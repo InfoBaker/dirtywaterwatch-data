@@ -22,17 +22,10 @@
  "resolved_reports": 146,
  "build": {
   "date": "2026-11-06",
-  "command": "python -m ingest.waters_from_nhd --names research/il/receiving-waters-missing.json --state IL --recheck",
-  "records_built": 0,
+  "command": "python -m ingest.waters_from_nhd --names research/il/receiving-waters-missing.json --state IL",
+  "records_built": 2,
   "names_resolved": 0,
-  "network_requests": 0,
-  "last_build": {
-   "date": "2026-11-04",
-   "command": "python -m ingest.waters_from_nhd --names research/il/receiving-waters-missing.json --state IL",
-   "records_built": 2,
-   "names_resolved": 48,
-   "network_requests": 13
-  }
+  "network_requests": 76
  },
  "rows": [
   {
@@ -56,7 +49,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -88.34737,
@@ -90,7 +83,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "ellis creek",
@@ -113,7 +106,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "unnamed tributary to DeArcy Branch",
@@ -144,7 +137,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "DeArcy Branch"
    ]
@@ -170,7 +163,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Crab Orchard Lake"
    ]
@@ -200,7 +193,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Shoal Creek"
    ],
@@ -238,7 +231,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -90.19571,
@@ -272,7 +265,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "De Archy Branch",
@@ -295,7 +288,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Nettel creek",
@@ -318,7 +311,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "To storm drain then to Mississippi River",
@@ -351,7 +344,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "to Mississippi River"
    ]
@@ -377,7 +370,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "kiljordin creek",
@@ -400,7 +393,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "A tributary to the East Branch of the DuPage River",
@@ -427,7 +420,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "East Branch of the DuPage River"
    ]
@@ -453,7 +446,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Powdermill Creej",
@@ -476,7 +469,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Saline Branch",
@@ -499,7 +492,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Southfork River",
@@ -522,7 +515,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Storm drain then to Mississippi River",
@@ -545,7 +538,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "to Mississippi River"
    ]
@@ -571,7 +564,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "East Branch of the DuPage River"
    ]
@@ -626,7 +619,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "that feeds Farm Creek"
    ]
@@ -649,7 +642,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "An unnamed tributary to DeArcy Branch",
@@ -672,7 +665,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "DeArcy Branch"
    ]
@@ -721,7 +714,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Brewster Run (Unnamed creek along Route 66)",
@@ -744,7 +737,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Brewster Run"
    ]
@@ -770,7 +763,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Clinton lake SRA",
@@ -788,7 +781,7 @@
    "places_from": [
     "il-idph-beachguard"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Creek",
@@ -825,7 +818,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Creek north of road leads"
    ]
@@ -851,7 +844,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -89.14306,
@@ -881,7 +874,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Ditch feeding West Fork Suger Creek",
@@ -921,7 +914,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Drainage ditch tributary to Lyman Woods pond",
@@ -944,7 +937,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Lyman Woods pond"
    ]
@@ -970,7 +963,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -89.96585,
@@ -1004,7 +997,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Fox River, Indian Creek and Blackberry Creek",
@@ -1027,7 +1020,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "Indian Creek: 24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "Indian Creek: 24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Fox River",
     "Indian Creek",
@@ -1105,7 +1098,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Kildeer Creek to Longview Meadows Lake",
@@ -1129,7 +1122,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Kildeer Creek"
    ]
@@ -1155,7 +1148,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lake Miltmore",
@@ -1173,7 +1166,7 @@
    "places_from": [
     "il-idph-beachguard"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lake Of Egypt",
@@ -1216,7 +1209,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lake of Egypt",
@@ -1297,7 +1290,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "MESD ditch"
    ]
@@ -1323,7 +1316,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Mud Run Creek tributary spoon river",
@@ -1346,7 +1339,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Old Macoupin Creek to Illinois River",
@@ -1406,7 +1399,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Salt Fork of the Saline Branch",
@@ -1429,7 +1422,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Small creek tributary to the Embarras River",
@@ -1479,7 +1472,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Storm sewer disch. to Saline Branch of Salt Fork",
@@ -1502,7 +1495,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Saline Branch of Salt Fork"
    ]
@@ -1561,7 +1554,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Quarry Banch"
    ]
@@ -1587,7 +1580,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "East Branch of the DuPage River"
    ]
@@ -1610,7 +1603,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Unnamed (locally known as Baker Creek)",
@@ -1656,7 +1649,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Unnamed stormwater detention pond for subdivision",
@@ -1761,7 +1754,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "creek to I&amp",
@@ -1799,7 +1792,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "ditch that run"
    ]
@@ -1825,7 +1818,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "marys river maybe",
@@ -1848,7 +1841,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "small creek, leads to East Branch of DuPage River",
@@ -1871,7 +1864,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "small creek: no NHD flowline or waterbody of that name in IL; a description, not a name; leads: no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "small creek: no NHD flowline or waterbody of that name in IL; a description, not a name; leads: no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "small creek",
     "leads"
@@ -1898,7 +1891,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "East Branch of DuPage River"
    ]
@@ -1939,7 +1932,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "unnamed to the Mississippi rivere",
@@ -2035,7 +2028,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Pope creek"
    ],
@@ -2076,7 +2069,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "De Arcy Branch"
    ]
@@ -2100,7 +2093,7 @@
     "Chicago",
     "Chicago / Niles"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "South Fork South Branch Chicago River",
@@ -2123,7 +2116,7 @@
     "Forest View",
     "Chicago / Niles"
    ],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   }
  ],
  "resolved": [
