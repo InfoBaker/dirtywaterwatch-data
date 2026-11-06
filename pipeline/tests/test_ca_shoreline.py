@@ -254,3 +254,43 @@ def test_without_the_offshore_limit_a_deep_outfall_is_held_as_before(monkeypatch
         **RULES["reach"]["shoreline"], "ocean_tie_offshore_km": None}}})
     ok, why = OW.Matcher.ocean_evidence(_matcher(), "pacific-ocean-ca", {"lat": 37.76, "lon": -122.58, "state": "CA"})
     assert ok is False and "more than 5 km" in why
+
+
+# ---------------------------------------------------------------- review of 2026-11-06: a short narrow mouth
+
+# the Golden Gate on the Census outlines is narrow (about 1.7 km) only over a short length: two pieces of the eroded
+# water grown back on either side of it overlapped through it, and the Pacific walk from Ocean Beach ran into the bay to
+# the city's eastern waterfront. Here the bay opens to the sea through a 1.6 km gap in a 45 m wall of land.
+WALL_BAY = box(-122.4995, 37.60, -122.35, 37.95)
+GAP = box(-122.5001, 37.80, -122.4994, 37.8144)
+WALL_LAND = {"CA": box(-123.5, 36.5, -121.0, 38.8).difference(box(-123.5, 36.5, -122.50, 38.8)).difference(WALL_BAY)
+             .difference(GAP)}
+
+
+def test_a_short_narrow_mouth_is_closed_and_the_pacific_walk_does_not_turn_into_the_bay():
+    from shapely.geometry import Point
+    g = R.ocean_outline(-122.515, 37.76, "CA", WALL_LAND, SHORE)
+    assert g is not None and g.contains(Point(-122.52, 37.76))
+    assert not g.contains(Point(-122.40, 37.80)) and not g.contains(Point(-122.45, 37.70))     # the bay is not the sea
+    c = {"key": "pt-w", "permit": None, "outfall": None, "water_slug": "pacific-ocean-ca", "lat": 37.76, "lon": -122.515,
+         "sources": ["event-point"], "state": "CA", "model": "shoreline"}
+    r = R.shoreline_record(c, WATERS, SHORE, WALL_LAND)
+    assert r["error"] is None and [s["km_end"] for s in r["segments"]] == [pytest.approx(20, abs=0.05)] * 2
+    lons = [x for s in r["segments"] for x, _ in s["coords"]]
+    assert max(lons) < -122.495                                             # never along the bay's shore
+    lats = sorted(s["coords"][-1][1] for s in r["segments"])
+    assert lats[0] < 37.80 and lats[1] > 37.8144                            # across the mouth, up the coast
+
+
+def test_the_opening_keeps_the_sea_side_and_never_adds_water():
+    from shapely.geometry import LineString
+    from shapely.geometry import box as b
+    sea, bay_, gap = b(0, 0, 5000, 20000), b(5050, 0, 15000, 20000), b(4990, 9200, 5060, 10800)
+    wm = sea.union(bay_).union(gap)                 # a 1.6 km gap in a 50 m wall
+    off = LineString([(0, 0), (0, 20000)])
+    kept = R.open_from(wm, off, 1000)
+    assert kept.difference(wm).area < 1e-6
+    assert kept.intersects(b(0, 0, 10, 20000)) and not kept.intersects(b(6500, 0, 15000, 20000))
+    assert R.open_from(wm, off, 0).equals(wm)
+    wide = sea.union(bay_).union(b(4990, 8000, 5060, 12000))                # a 4 km mouth stays open
+    assert R.open_from(wide, off, 1000).intersects(b(10000, 9000, 11000, 11000))
