@@ -512,8 +512,9 @@ def _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail, keys, tags
         for key in keys:
             by_reach[key].append({**iv, "placement": "reach", "reach": key})
         for slug, tag in tags.items():
-            by_water[slug].append({**iv, "placement": tag,
-                                   "reach": (reach_of.get(slug) or [None])[0] if tag == "reach" else None})
+            on = (reach_of.get(slug) or []) if tag == "reach" else []
+            by_water[slug].append({**iv, "placement": tag, "reach": on[0] if on else None,
+                                   **({"reaches": list(on)} if on else {})})
 
 
 def _hour(t: datetime) -> datetime:
