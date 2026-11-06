@@ -276,14 +276,15 @@
   ],
   "source": "U.S. Geological Survey, Network-Linked Data Index (NLDI) and the NHDPlus Version 2 river network; Jobson (1996), U.S. Geological Survey Water-Resources Investigations Report 96-4013",
   "shoreline": {
-   "doc": "The Great Lakes and Lake St. Clair are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page.",
+   "doc": "The Great Lakes and Lake St. Clair are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page. Puget Sound is drawn the same way.",
    "lakes": [
     {"name": "Lake Superior", "wikidata": "Q1066", "gnis_id": "1618946"},
     {"name": "Lake Michigan", "wikidata": "Q1169", "gnis_id": "1623080"},
     {"name": "Lake Huron", "wikidata": "Q1383", "gnis_id": "1624619"},
     {"name": "Lake Erie", "wikidata": "Q5492", "gnis_id": "1075813"},
     {"name": "Lake Ontario", "wikidata": "Q1062"},
-    {"name": "Lake St. Clair", "wikidata": "Q736707", "rationale": "Lake St. Clair joins Lake Huron to Lake Erie through the St. Clair and Detroit rivers and is part of the same Great Lakes system. It covers about 1,168 square kilometres and is shared with Ontario; a report from one outfall on its shore does not reach the whole lake, so the same shoreline stretch is drawn as on the Great Lakes."}
+    {"name": "Lake St. Clair", "wikidata": "Q736707", "rationale": "Lake St. Clair joins Lake Huron to Lake Erie through the St. Clair and Detroit rivers and is part of the same Great Lakes system. It covers about 1,168 square kilometres and is shared with Ontario; a report from one outfall on its shore does not reach the whole lake, so the same shoreline stretch is drawn as on the Great Lakes."},
+    {"name": "Puget Sound", "wikidata": "Q604141", "kinds": ["sound"], "states": ["WA"], "rationale": "Puget Sound's main basin, off Seattle, covers about 470 square kilometres in the record used here, and the sound as a whole is several times larger. A report from one outfall on its shore does not reach the whole sound, so a stretch of shoreline is drawn at the outfall as on the Great Lakes: up to 20 kilometres along the shore each way, because tides and wind move the water along the shore in both directions. The stretch keeps the report's own advisory period, or this site's 72-hour caution after the reported end. The distance is our reading of the evidence from the Great Lakes and ocean shores, not a measurement in Puget Sound, and it may change. Contamination can reach beyond the stretch, and the rest of the sound is not shown as clean."}
    ],
    "oceans": [
     {"name": "Atlantic Ocean", "wikidata": "Q97", "names": ["North Atlantic Ocean"], "states": ["FL"]},

@@ -179,3 +179,92 @@ def test_the_south_plants_marine_outfall_is_at_the_permits_diffuser_with_epas_po
 def test_the_gate_ties_script_finds_the_files_as_its_table_says():
     mod = _gate_ties()
     assert mod.main(["--check"]) == 0
+
+
+# ---------------------------------------------------------------- Puget Sound under the shoreline model
+
+def _shore():
+    from build import shoreline as SH
+    return SH.rule(_json("rules.json"))
+
+
+def test_puget_sound_is_a_shoreline_water_in_washington_and_no_other_sound_is():
+    """Puget Sound (openboatlaunch's record of the main basin, 472 km2, Q604141) takes the lake model with its own
+    wording; before, a report on it was a marker only. Other sounds and bays keep today's handling; the entry applies
+    in WA only, and a lake entry never picks up a sound that shares a lake's name."""
+    from build import shoreline as SH
+    from build import status as S
+    shore = _shore()
+    waters = S.load_waters()
+    e = SH.shoreline_entry(waters["puget-sound-wa"], shore)
+    assert e["name"] == "Puget Sound" and e["sound"] is True and not e.get("ocean")
+    assert {s for s, w in waters.items() if SH.is_shoreline(w, shore) and w.get("state") == "WA"} == {"puget-sound-wa"}
+    assert SH.shoreline_entry({**waters["puget-sound-wa"], "state": "OR"}, shore) is None
+    assert SH.shoreline_entry({"kind": "sound", "name": "Lake Erie", "wikidata": "Q5492", "state": "PA"}, shore) is None
+    assert SH.shoreline_entry({"kind": "lake", "name": "Lake Erie", "wikidata": "Q5492", "state": "PA"}, shore)["name"] \
+        == "Lake Erie"
+    assert "sound" not in SH.shoreline_entry({"kind": "lake", "name": "Lake Erie", "wikidata": "Q5492"}, shore)
+
+
+def test_puget_sounds_entry_states_its_reason_in_the_public_voice():
+    from export import build as X
+    e = [x for x in _json("rules.json")["reach"]["shoreline"]["lakes"] if x["name"] == "Puget Sound"][0]
+    assert e["wikidata"] == "Q604141" and e["kinds"] == ["sound"] and e["states"] == ["WA"]
+    assert "20 kilometres" in e["rationale"] and "72-hour caution" in e["rationale"] and "not shown as clean" in e["rationale"]
+    assert _json("rules.json")["yellow"]["default_hours"] == 72          # a sound takes the default caution
+    assert not X.internal_wording(e)
+
+
+def _puget_build():
+    import copy
+    import tempfile
+    from datetime import UTC, datetime, timedelta
+
+    from build import reaches as R
+    from build import status as S
+    from common import event
+    now = datetime(2026, 11, 6, 12, 0, tzinfo=UTC)
+    rec = S.load_waters()["puget-sound-wa"]
+    # a stand-in outline: the record's own is openboatlaunch's (cloud runs); a box whose east edge is the shore
+    geom = {"type": "Polygon", "coordinates": [[[-122.40, 47.52], [-122.40, 47.70], [-122.60, 47.70], [-122.60, 47.52],
+                                                [-122.40, 47.52]]]}
+    waters = {"puget-sound-wa": {**copy.deepcopy(rec), "geometry": geom}}
+    S._STATES = {"WA"}
+    tmp = Path(tempfile.mkdtemp())
+    rid = "WA0029181-057"
+    e = event(source_id="wa-test", source_record_id=rid, event_type="cso", status="ongoing", npdes_permit="WA0029181",
+              outfall_id="057", waterbody_text="Puget Sound", started_at=(now - timedelta(hours=2)).isoformat())
+    (tmp / "wa-test.json").write_text(json.dumps({"source_id": "wa-test", "ok": True, "last_ok_at": now.isoformat(),
+                                                  "meta": {}, "records": [e]}))
+    row = {"npdes_permit": "WA0029181", "outfall": "057", "state": "WA", "water_slug": "puget-sound-wa",
+           "lat": 47.5238863, "lon": -122.3963928, "outfall_kind": "cso", "_file": "data/outfalls-us.json"}
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = {**_json("rules.json"), "live_states": ["WA"]}
+    st, _ = S.build(now=now, write=False, events_dir=tmp, waters=waters, outfalls=[row], registry={}, reaches={},
+                    flows=({}, {}), discharger_towns={}, discharger_waters={}, rules=rules)
+    land = {"WA": __import__("shapely.geometry", fromlist=["box"]).box(-122.40, 47.40, -122.20, 47.80)}
+    stretch = R.shoreline_record({"water_slug": "puget-sound-wa", "lat": row["lat"], "lon": row["lon"], "state": "WA",
+                                  "permit": "WA0029181", "outfall": "057"}, waters, _shore(), land)
+    return st, stretch
+
+
+def test_a_report_on_puget_sound_colours_its_stretch_and_never_the_sound():
+    from build import status as S
+    st, stretch = _puget_build()
+    sound = st["waters"]["puget-sound-wa"]
+    assert sound["events"] == ["wa-test:WA0029181-057"]
+    assert sound["fill"] is False and sound["stretch_model"] == "shoreline"
+    assert sound["status_basis"] == S.SOUND_STATUS_BASIS
+    assert stretch["model"] == "shoreline" and stretch["sound"] is True and not stretch["ocean"]
+    assert stretch["segments"] and stretch["lake"] == "Puget Sound"
+
+
+def test_the_export_words_a_sound_stretch_as_a_sound():
+    from export import build as X
+    _, stretch = _puget_build()
+    props = X.shore_path_props(stretch)
+    assert props["sound"] is True
+    label = X.SOUND_LABEL.format(lake="Puget Sound", where_from="outfall 057", each=20)
+    text = " ".join(s["label"] for s in props["stops"]) + " " + label
+    assert "lake" not in text.replace("large lakes'", "") and "sound" in text
