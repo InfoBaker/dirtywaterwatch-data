@@ -154,7 +154,10 @@ def test_every_live_state_plant_row_has_its_match_fields_and_the_others_have_non
         if r["state"] in LIVE or r["state"] in built:
             assert MATCH_FIELDS <= set(r), (r["npdes_permit"], r.get("outfall"))
             assert bool(r["water_slug"]) == (r["match"] != "none") == ("no_water_reason" not in r)
-            assert r["water_matched_by"].startswith(("scripts/match_outfalls.py", "ingest.outfall_waters"))
+            # the matchers, or a state's hand ties from the operator's own list (scripts/wa_gate_ties.py and
+            # scripts/ca_gate_ties.py, 2026-11-06)
+            assert r["water_matched_by"].startswith(("scripts/match_outfalls.py", "ingest.outfall_waters",
+                                                     "scripts/wa_gate_ties.py", "scripts/ca_gate_ties.py"))
             if not r["water_slug"]:
                 assert r["water_name"] is None and r["water_match"].startswith("none: ")
             if r.get("coords_from") == "facility" and r["water_slug"]:
