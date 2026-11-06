@@ -4,8 +4,8 @@
  "waters": 386,
  "reports": 637,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in CA": 268,
-  "not a water name": 22,
+  "no NHD flowline or waterbody of that name in CA": 267,
+  "not a water name": 20,
   "1 NHD water of that name in CA, none within reach of the reports' places": 19,
   "the open sea (no NHD record)": 11,
   "no water name": 6,
@@ -15,6 +15,7 @@
   "a water record holds the water this text names, but the status resolver reads the text as a watershed or basin label, no": 4,
   "2 NHD waters of that name in CA, none within reach of the reports' places": 4,
   "a land-application system, not a surface water": 3,
+  "not reached this run (a recheck builds nothing)": 3,
   "private property, not a public water": 3,
   "a street name, not a water": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
@@ -47,12 +48,19 @@
  "resolved_names": 202,
  "resolved_reports": 466,
  "build": {
-  "date": "2026-11-04",
-  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA",
-  "records_built": 13,
-  "names_resolved": 14,
-  "network_requests": 182,
-  "stopped": "--budget-s used"
+  "date": "2026-11-06",
+  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA --recheck",
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 0,
+  "last_build": {
+   "date": "2026-11-04",
+   "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA",
+   "records_built": 13,
+   "names_resolved": 14,
+   "network_requests": 182,
+   "stopped": "--budget-s used"
+  }
  },
  "rows": [
   {
@@ -2669,7 +2677,7 @@
    "towns": [
     "Hawaiian Gardens"
    ],
-   "reason": "not a water name"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Austin Creek",
@@ -4260,7 +4268,7 @@
    "towns": [
     "West Hollywood"
    ],
-   "reason": "not a water name"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "IID G-Drain",
@@ -7934,7 +7942,10 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Wilmington Drain"
+   ]
   },
   {
    "name": "Wilmington channel",

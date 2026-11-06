@@ -200,6 +200,18 @@ OCEAN_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Waves and wind 
                "distance this site estimates from published studies of sewage along ocean beaches. This is an "
                "estimate, not a measurement of bacteria. The shore is not necessarily unsafe here, and the rest of the "
                "coast and the open water are not necessarily safe.")
+# a bay under the lake model (data/rules.json reach.shoreline.lakes with kinds ["bay"]: San Francisco Bay), its own words
+BAY_STOP_TEXT = {
+    "shoreline_limit": "The modeled shoreline stretch stops here ({each:g} km along the shore from the outfall): the "
+                       "distance is this site's estimate from published studies of sewage along lake and ocean shores, "
+                       "not a sign the water is clean beyond this point.",
+    "shoreline_end": "The modeled shoreline stretch stops here, where the mapped shore of this bay ends. "
+                     "Contamination can travel beyond this point.",
+}
+BAY_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Tides and wind move the bay's water back and forth along "
+             "the shore, so this stretch runs up to {each:g} km each way from that point, a distance this site uses on "
+             "large lakes and the ocean shore and has not measured in this bay. This is an estimate, not a measurement "
+             "of bacteria. The shore is not necessarily unsafe here, and the rest of the bay is not necessarily safe.")
 SHORE_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Wind-driven currents along the shore can carry sewage "
                "either way, so this stretch runs up to {each:g} km each way from that point, a distance this site "
                "estimates from published studies of Great Lakes overflows. This is an estimate, not a measurement of "
@@ -297,14 +309,21 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
 SHORELINE = "shoreline"
 
 
+def shore_stop_text(r: dict) -> dict:
+    """The stop wording of a shoreline stretch: the ocean's, a bay's or a sound's (under the lake model) or a lake's."""
+    return (OCEAN_STOP_TEXT if r.get("ocean") else BAY_STOP_TEXT if r.get("bay") else SOUND_STOP_TEXT if r.get("sound")
+            else SHORE_STOP_TEXT)
+
+
 def shore_path_props(r: dict) -> dict:
     """The path properties of a shoreline stretch that differ from a river trace's (none for a river trace)."""
     if r.get("model") != SHORELINE:
         return {}
     each = float(r.get("each_way_km") or r.get("cap_km") or 0)
-    stop_text = OCEAN_STOP_TEXT if r.get("ocean") else SOUND_STOP_TEXT if r.get("sound") else SHORE_STOP_TEXT
+    stop_text = shore_stop_text(r)
     return {"model": SHORELINE, "states": list(r.get("states") or []), "lake": r.get("lake") or r.get("river"),
             "each_way_km": each, "line_text": SHORE_LINE_TEXT, **({"ocean": True} if r.get("ocean") else {}),
+            **({"bay": True} if r.get("bay") else {}),
             **({"sound": True} if r.get("sound") else {}),
             "stops": [{"coordinates": s["coords"], "km_from_outfall": s.get("km_from_outfall"),
                        "cut_reason": s.get("cut_reason"),
@@ -319,10 +338,11 @@ def shore_event_features(a: dict, r: dict, e: dict, waters_by_reach: dict) -> li
     lake shore has no flow to time) and a stop marker at each end, with the lake's states."""
     each = float(r.get("each_way_km") or r.get("cap_km") or 0)
     where_from = f"outfall {r['outfall']}" if r.get("outfall") else "the reported location"
-    lake = r.get("lake") or r.get("river") or ("the ocean" if r.get("ocean") else "the lake")
-    label = (OCEAN_LABEL if r.get("ocean") else SOUND_LABEL if r.get("sound") else SHORE_LABEL).format(
-        lake=lake, where_from=where_from, each=each)
-    stop_text = OCEAN_STOP_TEXT if r.get("ocean") else SOUND_STOP_TEXT if r.get("sound") else SHORE_STOP_TEXT
+    lake = r.get("lake") or r.get("river") or ("the ocean" if r.get("ocean") else "the bay" if r.get("bay") else
+                                               "the sound" if r.get("sound") else "the lake")
+    label = (OCEAN_LABEL if r.get("ocean") else BAY_LABEL if r.get("bay") else SOUND_LABEL if r.get("sound") else
+             SHORE_LABEL).format(lake=lake, where_from=where_from, each=each)
+    stop_text = shore_stop_text(r)
     common_props = {"category": "sewage", "event_id": a["event_id"], "reach": a["reach"], "status": a["status"],
                     "model": SHORELINE, "states": list(r.get("states") or []),
                     "waters": waters_by_reach.get(a["reach"]) or list(r.get("waters") or [r.get("water_slug")])}

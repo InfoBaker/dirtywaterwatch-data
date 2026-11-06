@@ -13,7 +13,9 @@ Which lakes: shoreline_entry(): a lake or reservoir whose wikidata or gnis_id th
 name_min_area_km2 or more, or (min_area_km2 set) any lake or reservoir that large. An entry with `kinds` also applies to
 records of those kinds, and one with `states` only in those states: Puget Sound (kind "sound", WA; Washington's go-live
 gates, 2026-11-06), whose stretch is walked on its own outline like a lake's and worded for a sound ("sound": True on
-the entry returned, reach records and the export).
+the entry returned, reach records and the export). San Francisco Bay (kind "bay", CA; California's go-live gates,
+2026-11-06) is walked the same way and worded as a bay ("bay": True); its entry's open_m cuts its Census water at the
+Golden Gate (build/reaches.py cut_at_mouths).
 
 The shore: a lake record's outline is not all shore. The Census-cut Michigan records run along the state and
 international lines in the lake, and the NHDPlus Great Lakes polygons have straight edges on whole degrees where
@@ -53,7 +55,8 @@ KINDS = {"lake", "reservoir"}
 # but only for a record the rule's ocean entries name (by wikidata or by one of the entry's names, exactly)
 OCEAN_KINDS = {"bay", "sound", "sea", "ocean", "lake", "reservoir"}
 DEFAULTS = {"each_way_km": 20.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
-            "min_area_km2": None, "lakes": [], "oceans": [], "ocean_open_m": 1000.0}
+            "min_area_km2": None, "lakes": [], "oceans": [], "ocean_open_m": 1000.0,
+            "ocean_tie_offshore_km": None}
 STATE_NEAR_M = 2_000          # a stretch point this close to a state's land touches that state
 MODEL = "shoreline"
 STOP_LIMIT = "shoreline_limit"     # the walk reached each_way_km
@@ -90,14 +93,15 @@ def shoreline_entry(w: dict | None, r: dict) -> dict | None:
     area = w.get("area_km2")
     area = float(area) if isinstance(area, (int, float)) else None
     for e in r.get("lakes") or []:
-        # an entry may name other kinds it applies to (Puget Sound, kind "sound", 2026-11-06) and the states it is
+        # an entry may name other kinds it applies to (Puget Sound, kind "sound"; San Francisco Bay, kind "bay";
+        # 2026-11-06) and the states it is
         # applied in; a lake or reservoir qualifies as before
         extra = {str(k) for k in e.get("kinds") or []}
         if kind not in KINDS | extra:
             continue
         if e.get("states") and str(w.get("state") or "").upper() not in {str(x).upper() for x in e["states"]}:
             continue
-        hit = e if kind in KINDS else {**e, "sound": True}
+        hit = e if kind in KINDS else {**e, "bay": True} if kind == "bay" else {**e, "sound": True}
         if e.get("wikidata") and w.get("wikidata") == e["wikidata"]:
             return hit
         if e.get("gnis_id") and w.get("gnis_id") is not None and str(w["gnis_id"]) == str(e["gnis_id"]):
