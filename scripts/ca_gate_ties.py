@@ -19,9 +19,13 @@ India Basin, South Basin, Candlestick Cove, and Yosemite Creek, the tidal slough
 record is San Francisco Bay. Mission Creek and Islais Creek are the tidal channels openboatlaunch keeps as Mission Creek
 and Islais Creek Channel. EPA's 'Central San Francisco Bay' and 'Lower San Francisco Bay' (East Bay MUD's outfalls,
 CA0037702, and the Southeast plant's) are the San Francisco Bay Basin Plan's segments of the bay.
-The deep ocean outfalls EPA gives no point for take their permits' points (never a model's): Orange County Sanitation
-District's 120-inch and 78-inch outfalls (Order R8-2021-0010, NPDES CA0110604, Table 2) and Hyperion's 5-mile outfall
-(Order R4-2023-0033, NPDES CA0109991, Table 2); their water stays EPA's 'Pacific Ocean'.
+The deep ocean outfalls whose point EPA gives without the longitude's minus sign (a point across the Pacific, which the
+plants build set aside with coords_problem and kept as echo_lat/echo_lon) take their permits' points (never a model's):
+Orange County Sanitation District's 120-inch and 78-inch outfalls (Order R8-2021-0010, NPDES CA0110604, Table 2) and
+Hyperion's 5-mile outfall (Order R4-2023-0033, NPDES CA0109991, Table 2); their water stays EPA's 'Pacific Ocean'. The
+permit's point replaces the flagged one, so the row's coords_problem is cleared (reaches and placement skip a row that
+carries one: the 78-inch outfall, 1.5 miles out, gets its shoreline stretch); EPA's figures stay in epa_lat/epa_lon and
+echo_lat/echo_lon (review of 2026-11-06).
 
 Each row gets receiving_water_override {water, basis}: the name the record carries, so `python -m ingest.outfall_waters
 --state CA` finds that record by name once openboatlaunch's California extract is on file (the state batch's `extract`
@@ -112,7 +116,8 @@ TABLE = {
                                       "Francisco Bay', the San Francisco Bay Basin Plan's name for the bay's central segment"),
     ("plants", "CA0037702", "EFFD"): (SFB_SLUG, SFB, "EPA's inventory gives the receiving water 'Central San "
                                       "Francisco Bay', the San Francisco Bay Basin Plan's name for the bay's central segment"),
-    # the deep ocean outfalls EPA gives no point for: the permit's point (MOVE) and the permit's water
+    # the deep ocean outfalls whose point EPA gives with the longitude's sign dropped: the permit's point (MOVE) and
+    # the permit's water
     ("plants", "CA0110604", "001"): (PACIFIC_SLUG, PACIFIC, f"{OCSD} gives discharge point 001 (the 120-inch outfall) "
                                      "the receiving water 'Pacific Ocean (4.5 miles offshore)' at 33 34 36 N, 118 00 36 W"),
     ("plants", "CA0110604", "002"): (PACIFIC_SLUG, PACIFIC, f"{OCSD} gives discharge point 002 (the 78-inch outfall) "
@@ -121,14 +126,16 @@ TABLE = {
                                      "Y-shaped diffuser) the receiving water 'Pacific Ocean' at 33.91197 N, 118.52145 W"),
 }
 
-# the permits' own points for outfalls EPA's inventory gives none (degrees, minutes and seconds converted)
+# the permits' own points for the outfalls whose point EPA's inventory gives with the longitude's sign dropped (degrees,
+# minutes and seconds converted)
 MOVE = {
     ("plants", "CA0110604", "001"): (33.576667, -118.01, f"{OCSD}: 33 34 36 N, 118 00 36 W (the 120-inch outfall, "
-                                     "4.5 miles offshore); EPA's inventory gives no point"),
+                                     "4.5 miles offshore); EPA's inventory gives the same figures without the longitude's minus sign"),
     ("plants", "CA0110604", "002"): (33.615556, -117.970278, f"{OCSD}: 33 36 56 N, 117 58 13 W (the 78-inch outfall, "
-                                     "1.5 miles offshore); EPA's inventory gives no point"),
+                                     "1.5 miles offshore); EPA's inventory gives the same figures without the longitude's minus sign"),
     ("plants", "CA0109991", "002"): (33.91197, -118.52145, f"{HYPERION}: 33.91197 N, 118.52145 W (the 5-mile "
-                                     "outfall's Y-shaped diffuser); EPA's inventory gives no point"),
+                                     "outfall's Y-shaped diffuser); EPA's inventory gives the same figures without the longitude's minus "
+                                     "sign"),
 }
 
 
@@ -156,11 +163,17 @@ def override(o: dict, entry: tuple, wat: dict) -> str | None:
 
 
 def move(o: dict, lat: float, lon: float, note: str) -> None:
+    """The permit's point on row o. EPA's own point is kept in epa_lat/epa_lon (the flagged one the plants build set
+    aside in echo_lat/echo_lon when the row has none), and the flag on it is cleared: the row's point is now the
+    permit's (reaches and placement skip a row with coords_problem)."""
     if o.get("coords_from") != "permit":
         o["epa_lat"], o["epa_lon"] = o.get("lat"), o.get("lon")
+    if o.get("epa_lat") is None and o.get("echo_lat") is not None:
+        o["epa_lat"], o["epa_lon"] = o["echo_lat"], o["echo_lon"]
     o["lat"], o["lon"] = lat, lon
     o["coords_from"] = "permit"
     o["coords_note"] = note
+    o.pop("coords_problem", None)
 
 
 def apply(docs: dict, wat: dict) -> list[str]:
