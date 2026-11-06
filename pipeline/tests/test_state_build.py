@@ -463,7 +463,13 @@ def test_a_bay_drawn_by_its_coastline_is_a_bay_not_a_stream():
     assert N.kind_of("Harbor Creek", "line", fcodes=[46006]) == "stream"
     assert N.kind_of("Bay River", "line", fcodes=[46006]) == "river"
     w = {r["slug"]: r for r in json.loads((Path(__file__).resolve().parents[2] / "data" / "waters-nhd.json").read_text())["waters"]}
-    assert {w[s]["kind"] for s in ("budd-inlet-wa", "padilla-bay-wa", "possession-sound-wa")} == {"bay"}
+    assert w["budd-inlet-wa"]["kind"] == "bay"
+    # Padilla Bay's and Possession Sound's NHD records were dropped for openboatlaunch's by the tidy (2026-11-06):
+    # the records the site reads are a bay and a sound, never a stream
+    from build import status as S
+    loaded = S.load_waters()
+    assert "padilla-bay-wa" not in w and "possession-sound-wa" not in w
+    assert loaded["padilla-bay-wa"]["kind"] == "bay" and loaded["possession-sound-wa"]["kind"] == "sound"
 
 
 def test_an_artificial_path_at_the_point_does_not_contradict_the_inventorys_name():
