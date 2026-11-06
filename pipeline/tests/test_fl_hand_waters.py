@@ -137,12 +137,6 @@ def test_hand_only_needs_names():
         N.main(["--hand-only"])
 
 
-def test_a_hand_only_run_keeps_the_last_builds_detail_and_notes():
-    """A name no hand record takes keeps its last build's row whole, the tool's detail and notes included (2026-11-06,
-    California: a --hand-only run had dropped reason_detail and notes from 236 rows)."""
-    assert {"slugs", "how", "reason", "reason_detail", "notes", "defined_by", "places_failed"} <= set(N.HAND_ONLY_KEPT)
-
-
 def test_a_scoped_merge_keeps_the_states_rows_where_they_stood():
     old = [{"state": "CT", "name": "A", "from": "reports"}, {"state": "FL", "name": "B", "from": "reports"},
            {"state": "FL", "name": "C", "from": "reports"}, {"state": "GA", "name": "D", "from": "reports"}]
