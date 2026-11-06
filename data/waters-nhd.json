@@ -153451,25 +153451,27 @@
     "Sacramento County",
     "Oceanside"
    ],
-   "slugs": [],
-   "how": [],
-   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "slugs": [
+    "dry-creek-antelope-ca"
+   ],
+   "how": [
+    "GNIS name in CA, 1327 m from the reports' point (38.72450, -121.33870) (57 waters of that name in CA); the same NHD feature as record dry-creek-antelope-ca"
+   ],
+   "reason": null,
    "from": "reports",
    "reports": 4,
-   "reason_detail": [
-    "(--budget-s used)"
+   "notes": [
+    "'Unnamed Tributary to Dry Creek': a tributary of Dry Creek (the tributary has no name of its own)",
+    "'Unnamed Creek tributary to Dry Creek': a tributary of Dry Creek (the tributary has no name of its own)"
    ],
    "places_failed": [
     {
      "lon": -117.26933,
      "lat": 33.16429,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
-    },
-    {
-     "town": "Oceanside",
-     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
     }
-   ]
+   ],
+   "defined_by": "name"
   },
   {
    "state": "CA",

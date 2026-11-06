@@ -1,10 +1,10 @@
 {
  "about": "Receiving-water names in CA's reports (the State Water Board's CIWQS spill file, Category 1 spills, every report since June 2023, read 2026-11-04) that data/receiving-waters-national.json does not hold for CA, by name as typed (a list of names split at commas, semicolons, slashes and 'and', 'into', 'via'), with the number of reports giving each. Category 2 and 3 spills, which reached no water, are left out.",
  "state": "CA",
- "waters": 363,
- "reports": 587,
+ "waters": 360,
+ "reports": 572,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in CA": 260,
+  "no NHD flowline or waterbody of that name in CA": 259,
   "not a water name": 20,
   "1 NHD water of that name in CA, none within reach of the reports' places": 15,
   "no water name": 6,
@@ -15,7 +15,6 @@
   "the open sea (no NHD record)": 3,
   "a land-application system, not a surface water": 3,
   "2 NHD waters of that name in CA, none within reach of the reports' places": 3,
-  "57 NHD waters of that name in CA, none within reach of the reports' places": 3,
   "private property, not a public water": 3,
   "a street name, not a water": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
@@ -26,6 +25,7 @@
   "4 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "the name of a town (Oakland), not of a water: no NHD water of that name in CA": 1,
   "a short name with no kind of water (creek, river, lake): not looked up": 1,
+  "57 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "12 NHD waters of that name in CA and the reports give no place to choose one": 1,
   "3 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "the name of a town (Lake Don Pedro), not of a water: no NHD water of that name in CA": 1,
@@ -42,13 +42,13 @@
   "a tributary named by a place, not by the water it joins": 1,
   "the open ocean (no NHD record)": 1
  },
- "resolved_names": 225,
- "resolved_reports": 516,
+ "resolved_names": 228,
+ "resolved_reports": 531,
  "build": {
   "date": "2026-11-06",
-  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA --hand-only",
-  "records_built": 3,
-  "names_resolved": 4,
+  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA --recheck",
+  "records_built": 0,
+  "names_resolved": 0,
   "network_requests": 0,
   "last_build": {
    "date": "2026-11-06",
@@ -103,50 +103,6 @@
     "Oakland"
    ],
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "SF Bay",
-   "reports": 12,
-   "permits": [
-    "2SSO10087",
-    "2SSO10170",
-    "2SSO10183",
-    "2SSO18110"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.92401,
-     -122.34466
-    ],
-    [
-     37.93595,
-     -122.32291
-    ],
-    [
-     37.938,
-     -122.368
-    ],
-    [
-     37.81378,
-     -122.3625
-    ],
-    [
-     37.7597,
-     -122.25491
-    ]
-   ],
-   "towns": [
-    "Richmond",
-    "Alameda",
-    "San Mateo"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "San Jose Creek-Thompson Creek to U/S San Gabriel River",
@@ -2005,37 +1961,6 @@
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
-  },
-  {
-   "name": "Unnamed Tributary to Dry Creek",
-   "reports": 2,
-   "points": [
-    [
-     38.7245,
-     -121.3387
-    ]
-   ],
-   "towns": [
-    "Sacramento County"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "parts": [
-    "Dry Creek"
-   ],
-   "places_failed": [
-    {
-     "lon": -117.26933,
-     "lat": 33.16429,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
-    },
-    {
-     "town": "Oceanside",
-     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
-    }
-   ]
   },
   {
    "name": "Unnamed drainage channel",
@@ -4656,9 +4581,9 @@
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
    "records": [
-    "mission-creek-ca"
+    "mission-creek-mission-canyon-ca"
    ],
-   "reason": "a water record holds the water this text names (mission-creek-ca), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
+   "reason": "a water record holds the water this text names (mission-creek-mission-canyon-ca), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
   },
   {
    "name": "Mockingbird Canyon Wash",
@@ -6622,37 +6547,6 @@
    "reason": "not a water name"
   },
   {
-   "name": "Unnamed Creek tributary to Dry Creek",
-   "reports": 1,
-   "points": [
-    [
-     38.7233,
-     -121.3857
-    ]
-   ],
-   "towns": [
-    "Sacramento County"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "parts": [
-    "Dry Creek"
-   ],
-   "places_failed": [
-    {
-     "lon": -117.26933,
-     "lat": 33.16429,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
-    },
-    {
-     "town": "Oceanside",
-     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
-    }
-   ]
-  },
-  {
    "name": "Unnamed Irrigation Ditch",
    "reports": 1,
    "permits": [
@@ -7956,6 +7850,44 @@
      "lat": 33.99419,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.99419, -118.34468) (the nearest is 4.4 km away)"
     }
+   ]
+  },
+  {
+   "name": "SF Bay",
+   "reports": 12,
+   "slugs": [
+    "san-francisco-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.92401,
+     -122.34466
+    ],
+    [
+     37.93595,
+     -122.32291
+    ],
+    [
+     37.938,
+     -122.368
+    ],
+    [
+     37.81378,
+     -122.3625
+    ],
+    [
+     37.7597,
+     -122.25491
+    ]
+   ],
+   "towns": [
+    "Richmond",
+    "Alameda",
+    "San Mateo"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
    ]
   },
   {
@@ -9516,7 +9448,7 @@
    "name": "Dry Creek",
    "reports": 2,
    "slugs": [
-    "dry-creek-ca",
+    "dry-creek-antelope-ca",
     "dry-creek-galt-ca",
     "dry-creek-modesto-ca"
    ],
@@ -9714,8 +9646,7 @@
    "name": "Mare Island Strait",
    "reports": 2,
    "slugs": [
-    "mare-island-strait-ca",
-    "mare-island-strait-vallejo-ca"
+    "mare-island-strait-ca"
    ],
    "how": "a water record already holds the name",
    "points": [
@@ -9736,7 +9667,7 @@
    "name": "Mission Creek",
    "reports": 2,
    "slugs": [
-    "mission-creek-ca"
+    "mission-creek-mission-canyon-ca"
    ],
    "how": "a water record already holds the name",
    "points": [
@@ -9802,7 +9733,7 @@
    "name": "Pine Creek",
    "reports": 2,
    "slugs": [
-    "pine-creek-ca"
+    "pine-creek-concord-ca"
    ],
    "how": "a water record already holds the name",
    "points": [
@@ -10104,6 +10035,33 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Dry Creek",
+   "reports": 2,
+   "slugs": [
+    "dry-creek-antelope-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.7245,
+     -121.3387
+    ]
+   ],
+   "towns": [
+    "Sacramento County"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "places_failed": [
+    {
+     "lon": -117.26933,
+     "lat": 33.16429,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    }
    ]
   },
   {
@@ -10715,7 +10673,7 @@
    "name": "Dry Creek (Tuolumne River tributary",
    "reports": 1,
    "slugs": [
-    "dry-creek-ca",
+    "dry-creek-antelope-ca",
     "dry-creek-galt-ca",
     "dry-creek-modesto-ca"
    ],
@@ -12169,6 +12127,33 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Unnamed Creek tributary to Dry Creek",
+   "reports": 1,
+   "slugs": [
+    "dry-creek-antelope-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.7233,
+     -121.3857
+    ]
+   ],
+   "towns": [
+    "Sacramento County"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "places_failed": [
+    {
+     "lon": -117.26933,
+     "lat": 33.16429,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    }
    ]
   },
   {

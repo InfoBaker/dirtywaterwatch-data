@@ -80,3 +80,55 @@ def test_hand_only_statistics_do_not_replace_the_full_builds(tmp_path, monkeypat
     ca = json.loads(out.read_text())["stats"]["state_builds"]["CA"]
     assert ca["report_names"] == full and ca["targets"] == 9
     assert ca["report_names_hand_only"]["records"] == 3
+
+
+def test_case_variants_of_a_name_keep_their_own_rows():
+    """'Dry Creek' (resolved) and 'Dry creek' (not) are two report targets: each keeps its own last row (review of
+    2026-11-06, ca-merge P2-2); a spelling with no exact row falls back to the compact form only when it is unique."""
+    rows = [{"name": "Dry Creek", "slugs": ["dry-creek-antelope-ca"], "reason": None},
+            {"name": "Dry creek", "slugs": [], "reason": "57 NHD waters of that name in CA"},
+            {"name": "Foo Creek", "slugs": ["foo-creek-ca"], "reason": None}]
+    last = N.LastRows(rows)
+    assert last.get("Dry Creek")["slugs"] == ["dry-creek-antelope-ca"]
+    assert last.get("Dry creek")["slugs"] == []
+    assert last.get("DRY CREEK") is None                    # two rows share the compact form: neither is guessed
+    assert last.get("FOO CREEK")["slugs"] == ["foo-creek-ca"]
+
+
+def test_a_hand_only_run_keeps_each_case_variants_row(tmp_path, monkeypatch):
+    rows = [{"name": "Dry Creek", "from": N.REPORT_ROWS, "state": "CA", "slugs": ["dry-creek-antelope-ca"],
+             "how": ["GNIS name in CA"], "reason": None},
+            {"name": "Dry creek", "from": N.REPORT_ROWS, "state": "CA", "slugs": [], "how": [],
+             "reason": "57 NHD waters of that name in CA"}]
+    out = tmp_path / "waters-nhd.json"
+    out.write_text(json.dumps({"waters": [], "targets": rows}))
+    monkeypatch.setattr(N, "OUT", out)
+    monkeypatch.setattr(N, "HAND", [])
+    monkeypatch.setattr(N.Towns, "load", lambda self, state: ([], None))
+    seen = {}
+    monkeypatch.setattr(N, "names_finish", lambda *a, **k: seen.setdefault("rows", a[11].rows) and 0)
+    args = SimpleNamespace(refresh=False, offline=True, max_requests=0, budget_s=None)
+    N.names_hand_only(args, tmp_path / "names.json", {}, "CA", [], [_target("Dry Creek"), _target("Dry creek")], [],
+                      {}, {})
+    by = {r["name"]: r for r in seen["rows"]}
+    assert by["Dry Creek"]["slugs"] == ["dry-creek-antelope-ca"] and by["Dry Creek"]["reason"] is None
+    assert by["Dry creek"]["slugs"] == [] and by["Dry creek"]["reason"].startswith("57 NHD")
+
+
+def test_the_names_file_follows_a_tidys_drops_and_renames(tmp_path):
+    """A slug the tidy dropped or renamed is replaced in the names file's resolved names and rows (review of the CA
+    merge, P3-1); a slug the tidy did not touch stays."""
+    path = tmp_path / "names.json"
+    path.write_text(json.dumps({"state": "CA", "rows": [{"name": "X", "reports": 1, "records": ["mission-creek-ca"]}],
+                                "resolved": [{"name": "Mission Creek", "reports": 2, "slugs": ["mission-creek-ca"]},
+                                             {"name": "Mare Island Strait", "reports": 1,
+                                              "slugs": ["mare-island-strait-vallejo-ca", "napa-river-ca"]}]}))
+    actions = [{"slug": "mission-creek-ca", "action": "renamed", "to": "mission-creek-mission-canyon-ca"},
+               {"slug": "mare-island-strait-vallejo-ca", "action": "dropped", "to": "mare-island-strait-ca"},
+               {"slug": None, "action": "mapped", "to": "san-francisco-bay-ca", "row": "SF Bay"}]
+    assert N.names_follow_tidy(path, actions) == 3
+    doc = json.loads(path.read_text())
+    assert doc["rows"][0]["records"] == ["mission-creek-mission-canyon-ca"]
+    assert doc["resolved"][0]["slugs"] == ["mission-creek-mission-canyon-ca"]
+    assert doc["resolved"][1]["slugs"] == ["mare-island-strait-ca", "napa-river-ca"]
+    assert N.names_follow_tidy(path, []) == 0
