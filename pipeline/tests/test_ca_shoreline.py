@@ -327,3 +327,12 @@ def test_the_bays_census_water_is_cut_at_its_narrow_mouth_and_its_stretch_stays_
     assert [s["km_end"] for s in r["segments"]] == [pytest.approx(20, abs=0.05)] * 2
     before = _bay_on_census(None, monkeypatch)           # without the cut the Census water runs out onto the coast
     assert on_coast(before)                              # it ends up the coast, north of the mouth
+
+
+def test_a_point_on_another_states_land_is_not_taken_as_offshore():
+    nv = box(-121.0, 36.5, -119.0, 38.8)                     # a neighbour east of the synthetic California
+    m = SimpleNamespace(waters=WATERS, states=SimpleNamespace(shapes={"CA": CA_LAND, "NV": nv}))
+    ok, why = OW.Matcher.ocean_evidence(m, "pacific-ocean-ca", {"lat": 37.76, "lon": -120.93, "state": "CA"})
+    assert ok is False and "another state's land" in why and "more than 5 km" in why and "held until" in why
+    ok, why = OW.Matcher.ocean_evidence(m, "pacific-ocean-ca", {"lat": 37.76, "lon": -122.58, "state": "CA"})
+    assert ok is True and "offshore" in why                  # the deep outfall in the sea is still tied
