@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-06T05:12:33Z",
+ "built": "2026-11-06T06:16:17Z",
  "partial": false,
- "count": 3230,
+ "count": 3233,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -169,58 +169,51 @@
      "written": 2118
     },
     "report_names": {
-     "built": "2026-11-04T13:23:14Z",
+     "built": "2026-11-06T06:16:17Z",
      "file": "research/ca/receiving-waters-missing.json",
-     "names": 400,
-     "reports": 658,
-     "names_no_water": 70,
-     "waters_named": 319,
-     "already_a_record": 5,
-     "targets": 314,
-     "targets_mapped": 15,
-     "records": 13,
-     "targets_failed": 299,
+     "names": 386,
+     "reports": 637,
+     "names_no_water": 68,
+     "waters_named": 307,
+     "already_a_record": 4,
+     "targets": 303,
+     "targets_mapped": 3,
+     "records": 3,
+     "targets_failed": 300,
      "failed_reasons": {
-      "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points;": 144,
-      "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked": 65,
+      "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points;": 143,
+      "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked": 64,
       "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports": 33,
       "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flo": 15,
       "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name w": 10,
       "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked": 9,
       "the name of a town": 7,
       "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 3,
+      "not reached this run": 3,
       "no NHD flowline or waterbody of that name in CA; a description, not a name": 1,
       "19 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name": 1,
       "4 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1,
       "6 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1,
       "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name": 1,
-      "12 NHD waters of that name in CA and the reports give no place to choose one": 1,
-      "3 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1
+      "12 NHD waters of that name in CA and the reports give no place to choose one": 1
      },
-     "network_requests": 182,
-     "requests": {
-      "name2": 13,
-      "name4": 11,
-      "comid4": 2,
-      "gnis4": 2,
-      "nhd-hr": 11,
-      "nhd-hr-near": 142
-     },
+     "network_requests": 0,
+     "requests": {},
      "cached": {
       "tiger": 2,
-      "nhd-hr-near": 107
+      "tiger-hand": 3
      },
      "failed": {},
-     "stopped": "--budget-s used",
+     "stopped": null,
      "write": {
       "mode": "merge",
-      "existing_records": 2268,
-      "run_records": 13,
+      "existing_records": 3230,
+      "run_records": 3,
       "replaced": 0,
-      "added": 13,
-      "kept": 2268,
+      "added": 3,
+      "kept": 3230,
       "dropped": 0,
-      "written": 2281
+      "written": 3233
      }
     }
    },
@@ -119627,14 +119620,14 @@
    "reason": null,
    "from": "reports",
    "reports": 2,
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -117.88644,
      "lat": 33.9129,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.91290, -117.88644) (the nearest is 5.4 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "CA",
@@ -119835,11 +119828,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 30,
-   "notes": [
-    "the status resolver gives the name to arroyo-viejo-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to arroyo-viejo-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -120169,9 +120162,13 @@
    "towns": [
     "Sausalito"
    ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "slugs": [
+    "richardson-bay-ca"
+   ],
+   "how": [
+    "hand record (census: Census TIGER/Line hydrography 1107052605073, GNIS 231543)"
+   ],
+   "reason": null,
    "from": "reports",
    "reports": 9,
    "reason_detail": [
@@ -121165,6 +121162,9 @@
    "reason": "19 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 4,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.23281,
@@ -121186,9 +121186,6 @@
      "lat": 37.5013,
      "reason": "no NHD water of that name within 2 km of the reports' point (37.50130, -122.22170) (the nearest is 33.0 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -121229,11 +121226,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 4,
-   "notes": [
-    "the status resolver gives the name to rio-hondo-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to rio-hondo-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -121338,11 +121335,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 3,
-   "notes": [
-    "the status resolver gives the name to arroyo-conejo-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to arroyo-conejo-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -121384,11 +121381,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 3,
-   "notes": [
-    "'The storm drain leads to Centinela Creek': a tributary of Centinela Creek (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "'The storm drain leads to Centinela Creek': a tributary of Centinela Creek (the tributary has no name of its own)"
    ]
   },
   {
@@ -121484,6 +121481,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 3,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -120.33202,
@@ -121500,9 +121500,6 @@
      "lat": 37.98649,
      "reason": "no NHD water of that name within 2 km of the reports' point (37.98649, -120.38006) (the nearest is 10.7 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -121716,15 +121713,15 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 3,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.55139,
      "lat": 37.89699,
      "reason": "no NHD water of that name within 2 km of the reports' point (37.89699, -122.55139) (the nearest is 219.7 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -121800,6 +121797,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 3,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.65354,
@@ -121810,9 +121810,6 @@
      "town": "Salinas",
      "reason": "no NHD water of that name within 3 km of Salinas (the nearest is 140.9 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -122345,6 +122342,9 @@
    "reason": "4 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 2,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -120.67739,
@@ -122360,9 +122360,6 @@
      "town": "El Paso De Robles",
      "reason": "no NHD water of that name within 3 km of El Paso De Robles (the nearest is 22.3 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -122902,6 +122899,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 2,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -118.11319,
@@ -122912,9 +122912,6 @@
      "town": "Alhambra",
      "reason": "no NHD water of that name within 3 km of Alhambra (the nearest is 3.7 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -122934,6 +122931,9 @@
    "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 2,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.79372,
@@ -122944,9 +122944,6 @@
      "town": "San Jose",
      "reason": "no NHD water of that name within 3 km of San Jose (the nearest is 221.9 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -122967,6 +122964,9 @@
    "reason": "6 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 2,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.22673,
@@ -122977,9 +122977,6 @@
      "town": "Oakland",
      "reason": "no NHD water of that name within 3 km of Oakland (the nearest is 27.7 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -123083,11 +123080,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 2,
-   "notes": [
-    "the status resolver gives the name to sausal-creek-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to sausal-creek-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -123382,11 +123379,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 2,
-   "notes": [
-    "'Wash adjacent to Lembi Park which is a tributary of Willow Creek': a tributary of Wash adjacent (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "'Wash adjacent to Lembi Park which is a tributary of Willow Creek': a tributary of Wash adjacent (the tributary has no name of its own)"
    ]
   },
   {
@@ -123859,11 +123856,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to arroyo-simi-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to arroyo-simi-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -123927,6 +123924,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.65757,
@@ -123937,9 +123937,6 @@
      "town": "Santa Rosa",
      "reason": "no NHD water of that name within 3 km of Santa Rosa (the nearest is 18.6 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -123963,14 +123960,14 @@
    "reason": null,
    "from": "reports",
    "reports": 1,
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -123.2029,
      "lat": 39.2346,
      "reason": "no NHD water of that name within 2 km of the reports' point (39.23460, -123.20290) (the nearest is 20.4 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "CA",
@@ -124675,11 +124672,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to los-angeles-river-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to los-angeles-river-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -124720,6 +124717,9 @@
    "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -117.72283,
@@ -124730,9 +124730,6 @@
      "town": "Claremont",
      "reason": "no NHD water of that name within 3 km of Claremont (the nearest is 5.5 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -125649,15 +125646,15 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.3935,
      "lat": 38.7086,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.70860, -121.39350) (the nearest is 237.2 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -125677,6 +125674,9 @@
    "reason": "3 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.19848,
@@ -125687,9 +125687,6 @@
      "town": "Folsom",
      "reason": "no NHD water of that name within 3 km of Folsom (the nearest is 121.4 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -125946,11 +125943,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Unnamed surface tributary to Hinkle Creek': a tributary of Hinkle Creek (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "'Unnamed surface tributary to Hinkle Creek': a tributary of Hinkle Creek (the tributary has no name of its own)"
    ]
   },
   {
@@ -125998,15 +125995,15 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -120.91392,
      "lat": 38.66916,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.66916, -120.91392) (the nearest is 475.9 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -126312,6 +126309,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "notes": [
     "'Tributary to Lake Siskiyou': a tributary of Lake Siskiyou (the tributary has no name of its own)"
    ],
@@ -126321,9 +126321,6 @@
      "lat": 41.31733,
      "reason": "no NHD water of that name within 2 km of the reports' point (41.31733, -122.31448) (the nearest is 3.2 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -126480,6 +126477,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "notes": [
     "the status resolver gives the name to churn-creek-ca (another name): the name's own water is built"
    ],
@@ -126493,9 +126493,6 @@
      "town": "Redding",
      "reason": "no NHD water of that name within 3 km of Redding (the nearest is 3.6 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -126515,6 +126512,9 @@
    "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.65154,
@@ -126525,9 +126525,6 @@
      "town": "Yreka",
      "reason": "no NHD water of that name within 3 km of Yreka (the nearest is 12.0 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -126832,15 +126829,15 @@
    "reason": "13 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.63119,
      "lat": 38.96562,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.96562, -122.63119) (the nearest is 32.5 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -126922,11 +126919,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to mission-creek-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to mission-creek-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -127223,11 +127220,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to north-fork-arroyo-conejo-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to north-fork-arroyo-conejo-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -127750,6 +127747,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.24601,
@@ -127760,9 +127760,6 @@
      "town": "Oakland",
      "reason": "no NHD water of that name within 3 km of Oakland (the nearest is 215.8 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -127904,6 +127901,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.6145,
@@ -127920,9 +127920,6 @@
      "lat": 38.51711,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.51711, -121.75654) (the nearest is 30.3 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -128041,11 +128038,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to rio-hondo-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to rio-hondo-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -128289,15 +128286,15 @@
    "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -119.44888,
      "lat": 35.15144,
      "reason": "no NHD water of that name within 2 km of the reports' point (35.15144, -119.44888) (the nearest is 95.4 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -128534,15 +128531,15 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.94703,
      "lat": 37.22733,
      "reason": "no NHD water of that name within 2 km of the reports' point (37.22733, -121.94703) (the nearest is 303.8 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -128562,6 +128559,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.84577,
@@ -128572,9 +128572,6 @@
      "town": "San Jose",
      "reason": "no NHD water of that name within 3 km of San Jose (the nearest is 84.4 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -128613,15 +128610,15 @@
    "reason": "16 NHD waters of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.98185,
      "lat": 37.24668,
      "reason": "no NHD water of that name within 2 km of the reports' point (37.24668, -121.98185) (the nearest is 28.5 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -128685,11 +128682,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Tributary to South Branch of Linda Creek': a tributary of South Branch of Linda Creek (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "'Tributary to South Branch of Linda Creek': a tributary of South Branch of Linda Creek (the tributary has no name of its own)"
    ]
   },
   {
@@ -128730,6 +128727,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "notes": [
     "the status resolver gives the name to santa-clara-river-ca (another name): the name's own water is built"
    ],
@@ -128739,9 +128739,6 @@
      "lat": 34.389,
      "reason": "no NHD water of that name within 2 km of the reports' point (34.38900, -118.59900) (the nearest is 4.3 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -128826,11 +128823,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Unnamed Tributary to Stone Lakes': a tributary of Stone Lakes (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "'Unnamed Tributary to Stone Lakes': a tributary of Stone Lakes (the tributary has no name of its own)"
    ]
   },
   {
@@ -129116,11 +129113,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to coyote-creek-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to coyote-creek-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -129138,11 +129135,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to alhambra-wash-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to alhambra-wash-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -129160,11 +129157,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to santa-ana-river-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to santa-ana-river-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -129182,11 +129179,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to los-angeles-river-ca (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "the status resolver gives the name to los-angeles-river-ca (another name): the name's own water is built"
    ]
   },
   {
@@ -129414,6 +129411,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -122.23138,
@@ -129424,9 +129424,6 @@
      "town": "Oakland",
      "reason": "no NHD water of that name within 3 km of Oakland (the nearest is 184.3 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -129604,6 +129601,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -117.08594,
@@ -129614,9 +129614,6 @@
      "town": "San Diego",
      "reason": "no NHD water of that name within 3 km of San Diego (the nearest is 1034.8 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -129655,15 +129652,15 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.3747,
      "lat": 38.4305,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.43050, -121.37470) (the nearest is 160.2 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -129681,6 +129678,9 @@
    "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -121.39152,
@@ -129697,9 +129697,6 @@
      "lat": 38.04291,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.04291, -121.35162) (the nearest is 80.0 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
   },
   {
@@ -129845,11 +129842,11 @@
    "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Windport Canyon Creek which is tributary to Agua Amarga Canyon': a tributary of Windport Canyon Creek which is (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "(--budget-s used)"
+   ],
+   "notes": [
+    "'Windport Canyon Creek which is tributary to Agua Amarga Canyon': a tributary of Windport Canyon Creek which is (the tributary has no name of its own)"
    ]
   },
   {
@@ -129955,6 +129952,9 @@
    "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "(--budget-s used)"
+   ],
    "places_failed": [
     {
      "lon": -117.26933,
@@ -129965,10 +129965,61 @@
      "town": "Oceanside",
      "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
     }
-   ],
-   "reason_detail": [
-    "(--budget-s used)"
    ]
+  },
+  {
+   "state": "CA",
+   "name": "Artesia-Norwalk Drain",
+   "texts": [
+    "Artesia-Norwalk Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Hawaiian Gardens"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "CA",
+   "name": "Hollyhills Drain",
+   "texts": [
+    "Hollyhills Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "West Hollywood"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "CA",
+   "name": "Wilmington Drain",
+   "texts": [
+    "Wilmington Drain / Machado Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "Los Angeles County"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
+   "from": "reports",
+   "reports": 1
   },
   {
    "state": "IL",
@@ -1645540,6 +1645591,1500 @@
    }
   },
   {
+   "slug": "richardson-bay-ca",
+   "name": "Richardson Bay",
+   "kind": "bay",
+   "state": "CA",
+   "towns": [
+    "Belvedere",
+    "Mill Valley",
+    "Sausalito",
+    "Strawberry",
+    "Tamalpais-Homestead Valley",
+    "Tiburon"
+   ],
+   "bbox": [
+    -122.52487,
+    37.83189,
+    -122.45894,
+    37.89843
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 13.215,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "census",
+   "gnis_id": "231543",
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-06T06:16:17Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 1107052605073 (MTFCC H2051; named 'Richardson Bay' by the Census), cut to the state and simplified to ~10 m; the name and place from the USGS Geographic Names Information System, feature 231543 (primary point 37.869649, -122.4860841, 150 m or less from the polygons). Hand record: The State Water Board's spill reports (CIWQS, Category 1) name 'Richardson Bay' as the water reached (9 reports, Sausalito; research/ca/receiving-waters-missing.json). NHDPlus V2.1 and the NHD high-resolution areas carry no water of that name; GNIS lists Richardson Bay (feature 231543, class Bay, Marin County) at 37.86965 N 122.48608 W, and this record is the Census TIGER/Line area water polygon the Census names 'Richardson Bay', which holds that point. The Census draws it as its own polygon, apart from its San Francisco Bay polygons; openboatlaunch's san-francisco-bay-ca outline, whose bounding box reaches 122.507 W, may also cover it.",
+   "hand": true,
+   "tiger_ids": [
+    "1107052605073"
+   ],
+   "targets": 1,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -122.524774,
+       37.895993
+      ],
+      [
+       -122.524872,
+       37.895718
+      ],
+      [
+       -122.524637,
+       37.893927
+      ],
+      [
+       -122.524415,
+       37.893262
+      ],
+      [
+       -122.523501,
+       37.891185
+      ],
+      [
+       -122.523148,
+       37.891152
+      ],
+      [
+       -122.523411,
+       37.890454
+      ],
+      [
+       -122.523176,
+       37.889888
+      ],
+      [
+       -122.523142,
+       37.888987
+      ],
+      [
+       -122.522844,
+       37.888393
+      ],
+      [
+       -122.521694,
+       37.887838
+      ],
+      [
+       -122.520557,
+       37.886343
+      ],
+      [
+       -122.520766,
+       37.886145
+      ],
+      [
+       -122.521493,
+       37.88619
+      ],
+      [
+       -122.522159,
+       37.885432
+      ],
+      [
+       -122.518709,
+       37.882738
+      ],
+      [
+       -122.517752,
+       37.882754
+      ],
+      [
+       -122.516913,
+       37.882364
+      ],
+      [
+       -122.515305,
+       37.882171
+      ],
+      [
+       -122.514862,
+       37.881968
+      ],
+      [
+       -122.514342,
+       37.881248
+      ],
+      [
+       -122.514391,
+       37.880836
+      ],
+      [
+       -122.514738,
+       37.880649
+      ],
+      [
+       -122.51453,
+       37.880495
+      ],
+      [
+       -122.514294,
+       37.880561
+      ],
+      [
+       -122.514093,
+       37.880335
+      ],
+      [
+       -122.513545,
+       37.880506
+      ],
+      [
+       -122.513129,
+       37.880472
+      ],
+      [
+       -122.512651,
+       37.880137
+      ],
+      [
+       -122.512631,
+       37.87989
+      ],
+      [
+       -122.513087,
+       37.879296
+      ],
+      [
+       -122.512639,
+       37.878736
+      ],
+      [
+       -122.512784,
+       37.878654
+      ],
+      [
+       -122.512687,
+       37.878181
+      ],
+      [
+       -122.512447,
+       37.877897
+      ],
+      [
+       -122.511073,
+       37.876829
+      ],
+      [
+       -122.510609,
+       37.876867
+      ],
+      [
+       -122.51047,
+       37.876724
+      ],
+      [
+       -122.510561,
+       37.876406
+      ],
+      [
+       -122.509133,
+       37.875312
+      ],
+      [
+       -122.508579,
+       37.875432
+      ],
+      [
+       -122.508427,
+       37.875141
+      ],
+      [
+       -122.506548,
+       37.873835
+      ],
+      [
+       -122.505731,
+       37.873484
+      ],
+      [
+       -122.504915,
+       37.873797
+      ],
+      [
+       -122.504705,
+       37.874059
+      ],
+      [
+       -122.505317,
+       37.874923
+      ],
+      [
+       -122.505554,
+       37.87497
+      ],
+      [
+       -122.506047,
+       37.875484
+      ],
+      [
+       -122.506181,
+       37.875705
+      ],
+      [
+       -122.506026,
+       37.875833
+      ],
+      [
+       -122.505522,
+       37.87598
+      ],
+      [
+       -122.505182,
+       37.875672
+      ],
+      [
+       -122.505342,
+       37.875568
+      ],
+      [
+       -122.505127,
+       37.875354
+      ],
+      [
+       -122.503303,
+       37.87643
+      ],
+      [
+       -122.504024,
+       37.875743
+      ],
+      [
+       -122.50515,
+       37.875174
+      ],
+      [
+       -122.504675,
+       37.874804
+      ],
+      [
+       -122.504141,
+       37.873815
+      ],
+      [
+       -122.504212,
+       37.873513
+      ],
+      [
+       -122.50453,
+       37.873227
+      ],
+      [
+       -122.50417,
+       37.872973
+      ],
+      [
+       -122.50458,
+       37.872562
+      ],
+      [
+       -122.504563,
+       37.87232
+      ],
+      [
+       -122.503323,
+       37.871749
+      ],
+      [
+       -122.502753,
+       37.871896
+      ],
+      [
+       -122.502829,
+       37.872007
+      ],
+      [
+       -122.502539,
+       37.872158
+      ],
+      [
+       -122.502224,
+       37.871904
+      ],
+      [
+       -122.501317,
+       37.871701
+      ],
+      [
+       -122.500934,
+       37.871438
+      ],
+      [
+       -122.500331,
+       37.871823
+      ],
+      [
+       -122.500373,
+       37.871559
+      ],
+      [
+       -122.49981,
+       37.871099
+      ],
+      [
+       -122.499803,
+       37.870741
+      ],
+      [
+       -122.499526,
+       37.870774
+      ],
+      [
+       -122.498348,
+       37.871642
+      ],
+      [
+       -122.497558,
+       37.871863
+      ],
+      [
+       -122.497603,
+       37.871655
+      ],
+      [
+       -122.49877,
+       37.870719
+      ],
+      [
+       -122.498604,
+       37.870208
+      ],
+      [
+       -122.498222,
+       37.869978
+      ],
+      [
+       -122.497834,
+       37.870082
+      ],
+      [
+       -122.496511,
+       37.871088
+      ],
+      [
+       -122.496283,
+       37.871055
+      ],
+      [
+       -122.49613,
+       37.87077
+      ],
+      [
+       -122.497563,
+       37.868961
+      ],
+      [
+       -122.497271,
+       37.868055
+      ],
+      [
+       -122.497403,
+       37.867813
+      ],
+      [
+       -122.497063,
+       37.867231
+      ],
+      [
+       -122.496182,
+       37.866797
+      ],
+      [
+       -122.496404,
+       37.866347
+      ],
+      [
+       -122.496272,
+       37.866193
+      ],
+      [
+       -122.495856,
+       37.866303
+      ],
+      [
+       -122.495697,
+       37.866188
+      ],
+      [
+       -122.495392,
+       37.866391
+      ],
+      [
+       -122.494934,
+       37.865996
+      ],
+      [
+       -122.495447,
+       37.865397
+      ],
+      [
+       -122.495058,
+       37.865518
+      ],
+      [
+       -122.494642,
+       37.865221
+      ],
+      [
+       -122.494829,
+       37.864864
+      ],
+      [
+       -122.494531,
+       37.864496
+      ],
+      [
+       -122.493194,
+       37.86553
+      ],
+      [
+       -122.493111,
+       37.865458
+      ],
+      [
+       -122.494434,
+       37.864425
+      ],
+      [
+       -122.493789,
+       37.863898
+      ],
+      [
+       -122.493817,
+       37.864035
+      ],
+      [
+       -122.492445,
+       37.865074
+      ],
+      [
+       -122.492376,
+       37.865266
+      ],
+      [
+       -122.492016,
+       37.864981
+      ],
+      [
+       -122.493623,
+       37.863755
+      ],
+      [
+       -122.493109,
+       37.86337
+      ],
+      [
+       -122.492569,
+       37.863305
+      ],
+      [
+       -122.492193,
+       37.863558
+      ],
+      [
+       -122.492229,
+       37.863715
+      ],
+      [
+       -122.490842,
+       37.864094
+      ],
+      [
+       -122.490731,
+       37.863883
+      ],
+      [
+       -122.488459,
+       37.863735
+      ],
+      [
+       -122.488418,
+       37.863389
+      ],
+      [
+       -122.488778,
+       37.863076
+      ],
+      [
+       -122.489249,
+       37.862971
+      ],
+      [
+       -122.489567,
+       37.862372
+      ],
+      [
+       -122.488652,
+       37.861993
+      ],
+      [
+       -122.488292,
+       37.862301
+      ],
+      [
+       -122.488458,
+       37.861889
+      ],
+      [
+       -122.487509,
+       37.861461
+      ],
+      [
+       -122.487321,
+       37.861071
+      ],
+      [
+       -122.486566,
+       37.861544
+      ],
+      [
+       -122.486213,
+       37.861395
+      ],
+      [
+       -122.485339,
+       37.860786
+      ],
+      [
+       -122.485533,
+       37.86016
+      ],
+      [
+       -122.484791,
+       37.859995
+      ],
+      [
+       -122.484028,
+       37.859391
+      ],
+      [
+       -122.483717,
+       37.859303
+      ],
+      [
+       -122.484015,
+       37.859688
+      ],
+      [
+       -122.483648,
+       37.860122
+      ],
+      [
+       -122.48316,
+       37.859831
+      ],
+      [
+       -122.48262,
+       37.85984
+      ],
+      [
+       -122.479943,
+       37.85903
+      ],
+      [
+       -122.477971,
+       37.858822
+      ],
+      [
+       -122.477874,
+       37.858448
+      ],
+      [
+       -122.478165,
+       37.858657
+      ],
+      [
+       -122.478422,
+       37.858514
+      ],
+      [
+       -122.478726,
+       37.85753
+      ],
+      [
+       -122.478469,
+       37.856695
+      ],
+      [
+       -122.478296,
+       37.85686
+      ],
+      [
+       -122.477998,
+       37.856668
+      ],
+      [
+       -122.478157,
+       37.856509
+      ],
+      [
+       -122.478275,
+       37.856585
+      ],
+      [
+       -122.478164,
+       37.85641
+      ],
+      [
+       -122.47842,
+       37.856212
+      ],
+      [
+       -122.478365,
+       37.855294
+      ],
+      [
+       -122.478614,
+       37.854701
+      ],
+      [
+       -122.478634,
+       37.854085
+      ],
+      [
+       -122.478225,
+       37.854085
+      ],
+      [
+       -122.478225,
+       37.85397
+      ],
+      [
+       -122.478648,
+       37.853986
+      ],
+      [
+       -122.478662,
+       37.853855
+      ],
+      [
+       -122.478156,
+       37.85386
+      ],
+      [
+       -122.478163,
+       37.853481
+      ],
+      [
+       -122.478682,
+       37.853404
+      ],
+      [
+       -122.478661,
+       37.85158
+      ],
+      [
+       -122.479806,
+       37.849803
+      ],
+      [
+       -122.479936,
+       37.847957
+      ],
+      [
+       -122.479838,
+       37.84746
+      ],
+      [
+       -122.478435,
+       37.847354
+      ],
+      [
+       -122.478067,
+       37.847179
+      ],
+      [
+       -122.477438,
+       37.84635
+      ],
+      [
+       -122.476973,
+       37.844702
+      ],
+      [
+       -122.477132,
+       37.843647
+      ],
+      [
+       -122.476598,
+       37.842273
+      ],
+      [
+       -122.476154,
+       37.842081
+      ],
+      [
+       -122.475773,
+       37.842098
+      ],
+      [
+       -122.475378,
+       37.841856
+      ],
+      [
+       -122.475357,
+       37.841054
+      ],
+      [
+       -122.474851,
+       37.840615
+      ],
+      [
+       -122.474789,
+       37.840247
+      ],
+      [
+       -122.474255,
+       37.839653
+      ],
+      [
+       -122.474081,
+       37.839181
+      ],
+      [
+       -122.472681,
+       37.837978
+      ],
+      [
+       -122.472161,
+       37.836923
+      ],
+      [
+       -122.471843,
+       37.836869
+      ],
+      [
+       -122.471628,
+       37.836638
+      ],
+      [
+       -122.471953,
+       37.836231
+      ],
+      [
+       -122.472015,
+       37.835077
+      ],
+      [
+       -122.472694,
+       37.833973
+      ],
+      [
+       -122.472631,
+       37.83272
+      ],
+      [
+       -122.47283,
+       37.831892
+      ],
+      [
+       -122.458938,
+       37.86229
+      ],
+      [
+       -122.461716,
+       37.863952
+      ],
+      [
+       -122.462603,
+       37.86471
+      ],
+      [
+       -122.463178,
+       37.864869
+      ],
+      [
+       -122.464045,
+       37.865374
+      ],
+      [
+       -122.464856,
+       37.866275
+      ],
+      [
+       -122.466451,
+       37.86755
+      ],
+      [
+       -122.466908,
+       37.867665
+      ],
+      [
+       -122.468093,
+       37.868494
+      ],
+      [
+       -122.468308,
+       37.868445
+      ],
+      [
+       -122.468308,
+       37.868549
+      ],
+      [
+       -122.468987,
+       37.868725
+      ],
+      [
+       -122.470672,
+       37.87062
+      ],
+      [
+       -122.473828,
+       37.874855
+      ],
+      [
+       -122.474288,
+       37.87649
+      ],
+      [
+       -122.474212,
+       37.877479
+      ],
+      [
+       -122.473166,
+       37.879122
+      ],
+      [
+       -122.47133,
+       37.880913
+      ],
+      [
+       -122.4721,
+       37.883039
+      ],
+      [
+       -122.47269,
+       37.883616
+      ],
+      [
+       -122.472995,
+       37.884325
+      ],
+      [
+       -122.473703,
+       37.885055
+      ],
+      [
+       -122.473724,
+       37.885308
+      ],
+      [
+       -122.475749,
+       37.886923
+      ],
+      [
+       -122.478412,
+       37.888642
+      ],
+      [
+       -122.479486,
+       37.889158
+      ],
+      [
+       -122.481539,
+       37.889778
+      ],
+      [
+       -122.481983,
+       37.890091
+      ],
+      [
+       -122.482559,
+       37.890926
+      ],
+      [
+       -122.482662,
+       37.89059
+      ],
+      [
+       -122.483279,
+       37.89031
+      ],
+      [
+       -122.484139,
+       37.891123
+      ],
+      [
+       -122.484819,
+       37.891529
+      ],
+      [
+       -122.48672,
+       37.893391
+      ],
+      [
+       -122.487046,
+       37.893786
+      ],
+      [
+       -122.487102,
+       37.894149
+      ],
+      [
+       -122.488635,
+       37.895368
+      ],
+      [
+       -122.489342,
+       37.895604
+      ],
+      [
+       -122.490819,
+       37.894982
+      ],
+      [
+       -122.491921,
+       37.894933
+      ],
+      [
+       -122.492129,
+       37.894685
+      ],
+      [
+       -122.492024,
+       37.894284
+      ],
+      [
+       -122.492163,
+       37.893966
+      ],
+      [
+       -122.493321,
+       37.893646
+      ],
+      [
+       -122.494818,
+       37.893766
+      ],
+      [
+       -122.495907,
+       37.894172
+      ],
+      [
+       -122.497986,
+       37.893705
+      ],
+      [
+       -122.49895,
+       37.89377
+      ],
+      [
+       -122.499639,
+       37.894319
+      ],
+      [
+       -122.500156,
+       37.894294
+      ],
+      [
+       -122.501122,
+       37.896809
+      ],
+      [
+       -122.500948,
+       37.89686
+      ],
+      [
+       -122.500994,
+       37.897004
+      ],
+      [
+       -122.500326,
+       37.897038
+      ],
+      [
+       -122.499716,
+       37.895255
+      ],
+      [
+       -122.499297,
+       37.895291
+      ],
+      [
+       -122.498827,
+       37.895608
+      ],
+      [
+       -122.499,
+       37.895884
+      ],
+      [
+       -122.4992,
+       37.895853
+      ],
+      [
+       -122.499691,
+       37.897254
+      ],
+      [
+       -122.499875,
+       37.897225
+      ],
+      [
+       -122.50025,
+       37.897571
+      ],
+      [
+       -122.500104,
+       37.897681
+      ],
+      [
+       -122.500396,
+       37.89784
+      ],
+      [
+       -122.502121,
+       37.897807
+      ],
+      [
+       -122.501833,
+       37.896922
+      ],
+      [
+       -122.502199,
+       37.89623
+      ],
+      [
+       -122.502932,
+       37.898434
+      ],
+      [
+       -122.503077,
+       37.898401
+      ],
+      [
+       -122.502359,
+       37.895285
+      ],
+      [
+       -122.503149,
+       37.895384
+      ],
+      [
+       -122.503468,
+       37.89528
+      ],
+      [
+       -122.504079,
+       37.894709
+      ],
+      [
+       -122.504308,
+       37.894171
+      ],
+      [
+       -122.504301,
+       37.893682
+      ],
+      [
+       -122.503602,
+       37.893149
+      ],
+      [
+       -122.503352,
+       37.892747
+      ],
+      [
+       -122.503804,
+       37.891055
+      ],
+      [
+       -122.503721,
+       37.890632
+      ],
+      [
+       -122.503362,
+       37.889726
+      ],
+      [
+       -122.501761,
+       37.888675
+      ],
+      [
+       -122.50083,
+       37.887264
+      ],
+      [
+       -122.501017,
+       37.886143
+      ],
+      [
+       -122.501493,
+       37.885467
+      ],
+      [
+       -122.501445,
+       37.884928
+      ],
+      [
+       -122.500273,
+       37.883836
+      ],
+      [
+       -122.49969,
+       37.882897
+      ],
+      [
+       -122.499161,
+       37.88261
+      ],
+      [
+       -122.498754,
+       37.88282
+      ],
+      [
+       -122.498581,
+       37.883161
+      ],
+      [
+       -122.499921,
+       37.885962
+      ],
+      [
+       -122.498902,
+       37.886122
+      ],
+      [
+       -122.497485,
+       37.882348
+      ],
+      [
+       -122.496492,
+       37.880563
+      ],
+      [
+       -122.495909,
+       37.878646
+      ],
+      [
+       -122.495908,
+       37.878162
+      ],
+      [
+       -122.496234,
+       37.877871
+      ],
+      [
+       -122.496435,
+       37.877893
+      ],
+      [
+       -122.497183,
+       37.877459
+      ],
+      [
+       -122.498091,
+       37.877519
+      ],
+      [
+       -122.498854,
+       37.878018
+      ],
+      [
+       -122.499728,
+       37.878358
+      ],
+      [
+       -122.500637,
+       37.879501
+      ],
+      [
+       -122.502177,
+       37.880379
+      ],
+      [
+       -122.502634,
+       37.880456
+      ],
+      [
+       -122.503238,
+       37.880341
+      ],
+      [
+       -122.50406,
+       37.880673
+      ],
+      [
+       -122.50427,
+       37.881029
+      ],
+      [
+       -122.503847,
+       37.881462
+      ],
+      [
+       -122.50361,
+       37.88205
+      ],
+      [
+       -122.50465,
+       37.883106
+      ],
+      [
+       -122.50623,
+       37.883606
+      ],
+      [
+       -122.507124,
+       37.883711
+      ],
+      [
+       -122.507845,
+       37.883492
+      ],
+      [
+       -122.508684,
+       37.882943
+      ],
+      [
+       -122.509613,
+       37.882899
+      ],
+      [
+       -122.510272,
+       37.883147
+      ],
+      [
+       -122.511547,
+       37.88395
+      ],
+      [
+       -122.511907,
+       37.884565
+      ],
+      [
+       -122.511747,
+       37.885087
+      ],
+      [
+       -122.510658,
+       37.885801
+      ],
+      [
+       -122.509375,
+       37.886102
+      ],
+      [
+       -122.509007,
+       37.886536
+      ],
+      [
+       -122.509021,
+       37.88691
+      ],
+      [
+       -122.509402,
+       37.887564
+      ],
+      [
+       -122.510407,
+       37.888108
+      ],
+      [
+       -122.510809,
+       37.88813
+      ],
+      [
+       -122.512216,
+       37.888889
+      ],
+      [
+       -122.512944,
+       37.888384
+      ],
+      [
+       -122.513603,
+       37.887549
+      ],
+      [
+       -122.513936,
+       37.88745
+      ],
+      [
+       -122.514609,
+       37.88689
+      ],
+      [
+       -122.514985,
+       37.886057
+      ],
+      [
+       -122.515518,
+       37.885781
+      ],
+      [
+       -122.517126,
+       37.886205
+      ],
+      [
+       -122.517991,
+       37.888375
+      ],
+      [
+       -122.518747,
+       37.888178
+      ],
+      [
+       -122.519772,
+       37.889233
+      ],
+      [
+       -122.519377,
+       37.889562
+      ],
+      [
+       -122.518809,
+       37.889194
+      ],
+      [
+       -122.5184,
+       37.889271
+      ],
+      [
+       -122.518289,
+       37.889447
+      ],
+      [
+       -122.518358,
+       37.889831
+      ],
+      [
+       -122.517747,
+       37.891155
+      ],
+      [
+       -122.517739,
+       37.892254
+      ],
+      [
+       -122.517961,
+       37.892661
+      ],
+      [
+       -122.518085,
+       37.892759
+      ],
+      [
+       -122.518231,
+       37.892567
+      ],
+      [
+       -122.518363,
+       37.892694
+      ],
+      [
+       -122.518606,
+       37.892315
+      ],
+      [
+       -122.518751,
+       37.892447
+      ],
+      [
+       -122.518946,
+       37.892309
+      ],
+      [
+       -122.518821,
+       37.892035
+      ],
+      [
+       -122.518932,
+       37.891963
+      ],
+      [
+       -122.519091,
+       37.892123
+      ],
+      [
+       -122.519278,
+       37.891991
+      ],
+      [
+       -122.519112,
+       37.891683
+      ],
+      [
+       -122.519216,
+       37.891617
+      ],
+      [
+       -122.519383,
+       37.891782
+      ],
+      [
+       -122.519508,
+       37.891458
+      ],
+      [
+       -122.519889,
+       37.891551
+      ],
+      [
+       -122.520298,
+       37.891222
+      ],
+      [
+       -122.519328,
+       37.890189
+      ],
+      [
+       -122.520112,
+       37.889821
+      ],
+      [
+       -122.522288,
+       37.892014
+      ],
+      [
+       -122.522357,
+       37.892272
+      ],
+      [
+       -122.522024,
+       37.892734
+      ],
+      [
+       -122.523174,
+       37.893355
+      ],
+      [
+       -122.522723,
+       37.893975
+      ],
+      [
+       -122.52289,
+       37.894074
+      ],
+      [
+       -122.523395,
+       37.895514
+      ],
+      [
+       -122.52388,
+       37.89591
+      ],
+      [
+       -122.524774,
+       37.895993
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "richardson-creek-nc",
    "name": "Richardson Creek",
    "kind": "stream",
@@ -1797327,6 +1798872,2567 @@
       [
        -117.578569,
        33.38036
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "san-pablo-bay-ca",
+   "name": "San Pablo Bay",
+   "kind": "bay",
+   "state": "CA",
+   "towns": [
+    "Bayview",
+    "Hercules",
+    "North Richmond",
+    "Novato",
+    "Pinole",
+    "Richmond",
+    "Rodeo",
+    "San Rafael",
+    "Santa Venetia",
+    "Vallejo"
+   ],
+   "bbox": [
+    -122.50046,
+    37.95808,
+    -122.26215,
+    38.1558
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 273.8,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "census",
+   "gnis_id": "232456",
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-06T06:16:17Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 4 features 1102213137458, 110169761004, 110696995785, 110860158115 (MTFCC H2051; named 'San Pablo Bay' by the Census), cut to the state and simplified to ~10 m; the name and place from the USGS Geographic Names Information System, feature 232456 (primary point 38.0665874, -122.3844178, 150 m or less from the polygons). Hand record: EPA's inventory gives 'San Pablo Bay' as the receiving water of the Pinole-Hercules (CA0037796), Rodeo (CA0037826) and Novato (CA0037958) plants' outfalls 001. openboatlaunch's San Francisco Bay record ends at about 37.98 N and NHDPlus V2.1 and the NHD high-resolution areas carry no water of that name; GNIS lists San Pablo Bay (feature 232456, class Bay, Marin County) at 38.06659 N 122.38442 W, and this record is the four Census TIGER/Line area water polygons the Census names 'San Pablo Bay' (split at the Contra Costa, Marin, Sonoma, Napa and Solano county lines), one of which holds that point; the three outfalls' points lie in them.",
+   "hand": true,
+   "tiger_ids": [
+    "1102213137458",
+    "110169761004",
+    "110696995785",
+    "110860158115"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -122.269578,
+       38.060404
+      ],
+      [
+       -122.270104,
+       38.057297
+      ],
+      [
+       -122.270062,
+       38.056105
+      ],
+      [
+       -122.269174,
+       38.053182
+      ],
+      [
+       -122.268407,
+       38.051371
+      ],
+      [
+       -122.268367,
+       38.049624
+      ],
+      [
+       -122.262371,
+       38.050158
+      ],
+      [
+       -122.262636,
+       38.048807
+      ],
+      [
+       -122.26215,
+       38.048087
+      ],
+      [
+       -122.262835,
+       38.042582
+      ],
+      [
+       -122.263397,
+       38.04272
+      ],
+      [
+       -122.263772,
+       38.042413
+      ],
+      [
+       -122.264314,
+       38.042374
+      ],
+      [
+       -122.26459,
+       38.042201
+      ],
+      [
+       -122.264696,
+       38.041639
+      ],
+      [
+       -122.264078,
+       38.040907
+      ],
+      [
+       -122.264448,
+       38.040314
+      ],
+      [
+       -122.265518,
+       38.039677
+      ],
+      [
+       -122.269791,
+       38.038404
+      ],
+      [
+       -122.270277,
+       38.038476
+      ],
+      [
+       -122.270423,
+       38.038569
+      ],
+      [
+       -122.270172,
+       38.039344
+      ],
+      [
+       -122.270262,
+       38.03997
+      ],
+      [
+       -122.27063,
+       38.04091
+      ],
+      [
+       -122.271019,
+       38.040998
+      ],
+      [
+       -122.272124,
+       38.040498
+      ],
+      [
+       -122.272555,
+       38.039856
+      ],
+      [
+       -122.272493,
+       38.039636
+      ],
+      [
+       -122.272131,
+       38.039625
+      ],
+      [
+       -122.271957,
+       38.039883
+      ],
+      [
+       -122.272187,
+       38.04013
+      ],
+      [
+       -122.271895,
+       38.040427
+      ],
+      [
+       -122.2712,
+       38.040773
+      ],
+      [
+       -122.270811,
+       38.040789
+      ],
+      [
+       -122.270526,
+       38.040014
+      ],
+      [
+       -122.270735,
+       38.039833
+      ],
+      [
+       -122.270985,
+       38.040004
+      ],
+      [
+       -122.271165,
+       38.039916
+      ],
+      [
+       -122.270839,
+       38.039135
+      ],
+      [
+       -122.27102,
+       38.03891
+      ],
+      [
+       -122.271625,
+       38.038696
+      ],
+      [
+       -122.271923,
+       38.03946
+      ],
+      [
+       -122.272201,
+       38.039389
+      ],
+      [
+       -122.271889,
+       38.038553
+      ],
+      [
+       -122.272299,
+       38.038504
+      ],
+      [
+       -122.27307,
+       38.038686
+      ],
+      [
+       -122.273459,
+       38.038994
+      ],
+      [
+       -122.27277,
+       38.039455
+      ],
+      [
+       -122.272951,
+       38.039977
+      ],
+      [
+       -122.273848,
+       38.038664
+      ],
+      [
+       -122.274327,
+       38.038999
+      ],
+      [
+       -122.27441,
+       38.038813
+      ],
+      [
+       -122.273917,
+       38.038554
+      ],
+      [
+       -122.273883,
+       38.038329
+      ],
+      [
+       -122.273563,
+       38.038109
+      ],
+      [
+       -122.273633,
+       38.037686
+      ],
+      [
+       -122.273397,
+       38.037483
+      ],
+      [
+       -122.273862,
+       38.036966
+      ],
+      [
+       -122.274196,
+       38.037104
+      ],
+      [
+       -122.274411,
+       38.037038
+      ],
+      [
+       -122.274592,
+       38.036577
+      ],
+      [
+       -122.275092,
+       38.036604
+      ],
+      [
+       -122.274275,
+       38.035905
+      ],
+      [
+       -122.274877,
+       38.035994
+      ],
+      [
+       -122.275023,
+       38.035747
+      ],
+      [
+       -122.274787,
+       38.035379
+      ],
+      [
+       -122.275233,
+       38.032522
+      ],
+      [
+       -122.275838,
+       38.030676
+      ],
+      [
+       -122.276353,
+       38.030188
+      ],
+      [
+       -122.276325,
+       38.029776
+      ],
+      [
+       -122.276652,
+       38.029221
+      ],
+      [
+       -122.277354,
+       38.028414
+      ],
+      [
+       -122.278458,
+       38.027568
+      ],
+      [
+       -122.279084,
+       38.027178
+      ],
+      [
+       -122.279389,
+       38.027293
+      ],
+      [
+       -122.279681,
+       38.026574
+      ],
+      [
+       -122.281639,
+       38.027832
+      ],
+      [
+       -122.282549,
+       38.027569
+      ],
+      [
+       -122.282515,
+       38.027459
+      ],
+      [
+       -122.281744,
+       38.027739
+      ],
+      [
+       -122.281542,
+       38.027668
+      ],
+      [
+       -122.279744,
+       38.026464
+      ],
+      [
+       -122.28109,
+       38.024041
+      ],
+      [
+       -122.282044,
+       38.022696
+      ],
+      [
+       -122.283288,
+       38.021888
+      ],
+      [
+       -122.28667,
+       38.021021
+      ],
+      [
+       -122.288885,
+       38.022302
+      ],
+      [
+       -122.289337,
+       38.022263
+      ],
+      [
+       -122.289615,
+       38.022538
+      ],
+      [
+       -122.28992,
+       38.022566
+      ],
+      [
+       -122.2904,
+       38.021945
+      ],
+      [
+       -122.290018,
+       38.021527
+      ],
+      [
+       -122.289935,
+       38.020687
+      ],
+      [
+       -122.289206,
+       38.020494
+      ],
+      [
+       -122.289588,
+       38.019478
+      ],
+      [
+       -122.291616,
+       38.016968
+      ],
+      [
+       -122.292123,
+       38.016863
+      ],
+      [
+       -122.29461,
+       38.015606
+      ],
+      [
+       -122.294971,
+       38.015556
+      ],
+      [
+       -122.296436,
+       38.014749
+      ],
+      [
+       -122.296763,
+       38.014156
+      ],
+      [
+       -122.29643,
+       38.013765
+      ],
+      [
+       -122.296979,
+       38.013979
+      ],
+      [
+       -122.297352,
+       38.013259
+      ],
+      [
+       -122.297745,
+       38.011746
+      ],
+      [
+       -122.298492,
+       38.010926
+      ],
+      [
+       -122.299102,
+       38.010703
+      ],
+      [
+       -122.299466,
+       38.010238
+      ],
+      [
+       -122.303769,
+       38.010425
+      ],
+      [
+       -122.304144,
+       38.010594
+      ],
+      [
+       -122.304519,
+       38.010491
+      ],
+      [
+       -122.304969,
+       38.01065
+      ],
+      [
+       -122.308512,
+       38.009937
+      ],
+      [
+       -122.309253,
+       38.009919
+      ],
+      [
+       -122.311466,
+       38.010425
+      ],
+      [
+       -122.312535,
+       38.010929
+      ],
+      [
+       -122.313125,
+       38.010894
+      ],
+      [
+       -122.314589,
+       38.011278
+      ],
+      [
+       -122.315707,
+       38.011327
+      ],
+      [
+       -122.315839,
+       38.011679
+      ],
+      [
+       -122.316353,
+       38.011959
+      ],
+      [
+       -122.316415,
+       38.011448
+      ],
+      [
+       -122.316742,
+       38.011113
+      ],
+      [
+       -122.318526,
+       38.010036
+      ],
+      [
+       -122.319088,
+       38.009316
+      ],
+      [
+       -122.321081,
+       38.007525
+      ],
+      [
+       -122.324442,
+       38.005113
+      ],
+      [
+       -122.327156,
+       38.003465
+      ],
+      [
+       -122.328323,
+       38.003355
+      ],
+      [
+       -122.328295,
+       38.003003
+      ],
+      [
+       -122.328739,
+       38.00308
+      ],
+      [
+       -122.329336,
+       38.002805
+      ],
+      [
+       -122.330447,
+       38.001904
+      ],
+      [
+       -122.330773,
+       38.002014
+      ],
+      [
+       -122.331648,
+       38.001937
+      ],
+      [
+       -122.331662,
+       38.001679
+      ],
+      [
+       -122.332953,
+       38.00125
+      ],
+      [
+       -122.334397,
+       38.001607
+      ],
+      [
+       -122.335571,
+       38.001458
+      ],
+      [
+       -122.336598,
+       38.001546
+      ],
+      [
+       -122.339147,
+       38.002463
+      ],
+      [
+       -122.341591,
+       38.002885
+      ],
+      [
+       -122.342612,
+       38.003209
+      ],
+      [
+       -122.344168,
+       38.004648
+      ],
+      [
+       -122.345202,
+       38.005115
+      ],
+      [
+       -122.346223,
+       38.0054
+      ],
+      [
+       -122.348369,
+       38.005319
+      ],
+      [
+       -122.349763,
+       38.005727
+      ],
+      [
+       -122.350625,
+       38.00626
+      ],
+      [
+       -122.350613,
+       38.006548
+      ],
+      [
+       -122.350795,
+       38.006554
+      ],
+      [
+       -122.350988,
+       38.006826
+      ],
+      [
+       -122.35092,
+       38.006985
+      ],
+      [
+       -122.351464,
+       38.007178
+      ],
+      [
+       -122.351577,
+       38.007529
+      ],
+      [
+       -122.353391,
+       38.007983
+      ],
+      [
+       -122.353652,
+       38.008278
+      ],
+      [
+       -122.354287,
+       38.008289
+      ],
+      [
+       -122.354525,
+       38.008425
+      ],
+      [
+       -122.354786,
+       38.008255
+      ],
+      [
+       -122.356842,
+       38.008122
+      ],
+      [
+       -122.356946,
+       38.008391
+      ],
+      [
+       -122.357286,
+       38.008331
+      ],
+      [
+       -122.357481,
+       38.00805
+      ],
+      [
+       -122.358876,
+       38.007978
+      ],
+      [
+       -122.361577,
+       38.008572
+      ],
+      [
+       -122.363063,
+       38.009593
+      ],
+      [
+       -122.363663,
+       38.010284
+      ],
+      [
+       -122.363822,
+       38.011089
+      ],
+      [
+       -122.364242,
+       38.011906
+      ],
+      [
+       -122.364226,
+       38.012525
+      ],
+      [
+       -122.365754,
+       38.012497
+      ],
+      [
+       -122.366684,
+       38.012151
+      ],
+      [
+       -122.367232,
+       38.011469
+      ],
+      [
+       -122.367314,
+       38.010085
+      ],
+      [
+       -122.368132,
+       38.008101
+      ],
+      [
+       -122.368187,
+       38.006722
+      ],
+      [
+       -122.366621,
+       38.002734
+      ],
+      [
+       -122.366287,
+       38.000998
+      ],
+      [
+       -122.366222,
+       37.999441
+      ],
+      [
+       -122.365541,
+       37.998887
+      ],
+      [
+       -122.365853,
+       37.997936
+      ],
+      [
+       -122.365449,
+       37.99698
+      ],
+      [
+       -122.364796,
+       37.996569
+      ],
+      [
+       -122.364068,
+       37.996822
+      ],
+      [
+       -122.36272,
+       37.99635
+      ],
+      [
+       -122.361561,
+       37.995636
+      ],
+      [
+       -122.360768,
+       37.994466
+      ],
+      [
+       -122.36074,
+       37.993592
+      ],
+      [
+       -122.360003,
+       37.992329
+      ],
+      [
+       -122.359975,
+       37.990686
+      ],
+      [
+       -122.360293,
+       37.989571
+      ],
+      [
+       -122.361084,
+       37.988307
+      ],
+      [
+       -122.36116,
+       37.987741
+      ],
+      [
+       -122.361958,
+       37.987114
+      ],
+      [
+       -122.362187,
+       37.986565
+      ],
+      [
+       -122.363013,
+       37.986526
+      ],
+      [
+       -122.362436,
+       37.986054
+      ],
+      [
+       -122.362492,
+       37.985944
+      ],
+      [
+       -122.362985,
+       37.986059
+      ],
+      [
+       -122.362762,
+       37.985779
+      ],
+      [
+       -122.363116,
+       37.985169
+      ],
+      [
+       -122.364484,
+       37.985526
+      ],
+      [
+       -122.364387,
+       37.985971
+      ],
+      [
+       -122.364859,
+       37.986145
+      ],
+      [
+       -122.364908,
+       37.986471
+      ],
+      [
+       -122.365185,
+       37.986382
+      ],
+      [
+       -122.365178,
+       37.986064
+      ],
+      [
+       -122.364706,
+       37.985817
+      ],
+      [
+       -122.364782,
+       37.985157
+      ],
+      [
+       -122.363983,
+       37.985081
+      ],
+      [
+       -122.363108,
+       37.984307
+      ],
+      [
+       -122.363517,
+       37.983828
+      ],
+      [
+       -122.363399,
+       37.98362
+      ],
+      [
+       -122.363753,
+       37.982988
+      ],
+      [
+       -122.364863,
+       37.982317
+      ],
+      [
+       -122.364634,
+       37.981801
+      ],
+      [
+       -122.364793,
+       37.981257
+      ],
+      [
+       -122.36575,
+       37.980471
+      ],
+      [
+       -122.366236,
+       37.9803
+      ],
+      [
+       -122.367328,
+       37.981101
+      ],
+      [
+       -122.367368,
+       37.980475
+      ],
+      [
+       -122.367852,
+       37.979899
+      ],
+      [
+       -122.368311,
+       37.980195
+      ],
+      [
+       -122.368013,
+       37.980843
+      ],
+      [
+       -122.368208,
+       37.980887
+      ],
+      [
+       -122.368568,
+       37.980035
+      ],
+      [
+       -122.367436,
+       37.979327
+      ],
+      [
+       -122.367172,
+       37.978701
+      ],
+      [
+       -122.368921,
+       37.978711
+      ],
+      [
+       -122.369233,
+       37.978749
+      ],
+      [
+       -122.369456,
+       37.97898
+      ],
+      [
+       -122.370615,
+       37.979089
+      ],
+      [
+       -122.372087,
+       37.97916
+      ],
+      [
+       -122.372316,
+       37.979017
+      ],
+      [
+       -122.372364,
+       37.978578
+      ],
+      [
+       -122.372232,
+       37.978528
+      ],
+      [
+       -122.370344,
+       37.978535
+      ],
+      [
+       -122.370045,
+       37.978165
+      ],
+      [
+       -122.370614,
+       37.976936
+      ],
+      [
+       -122.37153,
+       37.976836
+      ],
+      [
+       -122.371522,
+       37.975946
+      ],
+      [
+       -122.371321,
+       37.975793
+      ],
+      [
+       -122.371723,
+       37.975001
+      ],
+      [
+       -122.372625,
+       37.974638
+      ],
+      [
+       -122.374394,
+       37.974484
+      ],
+      [
+       -122.376992,
+       37.975065
+      ],
+      [
+       -122.379844,
+       37.97611
+      ],
+      [
+       -122.381163,
+       37.976341
+      ],
+      [
+       -122.38271,
+       37.976216
+      ],
+      [
+       -122.384134,
+       37.975343
+      ],
+      [
+       -122.384871,
+       37.973701
+      ],
+      [
+       -122.384962,
+       37.972684
+      ],
+      [
+       -122.384532,
+       37.971541
+      ],
+      [
+       -122.388266,
+       37.971373
+      ],
+      [
+       -122.388358,
+       37.969779
+      ],
+      [
+       -122.388774,
+       37.96939
+      ],
+      [
+       -122.394125,
+       37.969584
+      ],
+      [
+       -122.395513,
+       37.969431
+      ],
+      [
+       -122.395902,
+       37.968552
+      ],
+      [
+       -122.39591,
+       37.96792
+      ],
+      [
+       -122.397305,
+       37.967904
+      ],
+      [
+       -122.396279,
+       37.966041
+      ],
+      [
+       -122.396036,
+       37.965761
+      ],
+      [
+       -122.395654,
+       37.965656
+      ],
+      [
+       -122.395558,
+       37.964261
+      ],
+      [
+       -122.395004,
+       37.962788
+      ],
+      [
+       -122.394151,
+       37.961728
+      ],
+      [
+       -122.393915,
+       37.960771
+      ],
+      [
+       -122.394984,
+       37.96064
+      ],
+      [
+       -122.39755,
+       37.962998
+      ],
+      [
+       -122.397821,
+       37.963053
+      ],
+      [
+       -122.398508,
+       37.963658
+      ],
+      [
+       -122.398674,
+       37.963976
+      ],
+      [
+       -122.39891,
+       37.964015
+      ],
+      [
+       -122.399,
+       37.963872
+      ],
+      [
+       -122.394443,
+       37.95997
+      ],
+      [
+       -122.394394,
+       37.960464
+      ],
+      [
+       -122.393735,
+       37.960612
+      ],
+      [
+       -122.393319,
+       37.960337
+      ],
+      [
+       -122.392841,
+       37.958551
+      ],
+      [
+       -122.393956,
+       37.958085
+      ],
+      [
+       -122.395188,
+       37.960153
+      ],
+      [
+       -122.400272,
+       37.963626
+      ],
+      [
+       -122.40275,
+       37.968212
+      ],
+      [
+       -122.441484,
+       37.968023
+      ],
+      [
+       -122.441584,
+       37.973923
+      ],
+      [
+       -122.438401,
+       37.977432
+      ],
+      [
+       -122.444011,
+       37.981375
+      ],
+      [
+       -122.445325,
+       37.982787
+      ],
+      [
+       -122.446781,
+       37.984877
+      ],
+      [
+       -122.447424,
+       37.985343
+      ],
+      [
+       -122.44708,
+       37.985641
+      ],
+      [
+       -122.448087,
+       37.988976
+      ],
+      [
+       -122.449177,
+       37.98952
+      ],
+      [
+       -122.449427,
+       37.99008
+      ],
+      [
+       -122.449726,
+       37.990283
+      ],
+      [
+       -122.45008,
+       37.991316
+      ],
+      [
+       -122.450761,
+       37.992514
+      ],
+      [
+       -122.451732,
+       37.992255
+      ],
+      [
+       -122.452552,
+       37.992651
+      ],
+      [
+       -122.454649,
+       37.994651
+      ],
+      [
+       -122.455364,
+       37.995744
+      ],
+      [
+       -122.455802,
+       37.997123
+      ],
+      [
+       -122.456698,
+       37.99754
+      ],
+      [
+       -122.457697,
+       37.998298
+      ],
+      [
+       -122.458864,
+       37.998325
+      ],
+      [
+       -122.459725,
+       37.998891
+      ],
+      [
+       -122.460678,
+       37.999924
+      ],
+      [
+       -122.461456,
+       38.001116
+      ],
+      [
+       -122.461685,
+       38.001715
+      ],
+      [
+       -122.461546,
+       38.002133
+      ],
+      [
+       -122.462075,
+       38.003331
+      ],
+      [
+       -122.462498,
+       38.003396
+      ],
+      [
+       -122.463081,
+       38.002715
+      ],
+      [
+       -122.464109,
+       38.002753
+      ],
+      [
+       -122.464665,
+       38.003363
+      ],
+      [
+       -122.465137,
+       38.003566
+      ],
+      [
+       -122.465213,
+       38.004225
+      ],
+      [
+       -122.465998,
+       38.004335
+      ],
+      [
+       -122.466803,
+       38.004126
+      ],
+      [
+       -122.467407,
+       38.00345
+      ],
+      [
+       -122.468824,
+       38.003477
+      ],
+      [
+       -122.469699,
+       38.003818
+      ],
+      [
+       -122.470254,
+       38.004246
+      ],
+      [
+       -122.47038,
+       38.004795
+      ],
+      [
+       -122.470602,
+       38.00501
+      ],
+      [
+       -122.472011,
+       38.004927
+      ],
+      [
+       -122.472602,
+       38.005114
+      ],
+      [
+       -122.473699,
+       38.006025
+      ],
+      [
+       -122.47372,
+       38.006454
+      ],
+      [
+       -122.474679,
+       38.006377
+      ],
+      [
+       -122.475602,
+       38.006673
+      ],
+      [
+       -122.476074,
+       38.006393
+      ],
+      [
+       -122.476803,
+       38.006392
+      ],
+      [
+       -122.479074,
+       38.007078
+      ],
+      [
+       -122.479956,
+       38.00749
+      ],
+      [
+       -122.483069,
+       38.009516
+      ],
+      [
+       -122.485994,
+       38.01257
+      ],
+      [
+       -122.487446,
+       38.013707
+      ],
+      [
+       -122.488231,
+       38.014102
+      ],
+      [
+       -122.489349,
+       38.014425
+      ],
+      [
+       -122.494225,
+       38.015253
+      ],
+      [
+       -122.495802,
+       38.015692
+      ],
+      [
+       -122.497232,
+       38.015565
+      ],
+      [
+       -122.500372,
+       38.015821
+      ],
+      [
+       -122.500459,
+       38.016753
+      ],
+      [
+       -122.499016,
+       38.017385
+      ],
+      [
+       -122.498287,
+       38.017887
+      ],
+      [
+       -122.497437,
+       38.019268
+      ],
+      [
+       -122.49757,
+       38.020993
+      ],
+      [
+       -122.497197,
+       38.023081
+      ],
+      [
+       -122.497622,
+       38.024426
+      ],
+      [
+       -122.497714,
+       38.026564
+      ],
+      [
+       -122.49829,
+       38.026942
+      ],
+      [
+       -122.498027,
+       38.027448
+      ],
+      [
+       -122.498174,
+       38.029266
+      ],
+      [
+       -122.498001,
+       38.02986
+      ],
+      [
+       -122.498467,
+       38.030761
+      ],
+      [
+       -122.49844,
+       38.031305
+      ],
+      [
+       -122.498211,
+       38.031623
+      ],
+      [
+       -122.497468,
+       38.032063
+      ],
+      [
+       -122.497997,
+       38.032662
+      ],
+      [
+       -122.497691,
+       38.033168
+      ],
+      [
+       -122.497692,
+       38.033783
+      ],
+      [
+       -122.497282,
+       38.034354
+      ],
+      [
+       -122.497305,
+       38.035931
+      ],
+      [
+       -122.497111,
+       38.036684
+      ],
+      [
+       -122.49544,
+       38.040805
+      ],
+      [
+       -122.493867,
+       38.045767
+      ],
+      [
+       -122.493554,
+       38.04613
+      ],
+      [
+       -122.492853,
+       38.046427
+      ],
+      [
+       -122.49311,
+       38.046998
+      ],
+      [
+       -122.492787,
+       38.047581
+      ],
+      [
+       -122.492348,
+       38.047817
+      ],
+      [
+       -122.492007,
+       38.0484
+      ],
+      [
+       -122.491409,
+       38.048488
+      ],
+      [
+       -122.492167,
+       38.049229
+      ],
+      [
+       -122.492612,
+       38.050103
+      ],
+      [
+       -122.492614,
+       38.05219
+      ],
+      [
+       -122.492044,
+       38.05246
+      ],
+      [
+       -122.492337,
+       38.053734
+      ],
+      [
+       -122.491908,
+       38.055828
+      ],
+      [
+       -122.491069,
+       38.057713
+      ],
+      [
+       -122.4895,
+       38.060251
+      ],
+      [
+       -122.489119,
+       38.061235
+      ],
+      [
+       -122.488987,
+       38.062306
+      ],
+      [
+       -122.488217,
+       38.063488
+      ],
+      [
+       -122.487704,
+       38.065246
+      ],
+      [
+       -122.486252,
+       38.066923
+      ],
+      [
+       -122.485295,
+       38.069544
+      ],
+      [
+       -122.484387,
+       38.072818
+      ],
+      [
+       -122.484417,
+       38.076455
+      ],
+      [
+       -122.484878,
+       38.079988
+      ],
+      [
+       -122.48467,
+       38.08146
+      ],
+      [
+       -122.48479,
+       38.083795
+      ],
+      [
+       -122.485133,
+       38.086658
+      ],
+      [
+       -122.485407,
+       38.091756
+      ],
+      [
+       -122.486152,
+       38.093701
+      ],
+      [
+       -122.486583,
+       38.094217
+      ],
+      [
+       -122.487696,
+       38.094804
+      ],
+      [
+       -122.487842,
+       38.095073
+      ],
+      [
+       -122.487335,
+       38.095964
+      ],
+      [
+       -122.487267,
+       38.097222
+      ],
+      [
+       -122.486725,
+       38.098694
+      ],
+      [
+       -122.487164,
+       38.099271
+      ],
+      [
+       -122.482661,
+       38.099174
+      ],
+      [
+       -122.483618,
+       38.104274
+      ],
+      [
+       -122.483997,
+       38.107784
+      ],
+      [
+       -122.451987,
+       38.098519
+      ],
+      [
+       -122.493475,
+       38.110575
+      ],
+      [
+       -122.490907,
+       38.112147
+      ],
+      [
+       -122.488967,
+       38.112632
+      ],
+      [
+       -122.484295,
+       38.114265
+      ],
+      [
+       -122.481792,
+       38.114777
+      ],
+      [
+       -122.479956,
+       38.115382
+      ],
+      [
+       -122.474887,
+       38.116082
+      ],
+      [
+       -122.466508,
+       38.116809
+      ],
+      [
+       -122.462614,
+       38.11754
+      ],
+      [
+       -122.459895,
+       38.11781
+      ],
+      [
+       -122.458497,
+       38.11814
+      ],
+      [
+       -122.456147,
+       38.118992
+      ],
+      [
+       -122.454992,
+       38.119684
+      ],
+      [
+       -122.453539,
+       38.12019
+      ],
+      [
+       -122.452593,
+       38.119899
+      ],
+      [
+       -122.452085,
+       38.119102
+      ],
+      [
+       -122.451417,
+       38.11902
+      ],
+      [
+       -122.451584,
+       38.117751
+      ],
+      [
+       -122.451271,
+       38.117251
+      ],
+      [
+       -122.451236,
+       38.116531
+      ],
+      [
+       -122.450659,
+       38.116883
+      ],
+      [
+       -122.448768,
+       38.117323
+      ],
+      [
+       -122.447481,
+       38.117119
+      ],
+      [
+       -122.447106,
+       38.116768
+      ],
+      [
+       -122.44383,
+       38.116037
+      ],
+      [
+       -122.443065,
+       38.116274
+      ],
+      [
+       -122.441932,
+       38.117114
+      ],
+      [
+       -122.440979,
+       38.117477
+      ],
+      [
+       -122.440214,
+       38.117587
+      ],
+      [
+       -122.439463,
+       38.117938
+      ],
+      [
+       -122.438698,
+       38.118581
+      ],
+      [
+       -122.438482,
+       38.119257
+      ],
+      [
+       -122.437961,
+       38.12002
+      ],
+      [
+       -122.436104,
+       38.120438
+      ],
+      [
+       -122.435659,
+       38.120927
+      ],
+      [
+       -122.435165,
+       38.120811
+      ],
+      [
+       -122.434838,
+       38.121053
+      ],
+      [
+       -122.434198,
+       38.120899
+      ],
+      [
+       -122.433586,
+       38.121267
+      ],
+      [
+       -122.433433,
+       38.121619
+      ],
+      [
+       -122.43287,
+       38.1218
+      ],
+      [
+       -122.429817,
+       38.123613
+      ],
+      [
+       -122.429309,
+       38.124377
+      ],
+      [
+       -122.428879,
+       38.125561
+      ],
+      [
+       -122.428322,
+       38.12571
+      ],
+      [
+       -122.427696,
+       38.125644
+      ],
+      [
+       -122.427105,
+       38.126045
+      ],
+      [
+       -122.426827,
+       38.125885
+      ],
+      [
+       -122.42593,
+       38.126264
+      ],
+      [
+       -122.425478,
+       38.126209
+      ],
+      [
+       -122.425144,
+       38.126671
+      ],
+      [
+       -122.424539,
+       38.126967
+      ],
+      [
+       -122.424219,
+       38.127396
+      ],
+      [
+       -122.423739,
+       38.127308
+      ],
+      [
+       -122.423356,
+       38.127423
+      ],
+      [
+       -122.423085,
+       38.127714
+      ],
+      [
+       -122.422556,
+       38.127753
+      ],
+      [
+       -122.422285,
+       38.12828
+      ],
+      [
+       -122.42232,
+       38.12878
+      ],
+      [
+       -122.421937,
+       38.128846
+      ],
+      [
+       -122.421603,
+       38.129731
+      ],
+      [
+       -122.421026,
+       38.129654
+      ],
+      [
+       -122.42097,
+       38.13011
+      ],
+      [
+       -122.420518,
+       38.129994
+      ],
+      [
+       -122.420101,
+       38.130098
+      ],
+      [
+       -122.418862,
+       38.130779
+      ],
+      [
+       -122.417116,
+       38.132026
+      ],
+      [
+       -122.416706,
+       38.132125
+      ],
+      [
+       -122.416615,
+       38.132389
+      ],
+      [
+       -122.416114,
+       38.132548
+      ],
+      [
+       -122.416093,
+       38.132861
+      ],
+      [
+       -122.415419,
+       38.133295
+      ],
+      [
+       -122.414883,
+       38.133449
+      ],
+      [
+       -122.414458,
+       38.134097
+      ],
+      [
+       -122.413276,
+       38.134624
+      ],
+      [
+       -122.412816,
+       38.135267
+      ],
+      [
+       -122.412469,
+       38.135311
+      ],
+      [
+       -122.412009,
+       38.135766
+      ],
+      [
+       -122.411446,
+       38.136003
+      ],
+      [
+       -122.411334,
+       38.136371
+      ],
+      [
+       -122.410743,
+       38.136618
+      ],
+      [
+       -122.410632,
+       38.13698
+      ],
+      [
+       -122.410333,
+       38.137118
+      ],
+      [
+       -122.409964,
+       38.137716
+      ],
+      [
+       -122.410144,
+       38.138074
+      ],
+      [
+       -122.409553,
+       38.138189
+      ],
+      [
+       -122.409609,
+       38.138513
+      ],
+      [
+       -122.409066,
+       38.138837
+      ],
+      [
+       -122.40892,
+       38.139436
+      ],
+      [
+       -122.408252,
+       38.139672
+      ],
+      [
+       -122.407827,
+       38.1401
+      ],
+      [
+       -122.407799,
+       38.140968
+      ],
+      [
+       -122.407388,
+       38.140979
+      ],
+      [
+       -122.406999,
+       38.141814
+      ],
+      [
+       -122.406887,
+       38.1426
+      ],
+      [
+       -122.406532,
+       38.143078
+      ],
+      [
+       -122.406532,
+       38.14372
+      ],
+      [
+       -122.406059,
+       38.144028
+      ],
+      [
+       -122.405905,
+       38.144704
+      ],
+      [
+       -122.406058,
+       38.14494
+      ],
+      [
+       -122.405724,
+       38.145127
+      ],
+      [
+       -122.405863,
+       38.145511
+      ],
+      [
+       -122.405439,
+       38.146
+      ],
+      [
+       -122.405459,
+       38.146352
+      ],
+      [
+       -122.405021,
+       38.146461
+      ],
+      [
+       -122.405007,
+       38.146681
+      ],
+      [
+       -122.405223,
+       38.146857
+      ],
+      [
+       -122.404547,
+       38.147445
+      ],
+      [
+       -122.404638,
+       38.147654
+      ],
+      [
+       -122.404499,
+       38.147791
+      ],
+      [
+       -122.405625,
+       38.149302
+      ],
+      [
+       -122.405312,
+       38.149675
+      ],
+      [
+       -122.405756,
+       38.151049
+      ],
+      [
+       -122.40632,
+       38.151428
+      ],
+      [
+       -122.406361,
+       38.151818
+      ],
+      [
+       -122.407662,
+       38.153461
+      ],
+      [
+       -122.40822,
+       38.155798
+      ],
+      [
+       -122.405948,
+       38.15558
+      ],
+      [
+       -122.405428,
+       38.154735
+      ],
+      [
+       -122.403592,
+       38.152939
+      ],
+      [
+       -122.401943,
+       38.152597
+      ],
+      [
+       -122.398994,
+       38.151563
+      ],
+      [
+       -122.397908,
+       38.151525
+      ],
+      [
+       -122.395849,
+       38.150931
+      ],
+      [
+       -122.393651,
+       38.150639
+      ],
+      [
+       -122.391967,
+       38.150056
+      ],
+      [
+       -122.390764,
+       38.149819
+      ],
+      [
+       -122.386139,
+       38.147982
+      ],
+      [
+       -122.385033,
+       38.147828
+      ],
+      [
+       -122.381048,
+       38.146084
+      ],
+      [
+       -122.379816,
+       38.145814
+      ],
+      [
+       -122.378106,
+       38.145138
+      ],
+      [
+       -122.376088,
+       38.144741
+      ],
+      [
+       -122.371498,
+       38.142778
+      ],
+      [
+       -122.368659,
+       38.141812
+      ],
+      [
+       -122.366077,
+       38.140621
+      ],
+      [
+       -122.364212,
+       38.1401
+      ],
+      [
+       -122.358124,
+       38.137619
+      ],
+      [
+       -122.353574,
+       38.136154
+      ],
+      [
+       -122.334373,
+       38.128187
+      ],
+      [
+       -122.332724,
+       38.127407
+      ],
+      [
+       -122.331124,
+       38.126419
+      ],
+      [
+       -122.329316,
+       38.12588
+      ],
+      [
+       -122.32693,
+       38.124919
+      ],
+      [
+       -122.334189,
+       38.12492
+      ],
+      [
+       -122.333737,
+       38.124655
+      ],
+      [
+       -122.331206,
+       38.123875
+      ],
+      [
+       -122.32827,
+       38.122486
+      ],
+      [
+       -122.32633,
+       38.121255
+      ],
+      [
+       -122.324946,
+       38.120772
+      ],
+      [
+       -122.323353,
+       38.119921
+      ],
+      [
+       -122.322602,
+       38.119728
+      ],
+      [
+       -122.321267,
+       38.118921
+      ],
+      [
+       -122.320627,
+       38.118822
+      ],
+      [
+       -122.318617,
+       38.117586
+      ],
+      [
+       -122.316913,
+       38.117025
+      ],
+      [
+       -122.316267,
+       38.116218
+      ],
+      [
+       -122.314278,
+       38.115004
+      ],
+      [
+       -122.313812,
+       38.114548
+      ],
+      [
+       -122.312477,
+       38.11407
+      ],
+      [
+       -122.311969,
+       38.113411
+      ],
+      [
+       -122.309327,
+       38.111878
+      ],
+      [
+       -122.307679,
+       38.110493
+      ],
+      [
+       -122.304571,
+       38.108487
+      ],
+      [
+       -122.302972,
+       38.107103
+      ],
+      [
+       -122.302513,
+       38.10629
+      ],
+      [
+       -122.30154,
+       38.10563
+      ],
+      [
+       -122.300817,
+       38.104482
+      ],
+      [
+       -122.2996,
+       38.104235
+      ],
+      [
+       -122.299357,
+       38.103993
+      ],
+      [
+       -122.29935,
+       38.103564
+      ],
+      [
+       -122.298773,
+       38.103251
+      ],
+      [
+       -122.29846,
+       38.103372
+      ],
+      [
+       -122.296959,
+       38.102092
+      ],
+      [
+       -122.295749,
+       38.100658
+      ],
+      [
+       -122.295423,
+       38.09985
+      ],
+      [
+       -122.29283,
+       38.096987
+      ],
+      [
+       -122.292476,
+       38.096465
+      ],
+      [
+       -122.292379,
+       38.095844
+      ],
+      [
+       -122.291399,
+       38.094971
+      ],
+      [
+       -122.289244,
+       38.092234
+      ],
+      [
+       -122.288974,
+       38.091619
+      ],
+      [
+       -122.288522,
+       38.091317
+      ],
+      [
+       -122.287959,
+       38.09058
+      ],
+      [
+       -122.287987,
+       38.090372
+      ],
+      [
+       -122.287632,
+       38.090229
+      ],
+      [
+       -122.287042,
+       38.089064
+      ],
+      [
+       -122.284012,
+       38.086459
+      ],
+      [
+       -122.28372,
+       38.085964
+      ],
+      [
+       -122.281747,
+       38.083991
+      ],
+      [
+       -122.281233,
+       38.082601
+      ],
+      [
+       -122.280087,
+       38.081552
+      ],
+      [
+       -122.279962,
+       38.080898
+      ],
+      [
+       -122.278447,
+       38.080365
+      ],
+      [
+       -122.277586,
+       38.079749
+      ],
+      [
+       -122.275862,
+       38.079193
+      ],
+      [
+       -122.275321,
+       38.078622
+      ],
+      [
+       -122.27523,
+       38.077957
+      ],
+      [
+       -122.274737,
+       38.077644
+      ],
+      [
+       -122.274855,
+       38.077973
+      ],
+      [
+       -122.274376,
+       38.077688
+      ],
+      [
+       -122.272993,
+       38.076209
+      ],
+      [
+       -122.27259,
+       38.076105
+      ],
+      [
+       -122.272194,
+       38.076258
+      ],
+      [
+       -122.271208,
+       38.075401
+      ],
+      [
+       -122.271361,
+       38.075022
+      ],
+      [
+       -122.269638,
+       38.073088
+      ],
+      [
+       -122.26925,
+       38.072153
+      ],
+      [
+       -122.268597,
+       38.071335
+      ],
+      [
+       -122.268451,
+       38.070818
+      ],
+      [
+       -122.268404,
+       38.068796
+      ],
+      [
+       -122.268759,
+       38.067588
+      ],
+      [
+       -122.26963,
+       38.067322
+      ],
+      [
+       -122.270979,
+       38.067529
+      ],
+      [
+       -122.267978,
+       38.060221
+      ],
+      [
+       -122.278381,
+       38.06142
+      ],
+      [
+       -122.269578,
+       38.060404
       ]
      ]
     ]
@@ -2037120,6 +2041226,2751 @@
       [
        -77.367298,
        39.061114
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "suisun-bay-ca",
+   "name": "Suisun Bay",
+   "kind": "bay",
+   "state": "CA",
+   "towns": [
+    "Benicia",
+    "Martinez"
+   ],
+   "bbox": [
+    -122.12777,
+    38.03225,
+    -121.95091,
+    38.12078
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 54.903,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "census",
+   "gnis_id": "253943",
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-06T06:16:17Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 2 features 110169760851, 110696995732 (MTFCC H2051; named 'Suisun Bay' by the Census), cut to the state and simplified to ~10 m; the name and place from the USGS Geographic Names Information System, feature 253943 (primary point 38.0638082, -121.9927399, 150 m or less from the polygons). Hand record: EPA's inventory gives 'Suisun Bay' as the receiving water of the Central Contra Costa Sanitary District plant's outfall 001 (CA0037648). Neither openboatlaunch nor NHDPlus V2.1 nor the NHD high-resolution areas carry a water of that name; GNIS lists Suisun Bay (feature 253943, class Bay, Solano County; an official name by Board decision) at 38.06381 N 121.99274 W, and this record is the two Census TIGER/Line area water polygons the Census names 'Suisun Bay' (split at the Contra Costa and Solano county line), one of which holds that point; the outfall's point lies in them. The Census's separate 'Suisun Cutoff' polygon is not part of it.",
+   "hand": true,
+   "tiger_ids": [
+    "110169760851",
+    "110696995732"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -122.127713,
+       38.047686
+      ],
+      [
+       -122.127567,
+       38.048324
+      ],
+      [
+       -122.127774,
+       38.049604
+      ],
+      [
+       -122.127322,
+       38.05018
+      ],
+      [
+       -122.127384,
+       38.050439
+      ],
+      [
+       -122.126674,
+       38.052053
+      ],
+      [
+       -122.126771,
+       38.052312
+      ],
+      [
+       -122.126486,
+       38.052537
+      ],
+      [
+       -122.126263,
+       38.053333
+      ],
+      [
+       -122.125412,
+       38.054346
+      ],
+      [
+       -122.123469,
+       38.057681
+      ],
+      [
+       -122.123789,
+       38.057906
+      ],
+      [
+       -122.124343,
+       38.057848
+      ],
+      [
+       -122.123963,
+       38.058115
+      ],
+      [
+       -122.12324,
+       38.057995
+      ],
+      [
+       -122.12047,
+       38.061721
+      ],
+      [
+       -122.114673,
+       38.067915
+      ],
+      [
+       -122.112957,
+       38.069432
+      ],
+      [
+       -122.112207,
+       38.070311
+      ],
+      [
+       -122.10499,
+       38.076423
+      ],
+      [
+       -122.104108,
+       38.077373
+      ],
+      [
+       -122.102246,
+       38.078747
+      ],
+      [
+       -122.102281,
+       38.078978
+      ],
+      [
+       -122.101635,
+       38.079467
+      ],
+      [
+       -122.100495,
+       38.078792
+      ],
+      [
+       -122.100814,
+       38.078501
+      ],
+      [
+       -122.100647,
+       38.078413
+      ],
+      [
+       -122.099994,
+       38.078984
+      ],
+      [
+       -122.10014,
+       38.079061
+      ],
+      [
+       -122.100377,
+       38.078885
+      ],
+      [
+       -122.10151,
+       38.079577
+      ],
+      [
+       -122.099953,
+       38.080468
+      ],
+      [
+       -122.096181,
+       38.083523
+      ],
+      [
+       -122.091775,
+       38.086711
+      ],
+      [
+       -122.089538,
+       38.088464
+      ],
+      [
+       -122.089385,
+       38.08892
+      ],
+      [
+       -122.089023,
+       38.089145
+      ],
+      [
+       -122.08926,
+       38.088733
+      ],
+      [
+       -122.088162,
+       38.089568
+      ],
+      [
+       -122.082546,
+       38.094255
+      ],
+      [
+       -122.081511,
+       38.095283
+      ],
+      [
+       -122.081365,
+       38.095283
+      ],
+      [
+       -122.081504,
+       38.094997
+      ],
+      [
+       -122.075331,
+       38.099942
+      ],
+      [
+       -122.071056,
+       38.103941
+      ],
+      [
+       -122.068727,
+       38.106677
+      ],
+      [
+       -122.067357,
+       38.108897
+      ],
+      [
+       -122.06637,
+       38.11138
+      ],
+      [
+       -122.065904,
+       38.113374
+      ],
+      [
+       -122.0666,
+       38.113479
+      ],
+      [
+       -122.065835,
+       38.11361
+      ],
+      [
+       -122.065598,
+       38.114379
+      ],
+      [
+       -122.065438,
+       38.11728
+      ],
+      [
+       -122.065654,
+       38.117928
+      ],
+      [
+       -122.065903,
+       38.120785
+      ],
+      [
+       -122.06462,
+       38.120157
+      ],
+      [
+       -122.055829,
+       38.1065
+      ],
+      [
+       -122.054231,
+       38.103456
+      ],
+      [
+       -122.053843,
+       38.102286
+      ],
+      [
+       -122.04075,
+       38.093571
+      ],
+      [
+       -122.041157,
+       38.09321
+      ],
+      [
+       -122.040899,
+       38.093105
+      ],
+      [
+       -122.039711,
+       38.093413
+      ],
+      [
+       -122.039752,
+       38.093056
+      ],
+      [
+       -122.039579,
+       38.092863
+      ],
+      [
+       -122.039085,
+       38.092742
+      ],
+      [
+       -122.039169,
+       38.092166
+      ],
+      [
+       -122.038404,
+       38.092314
+      ],
+      [
+       -122.037542,
+       38.091759
+      ],
+      [
+       -122.037299,
+       38.091132
+      ],
+      [
+       -122.037473,
+       38.090775
+      ],
+      [
+       -122.037,
+       38.090621
+      ],
+      [
+       -122.037133,
+       38.09027
+      ],
+      [
+       -122.036792,
+       38.090242
+      ],
+      [
+       -122.03691,
+       38.08983
+      ],
+      [
+       -122.036778,
+       38.089764
+      ],
+      [
+       -122.037814,
+       38.089286
+      ],
+      [
+       -122.038183,
+       38.089001
+      ],
+      [
+       -122.038051,
+       38.088853
+      ],
+      [
+       -122.038433,
+       38.088699
+      ],
+      [
+       -122.038412,
+       38.088512
+      ],
+      [
+       -122.037696,
+       38.088386
+      ],
+      [
+       -122.037516,
+       38.087792
+      ],
+      [
+       -122.037808,
+       38.08782
+      ],
+      [
+       -122.037773,
+       38.087688
+      ],
+      [
+       -122.037196,
+       38.087232
+      ],
+      [
+       -122.037475,
+       38.086798
+      ],
+      [
+       -122.038531,
+       38.086606
+      ],
+      [
+       -122.038399,
+       38.086029
+      ],
+      [
+       -122.037927,
+       38.086029
+      ],
+      [
+       -122.037669,
+       38.086276
+      ],
+      [
+       -122.037656,
+       38.085985
+      ],
+      [
+       -122.03703,
+       38.085897
+      ],
+      [
+       -122.035932,
+       38.085248
+      ],
+      [
+       -122.035821,
+       38.085353
+      ],
+      [
+       -122.035571,
+       38.084968
+      ],
+      [
+       -122.034917,
+       38.084852
+      ],
+      [
+       -122.033555,
+       38.085143
+      ],
+      [
+       -122.033645,
+       38.085033
+      ],
+      [
+       -122.033277,
+       38.084742
+      ],
+      [
+       -122.029676,
+       38.08645
+      ],
+      [
+       -122.030141,
+       38.086724
+      ],
+      [
+       -122.02946,
+       38.08679
+      ],
+      [
+       -122.029078,
+       38.087004
+      ],
+      [
+       -122.028577,
+       38.087498
+      ],
+      [
+       -122.02864,
+       38.087806
+      ],
+      [
+       -122.028285,
+       38.087592
+      ],
+      [
+       -122.027437,
+       38.087592
+      ],
+      [
+       -122.026888,
+       38.087427
+      ],
+      [
+       -122.026687,
+       38.087086
+      ],
+      [
+       -122.026075,
+       38.087306
+      ],
+      [
+       -122.024942,
+       38.086844
+      ],
+      [
+       -122.025019,
+       38.086289
+      ],
+      [
+       -122.025297,
+       38.086185
+      ],
+      [
+       -122.025526,
+       38.086717
+      ],
+      [
+       -122.025888,
+       38.086635
+      ],
+      [
+       -122.025679,
+       38.086613
+      ],
+      [
+       -122.025617,
+       38.086163
+      ],
+      [
+       -122.024658,
+       38.08575
+      ],
+      [
+       -122.024846,
+       38.085217
+      ],
+      [
+       -122.025291,
+       38.085009
+      ],
+      [
+       -122.025214,
+       38.084811
+      ],
+      [
+       -122.024394,
+       38.084695
+      ],
+      [
+       -122.024394,
+       38.084404
+      ],
+      [
+       -122.022831,
+       38.083514
+      ],
+      [
+       -122.022351,
+       38.08342
+      ],
+      [
+       -122.022254,
+       38.083173
+      ],
+      [
+       -122.02288,
+       38.082959
+      ],
+      [
+       -122.023172,
+       38.082624
+      ],
+      [
+       -122.023839,
+       38.082316
+      ],
+      [
+       -122.023576,
+       38.081514
+      ],
+      [
+       -122.023784,
+       38.081399
+      ],
+      [
+       -122.023263,
+       38.081086
+      ],
+      [
+       -122.023208,
+       38.080454
+      ],
+      [
+       -122.022457,
+       38.080195
+      ],
+      [
+       -122.022374,
+       38.079437
+      ],
+      [
+       -122.022104,
+       38.079173
+      ],
+      [
+       -122.022319,
+       38.079717
+      ],
+      [
+       -122.022263,
+       38.080173
+      ],
+      [
+       -122.022068,
+       38.080124
+      ],
+      [
+       -122.021916,
+       38.079684
+      ],
+      [
+       -122.021707,
+       38.080008
+      ],
+      [
+       -122.021304,
+       38.079992
+      ],
+      [
+       -122.021839,
+       38.079426
+      ],
+      [
+       -122.021791,
+       38.079327
+      ],
+      [
+       -122.021374,
+       38.079371
+      ],
+      [
+       -122.020978,
+       38.079091
+      ],
+      [
+       -122.021325,
+       38.078975
+      ],
+      [
+       -122.021652,
+       38.079184
+      ],
+      [
+       -122.021603,
+       38.078904
+      ],
+      [
+       -122.021889,
+       38.078256
+      ],
+      [
+       -122.022153,
+       38.078025
+      ],
+      [
+       -122.022459,
+       38.077998
+      ],
+      [
+       -122.022813,
+       38.077624
+      ],
+      [
+       -122.023335,
+       38.076647
+      ],
+      [
+       -122.022974,
+       38.076416
+      ],
+      [
+       -122.022383,
+       38.076454
+      ],
+      [
+       -122.022015,
+       38.076025
+      ],
+      [
+       -122.021098,
+       38.07563
+      ],
+      [
+       -122.020695,
+       38.075712
+      ],
+      [
+       -122.019076,
+       38.075222
+      ],
+      [
+       -122.018749,
+       38.075381
+      ],
+      [
+       -122.018568,
+       38.075711
+      ],
+      [
+       -122.018443,
+       38.075288
+      ],
+      [
+       -122.018012,
+       38.075194
+      ],
+      [
+       -122.018089,
+       38.075019
+      ],
+      [
+       -122.017936,
+       38.074997
+      ],
+      [
+       -122.01779,
+       38.075249
+      ],
+      [
+       -122.017616,
+       38.07509
+      ],
+      [
+       -122.01729,
+       38.075172
+      ],
+      [
+       -122.016991,
+       38.075046
+      ],
+      [
+       -122.017269,
+       38.074969
+      ],
+      [
+       -122.017234,
+       38.074853
+      ],
+      [
+       -122.016289,
+       38.074677
+      ],
+      [
+       -122.015969,
+       38.074919
+      ],
+      [
+       -122.015539,
+       38.075001
+      ],
+      [
+       -122.015205,
+       38.074787
+      ],
+      [
+       -122.014163,
+       38.0746
+      ],
+      [
+       -122.014135,
+       38.074259
+      ],
+      [
+       -122.013697,
+       38.074341
+      ],
+      [
+       -122.012412,
+       38.074027
+      ],
+      [
+       -122.012085,
+       38.074066
+      ],
+      [
+       -122.011883,
+       38.074335
+      ],
+      [
+       -122.011223,
+       38.074549
+      ],
+      [
+       -122.010813,
+       38.074307
+      ],
+      [
+       -122.010292,
+       38.074697
+      ],
+      [
+       -122.009659,
+       38.074603
+      ],
+      [
+       -122.008735,
+       38.074905
+      ],
+      [
+       -122.00633,
+       38.075337
+      ],
+      [
+       -122.0035,
+       38.076407
+      ],
+      [
+       -122.003292,
+       38.07627
+      ],
+      [
+       -122.003862,
+       38.075968
+      ],
+      [
+       -122.002632,
+       38.076039
+      ],
+      [
+       -122.001638,
+       38.075752
+      ],
+      [
+       -122.001408,
+       38.076895
+      ],
+      [
+       -122.001074,
+       38.076856
+      ],
+      [
+       -122.000392,
+       38.078495
+      ],
+      [
+       -121.999506,
+       38.082171
+      ],
+      [
+       -121.99975,
+       38.082951
+      ],
+      [
+       -122.000681,
+       38.083648
+      ],
+      [
+       -122.001472,
+       38.083951
+      ],
+      [
+       -122.001827,
+       38.08925
+      ],
+      [
+       -121.995269,
+       38.086579
+      ],
+      [
+       -121.994407,
+       38.086437
+      ],
+      [
+       -121.992831,
+       38.085623
+      ],
+      [
+       -121.992439,
+       38.085654
+      ],
+      [
+       -121.991014,
+       38.086371
+      ],
+      [
+       -121.990125,
+       38.086384
+      ],
+      [
+       -121.987063,
+       38.086155
+      ],
+      [
+       -121.98535,
+       38.085583
+      ],
+      [
+       -121.983578,
+       38.08425
+      ],
+      [
+       -121.982074,
+       38.082069
+      ],
+      [
+       -121.983393,
+       38.081206
+      ],
+      [
+       -121.979038,
+       38.079287
+      ],
+      [
+       -121.978548,
+       38.080191
+      ],
+      [
+       -121.978587,
+       38.080944
+      ],
+      [
+       -121.979352,
+       38.080571
+      ],
+      [
+       -121.980864,
+       38.080363
+      ],
+      [
+       -121.981432,
+       38.080489
+      ],
+      [
+       -121.981631,
+       38.080959
+      ],
+      [
+       -121.98117,
+       38.080706
+      ],
+      [
+       -121.980363,
+       38.080723
+      ],
+      [
+       -121.977361,
+       38.081741
+      ],
+      [
+       -121.976889,
+       38.081724
+      ],
+      [
+       -121.976276,
+       38.079396
+      ],
+      [
+       -121.976045,
+       38.078068
+      ],
+      [
+       -121.975031,
+       38.07655
+      ],
+      [
+       -121.974512,
+       38.075185
+      ],
+      [
+       -121.973591,
+       38.074232
+      ],
+      [
+       -121.972041,
+       38.073958
+      ],
+      [
+       -121.969685,
+       38.074403
+      ],
+      [
+       -121.969254,
+       38.074414
+      ],
+      [
+       -121.968983,
+       38.074206
+      ],
+      [
+       -121.968677,
+       38.074189
+      ],
+      [
+       -121.968198,
+       38.074492
+      ],
+      [
+       -121.968198,
+       38.074662
+      ],
+      [
+       -121.969692,
+       38.074694
+      ],
+      [
+       -121.968671,
+       38.074838
+      ],
+      [
+       -121.967802,
+       38.07559
+      ],
+      [
+       -121.967198,
+       38.075898
+      ],
+      [
+       -121.966594,
+       38.077145
+      ],
+      [
+       -121.965454,
+       38.077722
+      ],
+      [
+       -121.964794,
+       38.07847
+      ],
+      [
+       -121.963543,
+       38.078701
+      ],
+      [
+       -121.963682,
+       38.079118
+      ],
+      [
+       -121.965274,
+       38.080083
+      ],
+      [
+       -121.964677,
+       38.080887
+      ],
+      [
+       -121.961299,
+       38.08058
+      ],
+      [
+       -121.959318,
+       38.080624
+      ],
+      [
+       -121.958991,
+       38.08052
+      ],
+      [
+       -121.958804,
+       38.080163
+      ],
+      [
+       -121.958532,
+       38.080102
+      ],
+      [
+       -121.957413,
+       38.080158
+      ],
+      [
+       -121.95601,
+       38.080449
+      ],
+      [
+       -121.954807,
+       38.080916
+      ],
+      [
+       -121.954113,
+       38.081487
+      ],
+      [
+       -121.953473,
+       38.082476
+      ],
+      [
+       -121.95273,
+       38.084163
+      ],
+      [
+       -121.952209,
+       38.084789
+      ],
+      [
+       -121.951986,
+       38.084861
+      ],
+      [
+       -121.951701,
+       38.084486
+      ],
+      [
+       -121.952612,
+       38.083987
+      ],
+      [
+       -121.95357,
+       38.081817
+      ],
+      [
+       -121.955148,
+       38.079861
+      ],
+      [
+       -121.956225,
+       38.078186
+      ],
+      [
+       -121.956544,
+       38.078229
+      ],
+      [
+       -121.956565,
+       38.078119
+      ],
+      [
+       -121.956461,
+       38.077455
+      ],
+      [
+       -121.956002,
+       38.077076
+      ],
+      [
+       -121.955599,
+       38.077263
+      ],
+      [
+       -121.955495,
+       38.076949
+      ],
+      [
+       -121.95482,
+       38.076955
+      ],
+      [
+       -121.954445,
+       38.07673
+      ],
+      [
+       -121.95391,
+       38.076796
+      ],
+      [
+       -121.95384,
+       38.076582
+      ],
+      [
+       -121.953361,
+       38.076593
+      ],
+      [
+       -121.952527,
+       38.076082
+      ],
+      [
+       -121.952047,
+       38.076181
+      ],
+      [
+       -121.951887,
+       38.07584
+      ],
+      [
+       -121.951137,
+       38.075741
+      ],
+      [
+       -121.951338,
+       38.075549
+      ],
+      [
+       -121.951178,
+       38.075285
+      ],
+      [
+       -121.950911,
+       38.053918
+      ],
+      [
+       -121.957572,
+       38.055319
+      ],
+      [
+       -121.968876,
+       38.056102
+      ],
+      [
+       -121.981556,
+       38.055728
+      ],
+      [
+       -121.990407,
+       38.056666
+      ],
+      [
+       -122.001073,
+       38.058319
+      ],
+      [
+       -122.002698,
+       38.056902
+      ],
+      [
+       -122.006629,
+       38.057335
+      ],
+      [
+       -122.007852,
+       38.056923
+      ],
+      [
+       -122.009027,
+       38.055974
+      ],
+      [
+       -122.010805,
+       38.056491
+      ],
+      [
+       -122.013306,
+       38.056778
+      ],
+      [
+       -122.014092,
+       38.056734
+      ],
+      [
+       -122.014355,
+       38.057069
+      ],
+      [
+       -122.015738,
+       38.057114
+      ],
+      [
+       -122.015974,
+       38.05674
+      ],
+      [
+       -122.016134,
+       38.057136
+      ],
+      [
+       -122.016315,
+       38.057197
+      ],
+      [
+       -122.019225,
+       38.057626
+      ],
+      [
+       -122.020539,
+       38.057665
+      ],
+      [
+       -122.019426,
+       38.058599
+      ],
+      [
+       -122.018134,
+       38.058884
+      ],
+      [
+       -122.016445,
+       38.058856
+      ],
+      [
+       -122.011645,
+       38.058244
+      ],
+      [
+       -122.011624,
+       38.058535
+      ],
+      [
+       -122.017092,
+       38.059147
+      ],
+      [
+       -122.018224,
+       38.059131
+      ],
+      [
+       -122.019579,
+       38.058791
+      ],
+      [
+       -122.021185,
+       38.057566
+      ],
+      [
+       -122.021449,
+       38.05783
+      ],
+      [
+       -122.022185,
+       38.05771
+      ],
+      [
+       -122.023109,
+       38.057919
+      ],
+      [
+       -122.024624,
+       38.057941
+      ],
+      [
+       -122.024561,
+       38.058551
+      ],
+      [
+       -122.022998,
+       38.058677
+      ],
+      [
+       -122.023074,
+       38.058952
+      ],
+      [
+       -122.028042,
+       38.05836
+      ],
+      [
+       -122.028855,
+       38.058118
+      ],
+      [
+       -122.029245,
+       38.057674
+      ],
+      [
+       -122.029807,
+       38.057525
+      ],
+      [
+       -122.030134,
+       38.05769
+      ],
+      [
+       -122.030155,
+       38.057465
+      ],
+      [
+       -122.030412,
+       38.057372
+      ],
+      [
+       -122.030919,
+       38.057537
+      ],
+      [
+       -122.031545,
+       38.057427
+      ],
+      [
+       -122.03199,
+       38.057004
+      ],
+      [
+       -122.032941,
+       38.057285
+      ],
+      [
+       -122.033984,
+       38.056615
+      ],
+      [
+       -122.034303,
+       38.056692
+      ],
+      [
+       -122.034915,
+       38.056445
+      ],
+      [
+       -122.035637,
+       38.056417
+      ],
+      [
+       -122.035797,
+       38.056258
+      ],
+      [
+       -122.036381,
+       38.056319
+      ],
+      [
+       -122.037618,
+       38.055962
+      ],
+      [
+       -122.038062,
+       38.056006
+      ],
+      [
+       -122.039063,
+       38.055649
+      ],
+      [
+       -122.039758,
+       38.056468
+      ],
+      [
+       -122.039973,
+       38.056495
+      ],
+      [
+       -122.039619,
+       38.055896
+      ],
+      [
+       -122.040209,
+       38.055693
+      ],
+      [
+       -122.040119,
+       38.055528
+      ],
+      [
+       -122.039549,
+       38.055781
+      ],
+      [
+       -122.039397,
+       38.055567
+      ],
+      [
+       -122.041321,
+       38.054902
+      ],
+      [
+       -122.041641,
+       38.05499
+      ],
+      [
+       -122.04178,
+       38.05476
+      ],
+      [
+       -122.043858,
+       38.053909
+      ],
+      [
+       -122.04333,
+       38.053612
+      ],
+      [
+       -122.043128,
+       38.052953
+      ],
+      [
+       -122.04367,
+       38.053244
+      ],
+      [
+       -122.043802,
+       38.053755
+      ],
+      [
+       -122.043962,
+       38.053815
+      ],
+      [
+       -122.045087,
+       38.053464
+      ],
+      [
+       -122.047144,
+       38.052195
+      ],
+      [
+       -122.048645,
+       38.051585
+      ],
+      [
+       -122.049278,
+       38.05113
+      ],
+      [
+       -122.051945,
+       38.050581
+      ],
+      [
+       -122.054947,
+       38.050762
+      ],
+      [
+       -122.055586,
+       38.051202
+      ],
+      [
+       -122.056239,
+       38.05096
+      ],
+      [
+       -122.056572,
+       38.05135
+      ],
+      [
+       -122.058761,
+       38.05218
+      ],
+      [
+       -122.059025,
+       38.052504
+      ],
+      [
+       -122.059365,
+       38.052438
+      ],
+      [
+       -122.059587,
+       38.052691
+      ],
+      [
+       -122.059733,
+       38.052702
+      ],
+      [
+       -122.059768,
+       38.052537
+      ],
+      [
+       -122.060963,
+       38.052784
+      ],
+      [
+       -122.063541,
+       38.052729
+      ],
+      [
+       -122.065041,
+       38.053163
+      ],
+      [
+       -122.066021,
+       38.052834
+      ],
+      [
+       -122.066042,
+       38.052658
+      ],
+      [
+       -122.066625,
+       38.052257
+      ],
+      [
+       -122.066848,
+       38.05235
+      ],
+      [
+       -122.068272,
+       38.052268
+      ],
+      [
+       -122.069655,
+       38.053295
+      ],
+      [
+       -122.070454,
+       38.053449
+      ],
+      [
+       -122.070891,
+       38.053092
+      ],
+      [
+       -122.070912,
+       38.052707
+      ],
+      [
+       -122.071329,
+       38.05251
+      ],
+      [
+       -122.071169,
+       38.052042
+      ],
+      [
+       -122.071412,
+       38.051982
+      ],
+      [
+       -122.07144,
+       38.051806
+      ],
+      [
+       -122.072024,
+       38.051861
+      ],
+      [
+       -122.072232,
+       38.05174
+      ],
+      [
+       -122.072204,
+       38.051554
+      ],
+      [
+       -122.071454,
+       38.051136
+      ],
+      [
+       -122.071517,
+       38.050488
+      ],
+      [
+       -122.073059,
+       38.049389
+      ],
+      [
+       -122.074184,
+       38.049054
+      ],
+      [
+       -122.075546,
+       38.048878
+      ],
+      [
+       -122.075893,
+       38.04868
+      ],
+      [
+       -122.076046,
+       38.048867
+      ],
+      [
+       -122.076553,
+       38.048955
+      ],
+      [
+       -122.0787,
+       38.048823
+      ],
+      [
+       -122.079221,
+       38.048735
+      ],
+      [
+       -122.080075,
+       38.048311
+      ],
+      [
+       -122.080784,
+       38.048702
+      ],
+      [
+       -122.082618,
+       38.048146
+      ],
+      [
+       -122.082715,
+       38.048014
+      ],
+      [
+       -122.082451,
+       38.047778
+      ],
+      [
+       -122.082847,
+       38.047905
+      ],
+      [
+       -122.085668,
+       38.047613
+      ],
+      [
+       -122.087231,
+       38.047657
+      ],
+      [
+       -122.087536,
+       38.047409
+      ],
+      [
+       -122.087578,
+       38.046459
+      ],
+      [
+       -122.088154,
+       38.046242
+      ],
+      [
+       -122.088657,
+       38.04632
+      ],
+      [
+       -122.089419,
+       38.04617
+      ],
+      [
+       -122.090959,
+       38.045733
+      ],
+      [
+       -122.091021,
+       38.045189
+      ],
+      [
+       -122.091436,
+       38.044992
+      ],
+      [
+       -122.091602,
+       38.044705
+      ],
+      [
+       -122.091064,
+       38.043511
+      ],
+      [
+       -122.092551,
+       38.043892
+      ],
+      [
+       -122.095962,
+       38.043424
+      ],
+      [
+       -122.096538,
+       38.043166
+      ],
+      [
+       -122.096378,
+       38.042617
+      ],
+      [
+       -122.096593,
+       38.042232
+      ],
+      [
+       -122.097989,
+       38.041743
+      ],
+      [
+       -122.098184,
+       38.041479
+      ],
+      [
+       -122.098251,
+       38.03615
+      ],
+      [
+       -122.098489,
+       38.041523
+      ],
+      [
+       -122.098274,
+       38.041803
+      ],
+      [
+       -122.097093,
+       38.042111
+      ],
+      [
+       -122.09658,
+       38.042529
+      ],
+      [
+       -122.096684,
+       38.042919
+      ],
+      [
+       -122.097476,
+       38.043276
+      ],
+      [
+       -122.098455,
+       38.042825
+      ],
+      [
+       -122.098493,
+       38.042516
+      ],
+      [
+       -122.099622,
+       38.042566
+      ],
+      [
+       -122.101581,
+       38.042181
+      ],
+      [
+       -122.105311,
+       38.041092
+      ],
+      [
+       -122.107207,
+       38.040702
+      ],
+      [
+       -122.107499,
+       38.040399
+      ],
+      [
+       -122.107004,
+       38.038142
+      ],
+      [
+       -122.107603,
+       38.040245
+      ],
+      [
+       -122.107867,
+       38.040509
+      ],
+      [
+       -122.108867,
+       38.0403
+      ],
+      [
+       -122.109798,
+       38.039855
+      ],
+      [
+       -122.110187,
+       38.039887
+      ],
+      [
+       -122.112263,
+       38.039134
+      ],
+      [
+       -122.112367,
+       38.038854
+      ],
+      [
+       -122.112694,
+       38.038892
+      ],
+      [
+       -122.113687,
+       38.038463
+      ],
+      [
+       -122.114242,
+       38.037963
+      ],
+      [
+       -122.113047,
+       38.036788
+      ],
+      [
+       -122.112114,
+       38.033613
+      ],
+      [
+       -122.112356,
+       38.032942
+      ],
+      [
+       -122.113057,
+       38.03225
+      ],
+      [
+       -122.113002,
+       38.032525
+      ],
+      [
+       -122.112509,
+       38.033063
+      ],
+      [
+       -122.112371,
+       38.033832
+      ],
+      [
+       -122.113178,
+       38.036727
+      ],
+      [
+       -122.114367,
+       38.037765
+      ],
+      [
+       -122.114679,
+       38.037759
+      ],
+      [
+       -122.115936,
+       38.037039
+      ],
+      [
+       -122.117908,
+       38.035396
+      ],
+      [
+       -122.118272,
+       38.035302
+      ],
+      [
+       -122.127713,
+       38.047686
+      ]
+     ],
+     [
+      [
+       -122.120095,
+       38.038221
+      ],
+      [
+       -122.119253,
+       38.038562
+      ],
+      [
+       -122.120395,
+       38.03814
+      ],
+      [
+       -122.120095,
+       38.038221
+      ]
+     ],
+     [
+      [
+       -121.985085,
+       38.06256
+      ],
+      [
+       -121.983661,
+       38.062621
+      ],
+      [
+       -121.982361,
+       38.06239
+      ],
+      [
+       -121.98209,
+       38.062533
+      ],
+      [
+       -121.981166,
+       38.062528
+      ],
+      [
+       -121.980312,
+       38.062935
+      ],
+      [
+       -121.980632,
+       38.063468
+      ],
+      [
+       -121.98164,
+       38.064203
+      ],
+      [
+       -121.982077,
+       38.064258
+      ],
+      [
+       -121.982167,
+       38.063489
+      ],
+      [
+       -121.983001,
+       38.063077
+      ],
+      [
+       -121.983418,
+       38.063022
+      ],
+      [
+       -121.984092,
+       38.063208
+      ],
+      [
+       -121.984669,
+       38.062966
+      ],
+      [
+       -121.985454,
+       38.062988
+      ],
+      [
+       -121.985607,
+       38.062796
+      ],
+      [
+       -121.985085,
+       38.06256
+      ]
+     ],
+     [
+      [
+       -122.045715,
+       38.070555
+      ],
+      [
+       -122.045319,
+       38.070835
+      ],
+      [
+       -122.04443,
+       38.070901
+      ],
+      [
+       -122.044333,
+       38.07084
+      ],
+      [
+       -122.044527,
+       38.070653
+      ],
+      [
+       -122.04434,
+       38.070478
+      ],
+      [
+       -122.043971,
+       38.07051
+      ],
+      [
+       -122.043811,
+       38.070368
+      ],
+      [
+       -122.043923,
+       38.070087
+      ],
+      [
+       -122.043603,
+       38.069994
+      ],
+      [
+       -122.042727,
+       38.070395
+      ],
+      [
+       -122.042039,
+       38.070395
+      ],
+      [
+       -122.040768,
+       38.069895
+      ],
+      [
+       -122.039128,
+       38.070037
+      ],
+      [
+       -122.039093,
+       38.069894
+      ],
+      [
+       -122.03821,
+       38.069564
+      ],
+      [
+       -122.035952,
+       38.070025
+      ],
+      [
+       -122.034353,
+       38.07019
+      ],
+      [
+       -122.033742,
+       38.06997
+      ],
+      [
+       -122.0337,
+       38.069717
+      ],
+      [
+       -122.033179,
+       38.069283
+      ],
+      [
+       -122.032728,
+       38.069382
+      ],
+      [
+       -122.032707,
+       38.069091
+      ],
+      [
+       -122.031011,
+       38.069106
+      ],
+      [
+       -122.030469,
+       38.068903
+      ],
+      [
+       -122.029983,
+       38.068985
+      ],
+      [
+       -122.028732,
+       38.068622
+      ],
+      [
+       -122.028503,
+       38.068199
+      ],
+      [
+       -122.028725,
+       38.068029
+      ],
+      [
+       -122.02817,
+       38.0676
+      ],
+      [
+       -122.027829,
+       38.068474
+      ],
+      [
+       -122.027516,
+       38.068265
+      ],
+      [
+       -122.027266,
+       38.068408
+      ],
+      [
+       -122.025994,
+       38.069473
+      ],
+      [
+       -122.023901,
+       38.070813
+      ],
+      [
+       -122.023276,
+       38.071071
+      ],
+      [
+       -122.022636,
+       38.071065
+      ],
+      [
+       -122.021816,
+       38.070768
+      ],
+      [
+       -122.021504,
+       38.070977
+      ],
+      [
+       -122.021323,
+       38.070922
+      ],
+      [
+       -122.021191,
+       38.071125
+      ],
+      [
+       -122.025554,
+       38.072747
+      ],
+      [
+       -122.03048,
+       38.075336
+      ],
+      [
+       -122.031411,
+       38.075595
+      ],
+      [
+       -122.033121,
+       38.075617
+      ],
+      [
+       -122.03531,
+       38.076024
+      ],
+      [
+       -122.035943,
+       38.075986
+      ],
+      [
+       -122.039474,
+       38.074339
+      ],
+      [
+       -122.039717,
+       38.074449
+      ],
+      [
+       -122.040259,
+       38.073932
+      ],
+      [
+       -122.040579,
+       38.073839
+      ],
+      [
+       -122.044512,
+       38.073455
+      ],
+      [
+       -122.044186,
+       38.073318
+      ],
+      [
+       -122.044387,
+       38.073213
+      ],
+      [
+       -122.044374,
+       38.073032
+      ],
+      [
+       -122.044123,
+       38.072867
+      ],
+      [
+       -122.044269,
+       38.072708
+      ],
+      [
+       -122.044019,
+       38.072466
+      ],
+      [
+       -122.044742,
+       38.071818
+      ],
+      [
+       -122.044569,
+       38.071604
+      ],
+      [
+       -122.046257,
+       38.071137
+      ],
+      [
+       -122.046521,
+       38.070906
+      ],
+      [
+       -122.046682,
+       38.070363
+      ],
+      [
+       -122.045715,
+       38.070555
+      ]
+     ],
+     [
+      [
+       -121.991504,
+       38.08001
+      ],
+      [
+       -121.991601,
+       38.079697
+      ],
+      [
+       -121.991372,
+       38.079137
+      ],
+      [
+       -121.989739,
+       38.079473
+      ],
+      [
+       -121.989426,
+       38.079363
+      ],
+      [
+       -121.989231,
+       38.078992
+      ],
+      [
+       -121.989411,
+       38.078577
+      ],
+      [
+       -121.989835,
+       38.078456
+      ],
+      [
+       -121.990676,
+       38.077797
+      ],
+      [
+       -121.990745,
+       38.077538
+      ],
+      [
+       -121.989786,
+       38.07761
+      ],
+      [
+       -121.989341,
+       38.078143
+      ],
+      [
+       -121.988966,
+       38.078138
+      ],
+      [
+       -121.988222,
+       38.078012
+      ],
+      [
+       -121.987798,
+       38.077693
+      ],
+      [
+       -121.987034,
+       38.077798
+      ],
+      [
+       -121.987033,
+       38.077232
+      ],
+      [
+       -121.986471,
+       38.077375
+      ],
+      [
+       -121.985935,
+       38.07726
+      ],
+      [
+       -121.985727,
+       38.077085
+      ],
+      [
+       -121.985747,
+       38.076579
+      ],
+      [
+       -121.985129,
+       38.077013
+      ],
+      [
+       -121.983649,
+       38.077102
+      ],
+      [
+       -121.982863,
+       38.076954
+      ],
+      [
+       -121.981973,
+       38.076438
+      ],
+      [
+       -121.981216,
+       38.076476
+      ],
+      [
+       -121.980674,
+       38.076982
+      ],
+      [
+       -121.980716,
+       38.077174
+      ],
+      [
+       -121.983177,
+       38.079074
+      ],
+      [
+       -121.983789,
+       38.079332
+      ],
+      [
+       -121.984053,
+       38.079909
+      ],
+      [
+       -121.986453,
+       38.082721
+      ],
+      [
+       -121.987538,
+       38.083704
+      ],
+      [
+       -121.988476,
+       38.083385
+      ],
+      [
+       -121.989087,
+       38.082923
+      ],
+      [
+       -121.989476,
+       38.082494
+      ],
+      [
+       -121.989511,
+       38.082022
+      ],
+      [
+       -121.990317,
+       38.081368
+      ],
+      [
+       -121.991088,
+       38.08134
+      ],
+      [
+       -121.991449,
+       38.081103
+      ],
+      [
+       -121.992103,
+       38.081109
+      ],
+      [
+       -121.992387,
+       38.080213
+      ],
+      [
+       -121.991504,
+       38.08001
+      ]
+     ],
+     [
+      [
+       -121.979032,
+       38.073088
+      ],
+      [
+       -121.978364,
+       38.072939
+      ],
+      [
+       -121.978454,
+       38.072313
+      ],
+      [
+       -121.977433,
+       38.071995
+      ],
+      [
+       -121.977342,
+       38.071566
+      ],
+      [
+       -121.976946,
+       38.071264
+      ],
+      [
+       -121.976154,
+       38.07116
+      ],
+      [
+       -121.97349,
+       38.071343
+      ],
+      [
+       -121.973034,
+       38.071392
+      ],
+      [
+       -121.972728,
+       38.07159
+      ],
+      [
+       -121.972756,
+       38.071755
+      ],
+      [
+       -121.973889,
+       38.072364
+      ],
+      [
+       -121.97596,
+       38.073869
+      ],
+      [
+       -121.976558,
+       38.074489
+      ],
+      [
+       -121.977108,
+       38.075786
+      ],
+      [
+       -121.977483,
+       38.076038
+      ],
+      [
+       -121.977921,
+       38.076
+      ],
+      [
+       -121.978199,
+       38.075697
+      ],
+      [
+       -121.978157,
+       38.075318
+      ],
+      [
+       -121.977427,
+       38.074841
+      ],
+      [
+       -121.977601,
+       38.074456
+      ],
+      [
+       -121.979171,
+       38.073335
+      ],
+      [
+       -121.979032,
+       38.073088
+      ]
+     ],
+     [
+      [
+       -121.97736,
+       38.078444
+      ],
+      [
+       -121.975969,
+       38.077637
+      ],
+      [
+       -121.976513,
+       38.079961
+      ],
+      [
+       -121.976916,
+       38.081208
+      ],
+      [
+       -121.977194,
+       38.081466
+      ],
+      [
+       -121.977333,
+       38.081307
+      ],
+      [
+       -121.977187,
+       38.079697
+      ],
+      [
+       -121.977478,
+       38.078889
+      ],
+      [
+       -121.97736,
+       38.078444
+      ]
+     ],
+     [
+      [
+       -121.966954,
+       38.075124
+      ],
+      [
+       -121.966266,
+       38.075294
+      ],
+      [
+       -121.965967,
+       38.074827
+      ],
+      [
+       -121.965307,
+       38.074822
+      ],
+      [
+       -121.964591,
+       38.075201
+      ],
+      [
+       -121.964334,
+       38.074954
+      ],
+      [
+       -121.964056,
+       38.074943
+      ],
+      [
+       -121.963403,
+       38.075426
+      ],
+      [
+       -121.962646,
+       38.076641
+      ],
+      [
+       -121.962132,
+       38.077124
+      ],
+      [
+       -121.961777,
+       38.077174
+      ],
+      [
+       -121.961256,
+       38.076828
+      ],
+      [
+       -121.961013,
+       38.076883
+      ],
+      [
+       -121.960853,
+       38.07746
+      ],
+      [
+       -121.96052,
+       38.077861
+      ],
+      [
+       -121.960708,
+       38.078383
+      ],
+      [
+       -121.960589,
+       38.078597
+      ],
+      [
+       -121.961542,
+       38.079294
+      ],
+      [
+       -121.961653,
+       38.079723
+      ],
+      [
+       -121.961215,
+       38.080031
+      ],
+      [
+       -121.959554,
+       38.080481
+      ],
+      [
+       -121.964287,
+       38.080662
+      ],
+      [
+       -121.964774,
+       38.08053
+      ],
+      [
+       -121.965142,
+       38.080123
+      ],
+      [
+       -121.963731,
+       38.079338
+      ],
+      [
+       -121.963369,
+       38.078684
+      ],
+      [
+       -121.96355,
+       38.078536
+      ],
+      [
+       -121.964766,
+       38.078354
+      ],
+      [
+       -121.965204,
+       38.077711
+      ],
+      [
+       -121.966399,
+       38.077047
+      ],
+      [
+       -121.9671,
+       38.075283
+      ],
+      [
+       -121.966954,
+       38.075124
+      ]
+     ],
+     [
+      [
+       -121.961333,
+       38.079575
+      ],
+      [
+       -121.960603,
+       38.07908
+      ],
+      [
+       -121.959867,
+       38.079377
+      ],
+      [
+       -121.958685,
+       38.079548
+      ],
+      [
+       -121.95863,
+       38.079734
+      ],
+      [
+       -121.959346,
+       38.080069
+      ],
+      [
+       -121.96093,
+       38.079926
+      ],
+      [
+       -121.961333,
+       38.079575
+      ]
+     ],
+     [
+      [
+       -121.95824,
+       38.079295
+      ],
+      [
+       -121.956287,
+       38.078532
+      ],
+      [
+       -121.955363,
+       38.080163
+      ],
+      [
+       -121.955669,
+       38.080312
+      ],
+      [
+       -121.956079,
+       38.080257
+      ],
+      [
+       -121.956621,
+       38.079954
+      ],
+      [
+       -121.958074,
+       38.079712
+      ],
+      [
+       -121.958317,
+       38.079542
+      ],
+      [
+       -121.95824,
+       38.079295
       ]
      ]
     ]
