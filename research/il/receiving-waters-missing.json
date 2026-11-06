@@ -23,9 +23,9 @@
  "build": {
   "date": "2026-11-06",
   "command": "python -m ingest.waters_from_nhd --names research/il/receiving-waters-missing.json --state IL --hand-only",
-  "records_built": 4,
+  "records_built": 5,
   "names_resolved": 0,
-  "network_requests": 0,
+  "network_requests": 1,
   "last_build": {
    "date": "2026-11-06",
    "command": "python -m ingest.waters_from_nhd --names research/il/receiving-waters-missing.json --state IL",
