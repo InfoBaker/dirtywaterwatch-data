@@ -2373,7 +2373,8 @@ def describe_write(info: dict) -> str:
 
 
 def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None, keep=(),
-                 final: bool = False, rebuild: bool = False, scope_states=None, rows_from=None) -> dict:
+                 final: bool = False, rebuild: bool = False, scope_states=None, rows_from=None,
+                 stats_key: str = "report_names") -> dict:
     """Write OUT, merged into the file on disk (merge_waters, merge_targets when partial): a checkpoint
     (final=False) or a partial final write (--limit) never drops a record. The final write of a full run
     (final=True) with fewer records than the file holds still merges (nothing is dropped) and notes it in
@@ -2384,7 +2385,8 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
     problems of every other state stay (this run's rows over them), the file's partial flag and statistics stay, and
     stats (when final) is this run's statistics per state, written under stats.state_builds.<ST>.
     rows_from ('reports': a --names run, with scope_states): only the state's report-name rows are merged (the state
-    build's rows stay exactly) and the statistics go under stats.state_builds.<ST>.report_names, the rest kept."""
+    build's rows stay exactly) and the statistics go under stats.state_builds.<ST>.report_names, the rest kept
+    (stats_key: a --hand-only run's go under report_names_hand_only, so the full --names build's stay, 2026-11-06)."""
     done = [r for r in recs if r.get("slug")]
     run_rows = list(keep) + [public_record(r) for r in done]
     try:
@@ -2426,7 +2428,7 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
         if final:
             for st, v in (stats or {}).items():
                 if rows_from:
-                    builds[st] = {**(builds.get(st) or {}), "report_names": {**v, "write": info}}
+                    builds[st] = {**(builds.get(st) or {}), stats_key: {**v, "write": info}}
                     continue
                 # the tidy's log (--tidy: records dropped or renamed for openboatlaunch's) is the provenance of records
                 # no longer in the file: a rebuild of the state keeps it (2026-11-04 review: NC's 41 drops and 9
@@ -2779,6 +2781,46 @@ HAND: list[dict] = [
          why=("MWRD's CSO Points layer puts Lemont's Stephen Street outfall (IL0039551) in its 'I & M Canal' reach and EPA's "
               "CSO inventory names the Illinois and Michigan Canal for Lemont's outfalls 001 and 002. NHDPlus V2.1 has no "
               "flowline of that name; the USGS NHD high-resolution flowlines carry the canal at Lemont as GNIS 425678.")),
+    # 2026-11-06 (California's bays, docs/checklists/2026-11-06-ca-bays.md in the site repository): the northern arms of
+    # San Francisco Bay that EPA's inventory and the State Water Board's spill reports name and that neither
+    # openboatlaunch (its san-francisco-bay-ca is the central and south bay) nor NHDPlus V2.1 nor the NHD high-resolution
+    # areas (one unnamed estuary polygon) hold as a record. Each is the Census TIGER/Line area water the Census names so
+    # (TIGERweb Hydro layer 1; the Census splits a bay at county lines, so a record may take several polygons), with the
+    # USGS GNIS feature of the name (DomesticNames_CA, read 2026-11-06), whose primary point lies in the polygons
+    # (gnis_point, 0 m); no model supplied a coordinate, and kind bay keeps them unfilled like every bay.
+    dict(name="San Pablo Bay", state="CA", kind="bay", source="census", service="tiger", gnis_id="232456",
+         oids=["1102213137458", "110169761004", "110696995785", "110860158115"],
+         gnis_point=(-122.3844178, 38.0665874),
+         near=(-122.3844178, 38.0665874),
+         why=("EPA's inventory gives 'San Pablo Bay' as the receiving water of the Pinole-Hercules (CA0037796), Rodeo "
+              "(CA0037826) and Novato (CA0037958) plants' outfalls 001. openboatlaunch's San Francisco Bay record ends "
+              "at about 37.98 N and NHDPlus V2.1 and the NHD high-resolution areas carry no water of that name; GNIS "
+              "lists San Pablo Bay (feature 232456, class Bay, Marin County) at 38.06659 N 122.38442 W, and this record "
+              "is the four Census TIGER/Line area water polygons the Census names 'San Pablo Bay' (split at the "
+              "Contra Costa, Marin, Sonoma, Napa and Solano county lines), one of which holds that point; the three "
+              "outfalls' points lie in them.")),
+    dict(name="Suisun Bay", state="CA", kind="bay", source="census", service="tiger", gnis_id="253943",
+         oids=["110169760851", "110696995732"],
+         gnis_point=(-121.9927399, 38.0638082),
+         near=(-121.9927399, 38.0638082),
+         why=("EPA's inventory gives 'Suisun Bay' as the receiving water of the Central Contra Costa Sanitary "
+              "District plant's outfall 001 (CA0037648). Neither openboatlaunch nor NHDPlus V2.1 nor the NHD "
+              "high-resolution areas carry a water of that name; GNIS lists Suisun Bay (feature 253943, class Bay, "
+              "Solano County; an official name by Board decision) at 38.06381 N 121.99274 W, and this record is the "
+              "two Census TIGER/Line area water polygons the Census names 'Suisun Bay' (split at the Contra Costa and "
+              "Solano county line), one of which holds that point; the outfall's point lies in them. The Census's "
+              "separate 'Suisun Cutoff' polygon is not part of it.")),
+    dict(name="Richardson Bay", state="CA", kind="bay", source="census", service="tiger", gnis_id="231543",
+         oids=["1107052605073"],
+         gnis_point=(-122.4860841, 37.869649),
+         near=(-122.4860841, 37.869649),
+         why=("The State Water Board's spill reports (CIWQS, Category 1) name 'Richardson Bay' as the water reached "
+              "(9 reports, Sausalito; research/ca/receiving-waters-missing.json). NHDPlus "
+              "V2.1 and the NHD high-resolution areas carry no water of that name; GNIS lists Richardson Bay (feature "
+              "231543, class Bay, Marin County) at 37.86965 N 122.48608 W, and this record is the Census TIGER/Line "
+              "area water polygon the Census names 'Richardson Bay', which holds that point. The Census draws it as "
+              "its own polygon, apart from its San Francisco Bay polygons; openboatlaunch's san-francisco-bay-ca "
+              "outline, whose bounding box reaches 122.507 W, may also cover it.")),
 ]
 
 
@@ -4887,6 +4929,11 @@ def names_main(args) -> int:
     return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run)
 
 
+# the fields of the last build's row a --hand-only run keeps for a name no hand record takes (2026-11-06: the tool's
+# detail behind a public reason, reason_detail, and the row's notes were dropped from 236 California rows)
+HAND_ONLY_KEPT = ("slugs", "how", "reason", "reason_detail", "notes", "defined_by", "places_failed")
+
+
 def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason, existing) -> int:
     """--names FILE --state XX --hand-only: no NHD or OSM request; the state's hand records (HAND) are built (their
     own sources: the Census TIGER/Line hydrography, NHD by GNIS id, OSM ways by id) and attached to the names they
@@ -4916,7 +4963,7 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
             row["reason"] = f"{NOT_REACHED} (a hand-only run asks no NHD); the next --names run asks NHD"
         else:
             row.update({k: list(prev[k]) if isinstance(prev[k], list) else prev[k]
-                        for k in ("slugs", "how", "reason", "defined_by", "places_failed") if k in prev})
+                        for k in HAND_ONLY_KEPT if k in prev})
         run.rows.append(row)
         pairs.append((t, row))
     try:
@@ -4924,11 +4971,26 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
     except BudgetExhausted as ex:
         run.stopped = str(ex)
     run.hand_pass(pairs)
-    return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run)
+    return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run,
+                        hand_only=True)
 
 
-def names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run) -> int:
-    """The end of a --names run: slugs, checks, the merged write and the names file rewritten."""
+def kept_build_note(meta: dict) -> dict | None:
+    """The names file's note of the last full --names build, which a --recheck or --hand-only run keeps under
+    last_build: the previous note's own last_build, else the previous note when it was a full build."""
+    prev_note = meta.get("build") or {}
+    if prev_note.get("last_build"):
+        return prev_note["last_build"]
+    cmd = prev_note.get("command") or ""
+    return prev_note if cmd and "--recheck" not in cmd and "--hand-only" not in cmd else None
+
+
+def names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run,
+                 hand_only: bool = False) -> int:
+    """The end of a --names run: slugs, checks, the merged write and the names file rewritten. A --hand-only run
+    (hand_only) says so in the names file's build note, keeps the last full build's note under last_build, and writes
+    its statistics under stats.state_builds.<ST>.report_names_hand_only (2026-11-06 review P2-1: it had replaced the
+    full build's note and statistics with its own)."""
     recs = [r for r in run.feats.values() if not r.get("_existing")]
     for r in recs:
         if not r["towns"]:
@@ -4943,14 +5005,17 @@ def names_finish(args, path, meta, state, rows, targets, done, skipped_reason, e
     stats_out = {state: names_stats(state, path, rows, targets, done, out_rows, recs, skipped_reason, http, run)}
     try:
         info = write_output(recs, out_rows, skipped_list(skipped_reason), problems, partial=True, stats=stats_out,
-                            final=True, scope_states={state}, rows_from=REPORT_ROWS)
+                            final=True, scope_states={state}, rows_from=REPORT_ROWS,
+                            stats_key="report_names_hand_only" if hand_only else "report_names")
     except WriteRefused as ex:
         print(f"\nNOT WRITTEN: {ex}")
         return 1
     S._GEOM_CACHE.clear()          # the records this run wrote: the status resolver as the hourly run will build it
     after = S.make_resolver(S.load_waters(include_nhd=True))
+    hand = ({"command": f"python -m ingest.waters_from_nhd --names {stats_out[state]['file']} --state {state} --hand-only",
+             "last_build": kept_build_note(meta)} if hand_only else {})
     rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats_out[state],
-                  placed=lambda text, r, slugs: resolver_places(after, text, state, r, slugs))
+                  placed=lambda text, r, slugs: resolver_places(after, text, state, r, slugs), **hand)
     print(f"\n{len(recs)} records -> {shown(OUT)}: {describe_write(info)}")
     print(json.dumps(stats_out, indent=1))
     for p in problems[:40]:
@@ -4985,15 +5050,13 @@ def names_recheck(path, meta, state, rows, targets, done, skipped_reason, resolv
             out_rows.append({"name": t["name"], "from": REPORT_ROWS, "state": state, "slugs": [], "how": [],
                              "reason": f"{NOT_REACHED} (a recheck builds nothing); the next --names run asks NHD"})
             waiting += 1
-    prev_note = meta.get("build") or {}
     stats = {"built": now_iso(), "file": str(Path(path).resolve().relative_to(ROOT))
              if str(Path(path).resolve()).startswith(str(ROOT)) else Path(path).name, "records": 0,
              "network_requests": 0}
     rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats,
                   placed=lambda text, r, slugs: resolver_places(resolver, text, state, r, slugs),
                   command=f"python -m ingest.waters_from_nhd --names {stats['file']} --state {state} --recheck",
-                  last_build=prev_note.get("last_build") or (prev_note if prev_note.get("command") and "--recheck" not in
-                                                             prev_note["command"] else None))
+                  last_build=kept_build_note(meta))
     d = read_json(path) or {}
     print(f"report names {state} (recheck, nothing built): {d.get('resolved_names', 0)} names resolved "
           f"({d.get('resolved_reports', 0)} reports), {d.get('waters', 0)} still without a record; {len(done)} held by "
