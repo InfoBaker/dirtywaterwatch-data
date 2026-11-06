@@ -3190,8 +3190,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             intervals[slug].extend(ivs)
             covered[slug].update({iv.get("source_id") or rain_mod.SOURCE_ID for iv in ivs})
             for iv in ivs:
-                if iv.get("reach"):
-                    reaches_on_water[slug].add(iv["reach"])
+                reaches_on_water[slug].update(k for k in [iv.get("reach"), *(iv.get("reaches") or [])] if k)
         for key, ivs in by_reach.items():
             reach_ivs[key].extend(ivs)
         hf = rain_mod.health_file(rain)
