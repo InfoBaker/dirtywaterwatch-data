@@ -143,6 +143,9 @@
  "intrenchment-creek-ga": [
   "Intreachment Creek"
  ],
+ "islais-creek-channel-ca": [
+  "Islais Creek"
+ ],
  "jones-falls-md": [
   "Jones Fall"
  ],
@@ -278,6 +281,12 @@
  ],
  "saint-joseph-bay-fl": [
   "St. Joe Bay"
+ ],
+ "san-francisco-bay-ca": [
+  "Central San Francisco Bay",
+  "Lower San Francisco Bay",
+  "South San Francisco Bay",
+  "SF Bay"
  ],
  "savannah-river-ga": [
   "SAVANNAH RV"
