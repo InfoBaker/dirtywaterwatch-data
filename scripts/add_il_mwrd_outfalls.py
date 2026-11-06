@@ -30,7 +30,8 @@ O'Brien Lock) are on the layer but are not combined sewer outfalls. Each is an o
 discharge point needs a registry row and a water record before the state goes live): `structure` "lake_reversal_gate",
 receiving water Lake Michigan (the shoreline model of data/rules.json reach.shoreline draws a stretch at it), the point
 MWRD's layer gives, the permit and outfall id of il_mwrd.GATE_IDS (no permit lists the structures; each is filed
-under the MWRD plant permit whose EPA row lies nearest, which `permit_basis` names), `rain_caution` false (the rain
+for want of a permit of its own under the permit of the MWRD plant whose EPA row lies nearest, which
+`permit_basis` says in public words), `rain_caution` false (the rain
 caution's thresholds are for combined sewer outfalls; a structure opens when the waterway itself rises, on MWRD's
 decision, and the possible-CSO map and the reversal table report it). O'Brien Lock lies on the Calumet River about
 11 km upstream of the river's mouth at Calumet Harbor, farther from the lake's shore than a shoreline stretch can start
@@ -232,6 +233,18 @@ def shore_entry(lat: float, lon: float, lake) -> dict:
             "hole_m": round(metres(lat, lon, *reversed(nearest_points(hole, pt)[0].coords[0]))) if hole is not None else None}
 
 
+def gate_permit_basis(permit: str, near: dict | None, dist_m: float | None) -> str:
+    """Why a reversal structure is listed under a plant's permit, in public words (review of Illinois's gates,
+    2026-11-06): the structure is MWRD's and has no permit of its own, so it is listed under the permit of MWRD's plant
+    with the nearest outfall in EPA's inventory, and that permit does not name it."""
+    at = (f" ({permit}: outfall {near['outfall']}" + (f", '{near['outfall_name']}'" if near.get("outfall_name") else "")
+          + f", {round(dist_m):,} m away)") if near is not None and dist_m is not None else f" ({permit})"
+    return ("MWRD's own structure, with no permit of its own: no NPDES permit names it as an outfall and EPA's CSO "
+            "inventory lists none here. For want of one it is listed under the permit of the MWRD water reclamation "
+            f"plant with the nearest outfall in EPA's inventory{at}; that permit does not name the structure, and the "
+            "listing only keeps MWRD's structure with MWRD's own records")
+
+
 def gate_rows(points: list[dict], epa_rows: list[dict], hr: dict | None = None, previous: dict | None = None,
               lakes: dict | None = None) -> list[dict]:
     """The reversal structures' outfall rows (module docstring). points: the layer's rows for the structures; hr:
@@ -253,12 +266,7 @@ def gate_rows(points: list[dict], epa_rows: list[dict], hr: dict | None = None, 
         if near[1] is not None and nearest_all[1] is not None and nearest_all[1]["npdes_permit"] != permit:
             raise ValueError(f"{name}: the nearest MWRD plant row is {nearest_all[1]['npdes_permit']}, not {permit} "
                              "(il_mwrd.GATE_IDS)")
-        basis = ("EPA's CSO inventory lists no outfall at this structure and no permit names it as an outfall; it is "
-                 "filed under the MWRD water reclamation plant permit whose EPA row lies nearest"
-                 + (f" ({permit} outfall {near[1]['outfall']}"
-                    + (f", '{near[1]['outfall_name']}'" if near[1].get("outfall_name") else "")
-                    + f", {round(near[0]):,} m away)" if near[1] is not None else f" ({permit})")
-                 + ", the rule this file uses for MWRD's own outfalls")
+        basis = gate_permit_basis(permit, near[1], near[0])
         row = {"npdes_permit": permit, "permittee": (near[1] or {}).get("permittee") or "MWRD", "state": "IL",
                "city": p["OUTFALL_CITY"], "outfall": outfall, "outfall_name": name, "outfall_status": "CSO",
                "receiving_water_echo": M.LAKE, "mwrd_reach": p["WATERWAY_REACH"], "mwrd_owner": p["OWNER"],

@@ -136,7 +136,8 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
                "discharger_id": operator(permit, did),
                "permittee": o.get("permittee"), "state": st, "lat": lat, "lon": lon,
                "receiving_water": receiving_water(o), "water_slugs": slugs, "water_match": o.get("match"),
-               "rain": rain_of(rain_permits.get(permit)) if kind == "cso" and permit and not closed(o) else None}
+               "rain": rain_of(rain_permits.get(permit)) if kind == "cso" and permit and not closed(o)
+               and o.get("rain_caution") is not False else None}     # a lake reversal gate: not rain-driven
         if prov:                        # a place from the overflow reports: provisional, drawn apart on the map
             row.update({k: o.get(k) for k in PROVISIONAL_FIELDS})
         if o.get("coords_from") == "facility":
