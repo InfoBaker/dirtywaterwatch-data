@@ -1365,8 +1365,9 @@ ALONG_MIN_KM = 1.0
 
 
 def ocean_waters_along(segs: list[dict], waters: dict, ocean_slug: str, shore: dict, states: list[str]) -> list[str]:
-    """The bay, sound or lake records of the stretch's states (not an ocean record) that ALONG_MIN_KM or more of the
-    stretch's segments run in or along (within ALONG_TOL_M of the record's outline), by length along the stretch."""
+    """The bay, sound or lake records of the stretch's states (not an ocean record, and not ocean_slug: the record the
+    stretch walks, the ocean's or a bay's under the lake model) that ALONG_MIN_KM or more of the stretch's segments run
+    in or along (within ALONG_TOL_M of the record's outline), by length along the stretch."""
     import shapely
     from shapely.geometry import LineString, box
     from build.status import water_geometry
@@ -1535,8 +1536,12 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     lake_recs = SH.lake_waters(slug, states, waters, shore)
     for n_slug in onto:          # the other lake's records too (Lake Michigan's, from a Lake Huron outfall)
         lake_recs += [x for x in SH.lake_waters(n_slug, states, waters, shore) if x not in lake_recs]
-    if rec["ocean"] and segs:    # a bay or sound the ocean stretch runs along (ALONG_KINDS: its mouth is wider than the
-        lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]   # opening)
+    # a bay or sound the stretch runs along (ALONG_KINDS): on the ocean, one whose mouth is wider than the opening; on a
+    # bay under the lake model (San Francisco Bay), a bay record within the walked water (openboatlaunch's San Francisco
+    # Bay outline takes in the mouths of Richardson Bay and San Pablo Bay, which the site holds as Census records): a
+    # reach belongs to every water it runs through (CA final audit, 2026-11-06). A sound (Puget Sound) is not asked yet.
+    if (rec["ocean"] or rec.get("bay")) and segs:
+        lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]
     if segs and river_km:
         for sg in segs:
             sg["km_start"], sg["km_end"] = round(sg["km_start"] + river_km, 3), round(sg["km_end"] + river_km, 3)
