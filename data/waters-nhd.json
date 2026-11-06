@@ -2,7 +2,7 @@
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
  "built": "2026-11-06T07:05:58Z",
  "partial": false,
- "count": 3229,
+ "count": 3228,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -287,10 +287,10 @@
     },
     "existing_duplicates": {
      "date": "2026-11-06",
-     "dropped": 25,
+     "dropped": 26,
      "renamed": 3,
      "kept": 0,
-     "rows_mapped": 2,
+     "rows_mapped": 5,
      "unnamed_named": 0,
      "unnamed_left": [],
      "actions": [
@@ -475,6 +475,33 @@
        "to": "humboldt-bay-ca",
        "row": "Humboldt Bay",
        "why": "Humboldt Bay (humboldt-bay-ca) carries the name 'Humboldt Bay' and reaches the operators' town (eureka)"
+      },
+      {
+       "slug": "islais-creek-ca",
+       "action": "dropped",
+       "to": "islais-creek-channel-ca",
+       "why": "same name; 7% of the NHD feature lies within 300 m of islais-creek-channel-ca's bounding box, which the feature's own box covers 20% of; both name san francisco"
+      },
+      {
+       "slug": null,
+       "action": "mapped",
+       "to": "san-francisco-bay-ca",
+       "row": "Central San Francisco Bay",
+       "why": "San Francisco Bay (san-francisco-bay-ca) carries the name 'Central San Francisco Bay' and reaches the operators' town (san francisco)"
+      },
+      {
+       "slug": null,
+       "action": "mapped",
+       "to": "san-francisco-bay-ca",
+       "row": "Lower San Francisco Bay",
+       "why": "San Francisco Bay (san-francisco-bay-ca) carries the name 'Lower San Francisco Bay' and reaches the operators' towns (burlingame, san francisco)"
+      },
+      {
+       "slug": null,
+       "action": "mapped",
+       "to": "san-francisco-bay-ca",
+       "row": "SF Bay",
+       "why": "San Francisco Bay (san-francisco-bay-ca) carries the name 'SF Bay' and reaches the operators' towns (alameda, san mateo)"
       }
      ]
     }
@@ -146615,9 +146642,11 @@
     "Oakland",
     "Sausalito"
    ],
-   "slugs": [],
+   "slugs": [
+    "san-francisco-bay-ca"
+   ],
    "how": [],
-   "reason": "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "reason": null,
    "define_by": "reach",
    "defined_by": null,
    "permits": [
@@ -146628,6 +146657,9 @@
     "CA0038539",
     "CA0038628",
     "CA0110116"
+   ],
+   "notes": [
+    "2026-11-06: openboatlaunch's record: San Francisco Bay (san-francisco-bay-ca) carries the name 'Central San Francisco Bay' and reaches the operators' town (san francisco)"
    ]
   },
   {
@@ -146645,9 +146677,11 @@
     "Hayward",
     "San Leandro"
    ],
-   "slugs": [],
+   "slugs": [
+    "san-francisco-bay-ca"
+   ],
    "how": [],
-   "reason": "EPA's reaches for it are named New York Slough, not 'Lower San Francisco Bay'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "reason": null,
    "define_by": "reach",
    "defined_by": null,
    "permits": [
@@ -146662,6 +146696,9 @@
     "CA0038369",
     "CA0038636",
     "CA0038881"
+   ],
+   "notes": [
+    "2026-11-06: openboatlaunch's record: San Francisco Bay (san-francisco-bay-ca) carries the name 'Lower San Francisco Bay' and reaches the operators' towns (burlingame, san francisco)"
    ]
   },
   {
@@ -151230,7 +151267,7 @@
     "San Francisco"
    ],
    "slugs": [
-    "islais-creek-ca"
+    "islais-creek-channel-ca"
    ],
    "how": [
     "OSM fallback (NHDPlus has no feature of that name)"
@@ -151240,6 +151277,9 @@
    "defined_by": null,
    "permits": [
     "CA0037664"
+   ],
+   "notes": [
+    "2026-11-06: the NHD record islais-creek-ca was dropped: openboatlaunch's islais-creek-channel-ca is this water (same name; 7% of the NHD feature lies within 300 m of islais-creek-channel-ca's bounding box, which the feature's own box covers 20% of; both name san francisco)"
    ]
   },
   {
@@ -153109,13 +153149,18 @@
     "Richmond",
     "San Mateo"
    ],
-   "slugs": [],
+   "slugs": [
+    "san-francisco-bay-ca"
+   ],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
+   "reason": null,
    "from": "reports",
    "reports": 12,
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "2026-11-06: openboatlaunch's record: San Francisco Bay (san-francisco-bay-ca) carries the name 'SF Bay' and reaches the operators' towns (alameda, san mateo)"
    ]
   },
   {
@@ -896340,136 +896385,6 @@
       [
        -78.22599,
        39.296735
-      ]
-     ]
-    ]
-   }
-  },
-  {
-   "slug": "islais-creek-ca",
-   "name": "Islais Creek",
-   "kind": "stream",
-   "state": "CA",
-   "towns": [
-    "San Francisco"
-   ],
-   "bbox": [
-    -122.44106,
-    37.73067,
-    -122.39308,
-    37.74796
-   ],
-   "wikidata": "Q6081595",
-   "charted": null,
-   "area_km2": null,
-   "length_km": 5.5,
-   "launches": [],
-   "advisories": [],
-   "aliases": [],
-   "source": "osm",
-   "gnis_id": null,
-   "comids": [],
-   "nhd_fcodes": [],
-   "fetched_at": "2026-11-06T06:47:18Z",
-   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
-   "note": "NHDPlus V2.1 has no feature of this name here (tidal waters are unnamed areas); from OpenStreetMap",
-   "fallback_for": "nhd",
-   "osm": [
-    "w1127627006"
-   ],
-   "osm_timestamp": "2026-11-06T06:44:47Z",
-   "targets": 1,
-   "geometry": {
-    "type": "MultiLineString",
-    "coordinates": [
-     [
-      [
-       -122.441063,
-       37.737876
-      ],
-      [
-       -122.440479,
-       37.735895
-      ],
-      [
-       -122.440122,
-       37.735375
-      ],
-      [
-       -122.438626,
-       37.734728
-      ],
-      [
-       -122.434324,
-       37.733708
-      ],
-      [
-       -122.433032,
-       37.73334
-      ],
-      [
-       -122.432073,
-       37.732865
-      ],
-      [
-       -122.431191,
-       37.730674
-      ],
-      [
-       -122.428186,
-       37.731541
-      ],
-      [
-       -122.424502,
-       37.73117
-      ],
-      [
-       -122.419288,
-       37.73177
-      ],
-      [
-       -122.41714,
-       37.731753
-      ],
-      [
-       -122.414887,
-       37.73201
-      ],
-      [
-       -122.414417,
-       37.732695
-      ],
-      [
-       -122.410998,
-       37.734493
-      ],
-      [
-       -122.409141,
-       37.735766
-      ],
-      [
-       -122.40864,
-       37.736537
-      ],
-      [
-       -122.408365,
-       37.73735
-      ],
-      [
-       -122.407391,
-       37.737823
-      ],
-      [
-       -122.399665,
-       37.740033
-      ],
-      [
-       -122.394261,
-       37.746014
-      ],
-      [
-       -122.393082,
-       37.747962
       ]
      ]
     ]
