@@ -248,14 +248,26 @@ ALL_REQUIRED = {
               "sewer_overflow_bypass_event_id_ext", "current_report_form_flag", "sewer_overflow_bypass_start_datetime",
               "sewer_overflow_bypass_end_datetime", "latitude_measure", "longitude_measure",
               "sewer_overflow_bypass_discharge_volume_gallons", "discharge_quantification_method_desc",
-              "sewer_overflow_structure_type_code", "permitted_feature_identifier", "collection_system_identifier"),
+              "sewer_overflow_structure_type_code", "sewer_overflow_structure_type_desc",
+              "sewer_overflow_structure_type_code_other_text", "sewer_overflow_bypass_description_text",
+              "permitted_feature_identifier", "collection_system_identifier", "transaction_type"),
     "report": ("permit_identifier", "program_report_form_set_id", "program_report_form_id", "current_report_form_flag",
                *REPORT_COLUMNS),
-    "types": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_type_code", "sewer_overflow_bypass_type_desc"),
+    "types": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_type_code", "sewer_overflow_bypass_type_desc",
+              "sewer_overflow_bypass_type_code_sequence"),
     "waters": ("sewer_overflow_bypass_event_key", "name_receiving_water"),
-    "impacts": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_impact_code", "sewer_overflow_bypass_impact_desc"),
-    "systems": ("permit_identifier", "collection_system_identifier", "current_report_flag"),
+    "impacts": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_impact_code", "sewer_overflow_bypass_impact_desc",
+                "sewer_overflow_bypass_impact_other_text"),
+    "causes": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_cause_code", "sewer_overflow_bypass_cause_desc",
+               "sewer_overflow_bypass_cause_other_text"),
+    "actions": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_corrective_action_code",
+                "sewer_overflow_bypass_corrective_action_desc", "sewer_overflow_bypass_corrective_action_other_text"),
+    "systems": ("permit_identifier", "collection_system_identifier", "current_report_flag",
+                "collection_system_name", "percent_collection_system_css", *SYSTEM_COLUMNS),
 }
+# tables that hold thousands of rows nationally: one that arrives empty is a failed read, never "no events" (an empty
+# events table would otherwise empty every record of the feed; an empty report table would blank every report date)
+ALL_NONEMPTY = ("event", "report", "types", "waters", "impacts", "systems")
 
 
 # --------------------------------------------------------------------------- DC names and state
@@ -341,6 +353,9 @@ def current_from_all_versions(raw: dict[str, list[dict]]) -> dict[str, list[dict
     missing = [ALL_TABLES[k] for k in ("event", "report") if k not in raw]
     if missing:
         raise RuntimeError("all-versions ZIP has no " + ", ".join(missing))
+    empty = [ALL_TABLES[k] for k in ALL_NONEMPTY if k in raw and not raw[k]]
+    if empty:
+        raise RuntimeError("all-versions ZIP has no rows in " + ", ".join(empty))
     for k, cols in ALL_REQUIRED.items():
         rows = raw.get(k) or []
         absent = [c for c in cols if rows and c not in rows[0]]
@@ -399,6 +414,8 @@ def fetch_current() -> tuple[dict[str, list[dict]], dict]:
     if TABLES["events"] not in names:
         raise KeyError(f"current-version ZIP has no {TABLES['events']} (it holds {', '.join(sorted(names)) or 'nothing'})")
     tables = _zip_tables(zf, TABLES)
+    if not tables["events"]:   # a header with no rows would empty every record of the feed: read the other ZIP
+        raise KeyError(f"current-version ZIP's {TABLES['events']} has no rows")
     return tables, {"url": URL, "via": "live", "last_modified": lm, "raw_saved": _save(content, lm),
                     "extract_date": _entry_date(zf, TABLES["events"])}
 
