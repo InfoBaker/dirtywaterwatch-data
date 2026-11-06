@@ -45,7 +45,7 @@ def test_no_washington_nhd_record_hides_behind_an_openboatlaunch_slug():
 POINTS = {
     ("WA0029181", "030"): (47.581476, -122.342997),     # Lander St: 'Duwamish River - East Waterway'
     ("WA0029181", "032"): (47.577223, -122.34278),      # Hanford #2: 'Duwamish River - East Waterway'
-    ("WA0031682", "107"): (47.5736688, -122.3430585),   # 'East Waterway - Duwamish River'
+    ("WA0031682", "107"): (47.5736688, -122.3430585),   # 'East Waterway of the Duwamish River'
     ("WA0031682", "059"): (47.6702494, -122.4061857),   # 'Salmon Bay'
     ("WA0031682", "060"): (47.6678326, -122.4077581),   # 'Salmon Bay'
     ("WA0029181", "014"): (47.64711, -122.304861),      # Montlake: 'Lake Washington Ship Canal'
@@ -179,6 +179,48 @@ def test_the_south_plants_marine_outfall_is_at_the_permits_diffuser_with_epas_po
 def test_the_gate_ties_script_finds_the_files_as_its_table_says():
     mod = _gate_ties()
     assert mod.main(["--check"]) == 0
+
+
+
+# Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, layer 0), its
+# CSOB_REC_WTR_BDY_NAME for the outfalls the gate table cites, as published when the review fetched it (2026-11-06)
+SPU_LAYER_NAMES = {
+    "019": "Union Bay", "059": "Salmon Bay", "060": "Salmon Bay", "071": "Elliott Bay",
+    "091": "Puget Sound - S-Central", "094": "Puget Sound - S-Central", "095": "Puget Sound - S-Central",
+    "107": "East Waterway of the Duwamish River", "161": "Lake Washington", "168": "Longfellow Creek",
+    "169": "Longfellow Creek", "170": "Longfellow Creek", "174": "Lake Washington - Ship Canal",
+}
+
+
+def test_seattles_rows_quote_the_basin_layer_verbatim():
+    """Review 2026-11-06: four of Seattle's rows quoted 'Puget Sound - Central' and 'East Waterway - Duwamish River' as
+    the layer's text, which reads 'Puget Sound - S-Central' and 'East Waterway of the Duwamish River'."""
+    mod = _gate_ties()
+    n = 0
+    for key, entry in list(mod.TABLE.items()) + list(mod.NO_RECORD.items()):
+        basis = entry[-1]
+        if key[1] != "WA0031682" or "basin layer" not in basis or "gives outfall" not in basis:
+            continue
+        assert f"gives outfall {key[2]} the receiving water '{SPU_LAYER_NAMES[key[2]]}'" in basis, key
+        n += 1
+    assert n == 24
+
+
+def test_the_south_plants_note_places_epas_point_where_it_is():
+    """Review 2026-11-06: EPA's point for outfall 001 is a permitted-feature point about 4 km west of the plant (ECHO
+    places the facility at longitude -122.238935), 17.7 km from the diffuser; the note said 'the plant in Renton, 15 km'."""
+    import math
+
+    def km(a, b, c, d):
+        p1, p2, dl = math.radians(a), math.radians(c), math.radians(d - b)
+        x = math.sin((p2 - p1) / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+        return 2 * 6371.0 * math.asin(math.sqrt(x))
+    for o in _rows("outfalls-plants-us.json"):
+        if o["npdes_permit"] == "WA0029581" and o["outfall"] in ("001", "001A"):
+            d = km(o["epa_lat"], o["epa_lon"], o["lat"], o["lon"])
+            assert f"{round(d)} km from the diffuser" in o["coords_note"], (d, o["coords_note"])
+            assert "is the plant" not in o["coords_note"] + o["receiving_water_override"]["basis"]
+            assert abs((o["epa_lon"] - -122.238935) * 111.32 * math.cos(math.radians(47.47))) > 3.5   # not the plant
 
 
 # ---------------------------------------------------------------- Puget Sound under the shoreline model
