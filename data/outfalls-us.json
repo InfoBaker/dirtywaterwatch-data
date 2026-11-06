@@ -69790,7 +69790,7 @@
    "state": "KY",
    "city": "ERLANGER",
    "outfall": "027",
-   "outfall_name": "Untreated CSO or Stormwater from\r\n12th St � River Metals CSO ID 0730129",
+   "outfall_name": "Untreated CSO or Stormwater from\r\n12th St \ufffd River Metals CSO ID 0730129",
    "outfall_status": "CSO|SW",
    "feature_type": "EXO",
    "receiving_water_echo": "Licking River",
@@ -69964,7 +69964,7 @@
    "state": "KY",
    "city": "ERLANGER",
    "outfall": "034",
-   "outfall_name": "Untreated CSO from\r\nSouthern � Twin Oaks CSO ID 0870079",
+   "outfall_name": "Untreated CSO from\r\nSouthern \ufffd Twin Oaks CSO ID 0870079",
    "outfall_status": "CSO|SW",
    "feature_type": "EXO",
    "receiving_water_echo": "Licking River",
@@ -71309,7 +71309,7 @@
    "state": "KY",
    "city": "ERLANGER",
    "outfall": "086",
-   "outfall_name": "Untreated CSO or Stormwater from\r\nO�Fallon Ave CSO ID 0600096",
+   "outfall_name": "Untreated CSO or Stormwater from\r\nO\ufffdFallon Ave CSO ID 0600096",
    "outfall_status": "CSO|SW",
    "feature_type": "EXO",
    "receiving_water_echo": "Ohio River",
@@ -135833,7 +135833,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Guemes Channel (guemes-channel-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0020257",
@@ -135862,7 +135862,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Guemes Channel (guemes-channel-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0023973",
@@ -135892,7 +135892,7 @@
    "receiving_water_source": null,
    "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Port Angeles Harbor, Ennis Creek, Peabody Creek) cannot be told apart for this outfall",
    "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Port Angeles Harbor, Ennis Creek, Peabody Creek) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0023973",
@@ -135921,7 +135921,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Angeles Harbor' by name; Port Angeles Harbor (port-angeles-harbor-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -135951,7 +135951,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Angeles Harbor' by name; Port Angeles Harbor (port-angeles-harbor-wa, openboatlaunch), 17 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -135981,7 +135981,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Peabody Creek' by name; Peabody Creek (peabody-creek-wa, OpenStreetMap record), 13 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136011,7 +136011,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Angeles Harbor' by name; Port Angeles Harbor (port-angeles-harbor-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136041,7 +136041,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "point: 'Ennis Creek-Frontal Port Angeles Harbor' is a USGS HUC-12 watershed name, not a water; the water record at the outfall's point (0 m; snapped within 150 m); Port Angeles Harbor (port-angeles-harbor-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136071,7 +136071,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "none: EPA's point lies on Port Angeles Harbor (17 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.4 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "no_water_reason": "EPA's point lies on Port Angeles Harbor (17 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.4 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
   },
@@ -136102,7 +136102,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "none: EPA's point lies on Port Angeles Harbor (11 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.2 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "no_water_reason": "EPA's point lies on Port Angeles Harbor (11 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.2 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
   },
@@ -136133,7 +136133,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "none: EPA's point lies on Port Angeles Harbor (0 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (54.7 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "no_water_reason": "EPA's point lies on Port Angeles Harbor (0 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (54.7 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
   },
@@ -136164,7 +136164,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Skagit River' by name; Skagit River (skagit-river-wa, openboatlaunch), 30 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136194,7 +136194,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Skagit River' by name; Skagit River (skagit-river-wa, openboatlaunch), 30 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136224,7 +136224,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Skagit River' by name; Skagit River (skagit-river-wa, openboatlaunch), 67 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024074",
@@ -136253,7 +136253,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Skagit River' by name; Skagit River (skagit-river-wa, openboatlaunch), 163 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136282,7 +136282,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23021904 (12 m): GNIS 'Spokane River' (391131)); Spokane River (spokane-river-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 4
   },
   {
@@ -136312,7 +136312,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23021904 (12 m): GNIS 'Spokane River' (391131)); Spokane River (spokane-river-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 4
   },
   {
@@ -136342,7 +136342,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23021904 (12 m): GNIS 'Spokane River' (391131)); Spokane River (spokane-river-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 4
   },
   {
@@ -136372,7 +136372,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23021904 (12 m): GNIS 'Spokane River' (391131)); Spokane River (spokane-river-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 4
   },
   {
@@ -136402,7 +136402,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 19 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136431,7 +136431,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Hangman Creek' by name; Hangman Creek (hangman-creek-wa, NHDPlus V2.1 record), 54 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136461,7 +136461,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 24 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136490,7 +136490,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 47 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136520,7 +136520,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 39 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136549,7 +136549,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 7 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136578,7 +136578,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 21 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136607,7 +136607,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 33 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136636,7 +136636,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 71 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136665,7 +136665,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 9 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136694,7 +136694,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136732,7 +136732,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 1086 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136761,7 +136761,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Hangman Creek' by name; Hangman Creek (hangman-creek-wa, NHDPlus V2.1 record), 54 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -136791,7 +136791,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 54 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136820,7 +136820,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 47 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136849,7 +136849,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 31 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136878,7 +136878,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 36 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136907,7 +136907,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 10 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136936,7 +136936,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 40 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136965,7 +136965,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 2 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -136994,7 +136994,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 27 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -137024,7 +137024,7 @@
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 247 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -137053,7 +137053,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 47 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -137083,7 +137083,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024473",
@@ -137112,7 +137112,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Spokane River' by name; Spokane River (spokane-river-wa, openboatlaunch), 16 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137142,7 +137142,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137172,7 +137172,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137202,7 +137202,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137232,7 +137232,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137262,7 +137262,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137292,7 +137292,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 22 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137322,7 +137322,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Port Gardner Bay' by name; Port Gardner (port-gardner-wa, openboatlaunch), 1 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137352,7 +137352,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 116 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 3
   },
   {
@@ -137383,7 +137383,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 116 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 3
   },
   {
@@ -137414,7 +137414,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 116 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 3
   },
   {
@@ -137445,7 +137445,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 98 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137475,7 +137475,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 111 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0024490",
@@ -137505,7 +137505,7 @@
    "receiving_water_source": "state",
    "source_rows": 3,
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 143 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -137526,15 +137526,15 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 7,
+   "distance_m": 10,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 003 (Ballard Siphon Regulator) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 9.1 km away; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 7 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 10 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 003 (Ballard Siphon Regulator) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 9.1 km away (WA go-live gates 2026-11-06)"
@@ -137566,8 +137566,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 004 (11th Avenue NW (East Ballard Overflow)) the receiving water 'Lake Washington Ship Canal'; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 004 (11th Avenue NW (East Ballard Overflow)) the receiving water 'Lake Washington Ship Canal' (WA go-live gates 2026-11-06)"
@@ -137599,8 +137599,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 006 (Magnolia South Overflow) the receiving water 'Elliott Bay/Puget Sound'; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 006 (Magnolia South Overflow) the receiving water 'Elliott Bay/Puget Sound' (WA go-live gates 2026-11-06)"
@@ -137625,15 +137625,15 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 242,
+   "distance_m": 322,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 007 (Canal Street Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 7.4 km away; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 242 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 322 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 007 (Canal Street Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 7.4 km away (WA go-live gates 2026-11-06)"
@@ -137658,15 +137658,15 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 126,
+   "distance_m": 140,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 008 (3rd Avenue West Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Pipers Creek' is another outfall's water, 5.4 km away; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 126 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 140 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 008 (3rd Avenue West Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Pipers Creek' is another outfall's water, 5.4 km away (WA go-live gates 2026-11-06)"
@@ -137698,8 +137698,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 009 (Dexter Avenue Regulator) the receiving water 'Lake Union'; Lake Union (lake-union-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Union' by name; Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Union",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 009 (Dexter Avenue Regulator) the receiving water 'Lake Union' (WA go-live gates 2026-11-06)"
@@ -137732,7 +137732,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Lake Washington-Sammamish River' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -137760,8 +137760,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 012 (Belvoir PS Emergency Overflow) the receiving water 'Lake Washington (Union Bay)'; EPA's text 'Boeing Creek' is another outfall's water, 13 km away; Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "receiving_water_override": {
     "water": "Lake Washington",
@@ -137795,7 +137795,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Lake Washington-Sammamish River' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -137824,8 +137824,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 014 (Montlake Overflow) the receiving water 'Lake Washington Ship Canal'; the point lies on the Montlake Cut (USGS GNIS 1534602); Montlake Cut (montlake-cut-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Montlake Cut' by name; Montlake Cut (montlake-cut-wa, hand record, census), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Montlake Cut",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 014 (Montlake Overflow) the receiving water 'Lake Washington Ship Canal'; the point lies on the Montlake Cut (USGS GNIS 1534602) (WA go-live gates 2026-11-06)"
@@ -137858,7 +137858,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (5 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 5 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -137887,7 +137887,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Lake Washington-Sammamish River' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -137916,7 +137916,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -137945,7 +137945,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -137973,8 +137973,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Elliott West CSO Treatment Plant (027b) the receiving water 'Elliott Bay' (EPA writes 'Elliot Bay/Puget Sound'); Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Elliott West CSO Treatment Plant (027b) the receiving water 'Elliott Bay' (EPA writes 'Elliot Bay/Puget Sound') (WA go-live gates 2026-11-06)"
@@ -138006,8 +138006,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 028 (King Street Regulator) the receiving water 'Elliott Bay/Puget Sound'; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 38 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 38 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 028 (King Street Regulator) the receiving water 'Elliott Bay/Puget Sound' (WA go-live gates 2026-11-06)"
@@ -138032,15 +138032,15 @@
    "water_slug": "elliott-bay-wa",
    "water_name": "Elliott Bay",
    "water_kind": "bay",
-   "distance_m": 21,
+   "distance_m": 30,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 029 (Kingdome (Connecticut St Regulator)) the receiving water 'Elliott Bay/Puget Sound'; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 21 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 30 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 029 (Kingdome (Connecticut St Regulator)) the receiving water 'Elliott Bay/Puget Sound' (WA go-live gates 2026-11-06)"
@@ -138072,8 +138072,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 030 (Lander Street Regulator) the receiving water 'Duwamish River - East Waterway'; East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'East Waterway' by name; East Waterway (east-waterway-wa, hand record, census), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "East Waterway",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 030 (Lander Street Regulator) the receiving water 'Duwamish River - East Waterway' (WA go-live gates 2026-11-06)"
@@ -138098,15 +138098,15 @@
    "water_slug": "duwamish-river-wa",
    "water_name": "Duwamish River",
    "water_kind": "river",
-   "distance_m": 1776,
+   "distance_m": 2603,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 031a,b,c (Hanford #1 Regulator) the receiving water 'Duwamish River'; EPA's point lies 1.8 km west of the permit's (47.5631, -122.34531), which lies on the record (review 2026-11-04: EPA's point in error); Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 1776 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 2603 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 031a,b,c (Hanford #1 Regulator) the receiving water 'Duwamish River'; EPA's point lies 1.8 km west of the permit's (47.5631, -122.34531), which lies on the record (review 2026-11-04: EPA's point in error) (WA go-live gates 2026-11-06)"
@@ -138145,7 +138145,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 3
   },
   {
@@ -138181,7 +138181,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 3
   },
   {
@@ -138217,7 +138217,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 3
   },
   {
@@ -138239,15 +138239,15 @@
    "water_slug": "east-waterway-wa",
    "water_name": "East Waterway",
    "water_kind": "canal",
-   "distance_m": 18,
+   "distance_m": 27,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 032 (Hanford #2 Regulator) the receiving water 'Duwamish River - East Waterway'; EPA's text 'Duwamish Waterway' is the permit's label; East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 18 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'East Waterway' by name; East Waterway (east-waterway-wa, hand record, census), 27 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "East Waterway",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 032 (Hanford #2 Regulator) the receiving water 'Duwamish River - East Waterway'; EPA's text 'Duwamish Waterway' is the permit's label (WA go-live gates 2026-11-06)"
@@ -138280,7 +138280,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138314,8 +138314,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 034 (E. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 034 (E. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
@@ -138353,8 +138353,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 035 (W. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 035 (W. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
@@ -138387,7 +138387,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "name: its receiving water 'Duwamish Waterway' by name; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 55 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138416,7 +138416,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23977614 (192 m): GNIS 'Duwamish Waterway' (1504605)); Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 222 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138445,7 +138445,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Duwamish River' (data/dischargers.json, from the research), the listed water whose record lies at the point (4 m); Duwamish River (duwamish-river-wa, openboatlaunch), 4 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138474,7 +138474,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Duwamish River' (data/dischargers.json, from the research), the listed water whose record lies at the point (2 m); Duwamish River (duwamish-river-wa, openboatlaunch), 2 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138502,8 +138502,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 040 (8th Avenue South Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 040 (8th Avenue South Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
@@ -138528,15 +138528,15 @@
    "water_slug": "duwamish-river-wa",
    "water_name": "Duwamish River",
    "water_kind": "river",
-   "distance_m": 25,
+   "distance_m": 35,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 041 (Brandon Street Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 25 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 35 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 041 (Brandon Street Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
@@ -138568,8 +138568,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 042 (Michigan W. Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 042 (Michigan W. Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
@@ -138594,15 +138594,15 @@
    "water_slug": "duwamish-river-wa",
    "water_name": "Duwamish River",
    "water_kind": "river",
-   "distance_m": 10,
+   "distance_m": 14,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 043 (East Marginal Way PS Emergency Overflow) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 10 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 14 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Duwamish River",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 043 (East Marginal Way PS Emergency Overflow) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
@@ -138634,8 +138634,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Henderson/MLK CSO Treatment Plant (044) the receiving water 'Duwamish Waterway', and table 32 gives the Norfolk Street Regulator (044a) at the same point 'Duwamish River'; the point lies on openboatlaunch's Duwamish River record; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "receiving_water_override": {
     "water": "Duwamish River",
@@ -138668,8 +138668,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 044a (Norfolk Street Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "receiving_water_override": {
     "water": "Duwamish River",
@@ -138702,8 +138702,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 045 (Henderson Street PS Emergency Overflow) the receiving water 'Lake Washington'; EPA's text 'Duwamish Waterway' is the permit's label, 10.5 km away; Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2,
    "receiving_water_override": {
     "water": "Lake Washington",
@@ -138737,7 +138737,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138766,7 +138766,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138795,7 +138795,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138824,7 +138824,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Puget Sound' (data/dischargers.json, from the research), the listed water whose record lies at the point (19 m); Puget Sound (puget-sound-wa, openboatlaunch), 19 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138853,7 +138853,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "point: 'Shell Creek-Frontal Puget Sound' is a USGS HUC-12 watershed name, not a water; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -138883,7 +138883,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138912,7 +138912,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138941,7 +138941,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138970,7 +138970,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "point: 'Miller Creek-Frontal East Passage' is a USGS HUC-12 watershed name, not a water; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138999,7 +138999,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029181",
@@ -139020,15 +139020,15 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 293,
+   "distance_m": 430,
    "alternatives": [],
-   "match": "geometry+name",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 057 (Barton St PS Emergency Overflow) the receiving water 'Puget Sound'; Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 293 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 430 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 057 (Barton St PS Emergency Overflow) the receiving water 'Puget Sound' (WA go-live gates 2026-11-06)"
@@ -139061,7 +139061,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Sinclair Inlet' by name; Sinclair Inlet (sinclair-inlet-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139090,7 +139090,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139119,7 +139119,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 82 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139148,7 +139148,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 423 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139177,7 +139177,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 119 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139206,7 +139206,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Orchard Bay' by name; Port Orchard (port-orchard-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -139236,7 +139236,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Orchard Bay' by name; Port Orchard (port-orchard-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "point_shared_by": 2
   },
   {
@@ -139266,7 +139266,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139295,7 +139295,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139324,7 +139324,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139353,7 +139353,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139382,7 +139382,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139411,7 +139411,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Port Washington Narrows' by name; Port Washington Narrows (port-washington-narrows-wa, openboatlaunch), 1482 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139440,7 +139440,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Sinclair Inlet' by name; Sinclair Inlet (sinclair-inlet-wa, openboatlaunch), 4 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029289",
@@ -139469,7 +139469,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Sinclair Inlet' by name; Sinclair Inlet (sinclair-inlet-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029548",
@@ -139498,7 +139498,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 68 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029548",
@@ -139527,7 +139527,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Snohomish River' by name; Snohomish River (snohomish-river-wa, openboatlaunch), 49 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029548",
@@ -139556,7 +139556,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 24279014 (88 m): GNIS 'Snohomish River' (1508473)); Snohomish River (snohomish-river-wa, openboatlaunch), 82 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0029548",
@@ -139585,7 +139585,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 24279014 (72 m): GNIS 'Snohomish River' (1508473)); Snohomish River (snohomish-river-wa, openboatlaunch), 39 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139614,7 +139614,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139643,7 +139643,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139672,7 +139672,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139701,7 +139701,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139730,7 +139730,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139759,7 +139759,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139780,15 +139780,15 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 286,
+   "distance_m": 324,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 019 the receiving water 'Union Bay' (Ecology water body WA-08-9350, Lake Washington); Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 286 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 324 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 019 the receiving water 'Union Bay' (Ecology water body WA-08-9350, Lake Washington) (WA go-live gates 2026-11-06)"
@@ -139820,8 +139820,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (16 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 16 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Washington' (data/dischargers.json, from the research), the listed water whose record lies at the point (16 m); Lake Washington (lake-washington-wa, openboatlaunch), 16 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139849,8 +139849,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (19 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 19 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Washington' (data/dischargers.json, from the research), the listed water whose record lies at the point (19 m); Lake Washington (lake-washington-wa, openboatlaunch), 19 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139879,7 +139879,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139908,7 +139908,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139937,7 +139937,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139966,7 +139966,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -139995,7 +139995,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140024,7 +140024,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140053,7 +140053,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140082,7 +140082,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140111,7 +140111,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140140,7 +140140,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140169,7 +140169,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140198,7 +140198,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140227,7 +140227,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140256,7 +140256,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140285,7 +140285,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140320,7 +140320,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140355,7 +140355,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Andrews Bay (andrews-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140384,7 +140384,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140413,7 +140413,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140442,7 +140442,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140470,8 +140470,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Washington' (data/dischargers.json, from the research), the listed water whose record lies at the point (0 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140499,8 +140499,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (6 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Washington' (data/dischargers.json, from the research), the listed water whose record lies at the point (6 m); Lake Washington (lake-washington-wa, openboatlaunch), 6 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140528,8 +140528,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (13 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 13 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Washington' (data/dischargers.json, from the research), the listed water whose record lies at the point (13 m); Lake Washington (lake-washington-wa, openboatlaunch), 13 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140558,7 +140558,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Shilshole Bay (shilshole-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140586,8 +140586,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 059 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Salmon Bay' by name; Salmon Bay Waterway (salmon-bay-waterway-wa, hand record, census), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Salmon Bay",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 059 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
@@ -140619,8 +140619,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 060 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Salmon Bay' by name; Salmon Bay Waterway (salmon-bay-waterway-wa, hand record, census), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Salmon Bay",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 060 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
@@ -140659,7 +140659,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140677,10 +140677,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6419983,
    "lon": -122.41774,
-   "water_slug": "puget-sound-wa",
-   "water_name": "Puget Sound",
-   "water_kind": "sound",
-   "distance_m": 0,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 296,
    "alternatives": [
     {
      "slug": "elliott-bay-wa",
@@ -140693,8 +140693,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Elliott Bay' (data/dischargers.json, from the research), the listed water whose record lies at the point (296 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 296 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140723,7 +140723,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140751,8 +140751,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (1 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 1 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Elliott Bay' (data/dischargers.json, from the research), the listed water whose record lies at the point (1 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 1 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140781,7 +140781,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140809,8 +140809,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "operator's list: EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt) and lists the outfall as closed; Seattle Public Utilities' CSO basin layer has no basin for it; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 16 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 16 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt) and lists the outfall as closed; Seattle Public Utilities' CSO basin layer has no basin for it (WA go-live gates 2026-11-06)"
@@ -140835,15 +140835,15 @@
    "water_slug": "elliott-bay-wa",
    "water_name": "Elliott Bay",
    "water_kind": "bay",
-   "distance_m": 33,
+   "distance_m": 35,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 071 the receiving water 'Elliott Bay' (Ecology water body WA-09-0010); Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 33 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 35 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 071 the receiving water 'Elliott Bay' (Ecology water body WA-09-0010) (WA go-live gates 2026-11-06)"
@@ -140875,8 +140875,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "operator's list: EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt) and lists the outfall as closed; Seattle Public Utilities' CSO basin layer has no basin for it; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 1 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Elliott Bay' by name; Elliott Bay (elliott-bay-wa, openboatlaunch), 1 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Elliott Bay",
     "basis": "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt) and lists the outfall as closed; Seattle Public Utilities' CSO basin layer has no basin for it (WA go-live gates 2026-11-06)"
@@ -140909,7 +140909,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140944,7 +140944,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140973,7 +140973,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141002,7 +141002,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141030,8 +141030,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (5 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 5 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Puget Sound' (data/dischargers.json, from the research), the listed water whose record lies at the point (5 m); Puget Sound (puget-sound-wa, openboatlaunch), 5 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141060,7 +141060,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141081,15 +141081,15 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 384,
+   "distance_m": 564,
    "alternatives": [],
-   "match": "geometry+name",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 091 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 384 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 564 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 091 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
@@ -141114,15 +141114,15 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 266,
+   "distance_m": 390,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 094 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 266 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 390 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 094 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
@@ -141147,15 +141147,15 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 294,
+   "distance_m": 431,
    "alternatives": [],
-   "match": "geometry+name",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 095 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 294 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 431 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 095 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
@@ -141188,7 +141188,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23977614 (197 m): GNIS 'Duwamish Waterway' (1504605)); Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 222 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141209,15 +141209,15 @@
    "water_slug": "east-waterway-wa",
    "water_name": "East Waterway",
    "water_kind": "canal",
-   "distance_m": 24,
+   "distance_m": 36,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 107 the receiving water 'East Waterway of the Duwamish River' (Ecology water body WA-09-1010); East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 24 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'East Waterway' by name; East Waterway (east-waterway-wa, hand record, census), 36 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "East Waterway",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 107 the receiving water 'East Waterway of the Duwamish River' (Ecology water body WA-09-1010) (WA go-live gates 2026-11-06)"
@@ -141256,7 +141256,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141285,7 +141285,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141314,7 +141314,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141342,8 +141342,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Union' (data/dischargers.json, from the research), the listed water whose record lies at the point (0 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141371,8 +141371,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (17 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 17 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Union' (data/dischargers.json, from the research), the listed water whose record lies at the point (17 m); Lake Union (lake-union-wa, openboatlaunch), 17 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141401,7 +141401,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141430,7 +141430,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141459,7 +141459,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141488,7 +141488,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141522,8 +141522,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (29 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 29 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Union' (data/dischargers.json, from the research), the listed water whose record lies at the point (29 m); Lake Union (lake-union-wa, openboatlaunch), 29 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141541,10 +141541,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6520805,
    "lon": -122.320923,
-   "water_slug": "portage-bay-wa",
-   "water_name": "Portage Bay",
+   "water_slug": "lake-union-wa",
+   "water_name": "Lake Union",
    "water_kind": "lake",
-   "distance_m": 0,
+   "distance_m": 248,
    "alternatives": [
     {
      "slug": "lake-union-wa",
@@ -141557,8 +141557,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Union' (data/dischargers.json, from the research), the listed water whose record lies at the point (248 m); Lake Union (lake-union-wa, openboatlaunch), 248 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141587,7 +141587,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (6 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141616,7 +141616,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141645,7 +141645,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141674,7 +141674,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141703,7 +141703,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141738,7 +141738,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141767,7 +141767,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141795,8 +141795,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Union' (data/dischargers.json, from the research), the listed water whose record lies at the point (0 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141825,7 +141825,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141843,18 +141843,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6565285,
    "lon": -122.366791,
-   "water_slug": "lake-washington-ship-canal-wa",
-   "water_name": "Lake Washington Ship Canal",
-   "water_kind": "river",
-   "distance_m": 1,
+   "water_slug": "salmon-bay-waterway-wa",
+   "water_name": "Salmon Bay Waterway",
+   "water_kind": "canal",
+   "distance_m": 5,
    "alternatives": [],
    "match": "geometry",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (1 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 1 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Salmon Bay' (data/dischargers.json, from the research), the listed water whose record lies at the point (5 m); Salmon Bay Waterway (salmon-bay-waterway-wa, hand record, census), 5 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141882,8 +141882,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "operator's list: EPA's inventory gives the receiving water 'Salmon Bay Waterway', the Census polygon of that name; EPA lists the outfall as closed, and Seattle Public Utilities' CSO basin layer has no basin for it; Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Salmon Bay Waterway' by name; Salmon Bay Waterway (salmon-bay-waterway-wa, hand record, census), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Salmon Bay Waterway",
     "basis": "EPA's inventory gives the receiving water 'Salmon Bay Waterway', the Census polygon of that name; EPA lists the outfall as closed, and Seattle Public Utilities' CSO basin layer has no basin for it (WA go-live gates 2026-11-06)"
@@ -141916,7 +141916,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141945,7 +141945,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -141974,7 +141974,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -142009,7 +142009,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Andrews Bay (andrews-bay-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -142037,9 +142037,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
-   "water_match": "none: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "no_water_reason": "no record named 'Longfellow Creek' in WA",
+   "water_match": "none: no record named 'Longfellow Creek' in WA",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Longfellow Creek",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
@@ -142071,9 +142071,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
-   "water_match": "none: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "no_water_reason": "no record named 'Longfellow Creek' in WA",
+   "water_match": "none: no record named 'Longfellow Creek' in WA",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Longfellow Creek",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
@@ -142105,13 +142105,13 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); EPA's point for this outfall lies 20 km away in Kitsap County (review 2026-11-04), where it was tied to Blackjack Creek; Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "none: no record named 'Longfellow Creek' in WA",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Longfellow Creek",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); EPA's point for this outfall lies 20 km away in Kitsap County (review 2026-11-04), where it was tied to Blackjack Creek (WA go-live gates 2026-11-06)"
    },
-   "no_water_reason": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); EPA's point for this outfall lies 20 km away in Kitsap County (review 2026-11-04), where it was tied to Blackjack Creek; Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service"
+   "no_water_reason": "no record named 'Longfellow Creek' in WA"
   },
   {
    "npdes_permit": "WA0031682",
@@ -142140,7 +142140,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0031682",
@@ -142161,15 +142161,15 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 81,
+   "distance_m": 109,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 174 the receiving water 'Lake Washington - Ship Canal' (Ecology water body WA-08-9340); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 81 m from the point",
-   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 109 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 174 the receiving water 'Lake Washington - Ship Canal' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
@@ -142202,7 +142202,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
    "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0037061",
@@ -142231,7 +142231,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Budd Inlet' by name; Budd Inlet (budd-inlet-wa, NHDPlus V2.1 record), 34 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WA0037061",
@@ -142260,7 +142260,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Budd Inlet' by name; Budd Inlet (budd-inlet-wa, NHDPlus V2.1 record), 178 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WAG994562",
@@ -142290,7 +142290,7 @@
    "receiving_water_source": null,
    "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Port Angeles Harbor, Ennis Creek, Peabody Creek) cannot be told apart for this outfall",
    "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Port Angeles Harbor, Ennis Creek, Peabody Creek) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WAG994562",
@@ -142319,7 +142319,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "point: 'Ennis Creek-Frontal Port Angeles Harbor' is a USGS HUC-12 watershed name, not a water; the water record at the outfall's point (0 m; snapped within 150 m); Port Angeles Harbor (port-angeles-harbor-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WAG994562",
@@ -142348,7 +142348,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "none: EPA's point lies on Port Angeles Harbor (17 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.4 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "no_water_reason": "EPA's point lies on Port Angeles Harbor (17 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.4 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
   },
   {
@@ -142378,7 +142378,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "none: EPA's point lies on Port Angeles Harbor (11 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.2 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "no_water_reason": "EPA's point lies on Port Angeles Harbor (11 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (56.2 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
   },
   {
@@ -142408,7 +142408,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "none: EPA's point lies on Port Angeles Harbor (0 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (54.7 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "no_water_reason": "EPA's point lies on Port Angeles Harbor (0 m), not on a water named 'Discovery Bay-Strait of Juan De Fuca': the inventory's name and point disagree; the record of that name was set aside by the placement guard: discovery-bay-wa, name match too far (54.7 km; limit 5.0 km: 5 km for a bay or sound); NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Ennis Creek, White Creek); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
   },
   {
@@ -142438,7 +142438,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
    "npdes_permit": "WI0025593",
