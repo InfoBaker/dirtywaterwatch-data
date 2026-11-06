@@ -27,7 +27,8 @@ Records (a status snapshot turned into events; pa_phila_csocast.py is the model)
     raw.edits keeps every edit time seen, raw.first_seen_at and raw.last_seen_at our poll times, and raw.left_layer_at
     the first poll it was gone. A later day's appearance opens a new record.
   - A location at a reversal structure (the Wilmette gate, the Chicago River Controlling Works, O'Brien Lock) is a
-    diversion of the waterway into Lake Michigan: waterbody_text "Lake Michigan", raw.diversion the structure.
+    diversion of the waterway into Lake Michigan: waterbody_text "Lake Michigan", raw.diversion the structure, and the
+    permit and outfall id of its registry row (il_mwrd.GATE_IDS), so the record colours the stretch at that structure.
   - Place: the point MWRD gives (outSR 4326; coord_source source); the nearest registry row of data/outfalls-il.json
     within PAIR_M gives the permit, the outfall id and the receiving water; else the owner's permit (il_mwrd).
   - Edit times are read as epoch milliseconds in UTC (ArcGIS editor tracking); raw.edit_time_note says so.
@@ -128,8 +129,9 @@ def place(a: dict, reg: list[dict]) -> dict:
     div = M.diversion(a.get("LOCATION"))
     out = {"permit": None, "outfall": None, "outfall_name": a.get("LOCATION"), "water": M.reach_water(a.get("WATERWAY_REACH")),
            "water_slug": None, "diversion": div[1] if div else None, "pair": None}
-    if div:
+    if div:     # a reversal structure: its own registry row (il_mwrd.GATE_IDS), so the record colours its stretch
         out["water"] = M.LAKE
+        out["permit"], out["outfall"] = M.gate_ids(div[0])
         return out
     lat, lon = a.get("_lat"), a.get("_lon")
     best = None
