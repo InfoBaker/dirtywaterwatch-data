@@ -7452,8 +7452,8 @@
   "status": "candidate",
   "status_reason": "Only federal machine-readable sewage event feed. Covers NH (EPA permits) and RI well, MA barely, CT/VT/ME not at all. Mostly SSOs and noncompliance; routine permitted wet-weather CSOs are not reported here in New England. Includes basement backups that never reach a water: filter on structure type and receiving water.",
   "verified": "fetched",
-  "checked": "2026-11-01",
-  "notes": "Impacts include 'No observable impacts' (3,475 of 6,185 rows nationally). Volume quantification is often best professional judgement. Event times carry no timezone.",
+  "checked": "2026-11-06",
+  "notes": "Impacts include 'No observable impacts' (3,475 of 6,185 rows nationally). Volume quantification is often best professional judgement. Event times carry no timezone. | 2026-11-03 (plant outfalls): Overflow locations: in the 2026-11-03 13:22 UTC copy, 5,616 of 5,669 events carry latitude_measure / longitude_measure at the overflow itself (3,000 distinct permit+point locations), with sewer_overflow_structure_type_desc Manhole 1,196, Pumping Station 1,109, Basement Backup 527, Broken Pipe 368, CSO Outfall 307, Other 488, blank 1,674; 24 jurisdictions (IL 1,687, GA 1,232, PR 924, MS 353, AZ 288, RI 244, SD 207, NH 184, NE 162, DC 140 ...). All 305 CSO events with a feature id match the CSO inventory. | 2026-11-06: the 2026-11-05 current-version ZIP held only sewer_overflow_bypass_columns_metadata.csv and sewer_overflow_public_erd.pdf (302 KB), no table; the summary page and the downloads index still describe and link the same ZIP. The ingester reads the current version of each report from the all-versions ZIP when this one fails or holds no events table.",
   "area": "federal"
  },
  {
@@ -7496,8 +7496,8 @@
   "status": "candidate",
   "status_reason": "Use alongside the current dataset to keep revision history of an event report.",
   "verified": "fetched",
-  "checked": "2026-11-01",
-  "notes": "",
+  "checked": "2026-11-06",
+  "notes": "2026-11-06: read for its current rows (current_report_form_flag Y) when the current-version ZIP fails or holds no events table (as on 2026-11-05); 5,688 current events in the 2026-11-04 extract.",
   "area": "federal"
  },
  {
@@ -48222,8 +48222,8 @@
   "status": "used",
   "status_reason": "Statewide, machine-readable, event-precision SSO feed with start, end, volume, volume to water, receiving water (with DWR stream index), coordinates and 5-day follow-up fields. Built: pipeline/ingest/nc_dwr_sso.py (571 records on 2026-11-04).",
   "verified": "fetched",
-  "checked": "2026-11-04",
-  "notes": "Only SSOs reportable to DWR appear (1,000 gallons or more to ground, or any amount reaching surface water): 516 of 571 rows say reached water. deq_program is \"Sanitary Sewer Overflow\" for every row although the description says storm-related bypasses are included. Not a press release record: it does not say whether the operator issued the 24-hour press release. Timezone settled 2026-11-04: epoch values are true UTC (Raleigh's 2026-05-12 overflow starts 12:21 UTC, the 8:21 a.m. EDT start Raleigh Water published). The ingester also reads any later Sanitary_Sewer_Overflows_since_Jan_<year> layer it finds.",
+  "checked": "2026-11-06",
+  "notes": "Only SSOs reportable to DWR appear (1,000 gallons or more to ground, or any amount reaching surface water): 516 of 571 rows say reached water. deq_program is \"Sanitary Sewer Overflow\" for every row although the description says storm-related bypasses are included. Not a press release record: it does not say whether the operator issued the 24-hour press release. Timezone settled 2026-11-04: epoch values are true UTC (Raleigh's 2026-05-12 overflow starts 12:21 UTC, the 8:21 a.m. EDT start Raleigh Water published). The ingester also reads any later Sanitary_Sewer_Overflows_since_Jan_<year> layer it finds. | 2026-11-06: the layer has answered 400 \"Item does not exist or is inaccessible\" since 2026-11-05 (a name never used answers \"Invalid URL\", so the service seems to exist but is no longer shared). No public replacement: the organisation's service list has no other sewer overflow layer, an ArcGIS Online search finds only the history layer, the viewer and its web map, and the viewer's web map and DEQ's SSO page still point at this layer. The ingester reports the source as unavailable (ok false, meta.unavailable) and keeps the records it read; it also follows any layer the viewer's web map is pointed at.",
   "area": "nc"
  },
  {
@@ -48325,8 +48325,8 @@
   "status": "watch",
   "status_reason": "Public view of the permittee intake form (fields rep_Date, BIMSincNUM, DWR_SSOstart, DWR_IncVolume, reachSurfaceWater, volSurfaceWater, incCause, incDesc ...). 3,208 rows, lastEditDate 2026-05-17; seems to be the 2022-2025 store. Shows that NC uses its own e-reporting, not EPA NeT.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "",
+  "checked": "2026-11-06",
+  "notes": "2026-11-06: checked as a replacement for the 2026 layer and it is not one: layer ReportSSO_2, dataLastEditDate 2026-02-18, the intake form's fields (not DWR's tracking fields).",
   "area": "nc"
  },
  {

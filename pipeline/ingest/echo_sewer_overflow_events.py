@@ -12,6 +12,27 @@ Source
   here, MA barely (MWRA and one other), CT, VT and ME not at all (ME and VT have until 2028); NY
   had no rows in the 2026-10-30 file. Routine permitted wet-weather CSOs are mostly not here.
 
+  2026-11-05: the current-version ZIP of that day (Last-Modified 2026-11-05 12:13 UTC, 302 KB) held only
+  sewer_overflow_bypass_columns_metadata.csv and sewer_overflow_public_erd.pdf, none of its eight tables. EPA did not
+  move the table: on 2026-11-06 the summary page (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary)
+  still says "This Zipped collection of CSV files represents the Sewer Overflow and Bypass data ... It's comprised of 7
+  of the 8 data files ... These data represents the latest version of each 'Report'", the data downloads index still
+  links the same ZIP ("Sewer Overflow and Bypass Event Dataset (ZIP) (~516 KB)"), the metadata CSV inside it still
+  lists the same eight tables, the echodownloads directory has no other current-version file, and ECHO's web services
+  have no sewer overflow endpoint. The all-versions ZIP
+  (https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip, summary
+  .../sewer-overflow-all-versions-summary, 2026-11-04 extract) still holds every table, so when the current-version
+  ZIP fails or holds no events table this module reads the current version of each report from it
+  (current_from_all_versions): the all-versions metadata CSV (sewer_overflow_bypass_columns_metadata_all.csv) splits
+  the events table into sewer_overflow_bypass_report (report fields: received, start and end dates, data group,
+  submission type) and sewer_overflow_bypass_event (event fields), each row flagged current_report_form_flag Y or N.
+  The Y event rows joined to their Y report rows by permit, form set and form id reproduce the events table under
+  the same column names (the 2026-11-04 extract: 5,688 current events, one per event key, every one with its report;
+  5,669 in the 2026-11-03 current-version file). The current table's program_report_npdes_data_group_desc is not in
+  the all-versions tables and is left out; its event_transaction_type is the event row's transaction_type. The run
+  is ok, with meta.via, meta.url and meta.note saying which file was read; published_at and source_updated_at are
+  the all-versions file's own.
+
 Which events are kept (one record per event that reached a water)
   The dataset has no 'reached a water' flag, so the rule is built from its fields, in order:
     1. DROP building backups: structure type BAS 'Basement Backup', impact SBB 'Sewage Backup in
@@ -44,9 +65,10 @@ Mapping
   source_record_id = permit:form_set_id:event_id_ext (stable across report versions).
 
 Failures
-  A failed download (the research copy then stands in only on a first run with no previous
-  records), or an extract missing any expected table, writes ok=False with the error; the previous
-  records stay and the dropped-events file is not rewritten.
+  The current-version ZIP failing or holding no events table falls back to the all-versions ZIP (above). Both
+  failing (the research copy then stands in only on a first run with no previous records), or an extract missing
+  any expected table, writes ok=False with the error; the previous records stay and the dropped-events file is not
+  rewritten.
 
 Washington DC (permit DC0021199, DC Water; research/dc/report.md section 2.3)
   EPA writes DC's permit, so DC Water files its SSO/CSO noncompliance reports here: 140 current rows
@@ -120,7 +142,7 @@ Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
 
-Run from pipeline/:  python -m ingest.echo_sewer_overflow_events [--file saved.zip]
+Run from pipeline/:  python -m ingest.echo_sewer_overflow_events [--file saved.zip]   (either ZIP)
 """
 from __future__ import annotations
 
@@ -144,6 +166,8 @@ from common import (BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, now_iso, read_jso
 
 SOURCE_ID = "echo-sewer-overflow"
 URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+# the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
+ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
 STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
@@ -195,6 +219,55 @@ TABLES = {
     "treatment": "sewer_overflow_treatment_codes.csv",
     "systems": "collection_system_permits.csv",
 }
+# the all-versions ZIP's tables (sewer_overflow_bypass_columns_metadata_all.csv): the events table is split into
+# the report (one row per report version) and the event (one row per event per version)
+ALL_TABLES = {
+    "report": "sewer_overflow_bypass_report.csv",
+    "event": "sewer_overflow_bypass_event.csv",
+    "types": "sewer_overflow_bypass_type.csv",
+    "waters": "sewer_overflow_bypass_receiving_water.csv",
+    "impacts": "sewer_overflow_bypass_impact.csv",
+    "causes": "sewer_overflow_bypass_cause.csv",
+    "actions": "sewer_overflow_bypass_corrective_action.csv",
+    "treatment": "sewer_overflow_treatment_code.csv",
+    "systems": "collection_system_permit.csv",
+}
+# the version-tracking columns of the all-versions tables, which the current tables do not have
+VERSION_COLUMNS = {"current_report_form_flag", "current_report_flag", "replaced_date", "replacing_payload_id",
+                   "replacing_transaction_type", "transaction_id"}
+# columns of the current events table that come from the all-versions report table (same names in both metadata
+# CSVs); the event row's own transaction_type is the current table's event_transaction_type
+REPORT_COLUMNS = ("program_report_received_date", "program_report_start_date", "program_report_end_date",
+                  "electronic_submission_type_code", "electr_submission_type_desc",
+                  "program_report_npdes_data_group_number_code", "payload_id", "transaction_type")
+# columns of the current events table that come from the collection-system table
+SYSTEM_COLUMNS = ("collection_system_owner_type_code", "collection_system_owner_type_desc", "collection_system_population")
+# columns the build reads, checked by name before the all-versions tables are used
+ALL_REQUIRED = {
+    "event": ("permit_identifier", "program_report_form_set_id", "program_report_form_id", "sewer_overflow_bypass_event_key",
+              "sewer_overflow_bypass_event_id_ext", "current_report_form_flag", "sewer_overflow_bypass_start_datetime",
+              "sewer_overflow_bypass_end_datetime", "latitude_measure", "longitude_measure",
+              "sewer_overflow_bypass_discharge_volume_gallons", "discharge_quantification_method_desc",
+              "sewer_overflow_structure_type_code", "sewer_overflow_structure_type_desc",
+              "sewer_overflow_structure_type_code_other_text", "sewer_overflow_bypass_description_text",
+              "permitted_feature_identifier", "collection_system_identifier", "transaction_type"),
+    "report": ("permit_identifier", "program_report_form_set_id", "program_report_form_id", "current_report_form_flag",
+               *REPORT_COLUMNS),
+    "types": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_type_code", "sewer_overflow_bypass_type_desc",
+              "sewer_overflow_bypass_type_code_sequence"),
+    "waters": ("sewer_overflow_bypass_event_key", "name_receiving_water"),
+    "impacts": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_impact_code", "sewer_overflow_bypass_impact_desc",
+                "sewer_overflow_bypass_impact_other_text"),
+    "causes": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_cause_code", "sewer_overflow_bypass_cause_desc",
+               "sewer_overflow_bypass_cause_other_text"),
+    "actions": ("sewer_overflow_bypass_event_key", "sewer_overflow_bypass_corrective_action_code",
+                "sewer_overflow_bypass_corrective_action_desc", "sewer_overflow_bypass_corrective_action_other_text"),
+    "systems": ("permit_identifier", "collection_system_identifier", "current_report_flag",
+                "collection_system_name", "percent_collection_system_css", *SYSTEM_COLUMNS),
+}
+# tables that hold thousands of rows nationally: one that arrives empty is a failed read, never "no events" (an empty
+# events table would otherwise empty every record of the feed; an empty report table would blank every report date)
+ALL_NONEMPTY = ("event", "report", "types", "waters", "impacts", "systems")
 
 
 # --------------------------------------------------------------------------- DC names and state
@@ -256,44 +329,134 @@ def dc_row_state(lat, lon) -> tuple[str | None, str | None]:
 
 # --------------------------------------------------------------------------- fetch
 
+def _zip_tables(zf: zipfile.ZipFile, wanted: dict[str, str]) -> dict[str, list[dict]]:
+    names = {Path(n).name: n for n in zf.namelist()}
+    return {k: list(csv.DictReader(io.TextIOWrapper(zf.open(names[v]), encoding="utf-8-sig")))
+            for k, v in wanted.items() if v in names}
+
+
+def _entry_date(zf: zipfile.ZipFile, name: str) -> str:
+    names = {Path(n).name: n for n in zf.namelist()}
+    return datetime(*zf.getinfo(names[name]).date_time).date().isoformat()
+
+
+def is_all_versions(zf: zipfile.ZipFile) -> bool:
+    return ALL_TABLES["event"] in {Path(n).name for n in zf.namelist()}
+
+
+def current_from_all_versions(raw: dict[str, list[dict]]) -> dict[str, list[dict]]:
+    """The current-version tables (TABLES' keys and column names) from the all-versions tables (module docstring,
+    2026-11-06): the event rows flagged current_report_form_flag Y, each joined to its report row by permit, form set
+    and form id; child rows by the event key of a current event (EPA gives each version its own key); the collection
+    systems flagged current_report_flag Y. Every column is mapped by its name in the two metadata CSVs; a column the
+    build needs that is missing raises RuntimeError (a renamed table is a failed read, never a blank field)."""
+    missing = [ALL_TABLES[k] for k in ("event", "report") if k not in raw]
+    if missing:
+        raise RuntimeError("all-versions ZIP has no " + ", ".join(missing))
+    empty = [ALL_TABLES[k] for k in ALL_NONEMPTY if k in raw and not raw[k]]
+    if empty:
+        raise RuntimeError("all-versions ZIP has no rows in " + ", ".join(empty))
+    for k, cols in ALL_REQUIRED.items():
+        rows = raw.get(k) or []
+        absent = [c for c in cols if rows and c not in rows[0]]
+        if absent:
+            raise RuntimeError(f"all-versions {ALL_TABLES[k]} lacks column(s) {', '.join(absent)}")
+
+    def strip(r: dict, also=()) -> dict:
+        return {c: v for c, v in r.items() if c not in VERSION_COLUMNS and c not in also}
+
+    def key3(r: dict) -> tuple:
+        return r["permit_identifier"], r["program_report_form_set_id"], r["program_report_form_id"]
+
+    reports = {key3(r): r for r in raw["report"] if r.get("current_report_form_flag") == "Y"}
+    systems = [strip(r) for r in raw.get("systems") or [] if r.get("current_report_flag") == "Y"]
+    sysidx = {(r["permit_identifier"], r.get("collection_system_identifier") or ""): r for r in systems}
+    events = []
+    for r in raw["event"]:
+        if r.get("current_report_form_flag") != "Y":
+            continue
+        row = strip(r, ("transaction_type",))
+        row["event_transaction_type"] = r.get("transaction_type", "")
+        rep = reports.get(key3(r)) or {}
+        for c in REPORT_COLUMNS:
+            row[c] = rep.get(c, "")
+        sysrow = sysidx.get((r["permit_identifier"], r.get("collection_system_identifier") or ""), {})
+        for c in SYSTEM_COLUMNS:
+            row[c] = sysrow.get(c, "")
+        events.append(row)
+    keys = {r["sewer_overflow_bypass_event_key"] for r in events}
+    out = {"events": events, "systems": systems}
+    for k in ("types", "waters", "impacts", "causes", "actions", "treatment"):
+        if k in raw:
+            out[k] = [strip(r, ("payload_id", "transaction_type")) for r in raw[k]
+                      if r.get("sewer_overflow_bypass_event_key") in keys]
+    return out
+
+
+def _get(url: str) -> tuple[zipfile.ZipFile, bytes, str | None]:
+    r = requests.get(url, headers=HEADERS, timeout=180)
+    r.raise_for_status()
+    lm = r.headers.get("Last-Modified")
+    return (zipfile.ZipFile(io.BytesIO(r.content)), r.content,
+            parsedate_to_datetime(lm).isoformat().replace("+00:00", "Z") if lm else None)
+
+
+def _save(content: bytes, last_modified: str | None) -> str | None:
+    prev = (read_json(BUILD_DIR / "events" / f"{SOURCE_ID}.json", {}) or {}).get("meta", {})
+    if prev.get("last_modified") and prev.get("last_modified") == last_modified:
+        return None   # same extract as last run: no second copy
+    return str(save_raw(SOURCE_ID, content, "zip").relative_to(ROOT))
+
+
+def fetch_current() -> tuple[dict[str, list[dict]], dict]:
+    zf, content, lm = _get(URL)
+    names = {Path(n).name for n in zf.namelist()}
+    if TABLES["events"] not in names:
+        raise KeyError(f"current-version ZIP has no {TABLES['events']} (it holds {', '.join(sorted(names)) or 'nothing'})")
+    tables = _zip_tables(zf, TABLES)
+    if not tables["events"]:   # a header with no rows would empty every record of the feed: read the other ZIP
+        raise KeyError(f"current-version ZIP's {TABLES['events']} has no rows")
+    return tables, {"url": URL, "via": "live", "last_modified": lm, "raw_saved": _save(content, lm),
+                    "extract_date": _entry_date(zf, TABLES["events"])}
+
+
+def fetch_all_versions(why: str) -> tuple[dict[str, list[dict]], dict]:
+    zf, content, lm = _get(ALL_URL)
+    tables = current_from_all_versions(_zip_tables(zf, ALL_TABLES))
+    return tables, {"url": ALL_URL, "via": "live, all-versions ZIP (current version of each report)", "last_modified": lm,
+                    "raw_saved": _save(content, lm), "extract_date": _entry_date(zf, ALL_TABLES["event"]),
+                    "note": f"The current-version ZIP could not be read ({why}); the current version of each report "
+                            f"was taken from the all-versions ZIP ({ALL_URL}): rows flagged current_report_form_flag Y."}
+
+
 def fetch() -> tuple[dict[str, list[dict]], dict]:
-    """Tables from the live ZIP, or from the research copy when the download fails."""
-    info: dict = {"url": URL}
+    """Tables from the live current-version ZIP; when it fails or holds no events table, the current rows of the live
+    all-versions ZIP; when that fails too, the research copy (module docstring, Failures)."""
     try:
-        r = requests.get(URL, headers=HEADERS, timeout=180)
-        r.raise_for_status()
-        zf = zipfile.ZipFile(io.BytesIO(r.content))
-        lm = r.headers.get("Last-Modified")
-        info["last_modified"] = parsedate_to_datetime(lm).isoformat().replace("+00:00", "Z") if lm else None
-        prev = (read_json(BUILD_DIR / "events" / f"{SOURCE_ID}.json", {}) or {}).get("meta", {})
-        if prev.get("last_modified") and prev.get("last_modified") == info["last_modified"]:
-            info["raw_saved"] = None   # same extract as last run: no second copy
-        else:
-            info["raw_saved"] = str(save_raw(SOURCE_ID, r.content, "zip").relative_to(ROOT))
-        info["via"] = "live"
-        names = {Path(n).name: n for n in zf.namelist()}
-        zi = zf.getinfo(names[TABLES["events"]])
-        info["extract_date"] = datetime(*zi.date_time).date().isoformat()
-        tables = {k: list(csv.DictReader(io.TextIOWrapper(zf.open(names[v]), encoding="utf-8-sig")))
-                  for k, v in TABLES.items() if v in names}
-        return tables, info
+        return fetch_current()
     except (requests.RequestException, zipfile.BadZipFile, KeyError) as e:
-        print(f"warn: ECHO download failed ({e}); using {FALLBACK_DIR}", file=sys.stderr)
-        info.update(via="research copy", last_modified=None, error=f"ECHO download: {type(e).__name__}: {e}")
-        zpath = FALLBACK_DIR / "current_sewer_overflow_and_collection_systems_tables.zip"
-        if zpath.exists():
-            zf = zipfile.ZipFile(zpath)
-            zi = zf.getinfo(TABLES["events"])
-            info["extract_date"] = datetime(*zi.date_time).date().isoformat()
-        tables = {}
-        for k, v in TABLES.items():
-            p = FALLBACK_DIR / v
-            if p.exists():
-                with open(p, encoding="utf-8-sig", newline="") as f:
-                    tables[k] = list(csv.DictReader(f))
-        if "events" not in tables:
-            raise RuntimeError(f"ECHO download failed and no research copy: {e}") from e
-        return tables, info
+        why = f"{type(e).__name__}: {e.args[0] if isinstance(e, KeyError) and e.args else e}"
+        print(f"warn: ECHO current-version ZIP failed ({why}); trying the all-versions ZIP", file=sys.stderr)
+    try:
+        return fetch_all_versions(why)
+    except (requests.RequestException, zipfile.BadZipFile, KeyError, RuntimeError) as e2:
+        why = f"{why}; all-versions ZIP: {type(e2).__name__}: {e2}"
+    print(f"warn: ECHO downloads failed ({why}); using {FALLBACK_DIR}", file=sys.stderr)
+    info: dict = {"url": URL, "via": "research copy", "last_modified": None, "raw_saved": None,
+                  "error": f"ECHO download: {why}"}
+    zpath = FALLBACK_DIR / "current_sewer_overflow_and_collection_systems_tables.zip"
+    if zpath.exists():
+        zf = zipfile.ZipFile(zpath)
+        info["extract_date"] = _entry_date(zf, TABLES["events"])
+    tables = {}
+    for k, v in TABLES.items():
+        p = FALLBACK_DIR / v
+        if p.exists():
+            with open(p, encoding="utf-8-sig", newline="") as f:
+                tables[k] = list(csv.DictReader(f))
+    if "events" not in tables:
+        raise RuntimeError(f"ECHO download failed and no research copy: {why}")
+    return tables, info
 
 
 # --------------------------------------------------------------------------- lookups
@@ -597,17 +760,19 @@ def write_failed(records: list[dict], error: str, meta: dict) -> Path:
 
 
 def read_zip(path: Path) -> tuple[dict[str, list[dict]], dict]:
-    """Tables from a saved copy of the ZIP (--file: tests and replays; nothing fetched or saved)."""
+    """Tables from a saved copy of either ZIP (--file: tests and replays; nothing fetched or saved). An all-versions
+    ZIP is read for the current version of each report (current_from_all_versions)."""
     zf = zipfile.ZipFile(path)
-    names = {Path(n).name: n for n in zf.namelist()}
+    if is_all_versions(zf):
+        return current_from_all_versions(_zip_tables(zf, ALL_TABLES)), {
+            "url": ALL_URL, "via": f"file {Path(path).name} (all-versions ZIP, current version of each report)",
+            "last_modified": None, "raw_saved": None, "extract_date": _entry_date(zf, ALL_TABLES["event"])}
+    names = {Path(n).name for n in zf.namelist()}
     if TABLES["events"] not in names:
         raise RuntimeError(f"{path}: no {TABLES['events']} in the ZIP")
-    zi = zf.getinfo(names[TABLES["events"]])
     info = {"url": URL, "via": f"file {Path(path).name}", "last_modified": None, "raw_saved": None,
-            "extract_date": datetime(*zi.date_time).date().isoformat()}
-    tables = {k: list(csv.DictReader(io.TextIOWrapper(zf.open(names[v]), encoding="utf-8-sig")))
-              for k, v in TABLES.items() if v in names}
-    return tables, info
+            "extract_date": _entry_date(zf, TABLES["events"])}
+    return _zip_tables(zf, TABLES), info
 
 
 def main(argv=None) -> int:
@@ -626,7 +791,8 @@ def main(argv=None) -> int:
     kept, dropped, why = build(tables, info)
     meta = {"registry_ids": ["fed-echo-sewer-overflow-bypass-events"], "states": sorted(STATES),
             "extract_date": info.get("extract_date"), "last_modified": info.get("last_modified"),
-            "via": info.get("via"), "raw_saved": info.get("raw_saved"),
+            "via": info.get("via"), "url": info.get("url"), "raw_saved": info.get("raw_saved"),
+            **({"note": info["note"]} if info.get("note") else {}),
             "kept": len(kept), "dropped": len(dropped),
             "by_rule": [{"state": s, "outcome": o, "reason": r, "count": n} for (s, o, r), n in sorted(why.items())],
             "cadence": "daily (ECHO refresh ~07:10 ET); event-to-receipt lag days to weeks", "errors": errors}
