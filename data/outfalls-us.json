@@ -148,9 +148,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 009 (Baker Street Outfall) the receiving water 'Marina Beach', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -182,9 +182,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 010 (Pierce Street Outfall) the receiving water 'Marina Beach', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -204,8 +204,8 @@
    "in_icis": "YES",
    "permit_status": "EXP",
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110043091301",
-   "lat": 37.80611,
-   "lon": -122.38,
+   "lat": 37.811667,
+   "lon": -122.43189,
    "water_slug": null,
    "water_name": null,
    "water_kind": null,
@@ -214,15 +214,18 @@
    "match": "none",
    "outfall_kind": "cso",
    "country": "US",
-   "coords_from": "permitted_feature",
+   "coords_from": "permit",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 011 (Laguna Street Outfall) the receiving water 'Yacht Harbor #2', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
-   }
+   },
+   "epa_lat": 37.80611,
+   "epa_lon": -122.38,
+   "coords_note": "Order R2-2013-0029 (NPDES CA0037664), Table 2: 37.811667 N, 122.43189 W (discharge point 011, Laguna Street Outfall, Yacht Harbor #2); EPA's inventory gives 37.80611, -122.38, about 4.6 km east; the Regional Water Board's revised tentative order of January 2008 (R2-2008-00XX, the same permit) gave 37 48 22 N, 122 25 53 W, about 0.6 km south, at the shore"
   },
   {
    "npdes_permit": "CA0037664",
@@ -250,9 +253,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 013 (Beach Street Outfall) the receiving water 'Pier 39', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -284,9 +287,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 015 (Sansome Street Outfall) the receiving water 'Pier 31', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -318,9 +321,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 017 (Jackson Street Outfall) the receiving water 'Pier 3', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -352,9 +355,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 018 (Howard Street Outfall) the receiving water 'Pier 14', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -386,9 +389,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 019 (Brannan Street Outfall) the receiving water 'Pier 32', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -420,9 +423,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 022 (Third Street Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -454,9 +457,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 023 (Fourth Street North Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -488,9 +491,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 024 (Fifth Street North Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -522,9 +525,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.7 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 025 (Sixth Street North Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -556,9 +559,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.6 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.6 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 026 (Division Street Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -590,9 +593,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.6 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.6 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 027 (Sixth Street South Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -624,9 +627,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.6 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: mission-creek-ca, name match too far (471.6 km; limit 11.6 km: the stream record's extent (9.6 km) plus 2 km)",
+   "water_match": "none: the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Mission Creek' (mission-creek-ca) is on file; the next ties run (python -m ingest.outfall_waters --state CA) ties this row by that name",
    "receiving_water_override": {
     "water": "Mission Creek",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 028 (Fourth Street South Outfall) the receiving water 'Mission Creek', the tidal channel that openboatlaunch's record names Mission Creek, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -658,9 +661,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 029 (Mariposa Street Outfall) the receiving water 'Central Basin', a basin of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -692,9 +695,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 030 (20th Street Outfall) the receiving water 'Central Basin', a basin of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -726,9 +729,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 030A (22nd Street Outfall) the receiving water 'Central Basin', a basin of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -760,9 +763,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Islais Creek Channel' in CA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "no record named 'Islais Creek Channel' in CA",
+   "water_match": "none: the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "Islais Creek Channel",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 031 (Third Street North Outfall) the receiving water 'Islais Creek', the tidal channel that openboatlaunch's record names Islais Creek Channel, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -794,9 +797,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Islais Creek Channel' in CA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "no record named 'Islais Creek Channel' in CA",
+   "water_match": "none: the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "Islais Creek Channel",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 031A (Islais Creek North Outfall) the receiving water 'Islais Creek', the tidal channel that openboatlaunch's record names Islais Creek Channel, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -828,9 +831,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Islais Creek Channel' in CA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "no record named 'Islais Creek Channel' in CA",
+   "water_match": "none: the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "Islais Creek Channel",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 032 (Marin Street Outfall) the receiving water 'Islais Creek', the tidal channel that openboatlaunch's record names Islais Creek Channel, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -862,9 +865,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Islais Creek Channel' in CA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "no record named 'Islais Creek Channel' in CA",
+   "water_match": "none: the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "Islais Creek Channel",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 033 (Selby Street Outfall) the receiving water 'Islais Creek', the tidal channel that openboatlaunch's record names Islais Creek Channel, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -896,9 +899,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Islais Creek Channel' in CA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "no record named 'Islais Creek Channel' in CA",
+   "water_match": "none: the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'Islais Creek Channel' (openboatlaunch's islais-creek-channel-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "Islais Creek Channel",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 035 (Third Street South Outfall) the receiving water 'Islais Creek', the tidal channel that openboatlaunch's record names Islais Creek Channel, at the bay's shore; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay (CA go-live gates 2026-11-06)"
@@ -930,9 +933,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 037 (Evans Avenue Outfall) the receiving water 'India Basin', a basin of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -964,9 +967,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 038 (Hudson Avenue Outfall) the receiving water 'India Basin', a basin of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -998,9 +1001,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 040 (Griffith Street South Outfall) the receiving water 'Yosemite Creek', the tidal slough at San Francisco Bay's South Basin; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -1032,9 +1035,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 041 (Yosemite Avenue Outfall) the receiving water 'Yosemite Creek', the tidal slough at San Francisco Bay's South Basin; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -1066,9 +1069,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 042 (Fitch Street Outfall) the receiving water 'South Basin', a basin of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
@@ -1100,9 +1103,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named Cerrito Creek, not 'SAN FRANCISCO BAY'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
+   "water_matched_by": "scripts/ca_gate_ties.py (CA go-live gates, 2026-11-06)",
+   "no_water_reason": "the permit's water 'San Francisco Bay' (openboatlaunch's san-francisco-bay-ca) is not among the water records on file: the state batch's extract brings openboatlaunch's California records and its ties step ties this row by that name",
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 043 (Sunnydale Avenue Outfall) the receiving water 'Candlestick Cove', a cove of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
