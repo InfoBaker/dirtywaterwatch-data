@@ -340,3 +340,59 @@ def test_a_point_on_another_states_land_is_not_taken_as_offshore():
     assert ok is False and "another state's land" in why and "more than 5 km" in why and "held until" in why
     ok, why = OW.Matcher.ocean_evidence(m, "pacific-ocean-ca", {"lat": 37.76, "lon": -122.58, "state": "CA"})
     assert ok is True and "offshore" in why                  # the deep outfall in the sea is still tied
+
+
+# ---------------------------------------------------------------- the bays a bay stretch runs along (CA final audit)
+
+# a side bay opening off the east shore (like Richardson Bay or San Pablo Bay against openboatlaunch's San Francisco Bay
+# outline, which the site holds as their own Census records), one far down the coast, and one in another state
+SIDE_BAY = box(-122.35, 37.80, -122.33, 37.85)
+FAR_BAY = box(-122.34, 37.30, -122.33, 37.35)
+
+
+def _side_waters():
+    waters = copy.deepcopy(WATERS)
+    for slug, g, st in (("side-bay-ca", SIDE_BAY, "CA"), ("far-bay-ca", FAR_BAY, "CA"), ("side-bay-nv", SIDE_BAY, "NV")):
+        waters[slug] = {"slug": slug, "name": slug, "kind": "bay", "state": st, "towns": [], "bbox": list(g.bounds),
+                        "geometry": mapping(g)}
+    return waters
+
+
+def test_a_bay_stretch_is_also_on_the_bay_records_it_runs_along_and_on_no_other():
+    waters = _side_waters()
+    c = {"key": "pt-s", "permit": None, "outfall": None, "water_slug": "san-francisco-bay-ca", "lat": 37.75,
+         "lon": -122.36, "sources": ["event-point"], "state": "CA", "model": "shoreline"}
+    r = R.shoreline_record(c, waters, SHORE, LAND)
+    assert r["error"] is None and r["bay"] is True
+    assert r["waters"][0] == "san-francisco-bay-ca" and "side-bay-ca" in r["waters"]
+    assert "far-bay-ca" not in r["waters"] and "side-bay-nv" not in r["waters"]
+    assert not any(s.get("water_slug") == "side-bay-ca" for s in r["segments"])     # the walk stays on the bay's own shore
+    south = R.shoreline_record({**c, "key": "pt-s2", "lat": 37.62}, waters, SHORE, LAND)   # 20 km north: 37.80 not reached
+    assert south["error"] is None and "side-bay-ca" not in south["waters"]
+
+
+def test_the_status_lists_a_bay_report_on_the_side_bay_its_stretch_runs_along_and_never_fills_it():
+    waters = _side_waters()
+    key = "pt-" + hashlib.sha1(b"ca-test:9").hexdigest()[:12]
+    c = {"key": key, "permit": None, "outfall": None, "water_slug": "san-francisco-bay-ca", "lat": 37.75, "lon": -122.36,
+         "sources": ["event-point"], "state": "CA", "model": "shoreline"}
+    r = {**R.shoreline_record(c, waters, SHORE, LAND), "event_ids": ["ca-test:9"]}
+    tmp = Path(tempfile.mkdtemp())
+    (tmp / "ca-test.json").write_text(json.dumps({"source_id": "ca-test", "ok": True, "last_ok_at": NOW.isoformat(),
+                                                  "meta": {}, "records": [_ev("9", waterbody_text="San Francisco Bay",
+                                                                              lat=37.75, lon=-122.36)]}))
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    saved = S._STATES
+    S._STATES = {"CA"}
+    try:
+        st, _ = S.build(now=NOW, write=False, events_dir=tmp, waters=waters, outfalls=[], registry={},
+                        reaches={key: r}, flows=({}, {}), discharger_towns={}, discharger_waters={},
+                        rules={**RULES, "live_states": ["CA"]})
+    finally:
+        S._STATES = saved
+        S._SHORE_REACHES.clear()
+    bay, side = st["waters"]["san-francisco-bay-ca"], st["waters"]["side-bay-ca"]
+    assert bay["events"] == ["ca-test:9"] and bay["fill"] is False
+    assert side["events"] == ["ca-test:9"] and side["status"] in ("red", "yellow") and side["fill"] is False
+    assert not (st["waters"].get("far-bay-ca") or {}).get("events")
