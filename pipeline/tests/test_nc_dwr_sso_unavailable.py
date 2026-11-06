@@ -74,7 +74,8 @@ def test_a_layer_that_is_no_longer_public_is_reported_plainly_and_the_records_st
     assert S.main([]) == 1
     out = json.loads(ev.read_text())
     assert out["ok"] is False and out["count"] == 1                     # the records already read are kept
-    assert out["error"].startswith("source unavailable: DWR's sewer overflow layer (Sanitary_Sewer_Overflows_since_Jan_2026)")
+    assert out["error"].startswith("source unavailable: the NC Division of Water Resources sewer overflow layer "
+                                   "(Sanitary_Sewer_Overflows_since_Jan_2026) is not publicly available")
     assert "Item does not exist or is inaccessible" in out["error"]
     assert out["meta"]["unavailable"] is True and out["meta"]["registry_ids"] == [S.SOURCE_ID]
     since = out["meta"]["unavailable_since"]
@@ -98,3 +99,60 @@ def test_a_republished_layer_with_other_field_names_is_not_guessed(monkeypatch, 
     assert S.main([]) == 1
     out = json.loads((tmp_path / "events" / "nc-dwr-sso-2026.json").read_text())
     assert out["ok"] is False and "needs a field mapping" in out["error"] and out["meta"]["unavailable"] is False
+
+
+# ---------------------------------------------------------------- review 2026-11-06 (docs/reviews/2026-11-06-stale-sources-review.md)
+
+def _previous(tmp_path):
+    ev = tmp_path / "events" / "nc-dwr-sso-2026.json"
+    ev.parent.mkdir(parents=True, exist_ok=True)
+    ev.write_text(json.dumps({"source_id": S.SOURCE_ID, "ok": True, "last_ok_at": "2026-11-04T20:00:00Z",
+                              "meta": {"registry_ids": [S.SOURCE_ID]}, "count": 1, "records": [{"event_id": "x"}]}))
+    return ev
+
+
+def _two_layer_viewer(second_title, second_url):
+    return {"operationalLayers": [{"title": "Sanitary Sewer Overflows since Jan 2026", "url": S.LAYER},
+                                  {"title": second_title, "url": second_url}]}
+
+
+def test_an_empty_layer_with_unknown_fields_does_not_hide_the_outage(monkeypatch, tmp_path):
+    # the viewer's map also shows an empty overflow layer: no rows, no field list, so nothing shows it is this layer
+    _setup(monkeypatch, tmp_path, {S.ORG: _services(), S.VIEWER_MAP: _two_layer_viewer("SSO reports", NEW),
+                                   S.LAYER: GONE, NEW: {"features": []}})
+    ev = _previous(tmp_path)
+    assert S.main([]) == 1
+    out = json.loads(ev.read_text())
+    assert out["ok"] is False and out["count"] == 1 and out["meta"]["unavailable"] is True
+    assert out["error"].startswith("source unavailable:") and "1 other sewer overflow layer" in out["error"]
+    assert "needs a field mapping" in out["meta"]["layers"][NEW]["error"]
+
+
+def test_an_empty_layer_whose_field_list_matches_is_read(monkeypatch, tmp_path):
+    # a new year's layer on 1 January: no rows yet, but its query answers with this layer's fields
+    empty = {"fields": [{"name": f} for f in S.KEY_FIELDS], "features": []}
+    _setup(monkeypatch, tmp_path, {S.ORG: _services(), S.VIEWER_MAP: _viewer(NEW), NEW: empty})
+    assert S.main([]) == 0
+    assert NEW in json.loads((tmp_path / "events" / "nc-dwr-sso-2026.json").read_text())["meta"]["layers"]
+
+
+def test_a_layer_of_another_organisation_on_the_viewer_map_is_never_read(monkeypatch, tmp_path):
+    rows = json.loads((FIX / "nc_dwr_sso_2026.json").read_text())
+    page = rows["pages"][0] if "pages" in rows else rows
+    other = "https://services9.arcgis.com/SomeOtherOrg/arcgis/rest/services/County_SSOs/FeatureServer/0"
+    sess = _setup(monkeypatch, tmp_path, {S.ORG: _services(), S.VIEWER_MAP: _two_layer_viewer("County SSOs", other),
+                                          S.LAYER: GONE, other: page})
+    ev = _previous(tmp_path)
+    assert S.main([]) == 1
+    out = json.loads(ev.read_text())
+    assert not any(u.startswith(other) for u in sess.asked)             # same field names, but never asked
+    assert out["ok"] is False and out["meta"]["unavailable"] is True and out["count"] == 1
+    assert "organisation" in out["meta"]["layers"][other]["error"]
+
+
+def test_the_history_layer_is_left_out_however_the_viewer_map_writes_its_url():
+    hist_service = S.HIST_LAYER.rsplit("/", 1)[0] + "/"
+    sess = Sess({S.VIEWER_MAP: {"operationalLayers": [
+        {"title": "Sanitary Sewer Overflows September 2022 through December 2025", "url": hist_service},
+        {"title": "Sanitary Sewer Overflows since Jan 2026", "url": S.LAYER}]}})
+    assert S.viewer_layers(sess) == [S.LAYER]
