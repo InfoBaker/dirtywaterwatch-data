@@ -88,6 +88,17 @@ NOT_SEWAGE = {
     'no_sewage_evidence': "SIC 4952 / NAICS 221320 is one of several codes on the permit, and neither the facility name "
                           "(a sewage plant's word) nor its ICIS limits (a fecal-indicator limit, or a BOD, ammonia or "
                           "TKN limit with a disinfection limit) show a sewage discharge; held back pending review",
+    'not_a_sewage_plant': "EPA's own record shows no sewage plant or sewer system: ICIS-NPDES classes the facility "
+                          "NON-POTW and gives it no SIC or NAICS code, and its limit sets name other discharges "
+                          "(HAND_NOT_SEWAGE gives the record read)",
+}
+# permits that enter by a POTW component (or another basis not_sewage() does not read) but whose EPA record shows no
+# sewage plant or sewer system: held back by hand, each with the record read (CA final audit, 2026-11-06)
+HAND_NOT_SEWAGE = {
+    'CA0000018': "ECHO (cwa_rest_services.get_facilities and dfr_rest_services.get_dfr for CA0000018, read "
+                 "2026-11-06): facility 'VESSEL TESTING A PILOT OCEANWELL', facility type NON-POTW, privately owned, no "
+                 "SIC or NAICS code; its ICIS limit sets are 'DISCHARGE FROM TEST SITE A to F - BRINE OUTFALL' and "
+                 "'- FRESHWATER OUTFALL' at six test sites offshore: a desalination test vessel, not a sewage plant",
 }
 
 
@@ -118,6 +129,13 @@ def not_sewage(p, e, b, kinds):
     if (codes(e['r']['SIC_CODES']) | codes(e['r']['NAICS_CODES'])) - SEWER_CODES:
         return 'no_sewage_evidence'
     return None
+
+
+def hand_not_sewage_row(p, name, state, city, basis, outfalls):
+    """The excluded_not_sewage entry of a permit held back by hand (HAND_NOT_SEWAGE), with the EPA record read."""
+    return {'npdes_permit': p, 'permittee': name, 'state': state, 'city': city, 'sic_codes': [], 'naics_codes': [],
+            'facility_type': 'NON-POTW', 'plant_basis': basis, 'external_outfalls': outfalls, 'sewage_limit_kinds': [],
+            'reason': 'not_a_sewage_plant', 'why': NOT_SEWAGE['not_a_sewage_plant'], 'basis': HAND_NOT_SEWAGE[p]}
 
 
 def permit_limit_kinds(limits):
@@ -255,6 +273,13 @@ def main(argv):
     # ------------------------------------------------------------------ sewerage-code permits that are no sewage plant
     not_sewage_rows = []
     for p, b in sorted(universe.items()):
+        if p in HAND_NOT_SEWAGE:
+            r = perm[p]['r']
+            not_sewage_rows.append(hand_not_sewage_row(p, (r['FACILITY_NAME'] or '').strip() or None, r['STATE_CODE'],
+                                                       (r['CITY'] or '').strip() or None, b, len(perm[p]['exo'])))
+            del universe[p]
+            excluded['no sewage plant by its EPA record (not_a_sewage_plant)'] += 1
+            continue
         why = not_sewage(p, perm[p], b, limit_kinds.get(p))
         if why:
             r = perm[p]['r']
@@ -511,6 +536,11 @@ def main(argv):
             continue
         b = 'potw_component' if 'POTW' in c['components'] else ('potw_indicator' if (pm.get('FACILITY_TYPE_INDICATOR') or '').upper() == 'POTW' else 'tracked_operator')
         state = fac.get('STATE_CODE') or p[:2]
+        if p in HAND_NOT_SEWAGE:
+            not_sewage_rows.append(hand_not_sewage_row(p, (fac.get('FACILITY_NAME') or '').strip() or None, state,
+                                                       (fac.get('CITY') or '').strip() or None, b, len(c['features'])))
+            excluded['no sewage plant by its EPA record (not_a_sewage_plant)'] += 1
+            continue
         rows_p, kept_feats = [], 0
         feats_xy = [f for f in c['features'] if num(f['lat']) is not None and num(f['lon']) is not None]
         for f in feats_xy:
