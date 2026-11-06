@@ -2727,6 +2727,38 @@ HAND: list[dict] = [
               "Clearwater Bay (feature 297360, class Bay, Pinellas County) at 27.97207 N 82.82189 W, and this record is "
               "the Census TIGER/Line area water polygon it names 'Clearwater Bay', 1761 m from the nearest report "
               "point. GNIS's point lies 737 m from the polygon the Census names Clearwater Bay.")),
+    # Washington's go-live gates (2026-11-06): the waters Ecology's CSO permits name for King County's and Seattle's
+    # outfalls that neither openboatlaunch nor NHDPlus V2.1 holds as a record; the polygons the Census names (TIGERweb
+    # Hydro layer 1), each holding the outfalls' points
+    dict(name="East Waterway", state="WA", kind="canal", source="census", service="tiger",
+         oids=["110855770942"],
+         near=(-122.342997, 47.581476),
+         why=("Ecology's permits name the East Waterway of the Duwamish River as the receiving water of King County's "
+              "Lander Street (030) and Hanford #2 (032) overflows (WA0029181, 2024, table 32: 'Duwamish River - East "
+              "Waterway') and of Seattle's outfall 107 (WA0031682, 2025, table 2: 'East Waterway - Duwamish River'). "
+              "openboatlaunch's Duwamish River record ends 1 km south of them and NHDPlus V2.1 draws the waterway "
+              "only as an artificial path; this record is the Census TIGER/Line area water polygon named 'East "
+              "Waterway', on which the operators' points for 030 and 107 lie (032 lies 18 m from it).")),
+    dict(name="Salmon Bay Waterway", state="WA", kind="canal", source="census", service="tiger",
+         oids=["110855771286"], aliases=["Salmon Bay"],
+         near=(-122.4061857, 47.6702494),
+         why=("Ecology's Seattle CSO permit (WA0031682, 2025, table 2) names Salmon Bay as the receiving water of "
+              "outfalls 059 and 060, below the Hiram M. Chittenden Locks, and the Salmon Bay Waterway for 151 and "
+              "152 above them. openboatlaunch's Lake Washington Ship Canal record ends at the locks, and NHDPlus "
+              "V2.1 has no water of either name; this record is the Census TIGER/Line area water polygon named "
+              "'Salmon Bay Waterway', from Shilshole Bay through the locks to the Fremont Cut, on which both "
+              "outfalls' points lie. Above the locks it covers the same water as openboatlaunch's Ship Canal "
+              "record; the USGS GNIS feature Salmon Bay (1508047, the NHD high-resolution area of that name) lies "
+              "within it.")),
+    dict(name="Montlake Cut", state="WA", kind="canal", source="census", service="tiger", gnis_id="1534602",
+         oids=["110855771359"],
+         near=(-122.304861, 47.64711),
+         why=("Ecology's King County permit (WA0029181, 2024, table 32) names the Lake Washington Ship Canal as the "
+              "receiving water of the Montlake overflow (014), whose point lies on the Montlake Cut, the canal's "
+              "stretch between Union Bay and Portage Bay. openboatlaunch's Ship Canal record covers only the "
+              "stretch from Fremont to the locks, 3.9 km west; this record is the Census TIGER/Line area water "
+              "polygon there (the Census names it 'Lake Washington Cnl'), which the USGS NHD high-resolution area "
+              "Montlake Cut (GNIS 1534602) covers.")),
 ]
 
 

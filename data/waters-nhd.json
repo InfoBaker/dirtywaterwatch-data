@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-04T19:52:44Z",
+ "built": "2026-11-06T04:38:48Z",
  "partial": false,
- "count": 3214,
+ "count": 3217,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -2888,6 +2888,41 @@
        "why": "Port Orchard (port-orchard-wa) carries the name 'Port Orchard' and reaches the operators' town (bainbridge island)"
       }
      ]
+    },
+    "report_names": {
+     "built": "2026-11-06T04:38:47Z",
+     "file": "research/wa/receiving-waters-missing.json",
+     "names": 6,
+     "reports": 7,
+     "names_no_water": 0,
+     "waters_named": 6,
+     "already_a_record": 3,
+     "targets": 3,
+     "targets_mapped": 0,
+     "records": 3,
+     "targets_failed": 3,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports": 2,
+      "5 NHD waters of that name in WA, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1
+     },
+     "network_requests": 5,
+     "requests": {
+      "tiger": 2,
+      "tiger-hand": 3
+     },
+     "cached": {},
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3214,
+      "run_records": 3,
+      "replaced": 0,
+      "added": 3,
+      "kept": 3214,
+      "dropped": 0,
+      "written": 3217
+     }
     }
    }
   }
@@ -161898,13 +161933,12 @@
    "slugs": [
     "bellingham-bay-wa"
    ],
-   "how": [],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
    "reason": null,
    "from": "reports",
-   "reports": 2,
-   "notes": [
-    "2026-11-06: openboatlaunch's record: Bellingham Bay (bellingham-bay-wa) carries the name 'Bellingham Bay' and reaches the operators' town (bellingham)"
-   ]
+   "reports": 2
   },
   {
    "state": "WA",
@@ -161938,9 +161972,13 @@
     "Manchester",
     "Poulsbo"
    ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "slugs": [
+    "dyes-inlet-wa"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
    "from": "reports",
    "reports": 1
   },
@@ -161956,9 +161994,13 @@
    "towns": [
     "Union"
    ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "slugs": [
+    "hood-canal-wa"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
    "from": "reports",
    "reports": 1
   },
@@ -638039,6 +638081,251 @@
       [
        -122.267633,
        37.133919
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "east-waterway-wa",
+   "name": "East Waterway",
+   "kind": "canal",
+   "state": "WA",
+   "towns": [
+    "Seattle"
+   ],
+   "bbox": [
+    -122.34647,
+    47.56928,
+    -122.33861,
+    47.59064
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 0.504,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "census",
+   "gnis_id": null,
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-06T04:38:46Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 110855770942 (MTFCC H2051; named 'East Waterway' by the Census), cut to the state and simplified to ~10 m. Hand record: Ecology's permits name the East Waterway of the Duwamish River as the receiving water of King County's Lander Street (030) and Hanford #2 (032) overflows (WA0029181, 2024, table 32: 'Duwamish River - East Waterway') and of Seattle's outfall 107 (WA0031682, 2025, table 2: 'East Waterway - Duwamish River'). openboatlaunch's Duwamish River record ends 1 km south of them and NHDPlus V2.1 draws the waterway only as an artificial path; this record is the Census TIGER/Line area water polygon named 'East Waterway', on which the operators' points for 030 and 107 lie (032 lies 18 m from it).",
+   "hand": true,
+   "tiger_ids": [
+    "110855770942"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -122.346032,
+       47.570453
+      ],
+      [
+       -122.346472,
+       47.569277
+      ],
+      [
+       -122.345603,
+       47.569306
+      ],
+      [
+       -122.345052,
+       47.570657
+      ],
+      [
+       -122.344628,
+       47.570866
+      ],
+      [
+       -122.343612,
+       47.573559
+      ],
+      [
+       -122.343016,
+       47.57359
+      ],
+      [
+       -122.343023,
+       47.577965
+      ],
+      [
+       -122.342558,
+       47.577987
+      ],
+      [
+       -122.342573,
+       47.578865
+      ],
+      [
+       -122.342393,
+       47.579037
+      ],
+      [
+       -122.340505,
+       47.577848
+      ],
+      [
+       -122.340535,
+       47.57872
+      ],
+      [
+       -122.342863,
+       47.5803
+      ],
+      [
+       -122.342906,
+       47.580503
+      ],
+      [
+       -122.343012,
+       47.585454
+      ],
+      [
+       -122.342554,
+       47.585453
+      ],
+      [
+       -122.34276,
+       47.586326
+      ],
+      [
+       -122.342715,
+       47.587302
+      ],
+      [
+       -122.342569,
+       47.587331
+      ],
+      [
+       -122.342755,
+       47.588334
+      ],
+      [
+       -122.342538,
+       47.58831
+      ],
+      [
+       -122.342536,
+       47.588466
+      ],
+      [
+       -122.343027,
+       47.588602
+      ],
+      [
+       -122.342924,
+       47.588912
+      ],
+      [
+       -122.34276,
+       47.588911
+      ],
+      [
+       -122.343053,
+       47.589112
+      ],
+      [
+       -122.343016,
+       47.589445
+      ],
+      [
+       -122.342427,
+       47.589308
+      ],
+      [
+       -122.342327,
+       47.589463
+      ],
+      [
+       -122.342948,
+       47.589644
+      ],
+      [
+       -122.342845,
+       47.589998
+      ],
+      [
+       -122.338614,
+       47.589996
+      ],
+      [
+       -122.338606,
+       47.590617
+      ],
+      [
+       -122.342837,
+       47.590642
+      ],
+      [
+       -122.345924,
+       47.590152
+      ],
+      [
+       -122.345989,
+       47.583423
+      ],
+      [
+       -122.345732,
+       47.58319
+      ],
+      [
+       -122.345777,
+       47.582403
+      ],
+      [
+       -122.34551,
+       47.582033
+      ],
+      [
+       -122.345796,
+       47.581827
+      ],
+      [
+       -122.345841,
+       47.58108
+      ],
+      [
+       -122.345679,
+       47.580767
+      ],
+      [
+       -122.345749,
+       47.578981
+      ],
+      [
+       -122.34549,
+       47.577936
+      ],
+      [
+       -122.345913,
+       47.577183
+      ],
+      [
+       -122.345886,
+       47.57365
+      ],
+      [
+       -122.345414,
+       47.573599
+      ],
+      [
+       -122.345239,
+       47.57339
+      ],
+      [
+       -122.346288,
+       47.570766
+      ],
+      [
+       -122.346032,
+       47.570453
       ]
      ]
     ]
@@ -1333580,6 +1333867,79 @@
    }
   },
   {
+   "slug": "montlake-cut-wa",
+   "name": "Montlake Cut",
+   "kind": "canal",
+   "state": "WA",
+   "towns": [
+    "Seattle"
+   ],
+   "bbox": [
+    -122.30928,
+    47.64692,
+    -122.30024,
+    47.64775
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 0.049,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "census",
+   "gnis_id": "1534602",
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-06T04:38:47Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 110855771359 (MTFCC H3020; named 'Lake Washington Cnl' by the Census), cut to the state and simplified to ~10 m; the name and place from the USGS Geographic Names Information System, feature 1534602. Hand record: Ecology's King County permit (WA0029181, 2024, table 32) names the Lake Washington Ship Canal as the receiving water of the Montlake overflow (014), whose point lies on the Montlake Cut, the canal's stretch between Union Bay and Portage Bay. openboatlaunch's Ship Canal record covers only the stretch from Fremont to the locks, 3.9 km west; this record is the Census TIGER/Line area water polygon there (the Census names it 'Lake Washington Cnl'), which the USGS NHD high-resolution area Montlake Cut (GNIS 1534602) covers.",
+   "hand": true,
+   "tiger_ids": [
+    "110855771359"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -122.308979,
+       47.647241
+      ],
+      [
+       -122.309281,
+       47.646921
+      ],
+      [
+       -122.300537,
+       47.64692
+      ],
+      [
+       -122.300237,
+       47.64742
+      ],
+      [
+       -122.304418,
+       47.647723
+      ],
+      [
+       -122.307368,
+       47.647548
+      ],
+      [
+       -122.308885,
+       47.647745
+      ],
+      [
+       -122.308979,
+       47.647241
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "montreal-river-mi",
    "name": "Montreal River",
    "kind": "river",
@@ -1742975,6 +1743335,589 @@
       [
        -83.612919,
        41.974978
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "salmon-bay-waterway-wa",
+   "name": "Salmon Bay Waterway",
+   "kind": "canal",
+   "state": "WA",
+   "towns": [
+    "Seattle"
+   ],
+   "bbox": [
+    -122.41954,
+    47.65242,
+    -122.36054,
+    47.67632
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 1.537,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [
+    "Salmon Bay"
+   ],
+   "source": "census",
+   "gnis_id": null,
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-06T04:38:47Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 110855771286 (MTFCC H2051; named 'Salmon Bay Waterway' by the Census), cut to the state and simplified to ~10 m. Hand record: Ecology's Seattle CSO permit (WA0031682, 2025, table 2) names Salmon Bay as the receiving water of outfalls 059 and 060, below the Hiram M. Chittenden Locks, and the Salmon Bay Waterway for 151 and 152 above them. openboatlaunch's Lake Washington Ship Canal record ends at the locks, and NHDPlus V2.1 has no water of either name; this record is the Census TIGER/Line area water polygon named 'Salmon Bay Waterway', from Shilshole Bay through the locks to the Fremont Cut, on which both outfalls' points lie. Above the locks it covers the same water as openboatlaunch's Ship Canal record; the USGS GNIS feature Salmon Bay (1508047, the NHD high-resolution area of that name) lies within it.",
+   "hand": true,
+   "tiger_ids": [
+    "110855771286"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -122.419541,
+       47.669019
+      ],
+      [
+       -122.417527,
+       47.670219
+      ],
+      [
+       -122.412936,
+       47.671521
+      ],
+      [
+       -122.410644,
+       47.671817
+      ],
+      [
+       -122.40904,
+       47.671719
+      ],
+      [
+       -122.40774,
+       47.669519
+      ],
+      [
+       -122.40814,
+       47.667719
+      ],
+      [
+       -122.40744,
+       47.666619
+      ],
+      [
+       -122.401575,
+       47.665761
+      ],
+      [
+       -122.397479,
+       47.664319
+      ],
+      [
+       -122.394706,
+       47.663119
+      ],
+      [
+       -122.392029,
+       47.66302
+      ],
+      [
+       -122.391565,
+       47.663525
+      ],
+      [
+       -122.391162,
+       47.663582
+      ],
+      [
+       -122.390642,
+       47.663396
+      ],
+      [
+       -122.390514,
+       47.66318
+      ],
+      [
+       -122.389907,
+       47.66333
+      ],
+      [
+       -122.387155,
+       47.662714
+      ],
+      [
+       -122.387332,
+       47.662153
+      ],
+      [
+       -122.386463,
+       47.661756
+      ],
+      [
+       -122.386078,
+       47.661795
+      ],
+      [
+       -122.385189,
+       47.661454
+      ],
+      [
+       -122.384215,
+       47.660795
+      ],
+      [
+       -122.384078,
+       47.660838
+      ],
+      [
+       -122.383822,
+       47.660625
+      ],
+      [
+       -122.38395,
+       47.660462
+      ],
+      [
+       -122.383796,
+       47.66024
+      ],
+      [
+       -122.382403,
+       47.659159
+      ],
+      [
+       -122.382403,
+       47.657663
+      ],
+      [
+       -122.38263,
+       47.657692
+      ],
+      [
+       -122.382426,
+       47.655807
+      ],
+      [
+       -122.377069,
+       47.655925
+      ],
+      [
+       -122.377065,
+       47.657426
+      ],
+      [
+       -122.376225,
+       47.657525
+      ],
+      [
+       -122.376039,
+       47.657962
+      ],
+      [
+       -122.375777,
+       47.657975
+      ],
+      [
+       -122.375798,
+       47.657714
+      ],
+      [
+       -122.375268,
+       47.657728
+      ],
+      [
+       -122.375288,
+       47.657135
+      ],
+      [
+       -122.373732,
+       47.657108
+      ],
+      [
+       -122.373739,
+       47.658402
+      ],
+      [
+       -122.373167,
+       47.658409
+      ],
+      [
+       -122.372554,
+       47.65821
+      ],
+      [
+       -122.372506,
+       47.657686
+      ],
+      [
+       -122.371135,
+       47.657693
+      ],
+      [
+       -122.369138,
+       47.656557
+      ],
+      [
+       -122.368684,
+       47.656665
+      ],
+      [
+       -122.36805,
+       47.656378
+      ],
+      [
+       -122.368676,
+       47.655951
+      ],
+      [
+       -122.36951,
+       47.655703
+      ],
+      [
+       -122.369485,
+       47.655542
+      ],
+      [
+       -122.368439,
+       47.65472
+      ],
+      [
+       -122.367039,
+       47.65402
+      ],
+      [
+       -122.366439,
+       47.65432
+      ],
+      [
+       -122.366539,
+       47.65362
+      ],
+      [
+       -122.365839,
+       47.65422
+      ],
+      [
+       -122.363738,
+       47.652725
+      ],
+      [
+       -122.362839,
+       47.65332
+      ],
+      [
+       -122.362239,
+       47.65272
+      ],
+      [
+       -122.360539,
+       47.65242
+      ],
+      [
+       -122.360539,
+       47.65292
+      ],
+      [
+       -122.362437,
+       47.653907
+      ],
+      [
+       -122.362474,
+       47.654198
+      ],
+      [
+       -122.36323,
+       47.654768
+      ],
+      [
+       -122.365623,
+       47.656046
+      ],
+      [
+       -122.366102,
+       47.656121
+      ],
+      [
+       -122.366967,
+       47.656573
+      ],
+      [
+       -122.366776,
+       47.656902
+      ],
+      [
+       -122.367065,
+       47.656894
+      ],
+      [
+       -122.367423,
+       47.65719
+      ],
+      [
+       -122.366962,
+       47.657266
+      ],
+      [
+       -122.368064,
+       47.657328
+      ],
+      [
+       -122.370536,
+       47.659263
+      ],
+      [
+       -122.370787,
+       47.659902
+      ],
+      [
+       -122.370906,
+       47.659466
+      ],
+      [
+       -122.371138,
+       47.659642
+      ],
+      [
+       -122.370965,
+       47.659638
+      ],
+      [
+       -122.370965,
+       47.659835
+      ],
+      [
+       -122.371152,
+       47.659895
+      ],
+      [
+       -122.371367,
+       47.659761
+      ],
+      [
+       -122.372215,
+       47.660406
+      ],
+      [
+       -122.372426,
+       47.660356
+      ],
+      [
+       -122.372423,
+       47.660638
+      ],
+      [
+       -122.373615,
+       47.660852
+      ],
+      [
+       -122.373796,
+       47.660596
+      ],
+      [
+       -122.375281,
+       47.66062
+      ],
+      [
+       -122.374972,
+       47.660258
+      ],
+      [
+       -122.375464,
+       47.660596
+      ],
+      [
+       -122.375355,
+       47.660923
+      ],
+      [
+       -122.375834,
+       47.661113
+      ],
+      [
+       -122.376352,
+       47.660985
+      ],
+      [
+       -122.376352,
+       47.660615
+      ],
+      [
+       -122.377282,
+       47.660624
+      ],
+      [
+       -122.377443,
+       47.661108
+      ],
+      [
+       -122.377784,
+       47.660615
+      ],
+      [
+       -122.379798,
+       47.66117
+      ],
+      [
+       -122.382462,
+       47.663072
+      ],
+      [
+       -122.381912,
+       47.663414
+      ],
+      [
+       -122.38249,
+       47.663945
+      ],
+      [
+       -122.384113,
+       47.663129
+      ],
+      [
+       -122.384834,
+       47.663613
+      ],
+      [
+       -122.383686,
+       47.664211
+      ],
+      [
+       -122.384151,
+       47.664571
+      ],
+      [
+       -122.384627,
+       47.664311
+      ],
+      [
+       -122.38744,
+       47.66614
+      ],
+      [
+       -122.387957,
+       47.66654
+      ],
+      [
+       -122.387672,
+       47.66684
+      ],
+      [
+       -122.388257,
+       47.667093
+      ],
+      [
+       -122.389366,
+       47.667457
+      ],
+      [
+       -122.38979,
+       47.667419
+      ],
+      [
+       -122.390372,
+       47.667555
+      ],
+      [
+       -122.390356,
+       47.667658
+      ],
+      [
+       -122.390888,
+       47.667663
+      ],
+      [
+       -122.391318,
+       47.667093
+      ],
+      [
+       -122.391889,
+       47.66706
+      ],
+      [
+       -122.391867,
+       47.666832
+      ],
+      [
+       -122.392845,
+       47.666864
+      ],
+      [
+       -122.392822,
+       47.667435
+      ],
+      [
+       -122.393715,
+       47.667407
+      ],
+      [
+       -122.393736,
+       47.666603
+      ],
+      [
+       -122.395422,
+       47.66632
+      ],
+      [
+       -122.395824,
+       47.665656
+      ],
+      [
+       -122.396221,
+       47.665591
+      ],
+      [
+       -122.399716,
+       47.666507
+      ],
+      [
+       -122.402467,
+       47.667679
+      ],
+      [
+       -122.40364,
+       47.667719
+      ],
+      [
+       -122.40574,
+       47.670019
+      ],
+      [
+       -122.40734,
+       47.672719
+      ],
+      [
+       -122.40784,
+       47.673019
+      ],
+      [
+       -122.408587,
+       47.674382
+      ],
+      [
+       -122.40866,
+       47.674967
+      ],
+      [
+       -122.410303,
+       47.676318
+      ],
+      [
+       -122.413573,
+       47.676221
+      ],
+      [
+       -122.414259,
+       47.675691
+      ],
+      [
+       -122.419541,
+       47.669019
       ]
      ]
     ]
