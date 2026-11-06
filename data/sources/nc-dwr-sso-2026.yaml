@@ -34,6 +34,13 @@ level: "state"
 # Cadence (research): edited as DWR enters reports; median report latency 15.7 hours after start (2026
 #   rows); the layer has lagged a few days at times. Legal deadline: verbal report within 24 hours.
 #   The ingester runs hourly; the feed is stale after 6 hours without a good fetch.
+# 2026-11-06: the layer has answered 400 "Item does not exist or is inaccessible" since 2026-11-05 (a
+#   name never used answers "Invalid URL", so the service seems to exist but is no longer shared). No
+#   public replacement: the organisation's service list has no other sewer overflow layer, an ArcGIS
+#   Online search finds only the history layer, the viewer and its web map, and the viewer's web map and
+#   DEQ's SSO page still point at this layer. The ingester reports the source as unavailable (ok false,
+#   meta.unavailable) and keeps the records it read; it also follows any layer the viewer's web map is
+#   pointed at (same field names only).
 cadence: "6 hours"
 license: "Item description: \"The North Carolina Department of Environmental Quality shall not be held liable for any errors in this metadata ... These data cannot be construed to be a legal document.\" No licence restriction stated."
 attribution: "North Carolina Department of Environmental Quality, Division of Water Resources"
@@ -45,4 +52,4 @@ access: ["arcgis"]
 access_detail: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0/query?where=1%3D1&outFields=*&f=json (public, no key; maxRecordCount 2000). Backs the \"Sanitary Sewer Overflow Tracking Map\" Experience 4a50b5dc87844bab9930a5906522a779 (web map 20b6faf89710464bb6e009b44fbc63dc, owner DWR_GIS_Team). 571 rows on 2026-11-03 (Jan 50-74 a month). Sample in raw/sso-sample.json."
 machine_readable: true
 legal_basis: "G.S. 143-215.1C; permit conditions (24-hour verbal report, 5-day CS-SSO form)"
-checked: "2026-11-04"
+checked: "2026-11-06"

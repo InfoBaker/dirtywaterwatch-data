@@ -13,6 +13,18 @@ Source
     - history (--backfill, once): Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0
       (3,208 rows; frozen, last edited 2026-03-09). Different field names; written to its own events file
       (source id nc-dwr-sso-2022-2025) so each record cites the layer it came from.
+    - 2026-11-05: the this-year layer stopped answering. Its URL (and the service's) answers 400 "Item does not exist
+      or is inaccessible" (CONT_0001), where a name never used answers "Invalid URL", so the service appears to exist
+      but is no longer shared; its item 8008044d5ef8446b902a083820fe85f9 answers the same. On 2026-11-06 no replacement
+      is public: the organisation's service list (1,066 services) has no other sewer overflow layer (only the
+      history layer and Report_an_SSO_Public_View, the Survey123 intake view last edited 2026-02-18); an ArcGIS
+      Online search of the organisation and of "Sanitary Sewer Overflows" finds only the history layer, the viewer
+      and its web map; the Tracking Map's web map (item 20b6faf89710464bb6e009b44fbc63dc, VIEWER_MAP) still points at
+      the 2026 URL; DEQ's "Information on Sewer System Overflows" page still links the same viewer. So each run also
+      reads the layers the viewer's web map shows (a republished layer the viewer is pointed at is followed, if it
+      has this layer's field names: KEY_FIELDS, never a guessed mapping), and when every layer answers CONT_0001 the
+      run writes ok=False with a plain "source unavailable" error, meta.unavailable and meta.unavailable_since; the
+      records already read are kept.
   Every reportable overflow appears: 1,000 gallons or more to the ground, or any amount reaching surface
   water (the DWR reporting rule; permit conditions). No licence; the item says the data "cannot be construed
   to be a legal document". Credit: NC DEQ Division of Water Resources.
@@ -97,6 +109,11 @@ LAYER = f"{ORG}/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0"
 HIST_LAYER = f"{ORG}/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0"
 YEAR_LAYER = re.compile(r"^Sanitary_Sewer_Overflows_since_Jan_(\d{4})$")
 PAGE_URL = "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779"
+# the Tracking Map's own web map ("North Carolina Sanitary Sewer Overflows Viewer Map"): the layer DWR shows the public
+VIEWER_MAP = "https://www.arcgis.com/sharing/rest/content/items/20b6faf89710464bb6e009b44fbc63dc/data"
+VIEWER_TITLE = re.compile(r"sanitary sewer overflow|\bssos?\b", re.I)
+# the fields a this-year layer must have before its rows are read (a layer with other names needs a mapping first)
+KEY_FIELDS = ("globalid", "dwr_start_date", "dwr_permit_with_name")
 STATE_FILE = BUILD_DIR / "nc-dwr-sso-state.json"
 TZ = ZoneInfo("America/New_York")
 AUTHORITY = "NC DEQ Division of Water Resources (Sanitary Sewer Overflow Tracking Map)"
@@ -253,19 +270,61 @@ def layer_url(name: str) -> str:
     return f"{ORG}/{name}/FeatureServer/0"
 
 
+class LayerUnavailable(RuntimeError):
+    """ArcGIS answers that the layer's item does not exist or is not public (code 400, CONT_0001)."""
+
+
 def year_layers(sess: requests.Session) -> list[str]:
-    """Every Sanitary_Sewer_Overflows_since_Jan_<year> layer in the organisation, oldest first; the known 2026
-    layer when the service list cannot be read."""
+    """Every Sanitary_Sewer_Overflows_since_Jan_<year> layer in the organisation, oldest first, then any other sewer
+    overflow layer the Tracking Map's web map shows (a republished layer the viewer was pointed at); the known 2026
+    layer when neither lists one or the service list cannot be read."""
+    found = []
     try:
         r = sess.get(ORG, params={"f": "json"}, timeout=(15, 60))
         r.raise_for_status()
         names = sorted((s.get("name") or "" for s in r.json().get("services") or []),
                        key=lambda n: (YEAR_LAYER.match(n) or [None, "0"])[1])
         found = [layer_url(n) for n in names if YEAR_LAYER.match(n)]
-        return found or [LAYER]
     except Exception as e:  # noqa: BLE001
         print(f"{SOURCE_ID}: service list not read ({type(e).__name__}); reading the known layer", file=sys.stderr)
-        return [LAYER]
+    for url in viewer_layers(sess):
+        if url not in found:
+            found.append(url)
+    return found or [LAYER]
+
+
+def viewer_layers(sess: requests.Session) -> list[str]:
+    """The sewer overflow layers of the Tracking Map's web map (VIEWER_MAP), the history layer left out; [] when the
+    map cannot be read."""
+    try:
+        r = sess.get(VIEWER_MAP, params={"f": "json"}, timeout=(15, 60))
+        r.raise_for_status()
+        out = []
+
+        def walk(layers):
+            for lyr in layers or []:
+                url = (lyr.get("url") or "").rstrip("/")
+                if url and VIEWER_TITLE.search(lyr.get("title") or "") and url != HIST_LAYER and url not in out:
+                    out.append(url if re.search(r"/\d+$", url) else f"{url}/0")
+                walk(lyr.get("layers"))
+        walk(r.json().get("operationalLayers"))
+        return out
+    except Exception as e:  # noqa: BLE001
+        print(f"{SOURCE_ID}: viewer web map not read ({type(e).__name__})", file=sys.stderr)
+        return []
+
+
+def unavailable(err: dict) -> bool:
+    return err.get("messageCode") == "CONT_0001" or "does not exist or is inaccessible" in str(err.get("message", ""))
+
+
+def unavailable_text(urls: list[str], since: str | None) -> str:
+    names = ", ".join(u.split("/rest/services/")[-1].split("/FeatureServer")[0] for u in urls)
+    return (f"source unavailable: DWR's sewer overflow layer ({names}) is no longer public; ArcGIS answers \"Item does "
+            f"not exist or is inaccessible\"" + (f" (first seen {since})" if since else "") + ". The organisation's "
+            "service list and the Sanitary Sewer Overflow Tracking Map's web map show no other layer for this year. "
+            "The records read up to the last good fetch are kept; no new reports can be read until DWR shares the "
+            "layer again or publishes a replacement.")
 
 
 def layer_meta(sess: requests.Session, url: str) -> dict:
@@ -290,6 +349,8 @@ def query_layer(sess: requests.Session, url: str, fields: list[str], oid: str) -
         r.raise_for_status()
         d = r.json()
         if "error" in d:
+            if unavailable(d["error"]):
+                raise LayerUnavailable(f"{url}: {d['error'].get('message')}")
             # a new year's layer with other field names: ask for every field rather than fail
             if fields != ["*"]:
                 return query_layer(sess, url, ["*"], oid)
@@ -598,12 +659,34 @@ def main(argv=None) -> int:
             rows = _load_file(args.file)
             raw_docs = None
         else:
-            rows, raw_docs = [], []
+            rows, raw_docs, gone = [], [], []
             for url in year_layers(sess):
-                feats, doc = query_layer(sess, url, FIELDS, "objectid")
+                try:
+                    feats, doc = query_layer(sess, url, FIELDS, "objectid")
+                except LayerUnavailable as e:
+                    gone.append(url)
+                    layers_meta[url] = {"error": str(e), "unavailable": True}
+                    continue
+                missing = [k for k in KEY_FIELDS if feats and not any(c.lower() == k for c in feats[0])]
+                if missing:   # a republished layer with other field names: never guess the mapping
+                    layers_meta[url] = {"error": f"fields {', '.join(missing)} absent; the layer needs a field mapping",
+                                        "rows": len(feats)}
+                    continue
                 rows += [(url, a) for a in feats]
                 raw_docs.append(doc)
                 layers_meta[url] = {**layer_meta(sess, url), "rows": len(feats)}
+            if not raw_docs:
+                prev_meta = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("meta") or {}
+                since = prev_meta.get("unavailable_since") or fetched_at
+                if gone and len(gone) == len(layers_meta):
+                    msg = unavailable_text(gone, since)
+                    meta = {"unavailable": True, "unavailable_since": since, "layers": layers_meta, "page": PAGE_URL}
+                else:
+                    msg = "no readable layer: " + "; ".join(f"{u}: {m.get('error')}" for u, m in layers_meta.items())
+                    meta = {"unavailable": False, "unavailable_since": None, "layers": layers_meta, "page": PAGE_URL}
+                write_events(SOURCE_ID, [], ok=False, error=msg, meta=meta)
+                print(f"{SOURCE_ID}: {msg}", file=sys.stderr)
+                return 1
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
@@ -625,7 +708,7 @@ def main(argv=None) -> int:
     meta = {**stats, "layers": layers_meta or {LAYER: {"rows": len(rows), "from_file": True}},
             "newest_report": newest, "raw_path": raw_path, "time_basis": TIME_BASIS, "page": PAGE_URL,
             "credit": "NC DEQ Division of Water Resources, Sanitary Sewer Overflow Tracking Map",
-            "registry_ids": [SOURCE_ID]}
+            "registry_ids": [SOURCE_ID], "unavailable": False, "unavailable_since": None}
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
     print(f"{SOURCE_ID}: {stats['layer_rows']} layer rows, {stats['kept_from_earlier_runs']} kept; status "
