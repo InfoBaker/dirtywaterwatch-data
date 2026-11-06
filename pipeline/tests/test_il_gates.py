@@ -304,3 +304,18 @@ def test_a_reversal_structure_carries_no_rain_caution_on_the_map():
     rows = {r["outfall_id"]: r for r in XO.outfall_rows([gate, cso], {"IL"}, rain_permits=rain)}
     assert rows["Chicago River Controlling Works"]["rain"] is None
     assert rows["142"]["rain"] and rows["142"]["rain"]["status"] == "likely"
+
+
+def test_a_reversal_record_never_holds_back_its_plant_permits_rain_caution():
+    """Review 2026-11-06: a reversal or possible-diversion record carries its gate's plant permit; as a notice of a
+    discharge it held back that permit's rain caution on its sewer outfalls' waters. A gate is not rain-driven and its
+    record is no notice of the permit's overflows; a real overflow report at the permit still is."""
+    gate = {"npdes_permit": "IL0028053", "outfall": "Chicago River Controlling Works", "rain_caution": False}
+    cso = {"npdes_permit": "IL0028053", "outfall": "142"}
+    rev = {"event_id": "r", "npdes_permit": "IL0028053", "outfall_id": "Chicago River Controlling Works",
+           "event_type": "cso", "status": "ended", "started_at": "2026-11-05T00:00:00Z", "time_precision": "day"}
+    ovf = dict(rev, event_id="o", outfall_id="142")
+    skip = RL.not_rain_driven([gate, cso])
+    assert skip == {("IL0028053", "CHICAGO RIVER CONTROLLING WORKS")}
+    assert RL.discharge_starts([rev], skip) == {}
+    assert [e for _, e in RL.discharge_starts([rev, ovf], skip)["IL0028053"]] == ["o"]
