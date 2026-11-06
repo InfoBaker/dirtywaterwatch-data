@@ -235,7 +235,7 @@ class RequestBudget:
     """At most `limit` requests to the point service in one run; counts what was asked."""
 
     def __init__(self, limit: int):
-        self.limit, self.used, self.failures_in_a_row = limit, 0, 0
+        self.limit, self.used, self.failures_in_a_row, self.failures = limit, 0, 0, 0
 
     def take(self) -> None:
         if self.used >= self.limit:
@@ -293,6 +293,7 @@ def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, s
                 print(f"rain_thresholds: IEM {lat:.2f},{lon:.2f} {y}: {type(e).__name__}: {e}")
                 if budget is not None:
                     budget.failures_in_a_row += 1
+                    budget.failures += 1
                     if budget.failures_in_a_row >= IEM_MAX_FAILURES:
                         raise ServiceRefused(f"{IEM_MAX_FAILURES} failures in a row, the last: {type(e).__name__}: {e}") from e
             time.sleep(IEM_PAUSE_S)
@@ -352,12 +353,17 @@ RADAR_STATES = {
            "authority": "Michigan EGLE, MiEnviro CSO/SSO List",
            "what": "combined sewer overflow (CSO) and retention treatment basin (RTB) discharges, as the list classes "
                    "them (an RTB discharge is combined sewage given partial treatment before it overflows)"},
-    "GA": {"events": "ga-epd-spills", "types": ("cso", "sso"), "list": "EPD spills list",
+    # Georgia's list holds spills (blockages, breaks, pump stations; its few "CSO Dry-weather" rows are dry-weather
+    # too): rain does not drive them, as a Massachusetts sanitary sewer overflow gives no sample, so they are counted
+    # and listed but never read against the radar (sample False) and give no operator a trigger (review 2026-11-06).
+    "GA": {"events": "ga-epd-spills", "types": ("cso", "sso"), "list": "EPD spills list", "sample": False,
+           "no_sample_why": "the list records spills, not wet-weather combined sewer discharges: the radar was not read",
            "authority": "Georgia EPD, Municipal Sewage Spills Reported to EPD",
            "what": "every spill the list gives under a combined sewer permit (the list holds spills of raw sewage; "
                    "permitted wet-weather discharges at combined sewer outfalls are not spills and are not on it)"},
 }
-RADAR_SOURCE = "NOAA MRMS radar at the operator's outlets on its reported discharge days, {list} {y0} to {y1}"
+RADAR_SOURCE = ("{authority} (combined sewer discharges that began {y0} to {y1}); NOAA MRMS daily rainfall at the operator's "
+                "outfalls, via the Iowa Environmental Mesonet")
 RADAR_POINT_NOTE = ("the median of the operator's registered combined sewer outfall points (data/outfalls-*.json), to "
                     "0.01 degree, as for Massachusetts")
 TRACE_IN = 0.01            # a radar total under this is no radar rain that day: counted, not a sample
@@ -417,7 +423,7 @@ def day_radar(series: dict[date, float], d: date) -> float | None:
     """The radar's reading for a discharge that began on day d: the larger of that day's total and the day before's.
     The live check compares a rolling 24-hour total, read every hour, and keeps the caution 48 hours after it falls
     below the amount; a discharge that begins in the small hours after an evening storm has little rain on its own
-    calendar day (and the service's days run midnight to midnight Central Standard Time), so the day alone would
+    calendar day (and the service's days run midnight to midnight Chicago time), so the day alone would
     understate the rain the live check saw before the discharge. None when the day itself has no value."""
     v = series.get(d)
     if v is None:
@@ -449,7 +455,7 @@ def radar_row(permit: str, name: str | None, state: str, days, series: dict[date
     spec = RADAR_STATES[state]
     smp = radar_sample(days, series)
     vs = smp["values"]
-    thr = threshold_from(vs, min_days)
+    thr = threshold_from(vs, min_days) if spec.get("sample", True) else None
     sd = smp["sampled_days"]
     row = {"permit": permit, "name": name, "state": state, "has_cso_outfalls": True, "per_24h": True,
            "compare_to": "the NOAA MRMS radar-only 24-hour total at any of the permittee's outfalls",
@@ -463,15 +469,16 @@ def radar_row(permit: str, name: str | None, state: str, days, series: dict[date
            "point": list(point) if point else None, "n_outfall_points": n_points,
            "point_basis": RADAR_POINT_NOTE, "threshold_method": "radar_on_discharge_days"}
     if thr is not None:
-        src = RADAR_SOURCE.format(list=spec["list"], y0=sd[0].year, y1=sd[-1].year)
+        src = RADAR_SOURCE.format(authority=spec["authority"], y0=sd[0].year, y1=sd[-1].year)
         row.update(threshold_in=thr, basis="history", rule="rain_likely.percentile", threshold_kind="operator_history",
-                   basis_text=(f"10th percentile of the NOAA MRMS radar rainfall at the operator's outfalls on the "
+                   basis_text=(f"10th percentile of the NOAA MRMS daily rainfall at the operator's outfalls on the "
                                f"{len(vs)} days its reported discharges began with radar rain ({sd[0]:%b %Y} to "
                                f"{sd[-1]:%b %Y}; the larger of that day's total and the day before's): nine "
                                f"discharge days in ten had more rain"),
                    source=src)
     else:
-        why = (f"{len(vs)} discharge days with radar rain (fewer than {min_days})" if series else
+        why = (spec["no_sample_why"] if spec.get("sample") is False else
+               f"{len(vs)} discharge days with radar rain (fewer than {min_days})" if series else
                f"{len(days)} discharge days (fewer than {min_days}): the radar was not read")
         row.update(threshold_in=None, basis=None, why_fallback=why)
     return row
@@ -499,7 +506,9 @@ def radar_build(states=("MI", "GA"), budget: int = RADAR_BUDGET, min_days: int =
                       "radar rain (0.01 inch or more); days under 0.01 inch are counted, not sampled. Merged into "
                       "data/build/rain-thresholds.json every hour by build()."),
            "radar_source": "NOAA MRMS daily totals via the Iowa Environmental Mesonet reanalysis point service "
-                           "(mesonet.agron.iastate.edu/iemre), Central Standard Time days",
+                           "(mesonet.agron.iastate.edu/iemre): America/Chicago calendar days, summed from MRMS hourly "
+                           "totals (gauge-corrected GaugeCorr_QPE_01H to October 2020 and MultiSensor_QPE_01H_Pass2 after, "
+                           "radar-only RadarOnly_QPE_01H where those are missing, as in early 2015)",
            "states": {}, "permits": {}, "not_registered": {}}
     plan = []
     for st in states:
@@ -526,7 +535,7 @@ def radar_build(states=("MI", "GA"), budget: int = RADAR_BUDGET, min_days: int =
         g = reg[permit]
         c = centroid(g["points"])
         series = {}
-        if c and len(dd) >= min_days:
+        if c and len(dd) >= min_days and RADAR_STATES[st].get("sample", True):
             years = sorted({d.year for d in dd} | {(d - timedelta(days=1)).year for d in dd})
             series = iem_daily(c[0], c[1], years, offline=offline, budget=bud)
         npts = len({(round(a, 2), round(b, 2)) for a, b in g["points"]})
@@ -534,6 +543,8 @@ def radar_build(states=("MI", "GA"), budget: int = RADAR_BUDGET, min_days: int =
     for st in states:
         rows = [r for r in out["permits"].values() if r["state"] == st]
         out["states"][st].update(operators=len(rows), with_threshold=sum(1 for r in rows if r["threshold_in"] is not None))
+    if bud.failures:     # a year left unread would leave its discharge days out silently (review 2026-11-06)
+        raise ServiceRefused(f"{bud.failures} point-service request(s) failed; a rerun asks again for the years not cached")
     out["requests"] = bud.used
     out["count"] = len(out["permits"])
     out["with_threshold"] = sum(1 for r in out["permits"].values() if r["threshold_in"] is not None)
@@ -552,7 +563,11 @@ def merge_radar(permits: dict[str, dict], radar: dict, reg: dict, rules: dict) -
     radar takes it, unless its own reported rainfall already gives one (Massachusetts). Returns how many were laid."""
     n = 0
     for permit, r in ((radar or {}).get("permits") or {}).items():
-        if r.get("threshold_in") is None or (permits.get(permit) or {}).get("basis") == "history":
+        if (permits.get(permit) or {}).get("basis") == "history":
+            continue
+        if r.get("threshold_in") is None:     # the fallback stays; say why from the radar file (review 2026-11-06)
+            if permit in permits and r.get("why_fallback"):
+                permits[permit]["why_fallback"] = r["why_fallback"]
             continue
         fb = fallback_for(r.get("state") or permit[:2], rules)
         permits[permit] = {**r, "has_cso_outfalls": permit in reg, "fallback_in": fb["threshold_in"]}
