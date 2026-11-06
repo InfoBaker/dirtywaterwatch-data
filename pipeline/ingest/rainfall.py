@@ -208,7 +208,8 @@ def cso_outfalls(live: set[str] | None = None) -> list[dict]:
                     "water_slug": slug, "water_match": match if slug else None,
                     "distance_m": dist if slug else None, "source": src})
     for o in registry:
-        if (o.get("outfall_kind") or "cso") != "cso" or str(o.get("outfall_status") or "").startswith("CLS"):
+        if (o.get("outfall_kind") or "cso") != "cso" or str(o.get("outfall_status") or "").startswith("CLS") \
+                or o.get("rain_caution") is False:      # a lake reversal gate (data/outfalls-il.json): not rain-driven
             continue
         st = str(o.get("state") or str(o.get("npdes_permit") or "")[:2]).upper()
         if st not in radar or (st in SHARED_SITE_STATES and o.get("npdes_permit") in on_site):

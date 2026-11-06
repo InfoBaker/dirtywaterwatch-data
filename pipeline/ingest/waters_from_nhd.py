@@ -2727,6 +2727,26 @@ HAND: list[dict] = [
               "Clearwater Bay (feature 297360, class Bay, Pinellas County) at 27.97207 N 82.82189 W, and this record is "
               "the Census TIGER/Line area water polygon it names 'Clearwater Bay', 1761 m from the nearest report "
               "point. GNIS's point lies 737 m from the polygon the Census names Clearwater Bay.")),
+    # 2026-11-06 (Illinois's go-live gates, docs/checklists/2026-11-06-il-gates.md in the site repository): NHDPlus V2.1
+    # gives the canal's GNIS id to 69 km of flowlines, 26 km of them the South Branch and North Branch of the Chicago
+    # River and the North Shore Channel (each a record of its own); the record keeps the canal from its head at the
+    # South Branch to Lockport.
+    dict(name="Chicago Sanitary and Ship Canal", state="IL", kind="canal", source="nhd", gnis_id="421744",
+         supersede=True, within=(-88.2, 41.5, -87.66, 41.8404),
+         aliases=["Sanitary and Ship Canal", "Chicago Ship Canal", "CSSC"],
+         within_why=("north of 41.8404 N NHDPlus V2.1 gives GNIS 421744 to the South Branch Chicago River, the North "
+                     "Branch below the North Shore Channel and the North Shore Channel itself; 41.8404 N is the north "
+                     "edge of the Census TIGER/Line area water 110380385611, which the Census names 'Chicago Ship Cnl', "
+                     "where the canal leaves the South Branch near Damen Avenue"),
+         why=("EPA's CSO inventory and MWRD's CSO Points layer give the Chicago Sanitary and Ship Canal as the "
+              "receiving water of Stickney's, Chicago's and suburban outfalls (MWRD's reaches 'CSSC Upper' and 'CSSC "
+              "Lower'). NHDPlus V2.1 carries it as GNIS 421744 but on more than the canal (within_why); this record is "
+              "the canal itself, about 48 km from the South Branch to Lockport.")),
+    dict(name="Illinois and Michigan Canal", state="IL", kind="canal", source="nhd", service="hr", gnis_id="425678",
+         aliases=["I & M Canal", "I and M Canal", "IL & Mich Canal", "Ill and Mich Canal", "Illinois-Michigan Canal"],
+         why=("MWRD's CSO Points layer puts Lemont's Stephen Street outfall (IL0039551) in its 'I & M Canal' reach and EPA's "
+              "CSO inventory names the Illinois and Michigan Canal for Lemont's outfalls 001 and 002. NHDPlus V2.1 has no "
+              "flowline of that name; the USGS NHD high-resolution flowlines carry the canal at Lemont as GNIS 425678.")),
 ]
 
 
@@ -2822,6 +2842,29 @@ def build_tiger(spec: dict, nhd: Nhd) -> tuple[dict | None, str]:
     return rec, ""
 
 
+def clip_within(rec: dict, fs: list[dict], spec: dict) -> tuple[dict | None, list[dict], str]:
+    """(record, flowlines, problem): an NHDPlus V2.1 hand record cut to the spec's `within` box (lon0, lat0, lon1, lat1)
+    where NHDPlus gives the GNIS id to more than the named water (2026-11-06: GNIS 421744, the Chicago Sanitary and
+    Ship Canal, also on the South Branch Chicago River, the North Branch below the North Shore Channel and the North
+    Shore Channel itself, which have records of their own). The geometry, bounds, length and COMIDs are those inside
+    the box; the note says where the cut is and why (within_why)."""
+    from shapely.geometry import box as _box
+    b = _box(*spec["within"])
+    geom = rec["_geom"].intersection(b)
+    if geom.is_empty:
+        return None, fs, f"hand record {spec['name']} ({spec['state']}): nothing of GNIS {spec['gnis_id']} within {spec['within']}"
+    if geom.geom_type == "GeometryCollection":
+        from shapely.ops import linemerge
+        geom = linemerge([g for g in geom.geoms if g.geom_type in ("LineString", "MultiLineString")])
+    kept = [f for f in fs if f.get("_geom") is None or f["_geom"].intersection(b).length > 1e-6]
+    bb = geom.bounds
+    rec.update(_geom=geom, bbox=[round(bb[0], 5), round(bb[1], 5), round(bb[2], 5), round(bb[3], 5)],
+               length_km=round(WX.length_km(geom), 2), comids=sorted({int(f["comid"]) for f in kept if f.get("comid")}))
+    rec["note"] += (f"; only the part within {', '.join(str(x) for x in spec['within'])} (west, south, east, north) is kept: "
+                    f"{spec['within_why']}")
+    return rec, kept, ""
+
+
 def build_hand(spec: dict, nhd: Nhd, http: Http) -> tuple[dict | None, str]:
     """(record without slug, problem): one HAND record."""
     state = spec["state"]
@@ -2841,6 +2884,10 @@ def build_hand(spec: dict, nhd: Nhd, http: Http) -> tuple[dict | None, str]:
         if rec is None:
             return None, f"hand record {spec['name']} ({state}): no NHDPlus flowlines with GNIS id {spec['gnis_id']}"
         fs = nhd.lines_by_gnis(state, spec["gnis_id"])
+        if spec.get("within"):
+            rec, fs, problem = clip_within(rec, fs, spec)
+            if rec is None:
+                return None, problem
         rec["reachcodes"] = sorted({str(f["reachcode"]) for f in fs if f.get("reachcode")})
         rec["kind"] = spec.get("kind") or rec["kind"]
         rec["note"] += f" (reach codes {', '.join(rec['reachcodes'])}). Hand record: {spec['why']}"

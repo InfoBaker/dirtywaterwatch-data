@@ -523,6 +523,10 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
             rec.setdefault("file", row.get("_file") or row.get("file"))
             if "reach_id" in row:
                 rec.setdefault("reach_id", row.get("reach_id") or None)
+            if row.get("rain_caution") is False:        # a lake reversal gate (data/outfalls-il.json): never rain-driven
+                rec.setdefault("rain_caution", False)
+            if lake and isinstance(row.get("lake_entry"), dict):
+                rec.setdefault("lake_entry", row["lake_entry"])     # the stretch starts where the river meets the lake
         rec.setdefault("state", permit[:2].upper())
         rec.setdefault("outfall_kind", "cso")
 
@@ -900,7 +904,8 @@ def moved(c: dict, d: dict) -> bool:
     return abs(c["lat"] - d["lat"]) > MOVED_DEG or abs(c["lon"] - d["lon"]) > MOVED_DEG
 
 
-META_FIELDS = ("water_slug", "name", "sources", "state", "outfall_kind", "file", "reach_id", "reported_while_closed")
+META_FIELDS = ("water_slug", "name", "sources", "state", "outfall_kind", "file", "reach_id", "reported_while_closed",
+               "rain_caution")
 
 
 def plan(cands: list[dict], cached: dict[str, dict], now: datetime) -> tuple[list[dict], list[tuple[dict, dict]]]:
@@ -1393,6 +1398,13 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     if rec["ocean"] and c.get("lat") is None:
         rec["error"] = "no point to start from"
         return rec
+    # a structure up a river from the lake (O'Brien Lock, data/outfalls-il.json lake_entry): the stretch starts at the
+    # river's mouth, and the river's path from the structure to the mouth is drawn with it (km 0 to path_km)
+    gate_entry = c.get("lake_entry") if isinstance(c.get("lake_entry"), dict) else None
+    river = [list(map(float, x)) for x in (gate_entry or {}).get("path") or []]
+    if gate_entry and gate_entry.get("lat") is not None:
+        c = {**c, "lat": float(gate_entry["lat"]), "lon": float(gate_entry["lon"])}
+    river_km = float((gate_entry or {}).get("path_km") or 0.0) if len(river) >= 2 else 0.0
     g, outline = lake_outline(slug, waters, land, (c["lon"], c["lat"]) if c.get("lat") is not None else None, shore)
     if g is None or c.get("lat") is None:
         rec["error"] = ("no outline for the lake record" if not rec["ocean"] else
@@ -1444,8 +1456,17 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
         lake_recs += [x for x in SH.lake_waters(n_slug, states, waters, shore) if x not in lake_recs]
     if rec["ocean"] and segs:    # a bay or sound the ocean stretch runs along (ALONG_KINDS: its mouth is wider than the
         lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]   # opening)
+    if segs and river_km:
+        for sg in segs:
+            sg["km_start"], sg["km_end"] = round(sg["km_start"] + river_km, 3), round(sg["km_end"] + river_km, 3)
+        for e in stops:
+            e["km_from_outfall"] = round(e["km_from_outfall"] + river_km, 3)
+        segs.insert(0, {"comid": None, "km_start": 0.0, "km_end": round(river_km, 3), "gnis_name": gate_entry.get("water"),
+                        "coords": river, "path": "river_to_lake"})
     rec.update(segments=segs, stops=stops, cut_reason=SH.MODEL if segs else "no_trace",
-               length_km=round(sum(e["km_from_outfall"] for e in stops), 3), snap_m=r["snap_m"], states=states,
+               length_km=round(sum(e["km_from_outfall"] for e in stops) - (river_km if len(stops) > 1 else 0.0)
+                               if segs else 0.0, 3),
+               snap_m=r["snap_m"], states=states,
                waters=lake_recs, error=None if segs else "the shore has no length at the point")
     return rec
 
@@ -1494,7 +1515,8 @@ def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = F
     for c in cands:
         d = cached.get(c["key"])
         if (force or not d or d.get("model") != SH.MODEL or moved(c, d) or d.get("rule_sig") != sig
-                or d.get("water_slug") != c.get("water_slug") or not d.get("segments") or not fresh_rec(d, now)):
+                or d.get("water_slug") != c.get("water_slug") or not d.get("segments") or not fresh_rec(d, now)
+                or c.get("lake_entry") != d.get("lake_entry")):
             due.append(c)
         elif any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
             d.update({f: c[f] for f in META_FIELDS if f in c})

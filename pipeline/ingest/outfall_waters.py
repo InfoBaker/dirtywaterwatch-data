@@ -780,7 +780,9 @@ class Matcher:
         self.clear_row()
         text = text_of(o)
         lat, lon = o.get("lat"), o.get("lon")
-        not_name = why_not_a_name(text)
+        # an override names its water on a cited basis (a hand tie): it is a name even where the text rules would read
+        # a street ditch ('Calumet Union Drainage Ditch', 2026-11-06)
+        not_name = None if (o.get("receiving_water_override") or {}).get("water") else why_not_a_name(text)
         if text and not not_name:
             for step, fn in (("name", self.by_name), ("NHD builder", self.by_nhd_target), ("reach", self.by_reach),
                              ("NHD builder for the permit", self.by_builder_permit)):
