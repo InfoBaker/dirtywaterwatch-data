@@ -137523,18 +137523,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6639175,
    "lon": -122.382332,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 9081,
+   "distance_m": 7,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Duwamish Waterway': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 9.1 km from it, and it reaches the permittee's town; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 9081 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 003 (Ballard Siphon Regulator) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 9.1 km away; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 7 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Washington Ship Canal",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 003 (Ballard Siphon Regulator) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 9.1 km away (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137552,18 +137556,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6594925,
    "lon": -122.370773,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 8329,
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Duwamish Waterway': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 8.3 km from it, and it reaches the permittee's town; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 8329 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 004 (11th Avenue NW (East Ballard Overflow)) the receiving water 'Lake Washington Ship Canal'; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Washington Ship Canal",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 004 (11th Avenue NW (East Ballard Overflow)) the receiving water 'Lake Washington Ship Canal' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137581,18 +137589,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6301842,
    "lon": -122.399017,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 6602,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Duwamish Waterway': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 6.6 km from it, and it reaches the permittee's town; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 6602 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 006 (Magnolia South Overflow) the receiving water 'Elliott Bay/Puget Sound'; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 006 (Magnolia South Overflow) the receiving water 'Elliott Bay/Puget Sound' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137610,18 +137622,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6518555,
    "lon": -122.358116,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 7397,
+   "distance_m": 242,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Duwamish Waterway': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 7.4 km from it, and it reaches the permittee's town; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 7397 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 007 (Canal Street Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 7.4 km away; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 242 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Washington Ship Canal",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 007 (Canal Street Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Duwamish Waterway' is the permit's label, 7.4 km away (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137639,18 +137655,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6520844,
    "lon": -122.360054,
-   "water_slug": "pipers-creek-wa",
-   "water_name": "Pipers Creek",
-   "water_kind": "stream",
-   "distance_m": 5444,
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 126,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Pipers Creek': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 5.4 km from it, and it reaches the permittee's town; Pipers Creek (pipers-creek-wa, NHDPlus V2.1 record), 5444 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 008 (3rd Avenue West Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Pipers Creek' is another outfall's water, 5.4 km away; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 126 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Washington Ship Canal",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 008 (3rd Avenue West Overflow) the receiving water 'Lake Washington Ship Canal'; EPA's text 'Pipers Creek' is another outfall's water, 5.4 km away (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137668,18 +137688,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6322746,
    "lon": -122.339233,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 5708,
+   "water_slug": "lake-union-wa",
+   "water_name": "Lake Union",
+   "water_kind": "lake",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Duwamish Waterway': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 5.7 km from it, and it reaches the permittee's town; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 5708 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 009 (Dexter Avenue Regulator) the receiving water 'Lake Union'; Lake Union (lake-union-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Union",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 009 (Dexter Avenue Regulator) the receiving water 'Lake Union' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137726,20 +137750,23 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.6566963,
    "lon": -122.28759,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lake-washington-wa",
+   "water_name": "Lake Washington",
+   "water_kind": "lake",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Lake Washington (0 m), not on a water named 'Boeing Creek': the inventory's name and point disagree; the record of that name was set aside by the placement guard: boeing-creek-wa, name match too far (13.1 km; limit 4.0 km: the stream record's extent (2.0 km) plus 2 km); the NHD builder's record for 'Boeing Creek' for this permit, boeing-creek-wa, is 13.1 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 012 (Belvoir PS Emergency Overflow) the receiving water 'Lake Washington (Union Bay)'; EPA's text 'Boeing Creek' is another outfall's water, 13 km away; Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "point_shared_by": 2,
-   "no_water_reason": "EPA's point lies on Lake Washington (0 m), not on a water named 'Boeing Creek': the inventory's name and point disagree; the record of that name was set aside by the placement guard: boeing-creek-wa, name match too far (13.1 km; limit 4.0 km: the stream record's extent (2.0 km) plus 2 km); the NHD builder's record for 'Boeing Creek' for this permit, boeing-creek-wa, is 13.1 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "receiving_water_override": {
+    "water": "Lake Washington",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 012 (Belvoir PS Emergency Overflow) the receiving water 'Lake Washington (Union Bay)'; EPA's text 'Boeing Creek' is another outfall's water, 13 km away (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137787,18 +137814,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.64711,
    "lon": -122.304863,
-   "water_slug": "lake-washington-wa",
-   "water_name": "Lake Washington",
-   "water_kind": "lake",
-   "distance_m": 463,
+   "water_slug": "montlake-cut-wa",
+   "water_name": "Montlake Cut",
+   "water_kind": "canal",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "name: its receiving water 'Lake Washington-Sammamish River' by name; Lake Washington (lake-washington-wa, openboatlaunch), 463 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 014 (Montlake Overflow) the receiving water 'Lake Washington Ship Canal'; the point lies on the Montlake Cut (USGS GNIS 1534602); Montlake Cut (montlake-cut-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Montlake Cut",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 014 (Montlake Overflow) the receiving water 'Lake Washington Ship Canal'; the point lies on the Montlake Cut (USGS GNIS 1534602) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137932,19 +137963,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.61755,
    "lon": -122.361856,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Elliott Bay (0 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Elliott Bay (0 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Elliott West CSO Treatment Plant (027b) the receiving water 'Elliott Bay' (EPA writes 'Elliot Bay/Puget Sound'); Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Elliott West CSO Treatment Plant (027b) the receiving water 'Elliott Bay' (EPA writes 'Elliot Bay/Puget Sound') (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137962,18 +137996,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5990028,
    "lon": -122.337425,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 2941,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 38,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "name: its receiving water 'Duwamish Waterway' by name; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 2941 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 028 (King Street Regulator) the receiving water 'Elliott Bay/Puget Sound'; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 38 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 028 (King Street Regulator) the receiving water 'Elliott Bay/Puget Sound' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -137991,18 +138029,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5925331,
    "lon": -122.34211,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 2152,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 21,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "name: its receiving water 'Duwamish Waterway' by name; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 2152 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 029 (Kingdome (Connecticut St Regulator)) the receiving water 'Elliott Bay/Puget Sound'; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 21 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 029 (Kingdome (Connecticut St Regulator)) the receiving water 'Elliott Bay/Puget Sound' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138020,19 +138062,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5814743,
    "lon": -122.342995,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "east-waterway-wa",
+   "water_name": "East Waterway",
+   "water_kind": "canal",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "the record of that name was set aside by the placement guard: salmon-creek-wa, name match too far (9.2 km; limit 3.7 km: the stream record's extent (1.7 km) plus 2 km); the NHD builder's record for 'Salmon Creek' for this permit, salmon-creek-wa, is 9.2 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
-   "water_match": "none: the record of that name was set aside by the placement guard: salmon-creek-wa, name match too far (9.2 km; limit 3.7 km: the stream record's extent (1.7 km) plus 2 km); the NHD builder's record for 'Salmon Creek' for this permit, salmon-creek-wa, is 9.2 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 030 (Lander Street Regulator) the receiving water 'Duwamish River - East Waterway'; East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "East Waterway",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 030 (Lander Street Regulator) the receiving water 'Duwamish River - East Waterway' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138053,15 +138098,19 @@
    "water_slug": "duwamish-river-wa",
    "water_name": "Duwamish River",
    "water_kind": "river",
-   "distance_m": 2603,
+   "distance_m": 1776,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Duwamish River' by name; Duwamish River (duwamish-river-wa, openboatlaunch), 2603 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 031a,b,c (Hanford #1 Regulator) the receiving water 'Duwamish River'; EPA's point lies 1.8 km west of the permit's (47.5631, -122.34531), which lies on the record (review 2026-11-04: EPA's point in error); Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 1776 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 031a,b,c (Hanford #1 Regulator) the receiving water 'Duwamish River'; EPA's point lies 1.8 km west of the permit's (47.5631, -122.34531), which lies on the record (review 2026-11-04: EPA's point in error) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138187,18 +138236,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5772247,
    "lon": -122.342781,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 1199,
+   "water_slug": "east-waterway-wa",
+   "water_name": "East Waterway",
+   "water_kind": "canal",
+   "distance_m": 18,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "name: its receiving water 'Duwamish Waterway' by name; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 1199 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 032 (Hanford #2 Regulator) the receiving water 'Duwamish River - East Waterway'; EPA's text 'Duwamish Waterway' is the permit's label; East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 18 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "East Waterway",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 032 (Hanford #2 Regulator) the receiving water 'Duwamish River - East Waterway'; EPA's text 'Duwamish Waterway' is the permit's label (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138245,10 +138298,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5629845,
    "lon": -122.345268,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
    "alternatives": [
     {
      "slug": "harbor-island-reach-wa",
@@ -138256,14 +138309,17 @@
      "distance_m": 251
     }
    ],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Duwamish River (0 m), not on a water named 'Wapato Creek': the inventory's name and point disagree; the record of that name was set aside by the placement guard: wapato-creek-wa, name match too far (35.4 km; limit 10.1 km: the stream record's extent (8.1 km) plus 2 km); the NHD builder's record for 'Wapato Creek' for this permit, wapato-creek-wa, is 35.4 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Duwamish River (0 m), not on a water named 'Wapato Creek': the inventory's name and point disagree; the record of that name was set aside by the placement guard: wapato-creek-wa, name match too far (35.4 km; limit 10.1 km: the stream record's extent (8.1 km) plus 2 km); the NHD builder's record for 'Wapato Creek' for this permit, wapato-creek-wa, is 35.4 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 034 (E. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 034 (E. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138281,10 +138337,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5632248,
    "lon": -122.348259,
-   "water_slug": "lake-washington-wa",
-   "water_name": "Lake Washington",
-   "water_kind": "lake",
-   "distance_m": 7137,
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
    "alternatives": [
     {
      "slug": "harbor-island-reach-wa",
@@ -138292,13 +138348,17 @@
      "distance_m": 205
     }
    ],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Lake Washington-Sammamish River': the NHD builder's record for it for this permit (waterbody named 'Lake Washington' (0 m)); EPA's point is 7.1 km from it, and it reaches the permittee's town; Lake Washington (lake-washington-wa, openboatlaunch), 7137 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 035 (W. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 035 (W. Duwamish Siphon/Duwamish PS Emergency Overflow) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138432,18 +138492,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5336494,
    "lon": -122.322639,
-   "water_slug": "lake-washington-wa",
-   "water_name": "Lake Washington",
-   "water_kind": "lake",
-   "distance_m": 6314,
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Lake Washington-Sammamish River': the NHD builder's record for it for this permit (waterbody named 'Lake Washington' (0 m)); EPA's point is 6.3 km from it, and it reaches the permittee's town; Lake Washington (lake-washington-wa, openboatlaunch), 6314 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 040 (8th Avenue South Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 040 (8th Avenue South Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138461,18 +138525,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5546608,
    "lon": -122.340836,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
    "water_kind": "river",
-   "distance_m": 1523,
+   "distance_m": 25,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "name: its receiving water 'Duwamish Waterway' by name; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 1523 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 041 (Brandon Street Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 25 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 041 (Brandon Street Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138490,18 +138558,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5415611,
    "lon": -122.334991,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
    "water_kind": "river",
-   "distance_m": 3120,
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "name: its receiving water 'Duwamish Waterway' by name; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 3120 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 042 (Michigan W. Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 042 (Michigan W. Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138519,18 +138591,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5370483,
    "lon": -122.318489,
-   "water_slug": "lake-washington-wa",
-   "water_name": "Lake Washington",
-   "water_kind": "lake",
-   "distance_m": 5717,
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 10,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Lake Washington-Sammamish River': the NHD builder's record for it for this permit (waterbody named 'Lake Washington' (0 m)); EPA's point is 5.7 km from it, and it reaches the permittee's town; Lake Washington (lake-washington-wa, openboatlaunch), 5717 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 043 (East Marginal Way PS Emergency Overflow) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 10 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 043 (East Marginal Way PS Emergency Overflow) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138548,20 +138624,23 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.51194,
    "lon": -122.297356,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Duwamish River (0 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Henderson/MLK CSO Treatment Plant (044) the receiving water 'Duwamish Waterway', and table 32 gives the Norfolk Street Regulator (044a) at the same point 'Duwamish River'; the point lies on openboatlaunch's Duwamish River record; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "point_shared_by": 2,
-   "no_water_reason": "EPA's point lies on Duwamish River (0 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 1, gives the Henderson/MLK CSO Treatment Plant (044) the receiving water 'Duwamish Waterway', and table 32 gives the Norfolk Street Regulator (044a) at the same point 'Duwamish River'; the point lies on openboatlaunch's Duwamish River record (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138579,20 +138658,23 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.51194,
    "lon": -122.297356,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Duwamish River (0 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 044a (Norfolk Street Regulator) the receiving water 'Duwamish River'; Duwamish River (duwamish-river-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "point_shared_by": 2,
-   "no_water_reason": "EPA's point lies on Duwamish River (0 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "receiving_water_override": {
+    "water": "Duwamish River",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 044a (Norfolk Street Regulator) the receiving water 'Duwamish River' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138610,19 +138692,23 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5232849,
    "lon": -122.262947,
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 10528,
+   "water_slug": "lake-washington-wa",
+   "water_name": "Lake Washington",
+   "water_kind": "lake",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "NHD builder for the permit: its receiving water 'Duwamish Waterway': the NHD builder's record for it for this permit (GNIS name in WA, crossing Seattle (the points found no water of that name within 2 km: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby))); EPA's point is 10.5 km from it, and it reaches the permittee's town; Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 10528 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 2
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 045 (Henderson Street PS Emergency Overflow) the receiving water 'Lake Washington'; EPA's text 'Duwamish Waterway' is the permit's label, 10.5 km away; Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "point_shared_by": 2,
+   "receiving_water_override": {
+    "water": "Lake Washington",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 045 (Henderson Street PS Emergency Overflow) the receiving water 'Lake Washington'; EPA's text 'Duwamish Waterway' is the permit's label, 10.5 km away (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029181",
@@ -138931,19 +139017,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "lat": 47.5238876,
    "lon": -122.396393,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 293,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 58 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 58 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 057 (Barton St PS Emergency Overflow) the receiving water 'Puget Sound'; Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 293 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Puget Sound",
+    "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 057 (Barton St PS Emergency Overflow) the receiving water 'Puget Sound' (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0029289",
@@ -139688,19 +139777,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6610298,
    "lon": -122.297821,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lake-washington-wa",
+   "water_name": "Lake Washington",
+   "water_kind": "lake",
+   "distance_m": 286,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: lake-washington-wa, 324 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24538732-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: lake-washington-wa, 324 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24538732-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 019 the receiving water 'Union Bay' (Ecology water body WA-08-9350, Lake Washington); Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 286 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Washington",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 019 the receiving water 'Union Bay' (Ecology water body WA-08-9350, Lake Washington) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -140484,19 +140576,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6702919,
    "lon": -122.405899,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "salmon-bay-waterway-wa",
+   "water_name": "Salmon Bay Waterway",
+   "water_kind": "canal",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 140 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 140 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 059 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Salmon Bay",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 059 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -140514,19 +140609,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.66782,
    "lon": -122.407402,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "salmon-bay-waterway-wa",
+   "water_name": "Salmon Bay Waterway",
+   "water_kind": "canal",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 156 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 156 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 060 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Salmon Bay",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 060 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -140701,19 +140799,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.60581,
    "lon": -122.34053,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 16,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Elliott Bay (16 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Elliott Bay (16 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
+   "water_match": "operator's list: EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt); the outfall is closed and not in the 2025 permit; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 16 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt); the outfall is closed and not in the 2025 permit (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -140731,19 +140832,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6036987,
    "lon": -122.338577,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 33,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 24 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 24 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 071 the receiving water 'Elliott Bay' (Ecology water body WA-09-0010); Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 33 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 071 the receiving water 'Elliott Bay' (Ecology water body WA-09-0010) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -140761,19 +140865,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6009,
    "lon": -122.33671,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 1,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Elliott Bay (1 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Elliott Bay (1 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
+   "water_match": "operator's list: EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt); the outfall is closed and not in the 2025 permit; Elliott Bay (elliott-bay-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 1 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Elliott Bay",
+    "basis": "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt); the outfall is closed and not in the 2025 permit (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -140971,19 +141078,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.5256882,
    "lon": -122.395493,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 384,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 59 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 59 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 091 the receiving water 'Puget Sound - Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 384 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Puget Sound",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 091 the receiving water 'Puget Sound - Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141001,19 +141111,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.5237198,
    "lon": -122.396729,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 266,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 43 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 43 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 094 the receiving water 'Puget Sound - Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 266 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Puget Sound",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 094 the receiving water 'Puget Sound - Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141031,19 +141144,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.5205002,
    "lon": -122.395782,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 294,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 65 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 65 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 095 the receiving water 'Puget Sound - Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 294 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Puget Sound",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 095 the receiving water 'Puget Sound - Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141090,19 +141206,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.5736694,
    "lon": -122.34269,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "east-waterway-wa",
+   "water_name": "East Waterway",
+   "water_kind": "canal",
+   "distance_m": 24,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23978420-wa, 144 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23978420-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23978420-wa, 144 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23978420-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 107 the receiving water 'East Waterway - Duwamish River' (Ecology water body WA-09-1010); East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 24 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "East Waterway",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 107 the receiving water 'East Waterway - Duwamish River' (Ecology water body WA-09-1010) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141753,19 +141872,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.66677,
    "lon": -122.38801,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "salmon-bay-waterway-wa",
+   "water_name": "Salmon Bay Waterway",
+   "water_kind": "canal",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Lake Washington Ship Canal (0 m), not on a water named 'Salmon Bay Waterway': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Lake Washington Ship Canal (0 m), not on a water named 'Salmon Bay Waterway': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); no NHD feature and no OSM feature of that name near the points"
+   "water_match": "operator's list: EPA's inventory gives the receiving water 'Salmon Bay Waterway', the Census polygon of that name; the outfall is closed and not in the 2025 permit; Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Salmon Bay Waterway",
+    "basis": "EPA's inventory gives the receiving water 'Salmon Bay Waterway', the Census polygon of that name; the outfall is closed and not in the 2025 permit (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141915,9 +142037,13 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "no_water_reason": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_match": "none: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Longfellow Creek",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141945,9 +142071,13 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "no_water_reason": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_match": "none: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Longfellow Creek",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
@@ -141965,18 +142095,23 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.5391884,
    "lon": -122.632423,
-   "water_slug": "blackjack-creek-wa",
-   "water_name": "Blackjack Creek",
-   "water_kind": "stream",
-   "distance_m": 161,
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
    "alternatives": [],
-   "match": "geometry",
+   "match": "none",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 23990361 (111 m): GNIS 'Blackjack Creek' (1503416)); Blackjack Creek (blackjack-creek-wa, NHDPlus V2.1 record), 161 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_match": "none: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); EPA's point for this outfall lies 20 km away in Kitsap County (review 2026-11-04), where it was tied to Blackjack Creek; Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Longfellow Creek",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); EPA's point for this outfall lies 20 km away in Kitsap County (review 2026-11-04), where it was tied to Blackjack Creek (WA go-live gates 2026-11-06)"
+   },
+   "no_water_reason": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); EPA's point for this outfall lies 20 km away in Kitsap County (review 2026-11-04), where it was tied to Blackjack Creek; Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service"
   },
   {
    "npdes_permit": "WA0031682",
@@ -142023,19 +142158,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "lat": 47.6527596,
    "lon": -122.359802,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 81,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 49 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 49 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own"
+   "water_match": "operator's list: Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 174 the receiving water 'Lake Washington - Ship Canal' (Ecology water body WA-08-9340); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 81 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
+   "receiving_water_override": {
+    "water": "Lake Washington Ship Canal",
+    "basis": "Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle Public Utilities' CSO basin layer give outfall 174 the receiving water 'Lake Washington - Ship Canal' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
+   }
   },
   {
    "npdes_permit": "WA0031682",
