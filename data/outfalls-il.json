@@ -7590,7 +7590,7 @@
    "water_kind": "river",
    "distance_m": 115,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (115 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 115 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 115 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -7627,7 +7627,7 @@
    "water_kind": "river",
    "distance_m": 2,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (2 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 2 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 2 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -7664,7 +7664,7 @@
    "water_kind": "river",
    "distance_m": 18,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (18 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 18 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 18 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -7701,7 +7701,7 @@
    "water_kind": "river",
    "distance_m": 41,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (41 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 41 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 41 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -7738,7 +7738,7 @@
    "water_kind": "river",
    "distance_m": 51,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (51 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 51 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 51 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -7775,7 +7775,7 @@
    "water_kind": "river",
    "distance_m": 72,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (72 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 72 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 72 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -7812,7 +7812,7 @@
    "water_kind": "river",
    "distance_m": 39,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (39 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 39 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 39 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -8340,7 +8340,7 @@
    "water_kind": "river",
    "distance_m": 70,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (70 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 70 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 70 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -8512,7 +8512,7 @@
    "water_kind": "river",
    "distance_m": 21,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (21 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 21 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 21 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -8549,7 +8549,7 @@
    "water_kind": "river",
    "distance_m": 28,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (28 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 28 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 28 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -8586,7 +8586,7 @@
    "water_kind": "river",
    "distance_m": 25,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (25 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 25 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 25 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -8616,7 +8616,7 @@
    "water_kind": "river",
    "distance_m": 24,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (24 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 24 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 24 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -8646,7 +8646,7 @@
    "water_kind": "river",
    "distance_m": 38,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (38 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 38 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 38 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9050,12 +9050,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "little-calumet-river-il",
-   "water_name": "Little Calumet River",
+   "water_slug": "east-arm-little-calumet-river-il",
+   "water_name": "East Arm Little Calumet River",
    "water_kind": "river",
-   "distance_m": 4397,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4397 m from the point",
+   "distance_m": 17,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 17 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9124,12 +9124,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "little-calumet-river-il",
-   "water_name": "Little Calumet River",
+   "water_slug": "east-arm-little-calumet-river-il",
+   "water_name": "East Arm Little Calumet River",
    "water_kind": "river",
-   "distance_m": 4333,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4333 m from the point",
+   "distance_m": 14,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 14 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9154,12 +9154,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D256&outFields=*&f=json",
    "source_record_id": 256,
    "epa_row": null,
-   "water_slug": "little-calumet-river-il",
-   "water_name": "Little Calumet River",
+   "water_slug": "east-arm-little-calumet-river-il",
+   "water_name": "East Arm Little Calumet River",
    "water_kind": "river",
-   "distance_m": 4067,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4067 m from the point",
+   "distance_m": 4,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 4 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9191,12 +9191,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "little-calumet-river-il",
-   "water_name": "Little Calumet River",
+   "water_slug": "east-arm-little-calumet-river-il",
+   "water_name": "East Arm Little Calumet River",
    "water_kind": "river",
-   "distance_m": 4263,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4263 m from the point",
+   "distance_m": 11,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 11 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9450,7 +9450,7 @@
    "water_kind": "river",
    "distance_m": 220,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'East Arm Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 220 m from the point",
+   "water_match": "name: its receiving water 'East Arm Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 220 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)",
    "receiving_water_override": {
     "water": "East Arm Little Calumet River",
@@ -9528,7 +9528,7 @@
    "water_kind": "river",
    "distance_m": 30,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (30 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 30 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 30 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9633,7 +9633,7 @@
    "water_kind": "river",
    "distance_m": 54,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (54 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 54 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 54 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11613,7 +11613,7 @@
    "water_kind": "river",
    "distance_m": 45,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (45 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 45 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11862,12 +11862,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D334&outFields=*&f=json",
    "source_record_id": 334,
    "epa_row": null,
-   "water_slug": "little-calumet-river-il",
-   "water_name": "Little Calumet River",
+   "water_slug": "east-arm-little-calumet-river-il",
+   "water_name": "East Arm Little Calumet River",
    "water_kind": "river",
-   "distance_m": 4615,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4615 m from the point",
+   "distance_m": 11,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 11 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11899,12 +11899,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "little-calumet-river-il",
-   "water_name": "Little Calumet River",
+   "water_slug": "east-arm-little-calumet-river-il",
+   "water_name": "East Arm Little Calumet River",
    "water_kind": "river",
-   "distance_m": 4340,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4340 m from the point",
+   "distance_m": 13,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 13 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -13255,7 +13255,7 @@
    "water_kind": "river",
    "distance_m": 25,
    "match": "geometry+name",
-   "water_match": "point: the water record at the outfall's point (25 m; snapped within 150 m); East Arm Little Calumet River (east-arm-little-calumet-river-il, NHDPlus V2.1 record), 25 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; East Arm Little Calumet River (east-arm-little-calumet-river-il, hand record, nhd), 25 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
