@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-06T06:30:44Z",
+ "built": "2026-11-06T07:00:24Z",
  "partial": false,
- "count": 3233,
+ "count": 3234,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -1352,6 +1352,49 @@
       "kept": 3228,
       "dropped": 0,
       "written": 3230
+     }
+    },
+    "report_names_hand_only": {
+     "built": "2026-11-06T07:00:23Z",
+     "file": "research/il/receiving-waters-missing.json",
+     "names": 85,
+     "reports": 147,
+     "names_no_water": 10,
+     "waters_named": 69,
+     "already_a_record": 1,
+     "targets": 68,
+     "targets_mapped": 6,
+     "records": 4,
+     "targets_failed": 62,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points;": 48,
+      "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name w": 3,
+      "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the reports": 3,
+      "no NHD flowline or waterbody of that name in IL; the reports give no place to look for it in the NHD high-resolution flo": 2,
+      "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 2,
+      "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name": 1,
+      "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1,
+      "no NHD flowline or waterbody of that name in IL; a description, not a name": 1,
+      "24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name": 1
+     },
+     "network_requests": 0,
+     "requests": {},
+     "cached": {
+      "tiger": 1,
+      "gnis2": 4,
+      "nhd-hr": 2
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3233,
+      "run_records": 4,
+      "replaced": 3,
+      "added": 1,
+      "kept": 3230,
+      "dropped": 0,
+      "written": 3234
      }
     }
    },
@@ -114590,10 +114633,11 @@
     "Lansing"
    ],
    "slugs": [
-    "calumet-river-il"
+    "little-calumet-river-il"
    ],
    "how": [
-    "EPA's NHD reach/NHDPlus id 07120003000061, 07120003000188, 13463913, 13463969: GNIS 'Calumet River' (405379); no snapping"
+    "EPA's NHD reach/NHDPlus id 07120003000061, 07120003000188, 13463913, 13463969: GNIS 'Calumet River' (405379); no snapping",
+    "hand record little-calumet-river-il: NHDPlus V2.1 gives these flowlines the Calumet River's GNIS id (405379); they are the Little Calumet River (waters_from_nhd HAND, 2026-11-06)"
    ],
    "reason": null,
    "define_by": "reach",
@@ -114627,14 +114671,14 @@
     }
    ],
    "reach_slugs": {
-    "07120003000061": "calumet-river-il",
-    "07120003000188": "calumet-river-il",
-    "13463913": "calumet-river-il",
-    "13463969": "calumet-river-il",
-    "13463971": "calumet-river-il",
-    "13463979": "calumet-river-il",
-    "13464021": "calumet-river-il",
-    "13464023": "calumet-river-il"
+    "07120003000061": "little-calumet-river-il",
+    "07120003000188": "little-calumet-river-il",
+    "13463913": "little-calumet-river-il",
+    "13463969": "little-calumet-river-il",
+    "13463971": "little-calumet-river-il",
+    "13463979": "little-calumet-river-il",
+    "13464021": "little-calumet-river-il",
+    "13464023": "little-calumet-river-il"
    }
   },
   {
@@ -130966,6 +131010,9 @@
    "reason": "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 13,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "places_failed": [
     {
      "lon": -88.34737,
@@ -130976,9 +131023,6 @@
      "town": "Rosiclare",
      "reason": "no NHD water of that name within 3 km of Rosiclare (the nearest is 135.0 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131000,13 +131044,13 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 10,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'unnamed tributary to DeArcy Branch': a tributary of DeArcy Branch (the tributary has no name of its own)",
     "'An unnamed tributary to DeArcy Branch': a tributary of DeArcy Branch (the tributary has no name of its own)",
     "'unnamed tributary to De Arcy Branch': a tributary of De Arcy Branch (the tributary has no name of its own)"
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131122,13 +131166,13 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 5,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'A tributary to the East Branch of the DuPage River': a tributary of East Branch of the DuPage River (the tributary has no name of its own)",
     "'Tributary to East Branch of the DuPage River': a tributary of East Branch of the DuPage River (the tributary has no name of its own)",
     "'Tributary to the East Branch of the DuPage River': a tributary of East Branch of the DuPage River (the tributary has no name of its own)"
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131150,13 +131194,13 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 5,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'To storm drain then to Mississippi River': a tributary of to Mississippi River (the tributary has no name of its own)",
     "'Storm drain then to Mississippi River': a tributary of to Mississippi River (the tributary has no name of its own)",
     "the status resolver gives the name to mississippi-river-il (another name): the name's own water is built"
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131176,6 +131220,9 @@
    "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 4,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "places_failed": [
     {
      "lon": -90.19571,
@@ -131186,9 +131233,6 @@
      "town": "Cuba",
      "reason": "no NHD water of that name within 3 km of Cuba (the nearest is 233.3 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131230,6 +131274,9 @@
    "reason": "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 4,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'Tributary of Shoal Creek': a tributary of Shoal Creek (the tributary has no name of its own)"
    ],
@@ -131244,9 +131291,6 @@
      "lat": 39.1439,
      "reason": "no NHD water of that name within 2 km of the reports' point (39.14390, -89.63786) (the nearest is 10.4 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131372,12 +131416,12 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 3,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'Unnamed Flint Creek Tributary': a tributary of unnamed Flint Creek tributary (the tributary has no name of its own)",
     "the status resolver gives the name to flint-creek-il (another name): the name's own water is built"
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -131639,11 +131683,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to farm-creek-il (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "the status resolver gives the name to farm-creek-il (another name): the name's own water is built"
    ]
   },
   {
@@ -131713,14 +131757,14 @@
    "reason": null,
    "from": "reports",
    "reports": 1,
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -88.32667,
      "lat": 41.74167,
      "reason": "no NHD water of that name within 2 km of the reports' point (41.74167, -88.32667) (the nearest is 4.4 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "IL",
@@ -131847,11 +131891,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to little-wabash-river-il (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "the status resolver gives the name to little-wabash-river-il (another name): the name's own water is built"
    ]
   },
   {
@@ -131893,15 +131937,15 @@
    "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "places_failed": [
     {
      "lon": -89.14306,
      "lat": 41.0,
      "reason": "no NHD water of that name within 2 km of the reports' point (41.00000, -89.14306) (the nearest is 10.2 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -132030,11 +132074,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to wabash-river-il (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "the status resolver gives the name to wabash-river-il (another name): the name's own water is built"
    ]
   },
   {
@@ -132075,11 +132119,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'tributary to East Branch of DuPage River': a tributary of East Branch of DuPage River (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "'tributary to East Branch of DuPage River': a tributary of East Branch of DuPage River (the tributary has no name of its own)"
    ]
   },
   {
@@ -132099,6 +132143,9 @@
    "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "places_failed": [
     {
      "lon": -89.96585,
@@ -132109,9 +132156,6 @@
      "town": "Belleville",
      "reason": "no NHD water of that name within 3 km of Belleville (the nearest is 54.4 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -132138,14 +132182,14 @@
    "notes": [
     "'Unnamed tributary to Edwards River': a tributary of Edwards River (the tributary has no name of its own)"
    ],
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -90.035,
      "lat": 41.175,
      "reason": "no NHD water of that name within 2 km of the reports' point (41.17500, -90.03500) (the nearest is 8.2 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "IL",
@@ -132234,14 +132278,14 @@
    "notes": [
     "'Hoover Branch Tributary to Lake Springfield': a tributary of Hoover Branch (the tributary has no name of its own)"
    ],
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -89.63083,
      "lat": 39.74878,
      "reason": "no NHD water of that name within 2 km of the reports' point (39.74878, -89.63083) (the nearest is 8.2 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "IL",
@@ -132260,6 +132304,9 @@
    "reason": "24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "places_failed": [
     {
      "lon": -88.32667,
@@ -132270,9 +132317,6 @@
      "town": "Aurora",
      "reason": "no NHD water of that name within 3 km of Aurora (the nearest is 37.8 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -132446,11 +132490,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Drainage ditch tributary to Lyman Woods pond': a tributary of Lyman Woods pond (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "'Drainage ditch tributary to Lyman Woods pond': a tributary of Lyman Woods pond (the tributary has no name of its own)"
    ]
   },
   {
@@ -132491,11 +132535,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to marys-river-il (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "the status resolver gives the name to marys-river-il (another name): the name's own water is built"
    ]
   },
   {
@@ -132593,12 +132637,12 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'Mud Run Creek tributary spoon river': a tributary of Mud Run Creek tributary spoon river (the tributary has no name of its own)",
     "the status resolver gives the name to mud-run-il (another name): the name's own water is built"
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -132709,6 +132753,9 @@
    "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'unnamed tributary of Pope creek': a tributary of Pope creek (the tributary has no name of its own)"
    ],
@@ -132718,9 +132765,6 @@
      "lat": 41.17919,
      "reason": "no NHD water of that name within 2 km of the reports' point (41.17919, -90.31564) (the nearest is 4.2 km away)"
     }
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -132747,14 +132791,14 @@
    "notes": [
     "'Tributary of Prairie DuPont Creek': a tributary of Prairie DuPont Creek (the tributary has no name of its own)"
    ],
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -90.03246,
      "lat": 38.53172,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.53172, -90.03246) (the nearest is 4.2 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "IL",
@@ -132773,11 +132817,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Tributary of Quarry Banch': a tributary of Quarry Banch (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "'Tributary of Quarry Banch': a tributary of Quarry Banch (the tributary has no name of its own)"
    ]
   },
   {
@@ -132826,14 +132870,14 @@
    "notes": [
     "'unnamed tributary Rock River': a tributary of Rock River (the tributary has no name of its own)"
    ],
+   "defined_by": "name",
    "places_failed": [
     {
      "lon": -90.44915,
      "lat": 41.47793,
      "reason": "no NHD water of that name within 2 km of the reports' point (41.47793, -90.44915) (the nearest is 2.5 km away)"
     }
-   ],
-   "defined_by": "name"
+   ]
   },
   {
    "state": "IL",
@@ -132852,11 +132896,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "the status resolver gives the name to rocky-fork-il (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "the status resolver gives the name to rocky-fork-il (another name): the name's own water is built"
    ]
   },
   {
@@ -132876,11 +132920,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
-   "notes": [
-    "'Storm sewer disch. to Saline Branch of Salt Fork': a tributary of Saline Branch of Salt Fork (the tributary has no name of its own)"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "'Storm sewer disch. to Saline Branch of Salt Fork': a tributary of Saline Branch of Salt Fork (the tributary has no name of its own)"
    ]
   },
   {
@@ -132968,12 +133012,12 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ],
    "notes": [
     "'A Tributary that feeds Farm Creek.': a tributary of that feeds Farm Creek (the tributary has no name of its own)",
     "the status resolver gives the name to farm-creek-il (another name): the name's own water is built"
-   ],
-   "reason_detail": [
-    "OSM fallback: Overpass not reachable"
    ]
   },
   {
@@ -133096,7 +133140,7 @@
     "calumet-river-il"
    ],
    "how": [
-    "GNIS name in IL, 76 m from the reports' point (41.64499, -87.55966); the same NHD feature as record calumet-river-il"
+    "NHD high resolution: the Calumet River (GNIS 405379, hand record calumet-river-il), 145 m from the reports' point (41.64499, -87.55966), at its junction with the Little Calumet River"
    ],
    "reason": null,
    "from": "reports",
@@ -133209,11 +133253,11 @@
    "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 0,
-   "notes": [
-    "the status resolver gives the name to south-branch-chicago-river-il (another name): the name's own water is built"
-   ],
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
+   ],
+   "notes": [
+    "the status resolver gives the name to south-branch-chicago-river-il (another name): the name's own water is built"
    ]
   },
   {
@@ -420078,292 +420122,258 @@
    "kind": "river",
    "state": "IL",
    "towns": [
-    "Calumet",
     "Chicago",
     "Thornton"
    ],
    "bbox": [
-    -87.65124,
-    41.62626,
-    -87.5251,
-    41.66225
+    -87.57262,
+    41.64341,
+    -87.52922,
+    41.73289
    ],
    "wikidata": null,
    "charted": null,
    "area_km2": null,
-   "length_km": 14.31,
+   "length_km": 12.28,
    "launches": [],
    "advisories": [],
    "aliases": [],
    "source": "nhd",
    "gnis_id": "405379",
-   "comids": [
-    13463913,
-    13463969,
-    13463971,
-    13463979,
-    13464021,
-    13464023
-   ],
+   "comids": [],
    "nhd_fcodes": [
-    46006,
     55800
    ],
-   "fetched_at": "2026-11-06T05:09:08Z",
+   "fetched_at": "2026-11-06T07:00:23Z",
    "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
-   "note": "NHDPlus V2.1: 6 network flowlines with GNIS id 405379 in IL's box, cut to the state, merged and simplified to ~10 m",
-   "targets": 1,
+   "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 6 flowlines with GNIS id 405379 in IL, cut to the state, merged and simplified to ~10 m (reach codes 04040001000637, 04040001048321, 07120003003394, 07120003012108). Hand record: MWRD's CSO Points layer puts its own outfalls 151 and 152 (IL0028061) and Chicago's 206 and CDS-20 in its 'Cal R' reach, and O'Brien Lock and Dam, one of MWRD's three structures that let the waterways back into Lake Michigan (its reversals table), stands on this river. The USGS NHD high-resolution flowlines carry the Calumet River as GNIS 405379 (6 flowlines, about 12.4 km, reach codes 07120003003394, 07120003012108, 04040001048321 and 04040001000637) from its junction with the Little Calumet River at Hegewisch (41.6434 N, 87.5614 W) through the lock (41.6547 N, 87.5694 W) to its mouth at Calumet Harbor (41.7329 N, 87.5292 W); NHDPlus V2.1 has none of it and gives the id to the Little Calumet River instead (the Little Calumet River's hand record).",
+   "hand": true,
+   "reachcodes": [
+    "04040001000637",
+    "04040001048321",
+    "07120003003394",
+    "07120003012108"
+   ],
+   "targets": 0,
    "geometry": {
     "type": "MultiLineString",
     "coordinates": [
      [
       [
-       -87.525105,
-       41.626263
+       -87.561425,
+       41.643407
       ],
       [
-       -87.528606,
-       41.627178
+       -87.561404,
+       41.645335
       ],
       [
-       -87.529885,
-       41.627819
+       -87.565601,
+       41.651169
       ],
       [
-       -87.533693,
-       41.630842
+       -87.57234,
+       41.657304
       ],
       [
-       -87.534668,
-       41.631209
+       -87.572621,
+       41.662412
       ],
       [
-       -87.537138,
-       41.631074
+       -87.571645,
+       41.662093
       ],
       [
-       -87.538022,
-       41.631212
+       -87.567804,
+       41.663401
       ],
       [
-       -87.539973,
-       41.631968
+       -87.566388,
+       41.665181
       ],
       [
-       -87.541131,
-       41.632587
+       -87.565414,
+       41.665916
       ],
       [
-       -87.54238,
-       41.633503
+       -87.564005,
+       41.666123
       ],
       [
-       -87.543933,
-       41.635631
+       -87.562265,
+       41.667241
       ],
       [
-       -87.543901,
-       41.636707
+       -87.559978,
+       41.669149
       ],
       [
-       -87.543075,
-       41.638536
+       -87.559616,
+       41.669326
       ],
       [
-       -87.543287,
-       41.640389
+       -87.558345,
+       41.669442
       ],
       [
-       -87.543803,
-       41.641854
+       -87.557871,
+       41.670257
       ],
       [
-       -87.5449,
-       41.643182
+       -87.553358,
+       41.672676
       ],
       [
-       -87.54557,
-       41.64348
+       -87.552599,
+       41.673409
       ],
       [
-       -87.547279,
-       41.643206
+       -87.552191,
+       41.674652
       ],
       [
-       -87.548742,
-       41.643299
+       -87.55154,
+       41.67544
       ],
       [
-       -87.552035,
-       41.644605
+       -87.552139,
+       41.676445
       ],
       [
-       -87.554656,
-       41.646071
+       -87.55236,
+       41.677212
       ],
       [
-       -87.556431,
-       41.646177
+       -87.552105,
+       41.68124
       ],
       [
-       -87.557415,
-       41.645569
+       -87.552459,
+       41.686333
       ],
       [
-       -87.558728,
-       41.645251
+       -87.551968,
+       41.692204
       ],
       [
-       -87.561345,
-       41.643471
+       -87.552195,
+       41.693802
       ],
       [
-       -87.561973,
-       41.642504
+       -87.553451,
+       41.69667
       ],
       [
-       -87.564006,
-       41.640754
+       -87.553206,
+       41.697419
       ],
       [
-       -87.568105,
-       41.638467
+       -87.551696,
+       41.699495
       ],
       [
-       -87.572984,
-       41.638787
+       -87.547706,
+       41.701072
       ],
       [
-       -87.574397,
-       41.639149
+       -87.546183,
+       41.702394
       ],
       [
-       -87.578164,
-       41.641146
+       -87.545736,
+       41.703432
       ],
       [
-       -87.583195,
-       41.643226
+       -87.545755,
+       41.705105
       ],
       [
-       -87.584725,
-       41.644133
+       -87.546008,
+       41.705603
       ],
       [
-       -87.589304,
-       41.648471
+       -87.545857,
+       41.70751
       ],
       [
-       -87.590999,
-       41.649524
+       -87.545278,
+       41.708286
       ],
       [
-       -87.591886,
-       41.649717
+       -87.543771,
+       41.709372
       ],
       [
-       -87.59389,
-       41.649713
+       -87.543032,
+       41.710487
       ],
       [
-       -87.598387,
-       41.648662
+       -87.542752,
+       41.711536
       ],
       [
-       -87.600375,
-       41.648792
+       -87.542718,
+       41.713358
       ],
       [
-       -87.603729,
-       41.649685
+       -87.542356,
+       41.714411
       ],
       [
-       -87.606817,
-       41.649752
+       -87.542354,
+       41.715792
       ],
       [
-       -87.621259,
-       41.650831
+       -87.542744,
+       41.717248
       ],
       [
-       -87.622083,
-       41.651557
+       -87.543219,
+       41.71767
       ],
       [
-       -87.622715,
-       41.653886
+       -87.543428,
+       41.718254
       ],
       [
-       -87.622278,
-       41.656011
+       -87.54275,
+       41.720754
       ],
       [
-       -87.620215,
-       41.658029
+       -87.543218,
+       41.72367
       ],
       [
-       -87.619301,
-       41.659584
+       -87.542747,
+       41.724472
       ],
       [
-       -87.619205,
-       41.660385
+       -87.541728,
+       41.72513
       ],
       [
-       -87.619486,
-       41.661077
+       -87.542277,
+       41.726197
       ],
       [
-       -87.620459,
-       41.662082
+       -87.542279,
+       41.726586
       ],
       [
-       -87.62299,
-       41.662247
+       -87.542066,
+       41.727023
       ],
       [
-       -87.624303,
-       41.661929
+       -87.540026,
+       41.728528
       ],
       [
-       -87.630794,
-       41.657912
+       -87.529998,
+       41.732729
       ],
       [
-       -87.632139,
-       41.657327
-      ],
-      [
-       -87.634717,
-       41.657092
-      ],
-      [
-       -87.642112,
-       41.657708
-      ],
-      [
-       -87.642867,
-       41.657488
-      ],
-      [
-       -87.647253,
-       41.65737
-      ],
-      [
-       -87.647646,
-       41.657126
-      ],
-      [
-       -87.649501,
-       41.656843
-      ],
-      [
-       -87.650468,
-       41.656368
-      ],
-      [
-       -87.65124,
-       41.656355
+       -87.529216,
+       41.732891
       ]
      ]
     ]
@@ -476151,7 +476161,7 @@
     33600,
     55800
    ],
-   "fetched_at": "2026-11-06T06:30:01Z",
+   "fetched_at": "2026-11-06T07:00:23Z",
    "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
    "note": "NHDPlus V2.1: 32 network flowlines with GNIS id 421744 in IL's box, cut to the state, merged and simplified to ~10 m; only the part within -88.2, 41.5, -87.66, 41.8404 (west, south, east, north) is kept: north of 41.8404 N NHDPlus V2.1 gives GNIS 421744 to the South Branch Chicago River, the North Branch below the North Shore Channel and the North Shore Channel itself; 41.8404 N is the north edge of the Census TIGER/Line area water 110380385611, which the Census names 'Chicago Ship Cnl', where the canal leaves the South Branch near Damen Avenue (reach codes 07120004000037, 07120004000038, 07120004000039, 07120004000040, 07120004000041, 07120004000504, 07120004000918, 07120004000922, 07120004000923, 07120004000924, 07120004000937, 07120004000964, 07120004000969). Hand record: EPA's CSO inventory and MWRD's CSO Points layer give the Chicago Sanitary and Ship Canal as the receiving water of Stickney's, Chicago's and suburban outfalls (MWRD's reaches 'CSSC Upper' and 'CSSC Lower'). NHDPlus V2.1 carries it as GNIS 421744 but on more than the canal (within_why); this record is the canal itself, about 48 km from the South Branch to Lockport.",
    "hand": true,
@@ -887434,7 +887444,7 @@
    "nhd_fcodes": [
     55800
    ],
-   "fetched_at": "2026-11-06T06:30:44Z",
+   "fetched_at": "2026-11-06T07:00:23Z",
    "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
    "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 1 flowlines with GNIS id 425678 in IL, cut to the state, merged and simplified to ~10 m (reach codes 07120004003010). Hand record: MWRD's CSO Points layer puts Lemont's Stephen Street outfall (IL0039551) in its 'I & M Canal' reach and EPA's CSO inventory names the Illinois and Michigan Canal for Lemont's outfalls 001 and 002. NHDPlus V2.1 has no flowline of that name; the USGS NHD high-resolution flowlines carry the canal at Lemont as GNIS 425678.",
    "hand": true,
@@ -1072234,6 +1072244,309 @@
       [
        -88.913599,
        37.398486
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "little-calumet-river-il",
+   "name": "Little Calumet River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Calumet",
+    "Chicago",
+    "Thornton"
+   ],
+   "bbox": [
+    -87.65124,
+    41.62626,
+    -87.5251,
+    41.66225
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 14.31,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": null,
+   "comids": [
+    13463913,
+    13463969,
+    13463971,
+    13463979,
+    13464021,
+    13464023
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-06T07:00:23Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 6 network flowlines with GNIS id 405379 in IL's box, cut to the state, merged and simplified to ~10 m (reach codes 07120003000061, 07120003000188). Hand record: EPA's CSO inventory gives 'Little Calumet River' as the receiving water of Chicago's (IL0045012), Riverdale's (ILM580007), Dolton's (ILM580017) and MWRD's Calumet plant's (IL0028061) outfalls along this stretch, and MWRD's CSO Points layer puts them in its 'Little Cal R (North)' and 'Little Cal R (South)' reaches. This is the river from the Indiana line (the USGS NHD high-resolution 'Little Calumet River', GNIS 424126, upstream in Indiana) west past its junction with the Calumet River at Hegewisch to Blue Island, as NHDPlus V2.1 draws it (6 network flowlines). NHDPlus V2.1's GNIS id is not this water's own: NHDPlus names these flowlines 'Calumet River' (GNIS 405379, reach codes 07120003000061 and 07120003000188, in the Little Calumet-Galien basin), while the USGS NHD high-resolution flowlines give GNIS 405379 to the Calumet River from Hegewisch to Lake Michigan (the Calumet River's hand record) and leave this stretch unnamed.",
+   "hand": true,
+   "reachcodes": [
+    "07120003000061",
+    "07120003000188"
+   ],
+   "nhdplus_gnis_id": "405379",
+   "targets": 0,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -87.525105,
+       41.626263
+      ],
+      [
+       -87.528606,
+       41.627178
+      ],
+      [
+       -87.529885,
+       41.627819
+      ],
+      [
+       -87.533693,
+       41.630842
+      ],
+      [
+       -87.534668,
+       41.631209
+      ],
+      [
+       -87.537138,
+       41.631074
+      ],
+      [
+       -87.538022,
+       41.631212
+      ],
+      [
+       -87.539973,
+       41.631968
+      ],
+      [
+       -87.541131,
+       41.632587
+      ],
+      [
+       -87.54238,
+       41.633503
+      ],
+      [
+       -87.543933,
+       41.635631
+      ],
+      [
+       -87.543901,
+       41.636707
+      ],
+      [
+       -87.543075,
+       41.638536
+      ],
+      [
+       -87.543287,
+       41.640389
+      ],
+      [
+       -87.543803,
+       41.641854
+      ],
+      [
+       -87.5449,
+       41.643182
+      ],
+      [
+       -87.54557,
+       41.64348
+      ],
+      [
+       -87.547279,
+       41.643206
+      ],
+      [
+       -87.548742,
+       41.643299
+      ],
+      [
+       -87.552035,
+       41.644605
+      ],
+      [
+       -87.554656,
+       41.646071
+      ],
+      [
+       -87.556431,
+       41.646177
+      ],
+      [
+       -87.557415,
+       41.645569
+      ],
+      [
+       -87.558728,
+       41.645251
+      ],
+      [
+       -87.561345,
+       41.643471
+      ],
+      [
+       -87.561973,
+       41.642504
+      ],
+      [
+       -87.564006,
+       41.640754
+      ],
+      [
+       -87.568105,
+       41.638467
+      ],
+      [
+       -87.572984,
+       41.638787
+      ],
+      [
+       -87.574397,
+       41.639149
+      ],
+      [
+       -87.578164,
+       41.641146
+      ],
+      [
+       -87.583195,
+       41.643226
+      ],
+      [
+       -87.584725,
+       41.644133
+      ],
+      [
+       -87.589304,
+       41.648471
+      ],
+      [
+       -87.590999,
+       41.649524
+      ],
+      [
+       -87.591886,
+       41.649717
+      ],
+      [
+       -87.59389,
+       41.649713
+      ],
+      [
+       -87.598387,
+       41.648662
+      ],
+      [
+       -87.600375,
+       41.648792
+      ],
+      [
+       -87.603729,
+       41.649685
+      ],
+      [
+       -87.606817,
+       41.649752
+      ],
+      [
+       -87.621259,
+       41.650831
+      ],
+      [
+       -87.622083,
+       41.651557
+      ],
+      [
+       -87.622715,
+       41.653886
+      ],
+      [
+       -87.622278,
+       41.656011
+      ],
+      [
+       -87.620215,
+       41.658029
+      ],
+      [
+       -87.619301,
+       41.659584
+      ],
+      [
+       -87.619205,
+       41.660385
+      ],
+      [
+       -87.619486,
+       41.661077
+      ],
+      [
+       -87.620459,
+       41.662082
+      ],
+      [
+       -87.62299,
+       41.662247
+      ],
+      [
+       -87.624303,
+       41.661929
+      ],
+      [
+       -87.630794,
+       41.657912
+      ],
+      [
+       -87.632139,
+       41.657327
+      ],
+      [
+       -87.634717,
+       41.657092
+      ],
+      [
+       -87.642112,
+       41.657708
+      ],
+      [
+       -87.642867,
+       41.657488
+      ],
+      [
+       -87.647253,
+       41.65737
+      ],
+      [
+       -87.647646,
+       41.657126
+      ],
+      [
+       -87.649501,
+       41.656843
+      ],
+      [
+       -87.650468,
+       41.656368
+      ],
+      [
+       -87.65124,
+       41.656355
       ]
      ]
     ]

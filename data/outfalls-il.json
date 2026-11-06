@@ -6370,12 +6370,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 5 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 68,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 68 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 68 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6407,12 +6407,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 25 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 35,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 35 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 35 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6444,12 +6444,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 187 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 34,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 34 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 34 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6481,12 +6481,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 29 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 33,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 33 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 33 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6511,12 +6511,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D178&outFields=*&f=json",
    "source_record_id": 178,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 47,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 47 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 47 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6548,12 +6548,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 188 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 33,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 33 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 33 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6585,12 +6585,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 203 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 75,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 75 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 75 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -6625,9 +6625,9 @@
    "water_slug": "calumet-river-il",
    "water_name": "Calumet River",
    "water_kind": "river",
-   "distance_m": 34,
+   "distance_m": 194,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 34 m from the point",
+   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, hand record, NHD high resolution), 194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9050,12 +9050,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 4397,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 4397 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4397 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9124,12 +9124,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 4333,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 4333 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4333 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9154,12 +9154,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D256&outFields=*&f=json",
    "source_record_id": 256,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 4067,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 4067 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4067 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9191,12 +9191,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 4263,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 4263 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4263 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -9486,12 +9486,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 92,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 92 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 92 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -10119,9 +10119,9 @@
    "water_slug": "calumet-river-il",
    "water_name": "Calumet River",
    "water_kind": "river",
-   "distance_m": 8743,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 8743 m from the point",
+   "distance_m": 357,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, hand record, NHD high resolution), 357 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -10156,9 +10156,9 @@
    "water_slug": "calumet-river-il",
    "water_name": "Calumet River",
    "water_kind": "river",
-   "distance_m": 3191,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 3191 m from the point",
+   "distance_m": 155,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, hand record, NHD high resolution), 155 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -10190,12 +10190,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "distance: EPA's point lies 39 m from MWRD's"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 136,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 136 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 136 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11571,12 +11571,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D325&outFields=*&f=json",
    "source_record_id": 325,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 103,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 103 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 103 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11862,12 +11862,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D334&outFields=*&f=json",
    "source_record_id": 334,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 4615,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 4615 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4615 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11899,12 +11899,12 @@
     "receiving_water_echo": "GRAND AND LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 4340,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 4340 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 4340 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -11936,12 +11936,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street and side"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 60,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 60 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 60 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -12041,12 +12041,12 @@
     "receiving_water_echo": "LITTLE CALUMET RIVER",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 93,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 93 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 93 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -12862,12 +12862,12 @@
     "receiving_water_echo": "SUBURBAN CHICAGO AREAS",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 76,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 76 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 76 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -12899,12 +12899,12 @@
     "receiving_water_echo": "SUBURBAN CHICAGO AREAS",
     "paired_by": "name: MWRD's location and EPA's outfall name give the same street"
    },
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 71,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 71 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 71 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -12929,12 +12929,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D367&outFields=*&f=json",
    "source_record_id": 367,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 53,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 53 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 53 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -12959,12 +12959,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D368&outFields=*&f=json",
    "source_record_id": 368,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 75,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 75 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 75 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -14892,9 +14892,9 @@
    "water_slug": "calumet-river-il",
    "water_name": "Calumet River",
    "water_kind": "river",
-   "distance_m": 34,
+   "distance_m": 194,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 34 m from the point",
+   "water_match": "name: its receiving water 'Calumet River' by name; Calumet River (calumet-river-il, hand record, NHD high resolution), 194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -14919,12 +14919,12 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D451&outFields=*&f=json",
    "source_record_id": 451,
    "epa_row": null,
-   "water_slug": "calumet-river-il",
-   "water_name": "Calumet River",
+   "water_slug": "little-calumet-river-il",
+   "water_name": "Little Calumet River",
    "water_kind": "river",
    "distance_m": 68,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Little Calumet River' by name; Calumet River (calumet-river-il, NHDPlus V2.1 record), 68 m from the point",
+   "water_match": "name: its receiving water 'Little Calumet River' by name; Little Calumet River (little-calumet-river-il, hand record, nhd), 68 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   },
   {
@@ -15433,9 +15433,9 @@
    "water_slug": "lake-michigan-il",
    "water_name": "Lake Michigan",
    "water_kind": "lake",
-   "distance_m": 7784,
-   "match": "name_only",
-   "water_match": "name and town: its receiving water 'Lake Michigan' by name and the permittee's town (chicago): the only record of that name there; EPA's point, 7.8 km from it, is not at that water, so the town decides; Lake Michigan (lake-michigan-il, NHDPlus V2.1 record), 7784 m from the point",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Michigan' by name; Lake Michigan (lake-michigan-il, NHDPlus V2.1 record), 0 m from the point; matched at the structure's lake entry (41.732891, -87.529216), the Calumet River's mouth, where a reversal reaches the lake, 10.93 km down the river from the structure",
    "water_matched_by": "ingest.outfall_waters (2026-11-06)"
   }
  ],
