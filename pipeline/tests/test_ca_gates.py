@@ -68,7 +68,7 @@ def test_the_deep_ocean_outfalls_with_epas_sign_dropped_point_take_their_permits
     rows = _rows()
     want = {("plants", "CA0110604", "001"): (33.576667, -118.01), ("plants", "CA0110604", "002"): (33.615556, -117.970278),
             ("plants", "CA0109991", "002"): (33.91197, -118.52145)}
-    assert set(C.MOVE) == set(want)
+    assert set(C.MOVE) == set(want) | set(BAYSIDE_MOVES)
     for key, (lat, lon) in want.items():
         o = rows[key]
         assert (o["lat"], o["lon"]) == (lat, lon) and o["coords_from"] == "permit"
@@ -79,6 +79,27 @@ def test_the_deep_ocean_outfalls_with_epas_sign_dropped_point_take_their_permits
         # the flag on EPA's point is cleared: reaches.py skips a row that carries one (the 78-inch outfall, 1.5 miles
         # out, gets its stretch)
         assert "coords_problem" not in o
+
+
+# review of 2026-11-06, P3-4: Table 2 of Order R2-2013-0029 (NPDES CA0037664), as printed, and EPA's inventory point
+BAYSIDE_MOVES = {("us", "CA0037664", "011"): ((37.811667, -122.43189), (37.80611, -122.38))}
+
+
+def test_laguna_street_takes_table_2s_point_brannan_and_sunnydale_keep_epas():
+    rows = _rows()
+    for key, ((lat, lon), (elat, elon)) in BAYSIDE_MOVES.items():
+        o = rows[key]
+        assert (o["lat"], o["lon"]) == (lat, lon) and o["coords_from"] == "permit"
+        assert (o["epa_lat"], o["epa_lon"]) == (elat, elon)
+        assert o["coords_note"].startswith(C.BAYSIDE) and "EPA's inventory gives" in o["coords_note"]
+        assert C.TABLE[key][0] == C.SFB_SLUG            # the water is unchanged: San Francisco Bay
+    # Brannan Street (019): EPA's point is the 2008 tentative order's (37 47 7 N, 122 23 24 W); Table 2's 122 22 24 W
+    # lies out in the bay. Sunnydale Avenue (043): Table 2 prints Quint Street's point. Neither is moved.
+    for oid in ("019", "043"):
+        o = rows[("us", "CA0037664", oid)]
+        assert ("us", "CA0037664", oid) not in C.MOVE and o["coords_from"] != "permit"
+    assert (rows[("us", "CA0037664", "019")]["lat"], rows[("us", "CA0037664", "019")]["lon"]) == (37.785278, -122.39)
+    assert abs((37 + 47 / 60 + 7 / 3600) - 37.785278) < 1e-6 and abs((122 + 23 / 60 + 24 / 3600) - 122.39) < 1e-9
 
 
 def test_moving_a_row_to_the_permits_point_keeps_epas_point_and_clears_its_flag_and_is_idempotent():

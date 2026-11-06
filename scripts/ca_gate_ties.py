@@ -25,7 +25,14 @@ Orange County Sanitation District's 120-inch and 78-inch outfalls (Order R8-2021
 Hyperion's 5-mile outfall (Order R4-2023-0033, NPDES CA0109991, Table 2); their water stays EPA's 'Pacific Ocean'. The
 permit's point replaces the flagged one, so the row's coords_problem is cleared (reaches and placement skip a row that
 carries one: the 78-inch outfall, 1.5 miles out, gets its shoreline stretch); EPA's figures stay in epa_lat/epa_lon and
-echo_lat/echo_lon (review of 2026-11-06).
+echo_lat/echo_lon (review of 2026-11-06). Laguna Street (011), whose point in EPA's inventory lies about 4.6 km east
+of Table 2's, takes Table 2's (review of 2026-11-06, P3-4). Brannan Street (019) keeps EPA's point (37.785278,
+-122.39, at the shore by Pier 32): it is the point of the Regional Water Board's revised tentative order of January
+2008 for the same permit (37 47 7 N, 122 23 24 W), while Table 2 of the 2013 order prints 122.373333 W (122 22 24),
+about 1.1 km out in the bay, which looks like a slip of one minute. Sunnydale Avenue (043, Candlestick Cove) keeps
+EPA's point: Table 2 prints Quint Street's point for it (37.747222, -122.386944), the 2008 tentative order the same
+(37 44 50 N, 122 23 13 W), and no public record found gives its own (docs/checklists/2026-11-06-ca-bays.md in the
+site repository).
 
 Each row gets receiving_water_override {water, basis}: the name the record carries, so `python -m ingest.outfall_waters
 --state CA` finds that record by name once openboatlaunch's California extract is on file (the state batch's `extract`
@@ -136,6 +143,13 @@ MOVE = {
     ("plants", "CA0109991", "002"): (33.91197, -118.52145, f"{HYPERION}: 33.91197 N, 118.52145 W (the 5-mile "
                                      "outfall's Y-shaped diffuser); EPA's inventory gives the same figures without the longitude's minus "
                                      "sign"),
+    # a Bayside combined sewer discharge outfall whose point in EPA's inventory is not the permit's (review of
+    # 2026-11-06, P3-4): Table 2's point, as printed
+    ("us", "CA0037664", "011"): (37.811667, -122.43189, f"{BAYSIDE}: 37.811667 N, 122.43189 W (discharge point 011, "
+                                 "Laguna Street Outfall, Yacht Harbor #2); EPA's inventory gives 37.80611, -122.38, "
+                                 "about 4.6 km east; the Regional Water Board's revised tentative order of January 2008 "
+                                 "(R2-2008-00XX, the same permit) gave 37 48 22 N, 122 25 53 W, about 0.6 km south, at "
+                                 "the shore"),
 }
 
 
