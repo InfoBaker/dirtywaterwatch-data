@@ -84,3 +84,98 @@ def test_the_washington_hand_specs_name_their_tiger_ids():
     wa = {h["name"]: h for h in N.HAND if h["state"] == "WA"}
     assert {n: h["oids"] for n, h in wa.items()} == {v[0]: [v[1]] for v in HAND.values()}
     assert all(h["service"] == "tiger" and h.get("near") for h in wa.values())
+
+
+def _rows(name):
+    return [o for o in _json(name)["outfalls"] if o.get("state") == "WA"]
+
+
+KC_SEA = ("WA0029181", "WA0031682", "WA0029581")
+
+
+def _gate_ties():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("wa_gate_ties", ROOT / "scripts" / "wa_gate_ties.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_every_king_county_and_seattle_outfall_has_a_record_or_the_operators_water_and_a_reason():
+    """Before the gates, 41 rows of the three permits had no record; now only Seattle's Longfellow Creek outfalls lack
+    one, and they carry the operator's water and why."""
+    from build import status as S
+    waters = S.load_waters()
+    left = []
+    for name in ("outfalls-wa.json", "outfalls-us.json", "outfalls-plants-us.json"):
+        for o in _rows(name):
+            if o["npdes_permit"] not in KC_SEA:
+                continue
+            if o.get("water_slug"):
+                assert S.canon_slug(o["water_slug"]) in waters if hasattr(S, "canon_slug") else o["water_slug"] in waters
+            else:
+                left.append((name, o["outfall"]))
+                assert o["receiving_water_override"]["water"] == "Longfellow Creek"
+                assert "Longfellow Creek" in o["no_water_reason"] and "Overpass" in o["no_water_reason"]
+    assert sorted(left) == sorted([("outfalls-wa.json", x) for x in ("168", "169", "170")]
+                                  + [("outfalls-us.json", x) for x in ("168", "169", "170")])
+
+
+def test_each_hand_tie_cites_the_operators_list_and_the_record_it_names():
+    from build import status as S
+    waters = S.load_waters()
+    mod = _gate_ties()
+    files = {"wa": "outfalls-wa.json", "us": "outfalls-us.json", "plants": "outfalls-plants-us.json"}
+    idx = {(k, o["npdes_permit"], o["outfall"]): o for k, n in files.items() for o in _rows(n)}
+    assert len(mod.TABLE) == 55
+    for key, (slug, water, d, how, basis) in mod.TABLE.items():
+        o = idx[key]
+        assert o["water_slug"] == slug and o["distance_m"] == d and o["water_matched_by"] == mod.BY, key
+        assert o["receiving_water_override"]["water"] == water and o["receiving_water_override"]["basis"].startswith(basis)
+        w = waters[slug]
+        # the override's water is the record's name or alias, so a ties run with the outlines finds it by name
+        assert water.lower() in [str(x).lower() for x in [w["name"]] + list(w.get("aliases") or [])] or key[0] == "plants", key
+        assert ("Ecology's permit" in basis) or ("EPA's inventory" in basis), key
+        assert "no_water_reason" not in o
+
+
+def test_the_census_and_nhd_distances_are_measured_from_the_rows_own_points():
+    from shapely.geometry import shape
+    mod = _gate_ties()
+    recs = {r["slug"]: r for r in _nhd_wa()}
+    files = {"wa": "outfalls-wa.json", "us": "outfalls-us.json", "plants": "outfalls-plants-us.json"}
+    idx = {(k, o["npdes_permit"], o["outfall"]): o for k, n in files.items() for o in _rows(n)}
+    n = 0
+    for key, (slug, water, d, how, basis) in mod.TABLE.items():
+        if how == mod.OBL:
+            continue
+        o = idx[key]
+        got = _dist_m(shape(recs[slug]["geometry"]), o["lat"], o["lon"])
+        assert abs(got - d) <= 5, (key, got, d)
+        n += 1
+    assert n == 15
+
+
+def test_the_old_wrong_ties_are_gone():
+    """King County's Canal Street (007) and 3rd Ave W (008) were tied by EPA's permit-level text to the Duwamish Waterway
+    and Pipers Creek, 7.4 and 5.4 km away; Seattle's 170 to Blackjack Creek in Kitsap County; the South plant's 002A and
+    WAR002511 0P1 to the Black River near Olympia."""
+    for o in _rows("outfalls-us.json") + _rows("outfalls-plants-us.json") + _rows("outfalls-wa.json"):
+        if o["npdes_permit"] in KC_SEA + ("WAR002511",) and o.get("water_slug"):
+            assert o["water_slug"] not in ("pipers-creek-wa", "blackjack-creek-wa", "black-river-wa"), o["outfall"]
+            if (o.get("distance_m") or 0) > 400:      # only a hand tie whose basis says why the point is far
+                assert o["water_matched_by"].startswith("scripts/wa_gate_ties.py"), (o["npdes_permit"], o["outfall"])
+                assert o["outfall"] in ("031", "161"), (o["npdes_permit"], o["outfall"], o["water_slug"], o["distance_m"])
+
+
+def test_the_south_plants_marine_outfall_is_at_the_permits_diffuser_with_epas_point_kept():
+    for o in _rows("outfalls-plants-us.json"):
+        if o["npdes_permit"] == "WA0029581" and o["outfall"] in ("001", "001A"):
+            assert (o["lat"], o["lon"]) == (47.602778, -122.429) and o["coords_from"] == "permit"
+            assert (o["epa_lat"], o["epa_lon"]) == (47.471111, -122.296112)
+            assert "S1.A" in o["coords_note"] and o["water_slug"] == "puget-sound-wa"
+
+
+def test_the_gate_ties_script_finds_the_files_as_its_table_says():
+    mod = _gate_ties()
+    assert mod.main(["--check"]) == 0
