@@ -2201,7 +2201,7 @@ def public_record(r: dict) -> dict:
             "launches", "advisories", "aliases", "source", "gnis_id", "comids", "nhd_fcodes", "fetched_at",
             "towns_from", "note"]
     out = {k: r.get(k) for k in keys}
-    for k in ("fallback_for", "osm", "osm_timestamp", "covers_part_of", "hand", "reachcodes", "tiger_ids"):
+    for k in ("fallback_for", "osm", "osm_timestamp", "covers_part_of", "hand", "reachcodes", "tiger_ids", "nhdplus_gnis_id"):
         if r.get(k) is not None:
             out[k] = r[k]
     out["targets"] = r.get("_targets_n", 0)
@@ -2781,6 +2781,32 @@ HAND: list[dict] = [
          why=("MWRD's CSO Points layer puts Lemont's Stephen Street outfall (IL0039551) in its 'I & M Canal' reach and EPA's "
               "CSO inventory names the Illinois and Michigan Canal for Lemont's outfalls 001 and 002. NHDPlus V2.1 has no "
               "flowline of that name; the USGS NHD high-resolution flowlines carry the canal at Lemont as GNIS 425678.")),
+    # 2026-11-06 (Illinois's final audit, review 2026-11-06 P2-7, docs/checklists/2026-11-06-il-final.md in the site
+    # repository): NHDPlus V2.1 puts the Calumet River's GNIS id (405379) on the Little Calumet River from the Indiana line
+    # to Blue Island, and has none of the Calumet River itself; the NHD high-resolution flowlines carry the Calumet River
+    # under that id from its junction with the Little Calumet through O'Brien Lock to Lake Michigan, and leave the
+    # Little Calumet in Illinois unnamed. The lower river takes the id and the plain slug; the NHDPlus flowlines are the
+    # Little Calumet River's record, by their COMIDs.
+    dict(name="Calumet River", state="IL", kind="river", source="nhd", service="hr", gnis_id="405379", supersede=True,
+         why=("MWRD's CSO Points layer puts its own outfalls 151 and 152 (IL0028061) and Chicago's 206 and CDS-20 in its 'Cal R' "
+              "reach, and O'Brien Lock and Dam, one of MWRD's three structures that let the waterways back into Lake "
+              "Michigan (its reversals table), stands on this river. The USGS NHD high-resolution flowlines carry the "
+              "Calumet River as GNIS 405379 (6 flowlines, about 12.4 km, reach codes 07120003003394, 07120003012108, "
+              "04040001048321 and 04040001000637) from its junction with the Little Calumet River at Hegewisch "
+              "(41.6434 N, 87.5614 W) through the lock (41.6547 N, 87.5694 W) to its mouth at Calumet Harbor (41.7329 N, "
+              "87.5292 W); NHDPlus V2.1 has none of it and gives the id to the Little Calumet River instead (the "
+              "Little Calumet River's hand record).")),
+    dict(name="Little Calumet River", state="IL", kind="river", source="nhd", gnis_id="405379",
+         gnis_not_its_own=("NHDPlus names these flowlines 'Calumet River' (GNIS 405379, reach codes 07120003000061 and "
+                           "07120003000188, in the Little Calumet-Galien basin), while the USGS NHD high-resolution "
+                           "flowlines give GNIS 405379 to the Calumet River from Hegewisch to Lake Michigan (the "
+                           "Calumet River's hand record) and leave this stretch unnamed."),
+         why=("EPA's CSO inventory gives 'Little Calumet River' as the receiving water of Chicago's (IL0045012), Riverdale's "
+              "(ILM580007), Dolton's (ILM580017) and MWRD's Calumet plant's (IL0028061) outfalls along this stretch, and MWRD's CSO Points layer puts "
+              "them in its 'Little Cal R (North)' and 'Little Cal R (South)' reaches. This is the river from the Indiana "
+              "line (the USGS NHD high-resolution 'Little Calumet River', GNIS 424126, upstream in Indiana) west past "
+              "its junction with the Calumet River at Hegewisch to Blue Island, as NHDPlus V2.1 draws it (6 network "
+              "flowlines).")),
     # 2026-11-06 (California's bays, docs/checklists/2026-11-06-ca-bays.md in the site repository): the northern arms of
     # San Francisco Bay that EPA's inventory and the State Water Board's spill reports name and that neither
     # openboatlaunch (its san-francisco-bay-ca is the central and south bay) nor NHDPlus V2.1 nor the NHD high-resolution
@@ -2965,6 +2991,12 @@ def build_hand(spec: dict, nhd: Nhd, http: Http) -> tuple[dict | None, str]:
         rec["reachcodes"] = sorted({str(f["reachcode"]) for f in fs if f.get("reachcode")})
         rec["kind"] = spec.get("kind") or rec["kind"]
         rec["note"] += f" (reach codes {', '.join(rec['reachcodes'])}). Hand record: {spec['why']}"
+        if spec.get("gnis_not_its_own"):
+            # NHDPlus gives the flowlines another water's GNIS id (2026-11-06: GNIS 405379, the Calumet River, on the
+            # Little Calumet River in Illinois): the id stays on the record as NHDPlus's (nhdplus_gnis_id), not as the
+            # water's own, so the record is one feature by its COMIDs and the water that owns the id keeps it
+            rec["nhdplus_gnis_id"], rec["gnis_id"] = rec.get("gnis_id"), None
+            rec["note"] += f" NHDPlus V2.1's GNIS id is not this water's own: {spec['gnis_not_its_own']}"
         geom = rec["_geom"]
     else:
         els = overpass_ways(http, spec["ways"])
@@ -3422,6 +3454,12 @@ class Run:
                 self.problems.append(problem)
                 continue
             inherited = []
+            # names another hand record of the state carries (its name or an alias): a row of such a name is that
+            # record's, never inherited from the record this one replaces (2026-11-06: NHDPlus's Calumet River
+            # record held the Little Calumet River's targets; the Little Calumet River's hand record takes them)
+            claimed = {compact(n) for h in HAND if h is not spec and h["state"] == spec["state"]
+                       for n in [h["name"]] + list(h.get("aliases") or [])}
+            t_names = {id(row): [t["name"] or ""] + list(t["names"]) for t, row in targets}
             if spec.get("supersede"):
                 # the record this run built by the automatic pass for the same water is replaced: its targets
                 # go to the hand record (by name below, and the rest by their row), its aliases are kept, and the
@@ -3429,6 +3467,10 @@ class Run:
                 for k, r in auto:
                     for row in r["_targets"]:
                         row["_recs"] = [x for x in row["_recs"] if x is not r]
+                        if any(compact(n) in claimed for n in t_names.get(id(row), [])):
+                            row["how"].append(f"NHDPlus V2.1 record (GNIS {r.get('gnis_id')}) left to the hand "
+                                              f"record that carries this name")
+                            continue
                         row["how"].append(f"hand record replaces the NHDPlus V2.1 record (GNIS {r.get('gnis_id')}, "
                                           f"{r.get('length_km')} km)")
                         inherited.append(row)
