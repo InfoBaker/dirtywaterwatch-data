@@ -143,3 +143,23 @@ def test_once_openboatlaunchs_bay_record_is_on_file_the_permits_water_finds_it_b
     r = S.Resolver(waters, [], placement_rules={})
     assert r.by_name("San Francisco Bay", "CA", None, None)[0] == ["san-francisco-bay-ca"]
     assert r.by_name("Pacific Ocean", "CA", None, None)[0] == ["pacific-ocean-ca"]
+
+
+def test_the_oceanwell_test_vessel_is_held_back_as_no_sewage_plant_by_its_epa_record():
+    """CA final audit (2026-11-06): CA0000018 entered the plants file by its POTW component, but EPA's record classes it
+    NON-POTW with no sewerage code, and its limit sets are brine and freshwater outfalls of six test sites."""
+    import ast
+    import common
+    root = Path(__file__).resolve().parents[2]
+    doc = json.loads((root / "data" / "outfalls-plants-us.json").read_text())
+    assert not [r for r in doc["outfalls"] if r.get("npdes_permit") == "CA0000018"]
+    ex = [x for x in doc["excluded_not_sewage"] if x["npdes_permit"] == "CA0000018"]
+    assert len(ex) == 1 and ex[0]["reason"] == "not_a_sewage_plant" and ex[0]["facility_type"] == "NON-POTW"
+    assert "NON-POTW" in ex[0]["basis"] and "BRINE OUTFALL" in ex[0]["basis"] and "ECHO" in ex[0]["basis"]
+    assert doc["counts"]["excluded_not_sewage"]["not_a_sewage_plant"] == 1
+    assert doc["count"] == len(doc["outfalls"]) == sum(doc["counts"]["by_state"].values())
+    assert not [r for r in common.load_outfall_registry(provisional=False) if r.get("npdes_permit") == "CA0000018"]
+    src = (root / "research" / "federal" / "build_plant_outfalls.py").read_text()   # a rebuild holds it back too
+    hand = next(ast.literal_eval(n.value) for n in ast.parse(src).body if isinstance(n, ast.Assign)
+                and getattr(n.targets[0], "id", None) == "HAND_NOT_SEWAGE")
+    assert hand["CA0000018"] == ex[0]["basis"]
