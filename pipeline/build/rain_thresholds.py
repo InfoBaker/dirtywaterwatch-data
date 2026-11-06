@@ -1,6 +1,7 @@
 """Rainfall thresholds for the "discharge likely; no report received" caution (docs/rain-likely.md).
 
     python -m build.rain_thresholds [--offline] [--min-days 10]
+    python -m build.rain_thresholds --radar MI GA [--budget 1200] [--events MI=path.json]   (one-off, by hand)
 
 From the Massachusetts sewage notification records (data/build/events/ma-massdep.json), for each
 permittee and, where the data allow, each outfall: the rainfall at which discharges have
@@ -32,6 +33,17 @@ Writes data/build/rain-thresholds.json ({built, method, fallbacks, permits: {per
 data/build/rain-thresholds.md (what the data show for Springfield, Holyoke and Chicopee).
 Every CSO permittee with outfalls in the registries gets a row: history where there is enough,
 the published fallback otherwise.
+
+Georgia and Michigan (--radar, 2026-11-06): their lists carry no rainfall figure that reads as a 24-hour total
+(Michigan's precipitationAmount is the operator's figure for the event, often a storm total; Georgia's list has
+none), so an operator's amount is the 10th percentile of the MRMS daily radar total at its median outfall point on
+the days its reported combined sewer discharges began (the larger of that day's total and the day before's:
+day_radar), from 2015, the first full year of the operational MRMS product (RADAR_FIRST_DAY; Michigan: CSO and RTB
+discharges on the EGLE MiEnviro list, read back to 2001; Georgia: the combined sewer permits' reports on the EPD
+spills list), with the same 10-day minimum. The point service
+is asked once per point and year within a request budget (a refusal stops the run and nothing is written), and the
+result is data/rain-thresholds-radar.json, tracked in git; build() lays it over the fallback rows every hour
+(merge_radar), never over an operator's own reported rainfall.
 """
 from __future__ import annotations
 
@@ -211,9 +223,45 @@ def fallback_for(state: str | None, rules: dict) -> dict:
 
 # ---------------------------------------------------------------- MRMS daily history (IEM)
 
-def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, session=None) -> dict[date, float]:
+class BudgetSpent(Exception):
+    """The run's request budget for the point service is used up (a rerun continues from the cache)."""
+
+
+class ServiceRefused(Exception):
+    """The point service refused (403, 429, 5xx) or failed IEM_MAX_FAILURES times in a row: stop asking."""
+
+
+class RequestBudget:
+    """At most `limit` requests to the point service in one run; counts what was asked."""
+
+    def __init__(self, limit: int):
+        self.limit, self.used, self.failures_in_a_row, self.failures = limit, 0, 0, 0
+
+    def take(self) -> None:
+        if self.used >= self.limit:
+            raise BudgetSpent(f"{self.used} of {self.limit} point-service requests used")
+        self.used += 1
+
+
+IEM_MAX_FAILURES = 3
+IEM_KEEP = ("date", "mrms_precip_in", "prism_precip_in")
+
+
+def compact_iem(text: str, url: str, fetched_at: str) -> str:
+    """The point service's answer cut to what is read back (the day, MRMS and PRISM daily inches): a year at a
+    point is about 20 KB instead of 140 KB, so the cache that travels with the pipeline state stays small."""
+    d = json.loads(text)
+    rows = [{k: r.get(k) for k in IEM_KEEP} for r in (d or {}).get("data") or [] if isinstance(r, dict)]
+    return json.dumps({"source": url, "fetched_at": fetched_at, "data": rows}, separators=(",", ":"))
+
+
+def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, session=None,
+              budget: RequestBudget | None = None) -> dict[date, float]:
     """{date: MRMS daily inches} at the point; per-year files cached in data/raw/iem-iemre/, the
-    current year refetched when older than a day. Missing values are left out."""
+    current year refetched when older than a day. Missing values are left out. With a budget (the
+    one-off radar thresholds, radar_build): every request counts against it (BudgetSpent when it is
+    used up), and a refusal (HTTP 403, 429 or 5xx) or IEM_MAX_FAILURES failures in a row raise
+    ServiceRefused instead of being printed and passed over."""
     import requests
     IEM_DIR.mkdir(parents=True, exist_ok=True)
     this_year = datetime.now(UTC).year
@@ -225,14 +273,34 @@ def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, s
             d1 = date(y, 1, 1)
             d2 = min(date(y, 12, 31), datetime.now(UTC).date() - timedelta(days=1))
             session = session or requests.Session()
+            if budget is not None:
+                budget.take()
+            url = IEM_URL.format(d1=d1, d2=d2, lat=lat, lon=lon)
             try:
-                resp = session.get(IEM_URL.format(d1=d1, d2=d2, lat=lat, lon=lon), headers=HEADERS, timeout=90)
+                resp = session.get(url, headers=HEADERS, timeout=90)
+                code = getattr(resp, "status_code", 200)
+                if budget is not None and (code in (403, 429) or code >= 500):
+                    raise ServiceRefused(f"IEM {lat:.2f},{lon:.2f} {y}: HTTP {code}")
                 resp.raise_for_status()
-                p.write_text(resp.text)
+                tmp = p.with_suffix(".part")      # a full disk or a stop mid-write never leaves half a file
+                tmp.write_text(compact_iem(resp.text, url, now_iso()))
+                tmp.replace(p)
+                if budget is not None:
+                    budget.failures_in_a_row = 0
+            except ServiceRefused:
+                raise
             except Exception as e:  # noqa: BLE001  the cached copy (if any) still serves
                 print(f"rain_thresholds: IEM {lat:.2f},{lon:.2f} {y}: {type(e).__name__}: {e}")
+                if budget is not None:
+                    budget.failures_in_a_row += 1
+                    budget.failures += 1
+                    if budget.failures_in_a_row >= IEM_MAX_FAILURES:
+                        raise ServiceRefused(f"{IEM_MAX_FAILURES} failures in a row, the last: {type(e).__name__}: {e}") from e
             time.sleep(IEM_PAUSE_S)
-        d = read_json(p, {}) if p.exists() else {}
+        try:
+            d = read_json(p, {}) if p.exists() else {}
+        except ValueError:          # an unreadable cached file is no answer (the next run asks again)
+            d = {}
         for row in (d or {}).get("data") or []:
             v = row.get("mrms_precip_in")
             if v is None:
@@ -265,6 +333,246 @@ def centroid(points) -> tuple[float, float] | None:
     if not points:
         return None
     return (round(statistics.median(p[0] for p in points), 2), round(statistics.median(p[1] for p in points), 2))
+
+
+# ---------------------------------------------------------------- radar on reported discharge days (GA, MI)
+#
+# Where the operators' notices carry no rainfall figure that can be read as a 24-hour total (Michigan's
+# precipitationAmount is the operator's figure for the event, often the storm total: used directly as a radar trigger
+# it kept only 82 percent of overflow days; Georgia's list has none), the operator's amount is read from the radar
+# itself: the NOAA MRMS daily total at the operator's outfalls on each day one of its combined sewer discharges began,
+# and its 10th percentile, as for Massachusetts, when at least MIN_DAYS such days had radar rain. The point service is
+# asked once per point and year (one-off, by hand: `python -m build.rain_thresholds --radar MI GA`, about 600
+# requests); the result is data/rain-thresholds-radar.json, tracked in git, which build() merges into
+# data/build/rain-thresholds.json every hour without asking the service again.
+
+RADAR_FILE = DATA_DIR / "rain-thresholds-radar.json"
+RADAR_BUDGET = 1200
+RADAR_STATES = {
+    "MI": {"events": "mi-egle-mienviro-cso-sso-list", "types": ("cso",), "list": "EGLE MiEnviro list",
+           "authority": "Michigan EGLE, MiEnviro CSO/SSO List",
+           "what": "combined sewer overflow (CSO) and retention treatment basin (RTB) discharges, as the list classes "
+                   "them (an RTB discharge is combined sewage given partial treatment before it overflows)"},
+    # Georgia's list holds spills (blockages, breaks, pump stations; its few "CSO Dry-weather" rows are dry-weather
+    # too): rain does not drive them, as a Massachusetts sanitary sewer overflow gives no sample, so they are counted
+    # and listed but never read against the radar (sample False) and give no operator a trigger (review 2026-11-06).
+    "GA": {"events": "ga-epd-spills", "types": ("cso", "sso"), "list": "EPD spills list", "sample": False,
+           "no_sample_why": "the list records spills, not wet-weather combined sewer discharges: the radar was not read",
+           "authority": "Georgia EPD, Municipal Sewage Spills Reported to EPD",
+           "what": "every spill the list gives under a combined sewer permit (the list holds spills of raw sewage; "
+                   "permitted wet-weather discharges at combined sewer outfalls are not spills and are not on it)"},
+}
+RADAR_SOURCE = ("{authority} (combined sewer discharges that began {y0} to {y1}); NOAA MRMS daily rainfall at the operator's "
+                "outfalls, via the Iowa Environmental Mesonet")
+RADAR_POINT_NOTE = ("the median of the operator's registered combined sewer outfall points (data/outfalls-*.json), to "
+                    "0.01 degree, as for Massachusetts")
+TRACE_IN = 0.01            # a radar total under this is no radar rain that day: counted, not a sample
+# The first day read: the first full year of the operational MRMS product (NCEP, from October 2014). The point
+# service also answers for 2001 to 2014, but on the same operators' discharge days those years read far lower (St.
+# Joseph's 10th percentile 0.16 inch in 2001 to 2014 against 0.55 from 2015; Southgate-Wyandotte 0.07 against 0.33;
+# the 26 Michigan operators pooled 0.08 against 0.20) while the operators' own figures read the same in both periods,
+# so they are not a like-for-like record of the radar the live check reads.
+RADAR_FIRST_DAY = date(2015, 1, 1)
+
+
+def permits_by_discharger(rows: list[dict] | None = None) -> dict[str, list[str]]:
+    """{discharger id: [npdes permits]} from data/dischargers.json, to place a report filed without a permit (the
+    Great Lakes Water Authority files its first notices under its name) on its operator's permit."""
+    if rows is None:
+        d = read_json(DATA_DIR / "dischargers.json") or {}
+        rows = d.get("dischargers", d) if isinstance(d, dict) else d
+    out: dict[str, list[str]] = {}
+    for r in rows if isinstance(rows, list) else []:
+        for p in [r.get("npdes_permit")] + list(r.get("npdes_permits") or []):
+            if p and r.get("id") and p not in out.setdefault(r["id"], []):
+                out[r["id"]].append(p)
+    return out
+
+
+def record_permit(r: dict, by_discharger: dict[str, list[str]]) -> str | None:
+    """The record's permit; for a report filed with none, its operator's only permit (never a guess between two)."""
+    if r.get("npdes_permit"):
+        return r["npdes_permit"]
+    ps = by_discharger.get(r.get("discharger_id") or "") or []
+    return ps[0] if len(ps) == 1 else None
+
+
+def radar_discharge_days(records: list[dict], state: str, types, by_discharger: dict[str, list[str]],
+                         today: date, since: date | None = None) -> dict[str, dict[date, set]]:
+    """{permit: {start day: {outfall keys}}}: the local days on which a discharge of the given types of the state's
+    permits began, as the source gives the day (its own offset), from `since` on. A copy (duplicate_of) is not a
+    second discharge; a start on or after today is not a whole day yet. Pure."""
+    out: dict[str, dict[date, set]] = {}
+    for r in records:
+        if r.get("event_type") not in types or r.get("duplicate_of"):
+            continue
+        permit = record_permit(r, by_discharger)
+        if not permit or not permit.upper().startswith(state):
+            continue
+        try:
+            d0 = date.fromisoformat(str(r.get("started_at") or "")[:10])
+        except ValueError:
+            continue
+        if d0 >= today or (since and d0 < since):
+            continue
+        out.setdefault(permit, {}).setdefault(d0, set()).add(outfall_key(r.get("outfall_id")))
+    return out
+
+
+def day_radar(series: dict[date, float], d: date) -> float | None:
+    """The radar's reading for a discharge that began on day d: the larger of that day's total and the day before's.
+    The live check compares a rolling 24-hour total, read every hour, and keeps the caution 48 hours after it falls
+    below the amount; a discharge that begins in the small hours after an evening storm has little rain on its own
+    calendar day (and the service's days run midnight to midnight Chicago time), so the day alone would
+    understate the rain the live check saw before the discharge. None when the day itself has no value."""
+    v = series.get(d)
+    if v is None:
+        return None
+    return max(v, series.get(d - timedelta(days=1)) or 0.0)
+
+
+def radar_sample(days, series: dict[date, float]) -> dict:
+    """The radar reading for each discharge day (day_radar): a sample when it is TRACE_IN or more, a no-rain day
+    under it (snowmelt or a dry-weather discharge: counted, not a sample, as a reported 0.00 is in Massachusetts),
+    missing when the series has no value for the day. Pure."""
+    values, zero, missing, sampled = [], [], [], []
+    for d in sorted(days):
+        v = day_radar(series, d)
+        if v is None:
+            missing.append(d)
+        elif v < TRACE_IN:
+            zero.append(d)
+        else:
+            values.append(v)
+            sampled.append(d)
+    return {"values": sorted(values), "zero_days": zero, "missing_days": missing, "sampled_days": sampled}
+
+
+def radar_row(permit: str, name: str | None, state: str, days, series: dict[date, float], min_days: int,
+              point: tuple[float, float] | None, n_points: int) -> dict:
+    """One operator's row of data/rain-thresholds-radar.json: its threshold (the 10th percentile of the radar on its
+    discharge days, when at least min_days had radar rain), the counts behind it, the dates spanned. Pure."""
+    spec = RADAR_STATES[state]
+    smp = radar_sample(days, series)
+    vs = smp["values"]
+    thr = threshold_from(vs, min_days) if spec.get("sample", True) else None
+    sd = smp["sampled_days"]
+    row = {"permit": permit, "name": name, "state": state, "has_cso_outfalls": True, "per_24h": True,
+           "compare_to": "the NOAA MRMS radar-only 24-hour total at any of the permittee's outfalls",
+           "n_start_days": len(days), "n_discharge_days": len(vs), "n_no_radar_rain_days": len(smp["zero_days"]),
+           "n_no_radar_value_days": len(smp["missing_days"]),
+           "since": sd[0].isoformat() if sd else None, "until": sd[-1].isoformat() if sd else None,
+           "p5": percentile(vs, 0.05), "p10": percentile(vs, 0.10), "p25": percentile(vs, 0.25),
+           "p50": percentile(vs, 0.50), "p90": percentile(vs, 0.90),
+           "under_0_1_in": sum(1 for v in vs if v < 0.1),
+           "share_under_0_1_in": round(sum(1 for v in vs if v < 0.1) / len(vs), 3) if vs else None,
+           "point": list(point) if point else None, "n_outfall_points": n_points,
+           "point_basis": RADAR_POINT_NOTE, "threshold_method": "radar_on_discharge_days"}
+    if thr is not None:
+        src = RADAR_SOURCE.format(authority=spec["authority"], y0=sd[0].year, y1=sd[-1].year)
+        row.update(threshold_in=thr, basis="history", rule="rain_likely.percentile", threshold_kind="operator_history",
+                   basis_text=(f"10th percentile of the NOAA MRMS daily rainfall at the operator's outfalls on the "
+                               f"{len(vs)} days its reported discharges began with radar rain ({sd[0]:%b %Y} to "
+                               f"{sd[-1]:%b %Y}; the larger of that day's total and the day before's): nine "
+                               f"discharge days in ten had more rain"),
+                   source=src)
+    else:
+        why = (spec["no_sample_why"] if spec.get("sample") is False else
+               f"{len(vs)} discharge days with radar rain (fewer than {min_days})" if series else
+               f"{len(days)} discharge days (fewer than {min_days}): the radar was not read")
+        row.update(threshold_in=None, basis=None, why_fallback=why)
+    return row
+
+
+def radar_build(states=("MI", "GA"), budget: int = RADAR_BUDGET, min_days: int = MIN_DAYS, offline: bool = False,
+                events: dict[str, Path] | None = None, today: date | None = None, write: bool = True,
+                since: date | None = RADAR_FIRST_DAY) -> dict:
+    """Read each state's records (data/build/events/<source>.json, or events[state]), ask the point service for the
+    years of each operator's discharge days at its median outfall point (the operators with the most discharge days
+    first, within the budget), and write RADAR_FILE. Operators with no registered combined sewer outfall are listed,
+    not read: the caution has no point for them. Raises ServiceRefused or BudgetSpent (nothing written; the cache
+    keeps what was read)."""
+    today = today or datetime.now(UTC).date()
+    reg = cso_permittees()
+    by_dis = permits_by_discharger()
+    names = {p: (v or {}).get("name") for p, v in _discharger_names().items()}
+    bud = RequestBudget(budget)
+    out = {"built": now_iso(), "today": today.isoformat(), "min_days": min_days, "percentile": PERCENTILE,
+           "since": since.isoformat() if since else None,
+           "method": ("threshold_in = the 10th percentile of the NOAA MRMS daily radar total (Iowa Environmental Mesonet "
+                      "point service) at the operator's median outfall point on the days its reported combined sewer "
+                      "discharges began (the larger of that day's total and the day before's), from `since` (the "
+                      "first full year of the operational MRMS product), when at least min_days of those days had "
+                      "radar rain (0.01 inch or more); days under 0.01 inch are counted, not sampled. Merged into "
+                      "data/build/rain-thresholds.json every hour by build()."),
+           "radar_source": "NOAA MRMS daily totals via the Iowa Environmental Mesonet reanalysis point service "
+                           "(mesonet.agron.iastate.edu/iemre): America/Chicago calendar days, summed from MRMS hourly "
+                           "totals (gauge-corrected GaugeCorr_QPE_01H to October 2020 and MultiSensor_QPE_01H_Pass2 after, "
+                           "radar-only RadarOnly_QPE_01H where those are missing, as in early 2015)",
+           "states": {}, "permits": {}, "not_registered": {}}
+    plan = []
+    for st in states:
+        spec = RADAR_STATES[st]
+        path = (events or {}).get(st) or EVENTS_DIR / f"{spec['events']}.json"
+        ev = read_json(Path(path), {}) or {}
+        recs = ev.get("records") or []
+        days = radar_discharge_days(recs, st, spec["types"], by_dis, today, since)
+        cso_days = days if spec["types"] == ("cso",) else radar_discharge_days(recs, st, ("cso",), by_dis, today, since)
+        starts = [d for dd in days.values() for d in dd]
+        out["states"][st] = {"authority": spec["authority"], "what": spec["what"], "records_file": Path(path).name,
+                             "records_fetched_at": ev.get("fetched_at"), "records": len(recs),
+                             "first_day": min(starts).isoformat() if starts else None,
+                             "last_day": max(starts).isoformat() if starts else None}
+        for permit, dd in days.items():
+            if permit in reg:
+                plan.append((st, permit, dd))
+        # combined sewer discharges of a permit with no registered combined sewer outfall: listed, not read
+        for permit, dd in cso_days.items():
+            if permit not in reg:
+                out["not_registered"][permit] = {"state": st, "name": names.get(permit), "n_start_days": len(dd)}
+    plan.sort(key=lambda x: (-len(x[2]), x[1]))
+    for st, permit, dd in plan:
+        g = reg[permit]
+        c = centroid(g["points"])
+        series = {}
+        if c and len(dd) >= min_days and RADAR_STATES[st].get("sample", True):
+            years = sorted({d.year for d in dd} | {(d - timedelta(days=1)).year for d in dd})
+            series = iem_daily(c[0], c[1], years, offline=offline, budget=bud)
+        npts = len({(round(a, 2), round(b, 2)) for a, b in g["points"]})
+        out["permits"][permit] = radar_row(permit, names.get(permit) or g.get("name"), st, dd, series, min_days, c, npts)
+    for st in states:
+        rows = [r for r in out["permits"].values() if r["state"] == st]
+        out["states"][st].update(operators=len(rows), with_threshold=sum(1 for r in rows if r["threshold_in"] is not None))
+    if bud.failures:     # a year left unread would leave its discharge days out silently (review 2026-11-06)
+        raise ServiceRefused(f"{bud.failures} point-service request(s) failed; a rerun asks again for the years not cached")
+    out["requests"] = bud.used
+    out["count"] = len(out["permits"])
+    out["with_threshold"] = sum(1 for r in out["permits"].values() if r["threshold_in"] is not None)
+    if write:
+        write_json(RADAR_FILE, out)
+    return out
+
+
+def _discharger_names() -> dict[str, dict]:
+    from build.rain_likely import discharger_index
+    return discharger_index()
+
+
+def merge_radar(permits: dict[str, dict], radar: dict, reg: dict, rules: dict) -> int:
+    """Lay the radar thresholds (RADAR_FILE) over the hourly rows: an operator with a threshold of its own from the
+    radar takes it, unless its own reported rainfall already gives one (Massachusetts). Returns how many were laid."""
+    n = 0
+    for permit, r in ((radar or {}).get("permits") or {}).items():
+        if (permits.get(permit) or {}).get("basis") == "history":
+            continue
+        if r.get("threshold_in") is None:     # the fallback stays; say why from the radar file (review 2026-11-06)
+            if permit in permits and r.get("why_fallback"):
+                permits[permit]["why_fallback"] = r["why_fallback"]
+            continue
+        fb = fallback_for(r.get("state") or permit[:2], rules)
+        permits[permit] = {**r, "has_cso_outfalls": permit in reg, "fallback_in": fb["threshold_in"]}
+        n += 1
+    return n
 
 
 # ---------------------------------------------------------------- build
@@ -363,15 +671,19 @@ def build(offline: bool = False, min_days: int = MIN_DAYS, today: date | None = 
                     "share_of_those_with_a_discharge": round(len(above_dis) / len(above), 3) if above else None,
                 }
         permits[permit] = row
+    n_radar = merge_radar(permits, read_json(RADAR_FILE, {}) or {}, reg, rules)
     out = {
         "built": now_iso(), "today": today.isoformat(), "min_days": min_days, "percentile": PERCENTILE,
         "method": ("threshold_in = the 10th percentile of the rainfall the permittee reported on its discharge days "
                    "(the smallest positive figure on each day, CSO, blended and bypass reports), when at least "
                    f"{min_days} days have one; else the published fallback for the state (data/rules.json "
-                   "rain_likely.fallback). Compared with the MRMS 24-hour total at the permittee's outfalls."),
+                   "rain_likely.fallback). Compared with the MRMS 24-hour total at the permittee's outfalls. "
+                   "Georgia and Michigan operators: the 10th percentile of the MRMS daily radar total on their reported "
+                   "discharge days (data/rain-thresholds-radar.json, built by --radar)."),
         "source": "MassDEP Sewage Notification Data System, via the EEA Data Portal (Verified Data Reports)",
         "fallbacks": (rules.get("rain_likely") or {}).get("fallback"),
         "count": len(permits), "with_history": sum(1 for r in permits.values() if r["basis"] == "history"),
+        "with_radar_history": n_radar,
         "permits": permits,
     }
     if write:
@@ -440,13 +752,49 @@ def summary_md(d: dict) -> str:
     return "\n".join(lines)
 
 
+def radar_table(d: dict) -> str:
+    """The radar thresholds as a Markdown table (operator, discharge days, dates, 10th and 5th percentiles, the share
+    of days under 0.1 inch), the operators with their own figure first."""
+    lines = ["| Operator (permit) | Discharge days with radar rain (of start days) | Dates | 10th pct (in) | "
+             "5th pct (in) | Under 0.1 in | Trigger |", "|---|---:|---|---:|---:|---:|---|"]
+    rows = sorted((d.get("permits") or {}).values(),
+                  key=lambda r: (r["state"], r["threshold_in"] is None, -r["n_discharge_days"], r["permit"]))
+    for r in rows:
+        dates = f"{r['since']} to {r['until']}" if r.get("since") else "n/a"
+        share = f"{r['under_0_1_in']} ({100 * r['share_under_0_1_in']:.0f}%)" if r.get("share_under_0_1_in") is not None else "n/a"
+        p10 = f"{r['p10']:.2f}" if r.get("p10") is not None else "n/a"
+        p5 = f"{r['p5']:.2f}" if r.get("p5") is not None else "n/a"
+        trig = f"own, {r['threshold_in']:.2f} in" if r.get("threshold_in") is not None else "state or default"
+        lines.append(f"| {r.get('name') or r['permit']} ({r['permit']}) | {r['n_discharge_days']} ({r['n_start_days']}) | "
+                     f"{dates} | {p10} | {p5} | {share} | {trig} |")
+    return "\n".join(lines)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--offline", action="store_true", help="use only the cached MRMS daily history")
     ap.add_argument("--min-days", type=int, default=MIN_DAYS)
+    ap.add_argument("--radar", nargs="+", metavar="STATE", choices=sorted(RADAR_STATES),
+                    help="build data/rain-thresholds-radar.json for these states (one-off; asks the point service)")
+    ap.add_argument("--budget", type=int, default=RADAR_BUDGET, help="with --radar: the most point-service requests")
+    ap.add_argument("--events", action="append", default=[], metavar="STATE=PATH",
+                    help="with --radar: read this state's records from PATH instead of data/build/events/")
     a = ap.parse_args()
+    if a.radar:
+        events = dict(e.split("=", 1) for e in a.events)
+        try:
+            d = radar_build(a.radar, budget=a.budget, min_days=a.min_days, offline=a.offline,
+                            events={k.upper(): Path(v) for k, v in events.items()})
+        except (BudgetSpent, ServiceRefused) as e:
+            print(f"rain_thresholds --radar: stopped, nothing written: {type(e).__name__}: {e}")
+            raise SystemExit(2) from e
+        print(f"rain_thresholds --radar: {d['count']} operators, {d['with_threshold']} with their own threshold, "
+              f"{d['requests']} point-service requests -> {RADAR_FILE}")
+        print(radar_table(d))
+        return
     d = build(offline=a.offline, min_days=a.min_days)
-    print(f"rain_thresholds: {d['count']} permittees, {d['with_history']} with their own history -> {OUT_JSON}")
+    print(f"rain_thresholds: {d['count']} permittees, {d['with_history']} with their own history "
+          f"({d['with_radar_history']} from the radar) -> {OUT_JSON}")
     for p, name in FOCUS.items():
         r = d["permits"].get(p) or {}
         print(f"  {name} {p}: threshold {r.get('threshold_in')} in ({r.get('basis')}), n={r.get('n_discharge_days')}, "

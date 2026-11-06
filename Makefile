@@ -68,6 +68,9 @@
 #                  "discharge likely; no report received" caution (docs/rain-likely.md)
 #   make rain-thresholds  per-permittee rainfall thresholds from the MassDEP reports
 #                  (build/rain_thresholds.py -> data/build/rain-thresholds.json; run by make build)
+#   make rain-thresholds-radar  Georgia and Michigan operators' amounts from the radar on their discharge days
+#                  (one-off, by hand, after the states' backfills: about 600 point-service requests ->
+#                  data/rain-thresholds-radar.json, tracked in git and merged by make build)
 #   make provisional-outfalls  places where operators' own reports put an overflow, for operators with no
 #                  official outfall point (build/provisional_outfalls.py -> data/build/outfalls-reported.json;
 #                  docs/national-outfalls.md): clustered per operator (50 m), superseded by a registry outfall
@@ -97,7 +100,7 @@
 # Until `make setup` has run, the openboatlaunch venv next door is used; `make test` uses it too
 # while pipeline/.venv has no pytest (`make setup` installs it).
 
-.PHONY: setup ingest waters-nhd conditions rainfall rain-thresholds provisional-outfalls reaches fixtures build charts export refresh tally test
+.PHONY: setup ingest waters-nhd conditions rainfall rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
 
 VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
@@ -156,6 +159,9 @@ rainfall:
 
 rain-thresholds:
 	$(PY) -m build.rain_thresholds
+
+rain-thresholds-radar:
+	$(PY) -m build.rain_thresholds --radar MI GA
 
 provisional-outfalls:   ## provisional outfalls from the reports (a failure keeps the previous file)
 	$(PY) -m build.provisional_outfalls --geolocate --geo-budget-s 30 --llm --llm-cap-usd 0.25 --llm-budget-s 60 || echo "!! provisional outfalls failed; the previous data/build/outfalls-reported.json stays"
