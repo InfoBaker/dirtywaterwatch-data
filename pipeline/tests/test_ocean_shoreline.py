@@ -70,9 +70,10 @@ def _census(monkeypatch):
 def test_the_rule_lists_the_oceans_for_florida_with_the_distance_and_its_evidence():
     sh = RULES["reach"]["shoreline"]
     names = {e["name"]: e for e in sh["oceans"]}
-    assert set(names) == {"Atlantic Ocean", "Gulf of America"}
+    assert {"Atlantic Ocean", "Gulf of America"} <= set(names)
     assert "Gulf of Mexico" in names["Gulf of America"]["names"] and names["Atlantic Ocean"]["wikidata"] == "Q97"
-    assert all(e["states"] == ["FL"] for e in sh["oceans"])
+    assert names["Atlantic Ocean"]["states"] == ["FL"] and names["Gulf of America"]["states"] == ["FL"]
+    assert all(e.get("states") for e in sh["oceans"])     # every entry names its states (California's Pacific: CA)
     assert sh["each_way_km"] == 20 and sh["ocean_open_m"] == 1000
     assert "20 kilometres each way" in sh["ocean_rationale"] and "never as a colour over the ocean" in sh["ocean_rationale"]
     assert "Feddersen" in sh["ocean_source"] and "GeoHealth" in sh["ocean_source"] and "tl_2023_us_state" in sh["ocean_source"]

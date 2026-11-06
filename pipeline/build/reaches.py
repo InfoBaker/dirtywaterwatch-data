@@ -1239,11 +1239,57 @@ def census_lake_outline(slug: str, waters: dict, land: dict | None):
             water = poly.intersection(region).difference(near)
             from shapely.geometry import MultiPolygon
             from ingest import waters_extra as WX
+            entry = SH.shoreline_entry(w, shore_rule()) or {}
+            if entry.get("open_m") and not water.is_empty:
+                water = cut_at_mouths(water, bb, float(entry["open_m"]))
             parts = [p for p in getattr(water, "geoms", [water]) if p.geom_type == "Polygon" and not p.is_empty
                      and WX.area_km2(p) >= CENSUS_PIECE_KM2]
             g = (parts[0] if len(parts) == 1 else MultiPolygon(parts)) if parts else None
     _CENSUS_LAKES[slug] = g
     return g
+
+
+def cut_at_mouths(water, bb, op: float):
+    """A bay's Census water (census_lake_outline) less the other water it opens to through a mouth narrower than twice
+    op: the water's eroded pieces that lie mostly outside the record's own box (the sea outside the Golden Gate) are
+    grown back by op and taken away, with whatever is left of the water outside the record's box. Without it, San
+    Francisco Bay's Census water runs out through the Golden Gate onto the Pacific coast, and a stretch of the bay's
+    shore would follow Ocean Beach (review of 2026-11-06). The pieces inside the box stay joined as they are (the bay
+    narrows near the Dumbarton Bridge but is one water). The rule's lake entry asks for it with open_m."""
+    import math
+    import shapely
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+    lat = (bb[1] + bb[3]) / 2
+    k = (111_320.0 * math.cos(math.radians(lat)), 110_574.0)
+    wm = shapely.transform(water, lambda xy: xy * k)
+    own = shapely.transform(box(*bb), lambda xy: xy * k)
+    er = wm.buffer(-op)
+    other = [x for x in getattr(er, "geoms", [er]) if x.geom_type == "Polygon" and not x.is_empty
+             and x.intersection(own).area < 0.5 * x.area]
+    if not other:
+        return water
+    left = wm.difference(unary_union([x.buffer(op) for x in other]))
+    keep = [x for x in getattr(left, "geoms", [left]) if x.geom_type == "Polygon" and x.intersects(own)]
+    return shapely.transform(unary_union(keep), lambda xy: xy / k) if keep else water
+
+
+def open_from(wm, off, op: float):
+    """The water (in metres) that the opening by op keeps on the side of `off` (the offshore line): the pieces the
+    erosion leaves within op of that line, grown back by op and never beyond the water. Eroding cuts a mouth narrower
+    than twice op; the pieces are chosen before they are grown back, because two pieces grown back on either side of a
+    short narrow mouth (the Golden Gate, about 1.7 km across on the Census outlines) overlap through it and would join
+    the bay behind it to the sea again (review of 2026-11-06). op 0: the water as it is."""
+    from shapely.ops import unary_union
+    if op <= 0:
+        return wm
+    if off.is_empty:
+        return wm.buffer(-op).buffer(op).intersection(wm)
+    seeds = [x for x in getattr(wm.buffer(-op), "geoms", [wm.buffer(-op)])
+             if x.geom_type == "Polygon" and not x.is_empty and x.distance(off) < op + 50]
+    if not seeds:
+        return wm.buffer(-op).buffer(op).intersection(wm)
+    return unary_union([x.buffer(op) for x in seeds]).intersection(wm)
 
 
 _OCEAN: dict = {}
@@ -1284,8 +1330,6 @@ def ocean_outline(lon: float, lat: float, state: str, land: dict | None, shore: 
             k = (111_320.0 * math.cos(math.radians(lat)), 110_574.0)
             wm = shapely.transform(water, lambda xy: xy * k)
             op = float(r.get("ocean_open_m") or 0)
-            opened = wm.buffer(-op).buffer(op) if op > 0 else wm
-            opened = opened.intersection(wm)          # the opening never adds water
             # the state's offshore line: its polygon's boundary inside the box, away from land
             pm = shapely.transform(poly.intersection(region), lambda xy: xy * k)
             nm = shapely.transform(near, lambda xy: xy * k) if near is not None and not near.is_empty else None
@@ -1294,6 +1338,7 @@ def ocean_outline(lon: float, lat: float, state: str, land: dict | None, shore: 
                 off = off.difference(nm.buffer(OCEAN_OFFSHORE_M))
             rm = shapely.transform(region, lambda xy: xy * k).boundary.buffer(1.0)
             off = off.difference(rm)                  # the box's own edges are not the offshore line
+            opened = open_from(wm, off, op)
             parts = [x for x in getattr(opened, "geoms", [opened]) if x.geom_type == "Polygon" and not x.is_empty
                      and not off.is_empty and x.distance(off) < 50]
             if parts:
@@ -1392,6 +1437,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     rec["ocean"] = bool((entry or {}).get("ocean"))
     if (entry or {}).get("sound"):
         rec["sound"] = True             # a sound under the lake model (Puget Sound): its own wording in the export
+    if (entry or {}).get("bay"):
+        rec["bay"] = True               # a bay under the lake model (San Francisco Bay): its own wording in the export
     if rec["ocean"] and c.get("lat") is None:
         rec["error"] = "no point to start from"
         return rec
