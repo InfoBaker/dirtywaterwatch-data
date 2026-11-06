@@ -207,3 +207,85 @@ def test_both_downloads_failing_is_reported(monkeypatch, tmp_path):
     out = json.loads((tmp_path / "build" / "events" / "echo-sewer-overflow.json").read_text())
     assert out["ok"] is False
     assert "no sewer_overflow_bypass_report_events.csv" in out["error"] and "all-versions ZIP" in out["error"]
+
+
+# ---------------------------------------------------------------- review 2026-11-06 (docs/reviews/2026-11-06-stale-sources-review.md)
+
+def current_zip() -> bytes:
+    """A repaired current-version ZIP: the all-versions fixture's current rows under the current tables' names."""
+    t = E.current_from_all_versions(_raw_tables())
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        for k, name in E.TABLES.items():
+            rows = t.get(k) or []
+            cols = list(rows[0]) if rows else ["sewer_overflow_bypass_event_key"]
+            zf.writestr(zipfile.ZipInfo(name, (2026, 11, 7, 7, 15, 0)), _csv(cols, rows))
+    return buf.getvalue()
+
+
+@pytest.mark.parametrize("table,column", [("event", "sewer_overflow_bypass_description_text"),
+                                          ("impacts", "sewer_overflow_bypass_impact_other_text"),
+                                          ("event", "sewer_overflow_structure_type_code_other_text")])
+def test_a_renamed_column_the_water_rule_reads_is_a_failed_read(table, column):
+    # these columns decide whether an event reached a water: a rename must not silently drop events
+    raw = _raw_tables()
+    for r in raw[table]:
+        r.pop(column)
+    with pytest.raises(RuntimeError, match=column):
+        E.current_from_all_versions(raw)
+
+
+@pytest.mark.parametrize("table", ["event", "report", "types", "waters", "impacts", "systems"])
+def test_an_empty_all_versions_table_is_a_failed_read_not_no_events(table):
+    raw = _raw_tables()
+    raw[table] = []
+    with pytest.raises(RuntimeError, match="no rows"):
+        E.current_from_all_versions(raw)
+
+
+def test_a_repaired_current_zip_is_preferred_again(monkeypatch, tmp_path):
+    _isolate(monkeypatch, tmp_path)
+    asked = []
+    served = {E.URL: Resp(current_zip(), "Sat, 07 Nov 2026 12:15:00 GMT"),
+              E.ALL_URL: Resp(all_versions_zip(), "Wed, 04 Nov 2026 12:21:15 GMT")}
+    monkeypatch.setattr(E.requests, "get", lambda url, **kw: asked.append(url) or served[url])
+    assert E.main([]) == 0
+    out = json.loads((tmp_path / "build" / "events" / "echo-sewer-overflow.json").read_text())
+    assert asked == [E.URL] and out["ok"] is True and out["count"] == 1
+    assert out["meta"]["url"] == E.URL and out["meta"]["via"] == "live" and "note" not in out["meta"]
+    assert out["records"][0]["published_at"] == "2026-11-07"
+
+
+def test_a_current_zip_with_an_empty_events_table_falls_back(monkeypatch, tmp_path):
+    _isolate(monkeypatch, tmp_path)
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr(E.TABLES["events"], "sewer_overflow_bypass_event_key,permit_identifier\n")
+    served = {E.URL: Resp(buf.getvalue(), "Sat, 07 Nov 2026 12:15:00 GMT"),
+              E.ALL_URL: Resp(all_versions_zip(), "Wed, 04 Nov 2026 12:21:15 GMT")}
+    monkeypatch.setattr(E.requests, "get", lambda url, **kw: served[url])
+    assert E.main([]) == 0
+    out = json.loads((tmp_path / "build" / "events" / "echo-sewer-overflow.json").read_text())
+    assert out["count"] == 1 and out["meta"]["url"] == E.ALL_URL and "has no rows" in out["meta"]["note"]
+
+
+def test_both_failing_reads_the_research_copy_marked_not_ok_and_keeps_previous_records(monkeypatch, tmp_path):
+    _isolate(monkeypatch, tmp_path)
+    research = tmp_path / "research-copy"
+    research.mkdir()
+    with zipfile.ZipFile(io.BytesIO(current_zip())) as zf:
+        zf.extractall(research)
+    monkeypatch.setattr(E, "FALLBACK_DIR", research)
+
+    def get(url, **kw):
+        raise requests.ConnectionError("refused")
+    monkeypatch.setattr(E.requests, "get", get)
+    assert E.main([]) == 1                       # first run, nothing to keep: the research copy's records, not ok
+    path = tmp_path / "build" / "events" / "echo-sewer-overflow.json"
+    out = json.loads(path.read_text())
+    assert out["ok"] is False and out["count"] == 1 and out["meta"]["via"] == "research copy"
+    assert "all-versions ZIP" in out["error"]
+    out["records"] = [{"event_id": "previous"}]
+    path.write_text(json.dumps(out))
+    assert E.main([]) == 1                       # a later failing run keeps what was there
+    assert [r["event_id"] for r in json.loads(path.read_text())["records"]] == ["previous"]
