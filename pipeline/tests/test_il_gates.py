@@ -63,7 +63,11 @@ def test_the_three_reversal_structures_are_mwrd_outfall_rows_on_lake_michigan():
     lat, lon = M.DIVERSION_POINTS["O'Brien Lock"]
     assert R.seg_km([[lon, lat], le["path"][0]]) < 0.1 and le["path"][-1] == [le["lon"], le["lat"]]
     assert le["lat"] > 41.73 and 10 < le["path_km"] < 12 and "GNIS 405379" in le["source"]
-    assert "lake_entry" not in gates["Wilmette"] and "lake_entry" not in gates["CRCW"]
+    assert "lake_entry" not in gates["Wilmette"]
+    # the Controlling Works stand beside the lock, a hole in the lake polygon: the stretch starts on the outer shore
+    crcw = gates["CRCW"]["lake_entry"]
+    assert crcw["path"] == [] and crcw["path_km"] == 0.0 and "outer shore" in crcw["source"]
+    assert R.seg_km([[crcw["lon"], crcw["lat"]], [gates["CRCW"]["lon"], gates["CRCW"]["lat"]]]) < 0.3
     reg = {(r["npdes_permit"], str(r["outfall"])): r for r in common.load_outfall_registry(provisional=False)}
     assert all(reg[ids]["_file"] == "data/outfalls-il.json" for ids in M.GATE_IDS.values())
 
@@ -91,6 +95,21 @@ def test_gate_rows_take_the_nearest_mwrd_plant_permit_and_build_the_lake_entry()
         A.gate_rows(pts, [dict(epa[0], lat=41.75), dict(epa[1], lat=41.651)], {"O'Brien Lock": river})
 
 
+def test_a_structure_beside_a_hole_in_the_lake_starts_on_the_outer_shore():
+    A = _script("add_il_mwrd_outfalls")
+    lake = box(-87.62, 41.88, -87.50, 41.95).difference(box(-87.6080, 41.8884, -87.6050, 41.8888))   # a lock-sized hole
+    e = A.shore_entry(41.8885, -87.6083, lake)
+    assert (e["lat"], e["lon"]) == (41.88, -87.6083) and e["hole_m"] < 50 < e["outer_m"] < 1200
+    pts = [{"OBJECTID": 386, "OWNER": "MWRD", "OUTFALL_CITY": "Chicago", "WATERWAY_REACH": "Chicago R",
+            "TARP_CONNECTION": "Chicago River Controlling Works", "LOCATION": "Chicago River Controlling Works",
+            "M_OR_U": "Monitored", "lat": 41.8885, "lon": -87.6083}]
+    epa = [{"npdes_permit": "IL0028053", "outfall": "142", "outfall_name": "", "lat": 41.80, "lon": -87.70, "permittee": "P"}]
+    r = A.gate_rows(pts, epa, lakes={"lake-michigan-il": lake})[0]
+    assert r["lake_entry"]["lat"] == 41.88 and r["lake_entry"]["path"] == [] and "IL0028053 outfall 142, " in r["permit_basis"]
+    with pytest.raises(ValueError):
+        A.gate_rows(pts, epa, lakes={})
+
+
 def test_a_rebuild_of_the_gate_rows_keeps_every_other_row_and_its_ties():
     A = _script("add_il_mwrd_outfalls")
     doc = _il()
@@ -98,10 +117,11 @@ def test_a_rebuild_of_the_gate_rows_keeps_every_other_row_and_its_ties():
                              "WATERWAY_REACH": r["mwrd_reach"], "TARP_CONNECTION": r["tarp_connection"],
                              "LOCATION": r["tarp_connection"], "M_OR_U": "Monitored"},
               "geometry": {"x": r["lon"], "y": r["lat"]}} for r in doc["outfalls"] if r.get("structure")]
-    path = next(r for r in doc["outfalls"] if r.get("lake_entry"))["lake_entry"]["path"]
+    path = next(r for r in doc["outfalls"] if r.get("reversal_column") == "O'Brien Lock")["lake_entry"]["path"]
     hr = {"O'Brien Lock": [{"attributes": {"permanent_identifier": "x"}, "geometry": {"paths": [path]}}]}
     us = json.loads((ROOT / "data" / "outfalls-us.json").read_text())["outfalls"]
-    out = A.replace_gates(doc, feats, us, hr)
+    lakes = {"lake-michigan-il": A.lake_record_geometry("lake-michigan-il")}
+    out = A.replace_gates(doc, feats, us, hr, lakes)
     assert [r for r in out["outfalls"] if not r.get("structure")] == [r for r in doc["outfalls"] if not r.get("structure")]
     gates = [r for r in out["outfalls"] if r.get("structure")]
     assert len(gates) == 3 and all(r["water_slug"] == "lake-michigan-il" for r in gates)   # the ties are kept

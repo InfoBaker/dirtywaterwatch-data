@@ -36,7 +36,9 @@ decision, and the possible-CSO map and the reversal table report it). O'Brien Lo
 11 km upstream of the river's mouth at Calumet Harbor, farther from the lake's shore than a shoreline stretch can start
 (snap_km): its row carries `lake_entry`, the river's path from the lock to the mouth along the USGS NHD
 high-resolution flowlines of the Calumet River (GNIS 405379; fetched, or --hr FILE), where the stretch starts
-(build/reaches.py). The reversal and possible-diversion records carry the same permit and outfall id.
+(build/reaches.py). The Chicago River Controlling Works stand beside the Chicago Harbor Lock, which NHDPlus V2.1's
+Lake Michigan polygon leaves out as a hole: its lake_entry is the lake's outer shore nearest the structure
+(SHORE_ENTRY), with no river path. The reversal and possible-diversion records carry the same permit and outfall id.
 --gates-only FILE: the gate rows alone are rebuilt from a saved layer read of the three structures (the other rows stay).
 Water ties are added afterwards by `python -m ingest.outfall_waters --state IL`; a rerun keeps a row's ties when its
 point and receiving water are unchanged.
@@ -149,6 +151,11 @@ def pair(points: list[dict], epa: list[dict]) -> dict[int, tuple[dict, str]]:
 HR_FLOWLINES_URL = "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6"
 HR_LAKE_ENTRY = {"O'Brien Lock": {"gnis_id": "405379", "water": "Calumet River",
                                   "box": (-87.70, 41.60, -87.45, 41.80)}}
+# a structure whose own point the lake record holds inside a hole (the Chicago Harbor Lock beside the Controlling
+# Works: NHDPlus V2.1's Lake Michigan polygon leaves the lock chamber out as a ring of its own, so a stretch from the
+# point would walk around the lock): its stretch starts on the lake's outer shore nearest the structure
+SHORE_ENTRY = {"CRCW": {"lake": "lake-michigan-il", "water": "Chicago River"}}
+WATERS_NHD = ROOT / "data" / "waters-nhd.json"
 GATE_RAIN_NOTE = ("not read by the rain caution: its thresholds are for combined sewer outfalls, while this structure "
                   "opens when the waterway itself rises, on MWRD's decision; MWRD's possible-CSO map and its reversal "
                   "table report each opening")
@@ -202,9 +209,34 @@ def path_km(path: list[list[float]]) -> float:
 
 
 
-def gate_rows(points: list[dict], epa_rows: list[dict], hr: dict | None = None, previous: dict | None = None) -> list[dict]:
+def lake_record_geometry(slug: str, path: Path = WATERS_NHD):
+    """A water record's geometry (shapely) from data/waters-nhd.json, or None."""
+    from shapely.geometry import shape
+    doc = json.loads(path.read_text()) if path.exists() else {}
+    w = next((x for x in doc.get("waters") or [] if x.get("slug") == slug), None)
+    return shape(w["geometry"]) if w and w.get("geometry") else None
+
+
+def shore_entry(lat: float, lon: float, lake) -> dict:
+    """{lat, lon, outer_m, hole_m}: the point of the lake's outer shore (its polygons' exterior rings) nearest the
+    structure, and how far the structure lies from it and from the nearest hole in the polygon."""
+    from shapely.geometry import Point
+    from shapely.ops import nearest_points
+    pt = Point(lon, lat)
+    polys = list(getattr(lake, "geoms", [lake]))
+    ext = min((pg.exterior for pg in polys), key=lambda e: e.distance(pt))
+    q = nearest_points(ext, pt)[0]
+    holes = [h for pg in polys for h in pg.interiors]
+    hole = min((h for h in holes), key=lambda h: h.distance(pt), default=None)
+    return {"lat": round(q.y, 6), "lon": round(q.x, 6), "outer_m": round(metres(lat, lon, q.y, q.x)),
+            "hole_m": round(metres(lat, lon, *reversed(nearest_points(hole, pt)[0].coords[0]))) if hole is not None else None}
+
+
+def gate_rows(points: list[dict], epa_rows: list[dict], hr: dict | None = None, previous: dict | None = None,
+              lakes: dict | None = None) -> list[dict]:
     """The reversal structures' outfall rows (module docstring). points: the layer's rows for the structures; hr:
-    {reversal column: NHD high-resolution flowline features} for the structures in HR_LAKE_ENTRY (fetched when None)."""
+    {reversal column: NHD high-resolution flowline features} for the structures in HR_LAKE_ENTRY (fetched when None);
+    lakes: {slug: geometry} for SHORE_ENTRY (read from data/waters-nhd.json when None)."""
     prev = {(r["npdes_permit"], str(r["outfall"])): r for r in (previous or {}).get("outfalls", [])}
     by_permit: dict[str, list[dict]] = defaultdict(list)
     for o in epa_rows:
@@ -260,6 +292,19 @@ def gate_rows(points: list[dict], epa_rows: list[dict], hr: dict | None = None, 
                 "basis": (f"the structure lies on the {spec['water']}, {round(km, 1)} km up the river from its "
                           "mouth; in a reversal the river runs to the lake through that mouth, so the shoreline stretch "
                           "starts there and the river's path from the structure to it is drawn with it")}
+        if col in SHORE_ENTRY:
+            spec = SHORE_ENTRY[col]
+            lake = (lakes or {}).get(spec["lake"]) if lakes is not None else lake_record_geometry(spec["lake"])
+            if lake is None:
+                raise ValueError(f"{name}: no geometry for {spec['lake']}")
+            e = shore_entry(p["lat"], p["lon"], lake)
+            row["lake_entry"] = {
+                "lat": e["lat"], "lon": e["lon"], "water": spec["water"], "path": [], "path_km": 0.0,
+                "source": (f"the point of the outer shore of the water record {spec['lake']} (NHDPlus V2.1, cut to the "
+                           "state; data/waters-nhd.json) nearest MWRD's point for the structure"),
+                "basis": (f"the lake record leaves a hole in its polygon {e['hole_m']} m from the structure, at the lock "
+                          f"beside it, which a stretch from the structure's own point would walk around; the stretch "
+                          f"starts on the lake's shore {e['outer_m']} m away instead")}
         old = prev.get((permit, outfall))
         if old and old.get("lat") == row["lat"] and old.get("lon") == row["lon"] and \
                 old.get("receiving_water_echo") == row["receiving_water_echo"]:
@@ -347,11 +392,12 @@ def layer_points(features: list[dict]) -> list[dict]:
     return out
 
 
-def replace_gates(doc: dict, features: list[dict], epa_rows: list[dict], hr: dict | None = None) -> dict:
+def replace_gates(doc: dict, features: list[dict], epa_rows: list[dict], hr: dict | None = None,
+                  lakes: dict | None = None) -> dict:
     """The file with its gate rows rebuilt from a layer read of the structures (--gates-only); every other row stays."""
     div = [p for p in layer_points(features)
            if M.diversion(p["TARP_CONNECTION"], p["LOCATION"]) and "P.S." not in (p["LOCATION"] or "")]
-    gates = gate_rows(div, epa_rows, hr, doc)
+    gates = gate_rows(div, epa_rows, hr, doc, lakes)
     if len(gates) != len(M.GATE_IDS):
         raise ValueError(f"{len(gates)} structures in the layer read, not {len(M.GATE_IDS)}")
     rows = [r for r in doc["outfalls"] if r.get("structure") != "lake_reversal_gate"]
