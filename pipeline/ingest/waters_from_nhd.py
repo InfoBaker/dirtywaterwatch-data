@@ -2779,6 +2779,46 @@ HAND: list[dict] = [
          why=("MWRD's CSO Points layer puts Lemont's Stephen Street outfall (IL0039551) in its 'I & M Canal' reach and EPA's "
               "CSO inventory names the Illinois and Michigan Canal for Lemont's outfalls 001 and 002. NHDPlus V2.1 has no "
               "flowline of that name; the USGS NHD high-resolution flowlines carry the canal at Lemont as GNIS 425678.")),
+    # 2026-11-06 (California's bays, docs/checklists/2026-11-06-ca-bays.md in the site repository): the northern arms of
+    # San Francisco Bay that EPA's inventory and the State Water Board's spill reports name and that neither
+    # openboatlaunch (its san-francisco-bay-ca is the central and south bay) nor NHDPlus V2.1 nor the NHD high-resolution
+    # areas (one unnamed estuary polygon) hold as a record. Each is the Census TIGER/Line area water the Census names so
+    # (TIGERweb Hydro layer 1; the Census splits a bay at county lines, so a record may take several polygons), with the
+    # USGS GNIS feature of the name (DomesticNames_CA, read 2026-11-06), whose primary point lies in the polygons
+    # (gnis_point, 0 m); no model supplied a coordinate, and kind bay keeps them unfilled like every bay.
+    dict(name="San Pablo Bay", state="CA", kind="bay", source="census", service="tiger", gnis_id="232456",
+         oids=["1102213137458", "110169761004", "110696995785", "110860158115"],
+         gnis_point=(-122.3844178, 38.0665874),
+         near=(-122.3844178, 38.0665874),
+         why=("EPA's inventory gives 'San Pablo Bay' as the receiving water of the Pinole-Hercules (CA0037796), Rodeo "
+              "(CA0037826) and Novato (CA0037958) plants' outfalls 001. openboatlaunch's San Francisco Bay record ends "
+              "at about 37.98 N and NHDPlus V2.1 and the NHD high-resolution areas carry no water of that name; GNIS "
+              "lists San Pablo Bay (feature 232456, class Bay, Marin County) at 38.06659 N 122.38442 W, and this record "
+              "is the four Census TIGER/Line area water polygons the Census names 'San Pablo Bay' (split at the "
+              "Contra Costa, Marin, Sonoma, Napa and Solano county lines), one of which holds that point; the three "
+              "outfalls' points lie in them.")),
+    dict(name="Suisun Bay", state="CA", kind="bay", source="census", service="tiger", gnis_id="253943",
+         oids=["110169760851", "110696995732"],
+         gnis_point=(-121.9927399, 38.0638082),
+         near=(-121.9927399, 38.0638082),
+         why=("EPA's inventory gives 'Suisun Bay' as the receiving water of the Central Contra Costa Sanitary "
+              "District plant's outfall 001 (CA0037648). Neither openboatlaunch nor NHDPlus V2.1 nor the NHD "
+              "high-resolution areas carry a water of that name; GNIS lists Suisun Bay (feature 253943, class Bay, "
+              "Solano County; an official name by Board decision) at 38.06381 N 121.99274 W, and this record is the "
+              "two Census TIGER/Line area water polygons the Census names 'Suisun Bay' (split at the Contra Costa and "
+              "Solano county line), one of which holds that point; the outfall's point lies in them. The Census's "
+              "separate 'Suisun Cutoff' polygon is not part of it.")),
+    dict(name="Richardson Bay", state="CA", kind="bay", source="census", service="tiger", gnis_id="231543",
+         oids=["1107052605073"],
+         gnis_point=(-122.4860841, 37.869649),
+         near=(-122.4860841, 37.869649),
+         why=("The State Water Board's spill reports (CIWQS, Category 1) name 'Richardson Bay' as the water reached "
+              "(9 reports, Sausalito; research/ca/receiving-waters-missing.json). NHDPlus "
+              "V2.1 and the NHD high-resolution areas carry no water of that name; GNIS lists Richardson Bay (feature "
+              "231543, class Bay, Marin County) at 37.86965 N 122.48608 W, and this record is the Census TIGER/Line "
+              "area water polygon the Census names 'Richardson Bay', which holds that point. The Census draws it as "
+              "its own polygon, apart from its San Francisco Bay polygons; openboatlaunch's san-francisco-bay-ca "
+              "outline, whose bounding box reaches 122.507 W, may also cover it.")),
 ]
 
 
