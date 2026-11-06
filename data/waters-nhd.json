@@ -1,6 +1,6 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-06T05:12:33Z",
+ "built": "2026-11-06T06:30:44Z",
  "partial": false,
  "count": 3230,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
@@ -1257,6 +1257,54 @@
      "kept": 2822,
      "dropped": 0,
      "written": 3261
+    },
+    "report_names": {
+     "built": "2026-11-06T06:30:44Z",
+     "file": "research/il/receiving-waters-missing.json",
+     "names": 85,
+     "reports": 147,
+     "names_no_water": 10,
+     "waters_named": 69,
+     "already_a_record": 1,
+     "targets": 68,
+     "targets_mapped": 6,
+     "records": 2,
+     "targets_failed": 62,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points;": 48,
+      "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name w": 3,
+      "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the reports": 3,
+      "no NHD flowline or waterbody of that name in IL; the reports give no place to look for it in the NHD high-resolution flo": 2,
+      "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 2,
+      "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name": 1,
+      "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1,
+      "no NHD flowline or waterbody of that name in IL; a description, not a name": 1,
+      "24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name": 1
+     },
+     "network_requests": 76,
+     "requests": {
+      "tiger": 1,
+      "name2": 3,
+      "name4": 3,
+      "nhd-hr-near": 67,
+      "gnis2": 1,
+      "nhd-hr": 1
+     },
+     "cached": {
+      "gnis2": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3230,
+      "run_records": 2,
+      "replaced": 2,
+      "added": 0,
+      "kept": 3228,
+      "dropped": 0,
+      "written": 3230
+     }
     }
    },
    "MI": {
@@ -147218,7 +147266,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 13,
    "places_failed": [
@@ -147252,7 +147300,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 10,
    "notes": [
@@ -147279,7 +147327,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 9,
    "reason_detail": [
@@ -147300,7 +147348,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 8,
    "reason_detail": [
@@ -147351,7 +147399,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 5,
    "reason_detail": [
@@ -147374,7 +147422,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 5,
    "notes": [
@@ -147402,7 +147450,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 5,
    "notes": [
@@ -147428,7 +147476,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 4,
    "places_failed": [
@@ -147482,7 +147530,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 4,
    "notes": [
@@ -147518,7 +147566,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 3,
    "reason_detail": [
@@ -147539,7 +147587,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 3,
    "reason_detail": [
@@ -147560,7 +147608,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 3,
    "reason_detail": [
@@ -147581,7 +147629,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 3,
    "reason_detail": [
@@ -147624,7 +147672,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 3,
    "notes": [
@@ -147696,7 +147744,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 2,
    "reason_detail": [
@@ -147719,7 +147767,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 2,
    "reason_detail": [
@@ -147788,7 +147836,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 2,
    "reason_detail": [
@@ -147809,7 +147857,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 2,
    "reason_detail": [
@@ -147853,7 +147901,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 2,
    "reason_detail": [
@@ -147891,7 +147939,7 @@
    "towns": [],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -147940,7 +147988,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -147991,7 +148039,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148012,7 +148060,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148057,7 +148105,7 @@
    "towns": [],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148078,7 +148126,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148099,7 +148147,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -148145,7 +148193,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "places_failed": [
@@ -148217,7 +148265,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148282,7 +148330,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -148306,7 +148354,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148327,7 +148375,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -148351,7 +148399,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "places_failed": [
@@ -148436,7 +148484,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148512,7 +148560,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "places_failed": [
@@ -148544,7 +148592,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148563,7 +148611,7 @@
    "towns": [],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148584,7 +148632,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148605,7 +148653,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148698,7 +148746,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -148722,7 +148770,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148743,7 +148791,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -148806,7 +148854,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -148845,7 +148893,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -148961,7 +149009,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -149025,7 +149073,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -149104,7 +149152,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -149128,7 +149176,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -149152,7 +149200,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -149174,7 +149222,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -149220,7 +149268,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "notes": [
@@ -149243,7 +149291,7 @@
    "towns": [],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -149264,7 +149312,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -149285,7 +149333,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 1,
    "reason_detail": [
@@ -149412,7 +149460,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 0,
    "reason_detail": [
@@ -149461,7 +149509,7 @@
    ],
    "slugs": [],
    "how": [],
-   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "from": "reports",
    "reports": 0,
    "notes": [
@@ -475997,7 +476045,7 @@
     33600,
     55800
    ],
-   "fetched_at": "2026-11-06T05:09:36Z",
+   "fetched_at": "2026-11-06T06:30:01Z",
    "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
    "note": "NHDPlus V2.1: 32 network flowlines with GNIS id 421744 in IL's box, cut to the state, merged and simplified to ~10 m; only the part within -88.2, 41.5, -87.66, 41.8404 (west, south, east, north) is kept: north of 41.8404 N NHDPlus V2.1 gives GNIS 421744 to the South Branch Chicago River, the North Branch below the North Shore Channel and the North Shore Channel itself; 41.8404 N is the north edge of the Census TIGER/Line area water 110380385611, which the Census names 'Chicago Ship Cnl', where the canal leaves the South Branch near Damen Avenue (reach codes 07120004000037, 07120004000038, 07120004000039, 07120004000040, 07120004000041, 07120004000504, 07120004000918, 07120004000922, 07120004000923, 07120004000924, 07120004000937, 07120004000964, 07120004000969). Hand record: EPA's CSO inventory and MWRD's CSO Points layer give the Chicago Sanitary and Ship Canal as the receiving water of Stickney's, Chicago's and suburban outfalls (MWRD's reaches 'CSSC Upper' and 'CSSC Lower'). NHDPlus V2.1 carries it as GNIS 421744 but on more than the canal (within_why); this record is the canal itself, about 48 km from the South Branch to Lockport.",
    "hand": true,
@@ -476016,7 +476064,7 @@
     "07120004000964",
     "07120004000969"
    ],
-   "targets": 2,
+   "targets": 0,
    "geometry": {
     "type": "LineString",
     "coordinates": [
@@ -887280,14 +887328,14 @@
    "nhd_fcodes": [
     55800
    ],
-   "fetched_at": "2026-11-06T05:12:31Z",
+   "fetched_at": "2026-11-06T06:30:44Z",
    "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
    "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 1 flowlines with GNIS id 425678 in IL, cut to the state, merged and simplified to ~10 m (reach codes 07120004003010). Hand record: MWRD's CSO Points layer puts Lemont's Stephen Street outfall (IL0039551) in its 'I & M Canal' reach and EPA's CSO inventory names the Illinois and Michigan Canal for Lemont's outfalls 001 and 002. NHDPlus V2.1 has no flowline of that name; the USGS NHD high-resolution flowlines carry the canal at Lemont as GNIS 425678.",
    "hand": true,
    "reachcodes": [
     "07120004003010"
    ],
-   "targets": 3,
+   "targets": 0,
    "geometry": {
     "type": "MultiLineString",
     "coordinates": [
