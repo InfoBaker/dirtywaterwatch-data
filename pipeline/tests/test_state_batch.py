@@ -688,3 +688,18 @@ def test_obl_check_refuses_another_states_file(tmp_path):
                                         "waters": [{"slug": "charles-river-ma", "state": "MA"}]})
     ok, lines = B.obl_check("NE", root)
     assert not ok and "not NE's openboatlaunch extract" in lines[0]
+
+
+def test_a_great_lakes_state_has_its_lakes_cut_after_its_waters_are_rebuilt():
+    """2026-11-06 review of Illinois's gates: the NHD pass rebuilds Lake Michigan's Illinois record as the lake's whole
+    United States part; the batch cuts it back to the state's waters before the ties (and the gates' lake entries)."""
+    cut = ["/py", "-I", "scripts/cut_lakes_to_state_waters.py", "--state", "IL"]
+    p = B.plan("IL", "waters ties", py=PY)
+    assert [c.step for c in p.cmds] == ["waters", "cut", "ties"] and p.cmds[1].argv == cut and p.cmds[1].cwd == "."
+    assert [c.step for c in B.plan("IL", "waters osm names ties", budget_s=600, py=PY, osm_budget=600).cmds] == ["osm", "names", "cut", "ties"]
+    assert [c.step for c in B.plan("IL", "names", py=PY).cmds] == ["names", "cut"]
+    assert [c.step for c in B.plan("IL", "ties", py=PY).cmds] == ["ties"]           # nothing rebuilt: nothing to cut
+    assert [c.step for c in B.plan("NC", "waters ties", py=PY).cmds] == ["waters", "ties"]     # no Great Lake
+    assert B.count_lines("cut", ["lake-michigan-il: 57137.2 km2 -> 4055.3 km2, bbox [1]", "1 records cut; problems left: 0",
+                                 "noise"]) == ["lake-michigan-il: 57137.2 km2 -> 4055.3 km2, bbox [1]",
+                                               "1 records cut; problems left: 0"]
