@@ -64,7 +64,7 @@ def test_no_row_is_tied_to_a_record_that_is_not_on_file_and_each_untied_row_says
     assert all(o["water_slug"] in waters for o in ca)          # the share line counts only records on file
 
 
-def test_the_deep_ocean_outfalls_without_epas_point_take_their_permits_point():
+def test_the_deep_ocean_outfalls_with_epas_sign_dropped_point_take_their_permits_point():
     rows = _rows()
     want = {("plants", "CA0110604", "001"): (33.576667, -118.01), ("plants", "CA0110604", "002"): (33.615556, -117.970278),
             ("plants", "CA0109991", "002"): (33.91197, -118.52145)}
@@ -72,8 +72,26 @@ def test_the_deep_ocean_outfalls_without_epas_point_take_their_permits_point():
     for key, (lat, lon) in want.items():
         o = rows[key]
         assert (o["lat"], o["lon"]) == (lat, lon) and o["coords_from"] == "permit"
-        assert o["epa_lat"] is None and o["epa_lon"] is None          # EPA's inventory gave none
-        assert "Order R" in o["coords_note"] and "EPA's inventory gives no point" in o["coords_note"]
+        # EPA's inventory gives the same figures without the minus sign (review of 2026-11-06): kept, and said so
+        assert (o["epa_lat"], o["epa_lon"]) == (lat, -lon) == (o["echo_lat"], o["echo_lon"])
+        assert "Order R" in o["coords_note"] and "without the longitude's minus sign" in o["coords_note"]
+        assert "gives no point" not in o["coords_note"]
+        # the flag on EPA's point is cleared: reaches.py skips a row that carries one (the 78-inch outfall, 1.5 miles
+        # out, gets its stretch)
+        assert "coords_problem" not in o
+
+
+def test_moving_a_row_to_the_permits_point_keeps_epas_point_and_clears_its_flag_and_is_idempotent():
+    o = {"lat": None, "lon": None, "echo_lat": 33.6, "echo_lon": 117.9, "coords_from": "permitted_feature",
+         "coords_problem": "EPA's point (33.6, 117.9) lies more than about 2 km outside CA"}
+    C.move(o, 33.6, -117.9, "note")
+    assert (o["lat"], o["lon"], o["epa_lat"], o["epa_lon"]) == (33.6, -117.9, 33.6, 117.9) and "coords_problem" not in o
+    once = dict(o)
+    C.move(o, 33.6, -117.9, "note")
+    assert o == once
+    p = {"lat": 37.8, "lon": -122.4, "coords_from": "permitted_feature"}
+    C.move(p, 37.81, -122.43, "note")
+    assert (p["epa_lat"], p["epa_lon"]) == (37.8, -122.4)
     # 33 34 36 N, 118 00 36 W and 33 36 56 N, 117 58 13 W, as the order prints them
     assert abs((33 + 34 / 60 + 36 / 3600) - 33.576667) < 1e-6 and abs((118 + 0 / 60 + 36 / 3600) - 118.01) < 1e-9
     assert abs((33 + 36 / 60 + 56 / 3600) - 33.615556) < 1e-6 and abs((117 + 58 / 60 + 13 / 3600) - 117.970278) < 1e-6
