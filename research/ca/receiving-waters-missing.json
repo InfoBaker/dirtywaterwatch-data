@@ -1,40 +1,37 @@
 {
  "about": "Receiving-water names in CA's reports (the State Water Board's CIWQS spill file, Category 1 spills, every report since June 2023, read 2026-11-04) that data/receiving-waters-national.json does not hold for CA, by name as typed (a list of names split at commas, semicolons, slashes and 'and', 'into', 'via'), with the number of reports giving each. Category 2 and 3 spills, which reached no water, are left out.",
  "state": "CA",
- "waters": 385,
- "reports": 628,
+ "waters": 367,
+ "reports": 603,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in CA": 266,
+  "no NHD flowline or waterbody of that name in CA": 261,
   "not a water name": 20,
-  "1 NHD water of that name in CA, none within reach of the reports' places": 19,
-  "the open sea (no NHD record)": 11,
+  "1 NHD water of that name in CA, none within reach of the reports' places": 16,
   "no water name": 6,
   "a storm-sewer system, not a named water": 5,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 5,
   "an unnamed or unknown stream: the report names no water": 4,
   "a water record holds the water this text names, but the status resolver reads the text as a watershed or basin label, no": 4,
-  "2 NHD waters of that name in CA, none within reach of the reports' places": 4,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 4,
+  "the open sea (no NHD record)": 3,
   "a land-application system, not a surface water": 3,
-  "not reached this run (a hand-only run asks no NHD)": 3,
+  "2 NHD waters of that name in CA, none within reach of the reports' places": 3,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 3,
   "private property, not a public water": 3,
   "a street name, not a water": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
-  "a water record holds the name, but the reports' points lie too far from it to be placed there": 2,
   "a road in the report, not a water": 2,
   "6 NHD waters of that name in CA, none within reach of the reports' places": 2,
   "the name of a town (Courtland), not of a water: no NHD water of that name in CA": 1,
-  "19 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "4 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "the name of a town (Oakland), not of a water: no NHD water of that name in CA": 1,
   "a short name with no kind of water (creek, river, lake): not looked up": 1,
-  "57 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "12 NHD waters of that name in CA and the reports give no place to choose one": 1,
   "3 NHD waters of that name in CA, none within reach of the reports' places": 1,
   "the name of a town (Lake Don Pedro), not of a water: no NHD water of that name in CA": 1,
   "a storm-sewer system (MS4), not a named water": 1,
   "the name of a town (Marina), not of a water: no NHD water of that name in CA": 1,
   "13 NHD waters of that name in CA, none within reach of the reports' places": 1,
-  "the name of a town (Morro Bay), not of a water: no NHD water of that name in CA": 1,
   "the name of a town (North Fork), not of a water: no NHD water of that name in CA": 1,
   "6 NHD waters of that name in CA and the reports give no place to choose one": 1,
   "3 NHD waters of that name in CA and the reports give no place to choose one": 1,
@@ -45,22 +42,14 @@
   "a tributary named by a place, not by the water it joins": 1,
   "the open ocean (no NHD record)": 1
  },
- "resolved_names": 203,
- "resolved_reports": 475,
+ "resolved_names": 221,
+ "resolved_reports": 500,
  "build": {
   "date": "2026-11-06",
-  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA --hand-only",
-  "records_built": 3,
-  "names_resolved": 1,
-  "network_requests": 0,
-  "last_build": {
-   "date": "2026-11-04",
-   "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA",
-   "records_built": 13,
-   "names_resolved": 14,
-   "network_requests": 182,
-   "stopped": "--budget-s used"
-  }
+  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA",
+  "records_built": 6,
+  "names_resolved": 23,
+  "network_requests": 324
  },
  "rows": [
   {
@@ -92,7 +81,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Damon Slough",
@@ -150,7 +139,49 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
+  },
+  {
+   "name": "Richardson Bay",
+   "reports": 9,
+   "permits": [
+    "2SSO10114",
+    "2SSO10151",
+    "2SSO10169",
+    "2SSO10189"
+   ],
+   "sources": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "points": [
+    [
+     37.86246,
+     -122.4965
+    ],
+    [
+     37.84699,
+     -122.48265
+    ],
+    [
+     37.90423,
+     -122.50087
+    ],
+    [
+     37.87165,
+     -122.46917
+    ],
+    [
+     37.95979,
+     -122.49398
+    ]
+   ],
+   "towns": [
+    "Sausalito"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "San Jose Creek-Thompson Creek to U/S San Gabriel River",
@@ -184,7 +215,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "San Jose Creek-Thompson Creek"
    ]
@@ -231,7 +262,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Unnamed Creek",
@@ -305,22 +336,6 @@
    "reason": "a street name, not a water"
   },
   {
-   "name": "Alamitos Bay",
-   "reports": 6,
-   "permits": [
-    "4SSO10402",
-    "4SSO11365",
-    "4SSO11388"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "towns": [
-    "Lakewood"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
    "name": "Courtland",
    "reports": 6,
    "permits": [
@@ -349,31 +364,6 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "San Diego Bay",
-   "reports": 6,
-   "permits": [
-    "9SSO10647",
-    "9SSO10658"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     32.62882,
-     -117.13867
-    ]
-   ],
-   "towns": [
-    "Coronado",
-    "San Diego"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
    "name": "Trestle Glen Creek",
    "reports": 6,
    "permits": [
@@ -394,7 +384,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Brooktree Creek",
@@ -417,7 +407,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "L.A. River",
@@ -452,7 +442,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "San Antonio creek to Estuary",
@@ -506,7 +496,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Carquinez Straights",
@@ -537,7 +527,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Coyle Creek",
@@ -560,7 +550,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Los Angeles Harbor",
@@ -601,7 +591,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "No name on the seasonal drainage",
@@ -647,63 +637,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Redwood Creek",
-   "reports": 4,
-   "permits": [
-    "2SSO10168",
-    "2SSO10228"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.46022,
-     -122.23281
-    ],
-    [
-     37.43791,
-     -122.24125
-    ],
-    [
-     37.47794,
-     -122.22413
-    ],
-    [
-     37.5013,
-     -122.2217
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile",
-    "ca-swrcb-fhab"
-   ],
-   "reason": "19 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "places_failed": [
-    {
-     "lon": -122.23281,
-     "lat": 37.46022,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.46022, -122.23281) (the nearest is 37.7 km away)"
-    },
-    {
-     "lon": -122.24125,
-     "lat": 37.43791,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.43791, -122.24125) (the nearest is 40.3 km away)"
-    },
-    {
-     "lon": -122.22413,
-     "lat": 37.47794,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.47794, -122.22413) (the nearest is 35.6 km away)"
-    },
-    {
-     "lon": -122.2217,
-     "lat": 37.5013,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.50130, -122.22170) (the nearest is 33.0 km away)"
-    }
-   ]
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Rheem Creek",
@@ -723,7 +657,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "San Luis Creek",
@@ -746,7 +680,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Storm drain",
@@ -807,7 +741,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arroyo Conejo Creek",
@@ -834,7 +768,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Carquinez Straits",
@@ -861,7 +795,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Don Pedro Reservoir",
@@ -889,7 +823,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -120.33202,
@@ -933,7 +867,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Elmhurst creek"
    ]
@@ -951,26 +885,6 @@
     "Coronado"
    ],
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Foster City Lagoon",
-   "reports": 3,
-   "permits": [
-    "2SSO10135"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.56788,
-     -122.27404
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Humboldt Bay/ Pacific ocean",
@@ -1017,7 +931,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Reed Creek",
@@ -1037,7 +951,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.55139,
@@ -1070,7 +984,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "San Jose Creek - Thompson Crk to U/S San Gabriel River",
@@ -1105,7 +1019,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "San Jose Creek - Thompson Creek"
    ]
@@ -1131,7 +1045,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Santa Rita Creek",
@@ -1154,7 +1068,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.65354,
@@ -1196,7 +1110,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arroyo Las Posas",
@@ -1239,7 +1153,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Brittan Creek",
@@ -1266,7 +1180,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Castro Creek",
@@ -1294,7 +1208,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Centinela Creek / Ballona Creek",
@@ -1317,7 +1231,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Centinela Creek"
    ]
@@ -1344,7 +1258,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Coyote Creek Watershed",
@@ -1417,7 +1331,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "4 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "4 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -120.67739,
@@ -1453,7 +1367,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Glen Echo Creek",
@@ -1476,7 +1390,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Glenwood Creek",
@@ -1496,7 +1410,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Hatton creek",
@@ -1516,7 +1430,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Horno Basin",
@@ -1569,7 +1483,7 @@
     "ca-swrcb-ciwqs-spills-flatfile",
     "ca-swrcb-fhab"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Las Trampas Creek",
@@ -1652,7 +1566,7 @@
     "ca-swrcb-ciwqs-spills-flatfile",
     "ca-swrcb-fhab"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lockheed Channel",
@@ -1675,7 +1589,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Los Angeles Harbor Watershed",
@@ -1693,33 +1607,6 @@
    "parts": [
     "Los Angeles Harbor"
    ]
-  },
-  {
-   "name": "MISSION BAY",
-   "reports": 2,
-   "permits": [
-    "9SSO10658"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     32.79166,
-     -117.20605
-    ],
-    [
-     32.78582,
-     -117.18559
-    ]
-   ],
-   "towns": [
-    "San Diego"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Machado Lake",
@@ -1749,7 +1636,7 @@
     "ca-swrcb-ciwqs-spills-flatfile",
     "ca-swrcb-fhab"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Manhattan Beach-Frontal Santa Monica Bay Watershed",
@@ -1778,34 +1665,10 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Manhattan Beach-Frontal Santa Monica Bay"
    ]
-  },
-  {
-   "name": "Mare Island Strait",
-   "reports": 2,
-   "permits": [
-    "2SSO10212"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     38.1023,
-     -122.21963
-    ],
-    [
-     38.1172,
-     -122.23776
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Marina Lagoon",
@@ -1828,40 +1691,27 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
-   "name": "Monterey Bay",
+   "name": "Mission Creek",
    "reports": 2,
-   "permits": [
-    "3SSO10324",
-    "3SSO11609"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
    "points": [
     [
-     36.60393,
-     -121.88947
-    ],
-    [
-     36.63515,
-     -121.92681
-    ],
-    [
-     36.97147,
-     -121.95382
+     34.43657,
+     -119.72617
     ]
    ],
    "towns": [
-    "Pacific Grove"
+    "Santa Barbara"
    ],
    "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile",
-    "ca-swrcb-fhab"
+    "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "records": [
+    "mission-creek-ca"
+   ],
+   "reason": "a water record holds the name (mission-creek-ca), but the reports' points lie too far from it to be placed there"
   },
   {
    "name": "Newport Harbor",
@@ -1884,7 +1734,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "No name",
@@ -1949,6 +1799,26 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
+   "name": "Pine Creek",
+   "reports": 2,
+   "points": [
+    [
+     37.94584,
+     -122.0142
+    ]
+   ],
+   "towns": [
+    "Concord"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "records": [
+    "pine-creek-ca"
+   ],
+   "reason": "a water record holds the name (pine-creek-ca), but the reports' points lie too far from it to be placed there"
+  },
+  {
    "name": "Rio Hondo/LA River",
    "reports": 2,
    "permits": [
@@ -1969,7 +1839,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Rio Hondo"
    ],
@@ -2006,7 +1876,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.79372,
@@ -2044,7 +1914,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "See Item 14.B below",
@@ -2071,7 +1941,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Sidestream of Bean Creek",
@@ -2091,7 +1961,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Smiths Canal",
@@ -2111,7 +1981,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Storm drain ultimately leads to Pacific Ocean",
@@ -2135,7 +2005,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Sucker Ravine",
@@ -2155,7 +2025,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "The Los Aneles River",
@@ -2178,7 +2048,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Los Aneles River"
    ]
@@ -2201,7 +2071,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "channel in question ultimately"
    ]
@@ -2231,7 +2101,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Un-named ephemeral creek",
@@ -2254,7 +2124,34 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
+  },
+  {
+   "name": "Unnamed Tributary to Dry Creek",
+   "reports": 2,
+   "points": [
+    [
+     38.7245,
+     -121.3387
+    ]
+   ],
+   "towns": [
+    "Sacramento County"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "records": [
+    "dry-creek-ca"
+   ],
+   "reason": "a water record holds this water but not this spelling (dry-creek-ca): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)",
+   "places_failed": [
+    {
+     "lon": -117.26933,
+     "lat": 33.16429,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    }
+   ]
   },
   {
    "name": "Unnamed drainage channel",
@@ -2347,7 +2244,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Wash adjacent"
    ]
@@ -2432,7 +2329,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Alameda County SD Channel",
@@ -2452,7 +2349,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Alhambra Wash-Rio Hondo Channel",
@@ -2489,7 +2386,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Alvarado Creek",
@@ -2509,7 +2406,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arana Creek",
@@ -2532,7 +2429,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arroyo Corte Madera de Presidio",
@@ -2555,7 +2452,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arroyo Simi Flood Control Channel",
@@ -2578,7 +2475,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arroyo del Hombre Creek",
@@ -2598,7 +2495,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Arroyp Del Valle",
@@ -2621,7 +2518,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Artesia-Norwalk Drain",
@@ -2635,7 +2532,7 @@
    "towns": [
     "Hawaiian Gardens"
    ],
-   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Austin Creek",
@@ -2658,7 +2555,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.65757,
@@ -2767,7 +2664,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Banning Channell",
@@ -2787,7 +2684,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Bay",
@@ -2835,7 +2732,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Big Dalton DB to Walnut Creek",
@@ -2872,7 +2769,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Blackburn drainage system",
@@ -2915,7 +2812,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Bouton Creek",
@@ -2949,7 +2846,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Brea Creek",
@@ -2992,7 +2889,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Brea Creek - Coyote Creek"
    ]
@@ -3038,7 +2935,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Broadway Channel"
    ]
@@ -3061,7 +2958,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Calder Creek",
@@ -3084,7 +2981,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "California Park Lake",
@@ -3108,7 +3005,7 @@
     "ca-swrcb-ciwqs-spills-flatfile",
     "ca-swrcb-fhab"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Captured in catch basin",
@@ -3151,18 +3048,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Carmel Bay",
-   "reports": 1,
-   "permits": [
-    "3SSO10244"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Carmichael Creek",
@@ -3185,7 +3071,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Carquinez Straight",
@@ -3205,21 +3091,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Channel Islands Harbor",
-   "reports": 1,
-   "permits": [
-    "4SSO10479"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "towns": [
-    "Oxnard"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Charlie Beach",
@@ -3242,7 +3114,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Chavez Ravin-Los Angeles River",
@@ -3265,7 +3137,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Chino Creek (460",
@@ -3288,7 +3160,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Chino Creek"
    ],
@@ -3339,7 +3211,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Condon Park Pond",
@@ -3376,7 +3248,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "County of Orange Channel D03",
@@ -3410,7 +3282,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Coyote Creek - North Fork",
@@ -3444,7 +3316,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Crystal Springs Creek",
@@ -3481,7 +3353,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Devereux Slough",
@@ -3501,7 +3373,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Diamon Slough",
@@ -3618,19 +3490,15 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "parts": [
-    "Dry creek"
+   "records": [
+    "dry-creek-ca"
    ],
+   "reason": "a water record holds this water but not this spelling (dry-creek-ca): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)",
    "places_failed": [
     {
      "lon": -117.26933,
      "lat": 33.16429,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
-    },
-    {
-     "town": "Oceanside",
-     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
     }
    ]
   },
@@ -3675,7 +3543,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "East Twin Creek Channel that connects"
    ]
@@ -3701,7 +3569,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Elk Creek",
@@ -3735,7 +3603,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Erwin Creek",
@@ -3755,7 +3623,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "FMFCD percolation basin (Basin CC",
@@ -3789,7 +3657,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Fickle Hill Creek",
@@ -3812,7 +3680,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Forest swamp area",
@@ -3832,7 +3700,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Forest swamp"
    ]
@@ -3872,7 +3740,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Gaudelupe River",
@@ -3895,7 +3763,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Glorietta Bay",
@@ -3918,7 +3786,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Goat Creek",
@@ -3941,7 +3809,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.3935,
@@ -3971,7 +3839,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "3 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "3 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.19848,
@@ -4002,7 +3870,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Golf Creek",
@@ -4025,7 +3893,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Green Springs Creek",
@@ -4045,7 +3913,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Greystone Creek",
@@ -4068,7 +3936,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Hagan Park Pond",
@@ -4091,7 +3959,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Hagemann Gulch Creek",
@@ -4114,7 +3982,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Hang Town Creek",
@@ -4141,7 +4009,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Harada Park",
@@ -4161,7 +4029,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Heacock Channel",
@@ -4181,7 +4049,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "High Canal",
@@ -4212,7 +4080,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Hollyhills Drain",
@@ -4226,7 +4094,7 @@
    "towns": [
     "West Hollywood"
    ],
-   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "IID G-Drain",
@@ -4295,7 +4163,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "KENSINGTON HILLSIDE OPEN SPACE",
@@ -4318,7 +4186,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "L.A. Harbor",
@@ -4355,7 +4223,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Laguna Wash / La River",
@@ -4378,7 +4246,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Laguna Wash"
    ]
@@ -4404,7 +4272,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lake Don Pedro",
@@ -4447,7 +4315,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lake House Acres Creek",
@@ -4470,32 +4338,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Lake Oroville",
-   "reports": 1,
-   "permits": [
-    "5SSO10827"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     39.52745,
-     -121.46276
-    ],
-    [
-     39.71636,
-     -121.44897
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile",
-    "ca-swrcb-fhab"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lake Sherwood lake",
@@ -4515,7 +4358,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Lakewood. Watershed Boundaries (HUC12): Alamitos Bay Major Subwatershed: Los Cerritos Channel Major Watershed: San Gabriel River",
@@ -4563,7 +4406,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Little Churn Creek",
@@ -4586,7 +4429,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.34682,
@@ -4620,7 +4463,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.65154,
@@ -4632,30 +4475,6 @@
      "reason": "no NHD water of that name within 3 km of Yreka (the nearest is 12.0 km away)"
     }
    ]
-  },
-  {
-   "name": "Lodi Lake",
-   "reports": 1,
-   "permits": [
-    "5SSO11084"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     38.14847,
-     -121.29304
-    ]
-   ],
-   "towns": [
-    "Lodi"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile",
-    "ca-swrcb-fhab"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Long Beach Bay",
@@ -4678,7 +4497,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Long Beach Harbor",
@@ -4726,7 +4545,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Madera Del Presidio Open Channels",
@@ -4746,7 +4565,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Malibu Beach",
@@ -4769,7 +4588,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Marina",
@@ -4806,7 +4625,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Meeker Slough",
@@ -4826,7 +4645,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Millbrae Creek",
@@ -4849,7 +4668,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Miller Creek to Clear Lake",
@@ -4869,7 +4688,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "13 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "13 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Miller Creek"
    ],
@@ -4902,33 +4721,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Mission Bay/Enchanted cove",
-   "reports": 1,
-   "permits": [
-    "9SSO10658"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     32.77452,
-     -117.20876
-    ]
-   ],
-   "towns": [
-    "San Diego"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "parts": [
-    "Mission Bay"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Mission Creek Water Shed",
@@ -4951,7 +4744,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Mission Creek Watershed",
@@ -4997,7 +4790,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Mojabe River",
@@ -5017,7 +4810,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Molesworth Creek - Seasonal creek",
@@ -5037,30 +4830,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Morro Bay Estuary",
-   "reports": 1,
-   "permits": [
-    "3SSO18100"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     35.3243,
-     -120.83967
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "the name of a town (Morro Bay), not of a water: no NHD water of that name in CA",
-   "parts": [
-    "Morro Bay"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Mouth of Goleta Slough",
@@ -5117,7 +4887,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Natural streams",
@@ -5151,30 +4921,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Newport Bay",
-   "reports": 1,
-   "permits": [
-    "8SSO10590"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     33.61451,
-     -117.90094
-    ]
-   ],
-   "towns": [
-    "Newport Beach"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "No official name",
@@ -5205,7 +4952,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "No official"
    ]
@@ -5231,7 +4978,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "North Fork",
@@ -5265,7 +5012,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "OC Channel D03",
@@ -5352,7 +5099,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Olsen Channel",
@@ -5389,7 +5136,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Other surface waters. Reference key# G3C053500000000",
@@ -5432,7 +5179,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "PACIFIC OCEAN (WINDANSEA",
@@ -5455,7 +5202,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Pacific Coastline",
@@ -5478,7 +5225,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Pacific Ocean (Miramar Beach",
@@ -5489,7 +5236,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Pacific Ocean - Anita Street beach",
@@ -5512,7 +5259,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Palco March",
@@ -5535,7 +5282,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Patterson Road Drain",
@@ -5586,7 +5333,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Pennetencia Creek",
@@ -5620,7 +5367,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Pescadero creek drainage system",
@@ -5640,27 +5387,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Peters Canyon Channel",
-   "reports": 1,
-   "permits": [
-    "8SSO10587"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     33.68467,
-     -117.80612
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Pleasant Valley Creek",
@@ -5683,7 +5410,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.24601,
@@ -5714,7 +5441,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Poggy Canyon Channel",
@@ -5737,7 +5464,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Pond 20",
@@ -5760,7 +5487,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Prado Dam",
@@ -5774,7 +5501,7 @@
    "towns": [
     "Pomona"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Princevalle storm channel",
@@ -5797,76 +5524,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Putah Creek",
-   "reports": 1,
-   "permits": [
-    "5SSO11055"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     38.8021,
-     -122.6145
-    ],
-    [
-     38.76336,
-     -122.62966
-    ],
-    [
-     38.51711,
-     -121.75654
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile",
-    "ca-swrcb-fhab"
-   ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
-   "places_failed": [
-    {
-     "lon": -122.6145,
-     "lat": 38.8021,
-     "reason": "no NHD water of that name within 2 km of the reports' point (38.80210, -122.61450) (the nearest is 8.4 km away)"
-    },
-    {
-     "lon": -122.62966,
-     "lat": 38.76336,
-     "reason": "no NHD water of that name within 2 km of the reports' point (38.76336, -122.62966) (the nearest is 9.4 km away)"
-    },
-    {
-     "lon": -121.75654,
-     "lat": 38.51711,
-     "reason": "no NHD water of that name within 2 km of the reports' point (38.51711, -121.75654) (the nearest is 30.3 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Quimby creek",
-   "reports": 1,
-   "permits": [
-    "2SSO10179"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.31798,
-     -121.78424
-    ]
-   ],
-   "towns": [
-    "San Jose"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "ROSE CANYON OPEN SPACE PARK",
@@ -5889,7 +5547,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Randolph Creek",
@@ -5912,7 +5570,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Reidy Creek",
@@ -5935,7 +5593,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Revlon Slough",
@@ -5955,7 +5613,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Rio Hondo River",
@@ -5966,7 +5624,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Riverside County Flood Control Channel in Hemet CA",
@@ -5989,7 +5647,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Riverside County Flood Control Channel"
    ]
@@ -6012,7 +5670,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Robla Creek (Rio Linda Creek",
@@ -6035,7 +5693,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Robla Creek"
    ]
@@ -6052,7 +5710,7 @@
    "towns": [
     "Oakland"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Rodeo Creek",
@@ -6077,7 +5735,7 @@
    "towns": [
     "Oakland"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "San Antonio Creek",
@@ -6100,7 +5758,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "6 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "6 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.22673,
@@ -6125,7 +5783,7 @@
    "towns": [
     "Oakland"
    ],
-   "reason": "6 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "6 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "San Antonio creek"
    ],
@@ -6162,7 +5820,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "San Gabriel River @ Whittier Narrows Dam",
@@ -6223,7 +5881,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "San Jose Creek-Thompson Creek"
    ]
@@ -6240,79 +5898,6 @@
    "reason": "2 NHD waters of that name in CA and the reports give no place to choose one",
    "parts": [
     "San Jose Creek"
-   ]
-  },
-  {
-   "name": "San Leandro Bay",
-   "reports": 1,
-   "permits": [
-    "2SSO10087"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.74279,
-     -122.23201
-    ]
-   ],
-   "towns": [
-    "Alameda"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "San Pedro Bay",
-   "reports": 1,
-   "permits": [
-    "4SSO11423"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     33.78237,
-     -118.18352
-    ]
-   ],
-   "towns": [
-    "Long Beach"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
-  },
-  {
-   "name": "Sandy Creek",
-   "reports": 1,
-   "permits": [
-    "5SSO10730"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     35.15144,
-     -119.44888
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "2 NHD waters of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
-   "places_failed": [
-    {
-     "lon": -119.44888,
-     "lat": 35.15144,
-     "reason": "no NHD water of that name within 2 km of the reports' point (35.15144, -119.44888) (the nearest is 95.4 km away)"
-    }
    ]
   },
   {
@@ -6333,7 +5918,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Santa Maria",
@@ -6376,7 +5961,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Santa Monica Bay/King Harbor Marina",
@@ -6399,7 +5984,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Santa Monica Bay"
    ]
@@ -6416,7 +6001,7 @@
    "towns": [
     "Oakland"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Scotts Flatt",
@@ -6436,7 +6021,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Secondary channel to Oregon Gulch",
@@ -6459,7 +6044,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Secondary channel"
    ]
@@ -6519,46 +6104,12 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.94703,
      "lat": 37.22733,
      "reason": "no NHD water of that name within 2 km of the reports' point (37.22733, -121.94703) (the nearest is 303.8 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Sierra Creek",
-   "reports": 1,
-   "permits": [
-    "2SSO10179"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.39364,
-     -121.84577
-    ]
-   ],
-   "towns": [
-    "San Jose"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
-   "places_failed": [
-    {
-     "lon": -121.84577,
-     "lat": 37.39364,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.39364, -121.84577) (the nearest is 113.8 km away)"
-    },
-    {
-     "town": "San Jose",
-     "reason": "no NHD water of that name within 3 km of San Jose (the nearest is 84.4 km away)"
     }
    ]
   },
@@ -6580,7 +6131,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "16 NHD waters of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "16 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.98185,
@@ -6610,7 +6161,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "South Fork Santa Clara River",
@@ -6633,7 +6184,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -118.599,
@@ -6663,7 +6214,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Spill did not enter a body of water",
@@ -6706,7 +6257,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Storm Detention Area: Pine Basin 1",
@@ -6729,7 +6280,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Storm Pipe",
@@ -6812,7 +6363,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Strap Ravine",
@@ -6835,7 +6386,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Telegraph Road Drain",
@@ -6869,7 +6420,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Temporary Storm Basin",
@@ -6928,24 +6479,10 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Centinela Creek"
    ]
-  },
-  {
-   "name": "Thompson Wash",
-   "reports": 1,
-   "permits": [
-    "4SSO10418"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "towns": [
-    "Pomona"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Tiday Canal to San Francisco Bay",
@@ -6968,7 +6505,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Tiday Canal"
    ]
@@ -6994,7 +6531,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Lake Siskiyou"
    ],
@@ -7027,7 +6564,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "South Branch of Linda Creek"
    ]
@@ -7099,7 +6636,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "University Channel several miles upstream of Chollas Creek",
@@ -7122,7 +6659,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "University Channel several miles"
    ]
@@ -7148,7 +6685,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Unknonw - not confirmed"
    ]
@@ -7197,6 +6734,33 @@
    "reason": "not a water name"
   },
   {
+   "name": "Unnamed Creek tributary to Dry Creek",
+   "reports": 1,
+   "points": [
+    [
+     38.7233,
+     -121.3857
+    ]
+   ],
+   "towns": [
+    "Sacramento County"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "records": [
+    "dry-creek-ca"
+   ],
+   "reason": "a water record holds this water but not this spelling (dry-creek-ca): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)",
+   "places_failed": [
+    {
+     "lon": -117.26933,
+     "lat": 33.16429,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    }
+   ]
+  },
+  {
    "name": "Unnamed Irrigation Ditch",
    "reports": 1,
    "permits": [
@@ -7217,7 +6781,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Unnamed Pond",
@@ -7268,7 +6832,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Stone Lakes"
    ]
@@ -7311,7 +6875,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Holiday Lake"
    ],
@@ -7344,7 +6908,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Unnamed natural drainage channel in a marshland area leading to Suisun Bay on private property",
@@ -7407,7 +6971,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Hinkle Creek"
    ]
@@ -7450,7 +7014,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Upper Doolittle canyon drainage basen",
@@ -7493,7 +7057,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Verdugo Wash - LA River",
@@ -7516,7 +7080,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Vicente Creek",
@@ -7539,7 +7103,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -122.23138,
@@ -7570,7 +7134,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Vinyeard creek",
@@ -7590,7 +7154,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "WEST SIDE CREEK",
@@ -7613,7 +7177,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -117.08594,
@@ -7638,7 +7202,7 @@
    "towns": [
     "Glendora"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Water Conveyance System",
@@ -7658,7 +7222,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Watershed Boundaries - Long Beach Harbor",
@@ -7681,7 +7245,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Waverly Channel",
@@ -7704,7 +7268,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "We recovered the spill",
@@ -7715,7 +7279,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "West Creek",
@@ -7735,7 +7299,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "White Fox Creek",
@@ -7755,7 +7319,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "White Slough",
@@ -7784,7 +7348,7 @@
     "ca-swrcb-ciwqs-spills-flatfile",
     "ca-swrcb-fhab"
    ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "places_failed": [
     {
      "lon": -121.39152,
@@ -7800,36 +7364,6 @@
      "lon": -121.35162,
      "lat": 38.04291,
      "reason": "no NHD water of that name within 2 km of the reports' point (38.04291, -121.35162) (the nearest is 80.0 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Whitehouse Creek",
-   "reports": 1,
-   "permits": [
-    "5SSO10912"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     38.4305,
-     -121.3747
-    ]
-   ],
-   "towns": [
-    "Sacramento County"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
-   "places_failed": [
-    {
-     "lon": -121.3747,
-     "lat": 38.4305,
-     "reason": "no NHD water of that name within 2 km of the reports' point (38.43050, -121.37470) (the nearest is 160.2 km away)"
     }
    ]
   },
@@ -7854,7 +7388,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Willow Woodland Riparian Habitat Preserve",
@@ -7877,7 +7411,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Wilmington Drain / Machado Lake",
@@ -7900,7 +7434,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Wilmington Drain"
    ]
@@ -7926,7 +7460,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "Windport Canyon Creek which is tributary to Agua Amarga Canyon",
@@ -7949,7 +7483,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Windport Canyon Creek which is"
    ]
@@ -8035,7 +7569,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "beard ditch",
@@ -8055,7 +7589,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "cherry canyon creek",
@@ -8078,7 +7612,7 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
    "name": "continue",
@@ -8128,7 +7662,7 @@
    "towns": [
     "Industry"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "eventually to Los Angeles River",
@@ -8218,7 +7752,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines",
    "parts": [
     "returned it"
    ]
@@ -8266,7 +7800,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
    "parts": [
     "Rio Hondo Channel"
    ]
@@ -8297,7 +7831,7 @@
    "towns": [
     "Diamond Bar"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "to the Alhambra Wash",
@@ -8308,7 +7842,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "to the Santa Ana river",
@@ -8319,7 +7853,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "ultimately the Los Angeles River Watershed",
@@ -8330,7 +7864,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines",
    "parts": [
     "ultimately the Los Angeles River"
    ]
@@ -8364,7 +7898,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "unknown drainage ditch",
@@ -8398,7 +7932,7 @@
    "towns": [
     "Palos Verdes Estates"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "unnamed slough",
@@ -8432,7 +7966,7 @@
    "towns": [
     "Los Angeles"
    ],
-   "reason": "the open sea (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "within the Rio Hondo Watershed",
@@ -8443,7 +7977,7 @@
    "sources": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "reason": "no NHD flowline or waterbody of that name in CA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
+   "reason": "no NHD flowline or waterbody of that name in CA; the reports give no place to look for it in the NHD high-resolution flowlines"
   }
  ],
  "resolved": [
@@ -8693,42 +8227,6 @@
    ]
   },
   {
-   "name": "Richardson Bay",
-   "reports": 9,
-   "slugs": [
-    "richardson-bay-ca"
-   ],
-   "how": "the same water as a record on file",
-   "points": [
-    [
-     37.86246,
-     -122.4965
-    ],
-    [
-     37.84699,
-     -122.48265
-    ],
-    [
-     37.90423,
-     -122.50087
-    ],
-    [
-     37.87165,
-     -122.46917
-    ],
-    [
-     37.95979,
-     -122.49398
-    ]
-   ],
-   "towns": [
-    "Sausalito"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ]
-  },
-  {
    "name": "Strong Ranch Slough",
    "reports": 9,
    "slugs": [
@@ -8948,6 +8446,17 @@
    ]
   },
   {
+   "name": "Alamitos Bay",
+   "reports": 6,
+   "slugs": [
+    "alamitos-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lakewood"
+   ]
+  },
+  {
    "name": "Clear Lake",
    "reports": 6,
    "slugs": [
@@ -9093,6 +8602,27 @@
      "lat": 32.77633,
      "reason": "no NHD water of that name within 2 km of the reports' point (32.77633, -117.05640) (the nearest is 4.1 km away)"
     }
+   ]
+  },
+  {
+   "name": "San Diego Bay",
+   "reports": 6,
+   "slugs": [
+    "san-diego-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.62882,
+     -117.13867
+    ]
+   ],
+   "towns": [
+    "Coronado",
+    "San Diego"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
    ]
   },
   {
@@ -9418,6 +8948,36 @@
    ]
   },
   {
+   "name": "Redwood Creek",
+   "reports": 4,
+   "slugs": [
+    "redwood-creek-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.46022,
+     -122.23281
+    ],
+    [
+     37.43791,
+     -122.24125
+    ],
+    [
+     37.47794,
+     -122.22413
+    ],
+    [
+     37.5013,
+     -122.2217
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile",
+    "ca-swrcb-fhab"
+   ]
+  },
+  {
    "name": "San Mateo Creek",
    "reports": 4,
    "slugs": [
@@ -9589,6 +9149,23 @@
    ],
    "towns": [
     "Escondido"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Foster City Lagoon",
+   "reports": 3,
+   "slugs": [
+    "foster-city-lagoon-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.56788,
+     -122.27404
+    ]
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
@@ -10157,23 +9734,78 @@
    ]
   },
   {
-   "name": "Mission Creek",
+   "name": "MISSION BAY",
    "reports": 2,
    "slugs": [
-    "mission-creek-ca"
+    "mission-bay-ca"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
-     34.43657,
-     -119.72617
+     32.79166,
+     -117.20605
+    ],
+    [
+     32.78582,
+     -117.18559
     ]
    ],
    "towns": [
-    "Santa Barbara"
+    "San Diego"
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Mare Island Strait",
+   "reports": 2,
+   "slugs": [
+    "mare-island-strait-ca",
+    "mare-island-strait-vallejo-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.1023,
+     -122.21963
+    ],
+    [
+     38.1172,
+     -122.23776
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Monterey Bay",
+   "reports": 2,
+   "slugs": [
+    "monterey-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.60393,
+     -121.88947
+    ],
+    [
+     36.63515,
+     -121.92681
+    ],
+    [
+     36.97147,
+     -121.95382
+    ]
+   ],
+   "towns": [
+    "Pacific Grove"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile",
+    "ca-swrcb-fhab"
    ]
   },
   {
@@ -10188,26 +9820,6 @@
      38.02319,
      -121.35886
     ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ]
-  },
-  {
-   "name": "Pine Creek",
-   "reports": 2,
-   "slugs": [
-    "pine-creek-ca"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     37.94584,
-     -122.0142
-    ]
-   ],
-   "towns": [
-    "Concord"
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
@@ -10499,35 +10111,6 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
-   ]
-  },
-  {
-   "name": "Unnamed Tributary to Dry Creek",
-   "reports": 2,
-   "slugs": [
-    "dry-creek-ca",
-    "dry-creek-galt-ca",
-    "dry-creek-modesto-ca"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     38.7245,
-     -121.3387
-    ]
-   ],
-   "towns": [
-    "Sacramento County"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "places_failed": [
-    {
-     "lon": -117.26933,
-     "lat": 33.16429,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
-    }
    ]
   },
   {
@@ -10991,6 +10574,14 @@
    ]
   },
   {
+   "name": "Carmel Bay",
+   "reports": 1,
+   "slugs": [
+    "carmel-bay-ca"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
    "name": "Cerrito Creek",
    "reports": 1,
    "slugs": [
@@ -11008,6 +10599,17 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Channel Islands Harbor",
+   "reports": 1,
+   "slugs": [
+    "channel-islands-harbor-ca"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Oxnard"
    ]
   },
   {
@@ -11409,6 +11011,28 @@
    ]
   },
   {
+   "name": "Lake Oroville",
+   "reports": 1,
+   "slugs": [
+    "lake-oroville-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.52745,
+     -121.46276
+    ],
+    [
+     39.71636,
+     -121.44897
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile",
+    "ca-swrcb-fhab"
+   ]
+  },
+  {
    "name": "Lake Tahoe",
    "reports": 1,
    "slugs": [
@@ -11491,6 +11115,27 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Lodi Lake",
+   "reports": 1,
+   "slugs": [
+    "lodi-lake-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.14847,
+     -121.29304
+    ]
+   ],
+   "towns": [
+    "Lodi"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile",
+    "ca-swrcb-fhab"
    ]
   },
   {
@@ -11616,6 +11261,26 @@
    ]
   },
   {
+   "name": "Mission Bay/Enchanted cove",
+   "reports": 1,
+   "slugs": [
+    "mission-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.77452,
+     -117.20876
+    ]
+   ],
+   "towns": [
+    "San Diego"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Mojave River (dry riverbed",
    "reports": 1,
    "slugs": [
@@ -11652,6 +11317,23 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile",
     "ca-swrcb-fhab"
+   ]
+  },
+  {
+   "name": "Morro Bay Estuary",
+   "reports": 1,
+   "slugs": [
+    "morro-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.3243,
+     -120.83967
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
    ]
   },
   {
@@ -11706,6 +11388,26 @@
    ]
   },
   {
+   "name": "Newport Bay",
+   "reports": 1,
+   "slugs": [
+    "newport-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.61451,
+     -117.90094
+    ]
+   ],
+   "towns": [
+    "Newport Beach"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Noble Creek",
    "reports": 1,
    "slugs": [
@@ -11753,6 +11455,23 @@
    ]
   },
   {
+   "name": "Peters Canyon Channel",
+   "reports": 1,
+   "slugs": [
+    "peters-canyon-channel-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.68467,
+     -117.80612
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Pine Mountain Lake",
    "reports": 1,
    "slugs": [
@@ -11793,6 +11512,52 @@
      37.53044,
      -122.34471
     ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Putah Creek",
+   "reports": 1,
+   "slugs": [
+    "putah-creek-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.8021,
+     -122.6145
+    ],
+    [
+     38.76336,
+     -122.62966
+    ],
+    [
+     38.51711,
+     -121.75654
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile",
+    "ca-swrcb-fhab"
+   ]
+  },
+  {
+   "name": "Quimby creek",
+   "reports": 1,
+   "slugs": [
+    "quimby-creek-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.31798,
+     -121.78424
+    ]
+   ],
+   "towns": [
+    "San Jose"
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
@@ -11859,6 +11624,26 @@
    ]
   },
   {
+   "name": "San Leandro Bay",
+   "reports": 1,
+   "slugs": [
+    "san-leandro-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.74279,
+     -122.23201
+    ]
+   ],
+   "towns": [
+    "Alameda"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "San Marcos Creek",
    "reports": 1,
    "slugs": [
@@ -11876,12 +11661,56 @@
    ]
   },
   {
+   "name": "San Pedro Bay",
+   "reports": 1,
+   "slugs": [
+    "san-pedro-bay-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.78237,
+     -118.18352
+    ]
+   ],
+   "towns": [
+    "Long Beach"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Sand Canyon Wash",
    "reports": 1,
    "slugs": [
     "sand-canyon-wash-ca"
    ],
    "how": "record built from the name"
+  },
+  {
+   "name": "Sandy Creek",
+   "reports": 1,
+   "slugs": [
+    "sandy-creek-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     35.15144,
+     -119.44888
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "places_failed": [
+    {
+     "lon": -119.44888,
+     "lat": 35.15144,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.15144, -119.44888) (the nearest is 95.4 km away)"
+    }
+   ]
   },
   {
    "name": "Santa Ana River (City SD",
@@ -11946,6 +11775,37 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Sierra Creek",
+   "reports": 1,
+   "slugs": [
+    "sierra-creek-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.39364,
+     -121.84577
+    ]
+   ],
+   "towns": [
+    "San Jose"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "places_failed": [
+    {
+     "lon": -121.84577,
+     "lat": 37.39364,
+     "reason": "no NHD water of that name within 2 km of the reports' point (37.39364, -121.84577) (the nearest is 113.8 km away)"
+    },
+    {
+     "town": "San Jose",
+     "reason": "no NHD water of that name within 3 km of San Jose (the nearest is 84.4 km away)"
+    }
    ]
   },
   {
@@ -12195,6 +12055,17 @@
    ]
   },
   {
+   "name": "Thompson Wash",
+   "reports": 1,
+   "slugs": [
+    "thompson-wash-ca"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Pomona"
+   ]
+  },
+  {
    "name": "Tice Creek",
    "reports": 1,
    "slugs": [
@@ -12305,35 +12176,6 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
-   ]
-  },
-  {
-   "name": "Unnamed Creek tributary to Dry Creek",
-   "reports": 1,
-   "slugs": [
-    "dry-creek-ca",
-    "dry-creek-galt-ca",
-    "dry-creek-modesto-ca"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     38.7233,
-     -121.3857
-    ]
-   ],
-   "towns": [
-    "Sacramento County"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "places_failed": [
-    {
-     "lon": -117.26933,
-     "lat": 33.16429,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
-    }
    ]
   },
   {
@@ -12570,6 +12412,33 @@
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Whitehouse Creek",
+   "reports": 1,
+   "slugs": [
+    "whitehouse-creek-ca"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.4305,
+     -121.3747
+    ]
+   ],
+   "towns": [
+    "Sacramento County"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ],
+   "places_failed": [
+    {
+     "lon": -121.3747,
+     "lat": 38.4305,
+     "reason": "no NHD water of that name within 2 km of the reports' point (38.43050, -121.37470) (the nearest is 160.2 km away)"
+    }
    ]
   },
   {
