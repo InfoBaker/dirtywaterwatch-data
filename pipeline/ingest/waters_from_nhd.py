@@ -4124,6 +4124,11 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
         for k, v in aliases.items():
             cur[k] = list(dict.fromkeys(list(cur.get(k) or []) + v))
         aliases_path.write_text(json.dumps(dict(sorted(cur.items())), indent=1, ensure_ascii=False) + "\n")
+    for st in states:
+        n = names_follow_tidy(ROOT / "research" / st.lower() / "receiving-waters-missing.json",
+                              [a for a in actions if a["to"].endswith(f"-{st.lower()}")])
+        if n:
+            print(f"  {st}: {n} slugs in the names file's resolved names and rows follow the tidy", flush=True)
     for a in actions:
         print(f"  {a['action']:8} {a['slug'] or 'row ' + repr(a.get('row'))} -> {a['to']}: {a['why']}")
     print(f"{', '.join(states)}: {sum(a['action'] == 'dropped' for a in actions)} NHD records dropped for the "
@@ -4135,6 +4140,30 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
           f"{len(named)} 'Unnamed stream' records named for their town"
           + (f", left as they are (no town): {', '.join(unnamed_left)}" if unnamed_left else ""))
     return 0
+
+
+def names_follow_tidy(path, actions) -> int:
+    """The state's names file (research/<st>/receiving-waters-missing.json) after a tidy: a slug the tidy dropped (for
+    openboatlaunch's record of the same water) or renamed (off an openboatlaunch slug naming another water) is replaced
+    in the resolved names' slugs and the rows' records by the slug it went to (2026-11-06 review of the CA merge, P3-1:
+    'Mission Creek' still named mission-creek-ca, by then openboatlaunch's San Francisco channel). Applied once, by
+    the tidy that made the change. Returns the number of slugs replaced."""
+    path = Path(path)
+    to = {a["slug"]: a["to"] for a in actions if a.get("slug") and a.get("action") in ("dropped", "renamed")}
+    if not to or not path.exists():
+        return 0
+    doc = read_json(path) or {}
+    n = 0
+    for key, field in (("resolved", "slugs"), ("rows", "records")):
+        for r in doc.get(key) or []:
+            if not isinstance(r, dict) or not r.get(field):
+                continue
+            new = list(dict.fromkeys(to.get(x, x) for x in r[field]))
+            n += sum(1 for x in r[field] if x in to)
+            r[field] = new
+    if n:
+        write_json(path, doc)
+    return n
 
 
 def state_main(args) -> int:
@@ -4941,7 +4970,7 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
     added without asking NHD again for every name the state's reports give."""
     previous = [r for r in (read_json(OUT) or {}).get("targets") or [] if r.get("from") == REPORT_ROWS
                 and r.get("state") == state]
-    last = {compact(r["name"]): r for r in previous if r.get("name")}
+    last = LastRows(previous)
     http = Http(args.refresh, args.offline, max_requests=args.max_requests,
                 deadline=time.monotonic() + args.budget_s if args.budget_s else None)
     shapes = States()
@@ -4957,7 +4986,7 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
     pairs = []
     for t in targets:
         row = run.new_row(t)
-        prev = last.get(compact(t["name"]))
+        prev = last.get(t["name"])
         row.update({"from": REPORT_ROWS, "reports": t["events"]})
         if prev is None:
             row["reason"] = f"{NOT_REACHED} (a hand-only run asks no NHD); the next --names run asks NHD"
@@ -4973,6 +5002,25 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
     run.hand_pass(pairs)
     return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run,
                         hand_only=True)
+
+
+class LastRows:
+    """The last build's report rows by name, for --hand-only and --recheck: the exact name first, the compact form
+    (case and punctuation aside) only when one row has it (2026-11-06 review P2-2: 'Dry Creek', 4 reports and a record,
+    took the unresolved row of 'Dry creek', 1 report, when both were keyed by the compact form)."""
+
+    def __init__(self, rows):
+        self.exact, by_compact = {}, defaultdict(list)
+        for r in rows:
+            if r.get("name"):
+                self.exact.setdefault(r["name"], r)
+                by_compact[compact(r["name"])].append(r)
+        self.unique = {k: v[0] for k, v in by_compact.items() if len(v) == 1}
+
+    def get(self, name, default=None):
+        if name in self.exact:
+            return self.exact[name]
+        return self.unique.get(compact(name), default)
 
 
 def kept_build_note(meta: dict) -> dict | None:
@@ -5032,16 +5080,16 @@ def names_recheck(path, meta, state, rows, targets, done, skipped_reason, resolv
     if previous is None:
         previous = [r for r in (read_json(OUT) or {}).get("targets") or [] if r.get("from") == REPORT_ROWS
                     and r.get("state") == state]
-    last = {compact(r["name"]): r for r in previous if r.get("name")}
+    last = LastRows(previous)
     out_rows = []
     for t, slugs in done:                   # the places the last build could not find it at are kept
-        r = last.get(compact(t["name"])) or {}
+        r = last.get(t["name"]) or {}
         out_rows.append({"name": t["name"], "from": REPORT_ROWS, "state": state, "slugs": slugs, "reason": None,
                          "how": ["already a water record: the status resolver places reports of this name on it"],
                          **({"places_failed": r["places_failed"]} if r.get("places_failed") else {})})
     kept = waiting = 0
     for t in targets:
-        r = last.get(compact(t["name"]))
+        r = last.get(t["name"])
         if r is not None:
             out_rows.append({k: r[k] for k in ("name", "from", "state", "slugs", "how", "reason", "defined_by",
                                                "places_failed") if k in r})
@@ -5161,10 +5209,7 @@ def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, plac
     reason: its spelling needs an alias, or its points lie beyond the placement guard (2026-11-04 review: "Allen's
     Creek", "17 Mile River" and "South Fork of Middle River" were listed as resolved while their reports went unplaced
     or to the Middle River, and records chosen by a town 12 to 30 km from the reports' points place none of them)."""
-    by_name = {}
-    for r in out_rows:
-        if r.get("from") == REPORT_ROWS:
-            by_name[compact(r["name"])] = r
+    by_name = LastRows([r for r in out_rows if r.get("from") == REPORT_ROWS])     # exact name first (review P2-2)
     left, resolved = [], []
     for r in rows:
         parts = r.pop("_parts", None) or []
@@ -5173,7 +5218,7 @@ def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, plac
         if not parts:
             left.append({**base, "reason": why or "no water name"})
             continue
-        trs = [by_name.get(compact(p)) for p in parts]
+        trs = [by_name.get(p) for p in parts]
         if all(x is not None and x["slugs"] for x in trs):
             slugs = list(dict.fromkeys(s for x in trs for s in x["slugs"]))
             fails = [f for x in trs for f in x.get("places_failed") or []]
