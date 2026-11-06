@@ -154,10 +154,10 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 343,
+   "distance_m": 258,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 343 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 007 (Canal Street Overflow) the receiving water 'Lake Washington Ship Canal'; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 258 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 007 (Canal Street Overflow) the receiving water 'Lake Washington Ship Canal' (WA go-live gates 2026-11-06)"
@@ -197,10 +197,10 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 140,
+   "distance_m": 126,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 140 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 008 (3rd Avenue West Overflow) the receiving water 'Lake Washington Ship Canal'; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 126 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 008 (3rd Avenue West Overflow) the receiving water 'Lake Washington Ship Canal' (WA go-live gates 2026-11-06)"
@@ -359,8 +359,8 @@
    "water_kind": "canal",
    "distance_m": 0,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Montlake Cut' by name; Montlake Cut (montlake-cut-wa, hand record, census), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 014 (Montlake Overflow) the receiving water 'Lake Washington Ship Canal'; the point lies on the Montlake Cut, the canal's stretch between Union Bay and Portage Bay (USGS GNIS 1534602), which openboatlaunch's Ship Canal record does not cover; Montlake Cut (montlake-cut-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Montlake Cut",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 014 (Montlake Overflow) the receiving water 'Lake Washington Ship Canal'; the point lies on the Montlake Cut, the canal's stretch between Union Bay and Portage Bay (USGS GNIS 1534602), which openboatlaunch's Ship Canal record does not cover (WA go-live gates 2026-11-06)"
@@ -597,8 +597,8 @@
    "water_kind": "canal",
    "distance_m": 0,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'East Waterway' by name; East Waterway (east-waterway-wa, hand record, census), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 030 (Lander Street Regulator) the receiving water 'Duwamish River - East Waterway'; East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "East Waterway",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 030 (Lander Street Regulator) the receiving water 'Duwamish River - East Waterway' (WA go-live gates 2026-11-06)"
@@ -677,10 +677,10 @@
    "water_slug": "east-waterway-wa",
    "water_name": "East Waterway",
    "water_kind": "canal",
-   "distance_m": 27,
+   "distance_m": 18,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'East Waterway' by name; East Waterway (east-waterway-wa, hand record, census), 27 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 032 (Hanford #2 Regulator) the receiving water 'Duwamish River - East Waterway'; East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 18 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "East Waterway",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 032 (Hanford #2 Regulator) the receiving water 'Duwamish River - East Waterway' (WA go-live gates 2026-11-06)"
@@ -1422,10 +1422,10 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 430,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 430 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "distance_m": 293,
+   "match": "geometry+name",
+   "water_match": "operator's list: Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 057 (Barton St PS Emergency Overflow) the receiving water 'Puget Sound'; Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 293 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01), table 32, gives outfall 057 (Barton St PS Emergency Overflow) the receiving water 'Puget Sound' (WA go-live gates 2026-11-06)"
@@ -1699,10 +1699,10 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 324,
+   "distance_m": 286,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 324 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 019 the receiving water 'Union Bay' (Ecology water body WA-08-9350, Lake Washington); Union Bay is the bay of Lake Washington at the Montlake Cut, inside openboatlaunch's Lake Washington record; Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 286 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 019 the receiving water 'Union Bay' (Ecology water body WA-08-9350, Lake Washington); Union Bay is the bay of Lake Washington at the Montlake Cut, inside openboatlaunch's Lake Washington record (WA go-live gates 2026-11-06)"
@@ -2777,8 +2777,8 @@
    "water_kind": "canal",
    "distance_m": 0,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Salmon Bay' by name; Salmon Bay Waterway (salmon-bay-waterway-wa, hand record, census), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 059 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); below the locks, on the Census polygon named Salmon Bay Waterway; Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Salmon Bay",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 059 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); below the locks, on the Census polygon named Salmon Bay Waterway (WA go-live gates 2026-11-06)"
@@ -2820,8 +2820,8 @@
    "water_kind": "canal",
    "distance_m": 0,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Salmon Bay' by name; Salmon Bay Waterway (salmon-bay-waterway-wa, hand record, census), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 060 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); below the locks, on the Census polygon named Salmon Bay Waterway; Salmon Bay Waterway (salmon-bay-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Salmon Bay",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 060 the receiving water 'Salmon Bay' (Ecology water body WA-08-9340); below the locks, on the Census polygon named Salmon Bay Waterway (WA go-live gates 2026-11-06)"
@@ -3407,10 +3407,10 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 547,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 547 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "distance_m": 372,
+   "match": "geometry+name",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 091 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 372 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 091 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
@@ -3450,10 +3450,10 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 478,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 478 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "distance_m": 326,
+   "match": "geometry+name",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 094 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 326 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 094 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
@@ -3493,10 +3493,10 @@
    "water_slug": "puget-sound-wa",
    "water_name": "Puget Sound",
    "water_kind": "sound",
-   "distance_m": 417,
-   "match": "name_only",
-   "water_match": "name: its receiving water 'Puget Sound' by name; Puget Sound (puget-sound-wa, openboatlaunch), 417 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "distance_m": 284,
+   "match": "geometry+name",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 095 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270); Puget Sound (puget-sound-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 284 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Puget Sound",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 095 the receiving water 'Puget Sound - S-Central' (Ecology water body WA-PS-0270) (WA go-live gates 2026-11-06)"
@@ -3577,8 +3577,8 @@
    "water_kind": "canal",
    "distance_m": 0,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'East Waterway' by name; East Waterway (east-waterway-wa, hand record, census), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 107 the receiving water 'East Waterway of the Duwamish River' (Ecology water body WA-09-1010); East Waterway (east-waterway-wa, Census TIGER/Line record (data/waters-nhd.json)), 0 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "East Waterway",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 107 the receiving water 'East Waterway of the Duwamish River' (Ecology water body WA-09-1010) (WA go-live gates 2026-11-06)"
@@ -4554,10 +4554,10 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 647,
+   "distance_m": 469,
    "match": "name_only",
-   "water_match": "name: its receiving water 'Lake Washington' by name; Lake Washington (lake-washington-wa, openboatlaunch), 647 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 161 the receiving water 'Lake Washington' (Ecology water body WA-08-9350); the permit's own point for it (47.67713, -122.24909) lies on the lake's outline; Lake Washington (lake-washington-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 469 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 161 the receiving water 'Lake Washington' (Ecology water body WA-08-9350); the permit's own point for it (47.67713, -122.24909) lies on the lake's outline (WA go-live gates 2026-11-06)"
@@ -4638,9 +4638,9 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no record named 'Longfellow Creek' in WA",
-   "no_water_reason": "no record named 'Longfellow Creek' in WA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "none: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "no_water_reason": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Longfellow Creek",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 168 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
@@ -4682,9 +4682,9 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no record named 'Longfellow Creek' in WA",
-   "no_water_reason": "no record named 'Longfellow Creek' in WA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "none: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "no_water_reason": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Longfellow Creek",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 169 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
@@ -4726,9 +4726,9 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no record named 'Longfellow Creek' in WA",
-   "no_water_reason": "no record named 'Longfellow Creek' in WA",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "none: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "no_water_reason": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000); Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a record from it waits for a run that reaches OpenStreetMap's Overpass service",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Longfellow Creek",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 170 the receiving water 'Longfellow Creek' (Ecology water body WA-09-1000) (WA go-live gates 2026-11-06)"
@@ -4807,10 +4807,10 @@
    "water_slug": "lake-washington-ship-canal-wa",
    "water_name": "Lake Washington Ship Canal",
    "water_kind": "river",
-   "distance_m": 107,
+   "distance_m": 83,
    "match": "geometry+name",
-   "water_match": "name: its receiving water 'Lake Washington Ship Canal' by name; Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 107 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-06)",
+   "water_match": "operator's list: Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 174 the receiving water 'Lake Washington - Ship Canal' (Ecology water body WA-08-9340); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch record; distance to its outline as published on its water page, 2026-11-06), 83 m from the point",
+   "water_matched_by": "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)",
    "receiving_water_override": {
     "water": "Lake Washington Ship Canal",
     "basis": "Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2) gives outfall 174 the receiving water 'Lake Washington - Ship Canal' (Ecology water body WA-08-9340) (WA go-live gates 2026-11-06)"
