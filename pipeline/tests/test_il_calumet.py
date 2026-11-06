@@ -52,7 +52,13 @@ def test_the_nhdplus_flowlines_are_the_little_calumet_river_by_their_comids():
     ws = _waters()
     w = ws["little-calumet-river-il"]
     assert w["name"] == "Little Calumet River" and w["hand"] is True
-    assert w["gnis_id"] is None and w["nhdplus_gnis_id"] == "405379" and len(w["comids"]) == 6
+    assert w["gnis_id"] is None and w["nhdplus_gnis_id"] == "405379" and set(w["comids"]) == {13463969, 13463979}
+    # cut west of the junction at Hegewisch: the Grand Calumet east of it is grand-calumet-river-il (review P2-1)
+    assert w["bbox"][2] <= -87.5613 and spec["within"][2] == -87.5614 and "Grand Calumet" in spec["why"]
+    import shapely
+    m = lambda g: shapely.transform(g, lambda xy: xy * [83_000.0, 111_000.0])      # metres near 41.6 N
+    grand = m(shape(ws["grand-calumet-river-il"]["geometry"])).buffer(30)
+    assert m(shape(w["geometry"])).intersection(grand).length / 1000 < 0.1
     assert "is not this water's own" in w["note"]
     assert N.water_identity(w) == ("IL", "comids", tuple(sorted(w["comids"])))
     assert N.water_identity(ws["calumet-river-il"]) == ("IL", "gnis", "405379")
@@ -163,3 +169,39 @@ def test_the_stretchs_river_path_belongs_to_the_rivers_record():
             if r["outfall"] == "OBrien Lock and Dam"][0]
     assert R.river_path_waters(gate["lake_entry"]["path"], ws, "IL") == ["calumet-river-il"]
     assert R.river_path_waters([], ws, "IL") == []
+
+
+def test_a_reach_segment_on_a_records_own_comid_flags_it_whatever_nhdplus_names_it():
+    """Review P1-1: NHDPlus names the Little Calumet's flowlines 'Calumet River'; a traced segment on COMID 13463969
+    flags little-calumet-river-il (its own COMID) and not calumet-river-il; an unnamed segment on the lower river flags
+    calumet-river-il."""
+    from build import status as S
+    ws = {s: {**w, "extra": True} for s, w in _waters().items()
+          if s in ("calumet-river-il", "little-calumet-river-il", "grand-calumet-river-il")}
+    little = shape(ws["little-calumet-river-il"]["geometry"])
+    line = little.geoms[0] if little.geom_type == "MultiLineString" else little
+    pts = [list(c) for c in line.coords][len(line.coords) // 3:len(line.coords) // 3 + 3]
+    S._REACH_WATERS.clear()
+    seg = {"comid": 13463969, "gnis_name": "Calumet River", "coords": pts}
+    assert S.reach_waters({"key": "t-little", "segments": [seg]}, ws) == ["little-calumet-river-il"]
+    S._REACH_WATERS.clear()
+    assert S.reach_waters({"key": "t-little-noid", "segments": [{**seg, "comid": None}]}, ws) == []   # name alone: no
+    lower = shape(ws["calumet-river-il"]["geometry"])
+    lower = lower.geoms[0] if lower.geom_type == "MultiLineString" else lower
+    mid = [list(c) for c in lower.coords][len(lower.coords) // 2:len(lower.coords) // 2 + 3]
+    assert S.reach_waters({"key": "t-lower", "segments": [{"comid": None, "gnis_name": "", "coords": mid}]},
+                          ws) == ["calumet-river-il"]
+    S._REACH_WATERS.clear()
+
+
+def test_mwrds_little_cal_south_outfalls_are_on_the_east_arm():
+    """Review P2-2: the south arm carries the name MWRD and EPA use (alias), so each 'Little Cal R (South)' row is
+    tied to the east arm at its point."""
+    spec = _spec("East Arm Little Calumet River")
+    assert spec["supersede"] and "Little Calumet River" in spec["aliases"] and "Little Cal R (South)" in spec["why"]
+    assert "Little Calumet River" in _waters()["east-arm-little-calumet-river-il"]["aliases"]
+    il = json.loads((ROOT / "data" / "outfalls-il.json").read_text())["outfalls"]
+    south = [r for r in il if r.get("mwrd_reach") == "Little Cal R (South)"]
+    assert len(south) >= 20
+    assert all(r["water_slug"] == "east-arm-little-calumet-river-il" and r["distance_m"] <= 250 for r in south)
+    assert all(r["distance_m"] <= 50 for r in south if r["npdes_permit"] == "ILM580025")

@@ -2797,16 +2797,30 @@ HAND: list[dict] = [
               "87.5292 W); NHDPlus V2.1 has none of it and gives the id to the Little Calumet River instead (the "
               "Little Calumet River's hand record).")),
     dict(name="Little Calumet River", state="IL", kind="river", source="nhd", gnis_id="405379",
+         within=(-87.70, 41.60, -87.5614, 41.70),
+         within_why=("east of 87.5614 W, the junction with the Calumet River at Hegewisch, the NHDPlus chain of GNIS "
+                     "405379 runs up the Grand Calumet River to the Indiana line (the USGS NHD high-resolution Grand "
+                     "Calumet River, GNIS 409251, whose flowlines end at 41.6462 N 87.5614 W), which is the record "
+                     "grand-calumet-river-il; review 2026-11-06 P2-1"),
          gnis_not_its_own=("NHDPlus names these flowlines 'Calumet River' (GNIS 405379, reach codes 07120003000061 and "
                            "07120003000188, in the Little Calumet-Galien basin), while the USGS NHD high-resolution "
                            "flowlines give GNIS 405379 to the Calumet River from Hegewisch to Lake Michigan (the "
                            "Calumet River's hand record) and leave this stretch unnamed."),
-         why=("EPA's CSO inventory gives 'Little Calumet River' as the receiving water of Chicago's (IL0045012), Riverdale's "
-              "(ILM580007), Dolton's (ILM580017) and MWRD's Calumet plant's (IL0028061) outfalls along this stretch, and MWRD's CSO Points layer puts "
-              "them in its 'Little Cal R (North)' and 'Little Cal R (South)' reaches. This is the river from the Indiana "
-              "line (the USGS NHD high-resolution 'Little Calumet River', GNIS 424126, upstream in Indiana) west past "
-              "its junction with the Calumet River at Hegewisch to Blue Island, as NHDPlus V2.1 draws it (6 network "
-              "flowlines).")),
+         why=("MWRD's CSO Points layer puts Chicago's (IL0045012), Riverdale's (ILM580007) and Dolton's (ILM580017) "
+              "outfalls and its own Calumet plant's (IL0028061) along this stretch in its 'Little Cal R (North)' reach, "
+              "and EPA's CSO inventory gives them the receiving water 'Little Calumet River'. This is the river from its "
+              "junction with the Calumet River at Hegewisch west to Blue Island, as NHDPlus V2.1 draws it; the USGS NHD "
+              "high-resolution flowlines leave it unnamed. East of the junction NHDPlus's chain is the Grand Calumet "
+              "River (within_why); MWRD's 'Little Cal R (South)' is the river's south arm, the East Arm Little Calumet "
+              "River's record.")),
+    dict(name="East Arm Little Calumet River", state="IL", kind="river", source="nhd", gnis_id="451867",
+         supersede=True, aliases=["Little Calumet River"],
+         why=("NHDPlus V2.1 names these flowlines (GNIS 451867) the East Arm Little Calumet River, the Little Calumet "
+              "River's south arm from the Indiana line near Lansing to Blue Island; the USGS NHD high-resolution "
+              "flowlines leave it unnamed. MWRD's CSO Points layer calls it 'Little Cal R (South)', and EPA's CSO "
+              "inventory and MWRD's layer give 'Little Calumet River' as the receiving water of the outfalls on it "
+              "(Calumet City ILM580025, Dixmoor ILM580011 and others), hence the alias: the placement "
+              "guard then keeps whichever arm lies at an outfall's point (review 2026-11-06 P2-2).")),
     # 2026-11-06 (California's bays, docs/checklists/2026-11-06-ca-bays.md in the site repository): the northern arms of
     # San Francisco Bay that EPA's inventory and the State Water Board's spill reports name and that neither
     # openboatlaunch (its san-francisco-bay-ca is the central and south bay) nor NHDPlus V2.1 nor the NHD high-resolution
