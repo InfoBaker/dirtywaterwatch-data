@@ -166,8 +166,10 @@ def site_inputs() -> dict:
 
 def cso_open(o: dict) -> bool:
     """A registry row the caution reads: a combined sewer outfall (outfall_kind "cso"; plant outfalls never drive
-    it) that is not closed (outfall_status CLS)."""
-    return (o.get("outfall_kind") or "cso") == "cso" and not str(o.get("outfall_status") or "").upper().startswith("CLS")
+    it) that is not closed (outfall_status CLS) and not set apart from the caution (rain_caution false: a lake
+    reversal gate, data/outfalls-il.json, which opens when the waterway rises, on its operator's decision)."""
+    return (o.get("outfall_kind") or "cso") == "cso" and not str(o.get("outfall_status") or "").upper().startswith("CLS") \
+        and o.get("rain_caution") is not False
 
 
 def discharger_index() -> dict[str, dict]:
@@ -274,12 +276,24 @@ def subtract(a: datetime, b: datetime | None, blocks: list[tuple[datetime, datet
     return [(x, y) for x, y in pieces if y is None or y > x]
 
 
-def discharge_starts(events: list[dict]) -> dict[str, list[tuple[datetime, str]]]:
+def not_rain_driven(outfalls: list[dict] | None) -> set[tuple[str, str]]:
+    """(permit, outfall id) of the registry rows set apart from the rain caution (rain_caution false: a lake reversal
+    gate, data/outfalls-il.json), upper case."""
+    return {(str(o.get("npdes_permit") or "").upper(), str(o.get("outfall") or "").strip().upper())
+            for o in outfalls or [] if o.get("rain_caution") is False and o.get("npdes_permit")}
+
+
+def discharge_starts(events: list[dict], skip: set[tuple[str, str]] | None = None) -> dict[str, list[tuple[datetime, str]]]:
     """{permit: [(start, event_id)]} for every discharge notice with a permit and a start (any
-    source, any status; month and year records are not notices of a start)."""
+    source, any status; month and year records are not notices of a start). skip: (permit, outfall id) of structures
+    outside the caution (not_rain_driven): a reversal at a lake gate, filed under a plant's permit, is no notice of
+    the permit's sewer overflows and never holds back their caution (review 2026-11-06)."""
     out = defaultdict(list)
+    skip = skip or set()
     for ev in events:
         if ev.get("time_precision") in ("month", "year") or not ev.get("npdes_permit"):
+            continue
+        if (str(ev["npdes_permit"]).upper(), str(ev.get("outfall_id") or "").strip().upper()) in skip:
             continue
         et = ev.get("event_type")
         if et not in DISCHARGE_TYPES and not (et == "unknown" and ev.get("status") == "ongoing"):
@@ -307,6 +321,8 @@ def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list
             continue
         if r.get("model") == "shoreline" and r.get("outfall_kind") == "plant":
             continue        # a treatment plant's shoreline stretch: the permittee's CSO rain caution never reads it
+        if r.get("rain_caution") is False:
+            continue        # a lake reversal gate's stretch (data/outfalls-il.json): never rain-driven
         if r.get("segments"):
             keys.append(key)
             on = set(reach_waters_fn(r, waters))
@@ -366,7 +382,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
     start = parse_t(hist.get("start"))
     tail = float(cfg["tail_hours"])
     supp = timedelta(hours=float(cfg["notice_suppress_hours"]))
-    starts = discharge_starts(events)
+    starts = discharge_starts(events, not_rain_driven(outfalls))
     fetched = parse_t(rf.get("fetched_at"))
     valid = parse_t((rf.get("mrms") or {}).get("valid_time"))
     stale = valid is None or now - valid > timedelta(hours=float(cfg["rainfall_stale_hours"]) + 1)
