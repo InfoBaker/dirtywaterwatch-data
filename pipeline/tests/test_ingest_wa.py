@@ -350,12 +350,12 @@ def test_every_washington_operator_has_its_permit_duty_row_and_every_cso_operato
     assert not any("@ecy.wa.gov" in json.dumps(r).lower() for r in rows.values())
 
 
-def test_washington_rules_row_cites_the_law_and_is_not_live():
+def test_washington_rules_row_cites_the_law():
     from build import status
     root = Path(__file__).resolve().parents[2]
     rules = json.loads((root / "data" / "rules.json").read_text())
     wa = rules["red"]["by_state"]["WA"]
-    assert wa["hours"] is None and "RCW 90.48.636" in wa["basis"] and "WA" not in rules["live_states"]
+    assert wa["hours"] is None and "RCW 90.48.636" in wa["basis"]      # no official window in the 2025 law, live or not
     # an Ecology report follows the state row; a status-map overflow carries the operators' own 48 hours
     assert status.red_rule_for({"discharger_id": "wa-seattle-spu"}, "WA", rules)["rule"] == "red.by_state.WA"
     recs, _, _ = kc_run()
