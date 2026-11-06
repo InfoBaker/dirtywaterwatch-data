@@ -9,7 +9,8 @@ scripts/add_il_mwrd_outfalls.py import it).
 - REACH_WATERS: MWRD's waterway reach labels ("NSC Lower (NSWRP)", "Cal Sag Ch") to the water's name as NHD gives it.
 - DIVERSIONS: the three structures through which the Chicago Area Waterway System is let back into Lake Michigan in
   severe storms (the Wilmette gate, the Chicago River Controlling Works, O'Brien Lock and Dam), with the reversal
-  table's column for each.
+  table's column for each; GATE_IDS: each one's row in the outfall registry (permit and outfall id), which the
+  reversal and possible-diversion records carry.
 - OWNER_PERMITS: an owner on the layer to its combined sewer permit (EPA's CSO inventory, data/outfalls-us.json; Forest
   View's IL0020800 from EPA's discharge-point records, which type it private):
   the City of Chicago's IL0045012, MWRD's plant permits, the suburbs' general-permit coverages (ILM5800xx) and the
@@ -51,6 +52,18 @@ DIVERSIONS = [
 DIVERSION_POINTS = {"Wilmette": (42.075959, -87.684557), "CRCW": (41.888471, -87.608273),
                     "O'Brien Lock": (41.654744, -87.569396)}
 DIVERSION_WATERWAYS = {"Wilmette": "North Shore Channel", "CRCW": "Chicago River", "O'Brien Lock": "Calumet River"}
+# each structure's row in the outfall registry (data/outfalls-il.json, scripts/add_il_mwrd_outfalls.py gate_rows): the
+# permit it is filed under and its outfall id, the layer's TARP key. EPA's CSO inventory lists none of the three, and no
+# permit lists them as outfalls: a structure is filed under the MWRD water reclamation plant permit whose EPA row lies
+# nearest it, the rule the script uses for MWRD's own outfalls (Wilmette: the Terrence J. O'Brien plant's outfall 101 at
+# the Wilmette pumping station, 96 m; CRCW: the Stickney plant's outfall 142, 8.1 km; O'Brien Lock: the Calumet plant's
+# outfall 152, 2.6 km). The reversal and possible-diversion records carry these, so each ties to its structure's row.
+GATE_IDS = {"Wilmette": ("IL0028088", "Wilmette Gate"), "CRCW": ("IL0028053", "Chicago River Controlling Works"),
+            "O'Brien Lock": ("IL0028061", "OBrien Lock and Dam")}
+GATE_NOTE = ("a lake reversal structure, not a combined sewer outfall: in severe storms MWRD opens it and the Chicago "
+             "Area Waterway System, which takes the area's combined sewer overflows, flows back into Lake Michigan. A "
+             "reversal is a discharge of river water, with the combined sewage and stormwater in it, to the lake "
+             "(MWRD's Reversals to Lake Michigan table)")
 # MWRD's own outfalls: the permit of the plant whose service area holds them (the nearest of EPA's rows decides
 # between these; scripts/add_il_mwrd_outfalls.py)
 MWRD_PERMITS = ["IL0028053", "IL0028061", "IL0028088", "IL0047741", "IL0028070"]
@@ -93,6 +106,11 @@ def diversion(*texts) -> tuple[str, str] | None:
             if t and pat.search(str(t)):
                 return col, name
     return None
+
+
+def gate_ids(column: str | None) -> tuple[str | None, str | None]:
+    """(permit, outfall id) of a reversal structure's registry row by the reversal table's column; (None, None)."""
+    return GATE_IDS.get(column or "", (None, None))
 
 
 def owners(owner: str | None) -> list[str]:

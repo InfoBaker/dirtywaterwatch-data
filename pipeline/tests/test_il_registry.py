@@ -64,7 +64,9 @@ def test_points_pair_with_epa_rows_by_distance_then_street_and_side():
     assert {by[4]["outfall"], by[5]["outfall"]} == {"DS-X4#4", "DS-X4#5"}                 # one drop shaft, two outfalls
     assert by[3]["receiving_water_echo"] == "North Shore Channel" and by[1]["receiving_water_echo"] == "North Shore Channel"
     assert by[1]["epa_row"]["receiving_water_echo"] == "NORTH SHORE CHANNEL"         # EPA's text kept with its row
-    assert 6 not in by and doc["diversion_points"][0]["water"] == "Lake Michigan"
+    gate = next(r for r in doc["outfalls"] if r["source_record_id"] == 6)       # a reversal structure: its own row
+    assert gate["structure"] == "lake_reversal_gate" and gate["receiving_water_echo"] == "Lake Michigan"
+    assert (gate["npdes_permit"], gate["outfall"]) == M.GATE_IDS["CRCW"] and "diversion_points" not in doc
     assert 7 not in by and doc["without_permit"][0]["owner"] == "Sample Campground"
 
 

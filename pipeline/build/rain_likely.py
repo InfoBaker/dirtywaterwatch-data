@@ -166,8 +166,10 @@ def site_inputs() -> dict:
 
 def cso_open(o: dict) -> bool:
     """A registry row the caution reads: a combined sewer outfall (outfall_kind "cso"; plant outfalls never drive
-    it) that is not closed (outfall_status CLS)."""
-    return (o.get("outfall_kind") or "cso") == "cso" and not str(o.get("outfall_status") or "").upper().startswith("CLS")
+    it) that is not closed (outfall_status CLS) and not set apart from the caution (rain_caution false: a lake
+    reversal gate, data/outfalls-il.json, which opens when the waterway rises, on its operator's decision)."""
+    return (o.get("outfall_kind") or "cso") == "cso" and not str(o.get("outfall_status") or "").upper().startswith("CLS") \
+        and o.get("rain_caution") is not False
 
 
 def discharger_index() -> dict[str, dict]:
@@ -307,6 +309,8 @@ def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list
             continue
         if r.get("model") == "shoreline" and r.get("outfall_kind") == "plant":
             continue        # a treatment plant's shoreline stretch: the permittee's CSO rain caution never reads it
+        if r.get("rain_caution") is False:
+            continue        # a lake reversal gate's stretch (data/outfalls-il.json): never rain-driven
         if r.get("segments"):
             keys.append(key)
             on = set(reach_waters_fn(r, waters))

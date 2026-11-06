@@ -12,7 +12,9 @@ Source
 Records
   - One record per reversal and structure with a volume (a row with CRCW and Wilmette volumes gives two records):
     event_type cso (the water is combined sewage and stormwater mixed into the waterway), raw.diversion the structure,
-    waterbody_text "Lake Michigan", the structure's point (il_mwrd.DIVERSION_POINTS), volume_gal the table's million
+    waterbody_text "Lake Michigan", the structure's point (il_mwrd.DIVERSION_POINTS), npdes_permit and outfall_id of
+    the structure's row in the outfall registry (il_mwrd.GATE_IDS; data/outfalls-il.json), so the record colours the
+    shoreline stretch built at that structure and never the whole lake, volume_gal the table's million
     gallons, estimate_flag unknown (the table does not say how volumes are found).
   - Dates: the table gives days only: started_at the first day, ended_at the last (the same day for a one-day row),
     time_precision "day", status "ended". A range running into the next year ("12/31-1/1") ends in the next year.
@@ -125,9 +127,11 @@ def records(rows: list[dict], problems: list[str], last_modified: str | None) ->
         for col, mg in r["volumes"].items():
             lat, lon = M.DIVERSION_POINTS[col]
             name = next(n for _, c, n in M.DIVERSIONS if c == col)
+            permit, outfall = M.gate_ids(col)
             out.append(event(
                 source_id=SOURCE_ID, source_record_id=f"{r['start']}-{re.sub(r'[^a-z0-9]+', '-', col.lower()).strip('-')}",
-                event_type="cso", status="ended", outfall_name=name, waterbody_text=M.LAKE,
+                event_type="cso", status="ended", npdes_permit=permit, outfall_id=outfall, outfall_name=name,
+                waterbody_text=M.LAKE,
                 lat=lat, lon=lon, coord_source="outfall_layer",
                 started_at=r["start"], ended_at=r["end"], time_precision="day",
                 source_updated_at=last_modified, material=MATERIAL,
