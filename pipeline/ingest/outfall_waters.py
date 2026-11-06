@@ -1054,6 +1054,29 @@ def apply(o: dict, res: dict, mt: Matcher) -> None:
         o["water_matched_by"] = by
 
 
+def match_and_apply(o: dict, flags: dict, mt) -> dict:
+    """Match one row and write the result into it (apply). A structure up a river (a lake_entry with a river path)
+    that lets the river into the lake through its mouth (Illinois's O'Brien Lock and Dam, 2026-11-06) is matched at the
+    mouth: its water is the lake where the river enters it, while at the structure's own point the river's record lies
+    and the placement guard would refuse the lake. The row keeps its own point."""
+    entry = o.get("lake_entry") or {}
+    if entry.get("path") and entry.get("lat") is not None and entry.get("lon") is not None and o.get("lat") is not None:
+        at = (o["lat"], o["lon"])
+        o["lat"], o["lon"] = entry["lat"], entry["lon"]
+        try:
+            res = mt.match(o, flags)
+            apply(o, res, mt)
+        finally:
+            o["lat"], o["lon"] = at
+        o["water_match"] += (f"; matched at the structure's lake entry ({entry['lat']}, {entry['lon']}), the "
+                             f"{entry.get('water') or 'river'}'s mouth, where a reversal reaches the lake, "
+                             f"{entry.get('path_km')} km down the river from the structure")
+        return res
+    res = mt.match(o, flags)
+    apply(o, res, mt)
+    return res
+
+
 def is_matchers(o: dict) -> bool:
     return bool(o.get("water_slug")) and str(o.get("water_matched_by") or BY_MATCHER).startswith("scripts/match_outfalls")
 
@@ -1104,8 +1127,7 @@ def match_cso_row(mt: Matcher, name: str, o: dict, shared: Counter, diag: list, 
         o.pop("coords_problem", None)
     o["water_slug"] = None
     flags = mt.diagnose(o, shared)
-    res = mt.match(o, flags)
-    apply(o, res, mt)
+    res = match_and_apply(o, flags, mt)
     rm = o.get("replaced_match")
     if rm:
         o["water_match"] += (f"; replaces scripts/match_outfalls.py's match by name alone to {rm.get('water_name')} "

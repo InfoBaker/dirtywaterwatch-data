@@ -1400,6 +1400,38 @@ def ocean_waters_along(segs: list[dict], waters: dict, ocean_slug: str, shore: d
     return [s for _, s in sorted(found)]
 
 
+def river_path_waters(path: list, waters: dict, state: str | None) -> list[str]:
+    """The river, stream or canal records of the state that hold a structure's river path to the lake (a lake_entry's
+    path, O'Brien Lock to the Calumet River's mouth): half the path or more runs within ALONG_TOL_M of the record's
+    line, longest share first."""
+    import shapely
+    from shapely.geometry import LineString, box
+    from build.status import water_geometry
+    if len(path or []) < 2:
+        return []
+    ln = LineString(path)
+    lat0 = (ln.bounds[1] + ln.bounds[3]) / 2
+    k = (111_320.0 * math.cos(math.radians(lat0)), 110_574.0)
+    lm = shapely.transform(ln, lambda xy: xy * k)
+    area = box(*ln.bounds).buffer(0.01)
+    found = []
+    for slug, w in sorted(waters.items()):
+        if w.get("kind") not in ("river", "stream", "canal"):
+            continue
+        if state and str(w.get("state") or "").upper() != str(state).upper():
+            continue
+        bb = w.get("bbox")
+        if bb and not box(*bb).intersects(area):
+            continue
+        g = water_geometry(slug, waters)
+        if g is None or not g.intersects(area):
+            continue
+        share = lm.intersection(shapely.transform(g.intersection(area), lambda xy: xy * k).buffer(ALONG_TOL_M)).length / lm.length
+        if share >= 0.5:
+            found.append((-share, slug))
+    return [s for _, s in sorted(found)]
+
+
 def lake_outline(slug: str, waters: dict, land: dict | None, point: tuple | None = None, shore: dict | None = None) -> tuple:
     """(outline, where from): the record's own (openboatlaunch's file or inline), else census_lake_outline. An
     open-ocean record (reach.shoreline.oceans) is walked on the state's coastal waters at the point (ocean_outline,
@@ -1510,8 +1542,11 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
             sg["km_start"], sg["km_end"] = round(sg["km_start"] + river_km, 3), round(sg["km_end"] + river_km, 3)
         for e in stops:
             e["km_from_outfall"] = round(e["km_from_outfall"] + river_km, 3)
+        along = river_path_waters(river, waters, own or None)
         segs.insert(0, {"comid": None, "km_start": 0.0, "km_end": round(river_km, 3), "gnis_name": gate_entry.get("water"),
-                        "coords": river, "path": "river_to_lake"})
+                        "coords": river, "path": "river_to_lake", **({"water_slug": along[0]} if along else {})})
+        # a reach belongs to every water it runs through (review 2026-11-06 P2-7): the river's record too
+        lake_recs += [x for x in along if x not in lake_recs]
     rec.update(segments=segs, stops=stops, cut_reason=SH.MODEL if segs else "no_trace",
                length_km=round(sum(e["km_from_outfall"] for e in stops) - (river_km if len(stops) > 1 else 0.0)
                                if segs else 0.0, 3),

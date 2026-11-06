@@ -2478,11 +2478,20 @@ class _NoTravel(Exception):
     """A shoreline stretch has no travel time (no flow along a lake shore)."""
 
 
+def _comid_in(comid, w: dict) -> bool:
+    """Whether a water record's NHDPlus COMIDs hold this flowline."""
+    try:
+        return int(comid) in {int(x) for x in w.get("comids") or []}
+    except (TypeError, ValueError):
+        return False
+
+
 def reach_waters(reach: dict, waters: dict) -> list[str]:
     """River water records a reach runs along: a segment's midpoint within REACH_WATER_M of the
     water's geometry (openboatlaunch or waters-extra) and, when the NHDPlus flowline is named, the
     same name (so a Connecticut River reach passing the Westfield's mouth does not flag the
-    Westfield: tributaries upstream of their mouth are never on the reach)."""
+    Westfield: tributaries upstream of their mouth are never on the reach), unless the record holds the
+    segment's own COMID (a record whose name is not the one NHDPlus gives its flowlines)."""
     key = reach["key"]
     if reach.get("model") == SH.MODEL:      # a shoreline stretch: its lake and the same lake's records it reaches
         return [s for s in (reach.get("waters") or [reach.get("water_slug")]) if s in waters]
@@ -2499,7 +2508,10 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
             b = w["bbox"]
             if slug in found:
                 continue
-            if gnis and norm_name(w.get("name") or "") != gnis:
+            # the record holds the segment's own NHDPlus flowline (its COMIDs): the same water, whatever name NHDPlus
+            # gives it (2026-11-06: NHDPlus names the Little Calumet River's flowlines 'Calumet River', review P1-1)
+            own = sg.get("comid") is not None and _comid_in(sg["comid"], w)
+            if gnis and not own and norm_name(w.get("name") or "") != gnis:
                 continue
             if not (b[0] - pad <= c[0] <= b[2] + pad and b[1] - pad <= c[1] <= b[3] + pad):
                 continue
