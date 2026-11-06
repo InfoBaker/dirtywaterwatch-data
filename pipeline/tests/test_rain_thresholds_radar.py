@@ -163,6 +163,7 @@ def test_radar_build_reads_registered_operators_at_their_median_point_and_writes
     r = d["permits"]["MI0000001"]
     assert r["threshold_in"] == 0.3 and r["n_discharge_days"] == 20 and r["name"] == "City of Test"
     assert d["permits"]["MI0000002"]["threshold_in"] is None
+    assert d["permits"]["MI0000002"]["why_fallback"] == "1 discharge days (fewer than 10): the radar was not read"
     assert d["not_registered"] == {"MI0000009": {"state": "MI", "name": None, "n_start_days": 1}}
     assert d["requests"] == 1 and d["with_threshold"] == 1 and d["states"]["MI"]["records"] == 22
     assert json.loads(RT.RADAR_FILE.read_text())["permits"]["MI0000001"]["threshold_in"] == 0.3

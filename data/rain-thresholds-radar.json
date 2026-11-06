@@ -1,5 +1,5 @@
 {
- "built": "2026-11-06T04:50:51Z",
+ "built": "2026-11-06T05:04:20Z",
  "today": "2026-11-06",
  "min_days": 10,
  "percentile": 0.1,
@@ -944,7 +944,7 @@
    "threshold_method": "radar_on_discharge_days",
    "threshold_in": null,
    "basis": null,
-   "why_fallback": "0 discharge days with radar rain (fewer than 10)"
+   "why_fallback": "6 discharge days (fewer than 10): the radar was not read"
   },
   "MI0023647": {
    "permit": "MI0023647",
@@ -975,7 +975,7 @@
    "threshold_method": "radar_on_discharge_days",
    "threshold_in": null,
    "basis": null,
-   "why_fallback": "0 discharge days with radar rain (fewer than 10)"
+   "why_fallback": "6 discharge days (fewer than 10): the radar was not read"
   },
   "MI0026069": {
    "permit": "MI0026069",
@@ -1006,7 +1006,7 @@
    "threshold_method": "radar_on_discharge_days",
    "threshold_in": null,
    "basis": null,
-   "why_fallback": "0 discharge days with radar rain (fewer than 10)"
+   "why_fallback": "5 discharge days (fewer than 10): the radar was not read"
   },
   "MI0023701": {
    "permit": "MI0023701",
@@ -1037,7 +1037,7 @@
    "threshold_method": "radar_on_discharge_days",
    "threshold_in": null,
    "basis": null,
-   "why_fallback": "0 discharge days with radar rain (fewer than 10)"
+   "why_fallback": "3 discharge days (fewer than 10): the radar was not read"
   },
   "GA0036854": {
    "permit": "GA0036854",
@@ -1068,7 +1068,7 @@
    "threshold_method": "radar_on_discharge_days",
    "threshold_in": null,
    "basis": null,
-   "why_fallback": "0 discharge days with radar rain (fewer than 10)"
+   "why_fallback": "1 discharge days (fewer than 10): the radar was not read"
   }
  },
  "not_registered": {

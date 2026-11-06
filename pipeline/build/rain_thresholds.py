@@ -471,8 +471,9 @@ def radar_row(permit: str, name: str | None, state: str, days, series: dict[date
                                f"discharge days in ten had more rain"),
                    source=src)
     else:
-        row.update(threshold_in=None, basis=None,
-                   why_fallback=f"{len(vs)} discharge days with radar rain (fewer than {min_days})")
+        why = (f"{len(vs)} discharge days with radar rain (fewer than {min_days})" if series else
+               f"{len(days)} discharge days (fewer than {min_days}): the radar was not read")
+        row.update(threshold_in=None, basis=None, why_fallback=why)
     return row
 
 
