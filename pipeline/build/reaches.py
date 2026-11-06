@@ -1390,6 +1390,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     rec["river"] = (entry or {}).get("name") or w.get("name")
     rec["lake"] = rec["river"]
     rec["ocean"] = bool((entry or {}).get("ocean"))
+    if (entry or {}).get("sound"):
+        rec["sound"] = True             # a sound under the lake model (Puget Sound): its own wording in the export
     if rec["ocean"] and c.get("lat") is None:
         rec["error"] = "no point to start from"
         return rec

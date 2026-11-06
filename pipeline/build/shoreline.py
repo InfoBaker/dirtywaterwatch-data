@@ -10,7 +10,10 @@ and those states. The status build colours the stretch and lists the report on t
 draws the lake as an outline (display "outline", stretch_model "shoreline") and the stretch in reaches.geojson.
 
 Which lakes: shoreline_entry(): a lake or reservoir whose wikidata or gnis_id the rule lists, or whose name it lists at
-name_min_area_km2 or more, or (min_area_km2 set) any lake or reservoir that large.
+name_min_area_km2 or more, or (min_area_km2 set) any lake or reservoir that large. An entry with `kinds` also applies to
+records of those kinds, and one with `states` only in those states: Puget Sound (kind "sound", WA; Washington's go-live
+gates, 2026-11-06), whose stretch is walked on its own outline like a lake's and worded for a sound ("sound": True on
+the entry returned, reach records and the export).
 
 The shore: a lake record's outline is not all shore. The Census-cut Michigan records run along the state and
 international lines in the lake, and the NHDPlus Great Lakes polygons have straight edges on whole degrees where
@@ -83,18 +86,27 @@ def shoreline_entry(w: dict | None, r: dict) -> dict | None:
                 continue            # the entry lists the states it is applied in (the others keep today's handling)
             if (e.get("wikidata") and w.get("wikidata") == e["wikidata"]) or _norm(w.get("name")) in names:
                 return {**e, "ocean": True}
-    if w.get("kind") not in KINDS:
-        return None
+    kind = w.get("kind")
     area = w.get("area_km2")
     area = float(area) if isinstance(area, (int, float)) else None
     for e in r.get("lakes") or []:
+        # an entry may name other kinds it applies to (Puget Sound, kind "sound", 2026-11-06) and the states it is
+        # applied in; a lake or reservoir qualifies as before
+        extra = {str(k) for k in e.get("kinds") or []}
+        if kind not in KINDS | extra:
+            continue
+        if e.get("states") and str(w.get("state") or "").upper() not in {str(x).upper() for x in e["states"]}:
+            continue
+        hit = e if kind in KINDS else {**e, "sound": True}
         if e.get("wikidata") and w.get("wikidata") == e["wikidata"]:
-            return e
+            return hit
         if e.get("gnis_id") and w.get("gnis_id") is not None and str(w["gnis_id"]) == str(e["gnis_id"]):
-            return e
+            return hit
         floor = r.get("name_min_area_km2")
         if _norm(w.get("name")) == _norm(e.get("name")) and area is not None and (floor is None or area >= floor):
-            return e
+            return hit
+    if kind not in KINDS:
+        return None
     if r.get("min_area_km2") is not None and area is not None and area >= float(r["min_area_km2"]):
         return {"name": w.get("name")}
     return None
