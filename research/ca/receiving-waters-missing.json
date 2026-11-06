@@ -1,25 +1,25 @@
 {
  "about": "Receiving-water names in CA's reports (the State Water Board's CIWQS spill file, Category 1 spills, every report since June 2023, read 2026-11-04) that data/receiving-waters-national.json does not hold for CA, by name as typed (a list of names split at commas, semicolons, slashes and 'and', 'into', 'via'), with the number of reports giving each. Category 2 and 3 spills, which reached no water, are left out.",
  "state": "CA",
- "waters": 367,
- "reports": 603,
+ "waters": 363,
+ "reports": 587,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in CA": 261,
+  "no NHD flowline or waterbody of that name in CA": 260,
   "not a water name": 20,
-  "1 NHD water of that name in CA, none within reach of the reports' places": 16,
+  "1 NHD water of that name in CA, none within reach of the reports' places": 15,
   "no water name": 6,
   "a storm-sewer system, not a named water": 5,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 5,
   "an unnamed or unknown stream: the report names no water": 4,
   "a water record holds the water this text names, but the status resolver reads the text as a watershed or basin label, no": 4,
-  "a water record holds the name, but the reports' points lie too far from it to be placed there": 4,
   "the open sea (no NHD record)": 3,
   "a land-application system, not a surface water": 3,
   "2 NHD waters of that name in CA, none within reach of the reports' places": 3,
-  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 3,
+  "57 NHD waters of that name in CA, none within reach of the reports' places": 3,
   "private property, not a public water": 3,
   "a street name, not a water": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 2,
   "a road in the report, not a water": 2,
   "6 NHD waters of that name in CA, none within reach of the reports' places": 2,
   "the name of a town (Courtland), not of a water: no NHD water of that name in CA": 1,
@@ -42,14 +42,21 @@
   "a tributary named by a place, not by the water it joins": 1,
   "the open ocean (no NHD record)": 1
  },
- "resolved_names": 221,
- "resolved_reports": 500,
+ "resolved_names": 225,
+ "resolved_reports": 516,
  "build": {
   "date": "2026-11-06",
-  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA",
-  "records_built": 6,
-  "names_resolved": 23,
-  "network_requests": 324
+  "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA --hand-only",
+  "records_built": 3,
+  "names_resolved": 4,
+  "network_requests": 0,
+  "last_build": {
+   "date": "2026-11-06",
+   "command": "python -m ingest.waters_from_nhd --names research/ca/receiving-waters-missing.json --state CA",
+   "records_built": 6,
+   "names_resolved": 23,
+   "network_requests": 324
+  }
  },
  "rows": [
   {
@@ -135,48 +142,6 @@
     "Richmond",
     "Alameda",
     "San Mateo"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
-  },
-  {
-   "name": "Richardson Bay",
-   "reports": 9,
-   "permits": [
-    "2SSO10114",
-    "2SSO10151",
-    "2SSO10169",
-    "2SSO10189"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.86246,
-     -122.4965
-    ],
-    [
-     37.84699,
-     -122.48265
-    ],
-    [
-     37.90423,
-     -122.50087
-    ],
-    [
-     37.87165,
-     -122.46917
-    ],
-    [
-     37.95979,
-     -122.49398
-    ]
-   ],
-   "towns": [
-    "Sausalito"
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
@@ -796,51 +761,6 @@
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
-  },
-  {
-   "name": "Don Pedro Reservoir",
-   "reports": 3,
-   "permits": [
-    "5SSO10771"
-   ],
-   "sources": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "points": [
-    [
-     37.97748,
-     -120.33202
-    ],
-    [
-     37.96194,
-     -120.39987
-    ],
-    [
-     37.98649,
-     -120.38006
-    ]
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "reason": "1 NHD water of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06",
-   "places_failed": [
-    {
-     "lon": -120.33202,
-     "lat": 37.97748,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.97748, -120.33202) (the nearest is 10.8 km away)"
-    },
-    {
-     "lon": -120.39987,
-     "lat": 37.96194,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.96194, -120.39987) (the nearest is 7.6 km away)"
-    },
-    {
-     "lon": -120.38006,
-     "lat": 37.98649,
-     "reason": "no NHD water of that name within 2 km of the reports' point (37.98649, -120.38006) (the nearest is 10.7 km away)"
-    }
-   ]
   },
   {
    "name": "Elmhurst creek. (Tidal creek",
@@ -1694,26 +1614,6 @@
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-06"
   },
   {
-   "name": "Mission Creek",
-   "reports": 2,
-   "points": [
-    [
-     34.43657,
-     -119.72617
-    ]
-   ],
-   "towns": [
-    "Santa Barbara"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "records": [
-    "mission-creek-ca"
-   ],
-   "reason": "a water record holds the name (mission-creek-ca), but the reports' points lie too far from it to be placed there"
-  },
-  {
    "name": "Newport Harbor",
    "reports": 2,
    "permits": [
@@ -1797,26 +1697,6 @@
     "Oakland"
    ],
    "reason": "no NHD flowline or waterbody of that name in CA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Pine Creek",
-   "reports": 2,
-   "points": [
-    [
-     37.94584,
-     -122.0142
-    ]
-   ],
-   "towns": [
-    "Concord"
-   ],
-   "places_from": [
-    "ca-swrcb-ciwqs-spills-flatfile"
-   ],
-   "records": [
-    "pine-creek-ca"
-   ],
-   "reason": "a water record holds the name (pine-creek-ca), but the reports' points lie too far from it to be placed there"
   },
   {
    "name": "Rio Hondo/LA River",
@@ -2141,15 +2021,19 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "records": [
-    "dry-creek-ca"
+   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "parts": [
+    "Dry Creek"
    ],
-   "reason": "a water record holds this water but not this spelling (dry-creek-ca): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)",
    "places_failed": [
     {
      "lon": -117.26933,
      "lat": 33.16429,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    },
+    {
+     "town": "Oceanside",
+     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
     }
    ]
   },
@@ -3490,15 +3374,19 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "records": [
-    "dry-creek-ca"
+   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "parts": [
+    "Dry creek"
    ],
-   "reason": "a water record holds this water but not this spelling (dry-creek-ca): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)",
    "places_failed": [
     {
      "lon": -117.26933,
      "lat": 33.16429,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    },
+    {
+     "town": "Oceanside",
+     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
     }
    ]
   },
@@ -6748,15 +6636,19 @@
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
    ],
-   "records": [
-    "dry-creek-ca"
+   "reason": "57 NHD waters of that name in CA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "parts": [
+    "Dry Creek"
    ],
-   "reason": "a water record holds this water but not this spelling (dry-creek-ca): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)",
    "places_failed": [
     {
      "lon": -117.26933,
      "lat": 33.16429,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.16429, -117.26933) (the nearest is 115.7 km away)"
+    },
+    {
+     "town": "Oceanside",
+     "reason": "no NHD water of that name within 3 km of Oceanside (the nearest is 100.8 km away)"
     }
    ]
   },
@@ -8227,6 +8119,42 @@
    ]
   },
   {
+   "name": "Richardson Bay",
+   "reports": 9,
+   "slugs": [
+    "richardson-bay-ca"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     37.86246,
+     -122.4965
+    ],
+    [
+     37.84699,
+     -122.48265
+    ],
+    [
+     37.90423,
+     -122.50087
+    ],
+    [
+     37.87165,
+     -122.46917
+    ],
+    [
+     37.95979,
+     -122.49398
+    ]
+   ],
+   "towns": [
+    "Sausalito"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Strong Ranch Slough",
    "reports": 9,
    "slugs": [
@@ -9115,6 +9043,31 @@
    ]
   },
   {
+   "name": "Don Pedro Reservoir",
+   "reports": 3,
+   "slugs": [
+    "don-pedro-reservoir-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.97748,
+     -120.33202
+    ],
+    [
+     37.96194,
+     -120.39987
+    ],
+    [
+     37.98649,
+     -120.38006
+    ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Easton Creek",
    "reports": 3,
    "slugs": [
@@ -9780,6 +9733,26 @@
    ]
   },
   {
+   "name": "Mission Creek",
+   "reports": 2,
+   "slugs": [
+    "mission-creek-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.43657,
+     -119.72617
+    ]
+   ],
+   "towns": [
+    "Santa Barbara"
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
    "name": "Monterey Bay",
    "reports": 2,
    "slugs": [
@@ -9820,6 +9793,26 @@
      38.02319,
      -121.35886
     ]
+   ],
+   "places_from": [
+    "ca-swrcb-ciwqs-spills-flatfile"
+   ]
+  },
+  {
+   "name": "Pine Creek",
+   "reports": 2,
+   "slugs": [
+    "pine-creek-ca"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.94584,
+     -122.0142
+    ]
+   ],
+   "towns": [
+    "Concord"
    ],
    "places_from": [
     "ca-swrcb-ciwqs-spills-flatfile"
