@@ -1246,6 +1246,24 @@ def census_lake_outline(slug: str, waters: dict, land: dict | None):
     return g
 
 
+def open_from(wm, off, op: float):
+    """The water (in metres) that the opening by op keeps on the side of `off` (the offshore line): the pieces the
+    erosion leaves within op of that line, grown back by op and never beyond the water. Eroding cuts a mouth narrower
+    than twice op; the pieces are chosen before they are grown back, because two pieces grown back on either side of a
+    short narrow mouth (the Golden Gate, about 1.7 km across on the Census outlines) overlap through it and would join
+    the bay behind it to the sea again (review of 2026-11-06). op 0: the water as it is."""
+    from shapely.ops import unary_union
+    if op <= 0:
+        return wm
+    if off.is_empty:
+        return wm.buffer(-op).buffer(op).intersection(wm)
+    seeds = [x for x in getattr(wm.buffer(-op), "geoms", [wm.buffer(-op)])
+             if x.geom_type == "Polygon" and not x.is_empty and x.distance(off) < op + 50]
+    if not seeds:
+        return wm.buffer(-op).buffer(op).intersection(wm)
+    return unary_union([x.buffer(op) for x in seeds]).intersection(wm)
+
+
 _OCEAN: dict = {}
 OCEAN_OFFSHORE_M = 1_000        # a stretch of the state's water boundary this far from land is its offshore line
 
@@ -1284,8 +1302,6 @@ def ocean_outline(lon: float, lat: float, state: str, land: dict | None, shore: 
             k = (111_320.0 * math.cos(math.radians(lat)), 110_574.0)
             wm = shapely.transform(water, lambda xy: xy * k)
             op = float(r.get("ocean_open_m") or 0)
-            opened = wm.buffer(-op).buffer(op) if op > 0 else wm
-            opened = opened.intersection(wm)          # the opening never adds water
             # the state's offshore line: its polygon's boundary inside the box, away from land
             pm = shapely.transform(poly.intersection(region), lambda xy: xy * k)
             nm = shapely.transform(near, lambda xy: xy * k) if near is not None and not near.is_empty else None
@@ -1294,6 +1310,7 @@ def ocean_outline(lon: float, lat: float, state: str, land: dict | None, shore: 
                 off = off.difference(nm.buffer(OCEAN_OFFSHORE_M))
             rm = shapely.transform(region, lambda xy: xy * k).boundary.buffer(1.0)
             off = off.difference(rm)                  # the box's own edges are not the offshore line
+            opened = open_from(wm, off, op)
             parts = [x for x in getattr(opened, "geoms", [opened]) if x.geom_type == "Polygon" and not x.is_empty
                      and not off.is_empty and x.distance(off) < 50]
             if parts:
