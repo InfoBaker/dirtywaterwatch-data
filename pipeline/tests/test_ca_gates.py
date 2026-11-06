@@ -98,6 +98,11 @@ def test_laguna_street_takes_table_2s_point_brannan_and_sunnydale_keep_epas():
     for oid in ("019", "043"):
         o = rows[("us", "CA0037664", oid)]
         assert ("us", "CA0037664", oid) not in C.MOVE and o["coords_from"] != "permit"
+        # the row carries why, with the records cited and the rule applied (review of 2026-11-06, ca-bays P3-4)
+        assert o["coords_note"] == C.NOTE[("us", "CA0037664", oid)]
+        assert C.BAYSIDE in o["coords_note"] and "R2-2008-00XX" in o["coords_note"] and C.POINT_RULE in o["coords_note"]
+    assert C.POINT_RULE in rows[("us", "CA0037664", "011")]["coords_note"]
+    assert set(C.NOTE).isdisjoint(C.MOVE)
     assert (rows[("us", "CA0037664", "019")]["lat"], rows[("us", "CA0037664", "019")]["lon"]) == (37.785278, -122.39)
     assert abs((37 + 47 / 60 + 7 / 3600) - 37.785278) < 1e-6 and abs((122 + 23 / 60 + 24 / 3600) - 122.39) < 1e-9
 

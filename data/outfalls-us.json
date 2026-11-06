@@ -225,7 +225,7 @@
    },
    "epa_lat": 37.80611,
    "epa_lon": -122.38,
-   "coords_note": "Order R2-2013-0029 (NPDES CA0037664), Table 2: 37.811667 N, 122.43189 W (discharge point 011, Laguna Street Outfall, Yacht Harbor #2); EPA's inventory gives 37.80611, -122.38, about 4.6 km east; the Regional Water Board's revised tentative order of January 2008 (R2-2008-00XX, the same permit) gave 37 48 22 N, 122 25 53 W, about 0.6 km south, at the shore"
+   "coords_note": "Order R2-2013-0029 (NPDES CA0037664), Table 2: 37.811667 N, 122.43189 W (discharge point 011, Laguna Street Outfall, Yacht Harbor #2), the adopted order's point, about 290 m off the shore outside the Marina harbor (Census TIGER/Line water). EPA's inventory gives 37.80611, -122.38, about 4.6 km east, off the wrong shore. The rule for the Bayside points is the cited point nearest the shore at the named street; the San Francisco Bay Regional Water Board's revised tentative order of January 2008 for the same permit (R2-2008-00XX, agenda of January 2008, item 13) gave 37 48 22 N, 122 25 53 W, about 0.6 km south and about 70 m inland of the shoreline at Marina Boulevard, which by that rule is the nearer point; Table 2's is kept as the adopted order's"
   },
   {
    "npdes_permit": "CA0037664",
@@ -395,7 +395,8 @@
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 019 (Brannan Street Outfall) the receiving water 'Pier 32', a place on San Francisco Bay's waterfront; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
-   }
+   },
+   "coords_note": "EPA's point (37.785278, -122.39, Brannan Street Outfall, Pier 32) is the one the San Francisco Bay Regional Water Board's revised tentative order of January 2008 for the same permit (R2-2008-00XX, agenda of January 2008, item 13) gives (37 47 7 N, 122 23 24 W), about 210 m inland of the shoreline at Pier 30-32 as the Census draws it; Order R2-2013-0029 (NPDES CA0037664), Table 2 prints 122.373333 W (122 22 24), about 970 m out in the open bay, read as a slip of one minute. Rule applied: the cited point nearest the shore at the named street, so EPA's point is kept"
   },
   {
    "npdes_permit": "CA0037664",
@@ -1109,7 +1110,8 @@
    "receiving_water_override": {
     "water": "San Francisco Bay",
     "basis": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 043 (Sunnydale Avenue Outfall) the receiving water 'Candlestick Cove', a cove of San Francisco Bay; the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside system's 29 combined sewer discharge outfalls to San Francisco Bay; EPA's inventory text is not the bay (CA go-live gates 2026-11-06)"
-   }
+   },
+   "coords_note": "Order R2-2013-0029 (NPDES CA0037664), Table 2 gives discharge point 043 (Sunnydale Avenue Outfall, Candlestick Cove) Quint Street's point (37.747222, -122.386944, at Islais Creek, about 4 km north of Candlestick Cove), and the San Francisco Bay Regional Water Board's revised tentative order of January 2008 for the same permit (R2-2008-00XX, agenda of January 2008, item 13) the same (37 44 50 N, 122 23 13 W); EPA's inventory copies it. Rule applied: the cited point nearest the shore at the named street; no public record found gives this outfall's own point, so EPA's is kept"
   },
   {
    "npdes_permit": "CA0037681",
