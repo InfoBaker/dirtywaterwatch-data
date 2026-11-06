@@ -92,10 +92,12 @@ def test_the_rule_in_rules_json_has_its_numbers_rationale_and_source():
     # along the city's whole shore), not the 40 km river cap applied both ways
     assert r["each_way_km"] == 20 and RULES_FILE["reach"]["cap_km"] == 40
     assert r["min_area_km2"] is None
-    assert [e["name"] for e in r["lakes"]] == ["Lake Superior", "Lake Michigan", "Lake Huron", "Lake Erie",
-                                               "Lake Ontario", "Lake St. Clair"]
-    # a lake added beyond the five carries its own reason, in the public voice
-    stc = r["lakes"][-1]
+    assert [e["name"] for e in r["lakes"]][:6] == ["Lake Superior", "Lake Michigan", "Lake Huron", "Lake Erie",
+                                                   "Lake Ontario", "Lake St. Clair"]
+    # a lake added beyond the five carries its own reason, in the public voice (as does San Francisco Bay, a bay under
+    # the lake model since California's go-live gates: tests/test_ca_shoreline.py)
+    assert all(e.get("rationale") and not X.internal_wording(e) for e in r["lakes"][5:])
+    stc = r["lakes"][5]
     assert stc["wikidata"] == "Q736707" and "Great Lakes system" in stc["rationale"] and "Ontario" in stc["rationale"]
     assert not X.internal_wording(stc)
     assert "20 kilometres each way" in r["rationale"] and "not a measurement" in r["rationale"]

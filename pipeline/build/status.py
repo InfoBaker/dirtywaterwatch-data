@@ -198,6 +198,8 @@ NO_FILL_KINDS = RIVER_KINDS | {"bay", "sound"}     # coloured by reaches / marke
 SHORE_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the lake is not coloured whole"
 # the open ocean (reach.shoreline.oceans, 2026-11-04): the same model on the state's ocean shore, its own words
 OCEAN_STATUS_BASIS = "modeled shoreline stretches at the outfalls and reported locations; the ocean is not coloured whole"
+# a bay under the lake model (reach.shoreline.lakes with kinds ["bay"]: San Francisco Bay, 2026-11-06)
+BAY_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the bay is not coloured whole"
 SHORE_SUMMARY = "affected along a modeled shoreline stretch"
 _SHORE_REACHES: set[str] = set()       # the reach keys of this build's shoreline stretches (where())
 REACH_WATER_M = 500                                 # a reach segment lies on a river water within this
@@ -3303,6 +3305,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             "fill": kind not in NO_FILL_KINDS and slug not in shore_slugs,
             "status_basis": ("modeled reaches" if kind in RIVER_KINDS else
                              OCEAN_STATUS_BASIS if slug in ocean_slugs else
+                             BAY_STATUS_BASIS if slug in shore_slugs and kind == "bay" else
                              "markers only: tidal or estuary, movement not modeled" if kind in ("bay", "sound")
                              else SHORE_STATUS_BASIS if slug in shore_slugs else "whole water"),
             "summary": (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")

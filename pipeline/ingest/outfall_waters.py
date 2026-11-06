@@ -450,9 +450,18 @@ class Matcher:
         d = N.dist_m(shp.boundary, lon, lat)
         limit = float(shore["snap_km"]) * 1000
         where = "inland" if inside else "offshore"
+        # a deep ocean outfall ends in open water well beyond snap_km (Point Loma, Hyperion, Orange County: 6 to 8 km
+        # out): still the ocean's outfall, up to ocean_tie_offshore_km; it gets no stretch, and its reports are listed
+        # on the ocean (California's go-live gates, 2026-11-06). A point that far inland is still held.
+        off = float(shore.get("ocean_tie_offshore_km") or 0) * 1000
+        if not inside and limit < d <= off:
+            return True, (f"an open-ocean record (data/rules.json reach.shoreline.oceans), and EPA's point lies "
+                          f"{d / 1000:.1f} km offshore, in open water within {off / 1000:g} km of the state's shore (an "
+                          f"ocean outfall; beyond {limit / 1000:g} km no shoreline stretch starts there)")
         if d > limit:
             return False, (f"an open-ocean record (data/rules.json reach.shoreline.oceans), but EPA's point lies "
-                           f"{d / 1000:.1f} km {where} of the state's shore, more than {limit / 1000:g} km: {HELD}")
+                           f"{d / 1000:.1f} km {where} of the state's shore, more than "
+                           f"{(off if not inside and off > limit else limit) / 1000:g} km: {HELD}")
         return True, (f"an open-ocean record (data/rules.json reach.shoreline.oceans), and EPA's point lies "
                       f"{d / 1000:.1f} km {where} of the state's shore (within {limit / 1000:g} km)")
 
