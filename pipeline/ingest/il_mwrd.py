@@ -55,7 +55,7 @@ DIVERSION_WATERWAYS = {"Wilmette": "North Shore Channel", "CRCW": "Chicago River
 # each structure's row in the outfall registry (data/outfalls-il.json, scripts/add_il_mwrd_outfalls.py gate_rows): the
 # permit it is filed under and its outfall id, the layer's TARP key. EPA's CSO inventory lists none of the three, and no
 # permit lists them as outfalls: a structure is filed under the MWRD water reclamation plant permit whose EPA row lies
-# nearest it, the rule the script uses for MWRD's own outfalls (Wilmette: the Terrence J. O'Brien plant's outfall 101 at
+# nearest it, for want of a permit of its own (Wilmette: the Terrence J. O'Brien plant's outfall 101 at
 # the Wilmette pumping station, 96 m; CRCW: the Stickney plant's outfall 142, 8.1 km; O'Brien Lock: the Calumet plant's
 # outfall 152, 2.6 km). The reversal and possible-diversion records carry these, so each ties to its structure's row.
 GATE_IDS = {"Wilmette": ("IL0028088", "Wilmette Gate"), "CRCW": ("IL0028053", "Chicago River Controlling Works"),

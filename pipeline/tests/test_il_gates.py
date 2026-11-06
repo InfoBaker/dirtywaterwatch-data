@@ -58,6 +58,11 @@ def test_the_three_reversal_structures_are_mwrd_outfall_rows_on_lake_michigan():
         assert r["water_slug"] == "lake-michigan-il" and not r.get("coords_problem")
         assert r["rain_caution"] is False and "rain caution" in r["rain_caution_note"]
         assert "discharge of river water" in r["structure_note"] and "nearest" in r["permit_basis"]
+        # in public words: MWRD's structure, listed under the nearest plant's permit for want of one of its own
+        # (review 2026-11-06); never a pointer to an internal file
+        assert r["permit_basis"].startswith("MWRD's own structure, with no permit of its own")
+        assert "For want of one it is listed under the permit" in r["permit_basis"]
+        assert "does not name the structure" in r["permit_basis"] and "this file" not in r["permit_basis"]
     # O'Brien Lock lies up the Calumet River: the river's path to its mouth, from the USGS NHD high-resolution flowlines
     le = gates["O'Brien Lock"]["lake_entry"]
     lat, lon = M.DIVERSION_POINTS["O'Brien Lock"]
@@ -87,7 +92,7 @@ def test_gate_rows_take_the_nearest_mwrd_plant_permit_and_build_the_lake_entry()
     rows = A.gate_rows(pts, epa, {"O'Brien Lock": river})
     r = rows[0]
     assert (r["npdes_permit"], r["outfall"]) == M.GATE_IDS["O'Brien Lock"] and r["permittee"] == "SAMPLE WRP"
-    assert "IL0028061 outfall 152, 'CSO - SAMPLE PUMP STATION', 1,112 m away" in r["permit_basis"]
+    assert "IL0028061: outfall 152, 'CSO - SAMPLE PUMP STATION', 1,112 m away" in r["permit_basis"]
     assert r["lake_entry"]["path"] == [[-87.57, 41.65], [-87.57, 41.66], [-87.56, 41.7]]   # from the structure on
     assert (r["lake_entry"]["lat"], r["lake_entry"]["lon"]) == (41.7, -87.56) and "a, b" in r["lake_entry"]["source"]
     # the table's permit must be the nearest plant row's: a structure nearer another plant's rows stops the build
@@ -105,7 +110,7 @@ def test_a_structure_beside_a_hole_in_the_lake_starts_on_the_outer_shore():
             "M_OR_U": "Monitored", "lat": 41.8885, "lon": -87.6083}]
     epa = [{"npdes_permit": "IL0028053", "outfall": "142", "outfall_name": "", "lat": 41.80, "lon": -87.70, "permittee": "P"}]
     r = A.gate_rows(pts, epa, lakes={"lake-michigan-il": lake})[0]
-    assert r["lake_entry"]["lat"] == 41.88 and r["lake_entry"]["path"] == [] and "IL0028053 outfall 142, " in r["permit_basis"]
+    assert r["lake_entry"]["lat"] == 41.88 and r["lake_entry"]["path"] == [] and "IL0028053: outfall 142, " in r["permit_basis"]
     with pytest.raises(ValueError):
         A.gate_rows(pts, epa, lakes={})
 
@@ -285,3 +290,17 @@ def test_an_overrides_water_is_a_name_even_where_the_text_rules_read_a_ditch():
     hand = dict(row, receiving_water_override={"water": "Sample Union Drainage Ditch", "basis": "two agencies name it"})
     assert mt.match(hand) == {"slug": "ditch", "how": "by name", "step": "name"}
     assert mt.asked == ["Sample Union Drainage Ditch"]
+
+
+def test_a_reversal_structure_carries_no_rain_caution_on_the_map():
+    """Review 2026-11-06: out/outfalls.json gave a gate its plant permit's rain caution (the map's "discharge likely"
+    ring and words), though the gates are kept out of the caution; the permit's real outfalls keep theirs."""
+    from export import outfalls as XO
+    gate = {"npdes_permit": "IL0028053", "outfall": "Chicago River Controlling Works", "outfall_kind": "cso",
+            "outfall_status": "CSO", "rain_caution": False, "state": "IL", "lat": 41.888, "lon": -87.608,
+            "water_slug": "lake-michigan-il"}
+    cso = dict(gate, outfall="142", rain_caution=None, water_slug=None, lat=41.82, lon=-87.70)
+    rain = {"IL0028053": {"status": "likely", "rain_24h_in": 2.1, "threshold_in": 0.67, "valid_time": "2026-11-06T10:00:00Z"}}
+    rows = {r["outfall_id"]: r for r in XO.outfall_rows([gate, cso], {"IL"}, rain_permits=rain)}
+    assert rows["Chicago River Controlling Works"]["rain"] is None
+    assert rows["142"]["rain"] and rows["142"]["rain"]["status"] == "likely"
