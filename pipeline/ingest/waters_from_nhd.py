@@ -4927,6 +4927,11 @@ def names_main(args) -> int:
     return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run)
 
 
+# the fields of the last build's row a --hand-only run keeps for a name no hand record takes (2026-11-06: the tool's
+# detail behind a public reason, reason_detail, and the row's notes were dropped from 236 California rows)
+HAND_ONLY_KEPT = ("slugs", "how", "reason", "reason_detail", "notes", "defined_by", "places_failed")
+
+
 def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason, existing) -> int:
     """--names FILE --state XX --hand-only: no NHD or OSM request; the state's hand records (HAND) are built (their
     own sources: the Census TIGER/Line hydrography, NHD by GNIS id, OSM ways by id) and attached to the names they
@@ -4956,7 +4961,7 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
             row["reason"] = f"{NOT_REACHED} (a hand-only run asks no NHD); the next --names run asks NHD"
         else:
             row.update({k: list(prev[k]) if isinstance(prev[k], list) else prev[k]
-                        for k in ("slugs", "how", "reason", "defined_by", "places_failed") if k in prev})
+                        for k in HAND_ONLY_KEPT if k in prev})
         run.rows.append(row)
         pairs.append((t, row))
     try:
