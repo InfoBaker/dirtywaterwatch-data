@@ -25,7 +25,17 @@ Orange County Sanitation District's 120-inch and 78-inch outfalls (Order R8-2021
 Hyperion's 5-mile outfall (Order R4-2023-0033, NPDES CA0109991, Table 2); their water stays EPA's 'Pacific Ocean'. The
 permit's point replaces the flagged one, so the row's coords_problem is cleared (reaches and placement skip a row that
 carries one: the 78-inch outfall, 1.5 miles out, gets its shoreline stretch); EPA's figures stay in epa_lat/epa_lon and
-echo_lat/echo_lon (review of 2026-11-06).
+echo_lat/echo_lon (review of 2026-11-06). The Bayside points follow one rule, the cited point nearest the shore at
+the named street, and each row's coords_note says which point it keeps and why (NOTE for the rows not moved).
+Laguna Street (011), whose point in EPA's inventory lies about 4.6 km east, off the wrong shore, takes the 2008
+tentative order's point, about 70 m inland at Marina Boulevard, the nearest the shore of the cited points (Table 2's
+lies about 290 m off the shore; review of 2026-11-06, P3-4, and the ca-bays review, P3-3). Brannan Street (019) keeps EPA's point (37.785278,
+-122.39, at the shore by Pier 32): it is the point of the Regional Water Board's revised tentative order of January
+2008 for the same permit (37 47 7 N, 122 23 24 W), while Table 2 of the 2013 order prints 122.373333 W (122 22 24),
+about 1.1 km out in the bay, which looks like a slip of one minute. Sunnydale Avenue (043, Candlestick Cove) keeps
+EPA's point: Table 2 prints Quint Street's point for it (37.747222, -122.386944), the 2008 tentative order the same
+(37 44 50 N, 122 23 13 W), and no public record found gives its own (docs/checklists/2026-11-06-ca-bays.md in the
+site repository).
 
 Each row gets receiving_water_override {water, basis}: the name the record carries, so `python -m ingest.outfall_waters
 --state CA` finds that record by name once openboatlaunch's California extract is on file (the state batch's `extract`
@@ -48,6 +58,9 @@ BAYSIDE = "Order R2-2013-0029 (NPDES CA0037664), Table 2"
 STIP = ("the Regional Water Board's 2021 stipulation (cleanup and abatement order, November 2021) gives the Bayside "
         "system's 29 combined sewer discharge outfalls to San Francisco Bay")
 OCSD = "Order R8-2021-0010 (NPDES CA0110604, Orange County Sanitation District), Table 2"
+ORDER_2008 = ("San Francisco Bay Regional Water Board's revised tentative order of January 2008 for the same permit "
+              "(R2-2008-00XX, agenda of January 2008, item 13)")
+POINT_RULE = "the cited point nearest the shore at the named street"     # the rule the Bayside point calls follow
 HYPERION = "Order R4-2023-0033 (NPDES CA0109991, Hyperion Water Reclamation Plant), Table 2"
 SFB, SFB_SLUG = "San Francisco Bay", "san-francisco-bay-ca"
 MISSION, MISSION_SLUG = "Mission Creek", "mission-creek-ca"
@@ -136,6 +149,29 @@ MOVE = {
     ("plants", "CA0109991", "002"): (33.91197, -118.52145, f"{HYPERION}: 33.91197 N, 118.52145 W (the 5-mile "
                                      "outfall's Y-shaped diffuser); EPA's inventory gives the same figures without the longitude's minus "
                                      "sign"),
+    # a Bayside combined sewer discharge outfall whose point in EPA's inventory is not the permit's (review of
+    # 2026-11-06, P3-4; ca-bays review P3-3): by the rule (POINT_RULE), the 2008 tentative order's point
+    ("us", "CA0037664", "011"): (37.806111, -122.431389, f"the {ORDER_2008}: 37 48 22 N, 122 25 53 W (discharge point "
+                                 "011, Laguna Street Outfall, Yacht Harbor #2), about 70 m inland of the shoreline at "
+                                 f"Marina Boulevard (Census TIGER/Line water). Rule applied: {POINT_RULE}. {BAYSIDE} "
+                                 "gives 37.811667 N, 122.43189 W, about 290 m off the shore outside the Marina harbor "
+                                 "and about 0.6 km north; EPA's inventory gives 37.80611, -122.38, about 4.6 km east, "
+                                 "off the wrong shore"),
+}
+
+# the Bayside outfalls whose point is kept, with why (review of 2026-11-06, P3-4 of the CA gates and P3-4 of the CA
+# bays review): the note is set on the row, the point and coords_from are left as they are
+NOTE = {
+    ("us", "CA0037664", "019"): (f"EPA's point (37.785278, -122.39, Brannan Street Outfall, Pier 32) is the one the "
+                                 f"{ORDER_2008} gives (37 47 7 N, 122 23 24 W), about 210 m inland of the shoreline at Pier "
+                                 f"30-32 as the Census draws it; {BAYSIDE} prints 122.373333 W (122 22 24), about 970 m "
+                                 "out in the open bay, read as a slip of one minute. Rule applied: "
+                                 f"{POINT_RULE}, so EPA's point is kept"),
+    ("us", "CA0037664", "043"): (f"{BAYSIDE} gives discharge point 043 (Sunnydale Avenue Outfall, Candlestick Cove) "
+                                 "Quint Street's point (37.747222, -122.386944, at Islais Creek, about 4 km north of "
+                                 f"Candlestick Cove), and the {ORDER_2008} the same (37 44 50 N, 122 23 13 W); EPA's "
+                                 f"inventory copies it. Rule applied: {POINT_RULE}; no public record found gives this "
+                                 "outfall's own point, so EPA's is kept"),
 }
 
 
@@ -187,6 +223,8 @@ def apply(docs: dict, wat: dict) -> list[str]:
             continue
         if key in MOVE:
             move(o, *MOVE[key])
+        if key in NOTE:
+            o["coords_note"] = NOTE[key]
         p = override(o, entry, wat)
         if p:
             problems.append("/".join(key) + ": " + p)
