@@ -17,6 +17,7 @@ from build import rain_thresholds as RT  # noqa: E402
 from common import DATA_DIR  # noqa: E402
 
 TODAY = date(2026, 11, 6)
+REAL_IEM_DAILY = RT.iem_daily
 RULES = {"rain_likely": {"fallback": {"default": {"inches": 0.1, "basis": "default", "source": "methods",
                                                   "trigger_basis": "default"}, "by_state": {}}}}
 
@@ -74,17 +75,20 @@ def test_radar_row_takes_the_10th_percentile_of_days_with_radar_rain_and_counts_
     assert r["p5"] == RT.percentile(vals, 0.05) and r["under_0_1_in"] == 1 and r["share_under_0_1_in"] == round(1 / 12, 3)
     assert r["since"] == ds[0].isoformat() and r["until"] == ds[11].isoformat()
     assert r["basis"] == "history" and r["rule"] == "rain_likely.percentile" and r["threshold_kind"] == "operator_history"
-    assert r["source"] == ("NOAA MRMS radar at the operator's outlets on its reported discharge days, "
-                           "EGLE MiEnviro list 2016 to 2016")
+    assert r["source"] == ("Michigan EGLE, MiEnviro CSO/SSO List (combined sewer discharges that began 2016 to 2016); "
+                           "NOAA MRMS daily rainfall at the operator's outfalls, via the Iowa Environmental Mesonet")
     assert "12 days" in r["basis_text"] and "nine discharge days in ten" in r["basis_text"]
 
 
 def test_under_ten_days_with_radar_rain_keeps_the_published_rule():
     days = _days(12)
     series = {d: (0.0 if i < 3 else 0.5) for i, d in enumerate(sorted(days))}     # 9 samples
-    r = RT.radar_row("GA0000001", "Test", "GA", days, series, 10, (33.7, -84.4), 1)
+    r = RT.radar_row("MI0000001", "Test", "MI", days, series, 10, (42.3, -83.1), 1)
     assert r["threshold_in"] is None and r["basis"] is None and "9 discharge days" in r["why_fallback"]
     assert "source" not in r
+    # a Georgia row never takes a trigger, whatever the series (its list holds spills; review 2026-11-06)
+    g = RT.radar_row("GA0000001", "Test", "GA", _days(14), {d: 0.5 for d in _days(14)}, 10, (33.7, -84.4), 1)
+    assert g["threshold_in"] is None and g["why_fallback"] == RT.RADAR_STATES["GA"]["no_sample_why"]
 
 
 class FakeResp:
@@ -233,8 +237,11 @@ def test_the_tracked_radar_file_is_sound():
         assert r["state"] in RT.RADAR_STATES and p.startswith(r["state"])
         if r["threshold_in"] is not None:
             assert r["n_discharge_days"] >= d["min_days"] and r["threshold_in"] == r["p10"] >= RT.TRACE_IN
-            assert r["source"].startswith("NOAA MRMS radar at the operator's outlets on its reported discharge days, ")
-            assert RT.RADAR_STATES[r["state"]]["list"] in r["source"]
+            # the list named exactly as the rules name it, then the rainfall series (review 2026-11-06)
+            assert r["source"].startswith(RT.RADAR_STATES[r["state"]]["authority"] + " (combined sewer discharges that began ")
+            assert r["source"].endswith("; NOAA MRMS daily rainfall at the operator's outfalls, via the Iowa Environmental Mesonet")
+            assert "outlets" not in r["source"] and "radar-only" not in r["source"]
+            assert r["state"] != "GA"                                   # Georgia's spills give no trigger
         else:
             assert r["n_discharge_days"] < d["min_days"]
 
@@ -245,3 +252,50 @@ def test_rules_json_says_how_the_radar_amounts_are_made_and_cites_the_list():
     assert "Massachusetts" in rl["threshold_rationale"] and "10th percentile" in rl["threshold_rationale"]
     assert "MiEnviro" in rl["threshold_source"] and "MRMS" in rl["threshold_source"]
     assert "MiEnviro" in rl["source"]
+    # the period the triggers rest on, and the rainfall series named as it is (gauge-corrected where available, so not
+    # "radar-only"; review 2026-11-06)
+    assert "since 2015" in rl["threshold_rationale"] and "since 2001" not in rl["threshold_rationale"]
+    assert "day before" in rl["threshold_rationale"]
+    assert "radar-only" not in rl["threshold_source"]
+
+
+def test_georgia_spills_under_a_combined_sewer_permit_are_listed_never_sampled(tmp_path, monkeypatch):
+    """Georgia's list holds spills (blockages, breaks, pump stations): as a Massachusetts sanitary sewer overflow, they
+    give no sample, so even 12 of them under a combined sewer permit give no trigger and no request (review 2026-11-06)."""
+    p, asked = _world(tmp_path, monkeypatch)
+    reg = RT.cso_permittees()
+    reg["GA0000001"] = {"state": "GA", "name": "GA CSO", "points": [(31.57, -84.15)], "outfalls": {}}
+    monkeypatch.setattr(RT, "cso_permittees", lambda: reg)
+    g = tmp_path / "ga.json"
+    g.write_text(json.dumps({"records": [rec("GA0000001", (date(2026, 1, 1) + timedelta(days=i)).isoformat(),
+                                             etype="sso" if i % 2 else "cso") for i in range(0, 36, 3)]}))
+    d = RT.radar_build(["GA"], budget=10, events={"GA": g}, today=TODAY)
+    r = d["permits"]["GA0000001"]
+    assert r["n_start_days"] == 12 and r["threshold_in"] is None and asked == [] and d["requests"] == 0
+    assert r["why_fallback"] == RT.RADAR_STATES["GA"]["no_sample_why"]
+
+
+def test_radar_build_writes_nothing_when_a_single_request_failed(tmp_path, monkeypatch):
+    """One failed year (not three in a row) would leave that year's discharge days out of the sample silently: the
+    run stops and writes nothing; a rerun asks again for what is not cached (review 2026-11-06)."""
+    import requests
+    p, _ = _world(tmp_path, monkeypatch)
+    monkeypatch.setattr(RT, "iem_daily", REAL_IEM_DAILY)         # the real reader, against a session that fails once
+    monkeypatch.setattr(RT, "IEM_DIR", tmp_path / "iem")
+    monkeypatch.setattr(RT, "IEM_PAUSE_S", 0)
+    s = FakeSession([404, 200])
+    monkeypatch.setattr(requests, "Session", lambda: s)
+    with pytest.raises(RT.ServiceRefused, match="1 point-service request"):
+        RT.radar_build(["MI"], budget=10, events={"MI": p}, today=TODAY)
+    assert not RT.RADAR_FILE.exists() and len(s.urls) == 2
+    assert (tmp_path / "iem" / "42.32_-83.13_2016.json").exists()    # what was read stays cached for the rerun
+
+
+def test_merge_carries_the_radar_files_reason_onto_a_fallback_row():
+    permits = {"MI0000002": {"basis": "published", "threshold_in": 0.1,
+                             "why_fallback": "no discharge history with rainfall in the Massachusetts portal"}}
+    radar = {"permits": {"MI0000002": {"state": "MI", "threshold_in": None, "basis": None,
+                                       "why_fallback": "6 discharge days (fewer than 10): the radar was not read"}}}
+    assert RT.merge_radar(permits, radar, {"MI0000002": {}}, RULES) == 0
+    assert permits["MI0000002"]["threshold_in"] == 0.1
+    assert permits["MI0000002"]["why_fallback"] == "6 discharge days (fewer than 10): the radar was not read"
