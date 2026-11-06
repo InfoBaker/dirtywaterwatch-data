@@ -64,6 +64,12 @@ Steps (--steps, space- or comma-separated; run in this order whatever order they
              here) share NET_BUDGET_MAX.
   ties       python -m ingest.outfall_waters --state <ST>: every outfall row of the state tied to its record or a
              stated reason (counts in data/build/outfall-waters-<st>.json).
+  cut        (not a step to choose: added after waters, osm or names for a state on the Great Lakes, GREAT_LAKES_STATES,
+             before ties) python -I scripts/cut_lakes_to_state_waters.py --state <ST>: the NHD pass rebuilds a Great
+             Lake's record of the state as the lake's whole United States part (Lake Michigan for Illinois: 57,137 km2);
+             the cut brings it back to the state's own waters in the lake, which the shoreline stretches walk and the
+             outfall ties and the reversal gates' lake entries (data/outfalls-il.json) are measured against
+             (2026-11-06 review of Illinois's gates).
 The NHD, OSM and tie steps run with OBL_WATER_DIR set to the openboatlaunch out/water folder (--obl-dir, else
 OBL_WATER_DIR, else the restored ../openboatlaunch/out/water): build/status.py water_geometry reads each record's
 outline there, which ingest.outfall_waters measures a point against and ingest.waters_from_nhd checks a duplicate
@@ -108,6 +114,10 @@ NET_BUDGET_MAX = 3_600 + 180
 MODULE_OSM_BUDGET = 180      # ingest.waters_from_nhd's own --osm-budget default (the waters and names steps)
 OBL_KEY = "state/obl-water.tar.gz"
 REGIONAL_FILES = ("outfalls-ne.json", "outfalls-mid-atlantic.json")
+# the states whose water records hold a Great Lake: after a pass that rebuilds the state's records (waters, osm, names)
+# the batch cuts those lakes back to the state's waters (scripts/cut_lakes_to_state_waters.py), before the ties
+GREAT_LAKES_STATES = ("IL", "IN", "MI", "MN", "NY", "OH", "PA", "WI")
+REBUILDS_WATERS = ("waters", "osm", "names")
 CSO_ZIP_URL = "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
 LINE_MAX = 400               # a printed count line kept in the summary, at most this long
 LINES_PER_STEP = 40
@@ -120,6 +130,7 @@ COUNT_LINES = {
     "ties": re.compile(r"^([A-Z]{2}|ALL): |^written: "),
     "names": re.compile(r"^(report names |\d+ records -> |NOT WRITTEN|--names needs|PROBLEM )"),
     "extract": re.compile(r"^obl_waters: "),
+    "cut": re.compile(r"records cut|km2 -> "),
 }
 COUNT_LINES["osm"] = re.compile(COUNT_LINES["waters"].pattern + r"|^\s+[A-Z]{2}: \d+ names")
 
@@ -264,6 +275,7 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
     water, water_arg = obl_water_dir(obl_dir, root)
     outlines = {"OBL_WATER_DIR": water_arg}
     cmds: list[Cmd] = []
+    last_rebuild = next((s for s in reversed(steps) if s in REBUILDS_WATERS), None)
     for s in steps:
         if s == "extract":
             have = read_json(root / "data" / f"waters-{st.lower()}.json")
@@ -307,6 +319,8 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
                             env=dict(outlines)))
         elif s == "ties":
             cmds.append(Cmd(s, [py, "-m", "ingest.outfall_waters", "--state", st], cwd="pipeline", env=dict(outlines)))
+        if s == last_rebuild and st in GREAT_LAKES_STATES:
+            cmds.append(Cmd("cut", [py, "-I", "scripts/cut_lakes_to_state_waters.py", "--state", st]))
     return Plan(st, steps, budget, maxreq, cmds, osm, water)
 
 
