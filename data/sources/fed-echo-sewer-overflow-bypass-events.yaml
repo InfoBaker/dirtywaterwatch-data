@@ -28,6 +28,12 @@ level: "federal"
 #   events"; NE events back to 2019-2022 for NH.
 # Research notes: Impacts include 'No observable impacts' (3,475 of 6,185 rows nationally). Volume
 #   quantification is often best professional judgement. Event times carry no timezone.
+# 2026-11-05: the ZIP of that day held only sewer_overflow_bypass_columns_metadata.csv and
+#   sewer_overflow_public_erd.pdf (302 KB), no table; on 2026-11-06 the summary page and the downloads
+#   index still describe and link this same ZIP, so the table was not moved. When this ZIP fails or holds
+#   no events table, ingest/echo_sewer_overflow_events.py reads the current version of each report from
+#   the all-versions ZIP (fed-echo-sewer-overflow-bypass-all-versions; rows flagged
+#   current_report_form_flag Y), and meta.url names the file read.
 cadence: "\"The data are refreshed daily.\" Lag from event start to received date in NE: median 2–3 days, 90th percentile 6–7 days (NH, MA), 38 days (RI). Legal basis is the 24-hour oral / 5-day written noncompliance report, not public notice."
 license: "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html ECHO swagger 'license': 'U.S. Public Domain License'. ECHO About the Data: \"The information contained in ECHO is made available to the public\" with no warranty of \"accuracy, completeness, or currency\"; \"ECHO is not designed for large scale data transfers or robotic queries.\" https://echo.epa.gov/resources/echo-data/about-the-data"
 attribution: "US EPA OECA (ICIS-NPDES)"
@@ -39,4 +45,4 @@ access: ["csv"]
 access_detail: "ZIP (~1.1 MB) of 8 CSVs + ERD PDF; no auth. Tables: collection_system_permits, sewer_overflow_bypass_report_events (parent), _causes, _corrective_actions, _impacts, _receiving_waters, _types, sewer_overflow_treatment_codes. Summary: https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary. The per-permit HTML view (https://echo.epa.gov/sewer-overflow-report?id=…) redirected to an EPA login page from here. Raw copy: research/federal/raw/sobe_current/."
 machine_readable: true
 legal_basis: "40 CFR 122.41(l)(6)-(7), 122.41(m)(3); 40 CFR part 127 (Sewer Overflow/Bypass Event Reports, deadline Dec 21, 2025; ME and VT approved alternative deadline Dec 21, 2028)"
-checked: "2026-11-01"
+checked: "2026-11-06"

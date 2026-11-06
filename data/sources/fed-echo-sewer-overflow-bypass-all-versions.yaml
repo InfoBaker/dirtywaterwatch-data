@@ -14,6 +14,9 @@ level: "federal"
 # Cannot fill: timezone
 # Waters: Same universe as the current dataset, every submitted version
 # History: Full transaction history of submissions
+# 2026-11-06: read by ingest/echo_sewer_overflow_events.py when the current-version ZIP fails or holds no
+#   events table (as on 2026-11-05): the event rows flagged current_report_form_flag Y joined to their
+#   current report rows reproduce the current-version events table (2026-11-04 extract: 5,688 events).
 cadence: "Daily"
 license: "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html ECHO swagger 'license': 'U.S. Public Domain License'. ECHO About the Data: \"The information contained in ECHO is made available to the public\" with no warranty of \"accuracy, completeness, or currency\"; \"ECHO is not designed for large scale data transfers or robotic queries.\" https://echo.epa.gov/resources/echo-data/about-the-data"
 attribution: "US EPA OECA"
@@ -25,4 +28,4 @@ access: ["csv"]
 access_detail: "ZIP (~1.6 MB) of 10 CSVs incl. sewer_overflow_bypass_report.csv and sewer_overflow_bypass_event.csv; summary https://echo.epa.gov/tools/data-downloads/sewer-overflow-all-versions-summary. Fetched; raw copy research/federal/raw/sobe_all/."
 machine_readable: true
 legal_basis: "40 CFR part 127"
-checked: "2026-11-01"
+checked: "2026-11-06"
