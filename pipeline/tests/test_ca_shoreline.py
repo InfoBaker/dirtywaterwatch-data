@@ -126,6 +126,10 @@ def test_the_ocean_text_names_the_open_ocean_not_only_floridas_waters():
     assert "Pacific" in sh["ocean_rationale"] and "never as a colour over the ocean" in sh["ocean_rationale"]
     assert "lagoons and bays behind them" in sh["ocean_rationale"]
     assert sh["ocean_tie_offshore_km"] == pytest.approx(22.2)
+    # the distances as ocean_evidence measures them on the 1:500,000 outline (review of 2026-11-06)
+    for said in ("Point Loma 7.3 km", "Southwest Ocean Outfall 6.5 km", "5-mile outfall 8.0 km", "120-inch outfall 7.6 km",
+                 "12 nautical miles"):
+        assert said in sh["_internal_doc"]
 
 
 # ---------------------------------------------------------------- the walks
