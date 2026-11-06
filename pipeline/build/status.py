@@ -3306,7 +3306,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             "fill": kind not in NO_FILL_KINDS and slug not in shore_slugs,
             "status_basis": ("modeled reaches" if kind in RIVER_KINDS else
                              OCEAN_STATUS_BASIS if slug in ocean_slugs else
-                             SOUND_STATUS_BASIS if slug in shore_slugs and kind not in SH.KINDS else
+                             SOUND_STATUS_BASIS if slug in shore_slugs and kind == "sound" else
                              "markers only: tidal or estuary, movement not modeled" if kind in ("bay", "sound")
                              else SHORE_STATUS_BASIS if slug in shore_slugs else "whole water"),
             "summary": (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")

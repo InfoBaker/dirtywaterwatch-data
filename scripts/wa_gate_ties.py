@@ -21,7 +21,8 @@ later `python -m ingest.outfall_waters --state WA` with the outlines finds the s
 fields, with the distance measured on 2026-11-06 from the row's own point: to openboatlaunch's outline as its water
 page publishes it (the cloud runs' outlines; none is on file here), or to the record's own geometry (Census TIGER/Line
 and NHD records, data/waters-nhd.json). Nothing here moves a point except the South plant's marine outfall, whose EPA
-point is the plant in Renton, 15 km from the diffuser the permit locates; EPA's point is kept in epa_lat/epa_lon.
+point (a permitted-feature point inland, about 4 km west of the plant in Renton) lies 18 km from the diffuser the
+permit locates; EPA's point is kept in epa_lat/epa_lon.
 Rows the operators name a water for that has no record (Seattle's three Longfellow Creek outfalls: NHDPlus V2.1, the
 NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek; OpenStreetMap does, and its
 Overpass service did not answer from here) get the override and a reason, no tie.
@@ -38,8 +39,8 @@ sys.path.insert(0, str(ROOT / "pipeline"))
 
 BY = "scripts/wa_gate_ties.py (WA go-live gates, 2026-11-06)"
 KC = "Ecology's permit WA0029181 (King County West Point, effective 2024-06-01)"
-SEA = ("Ecology's permit WA0031682 (City of Seattle combined sewer system, effective 2025-12-01), table 2, and Seattle "
-       "Public Utilities' CSO basin layer")
+SEA = ("Seattle Public Utilities' CSO basin layer (ArcGIS item 1dd13c8a00ae4ff187cef29d208a5ada, which repeats Ecology's "
+       "permit WA0031682, City of Seattle combined sewer system, effective 2025-12-01, table 2)")
 SOUTH = "Ecology's permit WA0029581 (King County South plant, effective 2015-07-01)"
 OBL = "openboatlaunch record; distance to its outline as published on its water page, 2026-11-06"
 CENSUS = "Census TIGER/Line record (data/waters-nhd.json)"
@@ -53,7 +54,8 @@ def kc(dsn, name, said):
 
 
 def sea(dsn, said, wbid):
-    return f"{SEA} give outfall {dsn} the receiving water '{said}' (Ecology water body {wbid})"
+    # `said` is the layer's CSOB_REC_WTR_BDY_NAME as published (review 2026-11-06: quoted verbatim)
+    return f"{SEA} gives outfall {dsn} the receiving water '{said}' (Ecology water body {wbid})"
 
 
 # (file, permit, outfall): (slug, the override's water, metres from the row's point, how measured, basis)
@@ -83,13 +85,13 @@ TABLE = {
                                  sea("060", "Salmon Bay", "WA-08-9340") + "; below the locks, on the Census polygon "
                                  "named Salmon Bay Waterway"),
     ("wa", "WA0031682", "091"): ("puget-sound-wa", "Puget Sound", 372, OBL,
-                                 sea("091", "Puget Sound - Central", "WA-PS-0270")),
+                                 sea("091", "Puget Sound - S-Central", "WA-PS-0270")),
     ("wa", "WA0031682", "094"): ("puget-sound-wa", "Puget Sound", 326, OBL,
-                                 sea("094", "Puget Sound - Central", "WA-PS-0270")),
+                                 sea("094", "Puget Sound - S-Central", "WA-PS-0270")),
     ("wa", "WA0031682", "095"): ("puget-sound-wa", "Puget Sound", 284, OBL,
-                                 sea("095", "Puget Sound - Central", "WA-PS-0270")),
+                                 sea("095", "Puget Sound - S-Central", "WA-PS-0270")),
     ("wa", "WA0031682", "107"): ("east-waterway-wa", "East Waterway", 0, CENSUS,
-                                 sea("107", "East Waterway - Duwamish River", "WA-09-1010")),
+                                 sea("107", "East Waterway of the Duwamish River", "WA-09-1010")),
     ("wa", "WA0031682", "161"): ("lake-washington-wa", "Lake Washington", 469, OBL,
                                  sea("161", "Lake Washington", "WA-08-9350") + "; the permit's own point for it "
                                  "(47.67713, -122.24909) lies on the lake's outline"),
@@ -133,24 +135,25 @@ TABLE = {
     ("us", "WA0031682", "060"): ("salmon-bay-waterway-wa", "Salmon Bay", 0, CENSUS,
                                  sea("060", "Salmon Bay", "WA-08-9340")),
     ("us", "WA0031682", "070"): ("elliott-bay-wa", "Elliott Bay", 16, OBL,
-                                 "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt); the "
-                                 "outfall is closed and not in the 2025 permit"),
+                                 "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt) and lists "
+                                 "the outfall as closed; Seattle Public Utilities' CSO basin layer has no basin for it"),
     ("us", "WA0031682", "071"): ("elliott-bay-wa", "Elliott Bay", 33, OBL,
                                  sea("071", "Elliott Bay", "WA-09-0010")),
     ("us", "WA0031682", "072"): ("elliott-bay-wa", "Elliott Bay", 1, OBL,
-                                 "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt); the "
-                                 "outfall is closed and not in the 2025 permit"),
+                                 "EPA's inventory gives the receiving water 'Elliot Bay' (Elliott Bay misspelt) and lists "
+                                 "the outfall as closed; Seattle Public Utilities' CSO basin layer has no basin for it"),
     ("us", "WA0031682", "091"): ("puget-sound-wa", "Puget Sound", 384, OBL,
-                                 sea("091", "Puget Sound - Central", "WA-PS-0270")),
+                                 sea("091", "Puget Sound - S-Central", "WA-PS-0270")),
     ("us", "WA0031682", "094"): ("puget-sound-wa", "Puget Sound", 266, OBL,
-                                 sea("094", "Puget Sound - Central", "WA-PS-0270")),
+                                 sea("094", "Puget Sound - S-Central", "WA-PS-0270")),
     ("us", "WA0031682", "095"): ("puget-sound-wa", "Puget Sound", 294, OBL,
-                                 sea("095", "Puget Sound - Central", "WA-PS-0270")),
+                                 sea("095", "Puget Sound - S-Central", "WA-PS-0270")),
     ("us", "WA0031682", "107"): ("east-waterway-wa", "East Waterway", 24, CENSUS,
-                                 sea("107", "East Waterway - Duwamish River", "WA-09-1010")),
+                                 sea("107", "East Waterway of the Duwamish River", "WA-09-1010")),
     ("us", "WA0031682", "150"): ("salmon-bay-waterway-wa", "Salmon Bay Waterway", 0, CENSUS,
                                  "EPA's inventory gives the receiving water 'Salmon Bay Waterway', the Census polygon "
-                                 "of that name; the outfall is closed and not in the 2025 permit"),
+                                 "of that name; EPA lists the outfall as closed, and Seattle Public Utilities' CSO basin "
+                                 "layer has no basin for it"),
     ("us", "WA0031682", "174"): ("lake-washington-ship-canal-wa", "Lake Washington Ship Canal", 81, OBL,
                                  sea("174", "Lake Washington - Ship Canal", "WA-08-9340")),
     # EPA's other King County rows, tied by the outline ties of 2026-11-04 through EPA's permit-level text (review
@@ -190,10 +193,10 @@ TABLE = {
     ("plants", "WA0029581", "001"): ("puget-sound-wa", "Puget Sound", 0, OBL,
                                      f"{SOUTH}, S1.A, gives outfall 001 to Puget Sound with its north diffuser at "
                                      "47.602778, -122.429 (the south at 47.599722, -122.429028), off Duwamish Head; "
-                                     "EPA's text is 'Puget Sound (Central)' and EPA's point is the plant in Renton"),
+                                     "EPA's text is 'Puget Sound (Central)' and EPA's point lies inland, 18 km from the diffuser"),
     ("plants", "WA0029581", "001A"): ("puget-sound-wa", "Puget Sound", 0, OBL,
                                       f"{SOUTH}, S1.A: outfall 001's effluent to Puget Sound (north diffuser 47.602778, "
-                                      "-122.429); EPA's point is the plant in Renton"),
+                                      "-122.429); EPA's point lies inland, 18 km from the diffuser"),
     ("plants", "WA0029581", "002A"): ("black-river-renton-wa", "Black River", 168, NHD,
                                       f"{SOUTH} calls outfall 002 the Green River outfall (maintenance and emergency "
                                       "only); EPA's point lies 168 m from the Black River at Renton, where EPA's "
@@ -258,7 +261,8 @@ def move(o: dict, lat: float, lon: float) -> None:
     o["lat"], o["lon"] = lat, lon
     o["coords_from"] = "permit"
     o["coords_note"] = (f"{SOUTH}, S1.A, locates outfall 001's north diffuser at 47.602778, -122.429 (the south at "
-                        f"47.599722, -122.429028); EPA's point (epa_lat, epa_lon) is the plant in Renton, 15 km away")
+                        f"47.599722, -122.429028); EPA's point (epa_lat, epa_lon) lies inland, about 4 km west of the plant in "
+                        f"Renton and 18 km from the diffuser")
 
 
 def apply(docs: dict, wat: dict) -> list[str]:
