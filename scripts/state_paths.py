@@ -488,6 +488,7 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
     if st0:
         # cleared at the start, so an early return never leaves an older run's value for obl-not-saved to restore
         st0["national_before"] = st0.get("national")
+        st0.pop("need_full_before", None)
         write_obl_changes(st0, state_file)
     if not api.key():
         say("openboatlaunch API: no OBL_API_KEY here; the R2 copy is restored instead")
@@ -564,6 +565,8 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
                       "bytes": a.size, "sha256": a.sha256, "records": counts["records"]}
     if st.pop("need_full", None):
         st["full_pulled"] = True                   # ingest.obl_changes then rewrites every live state from it
+        # kept until the folder is saved: obl-not-saved asks for the full pull again (SOL wave2 P2-8)
+        st["need_full_before"] = True
     write_obl_changes(st, state_file)
     say(f"openboatlaunch API: national snapshot {got or snap} ({mb(a.size)}, sha256 checked), {counts['records']} "
         f"record(s) unpacked into {dest.name}/")
@@ -597,8 +600,9 @@ def pack_obl(out: Path, src: Path = OBL_OUT, always: bool = False) -> int:
 
 def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     """The folder the API changed this run could not be saved to R2: put the national pull and the changes' until
-    back to where they were before this run (data/build/obl-changes.json "national_before", "until_before"), so the
-    next run, restoring the older R2 copy, pulls and asks for those changes again. Exit 0."""
+    back to where they were before this run (data/build/obl-changes.json "national_before", "until_before", and
+    need_full when this run's full pull consumed it: "need_full_before"), so the next run, restoring the older R2 copy,
+    pulls and asks for those changes again. Exit 0."""
     if not (Path(src) / OBL_MARK).exists():
         return 0
     st = read_obl_changes(state_file)
@@ -609,6 +613,11 @@ def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     if "until_before" in st:
         st["until"] = st.pop("until_before")
         st.pop("etag", None)
+    if st.pop("need_full_before", None):
+        # this run's full pull (asked for by need_full: the changes it replaces were never fetched one by one) was not
+        # saved: the next run restores the older copy, so the full pull is asked for again (SOL wave2 P2-8)
+        st["need_full"] = True
+        st.pop("full_pulled", None)
     write_obl_changes(st, state_file)
     print("::warning::the openboatlaunch folder changed by the API was not saved to R2; the next run pulls those "
           "changes again", flush=True)

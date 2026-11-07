@@ -562,6 +562,42 @@ def test_more_changes_than_a_run_fetches_are_logged_from_the_list_and_move_on(ap
     assert "every live state's extract is rewritten" in capsys.readouterr().out
 
 
+def test_a_full_pull_whose_folder_was_not_saved_is_asked_for_again(api, tmp_path):
+    """SOL wave2 P2-8: cap -> full pull -> failed upload (obl-not-saved) -> the next run, within twenty-four hours of the
+    last national pull, pulls the national file again instead of asking for changes after the advanced until."""
+    from datetime import datetime, timezone
+    water, data, status = changes_setup(tmp_path, api)
+    sf = data / "build" / "obl-changes.json"
+    sf.write_text(json.dumps({"until": "2026-11-07T03:00:00+00:00",
+                              "national": {"snapshot": api.meta["snapshot"], "fetched_at": "2026-11-07T02:00:00Z"}}))
+    api.changes = [{"slug": f"w{i}-ri", "change": "changed", "at": "2026-11-07T04:00:00+00:00", "state": "RI"}
+                   for i in range(5)]
+    st = obl_changes.check(water, sf, status, max_records=3, data_dir=data)       # the cap: until moves on
+    assert st["need_full"] and st["until"] == "2026-11-07T05:00:00+00:00"
+    dest = tmp_path / "pulled" / "out"
+    t = datetime(2026, 11, 7, 6, tzinfo=timezone.utc)
+    assert SP.fetch_obl(dest, sf, now=t) == 0                                       # the full pull
+    assert "need_full" not in json.loads(sf.read_text())
+    obl_changes.check(dest / "water", sf, status, data_dir=data)                    # the same run's changes check
+    SP.obl_not_saved(sf, dest)                                                      # its upload failed
+    st = json.loads(sf.read_text())
+    assert st["need_full"] and "full_pulled" not in st
+    assert st["national"]["fetched_at"] == "2026-11-07T02:00:00Z"
+    (dest / SP.OBL_MARK).unlink()
+    api.seen.clear()
+    assert SP.fetch_obl(dest, sf, now=t.replace(hour=7)) == 0                       # within 24 h: pulled again
+    assert any("national" in path for path, *_ in api.seen)
+    st = json.loads(sf.read_text())
+    assert st["full_pulled"] and "need_full" not in st
+    # this time the folder is saved: nothing is rolled back, and the next run does not pull again
+    (dest / SP.OBL_MARK).unlink()
+    obl_changes.check(dest / "water", sf, status, data_dir=data)
+    st = json.loads(sf.read_text())
+    assert "need_full" not in st
+    assert SP.fetch_obl(dest, sf, now=t.replace(hour=8)) == SP.NOT_USED
+    assert "need_full_before" not in json.loads(sf.read_text())
+
+
 def test_the_daily_pull_request_carries_the_rewrites_and_the_review_lines(tmp_path):
     spec = importlib.util.spec_from_file_location("obl_extracts", ROOT / "scripts" / "obl_extracts.py")
     E = importlib.util.module_from_spec(spec)
