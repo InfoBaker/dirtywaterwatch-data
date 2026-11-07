@@ -207,8 +207,9 @@ _SHORE_REACHES: set[str] = set()       # the reach keys of this build's shorelin
 # An authority's advisory for a named stretch of a river (the record's `stretch`, docs/plan.md §3): build/reaches.py
 # traces the stretch (reach kind "advisory_stretch") and the advisory colours only that stretch, in its own category
 # (beach), with no travel time; the rivers it runs along take their state from it (placement "reach") and the water
-# page still lists the advisory. With no stretch traced (not yet, or its ends are off the mapped path) the advisory
-# colours its whole water, as before, and its reason says so (placement "stretch_unmodeled", stretch_fallback).
+# page still lists the advisory. With no stretch traced (not yet, its end off the mapped path or upstream of its start)
+# the advisory stays a coloured marker at its point and the river is not coloured (reaches, not whole rivers; SOL
+# wave2 P1-3, 2026-11-07); the marker's why says the stretch could not be traced (stretch_fallback).
 ADVISORY_STRETCH = "advisory_stretch"
 _STRETCH_REACHES: set[str] = set()     # the reach keys of this build's advisory stretches (where())
 STRETCH_SUMMARY = "part of this water is under an authority's advisory for a named stretch"
@@ -2641,11 +2642,13 @@ def stretch_traces(reaches: dict) -> dict[str, dict]:
 
 
 def stretch_fallback(r: dict | None) -> str:
-    """Why an advisory with a stretch colours its whole water: the stretch is not traced yet, or why it could not be."""
+    """Why an advisory with a stretch is shown only at its point: the stretch is not traced yet, or why it could not
+    be. The river is never coloured whole in its place (SOL wave2 P1-3)."""
+    tail = "the advisory is shown at its point, and the river is not coloured"
     if not r:
-        return "the stretch the advisory names is not traced yet; the advisory is shown on its whole water"
+        return f"the stretch the advisory names is not traced yet; {tail}"
     why = r.get("error") or r.get("cut_reason") or "no stretch could be traced"
-    return f"the stretch the advisory names could not be traced ({why}); the advisory is shown on its whole water"
+    return f"the stretch the advisory names could not be traced ({why}); {tail}"
 
 
 def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
@@ -2654,7 +2657,8 @@ def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
     stream or canal record (RIVER_KINDS) with no stretch of its own is shown as a point. The record is listed on the
     water's page and its marker carries the advisory's colour; the river record is not coloured. Keyed on the
     water's kind, never on the state. A lake, pond or reservoir keeps colours_whole_water; an advisory with a stretch
-    keeps the advisory-stretch path (its traced stretch, else the stretch_unmodeled fallback)."""
+    and a traced stretch (stretched) keeps the advisory-stretch path; one whose stretch is not traced is a point too
+    (SOL wave2 P1-3)."""
     if stretched or w.get("kind") not in RIVER_KINDS:
         return False
     if ev.get("event_type") in DISCHARGE_TYPES:
@@ -2836,8 +2840,7 @@ PLACEMENT_TEXT = {"reach": " · on a modeled downstream reach", "named": " · na
                   "tidal": " · tidal or estuary: movement not modeled",
                   "unmodeled": " · downstream path not modeled",
                   "shoreline_unmodeled": " · lake shore: stretch not modeled",
-                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled",
-                  "stretch_unmodeled": " · stretch not traced: shown on the whole water"}
+                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled"}
 SHORE_PLACEMENT_TEXT = " · on a modeled shoreline stretch"
 STRETCH_PLACEMENT_TEXT = " · on the stretch the advisory names"
 
@@ -2907,8 +2910,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return (f"{et} reported to the day only, with no end; caution to {int(h)} h from the start of that day{who}{at}"
                 if h else f"{et} reported to the day only, with no end{who}{at}")
     if rule in ("advisory_active", "rain_advisory"):
-        tail = at if iv.get("placement") == "stretch_unmodeled" or (
-            iv.get("placement") == "reach" and iv.get("reach") in _STRETCH_REACHES) else ""
+        tail = at if iv.get("placement") == "reach" and iv.get("reach") in _STRETCH_REACHES else ""
         return f"{et} in effect{who}{stretch_text(ev)}{tail}"
     return f"{iv['label']}{who}"
 
@@ -3192,12 +3194,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         coarse = ev.get("time_precision") in COARSE_PRECISION     # a monthly or annual total: never a reach
         found = event_reaches(ev, pl, reach_index) if is_discharge and not pl.get("no_receiving_water") \
             and not future and not coarse else []
-        # an authority's advisory for a named stretch: its traced stretch, else the whole water (stretch_unmodeled)
+        # an authority's advisory for a named stretch: its traced stretch, else a marker at its point (never the
+        # whole water: SOL wave2 P1-3)
         stretched = not is_discharge and not future and has_stretch(ev)
+        traced = False
         if stretched:
             sr = stretch_of_event.get(eid)
             if sr and sr.get("segments") and sr.get("cut_reason") != "no_trace":
-                found = [(sr, None)]
+                found, traced = [(sr, None)], True
             else:
                 placements[eid]["stretch_fallback"] = stretch_fallback(sr)
         # rivers, and the shoreline lakes, whose stretches carry a report as a river reach does
@@ -3216,7 +3220,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             per_water_events[slug].append(eid)
             if not live:
                 continue
-            on_river = advisory_on_river(ev, waters[slug], stretched)
+            on_river = advisory_on_river(ev, waters[slug], traced)
             if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
                 point_on.append(slug)
                 if on_river:
@@ -3234,13 +3238,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     else "unmodeled"
             elif is_discharge and waters[slug].get("kind") in ("bay", "sound"):
                 tag = "tidal"
-            elif stretched and waters[slug].get("kind") in RIVER_KINDS:
-                tag = "stretch_unmodeled"
             for iv in event_intervals(eff, waters[slug].get("state"), now, water={**waters[slug], "slug": slug},
                                       rules=rules):
                 iv["placement"] = tag
-                if tag == "stretch_unmodeled":
-                    iv["stretch_fallback"] = placements[eid].get("stretch_fallback")
                 intervals[slug].append(iv)
         if (is_discharge and live and not future and not coarse and river_slugs and not reach and ev.get("lat") is not None
                 and (parse_time(ev.get("started_at")) or now) > now - timedelta(days=30)):
@@ -3298,11 +3298,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
                                              for iv in sorted(ivs, key=lambda x: x["start"])],
                                "_ivs": ivs,
+                               # an advisory whose stretch is not traced: why it is a point (SOL wave2 P1-3)
+                               **({"stretch_fallback": placements[eid]["stretch_fallback"]}
+                                  if stretched and placements[eid].get("stretch_fallback") else {}),
                                "why": ("the advisory covers the stretch it names, drawn from end to end; the marker "
-                                       "is its point" if point_on and stretched and not placements[eid].get(
-                                           "stretch_fallback") else
-                                       RIVER_POINT_WHY if river_point and (names_its_water(ev) or
-                                                                         ev.get("event_type") not in POINT_ADVISORY_TYPES)
+                                       "is its point" if point_on and traced else
+                                       (placements[eid]["stretch_fallback"] if stretched else RIVER_POINT_WHY)
+                                       if river_point and (names_its_water(ev) or
+                                                           ev.get("event_type") not in POINT_ADVISORY_TYPES)
                                        else "the advisory covers the water it names; the marker is its point"
                                        if point_on and names_its_water(ev) else
                                        "water is not a lake, pond or reservoir under 50 km²" if point_on
@@ -3443,7 +3446,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             **({"end_not_used": iv["end_not_used"]} if iv.get("end_not_used") else {}),
                             # the water comes from the notice's text against its form's flag (TEXT_OVER_FLAG)
                             **({"text_over_flag": iv["text_over_flag"]} if iv.get("text_over_flag") else {}),
-                            # an advisory with a stretch shown on its whole water: why (no stretch traced)
+                            # why a stretch is not traced (kept for any interval that carries it)
                             **({"stretch_fallback": iv["stretch_fallback"]} if iv.get("stretch_fallback") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
                             "ended_at": iv["ended_at"],

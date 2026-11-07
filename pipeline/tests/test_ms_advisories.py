@@ -183,15 +183,10 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     assert (t["raw"]["stretch"]["from"]["lat"], t["raw"]["stretch"]["to"]["name"]) == (32.194572, "confluence with the Pearl River")
     st = _status(recs, "2026-11-07T13:00:00Z", monkeypatch)
     pr = st["waters"]["pearl-river-ms"]
-    # the river itself reads the authority's advisory: red, beach category, the stretch named in its reason
-    assert pr["status"] == "red" and pr["status_by_category"]["beach"] == "red"
-    assert pr["reasons"][0]["rule"] == "advisory_active"
-    assert pr["reason_short"].startswith("Water contact advisory in effect · Mississippi Department of Environmental")
-    # no stretch traced here (reaches={}): the whole-water fallback, and the reason says so
-    assert pr["reason_short"].endswith("from the mouth of Hanging Moss Creek to the Byram Swinging Bridge"
-                                       " · stretch not traced: shown on the whole water")
-    assert pr["reasons"][0]["placement"] == "stretch_unmodeled"
-    assert "not traced yet" in pr["reasons"][0]["stretch_fallback"]
+    # no stretch traced here (reaches={}): the Pearl River is not coloured whole (reaches, not whole rivers; SOL wave2
+    # P1-3); the advisory stays a red marker whose why says its stretch is not traced yet
+    assert pr["status"] == "grey" and p["event_id"] in pr["events"]
+    assert "not traced yet" in st["placements"][p["event_id"]]["stretch_fallback"]
     # Trahon Creek is tied by its name once its record exists (the report-names pass builds it)
     assert st["placements"][t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
     # reaches, not whole rivers (2026-11-07): Trahon Creek's advisory names no stretch with both ends, so it is listed
@@ -201,6 +196,7 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     # rivers are drawn by reaches and markers, never filled: the markers stay, so the map still shows both
     pts = {a["event_id"]: a for a in st["advisory_points"]}
     assert pts[p["event_id"]]["status"] == "red" and pts[p["event_id"]]["water_slugs"] == ["pearl-river-ms"]
+    assert "not traced yet" in pts[p["event_id"]]["why"] and "whole water" not in pts[p["event_id"]]["why"]
     assert pts[t["event_id"]]["status"] == "red" and pts[t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
     from build.status import RIVER_POINT_WHY
     assert pts[t["event_id"]]["why"] == RIVER_POINT_WHY
