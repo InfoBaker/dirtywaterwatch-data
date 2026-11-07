@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1288 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1298 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -32,7 +32,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
-| **all** | **453** | **225** | **364** | **183** | **63** | **1288** |
+| ne | 4 | 1 | 2 | 2 | 1 | 10 |
+| **all** | **457** | **226** | **366** | **185** | **64** | **1298** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1431,3 +1432,18 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-norc-river-reversal-analysis` | NORC/UChicago "rain" project: parse MWRD river reversals and CSOs | rejected | search_only | prior_art | Prior art; one-off analysis. |
 | `il-evanston-cso-plan` | City of Evanston CSO Public Notification Plan | unreachable | fetched | law | Suburban CSO plans point to MWRD alerts; this one moved. |
 | `il-mwrd-tarp-levels` | MWRD TARP reservoir levels map service | unreachable | fetched | hydrography | Token-protected; reservoir fullness would be a leading indicator of CSOs. |
+
+## ne: Nebraska (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ne-dwee-beachwatch` | Nebraska DWEE Beach Watch: MonitoredBeachAlert (ArcGIS) | used | fetched | advisories | Read through the generic ArcGIS reader (ne-dwee-beachwatch). Public layer with every weekly beach sample of the 2026 season (1,022 rows at 57 beaches, sample weeks 20 to 37, 2026-05-18 to 2026-09-14, fetched 2026-11-07): station, lat/long, sample date, E. coli, microcystin, HealthAlert YES/NO and description. 20 rows on health alert (microcystin above 8 ug/L: Rockford Lake, Maskenthine Reservoir, Cub Creek Lake, Big Indian Lake, Iron Horse Trail Lake, Kirkman's Cove Lake, Maple Creek Recreation Area Lake) read as the agency's bloom advisories; 38 rows labelled 'Elevated health risk for E. coli' (above 235/100 mL), for which DWEE issues no advisory, read as a caution; 57 records. |
+| `ne-dwee-net-sso-guide` | DWEE guide: Creating Event Report in NeTSSO | used | search_only | law | Confirms Nebraska permittees file sewer overflow and bypass reports in EPA's NeT-SewerOverflow (hence the SOBE rows). |
+| `ne-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), NE rows | used | fetched | events | The only dated, statewide, machine-readable overflow feed for Nebraska, read by the national eRule ingester (echo-sewer-overflow) with Nebraska in its states. 2026-11-04 extract: 162 current NE rows from 21 permits (CSO 89, SSO 64, BYP 9), starts 2022-04-15 to 2026-10-06; every row with a point, 158 with a volume, 49 with a receiving-water row. 51 kept from 13 permits; 111 dropped (83 building backups, 28 SSOs and manhole CSOs naming no water and no water impact). Received a median 22.5 days after the start (10% within a day, 10% 83 days or more). Times read in the zone of the event's own point (Mountain in the eighteen counties and the western part of Cherry County that 49 CFR 71.7(c) puts west of the boundary, Central elsewhere): all 162 points lie in the Central part. |
+| `ne-omaha-cso-permit-notice` | DWEE public notice: Omaha CSO permit NE0133680 modification | used | fetched | permits | Names the CSO receiving waters (Missouri River, Blood Creek to Big Papillion Creek, Little Papillion Creek, Cole Creek). The permit text sits in DWEE's OnBase public-access viewer (JavaScript) and was not read, so Omaha's CSO public-notification clause is unknown. |
+| `ne-echo-dmr-omaha-cso` | ECHO DMR data for Omaha CSO permit NE0133680 | candidate | fetched | permits | Only features 102 and 205R report DMRs, including 'Number of Events', 'Duration of discharge' and 'Flow, total' (likely the treated outfalls); the 25 CSO outfalls have no monthly counts. |
+| `ne-dhhs-hab-alerts` | Nebraska DHHS health alerts (HABs) | watch | search_only | advisories | Joint health alerts with DWEE; duplicates Beach Watch. |
+| `ne-omaha-news` | Local TV reports of Omaha overflows (WOWT and others) | watch | fetched | news | Omaha Public Works announces large overflows through media with a map of the affected stretch (Boxelder and West Papillion creeks, 2026-10-02: 'not to touch the water'). No city web notice found. |
+| `ne-omaha-cso-program` | Omaha CSO Program website (omahacso.com) | rejected | fetched | prior_art | Fetched: capital-program site (projects, quarterly reports, LTCP); no overflow status, notification or sign information found. cityofomaha.org and publicworks.omaha.gov returned 403 to curl. |
+| `ne-title-126-release` | Title 126 Chapter 18 (proposed Chapter 1) release notification | rejected | search_only | law | Oil and hazardous substance releases (notice within 15 minutes; 2026 proposal allows up to 24 hours); does not address sewage. |
+| `ne-dwee-beachwatch-page` | Nebraska Beach Watch page | unreachable | search_only | advisories | 503 to WebFetch and connection reset to curl on 2026-11-03; described in DWEE release dwee.nebraska.gov/node/4996 (fetched). |
