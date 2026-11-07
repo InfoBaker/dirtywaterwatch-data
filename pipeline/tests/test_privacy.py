@@ -9,6 +9,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import common  # noqa: E402
@@ -447,3 +449,73 @@ def test_a_bracketed_contact_is_cut_through_the_plant_build_and_the_row_scrub():
         assert rows[0]["permit_name"] == "City of Exampleton" and rows[0]["permit_name_scrubbed"] is True
         assert "Pat" not in json.dumps(rows)
         assert pn.scrub_rows(rows) == {}
+
+
+# ---------------------------------------------------------------- a permit held in a person's own name (2026-11-07)
+
+HOLDER_SHAPES = [   # (EPA's permit name, the facility, what the public file carries); invented names only
+    ("ZORVAN QUELTRIX PLACEWORTH", "EXAMPLE ESTATES", "EXAMPLE ESTATES"),                  # a three-part name
+    ("ABCD EXAMPLEWOOD SAMPLESON, PAT", "OVERLOOK EXAMPLE WWTF", "OVERLOOK EXAMPLE WWTF"),   # '<code> <surname>, <given>'
+    ("HOA QUILL VANTERO AND PAT SAMPLETON", "SOUTHGATE EXAMPLE WWTP", "SOUTHGATE EXAMPLE WWTP"),
+    ("THE PAT SAMPLE FAMILY LIMITED PARTNERSHIP", "EXAMPLE COUNTY MUD NO 1 WWTP", "EXAMPLE COUNTY MUD NO 1 WWTP"),
+    ("Pat Q. Example d/b/a Example Ridge Mobile Home Park", "EXAMPLE RIDGE TRAILER PARK",
+     "Example Ridge Mobile Home Park"),                                                       # the trade name
+    ("Quill Vantero DBA Example MHP", "EXAMPLE MHP", "Example MHP"),
+    ("ZORVAN QUELTRIX PLACEWORTH", "PAT EXAMPLE", "Holder of permit ZZ0000009"),              # no body to name it by
+]
+
+
+@pytest.mark.parametrize("name, facility, public", HOLDER_SHAPES)
+def test_a_permit_held_in_a_persons_name_is_named_by_its_facility_or_trade_name(name, facility, public):
+    """Through the plant-name path: the plant build's public_permit_name, then scrub_rows (as the build runs it)."""
+    import importlib.util
+    root = Path(__file__).resolve().parents[2]
+    pn = _permit_names()
+    spec = importlib.util.spec_from_file_location("bpo_holder", root / "research" / "federal" / "build_plant_outfalls.py")
+    bpo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bpo)
+    kept = bpo.public_permit_name(name)
+    rows = [{"npdes_permit": "ZZ0000009", "permittee": facility, "permit_name": kept, "state": "ZZ", "city": "Sampleville"}]
+    pn.scrub_rows(rows)
+    assert rows[0]["permit_name"] in (public, None)
+    if kept is not None:
+        assert rows[0]["permit_name"] == public and rows[0]["permit_name_scrubbed"] is True
+    for w in ("Zorvan", "Queltrix", "Vantero", "Sampleton", "Sampleson", "Pat ", "Quill"):
+        assert w.lower() not in (rows[0]["permit_name"] or "").lower() or w.strip().lower() in public.lower()
+    assert pn.scrub_rows(rows) == {}                       # stable on its own output
+
+
+@pytest.mark.parametrize("name, facility", [
+    ("Alabama Department of Conservation and Natural Resources", "EXAMPLE STATE PARK LAGOON"),
+    ("Example Sand and Gravel LLC", "EXAMPLE MEADOWS SUBDIVISION"), ("Exampleton, City of", "WILLOW EXAMPLE WWTP"),
+    ("ODNR Parks & Watercraft", "SALT EXAMPLE SP MARINA WWTP"), ("NYS DIV OF MILITARY AND NAVAL AFFAIRS", "CAMP EXAMPLE"),
+    ("Bunker Example and Peru MHC, LLC", "KINGS EXAMPLE WWTP"), ("Example Materials, Inc.", "EXAMPLE YARD"),
+    ("Example County Board of Education dba Example County Schools", "EXAMPLE SCHOOL"),
+    ("WEST EXAMPLETON", "WEST EXAMPLETON WATER UTILITIES"), ("AQUA EXAMPLE INC", "EXAMPLE WWTP")])
+def test_a_bodys_permit_name_is_not_taken_for_a_person(name, facility):
+    pn = _permit_names()
+    assert pn.holder_name(name, "ZZ0000001", "Sampleville", facility) == (name, False)
+
+
+def test_a_candidates_file_removes_a_holders_own_name_in_its_own_convention():
+    pn = _permit_names()
+    doc = {"candidates": [
+        {"npdes_permit": "ZZ0000001", "state": "ZZ", "facility": "SOUTHGATE EXAMPLE WWTP",
+         "permittee_as_recorded": "HOA QUILL VANTERO AND PAT SAMPLETON"},
+        {"npdes_permit": "ZZ0000002", "state": "ZZ", "facility": "HOUSE EXAMPLE WWTP",
+         "permittee_as_recorded": "HOUSE EXAMPLE OWNERS ASSOCIATION INC, EXAMPLE TRANSPORT LLC, AND QUILL VANTERO"},
+        {"npdes_permit": "ZZ0000003", "state": "ZZ", "facility": "EXAMPLE WWTP", "permittee_as_recorded": "Aqua Example Inc"}],
+        "public_by_name": []}
+    assert pn.scrub_candidates(doc) == {"ZZ": 2}
+    assert [c["permittee_as_recorded"] for c in doc["candidates"]] == ["[name removed]", "[name removed]", "Aqua Example Inc"]
+
+
+def test_no_registry_or_candidates_row_is_a_holders_own_name():
+    pn = _permit_names()
+    root = Path(__file__).resolve().parents[2]
+    doc = json.loads((root / "data" / "outfalls-plants-us.json").read_text())
+    bad = sum(pn.holder_name(r["permit_name"], r["npdes_permit"], r.get("city"), r.get("permittee"))[1]
+              for r in doc["outfalls"] if r.get("permit_name"))
+    assert bad == 0, f"{bad} plant rows name a permit's holder by a person's name"
+    for path in sorted((root / "research").glob("*/private-utilities-candidates.json")):
+        assert pn.scrub_candidates(json.loads(path.read_text())) == {}, path.parent.name
