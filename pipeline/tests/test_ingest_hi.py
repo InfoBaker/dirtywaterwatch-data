@@ -322,9 +322,12 @@ def test_register_rows_per_operator_and_the_departments_channels():
         assert row["unmonitored_reason"] == "feed_ingested" and row["feed_source_id"] == HI.SOURCE_ID
         assert row["basis_kind"] == "law" and "11-62" in row["legal_basis"]
         press, signs = reg[f"{r['id']}-press-release"], reg[f"{r['id']}-warning-signs"]
-        assert "press release" in press["legal_basis"] and press["barrier"] == "not_verified"
+        assert "press release" in press["legal_basis"]
+        assert press["monitored"] or press["barrier"] in ("not_verified", "bot_wall") or press.get("barrier_review")
         assert "warning signs" in signs["legal_basis"] and signs["barrier"] == "signs_only"
     assert reg["hi-doh-cwb-advisories"]["feed_source_id"] == HI.SOURCE_ID
+    assert reg["hi-honolulu-env-press-release"]["urls"] == ["https://www.honolulu.gov/env/news/"]      # final audit P2-7
+    assert reg["hi-honolulu-env-press-release"]["monitored"] and not reg["hi-honolulu-env-press-release"]["records"]
     assert reg["hi-doh-cwb-spill-reports"]["urls"] == [] and reg["hi-doh-cwb-signs"]["barrier"] == "signs_only"
     assert "section 4" in reg["hi-doh-wwb-ground-spill-reports"]["legal_basis"]          # final audit P2-5
     assert "4.c" in reg["hi-honolulu-env-press-release"]["legal_basis"]
