@@ -1,0 +1,40 @@
+id: "ak-epa-sobe"
+name: "EPA eRule Sewer Overflow/Bypass Event reports (Alaska APDES permittees)"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Alaska
+#   permits added 2026-11-07: times written with Alaska offsets (Hawaii-Aleutian by the event's point west of 169 30 W),
+#   "X which flowed to Y" read as both waters, a place named after a water not read as one.
+# Notes (research/ak, status used, verified fetched, checked 2026-11-07): The only dated
+#   machine-readable overflow data for Alaska; read by the national eRule ingester
+#   (echo-sewer-overflow) with Alaska in its states. Juneau's CSOs are absent.
+# Access detail (research, quoted): The current-version ZIP of 2026-11-05 held no tables; the
+#   all-versions ZIP (2026-11-04 extract, Last-Modified 2026-11-04 12:21 GMT) was read for the
+#   current version of each report. Alaska: 46 current reports from 3 permits, starts 2023-06-05 to
+#   2026-10-26: AK0022551 (Anchorage) 43, AK0021440 (Ketchikan, two anticipated pump-station
+#   bypasses) 2, AK0053775 (Denali National Park, a federal facility) 1. 44 SSO, 2 bypass. Kept 5 (a
+#   receiving water named), dropped 41 (23 building backups, 18 with no evidence the discharge
+#   reached a water).
+# Can fill: source_record_id, event_type, started_at, ended_at, reported_at, coordinates, volume,
+#   authority, waterbody (receiving waters table)
+# Cannot fill: advice_text; valid_until
+# Waters: permittees that file electronically: Anchorage AWWU, Ketchikan, Denali National Park
+#   (federal)
+# History: 2023-06 to date
+# Research notes: 22 'Basement Backup' plus one 'Other: Toilet'; receiving waters named: Tongass
+#   Narrows (2), Fish Creek, 'Fish Creek which flowed to Travels to Cook Inlet', Birch Lake. Times
+#   carry no zone: read as America/Anchorage. Descriptions carry no addresses or personal names.
+cadence: "Received a median 1 day after the start (n=46; the two anticipated bypasses were filed before they began); ECHO extract daily."
+license: "US government work"
+attribution: "US EPA (data filed by permittees through NeT-SewerOverflow)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["AK"]
+access: ["csv"]
+access_detail: "The current-version ZIP of 2026-11-05 held no tables; the all-versions ZIP (2026-11-04 extract, Last-Modified 2026-11-04 12:21 GMT) was read for the current version of each report. Alaska: 46 current reports from 3 permits, starts 2023-06-05 to 2026-10-26: AK0022551 (Anchorage) 43, AK0021440 (Ketchikan, two anticipated pump-station bypasses) 2, AK0053775 (Denali National Park, a federal facility) 1. 44 SSO, 2 bypass. Kept 5 (a receiving water named), dropped 41 (23 building backups, 18 with no evidence the discharge reached a water)."
+machine_readable: true
+legal_basis: "40 CFR 127; APDES permit 5-day noncompliance report"
+checked: "2026-11-07"

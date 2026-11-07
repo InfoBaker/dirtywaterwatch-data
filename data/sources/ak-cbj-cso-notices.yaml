@@ -1,0 +1,30 @@
+id: "ak-cbj-cso-notices"
+name: "City and Borough of Juneau wastewater utility page: combined sewer overflow public notices"
+url: "https://juneau.org/engineering-public-works/wastewater-utility"
+homepage: "https://juneau.org/engineering-public-works/wastewater-utility"
+kind: "html"
+level: "utility"
+# Notes (research/ak, status used, verified fetched, checked 2026-11-07): Juneau's permit-required
+#   CSO public notice channel; monitored for new notices.
+# Access detail (research, quoted): Answered 200 on 2026-11-07. The 'Combined Sewer Overflows'
+#   section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No
+#   Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'.
+#   Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification).
+# Can fill: started_at (date only)
+# Cannot fill: volume; end
+# Waters: Gastineau Channel (Juneau-Douglas CSO outfalls)
+# History: 2004 to date
+# Research notes: Corrects the research's 'no public channel' for Juneau: a page exists, with no
+#   notice since 2005.
+cadence: "as events occur (none since 2005)"
+license: "none stated"
+attribution: "City and Borough of Juneau"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["AK"]
+access: ["html", "pdf"]
+access_detail: "Answered 200 on 2026-11-07. The 'Combined Sewer Overflows' section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'. Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification)."
+machine_readable: false
+legal_basis: "NPDES permit AK0023213, Part I.D.1.g"
+checked: "2026-11-07"
