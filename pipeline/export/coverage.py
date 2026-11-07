@@ -160,6 +160,8 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[
         return "Dated reports, delayed", (
             (by or f"{Name} publishes dated reports") + (f", but the newest is from {day_text(latest)}" if latest else "")
             + (f" and reports typically appear {round(lag)} days after a discharge" if lag is not None and lag > LAG_OK_DAYS else "")
+            + (f", {(as_of - latest).days} days before {day_text(as_of)}, as the reports are published in batches months "
+               "later" if f.get("published_in_batches") and latest and (as_of - latest).days > LAG_OK_DAYS else "")
             + f"; a quiet map in {in_name} can mean a report has not appeared yet.")
     if f["monthly_share"] >= f["annual_share"] and f["monthly_share"] > 0:
         return "Monthly totals only", (f"{Name} publishes monthly totals, not dated reports; the map shows no dated "
@@ -193,7 +195,8 @@ def water_grade(f: dict, state_grade: tuple[str, str] | None, as_of: datetime) -
     return "Dated reports, delayed", "Few reports for this water carry a date; a quiet map here can mean a report has not appeared yet."
 
 
-def _figures(evs: list[dict], firsts: list[dict], feeds_of: dict, cadence: dict, names: dict, ids) -> dict:
+def _figures(evs: list[dict], firsts: list[dict], feeds_of: dict, cadence: dict, names: dict, ids,
+             batches: dict | None = None) -> dict:
     """The figures over one set of reports (a state's or a water's)."""
     d = [e for e in evs if is_dated(e)]
     latest = max((t for t in (when_of(e) for e in d) if t), default=None)
@@ -217,6 +220,10 @@ def _figures(evs: list[dict], firsts: list[dict], feeds_of: dict, cadence: dict,
     n = len(evs)
     return {"records_12m": n, "dated": len(d), "dated_share": round(len(d) / n, 4) if n else None,
             "latest_dated": iso(latest), "lag_days": min(timely) if timely else None,
+            # a feed published in batches months after the reports (TCEQ's table, meta.published_in_batches): the
+            # grade sentence gives the delay from the newest report to the snapshot (Texas final audit 2026-11-07)
+            **({"published_in_batches": True} if any((batches or {}).get(f["source_id"]) and f["_dated"] for f in fc)
+               else {}),
             "monthly_share": round(sum(1 for e in evs if e.get("time_precision") == "month") / n, 4) if n else 0,
             "annual_share": round(sum(1 for e in evs if e.get("time_precision") == "year"
                                       or e.get("event_type") == "annual_total") / n, 4) if n else 0,
@@ -335,13 +342,14 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
     start = now - timedelta(days=365)
     reg = {r.get("id"): r for r in registry or [] if isinstance(r, dict) and r.get("id")}
     # the site's sources: a feed takes its registry rows' event types and states
-    feed_types, feed_states, cadence = {}, {}, {}
+    feed_types, feed_states, cadence, batches = {}, {}, {}, {}
     for f in feeds or []:
         sid = f.get("source_id")
         rows = [reg[i] for i in f.get("registry_ids") or [] if i in reg]
         feed_types[sid] = {t for r in rows for t in r.get("event_types") or []}
         feed_states[sid] = [str(x).upper() for r in rows for x in r.get("states") or []]
         cadence[sid] = f.get("expected_cadence_hours")
+        batches[sid] = bool(f.get("published_in_batches"))
     sewage_feeds = {sid for sid, ts in feed_types.items() if ts & SEWAGE}
     names = source_names if source_names is not None else csv_mod.source_labels(events, feeds, registry)
     rows = [w for w in (waters.values() if isinstance(waters, dict) else waters or []) if isinstance(w, dict) and w.get("slug")]
@@ -371,7 +379,7 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         evs = by_state.get(st, [])
         ids = sorted({e.get("source_id") for e in evs} | {sid for sid in sewage_feeds if st in feed_states.get(sid, [])})
         own = {sid for sid in sewage_feeds if st in feed_states.get(sid, [])}
-        f = _figures(evs, firsts_state.get(st, []), own, cadence, names, ids)
+        f = _figures(evs, firsts_state.get(st, []), own, cadence, names, ids, batches)
         dated = {e.get("source_id") for e in evs if is_dated(e)}
         federal = bool(dated) and all(set((source_levels or {}).get(s) or []) == {"federal"} for s in dated)
         grade, sentence = grade_of(st, f, now, federal=federal)

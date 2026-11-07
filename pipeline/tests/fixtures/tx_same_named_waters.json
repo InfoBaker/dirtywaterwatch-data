@@ -1,0 +1,60 @@
+{
+ "buffalo-bayou-tx": {
+  "slug": "buffalo-bayou-tx",
+  "name": "Buffalo Bayou",
+  "kind": "river",
+  "state": "TX",
+  "towns": [
+   "Bunker Hill Village",
+   "Houston",
+   "Piney Point Village",
+   "Sugar Land",
+   "West University Place"
+  ],
+  "bbox": [
+   -95.826455,
+   29.716625,
+   -95.079286,
+   29.773937
+  ],
+  "aliases": null
+ },
+ "canyon-lake-tx": {
+  "slug": "canyon-lake-tx",
+  "name": "Canyon Lake",
+  "kind": "reservoir",
+  "state": "TX",
+  "towns": [
+   "Canyon City",
+   "Canyon Lake",
+   "Canyon Springs",
+   "Cranes Mill",
+   "New Braunfels",
+   "Spring Branch",
+   "Wimberley"
+  ],
+  "bbox": [
+   -98.34866,
+   29.850322,
+   -98.196621,
+   29.923157
+  ],
+  "aliases": null
+ },
+ "johnson-creek-reservoir-tx": {
+  "slug": "johnson-creek-reservoir-tx",
+  "name": "Johnson Creek Reservoir",
+  "kind": "reservoir",
+  "state": "TX",
+  "towns": [
+   "Avinger"
+  ],
+  "bbox": [
+   -94.570077,
+   32.837062,
+   -94.53949,
+   32.873219
+  ],
+  "aliases": null
+ }
+}
