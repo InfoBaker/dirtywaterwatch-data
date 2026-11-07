@@ -141,3 +141,70 @@ def test_a_short_layer_fails_the_run(tmp_path, monkeypatch):
                                  ["features"][:5]}))
     assert B.main(["--file", str(short)]) == 1
     assert json.loads((tmp_path / f"{B.SOURCE_ID}.json").read_text())["ok"] is False
+
+
+# ---------------------------------------------------------------- the water the advisory names (final audit, P2-2)
+
+def _status(recs, now, monkeypatch):
+    """The status build over MDEQ's records with two Mississippi waters near the releases' points."""
+    import tempfile
+    from datetime import datetime
+    from build import status as S
+    from tests.test_status import TEST_RULES
+    monkeypatch.setattr(S, "_RULES", TEST_RULES)
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    d = Path(tempfile.mkdtemp())
+    (d / f"{W.SOURCE_ID}.json").write_text(json.dumps({"source_id": W.SOURCE_ID, "ok": True, "last_ok_at": now,
+                                                       "meta": {}, "records": recs}))
+    line = lambda pts: {"type": "LineString", "coordinates": pts}                        # noqa: E731
+    pearl = [[-90.16, 32.42], [-90.112036, 32.351817], [-90.14, 32.25], [-90.20, 32.18]]
+    trahon = [[-90.25033, 32.194572], [-90.23, 32.19], [-90.205, 32.182]]
+    waters = {"pearl-river-ms": {"slug": "pearl-river-ms", "name": "Pearl River", "kind": "river", "state": "MS",
+                                 "bbox": [-90.20, 32.18, -90.11, 32.42], "geometry": line(pearl)},
+              "trahon-creek-ms": {"slug": "trahon-creek-ms", "name": "Trahon Creek", "kind": "stream", "state": "MS",
+                                  "bbox": [-90.25033, 32.182, -90.205, 32.194572], "geometry": line(trahon)}}
+    st, _ = S.build(now=datetime.fromisoformat(now.replace("Z", "+00:00")), write=False, events_dir=d, waters=waters,
+                    outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=TEST_RULES, placement_cache=None)
+    return st
+
+
+def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_and_grey_after_a_lift(monkeypatch):
+    feed = (REL / "feed.xml").read_bytes()
+    recs, _ = W.run(feed, _pages(), [], AT)
+    by = {r["source_record_id"]: r for r in recs}
+    p, t = by["pearl-river-hanging-moss-creek-to-byram-swinging-bridge"], by["trahon-creek-2026-09-02"]
+    assert p["water_slugs"] == ["pearl-river-ms"] and p["raw"]["advisory_extent"] == "named_water"
+    assert t["raw"]["stretch"]["from"]["name"] == "culvert at the Interstate 55 frontage road"
+    assert (t["raw"]["stretch"]["from"]["lat"], t["raw"]["stretch"]["to"]["name"]) == (32.194572, "confluence with the Pearl River")
+    st = _status(recs, "2026-11-07T13:00:00Z", monkeypatch)
+    pr = st["waters"]["pearl-river-ms"]
+    # the river itself reads the authority's advisory: red, beach category, the stretch named in its reason
+    assert pr["status"] == "red" and pr["status_by_category"]["beach"] == "red"
+    assert pr["reasons"][0]["rule"] == "advisory_active"
+    assert pr["reason_short"].startswith("Water contact advisory in effect · Mississippi Department of Environmental")
+    assert pr["reason_short"].endswith("from the mouth of Hanging Moss Creek to the Byram Swinging Bridge")
+    # Trahon Creek is tied by its name once its record exists (the report-names pass builds it)
+    assert st["placements"][t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
+    assert st["waters"]["trahon-creek-ms"]["status"] == "red"
+    # rivers are drawn by reaches and markers, never filled: the markers stay, so the map still shows both
+    pts = {a["event_id"]: a for a in st["advisory_points"]}
+    assert pts[p["event_id"]]["status"] == "red" and pts[p["event_id"]]["water_slugs"] == ["pearl-river-ms"]
+    # a lift release ends it: the river reads grey after the lift day
+    lift = (b"<item><title>MDEQ Lifts Water Contact Advisory for Pearl River</title>"
+            b"<link>https://www.mdeq.ms.gov/lift-test/</link><pubDate>Tue, 10 Nov 2026 15:00:00 +0000</pubDate></item>")
+    lifted, _ = W.run(feed.replace(b"<item>", lift + b"<item>", 1), {}, copy.deepcopy(recs), "2026-11-10T18:00:00Z")
+    assert next(r for r in lifted if r["event_id"] == p["event_id"])["status"] == "advisory_lifted"
+    st = _status(lifted, "2026-11-12T13:00:00Z", monkeypatch)
+    assert st["waters"]["pearl-river-ms"]["status"] == "grey"
+    assert st["waters"]["trahon-creek-ms"]["status"] == "red"                  # its own advisory still stands
+
+
+def test_a_beach_advisory_on_a_river_still_colours_only_its_point(monkeypatch):
+    recs, _ = W.run((REL / "feed.xml").read_bytes(), _pages(), [], AT)
+    p = copy.deepcopy(next(r for r in recs if r["source_record_id"].startswith("pearl-river")))
+    for k in ("advisory_extent", "advisory_noun"):
+        p["raw"].pop(k)                                                         # an ordinary station's advisory
+    st = _status([p], "2026-11-07T13:00:00Z", monkeypatch)
+    assert st["waters"]["pearl-river-ms"]["status"] == "grey"
+    assert st["advisory_points"][0]["why"] == "water is not a lake, pond or reservoir under 50 km²"
