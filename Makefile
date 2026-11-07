@@ -108,7 +108,8 @@
 #   make build     research fixtures + per-water status and hourly history (data/build/)
 #   make export    write out/ for the site
 #   make charts    chart series (build/charts.py)
-#   make refresh   ingest, provisional outfalls, reaches, build, charts, export (REFRESH_STAGES, in order; stops at
+#   make obl-sync  openboatlaunch's changed-since check (ingest/obl_changes.py: its API, key in OBL_API_KEY)
+#   make refresh   obl-sync, ingest, provisional outfalls, reaches, build, charts, export (REFRESH_STAGES; stops at
 #                  the first that fails). Every feed, extra and stage prints "timing: NAME SECONDS s"
 #                  (scripts/timed.sh; TIMINGS_FILE collects them, scripts/refresh-data.sh prints the longest at the end)
 #   make tally     docs/source-tally.md: every information source by state, what we collect, what we do not and
@@ -121,7 +122,7 @@
 # Until `make setup` has run, the openboatlaunch venv next door is used; `make test` uses it too
 # while pipeline/.venv has no pytest (`make setup` installs it).
 
-.PHONY: setup ingest waters-nhd conditions rainfall rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
+.PHONY: setup obl-sync ingest waters-nhd conditions rainfall rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
 
 VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
@@ -184,6 +185,9 @@ rain-thresholds:
 rain-thresholds-radar:
 	$(PY) -m build.rain_thresholds --radar MI GA
 
+obl-sync:           ## openboatlaunch's hourly changed-since check (ingest/obl_changes.py; never fails the run)
+	$(PY) -m ingest.obl_changes || echo "!! openboatlaunch changes check failed; the run goes on with the folder as restored"
+
 provisional-outfalls:   ## provisional outfalls from the reports (a failure keeps the previous file)
 	$(PY) -m build.provisional_outfalls --geolocate --geo-budget-s 30 --llm --llm-cap-usd 0.25 --llm-budget-s 60 || echo "!! provisional outfalls failed; the previous data/build/outfalls-reported.json stays"
 
@@ -203,7 +207,7 @@ charts:             ## per-water, per-discharger and per-state chart series (aft
 export:
 	$(PY) -m export.build $(FIXTURE_FLAG)
 
-REFRESH_STAGES = ingest provisional-outfalls reaches build charts export
+REFRESH_STAGES = obl-sync ingest provisional-outfalls reaches build charts export
 refresh:
 	@for t in $(REFRESH_STAGES); do \
 	  $(TIMED) stage.$$t $(MAKE) --no-print-directory $$t || exit 1; \

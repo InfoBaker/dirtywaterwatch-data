@@ -49,6 +49,8 @@ import math
 
 import numpy as np
 
+from common import same_gnis
+
 KINDS = {"lake", "reservoir"}
 # the open ocean (data/rules.json reach.shoreline.oceans, 2026-11-04: Florida's Atlantic Ocean and Gulf records): an
 # ocean record is kept as a bay or sound by openboatlaunch ("Atlantic Ocean", kind bay), so these kinds qualify too,
@@ -104,7 +106,7 @@ def shoreline_entry(w: dict | None, r: dict) -> dict | None:
         hit = e if kind in KINDS else {**e, "bay": True} if kind == "bay" else {**e, "sound": True}
         if e.get("wikidata") and w.get("wikidata") == e["wikidata"]:
             return hit
-        if e.get("gnis_id") and w.get("gnis_id") is not None and str(w["gnis_id"]) == str(e["gnis_id"]):
+        if same_gnis(e.get("gnis_id"), w.get("gnis_id")):
             return hit
         floor = r.get("name_min_area_km2")
         if _norm(w.get("name")) == _norm(e.get("name")) and area is not None and (floor is None or area >= floor):

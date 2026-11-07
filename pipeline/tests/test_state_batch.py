@@ -584,16 +584,23 @@ def test_state_build_workflow_restores_the_openboatlaunch_object():
     job = next(iter(w["jobs"].values()))
     assert job["env"]["OSM_BUDGET"] == "${{ inputs.osm_budget }}"
     names = [s.get("name", "") for s in job["steps"]]
-    ro = next(i for i, n in enumerate(names) if n.startswith("Restore openboatlaunch"))
+    ro = next(i for i, n in enumerate(names) if n.startswith("openboatlaunch's water records"))
     run = next(i for i, n in enumerate(names) if n.startswith("Run the steps"))
     assert names.index("Restore pipeline state from R2 (read only here)") < ro < run
     assert "state_paths.py unpack-obl obl-water.tar.gz" in job["steps"][ro]["run"]
+    # the API first (fetch-obl), the R2 copy only when it was not used
+    assert job["steps"][ro]["run"].index("fetch-obl") < job["steps"][ro]["run"].index("fetch state/obl-water.tar.gz")
+    assert job["env"]["OBL_API_KEY"] == "${{ secrets.OBL_API_KEY }}"
     for s in job["steps"]:
         if s.get("run") and "state_batch.py" in s["run"] and ("plan" in s["run"] or " run " in s["run"]):
             assert '--osm-budget "$OSM_BUDGET"' in s["run"]
     text = (ROOT / ".github/workflows/state-build.yml").read_text()
     assert "object put dirtywaterwatch-data/state/obl-water.tar.gz" not in text      # restored only, never saved
-    assert "object put dirtywaterwatch-data/state/obl-water.tar.gz" not in (ROOT / ".github/workflows/refresh.yml").read_text()
+    # the refresh saves the folder only when the API changed it (pack-obl), before the build state, rolled back on
+    # a failed upload (obl-not-saved)
+    rt = (ROOT / ".github/workflows/refresh.yml").read_text()
+    assert rt.index("state_paths.py pack-obl") < rt.index("object put dirtywaterwatch-data/state/obl-water.tar.gz") \
+        < rt.index("state_paths.py obl-not-saved") < rt.index("tar -czf build.tar.gz data/build")
 
 
 def test_extract_never_overwrites_a_regional_water_file(tmp_path):

@@ -289,7 +289,8 @@ def add_water(d, st):
     except Exception:
         return
     waters.append({"slug": d["slug"], "name": d["name"], "kind": d.get("kind"), "state": st,
-                   "launches": [l["s"] if isinstance(l, dict) else l for l in d.get("launches") or []]})
+                   "launches": [(l.get("slug") or l.get("s")) if isinstance(l, dict) else l for l in d.get("launches") or []
+                                if not isinstance(l, dict) or l.get("visibility", "published") == "published"]})
     geoms.append(g)
 
 
