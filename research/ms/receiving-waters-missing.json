@@ -1,8 +1,8 @@
 {
  "about": "Receiving-water names in MS's reports (EPA's overflow tables for Mississippi permits, the extract of 2026-11-04) that data/receiving-waters-national.json does not hold for MS, by name as typed (spellings that differ only in case, spaces or punctuation counted together), with the number of reports giving each and up to five of their points. The City of Jackson's shorthand names are given as the NHD creeks the ingester reads them as. Reports that say the discharge reached no water are left out.",
  "state": "MS",
- "waters": 42,
- "reports": 163,
+ "waters": 40,
+ "reports": 162,
  "rows": [
   {
    "name": "Davis bayou",
@@ -74,7 +74,7 @@
   },
   {
    "name": "Eubanks Creek",
-   "reports": 14,
+   "reports": 13,
    "permits": [
     "MS0024295"
    ],
@@ -101,6 +101,43 @@
     [
      32.355519,
      -90.177598
+    ]
+   ]
+  },
+  {
+   "name": "OKATIBBEE CREEK",
+   "reports": 13,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "spellings": [
+    "OKATIBBEE CREEK",
+    "Okatibbee Creek",
+    "okatibbee creek"
+   ],
+   "points": [
+    [
+     32.355384,
+     -88.744533
+    ],
+    [
+     32.359596,
+     -88.740767
+    ],
+    [
+     32.355538,
+     -88.744534
+    ],
+    [
+     32.37015,
+     -88.74581
+    ],
+    [
+     32.355221,
+     -88.744533
     ]
    ]
   },
@@ -169,43 +206,6 @@
     [
      32.369897,
      -90.115783
-    ]
-   ]
-  },
-  {
-   "name": "OKATIBBEE CREEK",
-   "reports": 11,
-   "permits": [
-    "MS0020117"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "spellings": [
-    "OKATIBBEE CREEK",
-    "Okatibbee Creek",
-    "okatibbee creek"
-   ],
-   "points": [
-    [
-     32.355384,
-     -88.744533
-    ],
-    [
-     32.359596,
-     -88.740767
-    ],
-    [
-     32.355538,
-     -88.744534
-    ],
-    [
-     32.37015,
-     -88.74581
-    ],
-    [
-     32.355221,
-     -88.744533
     ]
    ]
   },
@@ -584,6 +584,22 @@
    ]
   },
   {
+   "name": "EUBANKS",
+   "reports": 1,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.242866,
+     -90.301182
+    ]
+   ]
+  },
+  {
    "name": "Forth Bayou Creek",
    "reports": 1,
    "permits": [
@@ -696,38 +712,6 @@
    ]
   },
   {
-   "name": "OAKTIBEE CREEK",
-   "reports": 1,
-   "permits": [
-    "MS0020117"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.355538,
-     -88.744534
-    ]
-   ]
-  },
-  {
-   "name": "OKATIBBEE CREED",
-   "reports": 1,
-   "permits": [
-    "MS0020117"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.355538,
-     -88.744584
-    ]
-   ]
-  },
-  {
    "name": "Ocean Springs Harbor - Biloxi Bay",
    "reports": 1,
    "permits": [
@@ -788,22 +772,6 @@
     [
      30.492713,
      -88.558805
-    ]
-   ]
-  },
-  {
-   "name": "SAWASHEE CREEK",
-   "reports": 1,
-   "permits": [
-    "MS0020117"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.39779,
-     -88.666039
     ]
    ]
   },
