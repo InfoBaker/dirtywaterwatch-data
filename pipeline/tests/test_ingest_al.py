@@ -58,7 +58,7 @@ def test_times_are_central_wall_clock_and_received_time_from_the_live_layer():
     assert recs["SSO-00000285"]["reported_at"] is None and recs["SSO-00000285"]["published_at"] is None
 
 
-def test_ongoing_as_adem_marks_it_however_old():
+def test_ongoing_kept_as_adem_marks_it_with_its_age():
     recs, stats = _build()
     r = recs["SSO-00008447"]
     assert r["status"] == "ongoing" and r["ended_at"] is None and r["started_at"].startswith("2018-03-18T17:00")

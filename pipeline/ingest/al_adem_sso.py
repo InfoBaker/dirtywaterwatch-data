@@ -39,7 +39,8 @@ Record rules (one sso record per ADEM report id, source_record_id "SSO-00215084"
     reports have none. published_at and
     source_updated_at are null (the layers give no posting or edit time); raw._first_seen_at is our clock.
   - Status: sso_ongoing_ind Yes -> ongoing, as ADEM marks it, however old the start (nine reports on 2026-11-07, one
-    from 2018-03-18); a stop time -> ended at it; otherwise unknown. A stop before the start is not used.
+    from 2018-03-18; raw._ongoing_days); the status build caps it (red 7 days from the start, unresolved to day 30,
+    then a note that no end was reported: unresolved.* in data/rules.json); a stop time -> ended at it; otherwise unknown. A stop before the start is not used.
   - Volume: est_volume as filed. A number is volume_gal ("1200", "500.00"); a range on ADEM's form ("250,000 < gallons
     <= 500,000") is volume_text only, never turned into one figure; the history layer cuts the wording at 15
     characters ("250,000 < gall", "<=1,0"), so the live layer's full wording is used when it has the report, else the
