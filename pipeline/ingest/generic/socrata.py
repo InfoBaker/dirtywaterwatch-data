@@ -8,6 +8,9 @@ fetch block keys
           for hosts whose SODA endpoint refuses queries)
   where, order (":id" by default), page_size (1000), max_rows (200000)
   metadata: true asks /api/views/<id>.json; its rowsUpdatedAt becomes every record's source_updated_at
+  if_changed: true (with metadata: true) asks the metadata first and reads the table only when its rowsUpdatedAt differs
+          from the last good run's (meta.table_version): a large table refreshed in batches is not paged through every
+          hour. An unchanged table keeps the last good run's records, with meta.checked_at the time it was asked.
 """
 from __future__ import annotations
 
@@ -53,6 +56,18 @@ def fetch(block: dict, sess) -> Fetched:
         r = get(sess, u["meta"], timeout=(15, 60))
         out.meta, out.meta_bytes = r.json(), r.content
     return out
+
+
+def table_version(block: dict, meta: dict | None) -> str | None:
+    """The table's version for if_changed: its rowsUpdatedAt (epoch seconds) as text, None when absent."""
+    upd = (meta or {}).get("rowsUpdatedAt")
+    return str(upd) if upd not in (None, "") else None
+
+
+def current_version(block: dict, sess) -> str | None:
+    """The table's version now (one small metadata request), for if_changed."""
+    r = get(sess, urls(block)["meta"], timeout=(15, 120))
+    return table_version(block, r.json())
 
 
 def parse(block: dict, content: bytes) -> list[dict]:

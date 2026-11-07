@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1343 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1355 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -38,7 +38,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ne | 4 | 1 | 2 | 2 | 1 | 10 |
 | ak | 3 | 0 | 2 | 0 | 3 | 8 |
 | nm | 3 | 0 | 3 | 2 | 1 | 9 |
-| **all** | **474** | **228** | **381** | **191** | **69** | **1343** |
+| tx | 4 | 0 | 7 | 1 | 0 | 12 |
+| **all** | **478** | **228** | **388** | **192** | **69** | **1355** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1522,3 +1523,20 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nm-ocd-spills` | NM Oil Conservation Division spills database | rejected | search_only | events | Oil and gas only. |
 | `nm-swim-guide` | Swim Guide affiliates in New Mexico (Rio Grande Waterkeeper?) | rejected | search_only | monitoring | None found (search only). |
 | `nm-rio-grande-bacteria` | Rio Grande (Albuquerque reach) E. coli / bosque bacteria sampling | unreachable | inferred | monitoring | No public program found in the time box (lead from the task prompt). |
+
+## tx: Texas (12)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `tx-30tac-319-302` | 30 TAC 319.302 Notification Requirements and 319.303 Notice to Local Officials and Local Media | used | fetched | law | The public-notice duty: media and local officials only, above 100,000 gallons (or 50,000 near water supplies). |
+| `tx-glo-beach-watch` | Texas General Land Office Texas Beach Watch (BW2025_Summary MapServer) | used | fetched | advisories | Read through the generic ArcGIS reader (data/sources/tx-glo-beach-watch.yaml): 174 stations on 2026-11-07 (Low 162, Medium 12, High 0); High is the program's advisory, Medium its label. |
+| `tx-tceq-sso-opendata` | TCEQ "Sanitary Sewer Overflows (SSO)" dataset on data.texas.gov (8kc5-95uk) | used | fetched | events | Read through the generic Socrata reader (data/sources/tx-tceq-sso-opendata.yaml): 56,545 rows on 2026-11-07, every one a record; safe fields only (customer_number, incident_action and incident_comment not requested); placed only by the water a row names, never geocoded. |
+| `tx-tceq-ud-sso-page` | TCEQ "Reporting Unauthorized Discharges and Sanitary Sewer Overflows" guidance page | used | fetched | law | Law and deadlines. |
+| `tx-bills-2025` | Texas 89th Legislature (2025) bills on overflow notice | watch | search_only | law | No change to the public duty found. |
+| `tx-gchd-beach-advisories` | Galveston County Health District beach water advisories | watch | search_only | advisories | Local wording of advisories. |
+| `tx-hab` | Texas HABs (red tide and freshwater) | watch | search_only | advisories | Not a sewage source; low priority. |
+| `tx-houston-sso-monthly` | City of Houston Public Works monthly SSO reports and maps (consent decree Paragraph 61) | watch | search_only | events | Adds start/end times for Houston; the TCEQ dataset already carries the events. |
+| `tx-tceq-sso-initiative` | TCEQ Sanitary Sewer Overflow Initiative (voluntary SSO plans) | watch | search_only | permits | Context for which systems are under plans. |
+| `tx-tceq-ww-outfalls` | TCEQ Wastewater Outfalls map service | watch | search_only | outfalls | State outfall points to compare with ICIS. |
+| `tx-watershed-groups` | Galveston Bay Foundation, Bayou City Waterkeeper, Texas Stream Team | watch | search_only | monitoring | Possible bacteria context. |
+| `tx-epa-sobe` | EPA SOBE (eRule) extract, Texas rows | rejected | fetched | events | Too sparse; TCEQ dataset is the feed. |
