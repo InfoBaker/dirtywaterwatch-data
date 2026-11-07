@@ -21,7 +21,9 @@ Record rules (one record per station, flag and MDEQ start date)
     from our poll); a flag with no startdate starts at the poll that first saw it (raw.start_basis says so).
     advice_text is MDEQ's advisorydesc or closuredesc. The point is the station's own (layer 0); the segment's line
     (layer 1) is in raw.segment with its west and east ends as MDEQ names them.
-  - Every poll that still shows the flag re-confirms the record (source_updated_at = the poll's fetch time).
+  - Every poll that still shows the flag re-confirms the record (raw._last_seen_in_source = the poll's fetch time;
+    fetched_at too). The layer gives no report or edit time, so reported_at and source_updated_at stay null: a poll's
+    time is never published as the source's.
   - The first poll that shows both flags clear lifts it: status advisory_lifted, ended_at that poll's time (the
     advisory was lifted at or before then; raw.end_basis); a new start date or another flag or event type at the same
     station ends the old record at that poll and opens a new one.
@@ -121,17 +123,29 @@ def open_record(a: dict, seg: dict | None, at: str) -> dict:
                            "the layer gives no start date: the poll that first showed the flag"),
            "time_basis": ("started_at: MDEQ's start date (day); ended_at: the first poll that showed both flags clear, "
                           "so the advisory was lifted at or before then"),
-           "first_flagged_at": at}
+           "first_flagged_at": at, "_last_seen_in_source": at}
     return event(
         source_id=SOURCE_ID, source_record_id=f"{st}-{et}-{day or at[:16]}", event_type=et, status="advisory_active",
         lat=a.get("latitude"), lon=a.get("longitude"), coord_source="source" if a.get("latitude") is not None else None,
-        started_at=day or at, time_precision="day" if day else "poll", reported_at=at, source_updated_at=at,
+        started_at=day or at, time_precision="day" if day else "poll", fetched_at=at,
         authority=AUTHORITY, advice_text=(a.get("closuredesc") if closure else a.get("advisorydesc")) or None,
         source_url=SITE, raw=raw)
 
 
+def poll_times(r: dict) -> None:
+    """The layer gives no report or edit time. A record carried from before 2026-11-07 had a poll's time as
+    reported_at and source_updated_at (SOL wave 2 P1-6): both become null and the later of them is the last poll that
+    showed the flag (raw._last_seen_in_source)."""
+    seen = [x for x in (r.get("source_updated_at"), r.get("reported_at"), r["raw"].get("_last_seen_in_source")) if x]
+    if r.get("source_updated_at") or r.get("reported_at"):
+        r["raw"]["_last_seen_in_source"] = max(seen)
+        r["reported_at"] = r["source_updated_at"] = None
+
+
 def run(rows: list[dict], segs: dict[str, dict], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        poll_times(r)
     open_by = {r["raw"]["row"]["stationnumber"]: r for r in recs.values() if r["status"] == "advisory_active"}
     stats = {"stations": len(rows), "flagged": 0, "opened": 0, "lifted": 0, "replaced": 0}
     for a in rows:
@@ -146,7 +160,8 @@ def run(rows: list[dict], segs: dict[str, dict], prev: list[dict], at: str) -> t
                 cur["event_type"] == new["event_type"] and not start_day(a.get("startdate"))
                 and not start_day(cur["raw"]["row"].get("startdate"))))     # no MDEQ date: the poll's key stays
             if same:
-                cur["source_updated_at"], cur["fetched_at"] = at, at
+                cur["fetched_at"] = at
+                cur["raw"]["_last_seen_in_source"] = at
                 cur["raw"]["row"] = a
                 continue
             if cur:                                     # another start date, flag or type at the station
@@ -155,7 +170,8 @@ def run(rows: list[dict], segs: dict[str, dict], prev: list[dict], at: str) -> t
                 stats["replaced"] += 1
             if new["event_id"] in recs:                 # a closed record whose flag came back: the same advisory
                 old = recs[new["event_id"]]
-                old.update(status="advisory_active", ended_at=None, source_updated_at=at, fetched_at=at)
+                old.update(status="advisory_active", ended_at=None, fetched_at=at)
+                old["raw"]["_last_seen_in_source"] = at
                 old["raw"].setdefault("reopened_at", []).append(at)
                 continue
             recs[new["event_id"]] = new
