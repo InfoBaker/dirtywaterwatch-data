@@ -166,6 +166,7 @@ def run(rows: list[dict], segs: dict[str, dict], prev: list[dict], at: str) -> t
                 continue
             if cur:                                     # another start date, flag or type at the station
                 cur["status"], cur["ended_at"] = "advisory_lifted", at
+                cur["raw"]["ended_at_precision"] = "poll"   # an end seen by a poll is exact: never rounded to the day's end (SOL wave2 P1-2)
                 cur["raw"]["end_basis"] = f"replaced at this poll by {new['event_id']}"
                 stats["replaced"] += 1
             if new["event_id"] in recs:                 # a closed record whose flag came back: the same advisory
@@ -178,6 +179,7 @@ def run(rows: list[dict], segs: dict[str, dict], prev: list[dict], at: str) -> t
             stats["opened"] += 1
         elif cur:
             cur["status"], cur["ended_at"], cur["fetched_at"] = "advisory_lifted", at, at
+            cur["raw"]["ended_at_precision"] = "poll"       # exact at the poll that first showed the flags clear
             cur["raw"]["end_basis"] = "the first poll that showed both flags clear: lifted at or before then"
             stats["lifted"] += 1
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
