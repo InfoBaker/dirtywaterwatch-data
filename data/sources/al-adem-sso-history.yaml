@@ -8,8 +8,8 @@ level: "state"
 #   pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20
 #   hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since
 #   2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the
-#   receiving-water words name a water on 9,627, say none was reached on 4,111 and name only a storm
-#   drain or ditch or nothing on 1,020.
+#   receiving-water words name a water on 9,627, say none was reached on 4,113 and name only a storm
+#   drain or ditch or nothing on 1,018.
 # Access detail (research, quoted):
 #   https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0/query?where=...&outFields=*&f=json.
 #   Public, no key. 14,750 rows on 2026-11-03, first date_sso_began 2012-05-11, latest 2026-11-03

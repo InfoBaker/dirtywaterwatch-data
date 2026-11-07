@@ -140,7 +140,7 @@ NOT_A_NAME_WORD = {"the", "into", "a", "an", "unnamed", "named", "on", "and", "t
 INVALID = re.compile(r"(?i)invalid\s+named\s+receiving\s+water")
 DUPLICATE = re.compile(r"(?i)duplicate|incorrect(ed)?\s+basin|please\s+see\s+SSO|not\s+an?\s+ove?rflow|"
                        r"there\s+was\s+no\s+overflow|not\s+related\s+to\s+a\s+sanitary\s+sewer\s+overflow|"
-                       r"storm\s+drain\s+issue")
+                       r"storm\s+drain\s+issue|not\s+a\s+sanitary\s+sewer\s+overflow|non-notifiable")
 REPORT_ID = re.compile(r"\bSSO-?\s?(\d{5,8})\b", re.I)
 MAX_NAME_WORDS = 7
 

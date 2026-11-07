@@ -78,7 +78,7 @@
     "license": "No licence or terms shown on the service or the map page.",
     "legal_basis": "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) (immediate notification); r. 335-6-6-.02(hh) (notifiable SSO)",
     "status": "used",
-    "status_reason": "Read hourly by pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20 hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since 2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the receiving-water words name a water on 9,627, say none was reached on 4,111 and name only a storm drain or ditch or nothing on 1,020.",
+    "status_reason": "Read hourly by pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20 hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since 2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the receiving-water words name a water on 9,627, say none was reached on 4,113 and name only a storm drain or ditch or nothing on 1,018.",
     "verified": "fetched",
     "checked": "2026-11-07",
     "notes": "est_volume is a string, sometimes truncated (e.g. \"<=1,0\", \"10,000 < gall\"): take the full range from the live layer or the AEPACS PDF. Several older test services (SSO_ALL_AEPACS, SSO_ALL_Dates_ALT frozen at 9,830 rows to 2022-09-30) exist on the same server; use SSOs_ALL_OB_ID."
