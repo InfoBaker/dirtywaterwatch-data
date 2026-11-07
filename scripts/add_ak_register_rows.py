@@ -48,7 +48,7 @@ DIS = ROOT / "data" / "dischargers.json"
 CHECKED = "2026-11-07"
 LAW_ID = "ak-18-aac-72-940"
 JUNEAU_PAGE = "https://juneau.org/engineering-public-works/wastewater-utility"
-Q_LAW = ('18 AAC 72.940(a): the owner or operator of a wastewater collection, treatment, or disposal system "shall '
+Q_LAW = ('18 AAC 72.940(a): the operator of a wastewater collection, treatment, or disposal system "shall '
          'report to the department within 24 hours, or as soon after that as possible" when "an accident, spill, or '
          'other event occurs that results in inadequate treatment in violation of permit conditions, or threatens '
          'public health or water quality", "a sludge carry-over, washout, or overflow occurs" or "any part of the '
