@@ -23,8 +23,9 @@ Inputs
      joined to the town's row by the collection system's name EPA's table gives (the 2026-11-04 extract).
 Rules
   - legal_form: OWNERS and PRIVATE by hand; else from the name (a sanitary improvement district, a homeowners'
-    association, "Village of", "City of", a tribe); else null: a plant named for its town is a municipal plant by
-    EPA's facility type, but whether the town is a city or a village was not read.
+    association, "Village of", "City of", a tribe); else, for a plant named for the town it lies in and typed municipal
+    by EPA, the town's class among the Census Bureau's incorporated places (data/reference/ne-incorporated-places.json:
+    a city is "city", a village "town"; review 2026-11-07 P3-5); else null, with the reason in the notes.
   - notification_channel says what Nebraska law and the permits require (no public notice of overflows; reports to
     DWEE within 24 hours and 5 days, filed through EPA's NeT-SewerOverflow, public in EPA's overflow tables weeks
     later; Omaha's CSO permit's public notification clause, not read). notification_signup_url null: no overflow
@@ -53,9 +54,9 @@ LAW = ("No Nebraska statute or rule requires public notice of a sewage overflow 
        "writing within 5 days, filed through EPA's NeT-SewerOverflow, so the reports become public in EPA's overflow "
        f"tables (ECHO, {SOBE_URL}) weeks later (a median 23 days after the start in the 2026-11-04 extract).")
 OWN_PAGES = " The operator's own pages were not searched individually."
-OMAHA = (LAW + " As a combined sewer permittee (NE0133680) Omaha must notify the public of overflows under its permit's "
-         "public notification condition (Nine Minimum Controls, no. 8); the permit text sits in DWEE's document viewer "
-         "and was not read. No web notice of Omaha's overflows was found (the CSO program site omahacso.com carries "
+OMAHA = (LAW + " As a combined sewer permittee (NE0133680) Omaha's permit is expected to carry a public notification "
+         "condition (Nine Minimum Controls, no. 8); its terms could not be read (the permit text sits in DWEE's document "
+         "viewer). No web notice of Omaha's overflows was found (the CSO program site omahacso.com carries "
          "projects and reports only); Omaha Public Works announces large overflows through the news media.")
 CHANNEL = {"ne-omaha": OMAHA}
 # permits EPA Region 7 issues in Indian country (ECHO facility search, read 2026-11-07: IssuingAgency "EPA", permitting
@@ -96,8 +97,9 @@ OWNERS = {
     "NE0138932": ("ne-walthill", "Village of Walthill", "town", "EPA spells the second permit 'VILLAGE OF WATHILL'"),
     "NE0140295": ("ne-plattsmouth", "City of Plattsmouth", "city", "EPA records the second permit as 'City of "
                   "Plattsmouth'"),
-    "NE0027332": ("ne-saint-edward", "Saint Edward Wastewater Treatment Facility", None,
-                  "EPA records the permit name 'SAINT EDWARD'"),
+    "NE0027332": ("ne-saint-edward", "City of St. Edward", "city",
+                  "EPA records the permit name 'SAINT EDWARD'; St. Edward is a city (Census Bureau, incorporated "
+                  "places)"),
     "NE0038946": ("ne-hastings", "City of Hastings (Hastings Utilities: pollution control facility, Maxon Avenue plant, "
                   "aquifer storage)", "city", None),
     "NE0113298": ("ne-hastings", None, "city", "EPA types the Maxon Avenue plant privately owned; it is the City's "
@@ -180,8 +182,19 @@ WORKS = re.compile(r"\b(wwtf|wwtp|stp|potw|lagoons?|wastewater\s+treat\w*(\s+fac
                    r"facility|treatment facility|pollution control|sewage treatment|wtf|#\s*\d+)\b", re.I)
 
 
+def _places() -> dict[str, str]:
+    """town key -> 'city' or 'village' (data/reference/ne-incorporated-places.json, Census TIGERweb)."""
+    doc = json.loads((ROOT / "data" / "reference" / "ne-incorporated-places.json").read_text())
+    return {slug(p["name"]): p["kind"] for p in doc["places"]}
+
+
 def slug(s: str) -> str:
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", (s or "").lower())).strip("-")
+
+
+PLACES: dict[str, str] = {}
+# a town key as EPA spells the plant -> the Census place's key
+PLACE_ALIASES = {"dewitt": "de-witt", "saint-edward": "st-edward", "greeley": "greeley-center"}
 
 
 def place(s: str) -> str:
@@ -288,6 +301,7 @@ def base_row(rid, name, permits, kind, legal_form, towns, waters, outfalls, note
 
 
 def build(epa: dict[str, dict], research: list[dict], candidates: dict[str, dict]) -> tuple[list[dict], dict]:
+    PLACES.update(_places())
     rows: dict[str, dict] = {}
     held: dict[str, str] = {}
     rmap = {r["id"]: r for r in research}
@@ -376,9 +390,20 @@ def build(epa: dict[str, dict], research: list[dict], candidates: dict[str, dict
         g["lf"] = g["lf"] or form(owner)
         if form(owner) in PRIVATE_FORMS:
             g["notes"].append("Privately owned.")
-        elif key and key == city_key and o["ftype"] in ("Municipal or Water District", "POTW", "Municipality"):
-            g["notes"].append("A plant named for the town it lies in, typed municipal by EPA: the town's plant "
-                              "(whether a city or a village was not read).")
+        elif key and (key == city_key or PLACE_ALIASES.get(key, key) in PLACES) \
+                and o["ftype"] in ("Municipal or Water District", "POTW", "Municipality"):
+            kind = PLACES.get(PLACE_ALIASES.get(key, key))
+            if kind and not g["lf"]:
+                g["lf"] = "city" if kind == "city" else "town"
+                g["notes"].append(f"A plant named for the town it lies in, typed municipal by EPA: the town's plant; "
+                                  f"{place(o['city'])} is a {kind} (Census Bureau, incorporated places).")
+            elif not kind:
+                g["notes"].append("A plant named for the town it lies in, typed municipal by EPA: the town's plant "
+                                  "(the town is not among the Census Bureau's incorporated places, so its form is not "
+                                  "stated).")
+        elif key and PLACE_ALIASES.get(key, key) in PLACES and not g["lf"]:
+            g["notes"].append(f"Named for the town of {place(o['city'] or key)}, but EPA types it {o['ftype'] or 'with no '
+                              'facility type'}: who holds the permit was not read, so its form is not stated.")
     # candidates EPA's plant list does not carry: an owner by hand joins its row, the others are rows of their own
     for p, c in sorted(candidates.items()):
         if p in OWNERS and p not in epa and p not in held:

@@ -2496,17 +2496,19 @@
    "id": "ne-douglas-county-health",
    "name": "Douglas County Health Department",
    "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.douglascountyhealth.com/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "other",
+   "unmonitored_reason": "bot_wall",
    "publishes": "unknown",
    "records": false,
-   "note": "No URL known (not searched): the health department of Omaha's county; whether it posts sewage or water contact advisories was not researched. Voluntary. (research/ne/profile.json advisories)",
+   "note": "The health department of Omaha's county: its site answers 403 to the project user agent (2026-11-07), so whether it posts sewage or water contact advisories could not be read. Voluntary.",
    "sources": [],
-   "barrier": "not_verified"
+   "barrier": "bot_wall"
   },
   {
    "state": "NE",
@@ -2619,15 +2621,17 @@
    "id": "ne-dwee-beachwatch-page",
    "name": "Nebraska Department of Water, Energy, and Environment (Beach Watch page)",
    "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://deq-iis.ne.gov/zs/bw/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "results",
    "records": false,
-   "note": "DWEE's Beach Watch page (https://deq-iis.ne.gov/zs/bw/), where \"all sample results are posted\" (DWEE release), answered 503 on 2026-11-03 and no connection on 2026-11-07; its results are the layer the Beach Watch feed reads. Channel not researched beyond the link. Voluntary. (research/ne/report.md §2.5)",
+   "note": "DWEE's Beach Watch page, where \"all sample results are posted\" (DWEE release), answered 503 on 2026-11-03 and no connection on 2026-11-07; its results are the layer the Beach Watch feed reads. Channel not researched beyond the link. Voluntary. (research/ne/report.md §2.5)",
    "sources": [
     "ne-dwee-beachwatch-page"
    ],
@@ -2650,7 +2654,7 @@
    "unmonitored_reason": "none_found",
    "publishes": "none",
    "records": false,
-   "note": "No e-mail, text or web alert for sewage overflows exists in Nebraska: DWEE's listservs cover air, waste, energy and outreach, none sewage (DWEE site navigation read 2026-11-07). The gap is a legislative one. (research/ne/report.md §2.6)",
+   "note": "No e-mail, text or web alert for sewage overflows was found from DWEE: its listservs cover air, waste, energy and outreach, none sewage (DWEE site navigation read 2026-11-07), and no law requires one. Operators' own alerts were not searched one by one beyond Omaha and Lincoln. (research/ne/report.md §2.6)",
    "sources": [
     "ne-title-126-release"
    ],
@@ -4606,17 +4610,21 @@
    "id": "ne-lincoln-overflow-notices",
    "name": "City of Lincoln Transportation and Utilities",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.lincoln.ne.gov/City/Departments/LTU/Utilities/Wastewater"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "none",
    "records": false,
-   "note": "No URL known (not searched): Lincoln Transportation and Utilities' own overflow notices were not researched; its overflow reports reach EPA's tables (five in the 2026-11-04 extract, all under the Northeast plant). Voluntary. (research/ne/report.md §4)",
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "note": "Lincoln Transportation and Utilities' wastewater page, read 2026-11-07 (200): no overflow notice or alert found on it; read for changes. Its overflow reports reach EPA's tables (five in the 2026-11-04 extract, all under the Northeast plant). Voluntary.",
    "sources": [],
-   "barrier": "not_verified"
+   "barrier": null
   },
   {
    "state": "NE",
@@ -5878,7 +5886,7 @@
    "publishes": "unknown",
    "records": false,
    "noun": "CSO public notification",
-   "note": "Clause unread. Omaha's CSO permit presumably requires public notification of overflows (Nine Minimum Controls no. 8), but its text sits in DWEE's OnBase document viewer, which does not give a linkable document, and was not read; DWEE's public notice of the permit's modification (dwee.nebraska.gov/node/4730) names the CSO receiving waters only. No web channel found for the notices: the CSO program site carries projects and reports, the city's pages answer 403. A records request for the city's CSO public notification plan is the way to read it. (research/ne/report.md §2.1, §4)",
+   "note": "Clause unread. Omaha's CSO permit is expected to require public notification of overflows (Nine Minimum Controls no. 8), but its text sits in DWEE's OnBase document viewer, which does not give a linkable document, and was not read; DWEE's public notice of the permit's modification (dwee.nebraska.gov/node/4730) names the CSO receiving waters only. No web channel found for the notices: the CSO program site carries projects and reports, the city's pages answer 403. A records request for the city's CSO public notification plan is the way to read it. (research/ne/report.md §2.1, §4)",
    "sources": [
     "ne-omaha-cso-permit-notice"
    ],
@@ -5943,14 +5951,17 @@
    "name": "City of Omaha Public Works (combined sewer system; Papillion Creek and Missouri River water resource recovery facilities)",
    "id": "ne-omaha-public-works-pages",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.cityofomaha.org/",
+    "https://publicworks.omaha.gov/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
    "unmonitored_reason": "bot_wall",
    "publishes": "unknown",
-   "note": "The City of Omaha's and Omaha Public Works' sites (cityofomaha.org, publicworks.omaha.gov) answer 403 to the project user agent (2026-11-03); no overflow notice page of theirs was found by search. Voluntary. (research/ne/report.md §2.3)",
+   "note": "The City of Omaha's and Omaha Public Works' sites answer 403 to the project user agent (2026-11-03); no overflow notice page of theirs was found by search. Voluntary. (research/ne/report.md §2.3)",
    "sources": [
     "ne-omaha-cso-program"
    ],
@@ -6207,17 +6218,21 @@
    "id": "ne-papio-missouri-nrd",
    "name": "Papio-Missouri River Natural Resources District",
    "channel_kind": "group_results",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.papionrd.org/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "none",
    "records": false,
-   "note": "No URL known (not searched): the district for the Papillion Creek basin, the receiving waters of Omaha's Papillion Creek reports; whether it publishes water quality or overflow information was not researched. Voluntary. (research/ne/profile.json advisories)",
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "note": "The district for the Papillion Creek basin, the receiving waters of Omaha's Papillion Creek reports. Home page read 2026-11-07 (200): no overflow notice or water quality alert found on it; read for changes. Voluntary.",
    "sources": [],
-   "barrier": "not_verified"
+   "barrier": null
   },
   {
    "state": "NE",
@@ -6872,7 +6887,7 @@
    "permit": "NE0027332",
    "checked": "2026-11-07",
    "id": "ne-saint-edward-dwee-epa-report",
-   "name": "Saint Edward Wastewater Treatment Facility",
+   "name": "City of St. Edward",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
@@ -6889,7 +6904,7 @@
     "ne-epa-sobe",
     "ne-dwee-net-sso-guide"
    ],
-   "note": "Saint Edward Wastewater Treatment Facility reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "City of St. Edward reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
    "barrier": null
   },
   {
