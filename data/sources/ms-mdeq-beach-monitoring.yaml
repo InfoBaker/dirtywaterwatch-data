@@ -4,14 +4,12 @@ url: "https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView
 homepage: "https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer/0"
 kind: "arcgis"
 level: "state"
-# Notes (research/ms, status candidate, verified fetched, checked 2026-11-07): Best beach feed in
-#   the group, not yet read: an advisory and a closure are two separate flags on each station, with
-#   MDEQ's own start date as text and no end. The generic snapshot reader takes one state field and
-#   dates events by poll, which would drop MDEQ's start date and the closure flag; the generic layer
-#   reader would keep a lifted advisory in effect until it ages out. No station was under advisory
-#   or closure on 2026-11-07 (21 stations, Enterococci, last samples 2026-10-26 to 2026-11-05), so
-#   the lifted state could not be observed. Needs a small module (both flags, the start date, lifted
-#   when the flags clear).
+# Notes (research/ms, status used, verified fetched, checked 2026-11-07): Read hourly by
+#   pipeline/ingest/ms_mdeq_beaches.py: either flag opens a record (closure, advisory, or a bloom
+#   advisory when eventtype is HAB) on MDEQ's own start date at the station's point, with the
+#   segment line; the first poll with both flags clear lifts it. No station was flagged on
+#   2026-11-07 (21 stations); the layer keeps no history, MDEQ's site lists past advisories on a
+#   script page not read.
 # Access detail (research, quoted): Layer 0 stations (points), layer 1 beach segments (lines), both
 #   public:
 #   https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer/0/query?where=1%3D1&outFields=*&f=json.
@@ -24,7 +22,8 @@ level: "state"
 # Cannot fill: ended_at (advisory lift is a state change only); valid_until
 # Waters: 21 Gulf Coast beach stations (Hancock, Harrison, Jackson counties) and their beach
 #   segments
-# History: Historical pages on the site; layer holds current state
+# History: The layer holds the current state only; MDEQ's site lists past results and advisories
+#   (/Historical/HBR, /Historical/HCA, a script page).
 cadence: "Weekly sampling in season (Gulf Coast Research Laboratory); advisories posted first on the map. From 2026-09-08 routine advisories go to beach signs and the website only (no texts or press releases), per local press."
 license: "None shown."
 attribution: "Mississippi Department of Environmental Quality with USM Gulf Coast Research Laboratory"
