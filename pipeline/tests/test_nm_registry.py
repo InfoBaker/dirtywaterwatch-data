@@ -90,4 +90,8 @@ def test_missing_waters_list_leaves_out_what_the_national_list_holds():
     d = json.loads((ROOT / "research" / "nm" / "receiving-waters-missing.json").read_text())
     names = {r["name"] for r in d["rows"]}
     assert d["state"] == "NM" and "San Juan River" not in names and "Rio Grande" not in names
-    assert {"Eagle Nest Lake", "Quemado Lake"} <= names and d["waters"] == len(d["rows"])
+    # the names pass (batch/nm-2026-11-07) resolved Eagle Nest Lake and Quemado Lake to openboatlaunch's records, so
+    # the file lists only names no record holds
+    have = {w["name"] for f in ("waters-nm.json", "waters-nhd.json")
+            for w in json.loads((ROOT / "data" / f).read_text())["waters"] if w.get("state") == "NM"}
+    assert not (names & have) and d["waters"] == len(d["rows"])
