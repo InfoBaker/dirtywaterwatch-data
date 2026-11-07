@@ -3,23 +3,31 @@ practice and data/dischargers.json so they are reproducible.
 
 Usage: pipeline/.venv/bin/python -I scripts/add_hi_register_rows.py [--dry-run]
 
-The law (research/hi/report.md in the site repository; profile research/hi/profile.json):
-  - HAR 11-62 Appendix B ("Responses for wastewater spills, overflows and discharges"), section 9: the owner or agent
-    of a wastewater system reports spills, overflows and discharges to the Department of Health's Clean Water Branch.
-    The rule's text could not be read by a script (its published copies refuse automated reads), so its deadline is
-    not quoted; news reports describe the report as immediate. No duty to tell the public was found.
-  - HAR 11-55 (water pollution control; NPDES): the permits' standard conditions require noncompliance to be reported
-    to the Department.
-  - The Department tells the public: an advisory on its Clean Water Branch portal (the JSON list the feed reads), signs
-    at the water, e-mail notices by island and, for large spills, news releases. None of these is required by a rule
-    found in the research: they are the Department's practice (basis voluntary).
+The law, read on 2026-11-07 in the Department's own copy of chapter 11-62 (effective 2016-03-21:
+https://health.hawaii.gov/opppd/files/2026/08/chapter-11-62-HAR-effective-2016.03.21.pdf):
+  - HAR 11-62-06(g): the owner or person responsible for a wastewater system "shall notify the director immediately"
+    of a wastewater spill, overflow or discharge into surface waters, unless they comply with the protocol of Appendix B,
+    "Responses for Wastewater Spills, Overflows, and Discharges ('Spills')", dated July 1, 2014.
+  - Appendix B section 2, spills from any public or private wastewater system into state waters (drainage ditches
+    included): the owner or its agent shall (b) "immediately notify the CWB"; (c) "immediately send out a press
+    release for spills of a thousand gallons or more and for lesser spills if they present a substantial threat to
+    public health", to the Associated Press, the major newspapers and television stations, the Department's
+    Communications Office and the Branch (section 7); (e) "immediately post warning signs in the area(s) likely to be
+    affected by the spill and where public access is possible", the Department assuring enough signs and authorizing
+    their removal; (f) monitor the receiving water for enterococci (and Clostridium perfringens in fresh or brackish
+    water) for spills over 100 gallons until the Department says to stop (section 8); (g) a written report within five
+    working days (section 9.a).
+  - HAR 11-55 (NPDES): the permits' standard conditions require noncompliance to be reported to the Department.
+  - The Department's own advisory list, e-mail notices and news releases are its practice: no rule requiring them was
+    found (basis voluntary).
 
 Rows
-  - Per operator (every Hawaii row of data/dischargers.json): <id>-doh-cwb-report (law basis, HAR 11-62 Appendix B):
-    the report goes to the Department; it is not published, but the Department's advisory for the affected waters is,
-    in the list the feed reads (feed_ingested).
-  - Agency and voluntary rows: AGENCY below (the Department's report desk, its advisory list, its e-mail notices, its
-    signs, its news releases; the Surfrider Foundation's volunteer sampling; the Swim Guide app).
+  - Per operator (every Hawaii row of data/dischargers.json): <id>-doh-cwb-report (law: the notice and the five-day
+    report; the report is not published, the Department's advisory is, in the list the feed reads: feed_ingested);
+    <id>-press-release (law, Appendix B 2.c and 7: no web channel known, not searched); <id>-warning-signs (law,
+    Appendix B 2.e: on site only).
+  - Agency and voluntary rows: AGENCY below (the Department's report desk and its check of the signs, its advisory
+    list, its e-mail notices, its news releases; the Surfrider Foundation's volunteer sampling; the Swim Guide app).
 A rerun replaces every hi- row it makes. Validated before writing.
 """
 from __future__ import annotations
@@ -41,11 +49,18 @@ CHECKED = "2026-11-07"
 FEED = "hi-doh-cwb-events-api"
 PORTAL = "https://eha-cloud.doh.hawaii.gov/cwb/"
 API = "https://eha-cloud.doh.hawaii.gov/cwb/api/events"
-AUTHORITY = "Hawaii State Department of Health, Clean Water Branch"
-Q_LAW = ("HAR 11-62 Appendix B (Responses for wastewater spills, overflows and discharges), section 9: whoever owns "
-         "or runs a wastewater system reports spills, overflows and discharges to the Department of Health's Clean "
-         "Water Branch (the rule's text was not read: its published copies refuse automated reads; its deadline is not "
-         "quoted)")
+AUTHORITY = "Hawaii Department of Health, Clean Water Branch"
+RULE_URL = "https://health.hawaii.gov/opppd/files/2026/08/chapter-11-62-HAR-effective-2016.03.21.pdf"
+Q_LAW = ("HAR 11-62-06(g) and Appendix B (Responses for Wastewater Spills, Overflows, and Discharges, July 1, 2014), "
+         "sections 2.b and 9.a: for a spill into state waters the owner or its agent shall \"immediately notify the "
+         "CWB\" and submit a written report within five working days")
+Q_PRESS = ("HAR 11-62 Appendix B, sections 2.c and 7: the owner or its agent \"shall immediately send out a press release "
+           "for spills of a thousand gallons or more and for lesser spills if they present a substantial threat to "
+           "public health\", to the Associated Press, major newspapers and television news stations, the Department's "
+           "Communications Office and the Clean Water Branch")
+Q_SIGNS = ("HAR 11-62 Appendix B, section 2.e: the owner or its agent \"shall immediately post warning signs in the "
+           "area(s) likely to be affected by the spill and where public access is possible\"; the Department assures "
+           "that enough signs are posted and authorizes their removal")
 Q_NPDES = ("HAR 11-55 (water pollution control), the NPDES permits' standard conditions: noncompliance that may "
            "endanger health or the environment is reported to the Department of Health")
 AGENCY = [
@@ -53,10 +68,11 @@ AGENCY = [
      "channel_kind": "state_alert_page", "urls": [], "method": None, "legal_basis": f"{Q_LAW}; {Q_NPDES}",
      "basis_kind": "law", "monitored": False, "unmonitored_reason": "none_found", "publishes": "none",
      "records": False, "noun": "Report to the state",
-     "note": ("No web form: every wastewater operator, public or private, reports spills, overflows and discharges to "
-              "the Clean Water Branch. The reports themselves are not published; the Department posts an advisory for "
-              "the waters it judges affected (hi-doh-cwb-advisories). No Hawaii rule requires the operator to tell the "
-              "public. (research/hi/report.md section 2)"),
+     "note": ("No web form: every wastewater operator, public or private, reports a spill into state waters to the "
+              "Clean Water Branch immediately and in writing within five working days (HAR 11-62 Appendix B, read in "
+              f"the Department's copy {RULE_URL} on 2026-11-07). The reports themselves are not published; the "
+              "Department posts an advisory for the waters it judges affected (hi-doh-cwb-advisories). The operator's "
+              "own duties to the public are its press release and its warning signs (the operator rows)."),
      "sources": ["hi-har-11-62-app-b", "hi-har-11-55"]},
     {"id": "hi-doh-cwb-advisories", "agency": AUTHORITY, "name": f"{AUTHORITY} (water quality advisories and events)",
      "channel_kind": "feed", "urls": [API], "method": "json", "legal_basis": None, "basis_kind": "voluntary",
@@ -76,12 +92,12 @@ AGENCY = [
               "themselves are read from the portal's list. Not subscribed."),
      "sources": [FEED]},
     {"id": "hi-doh-cwb-signs", "agency": AUTHORITY, "name": f"{AUTHORITY} (warning signs at the water)",
-     "channel_kind": "lights_signs_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
+     "channel_kind": "lights_signs_page", "urls": [], "method": None, "legal_basis": Q_SIGNS, "basis_kind": "law",
      "monitored": False, "unmonitored_reason": "other", "publishes": "notices", "records": False,
-     "note": ("No web form: the Department posts warning signs at the affected waters (\"Warning signs have been "
-              "posted\" in its sewage spill notices) and removes them when it cancels the advisory; the portal gives the "
-              "removal time. On site only."),
-     "sources": [FEED]},
+     "note": ("No web form: the operator posts warning signs at the affected waters; the Department checks that enough "
+              "are posted and authorizes their removal, and its portal gives the removal time (\"Warning signs have "
+              "been posted\" in its sewage spill notices). On site only."),
+     "sources": ["hi-har-11-62-app-b", FEED]},
     {"id": "hi-doh-news-releases", "agency": "Hawaii State Department of Health",
      "name": "Hawaii State Department of Health (news releases)", "channel_kind": "news_page",
      "urls": ["https://health.hawaii.gov/news/"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
@@ -126,11 +142,22 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             method=None, legal_basis=basis, basis_kind="law", monitored=False, unmonitored_reason="feed_ingested",
             feed_source_id=FEED, publishes="notices", noun="Report to the state",
             sources=["hi-har-11-62-app-b", "hi-har-11-55", FEED],
-            note=(f"{name} reports spills, overflows and discharges to the Department of Health's Clean Water Branch. "
-                  "The report itself is not published; the Department's advisory for the affected waters is, in the "
-                  "list the feed reads (a notice names the facility when the Department gives it). No Hawaii rule "
-                  "requires the operator to tell the public; its own pages were not searched. (research/hi/report.md "
-                  "section 2)"))))
+            note=(f"{name} reports a spill into state waters to the Department of Health's Clean Water Branch "
+                  "immediately and in writing within five working days. The report itself is not published; the "
+                  "Department's advisory for the affected waters is, in the list the feed reads (a notice names the "
+                  "facility when the Department gives it). (HAR 11-62 Appendix B, read 2026-11-07)"))))
+        rows.append(finish(base(
+            id=f"{oid}-press-release", operator_id=oid, name=name, permit=permit, channel_kind="news_page", urls=[],
+            method=None, legal_basis=Q_PRESS, basis_kind="law", monitored=False, unmonitored_reason="other",
+            publishes="notices", records=False, noun="Press release", sources=["hi-har-11-62-app-b"],
+            note=("No URL known (not searched): the rule sends the operator's press release to the news media and the "
+                  "Department, not to a web page; whether this operator posts its releases on its own site was not "
+                  "searched."))))
+        rows.append(finish(base(
+            id=f"{oid}-warning-signs", operator_id=oid, name=name, permit=permit, channel_kind="lights_signs_page",
+            urls=[], method=None, legal_basis=Q_SIGNS, basis_kind="law", monitored=False, unmonitored_reason="other",
+            publishes="notices", records=False, noun="Warning signs", sources=["hi-har-11-62-app-b"],
+            note="No web form: warning signs at the affected waters, posted by the operator. On site only.")))
     return rows
 
 

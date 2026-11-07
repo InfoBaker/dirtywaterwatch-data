@@ -18,10 +18,9 @@ Rules
   - kind: "sso" for an operator with sewage spill advisories in the Department of Health's list, "bypass" for the
     Marine Corps plant (its advisories are effluent above the permit's bacteria limit), "plant" for the Schofield
     Barracks plant (none in the list read on 2026-11-07).
-  - notification_channel: HAR 11-62 Appendix B puts the duty to report on whoever owns or runs the system and the recipient is
-    the Department of Health's Clean Water Branch; the Department tells the public (its advisory list, signs, e-mail
-    notices by island). No rule requiring the operator to tell the public was found; the operators' own pages were not
-    searched. notification_signup_url: the Department's portal, where the e-mail notices are subscribed.
+  - notification_channel: HAR 11-62 Appendix B (read 2026-11-07): the operator notifies the Department's Clean Water
+    Branch, sends a press release to the news media for large spills and posts warning signs; the Department posts its
+    own advisory list and e-mail notices by island. The operators' own pages were not searched. notification_signup_url: the Department's portal, where the e-mail notices are subscribed.
   - Idempotent: every row with state HI is rebuilt; other states' rows are left as they are; the Hawaii rows are
     written after the last row of the file in id order.
 """
@@ -38,12 +37,14 @@ RESEARCH = ROOT / "research" / "hi" / "dischargers.json"
 PRIVATE = ROOT / "research" / "hi" / "private-utilities-candidates.json"
 CHECKED = "2026-11-07"
 PORTAL = "https://eha-cloud.doh.hawaii.gov/cwb/"
-LAW = ("HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and "
-       "discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their "
-       "own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its "
-       "Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends "
-       "e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the "
-       "operator's own web pages were not searched.")
+LAW = ("HAR 11-62 Appendix B (Responses for Wastewater Spills, Overflows, and Discharges, July 1, 2014; read in the "
+       "Department's copy of chapter 11-62 on 2026-11-07) requires whoever owns or runs a wastewater system, for a spill "
+       "into state waters, to notify the Hawaii Department of Health's Clean Water Branch immediately, send a press "
+       "release to the news media for a spill of 1,000 gallons or more or one that threatens public health, post "
+       "warning signs where the public has access, sample the affected waters until the Department says to stop, and "
+       "report in writing within five working days; NPDES permits under HAR 11-55 add their own reporting conditions. "
+       "The Department also posts an advisory on its Clean Water Branch website (a machine-readable list this site "
+       "reads) and sends e-mail notices by island. The operator's own web pages were not searched.")
 # advisories naming the operator's facilities in the Department's newest 500 events, read 2026-11-07
 ADVISORIES = {"hi-honolulu-env": 18, "hi-hawaii-county": 2, "hi-kauai-county": 2, "hi-maui-county": 1,
               "hi-mcbh-kaneohe": 4, "hi-jbphh": 9, "hi-hawaii-american-water": 2}

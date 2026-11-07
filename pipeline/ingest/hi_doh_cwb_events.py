@@ -42,8 +42,10 @@ Record rules
                            raw.advisory_noun "Brown Water Advisory" is its label): storm-water runoff after heavy rain.
       Beach Advisory    -> beach_advisory (enterococci above the Department's threshold at a monitored beach).
       Beach Notification -> beach_advisory with status unknown and raw._agency_label_only: a first high sample the
-                           Department is retesting, with no advisory issued; the site's 72-hour caution from the sample
-                           day (data/rules.json unresolved.sample_caution), never the Department's advisory.
+                           Department is retesting, with no advisory issued; the site's caution (data/rules.json
+                           unresolved.sample_caution) from the sample day to the later of 72 hours and the notice's
+                           closing (or the last read that listed it open: raw._caution_to_notice_end), never the
+                           Department's advisory.
       any other type    -> unknown, with parse_error.
     raw._type_basis says which rule applied.
   - Status: Open -> advisory_active (the Department's own window: "remain out of the affected waters until this
@@ -51,8 +53,9 @@ Record rules
     beach or rain advisory from it). Closed -> advisory_lifted with ended_at closedDate. A Beach Notification is status
     unknown (above). An advisory listed as open at an earlier read and missing from a later complete read (it fell out
     of the newest 500, or the Department withdrew it) keeps advisory_active with raw._unlisted_since (the first read
-    without it): the status build ends the Department's window there; for a sewage type raw._end_not_confirmed makes the
-    rest of the 30 days "end not confirmed" (hatched), since the Department's cancellation was never seen.
+    without it): the status build ends the Department's window there; for a sewage type raw._end_not_confirmed makes it
+    "end not confirmed" (hatched) to day 30 and for at least 72 hours after the unlisting, then the end-never-reported
+    note to day 90, since the Department's cancellation was never seen.
   - Water (rules only; no model, no geocoding, no coordinates: the API gives none): the place texts are the "Affected
     waters:" lines, the water the advice names ("stay out of Kuapa Pond"), locationName, the title after "at", "for" or "from", and a beach station's name. Diacritics and the
     okina are folded ("Kane'ohe" -> "Kaneohe"; the feed spells the same water both ways); a named water is up to three
@@ -107,7 +110,7 @@ URL = "https://eha-cloud.doh.hawaii.gov/cwb/api/events"
 PORTAL = "https://eha-cloud.doh.hawaii.gov/cwb/"
 EVENT_URL = "https://eha-cloud.doh.hawaii.gov/cwb/#!/event/{id}/details/view"
 TZ = ZoneInfo("Pacific/Honolulu")
-AUTHORITY = "Hawaii State Department of Health"   # the Branch is named in raw; "clean" never reaches a page title (audit-seo)
+AUTHORITY = "Hawaii Department of Health, Clean Water Branch"   # the site audit strips authority names before its verdict-word check
 TIMEOUT = (60, 600)            # the host is quick, the network here may not be
 MIN_ROWS_RATIO = 0.5
 SAMPLE_MAX_DAYS = 14           # a sample date later than the posting, or this long before it, is a typing slip
@@ -557,6 +560,13 @@ def to_record(row: dict, fetched_at: str, waters: Waters, prev: dict | None = No
     if notification:
         sv = row.get("sampleValue")
         raw["_agency_label_only"] = True
+        raw["_caution_to_notice_end"] = True
+        raw["_notice_end_basis"] = ("the Department's notice was still posted (closedDate)" if not open_ else
+                                    "the Department's notice was still listed as open at this read")
+        if open_:
+            raw["_last_seen_in_source"] = fetched_at
+        elif closed:
+            raw["_notice_closed_at"] = iso(closed)      # to the minute; the record's start is a day
         raw["_agency_label"] = (f"Enterococci {sv:g} per 100 mL in routine monitoring; the Department is retesting and "
                                 "issued no advisory" if isinstance(sv, (int, float)) else
                                 "A high enterococci result; the Department is retesting and issued no advisory")
