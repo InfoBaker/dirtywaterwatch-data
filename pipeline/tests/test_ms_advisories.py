@@ -120,6 +120,7 @@ def test_an_advisory_opens_on_mdeqs_start_date_and_lifts_at_the_first_clear_poll
     assert len(again) == 1 and again[0]["raw"]["_last_seen_in_source"] == "2026-11-07T13:00:00Z"     # re-confirmed
     off, st = B.run(_rows(), _segs(), copy.deepcopy(again), "2026-11-08T13:00:00Z")
     assert st["lifted"] == 1 and off[0]["status"] == "advisory_lifted" and off[0]["ended_at"] == "2026-11-08T13:00:00Z"
+    assert off[0]["raw"]["ended_at_precision"] == "poll"      # the poll's end is exact, never rounded to the day (SOL wave2 P1-2)
 
 
 def test_closure_and_bloom_types_and_a_flag_without_a_date():
