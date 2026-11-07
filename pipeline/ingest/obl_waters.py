@@ -27,7 +27,12 @@ Only active records are water records: renamed and merged ones become slug_alias
 end of a chain), deleted ones are counted. A record the extract on file holds is never dropped: when openboatlaunch
 deleted it, moved it into another state, or no longer serves it, it stays as a tombstone (status deleted, moved or
 not_in_snapshot, with successor_slug and retired_at), so the reports and outfall rows citing it keep their water
-until a person retires it. The API's records carry no advisories: the extract on file keeps its own. Only files whose record says the state are taken (a water that crosses a
+until a person retires it. The API's records carry no advisories: the extract on file keeps its own.
+
+An extract on file built from another source (DC's, from NHD: ingest/dc_waters.py) is merged, never replaced
+(merge_nhd): records matched by slug or numeric GNIS id take openboatlaunch's outline and fields, records only
+openboatlaunch has are added, ours only we have are kept, and the source line says which is which. water_id (the
+id shared by one water's records in several states: the Potomac's DC, MD and VA records) is recorded, not acted on. Only files whose record says the state are taken (a water that crosses a
 state line has one record per state there, sharing water_id); a file that cannot be read is skipped and counted.
 Keys an extract on file carries that this does not write (a hand field) are kept on the same slug. The snapshot date
 comes from --snapshot, else the folder's out/meta.json (`built`, `generated` or `updated`), else the API's meta.
@@ -44,7 +49,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from common import DATA_DIR, write_json
+from common import DATA_DIR, gnis_num, write_json
 
 LAUNCH_SHORT = {"s": "slug", "n": "name", "k": "kind", "st": "state", "t": "town", "x": "lon", "y": "lat", "f": "fee"}
 API_FIELDS = ("water_id", "gnis_id", "geometry_hash", "geometry_tolerance_m", "status", "successor_slug",
@@ -268,9 +273,117 @@ def on_file(path: Path) -> int:
         return 0
 
 
+def nhd_built(st: str, path: Path) -> dict | None:
+    """The extract on file when it is built from another source than openboatlaunch (DC's from NHD:
+    ingest/dc_waters.py) and holds only this state's records: such a file is merged with openboatlaunch's records
+    (merge_nhd), never replaced. None otherwise."""
+    try:
+        have = json.loads(Path(path).read_text())
+    except Exception:  # noqa: BLE001
+        return None
+    if not isinstance(have, dict) or str(have.get("source") or "").startswith("openboatlaunch"):
+        return None
+    ws = have.get("waters")
+    if not isinstance(ws, list) or not ws or any(str((w or {}).get("state") or "").upper() != st for w in ws):
+        return None
+    return have
+
+
+MERGE_SIZE = ("area_km2", "length_km")
+
+
+def merge_nhd(st: str, have: dict, waters: list[dict], raw_of, source: str, seen: Counter) -> dict:
+    """The extract on file (built from NHD) merged with openboatlaunch's records of the state: a record of ours that
+    is openboatlaunch's by slug or by GNIS id (compared as numbers: NHD's '00597915' is the API's 597915) takes its
+    outline (inline, with its bbox and size), launches and the API fields (water_id, the shared id of the same water
+    in other states, recorded and not acted on; geometry_hash, status, previous_slugs, updated_at ...); keeps its own
+    slug, name, gnis_id text and other fields; an openboatlaunch slug that differs becomes a slug alias. A record
+    openboatlaunch has and we lack is added (its outline inline). A record of ours openboatlaunch lacks is kept as it
+    is. Each record says where it came from (record_from); the source line says which is which."""
+    base = have.get("source_base") or have.get("source") or "the extract on file"
+    by_slug = {w["slug"]: w for w in waters}
+    by_gnis = {}
+    for w in waters:
+        if gnis_num(w.get("gnis_id")):
+            by_gnis.setdefault(gnis_num(w.get("gnis_id")), w["slug"])
+    used, out, matched, own = set(), [], [], []
+
+    def outline(r: dict, a: dict) -> dict:
+        raw = raw_of(a["slug"]) or {}
+        if raw.get("geometry"):
+            r["geometry"], r["bbox"], r["outline_from"] = raw["geometry"], a.get("bbox") or r.get("bbox"), "openboatlaunch"
+            for k in MERGE_SIZE:
+                if raw.get(k) is not None:
+                    r[k] = raw[k]
+        return r
+
+    for o in have.get("waters") or []:
+        if o.get("record_from") == "openboatlaunch" and o.get("slug") in by_slug:
+            continue                    # added by an earlier merge: added again below from openboatlaunch's record
+        a = by_slug.get(o.get("slug")) or by_slug.get(by_gnis.get(gnis_num(o.get("gnis_id"))) or "")
+        if a is None or a["slug"] in used:
+            out.append(o)
+            if o.get("record_from") != "openboatlaunch":
+                own.append(o["slug"])
+            continue
+        used.add(a["slug"])
+        r = dict(o)
+        for k in API_FIELDS:
+            if k != "gnis_id":
+                r[k] = a.get(k)
+        if not r.get("gnis_id"):
+            r["gnis_id"] = a.get("gnis_id")
+        r["launches"], r["launches_unpublished"] = a.get("launches") or [], a.get("launches_unpublished") or []
+        if a.get("towns") and not r.get("towns"):
+            r["towns"] = a["towns"]
+        al = list(r.get("slug_aliases") or [])
+        for x in ([a["slug"]] if a["slug"] != r["slug"] else []) + list(a.get("slug_aliases") or []):
+            if x not in al and x != r["slug"]:
+                al.append(x)
+        if al:
+            r["slug_aliases"] = al
+        r["record_from"] = "nhd+openboatlaunch"
+        out.append(outline(r, a))
+        matched.append(r["slug"])
+        seen["matched"] += 1
+    added = []
+    have_slugs = {w.get("slug") for w in out}
+    for a in waters:
+        if a["slug"] in used or a["slug"] in have_slugs:
+            continue
+        r = outline({**a, "record_from": "openboatlaunch", "source": source}, a)
+        if "advisories" not in r:
+            r["advisories"] = []
+        out.append(r)
+        added.append(a["slug"])
+        seen["added"] += 1
+    seen["own"] = len(own)
+    out.sort(key=lambda w: w["slug"])
+    matched, added = sorted(matched), sorted(added)
+    line = (f"{base}; merged with {source}: "
+            f"{', '.join(matched) or 'none'} take openboatlaunch's outline and fields (matched by slug or GNIS id); "
+            f"{', '.join(added) or 'none'} added from openboatlaunch; {len(own)} record(s) from the extract's own "
+            "source only")
+    return {**{k: v for k, v in have.items() if k not in ("waters", "count")}, "state": st, "source": line,
+            "source_base": base, "merged": {"openboatlaunch": source, "matched": sorted(matched), "added": sorted(added),
+                                            "own": sorted(own)},
+            "count": len(out), "waters": out}
+
+
 def write_extract(state: str, waters: list[dict], source: str, out_json: Path, seen: Counter,
-                  gone: dict | None = None) -> dict:
+                  gone: dict | None = None, raw_of=None) -> dict:
     st = state.upper()
+    nhd = nhd_built(st, out_json)
+    if nhd is not None:
+        if not waters:
+            # openboatlaunch has no record of the state: the extract on file is left exactly as it is
+            out = dict(nhd)
+            out["_read"] = dict(seen) | {"merged": 0}
+            return out
+        out = merge_nhd(st, nhd, waters, raw_of or (lambda slug: None), source, seen)
+        write_json(Path(out_json), out)
+        out["_read"] = dict(seen)
+        return out
     have = on_file(out_json)
     # the records the source knows for the state: active ones, those retired into them, and those deleted or moved
     known = len(waters) + len(gone or {}) + sum(len(w.get("slug_aliases") or []) for w in waters)
@@ -301,7 +414,13 @@ def extract(state: str, obl_dir: Path | None, out_json: Path | None = None, snap
             waters, seen, snap = api_records(st, gone)
             seen["from"] = "api"
             src = f"openboatlaunch API v1 snapshot {snapshot or snap}"
-            return write_extract(st, waters, src, out_json, seen, gone)
+            raw_of = None
+            if waters and nhd_built(st, out_json) is not None:
+                # a merge takes openboatlaunch's outlines: the state's list again, with them (a few records)
+                full, _ = obl_api.state_waters(st, None, geometry=True)
+                geo = {d.get("slug"): d for d in full if isinstance(d, dict)}
+                raw_of = geo.get
+            return write_extract(st, waters, src, out_json, seen, gone, raw_of)
         except obl_api.ApiError as ex:
             if obl_dir is None or not Path(obl_dir).is_dir():
                 raise
@@ -313,7 +432,13 @@ def extract(state: str, obl_dir: Path | None, out_json: Path | None = None, snap
     waters, seen = records(st, obl_dir, gone)
     snap = snapshot or snapshot_of(obl_dir)
     src = f"openboatlaunch out/water snapshot {snap or 'unknown date'}" + (f", changes to {until[:10]}" if until else "")
-    return write_extract(st, waters, src, out_json, seen, gone)
+
+    def raw_of(slug):
+        try:
+            return json.loads((obl_dir / f"{slug}.json").read_text())
+        except Exception:  # noqa: BLE001
+            return None
+    return write_extract(st, waters, src, out_json, seen, gone, raw_of)
 
 
 def main(argv=None) -> int:

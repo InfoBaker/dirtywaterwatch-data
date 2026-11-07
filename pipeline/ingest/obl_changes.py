@@ -115,12 +115,14 @@ def rewrite(states, obl_dir: Path, until: str | None, data_dir: Path = DATA_DIR)
             # request, never made by the hourly run or the daily rewrite
             out[st] = "no extract on file"
             continue
-        if have and not str(have.get("source") or "").startswith("openboatlaunch"):
-            # a state whose extract on file is built from another source (DC's from NHD: openboatlaunch has no DC
-            # records) is never rewritten from the folder, and is no longer pending (review 2026-11-07)
+        merge = obl_waters.nhd_built(st, path) is not None
+        if have and not merge and not str(have.get("source") or "").startswith("openboatlaunch"):
+            # a file from another source that is not one state's own extract is never rewritten (review 2026-11-07)
             out[st] = "not an openboatlaunch extract"
             continue
-        if have and str(have.get("state") or "").upper() != st:
+        # an extract built from another source (DC's, from NHD) is merged with openboatlaunch's records
+        # (ingest.obl_waters merge_nhd), and left as it is while openboatlaunch has none of the state
+        if have and not merge and str(have.get("state") or "").upper() != st:
             out[st] = "not this state's extract"
             continue
         before = path.read_bytes() if path.exists() else None
