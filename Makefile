@@ -59,6 +59,10 @@
 #                  Arizona: echo_sewer_overflow_events (EPA's overflow tables, AZ permits: the statewide record of
 #                  AZPDES overflows and bypasses, with ADEQ's waterbody identifiers named from
 #                  data/reference/az-adeq-wbids.json; scripts/az_adeq_wbids.py refreshes that file by hand)
+#                  South Dakota: echo_sewer_overflow_events (EPA's overflow tables, SD permits: the statewide record,
+#                  the 5-day written reports; times in the zone of the event's point, Mountain or Central, from
+#                  data/reference/sd-mountain-time-counties.json, written by scripts/sd_mountain_time_counties.py),
+#                  sd_danr_hab_advisories (the list of the year's bloom advisories on DANR's HAB page)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
