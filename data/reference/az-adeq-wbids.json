@@ -21,7 +21,7 @@
    "name": "Colorado River",
    "kind": "stream",
    "origin": "GLEN CANYON DAM",
-   "terminus": "LEES FERRY @ 36?51'30.33\"/111?36'02.64\"",
+   "terminus": "LEES FERRY @ 36°51'30.33\"/111°36'02.64\"",
    "flow_regime": "Perennial"
   },
   "AZ14070006-012": {
@@ -3500,14 +3500,14 @@
    "name": "Lee Valley Creek",
    "kind": "stream",
    "origin": "Lee Valley Reservoir",
-   "terminus": "LITTLE COLORADO RIVER EAST FORK @ 33?56'35.62\"/109?28'57.31\"",
+   "terminus": "LITTLE COLORADO RIVER EAST FORK @ 33°56'35.62\"/109°28'57.31\"",
    "flow_regime": "Perennial"
   },
   "AZ15020001-232B": {
    "name": "Lee Valley Creek",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "LEE VALLEY RESERVOIR @ 33?56'31.63\"/109?29'56.67\"",
+   "terminus": "LEE VALLEY RESERVOIR @ 33°56'31.63\"/109°29'56.67\"",
    "flow_regime": "Intermittent"
   },
   "AZ15020001-237": {
@@ -3646,7 +3646,7 @@
    "name": "Unnamed Trib To Lyman Lake (ULY)",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "LYMAN LAKE @ 34?21'09.14\"/109?22'00.13\"",
+   "terminus": "LYMAN LAKE @ 34°21'09.14\"/109°22'00.13\"",
    "flow_regime": "Undetermined"
   },
   "AZ15020002-001": {
@@ -5444,7 +5444,7 @@
    "name": "Polacca Wash",
    "kind": "stream",
    "origin": "Wepo Wash",
-   "terminus": "ORAIBI WASH @ 35?25'37.96\"/110?49'04.19\"",
+   "terminus": "ORAIBI WASH @ 35°25'37.96\"/110°49'04.19\"",
    "flow_regime": "Undetermined"
   },
   "AZ15020013-002-I": {
@@ -6245,7 +6245,7 @@
    "name": "Dinnebito Wash",
    "kind": "stream",
    "origin": "Dinnebito Wash East Fork",
-   "terminus": "LITTLE COLORADO RIVER @ 35?28'49.34\"/111?14'19.04\"",
+   "terminus": "LITTLE COLORADO RIVER @ 35°28'49.34\"/111°14'19.04\"",
    "flow_regime": "Undetermined"
   },
   "AZ15020017-002-I": {
@@ -6275,7 +6275,7 @@
    "name": "Moenkopi Wash",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "HAMBLIN WASH @ 36?01'47.5\"/111?23'37.66\"",
+   "terminus": "HAMBLIN WASH @ 36°01'47.5\"/111°23'37.66\"",
    "flow_regime": "Undetermined"
   },
   "AZ15020018-003-I": {
@@ -8007,7 +8007,7 @@
    "name": "Francis Creek",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "BURRO CREEK @ 34?44'27.28\"/113?14'36.77\"",
+   "terminus": "BURRO CREEK @ 34°44'27.28\"/113°14'36.77\"",
    "flow_regime": "Perennial"
   },
   "AZ15030202-013": {
@@ -8624,7 +8624,7 @@
    "name": "Peoples Canyon",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "SANTA MARIA RIVER @ 34?20'35.35\"/113?15'12.03\"",
+   "terminus": "SANTA MARIA RIVER @ 34°20'35.35\"/113°15'12.03\"",
    "flow_regime": "Undetermined"
   },
   "AZ15030203-555": {
@@ -8795,7 +8795,7 @@
    "name": "Gila River",
    "kind": "stream",
    "origin": "COTTONWOOD CREEK",
-   "terminus": "SAN FRANCISCO RIVER @ 32?58'33.21\"/109?22'19.03\"",
+   "terminus": "SAN FRANCISCO RIVER @ 32°58'33.21\"/109°22'19.03\"",
    "flow_regime": "Perennial"
   },
   "AZ15040002-002": {
@@ -9938,7 +9938,7 @@
    "name": "Bonita Creek",
    "kind": "stream",
    "origin": "SAN CARLOS RES. BOUNDARY",
-   "terminus": "GILA RIVER @ 32?53'36.38\"/109?28'43.48\"",
+   "terminus": "GILA RIVER @ 32°53'36.38\"/109°28'43.48\"",
    "flow_regime": "Perennial"
   },
   "AZ15040005-030-I": {
@@ -9955,7 +9955,7 @@
    "name": "Bonita Creek",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "PARK CREEK @ 33?07'30.27\"/109?39'27.54\""
+   "terminus": "PARK CREEK @ 33°07'30.27\"/109°39'27.54\""
   },
   "AZ15040005-033": {
    "name": "Watson Wash",
@@ -11472,7 +11472,7 @@
    "name": "Unnamed Trib (UQ2) to Queen Creek",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "QUEEN CREEK @ 33?18'26.15\"/111?04'19.3\""
+   "terminus": "QUEEN CREEK @ 33°18'26.15\"/111°04'19.3\""
   },
   "AZ15050100-1046": {
    "name": "Unnamed Trib to Reymert Wash",
@@ -11492,7 +11492,7 @@
    "name": "Unnamed Drainage (DTO) to UQ1 Trib",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "UQ1 TRIBUTARY @ 33?17'29.23\"/111?07'29.76\""
+   "terminus": "UQ1 TRIBUTARY @ 33°17'29.23\"/111°07'29.76\""
   },
   "AZ15050100-115": {
    "name": "Tempe Canal",
@@ -11545,7 +11545,7 @@
    "name": "Unnamed Trib (UQ9) to Queen Creek",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "QUEEN CREEK @ 33?19'53.61\"/111?05'10.06\"",
+   "terminus": "QUEEN CREEK @ 33°19'53.61\"/111°05'10.06\"",
    "flow_regime": "Intermittent"
   },
   "AZ15050100-1485": {
@@ -11865,7 +11865,7 @@
    "name": "Unnamed trib to Queen Creek (UQ3)",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "QUEEN CREEK @ 33?18'33.75\"/111?04'02.61\""
+   "terminus": "QUEEN CREEK @ 33°18'33.75\"/111°04'02.61\""
   },
   "AZ15050100-1844": {
    "name": "Unnamed Trib (UQ8) to Queen Creek",
@@ -12212,7 +12212,7 @@
    "name": "Unnamed Trib (UQE) to Queen Creek",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "QUEEN CREEK @ 33?18'31.84\"/111?03'44.15\""
+   "terminus": "QUEEN CREEK @ 33°18'31.84\"/111°03'44.15\""
   },
   "AZ15050100-9992": {
    "name": "Runoff to Telegraph Canyon",
@@ -13013,7 +13013,7 @@
    "name": "Aravaipa Creek",
    "kind": "stream",
    "origin": "Stowe Gulch",
-   "terminus": "ARAVAIPA WILD. BNDRY @ 32?54'23.41\"/110?33'41.89\"",
+   "terminus": "ARAVAIPA WILD. BNDRY @ 32°54'23.41\"/110°33'41.89\"",
    "flow_regime": "Perennial"
   },
   "AZ15050203-004C": {
@@ -13069,7 +13069,7 @@
    "name": "Buehman Canyon",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "UNNAMED TRIBUTARY @ 32?24'53.82\"/110?32'10.23\"",
+   "terminus": "UNNAMED TRIBUTARY @ 32°24'53.82\"/110°32'10.23\"",
    "flow_regime": "Undetermined"
   },
   "AZ15050203-010B": {
@@ -14393,13 +14393,13 @@
    "name": "Three R Canyon",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "UNNAMED TRIBUTARY TO THREE R CANYON @ 31?28'25.83\"/110?46'4.09\""
+   "terminus": "UNNAMED TRIBUTARY TO THREE R CANYON @ 31°28'25.83\"/110°46'4.09\""
   },
   "AZ15050301-558B": {
    "name": "Three R Canyon",
    "kind": "stream",
-   "origin": "UNNAMED TRIBUTARY TO THREE R CANYON @ 31?28'26\"/110?46\"04\"",
-   "terminus": "COX GULCH @ 31?28'28.03\"/110?47'14.65\"",
+   "origin": "UNNAMED TRIBUTARY TO THREE R CANYON @ 31°28'26\"/110°46\"04\"",
+   "terminus": "COX GULCH @ 31°28'28.03\"/110°47'14.65\"",
    "flow_regime": "Undetermined"
   },
   "AZ15050301-558C": {
@@ -14886,22 +14886,22 @@
   "AZ15050302-153B": {
    "name": "Davidson Canyon",
    "kind": "stream",
-   "origin": "SPRING @ 31?58'59.99\"/110?38'48.55\"",
-   "terminus": "UNNAMED TRIBUTARY @ 31?59'09.31\"/110?38'43.91\"",
+   "origin": "SPRING @ 31°58'59.99\"/110°38'48.55\"",
+   "terminus": "UNNAMED TRIBUTARY @ 31°59'09.31\"/110°38'43.91\"",
    "flow_regime": "Undetermined"
   },
   "AZ15050302-153C": {
    "name": "Davidson Canyon",
    "kind": "stream",
    "origin": "UNNAMED TRIB",
-   "terminus": "SPRING @ 32?00'40.34\"/110?38'35.81\"",
+   "terminus": "SPRING @ 32°00'40.34\"/110°38'35.81\"",
    "flow_regime": "Undetermined"
   },
   "AZ15050302-153D": {
    "name": "Davidson Canyon",
    "kind": "stream",
-   "origin": "SPRING @ 32?00'40.34\"/110?38'35.81\"",
-   "terminus": "CIENEGA CREEK @ 32?01'05.17\"/110?38'34.94\"",
+   "origin": "SPRING @ 32°00'40.34\"/110°38'35.81\"",
+   "terminus": "CIENEGA CREEK @ 32°01'05.17\"/110°38'34.94\"",
    "flow_regime": "Undetermined"
   },
   "AZ15050302-156": {
@@ -16297,7 +16297,7 @@
    "name": "Bear Wallow Creek South Fork",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "BEAR WALLOW CREEK @ 33?35'54.55\"/109?26'52.23\"",
+   "terminus": "BEAR WALLOW CREEK @ 33°35'54.55\"/109°26'52.23\"",
    "flow_regime": "Undetermined"
   },
   "AZ15060101-268": {
@@ -16500,13 +16500,13 @@
    "name": "Stinky Creek",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "FORT APACHE RESERVATION @ 33?52'30.29\"/109?29'44.94\""
+   "terminus": "FORT APACHE RESERVATION @ 33°52'30.29\"/109°29'44.94\""
   },
   "AZ15060101-352A": {
    "name": "Stinky Creek",
    "kind": "stream",
    "origin": "FORT APACHE RESERVATION",
-   "terminus": "BLACK RIVER WEST FORK @ 33?51'21.65\"/109?27'09.62\""
+   "terminus": "BLACK RIVER WEST FORK @ 33°51'21.65\"/109°27'09.62\""
   },
   "AZ15060101-353": {
    "name": "Hay Creek",
@@ -17516,7 +17516,7 @@
    "name": "Crouch Creek",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "CHERRY CREEK @ 34?02'55.6\"/110?53'42.78\"",
+   "terminus": "CHERRY CREEK @ 34°02'55.6\"/110°53'42.78\"",
    "flow_regime": "Undetermined"
   },
   "AZ15060103-041-I": {
@@ -17791,7 +17791,7 @@
    "name": "Unnamed Trib Five Point Mountain (UF2)",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "FIVE POINT MOUNTAIN TRIBUTARY @ 33?21'20.36\"/110?58'05.87\""
+   "terminus": "FIVE POINT MOUNTAIN TRIBUTARY @ 33°21'20.36\"/110°58'05.87\""
   },
   "AZ15060103-214": {
    "name": "Cataract Canyon",
@@ -17851,40 +17851,40 @@
    "name": "Pinal Creek",
    "kind": "stream",
    "origin": "Headwaters",
-   "terminus": "UNNAMED (RECEIVES GLOBE WWTP) @ 33?25'29.25\"/110?48'19.62\"",
+   "terminus": "UNNAMED (RECEIVES GLOBE WWTP) @ 33°25'29.25\"/110°48'19.62\"",
    "flow_regime": "Undetermined"
   },
   "AZ15060103-280B": {
    "name": "Pinal Creek",
    "kind": "stream",
    "origin": "Unnamed (receives Globe WWTP)",
-   "terminus": "GLOBE WWTP @ 33?26'53.96\"/110?49'23.21\""
+   "terminus": "GLOBE WWTP @ 33°26'53.96\"/110°49'23.21\""
   },
   "AZ15060103-280C": {
    "name": "Pinal Creek",
    "kind": "stream",
    "origin": "GLOBE WWTP",
-   "terminus": "LOWER PINAL WATER TRTMNT PLANT @ 33?31'4.34\"/110?51'55.29\""
+   "terminus": "LOWER PINAL WATER TRTMNT PLANT @ 33°31'4.34\"/110°51'55.29\""
   },
   "AZ15060103-280D": {
    "name": "Pinal Creek",
    "kind": "stream",
    "origin": "LOWER PINAL CREEK WTP OUTFALL #1",
-   "terminus": "SEE RANCH CROSSING @ 33?32'25\"/110?52'28\"",
+   "terminus": "SEE RANCH CROSSING @ 33°32'25\"/110°52'28\"",
    "flow_regime": "Perennial"
   },
   "AZ15060103-280E": {
    "name": "Pinal Creek",
    "kind": "stream",
    "origin": "SEE RANCH CROSSING",
-   "terminus": "UNNAMED TRIBUTARY @ 33?35'28\"/110?54'31\"",
+   "terminus": "UNNAMED TRIBUTARY @ 33°35'28\"/110°54'31\"",
    "flow_regime": "Undetermined"
   },
   "AZ15060103-280F": {
    "name": "Pinal Creek",
    "kind": "stream",
    "origin": "UNNAMED TRIBUTARY",
-   "terminus": "SALT RIVER @ 33?37'10.60\"/110?55'1.56\"",
+   "terminus": "SALT RIVER @ 33°37'10.60\"/110°55'1.56\"",
    "flow_regime": "Perennial"
   },
   "AZ15060103-281": {
@@ -19382,7 +19382,7 @@
    "name": "Salt River",
    "kind": "stream",
    "origin": "I-10 BRIDGE",
-   "terminus": "23RD AVENUE WWTP @ 33?24'42.32\"/112?7'59.56\"",
+   "terminus": "23RD AVENUE WWTP @ 33°24'42.32\"/112°7'59.56\"",
    "flow_regime": "Intermittent"
   },
   "AZ15060106B-001D": {
@@ -19427,7 +19427,7 @@
    "name": "Salt River",
    "kind": "stream",
    "origin": "TEMPE TOWN LAKE DAM",
-   "terminus": "I-10 BRIDGE @ 33?25'13.02\"/112?1'9.623\"",
+   "terminus": "I-10 BRIDGE @ 33°25'13.02\"/112°1'9.623\"",
    "flow_regime": "Intermittent"
   },
   "AZ15060106B-026A": {
@@ -21150,7 +21150,7 @@
    "name": "Fossil Creek",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "VERDE RIVER @ 34?18'21.51\"/111?40'31.98\"",
+   "terminus": "VERDE RIVER @ 34°18'21.51\"/111°40'31.98\"",
    "flow_regime": "Perennial",
    "canal": "Non-DWS"
   },
@@ -22179,7 +22179,7 @@
    "name": "Buckeye Canal",
    "kind": "stream",
    "origin": "SOUTH EXTENSION CANAL",
-   "terminus": "TERMINUS @ 33?21'34.86\"/112?41'03.31\" (HUC BNDRY 15070103)",
+   "terminus": "TERMINUS @ 33°21'34.86\"/112°41'03.31\" (HUC BNDRY 15070103)",
    "flow_regime": "C-N.A.",
    "canal": "Non-DWS"
   },
@@ -23422,7 +23422,7 @@
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "Jackrabbit Wash",
-   "terminus": "BUCKEYE CANAL @ 33?21'19.71\"/112?43'42.02\"",
+   "terminus": "BUCKEYE CANAL @ 33°21'19.71\"/112°43'42.02\"",
    "flow_regime": "Ephemeral",
    "canal": "Non-DWS"
   },
@@ -23438,35 +23438,35 @@
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "Sols Wash",
-   "terminus": "UNNAMED TRIBUTARY @ 33?51'51.57\"/112?39'56.22\"",
+   "terminus": "UNNAMED TRIBUTARY @ 33°51'51.57\"/112°39'56.22\"",
    "flow_regime": "Perennial"
   },
   "AZ15070103-002B": {
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "UNNAMED TRIB @ 335152.013/1123955.584",
-   "terminus": "JACKRABBIT WASH @ 33?30'19.43\"/112?44'32.65\"",
+   "terminus": "JACKRABBIT WASH @ 33°30'19.43\"/112°44'32.65\"",
    "flow_regime": "Ephemeral"
   },
   "AZ15070103-003": {
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "Martinez Wash",
-   "terminus": "SOLS WASH @ 33?58'19.26\"/112?43'36.02\"",
+   "terminus": "SOLS WASH @ 33°58'19.26\"/112°43'36.02\"",
    "flow_regime": "Intermittent"
   },
   "AZ15070103-004": {
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "Cottonwood Creek",
-   "terminus": "MARTINEZ WASH @ 33?59'47.33\"/112?44'33.55\"",
+   "terminus": "MARTINEZ WASH @ 33°59'47.33\"/112°44'33.55\"",
    "flow_regime": "Intermittent"
   },
   "AZ15070103-005": {
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "Blind Indian Creek",
-   "terminus": "COTTONWOOD CREEK @ 34?11'18.87\"/112?32'27.87\"",
+   "terminus": "COTTONWOOD CREEK @ 34°11'18.87\"/112°32'27.87\"",
    "flow_regime": "Intermittent"
   },
   "AZ15070103-006": {
@@ -23487,7 +23487,7 @@
    "name": "Hassayampa River",
    "kind": "stream",
    "origin": "Unnamed Trib @ 34 ° 26'09\"/112 ° 30'32\"",
-   "terminus": "BLIND INDIAN CREEK @ 34?12'40.00\"/112?32'18.37\"",
+   "terminus": "BLIND INDIAN CREEK @ 34°12'40.00\"/112°32'18.37\"",
    "flow_regime": "Intermittent"
   },
   "AZ15070103-008": {
@@ -23698,7 +23698,7 @@
   "AZ15070103-090": {
    "name": "Buckeye Canal",
    "kind": "stream",
-   "origin": "HUC BNDRY 15070103 (33?21'34.86\"/112?41'03.31\")",
+   "origin": "HUC BNDRY 15070103 (33°21'34.86\"/112°41'03.31\")",
    "terminus": "Hassayampa River",
    "flow_regime": "Undetermined",
    "canal": "Non-DWS"
@@ -24194,7 +24194,7 @@
   "AZ15070201-003A": {
    "name": "Gila River",
    "kind": "stream",
-   "origin": "TRIBUTARY @ 32?42'25.52\"/114?08'25.17\"",
+   "origin": "TRIBUTARY @ 32°42'25.52\"/114°08'25.17\"",
    "terminus": "CASTLE DOME WASH",
    "flow_regime": "Undetermined",
    "canal": "Non-DWS"
@@ -24218,7 +24218,7 @@
    "name": "Gila River",
    "kind": "stream",
    "origin": "Wellton Canal",
-   "terminus": "TRIBUTARY @ 32?42'25.52\"/114?08'25.17\"",
+   "terminus": "TRIBUTARY @ 32°42'25.52\"/114°08'25.17\"",
    "flow_regime": "Undetermined",
    "canal": "DWS"
   },
@@ -25250,7 +25250,7 @@
    "name": "C Canyon",
    "kind": "stream",
    "origin": "HEADWATERS",
-   "terminus": "MULE GULCH @ 31?26'28.46\"/109?53'30.16\""
+   "terminus": "MULE GULCH @ 31°26'28.46\"/109°53'30.16\""
   },
   "AZ15080301-152": {
    "name": "Johnson Canyon",

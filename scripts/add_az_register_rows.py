@@ -75,7 +75,8 @@ AGENCY = [
      "note": ("EPA's sewer overflow and bypass event tables (NPDES electronic reporting): Arizona's AZPDES permittees "
               "file their 24-hour and five-day reports in ADEQ's myDEQ and EPA publishes them (288 Arizona reports from "
               "42 permits, September 2019 to 28 October 2026, in the 2026-11-04 extract; a median 3 days from start to "
-              "receipt). No report from Pima County's permits. (research/az/report.md §2.2)"),
+              "receipt), and the Navajo Nation's reports under EPA's own permits (52 located in Arizona, February 2024 "
+              "to October 2026). No report from Pima County's permits. (research/az/report.md §2.2)"),
      "sources": ["fed-echo-sewer-overflow-bypass-events", "az-epa-sobe"]},
     {"id": "az-r18-9-c305-warning-signs", "agency": "Sewage collection system permittees (A.A.C. R18-9-C305)",
      "name": "Warning signs at repeated release locations", "channel_kind": "lights_signs_page", "urls": [],
@@ -112,8 +113,9 @@ AGENCY = [
      "sources": [LAW]},
     {"id": "az-adeq-reported-habs", "agency": "Arizona Department of Environmental Quality",
      "name": "Arizona Department of Environmental Quality (reported harmful algal blooms)",
-     "channel_kind": "state_alert_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
-     "monitored": False, "unmonitored_reason": "bot_wall", "publishes": "notices",
+     "channel_kind": "state_alert_page", "urls": ["https://azdeq.gov/reported-habs"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall",
+     "publishes": "notices",
      "note": ("ADEQ's \"Currently Reported\" bloom list (https://azdeq.gov/reported-habs) answers 403 to the project user "
               "agent (2026-11-07); a search snippet showed Lake Mohave advisories (Placer Cove danger, Eagle Wash "
               "warning, a lake-wide watch) as of 2026-06-12. Testing is voluntary for lake managers. Blooms, not sewage. "
@@ -138,8 +140,9 @@ AGENCY = [
               "(research/az/report.md §2.5)"),
      "sources": ["az-mohave-county-health-habs"]},
     {"id": "az-tempe-town-lake", "agency": "City of Tempe", "name": "City of Tempe (Tempe Town Lake)",
-     "channel_kind": "operator_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
-     "monitored": False, "unmonitored_reason": "bot_wall", "publishes": "unknown",
+     "channel_kind": "operator_page", "urls": ["https://www.tempe.gov/government/community-services/tempe-town-lake"],
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "bot_wall", "publishes": "unknown",
      "note": ("Tempe Town Lake's page (https://www.tempe.gov/government/community-services/tempe-town-lake) answers 403 "
               "to the project user agent (2026-11-07); whether the city posts E. coli results or closures was not "
               "verified. Voluntary. (research/az/report.md §2.5)"),
@@ -150,6 +153,51 @@ AGENCY = [
      "note": ("No Swim Guide affiliate or Arizona listing was found (search only, 2026-11-03); Arizona has no state beach "
               "monitoring program. (research/az/report.md §2.5)"),
      "sources": ["az-swim-guide"]},
+]
+
+
+# operators' own pages, searched for the largest operators and those the search turned up (2026-11-07; the rest not
+# searched one by one)
+OWN = [
+    {"id": "az-town-of-marana-news", "operator_id": "az-town-of-marana", "name": "Town of Marana",
+     "channel_kind": "news_page", "urls": ["https://www.maranaaz.gov/Government/News"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices", "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "note": ("The town's news list, where Marana has posted its sewage overflows (in 2021: storm-diluted sewage diverted "
+              "to a retention basin in North Marana, a trail closed for sewage cleanup). Answered 200 on 2026-11-07. "
+              "Voluntary.")},
+    {"id": "az-navajo-tribal-utility-authority-sso-plan", "operator_id": "az-navajo-tribal-utility-authority",
+     "name": "Navajo Tribal Utility Authority", "channel_kind": "operator_page",
+     "urls": ["https://www.ntua.com/assets/sso-response-plan---final.pdf"], "method": "pdf", "legal_basis": None,
+     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "documents",
+     "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "note": ("NTUA's sanitary sewer overflow response plan (PDF, answered 200 on 2026-11-07); read for changes. Its "
+              "public notice steps were not read in full. Filed voluntary: the permit clause that may require it was "
+              "not read.")},
+    {"id": "az-city-of-phoenix-sewer-service-page", "operator_id": "az-city-of-phoenix", "name": "City of Phoenix",
+     "channel_kind": "operator_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
+     "monitored": False, "unmonitored_reason": "none_found", "publishes": "none", "records": False,
+     "note": ("Phoenix's sewer service page (https://www.phoenix.gov/administration/departments/waterservices/"
+              "city-services-bill/general-service-issues.html, 200 on 2026-11-07) gives a hotline only for reporting "
+              "overflows; no list or notice of overflows was found on the city's site.")},
+    {"id": "az-city-of-mesa-wastewater-page", "operator_id": "az-city-of-mesa", "name": "City of Mesa",
+     "channel_kind": "operator_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
+     "monitored": False, "unmonitored_reason": "none_found", "publishes": "none", "records": False,
+     "note": ("Mesa's wastewater page (https://www.mesaaz.gov/Utilities/Water-Wastewater/Wastewater, 200 on 2026-11-07) "
+              "describes the system and its three plants; no overflow notice or list was found.")},
+    {"id": "az-city-of-yuma-utilities-page", "operator_id": "az-city-of-yuma", "name": "City of Yuma",
+     "channel_kind": "operator_page", "urls": ["https://www.yumaaz.gov/government/utilities"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall",
+     "publishes": "unknown",
+     "note": "Yuma's utilities page answers 403 to the project user agent (2026-11-07); whether it posts overflows is not known."},
+    {"id": "az-city-of-sedona-wastewater", "agency": "City of Sedona", "name": "City of Sedona (wastewater)",
+     "channel_kind": "operator_page", "urls": ["https://www.sedonaaz.gov/your-government/departments/wastewater"],
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "bot_wall", "publishes": "unknown",
+     "note": ("Sedona's wastewater pages answer 403 to the project user agent (2026-11-07). Sedona holds no AZPDES permit, "
+              "so its releases are not in EPA's tables; the press reported sewage spilling into Oak Creek "
+              "(azfamily.com, 2026-11-02, search result read). An example of the APP-only gap: such a release reaches "
+              "no public record but the press.")},
 ]
 
 
@@ -165,8 +213,20 @@ def first_sewage_permit(op: dict) -> str | None:
     return next((p for p in ps if p[:3] in ("AZ0", "AZ1", "NN0")), ps[0] if ps else None)
 
 
+def report_counts(dis: list[dict]) -> dict[str, int]:
+    """operator id -> its reports in EPA's tables placed in Arizona (the events and dropped files; empty when absent)."""
+    by_permit: Counter = Counter()
+    for f, key in ((ROOT / "data" / "build" / "events" / f"{FEED}.json", "records"),
+                   (ROOT / "data" / "build" / "echo-sewer-overflow-dropped.json", "dropped")):
+        if f.exists():
+            for r in json.loads(f.read_text()).get(key, []):
+                by_permit[r.get("npdes_permit") or r.get("permit")] += 1
+    return {op["id"]: sum(by_permit[p] for p in op.get("npdes_permits") or []) for op in dis if op.get("state") == "AZ"}
+
+
 def operator_rows(dis: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
     rows, left = [], []
+    reports = report_counts(dis)
     for op in dis:
         if op.get("state") != "AZ":
             continue
@@ -178,16 +238,16 @@ def operator_rows(dis: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
         private = (" The rule and the permit bind the holder, public or private."
                    if op.get("legal_form") not in (None, "city", "town", "county", "authority", "special district",
                                                    "federal facility", "state facility", "tribal") else "")
-        if op.get("legal_form") == "tribal":
+        if op.get("legal_form") == "tribal" or any(p.startswith("NN") for p in op.get("npdes_permits") or []):
             rows.append(finish(base(
                 id=f"{oid}-epa-report", operator_id=oid, name=name, permit=permit, channel_kind="feed", urls=[],
                 method=None, legal_basis=Q_TRIBAL.format(permit=permit), basis_kind="permit", monitored=False,
                 unmonitored_reason="feed_ingested", feed_source_id=FEED, publishes="notices", noun="EPA report",
                 sources=["az-epa-sobe"],
-                note=(f"{name}'s permits are EPA's (tribal land): reports go to EPA, which publishes the reports filed "
-                      f"electronically in its overflow tables (read by the {FEED} feed); none are there in the "
-                      "2026-11-04 extract. Arizona's collection-system rule does not apply on tribal land. "
-                      "(research/az/report.md §3)"))))
+                note=(f"{name}'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports "
+                      f"filed electronically in its overflow tables (read by the {FEED} feed; "
+                      f"{reports.get(oid, 0)} located in Arizona in the 2026-11-04 extract). Arizona's collection-system "
+                      "rule does not apply on tribal land. (research/az/report.md §3)"))))
             continue
         rows.append(finish(base(
             id=f"{oid}-adeq-report", operator_id=oid, name=name, permit=permit, channel_kind="feed", urls=[],
@@ -195,7 +255,8 @@ def operator_rows(dis: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
             unmonitored_reason="feed_ingested", feed_source_id=FEED, publishes="notices", noun="EPA report",
             sources=["az-epa-sobe", LAW],
             note=(f"{name} reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read "
-                  f"by the {FEED} feed, a median 3 days after the start.{private} No public notice is required beyond "
+                  f"by the {FEED} feed, a median 3 days after the start ({reports.get(oid, 0)} report(s) under its "
+                  f"permits in the 2026-11-04 extract).{private} No public notice is required beyond "
                   "the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). "
                   "(research/az/report.md §2.1)"))))
         if oid == "az-pima-county":
@@ -215,7 +276,7 @@ def run(dry_run: bool = False) -> dict:
     doc = NP.load_register(REGISTER)
     dis = json.loads(DIS.read_text())
     rows, left = operator_rows(dis)
-    rows += [finish(base(**r)) for r in AGENCY]
+    rows += [finish(base(**r)) for r in AGENCY + OWN]
     drop = tuple(r["id"] for r in doc["channels"] if r.get("state") == "AZ")
     doc = merge(doc, rows, drop)
     errs = NP.validate_register(doc, dis, ROOT)

@@ -27,8 +27,11 @@ Rules
   - notification_channel: what Arizona law requires (a 24-hour report to ADEQ and a five-day written report under
     A.A.C. R18-9-C305(F) and the AZPDES permit; the only public duty a warning sign where more than three reportable
     releases happened at one location in 12 months, R18-9-C305(G)) and where the reports become public (EPA's overflow
-    tables). Tribal rows: EPA Region 9 permits on tribal land, outside the state rule. notification_signup_url null:
-    no Arizona operator or agency offers an overflow alert list (research/az/report.md).
+    tables). Tribal rows and every Navajo Nation permit (NN...): EPA Region 9 permits in Indian country, outside the
+    state rule. notification_signup_url null: no overflow alert list was found from the state or the agencies; the
+    operators' own pages were not searched one by one (research/az/report.md).
+  - The counts and kind come from git-ignored files (the events and dropped files and the saved all-versions ZIP):
+    the script stops when they are absent. The Navajo Nation's reports count when the module placed them in Arizona.
   - Idempotent: a rerun replaces the rows it wrote (state AZ, source_areas ["az"]) and leaves every other row as it is;
     new rows go after the last row of the file.
 Writes data/dischargers.json (indent 1) and prints counts.
@@ -60,8 +63,8 @@ LAW = ("No Arizona statute or rule requires the public to be told of a sewage re
        "a few days later.")
 TRIBAL = ("A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and "
           "Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go "
-          "to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables "
-          f"({ECHO}); none are there in the 2026-11-04 extract. No public notice duty was found.")
+          f"to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables ({ECHO}). "
+          "No public notice duty was found.")
 PRIVATE_NOTE = " The rule and the permit conditions bind a private permittee as they bind a public one."
 OWN = " The operator's own pages were not searched individually."
 
@@ -128,7 +131,8 @@ GROUPS = {
                                            "Ganado and Twin Arrows plants)", "Navajo Tribal Utility Authority",
                                            "tribal", ["NN0020265", "NN0020281", "NN0020290", "NN0021555", "NN0022195",
                                                       "NN0030344"],
-                                           "Navajo Nation permits (NN...) EPA lists in Arizona."),
+                                           "Navajo Nation permits (NN...) EPA lists in Arizona. A report counts here when its point lies in "
+                                           "Arizona (one Window Rock report lies in New Mexico and is not counted)."),
 }
 # permits no input names well -> (row id, name, short_name, legal_form, note)
 HAND = {
@@ -273,12 +277,12 @@ def epa_reports() -> tuple[Counter, Counter]:
     allr, kept = Counter(), Counter()
     ev = json.loads(EVENTS.read_text()) if EVENTS.exists() else {}
     for r in ev.get("records", []):
-        if (r.get("npdes_permit") or "").startswith("AZ"):
+        if (r.get("npdes_permit") or "")[:2] in ("AZ", "NN"):
             kept[r["npdes_permit"]] += 1
             allr[r["npdes_permit"]] += 1
     dr = json.loads(DROPPED.read_text()) if DROPPED.exists() else {}
     for r in dr.get("dropped", []):
-        if (r.get("permit") or "").startswith("AZ"):
+        if (r.get("permit") or "")[:2] in ("AZ", "NN"):
             allr[r["permit"]] += 1
     return allr, kept
 
@@ -295,7 +299,7 @@ def collection_systems() -> set[str]:
 
 
 def row(rid, name, short, legal_form, permits, towns, waters, notes, kind, outfalls, research_ids, verified="fetched"):
-    tribal = legal_form == "tribal"
+    tribal = legal_form == "tribal" or any(p.startswith("NN") for p in permits)   # EPA's permits in Indian country
     private = legal_form in PRIVATE_FORMS
     return {"id": rid, "name": name, "short_name": short or name, "legal_form": legal_form, "state": "AZ",
             "kind": kind, "npdes_permit": permits[0] if permits else None, "npdes_permits": list(permits),
@@ -309,6 +313,11 @@ def row(rid, name, short, legal_form, permits, towns, waters, notes, kind, outfa
 
 
 def build(dis: list[dict]) -> tuple[list[dict], dict]:
+    missing = [str(p.relative_to(ROOT)) for p in (EVENTS, DROPPED, ROOT / "data" / "raw" / "echo-az" / "all.zip")
+               if not p.exists()]
+    if missing:   # git-ignored inputs: without them every row would turn "plant" and lose its report counts
+        raise SystemExit("run pipeline/ingest/echo_sewer_overflow_events.py first (with the all-versions ZIP saved at "
+                         "data/raw/echo-az/all.zip); missing: " + ", ".join(missing))
     keep = [d for d in dis if not (d.get("state") == "AZ" and "az" in (d.get("source_areas") or []))]
     held_elsewhere = {str(p).upper() for d in keep for p in [d.get("npdes_permit"), *(d.get("npdes_permits") or [])] if p}
     pl = plants()

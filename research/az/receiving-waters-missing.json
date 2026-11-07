@@ -1,9 +1,29 @@
 {
- "about": "Receiving-water names in AZ's reports (EPA's overflow tables for Arizona permits, the 2026-11-04 extract read on 2026-11-07) that data/receiving-waters-national.json does not hold for AZ, by name as the record gives it (an ADEQ waterbody identifier named as ADEQ's layer names it), with the number of reports giving each. Reports that say the discharge reached no water are left out.",
+ "about": "Receiving-water names in AZ's reports (EPA's overflow tables for Arizona permits, the 2026-11-04 extract read on 2026-11-07, with the Navajo Nation's reports located in Arizona) that data/receiving-waters-national.json does not hold for AZ, by name as the record gives it (an ADEQ waterbody identifier named as ADEQ's layer names it), with the number of reports giving each. Reports that say the discharge reached no water are left out.",
  "state": "AZ",
- "waters": 7,
- "reports": 15,
+ "waters": 9,
+ "reports": 24,
  "rows": [
+  {
+   "name": "Black Creek Wash",
+   "reports": 8,
+   "permits": [
+    "NN0021555"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     35.639444,
+     -109.080278
+    ]
+   ],
+   "spellings": [
+    "Black Creek wash",
+    "BLACK CREEK WASH"
+   ]
+  },
   {
    "name": "Unnamed Trib to Munds Creek",
    "reports": 5,
@@ -45,7 +65,7 @@
      "terminus": "Confluence with Unnamed Trib"
     }
    },
-   "points": [
+   "plant_points": [
     [
      33.80058,
      -111.98892
@@ -64,11 +84,11 @@
    "adeq_wbids": {
     "AZ15070101-210": {
      "origin": "SOUTH EXTENSION CANAL",
-     "terminus": "TERMINUS @ 33?21'34.86\"/112?41'03.31\" (HUC BNDRY 15070103)",
+     "terminus": "TERMINUS @ 33°21'34.86\"/112°41'03.31\" (HUC BNDRY 15070103)",
      "flow_regime": "C-N.A."
     }
    },
-   "points": [
+   "plant_points": [
     [
      33.363481,
      -112.582124
@@ -88,6 +108,22 @@
     [
      33.569479,
      -112.084755
+    ]
+   ]
+  },
+  {
+   "name": "Laguna Creek",
+   "reports": 1,
+   "permits": [
+    "NN0020281"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     36.733111,
+     -110.230611
     ]
    ]
   },
@@ -126,7 +162,7 @@
    "adeq_wbids": {
     "AZ15060103-280B": {
      "origin": "Unnamed (receives Globe WWTP)",
-     "terminus": "GLOBE WWTP @ 33?26'53.96\"/110?49'23.21\""
+     "terminus": "GLOBE WWTP @ 33°26'53.96\"/110°49'23.21\""
     }
    },
    "points": [

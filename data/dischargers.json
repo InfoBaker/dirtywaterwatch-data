@@ -224045,7 +224045,7 @@
   "towns": [
    "Cottonwood"
   ],
-  "notes": "EPA ICIS-NPDES: AZ0024716 City of Cottonwood - WWTF. EPA's overflow tables (2026-11-04 extract): 15 report(s), 9 with evidence the discharge reached a water.",
+  "notes": "EPA ICIS-NPDES: AZ0024716 City of Cottonwood - WWTF. EPA's overflow tables (2026-11-04 extract): 15 report(s), 0 with evidence the discharge reached a water.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -224782,7 +224782,7 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
@@ -224955,7 +224955,7 @@
   "towns": [
    "Grand Canyon"
   ],
-  "notes": "EPA ICIS-NPDES: AZ0022152 USDOI NPS - Grand Canyon NP - South Rim WWTP; AZ0110426 USDOI NPS - Grand Canyon NP - North Rim WWTP. EPA's overflow tables (2026-11-04 extract): 33 report(s), 2 with evidence the discharge reached a water.",
+  "notes": "EPA ICIS-NPDES: AZ0022152 USDOI NPS - Grand Canyon NP - South Rim WWTP; AZ0110426 USDOI NPS - Grand Canyon NP - North Rim WWTP. EPA's overflow tables (2026-11-04 extract): 33 report(s), 1 with evidence the discharge reached a water.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -225150,7 +225150,7 @@
   "water_slugs": [],
   "outfall_count": 6,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 6 rows)",
-  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
@@ -225161,7 +225161,7 @@
    "Kayenta",
    "Tuba City"
   ],
-  "notes": "EPA ICIS-NPDES: NN0020265 Chinle WWTF; NN0020281 Kayenta Wastewater Treatment Lagoon; NN0020290 Tuba City WWTF; NN0021555 Window Rock WWTF; NN0022195 Ganado WWTP; NN0030344 Twin Arrows Navajo Casino Wastewater Treatment Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Navajo Nation permits (NN...) EPA lists in Arizona.",
+  "notes": "EPA ICIS-NPDES: NN0020265 Chinle WWTF; NN0020281 Kayenta Wastewater Treatment Lagoon; NN0020290 Tuba City WWTF; NN0021555 Window Rock WWTF; NN0022195 Ganado WWTP; NN0030344 Twin Arrows Navajo Casino Wastewater Treatment Facility. EPA's overflow tables (2026-11-04 extract): 52 report(s), 15 with evidence the discharge reached a water. Navajo Nation permits (NN...) EPA lists in Arizona. A report counts here when its point lies in Arizona (one Window Rock report lies in New Mexico and is not counted).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -225188,7 +225188,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
-  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
@@ -225404,7 +225404,7 @@
   "water_slugs": [],
   "outfall_count": 4,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
-  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
@@ -225957,7 +225957,7 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
@@ -226158,7 +226158,7 @@
   "water_slugs": [],
   "outfall_count": 7,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 7 rows)",
-  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes the reports filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
