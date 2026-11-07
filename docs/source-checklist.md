@@ -32,8 +32,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
-| sd | 2 | 1 | 6 | 0 | 0 | 9 |
-| **all** | **455** | **226** | **370** | **183** | **63** | **1297** |
+| sd | 3 | 1 | 5 | 0 | 0 | 9 |
+| **all** | **456** | **226** | **369** | **183** | **63** | **1297** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1438,10 +1438,10 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `sd-danr-ereporting` | SD DANR electronic reporting page (NetDMR, eRule) | used | search_only | law | Lists Sewer Overflow/Bypass Event Reports under the eRule; SD permittees file through EPA's NeT, which is why SOBE carries SD. |
+| `sd-danr-hab-advisories` | SD DANR HABs Advisories layers (yearly) and HAB web page | used | fetched | advisories | DANR's HAB page now opens with a box "Harmful Algal Bloom Advisories 2026" listing each lake under advisory with its county and a date (five lakes on 2026-11-07: Twin Lakes, Spink County, 6/15/2026; Wall Lake, Minnehaha County, 8/11/2026; Clear Lake, Hamlin County, 8/18/2026; Lake Poinsett, Hamlin County, 9/15/2026; Lake Albert, Kingsbury County, 9/15/2026); "Advisories expire at the end of the calendar year". Read by the sd-danr-hab-advisories ingester. The yearly advisory map layers stop at 2024 (2024: 3 rows, e.g. Brant Lake, microcystin 9.46 above 8 ug/L), and DANR warns its map 'does not show current conditions'. |
 | `sd-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), SD rows | used | fetched | events | The only dated, statewide, machine-readable overflow feed for South Dakota, read by the national eRule ingester (echo-sewer-overflow) with South Dakota in its states. 2026-11-04 extract: 208 current SD rows from 56 permits (SSO 167, BYP 40, CSO 1), starts 2023-04-20 to 2026-11-02; every row with a point, 186 with a volume, 74 with a receiving-water row. 56 kept from 30 permits; 152 dropped (97 SSOs naming no water and no water impact, 34 building backups, 21 naming no water in words). Received a median 5 days after the start (10% the same day, 10% 57 days or more). Times read in the zone of the event's own point (Mountain in the fifteen counties 49 CFR 71.7(b) puts west of the boundary: 70 rows; Central elsewhere: 138). |
 | `sd-danr-hab-2026-samples` | SD DANR 2026 Shoreline Microcystin Samples (ArcGIS) | candidate | fetched | monitoring | Public layer, 21 lake stations in 2026, wide format (Date_1..Date_5, Microcystin_1..5); e.g. Clear Lake 14.405 on 08/18/2026. One new service per year. |
 | `sd-beach-ecoli` | State park beach E. coli monitoring | watch | search_only | monitoring | No public South Dakota beach bacteria program or results found (search only). |
-| `sd-danr-hab-advisories` | SD DANR HABs Advisories layers (yearly) and HAB web page | watch | fetched | advisories | Advisory layers exist for 2021-2024 (2024: 3 rows, e.g. Brant Lake, microcystin 9.46 above 8 ug/L); no 2026 advisory layer published, although 2026 advisories (Wall Lake, Twin Lakes) were issued by press release. DANR warns the map 'does not show current conditions'. |
 | `sd-danr-spills-nr42` | SD DANR spill reports (NR42 Interactive Map, Tanks and Spills database) | watch | fetched | events | A remediation case list (case number, status, dates reported and closed, site, lat/long, material, amount, spill category PETROLEUM/CHEMICAL/AGRI CHEM/OIL/COMBINED/OTHER). The reporting page covers petroleum and chemicals and does not mention sewage; municipal overflows go through the permit route (SOBE), so this is not an SSO source. |
 | `sd-echo-dmr-cso` | ECHO DMR data for Lead CSO permits | watch | fetched | permits | SD0027481 outfall 004 and SD0020796 outfall 003 report flow rate and rainfall duration but no 'number of events' parameter. |
 | `sd-friends-big-sioux` | Friends of the Big Sioux River water quality reports | watch | search_only | monitoring | Summer bacteria and flood-impact reports (2024 report covered Sioux Falls and Vermillion discharges). Not fetched. |

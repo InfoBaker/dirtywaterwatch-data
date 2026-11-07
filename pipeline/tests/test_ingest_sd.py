@@ -190,3 +190,49 @@ def test_main_reads_a_saved_zip_of_south_dakota_rows(tmp_path, monkeypatch):
     assert sum(x["count"] for x in doc["meta"]["by_rule"] if x["state"] == "SD" and x["outcome"] == "kept") == 6
     dropped = json.loads((tmp_path / "echo-sewer-overflow-dropped.json").read_text())
     assert dropped["count"] == 7
+
+
+# ---------------------------------------------------------------- DANR's harmful algal bloom advisories
+
+def _hab_page() -> str:
+    return (FIX / "sd_danr_hab_page.html").read_text()
+
+
+def test_the_hab_box_becomes_one_advisory_per_lake():
+    from ingest import sd_danr_hab_advisories as H
+    recs, meta = H.build(_hab_page(), "2026-11-07T12:00:00Z", [])
+    assert meta["box_year"] == 2026 and meta["on_page"] == 5 and meta["advisory_active"] == 5
+    by = {r["source_record_id"]: r for r in recs}
+    r = by["2026:twin-lakes:spink-county"]
+    assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active" and r["ended_at"] is None
+    assert r["started_at"] == "2026-06-15" and r["time_precision"] == "day" and r["waterbody_text"] == "Twin Lakes"
+    assert r["raw"]["county"] == "Spink County" and r["raw"]["expires_on"] == "2026-12-31"
+    assert "expire at the end of the calendar year" in r["raw"]["end_basis"]
+    assert r["lat"] is None and r["source_url"] == H.URL
+
+
+def test_a_hab_advisory_ends_with_the_year_and_a_lake_that_leaves_is_kept():
+    from ingest import sd_danr_hab_advisories as H
+    recs, _ = H.build(_hab_page(), "2026-11-07T12:00:00Z", [])
+    later, meta = H.build(_hab_page(), "2027-01-02T12:00:00Z", recs)
+    assert all(r["status"] == "advisory_lifted" and r["ended_at"] == "2026-12-31" for r in later)
+    fewer = _hab_page().replace("<p><strong>Wall Lake (Minnehaha County) </strong>8/11/2026 </p>", "")
+    again, meta = H.build(fewer, "2026-11-08T12:00:00Z", recs)
+    gone = next(r for r in again if r["waterbody_text"] == "Wall Lake")
+    assert meta["on_page"] == 4 and meta["kept_from_previous"] == 1
+    assert gone["raw"]["gone_from_page_since"] == "2026-11-08T12:00:00Z" and gone["status"] == "advisory_active"
+
+
+def test_a_page_without_the_box_fails_and_keeps_the_previous_records(tmp_path, monkeypatch):
+    from ingest import sd_danr_hab_advisories as H
+    monkeypatch.setattr(H, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(H, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / f"{sid}.json", **kw))
+    good = tmp_path / "good.html"
+    good.write_text(_hab_page())
+    assert H.main(["--file", str(good)]) == 0
+    bad = tmp_path / "bad.html"
+    bad.write_text("<html><body>moved</body></html>")
+    assert H.main(["--file", str(bad)]) == 1
+    doc = json.loads((tmp_path / "sd-danr-hab-advisories.json").read_text())
+    assert doc["ok"] is False and doc["count"] == 5
