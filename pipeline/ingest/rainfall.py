@@ -89,6 +89,13 @@ MRMS_PAUSE_S = 0.2
 NWS_PAUSE_S = 0.3
 MIN_OK_SHARE = 0.8             # fewer fresh readings than this share of points: ok false
 CHECK_TOLERANCE_IN = 0.011     # grid and identify at the same point and valid time differ by more: the grid is not used
+# The unit (found 2026-11-07): the service describes its values as inches but was returning millimetres (identify at
+# Bucklin Point, RI, valid 2026-11-07T02:00Z: 51.3 for 24 hours, 2.0 in; maxValues 118.7). The unit of every grid
+# and identify answer is decided from the data (decide_units), never from the description alone.
+MM_PER_IN = 25.4
+UNIT_BOUND_IN = {24: 30.0, 72: 45.0}   # a box maximum over this, read as inches, is impossible: millimetres (the
+                                       # US 24-hour record is 43 in, Alvin, Texas, 1979; 72 hours about 60 in)
+UNITS_FOUND = "2026-11-07"
 BASELINE_REQUESTS_PER_HOUR = 384   # 319 identify + 196 forecast cells / 3 (2026-11-02, before the grid)
 FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails
 LOOKUP_MAX = 100               # new NWS /points lookups a run
@@ -265,6 +272,52 @@ def group_points(outfalls: list[dict]) -> dict[str, dict]:
     return pts
 
 
+# ---------------------------------------------------------------- the unit
+
+def bound_verdict(maxima: dict) -> dict | None:
+    """maxima {hours: the largest value read, in the service's unit}: millimetres when a 24-hour maximum is over
+    30 or a 72-hour maximum over 45 (impossible as inches); None when the bound cannot tell."""
+    over = {h: m for h, m in (maxima or {}).items() if h in UNIT_BOUND_IN and m is not None and m > UNIT_BOUND_IN[h]}
+    if not over:
+        return None
+    h = min(over)
+    return {"units_read": "mm", "basis": "physical_bound",
+            "evidence": {"box_max": {f"h{k}": v for k, v in sorted(over.items())},
+                         "bound_in": {f"h{k}": UNIT_BOUND_IN[k] for k in sorted(over)},
+                         "text": f"the largest {h}-hour value read, {over[h]}, is over {UNIT_BOUND_IN[h]:g}, impossible "
+                                 f"as inches (US 24-hour record 43 in, Alvin, Texas, 1979): millimetres"}}
+
+
+def decide_units(maxima: dict, last: dict | None = None, gauge: dict | None = None) -> dict:
+    """The unit of this run's MRMS values: {units_read: "mm" | "in", factor (divide by it for inches), basis,
+    evidence, box_max}. The gauge check (gauge_check) decides when it has a verdict, except that it cannot make
+    values over the physical bound inches (the conflict is recorded and the bound kept); then the physical bound;
+    else the last unit determined (last: rainfall.json mrms.units_last_determined); else the service's stated
+    inches."""
+    box_max = {f"h{h}": v for h, v in sorted((maxima or {}).items()) if v is not None}
+    b = bound_verdict(maxima)
+    gv = (gauge or {}).get("verdict")
+    if gv in ("mm", "in") and not (gv == "in" and b):
+        d = {"units_read": gv, "basis": "gauge_check", "evidence": {k: v for k, v in gauge.items() if k != "pairs"}}
+    elif b:
+        d = dict(b)
+        if gv == "in":
+            d["conflict"] = f"the gauge check read inches ({gauge.get('text')}); the physical bound kept"
+    elif last and last.get("units_read") in ("mm", "in"):
+        d = {"units_read": last["units_read"], "basis": "last_determined",
+             "evidence": {"determined_at": last.get("determined_at"), "basis": last.get("basis")}}
+    else:
+        d = {"units_read": "in", "basis": "service_description",
+             "evidence": {"text": "no unit determined yet: the service's stated inches"}}
+    d["factor"] = MM_PER_IN if d["units_read"] == "mm" else 1.0
+    d["box_max"] = box_max
+    return d
+
+
+def to_inches(v, factor: float):
+    return None if v is None else round(float(v) / factor, 2)
+
+
 # ---------------------------------------------------------------- MRMS: per point (the fallback)
 
 def parse_identify(d: dict) -> dict:
@@ -375,7 +428,8 @@ def backfill_needed(hist: dict | None, permits: set[str], now: datetime) -> bool
 
 def read_grid(session, points: dict[str, dict], hours) -> dict:
     """One catalog query and one export per accumulation, sampled at every point. Returns {values: {key:
-    {h1, h24, ...}}, valid_time, products, box, problems, catalog}; raises when the 24-hour grid cannot be
+    {h1, h24, ...}}, maxima: {hours: the box maximum}, valid_time, products, box, problems, catalog}, the values in the
+    service's unit as read (run() decides the unit and converts); raises when the 24-hour grid cannot be
     read, is not where it was asked, or has no value at most points."""
     names = [grid_mod.item_name(h) for h in hours]
     cat, cat_raw = grid_mod.catalog(session, names)
@@ -386,7 +440,7 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
     box = grid_mod.grid_box([(p["lat"], p["lon"]) for p in points.values()])
     pts = {k: (p["lat"], p["lon"]) for k, p in points.items()}
     values: dict[str, dict] = {k: {} for k in points}
-    products, problems = {}, []
+    products, problems, maxima = {}, [], {}
     for h in hours:
         name = grid_mod.item_name(h)
         c = cat.get(name)
@@ -410,6 +464,8 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
             continue
         for k, v in got.items():
             values[k][f"h{h}"] = v
+        mx = [x for x in [g.max_read(), *got.values()] if x is not None]
+        maxima[h] = max(mx) if mx else None
         products[str(h)] = {"item": name, "objectid": c["objectid"], "valid_time": c["valid_time"], "bytes": len(b),
                             "sha256": hashlib.sha256(b).hexdigest(), **g.meta()}
     missing = sum(1 for v in values.values() if v.get("h24") is None)
@@ -420,18 +476,22 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
     shrink = [k for k, v in values.items() if None not in (v.get("h1"), v.get("h24")) and v["h1"] > v["h24"] + 0.005]
     if shrink:
         problems.append(f"1-hour total above the 24-hour total at {len(shrink)} point(s), e.g. {shrink[0]}")
-    return {"values": values, "valid_time": vt, "products": products, "box": box, "problems": problems,
-            "catalog": cat_raw}
+    return {"values": values, "maxima": maxima, "valid_time": vt, "products": products, "box": box,
+            "problems": problems, "catalog": cat_raw}
 
 
-def check_grid(session, grid: dict, points: dict[str, dict]) -> dict:
-    """identify at the wettest point: the grid's value there must be identify's (same valid time)."""
+def check_grid(session, grid: dict, points: dict[str, dict], factor: float = 1.0) -> dict:
+    """identify at the wettest point: the grid's value there must be identify's (same valid time). The grid's
+    values are in inches (converted); identify's answer is converted with the same factor before the comparison
+    (both come from the same service in the same unit)."""
     vals = grid["values"]
     k = max(sorted(vals), key=lambda x: vals[x].get("h24") if vals[x].get("h24") is not None else -1.0)
     out = {"point": k, "grid_h24": vals[k].get("h24")}
     d = identify(session, points[k]["lat"], points[k]["lon"])
     m = parse_identify(d)
-    out.update(identify_h24=m["h24"], identify_valid_time=m["valid_time"], answer=d)
+    out.update(identify_h24=to_inches(m["h24"], factor), identify_h24_as_read=m["h24"],
+               identify_valid_time=m["valid_time"], answer=d)
+    m["h24"] = out["identify_h24"]
     if m["valid_time"] != grid["valid_time"]:
         out["result"] = "skipped: the product changed between the grid and the check"
     elif m["h24"] is None or vals[k].get("h24") is None:
@@ -608,6 +668,11 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         for f in ("mrms", "qpf"):
             if (old_points.get(k) or {}).get(f):
                 p[f] = old_points[k][f]
+        if p.get("mrms") and not p["mrms"].get("units_read"):
+            del p["mrms"]                      # read before the unit was checked (2026-11-07): reread, never kept
+    prev_mrms = prev.get("mrms") or {}
+    last_units = prev_mrms.get("units_last_determined")
+    units: dict | None = None
     todo = [k for k, p in points.items() if needs_mrms(p.get("mrms"), now, force)]
     base = session or requests.Session()
     base.headers.update(HEADERS)
@@ -632,8 +697,11 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 g = None
                 time.sleep(2 + 3 * attempt)
         if g is not None:
+            units = decide_units(g["maxima"], last_units)
+            g["values_as_read"] = g["values"]
+            g["values"] = {k: {f: to_inches(x, units["factor"]) for f, x in v.items()} for k, v in g["values"].items()}
             try:
-                chk = check_grid(session, g, points)
+                chk = check_grid(session, g, points, units["factor"])
             except Exception as e:  # noqa: BLE001
                 chk = {"result": f"skipped: identify failed ({type(e).__name__}: {e})"[:300]}
             if chk.get("result") == "differs":
@@ -646,16 +714,18 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                     continue
                 sampled += 1
                 points[k]["mrms"] = {**{f"h{h}": v.get(f"h{h}") for h in hours}, "valid_time": g["valid_time"],
-                                     "fetched_at": fetched_at, "read": "grid", "product": PRODUCT}
+                                     "fetched_at": fetched_at, "read": "grid", "product": PRODUCT,
+                                     "units_read": units["units_read"]}
             problems.extend(g["problems"])
             read = "grid"
             raw = {"read": "grid", "catalog": g["catalog"], "box": g["box"], "products": g["products"],
-                   "check": chk, "hours": hours,
-                   "values": {k: [v.get(f"h{h}") for h in hours] for k, v in g["values"].items()}}
+                   "check": chk, "hours": hours, "units": units,
+                   "values": {k: [v.get(f"h{h}") for h in hours] for k, v in g["values_as_read"].items()}}
             grid_info = {"used": True, "valid_time": g["valid_time"], "box": g["box"], "products": g["products"],
                          "check": {k: v for k, v in (chk or {}).items() if k != "answer"}, "errors": errs}
         else:
             grid_info = {"used": False, "errors": errs}
+            units = None
             problems.append("grid read failed; per-point fallback: " + "; ".join(errs)[:400])
         todo = [k for k in todo if needs_mrms(points[k].get("mrms"), now, False)] if g is not None else todo
 
@@ -676,6 +746,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 return k, d, None
             except Exception as e:  # noqa: BLE001
                 return k, None, f"{type(e).__name__}: {e}"[:300]
+        got: dict[str, dict] = {}
         with ThreadPoolExecutor(max_workers=MRMS_WORKERS) as pool:
             for k, d, err in pool.map(fetch, order):
                 if err:
@@ -688,12 +759,21 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 for pr in m.pop("problems"):
                     problems.append(f"{k}: {pr}")
                 if m.get("valid_time"):
-                    points[k]["mrms"] = m
+                    got[k] = m
                 else:
                     failed[k] = "no valid time"
+        if got:                                 # the unit from every answer of the run, then inches
+            maxima = {h: max((m[f"h{h}"] for m in got.values() if m.get(f"h{h}") is not None), default=None)
+                      for h in UNIT_BOUND_IN}
+            units = decide_units(maxima, last_units)
+            for k, m in got.items():
+                for h in HOURS:
+                    m[f"h{h}"] = to_inches(m.get(f"h{h}"), units["factor"])
+                m["units_read"] = units["units_read"]
+                points[k]["mrms"] = m
         if answers:
             read, sampled = "point", len(answers)
-            raw = {"read": "point", "answers": answers, "grid": grid_info}
+            raw = {"read": "point", "answers": answers, "grid": grid_info, "units": units}
     if raw:
         save_raw("noaa-mrms-qpe", gzip.compress(json.dumps(raw).encode()), "json.gz")
 
@@ -755,12 +835,20 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                              + ("; " + "; ".join(grid_info.get("errors") or [])[:300] if grid_info.get("errors") else ""))
     permits = permit_summary(points, outfalls)
     counts = session.summary()
+    if units:
+        units = {**units, "determined_at": iso(now), "service_states": "inches",
+                 "rule": f"unit decided from the data (found {UNITS_FOUND}): a box maximum over "
+                         f"{UNIT_BOUND_IN[24]:g} (24 h) or {UNIT_BOUND_IN[72]:g} (72 h) is millimetres; values in "
+                         f"millimetres are divided by {MM_PER_IN} before use"}
+    last_determined = units if units and units["basis"] in ("physical_bound", "gauge_check") else last_units
     out = {
         "source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": ok, "error": error,
         "last_ok_at": now_iso() if ok else prev.get("last_ok_at"),
         "mrms": {"service": MRMS_URL, "product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, "
-                                                 "1-hour and 24-hour totals in inches (grid); 1/3/6/12/24/48/72-hour "
-                                                 "(per-point fallback)",
+                                                 "1-hour and 24-hour totals (grid); 1/3/6/12/24/48/72-hour "
+                                                 "(per-point fallback); in inches, converted from millimetres when the "
+                                                 "service's values are millimetres (units)",
+                 "units": units or prev_mrms.get("units"), "units_last_determined": last_determined,
                  "credit": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS)",
                  "read": read, "grid": grid_info,
                  "valid_time": iso(valid_time), "points": len(points), "outfalls": len(outfalls),
