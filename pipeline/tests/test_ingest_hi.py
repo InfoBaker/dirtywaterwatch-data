@@ -362,14 +362,30 @@ def test_state_text_is_in_the_page_shape():
     assert "Brown Water Advisories" in t and "contiguous United States" in t
 
 
+def check_missing_waters(d: dict, national: dict) -> None:
+    """The invariants of research/hi/receiving-waters-missing.json, true both as the state build writes it and after a
+    water batch moves the names it resolves into `resolved` (the file's names change with each batch; these do not)."""
+    held = {HI.key(n) for w in ((national.get("states") or {}).get("HI") or {}).get("waters") or []
+            for n in [w.get("name"), *(w.get("names_seen") or [])] if n}
+    rows, resolved = d["rows"], d.get("resolved") or []
+    assert d["state"] == "HI" and d["waters"] == len(rows)
+    assert not [r["name"] for r in rows if HI.key(r["name"]) in held]            # the national list's names left out
+    keys = [(r["name"], r["island"]) for r in rows]
+    assert len(keys) == len(set(keys))                                        # one row per name and island
+    for r in rows:
+        assert r["island"] in {v[0] for v in HI.ISLANDS.values()} and r["place"] == f"{r['name']}, {r['island']}"
+        assert r["slug_hint"] == f"{HI.key(r['name']).replace(' ', '-')}-{r['island'].lower()}-hi"
+        assert r["towns"] and "county seat" not in r["towns_basis"]
+    # a name two islands share keeps a row or a resolved entry on each island; never resolved across islands
+    seen = set(keys) | {(r["name"], r.get("island")) for r in resolved}
+    for s in d["same_name_on_islands"]:
+        assert {(s["name"], isl) for isl in s["islands"]} <= seen, s
+    for r in resolved:
+        if r["name"] == "Kailua Bay" and r.get("island") == "Oahu":
+            assert "kailua-bay-hi" not in (r.get("slugs") or [])                 # Kona's bay (final audit P1-1)
+
+
 def test_missing_waters_list_leaves_out_what_the_national_list_holds():
     d = json.loads((ROOT / "research" / "hi" / "receiving-waters-missing.json").read_text())
-    names = {r["name"] for r in d["rows"]}
-    assert d["state"] == "HI" and d["waters"] == len(d["rows"]) and "Hilo Bay" not in names
-    assert {"Kaneohe Bay", "Pearl Harbor", "Ala Wai Canal", "Lake Wilson"} <= names
-    assert {s["name"] for s in d["same_name_on_islands"]} == {"Waimea Bay", "Kailua Bay"}
-    rows = {(r["name"], r["island"]): r for r in d["rows"]}
-    assert {("Waimea Bay", "Oahu"), ("Waimea Bay", "Kauai"), ("Kailua Bay", "Oahu"), ("Kailua Bay", "Hawaii")} <= set(rows)
-    assert rows[("Waimea Bay", "Kauai")]["towns"] == ["Waimea"] and rows[("Waimea Bay", "Oahu")]["towns"][0] == "Pupukea"
-    assert rows[("Waimea Bay", "Kauai")]["slug_hint"] == "waimea-bay-kauai-hi"
-    assert all(r["towns"] and "county seat" not in r["towns_basis"] for r in d["rows"])
+    check_missing_waters(d, json.loads((ROOT / "data" / "receiving-waters-national.json").read_text()))
+    assert {s["name"] for s in d["same_name_on_islands"]} >= {"Waimea Bay", "Kailua Bay"}
