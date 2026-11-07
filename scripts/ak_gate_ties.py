@@ -1,5 +1,6 @@
-"""Alaska's go-live gates (2026-11-07): five plant outfalls tied by EPA's own limit-set names, one borrowed point set
-aside, and the reasons of the untied rows made to say why the NHD step could not place them.
+"""Alaska's go-live gates (2026-11-07): Juneau's four outfalls tied to Gastineau Channel by the permit's text, five plant
+outfalls tied by EPA's own limit-set names, the pipeline's 'CSO' feature held back, one borrowed point set aside, and
+the reasons of the untied rows made to say why the NHD step could not place them.
 
 Usage: pipeline/.venv/bin/python -I scripts/ak_gate_ties.py [--check]
   --check: change nothing; exit 1 when a row is not as this script leaves it (after a cloud ties run or a rebuild of
@@ -22,6 +23,14 @@ network NLDI and EPA's NHDPlus service read, has no data for Alaska, so 79 of th
     Each gets receiving_water_override {water, basis} (so a later `python -m ingest.outfall_waters --state AK` finds
     the same record by name) and the tie fields; the distance was measured on 2026-11-07 from the row's point to the
     outline as openboatlaunch's water page publishes it.
+  - Juneau (TABLE, JUNEAU): permit AK0023213 names Gastineau Channel as the receiving water of the plant (001) and of
+    the outfalls Table I.D.1 lists, the combined sewer outfalls N-11, N11.2 and N-15.1 (002, 003, 004 in EPA's CSO
+    inventory, which gives the same water). They go to the channel's hand record (Census TIGER/Line OID 11050889607,
+    ingest/waters_from_nhd.py HAND, built by a --hand-only run); 004 leaves Douglas Boat Harbor, which the outline
+    rule had given it at 174 m, for the channel the permit names (52 m).
+  - NOT_SEWER: AKG320002, the Trans-Alaska Pipeline's general permit, whose one row in EPA's CSO inventory (08AA, a
+    pump station's tank utilidor at Prudhoe Bay, 'CSO|DEW') is no combined sewer outfall by EPA's own record: listed
+    in data/outfalls-us.json's excluded_not_sewage, so the registry, the rain watch and the counts leave it out.
   - POINT_NOT_USED: AKG570023 (City of Koyuk) has no outfall point in ICIS; its row carried the facility geocode
     (coords_from 'facility'), which lies in Nome (Census place 'Nome city'), 209 km from Koyuk (Census place 'Koyuk
     city', interior point 64.94128, -161.14514). The point is kept as published in echo_lat/echo_lon and not used;
@@ -72,6 +81,37 @@ TABLE = {
         "KUSKOKWIM RIVER' and 'Seasonal discharge from lagoon to Kuskokwim River'; EPA's inventory gives no receiving "
         "water (outfall 001's limit sets name wetlands, and it stays untied)"),
 }
+
+JUNEAU = ("EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the "
+          "City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover "
+          "page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 "
+          "lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas)")
+HAND = "Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon"
+for _o, _d in (("001", 0), ("002", 143), ("003", 80), ("004", 52)):
+    TABLE[("plants" if _o == "001" else "us", "AK0023213", _o)] = (
+        "gastineau-channel-ak", "Gastineau Channel", _d, HAND, "Gastineau Channel",
+        JUNEAU + f"; EPA's {'discharge points' if _o == '001' else 'CSO inventory'} give outfall {_o} the receiving "
+                 f"water 'Gastineau Channel'")
+
+# permits held back from data/outfalls-us.json's combined sewer rows by EPA's own record (the excluded_not_sewage
+# section common.load_outfall_registry reads in every outfall file, as the plants file holds Arizona's and
+# California's): the row stays as EPA lists it and no reader of the registry sees it
+NOT_SEWER = {
+    "AKG320002": {
+        "npdes_permit": "AKG320002", "permittee": "APSC - TRANS-ALASKA PIPELINE SYSTEM", "state": "AK",
+        "city": "NORTH POLE", "sic_codes": ["1382", "4612", "4922"], "naics_codes": ["213112", "486110", "486210"],
+        "external_outfalls": 1, "reason": "not_a_combined_sewer",
+        "why": ("EPA's own record shows a crude-oil pipeline, not a combined sewer system: the CSO inventory's one "
+                "feature of the permit is a pump station's tank utilidor"),
+        "basis": ("ECHO (dfr_rest_services.get_dfr and eff_rest_services.download_effluent_chart for AKG320002, read "
+                  "2026-11-07): facility 'APSC - TRANS-ALASKA PIPELINE SYSTEM', SIC 1382 (Oil and Gas Exploration "
+                  "Services), 4612 (Crude Petroleum Pipelines), 4922 (Natural Gas Transmission), NAICS 213112, 486110, "
+                  "486210; EPA's CSO inventory lists one feature, 08AA 'PS01 TK110/TK110 Utilidors' at Pump Station 1, "
+                  "Prudhoe Bay, status 'CSO|DEW', with no limit or report 2023-2026 (the permit's limits are at pump "
+                  "stations 3 to 6); not a combined sewer outfall (Alaska final audit 2026-11-07)"),
+    },
+}
+
 
 # (file, permit, outfall): (EPA's receiving-water text, why the point is not the outfall's)
 POINT_NOT_USED = {
@@ -151,6 +191,13 @@ def apply(docs: dict, wat: dict) -> list[str]:
             missing.append("/".join(key[1:]))
             continue
         set_point_aside(o, entry)
+    held = docs["us"].setdefault("excluded_not_sewage", [])
+    for p, entry in NOT_SEWER.items():
+        if not any(o.get("npdes_permit") == p for o in docs["us"]["outfalls"]):
+            missing.append(f"{p} (excluded_not_sewage)")
+            continue
+        held[:] = [x for x in held if x.get("npdes_permit") != p] + [entry]
+    held.sort(key=lambda x: x["npdes_permit"])
     for d in docs.values():
         for o in d["outfalls"]:
             reword(o)
@@ -183,7 +230,7 @@ def main(argv=None) -> int:
                 tmp.write_text(new)
                 tmp.replace(path)
         print(f"data/{n}: {'written' if path.read_text() != old else 'unchanged'}")
-    print(f"{len(TABLE)} rows tied, {len(POINT_NOT_USED)} row's point set aside")
+    print(f"{len(TABLE)} rows tied, {len(POINT_NOT_USED)} row's point set aside, {len(NOT_SEWER)} permit held back")
     return 0
 
 

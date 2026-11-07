@@ -2778,6 +2778,20 @@ HAND: list[dict] = [
               "stretch from Fremont to the locks, 3.9 km west; this record is the Census TIGER/Line area water "
               "polygon there (the Census names it 'Lake Washington Cnl'), which the USGS NHD high-resolution area "
               "Montlake Cut (GNIS 1534602) covers.")),
+    # Alaska's go-live gates (2026-11-07, final audit docs/checklists/2026-11-07-ak-final.md in the site repository):
+    # Juneau's permit names Gastineau Channel for every outfall; neither openboatlaunch nor NHDPlus V2.1 (no Alaska data)
+    # holds it, and the NHD high-resolution services carry no named polygon for it
+    dict(name="Gastineau Channel", state="AK", kind="bay", source="census", service="tiger",
+         oids=["11050889607"],
+         near=(-134.406599, 58.299956),
+         why=("EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas Wastewater Treatment Plant, effective "
+              "2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the "
+              "Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau "
+              "Channel' (Part I), whose Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); "
+              "EPA's CSO inventory gives Gastineau Channel for outfalls 002, 003 and 004. openboatlaunch has no record "
+              "of the channel and NHDPlus V2.1 no Alaska data; this record is the Census TIGER/Line area water polygon "
+              "the Census names 'Gastineau Chnnl' (MTFCC H2051), which holds the plant's outfall and lies 52 to 143 m "
+              "from the three CSO outfalls' points. The USGS geographic names service gave no feature of the name.")),
     # 2026-11-06 (Illinois's go-live gates, docs/checklists/2026-11-06-il-gates.md in the site repository): NHDPlus V2.1
     # gives the canal's GNIS id to 69 km of flowlines, 26 km of them the South Branch and North Branch of the Chicago
     # River and the North Shore Channel (each a record of its own); the record keeps the canal from its head at the

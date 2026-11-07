@@ -41,9 +41,9 @@ def test_every_open_alaska_outfall_has_a_water_record_or_a_reason():
     from build import status as S
     waters = S.load_waters()
     rows = [r for r in _ak_rows() if not str(r.get("outfall_status") or "").upper().startswith("CLS")]
-    assert len(rows) == 110
+    assert len(rows) == 109         # 110 in EPA's lists less the pipeline's 'CSO' feature (held back)
     tied = [r for r in rows if r.get("water_slug")]
-    assert len(tied) == 35          # 30 by the water batch of 2026-11-07, 5 by scripts/ak_gate_ties.py
+    assert len(tied) == 38          # 29 by the water batch of 2026-11-07 (and 004 moved), 9 by scripts/ak_gate_ties.py
     assert all(r["water_slug"] in waters for r in tied)
     assert all(r.get("no_water_reason") for r in rows if not r.get("water_slug"))
 
@@ -86,7 +86,7 @@ def test_no_untied_alaska_row_says_no_named_nhd_water_is_near():
     untied = [r for r in _ak_rows() if not r.get("water_slug")]
     assert not [r for r in untied if "no named NHD water nearby" in (r.get("water_match") or "")]
     said = Counter("has no data for Alaska" in (r.get("no_water_reason") or "") for r in untied)
-    assert said[True] >= 55
+    assert said[True] >= 50
     for r in untied:
         assert r["water_match"] == "none: " + r["no_water_reason"]
 
@@ -175,3 +175,28 @@ def test_alaskas_monitored_rows_start_with_page_health_only():
     mon = sorted(r["id"] for r in rows if r.get("monitored"))
     assert mon == ["ak-ahab-network", "ak-juneau-douglas-cso-public-notification"]
     assert all(r.get("records") is False and r.get("every_hours") == 24 for r in rows if r.get("monitored"))
+
+
+def test_juneaus_outfalls_go_to_gastineau_channel_by_the_permits_text():
+    """Permit AK0023213 names Gastineau Channel for the plant (001) and the CSO outfalls of Table I.D.1 (N-11, N11.2,
+    N-15.1: 002, 003, 004). 004 leaves Douglas Boat Harbor, which only the outline rule had given it."""
+    from build import status as S
+    w = S.load_waters()["gastineau-channel-ak"]
+    assert w["source"] == "census" and w["hand"] is True and w["tiger_ids"] == ["11050889607"]
+    assert "Table I.D.1" in w["note"] and w["kind"] == "bay"
+    for o in ("001", "002", "003", "004"):
+        r = _row("AK0023213", o)
+        assert r["water_slug"] == "gastineau-channel-ak" and r["receiving_water_echo"] == "Gastineau Channel"
+        assert "to the Gastineau Channel" in r["receiving_water_override"]["basis"]
+        assert r["distance_m"] <= 150 and r["match"] == "geometry+name"
+        assert r["outfall_kind"] == ("plant" if o == "001" else "cso")
+
+
+def test_the_pipelines_cso_feature_is_held_back_by_epas_record():
+    doc = json.loads((DATA / "outfalls-us.json").read_text())
+    held = {x["npdes_permit"]: x for x in doc["excluded_not_sewage"]}
+    assert held["AKG320002"]["reason"] == "not_a_combined_sewer"
+    assert "Crude Petroleum Pipelines" in held["AKG320002"]["basis"]
+    assert any(o["npdes_permit"] == "AKG320002" for o in doc["outfalls"])        # EPA's row kept as listed
+    assert not [r for r in _ak_rows() if r["npdes_permit"] == "AKG320002"]          # no reader sees it
+    assert {r["npdes_permit"] for r in _ak_rows() if r["outfall_kind"] == "cso"} == {"AK0023213"}
