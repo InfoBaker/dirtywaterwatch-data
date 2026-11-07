@@ -1,6 +1,6 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
 Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona), South Dakota,
-Mississippi and Nebraska.
+Mississippi, Nebraska and Alaska.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -309,6 +309,35 @@ Nebraska (permits NE...; research/ne/report.md section 2.2; not live until data/
     kept (the report says a water was reached), but waterbody_text is null, so 'Unknown' is never printed as a water;
     the text stays in raw.receiving_waters and raw.receiving_water_note says why.
 
+Alaska (permits AK...; research/ak/report.md; not live until data/rules.json says so)
+  Alaska's APDES permittees that file electronically report here, and this dataset is the only dated, machine-readable
+  overflow record for the state (the 2026-11-04 all-versions extract: 46 current AK rows from 3 permits, 2023-06-05 to
+  2026-10-26: Anchorage AK0022551 43, Ketchikan AK0021440 2 anticipated pump-station bypasses, Denali National Park
+  AK0053775 1; 44 SSO and 2 bypass; 22 'Basement Backup'; receipt a median 1 day after the start, the anticipated
+  bypasses filed before they began). Juneau's CSO permit (AK0023213) files nothing here. Two Alaska rules, keyed on
+  AK permits only, so the other states' records are unchanged:
+  - Time zone (docs/decisions.md, National expansion item 6): America/Anchorage, labelled in raw.timezone_note.
+    49 CFR 71.12 puts "that part of the Aleutian Islands that is west of 169 degrees 30 minutes west longitude" in the
+    Hawaii-Aleutian zone and 71.11 the rest of Alaska in the Alaska zone, so an event whose own point lies in the
+    Aleutian chain west of that line is read as America/Adak, and the note says so. The chain is taken as two boxes
+    (AK_ALEUTIAN_WEST): longitude -180 to -169.5 with latitude 51 to 54.5 N (the Islands of Four Mountains to the
+    Andreanof Islands), and longitude 172 to 180 E with latitude 51 to 53.5 N (the Rat and Near Islands, Attu and
+    Shemya). Alaska land west of the line but off the chain stays Alaska time: the Pribilof Islands (St. Paul and St.
+    George, 56.5 to 57.3 N) and St. Lawrence Island (63 to 63.8 N). A positive longitude outside the Near Islands box
+    (a sign slip such as 149.9 for -149.9) stays Alaska time. No AK event in the extract lies in the boxes (the
+    westernmost is Denali, -148.9); one AK sewage permit in EPA's plant table does (Shemya Island, AKG573005, 52.72 N
+    174.09 E) and has not filed; St. Paul (AKG527721, 57.12 N -170.26) is Alaska time. An event without a point keeps
+    America/Anchorage.
+  - Receiving-water text: a report naming the water and where it went ('Fish Creek which flowed to Travels to Cook
+    Inlet') is read as both waters ('Fish Creek', 'Cook Inlet'); the text as typed stays in raw.receiving_waters and
+    raw.receiving_water_aliases says what was read (STATE_WATER_SPLIT).
+  - The generic text rule applies unchanged: 'Sewer Overflow out of manhole at Riley Creek Mercantile' (Denali; land
+    impact, no receiving water; the point about 540 m from Riley Creek) is kept as "text names a water (creek)",
+    erring on the side of showing it.
+  Alaska's descriptions carry no addresses or personal names ('SSO', 'FOG and Rags', 'Ruptured 30" Sewer Force
+  main'), and no point is shared by many reports (Ketchikan's two bypasses give the pump station's), so AK is in
+  neither FREE_TEXT_STATES nor REPEATED_POINT_STATES.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -340,13 +369,17 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
-            "NE": "America/Chicago"}
+            "NE": "America/Chicago", "AK": "America/Anchorage"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
+# a state's part in another zone, by the event's own point: [(lon_min, lon_max, lat_min, lat_max)], zone. The Aleutian
+# Islands west of 169 deg 30 min W are Hawaii-Aleutian time (49 CFR 71.12; the rest of Alaska 71.11); module docstring
+AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
+STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
 FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
@@ -475,6 +508,11 @@ def cso_by_structure(ev: dict, outfall: str | None) -> tuple[str, str | None, di
     notes["type_note"] = (f"filed as a combined sewer overflow, but at a {(ev.get('sewer_overflow_structure_type_desc') or 'structure not given').lower()}"
                           ", not at a combined sewer outfall or regulator: shown as a sewer overflow")
     return "sso", outfall, notes
+
+
+# a receiving-water text naming the water and where it went: both are read (module docstring, Alaska)
+STATE_WATER_SPLIT = {"AK": re.compile(r"^(.+?)\s+which\s+flow\w*\s+(?:(?:to|into)\s+)?(?:travel\w*\s+)?"
+                                      r"(?:(?:to|into)\s+)?(.+?)\s*\.?\s*$", re.I)}
 
 
 def no_water(w: str, state: str | None = None) -> bool:
@@ -954,6 +992,24 @@ def naive(ts: str | None) -> str | None:
         return None
 
 
+def event_tz(state: str, lat=None, lon=None) -> str | None:
+    """The zone an event's naive times are read in: the state's (STATE_TZ), or STATE_TZ_WEST's when the event's own
+    point lies in that part of the state (the Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12); None for a
+    state that stays naive."""
+    west = STATE_TZ_WEST.get(state)
+    if west and lat is not None and lon is not None and any(
+            x0 <= lon <= x1 and y0 <= lat <= y1 for x0, x1, y0, y1 in west[0]):
+        return west[1]
+    return STATE_TZ.get(state)
+
+
+def split_water(w: str, state: str) -> list[str]:
+    """A receiving-water text as the waters it names (STATE_WATER_SPLIT; a text it does not fit is one water)."""
+    pat = STATE_WATER_SPLIT.get(state)
+    m = pat.match(w) if pat else None
+    return [m.group(1).strip(), m.group(2).strip()] if m else [w]
+
+
 def zoned(ts: str | None, state: str, tz: str | None = None) -> str | None:
     """A naive time of a STATE_TZ state with its zone's offset ('2026-07-04T19:26:00-05:00'); a date or a time of
     another state as it is. A fall-back hour that happens twice is read as the first (fold 0). tz, when given, is the
@@ -1005,6 +1061,10 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
     lies in one of its counties (or the Mountain part of a split county), else the state's STATE_TZ zone; (None, None)
     for any other state. The basis says which county decided it, or that no point was given; for a split county it
     names the part by the file's central_label ("Fort Pierre corner"; "Central part" when the file gives none)."""
+    if state in STATE_TZ_WEST:   # Alaska: the Aleutian Islands west of 169 deg 30 min W (module docstring, Alaska)
+        tz = event_tz(state, lat, lon)
+        return tz, ("the zone of the event's own point (the Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12)"
+                    if tz != STATE_TZ.get(state) else None)
     if state not in POINT_ZONE_FILES:
         return None, None
     z = zone_shapes(state)
@@ -1171,6 +1231,10 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                 return hit[0] if hit and alias_reaches(hit[2], lat, lon) else w.strip()
             w_aliases = {w: _alias(w) for w in w_names if w.strip() and not no_water(w, state) and _alias(w) != w.strip()}
             real_w = list(dict.fromkeys(_alias(w) for w in real_w))
+        if state in STATE_WATER_SPLIT:   # 'X which flowed to Y' -> X; Y (what was typed stays in raw.receiving_waters)
+            w_aliases = {w: "; ".join(split_water(w.strip(), state)) for w in w_names
+                         if w.strip() and not no_water(w, state) and len(split_water(w.strip(), state)) > 1}
+            real_w = list(dict.fromkeys(x for w in real_w for x in split_water(w, state)))
         dc_state, dc_basis = dc_row_state(lat, lon) if state == "DC" else (None, None)
         if not slugs and real_w:
             for w in real_w:
