@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1299 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1308 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -33,7 +33,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
-| **all** | **456** | **226** | **367** | **186** | **64** | **1299** |
+| nm | 3 | 0 | 3 | 2 | 1 | 9 |
+| **all** | **459** | **226** | **370** | **188** | **65** | **1308** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1448,3 +1449,17 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `az-pima-rwrd` | Pima County Regional Wastewater Reclamation Department (Tucson) overflow information | rejected | search_only | events | No public overflow notices found. |
 | `az-swim-guide` | Swim Guide affiliates in Arizona | rejected | search_only | monitoring | No Arizona affiliate found (search only). |
 | `az-tempe-town-lake` | Tempe Town Lake water quality / E. coli | unreachable | inferred | monitoring | Not reached in the time box; lead from the task prompt only. |
+
+## nm: New Mexico (9)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nm-epa-sobe` | EPA ECHO SOBE (New Mexico permits) | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with New Mexico in its states since 2026-11-07: the only machine-readable record of New Mexico overflow reports, though only the Town of Taos files and the Navajo Nation's Shiprock plant files under its own permit. |
+| `nm-law-20-6-2-1203` | 20.6.2.1203 NMAC Notification of discharge - removal | used | fetched | law | Fetched: oral notice to NMED within 24 hours, written within one week, corrective-action report in 15 days; no public notice. |
+| `nm-nmed-hab-mapper` | NMED Surface Water Quality Bureau HABs Mapper (current HAB advisories) feature service | used | fetched | advisories | Read through the generic ArcGIS ingester (fetch block in its source file): one record per station and sample date under a WATCH, WARNING or DANGER status; the layer's own coordinates; blooms, not sewage. |
+| `nm-abcwua` | Albuquerque Bernalillo County Water Utility Authority overflow notices | watch | search_only | events | No public overflow list found; utility notifies NMED, EPA and Isleta Pueblo case by case per news. |
+| `nm-epa-r6-permits` | EPA Region 6 NPDES permits for New Mexico (standard conditions) | watch | inferred | permits | Permit SSO and public-notice clauses not read in the time box. |
+| `nm-nmed-enforcement-watch` | NMED Enforcement Watch (alleged violations database) | watch | search_only | permits | Violations, not events; NPDES enforcement is EPA's in NM. |
+| `nm-ocd-spills` | NM Oil Conservation Division spills database | rejected | search_only | events | Oil and gas only. |
+| `nm-swim-guide` | Swim Guide affiliates in New Mexico (Rio Grande Waterkeeper?) | rejected | search_only | monitoring | None found (search only). |
+| `nm-rio-grande-bacteria` | Rio Grande (Albuquerque reach) E. coli / bosque bacteria sampling | unreachable | inferred | monitoring | No public program found in the time box (lead from the task prompt). |
