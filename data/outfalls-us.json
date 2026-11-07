@@ -87442,26 +87442,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.32484,
    "lon": -95.94566,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "missouri-river-ne",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 946,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
-   "replaced_match": {
-    "water_slug": "missouri-river-ne",
-    "water_name": "Missouri River",
-    "match": "name_only",
-    "by": "scripts/match_outfalls.py (2026-11-01)",
-    "why": "a name-only match to a water of another name"
-   },
-   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 105 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 946 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
+   "receiving_water_override": {
+    "water": "Missouri River",
+    "basis": "EPA's CSO inventory gives outfall 105 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "NE0133680",
@@ -87479,26 +87475,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.27674,
    "lon": -95.92464,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "missouri-river-ne",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 999,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
-   "replaced_match": {
-    "water_slug": "missouri-river-ne",
-    "water_name": "Missouri River",
-    "match": "name_only",
-    "by": "scripts/match_outfalls.py (2026-11-01)",
-    "why": "a name-only match to a water of another name"
-   },
-   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 106 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 999 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
+   "receiving_water_override": {
+    "water": "Missouri River",
+    "basis": "EPA's CSO inventory gives outfall 106 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "NE0133680",
@@ -87516,28 +87508,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.27685,
    "lon": -95.92526,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "missouri-river-ne",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 1052,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
-   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 107 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 1052 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
    "point_shared_by": 2,
-   "replaced_match": {
-    "water_slug": "missouri-river-ne",
-    "water_name": "Missouri River",
-    "match": "name_only",
-    "by": "scripts/match_outfalls.py (2026-11-01)",
-    "why": "a name-only match to a water of another name"
-   },
-   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
+   "receiving_water_override": {
+    "water": "Missouri River",
+    "basis": "EPA's CSO inventory gives outfall 107 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "NE0133680",
@@ -87555,26 +87543,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.26489,
    "lon": -95.92553,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "missouri-river-ne",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 547,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
-   "replaced_match": {
-    "water_slug": "missouri-river-ne",
-    "water_name": "Missouri River",
-    "match": "name_only",
-    "by": "scripts/match_outfalls.py (2026-11-01)",
-    "why": "a name-only match to a water of another name"
-   },
-   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 108 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 547 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
+   "receiving_water_override": {
+    "water": "Missouri River",
+    "basis": "EPA's CSO inventory gives outfall 108 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "NE0133680",
