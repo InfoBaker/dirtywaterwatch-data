@@ -13,7 +13,12 @@ the water. The text names the Missouri River as the water the channel carries th
 receiving_water_override {water: "Missouri River", basis} (a later `python -m ingest.outfall_waters --state NE` then
 finds the same record by name) and the tie fields, with the distance measured on 2026-11-07 from the row's own point
 to openboatlaunch's Missouri River line as its water page publishes it (a centre line: the river's bank is nearer).
-Nothing here moves a point.
+Outfall 205R (the city's retention treatment basin at 64th and Dupont) has no point in EPA's inventory: its row carries
+the facility's point (coords_from 'facility'), the same point as outfall 107 on the Missouri riverfront, 10.9 km from
+Little Papillion Creek, the water EPA's text names for it. POINT_NOT_USED keeps that point as published in
+echo_lat/echo_lon and leaves lat/lon empty with coords_problem saying why (the way ingest.outfall_waters sets aside a
+point that cannot be the outfall's), so placement, reaches and the rain check do not use it; the row stays tied to
+Little Papillion Creek by EPA's receiving-water text. No point is invented.
 """
 from __future__ import annotations
 
@@ -45,6 +50,31 @@ TABLE = {
 }
 
 
+# (permit, outfall): (slug, EPA's receiving-water text, why the point is not the outfall's)
+POINT_NOT_USED = {
+    ("NE0133680", "205R"): ("little-papillion-creek-ne", "Little Papillion Creek",
+                            "EPA's inventory gives no point for outfall 205R (City of Omaha Retention Treatment Basin, "
+                            "64th and Dupont); the row's point was the facility's, shared with outfall 107 on the "
+                            "Missouri riverfront and 10.9 km from Little Papillion Creek, so it is not this outfall's "
+                            "place and is not used"),
+}
+
+
+def set_point_aside(o: dict, entry: tuple, w: dict) -> None:
+    slug, text, why = entry
+    if o.get("lat") is not None or o.get("lon") is not None:
+        o["echo_lat"], o["echo_lon"] = o.get("lat"), o.get("lon")
+    o["lat"] = o["lon"] = None
+    o["coords_problem"] = why
+    o.update(water_slug=slug, water_name=w.get("name"), water_kind=w.get("kind"), distance_m=None, match="name_only")
+    o["water_match"] = (f"receiving water: EPA's CSO inventory gives outfall {o.get('outfall')} the receiving water "
+                        f"'{text}'; {w.get('name')} ({slug}, NHDPlus V2.1 record), by name; the row has no point of "
+                        f"its own (coords_problem)")
+    o["water_matched_by"] = BY
+    o.pop("no_water_reason", None)
+    o.pop("replaced_match", None)
+
+
 def waters() -> dict:
     from build import status as S
     return S.load_waters()
@@ -72,6 +102,13 @@ def apply(doc: dict, wat: dict) -> list[str]:
             missing.append("/".join(key))
             continue
         tie(o, entry, wat[entry[0]])
+    for key, entry in POINT_NOT_USED.items():
+        o = idx.get(key)
+        if o is None or entry[0] not in wat or o.get("receiving_water_echo") != entry[1] \
+                or o.get("coords_from") != "facility":
+            missing.append("/".join(key))
+            continue
+        set_point_aside(o, entry, wat[entry[0]])
     return missing
 
 
@@ -96,7 +133,7 @@ def main(argv=None) -> int:
         tmp.write_text(new)
         tmp.replace(path)
     print(f"data/{FILE}: {'written' if path.read_text() != old else 'unchanged'}")
-    print(f"{len(TABLE)} rows tied")
+    print(f"{len(TABLE)} rows tied, {len(POINT_NOT_USED)} row's point set aside")
     return 0
 
 

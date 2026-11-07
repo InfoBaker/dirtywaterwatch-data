@@ -1,13 +1,13 @@
 {
- "about": "Receiving-water names in Nebraska's reports (EPA's overflow tables for Nebraska permits, the 2026-11-04 extract, and DWEE's Beach Watch health alerts and E. coli labels, read on 2026-11-07) that data/receiving-waters-national.json does not hold for NE, by name as the report gives it (a segment code and a place after 'at' cut), with the number of reports giving each. Reports that say the discharge reached no water are left out.",
+ "about": "Receiving-water names in Nebraska's reports (EPA's overflow tables for Nebraska permits, the 2026-11-04 extract, and DWEE's Beach Watch health alerts and E. coli labels, read on 2026-11-07) that data/receiving-waters-national.json does not hold for NE, by name as the report gives it (a segment code and a place after 'at' cut), with the number of reports giving each. Reports that say the discharge reached no water are left out. A Beach Watch station on a lake in another state (Lake Yankton, South Dakota: raw.state) is left out; that state's records hold the lake.",
  "state": "NE",
- "waters": 41,
- "reports": 83,
+ "waters": 40,
+ "reports": 82,
  "by_reason": {
-  "not in data/receiving-waters-national.json for NE": 38,
+  "not in data/receiving-waters-national.json for NE": 37,
   "an unnamed or unknown stream: the report names no water": 3
  },
- "named_waters": 38,
+ "named_waters": 37,
  "rows": [
   {
    "name": "Rockford Lake",
@@ -480,20 +480,6 @@
     [
      41.49583,
      -97.35915
-    ]
-   ]
-  },
-  {
-   "name": "Lake Yankton (Cottonwood Lake)",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "ne-dwee-beachwatch"
-   ],
-   "points": [
-    [
-     42.853031,
-     -97.468522
     ]
    ]
   },

@@ -71,3 +71,84 @@ def test_a_row_whose_text_changed_is_not_tied_by_the_table():
     missing = mod.apply(doc, {"missouri-river-ne": {"name": "Missouri River", "kind": "river"}})
     assert "NE0133680/105" in missing
     assert "water_slug" not in doc["outfalls"][0]
+
+
+def test_outfall_205r_keeps_epas_facility_point_aside_and_its_creek_by_the_text():
+    """205R has no point in EPA's inventory: the facility's point it carried is outfall 107's, on the Missouri
+    riverfront, 10.9 km from Little Papillion Creek. Kept as published, not used; tied by EPA's text."""
+    o = _omaha_cso()["205R"]
+    assert o["lat"] is None and o["lon"] is None
+    assert (o["echo_lat"], o["echo_lon"]) == (41.27685, -95.92526) == (_omaha_cso()["107"]["lat"], _omaha_cso()["107"]["lon"])
+    assert o["coords_from"] == "facility" and "not this outfall's place" in o["coords_problem"]
+    assert o["water_slug"] == "little-papillion-creek-ne" and o["receiving_water_echo"] == "Little Papillion Creek"
+    assert o["distance_m"] is None and o["match"] == "name_only"
+    # the rain check and the reaches read no point for it (the other 24 outfalls are read)
+    from ingest import rainfall as RF
+    pts = RF.cso_outfalls(live={"NE"})
+    assert len(pts) == 24 and "205R" not in {p["outfall"] for p in pts}
+
+
+# ---------------------------------------------------------------- Beach Watch: no record on a river
+
+YANKTON = {"OBJECTID": 9001, "StationID": "YAKLKBACT1", "StationName": "Lake Yankton (Cottonwood Lake) at Beach",
+           "Latitude": 42.853031, "Longitude": -97.468522, "SampleYear": "2026", "WeekNumber": "32",
+           "ActivityStartDate": 1786338000000, "EColi": "461", "Microcystin": "", "HealthAlert": "NO",
+           "EColiRisk": "Elevated health risk for E. coli", "HealthDescription": ""}
+
+
+def _beachwatch_with_yankton():
+    from ingest.generic import arcgis, runner
+    _, block = runner.load_source("ne-dwee-beachwatch")
+    doc = json.loads((Path(__file__).parent / "fixtures" / "ne_dwee_beachwatch.json").read_text())
+    doc["features"].append({"attributes": dict(YANKTON)})
+    rows = arcgis.parse(block, json.dumps(doc).encode())
+    return runner.build("ne-dwee-beachwatch", block, rows, "2026-11-07T01:14:00Z", [])[0]
+
+
+def _resolver(live, missouri_near_yankton=True):
+    """The status resolver over the committed water records, with the given states shown; the Missouri River gets a
+    line 319 m south of the Lake Yankton station (as openboatlaunch's outline lies), so a fall-through to the nearest
+    water would find it."""
+    from shapely.geometry import LineString, mapping
+    from build import status as S
+    waters = {k: dict(v) for k, v in S.load_waters().items()}
+    if missouri_near_yankton:
+        waters["missouri-river-ne"]["geometry"] = mapping(LineString([(-97.50, 42.8502), (-97.44, 42.8502)]))
+    S._STATES = set(live)
+    return S, S.Resolver(waters, S.load_registry_outfalls(), {}, {}, None)
+
+
+def test_the_lake_yankton_station_names_its_south_dakota_lake():
+    by = {r["source_record_id"]: r for r in _beachwatch_with_yankton()}
+    y = by["YAKLKBACT1-2026-w32"]
+    assert y["waterbody_text"] == "Lake Yankton" and y["raw"]["waterbody_as_named"] == "Lake Yankton (Cottonwood Lake)"
+    assert y["raw"]["state"] == "SD" and y["raw"]["county"] == "Yankton County" and "lake-yankton-sd" in y["raw"]["state_basis"]
+    assert y["event_type"] == "beach_advisory" and y["raw"]["_agency_label_only"] is True
+    assert all("state" not in r["raw"] for k, r in by.items() if k != "YAKLKBACT1-2026-w32")
+
+
+def test_no_beach_watch_record_places_on_a_river():
+    from build import status as S0
+    keep = S0._STATES
+    try:
+        S, R = _resolver({"NE"})
+        recs = _beachwatch_with_yankton()
+        for r in recs:
+            pl = R.resolve(r)
+            kinds = {R.waters[s].get("kind") for s in pl["water_slugs"]}
+            assert not kinds & S.RIVER_KINDS, (r["source_record_id"], pl)
+        y = R.resolve(next(r for r in recs if r["source_record_id"].startswith("YAKLK")))
+        assert y["water_slugs"] == [] and "Yankton County, SD" in y["unplaced_reason"]
+        # without the guard's state check the point would fall to the Missouri, 319 m away
+        assert R.by_point(42.853031, -97.468522, "NE")[1] == "missouri-river-ne"
+        # once South Dakota is shown, the record lands on its lake
+        S, R = _resolver({"NE", "SD"})
+        assert R.resolve(next(r for r in recs if r["source_record_id"].startswith("YAKLK")))["water_slugs"] == ["lake-yankton-sd"]
+    finally:
+        S0._STATES = keep
+
+
+def test_the_report_names_file_leaves_the_south_dakota_lake_out():
+    d = json.loads((ROOT / "research" / "ne" / "receiving-waters-missing.json").read_text())
+    assert not [r for r in d["rows"] if "yankton" in r["name"].lower()]
+    assert d["waters"] == len(d["rows"]) == 40 and d["named_waters"] == 37 and d["reports"] == sum(r["reports"] for r in d["rows"])
