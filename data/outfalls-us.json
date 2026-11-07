@@ -29,9 +29,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Gastineau Channel' in AK; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Gastineau Channel' in AK; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Gastineau Channel' in AK",
+   "water_match": "none: no record named 'Gastineau Channel' in AK",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "AK0023213",
@@ -59,9 +59,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Gastineau Channel' in AK; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Gastineau Channel' in AK; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Gastineau Channel' in AK",
+   "water_match": "none: no record named 'Gastineau Channel' in AK",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "AK0023213",
@@ -90,7 +90,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 174 m from Douglas Boat Harbor (douglas-boat-harbor-ak), the nearest openboatlaunch water within 400 m; the receiving water ('Gastineau Channel') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "AKG320002",
@@ -118,9 +118,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "no receiving-water text in EPA's inventory; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no receiving-water text in EPA's inventory; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "CA0037664",
