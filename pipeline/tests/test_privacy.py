@@ -382,4 +382,68 @@ def test_no_registry_row_names_a_person_in_epas_permit_name():
             cut += pn.scrub_permit_name(v, r.get("city"), r.get("permittee"))[1]
             alone += (not pu.has_org_word(v)) and pu.person_like(v)
         assert (cut, alone) == (0, 0), f"{path.name}: {cut} rows with a contact person, {alone} with a person alone"
+        # independent of the parser under test (SOL wave 2 P1-4): its own bracket split and private_utilities'
+        # person test; a part that is the row's facility name (words or their abbreviations) is the body's own name
+        assert _bracketed_people(rows, pu) == 0, f"{path.name}: a person's name in or beside brackets"
     assert seen > 20000
+
+
+def _bracketed_people(rows, pu) -> int:
+    import re
+
+    def words(s):
+        return re.findall(r"[a-z0-9]+", (s or "").lower())
+    n = 0
+    for r in rows:
+        v = r.get("permit_name")
+        if not v or not re.search(r"[()\[\]]", v) or not pu.has_org_word(v):
+            continue
+        fac = words(r.get("permittee"))
+        for x in re.split(r"\s*[()\[\]]\s*", v):
+            x = x.strip(" .,;-")
+            if (x and not pu.has_org_word(x) and pu.person_like(x)
+                    and not all(any(f.startswith(w) for f in fac) for w in words(x))):
+                n += 1
+    return n
+
+
+def test_the_independent_bracket_check_sees_a_contact_in_either_order():
+    import private_utilities as pu
+    _permit_names()
+    for v in ("Pat Example (City of Exampleton)", "City of Exampleton (Pat Example)"):
+        assert _bracketed_people([{"permit_name": v, "permittee": "EXAMPLETON WWTF"}], pu) == 1
+    assert _bracketed_people([{"permit_name": "Example Co. (P Example Hill Water Res)",
+                               "permittee": "EXAMPLE COUNTY (P EXAMPLE HILL WATER RESOURCES CENTER)"}], pu) == 0
+
+
+def test_a_bracketed_contact_is_cut_in_either_order():
+    """SOL wave 2 P1-4: '<a person> (City of X)' and 'City of X (<a person>)' passed unchanged."""
+    s = _permit_names().scrub_permit_name
+    for v in ("Pat Example (City of Exampleton)", "City of Exampleton (Pat Example)", "City of Exampleton [Pat Example]",
+              "Pat Example (Exampleton Sewer Authority)", "Example County Water District (Attn Pat Example)"):
+        out, changed = s(v, "Exampleton", "EXAMPLETON WWTF")
+        assert changed and "Pat" not in out and "(" not in out and "[" not in out, v
+    assert s("Pat Example (City of Exampleton)", "Exampleton")[0] == "City of Exampleton"
+    assert s("City of Exampleton (Pat Example) - Example Utilities")[0] == "City of Exampleton - Example Utilities"
+    for keep in ("City of Exampleton (North Plant)", "Example Foods (Plant 2)", "Example County (Sample Hill WRC)"):
+        assert s(keep, "Exampleton", "EXAMPLETON WWTF") == (keep, False), keep
+
+
+def test_a_bracketed_contact_is_cut_through_the_plant_build_and_the_row_scrub():
+    """The plant build keeps a field with a body's word (public_permit_name) and its scrub_rows pass must cut the
+    bracketed contact; the committed registry is rewritten by the same scrub_rows."""
+    import importlib.util
+    root = Path(__file__).resolve().parents[2]
+    pn = _permit_names()
+    spec = importlib.util.spec_from_file_location("bpo_privacy", root / "research" / "federal" / "build_plant_outfalls.py")
+    bpo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bpo)
+    for v in ("Pat Example (City of Exampleton)", "City of Exampleton (Pat Example)"):
+        kept = bpo.public_permit_name(v)
+        assert kept == v                                  # the plant build alone keeps it: a body's word
+        rows = [{"npdes_permit": "ZZ0000001", "permittee": "EXAMPLETON WWTF", "permit_name": kept, "state": "ZZ",
+                 "city": "Exampleton"}]
+        assert pn.scrub_rows(rows) == {"ZZ": 1}
+        assert rows[0]["permit_name"] == "City of Exampleton" and rows[0]["permit_name_scrubbed"] is True
+        assert "Pat" not in json.dumps(rows)
+        assert pn.scrub_rows(rows) == {}

@@ -23,8 +23,8 @@ Record rules
   - A lift ends every open record one of whose waters it names: status advisory_lifted, ended_at the lift release's
     date (day), raw.lifted_by its title, link and date.
   - MDEQ lifts by release, so an advisory stays MDEQ's word until a lift is published. Each run that reads the feed
-    without error and finds no lift for an open record re-confirms it: source_updated_at is that run's fetch time and
-    raw.confirmed_by says so (the status build keeps an advisory red while its source re-confirms it). A failed run
+    without error and finds no lift for an open record re-confirms it: raw._last_seen_in_source is that run's fetch
+    time and raw.confirmed_by says so (source_updated_at stays null: the feed gives no update time) (the status build keeps an advisory red while its source re-confirms it). A failed run
     confirms nothing, so an advisory whose feed stops answering ages out after the status build's 14 days.
   - STANDING: advisories in effect that no release in the feed issued, each cited to the release that says so. One on
     2026-11-07: "the longstanding water contact advisory for the section of the Pearl River from Hanging Moss Creek to
@@ -52,12 +52,14 @@ Record rules
     point ("its confluence with the Pearl River") has no `stretch` and colours its whole water. These fields are
     refreshed on carried records.
 
-Privacy: the feed's dc:creator (an MDEQ staff name) is never read; only titles, links, dates and the release text are.
+Privacy: the feed's dc:creator (an MDEQ staff name) is never read; only titles, links, dates and the release text are,
+and data/raw keeps only those fields of the feed (safe_feed), never the response.
 Run from pipeline/:  python -m ingest.ms_mdeq_water_contact [--file feed.xml [--pages DIR]]
 """
 from __future__ import annotations
 
 import html
+import json
 import re
 import sys
 from datetime import datetime
@@ -248,6 +250,21 @@ def standing_record(s: dict) -> dict:
              "time_basis": "day: the date of the release that says the advisory is in effect"})
 
 
+def poll_times(r: dict) -> None:
+    """A carried record from before 2026-11-07 had each run's fetch time as source_updated_at; the feed gives no
+    update time, so that field is null and the last poll that found no lift is raw._last_seen_in_source."""
+    if r.get("source_updated_at"):
+        prev = r["raw"].get("_last_seen_in_source")
+        r["raw"]["_last_seen_in_source"] = max(x for x in (prev, r["source_updated_at"]) if x)
+        r["source_updated_at"] = None
+
+
+def safe_feed(body: bytes) -> bytes:
+    """What is kept of a fetched feed in data/raw: the fields this module reads (title, link, date) as JSON, never the
+    response itself (its dc:creator is an MDEQ staff name; SOL wave 2 P1-5)."""
+    return json.dumps({"url": FEED, "items": items(body)}, ensure_ascii=False, indent=1).encode()
+
+
 def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     """(records, stats) from the feed, the release pages ({link: html or None}) and the previous records."""
     recs = {r["event_id"]: r for r in prev}
@@ -294,8 +311,9 @@ def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) ->
     for r in recs.values():
         if r["source_record_id"] not in standing:
             water_fields(r)
+        poll_times(r)
         if r["status"] == "advisory_active":
-            r["source_updated_at"] = at
+            r["raw"]["_last_seen_in_source"] = at      # our poll, never the source's time (SOL wave 2 P1-6)
             r["raw"]["confirmed_by"] = (f"MDEQ's news-release feed read at {at}: no release lifting this advisory among "
                                         f"its {len(its)} latest releases")
         r["fetched_at"] = at
@@ -307,7 +325,7 @@ def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) ->
 def fetch() -> tuple[bytes, dict[str, str | None]]:
     r = requests.get(FEED, headers=HEADERS, timeout=60)
     r.raise_for_status()
-    save_raw(SOURCE_ID, r.content, "xml")
+    save_raw(SOURCE_ID, safe_feed(r.content), "json")
     pages = {}
     for it in items(r.content):
         k, waters = kind(it["title"])
