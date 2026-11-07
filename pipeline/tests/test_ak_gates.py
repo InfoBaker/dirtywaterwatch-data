@@ -200,3 +200,49 @@ def test_the_pipelines_cso_feature_is_held_back_by_epas_record():
     assert any(o["npdes_permit"] == "AKG320002" for o in doc["outfalls"])        # EPA's row kept as listed
     assert not [r for r in _ak_rows() if r["npdes_permit"] == "AKG320002"]          # no reader sees it
     assert {r["npdes_permit"] for r in _ak_rows() if r["outfall_kind"] == "cso"} == {"AK0023213"}
+
+
+def _birch_record(lat="61.145893", lon="-149.936183"):
+    from tests import test_ingest_ak as T
+    row, t, waters, impacts = T.AK["28038"]
+    kept, dropped, _ = T._build({"28038": (dict(row, latitude_measure=lat, longitude_measure=lon), t, waters, impacts)})
+    assert len(kept) == 1
+    return next(iter(kept.values()))
+
+
+def test_anchorages_birch_lake_report_is_read_as_the_anchorage_lake():
+    """AK0022551's 'Birch Lake' at its point is the Anchorage lake (Census TIGER 11050902166, 13 m): the alias, within
+    3.5 km of the polygon; what was filed stays in raw.receiving_waters."""
+    r = _birch_record()
+    assert r["waterbody_text"] == "Birch Lake (Anchorage)"
+    assert r["raw"]["receiving_water_aliases"] == {"Birch Lake": "Birch Lake (Anchorage)"}
+    far = _birch_record("64.3166", "-146.6600")              # a point at the Delta Junction lake: read as typed
+    assert far["waterbody_text"] == "Birch Lake"
+
+
+def test_the_birch_lake_report_places_on_the_anchorage_record_never_on_delta_junctions(monkeypatch, tmp_path):
+    from build import status as S
+    waters = S.load_waters()
+    rec = waters["birch-lake-anchorage-ak"]
+    assert rec["source"] == "census" and rec["tiger_ids"] == ["11050902166"] and rec["hand"] is True
+    assert "Birch Lake (Anchorage)" in rec["aliases"] and "birch-lake-ak" in waters
+    # with no openboatlaunch outlines on hand (the guard cannot measure birch-lake-ak), and with them
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path)
+    monkeypatch.setattr(S, "_STATES", S.derive_states(waters, S.load_rules()) | {"AK"})
+    S._GEOM_CACHE.clear()
+    live = S.live_waters(waters, S._STATES)
+    R = S.Resolver(live, S.load_registry_outfalls(), S.load_discharger_towns(), S.load_discharger_waters(),
+                   S.load_rules().get("placement") or {})
+    out = R.resolve(_birch_record())
+    S._GEOM_CACHE.clear()
+    assert out["water_slugs"] == ["birch-lake-anchorage-ak"]
+    assert "birch-lake-ak" not in (out.get("water_slugs") or [])
+
+
+def test_alaskas_names_file_does_not_mark_birch_lake_as_delta_junctions():
+    d = json.loads((ROOT / "research" / "ak" / "receiving-waters-missing.json").read_text())
+    assert not [r for r in d.get("resolved") or [] if "birch-lake-ak" in (r.get("slugs") or [])]
+    assert [r for r in d["rows"] if r["name"] == "Birch Lake"]
+    nhd = json.loads((DATA / "waters-nhd.json").read_text())
+    t = [x for x in nhd["targets"] if x.get("state") == "AK" and x.get("name") == "Birch Lake"]
+    assert t and all(x["slugs"] == ["birch-lake-anchorage-ak"] for x in t)

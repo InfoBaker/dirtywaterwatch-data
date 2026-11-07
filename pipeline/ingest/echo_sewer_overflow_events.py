@@ -419,7 +419,8 @@ FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
-# Mississippi. Each NHD flowline of the name runs within about 3 km of the reports' points (GNIS id after the name).
+# Mississippi (and Alaska's Birch Lake, a Census record's alias). Each NHD flowline of the name runs within about 3 km
+# of the reports' points (GNIS id after the name).
 STATE_WATER_ALIASES = {"MS": {
     # (permit, _alias_key(text)): (NHD name, GNIS id, the NHD flowlines' bbox [lon0, lat0, lon1, lat1])
     ("MS0024295", "eubanks"): ("Eubanks Creek", "00669816", (-90.2099, 32.3221, -90.1528, 32.3590)),
@@ -434,6 +435,11 @@ STATE_WATER_ALIASES = {"MS": {
     ("MS0020117", "oaktibee creek"): ("Okatibbee Creek", "00691590", (-88.8433, 32.1826, -88.7475, 32.6101)),
     ("MS0020117", "okatibbee creed"): ("Okatibbee Creek", "00691590", (-88.8433, 32.1826, -88.7475, 32.6101)),
     ("MS0020117", "sawashee creek"): ("Sowashee Creek", "00678030", (-88.7515, 32.3039, -88.6085, 32.4747)),
+}, "AK": {
+    # Anchorage's Birch Lake (Alaska final audit 2026-11-07): the state's only other record of the name is the lake near
+    # Delta Junction, 505 km away. The name is read as the Anchorage lake's record alias; the bbox is the Census
+    # TIGER/Line polygon 'Birch Lk' (OID 11050902166) the hand record is built from (no GNIS id: Census, not NHD)
+    ("AK0022551", "birch lake"): ("Birch Lake (Anchorage)", None, (-149.9387, 61.1444, -149.9352, 61.1458)),
 }}
 # a shorthand is read as the NHD name only when the report's point lies within this distance of the named lines' bbox
 ALIAS_REACH_KM = 3.5
@@ -1337,8 +1343,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             w_aliases = {w: _alias(w) for w in w_names if w.strip() and not no_water(w, state) and _alias(w) != w.strip()}
             real_w = list(dict.fromkeys(_alias(w) for w in real_w))
         if state in STATE_WATER_SPLIT:   # 'X which flowed to Y' -> X; Y (what was typed stays in raw.receiving_waters)
-            w_aliases = {w: "; ".join(split_water(w.strip(), state)) for w in w_names
-                         if w.strip() and not no_water(w, state) and len(split_water(w.strip(), state)) > 1}
+            w_aliases = {**w_aliases, **{w: "; ".join(split_water(w.strip(), state)) for w in w_names
+                         if w.strip() and not no_water(w, state) and len(split_water(w.strip(), state)) > 1}}
             real_w = list(dict.fromkeys(x for w in real_w for x in split_water(w, state)))
         dc_state, dc_basis = dc_row_state(lat, lon) if state == "DC" else (None, None)
         if not slugs and real_w:
