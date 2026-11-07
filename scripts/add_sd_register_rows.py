@@ -122,6 +122,8 @@ AGENCY = [
               "(sd-friends-big-sioux)"),
      "sources": ["sd-friends-big-sioux"]},
 ]
+# what each CSO permit has filed in EPA's tables (2026-11-04 extract), per permit (review 2026-11-07 P3-1)
+CSO_FILED = {"SD0027481": "three reports in 2026, to Gold Run Creek"}
 OWN_PAGE_NOTES = {
     "sd-sioux-falls": (" Sioux Falls announced its June 2024 flood releases (partially treated, then untreated, to the "
                        "Big Sioux River) at a press conference; no standing overflow page was found."),
@@ -142,7 +144,8 @@ def operator_rows(dis: list[dict], research_ids: set[str]) -> list[dict]:
             continue
         oid, name, permit = op["id"], op["name"], op.get("npdes_permit")
         epa = "EPA Region 8" in (op.get("notification_channel") or "")
-        to = "EPA Region 8 (a permit in Indian country)" if epa else "DANR"
+        to = ("EPA Region 8 (a permit in Indian country, as read from the permit series and EPA's facility type, not "
+              "from the permit text)") if epa else "DANR"
         private = " The permit binds the holder, public or private." if op.get("legal_form") in (
             "investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
             "campground or resort", "private club", "business or industrial", "institution",
@@ -154,7 +157,7 @@ def operator_rows(dis: list[dict], research_ids: set[str]) -> list[dict]:
             noun="Report to the permitting authority", sources=["sd-epa-sobe", "sd-danr-ereporting"],
             note=(f"{name} reports each overflow and bypass to {to} within 24 hours and in writing within 5 days; the "
                   "written report, filed through NeT-SewerOverflow, is published in EPA's overflow tables, read by the "
-                  f"echo-sewer-overflow feed. No public notice is required.{private} (research/sd/report.md §2.1)"))))
+                  f"echo-sewer-overflow feed. No public-notice requirement was found.{private} (research/sd/report.md §2.1)"))))
         if op.get("kind") == "cso":
             rows.append(finish(base(
                 id=f"{oid}-cso-public-notification", operator_id=oid, name=name, permit=permit,
@@ -163,7 +166,7 @@ def operator_rows(dis: list[dict], research_ids: set[str]) -> list[dict]:
                 records=False, noun="CSO public notification", sources=["sd-echo-dmr-cso"],
                 note=(f"No web channel found: {name}'s public notification of combined sewer overflows under its permit; "
                       "the research found no web notice and did not read the permit. Its overflows reach EPA's tables "
-                      "when it files them there (Lead's CSO permit filed three in 2026, to Gold Run Creek). "
+                      f"when it files them there: {CSO_FILED.get(permit, 'no report of this permit in the 2026-11-04 extract')}. "
                       "(research/sd/report.md §2.1, §2.4)"))))
         elif oid in research_ids:
             rows.append(finish(base(
