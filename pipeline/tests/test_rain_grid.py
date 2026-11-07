@@ -177,7 +177,10 @@ def test_grid_samples_a_synthetic_tiff_at_each_point(tile, lzw):
 
 def test_a_real_export_equals_identify_at_the_point():
     """exportImage of conus_QPE_24H valid 2026-11-03T13:00Z over Calais, Maine (LZW tiles as the service writes
-    them), and identify at three points of it at the same time: 3.8, 5.9 and 4.6 in."""
+    them), and identify at three points of it at the same time: 3.8, 5.9 and 4.6, read then as inches. They are
+    millimetres (0.15 to 0.23 in): IEM's MRMS daily rainfall at 45.12, -67.38 is 0.02 in for 2026-11-02 and 0.22 in
+    for 2026-11-03 (mesonet.agron.iastate.edu/iemre/multiday, read 2026-11-07). The service already answered
+    millimetres on 2026-11-03."""
     g = G.Grid((FIXTURES / "mrms-qpe-24h-20261103T13Z.tif").read_bytes())
     box = G.grid_box([(45.10, -67.40), (45.25, -67.20)])
     assert G.check_georef(g, box) == [] and g.compression == 5
@@ -259,10 +262,19 @@ class FakeNOAA:
     """The MRMS ImageServer and api.weather.gov as the run sees them, from rain_at()."""
     IDS = {1: 101, 24: 124, 48: 148, 72: 172}
 
-    def __init__(self, export_fails=False, identify_off=0.0):
+    def __init__(self, export_fails=False, identify_off=0.0, scale=1.0, wet=None, gauges=None):
         self.headers: dict = {}
+        self.gauges = gauges or {}                  # station: [(minutes before VALID, mm in the last hour)]
         self.export_fails, self.identify_off = export_fails, identify_off
+        self.scale, self.wet = scale, wet or {}     # scale 25.4: the service answering millimetres
         self.calls: list[str] = []
+
+    def raw(self, lat, lon, h):
+        """The value the service answers (its unit): rain_at scaled, or a wet point's 24/48/72-hour value."""
+        w = self.wet.get((round(lat, 2), round(lon, 2)))
+        if w is not None and h >= 24:
+            return w
+        return round(rain_at(lat, lon, h) * self.scale, 2)
 
     def get(self, url, params=None, headers=None, timeout=None):
         kind = RF.request_kind(url)
@@ -277,15 +289,22 @@ class FakeNOAA:
             h = {i: h for h, i in self.IDS.items()}[json.loads(params["mosaicRule"])["lockRasterIds"][0]]
             xmin, ymin, xmax, ymax = (float(v) for v in params["bbox"].split(","))
             w, hh = (int(v) for v in params["size"].split(","))
-            return Resp(content=make_tiff(w, hh, xmin, ymax, lambda la, lo: rain_at(la, lo, h), tile=64, lzw=False),
+            return Resp(content=make_tiff(w, hh, xmin, ymax, lambda la, lo: self.raw(la, lo, h), tile=64, lzw=False),
                         ctype="image/tiff")
         if kind == "mrms_identify":
             g = json.loads(params["geometry"])
             lat, lon = g["y"], g["x"]
             names = [G.item_name(h) for h in RF.HOURS]
-            vals = [str(rain_at(lat, lon, h) + (self.identify_off if h == 24 else 0)) for h in RF.HOURS]
+            vals = [str(self.raw(lat, lon, h) + (self.identify_off if h == 24 else 0)) for h in RF.HOURS]
             return Resp(body={"properties": {"Values": vals}, "catalogItems": {"features": [
                 {"attributes": {"name": n, "idp_validendtime": vt}} for n in names]}})
+        if kind == "nws_stations":
+            st = url.split("/stations/")[1].split("/")[0]
+            return Resp(body={"features": [{"properties": {
+                "timestamp": RF.iso(VALID - timedelta(minutes=mins)),
+                "precipitationLastHour": {"unitCode": "wmoUnit:mm", "value": mm},
+                "precipitationLast3Hours": {"unitCode": "wmoUnit:mm", "value": None}}}
+                for mins, mm in self.gauges.get(st, [])]})
         if kind == "nws_points":
             lat, lon = (float(v) for v in url.rsplit("/", 1)[1].split(","))
             return Resp(body={"properties": {"gridId": "BOX", "gridX": round(-lon * 40), "gridY": round(lat * 40)}})
@@ -317,6 +336,7 @@ def world(tmp_path, monkeypatch):
     monkeypatch.setattr(RF, "OUT", tmp_path / "rainfall.json")
     monkeypatch.setattr(RF, "HISTORY", tmp_path / "rainfall-history.json")
     monkeypatch.setattr(RF, "GRIDS", tmp_path / "nws-gridpoints.json")
+    monkeypatch.setattr(RF, "GAUGE_CACHE", tmp_path / "raw" / "nws-gauges" / "observations.json")
     monkeypatch.setattr(RF, "save_raw", lambda *a, **k: None)
     monkeypatch.setattr(RF.time, "sleep", lambda s: None)
     return {"outfalls": outs, "n_ne": n_ne, "tmp": tmp_path}
@@ -461,3 +481,183 @@ def test_coverage_names_the_grid_for_radar_states_and_leaves_new_jersey_as_it_wa
     assert nj["trigger_bases"] == ["operator"] and md["trigger_bases"] == ["state"] and ma["trigger_bases"] == ["operator", "state"]
     assert nj["methods"] == ["site_flag"] and "njcsonotifications.com" in nj["sentence"]
     assert not va["covered"] and va["sentence"].startswith('No "discharge likely" caution here')
+
+
+# ---------------------------------------------------------------- the unit (found 2026-11-07)
+
+def test_the_unit_is_decided_from_the_data_not_the_service_description():
+    mm = RF.decide_units({24: 118.7, 1: 20.0})
+    assert mm["units_read"] == "mm" and mm["basis"] == "physical_bound" and mm["factor"] == 25.4
+    assert mm["evidence"]["box_max"] == {"h24": 118.7} and mm["evidence"]["bound_in"] == {"h24": 30.0}
+    assert RF.decide_units({24: 20.0, 72: 46.0})["units_read"] == "mm"               # the 72-hour bound
+    dry = RF.decide_units({24: 20.0, 72: 44.0})                                        # the bound cannot tell
+    assert dry["units_read"] == "in" and dry["basis"] == "service_description" and dry["factor"] == 1.0
+    kept = RF.decide_units({24: 2.0}, last={"units_read": "mm", "basis": "physical_bound", "determined_at": "x"})
+    assert kept["units_read"] == "mm" and kept["basis"] == "last_determined" and kept["factor"] == 25.4
+    assert RF.to_inches(51.3, 25.4) == 2.02 and RF.to_inches(None, 25.4) is None
+
+
+def test_a_grid_in_millimetres_is_read_as_inches_and_the_unit_is_kept_for_a_dry_hour(world):
+    steady(world)
+    wet = {(42.0, -75.0): 51.3}                      # Bucklin Point on 2026-11-07: 51.3 (mm) in 24 hours
+    out = RF.run(now=NOW, session=FakeNOAA(scale=25.4, wet=wet))
+    m = out["mrms"]
+    assert m["read"] == "grid" and m["grid"]["check"]["result"] == "agrees"           # identify in the same unit
+    assert m["grid"]["check"]["identify_h24_as_read"] == 51.3 and m["grid"]["check"]["identify_h24"] == 2.02
+    u = m["units"]
+    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and u["evidence"]["box_max"]["h24"] >= 51.3
+    assert m["units_last_determined"]["units_read"] == "mm"
+    p = out["points"]["42.00,-75.00"]["mrms"]
+    assert p["h24"] == 2.02 and p["units_read"] == "mm"
+    for k, pt in out["points"].items():
+        if k != "42.00,-75.00":
+            assert abs(pt["mrms"]["h24"] - rain_at(pt["lat"], pt["lon"])) <= 0.01
+    assert max(r["h24"] for r in out["permits"].values()) == 2.02
+    hist = json.loads((world["tmp"] / "rainfall-history.json").read_text())
+    assert max(a[-1] for a in hist["permits"].values()) == 2.02
+    # the next hour is dry (nothing over the bound): the unit last determined, millimetres, still applies
+    later = NOW + H
+    out2 = RF.run(now=later, session=FakeNOAA(scale=25.4), force=True)
+    assert out2["mrms"]["units"]["basis"] == "last_determined" and out2["mrms"]["units"]["units_read"] == "mm"
+    assert all(abs(pt["mrms"]["h24"] - rain_at(pt["lat"], pt["lon"])) <= 0.01 for pt in out2["points"].values())
+
+
+def test_the_per_point_fallback_decides_the_unit_from_its_answers(world):
+    steady(world)
+    out = RF.run(now=NOW, session=FakeNOAA(export_fails=True, scale=25.4, wet={(42.0, -75.0): 51.3}))
+    assert out["mrms"]["read"] == "point" and out["mrms"]["units"]["units_read"] == "mm"
+    p = out["points"]["42.00,-75.00"]["mrms"]
+    assert p["h24"] == 2.02 and p["h72"] == 2.02 and p["units_read"] == "mm"
+
+
+def test_a_reading_from_before_the_unit_check_is_not_kept(world):
+    steady(world)
+    prev = json.loads((world["tmp"] / "rainfall.json").read_text())
+    prev["points"] = {"42.00,-75.00": {"mrms": {"h24": 51.3, "valid_time": RF.iso(VALID),
+                                                "fetched_at": RF.iso(NOW), "read": "grid"}}}
+    (world["tmp"] / "rainfall.json").write_text(json.dumps(prev))
+    out = RF.run(now=NOW, session=FakeNOAA())        # this hour's reading is new, not the unmarked one
+    assert out["points"]["42.00,-75.00"]["mrms"]["h24"] == rain_at(42.0, -75.0)
+    assert out["mrms"]["units"]["basis"] == "service_description"
+
+
+# ---------------------------------------------------------------- the gauge check
+
+def test_gauge_window_and_verdict():
+    obs = [{"t": RF.iso(VALID - timedelta(minutes=69)), "h1": 20.0, "h3": None, "h6": None},   # too early
+           {"t": RF.iso(VALID - timedelta(minutes=9)), "h1": 1.5, "h3": 12.0, "h6": None}]
+    assert RF.gauge_window(obs, VALID) == {"obs_time": RF.iso(VALID - timedelta(minutes=9)), "hours": 3, "gauge_mm": 12.0}
+    assert RF.gauge_window(obs[:1], VALID) is None
+    assert RF.gauge_window([{"t": RF.iso(VALID), "h1": 1.9, "h3": None, "h6": None}], VALID) is None   # under 2 mm
+    mm = RF.gauge_verdict([{"station": "KPVD", "gauge_mm": 12.0, "mrms_as_read": 15.8}])
+    assert mm["verdict"] == "mm" and mm["ratio"] == 1.317
+    inch = RF.gauge_verdict([{"station": "KPVD", "gauge_mm": 12.0, "mrms_as_read": 0.5}])
+    assert inch["verdict"] == "in"
+    assert RF.gauge_verdict([{"station": "KPVD", "gauge_mm": 12.0, "mrms_as_read": 3.0}])["verdict"] is None
+    assert RF.gauge_verdict([])["verdict"] is None and "skipped" in RF.gauge_verdict([])["text"]
+    assert RF.trim_observations({"features": [{"properties": {
+        "timestamp": "2026-11-07T00:51:00+00:00", "precipitationLastHour": {"unitCode": "wmoUnit:mm", "value": 17.8},
+        "precipitationLast3Hours": {"unitCode": "wmoUnit:in", "value": 1.0}}}]}) == [
+        {"t": "2026-11-07T00:51:00+00:00", "h1": 17.8, "h3": None, "h6": None}]
+
+
+GAUGE_PT = (42.06, -74.97)          # an outfall point: rain_at 0.62 in for 24 hours, 0.15 in for one
+
+
+def test_the_gauge_check_decides_the_unit_when_the_bound_cannot(world, monkeypatch):
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT})
+    fake = FakeNOAA(scale=25.4, gauges={"KTST": [(9, 3.8)]})
+    out = RF.run(now=NOW, session=fake)
+    u = out["mrms"]["units"]
+    h1_mm = round(rain_at(*GAUGE_PT, 1) * 25.4, 2)
+    assert u["units_read"] == "mm" and u["basis"] == "gauge_check" and u["gauge_check"]["ratio"] == round(h1_mm / 3.8, 3)
+    assert u["gauge_check"]["pairs"][0]["hours"] == 1 and u["box_max"]["h24"] < 30          # the bound could not tell
+    assert out["mrms"]["units_last_determined"]["basis"] == "gauge_check"
+    assert abs(out["points"]["42.06,-74.97"]["mrms"]["h24"] - rain_at(*GAUGE_PT)) <= 0.01
+    r = out["requests"]
+    assert r["nws_stations"] == 1 and r["mrms_identify"] == 2          # the check's identify and one gauge's
+    # the same hour again (forced): the gauge answers come from the cache
+    again = RF.run(now=NOW + timedelta(minutes=20), session=FakeNOAA(scale=25.4, gauges={"KTST": [(9, 3.8)]}),
+                   force=True)
+    assert again["requests"]["nws_stations"] == 0 and again["requests"]["mrms_identify"] == 1
+    assert again["mrms"]["units"]["basis"] == "gauge_check"
+    # inches when the service answers inches
+    (world["tmp"] / "raw" / "nws-gauges" / "observations.json").unlink()
+    inch = RF.run(now=NOW, session=FakeNOAA(gauges={"KTST": [(9, 3.8)]}), force=True)
+    assert inch["mrms"]["units"]["units_read"] == "in" and inch["mrms"]["units"]["basis"] == "gauge_check"
+    assert inch["points"]["42.06,-74.97"]["mrms"]["h24"] == rain_at(*GAUGE_PT)
+
+
+def test_a_gauge_reading_inches_cannot_keep_impossible_values(world, monkeypatch):
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT})
+    out = RF.run(now=NOW, session=FakeNOAA(scale=1.0, wet={(42.0, -75.0): 51.3}, gauges={"KTST": [(9, 3.8)]}))
+    u = out["mrms"]["units"]
+    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and "gauge check read inches" in u["conflict"]
+
+
+def test_no_gauge_rain_skips_the_check(world, monkeypatch):
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT, "KFAR": (30.0, -90.0)})
+    out = RF.run(now=NOW, session=FakeNOAA(scale=25.4, gauges={"KTST": [(9, 0.3)]}))
+    g = out["mrms"]["units"]["gauge_check"]
+    assert g["verdict"] is None and g["gauges_in_box"] == ["KTST"] and out["requests"]["mrms_identify"] == 1
+    assert out["mrms"]["units"]["basis"] == "service_description"
+
+
+# ---------------------------------------------------------------- the history's readings from before the check
+
+def test_the_history_is_rescaled_once_hour_by_hour(world, monkeypatch):
+    now = datetime(2026, 11, 7, 3, 10, tzinfo=UTC)
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    n = 7 * 24
+    a, b = [None] * n, [None] * n
+    i = lambda t: int((t - start).total_seconds() // 3600)  # noqa: E731
+    a[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] = 0.5            # before any evidence: the stated inches, kept
+    b[i(datetime(2026, 11, 3, 13, tzinfo=UTC))] = 5.9           # the Calais reading known to be millimetres
+    a[i(datetime(2026, 11, 4, 1, tzinfo=UTC))] = 2.0            # after it: the unit last determined
+    a[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] = 59.1           # the storm: over the bound
+    b[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] = 12.7
+    hist = {"start": RF.iso(start), "permits": {"RI0100072": a, "ME0100013": b}}
+    (world["tmp"] / "rainfall-history.json").write_text(json.dumps(hist))
+    monkeypatch.setattr(sys, "argv", ["rainfall", "--repair-units"])
+    assert RF.main() == 0
+    got = json.loads((world["tmp"] / "rainfall-history.json").read_text())
+    ga, gb = got["permits"]["RI0100072"], got["permits"]["ME0100013"]
+    assert ga[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] == 0.5
+    assert gb[i(datetime(2026, 11, 3, 13, tzinfo=UTC))] == 0.23
+    assert ga[i(datetime(2026, 11, 4, 1, tzinfo=UTC))] == 0.08
+    assert ga[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] == 2.33 and gb[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] == 0.5
+    r = got["units_repair"]
+    assert r["hours_rescaled"] == 3 and r["values_rescaled"] == 4 and r["hours_kept_as_inches"] == 1
+    assert r["largest_before"] == 59.1 and r["largest_after"] == 2.33 and r["first_hour_over_bound"] == "2026-11-07T00:00:00Z"
+    assert r["ranges"][0][0] == "2026-11-03T13:00:00Z" and "2026-11-03T13:00:00Z" in r["evidence"]
+    assert got["units_checked"]["from"]
+    # a second run changes nothing; nor does the next reading, which keeps the record
+    again, rep = RF.repair_history_units(got, now)
+    assert rep["changed"] is False and again["permits"]["RI0100072"] == ga
+    kept = RF.update_history(got, {}, now)
+    assert kept["units_checked"] == got["units_checked"] and kept["units_repair"] == r
+
+
+def test_an_hour_over_the_bound_before_any_evidence_starts_the_millimetres(world):
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    hist = {"start": RF.iso(start), "permits": {"P": [0.4, 31.0, 3.0, None, 2.5]}}
+    got, rep = RF.repair_history_units(hist, start + 5 * H, known={})
+    assert got["permits"]["P"] == [0.4, 1.22, 0.12, None, 0.1] and rep["hours_kept_as_inches"] == 1
+
+
+def test_a_run_repairs_the_history_before_it_adds_its_reading(world):
+    steady(world)
+    path = world["tmp"] / "rainfall-history.json"
+    hist = json.loads(path.read_text())
+    for arr in hist["permits"].values():
+        arr[-30] = 40.0                                   # stored before the check, in millimetres
+    path.write_text(json.dumps(hist))
+    out = RF.run(now=NOW, session=FakeNOAA())
+    got = json.loads(path.read_text())
+    assert out["mrms"]["history_units_repair"]["hours_rescaled"] >= 1 and got["units_checked"]
+    assert all(arr[-30] == 1.57 for arr in got["permits"].values())
+    u = out["mrms"]["units"]                              # the repair's unit is the last one determined
+    assert u["units_read"] == "mm" and u["basis"] == "last_determined" and u["evidence"]["basis"] == "history_repair"
