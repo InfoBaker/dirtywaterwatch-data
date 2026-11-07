@@ -19,7 +19,12 @@ def tables():
 
 
 def built(t=None):
-    return E.build(t or tables(), {"extract_date": "2026-11-04"})
+    """Arizona's records only: the fixture's Shiprock bypass lies in New Mexico, which reads it since 2026-11-07
+    (tests/test_ingest_nm.py)."""
+    kept, dropped, why = E.build(t or tables(), {"extract_date": "2026-11-04"})
+    az = lambda st: st == "AZ"  # noqa: E731
+    return ([r for r in kept if az(r["raw"].get("state") or r["npdes_permit"][:2])],
+            [d for d in dropped if az(d.get("state") or d["permit"][:2])], why)
 
 
 def by_desc(recs, key="raw"):
@@ -177,7 +182,7 @@ def test_other_states_records_do_not_change():
         return t
     for st in ("NH", "GA"):
         t = relabel(tables(), st)
-        with_az = built(copy.deepcopy(t))
+        with_az = E.build(copy.deepcopy(t), {"extract_date": "2026-11-04"})
         import pytest
         mp = pytest.MonkeyPatch()
         for name, val in (("STATES", E.STATES - {"AZ"}), ("STATE_TZ", {k: v for k, v in E.STATE_TZ.items() if k != "AZ"}),
@@ -189,7 +194,7 @@ def test_other_states_records_do_not_change():
                           ("PERMIT_TZ", {}), ("POINT_PLACED_PREFIXES", set())):
             mp.setattr(E, name, val)
         try:
-            without = built(copy.deepcopy(t))
+            without = E.build(copy.deepcopy(t), {"extract_date": "2026-11-04"})
         finally:
             mp.undo()
         strip = lambda recs: json.dumps([{**r, "fetched_at": None} for r in recs], sort_keys=True)  # noqa: E731
@@ -214,5 +219,5 @@ def test_main_reads_a_saved_zip(tmp_path, monkeypatch):
             z.writestr(name, buf.getvalue())
     assert E.main(["--file", str(p)]) == 0
     doc = json.loads((tmp_path / "events" / "echo-sewer-overflow.json").read_text())
-    assert doc["count"] == 15 and "AZ" in doc["meta"]["states"]
+    assert doc["count"] == 16 and "AZ" in doc["meta"]["states"]      # 15 in Arizona, Shiprock's in New Mexico
     assert {r["outcome"]: r for r in doc["meta"]["by_rule"] if r["state"] == "AZ"}

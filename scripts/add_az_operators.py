@@ -277,12 +277,12 @@ def epa_reports() -> tuple[Counter, Counter]:
     allr, kept = Counter(), Counter()
     ev = json.loads(EVENTS.read_text()) if EVENTS.exists() else {}
     for r in ev.get("records", []):
-        if (r.get("npdes_permit") or "")[:2] in ("AZ", "NN"):
+        if (r.get("npdes_permit") or "")[:2] in ("AZ", "NN") and (r.get("raw") or {}).get("state", "AZ") == "AZ":
             kept[r["npdes_permit"]] += 1
             allr[r["npdes_permit"]] += 1
     dr = json.loads(DROPPED.read_text()) if DROPPED.exists() else {}
     for r in dr.get("dropped", []):
-        if (r.get("permit") or "")[:2] in ("AZ", "NN"):
+        if (r.get("permit") or "")[:2] in ("AZ", "NN") and r.get("state", "AZ") == "AZ":   # NN placed in AZ
             allr[r["permit"]] += 1
     return allr, kept
 
