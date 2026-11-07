@@ -59,6 +59,14 @@
 #                  Arizona: echo_sewer_overflow_events (EPA's overflow tables, AZ permits: the statewide record of
 #                  AZPDES overflows and bypasses, with ADEQ's waterbody identifiers named from
 #                  data/reference/az-adeq-wbids.json; scripts/az_adeq_wbids.py refreshes that file by hand)
+#                  South Dakota: echo_sewer_overflow_events (EPA's overflow tables, SD permits: the statewide record,
+#                  the 5-day written reports; times in the zone of the event's point, Mountain or Central, from
+#                  data/reference/sd-mountain-time-counties.json, written by scripts/sd_mountain_time_counties.py),
+#                  sd_danr_hab_advisories (the list of the year's bloom advisories on DANR's HAB page)
+#                  Mississippi: echo_sewer_overflow_events (EPA's overflow tables, MS permits in Central time: the
+#                  statewide record; MDEQ posts none), ms_mdeq_water_contact (MDEQ's news releases: water contact
+#                  advisories issued and lifted, the standing Pearl River advisory) and ms_mdeq_beaches (MDEQ's
+#                  beach layer: advisories, closures and coastal blooms on both flags and MDEQ's start date)
 #                  New Mexico: echo_sewer_overflow_events (EPA's overflow tables, NM permits and the Navajo Nation's
 #                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
 #                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
