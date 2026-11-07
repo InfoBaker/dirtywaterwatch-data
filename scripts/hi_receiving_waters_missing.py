@@ -41,8 +41,9 @@ NEAR = {
     ("Pokai Bay", "Oahu"): ["Waianae"], ("Yokohama Bay", "Oahu"): ["Makaha"], ("Lake Wilson", "Oahu"): ["Wahiawa"],
     **{(n, "Oahu"): ["Urban Honolulu"] for n in (
         "Ala Moana Lagoon", "Ala Wai Boat Harbor", "Ala Wai Canal", "Honolulu Harbor", "Keehi Lagoon", "Kalihi Stream",
-        "Kamanaiki Stream", "Makiki Stream", "Manoa Stream", "Palolo Stream", "Wailupe Stream", "Maunalua Bay",
-        "Kuapa Pond")},
+        "Kamanaiki Stream", "Makiki Stream", "Manoa Stream", "Palolo Stream")},
+    # Aina Haina and Hawaii Kai are in the 2020 Census place East Honolulu (the batch's Maunalua Bay record's town)
+    **{(n, "Oahu"): ["East Honolulu"] for n in ("Wailupe Stream", "Maunalua Bay", "Kuapa Pond")},
     ("Wailua Bay", "Kauai"): ["Wailua", "Kapaa"], ("Hanalei Bay", "Kauai"): ["Hanalei", "Princeville"],
     ("Nawiliwili Bay", "Kauai"): ["Lihue"], ("Anahola Bay", "Kauai"): ["Anahola"],
     ("Kalihiwai Bay", "Kauai"): ["Kilauea"], ("Kukuiula Bay", "Kauai"): ["Poipu", "Koloa"],

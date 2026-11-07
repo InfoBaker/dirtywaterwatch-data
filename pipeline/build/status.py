@@ -933,6 +933,55 @@ def outfall_name_id(row: dict) -> str | None:
     return norm_oid(m.group(1)) if m else None
 
 
+# States whose reports carry an island (raw.island) and no point: a name resolves only to a record on that island
+ISLAND_STATES = {"HI"}
+
+
+def water_island(w: dict) -> str | None:
+    """The island (ingest.hi_doh_cwb_events.ISLANDS key) a Hawaii water record lies on, from its box's centre; None
+    without a box or off every island's box."""
+    from ingest import hi_doh_cwb_events as HI
+    b = w.get("bbox")
+    if not (isinstance(b, (list, tuple)) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b)):
+        return None
+    for k in HI.ISLANDS:
+        if HI.on_island(w, k):
+            return k
+    return None
+
+
+def record_point(slug: str, waters: dict) -> tuple[float, float, str] | None:
+    """(lat, lon, basis) of a point on the water record itself: a point inside its outline or on its line (shapely
+    representative_point), else its box's centre; None without either."""
+    g = water_geometry(slug, waters)
+    if g is not None and not g.is_empty:
+        p = g.representative_point()
+        return round(p.y, 5), round(p.x, 5), "a point on the water record's own outline"
+    b = (waters.get(slug) or {}).get("bbox")
+    if isinstance(b, (list, tuple)) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b):
+        return round((b[1] + b[3]) / 2, 5), round((b[0] + b[2]) / 2, 5), "the centre of the water record's box"
+    return None
+
+
+RECORD_POINT_WHY = ("the report gives no point: the marker is on the water it names, at a point of that water's record, "
+                    "not where the discharge or advisory was")
+
+
+def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]:
+    """(the slugs on the report's island, why others were set aside). A report with no island keeps them all."""
+    from ingest import hi_doh_cwb_events as HI
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    isl = HI.key(raw.get("island") or "").replace(" ", "")
+    if isl not in HI.ISLANDS:
+        return list(slugs), None
+    kept = [x for x in slugs if water_island(waters.get(x) or {}) == isl]
+    off = [x for x in slugs if x not in kept]
+    if not off:
+        return kept, None
+    return kept, (f"the record(s) of that name ({', '.join(off)}) do not lie on {HI.ISLANDS[isl][0]}, the report's "
+                  "island (or have no box to show it)")
+
+
 def event_state(ev: dict) -> str | None:
     """The state a report counts under: the record's own two-letter raw.state first (an overflow outside its
     permit's state: DC Water's Potomac Interceptor rows in Montgomery County carry raw.state MD with
@@ -1652,6 +1701,15 @@ class Resolver:
         out, notes, ambiguous = [], [], False
         for n in sorted(names):
             slugs = found[n]
+            if state in ISLAND_STATES:
+                # Hawaii's reports give an island, never a point: a name two islands share ("Kailua Bay" off Oahu and
+                # off Kona) goes only to the record on the report's island (final audit 2026-11-07 P1-1)
+                kept, why = island_slugs(slugs, ev or {}, self.waters)
+                if why:
+                    notes.append(f"'{n}': {why}")
+                slugs = kept
+                if not slugs:
+                    continue
             if len(slugs) == 1:
                 out.append(slugs[0])
                 continue
@@ -3411,6 +3469,30 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     oid_key(ev.get("outfall_id")) if ev.get("outfall_id") else tuple(pl["water_slugs"]))
             if okey not in latest_month or (mark["month"], eid) > (latest_month[okey][2]["month"], latest_month[okey][0]["event_id"]):
                 latest_month[okey] = (ev, list(pl["water_slugs"]), mark)
+        # a report with no point (Hawaii's notices give none) placed on a water that is never filled whole (a stream, river,
+        # bay or sound) and drawn by no traced reach: its marker at a point of that water's record, so it shows in its
+        # colour (final audit 2026-11-07 P2-4); keyed on ISLAND_STATES, every other state unchanged
+        nofill = [x for x in pl["water_slugs"] if waters[x].get("kind") in NO_FILL_KINDS]
+        pick = point_on or ([] if (is_discharge and traced) or not is_discharge else nofill)
+        rp = record_point(pick[0], waters) if (pick and live and not future and ev.get("lat") is None
+                                                and event_state(ev) in ISLAND_STATES) else None
+        if rp:
+            ivs = event_intervals(eff, event_state(ev), now, water={**waters[pick[0]], "slug": pick[0]}, rules=rules)
+            colouring = [iv for iv in ivs if iv["color"] != "grey"]
+            if colouring and any(iv["end"] is None or iv["end"] > h_start for iv in colouring):
+                col, act = status_at(ivs, now)
+                top = max(act, key=lambda iv: RANK[iv["color"]]) if act else None
+                points.append({"event_id": eid, "water_slugs": list(pick), "status": col,
+                               "category": category_of(ev.get("event_type")),
+                               "rule": top["rule"] if top else None, "label": top["label"] if top else None,
+                               "short": short_reason(top, ev) if top else None,
+                               "from": iso(min(iv["start"] for iv in colouring)),
+                               "until": None if any(iv["end"] is None for iv in colouring)
+                               else iso(max(iv["end"] for iv in colouring)),
+                               "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
+                                             for iv in sorted(ivs, key=lambda x: x["start"])],
+                               "_ivs": ivs, "lat": rp[0], "lon": rp[1], "point_basis": rp[2],
+                               "why": RECORD_POINT_WHY})
         # beach, rain and HAB advisories that colour no water: a marker of their own
         if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
                 and ev.get("lat") is not None and ev.get("lon") is not None

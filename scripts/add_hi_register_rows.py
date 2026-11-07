@@ -54,15 +54,53 @@ RULE_URL = "https://health.hawaii.gov/opppd/files/2026/08/chapter-11-62-HAR-effe
 Q_LAW = ("HAR 11-62-06(g) and Appendix B (Responses for Wastewater Spills, Overflows, and Discharges, July 1, 2014), "
          "sections 2.b and 9.a: for a spill into state waters the owner or its agent shall \"immediately notify the "
          "CWB\" and submit a written report within five working days")
-Q_PRESS = ("HAR 11-62 Appendix B, sections 2.c and 7: the owner or its agent \"shall immediately send out a press release "
-           "for spills of a thousand gallons or more and for lesser spills if they present a substantial threat to "
-           "public health\", to the Associated Press, major newspapers and television news stations, the Department's "
-           "Communications Office and the Clean Water Branch")
-Q_SIGNS = ("HAR 11-62 Appendix B, section 2.e: the owner or its agent \"shall immediately post warning signs in the "
-           "area(s) likely to be affected by the spill and where public access is possible\"; the Department assures "
-           "that enough signs are posted and authorizes their removal")
+Q_PRESS = ("HAR 11-62 Appendix B, sections 2.c, 4.c and 7: for a spill into state waters, and for one onto the ground "
+           "where the public has access, the owner or its agent \"shall immediately send out a press release for spills "
+           "of a thousand gallons or more and for lesser spills if they present a substantial threat to public "
+           "health\", to the Associated Press, major newspapers and television news stations, the Department's "
+           "Communications Office and the Clean Water Branch (the Wastewater Branch for a ground spill)")
+Q_SIGNS = ("HAR 11-62 Appendix B, sections 2.e and 4.e: the owner or its agent \"shall immediately post warning signs "
+           "in the area(s) likely to be affected by the spill and where public access is possible\" (a spill into state "
+           "waters), and \"in the vicinity of the spill area\" (a spill onto the ground where the public has access); "
+           "the Department assures that enough signs are posted and authorizes their removal")
+Q_GROUND = ("HAR 11-62 Appendix B, section 4 (spills onto the ground, not into state waters, where the public has or may "
+            "have access): for a spill of a thousand gallons or more the owner or its agent immediately notifies the "
+            "Wastewater Branch on Oahu, or the district environmental health program chief on the other islands, and "
+            "reports in writing under section 9.a; smaller spills go in a quarterly tabulated summary (section 9.b)")
 Q_NPDES = ("HAR 11-55 (water pollution control), the NPDES permits' standard conditions: noncompliance that may "
            "endanger health or the environment is reported to the Department of Health")
+# the operators' own pages, one GET each on 2026-11-07 (final audit P2-7)
+PRESS_NOT_SEARCHED = {"urls": [], "method": None, "monitored": False, "unmonitored_reason": "other",
+                      "note": ("No URL known (not searched): the rule sends the operator's press release to the news "
+                               "media and the Department, not to a web page; whether this operator posts its releases on "
+                               "its own site was not searched.")}
+
+
+def _wall(url: str) -> dict:
+    return {"urls": [], "method": None, "monitored": False, "unmonitored_reason": "bot_wall",
+            "note": (f"The operator's site ({url}) answers 403 to the project's reader (2026-11-07), so whether it posts "
+                     "its spill releases there is not known. The rule sends the release to the news media and the "
+                     "Department.")}
+
+
+PRESS = {
+    "hi-honolulu-env": {"urls": ["https://www.honolulu.gov/env/news/"], "method": "html", "monitored": True,
+                        "unmonitored_reason": None, "every_hours": 24,
+                        "note": ("The Department of Environmental Services posts its spill releases on its news page "
+                                 "(answered 200 on 2026-11-07): \"City crews respond to force main break in Kahala\" "
+                                 "(September 12, 2026, 42,000 gallons; the Department of Health's advisory 2135), sewer "
+                                 "spills near Awa Street (December 23, 2025) and in Aiea (November 14, 2025). Page health "
+                                 "first: records off until a reviewer reads the first snapshots.")},
+    "hi-hawaii-county": _wall("https://www.dem.hawaiicounty.gov/"),
+    "hi-kauai-county": _wall("https://www.kauai.gov/Government/Departments-Agencies/Public-Works/Wastewater-Management"),
+    "hi-maui-county": _wall("https://www.mauicounty.gov/155/Environmental-Management"),
+    "hi-mcbh-kaneohe": _wall("https://www.mcbhawaii.marines.mil/News/"),
+    "hi-hawaii-american-water": _wall("https://www.amwater.com/hiaw/"),
+    "hi-jbphh": {"urls": [], "method": None, "monitored": False, "unmonitored_reason": "other",
+                 "note": ("No URL known (not reached): the base's site (https://jbphh.navy.mil/) did not answer the "
+                          "project's reader on 2026-11-07. The rule sends the release to the news media and the "
+                          "Department.")},
+}
 AGENCY = [
     {"id": "hi-doh-cwb-spill-reports", "agency": AUTHORITY, "name": f"{AUTHORITY} (wastewater spill reports)",
      "channel_kind": "state_alert_page", "urls": [], "method": None, "legal_basis": f"{Q_LAW}; {Q_NPDES}",
@@ -74,6 +112,15 @@ AGENCY = [
               "Department posts an advisory for the waters it judges affected (hi-doh-cwb-advisories). The operator's "
               "own duties to the public are its press release and its warning signs (the operator rows)."),
      "sources": ["hi-har-11-62-app-b", "hi-har-11-55"]},
+    {"id": "hi-doh-wwb-ground-spill-reports", "agency": "Hawaii Department of Health, Wastewater Branch",
+     "name": "Hawaii Department of Health, Wastewater Branch (ground spill reports)", "channel_kind": "state_alert_page",
+     "urls": [], "method": None, "legal_basis": Q_GROUND, "basis_kind": "law", "monitored": False,
+     "unmonitored_reason": "none_found", "publishes": "none", "records": False, "noun": "Report to the state",
+     "note": ("No web form: spills that reach no state water, where the public has access, are reported to the "
+              "Wastewater Branch (or a district office) and, under 1,000 gallons, only in quarterly summaries. Neither "
+              "is published, and such spills get no Clean Water Branch advisory; the operator's press release and "
+              "signs (sections 4.c and 4.e) are the public notice. (HAR 11-62 Appendix B, read 2026-11-07)"),
+     "sources": ["hi-har-11-62-app-b"]},
     {"id": "hi-doh-cwb-advisories", "agency": AUTHORITY, "name": f"{AUTHORITY} (water quality advisories and events)",
      "channel_kind": "feed", "urls": [API], "method": "json", "legal_basis": None, "basis_kind": "voluntary",
      "monitored": False, "unmonitored_reason": "feed_ingested", "feed_source_id": FEED, "publishes": "notices",
@@ -147,12 +194,9 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                   "Department's advisory for the affected waters is, in the list the feed reads (a notice names the "
                   "facility when the Department gives it). (HAR 11-62 Appendix B, read 2026-11-07)"))))
         rows.append(finish(base(
-            id=f"{oid}-press-release", operator_id=oid, name=name, permit=permit, channel_kind="news_page", urls=[],
-            method=None, legal_basis=Q_PRESS, basis_kind="law", monitored=False, unmonitored_reason="other",
-            publishes="notices", records=False, noun="Press release", sources=["hi-har-11-62-app-b"],
-            note=("No URL known (not searched): the rule sends the operator's press release to the news media and the "
-                  "Department, not to a web page; whether this operator posts its releases on its own site was not "
-                  "searched."))))
+            id=f"{oid}-press-release", operator_id=oid, name=name, permit=permit, channel_kind="news_page",
+            legal_basis=Q_PRESS, basis_kind="law", publishes="notices", records=False, noun="Press release",
+            sources=["hi-har-11-62-app-b"], **PRESS.get(oid, PRESS_NOT_SEARCHED))))
         rows.append(finish(base(
             id=f"{oid}-warning-signs", operator_id=oid, name=name, permit=permit, channel_kind="lights_signs_page",
             urls=[], method=None, legal_basis=Q_SIGNS, basis_kind="law", monitored=False, unmonitored_reason="other",
