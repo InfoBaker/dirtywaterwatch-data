@@ -113,7 +113,7 @@ DEFAULT_OSM_BUDGET = 1_200
 NET_BUDGET_MAX = 3_600 + 180
 MODULE_OSM_BUDGET = 180      # ingest.waters_from_nhd's own --osm-budget default (the waters and names steps)
 OBL_KEY = "state/obl-water.tar.gz"
-REGIONAL_FILES = ("outfalls-ne.json", "outfalls-mid-atlantic.json")
+REGIONAL_FILES = ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
 # the states whose water records hold a Great Lake: after a pass that rebuilds the state's records (waters, osm, names)
 # the batch cuts those lakes back to the state's waters (scripts/cut_lakes_to_state_waters.py), before the ties
 GREAT_LAKES_STATES = ("IL", "IN", "MI", "MN", "NY", "OH", "PA", "WI")
@@ -281,7 +281,7 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
             have = read_json(root / "data" / f"waters-{st.lower()}.json")
             if have is not None and not (isinstance(have, dict) and str(have.get("state") or "").upper() == st):
                 raise Refused(f"extract: data/waters-{st.lower()}.json is another file (not {st}'s openboatlaunch "
-                              "extract: data/waters-ne.json is New England's regional records), which the extract "
+                              "extract, e.g. a leftover New England regional file), which the extract "
                               "would overwrite; that state's extract needs another file name first")
             cmds.append(Cmd(s, [py, "-m", "ingest.obl_waters", "--state", st, "--from", water_arg,
                                 "--out", f"../data/waters-{st.lower()}.json"], cwd="pipeline"))
@@ -378,7 +378,7 @@ def obl_check(state: str, root: Path = ROOT) -> tuple[bool, list[str]]:
     lines: list[str] = []
     ext = root / "data" / f"waters-{st.lower()}.json"
     d = read_json(ext)
-    # the file must be this state's extract: data/waters-ne.json is New England's regional records, not Nebraska's
+    # the file must be this state's extract: a regional file under this state's code (New England's was data/waters-ne.json until 2026-11-07) is not Nebraska's
     if not isinstance(d, dict) or not isinstance(d.get("waters"), list) or str(d.get("state") or "").upper() != st:
         if isinstance(d, dict) and str(d.get("state") or "").upper() != st:
             lines.append(f"{st}: data/waters-{st.lower()}.json is not {st}'s openboatlaunch extract (its state is "

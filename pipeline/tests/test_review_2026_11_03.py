@@ -34,7 +34,7 @@ def data_dir(tmp_path):
     """Reference files for the redactor's lexicon, and the owner's blocklist holding the synthetic name."""
     d = tmp_path / "data"
     d.mkdir()
-    (d / "waters-ne.csv").write_text("slug,name,kind,state,towns,launch_count,wikidata\n"
+    (d / "waters-new-england.csv").write_text("slug,name,kind,state,towns,launch_count,wikidata\n"
                                      "test-river-ma,Test River,river,MA,Springfield,1,\n")
     (d / "dischargers.json").write_text(json.dumps([{"name": "Town of Orange WPCA", "towns": ["Orange"]}]))
     (d / "name-allowlist.json").write_text(json.dumps({"names": []}))
@@ -560,14 +560,14 @@ def test_p3_9_the_osm_budget_is_checked_before_each_chunk_of_a_state(monkeypatch
 @pytest.mark.parametrize("note,want", [
     # the registries named in public words (wording scan 2026-11-03), not only without their paths
     ("outfall not stated in the report; shown on every water this permit's outfalls discharge to (2 waters from the 13 "
-     "registry outfalls of CT0100412; data/outfalls-ne.json)",
+     "registry outfalls of CT0100412; data/outfalls-new-england.json)",
      "outfall not stated in the report; shown on every water this permit's outfalls discharge to (2 waters from the 13 "
      "listed outlets of CT0100412)"),
     ("placed by outfall 024 of permit CT0100366 (outfall registry): 024 to Long Island Sound (its water slug, geometry "
-     "match, 0 m); from its per-outfall volume text (no release at 021, 025) (data/outfalls-ne.json)",
+     "match, 0 m); from its per-outfall volume text (no release at 021, 025) (data/outfalls-new-england.json)",
      "placed by outfall 024 of permit CT0100366 (EPA and state outlet records): 024 to Long Island Sound (its water "
      "slug, geometry match, 0 m); from its per-outfall volume text (no release at 021, 025)"),
-    ("water from the outfall registry (data/outfalls-mid-atlantic.json, data/outfalls-ne.json): every listed outfall",
+    ("water from the outfall registry (data/outfalls-mid-atlantic.json, data/outfalls-new-england.json): every listed outfall",
      "water from the outlet list in EPA and state records: every listed outfall"),
     ("the report names no water and the operator lists 2 receiving waters (data/dischargers.json)",
      "the report names no water and the operator lists 2 receiving waters (our list of sewer operators)"),
@@ -585,12 +585,12 @@ def test_p3_7_placement_texts_name_the_registries_in_words_not_paths(note, want)
 
 
 def test_p3_7_the_export_checks_the_records_placement_texts_and_more_files(data_dir):
-    rec = {"placement_note": "from data/outfalls-ne.json", "unplaced_reason": "fixture row",
+    rec = {"placement_note": "from data/outfalls-new-england.json", "unplaced_reason": "fixture row",
            "set_aside": [{"water_slug": "x", "reason": "see research/ma/report.md"}]}
     assert X.note_wording(rec) == ["placement_note", "unplaced_reason", "set_aside"]
     e = ended("p", water_slugs=[])
     r = R.redactor_for([e], data_dir)
-    pl = {"water_slugs": [], "note": "x (data/dischargers.json)", "set_aside": [{"water_slug": "y", "reason": "z (data/outfalls-ne.json)"}]}
+    pl = {"water_slugs": [], "note": "x (data/dischargers.json)", "set_aside": [{"water_slug": "y", "reason": "z (data/outfalls-new-england.json)"}]}
     out = X.public_record(e, pl, r)
     assert out["placement_note"] == "x (our list of sewer operators)" and out["set_aside"][0]["reason"] == "z"
     src = inspect.getsource(X.export)

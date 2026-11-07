@@ -523,7 +523,7 @@ REGISTRY_WORDS = (
 
 
 def public_note(t):
-    """A placement text without repository paths: "(data/outfalls-ne.json)" and "; data/outfalls-ne.json)" after a
+    """A placement text without repository paths: "(data/outfalls-new-england.json)" and "; data/outfalls-new-england.json)" after a
     text that already names the outlet list are dropped, data/dischargers.json reads "our list of sewer operators",
     an outfall file elsewhere "the outlet list in EPA and state records", and any other path goes; the registries
     the pipeline names in words ("outfall registry", "registry outfalls") are named as the public knows them."""

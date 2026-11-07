@@ -60,8 +60,8 @@ Mapping
   published_at = the extract date (ZIP entry date of the events table); source_updated_at = the
   ZIP's HTTP Last-Modified. Volume in gallons; estimate_flag measured for automated/manual
   measurement, estimated for best professional judgement/modeling. Coordinates are the event's own.
-  water_slugs: CSO events via data/outfalls-ne.json (permit + permitted feature), else the
-  receiving-water name against data/waters-ne.csv in the permit's state (bbox tiebreak).
+  water_slugs: CSO events via data/outfalls-new-england.json (permit + permitted feature), else the
+  receiving-water name against data/waters-new-england.csv in the permit's state (bbox tiebreak).
   source_record_id = permit:form_set_id:event_id_ext (stable across report versions).
 
 Failures
@@ -91,7 +91,7 @@ Washington DC (permit DC0021199, DC Water; research/dc/report.md section 2.3)
     in research/dc/events.json) is not downloaded or parsed here; a build that reads it would link the
     versions by parent_event_id.
   - The CSO-typed rows with a feature number (structure 'CSO Outfall') look the outfall up in
-    data/outfalls-ne.json only, which has no DC rows, so they are placed by name or point; DC's outfalls
+    data/outfalls-new-england.json only, which has no DC rows, so they are placed by name or point; DC's outfalls
     are in data/outfalls-mid-atlantic.json (scripts/match_outfalls.py).
 
 Georgia (permits GA...; research/ga/report.md section 2.2; the state is not live until data/rules.json says so)
@@ -487,14 +487,14 @@ class Waters:
         for st in ("ct", "ma", "me", "nh", "ri", "vt"):
             for w in (read_json(DATA_DIR / f"waters-{st}.json", {}) or {}).get("waters", []):
                 bbox[w["slug"]] = w.get("bbox")
-        with open(DATA_DIR / "waters-ne.csv", newline="") as f:
+        with open(DATA_DIR / "waters-new-england.csv", newline="") as f:
             for r in csv.DictReader(f):
                 r["bbox"] = bbox.get(r["slug"])
                 self.by_name[(r["state"], self.key(r["name"]))].append(r)
         self.keys: dict[str, list[str]] = defaultdict(list)
         for st, k in self.by_name:
             self.keys[st].append(k)
-        reg = read_json(DATA_DIR / "outfalls-ne.json", {}) or {}
+        reg = read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}
         self.outfalls = {(o["npdes_permit"], str(o["outfall"]).zfill(3)): o for o in reg.get("outfalls", [])}
 
     @staticmethod

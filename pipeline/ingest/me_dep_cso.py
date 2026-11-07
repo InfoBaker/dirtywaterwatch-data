@@ -8,7 +8,7 @@ Sources
      003/005 and Old Town 003/004 closed in 2024-25 but still read ACTIVE); 12 rows have ACTIVE='Y'
      with STATUS='CLOSED'; Milford is ME0001678 in the layer but ME0102695 in DEP's report.
      -> data/build/me-cso-outfalls.json, with a per-permit reconciliation against the report's
-     2025 outfall counts and the water slug from data/outfalls-ne.json where the ECHO inventory has
+     2025 outfall counts and the water slug from data/outfalls-new-england.json where the ECHO inventory has
      the same permit + outfall.
   2. Maine Combined Sewer Overflow Status Report (registry: me-dep-cso-status-report), DEP's
      yearly PDF, the only public discharge record in Maine: per permittee, gallons and event-days
@@ -180,14 +180,14 @@ def fetch_layer() -> tuple[list[dict], str, str | None]:
 
 
 def registry_index() -> dict[tuple[str, str], dict]:
-    reg = read_json(DATA_DIR / "outfalls-ne.json", {}) or {}
+    reg = read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}
     return {(o["npdes_permit"], str(o["outfall"]).zfill(3)): o for o in reg.get("outfalls", [])}
 
 
 def me_waters_by_name() -> dict[str, list[dict]]:
     import csv
     out: dict[str, list[dict]] = defaultdict(list)
-    with open(DATA_DIR / "waters-ne.csv", newline="") as f:
+    with open(DATA_DIR / "waters-new-england.csv", newline="") as f:
         for r in csv.DictReader(f):
             if r["state"] == "ME":
                 out[re.sub(r"[^a-z0-9]+", " ", r["name"].lower()).strip()].append(r)

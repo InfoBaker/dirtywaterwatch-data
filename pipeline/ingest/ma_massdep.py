@@ -28,7 +28,7 @@ Quirks (research/ma/report.md 2.2)
     emails): dropped before anything is saved, raw files included; emails in free text are masked.
   - Coordinates are null on most rows: outfallId is joined to the MassDEP CSOs layer
     (DEP_OUTFL_, cached in data/build/ma-cso-outfalls.json for a day), then to the ECHO outfall
-    registry (data/outfalls-ne.json, permit + outfall number).
+    registry (data/outfalls-new-england.json, permit + outfall number).
   - The advisory text is only in attached .eml/.pdf files whose download returns 500, so
     advice_text is the 314 CMR 16.04(10)(g) required wording unless the record itself carries it.
   - Portal lag: Springfield median 18 h, Holyoke 39 h, Chicopee days; weekend events land Monday.
@@ -79,8 +79,8 @@ CROSSWALK = next((p for p in (ROOT / "data/reference/ma-portal-waterbody-crosswa
                                ROOT / "research/ma/raw/portal/waterbody-crosswalk.csv") if p.exists()),
                  ROOT / "data/reference/ma-portal-waterbody-crosswalk.csv")
 DISCHARGERS = ROOT / "research/ma/dischargers.json"
-WATERS_CSV = DATA_DIR / "waters-ne.csv"
-ECHO_OUTFALLS = DATA_DIR / "outfalls-ne.json"
+WATERS_CSV = DATA_DIR / "waters-new-england.csv"
+ECHO_OUTFALLS = DATA_DIR / "outfalls-new-england.json"
 
 ADVICE_314 = ("Avoid contact with these water bodies for 48 hours after the discharge or overflow "
               "ceases due to increased health risks from bacteria and other pollutants. See website "
@@ -380,7 +380,7 @@ def resolve_water(texts: list[tuple[str, str]], town: str | None, echo_rec: dict
         words = {w for t in texts for w in norm_name(t[1]).split() if len(w) > 3 and w not in ("RIVER", "BROOK", "HARBOR", "CHANNEL")}
         name_ok = bool(words & set(norm_name(echo_rec.get("water_name")).split()))
         if em in ("geometry+name", "name_only") or (em == "geometry" and name_ok):
-            note.update({"via": "ECHO outfall registry (data/outfalls-ne.json)", "echo_match": em,
+            note.update({"via": "ECHO outfall registry (data/outfalls-new-england.json)", "echo_match": em,
                          "distance_m": echo_rec.get("distance_m")})
             return [echo_rec["water_slug"]], "outfall_registry", note
         note["echo_candidate"] = {"slug": echo_rec["water_slug"], "match": em, "why_not": "geometry only, name differs"}
