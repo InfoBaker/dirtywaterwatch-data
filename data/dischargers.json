@@ -223461,5 +223461,2719 @@
   "source_areas": [
    "il"
   ]
+ },
+ {
+  "id": "az-adcrr-eyman",
+  "name": "Arizona Department of Corrections, Rehabilitation and Reentry (ASPC Eyman, Florence)",
+  "short_name": "ASPC Eyman",
+  "legal_form": "state facility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023485",
+  "npdes_permits": [
+   "AZ0023485"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Florence"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023485. EPA's overflow tables (2026-11-04 extract): 1 report(s), 0 with evidence the discharge reached a water. EPA's facility search names the permit ASP - EYMAN PRISON COMPLEX, Florence (NON-POTW), read 2026-11-07; the plant serves the state prison complex.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-adcrr-eyman",
+   "az-az0023485"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-alpine-sanitary-district",
+  "name": "Alpine Sanitary District",
+  "short_name": "Alpine Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0026174",
+  "npdes_permits": [
+   "AZ0026174"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Alpine"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026174 Alpine Sanitary District - WWTS. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-alpine-sanitary-district"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-american-ranch-domestic-water-improvement-district",
+  "name": "American Ranch Domestic Water Improvement District",
+  "short_name": "American Ranch Domestic Water Improvement District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026522",
+  "npdes_permits": [
+   "AZ0026522"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Prescott"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026522 American Ranch DWID. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA types the facility privately owned, but the permittee it records reads as a public body (American Ranch Dwid): filed as one.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-american-ranch-domestic-water-improvement-district"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-apache-junction-sewer-district",
+  "name": "Apache Junction Sewer District",
+  "short_name": "Apache Junction Sewer District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023931",
+  "npdes_permits": [
+   "AZ0023931",
+   "AZC111230",
+   "AZC115305"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Apache Junction"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023931 Apache Junction Sewer District WWTP; AZC111230 Apache Junction Sewer District WWTP; AZC115305 Apache Junction Sewer District WWTP. The construction coverages (AZC...) at the plants are held by the contractors EPA records: Archer Western Construction Llc, B.F.L. Construction Co. Inc.. EPA's overflow tables (2026-11-04 extract): 9 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-apache-junction-sewer-district",
+   "az-az0023931"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-arizona-city-sanitary-district",
+  "name": "Arizona City Sanitary District",
+  "short_name": "Arizona City Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024244",
+  "npdes_permits": [
+   "AZ0024244"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Arizona City"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024244 Arizona City Sanitary District - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-arizona-city-sanitary-district",
+   "az-az0024244"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-arizona-state-parks",
+  "name": "Arizona State Parks and Trails (Patagonia Lake State Park)",
+  "short_name": "Arizona State Parks and Trails",
+  "legal_form": "state facility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026620",
+  "npdes_permits": [
+   "AZ0026620"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Nogales"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026620 Az State Pks Patagonia Lake. EPA's overflow tables (2026-11-04 extract): 1 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-arizona-state-parks",
+   "az-az0026620"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-az0024902",
+  "name": "The Estates at Pine Canyon - Unit One (permit AZ0024902)",
+  "short_name": "The Estates at Pine Canyon - Unit One (permit AZ0024902)",
+  "legal_form": "facility (permittee not named)",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024902",
+  "npdes_permits": [
+   "AZ0024902"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Flagstaff"
+  ],
+  "notes": "EPA ICIS-NPDES: permit AZ0024902. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA's permittee name reads as an individual's: not named here; the row names the facility.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-az0024902"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-az0025909",
+  "name": "Miami Wastewater Reclamation Facility",
+  "short_name": "Miami Wastewater Reclamation Facility",
+  "legal_form": null,
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025909",
+  "npdes_permits": [
+   "AZ0025909"
+  ],
+  "receiving_waters": [
+   "Miami Wash in Salt River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Miami"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025909 Miami Wastewater Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the plant's name as the permittee; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-az0025909"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-big-park-improvement-district",
+  "name": "Big Park Improvement District",
+  "short_name": "Big Park Improvement District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024082",
+  "npdes_permits": [
+   "AZ0024082"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Sedona"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024082 Big Park Domestic Wastewater Improvement District WWTP. EPA's overflow tables (2026-11-04 extract): 1 report(s), 0 with evidence the discharge reached a water. EPA types the facility privately owned, but the permittee it records is a public body (Big Park Improvement District).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-big-park-improvement-district",
+   "az-az0024082"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-bison-ranch-owners-association",
+  "name": "Bison Ranch Owners Association",
+  "short_name": "Bison Ranch Owners Association",
+  "legal_form": "homeowners' association",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0026697",
+  "npdes_permits": [
+   "AZ0026697"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Overgaard"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026697 Bison Ranch WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Privately owned; permittee as EPA ICIS-NPDES records it: Bison Ranch Owners Assocation, Inc. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-bison-ranch-owners-association"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-black-canyon-ranch-rv-resort",
+  "name": "Black Canyon Ranch RV Resort",
+  "short_name": "Black Canyon Ranch RV Resort",
+  "legal_form": "campground or resort",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024741",
+  "npdes_permits": [
+   "AZ0024741"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Black Canyon City"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024741 Black Canyon Ranch RV Resort WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Privately owned; permittee as EPA ICIS-NPDES records it: Black Canyon Ranch Rv Resort Llc (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-black-canyon-ranch-rv-resort"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-avondale",
+  "name": "City of Avondale",
+  "short_name": "City of Avondale",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023281",
+  "npdes_permits": [
+   "AZ0023281",
+   "AZPT00001"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Avondale"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023281 City of Avondale - WRF; AZPT00001 City of Avondale - WRF. EPA's overflow tables (2026-11-04 extract): 1 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-avondale",
+   "az-az0023281"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-benson",
+  "name": "City of Benson",
+  "short_name": "City of Benson",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026026",
+  "npdes_permits": [
+   "AZ0026026"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Benson"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026026 City of Benson - WWTF. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-benson",
+   "az-az0026026"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-bisbee",
+  "name": "City of Bisbee",
+  "short_name": "City of Bisbee",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026077",
+  "npdes_permits": [
+   "AZ0026077"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Bisbee"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026077 City of Bisbee - San Jose WWTP. EPA's overflow tables (2026-11-04 extract): 2 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-bisbee",
+   "az-az0026077"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-buckeye",
+  "name": "City of Buckeye",
+  "short_name": "City of Buckeye",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024881",
+  "npdes_permits": [
+   "AZ0024881",
+   "AZ0025127",
+   "AZ0025216",
+   "AZ0025313",
+   "AZ0025518",
+   "AZ0025691",
+   "AZ0026913",
+   "AZPT00002"
+  ],
+  "receiving_waters": [
+   "Buckeye Canal",
+   "HASSAYAMPA RIVER IN MIDDLE GILA"
+  ],
+  "water_slugs": [],
+  "outfall_count": 12,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 12 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024881 City of Buckeye - Sundance WRF; AZ0025127 Buckeye, Town of; AZ0025216 Festival Ranch Water Reclamation Facility; AZ0025313 Central Buckeye Wastewater Treatment Plant; AZ0025518 Trillium West WWTP; AZ0025691 Sun Valley South WRP; AZ0026913 Town of Buckeye - Tartesso WRF; AZPT00002 Central Buckeye Wastewater Treatment Plant. EPA's overflow tables (2026-11-04 extract): 22 report(s), 7 with evidence the discharge reached a water. EPA records some of the permits under the Town of Buckeye, the city's earlier form.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-buckeye",
+   "az-az0024881",
+   "az-az0025127",
+   "az-az0025216",
+   "az-az0025313",
+   "az-az0025518",
+   "az-az0025691",
+   "az-az0026913"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-bullhead-city",
+  "name": "City of Bullhead City",
+  "short_name": "City of Bullhead City",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026808",
+  "npdes_permits": [
+   "AZ0026808"
+  ],
+  "receiving_waters": [
+   "Colorado River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Bullhead City"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026808 Section 10 WWTP. EPA's overflow tables (2026-11-04 extract): 7 report(s), 2 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-bullhead-city",
+   "az-az0026808"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-casa-grande",
+  "name": "City of Casa Grande",
+  "short_name": "City of Casa Grande",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025178",
+  "npdes_permits": [
+   "AZ0025178",
+   "AZPT00003"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Casa Grande"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025178 City of Casa Grande - WRF; AZPT00003 City of Casa Grande - WRF. EPA's overflow tables (2026-11-04 extract): 12 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-casa-grande",
+   "az-az0025178"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-cottonwood",
+  "name": "City of Cottonwood",
+  "short_name": "City of Cottonwood",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024716",
+  "npdes_permits": [
+   "AZ0024716"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Cottonwood"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024716 City of Cottonwood - WWTF. EPA's overflow tables (2026-11-04 extract): 15 report(s), 9 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-cottonwood",
+   "az-az0024716"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-el-mirage",
+  "name": "City of El Mirage",
+  "short_name": "City of El Mirage",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023272",
+  "npdes_permits": [
+   "AZ0023272",
+   "AZDM90327"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 11 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "El Mirage"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023272 City of El Mirage - WWTP; AZDM90327 City of El Mirage - WWTP. EPA's overflow tables (2026-11-04 extract): 5 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-el-mirage",
+   "az-az0023272"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-flagstaff",
+  "name": "City of Flagstaff Utilities (Wildcat Hill and Rio de Flag plants)",
+  "short_name": "City of Flagstaff",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020427",
+  "npdes_permits": [
+   "AZ0020427",
+   "AZ0023639",
+   "AZPT00007"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Flagstaff",
+   "Flagstaff Utilities"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020427 City of Flagstaff - Wildcat Hill WWTP; AZ0023639 City of Flagstaff - Rio De Flag Water Reclamation Facility; AZPT00007 City of Flagstaff - Wildcat Hill WWTP. EPA's overflow tables (2026-11-04 extract): 6 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-flagstaff",
+   "az-az0020427",
+   "az-az0023639"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-globe",
+  "name": "City of Globe",
+  "short_name": "City of Globe",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020249",
+  "npdes_permits": [
+   "AZ0020249"
+  ],
+  "receiving_waters": [
+   "Pinal Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Globe"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020249 City of Globe - Pinal Creek WWTP. EPA's overflow tables (2026-11-04 extract): 5 report(s), 2 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-globe",
+   "az-az0020249"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-goodyear",
+  "name": "City of Goodyear (157th Avenue, Corgett Wash and Rainbow Valley plants)",
+  "short_name": "City of Goodyear",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0022357",
+  "npdes_permits": [
+   "AZ0022357",
+   "AZ0023582",
+   "AZ0025135",
+   "AZC105576",
+   "AZC106697",
+   "AZC111558",
+   "AZC111560",
+   "AZDM90319",
+   "AZDM90355",
+   "AZMS92089",
+   "AZMS92107",
+   "AZPT00010"
+  ],
+  "receiving_waters": [
+   "Corgett Wash"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 17 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Goodyear"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0022357 City of Goodyear - 157Th Ave WWTP; AZ0023582 City of Goodyear - Corgett Wash WRF; AZ0025135 City of Goodyear - Rainbow Valley WRF; AZC105576 City of Goodyear - Rainbow Valley WRF; AZC106697 City of Goodyear - Corgett Wash WRF; AZC111558 City of Goodyear - Corgett Wash WRF; AZC111560 City of Goodyear - Rainbow Valley WRF; AZDM90319 City of Goodyear - 157Th Ave WWTP; AZDM90355 City of Goodyear - 157Th Ave WWTP; AZMS92089 City of Goodyear - Corgett Wash WRF; AZMS92107 City of Goodyear - Rainbow Valley WRF; AZPT00010 City of Goodyear - 157Th Ave WWTP. The construction coverages (AZC...) at the plants are held by the contractors EPA records: Felix Construction Company. EPA's overflow tables (2026-11-04 extract): 10 report(s), 4 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-goodyear",
+   "az-az0022357",
+   "az-az0023582",
+   "az-az0025135"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-holbrook",
+  "name": "City of Holbrook",
+  "short_name": "City of Holbrook",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025542",
+  "npdes_permits": [
+   "AZ0025542"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Holbrook"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025542 Painted Mesa Water Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-holbrook",
+   "az-az0025542"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-kingman",
+  "name": "City of Kingman (Hilltop and Downtown plants)",
+  "short_name": "City of Kingman",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025844",
+  "npdes_permits": [
+   "AZ0025844",
+   "AZ0026018"
+  ],
+  "receiving_waters": [
+   "COLORADO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Kingman"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025844 City of Kingman - Hilltop WWTP; AZ0026018 City of Kingman - Downtown WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-kingman",
+   "az-az0025844"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-mesa",
+  "name": "City of Mesa Water Resources (Northwest, Southeast and Greenfield plants)",
+  "short_name": "City of Mesa",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024031",
+  "npdes_permits": [
+   "AZ0024031",
+   "AZ0024627",
+   "AZ0025151",
+   "AZ0025241",
+   "AZPT00005"
+  ],
+  "receiving_waters": [
+   "Salt River",
+   "SALT RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 8 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Gilbert",
+   "Mesa",
+   "Mesa Water Resources"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024031 City of Mesa - Northwest WRP; AZ0024627 Mesa Northwest WRP; AZ0025151 City of Mesa - Southeast Water Reclamation Plant; AZ0025241 City of Mesa - Greenfield Water Reclamation Plant; AZPT00005 City of Mesa - Greenfield Water Reclamation Plant. EPA's overflow tables (2026-11-04 extract): 13 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-mesa",
+   "az-az0024031",
+   "az-az0024627",
+   "az-az0025151",
+   "az-az0025241"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-peoria",
+  "name": "City of Peoria",
+  "short_name": "City of Peoria",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024945",
+  "npdes_permits": [
+   "AZ0024945",
+   "AZ0025119",
+   "AZPT00012"
+  ],
+  "receiving_waters": [
+   "New River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Peoria"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024945 Jomax WRF; AZ0025119 City of Peoria - Butler Drive WRF; AZPT00012 Jomax WRF. EPA's overflow tables (2026-11-04 extract): 9 report(s), 2 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-peoria",
+   "az-az0024945",
+   "az-az0025119"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-phoenix",
+  "name": "City of Phoenix Water Services (91st Avenue, 23rd Avenue and Cave Creek plants)",
+  "short_name": "City of Phoenix",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020524",
+  "npdes_permits": [
+   "AZ0020524",
+   "AZ0020559",
+   "AZ0024465",
+   "AZ0026727",
+   "AZC111068",
+   "AZC111487",
+   "AZC113055",
+   "AZC113158",
+   "AZC113300",
+   "AZPT00006",
+   "AZS000003"
+  ],
+  "receiving_waters": [
+   "Az Canal Diversion Channel",
+   "Salt River",
+   "UNNAMED WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 17 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Phoenix",
+   "Phoenix Water Services"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020524 City of Phoenix - 91St Avenue WWTP; AZ0020559 City of Phoenix - 23Rd Avenue WWTP; AZ0024465 Cave Creek WRP; AZ0026727 City of Phoenix - Cave Creek Water Reclamation Plant; AZC111068 City of Phoenix - 23Rd Avenue WWTP; AZC111487 City of Phoenix - Cave Creek Water Reclamation Plant; AZC113055 City of Phoenix - Cave Creek Water Reclamation Plant; AZC113158 City of Phoenix - 91St Avenue WWTP; AZC113300 City of Phoenix - 23Rd Avenue WWTP; AZPT00006 City of Phoenix - 23Rd Avenue WWTP; AZS000003 City of Phoenix MS4. The construction coverages (AZC...) at the plants are held by the contractors EPA records: Felix Construction Company, Sundt Construction, Inc.. EPA's overflow tables (2026-11-04 extract): 47 report(s), 2 with evidence the discharge reached a water. The 91st Avenue plant is operated by Phoenix for the regional SROG partners.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-phoenix",
+   "az-az0020524",
+   "az-az0020559",
+   "az-az0024465",
+   "az-az0026727",
+   "az-azs000003"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-safford",
+  "name": "City of Safford",
+  "short_name": "City of Safford",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024911",
+  "npdes_permits": [
+   "AZ0024911"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Safford"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024911 City of Safford - Gila Resources WRP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-safford",
+   "az-az0024911"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-show-low",
+  "name": "City of Show Low",
+  "short_name": "City of Show Low",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0023841",
+  "npdes_permits": [
+   "AZ0023841"
+  ],
+  "receiving_waters": [
+   "TELEPHONE LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Show Low"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023841 City of Show Low - Main WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-show-low",
+   "az-az0023841"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-somerton",
+  "name": "City of Somerton",
+  "short_name": "City of Somerton",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026603",
+  "npdes_permits": [
+   "AZ0026603"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Somerton"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026603 City of Somerton - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-somerton",
+   "az-az0026603"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-tempe",
+  "name": "City of Tempe",
+  "short_name": "City of Tempe",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZS000005",
+  "npdes_permits": [
+   "AZS000005"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tempe"
+  ],
+  "notes": "EPA ICIS-NPDES: AZS000005 City of Tempe MS4. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-tempe",
+   "az-azs000005"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-tolleson",
+  "name": "City of Tolleson",
+  "short_name": "City of Tolleson",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020338",
+  "npdes_permits": [
+   "AZ0020338",
+   "AZPT00017"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tolleson"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020338 City of Tolleson - WWTP; AZPT00017 City of Tolleson - WWTP. EPA's overflow tables (2026-11-04 extract): 6 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-tolleson",
+   "az-az0020338"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-tombstone",
+  "name": "City of Tombstone",
+  "short_name": "City of Tombstone",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025577",
+  "npdes_permits": [
+   "AZ0025577"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tombstone"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025577 City of Tombstone - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-tombstone"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-tucson",
+  "name": "City of Tucson",
+  "short_name": "City of Tucson",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026417",
+  "npdes_permits": [
+   "AZ0026417",
+   "AZS000001"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026417 Tucson Airport Remediation Project - Co-Mingled Plume; AZS000001 City of Tucson MS4. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Tucson's sewers are Pima County's. AZ0026417 is Tucson Water's airport groundwater remediation discharge and AZS000001 the city MS4: neither is a sewage permit.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-tucson",
+   "az-az0026417",
+   "az-azs000001"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-willcox",
+  "name": "City of Willcox",
+  "short_name": "City of Willcox",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025771",
+  "npdes_permits": [
+   "AZ0025771"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Willcox"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025771 City of Willcox - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-willcox"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-williams",
+  "name": "City of Williams",
+  "short_name": "City of Williams",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025755",
+  "npdes_permits": [
+   "AZ0025755"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Williams"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025755 City of Williams - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-williams"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-winslow",
+  "name": "City of Winslow",
+  "short_name": "City of Winslow",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023833",
+  "npdes_permits": [
+   "AZ0023833",
+   "AZ0026310"
+  ],
+  "receiving_waters": [
+   "RUBY WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Winslow"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023833 City of Winslow - WWTP; AZ0026310 City of Winslow - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-winslow",
+   "az-az0023833",
+   "az-az0026310"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-city-of-yuma",
+  "name": "City of Yuma",
+  "short_name": "City of Yuma",
+  "legal_form": "city",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020443",
+  "npdes_permits": [
+   "AZ0020443",
+   "AZ0025411",
+   "AZPT00018"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Yuma"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020443 City of Yuma - Figueroa Ave WPCF; AZ0025411 Main Street Water Treatment Plant; AZPT00018 City of Yuma - Figueroa Ave WPCF. EPA's overflow tables (2026-11-04 extract): 17 report(s), 1 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-city-of-yuma",
+   "az-az0020443"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-colorado-river-sewage-system-jv",
+  "name": "Colorado River Sewage System Joint Venture (Parker)",
+  "short_name": "Colorado River Sewage System Joint Venture",
+  "legal_form": "tribal",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0021415",
+  "npdes_permits": [
+   "AZ0021415"
+  ],
+  "receiving_waters": [
+   "COLORADO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Parker"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0021415 Joint Venture WWTF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA's collection-system table types the owner a tribal government; the joint venture serves Parker and the Colorado River Indian Tribes' land.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-colorado-river-sewage-system-jv"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-epcor-water-arizona",
+  "name": "EPCOR Water Arizona",
+  "short_name": "EPCOR Water Arizona",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024139",
+  "npdes_permits": [
+   "AZ0024139",
+   "AZ0025429",
+   "AZ0026204"
+  ],
+  "receiving_waters": [
+   "Queen Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Anthem",
+   "San Tan Valley",
+   "Scottsdale"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024139 Miller Road Treatment Facility; AZ0025429 Anthem Water Campus WWTP; AZ0026204 Pecan Water Reclamation Facility. EPA's overflow tables (2026-11-04 extract): 1 report(s), 1 with evidence the discharge reached a water. EPCOR Water Arizona, a regulated water and wastewater utility company (the candidates file proposed business or industrial from the name). Privately owned; permittee as EPA ICIS-NPDES records it: Epcor Water Arizona Inc. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-epcor-water-arizona",
+   "az-az0026204"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-frito-lay-north-america-casa-grande-plant",
+  "name": "Frito-Lay North America (Casa Grande plant)",
+  "short_name": "Frito-Lay North America (Casa Grande plant)",
+  "legal_form": "business or industrial",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025798",
+  "npdes_permits": [
+   "AZ0025798"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Casa Grande"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025798 Frito-Lay - Casa Grande Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A food plant treating its own wastewater. Privately owned; permittee as EPA ICIS-NPDES records it: Frito-Lay North America Inc (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-frito-lay-north-america-casa-grande-plant"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-global-water-hassayampa-utilities",
+  "name": "Global Water - Hassayampa Utilities",
+  "short_name": "Global Water - Hassayampa Utilities",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025453",
+  "npdes_permits": [
+   "AZ0025453",
+   "AZ0025585",
+   "AZ0026611"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tonopah"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025453 Hassayampa Ranch WRF; AZ0025585 Balterra Water Reclamation Facility; AZ0026611 Hassayampa Campus 2 WRF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A wastewater utility company of the Global Water group. Privately owned; permittee as EPA ICIS-NPDES records it: Global Water - Hassayampa Utilities Company, Inc. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-global-water-hassayampa-utilities"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-global-water-palo-verde-utilities",
+  "name": "Global Water - Palo Verde Utilities",
+  "short_name": "Global Water - Palo Verde Utilities",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025071",
+  "npdes_permits": [
+   "AZ0025071",
+   "AZ0026816"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Maricopa"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025071 Palo Verde Utilities Co - WRF; AZ0026816 Global Water - Picacho Cove Utilities Company, Inc. Wrf#2. EPA's overflow tables (2026-11-04 extract): 11 report(s), 0 with evidence the discharge reached a water. A wastewater utility company of the Global Water group. Privately owned; permittee as EPA ICIS-NPDES records it: Global Water - Palo Verde Utilities Company, Inc. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-global-water-palo-verde-utilities",
+   "az-az0025071"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-grand-canyon-np",
+  "name": "National Park Service, Grand Canyon National Park (South Rim and North Rim plants)",
+  "short_name": "Grand Canyon National Park",
+  "legal_form": "federal facility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0022152",
+  "npdes_permits": [
+   "AZ0022152",
+   "AZ0110426"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Grand Canyon"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0022152 USDOI NPS - Grand Canyon NP - South Rim WWTP; AZ0110426 USDOI NPS - Grand Canyon NP - North Rim WWTP. EPA's overflow tables (2026-11-04 extract): 33 report(s), 2 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-grand-canyon-np",
+   "az-az0022152",
+   "az-az0110426"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-ibwc-nogales",
+  "name": "International Boundary and Water Commission (Nogales International Wastewater Treatment Plant)",
+  "short_name": "International Boundary and Water Commission",
+  "legal_form": "federal facility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025607",
+  "npdes_permits": [
+   "AZ0025607"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Rio Rico"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025607 Nogales International Wastewater Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The plant treats sewage from Nogales, Arizona, and Nogales, Sonora.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-ibwc-nogales",
+   "az-az0025607"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-kings-ranch-unit-2-domestic-wastewater-improvement-district",
+  "name": "Kings Ranch Unit 2 Domestic Wastewater Improvement District",
+  "short_name": "Kings Ranch Unit 2 Domestic Wastewater Improvement District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0023060",
+  "npdes_permits": [
+   "AZ0023060"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Black Canyon City"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023060. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA types the facility privately owned, but the permittee it records is a public body (Kings Ranch Unit 2 Domestic Wastewater Improvement District).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-kings-ranch-unit-2-domestic-wastewater-improvement-district"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-liberty-utilities-litchfield-park",
+  "name": "Liberty Utilities (Litchfield Park)",
+  "short_name": "Liberty Utilities (Litchfield Park)",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025712",
+  "npdes_permits": [
+   "AZ0025712"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Goodyear"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025712 Litchfield Park Service Company - Palm Valley WRF. EPA's overflow tables (2026-11-04 extract): 6 report(s), 2 with evidence the discharge reached a water. A water and sewer utility company of the Liberty Utilities group. Privately owned; permittee as EPA ICIS-NPDES records it: Liberty Utilities - Litchfield Park Water & Sewer - Corp. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-liberty-utilities-litchfield-park",
+   "az-az0025712"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-liberty-utilities-sarival",
+  "name": "Liberty Utilities (Sarival)",
+  "short_name": "Liberty Utilities (Sarival)",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0026425",
+  "npdes_permits": [
+   "AZ0026425"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Goodyear"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026425 Sarival WRF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A utility company of the Liberty Utilities group. Privately owned; permittee as EPA ICIS-NPDES records it: Liberty Utilities - Sub - Corp. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-liberty-utilities-sarival"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-mountain-pass-utility-company-saddlebrooke-ranch",
+  "name": "Mountain Pass Utility Company (SaddleBrooke Ranch)",
+  "short_name": "Mountain Pass Utility Company (SaddleBrooke Ranch)",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024775",
+  "npdes_permits": [
+   "AZ0024775"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024775 Saddlebrooke Ranch Water Reclamation Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A sewer utility company (SaddleBrooke Ranch). Privately owned; permittee as EPA ICIS-NPDES records it: Mountain Pass Utility Company (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-mountain-pass-utility-company-saddlebrooke-ranch"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-navajo-tribal-utility-authority",
+  "name": "Navajo Tribal Utility Authority (Chinle, Kayenta, Tuba City, Window Rock, Ganado and Twin Arrows plants)",
+  "short_name": "Navajo Tribal Utility Authority",
+  "legal_form": "tribal",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "NN0020265",
+  "npdes_permits": [
+   "NN0020265",
+   "NN0020281",
+   "NN0020290",
+   "NN0021555",
+   "NN0022195",
+   "NN0030344"
+  ],
+  "receiving_waters": [
+   "Laguna Wash",
+   "MOENKOPI WASH",
+   "BLACK CREEK",
+   "Pueblo Colorado Wash",
+   "tributary to Padre Canyon"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 6 rows)",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Chinle",
+   "Flagstaff",
+   "Fort Defiance",
+   "Ganado",
+   "Kayenta",
+   "Tuba City"
+  ],
+  "notes": "EPA ICIS-NPDES: NN0020265 Chinle WWTF; NN0020281 Kayenta Wastewater Treatment Lagoon; NN0020290 Tuba City WWTF; NN0021555 Window Rock WWTF; NN0022195 Ganado WWTP; NN0030344 Twin Arrows Navajo Casino Wastewater Treatment Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Navajo Nation permits (NN...) EPA lists in Arizona.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-navajo-tribal-utility-authority",
+   "az-nn0020290",
+   "az-nn0021555"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-nn0021610",
+  "name": "Sewage plant near Cameron (permit NN0021610)",
+  "short_name": "Sewage plant near Cameron (permit NN0021610)",
+  "legal_form": "facility (permittee not named)",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "NN0021610",
+  "npdes_permits": [
+   "NN0021610"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Cameron"
+  ],
+  "notes": "EPA ICIS-NPDES: permit NN0021610. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA's permittee name reads as an individual's: not named here; the row names the facility (EPA's facility name was removed too: the place is given).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-nn0021610"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-northern-gila-county-sanitary-district",
+  "name": "Northern Gila County Sanitary District (Payson)",
+  "short_name": "Northern Gila County Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020117",
+  "npdes_permits": [
+   "AZ0020117"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Payson"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020117 Northern Gila County Sanitary District - American Gulch. EPA's overflow tables (2026-11-04 extract): 6 report(s), 2 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-northern-gila-county-sanitary-district",
+   "az-az0020117"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-oracle-sanitary-district",
+  "name": "Oracle Sanitary District",
+  "short_name": "Oracle Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0020681",
+  "npdes_permits": [
+   "AZ0020681"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Oracle"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020681 Oracle Sanitary District WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-oracle-sanitary-district"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-pima-county",
+  "name": "Pima County (Regional Wastewater Reclamation Department, Tucson area)",
+  "short_name": "Pima County Regional Wastewater Reclamation",
+  "legal_form": "county",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020001",
+  "npdes_permits": [
+   "AZ0020001",
+   "AZ0020923",
+   "AZ0022250",
+   "AZ0024121",
+   "AZ0024937",
+   "AZ0025291",
+   "AZ0026093",
+   "AZ0026107",
+   "AZPT00013",
+   "AZS000002"
+  ],
+  "receiving_waters": [
+   "SANTA CRUZ RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 11 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Mount Lemmon",
+   "Sahuarita",
+   "Tucson"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020001 Pima County - Tres Rios WWRF; AZ0020923 Pima County - Water Reclamatio; AZ0022250 Pima County - WWMD - Mount Lemmon WWTP; AZ0024121 Pima County - WWMD - Avra Valley WWTF; AZ0024937 Pima County - WWMD - Green Valley BNRO - WWTP; AZ0025291 Ed Pastor Kino Environmental Restoration Project; AZ0026093 Shannon Road/El Camino Del Cerro; AZ0026107 Agua Nueva WRF; AZPT00013 Pima County - Tres Rios WWRF; AZS000002 Pima County MS4. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The Regional Wastewater Reclamation Department runs the Tucson area's sewers and plants (Tres Rios, Agua Nueva, Avra Valley, Green Valley, Mount Lemmon). EPA's collection-system table lists its systems, but no overflow or bypass report under any of its permits is in EPA's overflow tables (2026-11-04 extract). AZ0025291 (the Stadium District's Kino environmental restoration project), AZ0026093 (Solid Waste Management) and AZS000002 (the county MS4) are not sewage permits.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-pima-county",
+   "az-az0020001",
+   "az-az0020923",
+   "az-az0024121",
+   "az-az0024937",
+   "az-az0025291",
+   "az-az0026107",
+   "az-azs000002"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-pinetop-lakeside-sanitary-district",
+  "name": "Pinetop-Lakeside Sanitary District",
+  "short_name": "Pinetop-Lakeside Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025437",
+  "npdes_permits": [
+   "AZ0025437"
+  ],
+  "receiving_waters": [
+   "UNNAMED WASH, TRIB TO SHOWLOW CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Lakeside"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025437 Pinetop-Lakeside San Dist. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-pinetop-lakeside-sanitary-district",
+   "az-az0025437"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-pinewood-sanitary-district",
+  "name": "Pinewood Sanitary District",
+  "short_name": "Pinewood Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025879",
+  "npdes_permits": [
+   "AZ0025879"
+  ],
+  "receiving_waters": [
+   "Unnamed Trib to Munds Creek",
+   "Munds Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Munds Park"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025879 Pinewood Sanitary District - Kay S Blackman WWTP. EPA's overflow tables (2026-11-04 extract): 9 report(s), 6 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-pinewood-sanitary-district",
+   "az-az0025879"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-san-carlos-apache-tribe",
+  "name": "San Carlos Apache Tribe (Six Mile lagoon plant)",
+  "short_name": "San Carlos Apache Tribe",
+  "legal_form": "tribal",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024640",
+  "npdes_permits": [
+   "AZ0024640"
+  ],
+  "receiving_waters": [
+   "San Carlos River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Peridot"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024640 Six Mile Lagoon Wastewater Treatment Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-san-carlos-apache-tribe"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-cave-creek",
+  "name": "Town of Cave Creek",
+  "short_name": "Town of Cave Creek",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025828",
+  "npdes_permits": [
+   "AZ0025828"
+  ],
+  "receiving_waters": [
+   "Andorra Wash"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Cave Creek"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025828 Town of Cave Creek - WRF. EPA's overflow tables (2026-11-04 extract): 4 report(s), 4 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-cave-creek",
+   "az-az0025828"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-florence",
+  "name": "Town of Florence (North Florence and South plants)",
+  "short_name": "Town of Florence",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025194",
+  "npdes_permits": [
+   "AZ0025194",
+   "AZ0025208"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Florence"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025194 Town of Florence - North Florence WWTP; AZ0025208 Town of Florence - Wwrf-South Plant. EPA's overflow tables (2026-11-04 extract): 4 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-florence",
+   "az-az0025194",
+   "az-az0025208"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-gila-bend",
+  "name": "Town of Gila Bend",
+  "short_name": "Town of Gila Bend",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020231",
+  "npdes_permits": [
+   "AZ0020231"
+  ],
+  "receiving_waters": [
+   "Sand Tank Wash"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Gila Bend"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020231 Gila Bend - WWTP. EPA's overflow tables (2026-11-04 extract): 2 report(s), 1 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-gila-bend",
+   "az-az0020231"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-jerome",
+  "name": "Town of Jerome",
+  "short_name": "Town of Jerome",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0021804",
+  "npdes_permits": [
+   "AZ0021804"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Jerome"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0021804 Town of Jerome - WWTP. EPA's overflow tables (2026-11-04 extract): 1 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-jerome",
+   "az-az0021804"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-kearny",
+  "name": "Town of Kearny",
+  "short_name": "Town of Kearny",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024449",
+  "npdes_permits": [
+   "AZ0024449"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Kearny"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024449 Town of Kearny Wastewater Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-kearny"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-mammoth",
+  "name": "Town of Mammoth",
+  "short_name": "Town of Mammoth",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025470",
+  "npdes_permits": [
+   "AZ0025470"
+  ],
+  "receiving_waters": [
+   "CAMP GRANT WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Mammoth"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025470 Town of Mammoth. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-mammoth"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-marana",
+  "name": "Town of Marana",
+  "short_name": "Town of Marana",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024520",
+  "npdes_permits": [
+   "AZ0024520",
+   "AZC117008"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Marana"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024520 Town of Marana Water Reclamation Facility; AZC117008 Town of Marana Water Reclamation Facility. The construction coverages (AZC...) at the plants are held by the contractors EPA records: Archer Western Construction Llc. EPA's overflow tables (2026-11-04 extract): 7 report(s), 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-marana",
+   "az-az0024520"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-patagonia",
+  "name": "Town of Patagonia",
+  "short_name": "Town of Patagonia",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025011",
+  "npdes_permits": [
+   "AZ0025011"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Patagonia"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025011 Town of Patagonia - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-patagonia"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-prescott-valley",
+  "name": "Town of Prescott Valley",
+  "short_name": "Town of Prescott Valley",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025381",
+  "npdes_permits": [
+   "AZ0025381"
+  ],
+  "receiving_waters": [
+   "Agua Fria River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Prescott Valley"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025381 Town of Prescott Valley - WWTP. EPA's overflow tables (2026-11-04 extract): 14 report(s), 2 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-prescott-valley",
+   "az-az0025381"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-quartzsite",
+  "name": "Town of Quartzsite",
+  "short_name": "Town of Quartzsite",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023752",
+  "npdes_permits": [
+   "AZ0023752"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Quartzsite"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023752 Town of Quartzsite - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-quartzsite"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-snowflake",
+  "name": "Town of Snowflake",
+  "short_name": "Town of Snowflake",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0026034",
+  "npdes_permits": [
+   "AZ0026034"
+  ],
+  "receiving_waters": [
+   "COTTONWOOD WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Snowflake"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026034 Town of Snowflake - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-snowflake"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-superior",
+  "name": "Town of Superior",
+  "short_name": "Town of Superior",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0021199",
+  "npdes_permits": [
+   "AZ0021199"
+  ],
+  "receiving_waters": [
+   "Queen Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Superior"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0021199 Town of Superior WWTP. EPA's overflow tables (2026-11-04 extract): 1 report(s), 1 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-superior",
+   "az-az0021199"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-wickenburg",
+  "name": "Town of Wickenburg (Wickenburg and Wickenburg Ranch plants)",
+  "short_name": "Town of Wickenburg",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020044",
+  "npdes_permits": [
+   "AZ0020044",
+   "AZ0025976"
+  ],
+  "receiving_waters": [
+   "HASSAYAMPA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Wickenburg"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020044 Wickenburg WWTP; AZ0025976 Wickenburg Ranch WRF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA types the Wickenburg Ranch plant (AZ0025976) privately owned; the permittee it records is the Town.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-wickenburg"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-town-of-winkelman",
+  "name": "Town of Winkelman",
+  "short_name": "Town of Winkelman",
+  "legal_form": "town",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020176",
+  "npdes_permits": [
+   "AZ0020176"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Winkelman"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0020176 Town of Winkelman - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-town-of-winkelman"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-trillium-land-company",
+  "name": "Trillium Land Company",
+  "short_name": "Trillium Land Company",
+  "legal_form": "business or industrial",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0026221",
+  "npdes_permits": [
+   "AZ0026221"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "EPA ICIS-NPDES: AZ0026221 Floreo Water Reclamation Facility - WRF - Interim Phase. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A land developer that holds the plant's interim permit. Privately owned; permittee as EPA ICIS-NPDES records it: Trillium Land Company, Llc (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-trillium-land-company"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-tusayan-sanitary-district",
+  "name": "Tusayan Sanitary District",
+  "short_name": "Tusayan Sanitary District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026719",
+  "npdes_permits": [
+   "AZ0026719"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Grand Canyon"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0026719 Tusayan Sanitary District. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-tusayan-sanitary-district"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-upper-village-of-moenkopi",
+  "name": "Upper Village of Moenkopi (Hopi Tribe)",
+  "short_name": "Upper Village of Moenkopi",
+  "legal_form": "tribal",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024619",
+  "npdes_permits": [
+   "AZ0024619"
+  ],
+  "receiving_waters": [
+   "MOENKOPI WASH",
+   "REUSE HOLDING TANK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tuba City"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024619 Upper Village of Moenkopi WWTF. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-upper-village-of-moenkopi"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-usbr-lower-colorado",
+  "name": "U.S. Bureau of Reclamation, Lower Colorado Basin (Hoover Dam plant and Yuma Desalting Plant)",
+  "short_name": "U.S. Bureau of Reclamation",
+  "legal_form": "federal facility",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025160",
+  "npdes_permits": [
+   "AZ0025160",
+   "AZ0025348"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Boulder City",
+   "Yuma"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025160 USDOI Br - Hoover Dam WWTP; AZ0025348 USDOI Br - Yuma Desalting Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The Hoover Dam plant's permit is an Arizona permit; EPA records the facility's city as Boulder City, Nevada. The Yuma Desalting Plant is not a sewage plant.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-usbr-lower-colorado",
+   "az-az0025348"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-usfs-apache-sitgreaves",
+  "name": "U.S. Forest Service, Apache-Sitgreaves National Forests (Black Mesa Ranger District)",
+  "short_name": "Apache-Sitgreaves National Forests",
+  "legal_form": "federal facility",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0025224",
+  "npdes_permits": [
+   "AZ0025224"
+  ],
+  "receiving_waters": [
+   "UNNAMED WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Overgaard"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0025224 Usda Fs - Apache Sitgreaves Nf - Black Mesa Ranger District. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-usfs-apache-sitgreaves"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-utility-source-llc",
+  "name": "Utility Source, LLC",
+  "short_name": "Utility Source, LLC",
+  "legal_form": "investor-owned utility",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024708",
+  "npdes_permits": [
+   "AZ0024708"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Bellemont"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024708 Flagstaff Meadows WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A water and sewer company. Privately owned; permittee as EPA ICIS-NPDES records it: Utility Source, L.L.C (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-utility-source-llc"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-valle-airpark-llc",
+  "name": "Valle Airpark, LLC",
+  "short_name": "Valle Airpark, LLC",
+  "legal_form": "business or industrial",
+  "state": "AZ",
+  "kind": "plant",
+  "npdes_permit": "AZ0024015",
+  "npdes_permits": [
+   "AZ0024015"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The rule and the permit conditions bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Valle"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0024015 Valle Airpark WRF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A company that holds the airpark plant's permit. Privately owned; permittee as EPA ICIS-NPDES records it: Valle Airpark, L.L.C. (research/az/private-utilities-candidates.json); ADEQ's permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-valle-airpark-llc"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-virgin-river-domestic-wastewater-improvement-district",
+  "name": "Virgin River Domestic Wastewater Improvement District",
+  "short_name": "Virgin River Domestic Wastewater Improvement District",
+  "legal_form": "special district",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023655",
+  "npdes_permits": [
+   "AZ0023655"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Littlefield"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0023655 Virgin River DWID WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA types the facility privately owned, but the permittee it records is a public body (Virgin River Domestic Wastewater Improvement District).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-virgin-river-domestic-wastewater-improvement-district"
+  ],
+  "source_areas": [
+   "az"
+  ]
+ },
+ {
+  "id": "az-white-mountain-apache-tribe",
+  "name": "White Mountain Apache Tribe (Whiteriver, Hon-Dah, Sunrise and Cyclone plants)",
+  "short_name": "White Mountain Apache Tribe",
+  "legal_form": "tribal",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0022829",
+  "npdes_permits": [
+   "AZ0022829",
+   "AZ0022837",
+   "AZ0024058",
+   "AZ0024571",
+   "AZ0024589"
+  ],
+  "receiving_waters": [
+   "EAST BECKER CREEK",
+   "SNAKE SPRING",
+   "WHITE RIVER",
+   "BECKER CREEK",
+   "BOOTLEG LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 7 rows)",
+  "notification_channel": "A permit on tribal land, where EPA Region 9, not ADEQ, administers the Clean Water Act permit program and Arizona's collection-system rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)) and would appear in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); none are there in the 2026-11-04 extract. No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Apache County",
+   "Greer",
+   "Whiteriver"
+  ],
+  "notes": "EPA ICIS-NPDES: AZ0022829 Sunrise Day Lodge; AZ0022837 Sunrise Hotel WWTP; AZ0024058 Whiteriver Sewage Lagoons; AZ0024571 Cyclone Day Lodge WWTP; AZ0024589 Hon-Dah Regional WWTF. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "az-white-mountain-apache-tribe"
+  ],
+  "source_areas": [
+   "az"
+  ]
  }
 ]
