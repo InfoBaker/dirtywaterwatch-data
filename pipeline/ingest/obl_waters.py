@@ -36,7 +36,8 @@ id shared by one water's records in several states: the Potomac's DC, MD and VA 
 state line has one record per state there, sharing water_id); a file that cannot be read is skipped and counted.
 Keys an extract on file carries that this does not write (a hand field) are kept on the same slug. The snapshot date
 comes from --snapshot, else the folder's out/meta.json (`built`, `generated` or `updated`), else the API's meta.
-A result with fewer than half the records of the extract on file is refused (a partial snapshot never cuts it). Run
+A result with fewer than half the records of the extract on file is refused (a partial snapshot never cuts it), and
+so is an empty result, or a folder where the state's files are there but most do not decode (a damaged snapshot). Run
 it per state on a state build; the hourly changes check (ingest.obl_changes) rewrites the live states' extracts
 from the folder when openboatlaunch changes them.
 """
@@ -292,21 +293,35 @@ def nhd_built(st: str, path: Path) -> dict | None:
 MERGE_SIZE = ("area_km2", "length_km")
 
 
-def merge_nhd(st: str, have: dict, waters: list[dict], raw_of, source: str, seen: Counter) -> dict:
+def merge_nhd(st: str, have: dict, waters: list[dict], raw_of, source: str, seen: Counter,
+              gone: dict | None = None) -> dict:
     """The extract on file (built from NHD) merged with openboatlaunch's records of the state: a record of ours that
     is openboatlaunch's by slug or by GNIS id (compared as numbers: NHD's '00597915' is the API's 597915) takes its
     outline (inline, with its bbox and size), launches and the API fields (water_id, the shared id of the same water
     in other states, recorded and not acted on; geometry_hash, status, previous_slugs, updated_at ...); keeps its own
     slug, name, gnis_id text and other fields; an openboatlaunch slug that differs becomes a slug alias. A record
     openboatlaunch has and we lack is added (its outline inline). A record of ours openboatlaunch lacks is kept as it
-    is. Each record says where it came from (record_from); the source line says which is which."""
+    is. Each record says where it came from (record_from); the source line says which is which.
+
+    A record an earlier merge added (record_from openboatlaunch, owned by openboatlaunch) follows openboatlaunch's
+    lifecycle as an ordinary extract's does (SOL wave2 P2-9): renamed or merged into a record here, it is dropped and
+    resolves through that record's slug_aliases; deleted, moved into another state, or no longer served, it stays as a
+    tombstone (status deleted, moved or not_in_snapshot, with successor_slug and retired_at) so the reports citing it
+    keep their water. Our own records (NHD's identities) are never retired here; they are matched through the incoming
+    records' slug_aliases too, so a rename at openboatlaunch keeps them matched."""
+    gone = gone or {}
     base = have.get("source_base") or have.get("source") or "the extract on file"
     by_slug = {w["slug"]: w for w in waters}
+    by_alias = {}
+    for w in waters:
+        for x in w.get("slug_aliases") or []:
+            if isinstance(x, str) and x not in by_slug:
+                by_alias.setdefault(x, w["slug"])
     by_gnis = {}
     for w in waters:
         if gnis_num(w.get("gnis_id")):
             by_gnis.setdefault(gnis_num(w.get("gnis_id")), w["slug"])
-    used, out, matched, own = set(), [], [], []
+    used, out, matched, own, retired = set(), [], [], [], []
 
     def outline(r: dict, a: dict) -> dict:
         raw = raw_of(a["slug"]) or {}
@@ -317,10 +332,32 @@ def merge_nhd(st: str, have: dict, waters: list[dict], raw_of, source: str, seen
                     r[k] = raw[k]
         return r
 
+    def incoming(slug):
+        """openboatlaunch's record for a slug of ours: by slug, else the record it was renamed or merged into."""
+        if not isinstance(slug, str):
+            return None
+        return by_slug.get(slug) or by_slug.get(by_alias.get(slug) or "")
+
     for o in have.get("waters") or []:
-        if o.get("record_from") == "openboatlaunch" and o.get("slug") in by_slug:
-            continue                    # added by an earlier merge: added again below from openboatlaunch's record
-        a = by_slug.get(o.get("slug")) or by_slug.get(by_gnis.get(gnis_num(o.get("gnis_id"))) or "")
+        if o.get("record_from") == "openboatlaunch":
+            if o.get("slug") in by_slug:
+                continue                # added by an earlier merge: added again below from openboatlaunch's record
+            if o.get("slug") in by_alias:
+                seen["dropped, now an alias"] += 1
+                continue                # renamed or merged into a record here: resolves through its slug_aliases
+            g = gone.get(o.get("slug")) or {"status": "not_in_snapshot", "successor_slug": None, "retired_at": None}
+            if o.get("status") in TOMBSTONE and o.get("slug") not in gone:
+                g = {k: o.get(k) for k in ("status", "successor_slug", "retired_at")}
+            out.append({**o, **g})
+            retired.append(o["slug"])
+            seen[f"kept as {g['status']}"] += 1
+            continue
+        a = None
+        for x in [o.get("slug")] + list(o.get("slug_aliases") or []):
+            a = incoming(x)
+            if a is not None:
+                break
+        a = a or by_slug.get(by_gnis.get(gnis_num(o.get("gnis_id"))) or "")
         if a is None or a["slug"] in used:
             out.append(o)
             if o.get("record_from") != "openboatlaunch":
@@ -359,15 +396,18 @@ def merge_nhd(st: str, have: dict, waters: list[dict], raw_of, source: str, seen
         seen["added"] += 1
     seen["own"] = len(own)
     out.sort(key=lambda w: w["slug"])
-    matched, added = sorted(matched), sorted(added)
+    matched, added, retired = sorted(matched), sorted(added), sorted(retired)
     line = (f"{base}; merged with {source}: "
             f"{', '.join(matched) or 'none'} take openboatlaunch's outline and fields (matched by slug or GNIS id); "
             f"{', '.join(added) or 'none'} added from openboatlaunch; {len(own)} record(s) from the extract's own "
             "source only")
+    merged = {"openboatlaunch": source, "matched": matched, "added": added, "own": sorted(own)}
+    if retired:
+        line += (f"; {', '.join(retired)} kept as retired by openboatlaunch (deleted, moved or no longer served), "
+                 "their reports keeping their water")
+        merged["retired"] = retired
     return {**{k: v for k, v in have.items() if k not in ("waters", "count")}, "state": st, "source": line,
-            "source_base": base, "merged": {"openboatlaunch": source, "matched": sorted(matched), "added": sorted(added),
-                                            "own": sorted(own)},
-            "count": len(out), "waters": out}
+            "source_base": base, "merged": merged, "count": len(out), "waters": out}
 
 
 def write_extract(state: str, waters: list[dict], source: str, out_json: Path, seen: Counter,
@@ -380,11 +420,15 @@ def write_extract(state: str, waters: list[dict], source: str, out_json: Path, s
             out = dict(nhd)
             out["_read"] = dict(seen) | {"merged": 0}
             return out
-        out = merge_nhd(st, nhd, waters, raw_of or (lambda slug: None), source, seen)
+        out = merge_nhd(st, nhd, waters, raw_of or (lambda slug: None), source, seen, gone)
         write_json(Path(out_json), out)
         out["_read"] = dict(seen)
         return out
     have = on_file(out_json)
+    if not waters and not gone:
+        # nothing decoded for the state: an empty extract is never written (SOL wave1 P2-11)
+        raise Partial(f"no {st} record was read: an empty extract is never written, and "
+                      f"{Path(out_json).name} is left as it is")
     # the records the source knows for the state: active ones, those retired into them, and those deleted or moved
     known = len(waters) + len(gone or {}) + sum(len(w.get("slug_aliases") or []) for w in waters)
     if known * 2 < have:
@@ -430,6 +474,13 @@ def extract(state: str, obl_dir: Path | None, out_json: Path | None = None, snap
     obl_dir = Path(obl_dir)
     gone = {}
     waters, seen = records(st, obl_dir, gone)
+    files = sum(1 for _ in obl_dir.glob(f"*-{st.lower()}.json"))
+    bad = seen.get("unreadable", 0)
+    if files and (bad == files or bad * 2 > files):
+        # the files are there but (most of) their contents do not decode: a damaged snapshot, never a state with
+        # fewer waters; the extract on file is left as it is (SOL wave1 P2-11)
+        raise Partial(f"{bad} of the {files} {st} files in the openboatlaunch folder could not be read: a damaged "
+                      f"snapshot would cut the extract, which is left as it is")
     snap = snapshot or snapshot_of(obl_dir)
     src = f"openboatlaunch out/water snapshot {snap or 'unknown date'}" + (f", changes to {until[:10]}" if until else "")
 
