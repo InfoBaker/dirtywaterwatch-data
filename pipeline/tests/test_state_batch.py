@@ -334,6 +334,45 @@ def test_publish_opens_then_updates(tmp_path):
     assert git(origin, "rev-parse", "batch/nc-2026-11-04~1") == git(origin, "rev-parse", "main")
 
 
+def test_publish_finds_the_pull_request_after_a_failed_create(tmp_path, capsys):
+    # GitHub's GraphQL endpoint answered 502 to `gh pr create` on 2026-11-07 after the pull request was open: the step
+    # looks again before failing, and the pull request is updated
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n")
+    write(root, "data/build/name-blocklist.json", {"names": ["Jordan Quill"]})
+    write(root, "data/waters-nhd.json", {"waters": [{"slug": "neuse-river-nc", "state": "NC"}], "targets": []})
+    log = tmp_path / "gh.log"
+    seen = tmp_path / "gh.calls"
+    gh = tmp_path / "gh"
+    # `pr list` answers nothing the first time and 31 after the create has failed; `pr create` fails like a 502
+    gh.write_text(f"#!/bin/sh\necho \"$@\" >> {log}\n"
+                  f"case \"$1 $2\" in 'pr list') if [ -f {seen} ]; then printf '%s' 31; fi ;; "
+                  f"'pr create') touch {seen}; echo 'HTTP 502: 502 Bad Gateway' >&2; exit 1 ;; esac\n")
+    gh.chmod(gh.stat().st_mode | stat.S_IEXEC)
+    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh), pause_s=0) == 0
+    calls = log.read_text().splitlines()
+    assert [c.split()[0:2] for c in calls] == [["pr", "list"], ["pr", "create"], ["pr", "list"], ["pr", "edit"]]
+    assert "pull request #31 was open after all" in capsys.readouterr().out
+
+
+def test_publish_opens_through_rest_when_graphql_keeps_failing(tmp_path, capsys):
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n")
+    write(root, "data/build/name-blocklist.json", {"names": ["Jordan Quill"]})
+    write(root, "data/waters-nhd.json", {"waters": [{"slug": "neuse-river-nc", "state": "NC"}], "targets": []})
+    log = tmp_path / "gh.log"
+    gh = tmp_path / "gh"
+    gh.write_text(f"#!/bin/sh\necho \"$@\" >> {log}\n"
+                  f"case \"$1 $2\" in 'pr create') exit 1 ;; 'api -X') exit 0 ;; esac\n")
+    gh.chmod(gh.stat().st_mode | stat.S_IEXEC)
+    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh), pause_s=0) == 0
+    calls = log.read_text().splitlines()
+    assert calls[1].startswith("pr create") and calls[3].startswith("api -X POST repos/{owner}/{repo}/pulls -f base=main -f head=batch/nc-2026-11-04")
+    assert "through the REST endpoint" in capsys.readouterr().out
+
+
 def test_publish_refuses_when_the_scan_finds_something(tmp_path, capsys):
     root = repo(tmp_path)
     body = tmp_path / "body.md"
