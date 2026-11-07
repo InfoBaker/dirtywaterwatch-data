@@ -61,7 +61,7 @@ from datetime import UTC, datetime, timedelta
 
 import requests
 
-from common import BUILD_DIR, DATA_DIR, HEADERS, load_outfall_registry, now_iso, read_json, save_raw, write_json
+from common import BUILD_DIR, DATA_DIR, HEADERS, RAW_DIR, load_outfall_registry, now_iso, read_json, save_raw, write_json
 from ingest import mrms_grid as grid_mod
 
 SOURCE_ID = "noaa-mrms-qpe-imageserver"
@@ -96,6 +96,19 @@ MM_PER_IN = 25.4
 UNIT_BOUND_IN = {24: 30.0, 72: 45.0}   # a box maximum over this, read as inches, is impossible: millimetres (the
                                        # US 24-hour record is 43 in, Alvin, Texas, 1979; 72 hours about 60 in)
 UNITS_FOUND = "2026-11-07"
+# The gauge check (gauge_check): airport gauges, api.weather.gov /stations/{id}/observations (precipitation in mm),
+# against MRMS identify at the same place; a fixed small list, used when inside the box.
+GAUGES = {"KPVD": (41.72, -71.43), "KBOS": (42.36, -71.01), "KBDL": (41.94, -72.68), "KLGA": (40.78, -73.88),
+          "KPHL": (39.87, -75.23), "KBWI": (39.17, -76.68), "KORD": (41.96, -87.93), "KDTW": (42.23, -83.33),
+          "KATL": (33.63, -84.44), "KMIA": (25.79, -80.32), "KSEA": (47.44, -122.31), "KLAX": (33.94, -118.39),
+          "KSFO": (37.62, -122.37)}
+GAUGE_FIELDS = ((6, "precipitationLast6Hours"), (3, "precipitationLast3Hours"), (1, "precipitationLastHour"))
+GAUGE_MIN_MM = 2.0             # a gauge with less in the window gives no verdict
+GAUGE_IDENTIFY_MAX = 4         # identify calls a run for the gauge check (the wettest gauges)
+GAUGE_EARLY, GAUGE_LATE = timedelta(minutes=20), timedelta(minutes=5)   # an observation this close to the valid time
+GAUGE_RATIO_MM = (0.4, 2.5)    # MRMS / gauge in this range: millimetres; the same over 25.4: inches
+GAUGE_OBS_LIMIT = 6
+GAUGE_CACHE = RAW_DIR / "nws-gauges" / "observations.json"
 BASELINE_REQUESTS_PER_HOUR = 384   # 319 identify + 196 forecast cells / 3 (2026-11-02, before the grid)
 FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails
 LOOKUP_MAX = 100               # new NWS /points lookups a run
@@ -135,7 +148,7 @@ def parse_duration(s: str) -> timedelta | None:
 # ---------------------------------------------------------------- requests
 
 REQUEST_KINDS = (("/exportImage", "mrms_export"), ("/identify", "mrms_identify"), ("/query", "mrms_query"),
-                 ("/points/", "nws_points"), ("/gridpoints/", "nws_gridpoints"))
+                 ("/points/", "nws_points"), ("/gridpoints/", "nws_gridpoints"), ("/stations/", "nws_stations"))
 
 
 def request_kind(url: str) -> str:
@@ -316,6 +329,101 @@ def decide_units(maxima: dict, last: dict | None = None, gauge: dict | None = No
 
 def to_inches(v, factor: float):
     return None if v is None else round(float(v) / factor, 2)
+
+
+def trim_observations(d: dict) -> list[dict]:
+    """[{t, h1, h3, h6}] in millimetres from an api.weather.gov observations answer (a value in another unit is
+    left out)."""
+    out = []
+    for f in (d or {}).get("features") or []:
+        pr = f.get("properties") or {}
+        row = {"t": pr.get("timestamp")}
+        for h, field in GAUGE_FIELDS:
+            q = pr.get(field) or {}
+            v = q.get("value")
+            row[f"h{h}"] = float(v) if v is not None and str(q.get("unitCode") or "").endswith(":mm") else None
+        if row["t"]:
+            out.append(row)
+    return out
+
+
+def gauge_window(obs: list[dict], valid_time: datetime) -> dict | None:
+    """The observation closest to the MRMS valid time (from GAUGE_EARLY before to GAUGE_LATE after) and its
+    longest window with at least GAUGE_MIN_MM: {obs_time, hours, gauge_mm}; None when no gauge rain."""
+    near = [(abs((parse_t(o["t"]) - valid_time).total_seconds()), o) for o in obs if parse_t(o.get("t"))
+            and valid_time - GAUGE_EARLY <= parse_t(o["t"]) <= valid_time + GAUGE_LATE]
+    if not near:
+        return None
+    o = min(near, key=lambda x: x[0])[1]
+    for h, _ in GAUGE_FIELDS:
+        v = o.get(f"h{h}")
+        if v is not None and v >= GAUGE_MIN_MM:
+            return {"obs_time": o["t"], "hours": h, "gauge_mm": v}
+    return None
+
+
+def gauge_verdict(pairs: list[dict]) -> dict:
+    """The MRMS values at the gauges (as read) against the gauges (mm), summed: a ratio near 1 is millimetres,
+    near 1/25.4 inches; anything else, or no pair, gives no verdict."""
+    use = [p for p in pairs if p.get("mrms_as_read") is not None]
+    if not use:
+        return {"verdict": None, "text": "skipped: no gauge in the box had 2 mm or more"}
+    g, m = sum(p["gauge_mm"] for p in use), sum(p["mrms_as_read"] for p in use)
+    r = m / g
+    lo, hi = GAUGE_RATIO_MM
+    v = "mm" if lo <= r <= hi else "in" if lo / MM_PER_IN <= r <= hi / MM_PER_IN else None
+    return {"verdict": v, "ratio": round(r, 3), "gauge_mm": round(g, 1), "mrms_as_read": round(m, 2),
+            "gauges": [p["station"] for p in use],
+            "text": f"MRMS {round(m, 2)} against {round(g, 1)} mm at {len(use)} gauge(s) "
+                    f"({', '.join(p['station'] for p in use)}): ratio {r:.3f}, "
+                    + ({"mm": "millimetres", "in": "inches"}.get(v) or "no verdict")}
+
+
+def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
+    """Once a run: the latest observations of the GAUGES inside the box (kept in GAUGE_CACHE, refetched when
+    fetched before the valid time's window closed), and MRMS identify at the wettest (at most GAUGE_IDENTIFY_MAX,
+    kept per valid time) where a gauge had at least GAUGE_MIN_MM: {verdict, ratio, ..., pairs, fetched}."""
+    vt = parse_t(valid_time)
+    cache = read_json(GAUGE_CACHE, {}) or {}
+    obs_c, idf_c = cache.setdefault("observations", {}), cache.setdefault("identify", {})
+    inside = [st for st, (la, lo) in sorted(GAUGES.items())
+              if box["ymin"] <= la <= box["ymax"] and box["xmin"] <= lo <= box["xmax"]]
+    if not inside:
+        return {"verdict": None, "text": "skipped: no gauge of the list in the box", "valid_time": valid_time,
+                "gauges_in_box": [], "fetched": 0, "errors": {}, "pairs": []}
+    fetched, errors, wet = 0, {}, []
+    for st in inside:
+        c = obs_c.get(st) or {}
+        if not (parse_t(c.get("fetched_at")) and parse_t(c["fetched_at"]) >= vt + GAUGE_LATE):
+            try:
+                d = nws_get(session, f"{NWS}/stations/{st}/observations?limit={GAUGE_OBS_LIMIT}")
+                c = obs_c[st] = {"fetched_at": iso(now), "observations": trim_observations(d)}
+                fetched += 1
+            except Exception as e:  # noqa: BLE001
+                errors[st] = f"{type(e).__name__}: {e}"[:200]
+                continue
+        w = gauge_window(c.get("observations") or [], vt)
+        if w:
+            wet.append({"station": st, **w})
+    wet.sort(key=lambda p: (-p["gauge_mm"], p["station"]))
+    pairs = []
+    for p in wet[:GAUGE_IDENTIFY_MAX]:
+        c = idf_c.get(p["station"]) or {}
+        if c.get("valid_time") != valid_time:
+            la, lo = GAUGES[p["station"]]
+            try:
+                m = parse_identify(identify(session, la, lo))
+            except Exception as e:  # noqa: BLE001
+                errors[p["station"]] = f"identify: {type(e).__name__}: {e}"[:200]
+                continue
+            c = idf_c[p["station"]] = {"valid_time": m.get("valid_time"),
+                                       **{f"h{h}": m.get(f"h{h}") for h, _ in GAUGE_FIELDS}}
+        if c.get("valid_time") == valid_time:
+            pairs.append({**p, "mrms_as_read": c.get(f"h{p['hours']}")})
+    write_json(GAUGE_CACHE, cache)
+    out = gauge_verdict(pairs)
+    return {**out, "valid_time": valid_time, "gauges_in_box": inside, "fetched": fetched, "errors": errors,
+            "pairs": pairs}
 
 
 # ---------------------------------------------------------------- MRMS: per point (the fallback)
@@ -657,6 +765,14 @@ def permit_summary(points: dict[str, dict], outfalls: list[dict]) -> dict[str, d
 
 # ---------------------------------------------------------------- run
 
+def run_gauge_check(session, box, valid_time, now) -> dict:
+    """gauge_check, never failing the run."""
+    try:
+        return gauge_check(session, box, valid_time, now)
+    except Exception as e:  # noqa: BLE001
+        return {"verdict": None, "text": f"skipped: {type(e).__name__}: {e}"[:300]}
+
+
 def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: datetime | None = None,
         point_only: bool = False, session=None) -> dict:
     now = now or datetime.now(UTC)
@@ -697,7 +813,9 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 g = None
                 time.sleep(2 + 3 * attempt)
         if g is not None:
-            units = decide_units(g["maxima"], last_units)
+            gauge = run_gauge_check(session, g["box"], g["valid_time"], now)
+            units = decide_units(g["maxima"], last_units, gauge)
+            units["gauge_check"] = gauge
             g["values_as_read"] = g["values"]
             g["values"] = {k: {f: to_inches(x, units["factor"]) for f, x in v.items()} for k, v in g["values"].items()}
             try:
@@ -765,7 +883,13 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         if got:                                 # the unit from every answer of the run, then inches
             maxima = {h: max((m[f"h{h}"] for m in got.values() if m.get(f"h{h}") is not None), default=None)
                       for h in UNIT_BOUND_IN}
-            units = decide_units(maxima, last_units)
+            try:
+                box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
+            except ValueError:
+                box = None
+            gauge = run_gauge_check(session, box, max(m["valid_time"] for m in got.values()), now) if box else None
+            units = decide_units(maxima, last_units, gauge)
+            units["gauge_check"] = gauge
             for k, m in got.items():
                 for h in HOURS:
                     m[f"h{h}"] = to_inches(m.get(f"h{h}"), units["factor"])
