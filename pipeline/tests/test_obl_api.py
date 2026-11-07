@@ -562,6 +562,42 @@ def test_more_changes_than_a_run_fetches_are_logged_from_the_list_and_move_on(ap
     assert "every live state's extract is rewritten" in capsys.readouterr().out
 
 
+def test_a_full_pull_whose_folder_was_not_saved_is_asked_for_again(api, tmp_path):
+    """SOL wave2 P2-8: cap -> full pull -> failed upload (obl-not-saved) -> the next run, within twenty-four hours of the
+    last national pull, pulls the national file again instead of asking for changes after the advanced until."""
+    from datetime import datetime, timezone
+    water, data, status = changes_setup(tmp_path, api)
+    sf = data / "build" / "obl-changes.json"
+    sf.write_text(json.dumps({"until": "2026-11-07T03:00:00+00:00",
+                              "national": {"snapshot": api.meta["snapshot"], "fetched_at": "2026-11-07T02:00:00Z"}}))
+    api.changes = [{"slug": f"w{i}-ri", "change": "changed", "at": "2026-11-07T04:00:00+00:00", "state": "RI"}
+                   for i in range(5)]
+    st = obl_changes.check(water, sf, status, max_records=3, data_dir=data)       # the cap: until moves on
+    assert st["need_full"] and st["until"] == "2026-11-07T05:00:00+00:00"
+    dest = tmp_path / "pulled" / "out"
+    t = datetime(2026, 11, 7, 6, tzinfo=timezone.utc)
+    assert SP.fetch_obl(dest, sf, now=t) == 0                                       # the full pull
+    assert "need_full" not in json.loads(sf.read_text())
+    obl_changes.check(dest / "water", sf, status, data_dir=data)                    # the same run's changes check
+    SP.obl_not_saved(sf, dest)                                                      # its upload failed
+    st = json.loads(sf.read_text())
+    assert st["need_full"] and "full_pulled" not in st
+    assert st["national"]["fetched_at"] == "2026-11-07T02:00:00Z"
+    (dest / SP.OBL_MARK).unlink()
+    api.seen.clear()
+    assert SP.fetch_obl(dest, sf, now=t.replace(hour=7)) == 0                       # within 24 h: pulled again
+    assert any("national" in path for path, *_ in api.seen)
+    st = json.loads(sf.read_text())
+    assert st["full_pulled"] and "need_full" not in st
+    # this time the folder is saved: nothing is rolled back, and the next run does not pull again
+    (dest / SP.OBL_MARK).unlink()
+    obl_changes.check(dest / "water", sf, status, data_dir=data)
+    st = json.loads(sf.read_text())
+    assert "need_full" not in st
+    assert SP.fetch_obl(dest, sf, now=t.replace(hour=8)) == SP.NOT_USED
+    assert "need_full_before" not in json.loads(sf.read_text())
+
+
 def test_the_daily_pull_request_carries_the_rewrites_and_the_review_lines(tmp_path):
     spec = importlib.util.spec_from_file_location("obl_extracts", ROOT / "scripts" / "obl_extracts.py")
     E = importlib.util.module_from_spec(spec)
@@ -683,6 +719,138 @@ def test_the_hourly_rewrite_merges_dc_and_leaves_it_alone_without_dc_records(api
     before = (data2 / "waters-dc.json").read_bytes()
     assert obl_changes.rewrite({"DC"}, water2, None, data2) == {"DC": "current"}
     assert (data2 / "waters-dc.json").read_bytes() == before
+
+
+def dc_after_first_merge(tmp_path, gnis=True):
+    """DC merged once (Kingman Lake added from openboatlaunch); returns the folder, the extract and a writer of
+    folder records."""
+    water, data = dc_setup(tmp_path)
+    if not gnis:                                    # the reviewer's case: the added record without the optional GNIS id
+        k = rec_dc("kingman-lake-dc")
+        (water / "kingman-lake-dc.json").write_text(json.dumps({**k, "gnis_id": None}))
+    p = data / "waters-dc.json"
+    obl_waters.extract("DC", water, p)
+    assert json.loads(p.read_text())["merged"]["added"] == ["kingman-lake-dc"]
+
+    def put(src, **kw):
+        base = json.loads((water / f"{src}.json").read_text())
+        (water / f"{kw.get('slug', src)}.json").write_text(json.dumps({**base, **kw}))
+    return water, p, put
+
+
+def dc_waters(p):
+    return {w["slug"]: w for w in json.loads(p.read_text())["waters"]}
+
+
+@pytest.mark.parametrize("gnis", [False, True])
+def test_dc_merge_follows_a_rename_of_a_record_it_added(tmp_path, gnis):
+    """SOL wave2 P2-9: old-pond renamed to new-pond after the first merge: one record, the old slug an alias."""
+    from build import status as S
+    water, p, put = dc_after_first_merge(tmp_path, gnis)
+    put("kingman-lake-dc", status="renamed", successor_slug="kingman-pond-dc", retired_at="2026-11-07T08:00:00+00:00")
+    put("kingman-lake-dc", slug="kingman-pond-dc", name="Kingman Pond", previous_slugs=["kingman-lake-dc"],
+        status="active", successor_slug=None, retired_at=None)
+    obl_waters.extract("DC", water, p)
+    ws = dc_waters(p)
+    assert "kingman-lake-dc" not in ws and ws["kingman-pond-dc"]["record_from"] == "openboatlaunch"
+    assert S.slug_aliases(ws) == {"anacostia-river-dc": "anacostia-river-nhd-dc", "kingman-lake-dc": "kingman-pond-dc"}
+
+
+def test_dc_merge_follows_a_merge_of_a_record_it_added_into_one_of_ours(tmp_path):
+    from build import status as S
+    water, p, put = dc_after_first_merge(tmp_path)
+    put("kingman-lake-dc", status="merged", successor_slug="anacostia-river-dc", retired_at="2026-11-07T08:00:00+00:00")
+    obl_waters.extract("DC", water, p)
+    ws = dc_waters(p)
+    assert "kingman-lake-dc" not in ws
+    assert S.slug_aliases(ws)["kingman-lake-dc"] == "anacostia-river-nhd-dc"           # ours, NHD's slug kept
+    assert ws["anacostia-river-nhd-dc"]["record_from"] == "nhd+openboatlaunch"
+
+
+@pytest.mark.parametrize("how,status,successor", [("deleted", "deleted", None),
+                                                  ("moved", "moved", "kingman-lake-md"),
+                                                  ("vanished", "not_in_snapshot", None)])
+def test_dc_merge_keeps_a_retired_record_it_added_as_a_tombstone(tmp_path, how, status, successor):
+    """Deleted, merged into another state's record (a cross-state successor), or no longer served: kept, marked."""
+    water, p, put = dc_after_first_merge(tmp_path)
+    if how == "deleted":
+        put("kingman-lake-dc", status="deleted", geometry=None, retired_at="2026-11-07T08:00:00+00:00")
+    elif how == "moved":
+        put("kingman-lake-dc", status="merged", successor_slug="kingman-lake-md", retired_at="2026-11-07T08:00:00+00:00")
+    else:
+        (water / "kingman-lake-dc.json").unlink()
+    obl_waters.extract("DC", water, p)
+    d = json.loads(p.read_text())
+    k = dc_waters(p)["kingman-lake-dc"]
+    assert k["status"] == status and k["successor_slug"] == successor and k["record_from"] == "openboatlaunch"
+    assert k["geometry"]                                          # the outline it had stays with its reports
+    assert d["merged"]["retired"] == ["kingman-lake-dc"] and "kingman-lake-dc kept as retired" in d["source"]
+    before = p.read_bytes()
+    obl_waters.extract("DC", water, p)                            # stable on the next run
+    assert json.loads(p.read_text()) == json.loads(before)
+
+
+def test_dc_merge_keeps_our_record_matched_through_a_rename_at_openboatlaunch(tmp_path):
+    """Our NHD record matched to anacostia-river-dc stays ours and matched when openboatlaunch renames it (no GNIS id
+    to fall back on): the new slug becomes an alias, never a second record."""
+    water, p, put = dc_after_first_merge(tmp_path)
+    a = rec_dc("anacostia-river-dc")
+    (water / "anacostia-river-dc.json").write_text(json.dumps({**a, "status": "renamed",
+                                                               "successor_slug": "anacostia-dc"}))
+    (water / "anacostia-dc.json").write_text(json.dumps({**a, "slug": "anacostia-dc", "gnis_id": None,
+                                                         "previous_slugs": ["anacostia-river-dc"]}))
+    obl_waters.extract("DC", water, p)
+    ws = dc_waters(p)
+    assert "anacostia-dc" not in ws and "anacostia-river-dc" not in ws
+    assert ws["anacostia-river-nhd-dc"]["record_from"] == "nhd+openboatlaunch"
+    assert set(ws["anacostia-river-nhd-dc"]["slug_aliases"]) == {"anacostia-river-dc", "anacostia-dc"}
+    # deleted at openboatlaunch: our record is NHD's identity and stays as it is
+    (water / "anacostia-dc.json").write_text(json.dumps({**a, "slug": "anacostia-dc", "status": "deleted"}))
+    obl_waters.extract("DC", water, p)
+    ours = dc_waters(p)["anacostia-river-nhd-dc"]
+    assert ours["name"] == "Anacostia River" and ours.get("status") != "deleted"
+
+
+def test_an_extract_is_kept_when_the_state_files_are_there_but_none_decode(tmp_path):
+    """SOL wave1 P2-11: the expected *-ri.json files exist but hold malformed JSON: refused, the extract on file kept;
+    with no extract on file, nothing empty is written either."""
+    water = tmp_path / "obl" / "out" / "water"
+    water.mkdir(parents=True)
+    (water.parent / "meta.json").write_text((FIX / "meta.json").read_text())
+    for q in (FIX / "water").glob("*.json"):
+        (water / q.name).write_text(q.read_text())
+    out = tmp_path / "waters-ri.json"
+    obl_waters.extract("RI", water, out)
+    before = out.read_bytes()
+    assert json.loads(before)["count"] > 0
+    for q in water.glob("*-ri.json"):
+        q.write_text("{not json")
+    with pytest.raises(obl_waters.Partial, match="could not be read"):
+        obl_waters.extract("RI", water, out)
+    assert out.read_bytes() == before
+    assert obl_waters.main(["--state", "RI", "--from", str(water), "--out", str(out)]) == 1
+    assert out.read_bytes() == before
+    fresh = tmp_path / "waters-ri-new.json"
+    with pytest.raises(obl_waters.Partial):
+        obl_waters.extract("RI", water, fresh)
+    assert not fresh.exists()
+    # one damaged file of six is a half-written file, skipped as before
+    for q in (FIX / "water").glob("*.json"):
+        (water / q.name).write_text(q.read_text())
+    next(iter(sorted(water.glob("*-ri.json")))).write_text("{not json")
+    assert obl_waters.extract("RI", water, out)["_read"]["unreadable"] == 1
+
+
+def test_dc_merge_refuses_a_folder_whose_dc_files_do_not_decode(tmp_path):
+    water, data = dc_setup(tmp_path)
+    p = data / "waters-dc.json"
+    before = p.read_bytes()
+    for q in water.glob("*-dc.json"):
+        q.write_text("[")
+    with pytest.raises(obl_waters.Partial):
+        obl_waters.extract("DC", water, p)
+    assert p.read_bytes() == before
+    assert obl_changes.rewrite({"DC"}, water, None, data)["DC"].startswith("refused")
 
 
 def test_the_nhd_build_drops_its_record_of_a_water_openboatlaunch_has_by_gnis_id(monkeypatch):

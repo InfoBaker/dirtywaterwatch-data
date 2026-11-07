@@ -103,7 +103,7 @@ def test_grades_follow_the_plans_thresholds_and_poll_precision_counts_as_dated()
     assert va["duty"] == "Virginia law places no public notice duty on the discharger (Va. Code § 62.1-44.5 B)."
     ct = st["CT"]
     assert ct["grade"] == "No public reports" and ct["records_12m"] == 0 and ct["duty"] is None
-    assert ct["sentence"].startswith("Connecticut publishes no sewage overflow reports we can read")
+    assert ct["sentence"].startswith("Connecticut has published no sewage overflow reports we can read in the last 12 months")
     assert ct["feeds"] == [{"source_id": "ct-quiet", "name": "Connecticut dashboard", "precision": None,
                             "precision_text": None, "precisions": {}, "cadence_hours": 24, "records_12m": 0,
                             "latest": None, "lag_days": None}]

@@ -34,13 +34,14 @@ from __future__ import annotations
 import html
 import re
 import sys
-from datetime import date
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
 
 SOURCE_ID = "sd-danr-hab-advisories"
 URL = "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx"
@@ -74,15 +75,42 @@ def parse(page: str) -> tuple[int, list[dict]]:
     return year, out
 
 
+# The dates are South Dakota days: a county of the reference file (49 CFR 71.7(b)) keeps Mountain time, the rest
+# Central. Stanley County is split (its Fort Pierre corner keeps Central time): a lake listed there is read in Mountain
+# time, the later day's end. SOL 2026-11-07 wave 2 P1-1: the advisory ending December 31 runs to that day's end in
+# its own zone, not New York's.
+ZONE_FILE = DATA_DIR / "reference" / "sd-mountain-time-counties.json"
+CENTRAL = "America/Chicago"
+
+
+def county_zone(county: str | None) -> tuple[str, str]:
+    """(IANA zone, basis) for a lake DANR lists in this county."""
+    doc = read_json(ZONE_FILE, None) or {}
+    name = re.sub(r"(?i)\s+county$", "", str(county or "")).strip().lower()
+    cite = (doc.get("law") or {}).get("cite") or "49 CFR 71.7(b)"
+    for c in (doc.get("counties") or []) + (doc.get("split_counties") or []):
+        if re.sub(r"(?i)\s+county$", "", c.get("county") or "").strip().lower() == name and name:
+            return doc.get("zone") or "America/Denver", f"{c['county']} keeps Mountain time ({cite})"
+    return CENTRAL, (f"{county} County keeps Central time ({cite})" if county else
+                     "no county listed: Central time, the state's eastern part")
+
+
+def local_day(fetched: str, tz: str) -> str:
+    """The calendar day (YYYY-MM-DD) in tz at the fetch time (UTC ISO)."""
+    return datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZoneInfo(tz)).date().isoformat()
+
+
 def build(page: str, fetched: str, previous: list[dict], source_updated: str | None = None) -> tuple[list[dict], dict]:
     year, lines = parse(page)
-    today = fetched[:10]
     expires = f"{year}-12-31"
     records: dict[str, dict] = {}
     for x in lines:
         srid = f"{year}:{slug(x['lake'])}:{slug(x['county'])}"
-        over = today > expires
+        tz, tz_basis = county_zone(x["county"])
+        # the lake's own calendar day (fetched is UTC): December 31 lasts to its end in the lake's zone
+        over = local_day(fetched, tz) > expires
         raw = {"lake": x["lake"], "county": x["county"], "date": x["date"], "line": x["line"], "box_year": year,
+               "time_zone": tz, "time_zone_basis": tz_basis,
                "expires_on": expires, "end_basis": f"DANR's page: \"{RULE}\"",
                "date_note": "the date DANR lists beside the lake; the page does not say whether it is the sampling or "
                             "the issue date", "page_url": URL,
@@ -107,7 +135,8 @@ def build(page: str, fetched: str, previous: list[dict], source_updated: str | N
         exp = p["raw"].get("expires_on")
         if exp:
             p["ended_at"] = exp
-            if today > exp and p.get("status") == "advisory_active":
+            tz = p["raw"].get("time_zone") or county_zone(p["raw"].get("county"))[0]
+            if local_day(fetched, tz) > exp and p.get("status") == "advisory_active":
                 p["status"] = "advisory_lifted"
         records[sid] = p
         kept += 1

@@ -5,7 +5,8 @@ Three state objects:
   state/build.tar.gz       data/build whole: the ingesters' history and snapshot files, the reach traces
                            (data/build/reaches/, build/reaches.py: its NLDI and NHDPlus answers are kept there, 30
                            days), the provisional-outfall and geocoder caches, the private name blocklist. Made with
-                           tar by the workflow; this script only checks its size (check-size).
+                           tar by the workflow; this script checks its size (check-size) and restores it
+                           (unpack-build: data/build members only).
   state/raw-cache.tar.gz   the answers in data/raw that the code reads back (RAW_CACHE below, with the reasons),
                            packed and restored by this script. Everything else in data/raw is a bulk raw save that
                            no step reads back and that can carry personal fields; it stays on the runner and is
@@ -40,6 +41,14 @@ that cannot be read is replaced by the next good run's.
                                                             absolute or '..' paths, AppleDouble '._*' files and
                                                             anything else are skipped and counted (a tarball made
                                                             elsewhere, or by an older list, cannot widen the set)
+    python3 -I scripts/state_paths.py unpack-build FILE     restore state/build.tar.gz: the whole archive is read and
+                                                            checked first; only data/build and regular files and
+                                                            folders under it; a link, special file, absolute or '..'
+                                                            path, or anything outside data/build refuses the whole
+                                                            archive (exit 1, nothing written)
+    python3 -I scripts/state_paths.py fetch state/PAUSE FILE
+                                                            the shared pause switch: exit 0 set, 3 not set, 1 could
+                                                            not be checked (the workflows then stop)
     python3 -I scripts/state_paths.py unpack-obl FILE [--to DIR]
                                                             restore state/obl-water.tar.gz into DIR (default
                                                             ../openboatlaunch/out): only water/<slug>.json and
@@ -106,7 +115,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MAX_MB = 200.0
 WRANGLER_MAX_MB = 314.0          # wrangler r2 object put refuses a file over 300 MiB (314.6 MB)
 BUCKET = "dirtywaterwatch-data"
-STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz")
+STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE")   # state/PAUSE: the shared pause switch
 # wrangler's answer for a key that is not there ("The specified key does not exist."): a first run, not a failure
 MISSING = re.compile(r"specified key does not exist|NoSuchKey", re.I)
 FETCHED, ABSENT, FAILED = 0, 3, 1
@@ -352,6 +361,63 @@ def unpack(src: Path, root: Path = ROOT) -> dict:
     return counts
 
 
+BUILD_DIR = "data/build"
+
+
+def build_member_problem(m: tarfile.TarInfo) -> str | None:
+    """Why a member of state/build.tar.gz may not be restored, or None: only data/build itself and regular files and
+    directories under it (the folders data and data/build as directories); no link, device or fifo, no absolute or
+    '..' path (SOL wave1 P2-14)."""
+    name = m.name
+    if not name or name.startswith("/") or "\\" in name:
+        return "an absolute or odd path"
+    parts = [x for x in PurePosixPath(name).parts if x != "."]
+    if not parts or any(x in ("..", "") for x in parts):
+        return "a path outside data/build"
+    if not (m.isfile() or m.isdir()):
+        return "a link or special file"
+    if parts in (["data"], ["data", "build"]):
+        return None if m.isdir() else "a file in place of the data/build folder"
+    if len(parts) < 3 or parts[:2] != ["data", "build"]:
+        return "a path outside data/build"
+    return None
+
+
+def unpack_build(src: Path, root: Path = ROOT) -> dict:
+    """Restore state/build.tar.gz under root. The whole archive is read and every member checked first: one member
+    outside data/build, a link, a device or fifo, or a damaged gzip raises Unreadable having written nothing (a
+    replaced or mispacked object can never overwrite the code that later runs with the credentials). AppleDouble '._*'
+    files are skipped. Refused too when root/data or root/data/build is a link."""
+    root = Path(root)
+    for d in (root / "data", root / BUILD_DIR):
+        if d.is_symlink():
+            raise Unreadable(f"{d.relative_to(root)} is a link: not written through")
+    try:
+        with open(src, "rb") as fh:
+            if fh.read(2) != b"\x1f\x8b":
+                raise Unreadable(f"{Path(src).name} is not a gzip file")
+        with gzip.open(src, "rb") as g:
+            while g.read(1 << 20):
+                pass
+        with tarfile.open(src, "r:gz") as tf:
+            ms = tf.getmembers()
+            bad = [(m.name, why) for m in ms if (why := build_member_problem(m))]
+            if bad:
+                shown = "; ".join(f"{n[:120]!r}: {w}" for n, w in bad[:3])
+                raise Unreadable(f"{Path(src).name} holds {len(bad)} member(s) that may not be restored ({shown}); "
+                                 "nothing was written")
+            keep = [m for m in ms if not any(x.startswith("._") for x in PurePosixPath(m.name).parts)]
+            tf.extractall(root, members=keep, filter="data")
+    except Unreadable:
+        raise
+    except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+        raise Unreadable(f"{Path(src).name}: {type(ex).__name__}") from None
+    n = sum(1 for m in keep if m.isfile())
+    say(f"restored {n} file(s) from {Path(src).name} into {BUILD_DIR}"
+        + (f", {len(ms) - len(keep)} AppleDouble file(s) skipped" if len(ms) != len(keep) else ""))
+    return {"files": n, "skipped": len(ms) - len(keep)}
+
+
 def obl_allowed(name: str) -> bool:
     """A member of state/obl-water.tar.gz that may be restored: water/<slug>.json (one level, no AppleDouble '._'),
     meta.json, or the water directory itself; relative, no '..'."""
@@ -488,6 +554,7 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
     if st0:
         # cleared at the start, so an early return never leaves an older run's value for obl-not-saved to restore
         st0["national_before"] = st0.get("national")
+        st0.pop("need_full_before", None)
         write_obl_changes(st0, state_file)
     if not api.key():
         say("openboatlaunch API: no OBL_API_KEY here; the R2 copy is restored instead")
@@ -564,6 +631,8 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
                       "bytes": a.size, "sha256": a.sha256, "records": counts["records"]}
     if st.pop("need_full", None):
         st["full_pulled"] = True                   # ingest.obl_changes then rewrites every live state from it
+        # kept until the folder is saved: obl-not-saved asks for the full pull again (SOL wave2 P2-8)
+        st["need_full_before"] = True
     write_obl_changes(st, state_file)
     say(f"openboatlaunch API: national snapshot {got or snap} ({mb(a.size)}, sha256 checked), {counts['records']} "
         f"record(s) unpacked into {dest.name}/")
@@ -597,8 +666,9 @@ def pack_obl(out: Path, src: Path = OBL_OUT, always: bool = False) -> int:
 
 def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     """The folder the API changed this run could not be saved to R2: put the national pull and the changes' until
-    back to where they were before this run (data/build/obl-changes.json "national_before", "until_before"), so the
-    next run, restoring the older R2 copy, pulls and asks for those changes again. Exit 0."""
+    back to where they were before this run (data/build/obl-changes.json "national_before", "until_before", and
+    need_full when this run's full pull consumed it: "need_full_before"), so the next run, restoring the older R2 copy,
+    pulls and asks for those changes again. Exit 0."""
     if not (Path(src) / OBL_MARK).exists():
         return 0
     st = read_obl_changes(state_file)
@@ -609,6 +679,11 @@ def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     if "until_before" in st:
         st["until"] = st.pop("until_before")
         st.pop("etag", None)
+    if st.pop("need_full_before", None):
+        # this run's full pull (asked for by need_full: the changes it replaces were never fetched one by one) was not
+        # saved: the next run restores the older copy, so the full pull is asked for again (SOL wave2 P2-8)
+        st["need_full"] = True
+        st.pop("full_pulled", None)
     write_obl_changes(st, state_file)
     print("::warning::the openboatlaunch folder changed by the API was not saved to R2; the next run pulls those "
           "changes again", flush=True)
@@ -626,6 +701,8 @@ def main(argv=None) -> int:
         if name == "check-size":
             s.add_argument("--hard-mb", type=float, help="over the cap is a warning; only over this fails")
     s = sub.add_parser("unpack")
+    s.add_argument("file")
+    s = sub.add_parser("unpack-build")
     s.add_argument("file")
     s = sub.add_parser("unpack-obl")
     s.add_argument("file")
@@ -664,6 +741,13 @@ def main(argv=None) -> int:
         return obl_not_saved(Path(a.state_file), Path(a.src))
     if a.cmd == "pack-obl":
         return pack_obl(Path(a.file), Path(a.src), a.always)
+    if a.cmd == "unpack-build":
+        try:
+            unpack_build(Path(a.file))
+        except Unreadable as ex:
+            print(f"::error::the build state could not be restored ({ex})", flush=True)
+            return 1
+        return 0
     if a.cmd == "unpack-obl":
         try:
             unpack_obl(Path(a.file), Path(a.to))
