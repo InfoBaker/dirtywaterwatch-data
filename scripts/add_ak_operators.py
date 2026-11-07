@@ -44,7 +44,7 @@ RESEARCH = ROOT / "research" / "ak" / "dischargers.json"
 CHECKED = "2026-11-07"
 SOBE_FILERS = {"AK0022551": 43, "AK0021440": 2, "AK0053775": 1}   # current reports in the 2026-11-04 extract
 LAW = ("No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the "
-       "owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) "
+       "operator of a wastewater system to report to the Department of Environmental Conservation (DEC) "
        "within 24 hours when a spill or other event threatens public health or water quality, when a sludge "
        "carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a "
        "written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an "
