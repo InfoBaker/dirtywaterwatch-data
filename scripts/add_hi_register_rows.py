@@ -54,13 +54,19 @@ RULE_URL = "https://health.hawaii.gov/opppd/files/2026/08/chapter-11-62-HAR-effe
 Q_LAW = ("HAR 11-62-06(g) and Appendix B (Responses for Wastewater Spills, Overflows, and Discharges, July 1, 2014), "
          "sections 2.b and 9.a: for a spill into state waters the owner or its agent shall \"immediately notify the "
          "CWB\" and submit a written report within five working days")
-Q_PRESS = ("HAR 11-62 Appendix B, sections 2.c and 7: the owner or its agent \"shall immediately send out a press release "
-           "for spills of a thousand gallons or more and for lesser spills if they present a substantial threat to "
-           "public health\", to the Associated Press, major newspapers and television news stations, the Department's "
-           "Communications Office and the Clean Water Branch")
-Q_SIGNS = ("HAR 11-62 Appendix B, section 2.e: the owner or its agent \"shall immediately post warning signs in the "
-           "area(s) likely to be affected by the spill and where public access is possible\"; the Department assures "
-           "that enough signs are posted and authorizes their removal")
+Q_PRESS = ("HAR 11-62 Appendix B, sections 2.c, 4.c and 7: for a spill into state waters, and for one onto the ground "
+           "where the public has access, the owner or its agent \"shall immediately send out a press release for spills "
+           "of a thousand gallons or more and for lesser spills if they present a substantial threat to public "
+           "health\", to the Associated Press, major newspapers and television news stations, the Department's "
+           "Communications Office and the Clean Water Branch (the Wastewater Branch for a ground spill)")
+Q_SIGNS = ("HAR 11-62 Appendix B, sections 2.e and 4.e: the owner or its agent \"shall immediately post warning signs "
+           "in the area(s) likely to be affected by the spill and where public access is possible\" (a spill into state "
+           "waters), and \"in the vicinity of the spill area\" (a spill onto the ground where the public has access); "
+           "the Department assures that enough signs are posted and authorizes their removal")
+Q_GROUND = ("HAR 11-62 Appendix B, section 4 (spills onto the ground, not into state waters, where the public has or may "
+            "have access): for a spill of a thousand gallons or more the owner or its agent immediately notifies the "
+            "Wastewater Branch on Oahu, or the district environmental health program chief on the other islands, and "
+            "reports in writing under section 9.a; smaller spills go in a quarterly tabulated summary (section 9.b)")
 Q_NPDES = ("HAR 11-55 (water pollution control), the NPDES permits' standard conditions: noncompliance that may "
            "endanger health or the environment is reported to the Department of Health")
 AGENCY = [
@@ -74,6 +80,15 @@ AGENCY = [
               "Department posts an advisory for the waters it judges affected (hi-doh-cwb-advisories). The operator's "
               "own duties to the public are its press release and its warning signs (the operator rows)."),
      "sources": ["hi-har-11-62-app-b", "hi-har-11-55"]},
+    {"id": "hi-doh-wwb-ground-spill-reports", "agency": "Hawaii Department of Health, Wastewater Branch",
+     "name": "Hawaii Department of Health, Wastewater Branch (ground spill reports)", "channel_kind": "state_alert_page",
+     "urls": [], "method": None, "legal_basis": Q_GROUND, "basis_kind": "law", "monitored": False,
+     "unmonitored_reason": "none_found", "publishes": "none", "records": False, "noun": "Report to the state",
+     "note": ("No web form: spills that reach no state water, where the public has access, are reported to the "
+              "Wastewater Branch (or a district office) and, under 1,000 gallons, only in quarterly summaries. Neither "
+              "is published, and such spills get no Clean Water Branch advisory; the operator's press release and "
+              "signs (sections 4.c and 4.e) are the public notice. (HAR 11-62 Appendix B, read 2026-11-07)"),
+     "sources": ["hi-har-11-62-app-b"]},
     {"id": "hi-doh-cwb-advisories", "agency": AUTHORITY, "name": f"{AUTHORITY} (water quality advisories and events)",
      "channel_kind": "feed", "urls": [API], "method": "json", "legal_basis": None, "basis_kind": "voluntary",
      "monitored": False, "unmonitored_reason": "feed_ingested", "feed_source_id": FEED, "publishes": "notices",

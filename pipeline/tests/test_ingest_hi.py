@@ -298,7 +298,17 @@ def test_every_hawaii_sewage_permit_is_in_exactly_one_row():
               if r.get("state") == "HI"}
     cand = json.loads((ROOT / "research" / "hi" / "private-utilities-candidates.json").read_text())
     wanted = plants | {c["npdes_permit"] for c in cand["candidates"]}
-    assert len(wanted) == 14 and all(every[p] == 1 for p in wanted)
+    # final audit P2-3: HIF014798 is a general-permit coverage (storm water), kind "other" in data/outfalls-hi.json,
+    # not a sewage permit: in no operator's permits, named in the Kauai row's permit_note; HI0020877 is terminated
+    other = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-hi.json").read_text())["outfalls"]
+             if r["outfall_kind"] == "other"}
+    assert other == {"HIF014798"} and every["HIF014798"] == 0
+    assert len(wanted - other) == 13 and all(every[p] == 1 for p in wanted - other)
+    kauai = next(r for r in ops() if r["id"] == "hi-kauai-county")
+    assert "HIF014798" in kauai["permit_note"] and "HIR000000" in kauai["permit_note"]
+    hnl = next(r for r in ops() if r["id"] == "hi-honolulu-env")
+    assert hnl["npdes_permits"][-1] == "HI0020877" and hnl["npdes_permit"] != "HI0020877"
+    assert "terminated 05/31/2026" in hnl["permit_note"]
     assert {r["id"] for r in ops()} >= {"hi-honolulu-env", "hi-maui-county", "hi-mcbh-kaneohe", "hi-jbphh"}
     assert not DS.check_legal_forms(ops())
     # the operator ids the ingester names exist
@@ -316,6 +326,9 @@ def test_register_rows_per_operator_and_the_departments_channels():
         assert "warning signs" in signs["legal_basis"] and signs["barrier"] == "signs_only"
     assert reg["hi-doh-cwb-advisories"]["feed_source_id"] == HI.SOURCE_ID
     assert reg["hi-doh-cwb-spill-reports"]["urls"] == [] and reg["hi-doh-cwb-signs"]["barrier"] == "signs_only"
+    assert "section 4" in reg["hi-doh-wwb-ground-spill-reports"]["legal_basis"]          # final audit P2-5
+    assert "4.c" in reg["hi-honolulu-env-press-release"]["legal_basis"]
+    assert "4.e" in reg["hi-honolulu-env-warning-signs"]["legal_basis"]
     dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
     assert not NP.validate_register(NP.load_register(ROOT / "data" / "notice-channels"), dis, ROOT)
 
@@ -341,6 +354,7 @@ def test_state_text_is_in_the_page_shape():
     body = t.replace("Clean Water Branch", "")                               # the agency's name, not a verdict
     assert not re.search(r"\b(safe|clean)\b", body, re.I) and ".json" not in t
     assert "press release" in t and "Appendix B" in t and "whichever is later" in t
+    assert "onto the ground where the public has access" in t and "Wastewater Branch" in t
     assert not re.search(r"\b(owner|decision|coordinator)\b", t, re.I)
     assert "Brown Water Advisories" in t and "contiguous United States" in t
 
