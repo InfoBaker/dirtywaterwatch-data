@@ -42,6 +42,7 @@ def _tables(rows, waters, types=None, causes=None):
 
 def test_illinois_is_read_with_its_own_zone_and_scrub_only():
     assert "IL" in E.STATES and E.STATE_TZ["IL"] == "America/Chicago" and "IL" in E.FREE_TEXT_STATES
+    assert "IL" not in E.POINT_ZONE_FILES                # one zone for the whole state
     assert "IL" not in E.REPEATED_POINT_STATES          # Illinois points are the event's own (module docstring)
 
 

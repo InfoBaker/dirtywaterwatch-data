@@ -29,7 +29,8 @@ Rules
     tables); for the City of Jackson also the consent decree's overflow response plan (news releases and signs) and
     JXN Water's quarterly reports. notification_signup_url is null everywhere: no Mississippi operator offers an
     overflow alert sign-up that was found.
-  - Idempotent: a rerun replaces the rows it wrote (source_areas ["ms"]) and leaves every other row as it is.
+  - Idempotent: a rerun replaces the rows it wrote (source_areas ["ms"]), puts them after the last row in id order,
+    and leaves every other row as it is.
 Writes data/dischargers.json (indent 1) and prints counts.
 """
 from __future__ import annotations
@@ -401,6 +402,7 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
         raise SystemExit(f"public-by-name permits with no row: {left}")
     for r in new:
         r["npdes_permits"] = list(dict.fromkeys(r["npdes_permits"]))
+    new.sort(key=lambda r: r["id"])          # after the file's last row, in id order (as Arizona and South Dakota)
     return keep + new, counts
 
 

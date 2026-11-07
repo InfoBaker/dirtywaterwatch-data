@@ -16,13 +16,13 @@
   "access": [
    "csv"
   ],
-  "access_detail": "Daily ZIP from ECHO (no auth). Tables: sewer_overflow_bypass_report_events.csv (start/end datetime, duration, volume, lat/lon, structure type, description), _types, _receiving_waters, _causes, _impacts, _corrective_actions; collection_system_permits.csv. Copy already extracted in the shared scratchpad sobe/ folder; trimmed sample research/az/raw/sobe-sample-2026-11-03.json.",
+  "access_detail": "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP (Last-Modified 2026-11-05) held only its metadata, so the module reads the current version of each report from the all-versions ZIP (all_sewer_overflow_and_collection_systems_tables.zip, 2026-11-04 extract). Tables: report and event (start/end datetime, duration, volume, lat/lon, structure type, description), types, receiving waters, causes, impacts, corrective actions; collection-system permits.",
   "machine_readable": true,
   "sample_record": {
    "sewer_overflow_bypass_event_key": "28090",
    "permit_identifier": "AZ0020524",
    "program_report_received_date": "2026-10-30",
-   "sewer_overflow_bypass_description_text": "SSO at 21001 N Tatum Blvd",
+   "sewer_overflow_bypass_description_text": "SSO at [house number removed] N Tatum Blvd",
    "sewer_overflow_structure_type_desc": "Manhole",
    "wet_weather_occurance_indicator": "N",
    "latitude_measure": "33.676469",
@@ -74,11 +74,56 @@
   "history": "2019-09 to date (288 events: 2019 5, 2020 16, 2021 41, 2022 28, 2023 49, 2024 61, 2025 35, 2026 53 by received year)",
   "license": "EPA public data; no licence restriction stated",
   "legal_basis": "40 CFR 127 (eRule); AZPDES permit noncompliance reporting; A.A.C. R18-9-C305(F) for APP collection systems",
-  "status": "candidate",
-  "status_reason": "The only statewide machine-readable dated SSO feed for Arizona; event precision with coordinates on 285 of 288 rows.",
+  "status": "used",
+  "status_reason": "Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 52 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 285 dropped (257 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon).",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "Latest start 2026-10-28 (Phoenix 91st Ave, received 10-30). Timestamps carry no zone; a Taos NM description (1:10pm) against a stored 18:10 start suggests a fixed offset, so verify the zone before display. Pima County (Tucson, AZ0020001/AZ0020923) has no rows: either it files elsewhere or reports none. Only permittees with AZPDES (surface discharge) permits appear; APP-only collection systems that report to ADEQ under R18-9-C305 are not in this table."
+  "checked": "2026-11-07",
+  "notes": "2026-11-04 extract: starts 2019-09-24 to 2026-10-28, received 2019-09-26 to 2026-10-30, a median 3 days after the start (90th percentile 10). Volume on 44 of 288 reports, coordinates on 285, an end on 287. Receiving-water entry on 25 reports (24 naming a water; one is UNK_PERNL), mostly as ADEQ waterbody identifiers (AZ15060202-421), which ADEQ's WBID layers name (Unnamed Trib to Munds Creek). Most reports give the plant's point (Grand Canyon South Rim 30 of 32 at one point). Timestamps carry no zone: read as America/Phoenix (no daylight time). Pima County (Tucson) has no reports, though EPA's collection-system table lists its systems; APP-only collection systems are not in this table. The Navajo Nation's permits (NN..., EPA Region 9) file here too: 56 reports, 52 located in Arizona (2024-02 to 2026-10), naming washes such as Black Creek Wash and Moenkopi Wash."
+ },
+ {
+  "id": "az-adeq-wbid-layers",
+  "name": "ADEQ waterbody identifier (WBID) layers, streams and lakes (ArcGIS Online)",
+  "jurisdiction": "AZ",
+  "operator": "Arizona Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "hydrography",
+  "event_types": [],
+  "waters_covered": "4,165 stream segments and 315 lakes",
+  "water_slugs": [],
+  "url": "https://services.arcgis.com/SzoH1oFM2apCSkx3/arcgis/rest/services/STREAMS_WBID_AGOL/FeatureServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "ArcGIS feature services of the adeq_gis account: STREAMS_WBID_AGOL (NAME, WBID, ORIGIN, TERMINUS, FLOWREGIME, CANAL) and LAKES_WBID_AGOL (NAME, WBID, TYPE); answered the project user agent on 2026-11-07 while azdeq.gov answers 403.",
+  "machine_readable": true,
+  "sample_record": {
+   "WBID": "AZ15060106B-8861",
+   "NAME": "Andorra Wash",
+   "ORIGIN": "Confluence with Unnamed Trib",
+   "TERMINUS": "Cave Creek"
+  },
+  "fields": [
+   "NAME",
+   "WBID",
+   "ORIGIN",
+   "TERMINUS",
+   "FLOWREGIME",
+   "CANAL",
+   "TYPE"
+  ],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "edited irregularly",
+  "history": null,
+  "license": "provided as is (item licence text)",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Names the ADEQ waterbody identifiers Arizona permittees give as receiving waters in EPA's overflow reports (13 identifiers in the 2026-11-04 extract; EPA's ATTAINS holds 9 of them).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "Extract kept as data/reference/az-adeq-wbids.json (scripts/az_adeq_wbids.py): names only, no geometry."
  },
  {
   "id": "az-adeq-sso-reporting",
