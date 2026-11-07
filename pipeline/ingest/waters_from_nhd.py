@@ -215,6 +215,19 @@ OUT = DATA_DIR / "waters-nhd.json"
 PAUSE_S = 0.5
 FINISH_S = 60.0            # --wall-s: seconds kept for the end of the run (hand records, placement check, write)
 CHECKPOINT_EVERY = 25
+# States NHDPlus V2.1 does not cover (the medium-resolution network that NLDI and EPA's NHDPlus service above read):
+# a target there that those steps cannot place says so, not that no water of the name is near (Alaska final audit,
+# 2026-11-07: 79 of Alaska's 90 targets failed for that reason alone). The NHD high-resolution flowlines (hr_pass)
+# and the Census and OSM steps do cover them.
+NHDPLUS_ABSENT = {"AK": "Alaska"}
+
+
+def nhdplus_gap(state) -> str | None:
+    """The reason a target in a state NHDPlus V2.1 does not cover gets from the NHDPlus steps, or None."""
+    name = NHDPLUS_ABSENT.get(str(state or "").upper())
+    return f"NHDPlus V2.1, which this step reads, has no data for {name}" if name else None
+
+
 NEAR_M = 2000              # flowlines and waterbodies searched around a point (status.NAME_MATCH_M)
 GNIS_POINT_M = 150            # a TIGER polygon a hand record takes lies this close to the GNIS point of its name
 SITE_M = 300               # a beach/HAB site's lake or pond: containing or within this
@@ -1410,6 +1423,8 @@ def resolve_point(nhd: Nhd, t, lon, lat) -> tuple[dict | None, str]:
         f, how = line_choice
         return {"type": "line", "gnis_id": f["gnis_id"], "gnis_name": f["gnis_name"], "comid": f["comid"]}, how
     near_names = sorted({f.get("gnis_name") for f in fl if f.get("gnis_name")})[:6]
+    if not fl and nhdplus_gap(t.get("state")):
+        return None, nhdplus_gap(t.get("state"))
     return None, ("no NHD flowline or waterbody of that name within 2 km"
                   + (f" (nearby: {', '.join(near_names)})" if near_names else " (no named NHD water nearby)"))
 
@@ -1429,7 +1444,7 @@ def resolve_name_only(nhd: Nhd, t) -> tuple[dict | None, str]:
     shape_ = nhd.states.shapes[t["state"]].buffer(0.01)
     groups = {k: v for k, v in groups.items() if any(f["_geom"] is not None and f["_geom"].intersects(shape_) for f in v)}
     if not groups:
-        return None, "no NHD flowline or waterbody of that name in the state"
+        return None, nhdplus_gap(t["state"]) or "no NHD flowline or waterbody of that name in the state"
 
     def pick(k):
         fs = groups[k]
@@ -1613,7 +1628,9 @@ def resolve_unnamed(nhd: "Nhd", t, index: dict) -> tuple[list, str | None]:
         lon, lat = next(iter(t["points"]))
         h = nhd.nldi(lon, lat)
         if not h:
-            return [], "NLDI snapped the outfall's point to no NHDPlus flowline"
+            gap = nhdplus_gap(t.get("state"))
+            return [], (f"{gap}: NLDI snaps no point there" if gap else
+                        "NLDI snapped the outfall's point to no NHDPlus flowline")
         if h["snap_m"] > NEAR_M:
             return [], f"the outfall's point lies {h['snap_m']} m from the NHDPlus flowline of its catchment"
         got = nhd.by_comid(2, h["comid"])
