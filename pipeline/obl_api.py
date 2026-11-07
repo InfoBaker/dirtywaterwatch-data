@@ -42,6 +42,10 @@ CACHE_DIR = Path(os.environ.get("OBL_API_CACHE_DIR") or ROOT / "data" / "raw" / 
 BODY_MAX = 64 * 1024 * 1024          # a JSON answer larger than this is refused (a state page with outlines is a few MB)
 ERROR_BODY_MAX = 1 << 20
 TRIES = 3
+# meta, changes and single records are small: an API that accepts a connection and does not answer must not hold the
+# hourly run for minutes (review 2026-11-07, P3-2); the bulk file keeps its 600 s (state_paths.fetch_obl)
+QUICK_TIMEOUT = 30
+QUICK_TRIES = 2
 
 
 class ApiError(Exception):
@@ -203,7 +207,7 @@ def meta(use_cache: bool = True) -> dict:
     """The API's meta, asked with the cached ETag (a 304 returns the cached body). Raises ApiError."""
     cached = _cache_read("meta.json") if use_cache else None
     etag = cached.get("etag") if isinstance(cached, dict) and isinstance(cached.get("meta"), dict) else None
-    a = get("meta", etag=etag)
+    a = get("meta", etag=etag, timeout=QUICK_TIMEOUT, tries=QUICK_TRIES)
     if a.status == 304 and etag:
         m = cached["meta"]
         m["_not_modified"] = True
@@ -251,7 +255,7 @@ def state_waters(state: str, snapshot: str | None = None, geometry: bool = False
 def water(slug: str) -> tuple[int, dict | None, str | None]:
     """(status, record, successor slug from Location) for waters/{slug}: 200 the record, 301 the old record with its
     successor, 410 the deleted record, 404 none. Raises ApiError otherwise."""
-    a = get(f"waters/{urllib.parse.quote(slug)}")
+    a = get(f"waters/{urllib.parse.quote(slug)}", timeout=QUICK_TIMEOUT, tries=QUICK_TRIES)
     if a.status not in (200, 301, 410, 404):
         raise ApiError(f"waters/{slug}: HTTP {a.status}", a.status)
     try:
@@ -268,7 +272,8 @@ def changes(since: str, etag: str | None = None) -> dict:
     """{"status": 200|304|410, "changes": [...], "until": ..., "etag": ...} for changes?since=, every page read."""
     out, cursor, until, first_etag = [], None, None, None
     for n in range(1000):
-        a = get("changes", {"since": since, "cursor": cursor}, etag=etag if n == 0 else None)
+        a = get("changes", {"since": since, "cursor": cursor}, etag=etag if n == 0 else None, timeout=QUICK_TIMEOUT,
+                tries=QUICK_TRIES)
         if n == 0:
             first_etag = a.etag
             if a.status in (304, 410):

@@ -54,7 +54,8 @@ that cannot be read is replaced by the next good run's.
                                                             meta (ETag, a 304 most hours), then bulk/national.tar.gz
                                                             and its .sha256, checked against both, unpacked with the
                                                             unpack-obl rules into DIR (swapped in whole). At most one
-                                                            national pull a day, and none while the snapshot is the
+                                                            national pull a day (unless the changes check asked for
+                                                            one: need_full), and none while the snapshot is the
                                                             one last pulled (data/build/obl-changes.json "national"):
                                                             the R2 copy plus the hourly changes check
                                                             (ingest.obl_changes) is then current. Exit 0 unpacked from
@@ -483,6 +484,11 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
     import tempfile
     api = _obl_api()
     now = now or datetime.now(timezone.utc)
+    st0 = read_obl_changes(state_file)
+    if st0:
+        # cleared at the start, so an early return never leaves an older run's value for obl-not-saved to restore
+        st0["national_before"] = st0.get("national")
+        write_obl_changes(st0, state_file)
     if not api.key():
         say("openboatlaunch API: no OBL_API_KEY here; the R2 copy is restored instead")
         return NOT_USED
@@ -498,8 +504,6 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
     snap = m.get("snapshot")
     st = read_obl_changes(state_file)
     last = st.get("national") if isinstance(st.get("national"), dict) else {}
-    st["national_before"] = last or None           # obl-not-saved puts it back when this run's copy is not saved
-    write_obl_changes(st, state_file)
     when = _iso_time(last.get("fetched_at")) if last else None
     full = bool(st.get("need_full"))               # ingest.obl_changes: the change history did not reach (410)
     if not force and not full and last.get("snapshot") == snap and (dest / "water").is_dir():
@@ -509,10 +513,13 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
         say(f"openboatlaunch API: snapshot {snap} is the one pulled at {last.get('fetched_at')} and saved to R2; "
             "the R2 copy is restored")
         return NOT_USED
-    if not force and when is not None and (now - when).total_seconds() < OBL_NATIONAL_MIN_H * 3600:
-        say(f"openboatlaunch API: snapshot {snap} is new, but the national file was pulled at {last.get('fetched_at')} "
-            f"(at most one a day); the R2 copy is restored and the hourly changes check brings it up to date")
+    if not force and not full and when is not None and (now - when).total_seconds() < OBL_NATIONAL_MIN_H * 3600:
+        say(f"openboatlaunch API: snapshot {snap} is newer than the one pulled at {last.get('fetched_at')}, but the "
+            f"national file is pulled at most once a day; the R2 copy is restored and the hourly changes check brings "
+            "it up to date")
         return NOT_USED
+    if full:
+        say("openboatlaunch API: the changes check asked for a full pull (need_full): the national file is pulled")
     nat = ((m.get("bulk") or {}).get("national") or {})
     want = str(nat.get("sha256") or "").lower()
     try:
@@ -555,7 +562,8 @@ def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool 
     st = read_obl_changes(state_file)
     st["national"] = {"snapshot": got or snap, "built": m.get("built"), "fetched_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
                       "bytes": a.size, "sha256": a.sha256, "records": counts["records"]}
-    st.pop("need_full", None)
+    if st.pop("need_full", None):
+        st["full_pulled"] = True                   # ingest.obl_changes then rewrites every live state from it
     write_obl_changes(st, state_file)
     say(f"openboatlaunch API: national snapshot {got or snap} ({mb(a.size)}, sha256 checked), {counts['records']} "
         f"record(s) unpacked into {dest.name}/")

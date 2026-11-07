@@ -652,16 +652,18 @@ def other_changes(st: str, root: Path = ROOT) -> list[str]:
     return sorted({ln[3:].strip() for ln in (out or "").splitlines()} - keep)
 
 
-BATCH_BRANCH = re.compile(r"batch/[a-z]{2}-\d{4}-\d{2}-\d{2}")
+BATCH_BRANCH = re.compile(r"batch/([a-z]{2}|obl)-\d{4}-\d{2}-\d{2}")      # obl: scripts/obl_extracts.py
 
 
-def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh") -> dict:
-    branch = f"batch/{st.lower()}-{date}"
+def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh", label: str | None = None,
+                 pr_title: str | None = None) -> dict:
+    branch = f"batch/{(label or st).lower()}-{date}"
     # the push replaces the branch (--force): only ever a batch branch of this pattern, never main or another
     if not BATCH_BRANCH.fullmatch(branch):
         raise Refused(f"not a batch branch name: {branch!r}")
     who = ["-c", f"user.name={BOT[0]}", "-c", f"user.email={BOT[1]}"]
-    msg = f"{title(st, date)}: {', '.join(files)}"
+    ttl = pr_title or title(st, date)
+    msg = f"{ttl}: {', '.join(files)}"
     return {
         "branch": branch,
         "commit": [["git", "checkout", "-B", branch],
@@ -669,8 +671,8 @@ def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh
                    ["git", *who, "commit", "-m", msg],
                    ["git", "push", "--force", "origin", f"HEAD:refs/heads/{branch}"]],
         "find": [gh, "pr", "list", "--head", branch, "--state", "open", "--json", "number", "--jq", ".[0].number"],
-        "edit": lambda n: [gh, "pr", "edit", str(n), "--title", title(st, date), "--body-file", str(body)],
-        "create": [gh, "pr", "create", "--base", "main", "--head", branch, "--title", title(st, date),
+        "edit": lambda n: [gh, "pr", "edit", str(n), "--title", ttl, "--body-file", str(body)],
+        "create": [gh, "pr", "create", "--base", "main", "--head", branch, "--title", ttl,
                    "--body-file", str(body)],
     }
 
@@ -745,7 +747,8 @@ def _patterns(root: Path):
     return EMAIL_RE, PHONE_RE, (BlockScan(names) if names else None)
 
 
-def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT) -> int:
+def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT,
+         files: list[str] | None = None) -> int:
     """Exit 1 when a string new in the changed files (or a line of the texts) has an e-mail address or phone number
     shape or a blocklisted name; prints the file and the place, never the string."""
     email, phone, block = _patterns(root)
@@ -765,7 +768,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
             hits += 1
             print(f"::error::{where}: {k}", flush=True)
 
-    files = changed_files(valid_state(st, root), root)
+    files = changed_files(valid_state(st, root), root) if files is None else files
     for f in files:
         try:
             new = json.loads((root / f).read_text())

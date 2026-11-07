@@ -15,13 +15,16 @@ The state is data/build/obl-changes.json (saved with the pipeline state): until 
 pull (scripts/state_paths.py fetch-obl), pending_states (live states whose extract on file is behind the folder:
 rewritten every run until the checked-out file equals the rewrite, i.e. until the change is committed to main), and
 log, the review list: every rename, merge and deletion, and every outline change (geometry_hash) on a water with an
-active report (data/build/status.json), each with a line for docs/status.md, printed here as `status.md: ...` in the
-run log. The first run (no until) starts from the folder's snapshot time without rewriting anything; a 410 (since
+active report (data/build/status.json), each with a line in docs/status.md's form, printed here as
+`status.md: - HH:MMZ: ...` in the run log and carried into the daily extracts pull request (scripts/obl_extracts.py).
+A deleted record, or one moved into another state, stays in the extract as a tombstone (ingest.obl_waters), so its
+reports keep their water until a person retires it. The first run (no until) starts from the folder's snapshot time without rewriting anything; a 410 (since
 older than the API keeps) marks every live state pending and asks fetch-obl for a national pull.
 
 Never fails the run: no key, the API down, or no folder are said in one line and the run goes on as before (the
 until is not advanced when the changes could not be applied). At most --max-records single records a run; more
-changes than that wait for the national pull (need_full).
+changes than that are logged from the change list itself, until moves on, and the national pull (need_full, which
+overrides fetch-obl's once-a-day limit) brings the records; the run after that pull rewrites every live state.
 """
 from __future__ import annotations
 
@@ -71,6 +74,12 @@ def active_reports(path: Path = STATUS_FILE) -> set[str]:
     return {s for s, w in ws.items() if isinstance(w, dict) and str(w.get("status") or "") not in QUIET}
 
 
+def report_counts(path: Path = STATUS_FILE) -> dict[str, int]:
+    """{water slug: the number of reports placed on it} (the last run's data/build/status.json)."""
+    ws = read(path).get("waters") or {}
+    return {s: len(w.get("events") or []) for s, w in ws.items() if isinstance(w, dict) and w.get("events")}
+
+
 def folder_snapshot_time(obl_dir: Path) -> str | None:
     """The folder's snapshot time when it came from the API (its meta.json names a snapshot id); None for the older
     hand-packed copy, whose date is no point in the API's change history."""
@@ -101,13 +110,18 @@ def rewrite(states, obl_dir: Path, until: str | None, data_dir: Path = DATA_DIR)
     for st in sorted(states):
         path = data_dir / f"waters-{st.lower()}.json"
         have = read(path)
-        if have and str(have.get("state") or "").upper() != st:
-            out[st] = "not this state's extract"
+        if not have:
+            # no extract on file: a state's first extract is the state batch's extract step, reviewed in its pull
+            # request, never made by the hourly run or the daily rewrite
+            out[st] = "no extract on file"
             continue
         if have and not str(have.get("source") or "").startswith("openboatlaunch"):
             # a state whose extract on file is built from another source (DC's from NHD: openboatlaunch has no DC
             # records) is never rewritten from the folder, and is no longer pending (review 2026-11-07)
             out[st] = "not an openboatlaunch extract"
+            continue
+        if have and str(have.get("state") or "").upper() != st:
+            out[st] = "not this state's extract"
             continue
         before = path.read_bytes() if path.exists() else None
         try:
@@ -124,16 +138,46 @@ def rewrite(states, obl_dir: Path, until: str | None, data_dir: Path = DATA_DIR)
     return out
 
 
+def slug_state(slug) -> str | None:
+    m = re.search(r"-([a-z]{2})(?:-\d+)?$", str(slug or ""))
+    return m.group(1).upper() if m else None
+
+
+def hhmm(at) -> str:
+    """The HH:MMZ of a change time, as docs/status.md's entries begin ("- 03:53Z: ...")."""
+    m = re.search(r"T(\d{2}):(\d{2})", str(at or ""))
+    return f"{m.group(1)}:{m.group(2)}Z" if m else "--:--Z"
+
+
 def entry(kind: str, slug: str, state: str, at: str, **kw) -> dict:
+    """A review entry, with its line in docs/status.md's form ("- HH:MMZ: text")."""
     e = {"kind": kind, "slug": slug, "state": state, "at": at, **{k: v for k, v in kw.items() if v is not None}}
-    if kind in ("renamed", "merged"):
-        line = f"openboatlaunch {kind} {slug} into {kw.get('successor_slug')} ({state}); its events and outfalls follow by slug_aliases"
+    succ = kw.get("successor_slug")
+    cites = f" ({kw['reports']} report(s) on it)" if kw.get("reports") else ""
+    if kind in ("renamed", "merged") and slug_state(succ) not in (None, state):
+        line = (f"openboatlaunch {kind} {slug} into {succ}, another state's record; {slug} is kept in the {state} "
+                f"extract as moved{cites}, until its reports and outfalls are moved by hand")
+    elif kind in ("renamed", "merged"):
+        line = f"openboatlaunch {kind} {slug} into {succ} ({state}); its reports and outfalls follow by slug_aliases"
     elif kind == "deleted":
-        line = f"openboatlaunch deleted {slug} ({state}); anything citing it needs a new water"
+        line = (f"openboatlaunch deleted {slug} ({state}); kept in the extract as deleted{cites}, until its reports "
+                "and outfalls are moved by hand")
     else:
         line = f"openboatlaunch changed the outline of {slug} ({state}), a water with an active report; placement redone"
-    e["status_line"] = line
+    e["status_line"] = f"- {hhmm(at)}: {line}."
     return e
+
+
+def from_list(latest: dict, live: set, run: dict, pending: set) -> None:
+    """The review entries a change list gives without fetching the records (more changes than a run fetches)."""
+    for slug, c in sorted(latest.items()):
+        state = str(c.get("state") or slug_state(slug) or "").upper()
+        if state in live:
+            pending.add(state)
+        kind = c.get("change")
+        if kind in ("renamed", "merged", "deleted"):
+            run["logged"].append(entry(kind, slug, state, c.get("at"), successor_slug=c.get("successor_slug"),
+                                       reports=run["reports"].get(slug)))
 
 
 def check(obl_dir: Path | None = None, state_file: Path = STATE_FILE, status_file: Path = STATUS_FILE,
@@ -144,7 +188,7 @@ def check(obl_dir: Path | None = None, state_file: Path = STATE_FILE, status_fil
     live = set(live_states()) if data_dir == DATA_DIR else set(read(data_dir / "rules.json").get("live_states") or [])
     pending = set(st.get("pending_states") or [])
     st["until_before"] = st.get("until")
-    run = {"at": now_iso(now), "changes": 0, "fetched": 0, "logged": []}
+    run = {"at": now_iso(now), "changes": 0, "fetched": 0, "logged": [], "reports": report_counts(status_file)}
     have_folder = obl_dir.is_dir()
     if not obl_api.key():
         say("no OBL_API_KEY here: no changes asked")
@@ -180,8 +224,14 @@ def check(obl_dir: Path | None = None, state_file: Path = STATE_FILE, status_fil
                 if isinstance(c, dict) and isinstance(c.get("slug"), str):
                     latest[c["slug"]] = c
             if len(latest) > max_records:
+                # too many to fetch one by one: what the list itself says (renames, merges, deletions with their
+                # successor and state) goes to the review list, the states become pending, until moves on, and the
+                # national pull (need_full overrides its once-a-day limit) brings the records (review 2026-11-07, P2-2)
                 st["need_full"] = True
-                say(f"{len(latest)} changed records, over {max_records} a run: left for the national pull (until kept)")
+                from_list(latest, live, run, pending)
+                st["until"], st["etag"] = ans["until"], ans.get("etag")
+                say(f"{len(latest)} changed records, over {max_records} a run: logged from the list, a national pull "
+                    f"asked for; until {st['until']}")
             else:
                 ok = apply(latest, obl_dir, live, active_reports(status_file), run, pending)
                 if ok:
@@ -189,17 +239,22 @@ def check(obl_dir: Path | None = None, state_file: Path = STATE_FILE, status_fil
                     say(f"{len(latest)} changed record(s) since {st['until_before']}, applied; until {st['until']}")
                 else:
                     say("some changed records could not be fetched; until kept, asked again next run")
+    if st.pop("full_pulled", None):
+        # fetch-obl pulled the national file because need_full asked for it: every live state is rewritten from it
+        pending |= live
+        say("a national pull asked for by need_full is in the folder: every live state's extract is rewritten")
     if pending and have_folder:
         res = rewrite(pending & live, obl_dir, st.get("until"), data_dir)
         for s, r in res.items():
             say(f"{s}: extract {r}")
-        pending = {s for s in pending if s in live and res.get(s) not in ("current", "not an openboatlaunch extract")}
+        pending = {s for s in pending if s in live and res.get(s) not in ("current", "not an openboatlaunch extract",
+                                                                         "no extract on file")}
     elif pending:
         say(f"pending states {sorted(pending)}: no folder this run, rewritten when there is one")
     st["pending_states"] = sorted(pending)
     log = list(st.get("log") or []) + run["logged"]
     st["log"] = log[-LOG_KEEP:]
-    st["last_run"] = {k: v for k, v in run.items() if k != "logged"} | {"logged": len(run["logged"])}
+    st["last_run"] = {k: v for k, v in run.items() if k not in ("logged", "reports")} | {"logged": len(run["logged"])}
     write_json(state_file, st)
     for e in run["logged"]:
         print(f"status.md: {e['status_line']}", flush=True)
@@ -229,9 +284,10 @@ def apply(latest: dict, obl_dir: Path, live: set, reported: set, run: dict, pend
         status = rec.get("status") or {301: "renamed", 410: "deleted"}.get(code, "active")
         at = c.get("at") or rec.get("updated_at")
         if status in ("renamed", "merged"):
-            run["logged"].append(entry(status, slug, state, at, successor_slug=rec.get("successor_slug") or succ))
+            run["logged"].append(entry(status, slug, state, at, successor_slug=rec.get("successor_slug") or succ,
+                                       reports=run["reports"].get(slug)))
         elif status == "deleted":
-            run["logged"].append(entry("deleted", slug, state, at, name=rec.get("name")))
+            run["logged"].append(entry("deleted", slug, state, at, name=rec.get("name"), reports=run["reports"].get(slug)))
         elif slug in reported and (old or {}).get("geometry_hash") != rec.get("geometry_hash") and old is not None:
             run["logged"].append(entry("outline", slug, state, at, geometry_hash_before=(old or {}).get("geometry_hash"),
                                        geometry_hash=rec.get("geometry_hash")))

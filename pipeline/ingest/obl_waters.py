@@ -24,7 +24,10 @@ A record of the older shape (the R2 copy packed by hand: short launch keys s n k
 fields it gave before.
 
 Only active records are water records: renamed and merged ones become slug_aliases of their successor (followed to the
-end of a chain), deleted ones are counted. Only files whose record says the state are taken (a water that crosses a
+end of a chain), deleted ones are counted. A record the extract on file holds is never dropped: when openboatlaunch
+deleted it, moved it into another state, or no longer serves it, it stays as a tombstone (status deleted, moved or
+not_in_snapshot, with successor_slug and retired_at), so the reports and outfall rows citing it keep their water
+until a person retires it. The API's records carry no advisories: the extract on file keeps its own. Only files whose record says the state are taken (a water that crosses a
 state line has one record per state there, sharing water_id); a file that cannot be read is skipped and counted.
 Keys an extract on file carries that this does not write (a hand field) are kept on the same slug. The snapshot date
 comes from --snapshot, else the folder's out/meta.json (`built`, `generated` or `updated`), else the API's meta.
@@ -50,6 +53,7 @@ BASE_FIELDS = ("slug", "name", "kind", "state", "towns", "bbox", "wikidata", "ch
                "advisories")
 WRITTEN = set(BASE_FIELDS) | set(API_FIELDS) | {"launches_unpublished", "slug_aliases"}
 RETIRED = ("renamed", "merged")
+TOMBSTONE = ("deleted", "moved", "not_in_snapshot")     # a record kept on file after openboatlaunch retired it
 
 
 class Partial(Exception):
@@ -90,6 +94,9 @@ def water_record(d: dict) -> dict:
         "launches": [x["slug"] for x in ls if x["visibility"] == "published"],
         "advisories": list(d.get("advisories") or []),
     }
+    if is_new_shape(d) and "advisories" not in d:
+        # the API's records carry no advisories (2026-11-07): the extract on file keeps its own (merge_hand_fields)
+        del out["advisories"]
     if is_new_shape(d):
         for k in API_FIELDS:
             out[k] = list(d.get(k) or []) if k == "previous_slugs" else d.get(k)
@@ -147,9 +154,14 @@ def successor_of(slug: str, retired: dict[str, str], lookup=None, limit: int = 2
     return None
 
 
-def build_records(state: str, raw: list[dict], seen: Counter, lookup=None) -> list[dict]:
-    """The extract's records from a state's raw records (either shape): active ones only, with slug_aliases."""
+def build_records(state: str, raw: list[dict], seen: Counter, lookup=None, gone: dict | None = None) -> list[dict]:
+    """The extract's records from a state's raw records (either shape): active ones only, with slug_aliases. gone,
+    when given, receives {slug: {status, successor_slug, retired_at}} for every record that is no longer a water of
+    this state: "deleted", or "moved" (renamed or merged into a record outside this state's records, e.g.
+    lake-superior-il into lake-superior-mn). write_extract keeps such a record as a tombstone when the extract on file
+    holds it (its reports keep their water until a person moves them)."""
     st = state.upper()
+    gone = {} if gone is None else gone
     active, retired = {}, {}
     for d in raw:
         status = d.get("status") or "active"
@@ -160,6 +172,8 @@ def build_records(state: str, raw: list[dict], seen: Counter, lookup=None) -> li
             seen[status] += 1
         else:
             seen[status if status in ("deleted",) + RETIRED else "other status"] += 1
+            gone[d["slug"]] = {"status": "deleted", "successor_slug": None, "retired_at": d.get("retired_at")}
+    retired_at = {d["slug"]: d.get("retired_at") for d in raw if d.get("slug") in retired}
     out = {s: water_record(d) for s, d in active.items()}
     aliases: dict[str, set] = {}
     for s, d in active.items():
@@ -172,13 +186,14 @@ def build_records(state: str, raw: list[dict], seen: Counter, lookup=None) -> li
             aliases.setdefault(to, set()).add(old)
         else:
             seen["retired, successor not in this state's records"] += 1
+            gone[old] = {"status": "moved", "successor_slug": to or retired[old], "retired_at": retired_at.get(old)}
     for s, al in aliases.items():
         out[s]["slug_aliases"] = sorted(a for a in al if a not in out)
     seen["records"] += len(out)
     return [out[s] for s in sorted(out) if str(out[s].get("state") or st).upper() == st]
 
 
-def records(state: str, obl_dir: Path) -> tuple[list[dict], Counter]:
+def records(state: str, obl_dir: Path, gone: dict | None = None) -> tuple[list[dict], Counter]:
     """(the state's water records from the folder, sorted by slug, counts of what was read and skipped)."""
     seen = Counter()
     obl_dir = Path(obl_dir)
@@ -188,10 +203,10 @@ def records(state: str, obl_dir: Path) -> tuple[list[dict], Counter]:
             return json.loads((obl_dir / f"{slug}.json").read_text())
         except Exception:  # noqa: BLE001
             return None
-    return build_records(state, folder_records(state, obl_dir, seen), seen, lookup), seen
+    return build_records(state, folder_records(state, obl_dir, seen), seen, lookup, gone), seen
 
 
-def api_records(state: str) -> tuple[list[dict], Counter, str]:
+def api_records(state: str, gone: dict | None = None) -> tuple[list[dict], Counter, str]:
     """(the state's water records from the API's state list, counts, the snapshot date). Raises obl_api.ApiError."""
     import obl_api
     m = obl_api.meta()
@@ -199,7 +214,7 @@ def api_records(state: str) -> tuple[list[dict], Counter, str]:
     seen = Counter()
     raw = [d for d in raw if isinstance(d, dict) and d.get("slug")]
     built = str(m.get("built") or "")[:10] if snap == m.get("snapshot") else None
-    return build_records(state, raw, seen), seen, built or str(snap or "")[:8]
+    return build_records(state, raw, seen, None, gone), seen, built or str(snap or "")[:8]
 
 
 def merge_hand_fields(new: list[dict], path: Path) -> list[dict]:
@@ -207,14 +222,42 @@ def merge_hand_fields(new: list[dict], path: Path) -> list[dict]:
     try:
         have = json.loads(Path(path).read_text())
     except Exception:  # noqa: BLE001 - no extract on file
-        return new
+        have = {}
     old = {w.get("slug"): w for w in (have.get("waters") or []) if isinstance(w, dict)} if isinstance(have, dict) else {}
     out = []
     for w in new:
         o = old.get(w["slug"]) or {}
+        if "advisories" not in w:
+            w = {**w, "advisories": list(o.get("advisories") or [])}
         extra = {k: v for k, v in o.items() if k not in WRITTEN}
         out.append({**w, **extra} if extra else w)
     return out
+
+
+def keep_tombstones(new: list[dict], path: Path, gone: dict, seen: Counter) -> list[dict]:
+    """Never drop a record the extract on file holds: one that is now an alias of a record here (renamed or merged
+    within the state) resolves through slug_aliases; any other (deleted, moved to another state, or no longer in the
+    snapshot) stays as it is on file, marked status deleted, moved or not_in_snapshot with its successor and retired
+    time, so the reports, outfall rows and aliases that cite it keep their water until a person retires it (review
+    2026-11-07, P1-1)."""
+    try:
+        have = json.loads(Path(path).read_text())
+    except Exception:  # noqa: BLE001 - no extract on file
+        return new
+    if not isinstance(have, dict) or not isinstance(have.get("waters"), list):
+        return new
+    slugs = {w["slug"] for w in new}
+    aliased = {a for w in new for a in w.get("slug_aliases") or []}
+    kept = []
+    for o in have["waters"]:
+        if not isinstance(o, dict) or not o.get("slug") or o["slug"] in slugs or o["slug"] in aliased:
+            continue
+        g = gone.get(o["slug"]) or {"status": "not_in_snapshot", "successor_slug": None, "retired_at": None}
+        if o.get("status") in TOMBSTONE and o["slug"] not in gone:
+            g = {k: o.get(k) for k in ("status", "successor_slug", "retired_at")}
+        kept.append({**o, **g})
+        seen[f"kept as {g['status']}"] += 1
+    return sorted(new + kept, key=lambda w: w["slug"])
 
 
 def on_file(path: Path) -> int:
@@ -225,13 +268,16 @@ def on_file(path: Path) -> int:
         return 0
 
 
-def write_extract(state: str, waters: list[dict], source: str, out_json: Path, seen: Counter) -> dict:
+def write_extract(state: str, waters: list[dict], source: str, out_json: Path, seen: Counter,
+                  gone: dict | None = None) -> dict:
     st = state.upper()
     have = on_file(out_json)
-    if len(waters) * 2 < have:
-        raise Partial(f"{len(waters)} {st} records against {have} on file in {Path(out_json).name}: a partial "
+    # the records the source knows for the state: active ones, those retired into them, and those deleted or moved
+    known = len(waters) + len(gone or {}) + sum(len(w.get("slug_aliases") or []) for w in waters)
+    if known * 2 < have:
+        raise Partial(f"{known} {st} records against {have} on file in {Path(out_json).name}: a partial "
                       "snapshot would cut the extract, which is left as it is")
-    waters = merge_hand_fields(waters, out_json)
+    waters = keep_tombstones(merge_hand_fields(waters, out_json), out_json, gone or {}, seen)
     out = {"state": st, "source": source, "count": len(waters), "waters": waters}
     write_json(Path(out_json), out)
     out["_read"] = dict(seen)
@@ -251,10 +297,11 @@ def extract(state: str, obl_dir: Path | None, out_json: Path | None = None, snap
     if from_api:
         import obl_api
         try:
-            waters, seen, snap = api_records(st)
+            gone = {}
+            waters, seen, snap = api_records(st, gone)
             seen["from"] = "api"
             src = f"openboatlaunch API v1 snapshot {snapshot or snap}"
-            return write_extract(st, waters, src, out_json, seen)
+            return write_extract(st, waters, src, out_json, seen, gone)
         except obl_api.ApiError as ex:
             if obl_dir is None or not Path(obl_dir).is_dir():
                 raise
@@ -262,10 +309,11 @@ def extract(state: str, obl_dir: Path | None, out_json: Path | None = None, snap
     if obl_dir is None or not Path(obl_dir).is_dir():
         raise FileNotFoundError(f"{obl_dir}: no openboatlaunch out/water directory here")
     obl_dir = Path(obl_dir)
-    waters, seen = records(st, obl_dir)
+    gone = {}
+    waters, seen = records(st, obl_dir, gone)
     snap = snapshot or snapshot_of(obl_dir)
     src = f"openboatlaunch out/water snapshot {snap or 'unknown date'}" + (f", changes to {until[:10]}" if until else "")
-    return write_extract(st, waters, src, out_json, seen)
+    return write_extract(st, waters, src, out_json, seen, gone)
 
 
 def main(argv=None) -> int:
