@@ -75,7 +75,7 @@ def test_real_rows_kept_and_dropped_by_reason():
     by = {r["source_record_id"]: r for r in kept}
     assert by["NE0023965:1:1"]["event_type"] == "bypass" and by["NE0023965:1:1"]["volume_gal"] == 300000   # kept
     assert by["NE0133680:1:1"]["event_type"] == "cso" and by["NE0133680:1:1"]["raw"]["reached_water_rule"] == \
-        "CSO at a CSO outfall or regulator"                                   # Omaha's CSO permit, at outfall 204
+        "CSO at a CSO outfall or regulator"                                   # Omaha's CSO permit, at outfall 110
     assert by["NE0021148:6:1"]["time_precision"] == "day"                     # an extreme-event report: the period
 
 
@@ -99,7 +99,9 @@ def test_the_receiving_water_text_is_kept_as_reported():
     assert by["NE0112810:63:1"]["waterbody_text"] == "Big Papillion Creek"
     assert by["NE0021245:3:1"]["waterbody_text"] == "Missouri River at South Table Creek"
     assert by["NE0021148:6:1"]["waterbody_text"] == "Big Nemaha River (Segment NE2-10000)"
-    assert by["NE0112810:11:1"]["waterbody_text"] == "Unknown"                # a storm inlet; the water not named
+    unk = by["NE0112810:11:1"]                                                # into a storm inlet; water 'Unknown'
+    assert unk["waterbody_text"] is None and unk["raw"]["receiving_waters"] == ["Unknown"]
+    assert "'Unknown'" in unk["raw"]["receiving_water_note"]                  # kept, never printed as a water name
     assert by["NE0021199:2:1"]["waterbody_text"] is None                      # kept by its aquatic-habitat impact
     assert by["NE0021245:3:1"]["raw"]["receiving_waters"] == ["Missouri River at South Table Creek"]
 
@@ -228,3 +230,64 @@ def test_beachwatch_records_keep_only_the_safe_fields():
         assert set(r["raw"]["row"]) <= {"OBJECTID", "StationID", "StationName", "Latitude", "Longitude", "SampleYear",
                                         "WeekNumber", "ActivityStartDate", "EColi", "Microcystin", "HealthAlert",
                                         "EColiRisk", "HealthDescription"}
+
+
+# ---------------------------------------------------------------- review 2026-11-07: CSO by structure, 'Unknown'
+
+def test_a_cso_typed_overflow_at_a_manhole_is_a_sewer_overflow_with_the_type_as_filed():
+    by = {r["source_record_id"]: r for r in _build()[0]}
+    for rid in ("NE0112810:63:1", "NE0112810:11:1", "NE0036358:7:1"):       # manhole, manhole, lift station
+        r = by[rid]
+        assert r["event_type"] == "sso" and r["raw"]["type_as_filed"] == "CSO", rid
+        assert "not at a combined sewer outfall" in r["raw"]["type_note"] and r["outfall_id"] is None
+        assert r["material"] == E.MATERIAL["sso"]
+    assert by["NE0133680:1:1"]["event_type"] == "cso" and by["NE0133680:1:1"]["outfall_id"] == "110"
+    w204 = by["NE0133680:8:1"]                                                # permitted feature 204 given
+    assert w204["event_type"] == "cso" and w204["outfall_id"] == "204" and "type_as_filed" not in w204["raw"]
+    # every NE CSO left names its outfall or its water: none can fall to "every water of the operator"
+    assert all(r["outfall_id"] or r["waterbody_text"] for r in by.values() if r["event_type"] == "cso")
+
+
+def test_an_outfall_named_only_in_the_description_is_read_into_outfall_id():
+    fx = _fixture()
+    ev = next(e for e in fx["events"] if e["permit_identifier"] == "NE0133680" and e["program_report_form_set_id"] == "8")
+    ev["permitted_feature_identifier"] = ""
+    ev["sewer_overflow_structure_type_code"], ev["sewer_overflow_structure_type_desc"] = "BRO", "Broken Pipe"
+    ev["sewer_overflow_bypass_description_text"] = "Water Main break caused a dry weather overflow at CSO 119"
+    r = next(x for x in _build(fx)[0] if x["source_record_id"] == "NE0133680:8:1")
+    assert r["event_type"] == "cso" and r["outfall_id"] == "119" and "CSO 119" in r["raw"]["outfall_basis"]
+
+
+def test_the_structure_rule_and_unknown_water_are_nebraskas_only():
+    assert E.CSO_BY_STRUCTURE_STATES == {"NE"} and E.UNKNOWN_WATER_STATES == {"NE"}
+    from tests.test_ingest_dc import _row
+    t = {"events": [_row(sewer_overflow_bypass_event_key="x", permit_identifier="IL0000009",
+                         sewer_overflow_structure_type_code="MAN", sewer_overflow_structure_type_desc="Manhole")],
+         "types": [{"sewer_overflow_bypass_event_key": "x", "sewer_overflow_bypass_type_code": "CSO",
+                    "sewer_overflow_bypass_type_desc": "", "sewer_overflow_bypass_type_code_sequence": "1"}],
+         "waters": [{"sewer_overflow_bypass_event_key": "x", "name_receiving_water": "Unknown"}]}
+    r = E.build(t, {})[0][0]
+    assert r["event_type"] == "cso" and r["waterbody_text"] == "Unknown"     # Illinois as before
+
+
+def test_a_retyped_report_naming_no_water_is_never_spread_over_the_operators_waters():
+    from build import status as S
+    from tests.test_outfall_placement import WATERS
+    rec = {r["source_record_id"]: r for r in _build()[0]}["NE0112810:11:1"]
+    dw = {rec["discharger_id"]: {"id": rec["discharger_id"], "state": "CT", "names": ["Test River", "Mill River"],
+                                 "slugs": []}}
+    saved = dict(S.PLACE_STEPS)
+    S.PLACE_STEPS.update(registry=True, relaxed_guard=True, no_receiving_water=True, outfall_ids=True,
+                         multi_outfall=True)
+    S._GEOM_CACHE.clear()
+    try:
+        res = S.Resolver(WATERS, [], {}, dw, {"no_outfall_all_waters": True})
+        # without the point, so the distance guard cannot stand in for the rule (a long river such as the Missouri
+        # passes it near Omaha)
+        rec = dict(rec, npdes_permit="CT0109999", lat=None, lon=None, coord_source=None)
+        assert res.resolve(rec)["water_slugs"] == []
+        as_filed = dict(rec, event_type="cso", waterbody_text="Unknown")
+        assert res.resolve(as_filed)["water_slugs"] == ["test-river-ct", "mill-river-ct"]   # what the fix prevents
+    finally:
+        S.PLACE_STEPS.update(saved)
+        S._GEOM_CACHE.clear()
