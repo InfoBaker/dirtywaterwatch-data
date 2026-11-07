@@ -56,6 +56,9 @@
 #                  il_mwrd_possible_cso (MWRD's daily-reset map of possible CSO events, polled), il_mwrd_lake_reversals
 #                  (MWRD's table of reversals to Lake Michigan since 1985; needs pdftotext), il_idph_beachguard (IDPH's
 #                  list of beach advisories in effect and each listed beach's page); il_mwrd is a helper
+#                  Nebraska: echo_sewer_overflow_events (EPA's overflow tables, NE permits: the statewide record, each
+#                  event in the zone of its own point, data/reference/ne-mountain-time-counties.json) and the generic
+#                  ArcGIS block ne-dwee-beachwatch (DWEE Beach Watch: microcystin health alerts and elevated E. coli)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
