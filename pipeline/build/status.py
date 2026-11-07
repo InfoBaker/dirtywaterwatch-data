@@ -662,12 +662,39 @@ def canonical_dischargers(events: list[dict], aliases: dict[str, str]) -> list[d
     return out
 
 
-def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, include_restricted: bool = False):
+NOT_LIVE: list[str] = []      # (source id, state) of the records left out by the last load_events with `live` given
+_US_CODES = frozenset("AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM "
+                      "NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY PR VI GU AS MP".split())
+
+
+def _state_of_any(r: dict, sid: str) -> str | None:
+    """A record's state whether or not that state is live (event_state knows the live states only): the record's
+    raw.state, its state field, then the two-letter prefix of its source id or event id when that is a US code."""
+    raw = r.get("raw") if isinstance(r.get("raw"), dict) else {}
+    for v in (raw.get("state"), r.get("state")):
+        if isinstance(v, str) and v.strip()[:2].upper() in _US_CODES:
+            return v.strip()[:2].upper()
+    for v in (sid, r.get("event_id")):
+        if isinstance(v, str) and len(v) > 2 and v[2] in "-:_" and v[:2].upper() in _US_CODES:
+            return v[:2].upper()
+    return None
+
+
+def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, include_restricted: bool = False,
+                live: set[str] | None = None):
     """(files, events, problems): files = {source_id: file header + fixture flag}; events carry
     `_fixture` and `_file`. A file whose meta has distribution_discouraged true (NHDES Healthy
-    Swimming) is left out unless include_restricted (--include-nhdes; owner's decision pending)."""
+    Swimming) is left out unless include_restricted (--include-nhdes; owner's decision pending).
+    `live`: the states the site publishes (rules.json live_states): a record whose state (event_state) is another
+    state is left out, so that no water of a live state takes its colour or its history from a report the export
+    will not carry (2026-11-07: Alabama's ingester, merged before Alabama went live, placed one of its reports on
+    the Chattahoochee and Walter F George Reservoir on the Georgia side; the pages then counted "Record not found"
+    and the publish failed the wording scan). None (tests, batches, audits with a scratch rules file) keeps every
+    state's records as before."""
     files, events, problems = {}, [], []
     WITHHELD.clear()
+    NOT_LIVE.clear()
+    live_up = {str(x).upper() for x in live} if live is not None else None
     for p in sorted(events_dir.glob("*.json")):
         try:
             d = json.loads(p.read_text())
@@ -694,6 +721,11 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             r["_fixture"] = fixture
             r["_file"] = p.name
             r.setdefault("source_id", sid)
+            if live_up is not None:
+                st = event_state(r) or _state_of_any(r, sid)
+                if st and st not in live_up:
+                    NOT_LIVE.append((sid, st))
+                    continue
             events.append(r)
     return files, events, problems
 
@@ -3355,7 +3387,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
           registry: dict | None = None, include_restricted: bool = False, rules: dict | None = None,
           reaches: dict | None = None, flows: tuple | None = None, discharger_towns: dict | None = None,
           rain: dict | None = None, discharger_waters: dict | None = None, discharger_aliases_map: dict | None = None,
-          placement_cache: Path | None | bool = True):
+          placement_cache: Path | None | bool = True, live_only: bool = False):
     """rain: {"rainfall", "history", "thresholds"} (build/rain_likely.py); read from data/build/ when
     None and rules.rain_likely.enabled is true. Placement reads every outfall registry file
     (load_registry_outfalls) when outfalls is None, else the outfalls given.
@@ -3372,7 +3404,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     placement_outfalls = load_registry_outfalls() if outfalls is None else outfalls
     outfalls = load_outfalls() if outfalls is None else outfalls
     registry = load_registry() if registry is None else registry
-    files, events, problems = load_events(events_dir, include_fixtures, include_restricted)
+    files, events, problems = load_events(events_dir, include_fixtures, include_restricted,
+                                          live=rules_live_states(rules if rules is not None else load_rules()) if live_only else None)
+    if live_only and NOT_LIVE:
+        by_state = defaultdict(int)
+        for _, st in NOT_LIVE:
+            by_state[st] += 1
+        print(f"status: records of states not yet live left out (rules.json live_states): {dict(sorted(by_state.items()))}")
     problems.extend(alias_problems)
     # an event's discharger_id that the operator registry lists as an alias is read as the row's id here, as the
     # export publishes it: placement's operator towns and receiving waters, the guard's town check and
@@ -4039,9 +4077,12 @@ def main() -> None:
     ap.add_argument("--now", help="evaluate at this time (ISO 8601), for replays and tests")
     ap.add_argument("--include-nhdes", action="store_true",
                     help="include events files marked distribution_discouraged (NHDES Healthy Swimming)")
+    ap.add_argument("--live-only", action="store_true",
+                    help="leave out the records of states not in rules.json live_states (the refresh; the export "
+                         "carries none of them, so no live water may take its colour or history from one)")
     a = ap.parse_args()
     status, _ = build(include_fixtures=a.fixtures and not a.no_fixtures, now=parse_time(a.now) if a.now else None,
-                      include_restricted=a.include_nhdes)
+                      include_restricted=a.include_nhdes, live_only=a.live_only)
     by = defaultdict(int)
     for w in status["waters"].values():
         by[w["status"]] += 1
