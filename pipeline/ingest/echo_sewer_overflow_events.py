@@ -1,5 +1,5 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
-Washington State and Illinois.
+Washington State, Illinois and Arizona.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -138,6 +138,39 @@ Illinois (permits IL...; research/il/report.md section 2.2; not live until data/
     emails, phones, staff names, an owner's or resident's name, every house number). The point stays: it is the
     event's own (no Illinois point is shared by many reports of one permit except at a CSO outfall or a plant).
 
+Arizona (permits AZ...; research/az/report.md section 2.2; not live until data/rules.json says so)
+  Arizona's AZPDES permittees file their 24-hour and five-day overflow and bypass reports in ADEQ's myDEQ, and they
+  reach this dataset (2026-11-04 extract: 288 current AZ rows from 42 permits, 264 SSO and 24 bypass, starts from
+  2019-09 to 2026-10-28; received a median 3 days after the start, 90th percentile 10). Pima County (Tucson) files no
+  rows, and collection systems with only an Aquifer Protection Permit report to ADEQ under A.A.C. R18-9-C305(F) but
+  are not in this table. Five Arizona habits are handled here, for AZ permits only, so the other states' records are
+  unchanged:
+  - Time zone (docs/decisions.md, National expansion item 6): STATE_TZ gives America/Phoenix (no daylight time, so
+    every Arizona time is written -07:00).
+  - Receiving water as an ADEQ waterbody identifier: most named receiving waters are WBIDs ('AZ15060202-421'), not
+    names. AZ_WBID (data/reference/az-adeq-wbids.json, from ADEQ's stream and lake WBID layers;
+    scripts/az_adeq_wbids.py) turns each into ADEQ's name ('Unnamed Trib to Munds Creek'), so waterbody_text carries
+    the name; raw.receiving_waters keeps what was filed, raw.receiving_water_aliases what was changed and
+    raw.receiving_water_wbids ADEQ's segment (origin, terminus, flow regime). A code ADEQ's layer lacks is kept as
+    typed. 'UNK_PERNL' (a receiving-water entry with no name) counts as a water but gives no name (AZ_WATER_ALIASES).
+  - Washes and canals: most Arizona overflows reach streets, retention basins and dry washes, and the report says so
+    only in the impact text ('flowed to an unnamed wash', 'Discharged to the Corgett Wash', 'flowed into RID canal').
+    STATE_WATER_TEXT["AZ"] reads a named wash, arroyo or canal ('Queen Creek Wash'), or one the overflow went to,
+    into or through ('to an unnamed wash', 'into a Concrete lined canal'), as a water: a report naming a wash names
+    a water (the owner's rule of 2026-11-03 keeps a report that reached no water but does not place it on one). The
+    verb ('Wash with potable water', 'power washed') and a wash the overflow did not reach ('over 1/2 mile from the
+    closest dry wash') are not read as one.
+  - Texts that name a water only to deny it ('The SSO did not impact any waterway', 'did not reach any body of
+    water') and the plant's own ponds ('effluent storage pond', 'retention pond', 'recharge basin') are taken out of
+    the text before the water words are read (STATE_NOT_WATER_TEXT["AZ"]); a water-feature or other pond still counts.
+  - The point is mostly the plant's (Grand Canyon's South Rim plant gives one point for 30 of its 32 reports, Yuma 15
+    of 17): AZ is in REPEATED_POINT_STATES, with the shared points counted over every report of the permit, kept or
+    dropped (REPEATED_POINT_ALL_REPORTS), and a point counted as the permit's when REPEATED_POINT_MIN_BY_STATE["AZ"]
+    (3) or more reports with different descriptions ('Manhole ID : 112196', 'Manhole ID : 117012') give it. A manhole
+    that overflows again and again keeps its point (its reports share one description). Bypasses keep the point.
+  - Free text: descriptions give street addresses ('SSO at <number> N <street> Blvd') and 'Other' texts mention
+    private residences: AZ is in FREE_TEXT_STATES (the Illinois scrub; house numbers removed).
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -169,16 +202,20 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
-STATE_TZ = {"IL": "America/Chicago"}
+STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix"}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL"}
+FREE_TEXT_STATES = {"IL", "AZ"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
-REPEATED_POINT_STATES = {"GA"}
+REPEATED_POINT_STATES = {"GA", "AZ"}
 REPEATED_POINT_MIN = 5
+# Arizona (module docstring): the shared points are counted over every report of the permit, kept or dropped, and
+# only reports with different descriptions count, three of them enough
+REPEATED_POINT_ALL_REPORTS = {"AZ"}
+REPEATED_POINT_MIN_BY_STATE = {"AZ": 3}
 AUTHORITY = "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)"
 SUMMARY_URL = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 
@@ -208,6 +245,44 @@ WATER_WORDS = re.compile(r"\b(river|brook|stream|creek|pond|lake|harbou?r|bay|co
                          r"storm ?drain|catch basin|wetland|swamp|ocean)\b", re.I)
 OUTFALL_TEXT = re.compile(r"\bcso\b|regulator|outfall", re.I)
 TZ_NOTE = "ECHO gives event times without a timezone; recorded as given (presumably local time)"
+# Arizona (module docstring): a wash, arroyo or canal named ('Queen Creek Wash', 'RID canal') or one the overflow went
+# to, into or through; read only for AZ permits
+STATE_WATER_TEXT = {"AZ": re.compile(
+    r"\b(?:[A-Z][\w'-]*\s+){1,3}(?:Wash|Washes|Arroyo|Canal)\b|\b[A-Z]{2,}\s+(?i:canal)\b|"
+    r"(?i:\b(?:to|into|in|through|entered|enter|entering|reached|reach|reaching)\s+(?:[\w'-]+\s+){0,3}?"
+    r"(?:washe?s?|arroyos?|canals?)\b)")}
+# Arizona: a water named only to deny it, and the plant's own ponds and basins, taken out before the water words
+STATE_NOT_WATER_TEXT = {"AZ": re.compile(
+    r"(?i:\b(?:did\s*n[o']?t|does\s*n[o']?t|do\s*n[o']?t|never|no\s+impact\s+to)\s+(?:[\w-]+\s+){0,3}?"
+    r"(?:any\s+|a\s+|the\s+)?(?:waterways?|bod(?:y|ies)\s+of\s+water|water\s*bod(?:y|ies)|surface\s+waters?|"
+    r"waters?\s+of\s+the\s+(?:state|u\.?s\.?)|creeks?|rivers?|streams?|washe?s?|lakes?)\b|"
+    r"\b(?:effluent|storage|holding|retention|detention|evaporation|recharge|percolation|sludge|aeration|"
+    r"emergency\s+effluent)\s+(?:storage\s+|holding\s+)?(?:ponds?|basins?|lagoons?)\b)")}
+# Arizona receiving-water entries that are not names: counted as a water, no name given
+AZ_WATER_ALIASES = {"UNK_PERNL": None}
+AZ_WBID_RE = re.compile(r"^\s*(AZ\d{8}[A-Z]?-\d+[A-Z]?)\s*$")
+AZ_WBID_FILE = DATA_DIR / "reference" / "az-adeq-wbids.json"
+_AZ_WBID: dict | None = None
+
+
+def az_wbids() -> dict:
+    """ADEQ's WBIDs -> {name, kind, origin, terminus, flow_regime} (data/reference/az-adeq-wbids.json)."""
+    global _AZ_WBID
+    if _AZ_WBID is None:
+        _AZ_WBID = (read_json(AZ_WBID_FILE, {}) or {}).get("wbids", {})
+    return _AZ_WBID
+
+
+def normalise_az_water(w: str) -> str | None:
+    """An Arizona receiving-water entry as a name: a WBID as ADEQ names it, 'UNK_PERNL' as no name (None), any other
+    text as typed (trimmed)."""
+    t = (w or "").strip()
+    if t in AZ_WATER_ALIASES:
+        return AZ_WATER_ALIASES[t]
+    m = AZ_WBID_RE.match(t)
+    if m and (az_wbids().get(m.group(1)) or {}).get("name"):
+        return az_wbids()[m.group(1)]["name"]
+    return t
 
 TABLES = {
     "events": "sewer_overflow_bypass_report_events.csv",
@@ -543,9 +618,14 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
         return True, "impact to a water (" + ",".join(sorted(codes & WATER_IMPACTS)) + ")"
     texts = " ".join([i.get("sewer_overflow_bypass_impact_other_text") or "" for i in impacts]
                      + [ev.get("sewer_overflow_bypass_description_text") or ""])
+    if state in STATE_NOT_WATER_TEXT:   # a water named only to deny it, the plant's own ponds (module docstring, Arizona)
+        texts = STATE_NOT_WATER_TEXT[state].sub(" ", texts)
     m = WATER_WORDS.search(texts)
     if m:
         return True, f"text names a water ({m.group(0).lower()})"
+    m = STATE_WATER_TEXT[state].search(texts) if state in STATE_WATER_TEXT else None
+    if m:
+        return True, f"text names a water ({' '.join(m.group(0).split()).lower()})"
     if "BYP" in types:
         return True, "bypass (leaves the plant through its permitted outfall)"
     if "CSO" in types and (struct == "CSO" or (struct == "OTH" and OUTFALL_TEXT.search(other))):
@@ -608,6 +688,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     disc = discharger_index()
     W = Waters()
     kept, dropped, why = [], [], Counter()
+    all_points = report_points(tables["events"])
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
@@ -665,6 +746,13 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             slugs, how = [reg["water_slug"]], "outfall_registry"
         real_w = [w.strip() for w in w_names if w.strip() and not no_water(w, state)]
         w_aliases = {}
+        az_wbid = {}
+        if state == "AZ":   # ADEQ's WBIDs -> ADEQ's names; what was filed stays in raw.receiving_waters
+            w_aliases = {w: normalise_az_water(w) for w in w_names if w.strip() and not no_water(w, state)
+                         and normalise_az_water(w) != w}
+            real_w = list(dict.fromkeys(n for n in (normalise_az_water(w) for w in real_w) if n))
+            az_wbid = {m_.group(1): az_wbids()[m_.group(1)] for m_ in (AZ_WBID_RE.match(w) for w in w_names)
+                       if m_ and m_.group(1) in az_wbids()}
         if state == "DC":   # free text -> the NHD name; what was typed stays in raw.receiving_waters
             w_aliases = {w: normalise_dc_water(w) for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)
                          and normalise_dc_water(w) != w}
@@ -703,6 +791,10 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         })
         if w_aliases:
             raw["receiving_water_aliases"] = w_aliases
+        if az_wbid:
+            raw["receiving_water_wbids"] = az_wbid
+            raw["receiving_water_wbid_source"] = ("ADEQ waterbody identifiers (WBID layers on ArcGIS Online, "
+                                                  "data/reference/az-adeq-wbids.json)")
         if dc_state:   # placement state differs from the permit's; the operator stays DC Water
             raw["state"], raw["state_basis"] = dc_state, dc_basis
         if extreme:
@@ -724,24 +816,47 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             source_url=f"https://echo.epa.gov/detailed-facility-report?fid={permit}&sys=ICP",
             raw=raw, parse_error=perr,
         ))
-    repeated_points(kept)
+    repeated_points(kept, all_points)
     kept.sort(key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     return kept, dropped, why
 
 
-def repeated_points(kept: list[dict]) -> int:
+def report_points(events: list[dict]) -> Counter:
+    """For REPEATED_POINT_ALL_REPORTS: (permit, lat, lon) -> the number of different descriptions among every report
+    of the permit (kept or dropped) that gives the point."""
+    descs: dict[tuple, set] = defaultdict(set)
+    for ev in events:
+        p = ev.get("permit_identifier") or ""
+        if p[:2] not in REPEATED_POINT_ALL_REPORTS:
+            continue
+        try:
+            lat, lon = float(ev["latitude_measure"]), float(ev["longitude_measure"])
+        except (TypeError, ValueError, KeyError):
+            continue
+        descs[(p, lat, lon)].add((ev.get("sewer_overflow_bypass_description_text") or "").strip().lower()
+                                 or ev.get("sewer_overflow_bypass_event_key"))
+    return Counter({k: len(v) for k, v in descs.items()})
+
+
+def repeated_points(kept: list[dict], all_points: Counter | None = None) -> int:
     """For REPEATED_POINT_STATES: a point REPEATED_POINT_MIN or more kept events of one permit share is the permit's
-    location, not the spill's; it is moved to raw.reported_point (bypasses keep it). Returns the events changed."""
+    location, not the spill's; it is moved to raw.reported_point (bypasses keep it). For REPEATED_POINT_ALL_REPORTS the
+    count is all_points' (every report of the permit with a different description) against the state's own minimum.
+    Returns the events changed."""
     shared = Counter((r["npdes_permit"], r["lat"], r["lon"]) for r in kept
-                     if r["lat"] is not None and r["npdes_permit"][:2] in REPEATED_POINT_STATES)
+                     if r["lat"] is not None and r["npdes_permit"][:2] in REPEATED_POINT_STATES
+                     and r["npdes_permit"][:2] not in REPEATED_POINT_ALL_REPORTS)
+    shared.update({k: n for k, n in (all_points or {}).items()})
     n = 0
     for r in kept:
         k = (r["npdes_permit"], r["lat"], r["lon"])
-        if r["lat"] is None or shared.get(k, 0) < REPEATED_POINT_MIN or r["event_type"] == "bypass":
+        least = REPEATED_POINT_MIN_BY_STATE.get(r["npdes_permit"][:2], REPEATED_POINT_MIN)
+        if r["lat"] is None or shared.get(k, 0) < least or r["event_type"] == "bypass":
             continue
         r["raw"]["reported_point"] = [r["lat"], r["lon"]]
-        r["raw"]["point_note"] = (f"the same point is given for {shared[k]} reports of this permit: taken as the "
-                                  "permit's location, not the spill's")
+        r["raw"]["point_note"] = (f"the same point is given for {shared[k]} reports of this permit"
+                                  + (" with different descriptions" if r["npdes_permit"][:2] in REPEATED_POINT_ALL_REPORTS
+                                     else "") + ": taken as the permit's location, not the spill's")
         r["lat"] = r["lon"] = r["coord_source"] = None
         n += 1
     return n
