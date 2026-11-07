@@ -1382,6 +1382,10 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             "reached_water_rule": reason, "timezone_note": tz_note(state, permit, ev_tz, tz_basis), "report_version": ev.get("program_report_form_id"),
         })
         raw.update(ne_notes)
+        if ev_tz and any(t and "T" not in t for t in (start, end)):
+            # a date with no time keeps no offset: the zone it is a day of goes with it, so the status build ends the
+            # day in the event's own zone, not New York's (SOL 2026-11-07 wave 2 P1-1)
+            raw["time_zone"] = ev_tz
         if w_aliases:
             raw["receiving_water_aliases"] = w_aliases
         if az_wbid:
