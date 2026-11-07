@@ -1,0 +1,67 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 99999,
+    "Station_ID": "GAL999",
+    "Lat_DD": 29.50925,
+    "Long_DD": -94.49357,
+    "StationID": "GAL999",
+    "PRJ_ID": "TX284256",
+    "Name": "Galveston Island Park Board",
+    "chrCountyName": "Galveston County",
+    "Advisory": "High",
+    "cfu": 310.0,
+    "Measurement": "310 MPN/100ml",
+    "Date": "10/27/2026",
+    "stationname": "Fixture Beach"
+   },
+   "geometry": {
+    "x": -10518976.0956,
+    "y": 3440623.2004000023
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 912,
+    "Station_ID": "GAL076    ",
+    "Lat_DD": 29.50925,
+    "Long_DD": -94.49357,
+    "StationID": "GAL076",
+    "PRJ_ID": "TX284256",
+    "Name": "Rollover Pass East",
+    "chrCountyName": "Galveston County",
+    "Advisory": "Medium",
+    "cfu": 41.0,
+    "Measurement": "41 MPN/100ml",
+    "Date": "10/26/2026",
+    "stationname": "Gayle Street"
+   },
+   "geometry": {
+    "x": -10518976.0956,
+    "y": 3440623.2004000023
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 817,
+    "Station_ID": "CAM019    ",
+    "Lat_DD": 26.12817,
+    "Long_DD": -97.16688,
+    "StationID": "CAM019",
+    "PRJ_ID": "TX868582",
+    "Name": "City of South Padre Island",
+    "chrCountyName": "Cameron County",
+    "Advisory": "Low",
+    "cfu": 10.0,
+    "Measurement": "10 MPN/100ml",
+    "Date": "10/23/2026",
+    "stationname": "So. Padre Island - Fantasy"
+   },
+   "geometry": {
+    "x": -10816567.6036,
+    "y": 3014964.0262
+   }
+  }
+ ]
+}

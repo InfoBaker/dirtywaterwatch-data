@@ -57,6 +57,8 @@ HOMEPAGES = {
     "al-adem-sso-history": "https://gis.adem.alabama.gov/sso/index.html",
     "al-adem-sso-map-live": "https://gis.adem.alabama.gov/sso/index.html",
     "al-adem-beach-monitoring": "https://adem.alabama.gov/coastal/ademadph-coastal-alabama-beach-monitoring-program",
+    "tx-tceq-sso-opendata": "https://www.tceq.texas.gov/compliance/investigation/ud-sso",
+    "tx-glo-beach-watch": "https://www.texasbeachwatch.com/",
     "nc-dwr-sso-2026": "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779",
     "nc-dwr-sso-2022-2025": "https://www.deq.nc.gov/about/divisions/water-resources/water-quality-permitting/information-sewer-system-overflows",
     "nc-rwq-advisories": "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality",
