@@ -1,0 +1,39 @@
+id: "ms-mdeq-beach-monitoring"
+name: "Mississippi Beach Monitoring Program (BeachMonitoringView FeatureServer)"
+url: "https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer/0"
+homepage: "https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ms, status candidate, verified fetched, checked 2026-11-07): Best beach feed in
+#   the group, not yet read: an advisory and a closure are two separate flags on each station, with
+#   MDEQ's own start date as text and no end. The generic snapshot reader takes one state field and
+#   dates events by poll, which would drop MDEQ's start date and the closure flag; the generic layer
+#   reader would keep a lifted advisory in effect until it ages out. No station was under advisory
+#   or closure on 2026-11-07 (21 stations, Enterococci, last samples 2026-10-26 to 2026-11-05), so
+#   the lifted state could not be observed. Needs a small module (both flags, the start date, lifted
+#   when the flags clear).
+# Access detail (research, quoted): Layer 0 stations (points), layer 1 beach segments (lines), both
+#   public:
+#   https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer/0/query?where=1%3D1&outFields=*&f=json.
+#   Fields isadvisory, isclosure, eventtype (Enterococci, Debris Clean Up, HAB), advisorydesc,
+#   closuredesc, startdate, lastsampledate, epa (BEACON id). 21 stations, none under advisory on
+#   2026-11-03. Map at beaches.mdeq.ms.gov (historical results and advisories pages /Historical/HBR,
+#   /Historical/HCA). Samples raw/beach-l0.json, raw/beach-l1.json.
+# Can fill: source_status, started_at (startdate), geometry (official affected segment),
+#   advice_text, coordinates
+# Cannot fill: ended_at (advisory lift is a state change only); valid_until
+# Waters: 21 Gulf Coast beach stations (Hancock, Harrison, Jackson counties) and their beach
+#   segments
+# History: Historical pages on the site; layer holds current state
+cadence: "Weekly sampling in season (Gulf Coast Research Laboratory); advisories posted first on the map. From 2026-09-08 routine advisories go to beach signs and the website only (no texts or press releases), per local press."
+license: "None shown."
+attribution: "Mississippi Department of Environmental Quality with USM Gulf Coast Research Laboratory"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "hab_advisory"]
+states: ["MS"]
+access: ["arcgis", "html", "rss"]
+access_detail: "Layer 0 stations (points), layer 1 beach segments (lines), both public: https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer/0/query?where=1%3D1&outFields=*&f=json. Fields isadvisory, isclosure, eventtype (Enterococci, Debris Clean Up, HAB), advisorydesc, closuredesc, startdate, lastsampledate, epa (BEACON id). 21 stations, none under advisory on 2026-11-03. Map at beaches.mdeq.ms.gov (historical results and advisories pages /Historical/HBR, /Historical/HCA). Samples raw/beach-l0.json, raw/beach-l1.json."
+machine_readable: true
+legal_basis: "BEACH Act"
+checked: "2026-11-07"

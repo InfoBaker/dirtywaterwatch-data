@@ -16,7 +16,7 @@
     "access": [
       "csv"
     ],
-    "access_detail": "ECHO daily ZIP current_sewer_overflow_and_collection_systems_tables.zip; tables sewer_overflow_bypass_report_events.csv (+ receiving_waters, causes, impacts, types, corrective_actions). 353 Mississippi events from 47 permits on 2026-11-03 (latest start 2026-10-28); a few from 2023-2024, the rest from January 2026 on (125 in June 2026). Median 4 days from start to EPA receipt. Sample raw/sobe-ms-sample.json (shared extract in the scratchpad sobe folder).",
+    "access_detail": "ECHO daily ZIP current_sewer_overflow_and_collection_systems_tables.zip; tables sewer_overflow_bypass_report_events.csv (+ receiving_waters, causes, impacts, types, corrective_actions). 353 Mississippi events from 47 permits on 2026-11-03 (latest start 2026-10-28); a few from 2023-2024, the rest from January 2026 on (125 in June 2026). Median 4 days from start to EPA receipt. Sample raw/sobe-ms-sample.json.",
     "machine_readable": true,
     "sample_record": {
       "permit_identifier": "MS0048691",
@@ -74,11 +74,11 @@
     "history": "Sparse before December 2025 (eRule effective 2025-12-21); full from January 2026.",
     "license": "EPA ECHO data: public domain (US government work).",
     "legal_basis": "40 CFR 127; 40 CFR 122.41(l)(6); MDEQ permit conditions",
-    "status": "candidate",
-    "status_reason": "The only statewide dated list for Mississippi: event precision, coordinates on all 353 rows, start and end, volume, receiving water. Already in the national SOBE ingester.",
+    "status": "used",
+    "status_reason": "Read by the national eRule ingester with Mississippi in its states (Central time, free text scrubbed): the all-versions extract of 2026-11-04 held 358 current Mississippi events from 47 permits (SSO 314, bypass 43, CSO 1); 248 kept from 27 permits (243 naming a receiving water), 110 dropped (108 naming no water with only land or no observable impacts, 1 building backup, 1 bypass whose water is 'None'). Report received a median 4 days after the start (90th percentile 41 days). Every row has coordinates; 15 have no volume.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": ""
+    "checked": "2026-11-07",
+    "notes": "The current-version ZIP held only its metadata file on 2026-11-05 and 2026-11-07; the module reads the current version of each report from the all-versions ZIP. The City of Jackson's reports give creek names without 'Creek' ('EUBANKS', 'TOWN'); eight are read as the NHD creek of that name near the reports' points, four (Belhaven, Caney, Eastover, Three Mile) are kept as typed."
   },
   {
     "id": "ms-mdeq-netsso-guidance",
@@ -189,9 +189,9 @@
     "license": "None shown.",
     "legal_basis": "BEACH Act",
     "status": "candidate",
-    "status_reason": "Best beach feed in the group: advisory and closure flags with official segment lines and HAB as an event type.",
+    "status_reason": "Best beach feed in the group, not yet read: an advisory and a closure are two separate flags on each station, with MDEQ's own start date as text and no end. The generic snapshot reader takes one state field and dates events by poll, which would drop MDEQ's start date and the closure flag; the generic layer reader would keep a lifted advisory in effect until it ages out. No station was under advisory or closure on 2026-11-07 (21 stations, Enterococci, last samples 2026-10-26 to 2026-11-05), so the lifted state could not be observed. Needs a small module (both flags, the start date, lifted when the flags clear).",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -322,7 +322,7 @@
     "access": [
       "arcgis"
     ],
-    "access_detail": "Listed in the Hosted folder; not queried.",
+    "access_detail": "FeatureServer/0 public; fields are the facility's addresses, basin, county and agency staff assignments; no outfall number or receiving water.",
     "machine_readable": true,
     "sample_record": null,
     "fields": [],
@@ -336,10 +336,10 @@
     "history": "unknown",
     "license": "None shown.",
     "legal_basis": null,
-    "status": "watch",
-    "status_reason": "Possible improvement on ICIS facility points.",
+    "status": "rejected",
+    "status_reason": "Facility points of every MDEQ-regulated site (9,188 rows on 2026-11-07: plant entrances, addresses and agency staff assignments), not outfall points; no improvement on EPA's permitted-feature points.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -371,9 +371,9 @@
     "license": null,
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "Coastal HAB via the beach layer.",
+    "status_reason": "Coastal HAB advisories and closures as eventtype HAB on the beach layer; read with it when that module is built.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   }
 ]
