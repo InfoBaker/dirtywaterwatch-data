@@ -619,12 +619,12 @@ def norm_town(t) -> str:
 
 
 def load_waters(inp: Inputs) -> dict[str, dict]:
-    """Every water record as the build loads them (build/status.load_waters): waters-ne.json, the other
+    """Every water record as the build loads them (build/status.load_waters): waters-new-england.json, the other
     data/waters-*.json, then waters-extra, waters-dc, waters-nhd; the first record of a slug stays. Each copy gets
     `_origin` and `_file`."""
     d = inp.path("data")
-    paths = [d / "waters-ne.json"] + sorted(p for p in d.glob("waters-*.json")
-                                            if p.name != "waters-ne.json" and p.name not in EXTRA_WATER_FILES)
+    paths = [d / "waters-new-england.json"] + sorted(p for p in d.glob("waters-*.json")
+                                            if p.name != "waters-new-england.json" and p.name not in EXTRA_WATER_FILES)
     paths += [d / name for name in EXTRA_WATER_FILES]
     waters: dict[str, dict] = {}
     seen_any = False

@@ -238,7 +238,7 @@ def load_waters() -> dict[str, dict]:
 
 def outfall_points() -> dict[str, list[tuple[float, float]]]:
     """Wastewater outlets per water slug (the registry the water pages list)."""
-    d = read_json(DATA_DIR / "outfalls-ne.json", {}) or {}
+    d = read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}
     out: dict[str, list[tuple[float, float]]] = {}
     for o in d.get("outfalls", []):
         lon, lat = fnum(o.get("lon")), fnum(o.get("lat"))

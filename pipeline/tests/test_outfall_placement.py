@@ -42,7 +42,7 @@ WATERS = dict([
 def row(outfall, slug=None, receiving="", lat=None, lon=None, match="geometry"):
     return {"npdes_permit": PERMIT, "outfall": outfall, "state": "CT", "city": "NEW HAVEN", "water_slug": slug,
             "match": match if slug else "none", "distance_m": 10 if slug else None,
-            "receiving_water_echo": receiving, "lat": lat, "lon": lon, "_file": "data/outfalls-ne.json"}
+            "receiving_water_echo": receiving, "lat": lat, "lon": lon, "_file": "data/outfalls-new-england.json"}
 
 
 ROWS = [row("003", receiving="Test River", lat=41.3005, lon=-71.95),       # no slug: its receiving water by name
@@ -122,7 +122,7 @@ def test_a_report_naming_its_outfalls_only_in_its_volume_is_placed_by_them():
     assert pl["water_slugs"] == ["test-river-ct"] and pl["water_match"] == "outfall_registry"
     assert pl["note"].startswith("placed by outfalls 003, 004 of permit CT0100999 (outfall registry): "
                                  "003, 004 to Test River (its receiving water 'Test River' by name)")
-    assert "from its per-outfall volume text (data/outfalls-ne.json)" in pl["note"]
+    assert "from its per-outfall volume text (data/outfalls-new-england.json)" in pl["note"]
     assert pl["outfalls"] == [{"outfall": "003", "water_slug": "test-river-ct"},
                               {"outfall": "004", "water_slug": "test-river-ct"}]
     # without the step the same report stays unplaced (the permit's outfalls reach several waters)

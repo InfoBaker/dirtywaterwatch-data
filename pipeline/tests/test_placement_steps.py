@@ -73,13 +73,13 @@ def resolver(outfalls=(), towns=None, dis_waters=None, all_waters=False):
 
 def test_no_text_with_an_outfall_number_takes_the_registry_outfalls_water():
     r = resolver([{"npdes_permit": "MA0100001", "outfall": "017", "state": "MA", "water_slug": "test-river-ma",
-                   "match": "geometry+name", "distance_m": 12, "_file": "data/outfalls-ne.json"},
+                   "match": "geometry+name", "distance_m": 12, "_file": "data/outfalls-new-england.json"},
                   {"npdes_permit": "MA0100001", "outfall": "018", "state": "MA", "water_slug": "other-pond-ma",
-                   "match": "geometry", "_file": "data/outfalls-ne.json"}])
+                   "match": "geometry", "_file": "data/outfalls-new-england.json"}])
     pl = r.resolve(ev(npdes_permit="MA0100001", outfall_name="017"))       # the number given as the outfall name
     assert pl["water_slugs"] == ["test-river-ma"] and pl["water_match"] == "outfall_registry"
     assert pl["note"].startswith("placed by outfall 017 of permit MA0100001 (outfall registry): 017 to Test River")
-    assert "from its outfall name '017' (data/outfalls-ne.json)" in pl["note"]
+    assert "from its outfall name '017' (data/outfalls-new-england.json)" in pl["note"]
     # a street address is not an outfall number, and the permit's outfalls reach two waters: unplaced, with why
     pl = r.resolve(ev("2", npdes_permit="MA0100001", outfall_name="Manhole, 205 Main St"))
     assert pl["water_slugs"] == [] and "registry outfalls discharge to 2 waters" in pl["unplaced_reason"]
@@ -111,7 +111,7 @@ def test_registry_name_only_slug_must_carry_the_receiving_waters_name():
 
 def test_permit_with_one_water_for_every_outfall_places_a_report_naming_none():
     rows = [{"npdes_permit": "MA0100004", "outfall": o, "state": "MA", "water_slug": "test-river-ma",
-             "match": "geometry+name", "_file": "data/outfalls-ne.json"} for o in ("001", "002")]
+             "match": "geometry+name", "_file": "data/outfalls-new-england.json"} for o in ("001", "002")]
     pl = resolver(rows).resolve(ev(npdes_permit="MA0100004", event_type="sso"))
     assert pl["water_slugs"] == ["test-river-ma"] and pl["water_match"] == "inferred"
     assert "every listed outfall of MA0100004 (2)" in pl["note"]

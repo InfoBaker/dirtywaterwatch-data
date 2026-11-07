@@ -19,7 +19,7 @@ Record rules (nothing is invented):
   date (ECHO does not give the end); time_precision "day" (00:00 America/New_York).
 - No volume (ECHO gives none per event): volume_gal null. No outfall, no location.
 - Water placement: a bypass happens at the treatment plant, so it is placed on the plant's
-  receiving water (the permit's treated-effluent outfall in data/outfalls-ne.json, else the first
+  receiving water (the permit's treated-effluent outfall in data/outfalls-new-england.json, else the first
   water in research/ri/dischargers.json), water_match "inferred". SSOs and CSOs can be anywhere in
   the sewer system: water_slugs [] (the discharger's waters are in raw). Violations described as
   "no discharge to waters of the U.S." are kept, with water_slugs [] and raw.reached_water false.
@@ -61,7 +61,7 @@ PAGE_URL = "https://echo.epa.gov/detailed-facility-report?fid={permit}"
 AUTHORITY = "EPA ECHO (reported to regulators)"
 NOTE = "appeared in EPA ECHO; not a public notice"
 # the files the plant's receiving water comes from (meta, not raw)
-WATER_BASIS_FILES = {"treated_effluent_outfalls": "data/outfalls-ne.json", "first_receiving_water": "research/ri/dischargers.json"}
+WATER_BASIS_FILES = {"treated_effluent_outfalls": "data/outfalls-new-england.json", "first_receiving_water": "research/ri/dischargers.json"}
 TZ = ZoneInfo("America/New_York")
 PAUSE_S = 2.0
 OVERFLOW_RE = re.compile(r"\b(SSO|CSO|bypass|overflow|spill)\b", re.I)
@@ -135,7 +135,7 @@ def main(argv: list[str]) -> int:
     fetched = now_iso()
     prev_file = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
     prev = {r["event_id"]: r for r in prev_file.get("records", [])}
-    registry = (read_json(DATA_DIR / "outfalls-ne.json", {}) or {}).get("outfalls", [])
+    registry = (read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}).get("outfalls", [])
     records, errors, totals, skipped, extract_dates = {}, {}, {}, {}, {}
     plist = permits()
     for n, d in enumerate(plist):

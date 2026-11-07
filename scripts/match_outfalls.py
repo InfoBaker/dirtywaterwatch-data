@@ -32,7 +32,7 @@ water_match, water_matched_by, no_water_reason, replaced_match and coords_proble
 the rows from EPA's file and drops those fields until that pass runs again.
 
 National registry (2026-11-03, `--national`; data/outfalls-us.json): every state and territory in the inventory
-outside the 12 live ones (REGIONAL_STATES, read from the regional files: the New England six in data/outfalls-ne.json and
+outside the 12 live ones (REGIONAL_STATES, read from the regional files: the New England six in data/outfalls-new-england.json and
 NJ, NY, PA, MD, VA, DC in data/outfalls-mid-atlantic.json, which this mode never writes); DWW_STATES, when set, narrows the list (with
 --append, to rewrite only those states' rows). The 12 live states' files are not made by this mode and its changes
 below do not apply to them. Same row schema, plus on every row:
@@ -100,10 +100,10 @@ sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 from common import live_states as _live_states  # noqa: E402
 # the live states: data/rules.json live_states, the site's one list (common.live_states); --plants matches their rows
 LIVE_STATES = set(_live_states())
-# the states the regional registry files hold (data/outfalls-ne.json, data/outfalls-mid-atlantic.json, read from them):
+# the states the regional registry files hold (data/outfalls-new-england.json, data/outfalls-mid-atlantic.json, read from them):
 # --national leaves them out of data/outfalls-us.json; a state going live keeps its national rows
 REGIONAL_STATES = {str(r.get("state") or r["npdes_permit"][:2]).upper()
-                   for n in ("outfalls-ne.json", "outfalls-mid-atlantic.json")
+                   for n in ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
                    for r in json.load(open(os.path.join(ROOT, "data", n)))["outfalls"]}
 NE = set((os.environ.get("DWW_STATES") or "MA,CT,RI,NH,VT,ME").split(","))
 if PLANTS:
