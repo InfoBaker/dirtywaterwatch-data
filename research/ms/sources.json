@@ -75,7 +75,7 @@
     "license": "EPA ECHO data: public domain (US government work).",
     "legal_basis": "40 CFR 127; 40 CFR 122.41(l)(6); MDEQ permit conditions",
     "status": "used",
-    "status_reason": "Read by the national eRule ingester with Mississippi in its states (Central time, free text scrubbed): the all-versions extract of 2026-11-04 held 358 current Mississippi events from 47 permits (SSO 314, bypass 43, CSO 1); 248 kept from 27 permits (243 naming a receiving water), 110 dropped (108 naming no water with only land or no observable impacts, 1 building backup, 1 bypass whose water is 'None'). Report received a median 4 days after the start (90th percentile 41 days). Every row has coordinates; 15 have no volume.",
+    "status_reason": "Read by the national eRule ingester with Mississippi in its states (Central time, free text scrubbed): the all-versions extract of 2026-11-04 held 358 current Mississippi events from 47 permits (SSO 314, bypass 43, CSO 1); 246 kept from 27 permits (243 naming a receiving water), 112 dropped (109 naming no water with only land or no observable impacts, 1 building backup, 1 bypass whose water is 'None', 1 whose description says it was algae, not sewage). Report received a median 4 days after the start (90th percentile 41 days). Every row has coordinates; 15 have no volume.",
     "verified": "fetched",
     "checked": "2026-11-07",
     "notes": "The current-version ZIP held only its metadata file on 2026-11-05 and 2026-11-07; the module reads the current version of each report from the all-versions ZIP. The City of Jackson's reports give creek names without 'Creek' ('EUBANKS', 'TOWN'); eight are read as the NHD creek of that name near the reports' points, four (Belhaven, Caney, Eastover, Three Mile) are kept as typed."
