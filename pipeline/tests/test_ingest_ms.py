@@ -33,14 +33,16 @@ def test_mississippi_is_read_in_central_time_with_the_scrub_and_its_own_points()
 
 def test_kept_and_dropped_rows_by_reason():
     kept, dropped, why = _build()
-    assert sorted(kept) == ["MS0020117:1:1", "MS0022381:1:1", "MS0024295:1:1", "MS0024295:5:1", "MS0044059:10:1",
-                            "MS0045446:10:18", "MS0061191:1:1"]
+    assert sorted(kept) == ["MS0020117:1:1", "MS0022381:1:1", "MS0024295:1:1", "MS0024295:5:1", "MS0024295:8:1",
+                            "MS0044059:10:1", "MS0045446:10:18", "MS0061191:1:1"]
     assert {k: d["reason"] for k, d in dropped.items()} == {
+        "MS0029513:8:1": "the report says the matter was not sewage",          # "It was algae and lawn chemicals"
+        "MS0024295:16:3": "no evidence the discharge reached a water",         # 'SAMPLE LAKE CIR' is a street
         "MS0024163:1:1": "building backup",                                   # sewage backup in a building
         "MS0036111:2:1": "receiving water stated as none",                    # a bypass whose water is 'None'
         "MS0024848:1:1": "no evidence the discharge reached a water",         # the one CSO-typed row: no water named
         "MS0020184:1:1": "no evidence the discharge reached a water"}         # an SSO naming no water
-    assert why[("MS", "kept", "receiving water named")] == 7
+    assert why[("MS", "kept", "receiving water named")] == 8
 
 
 def test_a_bypass_is_kept_and_an_extreme_event_report_keeps_its_days():
@@ -62,8 +64,10 @@ def test_times_carry_central_offsets_winter_and_summer():
 
 def test_receiving_water_text_jackson_shorthand_and_as_typed():
     kept, _, _ = _build()
-    eu = next(r for r in kept.values() if r["raw"]["receiving_waters"] == ["EUBANKS"])
+    eu = kept["MS0024295:1:1"]
     assert eu["waterbody_text"] == "Eubanks Creek" and eu["raw"]["receiving_water_aliases"] == {"EUBANKS": "Eubanks Creek"}
+    far = kept["MS0024295:8:1"]                                              # 15.4 km from Eubanks Creek: as typed
+    assert far["waterbody_text"] == "EUBANKS" and "receiving_water_aliases" not in far["raw"]
     assert kept["MS0044059:10:1"]["waterbody_text"] == "Trahon Creek"
     assert kept["MS0024295:5:1"]["waterbody_text"] == "BELHAVEN"              # no NHD creek of that name: as typed
     assert "receiving_water_aliases" not in kept["MS0024295:5:1"]["raw"]
@@ -79,7 +83,7 @@ def test_receiving_water_text_jackson_shorthand_and_as_typed():
 def test_house_numbers_never_reach_a_mississippi_record():
     kept, dropped, _ = _build()
     blob = json.dumps([kept, dropped])
-    for n in ("1391", "4049", "4625"):
+    for n in ("1391", "4049", "4625", "2009", "512 "):
         assert n not in blob, n
     assert kept["MS0024295:5:1"]["raw"]["sewer_overflow_bypass_description_text"] == (
         "[house number removed] SAMPLE ST - MANHOLE")
@@ -137,7 +141,7 @@ def test_main_reads_a_saved_zip_of_mississippi_rows(tmp_path, monkeypatch):
             zf.writestr(name, buf.getvalue())
     assert E.main(["--file", str(z)]) == 0
     doc = json.loads((tmp_path / "events" / "echo-sewer-overflow.json").read_text())
-    assert doc["count"] == 7 and doc["meta"]["dropped"] == 4
+    assert doc["count"] == 8 and doc["meta"]["dropped"] == 6
     assert {"state": "MS", "outcome": "dropped", "reason": "building backup", "count": 1} in doc["meta"]["by_rule"]
 
 
@@ -231,3 +235,20 @@ def test_mississippi_rules_row_cites_the_law_and_is_not_live():
     ms = rules["red"]["by_state"]["MS"]
     assert ms["hours"] is None and "24 hours" in ms["basis"] and "NeT-SewerOverflow" in ms["source"]
     assert "MS" not in rules["live_states"]
+
+
+def test_text_rules_are_mississippi_only_and_meridians_spellings_read():
+    ev = {"sewer_overflow_bypass_description_text": "customer thought there was sewer in the pond. It was algae"}
+    assert E.reached_water(ev, ["SSO"], [], [], "MS") == (False, "the report says the matter was not sewage")
+    assert E.reached_water(ev, ["SSO"], [], [], "IL")[0] is True               # other states: the word rule as before
+    st = {"sewer_overflow_bypass_description_text": "[house number removed] FOREST LAKE CIR - 220858"}
+    assert E.reached_water(st, ["SSO"], [], [], "MS")[0] is False
+    assert E.reached_water(st, ["SSO"], [], [], "GA")[0] is True
+    keep = {"sewer_overflow_bypass_description_text": "Links Cove SSO - Lake Caroline"}
+    assert E.reached_water(keep, ["SSO"], [], [], "MS")[0] is True            # a real lake named after the street word
+    tab = E.STATE_WATER_ALIASES["MS"]
+    assert tab[("MS0020117", "oaktibee creek")][0] == "Okatibbee Creek"
+    assert tab[("MS0020117", "sawashee creek")][0] == "Sowashee Creek"
+    assert E.alias_reaches(tab[("MS0024295", "eubanks")][2], 32.3480, -90.1817)
+    assert not E.alias_reaches(tab[("MS0024295", "eubanks")][2], 32.2300, -90.2900)
+    assert not E.alias_reaches(tab[("MS0024295", "eubanks")][2], None, None)
