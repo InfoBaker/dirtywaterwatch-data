@@ -104,6 +104,23 @@
     "EColiRisk": "",
     "HealthDescription": "This beach is not under health alert"
    }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 88,
+    "StationID": "LBB1ROCKFD04",
+    "StationName": "Rockford Lake at Beach",
+    "Latitude": 40.223196,
+    "Longitude": -96.586409,
+    "SampleYear": "2026",
+    "WeekNumber": "24",
+    "ActivityStartDate": 1781499600000,
+    "EColi": "50",
+    "Microcystin": "1.48",
+    "HealthAlert": "NO",
+    "EColiRisk": "",
+    "HealthDescription": "This beach is not under health alert"
+   }
   }
  ]
 }

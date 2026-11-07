@@ -266,6 +266,15 @@
    "days_after_fetch": 31,
    "rationale": "An end time more than 31 days after we read a discharge report, or one before the discharge began, is most likely a typing error in the source. We do not draw a window from such an end: the report keeps the end as published, and the map treats the discharge as having no confirmed end. A planned window of some weeks keeps the end the authority gives, and so does an advisory."
   },
+  "sample_caution": {
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "flag": "_agency_label_only",
+   "hours": 72,
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, never as the agency's advisory.",
+   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch"
+  },
   "day_start_caution": {
    "sources": ["ga-epd-spills"],
    "hours": 72,
