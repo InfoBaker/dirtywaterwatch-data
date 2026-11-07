@@ -1,0 +1,268 @@
+{
+ "about": "Receiving-water names in SD's reports (EPA's overflow tables for South Dakota permits, the extract of 2026-11-04, and DANR's harmful algal bloom advisories, read 2026-11-07) that data/receiving-waters-national.json does not hold for SD, by name as typed, with the number of reports giving each. Reports that say the discharge reached no water are left out.",
+ "state": "SD",
+ "waters": 17,
+ "reports": 20,
+ "rows": [
+  {
+   "name": "tributary to mud creek",
+   "reports": 3,
+   "permits": [
+    "SD0022187"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     45.446215,
+     -98.109311
+    ],
+    [
+     45.444867,
+     -98.097274
+    ],
+    [
+     45.446,
+     -98.109
+    ]
+   ]
+  },
+  {
+   "name": "Dry Run Creek",
+   "reports": 2,
+   "permits": [
+    "SD0023361"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     43.697667,
+     -97.992417
+    ]
+   ]
+  },
+  {
+   "name": "Clear Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "sd-danr-hab-advisories"
+   ],
+   "counties": [
+    "Hamlin County"
+   ]
+  },
+  {
+   "name": "Dry Lake",
+   "reports": 1,
+   "permits": [
+    "SDG821598"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     45.050196,
+     -97.323078
+    ]
+   ]
+  },
+  {
+   "name": "Lake Albert",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "sd-danr-hab-advisories"
+   ],
+   "counties": [
+    "Kingsbury County"
+   ]
+  },
+  {
+   "name": "McCook Lake",
+   "reports": 1,
+   "permits": [
+    "SD0020567"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     42.550249,
+     -96.511671
+    ]
+   ]
+  },
+  {
+   "name": "Scatterwood via Drainage ditch",
+   "reports": 1,
+   "permits": [
+    "SD0022519"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     45.441722,
+     -99.005612
+    ]
+   ]
+  },
+  {
+   "name": "Spearfish Creek / Rubble Site Cell",
+   "reports": 1,
+   "permits": [
+    "SD0020044"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     44.550351,
+     -103.866191
+    ]
+   ]
+  },
+  {
+   "name": "Tributary to Battle Creek",
+   "reports": 1,
+   "permits": [
+    "SD0028620"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     44.395109,
+     -103.594654
+    ]
+   ]
+  },
+  {
+   "name": "Tributary to the Big Sioux River",
+   "reports": 1,
+   "permits": [
+    "SD0023388"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     44.244361,
+     -96.806361
+    ]
+   ]
+  },
+  {
+   "name": "Twin Lakes",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "sd-danr-hab-advisories"
+   ],
+   "counties": [
+    "Spink County"
+   ]
+  },
+  {
+   "name": "Unnamed",
+   "reports": 1,
+   "permits": [
+    "SD0020753"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     44.369526,
+     -97.11816
+    ]
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Whitewood Creek",
+   "reports": 1,
+   "permits": [
+    "SD0028615"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     44.318094,
+     -103.789031
+    ]
+   ]
+  },
+  {
+   "name": "Wall Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "sd-danr-hab-advisories"
+   ],
+   "counties": [
+    "Minnehaha County"
+   ]
+  },
+  {
+   "name": "West branch of Lac Qui Parle River",
+   "reports": 1,
+   "permits": [
+    "SDG820591"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     44.799786,
+     -96.453586
+    ]
+   ]
+  },
+  {
+   "name": "lake francis",
+   "reports": 1,
+   "permits": [
+    "SDG921784"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     43.444833,
+     -96.822667
+    ]
+   ]
+  },
+  {
+   "name": "unname tributary of snake creek",
+   "reports": 1,
+   "permits": [
+    "SD0021474"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     43.325389,
+     -96.77525
+    ]
+   ]
+  }
+ ]
+}
