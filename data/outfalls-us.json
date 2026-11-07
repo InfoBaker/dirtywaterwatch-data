@@ -87424,7 +87424,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 196 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87442,18 +87442,26 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.32484,
    "lon": -95.94566,
-   "water_slug": "missouri-river-ne",
-   "water_name": "Missouri River",
-   "water_kind": "river",
-   "distance_m": 880,
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
    "alternatives": [],
-   "match": "name_only",
+   "match": "none",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ne) is the only water of the receiving water's name ('Outfall channel to Missouri River') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "replaced_match": {
+    "water_slug": "missouri-river-ne",
+    "water_name": "Missouri River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a water of another name"
+   },
+   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87471,18 +87479,26 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.27674,
    "lon": -95.92464,
-   "water_slug": "missouri-river-ne",
-   "water_name": "Missouri River",
-   "water_kind": "river",
-   "distance_m": 913,
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
    "alternatives": [],
-   "match": "name_only",
+   "match": "none",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ne) is the only water of the receiving water's name ('Outfall channel to Missouri River') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "replaced_match": {
+    "water_slug": "missouri-river-ne",
+    "water_name": "Missouri River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a water of another name"
+   },
+   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87500,20 +87516,28 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.27685,
    "lon": -95.92526,
-   "water_slug": "missouri-river-ne",
-   "water_name": "Missouri River",
-   "water_kind": "river",
-   "distance_m": 950,
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
    "alternatives": [],
-   "match": "name_only",
+   "match": "none",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ne) is the only water of the receiving water's name ('Outfall channel to Missouri River') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
-   "point_shared_by": 2
+   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "point_shared_by": 2,
+   "replaced_match": {
+    "water_slug": "missouri-river-ne",
+    "water_name": "Missouri River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a water of another name"
+   },
+   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87531,18 +87555,26 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.26489,
    "lon": -95.92553,
-   "water_slug": "missouri-river-ne",
-   "water_name": "Missouri River",
-   "water_kind": "river",
-   "distance_m": 425,
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
    "alternatives": [],
-   "match": "name_only",
+   "match": "none",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ne) is the only water of the receiving water's name ('Outfall channel to Missouri River') in the state, 0.4 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "none: no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "replaced_match": {
+    "water_slug": "missouri-river-ne",
+    "water_name": "Missouri River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a water of another name"
+   },
+   "no_water_reason": "no record named 'Outfall channel' in NE; replaces scripts/match_outfalls.py's match by name alone to Missouri River (missouri-river-ne): a name-only match to a water of another name"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87571,7 +87603,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 304 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87600,7 +87632,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 222 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87628,8 +87660,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 240 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel to Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 240 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87657,8 +87689,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 182 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel to Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 182 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87686,8 +87718,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 15 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel to Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 15 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87715,8 +87747,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 69 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel to Missouri River.'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 69 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87744,8 +87776,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 273 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel to Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 273 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Outfall channel'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87774,7 +87806,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 249 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87803,7 +87835,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 341 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87832,7 +87864,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 318 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87861,7 +87893,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 133 m from Missouri River (missouri-river-ne), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87879,19 +87911,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.28863,
    "lon": -96.02482,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cole-creek-ne",
+   "water_name": "Cole Creek",
+   "water_kind": "stream",
+   "distance_m": 22,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Cole Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Cole Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Cole Creek' by name; Cole Creek (cole-creek-ne, NHDPlus V2.1 record), 22 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87909,19 +87940,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.29222,
    "lon": -96.02139,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cole-creek-ne",
+   "water_name": "Cole Creek",
+   "water_kind": "stream",
+   "distance_m": 3,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Cole Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Cole Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Cole Creek' by name; Cole Creek (cole-creek-ne, NHDPlus V2.1 record), 3 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87939,19 +87969,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.29931,
    "lon": -96.01801,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cole-creek-ne",
+   "water_name": "Cole Creek",
+   "water_kind": "stream",
+   "distance_m": 6,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Cole Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Cole Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Cole Creek' by name; Cole Creek (cole-creek-ne, NHDPlus V2.1 record), 6 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -87969,20 +87998,19 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.27685,
    "lon": -95.92526,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "little-papillion-creek-ne",
+   "water_name": "Little Papillion Creek",
+   "water_kind": "stream",
+   "distance_m": 10930,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "no_water_reason": "no openboatlaunch water named 'Little Papillion Creek' in NE; only the facility's point is known, which is not matched by distance",
-   "water_match": "none: no openboatlaunch water named 'Little Papillion Creek' in NE; only the facility's point is known, which is not matched by distance",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "name: its receiving water 'Little Papillion Creek' by name; Little Papillion Creek (little-papillion-creek-ne, NHDPlus V2.1 record), 10930 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
    "point_shared_by": 2
   },
   {
@@ -88001,19 +88029,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.20272,
    "lon": -95.9802,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "blood-creek-ne",
+   "water_name": "Blood Creek",
+   "water_kind": "stream",
+   "distance_m": 1599,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Blood Creek to Big Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Blood Creek to Big Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Blood Creek' by name; Blood Creek (blood-creek-ne, NHDPlus V2.1 record), 1599 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -88031,19 +88058,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.20073,
    "lon": -95.98177,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "blood-creek-ne",
+   "water_name": "Blood Creek",
+   "water_kind": "stream",
+   "distance_m": 1366,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Blood Creek to Big Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Blood Creek to Big Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Blood Creek' by name; Blood Creek (blood-creek-ne, NHDPlus V2.1 record), 1366 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -88061,19 +88087,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.25009,
    "lon": -96.02087,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "little-papillion-creek-ne",
+   "water_name": "Little Papillion Creek",
+   "water_kind": "stream",
+   "distance_m": 159,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Little Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Little Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Little Papillion Creek' by name; Little Papillion Creek (little-papillion-creek-ne, NHDPlus V2.1 record), 159 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -88091,19 +88116,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.245,
    "lon": -96.021944,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "little-papillion-creek-ne",
+   "water_name": "Little Papillion Creek",
+   "water_kind": "stream",
+   "distance_m": 166,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Little Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Little Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Little Papillion Creek' by name; Little Papillion Creek (little-papillion-creek-ne, NHDPlus V2.1 record), 166 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "NE0133680",
@@ -88121,19 +88145,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
    "lat": 41.244722,
    "lon": -96.02,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "little-papillion-creek-ne",
+   "water_name": "Little Papillion Creek",
+   "water_kind": "stream",
+   "distance_m": 15,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Little Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Little Papillion Creek' in NE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Little Papillion Creek' by name; Little Papillion Creek (little-papillion-creek-ne, NHDPlus V2.1 record), 15 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "OH0020001",
