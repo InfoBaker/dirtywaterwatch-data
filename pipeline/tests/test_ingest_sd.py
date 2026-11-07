@@ -27,7 +27,7 @@ def _build(tables=None, now="2026-11-07T12:00:00Z"):
 
 def test_south_dakota_is_read_with_the_point_zone_and_the_scrub():
     assert "SD" in E.STATES and E.STATE_TZ["SD"] == "America/Chicago" and E.STATE_TZ["IL"] == "America/Chicago"
-    assert E.POINT_ZONE_FILES == {"SD": "sd-mountain-time-counties.json"}
+    assert E.POINT_ZONE_FILES["SD"] == "sd-mountain-time-counties.json"
     assert "SD" in E.FREE_TEXT_STATES and "SD" not in E.REPEATED_POINT_STATES
 
 
