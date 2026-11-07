@@ -1,0 +1,86 @@
+id: "nm-nmed-hab-mapper"
+name: "NMED Surface Water Quality Bureau HABs Mapper (current HAB advisories) feature service"
+url: "https://services8.arcgis.com/sqciGhV7WvGQn4ky/arcgis/rest/services/Upload_Data_May2026/FeatureServer/0"
+homepage: "https://www.env.nm.gov/surface-water-quality/hab/"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS ingester (the fetch block below; ingest/nm_transforms.py writes the advisory text):
+#   source id nm-nmed-hab-mapper, data/build/events/nm-nmed-hab-mapper.json. Blooms, not sewage (hab_advisory).
+# Notes (research/nm, status used, verified fetched, checked 2026-11-07): Read through the generic
+#   ArcGIS ingester (fetch block in its source file): one record per station and sample date under a
+#   WATCH, WARNING or DANGER status; the layer's own coordinates; blooms, not sewage.
+# Access detail (research, quoted): Behind ArcGIS Experience 6329d5b4c47045b59bd52275bbf23a75 (page
+#   NMED-HABs-Mapper) linked from env.nm.gov/surface-water-quality/hab/. Layer edited 2026-10-30; 40
+#   rows. A historic table service also exists (2026_05_27_HABs_historic_data_example). Sample
+#   research/nm/raw/nmed-hab-current-sample-2026-11-03.json. The layer name (Upload_Data_May2026)
+#   suggests a new service per season; resolve the URL through the Experience each time.
+# Can fill: waterbody, coordinates, advice_text, source_updated_at, authority
+# Cannot fill: ended_at
+# Waters: 40 monitored lakes and reservoirs
+# History: current season; historic table separate
+# Research notes: 2026-11-07 fetch: 40 stations (26 MONITORED, 8 WATCH, 6 WARNING; WARNING at Eagle
+#   Nest Lake, Quemado Lake, El Vado Reservoir, Bluewater Lake, Charette Lake and Clayton Lake);
+#   layer last edited 2026-10-30. Last_Monitored is text in several date forms.
+cadence: "updated every one to three weeks in season (uploads 2026-09-29 to 2026-10-23 seen)"
+license: "none stated"
+attribution: "New Mexico Environment Department, SWQB"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NM"]
+registry_ids: ["nm-nmed-hab-mapper"]
+access: ["arcgis"]
+access_detail: "Behind ArcGIS Experience 6329d5b4c47045b59bd52275bbf23a75 (page NMED-HABs-Mapper) linked from env.nm.gov/surface-water-quality/hab/. Layer edited 2026-10-30; 40 rows. A historic table service also exists (2026_05_27_HABs_historic_data_example). Sample research/nm/raw/nmed-hab-current-sample-2026-11-03.json. The layer name (Upload_Data_May2026) suggests a new service per season; resolve the URL through the Experience each time."
+machine_readable: true
+legal_basis: "NMED HAB Advisory Guidance"
+checked: "2026-11-07"
+# Generic ingester (docs/generic-ingesters.md). One record per station and sample under a WATCH, WARNING or DANGER
+#   status; a MONITORED station (sampled, no advisory) is not a record, and a record whose station leaves those
+#   statuses is kept with the missing mark and ages out 14 days after it was last confirmed (build/status.py). The
+#   layer's last edit is every record's source_updated_at, so an advisory NMED still shows stays confirmed. The
+#   service is named for its upload (Upload_Data_May2026): a new season's service fails the fetch (ok false) until
+#   the url is updated from the HABs Mapper page. SWQB_internal_notes and GlobalID are never requested.
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://services8.arcgis.com/sqciGhV7WvGQn4ky/arcgis/rest/services/Upload_Data_May2026/FeatureServer/0"
+  order_by: "OBJECTID"
+  metadata: true
+  time_zone: "America/Denver"
+  bounds: [-109.1, 31.3, -103.0, 37.05]      # New Mexico; a point outside is not used (raw._coords_rejected)
+  safe_fields: [OBJECTID, ASSESSMENT_UNIT_NAME, STATION_NAME, Station_ID, MLOC_LATITUDE, MLOC_LONGITUDE,
+                Location_Details, Last_Monitored, CHARACTERISTIC_NAME, HAB_Status, Category_Override,
+                Advisory_Details, Map_Upload_Date, ReportedValue_ug_L]
+  reviewed_fields:
+    ASSESSMENT_UNIT_NAME: "NMED's name of the water's assessment unit (a lake, or a river segment between two places)"
+    STATION_NAME: "the monitoring station's name (a lake, a boat ramp, a bridge or a recreation area)"
+    CHARACTERISTIC_NAME: "the toxin tested (Microcystin, Anatoxin, Cylindrospermopsin)"
+  free_text: [STATION_NAME, Location_Details, Advisory_Details]
+  # sampled with no advisory (MONITORED), or lifted: not an advisory record
+  filter: [{field: HAB_Status, regex: "^\\s*(monitored|not monitored|no advisory|none|lifted|cleared?|)\\s*$", exclude: true}]
+  record:
+    source_record_id: {template: "{Station_ID|slug|default:no-station}-{@started_at|compact|default:nodate}"}
+    started_at:
+      field: Last_Monitored
+      formats: ["%m/%d/%Y %I:%M:%S %p", "%m/%d/%Y %I:%M %p", "%Y-%m-%d %I:%M:%S %p", "%m/%d/%Y %H:%M:%S",
+                "%m/%d/%Y %H:%M", "%m-%d-%Y", "%Y-%m-%d", "%m/%d/%Y"]
+    event_type: {const: hab_advisory}
+    status: {field: HAB_Status, upper: true, map: {WATCH: advisory_active, WARNING: advisory_active,
+                                                    DANGER: advisory_active}, otherwise: unknown}
+    lat: {field: MLOC_LATITUDE, parse: number}
+    lon: {field: MLOC_LONGITUDE, parse: number}
+    waterbody_text: ASSESSMENT_UNIT_NAME
+    authority: {const: "New Mexico Environment Department, Surface Water Quality Bureau (HABs Mapper)"}
+    source_url: {const: "https://www.env.nm.gov/surface-water-quality/hab/"}
+  transform: "ingest.nm_transforms.nm_hab_record"
+  raw_notes:
+    _hab_level: {field: HAB_Status, upper: true}
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    track:
+      HAB_Status: {key: _status_seen, label: status}
+  meta:
+    credit: "New Mexico Environment Department, Surface Water Quality Bureau, HABs Mapper"
+    caveat: "NMED's map shows each station's latest result; the advisory may have begun with an earlier sample."
+    time_basis: "Last_Monitored is the time of the station's latest sample, written as text in several forms (read as Mountain time; a date alone is a date). The layer's last edit is the time NMED last confirmed its map."

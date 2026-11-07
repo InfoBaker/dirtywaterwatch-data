@@ -51,6 +51,7 @@ AREA_TITLES = {
     "ca": "California",
     "il": "Illinois",
     "az": "Arizona",
+    "nm": "New Mexico",
 }
 
 HEADER = """# Source checklist
