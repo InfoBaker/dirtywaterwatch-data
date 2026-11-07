@@ -184,3 +184,47 @@ def test_main_reads_a_saved_zip_of_nebraska_rows(tmp_path, monkeypatch):
     assert sum(x["count"] for x in doc["meta"]["by_rule"] if x["state"] == "NE" and x["outcome"] == "kept") == 11
     dropped = json.loads((tmp_path / "echo-sewer-overflow-dropped.json").read_text())
     assert dropped["count"] == 2
+
+
+# ---------------------------------------------------------------- DWEE Beach Watch (generic ArcGIS block)
+
+def _beachwatch():
+    from ingest.generic import arcgis, runner
+    _, block = runner.load_source("ne-dwee-beachwatch")
+    rows = arcgis.parse(block, (FIX / "ne_dwee_beachwatch.json").read_bytes())
+    return runner.build("ne-dwee-beachwatch", block, rows, "2026-11-07T01:14:00Z", [])
+
+
+def test_beachwatch_block_asks_only_for_alert_and_e_coli_rows_and_safe_fields():
+    from ingest.generic import runner
+    _, block = runner.load_source("ne-dwee-beachwatch")
+    assert block["live"] is True and block["platform"] == "arcgis" and not runner.validate_block(block)
+    assert "HealthAlert = 'YES'" in block["where"] and "EColiRisk" in block["where"]
+    assert block["time_zone"] == "America/Chicago"
+
+
+def test_beachwatch_health_alert_is_the_authoritys_bloom_advisory_and_e_coli_a_caution():
+    recs, stats = _beachwatch()
+    by = {r["source_record_id"]: r for r in recs}
+    rock = by["LBB1ROCKFD04-2026-w23"]
+    assert rock["event_type"] == "hab_advisory" and rock["status"] == "advisory_active"
+    assert rock["started_at"] == "2026-06-08" and rock["time_precision"] == "day" and rock["ended_at"] is None
+    assert rock["waterbody_text"] == "Rockford Lake" and rock["outfall_name"] == "Rockford Lake at Beach"
+    assert rock["advice_text"].startswith("This beach is under health alert") and "13.78" in rock["advice_text"]
+    assert rock["lat"] == 40.223196 and rock["published_at"] is None
+    both = by["LNE2IRONHT04-2026-w23"]                                       # alert and E. coli: the alert
+    assert both["event_type"] == "hab_advisory" and both["raw"]["_ecoli_risk"].startswith("Elevated")
+    oak = by["LLP2BRNOAK09-2026-w21"]
+    assert oak["event_type"] == "beach_advisory" and oak["status"] == "unknown" and "no advisory issued" in oak["advice_text"]
+    assert oak["waterbody_text"] == "Branched Oak Lake" and oak["started_at"] == "2026-05-26"
+    other = by["GPTLKBACT1-2026-w21"]                                        # neither: only from a whole-layer copy
+    assert other["event_type"] == "unknown" and other["parse_error"]
+    assert stats["by_type"] == {"hab_advisory": 3, "beach_advisory": 2, "unknown": 1}
+
+
+def test_beachwatch_records_keep_only_the_safe_fields():
+    recs, _ = _beachwatch()
+    for r in recs:
+        assert set(r["raw"]["row"]) <= {"OBJECTID", "StationID", "StationName", "Latitude", "Longitude", "SampleYear",
+                                        "WeekNumber", "ActivityStartDate", "EColi", "Microcystin", "HealthAlert",
+                                        "EColiRisk", "HealthDescription"}
