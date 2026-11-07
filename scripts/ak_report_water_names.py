@@ -55,7 +55,7 @@ def main() -> int:
             | ({"points": points[n]} if points.get(n) else {})
             for n, c in sorted(reports.items(), key=lambda x: (-x[1], x[0]))]
     doc = {"about": ("Receiving-water names in Alaska's reports (EPA's overflow tables for Alaska permits, the "
-                     "2026-11-04 extract: the 5 reports that name a water) that data/receiving-waters-national.json "
+                     "2026-11-04 extract: the 6 reports kept, 5 of which name a water) that data/receiving-waters-national.json "
                      "does not hold for AK, by name as the report gives it once 'which flowed to' is split, with the "
                      "number of reports giving each and the reports' points; and the receiving water of the one "
                      "Alaska sewage permit in neither of EPA's outfall tables (0 reports). Reports that say the sewage "
