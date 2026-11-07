@@ -12,7 +12,9 @@ others after reading them for the next week's statement):
     advisory for E. coli. event_type beach_advisory (the beach category), status unknown, raw._agency_label_only and
     raw._agency_label (the agency's words): the status build gives it the site's caution for 72 hours from the sample
     (data/rules.json unresolved.sample_caution), never the authority's advisory rule (review 2026-11-07 P2-2).
-  A row with both is the health alert (hab_advisory), with the E. coli label in raw._ecoli_risk. A row with neither is
+  A row with both is the health alert (hab_advisory), with the E. coli label in raw._ecoli_risk. A station on a lake in
+another state (OUT_OF_STATE_STATIONS: Lake Yankton, South Dakota) names that lake, with raw.state, raw.county and
+raw.state_basis: the status build places it only in that state (status.Resolver, place_elsewhere). A row with neither is
   marked raw._sample_only and is not a record.
 
 ne_beachwatch_sequence (post): the layer is weekly and an alert holds until the next sample says otherwise, so each
@@ -31,6 +33,18 @@ import re
 
 from ingest.generic import fieldmap as F
 
+# Beach Watch stations whose lake lies outside Nebraska (DWEE samples them too): the record names the lake as its own
+# state's records name it, with that state and county in raw.state / raw.county and the evidence in raw.state_basis, so
+# the status build places it on that state's lake when that state is shown, and never on a Nebraska water near the
+# point (review of the final audit 2026-11-07, P2-2). Lake Yankton (DWEE: "Lake Yankton (Cottonwood Lake) at Beach") is
+# the lake below Gavins Point Dam on the South Dakota side; the station's point (42.853031, -97.468522) lies inside the
+# bounding box of data/waters-sd.json lake-yankton-sd, 319 m from the Missouri River.
+OUT_OF_STATE_STATIONS = {
+    "YAKLKBACT1": {"state": "SD", "county": "Yankton County", "water": "Lake Yankton",
+                   "basis": ("Lake Yankton lies in Yankton County, South Dakota, below Gavins Point Dam; the station's "
+                             "point lies inside the South Dakota lake's outline box (lake-yankton-sd)")},
+}
+
 ALERT_RULE = ("DWEE and DHHS: a microcystin result above 8 micrograms per litre puts the lake on health alert and "
               "closes its designated beach")
 ECOLI_RULE = "DWEE: E. coli above 235 per 100 mL is an elevated health risk; no advisory is issued for E. coli"
@@ -43,6 +57,11 @@ def ne_beachwatch_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
         rec["started_at"], rec["time_precision"] = st[:10], "day"
         notes["_date_basis"] = "ActivityStartDate is stored as midnight Central time: read as the sample date"
     notes["_station"] = F.clean(row.get("StationID")).upper()
+    away = OUT_OF_STATE_STATIONS.get(notes["_station"])
+    if away:
+        notes["waterbody_as_named"] = rec.get("waterbody_text")
+        rec["waterbody_text"] = away["water"]
+        notes["state"], notes["county"], notes["state_basis"] = away["state"], away["county"], away["basis"]
     alert = F.clean(row.get("HealthAlert")).upper() == "YES"
     ecoli = F.clean(row.get("EColiRisk"))
     micro, ec = F.clean(row.get("Microcystin")), F.clean(row.get("EColi"))

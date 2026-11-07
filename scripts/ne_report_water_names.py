@@ -55,6 +55,8 @@ def main() -> int:
         for r in json.loads(p.read_text()).get("records", []):
             if f == "echo-sewer-overflow" and not str(r.get("npdes_permit") or "").startswith("NE"):
                 continue
+            if str((r.get("raw") or {}).get("state") or "NE").upper() != "NE":
+                continue                # a Beach Watch station on another state's lake (ne_transforms.OUT_OF_STATE_STATIONS)
             seen = set()
             for raw in [x.strip() for x in (r.get("waterbody_text") or "").split(";") if x.strip()]:
                 for n in ([raw] if NO_NAME.match(raw) else names_in(raw)):
@@ -86,7 +88,9 @@ def main() -> int:
                      "2026-11-04 extract, and DWEE's Beach Watch health alerts and E. coli labels, read on 2026-11-07) "
                      "that data/receiving-waters-national.json does not hold for NE, by name as the report gives it "
                      "(a segment code and a place after 'at' cut), with the number of reports giving each. Reports "
-                     "that say the discharge reached no water are left out."),
+                     "that say the discharge reached no water are left out. A Beach Watch station on a lake in "
+                     "another state (Lake Yankton, South Dakota: raw.state) is left out; that state's records hold "
+                     "the lake."),
            "state": "NE", "waters": len(rows), "reports": sum(reports.values()),
            "by_reason": dict(Counter(r.get("reason", "not in data/receiving-waters-national.json for NE")
                                      for r in rows)),
