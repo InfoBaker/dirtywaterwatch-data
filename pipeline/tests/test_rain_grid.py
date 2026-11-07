@@ -5,6 +5,7 @@ Run from pipeline/: python -m pytest tests -q
 """
 from __future__ import annotations
 
+import copy
 import json
 import math
 import random
@@ -490,9 +491,9 @@ def test_coverage_names_the_grid_for_radar_states_and_leaves_new_jersey_as_it_wa
 def test_the_unit_is_decided_from_the_data_not_the_service_description():
     mm = RF.decide_units({24: 118.7, 1: 20.0})
     assert mm["units_read"] == "mm" and mm["basis"] == "physical_bound" and mm["factor"] == 25.4
-    assert mm["evidence"]["box_max"] == {"h24": 118.7} and mm["evidence"]["bound_in"] == {"h24": 30.0}
-    assert RF.decide_units({24: 20.0, 72: 46.0})["units_read"] == "mm"               # the 72-hour bound
-    dry = RF.decide_units({24: 20.0, 72: 44.0})                                        # the bound cannot tell
+    assert mm["evidence"]["box_max"] == {"h24": 118.7} and mm["evidence"]["bound_in"] == {"h24": 50.0}
+    assert RF.decide_units({24: 20.0, 72: 156.0})["units_read"] == "mm"              # the 72-hour bound
+    dry = RF.decide_units({24: 20.0, 72: 150.0})                                       # the bound cannot tell
     assert dry["units_read"] == "in" and dry["basis"] == "service_description" and dry["factor"] == 1.0
     kept = RF.decide_units({24: 2.0}, last={"units_read": "mm", "basis": "physical_bound", "determined_at": "x"})
     assert kept["units_read"] == "mm" and kept["basis"] == "last_determined" and kept["factor"] == 25.4
@@ -618,12 +619,37 @@ def test_the_gauge_check_decides_the_unit_when_the_bound_cannot(world, monkeypat
     assert inch["points"]["42.06,-74.97"]["mrms"]["h24"] == rain_at(*GAUGE_PT)
 
 
-def test_a_gauge_reading_inches_cannot_keep_impossible_values(world, monkeypatch):
+def test_a_gauge_reading_inches_against_a_value_over_the_record_is_a_conflict_that_divides_nothing(world, monkeypatch):
+    # SOL wave2 P2-10: the evidence conflicts; dividing would cut every genuine reading to a twenty-fifth, so nothing
+    # is divided (the safety side), both pieces are recorded, and the unit is not kept as determined
     steady(world)
     monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT})
-    out = RF.run(now=NOW, session=FakeNOAA(scale=1.0, wet={(42.0, -75.0): 51.3}, gauges={"KTST": [(9, 3.8)]}))
+    out = RF.run(now=NOW, session=FakeNOAA(scale=1.0, wet={(42.0, -75.0): 60.0}, gauges={"KTST": [(9, 3.8)]}))
     u = out["mrms"]["units"]
-    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and "gauge check read inches" in u["conflict"]
+    assert u["units_read"] == "in" and u["basis"] == "conflict" and u["factor"] == 1.0
+    assert "gauge check read inches" in u["conflict"] and "49.69 in" in u["conflict"]
+    assert u["evidence"]["gauge_check"]["verdict"] == "in" and u["evidence"]["physical_bound"]["box_max"]["h24"] == 60.0
+    assert out["mrms"]["units_last_determined"] is None or out["mrms"]["units_last_determined"]["basis"] != "conflict"
+    assert out["points"]["42.06,-74.97"]["mrms"]["h24"] == rain_at(*GAUGE_PT)
+
+
+def test_plausible_extreme_inch_totals_with_agreeing_gauges_are_never_divided(world, monkeypatch):
+    # SOL wave2 P2-10: thirty-one inches in a day is extreme, not impossible (US record 49.69 in, Kauai, 2018); with the
+    # gauge reading inches the run is inches, and a genuine low reading at another point of the run is kept as read
+    assert RF.UNIT_BOUND_IN[24] > 49.69 and RF.UNIT_BOUND_IN[72] > 154.7
+    u = RF.decide_units({24: 31}, gauge={"verdict": "in", "text": "agrees"})
+    assert u["units_read"] == "in" and u["basis"] == "gauge_check" and u["factor"] == 1.0 and "conflict" not in u
+    assert RF.decide_units({24: 31})["units_read"] == "in"                    # no gauge: the bound cannot tell
+    assert RF.decide_units({24: 45.0, 72: 120.0}, gauge={"verdict": "in", "text": "agrees"})["factor"] == 1.0
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT})
+    out = RF.run(now=NOW, session=FakeNOAA(scale=1.0, wet={(42.0, -75.0): 31.0}, gauges={"KTST": [(9, 3.8)]}))
+    u = out["mrms"]["units"]
+    assert u["units_read"] == "in" and u["basis"] == "gauge_check" and "conflict" not in u
+    assert out["points"]["42.00,-75.00"]["mrms"]["h24"] == 31.0
+    low = [pt for k, pt in out["points"].items() if k != "42.00,-75.00"]
+    assert low and all(pt["mrms"]["h24"] == rain_at(pt["lat"], pt["lon"]) for pt in low)
+    assert any(0 < pt["mrms"]["h24"] < 1 for pt in low)
 
 
 def test_no_gauge_rain_skips_the_check(world, monkeypatch):
@@ -672,9 +698,9 @@ def test_the_history_is_rescaled_once_hour_by_hour(world, monkeypatch):
 
 def test_every_hour_stored_before_the_check_is_millimetres(world):
     start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
-    hist = {"start": RF.iso(start), "permits": {"P": [0.4, 31.0, 3.0, None, 2.5]}}
+    hist = {"start": RF.iso(start), "permits": {"P": [0.4, 51.0, 3.0, None, 2.5]}}
     got, rep = RF.repair_history_units(hist, start + 5 * H, known={})
-    assert got["permits"]["P"] == [0.02, 1.22, 0.12, None, 0.1] and rep["hours_kept_as_inches"] == 0
+    assert got["permits"]["P"] == [0.02, 2.01, 0.12, None, 0.1] and rep["hours_kept_as_inches"] == 0
     assert rep["first_hour_over_bound"] == RF.iso(start + H)
 
 
@@ -695,13 +721,105 @@ def test_a_history_the_first_repair_checked_gets_its_kept_hours_rescaled_once(wo
     p = got["permits"]["P"]
     assert rep["changed"] and rep["values_rescaled"] == 1 and p[29] == 0.23
     assert p[61] == 0.23 and p[n - 40] == 0.4 and p[n - 49] == 0.3
-    assert got["units_checked"]["repair"] == RF.REPAIR_VERSION and got["units_repair"]["second_pass"] == rep
+    assert got["units_checked"]["repair"] == RF.REPAIR_VERSION and got["units_repair"]["third_pass"] == rep
     again, rep2 = RF.repair_history_units(got, now)
     assert rep2["changed"] is False and again["permits"]["P"] == p
     # a history begun after the check (version 2 from its first reading) is never rescaled
     fresh = RF.update_history(None, {"P": {"valid_time": RF.iso(now - H), "h24": 0.4}}, now)
     same, rep3 = RF.repair_history_units(fresh, now)
     assert rep3["changed"] is False and max(v for v in same["permits"]["P"] if v is not None) == 0.4
+
+
+def test_recent_originals_beside_converted_backfills_are_rescaled_exactly_once(world):
+    """SOL wave2 P2-7: a version-one history with an original 5.9 (mm) 25 hours before the check, its first rescaled
+    range an hour before the check, and hours a later reading filled from a 48-hour total (inches, marked in the
+    history's provenance). The originals are rescaled once, the backfills never; an unmarked recent hour that cannot
+    be told apart holds the migration open (never marked repaired) until it leaves the window."""
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    frm = datetime(2026, 11, 7, 3, tzinfo=UTC)
+    now = frm + 10 * H
+    n = 7 * 24
+    i = lambda t: int((t - start).total_seconds() // 3600)  # noqa: E731
+    a, b = [None] * n, [None] * n
+    a[i(frm - 80 * H)] = 12.7                       # old original: millimetres
+    a[i(frm - 25 * H)] = 5.9                        # recent original: millimetres (the reviewer's case)
+    a[i(frm - 24 * H)] = 0.3                        # a backfill after the check: inches already
+    a[i(frm - 48 * H)] = 0.2                        # another backfill
+    a[i(frm - H)] = 0.23                            # the first range version 1 rescaled
+    a[i(frm + 2 * H)] = 0.4                         # a reading after the check
+    b[i(frm - 30 * H)] = 2.54                       # recent, but this history marks no backfill for it: an original
+    hist = {"start": RF.iso(start), "permits": {"P": a, "Q": b},
+            "backfilled": {"P": [RF.iso(frm - 24 * H), RF.iso(frm - 48 * H)], "Q": []},
+            "units_checked": {"from": RF.iso(frm), "rule": "x"},
+            "units_repair": {"hours_kept_as_inches": 3, "ranges": [[RF.iso(frm - H), RF.iso(frm - H)]]}}
+    got, rep = RF.repair_history_units(copy.deepcopy(hist), now)
+    p, q = got["permits"]["P"], got["permits"]["Q"]
+    assert p[i(frm - 80 * H)] == 0.5 and p[i(frm - 24 * H)] == 0.3 and p[i(frm - 48 * H)] == 0.2
+    assert p[i(frm - H)] == 0.23 and p[i(frm + 2 * H)] == 0.4
+    # the unmarked recent hours (5.9 and 2.54) cannot be told from a backfill without provenance: held, listed, and
+    # the migration is not marked done
+    assert rep["unresolved"] == {"P": [RF.iso(frm - 25 * H)], "Q": [RF.iso(frm - 30 * H)]}
+    assert p[i(frm - 25 * H)] == 5.9 and q[i(frm - 30 * H)] == 2.54
+    assert got["units_checked"]["repair"] < RF.REPAIR_VERSION
+    # a second run rescales nothing twice
+    again, rep2 = RF.repair_history_units(copy.deepcopy(got), now + H)
+    assert again["permits"] == got["permits"] and rep2["values_rescaled"] == 0
+    assert again["units_checked"]["repair"] < RF.REPAIR_VERSION
+    # with marks complete since the check, the unmarked recent hours are originals: the same history is rescaled
+    # exactly once (the old original, both recent originals; never the backfills) and marked repaired
+    marked = copy.deepcopy(hist)
+    marked["backfilled_since"] = RF.iso(frm - 2 * H)
+    got3, rep3 = RF.repair_history_units(marked, now)
+    p3, q3 = got3["permits"]["P"], got3["permits"]["Q"]
+    assert rep3["values_rescaled"] == 3 and rep3["unresolved"] == {}
+    assert p3[i(frm - 80 * H)] == 0.5 and p3[i(frm - 25 * H)] == 0.23 and q3[i(frm - 30 * H)] == 0.1
+    assert p3[i(frm - 24 * H)] == 0.3 and p3[i(frm - 48 * H)] == 0.2 and p3[i(frm - H)] == 0.23
+    assert got3["units_checked"]["repair"] == RF.REPAIR_VERSION
+    again3, rep5 = RF.repair_history_units(copy.deepcopy(got3), now + H)
+    assert rep5["changed"] is False and again3["permits"] == got3["permits"]
+    # once the held hours leave the window, the migration completes and nothing is rescaled again
+    late = RF.update_history(copy.deepcopy(got), {}, frm + (RF.HISTORY_DAYS * 24 - 20) * H)
+    done, rep4 = RF.repair_history_units(late, frm + (RF.HISTORY_DAYS * 24 - 20) * H)
+    assert rep4["unresolved"] == {} and done["units_checked"]["repair"] == RF.REPAIR_VERSION
+    assert rep4["values_rescaled"] == 0
+
+
+def test_a_version_two_history_gets_the_hours_its_second_pass_skipped(world):
+    """SOL wave2 P2-7: version 2 rescaled only before 50 hours ahead of the check and marked the history done; the
+    hours it skipped are originals unless a backfill mark says otherwise. With the marks covering every recent
+    backfill and no unmarked recent value left, the history is rescaled once and marked repaired."""
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    frm = datetime(2026, 11, 7, 3, tzinfo=UTC)
+    n = 7 * 24
+    i = lambda t: int((t - start).total_seconds() // 3600)  # noqa: E731
+    a = [None] * n
+    a[i(frm - 80 * H)] = 0.5                        # rescaled by the second pass already
+    a[i(frm - 24 * H)] = 0.3                        # a backfill: inches
+    a[i(frm - 49 * H)] = 0.0                        # a dry original: the same in either unit
+    hist = {"start": RF.iso(start), "permits": {"P": a}, "backfilled": {"P": [RF.iso(frm - 24 * H)]},
+            "units_checked": {"from": RF.iso(frm), "rule": "x", "repair": 2},
+            "units_repair": {"hours_kept_as_inches": 2, "ranges": [[RF.iso(frm - H), RF.iso(frm - H)]],
+                             "second_pass": {"changed": True, "before": RF.iso(frm - 50 * H)}}}
+    got, rep = RF.repair_history_units(copy.deepcopy(hist), frm + H)
+    assert got["permits"]["P"] == a and rep["values_rescaled"] == 0 and rep["unresolved"] == {}
+    assert got["units_checked"]["repair"] == RF.REPAIR_VERSION
+    again, rep2 = RF.repair_history_units(got, frm + 2 * H)
+    assert rep2["changed"] is False and again["permits"]["P"] == a
+
+
+def test_the_history_records_which_hours_are_backfills():
+    now = datetime(2026, 11, 8, 10, 10, tzinfo=UTC)
+    vt = RF.iso(hour_floor_(now) - H)
+    h = RF.update_history(None, {"P": {"valid_time": vt, "h24": 0.4, "h48": 0.9, "h72": 1.0}}, now)
+    t = RF.parse_t(vt)
+    assert h["backfilled"] == {"P": sorted([RF.iso(t - 48 * H), RF.iso(t - 24 * H)])}
+    # a reading for that hour itself replaces the mark
+    later = RF.update_history(h, {"P": {"valid_time": RF.iso(t - 24 * H), "h24": 0.6}}, now)
+    assert later["backfilled"] == {"P": [RF.iso(t - 48 * H)]}
+
+
+def hour_floor_(t):
+    return t.replace(minute=0, second=0, microsecond=0)
 
 
 def test_a_run_repairs_the_history_before_it_adds_its_reading(world):
