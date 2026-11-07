@@ -313,3 +313,73 @@ def test_a_closing_signature_name_is_scrubbed_and_place_names_in_text_stay():
     assert "Chris Q. Placeholder" not in out2 and "Lake Example" in out2 and "Environmental Specialist" in out2
     assert scrub_text("Thank you for the report. The creek was clear.") == "Thank you for the report. The creek was clear."
     assert scrub_text("Regards to the crew; Mill Creek was turbid.") == "Regards to the crew; Mill Creek was turbid."
+
+
+# ---------------------------------------------------------------- EPA's permit name (2026-11-07)
+
+def _permit_names():
+    root = Path(__file__).resolve().parents[2]
+    if str(root / "scripts") not in sys.path:
+        sys.path.insert(0, str(root / "scripts"))
+    import permit_names
+    return permit_names
+
+
+def test_a_contact_person_before_the_body_in_epas_permit_name_is_cut():
+    """EPA's ICIS permit name often leads with a contact person ('<a person> - City of X'): the person goes, the body
+    stays (invented names only)."""
+    s = _permit_names().scrub_permit_name
+    assert s("Pat Example - City of Exampleton") == ("City of Exampleton", True)
+    assert s("Quill Placeholder- North Example Borough") == ("North Example Borough", True)
+    assert s("Pat Q. Example, Jr. - Exampleton Village of Sampleville") == ("Exampleton Village of Sampleville", True)
+    assert s("Pat Example-City of Exampleton") == ("City of Exampleton", True)
+    assert s("Pat Example, City of Exampleton") == ("City of Exampleton", True)
+    assert s("Pat Example - Example Bay Borough School District") == ("Example Bay Borough School District", True)
+    assert s("Example County Water District c/o Pat Example") == ("Example County Water District", True)
+    assert s("Quill Placeholder", "Exampleton", "EXAMPLETON LAGOON") == (None, True)    # a contact alone
+
+
+def test_an_organisation_or_place_first_permit_name_is_untouched():
+    s = _permit_names().scrub_permit_name
+    for keep in ("Exampleton, City of", "EXAMPLETON, CITY AND BOROUGH OF", "Example Foods, Inc.",
+                 "City of Exampleton - Example Utilities", "North Pole - City of North Pole",
+                 "Example County Sanitary District, Inc. - Dept. of Example Utilities", "Matanuska-Susitna Borough",
+                 "Example Creek - City of Exampleton", "Fort Example - City of Fort Example",
+                 "Sample, Example, Placeholder Sewer Commission", "Example Hills - Example Hills WWTP",
+                 "Example WPCP (Sample Plant)", "Example Lake Golf Club", "PAT EXAMPLE", None, ""):
+        assert s(keep, facility="EXAMPLE HILLS WWTP")[1] is False, keep
+
+
+def test_scrub_rows_keeps_the_other_fields_and_marks_the_row_without_the_removed_text():
+    pn = _permit_names()
+    rows = [{"npdes_permit": "ZZ0000001", "permittee": "EXAMPLETON WWTF", "permit_name": "Pat Example - City of Exampleton",
+             "state": "ZZ", "city": "Exampleton", "outfall": "001"},
+            {"npdes_permit": "ZZ0000002", "permittee": "SAMPLE WWTP", "permit_name": "Sampleville, City of", "state": "ZZ"}]
+    assert pn.scrub_rows(rows) == {"ZZ": 1}
+    assert rows[0] == {"npdes_permit": "ZZ0000001", "permittee": "EXAMPLETON WWTF", "permit_name": "City of Exampleton",
+                       "permit_name_scrubbed": True, "state": "ZZ", "city": "Exampleton", "outfall": "001"}
+    assert list(rows[0])[3] == "permit_name_scrubbed" and "Pat" not in json.dumps(rows)
+    assert "permit_name_scrubbed" not in rows[1]
+    assert pn.scrub_rows(rows) == {}                       # once is enough: the rule is stable on its own output
+
+
+def test_no_registry_row_names_a_person_in_epas_permit_name():
+    """Every registry file that carries permit_name: no row the rule would still cut, and no field that is a person's
+    name alone (counts only; the names are never printed)."""
+    pn = _permit_names()
+    import private_utilities as pu
+    root = Path(__file__).resolve().parents[2] / "data"
+    seen = 0
+    for path in sorted(root.glob("outfalls-*.json")):
+        doc = json.loads(path.read_text())
+        rows = doc["outfalls"] if isinstance(doc, dict) else doc
+        cut = alone = 0
+        for r in rows:
+            v = r.get("permit_name")
+            if not v:
+                continue
+            seen += 1
+            cut += pn.scrub_permit_name(v, r.get("city"), r.get("permittee"))[1]
+            alone += (not pu.has_org_word(v)) and pu.person_like(v)
+        assert (cut, alone) == (0, 0), f"{path.name}: {cut} rows with a contact person, {alone} with a person alone"
+    assert seen > 20000
