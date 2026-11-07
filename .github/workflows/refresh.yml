@@ -144,6 +144,9 @@ jobs:
           if [ "$rc" = 0 ]; then
             wrangler r2 object put dirtywaterwatch-data/state/obl-water.tar.gz --file obl-water.tar.gz --remote \
               || python3 -I scripts/state_paths.py obl-not-saved
+          elif [ "$rc" != 3 ]; then
+            # the pack itself failed (not "nothing to save"): the folder is not saved either, so roll back the same way
+            python3 -I scripts/state_paths.py obl-not-saved
           fi
           rm -f obl-water.tar.gz
       - name: Save pipeline state to R2
