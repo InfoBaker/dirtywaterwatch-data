@@ -15,16 +15,20 @@ The advisory code
   ADEM does not publish what the codes mean: the layer's renderer is one symbol, and the legend's "Beach Monitoring
   Sites" layer (classes Green, Yellow, Red, keyed on a text value) no longer answers (checked 2026-11-07). Every station
   showed 11 on 2026-11-07, when no Alabama swim advisory was reported in effect (the last reported, Wolf Bay at Orange
-  Beach Waterfront Park, was lifted in September 2026). So 11 is read as "no advisory" (BASELINE) and any other code as
-  an advisory, on the side of caution; the record quotes the code and says its meaning is not published. The legend's
+  Beach Waterfront Park, was lifted in September 2026). So 11 is read as "no advisory" (BASELINE) and any other code
+  opens a record, on the side of caution, shown only as the site's caution; the record quotes the code and says its
+  meaning is not published (an owner question: ask ADEM for the code list). The legend's
   green is never shown by this site.
 
 Record rules (one record per station and advisory spell)
   - A station whose code is not BASELINE (and not empty) opens a beach_advisory record, status advisory_active, at the
     station's point, dated by the poll that first saw it (time_precision poll; the layer gives no advisory date, only
     the last sample date, kept in raw.last_sample_date). The water is ADEM's WaterbodyN (waterbody_text).
-  - Every poll that still shows the code re-confirms it (source_updated_at the poll's time); a change to another
-    non-baseline code is kept in raw.codes_seen, not a new record.
+  - The layer gives no advisory, report or edit time, so reported_at and source_updated_at stay null; every poll that
+    still shows the code re-confirms it (raw._last_seen_in_source and fetched_at are that poll's time; the first poll
+    is raw._first_seen_at). A change to another non-baseline code is kept in raw.codes_seen, not a new record.
+  - Never the health department's advisory: until ADEM publishes what its codes mean, every record carries
+    raw.code_undecoded (the reason) and the status build shows it as the site's caution (rule code_caution), never red.
   - The first poll that shows BASELINE lifts it: status advisory_lifted, ended_at that poll's time (lifted at or before
     then; raw.end_basis).
   - A station missing from a poll changes nothing. A response with fewer than half the stations of the last good one,
@@ -57,7 +61,7 @@ BASELINE = {11}
 MIN_RATIO = 0.5
 CODE_NOTE = ("ADEM's layer gives the station advisory code {code}; ADEM does not publish what its codes mean. Every "
              "station showed 11 on 2026-11-07, when no swim advisory was reported in effect, so 11 is read as no "
-             "advisory and any other code as an advisory, on the side of caution.")
+             "advisory and any other code is shown as this site's caution, not as an advisory.")
 
 
 def query() -> bytes:
@@ -109,6 +113,7 @@ def open_record(a: dict, at: str) -> dict:
            "code_note": CODE_NOTE.format(code=code), "codes_seen": [{"code": code, "first_seen_at": at}],
            "last_sample_date": sample_day(a.get("Date")), "results_pdf": a.get("URL") or None,
            "start_basis": "the layer gives no advisory date: the poll that first showed the code",
+           "code_undecoded": CODE_NOTE.format(code=code), "_first_seen_at": at, "_last_seen_in_source": at,
            "time_basis": ("started_at: the first poll that showed a code other than 11; ended_at: the first poll that "
                           "showed 11 again, so the advisory was lifted at or before then")}
     return event(
@@ -116,7 +121,7 @@ def open_record(a: dict, at: str) -> dict:
         status="advisory_active", waterbody_text=(a.get("WaterbodyN") or "").strip() or None,
         outfall_name=name_of(a) or None,
         lat=a.get("Latitude"), lon=a.get("Longitude"), coord_source="source" if a.get("Latitude") is not None else None,
-        started_at=at, time_precision="poll", reported_at=at, source_updated_at=at,
+        started_at=at, time_precision="poll", reported_at=None, source_updated_at=None, fetched_at=at,
         authority=AUTHORITY, advice_text=None, source_url=SITE, raw=raw)
 
 
@@ -132,7 +137,8 @@ def run(rows: list[dict], prev: list[dict], at: str) -> tuple[list[dict], dict]:
         if flagged(a):
             stats["flagged"] += 1
             if cur:
-                cur["source_updated_at"], cur["fetched_at"] = at, at
+                cur["fetched_at"] = at
+                cur["raw"]["_last_seen_in_source"] = at
                 cur["raw"]["row"] = a
                 cur["raw"]["last_sample_date"] = sample_day(a.get("Date"))
                 if cur["raw"]["codes_seen"][-1]["code"] != code_of(a):
