@@ -1,5 +1,6 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
-Washington State, Illinois and Alaska.
+Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona), South Dakota,
+Mississippi, Nebraska and Alaska.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -48,7 +49,8 @@ Which events are kept (one record per event that reached a water)
        CSO, regulator or outfall).
     6. DROP the rest: SSOs, and CSO-type overflows from manholes or broken pipes, with no receiving
        water and only land or no-observable impacts.
-  Dropped events go to data/build/echo-sewer-overflow-dropped.json with the reason, for review.
+  Dropped events go to data/build/echo-sewer-overflow-dropped.json with the reason, for review (and with the start,
+  end and receipt date as given, which ingest/ga_epd_spills.py reads to give a Georgia dry-land spill its end).
 
 Mapping
   event_type from the types table: CSO -> cso, SSO -> sso, BYP -> bypass (first by sequence; a
@@ -138,6 +140,175 @@ Illinois (permits IL...; research/il/report.md section 2.2; not live until data/
     emails, phones, staff names, an owner's or resident's name, every house number). The point stays: it is the
     event's own (no Illinois point is shared by many reports of one permit except at a CSO outfall or a plant).
 
+Arizona (permits AZ..., and the Navajo Nation's NN... where the event's point is in Arizona; research/az/report.md
+section 2.2; not live until data/rules.json says so)
+  Arizona's AZPDES permittees file their 24-hour and five-day overflow and bypass reports in ADEQ's myDEQ, and they
+  reach this dataset (2026-11-04 extract: 288 current AZ rows from 42 permits, 264 SSO and 24 bypass, starts from
+  2019-09 to 2026-10-28; received a median 3 days after the start, 90th percentile 10). Pima County (Tucson) files no
+  rows, and collection systems with only an Aquifer Protection Permit report to ADEQ under A.A.C. R18-9-C305(F) but
+  are not in this table. The rules below are keyed on AZ (and the NN prefix), so the other states' records are
+  unchanged:
+  - Navajo Nation permits (NN...): EPA Region 9 issues them for the Navajo Nation, which spans Arizona, New Mexico and
+    Utah, so the prefix names no state. The state is the one the event's own point lies in (navajo_point_state: west of
+    the Arizona-New Mexico line at 109.045 W and south of the Arizona-Utah line at 37 N is Arizona; the Four Corners
+    boundaries), written in raw.state with raw.state_basis as for DC's rows in Maryland; a point outside STATES (New
+    Mexico, Utah) or no point is skipped as before. 2026-11-04 extract: 56 NN reports, 52 in Arizona (Window Rock,
+    Kayenta, Tuba City, Twin Arrows, Chinle), 4 in New Mexico (Shiprock, one of Window Rock's). Clock (PERMIT_TZ): the
+    Navajo Nation keeps daylight saving time, unlike the rest of Arizona, so NN times are read as America/Denver (the
+    tz database's backward link Navajo -> America/Denver); the Hopi reservation inside it keeps Arizona time, and its
+    permits (AZ...) stay America/Phoenix. An owner question: the decision gives the permit's state's zone.
+  - Time zone (docs/decisions.md, National expansion item 6): STATE_TZ gives America/Phoenix (no daylight time, so
+    every Arizona time is written -07:00).
+  - Receiving water as an ADEQ waterbody identifier: most named receiving waters are WBIDs ('AZ15060202-421'), not
+    names. AZ_WBID (data/reference/az-adeq-wbids.json, from ADEQ's stream and lake WBID layers;
+    scripts/az_adeq_wbids.py) turns each into ADEQ's name ('Unnamed Trib to Munds Creek'), so waterbody_text carries
+    the name; raw.receiving_waters keeps what was filed, raw.receiving_water_aliases what was changed and
+    raw.receiving_water_wbids ADEQ's segment (origin, terminus, flow regime). A code ADEQ's layer lacks is kept as
+    typed. 'UNK_PERNL' (a receiving-water entry with no name) counts as a water but gives no name (AZ_WATER_ALIASES).
+    A Navajo Nation entry that goes on after the name ('Black Creek wash however it was bypassed into lagoon') is cut
+    to the name; one that names only the plant's lagoon ('by passed into emergency lagoon.') is no water
+    (STATE_NO_WATER["AZ"]).
+  - Washes and canals: most Arizona overflows reach streets, retention basins and dry washes, and the report says so
+    only in the impact text ('flowed to an unnamed wash', 'Discharged to the Corgett Wash', 'flowed into RID canal').
+    az_water_text reads a named wash, arroyo or canal ('Queen Creek Wash', 'RID canal'), one the overflow went to,
+    into or through with a determiner ('to an unnamed wash', 'into a Concrete lined canal') and 'went to wash' ending a
+    clause, as a water: a report naming a wash names a water (the owner's rule of 2026-11-03 keeps a report that
+    reached no water off the water). The verb ('Wash with potable water', 'to wash down the street', 'Crew Will Wash
+    Down Area'), places named for washing ('Car Wash', 'Vactor Truck Wash') and a wash the overflow did not reach
+    ('over 1/2 mile from the closest dry wash') are not read as one.
+  - Texts that name a water only to deny it ('The SSO did not impact any waterway', 'did not reach any body of
+    water', 'did not enter the canal') and the plant's own ponds ('effluent storage pond', 'retention pond', 'recharge
+    basin') are taken out of the text before the water words are read (STATE_NOT_WATER_TEXT["AZ"]); a water-feature
+    or other pond still counts in an overflow's report.
+  - Bypasses held at the plant: a bypass whose text sends the flow to a pond or lagoon (a bypass's pond is the
+    plant's: AZ_BYPASS_POND) or says it was contained on the plant's property or site, and names no other water, is
+    dropped with the reason "bypass held at the plant (its own pond, lagoon or grounds)" (Cottonwood's lined effluent
+    ponds, 9 reports; Grand Canyon South Rim's emergency effluent lagoon, 1).
+  - The plant's point: many permits give one point for most of their reports (Grand Canyon's South Rim plant 30 of
+    32, Yuma 15 of 17). For the prefixes in REPEATED_POINT_ALL_REPORTS (AZ, NN) a point that three or more of a
+    permit's reports give (kept or dropped) is taken as the permit's location when it lies within
+    REPEATED_POINT_PLANT_M (1,000 m) of a point EPA's plant list gives the permit; a shared point farther away, or of a
+    permit with no plant point, is kept with raw.point_note. The descriptions are not compared: an Arizona
+    description ('Manhole ID : 112945') carries the report's own form id, not an asset number. Bypasses keep the point.
+  - Free text: descriptions give street addresses ('SSO at <number> N <street> Blvd') and 'Other' texts mention
+    private residences: the AZ rows (FREE_TEXT_STATES) get the Illinois scrub (house numbers removed).
+
+South Dakota (permits SD...; research/sd/report.md section 2.2; not live until data/rules.json says so)
+  South Dakota has no public-notice law for sewage; its permittees file their 5-day written overflow and bypass reports
+  through EPA's NeT-SewerOverflow, so this dataset is the state's only dated, event-level record (2026-11-04 extract:
+  208 current SD rows from 56 permits, starts April 2023 to 2026-11-02; SSO 167, BYP 40, CSO 1; every row with a
+  point, 186 with a volume; received a median 5 days after the start, 10% the same day, 10% 57 days or more). 57 are
+  kept, from 30 permits; 151 dropped: 97 SSOs naming no water and no water impact, 34 building backups, 20 naming no
+  water in words. Lead's CSO permit (SD0027481) files its Gold Run Creek overflows as SSOs at a manhole; they are kept
+  by the water they name. Four South Dakota habits are handled here, for SD permits only, so every other state's records
+  are unchanged (checked on that extract: 1,809 kept and 1,741 dropped records of the other states identical):
+  - Time zone. The state straddles Central and Mountain time, so one zone would mislabel a third of the reports
+    (Central for the whole state: 71 of 208 rows, 14 of 57 kept; Mountain: 137 rows, 43 kept). The rule uses public
+    records only: the event's own point against the outlines of the counties the Mountain zone covers. The boundary is
+    49 CFR 71.7(b) (down the Missouri River from North Dakota to Pierre, then along the north line of Jones County and
+    the west lines of Jones, Mellette and Todd counties); it leaves fifteen counties wholly in the Mountain zone (Bennett,
+    Butte, Corson, Custer, Dewey, Fall River, Haakon, Harding, Jackson, Lawrence, Meade, Oglala Lakota, Pennington,
+    Perkins, Ziebach) and splits Stanley County, whose corner around Fort Pierre keeps Central time. The outlines are
+    the Census Bureau's TIGERweb counties (data/reference/sd-mountain-time-counties.json, written by
+    scripts/sd_mountain_time_counties.py, which cites both). A point in one of the fifteen is read as America/Denver.
+    Stanley County is cut in two by the U.S. DOT time-zone layer's Central polygon (NTAD Time Zones, committed in the
+    same file; review 2026-11-07 P2-2): a point in its Fort Pierre corner is Central, a point in the rest of it (84% of
+    the county) Mountain. Any other point is America/Chicago (STATE_TZ), and raw.timezone_note names the county, or the
+    part of Stanley County, that decided it. On that extract: 71 rows Mountain (Rapid City, Spearfish, Hot Springs,
+    Lead, Sturgis, Custer, Keystone, and one Oahe Dam row in western Stanley County), 137 Central. The DOT layer as a
+    whole agrees on 207 rows; the other is the second Oahe Dam row (SD0026794), in Hughes County on the river channel
+    that is the boundary, read here as Central. Both Oahe Dam rows are dropped. Fort Pierre's four rows are Central.
+  - Receiving-water texts that name none (STATE_NO_WATER["SD"]): 'Does not apply- Do not discharge to any waters',
+    'NA, <why>' (unless the why says the water was discharged: then STATE_NO_NAME reads it as no name given, so
+    the bypass is kept by the bypass rule), the flow sent to the city's sewer system or plant ('Sanitation system of
+    City of ...', '... Wastewater Facility', '... WWTP', '... sewer system/POTW'), a lagoon cell ('Cell # 3', 'Cell 4 at the Lagoons'), 'Excavated
+    hole. No waterbody.', 'water is discharged out into a field', and 'Ditch by Lake ... Water never entered lake'.
+    'Spearfish Creek / Rubble Site Cell' and 'Unnamed' stay waters.
+  - The description's water words: a lagoon system's "emergency pond" is a holding cell of the plant, not a water
+    (STATE_NOT_A_WATER_TEXT["SD"]); a detention pond, a creek or a storm drain still counts.
+  - Free text: descriptions carry house addresses of backups and breaks ('entered basement of <number> <street>',
+    'SSO - <number> <street> SE'), so SD is in FREE_TEXT_STATES (the Illinois scrub). The points are the events' own
+    (no kept point is shared by more than four reports of one permit), so SD is not in REPEATED_POINT_STATES.
+
+Planned bypasses (every state; review 2026-11-07 P2-3)
+  An anticipated bypass notice (reporting requirement 'Anticipated bypass notice', code 4, or a report carrying the
+  anticipated-bypass text) gives the operator's planned start and end; a planned end can lie months ahead (Rapid City's
+  UV-building bypass to Rapid Creek, 2026-11-02 to 2027-04-30; Aberdeen's plant rebuild to Moccasin Creek, 2026-03-23
+  to 2028-06-01). While that end is still ahead of the run, the record is ongoing with the planned end as ended_at,
+  raw.end_is_planned true and raw.planned_end_note saying so; the status build keeps such an end (it is not a typing
+  error) and colours the discharge to it. Once the end has passed the record is ended, as any other. An end far ahead
+  on any other report is still treated as a typing error by the status build (unresolved.implausible_end).
+  On the 2026-11-04 extract four records carry a planned end ahead: the two South Dakota ones above and two Navajo
+  Nation bypasses in Arizona (NN0020265 to Nazlini Wash and NN0020281 to Laguna Creek, both to 2027-01-01 as filed).
+
+Mississippi (permits MS...; research/ms/report.md section 2.2; not live until data/rules.json says so)
+  MDEQ requires the 5-day written report of every SSO and bypass through EPA's NeT-SewerOverflow from 2025-12-21, so
+  this dataset is the statewide record (2026-11-04 all-versions extract: 358 current MS rows from 47 permits, all with
+  coordinates; SSO 314, BYP 43, CSO 1; report received a median 4 days after the start). MDEQ publishes no list of
+  its own. Three Mississippi habits are handled here, for MS permits only, so the other states' records are unchanged:
+  - Time zone: Mississippi is wholly in Central time; STATE_TZ gives America/Chicago, as for Illinois.
+  - Free text: descriptions name the manhole's or break's street address ('<number> <street> DR - <manhole no.>'),
+    so MS is in FREE_TEXT_STATES and every free-text field gets the Illinois scrub.
+  - The City of Jackson's reports (MS0024295, MS0044059, run by JXN Water) give a creek's name without 'Creek'
+    ('EUBANKS', 'HANGING MOSS ', 'TOWN'), and Meridian's (MS0020117) misspell its creeks three times ('OAKTIBEE
+    CREEK', 'OKATIBBEE CREED', 'SAWASHEE CREEK'). STATE_WATER_ALIASES reads such a name, for that permit only, as
+    the NHD flowline of the name (USGS NHD large-scale flowlines, GNIS id and the lines' bbox in the table, checked
+    2026-11-07), and only when the report's point lies within ALIAS_REACH_KM (3.5 km) of that bbox: in the
+    2026-11-04 extract 50 of 51 such reports lie within 3.5 km of the line itself (the farthest a Trahon Creek report
+    at 3,466 m); one EUBANKS report 15.4 km from Eubanks Creek is kept as typed. Names with no such flowline
+    ('BELHAVEN', 'CANEY', 'EASTOVER', 'THREE MILE'; JCUA's 'Forth Bayou Creek') are kept as typed.
+    raw.receiving_waters keeps the text as reported and raw.receiving_water_aliases says what was read.
+  - Two text rules (STATE_NOT_SEWAGE, STREET_WATER): a description saying the matter was not sewage ("customer
+    thought there was sewer in the pond. It was algae ...") drops the report; a water word that is part of a street
+    name ('FOREST LAKE CIR') is not read as a water.
+  Points are the event's own (a manhole that overflows in each storm repeats its point; the Vicksburg plant's
+  bypasses all give the plant's point), so MS is not in REPEATED_POINT_STATES. The generic 'no water' wordings cover
+  the Mississippi rows ('None'); a roadside or drainage ditch named as the receiving water is kept as a water.
+
+Nebraska (permits NE...; research/ne/report.md section 2.2; not live until data/rules.json says so)
+  Nebraska has no public-notice law for sewage; its permittees file their overflow and bypass reports through EPA's
+  NeT-SewerOverflow (DWEE's NeTSSO guide, publication 25-032), so this dataset is the state's only dated, event-level
+  record (2026-11-04 all-versions extract: 162 current NE rows from 21 permits, starts 2022-04 to 2026-10-06; CSO 89, SSO 64,
+  BYP 9; every row with a point, 158 with a volume; received a median 22.5 days after the start, 10% within a day, 10%
+  83 days or more). 51 are kept, from 13 permits; 111 dropped: 83 building backups, 28 SSOs and manhole CSOs naming no
+  water and no water impact. Omaha files under three permits (Papillion Creek WRRF NE0112810 with 71 rows, Missouri
+  River WRRF NE0036358, the CSO permit NE0133680); the Papillion Creek rows are all typed CSO but none is at a CSO
+  outfall (manholes, pump stations, broken pipes, basements), so they are kept only by the water they name. Four
+  Nebraska habits are handled here, for NE permits only, so every other state's records are unchanged (checked on that extract: 1,809 kept and 1,741 dropped records of
+  the other states identical):
+  - Time zone. The state straddles Central and Mountain time. The rule uses public records only and is South Dakota's
+    mechanism: the event's own point against the outlines of the area the Mountain zone covers (POINT_ZONE_FILES). The
+    boundary is 49 CFR 71.7(c) (south from the South Dakota line along range and section lines through Cherry County,
+    then the north and west lines of Thomas and McPherson counties, the north line of Keith County, the west line of
+    Lincoln County and the west lines of Hayes and Hitchcock counties to Kansas); it leaves eighteen counties wholly in
+    the Mountain zone (Arthur, Banner, Box Butte, Chase, Cheyenne, Dawes, Deuel, Dundy, Garden, Grant, Hooker, Keith,
+    Kimball, Morrill, Perkins, Scotts Bluff, Sheridan, Sioux) and splits Cherry County, whose western part keeps
+    Mountain time. The outlines are the Census Bureau's TIGERweb counties, Cherry County's two parts cut by the U.S.
+    DOT time-zone layer (NTAD Time Zones) and filed as South Dakota files Stanley County (split_counties with
+    mountain_part and central_part; data/reference/ne-mountain-time-counties.json, written by
+    scripts/ne_mountain_time_counties.py, which cites all three). A point in one of the eighteen counties or in Cherry
+    County's western part is read as America/Denver; any other point as America/Chicago (STATE_TZ), and
+    raw.timezone_note names the county that decided it, quoting the file's note for a split county. On that extract every one of the 162 points lies in the Central part (Omaha, Lincoln, Grand
+    Island, Seward, Falls City, Nebraska City and the other reporting towns are all east of the line); a single Central
+    zone would mislabel none of them today, a single Mountain zone all 162. The point rule is kept so a report from the
+    panhandle (Scottsbluff, Sidney, Ogallala, Alliance, Chadron) is read in its own zone when one is filed.
+  - Free text: descriptions carry house addresses of backups ('Sewer Back-up into home located at <number> <street>'),
+    so NE is in FREE_TEXT_STATES (the Illinois scrub). The receiving-water texts name no "none" wordings the generic rule
+    misses (no STATE_NO_WATER entry). The points are the events' own (no point is shared by
+    more than four reports of one permit), so NE is not in REPEATED_POINT_STATES.
+  - CSO by structure (CSO_BY_STRUCTURE_STATES; review 2026-11-07 P2-1). EPA's system table registers both Omaha
+    collection systems as combined, yet the Papillion Creek and Missouri River plants file manhole, pipe and pump-station
+    overflows in the separated western sewers (Boxelder Creek, the Elkhorn River, points west of every one of Omaha's 25
+    CSO outfalls) as CSOs. A CSO-typed NE report stays a CSO only at a CSO outfall or regulator, with a permitted
+    feature, or when its description names the permit's outfall ("at CSO 204", read into outfall_id with
+    raw.outfall_basis); any other is written sso, with raw.type_as_filed "CSO" and raw.type_note. On the 2026-11-04
+    extract 28 kept reports change (27 Papillion Creek, 1 Missouri River); the 4 kept CSOs are Omaha's CSO permit's
+    (outfalls 110, 119, 204 twice). A retyped report is never placed on every water of Omaha's operator row (that
+    inference is for CSOs): it is placed by the water it names, its point, or not at all.
+  - 'Unknown' as the receiving water (UNKNOWN_WATER_STATES): two Papillion Creek reports into a storm inlet. They are
+    kept (the report says a water was reached), but waterbody_text is null, so 'Unknown' is never printed as a water;
+    the text stays in raw.receiving_waters and raw.receiving_water_note says why.
+
 Alaska (permits AK...; research/ak/report.md; not live until data/rules.json says so)
   Alaska's APDES permittees that file electronically report here, and this dataset is the only dated, machine-readable
   overflow record for the state (the 2026-11-04 all-versions extract: 46 current AK rows from 3 permits, 2023-06-05 to
@@ -198,20 +369,55 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AK"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
-STATE_TZ = {"IL": "America/Chicago", "AK": "America/Anchorage"}
+STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
+            "NE": "America/Chicago", "AK": "America/Anchorage"}
+# states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
+# one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
+POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
 # a state's part in another zone, by the event's own point: [(lon_min, lon_max, lat_min, lat_max)], zone. The Aleutian
 # Islands west of 169 deg 30 min W are Hawaii-Aleutian time (49 CFR 71.12; the rest of Alaska 71.11); module docstring
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
+# a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
+# Mississippi. Each NHD flowline of the name runs within about 3 km of the reports' points (GNIS id after the name).
+STATE_WATER_ALIASES = {"MS": {
+    # (permit, _alias_key(text)): (NHD name, GNIS id, the NHD flowlines' bbox [lon0, lat0, lon1, lat1])
+    ("MS0024295", "eubanks"): ("Eubanks Creek", "00669816", (-90.2099, 32.3221, -90.1528, 32.3590)),
+    ("MS0024295", "hanging moss"): ("Hanging Moss Creek", "00670883", (-90.2371, 32.3604, -90.1039, 32.4146)),
+    ("MS0024295", "town"): ("Town Creek", "00678831", (-90.2395, 32.2835, -90.1783, 32.3595)),
+    ("MS0024295", "purple"): ("Purple Creek", "00676424", (-90.1506, 32.3663, -90.1044, 32.4174)),
+    ("MS0024295", "lynch"): ("Lynch Creek", "00672967", (-90.2806, 32.2725, -90.1872, 32.3394)),
+    ("MS0024295", "white oak"): ("White Oak Creek", "00679605", (-90.2005, 32.3641, -90.1270, 32.4497)),
+    ("MS0024295", "hardy"): ("Hardy Creek", "00670914", (-90.2530, 32.2508, -90.2049, 32.2860)),
+    ("MS0044059", "trahon"): ("Trahon Creek", "00678852", (-90.2825, 32.1780, -90.2399, 32.2570)),
+    # Meridian's misspellings of its own creeks (its other reports spell them right)
+    ("MS0020117", "oaktibee creek"): ("Okatibbee Creek", "00691590", (-88.8433, 32.1826, -88.7475, 32.6101)),
+    ("MS0020117", "okatibbee creed"): ("Okatibbee Creek", "00691590", (-88.8433, 32.1826, -88.7475, 32.6101)),
+    ("MS0020117", "sawashee creek"): ("Sowashee Creek", "00678030", (-88.7515, 32.3039, -88.6085, 32.4747)),
+}}
+# a shorthand is read as the NHD name only when the report's point lies within this distance of the named lines' bbox
+ALIAS_REACH_KM = 3.5
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
-REPEATED_POINT_STATES = {"GA"}
+REPEATED_POINT_STATES = {"GA", "AZ", "NN"}
 REPEATED_POINT_MIN = 5
+# Arizona and the Navajo Nation (module docstring, by permit prefix): a point counts as the plant's when three or more
+# of the permit's reports, kept or dropped, give it and it lies within REPEATED_POINT_PLANT_M of a point EPA's plant
+# list gives the permit (data/outfalls-plants-us.json); a shared point farther away is kept, with a note
+REPEATED_POINT_ALL_REPORTS = {"AZ", "NN"}
+REPEATED_POINT_MIN_BY_STATE = {"AZ": 3, "NN": 3}
+REPEATED_POINT_PLANT_M = 1000
+PLANTS_FILE = DATA_DIR / "outfalls-plants-us.json"
+# permits whose prefix is not a state (module docstring, Navajo Nation): the state the report counts under is read from
+# the event's own point; the reports placed outside STATES are skipped as before
+POINT_PLACED_PREFIXES = {"NN"}
+# permit prefixes with a clock of their own (module docstring, Navajo Nation): before STATE_TZ
+PERMIT_TZ = {"NN": "America/Denver"}
 AUTHORITY = "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)"
 SUMMARY_URL = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 
@@ -230,7 +436,78 @@ STATE_NO_WATER = {"GA": re.compile(r"^\s*((?:n/?a\s+)?dry\s*land(?:\s+spill)?|n[
                                    r"bu\w*ding\s+basement|did\s*n\S*\s+discharge\b.*)\s*\.?\s*$", re.I),
                   # Illinois: a lawn, an expectation of none, "None, <where>", the plant's own lagoon
                   "IL": re.compile(r"^\s*(lawn|grass|yard|we do not expect\b.*|none\s*[,;:-].*|"
-                                   r"(?:[\w.' -]+\s)?lagoons?)\s*\.?\s*$", re.I)}
+                                   r"(?:[\w.' -]+\s)?lagoons?)\s*\.?\s*$", re.I),
+                  # Arizona and the Navajo Nation: the flow bypassed into the plant's own (emergency) lagoon
+                  "AZ": re.compile(r"^\s*(?:by\s*-?\s*passed|bypassed|diverted)\s+(?:in)?to\s+(?:the\s+|an?\s+|our\s+)?"
+                                   r"(?:emergency\s+)?lagoons?\s*\.?\s*$", re.I),
+                  # South Dakota: "does not apply", "NA, <why>", the flow sent to the sewer system or a plant, a lagoon
+                  # cell, an excavation, a field, and a report that says the water was never reached
+                  "SD": re.compile(r"^\s*(does not apply\b.*|n/?a\s*[,;:-](?!.*\bdischarged?\b).*|.*\bsewer system\b.*|"
+                                   r"sanitation system\b.*|.*\bwastewater (?:treatment )?(?:facility|plant)|.*\bwwtp|"
+                                   r"(?:[\w.' -]+\s)?cell\s*#?\s*\d+\b.*|excavated hole\b.*|.*\bno ?water ?body\b.*|"
+                                   r"water (?:is|was) discharged (?:out )?(?:into|onto) a field|.*\bnever (?:entered|reached)\b.*)"
+                                   r"\s*\.?\s*$", re.I)}
+# receiving-water texts that name no water but do not deny one either: read as no name given, so the other rules
+# decide (South Dakota: "NA, all water was filtered before discharged." on a bypass that was discharged; review
+# 2026-11-07 P2-4)
+STATE_NO_NAME = {"SD": re.compile(r"^\s*n/?a\s*[,;:-].*\bdischarged?\b", re.I)}
+
+
+def named(waters: list[str], state: str | None) -> list[str]:
+    """The receiving-water texts minus those of STATE_NO_NAME (no name given, no denial)."""
+    pat = STATE_NO_NAME.get(state or "")
+    return [w for w in waters if not (pat and pat.match(w))]
+
+
+# words that name a structure of the sewer system, not a water, taken out of the text before WATER_WORDS is read, for
+# the listed states only (South Dakota's lagoon systems pump to an "emergency pond", a holding cell of the plant)
+STATE_NOT_A_WATER_TEXT = {"SD": re.compile(r"\bemergency ponds?\b", re.I)}
+
+
+def alias_reaches(bbox, lat, lon) -> bool:
+    """The report's point lies within ALIAS_REACH_KM of the bbox of the NHD lines an alias names."""
+    if lat is None or lon is None:
+        return False
+    import math
+    dlat = ALIAS_REACH_KM / 110.54
+    dlon = ALIAS_REACH_KM / (111.32 * math.cos(math.radians(lat)))
+    return bbox[0] - dlon <= lon <= bbox[2] + dlon and bbox[1] - dlat <= lat <= bbox[3] + dlat
+
+
+# Mississippi (module docstring): a description saying the matter was not sewage, and a water word that is a street's
+# name ('FOREST LAKE CIR'), read for MS permits only
+STATE_NOT_SEWAGE = {"MS": re.compile(r"\bthought there was sew\w*\b.*\bit was\b", re.I)}
+STREET_WATER = {"MS": re.compile(r"\b(?:river|brook|stream|creek|pond|lake|harbou?r|bay|cove)\s+(?:cir|circle|dr|drive|st|"
+                                 r"street|rd|road|ln|lane|ave|avenue|blvd|ct|court|pl|place|ter|terrace|way|pkwy|trl|"
+                                 r"trail|cv)\b\.?", re.I)}
+
+
+# states whose CSO-typed reports are read by the structure they come from (module docstring, Nebraska): a report typed
+# CSO stays a CSO only at a CSO outfall or regulator, or when it names the permit's outfall ("at CSO 204"); a manhole,
+# pipe or pump-station overflow is a sanitary sewer overflow, with the type as filed in raw.type_as_filed
+CSO_BY_STRUCTURE_STATES = {"NE"}
+CSO_OUTFALL_IN_TEXT = re.compile(r"\bCSO\s*(?:outfall\s*)?#?\s*(\d{3}[A-Z]?)\b", re.I)
+# states whose receiving-water text 'Unknown' is a placeholder: never printed as a water name
+UNKNOWN_WATER_STATES = {"NE"}
+UNKNOWN_WATER = re.compile(r"^\s*unknown\s*\.?\s*$", re.I)
+
+
+def cso_by_structure(ev: dict, outfall: str | None) -> tuple[str, str | None, dict]:
+    """(event_type, outfall, raw notes) for a CSO-typed report of a CSO_BY_STRUCTURE_STATES permit."""
+    struct = ev.get("sewer_overflow_structure_type_code") or ""
+    other = ev.get("sewer_overflow_structure_type_code_other_text") or ""
+    notes = {}
+    if not outfall:
+        m = CSO_OUTFALL_IN_TEXT.search(ev.get("sewer_overflow_bypass_description_text") or "")
+        if m:
+            outfall = m.group(1).upper().zfill(3)
+            notes["outfall_basis"] = f"outfall {outfall} read from the description ({m.group(0)!r})"
+    if outfall or struct == "CSO" or (struct == "OTH" and OUTFALL_TEXT.search(other)):
+        return "cso", outfall, notes
+    notes["type_as_filed"] = "CSO"
+    notes["type_note"] = (f"filed as a combined sewer overflow, but at a {(ev.get('sewer_overflow_structure_type_desc') or 'structure not given').lower()}"
+                          ", not at a combined sewer outfall or regulator: shown as a sewer overflow")
+    return "sso", outfall, notes
 
 
 # a receiving-water text naming the water and where it went: both are read (module docstring, Alaska)
@@ -246,6 +523,101 @@ WATER_WORDS = re.compile(r"\b(river|brook|stream|creek|pond|lake|harbou?r|bay|co
                          r"storm ?drain|catch basin|wetland|swamp|ocean)\b", re.I)
 OUTFALL_TEXT = re.compile(r"\bcso\b|regulator|outfall", re.I)
 TZ_NOTE = "ECHO gives event times without a timezone; recorded as given (presumably local time)"
+# Arizona (module docstring): a wash, arroyo or canal named ('Queen Creek Wash', 'RID canal') or one the overflow went
+# to, into or through; read only for AZ permits
+AZ_NAMED_WASH = re.compile(r"\b((?:[A-Z][\w'-]*\s+){1,3})(Wash|Washes|Arroyo|Canal)\b")
+AZ_CAPS_CANAL = re.compile(r"\b[A-Z]{2,}\s+(?i:canal)\b")
+# a wash the overflow went to, into or through: a determiner or a dry/unnamed before it, or "to wash" ending the clause
+AZ_TO_WASH = re.compile(
+    r"(?i:\b(?:to|into|in|through|entered|enter|entering|reached|reach|reaching)\s+"
+    r"(?:(?:an?|the|this|that|these|unnamed|dry|nearby|adjacent|natural|desert|concrete|lined|open)\s+)"
+    r"(?:[\w'-]+\s+){0,2}?(?:washe?s?|arroyos?|canals?)\b|"
+    r"\b(?:went|flowed|ran|drained|go|goes|flows|discharged)\s+(?:in)?to\s+washe?s?(?=\s*(?:[.,;]|$)))")
+# words before "Wash" that make it a place or a verb, not a water ('Car Wash', 'Crew Will Wash Down')
+AZ_WASH_STOP = {"car", "truck", "power", "pressure", "crew", "crews", "will", "vactor", "hand", "wheel", "auto", "bus",
+                "eye", "then", "and", "to", "please", "must", "should", "would", "can", "could", "shall", "did", "do",
+                "was", "were", "staff", "we", "they", "then", "also", "jet", "high", "street", "area"}
+
+
+def az_water_text(texts: str) -> str | None:
+    """Arizona (module docstring): a named wash, arroyo or canal ('Queen Creek Wash', 'RID canal'), or one the
+    overflow went to, into or through ('to an unnamed wash', 'Flow went to wash.'); None for the verb ('to wash down
+    the street', 'Crew Will Wash Down Area') and places named for washing ('Car Wash', 'Vactor Truck Wash')."""
+    for m in AZ_NAMED_WASH.finditer(texts):
+        words = m.group(1).split()
+        if not {w.lower().strip(".,;:'") for w in words} & AZ_WASH_STOP:
+            return m.group(0)
+    m = AZ_CAPS_CANAL.search(texts)
+    if m:
+        return m.group(0)
+    for m in AZ_TO_WASH.finditer(texts):
+        words = m.group(0).split()
+        before = words[-2].lower().strip(".,;:'") if len(words) > 1 else ""
+        if before == "to" or before not in AZ_WASH_STOP:   # 'went to wash'; not 'the Car Wash'
+            return m.group(0)
+    return None
+
+
+STATE_WATER_TEXT = {"AZ": az_water_text}
+# Arizona: a water named only to deny it, and the plant's own ponds and basins, taken out before the water words
+STATE_NOT_WATER_TEXT = {"AZ": re.compile(
+    r"(?i:\b(?:did\s*n[o']?t|does\s*n[o']?t|do\s*n[o']?t|never|no\s+impact\s+to)\s+(?:[\w-]+\s+){0,3}?"
+    r"(?:any\s+|a\s+|the\s+)?(?:waterways?|bod(?:y|ies)\s+of\s+water|water\s*bod(?:y|ies)|surface\s+waters?|"
+    r"waters?\s+of\s+the\s+(?:state|u\.?s\.?)|creeks?|rivers?|streams?|washe?s?|lakes?|canals?|arroyos?|ditch(?:es)?|"
+    r"channels?)\b|"
+    r"\b(?:effluent|storage|holding|retention|detention|evaporation|recharge|percolation|sludge|aeration|"
+    r"emergency\s+effluent)\s+(?:storage\s+|holding\s+)?(?:ponds?|basins?|lagoons?)\b)")}
+# Arizona bypasses: the flow held at the plant (its own pond or lagoon, or its grounds); and the pond words a bypass's
+# text uses for that pond
+AZ_PLANT_HELD = re.compile(r"(?i:\b(?:ponds?|lagoons?)\b|contained\s+(?:on|within|at)\s+(?:the\s+)?(?:plant|site|"
+                           r"facility|wwtp|property)|on\s+plant\s+property|on-?site\b|stayed\s+on\s*site)")
+AZ_BYPASS_POND = re.compile(r"(?i:\b(?:ponds?|lagoons?)\b)")
+# Arizona receiving-water entries that are not names: counted as a water, no name given
+AZ_WATER_ALIASES = {"UNK_PERNL": None}
+AZ_WBID_RE = re.compile(r"^\s*(AZ\d{8}[A-Z]?-\d+[A-Z]?)\s*$")
+AZ_WBID_FILE = DATA_DIR / "reference" / "az-adeq-wbids.json"
+_AZ_WBID: dict | None = None
+
+
+def az_wbids() -> dict:
+    """ADEQ's WBIDs -> {name, kind, origin, terminus, flow_regime} (data/reference/az-adeq-wbids.json)."""
+    global _AZ_WBID
+    if _AZ_WBID is None:
+        _AZ_WBID = (read_json(AZ_WBID_FILE, {}) or {}).get("wbids", {})
+    return _AZ_WBID
+
+
+def normalise_az_water(w: str) -> str | None:
+    """An Arizona receiving-water entry as a name: a WBID as ADEQ names it, 'UNK_PERNL' as no name (None), any other
+    text as typed (trimmed)."""
+    t = (w or "").strip()
+    if t in AZ_WATER_ALIASES:
+        return AZ_WATER_ALIASES[t]
+    m = AZ_WBID_RE.match(t)
+    if m and (az_wbids().get(m.group(1)) or {}).get("name"):
+        return az_wbids()[m.group(1)]["name"]
+    # 'Black Creek wash however it was bypassed into lagoon', 'BLACK CREEK WASH, BYPASSED DIVERTED TO LAGOON': the name
+    cut = re.sub(r"(?i)\s*(?:,|\bhowever\b|\bbypass(?:ed)?\b|\bby\s*-?\s*passed\b|\bdiverted\b).*$", "", t).strip(" .")
+    return cut or t
+
+NAVAJO_BASIS = ("a Navajo Nation permit (NN...), which spans Arizona, New Mexico and Utah: the state is the one the "
+                "event's own point lies in, west of the Arizona-New Mexico line (109.045 W) and south of the Arizona-Utah "
+                "line (37 N) being Arizona (the Four Corners boundaries)")
+
+
+def navajo_point_state(lat, lon) -> str | None:
+    """The state a Navajo Nation report's point lies in (AZ, NM or UT), from the Four Corners boundaries; None without
+    a point."""
+    try:
+        la, lo = float(lat), float(lon)
+    except (TypeError, ValueError):
+        return None
+    if la == 0 and lo == 0:
+        return None
+    if lo >= -109.045:
+        return "NM" if la < 37 else "CO"
+    return "AZ" if la < 37 else "UT"
+
 
 TABLES = {
     "events": "sewer_overflow_bypass_report_events.csv",
@@ -569,6 +941,7 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
     struct = ev.get("sewer_overflow_structure_type_code") or ""
     other = ev.get("sewer_overflow_structure_type_code_other_text") or ""
     codes = {i["sewer_overflow_bypass_impact_code"] for i in impacts}
+    waters = named(waters, state)
     real_waters = [w for w in waters if w.strip() and not no_water(w, state)]
     if struct == "BAS" or "SBB" in codes or (struct == "OTH" and BUILDING_TEXT.search(other)):
         if not real_waters:
@@ -581,9 +954,25 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
         return True, "impact to a water (" + ",".join(sorted(codes & WATER_IMPACTS)) + ")"
     texts = " ".join([i.get("sewer_overflow_bypass_impact_other_text") or "" for i in impacts]
                      + [ev.get("sewer_overflow_bypass_description_text") or ""])
+    if state in STATE_NOT_SEWAGE and STATE_NOT_SEWAGE[state].search(texts):
+        return False, "the report says the matter was not sewage"
+    if state in STREET_WATER:
+        texts = STREET_WATER[state].sub(" ", texts)
+    if state in STATE_NOT_A_WATER_TEXT:
+        texts = STATE_NOT_A_WATER_TEXT[state].sub(" ", texts)
+    held = bool(state == "AZ" and "BYP" in types and AZ_PLANT_HELD.search(texts))
+    if state in STATE_NOT_WATER_TEXT:   # a water named only to deny it, the plant's own ponds (module docstring, Arizona)
+        texts = STATE_NOT_WATER_TEXT[state].sub(" ", texts)
+    if state == "AZ" and "BYP" in types:   # a bypass's pond or lagoon is the plant's (module docstring, Arizona)
+        texts = AZ_BYPASS_POND.sub(" ", texts)
     m = WATER_WORDS.search(texts)
     if m:
         return True, f"text names a water ({m.group(0).lower()})"
+    found = STATE_WATER_TEXT[state](texts) if state in STATE_WATER_TEXT else None
+    if found:
+        return True, f"text names a water ({' '.join(found.split()).lower()})"
+    if held:
+        return False, "bypass held at the plant (its own pond, lagoon or grounds)"
     if "BYP" in types:
         return True, "bypass (leaves the plant through its permitted outfall)"
     if "CSO" in types and (struct == "CSO" or (struct == "OTH" and OUTFALL_TEXT.search(other))):
@@ -624,7 +1013,7 @@ def split_water(w: str, state: str) -> list[str]:
 def zoned(ts: str | None, state: str, tz: str | None = None) -> str | None:
     """A naive time of a STATE_TZ state with its zone's offset ('2026-07-04T19:26:00-05:00'); a date or a time of
     another state as it is. A fall-back hour that happens twice is read as the first (fold 0). tz, when given, is the
-    event's own zone (event_tz)."""
+    event's own zone (point_zone) in place of the state's."""
     tz = tz or STATE_TZ.get(state)
     if not ts or not tz or "T" not in ts:
         return ts
@@ -635,14 +1024,99 @@ def zoned(ts: str | None, state: str, tz: str | None = None) -> str | None:
     return dt.replace(tzinfo=ZoneInfo(tz)).isoformat()
 
 
-def tz_note(state: str, tz: str | None = None) -> str:
-    if tz and tz != STATE_TZ.get(state):
-        return (f"ECHO gives event times without a timezone; read as {tz}, the zone of the event's own point (the "
-                "Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12; a fall-back hour that happens twice is read as "
-                "the first)")
+def tz_note(state: str, permit: str = "", tz: str | None = None, basis: str | None = None) -> str:
+    if permit[:2] in PERMIT_TZ:
+        return (f"ECHO gives event times without a timezone; read as {PERMIT_TZ[permit[:2]]}, the Navajo Nation's clock "
+                "(it keeps daylight saving time, unlike the rest of Arizona; tz database link Navajo -> America/Denver)")
+    if basis:   # a state of POINT_ZONE_FILES: the zone of the event's own point
+        return (f"ECHO gives event times without a timezone; read as {tz}, {basis} (a fall-back hour that happens "
+                "twice is read as the first)")
     tz = STATE_TZ.get(state)
     return (f"ECHO gives event times without a timezone; read as {tz}, the permit's state's zone (a fall-back hour "
             "that happens twice is read as the first)") if tz else TZ_NOTE
+
+
+_ZONE_SHAPES: dict[str, dict] = {}
+
+
+def zone_shapes(state: str) -> dict:
+    """The reference file of POINT_ZONE_FILES[state], its outlines as shapely shapes (read once)."""
+    if state not in _ZONE_SHAPES:
+        from shapely.geometry import shape
+        doc = read_json(DATA_DIR / "reference" / POINT_ZONE_FILES[state], None)
+        if not doc or not doc.get("counties"):
+            raise RuntimeError(f"time-zone counties for {state} missing: data/reference/{POINT_ZONE_FILES[state]}")
+        _ZONE_SHAPES[state] = {
+            "doc": doc,
+            "zone": [(c["county"], shape(c["geometry"])) for c in doc["counties"]],
+            "split": [(c["county"], c.get("central_label") or "Central part", shape(c["geometry"]),
+                       shape(c["central_part"]) if c.get("central_part") else None,
+                       shape(c["mountain_part"]) if c.get("mountain_part") else None)
+                      for c in doc.get("split_counties", [])]}
+    return _ZONE_SHAPES[state]
+
+
+def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
+    """(zone, basis) for an event of a POINT_ZONE_FILES state: the reference file's zone when the event's own point
+    lies in one of its counties (or the Mountain part of a split county), else the state's STATE_TZ zone; (None, None)
+    for any other state. The basis says which county decided it, or that no point was given; for a split county it
+    names the part by the file's central_label ("Fort Pierre corner"; "Central part" when the file gives none)."""
+    if state in STATE_TZ_WEST:   # Alaska: the Aleutian Islands west of 169 deg 30 min W (module docstring, Alaska)
+        tz = event_tz(state, lat, lon)
+        return tz, ("the zone of the event's own point (the Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12)"
+                    if tz != STATE_TZ.get(state) else None)
+    if state not in POINT_ZONE_FILES:
+        return None, None
+    z = zone_shapes(state)
+    doc, cite = z["doc"], z["doc"]["law"]["cite"]
+    if lat is None or lon is None:
+        return STATE_TZ[state], f"no point given: the zone of the state's eastern counties ({cite})"
+    from shapely.geometry import Point
+    pt = Point(lon, lat)
+    for county, g in z["zone"]:
+        if g.covers(pt):
+            return doc["zone"], f"the zone of {county}, where the event's point lies ({cite})"
+    for county, note, g, central, mountain in z["split"]:
+        if not g.covers(pt):
+            continue
+        if mountain is not None and mountain.covers(pt):
+            return doc["zone"], (f"the zone of the part of {county} west of the boundary, where the event's point lies; "
+                                 f"the county is split ({cite}; parts from the U.S. DOT time-zone layer)")
+        if central is not None and central.covers(pt):
+            return STATE_TZ[state], (f"the zone of the {note} of {county}, where the event's point lies; "
+                                     f"the county is split ({cite}; parts from the U.S. DOT time-zone layer)")
+        return STATE_TZ[state], (f"{county} is split by the boundary ({cite}) and the point lies on neither part of it "
+                                 "in the U.S. DOT time-zone layer: read as Central")
+    n = len(z["zone"])
+    words = {15: "fifteen", 18: "eighteen"}.get(n, str(n))
+    split = " and ".join(c for c, *_ in z["split"])
+    return STATE_TZ[state], (f"the event's point lies outside the {words} Mountain-time counties"
+                             + (f" and {split}" if split else "") + f" ({cite})")
+
+
+PLANNED_LABEL = "reporting requirement 'Anticipated bypass notice', or the anticipated-bypass text filled"
+
+
+def planned_notice(ev: dict) -> bool:
+    """The report is an anticipated (planned) bypass notice: its reporting requirement says so (code 4, 'Anticipated
+    bypass notice') or it carries the anticipated-bypass text. Keyed on the report type, never on the state."""
+    return (str(ev.get("sewer_overflow_bypass_reporting_requirement_code") or "").strip() == "4"
+            or (ev.get("sewer_overflow_reporting_requirement_desc") or "").strip().lower() == "anticipated bypass notice"
+            or bool((ev.get("anticipated_bypass_text") or "").strip()))
+
+
+def end_ahead(end: str, now: str) -> bool:
+    """The end lies after now (a date-only end counts to the end of its day; a naive time is compared as written)."""
+    try:
+        e = datetime.fromisoformat(end)
+        n = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if "T" not in end:
+        e = e.replace(hour=23, minute=59, second=59)
+    if e.tzinfo is None:
+        n = n.replace(tzinfo=None)
+    return e > n
 
 
 def scrub_free_text(d: dict, keys) -> dict:
@@ -669,9 +1143,15 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     disc = discharger_index()
     W = Waters()
     kept, dropped, why = [], [], Counter()
+    run_now = info.get("now") or now_iso()
+    all_points = report_points(tables["events"])
+    plant_pts = plant_points({p for p, _, _ in all_points})
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
+        point_state = None
+        if state in POINT_PLACED_PREFIXES:   # Navajo Nation permits: the state from the event's point
+            state = point_state = navajo_point_state(ev.get("latitude_measure"), ev.get("longitude_measure"))
         if state not in STATES:
             continue
         k = ev["sewer_overflow_bypass_event_key"]
@@ -692,6 +1172,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                             "type": t_codes, "structure": ev.get("sewer_overflow_structure_type_desc"),
                             "impacts": [i["sewer_overflow_bypass_impact_desc"] for i in i_rows],
                             "receiving_water": w_names, "start": ev.get("sewer_overflow_bypass_start_datetime"),
+                            "end": ev.get("sewer_overflow_bypass_end_datetime") or None,
+                            "received": ev.get("program_report_received_date") or None,
                             "description": ev.get("sewer_overflow_bypass_description_text")})
             continue
 
@@ -718,19 +1200,37 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                 lat = lon = None
         except (TypeError, ValueError):
             lat = lon = None
-        tz = event_tz(state, lat, lon)
-        start, end = zoned(start, state, tz), zoned(end, state, tz)
         outfall = (ev.get("permitted_feature_identifier") or "").strip() or None
+        ne_notes = {}
+        if state in CSO_BY_STRUCTURE_STATES and etype == "cso":
+            etype, outfall, ne_notes = cso_by_structure(ev, outfall)
         slugs, how, coord_src = [], "none", "source" if lat is not None else None
         reg = W.outfalls.get((permit, outfall.zfill(3))) if outfall and etype == "cso" else None
         if reg and reg.get("water_slug"):
             slugs, how = [reg["water_slug"]], "outfall_registry"
-        real_w = [w.strip() for w in w_names if w.strip() and not no_water(w, state)]
+        real_w = [w.strip() for w in named(w_names, state) if w.strip() and not no_water(w, state)]
+        if state in UNKNOWN_WATER_STATES and any(UNKNOWN_WATER.match(w) for w in real_w):
+            ne_notes["receiving_water_note"] = ("the report gives the receiving water as 'Unknown': kept (the report "
+                                                "says it reached one), no water named")
+            real_w = [w for w in real_w if not UNKNOWN_WATER.match(w)]
         w_aliases = {}
+        az_wbid = {}
+        if state == "AZ":   # ADEQ's WBIDs -> ADEQ's names; what was filed stays in raw.receiving_waters
+            w_aliases = {w: normalise_az_water(w) for w in w_names if w.strip() and not no_water(w, state)
+                         and normalise_az_water(w) != w}
+            real_w = list(dict.fromkeys(n for n in (normalise_az_water(w) for w in real_w) if n))
+            az_wbid = {m_.group(1): az_wbids()[m_.group(1)] for m_ in (AZ_WBID_RE.match(w) for w in w_names)
+                       if m_ and m_.group(1) in az_wbids()}
         if state == "DC":   # free text -> the NHD name; what was typed stays in raw.receiving_waters
             w_aliases = {w: normalise_dc_water(w) for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)
                          and normalise_dc_water(w) != w}
             real_w = list(dict.fromkeys(normalise_dc_water(w) for w in real_w))
+        elif state in STATE_WATER_ALIASES:   # a permit's shorthand name -> the NHD name (module docstring, Mississippi)
+            def _alias(w: str, tab=STATE_WATER_ALIASES[state]) -> str:
+                hit = tab.get((permit, _alias_key(w)))
+                return hit[0] if hit and alias_reaches(hit[2], lat, lon) else w.strip()
+            w_aliases = {w: _alias(w) for w in w_names if w.strip() and not no_water(w, state) and _alias(w) != w.strip()}
+            real_w = list(dict.fromkeys(_alias(w) for w in real_w))
         if state in STATE_WATER_SPLIT:   # 'X which flowed to Y' -> X; Y (what was typed stays in raw.receiving_waters)
             w_aliases = {w: "; ".join(split_water(w.strip(), state)) for w in w_names
                          if w.strip() and not no_water(w, state) and len(split_water(w.strip(), state)) > 1}
@@ -744,6 +1244,9 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             how = "name" if slugs else "none"
         if lat is None and reg and reg.get("lat") is not None:
             lat, lon, coord_src = reg["lat"], reg["lon"], "outfall_layer"
+        ev_tz, tz_basis = point_zone(state, lat, lon)
+        ev_tz = PERMIT_TZ.get(permit[:2]) or ev_tz   # the Navajo Nation's clock (module docstring, Arizona)
+        start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
         dname = d.get("name") or (reg or {}).get("permittee") or sysrow.get("collection_system_name") or None
@@ -765,17 +1268,30 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                           for t in treat.get(k, [])],
             "collection_system_name": sysrow.get("collection_system_name"),
             "percent_collection_system_css": sysrow.get("percent_collection_system_css"),
-            "reached_water_rule": reason, "timezone_note": tz_note(state, tz), "report_version": ev.get("program_report_form_id"),
+            "reached_water_rule": reason, "timezone_note": tz_note(state, permit, ev_tz, tz_basis), "report_version": ev.get("program_report_form_id"),
         })
+        raw.update(ne_notes)
         if w_aliases:
             raw["receiving_water_aliases"] = w_aliases
+        if az_wbid:
+            raw["receiving_water_wbids"] = az_wbid
+            raw["receiving_water_wbid_source"] = ("ADEQ waterbody identifiers (WBID layers on ArcGIS Online, "
+                                                  "data/reference/az-adeq-wbids.json)")
+        if point_state:   # a Navajo Nation permit: the state from the point
+            raw["state"], raw["state_basis"] = point_state, NAVAJO_BASIS
         if dc_state:   # placement state differs from the permit's; the operator stays DC Water
             raw["state"], raw["state_basis"] = dc_state, dc_basis
         if extreme:
             raw["extreme_event_note"] = "G9B extreme-event report: spills too numerous to list; times are the report period"
+        status = "ended" if end else "unknown"
+        if end and planned_notice(ev) and end_ahead(end, run_now):
+            status = "ongoing"     # the operator's planned end, still ahead (module docstring, Planned bypasses)
+            raw["end_is_planned"] = True
+            raw["planned_end_note"] = (f"the operator's planned end of an anticipated bypass ({PLANNED_LABEL}); the "
+                                       "bypass runs to it unless a later report changes it")
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
-            status="ended" if end else "unknown",
+            status=status,
             discharger_id=d.get("id"), discharger_name=dname, npdes_permit=permit,
             outfall_id=outfall if etype in ("cso", "bypass") else None,
             outfall_name=(reg or {}).get("outfall_name") or None,   # the description text stays in raw
@@ -790,20 +1306,80 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             source_url=f"https://echo.epa.gov/detailed-facility-report?fid={permit}&sys=ICP",
             raw=raw, parse_error=perr,
         ))
-    repeated_points(kept)
+    repeated_points(kept, all_points, plant_pts)
     kept.sort(key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     return kept, dropped, why
 
 
-def repeated_points(kept: list[dict]) -> int:
+def report_points(events: list[dict]) -> Counter:
+    """For REPEATED_POINT_ALL_REPORTS (by permit prefix): (permit, lat, lon) -> the number of the permit's reports, kept
+    or dropped, that give the point. (The descriptions are not compared: an Arizona description such as 'Manhole ID :
+    112945' carries the report's own form id, not an asset's, so every description differs.)"""
+    out: Counter = Counter()
+    for ev in events:
+        p = ev.get("permit_identifier") or ""
+        if p[:2] not in REPEATED_POINT_ALL_REPORTS:
+            continue
+        try:
+            lat, lon = float(ev["latitude_measure"]), float(ev["longitude_measure"])
+        except (TypeError, ValueError, KeyError):
+            continue
+        out[(p, lat, lon)] += 1
+    return out
+
+
+def plant_points(permits: set[str]) -> dict[str, list[tuple[float, float]]]:
+    """permit -> the points EPA's plant list gives it (data/outfalls-plants-us.json), for the permits asked."""
+    if not permits or not PLANTS_FILE.exists():
+        return {}
+    out: dict[str, list[tuple[float, float]]] = defaultdict(list)
+    for r in (read_json(PLANTS_FILE, {}) or {}).get("outfalls", []):
+        p = str(r.get("npdes_permit") or "").upper()
+        if p in permits and r.get("lat") is not None and r.get("lon") is not None:
+            out[p].append((float(r["lat"]), float(r["lon"])))
+    return out
+
+
+def metres(a: tuple[float, float], b: tuple[float, float]) -> float:
+    from math import asin, cos, radians, sin, sqrt
+    la1, lo1, la2, lo2 = map(radians, (a[0], a[1], b[0], b[1]))
+    h = sin((la2 - la1) / 2) ** 2 + cos(la1) * cos(la2) * sin((lo2 - lo1) / 2) ** 2
+    return 2 * 6371000 * asin(sqrt(h))
+
+
+def repeated_points(kept: list[dict], all_points: Counter | None = None,
+                    plants: dict[str, list[tuple[float, float]]] | None = None) -> int:
     """For REPEATED_POINT_STATES: a point REPEATED_POINT_MIN or more kept events of one permit share is the permit's
-    location, not the spill's; it is moved to raw.reported_point (bypasses keep it). Returns the events changed."""
+    location, not the spill's; it is moved to raw.reported_point (bypasses keep it). For REPEATED_POINT_ALL_REPORTS the
+    count is all_points' (every report of the permit) against the prefix's own minimum, and the point must also lie
+    within REPEATED_POINT_PLANT_M of a point of the permit in EPA's plant list (plants); a shared point farther away,
+    or of a permit the plant list has no point for, stays, with raw.point_note. Returns the events changed."""
     shared = Counter((r["npdes_permit"], r["lat"], r["lon"]) for r in kept
-                     if r["lat"] is not None and r["npdes_permit"][:2] in REPEATED_POINT_STATES)
+                     if r["lat"] is not None and r["npdes_permit"][:2] in REPEATED_POINT_STATES
+                     and r["npdes_permit"][:2] not in REPEATED_POINT_ALL_REPORTS)
+    shared.update({k: n for k, n in (all_points or {}).items()})
     n = 0
     for r in kept:
         k = (r["npdes_permit"], r["lat"], r["lon"])
-        if r["lat"] is None or shared.get(k, 0) < REPEATED_POINT_MIN or r["event_type"] == "bypass":
+        prefix = r["npdes_permit"][:2]
+        least = REPEATED_POINT_MIN_BY_STATE.get(prefix, REPEATED_POINT_MIN)
+        if r["lat"] is None or shared.get(k, 0) < least or r["event_type"] == "bypass":
+            continue
+        if prefix in REPEATED_POINT_ALL_REPORTS:
+            near = min((metres((r["lat"], r["lon"]), q) for q in (plants or {}).get(r["npdes_permit"], [])),
+                       default=None)
+            if near is None or near > REPEATED_POINT_PLANT_M:
+                r["raw"]["point_note"] = (f"the same point is given for {shared[k]} reports of this permit; "
+                                          + ("EPA's plant list gives no point for the permit"
+                                             if near is None else f"it lies {near / 1000:.1f} km from the plant's point")
+                                          + ", so it is kept as the report gives it")
+                continue
+            r["raw"]["reported_point"] = [r["lat"], r["lon"]]
+            r["raw"]["point_note"] = (f"the same point is given for {shared[k]} reports of this permit and lies "
+                                      f"{near:.0f} m from the plant's point in EPA's plant list: taken as the permit's "
+                                      "location, not the spill's")
+            r["lat"] = r["lon"] = r["coord_source"] = None
+            n += 1
             continue
         r["raw"]["reported_point"] = [r["lat"], r["lon"]]
         r["raw"]["point_note"] = (f"the same point is given for {shared[k]} reports of this permit: taken as the "

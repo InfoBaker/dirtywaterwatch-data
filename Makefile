@@ -56,6 +56,20 @@
 #                  il_mwrd_possible_cso (MWRD's daily-reset map of possible CSO events, polled), il_mwrd_lake_reversals
 #                  (MWRD's table of reversals to Lake Michigan since 1985; needs pdftotext), il_idph_beachguard (IDPH's
 #                  list of beach advisories in effect and each listed beach's page); il_mwrd is a helper
+#                  Arizona: echo_sewer_overflow_events (EPA's overflow tables, AZ permits: the statewide record of
+#                  AZPDES overflows and bypasses, with ADEQ's waterbody identifiers named from
+#                  data/reference/az-adeq-wbids.json; scripts/az_adeq_wbids.py refreshes that file by hand)
+#                  South Dakota: echo_sewer_overflow_events (EPA's overflow tables, SD permits: the statewide record,
+#                  the 5-day written reports; times in the zone of the event's point, Mountain or Central, from
+#                  data/reference/sd-mountain-time-counties.json, written by scripts/sd_mountain_time_counties.py),
+#                  sd_danr_hab_advisories (the list of the year's bloom advisories on DANR's HAB page)
+#                  Mississippi: echo_sewer_overflow_events (EPA's overflow tables, MS permits in Central time: the
+#                  statewide record; MDEQ posts none), ms_mdeq_water_contact (MDEQ's news releases: water contact
+#                  advisories issued and lifted, the standing Pearl River advisory) and ms_mdeq_beaches (MDEQ's
+#                  beach layer: advisories, closures and coastal blooms on both flags and MDEQ's start date)
+#                  Nebraska: echo_sewer_overflow_events (EPA's overflow tables, NE permits: the statewide record, each
+#                  event in the zone of its own point, data/reference/ne-mountain-time-counties.json) and the generic
+#                  ArcGIS block ne-dwee-beachwatch (DWEE Beach Watch: microcystin health alerts and elevated E. coli)
 #                  Alaska: echo_sewer_overflow_events (EPA's overflow tables, AK permits: the only dated record;
 #                  Alaska time, Hawaii-Aleutian for a point in the Aleutians west of 169 30 W); Juneau's CSO notice page is a
 #                  register row read by notification_pages
