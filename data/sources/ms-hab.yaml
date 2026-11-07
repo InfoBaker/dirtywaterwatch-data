@@ -1,0 +1,25 @@
+id: "ms-hab"
+name: "Mississippi HABs"
+url: "https://beaches.mdeq.ms.gov/"
+homepage: "https://beaches.mdeq.ms.gov/"
+kind: "arcgis"
+level: "state"
+# Notes (research/ms, status used, verified fetched, checked 2026-11-07): Coastal bloom advisories
+#   and closures (eventtype HAB on the beach layer) are read by the beach module as hab_advisory;
+#   freshwater blooms only by news release.
+# Access detail (research, quoted): The beach layer carries eventtype HAB for advisories and
+#   closures. MDEQ has issued freshwater HAB advisories by news release (e.g. Ross Barnett
+#   Reservoir) per press; no freshwater list found.
+# Waters: Gulf beaches (HAB event type in the beach layer); freshwater: MDEQ news releases
+cadence: null
+license: "none stated"
+attribution: "Mississippi Department of Environmental Quality"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["MS"]
+access: ["arcgis"]
+access_detail: "The beach layer carries eventtype HAB for advisories and closures. MDEQ has issued freshwater HAB advisories by news release (e.g. Ross Barnett Reservoir) per press; no freshwater list found."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-07"
