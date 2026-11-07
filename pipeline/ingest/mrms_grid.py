@@ -18,6 +18,8 @@ import json
 import math
 import re
 import struct
+import sys
+from array import array
 from datetime import UTC, datetime
 
 MRMS_URL = "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer"
@@ -173,6 +175,21 @@ class Grid:
         if v is None or v != v or v < 0:
             return None
         return round(v, 2)
+
+    def max_read(self) -> float | None:
+        """The largest value (NaN and negatives left out) in the blocks read so far: after sample(), every block
+        that holds an outfall point, the box maximum the reader decides the grid's unit from (ingest/rainfall.py
+        decide_units). The blocks not read are not decoded for it (a box can be millions of pixels)."""
+        best = None
+        for b in self._blocks.values():
+            a = array("f")
+            a.frombytes(b[:len(b) // 4 * 4])
+            if (self.e == "<") != (sys.byteorder == "little"):
+                a.byteswap()
+            m = max((v for v in a if v == v and v >= 0), default=None)
+            if m is not None and (best is None or m > best):
+                best = m
+        return round(best, 2) if best is not None else None
 
     def meta(self) -> dict:
         return {"width": self.width, "height": self.height, "west": round(self.x0, 6), "north": round(self.y0, 6),

@@ -177,7 +177,10 @@ def test_grid_samples_a_synthetic_tiff_at_each_point(tile, lzw):
 
 def test_a_real_export_equals_identify_at_the_point():
     """exportImage of conus_QPE_24H valid 2026-11-03T13:00Z over Calais, Maine (LZW tiles as the service writes
-    them), and identify at three points of it at the same time: 3.8, 5.9 and 4.6 in."""
+    them), and identify at three points of it at the same time: 3.8, 5.9 and 4.6, read then as inches. They are
+    millimetres (0.15 to 0.23 in): IEM's MRMS daily rainfall at 45.12, -67.38 is 0.02 in for 2026-11-02 and 0.22 in
+    for 2026-11-03 (mesonet.agron.iastate.edu/iemre/multiday, read 2026-11-07). The service already answered
+    millimetres on 2026-11-03."""
     g = G.Grid((FIXTURES / "mrms-qpe-24h-20261103T13Z.tif").read_bytes())
     box = G.grid_box([(45.10, -67.40), (45.25, -67.20)])
     assert G.check_georef(g, box) == [] and g.compression == 5
@@ -259,10 +262,18 @@ class FakeNOAA:
     """The MRMS ImageServer and api.weather.gov as the run sees them, from rain_at()."""
     IDS = {1: 101, 24: 124, 48: 148, 72: 172}
 
-    def __init__(self, export_fails=False, identify_off=0.0):
+    def __init__(self, export_fails=False, identify_off=0.0, scale=1.0, wet=None):
         self.headers: dict = {}
         self.export_fails, self.identify_off = export_fails, identify_off
+        self.scale, self.wet = scale, wet or {}     # scale 25.4: the service answering millimetres
         self.calls: list[str] = []
+
+    def raw(self, lat, lon, h):
+        """The value the service answers (its unit): rain_at scaled, or a wet point's 24/48/72-hour value."""
+        w = self.wet.get((round(lat, 2), round(lon, 2)))
+        if w is not None and h >= 24:
+            return w
+        return round(rain_at(lat, lon, h) * self.scale, 2)
 
     def get(self, url, params=None, headers=None, timeout=None):
         kind = RF.request_kind(url)
@@ -277,13 +288,13 @@ class FakeNOAA:
             h = {i: h for h, i in self.IDS.items()}[json.loads(params["mosaicRule"])["lockRasterIds"][0]]
             xmin, ymin, xmax, ymax = (float(v) for v in params["bbox"].split(","))
             w, hh = (int(v) for v in params["size"].split(","))
-            return Resp(content=make_tiff(w, hh, xmin, ymax, lambda la, lo: rain_at(la, lo, h), tile=64, lzw=False),
+            return Resp(content=make_tiff(w, hh, xmin, ymax, lambda la, lo: self.raw(la, lo, h), tile=64, lzw=False),
                         ctype="image/tiff")
         if kind == "mrms_identify":
             g = json.loads(params["geometry"])
             lat, lon = g["y"], g["x"]
             names = [G.item_name(h) for h in RF.HOURS]
-            vals = [str(rain_at(lat, lon, h) + (self.identify_off if h == 24 else 0)) for h in RF.HOURS]
+            vals = [str(self.raw(lat, lon, h) + (self.identify_off if h == 24 else 0)) for h in RF.HOURS]
             return Resp(body={"properties": {"Values": vals}, "catalogItems": {"features": [
                 {"attributes": {"name": n, "idp_validendtime": vt}} for n in names]}})
         if kind == "nws_points":
@@ -461,3 +472,61 @@ def test_coverage_names_the_grid_for_radar_states_and_leaves_new_jersey_as_it_wa
     assert nj["trigger_bases"] == ["operator"] and md["trigger_bases"] == ["state"] and ma["trigger_bases"] == ["operator", "state"]
     assert nj["methods"] == ["site_flag"] and "njcsonotifications.com" in nj["sentence"]
     assert not va["covered"] and va["sentence"].startswith('No "discharge likely" caution here')
+
+
+# ---------------------------------------------------------------- the unit (found 2026-11-07)
+
+def test_the_unit_is_decided_from_the_data_not_the_service_description():
+    mm = RF.decide_units({24: 118.7, 1: 20.0})
+    assert mm["units_read"] == "mm" and mm["basis"] == "physical_bound" and mm["factor"] == 25.4
+    assert mm["evidence"]["box_max"] == {"h24": 118.7} and mm["evidence"]["bound_in"] == {"h24": 30.0}
+    assert RF.decide_units({24: 20.0, 72: 46.0})["units_read"] == "mm"               # the 72-hour bound
+    dry = RF.decide_units({24: 20.0, 72: 44.0})                                        # the bound cannot tell
+    assert dry["units_read"] == "in" and dry["basis"] == "service_description" and dry["factor"] == 1.0
+    kept = RF.decide_units({24: 2.0}, last={"units_read": "mm", "basis": "physical_bound", "determined_at": "x"})
+    assert kept["units_read"] == "mm" and kept["basis"] == "last_determined" and kept["factor"] == 25.4
+    assert RF.to_inches(51.3, 25.4) == 2.02 and RF.to_inches(None, 25.4) is None
+
+
+def test_a_grid_in_millimetres_is_read_as_inches_and_the_unit_is_kept_for_a_dry_hour(world):
+    steady(world)
+    wet = {(42.0, -75.0): 51.3}                      # Bucklin Point on 2026-11-07: 51.3 (mm) in 24 hours
+    out = RF.run(now=NOW, session=FakeNOAA(scale=25.4, wet=wet))
+    m = out["mrms"]
+    assert m["read"] == "grid" and m["grid"]["check"]["result"] == "agrees"           # identify in the same unit
+    assert m["grid"]["check"]["identify_h24_as_read"] == 51.3 and m["grid"]["check"]["identify_h24"] == 2.02
+    u = m["units"]
+    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and u["evidence"]["box_max"]["h24"] >= 51.3
+    assert m["units_last_determined"]["units_read"] == "mm"
+    p = out["points"]["42.00,-75.00"]["mrms"]
+    assert p["h24"] == 2.02 and p["units_read"] == "mm"
+    for k, pt in out["points"].items():
+        if k != "42.00,-75.00":
+            assert abs(pt["mrms"]["h24"] - rain_at(pt["lat"], pt["lon"])) <= 0.01
+    assert max(r["h24"] for r in out["permits"].values()) == 2.02
+    hist = json.loads((world["tmp"] / "rainfall-history.json").read_text())
+    assert max(a[-1] for a in hist["permits"].values()) == 2.02
+    # the next hour is dry (nothing over the bound): the unit last determined, millimetres, still applies
+    later = NOW + H
+    out2 = RF.run(now=later, session=FakeNOAA(scale=25.4), force=True)
+    assert out2["mrms"]["units"]["basis"] == "last_determined" and out2["mrms"]["units"]["units_read"] == "mm"
+    assert all(abs(pt["mrms"]["h24"] - rain_at(pt["lat"], pt["lon"])) <= 0.01 for pt in out2["points"].values())
+
+
+def test_the_per_point_fallback_decides_the_unit_from_its_answers(world):
+    steady(world)
+    out = RF.run(now=NOW, session=FakeNOAA(export_fails=True, scale=25.4, wet={(42.0, -75.0): 51.3}))
+    assert out["mrms"]["read"] == "point" and out["mrms"]["units"]["units_read"] == "mm"
+    p = out["points"]["42.00,-75.00"]["mrms"]
+    assert p["h24"] == 2.02 and p["h72"] == 2.02 and p["units_read"] == "mm"
+
+
+def test_a_reading_from_before_the_unit_check_is_not_kept(world):
+    steady(world)
+    prev = json.loads((world["tmp"] / "rainfall.json").read_text())
+    prev["points"] = {"42.00,-75.00": {"mrms": {"h24": 51.3, "valid_time": RF.iso(VALID),
+                                                "fetched_at": RF.iso(NOW), "read": "grid"}}}
+    (world["tmp"] / "rainfall.json").write_text(json.dumps(prev))
+    out = RF.run(now=NOW, session=FakeNOAA())        # this hour's reading is new, not the unmarked one
+    assert out["points"]["42.00,-75.00"]["mrms"]["h24"] == rain_at(42.0, -75.0)
+    assert out["mrms"]["units"]["basis"] == "service_description"
