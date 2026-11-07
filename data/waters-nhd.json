@@ -2,7 +2,7 @@
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
  "built": "2026-11-07T02:07:11Z",
  "partial": false,
- "count": 3791,
+ "count": 3792,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -3847,6 +3847,40 @@
      "kept": 3493,
      "dropped": 0,
      "written": 3501
+    },
+    "report_names_hand_only": {
+     "built": "2026-11-07T04:39:26Z",
+     "file": "research/ak/receiving-waters-missing.json",
+     "names": 2,
+     "reports": 2,
+     "names_no_water": 0,
+     "waters_named": 2,
+     "already_a_record": 0,
+     "targets": 2,
+     "targets_mapped": 0,
+     "records": 1,
+     "targets_failed": 2,
+     "failed_reasons": {
+      "not reached this run": 2
+     },
+     "network_requests": 0,
+     "requests": {},
+     "cached": {
+      "tiger": 2,
+      "tiger-hand": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3761,
+      "run_records": 1,
+      "replaced": 1,
+      "added": 0,
+      "kept": 3760,
+      "dropped": 0,
+      "written": 3761
+     }
     }
    },
    "NM": {
@@ -175843,2135 +175877,6 @@
    }
   },
   {
-   "state": "AK",
-   "name": "Eagle River",
-   "texts": [
-    "Eagle River"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Eagle River"
-   ],
-   "slugs": [
-    "eagle-river-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Eagle River' (GNIS 1401546) 299 m from the point (61.32170, -149.59200)"
-   ],
-   "reason": null,
-   "define_by": "reach",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AK0022543"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Glacier Creek",
-   "texts": [
-    "Glacier Creek"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Girdwood"
-   ],
-   "slugs": [
-    "glacier-creek-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Glacier Creek' (GNIS 1422171) 18 m from the point (60.94470, -149.15799)"
-   ],
-   "reason": null,
-   "define_by": "reach",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AK0047856"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Kenai River",
-   "texts": [
-    "Kenai River"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Soldotna"
-   ],
-   "slugs": [
-    "kenai-river-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Kenai River' (GNIS 1413302) 331 m from the point (60.47850, -151.09965); the same water as existing record kenai-river-ak"
-   ],
-   "reason": null,
-   "define_by": "reach",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AK0020036"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Matanuska River",
-   "texts": [
-    "Matanuska River"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Palmer"
-   ],
-   "slugs": [
-    "matanuska-river-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Matanuska River' (GNIS 1406051) 1346 m from the point (61.55972, -149.11000)"
-   ],
-   "reason": null,
-   "define_by": "reach",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AK0022497"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "McNeil Creek",
-   "texts": [
-    "McNeil Creek"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Homer"
-   ],
-   "slugs": [
-    "mcneil-creek-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'McNeil Creek' (GNIS 1413508) 27 m from the point (59.74580, -151.25500)"
-   ],
-   "reason": null,
-   "define_by": "reach",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AKG572027"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Ship Creek",
-   "texts": [
-    "Ship Creek"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Anchorage"
-   ],
-   "slugs": [
-    "ship-creek-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Ship Creek' (GNIS 1409430) 22 m from the point (61.22448, -149.85283)"
-   ],
-   "reason": null,
-   "define_by": "reach",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AKG002440"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Chukchi Sea",
-   "texts": [
-    "Chukchi Sea"
-   ],
-   "outfalls": 4,
-   "events": 0,
-   "points": 3,
-   "towns": [
-    "Barrow",
-    "Kotzebue",
-    "Shishmaref",
-    "Wainwright"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572006",
-    "AKG572025",
-    "AKG572048",
-    "AKG573020"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Tanana River",
-   "texts": [
-    "Tanana River"
-   ],
-   "outfalls": 3,
-   "events": 0,
-   "points": 3,
-   "towns": [
-    "Fairbanks",
-    "Nenana",
-    "North Pole"
-   ],
-   "slugs": [
-    "tanana-river-badger-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Tanana River' (GNIS 1416408) 1273 m from the point (64.74390, -147.38200)"
-   ],
-   "reason": null,
-   "define_by": "point",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AK0021393",
-    "AK0023451",
-    "AKG572031"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Clover Passage",
-   "texts": [
-    "Clover Passage"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Ketchikan"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG571038"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Cook Inlet",
-   "texts": [
-    "Cook Inlet",
-    "KNIK ARM OF COOK INLET"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Anchorage",
-    "Kenai"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021377",
-    "AK0022551"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Kaktovik Lagoon",
-   "texts": [
-    "Kaktovik Lagoon"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Kaktovik"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572024"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Resurrection Bay",
-   "texts": [
-    "Resurrection Bay"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Seward"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021890",
-    "AK0053724"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "SITKA SOUND",
-   "texts": [
-    "SITKA SOUND (MIDDLE CHANNEL)",
-    "STARRIGAVIN BAY, SITKA SOUND"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Sitka"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021474",
-    "AKG572043"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "TONGASS NARROWS",
-   "texts": [
-    "TONGASS NARROWS"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Ketchikan"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021440",
-    "AKG572019"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Yukon River",
-   "texts": [
-    "Yukon River"
-   ],
-   "outfalls": 2,
-   "events": 0,
-   "points": 2,
-   "towns": [
-    "Emmonak",
-    "Pilot Station"
-   ],
-   "slugs": [
-    "yukon-river-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Yukon River' (GNIS 1416412) 3116 m from the point (62.77780, -164.52300); the same water as existing record yukon-river-ak"
-   ],
-   "reason": null,
-   "define_by": "point",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AKG573006",
-    "AKG573014"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "ANNETTE BAY",
-   "texts": [
-    "ANNETTE BAY ON NICHOLS PASSAGE"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Metlakatla Indian Community"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG571012"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Auke Bay",
-   "texts": [
-    "Auke Bay"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Juneau"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572004"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Bartlett Cove",
-   "texts": [
-    "Bartlett Cove"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Gustavus"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572007"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Bering Sea",
-   "texts": [
-    "Bering Sea"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "St. Paul"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG527721"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Bering Strait",
-   "texts": [
-    "Bering Strait"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Diomede"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572116"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Buckland River",
-   "texts": [
-    "Buckland River"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Buckland"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG573028"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "FREDERICK SOUND",
-   "texts": [
-    "FREDERICK SOUND"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Petersburg"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021458"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Innoko River",
-   "texts": [
-    "Innoko River"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Shageluk"
-   ],
-   "slugs": [
-    "innoko-river-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Innoko River' (GNIS 1403877) 566 m from the point (62.82420, -159.53200)"
-   ],
-   "reason": null,
-   "define_by": "point",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AKG573040"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Kachemak Bay",
-   "texts": [
-    "Kachemak Bay"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Homer"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021245"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Kaseguluk Lagoon",
-   "texts": [
-    "Kaseguluk Lagoon"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Point Lay"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572036"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Keku Strait",
-   "texts": [
-    "Keku Strait"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kake"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572020"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Kigarak Lake",
-   "texts": [
-    "Kigarak Lake"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Atqasuk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Kotzebue Sound",
-   "texts": [
-    "Kotzebue Sound"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Deering"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG571051"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "KOYUK INLET OF NORTON SOUND",
-   "texts": [
-    "KOYUK INLET OF NORTON SOUND"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Koyuk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG570023"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "LISIANSKI INLET",
-   "texts": [
-    "LISIANSKI INLET"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Pelican"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0043532"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "McDermott Lake",
-   "texts": [
-    "McDermott Lake"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Prudhoe Bay"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572032"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Nenana River",
-   "texts": [
-    "Nenana River"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Denali National Park"
-   ],
-   "slugs": [
-    "nenana-river-ak"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Nenana River' (GNIS 1406943) 39 m from the point (63.72950, -148.87481); the same water as existing record nenana-river-ak"
-   ],
-   "reason": null,
-   "define_by": "point",
-   "defined_by": "point (NHD high resolution)",
-   "permits": [
-    "AK0053775"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "NICHOLS PASSAGE",
-   "texts": [
-    "NICHOLS PASSAGE"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Metlakatla Indian Community"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0053813"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "PASSAGE CANAL",
-   "texts": [
-    "PASSAGE CANAL, PRINCE WM SOUND"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Whittier"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0025402"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "PORTAGE COVE",
-   "texts": [
-    "PORTAGE COVE"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Haines"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021385"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "PRINCE WM SOUND",
-   "texts": [
-    "PASSAGE CANAL, PRINCE WM SOUND"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Whittier"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0025402"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Revillagigedo Channel",
-   "texts": [
-    "Revillagigedo Channel"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Ketchikan"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572028"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Shelter Cove",
-   "texts": [
-    "Shelter Cove"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Anchorage"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572111"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "STARRIGAVIN BAY",
-   "texts": [
-    "STARRIGAVIN BAY, SITKA SOUND"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Sitka"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572043"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "TAIYA INLET",
-   "texts": [
-    "TAIYA INLET"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Skagway"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0020010"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Thorne Bay",
-   "texts": [
-    "Thorne Bay"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Thorne Bay"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572045"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Tundra Pond",
-   "texts": [
-    "Tundra Pond"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Tuntutuliak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AKG572026"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Unalaska Bay",
-   "texts": [
-    "Unalaska Bay"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Unalaska"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0043451"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Valdez",
-   "texts": [
-    "Valdez, Port"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Valdez"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021431"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "Woody Island Channel",
-   "texts": [
-    "Woody Island Channel"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kodiak"
-   ],
-   "slugs": [
-    "woody-island-channel-ak"
-   ],
-   "how": [
-    "OSM fallback (NHDPlus has no feature of that name)"
-   ],
-   "reason": null,
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021555"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": "ZIMOVIA STRAITS",
-   "texts": [
-    "ZIMOVIA STRAITS"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Wrangell"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
-   "define_by": "point",
-   "defined_by": null,
-   "permits": [
-    "AK0021466"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AK0020648 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kodiak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AK0020648"
-   ],
-   "outfall_ref": [
-    "AK0020648",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AK0021547 001A"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Cordova"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AK0021547"
-   ],
-   "outfall_ref": [
-    "AK0021547",
-    "001A"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AK0022951 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Juneau"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AK0022951"
-   ],
-   "outfall_ref": [
-    "AK0022951",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG320002 08AA"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "North Pole"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG320002"
-   ],
-   "outfall_ref": [
-    "AKG320002",
-    "08AA"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG571056 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Point Hope"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG571056"
-   ],
-   "outfall_ref": [
-    "AKG571056",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572005 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Newtok"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572005"
-   ],
-   "outfall_ref": [
-    "AKG572005",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572022 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Hoonah"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572022"
-   ],
-   "outfall_ref": [
-    "AKG572022",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572023 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Atmautluak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572023"
-   ],
-   "outfall_ref": [
-    "AKG572023",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572056 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Diomede"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572056"
-   ],
-   "outfall_ref": [
-    "AKG572056",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572088 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Unalakleet"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572088"
-   ],
-   "outfall_ref": [
-    "AKG572088",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572098 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Tununak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572098"
-   ],
-   "outfall_ref": [
-    "AKG572098",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572115 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Mertarvik"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572115"
-   ],
-   "outfall_ref": [
-    "AKG572115",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572130 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kivalina"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572130"
-   ],
-   "outfall_ref": [
-    "AKG572130",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG572141 001A"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Napakiak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG572141"
-   ],
-   "outfall_ref": [
-    "AKG572141",
-    "001A"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573001 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Alakanuk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573001"
-   ],
-   "outfall_ref": [
-    "AKG573001",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573002 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Chuathbaluk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573002"
-   ],
-   "outfall_ref": [
-    "AKG573002",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573002 002"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Chuathbaluk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573002"
-   ],
-   "outfall_ref": [
-    "AKG573002",
-    "002"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573002 003"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Chuathbaluk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573002"
-   ],
-   "outfall_ref": [
-    "AKG573002",
-    "003"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573003 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Cold Bay"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573003"
-   ],
-   "outfall_ref": [
-    "AKG573003",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573004 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Dillingham"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573004"
-   ],
-   "outfall_ref": [
-    "AKG573004",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573005 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Shemya Island"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573005"
-   ],
-   "outfall_ref": [
-    "AKG573005",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573007 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Fort Greely"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573007"
-   ],
-   "outfall_ref": [
-    "AKG573007",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573008 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kongiganak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573008"
-   ],
-   "outfall_ref": [
-    "AKG573008",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573008 002"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kongiganak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573008"
-   ],
-   "outfall_ref": [
-    "AKG573008",
-    "002"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573010 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Naknek"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573010"
-   ],
-   "outfall_ref": [
-    "AKG573010",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573011 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Napaskiak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573011"
-   ],
-   "outfall_ref": [
-    "AKG573011",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573012 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Noatak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573012"
-   ],
-   "outfall_ref": [
-    "AKG573012",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573013 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Nightmute"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573013"
-   ],
-   "outfall_ref": [
-    "AKG573013",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573016 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "St. Marys"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573016"
-   ],
-   "outfall_ref": [
-    "AKG573016",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573019 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Selawik"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573019"
-   ],
-   "outfall_ref": [
-    "AKG573019",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573024 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Teller"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573024"
-   ],
-   "outfall_ref": [
-    "AKG573024",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573024 002"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Teller"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573024"
-   ],
-   "outfall_ref": [
-    "AKG573024",
-    "002"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573025 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Togiak"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573025"
-   ],
-   "outfall_ref": [
-    "AKG573025",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573027 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "White Mountain"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573027"
-   ],
-   "outfall_ref": [
-    "AKG573027",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573029 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "King Salmon"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573029"
-   ],
-   "outfall_ref": [
-    "AKG573029",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573031 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Mountain Village"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573031"
-   ],
-   "outfall_ref": [
-    "AKG573031",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573033 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Talkeetna"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573033"
-   ],
-   "outfall_ref": [
-    "AKG573033",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573034 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Shishmaref"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573034"
-   ],
-   "outfall_ref": [
-    "AKG573034",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573037 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Galena"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573037"
-   ],
-   "outfall_ref": [
-    "AKG573037",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573038 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kaktovik"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573038"
-   ],
-   "outfall_ref": [
-    "AKG573038",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573039 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kasigluk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573039"
-   ],
-   "outfall_ref": [
-    "AKG573039",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573041 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Kasigluk"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573041"
-   ],
-   "outfall_ref": [
-    "AKG573041",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573043 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Tetlin"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573043"
-   ],
-   "outfall_ref": [
-    "AKG573043",
-    "001"
-   ]
-  },
-  {
-   "state": "AK",
-   "name": null,
-   "texts": [
-    "unnamed outfall AKG573044 001"
-   ],
-   "outfalls": 1,
-   "events": 0,
-   "points": 1,
-   "towns": [
-    "Rampart"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
-   "define_by": "unnamed",
-   "defined_by": null,
-   "permits": [
-    "AKG573044"
-   ],
-   "outfall_ref": [
-    "AKG573044",
-    "001"
-   ]
-  },
-  {
    "state": "NM",
    "name": "RIO GRANDE",
    "texts": [
@@ -191628,6 +189533,2187 @@
    "reason": "6 NHD waters of that name in SD and the reports give no place to choose one",
    "from": "reports",
    "reports": 1
+  },
+  {
+   "state": "AK",
+   "name": "Eagle River",
+   "texts": [
+    "Eagle River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Eagle River"
+   ],
+   "slugs": [
+    "eagle-river-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Eagle River' (GNIS 1401546) 299 m from the point (61.32170, -149.59200)"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AK0022543"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Glacier Creek",
+   "texts": [
+    "Glacier Creek"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Girdwood"
+   ],
+   "slugs": [
+    "glacier-creek-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Glacier Creek' (GNIS 1422171) 18 m from the point (60.94470, -149.15799)"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AK0047856"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Kenai River",
+   "texts": [
+    "Kenai River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Soldotna"
+   ],
+   "slugs": [
+    "kenai-river-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Kenai River' (GNIS 1413302) 331 m from the point (60.47850, -151.09965); the same water as existing record kenai-river-ak"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AK0020036"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Matanuska River",
+   "texts": [
+    "Matanuska River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Palmer"
+   ],
+   "slugs": [
+    "matanuska-river-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Matanuska River' (GNIS 1406051) 1346 m from the point (61.55972, -149.11000)"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AK0022497"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "McNeil Creek",
+   "texts": [
+    "McNeil Creek"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Homer"
+   ],
+   "slugs": [
+    "mcneil-creek-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'McNeil Creek' (GNIS 1413508) 27 m from the point (59.74580, -151.25500)"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AKG572027"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Ship Creek",
+   "texts": [
+    "Ship Creek"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Anchorage"
+   ],
+   "slugs": [
+    "ship-creek-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Ship Creek' (GNIS 1409430) 22 m from the point (61.22448, -149.85283)"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AKG002440"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Chukchi Sea",
+   "texts": [
+    "Chukchi Sea"
+   ],
+   "outfalls": 4,
+   "events": 0,
+   "points": 3,
+   "towns": [
+    "Barrow",
+    "Kotzebue",
+    "Shishmaref",
+    "Wainwright"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572006",
+    "AKG572025",
+    "AKG572048",
+    "AKG573020"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Tanana River",
+   "texts": [
+    "Tanana River"
+   ],
+   "outfalls": 3,
+   "events": 0,
+   "points": 3,
+   "towns": [
+    "Fairbanks",
+    "Nenana",
+    "North Pole"
+   ],
+   "slugs": [
+    "tanana-river-badger-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Tanana River' (GNIS 1416408) 1273 m from the point (64.74390, -147.38200)"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AK0021393",
+    "AK0023451",
+    "AKG572031"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Clover Passage",
+   "texts": [
+    "Clover Passage"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Ketchikan"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG571038"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Cook Inlet",
+   "texts": [
+    "Cook Inlet",
+    "KNIK ARM OF COOK INLET"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Anchorage",
+    "Kenai"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021377",
+    "AK0022551"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Kaktovik Lagoon",
+   "texts": [
+    "Kaktovik Lagoon"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Kaktovik"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572024"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Resurrection Bay",
+   "texts": [
+    "Resurrection Bay"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Seward"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021890",
+    "AK0053724"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "SITKA SOUND",
+   "texts": [
+    "SITKA SOUND (MIDDLE CHANNEL)",
+    "STARRIGAVIN BAY, SITKA SOUND"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Sitka"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021474",
+    "AKG572043"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "TONGASS NARROWS",
+   "texts": [
+    "TONGASS NARROWS"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Ketchikan"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021440",
+    "AKG572019"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Yukon River",
+   "texts": [
+    "Yukon River"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Emmonak",
+    "Pilot Station"
+   ],
+   "slugs": [
+    "yukon-river-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Yukon River' (GNIS 1416412) 3116 m from the point (62.77780, -164.52300); the same water as existing record yukon-river-ak"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AKG573006",
+    "AKG573014"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "ANNETTE BAY",
+   "texts": [
+    "ANNETTE BAY ON NICHOLS PASSAGE"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Metlakatla Indian Community"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG571012"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Auke Bay",
+   "texts": [
+    "Auke Bay"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Juneau"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572004"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Bartlett Cove",
+   "texts": [
+    "Bartlett Cove"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Gustavus"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572007"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Bering Sea",
+   "texts": [
+    "Bering Sea"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "St. Paul"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG527721"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Bering Strait",
+   "texts": [
+    "Bering Strait"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Diomede"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572116"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Buckland River",
+   "texts": [
+    "Buckland River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Buckland"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG573028"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "FREDERICK SOUND",
+   "texts": [
+    "FREDERICK SOUND"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Petersburg"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021458"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Innoko River",
+   "texts": [
+    "Innoko River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Shageluk"
+   ],
+   "slugs": [
+    "innoko-river-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Innoko River' (GNIS 1403877) 566 m from the point (62.82420, -159.53200)"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AKG573040"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Kachemak Bay",
+   "texts": [
+    "Kachemak Bay"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Homer"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021245"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Kaseguluk Lagoon",
+   "texts": [
+    "Kaseguluk Lagoon"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Point Lay"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572036"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Keku Strait",
+   "texts": [
+    "Keku Strait"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kake"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572020"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Kigarak Lake",
+   "texts": [
+    "Kigarak Lake"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Atqasuk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Kotzebue Sound",
+   "texts": [
+    "Kotzebue Sound"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Deering"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG571051"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "KOYUK INLET OF NORTON SOUND",
+   "texts": [
+    "KOYUK INLET OF NORTON SOUND"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Koyuk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG570023"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "LISIANSKI INLET",
+   "texts": [
+    "LISIANSKI INLET"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Pelican"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0043532"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "McDermott Lake",
+   "texts": [
+    "McDermott Lake"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Prudhoe Bay"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572032"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Nenana River",
+   "texts": [
+    "Nenana River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Denali National Park"
+   ],
+   "slugs": [
+    "nenana-river-ak"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Nenana River' (GNIS 1406943) 39 m from the point (63.72950, -148.87481); the same water as existing record nenana-river-ak"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "AK0053775"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "NICHOLS PASSAGE",
+   "texts": [
+    "NICHOLS PASSAGE"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Metlakatla Indian Community"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0053813"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "PASSAGE CANAL",
+   "texts": [
+    "PASSAGE CANAL, PRINCE WM SOUND"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Whittier"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0025402"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "PORTAGE COVE",
+   "texts": [
+    "PORTAGE COVE"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Haines"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021385"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "PRINCE WM SOUND",
+   "texts": [
+    "PASSAGE CANAL, PRINCE WM SOUND"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Whittier"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0025402"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Revillagigedo Channel",
+   "texts": [
+    "Revillagigedo Channel"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Ketchikan"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572028"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Shelter Cove",
+   "texts": [
+    "Shelter Cove"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Anchorage"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572111"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "STARRIGAVIN BAY",
+   "texts": [
+    "STARRIGAVIN BAY, SITKA SOUND"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Sitka"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572043"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "TAIYA INLET",
+   "texts": [
+    "TAIYA INLET"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Skagway"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0020010"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Thorne Bay",
+   "texts": [
+    "Thorne Bay"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Thorne Bay"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572045"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Tundra Pond",
+   "texts": [
+    "Tundra Pond"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Tuntutuliak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AKG572026"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Unalaska Bay",
+   "texts": [
+    "Unalaska Bay"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Unalaska"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0043451"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Valdez",
+   "texts": [
+    "Valdez, Port"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Valdez"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021431"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Woody Island Channel",
+   "texts": [
+    "Woody Island Channel"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kodiak"
+   ],
+   "slugs": [
+    "woody-island-channel-ak"
+   ],
+   "how": [
+    "OSM fallback (NHDPlus has no feature of that name)"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021555"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "ZIMOVIA STRAITS",
+   "texts": [
+    "ZIMOVIA STRAITS"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Wrangell"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "AK0021466"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AK0020648 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kodiak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AK0020648"
+   ],
+   "outfall_ref": [
+    "AK0020648",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AK0021547 001A"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Cordova"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AK0021547"
+   ],
+   "outfall_ref": [
+    "AK0021547",
+    "001A"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AK0022951 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Juneau"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AK0022951"
+   ],
+   "outfall_ref": [
+    "AK0022951",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG320002 08AA"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "North Pole"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG320002"
+   ],
+   "outfall_ref": [
+    "AKG320002",
+    "08AA"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG571056 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Point Hope"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG571056"
+   ],
+   "outfall_ref": [
+    "AKG571056",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572005 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Newtok"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572005"
+   ],
+   "outfall_ref": [
+    "AKG572005",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572022 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Hoonah"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572022"
+   ],
+   "outfall_ref": [
+    "AKG572022",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572023 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Atmautluak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572023"
+   ],
+   "outfall_ref": [
+    "AKG572023",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572056 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Diomede"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572056"
+   ],
+   "outfall_ref": [
+    "AKG572056",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572088 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Unalakleet"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572088"
+   ],
+   "outfall_ref": [
+    "AKG572088",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572098 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Tununak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572098"
+   ],
+   "outfall_ref": [
+    "AKG572098",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572115 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Mertarvik"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572115"
+   ],
+   "outfall_ref": [
+    "AKG572115",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572130 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kivalina"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572130"
+   ],
+   "outfall_ref": [
+    "AKG572130",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG572141 001A"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Napakiak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG572141"
+   ],
+   "outfall_ref": [
+    "AKG572141",
+    "001A"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573001 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Alakanuk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573001"
+   ],
+   "outfall_ref": [
+    "AKG573001",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573002 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Chuathbaluk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573002"
+   ],
+   "outfall_ref": [
+    "AKG573002",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573002 002"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Chuathbaluk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573002"
+   ],
+   "outfall_ref": [
+    "AKG573002",
+    "002"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573002 003"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Chuathbaluk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573002"
+   ],
+   "outfall_ref": [
+    "AKG573002",
+    "003"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573003 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Cold Bay"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573003"
+   ],
+   "outfall_ref": [
+    "AKG573003",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573004 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Dillingham"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573004"
+   ],
+   "outfall_ref": [
+    "AKG573004",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573005 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Shemya Island"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573005"
+   ],
+   "outfall_ref": [
+    "AKG573005",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573007 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Fort Greely"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573007"
+   ],
+   "outfall_ref": [
+    "AKG573007",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573008 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kongiganak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573008"
+   ],
+   "outfall_ref": [
+    "AKG573008",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573008 002"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kongiganak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573008"
+   ],
+   "outfall_ref": [
+    "AKG573008",
+    "002"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573010 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Naknek"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573010"
+   ],
+   "outfall_ref": [
+    "AKG573010",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573011 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Napaskiak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573011"
+   ],
+   "outfall_ref": [
+    "AKG573011",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573012 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Noatak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573012"
+   ],
+   "outfall_ref": [
+    "AKG573012",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573013 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Nightmute"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573013"
+   ],
+   "outfall_ref": [
+    "AKG573013",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573016 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "St. Marys"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573016"
+   ],
+   "outfall_ref": [
+    "AKG573016",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573019 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Selawik"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573019"
+   ],
+   "outfall_ref": [
+    "AKG573019",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573024 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Teller"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573024"
+   ],
+   "outfall_ref": [
+    "AKG573024",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573024 002"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Teller"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573024"
+   ],
+   "outfall_ref": [
+    "AKG573024",
+    "002"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573025 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Togiak"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573025"
+   ],
+   "outfall_ref": [
+    "AKG573025",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573027 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "White Mountain"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573027"
+   ],
+   "outfall_ref": [
+    "AKG573027",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573029 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "King Salmon"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573029"
+   ],
+   "outfall_ref": [
+    "AKG573029",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573031 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Mountain Village"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573031"
+   ],
+   "outfall_ref": [
+    "AKG573031",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573033 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Talkeetna"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573033"
+   ],
+   "outfall_ref": [
+    "AKG573033",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573034 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Shishmaref"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573034"
+   ],
+   "outfall_ref": [
+    "AKG573034",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573037 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Galena"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573037"
+   ],
+   "outfall_ref": [
+    "AKG573037",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573038 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kaktovik"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573038"
+   ],
+   "outfall_ref": [
+    "AKG573038",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573039 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kasigluk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573039"
+   ],
+   "outfall_ref": [
+    "AKG573039",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573041 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Kasigluk"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573041"
+   ],
+   "outfall_ref": [
+    "AKG573041",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573043 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Tetlin"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573043"
+   ],
+   "outfall_ref": [
+    "AKG573043",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": null,
+   "texts": [
+    "unnamed outfall AKG573044 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Rampart"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "AKG573044"
+   ],
+   "outfall_ref": [
+    "AKG573044",
+    "001"
+   ]
+  },
+  {
+   "state": "AK",
+   "name": "Birch Lake",
+   "texts": [
+    "Birch Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "birch-lake-ak"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "AK",
+   "name": "Fish Creek",
+   "texts": [
+    "Fish Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 2,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "AK",
+   "name": "Ward Cove",
+   "texts": [
+    "Ward Cove"
+   ],
+   "outfalls": 0,
+   "events": 0,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
+   "from": "reports",
+   "reports": 0
   }
  ],
  "waters": [
@@ -1111638,6 +1111724,2347 @@
       [
        -88.622374,
        37.819871
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "gastineau-channel-ak",
+   "name": "Gastineau Channel",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Juneau"
+   ],
+   "bbox": [
+    -134.6069,
+    58.19558,
+    -134.21949,
+    58.35809
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 34.097,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "census",
+   "gnis_id": null,
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-07T04:39:26Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 11050889607 (MTFCC H2051; named 'Gastineau Chnnl' by the Census), cut to the state and simplified to ~10 m. Hand record: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas Wastewater Treatment Plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I), whose Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory gives Gastineau Channel for outfalls 002, 003 and 004. openboatlaunch has no record of the channel and NHDPlus V2.1 no Alaska data; this record is the Census TIGER/Line area water polygon the Census names 'Gastineau Chnnl' (MTFCC H2051), which holds the plant's outfall and lies 52 to 143 m from the three CSO outfalls' points. The USGS geographic names service gave no feature of the name.",
+   "hand": true,
+   "tiger_ids": [
+    "11050889607"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        -134.60042,
+        58.355329
+       ],
+       [
+        -134.593213,
+        58.351452
+       ],
+       [
+        -134.586803,
+        58.350917
+       ],
+       [
+        -134.585403,
+        58.350912
+       ],
+       [
+        -134.586578,
+        58.350063
+       ],
+       [
+        -134.584764,
+        58.34837
+       ],
+       [
+        -134.583801,
+        58.347143
+       ],
+       [
+        -134.581932,
+        58.346105
+       ],
+       [
+        -134.580529,
+        58.3458
+       ],
+       [
+        -134.577093,
+        58.345383
+       ],
+       [
+        -134.573601,
+        58.345848
+       ],
+       [
+        -134.57256,
+        58.346269
+       ],
+       [
+        -134.571323,
+        58.346962
+       ],
+       [
+        -134.570801,
+        58.347756
+       ],
+       [
+        -134.569675,
+        58.348523
+       ],
+       [
+        -134.567203,
+        58.34958
+       ],
+       [
+        -134.566905,
+        58.34994
+       ],
+       [
+        -134.567426,
+        58.351199
+       ],
+       [
+        -134.567592,
+        58.352549
+       ],
+       [
+        -134.565506,
+        58.352903
+       ],
+       [
+        -134.562127,
+        58.352516
+       ],
+       [
+        -134.555213,
+        58.351336
+       ],
+       [
+        -134.553951,
+        58.351546
+       ],
+       [
+        -134.551891,
+        58.352074
+       ],
+       [
+        -134.547232,
+        58.354798
+       ],
+       [
+        -134.546008,
+        58.356158
+       ],
+       [
+        -134.545237,
+        58.35804
+       ],
+       [
+        -134.536027,
+        58.358095
+       ],
+       [
+        -134.535492,
+        58.35715
+       ],
+       [
+        -134.534889,
+        58.356747
+       ],
+       [
+        -134.53262,
+        58.35617
+       ],
+       [
+        -134.52906,
+        58.354674
+       ],
+       [
+        -134.527324,
+        58.354205
+       ],
+       [
+        -134.526608,
+        58.354306
+       ],
+       [
+        -134.526118,
+        58.354941
+       ],
+       [
+        -134.526281,
+        58.355446
+       ],
+       [
+        -134.525977,
+        58.356212
+       ],
+       [
+        -134.52631,
+        58.356878
+       ],
+       [
+        -134.526008,
+        58.357312
+       ],
+       [
+        -134.525125,
+        58.357411
+       ],
+       [
+        -134.523618,
+        58.357095
+       ],
+       [
+        -134.522681,
+        58.357326
+       ],
+       [
+        -134.521109,
+        58.356906
+       ],
+       [
+        -134.520507,
+        58.357541
+       ],
+       [
+        -134.516717,
+        58.356353
+       ],
+       [
+        -134.515941,
+        58.355939
+       ],
+       [
+        -134.515663,
+        58.355188
+       ],
+       [
+        -134.514453,
+        58.354235
+       ],
+       [
+        -134.513219,
+        58.352226
+       ],
+       [
+        -134.512885,
+        58.351982
+       ],
+       [
+        -134.510218,
+        58.351257
+       ],
+       [
+        -134.511048,
+        58.349897
+       ],
+       [
+        -134.507849,
+        58.34984
+       ],
+       [
+        -134.507666,
+        58.349555
+       ],
+       [
+        -134.506921,
+        58.349437
+       ],
+       [
+        -134.501364,
+        58.344927
+       ],
+       [
+        -134.500827,
+        58.345231
+       ],
+       [
+        -134.492633,
+        58.339366
+       ],
+       [
+        -134.489748,
+        58.337657
+       ],
+       [
+        -134.485345,
+        58.335539
+       ],
+       [
+        -134.475554,
+        58.330218
+       ],
+       [
+        -134.475824,
+        58.329053
+       ],
+       [
+        -134.474627,
+        58.327837
+       ],
+       [
+        -134.47341,
+        58.327141
+       ],
+       [
+        -134.472001,
+        58.326813
+       ],
+       [
+        -134.470523,
+        58.327112
+       ],
+       [
+        -134.468847,
+        58.326759
+       ],
+       [
+        -134.453219,
+        58.318792
+       ],
+       [
+        -134.444698,
+        58.310744
+       ],
+       [
+        -134.440533,
+        58.307775
+       ],
+       [
+        -134.440441,
+        58.307234
+       ],
+       [
+        -134.439149,
+        58.308675
+       ],
+       [
+        -134.437807,
+        58.308663
+       ],
+       [
+        -134.436753,
+        58.308326
+       ],
+       [
+        -134.432166,
+        58.305891
+       ],
+       [
+        -134.431028,
+        58.304565
+       ],
+       [
+        -134.4312,
+        58.304044
+       ],
+       [
+        -134.43245,
+        58.303304
+       ],
+       [
+        -134.431568,
+        58.303496
+       ],
+       [
+        -134.430333,
+        58.302669
+       ],
+       [
+        -134.428552,
+        58.303232
+       ],
+       [
+        -134.425834,
+        58.301239
+       ],
+       [
+        -134.425819,
+        58.300944
+       ],
+       [
+        -134.428103,
+        58.299913
+       ],
+       [
+        -134.426735,
+        58.298895
+       ],
+       [
+        -134.425393,
+        58.299017
+       ],
+       [
+        -134.424558,
+        58.298542
+       ],
+       [
+        -134.422795,
+        58.299232
+       ],
+       [
+        -134.422158,
+        58.299308
+       ],
+       [
+        -134.41944,
+        58.298705
+       ],
+       [
+        -134.417899,
+        58.298675
+       ],
+       [
+        -134.415354,
+        58.298904
+       ],
+       [
+        -134.414786,
+        58.298077
+       ],
+       [
+        -134.413706,
+        58.298023
+       ],
+       [
+        -134.413598,
+        58.297908
+       ],
+       [
+        -134.410413,
+        58.298589
+       ],
+       [
+        -134.410559,
+        58.298773
+       ],
+       [
+        -134.409922,
+        58.298934
+       ],
+       [
+        -134.406764,
+        58.299241
+       ],
+       [
+        -134.404349,
+        58.297907
+       ],
+       [
+        -134.402977,
+        58.297577
+       ],
+       [
+        -134.402141,
+        58.296857
+       ],
+       [
+        -134.402341,
+        58.296761
+       ],
+       [
+        -134.402147,
+        58.296603
+       ],
+       [
+        -134.400219,
+        58.295625
+       ],
+       [
+        -134.399805,
+        58.295094
+       ],
+       [
+        -134.399623,
+        58.29521
+       ],
+       [
+        -134.398734,
+        58.294846
+       ],
+       [
+        -134.398188,
+        58.294232
+       ],
+       [
+        -134.396409,
+        58.293159
+       ],
+       [
+        -134.395566,
+        58.292369
+       ],
+       [
+        -134.393397,
+        58.291246
+       ],
+       [
+        -134.39332,
+        58.290771
+       ],
+       [
+        -134.39401,
+        58.290349
+       ],
+       [
+        -134.396831,
+        58.290119
+       ],
+       [
+        -134.397053,
+        58.289291
+       ],
+       [
+        -134.396555,
+        58.288126
+       ],
+       [
+        -134.393527,
+        58.285957
+       ],
+       [
+        -134.393013,
+        58.28598
+       ],
+       [
+        -134.391649,
+        58.286673
+       ],
+       [
+        -134.390545,
+        58.286428
+       ],
+       [
+        -134.3901,
+        58.285616
+       ],
+       [
+        -134.390116,
+        58.284864
+       ],
+       [
+        -134.389686,
+        58.284496
+       ],
+       [
+        -134.389196,
+        58.28442
+       ],
+       [
+        -134.384197,
+        58.285048
+       ],
+       [
+        -134.381744,
+        58.285769
+       ],
+       [
+        -134.381407,
+        58.285754
+       ],
+       [
+        -134.380855,
+        58.28537
+       ],
+       [
+        -134.378525,
+        58.28465
+       ],
+       [
+        -134.377666,
+        58.284159
+       ],
+       [
+        -134.377589,
+        58.283914
+       ],
+       [
+        -134.378172,
+        58.283239
+       ],
+       [
+        -134.377865,
+        58.282703
+       ],
+       [
+        -134.377221,
+        58.282434
+       ],
+       [
+        -134.375213,
+        58.282312
+       ],
+       [
+        -134.374615,
+        58.282465
+       ],
+       [
+        -134.373235,
+        58.281913
+       ],
+       [
+        -134.370782,
+        58.281591
+       ],
+       [
+        -134.369785,
+        58.280978
+       ],
+       [
+        -134.361968,
+        58.277917
+       ],
+       [
+        -134.361826,
+        58.277673
+       ],
+       [
+        -134.359038,
+        58.276296
+       ],
+       [
+        -134.357795,
+        58.275485
+       ],
+       [
+        -134.355807,
+        58.274701
+       ],
+       [
+        -134.352299,
+        58.272509
+       ],
+       [
+        -134.347899,
+        58.270763
+       ],
+       [
+        -134.347681,
+        58.270474
+       ],
+       [
+        -134.346093,
+        58.269575
+       ],
+       [
+        -134.343517,
+        58.268676
+       ],
+       [
+        -134.342078,
+        58.267673
+       ],
+       [
+        -134.340185,
+        58.266793
+       ],
+       [
+        -134.337356,
+        58.265115
+       ],
+       [
+        -134.335212,
+        58.263359
+       ],
+       [
+        -134.332828,
+        58.262622
+       ],
+       [
+        -134.332405,
+        58.262089
+       ],
+       [
+        -134.331276,
+        58.261689
+       ],
+       [
+        -134.329112,
+        58.261501
+       ],
+       [
+        -134.328266,
+        58.261234
+       ],
+       [
+        -134.327701,
+        58.260826
+       ],
+       [
+        -134.327513,
+        58.260246
+       ],
+       [
+        -134.326165,
+        58.259597
+       ],
+       [
+        -134.325088,
+        58.260061
+       ],
+       [
+        -134.324234,
+        58.259469
+       ],
+       [
+        -134.322022,
+        58.258486
+       ],
+       [
+        -134.321192,
+        58.25798
+       ],
+       [
+        -134.320909,
+        58.257546
+       ],
+       [
+        -134.3195,
+        58.257193
+       ],
+       [
+        -134.318667,
+        58.256579
+       ],
+       [
+        -134.317157,
+        58.256235
+       ],
+       [
+        -134.317123,
+        58.255938
+       ],
+       [
+        -134.31575,
+        58.255292
+       ],
+       [
+        -134.312419,
+        58.252949
+       ],
+       [
+        -134.310429,
+        58.25214
+       ],
+       [
+        -134.305234,
+        58.249188
+       ],
+       [
+        -134.303559,
+        58.248443
+       ],
+       [
+        -134.301162,
+        58.247821
+       ],
+       [
+        -134.299896,
+        58.247245
+       ],
+       [
+        -134.298161,
+        58.24581
+       ],
+       [
+        -134.296658,
+        58.245241
+       ],
+       [
+        -134.295804,
+        58.244269
+       ],
+       [
+        -134.295089,
+        58.243954
+       ],
+       [
+        -134.291548,
+        58.241458
+       ],
+       [
+        -134.2902,
+        58.240939
+       ],
+       [
+        -134.289259,
+        58.240137
+       ],
+       [
+        -134.287923,
+        58.239554
+       ],
+       [
+        -134.286748,
+        58.238459
+       ],
+       [
+        -134.284789,
+        58.237476
+       ],
+       [
+        -134.284356,
+        58.236717
+       ],
+       [
+        -134.281422,
+        58.235874
+       ],
+       [
+        -134.276453,
+        58.233422
+       ],
+       [
+        -134.274918,
+        58.233368
+       ],
+       [
+        -134.27473,
+        58.23262
+       ],
+       [
+        -134.273845,
+        58.231908
+       ],
+       [
+        -134.271947,
+        58.230754
+       ],
+       [
+        -134.269155,
+        58.229743
+       ],
+       [
+        -134.268691,
+        58.22926
+       ],
+       [
+        -134.267837,
+        58.228849
+       ],
+       [
+        -134.26685,
+        58.228589
+       ],
+       [
+        -134.265635,
+        58.228892
+       ],
+       [
+        -134.264822,
+        58.228808
+       ],
+       [
+        -134.262549,
+        58.228132
+       ],
+       [
+        -134.261885,
+        58.227679
+       ],
+       [
+        -134.260655,
+        58.227454
+       ],
+       [
+        -134.260323,
+        58.226987
+       ],
+       [
+        -134.25931,
+        58.226759
+       ],
+       [
+        -134.258477,
+        58.226301
+       ],
+       [
+        -134.255774,
+        58.224458
+       ],
+       [
+        -134.252839,
+        58.22311
+       ],
+       [
+        -134.251164,
+        58.222141
+       ],
+       [
+        -134.248395,
+        58.221261
+       ],
+       [
+        -134.246959,
+        58.220152
+       ],
+       [
+        -134.242413,
+        58.217813
+       ],
+       [
+        -134.239394,
+        58.214938
+       ],
+       [
+        -134.238662,
+        58.214607
+       ],
+       [
+        -134.237608,
+        58.213435
+       ],
+       [
+        -134.234982,
+        58.211851
+       ],
+       [
+        -134.231974,
+        58.210378
+       ],
+       [
+        -134.229885,
+        58.209832
+       ],
+       [
+        -134.227396,
+        58.208203
+       ],
+       [
+        -134.225884,
+        58.207877
+       ],
+       [
+        -134.224869,
+        58.207348
+       ],
+       [
+        -134.222224,
+        58.206787
+       ],
+       [
+        -134.21949,
+        58.205305
+       ],
+       [
+        -134.222178,
+        58.204375
+       ],
+       [
+        -134.240091,
+        58.200275
+       ],
+       [
+        -134.259332,
+        58.19558
+       ],
+       [
+        -134.259748,
+        58.196353
+       ],
+       [
+        -134.260994,
+        58.196963
+       ],
+       [
+        -134.261076,
+        58.197193
+       ],
+       [
+        -134.259439,
+        58.198525
+       ],
+       [
+        -134.261628,
+        58.198942
+       ],
+       [
+        -134.263161,
+        58.19949
+       ],
+       [
+        -134.26448,
+        58.201178
+       ],
+       [
+        -134.264484,
+        58.202046
+       ],
+       [
+        -134.265139,
+        58.202798
+       ],
+       [
+        -134.265605,
+        58.204011
+       ],
+       [
+        -134.266294,
+        58.204618
+       ],
+       [
+        -134.267172,
+        58.206278
+       ],
+       [
+        -134.268574,
+        58.207348
+       ],
+       [
+        -134.269009,
+        58.208213
+       ],
+       [
+        -134.270078,
+        58.208589
+       ],
+       [
+        -134.271485,
+        58.209628
+       ],
+       [
+        -134.273671,
+        58.210739
+       ],
+       [
+        -134.276935,
+        58.213034
+       ],
+       [
+        -134.280722,
+        58.214924
+       ],
+       [
+        -134.281658,
+        58.216006
+       ],
+       [
+        -134.283987,
+        58.217522
+       ],
+       [
+        -134.28594,
+        58.219513
+       ],
+       [
+        -134.287257,
+        58.220364
+       ],
+       [
+        -134.292443,
+        58.223035
+       ],
+       [
+        -134.29398,
+        58.223711
+       ],
+       [
+        -134.295103,
+        58.223884
+       ],
+       [
+        -134.299272,
+        58.226436
+       ],
+       [
+        -134.299821,
+        58.226956
+       ],
+       [
+        -134.300755,
+        58.227275
+       ],
+       [
+        -134.301276,
+        58.227721
+       ],
+       [
+        -134.303088,
+        58.228659
+       ],
+       [
+        -134.303997,
+        58.229569
+       ],
+       [
+        -134.305367,
+        58.229899
+       ],
+       [
+        -134.305482,
+        58.230533
+       ],
+       [
+        -134.306359,
+        58.230822
+       ],
+       [
+        -134.306661,
+        58.231168
+       ],
+       [
+        -134.307675,
+        58.231631
+       ],
+       [
+        -134.309517,
+        58.233376
+       ],
+       [
+        -134.312181,
+        58.23492
+       ],
+       [
+        -134.315335,
+        58.236347
+       ],
+       [
+        -134.315888,
+        58.236765
+       ],
+       [
+        -134.320171,
+        58.238887
+       ],
+       [
+        -134.322205,
+        58.240286
+       ],
+       [
+        -134.32517,
+        58.241497
+       ],
+       [
+        -134.326021,
+        58.242059
+       ],
+       [
+        -134.328599,
+        58.242837
+       ],
+       [
+        -134.330985,
+        58.243326
+       ],
+       [
+        -134.331949,
+        58.243814
+       ],
+       [
+        -134.33329,
+        58.244204
+       ],
+       [
+        -134.334668,
+        58.245185
+       ],
+       [
+        -134.335355,
+        58.24526
+       ],
+       [
+        -134.336911,
+        58.246317
+       ],
+       [
+        -134.33816,
+        58.247955
+       ],
+       [
+        -134.339484,
+        58.249032
+       ],
+       [
+        -134.343137,
+        58.251229
+       ],
+       [
+        -134.345072,
+        58.253034
+       ],
+       [
+        -134.346575,
+        58.253407
+       ],
+       [
+        -134.347285,
+        58.254433
+       ],
+       [
+        -134.348677,
+        58.255575
+       ],
+       [
+        -134.351412,
+        58.256633
+       ],
+       [
+        -134.354729,
+        58.25762
+       ],
+       [
+        -134.357983,
+        58.258939
+       ],
+       [
+        -134.359354,
+        58.258912
+       ],
+       [
+        -134.361293,
+        58.260402
+       ],
+       [
+        -134.363948,
+        58.261822
+       ],
+       [
+        -134.364607,
+        58.26256
+       ],
+       [
+        -134.365262,
+        58.262906
+       ],
+       [
+        -134.36685,
+        58.263355
+       ],
+       [
+        -134.367807,
+        58.263993
+       ],
+       [
+        -134.366959,
+        58.264137
+       ],
+       [
+        -134.36679,
+        58.264297
+       ],
+       [
+        -134.367066,
+        58.264832
+       ],
+       [
+        -134.369422,
+        58.265022
+       ],
+       [
+        -134.370354,
+        58.265397
+       ],
+       [
+        -134.371172,
+        58.26531
+       ],
+       [
+        -134.372869,
+        58.266527
+       ],
+       [
+        -134.373885,
+        58.266686
+       ],
+       [
+        -134.374839,
+        58.267425
+       ],
+       [
+        -134.375912,
+        58.267296
+       ],
+       [
+        -134.376241,
+        58.267398
+       ],
+       [
+        -134.375772,
+        58.267858
+       ],
+       [
+        -134.376344,
+        58.268684
+       ],
+       [
+        -134.377032,
+        58.269044
+       ],
+       [
+        -134.377193,
+        58.269566
+       ],
+       [
+        -134.378349,
+        58.270622
+       ],
+       [
+        -134.380139,
+        58.270911
+       ],
+       [
+        -134.383054,
+        58.272065
+       ],
+       [
+        -134.384425,
+        58.272001
+       ],
+       [
+        -134.385257,
+        58.27252
+       ],
+       [
+        -134.386027,
+        58.273449
+       ],
+       [
+        -134.384342,
+        58.275056
+       ],
+       [
+        -134.383287,
+        58.2755
+       ],
+       [
+        -134.384046,
+        58.276315
+       ],
+       [
+        -134.38577,
+        58.276705
+       ],
+       [
+        -134.387768,
+        58.276621
+       ],
+       [
+        -134.385117,
+        58.275531
+       ],
+       [
+        -134.385268,
+        58.275185
+       ],
+       [
+        -134.386429,
+        58.274314
+       ],
+       [
+        -134.390341,
+        58.275633
+       ],
+       [
+        -134.390077,
+        58.27616
+       ],
+       [
+        -134.38945,
+        58.276332
+       ],
+       [
+        -134.389414,
+        58.276612
+       ],
+       [
+        -134.388259,
+        58.277117
+       ],
+       [
+        -134.389093,
+        58.27707
+       ],
+       [
+        -134.389562,
+        58.277307
+       ],
+       [
+        -134.391203,
+        58.277184
+       ],
+       [
+        -134.391834,
+        58.277729
+       ],
+       [
+        -134.39345,
+        58.27796
+       ],
+       [
+        -134.394128,
+        58.278881
+       ],
+       [
+        -134.400864,
+        58.281922
+       ],
+       [
+        -134.403372,
+        58.282536
+       ],
+       [
+        -134.410213,
+        58.286054
+       ],
+       [
+        -134.410719,
+        58.286226
+       ],
+       [
+        -134.411193,
+        58.286203
+       ],
+       [
+        -134.411509,
+        58.285887
+       ],
+       [
+        -134.412289,
+        58.286588
+       ],
+       [
+        -134.415521,
+        58.287584
+       ],
+       [
+        -134.41814,
+        58.28946
+       ],
+       [
+        -134.422781,
+        58.291465
+       ],
+       [
+        -134.42453,
+        58.292579
+       ],
+       [
+        -134.428123,
+        58.294143
+       ],
+       [
+        -134.430233,
+        58.295833
+       ],
+       [
+        -134.431467,
+        58.297134
+       ],
+       [
+        -134.431399,
+        58.297496
+       ],
+       [
+        -134.430962,
+        58.29776
+       ],
+       [
+        -134.431054,
+        58.298086
+       ],
+       [
+        -134.431549,
+        58.298199
+       ],
+       [
+        -134.432191,
+        58.297984
+       ],
+       [
+        -134.432513,
+        58.298126
+       ],
+       [
+        -134.433115,
+        58.297908
+       ],
+       [
+        -134.43372,
+        58.297965
+       ],
+       [
+        -134.434216,
+        58.297751
+       ],
+       [
+        -134.434505,
+        58.297897
+       ],
+       [
+        -134.43316,
+        58.299046
+       ],
+       [
+        -134.433636,
+        58.299458
+       ],
+       [
+        -134.43327,
+        58.299077
+       ],
+       [
+        -134.434046,
+        58.298601
+       ],
+       [
+        -134.435075,
+        58.299071
+       ],
+       [
+        -134.434549,
+        58.299465
+       ],
+       [
+        -134.435374,
+        58.299826
+       ],
+       [
+        -134.436814,
+        58.299002
+       ],
+       [
+        -134.437664,
+        58.299334
+       ],
+       [
+        -134.438597,
+        58.299971
+       ],
+       [
+        -134.440163,
+        58.300247
+       ],
+       [
+        -134.441384,
+        58.300736
+       ],
+       [
+        -134.441579,
+        58.300997
+       ],
+       [
+        -134.44276,
+        58.301058
+       ],
+       [
+        -134.443404,
+        58.301346
+       ],
+       [
+        -134.444113,
+        58.301375
+       ],
+       [
+        -134.448116,
+        58.302837
+       ],
+       [
+        -134.449651,
+        58.303819
+       ],
+       [
+        -134.449705,
+        58.304889
+       ],
+       [
+        -134.451295,
+        58.306031
+       ],
+       [
+        -134.451483,
+        58.307113
+       ],
+       [
+        -134.451978,
+        58.307896
+       ],
+       [
+        -134.453209,
+        58.308401
+       ],
+       [
+        -134.454961,
+        58.309992
+       ],
+       [
+        -134.456357,
+        58.310456
+       ],
+       [
+        -134.457506,
+        58.31119
+       ],
+       [
+        -134.457479,
+        58.311975
+       ],
+       [
+        -134.458021,
+        58.312396
+       ],
+       [
+        -134.458813,
+        58.312649
+       ],
+       [
+        -134.459601,
+        58.31254
+       ],
+       [
+        -134.458069,
+        58.313304
+       ],
+       [
+        -134.458423,
+        58.313561
+       ],
+       [
+        -134.460304,
+        58.314222
+       ],
+       [
+        -134.462498,
+        58.314456
+       ],
+       [
+        -134.465292,
+        58.315426
+       ],
+       [
+        -134.465826,
+        58.315436
+       ],
+       [
+        -134.468855,
+        58.317003
+       ],
+       [
+        -134.469792,
+        58.317293
+       ],
+       [
+        -134.473036,
+        58.318971
+       ],
+       [
+        -134.47407,
+        58.319858
+       ],
+       [
+        -134.475247,
+        58.320305
+       ],
+       [
+        -134.476319,
+        58.321029
+       ],
+       [
+        -134.479317,
+        58.322374
+       ],
+       [
+        -134.48102,
+        58.323395
+       ],
+       [
+        -134.485622,
+        58.325446
+       ],
+       [
+        -134.48676,
+        58.326213
+       ],
+       [
+        -134.489007,
+        58.32825
+       ],
+       [
+        -134.491099,
+        58.328713
+       ],
+       [
+        -134.496199,
+        58.331034
+       ],
+       [
+        -134.496456,
+        58.331245
+       ],
+       [
+        -134.496291,
+        58.332165
+       ],
+       [
+        -134.496613,
+        58.332467
+       ],
+       [
+        -134.4969,
+        58.332533
+       ],
+       [
+        -134.49902,
+        58.332249
+       ],
+       [
+        -134.500128,
+        58.333215
+       ],
+       [
+        -134.502497,
+        58.333772
+       ],
+       [
+        -134.505162,
+        58.335172
+       ],
+       [
+        -134.506343,
+        58.335578
+       ],
+       [
+        -134.509643,
+        58.336041
+       ],
+       [
+        -134.510851,
+        58.336531
+       ],
+       [
+        -134.512637,
+        58.336993
+       ],
+       [
+        -134.514778,
+        58.337964
+       ],
+       [
+        -134.518769,
+        58.339249
+       ],
+       [
+        -134.519512,
+        58.339436
+       ],
+       [
+        -134.52097,
+        58.339437
+       ],
+       [
+        -134.522203,
+        58.339623
+       ],
+       [
+        -134.523384,
+        58.340043
+       ],
+       [
+        -134.523855,
+        58.342588
+       ],
+       [
+        -134.524489,
+        58.34318
+       ],
+       [
+        -134.524407,
+        58.343438
+       ],
+       [
+        -134.52729,
+        58.344724
+       ],
+       [
+        -134.531966,
+        58.344781
+       ],
+       [
+        -134.533033,
+        58.344549
+       ],
+       [
+        -134.534522,
+        58.34455
+       ],
+       [
+        -134.535289,
+        58.344649
+       ],
+       [
+        -134.536856,
+        58.345315
+       ],
+       [
+        -134.538696,
+        58.345631
+       ],
+       [
+        -134.539827,
+        58.345443
+       ],
+       [
+        -134.5412,
+        58.344766
+       ],
+       [
+        -134.542159,
+        58.343954
+       ],
+       [
+        -134.542707,
+        58.342076
+       ],
+       [
+        -134.543065,
+        58.341627
+       ],
+       [
+        -134.547623,
+        58.340471
+       ],
+       [
+        -134.547157,
+        58.339966
+       ],
+       [
+        -134.548557,
+        58.340167
+       ],
+       [
+        -134.549136,
+        58.340412
+       ],
+       [
+        -134.549713,
+        58.341005
+       ],
+       [
+        -134.55081,
+        58.340975
+       ],
+       [
+        -134.551089,
+        58.341307
+       ],
+       [
+        -134.552103,
+        58.341495
+       ],
+       [
+        -134.558288,
+        58.341332
+       ],
+       [
+        -134.563316,
+        58.341519
+       ],
+       [
+        -134.566695,
+        58.340954
+       ],
+       [
+        -134.568286,
+        58.340461
+       ],
+       [
+        -134.571973,
+        58.340733
+       ],
+       [
+        -134.573262,
+        58.340256
+       ],
+       [
+        -134.574334,
+        58.339619
+       ],
+       [
+        -134.575236,
+        58.338652
+       ],
+       [
+        -134.575757,
+        58.337453
+       ],
+       [
+        -134.576481,
+        58.336917
+       ],
+       [
+        -134.57672,
+        58.337033
+       ],
+       [
+        -134.576555,
+        58.338317
+       ],
+       [
+        -134.579553,
+        58.340584
+       ],
+       [
+        -134.579944,
+        58.341422
+       ],
+       [
+        -134.581182,
+        58.34262
+       ],
+       [
+        -134.580822,
+        58.342795
+       ],
+       [
+        -134.578158,
+        58.342622
+       ],
+       [
+        -134.574065,
+        58.342799
+       ],
+       [
+        -134.569916,
+        58.343378
+       ],
+       [
+        -134.569117,
+        58.343682
+       ],
+       [
+        -134.566592,
+        58.344118
+       ],
+       [
+        -134.566592,
+        58.344321
+       ],
+       [
+        -134.570137,
+        58.343886
+       ],
+       [
+        -134.571786,
+        58.343841
+       ],
+       [
+        -134.573982,
+        58.343421
+       ],
+       [
+        -134.577411,
+        58.343193
+       ],
+       [
+        -134.578551,
+        58.343389
+       ],
+       [
+        -134.57978,
+        58.343375
+       ],
+       [
+        -134.585805,
+        58.342839
+       ],
+       [
+        -134.587305,
+        58.341882
+       ],
+       [
+        -134.588048,
+        58.341636
+       ],
+       [
+        -134.588078,
+        58.341389
+       ],
+       [
+        -134.587252,
+        58.340826
+       ],
+       [
+        -134.587056,
+        58.340466
+       ],
+       [
+        -134.587057,
+        58.339511
+       ],
+       [
+        -134.587573,
+        58.338932
+       ],
+       [
+        -134.589276,
+        58.338151
+       ],
+       [
+        -134.590071,
+        58.337111
+       ],
+       [
+        -134.590243,
+        58.337094
+       ],
+       [
+        -134.59046,
+        58.337833
+       ],
+       [
+        -134.589663,
+        58.339001
+       ],
+       [
+        -134.590043,
+        58.339135
+       ],
+       [
+        -134.593563,
+        58.338841
+       ],
+       [
+        -134.594801,
+        58.338044
+       ],
+       [
+        -134.595328,
+        58.337468
+       ],
+       [
+        -134.596064,
+        58.337296
+       ],
+       [
+        -134.59718,
+        58.337382
+       ],
+       [
+        -134.597772,
+        58.337089
+       ],
+       [
+        -134.601472,
+        58.336205
+       ],
+       [
+        -134.603558,
+        58.335366
+       ],
+       [
+        -134.603311,
+        58.334673
+       ],
+       [
+        -134.602417,
+        58.333811
+       ],
+       [
+        -134.606616,
+        58.334283
+       ],
+       [
+        -134.606896,
+        58.341716
+       ],
+       [
+        -134.60042,
+        58.355329
+       ]
+      ],
+      [
+       [
+        -134.518523,
+        58.347499
+       ],
+       [
+        -134.516405,
+        58.347193
+       ],
+       [
+        -134.515228,
+        58.346477
+       ],
+       [
+        -134.513531,
+        58.345863
+       ],
+       [
+        -134.512741,
+        58.346024
+       ],
+       [
+        -134.511779,
+        58.346784
+       ],
+       [
+        -134.51222,
+        58.347372
+       ],
+       [
+        -134.513329,
+        58.34771
+       ],
+       [
+        -134.514248,
+        58.347803
+       ],
+       [
+        -134.515377,
+        58.347659
+       ],
+       [
+        -134.515987,
+        58.347785
+       ],
+       [
+        -134.515726,
+        58.348245
+       ],
+       [
+        -134.516612,
+        58.348857
+       ],
+       [
+        -134.518347,
+        58.34787
+       ],
+       [
+        -134.518523,
+        58.347499
+       ]
+      ],
+      [
+       [
+        -134.533735,
+        58.350732
+       ],
+       [
+        -134.532933,
+        58.350593
+       ],
+       [
+        -134.531814,
+        58.350643
+       ],
+       [
+        -134.531696,
+        58.351019
+       ],
+       [
+        -134.532359,
+        58.351465
+       ],
+       [
+        -134.533696,
+        58.351494
+       ],
+       [
+        -134.534389,
+        58.351227
+       ],
+       [
+        -134.534389,
+        58.351039
+       ],
+       [
+        -134.533735,
+        58.350732
+       ]
+      ],
+      [
+       [
+        -134.565825,
+        58.347153
+       ],
+       [
+        -134.561761,
+        58.34763
+       ],
+       [
+        -134.558352,
+        58.34746
+       ],
+       [
+        -134.556402,
+        58.347547
+       ],
+       [
+        -134.555436,
+        58.347865
+       ],
+       [
+        -134.5539,
+        58.348719
+       ],
+       [
+        -134.552332,
+        58.349096
+       ],
+       [
+        -134.548598,
+        58.34904
+       ],
+       [
+        -134.54475,
+        58.350068
+       ],
+       [
+        -134.541751,
+        58.349445
+       ],
+       [
+        -134.541503,
+        58.349504
+       ],
+       [
+        -134.541477,
+        58.349734
+       ],
+       [
+        -134.542743,
+        58.350182
+       ],
+       [
+        -134.542384,
+        58.350398
+       ],
+       [
+        -134.541535,
+        58.350415
+       ],
+       [
+        -134.537849,
+        58.349983
+       ],
+       [
+        -134.537301,
+        58.350156
+       ],
+       [
+        -134.537052,
+        58.35059
+       ],
+       [
+        -134.539502,
+        58.352424
+       ],
+       [
+        -134.540132,
+        58.352655
+       ],
+       [
+        -134.541122,
+        58.352063
+       ],
+       [
+        -134.543049,
+        58.351858
+       ],
+       [
+        -134.544532,
+        58.350948
+       ],
+       [
+        -134.548405,
+        58.350281
+       ],
+       [
+        -134.550328,
+        58.350599
+       ],
+       [
+        -134.553709,
+        58.350237
+       ],
+       [
+        -134.555857,
+        58.350351
+       ],
+       [
+        -134.560389,
+        58.351099
+       ],
+       [
+        -134.563057,
+        58.351793
+       ],
+       [
+        -134.56402,
+        58.351808
+       ],
+       [
+        -134.564762,
+        58.351502
+       ],
+       [
+        -134.564815,
+        58.351329
+       ],
+       [
+        -134.563989,
+        58.350333
+       ],
+       [
+        -134.564199,
+        58.348754
+       ],
+       [
+        -134.564584,
+        58.348145
+       ],
+       [
+        -134.565214,
+        58.347697
+       ],
+       [
+        -134.566633,
+        58.347349
+       ],
+       [
+        -134.565825,
+        58.347153
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        -134.597939,
+        58.330428
+       ],
+       [
+        -134.599184,
+        58.33071
+       ],
+       [
+        -134.601539,
+        58.331767
+       ],
+       [
+        -134.602336,
+        58.333751
+       ],
+       [
+        -134.597939,
+        58.330428
+       ]
       ]
      ]
     ]
