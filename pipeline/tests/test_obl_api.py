@@ -367,6 +367,27 @@ def test_changes_are_fetched_written_logged_and_the_extract_rewritten(api, tmp_p
     assert st["last_run"]["changes"] == 0 and st["pending_states"] == []
 
 
+def test_an_extract_from_another_source_is_never_rewritten_and_leaves_pending(api, tmp_path):
+    # DC's extract is built from NHD (openboatlaunch has no DC records): a 410 marks every live state pending, and the
+    # rewrite must neither refuse DC every hour nor ever write it from the folder (review 2026-11-07)
+    water, data, status = changes_setup(tmp_path, api)
+    (data / "rules.json").write_text(json.dumps({"live_states": ["RI", "DC"]}))
+    dc = {"state": "DC", "source": "USGS National Map NHD flowlines", "waters": [{"slug": "rock-creek-dc"}]}
+    (data / "waters-dc.json").write_text(json.dumps(dc))
+    before = (data / "waters-dc.json").read_bytes()
+    sf = data / "build" / "obl-changes.json"
+    sf.write_text(json.dumps({"until": "2026-11-07T03:00:00+00:00", "pending_states": ["DC", "RI"]}))
+    st = obl_changes.check(water, sf, status, data_dir=data)
+    assert (data / "waters-dc.json").read_bytes() == before
+    assert st["pending_states"] == []
+
+
+def test_the_refresh_rolls_back_when_the_pack_itself_fails():
+    yml = (ROOT / ".github" / "workflows" / "refresh.yml").read_text()
+    step = yml.split("Save openboatlaunch's folder to R2", 1)[1].split("- name:", 1)[0]
+    assert 'elif [ "$rc" != 3 ]' in step and step.count("state_paths.py obl-not-saved") == 2
+
+
 def test_a_410_asks_for_a_full_pull_and_the_api_down_keeps_until(api, tmp_path, capsys):
     water, data, status = changes_setup(tmp_path, api)
     sf = data / "build" / "obl-changes.json"

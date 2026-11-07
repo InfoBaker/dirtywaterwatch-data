@@ -104,6 +104,11 @@ def rewrite(states, obl_dir: Path, until: str | None, data_dir: Path = DATA_DIR)
         if have and str(have.get("state") or "").upper() != st:
             out[st] = "not this state's extract"
             continue
+        if have and not str(have.get("source") or "").startswith("openboatlaunch"):
+            # a state whose extract on file is built from another source (DC's from NHD: openboatlaunch has no DC
+            # records) is never rewritten from the folder, and is no longer pending (review 2026-11-07)
+            out[st] = "not an openboatlaunch extract"
+            continue
         before = path.read_bytes() if path.exists() else None
         try:
             obl_waters.extract(st, obl_dir, path, until=until)
@@ -188,7 +193,7 @@ def check(obl_dir: Path | None = None, state_file: Path = STATE_FILE, status_fil
         res = rewrite(pending & live, obl_dir, st.get("until"), data_dir)
         for s, r in res.items():
             say(f"{s}: extract {r}")
-        pending = {s for s in pending if s in live and res.get(s) not in ("current",)}
+        pending = {s for s in pending if s in live and res.get(s) not in ("current", "not an openboatlaunch extract")}
     elif pending:
         say(f"pending states {sorted(pending)}: no folder this run, rewritten when there is one")
     st["pending_states"] = sorted(pending)
