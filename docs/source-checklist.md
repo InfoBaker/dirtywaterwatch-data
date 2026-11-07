@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1288 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1299 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -32,7 +32,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
-| **all** | **453** | **225** | **364** | **183** | **63** | **1288** |
+| az | 3 | 1 | 3 | 3 | 1 | 11 |
+| **all** | **456** | **226** | **367** | **186** | **64** | **1299** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1431,3 +1432,19 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-norc-river-reversal-analysis` | NORC/UChicago "rain" project: parse MWRD river reversals and CSOs | rejected | search_only | prior_art | Prior art; one-off analysis. |
 | `il-evanston-cso-plan` | City of Evanston CSO Public Notification Plan | unreachable | fetched | law | Suburban CSO plans point to MWRD alerts; this one moved. |
 | `il-mwrd-tarp-levels` | MWRD TARP reservoir levels map service | unreachable | fetched | hydrography | Token-protected; reservoir fullness would be a leading indicator of CSOs. |
+
+## az: Arizona (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `az-adeq-wbid-layers` | ADEQ waterbody identifier (WBID) layers, streams and lakes (ArcGIS Online) | used | fetched | hydrography | Names the ADEQ waterbody identifiers Arizona permittees give as receiving waters in EPA's overflow reports (13 identifiers in the 2026-11-04 extract; EPA's ATTAINS holds 9 of them). |
+| `az-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 52 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 285 dropped (257 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon). |
+| `az-law-r18-9-c305` | A.A.C. R18-9-C305, 2.05 General Permit: CMOM of a sewage collection system (reporting and public notice signs) | used | fetched | law | Fetched text: 24-hour report to ADEQ for releases that are an imminent and substantial threat; signs only after more than three reportable releases at one location in 12 months. |
+| `az-adeq-reported-habs` | ADEQ AZHABs "Currently Reported" harmful algal bloom list | candidate | search_only | advisories | Only state HAB list; HTML behind a bot wall; testing is voluntary for lake managers. |
+| `az-adeq-sso-reporting` | ADEQ SSO and bypass reporting (Spill Line, myDEQ five-day report, SSO Report Form) | watch | search_only | law | Reporting channel to the regulator only; no public output found besides EPA SOBE. |
+| `az-mohave-county-health-habs` | Mohave County Department of Public Health HAB warnings (Lake Havasu) | watch | search_only | advisories | County news posts; scattered. |
+| `az-nps-lake-mead-habs` | NPS Lake Mead NRA harmful algal bloom page (Lake Mead, Lake Mohave) | watch | search_only | advisories | Shared AZ/NV waters; advisory HTML. |
+| `az-echo-dmr` | ECHO DMR monthly counts | rejected | inferred | permits | No CSO permits in Arizona; SOBE is the better federal source. |
+| `az-pima-rwrd` | Pima County Regional Wastewater Reclamation Department (Tucson) overflow information | rejected | search_only | events | No public overflow notices found. |
+| `az-swim-guide` | Swim Guide affiliates in Arizona | rejected | search_only | monitoring | No Arizona affiliate found (search only). |
+| `az-tempe-town-lake` | Tempe Town Lake water quality / E. coli | unreachable | inferred | monitoring | Not reached in the time box; lead from the task prompt only. |
