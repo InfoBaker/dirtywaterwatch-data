@@ -2912,6 +2912,28 @@ HAND: list[dict] = [
               "area water polygon the Census names 'Richardson Bay', which holds that point. The Census draws it as "
               "its own polygon, apart from its San Francisco Bay polygons; openboatlaunch's san-francisco-bay-ca "
               "outline, whose bounding box reaches 122.507 W, may also cover it.")),
+    # Alabama (final audit 2026-11-07 P2-2 to P2-4): service "hr", USGS NHD high-resolution flowlines by GNIS id, each
+    # found by name within a box around ADEM's report points (read 2026-11-07)
+    dict(name="Black Creek", state="AL", kind="stream", source="nhd", service="hr", gnis_id="114418",
+         why="Jefferson County's SSO reports on ADEM's layer (2018 to 2023) name Black Creek at points in west "
+             "Birmingham, 5.5 to 9.1 km from the Black Creek of Fultondale and Tarrant (GNIS 114413, the only Black "
+             "Creek record in Jefferson County) and within 2 km of another Black Creek, GNIS 114418 (8.6 km of USGS NHD "
+             "high-resolution flowlines), which the medium-resolution network the automatic pass reads does not name."),
+    dict(name="Eslava Creek", state="AL", kind="stream", source="nhd", service="hr", gnis_id="118029",
+         why="MAWSS's SSO reports on ADEM's layer name Eslava Creek at points in Mobile nearer the Eslava Creek of GNIS "
+             "118029 (4.9 km of USGS NHD high-resolution flowlines; one report 9 m from it) than the record of GNIS "
+             "118028, the only Eslava Creek record before."),
+    dict(name="Cypress Creek", state="AL", kind="stream", source="nhd", service="hr", gnis_id="159478",
+         why="The City of Tuscaloosa's SSO reports on ADEM's layer name 'UT to Cypress Creek' (83 reports) at points in "
+             "Tuscaloosa; the only Cypress Creek record in Alabama is Florence's (GNIS 1306249), 179 km away. Tuscaloosa's "
+             "Cypress Creek is GNIS 159478 (16.6 km of USGS NHD high-resolution flowlines south of the city)."),
+    dict(name="Big Wills Creek", state="AL", kind="stream", source="nhd", service="hr", gnis_id="150110", supersede=True,
+         near=(-86.0898, 34.0231),            # SSO-00215092 (Attalla, 2026-11-05): openboatlaunch's record has no outline
+         why="ADEM's SSO reports name Big Wills Creek at Attalla (City of Attalla, AL0057657; the report of 2026-11-05 "
+             "among them), but the record built from the NHDPlus V2.1 network had 9.6 km of fragments of GNIS 150110 that "
+             "miss Attalla. The USGS NHD high-resolution flowlines carry the whole creek under that GNIS id (38.7 km in "
+             "the box around Attalla alone), from Valley Head through Fort Payne to the Coosa River at Gadsden; this "
+             "record replaces the fragmentary one."),
 ]
 
 

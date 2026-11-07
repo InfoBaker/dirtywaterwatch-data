@@ -1,0 +1,213 @@
+{
+"black-creek-fultondale-al": {
+"slug": "black-creek-fultondale-al",
+"name": "Black Creek",
+"kind": "stream",
+"state": "AL",
+"towns": [
+"Birmingham",
+"Fultondale",
+"Tarrant"
+],
+"bbox": [
+-86.85389,
+33.60611,
+-86.77442,
+33.62203
+],
+"aliases": [],
+"geometry": {
+"type": "LineString",
+"coordinates": [
+[
+-86.77442,
+33.61963
+],
+[
+-86.78204,
+33.61119
+],
+[
+-86.79454,
+33.62098
+],
+[
+-86.81635,
+33.61377
+],
+[
+-86.82281,
+33.61987
+],
+[
+-86.8397,
+33.62201
+],
+[
+-86.8425,
+33.61172
+],
+[
+-86.85082,
+33.6104
+],
+[
+-86.85389,
+33.60611
+]
+]
+}
+},
+"black-creek-birmingham-al": {
+"slug": "black-creek-birmingham-al",
+"name": "Black Creek",
+"kind": "stream",
+"state": "AL",
+"towns": [
+"Birmingham",
+"Forestdale"
+],
+"bbox": [
+-86.9109,
+33.53612,
+-86.84175,
+33.55544
+],
+"aliases": [],
+"geometry": {
+"type": "LineString",
+"coordinates": [
+[
+-86.84175,
+33.55544
+],
+[
+-86.84619,
+33.55217
+],
+[
+-86.85294,
+33.55414
+],
+[
+-86.86925,
+33.54894
+],
+[
+-86.89238,
+33.5509
+],
+[
+-86.90225,
+33.54277
+],
+[
+-86.90736,
+33.54218
+],
+[
+-86.9109,
+33.53612
+]
+]
+}
+},
+"cowan-creek-al": {
+"slug": "cowan-creek-al",
+"name": "Cowan Creek",
+"kind": "stream",
+"state": "AL",
+"towns": [
+"Ferguson"
+],
+"bbox": [
+-85.59584,
+34.04138,
+-85.54105,
+34.15841
+],
+"aliases": []
+},
+"house-creek-al": {
+"slug": "house-creek-al",
+"name": "House Creek",
+"kind": "river",
+"state": "AL",
+"towns": [
+"White Hall"
+],
+"bbox": [
+-86.71385,
+32.34529,
+-86.70218,
+32.35784
+],
+"aliases": []
+},
+"eslava-creek-al": {
+"slug": "eslava-creek-al",
+"name": "Eslava Creek",
+"kind": "stream",
+"state": "AL",
+"towns": [
+"Mobile"
+],
+"bbox": [
+-88.11302,
+30.6415,
+-88.09282,
+30.673
+],
+"aliases": [],
+"geometry": {
+"type": "LineString",
+"coordinates": [
+[
+-88.11302,
+30.673
+],
+[
+-88.09441,
+30.66788
+],
+[
+-88.09673,
+30.6415
+]
+]
+}
+},
+"eslava-creek-mobile-al": {
+"slug": "eslava-creek-mobile-al",
+"name": "Eslava Creek",
+"kind": "stream",
+"state": "AL",
+"towns": [
+"Mobile"
+],
+"bbox": [
+-88.163,
+30.66193,
+-88.13177,
+30.68024
+],
+"aliases": [],
+"geometry": {
+"type": "LineString",
+"coordinates": [
+[
+-88.163,
+30.67917
+],
+[
+-88.13311,
+30.67846
+],
+[
+-88.13177,
+30.66193
+]
+]
+}
+}
+}
