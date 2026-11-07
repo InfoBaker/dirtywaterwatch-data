@@ -1,4 +1,7 @@
 {
+ "abiquiu-lake-nm": [
+  "Abiquiu Reservoir"
+ ],
  "allatoona-lake-ga": [
   "Lake Allatoona",
   "Allatoona Reservoir"
@@ -95,6 +98,9 @@
   "J Strom Thurmond Reservoir",
   "Lake Thurmond"
  ],
+ "conchas-lake-nm": [
+  "Conchas Reservoir"
+ ],
  "coosa-river-ga": [
   "COOSA RV"
  ],
@@ -149,6 +155,9 @@
  "jones-falls-md": [
   "Jones Fall"
  ],
+ "lake-avalon-nm": [
+  "Avalon Lake"
+ ],
  "lake-blue-ridge-ga": [
   "Blue Ridge Lake",
   "Blue Ridge Reservoir"
@@ -164,6 +173,9 @@
  ],
  "lake-lawne-fl": [
   "Lawne Lake"
+ ],
+ "lake-sumner-nm": [
+  "Sumner Lake"
  ],
  "lake-tobesofkee-ga": [
   "Lake Tobesofke"
@@ -202,6 +214,9 @@
  ],
  "naugatuck-river-ct": [
   "Naugatuct River"
+ ],
+ "navajo-lake-nm": [
+  "Navajo Reservoir"
  ],
  "new-haven-harbor-ct": [
   "Newhaven Harbor"
@@ -318,6 +333,9 @@
  ],
  "split-rock-creek-sd": [
   "Splitrock Creek"
+ ],
+ "stubblefield-reservoir-nm": [
+  "Stubblefield Lake"
  ],
  "sugar-creek-ga": [
   "Sugar Crek"
