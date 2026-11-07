@@ -280,7 +280,7 @@
    "slug_hint": "kuapa-pond-oahu-hi",
    "reports": 3,
    "towns": [
-    "Urban Honolulu",
+    "East Honolulu",
     "Hawaii Kai"
    ],
    "towns_basis": "the nearest Census places, by hand from the water's known place",
@@ -305,7 +305,7 @@
    "slug_hint": "maunalua-bay-oahu-hi",
    "reports": 3,
    "towns": [
-    "Urban Honolulu"
+    "East Honolulu"
    ],
    "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
@@ -614,7 +614,7 @@
    "slug_hint": "wailupe-stream-oahu-hi",
    "reports": 2,
    "towns": [
-    "Urban Honolulu"
+    "East Honolulu"
    ],
    "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
