@@ -135268,19 +135268,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039849180",
    "lat": 44.386,
    "lon": -103.713028,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "whitewood-creek-sd",
+   "water_name": "Whitewood Creek",
+   "water_kind": "stream",
+   "distance_m": 113,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Whitewood Creek' in SD; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Whitewood Creek' in SD; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Whitewood Creek' by name; Whitewood Creek (whitewood-creek-sd, NHDPlus V2.1 record), 113 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "SD0027481",
@@ -135309,9 +135308,9 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
-   "no_water_reason": "no openboatlaunch water named 'Gold Run Creek' in SD; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Gold Run Creek' in SD; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Whitewood Creek, not 'Gold Run Creek'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: City Creek, Deadwood Creek, West Strawberry Creek, Whitewood Creek); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Whitewood Creek, not 'Gold Run Creek'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: City Creek, Deadwood Creek, West Strawberry Creek, Whitewood Creek); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "SD0027481",
@@ -135339,9 +135338,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Gold Run Creek' in SD; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Gold Run Creek' in SD; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Whitewood Creek, not 'Gold Run Creek'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: City Creek, Deadwood Creek, West Strawberry Creek, Whitewood Creek); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Whitewood Creek, not 'Gold Run Creek'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: City Creek, Deadwood Creek, West Strawberry Creek, Whitewood Creek); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "TN0020575",
