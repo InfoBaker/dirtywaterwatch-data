@@ -28,7 +28,7 @@ def _build(tables=None):
 def test_mississippi_is_read_in_central_time_with_the_scrub_and_its_own_points():
     assert "MS" in E.STATES and E.STATE_TZ["MS"] == "America/Chicago" and "MS" in E.FREE_TEXT_STATES
     assert "MS" not in E.REPEATED_POINT_STATES      # a manhole that overflows each storm repeats its own point
-    assert set(E.STATE_WATER_ALIASES) == {"MS"}
+    assert set(E.STATE_WATER_ALIASES) == {"MS", "AK"}     # AK: Anchorage's Birch Lake (Alaska final audit 2026-11-07)
 
 
 def test_kept_and_dropped_rows_by_reason():

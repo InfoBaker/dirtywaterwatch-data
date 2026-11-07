@@ -2795,6 +2795,16 @@ HAND: list[dict] = [
               "of the channel and NHDPlus V2.1 no Alaska data; this record is the Census TIGER/Line area water polygon "
               "the Census names 'Gastineau Chnnl' (MTFCC H2051), which holds the plant's outfall and lies 52 to 143 m "
               "from the three CSO outfalls' points. The USGS geographic names service gave no feature of the name.")),
+    dict(name="Birch Lake", state="AK", kind="lake", source="census", service="tiger",
+         oids=["11050902166"], aliases=["Birch Lake (Anchorage)"],
+         near=(-149.936183, 61.145893),
+         why=("The Anchorage Water and Wastewater Utility's overflow report AK0022551:43:1 (EPA's sewer overflow table, "
+              "2026-10-26) gives Birch Lake as the receiving water, at 61.145893 N 149.936183 W in Anchorage. The only "
+              "Alaska record of the name (openboatlaunch's birch-lake-ak) is the Birch Lake near Delta Junction, 505 "
+              "km away; NHDPlus V2.1 has no Alaska data and the NHD high-resolution waterbody there is unnamed. This "
+              "record is the Census TIGER/Line area water polygon the Census names 'Birch Lk' (MTFCC H2030, 0.02 "
+              "km2), 13 m from the report's point; the report's name is read as it by the eRule module's Alaska "
+              "alias (STATE_WATER_ALIASES, within 3.5 km of the polygon).")),
     # 2026-11-06 (Illinois's go-live gates, docs/checklists/2026-11-06-il-gates.md in the site repository): NHDPlus V2.1
     # gives the canal's GNIS id to 69 km of flowlines, 26 km of them the South Branch and North Branch of the Chicago
     # River and the North Shore Channel (each a record of its own); the record keeps the canal from its head at the
