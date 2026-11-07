@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1296 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1316 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -32,8 +32,10 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
+| az | 3 | 1 | 3 | 3 | 1 | 11 |
+| sd | 3 | 1 | 5 | 0 | 0 | 9 |
 | ms | 5 | 0 | 2 | 1 | 0 | 8 |
-| **all** | **458** | **225** | **366** | **184** | **63** | **1296** |
+| **all** | **464** | **227** | **374** | **187** | **64** | **1316** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1432,6 +1434,36 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-norc-river-reversal-analysis` | NORC/UChicago "rain" project: parse MWRD river reversals and CSOs | rejected | search_only | prior_art | Prior art; one-off analysis. |
 | `il-evanston-cso-plan` | City of Evanston CSO Public Notification Plan | unreachable | fetched | law | Suburban CSO plans point to MWRD alerts; this one moved. |
 | `il-mwrd-tarp-levels` | MWRD TARP reservoir levels map service | unreachable | fetched | hydrography | Token-protected; reservoir fullness would be a leading indicator of CSOs. |
+
+## az: Arizona (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `az-adeq-wbid-layers` | ADEQ waterbody identifier (WBID) layers, streams and lakes (ArcGIS Online) | used | fetched | hydrography | Names the ADEQ waterbody identifiers Arizona permittees give as receiving waters in EPA's overflow reports (13 identifiers in the 2026-11-04 extract; EPA's ATTAINS holds 9 of them). |
+| `az-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 52 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 285 dropped (257 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon). |
+| `az-law-r18-9-c305` | A.A.C. R18-9-C305, 2.05 General Permit: CMOM of a sewage collection system (reporting and public notice signs) | used | fetched | law | Fetched text: 24-hour report to ADEQ for releases that are an imminent and substantial threat; signs only after more than three reportable releases at one location in 12 months. |
+| `az-adeq-reported-habs` | ADEQ AZHABs "Currently Reported" harmful algal bloom list | candidate | search_only | advisories | Only state HAB list; HTML behind a bot wall; testing is voluntary for lake managers. |
+| `az-adeq-sso-reporting` | ADEQ SSO and bypass reporting (Spill Line, myDEQ five-day report, SSO Report Form) | watch | search_only | law | Reporting channel to the regulator only; no public output found besides EPA SOBE. |
+| `az-mohave-county-health-habs` | Mohave County Department of Public Health HAB warnings (Lake Havasu) | watch | search_only | advisories | County news posts; scattered. |
+| `az-nps-lake-mead-habs` | NPS Lake Mead NRA harmful algal bloom page (Lake Mead, Lake Mohave) | watch | search_only | advisories | Shared AZ/NV waters; advisory HTML. |
+| `az-echo-dmr` | ECHO DMR monthly counts | rejected | inferred | permits | No CSO permits in Arizona; SOBE is the better federal source. |
+| `az-pima-rwrd` | Pima County Regional Wastewater Reclamation Department (Tucson) overflow information | rejected | search_only | events | No public overflow notices found. |
+| `az-swim-guide` | Swim Guide affiliates in Arizona | rejected | search_only | monitoring | No Arizona affiliate found (search only). |
+| `az-tempe-town-lake` | Tempe Town Lake water quality / E. coli | unreachable | inferred | monitoring | Not reached in the time box; lead from the task prompt only. |
+
+## sd: South Dakota (9)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `sd-danr-ereporting` | SD DANR electronic reporting page (NetDMR, eRule) | used | search_only | law | Lists Sewer Overflow/Bypass Event Reports under the eRule; SD permittees file through EPA's NeT, which is why SOBE carries SD. |
+| `sd-danr-hab-advisories` | SD DANR HABs Advisories layers (yearly) and HAB web page | used | fetched | advisories | DANR's HAB page now opens with a box "Harmful Algal Bloom Advisories 2026" listing each lake under advisory with its county and a date (five lakes on 2026-11-07: Twin Lakes, Spink County, 6/15/2026; Wall Lake, Minnehaha County, 8/11/2026; Clear Lake, Hamlin County, 8/18/2026; Lake Poinsett, Hamlin County, 9/15/2026; Lake Albert, Kingsbury County, 9/15/2026); "Advisories expire at the end of the calendar year". Read by the sd-danr-hab-advisories ingester. The yearly advisory map layers stop at 2024 (2024: 3 rows, e.g. Brant Lake, microcystin 9.46 above 8 ug/L), and DANR warns its map 'does not show current conditions'. |
+| `sd-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), SD rows | used | fetched | events | The only dated, statewide, machine-readable overflow feed for South Dakota, read by the national eRule ingester (echo-sewer-overflow) with South Dakota in its states. 2026-11-04 extract: 208 current SD rows from 56 permits (SSO 167, BYP 40, CSO 1), starts 2023-04-20 to 2026-11-02; every row with a point, 186 with a volume, 74 with a receiving-water row. 57 kept from 30 permits; 151 dropped (97 SSOs naming no water and no water impact, 34 building backups, 20 naming no water in words). Received a median 5 days after the start (10% the same day, 10% 57 days or more). Times read in the zone of the event's own point (Mountain in the fifteen counties 49 CFR 71.7(b) puts west of the boundary and in western Stanley County: 71 rows; Central elsewhere: 137). |
+| `sd-danr-hab-2026-samples` | SD DANR 2026 Shoreline Microcystin Samples (ArcGIS) | candidate | fetched | monitoring | Public layer, 21 lake stations in 2026, wide format (Date_1..Date_5, Microcystin_1..5); e.g. Clear Lake 14.405 on 08/18/2026. One new service per year. |
+| `sd-beach-ecoli` | State park beach E. coli monitoring | watch | search_only | monitoring | No public South Dakota beach bacteria program or results found (search only). |
+| `sd-danr-spills-nr42` | SD DANR spill reports (NR42 Interactive Map, Tanks and Spills database) | watch | fetched | events | A remediation case list (case number, status, dates reported and closed, site, lat/long, material, amount, spill category PETROLEUM/CHEMICAL/AGRI CHEM/OIL/COMBINED/OTHER). The reporting page covers petroleum and chemicals and does not mention sewage; municipal overflows go through the permit route (SOBE), so this is not an SSO source. |
+| `sd-echo-dmr-cso` | ECHO DMR data for Lead CSO permits | watch | fetched | permits | SD0027481 outfall 004 and SD0020796 outfall 003 report flow rate and rainfall duration but no 'number of events' parameter. |
+| `sd-friends-big-sioux` | Friends of the Big Sioux River water quality reports | watch | search_only | monitoring | Summer bacteria and flood-impact reports (2024 report covered Sioux Falls and Vermillion discharges). Not fetched. |
+| `sd-gfp-harmful-algae` | SD Game, Fish and Parks harmful algae page | watch | search_only | advisories | Education and reporting; no list or E. coli beach data found. |
 
 ## ms: Mississippi (8)
 

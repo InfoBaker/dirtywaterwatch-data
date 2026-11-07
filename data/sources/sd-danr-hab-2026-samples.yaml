@@ -1,0 +1,26 @@
+id: "sd-danr-hab-2026-samples"
+name: "SD DANR 2026 Shoreline Microcystin Samples (ArcGIS)"
+url: "https://services1.arcgis.com/PwrabBhZHUggYYSp/arcgis/rest/services/2026_Shoreline_Microcystin_Samples_View/FeatureServer/0"
+homepage: "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx"
+kind: "arcgis"
+level: "state"
+# Notes (research/sd, status candidate, verified fetched, checked 2026-11-03): Public layer, 21 lake
+#   stations in 2026, wide format (Date_1..Date_5, Microcystin_1..5); e.g. Clear Lake 14.405 on
+#   08/18/2026. One new service per year.
+# History: 2021-2026 as separate yearly services
+# Not ingested (2026-11-07): the layer holds one row per lake station with up to five sample dates and results in
+#   numbered columns (Date_1 to Date_5, Microcystin_1 to Microcystin_5; dates written two ways), not one row per
+#   sample or per advisory, so the generic ArcGIS reader's one-row-one-record map does not fit; a sample result is
+#   not an advisory either. 21 stations on 2026-11-07; a new service each season.
+cadence: "monthly samples in season"
+license: "none stated"
+attribution: "South Dakota DANR, Water Protection Program"
+enabled: true
+role: "monitoring"
+event_types: ["hab_advisory"]
+states: ["SD"]
+access: ["arcgis"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"

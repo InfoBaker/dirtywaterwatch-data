@@ -256,7 +256,7 @@ def test_main_reads_saved_files_and_writes_the_events_file(tmp_path, monkeypatch
 # ---------------------------------------------------------------- the EPA tables in Georgia
 
 def test_georgia_is_read_from_the_epa_tables():
-    assert "GA" in E.STATES and E.REPEATED_POINT_STATES == {"GA"}
+    assert "GA" in E.STATES and "GA" in E.REPEATED_POINT_STATES and "GA" not in E.REPEATED_POINT_ALL_REPORTS
 
 
 def test_did_not_enter_state_waters_is_no_water():
