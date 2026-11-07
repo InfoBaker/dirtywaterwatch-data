@@ -330,9 +330,16 @@ def test_missing_water_names_are_normalised_and_the_bloom_lakes_carry_their_coun
     assert m.norm("Unnamed") is None
     doc = json.loads((ROOT / "research" / "sd" / "receiving-waters-missing.json").read_text())
     lakes = {r["name"]: r.get("counties") for r in doc["rows"] if "sd-danr-hab-advisories" in r["sources"]}
-    assert lakes == {"Clear Lake": ["Hamlin County"], "Lake Albert": ["Kingsbury County"],
-                     "Lake Poinsett": ["Hamlin County"], "Twin Lakes": ["Spink County"],
-                     "Wall Lake": ["Minnehaha County"]}
+    # the five bloom lakes of 2026 with their counties; the names pass (batch/sd-2026-11-07) built some of them as
+    # records, so the file holds only the ones still missing, each still carrying its county
+    expected = {"Clear Lake": ["Hamlin County"], "Lake Albert": ["Kingsbury County"],
+                "Lake Poinsett": ["Hamlin County"], "Twin Lakes": ["Spink County"], "Wall Lake": ["Minnehaha County"]}
+    assert lakes and all(lakes[k] == v for k, v in expected.items() if k in lakes)
+    assert set(lakes) <= set(expected)
+    # a lake no longer listed has a record: openboatlaunch's extract or the NHD build
+    built = {w["name"] for f in ("waters-sd.json", "waters-nhd.json")
+             for w in json.load(open(ROOT / "data" / f))["waters"] if w.get("state") == "SD"}
+    assert all(name in built for name in expected if name not in lakes)
     assert all(r["name"] != "Unnamed" for r in doc["rows"])
 
 
