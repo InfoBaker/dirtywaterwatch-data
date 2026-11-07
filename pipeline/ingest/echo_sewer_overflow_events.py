@@ -49,7 +49,8 @@ Which events are kept (one record per event that reached a water)
        CSO, regulator or outfall).
     6. DROP the rest: SSOs, and CSO-type overflows from manholes or broken pipes, with no receiving
        water and only land or no-observable impacts.
-  Dropped events go to data/build/echo-sewer-overflow-dropped.json with the reason, for review.
+  Dropped events go to data/build/echo-sewer-overflow-dropped.json with the reason, for review (and with the start,
+  end and receipt date as given, which ingest/ga_epd_spills.py reads to give a Georgia dry-land spill its end).
 
 Mapping
   event_type from the types table: CSO -> cso, SSO -> sso, BYP -> bypass (first by sequence; a
@@ -1034,6 +1035,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                             "type": t_codes, "structure": ev.get("sewer_overflow_structure_type_desc"),
                             "impacts": [i["sewer_overflow_bypass_impact_desc"] for i in i_rows],
                             "receiving_water": w_names, "start": ev.get("sewer_overflow_bypass_start_datetime"),
+                            "end": ev.get("sewer_overflow_bypass_end_datetime") or None,
+                            "received": ev.get("program_report_received_date") or None,
                             "description": ev.get("sewer_overflow_bypass_description_text")})
             continue
 
