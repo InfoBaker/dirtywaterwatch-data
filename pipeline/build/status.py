@@ -320,6 +320,8 @@ RULES = {
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
     "advisory_unconfirmed": ("yellow", "Advisory with no reported status, issued less than 7 days ago"),
+    # data/rules.json unresolved.sample_caution: a sample result the agency labels a risk but issues no advisory for
+    "sample_caution": ("yellow", "Elevated result in the agency's sample; no advisory issued: the site's caution"),
     # build/rain_likely.py: radar rainfall over the permittee's threshold, no notice in the last 24 h
     # ("Discharge possible: ..." where only this site's default amount applies: rain_likely.label_for, per interval)
     "rain_likely": ("yellow", "Discharge likely: heavy rain, no report received"),
@@ -2229,6 +2231,16 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
 
     red = red_rule_for(ev, state, rules)
     yellow = yellow_rule_for(ev, water, rules)
+    sc = (rules.get("unresolved") or {}).get("sample_caution") or {}
+    if ev.get("source_id") in (sc.get("sources") or []) and sc.get("hours") \
+            and (ev.get("raw") or {}).get(sc.get("flag") or "_agency_label_only"):
+        # a sample the agency labels a risk with no advisory (Nebraska's elevated E. coli): the site's caution from
+        # the sample, never the authority's advisory rule (review 2026-11-07 P2-2)
+        iv = _iv(ev, start, start + timedelta(hours=float(sc["hours"])), "sample_caution", None, yellow)
+        iv["rule_applied"] = {"rule": "unresolved.sample_caution", "hours": float(sc["hours"]),
+                              "label": (ev.get("raw") or {}).get("_agency_label"),
+                              "rationale": sc.get("rationale"), "source": "data/rules.json"}
+        return [iv]
     if et in ADVISORY_TYPES or st in ("advisory_active", "advisory_lifted"):
         rule = "rain_advisory" if et == "rain_advisory" else "advisory_active"
         red = {"rule": "red.authority_advisory", "hours": None, "clock": None, "source": ev.get("source_url"),

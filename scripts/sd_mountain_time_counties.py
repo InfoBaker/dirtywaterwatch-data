@@ -98,7 +98,9 @@ def build(doc: dict, fetched_at: str, zones: dict | None = None) -> dict:
         "counties": [row(n) for n in MOUNTAIN_COUNTIES],
         "split_counties": [dict(row(n), note="split by the boundary; the Fort Pierre corner keeps Central time, the rest "
                                              "is in the Mountain zone (parts cut by the U.S. DOT time-zone layer)",
-                                **(split(by[n], zones) if zones else {})) for n in SPLIT_COUNTIES],
+                                **(split(by[n], zones) if zones else {}),
+                                # the name of the Central part, read by the eRule module's zone note
+                                central_label="Fort Pierre corner") for n in SPLIT_COUNTIES],
     }
 
 

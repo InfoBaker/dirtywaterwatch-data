@@ -61,6 +61,8 @@ HOMEPAGES = {
     "nc-wnc-rec-monitoring": "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-monitoring-program",
     "sd-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "sd-danr-hab-2026-samples": "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx",
+    "ne-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+    "ne-dwee-beachwatch": "https://dwee.nebraska.gov/node/4996",
 }
 
 

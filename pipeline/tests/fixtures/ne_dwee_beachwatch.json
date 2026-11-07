@@ -1,0 +1,126 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "geometryType": "esriGeometryPoint",
+ "fields": [],
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 86,
+    "StationID": "LBB1ROCKFD04",
+    "StationName": "Rockford Lake at Beach",
+    "Latitude": 40.223196,
+    "Longitude": -96.586409,
+    "SampleYear": "2026",
+    "WeekNumber": "22",
+    "ActivityStartDate": 1780290000000,
+    "EColi": "24",
+    "Microcystin": ">RL (35)",
+    "HealthAlert": "YES",
+    "EColiRisk": "",
+    "HealthDescription": "This beach is under health alert"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 87,
+    "StationID": "LBB1ROCKFD04",
+    "StationName": "Rockford Lake at Beach",
+    "Latitude": 40.223196,
+    "Longitude": -96.586409,
+    "SampleYear": "2026",
+    "WeekNumber": "23",
+    "ActivityStartDate": 1780894800000,
+    "EColi": "22",
+    "Microcystin": "13.78",
+    "HealthAlert": "YES",
+    "EColiRisk": "",
+    "HealthDescription": "This beach is under health alert"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 402,
+    "StationID": "LNE2IRONHT04",
+    "StationName": "Iron Horse Trail Lake at Beach",
+    "Latitude": 40.047597,
+    "Longitude": -96.098026,
+    "SampleYear": "2026",
+    "WeekNumber": "23",
+    "ActivityStartDate": 1780894800000,
+    "EColi": "921",
+    "Microcystin": "15.78",
+    "HealthAlert": "YES",
+    "EColiRisk": "Elevated health risk for E. coli",
+    "HealthDescription": "This beach is under health alert"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 23,
+    "StationID": "LLP2BRNOAK09",
+    "StationName": "Branched Oak Lake at Liebers Point Beach",
+    "Latitude": 40.972167,
+    "Longitude": -96.87094,
+    "SampleYear": "2026",
+    "WeekNumber": "21",
+    "ActivityStartDate": 1779771600000,
+    "EColi": "488",
+    "Microcystin": "<RL (.15)",
+    "HealthAlert": "NO",
+    "EColiRisk": "Elevated health risk for E. coli",
+    "HealthDescription": "This beach is not under health alert"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 30,
+    "StationID": "LMP2FTKRN104",
+    "StationName": "Ft. Kearny Lake No. 7 (SRA) at Beach",
+    "Latitude": 40.653559,
+    "Longitude": -98.987657,
+    "SampleYear": "2026",
+    "WeekNumber": "21",
+    "ActivityStartDate": 1779771600000,
+    "EColi": "980",
+    "Microcystin": "No Data",
+    "HealthAlert": "NO",
+    "EColiRisk": "Elevated health risk for E. coli",
+    "HealthDescription": "This beach is not under health alert"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1,
+    "StationID": "GPTLKBACT1",
+    "StationName": "Lewis and Clark Reservoir at Weigand Beach",
+    "Latitude": 42.837263,
+    "Longitude": -97.582382,
+    "SampleYear": "2026",
+    "WeekNumber": "21",
+    "ActivityStartDate": 1779771600000,
+    "EColi": "22",
+    "Microcystin": "<RL (.15)",
+    "HealthAlert": "NO",
+    "EColiRisk": "",
+    "HealthDescription": "This beach is not under health alert"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 88,
+    "StationID": "LBB1ROCKFD04",
+    "StationName": "Rockford Lake at Beach",
+    "Latitude": 40.223196,
+    "Longitude": -96.586409,
+    "SampleYear": "2026",
+    "WeekNumber": "24",
+    "ActivityStartDate": 1781499600000,
+    "EColi": "50",
+    "Microcystin": "1.48",
+    "HealthAlert": "NO",
+    "EColiRisk": "",
+    "HealthDescription": "This beach is not under health alert"
+   }
+  }
+ ]
+}
