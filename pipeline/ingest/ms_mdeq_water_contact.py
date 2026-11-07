@@ -35,6 +35,16 @@ Record rules
     downstream end is named only (raw.stretch). It is lifted like any other.
   - History: the feed holds ten releases, so the previous run's records are carried and updated; a record is never
     dropped because its release left the feed.
+  - The water (2026-11-07 final audit): an advisory names its water, so it colours that water, not only a point.
+    raw.advisory_extent is "named_water" (build/status.py then puts its interval on the water it is placed on, a
+    river included, and keeps its marker where the water is not filled); raw.advisory_noun "Water contact advisory"
+    is the label;
+    raw.stretch gives the ends the release names ("from the culvert at ... to its confluence with the Pearl River"),
+    the release's own point at the upstream end. Placement is by the water's name (waterbody_text), so a water whose
+    record does not exist yet (Trahon Creek before the report-names pass) is tied when the record appears; the Pearl
+    River's standing record also carries its slug (pearl-river-ms, the one Mississippi record of that name). A
+    modeled reach from the upstream end is not built: the reach builder traces discharges, and the downstream end
+    (the Byram Swinging Bridge) has no public point to cut it at. These fields are refreshed on carried records.
 
 Privacy: the feed's dc:creator (an MDEQ staff name) is never read; only titles, links, dates and the release text are.
 Run from pipeline/:  python -m ingest.ms_mdeq_water_contact [--file feed.xml [--pages DIR]]
@@ -61,6 +71,11 @@ AUTHORITY = "Mississippi Department of Environmental Quality (water contact advi
 ISSUE = re.compile(r"^(?:MDEQ\s+)?(?:Issues?\s+)?(?:a\s+)?Water Contact Advisor(?:y|ies)\s+(?:Issued\s+)?for\s+(.+?)\s*$", re.I)
 LIFT = re.compile(r"\bLift(?:s|ed)?\s+(?:the\s+)?Water Contact Advisor(?:y|ies)\s+(?:for|on)\s+(.+?)\s*$", re.I)
 COORD = re.compile(r"\((\d{2}\.\d+)\s*N,\s*(\d{2,3}\.\d+)\s*W\)")
+# "The advisory covers ... from the culvert at the Interstate 55 frontage road (32.194572 N, 90.250330 W) to its
+# confluence with the Pearl River."
+SPAN = re.compile(r"\bcovers\b.*?\bfrom\s+(?:the\s+)?(.+?)\s+to\s+(?:its\s+|the\s+)?(.+?)\.(?:\s|$)", re.I)
+NOUN = "Water contact advisory"
+EXTENT = "named_water"
 STANDING = [{
     "key": "pearl-river-hanging-moss-creek-to-byram-swinging-bridge",
     "waters": ["Pearl River"],
@@ -72,6 +87,7 @@ STANDING = [{
     "advice": ("MDEQ recommends that people avoid water contact recreational activities such as swimming, wading and "
                "fishing in these waters."),
     "point": (32.351817, -90.112036),
+    "water_slugs": ["pearl-river-ms"],     # data/waters-ms.json: the one Mississippi record named Pearl River
     "stretch": {"from": {"name": "mouth of Hanging Moss Creek", "lat": 32.351817, "lon": -90.112036,
                          "source": "USGS GNIS 670883, Streams (Mouth)"},
                 "to": {"name": "Byram Swinging Bridge", "lat": None, "lon": None,
@@ -135,6 +151,33 @@ def release_iso(date: str) -> str | None:
         return None
 
 
+def stretch_of(paras: list[str] | None) -> dict | None:
+    """The ends the release names ('covers ... from X (point) to Y'), the upstream end with the release's point."""
+    for p in paras or []:
+        m = SPAN.search(p)
+        if m:
+            c = COORD.search(m.group(1))
+            frm = re.sub(r"\s*\([^)]*\)", "", m.group(1)).strip(" ,")
+            return {"from": {"name": frm, "lat": float(c.group(1)) if c else None,
+                             "lon": -float(c.group(2)) if c else None, "source": "the release"},
+                    "to": {"name": m.group(2).strip(" ,"), "lat": None, "lon": None, "source": "the release"}}
+    return None
+
+
+def water_fields(r: dict, s: dict | None = None) -> dict:
+    """Mark a record as colouring the water it names (refreshed on carried records too)."""
+    r["raw"]["advisory_extent"], r["raw"]["advisory_noun"] = EXTENT, NOUN
+    if s is not None:
+        r["raw"]["stretch"] = s["stretch"]
+        if s.get("water_slugs"):
+            r["water_slugs"], r["water_match"] = list(s["water_slugs"]), "name"
+    elif not r["raw"].get("stretch"):
+        sp = stretch_of(r["raw"].get("release_text"))
+        if sp:
+            r["raw"]["stretch"] = sp
+    return r
+
+
 def issue_record(it: dict, waters: list[str], paras: list[str] | None) -> dict:
     text = " ".join(paras or [])
     c = COORD.search(text)
@@ -174,7 +217,7 @@ def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) ->
     stats["releases"] = len(its)
     for s in STANDING:
         r = standing_record(s)
-        recs.setdefault(r["event_id"], r)
+        water_fields(recs.setdefault(r["event_id"], r), s)
     lifts = []
     for it in sorted(its, key=lambda x: release_iso(x["date"]) or ""):
         k, waters = kind(it["title"])
@@ -208,7 +251,10 @@ def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) ->
                 r["status"], r["ended_at"] = "advisory_lifted", day
                 r["raw"]["lifted_by"] = {"title": it["title"], "link": it["link"], "date": day}
                 stats["lifted"] += 1
+    standing = {s["key"] for s in STANDING}
     for r in recs.values():
+        if r["source_record_id"] not in standing:
+            water_fields(r)
         if r["status"] == "advisory_active":
             r["source_updated_at"] = at
             r["raw"]["confirmed_by"] = (f"MDEQ's news-release feed read at {at}: no release lifting this advisory among "
