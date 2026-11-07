@@ -1,0 +1,5592 @@
+{
+ "state": "SD",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 224,
+ "waters": [
+  {
+   "slug": "amsden-lake-sd",
+   "name": "Amsden Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Groton"
+   ],
+   "bbox": [
+    -97.97805,
+    45.35214,
+    -97.95576,
+    45.36218
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.931,
+   "launches": [
+    "amsden-dam-lua-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020.",
+     "date": "2020-08-02",
+     "years": [
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "anderson-slough-sd",
+   "name": "Anderson Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "anderson-slough-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "angostura-reservoir-sd",
+   "name": "Angostura Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Angostura",
+    "Hot Springs"
+   ],
+   "bbox": [
+    -103.46143,
+    43.27285,
+    -103.37127,
+    43.34358
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.712,
+   "launches": [
+    "angostura-ra-horsehead-sd",
+    "angostura-ra-north-ramp-sd",
+    "angostura-ra-south-ramp-sd",
+    "angostura-ra-marina-sd",
+    "baileys-lua-sd",
+    "hat-creek-low-water-ramp-sd",
+    "hobie-cat-sd",
+    "sheps-canyon-lua-sd",
+    "sheps-canyon-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "antelope-lake-sd",
+   "name": "Antelope Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clark",
+    "Webster"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "antelope-lake-pwa-sd",
+    "antelope-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "baileys-lake-sd",
+   "name": "Baileys Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clark"
+   ],
+   "bbox": [
+    -97.76625,
+    44.98896,
+    -97.75245,
+    44.99753
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.731,
+   "launches": [
+    "baileys-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-butte-reservoir-sd",
+   "name": "Bear Butte Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Sturgis"
+   ],
+   "bbox": [
+    -103.45466,
+    44.45024,
+    -103.43339,
+    44.46098
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.032,
+   "launches": [
+    "bear-butte-lua-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaulieu-lake-sd",
+   "name": "Beaulieu Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Winner"
+   ],
+   "bbox": [
+    -99.81047,
+    43.30735,
+    -99.80645,
+    43.31271
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "beaulieu-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-lake-sd",
+   "name": "Beaver Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Yankton"
+   ],
+   "bbox": [
+    -97.45019,
+    43.00929,
+    -97.44308,
+    43.01788
+   ],
+   "wikidata": "Q25204338",
+   "charted": false,
+   "area_km2": 0.3,
+   "launches": [
+    "beaver-pwa-yankton-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "belle-fourche-reservoir-sd",
+   "name": "Belle Fourche Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Belle Fourche",
+    "Fruitdale"
+   ],
+   "bbox": [
+    -103.77557,
+    44.69,
+    -103.66905,
+    44.78427
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 31.328,
+   "launches": [
+    "gadens-point-sd",
+    "rocky-point-ra-east-sd",
+    "rocky-point-ra-west-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-sioux-river-sd",
+   "name": "Big Sioux River",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Baltic",
+    "Brandon",
+    "Brookings",
+    "Canton",
+    "Dell Rapids",
+    "Egan",
+    "Flandreau",
+    "Harrisburg",
+    "Hudson",
+    "Trent",
+    "Watertown"
+   ],
+   "bbox": [
+    -97.21111,
+    42.49001,
+    -96.43655,
+    45.32187
+   ],
+   "wikidata": "Q859274",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "9-mile-pwa-sd",
+    "big-sioux-river-baltic-sd",
+    "big-sioux-river-dell-rapids-sd",
+    "big-sioux-river-egan-sd",
+    "canton-city-park-kayak-ramp-sd",
+    "dell-rapids-dam-canoe-launch-sd",
+    "flandreau-sd",
+    "forsberg-city-park-kayak-launch-sd",
+    "hanten-city-park-big-sioux-portage-sd",
+    "kamp-gpa-sd",
+    "klondike-boat-ramp-sd",
+    "klondike-north-sd",
+    "klondike-south-sd",
+    "mckee-pwa-sd",
+    "north-canoe-launch-sd",
+    "oakridge-pwa-sd",
+    "riverside-city-park-small-vessel-ramp-sd",
+    "south-canoe-launch-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "big-stone-lake-sd",
+   "name": "Big Stone Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Big Stone City",
+    "Hartford Beach",
+    "Hiawatha Beach",
+    "Linden Beach",
+    "South Dakota Park"
+   ],
+   "bbox": [
+    -96.80587,
+    45.29978,
+    -96.44946,
+    45.5585
+   ],
+   "wikidata": "Q859342",
+   "charted": false,
+   "area_km2": 51.449,
+   "launches": [
+    "big-stone-hartford-beach-sp-sd",
+    "big-stone-hiawatha-waa-sd",
+    "big-stone-kasuske-s-waa-sd",
+    "big-stone-kolb-pwa-sd",
+    "big-stone-rearing-ponds-lua-sd",
+    "smith-gpa-kayak-area-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "bismark-lake-sd",
+   "name": "Bismark Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Custer"
+   ],
+   "bbox": [
+    -103.5177,
+    43.77511,
+    -103.51252,
+    43.78058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.105,
+   "launches": [
+    "bismark-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bitter-lake-sd",
+   "name": "Bitter Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Waubay",
+    "Webster"
+   ],
+   "bbox": [
+    -97.43894,
+    45.22406,
+    -97.26508,
+    45.32751
+   ],
+   "wikidata": "Q25204340",
+   "charted": false,
+   "area_km2": 70.541,
+   "launches": [
+    "bitter-east-pwa-sd",
+    "nw-bitter-kotzea-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "black-slough-sd",
+   "name": "Black Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Astoria"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "black-slough-boat-launch-sd",
+    "black-slough-boat-launch-sd-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-dog-lake-sd",
+   "name": "Blue Dog Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Waubay"
+   ],
+   "bbox": [
+    -97.32499,
+    45.34114,
+    -97.27568,
+    45.3645
+   ],
+   "wikidata": "Q24061575",
+   "charted": false,
+   "area_km2": 7.132,
+   "launches": [
+    "blue-dog-hatchery-waa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "blyth-slough-sd",
+   "name": "Blyth Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Henry"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blyth-slough-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brakke-dam-sd",
+   "name": "Brakke Dam",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Kennebec"
+   ],
+   "bbox": [
+    -99.95853,
+    43.87896,
+    -99.94122,
+    43.89604
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.459,
+   "launches": [
+    "brakke-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brant-lake-sd",
+   "name": "Brant Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Brant Lake",
+    "Brant Lake South"
+   ],
+   "bbox": [
+    -96.9761,
+    43.91094,
+    -96.93012,
+    43.93237
+   ],
+   "wikidata": "Q28912638",
+   "charted": false,
+   "area_km2": 4.467,
+   "launches": [
+    "east-brandt-pwa-sd",
+    "west-brant-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018, 2020 and 2024.",
+     "date": "2024-12-01",
+     "years": [
+      "2018",
+      "2020",
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "broadland-creek-sd",
+   "name": "Broadland Creek",
+   "kind": "stream",
+   "state": "SD",
+   "towns": [
+    "Huron"
+   ],
+   "bbox": [
+    -98.26518,
+    44.36425,
+    -98.19893,
+    44.39861
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ravine-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brush-lake-sd",
+   "name": "Brush Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Arlington"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brush-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-creek-sd",
+   "name": "Buffalo Creek",
+   "kind": "stream",
+   "state": "SD",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -96.93207,
+    43.87273,
+    -96.89743,
+    43.88063
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "buffalo-slough-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-lakes-sd",
+   "name": "Buffalo Lakes",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Agency Village",
+    "Buffalo Lake"
+   ],
+   "bbox": [
+    -97.32225,
+    45.5995,
+    -97.25225,
+    45.64175
+   ],
+   "wikidata": "Q25238268",
+   "charted": false,
+   "area_km2": 9.163,
+   "launches": [
+    "north-buffalo-pwa-sd",
+    "south-buffalo-lake-pwa-east-sd",
+    "south-buffalo-lake-pwa-west-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bullhead-lake-sd",
+   "name": "Bullhead Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Goodwin"
+   ],
+   "bbox": [
+    -96.81375,
+    44.93367,
+    -96.7955,
+    44.95625
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.05,
+   "launches": [
+    "bullhead-lake-deuel-sd"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2024) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2024-12-08"
+    }
+   ]
+  },
+  {
+   "slug": "burke-lake-sd",
+   "name": "Burke Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Burke"
+   ],
+   "bbox": [
+    -99.26358,
+    43.17336,
+    -99.25658,
+    43.17791
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.125,
+   "launches": [
+    "burke-lake-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "byre-lake-sd",
+   "name": "Byre Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Kennebec"
+   ],
+   "bbox": [
+    -99.8503,
+    43.92529,
+    -99.83173,
+    43.93144
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.499,
+   "launches": [
+    "byre-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canyon-lake-sd",
+   "name": "Canyon Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Rapid City"
+   ],
+   "bbox": [
+    -103.29477,
+    44.05698,
+    -103.28679,
+    44.06078
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.114,
+   "launches": [
+    "canyon-lake-kayak-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "center-lake-sd",
+   "name": "Center Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Custer"
+   ],
+   "bbox": [
+    -103.4191,
+    43.79886,
+    -103.41397,
+    43.80434
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.103,
+   "launches": [
+    "custer-sp-center-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chapelle-lake-sd",
+   "name": "Chapelle Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Highmore"
+   ],
+   "bbox": [
+    -99.59795,
+    44.39761,
+    -99.58881,
+    44.40621
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.145,
+   "launches": [
+    "chapelle-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cherry-lake-sd",
+   "name": "Cherry Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Bryant"
+   ],
+   "bbox": [
+    -97.53549,
+    44.53719,
+    -97.49825,
+    44.56176
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.616,
+   "launches": [
+    "cherry-lake-gpa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cheyenne-river-sd",
+   "name": "Cheyenne River",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Hot Springs"
+   ],
+   "bbox": [
+    -104.10161,
+    43.25155,
+    -100.70305,
+    44.78179
+   ],
+   "wikidata": "Q2116752",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cheyenne-canoe-access-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-clear-lake-sd",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": [
+    -97.3791,
+    45.68213,
+    -97.34006,
+    45.70685
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.298,
+   "launches": [
+    "clear-lake-lua-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "clear-lake-colton-sd",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Colton",
+    "Watertown"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clear-lake-pwa-sd",
+    "clear-lake-wwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-sd",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": [
+    -96.66951,
+    44.74561,
+    -96.64465,
+    44.76433
+   ],
+   "wikidata": "Q25204134",
+   "charted": false,
+   "area_km2": 2.282,
+   "launches": [
+    "clear-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cold-brook-reservoir-sd",
+   "name": "Cold Brook Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Hot Springs"
+   ],
+   "bbox": [
+    -103.49121,
+    43.45424,
+    -103.48424,
+    43.46088
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "coldbrook-reservoir-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "corsica-lake-sd",
+   "name": "Corsica Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Armour"
+   ],
+   "bbox": [
+    -98.29847,
+    43.40762,
+    -98.2865,
+    43.42212
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.477,
+   "launches": [
+    "corsica-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-lake-city-sd",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": [
+    -97.43806,
+    45.72561,
+    -97.41531,
+    45.74267
+   ],
+   "wikidata": "Q25204355",
+   "charted": false,
+   "area_km2": 1.543,
+   "launches": [
+    "cottonwood-lake-pwa-lake-city-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-redfield-sd",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Redfield"
+   ],
+   "bbox": [
+    -98.69644,
+    44.77434,
+    -98.65238,
+    44.80617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.277,
+   "launches": [
+    "cottonwood-northeast-pwa-sd",
+    "cottonwood-southwest-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-09-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "cottonwood-lake-sd",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Bradley",
+    "Onida"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cottonwood-lake-pwa-sd",
+    "cottonwood-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-springs-reservoir-sd",
+   "name": "Cottonwood Springs Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Erskine"
+   ],
+   "bbox": [
+    -103.57503,
+    43.43807,
+    -103.56597,
+    43.44269
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.113,
+   "launches": [
+    "cottonwood-springs-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cresbard-lake-sd",
+   "name": "Cresbard Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Cresbard"
+   ],
+   "bbox": [
+    -99.01856,
+    45.17123,
+    -99.00162,
+    45.17695
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.227,
+   "launches": [
+    "cresbard-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crow-lake-sd",
+   "name": "Crow Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Crow Lake"
+   ],
+   "bbox": [
+    -98.73603,
+    43.95455,
+    -98.70844,
+    43.97478
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.406,
+   "launches": [
+    "crow-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "curlew-lake-sd",
+   "name": "Curlew Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "New Underwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "curlew-lake-boat-launch-sd",
+    "curlew-lake-low-water-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dante-lake-sd",
+   "name": "Dante Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Wagner"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dante-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deerfield-lake-sd",
+   "name": "Deerfield Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Deerfield"
+   ],
+   "bbox": [
+    -103.82718,
+    44.00844,
+    -103.78441,
+    44.03341
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.718,
+   "launches": [
+    "deerfield-custer-crossing-pwa-sd",
+    "deerfield-dutchman-pwa-sd",
+    "deerfield-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "diamond-lake-sd",
+   "name": "Diamond Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Franklin"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "diamond-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dog-ear-lake-sd",
+   "name": "Dog Ear Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Tripp County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dog-ear-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dry-lake-florence-sd",
+   "name": "Dry Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Florence"
+   ],
+   "bbox": [
+    -97.36725,
+    45.03325,
+    -97.30375,
+    45.06475
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.124,
+   "launches": [
+    "dry-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dry-lake-number-one-sd",
+   "name": "Dry Lake Number One",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hillcrest Colony"
+   ],
+   "bbox": [
+    -97.73773,
+    44.90978,
+    -97.62167,
+    44.98886
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 17.394,
+   "launches": [
+    "dry-lake-l-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dry-lake-number-two-sd",
+   "name": "Dry Lake Number Two",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Willow Lake"
+   ],
+   "bbox": [
+    -97.71,
+    44.65575,
+    -97.5525,
+    44.7625
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 36.271,
+   "launches": [
+    "dry-lake-2-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dry-lake-sd",
+   "name": "Dry Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hayti",
+    "Stone Bridge"
+   ],
+   "bbox": [
+    -97.0775,
+    44.60194,
+    -97.03825,
+    44.6525
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.67,
+   "launches": [
+    "dry-lake-boat-launch-sd",
+    "dry-lake-boat-launch-hayti-sd",
+    "sioux-poinsett-gpa-north-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "drywood-lakes-sd",
+   "name": "Drywood Lakes",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Agency Village"
+   ],
+   "bbox": [
+    -97.20716,
+    45.55592,
+    -97.15008,
+    45.6154
+   ],
+   "wikidata": "Q49301934",
+   "charted": false,
+   "area_km2": 12.153,
+   "launches": [
+    "drywood-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dupree-lake-sd",
+   "name": "Dupree Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Faith"
+   ],
+   "bbox": [
+    -102.06151,
+    44.97388,
+    -102.04526,
+    44.99088
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.42,
+   "launches": [
+    "durkee-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eagle-butte-lake-sd",
+   "name": "Eagle Butte Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Eagle Butte"
+   ],
+   "bbox": [
+    -101.21088,
+    45.04107,
+    -101.20103,
+    45.04694
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.163,
+   "launches": [
+    "eagle-butte-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elk-lake-brown-county-sd",
+   "name": "Elk Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Brown County"
+   ],
+   "bbox": [
+    -98.7483,
+    45.85232,
+    -98.6733,
+    45.9101
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.238,
+   "launches": [
+    "elm-lake-dam-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "enemy-swim-lake-sd",
+   "name": "Enemy Swim Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Enemy Swim"
+   ],
+   "bbox": [
+    -97.29759,
+    45.42742,
+    -97.23047,
+    45.45628
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.497,
+   "launches": [
+    "enemy-swim-lua-sandy-beach-sd",
+    "enemy-swim-pwa-church-bay-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "eureka-lake-sd",
+   "name": "Eureka Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -99.6463,
+    45.76857,
+    -99.63527,
+    45.78133
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.684,
+   "launches": [
+    "eureka-east-pwa-sd",
+    "eureka-west-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fairfax-lake-sd",
+   "name": "Fairfax Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Fairfax"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fairfax-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fate-dam-sd",
+   "name": "Fate Dam",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Presho"
+   ],
+   "bbox": [
+    -100.0169,
+    43.93681,
+    -100.0037,
+    43.94918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.475,
+   "launches": [
+    "fate-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fish-lake-plankinton-sd",
+   "name": "Fish Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Plankinton"
+   ],
+   "bbox": [
+    -98.40302,
+    43.71917,
+    -98.37976,
+    43.73127
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.92,
+   "launches": [
+    "fish-lake-wfa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fish-lake-sd",
+   "name": "Fish Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Astoria"
+   ],
+   "bbox": [
+    -96.49093,
+    44.59058,
+    -96.46689,
+    44.61123
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.142,
+   "launches": [
+    "fish-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flat-creek-lake-sd",
+   "name": "Flat Creek Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Summerville"
+   ],
+   "bbox": [
+    -102.18618,
+    45.77462,
+    -102.16653,
+    45.78292
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.676,
+   "launches": [
+    "flat-creek-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fods-slough-sd",
+   "name": "Fods Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Madison"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fods-slough-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fordham-reservoir-sd",
+   "name": "Fordham Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Fordham Colony"
+   ],
+   "bbox": [
+    -97.93514,
+    44.76261,
+    -97.92526,
+    44.77645
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.387,
+   "launches": [
+    "fordham-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "forsch-lake-sd",
+   "name": "Forsch Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -97.51956,
+    43.64091,
+    -97.50379,
+    43.65072
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.638,
+   "launches": [
+    "frosch-lake-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goose-lake-sd",
+   "name": "Goose Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Kampeska"
+   ],
+   "bbox": [
+    -97.2935,
+    44.82575,
+    -97.2351,
+    44.86441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 10.215,
+   "launches": [
+    "goose-lake-gpa-sd",
+    "goose-lake-waa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "grass-lake-hartford-sd",
+   "name": "Grass Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hartford"
+   ],
+   "bbox": [
+    -97.05438,
+    43.58191,
+    -97.02569,
+    43.59851
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.218,
+   "launches": [
+    "grass-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grass-lake-sd",
+   "name": "Grass Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Florence"
+   ],
+   "bbox": [
+    -97.41175,
+    45.05475,
+    -97.35639,
+    45.08525
+   ],
+   "wikidata": "Q25204373",
+   "charted": false,
+   "area_km2": 9.59,
+   "launches": [
+    "grass-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gross-lake-sd",
+   "name": "Gross Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -97.50664,
+    43.66495,
+    -97.50026,
+    43.67396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.335,
+   "launches": [
+    "gross-lake-boat-launch-sd",
+    "gross-lake-gpa-west-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hayes-lake-sd",
+   "name": "Hayes Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Hayes"
+   ],
+   "bbox": [
+    -101.01907,
+    44.36089,
+    -101.00734,
+    44.37234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.223,
+   "launches": [
+    "hayes-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herman-pond-sd",
+   "name": "Herman Pond",
+   "kind": "pond",
+   "state": "SD",
+   "towns": [
+    "Madison"
+   ],
+   "bbox": [
+    -97.16767,
+    43.98591,
+    -97.16156,
+    43.99019
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "herman-pond-canoe-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herrick-lake-sd",
+   "name": "Herrick Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Burke"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "herrick-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hickman-lake-sd",
+   "name": "Hickman Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Britton"
+   ],
+   "bbox": [
+    -97.74602,
+    45.65657,
+    -97.73882,
+    45.66196
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.113,
+   "launches": [
+    "hickman-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-sd",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": [
+    -97.64625,
+    45.18075,
+    -97.62375,
+    45.2105
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.577,
+   "launches": [
+    "horseshoe-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2025) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2025-12-08"
+    }
+   ]
+  },
+  {
+   "slug": "iron-creek-lake-sd",
+   "name": "Iron Creek Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Sheep Flats"
+   ],
+   "bbox": [
+    -103.98388,
+    44.37001,
+    -103.97756,
+    44.37314
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "iron-creek-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "isabel-lake-sd",
+   "name": "Isabel Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Isabel"
+   ],
+   "bbox": [
+    -101.42661,
+    45.43054,
+    -101.40879,
+    45.43879
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.518,
+   "launches": [
+    "isabel-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-sd",
+   "name": "Island Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Montrose"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "island-lake-boat-launch-sd",
+    "south-island-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "james-river-sd",
+   "name": "James River",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Bath",
+    "Columbia",
+    "Frankfort",
+    "Hitchcock",
+    "Huron",
+    "Huron Hutterite Colony",
+    "Mayfield",
+    "Menno",
+    "Mitchell",
+    "Olivet",
+    "Wolf Creek Hutterite Colony",
+    "Woonsocket"
+   ],
+   "bbox": [
+    -98.49904,
+    42.85386,
+    -97.24573,
+    46.02297
+   ],
+   "wikidata": "Q1542610",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "james-river-diversion-access-north-boat-ramp-sd",
+    "james-river-diversion-access-south-boat-ramp-sd",
+    "james-river-pwa-hwy-38-sd",
+    "james-river-ramp-sd",
+    "ko-lee-access-pwa-james-river-sd",
+    "olivet-pwa-sd",
+    "schramm-pwa-sd",
+    "spink-county-dam-lua-sd",
+    "third-street-dam-pwa-sd",
+    "ulmer-wilderness-pwa-sd",
+    "verhelst-public-water-access-sd",
+    "wolf-creek-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-slough-sd",
+   "name": "Johnson Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Bryant"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "johnson-slough-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jones-lake-sd",
+   "name": "Jones Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Miller"
+   ],
+   "bbox": [
+    -98.95304,
+    44.46445,
+    -98.94269,
+    44.47663
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.316,
+   "launches": [
+    "jones-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 and 2024.",
+     "date": "2024-09-01",
+     "years": [
+      "2023",
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "kettle-lake-sd",
+   "name": "Kettle Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Marshall County"
+   ],
+   "bbox": [
+    -97.52799,
+    45.64607,
+    -97.49304,
+    45.6725
+   ],
+   "wikidata": "Q141626934",
+   "charted": false,
+   "area_km2": 3.621,
+   "launches": [
+    "kettle-cattail-lake-sd",
+    "kettle-cattail-lake-kayak-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-albert-sd",
+   "name": "Lake Albert",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Arlington Beach"
+   ],
+   "bbox": [
+    -97.18075,
+    44.49807,
+    -97.12825,
+    44.5625
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 15.76,
+   "launches": [
+    "lake-albert-east-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2026.",
+     "date": "2026-09-15",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-alice-sd",
+   "name": "Lake Alice",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-alice-north-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-alvin-sd",
+   "name": "Lake Alvin",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Harrisburg"
+   ],
+   "bbox": [
+    -96.63375,
+    43.43214,
+    -96.60996,
+    43.44282
+   ],
+   "wikidata": "Q6474756",
+   "charted": false,
+   "area_km2": 0.44,
+   "launches": [
+    "alvin-pwa-sd",
+    "lake-alvin-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-andes-sd",
+   "name": "Lake Andes",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake Andes"
+   ],
+   "bbox": [
+    -98.52885,
+    43.14958,
+    -98.38739,
+    43.24025
+   ],
+   "wikidata": "Q49303579",
+   "charted": false,
+   "area_km2": 19.539,
+   "launches": [
+    "center-unit-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-boehm-sd",
+   "name": "Lake Boehm",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Mac's Corner"
+   ],
+   "bbox": [
+    -99.41526,
+    44.24009,
+    -99.40876,
+    44.2491
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.252,
+   "launches": [
+    "mission-lake-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-byron-sd",
+   "name": "Lake Byron",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Huron",
+    "Huron Hutterite Colony"
+   ],
+   "bbox": [
+    -98.16025,
+    44.55425,
+    -98.09923,
+    44.57725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.573,
+   "launches": [
+    "lake-byron-northwest-lua-sd",
+    "lake-byron-south-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-campbell-sd",
+   "name": "Lake Campbell",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Brookings"
+   ],
+   "bbox": [
+    -96.87415,
+    44.18602,
+    -96.83446,
+    44.22389
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.024,
+   "launches": [
+    "lake-campbell-pwa-north-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-carthage-sd",
+   "name": "Lake Carthage",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Carthage"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-carthage-lua-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cavour-sd",
+   "name": "Lake Cavour",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Cavour"
+   ],
+   "bbox": [
+    -98.07314,
+    44.39427,
+    -98.03273,
+    44.41278
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.292,
+   "launches": [
+    "cavour-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cochrane-sd",
+   "name": "Lake Cochrane",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": [
+    -96.49079,
+    44.70088,
+    -96.46508,
+    44.71364
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.551,
+   "launches": [
+    "lake-cochrane-waa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-darling-sd",
+   "name": "Lake Darling",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Florence"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-darling-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-dimock-sd",
+   "name": "Lake Dimock",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Dimock"
+   ],
+   "bbox": [
+    -97.93424,
+    43.46692,
+    -97.91815,
+    43.48028
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.395,
+   "launches": [
+    "dimock-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-faulkton-sd",
+   "name": "Lake Faulkton",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Faulkton"
+   ],
+   "bbox": [
+    -99.18047,
+    45.02794,
+    -99.16728,
+    45.03484
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.326,
+   "launches": [
+    "lake-faulkton-lua-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-francis-case-sd",
+   "name": "Lake Francis Case",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Bonesteel",
+    "Burke",
+    "Chamberlain",
+    "Fairfax",
+    "Fort Thompson",
+    "Lake Andes",
+    "Oacoma",
+    "Pickstown",
+    "Platte"
+   ],
+   "bbox": [
+    -99.47992,
+    43.04698,
+    -98.53785,
+    44.06076
+   ],
+   "wikidata": "Q6475894",
+   "charted": false,
+   "area_km2": 348.17,
+   "launches": [
+    "buryanek-ra-sd",
+    "cedar-shores-lua-sd",
+    "dude-ranch-lua-sd",
+    "elm-creek-lua-sd",
+    "lfc-american-creek-sd",
+    "lfc-american-creek-marina-sd",
+    "lfc-fort-thompson-left-tailrace-sd",
+    "lfc-fort-thompson-right-tailrace-sd",
+    "lfc-fort-thompson-spillway-sd",
+    "lfc-old-fort-thompson-sd",
+    "north-point-sd",
+    "north-point-marina-sd",
+    "north-point-ra-prairie-dog-bay-sd",
+    "north-point-ra-st-francis-bay-sd",
+    "north-wheeler-ra-sd",
+    "pease-creek-ra-sd",
+    "platte-creek-ra-west-sd",
+    "platte-creek-ra-east-sd",
+    "snake-creek-ra-marina-sd",
+    "lake-francis-case-boat-launch-sd",
+    "south-shore-lua-sd",
+    "star-valley-lua-sd",
+    "west-bridge-lua-sd",
+    "whetstone-bay-lua-sd",
+    "whetstone-bay-lua-high-water-ramp-north-sd",
+    "whetstone-bay-lua-high-water-ramp-south-sd",
+    "white-swan-lua-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-francis-sd",
+   "name": "Lake Francis",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": [
+    -96.53954,
+    44.81739,
+    -96.52811,
+    44.82479
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.459,
+   "launches": [
+    "lake-francis-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-gardner-sd",
+   "name": "Lake Gardner",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Buffalo"
+   ],
+   "bbox": [
+    -103.62961,
+    45.6023,
+    -103.6078,
+    45.62184
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.944,
+   "launches": [
+    "gardner-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hendricks-sd",
+   "name": "Lake Hendricks",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Astoria"
+   ],
+   "bbox": [
+    -96.49858,
+    44.47347,
+    -96.42924,
+    44.50783
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.544,
+   "launches": [
+    "lake-hendricks-lua-south-sd",
+    "lake-hendricks-pwa-north-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://sdbit.maps.arcgis.com/apps/webappviewer/index.html?id=ec7a545532a24a3599a46cee428def48",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-08-02",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-henry-de-smet-sd",
+   "name": "Lake Henry",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "De Smet"
+   ],
+   "bbox": [
+    -97.51342,
+    44.31473,
+    -97.45166,
+    44.34589
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.804,
+   "launches": [
+    "lake-henry-lua-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-henry-scotland-sd",
+   "name": "Lake Henry",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Scotland"
+   ],
+   "bbox": [
+    -97.70598,
+    43.1405,
+    -97.69303,
+    43.15106
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.449,
+   "launches": [
+    "henry-pwa-scotland-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-henry-sd",
+   "name": "Lake Henry",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Winfred"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-henry-wpa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-herman-sd",
+   "name": "Lake Herman",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Madison"
+   ],
+   "bbox": [
+    -97.18761,
+    43.97208,
+    -97.15798,
+    44.0075
+   ],
+   "wikidata": "Q49303697",
+   "charted": false,
+   "area_km2": 5.428,
+   "launches": [
+    "herman-west-pwa-sd",
+    "lake-herman-kayak-launch-sd",
+    "lake-herman-sp-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020, 2023 and 2024.",
+     "date": "2024-12-01",
+     "years": [
+      "2020",
+      "2023",
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-hurley-sd",
+   "name": "Lake Hurley",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Gettysburg"
+   ],
+   "bbox": [
+    -100.1562,
+    45.08505,
+    -100.13655,
+    45.0935
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.421,
+   "launches": [
+    "hurley-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-kampeska-sd",
+   "name": "Lake Kampeska",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Kampeska",
+    "Watertown"
+   ],
+   "bbox": [
+    -97.25453,
+    44.89429,
+    -97.17013,
+    44.94976
+   ],
+   "wikidata": "Q19698289",
+   "charted": false,
+   "area_km2": 21.817,
+   "launches": [
+    "country-club-access-kampeska-sd",
+    "jackson-park-pwa-sd",
+    "kampeska-lynnwood-pwa-sd",
+    "kampeska-sailboat-landing-waa-sd",
+    "memorial-park-pwa-sd",
+    "sandy-shore-ra-sd",
+    "stokes-thomas-park-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-ketchum-sd",
+   "name": "Lake Ketchum",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-ketchum-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lakota-sd",
+   "name": "Lake Lakota",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Canton"
+   ],
+   "bbox": [
+    -96.56901,
+    43.20239,
+    -96.55325,
+    43.21117
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.345,
+   "launches": [
+    "lake-lakota-kayak-canoe-launch-sd",
+    "newton-hills-sp-lake-lakota-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-louise-sd",
+   "name": "Lake Louise",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Miller"
+   ],
+   "bbox": [
+    -99.15857,
+    44.62046,
+    -99.13058,
+    44.62895
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.686,
+   "launches": [
+    "lake-louise-ra-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020.",
+     "date": "2020-10-02",
+     "years": [
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-madison-sd",
+   "name": "Lake Madison",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Madison"
+   ],
+   "bbox": [
+    -97.06556,
+    43.93528,
+    -96.98592,
+    43.9785
+   ],
+   "wikidata": "Q28912639",
+   "charted": false,
+   "area_km2": 11.325,
+   "launches": [
+    "lake-madison-johnsons-point-sd",
+    "lake-madison-payne-pwa-sd",
+    "walkers-point-ra-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://sdbit.maps.arcgis.com/apps/webappviewer/index.html?id=ec7a545532a24a3599a46cee428def48",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2021.",
+     "date": "2021-08-02",
+     "years": [
+      "2020",
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-menno-sd",
+   "name": "Lake Menno",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Menno"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "menno-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mitchell-sd",
+   "name": "Lake Mitchell",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Mitchell"
+   ],
+   "bbox": [
+    -98.08633,
+    43.73173,
+    -98.02625,
+    43.76581
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.179,
+   "launches": [
+    "lake-mitchell-boat-launch-sd",
+    "lake-mitchell-northwest-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-08-28",
+     "years": [
+      "2023"
+     ]
+    },
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-norden-sd",
+   "name": "Lake Norden",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake Norden"
+   ],
+   "bbox": [
+    -97.21249,
+    44.58598,
+    -97.18625,
+    44.60648
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.147,
+   "launches": [
+    "lake-norden-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oahe-sd",
+   "name": "Lake Oahe",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Forest City",
+    "Kenel",
+    "Mobridge",
+    "Pierre",
+    "Pollock",
+    "Webb Ranch"
+   ],
+   "bbox": [
+    -101.15135,
+    44.42671,
+    -100.2149,
+    46.62822
+   ],
+   "wikidata": "Q474408",
+   "charted": false,
+   "area_km2": 1385.428,
+   "launches": [
+    "bob-s-landing-lua-sd",
+    "bush-s-landing-lua-sd",
+    "chantier-creek-lua-sd",
+    "cow-creek-ra-sd",
+    "dodge-draw-lua-sd",
+    "east-shore-lua-sd",
+    "east-whitlock-lua-north-sd",
+    "east-whitlock-lua-south-sd",
+    "foster-bay-lua-sd",
+    "indian-creek-east-low-water-ramp-sd",
+    "indian-creek-ra-east-sd",
+    "indian-creek-ra-west-sd",
+    "lighthouse-point-lua-sd",
+    "little-bend-lua-sd",
+    "little-bend-lua-hughes-county-sd",
+    "minneconjou-lua-south-sd",
+    "oahe-forest-city-sd",
+    "oahe-garrigan-s-landing-pwa-sd",
+    "oahe-old-agency-park-sd",
+    "oahe-pike-haven-sd",
+    "oahe-rousseau-sd",
+    "oahe-south-whitlock-sd",
+    "oahe-the-bay-sd",
+    "okobojo-point-ra-sd",
+    "peoria-flats-lua-sd",
+    "shaw-creek-lua-sd",
+    "spring-creek-ra-sd",
+    "sutton-bay-sd",
+    "swan-creek-low-water-sd",
+    "swan-creek-ra-east-sd",
+    "swan-creek-ra-west-sd",
+    "thomas-bay-lua-sd",
+    "walth-bay-lua-sd",
+    "west-pollock-ra-main-sd",
+    "west-pollock-ra-north-sd",
+    "west-shore-pwa-sd",
+    "west-whitlock-ra-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-oakwood-sd",
+   "name": "Lake Oakwood",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Bruce"
+   ],
+   "bbox": [
+    -96.98408,
+    44.4245,
+    -96.95667,
+    44.45534
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.948,
+   "launches": [
+    "oakwood-lakes-east-pwa-sd",
+    "oakwood-lakes-north-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 and 2024.",
+     "date": "2024-09-01",
+     "years": [
+      "2023",
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-oliver-sd",
+   "name": "Lake Oliver",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Gary"
+   ],
+   "bbox": [
+    -96.48243,
+    44.71492,
+    -96.46769,
+    44.7237
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.677,
+   "launches": [
+    "lake-oliver-lua-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-parmley-sd",
+   "name": "Lake Parmley",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Mina"
+   ],
+   "bbox": [
+    -98.75716,
+    45.43824,
+    -98.71692,
+    45.49004
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.21,
+   "launches": [
+    "mina-canoe-launch-sd",
+    "mina-east-lua-sd",
+    "mina-lake-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pocasse-sd",
+   "name": "Lake Pocasse",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Pollock"
+   ],
+   "bbox": [
+    -100.29589,
+    45.88509,
+    -100.24428,
+    45.91667
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.328,
+   "launches": [
+    "pocasse-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-poinsett-sd",
+   "name": "Lake Poinsett",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Arlington Beach",
+    "Hayti",
+    "Stone Bridge"
+   ],
+   "bbox": [
+    -97.12954,
+    44.53475,
+    -97.04204,
+    44.60192
+   ],
+   "wikidata": "Q2839261",
+   "charted": false,
+   "area_km2": 33.529,
+   "launches": [
+    "lake-poinsett-almos-sd",
+    "lake-poinsett-prestrude-sd",
+    "lake-poinsett-sarranen-sd",
+    "lake-poinsett-sorenson-pwa-sd",
+    "lake-poinsett-recreation-area-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 to 2026.",
+     "date": "2026-09-15",
+     "years": [
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    },
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-sharpe-sd",
+   "name": "Lake Sharpe",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "De Grey",
+    "Fort Pierre",
+    "Fort Thompson",
+    "Lower Brule",
+    "Pierre",
+    "Rousseau",
+    "West Brule"
+   ],
+   "bbox": [
+    -100.41182,
+    44.03153,
+    -99.44598,
+    44.45012
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 252.357,
+   "launches": [
+    "farm-island-ra-east-hipple-lake-sd",
+    "farm-island-ra-west-sd",
+    "fort-george-lua-sd",
+    "joe-creek-lua-sd",
+    "laframboise-pwa-sd",
+    "lake-sharpe-carry-in-access-sd",
+    "oahe-ds-kayak-launch-sd",
+    "oahe-downstream-ra-sd",
+    "sharpe-arikara-sd",
+    "sharpe-bad-river-sd",
+    "sharpe-cedar-creek-sd",
+    "sharpe-down-s-marina-sd",
+    "sharpe-east-oahe-tailrace-sd",
+    "sharpe-fort-pierre-sd",
+    "sharpe-good-soldier-sd",
+    "sharpe-iron-nation-north-sd",
+    "sharpe-iron-nation-south-sd",
+    "sharpe-little-bend-sd",
+    "sharpe-north-shore-sd",
+    "sharpe-wata-onazin-lower-brule-sd",
+    "sharpe-west-oahe-tailrace-sd",
+    "west-bend-ra-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-sinai-sd",
+   "name": "Lake Sinai",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Sinai"
+   ],
+   "bbox": [
+    -97.10875,
+    44.2465,
+    -97.05025,
+    44.2825
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.78,
+   "launches": [
+    "lake-sinai-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-st-john-sd",
+   "name": "Lake St John",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake Norden"
+   ],
+   "bbox": [
+    -97.20812,
+    44.55553,
+    -97.16375,
+    44.57425
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.555,
+   "launches": [
+    "lake-john-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-thompson-sd",
+   "name": "Lake Thompson",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "De Smet"
+   ],
+   "bbox": [
+    -97.50775,
+    44.15243,
+    -97.38356,
+    44.35423
+   ],
+   "wikidata": "Q6478028",
+   "charted": false,
+   "area_km2": 63.891,
+   "launches": [
+    "lake-thompson-lua-sd",
+    "lake-thompson-recreation-area-sd",
+    "schaefer-s-slough-sd",
+    "thompson-northeast-pwa-sd",
+    "thompson-southwest-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-traverse-sd",
+   "name": "Lake Traverse",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Roberts County"
+   ],
+   "bbox": [
+    -96.85907,
+    45.60623,
+    -96.60872,
+    45.77032
+   ],
+   "wikidata": "Q1493200",
+   "charted": false,
+   "area_km2": 47.314,
+   "launches": [
+    "lake-traverse-waldo-waa-sd",
+    "lake-travese-jensen-s-waa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://sdbit.maps.arcgis.com/apps/webappviewer/index.html?id=ec7a545532a24a3599a46cee428def48",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2021.",
+     "date": "2021-08-02",
+     "years": [
+      "2020",
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-vermillion-sd",
+   "name": "Lake Vermillion",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Rumpus Ridge"
+   ],
+   "bbox": [
+    -97.20539,
+    43.58523,
+    -97.16558,
+    43.62977
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.401,
+   "launches": [
+    "lake-vermillion-lua-sd",
+    "lake-vermillion-ra-west-sd",
+    "vermillion-kayak-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-yankton-sd",
+   "name": "Lake Yankton",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Yankton"
+   ],
+   "bbox": [
+    -97.4858,
+    42.85073,
+    -97.4604,
+    42.87139
+   ],
+   "wikidata": "Q55616508",
+   "charted": false,
+   "area_km2": 1.324,
+   "launches": [
+    "cottonwood-day-use-boat-ramp-sd",
+    "gavins-tailrace-pwa-sd",
+    "pierson-ranch-sd",
+    "yankton-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lakota-lake-sd",
+   "name": "Lakota Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Keystone"
+   ],
+   "bbox": [
+    -103.40043,
+    43.84723,
+    -103.39629,
+    43.85158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.046,
+   "launches": [
+    "lakota-lake-kayak-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lehrman-slough-sd",
+   "name": "Lehrman Slough",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Spencer"
+   ],
+   "bbox": [
+    -97.58959,
+    43.66876,
+    -97.57221,
+    43.67725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.757,
+   "launches": [
+    "lehrman-slough-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lemmon-lake-sd",
+   "name": "Lemmon Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lemmon"
+   ],
+   "bbox": [
+    -102.02488,
+    45.77316,
+    -102.00826,
+    45.78382
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.794,
+   "launches": [
+    "east-lemmon-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lewis-and-clark-lake-sd",
+   "name": "Lewis and Clark Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Bon Homme Colony",
+    "Fairview Heights",
+    "Springfield",
+    "Tabor",
+    "Tyndall",
+    "Yankton"
+   ],
+   "bbox": [
+    -97.90572,
+    42.82533,
+    -97.48107,
+    42.88139
+   ],
+   "wikidata": "Q7334123",
+   "charted": false,
+   "area_km2": 90.85,
+   "launches": [
+    "charley-creek-pwa-sd",
+    "lewis-and-clark-ra-east-midway-sd",
+    "lewis-and-clark-ra-gavins-point-sd",
+    "lewis-and-clark-ra-marina-sd",
+    "lewis-and-clark-ra-west-midway-sd",
+    "navratil-landing-pwa-sd",
+    "sand-creek-sd",
+    "sand-creek-lua-sd",
+    "springfield-bay-sd",
+    "springfield-ra-sd",
+    "tabor-lua-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "liitle-white-river-reservoir-sd",
+   "name": "Liitle White River Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Martin"
+   ],
+   "bbox": [
+    -101.55632,
+    43.15854,
+    -101.54411,
+    43.17687
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.73,
+   "launches": [
+    "lwr-south-boat-launch-sd",
+    "little-white-river-project-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-moreau-lake-sd",
+   "name": "Little Moreau Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Timber Lake"
+   ],
+   "bbox": [
+    -101.09506,
+    45.34581,
+    -101.08934,
+    45.34926
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "little-moreau-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-peninsula-park-sd",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Peninsula Park"
+   ],
+   "bbox": [
+    -97.04736,
+    43.9263,
+    -96.99277,
+    43.94693
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.133,
+   "launches": [
+    "long-wpa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-sd",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Henry"
+   ],
+   "bbox": [
+    -97.41587,
+    44.89475,
+    -97.379,
+    44.96225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.871,
+   "launches": [
+    "long-south-pwa-sd",
+    "long-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lost-lake-sd",
+   "name": "Lost Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hartford"
+   ],
+   "bbox": [
+    -97.0849,
+    43.57555,
+    -97.07252,
+    43.58643
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.512,
+   "launches": [
+    "loss-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lynn-lake-sd",
+   "name": "Lynn Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": [
+    -97.68203,
+    45.41338,
+    -97.63269,
+    45.46409
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.542,
+   "launches": [
+    "lynn-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marindahl-lake-sd",
+   "name": "Marindahl Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Mayfield"
+   ],
+   "bbox": [
+    -97.26926,
+    43.03656,
+    -97.25438,
+    43.05511
+   ],
+   "wikidata": "Q6763971",
+   "charted": false,
+   "area_km2": 0.611,
+   "launches": [
+    "marindahl-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 and 2024.",
+     "date": "2024-09-01",
+     "years": [
+      "2023",
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "mccook-lake-sd",
+   "name": "McCook Lake",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "North Sioux City"
+   ],
+   "bbox": [
+    -96.52495,
+    42.52501,
+    -96.50495,
+    42.55059
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.909,
+   "launches": [
+    "mccook-lake-boat-launch-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "memorial-pond-sd",
+   "name": "Memorial Pond",
+   "kind": "pond",
+   "state": "SD",
+   "towns": [
+    "Rapid City"
+   ],
+   "bbox": [
+    -103.22767,
+    44.08519,
+    -103.2255,
+    44.08605
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.016,
+   "launches": [
+    "memorial-kayak-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mickelson-fishing-pond-sd",
+   "name": "Mickelson Fishing Pond",
+   "kind": "pond",
+   "state": "SD",
+   "towns": [
+    "Pierre"
+   ],
+   "bbox": [
+    -100.33338,
+    44.38014,
+    -100.33188,
+    44.38313
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.017,
+   "launches": [
+    "mickelson-pond-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-lynn-lake-sd",
+   "name": "Middle Lynn Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "middle-lynn-lake-access-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "minnewasta-lake-sd",
+   "name": "Minnewasta Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": [
+    -97.39124,
+    45.38069,
+    -97.35254,
+    45.40163
+   ],
+   "wikidata": "Q24061593",
+   "charted": false,
+   "area_km2": 3.189,
+   "launches": [
+    "minnewasta-south-sunnybrook-waa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "mirage-lake-sd",
+   "name": "Mirage Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Doland"
+   ],
+   "bbox": [
+    -98.09749,
+    44.7839,
+    -98.08072,
+    44.80521
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.314,
+   "launches": [
+    "mirage-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "missouri-river-sd",
+   "name": "Missouri River",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "North Sioux City",
+    "Pickstown",
+    "Running Water",
+    "Vermillion"
+   ],
+   "bbox": [
+    -100.72225,
+    42.48204,
+    -96.4402,
+    46.42243
+   ],
+   "wikidata": "Q5419",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "myron-grove-pwa-sd",
+    "rosenbaum-pwa-sd",
+    "running-water-pwa-sd",
+    "spillway-lua-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "molstad-lake-sd",
+   "name": "Molstad Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Glenham"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "molstad-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morris-lake-sd",
+   "name": "Morris Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Artesian"
+   ],
+   "bbox": [
+    -97.82078,
+    43.93393,
+    -97.81084,
+    43.94085
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.257,
+   "launches": [
+    "morris-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morristown-east-lake-sd",
+   "name": "Morristown East Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Corson County"
+   ],
+   "bbox": [
+    -101.64993,
+    45.9203,
+    -101.63135,
+    45.93236
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.457,
+   "launches": [
+    "east-morristown-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morristown-lake-sd",
+   "name": "Morristown Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Morristown"
+   ],
+   "bbox": [
+    -101.76091,
+    45.90843,
+    -101.74932,
+    45.91924
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.47,
+   "launches": [
+    "west-morristown-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mud-lake-hurley-sd",
+   "name": "Mud Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hurley"
+   ],
+   "bbox": [
+    -97.056,
+    43.28961,
+    -97.04069,
+    43.30307
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.88,
+   "launches": [
+    "mud-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mud-lake-sd",
+   "name": "Mud Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Tulare"
+   ],
+   "bbox": [
+    -98.52242,
+    44.76284,
+    -98.50253,
+    44.77663
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.533,
+   "launches": [
+    "mud-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mud-lake-willow-lake-sd",
+   "name": "Mud Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Willow Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mud-lake-boat-launch-willow-lake-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "murdo-lake-sd",
+   "name": "Murdo Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Murdo"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "murdo-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-wall-lake-sd",
+   "name": "New Wall Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Wall"
+   ],
+   "bbox": [
+    -102.2818,
+    43.97361,
+    -102.27106,
+    43.98241
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "new-wall-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newell-city-pond-sd",
+   "name": "Newell City Pond",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Newell"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "newell-city-pond-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newell-lake-sd",
+   "name": "Newell Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Newell"
+   ],
+   "bbox": [
+    -103.40276,
+    44.83443,
+    -103.38501,
+    44.84746
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.597,
+   "launches": [
+    "newell-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nine-mile-lake-sd",
+   "name": "Nine Mile Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Veblen"
+   ],
+   "bbox": [
+    -97.47468,
+    45.75996,
+    -97.45585,
+    45.77542
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.105,
+   "launches": [
+    "nine-mile-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-scatterwood-lake-sd",
+   "name": "North Scatterwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Edmunds County"
+   ],
+   "bbox": [
+    -98.76681,
+    45.23034,
+    -98.73883,
+    45.27074
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.211,
+   "launches": [
+    "north-scatterwood-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oak-lake-sd",
+   "name": "Oak Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Astoria"
+   ],
+   "bbox": [
+    -96.54108,
+    44.50488,
+    -96.51486,
+    44.52896
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.706,
+   "launches": [
+    "oak-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "okobojo-creek-sd",
+   "name": "Okobojo Creek",
+   "kind": "stream",
+   "state": "SD",
+   "towns": [
+    "Gettysburg"
+   ],
+   "bbox": [
+    -100.52014,
+    44.55696,
+    -99.74352,
+    44.98817
+   ],
+   "wikidata": "Q49929302",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "potts-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "opal-lake-sd",
+   "name": "Opal Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Opal"
+   ],
+   "bbox": [
+    -102.42463,
+    44.91014,
+    -102.41925,
+    44.91791
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.149,
+   "launches": [
+    "opal-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "opitz-lake-sd",
+   "name": "Opitz Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Roslyn"
+   ],
+   "bbox": [
+    -97.52482,
+    45.57079,
+    -97.45253,
+    45.60487
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.813,
+   "launches": [
+    "opitz-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "osceola-lake-sd",
+   "name": "Osceola Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Osceola"
+   ],
+   "bbox": [
+    -97.82308,
+    44.46717,
+    -97.81725,
+    44.4695
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "osceola-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "owen-lake-sd",
+   "name": "Owen Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Bison"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "owens-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pactola-lake-sd",
+   "name": "Pactola Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Johnson Siding",
+    "Silver City"
+   ],
+   "bbox": [
+    -103.55545,
+    44.06046,
+    -103.48426,
+    44.08528
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.344,
+   "launches": [
+    "jenny-gulch-kayak-launch-sd",
+    "pactola-lake-boat-launch-near-johnson-siding-sd",
+    "pactola-north-pwa-sd",
+    "pactola-south-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "pelican-lake-sd",
+   "name": "Pelican Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Watertown"
+   ],
+   "bbox": [
+    -97.22942,
+    44.85178,
+    -97.13229,
+    44.88435
+   ],
+   "wikidata": "Q25204395",
+   "charted": false,
+   "area_km2": 12.174,
+   "launches": [
+    "northwest-pelican-lua-sd",
+    "pelican-lake-thompson-s-point-lua-sd",
+    "pelican-lake-kayak-area-sd",
+    "pelican-lake-recreation-area-sd",
+    "skinny-krull-access-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "pickerel-lake-sd",
+   "name": "Pickerel Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Enemy Swim"
+   ],
+   "bbox": [
+    -97.29074,
+    45.47705,
+    -97.26298,
+    45.52573
+   ],
+   "wikidata": "Q7190798",
+   "charted": false,
+   "area_km2": 4.332,
+   "launches": [
+    "pickerel-old-hatchery-sd",
+    "pickerel-lake-ra-east-sd",
+    "pickerel-lake-ra-west-sd",
+    "pickerel-west-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "pierpont-lake-sd",
+   "name": "Pierpont Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Pierpont"
+   ],
+   "bbox": [
+    -97.83689,
+    45.45721,
+    -97.82549,
+    45.46477
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.317,
+   "launches": [
+    "pierpont-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pigors-lake-sd",
+   "name": "Pigors Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Groton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pigors-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piyas-lake-sd",
+   "name": "Piyas Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Buffalo Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "piyas-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "platte-lake-sd",
+   "name": "Platte Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "White Lake"
+   ],
+   "bbox": [
+    -98.78881,
+    43.65466,
+    -98.75891,
+    43.68727
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.743,
+   "launches": [
+    "platte-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "price-lake-sd",
+   "name": "Price Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Redfield"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "price-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pudwell-reservoir-sd",
+   "name": "Pudwell Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "McIntosh"
+   ],
+   "bbox": [
+    -101.28126,
+    45.92154,
+    -101.2624,
+    45.93078
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.357,
+   "launches": [
+    "pudwell-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "punished-womans-lake-sd",
+   "name": "Punished Womans Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "South Shore"
+   ],
+   "bbox": [
+    -96.95728,
+    45.10763,
+    -96.91983,
+    45.11665
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.089,
+   "launches": [
+    "punished-woman-s-south-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "putney-slough-sd",
+   "name": "Putney Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Putney"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "putney-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rahn-lake-sd",
+   "name": "Rahn Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Tripp County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rahn-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-lake-sd",
+   "name": "Red Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Pukwana"
+   ],
+   "bbox": [
+    -99.28374,
+    43.70014,
+    -99.188,
+    43.74715
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 20.418,
+   "launches": [
+    "red-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "redfield-lake-sd",
+   "name": "Redfield Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Redfield"
+   ],
+   "bbox": [
+    -98.5672,
+    44.87221,
+    -98.52691,
+    44.88617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.821,
+   "launches": [
+    "lake-redfield-city-park-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "reliance-lake-sd",
+   "name": "Reliance Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Reliance"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "reliance-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "reynolds-slough-sd",
+   "name": "Reynolds Slough",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Madison"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "reynolds-slough-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rezac-lake-sd",
+   "name": "Rezac Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rezac-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rice-lake-sd",
+   "name": "Rice Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rice-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "richland-reservoir-sd",
+   "name": "Richland Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [],
+   "bbox": [
+    -100.41177,
+    44.14507,
+    -100.40827,
+    44.14889
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.06,
+   "launches": [
+    "richland-dam-usfs-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "richmond-lake-sd",
+   "name": "Richmond Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Aberdeen",
+    "Bieglers First Addition",
+    "Richmond",
+    "Richmond Lake Heights Development"
+   ],
+   "bbox": [
+    -98.64703,
+    45.53097,
+    -98.59118,
+    45.61034
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.709,
+   "launches": [
+    "brook-brown-pwa-sd",
+    "richmond-dam-lua-sd",
+    "richmond-lake-ra-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roosevelt-lake-sd",
+   "name": "Roosevelt Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Dallas"
+   ],
+   "bbox": [
+    -99.62745,
+    43.19736,
+    -99.61429,
+    43.20531
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.364,
+   "launches": [
+    "roosevelt-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-clark-sd",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clark"
+   ],
+   "bbox": [
+    -97.77975,
+    45.024,
+    -97.765,
+    45.04025
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.871,
+   "launches": [
+    "round-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-goodwin-sd",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Goodwin"
+   ],
+   "bbox": [
+    -96.85,
+    44.9545,
+    -96.81116,
+    44.97525
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.112,
+   "launches": [
+    "round-lake-deuel-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-sd",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "South Shore"
+   ],
+   "bbox": [
+    -96.91862,
+    45.1085,
+    -96.90691,
+    45.11673
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.679,
+   "launches": [
+    "round-benn-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roy-lake-sd",
+   "name": "Roy Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": [
+    -97.48633,
+    45.67801,
+    -97.40938,
+    45.71236
+   ],
+   "wikidata": "Q49309452",
+   "charted": false,
+   "area_km2": 9.154,
+   "launches": [
+    "bullhead-lua-sd",
+    "roy-lake-canoe-launch-sd",
+    "roy-lake-sp-sd",
+    "roy-lake-sp-east-sd",
+    "roy-lake-sp-lodge-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "rush-lake-sd",
+   "name": "Rush Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Waubay"
+   ],
+   "bbox": [
+    -97.40726,
+    45.32345,
+    -97.31175,
+    45.38096
+   ],
+   "wikidata": "Q25204432",
+   "charted": false,
+   "area_km2": 19.32,
+   "launches": [
+    "north-rush-pwa-sd",
+    "south-rush-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "salt-lake-sd",
+   "name": "Salt Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Selby"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "salt-lake-gpa-sd",
+    "salt-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "school-lake-sd",
+   "name": "School Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Goodwin"
+   ],
+   "bbox": [
+    -96.8305,
+    44.93357,
+    -96.8085,
+    44.94586
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.565,
+   "launches": [
+    "school-lake-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scott-lake-sd",
+   "name": "Scott Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hartford"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "scott-lake-boat-launch-sd",
+    "scott-lake-boat-launch-hartford-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shadehill-reservoir-sd",
+   "name": "Shadehill Reservoir",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Lemmon",
+    "Shadehill"
+   ],
+   "bbox": [
+    -102.30598,
+    45.68143,
+    -102.19898,
+    45.79536
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 22.243,
+   "launches": [
+    "hugh-glass-lua-sd",
+    "shadehill-ra-east-ramp-sd",
+    "shadehill-ra-ketterlings-point-sd",
+    "shadehill-west-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sheridan-lake-sd",
+   "name": "Sheridan Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Hill City"
+   ],
+   "bbox": [
+    -103.48565,
+    43.96521,
+    -103.45056,
+    43.98173
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.571,
+   "launches": [
+    "sheridan-north-pwa-sd",
+    "sheridan-south-pwa-sd"
+   ],
+   "advisories": [
+    {
+     "source": "sd-gfp-ais-waters",
+     "source_name": "South Dakota Game, Fish and Parks",
+     "url": "https://sdleastwanted.com",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "South Dakota Game, Fish and Parks lists this water as infested with zebra mussels. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "shue-creek-sd",
+   "name": "Shue Creek",
+   "kind": "stream",
+   "state": "SD",
+   "towns": [
+    "Carpenter"
+   ],
+   "bbox": [
+    -98.11597,
+    44.44158,
+    -97.81496,
+    44.66008
+   ],
+   "wikidata": "Q24061746",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "staum-dam-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-sd",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Freeman"
+   ],
+   "bbox": [
+    -97.42089,
+    43.44125,
+    -97.40021,
+    43.45496
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.778,
+   "launches": [
+    "silver-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "simon-lake-sd",
+   "name": "Simon Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hoven"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "simon-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "six-mile-lake-sd",
+   "name": "Six Mile Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "six-mile-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-coteau-lake-sd",
+   "name": "South Coteau Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": [
+    -96.735,
+    44.82275,
+    -96.719,
+    44.83275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.063,
+   "launches": [
+    "west-coteau-south-waa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-red-iron-lake-sd",
+   "name": "South Red Iron Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Clear Lake"
+   ],
+   "bbox": [
+    -97.33025,
+    45.65614,
+    -97.3085,
+    45.68525
+   ],
+   "wikidata": "Q49311231",
+   "charted": false,
+   "area_km2": 2.834,
+   "launches": [
+    "south-red-iron-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-scatterwood-lake-sd",
+   "name": "South Scatterwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Chelsea"
+   ],
+   "bbox": [
+    -98.76309,
+    45.18671,
+    -98.74525,
+    45.22997
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.723,
+   "launches": [
+    "south-scatterwood-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "split-rock-creek-sd",
+   "name": "Split Rock Creek",
+   "kind": "river",
+   "state": "SD",
+   "towns": [
+    "Brandon",
+    "Garretson"
+   ],
+   "bbox": [
+    -96.59595,
+    43.54898,
+    -96.43192,
+    43.80369
+   ],
+   "wikidata": "Q35334581",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "split-rock-creek-carry-in-access-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spring-lake-sd",
+   "name": "Spring Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Selby"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spring-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stink-lake-sd",
+   "name": "Stink Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Henry"
+   ],
+   "bbox": [
+    -97.4185,
+    44.96148,
+    -97.39125,
+    44.9875
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.279,
+   "launches": [
+    "stink-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stockade-lake-sd",
+   "name": "Stockade Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Custer"
+   ],
+   "bbox": [
+    -103.5308,
+    43.76466,
+    -103.50989,
+    43.77324
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.533,
+   "launches": [
+    "custer-sp-stockade-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sully-lake-sd",
+   "name": "Sully Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Onida"
+   ],
+   "bbox": [
+    -100.19802,
+    44.70866,
+    -100.17812,
+    44.7302
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.956,
+   "launches": [
+    "sully-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "summit-lake-sd",
+   "name": "Summit Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Summit"
+   ],
+   "bbox": [
+    -97.01723,
+    45.27892,
+    -97.00317,
+    45.29
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.735,
+   "launches": [
+    "summit-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-hoven-sd",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hoven"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "swan-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-sd",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Viborg"
+   ],
+   "bbox": [
+    -97.11267,
+    43.21599,
+    -97.09298,
+    43.22548
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.784,
+   "launches": [
+    "swan-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-webster-sd",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": [
+    -97.58825,
+    45.11725,
+    -97.53525,
+    45.158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.426,
+   "launches": [
+    "swan-lake-boat-launch-webster-sd",
+    "swan-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tisdale-lake-sd",
+   "name": "Tisdale Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "New Underwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tisdale-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "trail-city-railroad-lake-sd",
+   "name": "Trail City Railroad Lake",
+   "kind": "reservoir",
+   "state": "SD",
+   "towns": [
+    "Trail City"
+   ],
+   "bbox": [
+    -100.7588,
+    45.47657,
+    -100.74117,
+    45.48564
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.461,
+   "launches": [
+    "trail-city-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tripp-lake-sd",
+   "name": "Tripp Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Tripp"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tripp-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuschen-lake-sd",
+   "name": "Tuschen Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tuschen-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lake-sd",
+   "name": "Twin Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Montrose"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "twin-lake-boat-launch-sd",
+    "twin-lake-minnehaha-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "waggoner-lake-sd",
+   "name": "Waggoner Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Philip"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "waggoner-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wall-lake-sd",
+   "name": "Wall Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hartford"
+   ],
+   "bbox": [
+    -96.96971,
+    43.52816,
+    -96.9529,
+    43.53935
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.945,
+   "launches": [
+    "wall-lake-lua-sd"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2020",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "waubay-lake-sd",
+   "name": "Waubay Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Grenville",
+    "Webster"
+   ],
+   "bbox": [
+    -97.49628,
+    45.35287,
+    -97.30782,
+    45.47158
+   ],
+   "wikidata": "Q129567354",
+   "charted": false,
+   "area_km2": 72.265,
+   "launches": [
+    "south-waubay-kanago-pwa-sd",
+    "waubay-lake-pwa-grenville-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-oakwood-lake-sd",
+   "name": "West Oakwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Bruce"
+   ],
+   "bbox": [
+    -97.0275,
+    44.42779,
+    -96.98314,
+    44.4585
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.535,
+   "launches": [
+    "oakwood-canoe-kayak-launch-sd",
+    "oakwood-canoe-kayak-launch-bruce-sd",
+    "oakwood-lakes-sp-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-stink-lake-sd",
+   "name": "West Stink Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Eden"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "west-stink-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-lake-sd",
+   "name": "White Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Britton"
+   ],
+   "bbox": [
+    -97.62256,
+    45.84532,
+    -97.60526,
+    45.86491
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.85,
+   "launches": [
+    "white-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whitewood-lake-sd",
+   "name": "Whitewood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Lake Preston",
+    "Oldham"
+   ],
+   "bbox": [
+    -97.3835,
+    44.2765,
+    -97.23525,
+    44.3565
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 24.104,
+   "launches": [
+    "whitewood-lake-access-area-sd",
+    "whitewood-south-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willow-creek-lake-sd",
+   "name": "Willow Creek Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Westport"
+   ],
+   "bbox": [
+    -98.63696,
+    45.70356,
+    -98.58861,
+    45.7154
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.471,
+   "launches": [
+    "willow-creek-boat-launch-sd",
+    "willow-dam-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willow-lake-sd",
+   "name": "Willow Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Willow Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "willow-lake-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilmarth-lake-sd",
+   "name": "Wilmarth Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Plankinton"
+   ],
+   "bbox": [
+    -98.5976,
+    43.85626,
+    -98.57021,
+    43.86485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.485,
+   "launches": [
+    "wilmarth-lake-pwa-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-slough-sd",
+   "name": "Wolf Slough",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Hazel"
+   ],
+   "bbox": [
+    -97.35025,
+    44.801,
+    -97.314,
+    44.817
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.721,
+   "launches": [
+    "wolf-slough-boat-launch-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wylie-lake-sd",
+   "name": "Wylie Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Aberdeen"
+   ],
+   "bbox": [
+    -98.51599,
+    45.48737,
+    -98.51138,
+    45.48986
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.07,
+   "launches": [
+    "wylie-park-kayak-area-sd"
+   ],
+   "advisories": []
+  }
+ ]
+}

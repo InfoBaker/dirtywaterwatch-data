@@ -48,8 +48,10 @@ def test_legal_forms_are_controlled_and_no_individual_is_named():
     g = next(r for r in rows if "NM0028088" in r["npdes_permits"])
     assert g["legal_form"] == "facility (permittee not named)" and g["name"].startswith("Glorieta Camps")
     # New Mexico's mutual domestic associations are public bodies under the Sanitary Projects Act
-    assert DS.PUBLIC_NAME.search("Mora Mutual Water and Sewer Works Association")
-    assert not DS.PUBLIC_NAME.search("Sunrise Homeowners Association")
+    name = "Mora Mutual Water and Sewer Works Association"
+    assert not DS.check_legal_forms([{"id": "nm-x", "state": "NM", "name": name, "legal_form": "special district"}])
+    # keyed on New Mexico: the same name elsewhere still warns (review 2026-11-07 P3-3)
+    assert DS.check_legal_forms([{"id": "co-x", "state": "CO", "name": name, "legal_form": "special district"}])
 
 
 def test_register_rows_per_operator_and_the_state_notice():

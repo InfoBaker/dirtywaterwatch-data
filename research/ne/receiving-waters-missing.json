@@ -1,0 +1,739 @@
+{
+ "about": "Receiving-water names in Nebraska's reports (EPA's overflow tables for Nebraska permits, the 2026-11-04 extract, and DWEE's Beach Watch health alerts and E. coli labels, read on 2026-11-07) that data/receiving-waters-national.json does not hold for NE, by name as the report gives it (a segment code and a place after 'at' cut), with the number of reports giving each. Reports that say the discharge reached no water are left out.",
+ "state": "NE",
+ "waters": 41,
+ "reports": 83,
+ "by_reason": {
+  "not in data/receiving-waters-national.json for NE": 38,
+  "an unnamed or unknown stream: the report names no water": 3
+ },
+ "named_waters": 38,
+ "rows": [
+  {
+   "name": "Rockford Lake",
+   "reports": 8,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.223196,
+     -96.586409
+    ]
+   ]
+  },
+  {
+   "name": "Cub Creek Lake",
+   "reports": 7,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.243206,
+     -97.049199
+    ]
+   ]
+  },
+  {
+   "name": "Big Papillion Creek",
+   "reports": 5,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.22094,
+     -96.039191
+    ],
+    [
+     41.220929,
+     -96.038846
+    ],
+    [
+     41.22074,
+     -96.039196
+    ],
+    [
+     41.082848,
+     -95.889624
+    ],
+    [
+     41.284657,
+     -96.119972
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Maple Creek Recreation Area Lake",
+   "reports": 5,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     41.71017,
+     -97.25078
+    ]
+   ]
+  },
+  {
+   "name": "Branched Oak Lake",
+   "reports": 4,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.972167,
+     -96.87094
+    ]
+   ]
+  },
+  {
+   "name": "Kirkman's Cove Lake",
+   "reports": 4,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.186607,
+     -95.987402
+    ]
+   ]
+  },
+  {
+   "name": "Maskenthine Reservoir",
+   "reports": 4,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     41.97731,
+     -97.23633
+    ]
+   ]
+  },
+  {
+   "name": "Wirth Brothers Lake",
+   "reports": 4,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.450062,
+     -96.200703
+    ]
+   ]
+  },
+  {
+   "name": "Big Indian Lake (11A)",
+   "reports": 3,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.058967,
+     -96.695349
+    ]
+   ]
+  },
+  {
+   "name": "West Papillion Creek",
+   "reports": 3,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.28555,
+     -96.234515
+    ],
+    [
+     41.286977,
+     -96.186099
+    ],
+    [
+     41.290688,
+     -96.177898
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Boxelder Creek",
+   "reports": 2,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.220742,
+     -96.252236
+    ],
+    [
+     41.227507,
+     -96.237041
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Harry Strunk Lake (Medicine Creek Reservoir)",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.388221,
+     -100.223156
+    ]
+   ]
+  },
+  {
+   "name": "Holmes Lake",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.7816,
+     -96.63105
+    ]
+   ]
+  },
+  {
+   "name": "Intermittent Stream (Trib West Papio Creek)",
+   "reports": 2,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.255416,
+     -96.225508
+    ],
+    [
+     41.253106,
+     -96.212273
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Iron Horse Trail Lake",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.047597,
+     -96.098026
+    ]
+   ]
+  },
+  {
+   "name": "Bader Memorial Lake No. 6",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.986755,
+     -98.151141
+    ]
+   ]
+  },
+  {
+   "name": "Blood Creek",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.19598,
+     -95.987522
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Cottonmill Park Swim Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.702902,
+     -99.142471
+    ]
+   ]
+  },
+  {
+   "name": "Cottonwood Creek",
+   "reports": 1,
+   "permits": [
+    "NE0046272"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.308851,
+     -96.81023
+    ]
+   ],
+   "towns": [
+    "Prague"
+   ]
+  },
+  {
+   "name": "Drainage Ditch by east lagoon",
+   "reports": 1,
+   "permits": [
+    "NE0045101"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.459274,
+     -96.855911
+    ]
+   ],
+   "towns": [
+    "Clatonia"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "Duck Creek Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.49674,
+     -95.80472
+    ]
+   ]
+  },
+  {
+   "name": "Ft. Kearny Lake No. 7 (SRA)",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.653559,
+     -98.987657
+    ]
+   ]
+  },
+  {
+   "name": "Hanson Lake 2",
+   "reports": 1,
+   "permits": [
+    "NE0132632"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.065255,
+     -95.943037
+    ]
+   ],
+   "towns": [
+    "Bellevue"
+   ]
+  },
+  {
+   "name": "Intermittent Stream",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.20229,
+     -96.226455
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "Johnson Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.678867,
+     -99.831706
+    ]
+   ]
+  },
+  {
+   "name": "Kelley Creek",
+   "reports": 1,
+   "permits": [
+    "NE0021504"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.19179,
+     -100.60186
+    ]
+   ],
+   "towns": [
+    "McCook"
+   ]
+  },
+  {
+   "name": "Lake North",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     41.49583,
+     -97.35915
+    ]
+   ]
+  },
+  {
+   "name": "Lake Yankton (Cottonwood Lake)",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     42.853031,
+     -97.468522
+    ]
+   ]
+  },
+  {
+   "name": "Lewis and Clark Reservoir",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     42.837263,
+     -97.582382
+    ]
+   ]
+  },
+  {
+   "name": "Lone Star Reservoir",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.41478,
+     -97.38032
+    ]
+   ]
+  },
+  {
+   "name": "North Table Creek",
+   "reports": 1,
+   "permits": [
+    "NE0021245"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.683139,
+     -95.868702
+    ]
+   ],
+   "towns": [
+    "Nebraska City"
+   ]
+  },
+  {
+   "name": "Pibel Lake (SRA)",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     41.758377,
+     -98.531574
+    ]
+   ]
+  },
+  {
+   "name": "Summit Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     41.76107,
+     -96.29539
+    ]
+   ]
+  },
+  {
+   "name": "Swan Creek Lake (5A)",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ne-dwee-beachwatch"
+   ],
+   "points": [
+    [
+     40.45538,
+     -97.26406
+    ]
+   ]
+  },
+  {
+   "name": "Table Creek",
+   "reports": 1,
+   "permits": [
+    "NE0021245"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "as_typed": [
+    "Table Creek/Missouri River"
+   ],
+   "points": [
+    [
+     40.67506,
+     -95.84534
+    ]
+   ],
+   "towns": [
+    "Nebraska City"
+   ]
+  },
+  {
+   "name": "Tributary of Beadle Creek",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.191002,
+     -96.217043
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Tributary of Candlewood Reservoir",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.274024,
+     -96.121643
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Tributary of West Papillion Creek",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.259436,
+     -96.188631
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Tributary of Whispering Ridge Creek",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.306701,
+     -96.221806
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Tributary of the West Papillion Creek",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.254012,
+     -96.206698
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ]
+  },
+  {
+   "name": "Unnamed Drainageway",
+   "reports": 1,
+   "permits": [
+    "NE0112810"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.274464,
+     -96.103122
+    ]
+   ],
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  }
+ ]
+}

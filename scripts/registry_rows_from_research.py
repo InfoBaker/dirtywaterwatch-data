@@ -51,6 +51,7 @@ HOMEPAGES = {
     "va-echo-cso-inventory": "https://echo.epa.gov/tools/data-downloads/cso-inventory-download-summary",
     "dc-echo-sobe-dc0021199": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "az-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+    "ak-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "nm-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "nm-nmed-hab-mapper": "https://www.env.nm.gov/surface-water-quality/hab/",
     "nc-dwr-sso-2026": "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779",
@@ -63,6 +64,8 @@ HOMEPAGES = {
     "nc-wnc-rec-monitoring": "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-monitoring-program",
     "sd-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "sd-danr-hab-2026-samples": "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx",
+    "ne-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+    "ne-dwee-beachwatch": "https://dwee.nebraska.gov/node/4996",
 }
 
 

@@ -53,6 +53,8 @@ AREA_TITLES = {
     "az": "Arizona",
     "sd": "South Dakota",
     "ms": "Mississippi",
+    "ne": "Nebraska",
+    "ak": "Alaska",
     "nm": "New Mexico",
 }
 

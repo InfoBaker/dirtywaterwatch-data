@@ -35,9 +35,11 @@ machine_readable: true
 legal_basis: "NMED HAB Advisory Guidance"
 checked: "2026-11-07"
 # Generic ingester (docs/generic-ingesters.md). One record per station and sample under a WATCH, WARNING or DANGER
-#   status; a MONITORED station (sampled, no advisory) is not a record, and a record whose station leaves those
-#   statuses is kept with the missing mark and ages out 14 days after it was last confirmed (build/status.py). The
-#   layer's last edit is every record's source_updated_at, so an advisory NMED still shows stays confirmed. The
+#   status; a MONITORED station (sampled, no advisory) is not a record. Every fetch that still finds the record
+#   confirms it (history.confirm_while_listed: raw._last_seen_in_source), so an advisory NMED's map still shows keeps
+#   its colour however long since NMED last edited the layer; the first fetch that no longer finds it ends it
+#   (raw._unlisted_since, build/status.py). A failing fetch confirms nothing: the advisory then ages out 14 days after
+#   the last fetch that found it. The layer's last edit stays every record's source_updated_at. The
 #   service is named for its upload (Upload_Data_May2026): a new season's service fails the fetch (ok false) until
 #   the url is updated from the HABs Mapper page. SWQB_internal_notes and GlobalID are never requested.
 fetch:
@@ -78,6 +80,7 @@ fetch:
   dedupe: {repeats: suffix}
   history:
     keep_missing: true
+    confirm_while_listed: true
     track:
       HAB_Status: {key: _status_seen, label: status}
   meta:

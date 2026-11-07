@@ -1,0 +1,55 @@
+{
+ "about": "Receiving-water names in Alaska's reports (EPA's overflow tables for Alaska permits, the 2026-11-04 extract: the 6 reports kept, 5 of which name a water) that data/receiving-waters-national.json does not hold for AK, by name as the report gives it once 'which flowed to' is split, with the number of reports giving each and the reports' points; and the receiving water of the one Alaska sewage permit in neither of EPA's outfall tables (0 reports). Reports that say the sewage reached no water are left out. Cook Inlet and Tongass Narrows are on the national list.",
+ "state": "AK",
+ "records_read": 6,
+ "waters": 3,
+ "reports": 3,
+ "rows": [
+  {
+   "name": "Fish Creek",
+   "reports": 2,
+   "permits": [
+    "AK0022551"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     61.200844,
+     -149.93413
+    ],
+    [
+     61.179442,
+     -149.929066
+    ]
+   ]
+  },
+  {
+   "name": "Birch Lake",
+   "reports": 1,
+   "permits": [
+    "AK0022551"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     61.145893,
+     -149.936183
+    ]
+   ]
+  },
+  {
+   "name": "Ward Cove",
+   "reports": 0,
+   "permits": [
+    "AK0053384"
+   ],
+   "sources": [
+    "operator row ak-ward-cove-full-cycle"
+   ]
+  }
+ ]
+}
