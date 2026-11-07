@@ -4,10 +4,12 @@ url: "https://www.mdeq.ms.gov/category/news-release/feed/"
 homepage: "https://www.mdeq.ms.gov/category/news-release/feed/"
 kind: "rss"
 level: "state"
-# Notes (research/ms, status used, verified fetched, checked 2026-11-07): Polled every 3 hours by
-#   the notice-register monitor (row ms-mdeq-news-releases): a new release naming a water contact
-#   advisory becomes a dated record. The advisories in effect before the first poll (the Pearl River
-#   below Jackson, Trahon Creek) are not records.
+# Notes (research/ms, status used, verified fetched, checked 2026-11-07): Watched every 3 hours by
+#   the notice-register monitor (row ms-mdeq-news-releases), no records: the feed's items carry the
+#   title only, and a release lifting an advisory reads like one issuing it, so a new release is
+#   listed for review. A reader that tells issue from lift and takes the water named would make
+#   these dated advisories. The advisories in effect before the first poll (the Pearl River below
+#   Jackson, Trahon Creek) are not records.
 # Access detail (research, quoted): MDEQ's news-release RSS feed (answered 200 on 2026-11-07). The
 #   2026-09-02 release issued a water contact advisory for an unnamed tributary of Trahon Creek and
 #   Trahon Creek to the Pearl River "due to an ongoing sewage bypass" and said "the longstanding
