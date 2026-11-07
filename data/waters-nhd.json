@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-07T02:07:11Z",
+ "built": "2026-11-07T08:25:14Z",
  "partial": false,
- "count": 3793,
+ "count": 3802,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -62,6 +62,127 @@
    "warning": "this run resolved 872 records and the file holds 903; the 31 not resolved this run were kept from the file (failed requests, the OSM time budget, or changed targets); --rebuild replaces the file with this run's records"
   },
   "state_builds": {
+   "AK": {
+    "built": "2026-11-07T03:59:08Z",
+    "targets": 90,
+    "targets_by_define_by": {
+     "reach": 6,
+     "point": 40,
+     "unnamed": 44
+    },
+    "targets_mapped": 11,
+    "targets_mapped_by": {
+     "point (NHD high resolution)": 10,
+     "existing record": 1
+    },
+    "targets_failed": 79,
+    "failed_reasons": {
+     "NLDI snapped the outfall's point to no NHDPlus flowline": 44,
+     "no NHD flowline or waterbody of that name within 2 km": 35
+    },
+    "records": 8,
+    "records_by_define_by": {
+     "point (NHD high resolution)": 7,
+     "osm": 1
+    },
+    "records_by_kind": {
+     "river": 4,
+     "stream": 3,
+     "canal": 1
+    },
+    "no_water": {
+     "a wetland (not a named NHD water)": 2,
+     "not a water name": 1
+    },
+    "run": {
+     "requests": {
+      "tiger": 2,
+      "reach2": 2,
+      "reach4": 1,
+      "name2": 46,
+      "name4": 46,
+      "nldi-position": 98,
+      "near2": 54,
+      "near4": 54,
+      "nhd-hr-near": 44,
+      "nhd-hr": 10
+     },
+     "network_requests": 357,
+     "cached": {
+      "nldi-position": 2,
+      "near2": 2,
+      "near4": 2
+     },
+     "failed": {},
+     "stopped": null,
+     "other_places": {
+      "places": 0,
+      "resolved": 0,
+      "found": 0,
+      "seconds": 0.0
+     },
+     "osm": {
+      "by_state": {
+       "AK": {
+        "targets": 30,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 3493,
+     "run_records": 8,
+     "replaced": 0,
+     "added": 8,
+     "kept": 3493,
+     "dropped": 0,
+     "written": 3501
+    },
+    "report_names_hand_only": {
+     "built": "2026-11-07T07:54:46Z",
+     "file": "research/ak/receiving-waters-missing.json",
+     "names": 2,
+     "reports": 2,
+     "names_no_water": 0,
+     "waters_named": 2,
+     "already_a_record": 0,
+     "targets": 2,
+     "targets_mapped": 0,
+     "records": 2,
+     "targets_failed": 2,
+     "failed_reasons": {
+      "not reached this run": 2
+     },
+     "network_requests": 1,
+     "requests": {
+      "tiger-hand": 1
+     },
+     "cached": {
+      "tiger": 2,
+      "tiger-hand": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3761,
+      "run_records": 2,
+      "replaced": 1,
+      "added": 1,
+      "kept": 3760,
+      "dropped": 0,
+      "written": 3762
+     }
+    }
+   },
    "AZ": {
     "built": "2026-11-07T02:07:11Z",
     "targets": 123,
@@ -2467,6 +2588,120 @@
      }
     }
    },
+   "MS": {
+    "built": "2026-11-07T02:41:11Z",
+    "targets": 223,
+    "targets_by_define_by": {
+     "reach": 195,
+     "point": 10,
+     "name": 13,
+     "unnamed": 5
+    },
+    "targets_mapped": 168,
+    "targets_mapped_by": {
+     "reach": 85,
+     "name": 46,
+     "point (NHD high resolution)": 7,
+     "point": 24,
+     "existing record": 1,
+     "unnamed": 5
+    },
+    "targets_failed": 55,
+    "failed_reasons": {
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 19,
+     "no NHD flowline or waterbody of that name in the state": 5,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 2 NHD waters of that name in MS and no town to choose one; no NHD flow": 4,
+     "no NHD flowline or waterbody of that name within 2 km": 4,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 4 NHD waters of that name in MS and no town to choose one; no NHD flow": 2,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 3 NHD waters of that name in MS and no town to choose one; no NHD flow": 2,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 9 NHD waters of that name in MS and no town to choose one; no NHD flow": 2,
+     "EPA's reaches for it are named Bahala Creek, Big Cedar Creek, Burrus Bayou, Chunky River, French Branch, not 'DIRECTLY';": 1,
+     "EPA's reaches for it are named Tallahatchie River, not 'BLACK BAYOU'; 3 NHD waters of that name in MS and no town to cho": 1,
+     "EPA's reaches for it are named Tombigbee River, not 'TENNESSEE TOMBIGBEE WATERWAY'; no NHD flowline or waterbody of that": 1,
+     "EPA's reaches for it are named Bayou Bernard, not 'BERNARD BAYOU'; no NHD flowline or waterbody of that name in the stat": 1,
+     "EPA's reaches for it are named Homo, Bogue, not 'BOGUE HOMO CREEK'; no NHD flowline or waterbody of that name in the sta": 1,
+     "NHD feature 1306837 has no geometry in MS; no NHD high-resolution flowline of that name within 3 km of the points; no NH": 1,
+     "EPA's reaches for it are named Big Sunflower River, not 'SUNFLOWER RIVER'; no NHD flowline or waterbody of that name in ": 1,
+     "EPA's reaches for it are named Big Bogue, not 'BUG BOGUE CREEK'; no NHD flowline or waterbody of that name in the state;": 1
+    },
+    "records": 148,
+    "records_by_define_by": {
+     "reach": 77,
+     "name": 37,
+     "point": 21,
+     "unnamed": 5,
+     "point (NHD high resolution)": 7,
+     "osm": 1
+    },
+    "records_by_kind": {
+     "river": 34,
+     "canal": 6,
+     "stream": 103,
+     "lake": 3,
+     "pond": 2
+    },
+    "no_water": {
+     "no water name": 7,
+     "no receiving-water name, no point and no NHD reach in EPA's records for this outfall": 1
+    },
+    "run": {
+     "requests": {
+      "tiger": 1,
+      "reach2": 7,
+      "name2": 129,
+      "name4": 59,
+      "nldi-position": 129,
+      "near2": 129,
+      "near4": 101,
+      "gnis2": 148,
+      "comid2": 12,
+      "comid4": 6,
+      "gnis4": 5,
+      "nldi-nav": 4,
+      "nhd-hr-near": 34,
+      "nhd-hr": 7
+     },
+     "network_requests": 771,
+     "cached": {
+      "comid2": 1,
+      "comid4": 1,
+      "nldi-position": 1,
+      "near2": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "other_places": {
+      "places": 31,
+      "resolved": 31,
+      "found": 7,
+      "seconds": 50.5
+     },
+     "osm": {
+      "by_state": {
+       "MS": {
+        "targets": 24,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://lz4.overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 3438,
+     "run_records": 148,
+     "replaced": 125,
+     "added": 23,
+     "kept": 3313,
+     "dropped": 0,
+     "written": 3461
+    }
+   },
    "NC": {
     "built": "2026-11-04T05:12:02Z",
     "targets": 201,
@@ -2920,6 +3155,407 @@
       "kept": 2004,
       "dropped": 0,
       "written": 2004
+     }
+    }
+   },
+   "NE": {
+    "built": "2026-11-07T02:54:28Z",
+    "targets": 179,
+    "targets_by_define_by": {
+     "reach": 152,
+     "point": 7,
+     "name": 8,
+     "unnamed": 12
+    },
+    "targets_mapped": 117,
+    "targets_mapped_by": {
+     "reach": 78,
+     "point (NHD high resolution)": 7,
+     "name": 12,
+     "point": 8,
+     "unnamed": 12
+    },
+    "targets_failed": 62,
+    "failed_reasons": {
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 20,
+     "no NHD flowline or waterbody of that name in the state": 7,
+     "no NHD flowline or waterbody of that name within 2 km": 3,
+     "EPA's reaches for it are named Big Slough Creek, Logan Creek Dredge, not 'LOGAN CREEK'; no NHD flowline or waterbody of ": 1,
+     "EPA's reaches for it are named North Loup River, not 'Lower North Loup'; no NHD flowline or waterbody of that name in th": 1,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 2 NHD waters of that name in NE and no town to choose one; no NHD flow": 1,
+     "EPA's reaches for it are named North Fork Big Nemaha River, not 'N FK BIG NEMAHA'; no NHD flowline or waterbody of that ": 1,
+     "EPA's reaches for it are named North Fork Big Nemaha River, not 'N FK NEMAHA'; no NHD flowline or waterbody of that name": 1,
+     "EPA's reaches for it are named Big Sandy Creek, not 'SANDY Creek'; no NHD flowline or waterbody of that name in the stat": 1,
+     "EPA's reaches for it are named Little Blue River, Thirtytwo Mile Creek, not 'Upper LITTLE BLUE'; no NHD flowline or wate": 1,
+     "EPA's reaches for it are named North Branch Elkhorn River, not 'Branch EL River'; no NHD flowline or waterbody of that n": 1,
+     "EPA's reaches for it are named Blacksnake Creek, not 'CEDAR Creek'; 13 NHD waters of that name in NE, none crossing or w": 1,
+     "EPA's reaches for it are named Jones Creek, not 'DTCH LITTLE NE'; no NHD flowline or waterbody of that name in the state": 1,
+     "EPA's reaches for it are named Little Nemaha River, not 'DTC-LITTLE NEM'; no NHD flowline or waterbody of that name in t": 1,
+     "EPA's reaches for it are named Coal Creek, not 'DTC-WEEP WATER C'; no NHD flowline or waterbody of that name in the stat": 1
+    },
+    "records": 111,
+    "records_by_define_by": {
+     "reach": 76,
+     "name": 11,
+     "point": 7,
+     "unnamed": 11,
+     "point (NHD high resolution)": 6
+    },
+    "records_by_kind": {
+     "river": 31,
+     "stream": 76,
+     "canal": 4
+    },
+    "no_water": {
+     "no water name": 8,
+     "a river basin in EPA's receiving-water field, not a water": 2,
+     "not a water name": 1
+    },
+    "run": {
+     "requests": {
+      "tiger": 1,
+      "reach2": 13,
+      "gnis2": 100,
+      "name2": 86,
+      "name4": 64,
+      "nldi-position": 109,
+      "near2": 108,
+      "near4": 90,
+      "comid2": 20,
+      "nldi-nav": 10,
+      "nhd-hr-near": 39,
+      "nhd-hr": 7
+     },
+     "network_requests": 647,
+     "cached": {},
+     "failed": {},
+     "stopped": null,
+     "other_places": {
+      "places": 28,
+      "resolved": 28,
+      "found": 10,
+      "seconds": 47.1
+     },
+     "osm": {
+      "by_state": {
+       "NE": {
+        "targets": 29,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 3593,
+     "run_records": 111,
+     "replaced": 100,
+     "added": 11,
+     "kept": 3493,
+     "dropped": 0,
+     "written": 3604
+    },
+    "report_names": {
+     "built": "2026-11-07T08:25:13Z",
+     "file": "research/ne/receiving-waters-missing.json",
+     "names": 40,
+     "reports": 82,
+     "names_no_water": 2,
+     "waters_named": 36,
+     "already_a_record": 10,
+     "targets": 26,
+     "targets_mapped": 9,
+     "records": 9,
+     "targets_failed": 17,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points;": 16,
+      "the name of a town": 1
+     },
+     "network_requests": 34,
+     "requests": {
+      "name2": 2,
+      "name4": 1,
+      "gnis2": 5,
+      "comid4": 1,
+      "gnis4": 1,
+      "nhd-hr-near": 21,
+      "nhd-hr": 3
+     },
+     "cached": {
+      "tiger": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3793,
+      "run_records": 9,
+      "replaced": 0,
+      "added": 9,
+      "kept": 3793,
+      "dropped": 0,
+      "written": 3802
+     }
+    }
+   },
+   "NM": {
+    "built": "2026-11-07T04:54:05Z",
+    "targets": 46,
+    "targets_by_define_by": {
+     "reach": 42,
+     "unnamed": 4
+    },
+    "targets_mapped": 32,
+    "targets_mapped_by": {
+     "reach": 23,
+     "name": 4,
+     "point": 1,
+     "unnamed": 4
+    },
+    "targets_failed": 14,
+    "failed_reasons": {
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 6,
+     "EPA's reaches for it are named Rio Grande, not 'OF THE RIO GRANDE'; no NHD flowline or waterbody of that name in the sta": 1,
+     "EPA's reaches for it are named Rio Grande, not 'RIO GRANDE RIVER'; no NHD flowline or waterbody of that name in the stat": 1,
+     "EPA's reaches for it are named Rio Grande, not 'SEGMENT 2'; no NHD flowline or waterbody of that name in the state; no N": 1,
+     "EPA's reaches for it are named Pecos River, Rio Ruidoso, not 'SEG 2'; no NHD flowline or waterbody of that name in the s": 1,
+     "EPA's reaches for it are named Rio Chama, not 'CHAMA RIVER'; no NHD flowline or waterbody of that name in the state; no ": 1,
+     "EPA's reaches for it are named Rio Grande, not 'LOWER PERALTA DRAIN'; no NHD flowline or waterbody of that name in the s": 1,
+     "EPA's reaches for it are named Rio Grande, not 'RIO GRANDE RIVER SEGMENT'; no NHD flowline or waterbody of that name in ": 1,
+     "EPA's reaches for it are named Tularosa Creek, not 'RIO TULOROSA CREEK'; no NHD flowline or waterbody of that name in th": 1
+    },
+    "records": 27,
+    "records_by_define_by": {
+     "reach": 19,
+     "name": 4,
+     "point": 1,
+     "unnamed": 3
+    },
+    "records_by_kind": {
+     "river": 12,
+     "stream": 14,
+     "canal": 1
+    },
+    "no_water": {
+     "no water name": 2,
+     "a river basin in EPA's receiving-water field, not a water": 1,
+     "a land-application system, not a surface water": 1
+    },
+    "run": {
+     "requests": {
+      "tiger": 2,
+      "reach2": 4,
+      "gnis2": 27,
+      "name2": 19,
+      "name4": 15,
+      "nldi-position": 22,
+      "near2": 22,
+      "near4": 20,
+      "comid2": 4,
+      "comid4": 1,
+      "gnis4": 1,
+      "nldi-nav": 3,
+      "nhd-hr-near": 7
+     },
+     "network_requests": 147,
+     "cached": {
+      "nldi-position": 4,
+      "near2": 4,
+      "near4": 3,
+      "comid2": 2,
+      "comid4": 1,
+      "nldi-nav": 1,
+      "reach2": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "other_places": {
+      "places": 6,
+      "resolved": 6,
+      "found": 2,
+      "seconds": 8.2
+     },
+     "osm": {
+      "by_state": {
+       "NM": {
+        "targets": 5,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://lz4.overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 3777,
+     "run_records": 27,
+     "replaced": 25,
+     "added": 2,
+     "kept": 3752,
+     "dropped": 0,
+     "written": 3779
+    }
+   },
+   "SD": {
+    "built": "2026-11-07T02:24:12Z",
+    "targets": 257,
+    "targets_by_define_by": {
+     "reach": 198,
+     "point": 15,
+     "unnamed": 44
+    },
+    "targets_mapped": 201,
+    "targets_mapped_by": {
+     "reach": 98,
+     "point (NHD high resolution)": 9,
+     "name": 35,
+     "point": 19,
+     "unnamed": 40
+    },
+    "targets_failed": 56,
+    "failed_reasons": {
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 30,
+     "no NHD flowline or waterbody of that name within 2 km": 4,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 5 NHD waters of that name in SD and no town to choose one; no NHD flow": 3,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 2 NHD waters of that name in SD and no town to choose one; no NHD flow": 2,
+     "NLDI snapped the outfall's point to no NHDPlus flowline": 2,
+     "EPA's reaches for it are named Whitewood Creek, not 'Gold Run Creek'; no NHD flowline or waterbody of that name in the s": 1,
+     "EPA's reaches for it are named James River, not 'Crow Creek Ditch'; no NHD flowline or waterbody of that name in the sta": 1,
+     "EPA's reaches for it are named Missouri River, not 'LAKE SH'; no NHD flowline or waterbody of that name in the state; no": 1,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; 3 NHD waters of that name in SD and no town to choose one; no NHD flow": 1,
+     "EPA's reaches for it are named Crow Creek, not 'Placeholder'; no NHD flowline or waterbody of that name in the state; no": 1,
+     "EPA's reaches for it are named Medicine Creek, not 'Draper Dam'; no NHD flowline or waterbody of that name in the state;": 1,
+     "EPA's reaches for it are named East Fork Vermillion River, not 'East Fork Vermillion'; no NHD flowline or waterbody of t": 1,
+     "EPA's reaches for it are named Dolph Creek, not 'Johnsons Slough'; no NHD flowline or waterbody of that name in the stat": 1,
+     "EPA's reaches for it are named Battle Creek, not 'Lafferty Gulch'; no NHD flowline or waterbody of that name in the stat": 1,
+     "EPA's reaches for it are named Missouri River, not 'MUD LAKE'; 15 NHD waters of that name in SD and no town to choose on": 1
+    },
+    "records": 180,
+    "records_by_define_by": {
+     "reach": 92,
+     "name": 28,
+     "point": 13,
+     "unnamed": 38,
+     "point (NHD high resolution)": 9
+    },
+    "records_by_kind": {
+     "river": 38,
+     "stream": 132,
+     "canal": 4,
+     "lake": 6
+    },
+    "no_water": {
+     "not a water name": 14,
+     "a wetland (not a named NHD water)": 4
+    },
+    "run": {
+     "requests": {
+      "reach2": 39,
+      "gnis2": 134,
+      "name2": 106,
+      "nldi-position": 156,
+      "near2": 152,
+      "near4": 130,
+      "comid4": 25,
+      "gnis4": 19,
+      "name4": 65,
+      "comid2": 55,
+      "nldi-nav": 36,
+      "nhd-hr-near": 64,
+      "nhd-hr": 9
+     },
+     "network_requests": 996,
+     "cached": {
+      "comid4": 8,
+      "comid2": 5,
+      "nldi-position": 8,
+      "near2": 7,
+      "near4": 7
+     },
+     "failed": {
+      "tiger": 1
+     },
+     "stopped": null,
+     "other_places": {
+      "places": 56,
+      "resolved": 56,
+      "found": 9,
+      "seconds": 91.1
+     },
+     "osm": {
+      "by_state": {
+       "SD": {
+        "targets": 41,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 3379,
+     "run_records": 180,
+     "replaced": 150,
+     "added": 30,
+     "kept": 3229,
+     "dropped": 0,
+     "written": 3409
+    },
+    "report_names": {
+     "built": "2026-11-07T05:04:12Z",
+     "file": "research/sd/receiving-waters-missing.json",
+     "names": 15,
+     "reports": 16,
+     "names_no_water": 1,
+     "waters_named": 14,
+     "already_a_record": 7,
+     "targets": 7,
+     "targets_mapped": 1,
+     "records": 1,
+     "targets_failed": 6,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in SD; no NHD high-resolution flowline of that name within 3 km of the points;": 2,
+      "6 NHD waters of that name in SD and the reports give no place to choose one": 2,
+      "4 NHD waters of that name in SD, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1,
+      "1 NHD water of that name in SD, none within reach of the reports' places; no NHD high-resolution flowline of that name w": 1
+     },
+     "network_requests": 8,
+     "requests": {
+      "tiger": 1,
+      "name2": 1,
+      "name4": 1,
+      "gnis2": 1,
+      "nhd-hr-near": 4
+     },
+     "cached": {},
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3760,
+      "run_records": 1,
+      "replaced": 0,
+      "added": 1,
+      "kept": 3760,
+      "dropped": 0,
+      "written": 3761
      }
     }
    },
@@ -3392,600 +4028,6 @@
       "dropped": 0,
       "written": 3217
      }
-    }
-   },
-   "SD": {
-    "built": "2026-11-07T02:24:12Z",
-    "targets": 257,
-    "targets_by_define_by": {
-     "reach": 198,
-     "point": 15,
-     "unnamed": 44
-    },
-    "targets_mapped": 201,
-    "targets_mapped_by": {
-     "reach": 98,
-     "point (NHD high resolution)": 9,
-     "name": 35,
-     "point": 19,
-     "unnamed": 40
-    },
-    "targets_failed": 56,
-    "failed_reasons": {
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 30,
-     "no NHD flowline or waterbody of that name within 2 km": 4,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 5 NHD waters of that name in SD and no town to choose one; no NHD flow": 3,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 2 NHD waters of that name in SD and no town to choose one; no NHD flow": 2,
-     "NLDI snapped the outfall's point to no NHDPlus flowline": 2,
-     "EPA's reaches for it are named Whitewood Creek, not 'Gold Run Creek'; no NHD flowline or waterbody of that name in the s": 1,
-     "EPA's reaches for it are named James River, not 'Crow Creek Ditch'; no NHD flowline or waterbody of that name in the sta": 1,
-     "EPA's reaches for it are named Missouri River, not 'LAKE SH'; no NHD flowline or waterbody of that name in the state; no": 1,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 3 NHD waters of that name in SD and no town to choose one; no NHD flow": 1,
-     "EPA's reaches for it are named Crow Creek, not 'Placeholder'; no NHD flowline or waterbody of that name in the state; no": 1,
-     "EPA's reaches for it are named Medicine Creek, not 'Draper Dam'; no NHD flowline or waterbody of that name in the state;": 1,
-     "EPA's reaches for it are named East Fork Vermillion River, not 'East Fork Vermillion'; no NHD flowline or waterbody of t": 1,
-     "EPA's reaches for it are named Dolph Creek, not 'Johnsons Slough'; no NHD flowline or waterbody of that name in the stat": 1,
-     "EPA's reaches for it are named Battle Creek, not 'Lafferty Gulch'; no NHD flowline or waterbody of that name in the stat": 1,
-     "EPA's reaches for it are named Missouri River, not 'MUD LAKE'; 15 NHD waters of that name in SD and no town to choose on": 1
-    },
-    "records": 180,
-    "records_by_define_by": {
-     "reach": 92,
-     "name": 28,
-     "point": 13,
-     "unnamed": 38,
-     "point (NHD high resolution)": 9
-    },
-    "records_by_kind": {
-     "river": 38,
-     "stream": 132,
-     "canal": 4,
-     "lake": 6
-    },
-    "no_water": {
-     "not a water name": 14,
-     "a wetland (not a named NHD water)": 4
-    },
-    "run": {
-     "requests": {
-      "reach2": 39,
-      "gnis2": 134,
-      "name2": 106,
-      "nldi-position": 156,
-      "near2": 152,
-      "near4": 130,
-      "comid4": 25,
-      "gnis4": 19,
-      "name4": 65,
-      "comid2": 55,
-      "nldi-nav": 36,
-      "nhd-hr-near": 64,
-      "nhd-hr": 9
-     },
-     "network_requests": 996,
-     "cached": {
-      "comid4": 8,
-      "comid2": 5,
-      "nldi-position": 8,
-      "near2": 7,
-      "near4": 7
-     },
-     "failed": {
-      "tiger": 1
-     },
-     "stopped": null,
-     "other_places": {
-      "places": 56,
-      "resolved": 56,
-      "found": 9,
-      "seconds": 91.1
-     },
-     "osm": {
-      "by_state": {
-       "SD": {
-        "targets": 41,
-        "queries": 1,
-        "sent": 1,
-        "failed": null,
-        "via": [
-         "https://overpass-api.de/api/interpreter"
-        ]
-       }
-      },
-      "left_for_next_run": 0
-     }
-    },
-    "write": {
-     "mode": "merge",
-     "existing_records": 3379,
-     "run_records": 180,
-     "replaced": 150,
-     "added": 30,
-     "kept": 3229,
-     "dropped": 0,
-     "written": 3409
-    },
-    "report_names": {
-     "built": "2026-11-07T05:04:12Z",
-     "file": "research/sd/receiving-waters-missing.json",
-     "names": 15,
-     "reports": 16,
-     "names_no_water": 1,
-     "waters_named": 14,
-     "already_a_record": 7,
-     "targets": 7,
-     "targets_mapped": 1,
-     "records": 1,
-     "targets_failed": 6,
-     "failed_reasons": {
-      "no NHD flowline or waterbody of that name in SD; no NHD high-resolution flowline of that name within 3 km of the points;": 2,
-      "6 NHD waters of that name in SD and the reports give no place to choose one": 2,
-      "4 NHD waters of that name in SD, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1,
-      "1 NHD water of that name in SD, none within reach of the reports' places; no NHD high-resolution flowline of that name w": 1
-     },
-     "network_requests": 8,
-     "requests": {
-      "tiger": 1,
-      "name2": 1,
-      "name4": 1,
-      "gnis2": 1,
-      "nhd-hr-near": 4
-     },
-     "cached": {},
-     "failed": {},
-     "stopped": null,
-     "write": {
-      "mode": "merge",
-      "existing_records": 3760,
-      "run_records": 1,
-      "replaced": 0,
-      "added": 1,
-      "kept": 3760,
-      "dropped": 0,
-      "written": 3761
-     }
-    }
-   },
-   "MS": {
-    "built": "2026-11-07T02:41:11Z",
-    "targets": 223,
-    "targets_by_define_by": {
-     "reach": 195,
-     "point": 10,
-     "name": 13,
-     "unnamed": 5
-    },
-    "targets_mapped": 168,
-    "targets_mapped_by": {
-     "reach": 85,
-     "name": 46,
-     "point (NHD high resolution)": 7,
-     "point": 24,
-     "existing record": 1,
-     "unnamed": 5
-    },
-    "targets_failed": 55,
-    "failed_reasons": {
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 19,
-     "no NHD flowline or waterbody of that name in the state": 5,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 2 NHD waters of that name in MS and no town to choose one; no NHD flow": 4,
-     "no NHD flowline or waterbody of that name within 2 km": 4,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 4 NHD waters of that name in MS and no town to choose one; no NHD flow": 2,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 3 NHD waters of that name in MS and no town to choose one; no NHD flow": 2,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 9 NHD waters of that name in MS and no town to choose one; no NHD flow": 2,
-     "EPA's reaches for it are named Bahala Creek, Big Cedar Creek, Burrus Bayou, Chunky River, French Branch, not 'DIRECTLY';": 1,
-     "EPA's reaches for it are named Tallahatchie River, not 'BLACK BAYOU'; 3 NHD waters of that name in MS and no town to cho": 1,
-     "EPA's reaches for it are named Tombigbee River, not 'TENNESSEE TOMBIGBEE WATERWAY'; no NHD flowline or waterbody of that": 1,
-     "EPA's reaches for it are named Bayou Bernard, not 'BERNARD BAYOU'; no NHD flowline or waterbody of that name in the stat": 1,
-     "EPA's reaches for it are named Homo, Bogue, not 'BOGUE HOMO CREEK'; no NHD flowline or waterbody of that name in the sta": 1,
-     "NHD feature 1306837 has no geometry in MS; no NHD high-resolution flowline of that name within 3 km of the points; no NH": 1,
-     "EPA's reaches for it are named Big Sunflower River, not 'SUNFLOWER RIVER'; no NHD flowline or waterbody of that name in ": 1,
-     "EPA's reaches for it are named Big Bogue, not 'BUG BOGUE CREEK'; no NHD flowline or waterbody of that name in the state;": 1
-    },
-    "records": 148,
-    "records_by_define_by": {
-     "reach": 77,
-     "name": 37,
-     "point": 21,
-     "unnamed": 5,
-     "point (NHD high resolution)": 7,
-     "osm": 1
-    },
-    "records_by_kind": {
-     "river": 34,
-     "canal": 6,
-     "stream": 103,
-     "lake": 3,
-     "pond": 2
-    },
-    "no_water": {
-     "no water name": 7,
-     "no receiving-water name, no point and no NHD reach in EPA's records for this outfall": 1
-    },
-    "run": {
-     "requests": {
-      "tiger": 1,
-      "reach2": 7,
-      "name2": 129,
-      "name4": 59,
-      "nldi-position": 129,
-      "near2": 129,
-      "near4": 101,
-      "gnis2": 148,
-      "comid2": 12,
-      "comid4": 6,
-      "gnis4": 5,
-      "nldi-nav": 4,
-      "nhd-hr-near": 34,
-      "nhd-hr": 7
-     },
-     "network_requests": 771,
-     "cached": {
-      "comid2": 1,
-      "comid4": 1,
-      "nldi-position": 1,
-      "near2": 1
-     },
-     "failed": {},
-     "stopped": null,
-     "other_places": {
-      "places": 31,
-      "resolved": 31,
-      "found": 7,
-      "seconds": 50.5
-     },
-     "osm": {
-      "by_state": {
-       "MS": {
-        "targets": 24,
-        "queries": 1,
-        "sent": 1,
-        "failed": null,
-        "via": [
-         "https://lz4.overpass-api.de/api/interpreter"
-        ]
-       }
-      },
-      "left_for_next_run": 0
-     }
-    },
-    "write": {
-     "mode": "merge",
-     "existing_records": 3438,
-     "run_records": 148,
-     "replaced": 125,
-     "added": 23,
-     "kept": 3313,
-     "dropped": 0,
-     "written": 3461
-    }
-   },
-   "NE": {
-    "built": "2026-11-07T02:54:28Z",
-    "targets": 179,
-    "targets_by_define_by": {
-     "reach": 152,
-     "point": 7,
-     "name": 8,
-     "unnamed": 12
-    },
-    "targets_mapped": 117,
-    "targets_mapped_by": {
-     "reach": 78,
-     "point (NHD high resolution)": 7,
-     "name": 12,
-     "point": 8,
-     "unnamed": 12
-    },
-    "targets_failed": 62,
-    "failed_reasons": {
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 20,
-     "no NHD flowline or waterbody of that name in the state": 7,
-     "no NHD flowline or waterbody of that name within 2 km": 3,
-     "EPA's reaches for it are named Big Slough Creek, Logan Creek Dredge, not 'LOGAN CREEK'; no NHD flowline or waterbody of ": 1,
-     "EPA's reaches for it are named North Loup River, not 'Lower North Loup'; no NHD flowline or waterbody of that name in th": 1,
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; 2 NHD waters of that name in NE and no town to choose one; no NHD flow": 1,
-     "EPA's reaches for it are named North Fork Big Nemaha River, not 'N FK BIG NEMAHA'; no NHD flowline or waterbody of that ": 1,
-     "EPA's reaches for it are named North Fork Big Nemaha River, not 'N FK NEMAHA'; no NHD flowline or waterbody of that name": 1,
-     "EPA's reaches for it are named Big Sandy Creek, not 'SANDY Creek'; no NHD flowline or waterbody of that name in the stat": 1,
-     "EPA's reaches for it are named Little Blue River, Thirtytwo Mile Creek, not 'Upper LITTLE BLUE'; no NHD flowline or wate": 1,
-     "EPA's reaches for it are named North Branch Elkhorn River, not 'Branch EL River'; no NHD flowline or waterbody of that n": 1,
-     "EPA's reaches for it are named Blacksnake Creek, not 'CEDAR Creek'; 13 NHD waters of that name in NE, none crossing or w": 1,
-     "EPA's reaches for it are named Jones Creek, not 'DTCH LITTLE NE'; no NHD flowline or waterbody of that name in the state": 1,
-     "EPA's reaches for it are named Little Nemaha River, not 'DTC-LITTLE NEM'; no NHD flowline or waterbody of that name in t": 1,
-     "EPA's reaches for it are named Coal Creek, not 'DTC-WEEP WATER C'; no NHD flowline or waterbody of that name in the stat": 1
-    },
-    "records": 111,
-    "records_by_define_by": {
-     "reach": 76,
-     "name": 11,
-     "point": 7,
-     "unnamed": 11,
-     "point (NHD high resolution)": 6
-    },
-    "records_by_kind": {
-     "river": 31,
-     "stream": 76,
-     "canal": 4
-    },
-    "no_water": {
-     "no water name": 8,
-     "a river basin in EPA's receiving-water field, not a water": 2,
-     "not a water name": 1
-    },
-    "run": {
-     "requests": {
-      "tiger": 1,
-      "reach2": 13,
-      "gnis2": 100,
-      "name2": 86,
-      "name4": 64,
-      "nldi-position": 109,
-      "near2": 108,
-      "near4": 90,
-      "comid2": 20,
-      "nldi-nav": 10,
-      "nhd-hr-near": 39,
-      "nhd-hr": 7
-     },
-     "network_requests": 647,
-     "cached": {},
-     "failed": {},
-     "stopped": null,
-     "other_places": {
-      "places": 28,
-      "resolved": 28,
-      "found": 10,
-      "seconds": 47.1
-     },
-     "osm": {
-      "by_state": {
-       "NE": {
-        "targets": 29,
-        "queries": 1,
-        "sent": 1,
-        "failed": null,
-        "via": [
-         "https://overpass-api.de/api/interpreter"
-        ]
-       }
-      },
-      "left_for_next_run": 0
-     }
-    },
-    "write": {
-     "mode": "merge",
-     "existing_records": 3593,
-     "run_records": 111,
-     "replaced": 100,
-     "added": 11,
-     "kept": 3493,
-     "dropped": 0,
-     "written": 3604
-    }
-   },
-   "AK": {
-    "built": "2026-11-07T03:59:08Z",
-    "targets": 90,
-    "targets_by_define_by": {
-     "reach": 6,
-     "point": 40,
-     "unnamed": 44
-    },
-    "targets_mapped": 11,
-    "targets_mapped_by": {
-     "point (NHD high resolution)": 10,
-     "existing record": 1
-    },
-    "targets_failed": 79,
-    "failed_reasons": {
-     "NLDI snapped the outfall's point to no NHDPlus flowline": 44,
-     "no NHD flowline or waterbody of that name within 2 km": 35
-    },
-    "records": 8,
-    "records_by_define_by": {
-     "point (NHD high resolution)": 7,
-     "osm": 1
-    },
-    "records_by_kind": {
-     "river": 4,
-     "stream": 3,
-     "canal": 1
-    },
-    "no_water": {
-     "a wetland (not a named NHD water)": 2,
-     "not a water name": 1
-    },
-    "run": {
-     "requests": {
-      "tiger": 2,
-      "reach2": 2,
-      "reach4": 1,
-      "name2": 46,
-      "name4": 46,
-      "nldi-position": 98,
-      "near2": 54,
-      "near4": 54,
-      "nhd-hr-near": 44,
-      "nhd-hr": 10
-     },
-     "network_requests": 357,
-     "cached": {
-      "nldi-position": 2,
-      "near2": 2,
-      "near4": 2
-     },
-     "failed": {},
-     "stopped": null,
-     "other_places": {
-      "places": 0,
-      "resolved": 0,
-      "found": 0,
-      "seconds": 0.0
-     },
-     "osm": {
-      "by_state": {
-       "AK": {
-        "targets": 30,
-        "queries": 1,
-        "sent": 1,
-        "failed": null,
-        "via": [
-         "https://overpass-api.de/api/interpreter"
-        ]
-       }
-      },
-      "left_for_next_run": 0
-     }
-    },
-    "write": {
-     "mode": "merge",
-     "existing_records": 3493,
-     "run_records": 8,
-     "replaced": 0,
-     "added": 8,
-     "kept": 3493,
-     "dropped": 0,
-     "written": 3501
-    },
-    "report_names_hand_only": {
-     "built": "2026-11-07T07:54:46Z",
-     "file": "research/ak/receiving-waters-missing.json",
-     "names": 2,
-     "reports": 2,
-     "names_no_water": 0,
-     "waters_named": 2,
-     "already_a_record": 0,
-     "targets": 2,
-     "targets_mapped": 0,
-     "records": 2,
-     "targets_failed": 2,
-     "failed_reasons": {
-      "not reached this run": 2
-     },
-     "network_requests": 1,
-     "requests": {
-      "tiger-hand": 1
-     },
-     "cached": {
-      "tiger": 2,
-      "tiger-hand": 1
-     },
-     "failed": {},
-     "stopped": null,
-     "write": {
-      "mode": "merge",
-      "existing_records": 3761,
-      "run_records": 2,
-      "replaced": 1,
-      "added": 1,
-      "kept": 3760,
-      "dropped": 0,
-      "written": 3762
-     }
-    }
-   },
-   "NM": {
-    "built": "2026-11-07T04:54:05Z",
-    "targets": 46,
-    "targets_by_define_by": {
-     "reach": 42,
-     "unnamed": 4
-    },
-    "targets_mapped": 32,
-    "targets_mapped_by": {
-     "reach": 23,
-     "name": 4,
-     "point": 1,
-     "unnamed": 4
-    },
-    "targets_failed": 14,
-    "failed_reasons": {
-     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 6,
-     "EPA's reaches for it are named Rio Grande, not 'OF THE RIO GRANDE'; no NHD flowline or waterbody of that name in the sta": 1,
-     "EPA's reaches for it are named Rio Grande, not 'RIO GRANDE RIVER'; no NHD flowline or waterbody of that name in the stat": 1,
-     "EPA's reaches for it are named Rio Grande, not 'SEGMENT 2'; no NHD flowline or waterbody of that name in the state; no N": 1,
-     "EPA's reaches for it are named Pecos River, Rio Ruidoso, not 'SEG 2'; no NHD flowline or waterbody of that name in the s": 1,
-     "EPA's reaches for it are named Rio Chama, not 'CHAMA RIVER'; no NHD flowline or waterbody of that name in the state; no ": 1,
-     "EPA's reaches for it are named Rio Grande, not 'LOWER PERALTA DRAIN'; no NHD flowline or waterbody of that name in the s": 1,
-     "EPA's reaches for it are named Rio Grande, not 'RIO GRANDE RIVER SEGMENT'; no NHD flowline or waterbody of that name in ": 1,
-     "EPA's reaches for it are named Tularosa Creek, not 'RIO TULOROSA CREEK'; no NHD flowline or waterbody of that name in th": 1
-    },
-    "records": 27,
-    "records_by_define_by": {
-     "reach": 19,
-     "name": 4,
-     "point": 1,
-     "unnamed": 3
-    },
-    "records_by_kind": {
-     "river": 12,
-     "stream": 14,
-     "canal": 1
-    },
-    "no_water": {
-     "no water name": 2,
-     "a river basin in EPA's receiving-water field, not a water": 1,
-     "a land-application system, not a surface water": 1
-    },
-    "run": {
-     "requests": {
-      "tiger": 2,
-      "reach2": 4,
-      "gnis2": 27,
-      "name2": 19,
-      "name4": 15,
-      "nldi-position": 22,
-      "near2": 22,
-      "near4": 20,
-      "comid2": 4,
-      "comid4": 1,
-      "gnis4": 1,
-      "nldi-nav": 3,
-      "nhd-hr-near": 7
-     },
-     "network_requests": 147,
-     "cached": {
-      "nldi-position": 4,
-      "near2": 4,
-      "near4": 3,
-      "comid2": 2,
-      "comid4": 1,
-      "nldi-nav": 1,
-      "reach2": 1
-     },
-     "failed": {},
-     "stopped": null,
-     "other_places": {
-      "places": 6,
-      "resolved": 6,
-      "found": 2,
-      "seconds": 8.2
-     },
-     "osm": {
-      "by_state": {
-       "NM": {
-        "targets": 5,
-        "queries": 1,
-        "sent": 1,
-        "failed": null,
-        "via": [
-         "https://lz4.overpass-api.de/api/interpreter"
-        ]
-       }
-      },
-      "left_for_next_run": 0
-     }
-    },
-    "write": {
-     "mode": "merge",
-     "existing_records": 3777,
-     "run_records": 27,
-     "replaced": 25,
-     "added": 2,
-     "kept": 3752,
-     "dropped": 0,
-     "written": 3779
     }
    }
   }
@@ -10133,6 +10175,16 @@
   {
    "state": "AZ",
    "text": "UNNAMED WASH",
+   "reason": "not a water name"
+  },
+  {
+   "state": "NE",
+   "text": "Lake North",
+   "reason": "no water name"
+  },
+  {
+   "state": "NE",
+   "text": "Unnamed Drainageway",
    "reason": "not a water name"
   }
  ],
@@ -191716,6 +191768,793 @@
    "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD",
    "from": "reports",
    "reports": 0
+  },
+  {
+   "state": "NE",
+   "name": "Rockford Lake",
+   "texts": [
+    "Rockford Lake"
+   ],
+   "outfalls": 0,
+   "events": 8,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "rockford-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 8
+  },
+  {
+   "state": "NE",
+   "name": "Branched Oak Lake",
+   "texts": [
+    "Branched Oak Lake"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "branched-oak-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 4
+  },
+  {
+   "state": "NE",
+   "name": "Kirkman's Cove Lake",
+   "texts": [
+    "Kirkman's Cove Lake"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "kirkman-s-cove-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 4
+  },
+  {
+   "state": "NE",
+   "name": "Maskenthine Reservoir",
+   "texts": [
+    "Maskenthine Reservoir"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "maskenthine-reservoir-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 4
+  },
+  {
+   "state": "NE",
+   "name": "Harry Strunk Lake",
+   "texts": [
+    "Harry Strunk Lake (Medicine Creek Reservoir)"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "harry-strunk-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "NE",
+   "name": "Holmes Lake",
+   "texts": [
+    "Holmes Lake"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "holmes-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "NE",
+   "name": "Iron Horse Trail Lake",
+   "texts": [
+    "Iron Horse Trail Lake"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "iron-horse-trail-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "NE",
+   "name": "Blood Creek",
+   "texts": [
+    "Blood Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "blood-creek-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "NE",
+   "name": "Johnson Lake",
+   "texts": [
+    "Johnson Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "johnson-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "NE",
+   "name": "Summit Lake",
+   "texts": [
+    "Summit Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "summit-lake-ne"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "NE",
+   "name": "Cub Creek Lake",
+   "texts": [
+    "Cub Creek Lake"
+   ],
+   "outfalls": 0,
+   "events": 7,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 7,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Big Papillion Creek",
+   "texts": [
+    "Big Papillion Creek"
+   ],
+   "outfalls": 0,
+   "events": 5,
+   "points": 5,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "big-papillion-creek-ne"
+   ],
+   "how": [
+    "GNIS name in NE, 24 m from the reports' point (41.22094, -96.03919)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 5,
+   "places_failed": [
+    {
+     "lon": -95.88962,
+     "lat": 41.08285,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.08285, -95.88962) (the nearest is 9.1 km away)"
+    },
+    {
+     "lon": -96.11997,
+     "lat": 41.28466,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.28466, -96.11997) (the nearest is 2.0 km away)"
+    }
+   ],
+   "defined_by": "name"
+  },
+  {
+   "state": "NE",
+   "name": "Maple Creek Recreation Area Lake",
+   "texts": [
+    "Maple Creek Recreation Area Lake"
+   ],
+   "outfalls": 0,
+   "events": 5,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 5,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "West Papillion Creek",
+   "texts": [
+    "West Papillion Creek",
+    "Tributary of West Papillion Creek",
+    "Tributary of the West Papillion Creek"
+   ],
+   "outfalls": 0,
+   "events": 5,
+   "points": 5,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "west-papillion-creek-ne"
+   ],
+   "how": [
+    "GNIS name in NE, 410 m from the reports' point (41.28555, -96.23452)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 5,
+   "notes": [
+    "'Tributary of West Papillion Creek': a tributary of West Papillion Creek (the tributary has no name of its own)",
+    "'Tributary of the West Papillion Creek': a tributary of West Papillion Creek (the tributary has no name of its own)"
+   ],
+   "defined_by": "name"
+  },
+  {
+   "state": "NE",
+   "name": "Wirth Brothers Lake",
+   "texts": [
+    "Wirth Brothers Lake"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 4,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Big Indian Lake",
+   "texts": [
+    "Big Indian Lake (11A)"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 3,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Intermittent Stream",
+   "texts": [
+    "Intermittent Stream (Trib West Papio Creek)",
+    "Intermittent Stream"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 3,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 3,
+   "notes": [
+    "'Intermittent Stream (Trib West Papio Creek)': a tributary of Intermittent Stream (the tributary has no name of its own)"
+   ],
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Boxelder Creek",
+   "texts": [
+    "Boxelder Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 2,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "boxelder-creek-ne"
+   ],
+   "how": [
+    "GNIS name in NE, 39 m from the reports' point (41.22074, -96.25224) (2 waters of that name in NE)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "NE",
+   "name": "Bader Memorial Lake No. 6",
+   "texts": [
+    "Bader Memorial Lake No. 6"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Beadle Creek",
+   "texts": [
+    "Tributary of Beadle Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "beadle-creek-ne"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Beadle Creek' (GNIS 2573456) 93 m from the point (41.19100, -96.21704)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'Tributary of Beadle Creek': a tributary of Beadle Creek (the tributary has no name of its own)"
+   ],
+   "defined_by": "name (NHD high resolution)"
+  },
+  {
+   "state": "NE",
+   "name": "Candlewood Reservoir",
+   "texts": [
+    "Tributary of Candlewood Reservoir"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "candlewood-reservoir-ne"
+   ],
+   "how": [
+    "GNIS name in NE, 758 m from the reports' point (41.27402, -96.12164)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'Tributary of Candlewood Reservoir': a tributary of Candlewood Reservoir (the tributary has no name of its own)"
+   ],
+   "defined_by": "name"
+  },
+  {
+   "state": "NE",
+   "name": "Clark Reservoir",
+   "texts": [
+    "Lewis and Clark Reservoir"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Cottonmill Park Swim Lake",
+   "texts": [
+    "Cottonmill Park Swim Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Cottonwood Creek",
+   "texts": [
+    "Cottonwood Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "Prague"
+   ],
+   "slugs": [
+    "cottonwood-creek-ne"
+   ],
+   "how": [
+    "GNIS name in NE, 88 m from the reports' point (41.30885, -96.81023) (7 waters of that name in NE)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "NE",
+   "name": "Drainage Ditch by east lagoon",
+   "texts": [
+    "Drainage Ditch by east lagoon"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "Clatonia"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Duck Creek Lake",
+   "texts": [
+    "Duck Creek Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to duck-creek-ne (another name): the name's own water is built"
+   ],
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Ft. Kearny Lake No. 7",
+   "texts": [
+    "Ft. Kearny Lake No. 7 (SRA)"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Hanson Lake 2",
+   "texts": [
+    "Hanson Lake 2"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "Bellevue"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Kelley Creek",
+   "texts": [
+    "Kelley Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "McCook"
+   ],
+   "slugs": [
+    "kelley-creek-ne"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Kelley Creek' (GNIS 835021) 477 m from the point (40.19179, -100.60186)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name (NHD high resolution)"
+  },
+  {
+   "state": "NE",
+   "name": "Lewis",
+   "texts": [
+    "Lewis and Clark Reservoir"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "the name of a town (Lewis), not of a water: no NHD water of that name in NE",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "NE",
+   "name": "Lone Star Reservoir",
+   "texts": [
+    "Lone Star Reservoir"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "North Table Creek",
+   "texts": [
+    "North Table Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "Nebraska City"
+   ],
+   "slugs": [
+    "north-table-creek-ne"
+   ],
+   "how": [
+    "GNIS name in NE, 263 m from the reports' point (40.68314, -95.86870)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "NE",
+   "name": "Pibel Lake",
+   "texts": [
+    "Pibel Lake (SRA)"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Swan Creek Lake",
+   "texts": [
+    "Swan Creek Lake (5A)"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Table Creek",
+   "texts": [
+    "Table Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "Nebraska City"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in NE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "from": "reports",
+   "reports": 1,
+   "reason_detail": [
+    "OSM fallback: Overpass not reachable"
+   ]
+  },
+  {
+   "state": "NE",
+   "name": "Whispering Ridge Creek",
+   "texts": [
+    "Tributary of Whispering Ridge Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 1,
+   "towns": [
+    "La Vista",
+    "Omaha",
+    "Papillion"
+   ],
+   "slugs": [
+    "whispering-ridge-creek-ne"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Whispering Ridge Creek' (GNIS 2572305) 673 m from the point (41.30670, -96.22181)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'Tributary of Whispering Ridge Creek': a tributary of Whispering Ridge Creek (the tributary has no name of its own)"
+   ],
+   "defined_by": "name (NHD high resolution)"
   }
  ],
  "waters": [
@@ -315573,6 +316412,145 @@
       [
        -73.052419,
        41.468513
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "beadle-creek-ne",
+   "name": "Beadle Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Richland VII"
+   ],
+   "bbox": [
+    -96.23185,
+    41.17918,
+    -96.19642,
+    41.19031
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 3.81,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "2573456",
+   "comids": [],
+   "nhd_fcodes": [
+    46003
+   ],
+   "fetched_at": "2026-11-07T08:24:05Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 4 flowlines with GNIS id 2573456 within 0.5 degrees of the outfall's point, cut to the state, merged and simplified to ~10 m; NHDPlus V2.1 has no flowline of that name",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -96.231852,
+       41.189554
+      ],
+      [
+       -96.231387,
+       41.188799
+      ],
+      [
+       -96.230166,
+       41.187792
+      ],
+      [
+       -96.229217,
+       41.187381
+      ],
+      [
+       -96.22558,
+       41.186557
+      ],
+      [
+       -96.223838,
+       41.187103
+      ],
+      [
+       -96.223278,
+       41.187733
+      ],
+      [
+       -96.221583,
+       41.18792
+      ],
+      [
+       -96.218929,
+       41.188891
+      ],
+      [
+       -96.21698,
+       41.190093
+      ],
+      [
+       -96.216331,
+       41.190315
+      ],
+      [
+       -96.211725,
+       41.190288
+      ],
+      [
+       -96.209378,
+       41.189482
+      ],
+      [
+       -96.207873,
+       41.188557
+      ],
+      [
+       -96.206595,
+       41.188168
+      ],
+      [
+       -96.206104,
+       41.187648
+      ],
+      [
+       -96.204083,
+       41.18686
+      ],
+      [
+       -96.203437,
+       41.186068
+      ],
+      [
+       -96.202808,
+       41.183939
+      ],
+      [
+       -96.2021,
+       41.183017
+      ],
+      [
+       -96.199787,
+       41.181834
+      ],
+      [
+       -96.198821,
+       41.180689
+      ],
+      [
+       -96.196996,
+       41.17948
+      ],
+      [
+       -96.196494,
+       41.179381
+      ],
+      [
+       -96.196418,
+       41.179179
       ]
      ]
     ]
@@ -471102,6 +472080,973 @@
    }
   },
   {
+   "slug": "big-papillion-creek-ne",
+   "name": "Big Papillion Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Bellevue",
+    "Bellevue Second I",
+    "Bellevue Second II",
+    "Douglas",
+    "Gilmore II",
+    "Jefferson",
+    "McArdle",
+    "Omaha"
+   ],
+   "bbox": [
+    -96.27757,
+    41.14404,
+    -95.9628,
+    41.59281
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 62.36,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "827424",
+   "comids": [
+    17215634,
+    17215664,
+    17215676,
+    17215834,
+    17217244,
+    17217262,
+    17217278,
+    17217304,
+    17217328,
+    17217360,
+    17217366,
+    17217392,
+    17217444,
+    17217456,
+    17217462,
+    17217468,
+    17217484,
+    17217498,
+    17217504,
+    17217510,
+    17217522,
+    17217542,
+    17217546,
+    17217554,
+    17217574,
+    17217586,
+    17217632,
+    17217652,
+    17217672,
+    17217680,
+    17217690,
+    17217692,
+    17217706,
+    17217914,
+    17219096,
+    17219128,
+    17219140,
+    17219146,
+    17219158
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T08:23:39Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 39 network flowlines with GNIS id 827424 in NE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -96.277574,
+       41.592807
+      ],
+      [
+       -96.276021,
+       41.59276
+      ],
+      [
+       -96.27389,
+       41.592438
+      ],
+      [
+       -96.271698,
+       41.591681
+      ],
+      [
+       -96.268684,
+       41.590924
+      ],
+      [
+       -96.266887,
+       41.590853
+      ],
+      [
+       -96.26643,
+       41.59099
+      ],
+      [
+       -96.266216,
+       41.591447
+      ],
+      [
+       -96.265577,
+       41.591492
+      ],
+      [
+       -96.264998,
+       41.591331
+      ],
+      [
+       -96.26296,
+       41.590163
+      ],
+      [
+       -96.260829,
+       41.589361
+      ],
+      [
+       -96.258121,
+       41.5881
+      ],
+      [
+       -96.256721,
+       41.587893
+      ],
+      [
+       -96.253919,
+       41.587867
+      ],
+      [
+       -96.252153,
+       41.587659
+      ],
+      [
+       -96.251057,
+       41.587269
+      ],
+      [
+       -96.249585,
+       41.586232
+      ],
+      [
+       -96.248455,
+       41.584519
+      ],
+      [
+       -96.246352,
+       41.583583
+      ],
+      [
+       -96.244766,
+       41.582579
+      ],
+      [
+       -96.243365,
+       41.582192
+      ],
+      [
+       -96.242664,
+       41.581827
+      ],
+      [
+       -96.239588,
+       41.581647
+      ],
+      [
+       -96.234716,
+       41.581834
+      ],
+      [
+       -96.230727,
+       41.581815
+      ],
+      [
+       -96.229844,
+       41.581587
+      ],
+      [
+       -96.225517,
+       41.580127
+      ],
+      [
+       -96.224268,
+       41.579351
+      ],
+      [
+       -96.221736,
+       41.575969
+      ],
+      [
+       -96.220965,
+       41.569042
+      ],
+      [
+       -96.219773,
+       41.566162
+      ],
+      [
+       -96.219558,
+       41.564745
+      ],
+      [
+       -96.218794,
+       41.562619
+      ],
+      [
+       -96.218961,
+       41.55121
+      ],
+      [
+       -96.219962,
+       41.548855
+      ],
+      [
+       -96.220083,
+       41.548009
+      ],
+      [
+       -96.22002,
+       41.54666
+      ],
+      [
+       -96.21953,
+       41.544945
+      ],
+      [
+       -96.219558,
+       41.543254
+      ],
+      [
+       -96.218584,
+       41.543094
+      ],
+      [
+       -96.217701,
+       41.542661
+      ],
+      [
+       -96.217974,
+       41.541883
+      ],
+      [
+       -96.217639,
+       41.541655
+      ],
+      [
+       -96.21773,
+       41.541152
+      ],
+      [
+       -96.217425,
+       41.540969
+      ],
+      [
+       -96.217364,
+       41.540626
+      ],
+      [
+       -96.217515,
+       41.540191
+      ],
+      [
+       -96.217483,
+       41.538911
+      ],
+      [
+       -96.217635,
+       41.538705
+      ],
+      [
+       -96.21879,
+       41.538178
+      ],
+      [
+       -96.218759,
+       41.53779
+      ],
+      [
+       -96.216809,
+       41.535254
+      ],
+      [
+       -96.216408,
+       41.531893
+      ],
+      [
+       -96.215675,
+       41.529813
+      ],
+      [
+       -96.214669,
+       41.528556
+      ],
+      [
+       -96.214117,
+       41.524761
+      ],
+      [
+       -96.213599,
+       41.524259
+      ],
+      [
+       -96.213172,
+       41.523505
+      ],
+      [
+       -96.212866,
+       41.522476
+      ],
+      [
+       -96.212798,
+       41.516829
+      ],
+      [
+       -96.212613,
+       41.515343
+      ],
+      [
+       -96.212732,
+       41.512965
+      ],
+      [
+       -96.212031,
+       41.511959
+      ],
+      [
+       -96.209836,
+       41.507823
+      ],
+      [
+       -96.207338,
+       41.504464
+      ],
+      [
+       -96.206271,
+       41.502109
+      ],
+      [
+       -96.204991,
+       41.500016
+      ],
+      [
+       -96.20493,
+       41.499796
+      ],
+      [
+       -96.205508,
+       41.49927
+      ],
+      [
+       -96.205508,
+       41.498973
+      ],
+      [
+       -96.204686,
+       41.498173
+      ],
+      [
+       -96.204502,
+       41.497396
+      ],
+      [
+       -96.204259,
+       41.497121
+      ],
+      [
+       -96.203194,
+       41.496596
+      ],
+      [
+       -96.202707,
+       41.496162
+      ],
+      [
+       -96.201671,
+       41.494288
+      ],
+      [
+       -96.200663,
+       41.488527
+      ],
+      [
+       -96.198438,
+       41.481714
+      ],
+      [
+       -96.198098,
+       41.47513
+      ],
+      [
+       -96.197641,
+       41.474055
+      ],
+      [
+       -96.19764,
+       41.47337
+      ],
+      [
+       -96.198034,
+       41.471952
+      ],
+      [
+       -96.197938,
+       41.466647
+      ],
+      [
+       -96.198059,
+       41.466579
+      ],
+      [
+       -96.197633,
+       41.465344
+      ],
+      [
+       -96.196598,
+       41.463996
+      ],
+      [
+       -96.191093,
+       41.459243
+      ],
+      [
+       -96.190788,
+       41.458534
+      ],
+      [
+       -96.190632,
+       41.453665
+      ],
+      [
+       -96.190843,
+       41.451012
+      ],
+      [
+       -96.192596,
+       41.440014
+      ],
+      [
+       -96.191896,
+       41.437659
+      ],
+      [
+       -96.191378,
+       41.436905
+      ],
+      [
+       -96.19007,
+       41.434002
+      ],
+      [
+       -96.189673,
+       41.432356
+      ],
+      [
+       -96.189642,
+       41.430961
+      ],
+      [
+       -96.190096,
+       41.428629
+      ],
+      [
+       -96.191544,
+       41.416876
+      ],
+      [
+       -96.191512,
+       41.414544
+      ],
+      [
+       -96.190255,
+       41.401192
+      ],
+      [
+       -96.190339,
+       41.393053
+      ],
+      [
+       -96.190096,
+       41.392184
+      ],
+      [
+       -96.184992,
+       41.388117
+      ],
+      [
+       -96.183776,
+       41.386974
+      ],
+      [
+       -96.182652,
+       41.385351
+      ],
+      [
+       -96.182499,
+       41.383362
+      ],
+      [
+       -96.182831,
+       41.381876
+      ],
+      [
+       -96.182647,
+       41.379087
+      ],
+      [
+       -96.182191,
+       41.37831
+      ],
+      [
+       -96.179761,
+       41.376184
+      ],
+      [
+       -96.179731,
+       41.375567
+      ],
+      [
+       -96.180064,
+       41.374766
+      ],
+      [
+       -96.180094,
+       41.373966
+      ],
+      [
+       -96.179577,
+       41.373098
+      ],
+      [
+       -96.178484,
+       41.372298
+      ],
+      [
+       -96.176936,
+       41.372001
+      ],
+      [
+       -96.175113,
+       41.369601
+      ],
+      [
+       -96.171439,
+       41.366927
+      ],
+      [
+       -96.169891,
+       41.366059
+      ],
+      [
+       -96.169071,
+       41.365716
+      ],
+      [
+       -96.163881,
+       41.365261
+      ],
+      [
+       -96.163122,
+       41.364964
+      ],
+      [
+       -96.160936,
+       41.362952
+      ],
+      [
+       -96.158053,
+       41.362176
+      ],
+      [
+       -96.157355,
+       41.361284
+      ],
+      [
+       -96.156838,
+       41.359341
+      ],
+      [
+       -96.15617,
+       41.358609
+      ],
+      [
+       -96.144942,
+       41.354724
+      ],
+      [
+       -96.144334,
+       41.353627
+      ],
+      [
+       -96.140359,
+       41.349923
+      ],
+      [
+       -96.1396,
+       41.348986
+      ],
+      [
+       -96.139176,
+       41.348757
+      ],
+      [
+       -96.136718,
+       41.345077
+      ],
+      [
+       -96.134442,
+       41.342653
+      ],
+      [
+       -96.130832,
+       41.33728
+      ],
+      [
+       -96.129922,
+       41.336297
+      ],
+      [
+       -96.12886,
+       41.33552
+      ],
+      [
+       -96.125736,
+       41.331907
+      ],
+      [
+       -96.124311,
+       41.33065
+      ],
+      [
+       -96.117397,
+       41.322647
+      ],
+      [
+       -96.116669,
+       41.322144
+      ],
+      [
+       -96.115698,
+       41.321755
+      ],
+      [
+       -96.110118,
+       41.321412
+      ],
+      [
+       -96.108784,
+       41.320703
+      ],
+      [
+       -96.108087,
+       41.318805
+      ],
+      [
+       -96.106602,
+       41.31629
+      ],
+      [
+       -96.106572,
+       41.315992
+      ],
+      [
+       -96.10636,
+       41.315855
+      ],
+      [
+       -96.105361,
+       41.310345
+      ],
+      [
+       -96.104573,
+       41.308356
+      ],
+      [
+       -96.104454,
+       41.30376
+      ],
+      [
+       -96.104212,
+       41.302937
+      ],
+      [
+       -96.102606,
+       41.299987
+      ],
+      [
+       -96.101788,
+       41.297884
+      ],
+      [
+       -96.099879,
+       41.296534
+      ],
+      [
+       -96.09888,
+       41.293447
+      ],
+      [
+       -96.095971,
+       41.289789
+      ],
+      [
+       -96.09576,
+       41.287754
+      ],
+      [
+       -96.095915,
+       41.280415
+      ],
+      [
+       -96.095492,
+       41.278631
+      ],
+      [
+       -96.094917,
+       41.277511
+      ],
+      [
+       -96.093069,
+       41.275293
+      ],
+      [
+       -96.089527,
+       41.269599
+      ],
+      [
+       -96.087074,
+       41.266123
+      ],
+      [
+       -96.085592,
+       41.262235
+      ],
+      [
+       -96.085532,
+       41.260795
+      ],
+      [
+       -96.083294,
+       41.255353
+      ],
+      [
+       -96.082628,
+       41.254301
+      ],
+      [
+       -96.080448,
+       41.252037
+      ],
+      [
+       -96.078939,
+       41.24855
+      ],
+      [
+       -96.078667,
+       41.248321
+      ],
+      [
+       -96.076304,
+       41.247611
+      ],
+      [
+       -96.072188,
+       41.243973
+      ],
+      [
+       -96.068796,
+       41.243331
+      ],
+      [
+       -96.067646,
+       41.242553
+      ],
+      [
+       -96.065405,
+       41.242277
+      ],
+      [
+       -96.063588,
+       41.24175
+      ],
+      [
+       -96.055752,
+       41.23452
+      ],
+      [
+       -96.052605,
+       41.232071
+      ],
+      [
+       -96.049549,
+       41.230217
+      ],
+      [
+       -96.041226,
+       41.226392
+      ],
+      [
+       -96.040319,
+       41.225523
+      ],
+      [
+       -96.039866,
+       41.224791
+      ],
+      [
+       -96.039473,
+       41.223853
+      ],
+      [
+       -96.039204,
+       41.222138
+      ],
+      [
+       -96.038691,
+       41.220468
+      ],
+      [
+       -96.038057,
+       41.219622
+      ],
+      [
+       -96.035032,
+       41.217447
+      ],
+      [
+       -96.034125,
+       41.216555
+      ],
+      [
+       -96.03346,
+       41.215731
+      ],
+      [
+       -96.032918,
+       41.214313
+      ],
+      [
+       -96.031468,
+       41.21166
+      ],
+      [
+       -96.030925,
+       41.210905
+      ],
+      [
+       -96.029897,
+       41.209966
+      ],
+      [
+       -96.027476,
+       41.209027
+      ],
+      [
+       -96.022996,
+       41.208679
+      ],
+      [
+       -96.018063,
+       41.207691
+      ],
+      [
+       -96.016974,
+       41.207279
+      ],
+      [
+       -96.016734,
+       41.206478
+      ],
+      [
+       -96.016347,
+       41.202751
+      ],
+      [
+       -96.015237,
+       41.1974
+      ],
+      [
+       -96.006176,
+       41.187125
+      ],
+      [
+       -96.005361,
+       41.185958
+      ],
+      [
+       -96.000621,
+       41.180397
+      ],
+      [
+       -95.999829,
+       41.180122
+      ],
+      [
+       -95.997705,
+       41.177473
+      ],
+      [
+       -95.997371,
+       41.176925
+      ],
+      [
+       -95.995726,
+       41.171371
+      ],
+      [
+       -95.994691,
+       41.168514
+      ],
+      [
+       -95.985812,
+       41.160842
+      ],
+      [
+       -95.979847,
+       41.157304
+      ],
+      [
+       -95.974426,
+       41.153651
+      ],
+      [
+       -95.969582,
+       41.150935
+      ],
+      [
+       -95.968824,
+       41.150272
+      ],
+      [
+       -95.967553,
+       41.149656
+      ],
+      [
+       -95.965948,
+       41.148514
+      ],
+      [
+       -95.965219,
+       41.14664
+      ],
+      [
+       -95.964613,
+       41.145749
+      ],
+      [
+       -95.962796,
+       41.144036
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "big-rock-creek-il",
    "name": "Big Rock Creek",
    "kind": "stream",
@@ -538024,6 +539969,678 @@
       [
        -89.311671,
        32.436964
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "boxelder-creek-ne",
+   "name": "Boxelder Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Chicago",
+    "Omaha"
+   ],
+   "bbox": [
+    -96.25314,
+    41.21367,
+    -96.14807,
+    41.23301
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 12.69,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "827600",
+   "comids": [
+    17217634,
+    17217638,
+    17217642,
+    17217646,
+    17217664,
+    17217924
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T08:23:40Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 6 network flowlines with GNIS id 827600 in NE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -96.251121,
+       41.213674
+      ],
+      [
+       -96.251543,
+       41.214955
+      ],
+      [
+       -96.253142,
+       41.21761
+      ],
+      [
+       -96.252655,
+       41.219164
+      ],
+      [
+       -96.252562,
+       41.220124
+      ],
+      [
+       -96.252198,
+       41.22049
+      ],
+      [
+       -96.250059,
+       41.221577
+      ],
+      [
+       -96.249152,
+       41.222378
+      ],
+      [
+       -96.247155,
+       41.223569
+      ],
+      [
+       -96.244219,
+       41.224692
+      ],
+      [
+       -96.242494,
+       41.225037
+      ],
+      [
+       -96.239707,
+       41.224925
+      ],
+      [
+       -96.239345,
+       41.225406
+      ],
+      [
+       -96.239315,
+       41.225886
+      ],
+      [
+       -96.238347,
+       41.226573
+      ],
+      [
+       -96.237621,
+       41.227511
+      ],
+      [
+       -96.236592,
+       41.228015
+      ],
+      [
+       -96.236079,
+       41.229113
+      ],
+      [
+       -96.235324,
+       41.230028
+      ],
+      [
+       -96.235173,
+       41.230943
+      ],
+      [
+       -96.234841,
+       41.231309
+      ],
+      [
+       -96.233842,
+       41.231492
+      ],
+      [
+       -96.233146,
+       41.232453
+      ],
+      [
+       -96.232602,
+       41.232751
+      ],
+      [
+       -96.230785,
+       41.232958
+      ],
+      [
+       -96.22939,
+       41.232296
+      ],
+      [
+       -96.229027,
+       41.232342
+      ],
+      [
+       -96.228634,
+       41.2328
+      ],
+      [
+       -96.223545,
+       41.232141
+      ],
+      [
+       -96.222969,
+       41.232187
+      ],
+      [
+       -96.222576,
+       41.232393
+      ],
+      [
+       -96.222515,
+       41.232645
+      ],
+      [
+       -96.221335,
+       41.233011
+      ],
+      [
+       -96.220941,
+       41.23292
+      ],
+      [
+       -96.220668,
+       41.232669
+      ],
+      [
+       -96.219881,
+       41.232875
+      ],
+      [
+       -96.219305,
+       41.232853
+      ],
+      [
+       -96.217124,
+       41.232488
+      ],
+      [
+       -96.2157,
+       41.231826
+      ],
+      [
+       -96.215578,
+       41.231529
+      ],
+      [
+       -96.215305,
+       41.231483
+      ],
+      [
+       -96.213185,
+       41.231645
+      ],
+      [
+       -96.209187,
+       41.23103
+      ],
+      [
+       -96.208762,
+       41.230687
+      ],
+      [
+       -96.207975,
+       41.230848
+      ],
+      [
+       -96.207854,
+       41.230665
+      ],
+      [
+       -96.20746,
+       41.230574
+      ],
+      [
+       -96.207399,
+       41.230185
+      ],
+      [
+       -96.207096,
+       41.230025
+      ],
+      [
+       -96.206702,
+       41.230094
+      ],
+      [
+       -96.206703,
+       41.23062
+      ],
+      [
+       -96.205007,
+       41.230827
+      ],
+      [
+       -96.204825,
+       41.230415
+      ],
+      [
+       -96.20437,
+       41.230141
+      ],
+      [
+       -96.20337,
+       41.229936
+      ],
+      [
+       -96.202523,
+       41.229959
+      ],
+      [
+       -96.202431,
+       41.229411
+      ],
+      [
+       -96.201553,
+       41.229571
+      ],
+      [
+       -96.201189,
+       41.229411
+      ],
+      [
+       -96.201189,
+       41.228885
+      ],
+      [
+       -96.20031,
+       41.228611
+      ],
+      [
+       -96.198857,
+       41.228818
+      ],
+      [
+       -96.19713,
+       41.228499
+      ],
+      [
+       -96.196857,
+       41.228362
+      ],
+      [
+       -96.196675,
+       41.227973
+      ],
+      [
+       -96.195645,
+       41.227608
+      ],
+      [
+       -96.195251,
+       41.227197
+      ],
+      [
+       -96.194615,
+       41.227334
+      ],
+      [
+       -96.194403,
+       41.22722
+      ],
+      [
+       -96.194342,
+       41.226785
+      ],
+      [
+       -96.194069,
+       41.226511
+      ],
+      [
+       -96.193585,
+       41.226557
+      ],
+      [
+       -96.193313,
+       41.226946
+      ],
+      [
+       -96.193343,
+       41.227335
+      ],
+      [
+       -96.192586,
+       41.227289
+      ],
+      [
+       -96.192314,
+       41.22745
+      ],
+      [
+       -96.191768,
+       41.227335
+      ],
+      [
+       -96.191254,
+       41.227496
+      ],
+      [
+       -96.191011,
+       41.227313
+      ],
+      [
+       -96.191041,
+       41.226787
+      ],
+      [
+       -96.187951,
+       41.225828
+      ],
+      [
+       -96.187163,
+       41.225188
+      ],
+      [
+       -96.187133,
+       41.224937
+      ],
+      [
+       -96.187587,
+       41.224433
+      ],
+      [
+       -96.187496,
+       41.224251
+      ],
+      [
+       -96.186647,
+       41.223588
+      ],
+      [
+       -96.185951,
+       41.223314
+      ],
+      [
+       -96.18595,
+       41.223085
+      ],
+      [
+       -96.186616,
+       41.22297
+      ],
+      [
+       -96.186556,
+       41.222673
+      ],
+      [
+       -96.185042,
+       41.222651
+      ],
+      [
+       -96.184284,
+       41.222171
+      ],
+      [
+       -96.183679,
+       41.222377
+      ],
+      [
+       -96.183376,
+       41.22208
+      ],
+      [
+       -96.182286,
+       41.222195
+      ],
+      [
+       -96.18174,
+       41.221989
+      ],
+      [
+       -96.181074,
+       41.222104
+      ],
+      [
+       -96.18068,
+       41.221807
+      ],
+      [
+       -96.179802,
+       41.221761
+      ],
+      [
+       -96.178924,
+       41.221441
+      ],
+      [
+       -96.17856,
+       41.221419
+      ],
+      [
+       -96.178045,
+       41.221693
+      ],
+      [
+       -96.176743,
+       41.221534
+      ],
+      [
+       -96.175593,
+       41.221763
+      ],
+      [
+       -96.175047,
+       41.221237
+      ],
+      [
+       -96.175441,
+       41.220505
+      ],
+      [
+       -96.175198,
+       41.220391
+      ],
+      [
+       -96.174805,
+       41.22046
+      ],
+      [
+       -96.174108,
+       41.22094
+      ],
+      [
+       -96.173079,
+       41.220963
+      ],
+      [
+       -96.172745,
+       41.220597
+      ],
+      [
+       -96.172593,
+       41.219454
+      ],
+      [
+       -96.171867,
+       41.219249
+      ],
+      [
+       -96.171624,
+       41.218814
+      ],
+      [
+       -96.170927,
+       41.218815
+      ],
+      [
+       -96.170503,
+       41.218517
+      ],
+      [
+       -96.169746,
+       41.218449
+      ],
+      [
+       -96.168929,
+       41.217969
+      ],
+      [
+       -96.168202,
+       41.218472
+      ],
+      [
+       -96.168263,
+       41.218975
+      ],
+      [
+       -96.167748,
+       41.219044
+      ],
+      [
+       -96.167203,
+       41.218427
+      ],
+      [
+       -96.166961,
+       41.218427
+      ],
+      [
+       -96.166809,
+       41.21877
+      ],
+      [
+       -96.166325,
+       41.218862
+      ],
+      [
+       -96.164508,
+       41.218679
+      ],
+      [
+       -96.164387,
+       41.218885
+      ],
+      [
+       -96.164084,
+       41.218885
+      ],
+      [
+       -96.16363,
+       41.218473
+      ],
+      [
+       -96.163357,
+       41.219137
+      ],
+      [
+       -96.163055,
+       41.219228
+      ],
+      [
+       -96.161904,
+       41.219
+      ],
+      [
+       -96.16151,
+       41.219251
+      ],
+      [
+       -96.160753,
+       41.219252
+      ],
+      [
+       -96.160572,
+       41.219366
+      ],
+      [
+       -96.16039,
+       41.220326
+      ],
+      [
+       -96.159724,
+       41.220601
+      ],
+      [
+       -96.159209,
+       41.220487
+      ],
+      [
+       -96.159482,
+       41.220989
+      ],
+      [
+       -96.159331,
+       41.221218
+      ],
+      [
+       -96.15709,
+       41.221379
+      ],
+      [
+       -96.156423,
+       41.220716
+      ],
+      [
+       -96.155697,
+       41.220899
+      ],
+      [
+       -96.155091,
+       41.220784
+      ],
+      [
+       -96.154183,
+       41.221059
+      ],
+      [
+       -96.15394,
+       41.221219
+      ],
+      [
+       -96.15385,
+       41.221836
+      ],
+      [
+       -96.152911,
+       41.2225
+      ],
+      [
+       -96.152548,
+       41.223186
+      ],
+      [
+       -96.151821,
+       41.223506
+      ],
+      [
+       -96.151185,
+       41.223552
+      ],
+      [
+       -96.15064,
+       41.223186
+      ],
+      [
+       -96.150337,
+       41.223163
+      ],
+      [
+       -96.149278,
+       41.223575
+      ],
+      [
+       -96.14958,
+       41.224238
+      ],
+      [
+       -96.148067,
+       41.225541
       ]
      ]
     ]
@@ -668776,6 +671393,151 @@
       [
        -75.76693,
        43.096805
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "candlewood-reservoir-ne",
+   "name": "Candlewood Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Omaha"
+   ],
+   "bbox": [
+    -96.11619,
+    41.26798,
+    -96.10353,
+    41.27319
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 0.125,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "1767036",
+   "comids": [
+    17216906
+   ],
+   "nhd_fcodes": [
+    39004
+   ],
+   "fetched_at": "2026-11-07T08:23:41Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1 waterbody GNIS id 1767036 (1 polygon), cut to the state, simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -96.103526,
+       41.272849
+      ],
+      [
+       -96.106526,
+       41.273192
+      ],
+      [
+       -96.106708,
+       41.272644
+      ],
+      [
+       -96.106981,
+       41.272415
+      ],
+      [
+       -96.108375,
+       41.271981
+      ],
+      [
+       -96.108193,
+       41.271203
+      ],
+      [
+       -96.1088,
+       41.269992
+      ],
+      [
+       -96.109315,
+       41.269375
+      ],
+      [
+       -96.110679,
+       41.269192
+      ],
+      [
+       -96.111861,
+       41.268666
+      ],
+      [
+       -96.112891,
+       41.268461
+      ],
+      [
+       -96.114467,
+       41.268392
+      ],
+      [
+       -96.115558,
+       41.268895
+      ],
+      [
+       -96.116194,
+       41.268987
+      ],
+      [
+       -96.116103,
+       41.268598
+      ],
+      [
+       -96.115649,
+       41.268187
+      ],
+      [
+       -96.114891,
+       41.268003
+      ],
+      [
+       -96.113618,
+       41.26798
+      ],
+      [
+       -96.111194,
+       41.268277
+      ],
+      [
+       -96.109315,
+       41.268277
+      ],
+      [
+       -96.108315,
+       41.269283
+      ],
+      [
+       -96.105769,
+       41.27118
+      ],
+      [
+       -96.105163,
+       41.271866
+      ],
+      [
+       -96.104738,
+       41.272163
+      ],
+      [
+       -96.103587,
+       41.27246
+      ],
+      [
+       -96.103526,
+       41.272849
       ]
      ]
     ]
@@ -821796,6 +824558,1556 @@
       [
        -88.276551,
        39.203413
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "cottonwood-creek-ne",
+   "name": "Cottonwood Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Center",
+    "Chester",
+    "Elk",
+    "Mariposa",
+    "Stocking"
+   ],
+   "bbox": [
+    -96.89696,
+    41.20222,
+    -96.6306,
+    41.34535
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 35.29,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "828380",
+   "comids": [
+    17397809,
+    17397821,
+    17397875,
+    17397901,
+    17397931,
+    17397943,
+    17397947,
+    17398005,
+    17398007,
+    17398025,
+    17398041,
+    17398043,
+    17398049,
+    17398099,
+    17398101,
+    17398109,
+    17398143,
+    17398199,
+    17398215,
+    17398229,
+    17398241,
+    17398245,
+    17398255,
+    17399789,
+    17399825
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T08:23:41Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 25 network flowlines with GNIS id 828380 in NE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -96.896959,
+       41.342766
+      ],
+      [
+       -96.895472,
+       41.342309
+      ],
+      [
+       -96.893165,
+       41.340616
+      ],
+      [
+       -96.890434,
+       41.340136
+      ],
+      [
+       -96.888826,
+       41.340274
+      ],
+      [
+       -96.887369,
+       41.340548
+      ],
+      [
+       -96.886519,
+       41.340914
+      ],
+      [
+       -96.885366,
+       41.341692
+      ],
+      [
+       -96.884547,
+       41.341898
+      ],
+      [
+       -96.882392,
+       41.34295
+      ],
+      [
+       -96.882028,
+       41.343018
+      ],
+      [
+       -96.879358,
+       41.342744
+      ],
+      [
+       -96.877688,
+       41.342812
+      ],
+      [
+       -96.874016,
+       41.343613
+      ],
+      [
+       -96.873076,
+       41.344573
+      ],
+      [
+       -96.872195,
+       41.344688
+      ],
+      [
+       -96.871346,
+       41.344573
+      ],
+      [
+       -96.870101,
+       41.344756
+      ],
+      [
+       -96.868645,
+       41.34519
+      ],
+      [
+       -96.867006,
+       41.34535
+      ],
+      [
+       -96.863516,
+       41.344686
+      ],
+      [
+       -96.86303,
+       41.344229
+      ],
+      [
+       -96.862909,
+       41.343246
+      ],
+      [
+       -96.862424,
+       41.342628
+      ],
+      [
+       -96.861514,
+       41.340798
+      ],
+      [
+       -96.861059,
+       41.340478
+      ],
+      [
+       -96.859026,
+       41.339791
+      ],
+      [
+       -96.856295,
+       41.339173
+      ],
+      [
+       -96.854534,
+       41.340156
+      ],
+      [
+       -96.853442,
+       41.340179
+      ],
+      [
+       -96.852957,
+       41.339996
+      ],
+      [
+       -96.852471,
+       41.340384
+      ],
+      [
+       -96.852319,
+       41.340979
+      ],
+      [
+       -96.852137,
+       41.34107
+      ],
+      [
+       -96.85153,
+       41.341048
+      ],
+      [
+       -96.851226,
+       41.341459
+      ],
+      [
+       -96.850407,
+       41.341756
+      ],
+      [
+       -96.849041,
+       41.341893
+      ],
+      [
+       -96.848707,
+       41.341619
+      ],
+      [
+       -96.847949,
+       41.341572
+      ],
+      [
+       -96.846918,
+       41.340497
+      ],
+      [
+       -96.84628,
+       41.340223
+      ],
+      [
+       -96.844035,
+       41.339742
+      ],
+      [
+       -96.843337,
+       41.339032
+      ],
+      [
+       -96.8427,
+       41.339124
+      ],
+      [
+       -96.842124,
+       41.338735
+      ],
+      [
+       -96.842002,
+       41.339123
+      ],
+      [
+       -96.841517,
+       41.339169
+      ],
+      [
+       -96.841001,
+       41.338597
+      ],
+      [
+       -96.841001,
+       41.338185
+      ],
+      [
+       -96.840091,
+       41.33727
+      ],
+      [
+       -96.839758,
+       41.337339
+      ],
+      [
+       -96.839272,
+       41.33775
+      ],
+      [
+       -96.838756,
+       41.337727
+      ],
+      [
+       -96.83821,
+       41.337247
+      ],
+      [
+       -96.837998,
+       41.336446
+      ],
+      [
+       -96.836906,
+       41.335805
+      ],
+      [
+       -96.836998,
+       41.334982
+      ],
+      [
+       -96.836695,
+       41.334502
+      ],
+      [
+       -96.83533,
+       41.334021
+      ],
+      [
+       -96.834845,
+       41.333449
+      ],
+      [
+       -96.83445,
+       41.333311
+      ],
+      [
+       -96.834025,
+       41.333311
+      ],
+      [
+       -96.833934,
+       41.333654
+      ],
+      [
+       -96.833631,
+       41.333654
+      ],
+      [
+       -96.833358,
+       41.333517
+      ],
+      [
+       -96.833055,
+       41.332762
+      ],
+      [
+       -96.831507,
+       41.332853
+      ],
+      [
+       -96.830931,
+       41.332166
+      ],
+      [
+       -96.830507,
+       41.332052
+      ],
+      [
+       -96.830263,
+       41.332578
+      ],
+      [
+       -96.829717,
+       41.332509
+      ],
+      [
+       -96.829384,
+       41.332051
+      ],
+      [
+       -96.828323,
+       41.33125
+      ],
+      [
+       -96.827656,
+       41.329992
+      ],
+      [
+       -96.825533,
+       41.328505
+      ],
+      [
+       -96.823865,
+       41.327863
+      ],
+      [
+       -96.824078,
+       41.327177
+      ],
+      [
+       -96.823411,
+       41.32688
+      ],
+      [
+       -96.823351,
+       41.326491
+      ],
+      [
+       -96.822592,
+       41.326216
+      ],
+      [
+       -96.822198,
+       41.32649
+      ],
+      [
+       -96.821682,
+       41.326513
+      ],
+      [
+       -96.821622,
+       41.326124
+      ],
+      [
+       -96.821956,
+       41.325621
+      ],
+      [
+       -96.821895,
+       41.325324
+      ],
+      [
+       -96.821319,
+       41.32498
+      ],
+      [
+       -96.820742,
+       41.325323
+      ],
+      [
+       -96.820439,
+       41.325186
+      ],
+      [
+       -96.820228,
+       41.323951
+      ],
+      [
+       -96.819076,
+       41.323378
+      ],
+      [
+       -96.818318,
+       41.322326
+      ],
+      [
+       -96.817863,
+       41.322188
+      ],
+      [
+       -96.817681,
+       41.32244
+      ],
+      [
+       -96.817196,
+       41.322417
+      ],
+      [
+       -96.817135,
+       41.322097
+      ],
+      [
+       -96.817439,
+       41.321433
+      ],
+      [
+       -96.817348,
+       41.321182
+      ],
+      [
+       -96.81662,
+       41.321204
+      ],
+      [
+       -96.815923,
+       41.320724
+      ],
+      [
+       -96.815134,
+       41.320677
+      ],
+      [
+       -96.814862,
+       41.319465
+      ],
+      [
+       -96.814499,
+       41.319008
+      ],
+      [
+       -96.814954,
+       41.318459
+      ],
+      [
+       -96.814652,
+       41.317498
+      ],
+      [
+       -96.813227,
+       41.316445
+      ],
+      [
+       -96.812257,
+       41.316033
+      ],
+      [
+       -96.812045,
+       41.315759
+      ],
+      [
+       -96.811925,
+       41.314775
+      ],
+      [
+       -96.810803,
+       41.313837
+      ],
+      [
+       -96.810592,
+       41.313059
+      ],
+      [
+       -96.8095,
+       41.312486
+      ],
+      [
+       -96.80947,
+       41.312235
+      ],
+      [
+       -96.810229,
+       41.311892
+      ],
+      [
+       -96.81117,
+       41.311047
+      ],
+      [
+       -96.811353,
+       41.310612
+      ],
+      [
+       -96.811444,
+       41.310063
+      ],
+      [
+       -96.81105,
+       41.309766
+      ],
+      [
+       -96.811142,
+       41.30908
+      ],
+      [
+       -96.81093,
+       41.308531
+      ],
+      [
+       -96.811234,
+       41.307639
+      ],
+      [
+       -96.811235,
+       41.306587
+      ],
+      [
+       -96.810871,
+       41.306358
+      ],
+      [
+       -96.810022,
+       41.306289
+      ],
+      [
+       -96.809993,
+       41.305328
+      ],
+      [
+       -96.809387,
+       41.304665
+      ],
+      [
+       -96.809418,
+       41.303773
+      ],
+      [
+       -96.809267,
+       41.303521
+      ],
+      [
+       -96.808237,
+       41.302743
+      ],
+      [
+       -96.807601,
+       41.301462
+      ],
+      [
+       -96.806783,
+       41.30105
+      ],
+      [
+       -96.806753,
+       41.300684
+      ],
+      [
+       -96.807299,
+       41.300158
+      ],
+      [
+       -96.806875,
+       41.29938
+      ],
+      [
+       -96.807512,
+       41.299358
+      ],
+      [
+       -96.807513,
+       41.299015
+      ],
+      [
+       -96.806058,
+       41.298236
+      ],
+      [
+       -96.806028,
+       41.297733
+      ],
+      [
+       -96.805695,
+       41.297504
+      ],
+      [
+       -96.804512,
+       41.297663
+      ],
+      [
+       -96.804209,
+       41.297549
+      ],
+      [
+       -96.803998,
+       41.296679
+      ],
+      [
+       -96.802665,
+       41.295466
+      ],
+      [
+       -96.802878,
+       41.294094
+      ],
+      [
+       -96.803121,
+       41.293911
+      ],
+      [
+       -96.803152,
+       41.293546
+      ],
+      [
+       -96.802243,
+       41.293065
+      ],
+      [
+       -96.801121,
+       41.293156
+      ],
+      [
+       -96.800151,
+       41.292331
+      ],
+      [
+       -96.8,
+       41.291828
+      ],
+      [
+       -96.799576,
+       41.291599
+      ],
+      [
+       -96.798333,
+       41.291713
+      ],
+      [
+       -96.797575,
+       41.291186
+      ],
+      [
+       -96.796758,
+       41.289699
+      ],
+      [
+       -96.79673,
+       41.288395
+      ],
+      [
+       -96.796397,
+       41.287915
+      ],
+      [
+       -96.794336,
+       41.286701
+      ],
+      [
+       -96.793609,
+       41.286426
+      ],
+      [
+       -96.793184,
+       41.286403
+      ],
+      [
+       -96.792729,
+       41.286677
+      ],
+      [
+       -96.792396,
+       41.2867
+      ],
+      [
+       -96.79179,
+       41.286219
+      ],
+      [
+       -96.790729,
+       41.285966
+      ],
+      [
+       -96.790336,
+       41.285051
+      ],
+      [
+       -96.789821,
+       41.284891
+      ],
+      [
+       -96.789579,
+       41.284136
+      ],
+      [
+       -96.788185,
+       41.284043
+      ],
+      [
+       -96.788154,
+       41.284547
+      ],
+      [
+       -96.787699,
+       41.284683
+      ],
+      [
+       -96.786789,
+       41.284591
+      ],
+      [
+       -96.786305,
+       41.284316
+      ],
+      [
+       -96.784941,
+       41.284224
+      ],
+      [
+       -96.784455,
+       41.284704
+      ],
+      [
+       -96.783909,
+       41.284909
+      ],
+      [
+       -96.783697,
+       41.284817
+      ],
+      [
+       -96.783304,
+       41.284017
+      ],
+      [
+       -96.782153,
+       41.283147
+      ],
+      [
+       -96.782063,
+       41.28246
+      ],
+      [
+       -96.781699,
+       41.282186
+      ],
+      [
+       -96.781426,
+       41.282162
+      ],
+      [
+       -96.780729,
+       41.282528
+      ],
+      [
+       -96.780394,
+       41.283191
+      ],
+      [
+       -96.78,
+       41.28319
+      ],
+      [
+       -96.779546,
+       41.282801
+      ],
+      [
+       -96.779063,
+       41.281497
+      ],
+      [
+       -96.77879,
+       41.281223
+      ],
+      [
+       -96.777335,
+       41.28097
+      ],
+      [
+       -96.776185,
+       41.279711
+      ],
+      [
+       -96.775367,
+       41.279527
+      ],
+      [
+       -96.774943,
+       41.279069
+      ],
+      [
+       -96.773913,
+       41.27884
+      ],
+      [
+       -96.773944,
+       41.278382
+      ],
+      [
+       -96.774308,
+       41.278085
+      ],
+      [
+       -96.774339,
+       41.277788
+      ],
+      [
+       -96.773066,
+       41.277215
+      ],
+      [
+       -96.772946,
+       41.276941
+      ],
+      [
+       -96.773068,
+       41.276506
+      ],
+      [
+       -96.772947,
+       41.275888
+      ],
+      [
+       -96.773251,
+       41.275569
+      ],
+      [
+       -96.773283,
+       41.274402
+      ],
+      [
+       -96.77295,
+       41.274219
+      ],
+      [
+       -96.77201,
+       41.274264
+      ],
+      [
+       -96.770829,
+       41.273645
+      ],
+      [
+       -96.769586,
+       41.273484
+      ],
+      [
+       -96.768769,
+       41.272797
+      ],
+      [
+       -96.768013,
+       41.271515
+      ],
+      [
+       -96.767165,
+       41.27108
+      ],
+      [
+       -96.766862,
+       41.271057
+      ],
+      [
+       -96.766225,
+       41.271445
+      ],
+      [
+       -96.765861,
+       41.27117
+      ],
+      [
+       -96.765104,
+       41.271032
+      ],
+      [
+       -96.763954,
+       41.269888
+      ],
+      [
+       -96.762106,
+       41.269291
+      ],
+      [
+       -96.760924,
+       41.269359
+      ],
+      [
+       -96.760045,
+       41.269198
+      ],
+      [
+       -96.758652,
+       41.268327
+      ],
+      [
+       -96.756349,
+       41.267822
+      ],
+      [
+       -96.755714,
+       41.266975
+      ],
+      [
+       -96.753351,
+       41.266332
+      ],
+      [
+       -96.753231,
+       41.26576
+      ],
+      [
+       -96.752564,
+       41.265691
+      ],
+      [
+       -96.752382,
+       41.266193
+      ],
+      [
+       -96.751926,
+       41.266422
+      ],
+      [
+       -96.751411,
+       41.266307
+      ],
+      [
+       -96.751109,
+       41.265895
+      ],
+      [
+       -96.749772,
+       41.266227
+      ],
+      [
+       -96.748862,
+       41.266113
+      ],
+      [
+       -96.748833,
+       41.266777
+      ],
+      [
+       -96.748137,
+       41.267052
+      ],
+      [
+       -96.746954,
+       41.266618
+      ],
+      [
+       -96.744135,
+       41.266919
+      ],
+      [
+       -96.743134,
+       41.266508
+      ],
+      [
+       -96.743073,
+       41.265959
+      ],
+      [
+       -96.742587,
+       41.265548
+      ],
+      [
+       -96.741738,
+       41.265252
+      ],
+      [
+       -96.740585,
+       41.264544
+      ],
+      [
+       -96.738038,
+       41.264295
+      ],
+      [
+       -96.735855,
+       41.263611
+      ],
+      [
+       -96.731734,
+       41.264163
+      ],
+      [
+       -96.725491,
+       41.264398
+      ],
+      [
+       -96.725096,
+       41.264146
+      ],
+      [
+       -96.725095,
+       41.263277
+      ],
+      [
+       -96.724548,
+       41.262592
+      ],
+      [
+       -96.723942,
+       41.262295
+      ],
+      [
+       -96.721698,
+       41.261816
+      ],
+      [
+       -96.720758,
+       41.261406
+      ],
+      [
+       -96.718091,
+       41.26143
+      ],
+      [
+       -96.716425,
+       41.261683
+      ],
+      [
+       -96.711029,
+       41.26107
+      ],
+      [
+       -96.709756,
+       41.261345
+      ],
+      [
+       -96.708877,
+       41.261186
+      ],
+      [
+       -96.708756,
+       41.261026
+      ],
+      [
+       -96.70821,
+       41.260889
+      ],
+      [
+       -96.707392,
+       41.261301
+      ],
+      [
+       -96.70512,
+       41.261692
+      ],
+      [
+       -96.703241,
+       41.261533
+      ],
+      [
+       -96.702331,
+       41.261099
+      ],
+      [
+       -96.700056,
+       41.259317
+      ],
+      [
+       -96.69948,
+       41.259065
+      ],
+      [
+       -96.697962,
+       41.256848
+      ],
+      [
+       -96.694353,
+       41.254449
+      ],
+      [
+       -96.693412,
+       41.253374
+      ],
+      [
+       -96.692018,
+       41.252506
+      ],
+      [
+       -96.691472,
+       41.251843
+      ],
+      [
+       -96.691259,
+       41.250974
+      ],
+      [
+       -96.69181,
+       41.248768
+      ],
+      [
+       -96.691628,
+       41.248494
+      ],
+      [
+       -96.69084,
+       41.248288
+      ],
+      [
+       -96.690082,
+       41.24774
+      ],
+      [
+       -96.690142,
+       41.247054
+      ],
+      [
+       -96.688778,
+       41.247009
+      ],
+      [
+       -96.688232,
+       41.246163
+      ],
+      [
+       -96.687626,
+       41.246186
+      ],
+      [
+       -96.687293,
+       41.246415
+      ],
+      [
+       -96.687051,
+       41.247192
+      ],
+      [
+       -96.685264,
+       41.247468
+      ],
+      [
+       -96.68487,
+       41.247674
+      ],
+      [
+       -96.685112,
+       41.247376
+      ],
+      [
+       -96.68502,
+       41.246256
+      ],
+      [
+       -96.684292,
+       41.245455
+      ],
+      [
+       -96.684231,
+       41.244861
+      ],
+      [
+       -96.683201,
+       41.244381
+      ],
+      [
+       -96.682958,
+       41.243901
+      ],
+      [
+       -96.682473,
+       41.243535
+      ],
+      [
+       -96.68226,
+       41.243009
+      ],
+      [
+       -96.681957,
+       41.242849
+      ],
+      [
+       -96.68123,
+       41.242964
+      ],
+      [
+       -96.680988,
+       41.242849
+      ],
+      [
+       -96.681048,
+       41.24198
+      ],
+      [
+       -96.680139,
+       41.242049
+      ],
+      [
+       -96.678684,
+       41.240632
+      ],
+      [
+       -96.677259,
+       41.23974
+      ],
+      [
+       -96.676895,
+       41.239123
+      ],
+      [
+       -96.676652,
+       41.237957
+      ],
+      [
+       -96.676046,
+       41.237454
+      ],
+      [
+       -96.675712,
+       41.237317
+      ],
+      [
+       -96.674622,
+       41.237294
+      ],
+      [
+       -96.674197,
+       41.236951
+      ],
+      [
+       -96.673197,
+       41.236677
+      ],
+      [
+       -96.672864,
+       41.236403
+      ],
+      [
+       -96.672651,
+       41.236128
+      ],
+      [
+       -96.672741,
+       41.233613
+      ],
+      [
+       -96.672437,
+       41.232767
+      ],
+      [
+       -96.671467,
+       41.231624
+      ],
+      [
+       -96.671346,
+       41.230732
+      ],
+      [
+       -96.671073,
+       41.230434
+      ],
+      [
+       -96.669952,
+       41.230183
+      ],
+      [
+       -96.669649,
+       41.229932
+      ],
+      [
+       -96.669618,
+       41.228811
+      ],
+      [
+       -96.669406,
+       41.228537
+      ],
+      [
+       -96.668891,
+       41.228331
+      ],
+      [
+       -96.668769,
+       41.227874
+      ],
+      [
+       -96.668406,
+       41.227691
+      ],
+      [
+       -96.667164,
+       41.227531
+      ],
+      [
+       -96.666042,
+       41.226617
+      ],
+      [
+       -96.66577,
+       41.226296
+      ],
+      [
+       -96.665466,
+       41.224947
+      ],
+      [
+       -96.66383,
+       41.223507
+      ],
+      [
+       -96.663769,
+       41.222752
+      ],
+      [
+       -96.663344,
+       41.222478
+      ],
+      [
+       -96.663011,
+       41.221746
+      ],
+      [
+       -96.661315,
+       41.221792
+      ],
+      [
+       -96.661011,
+       41.220306
+      ],
+      [
+       -96.660193,
+       41.219345
+      ],
+      [
+       -96.658557,
+       41.21811
+      ],
+      [
+       -96.657042,
+       41.217562
+      ],
+      [
+       -96.656649,
+       41.217127
+      ],
+      [
+       -96.656799,
+       41.214429
+      ],
+      [
+       -96.656466,
+       41.214246
+      ],
+      [
+       -96.655527,
+       41.21436
+      ],
+      [
+       -96.655254,
+       41.214246
+      ],
+      [
+       -96.654346,
+       41.213354
+      ],
+      [
+       -96.65271,
+       41.213149
+      ],
+      [
+       -96.649833,
+       41.213469
+      ],
+      [
+       -96.6495,
+       41.213241
+      ],
+      [
+       -96.649379,
+       41.21292
+      ],
+      [
+       -96.649439,
+       41.211365
+      ],
+      [
+       -96.6485,
+       41.21116
+      ],
+      [
+       -96.647228,
+       41.210382
+      ],
+      [
+       -96.646682,
+       41.209536
+      ],
+      [
+       -96.646228,
+       41.209284
+      ],
+      [
+       -96.644956,
+       41.209056
+      ],
+      [
+       -96.644714,
+       41.208873
+      ],
+      [
+       -96.644532,
+       41.208027
+      ],
+      [
+       -96.643714,
+       41.208187
+      ],
+      [
+       -96.64317,
+       41.20869
+      ],
+      [
+       -96.642564,
+       41.208804
+      ],
+      [
+       -96.642352,
+       41.207775
+      ],
+      [
+       -96.641655,
+       41.207524
+      ],
+      [
+       -96.641443,
+       41.206838
+      ],
+      [
+       -96.64111,
+       41.206586
+      ],
+      [
+       -96.639778,
+       41.206449
+      ],
+      [
+       -96.638839,
+       41.205351
+      ],
+      [
+       -96.638203,
+       41.205008
+      ],
+      [
+       -96.636961,
+       41.20526
+      ],
+      [
+       -96.63684,
+       41.204322
+      ],
+      [
+       -96.636477,
+       41.204025
+      ],
+      [
+       -96.635811,
+       41.204025
+      ],
+      [
+       -96.635326,
+       41.204208
+      ],
+      [
+       -96.635114,
+       41.204459
+      ],
+      [
+       -96.634448,
+       41.204505
+      ],
+      [
+       -96.634327,
+       41.204414
+      ],
+      [
+       -96.634448,
+       41.203819
+      ],
+      [
+       -96.634145,
+       41.203819
+      ],
+      [
+       -96.633661,
+       41.204162
+      ],
+      [
+       -96.632873,
+       41.204116
+      ],
+      [
+       -96.63251,
+       41.203613
+      ],
+      [
+       -96.632359,
+       41.20295
+      ],
+      [
+       -96.631269,
+       41.202698
+      ],
+      [
+       -96.630602,
+       41.202218
       ]
      ]
     ]
@@ -1382381,6 +1386693,363 @@
       [
        -84.513386,
        33.285975
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "kelley-creek-ne",
+   "name": "Kelley Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "McCook",
+    "Willow Grove"
+   ],
+   "bbox": [
+    -100.61402,
+    40.19304,
+    -100.55976,
+    40.20816
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 7.26,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "835021",
+   "comids": [],
+   "nhd_fcodes": [
+    46003,
+    55800
+   ],
+   "fetched_at": "2026-11-07T08:24:18Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 4 flowlines with GNIS id 835021 within 0.5 degrees of the outfall's point, cut to the state, merged and simplified to ~10 m; NHDPlus V2.1 has no flowline of that name",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -100.614017,
+       40.208162
+      ],
+      [
+       -100.612431,
+       40.205958
+      ],
+      [
+       -100.612317,
+       40.205319
+      ],
+      [
+       -100.612577,
+       40.204015
+      ],
+      [
+       -100.612245,
+       40.202934
+      ],
+      [
+       -100.611748,
+       40.202368
+      ],
+      [
+       -100.610662,
+       40.201803
+      ],
+      [
+       -100.610033,
+       40.200962
+      ],
+      [
+       -100.609899,
+       40.200431
+      ],
+      [
+       -100.610066,
+       40.199447
+      ],
+      [
+       -100.607018,
+       40.199312
+      ],
+      [
+       -100.606831,
+       40.198894
+      ],
+      [
+       -100.606287,
+       40.1988
+      ],
+      [
+       -100.605694,
+       40.197648
+      ],
+      [
+       -100.605246,
+       40.197557
+      ],
+      [
+       -100.604108,
+       40.197661
+      ],
+      [
+       -100.603718,
+       40.196948
+      ],
+      [
+       -100.60351,
+       40.197065
+      ],
+      [
+       -100.603277,
+       40.196889
+      ],
+      [
+       -100.602951,
+       40.196901
+      ],
+      [
+       -100.602336,
+       40.197508
+      ],
+      [
+       -100.60128,
+       40.197458
+      ],
+      [
+       -100.600621,
+       40.196206
+      ],
+      [
+       -100.599595,
+       40.195732
+      ],
+      [
+       -100.598466,
+       40.195918
+      ],
+      [
+       -100.598188,
+       40.195277
+      ],
+      [
+       -100.597643,
+       40.194994
+      ],
+      [
+       -100.597438,
+       40.195081
+      ],
+      [
+       -100.597291,
+       40.195526
+      ],
+      [
+       -100.596691,
+       40.195549
+      ],
+      [
+       -100.596488,
+       40.19536
+      ],
+      [
+       -100.596658,
+       40.194957
+      ],
+      [
+       -100.59651,
+       40.193937
+      ],
+      [
+       -100.596119,
+       40.193689
+      ],
+      [
+       -100.594908,
+       40.193912
+      ],
+      [
+       -100.593568,
+       40.194735
+      ],
+      [
+       -100.592801,
+       40.194483
+      ],
+      [
+       -100.592314,
+       40.193758
+      ],
+      [
+       -100.591906,
+       40.194236
+      ],
+      [
+       -100.592284,
+       40.195234
+      ],
+      [
+       -100.591975,
+       40.195504
+      ],
+      [
+       -100.591582,
+       40.195378
+      ],
+      [
+       -100.591546,
+       40.195152
+      ],
+      [
+       -100.590971,
+       40.194858
+      ],
+      [
+       -100.591169,
+       40.194262
+      ],
+      [
+       -100.591087,
+       40.193917
+      ],
+      [
+       -100.590423,
+       40.193773
+      ],
+      [
+       -100.589291,
+       40.193954
+      ],
+      [
+       -100.588703,
+       40.193337
+      ],
+      [
+       -100.587596,
+       40.193042
+      ],
+      [
+       -100.587034,
+       40.193473
+      ],
+      [
+       -100.586789,
+       40.195272
+      ],
+      [
+       -100.586319,
+       40.195249
+      ],
+      [
+       -100.586035,
+       40.194841
+      ],
+      [
+       -100.585987,
+       40.194308
+      ],
+      [
+       -100.585477,
+       40.194193
+      ],
+      [
+       -100.58493,
+       40.19428
+      ],
+      [
+       -100.584602,
+       40.194533
+      ],
+      [
+       -100.58339,
+       40.194487
+      ],
+      [
+       -100.58222,
+       40.194939
+      ],
+      [
+       -100.580156,
+       40.195231
+      ],
+      [
+       -100.579171,
+       40.195971
+      ],
+      [
+       -100.578289,
+       40.195833
+      ],
+      [
+       -100.577782,
+       40.196017
+      ],
+      [
+       -100.57513,
+       40.198371
+      ],
+      [
+       -100.573876,
+       40.19907
+      ],
+      [
+       -100.571768,
+       40.199921
+      ],
+      [
+       -100.570297,
+       40.200146
+      ],
+      [
+       -100.569723,
+       40.200864
+      ],
+      [
+       -100.568967,
+       40.200743
+      ],
+      [
+       -100.567843,
+       40.201251
+      ],
+      [
+       -100.566737,
+       40.201376
+      ],
+      [
+       -100.566321,
+       40.201948
+      ],
+      [
+       -100.564614,
+       40.201823
+      ],
+      [
+       -100.564292,
+       40.202348
+      ],
+      [
+       -100.562291,
+       40.203041
+      ],
+      [
+       -100.561231,
+       40.203832
+      ],
+      [
+       -100.560889,
+       40.204929
+      ],
+      [
+       -100.559765,
+       40.205346
       ]
      ]
     ]
@@ -2066607,6 +2071276,289 @@
       [
        -122.293126,
        38.169723
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "north-table-creek-ne",
+   "name": "North Table Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Belmont",
+    "Four Mile",
+    "Nebraska City"
+   ],
+   "bbox": [
+    -95.93044,
+    40.67916,
+    -95.84473,
+    40.69365
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 8.92,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "831739",
+   "comids": [
+    7312095,
+    7312099,
+    7312365
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-07T08:23:42Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 3 network flowlines with GNIS id 831739 in NE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -95.930442,
+       40.685289
+      ],
+      [
+       -95.929811,
+       40.685724
+      ],
+      [
+       -95.928491,
+       40.687165
+      ],
+      [
+       -95.924648,
+       40.688928
+      ],
+      [
+       -95.922425,
+       40.689111
+      ],
+      [
+       -95.920713,
+       40.689753
+      ],
+      [
+       -95.920083,
+       40.690233
+      ],
+      [
+       -95.918973,
+       40.69236
+      ],
+      [
+       -95.918553,
+       40.692726
+      ],
+      [
+       -95.916811,
+       40.693459
+      ],
+      [
+       -95.91543,
+       40.693345
+      ],
+      [
+       -95.914798,
+       40.693071
+      ],
+      [
+       -95.914287,
+       40.692294
+      ],
+      [
+       -95.913656,
+       40.691745
+      ],
+      [
+       -95.913085,
+       40.691517
+      ],
+      [
+       -95.912123,
+       40.691288
+      ],
+      [
+       -95.911552,
+       40.690991
+      ],
+      [
+       -95.90999,
+       40.690763
+      ],
+      [
+       -95.909119,
+       40.690238
+      ],
+      [
+       -95.907917,
+       40.689964
+      ],
+      [
+       -95.907526,
+       40.689667
+      ],
+      [
+       -95.906775,
+       40.688455
+      ],
+      [
+       -95.905152,
+       40.688113
+      ],
+      [
+       -95.90302,
+       40.687999
+      ],
+      [
+       -95.901968,
+       40.687314
+      ],
+      [
+       -95.900917,
+       40.68752
+      ],
+      [
+       -95.894849,
+       40.687727
+      ],
+      [
+       -95.894188,
+       40.688139
+      ],
+      [
+       -95.891695,
+       40.688505
+      ],
+      [
+       -95.890374,
+       40.689466
+      ],
+      [
+       -95.888181,
+       40.690015
+      ],
+      [
+       -95.885989,
+       40.691982
+      ],
+      [
+       -95.882445,
+       40.692669
+      ],
+      [
+       -95.881844,
+       40.692623
+      ],
+      [
+       -95.880672,
+       40.691663
+      ],
+      [
+       -95.879921,
+       40.691732
+      ],
+      [
+       -95.878539,
+       40.692669
+      ],
+      [
+       -95.877939,
+       40.693653
+      ],
+      [
+       -95.876947,
+       40.693401
+      ],
+      [
+       -95.875475,
+       40.692532
+      ],
+      [
+       -95.873492,
+       40.689857
+      ],
+      [
+       -95.871509,
+       40.688142
+      ],
+      [
+       -95.870127,
+       40.686176
+      ],
+      [
+       -95.868715,
+       40.685787
+      ],
+      [
+       -95.868085,
+       40.685284
+      ],
+      [
+       -95.865922,
+       40.685559
+      ],
+      [
+       -95.863038,
+       40.684644
+      ],
+      [
+       -95.860155,
+       40.682815
+      ],
+      [
+       -95.859013,
+       40.682426
+      ],
+      [
+       -95.857602,
+       40.682266
+      ],
+      [
+       -95.85646,
+       40.681923
+      ],
+      [
+       -95.853547,
+       40.68174
+      ],
+      [
+       -95.852586,
+       40.681351
+      ],
+      [
+       -95.850814,
+       40.680939
+      ],
+      [
+       -95.849252,
+       40.680093
+      ],
+      [
+       -95.848471,
+       40.679224
+      ],
+      [
+       -95.848141,
+       40.679155
+      ],
+      [
+       -95.84703,
+       40.679658
+      ],
+      [
+       -95.844733,
+       40.679757
       ]
      ]
     ]
@@ -3280154,6 +3285106,571 @@
    }
   },
   {
+   "slug": "west-papillion-creek-ne",
+   "name": "West Papillion Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Chicago",
+    "Elkhorn",
+    "La Vista",
+    "Omaha"
+   ],
+   "bbox": [
+    -96.26256,
+    41.17916,
+    -96.08895,
+    41.3269
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 25.7,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "834612",
+   "comids": [
+    17217568,
+    17217594,
+    17217602,
+    17217604,
+    17217608,
+    17217612,
+    17217644,
+    17217658,
+    17217666,
+    17217684,
+    17217716,
+    17217906,
+    17217920
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T08:23:39Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 13 network flowlines with GNIS id 834612 in NE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -96.252895,
+       41.3263
+      ],
+      [
+       -96.253956,
+       41.32669
+      ],
+      [
+       -96.255381,
+       41.326897
+      ],
+      [
+       -96.255806,
+       41.326692
+      ],
+      [
+       -96.257052,
+       41.32555
+      ],
+      [
+       -96.259966,
+       41.324158
+      ],
+      [
+       -96.261151,
+       41.323313
+      ],
+      [
+       -96.261333,
+       41.322833
+      ],
+      [
+       -96.2614,
+       41.319335
+      ],
+      [
+       -96.262345,
+       41.316844
+      ],
+      [
+       -96.262562,
+       41.314329
+      ],
+      [
+       -96.262321,
+       41.313208
+      ],
+      [
+       -96.262418,
+       41.309824
+      ],
+      [
+       -96.261997,
+       41.3082
+      ],
+      [
+       -96.261119,
+       41.307262
+      ],
+      [
+       -96.259332,
+       41.306185
+      ],
+      [
+       -96.256756,
+       41.305771
+      ],
+      [
+       -96.255908,
+       41.30513
+      ],
+      [
+       -96.255878,
+       41.304833
+      ],
+      [
+       -96.254487,
+       41.30259
+      ],
+      [
+       -96.253821,
+       41.302064
+      ],
+      [
+       -96.253428,
+       41.301378
+      ],
+      [
+       -96.25353,
+       41.296073
+      ],
+      [
+       -96.252566,
+       41.292711
+      ],
+      [
+       -96.250059,
+       41.290437
+      ],
+      [
+       -96.249633,
+       41.289454
+      ],
+      [
+       -96.247113,
+       41.287445
+      ],
+      [
+       -96.244866,
+       41.284886
+      ],
+      [
+       -96.244229,
+       41.284521
+      ],
+      [
+       -96.242348,
+       41.283974
+      ],
+      [
+       -96.240073,
+       41.283062
+      ],
+      [
+       -96.23983,
+       41.282925
+      ],
+      [
+       -96.239587,
+       41.28233
+      ],
+      [
+       -96.236706,
+       41.281579
+      ],
+      [
+       -96.232401,
+       41.28108
+      ],
+      [
+       -96.231583,
+       41.281538
+      ],
+      [
+       -96.229916,
+       41.281677
+      ],
+      [
+       -96.229189,
+       41.28154
+      ],
+      [
+       -96.226583,
+       41.282228
+      ],
+      [
+       -96.225037,
+       41.281818
+      ],
+      [
+       -96.223367,
+       41.280219
+      ],
+      [
+       -96.222973,
+       41.280173
+      ],
+      [
+       -96.221942,
+       41.279603
+      ],
+      [
+       -96.22182,
+       41.279305
+      ],
+      [
+       -96.219455,
+       41.278713
+      ],
+      [
+       -96.218909,
+       41.278325
+      ],
+      [
+       -96.218665,
+       41.277319
+      ],
+      [
+       -96.215541,
+       41.276087
+      ],
+      [
+       -96.214026,
+       41.27579
+      ],
+      [
+       -96.212843,
+       41.275014
+      ],
+      [
+       -96.209478,
+       41.274902
+      ],
+      [
+       -96.208629,
+       41.274446
+      ],
+      [
+       -96.207902,
+       41.27456
+      ],
+      [
+       -96.207659,
+       41.2744
+      ],
+      [
+       -96.207053,
+       41.274355
+      ],
+      [
+       -96.206114,
+       41.274744
+      ],
+      [
+       -96.202084,
+       41.275113
+      ],
+      [
+       -96.202055,
+       41.276416
+      ],
+      [
+       -96.201327,
+       41.276463
+      ],
+      [
+       -96.200175,
+       41.27628
+      ],
+      [
+       -96.199297,
+       41.276647
+      ],
+      [
+       -96.198872,
+       41.276533
+      ],
+      [
+       -96.197903,
+       41.276579
+      ],
+      [
+       -96.197236,
+       41.276762
+      ],
+      [
+       -96.196993,
+       41.276488
+      ],
+      [
+       -96.196841,
+       41.275734
+      ],
+      [
+       -96.195204,
+       41.27546
+      ],
+      [
+       -96.190777,
+       41.273291
+      ],
+      [
+       -96.189503,
+       41.272331
+      ],
+      [
+       -96.18729,
+       41.271303
+      ],
+      [
+       -96.184075,
+       41.268859
+      ],
+      [
+       -96.182833,
+       41.26831
+      ],
+      [
+       -96.179952,
+       41.266551
+      ],
+      [
+       -96.178406,
+       41.265912
+      ],
+      [
+       -96.176315,
+       41.265753
+      ],
+      [
+       -96.1758,
+       41.265501
+      ],
+      [
+       -96.175648,
+       41.265136
+      ],
+      [
+       -96.174557,
+       41.265227
+      ],
+      [
+       -96.174405,
+       41.264839
+      ],
+      [
+       -96.175284,
+       41.264336
+      ],
+      [
+       -96.175314,
+       41.264084
+      ],
+      [
+       -96.174526,
+       41.263901
+      ],
+      [
+       -96.173678,
+       41.264016
+      ],
+      [
+       -96.173132,
+       41.263605
+      ],
+      [
+       -96.172796,
+       41.260633
+      ],
+      [
+       -96.172402,
+       41.25981
+      ],
+      [
+       -96.171675,
+       41.25949
+      ],
+      [
+       -96.171402,
+       41.258918
+      ],
+      [
+       -96.171643,
+       41.257615
+      ],
+      [
+       -96.171915,
+       41.257112
+      ],
+      [
+       -96.172854,
+       41.256288
+      ],
+      [
+       -96.172853,
+       41.255648
+      ],
+      [
+       -96.171853,
+       41.254277
+      ],
+      [
+       -96.169791,
+       41.25206
+      ],
+      [
+       -96.168942,
+       41.250437
+      ],
+      [
+       -96.168701,
+       41.248562
+      ],
+      [
+       -96.168428,
+       41.248128
+      ],
+      [
+       -96.164792,
+       41.245545
+      ],
+      [
+       -96.162004,
+       41.241659
+      ],
+      [
+       -96.161183,
+       41.233656
+      ],
+      [
+       -96.160032,
+       41.233313
+      ],
+      [
+       -96.159214,
+       41.232833
+      ],
+      [
+       -96.157275,
+       41.232742
+      ],
+      [
+       -96.157033,
+       41.232605
+      ],
+      [
+       -96.156881,
+       41.232079
+      ],
+      [
+       -96.155912,
+       41.231988
+      ],
+      [
+       -96.153034,
+       41.229793
+      ],
+      [
+       -96.150278,
+       41.227141
+      ],
+      [
+       -96.148067,
+       41.225541
+      ],
+      [
+       -96.146855,
+       41.225152
+      ],
+      [
+       -96.136922,
+       41.220031
+      ],
+      [
+       -96.135347,
+       41.218842
+      ],
+      [
+       -96.135226,
+       41.217059
+      ],
+      [
+       -96.13562,
+       41.21491
+      ],
+      [
+       -96.135196,
+       41.213446
+      ],
+      [
+       -96.134197,
+       41.212212
+      ],
+      [
+       -96.129201,
+       41.209262
+      ],
+      [
+       -96.127082,
+       41.206792
+      ],
+      [
+       -96.125326,
+       41.205672
+      ],
+      [
+       -96.122754,
+       41.203591
+      ],
+      [
+       -96.118667,
+       41.202173
+      ],
+      [
+       -96.116851,
+       41.201166
+      ],
+      [
+       -96.111887,
+       41.19897
+      ],
+      [
+       -96.108498,
+       41.195837
+      ],
+      [
+       -96.102084,
+       41.190462
+      ],
+      [
+       -96.091254,
+       41.180559
+      ],
+      [
+       -96.088955,
+       41.179163
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "west-pascagoula-river-ms",
    "name": "West Pascagoula River",
    "kind": "river",
@@ -3286648,6 +3292165,280 @@
       [
        -96.453151,
        45.293779
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "whispering-ridge-creek-ne",
+   "name": "Whispering Ridge Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Chicago",
+    "Elkhorn",
+    "Omaha"
+   ],
+   "bbox": [
+    -96.22039,
+    41.27296,
+    -96.19036,
+    41.31269
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 6.07,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "2572305",
+   "comids": [],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T08:24:26Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 4 flowlines with GNIS id 2572305 within 0.5 degrees of the outfall's point, cut to the state, merged and simplified to ~10 m; NHDPlus V2.1 has no flowline of that name",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -96.220388,
+       41.31269
+      ],
+      [
+       -96.21677,
+       41.312638
+      ],
+      [
+       -96.215217,
+       41.312301
+      ],
+      [
+       -96.214733,
+       41.311731
+      ],
+      [
+       -96.214014,
+       41.311469
+      ],
+      [
+       -96.213527,
+       41.310673
+      ],
+      [
+       -96.213304,
+       41.310575
+      ],
+      [
+       -96.212308,
+       41.310674
+      ],
+      [
+       -96.211422,
+       41.310385
+      ],
+      [
+       -96.210481,
+       41.310326
+      ],
+      [
+       -96.209891,
+       41.310494
+      ],
+      [
+       -96.208915,
+       41.310431
+      ],
+      [
+       -96.206851,
+       41.308648
+      ],
+      [
+       -96.206056,
+       41.308351
+      ],
+      [
+       -96.205523,
+       41.308333
+      ],
+      [
+       -96.20477,
+       41.307171
+      ],
+      [
+       -96.203624,
+       41.3064
+      ],
+      [
+       -96.203031,
+       41.30563
+      ],
+      [
+       -96.20225,
+       41.305068
+      ],
+      [
+       -96.202301,
+       41.304689
+      ],
+      [
+       -96.201363,
+       41.304118
+      ],
+      [
+       -96.200931,
+       41.304062
+      ],
+      [
+       -96.201145,
+       41.30248
+      ],
+      [
+       -96.200514,
+       41.30219
+      ],
+      [
+       -96.20043,
+       41.301781
+      ],
+      [
+       -96.200595,
+       41.30134
+      ],
+      [
+       -96.199883,
+       41.300595
+      ],
+      [
+       -96.200384,
+       41.299242
+      ],
+      [
+       -96.200299,
+       41.298272
+      ],
+      [
+       -96.197312,
+       41.291625
+      ],
+      [
+       -96.19664,
+       41.290958
+      ],
+      [
+       -96.196624,
+       41.287712
+      ],
+      [
+       -96.196408,
+       41.287321
+      ],
+      [
+       -96.196085,
+       41.287275
+      ],
+      [
+       -96.195431,
+       41.286013
+      ],
+      [
+       -96.194992,
+       41.285777
+      ],
+      [
+       -96.195168,
+       41.285116
+      ],
+      [
+       -96.19505,
+       41.284763
+      ],
+      [
+       -96.195574,
+       41.282629
+      ],
+      [
+       -96.195274,
+       41.281965
+      ],
+      [
+       -96.195173,
+       41.280855
+      ],
+      [
+       -96.195612,
+       41.280128
+      ],
+      [
+       -96.195705,
+       41.279533
+      ],
+      [
+       -96.1955,
+       41.279132
+      ],
+      [
+       -96.195809,
+       41.278841
+      ],
+      [
+       -96.195543,
+       41.27811
+      ],
+      [
+       -96.195858,
+       41.277428
+      ],
+      [
+       -96.194587,
+       41.275494
+      ],
+      [
+       -96.193294,
+       41.275269
+      ],
+      [
+       -96.19323,
+       41.274814
+      ],
+      [
+       -96.193065,
+       41.274682
+      ],
+      [
+       -96.19278,
+       41.274738
+      ],
+      [
+       -96.192467,
+       41.274266
+      ],
+      [
+       -96.191841,
+       41.274432
+      ],
+      [
+       -96.191459,
+       41.274197
+      ],
+      [
+       -96.19057,
+       41.274189
+      ],
+      [
+       -96.190361,
+       41.273595
+      ],
+      [
+       -96.190705,
+       41.272964
       ]
      ]
     ]
