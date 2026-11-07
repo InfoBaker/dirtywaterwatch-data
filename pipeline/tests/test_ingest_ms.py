@@ -231,8 +231,20 @@ def test_the_mississippi_register_rows():
     assert news["unmonitored_reason"] == "feed_ingested" and news["feed_source_id"] == "ms-mdeq-water-contact-advisories"
     assert rows["ms-mdeq-beach-monitoring-map"]["feed_source_id"] == "ms-mdeq-beach-monitoring"
     assert rows["ms-mdeq-beach-signs"]["barrier"] == "signs_only"
-    assert {r["operator_id"] for r in rows.values() if r["operator_id"]} == {"ms-jackson-jxn"}
+    # the report to MDEQ is a duty of every operator: one row each, read by the eRule feed (collection checklist §2)
+    ms_ops = {d["id"] for d in dis if d["state"] == "MS"}
+    assert {r["operator_id"] for r in rows.values() if r["operator_id"]} == ms_ops
+    for oid in ms_ops:
+        rep = rows[f"{oid}-overflow-report"]
+        assert rep["basis_kind"] == "permit" and rep["feed_source_id"] == "echo-sewer-overflow" and not rep["urls"]
+    # so the coverage file counts every operator, not the one with a page of its own ("1 of 1" posting online)
+    from export import coverage as C
+    told = C.notice_reach(doc, frozenset({"echo-sewer-overflow"}))["MS"]["told_online"]
+    assert told["operators"] == len(ms_ops) and told["online"] == 1
     assert rows["ms-jackson-jxn-overflow-signs"]["barrier"] == "signs_only"
+    # a new monitored row starts as page health only (docs/collection-checklist.md §3): records stay off until a
+    # reviewer has seen dated overflow notices in its snapshots that no feed carries
+    assert all(r.get("records") is False for r in rows.values() if r["monitored"])
     assert not any("@" in json.dumps(r) for r in rows.values())
 
 

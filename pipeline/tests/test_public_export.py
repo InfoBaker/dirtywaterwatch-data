@@ -229,12 +229,13 @@ def test_export_keeps_to_the_live_states():
     rows and per-state windows of a state built but not yet live stay home; national rows and feeds stay."""
     live = {"MA", "MD"}
     rows = [{"id": "md-x", "states": ["MD"]}, {"id": "ga-x", "states": ["GA"]}, {"id": "fed-echo", "states": []},
-            {"id": "mix", "states": ["ga", "ma"]}]
+            {"id": "mix", "states": ["ga", "ma"]}, {"id": "fed-us", "states": ["US"]}]
     kept = X.live_registry_rows(rows, live)
-    assert [r["id"] for r in kept] == ["md-x", "fed-echo", "mix"]
+    assert [r["id"] for r in kept] == ["md-x", "fed-echo", "mix", "fed-us"]
+    # a national feed whose one registry row says "US" (EPA's eRule tables, echo-sewer-overflow) stays on /sources/
     feeds = [{"source_id": "md-f", "registry_ids": ["md-x"]}, {"source_id": "ga-f", "registry_ids": ["ga-x"]},
-             {"source_id": "orphan", "registry_ids": []}]
-    assert [f["source_id"] for f in X.live_feeds(feeds, {r["id"] for r in kept})] == ["md-f", "orphan"]
+             {"source_id": "orphan", "registry_ids": []}, {"source_id": "us-f", "registry_ids": ["fed-us"]}]
+    assert [f["source_id"] for f in X.live_feeds(feeds, {r["id"] for r in kept})] == ["md-f", "orphan", "us-f"]
     dis = [{"id": "md-a", "state": "MD"}, {"id": "ga-a", "state": "GA"}, {"id": "n", "state": None}]
     assert [d["id"] for d in X.live_dischargers(dis, live)] == ["md-a", "n"]
     rules = {"version": "x", "red": {"by_state": {"MD": {"hours": 1}, "GA": {"hours": None}},

@@ -1007,6 +1007,9 @@ NATIONAL_TAGS = [
     re.compile(r"-\w+\s+rb\s*$|\s+rb\s*$", re.I),
     re.compile(r"^\s*\d{3}\s*-\s*", re.I),                  # an outfall number in front ('002-UNNAMED TRIB TO FLINT')
     re.compile(r"^\s*(discharges?d?|outfall|flows?)\s+(to|into)\s+", re.I),
+    # Mississippi's inventory writes the way in front ('DIRECTLY INTO LEAF RIVER', 'DIRECLTY INTO MOUND BAYOU', 'DIR INTO
+    # YOCONA RIVER'): the water follows (2026-11-07 MS final audit; 'DIRECTLY' had been read as the water's name)
+    re.compile(r"^\s*(directly|direclty|direct|dir\.?)\s+(to|into)\s+", re.I),
     re.compile(r"^\s*tidal\s+", re.I),
     re.compile(r"\b(estuary)\b(?=\s*$)", re.I),
     re.compile(r"\b(etc)\b\.?", re.I),
