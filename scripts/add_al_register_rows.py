@@ -16,12 +16,13 @@ The law (research/al/report.md §2.1 in the site repository; profile research/al
   - Per operator (every Alabama row of data/dischargers.json, 379 on 2026-11-07), two rows:
       <id>-overflow-report (permit basis): the report to ADEM through AEPACS, which ADEM publishes on its SSO map and
         layer within minutes: read by the al-adem-sso-history feed.
-      <id>-public-notice (law basis): the rule's notice to the public, for which no channel is set: no web form, the
-        operator's own pages not searched one by one (MAWSS and Jefferson County have their own rows).
+      <id>-public-notice (law basis): the rule's notice to the public, for which no channel is set: unmonitored
+        "other", "not searched individually" (barrier not_verified), since the operators' own pages were not searched
+        one by one; for MAWSS it is its news posts and for Jefferson County its opt-in alerts (PUBLIC_NOTICE_CHANNEL).
   - Beaches: the Coastal Alabama Beach Monitoring Program (ADEM with the Alabama Department of Public Health, under the
     federal BEACH Act): ADEM's map layer (read by the al-adem-beach-monitoring feed) and ADPH's beach page and swim
     advisories.
-Rows: AGENCY, OPERATOR_EXTRA and the per-operator rows; each URL was answered on 2026-11-07 with one GET with the project
+Rows: AGENCY and the per-operator rows; each URL was answered on 2026-11-07 with one GET with the project
 user agent (jccal.org answered 403; mobilebaykeeper.org did not answer within 90 seconds).
 A rerun replaces every al- row it makes. Validated before writing.
 """
@@ -101,7 +102,7 @@ AGENCY = [
      "feed_source_id": "al-adem-beach-monitoring", "publishes": "status", "noun": "Beach monitoring map",
      "note": ("The stations layer behind ADEM's beach monitoring map: 25 coastal stations with the last sample date, "
               "the results PDF and an advisory code (11 at every station on 2026-11-07; ADEM does not publish the codes' "
-              "meaning, so any other code is read as an advisory). Read hourly by the feed. (al-adem-beach-monitoring)"),
+              "meaning, so any other code is shown as this site's caution, never as an advisory). Read hourly by the feed. (al-adem-beach-monitoring)"),
      "sources": ["al-adem-beach-monitoring"]},
     {"id": "al-adem-beach-monitoring-page", "agency": ADEM, "name": f"{ADEM} (Coastal Alabama Beach Monitoring)",
      "channel_kind": "state_alert_page", "urls": [BEACH_PAGE], "method": "html", "legal_basis": Q_BEACH,
@@ -137,27 +138,25 @@ AGENCY = [
      "sources": ["al-mobile-baykeeper-swim"]},
 ]
 
-OPERATOR_EXTRA = {
-    "al-mawss": [
-        {"suffix": "news", "channel_kind": "operator_page", "urls": ["https://www.mawss.com/"], "method": "html",
-         "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-         "publishes": "notices", "records": False, "every_hours": 6, "noun": "News posts",
-         "note": ("MAWSS posts each overflow as a news item (\"wastewater overflow\", \"preliminary advisory\"); the home "
-                  "page answered 200 on 2026-11-07, the news list not traced further. The same overflows are on ADEM's "
-                  "layer. Voluntary. (al-mawss-news)"),
-         "sources": ["al-mawss-news"]},
-    ],
-    "al-jefferson-county": [
-        {"suffix": "everbridge-alerts", "channel_kind": "email_list", "urls": [], "method": None, "legal_basis": None,
-         "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "email_only", "publishes": "notices",
-         "records": False, "noun": "Overflow alerts",
-         "note": ("No web form: Jefferson County Environmental Services' opt-in overflow alerts (Everbridge, since March "
-                  "2021) and GovDelivery no-contact advisories. Sign-up only; www.jccal.org answered 403 to the project "
-                  "user agent on 2026-11-07. The same overflows are on ADEM's layer. Voluntary. "
-                  "(al-jefferson-county-everbridge)"),
-         "sources": ["al-jefferson-county-everbridge"]},
-    ],
+# operators whose own channel for the rule's public notice is known: their -public-notice row is that channel
+PUBLIC_NOTICE_CHANNEL = {
+    "al-mawss": {
+        "channel_kind": "news_page", "urls": ["https://www.mawss.com/"], "method": "html", "monitored": True,
+        "unmonitored_reason": None, "publishes": "notices", "records": False, "every_hours": 6,
+        "noun": "Overflow news posts", "sources": ["al-mawss-news", "al-adem-rule-335-6-6-12"],
+        "note": ("MAWSS gives its public notice as a news post for each overflow (\"wastewater overflow\", \"preliminary "
+                 "advisory\") on its website; the home page answered 200 on 2026-11-07, the news list not traced "
+                 "further. Watched for changes; the same overflows are read from ADEM's layer. (al-mawss-news)")},
+    "al-jefferson-county": {
+        "channel_kind": "email_list", "urls": [], "method": None, "monitored": False,
+        "unmonitored_reason": "email_only", "publishes": "notices", "records": False, "noun": "Overflow alerts",
+        "sources": ["al-jefferson-county-everbridge", "al-adem-rule-335-6-6-12"],
+        "note": ("No web form: Jefferson County Environmental Services gives its public notice as opt-in overflow "
+                 "alerts (Everbridge, since March 2021) and GovDelivery no-contact advisories, to subscribers only; "
+                 "www.jccal.org answered 403 to the project user agent on 2026-11-07. The same overflows are read from "
+                 "ADEM's layer. (al-jefferson-county-everbridge)")},
 }
+OPERATOR_EXTRA: dict = {}
 PRIVATE = {"investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
            "campground or resort", "private club", "business or industrial", "institution",
            "facility (permittee not named)"}
@@ -187,15 +186,20 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                   "al-adem-sso-history feed. "
                   + ("Its permits appear on ADEM's layer." if ssos else "None of its permits has a report on ADEM's "
                      "layer (read 2026-11-07).") + private))))
-        rows.append(finish(base(
-            id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit, channel_kind="operator_page",
-            urls=[], method=None, legal_basis=Q_RULE, basis_kind="law", monitored=False,
-            unmonitored_reason="none_found", publishes="unknown", records=False, noun="Notice to the public",
-            sources=["al-adem-rule-335-6-6-12", "al-petition-2017-notice"],
-            note=("No web form: the rule requires the permittee to report a notifiable overflow to the public as soon "
-                  "as possible but sets no channel or content, so no public page of the operator's is required; the "
-                  "operator's own pages were not searched one by one. The 2017 petition asking for a minimum standard "
-                  "was not adopted." + private))))
+        own = PUBLIC_NOTICE_CHANNEL.get(oid)
+        if own:                      # the operator's own channel for the rule's notice
+            rows.append(finish(base(id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit,
+                                    legal_basis=Q_RULE, basis_kind="law", **own)))
+        else:
+            rows.append(finish(base(
+                id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit, channel_kind="operator_page",
+                urls=[], method=None, legal_basis=Q_RULE, basis_kind="law", monitored=False,
+                unmonitored_reason="other", publishes="unknown", records=False, noun="Notice to the public",
+                sources=["al-adem-rule-335-6-6-12", "al-petition-2017-notice"],
+                note=("No URL known (not searched individually): the rule requires the permittee to report a notifiable "
+                      "overflow to the public as soon as possible but sets no channel or content, and this operator's "
+                      "own pages were not searched, so whether it posts its notices online is not known. The 2017 "
+                      "petition asking for a minimum standard was not adopted." + private))))
         for x in OPERATOR_EXTRA.get(oid, []):
             x = dict(x)
             suffix = x.pop("suffix")
@@ -204,7 +208,7 @@ def operator_rows(dis: list[dict]) -> list[dict]:
 
 
 def rows_for(dis: list[dict]) -> list[dict]:
-    for oid in OPERATOR_EXTRA:
+    for oid in PUBLIC_NOTICE_CHANNEL:
         if not any(d["id"] == oid for d in dis):
             raise SystemExit(f"{oid} is not in data/dischargers.json: run scripts/add_al_operators.py first")
     return [finish(base(**r)) for r in AGENCY] + operator_rows(dis)
