@@ -56,7 +56,10 @@ PUBLIC_NAME = re.compile(
     r",\s*(city|town|village|borough)\s+of\b|\bcounty\b|\bauthority\b|\bmunicipal|\b(utility|sanitary|sanitation|"
     r"sewer|sewerage|water|improvement|metropolitan|public service)\s+district\b|\bdistrict of columbia\b|"
     r"\bdepartment of\b|\bcommission\b|\bfederal\b|\b(army|navy|naval|air force|marine corps)\b|\btrib(e|al)\b|"
-    r"\bdistrict agricultural association\b", re.I)   # a California state agency (a fairground's), not a private body
+    r"\bdistrict agricultural association\b|"   # a California state agency (a fairground's), not a private body
+    # New Mexico's mutual domestic water and sewage works associations: political subdivisions under the Sanitary
+    # Projects Act (NMSA 1978, Chapter 3, Article 29), not private bodies
+    r"\bmutual (?:domestic|sewage|sewer|water and sewer)\b[\w\s&]*\bassociation\b", re.I)
 PRIVATE_NAME = re.compile(r"\b(inc|llc|l\.l\.c|ltd|lp|corp|corporation|company|association|assn|poa|hoa|club|mhp|"
                           r"mhc)\b\.?", re.I)
 
