@@ -46,7 +46,15 @@
    "kind_note": "EPA ECHO lists permit HI0020877 as Terminated (termination date 05/31/2026; individual NPDES permit, POTW), read 2026-11-07; the national plant file still says ADC. The Honouliuli plant keeps its row under HI0021954.",
    "source_url": "https://echodata.epa.gov/echo/cwa_rest_services.get_facilities?output=JSON&p_pid=HI0020877",
    "checked": "2026-11-07",
-   "supersedes": "data/outfalls-plants-us.json HI0020877 001"
+   "supersedes": "data/outfalls-plants-us.json HI0020877 001",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'PACIFIC OCEAN' in HI",
+   "no_water_reason": "no record named 'PACIFIC OCEAN' in HI",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
    "npdes_permit": "HIF014798",
@@ -83,7 +91,14 @@
    "kind_note": "EPA ECHO lists HIF014798 as a General Permit Covered Facility under master permit HIR000000 (other id R90H876), effective 07/10/2025, no POTW component, read 2026-11-07: Hawaii's NPDES general-permit series, very probably the plant site's storm-water coverage, not a sewage discharge permit. The Wailua plant's sewage outfall is HI0020257. Not confirmed in the coverage notice itself.",
    "source_url": "https://echodata.epa.gov/echo/cwa_rest_services.get_facilities?output=JSON&p_pid=HIF014798",
    "checked": "2026-11-07",
-   "supersedes": "data/outfalls-plants-us.json HIF014798"
+   "supersedes": "data/outfalls-plants-us.json HIF014798",
+   "water_slug": "konohiki-stream-hi",
+   "water_name": "Konohiki Stream",
+   "water_kind": "river",
+   "distance_m": 71,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 800005248 (EPA), no snapping; Konohiki Stream (konohiki-stream-hi, openboatlaunch), 71 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   }
  ]
 }
