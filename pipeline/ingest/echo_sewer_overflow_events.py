@@ -155,16 +155,18 @@ South Dakota (permits SD...; research/sd/report.md section 2.2; not live until d
     Butte, Corson, Custer, Dewey, Fall River, Haakon, Harding, Jackson, Lawrence, Meade, Oglala Lakota, Pennington,
     Perkins, Ziebach) and splits Stanley County, whose corner around Fort Pierre keeps Central time. The outlines are
     the Census Bureau's TIGERweb counties (data/reference/sd-mountain-time-counties.json, written by
-    scripts/sd_mountain_time_counties.py, which cites both). A point in one of the fifteen is read as America/Denver;
-    any other point, Stanley County's included, as America/Chicago (STATE_TZ), and raw.timezone_note names the county
-    that decided it. On that extract: 70 rows Mountain (Rapid City, Spearfish, Hot Springs, Lead, Sturgis, Custer,
-    Keystone), 138 Central. Checked against the U.S. DOT time-zone layer (NTAD Time Zones): it agrees on 206 rows; the
-    two others are the Oahe Dam's (SD0026794), on the river channel that is the boundary, both dropped (one lies in
-    Stanley County's Mountain part, read here as Central). Fort Pierre's four rows are Central in the DOT layer too.
+    scripts/sd_mountain_time_counties.py, which cites both). A point in one of the fifteen is read as America/Denver.
+    Stanley County is cut in two by the U.S. DOT time-zone layer's Central polygon (NTAD Time Zones, committed in the
+    same file; review 2026-11-07 P2-2): a point in its Fort Pierre corner is Central, a point in the rest of it (84% of
+    the county) Mountain. Any other point is America/Chicago (STATE_TZ), and raw.timezone_note names the county, or the
+    part of Stanley County, that decided it. On that extract: 71 rows Mountain (Rapid City, Spearfish, Hot Springs,
+    Lead, Sturgis, Custer, Keystone, and one Oahe Dam row in western Stanley County), 137 Central. The DOT layer as a
+    whole agrees on 207 rows; the other is the second Oahe Dam row (SD0026794), in Hughes County on the river channel
+    that is the boundary, read here as Central. Both Oahe Dam rows are dropped. Fort Pierre's four rows are Central.
   - Receiving-water texts that name none (STATE_NO_WATER["SD"]): 'Does not apply- Do not discharge to any waters',
     'NA, <why>' (unless the why says the water was discharged: then STATE_NO_NAME reads it as no name given, so
-    the bypass is kept by the bypass rule), the flow sent to the city's sewer system or plant ('Sanitation system of City of ...', '... Wastewater
-    Facility', '... WWTP', '... sewer system/POTW'), a lagoon cell ('Cell # 3', 'Cell 4 at the Lagoons'), 'Excavated
+    the bypass is kept by the bypass rule), the flow sent to the city's sewer system or plant ('Sanitation system of
+    City of ...', '... Wastewater Facility', '... WWTP', '... sewer system/POTW'), a lagoon cell ('Cell # 3', 'Cell 4 at the Lagoons'), 'Excavated
     hole. No waterbody.', 'water is discharged out into a field', and 'Ditch by Lake ... Water never entered lake'.
     'Spearfish Creek / Rubble Site Cell' and 'Unnamed' stay waters.
   - The description's water words: a lagoon system's "emergency pond" is a holding cell of the plant, not a water
@@ -673,7 +675,10 @@ def zone_shapes(state: str) -> dict:
         _ZONE_SHAPES[state] = {
             "doc": doc,
             "zone": [(c["county"], shape(c["geometry"])) for c in doc["counties"]],
-            "split": [(c["county"], shape(c["geometry"])) for c in doc.get("split_counties", [])]}
+            "split": [(c["county"], shape(c["geometry"]),
+                       shape(c["central_part"]) if c.get("central_part") else None,
+                       shape(c["mountain_part"]) if c.get("mountain_part") else None)
+                      for c in doc.get("split_counties", [])]}
     return _ZONE_SHAPES[state]
 
 
@@ -692,11 +697,19 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
     for county, g in z["zone"]:
         if g.covers(pt):
             return doc["zone"], f"the zone of {county}, where the event's point lies ({cite})"
-    for county, g in z["split"]:
-        if g.covers(pt):
+    for county, g, central, mountain in z["split"]:
+        if not g.covers(pt):
+            continue
+        if mountain is not None and mountain.covers(pt):
+            return doc["zone"], (f"the zone of the part of {county} west of the boundary, where the event's point lies; "
+                                 f"the county is split ({cite}; parts from the U.S. DOT time-zone layer)")
+        if central is not None and central.covers(pt):
             return STATE_TZ[state], (f"the zone of the Fort Pierre corner of {county}, where the event's point lies; "
-                                     f"the county is split ({cite})")
-    return STATE_TZ[state], f"the zone of the counties outside the Mountain-time counties, where the event's point lies ({cite})"
+                                     f"the county is split ({cite}; parts from the U.S. DOT time-zone layer)")
+        return STATE_TZ[state], (f"{county} is split by the boundary ({cite}) and the point lies on neither part of it "
+                                 "in the U.S. DOT time-zone layer: read as Central")
+    return STATE_TZ[state], (f"the event's point lies outside the fifteen Mountain-time counties and Stanley County "
+                             f"({cite})")
 
 
 PLANNED_LABEL = "reporting requirement 'Anticipated bypass notice', or the anticipated-bypass text filled"
