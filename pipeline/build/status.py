@@ -722,7 +722,12 @@ def load_waters(include_nhd: bool = True) -> dict[str, dict]:
                 continue
             if path.name in EXTRA_WATER_FILES:
                 w = {**w, "extra": True}
-            waters.setdefault(w["slug"], w)
+            kept = waters.setdefault(w["slug"], w)
+            if kept is not w and w.get("slug_aliases"):
+                # the same slug in a later file (a state extract beside the regional New England file): the slugs
+                # openboatlaunch renamed or merged into it still resolve (ingest.obl_waters, ingest.obl_changes)
+                have = list(kept.get("slug_aliases") or [])
+                waters[w["slug"]] = {**kept, "slug_aliases": have + [a for a in w["slug_aliases"] if a not in have]}
     moved = slug_aliases(waters)
     SLUG_ALIASES.clear()
     SLUG_ALIASES.update(moved)
@@ -2869,11 +2874,18 @@ PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse 
 
 def outline_files(waters) -> list:
     """The outlines placement reads from openboatlaunch's folder (water_geometry: a record with no inline geometry),
-    as (slug, size, modified) or (slug, None) where there is none: a moved outline, or a machine without the folder
+    as (slug, geometry_hash, present) for a record whose extract carries the hash, else (slug, size, modified) or
+    (slug, None) where there is none: a moved outline, or a machine without the folder
     (the hosted runner has none), is a placement input like the records themselves (review 2026-11-04)."""
     out = [str(OBL_WATER_DIR)]
     for slug in sorted(waters):
         if (waters[slug] or {}).get("geometry"):
+            continue
+        gh = (waters[slug] or {}).get("geometry_hash")
+        if gh:
+            # openboatlaunch's API records name their outline's hash (the extract carries it): a changed outline
+            # changes the hash, and a folder unpacked again (new file times) with the same outlines does not
+            out.append((slug, gh, (OBL_WATER_DIR / f"{slug}.json").is_file()))
             continue
         try:
             st = (OBL_WATER_DIR / f"{slug}.json").stat()

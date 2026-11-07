@@ -8,12 +8,15 @@ name: Refresh data
 # boundary, the NY workbook, this month's NJ ECHO answers: scripts/state_paths.py lists them with the reasons) are
 # state/raw-cache.tar.gz, restored after it and saved with it. Every other raw fetch stays on the runner (bulk raw
 # saves can carry personal fields and are never saved or committed). openboatlaunch's water records and outlines
-# (state/obl-water.tar.gz, packed once on a machine with the openboatlaunch checkout) are restored read only into
-# ../openboatlaunch/out, where the pipeline reads the outlines (build/status.py), and never saved; a missing or
-# unreadable one is a warning here (the run goes on without the outlines). Each state object is capped at 200 MB
+# come from its API (scripts/state_paths.py fetch-obl: the national bulk file, at most once a day, key OBL_API_KEY)
+# into ../openboatlaunch/out, where the pipeline reads them (build/status.py), else from the last good copy in R2
+# (state/obl-water.tar.gz); the hourly changes check (make obl-sync, the refresh's first stage) brings the folder up
+# to date, and the folder is saved back to R2 when the API changed it. Without either the run goes on without the
+# outlines (a warning). Each state object is capped at 200 MB
 # (the raw caches are not saved over it; the build state warns over it and is still saved up to wrangler's limit).
-# Needs the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 edit) and, for the model steps,
-# OPENROUTER_API_KEY (without it they run rules-only).
+# Needs the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 edit), for the model steps
+# OPENROUTER_API_KEY (without it they run rules-only), and for openboatlaunch's API OBL_API_KEY (without it, or with
+# the API down, the R2 copy is used as before).
 on:
   workflow_dispatch:
     inputs:
@@ -39,6 +42,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
       PYTHONUNBUFFERED: '1'
     steps:
       - name: Secrets present
@@ -74,18 +78,23 @@ jobs:
             echo "::error::state/build.tar.gz is in R2 but could not be fetched; nothing is published or saved this run"; exit 1
           fi
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
-      - name: Restore openboatlaunch's water records and outlines from R2 (state/obl-water.tar.gz; read only, never saved)
+      - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
         run: |
-          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl). Never
-          # stops the refresh: without them it runs as it did before the object existed, with no outlines here.
-          rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
-          if [ "$rc" = 0 ]; then
-            python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
-              || echo "::warning::state/obl-water.tar.gz could not be read; this run goes on without openboatlaunch's outlines"
-          elif [ "$rc" = 3 ]; then
-            echo "::warning::state/obl-water.tar.gz is not in R2 yet; this run goes on without openboatlaunch's outlines"
-          else
-            echo "::warning::state/obl-water.tar.gz could not be fetched; this run goes on without openboatlaunch's outlines"
+          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl rules).
+          # fetch-obl pulls the API's national bulk file (sha256 checked) at most once a day and only for a new
+          # snapshot; otherwise, or on any failure (said in the log), the R2 copy is restored as before. Never stops
+          # the refresh: without either it runs with no outlines here.
+          rc=0; python3 -I scripts/state_paths.py fetch-obl || rc=$?
+          if [ "$rc" != 0 ]; then
+            rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
+            if [ "$rc" = 0 ]; then
+              python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
+                || echo "::warning::state/obl-water.tar.gz could not be read; this run goes on without openboatlaunch's outlines"
+            elif [ "$rc" = 3 ]; then
+              echo "::warning::state/obl-water.tar.gz is not in R2 yet; this run goes on without openboatlaunch's outlines"
+            else
+              echo "::warning::state/obl-water.tar.gz could not be fetched; this run goes on without openboatlaunch's outlines"
+            fi
           fi
           rm -f obl-water.tar.gz
       - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
@@ -126,6 +135,17 @@ jobs:
           [ -f data/build/export-blocked.json ] && { echo "export blocked; out/ not published"; exit 0; }
           tar -czf out.tar.gz out && wrangler r2 object put dirtywaterwatch-data/state/out.tar.gz --file out.tar.gz --remote
           ls -la out.tar.gz
+      - name: Save openboatlaunch's folder to R2 when the API changed it (state/obl-water.tar.gz, the fallback copy)
+        # before the build state: when the upload fails, data/build/obl-changes.json goes back to before this run
+        # (obl-not-saved), so the next run, restoring the older copy, asks for the same changes again
+        if: success()
+        run: |
+          rc=0; python3 -I scripts/state_paths.py pack-obl obl-water.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            wrangler r2 object put dirtywaterwatch-data/state/obl-water.tar.gz --file obl-water.tar.gz --remote \
+              || python3 -I scripts/state_paths.py obl-not-saved
+          fi
+          rm -f obl-water.tar.gz
       - name: Save pipeline state to R2
         # only after a refresh that ran to the end: a cancelled or failed run must not overwrite the saved history
         # (a seed from the owner's machine, or the last good run) with a partial one
