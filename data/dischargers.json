@@ -223483,7 +223483,7 @@
   "towns": [
    "Adams"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045055 ADAMS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045055 ADAMS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Adams is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223492,7 +223492,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ainsworth",
@@ -223515,7 +223516,7 @@
   "towns": [
    "Ainsworth"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112267 AINSWORTH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112267 AINSWORTH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ainsworth is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223524,7 +223525,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-albion",
@@ -223547,7 +223549,7 @@
   "towns": [
    "Albion"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026573 ALBION WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026573 ALBION WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Albion is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223556,7 +223558,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-alda",
@@ -223579,7 +223582,7 @@
   "towns": [
    "Alda"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042056 ALDA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042056 ALDA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Alda is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223588,7 +223591,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-alexandria",
@@ -223611,7 +223615,7 @@
   "towns": [
    "Alexandria"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029238 ALEXANDRIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029238 ALEXANDRIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Alexandria is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223620,7 +223624,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-allen",
@@ -223643,7 +223648,7 @@
   "towns": [
    "Allen"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031241 ALLEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031241 ALLEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Allen is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223652,7 +223657,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-amherst",
@@ -223675,7 +223681,7 @@
   "towns": [
    "Amherst"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112992 AMHERST WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112992 AMHERST WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Amherst is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223684,7 +223690,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ansley",
@@ -223707,7 +223714,7 @@
   "towns": [
    "Ansley"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0043249 ANSLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0043249 ANSLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ansley is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223716,7 +223723,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-arapahoe",
@@ -223739,7 +223747,7 @@
   "towns": [
    "Arapahoe"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021521 ARAPAHOE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021521 ARAPAHOE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Arapahoe is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223748,7 +223756,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-arcadia",
@@ -223771,7 +223780,7 @@
   "towns": [
    "Arcadia"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0041297 ARCADIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0041297 ARCADIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Arcadia is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223780,7 +223789,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-arlington",
@@ -223803,7 +223813,7 @@
   "towns": [
    "Arlington"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049166 ARLINGTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049166 ARLINGTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Arlington is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223812,7 +223822,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-arnold",
@@ -223835,7 +223846,7 @@
   "towns": [
    "Arnold"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0028096 ARNOLD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0028096 ARNOLD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Arnold is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223844,7 +223855,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ashland",
@@ -223867,7 +223879,7 @@
   "towns": [
    "Ashland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026107 ASHLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026107 ASHLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ashland is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223876,7 +223888,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-ashton",
@@ -223899,7 +223912,7 @@
   "towns": [
    "Ashton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024350 ASHTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024350 ASHTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ashton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223908,7 +223921,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-atkinson",
@@ -223931,7 +223945,7 @@
   "towns": [
    "Atkinson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021610 ATKINSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021610 ATKINSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Atkinson is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223940,7 +223954,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-auburn",
@@ -223963,7 +223978,7 @@
   "towns": [
    "Auburn"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027774 AUBURN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027774 AUBURN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Auburn is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -223972,7 +223987,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-aurora",
@@ -223995,7 +224011,7 @@
   "towns": [
    "Aurora"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031810 AURORA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031810 AURORA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Aurora is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224004,7 +224020,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-avoca",
@@ -224027,7 +224044,7 @@
   "towns": [
    "Avoca"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113131 AVOCA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113131 AVOCA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Avoca is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224036,7 +224053,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-bancroft",
@@ -224059,7 +224077,7 @@
   "towns": [
    "Bancroft"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0028088 BANCROFT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0028088 BANCROFT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bancroft is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224068,7 +224086,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-barneston",
@@ -224091,7 +224110,7 @@
   "towns": [
    "Barneston"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0121711 BARNESTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0121711 BARNESTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Barneston is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224100,7 +224119,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-bassett",
@@ -224123,7 +224143,7 @@
   "towns": [
    "Bassett"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112666 BASSETT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112666 BASSETT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bassett is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224132,7 +224152,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-battle-creek",
@@ -224155,7 +224176,7 @@
   "towns": [
    "Battle Creek"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0041301 BATTLE CREEK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0041301 BATTLE CREEK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Battle Creek is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224164,7 +224185,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-bayard",
@@ -224187,7 +224209,7 @@
   "towns": [
    "Bayard"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112739 BAYARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112739 BAYARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bayard is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224196,7 +224218,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-beatrice",
@@ -224219,7 +224242,7 @@
   "towns": [
    "Beatrice"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0020915 BEATRICE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0020915 BEATRICE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Beatrice is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224228,7 +224251,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-beaver-city",
@@ -224251,7 +224275,7 @@
   "towns": [
    "Beaver City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026476 BEAVER CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026476 BEAVER CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Beaver City is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224260,7 +224284,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-beaver-crossing",
@@ -224284,7 +224309,7 @@
   "towns": [
    "Beaver Crossing"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023981 BEAVER CROSSING WASTEWATER. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023981 BEAVER CROSSING WASTEWATER. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Beaver Crossing is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224293,7 +224318,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-beaver-lake-association",
@@ -224349,7 +224375,7 @@
   "towns": [
    "Bee"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0123200 BEE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0123200 BEE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bee is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224358,7 +224384,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-beemer",
@@ -224381,7 +224408,7 @@
   "towns": [
    "Beemer"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046086 BEEMER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046086 BEEMER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Beemer is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224390,7 +224417,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-bellevue",
@@ -224446,7 +224474,7 @@
   "towns": [
    "Bellwood"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046094 BELLWOOD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046094 BELLWOOD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bellwood is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224455,7 +224483,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-benedict",
@@ -224478,7 +224507,7 @@
   "towns": [
    "Benedict"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0114944 BENEDICT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0114944 BENEDICT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Benedict is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224487,7 +224516,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-benkelman",
@@ -224510,7 +224540,7 @@
   "towns": [
    "Benkelman"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112887 BENKELMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112887 BENKELMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Benkelman is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224519,7 +224549,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-bennet",
@@ -224542,7 +224573,7 @@
   "towns": [
    "Bennet"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040916 BENNET WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040916 BENNET WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bennet is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224551,7 +224582,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-blair",
@@ -224574,7 +224606,7 @@
   "towns": [
    "Blair"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021482 BLAIR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021482 BLAIR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Blair is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224583,7 +224615,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-bloomfield",
@@ -224606,7 +224639,7 @@
   "towns": [
    "Bloomfield"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021733 BLOOMFIELD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021733 BLOOMFIELD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bloomfield is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224615,7 +224648,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-bradshaw",
@@ -224638,7 +224672,7 @@
   "towns": [
    "Bradshaw"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0121321 BRADSHAW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0121321 BRADSHAW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bradshaw is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224647,7 +224681,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-brainard",
@@ -224670,7 +224705,7 @@
   "towns": [
    "Brainard"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042366 BRAINARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042366 BRAINARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Brainard is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224679,7 +224714,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-bridgeport",
@@ -224702,7 +224738,7 @@
   "towns": [
    "Bridgeport"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112119 BRIDGEPORT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112119 BRIDGEPORT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bridgeport is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224711,7 +224747,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-broken-bow",
@@ -224734,7 +224771,7 @@
   "towns": [
    "Broken Bow"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027260 BROKEN BOW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027260 BROKEN BOW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Broken Bow is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224743,7 +224780,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-brownville",
@@ -224766,7 +224804,7 @@
   "towns": [
    "Brownville"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112984 BROWNVILLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112984 BROWNVILLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Brownville is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224775,7 +224813,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-brule",
@@ -224798,7 +224837,7 @@
   "towns": [
    "Brule"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021229 BRULE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021229 BRULE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Brule is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224807,7 +224846,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-bruning",
@@ -224830,7 +224870,7 @@
   "towns": [
    "Bruning"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045071 BRUNING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045071 BRUNING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Bruning is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224839,7 +224879,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-burchard",
@@ -224862,7 +224903,7 @@
   "towns": [
    "Burchard"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113638 BURCHARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113638 BURCHARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Burchard is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224871,7 +224912,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-burr",
@@ -224894,7 +224936,7 @@
   "towns": [
    "Burr"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046116 BURR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046116 BURR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Burr is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224903,7 +224945,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-burwell",
@@ -224926,7 +224969,7 @@
   "towns": [
    "Burwell"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021172 BURWELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021172 BURWELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Burwell is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224935,7 +224978,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-butte",
@@ -224959,7 +225003,7 @@
   "towns": [
    "Butte"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049221 BUTTE WASTEWATER TREATMENT FACILITY; NE0139521 BUTTE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049221 BUTTE WASTEWATER TREATMENT FACILITY; NE0139521 BUTTE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Butte is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -224968,7 +225012,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-byron",
@@ -224991,7 +225036,7 @@
   "towns": [
    "Byron"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029271 BYRON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029271 BYRON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Byron is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225000,7 +225045,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-cairo",
@@ -225023,7 +225069,7 @@
   "towns": [
    "Cairo"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045080 CAIRO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045080 CAIRO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Cairo is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225032,7 +225078,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-cambridge",
@@ -225055,7 +225102,7 @@
   "towns": [
    "Cambridge"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024180 CAMBRIDGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024180 CAMBRIDGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Cambridge is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225064,7 +225111,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-camp-ashland",
@@ -225182,7 +225230,7 @@
   "towns": [
    "Carleton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0028291 CARLETON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0028291 CARLETON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Carleton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225191,7 +225239,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-cedar-bluffs",
@@ -225214,7 +225263,7 @@
   "towns": [
    "Cedar Bluffs"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0039888 CEDAR BLUFFS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0039888 CEDAR BLUFFS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Cedar Bluffs is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225223,7 +225272,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-cedar-rapids",
@@ -225246,7 +225296,7 @@
   "towns": [
    "Cedar Rapids"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049158 CEDAR RAPIDS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049158 CEDAR RAPIDS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Cedar Rapids is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225255,7 +225305,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-central-city",
@@ -225278,7 +225329,7 @@
   "towns": [
    "Central City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0025445 CENTRAL CITY WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0025445 CENTRAL CITY WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Central City is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225287,7 +225338,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-centura-public-schools",
@@ -225343,7 +225395,7 @@
   "towns": [
    "Ceresco"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046124 CERESCO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046124 CERESCO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ceresco is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225352,7 +225404,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-chadron",
@@ -225375,7 +225428,7 @@
   "towns": [
    "Chadron"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029190 CHADRON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029190 CHADRON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Chadron is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225384,7 +225437,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-chambers",
@@ -225408,7 +225462,7 @@
   "towns": [
    "Chambers"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0129488 CHAMBERS WASTEWATER TREATMENT; NE0139599 CHAMBERS WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0129488 CHAMBERS WASTEWATER TREATMENT; NE0139599 CHAMBERS WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Chambers is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225417,7 +225471,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-chapman",
@@ -225440,7 +225495,7 @@
   "towns": [
    "Chapman"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031747 CHAPMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031747 CHAPMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Chapman is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225449,7 +225504,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-chappell",
@@ -225472,7 +225528,7 @@
   "towns": [
    "Chappell"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029211 CHAPPELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029211 CHAPPELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Chappell is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225481,7 +225537,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-clarks",
@@ -225504,7 +225561,7 @@
   "towns": [
    "Clarks"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113549 CLARKS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113549 CLARKS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Clarks is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225513,7 +225570,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-clarkson",
@@ -225536,7 +225594,7 @@
   "towns": [
    "Clarkson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021164 CLARKSON WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021164 CLARKSON WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Clarkson is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225545,7 +225603,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-clatonia",
@@ -225568,7 +225627,7 @@
   "towns": [
    "Clatonia"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045101 CLATONIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045101 CLATONIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Clatonia is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225577,7 +225636,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-coleridge",
@@ -225600,7 +225660,7 @@
   "towns": [
    "Coleridge"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0025429 COLERIDGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0025429 COLERIDGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Coleridge is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225609,7 +225669,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-colon",
@@ -225632,7 +225693,7 @@
   "towns": [
    "Colon"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0033499 COLON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0033499 COLON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Colon is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225641,7 +225702,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-columbus",
@@ -225664,7 +225726,7 @@
   "towns": [
    "Columbus"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0035025 COLUMBUS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0035025 COLUMBUS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Columbus is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225673,7 +225735,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-cortland",
@@ -225696,7 +225759,7 @@
   "towns": [
    "Cortland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027782 CORTLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027782 CORTLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Cortland is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225705,7 +225768,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-cozad",
@@ -225728,7 +225792,7 @@
   "towns": [
    "Cozad"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112828 COZAD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112828 COZAD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Cozad is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225737,7 +225801,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-crab-orchard",
@@ -225758,7 +225823,7 @@
   "towns": [
    "Crab Orchard"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0134155 CRAB ORCHARD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0134155 CRAB ORCHARD WASTEWATER TREATMENT FACILITY.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225791,7 +225856,7 @@
   "towns": [
    "Crawford"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0039799 CRAWFORD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0039799 CRAWFORD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Crawford is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225800,7 +225865,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-creighton",
@@ -225823,7 +225889,7 @@
   "towns": [
    "Creighton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021253 CREIGHTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021253 CREIGHTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Creighton is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225832,7 +225898,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-crete",
@@ -225855,7 +225922,7 @@
   "towns": [
    "Crete"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0034304 CRETE WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0034304 CRETE WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Crete is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225864,7 +225931,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-crofton",
@@ -225887,7 +225955,7 @@
   "towns": [
    "Crofton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049131 CROFTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049131 CROFTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Crofton is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225896,7 +225964,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-culbertson",
@@ -225919,7 +225988,7 @@
   "towns": [
    "Culbertson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0051624 CULBERTSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0051624 CULBERTSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Culbertson is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225928,7 +225997,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-dakota-city",
@@ -225951,7 +226021,7 @@
   "towns": [
    "Dakota City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024236 DAKOTA CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024236 DAKOTA CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Dakota City is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -225960,7 +226030,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-dakota-springs",
@@ -226013,7 +226084,7 @@
   "towns": [
    "Dannebrog"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045136 DANNEBROG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045136 DANNEBROG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Dannebrog is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226022,7 +226093,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-davey",
@@ -226045,7 +226117,7 @@
   "towns": [
    "Davey"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024295 DAVEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024295 DAVEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Davey is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226054,7 +226126,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-david-city",
@@ -226077,7 +226150,7 @@
   "towns": [
    "David City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021199 DAVID CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021199 DAVID CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; David City is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226086,7 +226159,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-dawson",
@@ -226109,7 +226183,7 @@
   "towns": [
    "Dawson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023914 DAWSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023914 DAWSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Dawson is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226118,7 +226192,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-decatur",
@@ -226141,7 +226216,7 @@
   "towns": [
    "Decatur"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049123 DECATUR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049123 DECATUR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Decatur is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226150,7 +226225,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-denton",
@@ -226173,7 +226249,7 @@
   "towns": [
    "Denton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046141 DENTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046141 DENTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Denton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226182,7 +226258,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-deshler",
@@ -226205,7 +226282,7 @@
   "towns": [
    "Deshler"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0039802 DESHLER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0039802 DESHLER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Deshler is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226214,7 +226291,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-dewitt",
@@ -226237,7 +226315,7 @@
   "towns": [
    "De Witt"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024341 DEWITT WASTEWATER TREATMENT FACILITY.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024341 DEWITT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; De Witt is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226246,7 +226324,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-diller",
@@ -226269,7 +226348,7 @@
   "towns": [
    "Diller"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0129500 DILLER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0129500 DILLER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Diller is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226278,7 +226357,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-dodge",
@@ -226301,7 +226381,7 @@
   "towns": [
    "Dodge"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042064 DODGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042064 DODGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Dodge is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226310,7 +226390,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-doniphan",
@@ -226333,7 +226414,7 @@
   "towns": [
    "Doniphan"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0114952 DONIPHAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0114952 DONIPHAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Doniphan is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226342,7 +226423,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-dorchester",
@@ -226365,7 +226447,7 @@
   "towns": [
    "Dorchester"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021539 DORCHESTER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021539 DORCHESTER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Dorchester is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226374,7 +226456,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-douglas",
@@ -226397,7 +226480,7 @@
   "towns": [
    "Douglas"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046159 DOUGLAS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046159 DOUGLAS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Douglas is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226406,7 +226489,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-dutton-lainson",
@@ -226462,7 +226546,7 @@
   "towns": [
    "Dwight"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046175 DWIGHT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046175 DWIGHT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Dwight is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226471,7 +226555,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-eagle",
@@ -226494,7 +226579,7 @@
   "towns": [
    "Eagle"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112062 EAGLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112062 EAGLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Eagle is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226503,7 +226588,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-eagle-lake-subdivision",
@@ -226556,7 +226642,7 @@
   "towns": [
    "Edison"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023817 EDISON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023817 EDISON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Edison is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226565,7 +226651,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-elgin",
@@ -226588,7 +226675,7 @@
   "towns": [
    "Elgin"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0039811 ELGIN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0039811 ELGIN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Elgin is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226597,7 +226684,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-elkhorn",
@@ -226620,7 +226708,7 @@
   "towns": [
    "Elkhorn"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040096 ELKHORN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040096 ELKHORN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (the town is not among the Census Bureau's incorporated places, so its form is not stated).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226652,7 +226740,7 @@
   "towns": [
    "Elm Creek"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026042 ELM CREEK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026042 ELM CREEK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Elm Creek is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226661,7 +226749,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-elmwood",
@@ -226684,7 +226773,7 @@
   "towns": [
    "Elmwood"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112127 ELMWOOD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112127 ELMWOOD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Elmwood is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226693,7 +226782,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-elwood",
@@ -226716,7 +226806,7 @@
   "towns": [
    "Elwood"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031755 ELWOOD WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031755 ELWOOD WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Elwood is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226725,7 +226815,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-emerson",
@@ -226748,7 +226839,7 @@
   "towns": [
    "Emerson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0041351 EMERSON WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0041351 EMERSON WASTEWATER TREATMENT.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226781,7 +226872,7 @@
   "towns": [
    "Ewing"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0043699 EWING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0043699 EWING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ewing is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226790,7 +226881,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-exeter",
@@ -226813,7 +226905,7 @@
   "towns": [
    "Exeter"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040941 EXETER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040941 EXETER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Exeter is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226822,7 +226914,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-fairbury",
@@ -226845,7 +226938,7 @@
   "towns": [
    "Fairbury"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024384 FAIRBURY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024384 FAIRBURY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Fairbury is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226854,7 +226947,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-fairmont",
@@ -226877,7 +226971,7 @@
   "towns": [
    "Fairmont"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042374 FAIRMONT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042374 FAIRMONT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Fairmont is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226886,7 +226980,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-falls-city",
@@ -226975,7 +227070,7 @@
   "towns": [
    "Farwell"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045161 FARWELL WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045161 FARWELL WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Farwell is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -226984,7 +227079,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-filley",
@@ -227007,7 +227103,7 @@
   "towns": [
    "Filley"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113573 FILLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113573 FILLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Filley is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227016,7 +227112,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-firth",
@@ -227039,7 +227136,7 @@
   "towns": [
    "Firth"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112241 FIRTH WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112241 FIRTH WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Firth is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227048,7 +227145,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-foreman-ridge",
@@ -227102,7 +227200,7 @@
   "towns": [
    "Fort Calhoun"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021113 FORT CALHOUN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021113 FORT CALHOUN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Fort Calhoun is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227111,7 +227209,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-fremont",
@@ -227134,7 +227233,7 @@
   "towns": [
    "Fremont"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031381 FREMONT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031381 FREMONT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Fremont is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227143,7 +227242,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-friend",
@@ -227166,7 +227266,7 @@
   "towns": [
    "Friend"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024007 FRIEND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024007 FRIEND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Friend is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227175,7 +227275,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-fullerton",
@@ -227198,7 +227299,7 @@
   "towns": [
    "Fullerton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026638 FULLERTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026638 FULLERTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Fullerton is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227207,7 +227308,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-garland",
@@ -227230,7 +227332,7 @@
   "towns": [
    "Garland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023931 GARLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023931 GARLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Garland is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227239,7 +227341,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-geneva",
@@ -227262,7 +227365,7 @@
   "towns": [
    "Geneva"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031763 GENEVA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031763 GENEVA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Geneva is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227271,7 +227374,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-genoa",
@@ -227294,7 +227398,7 @@
   "towns": [
    "Genoa"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027341 GENOA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027341 GENOA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Genoa is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227303,7 +227407,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-gering",
@@ -227326,7 +227431,7 @@
   "towns": [
    "Gering"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027936 GERING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027936 GERING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Gering is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227335,7 +227440,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-gibbon",
@@ -227358,7 +227464,7 @@
   "towns": [
    "Gibbon"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029297 GIBBON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029297 GIBBON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Gibbon is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227367,7 +227473,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-gibbon-inn",
@@ -227421,7 +227528,7 @@
   "towns": [
    "Gothenburg"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0047376 GOTHENBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0047376 GOTHENBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Gothenburg is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227430,7 +227537,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-grafton",
@@ -227453,7 +227561,7 @@
   "towns": [
    "Grafton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045217 GRAFTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045217 GRAFTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Grafton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227462,7 +227570,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-grand-island",
@@ -227519,7 +227628,7 @@
   "towns": [
    "Greeley"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049212 GREELEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049212 GREELEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Greeley is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227528,7 +227637,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-greenwood",
@@ -227551,7 +227661,7 @@
   "towns": [
    "Greenwood"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027367 GREENWOOD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027367 GREENWOOD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Greenwood is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227560,7 +227670,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-gresham",
@@ -227583,7 +227694,7 @@
   "towns": [
    "Gresham"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027359 GRESHAM WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027359 GRESHAM WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Gresham is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227592,7 +227703,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-guide-rock",
@@ -227615,7 +227727,7 @@
   "towns": [
    "Guide Rock"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021601 GUIDE ROCK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021601 GUIDE ROCK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Guide Rock is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227624,7 +227736,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-hadar",
@@ -227647,7 +227760,7 @@
   "towns": [
    "Hadar"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024210 HADAR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024210 HADAR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hadar is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227656,7 +227769,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-hallam",
@@ -227679,7 +227793,7 @@
   "towns": [
    "Hallam"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0028282 HALLAM WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0028282 HALLAM WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hallam is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227688,7 +227802,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-hampton",
@@ -227711,7 +227826,7 @@
   "towns": [
    "Hampton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0114979 HAMPTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0114979 HAMPTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hampton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227720,7 +227835,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-harbine",
@@ -227743,7 +227859,7 @@
   "towns": [
    "Harbine"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0114171 HARBINE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0114171 HARBINE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Harbine is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227752,7 +227868,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-hartington",
@@ -227775,7 +227892,7 @@
   "towns": [
    "Hartington"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049115 HARTINGTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049115 HARTINGTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hartington is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227784,7 +227901,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-hastings",
@@ -227873,7 +227991,7 @@
   "towns": [
    "Hebron"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024252 HEBRON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024252 HEBRON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hebron is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227882,7 +228000,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-hemingford",
@@ -227903,7 +228022,7 @@
   "towns": [
    "Hemingford"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0139360 HEMINGFORD WWTF.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0139360 HEMINGFORD WWTF. Named for the town of Hemingford, but EPA types it NON-POTW: who holds the permit was not read, so its form is not stated.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227937,7 +228056,7 @@
   "towns": [
    "Herman"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049107 HERMAN WASTEWATER TREATMENT FACILITY; NE0139866 HERMAN WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049107 HERMAN WASTEWATER TREATMENT FACILITY; NE0139866 HERMAN WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Herman is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227970,7 +228089,7 @@
   "towns": [
    "Hickman"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046183 HICKMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046183 HICKMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hickman is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -227979,7 +228098,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-hidden-valley-estates",
@@ -228033,7 +228153,7 @@
   "towns": [
    "Holbrook"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023833 HOLBROOK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023833 HOLBROOK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Holbrook is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228042,7 +228162,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-holdrege",
@@ -228065,7 +228186,7 @@
   "towns": [
    "Holdrege"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021202 HOLDREGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021202 HOLDREGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Holdrege is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228074,7 +228195,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-holstein",
@@ -228095,7 +228217,7 @@
   "towns": [
    "Holstein"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026484 HOLSTEIN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026484 HOLSTEIN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Holstein is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228104,7 +228226,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-homer",
@@ -228127,7 +228250,7 @@
   "towns": [
    "Homer"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0025453 HOMER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0025453 HOMER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Homer is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228136,7 +228259,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-hooper",
@@ -228159,7 +228283,7 @@
   "towns": [
    "Hooper"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049093 HOOPER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049093 HOOPER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Hooper is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228168,7 +228292,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-howells",
@@ -228191,7 +228316,7 @@
   "towns": [
    "Howells"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046205 HOWELLS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046205 HOWELLS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Howells is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228200,7 +228325,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-humboldt",
@@ -228223,7 +228349,7 @@
   "towns": [
    "Humboldt"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031844 HUMBOLDT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031844 HUMBOLDT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Humboldt is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228232,7 +228358,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-humphrey",
@@ -228255,7 +228382,7 @@
   "towns": [
    "Humphrey"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049085 HUMPHREY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049085 HUMPHREY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Humphrey is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228264,7 +228391,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-indianola",
@@ -228287,7 +228415,7 @@
   "towns": [
    "Indianola"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112712 INDIANOLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112712 INDIANOLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Indianola is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228296,7 +228424,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-innovative-exhaust-solutions",
@@ -228350,7 +228479,7 @@
   "towns": [
    "Jansen"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045233 JANSEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045233 JANSEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Jansen is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228359,7 +228488,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-johnson",
@@ -228382,7 +228512,7 @@
   "towns": [
    "Johnson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0037001 JOHNSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0037001 JOHNSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Johnson is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228391,7 +228521,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-juniata",
@@ -228414,7 +228545,7 @@
   "towns": [
    "Juniata"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0028100 JUNIATA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0028100 JUNIATA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Juniata is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228423,7 +228554,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-kearney",
@@ -228479,7 +228611,7 @@
   "towns": [
    "Kenesaw"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021555 KENESAW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021555 KENESAW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Kenesaw is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228488,7 +228620,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-kimball",
@@ -228511,7 +228644,7 @@
   "towns": [
    "Kimball"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021644 KIMBALL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021644 KIMBALL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Kimball is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228520,7 +228653,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-laurel",
@@ -228543,7 +228677,7 @@
   "towns": [
    "Laurel"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023922 LAUREL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023922 LAUREL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Laurel is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228552,7 +228686,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-leigh",
@@ -228575,7 +228710,7 @@
   "towns": [
    "Leigh"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112101 LEIGH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112101 LEIGH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Leigh is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228584,7 +228719,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-lewiston",
@@ -228607,7 +228743,7 @@
   "towns": [
    "Lewiston"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026051 LEWISTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026051 LEWISTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Lewiston is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228616,7 +228752,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-lexington",
@@ -228639,7 +228776,7 @@
   "towns": [
    "Lexington"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042668 LEXINGTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042668 LEXINGTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Lexington is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228648,7 +228785,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-lincoln",
@@ -228707,7 +228845,7 @@
   "towns": [
    "Lindsay"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027278 LINDSAY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027278 LINDSAY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Lindsay is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228716,7 +228854,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-lodgepole",
@@ -228739,7 +228878,7 @@
   "towns": [
    "Lodgepole"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112542 LODGEPOLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112542 LODGEPOLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Lodgepole is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228748,7 +228887,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-long-pine",
@@ -228771,7 +228911,7 @@
   "towns": [
    "Long Pine"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113344 LONG PINE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113344 LONG PINE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Long Pine is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228780,7 +228920,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-louisville",
@@ -228803,7 +228944,7 @@
   "towns": [
    "Louisville"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024228 LOUISVILLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024228 LOUISVILLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Louisville is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228812,7 +228953,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-loup-city",
@@ -228835,7 +228977,7 @@
   "towns": [
    "Loup City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045250 LOUP CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045250 LOUP CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Loup City is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228844,7 +228986,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-lyman",
@@ -228867,7 +229010,7 @@
   "towns": [
    "Lyman"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112208 LYMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112208 LYMAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Lyman is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228876,7 +229019,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-lyons",
@@ -228899,7 +229043,7 @@
   "towns": [
    "Lyons"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049182 LYONS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049182 LYONS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Lyons is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228908,7 +229052,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-madison",
@@ -228931,7 +229076,7 @@
   "towns": [
    "Madison"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049174 MADISON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049174 MADISON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Madison is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228940,7 +229085,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-madrid",
@@ -228961,7 +229107,7 @@
   "towns": [
    "Madrid"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0139289 MADRID WWTF.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0139289 MADRID WWTF. Named for the town of Madrid, but EPA types it NON-POTW: who holds the permit was not read, so its form is not stated.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -228993,7 +229139,7 @@
   "towns": [
    "Malcolm"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024261 MALCOLM WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024261 MALCOLM WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Malcolm is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229002,7 +229148,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-manley",
@@ -229025,7 +229172,7 @@
   "towns": [
    "Manley"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042340 MANLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042340 MANLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Manley is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229034,7 +229181,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-martinsburg",
@@ -229057,7 +229205,7 @@
   "towns": [
    "Allen"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113948 MARTINSBURG WASTEWATER TREATMENT FACILITY.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113948 MARTINSBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Allen is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229066,7 +229214,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-mccook",
@@ -229122,7 +229271,7 @@
   "towns": [
    "Mead"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024309 MEAD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024309 MEAD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Mead is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229131,7 +229280,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-meadow-grove",
@@ -229154,7 +229304,7 @@
   "towns": [
    "Meadow Grove"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0030741 MEADOW GROVE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0030741 MEADOW GROVE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Meadow Grove is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229163,7 +229313,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-memphis",
@@ -229186,7 +229337,7 @@
   "towns": [
    "Memphis"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029165 MEMPHIS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029165 MEMPHIS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Memphis is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229195,7 +229346,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-milford",
@@ -229218,7 +229370,7 @@
   "towns": [
    "Milford"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024333 MILFORD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024333 MILFORD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Milford is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229227,7 +229379,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-milligan",
@@ -229248,7 +229401,7 @@
   "towns": [
    "Milligan"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0039853 MILLIGAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0039853 MILLIGAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Milligan is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229257,7 +229410,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-minatare",
@@ -229280,7 +229434,7 @@
   "towns": [
    "Minatare"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0043290 MINATARE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0043290 MINATARE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Minatare is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229289,7 +229443,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-minden",
@@ -229312,7 +229467,7 @@
   "towns": [
    "Minden"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0025411 MINDEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0025411 MINDEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Minden is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229321,7 +229476,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-mitchell",
@@ -229344,7 +229500,7 @@
   "towns": [
    "Mitchell"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0026123 MITCHELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0026123 MITCHELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Mitchell is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229353,7 +229509,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-monroe",
@@ -229376,7 +229533,7 @@
   "towns": [
    "Monroe"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046221 MONROE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046221 MONROE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Monroe is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229385,7 +229542,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ne0114251",
@@ -229601,7 +229759,7 @@
   "towns": [
    "Nehawka"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0025399 NEHAWKA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0025399 NEHAWKA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Nehawka is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229610,7 +229768,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-neligh",
@@ -229633,7 +229792,7 @@
   "towns": [
    "Neligh"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0037010 NELIGH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0037010 NELIGH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Neligh is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229642,7 +229801,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-nelson",
@@ -229665,7 +229825,7 @@
   "towns": [
    "Nelson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0048046 NELSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0048046 NELSON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Nelson is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229674,7 +229834,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-nemaha",
@@ -229697,7 +229858,7 @@
   "towns": [
    "Nemaha"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0121304 NEMAHA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0121304 NEMAHA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Nemaha is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229706,7 +229867,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-newcastle",
@@ -229729,7 +229891,7 @@
   "towns": [
    "Newcastle"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049077 NEWCASTLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049077 NEWCASTLE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Newcastle is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229738,7 +229900,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-newman-grove",
@@ -229761,7 +229924,7 @@
   "towns": [
    "Newman Grove"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0030996 NEWMAN GROVE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0030996 NEWMAN GROVE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Newman Grove is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229770,7 +229933,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-newport",
@@ -229793,7 +229957,7 @@
   "towns": [
    "Newport"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0114910 NEWPORT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0114910 NEWPORT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Newport is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229802,7 +229966,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-nickerson",
@@ -229825,7 +229990,7 @@
   "towns": [
    "Nickerson"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024287 NICKERSON WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024287 NICKERSON WWTF.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229858,7 +230023,7 @@
   "towns": [
    "Niobrara"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0030716 NIOBRARA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0030716 NIOBRARA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Niobrara is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229867,7 +230032,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-norfolk",
@@ -229890,7 +230056,7 @@
   "towns": [
    "Norfolk"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0033421 NORFOLK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0033421 NORFOLK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Norfolk is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229899,7 +230065,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-north-bend",
@@ -229922,7 +230089,7 @@
   "towns": [
    "North Bend"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040924 NORTH BEND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040924 NORTH BEND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; North Bend is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229931,7 +230098,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-north-platte",
@@ -229987,7 +230155,7 @@
   "towns": [
    "O'Neill"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049051 O'NEILL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049051 O'NEILL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; O'Neill is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -229996,7 +230164,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-oakdale",
@@ -230019,7 +230188,7 @@
   "towns": [
    "Oakdale"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049069 OAKDALE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049069 OAKDALE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Oakdale is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230028,7 +230197,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-oakland",
@@ -230051,7 +230221,7 @@
   "towns": [
    "Oakland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024023 OAKLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024023 OAKLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Oakland is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230060,7 +230230,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-odell",
@@ -230083,7 +230254,7 @@
   "towns": [
    "Odell"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040975 ODELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040975 ODELL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Odell is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230092,7 +230263,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ogallala",
@@ -230115,7 +230287,7 @@
   "towns": [
    "Ogallala"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040045 OGALLALA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040045 OGALLALA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ogallala is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230124,7 +230296,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-omaha",
@@ -230149,7 +230322,7 @@
   "water_slugs": [],
   "outfall_count": 28,
   "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 28 rows for these permits)",
-  "notification_channel": "No Nebraska statute or rule requires public notice of a sewage overflow or a bypass: the permit's standard conditions require a report to the Department of Water, Energy, and Environment (DWEE) within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow, so the reports become public in EPA's overflow tables (ECHO, https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) weeks later (a median 23 days after the start in the 2026-11-04 extract). As a combined sewer permittee (NE0133680) Omaha must notify the public of overflows under its permit's public notification condition (Nine Minimum Controls, no. 8); the permit text sits in DWEE's document viewer and was not read. No web notice of Omaha's overflows was found (the CSO program site omahacso.com carries projects and reports only); Omaha Public Works announces large overflows through the news media.",
+  "notification_channel": "No Nebraska statute or rule requires public notice of a sewage overflow or a bypass: the permit's standard conditions require a report to the Department of Water, Energy, and Environment (DWEE) within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow, so the reports become public in EPA's overflow tables (ECHO, https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) weeks later (a median 23 days after the start in the 2026-11-04 extract). As a combined sewer permittee (NE0133680) Omaha's permit is expected to carry a public notification condition (Nine Minimum Controls, no. 8); its terms could not be read (the permit text sits in DWEE's document viewer). No web notice of Omaha's overflows was found (the CSO program site omahacso.com carries projects and reports only); Omaha Public Works announces large overflows through the news media.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
@@ -230226,7 +230399,7 @@
   "towns": [
    "Ong"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023795 ONG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023795 ONG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ong is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230235,7 +230408,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ord",
@@ -230258,7 +230432,7 @@
   "towns": [
    "Ord"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024392 ORD WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024392 ORD WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ord is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230267,7 +230441,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-osceola",
@@ -230290,7 +230465,7 @@
   "towns": [
    "Osceola"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046230 OSCEOLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046230 OSCEOLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Osceola is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230299,7 +230474,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-osmond",
@@ -230322,7 +230498,7 @@
   "towns": [
    "Osmond"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040029 OSMOND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040029 OSMOND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Osmond is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230331,7 +230507,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-otoe",
@@ -230354,7 +230531,7 @@
   "towns": [
    "Otoe"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0121673 OTOE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0121673 OTOE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Otoe is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230363,7 +230540,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-oxford",
@@ -230386,7 +230564,7 @@
   "towns": [
    "Oxford"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031828 OXFORD WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031828 OXFORD WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Oxford is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230395,7 +230573,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-palmer",
@@ -230418,7 +230597,7 @@
   "towns": [
    "Palmer"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031259 PALMER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031259 PALMER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Palmer is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230427,7 +230606,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-panama",
@@ -230450,7 +230630,7 @@
   "towns": [
    "Panama"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046256 PANAMA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046256 PANAMA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Panama is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230459,7 +230639,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-pawnee-city",
@@ -230482,7 +230663,7 @@
   "towns": [
    "Pawnee City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042048 PAWNEE CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042048 PAWNEE CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Pawnee City is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230491,7 +230672,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-paxton",
@@ -230514,7 +230696,7 @@
   "towns": [
    "Paxton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0041289 PAXTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0041289 PAXTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Paxton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230523,7 +230705,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-pender",
@@ -230546,7 +230729,7 @@
   "towns": [
    "Pender"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040908 VILLAGE OF PENDER. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040908 VILLAGE OF PENDER.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230579,7 +230762,7 @@
   "towns": [
    "Peru"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112232 PERU WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112232 PERU WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Peru is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230588,7 +230771,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-petersburg",
@@ -230611,7 +230795,7 @@
   "towns": [
    "Petersburg"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029157 PETERSBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029157 PETERSBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Petersburg is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230620,7 +230804,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-phillips",
@@ -230641,7 +230826,7 @@
   "towns": [
    "Phillips"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0124311 PHILLIPS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0124311 PHILLIPS WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Phillips is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230650,7 +230835,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-pickrell",
@@ -230673,7 +230859,7 @@
   "towns": [
    "Pickrell"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045276 PICKRELL WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045276 PICKRELL WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Pickrell is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230682,7 +230868,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-pierce",
@@ -230705,7 +230892,7 @@
   "towns": [
    "Pierce"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042331 PIERCE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042331 PIERCE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Pierce is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230714,7 +230901,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-pilger",
@@ -230737,7 +230925,7 @@
   "towns": [
    "Pilger"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027294 PILGER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027294 PILGER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Pilger is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230746,7 +230934,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-plainview",
@@ -230769,7 +230958,7 @@
   "towns": [
    "Plainview"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021741 PLAINVIEW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021741 PLAINVIEW WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Plainview is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230778,7 +230967,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-platte-center",
@@ -230801,7 +230991,7 @@
   "towns": [
    "Platte Center"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046264 PLATTE CENTER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046264 PLATTE CENTER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Platte Center is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230810,7 +231000,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-plattsmouth",
@@ -230835,7 +231026,7 @@
   "towns": [
    "Plattsmouth"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021121 PLATTSMOUTH WASTEWATER TREATMENT FACILITY; NE0140295 PLATTSMOUTH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read). EPA records the second permit as 'City of Plattsmouth'.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021121 PLATTSMOUTH WASTEWATER TREATMENT FACILITY; NE0140295 PLATTSMOUTH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Plattsmouth is a city (Census Bureau, incorporated places). EPA records the second permit as 'City of Plattsmouth'.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230868,7 +231059,7 @@
   "towns": [
    "Plymouth"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040894 PLYMOUTH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040894 PLYMOUTH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Plymouth is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230877,7 +231068,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ponca",
@@ -230900,7 +231092,7 @@
   "towns": [
    "Ponca"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021687 PONCA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021687 PONCA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ponca is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230909,7 +231101,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-prague",
@@ -230932,7 +231125,7 @@
   "towns": [
    "Prague"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046272 PRAGUE WWTP. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046272 PRAGUE WWTP. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Prague is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -230941,7 +231134,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-preserve-at-cross-creek",
@@ -230994,7 +231188,7 @@
   "towns": [
    "Primrose"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029220 PRIMROSE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029220 PRIMROSE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Primrose is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231003,7 +231197,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-randolph",
@@ -231026,7 +231221,7 @@
   "towns": [
    "Randolph"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029149 RANDOLPH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029149 RANDOLPH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Randolph is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231035,7 +231230,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-ravenna",
@@ -231058,7 +231254,7 @@
   "towns": [
    "Ravenna"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021547 RAVENNA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021547 RAVENNA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ravenna is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231067,7 +231263,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-raymond",
@@ -231090,7 +231287,7 @@
   "towns": [
    "Raymond"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046281 RAYMOND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046281 RAYMOND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Raymond is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231099,7 +231296,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-richland",
@@ -231122,7 +231320,7 @@
   "towns": [
    "Richland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0132195 RICHLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0132195 RICHLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Richland is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231131,7 +231329,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-rising-city",
@@ -231154,7 +231353,7 @@
   "towns": [
    "Rising City"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046299 RISING CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046299 RISING CITY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Rising City is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231163,7 +231362,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-riverview-shores",
@@ -231214,7 +231414,7 @@
   "towns": [
    "Rosalie"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046302 ROSALIE WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046302 ROSALIE WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Rosalie is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231223,11 +231423,12 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-saint-edward",
-  "name": "Saint Edward Wastewater Treatment Facility",
+  "name": "City of St. Edward",
   "state": "NE",
   "kind": "plant",
   "npdes_permit": "NE0027332",
@@ -231246,7 +231447,7 @@
   "towns": [
    "St Edward"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027332 SAINT EDWARD. EPA records the permit name 'SAINT EDWARD'.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027332 SAINT EDWARD. EPA records the permit name 'SAINT EDWARD'; St. Edward is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231255,7 +231456,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-santee-sioux-nation",
@@ -231309,7 +231511,7 @@
   "towns": [
    "Schuyler"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042358 SCHUYLER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042358 SCHUYLER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Schuyler is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231318,7 +231520,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-scotia",
@@ -231341,7 +231544,7 @@
   "towns": [
    "Scotia"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023973 SCOTIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023973 SCOTIA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Scotia is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231350,7 +231553,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-scottsbluff",
@@ -231373,7 +231577,7 @@
   "towns": [
    "Scottsbluff"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0036315 SCOTTSBLUFF WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0036315 SCOTTSBLUFF WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Scottsbluff is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231382,7 +231586,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-scribner",
@@ -231405,7 +231610,7 @@
   "towns": [
    "Scribner"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023787 SCRIBNER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023787 SCRIBNER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Scribner is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231414,7 +231619,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-seward",
@@ -231471,7 +231677,7 @@
   "towns": [
    "Shickley"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0030767 SHICKLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0030767 SHICKLEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Shickley is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231480,7 +231686,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-shubert",
@@ -231503,7 +231710,7 @@
   "towns": [
    "Shubert"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021725 SHUBERT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021725 SHUBERT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Shubert is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231512,7 +231719,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-sid-1-butler",
@@ -231828,7 +232036,7 @@
   "towns": [
    "Sidney"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023884 SIDNEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023884 SIDNEY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Sidney is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231837,7 +232045,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-silver-creek",
@@ -231860,7 +232069,7 @@
   "towns": [
    "Silver Creek"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0030724 SILVER CREEK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0030724 SILVER CREEK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Silver Creek is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231869,7 +232078,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-snyder",
@@ -231892,7 +232102,7 @@
   "towns": [
    "Snyder"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046311 SNYDER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046311 SNYDER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Snyder is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -231901,7 +232111,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-south-bend-lakes",
@@ -232019,7 +232230,7 @@
   "towns": [
    "Spencer"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049042 SPENCER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049042 SPENCER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Spencer is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232028,7 +232239,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-springfield",
@@ -232051,7 +232263,7 @@
   "towns": [
    "Springfield"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0041343 SPRINGFIELD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0041343 SPRINGFIELD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Springfield is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232060,7 +232272,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-st-helena",
@@ -232083,7 +232296,7 @@
   "towns": [
    "St Helena"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0131199 ST HELENA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0131199 ST HELENA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; St Helena is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232092,7 +232305,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-st-paul",
@@ -232115,7 +232329,7 @@
   "towns": [
    "St Paul"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027324 ST PAUL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027324 ST PAUL WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; St Paul is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232124,7 +232338,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-stanton",
@@ -232147,7 +232362,7 @@
   "towns": [
    "Stanton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0029343 STANTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0029343 STANTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Stanton is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232156,7 +232371,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-staplehurst",
@@ -232179,7 +232395,7 @@
   "towns": [
    "Staplehurst"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040959 STAPLEHURST WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040959 STAPLEHURST WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Staplehurst is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232188,7 +232404,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-stapleton",
@@ -232211,7 +232428,7 @@
   "towns": [
    "Stapleton"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0047287 STAPLETON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0047287 STAPLETON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Stapleton is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232220,7 +232437,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-steinauer",
@@ -232243,7 +232461,7 @@
   "towns": [
    "Steinauer"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024279 STEINAUER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024279 STEINAUER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Steinauer is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232252,7 +232470,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-stella",
@@ -232275,7 +232494,7 @@
   "towns": [
    "Stella"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045314 STELLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045314 STELLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Stella is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232284,7 +232503,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-sterling",
@@ -232307,7 +232527,7 @@
   "towns": [
    "Sterling"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040967 STERLING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040967 STERLING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Sterling is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232316,7 +232536,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-stromsburg",
@@ -232339,7 +232560,7 @@
   "towns": [
    "Stromsburg"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024325 STROMSBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024325 STROMSBURG WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Stromsburg is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232348,7 +232569,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-stuart",
@@ -232371,7 +232593,7 @@
   "towns": [
    "Stuart"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023949 STUART WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023949 STUART WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Stuart is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232380,7 +232602,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-superior",
@@ -232403,7 +232626,7 @@
   "towns": [
    "Superior"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023809 SUPERIOR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023809 SUPERIOR WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Superior is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232412,7 +232635,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-sutherland",
@@ -232435,7 +232659,7 @@
   "towns": [
    "Sutherland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0139653 SUTHERLAND WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0139653 SUTHERLAND WASTEWATER TREATMENT FACILITY.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232468,7 +232692,7 @@
   "towns": [
    "Syracuse"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040282 SYRACUSE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040282 SYRACUSE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Syracuse is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232477,7 +232701,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-table-rock",
@@ -232500,7 +232725,7 @@
   "towns": [
    "Table Rock"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023868 TABLE ROCK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023868 TABLE ROCK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Table Rock is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232509,7 +232734,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-talmage",
@@ -232532,7 +232758,7 @@
   "towns": [
    "Talmage"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112526 TALMAGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112526 TALMAGE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Talmage is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232541,7 +232767,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-taylor",
@@ -232564,7 +232791,7 @@
   "towns": [
    "Taylor"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0139297 TAYLOR WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0139297 TAYLOR WASTEWATER TREATMENT. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Taylor is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232573,7 +232800,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-tecumseh",
@@ -232596,7 +232824,7 @@
   "towns": [
    "Tecumseh"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0030911 TECUMSEH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0030911 TECUMSEH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Tecumseh is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232605,7 +232833,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-tekamah",
@@ -232628,7 +232857,7 @@
   "towns": [
    "Tekamah"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0123072 TEKAMAH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0123072 TEKAMAH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Tekamah is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232637,7 +232866,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-thurston",
@@ -232658,7 +232888,7 @@
   "towns": [
    "Thurston"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0031739 VILLAGE OF THURSTON. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0031739 VILLAGE OF THURSTON.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232691,7 +232921,7 @@
   "towns": [
    "Tilden"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027910 TILDEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027910 TILDEN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Tilden is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232700,7 +232930,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-timber-lake-home-owners-association",
@@ -232785,7 +233016,7 @@
   "towns": [
    "Uehling"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023779 UEHLING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023779 UEHLING WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Uehling is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232794,7 +233025,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-ulysses",
@@ -232817,7 +233049,7 @@
   "towns": [
    "Ulysses"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024368 ULYSSES WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024368 ULYSSES WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Ulysses is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232826,7 +233058,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-unadilla",
@@ -232849,7 +233082,7 @@
   "towns": [
    "Unadilla"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0025461 UNADILLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0025461 UNADILLA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Unadilla is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232858,7 +233091,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-union",
@@ -232881,7 +233115,7 @@
   "towns": [
    "Union"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0028118 UNION WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0028118 UNION WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Union is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232890,7 +233124,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-utica",
@@ -232913,7 +233148,7 @@
   "towns": [
    "Utica"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045365 UTICA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045365 UTICA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Utica is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232922,7 +233157,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-valentine",
@@ -232945,7 +233181,7 @@
   "towns": [
    "Valentine"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0051489 VALENTINE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0051489 VALENTINE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Valentine is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -232954,7 +233190,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-valley-view-hoa",
@@ -233008,7 +233245,7 @@
   "towns": [
    "Valparaiso"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0112976 VALPARAISO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0112976 VALPARAISO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Valparaiso is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233017,7 +233254,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-verdigre",
@@ -233041,7 +233279,7 @@
   "towns": [
    "Verdigre"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049026 VERDIGRE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read). NE0139611, the collection system in EPA's overflow tables (2026-11-04 extract: one report, an SSO naming no water), is not in EPA's plant list; joined by the town's name.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049026 VERDIGRE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Verdigre is a village (Census Bureau, incorporated places). NE0139611, the collection system in EPA's overflow tables (2026-11-04 extract: one report, an SSO naming no water), is not in EPA's plant list; joined by the town's name.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233050,7 +233288,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-verdon",
@@ -233073,7 +233312,7 @@
   "towns": [
    "Verdon"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0027928 VERDON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0027928 VERDON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Verdon is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233082,7 +233321,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-waco",
@@ -233105,7 +233345,7 @@
   "towns": [
    "Waco"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045004 WACO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045004 WACO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Waco is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233114,7 +233354,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-wahoo",
@@ -233137,7 +233378,7 @@
   "towns": [
    "Wahoo"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021679 WAHOO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021679 WAHOO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wahoo is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233146,7 +233387,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-wakefield",
@@ -233169,7 +233411,7 @@
   "towns": [
    "Wakefield"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0049018 WAKEFIELD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0049018 WAKEFIELD WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wakefield is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233178,7 +233420,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-walthill",
@@ -233203,7 +233446,7 @@
   "towns": [
    "Walthill"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021211 WALTHILL WASTEWATER TREATMENT; NE0138932 VILLAGE OF WALTHILL WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read). EPA spells the second permit 'VILLAGE OF WATHILL'.",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021211 WALTHILL WASTEWATER TREATMENT; NE0138932 VILLAGE OF WALTHILL WWTF. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Walthill is a village (Census Bureau, incorporated places). EPA spells the second permit 'VILLAGE OF WATHILL'.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233236,7 +233479,7 @@
   "towns": [
    "Waterbury"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0122220 WATERBURY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0122220 WATERBURY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Waterbury is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233245,7 +233488,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-waterloo",
@@ -233268,7 +233512,7 @@
   "towns": [
    "Waterloo"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0043311 WATERLOO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0043311 WATERLOO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Waterloo is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233277,7 +233521,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-wauneta",
@@ -233300,7 +233545,7 @@
   "towns": [
    "Wauneta"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023841 WAUNETA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023841 WAUNETA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wauneta is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233309,7 +233554,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-wausa",
@@ -233332,7 +233578,7 @@
   "towns": [
    "Wausa"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0039861 WAUSA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0039861 WAUSA WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wausa is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233341,7 +233587,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-waverly",
@@ -233364,7 +233611,7 @@
   "towns": [
    "Waverly"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024406 WAVERLY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024406 WAVERLY WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Waverly is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233373,7 +233620,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-wayne",
@@ -233396,7 +233644,7 @@
   "towns": [
    "Wayne"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0033111 WAYNE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0033111 WAYNE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wayne is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233405,7 +233653,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-weeping-water",
@@ -233428,7 +233677,7 @@
   "towns": [
    "Weeping Water"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046329 WEEPING WATER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046329 WEEPING WATER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Weeping Water is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233437,7 +233686,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-west-point",
@@ -233460,7 +233710,7 @@
   "towns": [
    "West Point"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023965 WEST POINT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023965 WEST POINT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; West Point is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233469,7 +233719,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-western",
@@ -233492,7 +233743,7 @@
   "towns": [
    "Western"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0042501 WESTERN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0042501 WESTERN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Western is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233501,7 +233752,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-weston",
@@ -233524,7 +233776,7 @@
   "towns": [
    "Weston"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0046337 WESTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0046337 WESTON WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Weston is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233533,7 +233785,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-wilber",
@@ -233556,7 +233809,7 @@
   "towns": [
    "Wilber"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0045373 WILBER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0045373 WILBER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wilber is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233565,7 +233818,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-winnebago",
@@ -233586,7 +233840,7 @@
   "towns": [
    "Winnebago"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0113212 WINNEBAGO WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0113212 WINNEBAGO WASTEWATER TREATMENT FACILITY.",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233619,7 +233873,7 @@
   "towns": [
    "Winside"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0043320 WINSIDE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0043320 WINSIDE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Winside is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233628,7 +233882,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-wisner",
@@ -233651,7 +233906,7 @@
   "towns": [
    "Wisner"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0023957 WISNER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0023957 WISNER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wisner is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233660,7 +233915,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-wolbach",
@@ -233683,7 +233939,7 @@
   "towns": [
    "Wolbach"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040088 WOLBACH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040088 WOLBACH WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wolbach is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233692,7 +233948,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-wood-river",
@@ -233715,7 +233972,7 @@
   "towns": [
    "Wood River"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021661 WOOD RIVER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021661 WOOD RIVER WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wood River is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233724,7 +233981,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-woodland-hills-hoa",
@@ -233778,7 +234036,7 @@
   "towns": [
    "Wymore"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0021130 WYMORE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0021130 WYMORE WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wymore is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233787,7 +234045,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-wynot",
@@ -233808,7 +234067,7 @@
   "towns": [
    "Wynot"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0127663 WYNOT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0127663 WYNOT WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Wynot is a village (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233817,7 +234076,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "town"
  },
  {
   "id": "ne-york",
@@ -233840,7 +234100,7 @@
   "towns": [
    "York"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0040932 YORK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0040932 YORK WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; York is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233849,7 +234109,8 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  },
  {
   "id": "ne-yutan",
@@ -233872,7 +234133,7 @@
   "towns": [
    "Yutan"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NE0024376 YUTAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant (whether a city or a village was not read).",
+  "notes": "EPA ECHO ICIS-NPDES: NE0024376 YUTAN WASTEWATER TREATMENT FACILITY. A plant named for the town it lies in, typed municipal by EPA: the town's plant; Yutan is a city (Census Bureau, incorporated places).",
   "verified": "inferred",
   "checked": "2026-11-07",
   "aliases": [
@@ -233881,6 +234142,7 @@
   "source_areas": [
    "ne",
    "federal"
-  ]
+  ],
+  "legal_form": "city"
  }
 ]

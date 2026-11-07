@@ -84,9 +84,9 @@ AGENCY = [
      "name": "Nebraska Department of Water, Energy, and Environment (overflow alerts)", "channel_kind": "email_list",
      "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
      "unmonitored_reason": "none_found", "publishes": "none", "records": False,
-     "note": ("No e-mail, text or web alert for sewage overflows exists in Nebraska: DWEE's listservs cover air, waste, "
-              "energy and outreach, none sewage (DWEE site navigation read 2026-11-07). The gap is a legislative one. "
-              "(research/ne/report.md §2.6)"),
+     "note": ("No e-mail, text or web alert for sewage overflows was found from DWEE: its listservs cover air, waste, "
+              "energy and outreach, none sewage (DWEE site navigation read 2026-11-07), and no law requires one. "
+              "Operators' own alerts were not searched one by one beyond Omaha and Lincoln. (research/ne/report.md §2.6)"),
      "sources": ["ne-title-126-release"]},
     {"id": "ne-dwee-beachwatch", "agency": "Nebraska Department of Water, Energy, and Environment",
      "name": "Nebraska Department of Water, Energy, and Environment (Beach Watch)", "channel_kind": "state_alert_page",
@@ -101,9 +101,10 @@ AGENCY = [
      "sources": ["ne-dwee-beachwatch"]},
     {"id": "ne-dwee-beachwatch-page", "agency": "Nebraska Department of Water, Energy, and Environment",
      "name": "Nebraska Department of Water, Energy, and Environment (Beach Watch page)",
-     "channel_kind": "state_alert_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
+     "channel_kind": "state_alert_page", "urls": ["https://deq-iis.ne.gov/zs/bw/"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary",
      "monitored": False, "unmonitored_reason": "other", "publishes": "results", "records": False,
-     "note": ("DWEE's Beach Watch page (https://deq-iis.ne.gov/zs/bw/), where \"all sample results are posted\" (DWEE "
+     "note": ("DWEE's Beach Watch page, where \"all sample results are posted\" (DWEE "
               "release), answered 503 on 2026-11-03 and no connection on 2026-11-07; its results are the layer the "
               "Beach Watch feed reads. Channel not researched beyond the link. Voluntary. (research/ne/report.md §2.5)"),
      "sources": ["ne-dwee-beachwatch-page"]},
@@ -125,34 +126,37 @@ AGENCY = [
               "(research/ne/report.md §2.5)"),
      "sources": ["ne-dhhs-hab-alerts"]},
     {"id": "ne-douglas-county-health", "agency": "Douglas County Health Department",
-     "name": "Douglas County Health Department", "channel_kind": "local_health_page", "urls": [], "method": None,
-     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
-     "publishes": "unknown", "records": False,
-     "note": ("No URL known (not searched): the health department of Omaha's county; whether it posts sewage or water "
-              "contact advisories was not researched. Voluntary. (research/ne/profile.json advisories)"),
+     "name": "Douglas County Health Department", "channel_kind": "local_health_page",
+     "urls": ["https://www.douglascountyhealth.com/"], "method": "html", "legal_basis": None,
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall", "publishes": "unknown",
+     "records": False,
+     "note": ("The health department of Omaha's county: its site answers 403 to the project user agent (2026-11-07), so "
+              "whether it posts sewage or water contact advisories could not be read. Voluntary."),
      "sources": []},
     {"id": "ne-papio-missouri-nrd", "agency": "Papio-Missouri River Natural Resources District",
-     "name": "Papio-Missouri River Natural Resources District", "channel_kind": "group_results", "urls": [],
-     "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
-     "unmonitored_reason": "other", "publishes": "unknown", "records": False,
-     "note": ("No URL known (not searched): the district for the Papillion Creek basin, the receiving waters of Omaha's "
-              "Papillion Creek reports; whether it publishes water quality or overflow information was not researched. "
-              "Voluntary. (research/ne/profile.json advisories)"),
+     "name": "Papio-Missouri River Natural Resources District", "channel_kind": "group_results",
+     "urls": ["https://www.papionrd.org/"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
+     "monitored": True, "unmonitored_reason": None, "publishes": "none", "records": False, "every_hours": 24,
+     "noun": "Voluntary page",
+     "note": ("The district for the Papillion Creek basin, the receiving waters of Omaha's Papillion Creek reports. Home "
+              "page read 2026-11-07 (200): no overflow notice or water quality alert found on it; read for changes. "
+              "Voluntary."),
      "sources": []},
     {"id": "ne-lincoln-overflow-notices", "agency": None, "operator_id": "ne-lincoln",
      "name": "City of Lincoln Transportation and Utilities", "permit": None, "channel_kind": "operator_page",
-     "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
-     "unmonitored_reason": "other", "publishes": "unknown", "records": False,
-     "note": ("No URL known (not searched): Lincoln Transportation and Utilities' own overflow notices were not "
-              "researched; its overflow reports reach EPA's tables (five in the 2026-11-04 extract, all under the "
-              "Northeast plant). Voluntary. (research/ne/report.md §4)"),
+     "urls": ["https://www.lincoln.ne.gov/City/Departments/LTU/Utilities/Wastewater"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "none", "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "note": ("Lincoln Transportation and Utilities' wastewater page, read 2026-11-07 (200): no overflow notice or alert "
+              "found on it; read for changes. Its overflow reports reach EPA's tables (five in the 2026-11-04 extract, "
+              "all under the Northeast plant). Voluntary."),
      "sources": []},
 ]
 OMAHA = [
     {"id": "ne-omaha-cso-public-notification", "permit": "NE0133680", "channel_kind": "operator_page", "urls": [],
      "method": None, "legal_basis": Q_NMC, "basis_kind": "permit", "monitored": False, "unmonitored_reason": "other",
      "publishes": "unknown", "records": False, "noun": "CSO public notification",
-     "note": ("Clause unread. Omaha's CSO permit presumably requires public notification of overflows (Nine Minimum "
+     "note": ("Clause unread. Omaha's CSO permit is expected to require public notification of overflows (Nine Minimum "
               "Controls no. 8), but its text sits in DWEE's OnBase document viewer, which does not give a linkable "
               "document, and was not read; DWEE's public notice of the permit's modification (dwee.nebraska.gov/node/"
               "4730) names the CSO receiving waters only. No web channel found for the notices: the CSO program site "
@@ -167,10 +171,11 @@ OMAHA = [
               "control plan; no overflow status, notice or sign information was found on it. Read for changes. "
               "Answered 200 on 2026-11-07. Voluntary. (research/ne/sources.json ne-omaha-cso-program)"),
      "sources": ["ne-omaha-cso-program"]},
-    {"id": "ne-omaha-public-works-pages", "permit": None, "channel_kind": "operator_page", "urls": [], "method": None,
+    {"id": "ne-omaha-public-works-pages", "permit": None, "channel_kind": "operator_page",
+     "urls": ["https://www.cityofomaha.org/", "https://publicworks.omaha.gov/"], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall",
      "publishes": "unknown",
-     "note": ("The City of Omaha's and Omaha Public Works' sites (cityofomaha.org, publicworks.omaha.gov) answer 403 to "
+     "note": ("The City of Omaha's and Omaha Public Works' sites answer 403 to "
               "the project user agent (2026-11-03); no overflow notice page of theirs was found by search. Voluntary. "
               "(research/ne/report.md §2.3)"),
      "sources": ["ne-omaha-cso-program"]},

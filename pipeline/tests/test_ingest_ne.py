@@ -6,6 +6,7 @@ import copy
 import csv
 import io
 import json
+import re
 import zipfile
 from pathlib import Path
 
@@ -337,3 +338,25 @@ def test_indian_country_permits_report_to_epa_not_dwee():
         assert "issued by EPA Region 7" in row["legal_basis"] and "DWEE" not in row["legal_basis"]
         assert f"{oid}-dwee-epa-report" not in reg
     assert "DWEE" in dis["ne-beatrice"]["notification_channel"] and "ne-beatrice-dwee-epa-report" in reg
+
+
+def test_legal_forms_from_the_census_class_and_a_reason_where_none():
+    dis = {d["id"]: d for d in json.loads((ROOT / "data" / "dischargers.json").read_text()) if d.get("state") == "NE"}
+    assert dis["ne-beatrice"]["legal_form"] == "city" and dis["ne-adams"]["legal_form"] == "town"   # city, village
+    assert "Census Bureau" in dis["ne-adams"]["notes"]
+    empty = [d for d in dis.values() if not d.get("legal_form")]
+    assert len(empty) <= 10
+    assert all(re.search(r"not read|not stated", d["notes"]) for d in empty)
+
+
+def test_public_wording_says_what_was_read():
+    text = (ROOT / "research" / "ne" / "state-text.md").read_text()
+    assert "kept but not placed" not in text and "are not shown on this site" in text
+    assert "must notify the public" not in text and "could not be read" in text
+    assert "were not searched one by one" in text and "issued by the federal agency" in text
+    basis = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["NE"]["basis"]
+    assert "notifies the public under its permit" not in basis and "could not be read" in basis
+    reg = {r["id"]: r for r in json.loads((ROOT / "data" / "notice-channels" / "ne.json").read_text())["channels"]}
+    assert "exists in Nebraska" not in reg["ne-dwee-overflow-alerts"]["note"]
+    for rid in ("ne-omaha-public-works-pages", "ne-dwee-beachwatch-page", "ne-douglas-county-health"):
+        assert reg[rid]["urls"], rid                                          # the page's health is recorded
