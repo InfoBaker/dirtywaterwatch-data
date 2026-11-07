@@ -20,7 +20,7 @@ NOTE = "start is in the future as published"
 def test_the_bath_record_of_the_kennebec_is_not_named_like_the_other_in_capitals():
     # D1: lists read "Kennebec River, ME, KENNEBEC RIVER, ME" (the record's name lives in waters-nhd.json, not waters-extra.json)
     waters = {}
-    for f in ("waters-ne.json", "waters-extra.json", "waters-nhd.json"):
+    for f in ("waters-new-england.json", "waters-extra.json", "waters-nhd.json"):
         for w in json.loads((DATA / f).read_text())["waters"]:
             waters[w["slug"]] = w
     bath, main = waters["kennebec-river-bath-me"], waters["kennebec-river-me"]

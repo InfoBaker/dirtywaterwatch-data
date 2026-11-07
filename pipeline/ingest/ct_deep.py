@@ -356,7 +356,7 @@ def _ct_reaches() -> dict[str, set[str]]:
     """CT water records that stand for one reach of a longer water: their slug carries a place
     qualifier (quinnipiac-river-hamden-ct, shetucket-river-norwich-ct ...). slug -> towns."""
     out = {}
-    with open(DATA_DIR / "waters-ne.csv", newline="") as f:
+    with open(DATA_DIR / "waters-new-england.csv", newline="") as f:
         for row in csv.DictReader(f):
             if row["state"] == "CT" and row["slug"] != f"{slug(row['name'])}-ct":
                 out[row["slug"]] = {norm_town(t) for t in (row.get("towns") or "").split(";") if t.strip()}

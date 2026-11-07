@@ -72,7 +72,7 @@ def load_rows(path: pathlib.Path) -> list:
 def federal_counts() -> dict:
     counts: dict = collections.defaultdict(lambda: {"cso_permits": set(), "cso_open_outfalls": 0,
                                                     "plant_permits": set(), "plant_permits_major": set()})
-    for f in ("data/outfalls-us.json", "data/outfalls-ne.json", "data/outfalls-mid-atlantic.json"):
+    for f in ("data/outfalls-us.json", "data/outfalls-new-england.json", "data/outfalls-mid-atlantic.json"):
         p = ROOT / f
         if not p.exists():
             continue

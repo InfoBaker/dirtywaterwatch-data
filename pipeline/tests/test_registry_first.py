@@ -57,15 +57,15 @@ REG_NJ = {"npdes_permit": "NJ0108723", "outfall": "016", "state": "NJ", "city": 
 REG_NB = {"npdes_permit": "MA0100781", "outfall": "003", "state": "MA", "city": "NEW BEDFORD",
           "receiving_water_echo": None, "lat": 41.565, "lon": -70.92, "water_slug": "buzzards-bay-ma",
           "match": "geometry", "distance_m": 0, "water_match": "EPA's point lies 0 m from Buzzards Bay",
-          "water_matched_by": "scripts/match_outfalls.py (2026-11-01)", "_file": "data/outfalls-ne.json"}
+          "water_matched_by": "scripts/match_outfalls.py (2026-11-01)", "_file": "data/outfalls-new-england.json"}
 REG_MWRA = [{"npdes_permit": "MA0103284", "outfall": "C01", "outfall_name": "MWR201: Cottage Farm", "state": "MA",
              "receiving_water_echo": "ATLANTIC OCEAN (BOSTON HARBOR)", "lat": 42.3526, "lon": -71.1111,
              "water_slug": "charles-river-ma", "match": "geometry", "distance_m": 19,
              "water_match": "EPA's point lies 19 m from Charles River", "water_matched_by": BY_PASS,
-             "_file": "data/outfalls-ne.json"},
+             "_file": "data/outfalls-new-england.json"},
             {"npdes_permit": "MA0100137", "outfall": "C01", "outfall_name": "GREENFIELD RD NEAR WPCF", "state": "MA",
              "receiving_water_echo": "Connecticut River", "lat": 42.58, "lon": -72.57, "water_slug": None,
-             "match": "none", "_file": "data/outfalls-ne.json"}]
+             "match": "none", "_file": "data/outfalls-new-england.json"}]
 REG_LAVALE = {"npdes_permit": "MD0067547", "outfall": "001", "state": "MD", "city": "LAVALE",
               "receiving_water_echo": "UPPER POTOMAC RIVER", "lat": 39.645, "lon": -78.81, "water_slug": "braddock-run-md",
               "match": "geometry", "distance_m": 120,
@@ -75,7 +75,7 @@ REG_HUC = {"npdes_permit": "MA0101192", "outfall": "070", "state": "MA", "city":
            "receiving_water_echo": "Charles River-Frontal Boston Harbor", "lat": None, "lon": None, "water_slug": None,
            "match": "none", "no_water_reason": "'Charles River-Frontal Boston Harbor' is a USGS HUC-12 watershed name",
            "water_match": "none: 'Charles River-Frontal Boston Harbor' is a USGS HUC-12 watershed name",
-           "water_matched_by": BY_PASS, "_file": "data/outfalls-ne.json"}
+           "water_matched_by": BY_PASS, "_file": "data/outfalls-new-england.json"}
 ROWS = [REG_NJ, REG_NB, REG_LAVALE, REG_HUC, *REG_MWRA]
 
 
