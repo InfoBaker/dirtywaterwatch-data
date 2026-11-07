@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-07T08:21:36Z",
+ "built": "2026-11-07T19:46:56Z",
  "partial": false,
- "count": 3821,
+ "count": 3830,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -1737,6 +1737,124 @@
       "kept": 3287,
       "dropped": 0,
       "written": 3313
+     }
+    }
+   },
+   "HI": {
+    "built": "2026-11-07T19:46:26Z",
+    "targets": 6,
+    "targets_by_define_by": {
+     "reach": 2,
+     "point": 2,
+     "unnamed": 2
+    },
+    "targets_mapped": 2,
+    "targets_mapped_by": {
+     "reach": 1,
+     "unnamed": 1
+    },
+    "targets_failed": 4,
+    "failed_reasons": {
+     "no NHD flowline or waterbody of that name within 2 km": 2,
+     "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowlin": 1,
+     "NLDI snapped the outfall's point to no NHDPlus flowline": 1
+    },
+    "records": 1,
+    "records_by_define_by": {
+     "unnamed": 1
+    },
+    "records_by_kind": {
+     "stream": 1
+    },
+    "no_water": {
+     "the open ocean (no NHD record)": 1
+    },
+    "run": {
+     "requests": {},
+     "network_requests": 0,
+     "cached": {
+      "tiger": 2,
+      "reach2": 1,
+      "name2": 3,
+      "name4": 3,
+      "nldi-position": 4,
+      "near2": 3,
+      "near4": 3,
+      "gnis2": 1,
+      "nldi-nav": 1,
+      "comid2": 1,
+      "nhd-hr-near": 2
+     },
+     "failed": {},
+     "stopped": null,
+     "other_places": {
+      "places": 0,
+      "resolved": 0,
+      "found": 0,
+      "seconds": 0.0
+     },
+     "osm": {
+      "by_state": {
+       "HI": {
+        "targets": 2,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 3821,
+     "run_records": 1,
+     "replaced": 0,
+     "added": 1,
+     "kept": 3821,
+     "dropped": 0,
+     "written": 3822
+    },
+    "report_names": {
+     "built": "2026-11-07T19:46:56Z",
+     "file": "research/hi/receiving-waters-missing.json",
+     "names": 58,
+     "reports": 160,
+     "names_no_water": 0,
+     "waters_named": 58,
+     "already_a_record": 17,
+     "targets": 41,
+     "targets_mapped": 8,
+     "records": 8,
+     "targets_failed": 33,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports": 33
+     },
+     "network_requests": 8,
+     "requests": {
+      "name2": 2,
+      "name4": 2,
+      "nhd-hr-near": 4
+     },
+     "cached": {
+      "tiger": 2,
+      "gnis2": 8,
+      "nhd-hr-near": 36
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3822,
+      "run_records": 8,
+      "replaced": 0,
+      "added": 8,
+      "kept": 3822,
+      "dropped": 0,
+      "written": 3830
      }
     }
    },
@@ -10308,6 +10426,11 @@
    "state": "MS",
    "text": "local drainage ditch",
    "reason": "not a water name"
+  },
+  {
+   "state": "HI",
+   "text": "PACIFIC OCEAN",
+   "reason": "the open ocean (no NHD record)"
   }
  ],
  "targets": [
@@ -194057,6 +194180,1337 @@
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
    ]
+  },
+  {
+   "state": "HI",
+   "name": "HILO BAY",
+   "texts": [
+    "HILO BAY"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Hilo"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "reach",
+   "defined_by": null,
+   "permits": [
+    "HI0021377"
+   ]
+  },
+  {
+   "state": "HI",
+   "name": "Konohiki Stream",
+   "texts": [
+    "Konohiki Stream"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Wailua"
+   ],
+   "slugs": [
+    "konohiki-stream-hi"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 20070000001215, 800005248, 800016422: GNIS 'Konohiki Stream' (00361414); no snapping; the same water as existing record konohiki-stream-hi"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "reach",
+   "permits": [
+    "HIF014798"
+   ],
+   "reach_slugs": {
+    "20070000001215": "konohiki-stream-hi",
+    "800005248": "konohiki-stream-hi",
+    "800016422": "konohiki-stream-hi"
+   }
+  },
+  {
+   "state": "HI",
+   "name": "Mamala Bay",
+   "texts": [
+    "Mamala Bay"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Ewa Beach"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "HI0021954"
+   ]
+  },
+  {
+   "state": "HI",
+   "name": "PACIFIC OCEANOFFSHORE WAILUA",
+   "texts": [
+    "PACIFIC OCEANOFFSHORE WAILUA"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Wailua"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (nearby: Opaekaa Stream, Wailua River); no NHD flowline or waterbody of that name in the state",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "HI0020257"
+   ]
+  },
+  {
+   "state": "HI",
+   "name": null,
+   "texts": [
+    "unnamed outfall HI0020770 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Pepeekeo"
+   ],
+   "slugs": [
+    "unnamed-stream-near-pepeekeo-hi"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 800013466, 20010000000193: an unnamed NHDPlus flowline with no named water within 50 km downstream"
+   ],
+   "reason": null,
+   "define_by": "unnamed",
+   "defined_by": "unnamed",
+   "permits": [
+    "HI0020770"
+   ],
+   "outfall_ref": [
+    "HI0020770",
+    "001"
+   ],
+   "reach_slugs": {
+    "20010000000193": "unnamed-stream-near-pepeekeo-hi",
+    "800013466": "unnamed-stream-near-pepeekeo-hi"
+   }
+  },
+  {
+   "state": "HI",
+   "name": null,
+   "texts": [
+    "unnamed outfall HI0021956 001"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Honolulu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "NLDI snapped the outfall's point to no NHDPlus flowline",
+   "define_by": "unnamed",
+   "defined_by": null,
+   "permits": [
+    "HI0021956"
+   ],
+   "outfall_ref": [
+    "HI0021956",
+    "001"
+   ]
+  },
+  {
+   "state": "HI",
+   "name": "Pearl Harbor",
+   "texts": [
+    "Pearl Harbor"
+   ],
+   "outfalls": 0,
+   "events": 11,
+   "points": 0,
+   "towns": [
+    "Aiea",
+    "Pearl City"
+   ],
+   "slugs": [
+    "pearl-harbor-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 11
+  },
+  {
+   "state": "HI",
+   "name": "Honokohau Harbor",
+   "texts": [
+    "Honokohau Harbor"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 0,
+   "towns": [
+    "Kalaoa"
+   ],
+   "slugs": [
+    "honokohau-small-boat-harbor-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 4
+  },
+  {
+   "state": "HI",
+   "name": "Nawiliwili Bay",
+   "texts": [
+    "Nawiliwili Bay"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 0,
+   "towns": [
+    "Lihue"
+   ],
+   "slugs": [
+    "nawiliwili-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 4
+  },
+  {
+   "state": "HI",
+   "name": "Kahului Harbor",
+   "texts": [
+    "Kahului Harbor"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Kahului"
+   ],
+   "slugs": [
+    "kahului-harbor-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Maui",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "Maunalua Bay",
+   "texts": [
+    "Maunalua Bay"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "East Honolulu"
+   ],
+   "slugs": [
+    "maunalua-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "Pokai Bay",
+   "texts": [
+    "Pokai Bay"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Waianae"
+   ],
+   "slugs": [
+    "poka-i-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "East Loch",
+   "texts": [
+    "East Loch"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Aiea",
+    "Pearl City"
+   ],
+   "slugs": [
+    "pearl-harbor-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Kailua Bay",
+   "texts": [
+    "Kailua Bay"
+   ],
+   "outfalls": 0,
+   "events": 17,
+   "points": 0,
+   "towns": [
+    "Kailua"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 17
+  },
+  {
+   "state": "HI",
+   "name": "Puako Bay",
+   "texts": [
+    "Puako Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Puako"
+   ],
+   "slugs": [
+    "puako-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Wailoa River",
+   "texts": [
+    "Wailoa River"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Hilo"
+   ],
+   "slugs": [
+    "wailoa-river-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Ala Wai Boat Harbor",
+   "texts": [
+    "Ala Wai Boat Harbor"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [
+    "ala-wai-boat-harbor-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kahana Bay",
+   "texts": [
+    "Kahana Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kaaawa",
+    "Punaluu"
+   ],
+   "slugs": [
+    "kahana-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kaneohe Bay",
+   "texts": [
+    "Kaneohe Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kaneohe"
+   ],
+   "slugs": [
+    "kane-ohe-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kawaihae Harbor",
+   "texts": [
+    "Kawaihae Harbor"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kawaihae"
+   ],
+   "slugs": [
+    "kawaihae-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Keehi Lagoon",
+   "texts": [
+    "Keehi Lagoon"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [
+    "keehi-lagoon-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kukuiula Bay",
+   "texts": [
+    "Kukuiula Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Koloa",
+    "Poipu"
+   ],
+   "slugs": [
+    "kukuiula-bay-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Maalaea Harbor",
+   "texts": [
+    "Maalaea Harbor"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Maalaea"
+   ],
+   "slugs": [
+    "maalaea-harbor-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "island": "Maui",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Waimea Bay",
+   "texts": [
+    "Waimea Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Waimea"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Sharks Cove",
+   "texts": [
+    "Sharks Cove"
+   ],
+   "outfalls": 0,
+   "events": 9,
+   "points": 0,
+   "towns": [
+    "Pupukea"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 9
+  },
+  {
+   "state": "HI",
+   "name": "Wailua Bay",
+   "texts": [
+    "Wailua Bay"
+   ],
+   "outfalls": 0,
+   "events": 8,
+   "points": 0,
+   "towns": [
+    "Kapaa",
+    "Wailua"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 8
+  },
+  {
+   "state": "HI",
+   "name": "Honolii Cove",
+   "texts": [
+    "Honolii Cove"
+   ],
+   "outfalls": 0,
+   "events": 7,
+   "points": 0,
+   "towns": [
+    "Hilo",
+    "Paukaa"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 7
+  },
+  {
+   "state": "HI",
+   "name": "Hanalei Bay",
+   "texts": [
+    "Hanalei Bay"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 0,
+   "towns": [
+    "Hanalei",
+    "Princeville"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 4
+  },
+  {
+   "state": "HI",
+   "name": "Keokea Bay",
+   "texts": [
+    "Keokea Bay"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Hawi"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "Kuapa Pond",
+   "texts": [
+    "Kuapa Pond"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "East Honolulu",
+    "Hawaii Kai"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "Nuupia Pond",
+   "texts": [
+    "Nuupia Pond"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Kailua",
+    "Kaneohe"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "Palolo Stream",
+   "texts": [
+    "Palolo Stream"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 3
+  },
+  {
+   "state": "HI",
+   "name": "Ahuimanu Stream",
+   "texts": [
+    "Ahuimanu Stream"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Ahuimanu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Honaunau Bay",
+   "texts": [
+    "Honaunau Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Honaunau-Napoopoo"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Kalihi Stream",
+   "texts": [
+    "Kalihi Stream"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [
+    "kalihi-stream-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Urban Honolulu"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Kiilae Bay",
+   "texts": [
+    "Kiilae Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Honaunau-Napoopoo"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Lake Wilson",
+   "texts": [
+    "Lake Wilson"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Wahiawa"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Puhi Bay",
+   "texts": [
+    "Puhi Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Hilo"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Wailupe Stream",
+   "texts": [
+    "Wailupe Stream"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "East Honolulu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Waimanalo Bay",
+   "texts": [
+    "Waimanalo Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Waimanalo",
+    "Waimanalo Beach"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "HI",
+   "name": "Ala Moana Lagoon",
+   "texts": [
+    "Ala Moana Lagoon"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Ala Wai Canal",
+   "texts": [
+    "Ala Wai Canal"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [
+    "ala-wai-canal-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Urban Honolulu"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Anaehoomalu Bay",
+   "texts": [
+    "Anaehoomalu Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Waikoloa Village"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Anahola Bay",
+   "texts": [
+    "Anahola Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Anahola"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Hanapepe Salt Pond",
+   "texts": [
+    "Hanapepe Salt Pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Hanapepe"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Honolulu Harbor",
+   "texts": [
+    "Honolulu Harbor"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kahaluu Bay",
+   "texts": [
+    "Kahaluu Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kahaluu-Keauhou"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kalauao Stream",
+   "texts": [
+    "Kalauao Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Aiea"
+   ],
+   "slugs": [
+    "kalauao-stream-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Aiea"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Kalauau Stream",
+   "texts": [
+    "Kalauau Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Aiea"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kalihiwai Bay",
+   "texts": [
+    "Kalihiwai Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kilauea"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kamanaiki Stream",
+   "texts": [
+    "Kamanaiki Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [
+    "kamanaiki-stream-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Urban Honolulu"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Kaopala Bay",
+   "texts": [
+    "Kaopala Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Napili-Honokowai"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Maui",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kawa Stream",
+   "texts": [
+    "Kawa Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kaneohe"
+   ],
+   "slugs": [
+    "kawa-stream-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Kaneohe (2 waters of that name in HI)"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Keoniloa Bay",
+   "texts": [
+    "Keoniloa Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Koloa",
+    "Poipu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Kauai",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Kua Bay",
+   "texts": [
+    "Kua Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kalaoa"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Maalaea Bay",
+   "texts": [
+    "Maalaea Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kihei",
+    "Maalaea"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Maui",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Makiki Stream",
+   "texts": [
+    "Makiki Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [
+    "makiki-stream-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Urban Honolulu"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Manoa Stream",
+   "texts": [
+    "Manoa Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Pauoa Bay",
+   "texts": [
+    "Pauoa Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Puako"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "HI",
+   "name": "Puha Stream",
+   "texts": [
+    "Puha Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Waimanalo"
+   ],
+   "slugs": [
+    "puha-stream-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Waimanalo"
+   ],
+   "reason": null,
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Wailuku River",
+   "texts": [
+    "Wailuku River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Hilo"
+   ],
+   "slugs": [
+    "wailuku-river-hi"
+   ],
+   "how": [
+    "GNIS name in HI, crossing Hilo"
+   ],
+   "reason": null,
+   "island": "Hawaii",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "HI",
+   "name": "Yokohama Bay",
+   "texts": [
+    "Yokohama Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Makaha"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "island": "Oahu",
+   "from": "reports",
+   "reports": 1
   }
  ],
  "waters": [
@@ -213000,6 +214454,77 @@
       [
        -76.90847,
        36.302771
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "ala-wai-canal-hi",
+   "name": "Ala Wai Canal",
+   "kind": "canal",
+   "state": "HI",
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "bbox": [
+    -157.84064,
+    21.28298,
+    -157.82608,
+    21.28894
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 1.77,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00358498",
+   "comids": [
+    800007881,
+    800007883,
+    800012335
+   ],
+   "nhd_fcodes": [
+    55800
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 3 network flowlines with GNIS id 00358498 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.826083,
+       21.282998
+      ],
+      [
+       -157.82652,
+       21.282977
+      ],
+      [
+       -157.827135,
+       21.283382
+      ],
+      [
+       -157.832416,
+       21.288113
+      ],
+      [
+       -157.833839,
+       21.288936
+      ],
+      [
+       -157.834593,
+       21.288909
+      ],
+      [
+       -157.840638,
+       21.287686
       ]
      ]
     ]
@@ -1374691,6 +1376216,677 @@
    }
   },
   {
+   "slug": "kalauao-stream-hi",
+   "name": "Kalauao Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Aiea",
+    "Waimalu"
+   ],
+   "bbox": [
+    -157.94378,
+    21.37964,
+    -157.85419,
+    21.41949
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 12.35,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00360093",
+   "comids": [
+    800000013,
+    800003284,
+    800014501,
+    800016682
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 4 network flowlines with GNIS id 00360093 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.854188,
+       21.418467
+      ],
+      [
+       -157.854993,
+       21.418522
+      ],
+      [
+       -157.858934,
+       21.417376
+      ],
+      [
+       -157.859434,
+       21.417524
+      ],
+      [
+       -157.859998,
+       21.417475
+      ],
+      [
+       -157.860563,
+       21.417733
+      ],
+      [
+       -157.861039,
+       21.417678
+      ],
+      [
+       -157.861862,
+       21.418058
+      ],
+      [
+       -157.862333,
+       21.418097
+      ],
+      [
+       -157.862762,
+       21.418719
+      ],
+      [
+       -157.862792,
+       21.41927
+      ],
+      [
+       -157.862974,
+       21.41949
+      ],
+      [
+       -157.863557,
+       21.419451
+      ],
+      [
+       -157.864074,
+       21.418911
+      ],
+      [
+       -157.865768,
+       21.418988
+      ],
+      [
+       -157.865921,
+       21.41841
+      ],
+      [
+       -157.866438,
+       21.418234
+      ],
+      [
+       -157.866332,
+       21.417749
+      ],
+      [
+       -157.866955,
+       21.417837
+      ],
+      [
+       -157.867002,
+       21.41733
+      ],
+      [
+       -157.867661,
+       21.417341
+      ],
+      [
+       -157.867967,
+       21.417083
+      ],
+      [
+       -157.86769,
+       21.415959
+      ],
+      [
+       -157.868084,
+       21.415502
+      ],
+      [
+       -157.868972,
+       21.415111
+      ],
+      [
+       -157.869172,
+       21.414059
+      ],
+      [
+       -157.870072,
+       21.414103
+      ],
+      [
+       -157.870178,
+       21.413943
+      ],
+      [
+       -157.870083,
+       21.413525
+      ],
+      [
+       -157.870254,
+       21.413321
+      ],
+      [
+       -157.871048,
+       21.413629
+      ],
+      [
+       -157.871365,
+       21.4131
+      ],
+      [
+       -157.872253,
+       21.412896
+      ],
+      [
+       -157.872147,
+       21.412208
+      ],
+      [
+       -157.8723,
+       21.412115
+      ],
+      [
+       -157.872971,
+       21.412549
+      ],
+      [
+       -157.873394,
+       21.412577
+      ],
+      [
+       -157.873547,
+       21.41239
+      ],
+      [
+       -157.873594,
+       21.411767
+      ],
+      [
+       -157.873929,
+       21.411652
+      ],
+      [
+       -157.875364,
+       21.412521
+      ],
+      [
+       -157.875688,
+       21.412549
+      ],
+      [
+       -157.875729,
+       21.412257
+      ],
+      [
+       -157.875182,
+       21.411783
+      ],
+      [
+       -157.875246,
+       21.411508
+      ],
+      [
+       -157.876493,
+       21.411343
+      ],
+      [
+       -157.877687,
+       21.411684
+      ],
+      [
+       -157.877928,
+       21.411469
+      ],
+      [
+       -157.878175,
+       21.41077
+      ],
+      [
+       -157.878828,
+       21.411039
+      ],
+      [
+       -157.879457,
+       21.41083
+      ],
+      [
+       -157.879716,
+       21.410472
+      ],
+      [
+       -157.879668,
+       21.409728
+      ],
+      [
+       -157.879868,
+       21.40937
+      ],
+      [
+       -157.880538,
+       21.409211
+      ],
+      [
+       -157.881162,
+       21.409497
+      ],
+      [
+       -157.881468,
+       21.409238
+      ],
+      [
+       -157.88162,
+       21.408621
+      ],
+      [
+       -157.882355,
+       21.408841
+      ],
+      [
+       -157.883573,
+       21.409678
+      ],
+      [
+       -157.884326,
+       21.409804
+      ],
+      [
+       -157.885437,
+       21.409259
+      ],
+      [
+       -157.886778,
+       21.409611
+      ],
+      [
+       -157.891023,
+       21.408101
+      ],
+      [
+       -157.891388,
+       21.407869
+      ],
+      [
+       -157.891846,
+       21.407203
+      ],
+      [
+       -157.891782,
+       21.406514
+      ],
+      [
+       -157.892716,
+       21.405677
+      ],
+      [
+       -157.893081,
+       21.40549
+      ],
+      [
+       -157.894727,
+       21.405352
+      ],
+      [
+       -157.895204,
+       21.405065
+      ],
+      [
+       -157.89578,
+       21.404966
+      ],
+      [
+       -157.897261,
+       21.404172
+      ],
+      [
+       -157.898255,
+       21.4041
+      ],
+      [
+       -157.899108,
+       21.403803
+      ],
+      [
+       -157.900545,
+       21.403591
+      ],
+      [
+       -157.903733,
+       21.401973
+      ],
+      [
+       -157.905256,
+       21.401516
+      ],
+      [
+       -157.90558,
+       21.401346
+      ],
+      [
+       -157.905839,
+       21.40063
+      ],
+      [
+       -157.906109,
+       21.400388
+      ],
+      [
+       -157.907532,
+       21.400339
+      ],
+      [
+       -157.907926,
+       21.400207
+      ],
+      [
+       -157.908262,
+       21.39932
+      ],
+      [
+       -157.908997,
+       21.399271
+      ],
+      [
+       -157.909303,
+       21.398726
+      ],
+      [
+       -157.909256,
+       21.398252
+      ],
+      [
+       -157.909591,
+       21.39796
+      ],
+      [
+       -157.911073,
+       21.398076
+      ],
+      [
+       -157.911679,
+       21.397752
+      ],
+      [
+       -157.912626,
+       21.397829
+      ],
+      [
+       -157.91362,
+       21.397461
+      ],
+      [
+       -157.914414,
+       21.396855
+      ],
+      [
+       -157.917177,
+       21.396586
+      ],
+      [
+       -157.917419,
+       21.396256
+      ],
+      [
+       -157.917754,
+       21.395149
+      ],
+      [
+       -157.918213,
+       21.395
+      ],
+      [
+       -157.919248,
+       21.395199
+      ],
+      [
+       -157.920365,
+       21.3945
+      ],
+      [
+       -157.921265,
+       21.393211
+      ],
+      [
+       -157.921612,
+       21.392286
+      ],
+      [
+       -157.922165,
+       21.391763
+      ],
+      [
+       -157.923294,
+       21.391896
+      ],
+      [
+       -157.925447,
+       21.391197
+      ],
+      [
+       -157.927658,
+       21.390861
+      ],
+      [
+       -157.927869,
+       21.390266
+      ],
+      [
+       -157.928269,
+       21.389997
+      ],
+      [
+       -157.928634,
+       21.389898
+      ],
+      [
+       -157.929534,
+       21.389969
+      ],
+      [
+       -157.930098,
+       21.389523
+      ],
+      [
+       -157.930921,
+       21.389441
+      ],
+      [
+       -157.931457,
+       21.38829
+      ],
+      [
+       -157.93141,
+       21.387954
+      ],
+      [
+       -157.932022,
+       21.386798
+      ],
+      [
+       -157.932586,
+       21.386445
+      ],
+      [
+       -157.932863,
+       21.385845
+      ],
+      [
+       -157.934356,
+       21.384948
+      ],
+      [
+       -157.935027,
+       21.383869
+      ],
+      [
+       -157.936285,
+       21.383538
+      ],
+      [
+       -157.936979,
+       21.382085
+      ],
+      [
+       -157.937285,
+       21.381804
+      ],
+      [
+       -157.937902,
+       21.381369
+      ],
+      [
+       -157.93869,
+       21.381165
+      ],
+      [
+       -157.939402,
+       21.380785
+      ],
+      [
+       -157.941311,
+       21.380546
+      ],
+      [
+       -157.941784,
+       21.380739
+      ],
+      [
+       -157.94206,
+       21.380704
+      ],
+      [
+       -157.943485,
+       21.380068
+      ],
+      [
+       -157.943778,
+       21.379639
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "kalihi-stream-hi",
+   "name": "Kalihi Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "bbox": [
+    -157.823,
+    21.37133,
+    -157.81177,
+    21.37682
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 1.71,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00360140",
+   "comids": [
+    800005652,
+    800010130,
+    800012352,
+    800016795
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 4 network flowlines with GNIS id 00360140 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.811768,
+       21.371326
+      ],
+      [
+       -157.812561,
+       21.371404
+      ],
+      [
+       -157.813285,
+       21.371663
+      ],
+      [
+       -157.81329,
+       21.37234
+      ],
+      [
+       -157.814019,
+       21.373243
+      ],
+      [
+       -157.814154,
+       21.373799
+      ],
+      [
+       -157.815406,
+       21.375006
+      ],
+      [
+       -157.816209,
+       21.375451
+      ],
+      [
+       -157.816708,
+       21.376211
+      ],
+      [
+       -157.817108,
+       21.376223
+      ],
+      [
+       -157.818254,
+       21.376823
+      ],
+      [
+       -157.820295,
+       21.375689
+      ],
+      [
+       -157.821512,
+       21.375221
+      ],
+      [
+       -157.821368,
+       21.374269
+      ],
+      [
+       -157.822497,
+       21.373746
+      ],
+      [
+       -157.823003,
+       21.372881
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "kallander-creek-mi",
    "name": "Kallander Creek",
    "kind": "stream",
@@ -1375154,6 +1377350,229 @@
       [
        -84.078496,
        33.481725
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "kamanaiki-stream-hi",
+   "name": "Kamanaiki Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "bbox": [
+    -157.86304,
+    21.34602,
+    -157.82587,
+    21.36145
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 4.59,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00360258",
+   "comids": [
+    800005632,
+    800014518
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 2 network flowlines with GNIS id 00360258 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.825873,
+       21.361455
+      ],
+      [
+       -157.826802,
+       21.361179
+      ],
+      [
+       -157.827966,
+       21.361152
+      ],
+      [
+       -157.830112,
+       21.36075
+      ],
+      [
+       -157.832199,
+       21.359599
+      ],
+      [
+       -157.833075,
+       21.35825
+      ],
+      [
+       -157.834356,
+       21.357248
+      ],
+      [
+       -157.835944,
+       21.35721
+      ],
+      [
+       -157.836837,
+       21.356653
+      ],
+      [
+       -157.838113,
+       21.35662
+      ],
+      [
+       -157.839371,
+       21.356235
+      ],
+      [
+       -157.840041,
+       21.355794
+      ],
+      [
+       -157.840829,
+       21.354869
+      ],
+      [
+       -157.841234,
+       21.354891
+      ],
+      [
+       -157.842087,
+       21.355376
+      ],
+      [
+       -157.842293,
+       21.355293
+      ],
+      [
+       -157.842469,
+       21.354902
+      ],
+      [
+       -157.843098,
+       21.354853
+      ],
+      [
+       -157.844091,
+       21.354142
+      ],
+      [
+       -157.84579,
+       21.35374
+      ],
+      [
+       -157.846067,
+       21.353487
+      ],
+      [
+       -157.846825,
+       21.3533
+      ],
+      [
+       -157.847248,
+       21.353002
+      ],
+      [
+       -157.848918,
+       21.352534
+      ],
+      [
+       -157.849288,
+       21.352209
+      ],
+      [
+       -157.849382,
+       21.351571
+      ],
+      [
+       -157.850898,
+       21.350249
+      ],
+      [
+       -157.851398,
+       21.350095
+      ],
+      [
+       -157.852104,
+       21.350177
+      ],
+      [
+       -157.852979,
+       21.349257
+      ],
+      [
+       -157.853644,
+       21.34929
+      ],
+      [
+       -157.85422,
+       21.348729
+      ],
+      [
+       -157.856083,
+       21.34798
+      ],
+      [
+       -157.856295,
+       21.347732
+      ],
+      [
+       -157.857094,
+       21.347644
+      ],
+      [
+       -157.857605,
+       21.347071
+      ],
+      [
+       -157.857946,
+       21.347027
+      ],
+      [
+       -157.858893,
+       21.347412
+      ],
+      [
+       -157.859733,
+       21.346625
+      ],
+      [
+       -157.860744,
+       21.346773
+      ],
+      [
+       -157.861162,
+       21.346668
+      ],
+      [
+       -157.861526,
+       21.346299
+      ],
+      [
+       -157.862372,
+       21.346018
+      ],
+      [
+       -157.862749,
+       21.346145
+      ],
+      [
+       -157.863037,
+       21.346624
       ]
      ]
     ]
@@ -1389561,6 +1391980,216 @@
       [
        -89.934125,
        37.972476
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "kawa-stream-hi",
+   "name": "Kawa Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Kaneohe"
+   ],
+   "bbox": [
+    -157.79309,
+    21.38789,
+    -157.78099,
+    21.41078
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 4.2,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00360773",
+   "comids": [
+    800005673,
+    800016809
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 2 network flowlines with GNIS id 00360773 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.784897,
+       21.388154
+      ],
+      [
+       -157.78572,
+       21.387885
+      ],
+      [
+       -157.786484,
+       21.388232
+      ],
+      [
+       -157.787231,
+       21.388348
+      ],
+      [
+       -157.787625,
+       21.388733
+      ],
+      [
+       -157.788148,
+       21.388629
+      ],
+      [
+       -157.788465,
+       21.389912
+      ],
+      [
+       -157.788982,
+       21.390755
+      ],
+      [
+       -157.7892,
+       21.391482
+      ],
+      [
+       -157.790099,
+       21.392187
+      ],
+      [
+       -157.790452,
+       21.393222
+      ],
+      [
+       -157.790375,
+       21.393828
+      ],
+      [
+       -157.790863,
+       21.394081
+      ],
+      [
+       -157.791504,
+       21.394715
+      ],
+      [
+       -157.792021,
+       21.394908
+      ],
+      [
+       -157.792574,
+       21.394869
+      ],
+      [
+       -157.792768,
+       21.395073
+      ],
+      [
+       -157.792785,
+       21.395525
+      ],
+      [
+       -157.793091,
+       21.396164
+      ],
+      [
+       -157.793026,
+       21.396522
+      ],
+      [
+       -157.792738,
+       21.396731
+      ],
+      [
+       -157.791991,
+       21.396648
+      ],
+      [
+       -157.791185,
+       21.397766
+      ],
+      [
+       -157.790956,
+       21.398674
+      ],
+      [
+       -157.791108,
+       21.399203
+      ],
+      [
+       -157.790667,
+       21.400089
+      ],
+      [
+       -157.790784,
+       21.401609
+      ],
+      [
+       -157.792101,
+       21.402314
+      ],
+      [
+       -157.792236,
+       21.402634
+      ],
+      [
+       -157.791441,
+       21.40526
+      ],
+      [
+       -157.791183,
+       21.405508
+      ],
+      [
+       -157.790436,
+       21.405673
+      ],
+      [
+       -157.791047,
+       21.406995
+      ],
+      [
+       -157.7912,
+       21.407485
+      ],
+      [
+       -157.791135,
+       21.407788
+      ],
+      [
+       -157.790829,
+       21.407986
+      ],
+      [
+       -157.790176,
+       21.408091
+      ],
+      [
+       -157.789512,
+       21.408063
+      ],
+      [
+       -157.788736,
+       21.407771
+      ],
+      [
+       -157.786965,
+       21.407825
+      ],
+      [
+       -157.784772,
+       21.408623
+      ],
+      [
+       -157.78099,
+       21.41078
       ]
      ]
     ]
@@ -1728635,6 +1731264,104 @@
       [
        -76.661576,
        39.27637
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "makiki-stream-hi",
+   "name": "Makiki Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "bbox": [
+    -157.83598,
+    21.30096,
+    -157.82746,
+    21.31678
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 2.06,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00362105",
+   "comids": [
+    800001130,
+    800007882
+   ],
+   "nhd_fcodes": [
+    46003
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 2 network flowlines with GNIS id 00362105 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.827465,
+       21.316777
+      ],
+      [
+       -157.82827,
+       21.315412
+      ],
+      [
+       -157.829263,
+       21.312636
+      ],
+      [
+       -157.830174,
+       21.311579
+      ],
+      [
+       -157.830598,
+       21.309288
+      ],
+      [
+       -157.830557,
+       21.308192
+      ],
+      [
+       -157.830786,
+       21.307526
+      ],
+      [
+       -157.83175,
+       21.306331
+      ],
+      [
+       -157.832214,
+       21.306149
+      ],
+      [
+       -157.833948,
+       21.304404
+      ],
+      [
+       -157.834012,
+       21.304134
+      ],
+      [
+       -157.83373,
+       21.303781
+      ],
+      [
+       -157.834336,
+       21.302636
+      ],
+      [
+       -157.835981,
+       21.300962
       ]
      ]
     ]
@@ -2316576,6 +2319303,85 @@
       [
        -73.844322,
        40.808951
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "puha-stream-hi",
+   "name": "Puha Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Waimanalo"
+   ],
+   "bbox": [
+    -157.71149,
+    21.34428,
+    -157.70535,
+    21.35129
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 1.25,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "01904991",
+   "comids": [
+    800010183,
+    800016849
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 2 network flowlines with GNIS id 01904991 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -157.71078,
+       21.344284
+      ],
+      [
+       -157.711191,
+       21.344955
+      ],
+      [
+       -157.711485,
+       21.346238
+      ],
+      [
+       -157.709263,
+       21.351084
+      ],
+      [
+       -157.706688,
+       21.351288
+      ],
+      [
+       -157.706424,
+       21.351156
+      ],
+      [
+       -157.706277,
+       21.350875
+      ],
+      [
+       -157.705683,
+       21.350743
+      ],
+      [
+       -157.705354,
+       21.350831
       ]
      ]
     ]
@@ -3150857,6 +3153663,175 @@
    ]
   },
   {
+   "slug": "unnamed-stream-near-pepeekeo-hi",
+   "name": "Unnamed stream near Pepeekeo",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Pepeekeo"
+   ],
+   "bbox": [
+    -155.08462,
+    19.83056,
+    -155.0823,
+    19.84144
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 1.76,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": null,
+   "comids": [
+    800013466
+   ],
+   "nhd_fcodes": [
+    56600
+   ],
+   "fetched_at": "2026-11-07T19:44:53Z",
+   "towns_from": "the Census places of the outfalls' points",
+   "note": "NHDPlus V2.1: the unnamed network flowline COMID 800013466, cut to the state and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -155.084624,
+       19.830555
+      ],
+      [
+       -155.084077,
+       19.830907
+      ],
+      [
+       -155.084042,
+       19.831017
+      ],
+      [
+       -155.084246,
+       19.8311
+      ],
+      [
+       -155.084106,
+       19.831336
+      ],
+      [
+       -155.083722,
+       19.831452
+      ],
+      [
+       -155.083844,
+       19.831986
+      ],
+      [
+       -155.083676,
+       19.832454
+      ],
+      [
+       -155.083694,
+       19.834282
+      ],
+      [
+       -155.083205,
+       19.834717
+      ],
+      [
+       -155.082868,
+       19.835592
+      ],
+      [
+       -155.082303,
+       19.835895
+      ],
+      [
+       -155.082792,
+       19.836209
+      ],
+      [
+       -155.083205,
+       19.836115
+      ],
+      [
+       -155.083357,
+       19.836215
+      ],
+      [
+       -155.083421,
+       19.83655
+      ],
+      [
+       -155.082781,
+       19.836815
+      ],
+      [
+       -155.083159,
+       19.83715
+      ],
+      [
+       -155.082717,
+       19.837542
+      ],
+      [
+       -155.082961,
+       19.837608
+      ],
+      [
+       -155.083374,
+       19.838406
+      ],
+      [
+       -155.083113,
+       19.838466
+      ],
+      [
+       -155.083037,
+       19.838643
+      ],
+      [
+       -155.08359,
+       19.838687
+      ],
+      [
+       -155.083788,
+       19.839154
+      ],
+      [
+       -155.08345,
+       19.839298
+      ],
+      [
+       -155.084212,
+       19.839408
+      ],
+      [
+       -155.084276,
+       19.839551
+      ],
+      [
+       -155.084259,
+       19.839931
+      ],
+      [
+       -155.083846,
+       19.840867
+      ],
+      [
+       -155.084288,
+       19.841098
+      ],
+      [
+       -155.084428,
+       19.841439
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "unnamed-stream-near-quartzsite-az",
    "name": "Unnamed stream near Quartzsite",
    "kind": "stream",
@@ -3224328,6 +3227303,1738 @@
       [
        -96.311085,
        41.035294
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "wailuku-river-hi",
+   "name": "Wailuku River",
+   "kind": "river",
+   "state": "HI",
+   "towns": [
+    "Hilo"
+   ],
+   "bbox": [
+    -155.42089,
+    19.70381,
+    -155.09036,
+    19.80751
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 44.5,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "00364759",
+   "comids": [
+    800002027,
+    800002037,
+    800002063,
+    800002064,
+    800002077,
+    800002079,
+    800002100,
+    800002132,
+    800002133,
+    800002134,
+    800002162,
+    800002166,
+    800002167,
+    800002170,
+    800002204,
+    800002205,
+    800002206,
+    800002208,
+    800002226,
+    800002228,
+    800004343,
+    800004350,
+    800004363,
+    800004364,
+    800004367,
+    800004394,
+    800004395,
+    800004424,
+    800004425,
+    800004458,
+    800004481,
+    800004484,
+    800004495,
+    800004496,
+    800006619,
+    800006665,
+    800006673,
+    800006684,
+    800006685,
+    800006686,
+    800006687,
+    800006707,
+    800006711,
+    800006726,
+    800006727,
+    800006728,
+    800006747,
+    800006749,
+    800006778,
+    800006779,
+    800006780,
+    800006781,
+    800006782,
+    800006792,
+    800008878,
+    800008890,
+    800008898,
+    800008899,
+    800008901,
+    800008902,
+    800008904,
+    800008905,
+    800008933,
+    800008938,
+    800008956,
+    800008957,
+    800008958,
+    800008959,
+    800008987,
+    800008988,
+    800009015,
+    800009016,
+    800009017,
+    800009020,
+    800009023,
+    800009038,
+    800009039,
+    800009040,
+    800009041,
+    800011062,
+    800011063,
+    800011099,
+    800011132,
+    800011133,
+    800011134,
+    800011186,
+    800011188,
+    800011190,
+    800011214,
+    800011216,
+    800011217,
+    800011218,
+    800011219,
+    800011242,
+    800011243,
+    800011246,
+    800013306,
+    800013308,
+    800013342,
+    800013346,
+    800013347,
+    800013381,
+    800013382,
+    800013407,
+    800013429,
+    800013430,
+    800013447,
+    800013448,
+    800013449,
+    800013450,
+    800013463,
+    800015516,
+    800015517,
+    800015541,
+    800015544,
+    800015545,
+    800015573,
+    800015579,
+    800015605,
+    800015633,
+    800015634,
+    800015658,
+    800015659,
+    800015661,
+    800015662,
+    800015679,
+    800015681,
+    800015683,
+    800015684,
+    800015699,
+    800015700,
+    800017714,
+    800017744,
+    800017758,
+    800017759,
+    800017768,
+    800017769,
+    800017772,
+    800017773,
+    800017775,
+    800017776,
+    800017832,
+    800017833,
+    800017834,
+    800017835,
+    800017857,
+    800017859,
+    800017862,
+    800017897,
+    800017898,
+    800017912,
+    800017913,
+    800017927,
+    800017928
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-07T19:46:38Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 154 network flowlines with GNIS id 00364759 in HI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -155.420886,
+       19.807511
+      ],
+      [
+       -155.419892,
+       19.807043
+      ],
+      [
+       -155.419142,
+       19.806977
+      ],
+      [
+       -155.417717,
+       19.806239
+      ],
+      [
+       -155.415925,
+       19.805942
+      ],
+      [
+       -155.415001,
+       19.805248
+      ],
+      [
+       -155.414361,
+       19.805138
+      ],
+      [
+       -155.413483,
+       19.804588
+      ],
+      [
+       -155.412151,
+       19.803288
+      ],
+      [
+       -155.409017,
+       19.802424
+      ],
+      [
+       -155.407755,
+       19.80249
+      ],
+      [
+       -155.405876,
+       19.802027
+      ],
+      [
+       -155.404701,
+       19.801966
+      ],
+      [
+       -155.403509,
+       19.80157
+      ],
+      [
+       -155.40287,
+       19.800893
+      ],
+      [
+       -155.402154,
+       19.800419
+      ],
+      [
+       -155.400206,
+       19.800033
+      ],
+      [
+       -155.398403,
+       19.80082
+      ],
+      [
+       -155.397519,
+       19.800738
+      ],
+      [
+       -155.396536,
+       19.800847
+      ],
+      [
+       -155.396193,
+       19.800732
+      ],
+      [
+       -155.39368,
+       19.801744
+      ],
+      [
+       -155.39289,
+       19.801705
+      ],
+      [
+       -155.392482,
+       19.80132
+      ],
+      [
+       -155.391657,
+       19.801221
+      ],
+      [
+       -155.390999,
+       19.801611
+      ],
+      [
+       -155.390412,
+       19.801683
+      ],
+      [
+       -155.389673,
+       19.801391
+      ],
+      [
+       -155.387813,
+       19.799057
+      ],
+      [
+       -155.387458,
+       19.798324
+      ],
+      [
+       -155.386639,
+       19.797575
+      ],
+      [
+       -155.385836,
+       19.796254
+      ],
+      [
+       -155.385378,
+       19.794151
+      ],
+      [
+       -155.384825,
+       19.793683
+      ],
+      [
+       -155.384273,
+       19.792918
+      ],
+      [
+       -155.382895,
+       19.792373
+      ],
+      [
+       -155.382203,
+       19.792273
+      ],
+      [
+       -155.381627,
+       19.792367
+      ],
+      [
+       -155.381057,
+       19.791976
+      ],
+      [
+       -155.379406,
+       19.791661
+      ],
+      [
+       -155.379069,
+       19.791392
+      ],
+      [
+       -155.378557,
+       19.79029
+      ],
+      [
+       -155.378086,
+       19.789883
+      ],
+      [
+       -155.377575,
+       19.789024
+      ],
+      [
+       -155.376046,
+       19.787961
+      ],
+      [
+       -155.374594,
+       19.787527
+      ],
+      [
+       -155.374158,
+       19.787158
+      ],
+      [
+       -155.37375,
+       19.786167
+      ],
+      [
+       -155.372965,
+       19.785287
+      ],
+      [
+       -155.372261,
+       19.784885
+      ],
+      [
+       -155.371714,
+       19.783251
+      ],
+      [
+       -155.3708,
+       19.78182
+      ],
+      [
+       -155.370835,
+       19.781044
+      ],
+      [
+       -155.370578,
+       19.779122
+      ],
+      [
+       -155.370101,
+       19.777405
+      ],
+      [
+       -155.36935,
+       19.775666
+      ],
+      [
+       -155.369082,
+       19.773866
+      ],
+      [
+       -155.368744,
+       19.772963
+      ],
+      [
+       -155.367831,
+       19.771934
+      ],
+      [
+       -155.366883,
+       19.771268
+      ],
+      [
+       -155.36533,
+       19.770977
+      ],
+      [
+       -155.36326,
+       19.769794
+      ],
+      [
+       -155.362038,
+       19.768738
+      ],
+      [
+       -155.360265,
+       19.7681
+      ],
+      [
+       -155.359962,
+       19.767533
+      ],
+      [
+       -155.359787,
+       19.766718
+      ],
+      [
+       -155.359171,
+       19.765562
+      ],
+      [
+       -155.358519,
+       19.763575
+      ],
+      [
+       -155.358385,
+       19.762656
+      ],
+      [
+       -155.357669,
+       19.761885
+      ],
+      [
+       -155.357192,
+       19.76046
+      ],
+      [
+       -155.35664,
+       19.759667
+      ],
+      [
+       -155.356256,
+       19.758291
+      ],
+      [
+       -155.354848,
+       19.757136
+      ],
+      [
+       -155.354511,
+       19.756233
+      ],
+      [
+       -155.35358,
+       19.755683
+      ],
+      [
+       -155.35351,
+       19.755116
+      ],
+      [
+       -155.353714,
+       19.754257
+      ],
+      [
+       -155.353312,
+       19.753607
+      ],
+      [
+       -155.35287,
+       19.753272
+      ],
+      [
+       -155.352463,
+       19.752396
+      ],
+      [
+       -155.35205,
+       19.751962
+      ],
+      [
+       -155.351852,
+       19.75134
+      ],
+      [
+       -155.351096,
+       19.750564
+      ],
+      [
+       -155.350619,
+       19.750327
+      ],
+      [
+       -155.349904,
+       19.750074
+      ],
+      [
+       -155.349457,
+       19.750173
+      ],
+      [
+       -155.348473,
+       19.748437
+      ],
+      [
+       -155.347874,
+       19.747738
+      ],
+      [
+       -155.346449,
+       19.74721
+      ],
+      [
+       -155.34585,
+       19.746467
+      ],
+      [
+       -155.345309,
+       19.745465
+      ],
+      [
+       -155.344193,
+       19.744524
+      ],
+      [
+       -155.343454,
+       19.742642
+      ],
+      [
+       -155.343494,
+       19.741816
+      ],
+      [
+       -155.343238,
+       19.740968
+      ],
+      [
+       -155.343819,
+       19.739658
+      ],
+      [
+       -155.343848,
+       19.738667
+      ],
+      [
+       -155.343238,
+       19.738205
+      ],
+      [
+       -155.342615,
+       19.737093
+      ],
+      [
+       -155.341633,
+       19.736157
+      ],
+      [
+       -155.340917,
+       19.7352
+      ],
+      [
+       -155.339086,
+       19.734022
+      ],
+      [
+       -155.33776,
+       19.733455
+      ],
+      [
+       -155.337446,
+       19.731589
+      ],
+      [
+       -155.33755,
+       19.730648
+      ],
+      [
+       -155.337399,
+       19.730158
+      ],
+      [
+       -155.336358,
+       19.729052
+      ],
+      [
+       -155.336654,
+       19.728534
+      ],
+      [
+       -155.336625,
+       19.728127
+      ],
+      [
+       -155.335881,
+       19.727648
+      ],
+      [
+       -155.335038,
+       19.725986
+      ],
+      [
+       -155.333974,
+       19.725056
+      ],
+      [
+       -155.333654,
+       19.723768
+      ],
+      [
+       -155.333194,
+       19.723922
+      ],
+      [
+       -155.332317,
+       19.723856
+      ],
+      [
+       -155.331572,
+       19.723262
+      ],
+      [
+       -155.330956,
+       19.722051
+      ],
+      [
+       -155.329421,
+       19.721715
+      ],
+      [
+       -155.328148,
+       19.721754
+      ],
+      [
+       -155.32666,
+       19.720807
+      ],
+      [
+       -155.325974,
+       19.72029
+      ],
+      [
+       -155.325654,
+       19.719767
+      ],
+      [
+       -155.325119,
+       19.719475
+      ],
+      [
+       -155.324288,
+       19.71953
+      ],
+      [
+       -155.322741,
+       19.719244
+      ],
+      [
+       -155.322532,
+       19.71898
+      ],
+      [
+       -155.322393,
+       19.718331
+      ],
+      [
+       -155.321486,
+       19.718006
+      ],
+      [
+       -155.320672,
+       19.717004
+      ],
+      [
+       -155.319561,
+       19.716415
+      ],
+      [
+       -155.319178,
+       19.7156
+      ],
+      [
+       -155.317812,
+       19.715248
+      ],
+      [
+       -155.317195,
+       19.714907
+      ],
+      [
+       -155.316143,
+       19.713905
+      ],
+      [
+       -155.31362,
+       19.713707
+      ],
+      [
+       -155.31283,
+       19.713014
+      ],
+      [
+       -155.311952,
+       19.712507
+      ],
+      [
+       -155.311272,
+       19.712485
+      ],
+      [
+       -155.310731,
+       19.712705
+      ],
+      [
+       -155.31015,
+       19.71254
+      ],
+      [
+       -155.309063,
+       19.712711
+      ],
+      [
+       -155.307726,
+       19.712078
+      ],
+      [
+       -155.307418,
+       19.712216
+      ],
+      [
+       -155.307209,
+       19.712584
+      ],
+      [
+       -155.306802,
+       19.712739
+      ],
+      [
+       -155.305744,
+       19.71254
+      ],
+      [
+       -155.305569,
+       19.712849
+      ],
+      [
+       -155.305831,
+       19.71346
+      ],
+      [
+       -155.305296,
+       19.713586
+      ],
+      [
+       -155.304081,
+       19.713328
+      ],
+      [
+       -155.30307,
+       19.71346
+      ],
+      [
+       -155.301366,
+       19.712981
+      ],
+      [
+       -155.300175,
+       19.713328
+      ],
+      [
+       -155.299628,
+       19.713322
+      ],
+      [
+       -155.299297,
+       19.713025
+      ],
+      [
+       -155.299123,
+       19.712623
+      ],
+      [
+       -155.298088,
+       19.7133
+      ],
+      [
+       -155.297658,
+       19.712744
+      ],
+      [
+       -155.297239,
+       19.712612
+      ],
+      [
+       -155.29692,
+       19.712612
+      ],
+      [
+       -155.296274,
+       19.712992
+      ],
+      [
+       -155.295251,
+       19.712639
+      ],
+      [
+       -155.294309,
+       19.713195
+      ],
+      [
+       -155.293949,
+       19.713278
+      ],
+      [
+       -155.29285,
+       19.713052
+      ],
+      [
+       -155.292362,
+       19.713471
+      ],
+      [
+       -155.291589,
+       19.71357
+      ],
+      [
+       -155.290874,
+       19.71401
+      ],
+      [
+       -155.290426,
+       19.713971
+      ],
+      [
+       -155.290048,
+       19.71418
+      ],
+      [
+       -155.289543,
+       19.715155
+      ],
+      [
+       -155.289386,
+       19.715226
+      ],
+      [
+       -155.286944,
+       19.714918
+      ],
+      [
+       -155.285939,
+       19.715094
+      ],
+      [
+       -155.284363,
+       19.714406
+      ],
+      [
+       -155.283736,
+       19.713718
+      ],
+      [
+       -155.282503,
+       19.71353
+      ],
+      [
+       -155.281532,
+       19.713756
+      ],
+      [
+       -155.280405,
+       19.714251
+      ],
+      [
+       -155.280108,
+       19.714675
+      ],
+      [
+       -155.279823,
+       19.715534
+      ],
+      [
+       -155.279126,
+       19.715225
+      ],
+      [
+       -155.27848,
+       19.715286
+      ],
+      [
+       -155.277771,
+       19.71473
+      ],
+      [
+       -155.276818,
+       19.714961
+      ],
+      [
+       -155.276056,
+       19.715423
+      ],
+      [
+       -155.275963,
+       19.71566
+      ],
+      [
+       -155.274911,
+       19.71626
+      ],
+      [
+       -155.273556,
+       19.715962
+      ],
+      [
+       -155.272423,
+       19.715467
+      ],
+      [
+       -155.271929,
+       19.715747
+      ],
+      [
+       -155.270993,
+       19.715835
+      ],
+      [
+       -155.270725,
+       19.715703
+      ],
+      [
+       -155.270144,
+       19.715719
+      ],
+      [
+       -155.269888,
+       19.716033
+      ],
+      [
+       -155.269202,
+       19.716231
+      ],
+      [
+       -155.268592,
+       19.716198
+      ],
+      [
+       -155.268191,
+       19.716005
+      ],
+      [
+       -155.267482,
+       19.716578
+      ],
+      [
+       -155.267662,
+       19.716859
+      ],
+      [
+       -155.267656,
+       19.717227
+      ],
+      [
+       -155.267359,
+       19.717558
+      ],
+      [
+       -155.266813,
+       19.71764
+      ],
+      [
+       -155.266493,
+       19.717937
+      ],
+      [
+       -155.263813,
+       19.719021
+      ],
+      [
+       -155.263388,
+       19.719346
+      ],
+      [
+       -155.26201,
+       19.719401
+      ],
+      [
+       -155.2609,
+       19.718894
+      ],
+      [
+       -155.259871,
+       19.718756
+      ],
+      [
+       -155.257104,
+       19.7194
+      ],
+      [
+       -155.256308,
+       19.71946
+      ],
+      [
+       -155.25511,
+       19.71908
+      ],
+      [
+       -155.25457,
+       19.718557
+      ],
+      [
+       -155.254349,
+       19.718094
+      ],
+      [
+       -155.254215,
+       19.717186
+      ],
+      [
+       -155.253722,
+       19.716371
+      ],
+      [
+       -155.253286,
+       19.716062
+      ],
+      [
+       -155.252472,
+       19.715804
+      ],
+      [
+       -155.251519,
+       19.714537
+      ],
+      [
+       -155.249671,
+       19.713178
+      ],
+      [
+       -155.248549,
+       19.712754
+      ],
+      [
+       -155.247863,
+       19.71265
+      ],
+      [
+       -155.246247,
+       19.712953
+      ],
+      [
+       -155.245131,
+       19.712552
+      ],
+      [
+       -155.243195,
+       19.71214
+      ],
+      [
+       -155.241131,
+       19.712036
+      ],
+      [
+       -155.240538,
+       19.711452
+      ],
+      [
+       -155.239166,
+       19.710578
+      ],
+      [
+       -155.237474,
+       19.710253
+      ],
+      [
+       -155.23662,
+       19.709819
+      ],
+      [
+       -155.234846,
+       19.70841
+      ],
+      [
+       -155.234265,
+       19.708388
+      ],
+      [
+       -155.233811,
+       19.708977
+      ],
+      [
+       -155.233701,
+       19.709654
+      ],
+      [
+       -155.233213,
+       19.709902
+      ],
+      [
+       -155.232027,
+       19.709809
+      ],
+      [
+       -155.231655,
+       19.710057
+      ],
+      [
+       -155.230894,
+       19.710052
+      ],
+      [
+       -155.230086,
+       19.71041
+      ],
+      [
+       -155.229173,
+       19.710509
+      ],
+      [
+       -155.227842,
+       19.710278
+      ],
+      [
+       -155.226377,
+       19.709211
+      ],
+      [
+       -155.225557,
+       19.708793
+      ],
+      [
+       -155.224243,
+       19.709052
+      ],
+      [
+       -155.223586,
+       19.708903
+      ],
+      [
+       -155.222517,
+       19.709294
+      ],
+      [
+       -155.222197,
+       19.709696
+      ],
+      [
+       -155.220732,
+       19.709597
+      ],
+      [
+       -155.219453,
+       19.709873
+      ],
+      [
+       -155.218401,
+       19.709614
+      ],
+      [
+       -155.218122,
+       19.709411
+      ],
+      [
+       -155.217826,
+       19.708531
+      ],
+      [
+       -155.216325,
+       19.707523
+      ],
+      [
+       -155.214797,
+       19.708169
+      ],
+      [
+       -155.214628,
+       19.707975
+      ],
+      [
+       -155.213884,
+       19.707925
+      ],
+      [
+       -155.212251,
+       19.709164
+      ],
+      [
+       -155.21185,
+       19.709197
+      ],
+      [
+       -155.210983,
+       19.708856
+      ],
+      [
+       -155.210158,
+       19.708792
+      ],
+      [
+       -155.210085,
+       19.708647
+      ],
+      [
+       -155.208559,
+       19.708218
+      ],
+      [
+       -155.208224,
+       19.707751
+      ],
+      [
+       -155.207274,
+       19.707035
+      ],
+      [
+       -155.205321,
+       19.706451
+      ],
+      [
+       -155.204815,
+       19.706
+      ],
+      [
+       -155.202147,
+       19.704855
+      ],
+      [
+       -155.20117,
+       19.70398
+      ],
+      [
+       -155.198426,
+       19.703815
+      ],
+      [
+       -155.1967,
+       19.704405
+      ],
+      [
+       -155.195723,
+       19.704564
+      ],
+      [
+       -155.195189,
+       19.704983
+      ],
+      [
+       -155.194905,
+       19.705475
+      ],
+      [
+       -155.194427,
+       19.705665
+      ],
+      [
+       -155.19404,
+       19.705443
+      ],
+      [
+       -155.192288,
+       19.705688
+      ],
+      [
+       -155.190916,
+       19.706156
+      ],
+      [
+       -155.190468,
+       19.706686
+      ],
+      [
+       -155.189031,
+       19.706904
+      ],
+      [
+       -155.188775,
+       19.706823
+      ],
+      [
+       -155.188538,
+       19.706508
+      ],
+      [
+       -155.183987,
+       19.706844
+      ],
+      [
+       -155.182783,
+       19.70625
+      ],
+      [
+       -155.181807,
+       19.706261
+      ],
+      [
+       -155.180755,
+       19.705996
+      ],
+      [
+       -155.180464,
+       19.706316
+      ],
+      [
+       -155.179412,
+       19.706569
+      ],
+      [
+       -155.178686,
+       19.707484
+      ],
+      [
+       -155.178131,
+       19.707558
+      ],
+      [
+       -155.17729,
+       19.708171
+      ],
+      [
+       -155.176774,
+       19.707965
+      ],
+      [
+       -155.176083,
+       19.707338
+      ],
+      [
+       -155.175813,
+       19.707296
+      ],
+      [
+       -155.174868,
+       19.708334
+      ],
+      [
+       -155.173779,
+       19.708644
+      ],
+      [
+       -155.173354,
+       19.708589
+      ],
+      [
+       -155.173067,
+       19.708296
+      ],
+      [
+       -155.171401,
+       19.707428
+      ],
+      [
+       -155.170698,
+       19.707323
+      ],
+      [
+       -155.169599,
+       19.707439
+      ],
+      [
+       -155.168901,
+       19.707912
+      ],
+      [
+       -155.168169,
+       19.708165
+      ],
+      [
+       -155.167936,
+       19.707879
+      ],
+      [
+       -155.167541,
+       19.707747
+      ],
+      [
+       -155.166856,
+       19.708145
+      ],
+      [
+       -155.1665,
+       19.708138
+      ],
+      [
+       -155.166098,
+       19.708583
+      ],
+      [
+       -155.164518,
+       19.708572
+      ],
+      [
+       -155.163576,
+       19.708787
+      ],
+      [
+       -155.163071,
+       19.70964
+      ],
+      [
+       -155.161664,
+       19.710114
+      ],
+      [
+       -155.160611,
+       19.710042
+      ],
+      [
+       -155.160077,
+       19.709789
+      ],
+      [
+       -155.158725,
+       19.709697
+      ],
+      [
+       -155.156217,
+       19.709909
+      ],
+      [
+       -155.155164,
+       19.710262
+      ],
+      [
+       -155.154036,
+       19.710074
+      ],
+      [
+       -155.153248,
+       19.710448
+      ],
+      [
+       -155.153164,
+       19.711307
+      ],
+      [
+       -155.152315,
+       19.712144
+      ],
+      [
+       -155.150542,
+       19.712738
+      ],
+      [
+       -155.150025,
+       19.713371
+      ],
+      [
+       -155.149426,
+       19.713768
+      ],
+      [
+       -155.147781,
+       19.713762
+      ],
+      [
+       -155.146804,
+       19.714048
+      ],
+      [
+       -155.146542,
+       19.714257
+      ],
+      [
+       -155.146305,
+       19.714863
+      ],
+      [
+       -155.144257,
+       19.715771
+      ],
+      [
+       -155.143658,
+       19.715864
+      ],
+      [
+       -155.143129,
+       19.715754
+      ],
+      [
+       -155.142653,
+       19.715958
+      ],
+      [
+       -155.141996,
+       19.715892
+      ],
+      [
+       -155.141629,
+       19.71577
+      ],
+      [
+       -155.141298,
+       19.715368
+      ],
+      [
+       -155.13867,
+       19.715241
+      ],
+      [
+       -155.138077,
+       19.714944
+      ],
+      [
+       -155.136697,
+       19.714784
+      ],
+      [
+       -155.135833,
+       19.715092
+      ],
+      [
+       -155.134883,
+       19.715656
+      ],
+      [
+       -155.134827,
+       19.715488
+      ],
+      [
+       -155.134002,
+       19.715124
+      ],
+      [
+       -155.133608,
+       19.715474
+      ],
+      [
+       -155.133561,
+       19.715712
+      ],
+      [
+       -155.13244,
+       19.715474
+      ],
+      [
+       -155.131682,
+       19.715768
+      ],
+      [
+       -155.131043,
+       19.715421
+      ],
+      [
+       -155.130049,
+       19.715498
+      ],
+      [
+       -155.129531,
+       19.71576
+      ],
+      [
+       -155.129333,
+       19.715679
+      ],
+      [
+       -155.127839,
+       19.71613
+      ],
+      [
+       -155.125641,
+       19.71706
+      ],
+      [
+       -155.125286,
+       19.717809
+      ],
+      [
+       -155.123161,
+       19.718339
+      ],
+      [
+       -155.122027,
+       19.719072
+      ],
+      [
+       -155.121859,
+       19.719512
+      ],
+      [
+       -155.121132,
+       19.719474
+      ],
+      [
+       -155.120423,
+       19.719904
+      ],
+      [
+       -155.119487,
+       19.71991
+      ],
+      [
+       -155.118319,
+       19.720265
+      ],
+      [
+       -155.116481,
+       19.719487
+      ],
+      [
+       -155.115249,
+       19.719757
+      ],
+      [
+       -155.11458,
+       19.720087
+      ],
+      [
+       -155.1134,
+       19.720104
+      ],
+      [
+       -155.112545,
+       19.719945
+      ],
+      [
+       -155.111182,
+       19.71942
+      ],
+      [
+       -155.110751,
+       19.719616
+      ],
+      [
+       -155.109807,
+       19.719572
+      ],
+      [
+       -155.108818,
+       19.719729
+      ],
+      [
+       -155.107499,
+       19.721152
+      ],
+      [
+       -155.106993,
+       19.721219
+      ],
+      [
+       -155.104933,
+       19.720896
+      ],
+      [
+       -155.103937,
+       19.720194
+      ],
+      [
+       -155.103034,
+       19.720113
+      ],
+      [
+       -155.102493,
+       19.720306
+      ],
+      [
+       -155.100796,
+       19.721782
+      ],
+      [
+       -155.0995,
+       19.722261
+      ],
+      [
+       -155.09786,
+       19.723941
+      ],
+      [
+       -155.097151,
+       19.72491
+      ],
+      [
+       -155.09589,
+       19.725109
+      ],
+      [
+       -155.095024,
+       19.725516
+      ],
+      [
+       -155.093078,
+       19.725809
+      ],
+      [
+       -155.091524,
+       19.725798
+      ],
+      [
+       -155.090361,
+       19.726371
       ]
      ]
     ]
