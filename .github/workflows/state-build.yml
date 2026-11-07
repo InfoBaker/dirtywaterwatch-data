@@ -100,10 +100,12 @@ jobs:
       - run: npm install -g wrangler@4
       - name: Restore pipeline state from R2 (read only here)
         run: |
-          # the name blocklist the publish needs comes with it; an object that is there but cannot be read stops the batch
+          # the name blocklist the publish needs comes with it; an object that is there but cannot be read stops the batch.
+          # unpack-build checks the whole archive first: data/build members only, no links or special files, so a
+          # replaced or mispacked object never overwrites the code that runs next with the credentials (SOL wave1 P2-14)
           rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?
           if [ "$rc" = 0 ]; then
-            tar -xzf build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked"; exit 1; }
+            python3 -I scripts/state_paths.py unpack-build build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked"; exit 1; }
           elif [ "$rc" = 3 ]; then
             echo "no state yet"
           else

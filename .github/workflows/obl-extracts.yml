@@ -40,7 +40,7 @@ jobs:
         run: |
           rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?
           if [ "$rc" = 0 ]; then
-            tar -xzf build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked"; exit 1; }
+            python3 -I scripts/state_paths.py unpack-build build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked"; exit 1; }   # data/build members only (SOL wave1 P2-14)
           elif [ "$rc" != 3 ]; then
             echo "::error::state/build.tar.gz is in R2 but could not be fetched"; exit 1
           fi

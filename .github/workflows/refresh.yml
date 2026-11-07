@@ -1,10 +1,11 @@
 name: Refresh data
 # Hourly (off the hour: GitHub delays runs queued at :00): pull every feed, compute statuses and reaches, build
 # charts, export, push the live files to R2 current/ for the site, save the pipeline state, and once a day attach
-# the full dataset to the rolling "latest" release (a dated release on Sundays). Standard hosted runners are free
-# on a public repository. The ingesters keep state between runs (history and snapshot files in data/build), so
-# that folder is restored from R2 state/build.tar.gz at the start and saved back at the end. The answers the code
-# reads back from data/raw (NHD, NLDI and Overpass answers, the Census outlines, IEM rainfall, the RI layers, the DC
+# the full dataset to the rolling "latest" release (a dated release on Sundays; due when the run starts in the 03Z
+# hour). A file at R2 state/PAUSE (the site's publish workflow reads the same switch) pauses it: nothing is collected,
+# published or saved. Standard hosted runners are free on a public repository. The ingesters keep state between runs
+# (history and snapshot files in data/build), so that folder is restored from R2 state/build.tar.gz at the start and
+# saved back at the end. The answers the code reads back from data/raw (NHD, NLDI and Overpass answers, the Census outlines, IEM rainfall, the RI layers, the DC
 # boundary, the NY workbook, this month's NJ ECHO answers: scripts/state_paths.py lists them with the reasons) are
 # state/raw-cache.tar.gz, restored after it and saved with it. Every other raw fetch stays on the runner (bulk raw
 # saves can carry personal fields and are never saved or committed). openboatlaunch's water records and outlines
@@ -45,6 +46,21 @@ jobs:
       OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
       PYTHONUNBUFFERED: '1'
     steps:
+      - name: Dataset release due (decided from the run's own start time)
+        id: release
+        # the daily release is the scheduled run that starts in the 03Z hour (a dated one on Sundays); a dispatch always
+        # releases. Decided here, at the start, from the clock (github.run_started_at is no context property, so the old
+        # condition never held), so a run that takes past the hour still releases (SOL wave1 P2-13)
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          hour=$(date -u +%H); dow=$(date -u +%u)
+          due=0
+          if [ "$EVENT" = workflow_dispatch ]; then due=1
+          elif [ "$EVENT" = schedule ] && [ "$hour" = 03 ]; then due=1; fi
+          weekly=0; [ "$due" = 1 ] && [ "$dow" = 7 ] && weekly=1
+          echo "due=$due" >> "$GITHUB_OUTPUT"; echo "weekly=$weekly" >> "$GITHUB_OUTPUT"
+          echo "dataset release: due=$due weekly=$weekly ($EVENT, $(date -u +%FT%TZ))"
       - name: Secrets present
         run: |
           [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || {
@@ -59,19 +75,36 @@ jobs:
       - run: python -m venv .venv && .venv/bin/pip install -q -r requirements.txt
         working-directory: pipeline
       - run: npm install -g wrangler@4
+      - name: Pause switch (R2 state/PAUSE, shared with the site's publish workflow)
+        id: pause
+        # set: nothing is collected, published or saved this run (every later step is skipped and the run succeeds);
+        # not set: the run goes on; could not be checked: the run stops, so a pause is never missed (SOL wave1 P2-9)
+        run: |
+          rc=0; python3 -I scripts/state_paths.py fetch state/PAUSE pause.check || rc=$?
+          rm -f pause.check
+          case "$rc" in
+            0) echo "paused=1" >> "$GITHUB_OUTPUT"
+               echo "::notice::R2 state/PAUSE is set: nothing is collected, published or saved this run" ;;
+            3) echo "R2 state/PAUSE is not set" ;;
+            *) echo "::error::R2 state/PAUSE could not be checked; nothing is collected, published or saved this run"; exit 1 ;;
+          esac
       - name: System tools (pdftotext, for MWRD's table of reversals to Lake Michigan)
         # ingest/il_mwrd_lake_reversals.py reads the PDF with poppler's pdftotext; without it that feed writes ok=False
         # and keeps its previous records, so a failed install warns and never stops the run
+        if: steps.pause.outputs.paused != '1'
         run: |
           command -v pdftotext >/dev/null || sudo apt-get install -y -qq poppler-utils >/dev/null \
             || echo "::warning::poppler-utils could not be installed; MWRD's reversals table is not read this run"
       - name: Restore pipeline state from R2
+        if: steps.pause.outputs.paused != '1'
         run: |
           # a missing object is a first run; one that is there but cannot be fetched or unpacked stops the run here, so
-          # nothing is published without the history and the blocklist and the stored state is never saved over
+          # nothing is published without the history and the blocklist and the stored state is never saved over.
+          # unpack-build checks the whole archive first: data/build members only, no links or special files (SOL
+          # wave1 P2-14); one that holds anything else is refused whole, before the checkout changes
           rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?
           if [ "$rc" = 0 ]; then
-            tar -xzf build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked; nothing is published or saved this run"; exit 1; }
+            python3 -I scripts/state_paths.py unpack-build build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked; nothing is published or saved this run"; exit 1; }
           elif [ "$rc" = 3 ]; then
             echo "no state yet"
           else
@@ -80,6 +113,7 @@ jobs:
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
       - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
         id: restore_raw
+        if: steps.pause.outputs.paused != '1'
         run: |
           # only the listed cache paths are written (scripts/state_paths.py unpack), whatever the tarball holds. Never
           # fails the run: without the caches it fetches what it needs. One that is there but could not be fetched is
@@ -95,6 +129,7 @@ jobs:
             echo "::warning::the raw cache could not be fetched; this run starts from the answers it fetches and keeps the stored one"
           fi
       - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
+        if: steps.pause.outputs.paused != '1'
         run: |
           # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl rules).
           # fetch-obl pulls the API's national bulk file (sha256 checked) at most once a day and only for a new
@@ -115,7 +150,7 @@ jobs:
           fi
           rm -f obl-water.tar.gz
       - name: Backfill (one-time history loads named in the dispatch input, before the refresh)
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.backfill != ''
+        if: steps.pause.outputs.paused != '1' && github.event_name == 'workflow_dispatch' && github.event.inputs.backfill != ''
         env:
           BACKFILL: ${{ github.event.inputs.backfill }}
         run: |
@@ -129,17 +164,24 @@ jobs:
           done
           exit $rc
       - name: Refresh (feeds, status, reaches, charts, export, tally, R2 current/)
+        id: refresh
+        if: steps.pause.outputs.paused != '1'
+        # a refresh that stopped at once (data/build/PAUSE, or another run's lock) says skipped=1: nothing after it is
+        # published or saved (SOL wave1 P2-9)
         run: sh scripts/refresh-data.sh
       - name: Full export to R2 for the site build (state/out.tar.gz; the site repository's publish workflow reads it)
-        if: success()
+        if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
         run: |
           [ -f data/build/export-blocked.json ] && { echo "export blocked; out/ not published"; exit 0; }
-          tar -czf out.tar.gz out && wrangler r2 object put dirtywaterwatch-data/state/out.tar.gz --file out.tar.gz --remote
+          [ -d out ] || { echo "::error::no out/ folder: nothing to publish, and no state is saved"; exit 1; }
+          # each its own command, so a failed archive or upload fails the step (SOL wave1 P2-12)
+          tar -czf out.tar.gz out
+          wrangler r2 object put dirtywaterwatch-data/state/out.tar.gz --file out.tar.gz --remote
           ls -la out.tar.gz
       - name: Save openboatlaunch's folder to R2 when the API changed it (state/obl-water.tar.gz, the fallback copy)
         # before the build state: when the upload fails, data/build/obl-changes.json goes back to before this run
         # (obl-not-saved), so the next run, restoring the older copy, asks for the same changes again
-        if: success()
+        if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
         run: |
           rc=0; python3 -I scripts/state_paths.py pack-obl obl-water.tar.gz || rc=$?
           if [ "$rc" = 0 ]; then
@@ -152,8 +194,8 @@ jobs:
           rm -f obl-water.tar.gz
       - name: Save pipeline state to R2
         # only after a refresh that ran to the end: a cancelled or failed run must not overwrite the saved history
-        # (a seed from the owner's machine, or the last good run) with a partial one
-        if: success()
+        # (a seed from the owner's machine, or the last good run) with a partial one; nor a paused or skipped one
+        if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
         run: |
           tar -czf build.tar.gz data/build
           # over 200 MB a warning (the history is still saved); over wrangler's 300 MiB upload limit, an error
@@ -163,7 +205,7 @@ jobs:
         # the cached answers only (scripts/state_paths.py); the next run's waters-nhd target and NLDI's hourly quota
         # resume from them. Over the cap the save fails with the sizes printed and the build state above still stands;
         # continue-on-error keeps the dataset release going while that is looked at.
-        if: success() && steps.restore_raw.outcome == 'success' && steps.restore_raw.outputs.keep != '1'
+        if: success() && steps.restore_raw.outcome == 'success' && steps.restore_raw.outputs.keep != '1' && steps.refresh.outputs.skipped != '1'
         continue-on-error: true
         run: |
           python3 -I scripts/state_paths.py pack raw-cache.tar.gz
@@ -171,15 +213,16 @@ jobs:
       - name: Dataset release (daily "latest"; dated on Sundays)
         # a release failure (GitHub's API answered 500 on an asset upload on 2026-11-04) never fails the run: the
         # export, the live files and the state are already saved; the upload is retried three times
-        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && contains(github.run_started_at, 'T03:'))
+        if: success() && steps.release.outputs.due == '1' && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
+          WEEKLY: ${{ steps.release.outputs.weekly }}
         run: |
           [ -f data/build/export-blocked.json ] && { echo "export blocked; no release"; exit 0; }
           (cd out && zip -qr ../dataset.zip . -x 'csv/*')
           gh release view latest >/dev/null 2>&1 || gh release create latest --title "Latest dataset" --notes "Rolling dataset; replaced daily. See DATA-LICENSE.md."
           n=0; until gh release upload latest dataset.zip --clobber; do n=$((n + 1)); [ "$n" -ge 3 ] && { echo "::warning::dataset release upload failed three times; the export and state are saved"; exit 1; }; sleep $((15 * n)); done
-          if [ "$(date -u +%u)" = "7" ]; then
+          if [ "$WEEKLY" = "1" ]; then
             tag="dataset-$(date -u +%F)"; gh release create "$tag" dataset.zip --title "Dataset $(date -u +%F)" --notes "Weekly dataset snapshot. See DATA-LICENSE.md." || true
           fi
