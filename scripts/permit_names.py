@@ -198,13 +198,138 @@ def _balance(s: str) -> str:
     return re.sub(r"\s+([)\]])", r"\1", re.sub(r"([(\[])\s+", r"\1", out))
 
 
+# ---------------------------------------------------------------- a permit held in a person's own name (2026-11-07)
+# The Texas review (P1-2) found permits whose EPA name is the holder's own: '<code> <surname>, <forename>',
+# 'HOA <a person> AND <a person>', a three-part personal name, '<bodies>, AND <a person>', '<a person> d/b/a <trade
+# name>' and '<a person> Family Limited Partnership'. The field then becomes the facility's name (or the trade name
+# after d/b/a), else 'Holder of permit <id>'; the plant file marks the row permit_name_scrubbed as before.
+DBA = re.compile(r"\s*-?\s*\b(?:d\s*/\s*b\s*/\s*a|dba|doing\s+business\s+as)\b\s*-?\s*", re.I)
+FAMILY = re.compile(r"\bfamily\s+(?:limited\s+)?(?:partnership|trust|lp|ltd|llc)\b", re.I)
+HOLDER_LEAD = re.compile(r"^(?:the|hoa|poa)\s+", re.I)
+CORP_PART = re.compile(r"(?:inc|l\.?l\.?c|l\.?p|ltd|llp|co|corp|pc|pllc)\.?", re.I)
+# EPA's abbreviations of a body's words that the shared lists lack (a word with no vowel, TWP or CNTY, is one too)
+ABBREVIATIONS = set("""
+auth muni sani sew svc svcs prk dept div dist corr sch bur opr const fac maint bldg ctr env envir util utils wtr ww
+cnty cisd isd sd ud psd pud hoa poa assn assoc boparc reservation rancheria pueblo mhc mhp odnr
+""".split())
+# bodies named for their founders, read as bodies (a firm, not the person)
+FIRM_NAMES = {"hatch mott macdonald", "martin marietta materials"}
+HOLDER = "Holder of permit {}"
+
+
+def _given(word: str) -> bool:
+    from build import redact
+    return word.lower() in (redact.FIRST_NAMES | pu.GIVEN_EXTRA)
+
+
+def _words(s: str | None) -> set[str]:
+    return {w for w in re.findall(r"[a-z]+", (s or "").lower()) if len(w) > 1}
+
+
+def _personal_part(part: str, context: set[str]) -> bool:
+    """A part of the holder's name that is a person's: private_utilities.person_like with no body's word, or two or
+    three words of letters none of which is a body's, an organisation's, a place-lead's or an abbreviation's word
+    (a word with no vowel is an abbreviation) and none of which the facility's name or the city shares."""
+    p = HOLDER_LEAD.sub("", pu.clean(part).strip(" .,;-"))
+    if not p or pu.has_org_word(p) or _norm(p) in FIRM_NAMES:
+        return False
+    if _words(p) & context:
+        return False
+    if pu.person_like(p):
+        return True
+    ws = p.split()
+    return (2 <= len(ws) <= 3 and all(re.fullmatch(r"[A-Za-z]{2,}", w) for w in ws)
+            and not any(_stop(w) or w.lower() in ABBREVIATIONS or not re.search(r"[aeiouy]", w, re.I) for w in ws))
+
+
+def person_holder(v, facility: str | None = None, city: str | None = None) -> bool:
+    """Whether EPA's permit name is (or holds) a private person's own name, by the shapes above."""
+    s = pu.clean(v)
+    if not s:
+        return False
+    if FAMILY.search(s) and any(_given(w) for w in re.findall(r"[A-Za-z]+", s)):
+        return True
+    context = _words(facility) | _words(city)
+    raw = [x for x in re.split(r"\s*[,;]\s*(?:and\s+|&\s*)?", s, flags=re.I) if x.strip(" .")]
+    if any(BARE_INVERTED.match(x.strip(" ,.-")) for x in raw[1:]):
+        return False                                  # EPA's inverted '<place>, City of'
+    # 'and' or '&' joins two people ('HOA <a person> AND <a person>') only where no word around it is a body's, an
+    # abbreviation's or a function word ('Department of Conservation and Natural Resources', 'Sand and Gravel LLC')
+    split: list[str] = []
+    for x in raw:
+        bare = HOLDER_LEAD.sub("", x.strip())
+        if re.search(r"\s(?:and|&)\s", bare, re.I) and not pu.has_org_word(bare) and not any(
+                _stop(w) or w.lower() in ABBREVIATIONS for w in re.findall(r"[A-Za-z]+", bare) if w.lower() != "and"):
+            sides = [y for y in re.split(r"\s+(?:and|&)\s+", bare, flags=re.I) if y.strip()]
+            split += sides if all(len(y.split()) >= 2 for y in sides) else [x]     # a person: two words at least
+        else:
+            split.append(x)
+    raw = split
+    parts: list[str] = []
+    for x in raw:                         # a corporate form belongs to the part before it ('<x> Materials, Inc.')
+        if parts and CORP_PART.fullmatch(x.strip(" .")):
+            parts[-1] += ", " + x
+        else:
+            parts.append(x)
+    if len(parts) == 1 and (pu.has_org_word(s) or not _words(s) - context):
+        return False
+    for i, x in enumerate(parts):
+        # '<code> <surname>, <forename>': a lone given name after a part with no body's word
+        if (i and len(x.split()) == 1 and _given(x.strip(" ."))
+                and not pu.has_org_word(parts[i - 1]) and not any(_stop(w) for w in parts[i - 1].split())):
+            return True
+        if _personal_part(x, context):
+            return True
+    return False
+
+
+def holder_name(v, permit: str | None, city: str | None = None, facility: str | None = None) -> tuple[str | None, bool]:
+    """(the permit name with a holder's own name replaced, whether it changed): the trade name after d/b/a when the
+    owner before it is a person; else the facility's name when it is a body's; else 'Holder of permit <id>'."""
+    s = pu.clean(v)
+    if not s:
+        return v, False
+    halves = DBA.split(s, maxsplit=1)
+    if len(halves) == 2 and halves[1].strip(" ,-"):
+        owner, trade = halves[0].strip(" ,-"), halves[1].strip(" ,-")
+        if person_holder(owner, facility, city) or person_part(owner) or pu.person_like(owner):
+            return trade, True
+        return s, False
+    if not person_holder(s, facility, city):
+        return s, False
+    fac = pu.clean(facility)
+    if fac and not person_holder(fac) and pu.public_name(fac) not in (None, pu.NAME_REMOVED):
+        return fac, True
+    return HOLDER.format(permit or "unknown"), True
+
+
+def scrub_candidates(doc: dict) -> Counter:
+    """research/<st>/private-utilities-candidates.json: a permittee_as_recorded that is a holder's own name becomes
+    the file's '[name removed]' (its convention: the permit is kept; the operator builders read that value), or the
+    trade name after d/b/a. Counter of rows per state."""
+    n: Counter = Counter()
+    for key in ("candidates", "public_by_name"):
+        for c in doc.get(key) or []:
+            v = c.get("permittee_as_recorded")
+            if not v or v == pu.NAME_REMOVED:
+                continue
+            new, changed = holder_name(v, c.get("npdes_permit"), c.get("city"), c.get("facility"))
+            if changed:
+                trade = len(DBA.split(pu.clean(v), maxsplit=1)) == 2      # the trade name after d/b/a is the body's
+                c["permittee_as_recorded"] = new if trade else pu.NAME_REMOVED
+                n[c.get("state") or "??"] += 1
+    return n
+
+
 def scrub_rows(rows: list[dict]) -> Counter:
     """Scrub every row's permit_name in place; the marker goes right after permit_name. Counter of rows per state."""
     n: Counter = Counter()
     for k, r in enumerate(rows):
         if "permit_name" not in r or not r.get("permit_name"):
             continue
-        new, changed = scrub_permit_name(r["permit_name"], r.get("city"), r.get("permittee"))
+        held, by_holder = holder_name(r["permit_name"], r.get("npdes_permit"), r.get("city"), r.get("permittee"))
+        new, changed = scrub_permit_name(held, r.get("city"), r.get("permittee"))
+        changed = changed or by_holder
         if not changed:
             continue
         out = {}
@@ -237,6 +362,14 @@ def main(argv: list[str]) -> int:
             if path.name == "outfalls-plants-us.json":
                 write_plants(path, doc)
             else:
+                path.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
+    for path in sorted((ROOT / "research").glob("*/private-utilities-candidates.json")):
+        doc = json.loads(path.read_text())
+        n = scrub_candidates(doc)
+        total += n
+        if n:
+            print(f"{path.relative_to(ROOT)}: {sum(n.values())} rows changed")
+            if not a.dry_run:
                 path.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
     for st, c in sorted(total.items()):
         print(f"  {st}: {c}")
