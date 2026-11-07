@@ -95,6 +95,18 @@ def test_duplicates_and_not_an_overflow_are_kept_unplaced():
     assert "not a sewer overflow" in n["raw"]["_no_water_reason"]
 
 
+def test_a_report_that_says_it_was_no_sanitary_overflow_is_unplaced():
+    # SSO-00213610 (final audit 2026-11-07 P2-1): placed on Mill Creek by its point before
+    words = ("This was not a sanitary overflow. There was an old storm pipe partially buried which had water seeping out "
+             "of it into the drainage ditch. A dye test showed no leak from the sanitary.")
+    a = {"sso_report_id": "SSO-00213610", "sso_report_version": 1, "rec_stream": words, "sso_ongoing_ind": "No",
+         "date_sso_began": 1780000000000, "date_sso_stopped": 1780003600000, "permit_no": "AL0022209",
+         "lat": 32.47, "long": -85.0}
+    recs, _ = _build(hist=[a], live=[])
+    r = recs["SSO-00213610"]
+    assert r["raw"]["reached_water"] is False and "not a sewer overflow" in r["raw"]["_no_water_reason"]
+
+
 def test_volumes_as_adem_states_them():
     recs, _ = _build()
     assert recs["SSO-00207548"]["volume_gal"] == 930
