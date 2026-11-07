@@ -197,11 +197,12 @@ def _beachwatch():
     return runner.build("ne-dwee-beachwatch", block, rows, "2026-11-07T01:14:00Z", [])
 
 
-def test_beachwatch_block_asks_only_for_alert_and_e_coli_rows_and_safe_fields():
+def test_beachwatch_block_reads_the_whole_layer_with_its_hooks():
     from ingest.generic import runner
     _, block = runner.load_source("ne-dwee-beachwatch")
     assert block["live"] is True and block["platform"] == "arcgis" and not runner.validate_block(block)
-    assert "HealthAlert = 'YES'" in block["where"] and "EColiRisk" in block["where"]
+    assert "where" not in block                                              # every row: the next sample is needed
+    assert block["post"] == "ingest.ne_transforms.ne_beachwatch_sequence"
     assert block["time_zone"] == "America/Chicago"
 
 
@@ -209,19 +210,48 @@ def test_beachwatch_health_alert_is_the_authoritys_bloom_advisory_and_e_coli_a_c
     recs, stats = _beachwatch()
     by = {r["source_record_id"]: r for r in recs}
     rock = by["LBB1ROCKFD04-2026-w23"]
-    assert rock["event_type"] == "hab_advisory" and rock["status"] == "advisory_active"
-    assert rock["started_at"] == "2026-06-08" and rock["time_precision"] == "day" and rock["ended_at"] is None
+    assert rock["event_type"] == "hab_advisory" and rock["started_at"] == "2026-06-08" and rock["time_precision"] == "day"
     assert rock["waterbody_text"] == "Rockford Lake" and rock["outfall_name"] == "Rockford Lake at Beach"
     assert rock["advice_text"].startswith("This beach is under health alert") and "13.78" in rock["advice_text"]
     assert rock["lat"] == 40.223196 and rock["published_at"] is None
     both = by["LNE2IRONHT04-2026-w23"]                                       # alert and E. coli: the alert
     assert both["event_type"] == "hab_advisory" and both["raw"]["_ecoli_risk"].startswith("Elevated")
     oak = by["LLP2BRNOAK09-2026-w21"]
-    assert oak["event_type"] == "beach_advisory" and oak["status"] == "unknown" and "no advisory issued" in oak["advice_text"]
+    assert oak["event_type"] == "beach_advisory" and oak["status"] == "unknown"
+    assert oak["raw"]["_agency_label_only"] is True and oak["raw"]["_agency_label"] == "Elevated health risk for E. coli"
+    assert "\u201cElevated health risk for E. coli\u201d" in oak["advice_text"] and "no advisory" in oak["advice_text"]
     assert oak["waterbody_text"] == "Branched Oak Lake" and oak["started_at"] == "2026-05-26"
-    other = by["GPTLKBACT1-2026-w21"]                                        # neither: only from a whole-layer copy
-    assert other["event_type"] == "unknown" and other["parse_error"]
-    assert stats["by_type"] == {"hab_advisory": 3, "beach_advisory": 2, "unknown": 1}
+    # a sample with neither statement is read (for the sequence) but is not a record
+    assert "GPTLKBACT1-2026-w21" not in by and "LBB1ROCKFD04-2026-w24" not in by
+    assert stats["by_type"] == {"hab_advisory": 3, "beach_advisory": 2} and stats["duplicates"]["samples_dropped"] == 2
+
+
+def test_a_bloom_alert_ends_at_the_stations_next_sample():
+    """Rockford Lake: on alert in weeks 22 and 23, off in week 24 (the real sequence)."""
+    by = {r["source_record_id"]: r for r in _beachwatch()[0]}
+    w22, w23 = by["LBB1ROCKFD04-2026-w22"], by["LBB1ROCKFD04-2026-w23"]
+    assert w22["status"] == "ended" and w22["ended_at"] == "2026-06-08" and w22["raw"]["_continued_by"] == w23["source_record_id"]
+    assert w23["status"] == "advisory_lifted" and w23["ended_at"] == "2026-06-15"
+    assert w23["raw"]["_lifted_by"] == "LBB1ROCKFD04-2026-w24"
+    iron = by["LNE2IRONHT04-2026-w23"]                                       # no later sample in the fixture: open
+    assert iron["status"] == "advisory_active" and iron["ended_at"] is None
+
+
+def test_beachwatch_colours_red_to_the_lift_and_e_coli_with_the_sites_caution_only():
+    from datetime import UTC, datetime, timedelta
+    from build import status as S
+    by = {r["source_record_id"]: r for r in _beachwatch()[0]}
+    now = datetime(2026, 9, 1, tzinfo=UTC)
+    rules = S.load_rules()
+    ivs = S.event_intervals(by["LBB1ROCKFD04-2026-w23"], "NE", now, None, rules)
+    assert [i["color"] for i in ivs] == ["red"] and ivs[0]["rule"] == "advisory_active"
+    assert ivs[0]["end"] == S.end_of_local_day(S.parse_time("2026-06-15"))   # the next sample's day, not 14 days
+    ivs = S.event_intervals(by["LLP2BRNOAK09-2026-w21"], "NE", now, None, rules)
+    assert len(ivs) == 1 and ivs[0]["color"] == "yellow" and ivs[0]["rule"] == "sample_caution"
+    assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72) and ivs[0]["category"] == "beach"
+    assert ivs[0]["rule_applied"]["rule"] == "unresolved.sample_caution" and ivs[0]["red_rule"] is None
+    assert ivs[0]["rule_applied"]["label"] == "Elevated health risk for E. coli"
+    assert "advisory" not in ivs[0]["label"].split(";")[0].lower() or "no advisory" in ivs[0]["label"].lower()
 
 
 def test_beachwatch_records_keep_only_the_safe_fields():
