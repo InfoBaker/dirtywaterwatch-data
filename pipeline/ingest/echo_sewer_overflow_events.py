@@ -1,5 +1,6 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
-Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona) and South Dakota.
+Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona), South Dakota and
+Mississippi.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -239,6 +240,30 @@ Planned bypasses (every state; review 2026-11-07 P2-3)
   On the 2026-11-04 extract four records carry a planned end ahead: the two South Dakota ones above and two Navajo
   Nation bypasses in Arizona (NN0020265 to Nazlini Wash and NN0020281 to Laguna Creek, both to 2027-01-01 as filed).
 
+Mississippi (permits MS...; research/ms/report.md section 2.2; not live until data/rules.json says so)
+  MDEQ requires the 5-day written report of every SSO and bypass through EPA's NeT-SewerOverflow from 2025-12-21, so
+  this dataset is the statewide record (2026-11-04 all-versions extract: 358 current MS rows from 47 permits, all with
+  coordinates; SSO 314, BYP 43, CSO 1; report received a median 4 days after the start). MDEQ publishes no list of
+  its own. Three Mississippi habits are handled here, for MS permits only, so the other states' records are unchanged:
+  - Time zone: Mississippi is wholly in Central time; STATE_TZ gives America/Chicago, as for Illinois.
+  - Free text: descriptions name the manhole's or break's street address ('<number> <street> DR - <manhole no.>'),
+    so MS is in FREE_TEXT_STATES and every free-text field gets the Illinois scrub.
+  - The City of Jackson's reports (MS0024295, MS0044059, run by JXN Water) give a creek's name without 'Creek'
+    ('EUBANKS', 'HANGING MOSS ', 'TOWN'), and Meridian's (MS0020117) misspell its creeks three times ('OAKTIBEE
+    CREEK', 'OKATIBBEE CREED', 'SAWASHEE CREEK'). STATE_WATER_ALIASES reads such a name, for that permit only, as
+    the NHD flowline of the name (USGS NHD large-scale flowlines, GNIS id and the lines' bbox in the table, checked
+    2026-11-07), and only when the report's point lies within ALIAS_REACH_KM (3.5 km) of that bbox: in the
+    2026-11-04 extract 50 of 51 such reports lie within 3.5 km of the line itself (the farthest a Trahon Creek report
+    at 3,466 m); one EUBANKS report 15.4 km from Eubanks Creek is kept as typed. Names with no such flowline
+    ('BELHAVEN', 'CANEY', 'EASTOVER', 'THREE MILE'; JCUA's 'Forth Bayou Creek') are kept as typed.
+    raw.receiving_waters keeps the text as reported and raw.receiving_water_aliases says what was read.
+  - Two text rules (STATE_NOT_SEWAGE, STREET_WATER): a description saying the matter was not sewage ("customer
+    thought there was sewer in the pond. It was algae ...") drops the report; a water word that is part of a street
+    name ('FOREST LAKE CIR') is not read as a water.
+  Points are the event's own (a manhole that overflows in each storm repeats its point; the Vicksburg plant's
+  bypasses all give the plant's point), so MS is not in REPEATED_POINT_STATES. The generic 'no water' wordings cover
+  the Mississippi rows ('None'); a roadside or drainage ditch named as the receiving water is kept as a water.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -270,16 +295,35 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
-STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago"}
+STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json"}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
+# a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
+# Mississippi. Each NHD flowline of the name runs within about 3 km of the reports' points (GNIS id after the name).
+STATE_WATER_ALIASES = {"MS": {
+    # (permit, _alias_key(text)): (NHD name, GNIS id, the NHD flowlines' bbox [lon0, lat0, lon1, lat1])
+    ("MS0024295", "eubanks"): ("Eubanks Creek", "00669816", (-90.2099, 32.3221, -90.1528, 32.3590)),
+    ("MS0024295", "hanging moss"): ("Hanging Moss Creek", "00670883", (-90.2371, 32.3604, -90.1039, 32.4146)),
+    ("MS0024295", "town"): ("Town Creek", "00678831", (-90.2395, 32.2835, -90.1783, 32.3595)),
+    ("MS0024295", "purple"): ("Purple Creek", "00676424", (-90.1506, 32.3663, -90.1044, 32.4174)),
+    ("MS0024295", "lynch"): ("Lynch Creek", "00672967", (-90.2806, 32.2725, -90.1872, 32.3394)),
+    ("MS0024295", "white oak"): ("White Oak Creek", "00679605", (-90.2005, 32.3641, -90.1270, 32.4497)),
+    ("MS0024295", "hardy"): ("Hardy Creek", "00670914", (-90.2530, 32.2508, -90.2049, 32.2860)),
+    ("MS0044059", "trahon"): ("Trahon Creek", "00678852", (-90.2825, 32.1780, -90.2399, 32.2570)),
+    # Meridian's misspellings of its own creeks (its other reports spell them right)
+    ("MS0020117", "oaktibee creek"): ("Okatibbee Creek", "00691590", (-88.8433, 32.1826, -88.7475, 32.6101)),
+    ("MS0020117", "okatibbee creed"): ("Okatibbee Creek", "00691590", (-88.8433, 32.1826, -88.7475, 32.6101)),
+    ("MS0020117", "sawashee creek"): ("Sowashee Creek", "00678030", (-88.7515, 32.3039, -88.6085, 32.4747)),
+}}
+# a shorthand is read as the NHD name only when the report's point lies within this distance of the named lines' bbox
+ALIAS_REACH_KM = 3.5
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
 REPEATED_POINT_STATES = {"GA", "AZ", "NN"}
 REPEATED_POINT_MIN = 5
@@ -339,6 +383,24 @@ def named(waters: list[str], state: str | None) -> list[str]:
 # words that name a structure of the sewer system, not a water, taken out of the text before WATER_WORDS is read, for
 # the listed states only (South Dakota's lagoon systems pump to an "emergency pond", a holding cell of the plant)
 STATE_NOT_A_WATER_TEXT = {"SD": re.compile(r"\bemergency ponds?\b", re.I)}
+
+
+def alias_reaches(bbox, lat, lon) -> bool:
+    """The report's point lies within ALIAS_REACH_KM of the bbox of the NHD lines an alias names."""
+    if lat is None or lon is None:
+        return False
+    import math
+    dlat = ALIAS_REACH_KM / 110.54
+    dlon = ALIAS_REACH_KM / (111.32 * math.cos(math.radians(lat)))
+    return bbox[0] - dlon <= lon <= bbox[2] + dlon and bbox[1] - dlat <= lat <= bbox[3] + dlat
+
+
+# Mississippi (module docstring): a description saying the matter was not sewage, and a water word that is a street's
+# name ('FOREST LAKE CIR'), read for MS permits only
+STATE_NOT_SEWAGE = {"MS": re.compile(r"\bthought there was sew\w*\b.*\bit was\b", re.I)}
+STREET_WATER = {"MS": re.compile(r"\b(?:river|brook|stream|creek|pond|lake|harbou?r|bay|cove)\s+(?:cir|circle|dr|drive|st|"
+                                 r"street|rd|road|ln|lane|ave|avenue|blvd|ct|court|pl|place|ter|terrace|way|pkwy|trl|"
+                                 r"trail|cv)\b\.?", re.I)}
 
 
 def no_water(w: str, state: str | None = None) -> bool:
@@ -780,6 +842,10 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
         return True, "impact to a water (" + ",".join(sorted(codes & WATER_IMPACTS)) + ")"
     texts = " ".join([i.get("sewer_overflow_bypass_impact_other_text") or "" for i in impacts]
                      + [ev.get("sewer_overflow_bypass_description_text") or ""])
+    if state in STATE_NOT_SEWAGE and STATE_NOT_SEWAGE[state].search(texts):
+        return False, "the report says the matter was not sewage"
+    if state in STREET_WATER:
+        texts = STREET_WATER[state].sub(" ", texts)
     if state in STATE_NOT_A_WATER_TEXT:
         texts = STATE_NOT_A_WATER_TEXT[state].sub(" ", texts)
     held = bool(state == "AZ" and "BYP" in types and AZ_PLANT_HELD.search(texts))
@@ -1012,6 +1078,12 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             w_aliases = {w: normalise_dc_water(w) for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)
                          and normalise_dc_water(w) != w}
             real_w = list(dict.fromkeys(normalise_dc_water(w) for w in real_w))
+        elif state in STATE_WATER_ALIASES:   # a permit's shorthand name -> the NHD name (module docstring, Mississippi)
+            def _alias(w: str, tab=STATE_WATER_ALIASES[state]) -> str:
+                hit = tab.get((permit, _alias_key(w)))
+                return hit[0] if hit and alias_reaches(hit[2], lat, lon) else w.strip()
+            w_aliases = {w: _alias(w) for w in w_names if w.strip() and not no_water(w, state) and _alias(w) != w.strip()}
+            real_w = list(dict.fromkeys(_alias(w) for w in real_w))
         dc_state, dc_basis = dc_row_state(lat, lon) if state == "DC" else (None, None)
         if not slugs and real_w:
             for w in real_w:

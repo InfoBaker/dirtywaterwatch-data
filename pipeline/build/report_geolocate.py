@@ -59,7 +59,8 @@ STATE_NAMES = {"CT": "Connecticut", "MA": "Massachusetts", "RI": "Rhode Island",
                "ME": "Maine", "NY": "New York", "NJ": "New Jersey", "PA": "Pennsylvania", "MD": "Maryland",
                "VA": "Virginia", "DC": "District of Columbia", "DE": "Delaware", "WV": "West Virginia",
                "NC": "North Carolina", "GA": "Georgia", "FL": "Florida", "MI": "Michigan", "WA": "Washington", "CA": "California", "IL": "Illinois", "AZ": "Arizona",
-               "SD": "South Dakota"}
+               "SD": "South Dakota",
+               "MS": "Mississippi"}
 PRECISION = {"address": 50, "intersection": 30, "pump_station": 100, "plant": 250, "frs_plant": 250}
 NEAR_OPERATOR_KM = 30
 TOWN_MISMATCH_NEAR_KM = 10
