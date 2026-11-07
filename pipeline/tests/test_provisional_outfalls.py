@@ -130,7 +130,7 @@ def test_an_official_outfall_of_the_same_operator_within_100_m_supersedes():
     near = 80 / 111_320
     reg = [{"npdes_permit": "CT0100013", "outfall": "002", "lat": 41.3 + near, "lon": -73.0, "outfall_kind": "plant",
             "_file": "data/outfalls-plants-us.json"},
-           {"npdes_permit": "CT0999999", "outfall": "001", "lat": 41.3, "lon": -73.0, "_file": "data/outfalls-ne.json"}]
+           {"npdes_permit": "CT0999999", "outfall": "001", "lat": 41.3, "lon": -73.0, "_file": "data/outfalls-new-england.json"}]
     a, b = place(), place(id="rep-y", lat=41.31)
     P.classify([a, b], reg, [])
     assert a["record_status"] == "superseded" and a["superseded_by"]["outfall"] == "002"
@@ -152,7 +152,7 @@ def test_an_outfall_layer_point_is_a_cso_and_a_stand_in_never_is():
 
 
 def test_a_cso_outfall_the_registry_lacks_named_in_two_overflows_is_kind_cso():
-    reg = [{"npdes_permit": "CT0100013", "outfall": "001", "lat": 41.5, "lon": -73.0, "_file": "data/outfalls-ne.json"}]
+    reg = [{"npdes_permit": "CT0100013", "outfall": "001", "lat": 41.5, "lon": -73.0, "_file": "data/outfalls-new-england.json"}]
     a = place(event_types={"cso": 2}, outfall_ids=["145"])
     b = place(id="rep-b", event_types={"cso": 2}, outfall_ids=["001"])
     c = place(id="rep-c", event_types={"cso": 1}, outfall_ids=["146"], overflow_count=1, report_count=1)

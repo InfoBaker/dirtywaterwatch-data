@@ -1,4 +1,4 @@
-"""Every registered outfall's water record: data/outfalls-ne.json and data/outfalls-mid-atlantic.json (a registry
+"""Every registered outfall's water record: data/outfalls-new-england.json and data/outfalls-mid-atlantic.json (a registry
 helper, not a feed: run by hand after ingest.waters_from_nhd; it writes no events file).
 
     python -m ingest.outfall_waters [--dry-run] [--offline] [--plants] [--state XX ...]
@@ -102,7 +102,7 @@ from build import status as S
 from common import BUILD_DIR, DATA_DIR, now_iso, read_json
 from ingest import waters_from_nhd as N
 
-FILES = ("outfalls-ne.json", "outfalls-mid-atlantic.json")
+FILES = ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
 SUMMARY = BUILD_DIR / "outfall-waters.json"
 PLANTS_FILE = "outfalls-plants-us.json"
 PLANTS_SUMMARY = BUILD_DIR / "plant-outfall-waters.json"

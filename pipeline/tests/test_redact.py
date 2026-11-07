@@ -24,13 +24,13 @@ N = R.REDACTED
 @pytest.fixture
 def data_dir(tmp_path):
     """Reference files for the lexicon: one water, one discharger, the allowlist and blocklist."""
-    (tmp_path / "waters-ne.csv").write_text("slug,name,kind,state,towns,launch_count,wikidata\n"
+    (tmp_path / "waters-new-england.csv").write_text("slug,name,kind,state,towns,launch_count,wikidata\n"
                                             "fort-point-channel-ma,Fort Point Channel,channel,MA,Boston,1,\n"
                                             "charles-river-ma,Charles River,river,MA,Boston; Cambridge; Sharon,3,\n")
     (tmp_path / "dischargers.json").write_text(json.dumps([{"name": "Town of Orange WPCA", "towns": ["Orange"],
                                                             "receiving_waters": ["Wepawaug River"]}]))
     (tmp_path / "waters-extra.json").write_text(json.dumps({"waters": [{"name": "Burr Creek", "towns": ["Bridgeport"]}]}))
-    (tmp_path / "outfalls-ne.json").write_text(json.dumps({"outfalls": [{"npdes_permit": "CT0100366",
+    (tmp_path / "outfalls-new-england.json").write_text(json.dumps({"outfalls": [{"npdes_permit": "CT0100366",
                                                                          "permittee": "GREATER NEW HAVEN WPCA",
                                                                          "outfall_name": "Huntington Road and Vernon Street"}]}))
     (tmp_path / "name-allowlist.json").write_text(json.dumps({"names": ["Mr. Rooter", "Sweet Peas"]}))

@@ -4,7 +4,7 @@ that discharge to it and the NHD identifiers EPA already gives, so each water ge
 state goes live (owner, 2026-11-04: openboatlaunch does not cover all water bodies; every water body must be
 clearly defined and mapped for connection with the appropriate operators).
 
-Reads the outfall registries (data/outfalls-ne.json, data/outfalls-mid-atlantic.json, data/outfalls-us.json,
+Reads the outfall registries (data/outfalls-new-england.json, data/outfalls-mid-atlantic.json, data/outfalls-us.json,
 data/outfalls-plants-us.json) and the water records (data/waters-*.json) and writes
 
   data/receiving-waters-national.json   per state: one row per receiving water (name as the permit gives it,
@@ -32,7 +32,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "receiving-waters-national.json"
 TALLY = ROOT / "docs" / "national-waters-tally.md"
 
-REGISTRIES = ["data/outfalls-ne.json", "data/outfalls-mid-atlantic.json", "data/outfalls-us.json",
+REGISTRIES = ["data/outfalls-new-england.json", "data/outfalls-mid-atlantic.json", "data/outfalls-us.json",
               "data/outfalls-plants-us.json"]
 NOT_WATERS = re.compile(r"^(none|n/?a|unknown|ground ?water|land|ground|soil|dry|evaporation|percolation|storm ?drain|"
                         r"storm sewer|municipal sewer|sanitary sewer|pond \(evaporation\)|spray field|"

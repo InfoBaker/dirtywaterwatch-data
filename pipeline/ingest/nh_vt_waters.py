@@ -1,7 +1,7 @@
 """Water-name matching for the NH and VT ingesters (shared helper, not a feed).
 
 Matches free text typed by an operator or a state layer ("Stevens brook lake champlain",
-"Otter Creek below the falls in Vergennes") to openboatlaunch water slugs in data/waters-ne.csv,
+"Otter Creek below the falls in Vergennes") to openboatlaunch water slugs in data/waters-new-england.csv,
 within one state. Rules, chosen to stay conservative (a wrong slug colours the wrong water red):
 
 - Whole-word, accent- and punctuation-insensitive match of a water's name; longest names first,
@@ -91,7 +91,7 @@ def facility_town(name: str | None) -> str:
 def _index(state: str):
     st = state.upper()
     by_name: dict[str, list[tuple[str, set[str]]]] = {}
-    with open(DATA_DIR / "waters-ne.csv", newline="") as f:
+    with open(DATA_DIR / "waters-new-england.csv", newline="") as f:
         for row in csv.DictReader(f):
             if row["state"] != st:
                 continue
