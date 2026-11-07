@@ -105,7 +105,7 @@ def test_the_receiving_water_text_is_kept_as_reported():
 
 
 def test_south_dakota_wordings_that_name_no_water():
-    for t in ("Does not apply- Do not discharge to any waters", "NA, all water was filtered before discharged. ",
+    for t in ("Does not apply- Do not discharge to any waters", "NA, the flow stayed in the plant",
               "Sanitation system of CIty of Pierre", "City of Pierre Wastewater Facility", "Apple Springs WWTP",
               "Box Elder sewer system/POTW", "Cell # 3", "Cell 4 at the Lagoons", "Excavated hole.  No waterbody. ",
               "water is discharged out into a field", "Ditch by Lake Mitchell.  Water never entered lake", "none", "NA"):
@@ -287,3 +287,13 @@ def test_a_far_end_on_an_ordinary_report_is_still_taken_for_a_typo():
     assert "more than" in status.end_not_credible(typo, datetime(2026, 11, 7, 12, tzinfo=UTC))
     labelled_elsewhere = {**typo, "raw": {**typo["raw"], "end_is_planned": "yes"}}   # only a True label counts
     assert status.end_not_credible(labelled_elsewhere, datetime(2026, 11, 7, 12, tzinfo=UTC))
+
+
+def test_na_with_the_water_discharged_is_no_name_and_the_bypass_is_kept():
+    """Review 2026-11-07 P2-4: SD0028615's bypass, 'NA, all water was filtered before discharged.'"""
+    w = "NA, all water was filtered before discharged. "
+    assert not E.no_water(w, "SD") and E.named([w], "SD") == [] and E.named([w], "IL") == [w]
+    ok, why = E.reached_water({}, ["BYP"], [w], [], "SD")
+    assert ok and why.startswith("bypass")
+    assert not E.reached_water({}, ["BYP"], ["Does not apply- Do not discharge to any waters"], [], "SD")[0]
+    assert not E.reached_water({}, ["SSO"], [w], [], "SD")[0]                  # an SSO naming none still needs evidence

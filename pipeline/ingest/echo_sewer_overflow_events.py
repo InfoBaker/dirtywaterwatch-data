@@ -162,7 +162,8 @@ South Dakota (permits SD...; research/sd/report.md section 2.2; not live until d
     two others are the Oahe Dam's (SD0026794), on the river channel that is the boundary, both dropped (one lies in
     Stanley County's Mountain part, read here as Central). Fort Pierre's four rows are Central in the DOT layer too.
   - Receiving-water texts that name none (STATE_NO_WATER["SD"]): 'Does not apply- Do not discharge to any waters',
-    'NA, <why>', the flow sent to the city's sewer system or plant ('Sanitation system of City of ...', '... Wastewater
+    'NA, <why>' (unless the why says the water was discharged: then STATE_NO_NAME reads it as no name given, so
+    the bypass is kept by the bypass rule), the flow sent to the city's sewer system or plant ('Sanitation system of City of ...', '... Wastewater
     Facility', '... WWTP', '... sewer system/POTW'), a lagoon cell ('Cell # 3', 'Cell 4 at the Lagoons'), 'Excavated
     hole. No waterbody.', 'water is discharged out into a field', and 'Ditch by Lake ... Water never entered lake'.
     'Spearfish Creek / Rubble Site Cell' and 'Unnamed' stay waters.
@@ -246,11 +247,23 @@ STATE_NO_WATER = {"GA": re.compile(r"^\s*((?:n/?a\s+)?dry\s*land(?:\s+spill)?|n[
                                    r"(?:[\w.' -]+\s)?lagoons?)\s*\.?\s*$", re.I),
                   # South Dakota: "does not apply", "NA, <why>", the flow sent to the sewer system or a plant, a lagoon
                   # cell, an excavation, a field, and a report that says the water was never reached
-                  "SD": re.compile(r"^\s*(does not apply\b.*|n/?a\s*[,;:-].*|.*\bsewer system\b.*|"
+                  "SD": re.compile(r"^\s*(does not apply\b.*|n/?a\s*[,;:-](?!.*\bdischarged?\b).*|.*\bsewer system\b.*|"
                                    r"sanitation system\b.*|.*\bwastewater (?:treatment )?(?:facility|plant)|.*\bwwtp|"
                                    r"(?:[\w.' -]+\s)?cell\s*#?\s*\d+\b.*|excavated hole\b.*|.*\bno ?water ?body\b.*|"
                                    r"water (?:is|was) discharged (?:out )?(?:into|onto) a field|.*\bnever (?:entered|reached)\b.*)"
                                    r"\s*\.?\s*$", re.I)}
+# receiving-water texts that name no water but do not deny one either: read as no name given, so the other rules
+# decide (South Dakota: "NA, all water was filtered before discharged." on a bypass that was discharged; review
+# 2026-11-07 P2-4)
+STATE_NO_NAME = {"SD": re.compile(r"^\s*n/?a\s*[,;:-].*\bdischarged?\b", re.I)}
+
+
+def named(waters: list[str], state: str | None) -> list[str]:
+    """The receiving-water texts minus those of STATE_NO_NAME (no name given, no denial)."""
+    pat = STATE_NO_NAME.get(state or "")
+    return [w for w in waters if not (pat and pat.match(w))]
+
+
 # words that name a structure of the sewer system, not a water, taken out of the text before WATER_WORDS is read, for
 # the listed states only (South Dakota's lagoon systems pump to an "emergency pond", a holding cell of the plant)
 STATE_NOT_A_WATER_TEXT = {"SD": re.compile(r"\bemergency ponds?\b", re.I)}
@@ -587,6 +600,7 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
     struct = ev.get("sewer_overflow_structure_type_code") or ""
     other = ev.get("sewer_overflow_structure_type_code_other_text") or ""
     codes = {i["sewer_overflow_bypass_impact_code"] for i in impacts}
+    waters = named(waters, state)
     real_waters = [w for w in waters if w.strip() and not no_water(w, state)]
     if struct == "BAS" or "SBB" in codes or (struct == "OTH" and BUILDING_TEXT.search(other)):
         if not real_waters:
@@ -789,7 +803,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         reg = W.outfalls.get((permit, outfall.zfill(3))) if outfall and etype == "cso" else None
         if reg and reg.get("water_slug"):
             slugs, how = [reg["water_slug"]], "outfall_registry"
-        real_w = [w.strip() for w in w_names if w.strip() and not no_water(w, state)]
+        real_w = [w.strip() for w in named(w_names, state) if w.strip() and not no_water(w, state)]
         w_aliases = {}
         if state == "DC":   # free text -> the NHD name; what was typed stays in raw.receiving_waters
             w_aliases = {w: normalise_dc_water(w) for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)
