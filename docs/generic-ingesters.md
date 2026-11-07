@@ -83,6 +83,7 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
 | `safe_fields` | every field the block may read or keep |
 | `reviewed_fields` | `{field: reason}` for a safe field whose name looks personal but is not |
 | `free_text` | the safe fields the scrubbers run on |
+| `free_text_scrub` | `strict`: a filer's free text that can carry residents' names and home addresses also loses owners' and residents' names and every house number (Michigan's scrub, `mi_egle_mienviro.free_text`); absent: the standard scrub |
 | `filter` | `[{field, regex, exclude}]`: rows kept (all rules must hold) |
 | `bounds` | `[lon_min, lat_min, lon_max, lat_max]`: a point outside is not used (`raw._coords_rejected`) |
 | `record` | the field map, one entry per event field (below) |
@@ -194,7 +195,10 @@ fetch:
     credit: "Maryland Department of the Environment, Reported Sewer Overflows (New for 2023), opendata.maryland.gov"
 ```
 
-Other keys: `where` (a SoQL filter), `order` (`:id`), `page_size` (1000), `max_rows` (200,000).
+Other keys: `where` (a SoQL filter), `order` (`:id`), `page_size` (1000), `max_rows` (200,000), `if_changed: true`
+(with `metadata: true`: the table's metadata is asked first and the rows are read only when its `rowsUpdatedAt` differs
+from the last good run's `meta.table_version`; an unchanged table keeps the last good run's records, their own fetch
+times kept, with `meta.checked_at` the time it was asked: for a large table refreshed in batches, such as TCEQ's).
 
 ## ArcGIS REST
 

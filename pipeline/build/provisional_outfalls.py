@@ -467,6 +467,13 @@ def outfall_ids(ev: dict) -> list[str]:
     return [str(i).strip() for i in ids if str(i).strip()]
 
 
+def named_water_only(ev: dict) -> bool:
+    """A report whose source rule places it only by the water it names (raw._placement "named_water_only": Texas's
+    TCEQ table, whose rows carry a county and free text but no point): never geolocated from its text and never stood
+    in by the operator's plant point; a report naming no water stays a report with no place."""
+    return (ev.get("raw") or {}).get("_placement") == "named_water_only"
+
+
 def build_places(events: list[dict], outlines: dict | None = None, key: dict | None = None,
                  by_id: dict | None = None) -> tuple[list[dict], Counter, list[dict]]:
     """(places, drops, unlocated): one place per operator and 50 m, from the reports with a usable point; drops
@@ -491,6 +498,9 @@ def build_places(events: list[dict], outlines: dict | None = None, key: dict | N
             continue
         state = S.event_state(ev) or (by_id.get(op) or {}).get("state") or permit_state(ev.get("npdes_permit") or op)
         if ev.get("lat") is None or ev.get("lon") is None:
+            if named_water_only(ev):
+                drops["placed by its named water only (the source's placement rule): not geolocated"] += 1
+                continue
             unlocated.append({**ev, "_op": op, "_state": state})
             continue
         prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)

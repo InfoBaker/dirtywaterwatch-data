@@ -1,0 +1,64 @@
+id: "tx-glo-beach-watch"
+name: "Texas Beach Watch (Texas General Land Office): coastal station layer (ArcGIS BW2025_Summary)"
+url: "https://gisweb.glo.texas.gov/arcgis/rest/services/BW/BW2025_Summary/MapServer/0"
+homepage: "https://www.texasbeachwatch.com/"
+kind: "api"
+level: "state"
+# Read through the generic ArcGIS reader with the hook ingest/tx_transforms.py tx_beachwatch_record: source id
+#   tx-glo-beach-watch, data/build/events/tx-glo-beach-watch.json. The beach-advisory category, never sewage.
+# Real fetch 2026-11-07: 174 stations in ten coastal counties (Galveston 55, Nueces 44, Cameron 27, Brazoria 16,
+#   Jefferson 11, Matagorda 8, Aransas 4, Kleberg 4, San Patricio 3, Harris 2); each row is the station's latest
+#   enterococcus sample (dates 2026-10-23 to 2026-10-28 that day) with the program's level: Low 162, Medium 12, High 0.
+#   The program's legend (texasbeachwatch.com, read 2026-11-07): Low under 35 MPN/100 ml, Medium 35 to 104, High above
+#   104, "An advisory for this beach is recommended". The 2023-2025 summary columns (samples, geometric mean,
+#   advisories, percent of days under advisory) are not read.
+# A High row is the program's advisory (advisory_active from the sample date while the layer shows it:
+#   history.confirm_while_listed); a Medium row is the program's label only (the site's caution from the sample date);
+#   a Low row is not a record (filter). Only the latest sample per station is published: an advisory's end is the first
+#   fetch at which the station shows a newer sample. No water name is given: a station is placed by its own point
+#   (the Gulf beaches, Galveston Bay, Corpus Christi Bay, the Laguna Madre and others).
+cadence: "weekly in the swimming season (May to September), every other week otherwise (program description)"
+license: "No licence statement on the service"
+attribution: "Texas General Land Office, Texas Beach Watch"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["TX"]
+registry_ids: ["tx-glo-beach-watch"]
+access: ["arcgis"]
+access_detail: "https://gisweb.glo.texas.gov/arcgis/rest/services/BW/BW2025_Summary/MapServer/0/query?where=1%3D1&outFields=*&f=json (public; 174 rows on 2026-11-07). Behind www.texasbeachwatch.com; email alerts per beach (alertSignup.cfm)."
+machine_readable: true
+legal_basis: "BEACH Act of 2000 (33 U.S.C. 1346) grant program; Texas Natural Resources Code 61.0115"
+checked: "2026-11-07"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://gisweb.glo.texas.gov/arcgis/rest/services/BW/BW2025_Summary/MapServer/0"
+  order_by: "OBJECTID"
+  time_zone: "America/Chicago"
+  bounds: [-97.9, 25.8, -93.5, 30.2]
+  min_rows_ratio: 0.5
+  safe_fields: [OBJECTID, StationID, Lat_DD, Long_DD, Name, chrCountyName, Advisory, cfu, Measurement, Date, stationname]
+  reviewed_fields:
+    Name: "the beach, park or its managing government ('Rockport Beach Park', 'City of South Padre Island'), never a person"
+    stationname: "the station's beach name ('So. Padre Island - Fantasy')"
+  filter: [{field: Advisory, regex: "^\\s*(high|medium)\\s*$"}]
+  record:
+    source_record_id: {template: "{StationID|upper}-{@started_at|compact}"}
+    started_at: {field: Date, parse: date, formats: ["%m/%d/%Y"]}
+    event_type: {const: beach_advisory}
+    lat: {field: Lat_DD, parse: number}
+    lon: {field: Long_DD, parse: number}
+    outfall_name: stationname
+    authority: {const: "Texas General Land Office (Texas Beach Watch)"}
+    source_url: {const: "https://www.texasbeachwatch.com/"}
+  transform: "ingest.tx_transforms.tx_beachwatch_record"
+  dedupe: {repeats: first}
+  history:
+    keep_missing: true
+    confirm_while_listed: true
+  meta:
+    credit: "Texas General Land Office, Texas Beach Watch"
+    license: "No licence statement on the service"
+    caveat: "Each station's latest sample only. High is the program's level at which an advisory is recommended; the local government posts the advisory. Medium is the program's label, not an advisory, and is shown with this site's caution."
+    time_basis: "Sample dates (no time of day)."

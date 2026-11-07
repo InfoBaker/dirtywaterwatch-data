@@ -1,0 +1,86 @@
+id: "tx-tceq-sso-opendata"
+name: "TCEQ Sanitary Sewer Overflows (SSO), Texas Open Data Portal (Socrata 8kc5-95uk)"
+url: "https://data.texas.gov/dataset/8kc5-95uk"
+homepage: "https://www.tceq.texas.gov/compliance/investigation/ud-sso"
+kind: "api"
+level: "state"
+# Read through the generic Socrata reader (the fetch block below; ingest/tx_transforms.py tx_tceq_record): source id
+#   tx-tceq-sso-opendata, data/build/events/tx-tceq-sso-opendata.json. Sewage (sso).
+# Real fetch 2026-11-07 (the safe fields of every row, 12 pages of 5,000): 56,545 rows, 56,456 incident numbers (89
+#   numbers on two rows); start dates 2010-09-02 to 2026-08-29 (2010 142, 2011 521, 2012 794, 2013 700, 2014 737,
+#   2015 2,055, 2016 5,259, 2017 5,645, 2018 5,964, 2019 4,776, 2020 4,790, 2021 4,985, 2022 3,805, 2023 3,990,
+#   2024 5,013, 2025 4,184, 2026 to August 3,185); status_code CLOSED 56,289, REFERRED 203, OPEN 53; material Sewage
+#   55,478, municipal wastewater 748; volume in gallons on 55,236 rows; 216 counties (Harris 17,662, Dallas 3,921, Bexar
+#   3,257, Tarrant 3,255, Travis 3,034; El Paso 180, Hudspeth none); 2,117 regulated entities. Every date is midnight:
+#   dates only. 9,594 rows give no end date.
+# Receiving water: 35,373 rows give none in TCEQ's words (NOT PROVIDED 23,320; NO WATER BODY PROVIDED 5,287; N/A 4,026;
+#   NONE 1,148; UNKNOWN 2,363 and variants); others give a TCEQ segment number ("613", "1007 OF THE SAN JACINTO RIVER
+#   BASIN", "SEGMENT NO. 2501BC"), a statement ("CONTAINED ON SITE", "SPILLED INTO STREET", "GROUND", "DITCH") or a
+#   water's name (SAN ANTONIO RIVER 567, SALADO CREEK 309, CEDAR BAYOU 267, LEON CREEK 240, BLACK DUCK BAY 142 ...);
+#   3,352 distinct texts. river_segment is not 0 on 1,874 rows.
+# Lag: TCEQ receives a report a median of 2 days after the spill began (received_date - start_date over every row). The
+#   table gives no publication date per row: it is refreshed in batches (metadata "Update Frequency: Semiannually";
+#   rows last updated 2026-09-24, holding reports received to 2026-08-31), so a report reaches the public at least 24
+#   days after TCEQ receives it and months later early in a refresh cycle; on 2026-11-07 the newest report had begun 70
+#   days before. if_changed asks the table's metadata each run and reads the rows only when rowsUpdatedAt moves.
+# Permits: list_of_permits gives the federal id on 15,447 rows; the WQ-to-federal and entity-to-federal crosswalk
+#   (data/reference/tx-tceq-permits.json, scripts/tx_permit_crosswalk.py) adds more.
+cadence: "refreshed in batches (metadata: semiannually; rows last updated 2026-09-24)"
+license: "No licence stated in the dataset metadata (licenseId null); data.texas.gov site terms apply"
+attribution: "Texas Commission on Environmental Quality, Office of Compliance and Enforcement"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["TX"]
+registry_ids: ["tx-tceq-sso-opendata"]
+access: ["api", "csv"]
+access_detail: "Socrata SODA https://data.texas.gov/resource/8kc5-95uk.json ($select of the safe fields, $order=:id, pages of 5,000) and metadata https://data.texas.gov/api/views/8kc5-95uk.json (rowsUpdatedAt). 56,545 rows on 2026-11-07, about 44 MB as selected."
+machine_readable: true
+legal_basis: "30 TAC 305.125(9); 30 TAC 319.301-319.303"
+checked: "2026-11-07"
+fetch:
+  platform: "socrata"
+  live: true
+  domain: "https://data.texas.gov"
+  dataset: "8kc5-95uk"
+  format: "json"
+  page_size: 5000
+  metadata: true            # rowsUpdatedAt -> source_updated_at; the table gives no per-row edit or publication time
+  if_changed: true          # a 44 MB table refreshed in batches: read only when rowsUpdatedAt moves
+  time_zone: "America/Chicago"   # dates only; each record names its county's zone (tx_tceq_record)
+  # Not requested: customer_number (TCEQ's id of the customer, which can be a private owner), incident_action and
+  #   incident_comment (free text by the reporter, on 8 and 4 percent of rows, not needed for the record).
+  safe_fields: [incident_number, regulated_entity_number, regulated_entity_name, material_type, amount, amount_unit,
+                start_date, end_date, received_date, status_code, tceq_region, list_of_permits, source, cause,
+                receiving_water_body, river_segment, county, incident_description]
+  reviewed_fields:
+    regulated_entity_name: "the regulated entity TCEQ files the report under: a plant, a collection system or a district ('HARRIS COUNTY MUD 26'); a name that is only a person's is removed (common.scrub_discharger)"
+  free_text: [source, receiving_water_body, incident_description]
+  free_text_scrub: "strict"
+  record:
+    source_record_id: incident_number
+    started_at: {field: start_date, parse: date}
+    ended_at: {field: end_date, parse: date}
+    reported_at: {field: received_date, parse: date}
+    event_type: {const: sso}
+    discharger_name: regulated_entity_name
+    outfall_name: source
+    material: material_type
+    waterbody_text: receiving_water_body
+    volume: {field: amount, unit: gallons, text: "{amount|num} {amount_unit|lower|default:(no unit given)}"}
+    authority: {const: "Texas Commission on Environmental Quality (Sanitary Sewer Overflows open data)"}
+    source_url: {template: "https://data.texas.gov/resource/8kc5-95uk.json?incident_number={incident_number}"}
+  transform: "ingest.tx_transforms.tx_tceq_record"
+  raw_notes:
+    _cause: {field: cause}
+    _tceq_region: {field: tceq_region}
+  dedupe: {repeats: suffix, order: ["-volume_gal"]}
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Texas Commission on Environmental Quality, Sanitary Sewer Overflows (SSO), data.texas.gov"
+    license: "No licence stated; data.texas.gov site terms"
+    caveat: "Reported to TCEQ's regional offices by the permittee; the table is published in batches months after the reports, gives dates without times and no locations, gives a receiving water on about one report in four, and a water's own name on about one in eight."
+    time_basis: "Dates only (start, end and the date TCEQ received the report); no time of day is given."
+    placement_rule: "TCEQ's table gives no coordinates: a report is placed only on the water it names; a report naming none is listed with its county and is never placed at the plant or geolocated from its text (raw._placement named_water_only)."

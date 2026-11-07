@@ -584,10 +584,20 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
             continue
         if f in row or v is not None:
             out[f] = v
+    strict = block.get("free_text_scrub") == "strict"
     for f in block.get("free_text") or ():
         if isinstance(out.get(f), str):
-            out[f] = scrub(out[f])
+            out[f] = scrub_strict(out[f]) if strict else scrub(out[f])
     return out, dropped
+
+
+def scrub_strict(text):
+    """free_text_scrub: strict (a filer's free text that can carry residents' names and home addresses): scrub, then
+    owners' and residents' names and every house number cut, as Michigan's filer text is (mi_egle_mienviro.free_text)."""
+    if not isinstance(text, str):
+        return text
+    from ingest import mi_egle_mienviro as MI          # here: the module imports this one's neighbours
+    return scrub_people(MI.free_text(text))
 
 
 # ---------------------------------------------------------------- validation
@@ -768,6 +778,8 @@ def validate(block: dict, source_id: str = "") -> list[str]:
     for f in block.get("free_text") or ():
         if f not in safe:
             errs.append(f"free_text field {f!r} is not a safe field")
+    if block.get("free_text_scrub") not in (None, "strict"):
+        errs.append("free_text_scrub is strict (or absent: the standard scrub)")
     if block.get("time_zone"):
         try:
             ZoneInfo(block["time_zone"])

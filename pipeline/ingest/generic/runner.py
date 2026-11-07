@@ -44,9 +44,9 @@ SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
                "record", "transform", "waters", "dedupe", "post", "history", "meta", "raw_notes", "decoded_times",
                "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
-               "short_runs_to_accept"}
+               "short_runs_to_accept", "free_text_scrub"}
 PLATFORM_KEYS = {
-    "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows"},
+    "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows", "if_changed"},
     "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata"},
     "csv": {"url", "params", "csv"}, "json": {"url", "params", "json"}, "rss": {"url", "params"},
     "atom": {"url", "params"},
@@ -187,6 +187,11 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
             errs.append("arcgis out_fields is a list of safe fields (never *)")
     if inner == "socrata" and block.get("format") not in (None, "json", "csv"):
         errs.append("socrata format is json or csv")
+    if block.get("if_changed") is not None:
+        if not isinstance(block["if_changed"], bool):
+            errs.append("if_changed is true or false")
+        elif block["if_changed"] and not block.get("metadata"):
+            errs.append("if_changed needs metadata: true (the table's version is its metadata's rowsUpdatedAt)")
     k = block.get("short_runs_to_accept")
     if k is not None and (isinstance(k, bool) or not isinstance(k, int) or k < 1):
         errs.append("short_runs_to_accept is a whole number of runs, 1 or more")
@@ -498,6 +503,27 @@ def fetch_rows(source_id: str, block: dict, file: str | None, meta_file: str | N
     return mod.parse(block, got.content), got.meta, raw_path
 
 
+def keep_unchanged(source_id: str, block: dict, path: Path, checked_at: str) -> str | None:
+    """if_changed (socrata.py): when the table's version is the last good run's, the last good run's records are kept
+    (their own fetch times stay: they were read then) with meta.checked_at now, and a line saying so is returned; None
+    when the table must be read (a new version, no earlier good run, or the version could not be asked: then the full
+    fetch runs and fails or succeeds on its own)."""
+    prev = read_json(path, {}) or {}
+    meta = prev.get("meta") or {}
+    if not prev.get("ok") or not prev.get("records") or not meta.get("table_version"):
+        return None
+    mod = platform(block["platform"])
+    try:
+        now = mod.current_version(block, session(block))
+    except Exception:  # noqa: BLE001 - the full fetch says what is wrong
+        return None
+    if now is None or now != meta["table_version"]:
+        return None
+    write_events(source_id, prev["records"], ok=True, error=None, path=path,
+                 meta={**meta, "checked_at": checked_at, "unchanged_runs": int(meta.get("unchanged_runs") or 0) + 1})
+    return f"table unchanged (version {now}); {len(prev['records'])} records kept from the last read"
+
+
 def public_meta(block_meta: dict) -> dict:
     return {META_ALIASES.get(k, k): v for k, v in (block_meta or {}).items()}
 
@@ -532,6 +558,11 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
     if errs:
         return fail("the fetch block cannot run: " + "; ".join(errs), 2)
     fetched_at = now_iso()
+    if block.get("if_changed") and not file:
+        kept = keep_unchanged(source_id, block, path, fetched_at)
+        if kept is not None:
+            print(f"{source_id}: {kept}")
+            return 0
     try:
         rows, pmeta, raw_path = fetch_rows(source_id, block, file, meta_file)
     except Exception as e:  # noqa: BLE001
@@ -578,6 +609,10 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         write_json(extra["state_path"], extra["state"])
     meta = {**stats, **public_meta(block.get("meta") or {}), "platform": block["platform"], "raw_path": raw_path,
             "generic": True, "registry_ids": row.get("registry_ids") or [], "timezone": block.get("time_zone")}
+    version = getattr(platform(block["platform"]), "table_version", None)
+    if block.get("if_changed") and version is not None:
+        meta["table_version"] = version(block, pmeta)
+        meta["checked_at"] = fetched_at
     path_notes_to_meta(records, meta)
     p = write_events(source_id, records, ok=True, error=None, meta=meta, path=path)
     print(f"{source_id}: {stats.get('rows')} rows -> {stats.get('records_written')} records; types {stats.get('by_type')}; "
