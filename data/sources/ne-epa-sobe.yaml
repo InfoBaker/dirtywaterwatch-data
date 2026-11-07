@@ -1,0 +1,41 @@
+id: "ne-epa-sobe"
+name: "EPA NPDES sewer overflow and bypass event reports (eRule Phase 2, \"SOBE\"), Nebraska permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Nebraska
+#   permits added 2026-11-07: times written in the zone of the event's own point (Mountain in the eighteen counties and
+#   the western part of Cherry County that 49 CFR 71.7(c) puts west of the boundary,
+#   data/reference/ne-mountain-time-counties.json; Central elsewhere), free text scrubbed (house addresses of backups).
+# Notes (research/ne, status used, verified fetched, checked 2026-11-07): The only dated, statewide,
+#   machine-readable overflow feed for Nebraska; the state has no public-notice law for sewage, and its permittees
+#   file their overflow and bypass reports through EPA's NeT-SewerOverflow (DWEE publication 25-032). Read from the
+#   all-versions ZIP (current version of each report) on 2026-11-07, the current-version ZIP holding no tables since
+#   2026-11-05.
+# Counts (2026-11-04 extract): 162 current NE rows from 21 permits; types CSO 89, SSO 64, BYP 9; structures: basement
+#   backup 79, manhole 39, broken pipe 21, pumping station 5, CSO outfall 3, other 2, none given 13; report groups G9A
+#   158, G9B (extreme events, report period only) 4. Every row has a point, 158 a volume, 49 a receiving-water row.
+#   Starts by year: 2022 1, 2023 17, 2024 13, 2025 59, 2026 to 6 Oct 72. Top permits: Omaha Papillion Creek WRRF
+#   (NE0112810) 71, all typed CSO but none at a CSO outfall; Grand Island (NE0043702) 23, 21 of them basement backups;
+#   Seward (NE0023876) 13; Omaha Missouri River WRRF (NE0036358) 10; Falls City (NE0021148) 9; Omaha's CSO permit
+#   (NE0133680) 8; Lincoln Northeast (NE0112488) 5. No point is shared by more than four reports of one permit.
+# Kept and dropped: 51 kept from 13 permits (49 naming a receiving water, 1 aquatic-habitat impact, 1 CSO at a CSO
+#   outfall); 111 dropped: 83 building backups, 28 SSOs and manhole CSOs naming no water and no water impact. Kept by
+#   start year: 2023 3, 2024 3, 2025 14, 2026 31; Omaha's Papillion Creek permit 27 of them.
+# Time zone: all 162 points lie in the Central part of the state (Omaha, Lincoln, Grand Island, Seward, Falls City,
+#   Nebraska City, North Platte, McCook and the other reporting towns); none in the Mountain-time counties. A single
+#   Central zone would mislabel none today; the point rule reads a panhandle report in Mountain time when one is filed.
+# Cannot fill: published_at (no posting time; the extract date stands in); advice_text; valid_until.
+cadence: "EPA refreshes daily. Nebraska rows: 162 events from 21 permits; report received a median 22.5 days after the start (10% within a day, 10% 83 days or more after; kept events a median 23 days). Newest receipt on the 2026-11-04 extract: 2026-10-16; newest start 2026-10-06 15:15 (Grand Island, a basement backup)."
+license: "EPA public data; no licence restriction stated on the ECHO download page."
+attribution: "U.S. EPA (ECHO), data entered by Nebraska permittees in NeT-SewerOverflow"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "cso"]
+states: ["NE"]
+access: ["csv"]
+access_detail: "Daily ZIP of CSV tables: sewer_overflow_bypass_report_events.csv joined on sewer_overflow_bypass_event_key to _types, _receiving_waters, _impacts, _causes, _corrective_actions; collection_system_permits.csv names the system. When the current-version ZIP fails, the all-versions ZIP (all_sewer_overflow_and_collection_systems_tables.zip) is read for the current version of each report. Filtered on permit_identifier LIKE NE%."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) and (l)(7) (24-hour and 5-day reports, as carried in Nebraska NPDES permits' standard conditions); 40 CFR part 127 (eRule Phase 2, from 2025-12-21)"
+checked: "2026-11-07"
