@@ -2607,8 +2607,9 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
 
 def names_its_water(ev: dict) -> bool:
     """An authority's advisory for the water it names (MDEQ's water contact advisories: raw.extent "named_water"):
-    it colours the water it is placed on, a river included (as NYC DEP's waterbody advisories colour theirs), and on
-    a water that is not filled it also keeps its marker, so the map still shows it. Other beach, rain and HAB
+    it colours the water it is placed on, and on a water that is not filled it also keeps its marker, so the map still
+    shows it. On a river, stream or canal it colours only the stretch it names (has_stretch); with no stretch it is a
+    point there, as every advisory is (advisory_on_river: reaches, not whole rivers, 2026-11-07). Other beach, rain and HAB
     advisories speak for a beach or a station, not the whole water (colours_whole_water)."""
     return (ev.get("raw") or {}).get("advisory_extent") == "named_water"
 
@@ -2645,6 +2646,25 @@ def stretch_fallback(r: dict | None) -> str:
         return "the stretch the advisory names is not traced yet; the advisory is shown on its whole water"
     why = r.get("error") or r.get("cut_reason") or "no stretch could be traced"
     return f"the stretch the advisory names could not be traced ({why}); the advisory is shown on its whole water"
+
+
+def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
+    """Reaches, not whole rivers (owner's rule; 2026-11-07, New Mexico final audit): an algal-bloom, beach, rain or
+    shellfish advisory, or any other record under an authority's advisory that is not a discharge, placed on a river,
+    stream or canal record (RIVER_KINDS) with no stretch of its own is shown as a point. The record is listed on the
+    water's page and its marker carries the advisory's colour; the river record is not coloured. Keyed on the
+    water's kind, never on the state. A lake, pond or reservoir keeps colours_whole_water; an advisory with a stretch
+    keeps the advisory-stretch path (its traced stretch, else the stretch_unmodeled fallback)."""
+    if stretched or w.get("kind") not in RIVER_KINDS:
+        return False
+    if ev.get("event_type") in DISCHARGE_TYPES:
+        return False
+    return ev.get("event_type") in ADVISORY_TYPES or str(ev.get("status") or "") in ("advisory_active",
+                                                                                    "advisory_lifted")
+
+
+RIVER_POINT_WHY = ("the advisory is on a river or stream and names no stretch to draw: it is shown at its point, and "
+                   "the river is not coloured whole")
 
 
 def colours_whole_water(w: dict) -> bool:
@@ -3165,7 +3185,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         for s in pl["unknown_slugs"]:
             unknown_slugs[s] += 1
         eff = effective.get(eid, ev)
-        point_on = []
+        point_on, river_point = [], []
         live = eid not in superseded and eid not in duplicates
         is_discharge = ev.get("event_type") in DISCHARGE_TYPES or (
             ev.get("event_type") == "unknown" and ev.get("status") == "ongoing")
@@ -3196,10 +3216,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             per_water_events[slug].append(eid)
             if not live:
                 continue
-            if ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug]):
+            on_river = advisory_on_river(ev, waters[slug], stretched)
+            if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
                 point_on.append(slug)
-                if not names_its_water(ev):
-                    continue                   # a beach's or station's advisory: its marker only
+                if on_river:
+                    river_point.append(slug)
+                if on_river or not names_its_water(ev):
+                    continue                   # a station's advisory, or any advisory on a river: its marker only
             if slug in carried:
                 continue                       # a reach carries it (below)
             tag = None
@@ -3256,7 +3279,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if okey not in latest_month or (mark["month"], eid) > (latest_month[okey][2]["month"], latest_month[okey][0]["event_id"]):
                 latest_month[okey] = (ev, list(pl["water_slugs"]), mark)
         # beach, rain and HAB advisories that colour no water: a marker of their own
-        if (ev.get("event_type") in POINT_ADVISORY_TYPES and eid not in superseded and eid not in duplicates
+        if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
                 and ev.get("lat") is not None and ev.get("lon") is not None
                 and (point_on or not pl["water_slugs"])):
             ivs = event_intervals(eff, event_state(ev), now, rules=rules)
@@ -3278,7 +3301,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "why": ("the advisory covers the stretch it names, drawn from end to end; the marker "
                                        "is its point" if point_on and stretched and not placements[eid].get(
                                            "stretch_fallback") else
-                                       "the advisory covers the water it names; the marker is its point"
+                                       RIVER_POINT_WHY if river_point and (names_its_water(ev) or
+                                                                         ev.get("event_type") not in POINT_ADVISORY_TYPES)
+                                       else "the advisory covers the water it names; the marker is its point"
                                        if point_on and names_its_water(ev) else
                                        "water is not a lake, pond or reservoir under 50 km²" if point_on
                                        else "not placed on a water")})

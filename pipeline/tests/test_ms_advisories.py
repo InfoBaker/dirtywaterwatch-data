@@ -194,10 +194,16 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     assert "not traced yet" in pr["reasons"][0]["stretch_fallback"]
     # Trahon Creek is tied by its name once its record exists (the report-names pass builds it)
     assert st["placements"][t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
-    assert st["waters"]["trahon-creek-ms"]["status"] == "red"
+    # reaches, not whole rivers (2026-11-07): Trahon Creek's advisory names no stretch with both ends, so it is listed
+    # on the creek's page and shown at its point in the authority's colour; the creek record is not coloured
+    tc = st["waters"]["trahon-creek-ms"]
+    assert tc["status"] == "grey" and t["event_id"] in tc["events"]
     # rivers are drawn by reaches and markers, never filled: the markers stay, so the map still shows both
     pts = {a["event_id"]: a for a in st["advisory_points"]}
     assert pts[p["event_id"]]["status"] == "red" and pts[p["event_id"]]["water_slugs"] == ["pearl-river-ms"]
+    assert pts[t["event_id"]]["status"] == "red" and pts[t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
+    from build.status import RIVER_POINT_WHY
+    assert pts[t["event_id"]]["why"] == RIVER_POINT_WHY
     # a lift release ends it: the river reads grey after the lift day
     lift = (b"<item><title>MDEQ Lifts Water Contact Advisory for Pearl River</title>"
             b"<link>https://www.mdeq.ms.gov/lift-test/</link><pubDate>Tue, 10 Nov 2026 15:00:00 +0000</pubDate></item>")
@@ -205,7 +211,8 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     assert next(r for r in lifted if r["event_id"] == p["event_id"])["status"] == "advisory_lifted"
     st = _status(lifted, "2026-11-12T13:00:00Z", monkeypatch)
     assert st["waters"]["pearl-river-ms"]["status"] == "grey"
-    assert st["waters"]["trahon-creek-ms"]["status"] == "red"                  # its own advisory still stands
+    assert st["waters"]["trahon-creek-ms"]["status"] == "grey"                 # a point, never the whole creek
+    assert {a["event_id"]: a for a in st["advisory_points"]}[t["event_id"]]["status"] == "red"   # still stands
 
 
 def test_a_beach_advisory_on_a_river_still_colours_only_its_point(monkeypatch):
