@@ -115,6 +115,8 @@ def _resolver(live, missouri_near_yankton=True):
     if missouri_near_yankton:
         waters["missouri-river-ne"]["geometry"] = mapping(LineString([(-97.50, 42.8502), (-97.44, 42.8502)]))
     S._STATES = set(live)
+    S._GEOM_CACHE.clear()       # the outline cache is module-wide: a Missouri geometry cached by another test (None
+                                # with no outline folder) would hide the line given here; cleared again after the test
     return S, S.Resolver(waters, S.load_registry_outfalls(), {}, {}, None)
 
 
@@ -146,9 +148,33 @@ def test_no_beach_watch_record_places_on_a_river():
         assert R.resolve(next(r for r in recs if r["source_record_id"].startswith("YAKLK")))["water_slugs"] == ["lake-yankton-sd"]
     finally:
         S0._STATES = keep
+        S0._GEOM_CACHE.clear()  # the test's Missouri line must not reach a later test
 
 
 def test_the_report_names_file_leaves_the_south_dakota_lake_out():
     d = json.loads((ROOT / "research" / "ne" / "receiving-waters-missing.json").read_text())
     assert not [r for r in d["rows"] if "yankton" in r["name"].lower()]
     assert d["waters"] == len(d["rows"]) == 40 and d["named_waters"] == 37 and d["reports"] == sum(r["reports"] for r in d["rows"])
+
+
+def test_the_cross_state_rule_is_keyed_narrowly():
+    """place_elsewhere acts only on a record whose own raw.state, with raw.state_basis, is not shown while the record
+    counts under another state: DC Water's Maryland rows (MD shown), a raw.state without its basis, and a Navajo
+    Nation report located in a state not shown (it counts under no state) are placed as before (review 2026-11-07)."""
+    from build import status as S
+    keep = S._STATES
+    try:
+        S._STATES = {"DC", "MD", "VA", "NE"}
+        dc_md = {"source_id": "dc-water-news", "npdes_permit": "DC0021199",
+                 "raw": {"state": "MD", "state_basis": "Potomac Interceptor"}}
+        assert S.event_state(dc_md) == "MD" and S.Resolver.place_elsewhere(dc_md) is None
+        no_basis = {"source_id": "ne-dwee-beachwatch", "raw": {"state": "SD"}}
+        assert S.Resolver.place_elsewhere(no_basis) is None
+        navajo = {"source_id": "echo-sewer-overflow", "npdes_permit": "NN0020621",
+                  "event_id": "echo-sewer-overflow:NN0020621:1:1", "raw": {"state": "NM", "state_basis": "point"}}
+        assert S.event_state(navajo) is None and S.Resolver.place_elsewhere(navajo) is None
+        # DC Water's Maryland row while Maryland is not shown: counted under DC, never placed on a DC water
+        S._STATES = {"DC"}
+        assert "MD, a state this site does not show yet" in S.Resolver.place_elsewhere(dc_md)
+    finally:
+        S._STATES = keep
