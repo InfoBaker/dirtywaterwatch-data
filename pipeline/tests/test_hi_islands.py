@@ -112,3 +112,57 @@ def test_the_rewrite_matches_rows_by_name_and_island(tmp_path):
     d = json.loads(path.read_text())
     assert [(r["name"], r["island"]) for r in d["rows"]] == [("Kailua Bay", "Oahu")]
     assert [(r["name"], r["island"]) for r in d["resolved"]] == [("Kailua Bay", "Hawaii")]
+
+
+# ---------------------------------------------------------------- markers for reports with no point (P2-4)
+
+def test_a_placed_report_with_no_point_shows_a_marker_in_its_colour(tmp_path):
+    from datetime import UTC, datetime, timedelta
+    now = datetime(2026, 11, 7, 18, tzinfo=UTC)
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    stream = {"type": "LineString", "coordinates": [[-157.82, 21.41], [-157.80, 21.42]]}
+    bay = {"type": "Polygon", "coordinates": [[[-157.88, 21.55], [-157.86, 21.55], [-157.86, 21.57], [-157.88, 21.55]]]}
+    waters = {"kawa-stream-hi": {"slug": "kawa-stream-hi", "name": "Kawa Stream", "kind": "stream", "state": "HI",
+                                 "bbox": [-157.82, 21.41, -157.80, 21.42], "geometry": stream},
+              "kahana-bay-hi": {"slug": "kahana-bay-hi", "name": "Kahana Bay", "kind": "bay", "state": "HI",
+                                "bbox": [-157.88, 21.55, -157.86, 21.57], "geometry": bay},
+              "test-river-ma": {"slug": "test-river-ma", "name": "Test River", "kind": "river", "state": "MA",
+                                "bbox": [-72, 42, -71.9, 42.0],
+                                "geometry": {"type": "LineString", "coordinates": [[-72.0, 42.0], [-71.9, 42.0]]}}}
+    base = {"parent_event_id": None, "discharger_id": None, "discharger_name": None, "npdes_permit": None,
+            "outfall_id": None, "outfall_name": None, "water_match": "name", "lat": None, "lon": None,
+            "coord_source": None, "coord_precision_m": None, "ended_at": None, "time_precision": "minute",
+            "reported_at": None, "source_updated_at": None, "fetched_at": now.isoformat(), "material": None,
+            "volume_gal": None, "volume_text": None, "estimate_flag": "unknown", "advice_text": None,
+            "advice_window_hours": None, "advice_window_basis": None, "source_url": None, "parse_error": None,
+            "duplicate_of": None}
+    spill = {**base, "event_id": "hi-doh-cwb-events-api:1", "source_id": "hi-doh-cwb-events-api",
+             "source_record_id": "1", "event_type": "sso", "status": "advisory_active", "waterbody_text": "Kawa Stream",
+             "water_slugs": ["kawa-stream-hi"], "started_at": (now - timedelta(days=1)).isoformat(),
+             "published_at": (now - timedelta(days=1)).isoformat(), "authority": HI.AUTHORITY,
+             "raw": {"state": "HI", "island": "Oahu", "_last_seen_in_source": now.isoformat()}}
+    brown = {**spill, "event_id": "hi-doh-cwb-events-api:2", "source_record_id": "2", "event_type": "rain_advisory",
+             "waterbody_text": "Kahana Bay", "water_slugs": ["kahana-bay-hi"],
+             "raw": {"state": "HI", "island": "Oahu", "advisory_noun": "Brown Water Advisory",
+                     "_last_seen_in_source": now.isoformat()}}
+    ma = {**spill, "event_id": "ma-test:3", "source_id": "ma-test", "source_record_id": "3", "status": "ongoing",
+          "waterbody_text": "Test River", "water_slugs": ["test-river-ma"], "raw": {"state": "MA"}}
+    (tmp_path / "hi-doh-cwb-events-api.json").write_text(json.dumps(
+        {"source_id": "hi-doh-cwb-events-api", "ok": True, "last_ok_at": now.isoformat(), "meta": {},
+         "records": [spill, brown]}))
+    (tmp_path / "ma-test.json").write_text(json.dumps(
+        {"source_id": "ma-test", "ok": True, "last_ok_at": now.isoformat(), "meta": {}, "records": [ma]}))
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"HI", "MA"})
+    st, _ = S.build(now=now, write=False, events_dir=tmp_path, waters=waters, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    pts = {p["event_id"]: p for p in st["advisory_points"]}
+    s, b = pts["hi-doh-cwb-events-api:1"], pts["hi-doh-cwb-events-api:2"]
+    assert s["status"] == "red" and s["category"] == "sewage" and s["water_slugs"] == ["kawa-stream-hi"]
+    assert b["status"] == "yellow" and b["category"] == "beach" and b["water_slugs"] == ["kahana-bay-hi"]
+    for p in (s, b):
+        assert p["lat"] is not None and p["point_basis"] == "a point on the water record's own outline"
+        assert "no point" in p["why"]
+    assert 21.41 <= s["lat"] <= 21.42 and -157.82 <= s["lon"] <= -157.80      # on the stream itself
+    assert "ma-test:3" not in pts                                            # other states unchanged

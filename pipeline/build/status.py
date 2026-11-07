@@ -950,6 +950,23 @@ def water_island(w: dict) -> str | None:
     return None
 
 
+def record_point(slug: str, waters: dict) -> tuple[float, float, str] | None:
+    """(lat, lon, basis) of a point on the water record itself: a point inside its outline or on its line (shapely
+    representative_point), else its box's centre; None without either."""
+    g = water_geometry(slug, waters)
+    if g is not None and not g.is_empty:
+        p = g.representative_point()
+        return round(p.y, 5), round(p.x, 5), "a point on the water record's own outline"
+    b = (waters.get(slug) or {}).get("bbox")
+    if isinstance(b, (list, tuple)) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b):
+        return round((b[1] + b[3]) / 2, 5), round((b[0] + b[2]) / 2, 5), "the centre of the water record's box"
+    return None
+
+
+RECORD_POINT_WHY = ("the report gives no point: the marker is on the water it names, at a point of that water's record, "
+                    "not where the discharge or advisory was")
+
+
 def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]:
     """(the slugs on the report's island, why others were set aside). A report with no island keeps them all."""
     from ingest import hi_doh_cwb_events as HI
@@ -3452,6 +3469,30 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     oid_key(ev.get("outfall_id")) if ev.get("outfall_id") else tuple(pl["water_slugs"]))
             if okey not in latest_month or (mark["month"], eid) > (latest_month[okey][2]["month"], latest_month[okey][0]["event_id"]):
                 latest_month[okey] = (ev, list(pl["water_slugs"]), mark)
+        # a report with no point (Hawaii's notices give none) placed on a water that is never filled whole (a stream, river,
+        # bay or sound) and drawn by no traced reach: its marker at a point of that water's record, so it shows in its
+        # colour (final audit 2026-11-07 P2-4); keyed on ISLAND_STATES, every other state unchanged
+        nofill = [x for x in pl["water_slugs"] if waters[x].get("kind") in NO_FILL_KINDS]
+        pick = point_on or ([] if (is_discharge and traced) or not is_discharge else nofill)
+        rp = record_point(pick[0], waters) if (pick and live and not future and ev.get("lat") is None
+                                                and event_state(ev) in ISLAND_STATES) else None
+        if rp:
+            ivs = event_intervals(eff, event_state(ev), now, water={**waters[pick[0]], "slug": pick[0]}, rules=rules)
+            colouring = [iv for iv in ivs if iv["color"] != "grey"]
+            if colouring and any(iv["end"] is None or iv["end"] > h_start for iv in colouring):
+                col, act = status_at(ivs, now)
+                top = max(act, key=lambda iv: RANK[iv["color"]]) if act else None
+                points.append({"event_id": eid, "water_slugs": list(pick), "status": col,
+                               "category": category_of(ev.get("event_type")),
+                               "rule": top["rule"] if top else None, "label": top["label"] if top else None,
+                               "short": short_reason(top, ev) if top else None,
+                               "from": iso(min(iv["start"] for iv in colouring)),
+                               "until": None if any(iv["end"] is None for iv in colouring)
+                               else iso(max(iv["end"] for iv in colouring)),
+                               "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
+                                             for iv in sorted(ivs, key=lambda x: x["start"])],
+                               "_ivs": ivs, "lat": rp[0], "lon": rp[1], "point_basis": rp[2],
+                               "why": RECORD_POINT_WHY})
         # beach, rain and HAB advisories that colour no water: a marker of their own
         if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
                 and ev.get("lat") is not None and ev.get("lon") is not None
