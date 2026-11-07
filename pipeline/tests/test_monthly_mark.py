@@ -122,7 +122,7 @@ def test_the_export_writes_the_mark_on_the_outline_and_the_outfall_points(tmp_pa
     # out/outfalls.json, adding an outfall the registries lack
     from export import outfalls as XO
     (tmp_path / "data").mkdir()
-    (tmp_path / "data" / "outfalls-ne.json").write_text(json.dumps({"outfalls": [
+    (tmp_path / "data" / "outfalls-new-england.json").write_text(json.dumps({"outfalls": [
         {"npdes_permit": "MA0101613", "outfall": "013", "water_slug": "test-river-ma", "lat": 42.0, "lon": -72.0}]}))
     from common import load_outfall_registry
     marks = [{"npdes_permit": "MA0101613", "outfall_id": "13", "status": "monthly", "days": 4, "month": "2026-09",

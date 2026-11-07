@@ -338,7 +338,7 @@ def _facility_permits() -> dict[str, str]:
             for row in csv.DictReader(lines[start:]):
                 if row.get("NPDESPermitNumber") and row.get("FacilityName"):
                     out.setdefault(norm(row["FacilityName"]), row["NPDESPermitNumber"].strip())
-    reg = read_json(ROOT / "data" / "outfalls-ne.json", {}) or {}
+    reg = read_json(ROOT / "data" / "outfalls-new-england.json", {}) or {}
     for o in reg.get("outfalls", []):
         if o.get("state") == "VT" and o.get("permittee"):
             out.setdefault(norm(o["permittee"]), o["npdes_permit"])

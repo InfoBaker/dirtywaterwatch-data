@@ -33,7 +33,7 @@ supplemental one within 24 hours. Four permittees publish something parseable:
    Date, total gallons, description; times and durations are taken from the description when
    written as h:mm am/pm. All are after-the-fact notices: status ended.
 
-Outfall coordinates and water slugs come from data/outfalls-ne.json (EPA ECHO CSO inventory) by
+Outfall coordinates and water slugs come from data/outfalls-new-england.json (EPA ECHO CSO inventory) by
 permit + outfall number (water_match outfall_registry, coord_source outfall_layer); waterbody_text
 is then ECHO's receiving-water name, since the notices name none. Authority = the permittee.
 Advice: NH permits set no public advice window, so advice_text/advice_window_* stay null (RSA
@@ -114,7 +114,7 @@ def outfall(permit: str, number: str) -> dict | None:
     global _REG
     if _REG is None:
         _REG = {}
-        for o in (read_json(DATA_DIR / "outfalls-ne.json", {}) or {}).get("outfalls", []):
+        for o in (read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}).get("outfalls", []):
             _REG.setdefault((o["npdes_permit"], str(o["outfall"]).upper()), o)
     return _REG.get((permit, str(number).upper()))
 
@@ -538,7 +538,7 @@ def main(argv=None) -> int:
     records, health = assemble(prev_file, new, errors, fetched_at)
     meta = {"urls": URLS, "counts_fetched": counts, "errors": errors or None,
             "browser_headers_used_for": used_browser or None, "advice": ADVICE_NOTE,
-            "outfall_registry": "data/outfalls-ne.json (EPA ECHO) by permit + outfall number", **health}
+            "outfall_registry": "data/outfalls-new-england.json (EPA ECHO) by permit + outfall number", **health}
     path = write_events(SOURCE_ID, records, ok=True, error="; ".join(f"{k}: {v}" for k, v in errors.items()) or None,
                         meta=meta)
     print(f"{SOURCE_ID}: {counts}, errors {errors or 'none'}, {len(records)} in file -> {path}")

@@ -8,7 +8,7 @@ emails, phones and staff names ("Inspector X", "contact X at"); this pass covers
 deliberately conservative: agency, company, street and water names stay.
 
   candidate  two or three capitalised words (one after an honorific) that are not place, water,
-             organisation, street or header words. The lexicon: data/waters-ne.csv (names and towns),
+             organisation, street or header words. The lexicon: data/waters-new-england.csv (names and towns),
              data/waters-extra.json, data/waters-nhd.json, data/dischargers.json, data/outfalls-*.json, the records' own
              name fields (utility, permittee, water body, beach) and keys, US states, months,
              weekdays, and the words the records use in lower case. A run ending in a street, water or
@@ -293,7 +293,7 @@ def reference_names(data_dir: str) -> tuple[frozenset, frozenset]:
     (whole names); towns lower case on their own (a town is never taken as a given name)."""
     d = Path(data_dir)
     names, towns = set(), set()
-    p = d / "waters-ne.csv"
+    p = d / "waters-new-england.csv"
     if p.exists():
         with p.open(newline="") as fh:
             for row in csv.DictReader(fh):

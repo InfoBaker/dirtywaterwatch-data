@@ -6,7 +6,7 @@ openboatlaunch only keeps waters with a public launch, so many waters that take 
 in Rutland, the Mill River in Springfield, the Quequechan under Fall River, Back Cove in Portland)
 have no record and their events cannot be placed or drawn. This module fetches each one from the
 Overpass API (one query per water, 2-3 s apart; every response cached in data/raw/osm-waters/<key>.json
-and reused unless --refresh) and writes rows in the shape of data/waters-ne.json plus:
+and reused unless --refresh) and writes rows in the shape of data/waters-new-england.json plus:
   geometry   GeoJSON in WGS84 (MultiLineString for rivers, streams and canals; Polygon or
              MultiPolygon for bays, harbours and ponds), simplified to about 10 m
   source     "osm"; osm: the element ids used ("w123", "r456"; a way inside a used relation is
@@ -17,7 +17,7 @@ Rows: launches and advisories are empty (none known here); charted is null (not 
 
 The list (SPECS) comes from the state research reports plus every receiving water named by 20 or
 more unplaced events (data/build/events/*.json with no water_slugs, grouped by state and name).
-Before fetching, a spec is skipped when data/waters-ne.json already has that name in that state
+Before fetching, a spec is skipped when data/waters-new-england.json already has that name in that state
 with one of the spec's towns, or when its `skip` gives a reason (checked by hand; see SPECS).
 
 Slugs follow openboatlaunch: <name>-<st>; when the name already exists in that state for another
@@ -297,11 +297,11 @@ def norm(s: str) -> str:
 
 
 def load_ne() -> list[dict]:
-    return (read_json(DATA_DIR / "waters-ne.json") or {}).get("waters", [])
+    return (read_json(DATA_DIR / "waters-new-england.json") or {}).get("waters", [])
 
 
 def existing(spec: dict, ne: list[dict]) -> dict | None:
-    """The waters-ne row with this name in this state listing one of the spec's towns."""
+    """The waters-new-england row with this name in this state listing one of the spec's towns."""
     towns = {norm(t) for t in spec["towns"]}
     for w in ne:
         if w["state"] == spec["state"] and norm(w["name"]) == norm(spec["name"]) \
@@ -799,7 +799,7 @@ def write_output(recs, skipped, missing, partial: bool, problems=()) -> None:
         "built": now_iso(),
         "partial": partial,
         "count": len(recs),
-        "note": "Receiving waters with no openboatlaunch record. Same row shape as waters-ne.json plus geometry, "
+        "note": "Receiving waters with no openboatlaunch record. Same row shape as waters-new-england.json plus geometry, "
                 "source, osm ids, aliases and length_km; launches and advisories empty, charted not checked.",
         "skipped": skipped,
         "missing": missing,
