@@ -2250,8 +2250,17 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
                 return [_iv(ev, start, end, rule, red, yellow)]
+            listed = parse_time((ev.get("raw") or {}).get("_last_seen_in_source"))
+            unlisted = parse_time((ev.get("raw") or {}).get("_unlisted_since"))
+            if unlisted is not None and unlisted > start:
+                # a feed read with history.confirm_while_listed (docs/generic-ingesters.md): the advisory was shown
+                # at every fetch up to the first that no longer found it; it ends there, at or before that fetch
+                iv = _iv(ev, start, unlisted, rule, red, yellow)
+                iv["confirmed"] = iso(listed or start)
+                iv["ended_by"] = "no longer on the authority's map at this fetch"
+                return [iv]
             if et in AGING_TYPES:
-                confirmed = max(t for t in (start, parse_time(ev.get("source_updated_at"))) if t)
+                confirmed = max(t for t in (start, parse_time(ev.get("source_updated_at")), listed) if t)
                 until = confirmed + timedelta(days=CONFIRM_DAYS)
                 out = [_iv(ev, start, until, rule, red, yellow)]
                 note = _iv(ev, until, max(until, start + timedelta(days=NOTE_DAYS)), "not_reconfirmed", red, yellow)

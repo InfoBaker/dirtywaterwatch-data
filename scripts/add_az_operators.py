@@ -132,7 +132,8 @@ GROUPS = {
                                            "tribal", ["NN0020265", "NN0020281", "NN0020290", "NN0021555", "NN0022195",
                                                       "NN0030344"],
                                            "Navajo Nation permits (NN...) EPA lists in Arizona. A report counts here when its point lies in "
-                                           "Arizona (one Window Rock report lies in New Mexico and is not counted)."),
+                                           "Arizona (three Window Rock reports lie in New Mexico, two of them at the "
+                                           "lift station by Navajo, New Mexico, and are not counted)."),
 }
 # permits no input names well -> (row id, name, short_name, legal_form, note)
 HAND = {
@@ -277,12 +278,12 @@ def epa_reports() -> tuple[Counter, Counter]:
     allr, kept = Counter(), Counter()
     ev = json.loads(EVENTS.read_text()) if EVENTS.exists() else {}
     for r in ev.get("records", []):
-        if (r.get("npdes_permit") or "")[:2] in ("AZ", "NN"):
+        if (r.get("npdes_permit") or "")[:2] in ("AZ", "NN") and (r.get("raw") or {}).get("state", "AZ") == "AZ":
             kept[r["npdes_permit"]] += 1
             allr[r["npdes_permit"]] += 1
     dr = json.loads(DROPPED.read_text()) if DROPPED.exists() else {}
     for r in dr.get("dropped", []):
-        if (r.get("permit") or "")[:2] in ("AZ", "NN"):
+        if (r.get("permit") or "")[:2] in ("AZ", "NN") and r.get("state", "AZ") == "AZ":   # NN placed in AZ
             allr[r["permit"]] += 1
     return allr, kept
 

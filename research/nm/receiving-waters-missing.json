@@ -1,0 +1,514 @@
+{
+ "about": "Water names in NM's records that data/receiving-waters-national.json does not hold for NM: EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; New Mexico permits and the Navajo Nation's reports located in New Mexico; every receiving water they name is already on the national list) and NMED's bloom map (every station's assessment unit in the layer read on 2026-11-07, a river's segment apart), with the number of records giving each and the stations on it. Reports that say the discharge reached no water are left out.",
+ "state": "NM",
+ "waters": 33,
+ "reports": 10,
+ "rows": [
+  {
+   "name": "Alto Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     33.395833,
+     -105.673611
+    ]
+   ]
+  },
+  {
+   "name": "Bluewater Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.292504,
+     -108.111948
+    ]
+   ]
+  },
+  {
+   "name": "Charette Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "segments": [
+    "Lower"
+   ],
+   "points": [
+    [
+     36.1856,
+     -104.8038
+    ]
+   ]
+  },
+  {
+   "name": "Clayton Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.57571,
+     -103.30227
+    ]
+   ]
+  },
+  {
+   "name": "Eagle Nest Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.53417,
+     -105.254726
+    ]
+   ]
+  },
+  {
+   "name": "El Vado Reservoir",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.60912,
+     -106.74545
+    ]
+   ]
+  },
+  {
+   "name": "Lake Roberts",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     33.03052,
+     -108.16059
+    ]
+   ]
+  },
+  {
+   "name": "Nichols Reservoir",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.69085,
+     -105.87709
+    ]
+   ]
+  },
+  {
+   "name": "Quemado Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     34.138,
+     -108.496
+    ]
+   ]
+  },
+  {
+   "name": "Stubblefield Lake",
+   "reports": 1,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.57564,
+     -104.66115
+    ]
+   ]
+  },
+  {
+   "name": "Elephant Butte Lake",
+   "reports": 0,
+   "stations": 2,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     33.20252,
+     -107.19944
+    ],
+    [
+     33.18148,
+     -107.20177
+    ]
+   ]
+  },
+  {
+   "name": "Navajo Reservoir",
+   "reports": 0,
+   "stations": 2,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.84907,
+     -107.60725
+    ],
+    [
+     36.8346,
+     -107.58882
+    ]
+   ]
+  },
+  {
+   "name": "Abiquiu Reservoir",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.25388,
+     -106.44208
+    ]
+   ]
+  },
+  {
+   "name": "Avalon Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     32.49889,
+     -104.2494
+    ]
+   ]
+  },
+  {
+   "name": "Bear Canyon Reservoir",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     32.88342,
+     -107.99628
+    ]
+   ]
+  },
+  {
+   "name": "Bill Evans Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     32.86583,
+     -108.57396
+    ]
+   ]
+  },
+  {
+   "name": "Bonito Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     33.45651,
+     -105.73364
+    ]
+   ]
+  },
+  {
+   "name": "Brantley Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     32.55888,
+     -104.39011
+    ]
+   ]
+  },
+  {
+   "name": "Caballo Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     32.91149,
+     -107.29868
+    ]
+   ]
+  },
+  {
+   "name": "Conchas Reservoir",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.38911,
+     -104.19451
+    ]
+   ]
+  },
+  {
+   "name": "Grindstone Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     33.3216,
+     -105.68535
+    ]
+   ]
+  },
+  {
+   "name": "Heron Reservoir",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.67647,
+     -106.7003
+    ]
+   ]
+  },
+  {
+   "name": "Hopewell Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.7058,
+     -106.23521
+    ]
+   ]
+  },
+  {
+   "name": "Laguna Madre",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.6039,
+     -104.63909
+    ]
+   ]
+  },
+  {
+   "name": "Lake Farmington",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.7979,
+     -108.10424
+    ]
+   ]
+  },
+  {
+   "name": "Lake Maloya",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.98698,
+     -104.37334
+    ]
+   ]
+  },
+  {
+   "name": "Morphy Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.94182,
+     -105.39792
+    ]
+   ]
+  },
+  {
+   "name": "San Gregorio Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.03944,
+     -106.84913
+    ]
+   ]
+  },
+  {
+   "name": "Santa Cruz Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.97673,
+     -105.9176
+    ]
+   ]
+  },
+  {
+   "name": "Santa Rosa Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.03993,
+     -104.6486
+    ]
+   ]
+  },
+  {
+   "name": "Springer Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     36.41708,
+     -104.65259
+    ]
+   ]
+  },
+  {
+   "name": "Storrie Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     35.6599,
+     -105.23806
+    ]
+   ]
+  },
+  {
+   "name": "Sumner Lake",
+   "reports": 0,
+   "stations": 1,
+   "permits": [],
+   "sources": [
+    "nm-nmed-hab-mapper"
+   ],
+   "points": [
+    [
+     34.61868,
+     -104.38561
+    ]
+   ]
+  }
+ ]
+}

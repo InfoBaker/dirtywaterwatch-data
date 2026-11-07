@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1334 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1343 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -37,7 +37,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ms | 5 | 0 | 2 | 1 | 0 | 8 |
 | ne | 4 | 1 | 2 | 2 | 1 | 10 |
 | ak | 3 | 0 | 2 | 0 | 3 | 8 |
-| **all** | **471** | **228** | **378** | **189** | **68** | **1334** |
+| nm | 3 | 0 | 3 | 2 | 1 | 9 |
+| **all** | **474** | **228** | **381** | **191** | **69** | **1343** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1442,7 +1443,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `az-adeq-wbid-layers` | ADEQ waterbody identifier (WBID) layers, streams and lakes (ArcGIS Online) | used | fetched | hydrography | Names the ADEQ waterbody identifiers Arizona permittees give as receiving waters in EPA's overflow reports (13 identifiers in the 2026-11-04 extract; EPA's ATTAINS holds 9 of them). |
-| `az-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 52 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 285 dropped (257 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon). |
+| `az-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 50 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 283 dropped (255 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon). |
 | `az-law-r18-9-c305` | A.A.C. R18-9-C305, 2.05 General Permit: CMOM of a sewage collection system (reporting and public notice signs) | used | fetched | law | Fetched text: 24-hour report to ADEQ for releases that are an imminent and substantial threat; signs only after more than three reportable releases at one location in 12 months. |
 | `az-adeq-reported-habs` | ADEQ AZHABs "Currently Reported" harmful algal bloom list | candidate | search_only | advisories | Only state HAB list; HTML behind a bot wall; testing is voluntary for lake managers. |
 | `az-adeq-sso-reporting` | ADEQ SSO and bypass reporting (Spill Line, myDEQ five-day report, SSO Report Form) | watch | search_only | law | Reporting channel to the regulator only; no public output found besides EPA SOBE. |
@@ -1507,3 +1508,17 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ak-awwu` | Anchorage Water and Wastewater Utility website | unreachable | fetched | events | The site answers 403 to scripted reads (2026-11-07); search found no overflow notice page; SOBE carries AWWU's events. |
 | `ak-dec-beach-program` | Alaska DEC Beach Program (BEACH Act monitoring) | unreachable | fetched | advisories | DEC's pages answer 403 behind a bot check (2026-11-07); the research URL had answered 404. |
 | `ak-dec-spill-database` | Alaska DEC Statewide Oil and Hazardous Substance Spills Database (PERP Spill Search) | unreachable | fetched | events | Bot wall; scope is oil and hazardous substances, so sewage may not be in it (unconfirmed). |
+
+## nm: New Mexico (9)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nm-epa-sobe` | EPA ECHO SOBE (New Mexico permits) | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with New Mexico in its states since 2026-11-07: the only machine-readable record of New Mexico overflow reports, though only the Town of Taos files and the Navajo Nation's Shiprock plant files under its own permit. |
+| `nm-law-20-6-2-1203` | 20.6.2.1203 NMAC Notification of discharge - removal | used | fetched | law | Fetched: oral notice to NMED within 24 hours, written within one week, corrective-action report in 15 days; no public notice. |
+| `nm-nmed-hab-mapper` | NMED Surface Water Quality Bureau HABs Mapper (current HAB advisories) feature service | used | fetched | advisories | Read through the generic ArcGIS ingester (fetch block in its source file): one record per station and sample date under a WATCH, WARNING or DANGER status; the layer's own coordinates; blooms, not sewage. |
+| `nm-abcwua` | Albuquerque Bernalillo County Water Utility Authority overflow notices | watch | search_only | events | No public overflow list found; utility notifies NMED, EPA and Isleta Pueblo case by case per news. |
+| `nm-epa-r6-permits` | EPA Region 6 NPDES permits for New Mexico (standard conditions) | watch | inferred | permits | Permit SSO and public-notice clauses not read in the time box. |
+| `nm-nmed-enforcement-watch` | NMED Enforcement Watch (alleged violations database) | watch | search_only | permits | Violations, not events; NPDES enforcement is EPA's in NM. |
+| `nm-ocd-spills` | NM Oil Conservation Division spills database | rejected | search_only | events | Oil and gas only. |
+| `nm-swim-guide` | Swim Guide affiliates in New Mexico (Rio Grande Waterkeeper?) | rejected | search_only | monitoring | None found (search only). |
+| `nm-rio-grande-bacteria` | Rio Grande (Albuquerque reach) E. coli / bosque bacteria sampling | unreachable | inferred | monitoring | No public program found in the time box (lead from the task prompt). |
