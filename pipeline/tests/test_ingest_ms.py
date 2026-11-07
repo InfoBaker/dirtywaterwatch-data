@@ -248,11 +248,11 @@ def test_the_mississippi_register_rows():
     assert not any("@" in json.dumps(r) for r in rows.values())
 
 
-def test_mississippi_rules_row_cites_the_law_and_is_not_live():
+def test_mississippi_rules_row_cites_the_law():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     ms = rules["red"]["by_state"]["MS"]
     assert ms["hours"] is None and "24 hours" in ms["basis"] and "NeT-SewerOverflow" in ms["source"]
-    assert "MS" not in rules["live_states"]
+    assert "MS" in rules["live_states"]   # live since 2026-11-07 (final audit docs/checklists/2026-11-07-ms-final.md)
 
 
 def test_text_rules_are_mississippi_only_and_meridians_spellings_read():
