@@ -302,3 +302,16 @@ def test_na_with_the_water_discharged_is_no_name_and_the_bypass_is_kept():
     assert ok and why.startswith("bypass")
     assert not E.reached_water({}, ["BYP"], ["Does not apply- Do not discharge to any waters"], [], "SD")[0]
     assert not E.reached_water({}, ["SSO"], [w], [], "SD")[0]                  # an SSO naming none still needs evidence
+
+
+# ---------------------------------------------------------------- register (scripts/add_sd_register_rows.py)
+
+def test_register_rows_say_per_permit_what_is_filed_and_how_the_authority_was_read():
+    doc = json.loads((ROOT / "data" / "notice-channels" / "sd.json").read_text())
+    rows = {r["id"]: r for r in doc["channels"]}
+    ld = rows["sd-lead-deadwood-sd-cso-public-notification"]
+    assert "Gold Run" not in ld["note"] and "no report of this permit" in ld["note"]
+    assert "Gold Run Creek" in rows["sd-lead-cso-cso-public-notification"]["note"]
+    epa = [r for r in rows.values() if r["id"].endswith("-overflow-report") and "EPA Region 8" in r["note"]]
+    assert epa and all("not from the permit text" in r["note"] for r in epa)
+    assert not any("No public notice is required" in r["note"] for r in rows.values())
