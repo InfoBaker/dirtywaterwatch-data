@@ -37,6 +37,11 @@ from ingest import waters_from_nhd as N  # noqa: E402
     ("Little River and Big Creek", ["Little River", "Big Creek"]),
     ("Discharge to Town Branch", ["Town Branch"]),
     ("CHATTAHOOCHEE", ["CHATTAHOOCHEE"]),          # a name with no kind word is kept
+    # the way in front of the water (Mississippi's inventory, 2026-11-07): 'DIRECTLY' is not the water's name
+    ("DIRECTLY INTO LEAF RIVER", ["LEAF RIVER"]), ("DIRECLTY INTO MOUND BAYOU", ["MOUND BAYOU"]),
+    ("DIR INTO YOCONA RIVER", ["YOCONA RIVER"]), ("DIR INTO DITCH THEN BURNEY BRANCH", ["BURNEY BRANCH"]),
+    ("directly to Ray Roberts Lake", ["Ray Roberts Lake"]),
+    ("DIRECT DISCHARGE CREEK", ["DIRECT DISCHARGE CREEK"]),   # no 'to' or 'into' after it: a name, left alone
 ])
 def test_national_texts_that_name_waters(text, expected):
     assert N.national_parts(text) == (expected, None)
