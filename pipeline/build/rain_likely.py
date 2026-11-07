@@ -393,7 +393,11 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                           "valid_time": iso(valid), "ok": rf.get("ok"), "last_ok_at": rf.get("last_ok_at"),
                           "error": rf.get("error"), "stale": stale, "points": (rf.get("mrms") or {}).get("points"),
                           "read": (rf.get("mrms") or {}).get("read"), "product": PRODUCT,
-                          "states": (rf.get("mrms") or {}).get("states")},
+                          "states": (rf.get("mrms") or {}).get("states"),
+                          # the unit the service's values were read in (mm converted to inches) and the evidence
+                          "units": {k: v for k, v in ((rf.get("mrms") or {}).get("units") or {}).items()
+                                    if k in ("units_read", "basis", "evidence", "box_max", "determined_at", "conflict")}
+                          or None},
              "forecast": {"source_id": QPF_SOURCE_ID, "window_hours": (rf.get("qpf") or {}).get("window_hours"),
                           "grids": (rf.get("qpf") or {}).get("grids")},
              "thresholds": {"built": thresholds.get("built"), "method": thresholds.get("method"),
