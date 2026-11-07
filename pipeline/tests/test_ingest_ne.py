@@ -28,7 +28,7 @@ def _build(tables=None):
 
 def test_nebraska_is_read_with_the_point_zone_and_the_scrub():
     assert "NE" in E.STATES and E.STATE_TZ["NE"] == "America/Chicago" and E.STATE_TZ["IL"] == "America/Chicago"
-    assert E.POINT_ZONE_FILES["NE"] == "ne-mountain-time-counties.json"
+    assert E.POINT_ZONE_FILES == {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
     assert "NE" in E.FREE_TEXT_STATES and "NE" not in E.REPEATED_POINT_STATES and "NE" not in E.STATE_NO_WATER
 
 
@@ -38,8 +38,10 @@ def test_the_mountain_counties_file_cites_the_boundary_and_holds_eighteen_counti
     assert sorted(c["county"] for c in doc["counties"]) == sorted(
         [f"{n} County" for n in ("Arthur", "Banner", "Box Butte", "Chase", "Cheyenne", "Dawes", "Deuel", "Dundy",
                                  "Garden", "Grant", "Hooker", "Keith", "Kimball", "Morrill", "Perkins",
-                                 "Scotts Bluff", "Sheridan", "Sioux")] + ["Cherry County, western part"])
-    assert [c["county"] for c in doc["split_counties"]] == ["Cherry County"]
+                                 "Scotts Bluff", "Sheridan", "Sioux")])
+    assert [c["county"] for c in doc["split_counties"]] == ["Cherry County"]          # South Dakota's shape
+    cherry = doc["split_counties"][0]
+    assert cherry["mountain_part"] and cherry["central_part"] and 0.6 < cherry["mountain_share"] < 0.7
     assert "tigerweb.geo.census.gov" in doc["source"]["url"] and "NTAD_Time_Zones" in doc["checked_against"]["url"]
 
 
@@ -49,9 +51,11 @@ def test_the_zone_is_the_zone_of_the_events_own_point():
     assert E.point_zone("NE", 41.123, -100.765)[0] == "America/Chicago"       # North Platte, Lincoln County
     assert E.point_zone("NE", 41.257, -95.935)[0] == "America/Chicago"        # Omaha
     tz, basis = E.point_zone("NE", 42.917, -101.700)                         # Merriman, western Cherry County
-    assert tz == "America/Denver" and "Cherry County, western part" in basis
+    assert tz == "America/Denver" and "part of Cherry County west of the boundary" in basis
     tz, basis = E.point_zone("NE", 42.873, -100.551)                         # Valentine, eastern Cherry County
-    assert tz == "America/Chicago" and "Cherry County" in basis and "split" in basis
+    assert tz == "America/Chicago" and "Central part of Cherry County" in basis and "split" in basis and "split" in basis
+    tz, basis = E.point_zone("NE", 40.81, -96.70)                            # Lincoln
+    assert tz == "America/Chicago" and "outside the eighteen Mountain-time counties and Cherry County" in basis
     tz, basis = E.point_zone("NE", None, None)
     assert tz == "America/Chicago" and basis.startswith("no point given")
     assert E.point_zone("IL", 41.9, -87.6) == (None, None)                    # a one-zone state is not read by point

@@ -27,9 +27,10 @@ The rule's public records
     Cherry County's Mountain part is its outline cut by the DOT layer's Mountain polygon (the rule's section lines are
     not drawn in any county layer), simplified to 0.001 degree.
 
-Writes data/reference/ne-mountain-time-counties.json: the eighteen counties' names, GEOIDs and outlines, Cherry
-County's western part with them (the area that keeps Mountain time), and Cherry County's whole outline under
-split_counties (a point in it but outside its western part keeps Central time). Coordinates rounded to 4 decimals.
+Writes data/reference/ne-mountain-time-counties.json in South Dakota's shape (one mechanism for both states): the
+eighteen counties' names, GEOIDs and outlines, and Cherry County under split_counties with its outline, its
+mountain_part (west of the line, cut by the DOT Mountain polygon), its central_part and the Mountain share of its area.
+Coordinates rounded to 4 decimals.
 
 Run from the repository root:
   pipeline/.venv/bin/python scripts/ne_mountain_time_counties.py [--file counties.geojson --zones mountain.geojson]
@@ -88,12 +89,13 @@ def build(doc: dict, zones: dict, fetched_at: str) -> dict:
         return {"county": f["properties"]["NAME"], "geoid": f["properties"]["GEOID"],
                 "geometry": {"type": f["geometry"]["type"], "coordinates": _round(f["geometry"]["coordinates"])}}
 
-    def west_part(n):
-        f = by[n]
-        part = shape(f["geometry"]).intersection(mpoly).simplify(0.001)
-        return {"county": f"{f['properties']['NAME']}, western part", "geoid": f["properties"]["GEOID"],
-                "geometry": _geom(part),
-                "note": "the part of the county west of the 49 CFR 71.7(c) line, cut by the DOT Mountain polygon"}
+    def split(n):
+        g = shape(by[n]["geometry"])
+        m, c = g.intersection(mpoly).simplify(0.001), g.difference(mpoly).simplify(0.001)
+        return dict(row(n), note=("split by the boundary; its western part keeps Mountain time, the rest, Valentine's "
+                                  "part, Central time (parts cut by the U.S. DOT time-zone layer)"),
+                    central_part=_geom(c), mountain_part=_geom(m), mountain_share=round(m.area / g.area, 3),
+                    central_label="Central part")
     return {
         "state": "NE",
         "zone": "America/Denver",
@@ -107,9 +109,8 @@ def build(doc: dict, zones: dict, fetched_at: str) -> dict:
         "law": {"cite": CFR, "url": CFR_URL, "read": "2026-11-07"},
         "checked_against": {"name": "U.S. DOT NTAD Time Zones", "url": DOT_LAYER, "read": "2026-11-07"},
         "source": {"name": "U.S. Census Bureau TIGERweb, State_County layer 1", "url": URL, "fetched_at": fetched_at},
-        "counties": [row(n) for n in MOUNTAIN_COUNTIES] + [west_part(n) for n in SPLIT_COUNTIES],
-        "split_counties": [dict(row(n), note="split by the boundary; outside its western part it keeps Central time")
-                           for n in SPLIT_COUNTIES],
+        "counties": [row(n) for n in MOUNTAIN_COUNTIES],
+        "split_counties": [split(n) for n in SPLIT_COUNTIES],
     }
 
 

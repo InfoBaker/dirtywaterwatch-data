@@ -409,7 +409,8 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     otherwise colour red for years (generic-ingesters re-check R6). The record then has no confirmed end: it follows
     the rules for records with none (docs/plan.md §2), and the published value stays in the record as given.
     Advisories keep their end, the authority's own (a seasonal shellfish closure may run for months), and so do
-    month and year records (their end is the period's end; they set no window)."""
+    month and year records (their end is the period's end; they set no window), and a planned bypass whose ingester
+    labels its end as the operator's planned end (raw.end_is_planned: EPA's anticipated bypass notices)."""
     en = parse_time(ev.get("ended_at"))
     if en is None:
         return None
@@ -418,6 +419,8 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
         return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
     if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
         return None
+    if (ev.get("raw") or {}).get("end_is_planned") is True:
+        return None     # an operator's planned end of an anticipated bypass, labelled by its ingester (months ahead)
     if ev.get("event_type") == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
         return None     # a month or year record ends at the period's end by construction, and sets no window
     days = end_limit_days(load_rules() if rules is None else rules)
