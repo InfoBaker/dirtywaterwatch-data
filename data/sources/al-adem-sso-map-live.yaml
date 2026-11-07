@@ -1,0 +1,32 @@
+id: "al-adem-sso-map-live"
+name: "ADEM Sanitary Sewer Overflow Map (SSO_Service MapServer layer 0, current SSOs)"
+url: "https://gis.adem.alabama.gov/sso/index.html"
+homepage: "https://gis.adem.alabama.gov/sso/index.html"
+kind: "arcgis"
+level: "state"
+# Notes (research/al, status used, verified fetched, checked 2026-11-07): Read with the history
+#   layer by pipeline/ingest/al_adem_sso.py: 31 reports on 2026-11-07; gives ADEM's received time,
+#   the report type, the cause and the volume range in full (the history layer cuts it at 15
+#   characters).
+# Access detail (research, quoted):
+#   https://gis.adem.alabama.gov/arcgis/rest/services/SSO_Service/MapServer/0/query?where=1%3D1&outFields=*&f=json.
+#   27 rows on 2026-11-03. Per ADEM, SSOs "are displayed on the map for 10 days after the SSO has
+#   ceased"; ongoing ones stay (one from 2018 still shows). Popup links to eFile per permit. Sample
+#   raw/sso-sample.json, raw/sso-all27.json.
+# Can fill: reported_at (received_date), started_at, ended_at, coordinates, volume, waterbody,
+#   source_status (report_type: Initial/Final)
+# Cannot fill: history beyond the 10-day window
+# Waters: statewide; current SSOs only
+# History: rolling: ongoing plus 10 days after end
+cadence: "Minutes (row received 2026-11-03 1:40 PM present the same afternoon)"
+license: "None shown."
+attribution: "Alabama Department of Environmental Management"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["AL"]
+access: ["arcgis", "map_only"]
+access_detail: "https://gis.adem.alabama.gov/arcgis/rest/services/SSO_Service/MapServer/0/query?where=1%3D1&outFields=*&f=json. 27 rows on 2026-11-03. Per ADEM, SSOs \"are displayed on the map for 10 days after the SSO has ceased\"; ongoing ones stay (one from 2018 still shows). Popup links to eFile per permit. Sample raw/sso-sample.json, raw/sso-all27.json."
+machine_readable: true
+legal_basis: "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) (immediate notification); r. 335-6-6-.02(hh) (notifiable SSO)"
+checked: "2026-11-07"
