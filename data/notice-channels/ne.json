@@ -2930,25 +2930,24 @@
    "agency": null,
    "permit": "NE0041351",
    "checked": "2026-11-07",
-   "id": "ne-emerson-dwee-epa-report",
+   "id": "ne-emerson-epa-report",
    "name": "Village of Emerson",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0041351, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0041351, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Village of Emerson reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Village of Emerson holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -5963,25 +5962,24 @@
    "agency": null,
    "permit": "NE0061263",
    "checked": "2026-11-07",
-   "id": "ne-omaha-tribe-macy-dwee-epa-report",
+   "id": "ne-omaha-tribe-macy-epa-report",
    "name": "Omaha Tribe of Nebraska (Macy plant)",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0061263, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0061263, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Omaha Tribe of Nebraska (Macy plant) reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Omaha Tribe of Nebraska (Macy plant) holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -6281,25 +6279,24 @@
    "agency": null,
    "permit": "NE0040908",
    "checked": "2026-11-07",
-   "id": "ne-pender-dwee-epa-report",
+   "id": "ne-pender-epa-report",
    "name": "Village of Pender",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0040908, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0040908, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Village of Pender reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Village of Pender holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -6848,25 +6845,24 @@
    "agency": null,
    "permit": "NE0046302",
    "checked": "2026-11-07",
-   "id": "ne-rosalie-dwee-epa-report",
+   "id": "ne-rosalie-epa-report",
    "name": "Rosalie Wastewater Treatment Facility",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0046302, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0046302, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Rosalie Wastewater Treatment Facility reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Rosalie Wastewater Treatment Facility holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -6902,25 +6898,24 @@
    "agency": null,
    "permit": "NE0132641",
    "checked": "2026-11-07",
-   "id": "ne-santee-sioux-nation-dwee-epa-report",
+   "id": "ne-santee-sioux-nation-epa-report",
    "name": "Santee Sioux Nation (Village of Santee plant)",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0132641, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0132641, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Santee Sioux Nation (Village of Santee plant) reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Santee Sioux Nation (Village of Santee plant) holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -8063,25 +8058,24 @@
    "agency": null,
    "permit": "NE0031739",
    "checked": "2026-11-07",
-   "id": "ne-thurston-dwee-epa-report",
+   "id": "ne-thurston-epa-report",
    "name": "Village of Thurston",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0031739, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0031739, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Village of Thurston reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Village of Thurston holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -8522,25 +8516,24 @@
    "agency": null,
    "permit": "NE0021211",
    "checked": "2026-11-07",
-   "id": "ne-walthill-dwee-epa-report",
+   "id": "ne-walthill-epa-report",
    "name": "Village of Walthill",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0021211, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0021211, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Village of Walthill reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Village of Walthill holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {
@@ -8846,25 +8839,24 @@
    "agency": null,
    "permit": "NE0113212",
    "checked": "2026-11-07",
-   "id": "ne-winnebago-dwee-epa-report",
+   "id": "ne-winnebago-epa-report",
    "name": "Village of Winnebago",
    "channel_kind": "feed",
    "urls": [
     "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
    ],
    "method": "html",
-   "legal_basis": "NPDES permit NE0113212, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read",
+   "legal_basis": "NPDES permit NE0113212, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
-   "noun": "Report to DWEE and EPA",
+   "noun": "Report to EPA",
    "sources": [
-    "ne-epa-sobe",
-    "ne-dwee-net-sso-guide"
+    "ne-epa-sobe"
    ],
-   "note": "Village of Winnebago reports its overflows and bypasses to DWEE and files them in EPA's NeT-SewerOverflow; EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed), weeks after the event. None of its permits has a report in the 2026-11-04 extract. (research/ne/report.md §2.1, §2.2)",
+   "note": "Village of Winnebago holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the echo-sewer-overflow feed). None of its permits has a report in the 2026-11-04 extract. The issuing agency was read from EPA's facility record (2026-11-07).",
    "barrier": null
   },
   {

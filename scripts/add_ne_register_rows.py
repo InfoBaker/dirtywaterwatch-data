@@ -17,7 +17,8 @@ The law (research/ne/report.md §2.1 in the site repository; profile research/ne
     was not read, so the clause is filed unread.
 Rows
   - Per operator: <id>-dwee-epa-report (permit basis; feed_ingested, echo-sewer-overflow), with the count of reports
-    EPA's 2026-11-04 extract holds under the operator's permits.
+    EPA's 2026-11-04 extract holds under the operator's permits; for the operators whose permits EPA issues in Indian
+    country (add_ne_operators.EPA_ISSUED), <id>-epa-report: the report goes to EPA Region 7, not DWEE.
   - Omaha (the one CSO operator): ne-omaha-cso-public-notification (permit, clause unread), the CSO program site
     (voluntary, monitored), the city's overflow pages (voluntary, 403) and its statements to the news media (voluntary).
   - Agency and voluntary rows: AGENCY below, with "none found" rows (urls []) where the research looked and found no
@@ -36,6 +37,7 @@ sys.path.insert(0, str(ROOT / "pipeline"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from add_register_rows import finish, merge  # noqa: E402
 from ingest import notification_pages as NP  # noqa: E402
+from add_ne_operators import EPA_ISSUED  # noqa: E402
 
 REGISTER = ROOT / "data" / "notice-channels"
 DIS = ROOT / "data" / "dischargers.json"
@@ -46,6 +48,9 @@ BW_RELEASE = "https://dwee.nebraska.gov/news-events/press-releases/dwee-launches
 Q_PERMIT = ("NPDES permit {permit}, standard conditions (40 CFR 122.41(l)(6)-(7), as carried in Nebraska permits; "
             "DWEE noncompliance form WAT098): report to DWEE within 24 hours and in writing within 5 days, filed through "
             "EPA's NeT-SewerOverflow (DWEE publication 25-032); permit text not read")
+Q_EPA = ("NPDES permit {permit}, issued by EPA Region 7 in Indian country (EPA's facility record: issuing agency EPA, "
+         "read 2026-11-07), standard conditions (40 CFR 122.41(l)(6)-(7)): report to EPA within 24 hours and in writing "
+         "within 5 days, filed through EPA's NeT-SewerOverflow; Nebraska's rules do not apply; permit text not read")
 Q_NMC = ("NPDES permit NE0133680: public notification of combined sewer overflows (Nine Minimum Controls no. 8, EPA's "
          "CSO Control Policy, 59 FR 18688); the clause is unread: the permit text sits in DWEE's OnBase document viewer")
 # reports in EPA's overflow tables per permit, 2026-11-04 all-versions extract (current version of each report)
@@ -204,6 +209,17 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             "investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
             "campground or resort", "private club", "business or industrial", "institution",
             "facility (permittee not named)") else ""
+        if set(op.get("npdes_permits") or []) <= EPA_ISSUED:
+            rows.append(finish(base(
+                id=f"{oid}-epa-report", operator_id=oid, name=name, permit=permit, channel_kind="feed",
+                urls=[SOBE_PAGE], method="html", legal_basis=Q_EPA.format(permit=permit), basis_kind="permit",
+                monitored=False, unmonitored_reason="feed_ingested", feed_source_id="echo-sewer-overflow",
+                publishes="notices", noun="Report to EPA", sources=["ne-epa-sobe"],
+                note=(f"{name} holds an EPA-issued permit in Indian country: it reports its overflows and bypasses to "
+                      "EPA Region 7, not to DWEE, and EPA publishes them in its overflow tables (read by the "
+                      f"echo-sewer-overflow feed). {reports(op)} The issuing agency was read from EPA's facility record "
+                      "(2026-11-07)."))))
+            continue
         rows.append(finish(base(
             id=f"{oid}-dwee-epa-report", operator_id=oid, name=name, permit=permit, channel_kind="feed",
             urls=[SOBE_PAGE], method="html", legal_basis=Q_PERMIT.format(permit=permit), basis_kind="permit",
