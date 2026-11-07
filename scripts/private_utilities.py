@@ -605,6 +605,12 @@ def candidate(e: dict, basis: str, src: dict, registry: dict, research: dict, in
     residence = single_residence(e["facility"], e["permit_name"])
     facility = NAME_REMOVED if residence else public_name(e["facility"])
     permittee = NAME_REMOVED if residence else public_name(e["permit_name"])
+    if permittee not in (None, NAME_REMOVED):
+        # a permit held in a person's own name (permit_names.person_holder; Texas review 2026-11-07 P1-2): the
+        # trade name after d/b/a was taken above; any other holder's own name is removed
+        import permit_names
+        if permit_names.person_holder(permittee, e["facility"], e["city"]):
+            permittee = NAME_REMOVED
     from build import redact
     waters = [w for w in e["waters"] if not (redact.person_shaped(w) or redact.person_shaped(w.title()))]
     if residence:              # a home: the permit and the state only (its city, county and stream point to it)
