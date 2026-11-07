@@ -85,11 +85,11 @@
     "history": "2010-09 to date (fuller from 2015-2016)",
     "license": "No licence stated in the dataset metadata (licenseId null); data.texas.gov site terms apply.",
     "legal_basis": "30 TAC 305.125(9); 30 TAC 319.301-319.303",
-    "status": "candidate",
-    "status_reason": "Statewide, daily precision, stable incident number, volume, cause, permit and often a named water body, 16 years. No coordinates (county and address text only) and a lag of months.",
+    "status": "used",
+    "status_reason": "Read through the generic Socrata reader (data/sources/tx-tceq-sso-opendata.yaml): 56,545 rows on 2026-11-07, every one a record; safe fields only (customer_number, incident_action and incident_comment not requested); placed only by the water a row names, never geocoded.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "Geocode from incident_description addresses or the regulated entity (RN) location; river_segment gives the TCEQ classified segment when not 0. incident_description, incident_action and incident_comment are free text written by reporters and may name contractors or people: run the name blocklist before display."
+    "checked": "2026-11-07",
+    "notes": "The free text (source, receiving_water_body, incident_description) gets the strict scrub; the operator comes from the row's federal id or data/reference/tx-tceq-permits.json. The research's suggestion to geocode from the description addresses was not taken (owner default 2026-11-07: placement by the named water only)."
   },
   {
     "id": "tx-tceq-ud-sso-page",
@@ -228,10 +228,10 @@
     "history": "current state plus 2023-2025 summaries; the service name changes yearly (BW2025_Summary)",
     "license": "None shown.",
     "legal_basis": "BEACH Act (GLO administers)",
-    "status": "candidate",
-    "status_reason": "Machine-readable coastal advisory feed; local governments post signs; Galveston County Health District issues the Galveston advisories.",
+    "status": "used",
+    "status_reason": "Read through the generic ArcGIS reader (data/sources/tx-glo-beach-watch.yaml): 174 stations on 2026-11-07 (Low 162, Medium 12, High 0); High is the program's advisory, Medium its label.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": "Watch for the service name changing (BW2026_...)."
   },
   {

@@ -85,6 +85,11 @@
 #                  within minutes, with the live map's received time and cause; the last 60 days each hour, the whole
 #                  layer every 20 hours) and al_adem_beaches (ADEM and ADPH's coastal beach monitoring layer: an
 #                  advisory code other than 11 opens a beach advisory)
+#                  Texas: the generic Socrata block tx-tceq-sso-opendata (TCEQ's Sanitary Sewer Overflows table since
+#                  2010: dates only, no locations, published in batches months late; read only when its rowsUpdatedAt
+#                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt
+#                  by scripts/tx_permit_crosswalk.py) and the generic ArcGIS block tx-glo-beach-watch (Texas Beach
+#                  Watch's coastal stations: High is the program's advisory, Medium its label)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

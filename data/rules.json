@@ -186,6 +186,12 @@
     "clock": "end_of_discharge",
     "basis": "Alabama sets no period after a sewage discharge during which the water is to be avoided. Its rule requires the permittee to report a sanitary sewer overflow that reaches a surface water or may endanger health to the Alabama Department of Environmental Management, the public, the county health department and affected water systems as soon as possible, and the Department's reporting form sets 24 hours with a written follow-up within 5 days; the rule sets no channel or content for the notice to the public, and petitions in 2017 and 2018 asking for one were not adopted. The Department posts every report on its public sewer overflow map within minutes of filing. On the coast, the Department of Public Health issues swim advisories from the beach monitoring program and lifts them when bacteria fall below the federal threshold. This site marks a reported discharge while it runs and applies its own caution after it ends",
     "source": "Ala. Admin. Code r. 335-6-6-.12(l)6.(v) and r. 335-6-6-.02(hh); ADEM AEPACS SSO Event Reporting Form v1.5; petition to amend r. 335-6-6-.12 (Alabama Rivers Alliance and eight riverkeepers, March 2017); Coastal Alabama Beach Monitoring Program (ADEM and ADPH, BEACH Act)"
+   },
+   "TX": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Texas law sets no period after a sewage discharge during which the water is to be avoided, and nothing requires a sewage spill to be posted on the web. Every sewer overflow must be reported to the Texas Commission on Environmental Quality's regional office within 24 hours and in writing within five working days (30 TAC 305.125(9)); the Commission publishes these reports as open data in batches, months after they are made, with dates but no times and no locations. A local government's facility must also tell local officials and local media within 24 hours of a spill likely to affect a drinking-water source, of 50,000 gallons or more near one or in a sensitive area, or of 100,000 gallons or more (30 TAC 319.302). Texas Beach Watch recommends a beach advisory when a sample's enterococcus count is above 104 per 100 millilitres; local governments post it. Dates are read in Central time, and in Mountain time in El Paso and Hudspeth counties. This site marks a reported discharge from its start date to its end date and applies its own caution after it ends; a report is placed only on the water it names, and a report that names none is listed by its county",
+    "source": "30 TAC 305.125(9); 30 TAC 319.301-319.303; TCEQ Sanitary Sewer Overflows (data.texas.gov 8kc5-95uk); Texas Beach Watch (Texas General Land Office); 49 CFR 71.9-71.10"
    }
   },
   "by_discharger": {
@@ -331,12 +337,13 @@
   "sample_caution": {
    "sources": [
     "ne-dwee-beachwatch",
-    "hi-doh-cwb-events-api"
+    "hi-doh-cwb-events-api",
+    "tx-glo-beach-watch"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
-   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done), never as the agency's advisory.",
-   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch"
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high; Texas Beach Watch's Medium level, enterococcus from 35 to 104 per 100 mL, at which the program recommends no advisory). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done), never as the agency's advisory.",
+   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii Department of Health, Clean Water Branch; Texas General Land Office, Texas Beach Watch"
   },
   "day_start_caution": {
    "sources": [

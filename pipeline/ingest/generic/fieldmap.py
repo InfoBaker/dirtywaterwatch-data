@@ -584,10 +584,66 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
             continue
         if f in row or v is not None:
             out[f] = v
+    strict = block.get("free_text_scrub") == "strict"
     for f in block.get("free_text") or ():
         if isinstance(out.get(f), str):
-            out[f] = scrub(out[f])
+            out[f] = scrub_strict(out[f]) if strict else scrub(out[f])
     return out, dropped
+
+
+# strict scrub (review 2026-11-07 TX P1-1): numbers that are not house numbers, kept through the cut; a number after a
+# slash or at the start of a field is a house number like any other ("Line Break/1967 Columbus Ave.")
+ROAD_NUMBER = re.compile(r"\b(?:FM|RM|CR|SH|IH|HWY|US|SPUR|LOOP|PR|BUS|I|STATE\s+HIGHWAY|COUNTY\s+ROAD|FARM\s+TO\s+MARKET|"
+                         r"RANCH\s+ROAD|INTERSTATE|HIGHWAY|ROUTE|RT|SR)[\s.-]{0,3}\d{1,4}[A-Z]?\b", re.I)
+SEGMENT_BEFORE_WATER = re.compile(
+    r"(?:^\s*|\bseg(?:ment)?\.?\s*(?:no\.?|#)?\s*)\d{3,4}[A-Z]{0,2}(?=\s+(?:of\s+the\s+)?(?:[A-Za-z'.]+\s+){0,4}?"
+    r"(?:creek|river|bayou|arroyo|lake|bay|reservoir|channel|tidal|basin|segment|estuary|lagoon|laguna)\b)", re.I)
+STREET_AHEAD = re.compile(r"^\W*(?:\S+\s+){0,7}?(?:street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|boulevard|way|court|"
+                          r"ct|circle|cir|trail|trl|parkway|pkwy|bend|crossing|place|pl|loop|terrace|ter|cove|cv|path|"
+                          r"highway|hwy|run)\b\.?", re.I)
+STREET_HOUSE = re.compile(
+    r"(?:(?<![\w.,/:#-])|(?<=#))(\d{1,6}[A-Za-z]?)(?=\s{1,2}(?:(?:block\s+of|at|on|in|of)\s{1,2})?"
+    r"(?:[NSEW]\.?\s{0,2}){0,3}\s?(?:(?:[A-Za-z][\w'.-]*\s{1,2}){1,3}(?:street|st|road|rd|drive|dr|lane|ln|avenue|ave|"
+    r"blvd|boulevard|way|court|ct|circle|cir|trail|trl|parkway|pkwy|bend|crossing|place|pl|loop|terrace|ter|cove|cv|"
+    r"path|run|Qzqx[a-z]+)\b|Qzqx[a-z]+))", re.I)
+UNIT_NUMBER = re.compile(r"\b(lot|apt|apartment|unit|suite|ste|space|spc|trailer|bldg|building)\.?\s*(?:no\.?|#)?\s*\d+[A-Za-z]?\b",
+                         re.I)
+
+
+def scrub_strict(text):
+    """free_text_scrub: strict (a filer's free text that can carry residents' names and home addresses): scrub, then
+    owners' and residents' names and every house number cut, as Michigan's filer text is (mi_egle_mienviro.free_text),
+    with a number after a slash read as one at the start of a field, and lot, apartment and unit numbers cut. Road
+    numbers ("FM 1960") and a segment number before a water ("2202 Arroyo Colorado Above Tidal") are not house
+    numbers and stay."""
+    if not isinstance(text, str):
+        return text
+    from ingest import mi_egle_mienviro as MI          # here: the module imports this one's neighbours
+    keep: list[str] = []
+
+    def hold(m):                      # a word-shaped stand-in, so "12345 FM 1960 Rd" still reads as an address
+        keep.append(m.group(0))
+        i, tag = len(keep) - 1, ""
+        while True:
+            tag = "abcdefghijklmnopqrstuvwxyz"[i % 26] + tag
+            i = i // 26 - 1
+            if i < 0:
+                break
+        return f"Qzqx{tag}"
+    t = ROAD_NUMBER.sub(hold, text)
+    t = SEGMENT_BEFORE_WATER.sub(lambda m: m.group(0) if STREET_AHEAD.match(t[m.end():]) else hold(m), t)
+    t = re.sub(r"/(?=\s*\d)", "/ ", t)
+    t = UNIT_NUMBER.sub(lambda m: f"{m.group(1)} [house number removed]", t)
+    t = scrub_people(MI.free_text(t))
+    t = STREET_HOUSE.sub(lambda m: m.group(0) if (m.start() and t[m.start() - 1] == "#" and len(m.group(1)) < 3)
+                         else "[house number removed]", t)      # whatever stands before it ("No. 19", "LS 8015", "MH 11770 at")
+    def back(m):
+        i = 0
+        for c in m.group(1):
+            i = i * 26 + "abcdefghijklmnopqrstuvwxyz".index(c) + 1
+        return keep[i - 1] if 0 < i <= len(keep) else m.group(0)
+    t = re.sub(r"Qzqx([a-z]+)", back, t)
+    return t
 
 
 # ---------------------------------------------------------------- validation
@@ -768,6 +824,8 @@ def validate(block: dict, source_id: str = "") -> list[str]:
     for f in block.get("free_text") or ():
         if f not in safe:
             errs.append(f"free_text field {f!r} is not a safe field")
+    if block.get("free_text_scrub") not in (None, "strict"):
+        errs.append("free_text_scrub is strict (or absent: the standard scrub)")
     if block.get("time_zone"):
         try:
             ZoneInfo(block["time_zone"])
