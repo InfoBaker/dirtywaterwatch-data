@@ -49,6 +49,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
                     now_iso, read_json, rules_live_states, write_json)
 from build import shoreline as SH
@@ -368,10 +369,10 @@ DEFAULT_CADENCE = [
 
 # ---------------------------------------------------------------- time
 
-def parse_time(s) -> datetime | None:
-    """ISO 8601 to an aware UTC datetime. A naive time is America/New_York local clock time (the
-    sources' convention; an ambiguous or skipped hour at a DST change takes the first reading) and
-    is converted to UTC here, so every window below is added in absolute hours, never wall-clock."""
+def parse_time(s, tz: ZoneInfo | None = None) -> datetime | None:
+    """ISO 8601 to an aware UTC datetime. A naive time (or a bare date, read as its midnight) is local clock time in tz,
+    the record's own zone (event_zone), else America/New_York (an ambiguous or skipped hour at a DST change takes the
+    first reading), and is converted to UTC here, so every window below is added in absolute hours, never wall-clock."""
     if not s:
         return None
     try:
@@ -379,14 +380,52 @@ def parse_time(s) -> datetime | None:
     except ValueError:
         return None
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=LOCAL)
+        dt = dt.replace(tzinfo=tz or LOCAL)
     return dt.astimezone(UTC)
 
 
-def end_of_local_day(dt: datetime) -> datetime:
-    """The end of the America/New_York calendar day containing dt, in UTC (23 or 25 h days included)."""
-    d = dt.astimezone(LOCAL).date() + timedelta(days=1)
-    return datetime(d.year, d.month, d.day, tzinfo=LOCAL).astimezone(UTC)
+def end_of_local_day(dt: datetime, tz: ZoneInfo | None = None) -> datetime:
+    """The end of the calendar day containing dt in tz (the record's zone, event_zone; else America/New_York), in UTC
+    (23 or 25 h days included)."""
+    tz = tz or LOCAL
+    d = dt.astimezone(tz).date() + timedelta(days=1)
+    return datetime(d.year, d.month, d.day, tzinfo=tz).astimezone(UTC)
+
+
+@functools.lru_cache(maxsize=64)
+def _zone(name: str) -> ZoneInfo | None:
+    try:
+        return ZoneInfo(name)
+    except (ValueError, KeyError, OSError):
+        return None
+
+
+def event_zone(ev: dict, state: str | None = None) -> ZoneInfo:
+    """The clock a record's bare dates and unzoned times are read in, and its calendar days end in (SOL 2026-11-07,
+    wave 1 P1-2, wave 2 P1-1): raw.time_zone (an IANA name its ingester gives from the record's own point), else the
+    zone of the record's state at its point (zones.zone_for: Florida, South Dakota and Nebraska by the point), the
+    state from event_state, else the state the caller passes; America/New_York when neither is known."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    if isinstance(raw.get("time_zone"), str) and (z := _zone(raw["time_zone"])):
+        return z
+    name = zones.zone_for(event_state(ev) or state, ev.get("lat"), ev.get("lon"))
+    return (_zone(name) if name else None) or LOCAL
+
+
+def ev_time(ev: dict, key: str, state: str | None = None, tz: ZoneInfo | None = None) -> datetime | None:
+    """parse_time of the record's field in the record's own zone (event_zone)."""
+    v = ev.get(key)
+    if not v:
+        return None
+    return parse_time(v, tz or event_zone(ev, state))
+
+
+def end_precision(ev: dict) -> str | None:
+    """The precision of the record's end: raw.ended_at_precision where the ingester gives the end its own (an exact
+    end borrowed from another report, a lift seen at a poll: minute, hour, poll, bound), else time_precision. Only an
+    end of day precision is counted to the end of its local day (SOL 2026-11-07, wave 1 P1-1, wave 2 P1-2)."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("ended_at_precision") or ev.get("time_precision")
 
 
 # A start more than this far after the build's time is a source error (a NY SPRTK record published with a start of
@@ -397,7 +436,7 @@ FUTURE_START_H = 24
 
 def future_start(ev: dict, now: datetime | None) -> str | None:
     """The validation note for a record whose start lies more than FUTURE_START_H hours after now, else None."""
-    st = parse_time(ev.get("started_at"))
+    st = ev_time(ev, "started_at")
     if st is None or now is None or st <= now + timedelta(hours=FUTURE_START_H):
         return None
     return f"start is in the future as published (started_at {ev.get('started_at')}); it sets no status"
@@ -419,10 +458,11 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     Advisories keep their end, the authority's own (a seasonal shellfish closure may run for months), and so do
     month and year records (their end is the period's end; they set no window), and a planned bypass whose ingester
     labels its end as the operator's planned end (raw.end_is_planned: EPA's anticipated bypass notices)."""
-    en = parse_time(ev.get("ended_at"))
+    tz = event_zone(ev)
+    en = ev_time(ev, "ended_at", tz=tz)
     if en is None:
         return None
-    st = parse_time(ev.get("started_at"))
+    st = ev_time(ev, "started_at", tz=tz)
     if st and en < st:
         return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
     if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
@@ -434,7 +474,7 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     days = end_limit_days(load_rules() if rules is None else rules)
     if days is None:
         return None
-    read = min(t for t in (parse_time(ev.get("fetched_at")), now) if t)
+    read = min(t for t in (ev_time(ev, "fetched_at", tz=tz), now) if t)
     if en <= read + timedelta(days=days):
         return None
     return (f"ended_at {ev.get('ended_at')} is more than {days:g} days after the report was read "
@@ -465,12 +505,13 @@ def end_assumed(ev: dict, now: datetime, rules: dict) -> datetime | None:
     et = ev.get("event_type")
     if not (et in DISCHARGE_TYPES or (et == "unknown" and ev.get("status") == "ongoing")):
         return None
-    if ev.get("time_precision") in COARSE_PRECISION or (parse_time(ev.get("ended_at")) is not None
+    if ev.get("time_precision") in COARSE_PRECISION or (ev_time(ev, "ended_at") is not None
                                                         and not end_not_credible(ev, now, rules)):
         return None
     if ev.get("status") == "ended" and (ev.get("raw") or {}).get("_ended_before"):
         return None
-    begin = parse_time(ev.get("started_at")) or parse_time(ev.get("reported_at")) or parse_time(ev.get("published_at"))
+    tz = event_zone(ev)
+    begin = ev_time(ev, "started_at", tz=tz) or ev_time(ev, "reported_at", tz=tz) or ev_time(ev, "published_at", tz=tz)
     if begin is None:
         return None
     at = begin + timedelta(days=unresolved_days(rules))
@@ -2265,25 +2306,29 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
 
 def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None, rules: dict) -> list[dict]:
     et, st = ev.get("event_type") or "unknown", ev.get("status") or "unknown"
+    tz = event_zone(ev, state)
+
+    def pt(v):
+        return parse_time(v, tz)          # the record's own clock (event_zone)
     if et == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
         return []                 # outfall-months and annual totals are history, never a colour
     if future_start(ev, now):
         return []                 # a start in the future as published: no colour (FUTURE_START_H)
     if et == "unknown" and st != "ongoing":
         return []                 # an unparsed record colours only while it says ongoing
-    start = parse_time(ev.get("started_at")) or parse_time(ev.get("reported_at")) or parse_time(ev.get("published_at"))
+    start = pt(ev.get("started_at")) or pt(ev.get("reported_at")) or pt(ev.get("published_at"))
     if start is None:
         return []
-    end = parse_time(ev.get("ended_at"))
+    end = pt(ev.get("ended_at"))
     end_not_used = end_not_credible(ev, now, rules) if end is not None else None
     if end_not_used:
         end = None      # before the start, or too far ahead: no confirmed end (validation error in build: time_problem)
-    if end is not None and ev.get("time_precision") == "day":
-        end = end_of_local_day(end)          # a day-precision end counts from the end of that day
+    if end is not None and end_precision(ev) == "day":
+        end = end_of_local_day(end, tz)      # a day-precision end counts from the end of that day, in its own zone
     bound = None
     if end is None and st == "ended" and ev.get("time_precision") == "bound":
         # "no activations for 12 hours": ended by this time at the latest; windows count from the bound
-        bound = parse_time((ev.get("raw") or {}).get("_ended_before"))
+        bound = pt((ev.get("raw") or {}).get("_ended_before"))
         if bound is not None:
             end = bound
             start = min(start, bound)        # a report time after the bound is not the discharge's start
@@ -2309,8 +2354,8 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
                 return [_iv(ev, start, end, rule, red, yellow)]
-            listed = parse_time((ev.get("raw") or {}).get("_last_seen_in_source"))
-            unlisted = parse_time((ev.get("raw") or {}).get("_unlisted_since"))
+            listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
+            unlisted = pt((ev.get("raw") or {}).get("_unlisted_since"))
             if unlisted is not None and unlisted > start:
                 # a feed read with history.confirm_while_listed (docs/generic-ingesters.md): the advisory was shown
                 # at every fetch up to the first that no longer found it; it ends there, at or before that fetch
@@ -2319,7 +2364,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 iv["ended_by"] = "no longer on the authority's map at this fetch"
                 return [iv]
             if et in AGING_TYPES:
-                confirmed = max(t for t in (start, parse_time(ev.get("source_updated_at")), listed) if t)
+                confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
                 until = confirmed + timedelta(days=CONFIRM_DAYS)
                 out = [_iv(ev, start, until, rule, red, yellow)]
                 note = _iv(ev, until, max(until, start + timedelta(days=NOTE_DAYS)), "not_reconfirmed", red, yellow)
@@ -2329,11 +2374,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             return [_iv(ev, start, None, rule, red, yellow)]
         if st == "advisory_lifted":
             # needs its own (or inherited) start; ends at ended_at, else when the lifting was reported
-            real_start = parse_time(ev.get("started_at"))
+            real_start = pt(ev.get("started_at"))
             if real_start is None:
                 return []
-            told = [t for t in (parse_time(ev.get("reported_at")), parse_time(ev.get("published_at")),
-                                parse_time(ev.get("source_updated_at"))) if t and t >= real_start]
+            told = [t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at")),
+                                pt(ev.get("source_updated_at"))) if t and t >= real_start]
             e = end or (min(told) if told else None)
             return [_iv(ev, real_start, e, rule, red, yellow)] if e else []
         if end:
@@ -2350,7 +2395,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         then unresolved to day 30, then the off-map note to day 90. Every colour ends by the absolute cap, 30 days
         (unresolved_yellow_days) after the report began, however late it was reported or first seen: after that the
         site assumes the discharge ended and the record says the end was never reported (owner, 2026-11-03)."""
-        cap = (parse_time(ev.get("started_at")) or start) + timedelta(days=unres_days)
+        cap = (pt(ev.get("started_at")) or start) + timedelta(days=unres_days)
         first_until = min(first_until, cap)
         u_until = min(anchor + timedelta(days=unres_days), cap)
         note_from = max(anchor, first_until, u_until)
@@ -2403,17 +2448,17 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
     # extract date that is later than the report (owner, 2026-11-03), and never before the start
     ds = u.get("day_start_caution") or {}
     if ev.get("time_precision") == "day" and ev.get("source_id") in (ds.get("sources") or []) and ds.get("hours") \
-            and parse_time(ev.get("started_at")):
+            and pt(ev.get("started_at")):
         # a feed that gives only the day a discharge began and never an end (Georgia EPD's daily list): the site's
         # caution runs from the start of that day, then the end is unconfirmed to day 30 (unresolved.day_start_caution)
-        day0 = parse_time(ev["started_at"])
+        day0 = pt(ev["started_at"])
         out = no_end(day0, day0 + timedelta(hours=float(ds["hours"])), "day_start_caution")
         for iv in out:
             if iv["rule"] == "day_start_caution":
                 iv["rule_applied"] = {"rule": "unresolved.day_start_caution", "hours": float(ds["hours"]),
                                       "rationale": ds.get("rationale"), "source": "data/rules.json"}
         return out
-    told = next((t for t in (parse_time(ev.get("reported_at")), parse_time(ev.get("published_at"))) if t), None)
+    told = next((t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at"))) if t), None)
     anchor = max(start, told) if told else start
     return no_end(anchor, anchor + timedelta(days=unknown_days), "no_end")
 
