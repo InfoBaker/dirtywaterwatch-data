@@ -79,7 +79,7 @@ def test_echo_date_only_records_of_central_and_mountain_states_end_their_own_day
     assert ends["echo-sewer-overflow:m"] == Z("2026-07-05T06:00:00Z")   # midnight MDT
     # without the stamp, the permit's state gives the zone (never New York's)
     bare = dict(central, raw={})
-    assert S.event_intervals(bare, None, Z("2026-07-04T00:00:00Z"), rules=RULES)[0]["end"] == Z("2026-07-05T05:00:00Z")
+    assert S.event_intervals(bare, "NE", Z("2026-07-04T00:00:00Z"), rules=RULES)[0]["end"] == Z("2026-07-05T05:00:00Z")
 
 
 def test_echo_stamps_the_zone_of_a_date_only_record():
