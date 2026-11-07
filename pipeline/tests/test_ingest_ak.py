@@ -120,8 +120,8 @@ def test_receiving_water_text_and_where_it_went():
     assert fish["raw"]["receiving_waters"] == ["Fish Creek which flowed to Travels to Cook Inlet"]
     assert fish["raw"]["receiving_water_aliases"] == {"Fish Creek which flowed to Travels to Cook Inlet":
                                                       "Fish Creek; Cook Inlet"}
-    assert kept["AK0022551:43:1"]["waterbody_text"] == "Birch Lake"
-    assert "receiving_water_aliases" not in kept["AK0022551:43:1"]["raw"]
+    assert kept["AK0022551:43:1"]["waterbody_text"] == "Birch Lake (Anchorage)"   # the Anchorage lake (alias)
+    assert kept["AK0022551:43:1"]["raw"]["receiving_water_aliases"] == {"Birch Lake": "Birch Lake (Anchorage)"}
     assert E.split_water("Fish Creek which flows into Ship Creek", "AK") == ["Fish Creek", "Ship Creek"]
     assert E.split_water("Fish Creek which flowed to Cook Inlet", "MA") == ["Fish Creek which flowed to Cook Inlet"]
 
