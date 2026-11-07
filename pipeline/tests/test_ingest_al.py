@@ -48,7 +48,9 @@ def test_times_are_central_wall_clock_and_received_time_from_the_live_layer():
     r = recs["SSO-00215084"]                          # live: began 2026-11-03 01:03 pm, stopped 01:30 pm
     assert r["started_at"] == "2026-11-03T13:03:00-06:00" and r["ended_at"] == "2026-11-03T13:30:00-06:00"
     assert r["time_precision"] == "minute" and r["status"] == "ended"
-    assert r["reported_at"] == "2026-11-05T15:05:00-06:00"         # received_date 'Nov  5 2026  3:05PM'
+    assert r["reported_at"] is None                    # version 2: 'Nov  5 2026  3:05PM' is the final report's receipt
+    assert r["raw"]["_received_latest_version"]["received"] == "2026-11-05T15:05:00-06:00"
+    assert recs["SSO-00214479"]["reported_at"] == "2026-10-30T12:30:00-05:00"    # version 1: the first filing
     assert r["raw"]["report_type"] == "Final Report" and r["raw"]["live"]["cause_of_discharge"] == "vent saddle rusted"
     assert r["discharger_id"] == "al-baldwin-county-sewer-service"
     summer = recs["SSO-00207548"]["started_at"]
@@ -126,7 +128,7 @@ def test_history_is_carried_and_a_full_read_marks_missing_reports():
     assert again["SSO-00000285"]["raw"]["_missing_from_layer_since"] == AT
     part, _ = _build(prev=copy.deepcopy(prev), hist=hist[:3], live=[], full=False)
     assert len(part) == 19 and "_missing_from_layer_since" not in part["SSO-00000285"]["raw"]
-    assert part["SSO-00215084"]["reported_at"] == "2026-11-05T15:05:00-06:00"   # kept once seen
+    assert part["SSO-00214479"]["reported_at"] == "2026-10-30T12:30:00-05:00"   # kept once seen
 
 
 def test_live_only_report_is_built_from_the_live_layer():

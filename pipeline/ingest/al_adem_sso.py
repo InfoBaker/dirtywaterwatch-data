@@ -31,10 +31,12 @@ Record rules (one sso record per ADEM report id, source_record_id "SSO-00215084"
   - The live layer gives old ids as bare numbers ("8447"); they are written as the history layer writes them
     ("SSO-00008447").
   - Times: the history layer stores Central wall-clock time as if it were UTC (an epoch of 13:03 UTC is the live
-    layer's "2026-11-03 01:03 pm" for the same report, checked on all 30 shared reports on 2026-11-07): each value is
+    layer's "2026-11-03 01:03 pm" for the same report, checked on all 31 live-layer reports on 2026-11-07): each value is
     read as UTC and its wall-clock time labelled America/Chicago (raw._time_basis). time_precision minute.
-    reported_at is the live layer's received_date (ADEM's receipt, Central time) while the report is on the live
-    layer, kept once seen; the history layer gives no receipt time, so older reports have none. published_at and
+    reported_at is the live layer's received_date (Central time) when the report is still at version 1 there: the
+    field is the receipt of the latest version filed, so for a later version it is kept in raw._received_latest_version
+    and never taken for the first notice; once set it is kept. The history layer gives no receipt time, so most
+    reports have none. published_at and
     source_updated_at are null (the layers give no posting or edit time); raw._first_seen_at is our clock.
   - Status: sso_ongoing_ind Yes -> ongoing, as ADEM marks it, however old the start (nine reports on 2026-11-07, one
     from 2018-03-18); a stop time -> ended at it; otherwise unknown. A stop before the start is not used.
@@ -439,10 +441,17 @@ def build_record(a, live, base, raw, prev, ops, known_ids) -> dict:
     # received time: the live layer's, kept once seen
     p_raw = (prev or {}).get("raw") or {}
     received = live_time((live or {}).get("received_date")) if live else None
-    reported_at = iso(received) or (prev or {}).get("reported_at")
-    if received:
-        raw["_received_basis"] = "received_date on ADEM's live SSO map layer (ADEM's receipt of the filing)"
-    elif reported_at:
+    live_ver = str((live or {}).get("sso_report_version") or "").strip()
+    reported_at = (prev or {}).get("reported_at")
+    if received and live_ver == "1":
+        reported_at = reported_at or iso(received)
+        raw["_received_basis"] = ("received_date on ADEM's live SSO map layer while the report was at version 1 "
+                                  "(ADEM's receipt of the first filing)")
+    elif received:
+        raw["_received_latest_version"] = {"version": live_ver or None, "received": iso(received),
+                                           "basis": "received_date on ADEM's live layer: the receipt of this version, "
+                                                    "not of the first filing"}
+    if reported_at and "_received_basis" not in raw:
         raw["_received_basis"] = p_raw.get("_received_basis")
 
     lat, lon = fnum(a.get("lat")), fnum(a.get("long"))
