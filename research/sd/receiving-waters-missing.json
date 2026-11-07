@@ -1,8 +1,31 @@
 {
  "about": "Receiving-water names in SD's reports (EPA's overflow tables for South Dakota permits, the extract of 2026-11-04, and DANR's harmful algal bloom advisories, read 2026-11-07) that data/receiving-waters-national.json does not hold for SD, by name as typed, with the number of reports giving each. Reports that say the discharge reached no water are left out.",
  "state": "SD",
- "waters": 15,
- "reports": 16,
+ "left_out": [
+  {
+   "name": "Unnamed",
+   "reports": 1,
+   "reason": "names no water"
+  }
+ ],
+ "waters": 7,
+ "reports": 8,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in SD": 2,
+  "6 NHD waters of that name in SD and the reports give no place to choose one": 2,
+  "1 NHD water of that name in SD, none within reach of the reports' places": 1,
+  "4 NHD waters of that name in SD, none within reach of the reports' places": 1,
+  "no water name": 1
+ },
+ "resolved_names": 8,
+ "resolved_reports": 8,
+ "build": {
+  "date": "2026-11-07",
+  "command": "python -m ingest.waters_from_nhd --names research/sd/receiving-waters-missing.json --state SD",
+  "records_built": 1,
+  "names_resolved": 8,
+  "network_requests": 8
+ },
  "rows": [
   {
    "name": "Dry Run Creek",
@@ -21,7 +44,8 @@
    ],
    "as_typed": [
     "Dry Run Creek"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in SD; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Clear Lake",
@@ -35,40 +59,8 @@
    ],
    "as_typed": [
     "Clear Lake"
-   ]
-  },
-  {
-   "name": "Dry Lake",
-   "reports": 1,
-   "permits": [
-    "SDG821598"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     45.050196,
-     -97.323078
-    ]
-   ],
-   "as_typed": [
-    "Dry Lake"
-   ]
-  },
-  {
-   "name": "Lake Albert",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "sd-danr-hab-advisories"
-   ],
-   "counties": [
-    "Kingsbury County"
-   ],
-   "as_typed": [
-    "Lake Albert"
-   ]
+   "reason": "6 NHD waters of that name in SD and the reports give no place to choose one"
   },
   {
    "name": "Lake Francis",
@@ -87,40 +79,14 @@
    ],
    "as_typed": [
     "lake francis"
-   ]
-  },
-  {
-   "name": "Lake Poinsett",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "sd-danr-hab-advisories"
    ],
-   "counties": [
-    "Hamlin County"
-   ],
-   "as_typed": [
-    "Lake Poinsett"
-   ],
-   "in_national_list": true
-  },
-  {
-   "name": "McCook Lake",
-   "reports": 1,
-   "permits": [
-    "SD0020567"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     42.550249,
-     -96.511671
-    ]
-   ],
-   "as_typed": [
-    "McCook Lake"
+   "reason": "1 NHD water of that name in SD, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "places_failed": [
+    {
+     "lon": -96.82267,
+     "lat": 43.44483,
+     "reason": "no NHD water of that name within 2 km of the reports' point (43.44483, -96.82267) (the nearest is 153.5 km away)"
+    }
    ]
   },
   {
@@ -140,26 +106,8 @@
    ],
    "as_typed": [
     "Scatterwood via Drainage ditch"
-   ]
-  },
-  {
-   "name": "Spearfish Creek",
-   "reports": 1,
-   "permits": [
-    "SD0020044"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     44.550351,
-     -103.866191
-    ]
-   ],
-   "as_typed": [
-    "Spearfish Creek / Rubble Site Cell"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in SD; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Twin Lakes",
@@ -173,7 +121,8 @@
    ],
    "as_typed": [
     "Twin Lakes"
-   ]
+   ],
+   "reason": "6 NHD waters of that name in SD and the reports give no place to choose one"
   },
   {
    "name": "Unnamed tributary of Battle Creek",
@@ -192,58 +141,17 @@
    ],
    "as_typed": [
     "Tributary to Battle Creek"
-   ]
-  },
-  {
-   "name": "Unnamed tributary of Big Sioux River",
-   "reports": 1,
-   "permits": [
-    "SD0023388"
    ],
-   "sources": [
-    "echo-sewer-overflow"
+   "reason": "4 NHD waters of that name in SD, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "parts": [
+    "Battle Creek"
    ],
-   "points": [
-    [
-     44.244361,
-     -96.806361
-    ]
-   ],
-   "as_typed": [
-    "Tributary to the Big Sioux River"
-   ]
-  },
-  {
-   "name": "Unnamed tributary of Whitewood Creek",
-   "reports": 1,
-   "permits": [
-    "SD0028615"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     44.318094,
-     -103.789031
-    ]
-   ],
-   "as_typed": [
-    "Unnamed tributary of Whitewood Creek"
-   ]
-  },
-  {
-   "name": "Wall Lake",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "sd-danr-hab-advisories"
-   ],
-   "counties": [
-    "Minnehaha County"
-   ],
-   "as_typed": [
-    "Wall Lake"
+   "places_failed": [
+    {
+     "lon": -103.59465,
+     "lat": 44.39511,
+     "reason": "no NHD water of that name within 2 km of the reports' point (44.39511, -103.59465) (the nearest is 54.2 km away)"
+    }
    ]
   },
   {
@@ -263,14 +171,104 @@
    ],
    "as_typed": [
     "West branch of Lac Qui Parle River"
-   ]
+   ],
+   "reason": "no water name"
   }
  ],
- "left_out": [
+ "resolved": [
   {
-   "name": "Unnamed",
+   "name": "Dry Lake",
    "reports": 1,
-   "reason": "names no water"
+   "slugs": [
+    "dry-lake-florence-sd"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.050196,
+     -97.323078
+    ]
+   ]
+  },
+  {
+   "name": "Lake Albert",
+   "reports": 1,
+   "slugs": [
+    "lake-albert-sd"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Lake Poinsett",
+   "reports": 1,
+   "slugs": [
+    "lake-poinsett-sd"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "McCook Lake",
+   "reports": 1,
+   "slugs": [
+    "mccook-lake-sd"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     42.550249,
+     -96.511671
+    ]
+   ]
+  },
+  {
+   "name": "Spearfish Creek",
+   "reports": 1,
+   "slugs": [
+    "spearfish-creek-sd"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     44.550351,
+     -103.866191
+    ]
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Big Sioux River",
+   "reports": 1,
+   "slugs": [
+    "big-sioux-river-sd"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.244361,
+     -96.806361
+    ]
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Whitewood Creek",
+   "reports": 1,
+   "slugs": [
+    "whitewood-creek-sd"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.318094,
+     -103.789031
+    ]
+   ]
+  },
+  {
+   "name": "Wall Lake",
+   "reports": 1,
+   "slugs": [
+    "wall-lake-sd"
+   ],
+   "how": "a water record already holds the name"
   }
  ]
 }
