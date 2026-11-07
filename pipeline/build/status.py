@@ -1988,6 +1988,23 @@ class Resolver:
             out["note"] = "; ".join(x for x in (said, out.get("note")) if x)
         return out
 
+    @staticmethod
+    def place_elsewhere(ev: dict) -> str | None:
+        """Why a record is not placed here: its raw.state (with raw.state_basis, the evidence) names a state other than
+        the one it counts under (event_state), which happens only when that state is not shown (event_state reads a
+        live raw.state first). Nebraska's Beach Watch station on Lake Yankton, South Dakota (ingest/ne_transforms.py
+        OUT_OF_STATE_STATIONS) is the case: before, its point fell to the Missouri River in Nebraska, 319 m away."""
+        raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+        own = str(raw.get("state") or "").strip().upper()
+        if len(own) != 2 or not raw.get("state_basis"):
+            return None
+        counted = event_state(ev)
+        if counted is None or counted == own:
+            return None
+        county = f"{raw['county']}, " if raw.get("county") else ""
+        return (f"the report's place lies in {county}{own}, a state this site does not show yet: not placed on a "
+                f"water of {counted}")
+
     def _resolve(self, ev: dict) -> dict:
         given = list(dict.fromkeys(self.canon(s) for s in ev.get("water_slugs") or []))
         known = [s for s in given if s in self.waters]
@@ -1999,6 +2016,12 @@ class Resolver:
             if nr:                  # kept, with its page; colours nothing, no reach (counted with no_receiving_water)
                 return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
                         "no_receiving_water": nr, "no_release": True}
+        elsewhere = self.place_elsewhere(ev)
+        if elsewhere:
+            # the record says its place lies in a state the site does not show: never placed on a water of the state
+            # it is counted under (a name of that state, or the nearest water to the point across the line)
+            return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
+                    "unplaced_reason": elsewhere}
         text0 = ev.get("waterbody_text")
         if isinstance(text0, str) and text0.strip() \
                 and (not re.sub(r"[\W_]+", "", text0.replace(REDACTED, "")) or person_shaped(text0)) \
