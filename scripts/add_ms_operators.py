@@ -11,10 +11,13 @@ Inputs
      owner is read from EPA's permit name: a public authority, district, board of supervisors, school district, tribe
      or state body named before the facility ('JACKSON COUNTY UTILITY AUTHORITY, POTW 7C'; the abbreviations HCUA,
      DCRUA, PRCUA, SCUA and JCUA spelt out from EPA's own longer names), 'X, CITY OF' and 'X, TOWN OF', else the place
-     before 'POTW' or 'LAGOON' ('LAUREL POTW, NUMBER 2' is Laurel's). A municipality named only by its place is filed as
-     "the municipal sewer system of X", legal form city (a city, town or village: the class was not read).
-  3. Permits EPA's overflow tables name (kept or dropped reports) that no plant row holds (one on 2026-11-07: a school
-     district's lift station, named from the collection system EPA's table gives).
+     before 'POTW' or 'LAGOON' ('LAUREL POTW, NUMBER 2' is Laurel's). A municipality named only by its place takes its
+     class from the Census Bureau's 2024 Gazetteer (data/reference/ms-census-places.json): "City of X" (city) or "Town
+     of X" / "Village of X" (legal form town); a place the Gazetteer does not list keeps "X municipal sewer system", null.
+  3. Permits EPA's overflow tables name (kept or dropped reports; data/reference/ms-epa-sobe-permits.json, written by
+     scripts/ms_reference_files.py, so the rows rebuild from committed files) that no plant row holds (one on
+     2026-11-07: a school district's lift station, MS0034487, in HAND).
+  kind: "sso" for an operator with a permit that files reports in EPA's overflow tables, else "plant".
   4. research/ms/private-utilities-candidates.json (36 private sewage permits): grouped by permittee as EPA ICIS-NPDES
      records it, legal_form from PRIVATE below (docs/legal-forms.md), never an individual's name: a permit whose
      permittee the candidates file removed is filed under its facility (or its permit alone when the facility's name
@@ -43,8 +46,8 @@ DIS = ROOT / "data" / "dischargers.json"
 RESEARCH = ROOT / "research" / "ms" / "dischargers.json"
 CANDIDATES = ROOT / "research" / "ms" / "private-utilities-candidates.json"
 PLANTS = ROOT / "data" / "outfalls-plants-us.json"
-EVENTS = ROOT / "data" / "build" / "events" / "echo-sewer-overflow.json"
-DROPPED = ROOT / "data" / "build" / "echo-sewer-overflow-dropped.json"
+SOBE = ROOT / "data" / "reference" / "ms-epa-sobe-permits.json"        # scripts/ms_reference_files.py
+CENSUS = ROOT / "data" / "reference" / "ms-census-places.json"
 
 BASE_LAW = ("No Mississippi statute or rule requiring public notice of a sewer overflow or a bypass was found: the "
             "permit conditions require a report to MDEQ within 24 hours and, from 21 December 2025, an electronic "
@@ -108,7 +111,7 @@ PRIVATE = {
     "TUNICA INDUSTRIAL PARK": ("business or industrial", "The industrial park's own plant; its owner was not read."),
     "RAINBOW LAKES PROPERTY OWNERS ASSOC": ("homeowners' association", "A property owners' association."),
     "RESERVOIR EAST SUBDIVISION": ("homeowners' association", "A subdivision's plant; the owner was not read."),
-    "MIZE POTW": ("business or industrial", "EPA types the plant privately owned; the owner was not read."),
+    "MIZE POTW": (None, "EPA types the plant privately owned, though Mize is a town; the owner was not read."),
     "CHURCH OF GOD THE BIBLEWAY INC": ("institution", "A church's campground."),
     "CEDAR CREEK LLC": ("business or industrial", ""),
     "GREAT RIVER UTILITY OPERATING CO LLC": ("investor-owned utility", "A sewer company with subdivision plants."),
@@ -117,14 +120,14 @@ PRIVATE = {
     "KATSIB PROPERTIES LLC": ("mobile-home park", "The owner of a mobile-home park."),
     "WESTSIDE CHURCH OF CHRIST": ("institution", "A church."),
     "ANDERSON GROVE LLC": ("mobile-home park", "The owner of a mobile-home park."),
-    "PASCAGOULA WATER TREATMENT PLANT, BAYOU CASOTTE": ("business or industrial",
-                                                        "EPA types the plant privately owned; the owner was not read."),
+    "PASCAGOULA WATER TREATMENT PLANT, BAYOU CASOTTE": (None, "EPA types the plant privately owned, though the name "
+                                                              "reads as a public plant; the owner was not read."),
     "SOUTHWEST DEVELOPMENT CORP": ("business or industrial", "A developer."),
     "CAESAR OAKS LLC": ("business or industrial", ""),
     "EAST OXFORD UTILITIES LLC": ("investor-owned utility", "A sewer company."),
     "OUR LADY OF HOPE INC": ("institution", ""),
     "AUBURN APARTMENTS LLC": ("business or industrial", "An apartment complex's owner."),
-    "BEAU RIVAGE RESORTS LLC": ("private club", "A resort's golf course."),
+    "BEAU RIVAGE RESORTS LLC": ("campground or resort", "A resort's golf course."),
 }
 PRIVATE_ALIASES = {"GREAT RIVER UTILITY OPERATING COMPANY LLC": "GREAT RIVER UTILITY OPERATING CO LLC",
                    "ADAMS COUNTY WATER ASSN INC": "ADAMS COUNTY WATER ASSOCIATION"}
@@ -180,7 +183,7 @@ def owner(permit: str, permit_name: str | None, facility_type: str | None) -> tu
         k, disp, lf = HAND[permit]
         if disp is None:
             return owner("", k, facility_type)
-        return k, disp, lf, "read by hand from EPA's permit name and facility type"
+        return k, disp, lf, "read by hand from EPA's permit name and facility type (HAND)"
     s = norm(permit_name)
     m = CITY_OF.match(s)
     if m:
@@ -201,9 +204,14 @@ def owner(permit: str, permit_name: str | None, facility_type: str | None) -> tu
             if CITIES and compact(place) not in CITIES:
                 return s, smart_title(s), None, ("EPA's permit name; EPA types the plant municipal or a water "
                                                  "district, but the name is not its town's: the owner was not read")
-            return place, f"{smart_title(place)} municipal sewer system", "city", (
-                "EPA's permit name gives the place, EPA types the plant municipal; Mississippi's class of the "
-                "municipality (city, town or village) was not read")
+            cls = PLACES.get(compact(place))
+            if cls:
+                return place, f"{cls.title()} of {smart_title(place)}", "city" if cls == "city" else "town", (
+                    f"EPA's permit name gives the place and EPA types the plant municipal; {smart_title(place)} is a "
+                    f"{cls} (Census Bureau 2024 Gazetteer)")
+            return place, f"{smart_title(place)} municipal sewer system", None, (
+                "EPA's permit name gives the place and EPA types the plant municipal; the place is not an "
+                "incorporated place of the Census Bureau's 2024 Gazetteer, so its class was not read")
     body = re.sub(r",.*$", "", s) if form(re.sub(r",.*$", "", s)) else s
     return body, smart_title(body), form(body), "EPA's permit name"
 
@@ -214,6 +222,8 @@ def compact(s: str | None) -> str:
 
 # the cities EPA ICIS-NPDES gives for Mississippi's plants: a place before 'POTW' that is one of them is a municipality
 CITIES = {compact(r.get("city")) for r in json.loads(PLANTS.read_text())["outfalls"] if r.get("state") == "MS"} - {""}
+# incorporated places and their class (city, town, village), keyed like compact()
+PLACES = {compact(n): v["class"] for n, v in json.loads(CENSUS.read_text())["places"].items()}
 
 
 def slug(s: str) -> str:
@@ -244,18 +254,9 @@ def plants() -> dict[str, list[dict]]:
 
 
 def sobe_permits() -> dict[str, str | None]:
-    """MS permit -> the collection system EPA's overflow tables name, over kept and dropped reports."""
-    out: dict[str, str | None] = {}
-    if EVENTS.exists():
-        for r in json.loads(EVENTS.read_text()).get("records", []):
-            p = r.get("npdes_permit") or ""
-            if p.startswith("MS"):
-                out.setdefault(p, (r.get("raw") or {}).get("collection_system_name"))
-    if DROPPED.exists():
-        for r in json.loads(DROPPED.read_text()).get("dropped", []):
-            if str(r.get("permit") or "").startswith("MS"):
-                out.setdefault(r["permit"], None)
-    return out
+    """MS permit -> the first collection system EPA's overflow tables name (data/reference/ms-epa-sobe-permits.json)."""
+    doc = json.loads(SOBE.read_text())
+    return {p: (v.get("collection_systems") or [None])[0] for p, v in doc["permits"].items()}
 
 
 def build(dis: list[dict]) -> tuple[list[dict], Counter]:
@@ -293,7 +294,7 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
         if c["npdes_permit"] in held or c["npdes_permit"] in pl:
             continue
         k, disp, lf, basis = owner(c["npdes_permit"], c["permittee_as_recorded"], None)
-        g = group(k, disp, lf, basis + " (EPA types the facility privately owned; the permittee is a public body)")
+        g = group(k, disp, lf, basis + "; EPA types the facility privately owned, but the permittee is a public body")
         g["permits"].append(c["npdes_permit"])
         g["cands"].append(c)
         counts["public bodies EPA types private"] += 1
@@ -316,6 +317,7 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
         k = keys.pop()
         groups[k]["research"] = r
     reserved = {r["id"] for r in research}
+    reporting = set(sobe_permits())
     for k, g in sorted(groups.items(), key=lambda kv: kv[0]):
         perms = list(dict.fromkeys(g["permits"]))
         if not perms or set(perms) <= held:
@@ -331,17 +333,18 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
             rid = f"{rid}-{perms[0].lower()}"
         facs = ", ".join(sorted(
             {f"{smart_title(x.get('permit_name') or x.get('permittee') or '')} ({x['npdes_permit']})" for x in rows}
-            | {f"{smart_title(n or '')} ({p}, from EPA's overflow tables)" for p, n in g["sobe"]}
+            | {(f"{smart_title(n)} ({p}, from EPA's overflow tables)" if n else f"permit {p} (from EPA's overflow tables)")
+               for p, n in g["sobe"]}
             | {f"{smart_title(c['facility'])} ({c['npdes_permit']})" for c in g["cands"]
                if c["facility"] != "[name removed]"}))
         waters = list(dict.fromkeys([*(r.get("receiving_waters") or [] if r else []),
                                      *[x["receiving_water_echo"] for x in rows if x.get("receiving_water_echo")]]))[:8]
         towns = list(dict.fromkeys([*(r.get("towns") or [] if r else []),
                                     *sorted({smart_title(x["city"]) for x in rows + g["cands"] if x.get("city")})]))
-        notes = f"Owner from {g['basis']}. Plants: {facs}."
+        notes = f"Owner: {g['basis']}. Plants and systems: {facs}."
         if r:
             notes += " " + (r.get("notes") or "")
-        kind = "sso" if r else ("sso" if g["sobe"] else "plant")
+        kind = "sso" if set(perms) & reporting else "plant"     # one rule: a permit that files overflow reports
         nr = row(rid, name, re.sub(r" \(.*\)$", "", name), kind, perms, towns, waters, notes.strip(), lf,
                  outfall_count=len(rows) or None,
                  outfalls_source=(f"EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, {len(rows)} rows)"
@@ -384,7 +387,7 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
             waters = list(dict.fromkeys(w for c in cs for w in c.get("receiving_waters_echo") or []))[:8]
         if rid in ids:
             rid = f"{rid}-{perms[0].lower()}"
-        nr = row(rid, name, name, "plant", perms, sorted({smart_title(c["city"]) for c in cs if c.get("city")}), waters,
+        nr = row(rid, name, name, "sso" if set(perms) & reporting else "plant", perms, sorted({smart_title(c["city"]) for c in cs if c.get("city")}), waters,
                  (note + f" Plants: {facs}. Privately owned by EPA's facility type; permittee as EPA ICIS-NPDES records "
                   "it (research/ms/private-utilities-candidates.json); MDEQ's permit documents were not read.").strip(),
                  lf, verified="inferred", private=True)

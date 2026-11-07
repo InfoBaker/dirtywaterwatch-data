@@ -176,6 +176,13 @@ def test_every_mississippi_permit_has_exactly_one_operator_row():
     assert by_id["ms-hinds-community-college"]["legal_form"] == "state facility"   # EPA types it private
     assert by_id["ms-cleary-heights-potw"]["legal_form"] is None                      # a subdivision's plant, not a town
     assert by_id["ms-great-river-utility-operating-co-llc"]["legal_form"] == "investor-owned utility"
+    assert by_id["ms-mize-potw"]["legal_form"] is None and by_id["ms-beau-rivage-resorts-llc"]["legal_form"] == \
+        "campground or resort"
+    filing = set(json.loads((ROOT / "data" / "reference" / "ms-epa-sobe-permits.json").read_text())["permits"])
+    for r in dis:      # one kind rule: an operator with a permit that files overflow reports is "sso"
+        assert r["kind"] == ("sso" if set(r["npdes_permits"]) & filing else "plant"), r["id"]
+        assert "Owner from" not in r["notes"] and "Plants:  (" not in r["notes"]
+    assert sum(r["kind"] == "sso" for r in dis) == 33
     for r in dis:
         assert "[name removed]" not in r["name"] and r["notification_signup_url"] is None
         assert "24 hours" in r["notification_channel"]
@@ -187,9 +194,6 @@ def test_the_operator_rows_are_reproducible():
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
     dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
-    if not m.EVENTS.exists():          # the one permit only EPA's tables name needs the events file
-        import pytest
-        pytest.skip("no events file of EPA's tables in data/build")
     out, _ = m.build(dis)
     assert [r for r in out if r.get("state") == "MS"] == _ms_operators()
 
@@ -200,7 +204,9 @@ def test_owner_names_from_epa_permit_names():
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
     o = lambda p, n, t="Municipal or Water District": m.owner(p, n, t)[:3]   # noqa: E731
-    assert o("X", "LAUREL POTW, NUMBER 2") == ("LAUREL", "Laurel municipal sewer system", "city")
+    assert o("X", "LAUREL POTW, NUMBER 2") == ("LAUREL", "City of Laurel", "city")          # Census: a city
+    assert o("X", "KILMICHAEL POTW") == ("KILMICHAEL", "Town of Kilmichael", "town")         # Census: a town
+    assert o("X", "FOXWORTH POTW")[1:] == ("Foxworth municipal sewer system", None)        # not incorporated
     assert o("X", "WEST POINT POTW, WEST")[0] == "WEST POINT"
     assert o("X", "HARRISON CO UTIL AUTH, S20 D'IBERVILLE WWTF")[:2] == (
         "HARRISON COUNTY UTILITY AUTHORITY", "Harrison County Utility Authority")
