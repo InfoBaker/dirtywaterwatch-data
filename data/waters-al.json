@@ -1,0 +1,4266 @@
+{
+ "state": "AL",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 120,
+ "waters": [
+  {
+   "slug": "abbie-creek-al",
+   "name": "Abbie Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Abbeville"
+   ],
+   "bbox": [
+    -85.105187,
+    31.409822,
+    -85.078938,
+    31.417184
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "abbie-creek-boat-launch-al"
+   ],
+   "water_id": "abbie-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "3dcb73f5667be3caf6fb3aab8835a2120f2288cbaf436982291956ec991472d2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alabama-river-al",
+   "name": "Alabama River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Autaugaville",
+    "Benton",
+    "Boykin",
+    "Cahaba",
+    "Cedar Point",
+    "Claiborne",
+    "Elm Bluff",
+    "Finchburg",
+    "Franklin",
+    "Georgetown",
+    "Gosport",
+    "Jackson"
+   ],
+   "bbox": [
+    -87.943146,
+    31.137073,
+    -86.278182,
+    32.490486
+   ],
+   "wikidata": "Q558643",
+   "charted": true,
+   "area_km2": 0.461,
+   "launches": [
+    "alabama-river-boat-launch-near-boykin-al-2",
+    "beech-creek-marina-public-boat-ramp-al",
+    "bell-s-landing-boat-ramp-al",
+    "alabama-river-boat-launch-near-benton-al",
+    "bethel-branch-boat-ramp-al",
+    "claiborne-damsite-east-north-boat-ramp-al",
+    "claiborne-damsite-east-south-boat-ramp-al",
+    "claiborne-landing-al",
+    "clifton-ferry-boat-ramp-al",
+    "cobbs-landing-boat-ramp-al",
+    "cooters-pond-boat-ramp-al",
+    "coy-public-dirt-ramp-al",
+    "dixie-landing-public-ramp-al",
+    "ellis-landing-boat-ramp-al",
+    "elm-bluff-boat-ramp-al",
+    "eurika-landing-al",
+    "gainestown-public-boat-ramp-al",
+    "boykin-boat-launch-al-3",
+    "gullets-bluff-boat-ramp-al",
+    "cedar-point-boat-launch-al-2",
+    "haines-island-boat-ramp-al",
+    "holleys-ferry-boat-ramp-al",
+    "jones-bluff-park-boat-ramp-al",
+    "mcduffie-landing-boat-ramp-al",
+    "alabama-river-boat-launch-near-cahaba-al",
+    "portland-landing-al",
+    "powder-magazine-boat-ramp-al",
+    "prairie-creek-boat-ramp-dock-al",
+    "boykin-boat-launch-al",
+    "silver-creek-boat-ramp-al",
+    "six-mile-creek-boat-ramp-al",
+    "steele-s-landing-boat-ramp-al"
+   ],
+   "water_id": "alabama-river-al",
+   "gnis_id": "154961",
+   "geometry_hash": "4725055fa3a220911323989e2442c88d94c84fac95052a9783db13d7f01b5686",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "alabama-river-boat-launch-near-autaugaville-al",
+    "alabama-river-boat-launch-near-autaugaville-al-2",
+    "alabama-river-boat-launch-near-boykin-al",
+    "alabama-river-boat-launch-near-jackson-al",
+    "alabama-river-boat-launch-near-millbrook-al",
+    "alabama-river-boat-launch-near-millbrook-al-2",
+    "alabama-river-boat-launch-near-millbrook-al-3",
+    "alabama-river-boat-launch-near-monroeville-al",
+    "alabama-river-boat-launch-near-montgomery-al-3",
+    "alabama-river-boat-launch-near-montgomery-al-4",
+    "alabama-river-boat-launch-near-montgomery-al-5",
+    "alabama-river-boat-launch-near-montgomery-al-6",
+    "alabama-river-boat-launch-near-montgomery-al-7",
+    "alabama-river-boat-launch-near-packards-bend-al",
+    "alabama-river-boat-launch-near-peace-al",
+    "alabama-river-boat-launch-near-peace-al-10",
+    "alabama-river-boat-launch-near-peace-al-11",
+    "alabama-river-boat-launch-near-peace-al-12",
+    "alabama-river-boat-launch-near-peace-al-13",
+    "alabama-river-boat-launch-near-peace-al-2",
+    "alabama-river-boat-launch-near-peace-al-3",
+    "alabama-river-boat-launch-near-peace-al-4",
+    "alabama-river-boat-launch-near-peace-al-5",
+    "alabama-river-boat-launch-near-peace-al-6",
+    "alabama-river-boat-launch-near-peace-al-7",
+    "alabama-river-boat-launch-near-peace-al-8",
+    "alabama-river-boat-launch-near-peace-al-9",
+    "alabama-river-boat-launch-near-pinebelt-al",
+    "alabama-river-boat-launch-near-prattville-al",
+    "alabama-river-boat-launch-near-prattville-al-2",
+    "alabama-river-boat-launch-near-prattville-al-3",
+    "alabama-river-boat-launch-near-prattville-al-4",
+    "alabama-river-boat-launch-near-prattville-al-5",
+    "alabama-river-boat-launch-near-prattville-al-6",
+    "alabama-river-boat-launch-near-selma-al",
+    "alabama-river-boat-launch-near-white-hall-al",
+    "alabama-river-boat-launch-near-white-hall-al-10",
+    "alabama-river-boat-launch-near-white-hall-al-11",
+    "alabama-river-boat-launch-near-white-hall-al-12",
+    "alabama-river-boat-launch-near-white-hall-al-13",
+    "alabama-river-boat-launch-near-white-hall-al-14",
+    "alabama-river-boat-launch-near-white-hall-al-15",
+    "alabama-river-boat-launch-near-white-hall-al-16",
+    "alabama-river-boat-launch-near-white-hall-al-17",
+    "alabama-river-boat-launch-near-white-hall-al-18",
+    "alabama-river-boat-launch-near-white-hall-al-2",
+    "alabama-river-boat-launch-near-white-hall-al-3",
+    "alabama-river-boat-launch-near-white-hall-al-4",
+    "alabama-river-boat-launch-near-white-hall-al-5",
+    "alabama-river-boat-launch-near-white-hall-al-6",
+    "alabama-river-boat-launch-near-white-hall-al-7",
+    "alabama-river-boat-launch-near-white-hall-al-8",
+    "alabama-river-boat-launch-near-white-hall-al-9",
+    "millers-ferry-marina-boat-ramp-al",
+    "alabama-river-boat-launch-near-montgomery-al",
+    "private-boat-ramp-in-disrepair-al",
+    "private-boat-with-wooden-retaining-walls-on-side-al",
+    "wooden-boat-ramp-from-paper-chart-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "aldridge-creek-al",
+   "name": "Aldridge Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Burrows"
+   ],
+   "bbox": [
+    -86.567398,
+    34.575548,
+    -86.539151,
+    34.715764
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "aldridge-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "3dbb5bfb07afcc24d49efad5bc80a5163cb78e555a27ddca93ca9bacc77737e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "aldridge-creek-boat-launch-near-burrows-al-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "aliceville-lake-al",
+   "name": "Aliceville Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Pickensville"
+   ],
+   "bbox": [
+    -88.310737,
+    33.210602,
+    -88.265176,
+    33.278492
+   ],
+   "wikidata": "Q4726213",
+   "charted": true,
+   "area_km2": 8.547,
+   "launches": [
+    "pickensville-campground-boat-ramp-road-al",
+    "aliceville-lake-boat-launch-near-pickensville-al",
+    "aliceville-lake-boat-launch-near-pickensville-al-2"
+   ],
+   "water_id": "aliceville-lake-al",
+   "gnis_id": "135661",
+   "geometry_hash": "39e91b939761741c2b0d78f5e146979fcd98949e2c811eac207e6cc7f43ccd91",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "aloe-bay-channel-al",
+   "name": "Aloe Bay Channel",
+   "kind": "canal",
+   "state": "AL",
+   "towns": [
+    "Dauphin Island"
+   ],
+   "bbox": [
+    -88.129056,
+    30.258954,
+    -88.114941,
+    30.265795
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "aloe-bay-landing-al"
+   ],
+   "water_id": "aloe-bay-channel-al",
+   "gnis_id": null,
+   "geometry_hash": "946d4ed87b8606c739d00de3fa34fe98618b5578cf388d5201fa9f92fc91cee4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "anderson-creek-al",
+   "name": "Anderson Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Anderson Creek Estates"
+   ],
+   "bbox": [
+    -87.283478,
+    34.812687,
+    -87.220488,
+    34.947426
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "anderson-creek-boat-launch-al"
+   ],
+   "water_id": "anderson-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "437b768dec60a0cc45ab2c3a804e0ce0fc9b9e8dc23483b7f78d019b71e437e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arnica-bay-al",
+   "name": "Arnica Bay",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Perdido Beach"
+   ],
+   "bbox": [
+    -87.53978,
+    30.303111,
+    -87.517451,
+    30.322129
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.666,
+   "launches": [],
+   "water_id": "arnica-bay-al",
+   "gnis_id": null,
+   "geometry_hash": "8c446222c4f402759aacafd0d4e81bc006f1e3b9faf8c0b6f07be2e2d584fcfa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bear-point-community-boat-launch-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bankhead-lake-al",
+   "name": "Bankhead Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Driftwood",
+    "Hueytown",
+    "Little Shoal",
+    "Littletons",
+    "Providence",
+    "West Jefferson"
+   ],
+   "bbox": [
+    -87.358338,
+    33.457556,
+    -87.185221,
+    33.628737
+   ],
+   "wikidata": "Q4856292",
+   "charted": true,
+   "area_km2": 16.69,
+   "launches": [
+    "bankhead-lake-boat-launch-near-driftwood-al-3"
+   ],
+   "water_id": "bankhead-lake-al",
+   "gnis_id": "113443",
+   "geometry_hash": "2176e294791239f17c4188c1503fb7c513643d226af4633d26907e85b20fad60",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "dunns-camp-boat-ramp-al",
+    "franklin-ferry-marina-boat-ramp-gas-al",
+    "kings-camp-boat-ramp-al",
+    "bankhead-lake-boat-launch-near-driftwood-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bayou-la-batre-al",
+   "name": "Bayou La Batre",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Bayou La Batre"
+   ],
+   "bbox": [
+    -88.27171,
+    30.38225,
+    -88.231714,
+    30.408481
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.422,
+   "launches": [
+    "bayou-la-batre-boat-ramp-al"
+   ],
+   "water_id": "bayou-la-batre-al",
+   "gnis_id": null,
+   "geometry_hash": "38d4be4461985a70948659ae2dc4c57c79904f241edcc3e9ddc11e61a4d65a0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bayou-sara-al",
+   "name": "Bayou Sara",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Saraland"
+   ],
+   "bbox": [
+    -88.137339,
+    30.802672,
+    -88.013694,
+    30.976827
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "saraland-boat-launch-al"
+   ],
+   "water_id": "bayou-sara-al",
+   "gnis_id": null,
+   "geometry_hash": "5f76c6876f0dc9a0ac8f296d7b1cb91649a5cc80ec9b9465a43d2711e01b55ae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-al",
+   "name": "Bear Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Bear Creek",
+    "Hackleburg",
+    "Hodges"
+   ],
+   "bbox": [
+    -88.173874,
+    34.259948,
+    -87.612416,
+    34.497972
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-5-access-al",
+    "military-bridge-access-al",
+    "quarter-creek-al",
+    "quarter-creek-access-al",
+    "rock-quarry-branch-access-al",
+    "scott-bridge-access-al",
+    "scott-landing-boat-launch-al"
+   ],
+   "water_id": "bear-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "c6bcedbd906b2aaec143737f73512ac2cb2bf848f734f1e003572ccd83a56c8e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-prattville-al",
+   "name": "Bear Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Prattville"
+   ],
+   "bbox": [
+    -86.595765,
+    32.368211,
+    -86.583901,
+    32.383515
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [],
+   "water_id": "bear-creek-prattville-al",
+   "gnis_id": null,
+   "geometry_hash": "39656afa43fd6c712f367b983c815c2f72e895944edcf5347c08a1a2dccdd3e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bear-creek-boat-launch-near-prattville-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-reservoir-al",
+   "name": "Bear Creek Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Hodges",
+    "Vina"
+   ],
+   "bbox": [
+    -87.987839,
+    34.363314,
+    -87.949345,
+    34.412706
+   ],
+   "wikidata": "Q4876409",
+   "charted": false,
+   "area_km2": 1.586,
+   "launches": [
+    "horseshoe-bend-boat-ramp-al",
+    "piney-point-boat-ramp-al"
+   ],
+   "water_id": "bear-creek-reservoir-al",
+   "gnis_id": "113679",
+   "geometry_hash": "98e51ae5f7d99312fd097bd794383100d0c369815fc56bd2e7e9cd4e27f347f2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-wills-creek-al",
+   "name": "Big Wills Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Gadsden"
+   ],
+   "bbox": [
+    -86.118009,
+    33.979438,
+    -85.658416,
+    34.535887
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "big-wills-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "345002adec23b547ceac5bdda92d490d5a1fa6c92e5f439b4d76c902e836a823",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "big-wills-creek-boat-launch-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-warrior-river-al",
+   "name": "Black Warrior River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Akron",
+    "Demopolis",
+    "Eutaw",
+    "Forkland",
+    "Lock Five",
+    "McClure",
+    "Millwood",
+    "Moundville",
+    "Tuscaloosa"
+   ],
+   "bbox": [
+    -87.852766,
+    32.517868,
+    -87.186133,
+    33.557151
+   ],
+   "wikidata": "Q727892",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "backbone-boat-ramp-al",
+    "black-warrior-river-boat-launch-near-tuscaloosa-al-2",
+    "finches-ferry-boat-ramp-al",
+    "foster-s-ferry-al",
+    "jennings-ferry-boat-ramp-al",
+    "lock-5-east-boat-ramp-al",
+    "lock-5-west-boat-ramp-al",
+    "lock-6-east-boat-ramp-al",
+    "lock-7-boat-ramp-al",
+    "black-warrior-river-boat-launch-near-akron-al",
+    "merriweather-ldg-paved-ramp-al",
+    "moundville-access-al",
+    "old-lock-7-east-boat-ramp-al",
+    "runaway-2-boat-ramp-al",
+    "eutaw-boat-launch-al"
+   ],
+   "water_id": "black-warrior-river-al",
+   "gnis_id": "159191",
+   "geometry_hash": "e7b51011ab911eb85a95b14cda6858f51f9e0abfd6435a09e759b6d9aee5b5c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "private-boat-ramp-al",
+    "private-boat-ramp-317-9-al",
+    "private-paved-ramp-al",
+    "private-paved-ramp-eutaw-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-warrior-river-barney-al",
+   "name": "Black Warrior River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Barney",
+    "Dovertown",
+    "Gorgas",
+    "Littletons",
+    "Pumpkin Center",
+    "Reeds Ferry"
+   ],
+   "bbox": [
+    -87.234629,
+    33.620159,
+    -87.119302,
+    33.736943
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.562,
+   "launches": [
+    "black-warrior-river-boat-launch-near-pumpkin-center-al"
+   ],
+   "water_id": "black-warrior-river-barney-al",
+   "gnis_id": null,
+   "geometry_hash": "9b635864ae2ab0480bb520f842b6c5192565d5dee36531c9efcb94f2ff2043a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bloch-park-marina-dock-al",
+   "name": "Bloch Park Marina Dock",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Selma"
+   ],
+   "bbox": [
+    -87.042809,
+    32.396098,
+    -87.041877,
+    32.396944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.004,
+   "launches": [
+    "bloch-park-marina-dock-boat-launch-near-selma-al"
+   ],
+   "water_id": "bloch-park-marina-dock-al",
+   "gnis_id": null,
+   "geometry_hash": "91c1091b683b2e7486a168fc78fee0fc2bfbdf7e30f17f401781af64f1f10297",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bluff-creek-al",
+   "name": "Bluff Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Loflin"
+   ],
+   "bbox": [
+    -85.014957,
+    32.181242,
+    -85.008474,
+    32.189047
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bluff-creek-boat-launch-al"
+   ],
+   "water_id": "bluff-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "a87783013f82360c717baaebf14d2c8c180413bf7ea0c5e76195f802152493c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-chitto-al",
+   "name": "Bogue Chitto",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Cochrane"
+   ],
+   "bbox": [
+    -88.330808,
+    33.083583,
+    -88.264064,
+    33.097229
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cochrane-campground-boat-ramp-al"
+   ],
+   "water_id": "bogue-chitto-al",
+   "gnis_id": null,
+   "geometry_hash": "6b33ef7fe7894d910876a3c10575e3437824b7b7f86b32f7df0b5f6e03539673",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-chotto-creek-al",
+   "name": "Bogue Chotto Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Boykin"
+   ],
+   "bbox": [
+    -87.28259,
+    32.164806,
+    -87.222647,
+    32.237654
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bogue-chitto-creek-entrance-boat-ramp-al"
+   ],
+   "water_id": "bogue-chotto-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "58333a8e163894b00a7fd93d3b7638b0c12522af77c495b2e3be7aa67569eaf8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bon-secour-bay-al",
+   "name": "Bon Secour Bay",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Gulf Shores"
+   ],
+   "bbox": [
+    -87.936873,
+    30.238706,
+    -87.753852,
+    30.409539
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 171.751,
+   "launches": [
+    "the-pines-park-public-boat-launch-al"
+   ],
+   "water_id": "bon-secour-bay-al",
+   "gnis_id": null,
+   "geometry_hash": "de9af5fb8edc490fac2daa46dce471474ef752dc45656a4121abd655fb0d7ad2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cahaba-river-al",
+   "name": "Cahaba River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Cahaba",
+    "Piper",
+    "Selma",
+    "Sprott"
+   ],
+   "bbox": [
+    -87.274231,
+    32.318024,
+    -86.542547,
+    33.690442
+   ],
+   "wikidata": "Q2933076",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cahaba-river-boat-launch-al",
+    "old-cahawba-boat-ramp-al",
+    "sprott-landing-al"
+   ],
+   "water_id": "cahaba-river-al",
+   "gnis_id": "159294",
+   "geometry_hash": "2338cde6eff101ed4ef069f4097a32f0bdccdb6be2955048f40be408b467004b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cahaba-river-boat-launch-near-cahaba-al",
+    "cahaba-river-boat-launch-near-cahaba-al-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cane-creek-al",
+   "name": "Cane Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Cordova"
+   ],
+   "bbox": [
+    -87.33529,
+    33.758522,
+    -87.16851,
+    33.856932
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cordova-al"
+   ],
+   "water_id": "cane-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "5070120dbcd419d528b43f8b228ddd86d089129aebd5c2dfb2907e60ded4cf24",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-reservoir-al",
+   "name": "Cedar Creek Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Dempsey",
+    "Russellville",
+    "White Oak Community"
+   ],
+   "bbox": [
+    -87.979294,
+    34.502803,
+    -87.848837,
+    34.562934
+   ],
+   "wikidata": "Q5056637",
+   "charted": false,
+   "area_km2": 13.998,
+   "launches": [
+    "cedar-creek-dam-boat-ramp-al",
+    "gilbritton-boat-ramp-al",
+    "hellum-mill-boat-ramp-al",
+    "lost-creek-boat-ramp-al",
+    "slickrock-day-use-area-boat-ramp-al"
+   ],
+   "water_id": "cedar-creek-reservoir-al",
+   "gnis_id": "132019",
+   "geometry_hash": "0d230196c7e5d4a25e7afb33971ca817cc44a23bd08eaea8b0d9239d10bd3767",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chattahoochee-river-al",
+   "name": "Chattahoochee River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Abbeville",
+    "Columbia",
+    "Gordon",
+    "Jernigan",
+    "Lanett",
+    "River View"
+   ],
+   "bbox": [
+    -85.199169,
+    30.71149,
+    -84.865539,
+    33.17843
+   ],
+   "wikidata": "Q1068297",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chattahoochee-river-boat-launch-near-abbeville-al",
+    "gordon-al",
+    "chattahoochee-river-boat-launch-near-jernigan-al"
+   ],
+   "water_id": "chattahoochee-river-al",
+   "gnis_id": "354236",
+   "geometry_hash": "ca6b786344ff9289c6f34b1557afb25f2df90445f811c76550413af7dd0bff2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chickasaw-creek-al",
+   "name": "Chickasaw Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Chickasaw",
+    "Saraland"
+   ],
+   "bbox": [
+    -88.237078,
+    30.735765,
+    -88.042374,
+    31.049136
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.452,
+   "launches": [
+    "chickasaw-creek-boat-launch-near-chickasaw-al-2"
+   ],
+   "water_id": "chickasaw-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "43bdf6b28360f8fd609d783677444e9990c8e1fa018f280bd80920536db50664",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "choctawhatchee-river-al",
+   "name": "Choctawhatchee River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Clayhatchee",
+    "Eunola",
+    "Newton"
+   ],
+   "bbox": [
+    -85.886356,
+    30.790775,
+    -85.546028,
+    31.361056
+   ],
+   "wikidata": "Q4272077",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clayhatchee-al",
+    "newton-al",
+    "spann-s-al"
+   ],
+   "water_id": "choctawhatchee-river-al",
+   "gnis_id": "294307",
+   "geometry_hash": "2cb0bef1f0786deb18cc4af7c5b243972a7ff4edcfbfd9cf9bc5bf96e0d6a13a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "conecuh-river-al",
+   "name": "Conecuh River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Andalusia",
+    "Pollard",
+    "River Falls",
+    "Roberts"
+   ],
+   "bbox": [
+    -87.175876,
+    30.992969,
+    -85.734579,
+    32.046038
+   ],
+   "wikidata": "Q5159475",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brooklyn-road-al",
+    "hart-s-bridge-al",
+    "parker-s-bridge-al",
+    "pollard-al",
+    "river-falls-al"
+   ],
+   "water_id": "conecuh-river-al",
+   "gnis_id": null,
+   "geometry_hash": "dba7f41ae8b2690c93645d11ba4c49ba04fcdf0714e9f1afe422fd83dec2d0e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coosa-river-al",
+   "name": "Coosa River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Coosada",
+    "Francis",
+    "Gadsden",
+    "Lincoln",
+    "Millbrook",
+    "Ragan Chapel",
+    "Rainbow City",
+    "Riverside",
+    "Vincent",
+    "Wetumpka",
+    "Wilsonville"
+   ],
+   "bbox": [
+    -86.535187,
+    32.486494,
+    -85.177449,
+    34.258467
+   ],
+   "wikidata": "Q1129913",
+   "charted": false,
+   "area_km2": 1.248,
+   "launches": [
+    "beeswax-creek-al",
+    "coosa-river-boat-launch-near-gadsden-al-2",
+    "glover-s-ferry-al",
+    "coosa-river-boat-launch-near-vincent-al",
+    "hokes-bluff-al",
+    "rainbow-landing-al",
+    "wetumpka-al"
+   ],
+   "water_id": "coosa-river-al",
+   "gnis_id": "169321",
+   "geometry_hash": "a785487b271f91787249fe2cbf81b9d0bd50cea0ef75ca2772037da3a6c25072",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "coosa-river-boat-launch-near-coosada-al",
+    "coosa-river-boat-launch-near-wetumpka-al-4",
+    "pirvate-boat-ramp-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cotton-bayou-al",
+   "name": "Cotton Bayou",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Orange Beach"
+   ],
+   "bbox": [
+    -87.584503,
+    30.271766,
+    -87.554884,
+    30.283465
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.715,
+   "launches": [
+    "cotton-bayou-boat-launch-near-orange-beach-al",
+    "cotton-bayou-boat-launch-near-orange-beach-al-2"
+   ],
+   "water_id": "cotton-bayou-al",
+   "gnis_id": null,
+   "geometry_hash": "470ee346856d8409dd2213488f50acc963ff1058d86fd1470d94e947d897c8be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cowan-creek-al",
+   "name": "Cowan Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Ferguson"
+   ],
+   "bbox": [
+    -85.595842,
+    34.041384,
+    -85.541052,
+    34.158411
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "cowan-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "834e1a594bf0b83dc2157fa8e7b31cab61c32b87b14f32966d03f2fd79ba6216",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cowan-creek-boat-launch-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crabtree-slough-al",
+   "name": "Crabtree Slough",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Decatur"
+   ],
+   "bbox": [
+    -86.970512,
+    34.542587,
+    -86.9518,
+    34.557583
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.611,
+   "launches": [
+    "crabtree-slough-small-boat-access-al"
+   ],
+   "water_id": "crabtree-slough-al",
+   "gnis_id": null,
+   "geometry_hash": "2d0d3585af0bc9d21a6e363e7e5c2c35926ef4cf860d3bde37dc4122b0d796d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cyprus-creek-al",
+   "name": "Cyprus Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "White Hall"
+   ],
+   "bbox": [
+    -86.681673,
+    32.317902,
+    -86.65255,
+    32.356573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.311,
+   "launches": [
+    "holy-ground-battlefield-cypress-creek-boat-ramp-al"
+   ],
+   "water_id": "cyprus-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "b8e3bdd671cc748943f37bdd8d529977a4aa44bb64aa80c23727fa0dbcc72d69",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dead-lake-al",
+   "name": "Dead Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Creola"
+   ],
+   "bbox": [
+    -87.996615,
+    30.869016,
+    -87.968739,
+    30.907857
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.355,
+   "launches": [
+    "dead-lake-boat-launch-al"
+   ],
+   "water_id": "dead-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "0cfe19a10ddf5944824f4dd0b3cc80ce3a872f46a73e13d8c88137b62e6b2676",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dog-river-al",
+   "name": "Dog River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Mobile"
+   ],
+   "bbox": [
+    -88.115155,
+    30.56492,
+    -88.087254,
+    30.644652
+   ],
+   "wikidata": "Q5288217",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dog-river-park-boat-launch-al"
+   ],
+   "water_id": "dog-river-al",
+   "gnis_id": "155054",
+   "geometry_hash": "4f1826df3b3933c8c1e2ebef06dc687516bdb42ae4ac872d2df1a251173e85ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "double-oak-lake-al",
+   "name": "Double Oak Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Pelham"
+   ],
+   "bbox": [
+    -86.764068,
+    33.32306,
+    -86.751256,
+    33.33242
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.234,
+   "launches": [
+    "double-oak-lake-boat-launch-al"
+   ],
+   "water_id": "double-oak-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "f02681eda2383220c0ecb0baeb9ad6fdc8c66fd63f35e8d97d3a3a942fb54a6e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-fowl-river-al",
+   "name": "East Fowl River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Delchamps"
+   ],
+   "bbox": [
+    -88.174537,
+    30.401195,
+    -88.134153,
+    30.429943
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fowl-river-access-al"
+   ],
+   "water_id": "east-fowl-river-al",
+   "gnis_id": null,
+   "geometry_hash": "c83328ea81ab657fb26cbe95942793f3dc86cadbc1a89bd4e9f4e138fc75471b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-river-al",
+   "name": "Elk River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Athens",
+    "Elk Shores",
+    "Elkmont",
+    "Gipsy",
+    "Hickory Hills",
+    "Spencer Store"
+   ],
+   "bbox": [
+    -87.278266,
+    34.749221,
+    -86.995519,
+    35.014313
+   ],
+   "wikidata": "Q5364109",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "buck-island-al",
+    "easter-ferry-al",
+    "elk-river-mills-al",
+    "maples-bridge-al"
+   ],
+   "water_id": "elk-river-al",
+   "gnis_id": "117929",
+   "geometry_hash": "92b28e34cf6322fd1a8adb6e1b6cdf4313f7b024e0421c5b5fa807696f9342a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "first-creek-al",
+   "name": "First Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Rogersville"
+   ],
+   "bbox": [
+    -87.346587,
+    34.807109,
+    -87.2852,
+    34.933542
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "first-creek-boat-ramp-al"
+   ],
+   "water_id": "first-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "0e80384cbab703559270a64fe410432bbb83d131aac4803d523f0377f311e382",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fish-river-al",
+   "name": "Fish River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Clay City",
+    "Fairhope",
+    "Marlow"
+   ],
+   "bbox": [
+    -87.838917,
+    30.414019,
+    -87.788546,
+    30.741027
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.355,
+   "launches": [
+    "fish-river-boat-launch-al"
+   ],
+   "water_id": "fish-river-al",
+   "gnis_id": null,
+   "geometry_hash": "aa9bfe823b2b13aeba02b19ad5452c8b7f9d16fa222795495999f2d8921c583d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fivemile-creek-al",
+   "name": "Fivemile Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Oak Village"
+   ],
+   "bbox": [
+    -87.769881,
+    32.825908,
+    -87.379625,
+    32.901137
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "fivemile-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "59a73c6b0532c89b4d68edf0aa913f1c8e99818ae21c1e017a8efca07e3a3c93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "private-paved-ramp-oak-village-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flint-creek-al",
+   "name": "Flint Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Decatur",
+    "Hartselle"
+   ],
+   "bbox": [
+    -86.992769,
+    34.29211,
+    -86.888971,
+    34.587844
+   ],
+   "wikidata": "Q5459484",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "flint-creek-31-al",
+    "flint-creek-boat-launch-al",
+    "hickory-hills-al"
+   ],
+   "water_id": "flint-creek-al",
+   "gnis_id": "151773",
+   "geometry_hash": "695cf3774989b20067d2c39e326ab0f1bcea9fc2bc2f65ccc43a288a1e7a6c65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flint-river-al",
+   "name": "Flint River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Owens Cross Roads"
+   ],
+   "bbox": [
+    -86.532879,
+    34.502547,
+    -86.449739,
+    34.645346
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chickasaw-ramp-al",
+    "turkey-springs-ramp-al"
+   ],
+   "water_id": "flint-river-al",
+   "gnis_id": null,
+   "geometry_hash": "1e6bad4ce17c85baad89a63fc947ab4b26b462907ba0c3114586ec6840a13c52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gantt-lake-al",
+   "name": "Gantt Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Clearview"
+   ],
+   "bbox": [
+    -86.480048,
+    31.40323,
+    -86.391581,
+    31.462695
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.549,
+   "launches": [
+    "gantt-boat-launch-al"
+   ],
+   "water_id": "gantt-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "9be4b7488bb51a9c1ce56dc54b7b8346010352d031c7dc7ff6cd419eedde844b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "garth-slough-al",
+   "name": "Garth Slough",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Decatur"
+   ],
+   "bbox": [
+    -86.923441,
+    34.550512,
+    -86.850357,
+    34.58338
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.528,
+   "launches": [
+    "duncan-hill-small-boat-access-al",
+    "suzie-hole-small-boat-access-al"
+   ],
+   "water_id": "garth-slough-al",
+   "gnis_id": null,
+   "geometry_hash": "553ec2d108147bedc6f0c0952aba579d444d7e4f71126e2f2cd6c8ce10f9d5e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "graham-bayou-al",
+   "name": "Graham Bayou",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Foley"
+   ],
+   "bbox": [
+    -87.634261,
+    30.340495,
+    -87.603285,
+    30.347656
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "graham-creek-kayak-launch-al"
+   ],
+   "water_id": "graham-bayou-al",
+   "gnis_id": null,
+   "geometry_hash": "46d772ec55c37e7adfa8fa9bf0a246b33fb2a0f83adc6b7bdffaa710c4d07f0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gunnison-creek-al",
+   "name": "Gunnison Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Satsuma"
+   ],
+   "bbox": [
+    -88.062457,
+    30.84079,
+    -88.027143,
+    30.909663
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "gunnison-creek-canoe-and-kayak-launch-al"
+   ],
+   "water_id": "gunnison-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "3b4f89d174df7239c8fb7dd51a56a3454b59fbbe35ba45bca90a895f3897ffe5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "guntersville-lake-al",
+   "name": "Guntersville Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Breezeway Bay",
+    "Bridgeport",
+    "Columbus City",
+    "Cottonville",
+    "Country Club Estates",
+    "Five Points",
+    "Guntersville",
+    "Henryville",
+    "Hollywood",
+    "Lake Shore Drive Subdivision",
+    "Lakeview",
+    "Lakeview Shores"
+   ],
+   "bbox": [
+    -86.394613,
+    34.290613,
+    -85.615301,
+    35.038654
+   ],
+   "wikidata": "Q3561578",
+   "charted": true,
+   "area_km2": 213.664,
+   "launches": [
+    "b-b-comer-bridge-al",
+    "beech-creek-al",
+    "bridgeport-ferry-al",
+    "brown-s-creek-al",
+    "bucks-pocket-state-park-al",
+    "claysville-al",
+    "crow-creek-al",
+    "east-lake-park-and-ramp-al",
+    "honeycomb-al",
+    "lake-guntersville-state-park-ramp-al",
+    "lake-guntersville-state-park-ramp-al-2",
+    "langston-al",
+    "langston-rd-al",
+    "lee-row-tn-river-al",
+    "long-island-al",
+    "marshall-county-park-1-al",
+    "marshall-county-park-2-al",
+    "mink-creek-al",
+    "minky-creek-al",
+    "mud-creek-g-ville-al",
+    "north-sauty-al",
+    "north-sauty-hwy-79-ramp-al",
+    "preston-recreation-area-al",
+    "racoon-creek-al",
+    "scottsboro-city-park-al",
+    "guntersville-lake-boat-launch-near-lakeview-al",
+    "stevenson-al",
+    "tva-public-boat-ramp-al",
+    "tom-jackson-park-al",
+    "town-creek-g-ville-al",
+    "town-creek-ramp-bellefonte-al",
+    "town-creek-hwy-227-ramp-al",
+    "val-monte-rd-al",
+    "wanville-ramp-al",
+    "waterfront-al"
+   ],
+   "water_id": "guntersville-lake-al",
+   "gnis_id": "119508",
+   "geometry_hash": "a665c25937d333b0115b40f6f45ed4fd302d245ded3d5cc9012ca06ea221bcb6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "h-neely-henry-lake-al",
+   "name": "H. Neely Henry Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Ohatchee",
+    "Rainbow City"
+   ],
+   "bbox": [
+    -86.143487,
+    33.780995,
+    -86.03641,
+    33.918087
+   ],
+   "wikidata": "Q6986833",
+   "charted": false,
+   "area_km2": 16.983,
+   "launches": [
+    "canoe-creek-al",
+    "ten-islands-al"
+   ],
+   "water_id": "h-neely-henry-lake-al",
+   "gnis_id": "164686",
+   "geometry_hash": "94b95749aa28300e9e07ba09cb89a2e603243f7ffcf69fd48b5dd2f986c23a74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "holley-creek-al",
+   "name": "Holley Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Little River"
+   ],
+   "bbox": [
+    -87.88641,
+    31.163882,
+    -87.704602,
+    31.219816
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "holly-creek-landing-al"
+   ],
+   "water_id": "holley-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "107f6ef45157abaa96166c6519f773b22457b8e3e7629f95ea30bb87c7e54dfc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "holt-lake-al",
+   "name": "Holt Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Three Branches Estates",
+    "Tuscaloosa"
+   ],
+   "bbox": [
+    -87.45157,
+    33.244839,
+    -87.354605,
+    33.459645
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 11.337,
+   "launches": [
+    "blue-creek-boat-ramp-al",
+    "burchfield-branch-boat-ramp-al",
+    "holt-lake-boat-launch-near-tuscaloosa-al-2",
+    "holt-resource-office-boat-ramp-al",
+    "holt-lake-boat-launch-near-tuscaloosa-al-3",
+    "rock-quarry-landing-al",
+    "holt-lake-boat-launch-near-tuscaloosa-al"
+   ],
+   "water_id": "holt-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "271bf6d00a0fee316eef4f04f8814cd6eca8b59508208b26779ce0587c0524c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hide-a-way-marina-boat-ramp-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "house-creek-al",
+   "name": "House Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "White Hall"
+   ],
+   "bbox": [
+    -86.713855,
+    32.345288,
+    -86.702179,
+    32.357837
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.126,
+   "launches": [],
+   "water_id": "house-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "18c2cfb92e55fc1c4c723e71a4a1841f318065575db09b514b0d16c9fca3e190",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "house-creek-boat-launch-near-white-hall-al",
+    "house-creek-boat-launch-near-white-hall-al-2",
+    "house-creek-boat-launch-near-white-hall-al-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-creek-al",
+   "name": "Indian Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Triana"
+   ],
+   "bbox": [
+    -86.732657,
+    34.573856,
+    -86.686556,
+    34.820978
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "triana-al"
+   ],
+   "water_id": "indian-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "348d08f0ede804720cd1594e664eae5bc43f63f9c4b50b39ed42f15a98bb1f7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jordan-lake-al",
+   "name": "Jordan Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Holtville",
+    "Wetumpka"
+   ],
+   "bbox": [
+    -86.446259,
+    32.614437,
+    -86.234124,
+    32.806317
+   ],
+   "wikidata": "Q6276684",
+   "charted": false,
+   "area_km2": 18.493,
+   "launches": [
+    "bonner-s-point-al",
+    "camp-rotary-al"
+   ],
+   "water_id": "jordan-lake-al",
+   "gnis_id": "121053",
+   "geometry_hash": "72c3ce1b64e1e2d0f9f5261e2e1791aee06f1997dbe9280d23a4440f63603ae1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-frank-jackson-al",
+   "name": "Lake Frank Jackson",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Opp"
+   ],
+   "bbox": [
+    -86.285801,
+    31.296263,
+    -86.255504,
+    31.34299
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.306,
+   "launches": [
+    "lake-frank-jackson-boat-launch-al"
+   ],
+   "water_id": "lake-frank-jackson-al",
+   "gnis_id": null,
+   "geometry_hash": "ab7d87ede9e30ece745fddbd616abd7e394c14674ec1a9e7615152f3cfd98bb6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-harding-al",
+   "name": "Lake Harding",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Jester",
+    "Phenix City"
+   ],
+   "bbox": [
+    -85.200486,
+    32.656295,
+    -85.064997,
+    32.770005
+   ],
+   "wikidata": "Q6476087",
+   "charted": false,
+   "area_km2": 17.994,
+   "launches": [
+    "halawakee-creek-al",
+    "po-boy-s-al"
+   ],
+   "water_id": "lake-harding-al",
+   "gnis_id": "1945742",
+   "geometry_hash": "a8f09de20191f3e718bb5c11d07d044812be4bee5a4747eb2a87af5e764e6664",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-jackson-al",
+   "name": "Lake Jackson",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Florala"
+   ],
+   "bbox": [
+    -86.333381,
+    30.987094,
+    -86.317252,
+    31.002115
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.454,
+   "launches": [
+    "lake-jackson-boat-launch-al"
+   ],
+   "water_id": "lake-jackson-al",
+   "gnis_id": null,
+   "geometry_hash": "5aa00275a6f8e7e28c7e0309237b6dedc70df96d99208d54fbb7d1d72a6b32a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-martin-al",
+   "name": "Lake Martin",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Bama Park",
+    "Dadeville",
+    "Kowaliga",
+    "Our Town",
+    "Piney Point",
+    "Still Waters"
+   ],
+   "bbox": [
+    -86.047357,
+    32.677789,
+    -85.797653,
+    32.930058
+   ],
+   "wikidata": "Q6476811",
+   "charted": false,
+   "area_km2": 125.369,
+   "launches": [
+    "kowaliga-al",
+    "madwin-creek-al",
+    "pace-s-point-al",
+    "smith-mountain-landing-al",
+    "lake-martin-boat-launch-near-our-town-al",
+    "young-s-landing-al"
+   ],
+   "water_id": "lake-martin-al",
+   "gnis_id": "122333",
+   "geometry_hash": "39fcc135ed5e834e0f81ad4c9f5d473376bb380a1671cf3fdb61fde997f2fdb5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "emerald-shores-boat-ramp-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tuscaloosa-al",
+   "name": "Lake Tuscaloosa",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Binion Heights",
+    "Demarest",
+    "Sartains Ridgecrest Subdivision",
+    "Tuscaloosa"
+   ],
+   "bbox": [
+    -87.619824,
+    33.26459,
+    -87.49626,
+    33.414485
+   ],
+   "wikidata": "Q6478176",
+   "charted": false,
+   "area_km2": 18.111,
+   "launches": [
+    "binion-creek-al",
+    "rock-quarry-park-boat-landing-al"
+   ],
+   "water_id": "lake-tuscaloosa-al",
+   "gnis_id": "128210",
+   "geometry_hash": "cb46f1bb4bbdaaa49b561802ad82381c32801a2d905ea59493c17d9863f39729",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lay-lake-al",
+   "name": "Lay Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "East Bend",
+    "Indian Hill"
+   ],
+   "bbox": [
+    -86.624251,
+    32.963438,
+    -86.335261,
+    33.425972
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "childersburg-access-al",
+    "kelly-creek-al"
+   ],
+   "water_id": "lay-lake-al",
+   "gnis_id": "121443",
+   "geometry_hash": "1fe21c2ee884d69146bc26c5555cea79654f573ae7ac93dab7b3c82b2704df4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lay-lake-hidden-valley-al",
+   "name": "Lay lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Hidden Valley",
+    "Pine Grove Village",
+    "Wildwood Shores"
+   ],
+   "bbox": [
+    -86.598839,
+    32.963459,
+    -86.475148,
+    33.10017
+   ],
+   "wikidata": "Q34902508",
+   "charted": false,
+   "area_km2": 18.912,
+   "launches": [
+    "lay-dam-al",
+    "lay-lake-boat-launch-al",
+    "paint-creek-al"
+   ],
+   "water_id": "lay-lake-hidden-valley-al",
+   "gnis_id": "121443",
+   "geometry_hash": "de2c6975bf3fd1cbe16deb14a49a22740d00f184b827f0b9abd4ce85c16e4f17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "leon-brooks-hines-lake-al",
+   "name": "Leon Brooks Hines Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Parker Springs"
+   ],
+   "bbox": [
+    -86.837795,
+    31.023881,
+    -86.827507,
+    31.041578
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.584,
+   "launches": [
+    "brooks-hines-lake-al"
+   ],
+   "water_id": "leon-brooks-hines-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "69b0c70262e36fe65707f31e9c1441c01cc364d06687e053f7920f12d225c0b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lewis-smith-lake-al",
+   "name": "Lewis Smith Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Ardell",
+    "Arley",
+    "Cullman",
+    "Double Springs",
+    "Falls City",
+    "Jasper",
+    "Trimble"
+   ],
+   "bbox": [
+    -87.357363,
+    33.94207,
+    -86.910524,
+    34.197988
+   ],
+   "wikidata": "Q6537060",
+   "charted": false,
+   "area_km2": 72.759,
+   "launches": [
+    "clear-creek-boat-ramp-al",
+    "dayuse-boat-ramp-al",
+    "lion-s-park-al",
+    "smith-lake-dam-al",
+    "smith-lake-park-al"
+   ],
+   "water_id": "lewis-smith-lake-al",
+   "gnis_id": "159929",
+   "geometry_hash": "194d76b28152462d687e3eba453250849a5e28688d8a4d1c63978c09a74743bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-bear-creek-al",
+   "name": "Little Bear Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Bear Creek",
+    "Phil Campbell"
+   ],
+   "bbox": [
+    -87.687646,
+    34.278469,
+    -87.644634,
+    34.371889
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bates-landing-al",
+    "little-bear-creek-boat-launch-near-phil-campbell-al",
+    "twin-pines-boat-ramp-al"
+   ],
+   "water_id": "little-bear-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "16be4fb81ab33434173e2a309f449bba4fb6e80b29ef35b4db92a37d3737c6c7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-bear-creek-reservoir-al",
+   "name": "Little Bear Creek Reservoir",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Hodges",
+    "Old Nauvoo",
+    "Piney Bend"
+   ],
+   "bbox": [
+    -87.97552,
+    34.410784,
+    -87.896489,
+    34.472012
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.227,
+   "launches": [
+    "elliot-branch-boat-ramp-al",
+    "mcafee-boat-ramp-al",
+    "little-bear-creek-reservoir-boat-launch-near-old-nauvoo-al",
+    "williams-hollow-boat-ramp-al"
+   ],
+   "water_id": "little-bear-creek-reservoir-al",
+   "gnis_id": null,
+   "geometry_hash": "6f9cd9a9c5e0638b6cbf355c79500c57b3d377fe0a3614d0b47f0e7f169d2d4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-lagoon-al",
+   "name": "Little Lagoon",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Gulf Shores"
+   ],
+   "bbox": [
+    -87.819993,
+    30.233203,
+    -87.689604,
+    30.25963
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 9.072,
+   "launches": [
+    "jeff-friend-kayak-launch-al",
+    "moe-s-landing-park-boat-ramp-al"
+   ],
+   "water_id": "little-lagoon-al",
+   "gnis_id": null,
+   "geometry_hash": "f4cff865c13a7c7549fa364d38878d8f4f296d304039d6020fda952f478ac824",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-al",
+   "name": "Little River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Rockdale",
+    "Wedowee"
+   ],
+   "bbox": [
+    -85.574981,
+    33.29525,
+    -85.430559,
+    33.379176
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.04,
+   "launches": [
+    "swagg-al",
+    "white-s-bridge-al"
+   ],
+   "water_id": "little-river-al",
+   "gnis_id": null,
+   "geometry_hash": "79d3e0e24ffb309fd56567ec79af74955cbf706c48650d8bdaed608512feb164",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "locust-fork-al",
+   "name": "Locust Fork",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Alliance",
+    "Black Creek",
+    "Cleveland",
+    "Hueytown",
+    "Maxine",
+    "Powhatan",
+    "Riverside",
+    "Snead",
+    "West Jefferson",
+    "Wilderness Garden"
+   ],
+   "bbox": [
+    -87.186749,
+    33.54429,
+    -86.279477,
+    34.151465
+   ],
+   "wikidata": "Q6666097",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hwy-269-public-boat-ramp-al",
+    "locust-fork-boat-launch-near-alliance-al",
+    "locust-fork-boat-launch-near-black-creek-al-2",
+    "locust-fork-boat-launch-near-wilderness-garden-al",
+    "locust-fork-boat-launch-near-wilderness-garden-al-2"
+   ],
+   "water_id": "locust-fork-al",
+   "gnis_id": "1901223",
+   "geometry_hash": "3a9294bba8b82465ba0cd15f171ffa46c10e928c10f56e226a4583354f743c8a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "buddy-vine-s-boat-ramp-gas-al",
+    "locust-fork-boat-launch-near-black-creek-al",
+    "pratt-coal-co-boat-ramp-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "logan-martin-lake-al",
+   "name": "Logan Martin Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Catatoga Estates",
+    "Cedar Cove Estates",
+    "Cropwell",
+    "Pell City"
+   ],
+   "bbox": [
+    -86.339565,
+    33.42429,
+    -86.137611,
+    33.606401
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 43.432,
+   "launches": [
+    "logan-martin-lake-boat-launch-near-cropwell-al"
+   ],
+   "water_id": "logan-martin-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "8dae99a9f0046909ea0eb5a6c5cb87f3933e451f068162935fe7528917b58df2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lucy-branch-al",
+   "name": "Lucy Branch",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Anderson"
+   ],
+   "bbox": [
+    -87.226942,
+    34.762184,
+    -87.211432,
+    34.795009
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lucy-branch-boat-launch-al"
+   ],
+   "water_id": "lucy-branch-al",
+   "gnis_id": null,
+   "geometry_hash": "217216ad179061700cffa727b3d04da5d98f696a2bac4f7c0887cd719235612a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lunker-lake-al",
+   "name": "Lunker Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Eagle Point"
+   ],
+   "bbox": [
+    -86.696669,
+    33.373122,
+    -86.686989,
+    33.385112
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.33,
+   "launches": [
+    "lunker-lake-boat-launch-al"
+   ],
+   "water_id": "lunker-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "cf49591a66eea676aad0fbd133bef5abe58e015f976dfa4dafa8be134fbe545b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "magnolia-river-al",
+   "name": "Magnolia River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Magnolia Springs"
+   ],
+   "bbox": [
+    -87.815402,
+    30.386464,
+    -87.689588,
+    30.459824
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "rock-landing-al"
+   ],
+   "water_id": "magnolia-river-al",
+   "gnis_id": null,
+   "geometry_hash": "c8da56e3aace5102128d321b87ef898dacd29917604492e98f1f619826b2eb40",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcconnico-creek-al",
+   "name": "McConnico Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Forkland"
+   ],
+   "bbox": [
+    -87.959338,
+    32.622504,
+    -87.879597,
+    32.708621
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "forkland-boat-ramp-al"
+   ],
+   "water_id": "mcconnico-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "8d4779552a5db29b8dfb1a6b798a87cba3f9d3e24bf9e0ff23ce825d1ae309b0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-lake-al",
+   "name": "Middle Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Gulf Shores"
+   ],
+   "bbox": [
+    -87.646665,
+    30.255496,
+    -87.625113,
+    30.26801
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.7,
+   "launches": [
+    "middle-lake-boat-launch-al"
+   ],
+   "water_id": "middle-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "d3ae38b3fbd712944aedd3064da7e01f8989eb015c00b1f002915b06e26d9a9e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-al",
+   "name": "Mill Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Tuscaloosa"
+   ],
+   "bbox": [
+    -87.599601,
+    33.207855,
+    -87.59479,
+    33.223227
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mill-creek-boat-launch-near-tuscaloosa-al"
+   ],
+   "water_id": "mill-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "8be2c7eccc6123337c6645889d08078fb63afe1a091ea970d058ace43cd7f582",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mitchell-lake-al",
+   "name": "Mitchell Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Clanton"
+   ],
+   "bbox": [
+    -86.463454,
+    32.852408,
+    -86.43926,
+    32.873874
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.869,
+   "launches": [
+    "higgins-ferry-al"
+   ],
+   "water_id": "mitchell-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "ba7bf476a8913b53afd482065eaee98084d46f915b33efa95bf9fa4288e68b55",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mobile-bay-al",
+   "name": "Mobile Bay",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Daphne",
+    "Dauphin Island",
+    "Fairhope",
+    "Fort Morgan",
+    "Heron Bay",
+    "Mobile",
+    "Point Clear",
+    "Spanish Fort"
+   ],
+   "bbox": [
+    -88.13785,
+    30.226588,
+    -87.753852,
+    30.685298
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 877.269,
+   "launches": [
+    "arlington-park-kayak-launch-al",
+    "billy-goat-hole-boat-ramp-al",
+    "choccalotta-bay-al",
+    "fort-morgan-public-boat-launch-al",
+    "mobile-bay-boat-launch-near-dauphin-island-al-6",
+    "may-day-park-starke-s-landing-al",
+    "mobile-bay-boat-launch-near-mobile-al-3",
+    "mobile-bay-boat-launch-near-fairhope-al",
+    "mobile-bay-boat-launch-near-fairhope-al-3",
+    "steadmans-landing-al",
+    "tensaw-landing-al"
+   ],
+   "water_id": "mobile-bay-al",
+   "gnis_id": null,
+   "geometry_hash": "40a3c8c2c2b5738f0351c93327114cd715e328eefbb480486ac3b88eaf9a0577",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mobile-river-al",
+   "name": "Mobile River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Mobile",
+    "Mount Vernon",
+    "Saraland"
+   ],
+   "bbox": [
+    -88.042374,
+    30.665677,
+    -87.943146,
+    31.137073
+   ],
+   "wikidata": "Q1084490",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "convention-center-public-boat-ramp-al",
+    "mt-vernon-al"
+   ],
+   "water_id": "mobile-river-al",
+   "gnis_id": "163332",
+   "geometry_hash": "320750954524b581a2b9941371d77cc27dad4bda05f92483ebd812a99cd3c7a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mulberry-fork-al",
+   "name": "Mulberry Fork",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Garden City",
+    "Lynns Park"
+   ],
+   "bbox": [
+    -87.237864,
+    33.557151,
+    -86.47974,
+    34.261651
+   ],
+   "wikidata": "Q6933808",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lynn-s-park-al"
+   ],
+   "water_id": "mulberry-fork-al",
+   "gnis_id": "123577",
+   "geometry_hash": "09a70304c964e8b147e8892a24eab99d977c158c817748e66fa95cf37e6918c6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "palmetto-creek-al",
+   "name": "Palmetto Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Perdido Beach"
+   ],
+   "bbox": [
+    -87.542301,
+    30.339576,
+    -87.504883,
+    30.391667
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.567,
+   "launches": [
+    "palmetto-creek-boat-ramp-al"
+   ],
+   "water_id": "palmetto-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "be1c194d47cfde81fda224903953a81102e97004b3aa6e2e3580ee6e3aa1e3c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pea-river-al",
+   "name": "Pea River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Elba",
+    "Ganer",
+    "Samson"
+   ],
+   "bbox": [
+    -86.140296,
+    30.990639,
+    -85.560011,
+    32.112161
+   ],
+   "wikidata": "Q7157190",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "samson-al"
+   ],
+   "water_id": "pea-river-al",
+   "gnis_id": "124530",
+   "geometry_hash": "a832ae20f06297849992baf4f150a85cdc7bcff67d235ef6b1efbb12d399a4f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "perdido-bay-al",
+   "name": "Perdido Bay",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Lillian",
+    "Perdido Beach"
+   ],
+   "bbox": [
+    -87.575142,
+    30.29801,
+    -87.34103,
+    30.459379
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 66.669,
+   "launches": [
+    "perdido-bay-boat-launch-near-lillian-al"
+   ],
+   "water_id": "perdido-bay-al",
+   "gnis_id": null,
+   "geometry_hash": "c2c25d6272c4d8eb05b0c0fc496b612f32dfd83a13498c0a859e59193bdf67fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "perdido-river-al",
+   "name": "Perdido River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Seminole"
+   ],
+   "bbox": [
+    -87.634836,
+    30.449723,
+    -87.389087,
+    31.044024
+   ],
+   "wikidata": "Q3294510",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "seminole-boat-ramp-al"
+   ],
+   "water_id": "perdido-river-al",
+   "gnis_id": "288720",
+   "geometry_hash": "e1a86fc63b6d24652b9a131ca2e201ec89293a52f561236821fc366e76209fd8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pickwick-lake-al",
+   "name": "Pickwick Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Florence",
+    "Georgetown",
+    "Margerum",
+    "Riverton",
+    "Sheffield",
+    "Tuscumbia",
+    "Waterloo",
+    "Wright"
+   ],
+   "bbox": [
+    -88.261644,
+    34.727342,
+    -87.624755,
+    35.088649
+   ],
+   "wikidata": "Q7190954",
+   "charted": true,
+   "area_km2": 149.083,
+   "launches": [
+    "brush-creek-boat-launch-al",
+    "buzzard-s-roost-al",
+    "cane-creek-boat-ramp-al",
+    "colbert-ferry-boat-launch-al",
+    "mcfarland-north-al",
+    "mcfarland-west-al",
+    "muscle-shoals-reservation-boat-ramp-al",
+    "pickwick-lake-boat-launch-al",
+    "pride-landing-al",
+    "riverfront-park-al",
+    "rose-trail-al",
+    "second-creek-recreation-area-al",
+    "sheffield-riverfront-park-al",
+    "waterloo-creekside-al",
+    "waterloo-riverside-al"
+   ],
+   "water_id": "pickwick-lake-al",
+   "gnis_id": "1326389",
+   "geometry_hash": "d326cac01778eb354be920d59c12dbc678b66b09aee26f4f1a359b28602a66b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "polecat-bay-al",
+   "name": "Polecat Bay",
+   "kind": "bay",
+   "state": "AL",
+   "towns": [
+    "Mobile"
+   ],
+   "bbox": [
+    -88.027589,
+    30.686411,
+    -88.007461,
+    30.718309
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.075,
+   "launches": [
+    "liz-s-launch-al"
+   ],
+   "water_id": "polecat-bay-al",
+   "gnis_id": null,
+   "geometry_hash": "17bdd12f649817f840cae512a07417d68fd9655330bc17d32ddb65201b0c9ca7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "portage-creek-al",
+   "name": "Portage Creek",
+   "kind": "sound",
+   "state": "AL",
+   "towns": [
+    "Gulf Shores"
+   ],
+   "bbox": [
+    -87.724092,
+    30.277901,
+    -87.609837,
+    30.308159
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.447,
+   "launches": [
+    "canal-park-boat-launch-al"
+   ],
+   "water_id": "portage-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "0bb2dc1234b5f30f2b57899cc6ec19ebb1ff46bdf48154682db56225d48ce36b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "r-l-harris-reservoir-al",
+   "name": "R.L. Harris Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Berwick",
+    "Lineville",
+    "Ofelia",
+    "Wedowee"
+   ],
+   "bbox": [
+    -85.653562,
+    33.253684,
+    -85.567289,
+    33.314914
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 15.94,
+   "launches": [
+    "fox-creek-al",
+    "highway-48-bridge-al",
+    "road-end-al"
+   ],
+   "water_id": "r-l-harris-reservoir-al",
+   "gnis_id": null,
+   "geometry_hash": "5ec02858ff944c810980e9853c8df76b144b86c0b97382e530bae22cc737aa3a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rice-creek-al",
+   "name": "Rice Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Stockton"
+   ],
+   "bbox": [
+    -87.887781,
+    31.006699,
+    -87.845288,
+    31.021163
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rice-creek-landing-al"
+   ],
+   "water_id": "rice-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "43aab5c55a5dc1d1b47a2943eb83608fd8a9f37c0b397ae98e568f1e2eb6c957",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "roberts-bayou-al",
+   "name": "Roberts Bayou",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Elberta"
+   ],
+   "bbox": [
+    -87.541773,
+    30.321784,
+    -87.532352,
+    30.330129
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.119,
+   "launches": [
+    "roberts-bayou-boat-launch-al"
+   ],
+   "water_id": "roberts-bayou-al",
+   "gnis_id": null,
+   "geometry_hash": "11d8cb7b814d5a1c8553516ed9df834e3844a403795e6787085d138ea0a820d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "second-creek-al",
+   "name": "Second Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Thorntontown"
+   ],
+   "bbox": [
+    -87.378174,
+    34.814275,
+    -87.330137,
+    35.005187
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "second-creek-boat-launch-al"
+   ],
+   "water_id": "second-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "f3c2b3e225665b4f364756fd5f6b3449038b51a430a62d4bfc155b09af4100f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sepulga-river-al",
+   "name": "Sepulga River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Brooklyn",
+    "Paul",
+    "Red Level",
+    "Travis Bridge"
+   ],
+   "bbox": [
+    -86.951965,
+    31.181073,
+    -86.69915,
+    31.598428
+   ],
+   "wikidata": "Q7452391",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "staples-bridge-launch-al",
+    "travis-bridge-launch-al"
+   ],
+   "water_id": "sepulga-river-al",
+   "gnis_id": "160578",
+   "geometry_hash": "e590c63a04fd7b37594826969aadd3a2e82708039f6ac00d4c1c20d21e8fcd64",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shelby-lake-al",
+   "name": "Shelby Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Gulf Shores"
+   ],
+   "bbox": [
+    -87.677252,
+    30.251429,
+    -87.65267,
+    30.269126
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.08,
+   "launches": [
+    "shelby-lake-boat-launch-al"
+   ],
+   "water_id": "shelby-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "c12327ae69b3d90e1231fb11c1ca8f0d27c1bf845eb6fb01a02b13df0b3ba4fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sipsey-fork-al",
+   "name": "Sipsey Fork",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Sipsey"
+   ],
+   "bbox": [
+    -87.107844,
+    33.815644,
+    -87.057082,
+    33.940649
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "parker-s-landing-al"
+   ],
+   "water_id": "sipsey-fork-al",
+   "gnis_id": null,
+   "geometry_hash": "bb76cd9c005c101d807c0d0d2a94d42b008f104416bbd4de0cdfb2a73bfb70aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-cowikee-creek-al",
+   "name": "South Fork Cowikee Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Howe"
+   ],
+   "bbox": [
+    -85.334344,
+    31.992741,
+    -85.143576,
+    32.024728
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boat-access-gammage-road-al"
+   ],
+   "water_id": "south-fork-cowikee-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "55a6e7a9f2b9d6bd54ef09829299f291f514fc62170e00714b9d8f30b57e2b1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-al",
+   "name": "Spring Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Courtland"
+   ],
+   "bbox": [
+    -87.285837,
+    34.661358,
+    -87.249929,
+    34.750443
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "spring-creek-boat-launch-al"
+   ],
+   "water_id": "spring-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "836b73c8d28b4183b781378c3154ed2dbcdf51017770a3a40a6268558ea8be2f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-tuscumbia-al",
+   "name": "Spring Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Tuscumbia"
+   ],
+   "bbox": [
+    -87.731492,
+    34.713105,
+    -87.697611,
+    34.748677
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "spring-creek-ramp-al"
+   ],
+   "water_id": "spring-creek-tuscumbia-al",
+   "gnis_id": null,
+   "geometry_hash": "5a1fc30aeae1b2c939f307a64e722be385b7adf0ccefc7c5d0717bc3395c0ed1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "steele-creek-al",
+   "name": "Steele Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Cox Beach"
+   ],
+   "bbox": [
+    -88.087852,
+    30.853645,
+    -88.038644,
+    30.86538
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "steele-creek-boat-launch-al"
+   ],
+   "water_id": "steele-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "b9fda8b5fa51297d41d91a09ac81e5cc3dd7578cf07cf7872413acac73428e06",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "swift-creek-al",
+   "name": "Swift Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Autaugaville"
+   ],
+   "bbox": [
+    -86.680552,
+    32.40243,
+    -86.631832,
+    32.487891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "swift-creek-boat-ramp-al"
+   ],
+   "water_id": "swift-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "c27c4ab7e0b826746abec6172aec9e36b4ca6bf962fa4ad468875223a6228187",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "swift-creek-boat-launch-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tallapoosa-river-al",
+   "name": "Tallapoosa River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Center West",
+    "Fuller Crossroad",
+    "Liberty",
+    "New Site",
+    "Ofelia",
+    "Swagg",
+    "Tallassee",
+    "Tuskugu",
+    "Wedowee",
+    "Wildwood"
+   ],
+   "bbox": [
+    -86.278182,
+    32.405623,
+    -85.000846,
+    33.773644
+   ],
+   "wikidata": "Q1424101",
+   "charted": false,
+   "area_km2": 4.237,
+   "launches": [
+    "tallapoosa-river-boat-launch-near-tuskugu-al-2",
+    "foster-s-bridge-al",
+    "tallapoosa-river-boat-launch-near-new-site-al"
+   ],
+   "water_id": "tallapoosa-river-al",
+   "gnis_id": "160710",
+   "geometry_hash": "4f3f96d76b4f767725ce6c86c42ae16f0f93ae99ac0e2ee1c60a09c9292585a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tallapoosa-river-boat-launch-near-liberty-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tennessee-river-al",
+   "name": "Tennessee River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Bluff City",
+    "Decatur",
+    "Guntersville",
+    "Triana"
+   ],
+   "bbox": [
+    -88.232055,
+    34.372899,
+    -85.62334,
+    35.070749
+   ],
+   "wikidata": "Q193737",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bluff-city-boat-ramp-al",
+    "guntersville-dam-reservation-northside-al",
+    "sunnyside-boat-ramp-al"
+   ],
+   "water_id": "tennessee-river-al",
+   "gnis_id": "517033",
+   "geometry_hash": "368d3d8c26532e9095b5c39260220c46f88b23aa0e91aa83c7ee582280ce1f93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "riverwalk-marina-boat-ramp-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tennessee-tombigbee-waterway-al",
+   "name": "Tennessee-Tombigbee Waterway",
+   "kind": "canal",
+   "state": "AL",
+   "towns": [
+    "Cochrane"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cochrane-boat-launch-al"
+   ],
+   "water_id": "tennessee-tombigbee-waterway-al",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tensaw-lake-al",
+   "name": "Tensaw Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Bay Minette",
+    "Stockton"
+   ],
+   "bbox": [
+    -87.898212,
+    31.041569,
+    -87.864863,
+    31.089557
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.002,
+   "launches": [
+    "hubbard-landing-al",
+    "upper-bryant-landing-al"
+   ],
+   "water_id": "tensaw-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "983b6121345bd10b8312dfd0b11d57f1dd0ebd57357c41f26c55120a6404d902",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tensaw-river-al",
+   "name": "Tensaw River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Bay Minette",
+    "Stockton"
+   ],
+   "bbox": [
+    -88.007683,
+    30.685047,
+    -87.870419,
+    31.068484
+   ],
+   "wikidata": "Q7700626",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cliff-s-landing-al",
+    "lower-bryant-landing-al"
+   ],
+   "water_id": "tensaw-river-al",
+   "gnis_id": "153670",
+   "geometry_hash": "81db60c8d2eeeedda278e91470c7351e222bd0ffdb22304290c781d333ecf42f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tombigbee-river-al",
+   "name": "Tombigbee River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Birdeye",
+    "Butler",
+    "Coffeeville",
+    "Demopolis",
+    "Gainesville",
+    "Jackson",
+    "McIntosh",
+    "Miller",
+    "Myrtlewood",
+    "Naheola",
+    "Pennington",
+    "Pickensville"
+   ],
+   "bbox": [
+    -88.48889,
+    31.137073,
+    -87.83748,
+    33.513477
+   ],
+   "wikidata": "Q2297877",
+   "charted": true,
+   "area_km2": 2.887,
+   "launches": [
+    "bashi-creek-boat-ramp-al",
+    "birdeye-boat-ramp-al",
+    "boligee-access-al",
+    "bud-s-landing-public-boat-ramp-al",
+    "choctaw-nwr-boat-ramp-al",
+    "demopolis-boat-launch-al",
+    "demopolis-city-landing-al",
+    "foscue-boat-ramp-al",
+    "tombigbee-river-boat-launch-near-gainesville-al",
+    "lenoir-landing-boat-ramp-al",
+    "lock-4-boat-ramp-al",
+    "mccarty-s-ferry-boat-ramp-al",
+    "mcintosh-bluff-landing-al",
+    "myrtlewood-al",
+    "naheola-landing-boat-ramp-al",
+    "old-lock-1-al",
+    "old-lock-2-boat-ramp-al",
+    "tombigbee-river-boat-launch-near-pickensville-al",
+    "tombigbee-river-boat-launch-near-warsaw-al",
+    "tombigbee-river-boat-launch-near-coffeeville-al",
+    "spillway-falls-boat-ramp-al",
+    "saint-stephens-park-tombigbee-boat-launch-al",
+    "sumter-boat-ramp-al",
+    "tombigbee-river-boat-launch-near-tompkinsville-al",
+    "tuscahoma-landing-al",
+    "tuscahoma-landing-public-boat-ramp-al",
+    "tombigbee-river-boat-launch-near-vienna-al"
+   ],
+   "water_id": "tombigbee-river-al",
+   "gnis_id": "158094",
+   "geometry_hash": "39aeade4f79227974da3c0dfff9b40b6e4378a3dcc08a23e088dbba3ba62d9c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bobby-s-fish-camp-boat-ramp-al",
+    "coast-guard-demopolis-site-office-boat-ramp-al",
+    "tombigbee-river-boat-launch-near-jackson-al",
+    "tombigbee-river-boat-launch-near-mcintosh-al-2",
+    "tombigbee-river-boat-launch-near-pennington-al-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "valley-creek-al",
+   "name": "Valley Creek",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Driftwood"
+   ],
+   "bbox": [
+    -87.230803,
+    33.378449,
+    -86.826125,
+    33.538827
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "valley-creek-al",
+   "gnis_id": null,
+   "geometry_hash": "64c96d8fa4df55870f53aa77355c1d8e3919d873997a2a10406b73935a97b506",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "valley-creek-boat-launch-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walter-f-george-reservoir-al",
+   "name": "Walter F. George Reservoir",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Abbeville",
+    "Coates",
+    "White Oak"
+   ],
+   "bbox": [
+    -85.177384,
+    31.613666,
+    -85.035179,
+    31.780034
+   ],
+   "wikidata": "Q7333077",
+   "charted": false,
+   "area_km2": 61.291,
+   "launches": [
+    "walter-f-george-reservoir-boat-launch-near-abbeville-al-2",
+    "walter-f-george-reservoir-boat-launch-near-abbeville-al-3",
+    "thomas-mill-creek-al",
+    "walter-f-george-reservoir-boat-launch-near-white-oak-al-4",
+    "walter-f-george-reservoir-boat-launch-near-white-oak-al-3"
+   ],
+   "water_id": "walter-f-george-reservoir-al",
+   "gnis_id": "324814",
+   "geometry_hash": "d3b28ce1dfd91d2da6ca08db769eef0721c1fcff4ab3a164dc84bab156146c7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "walter-f-george-reservoir-eufaula-al",
+   "name": "Walter F George Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Eufaula"
+   ],
+   "bbox": [
+    -85.15028,
+    31.900047,
+    -85.024498,
+    32.093069
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 27.353,
+   "launches": [
+    "houston-unit-boat-launch-al",
+    "lakepoint-resort-state-park-campground-boat-launch-al",
+    "lakepoint-resort-state-park-main-boat-launch-al",
+    "lakepoint-resort-state-park-secondary-boat-launch-al"
+   ],
+   "water_id": "walter-f-george-reservoir-coffinton-ga",
+   "gnis_id": null,
+   "geometry_hash": "43c7a1771da6860e1f75f9d03222f6ba5f42b52f7677e88c911c6da1a3c816e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "walter-f-george-reservoir-eufaula-al-2",
+   "name": "Walter F George Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Eufaula"
+   ],
+   "bbox": [
+    -85.18149,
+    31.776575,
+    -85.105298,
+    31.909037
+   ],
+   "wikidata": "Q7333077",
+   "charted": false,
+   "area_km2": 29.993,
+   "launches": [
+    "walter-f-george-reservoir-boat-launch-near-eufaula-al"
+   ],
+   "water_id": "walter-f-george-reservoir-al",
+   "gnis_id": "324814",
+   "geometry_hash": "fd82b9adfa7c05bce68be6c20b7202d6994a61082632a79b67aa4a61c5add0ce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "u-s-coast-guard-aids-to-navigation-team-eufala-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "weeks-bay-al",
+   "name": "Weeks Bay",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Fairhope"
+   ],
+   "bbox": [
+    -87.846969,
+    30.375154,
+    -87.814046,
+    30.415247
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.985,
+   "launches": [
+    "weeks-bay-boat-launch-near-magnolia-springs-al-3"
+   ],
+   "water_id": "weeks-bay-al",
+   "gnis_id": null,
+   "geometry_hash": "428651f93b624fe9afbed805e1cdedfd0e5f0b43495f9ff01b9ca9dfe195fef1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "weiss-lake-al",
+   "name": "Weiss Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Alpine Shores",
+    "Billy Goat Hill",
+    "Burkhalter Subdivision",
+    "Cedar Bluff",
+    "Centre",
+    "Hopewell",
+    "Leesburg",
+    "Newberry Cove",
+    "Oceola",
+    "Pathkiller Cove",
+    "Piney",
+    "Roberts Subdivision"
+   ],
+   "bbox": [
+    -85.818465,
+    34.132461,
+    -85.44334,
+    34.271616
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 93.9,
+   "launches": [
+    "cedar-bluff-al",
+    "chattooga-bridge-al",
+    "east-diversion-al",
+    "leesburg-al",
+    "mud-creek-weiss-al"
+   ],
+   "water_id": "weiss-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "d677e4797bbaf417b06c016043de96f174ca1937cbb6c3b71609b37a13ef728f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "weiss-lake-boat-launch-near-billy-goat-hill-al-2",
+    "weiss-lake-boat-launch-near-cedar-bluff-al",
+    "weiss-lake-boat-launch-near-cedar-bluff-al-2",
+    "weiss-lake-boat-launch-near-centre-al-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-fowl-river-al",
+   "name": "West Fowl River",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Dauphin Island"
+   ],
+   "bbox": [
+    -88.18715,
+    30.361244,
+    -88.142944,
+    30.391125
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.619,
+   "launches": [
+    "west-fowl-river-boat-launch-al"
+   ],
+   "water_id": "west-fowl-river-al",
+   "gnis_id": null,
+   "geometry_hash": "d4b4bf54b624d78412df8ed8e8821e71f0f3bde4000701a677601e1d7eea43bc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-point-lake-willow-crest-lake-al",
+   "name": "West Point Lake;Willow Crest Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Evansville",
+    "Lanett",
+    "Old Atkinson Crossing",
+    "Piedmont Heights"
+   ],
+   "bbox": [
+    -85.264923,
+    32.915796,
+    -84.988889,
+    33.249416
+   ],
+   "wikidata": "Q7335398",
+   "charted": false,
+   "area_km2": 81.408,
+   "launches": [
+    "west-point-lake-willow-crest-lake-boat-launch-near-piedmont-heights-al",
+    "amity-campground-south-boat-ramp-al",
+    "west-point-lake-willow-crest-lake-boat-launch-near-lanett-al",
+    "west-point-lake-willow-crest-lake-boat-launch-near-evansville-al",
+    "west-point-lake-willow-crest-lake-boat-launch-near-piedmont-heights-al-2"
+   ],
+   "water_id": "west-point-lake-willow-crest-lake-al",
+   "gnis_id": "325064",
+   "geometry_hash": "c92eef1fc48491d25199494d06e7c83bd856e311a219812d39b6a7b3698c3cec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wheeler-lake-al",
+   "name": "Wheeler Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Anderson Creek Estates",
+    "Decatur",
+    "Elk Shores",
+    "Oliver",
+    "Rogersville",
+    "Triana"
+   ],
+   "bbox": [
+    -87.383769,
+    34.390015,
+    -86.391217,
+    34.86481
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "arrowhead-al",
+    "barnett-al",
+    "cotaco-creek-al",
+    "elk-river-north-72-al",
+    "elk-river-south-72-al",
+    "elk-river-state-park-al"
+   ],
+   "water_id": "wheeler-lake-al",
+   "gnis_id": "112837",
+   "geometry_hash": "086c20fb2706867ae7d7dee5546303eedd1a1d79e42a41f3545625fb08a99d59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "william-bacon-oliver-lake-al",
+   "name": "William Bacon Oliver Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Warrior Heights"
+   ],
+   "bbox": [
+    -87.593226,
+    33.207302,
+    -87.449335,
+    33.255364
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.422,
+   "launches": [
+    "riverview-access-al"
+   ],
+   "water_id": "william-bacon-oliver-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "68da29f3288b1620e27d766846036cd4bce3879b6d9f193d3be621d9c0288590",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "william-bill-dannelly-reservoir-al",
+   "name": "William \"Bill\" Dannelly Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Boykin"
+   ],
+   "bbox": [
+    -87.283357,
+    32.139345,
+    -87.252885,
+    32.152684
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.684,
+   "launches": [
+    "william-bill-dannelly-reservoir-boat-launch-al"
+   ],
+   "water_id": "william-bill-dannelly-reservoir-al",
+   "gnis_id": null,
+   "geometry_hash": "cd163664940d38dbee85b9f0dd9cb893ab42b88619080f9ae8c36a176216d507",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "william-bill-dannelly-reservoir-prairie-bluff-al",
+   "name": "William 'Bill' Dannelly Reservoir",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Midway",
+    "Prairie Bluff"
+   ],
+   "bbox": [
+    -87.414771,
+    32.090502,
+    -87.318361,
+    32.156177
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.164,
+   "launches": [
+    "millers-ferry-campground-boat-ramp-al",
+    "millers-ferry-resource-office-boat-ramp-al",
+    "shell-creek-boat-ramp-al"
+   ],
+   "water_id": "william-bill-dannelly-reservoir-prairie-bluff-al",
+   "gnis_id": null,
+   "geometry_hash": "cca67ffdb221062e23c02dd0e6273f5d5e16b66b132f97719b885f86988bc081",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "william-bill-dannelly-reservoir-boat-launch-prairie-bluff-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-lake-al",
+   "name": "Wilson Lake",
+   "kind": "river",
+   "state": "AL",
+   "towns": [
+    "Bailey Springs",
+    "Fishermans Resort",
+    "Florence",
+    "Fosters Mill",
+    "Killen",
+    "Lakeview",
+    "Lock Three",
+    "Saint Florian",
+    "Wheeler Dam Village"
+   ],
+   "bbox": [
+    -87.628092,
+    34.76476,
+    -87.381374,
+    34.920324
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 57.085,
+   "launches": [
+    "alloys-park-boat-ramp-al",
+    "lock-six-boat-ramp-al",
+    "shoal-creek-al",
+    "wilson-lake-boat-launch-near-fosters-mill-al",
+    "wheeler-dam-reservation-ramp-al",
+    "wilson-dam-reservation-boat-ramp-al"
+   ],
+   "water_id": "wilson-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "3bfccca6de405202e6b9d73f742c9de51c83ce94c7f80f419801dc4b54fae3a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "doublehead-resort-ramp-al",
+    "emerald-beach-marina-boat-ramp-al",
+    "fisherman-s-resort-ramp-al",
+    "wilson-lake-boat-launch-near-bailey-springs-al",
+    "wilson-lake-boat-launch-near-killen-al-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "woodhaven-lake-al",
+   "name": "Woodhaven Lake",
+   "kind": "reservoir",
+   "state": "AL",
+   "towns": [
+    "Woodhaven"
+   ],
+   "bbox": [
+    -86.617456,
+    33.760063,
+    -86.613798,
+    33.765302
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.089,
+   "launches": [],
+   "water_id": "woodhaven-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "db2923aeb7d5b7d70ba6a9da7a278f2235fc4e0f11ccc7b9b5b5bc7dbf493f60",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "woodhaven-lake-boat-launch-near-woodhaven-al"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yates-lake-al",
+   "name": "Yates Lake",
+   "kind": "lake",
+   "state": "AL",
+   "towns": [
+    "Tallassee"
+   ],
+   "bbox": [
+    -85.912498,
+    32.595293,
+    -85.876296,
+    32.679792
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.531,
+   "launches": [
+    "yates-lake-boat-launch-al"
+   ],
+   "water_id": "yates-lake-al",
+   "gnis_id": null,
+   "geometry_hash": "c2e3faca2b5f1db8a6ee41b2c7844e8a0fbfdf4266c162032adc5cca3c6d00b8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellow-creek-demopolis-al",
+   "name": "Yellow Creek",
+   "kind": "stream",
+   "state": "AL",
+   "towns": [
+    "Demopolis"
+   ],
+   "bbox": [
+    -87.787985,
+    32.503553,
+    -87.727987,
+    32.559786
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "arcola-boat-ramp-al"
+   ],
+   "water_id": "yellow-creek-demopolis-al",
+   "gnis_id": null,
+   "geometry_hash": "9e105dff47128eff67a480e473f6955a6ca2fba8ad986cba9b301f1b299c418e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
