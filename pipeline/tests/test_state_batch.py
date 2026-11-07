@@ -156,6 +156,11 @@ def test_obl_check(tmp_path):
     assert "predates them" in lines[2]                                  # 0 counted, 2 on file now
     ok, lines = B.obl_check("OH", root)
     assert not ok and "ingest.obl_waters --state OH" in lines[0]
+    # SOL wave1 P2-11: a correctly shaped empty extract is not accepted
+    write(root, "data/waters-nc.json", {"state": "NC", "source": "openboatlaunch out/water snapshot 2026-11-02",
+                                        "count": 0, "waters": []})
+    ok, lines = B.obl_check("nc", root)
+    assert not ok and "holds no water record" in lines[0]
 
 
 def fake_step(code: str) -> list[str]:
@@ -399,7 +404,9 @@ def test_refresh_workflow_keeps_the_raw_cache():
     sb = names.index("Save pipeline state to R2")
     sr = next(i for i, n in enumerate(names) if n.startswith("Save the raw caches"))
     assert rb < rr < refresh < sb < sr
-    assert steps[sb]["if"] == "success()" and steps[sr]["if"].startswith("success() && ")
+    assert steps[sb]["if"].startswith("success() && ") and steps[sr]["if"].startswith("success() && ")
+    assert "steps.pause.outputs.paused != '1'" in steps[sb]["if"]                 # SOL wave1 P2-9
+    assert "steps.refresh.outputs.skipped != '1'" in steps[sb]["if"] and "steps.refresh.outputs.skipped != '1'" in steps[sr]["if"]
     assert "steps.restore_raw.outputs.keep != '1'" in steps[sr]["if"]       # a cache it could not fetch stays
     assert "state_paths.py pack raw-cache.tar.gz" in steps[sr]["run"]
     assert "state_paths.py unpack raw-cache.tar.gz" in steps[rr]["run"]

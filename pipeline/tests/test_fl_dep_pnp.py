@@ -30,15 +30,18 @@ def test_only_sewage_notices_become_records():
     by_kind = {r["raw"]["_pnp_kind"]: r for r in recs.values()}
     assert by_kind["partially_treated"]["event_type"] == "plant_bypass"
     c = by_kind["citizen_complaint"]
-    assert (c["event_type"], c["status"]) == ("unknown", "unknown")
+    # the public's report keeps its sewage classification; its provenance is marked apart (SOL 2026-11-07 wave 1 P1-5)
+    assert c["event_type"] == "sso" and c["status"] != "unknown" and c["raw"]["report_provenance"] == "citizen"
 
 
 def test_ids_times_and_status():
     recs, _ = built()
     r = recs["202611076-20261101T155824"]
-    assert r["reported_at"] == "2026-11-01T15:58:24-05:00"       # wall clock stored as UTC, read as Florida time (EST from 1 Nov)
-    assert r["started_at"] == "2026-11-01T00:00:00-04:00" and r["time_precision"] == "day"
-    assert r["ended_at"] == "2026-11-02T00:00:00-05:00" and r["status"] == "ended"
+    # wall clock stored as UTC, read as the point's Florida time: Panama City keeps Central time (CST from 1 Nov 02:00;
+    # midnight was still CDT) (SOL 2026-11-07 wave 1 P1-3)
+    assert r["reported_at"] == "2026-11-01T15:58:24-06:00" and r["raw"]["time_zone"] == "America/Chicago"
+    assert r["started_at"] == "2026-11-01T00:00:00-05:00" and r["time_precision"] == "day"
+    assert r["ended_at"] == "2026-11-02T00:00:00-06:00" and r["status"] == "ended"
     assert r["published_at"] is None
     later = recs["202611076-20261102T091000"]
     assert later["status"] == "ongoing" and later["ended_at"] is None
@@ -180,7 +183,7 @@ def test_sewer_shorthand_and_a_contradicted_template_are_sewage():
     assert P.classify(t, None, None)[0] == "treated"
 
 
-def test_a_complaint_is_never_linked_to_an_operator_notice_and_never_colours():
+def test_a_complaint_is_never_linked_to_an_operator_notice_and_colours_only_the_caution():
     from datetime import UTC, datetime
 
     from build import status as S
@@ -193,8 +196,10 @@ def test_a_complaint_is_never_linked_to_an_operator_notice_and_never_colours():
     assert c["parent_event_id"] is None and o["parent_event_id"] is None and stats["revisions"] == 0
     superseded, _ = S.resolve_revisions(recs, {r["event_id"]: r for r in recs})
     assert o["event_id"] not in superseded
-    for now in (datetime(2026, 11, 2, tzinfo=UTC), datetime(2026, 11, 20, tzinfo=UTC)):
-        assert S.event_intervals(c, "FL", now) == []
+    for now in (datetime(2026, 11, 4, tzinfo=UTC), datetime(2026, 11, 20, tzinfo=UTC)):
+        ivs = S.event_intervals(c, "FL", now)
+        assert ivs and not any(iv["color"] == "red" for iv in ivs)
+        assert all(iv["citizen_report"] for iv in ivs) and any(iv["rule"] == "citizen_caution" for iv in ivs)
 
 
 def test_city_is_not_a_water_name():
@@ -247,7 +252,9 @@ def test_left_out_counts_are_public_cumulative_and_not_doubled(tmp_path, monkeyp
     meta = json.loads((ev / f"{P.SOURCE_ID}.json").read_text())["meta"]
     assert meta["left_out"] == {"other pollution (fuel, oil, chemicals, stormwater and the like)": 1,
                                 "reclaimed water (reuse)": 1}
-    assert meta["listed_without_status"] == {"filed by a member of the public": 1}
+    # reports filed by the public are shown under the caution now (wave 1 P1-5): none is listed without a status
+    assert "listed_without_status" not in meta and meta["filed_by_the_public"] == 1
+    assert "members of the public are shown under the site's caution" in meta["left_out_note"]
     assert {"left_out", "listed_without_status", "left_out_note"} <= PUBLIC_FEED_META
 
 

@@ -32,11 +32,19 @@ Passes (2026-11-04): a full pass reads every active point once; a new pass start
 
 Records (beach_advisory; a beach record, never a sewage record)
   Per sampling point, in date order: a sample with Advisory Yes opens an advisory (or continues the open one); the next
-  sample with Advisory No ends it: advisory_lifted, ended_at = that sample's date (day precision). One still open is
+  sample with Advisory No ends it: advisory_lifted. DOH lifts the advisory when that clean result is known, usually one
+  to three days after the sample was collected, and the page gives no lifting date (SOL review 2026-11-07 wave 1 P1-4:
+  the collection date is not the lift). raw.clean_sample_date keeps the collection date; ended_at is what was observed:
+  the first run that read the clean result (raw.lift_first_seen_at; raw.ended_at_precision "poll"), with
+  raw.lift_observed_between [the last run that read it open, or the clean sample's day when no run did, that run].
+  An advisory first read already lifted, whose clean result was first read more than three days (LIFT_LAG_DAYS) after
+  the sample (history), ends at the end of that third day: the latest usual lift, the site's bound
+  (raw.ended_at_precision "bound", raw.ended_at_basis), never the collection date. One still open is
   advisory_active, source_updated_at = the date of its latest Advisory Yes sample (the status build stops colouring it
   14 days after). started_at is the sample date of the first Advisory Yes result (DOH issues the advisory when the
   laboratory result is known, usually one to three days after sampling: raw.start_basis). DOH's own advisory text and
-  signs are not on the page: advice_text is null.
+  signs are not on the page: advice_text is null. Dates are days of the point's own clock: Central time west of the
+  Apalachicola River (zones.florida_zone; the Panhandle, raw.time_zone), Eastern elsewhere (wave 1 P1-3).
   event_id = fl-doh-beaches:<EPA beach id or county-location>:<sample period ID of the opening sample>.
   waterbody_text = the sampling location as DOH names it (a beach or street end); water_slugs stay empty until
   Florida's water records are built. Coordinates: the point's SPLat/SPLong.
@@ -62,6 +70,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+import zones
 from common import (BROWSER_HEADERS, BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events,
                     write_json)
 
@@ -80,8 +89,13 @@ MIN_HOURS = 20
 BUDGET_S = 360.0           # seconds of result pages a run may spend; the pass continues next run
 REFUSED_RUN = 5            # this many points in a row without a sample row: ask the probe whether the page refuses us
 GIVE_UP_RUNS = 3           # a point not read in this many runs of a pass is left for that pass (it keeps its records)
-END_BASIS = ("the sample date of the next result without an advisory; the Department of Health lifts the advisory when "
-             "that result is known, usually one to three days later, and the page gives no lifting date")
+END_BASIS = ("the clean sample (raw.clean_sample_date) is the next result without an advisory; the Department of Health "
+             "lifts the advisory when that result is known, usually one to three days after the sample, and the page "
+             "gives no lifting date: the end is when this site first read the clean result (raw.ended_at_basis)")
+LIFT_LAG_DAYS = 3          # DOH lifts an advisory when the clean result is known, "usually one to three days" later
+BOUND_BASIS = ("not observed: this advisory was first read already lifted, more than {n} days after its clean sample "
+               "was collected on {d}; DOH gives no lifting date, so it is counted to the end of {last}, {n} days after "
+               "that sample, the latest usual lift (the site's bound, not DOH's date)")
 START_BASIS = ("the sample date of the first result with an advisory; the Department of Health issues the advisory "
                "when the laboratory result is known, usually one to three days after sampling")
 
@@ -125,12 +139,29 @@ def point_id(p: dict) -> str:
     return re.sub(r"[^a-z0-9]+", "-", f"{p.get('County')} {p.get('SPLocation')}".lower()).strip("-")
 
 
-def day(d: str) -> str:
+def point_tz(p: dict) -> ZoneInfo:
+    """The point's clock: Central in the Panhandle (zones.florida_zone), else Eastern (TZ)."""
+    try:
+        lat, lon = float(p.get("SPLat")), float(p.get("SPLong"))
+    except (TypeError, ValueError):
+        return TZ
+    return ZoneInfo(zones.CENTRAL) if zones.florida_zone(lat, lon) == zones.CENTRAL else TZ
+
+
+def day(d: str, tz: ZoneInfo = TZ) -> str:
     y, m, dd = (int(x) for x in d.split("-"))
-    return datetime(y, m, dd, tzinfo=TZ).isoformat()
+    return datetime(y, m, dd, tzinfo=tz).isoformat()
 
 
-def episodes(p: dict, samples: list[dict], fetched_at: str) -> list[dict]:
+def _when(s) -> datetime | None:
+    try:
+        t = datetime.fromisoformat(str(s).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return None
+    return t if t.tzinfo else None
+
+
+def episodes(p: dict, samples: list[dict], fetched_at: str, prev: dict | None = None) -> list[dict]:
     """samples: older ones first, the page's rows last: a sample read again replaces the copy kept from an earlier run
     (a result posted late, or an advisory flag corrected)."""
     samples = sorted({s["period"]: s for s in samples}.values(), key=lambda s: (s["date"], int(s["period"])))
@@ -143,15 +174,45 @@ def episodes(p: dict, samples: list[dict], fetched_at: str) -> list[dict]:
             ep["last"] = s
         elif s.get("advisory") == "No" and ep is not None:
             ep["samples"].append(s)
-            out.append(make(p, ep, s, fetched_at))
+            out.append(make(p, ep, s, fetched_at, prev))
             ep = None
     if ep is not None:
-        out.append(make(p, ep, None, fetched_at))
+        out.append(make(p, ep, None, fetched_at, prev))
     return out
 
 
-def make(p: dict, ep: dict, lift: dict | None, fetched_at: str) -> dict:
+def lift_end(lift: dict, before: dict | None, fetched_at: str, tz: ZoneInfo) -> dict:
+    """The raw fields of a lifted advisory's end, and ended_at (module docstring, Records): what was observed, never
+    the clean sample's collection date. before: this advisory's record from the earlier run, if any."""
+    b_raw = (before or {}).get("raw") or {}
+    was_lifted = (before or {}).get("status") == "advisory_lifted"
+    seen = b_raw.get("lift_first_seen_at") if was_lifted else fetched_at
+    open_seen = b_raw.get("last_seen_open_at") or ((before or {}).get("fetched_at") if before and not was_lifted
+                                                    else None)
+    d = lift["date"]
+    y, m, dd = (int(x) for x in d.split("-"))
+    bound = datetime(y, m, dd, tzinfo=tz) + timedelta(days=LIFT_LAG_DAYS + 1)
+    out = {"clean_sample_date": d, "end_basis": END_BASIS}
+    if seen:
+        out["lift_first_seen_at"] = seen
+    seen_t = _when(seen)
+    if seen_t is not None and (open_seen or seen_t <= bound):
+        out.update(ended_at=seen, ended_at_precision="poll",
+                   lift_observed_between=[open_seen or day(d, tz), seen],
+                   ended_at_basis=("the first run that read the clean result" + ("" if open_seen else
+                                   " (no earlier run read the advisory open: it was lifted between the clean sample's "
+                                   "day and that run)")))
+    else:
+        out.update(ended_at=bound.isoformat(), ended_at_precision="bound",
+                   ended_at_basis=BOUND_BASIS.format(n=LIFT_LAG_DAYS, d=d,
+                                                     last=(bound - timedelta(days=1)).date().isoformat()))
+    return out
+
+
+def make(p: dict, ep: dict, lift: dict | None, fetched_at: str, prev: dict | None = None) -> dict:
     o = ep["open"]
+    tz = point_tz(p)
+    before = (prev or {}).get(f"{SOURCE_ID}:{point_id(p)}:{o['period']}")
     lat, lon = p.get("SPLat"), p.get("SPLong")
     try:
         lat, lon = float(lat), float(lon)
@@ -161,15 +222,22 @@ def make(p: dict, ep: dict, lift: dict | None, fetched_at: str) -> dict:
            "location": p.get("SPLocation"), "samples": ep["samples"], "start_basis": START_BASIS,
            "detail_page": p.get("Link")}
     status = "advisory_lifted" if lift else "advisory_active"
+    if tz is not TZ:
+        raw["time_zone"] = tz.key
+    ended_at = None
     if lift:
-        raw["end_basis"] = END_BASIS
+        end = lift_end(lift, before, fetched_at, tz)
+        ended_at = end.pop("ended_at")
+        raw.update(end)
+    elif _when(fetched_at) is not None:
+        raw["last_seen_open_at"] = fetched_at          # this run read the advisory still open
     return event(
         source_id=SOURCE_ID, source_record_id=f"{point_id(p)}:{o['period']}", fetched_at=fetched_at,
         source_url=p.get("Link") or PAGE_URL, event_type="beach_advisory", status=status,
         waterbody_text=p.get("SPLocation"), water_slugs=[], water_match="none", outfall_name=p.get("SPLocation"),
         lat=lat, lon=lon, coord_source="source" if lat is not None else None, coord_precision_m=10 if lat is not None else None,
-        started_at=day(o["date"]), ended_at=day(lift["date"]) if lift else None, time_precision="day",
-        reported_at=None, published_at=None, source_updated_at=day(ep["last"]["date"]),
+        started_at=day(o["date"], tz), ended_at=ended_at, time_precision="day",
+        reported_at=None, published_at=None, source_updated_at=day(ep["last"]["date"], tz),
         material="enterococcus bacteria above the state's beach action value", authority=AUTHORITY,
         advice_text=None, raw=raw,
     )
@@ -281,6 +349,7 @@ def fetch(limit: int | None = None, budget_s: float | None = None) -> tuple[list
 def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
     records, seen, samples_n, read, empty = [], set(), 0, 0, 0
     read_points = set()
+    prev_by_id = {r["event_id"]: r for r in prev_records if r.get("event_id")}
     for p in points:
         page = pages.get(point_key(p))
         if page is None:
@@ -294,7 +363,7 @@ def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at:
         old = [s for r in prev_records if r.get("raw", {}).get("county") == p.get("County")
                and r.get("raw", {}).get("location") == p.get("SPLocation") for s in r["raw"].get("samples") or []]
         read_points.add((p.get("County"), p.get("SPLocation")))
-        for rec in episodes(p, old + rows, fetched_at):
+        for rec in episodes(p, old + rows, fetched_at, prev_by_id):
             seen.add(rec["event_id"])
             records.append(rec)
     kept = 0

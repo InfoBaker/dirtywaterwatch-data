@@ -1,6 +1,6 @@
 #!/bin/sh
 # The data refresh: feeds -> provisional outfalls -> reaches -> status -> charts -> export -> tally -> R2 current/.
-# Run from the repository root by the GitHub Actions workflow or by hand. A PAUSE file stops it; a lock directory
+# Run from the repository root by the GitHub Actions workflow or by hand. A PAUSE file stops it (skipped=1); a lock directory
 # keeps runs from overlapping (a lock older than two hours is treated as stale). The site is built elsewhere from
 # the files uploaded to R2. Log: data/build/refresh.log (not in git).
 # Exit 1 when the refresh or the export failed, or the export is blocked: the workflow then publishes no export
@@ -8,11 +8,14 @@
 set -u
 cd "$(dirname "$0")/.." || exit 1
 export FIXTURES=0   # research fixtures never reach the public files
-[ -f data/build/PAUSE ] && { echo "$(date -u +%FT%TZ) paused"; exit 0; }
+# a run that stops at once (PAUSE, or another run's lock) did nothing: under GitHub Actions it says skipped=1, so the
+# workflow publishes and saves nothing after it (SOL wave1 P2-9; the workflow checks R2 state/PAUSE before this)
+skipped() { echo "$(date -u +%FT%TZ) $1"; [ -n "${GITHUB_OUTPUT:-}" ] && echo "skipped=1" >> "$GITHUB_OUTPUT"; exit 0; }
+[ -f data/build/PAUSE ] && skipped paused
 LOCK=data/build/refresh.lockdir
 mkdir -p data/build
 if ! mkdir "$LOCK" 2>/dev/null; then
-  if [ -n "$(find "$LOCK" -maxdepth 0 -mmin +120 2>/dev/null)" ]; then rmdir "$LOCK"; mkdir "$LOCK" || exit 0; else echo "$(date -u +%FT%TZ) locked"; exit 0; fi
+  if [ -n "$(find "$LOCK" -maxdepth 0 -mmin +120 2>/dev/null)" ]; then rmdir "$LOCK"; mkdir "$LOCK" || skipped locked; else skipped locked; fi
 fi
 # every feed and stage prints "timing: NAME SECONDS s" (scripts/timed.sh); the longest are listed again at the end
 TIMINGS_FILE="$(pwd)/data/build/refresh-timings.tsv"

@@ -221,19 +221,35 @@ def test_a_lifted_advisory_leaves_its_stretch_grey(traced):
     assert st["reach_events_active"] == []
 
 
-def test_with_no_stretch_traced_the_whole_water_reads_the_advisory_and_says_why(no_requests, monkeypatch):
+def test_with_no_stretch_traced_the_advisory_is_a_marker_never_the_whole_river(no_requests, monkeypatch):
+    # SOL wave2 P1-3 (2026-11-07): an advisory whose stretch is not traced (none yet, its end more than 1 km off the
+    # path, or its end upstream of its start) stays a coloured marker that says why; the river is never coloured
+    # whole and nothing reads "shown on the whole water"
     from tests.test_status import TEST_RULES
     monkeypatch.setattr(S, "_RULES", TEST_RULES)
     r = standing()
-    r["stretch"]["end"].update(lat=32.30, lon=-90.30)
-    off = pearl_trace(no_requests, r)
-    for reaches, why in (({}, "not traced yet"), ({off["key"]: off}, "could not be traced")):
-        st, _ = _status([r], "2026-11-07T13:00:00Z", reaches)
+    off_rec = copy.deepcopy(r)
+    off_rec["stretch"]["end"].update(lat=32.30, lon=-90.30)                             # miles off the river
+    off = pearl_trace(no_requests, off_rec)
+    assert off["cut_reason"] == "stretch_end_off_path"
+    up_rec = copy.deepcopy(r)
+    up_rec["stretch"]["end"].update(lat=MOUTH[1] + 0.003, lon=MOUTH[0])                 # above the start
+    up = pearl_trace(no_requests, up_rec)
+    assert up["segments"] == [] and up["cut_reason"] == "stretch_end_not_downstream"
+    for rec, reaches, why in ((r, {}, "not traced yet"), (off_rec, {off["key"]: off}, "could not be traced"),
+                              (up_rec, {up["key"]: up}, "could not be traced")):
+        st, hist = _status([rec], "2026-11-07T13:00:00Z", reaches)
         pr = st["waters"]["pearl-river-ms"]
-        assert pr["status"] == "red" and pr["reasons"][0]["placement"] == "stretch_unmodeled"
-        assert why in pr["reasons"][0]["stretch_fallback"] and pr["reaches"] == []
-        assert pr["reason_short"].endswith("· stretch not traced: shown on the whole water")
-        assert st["reaches"] == {}
+        assert pr["status"] == "grey" and pr["reaches"] == [] and st["reaches"] == {}
+        assert not [x for x in pr["reasons"] if x.get("color", x.get("status")) in ("red", "yellow")]
+        assert not any(x.get("placement") == "stretch_unmodeled" for x in pr["reasons"])
+        assert rec["event_id"] in pr["events"]                # the water's page still lists the advisory
+        pt = next(p for p in st["advisory_points"] if p["event_id"] == rec["event_id"])
+        assert pt["status"] == "red" and pt["water_slugs"] == ["pearl-river-ms"]
+        assert why in pt["why"] and why in pt["stretch_fallback"] and "river is not coloured" in pt["why"]
+        assert why in st["placements"][rec["event_id"]]["stretch_fallback"]
+        text = json.dumps([st, hist], default=str)
+        assert "whole water" not in text and "stretch_unmodeled" not in text
 
 
 # ---------------------------------------------------------------- the export

@@ -250,7 +250,9 @@ def test_beachwatch_colours_red_to_the_lift_and_e_coli_with_the_sites_caution_on
     rules = S.load_rules()
     ivs = S.event_intervals(by["LBB1ROCKFD04-2026-w23"], "NE", now, None, rules)
     assert [i["color"] for i in ivs] == ["red"] and ivs[0]["rule"] == "advisory_active"
-    assert ivs[0]["end"] == S.end_of_local_day(S.parse_time("2026-06-15"))   # the next sample's day, not 14 days
+    chicago = S.ZoneInfo("America/Chicago")      # a Nebraska day ends at Central midnight (SOL 2026-11-07 wave 2 P1-1)
+    assert ivs[0]["end"] == S.end_of_local_day(S.parse_time("2026-06-15", chicago), chicago)   # the next sample's day
+    assert ivs[0]["end"].isoformat() == "2026-06-16T05:00:00+00:00"
     ivs = S.event_intervals(by["LLP2BRNOAK09-2026-w21"], "NE", now, None, rules)
     assert len(ivs) == 1 and ivs[0]["color"] == "yellow" and ivs[0]["rule"] == "sample_caution"
     assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72) and ivs[0]["category"] == "beach"

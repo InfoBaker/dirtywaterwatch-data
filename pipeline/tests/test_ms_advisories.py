@@ -38,7 +38,8 @@ def test_the_feed_gives_the_trahon_creek_advisory_and_the_standing_pearl_river_o
     assert t["published_at"].startswith("2026-09-02T13:41:58-05:00")
     assert (t["lat"], t["lon"]) == (32.194572, -90.25033) and t["coord_source"] == "source"   # the release's own point
     assert t["advice_text"].startswith("MDEQ recommends that people avoid water contact")
-    assert t["source_url"] == TRAHON_URL and t["source_updated_at"] == AT
+    assert t["source_url"] == TRAHON_URL and t["source_updated_at"] is None           # the feed gives no update time
+    assert t["raw"]["_last_seen_in_source"] == AT and t["fetched_at"] == AT
     p = by["pearl-river-hanging-moss-creek-to-byram-swinging-bridge"]
     assert p["status"] == "advisory_active" and p["started_at"] == "2026-09-02"
     assert "remains in effect" in p["raw"]["quote"] and "began earlier" in p["raw"]["start_basis"]
@@ -109,15 +110,17 @@ def test_an_advisory_opens_on_mdeqs_start_date_and_lifts_at_the_first_clear_poll
                         _segs(), [], AT)
     r = recs[0]
     assert stats["opened"] == 1 and r["event_type"] == "beach_advisory" and r["status"] == "advisory_active"
-    assert r["started_at"] == "2026-11-05" and r["time_precision"] == "day" and r["source_updated_at"] == AT
+    assert r["started_at"] == "2026-11-05" and r["time_precision"] == "day" and r["source_updated_at"] is None
+    assert r["raw"]["_last_seen_in_source"] == AT
     assert (r["lat"], r["lon"]) == (30.27639, -89.3736) and r["raw"]["station"] == "Waveland Beach"
     assert r["raw"]["segment"]["paths"] and r["raw"]["segment"]["west_end"] == "Oak Blvd"
     assert r["advice_text"] == "Enterococci above criteria"
     again, _ = B.run(_rows(isadvisory=1, startdate="11/5/2026 10:00:00"), _segs(), copy.deepcopy(recs),
                      "2026-11-07T13:00:00Z")
-    assert len(again) == 1 and again[0]["source_updated_at"] == "2026-11-07T13:00:00Z"     # re-confirmed
+    assert len(again) == 1 and again[0]["raw"]["_last_seen_in_source"] == "2026-11-07T13:00:00Z"     # re-confirmed
     off, st = B.run(_rows(), _segs(), copy.deepcopy(again), "2026-11-08T13:00:00Z")
     assert st["lifted"] == 1 and off[0]["status"] == "advisory_lifted" and off[0]["ended_at"] == "2026-11-08T13:00:00Z"
+    assert off[0]["raw"]["ended_at_precision"] == "poll"      # the poll's end is exact, never rounded to the day (SOL wave2 P1-2)
 
 
 def test_closure_and_bloom_types_and_a_flag_without_a_date():
@@ -183,15 +186,10 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     assert (t["raw"]["stretch"]["from"]["lat"], t["raw"]["stretch"]["to"]["name"]) == (32.194572, "confluence with the Pearl River")
     st = _status(recs, "2026-11-07T13:00:00Z", monkeypatch)
     pr = st["waters"]["pearl-river-ms"]
-    # the river itself reads the authority's advisory: red, beach category, the stretch named in its reason
-    assert pr["status"] == "red" and pr["status_by_category"]["beach"] == "red"
-    assert pr["reasons"][0]["rule"] == "advisory_active"
-    assert pr["reason_short"].startswith("Water contact advisory in effect · Mississippi Department of Environmental")
-    # no stretch traced here (reaches={}): the whole-water fallback, and the reason says so
-    assert pr["reason_short"].endswith("from the mouth of Hanging Moss Creek to the Byram Swinging Bridge"
-                                       " · stretch not traced: shown on the whole water")
-    assert pr["reasons"][0]["placement"] == "stretch_unmodeled"
-    assert "not traced yet" in pr["reasons"][0]["stretch_fallback"]
+    # no stretch traced here (reaches={}): the Pearl River is not coloured whole (reaches, not whole rivers; SOL wave2
+    # P1-3); the advisory stays a red marker whose why says its stretch is not traced yet
+    assert pr["status"] == "grey" and p["event_id"] in pr["events"]
+    assert "not traced yet" in st["placements"][p["event_id"]]["stretch_fallback"]
     # Trahon Creek is tied by its name once its record exists (the report-names pass builds it)
     assert st["placements"][t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
     # reaches, not whole rivers (2026-11-07): Trahon Creek's advisory names no stretch with both ends, so it is listed
@@ -201,6 +199,7 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     # rivers are drawn by reaches and markers, never filled: the markers stay, so the map still shows both
     pts = {a["event_id"]: a for a in st["advisory_points"]}
     assert pts[p["event_id"]]["status"] == "red" and pts[p["event_id"]]["water_slugs"] == ["pearl-river-ms"]
+    assert "not traced yet" in pts[p["event_id"]]["why"] and "whole water" not in pts[p["event_id"]]["why"]
     assert pts[t["event_id"]]["status"] == "red" and pts[t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
     from build.status import RIVER_POINT_WHY
     assert pts[t["event_id"]]["why"] == RIVER_POINT_WHY
@@ -223,3 +222,95 @@ def test_a_beach_advisory_on_a_river_still_colours_only_its_point(monkeypatch):
     st = _status([p], "2026-11-07T13:00:00Z", monkeypatch)
     assert st["waters"]["pearl-river-ms"]["status"] == "grey"
     assert st["advisory_points"][0]["why"] == "water is not a lake, pond or reservoir under 50 km²"
+
+
+# ---------------------------------------------------------------- SOL wave 2 P1-5 and P1-6 (2026-11-07)
+
+_CREATOR_FEED = b"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>MDEQ</title>
+<item><title>Water Contact Advisory Issued for Section of Example Creek</title>
+<link>https://www.mdeq.ms.gov/water-contact-advisory-issued-for-section-of-example-creek/</link>
+<pubDate>Mon, 02 Nov 2026 13:41:58 +0000</pubDate><dc:creator><![CDATA[Quill Placeholder]]></dc:creator>
+<author>quill.placeholder@example.org (Quill Placeholder)</author></item>
+</channel></rss>"""
+
+
+def test_the_feed_kept_in_raw_storage_carries_no_author(monkeypatch):
+    """P1-5: fetch() saved the whole RSS response (dc:creator, an MDEQ staff name) before items() dropped it."""
+    saved, link = [], "https://www.mdeq.ms.gov/water-contact-advisory-issued-for-section-of-example-creek/"
+
+    class Resp:
+        def __init__(self, content):
+            self.content, self.ok = content, True
+            self.text = content.decode()
+
+        def raise_for_status(self):
+            pass
+
+    def get(url, **_):
+        return Resp(_CREATOR_FEED if url == W.FEED else b"<p>Example page by Quill Placeholder</p>")
+
+    monkeypatch.setattr(W.requests, "get", get)
+    monkeypatch.setattr(W, "save_raw", lambda sid, content, ext: saved.append((sid, content, ext)))
+    feed, pages = W.fetch()
+    assert len(saved) == 1 and saved[0][2] == "json"
+    blob = saved[0][1]
+    assert b"Quill" not in blob and b"Placeholder" not in blob and b"creator" not in blob and b"author" not in blob
+    kept = json.loads(blob)
+    assert kept["items"] == [{"title": "Water Contact Advisory Issued for Section of Example Creek", "link": link,
+                              "date": "Mon, 02 Nov 2026 13:41:58 +0000"}]
+    recs, _ = W.run(feed, {}, [], AT)
+    assert any(r["raw"].get("title", "").endswith("Example Creek") for r in recs)
+    assert "Quill" not in json.dumps(recs) and "Placeholder" not in json.dumps(recs)
+
+
+def test_an_unchanged_feed_polled_twice_moves_only_the_confirmation():
+    """P1-6: each run's fetch time was published as source_updated_at ("Source last updated")."""
+    later = "2026-11-07T13:00:00Z"
+    first, _ = W.run((REL / "feed.xml").read_bytes(), _pages(), [], AT)
+    second, _ = W.run((REL / "feed.xml").read_bytes(), _pages(), copy.deepcopy(first), later)
+    a = {r["event_id"]: r for r in first}
+    for r in second:
+        assert r["status"] == "advisory_active"
+        for f in ("source_updated_at", "reported_at", "published_at", "started_at"):
+            assert r[f] == a[r["event_id"]][f], f                       # source times never move on a poll
+        assert r["source_updated_at"] is None
+        assert r["raw"]["_last_seen_in_source"] == later and r["fetched_at"] == later
+    from build import status
+    t = next(r for r in second if r["source_record_id"] == "trahon-creek-2026-09-02")
+    ivs = status.event_intervals(t, "MS", status.parse_time(later))
+    assert ivs[0]["color"] == "red" and ivs[0]["confirmed"].startswith("2026-11-07T13:00")
+
+
+def test_a_record_carried_from_before_the_fix_loses_its_poll_time_as_source_time():
+    first, _ = W.run((REL / "feed.xml").read_bytes(), _pages(), [], AT)
+    old = copy.deepcopy(first)
+    for r in old:
+        r["source_updated_at"] = AT
+        r["raw"].pop("_last_seen_in_source")
+    out, _ = W.run(b"<rss></rss>", {}, old, "2026-11-07T13:00:00Z")
+    assert all(r["source_updated_at"] is None for r in out)
+    assert all(r["raw"]["_last_seen_in_source"] == "2026-11-07T13:00:00Z" for r in out)
+
+
+def test_a_beach_advisory_without_a_source_time_polled_twice_keeps_null_source_times():
+    """P1-6: a flag with no MDEQ report or edit time took the poll's time as reported_at and source_updated_at."""
+    later = "2026-11-07T13:00:00Z"
+    for flags in ({"isadvisory": 1}, {"isadvisory": 1, "startdate": "11/5/2026"}):
+        recs, _ = B.run(_rows(**flags), _segs(), [], AT)
+        again, st = B.run(_rows(**flags), _segs(), copy.deepcopy(recs), later)
+        r = again[0]
+        assert len(again) == 1 and st["opened"] == 0 and r["status"] == "advisory_active"
+        assert r["reported_at"] is None and r["source_updated_at"] is None and r["published_at"] is None
+        assert r["started_at"] == recs[0]["started_at"]
+        assert r["raw"]["_last_seen_in_source"] == later and r["fetched_at"] == later
+        from build import status
+        ivs = status.event_intervals(r, "MS", status.parse_time(later))
+        assert ivs[0]["color"] == "red" and ivs[0]["confirmed"].startswith("2026-11-07T13:00")
+    # a record carried from before the fix: its poll times move to the confirmation field
+    old = copy.deepcopy(recs)
+    old[0].update(reported_at=AT, source_updated_at=later)
+    old[0]["raw"].pop("_last_seen_in_source")
+    carried, _ = B.run(_rows(), _segs(), old, "2026-11-08T13:00:00Z")
+    assert carried[0]["reported_at"] is None and carried[0]["source_updated_at"] is None
+    assert carried[0]["raw"]["_last_seen_in_source"] == later and carried[0]["status"] == "advisory_lifted"

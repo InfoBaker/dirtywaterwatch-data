@@ -78,11 +78,18 @@ Which notices become records (the feed mixes every kind of pollution)
   - The counts of what is left out are public and cumulative: data/build/fl-dep-pnp-state.json keeps
     each left-out notice's id and kind, and the events file's meta.left_out, listed_without_status
     and left_out_note (export/build.py PUBLIC_FEED_META) give the totals.
-  - Citizen complaints (the scope rule of 2026-11-04): a sewage notice filed by a
-    member of the public (relationship OTHER- with citizen, resident, homeowner or neighbour words)
-    is a record of event_type unknown and status unknown, raw._pnp_kind "citizen_complaint": kept
-    and listed, never coloured as a discharge (docs: unknown records colour only when ongoing),
-    and never linked to an operator's notice as a revision (a revision supersedes its parent).
+  - Citizen reports: a sewage notice filed by a member of the public (relationship OTHER- with
+    citizen, resident, homeowner or neighbour words) keeps the classification its words give (an
+    overflow, a bypass) and its status (ongoing, ended), with its provenance marked apart:
+    raw._pnp_kind "citizen_complaint" and raw.report_provenance "citizen". The status build colours
+    it with the site's caution only, never red, and cites it as the public's report, never as an
+    authority's confirmation (SOL review 2026-11-07 wave 1 P1-5, replacing the 2026-11-04 default
+    of event_type and status unknown, which could never colour). It is never linked to an
+    operator's notice as a revision (a revision supersedes its parent).
+  - Times: DEP stores the filer's wall clock as if it were UTC. It is Florida's clock at the
+    notice's point: Central time west of the Apalachicola River (zones.florida_zone; the Panhandle),
+    Eastern elsewhere and when the notice has no usable point (SOL review 2026-11-07 wave 1 P1-3).
+    A Central-time record carries raw.time_zone.
 
 Record rules
   - OBJECTID is renumbered whenever DEP rebuilds the layer (newest first), so it is not an id.
@@ -159,6 +166,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from build import redact
+import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, OPERATOR_WORDS, ROOT, drop_house_numbers, event, now_iso,
                     parse_volume_gal, path_notes_to_meta, read_json, residence_numbers, save_raw, scrub_text,
                     strip_house_numbers, write_events, write_json)
@@ -771,26 +779,38 @@ def classify(text: str | None, facility: str | None, filer: str | None) -> tuple
         else:
             kind, et, rule = "other_pollution", None, "text: no sewage words"
     if et and filer == "citizen":
-        return "citizen_complaint", "unknown", rule + "; filed by a member of the public"
+        return "citizen_complaint", et, rule + "; filed by a member of the public"
     return kind, et, rule
 
 
 # ---------------------------------------------------------------- fields
 
-def wall_clock(ms) -> datetime | None:
-    """An epoch-ms value holding Florida wall-clock time stored as UTC -> aware America/New_York."""
+def wall_clock(ms, tz: ZoneInfo = TZ) -> datetime | None:
+    """An epoch-ms value holding Florida wall-clock time stored as UTC -> aware in tz (the notice's zone: florida_tz)."""
     if ms in (None, ""):
         return None
     try:
         t = datetime.fromtimestamp(float(ms) / 1000, UTC)
     except (TypeError, ValueError, OverflowError, OSError):
         return None
-    return t.replace(tzinfo=None).replace(tzinfo=TZ)
+    return t.replace(tzinfo=None).replace(tzinfo=tz)
 
 
-def local_date(ms) -> datetime | None:
-    t = wall_clock(ms)
+def local_date(ms, tz: ZoneInfo = TZ) -> datetime | None:
+    t = wall_clock(ms, tz)
     return t.replace(hour=0, minute=0, second=0, microsecond=0) if t else None
+
+
+CENTRAL = ZoneInfo(zones.CENTRAL)
+FL_CENTRAL_BASIS = ("the notice's point lies west of the Apalachicola River, in Florida's Central time zone (49 CFR "
+                    "71.5): its wall-clock times are read as Central time")
+CITIZEN_NOTE = ("filed with DEP by a member of the public, not by the system's operator or owner; no authority has "
+                "confirmed the discharge")
+
+
+def florida_tz(lat, lon) -> ZoneInfo:
+    """The zone of a notice's wall clock: Central at a Panhandle point (zones.florida_zone), else Eastern (TZ)."""
+    return CENTRAL if zones.florida_zone(lat, lon) == zones.CENTRAL else TZ
 
 
 def iso(t: datetime | None) -> str | None:
@@ -1143,8 +1163,14 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
     if tf:
         raw["_template"] = tf
     raw["_time_basis"] = TIME_BASIS
-    reported = wall_clock(a.get("DATE_TIME_OF_REPORT"))
-    start, end = local_date(a.get("RELEASE_START_DATE_TIME")), local_date(a.get("RELEASE_END_DATE_TIME"))
+    lat, lon = fnum(a.get("LATITUDE")), fnum(a.get("LONGITUDE"))
+    usable = lat is not None and lon is not None and in_fl(lon, lat)
+    tz = florida_tz(lat if usable else None, lon if usable else None)
+    if tz is not TZ:
+        raw["time_zone"] = tz.key
+        raw["_time_zone_basis"] = FL_CENTRAL_BASIS
+    reported = wall_clock(a.get("DATE_TIME_OF_REPORT"), tz)
+    start, end = local_date(a.get("RELEASE_START_DATE_TIME"), tz), local_date(a.get("RELEASE_END_DATE_TIME"), tz)
     raw["_decoded_times"] = {"reported": iso(reported), "release_start_date": start.date().isoformat() if start else None,
                              "release_end_date": end.date().isoformat() if end else None}
     ongoing = str(a.get("RELEASE_ONGOING") or "").strip().upper()
@@ -1167,7 +1193,6 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
         if status == "ended":
             status = "unknown"
 
-    lat, lon = fnum(a.get("LATITUDE")), fnum(a.get("LONGITUDE"))
     if lat is not None and lon is not None and not in_fl(lon, lat):
         raw["_coords_rejected"] = {"lat": lat, "lon": lon, "why": "not in Florida"}
         lat = lon = None
@@ -1216,6 +1241,9 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
 
     p_raw = (prev or {}).get("raw") or {}
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or base["fetched_at"]
+    if kind == "citizen_complaint":
+        raw["report_provenance"] = "citizen"
+        raw["_provenance_note"] = CITIZEN_NOTE
 
     material = {"untreated": "untreated wastewater", "partially_treated": "partially treated wastewater",
                 "wastewater_unspecified": "wastewater (type not stated)",
@@ -1365,16 +1393,17 @@ def _days_before(iso_t: str, days: int) -> str | None:
 
 def left_out_meta(left_out: dict, records: list[dict], backfilled_at: str | None) -> dict:
     """The public counts of what this feed reads and does not show (the scope rule of 2026-11-04: treated effluent, reuse and
-    biosolids counted but not shown as sewage reports; complaints listed with no status). left_out: every notice
+    biosolids counted but not shown as sewage reports; reports filed by the public shown under the caution). left_out: every notice
     ever read and left out, by its source_record_id, so the counts are cumulative and a re-read never doubles them."""
     by = Counter(LEFT_OUT_LABEL.get(k, k) for k in left_out.values())
     complaints = sum(1 for r in records if (r.get("raw") or {}).get("_pnp_kind") == "citizen_complaint")
     scope = ("every notice since July 2017" if backfilled_at else "the notices read so far (the last 30 days at first)")
     return {"left_out": dict(sorted(by.items())),
-            "listed_without_status": {"filed by a member of the public": complaints},
+            "filed_by_the_public": complaints,
             "left_out_note": (f"Counted over {scope}: notices about treated effluent, reclaimed water, biosolids and "
                               "other pollution are counted here but not shown as sewage reports; sewage notices filed "
-                              "by members of the public are listed with no status.")}
+                              "by members of the public are shown under the site's caution, not as an authority's "
+                              "confirmation.")}
 
 
 # ---------------------------------------------------------------- fetch

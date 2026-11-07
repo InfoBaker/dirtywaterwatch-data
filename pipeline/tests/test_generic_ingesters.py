@@ -719,3 +719,72 @@ def test_arcgis_refuses_a_page_out_of_object_id_order():
          "page_size": 3, "record": {"source_record_id": "OBJECTID"}}
     with pytest.raises(RuntimeError, match="order"):
         arcgis.fetch(b, Unordered())
+
+
+# ---------------------------------------------------------------- SOL wave 1 P1-7: raw storage keeps safe fields only
+
+PERSONAL = ("Pat Example", "pat.example@example.org", "312-555-0199", "312-555-0142", "ops.person@example.org",
+            "Placeholder", "Reporter Name", "Contact Email", "Contact Phone", "reporter_name", "contact_email",
+            "contact_phone", "Quill Owner", "quill.owner@example.org")
+
+
+def _intercept(monkeypatch, tmp_path, content: bytes, parse=None):
+    """Every write fetch_rows makes: save_raw and write_json (the fetch state), and any other file write."""
+    from ingest.generic.base import Fetched
+    saved, states = [], []
+    meta = {"rowsUpdatedAt": 1762300000, "owner": {"displayName": "Quill Owner", "email": "quill.owner@example.org"},
+            "editingInfo": {"lastEditDate": 1762300000000, "lastEditor": "Quill Owner"},
+            "description": "Contact Pat Example at pat.example@example.org"}
+    monkeypatch.setattr(csv_json, "fetch", lambda b, s: Fetched(content, "csv", meta, json.dumps(meta).encode()))
+    if parse:
+        monkeypatch.setattr(csv_json, "parse", parse)
+    monkeypatch.setattr(runner, "STATE_DIR", tmp_path / "state")
+    monkeypatch.setattr(runner, "save_raw", lambda sid, c, ext: (saved.append((c, ext)), tmp_path / "x.json")[1])
+    monkeypatch.setattr(runner, "ROOT", tmp_path)
+    real_wj = runner.write_json
+    monkeypatch.setattr(runner, "write_json", lambda p, d, *a, **k: (states.append(json.dumps(d)), real_wj(p, d, *a, **k))[1])
+    return saved, states
+
+
+def test_fetch_rows_keeps_no_excluded_field_or_contact_in_raw_storage(monkeypatch, tmp_path):
+    saved, states = _intercept(monkeypatch, tmp_path, CSV.encode())
+    rows, meta, raw_path = runner.fetch_rows("x-test", block(), None, None)
+    assert len(saved) == 1 and saved[0][1] == "json" and raw_path == "x.json"
+    blob = saved[0][0].decode() + "".join(states)
+    for s in PERSONAL:
+        assert s not in blob, s
+    doc = json.loads(saved[0][0])
+    assert doc["format"] == runner.SAFE_ROWS_FORMAT and len(doc["rows"]) == 3
+    assert all(set(r) <= set(block()["safe_fields"]) for r in doc["rows"])
+    assert "[email removed]" in doc["rows"][0]["notes"] and "[phone removed]" in doc["rows"][0]["notes"]
+    assert doc["meta"] == meta == {"rowsUpdatedAt": 1762300000, "editingInfo": {"lastEditDate": 1762300000000}}
+    # nothing else was written under the run's directories
+    assert not [p for p in tmp_path.rglob("*") if p.is_file() and p.suffix != ".json"]
+    for p in tmp_path.rglob("*.json"):
+        assert not any(s in p.read_text() for s in PERSONAL), p
+    # the same response again: nothing new saved
+    runner.fetch_rows("x-test", block(), None, None)
+    assert len(saved) == 1
+    # the saved record replays with --file to the same records as the live rows
+    f = tmp_path / "replay.json"
+    f.write_bytes(saved[0][0])
+    again, ameta, _ = runner.fetch_rows("x-test", block(), str(f), None)
+    live = runner.build("x-test", block(), rows, FETCHED, [], meta)[0]
+    replay = runner.build("x-test", block(), again, FETCHED, [], ameta)[0]
+    assert replay == live
+
+
+def test_fetch_rows_keeps_only_the_rows_the_filter_keeps(monkeypatch, tmp_path):
+    saved, _ = _intercept(monkeypatch, tmp_path, CSV.encode())
+    b = block(filter=[{"field": "kind", "regex": "^CSO$", "exclude": True}])
+    runner.fetch_rows("x-test", b, None, None)
+    assert [r["report_id"] for r in json.loads(saved[0][0])["rows"]] == ["A1", "A3"]
+
+
+def test_a_response_that_fails_to_parse_is_not_saved(monkeypatch, tmp_path):
+    def broken(b, content):
+        raise ValueError("not a table")
+    saved, states = _intercept(monkeypatch, tmp_path, CSV.encode(), parse=broken)
+    with pytest.raises(ValueError):
+        runner.fetch_rows("x-test", block(), None, None)
+    assert saved == [] and states == []
