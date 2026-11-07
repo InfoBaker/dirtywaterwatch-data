@@ -1,0 +1,67 @@
+{
+"features": [
+{
+"attributes": {
+"sso_report_id": "SSO-00215084",
+"sso_report_version": "2",
+"permit_no": "AL0042234",
+"permittee": "Baldwin County Sewer Service, LLC",
+"facility_site": "Spanish Fort Sewer WWTP",
+"report_type": "Final Report",
+"received_date": "Nov  5 2026  3:05PM",
+"date_sso_began": "2026-11-03 01:03 pm",
+"date_sso_stopped": "2026-11-03 01:30 pm",
+"sso_ongoing_ind": "No",
+"est_volume": "1000",
+"volume_color": "blue",
+"location_of_discharge": "Example Rd at the lift station",
+"receiving_stream": "Ground Absorbed;pump truck",
+"lattitude_decimal": 30.6256621,
+"longitude_decimal": -87.809991,
+"cause_of_discharge": "vent saddle rusted"
+}
+},
+{
+"attributes": {
+"sso_report_id": "SSO-00214479",
+"sso_report_version": "1",
+"permit_no": "AL0050237",
+"permittee": "City of Auburn",
+"facility_site": "H.C. Morgan WPCF",
+"report_type": "Final Report",
+"received_date": "Oct 30 2026 12:30PM",
+"date_sso_began": "2026-10-30 08:30 am",
+"date_sso_stopped": "2026-10-30 10:30 am",
+"sso_ongoing_ind": "No",
+"est_volume": "1200",
+"volume_color": "blue",
+"location_of_discharge": "Example Rd at the lift station",
+"receiving_stream": "Ground Absorbed;Moores Mill Creek",
+"lattitude_decimal": 32.613377,
+"longitude_decimal": -85.459838,
+"cause_of_discharge": "Wooded area behind 77 Sample Ln."
+}
+},
+{
+"attributes": {
+"sso_report_id": "8447",
+"sso_report_version": "3",
+"permit_no": "AL0063657",
+"permittee": "City of Uniontown",
+"facility_site": "Uniontown Wastewater Treatment Facility",
+"report_type": "Final Report",
+"received_date": "Oct 31 2018  6:45AM",
+"date_sso_began": "2018-03-18 5:00 PM",
+"date_sso_stopped": null,
+"sso_ongoing_ind": "Yes",
+"est_volume": "250,000 < gallons <=500,000",
+"volume_color": "orange",
+"location_of_discharge": "Example Rd at the lift station",
+"receiving_stream": "Freetown Creek",
+"lattitude_decimal": 32.380482,
+"longitude_decimal": -87.5106,
+"cause_of_discharge": "Construction and ground saturation"
+}
+}
+]
+}

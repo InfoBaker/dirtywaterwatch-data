@@ -53,8 +53,11 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
   be safe fields) only those fields are requested. A safe field must be a single value: an object or a list is
   dropped (`raw._dropped_objects`), since its keys were not reviewed; name its leaves (`site.lat`). `raw.row` holds
   the safe fields as the source gave them, and `raw` notes say how each value was read (`_basis`, `_water`,
-  `_source_type`, `_duplicate_basis`, `_first_seen_at`, `_revisions`, and the block's own `raw_notes`). The whole
-  response, as fetched, is kept only on the machine that runs the fetch (`data/raw/`), never in a record.
+  `_source_type`, `_duplicate_basis`, `_first_seen_at`, `_revisions`, and the block's own `raw_notes`). The response
+  itself is never kept: `data/raw/` (on the machine that runs the fetch) keeps only the rows the filter keeps, cut
+  to their safe fields with free text scrubbed, and the platform metadata the readers use (`runner.SAFE_META`:
+  `rowsUpdatedAt`, `editingInfo.lastEditDate`), as `dww-safe-rows/1` JSON that `--file` replays; a response that
+  fails to parse is not kept (SOL review 2026-11-07, wave 1 P1-7).
 - **Personal data removed.** A safe field any part of whose name may hold a private person (a name, owner, caller,
   resident, complainant, reporter, submitter, contact, inspector, email or phone field) is refused unless
   `reviewed_fields` gives the reason it does not; emails, phone numbers and names after a title or an honorific

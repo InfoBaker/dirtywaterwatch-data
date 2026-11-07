@@ -49,6 +49,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
                     now_iso, read_json, rules_live_states, write_json)
 from build import shoreline as SH
@@ -207,8 +208,9 @@ _SHORE_REACHES: set[str] = set()       # the reach keys of this build's shorelin
 # An authority's advisory for a named stretch of a river (the record's `stretch`, docs/plan.md §3): build/reaches.py
 # traces the stretch (reach kind "advisory_stretch") and the advisory colours only that stretch, in its own category
 # (beach), with no travel time; the rivers it runs along take their state from it (placement "reach") and the water
-# page still lists the advisory. With no stretch traced (not yet, or its ends are off the mapped path) the advisory
-# colours its whole water, as before, and its reason says so (placement "stretch_unmodeled", stretch_fallback).
+# page still lists the advisory. With no stretch traced (not yet, its end off the mapped path or upstream of its start)
+# the advisory stays a coloured marker at its point and the river is not coloured (reaches, not whole rivers; SOL
+# wave2 P1-3, 2026-11-07); the marker's why says the stretch could not be traced (stretch_fallback).
 ADVISORY_STRETCH = "advisory_stretch"
 _STRETCH_REACHES: set[str] = set()     # the reach keys of this build's advisory stretches (where())
 STRETCH_SUMMARY = "part of this water is under an authority's advisory for a named stretch"
@@ -324,6 +326,10 @@ RULES = {
     "day_start_caution": ("yellow", "Report dated to the day only, with no end: caution from the start of that day"),
     "text_caution": ("yellow", "Water named in the notice's text; the notice's form said no water was reached: "
                                "the site's caution, not an advisory"),
+    "citizen_caution": ("yellow", "Reported by a member of the public, not confirmed by an authority: the site's "
+                                  "caution, not an advisory"),
+    "code_caution": ("yellow", "A code on the source's map whose meaning the source does not publish: the site's "
+                               "caution, not an advisory"),
     "end_never_reported": ("grey", "Unresolved: no end reported (off the map after 30 days)"),
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
@@ -368,10 +374,10 @@ DEFAULT_CADENCE = [
 
 # ---------------------------------------------------------------- time
 
-def parse_time(s) -> datetime | None:
-    """ISO 8601 to an aware UTC datetime. A naive time is America/New_York local clock time (the
-    sources' convention; an ambiguous or skipped hour at a DST change takes the first reading) and
-    is converted to UTC here, so every window below is added in absolute hours, never wall-clock."""
+def parse_time(s, tz: ZoneInfo | None = None) -> datetime | None:
+    """ISO 8601 to an aware UTC datetime. A naive time (or a bare date, read as its midnight) is local clock time in tz,
+    the record's own zone (event_zone), else America/New_York (an ambiguous or skipped hour at a DST change takes the
+    first reading), and is converted to UTC here, so every window below is added in absolute hours, never wall-clock."""
     if not s:
         return None
     try:
@@ -379,14 +385,52 @@ def parse_time(s) -> datetime | None:
     except ValueError:
         return None
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=LOCAL)
+        dt = dt.replace(tzinfo=tz or LOCAL)
     return dt.astimezone(UTC)
 
 
-def end_of_local_day(dt: datetime) -> datetime:
-    """The end of the America/New_York calendar day containing dt, in UTC (23 or 25 h days included)."""
-    d = dt.astimezone(LOCAL).date() + timedelta(days=1)
-    return datetime(d.year, d.month, d.day, tzinfo=LOCAL).astimezone(UTC)
+def end_of_local_day(dt: datetime, tz: ZoneInfo | None = None) -> datetime:
+    """The end of the calendar day containing dt in tz (the record's zone, event_zone; else America/New_York), in UTC
+    (23 or 25 h days included)."""
+    tz = tz or LOCAL
+    d = dt.astimezone(tz).date() + timedelta(days=1)
+    return datetime(d.year, d.month, d.day, tzinfo=tz).astimezone(UTC)
+
+
+@functools.lru_cache(maxsize=64)
+def _zone(name: str) -> ZoneInfo | None:
+    try:
+        return ZoneInfo(name)
+    except (ValueError, KeyError, OSError):
+        return None
+
+
+def event_zone(ev: dict, state: str | None = None) -> ZoneInfo:
+    """The clock a record's bare dates and unzoned times are read in, and its calendar days end in (SOL 2026-11-07,
+    wave 1 P1-2, wave 2 P1-1): raw.time_zone (an IANA name its ingester gives from the record's own point), else the
+    zone of the record's state at its point (zones.zone_for: Florida, South Dakota and Nebraska by the point), the
+    state from event_state, else the state the caller passes; America/New_York when neither is known."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    if isinstance(raw.get("time_zone"), str) and (z := _zone(raw["time_zone"])):
+        return z
+    name = zones.zone_for(event_state(ev) or state, ev.get("lat"), ev.get("lon"))
+    return (_zone(name) if name else None) or LOCAL
+
+
+def ev_time(ev: dict, key: str, state: str | None = None, tz: ZoneInfo | None = None) -> datetime | None:
+    """parse_time of the record's field in the record's own zone (event_zone)."""
+    v = ev.get(key)
+    if not v:
+        return None
+    return parse_time(v, tz or event_zone(ev, state))
+
+
+def end_precision(ev: dict) -> str | None:
+    """The precision of the record's end: raw.ended_at_precision where the ingester gives the end its own (an exact
+    end borrowed from another report, a lift seen at a poll: minute, hour, poll, bound), else time_precision. Only an
+    end of day precision is counted to the end of its local day (SOL 2026-11-07, wave 1 P1-1, wave 2 P1-2)."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("ended_at_precision") or ev.get("time_precision")
 
 
 # A start more than this far after the build's time is a source error (a NY SPRTK record published with a start of
@@ -397,7 +441,7 @@ FUTURE_START_H = 24
 
 def future_start(ev: dict, now: datetime | None) -> str | None:
     """The validation note for a record whose start lies more than FUTURE_START_H hours after now, else None."""
-    st = parse_time(ev.get("started_at"))
+    st = ev_time(ev, "started_at")
     if st is None or now is None or st <= now + timedelta(hours=FUTURE_START_H):
         return None
     return f"start is in the future as published (started_at {ev.get('started_at')}); it sets no status"
@@ -419,10 +463,11 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     Advisories keep their end, the authority's own (a seasonal shellfish closure may run for months), and so do
     month and year records (their end is the period's end; they set no window), and a planned bypass whose ingester
     labels its end as the operator's planned end (raw.end_is_planned: EPA's anticipated bypass notices)."""
-    en = parse_time(ev.get("ended_at"))
+    tz = event_zone(ev)
+    en = ev_time(ev, "ended_at", tz=tz)
     if en is None:
         return None
-    st = parse_time(ev.get("started_at"))
+    st = ev_time(ev, "started_at", tz=tz)
     if st and en < st:
         return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
     if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
@@ -434,7 +479,7 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     days = end_limit_days(load_rules() if rules is None else rules)
     if days is None:
         return None
-    read = min(t for t in (parse_time(ev.get("fetched_at")), now) if t)
+    read = min(t for t in (ev_time(ev, "fetched_at", tz=tz), now) if t)
     if en <= read + timedelta(days=days):
         return None
     return (f"ended_at {ev.get('ended_at')} is more than {days:g} days after the report was read "
@@ -465,12 +510,13 @@ def end_assumed(ev: dict, now: datetime, rules: dict) -> datetime | None:
     et = ev.get("event_type")
     if not (et in DISCHARGE_TYPES or (et == "unknown" and ev.get("status") == "ongoing")):
         return None
-    if ev.get("time_precision") in COARSE_PRECISION or (parse_time(ev.get("ended_at")) is not None
+    if ev.get("time_precision") in COARSE_PRECISION or (ev_time(ev, "ended_at") is not None
                                                         and not end_not_credible(ev, now, rules)):
         return None
     if ev.get("status") == "ended" and (ev.get("raw") or {}).get("_ended_before"):
         return None
-    begin = parse_time(ev.get("started_at")) or parse_time(ev.get("reported_at")) or parse_time(ev.get("published_at"))
+    tz = event_zone(ev)
+    begin = ev_time(ev, "started_at", tz=tz) or ev_time(ev, "reported_at", tz=tz) or ev_time(ev, "published_at", tz=tz)
     if begin is None:
         return None
     at = begin + timedelta(days=unresolved_days(rules))
@@ -2234,6 +2280,38 @@ def text_over_flag(ev: dict) -> bool:
     return raw.get("reached_water") == TEXT_OVER_FLAG
 
 
+# A sewage report filed by a member of the public (raw.report_provenance "citizen": the Florida DEP PNP notices a
+# resident filed). Its classification is the report's own (a sewage overflow), its provenance is marked apart, and its
+# colour is the site's caution only (rule citizen_caution, never red): what would be red is yellow, cited as the
+# public's report, never as an authority's confirmation (SOL 2026-11-07 wave 1 P1-5; err on the side of safety).
+CITIZEN = "citizen"
+CITIZEN_NOTE = "filed by a member of the public; no authority has confirmed the discharge"
+
+
+def citizen_report(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("report_provenance") == CITIZEN
+
+
+# A record opened from a source's code whose meaning the source does not publish (raw.code_undecoded: the reason, as
+# ADEM's beach map code; ingest/al_adem_beaches.py). It is never shown as the authority's own advisory: what would be
+# red is the site's caution (rule code_caution), until the source states what its codes mean.
+def code_undecoded(ev: dict) -> str | None:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    v = raw.get("code_undecoded")
+    return v if isinstance(v, str) and v.strip() else None
+
+
+def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None:
+    """Turn a red interval into the site's caution under rule (no authority window applies)."""
+    was = iv["rule"]
+    iv["color"], iv["label"], iv["rule"] = RULES[rule][0], RULES[rule][1], rule
+    iv["window_hours"] = iv["window_basis"] = None
+    iv["rule_applied"] = {"rule": applied, "replaces": was, "hours": None,
+                          "rationale": f"{basis}: placed on the water under the site's caution, never red "
+                                       "(no authority window applies)", "source": source}
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2254,36 +2332,47 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             iv["text_over_flag"] = basis
             if iv["color"] == "red":
-                was = iv["rule"]
-                iv["color"], iv["label"], iv["rule"] = RULES["text_caution"][0], RULES["text_caution"][1], "text_caution"
-                iv["window_hours"] = iv["window_basis"] = None      # no authority window applies
-                iv["rule_applied"] = {"rule": "placement.text_over_flag", "replaces": was, "hours": None,
-                                      "rationale": f"{basis}: placed on the water under the site's caution, never red "
-                                                   "(no authority window applies)", "source": ev.get("source_url")}
+                _caution_only(iv, "text_caution", "placement.text_over_flag", basis, ev.get("source_url"))
+    if out and citizen_report(ev):
+        basis = str((ev.get("raw") or {}).get("_provenance_note") or CITIZEN_NOTE)
+        for iv in out:
+            iv["citizen_report"] = basis
+            if iv["color"] == "red":
+                _caution_only(iv, "citizen_caution", "provenance.citizen_report", basis, ev.get("source_url"))
+    code_basis = code_undecoded(ev) if out else None
+    if code_basis:
+        for iv in out:
+            iv["code_undecoded"] = code_basis
+            if iv["color"] == "red":
+                _caution_only(iv, "code_caution", "provenance.code_undecoded", code_basis, ev.get("source_url"))
     return out
 
 
 def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None, rules: dict) -> list[dict]:
     et, st = ev.get("event_type") or "unknown", ev.get("status") or "unknown"
+    tz = event_zone(ev, state)
+
+    def pt(v):
+        return parse_time(v, tz)          # the record's own clock (event_zone)
     if et == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
         return []                 # outfall-months and annual totals are history, never a colour
     if future_start(ev, now):
         return []                 # a start in the future as published: no colour (FUTURE_START_H)
     if et == "unknown" and st != "ongoing":
         return []                 # an unparsed record colours only while it says ongoing
-    start = parse_time(ev.get("started_at")) or parse_time(ev.get("reported_at")) or parse_time(ev.get("published_at"))
+    start = pt(ev.get("started_at")) or pt(ev.get("reported_at")) or pt(ev.get("published_at"))
     if start is None:
         return []
-    end = parse_time(ev.get("ended_at"))
+    end = pt(ev.get("ended_at"))
     end_not_used = end_not_credible(ev, now, rules) if end is not None else None
     if end_not_used:
         end = None      # before the start, or too far ahead: no confirmed end (validation error in build: time_problem)
-    if end is not None and ev.get("time_precision") == "day":
-        end = end_of_local_day(end)          # a day-precision end counts from the end of that day
+    if end is not None and end_precision(ev) == "day":
+        end = end_of_local_day(end, tz)      # a day-precision end counts from the end of that day, in its own zone
     bound = None
     if end is None and st == "ended" and ev.get("time_precision") == "bound":
         # "no activations for 12 hours": ended by this time at the latest; windows count from the bound
-        bound = parse_time((ev.get("raw") or {}).get("_ended_before"))
+        bound = pt((ev.get("raw") or {}).get("_ended_before"))
         if bound is not None:
             end = bound
             start = min(start, bound)        # a report time after the bound is not the discharge's start
@@ -2295,10 +2384,25 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             and (ev.get("raw") or {}).get(sc.get("flag") or "_agency_label_only"):
         # a sample the agency labels a risk with no advisory (Nebraska's elevated E. coli): the site's caution from
         # the sample, never the authority's advisory rule (review 2026-11-07 P2-2)
-        iv = _iv(ev, start, start + timedelta(hours=float(sc["hours"])), "sample_caution", None, yellow)
+        until = start + timedelta(hours=float(sc["hours"]))
+        raw = ev.get("raw") or {}
+        notice_end = None
+        if raw.get("_caution_to_notice_end") is True:
+            # the agency keeps a notice up while it retests (Hawaii's beach notifications, ingest/hi_doh_cwb_events.py):
+            # the caution runs to the later of its hours and the notice's closing, or the last read that listed it
+            # while it is open (review 2026-11-07 P2-2); keyed on the record's flag, so other feeds are unchanged
+            notice_end = (parse_time(raw.get("_notice_closed_at")) or end
+                          or parse_time(raw.get("_last_seen_in_source")))
+            if notice_end is not None and notice_end > until:
+                until = notice_end
+        iv = _iv(ev, start, until, "sample_caution", None, yellow)
         iv["rule_applied"] = {"rule": "unresolved.sample_caution", "hours": float(sc["hours"]),
-                              "label": (ev.get("raw") or {}).get("_agency_label"),
+                              "label": raw.get("_agency_label"),
                               "rationale": sc.get("rationale"), "source": "data/rules.json"}
+        if notice_end is not None and until == notice_end:
+            iv["rule_applied"]["extended_to"] = {
+                "until": iso(notice_end), "basis": raw.get("_notice_end_basis") or "the agency's notice was still posted",
+                "source": ev.get("source_url")}
         return [iv]
     if et in ADVISORY_TYPES or st in ("advisory_active", "advisory_lifted"):
         rule = "rain_advisory" if et == "rain_advisory" else "advisory_active"
@@ -2309,17 +2413,44 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
                 return [_iv(ev, start, end, rule, red, yellow)]
-            listed = parse_time((ev.get("raw") or {}).get("_last_seen_in_source"))
-            unlisted = parse_time((ev.get("raw") or {}).get("_unlisted_since"))
+            listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
+            unlisted = pt((ev.get("raw") or {}).get("_unlisted_since"))
             if unlisted is not None and unlisted > start:
                 # a feed read with history.confirm_while_listed (docs/generic-ingesters.md): the advisory was shown
                 # at every fetch up to the first that no longer found it; it ends there, at or before that fetch
                 iv = _iv(ev, start, unlisted, rule, red, yellow)
                 iv["confirmed"] = iso(listed or start)
                 iv["ended_by"] = "no longer on the authority's map at this fetch"
+                if (ev.get("raw") or {}).get("_end_not_confirmed") is True and et not in ADVISORY_TYPES:
+                    # a sewage report under the authority's advisory that left its list without the authority's
+                    # cancellation (ingest/hi_doh_cwb_events.py): its end is not confirmed, never a clean end at our
+                    # fetch. "End not confirmed" (hatched) to day 30 from the start and for at least the site's caution
+                    # hours after the unlisting, even past day 30 (review 2026-11-07 P2-1); then the end-never-reported
+                    # note to day 90, as for any unresolved record (no_end)
+                    u = (rules or {}).get("unresolved") or {}
+                    days = float(u.get("unresolved_yellow_days") or 30)
+                    hours = float(((rules or {}).get("yellow") or {}).get("default_hours") or 72)
+                    hatch_until = max(start + timedelta(days=days), unlisted + timedelta(hours=hours))
+                    iv["ended_by"] = ("no longer on the authority's list at this fetch, with no cancellation: "
+                                      "the end is not confirmed")
+                    un = _iv(ev, unlisted, hatch_until, "unresolved", red, yellow)
+                    un["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
+                                          "hours_after_unlisting": hours,
+                                          "rationale": "the advisory left the authority's list without its "
+                                                       "cancellation; the end is not confirmed",
+                                          "source": "data/rules.json"}
+                    out = [iv, un]
+                    note_until = max(hatch_until, start + timedelta(days=NOTE_DAYS))
+                    if note_until > hatch_until:
+                        note = _iv(ev, hatch_until, note_until, "end_never_reported", red, yellow)
+                        note["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
+                                                "rationale": u.get("end_assumed_rationale")
+                                                or u.get("unresolved_yellow_rationale"), "source": "data/rules.json"}
+                        out.append(note)
+                    return out
                 return [iv]
             if et in AGING_TYPES:
-                confirmed = max(t for t in (start, parse_time(ev.get("source_updated_at")), listed) if t)
+                confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
                 until = confirmed + timedelta(days=CONFIRM_DAYS)
                 out = [_iv(ev, start, until, rule, red, yellow)]
                 note = _iv(ev, until, max(until, start + timedelta(days=NOTE_DAYS)), "not_reconfirmed", red, yellow)
@@ -2329,11 +2460,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             return [_iv(ev, start, None, rule, red, yellow)]
         if st == "advisory_lifted":
             # needs its own (or inherited) start; ends at ended_at, else when the lifting was reported
-            real_start = parse_time(ev.get("started_at"))
+            real_start = pt(ev.get("started_at"))
             if real_start is None:
                 return []
-            told = [t for t in (parse_time(ev.get("reported_at")), parse_time(ev.get("published_at")),
-                                parse_time(ev.get("source_updated_at"))) if t and t >= real_start]
+            told = [t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at")),
+                                pt(ev.get("source_updated_at"))) if t and t >= real_start]
             e = end or (min(told) if told else None)
             return [_iv(ev, real_start, e, rule, red, yellow)] if e else []
         if end:
@@ -2350,7 +2481,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         then unresolved to day 30, then the off-map note to day 90. Every colour ends by the absolute cap, 30 days
         (unresolved_yellow_days) after the report began, however late it was reported or first seen: after that the
         site assumes the discharge ended and the record says the end was never reported (owner, 2026-11-03)."""
-        cap = (parse_time(ev.get("started_at")) or start) + timedelta(days=unres_days)
+        cap = (pt(ev.get("started_at")) or start) + timedelta(days=unres_days)
         first_until = min(first_until, cap)
         u_until = min(anchor + timedelta(days=unres_days), cap)
         note_from = max(anchor, first_until, u_until)
@@ -2403,17 +2534,17 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
     # extract date that is later than the report (owner, 2026-11-03), and never before the start
     ds = u.get("day_start_caution") or {}
     if ev.get("time_precision") == "day" and ev.get("source_id") in (ds.get("sources") or []) and ds.get("hours") \
-            and parse_time(ev.get("started_at")):
+            and pt(ev.get("started_at")):
         # a feed that gives only the day a discharge began and never an end (Georgia EPD's daily list): the site's
         # caution runs from the start of that day, then the end is unconfirmed to day 30 (unresolved.day_start_caution)
-        day0 = parse_time(ev["started_at"])
+        day0 = pt(ev["started_at"])
         out = no_end(day0, day0 + timedelta(hours=float(ds["hours"])), "day_start_caution")
         for iv in out:
             if iv["rule"] == "day_start_caution":
                 iv["rule_applied"] = {"rule": "unresolved.day_start_caution", "hours": float(ds["hours"]),
                                       "rationale": ds.get("rationale"), "source": "data/rules.json"}
         return out
-    told = next((t for t in (parse_time(ev.get("reported_at")), parse_time(ev.get("published_at"))) if t), None)
+    told = next((t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at"))) if t), None)
     anchor = max(start, told) if told else start
     return no_end(anchor, anchor + timedelta(days=unknown_days), "no_end")
 
@@ -2641,11 +2772,13 @@ def stretch_traces(reaches: dict) -> dict[str, dict]:
 
 
 def stretch_fallback(r: dict | None) -> str:
-    """Why an advisory with a stretch colours its whole water: the stretch is not traced yet, or why it could not be."""
+    """Why an advisory with a stretch is shown only at its point: the stretch is not traced yet, or why it could not
+    be. The river is never coloured whole in its place (SOL wave2 P1-3)."""
+    tail = "the advisory is shown at its point, and the river is not coloured"
     if not r:
-        return "the stretch the advisory names is not traced yet; the advisory is shown on its whole water"
+        return f"the stretch the advisory names is not traced yet; {tail}"
     why = r.get("error") or r.get("cut_reason") or "no stretch could be traced"
-    return f"the stretch the advisory names could not be traced ({why}); the advisory is shown on its whole water"
+    return f"the stretch the advisory names could not be traced ({why}); {tail}"
 
 
 def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
@@ -2654,7 +2787,8 @@ def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
     stream or canal record (RIVER_KINDS) with no stretch of its own is shown as a point. The record is listed on the
     water's page and its marker carries the advisory's colour; the river record is not coloured. Keyed on the
     water's kind, never on the state. A lake, pond or reservoir keeps colours_whole_water; an advisory with a stretch
-    keeps the advisory-stretch path (its traced stretch, else the stretch_unmodeled fallback)."""
+    and a traced stretch (stretched) keeps the advisory-stretch path; one whose stretch is not traced is a point too
+    (SOL wave2 P1-3)."""
     if stretched or w.get("kind") not in RIVER_KINDS:
         return False
     if ev.get("event_type") in DISCHARGE_TYPES:
@@ -2737,11 +2871,14 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
     for ev in events:
         if ev.get("_fixture") or ev.get("time_precision") in COARSE_PRECISION or ev.get("duplicate_of"):
             continue
+        if citizen_report(ev):
+            continue        # a member of the public's report never absorbs (nor is absorbed by) an operator's report
         if ev.get("event_type") not in DISCHARGE_TYPES or not ev.get("npdes_permit"):
             continue
-        t = parse_time(ev.get("started_at"))
+        tz = event_zone(ev)
+        t = ev_time(ev, "started_at", tz=tz)
         if t:
-            groups[(ev["npdes_permit"], t.astimezone(LOCAL).date())].append(ev)
+            groups[(ev["npdes_permit"], t.astimezone(tz).date())].append(ev)   # the day in the report's own zone
     dup = {}
     dry = {}
 
@@ -2836,8 +2973,7 @@ PLACEMENT_TEXT = {"reach": " · on a modeled downstream reach", "named": " · na
                   "tidal": " · tidal or estuary: movement not modeled",
                   "unmodeled": " · downstream path not modeled",
                   "shoreline_unmodeled": " · lake shore: stretch not modeled",
-                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled",
-                  "stretch_unmodeled": " · stretch not traced: shown on the whole water"}
+                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled"}
 SHORE_PLACEMENT_TEXT = " · on a modeled shoreline stretch"
 STRETCH_PLACEMENT_TEXT = " · on the stretch the advisory names"
 
@@ -2897,7 +3033,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return f"{et} ended {endtxt}; caution to {int(h)} h after the end{who}{at}" if h else f"{et} ended {endtxt}{who}{at}"
     if rule == "no_end":
         return f"{et} with no reported end{who}{at}"
-    if rule == "text_caution":
+    if rule in ("text_caution", "code_caution"):
         was = (iv.get("rule_applied") or {}).get("replaces")
         what = {"ongoing": f"{et} ongoing", "discharge": f"{et} in progress",
                 "authority_window": f"{et} ended {endtxt}"}.get(was, et)
@@ -2907,8 +3043,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return (f"{et} reported to the day only, with no end; caution to {int(h)} h from the start of that day{who}{at}"
                 if h else f"{et} reported to the day only, with no end{who}{at}")
     if rule in ("advisory_active", "rain_advisory"):
-        tail = at if iv.get("placement") == "stretch_unmodeled" or (
-            iv.get("placement") == "reach" and iv.get("reach") in _STRETCH_REACHES) else ""
+        tail = at if iv.get("placement") == "reach" and iv.get("reach") in _STRETCH_REACHES else ""
         return f"{et} in effect{who}{stretch_text(ev)}{tail}"
     return f"{iv['label']}{who}"
 
@@ -3192,12 +3327,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         coarse = ev.get("time_precision") in COARSE_PRECISION     # a monthly or annual total: never a reach
         found = event_reaches(ev, pl, reach_index) if is_discharge and not pl.get("no_receiving_water") \
             and not future and not coarse else []
-        # an authority's advisory for a named stretch: its traced stretch, else the whole water (stretch_unmodeled)
+        # an authority's advisory for a named stretch: its traced stretch, else a marker at its point (never the
+        # whole water: SOL wave2 P1-3)
         stretched = not is_discharge and not future and has_stretch(ev)
+        traced = False
         if stretched:
             sr = stretch_of_event.get(eid)
             if sr and sr.get("segments") and sr.get("cut_reason") != "no_trace":
-                found = [(sr, None)]
+                found, traced = [(sr, None)], True
             else:
                 placements[eid]["stretch_fallback"] = stretch_fallback(sr)
         # rivers, and the shoreline lakes, whose stretches carry a report as a river reach does
@@ -3216,7 +3353,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             per_water_events[slug].append(eid)
             if not live:
                 continue
-            on_river = advisory_on_river(ev, waters[slug], stretched)
+            on_river = advisory_on_river(ev, waters[slug], traced)
             if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
                 point_on.append(slug)
                 if on_river:
@@ -3234,13 +3371,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     else "unmodeled"
             elif is_discharge and waters[slug].get("kind") in ("bay", "sound"):
                 tag = "tidal"
-            elif stretched and waters[slug].get("kind") in RIVER_KINDS:
-                tag = "stretch_unmodeled"
             for iv in event_intervals(eff, waters[slug].get("state"), now, water={**waters[slug], "slug": slug},
                                       rules=rules):
                 iv["placement"] = tag
-                if tag == "stretch_unmodeled":
-                    iv["stretch_fallback"] = placements[eid].get("stretch_fallback")
                 intervals[slug].append(iv)
         if (is_discharge and live and not future and not coarse and river_slugs and not reach and ev.get("lat") is not None
                 and (parse_time(ev.get("started_at")) or now) > now - timedelta(days=30)):
@@ -3298,11 +3431,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
                                              for iv in sorted(ivs, key=lambda x: x["start"])],
                                "_ivs": ivs,
+                               # an advisory whose stretch is not traced: why it is a point (SOL wave2 P1-3)
+                               **({"stretch_fallback": placements[eid]["stretch_fallback"]}
+                                  if stretched and placements[eid].get("stretch_fallback") else {}),
                                "why": ("the advisory covers the stretch it names, drawn from end to end; the marker "
-                                       "is its point" if point_on and stretched and not placements[eid].get(
-                                           "stretch_fallback") else
-                                       RIVER_POINT_WHY if river_point and (names_its_water(ev) or
-                                                                         ev.get("event_type") not in POINT_ADVISORY_TYPES)
+                                       "is its point" if point_on and traced else
+                                       (placements[eid]["stretch_fallback"] if stretched else RIVER_POINT_WHY)
+                                       if river_point and (names_its_water(ev) or
+                                                           ev.get("event_type") not in POINT_ADVISORY_TYPES)
                                        else "the advisory covers the water it names; the marker is its point"
                                        if point_on and names_its_water(ev) else
                                        "water is not a lake, pond or reservoir under 50 km²" if point_on
@@ -3443,7 +3579,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             **({"end_not_used": iv["end_not_used"]} if iv.get("end_not_used") else {}),
                             # the water comes from the notice's text against its form's flag (TEXT_OVER_FLAG)
                             **({"text_over_flag": iv["text_over_flag"]} if iv.get("text_over_flag") else {}),
-                            # an advisory with a stretch shown on its whole water: why (no stretch traced)
+                            # why a stretch is not traced (kept for any interval that carries it)
                             **({"stretch_fallback": iv["stretch_fallback"]} if iv.get("stretch_fallback") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
                             "ended_at": iv["ended_at"],

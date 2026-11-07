@@ -1684,6 +1684,68 @@ def shore_sig(shore: dict) -> str:
     return "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km", "ocean_open_m"))
 
 
+# The shoreline model's version: raise it when the walk or the membership rules change, and every cached stretch is
+# rebuilt (2: membership for every shoreline model, sounds and lakes too; SOL wave1 P1-6 and P2-10, 2026-11-07).
+SHORE_MODEL_VERSION = 2
+SHORE_SIG_PAD = 0.02            # degrees around a stretch's segments: the water records that can change its membership
+_GEOM_SIG: dict = {}
+
+
+def geometry_sig(slug: str, waters: dict) -> str:
+    """A hash of the record's outline as stored (inline, else openboatlaunch's file), "none" without one."""
+    import hashlib
+    from build.status import OBL_WATER_DIR
+    w = waters.get(slug) or {}
+    if w.get("geometry"):
+        raw = json.dumps(w["geometry"], sort_keys=True, separators=(",", ":")).encode()
+        return hashlib.sha1(raw).hexdigest()[:16]
+    p = OBL_WATER_DIR / f"{slug}.json"
+    try:
+        st = p.stat()
+    except OSError:
+        return "none"
+    key = (str(p), st.st_size, st.st_mtime_ns)         # the file's hash, read once while it is unchanged
+    if key not in _GEOM_SIG:
+        try:
+            _GEOM_SIG[key] = hashlib.sha1(p.read_bytes()).hexdigest()[:16]
+        except OSError:
+            return "none"
+    return _GEOM_SIG[key]
+
+
+def shore_input_sig(slug: str | None, segs: list[dict] | None, waters: dict, shore: dict) -> str:
+    """What a shoreline stretch was built from besides its point and the shared rule values (SOL wave1 P2-10): the
+    model version and membership rules, the walked record (its outline, kind, state, box and its own entry, open_m
+    included), and every water record whose box lies within SHORE_SIG_PAD of the stretch (its kind, state, box,
+    outline and entry: a corrected outline, an added bay or a changed entry can change the walk or the stretch's
+    waters). A change rebuilds the stretch; the rule values alone are shore_sig."""
+    import hashlib
+    from shapely.geometry import box
+    from build.status import water_geometry
+
+    def one(x: str) -> list:
+        w = waters.get(x) or {}
+        return [x, w.get("kind"), str(w.get("state") or "").upper(), w.get("bbox"), w.get("name"), geometry_sig(x, waters),
+                SH.shoreline_entry(w, shore)]
+    parts: list = [SHORE_MODEL_VERSION, sorted(ALONG_KINDS), ALONG_TOL_M, ALONG_MIN_KM, one(slug) if slug else None]
+    xs = [float(x) for sg in segs or [] for x, _ in sg.get("coords") or []]
+    ys = [float(y) for sg in segs or [] for _, y in sg.get("coords") or []]
+    if xs:
+        area = box(min(xs) - SHORE_SIG_PAD, min(ys) - SHORE_SIG_PAD, max(xs) + SHORE_SIG_PAD, max(ys) + SHORE_SIG_PAD)
+        near = []
+        for x, w in sorted(waters.items()):
+            if x == slug:
+                continue
+            bb = w.get("bbox")
+            if not (bb and len(bb) == 4):
+                g = water_geometry(x, waters) if w.get("geometry") else None
+                bb = list(g.bounds) if g is not None and not g.is_empty else None
+            if bb and box(*bb).intersects(area):
+                near.append(one(x))
+        parts.append(near)
+    return hashlib.sha1(json.dumps(parts, sort_keys=True, default=str).encode()).hexdigest()[:16]
+
+
 def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> dict:
     """One outfall's (or report point's) shoreline stretch as a reach record: two segments from the point on the
     shore, one each way (km_start 0), the lake as its water, the same lake's records in the other states it
@@ -1766,8 +1828,10 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     # a bay or sound the stretch runs along (ALONG_KINDS): on the ocean, one whose mouth is wider than the opening; on a
     # bay under the lake model (San Francisco Bay), a bay record within the walked water (openboatlaunch's San Francisco
     # Bay outline takes in the mouths of Richardson Bay and San Pablo Bay, which the site holds as Census records): a
-    # reach belongs to every water it runs through (CA final audit, 2026-11-06). A sound (Puget Sound) is not asked yet.
-    if (rec["ocean"] or rec.get("bay")) and segs:
+    # reach belongs to every water it runs through (CA final audit, 2026-11-06). Every shoreline model is asked: a sound
+    # (Puget Sound) stretch along a bay record is that bay's too, and a lake's along a bay or another lake record (SOL
+    # wave1 P1-6, 2026-11-07).
+    if segs:
         lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]
     if segs and river_km:
         for sg in segs:
@@ -1783,7 +1847,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
                length_km=round(sum(e["km_from_outfall"] for e in stops) - (river_km if len(stops) > 1 else 0.0)
                                if segs else 0.0, 3),
                snap_m=r["snap_m"], states=states,
-               waters=lake_recs, error=None if segs else "the shore has no length at the point")
+               waters=lake_recs, error=None if segs else "the shore has no length at the point",
+               input_sig=shore_input_sig(slug, segs, waters, shore))
     return rec
 
 
@@ -1822,7 +1887,8 @@ def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = F
     """Build the due shoreline stretches (no request): never built, moved, built with other rule values or another
     water, a cached river trace, one that got no stretch (no outline for the lake record yet, or the point too far
     from its shore: rebuilt every run, since a stretch costs no request and an outline added to the records must take
-    effect at once, not after CACHE_DAYS), or older than CACHE_DAYS. Without the Census outlines nothing is built this
+    effect at once, not after CACHE_DAYS), built from other outlines, entries or nearby water records or by another
+    model version (shore_input_sig), or older than CACHE_DAYS. Without the Census outlines nothing is built this
     run (and nothing cached as a failure). Returns counts."""
     now = datetime.now(UTC)
     cached = load_reaches()
@@ -1832,7 +1898,9 @@ def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = F
         d = cached.get(c["key"])
         if (force or not d or d.get("model") != SH.MODEL or moved(c, d) or d.get("rule_sig") != sig
                 or d.get("water_slug") != c.get("water_slug") or not d.get("segments") or not fresh_rec(d, now)
-                or c.get("lake_entry") != d.get("lake_entry")):
+                or c.get("lake_entry") != d.get("lake_entry")
+                # the outlines, entries and records it was built from (SOL wave1 P2-10)
+                or d.get("input_sig") != shore_input_sig(c.get("water_slug"), d.get("segments"), waters, shore)):
             due.append(c)
         elif any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
             d.update({f: c[f] for f in META_FIELDS if f in c})

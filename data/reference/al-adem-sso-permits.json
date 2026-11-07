@@ -1,0 +1,5616 @@
+{
+ "about": "Every permit in ADEM's SSO report layer (SSOs_ALL_OB_ID), the permittee and facility names ADEM gives for it, newest first, and its report count; a permittee that reads as a person's name is left out (permittee_removed). Written by scripts/al_reference_files.py.",
+ "source": "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0",
+ "read": "2026-11-07",
+ "permits": {
+  "AL0020001": {
+   "reports": 60,
+   "first_year": 2012,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Sylacauga",
+     "reports": 60,
+     "latest": "2026-08-04"
+    }
+   ],
+   "facilities": [
+    "J Earl Ham WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020010": {
+   "reports": 1,
+   "first_year": 2025,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Sylacauga",
+     "reports": 1,
+     "latest": "2025-02-12"
+    }
+   ],
+   "facilities": [
+    "Fairmont WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020036": {
+   "reports": 14,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Enterprise",
+     "reports": 14,
+     "latest": "2026-10-11"
+    }
+   ],
+   "facilities": [
+    "Enterprise College Street WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020061": {
+   "reports": 23,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Enterprise",
+     "reports": 23,
+     "latest": "2026-10-10"
+    }
+   ],
+   "facilities": [
+    "Enterprise Northeast WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020141": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Waterworks and Sewer Board of the City of Ashland",
+     "reports": 2,
+     "latest": "2022-04-05"
+    }
+   ],
+   "facilities": [
+    "Ashland WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020150": {
+   "reports": 272,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Guntersville Water and Sewer Board",
+     "reports": 272,
+     "latest": "2026-10-16"
+    }
+   ],
+   "facilities": [
+    "Eastlake WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020192": {
+   "reports": 41,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Municipal Utilities Board of the City of Albertville",
+     "reports": 15,
+     "latest": "2025-07-21"
+    },
+    {
+     "name": "Municipal Utilities Board of Albertville",
+     "reports": 26,
+     "latest": "2022-01-30"
+    }
+   ],
+   "facilities": [
+    "MUB Wastewater Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020206": {
+   "reports": 188,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Athens Utilities",
+     "reports": 64,
+     "latest": "2026-09-22"
+    },
+    {
+     "name": "Athens Utilities",
+     "reports": 124,
+     "latest": "2023-02-17"
+    }
+   ],
+   "facilities": [
+    "Athens WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020273": {
+   "reports": 2,
+   "first_year": 2019,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "City of Geneva Water Works & Sewer Board",
+     "reports": 2,
+     "latest": "2020-02-06"
+    }
+   ],
+   "facilities": [
+    "Geneva WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020303": {
+   "reports": 186,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Arab Sewer Board",
+     "reports": 81,
+     "latest": "2026-09-17"
+    },
+    {
+     "name": "Arab Sewer Board",
+     "reports": 105,
+     "latest": "2022-04-18"
+    }
+   ],
+   "facilities": [
+    "Riley Maze Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020427": {
+   "reports": 48,
+   "first_year": 2017,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "City of Cordova",
+     "reports": 48,
+     "latest": "2022-12-14"
+    }
+   ],
+   "facilities": [
+    "Cordova WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020486": {
+   "reports": 18,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Tallassee",
+     "reports": 18,
+     "latest": "2026-06-02"
+    }
+   ],
+   "facilities": [
+    "Tallassee Sewer Stabilization Pond"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020532": {
+   "reports": 22,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Water Works and Sewer Board of the City of Greenville",
+     "reports": 19,
+     "latest": "2026-11-02"
+    },
+    {
+     "name": "Greenville Water Works & Sewer Board",
+     "reports": 3,
+     "latest": "2016-03-18"
+    }
+   ],
+   "facilities": [
+    "Greenville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020699": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Water Works Board of the Town of Hurtsboro",
+     "reports": 1,
+     "latest": "2019-08-16"
+    }
+   ],
+   "facilities": [
+    "Hurtsboro HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020842": {
+   "reports": 255,
+   "first_year": 2013,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Fairhope",
+     "reports": 219,
+     "latest": "2026-06-18"
+    },
+    {
+     "name": "City Of Fairhope",
+     "reports": 36,
+     "latest": "2018-02-11"
+    }
+   ],
+   "facilities": [
+    "Fairhope WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020869": {
+   "reports": 14,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jackson Water Works & Sewer Board",
+     "reports": 14,
+     "latest": "2026-04-06"
+    }
+   ],
+   "facilities": [
+    "Jackson Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020885": {
+   "reports": 1,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Chickasaw",
+     "reports": 1,
+     "latest": "2021-04-24"
+    }
+   ],
+   "facilities": [
+    "Chickasaw Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020915": {
+   "reports": 3,
+   "first_year": 2022,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City Of Reform",
+     "reports": 3,
+     "latest": "2025-08-14"
+    }
+   ],
+   "facilities": [
+    "Reform WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020940": {
+   "reports": 13,
+   "first_year": 2015,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "City Of Elba",
+     "reports": 13,
+     "latest": "2023-03-27"
+    }
+   ],
+   "facilities": [
+    "Elba Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0020991": {
+   "reports": 45,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Bridgeport",
+     "reports": 44,
+     "latest": "2026-08-13"
+    },
+    {
+     "name": "Bridgeport Utilities Board",
+     "reports": 1,
+     "latest": "2015-12-28"
+    }
+   ],
+   "facilities": [
+    "Bridgeport Sewage Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021113": {
+   "reports": 2,
+   "first_year": 2016,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Town of Falkville",
+     "reports": 2,
+     "latest": "2022-04-09"
+    }
+   ],
+   "facilities": [
+    "Falkville HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021156": {
+   "reports": 68,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Alexander City",
+     "reports": 68,
+     "latest": "2026-10-16"
+    }
+   ],
+   "facilities": [
+    "Coley Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021245": {
+   "reports": 27,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Sewage Disposal Board of the City of Red Bay",
+     "reports": 5,
+     "latest": "2026-03-17"
+    },
+    {
+     "name": "City of Red Bay",
+     "reports": 22,
+     "latest": "2020-08-03"
+    }
+   ],
+   "facilities": [
+    "Red Bay Wastewater Treatment Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021334": {
+   "reports": 66,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Glencoe Water and Sewer Board",
+     "reports": 66,
+     "latest": "2026-07-24"
+    }
+   ],
+   "facilities": [
+    "Glencoe Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021351": {
+   "reports": 4,
+   "first_year": 2017,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Stevenson Utilities Board",
+     "reports": 4,
+     "latest": "2020-05-27"
+    }
+   ],
+   "facilities": [
+    "Stevenson Wastewater Treatment Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021407": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Opp",
+     "reports": 1,
+     "latest": "2019-12-13"
+    }
+   ],
+   "facilities": [
+    "Opp Eastside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021458": {
+   "reports": 8,
+   "first_year": 2018,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Childersburg Water Works, Sewer, and Gas Board",
+     "reports": 8,
+     "latest": "2025-09-08"
+    }
+   ],
+   "facilities": [
+    "Pinecrest Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021466": {
+   "reports": 18,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works, Sewer, and Gas Board of the City of Childersburg",
+     "reports": 11,
+     "latest": "2026-01-07"
+    },
+    {
+     "name": "Childersburg Water Works, Sewer, Gas Board",
+     "reports": 7,
+     "latest": "2020-10-07"
+    }
+   ],
+   "facilities": [
+    "Childersburg South Bailey Branch Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0021491": {
+   "reports": 1,
+   "first_year": 2013,
+   "last_year": 2013,
+   "permittees": [
+    {
+     "name": "Town of Wilsonville",
+     "reports": 1,
+     "latest": "2013-05-26"
+    }
+   ],
+   "facilities": [
+    "Wilsonville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022136": {
+   "reports": 17,
+   "first_year": 2014,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Monroeville",
+     "reports": 7,
+     "latest": "2025-09-30"
+    },
+    {
+     "name": "Monroeville Water Works",
+     "reports": 8,
+     "latest": "2021-10-12"
+    },
+    {
+     "name": "City Of Monroeville",
+     "reports": 2,
+     "latest": "2014-05-07"
+    }
+   ],
+   "facilities": [
+    "Hudson Branch WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022195": {
+   "reports": 211,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works & Sewer Board of the City of Anniston",
+     "reports": 211,
+     "latest": "2026-05-15"
+    }
+   ],
+   "facilities": [
+    "Choccolocco Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022209": {
+   "reports": 344,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Phenix City Department of Public Utilities",
+     "reports": 344,
+     "latest": "2026-10-09"
+    }
+   ],
+   "facilities": [
+    "Phenix City WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022225": {
+   "reports": 97,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Montgomery Water Works & Sanitary Sewer Board",
+     "reports": 62,
+     "latest": "2026-08-25"
+    },
+    {
+     "name": "City of Montgomery Water Works and Sanitary Sewer Board",
+     "reports": 35,
+     "latest": "2020-03-04"
+    }
+   ],
+   "facilities": [
+    "Econchate WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022241": {
+   "reports": 13,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Montgomery Water Works & Sanitary Sewer Board",
+     "reports": 9,
+     "latest": "2025-09-09"
+    },
+    {
+     "name": "City of Montgomery Water Works and Sanitary Sewer Board",
+     "reports": 4,
+     "latest": "2018-01-22"
+    }
+   ],
+   "facilities": [
+    "Towassa WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022357": {
+   "reports": 9,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City of Talladega Water & Environmental Services",
+     "reports": 2,
+     "latest": "2025-03-17"
+    },
+    {
+     "name": "City of Talladega Water and Sewer",
+     "reports": 7,
+     "latest": "2020-12-17"
+    }
+   ],
+   "facilities": [
+    "Talladega Main WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022578": {
+   "reports": 14,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Waterworks and Sewer Board of the City of Selma",
+     "reports": 3,
+     "latest": "2026-05-12"
+    },
+    {
+     "name": "Selma Water Works & Sewer Board",
+     "reports": 11,
+     "latest": "2020-05-04"
+    }
+   ],
+   "facilities": [
+    "Valley Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022586": {
+   "reports": 103,
+   "first_year": 2012,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jacksonville Water Works, Gas and Sewer Board",
+     "reports": 100,
+     "latest": "2026-08-10"
+    },
+    {
+     "name": "Jacksonville  Water Works Gas And Sewer Bd",
+     "reports": 3,
+     "latest": "2015-01-04"
+    }
+   ],
+   "facilities": [
+    "Jacksonville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022594": {
+   "reports": 8,
+   "first_year": 2020,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Town of Cherokee",
+     "reports": 8,
+     "latest": "2025-11-23"
+    }
+   ],
+   "facilities": [
+    "Cherokee Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022608": {
+   "reports": 23,
+   "first_year": 2017,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "The Water Works Board of the Town of East Brewton",
+     "reports": 1,
+     "latest": "2023-10-14"
+    },
+    {
+     "name": "East Brewton Water Works & Sewer Board",
+     "reports": 22,
+     "latest": "2020-01-13"
+    }
+   ],
+   "facilities": [
+    "East Brewton WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022641": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Town of Brantley",
+     "reports": 1,
+     "latest": "2022-07-05"
+    }
+   ],
+   "facilities": [
+    "Brantley Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022659": {
+   "reports": 98,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works & Sewer Board of the City of Gadsden, Alabama",
+     "reports": 38,
+     "latest": "2026-08-07"
+    },
+    {
+     "name": "The Water Works & Sewer Board of the City of Gadsden",
+     "reports": 53,
+     "latest": "2021-04-26"
+    },
+    {
+     "name": "Gadsden Waterworks & Sewer Board",
+     "reports": 7,
+     "latest": "2015-10-29"
+    }
+   ],
+   "facilities": [
+    "Gadsden East River WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022713": {
+   "reports": 575,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Tuscaloosa",
+     "reports": 575,
+     "latest": "2026-10-27"
+    }
+   ],
+   "facilities": [
+    "Hilliard N. Fletcher WRRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022764": {
+   "reports": 54,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Dothan",
+     "reports": 54,
+     "latest": "2026-10-28"
+    }
+   ],
+   "facilities": [
+    "Dothan Omussee Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022926": {
+   "reports": 27,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 15,
+     "latest": "2026-09-17"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 12,
+     "latest": "2021-01-26"
+    }
+   ],
+   "facilities": [
+    "Turkey Creek WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0022934": {
+   "reports": 18,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 6,
+     "latest": "2026-02-13"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 12,
+     "latest": "2023-10-20"
+    }
+   ],
+   "facilities": [
+    "Trussville WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023027": {
+   "reports": 162,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 15,
+     "latest": "2026-08-25"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 147,
+     "latest": "2025-05-27"
+    }
+   ],
+   "facilities": [
+    "Cahaba River WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023086": {
+   "reports": 853,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Mobile Area Water and Sewer System",
+     "reports": 853,
+     "latest": "2026-11-06"
+    }
+   ],
+   "facilities": [
+    "Clifton C. Williams WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023094": {
+   "reports": 298,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Mobile Area Water and Sewer System",
+     "reports": 298,
+     "latest": "2026-06-22"
+    }
+   ],
+   "facilities": [
+    "Wright Smith Jr. WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023116": {
+   "reports": 22,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Helena Utilities Board",
+     "reports": 22,
+     "latest": "2026-05-11"
+    }
+   ],
+   "facilities": [
+    "Helena WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023159": {
+   "reports": 18,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Lanett",
+     "reports": 18,
+     "latest": "2026-02-26"
+    }
+   ],
+   "facilities": [
+    "Lanett WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023205": {
+   "reports": 789,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Water Works and Sewer Board of the City of Prichard",
+     "reports": 789,
+     "latest": "2026-06-29"
+    }
+   ],
+   "facilities": [
+    "CA Morris Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023256": {
+   "reports": 8,
+   "first_year": 2018,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "City of Livingston",
+     "reports": 8,
+     "latest": "2024-05-07"
+    }
+   ],
+   "facilities": [
+    "Livingston Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023302": {
+   "reports": 5,
+   "first_year": 2022,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Ashville",
+     "reports": 5,
+     "latest": "2026-06-04"
+    }
+   ],
+   "facilities": [
+    "Ashville Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023329": {
+   "reports": 8,
+   "first_year": 2023,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Water Works and Sewer Board of the Town of Ardmore",
+     "reports": 8,
+     "latest": "2024-04-11"
+    }
+   ],
+   "facilities": [
+    "Ardmore WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023361": {
+   "reports": 9,
+   "first_year": 2021,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City of York",
+     "reports": 9,
+     "latest": "2025-11-12"
+    }
+   ],
+   "facilities": [
+    "York Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023400": {
+   "reports": 1,
+   "first_year": 2017,
+   "last_year": 2017,
+   "permittees": [
+    {
+     "name": "Winfield Water Works & Sewer Board",
+     "reports": 1,
+     "latest": "2017-12-18"
+    }
+   ],
+   "facilities": [
+    "Winfield WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023418": {
+   "reports": 142,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jasper Waterworks & Sewer Board, Inc.",
+     "reports": 142,
+     "latest": "2026-11-04"
+    }
+   ],
+   "facilities": [
+    "Town Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023493": {
+   "reports": 27,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Flomaton",
+     "reports": 27,
+     "latest": "2026-07-31"
+    }
+   ],
+   "facilities": [
+    "Flomaton Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023647": {
+   "reports": 235,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 109,
+     "latest": "2026-09-29"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 126,
+     "latest": "2021-06-21"
+    }
+   ],
+   "facilities": [
+    "Village Creek WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023655": {
+   "reports": 876,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 199,
+     "latest": "2026-10-21"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 677,
+     "latest": "2023-04-28"
+    }
+   ],
+   "facilities": [
+    "Valley Creek WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023680": {
+   "reports": 3,
+   "first_year": 2021,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City of Camden",
+     "reports": 2,
+     "latest": "2025-09-19"
+    },
+    {
+     "name": "City Of Camden",
+     "reports": 1,
+     "latest": "2021-06-19"
+    }
+   ],
+   "facilities": [
+    "Camden South WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023809": {
+   "reports": 15,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Marion",
+     "reports": 10,
+     "latest": "2026-06-18"
+    },
+    {
+     "name": "City Of Marion",
+     "reports": 5,
+     "latest": "2021-12-01"
+    }
+   ],
+   "facilities": [
+    "Marion WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023825": {
+   "reports": 99,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Brewton",
+     "reports": 99,
+     "latest": "2026-09-20"
+    }
+   ],
+   "facilities": [
+    "Brewton Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023884": {
+   "reports": 85,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City Of Florence Water/Wastewater Department",
+     "reports": 85,
+     "latest": "2026-10-23"
+    }
+   ],
+   "facilities": [
+    "Cypress Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023906": {
+   "reports": 1,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Alabama Department of Conservation and Natural Resources",
+     "reports": 1,
+     "latest": "2023-09-18"
+    }
+   ],
+   "facilities": [
+    "Alabama Department of Conservation Lakepoint State Park Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0023922": {
+   "reports": 1,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Town of Berry",
+     "reports": 1,
+     "latest": "2023-02-16"
+    }
+   ],
+   "facilities": [
+    "Town of Berry Wastewater Treatment Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024171": {
+   "reports": 1,
+   "first_year": 2025,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Water, Sewer, & Gas Board of the Town of Wedowee",
+     "reports": 1,
+     "latest": "2025-02-25"
+    }
+   ],
+   "facilities": [
+    "Wedowee Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024180": {
+   "reports": 68,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Muscle Shoals Utilities Board",
+     "reports": 68,
+     "latest": "2026-10-18"
+    }
+   ],
+   "facilities": [
+    "Muscle Shoals WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024210": {
+   "reports": 6,
+   "first_year": 2018,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Town of Camp Hill",
+     "reports": 6,
+     "latest": "2023-01-10"
+    }
+   ],
+   "facilities": [
+    "Camp Hill Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024236": {
+   "reports": 4,
+   "first_year": 2019,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Water Works and Sewer Board of the Town of Collinsville",
+     "reports": 4,
+     "latest": "2020-04-13"
+    }
+   ],
+   "facilities": [
+    "Collinsville Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024295": {
+   "reports": 32,
+   "first_year": 2016,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Town of Cottonwood",
+     "reports": 32,
+     "latest": "2021-04-24"
+    }
+   ],
+   "facilities": [
+    "Cottonwood WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024368": {
+   "reports": 4,
+   "first_year": 2017,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Vernon Water & Sewer Board",
+     "reports": 4,
+     "latest": "2020-04-03"
+    }
+   ],
+   "facilities": [
+    "Vernon Water and Sewer Wastewater Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024376": {
+   "reports": 12,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Piedmont Water, Sewer & Gas Board",
+     "reports": 12,
+     "latest": "2026-04-27"
+    }
+   ],
+   "facilities": [
+    "Piedmont Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024520": {
+   "reports": 26,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Anniston",
+     "reports": 3,
+     "latest": "2026-02-18"
+    },
+    {
+     "name": "The Water Works and Sewer Board of the City Of Anniston",
+     "reports": 23,
+     "latest": "2025-03-12"
+    }
+   ],
+   "facilities": [
+    "McClellan WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024589": {
+   "reports": 40,
+   "first_year": 2017,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "City of Columbiana",
+     "reports": 40,
+     "latest": "2023-01-16"
+    }
+   ],
+   "facilities": [
+    "Columbiana WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024678": {
+   "reports": 19,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Utilities Board of the Town of Cedar Bluff",
+     "reports": 18,
+     "latest": "2026-05-07"
+    },
+    {
+     "name": "Cedar Bluff Utilities Board And Solid Waste Authority",
+     "reports": 1,
+     "latest": "2015-12-29"
+    }
+   ],
+   "facilities": [
+    "Cedar Bluff Wastewater Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0024724": {
+   "reports": 132,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "East Alabama Water, Sewer, and Fire Protection District",
+     "reports": 132,
+     "latest": "2026-08-14"
+    }
+   ],
+   "facilities": [
+    "East Alabama Lower Valley WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0025828": {
+   "reports": 71,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Alabaster",
+     "reports": 71,
+     "latest": "2026-04-08"
+    }
+   ],
+   "facilities": [
+    "Alabaster WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0025852": {
+   "reports": 28,
+   "first_year": 2021,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Hoover",
+     "reports": 28,
+     "latest": "2026-02-27"
+    }
+   ],
+   "facilities": [
+    "Inverness WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0026654": {
+   "reports": 22,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Prattville",
+     "reports": 3,
+     "latest": "2026-08-15"
+    },
+    {
+     "name": "City Of Prattville",
+     "reports": 19,
+     "latest": "2023-06-12"
+    }
+   ],
+   "facilities": [
+    "Prattville Autauga Creek Clean Water Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0026891": {
+   "reports": 6,
+   "first_year": 2016,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Utilities Board of the Town of Grove Hill",
+     "reports": 1,
+     "latest": "2021-08-30"
+    },
+    {
+     "name": "Town of Grove Hill",
+     "reports": 5,
+     "latest": "2020-02-11"
+    }
+   ],
+   "facilities": [
+    "James Creek Wastewater Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0026913": {
+   "reports": 255,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 122,
+     "latest": "2026-11-05"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 133,
+     "latest": "2021-06-21"
+    }
+   ],
+   "facilities": [
+    "Five Mile Creek WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027448": {
+   "reports": 79,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "North Baldwin Utilities",
+     "reports": 79,
+     "latest": "2026-09-24"
+    }
+   ],
+   "facilities": [
+    "Westside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027561": {
+   "reports": 200,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Daphne",
+     "reports": 145,
+     "latest": "2026-10-15"
+    },
+    {
+     "name": "Utilities Board Of The City Of Daphne",
+     "reports": 55,
+     "latest": "2018-11-29"
+    }
+   ],
+   "facilities": [
+    "Daphne Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027570": {
+   "reports": 1,
+   "first_year": 2017,
+   "last_year": 2017,
+   "permittees": [
+    {
+     "name": "Riverside Utility Services, LLC",
+     "reports": 1,
+     "latest": "2017-03-22"
+    }
+   ],
+   "facilities": [
+    "River Bend Apartments WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027642": {
+   "reports": 2,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Springfield MPH, LLC",
+     "reports": 2,
+     "latest": "2023-06-19"
+    }
+   ],
+   "facilities": [
+    "Forestdale Mobile Home Park"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027723": {
+   "reports": 49,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Prattville",
+     "reports": 6,
+     "latest": "2026-06-27"
+    },
+    {
+     "name": "City Of Prattville",
+     "reports": 43,
+     "latest": "2024-03-11"
+    }
+   ],
+   "facilities": [
+    "Prattville Pine Creek Clean Water Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027782": {
+   "reports": 96,
+   "first_year": 2014,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Monroeville",
+     "reports": 34,
+     "latest": "2025-11-05"
+    },
+    {
+     "name": "Monroeville Water Works",
+     "reports": 61,
+     "latest": "2021-07-21"
+    },
+    {
+     "name": "City Of Monroeville",
+     "reports": 1,
+     "latest": "2014-11-21"
+    }
+   ],
+   "facilities": [
+    "Monroeville Double Branch WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027863": {
+   "reports": 127,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works & Sanitary Sewer Board of the City of Montgomery",
+     "reports": 67,
+     "latest": "2026-10-22"
+    },
+    {
+     "name": "City of Montgomery Water Works and Sanitary Sewer Board",
+     "reports": 60,
+     "latest": "2020-12-27"
+    }
+   ],
+   "facilities": [
+    "Catoma Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0027987": {
+   "reports": 16,
+   "first_year": 2018,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Russellville Water and Sewer Board",
+     "reports": 16,
+     "latest": "2024-01-25"
+    }
+   ],
+   "facilities": [
+    "Radford \"Joe\" Murray WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0031372": {
+   "reports": 190,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Scottsboro Water, Sewer, and Gas Board",
+     "reports": 190,
+     "latest": "2026-08-21"
+    }
+   ],
+   "facilities": [
+    "Scottsboro Southside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0031925": {
+   "reports": 7,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Lockhart and Florala Utilities Board",
+     "reports": 7,
+     "latest": "2026-10-10"
+    }
+   ],
+   "facilities": [
+    "Lockhart/Florala WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0032301": {
+   "reports": 2,
+   "first_year": 2023,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Jefferson County Housing Authority",
+     "reports": 2,
+     "latest": "2024-02-13"
+    }
+   ],
+   "facilities": [
+    "Dixie Manor Housing Project WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0032310": {
+   "reports": 42,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Troy",
+     "reports": 32,
+     "latest": "2026-03-31"
+    },
+    {
+     "name": "City Of Troy Utility Department",
+     "reports": 10,
+     "latest": "2018-07-25"
+    }
+   ],
+   "facilities": [
+    "Troy Walnut Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0032387": {
+   "reports": 64,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Department of Conservation and Natural Resources and Rogersville Water Works and Sewer Board",
+     "reports": 25,
+     "latest": "2026-06-08"
+    },
+    {
+     "name": "Alabama Dept. of Conservation and Rogersville Water & Sewer Board",
+     "reports": 39,
+     "latest": "2024-03-26"
+    }
+   ],
+   "facilities": [
+    "Joe Wheeler State Park and Rogersville Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0041653": {
+   "reports": 27,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Hoover",
+     "reports": 27,
+     "latest": "2026-10-12"
+    }
+   ],
+   "facilities": [
+    "Riverchase WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0041726": {
+   "reports": 1,
+   "first_year": 2015,
+   "last_year": 2015,
+   "permittees": [
+    {
+     "name": "Walker County Board of Education",
+     "reports": 1,
+     "latest": "2015-06-22"
+    }
+   ],
+   "facilities": [
+    "Curry School System WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0042234": {
+   "reports": 210,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Baldwin County Sewer Service, LLC",
+     "reports": 210,
+     "latest": "2026-11-03"
+    }
+   ],
+   "facilities": [
+    "Spanish Fort Sewer WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0042391": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Washington County Board of Education",
+     "reports": 1,
+     "latest": "2022-04-25"
+    }
+   ],
+   "facilities": [
+    "Leroy High School"
+   ],
+   "permittee_removed": false
+  },
+  "AL0042765": {
+   "reports": 59,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Rainsville",
+     "reports": 58,
+     "latest": "2026-03-12"
+    },
+    {
+     "name": "City Of Rainsville",
+     "reports": 1,
+     "latest": "2017-06-30"
+    }
+   ],
+   "facilities": [
+    "Rainsville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0042838": {
+   "reports": 149,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Robertsdale",
+     "reports": 149,
+     "latest": "2026-11-04"
+    }
+   ],
+   "facilities": [
+    "Robertsdale WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0043168": {
+   "reports": 12,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Demopolis",
+     "reports": 12,
+     "latest": "2026-05-06"
+    }
+   ],
+   "facilities": [
+    "Demopolis WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0043176": {
+   "reports": 42,
+   "first_year": 2013,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Dallas County Water And Sewer Authority",
+     "reports": 42,
+     "latest": "2026-09-12"
+    }
+   ],
+   "facilities": [
+    "Dallas County WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0043494": {
+   "reports": 6,
+   "first_year": 2014,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Odenville Utilities Board",
+     "reports": 6,
+     "latest": "2021-04-05"
+    }
+   ],
+   "facilities": [
+    "St. Clair Correctional Facility WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0043656": {
+   "reports": 1,
+   "first_year": 2018,
+   "last_year": 2018,
+   "permittees": [
+    {
+     "name": "Lee County Board of Education",
+     "reports": 1,
+     "latest": "2018-04-23"
+    }
+   ],
+   "facilities": [
+    "Beauregard High School Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0044067": {
+   "reports": 19,
+   "first_year": 2015,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City Of Eutaw",
+     "reports": 19,
+     "latest": "2025-09-16"
+    }
+   ],
+   "facilities": [
+    "City of Eutaw Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0044105": {
+   "reports": 49,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Brundidge",
+     "reports": 49,
+     "latest": "2026-08-05"
+    }
+   ],
+   "facilities": [
+    "Brundidge WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0044857": {
+   "reports": 30,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Waterworks & Sewer Board of the City of Centreville and the Water Works Board of the Town of Brent",
+     "reports": 5,
+     "latest": "2026-10-23"
+    },
+    {
+     "name": "The WW & SB of the City of Centreville and the WWB of the Town of Brent, Alabama",
+     "reports": 5,
+     "latest": "2024-11-27"
+    },
+    {
+     "name": "Centreville and Brent Water & Sewer Boards",
+     "reports": 20,
+     "latest": "2020-08-04"
+    }
+   ],
+   "facilities": [
+    "Centreville-Brent WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0045560": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Asset Management Professionals, LLC",
+     "reports": 1,
+     "latest": "2019-02-04"
+    }
+   ],
+   "facilities": [
+    "Donaldson Correctional Facility WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0045683": {
+   "reports": 28,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of The City of Linden",
+     "reports": 6,
+     "latest": "2026-06-18"
+    },
+    {
+     "name": "Utilities Board Of The City Of Linden",
+     "reports": 22,
+     "latest": "2022-04-13"
+    }
+   ],
+   "facilities": [
+    "City of Linden HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0045969": {
+   "reports": 95,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Water Utilities, Inc.",
+     "reports": 26,
+     "latest": "2026-10-21"
+    },
+    {
+     "name": "SWWC Utilities, Inc.",
+     "reports": 69,
+     "latest": "2023-11-08"
+    }
+   ],
+   "facilities": [
+    "Riverview WRRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0045993": {
+   "reports": 58,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Pell City",
+     "reports": 58,
+     "latest": "2026-08-28"
+    }
+   ],
+   "facilities": [
+    "Dye Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0046728": {
+   "reports": 2,
+   "first_year": 2021,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Department Of Conservation And Natural Resources",
+     "reports": 2,
+     "latest": "2026-02-02"
+    }
+   ],
+   "facilities": [
+    "Cheaha State Park WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0046744": {
+   "reports": 19,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "West Escambia Utilities, Inc.",
+     "reports": 7,
+     "latest": "2025-06-09"
+    },
+    {
+     "name": "Utilities Board of the City of Atmore",
+     "reports": 12,
+     "latest": "2020-01-03"
+    }
+   ],
+   "facilities": [
+    "Fountain/Holman Correctional Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0047465": {
+   "reports": 168,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City Of Dothan",
+     "reports": 168,
+     "latest": "2026-10-15"
+    }
+   ],
+   "facilities": [
+    "Dothan Little Choctawhatchee WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0047503": {
+   "reports": 23,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Evergreen",
+     "reports": 16,
+     "latest": "2026-07-30"
+    },
+    {
+     "name": "City Of Evergreen",
+     "reports": 7,
+     "latest": "2021-05-09"
+    }
+   ],
+   "facilities": [
+    "Evergreen Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0047546": {
+   "reports": 6,
+   "first_year": 2018,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Bradford Health Services",
+     "reports": 6,
+     "latest": "2025-12-16"
+    }
+   ],
+   "facilities": [
+    "Bradford Health Services WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0047571": {
+   "reports": 2,
+   "first_year": 2021,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Lockerbie Homeowners Association",
+     "reports": 2,
+     "latest": "2022-07-05"
+    }
+   ],
+   "facilities": [
+    "Lockerbie Subdivision WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0047601": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Harbor Pointe Utilities LLC",
+     "reports": 2,
+     "latest": "2022-08-22"
+    }
+   ],
+   "facilities": [
+    "Stillwaters Resort WWTP and Sprayfield"
+   ],
+   "permittee_removed": false
+  },
+  "AL0048372": {
+   "reports": 33,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City Of Hamilton",
+     "reports": 33,
+     "latest": "2026-09-15"
+    }
+   ],
+   "facilities": [
+    "Hamilton WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0048461": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Limestone County Water and Sewer Authority",
+     "reports": 2,
+     "latest": "2023-06-16"
+    }
+   ],
+   "facilities": [
+    "Limestone Correctional Facility Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0048585": {
+   "reports": 6,
+   "first_year": 2019,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "West Morgan/East Lawrence Water and Sewer Authority",
+     "reports": 6,
+     "latest": "2020-02-11"
+    }
+   ],
+   "facilities": [
+    "Town of Courtland HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0048593": {
+   "reports": 346,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Decatur Utilities",
+     "reports": 346,
+     "latest": "2026-10-18"
+    }
+   ],
+   "facilities": [
+    "Decatur Utilities WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0048763": {
+   "reports": 67,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Tuskegee",
+     "reports": 67,
+     "latest": "2026-07-08"
+    }
+   ],
+   "facilities": [
+    "Tuskegee North WPCP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0048861": {
+   "reports": 62,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Alexander City",
+     "reports": 62,
+     "latest": "2026-09-02"
+    }
+   ],
+   "facilities": [
+    "Sugar Creek Advanced WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049042": {
+   "reports": 110,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Utilities Board of the City of Foley",
+     "reports": 30,
+     "latest": "2026-10-04"
+    },
+    {
+     "name": "The Utilities Board of The City of Foley",
+     "reports": 80,
+     "latest": "2022-08-25"
+    }
+   ],
+   "facilities": [
+    "Foley WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049115": {
+   "reports": 3,
+   "first_year": 2017,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Town Of Millport",
+     "reports": 3,
+     "latest": "2022-05-01"
+    }
+   ],
+   "facilities": [
+    "Millport Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049531": {
+   "reports": 14,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Huntsville Water Pollution Control",
+     "reports": 3,
+     "latest": "2026-04-05"
+    },
+    {
+     "name": "City of Huntsville",
+     "reports": 11,
+     "latest": "2025-03-26"
+    }
+   ],
+   "facilities": [
+    "Western Area WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049549": {
+   "reports": 161,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Oneonta",
+     "reports": 92,
+     "latest": "2026-07-24"
+    },
+    {
+     "name": "The Utilities Board of the City of Oneonta",
+     "reports": 69,
+     "latest": "2021-06-22"
+    }
+   ],
+   "facilities": [
+    "Oneonta WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049557": {
+   "reports": 43,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "West Escambia Utilities, Inc.",
+     "reports": 32,
+     "latest": "2026-06-20"
+    },
+    {
+     "name": "West Escambia Utilities Inc",
+     "reports": 11,
+     "latest": "2017-10-23"
+    }
+   ],
+   "facilities": [
+    "Atmore WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049603": {
+   "reports": 37,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Board of Water and Sewer Commissioners for the City of Boaz, Alabama",
+     "reports": 21,
+     "latest": "2026-06-10"
+    },
+    {
+     "name": "Boaz Water & Sewer Board",
+     "reports": 16,
+     "latest": "2021-06-21"
+    }
+   ],
+   "facilities": [
+    "Boaz Slab Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049859": {
+   "reports": 3,
+   "first_year": 2017,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "South Alabama Utility Service, INC WWTP",
+     "reports": 3,
+     "latest": "2020-09-22"
+    }
+   ],
+   "facilities": [
+    "Fort Morgan Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049867": {
+   "reports": 121,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "North Baldwin Utilities",
+     "reports": 121,
+     "latest": "2026-10-05"
+    }
+   ],
+   "facilities": [
+    "Harry Still Sr. WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0049921": {
+   "reports": 20,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Millbrook",
+     "reports": 20,
+     "latest": "2026-10-13"
+    }
+   ],
+   "facilities": [
+    "Millbrook WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050113": {
+   "reports": 42,
+   "first_year": 2019,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Town Of Hayneville",
+     "reports": 42,
+     "latest": "2024-12-29"
+    }
+   ],
+   "facilities": [
+    "Hayneville HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050121": {
+   "reports": 33,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Sheffield Utilities",
+     "reports": 33,
+     "latest": "2026-06-02"
+    }
+   ],
+   "facilities": [
+    "Sheffield WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050130": {
+   "reports": 40,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Opelika",
+     "reports": 40,
+     "latest": "2026-10-02"
+    }
+   ],
+   "facilities": [
+    "Opelika Westside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050211": {
+   "reports": 8,
+   "first_year": 2013,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the Town of Butler",
+     "reports": 6,
+     "latest": "2026-08-20"
+    },
+    {
+     "name": "Town of Butler Utilities Board",
+     "reports": 1,
+     "latest": "2018-09-21"
+    },
+    {
+     "name": "Butler City Of Utilities Board",
+     "reports": 1,
+     "latest": "2013-02-11"
+    }
+   ],
+   "facilities": [
+    "Butler HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050237": {
+   "reports": 41,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Auburn",
+     "reports": 41,
+     "latest": "2026-10-30"
+    }
+   ],
+   "facilities": [
+    "H.C. Morgan WPCF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050245": {
+   "reports": 39,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Auburn",
+     "reports": 39,
+     "latest": "2026-10-13"
+    }
+   ],
+   "facilities": [
+    "Auburn Northside WPCF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050261": {
+   "reports": 6,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Daleville",
+     "reports": 2,
+     "latest": "2026-03-09"
+    },
+    {
+     "name": "Daleville Water and Sewer Board",
+     "reports": 2,
+     "latest": "2019-04-30"
+    },
+    {
+     "name": "City of Daleville",
+     "reports": 2,
+     "latest": "2016-03-08"
+    }
+   ],
+   "facilities": [
+    "Daleville Southeast Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050423": {
+   "reports": 21,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Cullman",
+     "reports": 21,
+     "latest": "2026-11-01"
+    }
+   ],
+   "facilities": [
+    "Cullman WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050466": {
+   "reports": 1,
+   "first_year": 2016,
+   "last_year": 2016,
+   "permittees": [
+    {
+     "name": "Hillwood Limited d/b/a Hillwood Apartments",
+     "reports": 1,
+     "latest": "2016-10-20"
+    }
+   ],
+   "facilities": [
+    "Hillwood Apartments WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050547": {
+   "reports": 10,
+   "first_year": 2018,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Dauphin Island Water, Sewer, and Fire Protection Authority",
+     "reports": 8,
+     "latest": "2022-08-25"
+    },
+    {
+     "name": "Dauphin Island Water & Sewer Authority",
+     "reports": 2,
+     "latest": "2018-09-02"
+    }
+   ],
+   "facilities": [
+    "Dauphin Island WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050636": {
+   "reports": 5,
+   "first_year": 2020,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Town of Thorsby",
+     "reports": 5,
+     "latest": "2024-10-22"
+    }
+   ],
+   "facilities": [
+    "Thorsby HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050768": {
+   "reports": 1,
+   "first_year": 2018,
+   "last_year": 2018,
+   "permittees": [
+    {
+     "name": "Town of Holly Pond",
+     "reports": 1,
+     "latest": "2018-03-11"
+    }
+   ],
+   "facilities": [
+    "Holly Pond WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050831": {
+   "reports": 6,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Department of Conservation and Natural Resources",
+     "reports": 6,
+     "latest": "2026-03-03"
+    }
+   ],
+   "facilities": [
+    "Oak Mountain State Park WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050881": {
+   "reports": 4,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 1,
+     "latest": "2026-01-29"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 3,
+     "latest": "2020-08-03"
+    }
+   ],
+   "facilities": [
+    "Warrior WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050903": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "City of Springville",
+     "reports": 1,
+     "latest": "2019-09-23"
+    }
+   ],
+   "facilities": [
+    "Springville Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0050938": {
+   "reports": 71,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Calera",
+     "reports": 71,
+     "latest": "2026-06-01"
+    }
+   ],
+   "facilities": [
+    "Calera Pollution Control Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0051144": {
+   "reports": 2,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Utilities Board of the Town of Millry",
+     "reports": 1,
+     "latest": "2025-01-06"
+    },
+    {
+     "name": "Town Of Millry",
+     "reports": 1,
+     "latest": "2017-10-05"
+    }
+   ],
+   "facilities": [
+    "Millry Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0051403": {
+   "reports": 2,
+   "first_year": 2021,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Clearwater Solutions, LLC",
+     "reports": 2,
+     "latest": "2024-09-25"
+    }
+   ],
+   "facilities": [
+    "Red Eagle Honor Farm"
+   ],
+   "permittee_removed": false
+  },
+  "AL0052191": {
+   "reports": 1,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Bridgeport, City Of, UB",
+     "reports": 1,
+     "latest": "2021-10-24"
+    }
+   ],
+   "facilities": [
+    "Bridgeport Water Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0052272": {
+   "reports": 5,
+   "first_year": 2024,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "The Water Works & Sewer Board of the City of Guin",
+     "reports": 1,
+     "latest": "2025-03-07"
+    },
+    {
+     "name": "Waterworks & Sewer Board Of Guin",
+     "reports": 4,
+     "latest": "2024-07-09"
+    }
+   ],
+   "facilities": [
+    "Guin Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0053121": {
+   "reports": 6,
+   "first_year": 2018,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Alabama Water Utilities, Inc",
+     "reports": 2,
+     "latest": "2025-11-19"
+    },
+    {
+     "name": "SWWC Utilities, Inc.",
+     "reports": 4,
+     "latest": "2021-08-08"
+    }
+   ],
+   "facilities": [
+    "Morris Manor WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0053201": {
+   "reports": 229,
+   "first_year": 2013,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works & Sewer Board of the City of Gadsden",
+     "reports": 163,
+     "latest": "2026-09-28"
+    },
+    {
+     "name": "Water Works & Sewer Board of the City of Gadsden",
+     "reports": 66,
+     "latest": "2017-12-20"
+    }
+   ],
+   "facilities": [
+    "Gadsden West River WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0053538": {
+   "reports": 2,
+   "first_year": 2020,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Kowaliga Retreat Homeowners Association, Inc.",
+     "reports": 2,
+     "latest": "2024-05-10"
+    }
+   ],
+   "facilities": [
+    "Kowaliga Retreat WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0053643": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Blountsville Utility Board",
+     "reports": 1,
+     "latest": "2019-06-05"
+    }
+   ],
+   "facilities": [
+    "Blountsville HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0054356": {
+   "reports": 77,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Lincoln",
+     "reports": 77,
+     "latest": "2026-09-30"
+    }
+   ],
+   "facilities": [
+    "Lincoln WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0054461": {
+   "reports": 2,
+   "first_year": 2017,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Scottsboro Water, Sewer, & Gas Board",
+     "reports": 2,
+     "latest": "2019-05-10"
+    }
+   ],
+   "facilities": [
+    "Goosepond WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0054631": {
+   "reports": 51,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works & Sewer Board of the City of Clanton",
+     "reports": 1,
+     "latest": "2026-05-07"
+    },
+    {
+     "name": "City of Clanton",
+     "reports": 50,
+     "latest": "2025-05-26"
+    }
+   ],
+   "facilities": [
+    "Walnut Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0054640": {
+   "reports": 5,
+   "first_year": 2022,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Fayette",
+     "reports": 3,
+     "latest": "2026-05-19"
+    },
+    {
+     "name": "City Of Fayette",
+     "reports": 2,
+     "latest": "2022-04-12"
+    }
+   ],
+   "facilities": [
+    "Fayette WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0054666": {
+   "reports": 45,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Pelham",
+     "reports": 45,
+     "latest": "2026-03-30"
+    }
+   ],
+   "facilities": [
+    "City of Pelham WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0054674": {
+   "reports": 175,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Hartselle Utilities",
+     "reports": 175,
+     "latest": "2026-02-23"
+    }
+   ],
+   "facilities": [
+    "Hartselle Utilities WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055042": {
+   "reports": 11,
+   "first_year": 2017,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "City Of Huntsville",
+     "reports": 11,
+     "latest": "2021-09-20"
+    }
+   ],
+   "facilities": [
+    "Big Cove WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055158": {
+   "reports": 42,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Harvest-Monrovia Water, Sewer, and Fire Protection Authority, Inc.",
+     "reports": 24,
+     "latest": "2026-05-23"
+    },
+    {
+     "name": "Harvest-Monrovia Water, Sewer, and Fire Authority",
+     "reports": 18,
+     "latest": "2023-02-17"
+    }
+   ],
+   "facilities": [
+    "Hunter's Crossing WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055204": {
+   "reports": 223,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Prichard, AL",
+     "reports": 223,
+     "latest": "2026-05-28"
+    }
+   ],
+   "facilities": [
+    "Stanley Brooks WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055255": {
+   "reports": 3,
+   "first_year": 2018,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Moody Governmental Utility Services Corporation",
+     "reports": 3,
+     "latest": "2022-12-07"
+    }
+   ],
+   "facilities": [
+    "The David Treadwell WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055263": {
+   "reports": 1,
+   "first_year": 2015,
+   "last_year": 2015,
+   "permittees": [
+    {
+     "name": "Coosa County Board of Education",
+     "reports": 1,
+     "latest": "2015-03-05"
+    }
+   ],
+   "facilities": [
+    "Central High School WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055417": {
+   "reports": 31,
+   "first_year": 2015,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Utilities Board Of The City Of Andalusia",
+     "reports": 31,
+     "latest": "2024-08-14"
+    }
+   ],
+   "facilities": [
+    "Andalusia Riverside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055786": {
+   "reports": 78,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Board of Water & Sewer Commissioners of the City of Saraland",
+     "reports": 78,
+     "latest": "2026-10-31"
+    }
+   ],
+   "facilities": [
+    "Saraland WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055841": {
+   "reports": 55,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Gulf Shores",
+     "reports": 55,
+     "latest": "2026-09-06"
+    }
+   ],
+   "facilities": [
+    "Gulf Shores Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055867": {
+   "reports": 1,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Southside Water Works and Sewer Board",
+     "reports": 1,
+     "latest": "2023-05-31"
+    }
+   ],
+   "facilities": [
+    "Southside Waste Stabilization Ponds"
+   ],
+   "permittee_removed": false
+  },
+  "AL0055875": {
+   "reports": 3,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the Town of New Brockton",
+     "reports": 2,
+     "latest": "2026-10-10"
+    },
+    {
+     "name": "Town Of New Brockton Water and Sewer Board",
+     "reports": 1,
+     "latest": "2017-10-29"
+    }
+   ],
+   "facilities": [
+    "New Brockton WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056022": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City of Thomasville Water Works and Sewer Board",
+     "reports": 2,
+     "latest": "2025-07-08"
+    }
+   ],
+   "facilities": [
+    "Thomasville HCR Lagoon & Sprayfield"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056111": {
+   "reports": 1,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "City of Slocomb Waterworks and Sewer Board",
+     "reports": 1,
+     "latest": "2020-09-16"
+    }
+   ],
+   "facilities": [
+    "Slocomb Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056120": {
+   "reports": 11,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 8,
+     "latest": "2026-06-20"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 3,
+     "latest": "2019-06-03"
+    }
+   ],
+   "facilities": [
+    "Prudes Creek WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056146": {
+   "reports": 38,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Heflin Water Works and Sewer Board",
+     "reports": 38,
+     "latest": "2026-09-21"
+    }
+   ],
+   "facilities": [
+    "Heflin Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056251": {
+   "reports": 93,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Water Utilities, Inc",
+     "reports": 17,
+     "latest": "2026-08-06"
+    },
+    {
+     "name": "SWWC Utilities, Inc.",
+     "reports": 76,
+     "latest": "2023-01-09"
+    }
+   ],
+   "facilities": [
+    "North Shelby Water Resource Recovery Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056278": {
+   "reports": 523,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Littleville",
+     "reports": 523,
+     "latest": "2026-08-08"
+    }
+   ],
+   "facilities": [
+    "Littleville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056324": {
+   "reports": 24,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Ozark",
+     "reports": 24,
+     "latest": "2026-04-29"
+    }
+   ],
+   "facilities": [
+    "Ozark Southside WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056545": {
+   "reports": 4,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Limestone County Water and Sewer Authority",
+     "reports": 4,
+     "latest": "2026-10-22"
+    }
+   ],
+   "facilities": [
+    "Elkmont Rural Village WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056553": {
+   "reports": 2,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "The Cove Mobile Home Park",
+     "reports": 2,
+     "latest": "2021-04-29"
+    }
+   ],
+   "facilities": [
+    "The Cove Mobile Home Park Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056626": {
+   "reports": 107,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Arab Sewer Board",
+     "reports": 107,
+     "latest": "2026-10-13"
+    }
+   ],
+   "facilities": [
+    "Gilliam Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056685": {
+   "reports": 30,
+   "first_year": 2016,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Phoenix Water Resources, LLC",
+     "reports": 30,
+     "latest": "2025-12-05"
+    }
+   ],
+   "facilities": [
+    "Eastwood Mobile Home Village WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056812": {
+   "reports": 2,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "The Water Works & Sewer Board of the Town of Phil Campbell, Alabama",
+     "reports": 2,
+     "latest": "2023-05-08"
+    }
+   ],
+   "facilities": [
+    "Phil Campbell WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056839": {
+   "reports": 3,
+   "first_year": 2015,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Utilities Board Of Rainbow City",
+     "reports": 3,
+     "latest": "2025-05-28"
+    }
+   ],
+   "facilities": [
+    "Rainbow City WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0056855": {
+   "reports": 32,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City of Huntsville Water Pollution Control",
+     "reports": 2,
+     "latest": "2025-02-12"
+    },
+    {
+     "name": "City of Huntsville",
+     "reports": 30,
+     "latest": "2021-03-18"
+    }
+   ],
+   "facilities": [
+    "Aldridge Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057029": {
+   "reports": 12,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Hanceville Water Works and Sewer Board",
+     "reports": 12,
+     "latest": "2026-05-22"
+    }
+   ],
+   "facilities": [
+    "Hanceville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057100": {
+   "reports": 18,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Tuscumbia Department of Utilities",
+     "reports": 18,
+     "latest": "2026-03-03"
+    }
+   ],
+   "facilities": [
+    "Tuscumbia WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057169": {
+   "reports": 1,
+   "first_year": 2024,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Town Of Brilliant",
+     "reports": 1,
+     "latest": "2024-04-30"
+    }
+   ],
+   "facilities": [
+    "Brilliant WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057193": {
+   "reports": 53,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Greensboro",
+     "reports": 53,
+     "latest": "2025-12-19"
+    }
+   ],
+   "facilities": [
+    "Greensboro Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057657": {
+   "reports": 129,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Attalla",
+     "reports": 43,
+     "latest": "2026-11-05"
+    },
+    {
+     "name": "City Of Attalla",
+     "reports": 86,
+     "latest": "2024-03-26"
+    }
+   ],
+   "facilities": [
+    "Attalla Wastewater Treatment Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057703": {
+   "reports": 1,
+   "first_year": 2025,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "BRE - Whispering Pines LLC",
+     "reports": 1,
+     "latest": "2025-02-12"
+    }
+   ],
+   "facilities": [
+    "Whispering Pines WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057720": {
+   "reports": 13,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town Of Autaugaville",
+     "reports": 13,
+     "latest": "2026-02-12"
+    }
+   ],
+   "facilities": [
+    "Autaugaville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0057878": {
+   "reports": 32,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Ashford",
+     "reports": 32,
+     "latest": "2026-06-22"
+    }
+   ],
+   "facilities": [
+    "Ashford WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058122": {
+   "reports": 1,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "City of Moundville",
+     "reports": 1,
+     "latest": "2021-02-18"
+    }
+   ],
+   "facilities": [
+    "Moundville Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058335": {
+   "reports": 7,
+   "first_year": 2018,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Town of Columbia",
+     "reports": 7,
+     "latest": "2022-12-20"
+    }
+   ],
+   "facilities": [
+    "Columbia Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058343": {
+   "reports": 20,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Living Water Utilities, LLC",
+     "reports": 4,
+     "latest": "2026-07-28"
+    },
+    {
+     "name": "City of Good Hope",
+     "reports": 16,
+     "latest": "2021-08-31"
+    }
+   ],
+   "facilities": [
+    "Good Hope WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058394": {
+   "reports": 111,
+   "first_year": 2015,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "City of Huntsville Water Pollution Control",
+     "reports": 7,
+     "latest": "2025-05-13"
+    },
+    {
+     "name": "City of Huntsville",
+     "reports": 104,
+     "latest": "2022-03-23"
+    }
+   ],
+   "facilities": [
+    "Spring Branch WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058408": {
+   "reports": 21,
+   "first_year": 2016,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Water Works & Sewer Board of the City of Oxford",
+     "reports": 1,
+     "latest": "2021-12-07"
+    },
+    {
+     "name": "Oxford Waterworks & Sewer Board",
+     "reports": 20,
+     "latest": "2020-04-01"
+    }
+   ],
+   "facilities": [
+    "Oxford Tull C. Allen WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058670": {
+   "reports": 1,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Swan Creek Community",
+     "reports": 1,
+     "latest": "2020-02-19"
+    }
+   ],
+   "facilities": [
+    "Swan Creek Community Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058688": {
+   "reports": 3,
+   "first_year": 2018,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "The Utilities Board of the City of Ozark",
+     "reports": 3,
+     "latest": "2024-01-23"
+    }
+   ],
+   "facilities": [
+    "Ozark Northeast Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058823": {
+   "reports": 1,
+   "first_year": 2025,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Talladega County Board of Education",
+     "reports": 1,
+     "latest": "2025-02-03"
+    }
+   ],
+   "facilities": [
+    "Winterboro School Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0058947": {
+   "reports": 4,
+   "first_year": 2020,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "City of Hartford",
+     "reports": 2,
+     "latest": "2024-02-17"
+    },
+    {
+     "name": "City Of Hartford",
+     "reports": 2,
+     "latest": "2020-09-16"
+    }
+   ],
+   "facilities": [
+    "Hartford Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0059218": {
+   "reports": 41,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Opelika",
+     "reports": 41,
+     "latest": "2026-11-03"
+    }
+   ],
+   "facilities": [
+    "Opelika Eastside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0059315": {
+   "reports": 1,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Montgomery Water Works and Sanitary Sewer Board",
+     "reports": 1,
+     "latest": "2020-10-29"
+    }
+   ],
+   "facilities": [
+    "Rolling Hills Wastewater Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0059331": {
+   "reports": 13,
+   "first_year": 2018,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Living Water Utilities, LLC",
+     "reports": 4,
+     "latest": "2024-07-18"
+    },
+    {
+     "name": "City of Jemison",
+     "reports": 9,
+     "latest": "2020-10-11"
+    }
+   ],
+   "facilities": [
+    "Jemison WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0059358": {
+   "reports": 13,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Water and Sewer Board of the City of Abbeville",
+     "reports": 13,
+     "latest": "2026-03-23"
+    }
+   ],
+   "facilities": [
+    "Abbeville South Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0059455": {
+   "reports": 19,
+   "first_year": 2016,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Haleyville Waterworks and Sewer Board",
+     "reports": 1,
+     "latest": "2023-11-18"
+    },
+    {
+     "name": "Haleyville Waterworks & Sewer Board",
+     "reports": 18,
+     "latest": "2022-04-29"
+    }
+   ],
+   "facilities": [
+    "Haleyville Wastewater Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060283": {
+   "reports": 53,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town Of Loxley",
+     "reports": 53,
+     "latest": "2026-10-06"
+    }
+   ],
+   "facilities": [
+    "City of Loxley WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060372": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "BSR Sewer Company, Inc.",
+     "reports": 2,
+     "latest": "2023-07-19"
+    }
+   ],
+   "facilities": [
+    "Blount Springs Recolonization WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060445": {
+   "reports": 30,
+   "first_year": 2020,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Union Springs Utilities Board",
+     "reports": 30,
+     "latest": "2026-02-16"
+    }
+   ],
+   "facilities": [
+    "Union Springs WWTPs and Land Application"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060453": {
+   "reports": 33,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Utilities Board of the Town of Chatom",
+     "reports": 13,
+     "latest": "2026-10-20"
+    },
+    {
+     "name": "Chatom Utilities Board",
+     "reports": 20,
+     "latest": "2022-03-14"
+    }
+   ],
+   "facilities": [
+    "Chatom WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060461": {
+   "reports": 3,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Clayton Water and Sewer Board",
+     "reports": 3,
+     "latest": "2026-10-02"
+    }
+   ],
+   "facilities": [
+    "Clayton WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060526": {
+   "reports": 2,
+   "first_year": 2017,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Town of Woodville",
+     "reports": 2,
+     "latest": "2021-02-23"
+    }
+   ],
+   "facilities": [
+    "Woodville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060577": {
+   "reports": 34,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Priceville",
+     "reports": 34,
+     "latest": "2026-03-12"
+    }
+   ],
+   "facilities": [
+    "Priceville Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060887": {
+   "reports": 12,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "South Alabama Utilities",
+     "reports": 12,
+     "latest": "2026-06-20"
+    }
+   ],
+   "facilities": [
+    "Citronelle Wastewater Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "AL0060976": {
+   "reports": 10,
+   "first_year": 2017,
+   "last_year": 2018,
+   "permittees": [
+    {
+     "name": "Absolute Environmental Disposal, LLC",
+     "reports": 4,
+     "latest": "2018-09-24"
+    },
+    {
+     "name": "Living Water Utilities, LLC",
+     "reports": 2,
+     "latest": "2017-05-14"
+    }
+   ],
+   "facilities": [
+    "Country Park WWTP"
+   ],
+   "permittee_removed": true
+  },
+  "AL0061158": {
+   "reports": 4,
+   "first_year": 2021,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the Town of Parrish",
+     "reports": 2,
+     "latest": "2024-01-24"
+    },
+    {
+     "name": "Water Works & Sewer Board of the Town of Parrish",
+     "reports": 2,
+     "latest": "2021-06-03"
+    }
+   ],
+   "facilities": [
+    "Parrish HCR Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0061280": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Town of Garden City",
+     "reports": 1,
+     "latest": "2022-12-01"
+    }
+   ],
+   "facilities": [
+    "Garden City Wastewater Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0061671": {
+   "reports": 62,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Eufaula",
+     "reports": 62,
+     "latest": "2026-10-11"
+    }
+   ],
+   "facilities": [
+    "Eufaula WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062251": {
+   "reports": 6,
+   "first_year": 2017,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Jefferson County Housing Authority",
+     "reports": 6,
+     "latest": "2022-06-08"
+    }
+   ],
+   "facilities": [
+    "Brookside Village WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062278": {
+   "reports": 1,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Rockford Utilities Board, Inc.",
+     "reports": 1,
+     "latest": "2020-04-20"
+    }
+   ],
+   "facilities": [
+    "Rockford WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062448": {
+   "reports": 8,
+   "first_year": 2015,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Daleville Water and Sewer Board",
+     "reports": 6,
+     "latest": "2021-06-05"
+    },
+    {
+     "name": "City Of Daleville",
+     "reports": 2,
+     "latest": "2016-07-04"
+    }
+   ],
+   "facilities": [
+    "Daleville Westside WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062715": {
+   "reports": 54,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Roanoke",
+     "reports": 7,
+     "latest": "2026-10-21"
+    },
+    {
+     "name": "Roanoke Utilities Board",
+     "reports": 41,
+     "latest": "2024-09-27"
+    },
+    {
+     "name": "The Utilities Board of the City of Roanoke",
+     "reports": 6,
+     "latest": "2018-09-13"
+    }
+   ],
+   "facilities": [
+    "Roanoke WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062723": {
+   "reports": 16,
+   "first_year": 2019,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Water Works & Sewer Board of the Town of Centre",
+     "reports": 16,
+     "latest": "2022-10-20"
+    }
+   ],
+   "facilities": [
+    "Centre Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062731": {
+   "reports": 8,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Pine Hill",
+     "reports": 8,
+     "latest": "2026-10-21"
+    }
+   ],
+   "facilities": [
+    "Pine Hill Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062839": {
+   "reports": 7,
+   "first_year": 2020,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of LaFayette",
+     "reports": 7,
+     "latest": "2026-09-24"
+    }
+   ],
+   "facilities": [
+    "Mill Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062847": {
+   "reports": 1,
+   "first_year": 2024,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Town of Wadley",
+     "reports": 1,
+     "latest": "2024-08-23"
+    }
+   ],
+   "facilities": [
+    "Wadley Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062863": {
+   "reports": 13,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Mission Critical Environmental, LLC",
+     "reports": 7,
+     "latest": "2026-10-14"
+    },
+    {
+     "name": "PDR Properties, Inc.",
+     "reports": 6,
+     "latest": "2020-04-08"
+    }
+   ],
+   "facilities": [
+    "Redstone Arsenal Central WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0062944": {
+   "reports": 5,
+   "first_year": 2018,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Jackson County Water Authority",
+     "reports": 5,
+     "latest": "2023-07-14"
+    }
+   ],
+   "facilities": [
+    "Hollywood WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0063002": {
+   "reports": 20,
+   "first_year": 2023,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Satsuma Water and Sewer Board",
+     "reports": 20,
+     "latest": "2026-05-22"
+    }
+   ],
+   "facilities": [
+    "Satsuma Wastewater Treatment Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0063657": {
+   "reports": 62,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Waterworks and Sewer Board of the City of Uniontown",
+     "reports": 26,
+     "latest": "2026-07-07"
+    },
+    {
+     "name": "City of Uniontown",
+     "reports": 36,
+     "latest": "2021-01-27"
+    }
+   ],
+   "facilities": [
+    "Uniontown Wastewater Treatment Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0063797": {
+   "reports": 6,
+   "first_year": 2018,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Waterworks and Sewage Board of the City of Dadeville",
+     "reports": 2,
+     "latest": "2025-12-04"
+    },
+    {
+     "name": "City of Dadeville",
+     "reports": 4,
+     "latest": "2023-03-27"
+    }
+   ],
+   "facilities": [
+    "Dadeville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0064025": {
+   "reports": 41,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the City of Wetumpka",
+     "reports": 33,
+     "latest": "2026-06-16"
+    },
+    {
+     "name": "City Of Wetumpka Ww And S Board",
+     "reports": 8,
+     "latest": "2017-10-30"
+    }
+   ],
+   "facilities": [
+    "Wilako WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0064181": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Cherokee Ridge Property Owners Association",
+     "reports": 1,
+     "latest": "2022-12-15"
+    }
+   ],
+   "facilities": [
+    "Cherokee Ridge Property Owners Association WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0064394": {
+   "reports": 117,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Northport",
+     "reports": 117,
+     "latest": "2026-10-07"
+    }
+   ],
+   "facilities": [
+    "Northport WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0066796": {
+   "reports": 3,
+   "first_year": 2018,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Harvest Monrovia Water, Sewer and Fire Protection Authority",
+     "reports": 3,
+     "latest": "2024-03-26"
+    }
+   ],
+   "facilities": [
+    "Stoney Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0066974": {
+   "reports": 77,
+   "first_year": 2015,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Town of Town Creek",
+     "reports": 77,
+     "latest": "2024-01-24"
+    }
+   ],
+   "facilities": [
+    "Town Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0067067": {
+   "reports": 35,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Jefferson County Commission",
+     "reports": 17,
+     "latest": "2026-10-01"
+    },
+    {
+     "name": "Jefferson County Commission Environmental Services Department",
+     "reports": 18,
+     "latest": "2022-11-01"
+    }
+   ],
+   "facilities": [
+    "Leeds WRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0067776": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Matthews Landing, Inc,",
+     "reports": 1,
+     "latest": "2019-07-07"
+    }
+   ],
+   "facilities": [
+    "Matthews Landing, Inc. WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0067814": {
+   "reports": 24,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Enviro Services, LLC",
+     "reports": 7,
+     "latest": "2026-09-30"
+    },
+    {
+     "name": "Enviro Services, L.L.C.",
+     "reports": 17,
+     "latest": "2024-03-25"
+    }
+   ],
+   "facilities": [
+    "Liberty Park WRRF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0067903": {
+   "reports": 4,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Eclectic",
+     "reports": 4,
+     "latest": "2026-06-19"
+    }
+   ],
+   "facilities": [
+    "Eclectic Lagoon and Sprayfield"
+   ],
+   "permittee_removed": false
+  },
+  "AL0068420": {
+   "reports": 19,
+   "first_year": 2016,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Knobloch, Inc.",
+     "reports": 19,
+     "latest": "2026-07-28"
+    }
+   ],
+   "facilities": [
+    "East Tuscaloosa-West Jefferson WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0068551": {
+   "reports": 1,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "The Water Works and Sewer Board of the Town of Ariton, Alabama",
+     "reports": 1,
+     "latest": "2023-05-18"
+    }
+   ],
+   "facilities": [
+    "Ariton Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0068608": {
+   "reports": 33,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Harvest-Monrovia Water, Sewer, and Fire Protection Authority",
+     "reports": 5,
+     "latest": "2026-11-01"
+    },
+    {
+     "name": "Harvest-Monrovia Water, Sewer and Fire Protection Authority",
+     "reports": 28,
+     "latest": "2026-04-29"
+    }
+   ],
+   "facilities": [
+    "Jeff Road WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0070084": {
+   "reports": 5,
+   "first_year": 2013,
+   "last_year": 2017,
+   "permittees": [
+    {
+     "name": "Odenville Utilities Board",
+     "reports": 5,
+     "latest": "2017-09-05"
+    }
+   ],
+   "facilities": [
+    "Odenville WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0070254": {
+   "reports": 2,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Vance",
+     "reports": 2,
+     "latest": "2026-08-27"
+    }
+   ],
+   "facilities": [
+    "Vance WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0070726": {
+   "reports": 1,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Town of Midway",
+     "reports": 1,
+     "latest": "2021-04-28"
+    }
+   ],
+   "facilities": [
+    "Midway Land Application"
+   ],
+   "permittee_removed": false
+  },
+  "AL0070904": {
+   "reports": 5,
+   "first_year": 2020,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Baldwin County Sewer Service, LLC",
+     "reports": 5,
+     "latest": "2025-11-18"
+    }
+   ],
+   "facilities": [
+    "Steelwood Limited WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0070939": {
+   "reports": 4,
+   "first_year": 2017,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Town of Notasulga",
+     "reports": 4,
+     "latest": "2023-11-13"
+    }
+   ],
+   "facilities": [
+    "Notasulga WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0070947": {
+   "reports": 33,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Harvest Monrovia Water, Sewer, and Fire Protection Authority",
+     "reports": 28,
+     "latest": "2026-06-07"
+    },
+    {
+     "name": "Harvest Monrovia Water, Sewer And Fire Protection Authority",
+     "reports": 5,
+     "latest": "2019-02-22"
+    }
+   ],
+   "facilities": [
+    "Burwell Road WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0071056": {
+   "reports": 3,
+   "first_year": 2022,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Sumter County Commission",
+     "reports": 3,
+     "latest": "2023-05-04"
+    }
+   ],
+   "facilities": [
+    "Bellamy Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0071501": {
+   "reports": 165,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Shelby Ridge Utility Systems, LLC",
+     "reports": 146,
+     "latest": "2026-10-12"
+    },
+    {
+     "name": "Double Oak Water Reclamation, LLC",
+     "reports": 19,
+     "latest": "2018-07-26"
+    }
+   ],
+   "facilities": [
+    "Shelby Ridge Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0071897": {
+   "reports": 7,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Water and Wastewater Board of the City of Madison",
+     "reports": 5,
+     "latest": "2025-12-29"
+    },
+    {
+     "name": "Water & Wastewater Board of the City of Madison",
+     "reports": 2,
+     "latest": "2019-05-08"
+    }
+   ],
+   "facilities": [
+    "Madison WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0071901": {
+   "reports": 6,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Water and Sewer Board of the Town of Leighton",
+     "reports": 6,
+     "latest": "2020-02-11"
+    }
+   ],
+   "facilities": [
+    "Leighton WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0072737": {
+   "reports": 30,
+   "first_year": 2014,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City Of Dothan",
+     "reports": 30,
+     "latest": "2026-02-22"
+    }
+   ],
+   "facilities": [
+    "Dothan New Cypress Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0072834": {
+   "reports": 20,
+   "first_year": 2017,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Town of Lexington",
+     "reports": 20,
+     "latest": "2024-10-03"
+    }
+   ],
+   "facilities": [
+    "Lexington Lagoon and Sprayfield"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073083": {
+   "reports": 1,
+   "first_year": 2026,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "OSDS, LLC",
+     "reports": 1,
+     "latest": "2026-07-07"
+    }
+   ],
+   "facilities": [
+    "OSDS WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073202": {
+   "reports": 3,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Gordon",
+     "reports": 3,
+     "latest": "2026-05-27"
+    }
+   ],
+   "facilities": [
+    "Town of Gordon WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073261": {
+   "reports": 1,
+   "first_year": 2018,
+   "last_year": 2018,
+   "permittees": [
+    {
+     "name": "Town of Cleveland",
+     "reports": 1,
+     "latest": "2018-12-28"
+    }
+   ],
+   "facilities": [
+    "Cleveland WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073270": {
+   "reports": 4,
+   "first_year": 2017,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "North Choctaw Water & Sewer Authority",
+     "reports": 4,
+     "latest": "2023-05-14"
+    }
+   ],
+   "facilities": [
+    "North Choctaw WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073351": {
+   "reports": 7,
+   "first_year": 2013,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Enviro-Systems, LLC",
+     "reports": 7,
+     "latest": "2025-08-12"
+    }
+   ],
+   "facilities": [
+    "Enviro-Systems WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073539": {
+   "reports": 12,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Water Utilities, Inc",
+     "reports": 2,
+     "latest": "2026-09-30"
+    },
+    {
+     "name": "SWWC Utilties, Inc.",
+     "reports": 3,
+     "latest": "2024-01-13"
+    },
+    {
+     "name": "Weatherly Utilities Services, LLC",
+     "reports": 7,
+     "latest": "2021-09-27"
+    }
+   ],
+   "facilities": [
+    "Weatherly Water Reclamation Center"
+   ],
+   "permittee_removed": false
+  },
+  "AL0073580": {
+   "reports": 7,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Brewton",
+     "reports": 7,
+     "latest": "2026-10-31"
+    }
+   ],
+   "facilities": [
+    "North Brewton Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0074195": {
+   "reports": 3,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Town of West Blocton",
+     "reports": 3,
+     "latest": "2025-05-12"
+    }
+   ],
+   "facilities": [
+    "West Blocton WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0074608": {
+   "reports": 2,
+   "first_year": 2019,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "City of Calera",
+     "reports": 2,
+     "latest": "2020-12-14"
+    }
+   ],
+   "facilities": [
+    "Camp Branch Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0075248": {
+   "reports": 2,
+   "first_year": 2020,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Limestone County Water and Sewer Authority",
+     "reports": 2,
+     "latest": "2022-02-18"
+    }
+   ],
+   "facilities": [
+    "Lucy's Branch WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0075256": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "SWWC Services, Inc.",
+     "reports": 1,
+     "latest": "2022-02-09"
+    }
+   ],
+   "facilities": [
+    "North Jefferson Middle School WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0075523": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Integra Water Vinemont, LLC",
+     "reports": 1,
+     "latest": "2019-03-15"
+    }
+   ],
+   "facilities": [
+    "South Vinemont WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0075701": {
+   "reports": 4,
+   "first_year": 2018,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Utilities Board of the Town of Pennington",
+     "reports": 4,
+     "latest": "2022-05-18"
+    }
+   ],
+   "facilities": [
+    "Pennington WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0076244": {
+   "reports": 4,
+   "first_year": 2017,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "City of Sumiton",
+     "reports": 4,
+     "latest": "2020-06-30"
+    }
+   ],
+   "facilities": [
+    "Sumiton Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0076261": {
+   "reports": 25,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "West Blount Sewer System",
+     "reports": 25,
+     "latest": "2026-10-20"
+    }
+   ],
+   "facilities": [
+    "West Blount Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0076317": {
+   "reports": 3,
+   "first_year": 2018,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Town of Shorter",
+     "reports": 3,
+     "latest": "2025-01-16"
+    }
+   ],
+   "facilities": [
+    "Shorter WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0076520": {
+   "reports": 16,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "SWWC Utilities, Inc.",
+     "reports": 8,
+     "latest": "2025-06-24"
+    },
+    {
+     "name": "Weatherly Utility Services, LLC",
+     "reports": 8,
+     "latest": "2021-05-05"
+    }
+   ],
+   "facilities": [
+    "Weatherly Utility Services - Site 2"
+   ],
+   "permittee_removed": false
+  },
+  "AL0076708": {
+   "reports": 1,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "West Morgan East Lawrence Water and Sewer Authority",
+     "reports": 1,
+     "latest": "2023-04-09"
+    }
+   ],
+   "facilities": [
+    "Mallard Fox West WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0076821": {
+   "reports": 2,
+   "first_year": 2018,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "American Water Enterprises, LLC",
+     "reports": 1,
+     "latest": "2024-02-21"
+    },
+    {
+     "name": "American Water Enterprises, Inc.",
+     "reports": 1,
+     "latest": "2018-02-01"
+    }
+   ],
+   "facilities": [
+    "Fort Rucker Main WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0077453": {
+   "reports": 5,
+   "first_year": 2022,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Integra Water Creola, LLC",
+     "reports": 5,
+     "latest": "2026-08-20"
+    }
+   ],
+   "facilities": [
+    "North Mobile County WPCF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078034": {
+   "reports": 24,
+   "first_year": 2020,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Baldwin County Sewer Service, LLC",
+     "reports": 24,
+     "latest": "2026-10-01"
+    }
+   ],
+   "facilities": [
+    "Blackwater WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078204": {
+   "reports": 4,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Margaret",
+     "reports": 1,
+     "latest": "2026-02-24"
+    },
+    {
+     "name": "Moody GUSC",
+     "reports": 3,
+     "latest": "2020-02-05"
+    }
+   ],
+   "facilities": [
+    "Margaret WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078298": {
+   "reports": 6,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Integra Water Madison County, LLC",
+     "reports": 6,
+     "latest": "2026-10-30"
+    }
+   ],
+   "facilities": [
+    "Integra Madison County WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078344": {
+   "reports": 5,
+   "first_year": 2023,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "HICO Utility Company",
+     "reports": 5,
+     "latest": "2025-03-16"
+    }
+   ],
+   "facilities": [
+    "West Fork WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078395": {
+   "reports": 8,
+   "first_year": 2017,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Phoenix Water Resources, LLC",
+     "reports": 8,
+     "latest": "2025-12-22"
+    }
+   ],
+   "facilities": [
+    "Irondale WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078506": {
+   "reports": 22,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Alabama Water Utilities, Inc.",
+     "reports": 6,
+     "latest": "2026-04-15"
+    },
+    {
+     "name": "SWWC Utilities, Inc.",
+     "reports": 2,
+     "latest": "2023-01-30"
+    },
+    {
+     "name": "Southwest Water Company",
+     "reports": 14,
+     "latest": "2020-06-23"
+    }
+   ],
+   "facilities": [
+    "Brookwood SEU WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0078921": {
+   "reports": 132,
+   "first_year": 2015,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Utilities Board of the City of Bayou La Batre",
+     "reports": 116,
+     "latest": "2026-11-04"
+    },
+    {
+     "name": "Bayou La Batre Utility Board",
+     "reports": 16,
+     "latest": "2018-07-18"
+    }
+   ],
+   "facilities": [
+    "Bayou La Batre Wastewater Treatment Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0079774": {
+   "reports": 6,
+   "first_year": 2019,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "ST Exit 62, LLC",
+     "reports": 4,
+     "latest": "2024-02-13"
+    },
+    {
+     "name": "Cap, LLC",
+     "reports": 2,
+     "latest": "2019-09-19"
+    }
+   ],
+   "facilities": [
+    "Fosters Water Treatment Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0079880": {
+   "reports": 8,
+   "first_year": 2016,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Poarch Creek Indians Utility Authority",
+     "reports": 8,
+     "latest": "2024-11-26"
+    }
+   ],
+   "facilities": [
+    "Poarch Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0080306": {
+   "reports": 13,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "Sumter County Sewer Authority",
+     "reports": 13,
+     "latest": "2020-01-30"
+    }
+   ],
+   "facilities": [
+    "Wendy Hills Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0081124": {
+   "reports": 18,
+   "first_year": 2018,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Orange Beach",
+     "reports": 18,
+     "latest": "2026-06-21"
+    }
+   ],
+   "facilities": [
+    "City of Orange Beach Wastewater Treatment Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0081299": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "South Alabama Utilities",
+     "reports": 1,
+     "latest": "2019-07-15"
+    }
+   ],
+   "facilities": [
+    "Miller Creek WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0081396": {
+   "reports": 2,
+   "first_year": 2017,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "W & S Farms Partnership",
+     "reports": 2,
+     "latest": "2021-09-07"
+    }
+   ],
+   "facilities": [
+    "Kings Acres Sanitary Lagoon"
+   ],
+   "permittee_removed": false
+  },
+  "AL0082431": {
+   "reports": 5,
+   "first_year": 2022,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "The Water Works & Sanitary Sewer Board of the City of Montgomery",
+     "reports": 5,
+     "latest": "2025-04-07"
+    }
+   ],
+   "facilities": [
+    "Milley's Creek WPCP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0082813": {
+   "reports": 1,
+   "first_year": 2024,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Community Utilities of Alabama Inc.",
+     "reports": 1,
+     "latest": "2024-11-06"
+    }
+   ],
+   "facilities": [
+    "Woodruff Farms WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0082848": {
+   "reports": 1,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Utilities Board of the Town of Gilbertown",
+     "reports": 1,
+     "latest": "2021-08-10"
+    }
+   ],
+   "facilities": [
+    "Gilbertown Water Resources Recovery Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0083470": {
+   "reports": 67,
+   "first_year": 2019,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Baldwin County Sewer Service, LLC",
+     "reports": 67,
+     "latest": "2026-10-30"
+    }
+   ],
+   "facilities": [
+    "Summerdale WWTF"
+   ],
+   "permittee_removed": false
+  },
+  "AL0083518": {
+   "reports": 1,
+   "first_year": 2020,
+   "last_year": 2020,
+   "permittees": [
+    {
+     "name": "SWWC Utilities, Inc.",
+     "reports": 1,
+     "latest": "2020-04-06"
+    }
+   ],
+   "facilities": [
+    "Morris Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0084000": {
+   "reports": 4,
+   "first_year": 2021,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "City of Taylor",
+     "reports": 4,
+     "latest": "2026-05-10"
+    }
+   ],
+   "facilities": [
+    "Taylor WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0084107": {
+   "reports": 1,
+   "first_year": 2024,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Living Water Utilities, LLC",
+     "reports": 1,
+     "latest": "2024-02-26"
+    }
+   ],
+   "facilities": [
+    "Living Water Reclamation Facility"
+   ],
+   "permittee_removed": false
+  },
+  "AL0084472": {
+   "reports": 4,
+   "first_year": 2025,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Town of Kinsey",
+     "reports": 4,
+     "latest": "2026-06-21"
+    }
+   ],
+   "facilities": [
+    "Kinsey WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "AL0084474": {
+   "reports": 1,
+   "first_year": 2026,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Engineering Design Group, LLC",
+     "reports": 1,
+     "latest": "2026-03-02"
+    }
+   ],
+   "facilities": [
+    "Tannehill Preserve Clean Water Facility"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9902004": {
+   "reports": 6,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Baldwin County Sewer Service, LLC",
+     "reports": 1,
+     "latest": "2026-09-28"
+    },
+    {
+     "name": "Baldwin County Sewer Service LLC",
+     "reports": 5,
+     "latest": "2021-09-15"
+    }
+   ],
+   "facilities": [
+    "Lillian Sewer"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9902013": {
+   "reports": 120,
+   "first_year": 2017,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Baldwin County Sewer Services",
+     "reports": 103,
+     "latest": "2026-10-09"
+    },
+    {
+     "name": "South Alabama Utilities Services, Inc.",
+     "reports": 17,
+     "latest": "2018-12-28"
+    }
+   ],
+   "facilities": [
+    "Fort Morgan Treatment Plant"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9925001": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "The Waterworks Sewer & Gas Board of the Town of Section",
+     "reports": 1,
+     "latest": "2019-09-09"
+    }
+   ],
+   "facilities": [
+    "Town of Geraldine WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9937715": {
+   "reports": 1,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Pinnacle Wastewater Systems, LLC",
+     "reports": 1,
+     "latest": "2023-12-11"
+    }
+   ],
+   "facilities": [
+    "Winslow Parc WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9937800": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Arbor Utility Management, LLC",
+     "reports": 2,
+     "latest": "2026-01-20"
+    }
+   ],
+   "facilities": [
+    "Cottages At Bethune Lake"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9942570": {
+   "reports": 1,
+   "first_year": 2019,
+   "last_year": 2019,
+   "permittees": [
+    {
+     "name": "Limestone County Water & Sewer Authority",
+     "reports": 1,
+     "latest": "2019-09-03"
+    }
+   ],
+   "facilities": [
+    "Clements School WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9945691": {
+   "reports": 1,
+   "first_year": 2026,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Harvest- Monrovia Water, Sewer, and Fire Protection Authority, Inc.",
+     "reports": 1,
+     "latest": "2026-10-18"
+    }
+   ],
+   "facilities": [
+    "Bridgehill Subdivision"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9945758": {
+   "reports": 1,
+   "first_year": 2024,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "Harvest Monrovia Water Sewer and Fire Protection Authority",
+     "reports": 1,
+     "latest": "2024-05-28"
+    }
+   ],
+   "facilities": [
+    "Chandler Farms WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9949612": {
+   "reports": 4,
+   "first_year": 2018,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Corex Utilities Inc.",
+     "reports": 3,
+     "latest": "2025-04-07"
+    },
+    {
+     "name": "Board of Water and Sewer Commissioners of the City of Mobile",
+     "reports": 1,
+     "latest": "2018-10-10"
+    }
+   ],
+   "facilities": [
+    "Copeland Island WRF"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9949621": {
+   "reports": 2,
+   "first_year": 2017,
+   "last_year": 2017,
+   "permittees": [
+    {
+     "name": "Board of Water And Sewer Commissioners of The City of Mobile Alabama",
+     "reports": 2,
+     "latest": "2017-10-09"
+    }
+   ],
+   "facilities": [
+    "Nora Mae Hutchens Elementary School WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9949647": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "South Alabama Utilities",
+     "reports": 1,
+     "latest": "2022-04-20"
+    }
+   ],
+   "facilities": [
+    "Champion Hills WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9949649": {
+   "reports": 1,
+   "first_year": 2024,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "University Of Mobile",
+     "reports": 1,
+     "latest": "2024-03-22"
+    }
+   ],
+   "facilities": [
+    "University of Mobile WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9949726": {
+   "reports": 2,
+   "first_year": 2023,
+   "last_year": 2023,
+   "permittees": [
+    {
+     "name": "Mobile County Water, Sewer & Fire Protection Authority",
+     "reports": 2,
+     "latest": "2023-07-31"
+    }
+   ],
+   "facilities": [
+    "North I 10 Elementary School"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9958670": {
+   "reports": 2,
+   "first_year": 2021,
+   "last_year": 2021,
+   "permittees": [
+    {
+     "name": "Community Utilities of Alabama, Inc.",
+     "reports": 2,
+     "latest": "2021-04-16"
+    }
+   ],
+   "facilities": [
+    "Carrington Lakes Subdivision"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9959008": {
+   "reports": 1,
+   "first_year": 2022,
+   "last_year": 2022,
+   "permittees": [
+    {
+     "name": "Pinnacle Wastewater Systems, LLC.",
+     "reports": 1,
+     "latest": "2022-10-11"
+    }
+   ],
+   "facilities": [
+    "Creekview Subdivision WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9963031": {
+   "reports": 2,
+   "first_year": 2022,
+   "last_year": 2024,
+   "permittees": [
+    {
+     "name": "IMS Development, LLC",
+     "reports": 2,
+     "latest": "2024-08-20"
+    }
+   ],
+   "facilities": [
+    "Beacon Hill Apartment WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9963832": {
+   "reports": 2,
+   "first_year": 2026,
+   "last_year": 2026,
+   "permittees": [
+    {
+     "name": "Community Utilities of Alabama, Inc.",
+     "reports": 2,
+     "latest": "2026-07-31"
+    }
+   ],
+   "facilities": [
+    "King's Loop Road Subdivision WWTP"
+   ],
+   "permittee_removed": false
+  },
+  "ALSI9967004": {
+   "reports": 1,
+   "first_year": 2025,
+   "last_year": 2025,
+   "permittees": [
+    {
+     "name": "Integrated Wastewater Management, Inc.",
+     "reports": 1,
+     "latest": "2025-05-23"
+    }
+   ],
+   "facilities": [
+    "Silverock Cove WWTP"
+   ],
+   "permittee_removed": false
+  }
+ }
+}

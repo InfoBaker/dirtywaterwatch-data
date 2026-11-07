@@ -144,8 +144,12 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[
     # no possessive ("Massachusetts's") and no unsourced delay: the delayed sentence gives the state's own lag
     by = f"Overflow reports from sewer operators in {in_name} are published by {FEDERAL_PUBLISHER}" if federal else None
     if f["records_12m"] == 0:
-        return "No public reports", (f"{Name} publishes no sewage overflow reports we can read; the map shows no "
-                                     "discharges there because none are reported, not because none happen.")
+        # scoped to the grading window: a state with an older readable report on file (New Mexico's of June 2024)
+        # must not be told it publishes nothing readable (SOL review 2026-11-07, site P2-8; the site's coverage.ts
+        # gradeOf says the same)
+        return "No public reports", (f"{Name} has published no sewage overflow reports we can read in the last 12 "
+                                     "months; the map shows no recent discharges there because none are reported, "
+                                     "not because none happen.")
     latest = _t(f.get("latest_dated"))
     fresh = latest is not None and as_of - latest <= timedelta(days=FRESH_DAYS)
     lag = f.get("lag_days")

@@ -578,6 +578,7 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict], epa_dropped: list[
         if (r["raw"].get("_end_basis") or "").startswith(EPA_BASIS):
             r["ended_at"], r["status"] = None, "unknown"
             r["raw"].pop("_end_basis", None)
+            r["raw"].pop("ended_at_precision", None)
         for k in ("_epa_candidates", "_epa_record", "_epa_dropped_record", "_epa_not_paired", "_epa_end_not_used"):
             r["raw"].pop(k, None)
     for e in epa:
@@ -772,6 +773,9 @@ def _pair(r: dict, e: dict, why: str, mark: bool = True) -> str:
         out = "refused"
     elif not out:
         r["ended_at"], r["status"] = e["ended_at"], "ended"
+        # the end is EPA's, to the minute, while the start stays EPD's day: the status build counts a day-precision
+        # end to the end of its day, so the end's own precision is kept apart (SOL 2026-11-07 wave 1 P1-1, wave 2 P1-2)
+        r["raw"]["ended_at_precision"] = e.get("time_precision") or "minute"
         r["raw"]["_end_basis"] = (f"{EPA_BASIS} {e['event_id']} ({why}; EPA start {e.get('started_at')}, end "
                                   f"{e['ended_at']}, as given, presumably local time)")
         out = "taken"

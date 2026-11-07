@@ -77,6 +77,14 @@
 #                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
 #                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
 #                  advisory map layer, blooms; ingest/nm_transforms.py)
+#                  Hawaii: hi_doh_cwb_events (the Department of Health Clean Water Branch's events endpoint, the newest
+#                  500 advisories every run: sewage spill and permit exceedance advisories in the Department's own
+#                  window, Brown Water Advisories as rainfall advisories, beach advisories and retest notices; placed
+#                  by the names the notices give, per island; no history backfill: the endpoint ignores paging)
+#                  Alabama: al_adem_sso (ADEM's SSO report layers: every report filed through AEPACS since 2012, posted
+#                  within minutes, with the live map's received time and cause; the last 60 days each hour, the whole
+#                  layer every 20 hours) and al_adem_beaches (ADEM and ADPH's coastal beach monitoring layer: an
+#                  advisory code other than 11 opens a beach advisory)
 #                  Texas: the generic Socrata block tx-tceq-sso-opendata (TCEQ's Sanitary Sewer Overflows table since
 #                  2010: dates only, no locations, published in batches months late; read only when its rowsUpdatedAt
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt

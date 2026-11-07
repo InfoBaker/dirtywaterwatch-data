@@ -60,7 +60,12 @@ PUBLIC_NAME = re.compile(
 # New Mexico's mutual domestic water and sewage works associations: political subdivisions under the Sanitary Projects
 # Act (NMSA 1978, Chapter 3, Article 29), not private bodies; read as public names on New Mexico rows only
 STATE_PUBLIC_NAME = {"NM": re.compile(r"\bmutual (?:domestic|sewage|sewer|water and sewer)\b[\w\s&]*\bassociation\b",
-                                      re.I)}
+                                      re.I),
+                     # Alabama's municipal water, sewer, gas and utilities boards are public corporations incorporated
+                     # under Ala. Code Title 11, Chapter 50, so their legal names carry "Inc." ("Grand Bay Water Works
+                     # Board, Inc."); so is a town's governmental utility services corporation (Moody's)
+                     "AL": re.compile(r"\b(?:water ?works|water|sewer|gas|utilities|utility)\b[\w\s,&]*\bboard\b|"
+                                      r"\bgovernmental utility services corporation\b", re.I)}
 PRIVATE_NAME = re.compile(r"\b(inc|llc|l\.l\.c|ltd|lp|corp|corporation|company|association|assn|poa|hoa|club|mhp|"
                           r"mhc)\b\.?", re.I)
 
