@@ -44,7 +44,8 @@ def main() -> int:
         if not p.exists():
             continue
         for r in json.loads(p.read_text()).get("records", []):
-            if str(r.get("npdes_permit") or "")[:2] not in ("AZ", "NN"):   # the Navajo Nation's placed in AZ
+            if (str(r.get("npdes_permit") or "")[:2] not in ("AZ", "NN")
+                    or (r.get("raw") or {}).get("state", "AZ") != "AZ"):   # the Navajo Nation's placed in AZ only
                 continue
             raw = r.get("raw") or {}
             for n0 in dict.fromkeys(x.strip() for x in (r.get("waterbody_text") or "").split(";") if x.strip()):

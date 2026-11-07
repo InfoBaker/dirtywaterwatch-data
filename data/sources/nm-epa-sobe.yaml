@@ -1,0 +1,47 @@
+id: "nm-epa-sobe"
+name: "EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), New Mexico permits and the Navajo Nation's permits located in New Mexico"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), New
+#   Mexico permits added 2026-11-07, and the Navajo Nation's permits (NN...) for reports whose point lies in New
+#   Mexico (by the Census state outlines near the Arizona line): times with Mountain offsets (the Navajo Nation's
+#   clock is the same), a longitude missing its minus sign read as west, an entry naming only the plant's lagoon read
+#   as no water, free text scrubbed.
+# Notes (research/nm, status used, verified fetched, checked 2026-11-07): Read by the national eRule
+#   module (echo-sewer-overflow) with New Mexico in its states since 2026-11-07: the only
+#   machine-readable record of New Mexico overflow reports, though only the Town of Taos files and
+#   the Navajo Nation's Shiprock plant files under its own permit.
+# Access detail (research, quoted): Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version
+#   ZIP (Last-Modified 2026-11-05) held only its metadata, so the module reads the current version
+#   of each report from the all-versions ZIP (2026-11-04 extract). 2 reports under New Mexico
+#   permits, both the Town of Taos's (NM0024066): 2026-02-19 private-sewer overflow (50 gallons) and
+#   2026-10-16 manhole overflow (2,000 gallons). 6 Navajo Nation reports located in New Mexico:
+#   Shiprock (NN0020621) 3, 2024-06 to 2025-11, and 3 under Window Rock's permit (NN0021555),
+#   2026-08: two at the lift station by Navajo, New Mexico, 48 m east of the state line, and a line
+#   break east of Fort Defiance. 55 New Mexico permits and 5 Navajo Nation permits located in New
+#   Mexico are in EPA's collection-system table.
+# Can fill: started_at, ended_at, coordinates, volume, location_text, source_record_id
+# Cannot fill: waterbody (named on 1 of 8 reports); advice_text
+# History: 2024-06 to 2026-10 (New Mexico-located reports); New Mexico permits 2026 only
+# Research notes: 2026-11-04 extract: 8 reports located in New Mexico; 1 kept as reaching a water
+#   (Shiprock's anticipated bypass of 2024-06-15 to 06-22, 300,000 gallons, receiving water San Juan
+#   River), 7 dropped (6 with no evidence the sewage reached a water, 1 naming only the plant's
+#   emergency lagoon). Times carry no zone: read as America/Denver. One Taos report gives 18:10 for
+#   a release its description puts at 1:10pm (five hours apart); one Shiprock report gives its
+#   longitude without the minus sign (read as west). The kept bypass's description says the flow
+#   went to the plant's back-up lagoon; it is shown on the San Juan River because the report names
+#   it (raw.kept_note).
+cadence: "EPA refreshes daily. New Mexico rows (2026-11-04 extract): 2 reports under New Mexico permits (Town of Taos, SSO 2) and 6 Navajo Nation reports located in New Mexico (Shiprock 3: SSO 1, bypass 2; Window Rock's permit 3 SSO); received a median 4 days after the start (one anticipated bypass notice filed the day before it began; Taos's two 10 and 21 days). Volume, an end and a point on all 8. Newest row: a Taos manhole overflow that started 2026-10-16 16:00 and was received 2026-10-26."
+license: "EPA public data"
+attribution: "US EPA (data filed by New Mexico's EPA Region 6 permittees and the Navajo Nation's EPA Region 9 permittees through EPA's NeT eRule tool)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["NM"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP (Last-Modified 2026-11-05) held only its metadata, so the module reads the current version of each report from the all-versions ZIP (2026-11-04 extract). 2 reports under New Mexico permits, both the Town of Taos's (NM0024066): 2026-02-19 private-sewer overflow (50 gallons) and 2026-10-16 manhole overflow (2,000 gallons). 6 Navajo Nation reports located in New Mexico: Shiprock (NN0020621) 3, 2024-06 to 2025-11, and 3 under Window Rock's permit (NN0021555), 2026-08: two at the lift station by Navajo, New Mexico, 48 m east of the state line, and a line break east of Fort Defiance. 55 New Mexico permits and 5 Navajo Nation permits located in New Mexico are in EPA's collection-system table."
+machine_readable: true
+legal_basis: "EPA-issued NPDES permits (40 CFR 122.41(l)(6) and (m)(3), 40 CFR 127); 20.6.2.1203 NMAC (the report to NMED) leaves no public record"
+checked: "2026-11-07"

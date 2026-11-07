@@ -225161,7 +225161,7 @@
    "Kayenta",
    "Tuba City"
   ],
-  "notes": "EPA ICIS-NPDES: NN0020265 Chinle WWTF; NN0020281 Kayenta Wastewater Treatment Lagoon; NN0020290 Tuba City WWTF; NN0021555 Window Rock WWTF; NN0022195 Ganado WWTP; NN0030344 Twin Arrows Navajo Casino Wastewater Treatment Facility. EPA's overflow tables (2026-11-04 extract): 52 report(s), 15 with evidence the discharge reached a water. Navajo Nation permits (NN...) EPA lists in Arizona. A report counts here when its point lies in Arizona (one Window Rock report lies in New Mexico and is not counted).",
+  "notes": "EPA ICIS-NPDES: NN0020265 Chinle WWTF; NN0020281 Kayenta Wastewater Treatment Lagoon; NN0020290 Tuba City WWTF; NN0021555 Window Rock WWTF; NN0022195 Ganado WWTP; NN0030344 Twin Arrows Navajo Casino Wastewater Treatment Facility. EPA's overflow tables (2026-11-04 extract): 50 report(s), 15 with evidence the discharge reached a water. Navajo Nation permits (NN...) EPA lists in Arizona. A report counts here when its point lies in Arizona (three Window Rock reports lie in New Mexico, two of them at the lift station by Navajo, New Mexico, and are not counted).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -262596,5 +262596,2263 @@
    "federal"
   ],
   "legal_form": "city"
+ },
+ {
+  "id": "nm-abcwua",
+  "name": "Albuquerque Bernalillo County Water Utility Authority",
+  "short_name": "Albuquerque Bernalillo County Water Utility Authority",
+  "legal_form": "authority",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022250",
+  "npdes_permits": [
+   "NM0022250"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Albuquerque"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0022250 Albuquerque Bernalillo County Water Utility Authority. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Albuquerque's sewers and the Southside Water Reclamation Plant. EPA's collection-system table lists the system, but no report under the permit is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-abcwua",
+   "nm-nm0022250"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-abiquiu-mdwca",
+  "name": "Abiquiu Mutual Domestic Water Consumers and Mutual Sewage Works Association",
+  "short_name": "Abiquiu MDWCA and MSWA",
+  "legal_form": "special district",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024830",
+  "npdes_permits": [
+   "NM0024830"
+  ],
+  "receiving_waters": [
+   "CHAMA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Abiquiu"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024830 Abiquiu Mdwca & Mswa. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A mutual domestic association: a political subdivision of the state under the Sanitary Projects Act (NMSA 1978, Chapter 3, Article 29), filed as a special district. EPA records the owner as \"ABIQUIU, CITY OF\"; Abiquiu is not incorporated, and EPA's facility and collection-system tables name the association.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-abiquiu-mdwca"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-anthony-water-and-sanitation-district",
+  "name": "Anthony Water and Sanitation District",
+  "short_name": "Anthony Water and Sanitation District",
+  "legal_form": "special district",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029629",
+  "npdes_permits": [
+   "NM0029629"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Anthony"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029629 Anthony Water & Sanitation Dis. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-anthony-water-and-sanitation-district"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-bia-wingate-high-school",
+  "name": "Bureau of Indian Affairs, Wingate High School",
+  "short_name": "Wingate High School",
+  "legal_form": "federal facility",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NN0020958",
+  "npdes_permits": [
+   "NN0020958"
+  ],
+  "receiving_waters": [
+   "PUERCO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 9, for the Navajo Nation), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Wingate"
+  ],
+  "notes": "EPA ICIS-NPDES: NN0020958 Wingate High School Wastewater Treatment Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A Navajo Nation permit (NN...) for a federal school's plant at Fort Wingate.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-bia-wingate-high-school"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-bie-nenahnezad-community-school",
+  "name": "Bureau of Indian Education, Nenahnezad Community School",
+  "short_name": "Nenahnezad Community School",
+  "legal_form": "federal facility",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NN0020800",
+  "npdes_permits": [
+   "NN0020800"
+  ],
+  "receiving_waters": [
+   "SAN JUAN RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 9, for the Navajo Nation), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Fruitland"
+  ],
+  "notes": "EPA ICIS-NPDES: NN0020800 Nenahnezad Community School. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A Navajo Nation permit (NN...) for a federal school's plant near Fruitland.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-bie-nenahnezad-community-school"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-camino-real-regional-utility-authority",
+  "name": "Camino Real Regional Utility Authority (Sunland Park and North plants)",
+  "short_name": "Camino Real Regional Utility Authority",
+  "legal_form": "authority",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029483",
+  "npdes_permits": [
+   "NM0029483",
+   "NM0031178"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE RIVER  2064",
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Sunland",
+   "Sunland Park"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029483 Sunland Park Wastewater Plant; NM0031178 Camino Real Regional Utility Authority North Wastewater Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-camino-real-regional-utility-authority",
+   "nm-nm0029483",
+   "nm-nm0031178"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-casa-blanca-wwtp",
+  "name": "Casa Blanca Wastewater Treatment Plant (Pueblo of Laguna)",
+  "short_name": "Casa Blanca WWTP",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0030678",
+  "npdes_permits": [
+   "NM0030678"
+  ],
+  "receiving_waters": [
+   "ACOMA CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 6), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Casa Blanca"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030678 Casa Blanca WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA types the owner a tribal government; the plant, on the Pueblo of Laguna's land, serves the Dancing Eagle Casino and a small residential area (EPA's 2021 fact sheet; NMED's certification list files it under Laguna Pueblo).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-casa-blanca-wwtp"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-cds-rainmakers-utilities",
+  "name": "CDS Rainmakers Utilities, LLC",
+  "short_name": "CDS Rainmakers Utilities",
+  "legal_form": "investor-owned utility",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029238",
+  "npdes_permits": [
+   "NM0029238"
+  ],
+  "receiving_waters": [
+   "LITTLE CREEK/EAGLE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The permit conditions and the state rule bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Lincoln Coulty"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029238 Cds Rainmakers Utilities, Llc. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A sewer utility company (Lincoln County); EPA types it privately owned.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-cds-rainmakers-utilities"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-artesia",
+  "name": "City of Artesia",
+  "short_name": "City of Artesia",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022268",
+  "npdes_permits": [
+   "NM0022268"
+  ],
+  "receiving_waters": [
+   "PECOS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Artesia"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0022268 City of Artesia. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-artesia",
+   "nm-nm0022268"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-aztec",
+  "name": "City of Aztec",
+  "short_name": "City of Aztec",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0020168",
+  "npdes_permits": [
+   "NM0020168"
+  ],
+  "receiving_waters": [
+   "ANIMAS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Aztec"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020168 Aztec, City of - WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-aztec",
+   "nm-nm0020168"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-belen",
+  "name": "City of Belen",
+  "short_name": "City of Belen",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020150",
+  "npdes_permits": [
+   "NM0020150"
+  ],
+  "receiving_waters": [
+   "BOSQUE DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Belen"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020150 City of Belen WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-belen",
+   "nm-nm0020150"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-bloomfield",
+  "name": "City of Bloomfield",
+  "short_name": "City of Bloomfield",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020770",
+  "npdes_permits": [
+   "NM0020770"
+  ],
+  "receiving_waters": [
+   "SAN JUAN RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Bloomfield"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020770 Bloomfield, City of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-bloomfield",
+   "nm-nm0020770"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-carlsbad",
+  "name": "City of Carlsbad",
+  "short_name": "City of Carlsbad",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0026395",
+  "npdes_permits": [
+   "NM0026395"
+  ],
+  "receiving_waters": [
+   "SEG 2-202 PECOS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Carlsbad"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0026395 City of Carlsbad. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-carlsbad",
+   "nm-nm0026395"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-espanola",
+  "name": "City of Española",
+  "short_name": "City of Española",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029351",
+  "npdes_permits": [
+   "NM0029351"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Espanola",
+   "Española"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029351 Espanola, City of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-espanola",
+   "nm-nm0029351"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-farmington",
+  "name": "City of Farmington",
+  "short_name": "City of Farmington",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020583",
+  "npdes_permits": [
+   "NM0020583"
+  ],
+  "receiving_waters": [
+   "SAN JUAN RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Farmington"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020583 City of Farmington. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-farmington",
+   "nm-nm0020583"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-gallup",
+  "name": "City of Gallup",
+  "short_name": "City of Gallup",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020672",
+  "npdes_permits": [
+   "NM0020672"
+  ],
+  "receiving_waters": [
+   "PUERCO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Gallup"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020672 Gallup, City of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-gallup",
+   "nm-nm0020672"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-las-cruces",
+  "name": "City of Las Cruces Utilities (Jacob A. Hands and East Mesa plants)",
+  "short_name": "City of Las Cruces",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0023311",
+  "npdes_permits": [
+   "NM0023311",
+   "NM0030872"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE RIVER SEGMENT",
+   "SOUTH FORK LAS CRUCES ARROYO"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Las Cruces",
+   "Las Cruces Utilities"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0023311 City of Las Cruces - Jacob Hands Memorial WWTF; NM0030872 Las Cruces, City of - East Mesa Water Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA's collection-system table lists the system, but no report under its permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-las-cruces",
+   "nm-nm0023311"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-las-vegas",
+  "name": "City of Las Vegas",
+  "short_name": "City of Las Vegas",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0028827",
+  "npdes_permits": [
+   "NM0028827"
+  ],
+  "receiving_waters": [
+   "GALLINAS RIVER, PECOS RIVER BASIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Las Vegas"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0028827 City of Las Vegas. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-las-vegas",
+   "nm-nm0028827"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-raton",
+  "name": "City of Raton",
+  "short_name": "City of Raton",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020273",
+  "npdes_permits": [
+   "NM0020273"
+  ],
+  "receiving_waters": [
+   "DOGGETT CRK, RATON CRK, CHICO RICA"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Raton"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020273 City of Raton. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-raton"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-rio-rancho",
+  "name": "City of Rio Rancho (plants no. 2 and no. 3)",
+  "short_name": "City of Rio Rancho",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0027987",
+  "npdes_permits": [
+   "NM0027987",
+   "NM0029602"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Rio Rancho"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0027987 Rio Rancho, City of WWTP #2; NM0029602 Wastewater Treatment Plant #3. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-rio-rancho",
+   "nm-nm0027987"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-roswell",
+  "name": "City of Roswell",
+  "short_name": "City of Roswell",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020311",
+  "npdes_permits": [
+   "NM0020311"
+  ],
+  "receiving_waters": [
+   "RIO HONDO"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Roswell"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020311 Roswell, City of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-roswell"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-santa-fe",
+  "name": "City of Santa Fe (Paseo Real plant)",
+  "short_name": "City of Santa Fe",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022292",
+  "npdes_permits": [
+   "NM0022292"
+  ],
+  "receiving_waters": [
+   "SANTA FE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Santa Fe"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0022292 Santa Fe WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the plant as \"SANTA FE, CITY OF (AIRPORT RD\". EPA's collection-system table lists the system, but no report under the permit is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-santa-fe",
+   "nm-nm0022292"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-santa-rosa",
+  "name": "City of Santa Rosa",
+  "short_name": "City of Santa Rosa",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024988",
+  "npdes_permits": [
+   "NM0024988"
+  ],
+  "receiving_waters": [
+   "EL RITO CREEK TO PECOS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Santa Rosa"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024988 City of Santa Rosa Wastewater. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-santa-rosa"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-socorro",
+  "name": "City of Socorro",
+  "short_name": "City of Socorro",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0028835",
+  "npdes_permits": [
+   "NM0028835"
+  ],
+  "receiving_waters": [
+   "LUIS LOPEZ DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Socorro"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0028835 Socorro, City of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-socorro",
+   "nm-nm0028835"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-truth-or-consequences",
+  "name": "City of Truth or Consequences",
+  "short_name": "City of Truth or Consequences",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020681",
+  "npdes_permits": [
+   "NM0020681"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Truth Or Consequences",
+   "Truth or Consequences"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020681 City of Truth Or Consequences. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-truth-or-consequences",
+   "nm-nm0020681"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-city-of-tucumcari",
+  "name": "City of Tucumcari",
+  "short_name": "City of Tucumcari",
+  "legal_form": "city",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020711",
+  "npdes_permits": [
+   "NM0020711"
+  ],
+  "receiving_waters": [
+   "CANADIAN RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tucumcari"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020711 Tucumcari, City of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-city-of-tucumcari",
+   "nm-nm0020711"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-dona-ana-county",
+  "name": "Doña Ana County Utilities (South Central Regional plant)",
+  "short_name": "Doña Ana County",
+  "legal_form": "county",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030490",
+  "npdes_permits": [
+   "NM0030490"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE RIVER",
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "La Mesa"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030490 Dona Ana County Utilities Dept. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-dona-ana-county",
+   "nm-nm0030490"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-eastern-new-mexico-rural-water-authority",
+  "name": "Eastern New Mexico Rural Water Authority",
+  "short_name": "Eastern New Mexico Rural Water Authority",
+  "legal_form": "authority",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0031235",
+  "npdes_permits": [
+   "NM0031235"
+  ],
+  "receiving_waters": [
+   "UTE RESERVOIR"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Logan"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0031235 Eastern NM Rural Water System. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the owner as \"EASTERN NM RURAL WATER SYSTEM\" (Ute Reservoir).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-eastern-new-mexico-rural-water-authority"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-jemez-valley-public-schools",
+  "name": "Jemez Valley Public Schools",
+  "short_name": "Jemez Valley Public Schools",
+  "legal_form": "special district",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0028479",
+  "npdes_permits": [
+   "NM0028479"
+  ],
+  "receiving_waters": [
+   "JEMEZ RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Jemez Pueblo"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0028479 Jemez Valley Public Schools. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A public school district; EPA types the facility privately owned.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-jemez-valley-public-schools"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-jicarilla-apache-nation",
+  "name": "Jicarilla Apache Nation (Dulce plant)",
+  "short_name": "Jicarilla Apache Nation",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030520",
+  "npdes_permits": [
+   "NM0030520"
+  ],
+  "receiving_waters": [
+   "UNNAMED TRIBUTARY TO AMARGO CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 6), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Dulce"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030520 Dulce Wastewater Treat.Plt.. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-jicarilla-apache-nation"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-los-alamos-county",
+  "name": "Los Alamos County Department of Public Utilities (Bayo and White Rock plants)",
+  "short_name": "Los Alamos County",
+  "legal_form": "county",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020133",
+  "npdes_permits": [
+   "NM0020133",
+   "NM0020141"
+  ],
+  "receiving_waters": [
+   "CANADA DEL BUEY"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Los Alamos",
+   "White Rock"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020133 Los Alamos County-White Rock P; NM0020141 Los Alamos County Pud-Bayo WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-los-alamos-county",
+   "nm-nm0020141"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-mescalero-apache-tribe",
+  "name": "Mescalero Apache Tribe",
+  "short_name": "Mescalero Apache Tribe",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0030660",
+  "npdes_permits": [
+   "NM0030660"
+  ],
+  "receiving_waters": [
+   "RIO TULOROSA CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 6), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Mescalero"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030660 Mescalero Apache Wastewater. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-mescalero-apache-tribe"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-mora-mutual-water-and-sewer-works-association",
+  "name": "Mora Mutual Water and Sewer Works Association",
+  "short_name": "Mora Mutual Water and Sewer Works Association",
+  "legal_form": "special district",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0024996",
+  "npdes_permits": [
+   "NM0024996"
+  ],
+  "receiving_waters": [
+   "MORA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Mora"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024996 Mora Mutual Water & Sewer Works Association. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A mutual domestic association: a political subdivision of the state under the Sanitary Projects Act (NMSA 1978, Chapter 3, Article 29), filed as a special district.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-mora-mutual-water-and-sewer-works-association"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-navajo-tribal-utility-authority",
+  "name": "Navajo Tribal Utility Authority (Shiprock and Northern Edge Navajo Casino plants)",
+  "short_name": "Navajo Tribal Utility Authority",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NN0020621",
+  "npdes_permits": [
+   "NN0020621",
+   "NN0030343"
+  ],
+  "receiving_waters": [
+   "SAN JUAN RIVER",
+   "Drainage wash tributory to San Juan River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 9, for the Navajo Nation), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Farmington",
+   "Shiprock"
+  ],
+  "notes": "EPA ICIS-NPDES: NN0020621 Shiprock WWTF; NN0030343 Northern Edge Navajo Casino WWTP. EPA's overflow tables (2026-11-04 extract): 3 report(s) placed in New Mexico, 1 with evidence the discharge reached a water. Navajo Nation permits (NN...) whose plants lie in New Mexico; the Authority's Arizona plants are Arizona's row. A report counts here when its point lies in New Mexico. Three reports under Window Rock's permit (NN0021555, Arizona's row) lie in New Mexico and are placed there: two at the lift station by Navajo, New Mexico (2026-08-10 and 08-11) and a line washed out east of Fort Defiance (2026-08-19).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-navajo-tribal-utility-authority",
+   "nm-nn0020621",
+   "nm-nn0020621-shiprock"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-new-mexico-water-service-company",
+  "name": "New Mexico Water Service Company (Rio Communities and Rio del Oro plants)",
+  "short_name": "New Mexico Water Service Company",
+  "legal_form": "investor-owned utility",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0027782",
+  "npdes_permits": [
+   "NM0027782",
+   "NM0030414"
+  ],
+  "receiving_waters": [
+   "LOWER PERALTA DRAIN",
+   "LA CANADA DE LA LOMA DE ARENA"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The permit conditions and the state rule bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Belen"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0027782 Rio Communities Ww Treatment; NM0030414 Rio del Oro Ww Treatment Fac.. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the owners as \"RIO COMMUNITIES WWTF-NM WATER\" and \"RIO DEL ORO WWTF-NM WATER SERV\" and types them municipal or water districts; New Mexico Water Service Company is a regulated water and sewer company. The permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-new-mexico-water-service-company"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-nm0028088",
+  "name": "Glorieta Camps Wastewater Treatment Plant (permit NM0028088)",
+  "short_name": "Glorieta Camps Wastewater Treatment Plant",
+  "legal_form": "facility (permittee not named)",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0028088",
+  "npdes_permits": [
+   "NM0028088"
+  ],
+  "receiving_waters": [
+   "GLORIETA CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The permit conditions and the state rule bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Glorieta"
+  ],
+  "notes": "EPA ICIS-NPDES: permit NM0028088. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA's permittee name reads as an individual's: not named here; the row names the facility. EPA types it privately owned.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-nm0028088"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-oshara-village-wrf",
+  "name": "Oshara Village Water Reclamation Facility",
+  "short_name": "Oshara Village Water Reclamation Facility",
+  "legal_form": null,
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030813",
+  "npdes_permits": [
+   "NM0030813"
+  ],
+  "receiving_waters": [
+   "ARROYO HONDO"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Santa Fe"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030813 Oshara Village Wtr Reclamation. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the plant's name as the permittee and types it a municipal or water district; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-oshara-village-wrf"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-pilot-travel-center-305",
+  "name": "Pilot Travel Centers (Travel Center #305, Jamestown)",
+  "short_name": "Pilot Travel Center #305",
+  "legal_form": "business or industrial",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0031231",
+  "npdes_permits": [
+   "NM0031231"
+  ],
+  "receiving_waters": [
+   "LITTLE COLORADO RIVER BASIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The permit conditions and the state rule bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Jamestown"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0031231 Pilot Travel Center #305 WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A truck stop's plant treating its own sewage; the permittee as EPA records it.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-pilot-travel-center-305"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-pueblo-of-san-felipe",
+  "name": "Pueblo of San Felipe",
+  "short_name": "Pueblo of San Felipe",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0031011",
+  "npdes_permits": [
+   "NM0031011"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "A permit on tribal land, where EPA (Region 6), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "San Felipe Pueblo"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0031011 San Felipe Pueblo Wastewater Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-pueblo-of-san-felipe"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-ramah-navajo-school-board",
+  "name": "Ramah Navajo School Board, Inc. (Pine Hill school plant)",
+  "short_name": "Ramah Navajo School Board",
+  "legal_form": "institution",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NN0030325",
+  "npdes_permits": [
+   "NN0030325"
+  ],
+  "receiving_waters": [
+   "UNNAMED WASH, TRIBUTARY TO LITTLE COLORADO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "A permit on tribal land, where EPA (Region 9, for the Navajo Nation), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Pinehill"
+  ],
+  "notes": "EPA ICIS-NPDES: NN0030325 Pinehill WWTF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A non-profit corporation that runs the Pine Hill school; a Navajo Nation permit (NN...). EPA types it privately owned; its name reads as a public body, but the permittee is the corporation.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-ramah-navajo-school-board"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-ramah-water-and-sanitation-district",
+  "name": "Ramah Water and Sanitation District",
+  "short_name": "Ramah Water and Sanitation District",
+  "legal_form": "special district",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0023396",
+  "npdes_permits": [
+   "NM0023396"
+  ],
+  "receiving_waters": [
+   "CEBOLIA CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Ramah"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0023396 Ramah Water and Sanitation. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-ramah-water-and-sanitation-district"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-ranchland-utility-company",
+  "name": "Ranchland Utility Company",
+  "short_name": "Ranchland Utility Company",
+  "legal_form": "investor-owned utility",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030368",
+  "npdes_permits": [
+   "NM0030368"
+  ],
+  "receiving_waters": [
+   "ARROYO HONDO"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The permit conditions and the state rule bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Santa Fe"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030368 Ranchland Utility Company. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A sewer utility company (Santa Fe County); EPA types it a municipal or water district, and its collection-system table a municipality.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-ranchland-utility-company"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-reserve-mutual-sewer-association",
+  "name": "Reserve Mutual Sewer Association",
+  "short_name": "Reserve Mutual Sewer Association",
+  "legal_form": "special district",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024163",
+  "npdes_permits": [
+   "NM0024163"
+  ],
+  "receiving_waters": [
+   "SAN FRANSICO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Reserve"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024163 Reserve, Village of. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the owner as \"RESERVE MUTUAL SEWER ASSOCIATI\" and names the facility and collection system \"RESERVE, VILLAGE OF\". Filed as a mutual domestic association under the Sanitary Projects Act (a special district); the permit documents were not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-reserve-mutual-sewer-association"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-rio-puerco-wwtp",
+  "name": "Rio Puerco Wastewater Treatment Plant (Route 66 Casino; a tribal enterprise of the Pueblo of Laguna)",
+  "short_name": "Rio Puerco WWTP (Route 66 Casino)",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0030686",
+  "npdes_permits": [
+   "NM0030686"
+  ],
+  "receiving_waters": [
+   "UNNAMED ARROYA TO RIO PUERCO"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "A permit on tribal land, where EPA (Region 6), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Albuquerque"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030686 Rio Puerco Wwtp/Route 66 Casino. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The applicant in EPA's 2021 fact sheet is Laguna Development Corporation, the Pueblo of Laguna's enterprise, and the plant lies on the Pueblo's land at Interstate 40 exit 140, discharging by an unnamed arroyo to the Rio Puerco; EPA types it privately owned. Filed as tribal (a tribal enterprise).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-rio-puerco-wwtp"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-ruidoso-ruidoso-downs",
+  "name": "Village of Ruidoso and City of Ruidoso Downs (joint plant)",
+  "short_name": "Ruidoso and Ruidoso Downs",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029165",
+  "npdes_permits": [
+   "NM0029165"
+  ],
+  "receiving_waters": [
+   "SEG 2-208 PECOS RIVER BASIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Ruidoso",
+   "Ruidoso and City of Ruidoso Downs"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029165 Ruidoso-Ruidoso Downs WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The regional plant the Village of Ruidoso and the City of Ruidoso Downs share; EPA records it as \"RUIDOSO-RUIDOSO DOWNS WWTP-LIN\".",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-ruidoso-ruidoso-downs",
+   "nm-nm0029165"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-salem-wwtp",
+  "name": "Salem Wastewater Treatment Plant",
+  "short_name": "Salem Wastewater Treatment Plant",
+  "legal_form": null,
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030457",
+  "npdes_permits": [
+   "NM0030457"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Salem"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030457 Salem Wastewater Treat. Plt.. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the plant's name as the permittee and types it a municipal or water district; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-salem-wwtp"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-sierra-county-regional-wwtp",
+  "name": "Sierra County Regional Wastewater Treatment Plant",
+  "short_name": "Sierra County Regional WWTP",
+  "legal_form": null,
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030864",
+  "npdes_permits": [
+   "NM0030864"
+  ],
+  "receiving_waters": [
+   "CUCHILLO NEGRO CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Truth Or Consequences"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030864 Sierra County Regional WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the plant's name as the permittee; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-sierra-county-regional-wwtp"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-tesuque-casino-wwtp",
+  "name": "Tesuque Casino Wastewater Treatment Plant",
+  "short_name": "Tesuque Casino Wastewater Treatment Plant",
+  "legal_form": "tribal",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0031224",
+  "npdes_permits": [
+   "NM0031224"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE BASIN, RIO TESUQUE",
+   "RIO TESUQUE"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "A permit on tribal land, where EPA (Region 6), not the state, administers the Clean Water Act permit program and New Mexico's notice rule does not apply: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No public notice duty was found.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Tesuque"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0031224 Tesuque Casino Wastewater Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA's collection-system table types the owner a tribal government (its facility table: privately owned); the casino is on the Pueblo of Tesuque's land.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-tesuque-casino-wwtp"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-town-of-bernalillo",
+  "name": "Town of Bernalillo",
+  "short_name": "Town of Bernalillo",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0023485",
+  "npdes_permits": [
+   "NM0023485"
+  ],
+  "receiving_waters": [
+   "SEGMENT 2-105 OF THE RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Bernalillo"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0023485 Town of Bernalillo. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the owner as \"BERNALILLO, CITY OF\"; its facility and collection-system tables name the Town.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-town-of-bernalillo"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-town-of-red-river",
+  "name": "Town of Red River",
+  "short_name": "Town of Red River",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024899",
+  "npdes_permits": [
+   "NM0024899"
+  ],
+  "receiving_waters": [
+   "RED RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Red River",
+   "Taos"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024899 Town of Red River. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-town-of-red-river"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-town-of-silver-city",
+  "name": "Town of Silver City",
+  "short_name": "Town of Silver City",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020109",
+  "npdes_permits": [
+   "NM0020109"
+  ],
+  "receiving_waters": [
+   "SAN VINCENTE ARROYO"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Grant County",
+   "Silver City"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020109 Silver City, Town of WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-town-of-silver-city",
+   "nm-nm0020109"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-town-of-springer",
+  "name": "Town of Springer",
+  "short_name": "Town of Springer",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0030295",
+  "npdes_permits": [
+   "NM0030295"
+  ],
+  "receiving_waters": [
+   "CIMARRON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Springer"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030295 Springer WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the owner as \"SPRINGER, CITY OF\".",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-town-of-springer"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-town-of-taos",
+  "name": "Town of Taos",
+  "short_name": "Town of Taos",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024066",
+  "npdes_permits": [
+   "NM0024066"
+  ],
+  "receiving_waters": [
+   "ARROYO DE LA GUERA RIO PUEBLO DE TA"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Rancho de Taos",
+   "Taos"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024066 Town of Taos WWTP. EPA's overflow tables (2026-11-04 extract): 2 report(s) placed in New Mexico, 0 with evidence the discharge reached a water.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-town-of-taos",
+   "nm-nm0024066"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-usbr-cutter-lateral",
+  "name": "U.S. Bureau of Reclamation, Cutter Lateral Water Treatment Plant (Navajo-Gallup Water Supply Project)",
+  "short_name": "Cutter Lateral Water Treatment Plant",
+  "legal_form": "federal facility",
+  "state": "NM",
+  "kind": "plant",
+  "npdes_permit": "NM0031194",
+  "npdes_permits": [
+   "NM0031194"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Farmington"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0031194 Cutter Lateral Water Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-04 extract). A drinking-water plant of the Navajo-Gallup Water Supply Project (EPA lists a sewage code for it and types it privately owned). The permit application names the Bureau of Reclamation (EPA's 2018 fact sheet); NMED's 2023 certification notice names the Navajo Tribal Utility Authority, which with the Navajo Nation has operated the lateral since June 2024 (Reclamation's project page). Whether the permit was reissued to the Authority was not confirmed.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-usbr-cutter-lateral"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-angel-fire",
+  "name": "Village of Angel Fire",
+  "short_name": "Village of Angel Fire",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030503",
+  "npdes_permits": [
+   "NM0030503"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Angel Fire"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030503 The Village of Angelfire, WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-angel-fire"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-bosque-farms",
+  "name": "Village of Bosque Farms",
+  "short_name": "Village of Bosque Farms",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030279",
+  "npdes_permits": [
+   "NM0030279"
+  ],
+  "receiving_waters": [
+   "RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Bosque Farms"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0030279 Bosque Farms, Village of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-bosque-farms"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-chama",
+  "name": "Village of Chama",
+  "short_name": "Village of Chama",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0027731",
+  "npdes_permits": [
+   "NM0027731"
+  ],
+  "receiving_waters": [
+   "RIO CHAMITA/RIO CHAMA"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Chama"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0027731 Village of Chama. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-chama"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-cimarron",
+  "name": "Village of Cimarron",
+  "short_name": "Village of Cimarron",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0031038",
+  "npdes_permits": [
+   "NM0031038"
+  ],
+  "receiving_waters": [
+   "PONIL CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Cimarron"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0031038 Cimarron, Village of WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-cimarron"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-cloudcroft",
+  "name": "Village of Cloudcroft",
+  "short_name": "Village of Cloudcroft",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0023370",
+  "npdes_permits": [
+   "NM0023370"
+  ],
+  "receiving_waters": [
+   "DRY CREEK BED"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Cloudcroft"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0023370 Cloudcroft, Village of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-cloudcroft"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-cuba",
+  "name": "Village of Cuba",
+  "short_name": "Village of Cuba",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024848",
+  "npdes_permits": [
+   "NM0024848"
+  ],
+  "receiving_waters": [
+   "RIO PUERCO/MIDDLE RIO GRANDE_20.6.4"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Cuba"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0024848 Cuba, Village of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-cuba"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-fort-sumner",
+  "name": "Village of Fort Sumner",
+  "short_name": "Village of Fort Sumner",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0023477",
+  "npdes_permits": [
+   "NM0023477"
+  ],
+  "receiving_waters": [
+   "PECOS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Sumner"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0023477 Fort Sumner WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract). EPA records the owner as \"FORT SUMNER, TOWN OF\".",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-fort-sumner"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-hatch",
+  "name": "Village of Hatch",
+  "short_name": "Village of Hatch",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020010",
+  "npdes_permits": [
+   "NM0020010"
+  ],
+  "receiving_waters": [
+   "HATCH DRAIN/RIO GRANDE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Dona Ana County",
+   "Hatch"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020010 Hatch, Village of, WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-hatch"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-jemez-springs",
+  "name": "Village of Jemez Springs",
+  "short_name": "Village of Jemez Springs",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0028011",
+  "npdes_permits": [
+   "NM0028011"
+  ],
+  "receiving_waters": [
+   "JEMEZ RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Jemez Springs"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0028011 Jemez Springs, Village of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-jemez-springs"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-los-lunas",
+  "name": "Village of Los Lunas",
+  "short_name": "Village of Los Lunas",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020303",
+  "npdes_permits": [
+   "NM0020303"
+  ],
+  "receiving_waters": [
+   "SEGMENT 2-105 OF THE RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Los Lunas"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0020303 Los Lunas WWTP. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-los-lunas",
+   "nm-nm0020303"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-maxwell",
+  "name": "Village of Maxwell",
+  "short_name": "Village of Maxwell",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029149",
+  "npdes_permits": [
+   "NM0029149"
+  ],
+  "receiving_waters": [
+   "CANADIAN RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Maxwell"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029149 Village of Maxwell. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-maxwell"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-pecos",
+  "name": "Village of Pecos",
+  "short_name": "Village of Pecos",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029041",
+  "npdes_permits": [
+   "NM0029041"
+  ],
+  "receiving_waters": [
+   "PECOS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Pecos",
+   "San Miguel County"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0029041 Village of Pecos. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-pecos"
+  ],
+  "source_areas": [
+   "nm"
+  ]
+ },
+ {
+  "id": "nm-village-of-taos-ski-valley",
+  "name": "Village of Taos Ski Valley",
+  "short_name": "Village of Taos Ski Valley",
+  "legal_form": "town",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022101",
+  "npdes_permits": [
+   "NM0022101"
+  ],
+  "receiving_waters": [
+   "RIO HONDO/RIO GRANDE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "EPA Region 6 issues New Mexico's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). 20.6.2.1203 NMAC also requires the person in charge of a facility to tell NMED orally within 24 hours of a discharge that may with reasonable probability injure health or property, in writing within a week, with a corrective-action report in 15 days; NMED publishes no list of these notices. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Taos Ski Valley"
+  ],
+  "notes": "EPA ICIS-NPDES: NM0022101 Taos Ski Valley, Village of. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "nm-village-of-taos-ski-valley",
+   "nm-nm0022101"
+  ],
+  "source_areas": [
+   "nm"
+  ]
  }
 ]

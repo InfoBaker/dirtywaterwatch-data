@@ -90,7 +90,7 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
 | `waters` | `matcher` (`fn(text, rec, row, ctx)`), its options, and `no_water` patterns |
 | `dedupe` | `repeats: suffix` (copies kept as `id~2`, `id~3`, `duplicate_of` the first, in `order`) or `first`; `ignore` |
 | `post` | `fn(records, ctx)` over all the records of a run (rules across records or sources) |
-| `history` | `keep_missing` (default true), `missing_key`, `revisions`, `track` (`[fields]`, or `{field: {key, label, from, skip_null}}`), `supersede` (lists of templates) |
+| `history` | `keep_missing` (default true), `missing_key`, `revisions`, `track` (`[fields]`, or `{field: {key, label, from, skip_null}}`), `supersede` (lists of templates), `confirm_while_listed` (an advisory layer that shows only what is in effect: each fetch that finds a record writes `raw._last_seen_in_source`, which the status build counts as a confirmation, and the first fetch that no longer finds it writes `raw._unlisted_since`, where the status build ends the advisory) |
 | `raw_notes` | `{_name: value spec}`: notes written on each record (decoded codes, labels) |
 | `decoded_times` | `{fields, parse}`: the source's date fields as read, on each record (`raw._decoded_times`) |
 | `min_rows_ratio`, `max_error_share` | the failure thresholds (0.5 and 0.2) |

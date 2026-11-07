@@ -354,9 +354,12 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
     prev = {r["event_id"]: r for r in prev_records or [] if isinstance(r, dict) and r.get("event_id")}
     n = Counter()
     ign = set((block.get("dedupe") or {}).get("ignore") or [])
+    listed = bool(h.get("confirm_while_listed"))
     for r in records:
         p = prev.get(r["event_id"])
         praw = (p or {}).get("raw") or {}
+        if listed:   # history.confirm_while_listed: this fetch found the record in the source (an advisory still shown)
+            r["raw"]["_last_seen_in_source"] = fetched_at
         r["raw"]["_first_seen_at"] = praw.get("_first_seen_at") or (p or {}).get("fetched_at") or fetched_at
         if not p:
             n["new"] += 1
@@ -402,6 +405,8 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
                 continue
             p = {**p, "raw": dict(p.get("raw") or {})}
             p["raw"][mkey] = p["raw"].get(mkey) or fetched_at
+            if listed:   # the first fetch that no longer found it: the status build ends the advisory there
+                p["raw"]["_unlisted_since"] = p["raw"].get("_unlisted_since") or p["raw"][mkey]
             succ = None
             for keys, idx in index:
                 k = _supersede_keys(p, keys)

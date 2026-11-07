@@ -1124,7 +1124,7 @@
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
    "noun": "Data feed",
-   "note": "EPA's sewer overflow and bypass event tables (NPDES electronic reporting): Arizona's AZPDES permittees file their 24-hour and five-day reports in ADEQ's myDEQ and EPA publishes them (288 Arizona reports from 42 permits, September 2019 to 28 October 2026, in the 2026-11-04 extract; a median 3 days from start to receipt), and the Navajo Nation's reports under EPA's own permits (52 located in Arizona, February 2024 to October 2026). No report from Pima County's permits. (research/az/report.md §2.2)",
+   "note": "EPA's sewer overflow and bypass event tables (NPDES electronic reporting): Arizona's AZPDES permittees file their 24-hour and five-day reports in ADEQ's myDEQ and EPA publishes them (288 Arizona reports from 42 permits, September 2019 to 28 October 2026, in the 2026-11-04 extract; a median 3 days from start to receipt), and the Navajo Nation's reports under EPA's own permits (50 located in Arizona, February 2024 to October 2026). No report from Pima County's permits. (research/az/report.md §2.2)",
    "sources": [
     "fed-echo-sewer-overflow-bypass-events",
     "az-epa-sobe"
@@ -1429,7 +1429,7 @@
    "sources": [
     "az-epa-sobe"
    ],
-   "note": "Navajo Tribal Utility Authority (Chinle, Kayenta, Tuba City, Window Rock, Ganado and Twin Arrows plants)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 52 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "note": "Navajo Tribal Utility Authority (Chinle, Kayenta, Tuba City, Window Rock, Ganado and Twin Arrows plants)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 50 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
    "barrier": null
   },
   {

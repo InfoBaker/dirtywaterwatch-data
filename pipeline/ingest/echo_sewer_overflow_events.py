@@ -1,6 +1,6 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
 Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona), South Dakota,
-Mississippi, Nebraska and Alaska.
+Mississippi, Nebraska, Alaska and New Mexico (with the Navajo Nation's reports located in New Mexico).
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -152,8 +152,9 @@ section 2.2; not live until data/rules.json says so)
     Utah, so the prefix names no state. The state is the one the event's own point lies in (navajo_point_state: west of
     the Arizona-New Mexico line at 109.045 W and south of the Arizona-Utah line at 37 N is Arizona; the Four Corners
     boundaries), written in raw.state with raw.state_basis as for DC's rows in Maryland; a point outside STATES (New
-    Mexico, Utah) or no point is skipped as before. 2026-11-04 extract: 56 NN reports, 52 in Arizona (Window Rock,
-    Kayenta, Tuba City, Twin Arrows, Chinle), 4 in New Mexico (Shiprock, one of Window Rock's). Clock (PERMIT_TZ): the
+    Mexico, Utah) or no point is skipped as before. 2026-11-04 extract: 56 NN reports, 50 in Arizona (Window Rock,
+    Kayenta, Tuba City, Twin Arrows, Chinle), 6 in New Mexico (Shiprock 3, Window Rock's 3; near the line the Census
+    outlines decide: navajo_point_place, module docstring New Mexico). Clock (PERMIT_TZ): the
     Navajo Nation keeps daylight saving time, unlike the rest of Arizona, so NN times are read as America/Denver (the
     tz database's backward link Navajo -> America/Denver); the Hopi reservation inside it keeps Arizona time, and its
     permits (AZ...) stay America/Phoenix. An owner question: the decision gives the permit's state's zone.
@@ -338,6 +339,39 @@ Alaska (permits AK...; research/ak/report.md; not live until data/rules.json say
   main'), and no point is shared by many reports (Ketchikan's two bypasses give the pump station's), so AK is in
   neither FREE_TEXT_STATES nor REPEATED_POINT_STATES.
 
+New Mexico (permits NM..., and the Navajo Nation's NN... where the event's point is in New Mexico; research/nm/report.md
+section 2.2; not live until data/rules.json says so)
+  EPA Region 6 issues New Mexico's permits, so their 24-hour and five-day noncompliance reports go to EPA, and those filed
+  electronically reach this dataset. Few do (2026-11-04 extract): 2 reports under New Mexico permits, both the Town of
+  Taos's (NM0024066, 2026-02 and 2026-10), although EPA's collection-system table lists 55 New Mexico permits
+  (Albuquerque, Santa Fe and Las Cruces among them); and 6 Navajo Nation reports whose point lies in New Mexico (3 under
+  the Shiprock plant's NN0020621, 2024-06 to 2025-11, and three under Window Rock's NN0021555, 2026-08; 8 in all).
+  New Mexico's own notice rule (20.6.2.1203 NMAC: an oral report to NMED within 24 hours)
+  leaves no public record. The rules below are keyed on NM (and the NM and NN prefixes), so the other states' records
+  are unchanged:
+  - Navajo Nation permits (NN...): placed by the event's own point as for Arizona (navajo_point_place: east of 109.045 W
+    and south of 37 N is New Mexico, except within NAVAJO_BAND of that meridian, where the Census state outlines decide,
+    since the Arizona-New Mexico line runs up to 430 m west of it; review 2026-11-07 P2-1), with raw.state and
+    raw.state_basis. 2026-11-04 extract: 8 located in New Mexico (Shiprock 3, Window Rock's permit 3: two lift-station
+    reports at Navajo, New Mexico, 48 m east of the line, and a line break east of Fort Defiance). The Nation's
+    clock (PERMIT_TZ, America/Denver) is New Mexico's zone too, so its reports and the state's read alike.
+  - Time zone (docs/decisions.md, National expansion item 6): STATE_TZ gives America/Denver (Mountain time with
+    daylight saving time). Known problem: one Taos report (2026-02-19) gives 18:10 to 18:30 while its description says
+    "from 1:10pm to 1:30pm", five hours apart; times are read as filed (that report is dropped: no water).
+  - A longitude filed without its minus sign (SIGN_REPAIR_PREFIXES: NM, NN): one Shiprock report gives 108.666488 E. A
+    positive longitude whose negative lies, with the latitude, in the Four Corners states' box (SIGN_REPAIR_BOX) is
+    read as west, raw.reported_longitude keeping what was filed and raw.coord_note saying so, before the state is read
+    from it; any other positive longitude is kept as filed.
+  - Receiving-water entries that name only the plant's own lagoon ('by passed into emergency lagoon.') are no water
+    (STATE_NO_WATER["NM"] is Arizona's pattern for the same Navajo Nation habit). A bypass whose receiving-water field
+    names the San Juan River is kept on that river although its description says the flow went to the back-up lagoon:
+    the permittee named the river (the safe side); raw.kept_note says so (LAGOON_NOTE_STATES).
+  - Free text: descriptions give street intersections ('on <street> and <street> Intersection'): the NM rows
+    (FREE_TEXT_STATES) get the Illinois scrub. Points are the event's own; the Shiprock plant's two bypasses give the
+    plant's point, which bypasses keep.
+  - A Navajo Nation report dropped for New Mexico or Arizona carries "state" in the dropped file, so the state scripts
+    count it under the state it was placed in.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -369,10 +403,10 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
-            "NE": "America/Chicago", "AK": "America/Anchorage"}
+            "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
@@ -381,7 +415,7 @@ POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-t
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
@@ -418,6 +452,14 @@ PLANTS_FILE = DATA_DIR / "outfalls-plants-us.json"
 POINT_PLACED_PREFIXES = {"NN"}
 # permit prefixes with a clock of their own (module docstring, Navajo Nation): before STATE_TZ
 PERMIT_TZ = {"NN": "America/Denver"}
+# permit prefixes whose positive longitude is read as west when its negative lies in SIGN_REPAIR_BOX (module docstring,
+# New Mexico): [lon_min, lat_min, lon_max, lat_max] around Arizona, New Mexico, Utah and Colorado
+SIGN_REPAIR_PREFIXES = {"NM", "NN"}
+SIGN_REPAIR_BOX = (-114.9, 31.3, -102.0, 42.0)
+# states whose kept reports that name a receiving water but describe the flow going to the plant's lagoon carry a note
+# saying why they are shown (module docstring, New Mexico; review 2026-11-07 P2-3)
+LAGOON_NOTE_STATES = {"NM"}
+LAGOON_TEXT = re.compile(r"\blagoons?\b", re.I)
 AUTHORITY = "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)"
 SUMMARY_URL = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 
@@ -447,6 +489,8 @@ STATE_NO_WATER = {"GA": re.compile(r"^\s*((?:n/?a\s+)?dry\s*land(?:\s+spill)?|n[
                                    r"(?:[\w.' -]+\s)?cell\s*#?\s*\d+\b.*|excavated hole\b.*|.*\bno ?water ?body\b.*|"
                                    r"water (?:is|was) discharged (?:out )?(?:into|onto) a field|.*\bnever (?:entered|reached)\b.*)"
                                    r"\s*\.?\s*$", re.I)}
+# New Mexico (the Navajo Nation's reports placed there): Arizona's wording for the plant's own lagoon
+STATE_NO_WATER["NM"] = STATE_NO_WATER["AZ"]
 # receiving-water texts that name no water but do not deny one either: read as no name given, so the other rules
 # decide (South Dakota: "NA, all water was filtered before discharged." on a bypass that was discharged; review
 # 2026-11-07 P2-4)
@@ -603,20 +647,75 @@ def normalise_az_water(w: str) -> str | None:
 NAVAJO_BASIS = ("a Navajo Nation permit (NN...), which spans Arizona, New Mexico and Utah: the state is the one the "
                 "event's own point lies in, west of the Arizona-New Mexico line (109.045 W) and south of the Arizona-Utah "
                 "line (37 N) being Arizona (the Four Corners boundaries)")
+# the Arizona-New Mexico line is not the meridian: in the Census outlines it runs from 109.0452 W at the Four Corners
+# to 109.0498 W at 31.5 N (review 2026-11-07 P2-1), so a point within NAVAJO_BAND of the meridian is placed by the Census
+# Bureau's 1:500,000 state outlines (waters_extra.states_zip(), read by waters_from_nhd.read_state_outlines)
+NAVAJO_BAND = (-109.056, -109.040)
+NAVAJO_OUTLINE_BASIS = ("a Navajo Nation permit (NN...), which spans Arizona, New Mexico and Utah: the state is the one "
+                        "the event's own point lies in; near the Arizona-New Mexico line, whose course runs up to 430 m "
+                        "west of the 109.045 W meridian, the point is placed by the Census Bureau's 1:500,000 state "
+                        "outlines (cb_2023_us_state_500k)")
+NAVAJO_FALLBACK_BASIS = NAVAJO_BASIS + ("; the Census state outlines could not be read, so a point within 1.5 km of the "
+                                        "meridian was placed by the meridian")
+_NAVAJO_OUTLINES: dict | None = None
 
 
-def navajo_point_state(lat, lon) -> str | None:
-    """The state a Navajo Nation report's point lies in (AZ, NM or UT), from the Four Corners boundaries; None without
-    a point."""
+def repair_sign(ev: dict) -> tuple[dict, str | None]:
+    """For SIGN_REPAIR_PREFIXES (module docstring, New Mexico): a positive longitude whose negative lies, with the
+    latitude, in SIGN_REPAIR_BOX is read as west. (a copy of the row, the note), or (the row, None) unchanged."""
+    try:
+        la, lo = float(ev.get("latitude_measure")), float(ev.get("longitude_measure"))
+    except (TypeError, ValueError):
+        return ev, None
+    x0, y0, x1, y1 = SIGN_REPAIR_BOX
+    if lo <= 0 or not (x0 <= -lo <= x1 and y0 <= la <= y1):
+        return ev, None
+    out = dict(ev)
+    out["longitude_measure"] = "-" + str(ev["longitude_measure"]).strip().lstrip("+")   # '+108.6' too
+    return out, (f"longitude filed as {str(ev['longitude_measure']).strip()} (east of Greenwich), read as west: the "
+                 "minus sign was missing, and only so does the point lie in the Four Corners states")
+
+
+def navajo_outlines() -> dict:
+    """{state: shapely geometry} for AZ, NM, UT and CO from the Census state outlines; {} when they cannot be read."""
+    global _NAVAJO_OUTLINES
+    if _NAVAJO_OUTLINES is None:
+        try:
+            from ingest import waters_extra as WX, waters_from_nhd as WFN
+            # downloaded once when absent, except under the tests (a saved copy or the meridian rule there)
+            zp = WX.states_zip(download="pytest" not in sys.modules)
+            _NAVAJO_OUTLINES = WFN.read_state_outlines({"AZ", "NM", "UT", "CO"}, zip_path=zp)
+        except Exception:   # noqa: BLE001 (no file and no network: the meridian rule, said in the basis)
+            _NAVAJO_OUTLINES = {}
+    return _NAVAJO_OUTLINES
+
+
+def navajo_point_place(lat, lon) -> tuple[str | None, str | None]:
+    """(the state a Navajo Nation report's point lies in, AZ, NM, UT or CO, and the basis); (None, None) without a
+    point. Away from the Arizona-New Mexico line the Four Corners meridian and parallel decide; within NAVAJO_BAND of the
+    meridian the Census state outlines do (the nearest outline when the point is in none)."""
     try:
         la, lo = float(lat), float(lon)
     except (TypeError, ValueError):
-        return None
+        return None, None
     if la == 0 and lo == 0:
-        return None
-    if lo >= -109.045:
-        return "NM" if la < 37 else "CO"
-    return "AZ" if la < 37 else "UT"
+        return None, None
+    by_meridian = ("NM" if la < 37 else "CO") if lo >= -109.045 else ("AZ" if la < 37 else "UT")
+    if not (NAVAJO_BAND[0] <= lo < NAVAJO_BAND[1]):
+        return by_meridian, NAVAJO_BASIS
+    shapes = navajo_outlines()
+    if not shapes:
+        return by_meridian, NAVAJO_FALLBACK_BASIS
+    from shapely.geometry import Point
+    pt = Point(lo, la)
+    inside = [st for st, g in sorted(shapes.items()) if g.covers(pt)]
+    st = inside[0] if inside else min(sorted(shapes), key=lambda k: shapes[k].distance(pt))
+    return st, NAVAJO_OUTLINE_BASIS
+
+
+def navajo_point_state(lat, lon) -> str | None:
+    """The state a Navajo Nation report's point lies in (navajo_point_place); None without a point."""
+    return navajo_point_place(lat, lon)[0]
 
 
 TABLES = {
@@ -1149,9 +1248,13 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
+        sign_note = None
+        if permit[:2] in SIGN_REPAIR_PREFIXES:   # a longitude without its minus sign (module docstring, New Mexico)
+            ev, sign_note = repair_sign(ev)
         point_state = None
         if state in POINT_PLACED_PREFIXES:   # Navajo Nation permits: the state from the event's point
-            state = point_state = navajo_point_state(ev.get("latitude_measure"), ev.get("longitude_measure"))
+            state, point_basis = navajo_point_place(ev.get("latitude_measure"), ev.get("longitude_measure"))
+            point_state = state
         if state not in STATES:
             continue
         k = ev["sewer_overflow_bypass_event_key"]
@@ -1175,6 +1278,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                             "end": ev.get("sewer_overflow_bypass_end_datetime") or None,
                             "received": ev.get("program_report_received_date") or None,
                             "description": ev.get("sewer_overflow_bypass_description_text")})
+            if point_state:   # a Navajo Nation report: the state it was placed in (module docstring, New Mexico)
+                dropped[-1]["state"] = point_state
             continue
 
         etype = TYPE_MAP.get(t_codes[0], "unknown") if t_codes else "unknown"
@@ -1278,7 +1383,12 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["receiving_water_wbid_source"] = ("ADEQ waterbody identifiers (WBID layers on ArcGIS Online, "
                                                   "data/reference/az-adeq-wbids.json)")
         if point_state:   # a Navajo Nation permit: the state from the point
-            raw["state"], raw["state_basis"] = point_state, NAVAJO_BASIS
+            raw["state"], raw["state_basis"] = point_state, point_basis
+        if state in LAGOON_NOTE_STATES and real_w and LAGOON_TEXT.search(ev.get("sewer_overflow_bypass_description_text") or ""):
+            raw["kept_note"] = ("the description says the flow went to the plant's lagoon; shown on "
+                                + "; ".join(real_w) + " because the report names it as the receiving water")
+        if sign_note:   # module docstring, New Mexico
+            raw["reported_longitude"], raw["coord_note"] = str(ev["longitude_measure"])[1:], sign_note
         if dc_state:   # placement state differs from the permit's; the operator stays DC Water
             raw["state"], raw["state_basis"] = dc_state, dc_basis
         if extreme:
