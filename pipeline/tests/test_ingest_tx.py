@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 FIX = Path(__file__).resolve().parent / "fixtures"
 FETCHED = "2026-11-07T13:00:00Z"
 PERSONAL = ["Fixturename", "Jane", "1234 Sample", "4321 Fixture", "4321", "555-0142", "512-555", "jfixture",
-            "example.com", "CN600000001", "Caller", "limed"]
+            "example.com", "CN600000001", "Caller", "limed", "1967", "Lot 108", "Apt #2"]
 
 
 def tceq(prev=()):
@@ -44,7 +44,7 @@ def test_blocks_validate():
 
 def test_every_row_is_a_record_with_dates_only_and_the_tables_own_ids():
     recs, stats = tceq()
-    assert stats["rows"] == 10 and stats["records_written"] == 10
+    assert stats["rows"] == 12 and stats["records_written"] == 11 and "900011" not in recs   # 2022: before the cut
     assert "900002~2" in recs and recs["900002~2"]["duplicate_of"] == recs["900002"]["event_id"]
     r = recs["900002"]
     assert r["event_type"] == "sso" and r["status"] == "ended" and r["time_precision"] == "day"
@@ -60,9 +60,9 @@ def test_every_row_is_a_record_with_dates_only_and_the_tables_own_ids():
 
 def test_the_zone_follows_the_county():
     recs, _ = tceq()
-    assert recs["900003"]["raw"]["timezone"] == "America/Denver"          # El Paso County: Mountain time
+    assert recs["900003"]["raw"]["time_zone"] == "America/Denver" and recs["900003"]["started_at"] == "2026-07-20T00:00:00-06:00"          # El Paso County: Mountain time
     assert recs["900003"]["raw"]["timezone_note"].startswith("Mountain time (El Paso County")
-    assert recs["900001"]["raw"]["timezone"] == "America/Chicago"
+    assert recs["900001"]["raw"]["time_zone"] == "America/Chicago" and recs["900001"]["started_at"] == "2026-08-03T00:00:00-05:00"
     from ingest import tx_transforms as T
     assert T.zone_of("HUDSPETH") == "America/Denver" and T.zone_of("CULBERSON") == "America/Chicago"
 
@@ -114,7 +114,7 @@ def test_no_personal_field_or_string_reaches_the_records():
     assert not {"customer_number", "incident_comment", "incident_action"} & set(r)
     assert "[house number removed]" in r["incident_description"] and "[phone removed]" in r["incident_description"]
     assert "[email removed]" in r["incident_description"] and "[name removed]" in r["incident_description"]
-    assert "[house number removed] FIXTURE DRIVE" in r["receiving_water_body"]
+    assert "[house number removed] FIXTURE DRIVE" in recs["900006"]["waterbody_text"]
     assert "[house number removed] Fixture Drive" in recs["900006"]["outfall_name"]
     # an entity filed under a person's name: gone from discharger_name and from raw.row
     p = recs["900009"]
@@ -133,12 +133,12 @@ def test_if_changed_keeps_the_last_read_while_the_table_is_unchanged(tmp_path, m
     recs, _ = tceq()
     path = tmp_path / "tx.json"
     path.write_text(json.dumps({"ok": True, "records": list(recs.values()),
-                                "meta": {"table_version": "1790274119", "rows": 10}}))
+                                "meta": {"table_version": "1790274119", "rows": 11}}))
     _, block = R.load_source("tx-tceq-sso-opendata")
     monkeypatch.setattr(socrata, "current_version", lambda b, s: "1790274119")
     line = R.keep_unchanged("tx-tceq-sso-opendata", block, path, "2026-11-07T14:00:00Z")
     doc = json.loads(path.read_text())
-    assert "unchanged" in line and doc["ok"] and doc["count"] == 10 and doc["meta"]["checked_at"] == "2026-11-07T14:00:00Z"
+    assert "unchanged" in line and doc["ok"] and doc["count"] == 11 and doc["meta"]["checked_at"] == "2026-11-07T14:00:00Z"
     assert all(r["fetched_at"] == FETCHED for r in doc["records"])       # the records' own fetch time stays
     monkeypatch.setattr(socrata, "current_version", lambda b, s: "1800000000")
     assert R.keep_unchanged("tx-tceq-sso-opendata", block, path, "2026-11-07T15:00:00Z") is None
@@ -216,17 +216,23 @@ def test_state_text_is_in_the_page_shape():
     assert "56,545" in t and "Mountain time in El Paso and Hudspeth" in t
 
 
-def test_missing_waters_list_names_waters_only():
+def test_missing_waters_list_names_waters_only_by_county_with_towns():
     d = json.loads((ROOT / "research" / "tx" / "receiving-waters-missing.json").read_text())
     nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["TX"]["waters"]
     have = {re.sub(r"[^a-z0-9]", "", n.lower()) for w in nat for n in [w["name"], w["key"]]}
     assert d["state"] == "TX" and d["waters"] == len(d["rows"]) > 500
+    seen = Counter((r["name"], r["county"]) for r in d["rows"])
+    assert set(seen.values()) == {1}
     for r in d["rows"]:
         assert re.sub(r"[^a-z0-9]", "", r["name"].lower()) not in have
-        assert not re.search(r"\d", r["name"]) and not re.search(r"\d", " ".join(r["spellings"]))
-        assert "removed]" not in json.dumps(r)
+        assert not re.search(r"\\d", r["name"]) and not re.search(r"\\d", " ".join(r["spellings"]))
+        assert "removed]" not in json.dumps(r) and r["county"]
     names = {r["name"] for r in d["rows"]}
     assert "Leon Creek" in names and "Unnamed Creek" not in names and "Not Provided" not in names
+    assert "Colorado" not in names                                         # TCEQ's basin label
+    poc = [r for r in d["rows"] if r["name"] == "Post Oak Creek"]
+    grayson = next(r for r in poc if r["county"] == "Grayson County")
+    assert grayson["towns"][0] == "Sherman" and grayson["gnis_name_of"] and len(poc) >= 2
 
 
 @pytest.mark.parametrize("text", ["Not Provided", "NOT PROVIDEDD", "NONE LISTED", "None listed in report", "n/a",
@@ -269,3 +275,85 @@ def test_the_rows_once_named_for_people_carry_their_facility():
     assert not [r["name"] for r in rows if A.owner_person(r["name"]) and r.get("npdes_permits")
                 and not r["name"].startswith("Holder of permit") and r["id"].startswith("tx-") and
                 not r["id"].startswith("tx-rn")]
+
+
+def test_cause_slash_address_and_unit_numbers_are_cut_but_roads_and_segments_stay():
+    recs, _ = tceq()
+    r = recs["900010"]
+    assert r["outfall_name"] == "Line Break/ [house number removed] Sampleton Ave."
+    d = r["raw"]["row"]["incident_description"]
+    assert "Lot [house number removed]" in d and "Apt [house number removed]" in d and "1967" not in d
+    assert "FM 1960" in d and "2202 Arroyo Colorado Above Tidal" in d
+    for t, want in (("Grease/ 1967 Columbus Ave", "Grease/ [house number removed] Columbus Ave"),
+                    ("1967 Columbus Ave.", "[house number removed] Columbus Ave."),
+                    ("Manhole/1209 N Main St", "Manhole/ [house number removed] N Main St"),
+                    ("Manhole/ 12345 FM 1960 Rd", "Manhole/ [house number removed] FM 1960 Rd"),
+                    ("1007 OF THE SAN JACINTO RIVER BASIN", "1007 OF THE SAN JACINTO RIVER BASIN"),
+                    ("2513 Rosebud Ct. into Walnut Creek", "[house number removed] Rosebud Ct. into Walnut Creek"),
+                    ("Lift Station #6 on Moore Lane", "Lift Station #6 on Moore Lane")):
+        assert F.scrub_strict(t) == want, t
+
+
+HOUSE = re.compile(r"(?<![\\w.,:#-])\\d{2,6}[A-Za-z]?\\s{1,2}(?:[NSEW]\\.?\\s{1,2})?(?:[A-Za-z][\\w'.-]*\\s{1,2}){1,3}"
+                   r"(?:street|st|road|rd|avenue|ave|lane|ln|drive|dr|court|ct|circle|cir|boulevard|blvd|trail|trl|"
+                   r"parkway|pkwy|cove|cv)\\b", re.I)
+
+
+def test_no_record_built_from_the_saved_read_keeps_a_house_number_before_a_street_word():
+    saved = sorted(p for p in (ROOT / "data" / "raw" / "tx-tceq-sso-opendata").glob("2026*Z.json"))
+    if not saved:
+        pytest.skip("the saved read is not on this machine (data/raw is not in git)")
+    _, block = R.load_source("tx-tceq-sso-opendata")
+    rows = socrata.parse(block, saved[-1].read_bytes())
+    recs, _ = R.build("tx-tceq-sso-opendata", block, rows, FETCHED, (), None)
+    bad = [m.group(0) for r in recs for t in [r.get("outfall_name") or "", r.get("waterbody_text") or "",
+                                               *map(str, (r["raw"].get("row") or {}).values())]
+           for m in HOUSE.finditer(t)]
+    assert not bad, bad[:10]
+
+
+def test_dates_are_the_countys_midnight_and_a_day_ends_there():
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    from build import status as S
+    recs, _ = tceq()
+    ep = recs["900003"]
+    assert S.event_zone(ep) == ZoneInfo("America/Denver") and ep["reported_at"] == "2026-07-21T00:00:00-06:00"
+    hou = recs["900001"]
+    end = S.end_of_local_day(S.parse_time(hou["ended_at"]), S.event_zone(hou))
+    assert end == datetime(2026, 8, 4, tzinfo=ZoneInfo("America/Chicago"))
+
+
+def test_a_basin_name_is_not_a_water():
+    recs, _ = tceq()
+    r = recs["900010"]
+    assert r["waterbody_text"] is None and r["raw"]["_water_text_as_given"] == "COLORADO"
+    assert "basin" in r["raw"]["_water_text_why"] and r["raw"]["_tceq_segment"] == "1412"
+
+
+def test_beach_watch_medium_is_the_sites_72_hour_caution():
+    from datetime import UTC, datetime, timedelta
+    from build import status as S
+    recs, _ = beach()
+    med = next(r for r in recs if r["raw"]["_level"] == "Medium")
+    ivs = S.event_intervals(med, "TX", datetime(2026, 10, 29, tzinfo=UTC), None, S.load_rules())
+    assert len(ivs) == 1 and ivs[0]["rule"] == "sample_caution" and ivs[0]["color"] == "yellow"
+    assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72) and ivs[0]["red_rule"] is None
+
+
+def test_a_read_torn_by_a_refresh_is_read_again_or_refused(monkeypatch):
+    _, block = R.load_source("tx-tceq-sso-opendata")
+    versions = iter(["1", "2", "2", "2"])                 # moved during the first read, steady during the second
+    monkeypatch.setattr(socrata, "current_version", lambda b, s: next(versions))
+    reads = []
+    monkeypatch.setattr(socrata, "read_pages", lambda b, s, u: (reads.append(1) or ([[{"incident_number": "1"}]], 1)))
+    monkeypatch.setattr(socrata, "row_count", lambda b, s, u: 1)
+    out = socrata.fetch({**block, "metadata": False}, None)
+    assert len(reads) == 2 and b"incident_number" in out.content
+    monkeypatch.setattr(socrata, "current_version", lambda b, s, it=iter(range(100)): str(next(it)))
+    with pytest.raises(RuntimeError, match="changed during each"):
+        socrata.fetch({**block, "metadata": False}, None)
+    monkeypatch.setattr(socrata, "current_version", lambda b, s: "1")
+    monkeypatch.setattr(socrata, "row_count", lambda b, s, u: 5)
+    with pytest.raises(RuntimeError, match="table counts 5"):
+        socrata.fetch({**block, "metadata": False}, None)

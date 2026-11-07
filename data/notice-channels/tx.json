@@ -5230,6 +5230,26 @@
   },
   {
    "state": "TX",
+   "operator_id": "tx-city-of-arlington",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-arlington-website",
+   "name": "City of Arlington",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "note": "City of Arlington's own pages were not searched individually (one of the ten operators with the most reports).",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "TX",
    "operator_id": "tx-city-of-arp",
    "agency": null,
    "permit": "TX0054194",
@@ -5376,6 +5396,30 @@
     "tx-tceq-sso-opendata"
    ],
    "note": "City of Austin reports each overflow to the TCEQ regional office; TCEQ publishes the reports in its open data, read by the tx-tceq-sso-opendata feed (2531 report(s) in the table read 2026-11-07). As a local government's facility it also notifies local officials and media above the 30 TAC 319.302 thresholds (tx-local-officials-media-notice). (research/tx/report.md §2.1)",
+   "barrier": null
+  },
+  {
+   "state": "TX",
+   "operator_id": "tx-city-of-austin",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-austin-water-news",
+   "name": "City of Austin (Austin Water)",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.austintexas.gov/water/news"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "note": "Austin Water's news list (answered 200 on 2026-11-07) carries releases on large overflows (one of more than 100,000 gallons near E. Howard Lane, September 2026). Watched without records: the overflows reach TCEQ's table. Voluntary beyond the 30 TAC 319.302 media notice.",
    "barrier": null
   },
   {
@@ -5777,6 +5821,26 @@
    ],
    "note": "City of Baytown reports each overflow to the TCEQ regional office; TCEQ publishes the reports in its open data, read by the tx-tceq-sso-opendata feed (1261 report(s) in the table read 2026-11-07). As a local government's facility it also notifies local officials and media above the 30 TAC 319.302 thresholds (tx-local-officials-media-notice). (research/tx/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "TX",
+   "operator_id": "tx-city-of-baytown",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-baytown-website",
+   "name": "City of Baytown",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "note": "City of Baytown's own pages were not searched individually (one of the ten operators with the most reports).",
+   "barrier": "not_verified"
   },
   {
    "state": "TX",
@@ -8530,6 +8594,26 @@
   },
   {
    "state": "TX",
+   "operator_id": "tx-city-of-corpus-christi",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-corpus-christi-website",
+   "name": "City of Corpus Christi",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "note": "City of Corpus Christi's own pages were not searched individually (one of the ten operators with the most reports).",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "TX",
    "operator_id": "tx-city-of-corrigan",
    "agency": null,
    "permit": "TX0133787",
@@ -9001,6 +9085,30 @@
     "tx-tceq-sso-opendata"
    ],
    "note": "City of Dalhart reports each overflow to the TCEQ regional office; TCEQ publishes the reports in its open data, read by the tx-tceq-sso-opendata feed (6 report(s) in the table read 2026-11-07). As a local government's facility it also notifies local officials and media above the 30 TAC 319.302 thresholds (tx-local-officials-media-notice). (research/tx/report.md §2.1)",
+   "barrier": null
+  },
+  {
+   "state": "TX",
+   "operator_id": "tx-city-of-dallas",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-dallas-news",
+   "name": "City of Dallas (Dallas Water Utilities)",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.dallascitynews.net/"
+   ],
+   "method": "html",
+   "legal_basis": "30 TAC 319.302: the owner of a local government's facility notifies local government officials and local media within 24 hours of a spill likely to affect a drinking-water source, of 50,000 gallons or more near one or in a sensitive area, or of \"a spill of 100,000 gallons or more\"; 319.303 sets the precautionary statements",
+   "basis_kind": "law",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Notice to local media",
+   "note": "Dallas posts its overflow bulletins (heavy-rain overflows) and the TCEQ public notification forms it files under 30 TAC 319.302 (dallascityhall.com, govdelivery); the city news site answered 200 on 2026-11-07. Watched without records.",
    "barrier": null
   },
   {
@@ -10677,6 +10785,27 @@
    ],
    "note": "City of Fort Worth reports each overflow to the TCEQ regional office; TCEQ publishes the reports in its open data, read by the tx-tceq-sso-opendata feed (1331 report(s) in the table read 2026-11-07). As a local government's facility it also notifies local officials and media above the 30 TAC 319.302 thresholds (tx-local-officials-media-notice). (research/tx/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "TX",
+   "operator_id": "tx-city-of-fort-worth",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-fort-worth-water-website",
+   "name": "City of Fort Worth",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.fortworthtexas.gov/departments/water"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "unknown",
+   "note": "The water department's site answers 403 to the project user agent (2026-11-07); a search found no public overflow notice page, only the utility's reporting procedure.",
+   "barrier": "bot_wall"
   },
   {
    "state": "TX",
@@ -12862,19 +12991,23 @@
    "id": "tx-city-of-houston-sso-monthly",
    "name": "City of Houston",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "Consent decree, United States and State of Texas v. City of Houston, No. 4:18-cv-03368 (S.D. Tex., 2021): monthly sanitary sewer overflow reports",
+   "urls": [
+    "https://www.houstonpublicworks.org/wastewater-cd"
+   ],
+   "method": "html",
+   "legal_basis": "Consent decree, United States and State of Texas v. City of Houston, No. 4:18-cv-03368 (S.D. Tex., 2021), paragraph 61: a monthly summary of the prior month's sanitary sewer overflows",
    "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "documents",
    "records": false,
-   "note": "Houston Public Works files a monthly SSO summary report and map as PDFs under the 2021 consent decree (SSO id, permit, address, whether waters were reached, gallons, cause, start and end times); seen in search for late 2022 to August 2025, the page address not verified in the research. Not read: the same overflows reach TCEQ's table. (research/tx/sources.json tx-houston-sso-monthly)",
+   "every_hours": 24,
+   "noun": "Consent decree reports",
+   "note": "Houston Public Works' consent decree page (answered 200 on 2026-11-07) lists the monthly SSO reports as PDFs, January 2021 to September 2026 (SSO id, permit, address, whether waters were reached, gallons, cause, start and end times), a month ahead of TCEQ's table. Watched for new reports; the PDFs are not read into records: the same overflows reach TCEQ's table. (research/tx/sources.json tx-houston-sso-monthly)",
    "sources": [
     "tx-houston-sso-monthly"
    ],
-   "barrier": "not_verified"
+   "barrier": null
   },
   {
    "state": "TX",
@@ -22503,6 +22636,26 @@
   },
   {
    "state": "TX",
+   "operator_id": "tx-city-of-waco",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-city-of-waco-website",
+   "name": "City of Waco",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "note": "City of Waco's own pages were not searched individually (one of the ten operators with the most reports).",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "TX",
    "operator_id": "tx-city-of-waelder",
    "agency": null,
    "permit": "TX0034452",
@@ -25950,6 +26103,26 @@
    ],
    "note": "El Paso Water Utilities Public Service Board reports each overflow to the TCEQ regional office; TCEQ publishes the reports in its open data, read by the tx-tceq-sso-opendata feed (129 report(s) in the table read 2026-11-07). As a local government's facility it also notifies local officials and media above the 30 TAC 319.302 thresholds (tx-local-officials-media-notice). (research/tx/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "TX",
+   "operator_id": "tx-el-paso-water-utilities-public-service-board",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-el-paso-water-website",
+   "name": "El Paso Water",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "records": false,
+   "note": "El Paso Water's site (https://www.epwater.org/, 200 on 2026-11-07) gives no notice or list of overflows in a search of 2026-11-07. No web channel found.",
+   "barrier": "no_web_page"
   },
   {
    "state": "TX",
@@ -60999,6 +61172,26 @@
   },
   {
    "state": "TX",
+   "operator_id": "tx-san-antonio-water-system",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-saws-website",
+   "name": "San Antonio Water System",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "records": false,
+   "note": "SAWS's site (https://www.saws.org/, 200 on 2026-11-07) gives no notice or list of overflows in a search of 2026-11-07; only news coverage was found. No web channel found.",
+   "barrier": "no_web_page"
+  },
+  {
+   "state": "TX",
    "operator_id": "tx-schertz-city-of-and-cibolo-creek-municipal-auth",
    "agency": null,
    "permit": "TX0136361",
@@ -65119,6 +65312,26 @@
    ],
    "note": "Trinity River Authority of Texas reports each overflow to the TCEQ regional office; TCEQ publishes the reports in its open data, read by the tx-tceq-sso-opendata feed (164 report(s) in the table read 2026-11-07). As a local government's facility it also notifies local officials and media above the 30 TAC 319.302 thresholds (tx-local-officials-media-notice). (research/tx/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "TX",
+   "operator_id": "tx-trinity-river-authority-of-texas",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "tx-trinity-river-authority-of-texas-website",
+   "name": "Trinity River Authority of Texas",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "note": "Trinity River Authority of Texas's own pages were not searched individually (one of the ten operators with the most reports).",
+   "barrier": "not_verified"
   },
   {
    "state": "TX",

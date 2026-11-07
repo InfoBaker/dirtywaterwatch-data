@@ -213,6 +213,46 @@
     "receiving_water_body": "SAN ANTONIO RIVER",
     "county": "BEXAR",
     "incident_description": "12 inch main blocked; sewage to the river."
+   },
+   {
+    "material_type": "Sewage",
+    "amount_unit": "GALLONS",
+    "status_code": "CLOSED",
+    "river_segment": "1412",
+    "cause": "LINE BLOCKAGE (NON-GREASE)",
+    "source": "Line Break/1967 Sampleton Ave.",
+    "customer_number": "CN600000001",
+    "incident_number": "900010",
+    "regulated_entity_number": "RN100000004",
+    "regulated_entity_name": "CITY OF EXAMPLE WWTP",
+    "amount": "75",
+    "start_date": "2024-09-01T00:00:00.000",
+    "received_date": "2024-09-02T00:00:00.000",
+    "tceq_region": "REGION 04 - DFW METROPLEX",
+    "list_of_permits": null,
+    "receiving_water_body": "COLORADO",
+    "county": "TARRANT",
+    "incident_description": "Service lateral at Lot 108, 1967 Sampleton Ave.; customer at Apt #2 notified. Main on FM 1960 near segment 2202 Arroyo Colorado Above Tidal."
+   },
+   {
+    "material_type": "Sewage",
+    "amount_unit": "GALLONS",
+    "status_code": "CLOSED",
+    "river_segment": "0",
+    "cause": "LINE BLOCKAGE (NON-GREASE)",
+    "source": "Manhole",
+    "customer_number": "CN600000001",
+    "incident_number": "900011",
+    "regulated_entity_number": "RN100000004",
+    "regulated_entity_name": "CITY OF EXAMPLE WWTP",
+    "amount": "20",
+    "start_date": "2022-05-01T00:00:00.000",
+    "received_date": "2022-05-02T00:00:00.000",
+    "tceq_region": "REGION 04 - DFW METROPLEX",
+    "list_of_permits": null,
+    "receiving_water_body": "Not Provided",
+    "county": "TARRANT",
+    "incident_description": "Before the cut."
    }
   ]
  ]
