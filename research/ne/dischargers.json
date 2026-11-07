@@ -74,7 +74,7 @@
   "id": "ne-grand-island",
   "name": "City of Grand Island WWTF",
   "state": "NE",
-  "kind": "No receiving water given in the rows.",
+  "kind": "sso",
   "npdes_permit": "NE0043702",
   "receiving_waters": [
    "Wood River",
@@ -88,7 +88,7 @@
   "towns": [
    "Grand Island"
   ],
-  "notes": "23 SOBE events, latest start 2026-10-06. ",
+  "notes": "23 SOBE events, latest start 2026-10-06. No receiving water given in the rows.",
   "verified": "fetched",
   "checked": "2026-11-03"
  },
@@ -139,7 +139,7 @@
   "id": "ne-lincoln-northeast",
   "name": "Lincoln Northeast WRRF",
   "state": "NE",
-  "kind": "Lincoln Transportation and Utilities not searched.",
+  "kind": "sso",
   "npdes_permit": "NE0112488",
   "receiving_waters": [
    "Salt Creek"
@@ -152,7 +152,7 @@
   "towns": [
    "Lincoln"
   ],
-  "notes": "5 SOBE events, latest start 2025-12-14. ",
+  "notes": "5 SOBE events, latest start 2025-12-14. Lincoln Transportation and Utilities not searched.",
   "verified": "fetched",
   "checked": "2026-11-03"
  },

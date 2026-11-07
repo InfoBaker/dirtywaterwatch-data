@@ -56,10 +56,11 @@ PUBLIC_NAME = re.compile(
     r",\s*(city|town|village|borough)\s+of\b|\bcounty\b|\bauthority\b|\bmunicipal|\b(utility|sanitary|sanitation|"
     r"sewer|sewerage|water|improvement|metropolitan|public service)\s+district\b|\bdistrict of columbia\b|"
     r"\bdepartment of\b|\bcommission\b|\bfederal\b|\b(army|navy|naval|air force|marine corps)\b|\btrib(e|al)\b|"
-    r"\bdistrict agricultural association\b|"   # a California state agency (a fairground's), not a private body
-    # New Mexico's mutual domestic water and sewage works associations: political subdivisions under the Sanitary
-    # Projects Act (NMSA 1978, Chapter 3, Article 29), not private bodies
-    r"\bmutual (?:domestic|sewage|sewer|water and sewer)\b[\w\s&]*\bassociation\b", re.I)
+    r"\bdistrict agricultural association\b", re.I)   # a California state agency (a fairground's), not a private body
+# New Mexico's mutual domestic water and sewage works associations: political subdivisions under the Sanitary Projects
+# Act (NMSA 1978, Chapter 3, Article 29), not private bodies; read as public names on New Mexico rows only
+STATE_PUBLIC_NAME = {"NM": re.compile(r"\bmutual (?:domestic|sewage|sewer|water and sewer)\b[\w\s&]*\bassociation\b",
+                                      re.I)}
 PRIVATE_NAME = re.compile(r"\b(inc|llc|l\.l\.c|ltd|lp|corp|corporation|company|association|assn|poa|hoa|club|mhp|"
                           r"mhc)\b\.?", re.I)
 
@@ -94,7 +95,8 @@ def check_legal_forms(rows: list[dict]) -> list[str]:
         if value in PRIVATE_FORMS and PUBLIC_NAME.search(name) and not PRIVATE_NAME.search(name):
             out.append(f"{rid}: legal_form {r.get('legal_form')!r} is private but the name {name!r} reads as a public "
                        f"body: check the permit")
-        elif value in PUBLIC_FORMS and PRIVATE_NAME.search(name) and not PUBLIC_NAME.search(name):
+        elif value in PUBLIC_FORMS and PRIVATE_NAME.search(name) and not PUBLIC_NAME.search(name) and not (
+                STATE_PUBLIC_NAME.get(r.get("state") or "") and STATE_PUBLIC_NAME[r["state"]].search(name)):
             out.append(f"{rid}: legal_form {r.get('legal_form')!r} is public but the name {name!r} reads as a company "
                        f"or association: check the permit")
     return out

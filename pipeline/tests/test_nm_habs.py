@@ -83,3 +83,37 @@ def test_a_lifted_station_keeps_its_record_with_the_missing_mark():
     assert e["raw"].get("_missing_from_source_since") == FETCHED and e["status"] == "advisory_active"
     assert [r["event_id"] for r in again if r["waterbody_text"] != "Eagle Nest Lake"] == \
            [r["event_id"] for r in first if r["waterbody_text"] != "Eagle Nest Lake"]
+
+
+def test_each_fetch_that_finds_an_advisory_confirms_it_and_the_first_that_does_not_ends_it():
+    """Review 2026-11-07 P2-2: NMED's map shows an advisory until it lifts it, however long since the layer's last edit.
+    A fetch that still finds the station confirms the advisory; the first fetch that no longer finds it ends it."""
+    from datetime import datetime, timezone
+    from build import status
+    first, _ = build()
+    later = "2026-12-20T02:00:00Z"                    # weeks after the layer's last edit (2026-10-30)
+    b = block()
+    page = json.loads(FIX.read_text())
+    again, _ = runner.build("nm-nmed-hab-mapper", b, arcgis.parse(b, json.dumps(page).encode()), later,
+                            copy.deepcopy(first), META)
+    e = next(r for r in again if r["waterbody_text"] == "Eagle Nest Lake")
+    assert e["raw"]["_last_seen_in_source"] == later and "_unlisted_since" not in e["raw"]
+    rules = status.load_rules()
+    ivs = status.event_intervals(e, "NM", datetime(2026, 12, 21, tzinfo=timezone.utc), None, rules)
+    assert ivs[0]["rule"] == "advisory_active" and ivs[0]["end"] > datetime(2027, 1, 2, tzinfo=timezone.utc)
+    assert ivs[0]["confirmed"].startswith("2026-12-20")
+    # lifted: the station is MONITORED at the next fetch; the advisory ends at that fetch, not 14 days later
+    lifted = "2026-12-27T02:00:00Z"
+    for f in page["features"]:
+        if f["attributes"]["OBJECTID"] == 100:
+            f["attributes"]["HAB_Status"] = "MONITORED"
+    third, _ = runner.build("nm-nmed-hab-mapper", b, arcgis.parse(b, json.dumps(page).encode()), lifted,
+                            copy.deepcopy(again), META)
+    e = next(r for r in third if r["waterbody_text"] == "Eagle Nest Lake")
+    assert e["raw"]["_unlisted_since"] == lifted and e["raw"]["_last_seen_in_source"] == later
+    ivs = status.event_intervals(e, "NM", datetime(2027, 1, 5, tzinfo=timezone.utc), None, rules)
+    assert len(ivs) == 1 and ivs[0]["end"] == datetime(2026, 12, 27, 2, tzinfo=timezone.utc)
+    # without the history key (every other block) nothing changes
+    b2 = {**b, "history": {k: v for k, v in b["history"].items() if k != "confirm_while_listed"}}
+    plain, _ = runner.build("nm-nmed-hab-mapper", b2, arcgis.parse(b2, json.dumps(page).encode()), lifted, [], META)
+    assert not any("_last_seen_in_source" in r["raw"] or "_unlisted_since" in r["raw"] for r in plain)

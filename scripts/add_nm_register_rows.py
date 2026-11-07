@@ -63,9 +63,9 @@ AGENCY = [
      "feed_source_id": FEED, "publishes": "notices", "noun": "Data feed",
      "note": ("EPA's sewer overflow and bypass event tables (NPDES electronic reporting): the reports New Mexico's "
               "permittees file electronically with EPA, and the Navajo Nation's under its own permits. 2026-11-04 "
-              "extract: 2 reports under New Mexico permits, both the Town of Taos's (2026), and 4 Navajo Nation "
-              "reports located in New Mexico (3 Shiprock, 2024 to 2025; 1 Window Rock, 2026); a median 4 days from start "
-              "to receipt. EPA's collection-system table lists 55 New Mexico permits, Albuquerque, Santa Fe and Las "
+              "extract: 2 reports under New Mexico permits, both the Town of Taos's (2026), and 6 Navajo Nation "
+              "reports located in New Mexico (3 Shiprock, 2024 to 2025; 3 under Window Rock's permit, 2026, two of them "
+              "at the lift station by Navajo, New Mexico); a median 4 days from start to receipt. EPA's collection-system table lists 55 New Mexico permits, Albuquerque, Santa Fe and Las "
               "Cruces among them, but no other has filed a report. (research/nm/report.md §2.2)"),
      "sources": ["fed-echo-sewer-overflow-bypass-events", "nm-epa-sobe"]},
     {"id": "nm-nmed-discharge-notice", "agency": "New Mexico Environment Department",
@@ -169,6 +169,12 @@ OWN = [
 ]
 
 
+# reports placed in New Mexico under another state's operator row (review 2026-11-07 P3-11)
+WINDOW_ROCK = {"nm-navajo-tribal-utility-authority": (
+    " Three more reports under the Authority's Window Rock permit (NN0021555, Arizona's row) lie in New Mexico and are "
+    "placed there: two at the lift station by Navajo, New Mexico, and a line washed out east of Fort Defiance (2026-08).")}
+
+
 def base(**kw) -> dict:
     r = {"state": "NM", "operator_id": None, "agency": None, "permit": None, "checked": CHECKED}
     r.update(kw)
@@ -208,7 +214,7 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                 noun="EPA report", sources=["nm-epa-sobe"],
                 note=(f"{name}'s permits are EPA's on tribal land: reports go to EPA, which publishes those filed "
                       f"electronically in its overflow tables, read by the {FEED} feed ({count}). New Mexico's notice "
-                      "rule does not apply on tribal land. (research/nm/report.md §3)"))))
+                      "rule does not apply on tribal land." + WINDOW_ROCK.get(oid, "") + " (research/nm/report.md §3)"))))
             continue
         private = (" The permit and the state rule bind the holder, public or private."
                    if op.get("legal_form") not in (None, "city", "town", "county", "authority", "special district",
@@ -220,8 +226,8 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             sources=["nm-epa-sobe", "nm-epa-r6-permits"],
             note=(f"{name} reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed "
                   f"electronically in its overflow tables, read by the {FEED} feed ({count}). Its 20.6.2.1203 notice to "
-                  f"NMED is not published (nm-nmed-discharge-notice).{private} No public notice is required. "
-                  "(research/nm/report.md §2.1)"))))
+                  f"NMED is not published (nm-nmed-discharge-notice).{private} No public notice is required. The "
+                  "permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)"))))
     return rows
 
 

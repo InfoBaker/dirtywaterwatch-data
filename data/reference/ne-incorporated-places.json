@@ -1,0 +1,2651 @@
+{
+ "state": "NE",
+ "source": {
+  "name": "U.S. Census Bureau TIGERweb, Places_CouSub_ConCity_SubMCD layer 4 (incorporated places)",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query?where=STATE%3D%2731%27&outFields=NAME,BASENAME,LSADC,GEOID,FUNCSTAT&returnGeometry=false&f=json",
+  "fetched_at": "2026-11-07",
+  "note": "LSAD 25 city, 47 village"
+ },
+ "places": [
+  {
+   "name": "Abie",
+   "kind": "village",
+   "geoid": "3100205"
+  },
+  {
+   "name": "Adams",
+   "kind": "village",
+   "geoid": "3100240"
+  },
+  {
+   "name": "Ainsworth",
+   "kind": "city",
+   "geoid": "3100415"
+  },
+  {
+   "name": "Albion",
+   "kind": "city",
+   "geoid": "3100555"
+  },
+  {
+   "name": "Alda",
+   "kind": "village",
+   "geoid": "3100625"
+  },
+  {
+   "name": "Alexandria",
+   "kind": "village",
+   "geoid": "3100730"
+  },
+  {
+   "name": "Allen",
+   "kind": "village",
+   "geoid": "3100870"
+  },
+  {
+   "name": "Alliance",
+   "kind": "city",
+   "geoid": "3100905"
+  },
+  {
+   "name": "Alma",
+   "kind": "city",
+   "geoid": "3100975"
+  },
+  {
+   "name": "Alvo",
+   "kind": "village",
+   "geoid": "3101150"
+  },
+  {
+   "name": "Amherst",
+   "kind": "village",
+   "geoid": "3101290"
+  },
+  {
+   "name": "Anoka",
+   "kind": "village",
+   "geoid": "3101465"
+  },
+  {
+   "name": "Anselmo",
+   "kind": "village",
+   "geoid": "3101500"
+  },
+  {
+   "name": "Ansley",
+   "kind": "village",
+   "geoid": "3101535"
+  },
+  {
+   "name": "Arapahoe",
+   "kind": "city",
+   "geoid": "3101780"
+  },
+  {
+   "name": "Arcadia",
+   "kind": "village",
+   "geoid": "3101850"
+  },
+  {
+   "name": "Arlington",
+   "kind": "village",
+   "geoid": "3101990"
+  },
+  {
+   "name": "Arnold",
+   "kind": "village",
+   "geoid": "3102095"
+  },
+  {
+   "name": "Arthur",
+   "kind": "village",
+   "geoid": "3102200"
+  },
+  {
+   "name": "Ashland",
+   "kind": "city",
+   "geoid": "3102305"
+  },
+  {
+   "name": "Ashton",
+   "kind": "village",
+   "geoid": "3102375"
+  },
+  {
+   "name": "Atkinson",
+   "kind": "city",
+   "geoid": "3102550"
+  },
+  {
+   "name": "Atlanta",
+   "kind": "village",
+   "geoid": "3102620"
+  },
+  {
+   "name": "Auburn",
+   "kind": "city",
+   "geoid": "3102655"
+  },
+  {
+   "name": "Aurora",
+   "kind": "city",
+   "geoid": "3102690"
+  },
+  {
+   "name": "Avoca",
+   "kind": "village",
+   "geoid": "3102795"
+  },
+  {
+   "name": "Axtell",
+   "kind": "village",
+   "geoid": "3102830"
+  },
+  {
+   "name": "Ayr",
+   "kind": "village",
+   "geoid": "3102865"
+  },
+  {
+   "name": "Bancroft",
+   "kind": "village",
+   "geoid": "3103005"
+  },
+  {
+   "name": "Barada",
+   "kind": "village",
+   "geoid": "3103040"
+  },
+  {
+   "name": "Barneston",
+   "kind": "village",
+   "geoid": "3103075"
+  },
+  {
+   "name": "Bartlett",
+   "kind": "village",
+   "geoid": "3103145"
+  },
+  {
+   "name": "Bartley",
+   "kind": "village",
+   "geoid": "3103180"
+  },
+  {
+   "name": "Bassett",
+   "kind": "city",
+   "geoid": "3103215"
+  },
+  {
+   "name": "Battle Creek",
+   "kind": "city",
+   "geoid": "3103250"
+  },
+  {
+   "name": "Bayard",
+   "kind": "city",
+   "geoid": "3103285"
+  },
+  {
+   "name": "Bazile Mills",
+   "kind": "village",
+   "geoid": "3103355"
+  },
+  {
+   "name": "Beatrice",
+   "kind": "city",
+   "geoid": "3103390"
+  },
+  {
+   "name": "Beaver City",
+   "kind": "city",
+   "geoid": "3103495"
+  },
+  {
+   "name": "Beaver Crossing",
+   "kind": "village",
+   "geoid": "3103530"
+  },
+  {
+   "name": "Bee",
+   "kind": "village",
+   "geoid": "3103600"
+  },
+  {
+   "name": "Beemer",
+   "kind": "village",
+   "geoid": "3103635"
+  },
+  {
+   "name": "Belden",
+   "kind": "village",
+   "geoid": "3103775"
+  },
+  {
+   "name": "Belgrade",
+   "kind": "village",
+   "geoid": "3103810"
+  },
+  {
+   "name": "Bellevue",
+   "kind": "city",
+   "geoid": "3103950"
+  },
+  {
+   "name": "Bellwood",
+   "kind": "village",
+   "geoid": "3104020"
+  },
+  {
+   "name": "Belvidere",
+   "kind": "village",
+   "geoid": "3104160"
+  },
+  {
+   "name": "Benedict",
+   "kind": "village",
+   "geoid": "3104195"
+  },
+  {
+   "name": "Benkelman",
+   "kind": "city",
+   "geoid": "3104230"
+  },
+  {
+   "name": "Bennet",
+   "kind": "village",
+   "geoid": "3104300"
+  },
+  {
+   "name": "Bennington",
+   "kind": "city",
+   "geoid": "3104405"
+  },
+  {
+   "name": "Bertrand",
+   "kind": "village",
+   "geoid": "3104615"
+  },
+  {
+   "name": "Berwyn",
+   "kind": "village",
+   "geoid": "3104650"
+  },
+  {
+   "name": "Big Springs",
+   "kind": "village",
+   "geoid": "3104895"
+  },
+  {
+   "name": "Bladen",
+   "kind": "village",
+   "geoid": "3105140"
+  },
+  {
+   "name": "Blair",
+   "kind": "city",
+   "geoid": "3105350"
+  },
+  {
+   "name": "Bloomfield",
+   "kind": "city",
+   "geoid": "3105455"
+  },
+  {
+   "name": "Bloomington",
+   "kind": "village",
+   "geoid": "3105490"
+  },
+  {
+   "name": "Blue Hill",
+   "kind": "city",
+   "geoid": "3105560"
+  },
+  {
+   "name": "Blue Springs",
+   "kind": "city",
+   "geoid": "3105630"
+  },
+  {
+   "name": "Boys Town",
+   "kind": "village",
+   "geoid": "3106015"
+  },
+  {
+   "name": "Bradshaw",
+   "kind": "village",
+   "geoid": "3106050"
+  },
+  {
+   "name": "Brady",
+   "kind": "village",
+   "geoid": "3106085"
+  },
+  {
+   "name": "Brainard",
+   "kind": "village",
+   "geoid": "3106120"
+  },
+  {
+   "name": "Brewster",
+   "kind": "village",
+   "geoid": "3106260"
+  },
+  {
+   "name": "Bridgeport",
+   "kind": "city",
+   "geoid": "3106295"
+  },
+  {
+   "name": "Bristow",
+   "kind": "village",
+   "geoid": "3106400"
+  },
+  {
+   "name": "Broadwater",
+   "kind": "village",
+   "geoid": "3106470"
+  },
+  {
+   "name": "Brock",
+   "kind": "village",
+   "geoid": "3106505"
+  },
+  {
+   "name": "Broken Bow",
+   "kind": "city",
+   "geoid": "3106610"
+  },
+  {
+   "name": "Brownville",
+   "kind": "village",
+   "geoid": "3106750"
+  },
+  {
+   "name": "Brule",
+   "kind": "village",
+   "geoid": "3106785"
+  },
+  {
+   "name": "Bruning",
+   "kind": "village",
+   "geoid": "3106820"
+  },
+  {
+   "name": "Bruno",
+   "kind": "village",
+   "geoid": "3106855"
+  },
+  {
+   "name": "Brunswick",
+   "kind": "village",
+   "geoid": "3106890"
+  },
+  {
+   "name": "Burchard",
+   "kind": "village",
+   "geoid": "3107065"
+  },
+  {
+   "name": "Burr",
+   "kind": "village",
+   "geoid": "3107205"
+  },
+  {
+   "name": "Burton",
+   "kind": "village",
+   "geoid": "3107310"
+  },
+  {
+   "name": "Burwell",
+   "kind": "city",
+   "geoid": "3107345"
+  },
+  {
+   "name": "Bushnell",
+   "kind": "village",
+   "geoid": "3107415"
+  },
+  {
+   "name": "Butte",
+   "kind": "village",
+   "geoid": "3107485"
+  },
+  {
+   "name": "Byron",
+   "kind": "village",
+   "geoid": "3107555"
+  },
+  {
+   "name": "Cairo",
+   "kind": "village",
+   "geoid": "3107625"
+  },
+  {
+   "name": "Callaway",
+   "kind": "village",
+   "geoid": "3107660"
+  },
+  {
+   "name": "Cambridge",
+   "kind": "city",
+   "geoid": "3107730"
+  },
+  {
+   "name": "Campbell",
+   "kind": "village",
+   "geoid": "3107870"
+  },
+  {
+   "name": "Carleton",
+   "kind": "village",
+   "geoid": "3107975"
+  },
+  {
+   "name": "Carroll",
+   "kind": "village",
+   "geoid": "3108010"
+  },
+  {
+   "name": "Cedar Bluffs",
+   "kind": "village",
+   "geoid": "3108150"
+  },
+  {
+   "name": "Cedar Creek",
+   "kind": "village",
+   "geoid": "3108185"
+  },
+  {
+   "name": "Cedar Rapids",
+   "kind": "village",
+   "geoid": "3108220"
+  },
+  {
+   "name": "Center",
+   "kind": "village",
+   "geoid": "3108360"
+  },
+  {
+   "name": "Central City",
+   "kind": "city",
+   "geoid": "3108535"
+  },
+  {
+   "name": "Ceresco",
+   "kind": "village",
+   "geoid": "3108570"
+  },
+  {
+   "name": "Chadron",
+   "kind": "city",
+   "geoid": "3108605"
+  },
+  {
+   "name": "Chambers",
+   "kind": "village",
+   "geoid": "3108675"
+  },
+  {
+   "name": "Chapman",
+   "kind": "village",
+   "geoid": "3108780"
+  },
+  {
+   "name": "Chappell",
+   "kind": "city",
+   "geoid": "3108885"
+  },
+  {
+   "name": "Chester",
+   "kind": "village",
+   "geoid": "3109095"
+  },
+  {
+   "name": "Clarks",
+   "kind": "village",
+   "geoid": "3109165"
+  },
+  {
+   "name": "Clarkson",
+   "kind": "city",
+   "geoid": "3109200"
+  },
+  {
+   "name": "Clatonia",
+   "kind": "village",
+   "geoid": "3109270"
+  },
+  {
+   "name": "Clay Center",
+   "kind": "city",
+   "geoid": "3109375"
+  },
+  {
+   "name": "Clearwater",
+   "kind": "village",
+   "geoid": "3109445"
+  },
+  {
+   "name": "Clinton",
+   "kind": "village",
+   "geoid": "3109655"
+  },
+  {
+   "name": "Cody",
+   "kind": "village",
+   "geoid": "3109760"
+  },
+  {
+   "name": "Coleridge",
+   "kind": "village",
+   "geoid": "3109865"
+  },
+  {
+   "name": "Colon",
+   "kind": "village",
+   "geoid": "3110005"
+  },
+  {
+   "name": "Columbus",
+   "kind": "city",
+   "geoid": "3110110"
+  },
+  {
+   "name": "Comstock",
+   "kind": "village",
+   "geoid": "3110180"
+  },
+  {
+   "name": "Concord",
+   "kind": "village",
+   "geoid": "3110250"
+  },
+  {
+   "name": "Cook",
+   "kind": "village",
+   "geoid": "3110390"
+  },
+  {
+   "name": "Cordova",
+   "kind": "village",
+   "geoid": "3110495"
+  },
+  {
+   "name": "Cornlea",
+   "kind": "village",
+   "geoid": "3110600"
+  },
+  {
+   "name": "Cortland",
+   "kind": "village",
+   "geoid": "3110635"
+  },
+  {
+   "name": "Cotesfield",
+   "kind": "village",
+   "geoid": "3110740"
+  },
+  {
+   "name": "Cowles",
+   "kind": "village",
+   "geoid": "3110985"
+  },
+  {
+   "name": "Cozad",
+   "kind": "city",
+   "geoid": "3111020"
+  },
+  {
+   "name": "Crab Orchard",
+   "kind": "village",
+   "geoid": "3111055"
+  },
+  {
+   "name": "Craig",
+   "kind": "village",
+   "geoid": "3111090"
+  },
+  {
+   "name": "Crawford",
+   "kind": "city",
+   "geoid": "3111195"
+  },
+  {
+   "name": "Creighton",
+   "kind": "city",
+   "geoid": "3111230"
+  },
+  {
+   "name": "Creston",
+   "kind": "village",
+   "geoid": "3111300"
+  },
+  {
+   "name": "Crete",
+   "kind": "city",
+   "geoid": "3111370"
+  },
+  {
+   "name": "Crofton",
+   "kind": "city",
+   "geoid": "3111440"
+  },
+  {
+   "name": "Crookston",
+   "kind": "village",
+   "geoid": "3111475"
+  },
+  {
+   "name": "Culbertson",
+   "kind": "village",
+   "geoid": "3111615"
+  },
+  {
+   "name": "Curtis",
+   "kind": "city",
+   "geoid": "3111825"
+  },
+  {
+   "name": "Cushing",
+   "kind": "village",
+   "geoid": "3111860"
+  },
+  {
+   "name": "Dakota City",
+   "kind": "city",
+   "geoid": "3112000"
+  },
+  {
+   "name": "Dalton",
+   "kind": "village",
+   "geoid": "3112070"
+  },
+  {
+   "name": "Danbury",
+   "kind": "village",
+   "geoid": "3112105"
+  },
+  {
+   "name": "Dannebrog",
+   "kind": "village",
+   "geoid": "3112140"
+  },
+  {
+   "name": "Davenport",
+   "kind": "village",
+   "geoid": "3112245"
+  },
+  {
+   "name": "Davey",
+   "kind": "village",
+   "geoid": "3112280"
+  },
+  {
+   "name": "David City",
+   "kind": "city",
+   "geoid": "3112315"
+  },
+  {
+   "name": "Dawson",
+   "kind": "village",
+   "geoid": "3112420"
+  },
+  {
+   "name": "Daykin",
+   "kind": "village",
+   "geoid": "3112455"
+  },
+  {
+   "name": "De Witt",
+   "kind": "village",
+   "geoid": "3113015"
+  },
+  {
+   "name": "Decatur",
+   "kind": "village",
+   "geoid": "3112525"
+  },
+  {
+   "name": "Denton",
+   "kind": "village",
+   "geoid": "3112770"
+  },
+  {
+   "name": "Deshler",
+   "kind": "city",
+   "geoid": "3112840"
+  },
+  {
+   "name": "Deweese",
+   "kind": "village",
+   "geoid": "3112945"
+  },
+  {
+   "name": "Diller",
+   "kind": "village",
+   "geoid": "3113085"
+  },
+  {
+   "name": "Dix",
+   "kind": "village",
+   "geoid": "3113190"
+  },
+  {
+   "name": "Dixon",
+   "kind": "village",
+   "geoid": "3113225"
+  },
+  {
+   "name": "Dodge",
+   "kind": "village",
+   "geoid": "3113295"
+  },
+  {
+   "name": "Doniphan",
+   "kind": "village",
+   "geoid": "3113365"
+  },
+  {
+   "name": "Dorchester",
+   "kind": "village",
+   "geoid": "3113435"
+  },
+  {
+   "name": "Douglas",
+   "kind": "village",
+   "geoid": "3113505"
+  },
+  {
+   "name": "Du Bois",
+   "kind": "village",
+   "geoid": "3113750"
+  },
+  {
+   "name": "Dunbar",
+   "kind": "village",
+   "geoid": "3113855"
+  },
+  {
+   "name": "Duncan",
+   "kind": "village",
+   "geoid": "3113890"
+  },
+  {
+   "name": "Dunning",
+   "kind": "village",
+   "geoid": "3113960"
+  },
+  {
+   "name": "Dwight",
+   "kind": "village",
+   "geoid": "3114065"
+  },
+  {
+   "name": "Eagle",
+   "kind": "village",
+   "geoid": "3114100"
+  },
+  {
+   "name": "Eddyville",
+   "kind": "village",
+   "geoid": "3114380"
+  },
+  {
+   "name": "Edgar",
+   "kind": "city",
+   "geoid": "3114450"
+  },
+  {
+   "name": "Edison",
+   "kind": "village",
+   "geoid": "3114520"
+  },
+  {
+   "name": "Elba",
+   "kind": "village",
+   "geoid": "3114555"
+  },
+  {
+   "name": "Elgin",
+   "kind": "city",
+   "geoid": "3114730"
+  },
+  {
+   "name": "Elk Creek",
+   "kind": "village",
+   "geoid": "3114975"
+  },
+  {
+   "name": "Elm Creek",
+   "kind": "village",
+   "geoid": "3115360"
+  },
+  {
+   "name": "Elmwood",
+   "kind": "village",
+   "geoid": "3115430"
+  },
+  {
+   "name": "Elsie",
+   "kind": "village",
+   "geoid": "3115500"
+  },
+  {
+   "name": "Elwood",
+   "kind": "village",
+   "geoid": "3115570"
+  },
+  {
+   "name": "Elyria",
+   "kind": "village",
+   "geoid": "3115605"
+  },
+  {
+   "name": "Emerson",
+   "kind": "village",
+   "geoid": "3115710"
+  },
+  {
+   "name": "Emmet",
+   "kind": "village",
+   "geoid": "3115815"
+  },
+  {
+   "name": "Endicott",
+   "kind": "village",
+   "geoid": "3115920"
+  },
+  {
+   "name": "Ericson",
+   "kind": "village",
+   "geoid": "3116025"
+  },
+  {
+   "name": "Eustis",
+   "kind": "village",
+   "geoid": "3116165"
+  },
+  {
+   "name": "Ewing",
+   "kind": "village",
+   "geoid": "3116270"
+  },
+  {
+   "name": "Exeter",
+   "kind": "village",
+   "geoid": "3116340"
+  },
+  {
+   "name": "Fairbury",
+   "kind": "city",
+   "geoid": "3116410"
+  },
+  {
+   "name": "Fairfield",
+   "kind": "city",
+   "geoid": "3116445"
+  },
+  {
+   "name": "Fairmont",
+   "kind": "village",
+   "geoid": "3116550"
+  },
+  {
+   "name": "Falls City",
+   "kind": "city",
+   "geoid": "3116655"
+  },
+  {
+   "name": "Farnam",
+   "kind": "village",
+   "geoid": "3116725"
+  },
+  {
+   "name": "Farwell",
+   "kind": "village",
+   "geoid": "3116760"
+  },
+  {
+   "name": "Filley",
+   "kind": "village",
+   "geoid": "3116830"
+  },
+  {
+   "name": "Firth",
+   "kind": "village",
+   "geoid": "3116935"
+  },
+  {
+   "name": "Fordyce",
+   "kind": "village",
+   "geoid": "3117110"
+  },
+  {
+   "name": "Fort Calhoun",
+   "kind": "city",
+   "geoid": "3117145"
+  },
+  {
+   "name": "Foster",
+   "kind": "village",
+   "geoid": "3117320"
+  },
+  {
+   "name": "Franklin",
+   "kind": "city",
+   "geoid": "3117530"
+  },
+  {
+   "name": "Fremont",
+   "kind": "city",
+   "geoid": "3117670"
+  },
+  {
+   "name": "Friend",
+   "kind": "city",
+   "geoid": "3117775"
+  },
+  {
+   "name": "Fullerton",
+   "kind": "city",
+   "geoid": "3117810"
+  },
+  {
+   "name": "Funk",
+   "kind": "village",
+   "geoid": "3117880"
+  },
+  {
+   "name": "Gandy",
+   "kind": "village",
+   "geoid": "3117950"
+  },
+  {
+   "name": "Garland",
+   "kind": "village",
+   "geoid": "3118230"
+  },
+  {
+   "name": "Garrison",
+   "kind": "village",
+   "geoid": "3118300"
+  },
+  {
+   "name": "Geneva",
+   "kind": "city",
+   "geoid": "3118405"
+  },
+  {
+   "name": "Genoa",
+   "kind": "city",
+   "geoid": "3118475"
+  },
+  {
+   "name": "Gering",
+   "kind": "city",
+   "geoid": "3118580"
+  },
+  {
+   "name": "Gibbon",
+   "kind": "city",
+   "geoid": "3118615"
+  },
+  {
+   "name": "Gilead",
+   "kind": "village",
+   "geoid": "3118720"
+  },
+  {
+   "name": "Giltner",
+   "kind": "village",
+   "geoid": "3118825"
+  },
+  {
+   "name": "Glenvil",
+   "kind": "village",
+   "geoid": "3119070"
+  },
+  {
+   "name": "Goehner",
+   "kind": "village",
+   "geoid": "3119245"
+  },
+  {
+   "name": "Gordon",
+   "kind": "city",
+   "geoid": "3119350"
+  },
+  {
+   "name": "Gothenburg",
+   "kind": "city",
+   "geoid": "3119385"
+  },
+  {
+   "name": "Grafton",
+   "kind": "village",
+   "geoid": "3119455"
+  },
+  {
+   "name": "Grand Island",
+   "kind": "city",
+   "geoid": "3119595"
+  },
+  {
+   "name": "Grant",
+   "kind": "city",
+   "geoid": "3119910"
+  },
+  {
+   "name": "Greeley Center",
+   "kind": "village",
+   "geoid": "3120050"
+  },
+  {
+   "name": "Greenwood",
+   "kind": "village",
+   "geoid": "3120190"
+  },
+  {
+   "name": "Gresham",
+   "kind": "village",
+   "geoid": "3120225"
+  },
+  {
+   "name": "Gretna",
+   "kind": "city",
+   "geoid": "3120260"
+  },
+  {
+   "name": "Gross",
+   "kind": "village",
+   "geoid": "3120295"
+  },
+  {
+   "name": "Guide Rock",
+   "kind": "village",
+   "geoid": "3120365"
+  },
+  {
+   "name": "Gurley",
+   "kind": "village",
+   "geoid": "3120435"
+  },
+  {
+   "name": "Hadar",
+   "kind": "village",
+   "geoid": "3120470"
+  },
+  {
+   "name": "Haigler",
+   "kind": "village",
+   "geoid": "3120540"
+  },
+  {
+   "name": "Hallam",
+   "kind": "village",
+   "geoid": "3120610"
+  },
+  {
+   "name": "Halsey",
+   "kind": "village",
+   "geoid": "3120680"
+  },
+  {
+   "name": "Hamlet",
+   "kind": "village",
+   "geoid": "3120750"
+  },
+  {
+   "name": "Hampton",
+   "kind": "village",
+   "geoid": "3120785"
+  },
+  {
+   "name": "Harbine",
+   "kind": "village",
+   "geoid": "3120960"
+  },
+  {
+   "name": "Hardy",
+   "kind": "village",
+   "geoid": "3120995"
+  },
+  {
+   "name": "Harrison",
+   "kind": "village",
+   "geoid": "3121240"
+  },
+  {
+   "name": "Hartington",
+   "kind": "city",
+   "geoid": "3121275"
+  },
+  {
+   "name": "Harvard",
+   "kind": "city",
+   "geoid": "3121345"
+  },
+  {
+   "name": "Hastings",
+   "kind": "city",
+   "geoid": "3121415"
+  },
+  {
+   "name": "Hay Springs",
+   "kind": "village",
+   "geoid": "3121730"
+  },
+  {
+   "name": "Hayes Center",
+   "kind": "village",
+   "geoid": "3121660"
+  },
+  {
+   "name": "Hazard",
+   "kind": "village",
+   "geoid": "3121765"
+  },
+  {
+   "name": "Heartwell",
+   "kind": "village",
+   "geoid": "3121835"
+  },
+  {
+   "name": "Hebron",
+   "kind": "city",
+   "geoid": "3121905"
+  },
+  {
+   "name": "Hemingford",
+   "kind": "village",
+   "geoid": "3122045"
+  },
+  {
+   "name": "Henderson",
+   "kind": "city",
+   "geoid": "3122080"
+  },
+  {
+   "name": "Hendley",
+   "kind": "village",
+   "geoid": "3122115"
+  },
+  {
+   "name": "Henry",
+   "kind": "village",
+   "geoid": "3122150"
+  },
+  {
+   "name": "Herman",
+   "kind": "village",
+   "geoid": "3122185"
+  },
+  {
+   "name": "Hershey",
+   "kind": "village",
+   "geoid": "3122290"
+  },
+  {
+   "name": "Hickman",
+   "kind": "city",
+   "geoid": "3122325"
+  },
+  {
+   "name": "Hildreth",
+   "kind": "village",
+   "geoid": "3122430"
+  },
+  {
+   "name": "Holbrook",
+   "kind": "village",
+   "geoid": "3122605"
+  },
+  {
+   "name": "Holdrege",
+   "kind": "city",
+   "geoid": "3122640"
+  },
+  {
+   "name": "Holstein",
+   "kind": "village",
+   "geoid": "3122815"
+  },
+  {
+   "name": "Homer",
+   "kind": "village",
+   "geoid": "3122920"
+  },
+  {
+   "name": "Hooper",
+   "kind": "city",
+   "geoid": "3123025"
+  },
+  {
+   "name": "Hordville",
+   "kind": "village",
+   "geoid": "3123200"
+  },
+  {
+   "name": "Hoskins",
+   "kind": "village",
+   "geoid": "3123235"
+  },
+  {
+   "name": "Howard City (Boelus)",
+   "kind": "village",
+   "geoid": "3123270"
+  },
+  {
+   "name": "Howells",
+   "kind": "village",
+   "geoid": "3123340"
+  },
+  {
+   "name": "Hubbard",
+   "kind": "village",
+   "geoid": "3123375"
+  },
+  {
+   "name": "Hubbell",
+   "kind": "village",
+   "geoid": "3123410"
+  },
+  {
+   "name": "Humboldt",
+   "kind": "city",
+   "geoid": "3123445"
+  },
+  {
+   "name": "Humphrey",
+   "kind": "city",
+   "geoid": "3123480"
+  },
+  {
+   "name": "Huntley",
+   "kind": "village",
+   "geoid": "3123550"
+  },
+  {
+   "name": "Hyannis",
+   "kind": "village",
+   "geoid": "3123655"
+  },
+  {
+   "name": "Imperial",
+   "kind": "city",
+   "geoid": "3123690"
+  },
+  {
+   "name": "Indianola",
+   "kind": "city",
+   "geoid": "3123830"
+  },
+  {
+   "name": "Inglewood",
+   "kind": "village",
+   "geoid": "3123970"
+  },
+  {
+   "name": "Inman",
+   "kind": "village",
+   "geoid": "3124075"
+  },
+  {
+   "name": "Ithaca",
+   "kind": "village",
+   "geoid": "3124285"
+  },
+  {
+   "name": "Jackson",
+   "kind": "village",
+   "geoid": "3124355"
+  },
+  {
+   "name": "Jansen",
+   "kind": "village",
+   "geoid": "3124530"
+  },
+  {
+   "name": "Johnson",
+   "kind": "village",
+   "geoid": "3124670"
+  },
+  {
+   "name": "Johnstown",
+   "kind": "village",
+   "geoid": "3124740"
+  },
+  {
+   "name": "Julian",
+   "kind": "village",
+   "geoid": "3124915"
+  },
+  {
+   "name": "Juniata",
+   "kind": "village",
+   "geoid": "3124950"
+  },
+  {
+   "name": "Kearney",
+   "kind": "city",
+   "geoid": "3125055"
+  },
+  {
+   "name": "Kenesaw",
+   "kind": "village",
+   "geoid": "3125160"
+  },
+  {
+   "name": "Kennard",
+   "kind": "village",
+   "geoid": "3125230"
+  },
+  {
+   "name": "Kilgore",
+   "kind": "village",
+   "geoid": "3125405"
+  },
+  {
+   "name": "Kimball",
+   "kind": "city",
+   "geoid": "3125475"
+  },
+  {
+   "name": "La Vista",
+   "kind": "city",
+   "geoid": "3126385"
+  },
+  {
+   "name": "Lamar",
+   "kind": "village",
+   "geoid": "3126175"
+  },
+  {
+   "name": "Laurel",
+   "kind": "city",
+   "geoid": "3126350"
+  },
+  {
+   "name": "Lawrence",
+   "kind": "village",
+   "geoid": "3126420"
+  },
+  {
+   "name": "Lebanon",
+   "kind": "village",
+   "geoid": "3126455"
+  },
+  {
+   "name": "Leigh",
+   "kind": "village",
+   "geoid": "3126560"
+  },
+  {
+   "name": "Leshara",
+   "kind": "village",
+   "geoid": "3126630"
+  },
+  {
+   "name": "Lewellen",
+   "kind": "village",
+   "geoid": "3126805"
+  },
+  {
+   "name": "Lewiston",
+   "kind": "village",
+   "geoid": "3126875"
+  },
+  {
+   "name": "Lexington",
+   "kind": "city",
+   "geoid": "3126910"
+  },
+  {
+   "name": "Liberty",
+   "kind": "village",
+   "geoid": "3126980"
+  },
+  {
+   "name": "Lincoln",
+   "kind": "city",
+   "geoid": "3128000"
+  },
+  {
+   "name": "Lindsay",
+   "kind": "village",
+   "geoid": "3128105"
+  },
+  {
+   "name": "Linwood",
+   "kind": "village",
+   "geoid": "3128245"
+  },
+  {
+   "name": "Litchfield",
+   "kind": "village",
+   "geoid": "3128350"
+  },
+  {
+   "name": "Lodgepole",
+   "kind": "village",
+   "geoid": "3128420"
+  },
+  {
+   "name": "Long Pine",
+   "kind": "city",
+   "geoid": "3129050"
+  },
+  {
+   "name": "Loomis",
+   "kind": "village",
+   "geoid": "3129085"
+  },
+  {
+   "name": "Lorton",
+   "kind": "village",
+   "geoid": "3129175"
+  },
+  {
+   "name": "Louisville",
+   "kind": "city",
+   "geoid": "3129260"
+  },
+  {
+   "name": "Loup City",
+   "kind": "city",
+   "geoid": "3129470"
+  },
+  {
+   "name": "Lushton",
+   "kind": "village",
+   "geoid": "3129645"
+  },
+  {
+   "name": "Lyman",
+   "kind": "village",
+   "geoid": "3129715"
+  },
+  {
+   "name": "Lynch",
+   "kind": "village",
+   "geoid": "3129750"
+  },
+  {
+   "name": "Lyons",
+   "kind": "city",
+   "geoid": "3129855"
+  },
+  {
+   "name": "Madison",
+   "kind": "city",
+   "geoid": "3130240"
+  },
+  {
+   "name": "Madrid",
+   "kind": "village",
+   "geoid": "3130275"
+  },
+  {
+   "name": "Magnet",
+   "kind": "village",
+   "geoid": "3130310"
+  },
+  {
+   "name": "Malcolm",
+   "kind": "village",
+   "geoid": "3130345"
+  },
+  {
+   "name": "Malmo",
+   "kind": "village",
+   "geoid": "3130380"
+  },
+  {
+   "name": "Manley",
+   "kind": "village",
+   "geoid": "3130415"
+  },
+  {
+   "name": "Marquette",
+   "kind": "village",
+   "geoid": "3130730"
+  },
+  {
+   "name": "Martinsburg",
+   "kind": "village",
+   "geoid": "3130940"
+  },
+  {
+   "name": "Maskell",
+   "kind": "village",
+   "geoid": "3131045"
+  },
+  {
+   "name": "Mason City",
+   "kind": "village",
+   "geoid": "3131115"
+  },
+  {
+   "name": "Maxwell",
+   "kind": "village",
+   "geoid": "3131220"
+  },
+  {
+   "name": "Maywood",
+   "kind": "village",
+   "geoid": "3131325"
+  },
+  {
+   "name": "McCook",
+   "kind": "city",
+   "geoid": "3129925"
+  },
+  {
+   "name": "McCool Junction",
+   "kind": "village",
+   "geoid": "3129960"
+  },
+  {
+   "name": "McGrew",
+   "kind": "village",
+   "geoid": "3130030"
+  },
+  {
+   "name": "McLean",
+   "kind": "village",
+   "geoid": "3130065"
+  },
+  {
+   "name": "Mead",
+   "kind": "village",
+   "geoid": "3131395"
+  },
+  {
+   "name": "Meadow Grove",
+   "kind": "village",
+   "geoid": "3131465"
+  },
+  {
+   "name": "Melbeta",
+   "kind": "village",
+   "geoid": "3131570"
+  },
+  {
+   "name": "Memphis",
+   "kind": "village",
+   "geoid": "3131640"
+  },
+  {
+   "name": "Merna",
+   "kind": "village",
+   "geoid": "3131780"
+  },
+  {
+   "name": "Merriman",
+   "kind": "village",
+   "geoid": "3131815"
+  },
+  {
+   "name": "Milford",
+   "kind": "city",
+   "geoid": "3132060"
+  },
+  {
+   "name": "Miller",
+   "kind": "village",
+   "geoid": "3132130"
+  },
+  {
+   "name": "Milligan",
+   "kind": "village",
+   "geoid": "3132200"
+  },
+  {
+   "name": "Minatare",
+   "kind": "city",
+   "geoid": "3132305"
+  },
+  {
+   "name": "Minden",
+   "kind": "city",
+   "geoid": "3132340"
+  },
+  {
+   "name": "Mitchell",
+   "kind": "city",
+   "geoid": "3132410"
+  },
+  {
+   "name": "Monowi",
+   "kind": "village",
+   "geoid": "3132550"
+  },
+  {
+   "name": "Monroe",
+   "kind": "village",
+   "geoid": "3132585"
+  },
+  {
+   "name": "Moorefield",
+   "kind": "village",
+   "geoid": "3132760"
+  },
+  {
+   "name": "Morrill",
+   "kind": "village",
+   "geoid": "3132830"
+  },
+  {
+   "name": "Morse Bluff",
+   "kind": "village",
+   "geoid": "3132865"
+  },
+  {
+   "name": "Mullen",
+   "kind": "village",
+   "geoid": "3133250"
+  },
+  {
+   "name": "Murdock",
+   "kind": "village",
+   "geoid": "3133320"
+  },
+  {
+   "name": "Murray",
+   "kind": "village",
+   "geoid": "3133425"
+  },
+  {
+   "name": "Naper",
+   "kind": "village",
+   "geoid": "3133530"
+  },
+  {
+   "name": "Naponee",
+   "kind": "village",
+   "geoid": "3133565"
+  },
+  {
+   "name": "Nebraska City",
+   "kind": "city",
+   "geoid": "3133705"
+  },
+  {
+   "name": "Nehawka",
+   "kind": "village",
+   "geoid": "3133740"
+  },
+  {
+   "name": "Neligh",
+   "kind": "city",
+   "geoid": "3133775"
+  },
+  {
+   "name": "Nelson",
+   "kind": "city",
+   "geoid": "3133880"
+  },
+  {
+   "name": "Nemaha",
+   "kind": "village",
+   "geoid": "3133950"
+  },
+  {
+   "name": "Nenzel",
+   "kind": "village",
+   "geoid": "3133985"
+  },
+  {
+   "name": "Newcastle",
+   "kind": "village",
+   "geoid": "3134090"
+  },
+  {
+   "name": "Newman Grove",
+   "kind": "city",
+   "geoid": "3134230"
+  },
+  {
+   "name": "Newport",
+   "kind": "village",
+   "geoid": "3134265"
+  },
+  {
+   "name": "Nickerson",
+   "kind": "village",
+   "geoid": "3134300"
+  },
+  {
+   "name": "Niobrara",
+   "kind": "village",
+   "geoid": "3134370"
+  },
+  {
+   "name": "Nora",
+   "kind": "village",
+   "geoid": "3134545"
+  },
+  {
+   "name": "Norfolk",
+   "kind": "city",
+   "geoid": "3134615"
+  },
+  {
+   "name": "Norman",
+   "kind": "village",
+   "geoid": "3134650"
+  },
+  {
+   "name": "North Bend",
+   "kind": "city",
+   "geoid": "3134720"
+  },
+  {
+   "name": "North Loup",
+   "kind": "village",
+   "geoid": "3134825"
+  },
+  {
+   "name": "North Platte",
+   "kind": "city",
+   "geoid": "3135000"
+  },
+  {
+   "name": "O'Neill",
+   "kind": "city",
+   "geoid": "3137105"
+  },
+  {
+   "name": "Oak",
+   "kind": "village",
+   "geoid": "3135245"
+  },
+  {
+   "name": "Oakdale",
+   "kind": "village",
+   "geoid": "3135385"
+  },
+  {
+   "name": "Oakland",
+   "kind": "city",
+   "geoid": "3135490"
+  },
+  {
+   "name": "Obert",
+   "kind": "village",
+   "geoid": "3135560"
+  },
+  {
+   "name": "Oconto",
+   "kind": "village",
+   "geoid": "3135665"
+  },
+  {
+   "name": "Octavia",
+   "kind": "village",
+   "geoid": "3135700"
+  },
+  {
+   "name": "Odell",
+   "kind": "village",
+   "geoid": "3135735"
+  },
+  {
+   "name": "Ogallala",
+   "kind": "city",
+   "geoid": "3135980"
+  },
+  {
+   "name": "Ohiowa",
+   "kind": "village",
+   "geoid": "3136015"
+  },
+  {
+   "name": "Omaha",
+   "kind": "city",
+   "geoid": "3137000"
+  },
+  {
+   "name": "Ong",
+   "kind": "village",
+   "geoid": "3137140"
+  },
+  {
+   "name": "Orchard",
+   "kind": "village",
+   "geoid": "3137210"
+  },
+  {
+   "name": "Ord",
+   "kind": "city",
+   "geoid": "3137280"
+  },
+  {
+   "name": "Orleans",
+   "kind": "village",
+   "geoid": "3137420"
+  },
+  {
+   "name": "Osceola",
+   "kind": "city",
+   "geoid": "3137525"
+  },
+  {
+   "name": "Oshkosh",
+   "kind": "city",
+   "geoid": "3137560"
+  },
+  {
+   "name": "Osmond",
+   "kind": "city",
+   "geoid": "3137595"
+  },
+  {
+   "name": "Otoe",
+   "kind": "village",
+   "geoid": "3137630"
+  },
+  {
+   "name": "Overton",
+   "kind": "village",
+   "geoid": "3137770"
+  },
+  {
+   "name": "Oxford",
+   "kind": "village",
+   "geoid": "3137910"
+  },
+  {
+   "name": "Page",
+   "kind": "village",
+   "geoid": "3138085"
+  },
+  {
+   "name": "Palisade",
+   "kind": "village",
+   "geoid": "3138130"
+  },
+  {
+   "name": "Palmer",
+   "kind": "village",
+   "geoid": "3138160"
+  },
+  {
+   "name": "Palmyra",
+   "kind": "village",
+   "geoid": "3138190"
+  },
+  {
+   "name": "Panama",
+   "kind": "village",
+   "geoid": "3138225"
+  },
+  {
+   "name": "Papillion",
+   "kind": "city",
+   "geoid": "3138295"
+  },
+  {
+   "name": "Pawnee City",
+   "kind": "city",
+   "geoid": "3138575"
+  },
+  {
+   "name": "Paxton",
+   "kind": "village",
+   "geoid": "3138610"
+  },
+  {
+   "name": "Pender",
+   "kind": "village",
+   "geoid": "3138750"
+  },
+  {
+   "name": "Peru",
+   "kind": "city",
+   "geoid": "3138960"
+  },
+  {
+   "name": "Petersburg",
+   "kind": "village",
+   "geoid": "3138995"
+  },
+  {
+   "name": "Phillips",
+   "kind": "village",
+   "geoid": "3139030"
+  },
+  {
+   "name": "Pickrell",
+   "kind": "village",
+   "geoid": "3139065"
+  },
+  {
+   "name": "Pierce",
+   "kind": "city",
+   "geoid": "3139100"
+  },
+  {
+   "name": "Pilger",
+   "kind": "village",
+   "geoid": "3139135"
+  },
+  {
+   "name": "Plainview",
+   "kind": "city",
+   "geoid": "3139170"
+  },
+  {
+   "name": "Platte Center",
+   "kind": "village",
+   "geoid": "3139310"
+  },
+  {
+   "name": "Plattsmouth",
+   "kind": "city",
+   "geoid": "3139345"
+  },
+  {
+   "name": "Pleasant Dale",
+   "kind": "village",
+   "geoid": "3139380"
+  },
+  {
+   "name": "Pleasanton",
+   "kind": "village",
+   "geoid": "3139450"
+  },
+  {
+   "name": "Plymouth",
+   "kind": "village",
+   "geoid": "3139590"
+  },
+  {
+   "name": "Polk",
+   "kind": "village",
+   "geoid": "3139660"
+  },
+  {
+   "name": "Ponca",
+   "kind": "city",
+   "geoid": "3139695"
+  },
+  {
+   "name": "Potter",
+   "kind": "village",
+   "geoid": "3139870"
+  },
+  {
+   "name": "Prague",
+   "kind": "village",
+   "geoid": "3139975"
+  },
+  {
+   "name": "Primrose",
+   "kind": "village",
+   "geoid": "3140360"
+  },
+  {
+   "name": "Prosser",
+   "kind": "village",
+   "geoid": "3140430"
+  },
+  {
+   "name": "Ragan",
+   "kind": "village",
+   "geoid": "3140570"
+  },
+  {
+   "name": "Ralston",
+   "kind": "city",
+   "geoid": "3140605"
+  },
+  {
+   "name": "Randolph",
+   "kind": "city",
+   "geoid": "3140675"
+  },
+  {
+   "name": "Ravenna",
+   "kind": "city",
+   "geoid": "3140710"
+  },
+  {
+   "name": "Raymond",
+   "kind": "village",
+   "geoid": "3140780"
+  },
+  {
+   "name": "Red Cloud",
+   "kind": "city",
+   "geoid": "3140920"
+  },
+  {
+   "name": "Republican City",
+   "kind": "village",
+   "geoid": "3141130"
+  },
+  {
+   "name": "Reynolds",
+   "kind": "village",
+   "geoid": "3141235"
+  },
+  {
+   "name": "Richland",
+   "kind": "village",
+   "geoid": "3141375"
+  },
+  {
+   "name": "Rising City",
+   "kind": "village",
+   "geoid": "3141480"
+  },
+  {
+   "name": "Riverdale",
+   "kind": "village",
+   "geoid": "3141515"
+  },
+  {
+   "name": "Riverton",
+   "kind": "village",
+   "geoid": "3141760"
+  },
+  {
+   "name": "Roca",
+   "kind": "village",
+   "geoid": "3141830"
+  },
+  {
+   "name": "Rockville",
+   "kind": "village",
+   "geoid": "3142075"
+  },
+  {
+   "name": "Rogers",
+   "kind": "village",
+   "geoid": "3142145"
+  },
+  {
+   "name": "Rosalie",
+   "kind": "village",
+   "geoid": "3142250"
+  },
+  {
+   "name": "Roseland",
+   "kind": "village",
+   "geoid": "3142355"
+  },
+  {
+   "name": "Royal",
+   "kind": "village",
+   "geoid": "3142495"
+  },
+  {
+   "name": "Rulo",
+   "kind": "village",
+   "geoid": "3142670"
+  },
+  {
+   "name": "Rushville",
+   "kind": "city",
+   "geoid": "3142775"
+  },
+  {
+   "name": "Ruskin",
+   "kind": "village",
+   "geoid": "3142810"
+  },
+  {
+   "name": "Salem",
+   "kind": "village",
+   "geoid": "3143370"
+  },
+  {
+   "name": "Santee",
+   "kind": "village",
+   "geoid": "3143475"
+  },
+  {
+   "name": "Sargent",
+   "kind": "city",
+   "geoid": "3143685"
+  },
+  {
+   "name": "Saronville",
+   "kind": "village",
+   "geoid": "3143755"
+  },
+  {
+   "name": "Schuyler",
+   "kind": "city",
+   "geoid": "3144035"
+  },
+  {
+   "name": "Scotia",
+   "kind": "village",
+   "geoid": "3144070"
+  },
+  {
+   "name": "Scottsbluff",
+   "kind": "city",
+   "geoid": "3144245"
+  },
+  {
+   "name": "Scribner",
+   "kind": "city",
+   "geoid": "3144280"
+  },
+  {
+   "name": "Seward",
+   "kind": "city",
+   "geoid": "3144420"
+  },
+  {
+   "name": "Shelby",
+   "kind": "village",
+   "geoid": "3144595"
+  },
+  {
+   "name": "Shelton",
+   "kind": "village",
+   "geoid": "3144700"
+  },
+  {
+   "name": "Shickley",
+   "kind": "village",
+   "geoid": "3145085"
+  },
+  {
+   "name": "Sholes",
+   "kind": "village",
+   "geoid": "3145190"
+  },
+  {
+   "name": "Shubert",
+   "kind": "village",
+   "geoid": "3145225"
+  },
+  {
+   "name": "Sidney",
+   "kind": "city",
+   "geoid": "3145295"
+  },
+  {
+   "name": "Silver Creek",
+   "kind": "village",
+   "geoid": "3145400"
+  },
+  {
+   "name": "Smithfield",
+   "kind": "village",
+   "geoid": "3145575"
+  },
+  {
+   "name": "Snyder",
+   "kind": "village",
+   "geoid": "3145610"
+  },
+  {
+   "name": "South Bend",
+   "kind": "village",
+   "geoid": "3145680"
+  },
+  {
+   "name": "South Sioux City",
+   "kind": "city",
+   "geoid": "3146030"
+  },
+  {
+   "name": "Spalding",
+   "kind": "village",
+   "geoid": "3146135"
+  },
+  {
+   "name": "Spencer",
+   "kind": "village",
+   "geoid": "3146275"
+  },
+  {
+   "name": "Sprague",
+   "kind": "village",
+   "geoid": "3146380"
+  },
+  {
+   "name": "Springfield",
+   "kind": "city",
+   "geoid": "3146520"
+  },
+  {
+   "name": "Springview",
+   "kind": "village",
+   "geoid": "3146625"
+  },
+  {
+   "name": "St. Edward",
+   "kind": "city",
+   "geoid": "3143055"
+  },
+  {
+   "name": "St. Helena",
+   "kind": "village",
+   "geoid": "3143090"
+  },
+  {
+   "name": "St. Paul",
+   "kind": "city",
+   "geoid": "3143265"
+  },
+  {
+   "name": "Stamford",
+   "kind": "village",
+   "geoid": "3146695"
+  },
+  {
+   "name": "Stanton",
+   "kind": "city",
+   "geoid": "3146800"
+  },
+  {
+   "name": "Staplehurst",
+   "kind": "village",
+   "geoid": "3146835"
+  },
+  {
+   "name": "Stapleton",
+   "kind": "village",
+   "geoid": "3146870"
+  },
+  {
+   "name": "Steele City",
+   "kind": "village",
+   "geoid": "3147010"
+  },
+  {
+   "name": "Steinauer",
+   "kind": "village",
+   "geoid": "3147080"
+  },
+  {
+   "name": "Stella",
+   "kind": "village",
+   "geoid": "3147115"
+  },
+  {
+   "name": "Sterling",
+   "kind": "village",
+   "geoid": "3147150"
+  },
+  {
+   "name": "Stockham",
+   "kind": "village",
+   "geoid": "3147220"
+  },
+  {
+   "name": "Stockville",
+   "kind": "village",
+   "geoid": "3147290"
+  },
+  {
+   "name": "Strang",
+   "kind": "village",
+   "geoid": "3147360"
+  },
+  {
+   "name": "Stratton",
+   "kind": "village",
+   "geoid": "3147395"
+  },
+  {
+   "name": "Stromsburg",
+   "kind": "city",
+   "geoid": "3147465"
+  },
+  {
+   "name": "Stuart",
+   "kind": "village",
+   "geoid": "3147500"
+  },
+  {
+   "name": "Sumner",
+   "kind": "village",
+   "geoid": "3147675"
+  },
+  {
+   "name": "Superior",
+   "kind": "city",
+   "geoid": "3147815"
+  },
+  {
+   "name": "Surprise",
+   "kind": "village",
+   "geoid": "3147850"
+  },
+  {
+   "name": "Sutherland",
+   "kind": "village",
+   "geoid": "3147920"
+  },
+  {
+   "name": "Sutton",
+   "kind": "city",
+   "geoid": "3147955"
+  },
+  {
+   "name": "Swanton",
+   "kind": "village",
+   "geoid": "3148060"
+  },
+  {
+   "name": "Syracuse",
+   "kind": "city",
+   "geoid": "3148235"
+  },
+  {
+   "name": "Table Rock",
+   "kind": "village",
+   "geoid": "3148270"
+  },
+  {
+   "name": "Talmage",
+   "kind": "village",
+   "geoid": "3148305"
+  },
+  {
+   "name": "Tarnov",
+   "kind": "village",
+   "geoid": "3148410"
+  },
+  {
+   "name": "Taylor",
+   "kind": "village",
+   "geoid": "3148445"
+  },
+  {
+   "name": "Tecumseh",
+   "kind": "city",
+   "geoid": "3148480"
+  },
+  {
+   "name": "Tekamah",
+   "kind": "city",
+   "geoid": "3148515"
+  },
+  {
+   "name": "Terrytown",
+   "kind": "city",
+   "geoid": "3148585"
+  },
+  {
+   "name": "Thayer",
+   "kind": "village",
+   "geoid": "3148690"
+  },
+  {
+   "name": "Thedford",
+   "kind": "village",
+   "geoid": "3148760"
+  },
+  {
+   "name": "Thurston",
+   "kind": "village",
+   "geoid": "3148900"
+  },
+  {
+   "name": "Tilden",
+   "kind": "city",
+   "geoid": "3148935"
+  },
+  {
+   "name": "Tobias",
+   "kind": "village",
+   "geoid": "3149005"
+  },
+  {
+   "name": "Trenton",
+   "kind": "village",
+   "geoid": "3149145"
+  },
+  {
+   "name": "Trumbull",
+   "kind": "village",
+   "geoid": "3149285"
+  },
+  {
+   "name": "Uehling",
+   "kind": "village",
+   "geoid": "3149425"
+  },
+  {
+   "name": "Ulysses",
+   "kind": "village",
+   "geoid": "3149460"
+  },
+  {
+   "name": "Unadilla",
+   "kind": "village",
+   "geoid": "3149530"
+  },
+  {
+   "name": "Union",
+   "kind": "village",
+   "geoid": "3149635"
+  },
+  {
+   "name": "Upland",
+   "kind": "village",
+   "geoid": "3149880"
+  },
+  {
+   "name": "Utica",
+   "kind": "village",
+   "geoid": "3149915"
+  },
+  {
+   "name": "Valentine",
+   "kind": "city",
+   "geoid": "3149950"
+  },
+  {
+   "name": "Valley",
+   "kind": "city",
+   "geoid": "3150020"
+  },
+  {
+   "name": "Valparaiso",
+   "kind": "village",
+   "geoid": "3150125"
+  },
+  {
+   "name": "Venango",
+   "kind": "village",
+   "geoid": "3150230"
+  },
+  {
+   "name": "Verdel",
+   "kind": "village",
+   "geoid": "3150335"
+  },
+  {
+   "name": "Verdigre",
+   "kind": "village",
+   "geoid": "3150370"
+  },
+  {
+   "name": "Verdon",
+   "kind": "village",
+   "geoid": "3150510"
+  },
+  {
+   "name": "Virginia",
+   "kind": "village",
+   "geoid": "3150790"
+  },
+  {
+   "name": "Waco",
+   "kind": "village",
+   "geoid": "3150895"
+  },
+  {
+   "name": "Wahoo",
+   "kind": "city",
+   "geoid": "3150965"
+  },
+  {
+   "name": "Wakefield",
+   "kind": "city",
+   "geoid": "3151070"
+  },
+  {
+   "name": "Wallace",
+   "kind": "village",
+   "geoid": "3151175"
+  },
+  {
+   "name": "Walthill",
+   "kind": "village",
+   "geoid": "3151245"
+  },
+  {
+   "name": "Washington",
+   "kind": "village",
+   "geoid": "3151595"
+  },
+  {
+   "name": "Waterbury",
+   "kind": "village",
+   "geoid": "3151630"
+  },
+  {
+   "name": "Waterloo",
+   "kind": "village",
+   "geoid": "3151665"
+  },
+  {
+   "name": "Wauneta",
+   "kind": "village",
+   "geoid": "3151700"
+  },
+  {
+   "name": "Wausa",
+   "kind": "village",
+   "geoid": "3151735"
+  },
+  {
+   "name": "Waverly",
+   "kind": "city",
+   "geoid": "3151770"
+  },
+  {
+   "name": "Wayne",
+   "kind": "city",
+   "geoid": "3151840"
+  },
+  {
+   "name": "Weeping Water",
+   "kind": "city",
+   "geoid": "3152015"
+  },
+  {
+   "name": "Wellfleet",
+   "kind": "village",
+   "geoid": "3152085"
+  },
+  {
+   "name": "West Point",
+   "kind": "city",
+   "geoid": "3152575"
+  },
+  {
+   "name": "Western",
+   "kind": "village",
+   "geoid": "3152295"
+  },
+  {
+   "name": "Weston",
+   "kind": "village",
+   "geoid": "3152540"
+  },
+  {
+   "name": "Whitney",
+   "kind": "village",
+   "geoid": "3152925"
+  },
+  {
+   "name": "Wilber",
+   "kind": "city",
+   "geoid": "3152960"
+  },
+  {
+   "name": "Wilcox",
+   "kind": "village",
+   "geoid": "3152995"
+  },
+  {
+   "name": "Wilsonville",
+   "kind": "village",
+   "geoid": "3153240"
+  },
+  {
+   "name": "Winnebago",
+   "kind": "village",
+   "geoid": "3153275"
+  },
+  {
+   "name": "Winnetoon",
+   "kind": "village",
+   "geoid": "3153345"
+  },
+  {
+   "name": "Winside",
+   "kind": "village",
+   "geoid": "3153380"
+  },
+  {
+   "name": "Winslow",
+   "kind": "village",
+   "geoid": "3153415"
+  },
+  {
+   "name": "Wisner",
+   "kind": "city",
+   "geoid": "3153450"
+  },
+  {
+   "name": "Wolbach",
+   "kind": "village",
+   "geoid": "3153520"
+  },
+  {
+   "name": "Wood Lake",
+   "kind": "village",
+   "geoid": "3153555"
+  },
+  {
+   "name": "Wood River",
+   "kind": "city",
+   "geoid": "3153660"
+  },
+  {
+   "name": "Wymore",
+   "kind": "city",
+   "geoid": "3153835"
+  },
+  {
+   "name": "Wynot",
+   "kind": "village",
+   "geoid": "3153905"
+  },
+  {
+   "name": "York",
+   "kind": "city",
+   "geoid": "3154045"
+  },
+  {
+   "name": "Yutan",
+   "kind": "city",
+   "geoid": "3154115"
+  }
+ ]
+}

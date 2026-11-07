@@ -75,7 +75,7 @@ AGENCY = [
      "note": ("EPA's sewer overflow and bypass event tables (NPDES electronic reporting): Arizona's AZPDES permittees "
               "file their 24-hour and five-day reports in ADEQ's myDEQ and EPA publishes them (288 Arizona reports from "
               "42 permits, September 2019 to 28 October 2026, in the 2026-11-04 extract; a median 3 days from start to "
-              "receipt), and the Navajo Nation's reports under EPA's own permits (52 located in Arizona, February 2024 "
+              "receipt), and the Navajo Nation's reports under EPA's own permits (50 located in Arizona, February 2024 "
               "to October 2026). No report from Pima County's permits. (research/az/report.md §2.2)"),
      "sources": ["fed-echo-sewer-overflow-bypass-events", "az-epa-sobe"]},
     {"id": "az-r18-9-c305-warning-signs", "agency": "Sewage collection system permittees (A.A.C. R18-9-C305)",

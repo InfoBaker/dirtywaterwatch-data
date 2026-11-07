@@ -1,0 +1,1895 @@
+{
+ "state": "AZ",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 74,
+ "waters": [
+  {
+   "slug": "alamo-lake-az",
+   "name": "Alamo Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -113.60205,
+    34.23196,
+    -113.56112,
+    34.27677
+   ],
+   "wikidata": "Q4705968",
+   "charted": false,
+   "area_km2": 5.94,
+   "launches": [
+    "alamo-lake-main-boat-ramp-az",
+    "cholla-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alvord-lake-az",
+   "name": "Alvord Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Phoenix"
+   ],
+   "bbox": [
+    -112.14019,
+    33.37194,
+    -112.13528,
+    33.37663
+   ],
+   "wikidata": "Q4738340",
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "alvord-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "apache-lake-az",
+   "name": "Apache Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.34504,
+    33.57265,
+    -111.16162,
+    33.67136
+   ],
+   "wikidata": "Q616908",
+   "charted": false,
+   "area_km2": 9.97,
+   "launches": [
+    "burnt-corral-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Quagga mussels",
+     "text": "Quagga mussels (latest report 2016) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "quagga mussels"
+     ],
+     "date": "2016-05-15"
+    }
+   ]
+  },
+  {
+   "slug": "arivaca-lake-az",
+   "name": "Arivaca Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Oro Blanco"
+   ],
+   "bbox": [
+    -111.2549,
+    31.52535,
+    -111.24832,
+    31.5371
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.208,
+   "launches": [
+    "arivaca-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ashurst-lake-az",
+   "name": "Ashurst Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.40742,
+    35.01194,
+    -111.39796,
+    35.02677
+   ],
+   "wikidata": "Q4806131",
+   "charted": false,
+   "area_km2": 0.748,
+   "launches": [
+    "ashurst-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bartlett-reservoir-az",
+   "name": "Bartlett Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Rio Verde"
+   ],
+   "bbox": [
+    -111.66457,
+    33.81123,
+    -111.59302,
+    33.92564
+   ],
+   "wikidata": "Q809448",
+   "charted": false,
+   "area_km2": 9.125,
+   "launches": [
+    "bartlett-lake-marina-boat-ramp-az",
+    "jojoba-boat-ramp-az",
+    "yellow-cliffs-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azvma.org/news/564446",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-05-06",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "becker-lake-az",
+   "name": "Becker Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Eagar"
+   ],
+   "bbox": [
+    -109.30992,
+    34.14753,
+    -109.30268,
+    34.15698
+   ],
+   "wikidata": "Q4878666",
+   "charted": false,
+   "area_km2": 0.325,
+   "launches": [
+    "becker-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-lake-az",
+   "name": "Big Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -109.43137,
+    33.87174,
+    -109.40885,
+    33.89101
+   ],
+   "wikidata": "Q4905944",
+   "charted": false,
+   "area_km2": 2.008,
+   "launches": [
+    "big-lake-main-boat-ramp-az",
+    "big-lake-marina-az",
+    "railroad-cove-boat-ramp-az",
+    "south-cove-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "black-canyon-lake-az",
+   "name": "Black Canyon Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Heber–Overgaard, Arizona"
+   ],
+   "bbox": [
+    -110.70405,
+    34.32478,
+    -110.69817,
+    34.33299
+   ],
+   "wikidata": "Q880135",
+   "charted": false,
+   "area_km2": 0.134,
+   "launches": [
+    "black-canyon-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-ridge-reservoir-az",
+   "name": "Blue Ridge Reservoir",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.2382,
+    34.5324,
+    -111.18067,
+    34.55899
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.088,
+   "launches": [
+    "blue-ridge-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bunch-reservoir-az",
+   "name": "Bunch Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Northwoods"
+   ],
+   "bbox": [
+    -109.44872,
+    34.03524,
+    -109.44437,
+    34.04297
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.192,
+   "launches": [
+    "bunch-reservoir-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canyon-lake-az",
+   "name": "Canyon Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Apache Junction",
+    "Tortilla Flat"
+   ],
+   "bbox": [
+    -111.44574,
+    33.52629,
+    -111.34395,
+    33.59058
+   ],
+   "wikidata": "Q1033996",
+   "charted": false,
+   "area_km2": 3.42,
+   "launches": [
+    "canyon-lake-marina-boat-ramp-az",
+    "laguna-boat-ramp-az",
+    "palo-verde-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Quagga mussels",
+     "text": "Quagga mussels (latest report 2015) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "quagga mussels"
+     ],
+     "date": "2015-12-15"
+    }
+   ]
+  },
+  {
+   "slug": "cataract-lake-az",
+   "name": "Cataract Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Williams"
+   ],
+   "bbox": [
+    -112.22117,
+    35.24847,
+    -112.21413,
+    35.25262
+   ],
+   "wikidata": "Q5051463",
+   "charted": false,
+   "area_km2": 0.101,
+   "launches": [
+    "cataract-lake-boat-launch-near-williams-az",
+    "cataract-lake-boat-launch-near-williams-az-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chaparral-lake-az",
+   "name": "Chaparral Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Scottsdale"
+   ],
+   "bbox": [
+    -111.9084,
+    33.50993,
+    -111.90668,
+    33.51453
+   ],
+   "wikidata": "Q5072940",
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "chaparral-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chevelon-canyon-lake-az",
+   "name": "Chevelon Canyon Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -110.82953,
+    34.47607,
+    -110.8199,
+    34.51195
+   ],
+   "wikidata": "Q5094319",
+   "charted": false,
+   "area_km2": 0.741,
+   "launches": [
+    "chevelon-canyon-lake-boat-launch-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "clear-creek-lake-az",
+   "name": "Clear Creek Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Winslow"
+   ],
+   "bbox": [
+    -110.64375,
+    34.96883,
+    -110.63605,
+    34.97515
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.175,
+   "launches": [
+    "clear-creek-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cluff-reservoir-number-three-az",
+   "name": "Cluff Reservoir Number Three",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Pima"
+   ],
+   "bbox": [
+    -109.86405,
+    32.80435,
+    -109.86155,
+    32.80712
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.042,
+   "launches": [
+    "cluff-reservoir-number-three-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colorado-river-az",
+   "name": "Colorado River",
+   "kind": "river",
+   "state": "AZ",
+   "towns": [
+    "Bullhead City",
+    "Cibola",
+    "Cienega Springs",
+    "Ehrenberg",
+    "Martinez Lake",
+    "Meadview",
+    "Page",
+    "Parker Strip",
+    "Paymaster Landing",
+    "Topock",
+    "Willow Valley"
+   ],
+   "bbox": [
+    -114.74355,
+    32.71871,
+    -111.47882,
+    36.93794
+   ],
+   "wikidata": "Q1265",
+   "charted": false,
+   "area_km2": 14.832,
+   "launches": [
+    "a-10-boat-ramp-az",
+    "a-7-boat-ramp-az",
+    "buckskin-mtn-boat-ramp-az",
+    "cibola-lake-north-boat-ramp-az",
+    "cibola-lake-south-boat-ramp-az",
+    "community-park-boat-ramp-az",
+    "davis-camp-boat-ramp-az",
+    "diamond-creek-az",
+    "emerald-cyn-boat-ramp-az",
+    "glen-canyon-river-access-boat-ramp-az",
+    "lees-ferry-boat-launch-az",
+    "lees-ferry-boat-ramp-az",
+    "oxbow-boat-ramp-az",
+    "pierce-ferry-boat-ramp-az",
+    "river-island-boat-ramp-az",
+    "rotary-park-boat-ramp-az",
+    "veteran-s-park-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "concho-lake-az",
+   "name": "Concho Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Concho"
+   ],
+   "bbox": [
+    -109.63291,
+    34.4394,
+    -109.62661,
+    34.44878
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.169,
+   "launches": [
+    "concho-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crescent-lake-az",
+   "name": "Crescent Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Eagar"
+   ],
+   "bbox": [
+    -109.4277,
+    33.89715,
+    -109.4155,
+    33.91757
+   ],
+   "wikidata": "Q5184383",
+   "charted": false,
+   "area_km2": 0.678,
+   "launches": [
+    "crescent-lake-dam-area-boating-site-az",
+    "crescent-lake-south-boat-ramp-az",
+    "crescent-lake-west-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dogtown-reservoir-az",
+   "name": "Dogtown Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Williams"
+   ],
+   "bbox": [
+    -112.13768,
+    35.2086,
+    -112.12528,
+    35.21317
+   ],
+   "wikidata": "Q5288485",
+   "charted": false,
+   "area_km2": 0.26,
+   "launches": [
+    "dogtown-reservoir-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-lagoon-az",
+   "name": "East Lagoon",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Cottonwood"
+   ],
+   "bbox": [
+    -112.00704,
+    34.75171,
+    -112.00291,
+    34.75381
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.031,
+   "launches": [
+    "east-lagoon-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fool-hollow-lake-az",
+   "name": "Fool Hollow Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Show Low"
+   ],
+   "bbox": [
+    -110.07548,
+    34.26524,
+    -110.04804,
+    34.2781
+   ],
+   "wikidata": "Q7352006",
+   "charted": false,
+   "area_km2": 0.508,
+   "launches": [
+    "fool-hollow-lake-east-boat-ramp-az",
+    "fool-hollow-lake-west-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gila-river-az",
+   "name": "Gila River",
+   "kind": "river",
+   "state": "AZ",
+   "towns": [
+    "Morenci"
+   ],
+   "bbox": [
+    -114.55815,
+    32.67616,
+    -108.99326,
+    33.39022
+   ],
+   "wikidata": "Q838143",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dry-canyon-boat-take-out-az",
+    "gila-river-boat-put-in-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "granite-basin-lake-az",
+   "name": "Granite Basin Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Prescott"
+   ],
+   "bbox": [
+    -112.55207,
+    34.61609,
+    -112.54842,
+    34.61804
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "granite-basin-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-valley-park-main-lake-az",
+   "name": "Green Valley Park Main Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Payson"
+   ],
+   "bbox": [
+    -111.34664,
+    34.23078,
+    -111.34329,
+    34.23267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "green-valley-park-main-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-reservoir-az",
+   "name": "Horseshoe Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.74622,
+    33.9833,
+    -111.69033,
+    34.05706
+   ],
+   "wikidata": "Q5906041",
+   "charted": false,
+   "area_km2": 9.662,
+   "launches": [
+    "ocotillo-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaibab-lake-az",
+   "name": "Kaibab Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Williams"
+   ],
+   "bbox": [
+    -112.16299,
+    35.28176,
+    -112.14542,
+    35.28813
+   ],
+   "wikidata": "Q6347551",
+   "charted": false,
+   "area_km2": 0.26,
+   "launches": [
+    "kaibab-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kennedy-park-lake-az",
+   "name": "Kennedy Park Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Tucson"
+   ],
+   "bbox": [
+    -111.00961,
+    32.17921,
+    -111.0067,
+    32.18121
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.033,
+   "launches": [
+    "kennedy-park-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kinnikinick-lake-az",
+   "name": "Kinnikinick Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.31255,
+    34.89464,
+    -111.29715,
+    34.90046
+   ],
+   "wikidata": "Q6414112",
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "kinnikinick-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knoll-lake-az",
+   "name": "Knoll Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.09478,
+    34.41803,
+    -111.0842,
+    34.43128
+   ],
+   "wikidata": "Q6422972",
+   "charted": false,
+   "area_km2": 0.213,
+   "launches": [
+    "knoll-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-havasu-az",
+   "name": "Lake Havasu",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Lake Havasu City",
+    "Parker Strip"
+   ],
+   "bbox": [
+    -114.40524,
+    34.28859,
+    -114.09693,
+    34.5324
+   ],
+   "wikidata": "Q451522",
+   "charted": false,
+   "area_km2": 59.602,
+   "launches": [
+    "cattail-cove-boat-ramp-az",
+    "lake-havasu-boat-launch-near-parker-strip-az",
+    "lake-havasu-boat-launch-near-lake-havasu-city-az-2",
+    "site-six-boat-ramp-az",
+    "take-off-point-az",
+    "windsor-north-boat-ramp-az",
+    "windsor-pwc-boat-ramp-az",
+    "windsor-south-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mead-az",
+   "name": "Lake Mead",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Meadview",
+    "Temple Bar"
+   ],
+   "bbox": [
+    -114.83948,
+    36.00097,
+    -114.09881,
+    36.42515
+   ],
+   "wikidata": "Q654515",
+   "charted": false,
+   "area_km2": 309.936,
+   "launches": [
+    "south-cove-boat-launch-az",
+    "south-cove-boat-ramp-meadview-az",
+    "temple-bar-marina-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mohave-az",
+   "name": "Lake Mohave",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Bullhead City",
+    "Katherine",
+    "Willow Beach"
+   ],
+   "bbox": [
+    -114.74455,
+    35.19572,
+    -114.56031,
+    36.01539
+   ],
+   "wikidata": "Q1801012",
+   "charted": false,
+   "area_km2": 104.857,
+   "launches": [
+    "davis-dam-trailhead-paddle-craft-launch-az",
+    "katherine-s-landing-boat-ramp-az",
+    "princess-cove-boat-ramp-az",
+    "willow-beach-boat-launch-az",
+    "willow-beach-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pleasant-az",
+   "name": "Lake Pleasant",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Black Canyon City",
+    "Sun City West"
+   ],
+   "bbox": [
+    -112.32501,
+    33.84708,
+    -112.19556,
+    33.97442
+   ],
+   "wikidata": "Q46082605",
+   "charted": false,
+   "area_km2": 31.949,
+   "launches": [
+    "10-lane-boat-ramp-az",
+    "castle-creek-4-lane-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Quagga mussels",
+     "text": "Quagga mussels (latest report 2010) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "quagga mussels"
+     ],
+     "date": "2010-07-22"
+    }
+   ]
+  },
+  {
+   "slug": "lake-powell-az",
+   "name": "Lake Powell",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Page"
+   ],
+   "bbox": [
+    -111.56748,
+    36.84441,
+    -110.28672,
+    37.90938
+   ],
+   "wikidata": "Q667507",
+   "charted": false,
+   "area_km2": 518.752,
+   "launches": [
+    "antelope-point-boat-ramp-az",
+    "antelope-point-marina-boat-ramp-az",
+    "wahweap-marina-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lakeside-park-lake-az",
+   "name": "Lakeside Park Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Tucson"
+   ],
+   "bbox": [
+    -110.81853,
+    32.1849,
+    -110.81533,
+    32.18758
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.047,
+   "launches": [
+    "chuck-ford-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lee-valley-reservoir-az",
+   "name": "Lee Valley Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -109.50462,
+    33.93805,
+    -109.49822,
+    33.94387
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.148,
+   "launches": [
+    "lee-valley-reservoir-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-az",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [],
+   "bbox": [
+    -111.2221,
+    34.77644,
+    -111.19844,
+    34.79966
+   ],
+   "wikidata": "Q1869365",
+   "charted": false,
+   "area_km2": 1.253,
+   "launches": [
+    "long-lake-north-boat-ramp-az",
+    "long-lake-south-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-lake-mary-az",
+   "name": "Lower Lake Mary",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Flagstaff"
+   ],
+   "bbox": [
+    -111.58355,
+    35.09953,
+    -111.56046,
+    35.11249
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.554,
+   "launches": [
+    "lower-lake-mary-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "luna-lake-az",
+   "name": "Luna Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Alpine"
+   ],
+   "bbox": [
+    -109.10327,
+    33.82769,
+    -109.07946,
+    33.83315
+   ],
+   "wikidata": "Q6703541",
+   "charted": false,
+   "area_km2": 0.511,
+   "launches": [
+    "luna-lake-day-use-area-az",
+    "luna-lake-marina-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lyman-lake-az",
+   "name": "Lyman Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Saint Johns"
+   ],
+   "bbox": [
+    -109.38514,
+    34.33349,
+    -109.34054,
+    34.37687
+   ],
+   "wikidata": "Q1148694",
+   "charted": false,
+   "area_km2": 4.831,
+   "launches": [
+    "lyman-lake-boat-launch-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lynx-lake-az",
+   "name": "Lynx Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Prescott"
+   ],
+   "bbox": [
+    -112.38845,
+    34.51404,
+    -112.38218,
+    34.52241
+   ],
+   "wikidata": "Q6709571",
+   "charted": false,
+   "area_km2": 0.163,
+   "launches": [
+    "lynx-lake-boat-launch-az",
+    "lynx-lake-marina-store-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marshall-lake-az",
+   "name": "Marshall Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Flagstaff"
+   ],
+   "bbox": [
+    -111.5386,
+    35.11393,
+    -111.53071,
+    35.12361
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.393,
+   "launches": [
+    "marshall-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "martinez-lake-az",
+   "name": "Martinez Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Martinez Lake"
+   ],
+   "bbox": [
+    -114.49344,
+    32.97283,
+    -114.46036,
+    33.00257
+   ],
+   "wikidata": "Q6777123",
+   "charted": false,
+   "area_km2": 2.305,
+   "launches": [
+    "martinez-lake-boat-ramp-az",
+    "meers-point-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Quagga mussels",
+     "text": "Quagga mussels (latest report 2010) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "quagga mussels"
+     ],
+     "date": "2010-03-27"
+    }
+   ]
+  },
+  {
+   "slug": "mittry-lake-az",
+   "name": "Mittry Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Laguna",
+    "Yuma"
+   ],
+   "bbox": [
+    -114.486,
+    32.81691,
+    -114.4468,
+    32.86686
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.42,
+   "launches": [
+    "mittry-lake-main-boat-ramp-az",
+    "mittry-lake-north-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Quagga mussels",
+     "text": "Quagga mussels (latest report 2010) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "quagga mussels"
+     ],
+     "date": "2010-03-27"
+    }
+   ]
+  },
+  {
+   "slug": "nelson-reservoir-az",
+   "name": "Nelson Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Eagar"
+   ],
+   "bbox": [
+    -109.19483,
+    34.04528,
+    -109.18697,
+    34.06019
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.256,
+   "launches": [
+    "nelson-reservoir-north-boat-ramp-az",
+    "nelson-reservoir-south-boat-ramp-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "parker-canyon-lake-az",
+   "name": "Parker Canyon Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Sierra Vista"
+   ],
+   "bbox": [
+    -110.45837,
+    31.42271,
+    -110.44712,
+    31.43815
+   ],
+   "wikidata": "Q7138285",
+   "charted": false,
+   "area_km2": 0.417,
+   "launches": [
+    "parker-lake-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "patagonia-lake-az",
+   "name": "Patagonia Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Nogales"
+   ],
+   "bbox": [
+    -110.87007,
+    31.48872,
+    -110.84619,
+    31.50045
+   ],
+   "wikidata": "Q1538936",
+   "charted": false,
+   "area_km2": 0.673,
+   "launches": [
+    "patagonia-lake-marina-boat-ramp-az",
+    "patagonia-lake-north-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pena-blanca-lake-az",
+   "name": "Peña Blanca Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Nogales"
+   ],
+   "bbox": [
+    -111.08942,
+    31.39908,
+    -111.08416,
+    31.40919
+   ],
+   "wikidata": "Q7179682",
+   "charted": false,
+   "area_km2": 0.145,
+   "launches": [
+    "pena-blanca-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rainbow-lake-az",
+   "name": "Rainbow Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Lake of the Woods"
+   ],
+   "bbox": [
+    -109.9895,
+    34.14301,
+    -109.9762,
+    34.15825
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.458,
+   "launches": [
+    "rainbow-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "redondo-lake-az",
+   "name": "Redondo Lake",
+   "kind": "pond",
+   "state": "AZ",
+   "towns": [
+    "Buckshot"
+   ],
+   "bbox": [
+    -114.48622,
+    32.74098,
+    -114.48266,
+    32.74383
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.05,
+   "launches": [
+    "redondo-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "riggs-lake-az",
+   "name": "Riggs Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Pima"
+   ],
+   "bbox": [
+    -109.96572,
+    32.70621,
+    -109.96376,
+    32.70913
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.034,
+   "launches": [
+    "riggs-flat-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "river-reservoir-az",
+   "name": "River Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Northwoods"
+   ],
+   "bbox": [
+    -109.44456,
+    34.02505,
+    -109.42926,
+    34.0379
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.522,
+   "launches": [
+    "river-reservoir-main-boating-site-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "roper-lake-az",
+   "name": "Roper Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Safford"
+   ],
+   "bbox": [
+    -109.70694,
+    32.75416,
+    -109.7005,
+    32.75703
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.105,
+   "launches": [
+    "roper-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saguaro-lake-az",
+   "name": "Saguaro Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Fountain Hills"
+   ],
+   "bbox": [
+    -111.5395,
+    33.55332,
+    -111.44291,
+    33.58107
+   ],
+   "wikidata": "Q2211948",
+   "charted": false,
+   "area_km2": 4.798,
+   "launches": [
+    "saguaro-lake-east-boat-ramp-az",
+    "saguaro-lake-west-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sahuarita-lake-az",
+   "name": "Sahuarita Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Sahuarita"
+   ],
+   "bbox": [
+    -110.96817,
+    31.96941,
+    -110.96602,
+    31.97473
+   ],
+   "wikidata": "Q7351692",
+   "charted": false,
+   "area_km2": 0.034,
+   "launches": [
+    "sahuarita-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salt-river-az",
+   "name": "Salt River",
+   "kind": "river",
+   "state": "AZ",
+   "towns": [
+    "Fountain Hills",
+    "Rock House"
+   ],
+   "bbox": [
+    -112.30354,
+    33.37885,
+    -110.22582,
+    33.83835
+   ],
+   "wikidata": "Q1341271",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "foxtail-boating-site-az",
+    "phon-d-sutton-rap-az",
+    "sr-288-bridge-rafting-take-out-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scott-reservoir-az",
+   "name": "Scott Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Pinetop-Lakeside"
+   ],
+   "bbox": [
+    -109.96105,
+    34.17161,
+    -109.95648,
+    34.18069
+   ],
+   "wikidata": "Q7351559",
+   "charted": false,
+   "area_km2": 0.209,
+   "launches": [
+    "scott-reservoir-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "show-low-lake-az",
+   "name": "Show Low Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Wagon Wheel"
+   ],
+   "bbox": [
+    -110.00621,
+    34.17731,
+    -109.99488,
+    34.1959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.621,
+   "launches": [
+    "show-low-lake-boat-launch-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silverbell-lake-az",
+   "name": "Silverbell Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Tucson"
+   ],
+   "bbox": [
+    -111.03405,
+    32.28219,
+    -111.03086,
+    32.28626
+   ],
+   "wikidata": "Q7351694",
+   "charted": false,
+   "area_km2": 0.055,
+   "launches": [
+    "silverbell-lake-slipway-az",
+    "silverbell-lake-slipway-south-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tempe-town-lake-az",
+   "name": "Tempe Town Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Tempe"
+   ],
+   "bbox": [
+    -111.94951,
+    33.43016,
+    -111.91024,
+    33.43671
+   ],
+   "wikidata": "Q2402621",
+   "charted": false,
+   "area_km2": 0.95,
+   "launches": [
+    "tempe-town-lake-boat-launch-near-tempe-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "theodore-roosevelt-lake-az",
+   "name": "Theodore Roosevelt Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "North Bay Estates",
+    "Roosevelt",
+    "Roosevelt Estates"
+   ],
+   "bbox": [
+    -111.25391,
+    33.63594,
+    -110.96408,
+    33.76962
+   ],
+   "wikidata": "Q1426999",
+   "charted": false,
+   "area_km2": 66.337,
+   "launches": [
+    "cholla-boat-ramp-az-2",
+    "grapevine-boat-ramp-az",
+    "indian-point-boat-ramp-az",
+    "roosevelt-lake-marina-boat-ramp-az",
+    "schoolhouse-boat-ramp-az",
+    "windy-hill-boat-ramp-badger-az",
+    "windy-hill-boat-ramp-bobcat-az",
+    "windy-hill-boat-ramp-coyote-az",
+    "windy-hill-boat-ramp-ringtail-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "topock-bay-az",
+   "name": "Topock Bay",
+   "kind": "bay",
+   "state": "AZ",
+   "towns": [
+    "Golden Shores"
+   ],
+   "bbox": null,
+   "wikidata": "Q49394024",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "catfish-paradise-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tunnel-reservoir-az",
+   "name": "Tunnel Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Northwoods"
+   ],
+   "bbox": [
+    -109.44498,
+    34.02851,
+    -109.44094,
+    34.03425
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.158,
+   "launches": [
+    "tunnel-reservoir-boating-site-az"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://azdeq.gov/reported-habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "upper-goldwater-lake-az",
+   "name": "Upper Goldwater Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Prescott"
+   ],
+   "bbox": [
+    -112.45123,
+    34.49546,
+    -112.44662,
+    34.4999
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "goldwater-lake-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-lake-mary-az",
+   "name": "Upper Lake Mary",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Flagstaff"
+   ],
+   "bbox": [
+    -111.53575,
+    35.04225,
+    -111.4574,
+    35.0809
+   ],
+   "wikidata": "Q1250186",
+   "charted": false,
+   "area_km2": 2.502,
+   "launches": [
+    "narrows-boat-ramp-az",
+    "upper-lake-mary-boat-ramp-1-az",
+    "upper-lake-mary-boat-ramp-2-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "verde-river-az",
+   "name": "Verde River",
+   "kind": "river",
+   "state": "AZ",
+   "towns": [
+    "Camp Verde",
+    "Cottonwood",
+    "Rio Verde"
+   ],
+   "bbox": [
+    -112.46055,
+    33.54723,
+    -111.60469,
+    34.91723
+   ],
+   "wikidata": "Q4107580",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clear-creek-boating-site-az",
+    "verde-river-boat-launch-near-rio-verde-az",
+    "verde-river-boat-launch-near-cottonwood-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watson-lake-az",
+   "name": "Watson Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Prescott"
+   ],
+   "bbox": [
+    -112.42559,
+    34.58203,
+    -112.41006,
+    34.59587
+   ],
+   "wikidata": "Q7348497",
+   "charted": false,
+   "area_km2": 0.545,
+   "launches": [
+    "hillsdale-boat-ramp-az",
+    "watson-lake-main-boat-ramp-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-horse-lake-az",
+   "name": "White Horse Lake",
+   "kind": "lake",
+   "state": "AZ",
+   "towns": [
+    "Williams"
+   ],
+   "bbox": [
+    -112.01947,
+    35.11361,
+    -112.00838,
+    35.11968
+   ],
+   "wikidata": "Q7351645",
+   "charted": false,
+   "area_km2": 0.157,
+   "launches": [
+    "white-horse-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willow-lake-az",
+   "name": "Willow Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Prescott"
+   ],
+   "bbox": [
+    -112.44942,
+    34.5981,
+    -112.42992,
+    34.61123
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.937,
+   "launches": [
+    "willow-lake-boat-launch-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willow-springs-lake-az",
+   "name": "Willow Springs Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Ponderosa Spring Subdivision"
+   ],
+   "bbox": [
+    -110.87936,
+    34.30115,
+    -110.86183,
+    34.31718
+   ],
+   "wikidata": "Q2581736",
+   "charted": false,
+   "area_km2": 0.541,
+   "launches": [
+    "willow-springs-fishing-and-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "woodland-reservoir-az",
+   "name": "Woodland Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Pinetop-Lakeside"
+   ],
+   "bbox": [
+    -109.95388,
+    34.12446,
+    -109.94939,
+    34.1277
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.056,
+   "launches": [
+    "woodland-lake-park-boating-site-az"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "woods-canyon-lake-az",
+   "name": "Woods Canyon Lake",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Sleepy Hollow"
+   ],
+   "bbox": [
+    -110.95971,
+    34.33296,
+    -110.93612,
+    34.34234
+   ],
+   "wikidata": "Q7351190",
+   "charted": false,
+   "area_km2": 0.232,
+   "launches": [
+    "woods-canyon-lake-area-az"
+   ],
+   "advisories": []
+  }
+ ]
+}

@@ -25,7 +25,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Albuquerque Bernalillo County Water Utility Authority reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Albuquerque Bernalillo County Water Utility Authority reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -73,7 +73,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Abiquiu Mutual Domestic Water Consumers and Mutual Sewage Works Association reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Abiquiu Mutual Domestic Water Consumers and Mutual Sewage Works Association reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -98,7 +98,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Anthony Water and Sanitation District reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Anthony Water and Sanitation District reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -198,7 +198,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Camino Real Regional Utility Authority (Sunland Park and North plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Camino Real Regional Utility Authority (Sunland Park and North plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -208,7 +208,7 @@
    "permit": "NM0030678",
    "checked": "2026-11-07",
    "id": "nm-casa-blanca-wwtp-epa-report",
-   "name": "Casa Blanca Wastewater Treatment Plant",
+   "name": "Casa Blanca Wastewater Treatment Plant (Pueblo of Laguna)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -222,7 +222,7 @@
    "sources": [
     "nm-epa-sobe"
    ],
-   "note": "Casa Blanca Wastewater Treatment Plant's permits are EPA's on tribal land: reports go to EPA, which publishes those filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). New Mexico's notice rule does not apply on tribal land. (research/nm/report.md §3)",
+   "note": "Casa Blanca Wastewater Treatment Plant (Pueblo of Laguna)'s permits are EPA's on tribal land: reports go to EPA, which publishes those filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). New Mexico's notice rule does not apply on tribal land. (research/nm/report.md §3)",
    "barrier": null
   },
   {
@@ -247,7 +247,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "CDS Rainmakers Utilities, LLC reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "CDS Rainmakers Utilities, LLC reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -272,7 +272,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Artesia reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Artesia reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -297,7 +297,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Aztec reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Aztec reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -322,7 +322,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Belen reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Belen reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -347,7 +347,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Bloomfield reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Bloomfield reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -372,7 +372,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Carlsbad reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Carlsbad reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -397,7 +397,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Española reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Española reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -422,7 +422,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Farmington reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Farmington reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -467,7 +467,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Gallup reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Gallup reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -492,7 +492,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Las Cruces Utilities (Jacob A. Hands and East Mesa plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Las Cruces Utilities (Jacob A. Hands and East Mesa plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -538,7 +538,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Las Vegas reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Las Vegas reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -563,7 +563,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Raton reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Raton reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -588,7 +588,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Rio Rancho (plants no. 2 and no. 3) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Rio Rancho (plants no. 2 and no. 3) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -633,7 +633,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Roswell reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Roswell reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -658,7 +658,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Santa Fe (Paseo Real plant) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Santa Fe (Paseo Real plant) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -703,7 +703,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Santa Rosa reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Santa Rosa reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -728,7 +728,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Socorro reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Socorro reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -753,7 +753,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Truth or Consequences reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Truth or Consequences reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -778,32 +778,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "City of Tucumcari reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
-   "barrier": null
-  },
-  {
-   "state": "NM",
-   "operator_id": "nm-cutter-lateral-water-treatment-plant",
-   "agency": null,
-   "permit": "NM0031194",
-   "checked": "2026-11-07",
-   "id": "nm-cutter-lateral-water-treatment-plant-epa-report",
-   "name": "Cutter Lateral Water Treatment Plant",
-   "channel_kind": "feed",
-   "urls": [],
-   "method": null,
-   "legal_basis": "NPDES permit NM0031194 (EPA Region 6): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to EPA",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "feed_ingested",
-   "feed_source_id": "echo-sewer-overflow",
-   "publishes": "notices",
-   "noun": "EPA report",
-   "sources": [
-    "nm-epa-sobe",
-    "nm-epa-r6-permits"
-   ],
-   "note": "Cutter Lateral Water Treatment Plant reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "City of Tucumcari reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -828,7 +803,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Doña Ana County Utilities (South Central Regional plant) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Doña Ana County Utilities (South Central Regional plant) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -853,7 +828,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Eastern New Mexico Rural Water Authority reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Eastern New Mexico Rural Water Authority reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -876,7 +851,7 @@
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
    "noun": "Data feed",
-   "note": "EPA's sewer overflow and bypass event tables (NPDES electronic reporting): the reports New Mexico's permittees file electronically with EPA, and the Navajo Nation's under its own permits. 2026-11-04 extract: 2 reports under New Mexico permits, both the Town of Taos's (2026), and 4 Navajo Nation reports located in New Mexico (3 Shiprock, 2024 to 2025; 1 Window Rock, 2026); a median 4 days from start to receipt. EPA's collection-system table lists 55 New Mexico permits, Albuquerque, Santa Fe and Las Cruces among them, but no other has filed a report. (research/nm/report.md §2.2)",
+   "note": "EPA's sewer overflow and bypass event tables (NPDES electronic reporting): the reports New Mexico's permittees file electronically with EPA, and the Navajo Nation's under its own permits. 2026-11-04 extract: 2 reports under New Mexico permits, both the Town of Taos's (2026), and 6 Navajo Nation reports located in New Mexico (3 Shiprock, 2024 to 2025; 3 under Window Rock's permit, 2026, two of them at the lift station by Navajo, New Mexico); a median 4 days from start to receipt. EPA's collection-system table lists 55 New Mexico permits, Albuquerque, Santa Fe and Las Cruces among them, but no other has filed a report. (research/nm/report.md §2.2)",
    "sources": [
     "fed-echo-sewer-overflow-bypass-events",
     "nm-epa-sobe"
@@ -929,7 +904,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Jemez Valley Public Schools reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Jemez Valley Public Schools reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -978,7 +953,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Los Alamos County Department of Public Utilities (Bayo and White Rock plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Los Alamos County Department of Public Utilities (Bayo and White Rock plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1027,7 +1002,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Mora Mutual Water and Sewer Works Association reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Mora Mutual Water and Sewer Works Association reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1051,7 +1026,7 @@
    "sources": [
     "nm-epa-sobe"
    ],
-   "note": "Navajo Tribal Utility Authority (Shiprock and Northern Edge Navajo Casino plants)'s permits are EPA's on tribal land: reports go to EPA, which publishes those filed electronically in its overflow tables, read by the echo-sewer-overflow feed (3 report(s) placed in New Mexico in the 2026-11-04 extract). New Mexico's notice rule does not apply on tribal land. (research/nm/report.md §3)",
+   "note": "Navajo Tribal Utility Authority (Shiprock and Northern Edge Navajo Casino plants)'s permits are EPA's on tribal land: reports go to EPA, which publishes those filed electronically in its overflow tables, read by the echo-sewer-overflow feed (3 report(s) placed in New Mexico in the 2026-11-04 extract). New Mexico's notice rule does not apply on tribal land. Three more reports under the Authority's Window Rock permit (NN0021555, Arizona's row) lie in New Mexico and are placed there: two at the lift station by Navajo, New Mexico, and a line washed out east of Fort Defiance (2026-08). (research/nm/report.md §3)",
    "barrier": null
   },
   {
@@ -1076,7 +1051,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "New Mexico Water Service Company (Rio Communities and Rio del Oro plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "New Mexico Water Service Company (Rio Communities and Rio del Oro plants) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1101,7 +1076,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Glorieta Camps Wastewater Treatment Plant (permit NM0028088) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Glorieta Camps Wastewater Treatment Plant (permit NM0028088) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1231,7 +1206,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Oshara Village Water Reclamation Facility reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Oshara Village Water Reclamation Facility reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1256,7 +1231,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Pilot Travel Centers (Travel Center #305, Jamestown) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Pilot Travel Centers (Travel Center #305, Jamestown) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1329,7 +1304,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Ramah Water and Sanitation District reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Ramah Water and Sanitation District reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1354,7 +1329,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Ranchland Utility Company reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Ranchland Utility Company reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1379,7 +1354,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Reserve Mutual Sewer Association reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Reserve Mutual Sewer Association reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1412,11 +1387,11 @@
    "permit": "NM0030686",
    "checked": "2026-11-07",
    "id": "nm-rio-puerco-wwtp-epa-report",
-   "name": "Rio Puerco Wastewater Treatment Plant (Route 66 Casino)",
+   "name": "Rio Puerco Wastewater Treatment Plant (Route 66 Casino; a tribal enterprise of the Pueblo of Laguna)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
-   "legal_basis": "NPDES permit NM0030686 (EPA Region 6): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to EPA",
+   "legal_basis": "NPDES permit NM0030686 (EPA Region 6, tribal land): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to EPA",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
@@ -1424,10 +1399,9 @@
    "publishes": "notices",
    "noun": "EPA report",
    "sources": [
-    "nm-epa-sobe",
-    "nm-epa-r6-permits"
+    "nm-epa-sobe"
    ],
-   "note": "Rio Puerco Wastewater Treatment Plant (Route 66 Casino) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). The permit and the state rule bind the holder, public or private. No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Rio Puerco Wastewater Treatment Plant (Route 66 Casino; a tribal enterprise of the Pueblo of Laguna)'s permits are EPA's on tribal land: reports go to EPA, which publishes those filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). New Mexico's notice rule does not apply on tribal land. (research/nm/report.md §3)",
    "barrier": null
   },
   {
@@ -1452,7 +1426,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Ruidoso and City of Ruidoso Downs (joint plant) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Ruidoso and City of Ruidoso Downs (joint plant) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1477,7 +1451,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Salem Wastewater Treatment Plant reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Salem Wastewater Treatment Plant reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1502,7 +1476,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Sierra County Regional Wastewater Treatment Plant reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Sierra County Regional Wastewater Treatment Plant reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1574,7 +1548,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Town of Bernalillo reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Town of Bernalillo reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1599,7 +1573,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Town of Red River reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Town of Red River reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1624,7 +1598,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Town of Silver City reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Town of Silver City reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1649,7 +1623,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Town of Springer reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Town of Springer reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1674,7 +1648,32 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Town of Taos reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (2 report(s) placed in New Mexico in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Town of Taos reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (2 report(s) placed in New Mexico in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
+   "barrier": null
+  },
+  {
+   "state": "NM",
+   "operator_id": "nm-usbr-cutter-lateral",
+   "agency": null,
+   "permit": "NM0031194",
+   "checked": "2026-11-07",
+   "id": "nm-usbr-cutter-lateral-epa-report",
+   "name": "U.S. Bureau of Reclamation, Cutter Lateral Water Treatment Plant (Navajo-Gallup Water Supply Project)",
+   "channel_kind": "feed",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NPDES permit NM0031194 (EPA Region 6): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to EPA",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "echo-sewer-overflow",
+   "publishes": "notices",
+   "noun": "EPA report",
+   "sources": [
+    "nm-epa-sobe",
+    "nm-epa-r6-permits"
+   ],
+   "note": "U.S. Bureau of Reclamation, Cutter Lateral Water Treatment Plant (Navajo-Gallup Water Supply Project) reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1699,7 +1698,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Angel Fire reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Angel Fire reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1724,7 +1723,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Bosque Farms reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Bosque Farms reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1749,7 +1748,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Chama reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Chama reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1774,7 +1773,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Cimarron reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Cimarron reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1799,7 +1798,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Cloudcroft reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Cloudcroft reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1824,7 +1823,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Cuba reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Cuba reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1849,7 +1848,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Fort Sumner reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Fort Sumner reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1874,7 +1873,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Hatch reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Hatch reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1899,7 +1898,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Jemez Springs reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Jemez Springs reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1924,7 +1923,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Los Lunas reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Los Lunas reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1949,7 +1948,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Maxwell reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Maxwell reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1974,7 +1973,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Pecos reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Pecos reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1999,7 +1998,7 @@
     "nm-epa-sobe",
     "nm-epa-r6-permits"
    ],
-   "note": "Village of Taos Ski Valley reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. (research/nm/report.md §2.1)",
+   "note": "Village of Taos Ski Valley reports noncompliance to EPA Region 6 under its permit; EPA publishes the reports filed electronically in its overflow tables, read by the echo-sewer-overflow feed (no report under its permits in the 2026-11-04 extract). Its 20.6.2.1203 notice to NMED is not published (nm-nmed-discharge-notice). No public notice is required. The permit itself was not read: the federal standard condition is assumed. (research/nm/report.md §2.1)",
    "barrier": null
   }
  ]

@@ -97,9 +97,11 @@ OWNERS = {
                   "and North plants)", "Camino Real Regional Utility Authority", "authority", None),
     "NM0031178": ("nm-camino-real-regional-utility-authority", None, None, None, None),
     "NM0026395": ("nm-city-of-carlsbad", "City of Carlsbad", "City of Carlsbad", "city", None),
-    "NM0030678": ("nm-casa-blanca-wwtp", "Casa Blanca Wastewater Treatment Plant", "Casa Blanca WWTP", "tribal",
-                  "EPA types the owner a tribal government and records the plant's name as the permittee; the owner "
-                  "was not read."),
+    "NM0030678": ("nm-casa-blanca-wwtp", "Casa Blanca Wastewater Treatment Plant (Pueblo of Laguna)", "Casa Blanca WWTP",
+                  "tribal",
+                  "EPA types the owner a tribal government; the plant, on the Pueblo of Laguna's land, serves the "
+                  "Dancing Eagle Casino and a small residential area (EPA's 2021 fact sheet; NMED's certification list "
+                  "files it under Laguna Pueblo)."),
     "NM0031038": ("nm-village-of-cimarron", "Village of Cimarron", "Village of Cimarron", "town", None),
     "NM0023370": ("nm-village-of-cloudcroft", "Village of Cloudcroft", "Village of Cloudcroft", "town", None),
     "NM0030490": ("nm-dona-ana-county", "Doña Ana County Utilities (South Central Regional plant)", "Doña Ana County",
@@ -133,9 +135,10 @@ OWNERS = {
     "NN0020621": ("nm-navajo-tribal-utility-authority", "Navajo Tribal Utility Authority (Shiprock and Northern Edge "
                   "Navajo Casino plants)", "Navajo Tribal Utility Authority", "tribal",
                   "Navajo Nation permits (NN...) whose plants lie in New Mexico; the Authority's Arizona plants are "
-                  "Arizona's row. A report counts here when its point lies in New Mexico. One report under Window "
-                  "Rock's permit (NN0021555, Arizona's row) lies just east of the state line, 2026-08-19, and is "
-                  "placed in New Mexico."),
+                  "Arizona's row. A report counts here when its point lies in New Mexico. Three reports under Window "
+                  "Rock's permit (NN0021555, Arizona's row) lie in New Mexico and are placed there: two at the lift "
+                  "station by Navajo, New Mexico (2026-08-10 and 08-11) and a line washed out east of Fort Defiance "
+                  "(2026-08-19)."),
     "NN0030343": ("nm-navajo-tribal-utility-authority", None, None, None, None),
     "NM0030813": ("nm-oshara-village-wrf", "Oshara Village Water Reclamation Facility",
                   "Oshara Village Water Reclamation Facility", None,
@@ -205,14 +208,19 @@ OWNERS = {
                   "it privately owned."),
     "NM0029238": ("nm-cds-rainmakers-utilities", "CDS Rainmakers Utilities, LLC", "CDS Rainmakers Utilities",
                   "investor-owned utility", "A sewer utility company (Lincoln County); EPA types it privately owned."),
-    "NM0030686": ("nm-rio-puerco-wwtp", "Rio Puerco Wastewater Treatment Plant (Route 66 Casino)",
-                  "Rio Puerco WWTP", "business or industrial",
-                  "EPA types it privately owned; the legal form is the candidates file's proposal from the name, and "
-                  "the permit documents were not read."),
-    "NM0031194": ("nm-cutter-lateral-water-treatment-plant", "Cutter Lateral Water Treatment Plant",
-                  "Cutter Lateral Water Treatment Plant", "business or industrial",
-                  "EPA types it privately owned and lists a sewage code for it; the legal form is the candidates file's "
-                  "proposal from the name, and the permit documents were not read."),
+    "NM0030686": ("nm-rio-puerco-wwtp", "Rio Puerco Wastewater Treatment Plant (Route 66 Casino; a tribal enterprise of "
+                  "the Pueblo of Laguna)", "Rio Puerco WWTP (Route 66 Casino)", "tribal",
+                  "The applicant in EPA's 2021 fact sheet is Laguna Development Corporation, the Pueblo of Laguna's "
+                  "enterprise, and the plant lies on the Pueblo's land at Interstate 40 exit 140, discharging by an "
+                  "unnamed arroyo to the Rio Puerco; EPA types it privately owned. Filed as tribal (a tribal "
+                  "enterprise)."),
+    "NM0031194": ("nm-usbr-cutter-lateral", "U.S. Bureau of Reclamation, Cutter Lateral Water Treatment Plant "
+                  "(Navajo-Gallup Water Supply Project)", "Cutter Lateral Water Treatment Plant", "federal facility",
+                  "A drinking-water plant of the Navajo-Gallup Water Supply Project (EPA lists a sewage code for it and "
+                  "types it privately owned). The permit application names the Bureau of Reclamation (EPA's 2018 fact "
+                  "sheet); NMED's 2023 certification notice names the Navajo Tribal Utility Authority, which with the "
+                  "Navajo Nation has operated the lateral since June 2024 (Reclamation's project page). Whether the "
+                  "permit was reissued to the Authority was not confirmed."),
     "NM0031224": ("nm-tesuque-casino-wwtp", "Tesuque Casino Wastewater Treatment Plant",
                   "Tesuque Casino Wastewater Treatment Plant", "tribal",
                   "EPA's collection-system table types the owner a tribal government (its facility table: privately "

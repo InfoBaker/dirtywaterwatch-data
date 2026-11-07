@@ -18,6 +18,18 @@ FIX = Path(__file__).parent / "fixtures" / "nm_sobe_rows.json"
 NO_EVIDENCE = "no evidence the discharge reached a water"
 
 
+@pytest.fixture(autouse=True)
+def outlines(monkeypatch):
+    """The Census state outlines when a saved copy is at hand; else boxes with the Arizona-New Mexico line at
+    109.0462 W, its course at 35.9 N (both place the Navajo, New Mexico lift station in New Mexico)."""
+    real = E.navajo_outlines()
+    if not real:
+        from shapely.geometry import box
+        real = {"AZ": box(-115, 31, -109.0462, 37), "NM": box(-109.0462, 31, -103, 37),
+                "UT": box(-115, 37, -109.0452, 42), "CO": box(-109.0452, 37, -102, 41)}
+    monkeypatch.setattr(E, "_NAVAJO_OUTLINES", real)
+
+
 def tables():
     return {k: v for k, v in json.loads(FIX.read_text()).items() if isinstance(v, list)}
 
@@ -49,10 +61,14 @@ def test_kept_and_dropped_rows_by_reason():
         ("NN0020621", "Due to power outage at the transformer bank at the WWTP."):
             ("receiving water stated as none", "NM"),                     # 'by passed into emergency lagoon.'
         ("NN0021555", "Rain washed out the 8-inch sewer line."): (NO_EVIDENCE, "NM"),
+        # the lift station at Navajo, New Mexico: 48 m east of the state line, 160 m west of the meridian (P2-1)
+        ("NN0021555", "Debris stuck in propeller of pump #1 pump #2 didn't come on."): (NO_EVIDENCE, "NM"),
+        ("NN0021555", "Power outage in the area causing lift station to trip. Has to be manually reset the automatic "
+                      "reset"): (NO_EVIDENCE, "NM"),
         ("NN0020281", "Sewer OF coming from clean out near house trailer."): ("building backup", "AZ"),
     }
     assert why[("NM", "kept", "receiving water named")] == 1
-    assert sum(n for (s, o, _), n in why.items() if s == "NM" and o == "dropped") == 5
+    assert sum(n for (s, o, _), n in why.items() if s == "NM" and o == "dropped") == 7
 
 
 def test_navajo_nation_reports_in_new_mexico_are_placed_by_their_point():
@@ -63,8 +79,8 @@ def test_navajo_nation_reports_in_new_mexico_are_placed_by_their_point():
     assert k["raw"]["sewer_overflow_reporting_requirement_desc"] == "Anticipated bypass notice"
     assert k["reported_at"] == "2024-06-14"                                   # filed the day before it began
     # Window Rock's permit is Arizona's operator, but this report's point lies east of the state line
-    wr = next(x for x in dropped if x["permit"] == "NN0021555")
-    assert wr["state"] == "NM"
+    wr = [x for x in dropped if x["permit"] == "NN0021555"]
+    assert len(wr) == 3 and {x["state"] for x in wr} == {"NM"}
     # without New Mexico in STATES its Navajo Nation reports are skipped, as they were before
     with pytest.MonkeyPatch.context() as mp:
         mp.setattr(E, "STATES", E.STATES - {"NM"})
@@ -162,3 +178,22 @@ def test_main_reads_a_saved_zip(tmp_path, monkeypatch):
     doc = json.loads((tmp_path / "events" / "echo-sewer-overflow.json").read_text())
     assert doc["count"] == 1 and "NM" in doc["meta"]["states"]
     assert any(r["state"] == "NM" for r in doc["meta"]["by_rule"])
+
+
+def test_the_state_line_near_navajo_new_mexico_is_the_census_outline_not_the_meridian():
+    """Review 2026-11-07 P2-1: the Arizona-New Mexico line runs west of 109.045 W; a point between them is New Mexico's."""
+    st, basis = E.navajo_point_place(35.903429, -109.045520)
+    assert st == "NM" and "Census" in basis
+    assert E.navajo_point_place(35.903429, -109.0470)[0] == "AZ"             # west of the line
+    assert E.navajo_point_place(35.73111, -109.036228) == ("NM", E.NAVAJO_BASIS)   # away from the band: the meridian
+    with pytest.MonkeyPatch.context() as mp:                                 # no outlines: the meridian, said so
+        mp.setattr(E, "_NAVAJO_OUTLINES", {})
+        assert E.navajo_point_place(35.903429, -109.045520) == ("AZ", E.NAVAJO_FALLBACK_BASIS)
+
+
+def test_the_shiprock_bypass_says_why_it_is_shown_despite_the_lagoon():
+    """Review 2026-11-07 P2-3: kept on the San Juan River, which the report names, with a note on the lagoon."""
+    kept, _, _ = built()
+    note = kept[0]["raw"]["kept_note"]
+    assert "lagoon" in note and "San Juan River" in note
+    assert E.repair_sign({"latitude_measure": "36.7", "longitude_measure": "+108.7"})[0]["longitude_measure"] == "-108.7"

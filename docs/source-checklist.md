@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1325 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1343 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -35,8 +35,10 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
 | sd | 3 | 1 | 5 | 0 | 0 | 9 |
 | ms | 5 | 0 | 2 | 1 | 0 | 8 |
+| ne | 4 | 1 | 2 | 2 | 1 | 10 |
+| ak | 3 | 0 | 2 | 0 | 3 | 8 |
 | nm | 3 | 0 | 3 | 2 | 1 | 9 |
-| **all** | **467** | **227** | **377** | **189** | **65** | **1325** |
+| **all** | **474** | **228** | **381** | **191** | **69** | **1343** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1441,7 +1443,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `az-adeq-wbid-layers` | ADEQ waterbody identifier (WBID) layers, streams and lakes (ArcGIS Online) | used | fetched | hydrography | Names the ADEQ waterbody identifiers Arizona permittees give as receiving waters in EPA's overflow reports (13 identifiers in the 2026-11-04 extract; EPA's ATTAINS holds 9 of them). |
-| `az-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 52 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 285 dropped (257 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon). |
+| `az-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time (the Navajo Nation's in its own daylight-saving time), ADEQ waterbody identifiers named, washes and canals read as waters, a shared point near the plant not used as the spill's. 2026-11-04 extract: 288 reports under Arizona permits from 42 permits and 50 Navajo Nation reports located in Arizona; 55 kept as reaching a water (27 SSO, 28 bypass), 283 dropped (255 with no evidence the sewage reached a water, 17 building backups, 10 bypasses held in the plant's ponds, lagoon or grounds, 1 naming only the plant's lagoon). |
 | `az-law-r18-9-c305` | A.A.C. R18-9-C305, 2.05 General Permit: CMOM of a sewage collection system (reporting and public notice signs) | used | fetched | law | Fetched text: 24-hour report to ADEQ for releases that are an imminent and substantial threat; signs only after more than three reportable releases at one location in 12 months. |
 | `az-adeq-reported-habs` | ADEQ AZHABs "Currently Reported" harmful algal bloom list | candidate | search_only | advisories | Only state HAB list; HTML behind a bot wall; testing is voluntary for lake managers. |
 | `az-adeq-sso-reporting` | ADEQ SSO and bypass reporting (Spill Line, myDEQ five-day report, SSO Report Form) | watch | search_only | law | Reporting channel to the regulator only; no public output found besides EPA SOBE. |
@@ -1478,6 +1480,34 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ms-jxn-water` | JXN Water (Jackson sewer under federal interim stipulated order, 2023) | watch | search_only | events | Events reach SOBE; quarterly reports give totals. |
 | `ms-mdeq-beach-alerts` | MDEQ beach advisory text and email alerts | watch | fetched | advisories | Retired for routine advisories on 2026-09-08 (MDEQ news release of that day: "communicated through posted beach signage and the MDEQ Beach Monitoring website rather than text alerts and news releases"); the beach layer is the source. |
 | `ms-mdeq-npdes-points` | MDEQ Current_NPDES_Points hosted layer | rejected | fetched | outfalls | Facility points of every MDEQ-regulated site (9,188 rows on 2026-11-07: plant entrances, addresses and agency staff assignments), not outfall points; no improvement on EPA's permitted-feature points. |
+
+## ne: Nebraska (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ne-dwee-beachwatch` | Nebraska DWEE Beach Watch: MonitoredBeachAlert (ArcGIS) | used | fetched | advisories | Read through the generic ArcGIS reader (ne-dwee-beachwatch). Public layer with every weekly beach sample of the 2026 season (1,022 rows at 57 beaches, sample weeks 20 to 37, 2026-05-18 to 2026-09-14, fetched 2026-11-07): station, lat/long, sample date, E. coli, microcystin, HealthAlert YES/NO and description. 20 rows on health alert (microcystin above 8 ug/L: Rockford Lake, Maskenthine Reservoir, Cub Creek Lake, Big Indian Lake, Iron Horse Trail Lake, Kirkman's Cove Lake, Maple Creek Recreation Area Lake) read as the agency's bloom advisories, each ending at the beach's next weekly sample; 38 rows labelled 'Elevated health risk for E. coli' (above 235/100 mL), for which DWEE issues no advisory, quoted and shown with the site's 72-hour caution; 57 records. |
+| `ne-dwee-net-sso-guide` | DWEE guide: Creating Event Report in NeTSSO | used | search_only | law | Confirms Nebraska permittees file sewer overflow and bypass reports in EPA's NeT-SewerOverflow (hence the SOBE rows). |
+| `ne-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), NE rows | used | fetched | events | The only dated, statewide, machine-readable overflow feed for Nebraska, read by the national eRule ingester (echo-sewer-overflow) with Nebraska in its states. 2026-11-04 extract: 162 current NE rows from 21 permits (CSO 89, SSO 64, BYP 9), starts 2022-04-15 to 2026-10-06; every row with a point, 158 with a volume, 49 with a receiving-water row. 51 kept from 13 permits (38 sewer overflows, 9 bypasses, 4 CSOs: 28 reports Omaha filed as CSOs from manholes, pipes and pump stations are shown as sewer overflows); 111 dropped (83 building backups, 28 SSOs and manhole CSOs naming no water and no water impact). Received a median 22.5 days after the start (10% within a day, 10% 83 days or more). Times read in the zone of the event's own point (Mountain in the eighteen counties and the western part of Cherry County that 49 CFR 71.7(c) puts west of the boundary, Central elsewhere): all 162 points lie in the Central part. |
+| `ne-omaha-cso-permit-notice` | DWEE public notice: Omaha CSO permit NE0133680 modification | used | fetched | permits | Names the CSO receiving waters (Missouri River, Blood Creek to Big Papillion Creek, Little Papillion Creek, Cole Creek). The permit text sits in DWEE's OnBase public-access viewer (JavaScript) and was not read, so Omaha's CSO public-notification clause is unknown. |
+| `ne-echo-dmr-omaha-cso` | ECHO DMR data for Omaha CSO permit NE0133680 | candidate | fetched | permits | Only features 102 and 205R report DMRs, including 'Number of Events', 'Duration of discharge' and 'Flow, total' (likely the treated outfalls); the 25 CSO outfalls have no monthly counts. |
+| `ne-dhhs-hab-alerts` | Nebraska DHHS health alerts (HABs) | watch | search_only | advisories | Joint health alerts with DWEE; duplicates Beach Watch. |
+| `ne-omaha-news` | Local TV reports of Omaha overflows (WOWT and others) | watch | fetched | news | Omaha Public Works announces large overflows through media with a map of the affected stretch (Boxelder and West Papillion creeks, 2026-10-02: 'not to touch the water'). No city web notice found. |
+| `ne-omaha-cso-program` | Omaha CSO Program website (omahacso.com) | rejected | fetched | prior_art | Fetched: capital-program site (projects, quarterly reports, LTCP); no overflow status, notification or sign information found. cityofomaha.org and publicworks.omaha.gov returned 403 to curl. |
+| `ne-title-126-release` | Title 126 Chapter 18 (proposed Chapter 1) release notification | rejected | search_only | law | Oil and hazardous substance releases (notice within 15 minutes; 2026 proposal allows up to 24 hours); does not address sewage. |
+| `ne-dwee-beachwatch-page` | Nebraska Beach Watch page | unreachable | search_only | advisories | 503 to WebFetch and connection reset to curl on 2026-11-03; described in DWEE release dwee.nebraska.gov/node/4996 (fetched). |
+
+## ak: Alaska (8)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ak-18-aac-72-940` | 18 AAC 72.940 Emergency notice (wastewater) | used | fetched | law | Regulator notice for wastewater emergencies (24 hours, written report in 7 days); no public-notice duty. |
+| `ak-cbj-cso-notices` | City and Borough of Juneau wastewater utility page: combined sewer overflow public notices | used | fetched | events | Juneau's permit-required CSO public notice channel; monitored for new notices. |
+| `ak-epa-sobe` | EPA eRule Sewer Overflow/Bypass Event reports (Alaska APDES permittees) | used | fetched | events | The only dated machine-readable overflow data for Alaska; read by the national eRule ingester (echo-sewer-overflow) with Alaska in its states. Juneau's CSOs are absent. |
+| `ak-ahab` | Alaska Harmful Algal Bloom Network (AHAB) and DEC shellfish PSP program | watch | fetched | advisories | Marine biotoxin focus (PSP); not sewage; monitored as a voluntary page. |
+| `ak-apdes-permits` | Wastewater discharge permits (Juneau-Douglas AK0023213, Mendenhall AK0022951) and DEC Water Permit Search | watch | fetched | permits | Juneau's CSO and overflow public-notice clauses read; the APDES standard conditions read in one permit; the other permits not read. |
+| `ak-awwu` | Anchorage Water and Wastewater Utility website | unreachable | fetched | events | The site answers 403 to scripted reads (2026-11-07); search found no overflow notice page; SOBE carries AWWU's events. |
+| `ak-dec-beach-program` | Alaska DEC Beach Program (BEACH Act monitoring) | unreachable | fetched | advisories | DEC's pages answer 403 behind a bot check (2026-11-07); the research URL had answered 404. |
+| `ak-dec-spill-database` | Alaska DEC Statewide Oil and Hazardous Substance Spills Database (PERP Spill Search) | unreachable | fetched | events | Bot wall; scope is oil and hazardous substances, so sewage may not be in it (unconfirmed). |
 
 ## nm: New Mexico (9)
 
