@@ -1,5 +1,5 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
-Washington State and Illinois.
+Washington State, Illinois and Mississippi.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -138,6 +138,24 @@ Illinois (permits IL...; research/il/report.md section 2.2; not live until data/
     emails, phones, staff names, an owner's or resident's name, every house number). The point stays: it is the
     event's own (no Illinois point is shared by many reports of one permit except at a CSO outfall or a plant).
 
+Mississippi (permits MS...; research/ms/report.md section 2.2; not live until data/rules.json says so)
+  MDEQ requires the 5-day written report of every SSO and bypass through EPA's NeT-SewerOverflow from 2025-12-21, so
+  this dataset is the statewide record (2026-11-04 all-versions extract: 358 current MS rows from 47 permits, all with
+  coordinates; SSO 314, BYP 43, CSO 1; report received a median 4 days after the start). MDEQ publishes no list of
+  its own. Three Mississippi habits are handled here, for MS permits only, so the other states' records are unchanged:
+  - Time zone: Mississippi is wholly in Central time; STATE_TZ gives America/Chicago, as for Illinois.
+  - Free text: descriptions name the manhole's or break's street address ('<number> <street> DR - <manhole no.>'),
+    so MS is in FREE_TEXT_STATES and every free-text field gets the Illinois scrub.
+  - The City of Jackson's reports (MS0024295, MS0044059, run by JXN Water) give a creek's name without 'Creek'
+    ('EUBANKS', 'HANGING MOSS ', 'TOWN'). STATE_WATER_ALIASES reads such a name, for that permit only, as the NHD
+    flowline that carries the name with 'Creek' and runs within about 3 km of the reports' own points (USGS NHD
+    large-scale flowlines, GNIS id in the table, checked 2026-11-07). Names with no such flowline ('BELHAVEN',
+    'CANEY', 'EASTOVER', 'THREE MILE') are kept as typed. raw.receiving_waters keeps the text as reported and
+    raw.receiving_water_aliases says what was read.
+  Points are the event's own (a manhole that overflows in each storm repeats its point; the Vicksburg plant's
+  bypasses all give the plant's point), so MS is not in REPEATED_POINT_STATES. The generic 'no water' wordings cover
+  the Mississippi rows ('None'); a roadside or drainage ditch named as the receiving water is kept as a water.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -169,13 +187,25 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "MS"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
-STATE_TZ = {"IL": "America/Chicago"}
+STATE_TZ = {"IL": "America/Chicago", "MS": "America/Chicago"}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL"}
+FREE_TEXT_STATES = {"IL", "MS"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
+# a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
+# Mississippi. Each NHD flowline of the name runs within about 3 km of the reports' points (GNIS id after the name).
+STATE_WATER_ALIASES = {"MS": {
+    ("MS0024295", "eubanks"): "Eubanks Creek",            # GNIS 00669816
+    ("MS0024295", "hanging moss"): "Hanging Moss Creek",  # GNIS 00670883
+    ("MS0024295", "town"): "Town Creek",                  # GNIS 00678831
+    ("MS0024295", "purple"): "Purple Creek",              # GNIS 00676424
+    ("MS0024295", "lynch"): "Lynch Creek",                # GNIS 00672967
+    ("MS0024295", "white oak"): "White Oak Creek",        # GNIS 00679605
+    ("MS0024295", "hardy"): "Hardy Creek",                # GNIS 00670914
+    ("MS0044059", "trahon"): "Trahon Creek",              # GNIS 00678852
+}}
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
 REPEATED_POINT_STATES = {"GA"}
 REPEATED_POINT_MIN = 5
@@ -669,6 +699,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             w_aliases = {w: normalise_dc_water(w) for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)
                          and normalise_dc_water(w) != w}
             real_w = list(dict.fromkeys(normalise_dc_water(w) for w in real_w))
+        elif state in STATE_WATER_ALIASES:   # a permit's shorthand name -> the NHD name (module docstring, Mississippi)
+            def _alias(w: str, tab=STATE_WATER_ALIASES[state]) -> str:
+                return tab.get((permit, _alias_key(w)), w.strip())
+            w_aliases = {w: _alias(w) for w in w_names if w.strip() and not no_water(w, state) and _alias(w) != w.strip()}
+            real_w = list(dict.fromkeys(_alias(w) for w in real_w))
         dc_state, dc_basis = dc_row_state(lat, lon) if state == "DC" else (None, None)
         if not slugs and real_w:
             for w in real_w:
