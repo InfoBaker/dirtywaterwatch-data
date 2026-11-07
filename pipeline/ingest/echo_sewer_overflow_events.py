@@ -1,5 +1,5 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
-Washington State and Illinois.
+Washington State, Illinois and Nebraska.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -138,6 +138,38 @@ Illinois (permits IL...; research/il/report.md section 2.2; not live until data/
     emails, phones, staff names, an owner's or resident's name, every house number). The point stays: it is the
     event's own (no Illinois point is shared by many reports of one permit except at a CSO outfall or a plant).
 
+Nebraska (permits NE...; research/ne/report.md section 2.2; not live until data/rules.json says so)
+  Nebraska has no public-notice law for sewage; its permittees file their overflow and bypass reports through EPA's
+  NeT-SewerOverflow (DWEE's NeTSSO guide, publication 25-032), so this dataset is the state's only dated, event-level
+  record (2026-11-04 all-versions extract: 162 current NE rows from 21 permits, starts 2022-04 to 2026-10-06; CSO 89, SSO 64,
+  BYP 9; every row with a point, 158 with a volume; received a median 22.5 days after the start, 10% within a day, 10%
+  83 days or more). 51 are kept, from 13 permits; 111 dropped: 83 building backups, 28 SSOs and manhole CSOs naming no
+  water and no water impact. Omaha files under three permits (Papillion Creek WRRF NE0112810 with 71 rows, Missouri
+  River WRRF NE0036358, the CSO permit NE0133680); the Papillion Creek rows are all typed CSO but none is at a CSO
+  outfall (manholes, pump stations, broken pipes, basements), so they are kept only by the water they name. Two Nebraska habits are handled here, for NE permits
+  only, so every other state's records are unchanged (checked on that extract: 1,809 kept and 1,741 dropped records of
+  the other states identical):
+  - Time zone. The state straddles Central and Mountain time. The rule uses public records only and is South Dakota's
+    mechanism: the event's own point against the outlines of the area the Mountain zone covers (POINT_ZONE_FILES). The
+    boundary is 49 CFR 71.7(c) (south from the South Dakota line along range and section lines through Cherry County,
+    then the north and west lines of Thomas and McPherson counties, the north line of Keith County, the west line of
+    Lincoln County and the west lines of Hayes and Hitchcock counties to Kansas); it leaves eighteen counties wholly in
+    the Mountain zone (Arthur, Banner, Box Butte, Chase, Cheyenne, Dawes, Deuel, Dundy, Garden, Grant, Hooker, Keith,
+    Kimball, Morrill, Perkins, Scotts Bluff, Sheridan, Sioux) and splits Cherry County, whose western part keeps
+    Mountain time. The outlines are the Census Bureau's TIGERweb counties, Cherry County's western part cut by the U.S.
+    DOT time-zone layer (NTAD Time Zones) (data/reference/ne-mountain-time-counties.json, written by
+    scripts/ne_mountain_time_counties.py, which cites all three). A point in one of them is read as America/Denver; any
+    other point, the rest of Cherry County's included, as America/Chicago (STATE_TZ), and raw.timezone_note names the
+    county that decided it. On that extract every one of the 162 points lies in the Central part (Omaha, Lincoln, Grand
+    Island, Seward, Falls City, Nebraska City and the other reporting towns are all east of the line); a single Central
+    zone would mislabel none of them today, a single Mountain zone all 162. The point rule is kept so a report from the
+    panhandle (Scottsbluff, Sidney, Ogallala, Alliance, Chadron) is read in its own zone when one is filed.
+  - Free text: descriptions carry house addresses of backups ('Sewer Back-up into home located at <number> <street>'),
+    so NE is in FREE_TEXT_STATES (the Illinois scrub). The receiving-water texts name no "none" wordings the generic rule
+    misses (no STATE_NO_WATER entry); two Papillion Creek rows give the water as 'Unknown' with a description of a
+    discharge into a storm inlet, and are kept with that text. The points are the events' own (no point is shared by
+    more than four reports of one permit), so NE is not in REPEATED_POINT_STATES.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -169,11 +201,14 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "NE"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
-STATE_TZ = {"IL": "America/Chicago"}
+STATE_TZ = {"IL": "America/Chicago", "NE": "America/Chicago"}
+# states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
+# one of the counties of the reference file is read in that file's zone (module docstring, Nebraska)
+POINT_ZONE_FILES = {"NE": "ne-mountain-time-counties.json"}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL"}
+FREE_TEXT_STATES = {"IL", "NE"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
@@ -565,10 +600,11 @@ def naive(ts: str | None) -> str | None:
         return None
 
 
-def zoned(ts: str | None, state: str) -> str | None:
+def zoned(ts: str | None, state: str, tz: str | None = None) -> str | None:
     """A naive time of a STATE_TZ state with its zone's offset ('2026-07-04T19:26:00-05:00'); a date or a time of
-    another state as it is. A fall-back hour that happens twice is read as the first (fold 0)."""
-    tz = STATE_TZ.get(state)
+    another state as it is. A fall-back hour that happens twice is read as the first (fold 0). tz, when given, is the
+    event's own zone (point_zone) in place of the state's."""
+    tz = tz or STATE_TZ.get(state)
     if not ts or not tz or "T" not in ts:
         return ts
     dt = datetime.fromisoformat(ts)
@@ -578,10 +614,53 @@ def zoned(ts: str | None, state: str) -> str | None:
     return dt.replace(tzinfo=ZoneInfo(tz)).isoformat()
 
 
-def tz_note(state: str) -> str:
+def tz_note(state: str, tz: str | None = None, basis: str | None = None) -> str:
+    if basis:   # a state of POINT_ZONE_FILES: the zone of the event's own point
+        return (f"ECHO gives event times without a timezone; read as {tz}, {basis} (a fall-back hour that happens "
+                "twice is read as the first)")
     tz = STATE_TZ.get(state)
     return (f"ECHO gives event times without a timezone; read as {tz}, the permit's state's zone (a fall-back hour "
             "that happens twice is read as the first)") if tz else TZ_NOTE
+
+
+_ZONE_SHAPES: dict[str, dict] = {}
+
+
+def zone_shapes(state: str) -> dict:
+    """The reference file of POINT_ZONE_FILES[state], its outlines as shapely shapes (read once)."""
+    if state not in _ZONE_SHAPES:
+        from shapely.geometry import shape
+        doc = read_json(DATA_DIR / "reference" / POINT_ZONE_FILES[state], None)
+        if not doc or not doc.get("counties"):
+            raise RuntimeError(f"time-zone counties for {state} missing: data/reference/{POINT_ZONE_FILES[state]}")
+        _ZONE_SHAPES[state] = {
+            "doc": doc,
+            "zone": [(c["county"], shape(c["geometry"])) for c in doc["counties"]],
+            "split": [(c["county"], c.get("note") or "split by the boundary", shape(c["geometry"]))
+                      for c in doc.get("split_counties", [])]}
+    return _ZONE_SHAPES[state]
+
+
+def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
+    """(zone, basis) for an event of a POINT_ZONE_FILES state: the reference file's zone when the event's own point
+    lies in one of its counties (or the part of a split county it lists), else the state's STATE_TZ zone; (None, None)
+    for any other state. The basis says which county decided it, or that no point was given; for a split county it
+    quotes the file's note on the part that keeps the other zone."""
+    if state not in POINT_ZONE_FILES:
+        return None, None
+    z = zone_shapes(state)
+    doc, cite = z["doc"], z["doc"]["law"]["cite"]
+    if lat is None or lon is None:
+        return STATE_TZ[state], f"no point given: the zone of the counties outside the Mountain-time counties ({cite})"
+    from shapely.geometry import Point
+    pt = Point(lon, lat)
+    for county, g in z["zone"]:
+        if g.covers(pt):
+            return doc["zone"], f"the zone of {county}, where the event's point lies ({cite})"
+    for county, note, g in z["split"]:
+        if g.covers(pt):
+            return STATE_TZ[state], f"the zone of {county}, where the event's point lies; the county is {note} ({cite})"
+    return STATE_TZ[state], f"the zone of the counties outside the Mountain-time counties, where the event's point lies ({cite})"
 
 
 def scrub_free_text(d: dict, keys) -> dict:
@@ -644,7 +723,6 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         if not start:
             perr = (perr + "; " if perr else "") + "no start time"
             precision = None
-        start, end = zoned(start, state), zoned(end, state)
         vol = ev.get("sewer_overflow_bypass_discharge_volume_gallons")
         try:
             vol_gal = int(round(float(vol))) if vol not in (None, "") else None
@@ -678,6 +756,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             how = "name" if slugs else "none"
         if lat is None and reg and reg.get("lat") is not None:
             lat, lon, coord_src = reg["lat"], reg["lon"], "outfall_layer"
+        ev_tz, tz_basis = point_zone(state, lat, lon)
+        start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
         dname = d.get("name") or (reg or {}).get("permittee") or sysrow.get("collection_system_name") or None
@@ -699,7 +779,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                           for t in treat.get(k, [])],
             "collection_system_name": sysrow.get("collection_system_name"),
             "percent_collection_system_css": sysrow.get("percent_collection_system_css"),
-            "reached_water_rule": reason, "timezone_note": tz_note(state), "report_version": ev.get("program_report_form_id"),
+            "reached_water_rule": reason, "timezone_note": tz_note(state, ev_tz, tz_basis), "report_version": ev.get("program_report_form_id"),
         })
         if w_aliases:
             raw["receiving_water_aliases"] = w_aliases
