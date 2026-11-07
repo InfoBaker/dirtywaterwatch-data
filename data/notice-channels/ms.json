@@ -48,6 +48,7 @@
    "monitored": true,
    "unmonitored_reason": null,
    "publishes": "notices",
+   "records": false,
    "every_hours": 6,
    "noun": "News releases",
    "note": "JXN Water's news page (answered 200 on 2026-11-07), where the overflow response plan's news releases for significant overflows would appear; whether they are posted here was not checked. (ms-jxn-water)",
