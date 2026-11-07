@@ -24,6 +24,23 @@ of before runs as the fallback: one `identify` per point (1/3/6/12/24/48/72-hour
 time, at most FALLBACK_MAX_CALLS points (one per permittee first, wettest first). Readings are kept per
 clock hour (rainfall.json; --force rereads). Negative values are no data.
 
+Unit (found 2026-11-07): the service describes its values as inches, but answers millimetres (identify at Bucklin
+Point, RI, valid 2026-11-07T02:00Z: 1.6, 15.8, 26.7, 40.1, 51.3, 52.4, 52.4 for 1 to 72 hours; maxValues 118.7; the
+Providence gauge 17.8 to 26.4 mm in the hour to 00:51Z), and already did on 2026-11-03 (the Calais export in
+tests/fixtures: 3.8 to 7.3 where IEM's MRMS daily is 0.22 in). So every run decides the unit from the data
+(decide_units), never from the description alone: a box maximum (the largest value in the grid blocks read, or in
+the run's identify answers) over 30 for 24 hours or 45 for 72 hours is millimetres (the US 24-hour record is 43 in,
+Alvin, Texas, 1979); the gauge check (gauge_check: airport gauges in the box from api.weather.gov, mm, against
+identify at the wettest, at most four, where one had 2 mm or more; MRMS/gauge 0.4 to 2.5 is millimetres, the same
+over 25.4 inches) decides when it has a verdict, but cannot make values over the bound inches; else the unit last
+determined (rainfall.json mrms.units_last_determined); before any, the stated inches. Millimetres are divided by
+25.4 before anything uses them; rainfall.json mrms.units (and each reading's units_read) records the unit, the
+basis and the evidence; the identify check compares in the same unit. Point readings stored before the check are
+dropped and reread. The history's readings stored before it are rescaled once (repair_history_units, by any run or
+by --repair-units; the history then carries units_checked and units_repair).
+
+    python -m ingest.rainfall --repair-units     only the history repair (a second run changes nothing)
+
 Forecast: NWS gridpoint quantitativePrecipitation (mm, 1-6 h periods) from api.weather.gov,
 summed over the next 24 hours (a period counts in proportion to its overlap). The point's grid
 cell comes from /points/{lat},{lon} once (data/build/nws-gridpoints.json; at most LOOKUP_MAX new
@@ -40,8 +57,9 @@ it). The first reading also fills the two earlier 24-hour windows it implies (48
 ending 24 h before, 72 h - 48 h ending 48 h before) when those hours are empty.
 
 Raw responses: data/raw/noaa-mrms-qpe/<stamp>.json.gz (a grid run: the catalog answer, the box, each
-product's object id, valid time, size and SHA-256, the identify check and the raw value sampled at
-every point; a per-point run: every identify answer) and data/raw/nws-qpf/<stamp>.json.gz (the QPF
+product's object id, valid time, size and SHA-256, the identify check, the unit decided and the raw value
+sampled at every point, as read; a per-point run: every identify answer), data/raw/nws-gauges/observations.json
+(the gauge check's observations and identify answers, kept between runs) and data/raw/nws-qpf/<stamp>.json.gz (the QPF
 layer and update time of each grid cell fetched). The grids themselves are not kept (about 0.5 MB
 each); NOAA archives MRMS.
 """

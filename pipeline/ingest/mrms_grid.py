@@ -10,6 +10,10 @@ to, nearest neighbour, float32 GeoTIFF with LZW compression, no data as -9999). 
 hundredth). Sampling is local: the TIFF is read here (tiles or strips, LZW or none) with the standard
 library only.
 
+The values are as the service answers them: it states inches but answered millimetres (found 2026-11-07); the unit
+is decided in ingest/rainfall.py (decide_units) from the box maximum (Grid.max_read) and a gauge check, and
+millimetres converted there, before anything uses them.
+
 Pure except catalog() and export(), which take a requests session.
 """
 from __future__ import annotations
