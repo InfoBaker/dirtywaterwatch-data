@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1288 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1296 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -32,7 +32,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
-| **all** | **453** | **225** | **364** | **183** | **63** | **1288** |
+| ak | 3 | 0 | 2 | 0 | 3 | 8 |
+| **all** | **456** | **225** | **366** | **183** | **66** | **1296** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1431,3 +1432,16 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-norc-river-reversal-analysis` | NORC/UChicago "rain" project: parse MWRD river reversals and CSOs | rejected | search_only | prior_art | Prior art; one-off analysis. |
 | `il-evanston-cso-plan` | City of Evanston CSO Public Notification Plan | unreachable | fetched | law | Suburban CSO plans point to MWRD alerts; this one moved. |
 | `il-mwrd-tarp-levels` | MWRD TARP reservoir levels map service | unreachable | fetched | hydrography | Token-protected; reservoir fullness would be a leading indicator of CSOs. |
+
+## ak: Alaska (8)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ak-18-aac-72-940` | 18 AAC 72.940 Emergency notice (wastewater) | used | fetched | law | Regulator notice for wastewater emergencies (24 hours, written report in 7 days); no public-notice duty. |
+| `ak-cbj-cso-notices` | City and Borough of Juneau wastewater utility page: combined sewer overflow public notices | used | fetched | events | Juneau's permit-required CSO public notice channel; monitored for new notices. |
+| `ak-epa-sobe` | EPA eRule Sewer Overflow/Bypass Event reports (Alaska APDES permittees) | used | fetched | events | The only dated machine-readable overflow data for Alaska; read by the national eRule ingester (echo-sewer-overflow) with Alaska in its states. Juneau's CSOs are absent. |
+| `ak-ahab` | Alaska Harmful Algal Bloom Network (AHAB) and DEC shellfish PSP program | watch | fetched | advisories | Marine biotoxin focus (PSP); not sewage; monitored as a voluntary page. |
+| `ak-apdes-permits` | APDES individual permits (Juneau-Douglas AK0023213, Anchorage Asplund AK0022551) and DEC Water Permit Search | watch | fetched | permits | Juneau's CSO and overflow public-notice clauses read; the APDES standard conditions read in one permit; the other permits not read. |
+| `ak-awwu` | Anchorage Water and Wastewater Utility website | unreachable | fetched | events | The site answers 403 to scripted reads (2026-11-07); search found no overflow notice page; SOBE carries AWWU's events. |
+| `ak-dec-beach-program` | Alaska DEC Beach Program (BEACH Act monitoring) | unreachable | fetched | advisories | DEC's pages answer 403 behind a bot check (2026-11-07); the research URL had answered 404. |
+| `ak-dec-spill-database` | Alaska DEC Statewide Oil and Hazardous Substance Spills Database (PERP Spill Search) | unreachable | fetched | events | Bot wall; scope is oil and hazardous substances, so sewage may not be in it (unconfirmed). |

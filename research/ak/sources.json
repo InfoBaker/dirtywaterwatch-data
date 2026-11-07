@@ -16,7 +16,7 @@
     "access": [
       "csv"
     ],
-    "access_detail": "National daily ZIP (local copy in the shared federal pull). Alaska: 46 events, AK0022551 Anchorage 43, AK0021440 Ketchikan 2, AK0053775 (Denali, federal facility) 1; starts 2023-06-05 to 2026-10-26. Trimmed sample raw/sobe-sample.json.",
+    "access_detail": "The current-version ZIP of 2026-11-05 held no tables; the all-versions ZIP (2026-11-04 extract, Last-Modified 2026-11-04 12:21 GMT) was read for the current version of each report. Alaska: 46 current reports from 3 permits, starts 2023-06-05 to 2026-10-26: AK0022551 (Anchorage) 43, AK0021440 (Ketchikan, two anticipated pump-station bypasses) 2, AK0053775 (Denali National Park, a federal facility) 1. 44 SSO, 2 bypass. Kept 5 (a receiving water named), dropped 41 (23 building backups, 18 with no evidence the discharge reached a water).",
     "machine_readable": true,
     "sample_record": {
       "permit_identifier": "AK0022551",
@@ -61,15 +61,15 @@
     ],
     "has_coordinates": true,
     "has_outfall_ids": false,
-    "cadence": "Received a median 1 day after the start (n=46); ECHO extract daily.",
+    "cadence": "Received a median 1 day after the start (n=46; the two anticipated bypasses were filed before they began); ECHO extract daily.",
     "history": "2023-06 to date",
     "license": "US government work",
     "legal_basis": "40 CFR 127; APDES permit 5-day noncompliance report",
-    "status": "candidate",
-    "status_reason": "The only dated machine-readable overflow data for Alaska; Anchorage dominates. Juneau's CSOs are absent.",
+    "status": "used",
+    "status_reason": "The only dated machine-readable overflow data for Alaska; read by the national eRule ingester (echo-sewer-overflow) with Alaska in its states. Juneau's CSOs are absent.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "22 of 46 are 'Basement Backup'; receiving waters named include Fish Creek (to Cook Inlet), Tongass Narrows, Birch Lake."
+    "checked": "2026-11-07",
+    "notes": "22 'Basement Backup' plus one 'Other: Toilet'; receiving waters named: Tongass Narrows (2), Fish Creek, 'Fish Creek which flowed to Travels to Cook Inlet', Birch Lake. Times carry no zone: read as America/Anchorage. Descriptions carry no addresses or personal names."
   },
   {
     "id": "ak-dec-spill-database",
@@ -87,7 +87,7 @@
     "access": [
       "html"
     ],
-    "access_detail": "HTTP 403 to WebFetch and curl: a DataDome 'Please enable JS and disable any ad blocker' bot wall. Spill data page https://www.dec.alaska.gov/spar/ppr/spill-information/spill-data (search). Contact decsparspilldata@alaska.gov.",
+    "access_detail": "HTTP 403 to WebFetch and curl: a DataDome 'Please enable JS and disable any ad blocker' bot wall. Spill data page https://www.dec.alaska.gov/spar/ppr/spill-information/spill-data (search). Contact decsparspilldata@alaska.gov. Still 403 on 2026-11-07.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -102,7 +102,7 @@
     "status": "unreachable",
     "status_reason": "Bot wall; scope is oil and hazardous substances, so sewage may not be in it (unconfirmed).",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -118,11 +118,11 @@
     ],
     "waters_covered": null,
     "water_slugs": [],
-    "url": "https://regulations.justia.com/states/alaska/title-18/chapter-72/article-7/section-18-aac-72-940",
+    "url": "https://www.akleg.gov/basis/aac.asp?media=print&secStart=18.72.940&secEnd=18.72.940",
     "access": [
       "html"
     ],
-    "access_detail": "Justia and LII returned 403 or index pages; text known only from a search snippet: reportable events include 'an accident, spill, or other event that results in inadequate treatment in violation of permit conditions, or threatens public health or water quality' and 'a sludge carry-over, washout, or overflow'. Deadline and recipients not read.",
+    "access_detail": "Read on akleg.gov 2026-11-07 (Justia and LII had refused). (a) The owner or operator of a domestic or nondomestic wastewater collection, treatment, or disposal system 'shall report to the department within 24 hours, or as soon after that as possible' for six kinds of event, among them a spill or other event that 'threatens public health or water quality', 'a sludge carry-over, washout, or overflow' and a by-pass of any part of the treatment works; (b) a written report to the department within seven days; (c) not for an onsite system serving a private residence.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -135,9 +135,9 @@
     "license": null,
     "legal_basis": "18 AAC 72.940",
     "status": "used",
-    "status_reason": "Regulator notice for wastewater emergencies; no public-notice duty found.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status_reason": "Regulator notice for wastewater emergencies (24 hours, written report in 7 days); no public-notice duty.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -157,7 +157,7 @@
     "access": [
       "pdf"
     ],
-    "access_detail": null,
+    "access_detail": "DEC's permit search and wastewater pages answer 403 (DataDome) to scripted reads on 2026-11-07. Read instead on the City and Borough of Juneau's site: AK0023213 (EPA-issued 2001, expired 2006, administratively continued) Part I.D.1.g 'The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts' and Part III.H.2.a (public notification of overflows that may imminently and substantially endanger human health); AK0022951 (APDES, 2014) Appendix A Part 3.4 Twenty-four Hour Reporting: orally within 24 hours, in writing within five days, to DEC.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -170,9 +170,9 @@
     "license": null,
     "legal_basis": null,
     "status": "watch",
-    "status_reason": "Permit public-notification clauses not read in the time box.",
-    "verified": "inferred",
-    "checked": "2026-11-03",
+    "status_reason": "Juneau's CSO and overflow public-notice clauses read; the APDES standard conditions read in one permit; the other permits not read.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -191,7 +191,7 @@
     "access": [
       "html"
     ],
-    "access_detail": null,
+    "access_detail": "HTTP 403 (DataDome) to the project's reader and to curl on 2026-11-07.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -203,10 +203,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "watch",
-    "status_reason": "Small seasonal program at a few marine beaches; not fetched.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status": "unreachable",
+    "status_reason": "DEC's pages answer 403 behind a bot check (2026-11-07); the research URL had answered 404.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -225,7 +225,7 @@
     "access": [
       "html"
     ],
-    "access_detail": null,
+    "access_detail": "Answered 200 on 2026-11-07: links to HAB alerts and shellfish poisoning pages; no machine-readable alert layer found.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -238,9 +238,9 @@
     "license": null,
     "legal_basis": null,
     "status": "watch",
-    "status_reason": "Marine biotoxin focus (PSP); not sewage; not fetched.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status_reason": "Marine biotoxin focus (PSP); not sewage; monitored as a voluntary page.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -259,7 +259,7 @@
     "access": [
       "html"
     ],
-    "access_detail": null,
+    "access_detail": "HTTP 403 on 2026-11-07.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -271,10 +271,50 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "watch",
-    "status_reason": "No overflow notice page found by search; SOBE carries AWWU's events.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status": "unreachable",
+    "status_reason": "The site answers 403 to scripted reads (2026-11-07); search found no overflow notice page; SOBE carries AWWU's events.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
+  },
+  {
+    "id": "ak-cbj-cso-notices",
+    "name": "City and Borough of Juneau wastewater utility page: combined sewer overflow public notices",
+    "jurisdiction": "AK",
+    "operator": "City and Borough of Juneau",
+    "operator_type": "utility",
+    "role": "events",
+    "event_types": [
+      "cso"
+    ],
+    "waters_covered": "Gastineau Channel (Juneau-Douglas CSO outfalls)",
+    "water_slugs": [],
+    "url": "https://juneau.org/engineering-public-works/wastewater-utility",
+    "access": [
+      "html",
+      "pdf"
+    ],
+    "access_detail": "Answered 200 on 2026-11-07. The 'Combined Sewer Overflows' section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'. Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification).",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "started_at (date only)"
+    ],
+    "cannot_fill": [
+      "volume",
+      "end"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "as events occur (none since 2005)",
+    "history": "2004 to date",
+    "license": null,
+    "legal_basis": "NPDES permit AK0023213, Part I.D.1.g",
+    "status": "used",
+    "status_reason": "Juneau's permit-required CSO public notice channel; monitored for new notices.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
+    "notes": "Corrects the research's 'no public channel' for Juneau: a page exists, with no notice since 2005."
   }
 ]
