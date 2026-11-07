@@ -201,7 +201,9 @@ fetch:
 Other keys: `where` (a SoQL filter), `order` (`:id`), `page_size` (1000), `max_rows` (200,000), `if_changed: true`
 (with `metadata: true`: the table's metadata is asked first and the rows are read only when its `rowsUpdatedAt` differs
 from the last good run's `meta.table_version`; an unchanged table keeps the last good run's records, their own fetch
-times kept, with `meta.checked_at` the time it was asked: for a large table refreshed in batches, such as TCEQ's).
+times kept, with `meta.checked_at` the time it was asked: for a large table refreshed in batches, such as TCEQ's;
+the version is asked before and after paging, a read during which it moved is read again, three tries, and a read whose
+rows differ from the table's `count(*)` is refused, so a read torn by a refresh is never kept).
 
 ## ArcGIS REST
 

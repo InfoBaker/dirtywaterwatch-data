@@ -337,12 +337,13 @@
   "sample_caution": {
    "sources": [
     "ne-dwee-beachwatch",
-    "hi-doh-cwb-events-api"
+    "hi-doh-cwb-events-api",
+    "tx-glo-beach-watch"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
-   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done), never as the agency's advisory.",
-   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch"
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high; Texas Beach Watch's Medium level, enterococcus from 35 to 104 per 100 mL, at which the program recommends no advisory). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done), never as the agency's advisory.",
+   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii Department of Health, Clean Water Branch; Texas General Land Office, Texas Beach Watch"
   },
   "day_start_caution": {
    "sources": [

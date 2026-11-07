@@ -5,8 +5,8 @@ Socrata 8kc5-95uk): one row per incident reported to a TCEQ regional office sinc
 319.301-319.303). The rows give dates only (start, end, received; every value is midnight), a volume, the cause, the
 source of the spill, the TCEQ region, the county, the regulated entity (RN) and its permits, and often a receiving water;
 no coordinates and no time of day. The table is refreshed in batches months apart.
-  - Zone: dates only, so no clock time is converted; each record still says the zone its county keeps
-    (raw.timezone and raw.timezone_note): Mountain time in El Paso and Hudspeth counties, Central time in the other 252
+  - Zone: dates only; each date is midnight in the zone its county keeps, and the record says that zone
+    (raw.time_zone, raw.timezone_note), so the status build ends a day at that zone's midnight: Mountain time in El Paso and Hudspeth counties, Central time in the other 252
     (49 CFR 71.9 and 71.10: the boundary between the Central and Mountain zones in Texas follows the eastern lines of
     Hudspeth and El Paso counties).
   - Placement (owner default 2026-11-07, docs/state-builder-brief-wave3.md in the site repository): a row naming a water
@@ -15,7 +15,8 @@ no coordinates and no time of day. The table is refreshed in batches months apar
     (raw.county). raw._placement "named_water_only" tells build/provisional_outfalls.py never to geolocate the row from
     its text and never to stand the operator's plant point in for it. A model pass could later read a segment number or a
     misspelt name; a model never supplies a place or a colour.
-  - Receiving-water text: TCEQ's wordings for no water given ("NOT PROVIDED", "NO WATER BODY PROVIDED", "NONE LISTED",
+  - Receiving-water text: a bare basin name ("COLORADO", "BRAZOS", "TRINITY RIVER BASIN") is TCEQ's basin label and
+    names no water; TCEQ's wordings for no water given ("NOT PROVIDED", "NO WATER BODY PROVIDED", "NONE LISTED",
     "NOT SPECIFIED", "N/A" ...) and a bare number (a TCEQ segment number, "613") name no water: waterbody_text is null and
     the words stay in raw._water_text_as_given (and in raw.row). The river_segment column, when not 0, is TCEQ's
     classified segment, kept in raw._tceq_segment. A statement that the spill was contained or stayed on the ground
@@ -48,11 +49,15 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from common import DATA_DIR, NAME_REMOVED, scrub_discharger
 from ingest.generic import fieldmap as F
 
 MOUNTAIN_COUNTIES = {"EL PASO", "HUDSPETH"}
+ROW_IN_RECORD = {"incident_number", "start_date", "end_date", "received_date", "amount", "amount_unit", "material_type",
+                 "source", "cause", "tceq_region", "receiving_water_body"}
 ZONE_NOTE = "{zone} time ({county}; 49 CFR 71.9-71.10); dates only"
 PLACEMENT = ("TCEQ's table gives no coordinates: a report is placed only on the water it names; a report naming none is "
              "listed with its county and is never placed at the plant or geolocated from its text")
@@ -62,6 +67,13 @@ NOT_GIVEN = re.compile(
     r"none\s*(?:listed|lised|provided|given|identified|noted|reported|specified|stated)?(?:\s+in\s+report)?|"
     r"not\s+(?:specified|applicable|listed|given|identified|reported|stated|known)|n\s*/?\s*a|unknown|unk|"
     r"no\s+info\w*|blank|-+|0+)\W*$", re.I)
+# TCEQ's river basins (Texas Water Code basin names, the first digits of a segment number): a bare basin name is the
+# basin TCEQ assigns the spill ("COLORADO" on Midland's bar-ditch spills, segment 1412), not a water the spill reached
+# (review 2026-11-07 P2-3); "Colorado River" names the river and stays, and so does "Rio Grande", the river's own name
+BASIN_ONLY = re.compile(r"^\s*(?:the\s+)?(?:canadian|red|sulphur|cypress|sabine|neches|trinity|san\s+jacinto|brazos|colorado|"
+                        r"lavaca|guadalupe|san\s+antonio|nueces|rio\s+grande(?=\s+(?:river\s+)?basin)|neches[-\s]trinity|trinity[-\s]san\s+jacinto|"
+                        r"san\s+jacinto[-\s]brazos|brazos[-\s]colorado|colorado[-\s]lavaca|lavaca[-\s]guadalupe|"
+                        r"san\s+antonio[-\s]nueces|nueces[-\s]rio\s+grande)(?:\s+(?:river\s+)?basin)?\W*$", re.I)
 SEGMENT_ONLY = re.compile(r"^\s*(?:segment\s*(?:no\.?|number|#)?\s*)?\d{3,4}[a-z]{0,2}\s*\.?\s*$", re.I)
 NOT_SEWAGE_MATERIAL = re.compile(r"^\s*(?:rock|water\s*\(h2o\)|water)\s*$", re.I)
 EPA_ID = re.compile(r"WASTEWATER-EPA ID-(TX\d{7})")
@@ -133,19 +145,31 @@ def tx_tceq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if county:
         notes["county"] = county
     notes["state"] = "TX"
-    notes["timezone"] = zone
+    notes["time_zone"] = zone
+    # the dates are the county's calendar days: midnight in its own zone (review 2026-11-07 P2-1: El Paso's carried
+    # Central offsets); the status build ends a day-precision end at that zone's midnight (raw.time_zone)
+    tz = ZoneInfo(zone)
+    for k in ("started_at", "ended_at", "reported_at"):
+        v = rec.get(k)
+        if isinstance(v, str) and re.match(r"\d{4}-\d{2}-\d{2}", v):
+            rec[k] = datetime(int(v[:4]), int(v[5:7]), int(v[8:10]), tzinfo=tz).isoformat()
     notes["timezone_note"] = ZONE_NOTE.format(zone="Mountain" if zone == "America/Denver" else "Central",
                                               county=county or "county not given")
+    # raw.row keeps the source's fields the record does not already carry (review 2026-11-07 P2-6): the dates, volume,
+    # material, source, cause and region are the record's own fields or notes; the water text as given stays when the
+    # record clears it (raw._water_text_as_given)
+    notes["row"] = {k: v for k, v in row.items() if k not in ROW_IN_RECORD}
     notes["_placement"] = "named_water_only"       # the rule: PLACEMENT (in the feed's meta, placement_rule)
     seg = F.clean(row.get("river_segment"))
     if seg and seg.strip("0"):
         notes["_tceq_segment"] = seg
     # the receiving water: TCEQ's "none given" wordings and bare segment numbers name no water
     text = F.clean(rec.get("waterbody_text"))
-    if text and (NOT_GIVEN.match(text) or SEGMENT_ONLY.match(text)):
+    if text and (NOT_GIVEN.match(text) or SEGMENT_ONLY.match(text) or BASIN_ONLY.match(text)):
         notes["_water_text_as_given"] = text
         notes["_water_text_why"] = ("TCEQ's field gives a segment number, not a name" if SEGMENT_ONLY.match(text)
-                                        else "TCEQ's field says no receiving water was given")
+                                    else "TCEQ's river basin, not a water the spill reached" if BASIN_ONLY.match(text)
+                                    else "TCEQ's field says no receiving water was given")
         rec["waterbody_text"] = None
     # the operator
     look = _lookups(ctx)
@@ -168,7 +192,7 @@ def tx_tceq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     ent = F.clean(row.get("regulated_entity_name"))
     if ent and not FACILITY_WORDS.search(ent) \
             and scrub_discharger({"discharger_name": ent})["discharger_name"] == NAME_REMOVED:
-        notes["row"] = {**row, "regulated_entity_name": NAME_REMOVED}
+        notes["row"] = {**notes["row"], "regulated_entity_name": NAME_REMOVED}
         notes["_entity_name_removed"] = "the entity's name reads as a person's"
         if rec.get("discharger_name") == ent:
             rec["discharger_name"] = NAME_REMOVED

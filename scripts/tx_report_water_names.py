@@ -13,7 +13,9 @@ Several waters in one text ("Cypress Creek and Spring Creek") stay one row: the 
 leading "Spilled into", a trailing full stop and TCEQ's segment prefix ("1007 of the ...") are taken off. A name is
 compared with the national list's names, keys, names seen and GNIS names, case and punctuation aside. Texas Beach Watch
 names no water (its stations are placed by their points): it adds no row.
-Each row: name, reports, counties (up to five, most reports first), permits (up to five), sources, the TCEQ segment
+Each row is one name in one county (review 2026-11-07 P2-4: same-named creeks of different counties are different
+waters): name, reports, county, towns (the reporting operators' towns, most reports first), permits (up to five),
+sources, gnis_name_of (when the national list has the name only as a GNIS name of another water), the TCEQ segment
 codes the reports give (river_segment), and the spellings seen (up to five; only those with no number, street or
 plant word, so no address is quoted).
 """
@@ -31,6 +33,7 @@ from build import status as S  # noqa: E402
 
 EVENTS = ROOT / "data" / "build" / "events"
 OUT = ROOT / "research" / "tx" / "receiving-waters-missing.json"
+ARCHIVE = ROOT / "data" / "build" / "archive" / "tx-tceq-sso-opendata"
 WATER_WORD = re.compile(r"\b(creek|cr\.?|river|bayou|lake|branch|br\.?|reservoir|bay|slough|tributary|trib\.?|draw|"
                         r"arroyo|canal|channel|pond|lagoon|gulf|harbou?r|cove|fork|run|springs?|marsh|estuary|resaca|"
                         r"laguna|inlet|pass|gully|prong|brazos|trinity|sabine|neches|guadalupe|nueces|colorado|"
@@ -71,24 +74,36 @@ def clean_name(t: str) -> str:
     return t.title() if t.isupper() or t.islower() else t
 
 
-def main() -> int:
-    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["TX"]["waters"]
-    have = {compact(n) for w in nat for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []),
-                                                *(w.get("gnis_names") or [])] if n}
+def records():
+    """The live build's records and, when written, the yearly archive's (scripts/tx_tceq_archive.py)."""
     p = EVENTS / "tx-tceq-sso-opendata.json"
     if not p.exists():
         raise SystemExit("run `python -m ingest.generic tx-tceq-sso-opendata` first")
-    reports, counties, permits, segments = Counter(), defaultdict(Counter), defaultdict(Counter), defaultdict(set)
-    spellings: dict[str, Counter] = defaultdict(Counter)
+    yield from json.loads(p.read_text()).get("records", [])
+    for f in sorted(ARCHIVE.glob("[12]*.json")):
+        yield from json.loads(f.read_text()).get("records", [])
+
+
+def main() -> int:
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["TX"]["waters"]
+    have = {compact(n) for w in nat for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or [])] if n}
+    gnis_of: dict[str, set] = defaultdict(set)          # a GNIS name -> the national waters that carry it as a part
+    for w in nat:
+        for g in w.get("gnis_names") or []:
+            gnis_of[compact(g)].add(w["name"])
+    towns_of = {r["id"]: r.get("towns") or [] for r in json.loads((ROOT / "data" / "dischargers.json").read_text())
+                if r.get("state") == "TX"}
+    reports, permits, segments, towns = Counter(), defaultdict(Counter), defaultdict(set), defaultdict(Counter)
+    spellings: dict[tuple, Counter] = defaultdict(Counter)
     shown: dict[str, str] = {}
     why = Counter()
     resolved = Counter()
-    for r in json.loads(p.read_text()).get("records", []):
+    for r in records():
         if r.get("duplicate_of") or (r.get("raw") or {}).get("_missing_from_source_since"):
             continue
         t = r.get("waterbody_text")
         if not t:
-            why["no water given (TCEQ's wordings, segment numbers)"] += 1
+            why["no water given (TCEQ's wordings, segment numbers, basin names)"] += 1
             continue
         if S.stated_no_water(t) or S.no_water_text(t) or NO_WATER_WORDS.match(t):
             why["the text names no water or says none was reached"] += 1
@@ -113,37 +128,42 @@ def main() -> int:
         if k in have:
             resolved[k] += 1
             continue
-        name = shown.setdefault(k, n)
-        reports[name] += 1
+        raw = r.get("raw") or {}
+        key = (shown.setdefault(k, n), raw.get("county") or "county not given")
+        reports[key] += 1
         sp = " ".join(t.split())
         if not re.search(r"\d", sp) and not STREETISH.search(sp):     # a spelling is quoted only when it is a name
-            spellings[name][sp] += 1
-        raw = r.get("raw") or {}
-        if raw.get("county"):
-            counties[name][raw["county"]] += 1
+            spellings[key][sp] += 1
         if r.get("npdes_permit"):
-            permits[name][r["npdes_permit"]] += 1
+            permits[key][r["npdes_permit"]] += 1
         if raw.get("_tceq_segment"):
-            segments[name].add(raw["_tceq_segment"])
+            segments[key].add(raw["_tceq_segment"])
+        for tw in towns_of.get(r.get("discharger_id"), [])[:3]:
+            towns[key][tw] += 1
     rows = []
-    for n in sorted(reports, key=lambda x: (-reports[x], x)):
-        rows.append({"name": n, "reports": reports[n],
-                     "counties": [c for c, _ in counties[n].most_common(5)],
-                     "permits": [q for q, _ in permits[n].most_common(5)],
+    for key in sorted(reports, key=lambda x: (-reports[x], x)):
+        n, county = key
+        rows.append({"name": n, "reports": reports[key], "county": county,
+                     "towns": [t for t, _ in towns[key].most_common(3)],
+                     "permits": [q for q, _ in permits[key].most_common(5)],
                      "sources": ["tx-tceq-sso-opendata"],
-                     **({"segments": sorted(segments[n])} if segments[n] else {}),
-                     "spellings": [s for s, _ in spellings[n].most_common(5)]})
+                     **({"gnis_name_of": sorted(gnis_of[compact(n)])} if gnis_of.get(compact(n)) else {}),
+                     **({"segments": sorted(segments[key])} if segments[key] else {}),
+                     "spellings": [s for s, _ in spellings[key].most_common(5)]})
     doc = {"about": ("Water names in TX's records that data/receiving-waters-national.json does not hold for TX: TCEQ's "
-                     "Sanitary Sewer Overflows table (data.texas.gov 8kc5-95uk, read 2026-11-07; the receiving water a "
-                     "report gives, once per report), with the counties, permits and TCEQ segment codes of the reports "
-                     "naming each. Records naming no water and texts that are not a water's name are left out (by_reason). "
-                     "Texas Beach Watch names no water: its stations are placed by their points. Written by "
-                     "scripts/tx_report_water_names.py."),
-           "state": "TX", "waters": len(rows), "reports": sum(reports.values()),
-           "reports_on_listed_waters": sum(resolved.values()), "by_reason": dict(why.most_common()), "rows": rows}
+                     "Sanitary Sewer Overflows table (data.texas.gov 8kc5-95uk, read 2026-11-07, every report since "
+                     "2010; the receiving water a report gives, once per report), one row per name and county, with the "
+                     "towns of the operators that reported it (nearest first by reports), the permits and TCEQ segment "
+                     "codes. A name the national list carries only as a GNIS name of another water is kept, with that "
+                     "water in gnis_name_of (Post Oak Creek in Grayson County is not the Red River). Records naming no "
+                     "water and texts that are not a water's name are left out (by_reason). Texas Beach Watch names no "
+                     "water: its stations are placed by their points. Written by scripts/tx_report_water_names.py."),
+           "state": "TX", "waters": len(rows), "names": len({r["name"] for r in rows}),
+           "reports": sum(reports.values()), "reports_on_listed_waters": sum(resolved.values()),
+           "by_reason": dict(why.most_common()), "rows": rows}
     OUT.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
-    print(f"{len(rows)} names, {sum(reports.values())} reports; {sum(resolved.values())} reports on listed waters; "
-          f"left out {dict(why)} -> {OUT.relative_to(ROOT)}")
+    print(f"{len(rows)} rows ({doc['names']} names), {sum(reports.values())} reports; {sum(resolved.values())} reports on "
+          f"listed waters; left out {dict(why)} -> {OUT.relative_to(ROOT)}")
     return 0
 
 

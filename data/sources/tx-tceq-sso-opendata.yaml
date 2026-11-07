@@ -12,7 +12,8 @@ level: "state"
 #   2024 5,013, 2025 4,184, 2026 to August 3,185); status_code CLOSED 56,289, REFERRED 203, OPEN 53; material Sewage
 #   55,478, municipal wastewater 748; volume in gallons on 55,236 rows; 216 counties (Harris 17,662, Dallas 3,921, Bexar
 #   3,257, Tarrant 3,255, Travis 3,034; El Paso 180, Hudspeth none); 2,117 regulated entities. Every date is midnight:
-#   dates only. 9,594 rows give no end date.
+#   dates only. 9,594 rows give no end date: none received since 2024-07-22 has one. 44 give an end in 2030 to 3000.
+#   The live build reads the 16,372 that began on or after 2023-01-01; the 40,173 before are in yearly archive files.
 # Receiving water: 35,373 rows give none in TCEQ's words (NOT PROVIDED 23,320; NO WATER BODY PROVIDED 5,287; N/A 4,026;
 #   NONE 1,148; UNKNOWN 2,363 and variants); others give a TCEQ segment number ("613", "1007 OF THE SAN JACINTO RIVER
 #   BASIN", "SEGMENT NO. 2501BC"), a statement ("CONTAINED ON SITE", "SPILLED INTO STREET", "GROUND", "DITCH") or a
@@ -45,6 +46,12 @@ fetch:
   dataset: "8kc5-95uk"
   format: "json"
   page_size: 5000
+  # the hourly build carries the reports that began on or after 2023-01-01 (about 16,400 on 2026-11-07, the years the
+  #   status, the 90-day history and the recent charts read); the reports of 2010-2022 (about 40,000) are written once
+  #   per table version to yearly archive files by scripts/tx_tceq_archive.py (review 2026-11-07 P2-6). A fixed date,
+  #   not a rolling one: a record that aged out of a rolling window would read as missing from the source.
+  where: "start_date >= '2023-01-01T00:00:00'"
+  filter: [{field: start_date, regex: "^20(2[3-9]|[3-9][0-9])-"}]   # the same cut on a saved read (--file)
   metadata: true            # rowsUpdatedAt -> source_updated_at; the table gives no per-row edit or publication time
   if_changed: true          # a 44 MB table refreshed in batches: read only when rowsUpdatedAt moves
   time_zone: "America/Chicago"   # dates only; each record names its county's zone (tx_tceq_record)

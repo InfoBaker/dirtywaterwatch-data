@@ -134,15 +134,56 @@ AGENCY = [
 # operators' own channels found in the research
 OWN = [
     {"id": "tx-city-of-houston-sso-monthly", "operator_id": "tx-city-of-houston", "name": "City of Houston",
-     "channel_kind": "operator_page", "urls": [], "method": None,
+     "channel_kind": "operator_page", "urls": ["https://www.houstonpublicworks.org/wastewater-cd"], "method": "html",
      "legal_basis": ("Consent decree, United States and State of Texas v. City of Houston, No. 4:18-cv-03368 (S.D. "
-                     "Tex., 2021): monthly sanitary sewer overflow reports"), "basis_kind": "permit",
-     "monitored": False, "unmonitored_reason": "other", "publishes": "documents", "records": False,
-     "note": ("Houston Public Works files a monthly SSO summary report and map as PDFs under the 2021 consent decree "
-              "(SSO id, permit, address, whether waters were reached, gallons, cause, start and end times); seen in "
-              "search for late 2022 to August 2025, the page address not verified in the research. Not read: the "
-              "same overflows reach TCEQ's table. (research/tx/sources.json tx-houston-sso-monthly)"),
+                     "Tex., 2021), paragraph 61: a monthly summary of the prior month's sanitary sewer overflows"),
+     "basis_kind": "permit", "monitored": True, "unmonitored_reason": None, "publishes": "documents",
+     "records": False, "every_hours": 24, "noun": "Consent decree reports",
+     "note": ("Houston Public Works' consent decree page (answered 200 on 2026-11-07) lists the monthly SSO reports as "
+              "PDFs, January 2021 to September 2026 (SSO id, permit, address, whether waters were reached, gallons, "
+              "cause, start and end times), a month ahead of TCEQ's table. Watched for new reports; the PDFs are not "
+              "read into records: the same overflows reach TCEQ's table. (research/tx/sources.json tx-houston-sso-monthly)"),
      "sources": ["tx-houston-sso-monthly"]},
+    {"id": "tx-city-of-austin-water-news", "operator_id": "tx-city-of-austin", "name": "City of Austin (Austin Water)",
+     "channel_kind": "news_page", "urls": ["https://www.austintexas.gov/water/news"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices", "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "note": ("Austin Water's news list (answered 200 on 2026-11-07) carries releases on large overflows (one of more "
+              "than 100,000 gallons near E. Howard Lane, September 2026). Watched without records: the overflows reach "
+              "TCEQ's table. Voluntary beyond the 30 TAC 319.302 media notice.")},
+    {"id": "tx-city-of-dallas-news", "operator_id": "tx-city-of-dallas", "name": "City of Dallas (Dallas Water Utilities)",
+     "channel_kind": "news_page", "urls": ["https://www.dallascitynews.net/"], "method": "html",
+     "legal_basis": Q_319, "basis_kind": "law", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices", "records": False, "every_hours": 24, "noun": "Notice to local media",
+     "note": ("Dallas posts its overflow bulletins (heavy-rain overflows) and the TCEQ public notification forms it "
+              "files under 30 TAC 319.302 (dallascityhall.com, govdelivery); the city news site answered 200 on "
+              "2026-11-07. Watched without records.")},
+    {"id": "tx-saws-website", "operator_id": "tx-san-antonio-water-system", "name": "San Antonio Water System",
+     "channel_kind": "operator_page", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
+     "monitored": False, "unmonitored_reason": "none_found", "publishes": "none", "records": False,
+     "note": ("SAWS's site (https://www.saws.org/, 200 on 2026-11-07) gives no notice or list of overflows in a search "
+              "of 2026-11-07; only news coverage was found. No web channel found.")},
+    {"id": "tx-el-paso-water-website", "operator_id": "tx-el-paso-water-utilities-public-service-board",
+     "name": "El Paso Water", "channel_kind": "operator_page", "urls": [], "method": None, "legal_basis": None,
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "none_found", "publishes": "none",
+     "records": False,
+     "note": ("El Paso Water's site (https://www.epwater.org/, 200 on 2026-11-07) gives no notice or list of overflows "
+              "in a search of 2026-11-07. No web channel found.")},
+    {"id": "tx-city-of-fort-worth-water-website", "operator_id": "tx-city-of-fort-worth", "name": "City of Fort Worth",
+     "channel_kind": "operator_page", "urls": ["https://www.fortworthtexas.gov/departments/water"], "method": "html",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall",
+     "publishes": "unknown",
+     "note": ("The water department's site answers 403 to the project user agent (2026-11-07); a search found no public "
+              "overflow notice page, only the utility's reporting procedure.")},
+] + [
+    {"id": f"{oid}-website", "operator_id": oid, "name": name, "channel_kind": "operator_page", "urls": [],
+     "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
+     "publishes": "unknown", "records": False,
+     "note": f"{name}'s own pages were not searched individually (one of the ten operators with the most reports)."}
+    for oid, name in (("tx-city-of-arlington", "City of Arlington"), ("tx-city-of-waco", "City of Waco"),
+                      ("tx-city-of-corpus-christi", "City of Corpus Christi"),
+                      ("tx-trinity-river-authority-of-texas", "Trinity River Authority of Texas"),
+                      ("tx-city-of-baytown", "City of Baytown"))
 ]
 
 
