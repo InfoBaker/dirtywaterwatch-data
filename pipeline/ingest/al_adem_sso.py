@@ -59,7 +59,9 @@ Record rules (one sso record per ADEM report id, source_record_id "SSO-00215084"
     permittee as filed.
   - event_type sso for every report: ADEM's layer is the SSO report system (some reports are at a plant's own lift
     station; the location words say so).
-Privacy: the layers carry no reporter, contact or certifier field (none is requested). LOCATION_OF_DISCHARGE,
+Privacy: the layers carry no reporter, contact or certifier field (none is requested). A permittee that reads as a
+  person's name (common.scrub_discharger: one permit on 2026-11-07) is "[name removed]" in discharger_name and in raw;
+  the permit stays. LOCATION_OF_DISCHARGE,
   rec_stream and cause_of_discharge are typed by the permittee and often give a street address, frequently a home's
   ("2306 PEER CT", "Into Private Residence"): common.scrub_text runs on each (e-mails, phones, staff names) and then
   common.strip_house_numbers removes every street address's house number (the street and ADEM's point stay), as
@@ -86,7 +88,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from build import redact
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta, read_json,
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, scrub_text, strip_house_numbers, write_events, write_json)
 
 SOURCE_ID = "al-adem-sso-history"
@@ -489,7 +491,7 @@ def build_record(a, live, base, raw, prev, ops, known_ids) -> dict:
         seen.append({"version": ver, "first_seen_at": base["fetched_at"]})
     raw["_versions_seen"] = seen
 
-    return event(
+    rec = event(
         **base, event_type="sso", status=status,
         discharger_id=did, discharger_name=(a.get("permittee") or (live or {}).get("permittee") or None),
         npdes_permit=permit, outfall_id=None,
@@ -503,6 +505,11 @@ def build_record(a, live, base, raw, prev, ops, known_ids) -> dict:
         authority=AUTHORITY, advice_text=None, advice_window_hours=None, advice_window_basis=None,
         raw=raw, parse_error="; ".join(problems) or None, duplicate_of=dup_of,
     )
+    if rec["discharger_name"] == NAME_REMOVED:      # a permittee that reads as a person's name: out of raw too
+        for part in (rec["raw"].get("row") or {}, rec["raw"].get("live") or {}):
+            if part.get("permittee"):
+                part["permittee"] = NAME_REMOVED
+    return rec
 
 
 def build(hist_rows: list[dict], live_rows: list[dict], fetched_at: str, prev_records: list[dict], full: bool,
