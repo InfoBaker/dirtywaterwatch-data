@@ -220,7 +220,8 @@ def report_counts(dis: list[dict]) -> dict[str, int]:
                    (ROOT / "data" / "build" / "echo-sewer-overflow-dropped.json", "dropped")):
         if f.exists():
             for r in json.loads(f.read_text()).get(key, []):
-                by_permit[r.get("npdes_permit") or r.get("permit")] += 1
+                if (r.get("state") or (r.get("raw") or {}).get("state") or "AZ") == "AZ":   # NN placed in AZ only
+                    by_permit[r.get("npdes_permit") or r.get("permit")] += 1
     return {op["id"]: sum(by_permit[p] for p in op.get("npdes_permits") or []) for op in dis if op.get("state") == "AZ"}
 
 
