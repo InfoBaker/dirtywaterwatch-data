@@ -334,3 +334,36 @@ def test_missing_water_names_are_normalised_and_the_bloom_lakes_carry_their_coun
                      "Lake Poinsett": ["Hamlin County"], "Twin Lakes": ["Spink County"],
                      "Wall Lake": ["Minnehaha County"]}
     assert all(r["name"] != "Unnamed" for r in doc["rows"])
+
+
+# ---------------------------------------------------------------- final audit 2026-11-07: a general permit's state
+
+def test_a_general_permits_report_counts_under_its_state(monkeypatch):
+    """SDG821580's bypass to the Big Sioux River had no state (the permit's prefix was read only before a digit), so
+    it was not placed by name, not counted and not coloured; the same held for ILG, GAU, RIS and NHG permits."""
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", {"SD", "IL", "GA", "RI", "NH"})
+    for permit, st in [("SDG821580", "SD"), ("SD0023574", "SD"), ("ILG640063", "IL"), ("GAU020000", "GA"),
+                       ("RIS000002", "RI"), ("NHG580001", "NH")]:
+        assert S.event_state({"npdes_permit": permit, "source_id": "echo-sewer-overflow"}) == st
+    assert S.event_state({"npdes_permit": "NN0020001", "source_id": "echo-sewer-overflow"}) is None
+    assert S.event_state({"npdes_permit": "SDGX21580", "source_id": "echo-sewer-overflow"}) is None
+    W = {"big-sioux-river-sd": {"slug": "big-sioux-river-sd", "name": "Big Sioux River", "kind": "river",
+                                "state": "SD", "towns": [], "bbox": [-97.21, 42.49, -96.44, 45.32]}}
+    R = S.Resolver(W, [], {}, {}, {})
+    ev = {"event_id": "echo-sewer-overflow:SDG821580:2:1", "source_id": "echo-sewer-overflow",
+          "npdes_permit": "SDG821580", "event_type": "bypass", "waterbody_text": "Big Sioux River",
+          "lat": 44.721946, "lon": -97.041613, "water_slugs": [], "water_match": "none", "raw": {}}
+    assert R.resolve(ev)["water_slugs"] == ["big-sioux-river-sd"]
+
+
+def test_operator_rows_state_no_unread_permit_duty_as_fact():
+    """Final audit 2026-11-07 (review P2-1 carried to the operator rows): the public channel text says no statute was
+    found and that the two combined sewer permits are expected to require notice; neither permit was read."""
+    rows = [o for o in json.loads((ROOT / "data" / "dischargers.json").read_text()) if o["state"] == "SD"]
+    text = [o["notification_channel"] for o in rows]
+    assert len(rows) == 369
+    assert all(t.startswith("No South Dakota statute or rule was found that requires") for t in text)
+    assert not any("must notify the public" in t for t in text)
+    cso = [o for o in rows if o["kind"] == "cso"]
+    assert len(cso) == 2 and all("is expected to require public notice" in o["notification_channel"] for o in cso)
