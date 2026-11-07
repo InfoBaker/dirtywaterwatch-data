@@ -81,13 +81,15 @@ AGENCY = [
     {"id": "ms-mdeq-news-releases", "agency": MDEQ, "name": MDEQ, "channel_kind": "news_page",
      "urls": ["https://www.mdeq.ms.gov/category/news-release/feed/"], "method": "rss", "legal_basis": None,
      "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "notices",
-     "every_hours": 3, "noun": "News releases",
+     "records": False, "every_hours": 3, "noun": "News releases",
      "note": ("MDEQ's news releases (RSS, answered 200 on 2026-11-07). Ad hoc water contact advisories after sewage "
               "discharges come this way: 2026-09-02, an advisory for an unnamed tributary of Trahon Creek and Trahon "
               "Creek to the Pearl River \"due to an ongoing sewage bypass\", the release adding that \"the longstanding "
               "water contact advisory for the section of the Pearl River from Hanging Moss Creek to the Byram Swinging "
               "bridge remains in effect\". Beach advisories came this way until 2026-09-07. No law requires the "
-              "releases. (ms-mdeq-water-contact-advisories)"),
+              "releases. Watched for changes, no records: the feed's items carry the title only, and a release that lifts "
+              "an advisory (\"MDEQ Lifts Water Contact Advisories for ...\") reads to the notice finder like one that "
+              "issues it, so a new release is listed in the change log for review. (ms-mdeq-water-contact-advisories)"),
      "sources": ["ms-mdeq-water-contact-advisories"]},
     {"id": "ms-mdeq-beach-monitoring-map", "agency": MDEQ, "name": f"{MDEQ} (Beach Monitoring Program)",
      "channel_kind": "state_alert_page", "urls": [BEACH_LAYER], "method": "json", "legal_basis": Q_BEACH,

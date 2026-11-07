@@ -1,0 +1,21 @@
+---
+state: MS
+name: Mississippi
+updated: 2026-11-07
+---
+
+**What the law requires.** No Mississippi statute or rule requiring the public to be told of a sewer overflow or a treatment plant bypass was found. Every sewage operator, public or private, must report one to the Mississippi Department of Environmental Quality within 24 hours and file a written report within five days; since December 21, 2025 that report is filed through the U.S. Environmental Protection Agency's electronic reporting system. Mississippi has no combined sewers (sewage and rainwater in one pipe). The law sets no period after a discharge during which the water is to be avoided. In Jackson, whose sewer system is run by JXN Water under a 2023 federal court order, the overflow response plan of the 2013 consent decree calls for news releases and temporary signs for significant overflows. Beach advisories on the Gulf Coast are issued by the Department's Beach Monitoring Program.
+
+**What is published.** The U.S. Environmental Protection Agency publishes the reports Mississippi operators file, daily, with the start and end to the minute, the point, the receiving water and in most cases the volume: 358 reports from 47 permits in the file of November 4, 2026, almost all from January 2026 on, of which this site reads 248 as having reached a water (sewer overflows and bypasses). A report reaches that table a median of four days after the discharge began; one in ten takes 41 days or more. The Department issues water contact advisories for streams and rivers after large discharges as news releases: on September 2, 2026, one for Trahon Creek and a tributary to the Pearl River during an ongoing sewage bypass. It shows beach advisories and closures for 21 Gulf Coast stations on its beach monitoring map, with the start date and the reason (bacteria, an algal bloom).
+
+**What is not published.** The Department publishes no list or map of the overflow reports it receives. It keeps no list of the water contact advisories in effect: a long-standing advisory on the Pearl River below Jackson, from Hanging Moss Creek to the Byram Swinging Bridge, is known only from its mention in the September 2026 release. The beach map gives no end date when an advisory is lifted and keeps no history. JXN Water's quarterly reports to the court give overflow totals, not single events, and no page listing them was found.
+
+**What stands in the way.** With no duty to tell the public, the operators' reports reach the public only through the federal table, days or weeks later. Since September 8, 2026 routine beach advisories are no longer sent as text alerts or news releases: they are posted on signs at the beach and on the Department's map only. Signs at overflows are seen only on site.
+
+**Known problems in the data.** The federal reports give times without a time zone; this site reads them as Central time. Many reports describe the place by a street address, and some name no water at all; reports that say the sewage stayed out of the water are kept but not placed on one. Jackson's reports often name a creek without the word "creek" ("Eubanks", "Town"); this site reads eight of these as the creek of that name that runs near the reported point, and keeps the others as written. Fifteen reports give no volume, and eleven reports of severe storms give only the days of the report period. On November 5 and 7, 2026 the federal daily file of current reports was published without its tables; this site read the same reports from the federal file of every version.
+
+**What this site does about it.** A report is shown from its start to its end, then with the site's caution (72 hours; 96 on lakes, ponds and reservoirs), since the law sets no period. A report of a severe storm's overflows is shown for the days it covers. The Department's news releases and its beach map are checked for changes every few hours; their advisories are not yet shown as reports on this site. Street addresses and house numbers in the reports' descriptions are not reproduced here; the full report is in the federal records.
+
+{{share_line}}
+
+Of this state's reports on this site, {{dated_share}} are dated to the day or better; the newest dated report is from {{latest_dated}}. Coverage: {{grade}}.

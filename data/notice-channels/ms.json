@@ -198,9 +198,10 @@
    "monitored": true,
    "unmonitored_reason": null,
    "publishes": "notices",
+   "records": false,
    "every_hours": 3,
    "noun": "News releases",
-   "note": "MDEQ's news releases (RSS, answered 200 on 2026-11-07). Ad hoc water contact advisories after sewage discharges come this way: 2026-09-02, an advisory for an unnamed tributary of Trahon Creek and Trahon Creek to the Pearl River \"due to an ongoing sewage bypass\", the release adding that \"the longstanding water contact advisory for the section of the Pearl River from Hanging Moss Creek to the Byram Swinging bridge remains in effect\". Beach advisories came this way until 2026-09-07. No law requires the releases. (ms-mdeq-water-contact-advisories)",
+   "note": "MDEQ's news releases (RSS, answered 200 on 2026-11-07). Ad hoc water contact advisories after sewage discharges come this way: 2026-09-02, an advisory for an unnamed tributary of Trahon Creek and Trahon Creek to the Pearl River \"due to an ongoing sewage bypass\", the release adding that \"the longstanding water contact advisory for the section of the Pearl River from Hanging Moss Creek to the Byram Swinging bridge remains in effect\". Beach advisories came this way until 2026-09-07. No law requires the releases. Watched for changes, no records: the feed's items carry the title only, and a release that lifts an advisory (\"MDEQ Lifts Water Contact Advisories for ...\") reads to the notice finder like one that issues it, so a new release is listed in the change log for review. (ms-mdeq-water-contact-advisories)",
    "sources": [
     "ms-mdeq-water-contact-advisories"
    ],
