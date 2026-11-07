@@ -42,7 +42,7 @@ def test_the_feed_gives_the_trahon_creek_advisory_and_the_standing_pearl_river_o
     p = by["pearl-river-hanging-moss-creek-to-byram-swinging-bridge"]
     assert p["status"] == "advisory_active" and p["started_at"] == "2026-09-02"
     assert "remains in effect" in p["raw"]["quote"] and "began earlier" in p["raw"]["start_basis"]
-    assert p["raw"]["stretch"]["from"]["source"].startswith("USGS GNIS 670883") and p["raw"]["stretch"]["to"]["lat"] is None
+    assert p["raw"]["stretch"]["from"]["source"].startswith("USGS GNIS 670883") and p["raw"]["stretch"]["to"]["lat"] == 32.17657
     # the beach issue and the beach lift are left to the beach layer; the air-quality releases are not read
     assert stats["beach_left_to_layer"] == 2 and stats["issues"] == 1 and len(recs) == 2
     assert not any("creator" in json.dumps(r) for r in recs)                 # dc:creator (a staff name) is never read
@@ -175,6 +175,10 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     by = {r["source_record_id"]: r for r in recs}
     p, t = by["pearl-river-hanging-moss-creek-to-byram-swinging-bridge"], by["trahon-creek-2026-09-02"]
     assert p["water_slugs"] == ["pearl-river-ms"] and p["raw"]["advisory_extent"] == "named_water"
+    # both ends of the Pearl River stretch carry a cited public point: GNIS for the mouth, the bridge's National
+    # Register nomination (UTM 15 759900 E 3563150 N, NAD 1927) for the Byram Swinging Bridge
+    to = p["raw"]["stretch"]["to"]
+    assert (to["lat"], to["lon"]) == (32.17657, -90.24366) and "79003427" in to["source"] and to["url"]
     assert t["raw"]["stretch"]["from"]["name"] == "culvert at the Interstate 55 frontage road"
     assert (t["raw"]["stretch"]["from"]["lat"], t["raw"]["stretch"]["to"]["name"]) == (32.194572, "confluence with the Pearl River")
     st = _status(recs, "2026-11-07T13:00:00Z", monkeypatch)

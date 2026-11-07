@@ -141,8 +141,8 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[
     name = state_name(st)
     Name = "The District of Columbia" if name.startswith("District") else name
     in_name = "the District of Columbia" if st == "DC" else name
-    by = (f"{Name}'s operators' overflow reports are published by {FEDERAL_PUBLISHER}, days to weeks after the event"
-          if federal else None)
+    # no possessive ("Massachusetts's") and no unsourced delay: the delayed sentence gives the state's own lag
+    by = f"Overflow reports from sewer operators in {in_name} are published by {FEDERAL_PUBLISHER}" if federal else None
     if f["records_12m"] == 0:
         return "No public reports", (f"{Name} publishes no sewage overflow reports we can read; the map shows no "
                                      "discharges there because none are reported, not because none happen.")
@@ -324,8 +324,8 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
     """out/coverage.json: {built_from, as_of, definitions, states: {ST: {...}}, waters: {slug: {...}},
     rain_caution_states}. events: the public records (with `state`, `superseded`, `duplicate_of`); waters: the tracked
     water rows (slug, state, events); feeds and registry: out/sources.json's; rain_states: rain_caution_states;
-    source_levels: {source_id: [the levels of its registry rows]} over the whole registry (a national row such as
-    EPA's eRule tables, states ["US"], is not among the live rows of out/sources.json)."""
+    source_levels: {source_id: [the levels of its registry rows]} over the whole registry (EPA's eRule tables:
+    fed-echo-sewer-overflow-bypass-events, level federal, states ["US"])."""
     from export import csv as csv_mod
     now = status_mod.parse_time(as_of) or datetime.now(UTC)
     start = now - timedelta(days=365)

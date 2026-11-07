@@ -794,13 +794,18 @@ def live_jurisdiction_events(events: list[dict], live: set[str]) -> tuple[list[d
     return kept, n
 
 
+NATIONAL = "US"          # a registry row's states value for a national source
+
+
 def live_registry_rows(rows: list[dict], live: set[str]) -> list[dict]:
     """The registry rows of the live states and the national ones: a row whose `states` list names only states not
-    yet live stays home (docs/national-approach.md §8 item 3: nothing outside live_states reaches out/)."""
+    yet live stays home (docs/national-approach.md §8 item 3: nothing outside live_states reaches out/). A national
+    row is one with no states or with "US" (EPA's eRule tables, fed-echo-sewer-overflow-bypass-events: without it the
+    echo-sewer-overflow feed, which lists only that row, left /sources/ from 2026-11-04 to the 2026-11-07 review)."""
     out = []
     for r in rows:
         sts = {str(x).upper() for x in (r.get("states") or [])}
-        if not sts or sts & live:
+        if not sts or NATIONAL in sts or sts & live:
             out.append(r)
     return out
 
@@ -1615,7 +1620,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         csv_events, tracked, feeds, reg_rows, dis, status_mod.load_rules(), st.get("now"),
         rain_states=rain_caution_states(rain_block), notification_pages=coverage_mod.load_notification_pages(),
         register=coverage_mod.load_register(),
-        # the level of each feed's registry rows, from the whole registry (EPA's national row is not a live row)
+        # the level of each feed's registry rows, read from the whole registry (not only the live rows)
         source_levels={sid: sorted({str((registry.get(rid) or {}).get("level") or "") for rid in h.get("registry_ids") or []}
                                    - {""}) for sid, h in health.items()})
     cov["states"] = {k: v for k, v in (cov.get("states") or {}).items() if k in status_mod.states()}   # live only

@@ -31,8 +31,8 @@ Record rules
     the Byram Swinging bridge remains in effect" (the 2026-09-02 release). Its start is not stated: started_at is that
     release's date, the earliest date the record can stand on, and raw.start_basis says the advisory began earlier.
     Its point is the stretch's upstream end, the mouth of Hanging Moss Creek in the USGS Geographic Names Information
-    System (GNIS 670883, Streams (Mouth) layer); no public point for the Byram Swinging Bridge was found, so the
-    downstream end is named only (raw.stretch). It is lifted like any other.
+    System (GNIS 670883, Streams (Mouth) layer); the downstream end, the Byram Swinging Bridge, is the point of its
+    National Register nomination (raw.stretch.to; see "The water" below). It is lifted like any other.
   - History: the feed holds ten releases, so the previous run's records are carried and updated; a record is never
     dropped because its release left the feed.
   - The water (2026-11-07 final audit): an advisory names its water, so it colours that water, not only a point.
@@ -43,8 +43,10 @@ Record rules
     the release's own point at the upstream end. Placement is by the water's name (waterbody_text), so a water whose
     record does not exist yet (Trahon Creek before the report-names pass) is tied when the record appears; the Pearl
     River's standing record also carries its slug (pearl-river-ms, the one Mississippi record of that name). A
-    modeled reach from the upstream end is not built: the reach builder traces discharges, and the downstream end
-    (the Byram Swinging Bridge) has no public point to cut it at. These fields are refreshed on carried records.
+    modeled reach from the upstream end is not built yet: the reach builder traces discharges to a cap, not an
+    advisory's stretch to a named end. The downstream end has a public point (the Byram Bridge's National Register
+    nomination, NRHP 79003427: UTM 15 759900 E 3563150 N, NAD 1927), kept in raw.stretch.to for that trace. These
+    fields are refreshed on carried records.
 
 Privacy: the feed's dc:creator (an MDEQ staff name) is never read; only titles, links, dates and the release text are.
 Run from pipeline/:  python -m ingest.ms_mdeq_water_contact [--file feed.xml [--pages DIR]]
@@ -90,8 +92,13 @@ STANDING = [{
     "water_slugs": ["pearl-river-ms"],     # data/waters-ms.json: the one Mississippi record named Pearl River
     "stretch": {"from": {"name": "mouth of Hanging Moss Creek", "lat": 32.351817, "lon": -90.112036,
                          "source": "USGS GNIS 670883, Streams (Mouth)"},
-                "to": {"name": "Byram Swinging Bridge", "lat": None, "lon": None,
-                       "source": "named in the release; no public point found"}},
+                # the bridge's National Register nomination (Byram Bridge, NRHP 79003427; MDAH Historic Sites Survey,
+                # 1978) gives UTM zone 15, 759900 E, 3563150 N (NAD 1927), read here as latitude and longitude; the
+                # nomination's NPS copy: https://npgallery.nps.gov/NRHP/GetAsset/NRHP/79003427_text
+                "to": {"name": "Byram Swinging Bridge", "lat": 32.17657, "lon": -90.24366,
+                       "source": ("National Register of Historic Places nomination, Byram Bridge (reference 79003427), "
+                                  "UTM 15 759900 E 3563150 N, NAD 1927"),
+                       "url": "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/79003427_text"}},
 }]
 
 
