@@ -2,19 +2,19 @@
  "about": "Receiving-water names in Alaska's reports (EPA's overflow tables for Alaska permits, the 2026-11-04 extract: the 6 reports kept, 5 of which name a water) that data/receiving-waters-national.json does not hold for AK, by name as the report gives it once 'which flowed to' is split, with the number of reports giving each and the reports' points; and the receiving water of the one Alaska sewage permit in neither of EPA's outfall tables (0 reports). Reports that say the sewage reached no water are left out. Cook Inlet and Tongass Narrows are on the national list.",
  "state": "AK",
  "records_read": 6,
- "waters": 2,
- "reports": 2,
+ "waters": 3,
+ "reports": 3,
  "by_reason": {
   "not reached this run (a hand-only run asks no NHD)": 2
  },
- "resolved_names": 1,
- "resolved_reports": 1,
+ "resolved_names": 0,
+ "resolved_reports": 0,
  "build": {
   "date": "2026-11-07",
   "command": "python -m ingest.waters_from_nhd --names research/ak/receiving-waters-missing.json --state AK --hand-only",
-  "records_built": 1,
+  "records_built": 2,
   "names_resolved": 0,
-  "network_requests": 0
+  "network_requests": 1
  },
  "rows": [
   {
@@ -39,6 +39,23 @@
    "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD"
   },
   {
+   "name": "Birch Lake",
+   "reports": 1,
+   "permits": [
+    "AK0022551"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     61.145893,
+     -149.936183
+    ]
+   ],
+   "note": "Anchorage's Birch Lake (the report's point 61.145893, -149.936183): hand record birch-lake-anchorage-ak (Census TIGER 11050902166), read by the eRule module's AK alias. Not birch-lake-ak, the lake near Delta Junction 505 km away, which a run without openboatlaunch's outlines takes for it (Alaska final audit 2026-11-07)"
+  },
+  {
    "name": "Ward Cove",
    "reports": 0,
    "permits": [
@@ -48,22 +65,6 @@
     "operator row ak-ward-cove-full-cycle"
    ],
    "reason": "not reached this run (a hand-only run asks no NHD); the next --names run asks NHD"
-  }
- ],
- "resolved": [
-  {
-   "name": "Birch Lake",
-   "reports": 1,
-   "slugs": [
-    "birch-lake-ak"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
-    [
-     61.145893,
-     -149.936183
-    ]
-   ]
   }
  ]
 }

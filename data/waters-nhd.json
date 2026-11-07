@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-07T04:39:26Z",
+ "built": "2026-11-07T07:54:47Z",
  "partial": false,
- "count": 3761,
+ "count": 3762,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -147,7 +147,7 @@
      "written": 3501
     },
     "report_names_hand_only": {
-     "built": "2026-11-07T04:39:26Z",
+     "built": "2026-11-07T07:54:46Z",
      "file": "research/ak/receiving-waters-missing.json",
      "names": 2,
      "reports": 2,
@@ -156,13 +156,15 @@
      "already_a_record": 0,
      "targets": 2,
      "targets_mapped": 0,
-     "records": 1,
+     "records": 2,
      "targets_failed": 2,
      "failed_reasons": {
       "not reached this run": 2
      },
-     "network_requests": 0,
-     "requests": {},
+     "network_requests": 1,
+     "requests": {
+      "tiger-hand": 1
+     },
      "cached": {
       "tiger": 2,
       "tiger-hand": 1
@@ -172,12 +174,12 @@
      "write": {
       "mode": "merge",
       "existing_records": 3761,
-      "run_records": 1,
+      "run_records": 2,
       "replaced": 1,
-      "added": 0,
+      "added": 1,
       "kept": 3760,
       "dropped": 0,
-      "written": 3761
+      "written": 3762
      }
     }
    },
@@ -189665,10 +189667,10 @@
    "points": 1,
    "towns": [],
    "slugs": [
-    "birch-lake-ak"
+    "birch-lake-anchorage-ak"
    ],
    "how": [
-    "already a water record: the status resolver places reports of this name on it"
+    "hand record birch-lake-anchorage-ak (Census TIGER 11050902166, 13 m from the report's point), the eRule module's AK alias; not birch-lake-ak, the lake near Delta Junction 505 km away, which this offline run without openboatlaunch's outlines took for it (Alaska final audit 2026-11-07)"
    ],
    "reason": null,
    "from": "reports",
@@ -487096,6 +487098,85 @@
       [
        -84.518396,
        33.1071
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "birch-lake-anchorage-ak",
+   "name": "Birch Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Anchorage"
+   ],
+   "bbox": [
+    -149.93863,
+    61.14444,
+    -149.93519,
+    61.14582
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": 0.018,
+   "length_km": null,
+   "launches": [],
+   "advisories": [],
+   "aliases": [
+    "Birch Lake (Anchorage)"
+   ],
+   "source": "census",
+   "gnis_id": null,
+   "comids": [],
+   "nhd_fcodes": [],
+   "fetched_at": "2026-11-07T07:54:46Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 11050902166 (MTFCC H2030; named 'Birch Lk' by the Census), cut to the state and simplified to ~10 m. Hand record: The Anchorage Water and Wastewater Utility's overflow report AK0022551:43:1 (EPA's sewer overflow table, 2026-10-26) gives Birch Lake as the receiving water, at 61.145893 N 149.936183 W in Anchorage. The only Alaska record of the name (openboatlaunch's birch-lake-ak) is the Birch Lake near Delta Junction, 505 km away; NHDPlus V2.1 has no Alaska data and the NHD high-resolution waterbody there is unnamed. This record is the Census TIGER/Line area water polygon the Census names 'Birch Lk' (MTFCC H2030, 0.02 km2), 13 m from the report's point; the report's name is read as it by the eRule module's Alaska alias (STATE_WATER_ALIASES, within 3.5 km of the polygon).",
+   "hand": true,
+   "tiger_ids": [
+    "11050902166"
+   ],
+   "targets": 0,
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -149.938634,
+       61.145364
+      ],
+      [
+       -149.938477,
+       61.144738
+      ],
+      [
+       -149.937864,
+       61.144445
+      ],
+      [
+       -149.936083,
+       61.144899
+      ],
+      [
+       -149.935186,
+       61.145485
+      ],
+      [
+       -149.935877,
+       61.145738
+      ],
+      [
+       -149.937255,
+       61.145824
+      ],
+      [
+       -149.937801,
+       61.145772
+      ],
+      [
+       -149.938634,
+       61.145364
       ]
      ]
     ]
@@ -1077324,7 +1077405,7 @@
    "gnis_id": null,
    "comids": [],
    "nhd_fcodes": [],
-   "fetched_at": "2026-11-07T04:39:26Z",
+   "fetched_at": "2026-11-07T07:54:46Z",
    "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
    "note": "U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, layer 1 'Areal Hydrography'): 1 feature 11050889607 (MTFCC H2051; named 'Gastineau Chnnl' by the Census), cut to the state and simplified to ~10 m. Hand record: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas Wastewater Treatment Plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I), whose Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory gives Gastineau Channel for outfalls 002, 003 and 004. openboatlaunch has no record of the channel and NHDPlus V2.1 no Alaska data; this record is the Census TIGER/Line area water polygon the Census names 'Gastineau Chnnl' (MTFCC H2051), which holds the plant's outfall and lies 52 to 143 m from the three CSO outfalls' points. The USGS geographic names service gave no feature of the name.",
    "hand": true,
