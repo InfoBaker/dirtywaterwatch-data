@@ -367,3 +367,13 @@ def test_operator_rows_state_no_unread_permit_duty_as_fact():
     assert not any("must notify the public" in t for t in text)
     cso = [o for o in rows if o["kind"] == "cso"]
     assert len(cso) == 2 and all("is expected to require public notice" in o["notification_channel"] for o in cso)
+
+
+def test_splitrock_creek_is_split_rock_creek():
+    """Final audit 2026-11-07: Brandon's bypass (SD0022535) names 'Splitrock Creek'; the record is Split Rock Creek,
+    whose extent holds the report's point."""
+    from build import status as S
+    W = S.load_waters()
+    assert "split-rock-creek-sd" in W and "Splitrock Creek" in (W["split-rock-creek-sd"].get("aliases") or [])
+    b = W["split-rock-creek-sd"]["bbox"]
+    assert b[0] <= -96.594722 <= b[2] and b[1] <= 43.599056 <= b[3]
