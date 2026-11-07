@@ -15,12 +15,15 @@ Record rules
   - One hab_advisory record per lake line: waterbody_text the lake as written, raw.county its county, started_at the
     line's date (time_precision day; the page does not say whether it is the sampling or the issue date, so
     raw.date_note says so), source_record_id <year>:<lake slug>:<county slug> (stable while the line stays).
-  - Status: advisory_active while the year of the box has not ended. DANR's own window is the calendar year, so the
-    advisory's end is that year's 31 December: raw.expires_on carries it, and once the fetch is past it the record is
-    advisory_lifted with ended_at that date (the authority's rule, quoted in raw.end_basis; no other end is written).
+  - Status and end: DANR's own window is the calendar year ("Advisories expire at the end of the calendar year"), so
+    every record's ended_at is that year's 31 December, the authority's end, quoted in raw.end_basis (review
+    2026-11-07 P1-1: without it the status build ages an advisory out 14 days after its date). The record is
+    advisory_active while the fetch is on or before that day and advisory_lifted after it; no other end is written.
   - A lake that leaves the box before the year ends keeps its record with raw.gone_from_page_since and its status (the
     page gives no lifting); a page whose box cannot be found writes ok=False and the previous records stay.
-  - No coordinates on the page: the record is placed by the lake's name (the status build's name matching).
+  - No coordinates on the page: the record is placed by the lake's name (the status build's name matching), with
+    raw.placement_hint giving the lake, its county and the state, so a same-named lake in another county is not taken
+    (research/sd/receiving-waters-missing.json lists the five lakes with their counties for the water batch).
   - Only the lake, county and date are read: the page carries no personal data (strip_personal runs on raw all the
     same).
 
@@ -82,12 +85,15 @@ def build(page: str, fetched: str, previous: list[dict], source_updated: str | N
         raw = {"lake": x["lake"], "county": x["county"], "date": x["date"], "line": x["line"], "box_year": year,
                "expires_on": expires, "end_basis": f"DANR's page: \"{RULE}\"",
                "date_note": "the date DANR lists beside the lake; the page does not say whether it is the sampling or "
-                            "the issue date", "page_url": URL}
+                            "the issue date", "page_url": URL,
+               "placement_hint": {"name": x["lake"], "county": x["county"], "state": "SD",
+                                  "basis": "the county DANR lists beside the lake: a same-named lake elsewhere in the "
+                                           "state is not this one"}}
         perr = None if x["date"][:4] == str(year) else f"date {x['date']} outside the box's year {year}"
         records[srid] = event(
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory",
             status="advisory_lifted" if over else "advisory_active",
-            waterbody_text=x["lake"], started_at=x["date"], ended_at=expires if over else None, time_precision="day",
+            waterbody_text=x["lake"], started_at=x["date"], ended_at=expires, time_precision="day",
             source_updated_at=source_updated, fetched_at=fetched, authority=AUTHORITY, advice_text=RULE,
             source_url=URL, raw=raw, parse_error=perr)
     kept = 0
@@ -99,8 +105,10 @@ def build(page: str, fetched: str, previous: list[dict], source_updated: str | N
         p["raw"] = {**(p.get("raw") or {}), "gone_from_page_since": (p.get("raw") or {}).get("gone_from_page_since")
                     or fetched}
         exp = p["raw"].get("expires_on")
-        if exp and today > exp and p.get("status") == "advisory_active":
-            p["status"], p["ended_at"] = "advisory_lifted", exp
+        if exp:
+            p["ended_at"] = exp
+            if today > exp and p.get("status") == "advisory_active":
+                p["status"] = "advisory_lifted"
         records[sid] = p
         kept += 1
     out = sorted(records.values(), key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)

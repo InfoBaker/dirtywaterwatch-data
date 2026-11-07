@@ -204,7 +204,9 @@ def test_the_hab_box_becomes_one_advisory_per_lake():
     assert meta["box_year"] == 2026 and meta["on_page"] == 5 and meta["advisory_active"] == 5
     by = {r["source_record_id"]: r for r in recs}
     r = by["2026:twin-lakes:spink-county"]
-    assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active" and r["ended_at"] is None
+    assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active" and r["ended_at"] == "2026-12-31"
+    assert r["raw"]["placement_hint"] == {"name": "Twin Lakes", "county": "Spink County", "state": "SD",
+                                          "basis": r["raw"]["placement_hint"]["basis"]}
     assert r["started_at"] == "2026-06-15" and r["time_precision"] == "day" and r["waterbody_text"] == "Twin Lakes"
     assert r["raw"]["county"] == "Spink County" and r["raw"]["expires_on"] == "2026-12-31"
     assert "expire at the end of the calendar year" in r["raw"]["end_basis"]
@@ -236,3 +238,23 @@ def test_a_page_without_the_box_fails_and_keeps_the_previous_records(tmp_path, m
     assert H.main(["--file", str(bad)]) == 1
     doc = json.loads((tmp_path / "sd-danr-hab-advisories.json").read_text())
     assert doc["ok"] is False and doc["count"] == 5
+
+
+def test_a_bloom_advisory_colours_its_lake_to_the_end_of_the_year():
+    """Review 2026-11-07 P1-1: with no end the status build aged the advisories out 14 days after their date; DANR's
+    own window is the calendar year."""
+    from datetime import UTC, datetime
+    from build import status
+    from ingest import sd_danr_hab_advisories as H
+    recs, _ = H.build(_hab_page(), "2026-11-07T12:00:00Z", [])
+    twin = next(r for r in recs if r["waterbody_text"] == "Twin Lakes")       # dated 2026-06-15
+    now = datetime(2026, 11, 7, 12, tzinfo=UTC)
+    ivs = status.event_intervals(twin, "SD", now)
+    live = [iv for iv in ivs if iv["start"] <= now and (iv["end"] is None or iv["end"] > now)]
+    assert live and live[0]["rule"] == "advisory_active" and live[0]["red_rule"]["rule"] == "red.authority_advisory"
+    assert live[0]["end"].astimezone(status.LOCAL).date().isoformat() in ("2026-12-31", "2027-01-01")
+    later, _ = H.build(_hab_page(), "2027-01-02T12:00:00Z", recs)
+    twin2 = next(r for r in later if r["waterbody_text"] == "Twin Lakes")
+    then = datetime(2027, 1, 2, 12, tzinfo=UTC)
+    assert not [iv for iv in status.event_intervals(twin2, "SD", then)
+                if iv["start"] <= then and (iv["end"] is None or iv["end"] > then) and iv["color"]]
