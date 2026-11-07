@@ -1,0 +1,5477 @@
+{
+ "state": "NE",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 211,
+ "waters": [
+  {
+   "slug": "alexandria-lake-3-ne",
+   "name": "Alexandria Lake 3",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Alexandria"
+   ],
+   "bbox": [
+    -97.33628,
+    40.23082,
+    -97.32999,
+    40.23371
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.124,
+   "launches": [
+    "alexandria-state-recreation-area-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ansley-reservoir-ne",
+   "name": "Ansley Reservoir",
+   "kind": "pond",
+   "state": "NE",
+   "towns": [
+    "Ansley"
+   ],
+   "bbox": [
+    -99.39058,
+    41.28973,
+    -99.38622,
+    41.29223
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.022,
+   "launches": [
+    "ansley-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "arrowhead-lake-ne",
+   "name": "Arrowhead Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Diller"
+   ],
+   "bbox": [
+    -96.87479,
+    40.09774,
+    -96.86477,
+    40.1044
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.217,
+   "launches": [
+    "arrowhead-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-reservoir-2-a-ne",
+   "name": "Bear Creek Reservoir 2-A",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Beatrice"
+   ],
+   "bbox": [
+    -96.68244,
+    40.31474,
+    -96.67733,
+    40.31734
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.069,
+   "launches": [
+    "bear-creek-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beem-lake-ne",
+   "name": "Beem Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hyannis"
+   ],
+   "bbox": [
+    -101.74087,
+    41.99531,
+    -101.71713,
+    42.00058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.67,
+   "launches": [
+    "avocet-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bennington-lake-ne",
+   "name": "Bennington Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bennington"
+   ],
+   "bbox": [
+    -96.19643,
+    41.36493,
+    -96.17896,
+    41.3783
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.068,
+   "launches": [
+    "bennington-lake-boat-launch-ne",
+    "newport-landing-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-alkali-lake-ne",
+   "name": "Big Alkali Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.63376,
+    42.61906,
+    -100.59067,
+    42.63743
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.849,
+   "launches": [
+    "big-alkali-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-elk-lake-wp7-ne",
+   "name": "Big Elk Lake (WP7)",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Papillion"
+   ],
+   "bbox": [
+    -96.08086,
+    41.15742,
+    -96.07813,
+    41.1613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.054,
+   "launches": [
+    "emergency-boat-ramp-ne",
+    "emergency-boat-ramp-papillion-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-indian-creek-reservoir-11-a-ne",
+   "name": "Big Indian Creek Reservoir 11-A",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Wymore"
+   ],
+   "bbox": [
+    -96.6991,
+    40.05453,
+    -96.68864,
+    40.06307
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.266,
+   "launches": [
+    "big-indian-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://deq-iis.ne.gov/zs/bw/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2026.",
+     "date": "2026-09-07",
+     "years": [
+      "2022",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "birdwood-lake-ne",
+   "name": "Birdwood Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "North Platte"
+   ],
+   "bbox": [
+    -100.83903,
+    41.11533,
+    -100.83059,
+    41.11759
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.093,
+   "launches": [
+    "birdwood-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "birdwood-lake-north-platte-ne",
+   "name": "Birdwood Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "North Platte"
+   ],
+   "bbox": [
+    -100.90327,
+    41.12402,
+    -100.89465,
+    41.1264
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.11,
+   "launches": [
+    "east-hershey-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-hole-west-lake-ne",
+   "name": "Blue Hole West Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Elm Creek"
+   ],
+   "bbox": [
+    -99.39047,
+    40.68495,
+    -99.38162,
+    40.68924
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "blue-hole-west-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-lake-ne",
+   "name": "Blue Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Mumper"
+   ],
+   "bbox": [
+    -102.44517,
+    41.70063,
+    -102.4241,
+    41.71746
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.22,
+   "launches": [
+    "blue-lake-boat-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bluestem-lake-ne",
+   "name": "Bluestem Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Sprague"
+   ],
+   "bbox": [
+    -96.80489,
+    40.62607,
+    -96.78822,
+    40.64309
+   ],
+   "wikidata": "Q34878327",
+   "charted": false,
+   "area_km2": 0.95,
+   "launches": [
+    "bluestem-sra-area-2-ne",
+    "bluestem-sra-area-3-ne",
+    "bluestem-sra-area-5-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017, 2021, 2022 and 2025.",
+     "date": "2025-08-01",
+     "years": [
+      "2017",
+      "2021",
+      "2022",
+      "2025"
+     ]
+    },
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "bossung-lake-ne",
+   "name": "Bossung Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -99.83254,
+    40.68577,
+    -99.82883,
+    40.68963
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "johnson-lake-sra-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bowling-lake-ne",
+   "name": "Bowling Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Lincoln"
+   ],
+   "bbox": [
+    -96.78683,
+    40.86376,
+    -96.78244,
+    40.86767
+   ],
+   "wikidata": "Q34878622",
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "bowling-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "bowman-lake-ne",
+   "name": "Bowman Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Loup City"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "loup-city-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "box-butte-reservoir-ne",
+   "name": "Box Butte Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hemingford"
+   ],
+   "bbox": [
+    -103.15321,
+    42.45017,
+    -103.07337,
+    42.46928
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.649,
+   "launches": [
+    "box-butte-sra-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "branched-oak-lake-ne",
+   "name": "Branched Oak Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Malcolm",
+    "Raymond"
+   ],
+   "bbox": [
+    -96.90203,
+    40.95937,
+    -96.85018,
+    40.99266
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.869,
+   "launches": [
+    "area-7-paddlecraft-launch-ne",
+    "branched-oak-lake-sra-area-11-a-ne",
+    "branched-oak-lake-sra-area-11-b-ne",
+    "branched-oak-lake-sra-area-11-c-ne",
+    "branched-oak-lake-sra-area-2-ne",
+    "branched-oak-lake-sra-area-4-ne",
+    "branched-oak-lake-sra-area-5-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2016.",
+     "date": "2016-08-02",
+     "years": [
+      "2016"
+     ]
+    },
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "bruning-pit-ne",
+   "name": "Bruning Pit",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bruning"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bruning-dam-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burchard-lake-ne",
+   "name": "Burchard Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Burchard"
+   ],
+   "bbox": [
+    -96.31177,
+    40.16182,
+    -96.29711,
+    40.17098
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.508,
+   "launches": [
+    "burchard-lake-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "calamus-reservoir-ne",
+   "name": "Calamus Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Burwell",
+    "Mikes Meadows"
+   ],
+   "bbox": [
+    -99.30943,
+    41.82708,
+    -99.20529,
+    41.91093
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.391,
+   "launches": [
+    "calamus-reservoir-sra-buckshot-bay-ne",
+    "homestead-knolls-ne",
+    "nunda-shoals-ne",
+    "valley-view-flat-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-09-20",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "calamus-river-ne",
+   "name": "Calamus River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Taylor"
+   ],
+   "bbox": [
+    -100.00433,
+    41.80275,
+    -99.15183,
+    42.30623
+   ],
+   "wikidata": "Q132462673",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hannaman-bayou-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "camp-hayes-lake-ne",
+   "name": "Camp Hayes Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hayes Center"
+   ],
+   "bbox": [
+    -100.9319,
+    40.58452,
+    -100.92664,
+    40.593
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.136,
+   "launches": [
+    "hayes-center-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carter-lake-ne",
+   "name": "Carter Lake",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Omaha"
+   ],
+   "bbox": [
+    -95.93124,
+    41.28739,
+    -95.90171,
+    41.30411
+   ],
+   "wikidata": "Q5047186",
+   "charted": true,
+   "area_km2": 1.352,
+   "launches": [
+    "carter-lake-nebraska-boat-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-river-ne",
+   "name": "Cedar River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Ericson",
+    "Spalding"
+   ],
+   "bbox": [
+    -98.88872,
+    41.36903,
+    -97.92494,
+    41.97111
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ericson-lake-rd-access-paddlecraft-launch-ne",
+    "spalding-city-park-access-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "center-lake-ne",
+   "name": "Center Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bridgeport-sra-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chappell-lake-ne",
+   "name": "Chappell Lake",
+   "kind": "pond",
+   "state": "NE",
+   "towns": [
+    "Chappell"
+   ],
+   "bbox": [
+    -102.47018,
+    41.08123,
+    -102.46347,
+    41.08556
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.119,
+   "launches": [
+    "chappell-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "cherry-creek-pond-ne",
+   "name": "Cherry Creek Pond",
+   "kind": "pond",
+   "state": "NE",
+   "towns": [
+    "Crawford"
+   ],
+   "bbox": [
+    -103.44251,
+    42.66356,
+    -103.44099,
+    42.6648
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.01,
+   "launches": [
+    "fort-robinson-sp-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clatonia-creek-reservoir-3-a-ne",
+   "name": "Clatonia Creek Reservoir 3-A",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Clatonia"
+   ],
+   "bbox": [
+    -96.8622,
+    40.4809,
+    -96.85797,
+    40.48798
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "clatonia-public-use-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-ne",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.63992,
+    42.55091,
+    -100.60293,
+    42.56396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.113,
+   "launches": [
+    "clear-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conestoga-lake-ne",
+   "name": "Conestoga Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Denton"
+   ],
+   "bbox": [
+    -96.86074,
+    40.76084,
+    -96.84561,
+    40.7704
+   ],
+   "wikidata": "Q34881305",
+   "charted": false,
+   "area_km2": 0.757,
+   "launches": [
+    "conestoga-lake-sra-ne",
+    "conestoga-sra-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cottonmill-lake-ne",
+   "name": "Cottonmill Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -99.15292,
+    40.70174,
+    -99.14316,
+    40.71221
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.123,
+   "launches": [
+    "cottonmill-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "cottontail-lake-ne",
+   "name": "Cottontail Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Sprague"
+   ],
+   "bbox": [
+    -96.7686,
+    40.64509,
+    -96.76397,
+    40.64961
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.082,
+   "launches": [
+    "cottontail-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-ne",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Merriman"
+   ],
+   "bbox": [
+    -101.67926,
+    42.91033,
+    -101.6733,
+    42.91714
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.201,
+   "launches": [
+    "cottonwood-lake-sra-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "cozad-lake-ne",
+   "name": "Cozad Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Ainsworth"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-pine-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crescent-lake-ne",
+   "name": "Crescent Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -102.42055,
+    41.68163,
+    -102.39185,
+    41.72199
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.318,
+   "launches": [
+    "crescent-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-cove-ne",
+   "name": "Crystal Cove",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "South Sioux City"
+   ],
+   "bbox": [
+    -96.43333,
+    42.45005,
+    -96.42965,
+    42.45526
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "crystal-cove-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-ne",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hastings"
+   ],
+   "bbox": [
+    -98.43911,
+    40.45455,
+    -98.43583,
+    40.45809
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.018,
+   "launches": [
+    "crystal-lake-paddlecraft-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "cub-creek-reservoir-12-a-ne",
+   "name": "Cub Creek Reservoir 12-A",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Jansen"
+   ],
+   "bbox": [
+    -97.05225,
+    40.23547,
+    -97.04852,
+    40.24445
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "cub-creek-recreation-area-southern-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://deq-iis.ne.gov/zs/bw/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025 and 2026.",
+     "date": "2026-09-07",
+     "years": [
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "cub-creek-reservoir-ne",
+   "name": "Cub Creek Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Springview"
+   ],
+   "bbox": [
+    -99.92051,
+    42.82489,
+    -99.9093,
+    42.83132
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "cub-creek-recreation-area-northern-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "czechland-lake-ne",
+   "name": "Czechland Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Prague"
+   ],
+   "bbox": [
+    -96.82697,
+    41.32178,
+    -96.81464,
+    41.32954
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.269,
+   "launches": [
+    "czechland-lake-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "davis-creek-reservoir-ne",
+   "name": "Davis Creek Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Scotia"
+   ],
+   "bbox": [
+    -98.78725,
+    41.4086,
+    -98.7425,
+    41.44775
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.841,
+   "launches": [
+    "davis-creek-main-boat-ramp-ne",
+    "davis-creek-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "decker-creek-ne",
+   "name": "Decker Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Louisville"
+   ],
+   "bbox": [
+    -96.21938,
+    40.92072,
+    -96.20386,
+    40.99415
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "platte-river-sp-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "defair-lake-ne",
+   "name": "DeFair Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hyannis"
+   ],
+   "bbox": [
+    -101.71521,
+    41.95845,
+    -101.70633,
+    41.96627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.314,
+   "launches": [
+    "defair-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "desoto-lake-ne",
+   "name": "DeSoto Lake",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Fort Calhoun"
+   ],
+   "bbox": [
+    -96.04276,
+    41.49121,
+    -95.99065,
+    41.54741
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.646,
+   "launches": [
+    "desoto-bend-nwr-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dewey-lake-ne",
+   "name": "Dewey Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.66494,
+    42.53964,
+    -100.60904,
+    42.55013
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.498,
+   "launches": [
+    "dewey-lake-east-ramp-ne",
+    "dewey-lake-west-ramp-ne",
+    "dewey-lake-east-4-ne",
+    "dewey-lake-unit-4-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "diamond-lake-big-indian-creek-reservoir-5-f-ne",
+   "name": "Diamond Lake;Big Indian Creek Reservoir 5-F",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Odell"
+   ],
+   "bbox": [
+    -96.87304,
+    40.03796,
+    -96.86732,
+    40.04158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.079,
+   "launches": [
+    "diamond-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "duck-creek-ne",
+   "name": "Duck Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Peru"
+   ],
+   "bbox": [
+    -95.80141,
+    40.4978,
+    -95.75288,
+    40.50264
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "duck-creek-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "duck-lake-ne",
+   "name": "Duck Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.73154,
+    42.54106,
+    -100.72245,
+    42.54671
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.3,
+   "launches": [
+    "duck-lake-main-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eagle-scout-lake-ne",
+   "name": "Eagle Scout Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Grand Island"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "eagle-scout-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-ne",
+   "name": "East Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bridgeport-sra-ne-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-midway-lake-ne",
+   "name": "East Midway Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Cozad"
+   ],
+   "bbox": [
+    -100.05137,
+    40.77197,
+    -100.02604,
+    40.78385
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.621,
+   "launches": [
+    "midway-canyon-reservoir-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-sutherland-lake-ne",
+   "name": "East Sutherland Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hershey"
+   ],
+   "bbox": [
+    -101.05921,
+    41.14008,
+    -101.05061,
+    41.14145
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.102,
+   "launches": [
+    "east-sutherland-i-80-lake-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elkhorn-river-ne",
+   "name": "Elkhorn River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Norfolk",
+    "Stanton",
+    "Valley",
+    "Waterloo",
+    "Wisner"
+   ],
+   "bbox": [
+    -99.18326,
+    41.11882,
+    -96.25864,
+    42.61068
+   ],
+   "wikidata": "Q3051329",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "elkhorn-crossing-ne",
+    "graske-crossing-ne",
+    "norfolk-1st-street-ramp-ne",
+    "stanton-city-park-access-paddlecraft-launch-ne",
+    "waterloo-river-access-ne",
+    "wisner-city-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elwood-reservoir-ne",
+   "name": "Elwood Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Elwood"
+   ],
+   "bbox": [
+    -99.87857,
+    40.60239,
+    -99.84322,
+    40.64917
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.735,
+   "launches": [
+    "elwood-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "enders-reservoir-ne",
+   "name": "Enders Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Enders",
+    "Imperial"
+   ],
+   "bbox": [
+    -101.58083,
+    40.41846,
+    -101.51774,
+    40.44126
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.97,
+   "launches": [
+    "enders-reservoir-sra-area-a-ne",
+    "enders-reservoir-sra-center-dam-north-ne",
+    "enders-reservoir-sra-no-name-bay-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ericson-lake-ne",
+   "name": "Ericson Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Ericson"
+   ],
+   "bbox": [
+    -98.66829,
+    41.757,
+    -98.65295,
+    41.76927
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.578,
+   "launches": [
+    "lake-ericson-boat-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flanagan-lake-ne",
+   "name": "Flanagan Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bennington"
+   ],
+   "bbox": [
+    -96.20104,
+    41.30876,
+    -96.18125,
+    41.33117
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.858,
+   "launches": [
+    "flanagan-lake-and-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "fremont-slough-ne",
+   "name": "Fremont Slough",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "North Platte"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fremont-slough-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "frenchman-creek-ne",
+   "name": "Frenchman Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Palisade"
+   ],
+   "bbox": [
+    -101.51779,
+    40.22149,
+    -100.82475,
+    40.42972
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "frenchman-wma-ne",
+    "frenchman-wma-palisade-ne",
+    "frenchman-wma-ne-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "frye-lake-ne",
+   "name": "Frye Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hyannis"
+   ],
+   "bbox": [
+    -101.75278,
+    42.01632,
+    -101.72826,
+    42.02448
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.992,
+   "launches": [
+    "frye-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gallagher-canyon-reservoir-ne",
+   "name": "Gallagher Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Cozad"
+   ],
+   "bbox": [
+    -99.98934,
+    40.72209,
+    -99.96889,
+    40.74287
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.574,
+   "launches": [
+    "gallagher-canyon-sra-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goldeneye-lake-ne",
+   "name": "Goldeneye Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Big Springs"
+   ],
+   "bbox": [
+    -102.128,
+    41.03847,
+    -102.12437,
+    41.04028
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.06,
+   "launches": [
+    "goldeneye-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goose-lake-ne",
+   "name": "Goose Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Chambers"
+   ],
+   "bbox": [
+    -98.57058,
+    42.10349,
+    -98.55448,
+    42.11603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.881,
+   "launches": [
+    "goose-lake-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "grabel-ponds-ne",
+   "name": "Grabel Ponds",
+   "kind": "pond",
+   "state": "NE",
+   "towns": [
+    "Crawford"
+   ],
+   "bbox": [
+    -103.42922,
+    42.65299,
+    -103.42703,
+    42.65891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.031,
+   "launches": [
+    "fort-robinson-sp-paddlecraft-launch-crawford-ne",
+    "fort-robinson-sp-paddlecraft-launch-ne-2",
+    "fort-robinson-sp-paddlecraft-launch-ne-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grove-lake-ne",
+   "name": "Grove Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Royal"
+   ],
+   "bbox": [
+    -98.12075,
+    42.36847,
+    -98.11358,
+    42.37962
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.201,
+   "launches": [
+    "grove-lake-north-ramp-ne",
+    "grove-lake-wma-south-ramp-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "hackberry-lake-ne",
+   "name": "Hackberry Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Simeon"
+   ],
+   "bbox": [
+    -100.7035,
+    42.55682,
+    -100.65149,
+    42.57039
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.672,
+   "launches": [
+    "hackberry-east-ramp-ne",
+    "hackberry-west-ramp-ne",
+    "hackberry-lake-3b-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harlan-county-lake-ne",
+   "name": "Harlan County Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Alma",
+    "Republican City"
+   ],
+   "bbox": [
+    -99.39057,
+    40.02425,
+    -99.21056,
+    40.09738
+   ],
+   "wikidata": "Q5658289",
+   "charted": false,
+   "area_km2": 50.724,
+   "launches": [
+    "cedar-point-low-water-ramp-ne",
+    "gremlin-cove-ne",
+    "hunter-cove-ne",
+    "hunter-cove-low-water-ne",
+    "methodist-cove-ne",
+    "methodist-cove-alma-ne",
+    "methodist-cove-paddlecraft-launch-ne",
+    "north-shore-marina-ne",
+    "patterson-harbor-ne",
+    "pelican-point-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harry-strunk-lake-ne",
+   "name": "Harry Strunk Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -100.25479,
+    40.37758,
+    -100.2134,
+    40.44251
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.053,
+   "launches": [
+    "medicine-creek-trail-3-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hedgefield-lake-ne",
+   "name": "Hedgefield Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hickman"
+   ],
+   "bbox": [
+    -96.57061,
+    40.60102,
+    -96.56584,
+    40.60535
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.096,
+   "launches": [
+    "hedgefield-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hershey-lake-ne",
+   "name": "Hershey Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hershey"
+   ],
+   "bbox": [
+    -100.99784,
+    41.13446,
+    -100.98326,
+    41.13591
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.217,
+   "launches": [
+    "hershey-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "holdrege-city-lake-north-park-ne",
+   "name": "Holdrege City Lake (North Park)",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Holdrege"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "holdrege-city-lake-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holmes-lake-ne",
+   "name": "Holmes Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Lincoln"
+   ],
+   "bbox": [
+    -96.64092,
+    40.77185,
+    -96.62542,
+    40.78505
+   ],
+   "wikidata": "Q34890432",
+   "charted": false,
+   "area_km2": 0.436,
+   "launches": [
+    "little-lake-ne",
+    "main-lake-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017.",
+     "date": "2017-08-02",
+     "years": [
+      "2017"
+     ]
+    },
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "homestead-lake-ne",
+   "name": "Homestead Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bruno"
+   ],
+   "bbox": [
+    -96.96172,
+    41.30441,
+    -96.95515,
+    41.30685
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "homestead-lake-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hugh-butler-lake-ne",
+   "name": "Hugh Butler Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "McCook"
+   ],
+   "bbox": [
+    -100.742,
+    40.34806,
+    -100.66374,
+    40.39091
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.518,
+   "launches": [
+    "marina-north-ramp-ne",
+    "marina-south-ramp-ne",
+    "red-willow-reservoir-south-ramp-ne",
+    "willow-view-camp-ground-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hull-lake-ne",
+   "name": "Hull Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Butte"
+   ],
+   "bbox": [
+    -98.88462,
+    42.86628,
+    -98.88115,
+    42.86838
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.014,
+   "launches": [
+    "hull-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ice-house-ponds-ne",
+   "name": "Ice House Ponds",
+   "kind": "pond",
+   "state": "NE",
+   "towns": [
+    "Crawford"
+   ],
+   "bbox": [
+    -103.47648,
+    42.64814,
+    -103.47203,
+    42.65204
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.018,
+   "launches": [
+    "ice-house-pond-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "interstate-lake-ne",
+   "name": "Interstate Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Cozad"
+   ],
+   "bbox": [
+    -99.98483,
+    40.8386,
+    -99.97988,
+    40.84106
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.071,
+   "launches": [
+    "cozad-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "iron-horse-trail-lake-ne",
+   "name": "Iron Horse Trail Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Pawnee City"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "iron-horse-trail-lake-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-ne",
+   "name": "Island Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Mumper"
+   ],
+   "bbox": [
+    -102.41047,
+    41.72689,
+    -102.38496,
+    41.74891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.097,
+   "launches": [
+    "island-lake-1-ne",
+    "island-lake-2-ne",
+    "island-lake-3-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jeffrey-reservoir-ne",
+   "name": "Jeffrey Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Brady"
+   ],
+   "bbox": [
+    -100.43062,
+    40.91836,
+    -100.3972,
+    40.96168
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.427,
+   "launches": [
+    "jeffrey-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-lake-fremont-ne",
+   "name": "Johnson Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.44749,
+    41.43102,
+    -96.44572,
+    41.43606
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.048,
+   "launches": [
+    "johnson-park-lake-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-lake-ne",
+   "name": "Johnson Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -99.87996,
+    40.67516,
+    -99.81894,
+    40.71696
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.885,
+   "launches": [
+    "johnson-lake-sra-inlet-ne",
+    "meedo-ramp-ne",
+    "nautical-rose-boat-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kea-lake-ne",
+   "name": "Kea Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -99.09494,
+    40.66755,
+    -99.08788,
+    40.669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.084,
+   "launches": [
+    "kea-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "kearney-archway-foundation-pond-1-ne",
+   "name": "Kearney Archway Foundation Pond 1",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "archway-lake-1-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "killdeer-lake-ne",
+   "name": "Killdeer Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Lincoln"
+   ],
+   "bbox": [
+    -96.76756,
+    40.67537,
+    -96.76361,
+    40.67768
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.061,
+   "launches": [
+    "killdeer-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kirkman-s-cove-lake-ne",
+   "name": "Kirkman's Cove Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Humboldt"
+   ],
+   "bbox": [
+    -96.00003,
+    40.18135,
+    -95.98545,
+    40.19595
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.619,
+   "launches": [
+    "kirkman-s-cove-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://deq-iis.ne.gov/zs/bw/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2016, 2017, 2019 to 2022 and 2026.",
+     "date": "2026-08-03",
+     "years": [
+      "2016",
+      "2017",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "kramper-lake-ne",
+   "name": "Kramper Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hubbard"
+   ],
+   "bbox": [
+    -96.58466,
+    42.36979,
+    -96.56868,
+    42.38689
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.897,
+   "launches": [
+    "danish-alps-sra-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists brittle naiad and curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "brittle naiad",
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "l-e-ray-lake-ne",
+   "name": "L E Ray Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Grand Island"
+   ],
+   "bbox": [
+    -98.35746,
+    40.88765,
+    -98.34989,
+    40.89058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.119,
+   "launches": [
+    "l-e-ray-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-1-fremont-ne",
+   "name": "Lake 1",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.56387,
+    41.44825,
+    -96.55969,
+    41.45123
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "fremont-sra-1-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-11-ne",
+   "name": "Lake 11",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.54384,
+    41.44151,
+    -96.54091,
+    41.44321
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "fremont-sra-11-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-12-ne",
+   "name": "Lake 12",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.54015,
+    41.43999,
+    -96.53311,
+    41.44127
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.029,
+   "launches": [
+    "fremont-sra-12-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-13-ne",
+   "name": "Lake 13",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.53535,
+    41.43758,
+    -96.53213,
+    41.43965
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.02,
+   "launches": [
+    "fremont-sra-13-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-16-ne",
+   "name": "Lake 16",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.55853,
+    41.44021,
+    -96.5543,
+    41.44258
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.06,
+   "launches": [
+    "fremont-sra-16-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-17-ne",
+   "name": "Lake 17",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.54912,
+    41.43883,
+    -96.54483,
+    41.44016
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.026,
+   "launches": [
+    "fremont-sra-17-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-19-ne",
+   "name": "Lake 19",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.54055,
+    41.43712,
+    -96.53691,
+    41.43805
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.017,
+   "launches": [
+    "fremont-sra-19-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-2-fremont-ne",
+   "name": "Lake 2",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.56809,
+    41.44864,
+    -96.56227,
+    41.45053
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.068,
+   "launches": [
+    "fremont-sra-2-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-20-ne",
+   "name": "Lake 20",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.55834,
+    41.43421,
+    -96.54563,
+    41.43952
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.2,
+   "launches": [
+    "fremont-sra-20-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-3-ne",
+   "name": "Lake 3",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.57063,
+    41.44946,
+    -96.5684,
+    41.45101
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.015,
+   "launches": [
+    "fremont-sra-3-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-4-ne",
+   "name": "Lake 4",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.57778,
+    41.45004,
+    -96.57266,
+    41.45114
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.028,
+   "launches": [
+    "fremont-sra-4-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-5-ne",
+   "name": "Lake 5",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.57768,
+    41.44866,
+    -96.56959,
+    41.4498
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.054,
+   "launches": [
+    "fremont-sra-5-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cunningham-ne",
+   "name": "Lake Cunningham",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Bennington"
+   ],
+   "bbox": [
+    -96.06209,
+    41.33797,
+    -96.0409,
+    41.36939
+   ],
+   "wikidata": "Q5568746",
+   "charted": false,
+   "area_km2": 1.422,
+   "launches": [
+    "glenn-cunnigham-paddlecraft-launch-ne",
+    "glenn-cunningham-main-boat-ramp-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "lake-hastings-ne",
+   "name": "Lake Hastings",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hastings"
+   ],
+   "bbox": [
+    -98.39989,
+    40.6081,
+    -98.38522,
+    40.61674
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.293,
+   "launches": [
+    "hastings-ramp-2-ne",
+    "lake-hastings-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-helen-ne",
+   "name": "Lake Helen",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Gothenburg"
+   ],
+   "bbox": [
+    -100.16665,
+    40.93872,
+    -100.1611,
+    40.9431
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.119,
+   "launches": [
+    "lake-helen-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-maloney-ne",
+   "name": "Lake Maloney",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "North Platte"
+   ],
+   "bbox": [
+    -100.80275,
+    41.01956,
+    -100.7567,
+    41.05228
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.416,
+   "launches": [
+    "lake-maloney-north-ramp-ne",
+    "lake-maloney-sra-area-1-ne",
+    "lake-maloney-sra-area-2-ne",
+    "lake-maloney-sra-area-3-ne",
+    "lake-maloney-sra-area-4-ne",
+    "lake-maloney-south-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mcconaughy-ne",
+   "name": "Lake McConaughy",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Belmar",
+    "Lemoyne",
+    "Martin",
+    "Ogallala",
+    "Ruthton"
+   ],
+   "bbox": [
+    -102.01692,
+    41.19732,
+    -101.66915,
+    41.30286
+   ],
+   "wikidata": "Q6476851",
+   "charted": false,
+   "area_km2": 112.118,
+   "launches": [
+    "lake-mcconaughy-sra-arthur-bay-ne",
+    "lake-mcconaughy-sra-cedar-vue-bayside-ne",
+    "lake-mcconaughy-sra-cedar-vue-lakeside-ne",
+    "lake-mcconaughy-sra-diver-s-bay-ne",
+    "lake-mcconaughy-sra-eagle-canyon-ne",
+    "lake-mcconaughy-sra-lemoyne-low-water-ne",
+    "lake-mcconaughy-sra-lemoyne-bay-bayside-ramp-ne",
+    "lake-mcconaughy-sra-martin-bay-high-water-ne",
+    "lake-mcconaughy-sra-martin-bay-low-water-ne",
+    "lake-mcconaughy-sra-omaha-beach-ne",
+    "lake-mcconaughy-sra-otter-creek-ne",
+    "lake-mcconaughy-sra-otter-creek-bayside-ne",
+    "lake-mcconaughy-sra-sandy-beach-ne",
+    "lake-mcconaughy-sra-spillway-bay-back-ramp-ne",
+    "lake-mcconaughy-sra-spillway-bay-front-ne",
+    "lake-mcconaughy-sra-spillway-bay-low-water-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-minatare-ne",
+   "name": "Lake Minatare",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Scottsbluff"
+   ],
+   "bbox": [
+    -103.51756,
+    41.91833,
+    -103.47289,
+    41.94783
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.045,
+   "launches": [
+    "lake-minatare-sra-butte-view-ne",
+    "lake-view-rock-ramp-ne",
+    "main-canal-west-wind-ramp-ne",
+    "scouts-rest-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-north-ne",
+   "name": "Lake North",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -97.35935,
+    41.4844,
+    -97.34994,
+    41.4959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.82,
+   "launches": [
+    "lake-north-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ogallala-ne",
+   "name": "Lake Ogallala",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Ogallala"
+   ],
+   "bbox": [
+    -101.66873,
+    41.20969,
+    -101.63615,
+    41.23441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.221,
+   "launches": [
+    "lake-ogallala-north-boat-ramp-ne",
+    "lake-ogallala-south-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wanahoo-ne",
+   "name": "Lake Wanahoo",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Wahoo"
+   ],
+   "bbox": [
+    -96.61828,
+    41.23516,
+    -96.60318,
+    41.26591
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.29,
+   "launches": [
+    "lake-wanahoo-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lawrence-youngman-lake-ne",
+   "name": "Lawrence Youngman Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Valley"
+   ],
+   "bbox": [
+    -96.22774,
+    41.26321,
+    -96.21706,
+    41.27234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.233,
+   "launches": [
+    "lawrence-youngman-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "leisure-lake-ne",
+   "name": "Leisure Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -96.98881,
+    40.25545,
+    -96.98341,
+    40.26167
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.128,
+   "launches": [
+    "leisure-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lewis-and-clark-lake-ne",
+   "name": "Lewis and Clark Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Crofton",
+    "Kohles Acres Area",
+    "Santee"
+   ],
+   "bbox": [
+    -97.90572,
+    42.82533,
+    -97.48107,
+    42.88139
+   ],
+   "wikidata": "Q7334123",
+   "charted": false,
+   "area_km2": 90.85,
+   "launches": [
+    "lewis-and-clark-lake-sra-bloomfield-ne",
+    "miller-creek-ne",
+    "santee-ne",
+    "south-shore-ne",
+    "weigand-marina-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "liberty-cove-ne",
+   "name": "Liberty Cove",
+   "kind": "bay",
+   "state": "NE",
+   "towns": [
+    "Lawrence"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "liberty-cove-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "logan-creek-dredge-ne",
+   "name": "Logan Creek Dredge",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Bancroft",
+    "Oakland"
+   ],
+   "bbox": [
+    -97.08369,
+    41.62017,
+    -96.48299,
+    42.43567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bancroft-24th-rd-paddlecraft-launch-ne",
+    "logan-creek-dredge-carry-in-access-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-ne",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.72768,
+    42.52287,
+    -100.7035,
+    42.53142
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.378,
+   "launches": [
+    "west-long-lake-east-boat-launch-ne",
+    "west-long-lake-main-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loup-canal-ne",
+   "name": "Loup Canal",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -97.38767,
+    41.4887,
+    -97.36649,
+    41.49498
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "castner-s-crossing-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-lord-lake-ne",
+   "name": "Lower Lord Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -101.06956,
+    42.68247,
+    -101.05502,
+    42.68739
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.219,
+   "launches": [
+    "mckelvie-national-forest-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maskenthine-reservoir-ne",
+   "name": "Maskenthine Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Stanton"
+   ],
+   "bbox": [
+    -97.23957,
+    41.97401,
+    -97.23206,
+    41.98992
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.362,
+   "launches": [
+    "maskenthine-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://deq-iis.ne.gov/zs/bw/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021, 2022 and 2026.",
+     "date": "2026-07-06",
+     "years": [
+      "2021",
+      "2022",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "medicine-creek-ne",
+   "name": "Medicine Creek",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -100.22211,
+    40.27942,
+    -100.1449,
+    40.37852
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "medicine-creek-trail-1-ne",
+    "medicine-creek-trail-4-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "memphis-lake-ne",
+   "name": "Memphis Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Memphis"
+   ],
+   "bbox": [
+    -96.44658,
+    41.09612,
+    -96.4363,
+    41.10297
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.236,
+   "launches": [
+    "memphis-lake-sra-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "merganser-lake-ne",
+   "name": "Merganser Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Crete"
+   ],
+   "bbox": [
+    -96.8589,
+    40.6024,
+    -96.85278,
+    40.60725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.129,
+   "launches": [
+    "merganser-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "merritt-reservoir-ne",
+   "name": "Merritt Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -101.00152,
+    42.57814,
+    -100.86176,
+    42.63745
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 10.51,
+   "launches": [
+    "beeds-landing-ne",
+    "fishermans-ramp-main-ramp-ne",
+    "merritt-reservoir-sra-cedar-bay-ne",
+    "powder-horn-ne",
+    "snake-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-channel-platte-river-ne",
+   "name": "Middle Channel Platte River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -99.07517,
+    40.65862,
+    -98.80627,
+    40.69628
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bassway-strip-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "missouri-river-ne",
+   "name": "Missouri River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Bellevue",
+    "Blair",
+    "Brownville",
+    "Crofton",
+    "Dakota City",
+    "Decatur",
+    "Falls City",
+    "Florence",
+    "Fort Calhoun",
+    "Lynch",
+    "Macy",
+    "Nebraska City"
+   ],
+   "bbox": [
+    -98.54664,
+    39.82105,
+    -94.87675,
+    43.05496
+   ],
+   "wikidata": "Q5419",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bazile-creek-wma-ne",
+    "brooky-bottom-park-sportsman-ne",
+    "brownville-riverside-city-park-ne",
+    "city-of-blair-boat-ramp-ne",
+    "city-of-decatur-ne",
+    "dakota-city-cottonwood-cove-park-ne",
+    "ferry-landing-8162-ne",
+    "gavins-tailwaters-south-ne",
+    "haworth-river-park-ne",
+    "indian-cave-ne",
+    "indian-cave-backwater-paddlecraft-launch-ne",
+    "mulberry-bend-ne",
+    "n-p-dodge-memorial-park-ne",
+    "n-p-dodge-memorial-park-florence-ne",
+    "niobrara-confluence-wma-ne",
+    "niobrara-landing-ne",
+    "omandi-bend-ne",
+    "pelican-point-tekamah-ne",
+    "peru-boat-ramp-ne",
+    "plattsmouth-boat-ramp-ne",
+    "ponca-state-park-ne",
+    "riverview-boat-ramp-ne",
+    "rulo-boat-ramp-ne",
+    "scenic-park-s-sioux-city-ne",
+    "st-helena-cedar-co-access-8230-ne",
+    "sunshine-bottoms-ne",
+    "verdel-landing-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mormon-canal-ne",
+   "name": "Mormon Canal",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Niobrara"
+   ],
+   "bbox": [
+    -98.05921,
+    42.74235,
+    -98.0469,
+    42.7669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.313,
+   "launches": [
+    "niobrara-sp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "niobrara-river-ne",
+   "name": "Niobrara River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Nenzel",
+    "Riverview",
+    "Valentine"
+   ],
+   "bbox": [
+    -104.19842,
+    42.41052,
+    -98.0317,
+    42.90993
+   ],
+   "wikidata": "Q1124558",
+   "charted": false,
+   "area_km2": 4.534,
+   "launches": [
+    "accessible-canoe-launch-ne",
+    "fort-niobrara-launch-site-ne",
+    "nichols-landing-paddlecraft-launch-ne",
+    "niobrara-canoe-launch-ne",
+    "niobrara-river-carry-in-access-ne",
+    "smith-falls-landing-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-channel-platte-river-gibbon-ne",
+   "name": "North Channel Platte River",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Gibbon"
+   ],
+   "bbox": [
+    -98.83841,
+    40.70939,
+    -98.44523,
+    40.85026
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "windmill-sra-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-channel-platte-river-ne",
+   "name": "North Channel Platte River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -99.00389,
+    40.67535,
+    -98.99452,
+    40.67651
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kearney-central-ave-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-elkhorn-river-ne",
+   "name": "North Fork Elkhorn River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -97.62806,
+    41.99499,
+    -97.36481,
+    42.54003
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "1st-st-put-in-paddlecraft-launch-ne",
+    "e-bluff-park-take-out-paddlecraft-launch-ne",
+    "hyvee-parking-lot-take-out-paddlecraft-launch-ne",
+    "winter-park-put-in-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-loup-river-ne",
+   "name": "North Loup River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Burwell"
+   ],
+   "bbox": [
+    -101.39057,
+    41.26246,
+    -98.39687,
+    42.42151
+   ],
+   "wikidata": "Q107190748",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "riverside-park-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-oak-creek-reservoir-6-c-ne",
+   "name": "North Oak Creek Reservoir 6-C",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Brainard"
+   ],
+   "bbox": [
+    -96.96478,
+    41.15964,
+    -96.96062,
+    41.16478
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.084,
+   "launches": [
+    "timber-point-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-platte-i-80-lake-ne",
+   "name": "North Platte I-80 Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "North Platte"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "iron-horse-city-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-platte-river-ne",
+   "name": "North Platte River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Hershey",
+    "North Platte"
+   ],
+   "bbox": [
+    -104.26401,
+    41.11377,
+    -100.68151,
+    42.08033
+   ],
+   "wikidata": "Q1755015",
+   "charted": false,
+   "area_km2": 1.295,
+   "launches": [
+    "buffalo-bill-ranch-sra-ne",
+    "cody-park-access-paddlecraft-launch-ne",
+    "north-river-wma-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "olive-creek-lake-ne",
+   "name": "Olive Creek Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Crete"
+   ],
+   "bbox": [
+    -96.85087,
+    40.57482,
+    -96.84119,
+    40.58544
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.474,
+   "launches": [
+    "olive-creek-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "oliver-reservoir-ne",
+   "name": "Oliver Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Bushnell"
+   ],
+   "bbox": [
+    -103.8319,
+    41.22002,
+    -103.80978,
+    41.22959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.63,
+   "launches": [
+    "oliver-state-recreation-area-bay-ramp-ne",
+    "oliver-state-recreation-area-main-ramp-ne",
+    "oliver-state-recreation-area-west-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oxbow-trail-lake-ne",
+   "name": "Oxbow Trail Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Ulysses"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "oxbow-trail-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oxford-city-lake-george-mitchell-park-ne",
+   "name": "Oxford City Lake (George Mitchell Park)",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Oxford"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "oxford-city-lake-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pawnee-lake-ne",
+   "name": "Pawnee Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Lincoln"
+   ],
+   "bbox": [
+    -96.88862,
+    40.83601,
+    -96.86204,
+    40.85916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.51,
+   "launches": [
+    "pawnee-lake-sra-ramp-1-ne",
+    "pawnee-lake-sra-ramp-2-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017, 2021 and 2023.",
+     "date": "2023-06-19",
+     "years": [
+      "2017",
+      "2021",
+      "2023"
+     ]
+    },
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "pawnee-slough-ne",
+   "name": "Pawnee Slough",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Maxwell"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pawnee-slough-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pelican-lake-ne",
+   "name": "Pelican Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.69917,
+    42.51741,
+    -100.63274,
+    42.53607
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.215,
+   "launches": [
+    "pelican-lake-primitive-launch-ne",
+    "pelican-lake-boat-launch-ne",
+    "pelican-lake-east-15a-boat-launch-ne",
+    "pelican-lake-east-in-15c-boat-launch-ne",
+    "pelican-lake-main-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "peterson-lake-ne",
+   "name": "Peterson Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -99.43931,
+    42.27463,
+    -99.42571,
+    42.28166
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.364,
+   "launches": [
+    "peterson-lake-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "philips-lake-ne",
+   "name": "Philips Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -99.81762,
+    40.67194,
+    -99.74693,
+    40.69813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.944,
+   "launches": [
+    "phillips-canyon-sra-ne",
+    "phillips-canyon-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pibel-reservoir-ne",
+   "name": "Pibel Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Ericson"
+   ],
+   "bbox": [
+    -98.53266,
+    41.75475,
+    -98.52894,
+    41.76074
+   ],
+   "wikidata": "Q2091984",
+   "charted": false,
+   "area_km2": 0.099,
+   "launches": [
+    "pibel-lake-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pierce-lake-ne",
+   "name": "Pierce Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Pierce"
+   ],
+   "bbox": [
+    -97.52117,
+    42.20109,
+    -97.51676,
+    42.20359
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.05,
+   "launches": [
+    "gilman-park-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pierce-milling-plant-reservoir-ne",
+   "name": "Pierce Milling Plant Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Valentine"
+   ],
+   "bbox": [
+    -100.55866,
+    42.8824,
+    -100.55358,
+    42.88636
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.055,
+   "launches": [
+    "valentine-mill-pond-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pilger-reservoir-1-b-ne",
+   "name": "Pilger Reservoir 1-B",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Pilger"
+   ],
+   "bbox": [
+    -97.04451,
+    42.02579,
+    -97.03971,
+    42.0327
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "pilger-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pioneer-trails-lake-ne",
+   "name": "Pioneer Trails Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Aurora"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pioneer-trails-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "platte-river-ne",
+   "name": "Platte River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Columbus",
+    "Fremont",
+    "Leshara",
+    "Louisville",
+    "Marquette",
+    "Meadow",
+    "South Bend"
+   ],
+   "bbox": [
+    -100.68151,
+    40.65444,
+    -95.87905,
+    41.46231
+   ],
+   "wikidata": "Q655754",
+   "charted": true,
+   "area_km2": 74.267,
+   "launches": [
+    "flatwater-landing-ne",
+    "platte-river-boat-launch-near-fremont-ne-4",
+    "louisville-platte-river-boat-ramp-ne",
+    "lousiville-sra-ne",
+    "platte-river-landing-leshara-ne",
+    "schramm-state-park-paddlecraft-launch-ne",
+    "tooley-park-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "plum-creek-canyon-reservoir-ne",
+   "name": "Plum Creek Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -99.94216,
+    40.69882,
+    -99.91154,
+    40.72433
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.968,
+   "launches": [
+    "plum-creek-canyon-reservoir-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pony-lake-ne",
+   "name": "Pony Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -99.02739,
+    40.67058,
+    -99.01868,
+    40.6723
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "bufflehead-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powder-creek-reservoir-ne",
+   "name": "Powder Creek Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Ponca"
+   ],
+   "bbox": [
+    -96.84284,
+    42.57643,
+    -96.8287,
+    42.58962
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.441,
+   "launches": [
+    "powder-creek-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "prairie-owl-lake-wilson-creek-4f-ne",
+   "name": "Prairie Owl Lake (Wilson Creek 4F)",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Dunbar"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "prairie-owl-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prairie-queen-lake-ne",
+   "name": "Prairie Queen Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Papillion"
+   ],
+   "bbox": [
+    -96.12016,
+    41.14921,
+    -96.10909,
+    41.16844
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.528,
+   "launches": [
+    "prairie-queen-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed, Eurasian watermilfoil and white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "Eurasian watermilfoil",
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "prairie-view-lake-ne",
+   "name": "Prairie View Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bennington"
+   ],
+   "bbox": [
+    -96.20592,
+    41.36564,
+    -96.19747,
+    41.37372
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.165,
+   "launches": [
+    "prairie-view-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "pressey-wma-pond-ne",
+   "name": "Pressey WMA Pond",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Oconto"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pressey-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rat-lake-ne",
+   "name": "Rat Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Conterra"
+   ],
+   "bbox": [
+    -100.65872,
+    42.44771,
+    -100.63941,
+    42.45665
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.715,
+   "launches": [
+    "rat-beaver-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ravenna-lake-ne",
+   "name": "Ravenna Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Ravenna"
+   ],
+   "bbox": [
+    -98.89457,
+    41.0185,
+    -98.88965,
+    41.02516
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.062,
+   "launches": [
+    "ravenna-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "recharge-lake-ne",
+   "name": "Recharge Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "York"
+   ],
+   "bbox": [
+    -97.63725,
+    40.86712,
+    -97.62484,
+    40.87376
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.152,
+   "launches": [
+    "bruce-l-anderson-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-fox-lake-ne",
+   "name": "Red Fox Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Pilger"
+   ],
+   "bbox": [
+    -97.05825,
+    41.98275,
+    -97.05271,
+    41.98635
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.112,
+   "launches": [
+    "red-fox-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-creek-lake-ne",
+   "name": "Rock Creek Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Haigler"
+   ],
+   "bbox": [
+    -101.76569,
+    40.08643,
+    -101.75923,
+    40.09879
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.176,
+   "launches": [
+    "rock-creek-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rockford-lake-ne",
+   "name": "Rockford Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Blue Springs"
+   ],
+   "bbox": [
+    -96.58725,
+    40.21443,
+    -96.57645,
+    40.23055
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.533,
+   "launches": [
+    "rockford-lake-sra-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "salt-creek-ne",
+   "name": "Salt Creek",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Ashland"
+   ],
+   "bbox": [
+    -96.76715,
+    40.61519,
+    -96.31188,
+    41.05176
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "catfish-run-wma-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salt-creek-reservoir-26-a-ne",
+   "name": "Salt Creek Reservoir 26-A",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Crete"
+   ],
+   "bbox": [
+    -96.88655,
+    40.61269,
+    -96.88413,
+    40.61582
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.045,
+   "launches": [
+    "wild-plum-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shell-lake-ne",
+   "name": "Shell Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Gordon"
+   ],
+   "bbox": [
+    -102.0443,
+    42.91575,
+    -102.03317,
+    42.92632
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.619,
+   "launches": [
+    "shell-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sherman-reservoir-ne",
+   "name": "Sherman Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Loup City"
+   ],
+   "bbox": [
+    -98.93241,
+    41.28782,
+    -98.86656,
+    41.35075
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 10.509,
+   "launches": [
+    "marina-bay-ne",
+    "sherman-reservoir-trail-10-ne",
+    "thunder-bay-ne",
+    "trail-8-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skyview-lake-ne",
+   "name": "Skyview Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -97.44576,
+    42.03648,
+    -97.43694,
+    42.04326
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.163,
+   "launches": [
+    "skyview-lake-west-ramp-ne",
+    "skyview-park-east-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-creek-ne",
+   "name": "Smith Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Beaver Crossing"
+   ],
+   "bbox": [
+    -97.32694,
+    40.8055,
+    -97.32015,
+    40.82896
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "smith-creek-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-lake-ne",
+   "name": "Smith Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hinn Ranch"
+   ],
+   "bbox": [
+    -102.46254,
+    42.39834,
+    -102.44307,
+    42.4131
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.898,
+   "launches": [
+    "smith-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "south-loup-river-ne",
+   "name": "South Loup River",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Arnold"
+   ],
+   "bbox": [
+    -100.38018,
+    40.94973,
+    -98.64775,
+    41.52399
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "arnold-lake-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stagecoach-lake-ne",
+   "name": "Stagecoach Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hickman"
+   ],
+   "bbox": [
+    -96.64845,
+    40.596,
+    -96.63524,
+    40.60657
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.67,
+   "launches": [
+    "stagecoach-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "standing-bear-lake-ne",
+   "name": "Standing Bear Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bennington"
+   ],
+   "bbox": [
+    -96.13858,
+    41.3098,
+    -96.12209,
+    41.31758
+   ],
+   "wikidata": "Q7598481",
+   "charted": false,
+   "area_km2": 0.476,
+   "launches": [
+    "standing-bear-main-boat-ramp-ne",
+    "standing-bear-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "summer-haven-lake-ne",
+   "name": "Summer Haven Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -98.98359,
+    40.65327,
+    -98.97057,
+    40.65694
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.143,
+   "launches": [
+    "fort-kearny-sra-7-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "summit-lake-ne",
+   "name": "Summit Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Tekamah"
+   ],
+   "bbox": [
+    -96.30196,
+    41.75147,
+    -96.28209,
+    41.76625
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.669,
+   "launches": [
+    "summit-lake-boat-launch-ne",
+    "summit-lake-sra-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "sutherland-reservoir-ne",
+   "name": "Sutherland Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Sutherland"
+   ],
+   "bbox": [
+    -101.1598,
+    41.08684,
+    -101.09968,
+    41.12558
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.887,
+   "launches": [
+    "sutherland-reservoir-sra-hershey-beach-ne",
+    "sutherland-reservoir-sra-inlet-west-ramp-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2015.",
+     "date": "2015-07-02",
+     "years": [
+      "2015"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "swan-creek-67-ne",
+   "name": "Swan Creek 67",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Swanton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "swanton-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-creek-reservoir-5-c-ne",
+   "name": "Swan Creek Reservoir 5-C",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Friend"
+   ],
+   "bbox": [
+    -97.25833,
+    40.50994,
+    -97.25146,
+    40.51646
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.126,
+   "launches": [
+    "swan-creek-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://deq-iis.ne.gov/zs/bw/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017, 2020 and 2021.",
+     "date": "2021-09-06",
+     "years": [
+      "2017",
+      "2020",
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "swan-lake-ne",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Tobias"
+   ],
+   "bbox": [
+    -97.26814,
+    40.45425,
+    -97.25965,
+    40.46469
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.325,
+   "launches": [
+    "willard-l-meyer-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-swan-lake-ne",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Swan Lake"
+   ],
+   "bbox": [
+    -99.04933,
+    42.16198,
+    -99.02639,
+    42.16952
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.891,
+   "launches": [
+    "swan-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swanson-reservoir-ne",
+   "name": "Swanson Reservoir",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Trenton"
+   ],
+   "bbox": [
+    -101.1504,
+    40.14542,
+    -101.06354,
+    40.17292
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.851,
+   "launches": [
+    "macklin-bay-ne",
+    "spring-canyon-north-ne",
+    "spring-canyon-south-ne",
+    "swanson-reservoir-low-water-boat-ramp-ne",
+    "swanson-reservoir-trail-3-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-07-24",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tailrace-ne",
+   "name": "Tailrace",
+   "kind": "canal",
+   "state": "NE",
+   "towns": [
+    "Kearney"
+   ],
+   "bbox": [
+    -99.10464,
+    40.67733,
+    -99.10106,
+    40.70309
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "yanney-park-access-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tower-lake-fws-ne",
+   "name": "Tower Lake (FWS)",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Ainsworth"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "yellowthroat-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lakes-ne",
+   "name": "Twin Lakes",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Pleasant Dale"
+   ],
+   "bbox": [
+    -96.96114,
+    40.82342,
+    -96.94388,
+    40.84039
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.766,
+   "launches": [
+    "twin-lakes-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "us-west-lake-ne",
+   "name": "US West Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Ashland"
+   ],
+   "bbox": [
+    -96.30698,
+    41.02174,
+    -96.30383,
+    41.02392
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.033,
+   "launches": [
+    "centurylink-lake-main-boat-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "verdon-lake-ne",
+   "name": "Verdon Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Verdon"
+   ],
+   "bbox": [
+    -95.72707,
+    40.14593,
+    -95.72183,
+    40.14895
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.11,
+   "launches": [
+    "verdon-sra-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "victoria-springs-lake-ne",
+   "name": "Victoria Springs Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "New Helena"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "victoria-springs-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "victory-lake-ne",
+   "name": "Victory Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -96.55854,
+    41.43839,
+    -96.53313,
+    41.44601
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.403,
+   "launches": [
+    "fremont-sra-15-east-ne",
+    "fremont-sra-15-west-ne",
+    "fremont-sra-18-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wagon-train-lake-ne",
+   "name": "Wagon Train Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Hickman"
+   ],
+   "bbox": [
+    -96.59148,
+    40.62077,
+    -96.57698,
+    40.64344
+   ],
+   "wikidata": "Q34933903",
+   "charted": false,
+   "area_km2": 1.189,
+   "launches": [
+    "wagon-train-sra-ne",
+    "wagon-train-sra-area-6-paddlecraft-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 and 2020.",
+     "date": "2020-09-28",
+     "years": [
+      "2019",
+      "2020"
+     ]
+    },
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "walgren-lake-ne",
+   "name": "Walgren Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Hay Springs"
+   ],
+   "bbox": [
+    -102.63109,
+    42.63375,
+    -102.62134,
+    42.64133
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.495,
+   "launches": [
+    "walgren-sra-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Eurasian watermilfoil",
+     "text": "Nebraska Game and Parks lists Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "walnut-creek-lake-ne",
+   "name": "Walnut Creek Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Papillion"
+   ],
+   "bbox": [
+    -96.07388,
+    41.13459,
+    -96.06472,
+    41.14434
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.35,
+   "launches": [
+    "walnut-creek-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and Eurasian watermilfoil as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "Eurasian watermilfoil"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "walnut-creek-reservoir-number-2-ne",
+   "name": "Walnut Creek Reservoir Number 2",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Crete"
+   ],
+   "bbox": [
+    -96.92905,
+    40.66543,
+    -96.92542,
+    40.66856
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "walnut-creek-public-use-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watts-lake-ne",
+   "name": "Watts Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Simeon"
+   ],
+   "bbox": [
+    -100.70241,
+    42.5733,
+    -100.67314,
+    42.58043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.646,
+   "launches": [
+    "watt-s-lake-east-boat-launch-ne",
+    "watts-lake-main-ramp-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wehrspann-creek-ne",
+   "name": "Wehrspann Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Gretna"
+   ],
+   "bbox": [
+    -96.23488,
+    41.12671,
+    -96.1771,
+    41.14285
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "forest-city-paddlecraft-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wehrspann-lake-ne",
+   "name": "Wehrspann Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Gretna"
+   ],
+   "bbox": [
+    -96.16878,
+    41.14576,
+    -96.14771,
+    41.1727
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.914,
+   "launches": [
+    "chalco-hills-recreation-area-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Curly-leaf pondweed",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "wellfleet-lake-ne",
+   "name": "Wellfleet Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Wellfleet"
+   ],
+   "bbox": [
+    -100.74845,
+    40.75049,
+    -100.73583,
+    40.75647
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.201,
+   "launches": [
+    "wellfleet-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-cozad-lake-ne",
+   "name": "West Cozad Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Cozad"
+   ],
+   "bbox": [
+    -100.01331,
+    40.85244,
+    -100.00632,
+    40.85545
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.071,
+   "launches": [
+    "west-cozad-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-maple-creek-ne",
+   "name": "West Fork Maple Creek",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Leigh"
+   ],
+   "bbox": [
+    -97.25701,
+    41.52913,
+    -96.9085,
+    41.77209
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "leigh-city-park-ne",
+    "main-lake-ramp-south-of-91-ne",
+    "maple-creek-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-lake-ne",
+   "name": "West Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bridgeport-sra-ne-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-wood-river-mm-299n-ne",
+   "name": "West Wood River (MM 299N)",
+   "kind": "river",
+   "state": "NE",
+   "towns": [
+    "Wood River"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "west-wood-river-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whitney-lake-ne",
+   "name": "Whitney Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Whitney"
+   ],
+   "bbox": [
+    -103.32608,
+    42.7779,
+    -103.28053,
+    42.79653
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.896,
+   "launches": [
+    "whitney-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wildcat-creek-ne",
+   "name": "Wildcat Creek",
+   "kind": "stream",
+   "state": "NE",
+   "towns": [
+    "Blue Springs"
+   ],
+   "bbox": [
+    -96.50676,
+    40.14666,
+    -96.48897,
+    40.16301
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wolf-wildcat-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wildwood-lake-ne",
+   "name": "Wildwood Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Valparaiso"
+   ],
+   "bbox": [
+    -96.85009,
+    41.03215,
+    -96.8356,
+    41.04571
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.442,
+   "launches": [
+    "wildwood-wma-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "willow-creek-lake-ne",
+   "name": "Willow Creek Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Pierce"
+   ],
+   "bbox": [
+    -97.60093,
+    42.16618,
+    -97.55487,
+    42.18395
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.119,
+   "launches": [
+    "willow-creek-sra-north-ne",
+    "willow-creek-sra-south-ne",
+    "willow-creek-sra-paddlecraft-launch-ne",
+    "willow-creek-southwest-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2015, 2017 and 2019 to 2023.",
+     "date": "2023-09-18",
+     "years": [
+      "2015",
+      "2017",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "willow-lake-ne",
+   "name": "Willow Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [],
+   "bbox": [
+    -100.09373,
+    42.23029,
+    -100.06571,
+    42.24259
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.657,
+   "launches": [
+    "willow-lake-b-c-wma-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-creek-reservoir-2-x-ne",
+   "name": "Wilson Creek Reservoir 2-X",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Dunbar"
+   ],
+   "bbox": [
+    -96.05837,
+    40.70451,
+    -96.05603,
+    40.70785
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.056,
+   "launches": [
+    "wilson-creek-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "winters-creek-lake-ne",
+   "name": "Winters Creek Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Scottsbluff"
+   ],
+   "bbox": [
+    -103.53262,
+    41.95111,
+    -103.519,
+    41.96442
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.906,
+   "launches": [
+    "winters-creek-lake-boat-launch-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wirth-brothers-reservoir-ne",
+   "name": "Wirth Brothers Reservoir",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Tecumseh"
+   ],
+   "bbox": [
+    -96.2052,
+    40.44887,
+    -96.20027,
+    40.45246
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.094,
+   "launches": [
+    "wirth-brothers-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://deq-iis.ne.gov/zs/bw/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-09-20",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "wp6-ne",
+   "name": "WP6",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Papillion"
+   ],
+   "bbox": [
+    -96.09903,
+    41.16188,
+    -96.09179,
+    41.16673
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "portal-recreation-area-ne"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yankee-hill-lake-ne",
+   "name": "Yankee Hill Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Lincoln"
+   ],
+   "bbox": [
+    -96.7966,
+    40.71849,
+    -96.78024,
+    40.73273
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.755,
+   "launches": [
+    "yankee-hill-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "White perch",
+     "text": "Nebraska Game and Parks lists white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "white perch"
+     ],
+     "date": null
+    }
+   ]
+  },
+  {
+   "slug": "zorinsky-lake-ne",
+   "name": "Zorinsky Lake",
+   "kind": "lake",
+   "state": "NE",
+   "towns": [
+    "Gretna"
+   ],
+   "bbox": [
+    -96.18727,
+    41.21424,
+    -96.16065,
+    41.22447
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.959,
+   "launches": [
+    "zorinsky-lake-boat-launch-ne"
+   ],
+   "advisories": [
+    {
+     "source": "ne-ngpc-ais-waters",
+     "source_name": "Nebraska Game and Parks",
+     "url": "https://www.arcgis.com/home/item.html?id=ac50080678ea41ccb26979aa7fa12959",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Invasive species",
+     "text": "Nebraska Game and Parks lists curly-leaf pondweed and white perch as present in this water. Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "curly-leaf pondweed",
+      "white perch"
+     ],
+     "date": null
+    },
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2016) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2016-06-28"
+    }
+   ]
+  }
+ ]
+}
