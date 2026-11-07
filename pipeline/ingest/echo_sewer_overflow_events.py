@@ -143,21 +143,26 @@ Alaska (permits AK...; research/ak/report.md; not live until data/rules.json say
   overflow record for the state (the 2026-11-04 all-versions extract: 46 current AK rows from 3 permits, 2023-06-05 to
   2026-10-26: Anchorage AK0022551 43, Ketchikan AK0021440 2 anticipated pump-station bypasses, Denali National Park
   AK0053775 1; 44 SSO and 2 bypass; 22 'Basement Backup'; receipt a median 1 day after the start, the anticipated
-  bypasses filed before they began). Juneau's CSO permit (AK0023213) files nothing here. Three Alaska rules, keyed on
+  bypasses filed before they began). Juneau's CSO permit (AK0023213) files nothing here. Two Alaska rules, keyed on
   AK permits only, so the other states' records are unchanged:
   - Time zone (docs/decisions.md, National expansion item 6): America/Anchorage, labelled in raw.timezone_note.
-    Federal law puts the part of Alaska west of 169 deg 30 min W in the Hawaii-Aleutian zone (49 CFR 71.10), so an
-    event whose own point lies there (west of -169.5, or east of 180 on the far Aleutians) is read as America/Adak,
-    and the note says so. No AK event in the extract lies there (the westernmost is Denali, -148.9); two AK sewage
-    permits in EPA's plant table do (a general-permit lagoon at St. Paul, AKG527721, -170.26, and Shemya Island,
-    AKG573005, 174.09) and neither has filed. An event without a point keeps America/Anchorage. St. Paul observes
-    Alaska time in practice although it lies west of the line; the coordinate rule follows the regulation.
+    49 CFR 71.12 puts "that part of the Aleutian Islands that is west of 169 degrees 30 minutes west longitude" in the
+    Hawaii-Aleutian zone and 71.11 the rest of Alaska in the Alaska zone, so an event whose own point lies in the
+    Aleutian chain west of that line is read as America/Adak, and the note says so. The chain is taken as two boxes
+    (AK_ALEUTIAN_WEST): longitude -180 to -169.5 with latitude 51 to 54.5 N (the Islands of Four Mountains to the
+    Andreanof Islands), and longitude 172 to 180 E with latitude 51 to 53.5 N (the Rat and Near Islands, Attu and
+    Shemya). Alaska land west of the line but off the chain stays Alaska time: the Pribilof Islands (St. Paul and St.
+    George, 56.5 to 57.3 N) and St. Lawrence Island (63 to 63.8 N). A positive longitude outside the Near Islands box
+    (a sign slip such as 149.9 for -149.9) stays Alaska time. No AK event in the extract lies in the boxes (the
+    westernmost is Denali, -148.9); one AK sewage permit in EPA's plant table does (Shemya Island, AKG573005, 52.72 N
+    174.09 E) and has not filed; St. Paul (AKG527721, 57.12 N -170.26) is Alaska time. An event without a point keeps
+    America/Anchorage.
   - Receiving-water text: a report naming the water and where it went ('Fish Creek which flowed to Travels to Cook
     Inlet') is read as both waters ('Fish Creek', 'Cook Inlet'); the text as typed stays in raw.receiving_waters and
     raw.receiving_water_aliases says what was read (STATE_WATER_SPLIT).
-  - A place named after a water is not a water: 'Sewer Overflow out of manhole at Riley Creek Mercantile' (a store;
-    the report gives land-surface impact and no receiving water) does not count as text naming a water
-    (STATE_PLACE_NAMES). The record is dropped like any SSO with no evidence of a water and listed in the dropped file.
+  - The generic text rule applies unchanged: 'Sewer Overflow out of manhole at Riley Creek Mercantile' (Denali; land
+    impact, no receiving water; the point about 540 m from Riley Creek) is kept as "text names a water (creek)",
+    erring on the side of showing it.
   Alaska's descriptions carry no addresses or personal names ('SSO', 'FOG and Rags', 'Ruptured 30" Sewer Force
   main'), and no point is shared by many reports (Ketchikan's two bypasses give the pump station's), so AK is in
   neither FREE_TEXT_STATES nor REPEATED_POINT_STATES.
@@ -196,9 +201,10 @@ FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
 STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AK"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AK": "America/Anchorage"}
-# a state's part in another zone, by the event's own point: (longitude at or west of which, zone); Alaska west of
-# 169 deg 30 min W is Hawaii-Aleutian time (49 CFR 71.10), and a positive longitude there is the far Aleutians
-STATE_TZ_WEST = {"AK": (-169.5, "America/Adak")}
+# a state's part in another zone, by the event's own point: [(lon_min, lon_max, lat_min, lat_max)], zone. The Aleutian
+# Islands west of 169 deg 30 min W are Hawaii-Aleutian time (49 CFR 71.12; the rest of Alaska 71.11); module docstring
+AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
+STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
 FREE_TEXT_STATES = {"IL"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
@@ -230,9 +236,6 @@ STATE_NO_WATER = {"GA": re.compile(r"^\s*((?:n/?a\s+)?dry\s*land(?:\s+spill)?|n[
 # a receiving-water text naming the water and where it went: both are read (module docstring, Alaska)
 STATE_WATER_SPLIT = {"AK": re.compile(r"^(.+?)\s+which\s+flow\w*\s+(?:(?:to|into)\s+)?(?:travel\w*\s+)?"
                                       r"(?:(?:to|into)\s+)?(.+?)\s*\.?\s*$", re.I)}
-# places named after a water (a store, a campground, a road) that are not a water (module docstring, Alaska)
-STATE_PLACE_NAMES = {"AK": re.compile(r"\b[A-Z][a-z]+\s+(?:Creek|River|Lake|Bay)\s+(?:Mercantile|Campground|Store|"
-                                      r"Lodge|Road|Rd|Drive|Dr|Street|St|Avenue|Ave|Subdivision|School)\b")}
 
 
 def no_water(w: str, state: str | None = None) -> bool:
@@ -578,8 +581,6 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
         return True, "impact to a water (" + ",".join(sorted(codes & WATER_IMPACTS)) + ")"
     texts = " ".join([i.get("sewer_overflow_bypass_impact_other_text") or "" for i in impacts]
                      + [ev.get("sewer_overflow_bypass_description_text") or ""])
-    if state in STATE_PLACE_NAMES:
-        texts = STATE_PLACE_NAMES[state].sub(" ", texts)
     m = WATER_WORDS.search(texts)
     if m:
         return True, f"text names a water ({m.group(0).lower()})"
@@ -604,9 +605,11 @@ def naive(ts: str | None) -> str | None:
 
 def event_tz(state: str, lat=None, lon=None) -> str | None:
     """The zone an event's naive times are read in: the state's (STATE_TZ), or STATE_TZ_WEST's when the event's own
-    point lies in that part of the state (Alaska west of 169 deg 30 min W); None for a state that stays naive."""
+    point lies in that part of the state (the Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12); None for a
+    state that stays naive."""
     west = STATE_TZ_WEST.get(state)
-    if west and lon is not None and (lon <= west[0] or lon > 0):
+    if west and lat is not None and lon is not None and any(
+            x0 <= lon <= x1 and y0 <= lat <= y1 for x0, x1, y0, y1 in west[0]):
         return west[1]
     return STATE_TZ.get(state)
 
@@ -634,8 +637,8 @@ def zoned(ts: str | None, state: str, tz: str | None = None) -> str | None:
 
 def tz_note(state: str, tz: str | None = None) -> str:
     if tz and tz != STATE_TZ.get(state):
-        return (f"ECHO gives event times without a timezone; read as {tz}, the zone of the event's own point (the part "
-                "of the state west of 169 deg 30 min W, 49 CFR 71.10; a fall-back hour that happens twice is read as "
+        return (f"ECHO gives event times without a timezone; read as {tz}, the zone of the event's own point (the "
+                "Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12; a fall-back hour that happens twice is read as "
                 "the first)")
     tz = STATE_TZ.get(state)
     return (f"ECHO gives event times without a timezone; read as {tz}, the permit's state's zone (a fall-back hour "

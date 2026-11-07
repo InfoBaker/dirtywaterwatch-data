@@ -1,5 +1,5 @@
 """Alaska: the Alaska rules of EPA's overflow tables (the zone by the event's point, the 'which flowed to' receiving
-water, a place named after a water), kept and dropped rows by reason, the stable record id, a saved ZIP, and the
+water), kept and dropped rows by reason, the stable record id, a saved ZIP, and the
 other states' records unchanged. The rows are Alaska's own from the 2026-11-04 extract (permits, times, points,
 volumes and texts as filed; they carry no personal names or addresses); no network."""
 import csv
@@ -76,13 +76,13 @@ def test_alaska_is_read_in_its_zone_and_in_no_other_state_set():
 
 def test_kept_and_dropped_rows_by_reason():
     kept, dropped, why = _build(AK)
-    assert set(kept) == {"AK0022551:43:1", "AK0022551:37:1", "AK0021440:2:1"}
+    assert set(kept) == {"AK0022551:43:1", "AK0022551:37:1", "AK0021440:2:1", "AK0053775:1:1"}
     assert why[("AK", "kept", "receiving water named")] == 3
     assert dropped["AK0022551:40:1"]["reason"] == "building backup"            # a basement backup
     assert dropped["AK0022551:38:1"]["reason"] == "building backup"            # 'Other': Toilet
     assert dropped["AK0022551:6:1"]["reason"] == "no evidence the discharge reached a water"
-    # a store named after a creek is not a water; the report gives land-surface impact only
-    assert dropped["AK0053775:1:1"]["reason"] == "no evidence the discharge reached a water"
+    # the generic text rule keeps the Denali report that names a place on Riley Creek (erring on the safe side)
+    assert why[("AK", "kept", "text names a water (creek)")] == 1 and "AK0053775:1:1" not in dropped
 
 
 def test_alaska_times_carry_alaska_offsets():
@@ -96,17 +96,21 @@ def test_alaska_times_carry_alaska_offsets():
     assert E.zoned("2026-07-04", "AK") == "2026-07-04"
 
 
-def test_an_event_west_of_169_30_is_read_in_hawaii_aleutian_time():
-    assert E.event_tz("AK", 57.12, -170.26) == "America/Adak"          # St. Paul's point
+def test_an_event_in_the_aleutians_west_of_169_30_is_read_in_hawaii_aleutian_time():
+    # 49 CFR 71.12: only "that part of the Aleutian Islands" west of the line; 71.11: the rest of Alaska
     assert E.event_tz("AK", 52.72, 174.09) == "America/Adak"           # Shemya Island, east of 180
+    assert E.event_tz("AK", 51.88, -176.66) == "America/Adak"          # Adak
+    assert E.event_tz("AK", 57.12, -170.26) == "America/Anchorage"     # St. Paul, Pribilof Islands: Alaska time
+    assert E.event_tz("AK", 63.78, -171.74) == "America/Anchorage"     # Gambell, St. Lawrence Island
+    assert E.event_tz("AK", 61.2, 149.9) == "America/Anchorage"        # an Anchorage point with its sign slipped
     assert E.event_tz("AK", 53.87, -166.54) == "America/Anchorage"     # Unalaska lies east of the line
     assert E.event_tz("AK", None, None) == "America/Anchorage"
     assert E.event_tz("WA", 47.0, -170.0) is None and E.event_tz("IL", 40.0, -89.0) == "America/Chicago"
-    row = dict(AK["28038"][0], latitude_measure="57.12", longitude_measure="-170.26")
+    row = dict(AK["28038"][0], latitude_measure="51.88", longitude_measure="-176.66")
     kept, _, _ = _build({"28038": (row, "SSO", ["Birch Lake"], ["NOI"])})
     r = kept["AK0022551:43:1"]
     assert r["started_at"] == "2026-10-26T05:33:00-09:00"              # HADT
-    assert "America/Adak" in r["raw"]["timezone_note"] and "49 CFR 71.10" in r["raw"]["timezone_note"]
+    assert "America/Adak" in r["raw"]["timezone_note"] and "49 CFR 71.12" in r["raw"]["timezone_note"]
 
 
 def test_receiving_water_text_and_where_it_went():
@@ -153,7 +157,7 @@ def test_other_states_records_are_byte_identical_with_and_without_the_alaska_rul
     with_ak = [r for r in with_ak if not r["npdes_permit"].startswith("AK")]
     monkeypatch.setattr(E, "STATES", E.STATES - {"AK"})
     monkeypatch.setattr(E, "STATE_TZ", {k: v for k, v in E.STATE_TZ.items() if k != "AK"})
-    for name in ("STATE_TZ_WEST", "STATE_WATER_SPLIT", "STATE_PLACE_NAMES"):
+    for name in ("STATE_TZ_WEST", "STATE_WATER_SPLIT"):
         monkeypatch.setattr(E, name, {})
     without, _, _ = E.build(_tables(others), {"extract_date": "2026-11-04"})
     assert _strip(with_ak) == _strip(without)
@@ -185,9 +189,9 @@ def test_main_reads_a_saved_zip_with_alaska_rows(tmp_path, monkeypatch):
         sid, recs, path=tmp_path / "events" / f"{sid}.json", **kw))
     assert E.main(["--file", str(_zip(tmp_path, _tables(AK)))]) == 0
     out = json.loads((tmp_path / "events" / f"{E.SOURCE_ID}.json").read_text())
-    assert out["count"] == 3 and "AK" in out["meta"]["states"]
+    assert out["count"] == 4 and "AK" in out["meta"]["states"]
     rules = {(r["outcome"], r["reason"]): r["count"] for r in out["meta"]["by_rule"] if r["state"] == "AK"}
-    assert rules == {("kept", "receiving water named"): 3, ("dropped", "building backup"): 2,
-                     ("dropped", "no evidence the discharge reached a water"): 2}
+    assert rules == {("kept", "receiving water named"): 3, ("kept", "text names a water (creek)"): 1,
+                     ("dropped", "building backup"): 2, ("dropped", "no evidence the discharge reached a water"): 1}
     dropped = json.loads((tmp_path / "echo-sewer-overflow-dropped.json").read_text())
-    assert dropped["count"] == 4
+    assert dropped["count"] == 3
