@@ -1,0 +1,1127 @@
+{
+ "state": "NM",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 42,
+ "waters": [
+  {
+   "slug": "abiquiu-lake-nm",
+   "name": "Abiquiu Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Abiquiu"
+   ],
+   "bbox": [
+    -106.52226,
+    36.23065,
+    -106.4265,
+    36.29601
+   ],
+   "wikidata": "Q4667899",
+   "charted": false,
+   "area_km2": 6.546,
+   "launches": [
+    "abiquiu-lake-boat-launch-near-abiquiu-nm",
+    "abiquiu-lake-boat-launch-near-abiquiu-nm-3",
+    "abiquiu-lake-boat-launch-near-abiquiu-nm-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "animas-river-nm",
+   "name": "Animas River",
+   "kind": "river",
+   "state": "NM",
+   "towns": [
+    "Flora Vista"
+   ],
+   "bbox": [
+    -108.22261,
+    36.71333,
+    -107.86331,
+    37.06121
+   ],
+   "wikidata": "Q2615286",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "animas-river-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-canyon-reservoir-nm",
+   "name": "Bear Canyon Reservoir",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Mimbres"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bear-canyon-reservoir-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bill-evans-lake-nm",
+   "name": "Bill Evans Lake",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [],
+   "bbox": [
+    -108.57917,
+    32.86386,
+    -108.57027,
+    32.86903
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.226,
+   "launches": [
+    "bill-evans-lake-boat-launch-nm",
+    "bill-evans-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bluewater-lake-nm",
+   "name": "Bluewater Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Baca / Kin Łigaaí"
+   ],
+   "bbox": [
+    -108.16356,
+    35.27606,
+    -108.10944,
+    35.32525
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.971,
+   "launches": [
+    "bluewater-lake-boat-launch-near-baca-kin-igaai-nm",
+    "bluewater-lake-boat-launch-near-baca-kin-igaai-nm-2",
+    "bluewater-lake-boat-launch-near-baca-kin-igaai-nm-3",
+    "bluewater-lake-boat-launch-near-baca-kin-igaai-nm-4"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-15",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "brantley-lake-nm",
+   "name": "Brantley Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Carlsbad"
+   ],
+   "bbox": [
+    -104.4054,
+    32.53309,
+    -104.34977,
+    32.60522
+   ],
+   "wikidata": "Q4957685",
+   "charted": false,
+   "area_km2": 6.853,
+   "launches": [
+    "brantley-lake-boat-launch-near-carlsbad-nm",
+    "brantley-lake-west-boat-ramp-nm",
+    "brantley-lake-boat-launch-near-carlsbad-nm-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "caballo-lake-nm",
+   "name": "Caballo Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Oasis"
+   ],
+   "bbox": [
+    -107.3105,
+    32.89651,
+    -107.286,
+    32.971
+   ],
+   "wikidata": "Q5015210",
+   "charted": false,
+   "area_km2": 9.688,
+   "launches": [
+    "caballo-lake-boat-launch-near-oasis-nm-2",
+    "caballo-lake-low-water-boat-ramp-nm",
+    "caballo-lake-boat-launch-near-oasis-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "charette-lake-nm",
+   "name": "Charette Lake",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [],
+   "bbox": [
+    -104.81262,
+    36.18202,
+    -104.79653,
+    36.18982
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.69,
+   "launches": [
+    "charette-lake-boat-launch-nm",
+    "charette-lake-boat-launch-nm-2"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-16",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "clayton-lake-nm",
+   "name": "Clayton Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Clayton"
+   ],
+   "bbox": [
+    -103.30977,
+    36.57407,
+    -103.29515,
+    36.5819
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.293,
+   "launches": [
+    "clayton-lake-boat-launch-nm",
+    "clayton-lake-boat-launch-near-clayton-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025 and 2026.",
+     "date": "2026-09-15",
+     "years": [
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "cochiti-lake-nm",
+   "name": "Cochiti Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Cochiti"
+   ],
+   "bbox": [
+    -106.32622,
+    35.61352,
+    -106.2977,
+    35.67405
+   ],
+   "wikidata": "Q5775863",
+   "charted": false,
+   "area_km2": 4.225,
+   "launches": [
+    "cochiti-lake-boat-launch-nm",
+    "cochiti-lake-main-access-cochiti-access-nm",
+    "santa-cruz-boat-ramp-nm",
+    "tetilla-boat-ramp-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019.",
+     "date": "2019-09-02",
+     "years": [
+      "2019"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "conchas-lake-nm",
+   "name": "Conchas Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Conchas",
+    "Hooverville"
+   ],
+   "bbox": [
+    -104.25298,
+    35.36707,
+    -104.184,
+    35.42109
+   ],
+   "wikidata": "Q5158618",
+   "charted": false,
+   "area_km2": 7.649,
+   "launches": [
+    "conchas-lake-boat-launch-near-conchas-nm",
+    "conchas-lake-boat-launch-near-conchas-nm-2",
+    "conchas-lake-boat-launch-near-conchas-nm-3",
+    "conchas-lake-boat-launch-near-conchas-nm-4",
+    "conchas-lake-boat-launch-near-conchas-nm-5",
+    "south-area-high-water-boat-ramp-nm",
+    "conchas-lake-boat-launch-near-hooverville-nm",
+    "south-area-mid-water-boat-ramp-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eagle-nest-lake-nm",
+   "name": "Eagle Nest Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Eagle Nest"
+   ],
+   "bbox": [
+    -105.27301,
+    36.4948,
+    -105.22913,
+    36.54517
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.56,
+   "launches": [
+    "eagle-nest-lake-boat-launch-near-eagle-nest-nm-2",
+    "eagle-nest-lake-boat-launch-near-eagle-nest-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-16",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "el-vado-reservoir-nm",
+   "name": "El Vado Reservoir",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "El Vado"
+   ],
+   "bbox": [
+    -106.77341,
+    36.58882,
+    -106.73163,
+    36.66535
+   ],
+   "wikidata": "Q5352314",
+   "charted": false,
+   "area_km2": 11.662,
+   "launches": [
+    "el-vado-reservoir-boat-launch-nm",
+    "el-vado-reservoir-boat-launch-near-el-vado-nm-2",
+    "el-vado-reservoir-boat-launch-near-el-vado-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-22",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "elephant-butte-lake-nm",
+   "name": "Elephant Butte Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Elephant Butte",
+    "Elephant Butte Estates",
+    "Rock Canyon",
+    "Truth or Consequences"
+   ],
+   "bbox": [
+    -107.21448,
+    33.14611,
+    -107.14319,
+    33.31876
+   ],
+   "wikidata": "Q5359306",
+   "charted": false,
+   "area_km2": 38.642,
+   "launches": [
+    "elephant-butte-lake-boat-launch-near-truth-or-consequences-nm-2",
+    "elephant-butte-lake-boat-launch-near-elephant-butte-estates-nm",
+    "elephant-butte-lake-boat-launch-near-truth-or-consequences-nm",
+    "elephant-butte-reservoir-marina-del-sur-nm",
+    "elephant-butte-reservoir-rock-canyon-marina-nm",
+    "elephant-butte-lake-boat-launch-near-rock-canyon-nm",
+    "south-monticello-boat-ramp-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fenton-lake-nm",
+   "name": "Fenton Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Seven Springs"
+   ],
+   "bbox": [
+    -106.72977,
+    35.88155,
+    -106.72313,
+    35.88537
+   ],
+   "wikidata": "Q49700692",
+   "charted": false,
+   "area_km2": 0.105,
+   "launches": [
+    "fenton-lake-boat-launch-nm",
+    "fenton-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-meadow-lake-nm",
+   "name": "Green Meadow Lake",
+   "kind": "pond",
+   "state": "NM",
+   "towns": [
+    "Hobbs"
+   ],
+   "bbox": [
+    -103.16788,
+    32.74853,
+    -103.16502,
+    32.7504
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "green-meadow-lake-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grindstone-lake-nm",
+   "name": "Grindstone Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Ruidoso"
+   ],
+   "bbox": [
+    -105.68931,
+    33.31982,
+    -105.68338,
+    33.32375
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "grindstone-lake-boat-launch-nm",
+    "grindstone-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "heron-reservoir-nm",
+   "name": "Heron Reservoir",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Tierra Amarilla"
+   ],
+   "bbox": [
+    -106.74102,
+    36.66608,
+    -106.64081,
+    36.72381
+   ],
+   "wikidata": "Q49701069",
+   "charted": false,
+   "area_km2": 17.057,
+   "launches": [
+    "heron-reservoir-boat-launch-near-tierra-amarilla-nm",
+    "heron-reservoir-boat-launch-near-tierra-amarilla-nm-2",
+    "heron-reservoir-boat-launch-near-tierra-amarilla-nm-4",
+    "la-laja-boat-ramp-nm",
+    "heron-reservoir-boat-launch-near-tierra-amarilla-nm-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-lake-nm",
+   "name": "Jackson Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Farmington"
+   ],
+   "bbox": [
+    -108.22928,
+    36.80647,
+    -108.22382,
+    36.81312
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.249,
+   "launches": [
+    "jackson-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jal-lake-nm",
+   "name": "Jal Lake",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Jal"
+   ],
+   "bbox": [
+    -103.19159,
+    32.09898,
+    -103.18799,
+    32.1007
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "jal-lake-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-avalon-nm",
+   "name": "Lake Avalon",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Carlsbad"
+   ],
+   "bbox": [
+    -104.27182,
+    32.49074,
+    -104.23765,
+    32.50985
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.945,
+   "launches": [
+    "avalon-reservoir-boat-ramp-nm",
+    "lake-avalon-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-maloya-nm",
+   "name": "Lake Maloya",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Raton"
+   ],
+   "bbox": [
+    -104.37889,
+    36.98378,
+    -104.36709,
+    36.99561
+   ],
+   "wikidata": "Q6476762",
+   "charted": false,
+   "area_km2": 0.441,
+   "launches": [
+    "lake-maloya-boat-launch-near-raton-nm",
+    "lake-maloya-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-roberts-nm",
+   "name": "Lake Roberts",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [],
+   "bbox": [
+    -108.16519,
+    33.02775,
+    -108.15425,
+    33.03401
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "lake-roberts-boat-launch-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-08",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-sumner-nm",
+   "name": "Lake Sumner",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Lake Sumner"
+   ],
+   "bbox": [
+    -104.39921,
+    34.60523,
+    -104.36249,
+    34.65783
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.105,
+   "launches": [
+    "alamo-point-boat-ramp-nm",
+    "lake-sumner-east-side-nm",
+    "lake-sumner-boat-launch-near-lake-sumner-nm-2",
+    "lake-sumner-boat-launch-near-lake-sumner-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-van-nm",
+   "name": "Lake Van",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Lake Van"
+   ],
+   "bbox": [
+    -104.35893,
+    33.19203,
+    -104.35407,
+    33.1961
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.115,
+   "launches": [
+    "lake-van-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-transill-reservoir-nm",
+   "name": "Lower Transill Reservoir",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Carlsbad"
+   ],
+   "bbox": [
+    -104.26743,
+    32.41058,
+    -104.21813,
+    32.49127
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.867,
+   "launches": [
+    "lower-transill-reservoir-boat-launch-near-carlsbad-nm",
+    "lower-transill-reservoir-boat-launch-near-carlsbad-nm-2",
+    "lower-transill-reservoir-boat-launch-near-carlsbad-nm-4"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morphy-lake-nm",
+   "name": "Morphy Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Monte Aplanado"
+   ],
+   "bbox": [
+    -105.4006,
+    35.94075,
+    -105.39558,
+    35.94375
+   ],
+   "wikidata": "Q7357959",
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "morphy-lake-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "navajo-lake-nm",
+   "name": "Navajo Lake",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Navajo Dam"
+   ],
+   "bbox": [
+    -107.62007,
+    36.79629,
+    -107.35399,
+    37.04654
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 52.709,
+   "launches": [
+    "navajo-lake-boat-launch-near-navajo-dam-nm",
+    "navajo-lake-boat-launch-near-navajo-dam-nm-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "number-thirteen-lake-nm",
+   "name": "Number Thirteen Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Maxwell"
+   ],
+   "bbox": [
+    -104.58945,
+    36.57636,
+    -104.57451,
+    36.58798
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.167,
+   "launches": [
+    "lake-13-boat-launch-nm",
+    "number-thirteen-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pecos-river-nm",
+   "name": "Pecos River",
+   "kind": "river",
+   "state": "NM",
+   "towns": [
+    "Carlsbad",
+    "Loving"
+   ],
+   "bbox": [
+    -105.6933,
+    31.90155,
+    -103.91121,
+    35.97623
+   ],
+   "wikidata": "Q1356561",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pecos-river-hwy-31-nm",
+    "pecos-river-stateline-red-bluff-nm",
+    "pecos-river-carry-in-access-near-carlsbad-nm",
+    "pecos-river-carry-in-access-near-loving-nm",
+    "pecos-river-carry-in-access-near-carlsbad-nm-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quemado-lake-nm",
+   "name": "Quemado Lake",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [],
+   "bbox": [
+    -108.49755,
+    34.13114,
+    -108.48318,
+    34.13938
+   ],
+   "wikidata": "Q49702402",
+   "charted": false,
+   "area_km2": 0.412,
+   "launches": [
+    "quemado-boat-launch-nm",
+    "quemado-lake-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rio-chama-nm",
+   "name": "Rio Chama",
+   "kind": "river",
+   "state": "NM",
+   "towns": [
+    "El Vado"
+   ],
+   "bbox": [
+    -106.75204,
+    36.04165,
+    -106.08765,
+    37.00001
+   ],
+   "wikidata": "Q7335176",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-eddy-take-out-nm",
+    "chavez-canyon-boat-launch-nm",
+    "rio-chama-downstream-of-coopers-landing-nm",
+    "rio-chama-boat-launch-near-el-vado-nm",
+    "skull-bridge-nm",
+    "whirlpool-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rio-grande-nm",
+   "name": "Rio Grande",
+   "kind": "river",
+   "state": "NM",
+   "towns": [
+    "Antoine Leroux Grant",
+    "Bosque Farms",
+    "Fort Selden",
+    "Los Lunas",
+    "Pilar",
+    "Rinconada",
+    "Taos",
+    "Truth or Consequences",
+    "Williamsburg"
+   ],
+   "bbox": [
+    -107.30705,
+    31.78377,
+    -105.67104,
+    36.9962
+   ],
+   "wikidata": "Q160636",
+   "charted": false,
+   "area_km2": 1.292,
+   "launches": [
+    "rio-grande-boat-launch-near-rinconada-nm",
+    "rio-grande-boat-launch-near-antoine-leroux-grant-nm",
+    "lone-juniper-boat-takeout-nm",
+    "north-picnic-area-and-beach-boat-ramp-nm",
+    "rio-grande-boat-launch-near-pilar-nm",
+    "rio-bravo-boat-takeout-nm",
+    "taos-junction-bridge-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "san-juan-river-nm",
+   "name": "San Juan River",
+   "kind": "river",
+   "state": "NM",
+   "towns": [
+    "Bloomfield",
+    "Navajo Dam"
+   ],
+   "bbox": [
+    -109.02704,
+    36.68534,
+    -107.16749,
+    37.04129
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.644,
+   "launches": [
+    "san-juan-river-boat-launch-near-navajo-dam-nm-2",
+    "san-juan-river-boat-launch-near-navajo-dam-nm",
+    "san-juan-river-boat-launch-near-navajo-dam-nm-3",
+    "san-juan-river-boat-launch-near-bloomfield-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "santa-cruz-lake-nm",
+   "name": "Santa Cruz Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Española",
+    "Potrero"
+   ],
+   "bbox": [
+    -105.92046,
+    35.9689,
+    -105.913,
+    35.97961
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.351,
+   "launches": [
+    "santa-cruz-lake-boat-launch-espanola-nm",
+    "santa-cruz-lake-boat-launch-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-09",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "santa-rosa-lake-nm",
+   "name": "Santa Rosa Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Santa Rosa"
+   ],
+   "bbox": [
+    -104.69127,
+    35.02866,
+    -104.63256,
+    35.07774
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.677,
+   "launches": [
+    "santa-rosa-lake-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "snow-lake-nm",
+   "name": "Snow Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [],
+   "bbox": [
+    -108.49893,
+    33.4173,
+    -108.49304,
+    33.42982
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.334,
+   "launches": [
+    "snow-lake-boat-launch-nm",
+    "snow-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "springer-lake-nm",
+   "name": "Springer Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Springer"
+   ],
+   "bbox": [
+    -104.66349,
+    36.4086,
+    -104.64647,
+    36.424
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.457,
+   "launches": [
+    "springer-lake-boat-launch-nm",
+    "springer-lake-carry-in-access-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "storrie-lake-nm",
+   "name": "Storrie Lake",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Las Vegas"
+   ],
+   "bbox": [
+    -105.25138,
+    35.65503,
+    -105.22824,
+    35.67667
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.193,
+   "launches": [
+    "storrie-lake-boat-launch-nm",
+    "storrie-lake-state-park-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stubblefield-reservoir-nm",
+   "name": "Stubblefield Reservoir",
+   "kind": "reservoir",
+   "state": "NM",
+   "towns": [
+    "Maxwell"
+   ],
+   "bbox": [
+    -104.67789,
+    36.56231,
+    -104.64947,
+    36.58651
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.753,
+   "launches": [
+    "stubblefield-reservoir-boat-launch-nm"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.env.nm.gov/surface-water-quality/habs/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-16",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tucumcari-lake-nm",
+   "name": "Tucumcari Lake",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Tucumcari"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tucumcari-lake-boat-launch-nm"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ute-reservoir-nm",
+   "name": "Ute Reservoir",
+   "kind": "lake",
+   "state": "NM",
+   "towns": [
+    "Hendricks Place",
+    "Logan"
+   ],
+   "bbox": [
+    -103.63914,
+    35.32003,
+    -103.44347,
+    35.3959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 22.752,
+   "launches": [
+    "ute-reservoir-boat-launch-near-logan-nm-4",
+    "ute-reservoir-boat-launch-near-logan-nm-3",
+    "ute-reservoir-boat-launch-near-hendricks-place-nm",
+    "ute-reservoir-boat-launch-near-logan-nm-2",
+    "ute-reservoir-boat-launch-near-logan-nm"
+   ],
+   "advisories": []
+  }
+ ]
+}
