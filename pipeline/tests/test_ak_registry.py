@@ -67,7 +67,8 @@ def test_no_name_from_epas_permit_name_field_reaches_a_row():
     """EPA's permit_name often reads '<person> - <body>', and sometimes is a person's name alone: no such name, and no
     two-word start of one, appears in the operator rows or the register (the names are read here, never listed)."""
     people = _person_parts()
-    assert len(people) > 40                              # the field does carry them
+    # scripts/permit_names.py cut them from the registry (2026-11-07): none is left, and none reached a row
+    assert not people, f"{len(people)} person-shaped parts left in EPA's Alaska permit names"
     blob = json.dumps(_ak_rows())
     reg = (ROOT / "data" / "notice-channels" / "ak.json").read_text()
     text = (ROOT / "research" / "ak" / "state-text.md").read_text()
