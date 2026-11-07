@@ -16,7 +16,7 @@
     "access": [
       "csv"
     ],
-    "access_detail": "ECHO daily ZIP current_sewer_overflow_and_collection_systems_tables.zip; tables sewer_overflow_bypass_report_events.csv (+ receiving_waters, causes, impacts, types, corrective_actions). 353 Mississippi events from 47 permits on 2026-11-03 (latest start 2026-10-28); a few from 2023-2024, the rest from January 2026 on (125 in June 2026). Median 4 days from start to EPA receipt. Sample raw/sobe-ms-sample.json (shared extract in the scratchpad sobe folder).",
+    "access_detail": "ECHO daily ZIP current_sewer_overflow_and_collection_systems_tables.zip; tables sewer_overflow_bypass_report_events.csv (+ receiving_waters, causes, impacts, types, corrective_actions). 353 Mississippi events from 47 permits on 2026-11-03 (latest start 2026-10-28); a few from 2023-2024, the rest from January 2026 on (125 in June 2026). Median 4 days from start to EPA receipt. Sample raw/sobe-ms-sample.json.",
     "machine_readable": true,
     "sample_record": {
       "permit_identifier": "MS0048691",
@@ -74,11 +74,11 @@
     "history": "Sparse before December 2025 (eRule effective 2025-12-21); full from January 2026.",
     "license": "EPA ECHO data: public domain (US government work).",
     "legal_basis": "40 CFR 127; 40 CFR 122.41(l)(6); MDEQ permit conditions",
-    "status": "candidate",
-    "status_reason": "The only statewide dated list for Mississippi: event precision, coordinates on all 353 rows, start and end, volume, receiving water. Already in the national SOBE ingester.",
+    "status": "used",
+    "status_reason": "Read by the national eRule ingester with Mississippi in its states (Central time, free text scrubbed): the all-versions extract of 2026-11-04 held 358 current Mississippi events from 47 permits (SSO 314, bypass 43, CSO 1); 246 kept from 27 permits (243 naming a receiving water), 112 dropped (109 naming no water with only land or no observable impacts, 1 building backup, 1 bypass whose water is 'None', 1 whose description says it was algae, not sewage). Report received a median 4 days after the start (90th percentile 41 days). Every row has coordinates; 15 have no volume.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": ""
+    "checked": "2026-11-07",
+    "notes": "The current-version ZIP held only its metadata file on 2026-11-05 and 2026-11-07; the module reads the current version of each report from the all-versions ZIP. The City of Jackson's reports give creek names without 'Creek' ('EUBANKS', 'TOWN'); eight are read as the NHD creek of that name near the reports' points, four (Belhaven, Caney, Eastover, Three Mile) are kept as typed."
   },
   {
     "id": "ms-mdeq-netsso-guidance",
@@ -185,13 +185,13 @@
     "has_coordinates": true,
     "has_outfall_ids": false,
     "cadence": "Weekly sampling in season (Gulf Coast Research Laboratory); advisories posted first on the map. From 2026-09-08 routine advisories go to beach signs and the website only (no texts or press releases), per local press.",
-    "history": "Historical pages on the site; layer holds current state",
+    "history": "The layer holds the current state only; MDEQ's site lists past results and advisories (/Historical/HBR, /Historical/HCA, a script page).",
     "license": "None shown.",
     "legal_basis": "BEACH Act",
-    "status": "candidate",
-    "status_reason": "Best beach feed in the group: advisory and closure flags with official segment lines and HAB as an event type.",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/ms_mdeq_beaches.py: either flag opens a record (closure, advisory, or a bloom advisory when eventtype is HAB) on MDEQ's own start date at the station's point, with the segment line; the first poll with both flags clear lifts it. No station was flagged on 2026-11-07 (21 stations); the layer keeps no history, MDEQ's site lists past advisories on a script page not read.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -227,9 +227,9 @@
     "license": "unknown",
     "legal_basis": "agency practice",
     "status": "watch",
-    "status_reason": "The layer is the better source; texts are an owner sign-up.",
+    "status_reason": "Retired for routine advisories on 2026-09-08 (MDEQ news release of that day: \"communicated through posted beach signage and the MDEQ Beach Monitoring website rather than text alerts and news releases\"); the beach layer is the source.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -279,12 +279,13 @@
     ],
     "waters_covered": "Pearl River and others ad hoc",
     "water_slugs": [],
-    "url": "https://www.mdeq.ms.gov/news",
+    "url": "https://www.mdeq.ms.gov/category/news-release/feed/",
     "access": [
+      "rss",
       "html"
     ],
-    "access_detail": "Issued ad hoc as news releases; in 2020 MDEQ declined to reissue a Pearl River advisory (press). No standing list.",
-    "machine_readable": false,
+    "access_detail": "MDEQ's news-release RSS feed (answered 200 on 2026-11-07). The 2026-09-02 release issued a water contact advisory for an unnamed tributary of Trahon Creek and Trahon Creek to the Pearl River \"due to an ongoing sewage bypass\" and said \"the longstanding water contact advisory for the section of the Pearl River from Hanging Moss Creek to the Byram Swinging bridge remains in effect\". No standing list of advisories in effect.",
+    "machine_readable": true,
     "sample_record": null,
     "fields": [],
     "fills_event_fields": [
@@ -296,14 +297,14 @@
     ],
     "has_coordinates": false,
     "has_outfall_ids": false,
-    "cadence": "ad hoc",
+    "cadence": "ad hoc; releases a few times a month",
     "history": null,
     "license": "unknown",
     "legal_basis": null,
-    "status": "watch",
-    "status_reason": "Poll MDEQ news for \"water contact advisory\".",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status": "used",
+    "status_reason": "Read every refresh by pipeline/ingest/ms_mdeq_water_contact.py: a release titled 'Water Contact Advisory Issued for ...' opens an advisory (MDEQ's date, the release's own point and advice), a release titled '... Lifts Water Contact Advisor(y|ies) for ...' ends it; each clean read with no lift re-confirms it. The Pearl River advisory the 2026-09-02 release says 'remains in effect' is a record of its own, cited to that release. Beach releases are left to the beach layer. On 2026-11-07: 2 advisories in effect (Trahon Creek, the Pearl River from Hanging Moss Creek to the Byram Swinging Bridge).",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -322,7 +323,7 @@
     "access": [
       "arcgis"
     ],
-    "access_detail": "Listed in the Hosted folder; not queried.",
+    "access_detail": "FeatureServer/0 public; fields are the facility's addresses, basin, county and agency staff assignments; no outfall number or receiving water.",
     "machine_readable": true,
     "sample_record": null,
     "fields": [],
@@ -336,10 +337,10 @@
     "history": "unknown",
     "license": "None shown.",
     "legal_basis": null,
-    "status": "watch",
-    "status_reason": "Possible improvement on ICIS facility points.",
+    "status": "rejected",
+    "status_reason": "Facility points of every MDEQ-regulated site (9,188 rows on 2026-11-07: plant entrances, addresses and agency staff assignments), not outfall points; no improvement on EPA's permitted-feature points.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -370,10 +371,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Coastal HAB via the beach layer.",
+    "status": "used",
+    "status_reason": "Coastal bloom advisories and closures (eventtype HAB on the beach layer) are read by the beach module as hab_advisory; freshwater blooms only by news release.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   }
 ]
