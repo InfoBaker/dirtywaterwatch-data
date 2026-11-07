@@ -18,4 +18,4 @@ updated: 2026-11-07
 
 {{share_line}}
 
-Of this state's reports on this site, {{dated_share}} are dated to the day or better; the newest dated report is from {{latest_dated}}. Coverage: {{grade}}.
+The coverage grade counts the last 12 months, and the one report this site shows from the federal extract of November 4, 2026 began in June 2024. Of this state's reports on this site, {{dated_share}} are dated to the day or better; the newest dated report is from {{latest_dated}}. Coverage: {{grade}}.

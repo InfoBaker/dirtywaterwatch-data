@@ -117,3 +117,32 @@ def test_each_fetch_that_finds_an_advisory_confirms_it_and_the_first_that_does_n
     b2 = {**b, "history": {k: v for k, v in b["history"].items() if k != "confirm_while_listed"}}
     plain, _ = runner.build("nm-nmed-hab-mapper", b2, arcgis.parse(b2, json.dumps(page).encode()), lifted, [], META)
     assert not any("_last_seen_in_source" in r["raw"] or "_unlisted_since" in r["raw"] for r in plain)
+
+
+def test_nmeds_names_place_on_the_openboatlaunch_records_by_hand_alias(monkeypatch, tmp_path):
+    """Final audit 2026-11-07: NMED names six lakes otherwise than openboatlaunch does (Stubblefield Lake, under a WATCH
+    on 2026-11-07, is openboatlaunch's Stubblefield Reservoir). Each station's own point lies inside the record's box;
+    data/water-aliases.json carries the names, so the advisory places on the lake and no second record is built."""
+    from build import status as S
+    pairs = {"Stubblefield Lake": ("stubblefield-reservoir-nm", 36.57564, -104.66115),
+             "Navajo Reservoir": ("navajo-lake-nm", 36.84907, -107.60725),
+             "Abiquiu Reservoir": ("abiquiu-lake-nm", 36.25388, -106.44208),
+             "Avalon Lake": ("lake-avalon-nm", 32.49889, -104.2494),
+             "Conchas Reservoir": ("conchas-lake-nm", 35.38911, -104.19451),
+             "Sumner Lake": ("lake-sumner-nm", 34.61868, -104.38561)}
+    waters = S.load_waters()
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path)
+    monkeypatch.setattr(S, "_STATES", S.derive_states(waters, S.load_rules()) | {"NM"})
+    S._GEOM_CACHE.clear()
+    live = S.live_waters(waters, S._STATES)
+    R = S.Resolver(live, S.load_registry_outfalls(), S.load_discharger_towns(), S.load_discharger_waters(),
+                   S.load_rules().get("placement") or {})
+    try:
+        for name, (slug, lat, lon) in pairs.items():
+            x0, y0, x1, y1 = waters[slug]["bbox"]
+            assert x0 <= lon <= x1 and y0 <= lat <= y1 and name in waters[slug]["aliases"]
+            ev = {"event_id": "t", "source_id": "nm-nmed-hab-mapper", "event_type": "hab_advisory",
+                  "waterbody_text": name, "lat": lat, "lon": lon, "raw": {}, "npdes_permit": None, "discharger_id": None}
+            assert R.resolve(ev)["water_slugs"] == [slug], name
+    finally:
+        S._GEOM_CACHE.clear()
