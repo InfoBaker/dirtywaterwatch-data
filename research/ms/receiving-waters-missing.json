@@ -1,45 +1,24 @@
 {
  "about": "Receiving-water names in MS's reports (EPA's overflow tables for Mississippi permits, the extract of 2026-11-04) that data/receiving-waters-national.json does not hold for MS, by name as typed (spellings that differ only in case, spaces or punctuation counted together), with the number of reports giving each and up to five of their points. The City of Jackson's shorthand names are given as the NHD creeks the ingester reads them as. Reports that say the discharge reached no water are left out.",
  "state": "MS",
- "waters": 40,
- "reports": 162,
+ "waters": 21,
+ "reports": 63,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in MS": 17,
+  "not a water name": 2,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 1,
+  "an unnamed or unknown stream: the report names no water": 1
+ },
+ "resolved_names": 19,
+ "resolved_reports": 99,
+ "build": {
+  "date": "2026-11-07",
+  "command": "python -m ingest.waters_from_nhd --names research/ms/receiving-waters-missing.json --state MS",
+  "records_built": 14,
+  "names_resolved": 19,
+  "network_requests": 46
+ },
  "rows": [
-  {
-   "name": "Davis bayou",
-   "reports": 22,
-   "permits": [
-    "MS0045446"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "spellings": [
-    "Davis Bayou",
-    "Davis bayou"
-   ],
-   "points": [
-    [
-     30.407073,
-     -88.773729
-    ],
-    [
-     30.406989,
-     -88.750421
-    ],
-    [
-     30.403328,
-     -88.791635
-    ],
-    [
-     30.410522,
-     -88.789255
-    ],
-    [
-     30.410703,
-     -88.789951
-    ]
-   ]
-  },
   {
    "name": "Ocean springs inner harbor",
    "reports": 20,
@@ -70,76 +49,8 @@
      30.409941,
      -88.817936
     ]
-   ]
-  },
-  {
-   "name": "Eubanks Creek",
-   "reports": 13,
-   "permits": [
-    "MS0024295"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.370587,
-     -90.192763
-    ],
-    [
-     32.361361,
-     -90.164864
-    ],
-    [
-     32.33603,
-     -90.169037
-    ],
-    [
-     32.351361,
-     -90.154071
-    ],
-    [
-     32.355519,
-     -90.177598
-    ]
-   ]
-  },
-  {
-   "name": "OKATIBBEE CREEK",
-   "reports": 13,
-   "permits": [
-    "MS0020117"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "spellings": [
-    "OKATIBBEE CREEK",
-    "Okatibbee Creek",
-    "okatibbee creek"
-   ],
-   "points": [
-    [
-     32.355384,
-     -88.744533
-    ],
-    [
-     32.359596,
-     -88.740767
-    ],
-    [
-     32.355538,
-     -88.744534
-    ],
-    [
-     32.37015,
-     -88.74581
-    ],
-    [
-     32.355221,
-     -88.744533
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Fort bayou",
@@ -175,123 +86,8 @@
      30.412502,
      -88.802818
     ]
-   ]
-  },
-  {
-   "name": "Hanging Moss Creek",
-   "reports": 11,
-   "permits": [
-    "MS0024295"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.360313,
-     -90.153728
-    ],
-    [
-     32.371576,
-     -90.140981
-    ],
-    [
-     32.373463,
-     -90.142687
-    ],
-    [
-     32.358825,
-     -90.120578
-    ],
-    [
-     32.369897,
-     -90.115783
-    ]
-   ]
-  },
-  {
-   "name": "Lynch Creek",
-   "reports": 7,
-   "permits": [
-    "MS0024295"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.308268,
-     -90.238333
-    ],
-    [
-     32.295203,
-     -90.240454
-    ],
-    [
-     32.306082,
-     -90.24031
-    ],
-    [
-     32.338549,
-     -90.268767
-    ],
-    [
-     32.328407,
-     -90.248744
-    ]
-   ]
-  },
-  {
-   "name": "Purple Creek",
-   "reports": 7,
-   "permits": [
-    "MS0024295"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.391323,
-     -90.103933
-    ],
-    [
-     32.369897,
-     -90.115783
-    ],
-    [
-     32.392629,
-     -90.101666
-    ],
-    [
-     32.398449,
-     -90.133792
-    ]
-   ]
-  },
-  {
-   "name": "Weeks bayou",
-   "reports": 7,
-   "permits": [
-    "MS0045446"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "spellings": [
-    "Weeks Bayou",
-    "Weeks bayou"
-   ],
-   "points": [
-    [
-     30.405731,
-     -88.81144
-    ],
-    [
-     30.397679,
-     -88.810686
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "BELHAVEN",
@@ -323,39 +119,8 @@
      32.319455,
      -90.170987
     ]
-   ]
-  },
-  {
-   "name": "Trahon Creek",
-   "reports": 6,
-   "permits": [
-    "MS0044059"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.219313,
-     -90.251674
-    ],
-    [
-     32.254379,
-     -90.307587
-    ],
-    [
-     32.216663,
-     -90.245427
-    ],
-    [
-     32.24724,
-     -90.308065
-    ],
-    [
-     32.262648,
-     -90.315483
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "CANEY",
@@ -383,7 +148,8 @@
      32.257262,
      -90.235562
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "EASTOVER",
@@ -403,43 +169,8 @@
      32.341693,
      -90.145275
     ]
-   ]
-  },
-  {
-   "name": "Hardy Creek",
-   "reports": 2,
-   "permits": [
-    "MS0024295"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.271211,
-     -90.2337
-    ],
-    [
-     32.271654,
-     -90.237494
-    ]
-   ]
-  },
-  {
-   "name": "Heron Bayou",
-   "reports": 2,
-   "permits": [
-    "MS0045446"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     30.39445,
-     -88.756734
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Porter's Bayou",
@@ -455,7 +186,11 @@
      33.601088,
      -90.768943
     ]
-   ]
+   ],
+   "records": [
+    "porter-bayou-ms"
+   ],
+   "reason": "a water record holds this water but not this spelling (porter-bayou-ms): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Roadside ditch",
@@ -476,7 +211,8 @@
      34.955372,
      -89.901477
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Unnamed creek",
@@ -501,39 +237,8 @@
      32.381081,
      -88.733684
     ]
-   ]
-  },
-  {
-   "name": "Big Cedar Creek",
-   "reports": 1,
-   "permits": [
-    "MS0044504"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     30.906583,
-     -88.594389
-    ]
-   ]
-  },
-  {
-   "name": "Big Cedar Creek Headwaters",
-   "reports": 1,
-   "permits": [
-    "MS0044504"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     30.910229,
-     -88.59526
-    ]
-   ]
+   "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
    "name": "Biloxi Bay",
@@ -549,7 +254,8 @@
      30.409384,
      -88.817173
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Chico Bayou",
@@ -565,7 +271,8 @@
      30.348034,
      -88.522945
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Drainage Ditch",
@@ -581,7 +288,8 @@
      34.938056,
      -89.8475
     ]
-   ]
+   ],
+   "reason": "not a water name"
   },
   {
    "name": "EUBANKS",
@@ -597,7 +305,8 @@
      32.242866,
      -90.301182
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Forth Bayou Creek",
@@ -613,39 +322,8 @@
      30.475983,
      -88.757545
     ]
-   ]
-  },
-  {
-   "name": "GALLAGHER CREEK",
-   "reports": 1,
-   "permits": [
-    "MS0020117"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     32.385314,
-     -88.719705
-    ]
-   ]
-  },
-  {
-   "name": "Halstead bayou",
-   "reports": 1,
-   "permits": [
-    "MS0045446"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     30.395891,
-     -88.800418
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Keegans Bayou",
@@ -661,7 +339,8 @@
      30.405672,
      -88.897187
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Lake Yazoo",
@@ -677,7 +356,8 @@
      30.364556,
      -88.561833
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Newell Branch Creek",
@@ -693,23 +373,8 @@
      32.40592,
      -88.67849
     ]
-   ]
-  },
-  {
-   "name": "Nolehoe Creek",
-   "reports": 1,
-   "permits": [
-    "MS0029513"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     34.960046,
-     -89.914973
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Ocean Springs Harbor - Biloxi Bay",
@@ -725,23 +390,8 @@
      30.409462,
      -88.81802
     ]
-   ]
-  },
-  {
-   "name": "Old Fort Bayou",
-   "reports": 1,
-   "permits": [
-    "MS0045446"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     30.421772,
-     -88.720002
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Rabbit Creek",
@@ -757,23 +407,8 @@
      32.545885,
      -88.605088
     ]
-   ]
-  },
-  {
-   "name": "Robinson Bayou",
-   "reports": 1,
-   "permits": [
-    "MS0021521"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     30.492713,
-     -88.558805
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "THREE MILE",
@@ -789,23 +424,8 @@
      32.280967,
      -90.2354
     ]
-   ]
-  },
-  {
-   "name": "Turner Creek/Bridge Creek",
-   "reports": 1,
-   "permits": [
-    "MS0061328"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     34.909016,
-     -88.515668
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07"
   },
   {
    "name": "Unnamed creek/roadside ditch",
@@ -821,6 +441,10 @@
      31.865222,
      -90.404925
     ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-07",
+   "parts": [
+    "roadside ditch"
    ]
   },
   {
@@ -837,17 +461,400 @@
      32.779681,
      -89.113569
     ]
+   ],
+   "reason": "not a water name"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Davis bayou",
+   "reports": 22,
+   "slugs": [
+    "davis-bayou-ms"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.407073,
+     -88.773729
+    ],
+    [
+     30.406989,
+     -88.750421
+    ],
+    [
+     30.403328,
+     -88.791635
+    ],
+    [
+     30.410522,
+     -88.789255
+    ],
+    [
+     30.410703,
+     -88.789951
+    ]
+   ]
+  },
+  {
+   "name": "Eubanks Creek",
+   "reports": 13,
+   "slugs": [
+    "eubanks-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.370587,
+     -90.192763
+    ],
+    [
+     32.361361,
+     -90.164864
+    ],
+    [
+     32.33603,
+     -90.169037
+    ],
+    [
+     32.351361,
+     -90.154071
+    ],
+    [
+     32.355519,
+     -90.177598
+    ]
+   ]
+  },
+  {
+   "name": "OKATIBBEE CREEK",
+   "reports": 13,
+   "slugs": [
+    "okatibbee-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.355384,
+     -88.744533
+    ],
+    [
+     32.359596,
+     -88.740767
+    ],
+    [
+     32.355538,
+     -88.744534
+    ],
+    [
+     32.37015,
+     -88.74581
+    ],
+    [
+     32.355221,
+     -88.744533
+    ]
+   ]
+  },
+  {
+   "name": "Hanging Moss Creek",
+   "reports": 11,
+   "slugs": [
+    "hanging-moss-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.360313,
+     -90.153728
+    ],
+    [
+     32.371576,
+     -90.140981
+    ],
+    [
+     32.373463,
+     -90.142687
+    ],
+    [
+     32.358825,
+     -90.120578
+    ],
+    [
+     32.369897,
+     -90.115783
+    ]
+   ]
+  },
+  {
+   "name": "Lynch Creek",
+   "reports": 7,
+   "slugs": [
+    "lynch-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.308268,
+     -90.238333
+    ],
+    [
+     32.295203,
+     -90.240454
+    ],
+    [
+     32.306082,
+     -90.24031
+    ],
+    [
+     32.338549,
+     -90.268767
+    ],
+    [
+     32.328407,
+     -90.248744
+    ]
+   ]
+  },
+  {
+   "name": "Purple Creek",
+   "reports": 7,
+   "slugs": [
+    "purple-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.391323,
+     -90.103933
+    ],
+    [
+     32.369897,
+     -90.115783
+    ],
+    [
+     32.392629,
+     -90.101666
+    ],
+    [
+     32.398449,
+     -90.133792
+    ]
+   ]
+  },
+  {
+   "name": "Weeks bayou",
+   "reports": 7,
+   "slugs": [
+    "weeks-bayou-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     30.405731,
+     -88.81144
+    ],
+    [
+     30.397679,
+     -88.810686
+    ]
+   ]
+  },
+  {
+   "name": "Trahon Creek",
+   "reports": 6,
+   "slugs": [
+    "trahon-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.219313,
+     -90.251674
+    ],
+    [
+     32.254379,
+     -90.307587
+    ],
+    [
+     32.216663,
+     -90.245427
+    ],
+    [
+     32.24724,
+     -90.308065
+    ],
+    [
+     32.262648,
+     -90.315483
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -90.30759,
+     "lat": 32.25438,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.25438, -90.30759) (the nearest is 2.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Hardy Creek",
+   "reports": 2,
+   "slugs": [
+    "hardy-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.271211,
+     -90.2337
+    ],
+    [
+     32.271654,
+     -90.237494
+    ]
+   ]
+  },
+  {
+   "name": "Heron Bayou",
+   "reports": 2,
+   "slugs": [
+    "heron-bayou-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     30.39445,
+     -88.756734
+    ]
+   ]
+  },
+  {
+   "name": "Big Cedar Creek",
+   "reports": 1,
+   "slugs": [
+    "big-cedar-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     30.906583,
+     -88.594389
+    ]
+   ]
+  },
+  {
+   "name": "Big Cedar Creek Headwaters",
+   "reports": 1,
+   "slugs": [
+    "big-cedar-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     30.910229,
+     -88.59526
+    ]
+   ]
+  },
+  {
+   "name": "GALLAGHER CREEK",
+   "reports": 1,
+   "slugs": [
+    "gallagher-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.385314,
+     -88.719705
+    ]
+   ]
+  },
+  {
+   "name": "Halstead bayou",
+   "reports": 1,
+   "slugs": [
+    "halstead-bayou-ms"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.395891,
+     -88.800418
+    ]
+   ]
+  },
+  {
+   "name": "Nolehoe Creek",
+   "reports": 1,
+   "slugs": [
+    "nolehoe-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     34.960046,
+     -89.914973
+    ]
+   ]
+  },
+  {
+   "name": "Old Fort Bayou",
+   "reports": 1,
+   "slugs": [
+    "old-fort-bayou-ms"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.421772,
+     -88.720002
+    ]
+   ]
+  },
+  {
+   "name": "Robinson Bayou",
+   "reports": 1,
+   "slugs": [
+    "robinson-bayou-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     30.492713,
+     -88.558805
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -88.55881,
+     "lat": 30.49271,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.49271, -88.55881) (the nearest is 425.8 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Turner Creek/Bridge Creek",
+   "reports": 1,
+   "slugs": [
+    "turner-creek-ms"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     34.909016,
+     -88.515668
+    ]
    ]
   },
   {
    "name": "unnamed creek/tributary of Bogue Chitto river",
    "reports": 1,
-   "permits": [
-    "MS0021555"
+   "slugs": [
+    "bogue-chitto-river-ms"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
+   "how": "a water record already holds the name",
    "points": [
     [
      31.272861,
