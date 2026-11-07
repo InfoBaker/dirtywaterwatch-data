@@ -497,6 +497,13 @@ def scrub_discharger(rec: dict) -> dict:
     return rec
 
 
+# fields a record carries only when its source gives them (absent, not null, on every other record):
+#   stretch  an advisory that names a stretch of a river by its two ends, each end with a public point:
+#            {"water": name, "start": {name, lat, lon, basis, source, url}, "end": {...}}. build/reaches.py traces the
+#            stretch from start to end (reach kind "advisory_stretch") and build/status.py colours only that stretch.
+OPTIONAL_EVENT_FIELDS = {"stretch"}
+
+
 def event(**f) -> dict:
     """An event record with every field present (docs/plan.md §3); validates the enumerations."""
     rec = {
@@ -513,7 +520,7 @@ def event(**f) -> dict:
         "source_url": None, "raw": {}, "parse_error": None,
         "duplicate_of": None,   # event_id of the record this one duplicates (another source's copy); status skips it
     }
-    unknown = set(f) - set(rec)
+    unknown = set(f) - set(rec) - OPTIONAL_EVENT_FIELDS
     if unknown:
         raise ValueError(f"unknown event fields: {sorted(unknown)}")
     rec.update(f)

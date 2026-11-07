@@ -43,6 +43,11 @@ Files:
                      properties.states (the outfall's state first); a reach crossing a state line is in both files.
                      reaches/index.json lists them {state, file, features, paths, segments, stops, bytes, built}.
                      The national reaches.geojson and reach-paths.geojson stay until the site reads these.
+                     An authority's advisory for a named stretch of a river (build/reaches.py "advisory_stretch")
+                     is in the same files with properties.reach_kind "advisory_stretch", its category (beach), no
+                     arrival hours, the advisory's authority and link, both ends with their basis and citation
+                     (properties.stretch) and its own label and stop wording (ADVISORY_LABEL, ADVISORY_STOP_TEXT);
+                     its path only while the status build lists it. Sewage features are unchanged.
   launches.geojson   launches on tracked waters with access public, public_restricted, private,
                      commercial or club (openboatlaunch; unknown skipped), plus the editorial rows
                      in data/launches-extra.json (launches no source carries yet; each cites where
@@ -218,6 +223,89 @@ SHORE_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Wind-driven cur
                "bacteria. The shore is not necessarily unsafe here, and the rest of the lake is not necessarily safe.")
 
 
+# an authority's advisory for a named stretch of a river (build/reaches.py ADVISORY_KIND): its own kind
+# (properties.reach_kind "advisory_stretch"), the advisory's category (beach), no travel time, and its own words
+ADVISORY_KIND = "advisory_stretch"
+ADVISORY_LINE_TEXT = "Stretch named in an authority's advisory, drawn along the mapped river channel."
+ADVISORY_LABEL = ("{authority}'s {noun} covers the {water} from the {start} to the {end}. This line follows that "
+                  "stretch along the mapped river channel (U.S. Geological Survey NHDPlus), from the point of the "
+                  "{start} to the point of the {end}; the advisory's own words set its extent.{short} "
+                  "Upstream end: {start_source}. Downstream end: {end_source}.")
+ADVISORY_SHORT = " The line stops short of the {end}: {why}."
+ADVISORY_STOP_TEXT = {
+    "stretch_end": "The advisory's stretch ends here, at the {end}, as {authority} names it. It marks the end of the "
+                   "advisory's stretch, not the end of any contamination.",
+    "cap_km": "The line stops here, {km:g} km below the {start}: this site draws no stretch longer than {cap:g} km. The "
+              "advisory names a stretch that runs on to the {end}.",
+    "tidal": "The line stops here, where the mapped river becomes tidal. The advisory names a stretch that runs on to "
+             "the {end}.",
+    "estuary": "The line stops here, where the mapped river meets an estuary or the sea. The advisory names a stretch "
+               "that runs on to the {end}.",
+    "lake_or_reservoir": "The line stops here, where the mapped river enters a lake or reservoir. The advisory names a "
+                         "stretch that runs on to the {end}.",
+}
+ADVISORY_STOP_OTHER = ("The line stops here, where the mapped river network gives out. The advisory names a stretch that "
+                       "runs on to the {end}.")
+
+
+def advisory_words(r: dict, cap: float, e: dict | None = None) -> dict:
+    """The label, stop label and public properties of an advisory stretch (ADVISORY_KIND)."""
+    adv, st = r.get("advisory") or {}, r.get("stretch") or {}
+    a, b = st.get("start") or {}, st.get("end") or {}
+    authority = re.sub(r"\s*\([^)]*\)\s*$", "", str(adv.get("authority") or "The authority")).strip()
+    noun = str((((e or {}).get("raw") or {}).get("advisory_noun")) or "advisory").lower()
+    water = st.get("water") or r.get("river") or "river"
+
+    def cite(x):
+        return "; ".join(v for v in (x.get("source"), x.get("url")) if v) or "not given"
+    end_info = (r.get("stretch_trace") or {}).get("end") or {}
+    cut = r.get("cut_reason")
+    names = {"authority": authority, "water": water, "start": a.get("name") or "upstream end",
+             "end": b.get("name") or "downstream end", "cap": cap, "km": float(r.get("length_km") or 0)}
+    stop = ADVISORY_STOP_TEXT.get(cut, ADVISORY_STOP_OTHER).format(**names)
+    short = "" if cut == "stretch_end" else ADVISORY_SHORT.format(
+        end=names["end"], why={"cap_km": f"this site draws no stretch longer than {cap:g} km",
+                               "tidal": "the mapped river becomes tidal",
+                               "estuary": "the mapped river meets an estuary or the sea",
+                               "lake_or_reservoir": "the mapped river enters a lake or reservoir"}.get(
+                                   cut, "the mapped river network gives out"))
+    label = ADVISORY_LABEL.format(**names, noun=noun, short=short, start_source=cite(a), end_source=cite(b))
+    props = {"reach_kind": ADVISORY_KIND, "event_id": adv.get("event_id"), "authority": authority,
+             "source_url": adv.get("source_url"),
+             "stretch": {"water": water,
+                         "start": {k: a.get(k) for k in ("name", "lat", "lon", "basis", "source", "url")},
+                         "end": {k: b.get(k) for k in ("name", "lat", "lon", "basis", "source", "url")},
+                         "end_reached": bool(end_info.get("reached")), "end_km": end_info.get("km"),
+                         **({"end_beyond_cap": True} if end_info.get("beyond_cap") else {})},
+             "rule_applied": r.get("rule")}
+    return {"label": label, "stop_label": stop, "props": props}
+
+
+def advisory_event_features(a: dict, r: dict, e: dict, waters_by_reach: dict, cap: float) -> list:
+    """An active advisory's features on its named stretch: one segment per flowline (no travel time) and a stop
+    marker at the end, in the advisory's category."""
+    w = advisory_words(r, cap, e)
+    common_props = {"category": a.get("category") or "beach", "event_id": a["event_id"], "reach": a["reach"],
+                    "status": a["status"], **w["props"],
+                    "waters": waters_by_reach.get(a["reach"]) or [r.get("water_slug")]}
+    out = []
+    for sg in r["segments"]:
+        out.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": sg["coords"]},
+                    "properties": {**common_props, "feature": "segment", "rule": a["rule"], "short": a["short"],
+                                   "outfall": None, "permit": None, "river": r.get("river"), "comid": sg.get("comid"),
+                                   "km_from_outfall": sg["km_end"], "km_start": sg["km_start"],
+                                   "arrival_hours_typical": None, "arrival_hours_fast": None,
+                                   "arrival_hours_leading_edge": None, "reached_fast": None, "reached_typical": None,
+                                   "hours_since_start": a.get("hours_since_start"), "gauge": None, "flow_cfs": None,
+                                   "flow_time": None, "flow_basis": None, "cut_reason": r.get("cut_reason"),
+                                   "line_text": ADVISORY_LINE_TEXT, "label": w["label"],
+                                   "fixture": bool(e.get("fixture"))}})
+    out.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": r["segments"][-1]["coords"][-1]},
+                "properties": {**common_props, "feature": "stop", "cut_reason": r.get("cut_reason"),
+                               "km_from_outfall": r.get("length_km"), "label": w["stop_label"]}})
+    return out
+
+
 def reach_waters(st: dict) -> dict[str, list[str]]:
     """reach key -> the water slugs whose status that reach feeds (status.json waters[slug].reaches, inverted),
     the outfall's own water first, then downstream waters in slug order."""
@@ -244,6 +332,9 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
         e = by_event.get(a["event_id"]) or {}
         if r.get("model") == SHORELINE:
             feats.extend(shore_event_features(a, r, e, waters_by_reach))
+            continue
+        if r.get("kind") == ADVISORY_KIND:
+            feats.extend(advisory_event_features(a, r, e, waters_by_reach, cap))
             continue
         start = status_mod.parse_time(e.get("started_at"))
         start_txt = start.astimezone(status_mod.LOCAL).strftime("%b %-d %H:%M") if start else "an unknown time"
@@ -287,6 +378,11 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
     for key, r in sorted(cached.items()):
         if not r.get("segments"):
             continue
+        if r.get("kind") == ADVISORY_KIND:
+            if key in status_by_reach:          # an advisory's stretch: while the status build lists it
+                paths.append(advisory_path(key, r, status_by_reach[key], waters_by_reach, cap,
+                                           by_event.get((r.get("advisory") or {}).get("event_id"))))
+            continue
         paths.append({"type": "Feature", "id": key,
                       "geometry": {"type": "MultiLineString", "coordinates": [sg["coords"] for sg in r["segments"]]},
                       "properties": {"category": "sewage", "reach": key, "permit": r.get("permit"), "outfall": r.get("outfall"),
@@ -304,6 +400,21 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                                      "stop_label": STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap),
                                      "line_text": LINE_TEXT, **shore_path_props(r)}})
     return feats, paths
+
+
+def advisory_path(key: str, r: dict, sr: dict, waters_by_reach: dict, cap: float, e: dict | None) -> dict:
+    """The path feature of an advisory's named stretch (ADVISORY_KIND): its status now, kind, category and words."""
+    w = advisory_words(r, cap, e)
+    return {"type": "Feature", "id": key,
+            "geometry": {"type": "MultiLineString", "coordinates": [sg["coords"] for sg in r["segments"]]},
+            "properties": {"category": sr.get("category") or "beach", "reach": key, "permit": None, "outfall": None,
+                           "water_slug": r.get("water_slug"), "river": r.get("river"),
+                           "waters": waters_by_reach.get(key) or [r.get("water_slug")],
+                           "length_km": r.get("length_km"), "cut_reason": r.get("cut_reason"),
+                           "status": sr.get("status", "grey"), "rain_likely": False,
+                           "segments_km": [[sg["km_start"], sg["km_end"]] for sg in r["segments"]],
+                           "stop_label": w["stop_label"], "line_text": ADVISORY_LINE_TEXT, "label": w["label"],
+                           **w["props"]}}
 
 
 SHORELINE = "shoreline"
@@ -1455,7 +1566,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                "red_rule": w.get("red_rule"), "yellow_rule": w.get("yellow_rule"), "rule_applied": w.get("rule_applied"),
                "reaches": [{"key": k, **{f: (st.get("reaches") or {}).get(k, {}).get(f)
                                          for f in ("status", "river", "permit", "outfall", "length_km", "cut_reason", "active",
-                                                   "rain_likely", "rain_trigger_basis")}}
+                                                   "rain_likely", "rain_trigger_basis")},
+                            # an authority's advisory for a named stretch (ADVISORY_KIND): its kind and category
+                            **({"reach_kind": ADVISORY_KIND, "category": (st.get("reaches") or {})[k].get("category")}
+                               if (st.get("reaches") or {}).get(k, {}).get("kind") == ADVISORY_KIND else {})}
                            for k in w.get("reaches") or []],
                # radar rainfall over the permittees discharging here, their thresholds, the forecast
                # (build/rain_likely.py); null when no CSO permittee discharges to this water

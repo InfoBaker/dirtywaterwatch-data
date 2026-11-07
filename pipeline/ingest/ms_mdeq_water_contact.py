@@ -42,11 +42,14 @@ Record rules
     raw.stretch gives the ends the release names ("from the culvert at ... to its confluence with the Pearl River"),
     the release's own point at the upstream end. Placement is by the water's name (waterbody_text), so a water whose
     record does not exist yet (Trahon Creek before the report-names pass) is tied when the record appears; the Pearl
-    River's standing record also carries its slug (pearl-river-ms, the one Mississippi record of that name). A
-    modeled reach from the upstream end is not built yet: the reach builder traces discharges to a cap, not an
-    advisory's stretch to a named end. The downstream end has a public point (the Byram Bridge's National Register
-    nomination, NRHP 79003427: UTM 15 759900 E 3563150 N, NAD 1927), kept in raw.stretch.to for that trace. These
-    fields are refreshed on carried records.
+    River's standing record also carries its slug (pearl-river-ms, the one Mississippi record of that name). When both
+    ends have a public point the record carries `stretch` ({water, start, end}, each end with its point, basis and
+    citation; docs/plan.md §3): build/reaches.py traces it from the upstream end down NHDPlus to the flowline point
+    nearest the downstream end (reach kind "advisory_stretch") and build/status.py colours that stretch, not the
+    whole river. The Pearl River's ends: the mouth of Hanging Moss Creek (GNIS 670883) and the Byram Bridge's National
+    Register nomination (NRHP 79003427: UTM 15 759900 E 3563150 N, NAD 1927). A release whose downstream end has no
+    point ("its confluence with the Pearl River") has no `stretch` and colours its whole water. These fields are
+    refreshed on carried records.
 
 Privacy: the feed's dc:creator (an MDEQ staff name) is never read; only titles, links, dates and the release text are.
 Run from pipeline/:  python -m ingest.ms_mdeq_water_contact [--file feed.xml [--pages DIR]]
@@ -90,8 +93,14 @@ STANDING = [{
                "fishing in these waters."),
     "point": (32.351817, -90.112036),
     "water_slugs": ["pearl-river-ms"],     # data/waters-ms.json: the one Mississippi record named Pearl River
+    # the bases of the two points for the traced stretch (the record's `stretch`, docs/plan.md §3)
+    "basis": {"from": "the mouth point of Hanging Moss Creek in the USGS Geographic Names Information System "
+                      "(feature 670883, Streams (Mouth) layer)",
+              "to": "the UTM reference of the bridge's National Register nomination (zone 15, 759900 E, 3563150 N, "
+                    "NAD 1927), read as latitude and longitude"},
     "stretch": {"from": {"name": "mouth of Hanging Moss Creek", "lat": 32.351817, "lon": -90.112036,
-                         "source": "USGS GNIS 670883, Streams (Mouth)"},
+                         "source": "USGS GNIS 670883, Streams (Mouth)",
+                         "url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/670883"},
                 # the bridge's National Register nomination (Byram Bridge, NRHP 79003427; MDAH Historic Sites Survey,
                 # 1978) gives UTM zone 15, 759900 E, 3563150 N (NAD 1927), read here as latitude and longitude; the
                 # nomination's NPS copy: https://npgallery.nps.gov/NRHP/GetAsset/NRHP/79003427_text
@@ -171,6 +180,22 @@ def stretch_of(paras: list[str] | None) -> dict | None:
     return None
 
 
+def traced_stretch(raw_stretch: dict | None, water: str | None, basis: dict | None = None) -> dict | None:
+    """The record's `stretch` (common.OPTIONAL_EVENT_FIELDS; docs/plan.md §3) when both ends the release names have a
+    public point: {water, start, end}, each end {name, lat, lon, basis, source, url}; else None (an end without a
+    point, such as "its confluence with the Pearl River", leaves the advisory on its whole water)."""
+    ends = {}
+    for k, side in (("from", "start"), ("to", "end")):
+        e = (raw_stretch or {}).get(k) or {}
+        if not isinstance(e.get("lat"), (int, float)) or not isinstance(e.get("lon"), (int, float)):
+            return None
+        ends[side] = {"name": e.get("name"), "lat": e["lat"], "lon": e["lon"],
+                      "basis": (basis or {}).get(k) or ("the release's own coordinates" if e.get("source") == "the release"
+                                                        else None),
+                      "source": e.get("source"), "url": e.get("url")}
+    return {"water": water, **ends}
+
+
 def water_fields(r: dict, s: dict | None = None) -> dict:
     """Mark a record as colouring the water it names (refreshed on carried records too)."""
     r["raw"]["advisory_extent"], r["raw"]["advisory_noun"] = EXTENT, NOUN
@@ -182,6 +207,12 @@ def water_fields(r: dict, s: dict | None = None) -> dict:
         sp = stretch_of(r["raw"].get("release_text"))
         if sp:
             r["raw"]["stretch"] = sp
+    waters = r["raw"].get("waters") or []
+    st = traced_stretch(r["raw"].get("stretch"), waters[0] if len(waters) == 1 else None, (s or {}).get("basis"))
+    if st:
+        r["stretch"] = st
+    else:
+        r.pop("stretch", None)
     return r
 
 
