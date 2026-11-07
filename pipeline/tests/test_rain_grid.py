@@ -342,8 +342,9 @@ def world(tmp_path, monkeypatch):
     return {"outfalls": outs, "n_ne": n_ne, "tmp": tmp_path}
 
 
-def steady(world):
-    """An hour like any other: every point's NWS cell known, a third of the cells due, the history complete."""
+def steady(world, checked=True):
+    """An hour like any other: every point's NWS cell known, a third of the cells due, the history complete (written
+    after the unit check unless checked is False)."""
     pts = RF.group_points(world["outfalls"])
     grids = {k: {"grid": f"BOX/{round(-p['lon'] * 40)},{round(p['lat'] * 40)}"} for k, p in pts.items()}
     cells = sorted({g["grid"] for g in grids.values()})
@@ -354,7 +355,8 @@ def steady(world):
     start = RF.hour_floor(NOW) - timedelta(hours=RF.HISTORY_DAYS * 24 - 1)
     perms = {o["permit"] for o in world["outfalls"]}
     (world["tmp"] / "rainfall-history.json").write_text(json.dumps(
-        {"start": RF.iso(start), "permits": {p: [0.0] * (RF.HISTORY_DAYS * 24) for p in perms}}))
+        {"start": RF.iso(start), "permits": {p: [0.0] * (RF.HISTORY_DAYS * 24) for p in perms},
+         **({"units_checked": {"from": RF.iso(start), "rule": "x", "repair": RF.REPAIR_VERSION}} if checked else {})}))
     ne_cells = {grids[k]["grid"] for k, p in pts.items() if any(s == "MA" for s in p["states"])}
     # before the grid: one identify per New England point, and a third of its forecast cells, each hour
     return sum(1 for p in pts.values() if "MA" in p["states"]) + math.ceil(len(ne_cells) / 3)
@@ -543,6 +545,33 @@ def test_a_reading_from_before_the_unit_check_is_not_kept(world):
 
 # ---------------------------------------------------------------- the gauge check
 
+def test_the_gauge_window_takes_the_routine_report_not_a_special_or_empty_row():
+    """Review 2026-11-07 P2: KBOS on 2026-11-07 (routine report at :54, special reports, five-minute rows without
+    precipitation). A special report after the valid time holds the minutes since the routine report."""
+    vt = VALID
+    obs = [{"t": RF.iso(vt + timedelta(minutes=3)), "h1": 2.1, "h3": None, "h6": None},     # special, 9 minutes
+           {"t": RF.iso(vt - timedelta(minutes=1)), "h1": None, "h3": None, "h6": None},   # five-minute row
+           {"t": RF.iso(vt - timedelta(minutes=6)), "h1": 13.2, "h3": None, "h6": None},   # routine
+           {"t": RF.iso(vt - timedelta(minutes=10)), "h1": 12.4, "h3": None, "h6": None}]  # special before it
+    assert RF.gauge_window(obs, vt) == {"obs_time": RF.iso(vt - timedelta(minutes=6)), "hours": 1, "gauge_mm": 13.2}
+    assert RF.gauge_window(obs[:2], vt) is None                 # only the special after the hour: no verdict
+
+
+def test_the_gauge_check_asks_for_the_window_and_stops_at_the_first_failure(world, monkeypatch):
+    monkeypatch.setattr(RF, "GAUGE_CACHE", world["tmp"] / "g.json")
+    monkeypatch.setattr(RF, "GAUGES", {"KAAA": (42.0, -75.0), "KBBB": (42.1, -75.1), "KCCC": (42.2, -75.2)})
+    calls = []
+
+    class Down:
+        def get(self, url, **kw):
+            calls.append((url, kw.get("params"), kw.get("timeout")))
+            raise RF.requests.ConnectionError("down")
+    box = {"xmin": -76, "xmax": -74, "ymin": 41, "ymax": 43}
+    out = RF.gauge_check(Down(), box, RF.iso(VALID), NOW)
+    assert len(calls) == 1 and calls[0][1] == {"start": RF.iso(VALID - RF.GAUGE_EARLY), "end": RF.iso(VALID)}
+    assert calls[0][2] == RF.GAUGE_TIMEOUT_S and out["verdict"] is None and len(out["errors"]) == 3
+
+
 def test_gauge_window_and_verdict():
     obs = [{"t": RF.iso(VALID - timedelta(minutes=69)), "h1": 20.0, "h3": None, "h6": None},   # too early
            {"t": RF.iso(VALID - timedelta(minutes=9)), "h1": 1.5, "h3": 12.0, "h6": None}]
@@ -614,7 +643,7 @@ def test_the_history_is_rescaled_once_hour_by_hour(world, monkeypatch):
     n = 7 * 24
     a, b = [None] * n, [None] * n
     i = lambda t: int((t - start).total_seconds() // 3600)  # noqa: E731
-    a[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] = 0.5            # before any evidence: the stated inches, kept
+    a[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] = 0.5            # before any evidence: millimetres too (review P1-1)
     b[i(datetime(2026, 11, 3, 13, tzinfo=UTC))] = 5.9           # the Calais reading known to be millimetres
     a[i(datetime(2026, 11, 4, 1, tzinfo=UTC))] = 2.0            # after it: the unit last determined
     a[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] = 59.1           # the storm: over the bound
@@ -625,15 +654,15 @@ def test_the_history_is_rescaled_once_hour_by_hour(world, monkeypatch):
     assert RF.main() == 0
     got = json.loads((world["tmp"] / "rainfall-history.json").read_text())
     ga, gb = got["permits"]["RI0100072"], got["permits"]["ME0100013"]
-    assert ga[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] == 0.5
+    assert ga[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] == 0.02
     assert gb[i(datetime(2026, 11, 3, 13, tzinfo=UTC))] == 0.23
     assert ga[i(datetime(2026, 11, 4, 1, tzinfo=UTC))] == 0.08
     assert ga[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] == 2.33 and gb[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] == 0.5
     r = got["units_repair"]
-    assert r["hours_rescaled"] == 3 and r["values_rescaled"] == 4 and r["hours_kept_as_inches"] == 1
+    assert r["hours_rescaled"] == 4 and r["values_rescaled"] == 5 and r["hours_kept_as_inches"] == 0
     assert r["largest_before"] == 59.1 and r["largest_after"] == 2.33 and r["first_hour_over_bound"] == "2026-11-07T00:00:00Z"
-    assert r["ranges"][0][0] == "2026-11-03T13:00:00Z" and "2026-11-03T13:00:00Z" in r["evidence"]
-    assert got["units_checked"]["from"]
+    assert r["ranges"][0][0] == "2026-11-02T05:00:00Z" and "2026-11-03T13:00:00Z" in r["evidence"]
+    assert got["units_checked"]["from"] and got["units_checked"]["repair"] == RF.REPAIR_VERSION
     # a second run changes nothing; nor does the next reading, which keeps the record
     again, rep = RF.repair_history_units(got, now)
     assert rep["changed"] is False and again["permits"]["RI0100072"] == ga
@@ -641,15 +670,42 @@ def test_the_history_is_rescaled_once_hour_by_hour(world, monkeypatch):
     assert kept["units_checked"] == got["units_checked"] and kept["units_repair"] == r
 
 
-def test_an_hour_over_the_bound_before_any_evidence_starts_the_millimetres(world):
+def test_every_hour_stored_before_the_check_is_millimetres(world):
     start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
     hist = {"start": RF.iso(start), "permits": {"P": [0.4, 31.0, 3.0, None, 2.5]}}
     got, rep = RF.repair_history_units(hist, start + 5 * H, known={})
-    assert got["permits"]["P"] == [0.4, 1.22, 0.12, None, 0.1] and rep["hours_kept_as_inches"] == 1
+    assert got["permits"]["P"] == [0.02, 1.22, 0.12, None, 0.1] and rep["hours_kept_as_inches"] == 0
+    assert rep["first_hour_over_bound"] == RF.iso(start + H)
+
+
+def test_a_history_the_first_repair_checked_gets_its_kept_hours_rescaled_once(world):
+    """Review 2026-11-07 P1-1: the first repair (version 1) kept the hours before its first millimetre hour."""
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    now = datetime(2026, 11, 7, 3, 10, tzinfo=UTC)
+    n = 7 * 24
+    a = [None] * n
+    a[29] = 5.9                                     # 2026-11-02T05Z, kept as inches by version 1: millimetres
+    a[61] = 0.23                                    # 2026-11-03T13Z, the first range version 1 rescaled
+    a[n - 40] = 0.4                                 # after the check (inches already)
+    a[n - 49] = 0.3                                 # an earlier window a reading after the check filled (inches)
+    hist = {"start": RF.iso(start), "permits": {"P": a},
+            "units_checked": {"from": "2026-11-07T03:00:00Z", "rule": "x"},
+            "units_repair": {"hours_kept_as_inches": 1, "ranges": [["2026-11-03T13:00:00Z", "2026-11-07T02:00:00Z"]]}}
+    got, rep = RF.repair_history_units(hist, now)
+    p = got["permits"]["P"]
+    assert rep["changed"] and rep["values_rescaled"] == 1 and p[29] == 0.23
+    assert p[61] == 0.23 and p[n - 40] == 0.4 and p[n - 49] == 0.3
+    assert got["units_checked"]["repair"] == RF.REPAIR_VERSION and got["units_repair"]["second_pass"] == rep
+    again, rep2 = RF.repair_history_units(got, now)
+    assert rep2["changed"] is False and again["permits"]["P"] == p
+    # a history begun after the check (version 2 from its first reading) is never rescaled
+    fresh = RF.update_history(None, {"P": {"valid_time": RF.iso(now - H), "h24": 0.4}}, now)
+    same, rep3 = RF.repair_history_units(fresh, now)
+    assert rep3["changed"] is False and max(v for v in same["permits"]["P"] if v is not None) == 0.4
 
 
 def test_a_run_repairs_the_history_before_it_adds_its_reading(world):
-    steady(world)
+    steady(world, checked=False)
     path = world["tmp"] / "rainfall-history.json"
     hist = json.loads(path.read_text())
     for arr in hist["permits"].values():
