@@ -204,6 +204,14 @@ SOUND_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the sound is 
 BAY_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the bay is not coloured whole"
 SHORE_SUMMARY = "affected along a modeled shoreline stretch"
 _SHORE_REACHES: set[str] = set()       # the reach keys of this build's shoreline stretches (where())
+# An authority's advisory for a named stretch of a river (the record's `stretch`, docs/plan.md §3): build/reaches.py
+# traces the stretch (reach kind "advisory_stretch") and the advisory colours only that stretch, in its own category
+# (beach), with no travel time; the rivers it runs along take their state from it (placement "reach") and the water
+# page still lists the advisory. With no stretch traced (not yet, or its ends are off the mapped path) the advisory
+# colours its whole water, as before, and its reason says so (placement "stretch_unmodeled", stretch_fallback).
+ADVISORY_STRETCH = "advisory_stretch"
+_STRETCH_REACHES: set[str] = set()     # the reach keys of this build's advisory stretches (where())
+STRETCH_SUMMARY = "part of this water is under an authority's advisory for a named stretch"
 REACH_WATER_M = 500                                 # a reach segment lies on a river water within this
 
 # Advisory windows (owner decision 2026-11-02) live in data/rules.json: red hours by state (the
@@ -2582,10 +2590,37 @@ def names_its_water(ev: dict) -> bool:
 
 
 def stretch_text(ev: dict | None) -> str:
-    """' · from X to Y' for an advisory whose source names its ends (raw.stretch), else ''."""
-    s = ((ev or {}).get("raw") or {}).get("stretch") or {}
-    a, b = (s.get("from") or {}).get("name"), (s.get("to") or {}).get("name")
+    """' · from X to Y' for an advisory whose source names its ends (the record's `stretch`, else raw.stretch), else ''."""
+    g = (ev or {}).get("stretch") or {}
+    a, b = (g.get("start") or {}).get("name"), (g.get("end") or {}).get("name")
+    if not (a and b):
+        s = ((ev or {}).get("raw") or {}).get("stretch") or {}
+        a, b = (s.get("from") or {}).get("name"), (s.get("to") or {}).get("name")
     return f" · from the {a} to the {b}" if a and b else ""
+
+
+def has_stretch(ev: dict) -> bool:
+    """An advisory whose record names a stretch with a point at each end (build/reaches.py stretch_of)."""
+    from build.reaches import stretch_of
+    return ev.get("event_type") in POINT_ADVISORY_TYPES and stretch_of(ev) is not None
+
+
+def stretch_traces(reaches: dict) -> dict[str, dict]:
+    """event_id -> its cached advisory stretch record (traced or not)."""
+    out = {}
+    for r in (reaches or {}).values():
+        if r.get("kind") == ADVISORY_STRETCH:
+            for eid in r.get("event_ids") or []:
+                out[eid] = r
+    return out
+
+
+def stretch_fallback(r: dict | None) -> str:
+    """Why an advisory with a stretch colours its whole water: the stretch is not traced yet, or why it could not be."""
+    if not r:
+        return "the stretch the advisory names is not traced yet; the advisory is shown on its whole water"
+    why = r.get("error") or r.get("cut_reason") or "no stretch could be traced"
+    return f"the stretch the advisory names could not be traced ({why}); the advisory is shown on its whole water"
 
 
 def colours_whole_water(w: dict) -> bool:
@@ -2757,13 +2792,17 @@ PLACEMENT_TEXT = {"reach": " · on a modeled downstream reach", "named": " · na
                   "tidal": " · tidal or estuary: movement not modeled",
                   "unmodeled": " · downstream path not modeled",
                   "shoreline_unmodeled": " · lake shore: stretch not modeled",
-                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled"}
+                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled",
+                  "stretch_unmodeled": " · stretch not traced: shown on the whole water"}
 SHORE_PLACEMENT_TEXT = " · on a modeled shoreline stretch"
+STRETCH_PLACEMENT_TEXT = " · on the stretch the advisory names"
 
 
 def where(iv: dict) -> str:
     if iv.get("placement") == "reach" and iv.get("reach") in _SHORE_REACHES:
         return SHORE_PLACEMENT_TEXT
+    if iv.get("placement") == "reach" and iv.get("reach") in _STRETCH_REACHES:
+        return STRETCH_PLACEMENT_TEXT
     return PLACEMENT_TEXT.get(iv.get("placement") or "", "")
 
 
@@ -2824,7 +2863,9 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return (f"{et} reported to the day only, with no end; caution to {int(h)} h from the start of that day{who}{at}"
                 if h else f"{et} reported to the day only, with no end{who}{at}")
     if rule in ("advisory_active", "rain_advisory"):
-        return f"{et} in effect{who}{stretch_text(ev)}"
+        tail = at if iv.get("placement") == "stretch_unmodeled" or (
+            iv.get("placement") == "reach" and iv.get("reach") in _STRETCH_REACHES) else ""
+        return f"{et} in effect{who}{stretch_text(ev)}{tail}"
     return f"{iv['label']}{who}"
 
 
@@ -2987,6 +3028,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     ocean_slugs = {x for x in shore_slugs if SH.is_ocean(waters[x], shore)}     # and the open ocean's (the same model)
     _SHORE_REACHES.clear()
     _SHORE_REACHES.update(k for k, r in (reaches or {}).items() if r.get("model") == SH.MODEL)
+    _STRETCH_REACHES.clear()
+    _STRETCH_REACHES.update(k for k, r in (reaches or {}).items() if r.get("kind") == ADVISORY_STRETCH)
+    stretch_of_event = stretch_traces(reaches)
     if flows is None:
         from build import reaches as reaches_mod
         flows = (read_json(reaches_mod.GAUGES_BY_RIVER) or {}, read_json(reaches_mod.GAUGES_LATEST) or {})
@@ -3097,6 +3141,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         coarse = ev.get("time_precision") in COARSE_PRECISION     # a monthly or annual total: never a reach
         found = event_reaches(ev, pl, reach_index) if is_discharge and not pl.get("no_receiving_water") \
             and not future and not coarse else []
+        # an authority's advisory for a named stretch: its traced stretch, else the whole water (stretch_unmodeled)
+        stretched = not is_discharge and not future and has_stretch(ev)
+        if stretched:
+            sr = stretch_of_event.get(eid)
+            if sr and sr.get("segments") and sr.get("cut_reason") != "no_trace":
+                found = [(sr, None)]
+            else:
+                placements[eid]["stretch_fallback"] = stretch_fallback(sr)
         # rivers, and the shoreline lakes, whose stretches carry a report as a river reach does
         river_slugs = [x for x in pl["water_slugs"] if waters[x].get("kind") in RIVER_KINDS or x in shore_slugs]
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
@@ -3128,9 +3180,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     else "unmodeled"
             elif is_discharge and waters[slug].get("kind") in ("bay", "sound"):
                 tag = "tidal"
+            elif stretched and waters[slug].get("kind") in RIVER_KINDS:
+                tag = "stretch_unmodeled"
             for iv in event_intervals(eff, waters[slug].get("state"), now, water={**waters[slug], "slug": slug},
                                       rules=rules):
                 iv["placement"] = tag
+                if tag == "stretch_unmodeled":
+                    iv["stretch_fallback"] = placements[eid].get("stretch_fallback")
                 intervals[slug].append(iv)
         if (is_discharge and live and not future and not coarse and river_slugs and not reach and ev.get("lat") is not None
                 and (parse_time(ev.get("started_at")) or now) > now - timedelta(days=30)):
@@ -3188,7 +3244,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
                                              for iv in sorted(ivs, key=lambda x: x["start"])],
                                "_ivs": ivs,
-                               "why": ("the advisory covers the water it names; the marker is its point"
+                               "why": ("the advisory covers the stretch it names, drawn from end to end; the marker "
+                                       "is its point" if point_on and stretched and not placements[eid].get(
+                                           "stretch_fallback") else
+                                       "the advisory covers the water it names; the marker is its point"
                                        if point_on and names_its_water(ev) else
                                        "water is not a lake, pond or reservoir under 50 km²" if point_on
                                        else "not placed on a water")})
@@ -3328,6 +3387,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             **({"end_not_used": iv["end_not_used"]} if iv.get("end_not_used") else {}),
                             # the water comes from the notice's text against its form's flag (TEXT_OVER_FLAG)
                             **({"text_over_flag": iv["text_over_flag"]} if iv.get("text_over_flag") else {}),
+                            # an advisory with a stretch shown on its whole water: why (no stretch traced)
+                            **({"stretch_fallback": iv["stretch_fallback"]} if iv.get("stretch_fallback") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
                             "ended_at": iv["ended_at"],
                             # rain_likely: the radar total, the threshold and its basis (build/rain_likely.py)
@@ -3377,7 +3438,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         stale = [{"source_id": s, "last_ok_at": health[s]["last_ok_at"], "reason": health[s]["stale_reason"]}
                  for s in sorted(covered[slug]) if s in health and health[s]["stale"]] + partial_stale.get(slug, [])
         kind = w.get("kind")
-        on_reach_now = any(r.get("placement") == "reach" and r["status"] != "grey" for r in reasons)
+        on_reach_now = any(r.get("placement") == "reach" and r["status"] != "grey"
+                           and r.get("reach") not in _STRETCH_REACHES for r in reasons)
+        on_stretch_now = any(r.get("placement") == "reach" and r["status"] != "grey"
+                             and r.get("reach") in _STRETCH_REACHES for r in reasons)
         out_waters[slug] = {
             "name": w.get("name"), "kind": kind, "state": w.get("state"),
             "status": color, "since": iso(since), "reason_short": reasons[0]["short"] if reasons else None,
@@ -3394,7 +3458,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                              "markers only: tidal or estuary, movement not modeled" if kind in ("bay", "sound")
                              else SHORE_STATUS_BASIS if slug in shore_slugs else "whole water"),
             "summary": (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")
-            if on_reach_now else None,
+            if on_reach_now else STRETCH_SUMMARY if on_stretch_now else None,
             **({"stretch_model": SH.MODEL} if slug in shore_slugs else {}),
             "reaches": sorted(reaches_on_water.get(slug, [])),
             "unresolved_events": sorted({r["event_id"] for r in reasons if r["rule"] in ("unresolved", "end_never_reported")}),
@@ -3430,9 +3494,16 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             "rain_trigger_basis": rain_mod.strongest_basis(iv.get("trigger_basis") for iv in act
                                                                             if iv["rule"] == "rain_likely"),
                             **({"model": SH.MODEL, "states": r.get("states") or [], "waters": r.get("waters") or []}
-                               if r.get("model") == SH.MODEL else {})}
+                               if r.get("model") == SH.MODEL else {}),
+                            # an advisory's named stretch: its own kind and category, the advisory and both ends
+                            **({"kind": ADVISORY_STRETCH, "category": category_of((r.get("advisory") or {}).get(
+                                "event_type") or "beach_advisory"), "advisory": r.get("advisory"),
+                                "stretch": r.get("stretch"), "rule_applied": r.get("rule"),
+                                "stretch_trace": r.get("stretch_trace"), "state": r.get("state")}
+                               if r.get("kind") == ADVISORY_STRETCH else {})}
         reach_strips[key] = paint(ivs, h0, h_end, n_hours)
-        reach_hist[key] = [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"], iv["event_id"], "sewage"]
+        hist_cat = out_reaches[key].get("category") or "sewage"
+        reach_hist[key] = [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"], iv["event_id"], hist_cat]
                            for iv in sorted(ivs, key=lambda x: x["start"]) if iv["end"] is None or iv["end"] > h0]
         by_event = defaultdict(list)
         for iv in act:
@@ -3441,8 +3512,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if by_event:
             from build import reaches as reaches_mod
             try:        # a travel estimate never stops the status build
-                if r.get("model") == SH.MODEL:      # a lake shore: no flow, no travel time
-                    raise _NoTravel()
+                if r.get("model") == SH.MODEL or r.get("kind") == ADVISORY_STRETCH:
+                    raise _NoTravel()   # a lake shore (no flow) or an advisory's named stretch: no travel time
                 flow = reaches_mod.flow_for(r, gauges, latest, now)
                 band = reaches_mod.travel(r["segments"], flow["q_ratio"])
             except _NoTravel:
@@ -3474,7 +3545,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     "short": short_reason(top, by_id.get(eid)), "rule_applied": top.get("rule_applied"),
                     "started_at": by_id[eid].get("started_at"), "hours_since_start": round(elapsed, 1),
                     **{k: v for k, v in flow.items() if k != "q_ratio"}, "q_ratio": round(flow["q_ratio"], 3),
-                    "segments": segs})
+                    "segments": segs,
+                    **({"kind": ADVISORY_STRETCH, "category": out_reaches[key]["category"]}
+                       if r.get("kind") == ADVISORY_STRETCH else {})})
 
     point_strips = {}
     for pt in points:

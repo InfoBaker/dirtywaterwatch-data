@@ -51,6 +51,17 @@ the NHDPlus walk. A rate-limited request is never cached as a failure. Only one 
 (data/build/reaches.lock); another run refreshes flows only.
 Per outfall state and the last runs' request counts: data/build/reach-outfalls.json.
 
+Advisory stretches (reach kind "advisory_stretch", ADVISORY_KIND): an authority's advisory for a named stretch of
+a river, an event record whose `stretch` gives both ends a public point (docs/plan.md §3; MDEQ's standing Pearl River
+advisory from the mouth of Hanging Moss Creek to the Byram Swinging Bridge), in effect or lifted within 90 days
+(stretch_points, from the events files; nothing state-specific). One trace each from the upstream end (NLDI
+comid/position, as an event point, navigation to STRETCH_SEARCH x the cap), cached CACHE_DAYS under
+adv-<sha1 of the event id>.json, traced again when an end moves; cut at the point of the path nearest the
+downstream end (cut_reason "stretch_end"), or earlier at tide, a lake or the cap (an end past the cap is cut at the
+cap and stretch_trace.end says so); an end more than STRETCH_END_MAX_M from the path draws nothing
+("stretch_end_off_path"). The record carries the advisory (event id, authority, link), both ends with their basis and
+citation, the length and the rule applied (STRETCH_RULE). A stretch whose advisory has left the history is retired.
+
 Flows: gauges per river (data/build/gauges-by-river.json, from the gauge table in
 research/hydrography/report.md 2.7, with each gauge's NHDPlus COMID, mean annual flow and drainage
 area) and the latest discharge (parameter 00060) per state from the USGS Water Data OGC API
@@ -104,6 +115,18 @@ DETERMINISTIC_ERRORS = ("outfall not indexed", "no NHDPlus catchment", "no flowl
 # reach record carries outfall_kind for that filter. --plants traces them (after every CSO outfall).
 TRACE_PLANTS = False
 RIVER_KINDS = {"river", "stream", "canal"}
+# An authority's advisory for a named stretch of a river (an event record's `stretch`, both ends with a public point;
+# docs/plan.md §3): traced from its start down the same network to the flowline point nearest its end, a reach of
+# its own kind (status.py colours only it; export/build.py labels it as the advisory's stretch, never a travel time).
+ADVISORY_KIND = "advisory_stretch"
+STRETCH_SEARCH = 2.0          # x cap_km: how far downstream the end is looked for (an end past the cap is said so)
+STRETCH_END_MAX_M = 1000.0    # the end's point must lie this close to the traced path, else no stretch is drawn
+STRETCH_LEAD_MAX_KM = 1.0     # a start at a tributary's mouth: at most this much of the tributary is left out
+STRETCH_HISTORY_DAYS = 90     # status.HISTORY_DAYS: a lifted advisory's stretch is kept while its red is in history
+STRETCH_RULE = ("the stretch the authority's advisory names, traced from its upstream end down the NHDPlus V2.1 main "
+                "stem (USGS NLDI, else EPA's NHDPlus service) to the point of the path nearest its downstream end; cut "
+                "earlier where the river becomes tidal or enters a lake or reservoir, or at this site's longest drawn "
+                "stretch, and the record says so")
 LAKE_FTYPES = {390, 436}          # NHD LakePond, Reservoir
 ESTUARY_FTYPES = {493}            # NHD Estuary
 COASTLINE_FCODE = 56600           # NHD Coastline flowlines: the sea, not a river
@@ -277,13 +300,18 @@ def trim_from_point(coords, lon, lat):
 
 # ---------------------------------------------------------------- the cut rules (pure)
 
-def build_segments(flowlines: list[dict], attrs: dict, cap: float) -> tuple[list[dict], str]:
-    """flowlines: [{"comid", "coords"}] in NLDI order; attrs: {comid: NHDPlus attributes}.
-    Returns (segments upstream first with km_start/km_end, cut_reason)."""
+def ordered(flowlines: list[dict], attrs: dict) -> list[dict]:
+    """The flowlines upstream first (by NHDPlus hydroseq when every one has attributes, else NLDI's order)."""
     def order(f):
         h = (attrs.get(f["comid"]) or {}).get("hydroseq")
         return -(h if isinstance(h, (int, float)) else 0)
-    lines = sorted(flowlines, key=order) if all(attrs.get(f["comid"]) for f in flowlines) else list(flowlines)
+    return sorted(flowlines, key=order) if all(attrs.get(f["comid"]) for f in flowlines) else list(flowlines)
+
+
+def build_segments(flowlines: list[dict], attrs: dict, cap: float) -> tuple[list[dict], str]:
+    """flowlines: [{"comid", "coords"}] in NLDI order; attrs: {comid: NHDPlus attributes}.
+    Returns (segments upstream first with km_start/km_end, cut_reason)."""
+    lines = ordered(flowlines, attrs)
     segs, km = [], 0.0
     for i, f in enumerate(lines):
         a = attrs.get(f["comid"]) or {}
@@ -315,6 +343,88 @@ def segment(comid, a, coords, k0, k1) -> dict:
     keep = {k: a.get(k) for k in ATTR_FIELDS if k != "comid"}
     return {"comid": comid, "km_start": round(k0, 3), "km_end": round(k1, 3), **keep,
             "coords": [[round(x, 6), round(y, 6)] for x, y in coords]}
+
+
+def _gnis(s) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(s or "").lower()).strip()
+
+
+def _metres(a, b) -> float:
+    return seg_km([list(a), list(b)]) * 1000
+
+
+def locate(lines: list[dict], lon: float, lat: float) -> tuple[float, float, list]:
+    """(km along the ordered flowlines to the point of the path nearest (lon, lat), that point's distance from it in
+    metres, the nearest point [lon, lat])."""
+    from shapely.geometry import LineString, Point
+    from shapely.ops import substring
+    best, km = (math.inf, 0.0, None), 0.0
+    for f in lines:
+        c = f["coords"]
+        length = seg_km(c)
+        if len(c) >= 2 and length > 0:
+            ln = LineString(c)
+            d = ln.project(Point(lon, lat))
+            near = ln.interpolate(d)
+            off = _metres((near.x, near.y), (lon, lat))
+            if off < best[0]:
+                part = substring(ln, 0, d)
+                along = seg_km([list(x) for x in part.coords]) if part.length > 0 else 0.0
+                best = (off, km + along, [near.x, near.y])
+        km += max(length, 0.0)
+    return best[1], best[0], best[2]
+
+
+def stretch_segments(flowlines: list[dict], attrs: dict, cap: float, water: str | None,
+                     end: tuple[float, float], start: tuple[float, float] | None = None) -> tuple[list[dict], str, dict]:
+    """An advisory stretch (ADVISORY_KIND): (segments upstream first, cut_reason, what the record says of its ends).
+    The start is the trace's (the first flowline trimmed at the start point). A start at a tributary's mouth
+    snaps onto the tributary's last flowline: up to STRETCH_LEAD_MAX_KM of flowlines before the first one NHDPlus
+    names as the advisory's water are left out. The end: the point of the path nearest the end's point (end: lon,
+    lat), which must lie within STRETCH_END_MAX_M of it (else no segments, cut_reason "stretch_end_off_path"). The
+    start (lon, lat), when given, must lie within STRETCH_END_MAX_M of where the path begins ("stretch_start_off_path").
+    The usual cuts apply first (tide, lake or reservoir, estuary, the cap); the stretch's own end is cut_reason
+    "stretch_end"; an end past the cap is cut at the cap ("cap_km") and the record says so (end.beyond_cap)."""
+    lines = ordered(flowlines, attrs)
+    info: dict = {}
+    want = _gnis(water)
+    names = [_gnis((attrs.get(f["comid"]) or {}).get("gnis_name")) for f in lines]
+    if want and names and names[0] != want and want in names:
+        i = names.index(want)
+        lead = sum(seg_km(f["coords"]) for f in lines[:i])
+        if lead <= STRETCH_LEAD_MAX_KM:
+            info["left_out"] = {"km": round(lead, 3), "comids": [f["comid"] for f in lines[:i]],
+                                "names": sorted({(attrs.get(f["comid"]) or {}).get("gnis_name") or "" for f in lines[:i]}),
+                                "why": f"the start lies at a tributary's mouth: the stretch begins on the {water}"}
+            lines = lines[i:]
+    if not lines:
+        return [], "no_trace", info
+    if start is not None:
+        head = lines[0]["coords"][0]
+        off0 = _metres(head, start)
+        info["start"] = {"offset_m": round(off0, 1), "path_point": [round(head[0], 6), round(head[1], 6)]}
+        if off0 > STRETCH_END_MAX_M:
+            info["start"]["why"] = (f"the start's point lies {off0 / 1000:.1f} km from where the traced path begins "
+                                    f"(more than {STRETCH_END_MAX_M / 1000:g} km): the stretch is not drawn")
+            return [], "stretch_start_off_path", info
+    km_end, off_m, near = locate(lines, *end)
+    info["end"] = {"km": round(km_end, 3), "offset_m": round(off_m, 1),
+                   "path_point": [round(near[0], 6), round(near[1], 6)] if near else None}
+    if off_m > STRETCH_END_MAX_M:
+        info["end"]["why"] = (f"the end's point lies {off_m / 1000:.1f} km from the traced path (more than "
+                              f"{STRETCH_END_MAX_M / 1000:g} km): the stretch is not drawn")
+        return [], "stretch_end_off_path", info
+    segs, why = build_segments(lines, attrs, min(cap, km_end))
+    if why == "cap_km" and km_end <= cap:
+        why = "stretch_end"
+    reached = why == "stretch_end" or (bool(segs) and abs(segs[-1]["km_end"] - km_end) < 0.001)
+    info["end"]["reached"] = reached
+    if km_end > cap:
+        info["end"]["beyond_cap"] = True
+    if not reached:
+        info["end"]["why"] = (f"the advisory's end lies {km_end:.1f} km down the path; the drawn stretch stops at "
+                              f"{(segs[-1]['km_end'] if segs else 0.0):.1f} km ({why})")
+    return segs, ("stretch_end" if reached else why), info
 
 
 # ---------------------------------------------------------------- Jobson 1996
@@ -817,7 +927,8 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
     (nldi_low()). A failure is a no_trace record with its error."""
     rec = {**o, "fetched_at": now_iso(), "cap_km": cap, "method": None, "npdes_id": None, "start_comid": None,
            "segments": [], "cut_reason": None, "length_km": 0.0, "error": None}
-    dist = int(math.ceil(cap + 5))
+    stop = o.get("stop") if o.get("kind") == ADVISORY_KIND else None
+    dist = int(math.ceil(cap * (STRETCH_SEARCH if stop else 1) + 5))
     oid = norm_oid(o.get("outfall"))
     npdes_id = f"{o['permit']}{oid.zfill(3) if oid.isdigit() else oid}" if o.get("permit") and oid else None
     try:
@@ -848,7 +959,15 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
         attrs = fetch_attrs(sorted({ln["comid"] for ln in lines}))
         if rec["start_comid"] is None:
             rec["start_comid"] = lines[0]["comid"]
-        segs, why = build_segments(lines, attrs, cap)
+        if stop:
+            segs, why, info = stretch_segments(lines, attrs, cap, o.get("name"), (stop["lon"], stop["lat"]),
+                                               (o["lon"], o["lat"]) if o.get("lat") is not None else None)
+            rec["stretch_trace"] = info
+            if not segs:
+                rec["error"] = ((info.get("start") or {}).get("why") or (info.get("end") or {}).get("why")
+                                or "no flowlines on the stretch")
+        else:
+            segs, why = build_segments(lines, attrs, cap)
         rec["segments"], rec["cut_reason"] = segs, why
         rec["length_km"] = round(segs[-1]["km_end"], 3) if segs else 0.0
         rec["river"] = (segs[0].get("gnis_name") if segs else (attrs.get(lines[0]["comid"]) or {}).get("gnis_name"))
@@ -871,6 +990,103 @@ def event_points() -> list[dict]:
         out.append({"key": key, "permit": n.get("permit"), "outfall": None, "water_slug": n.get("water_slug"),
                     "lat": n["lat"], "lon": n["lon"], "name": None, "sources": ["event-point"],
                     "event_ids": [n["event_id"]], **({"model": n["model"]} if n.get("model") else {})})
+    return out
+
+
+def stretch_of(ev: dict) -> dict | None:
+    """A record's `stretch` when both ends carry a numeric point (docs/plan.md §3), else None."""
+    st = ev.get("stretch") if isinstance(ev, dict) else None
+    if not isinstance(st, dict):
+        return None
+    for side in ("start", "end"):
+        e = st.get(side)
+        if not isinstance(e, dict) or not all(isinstance(e.get(k), (int, float)) and not isinstance(e.get(k), bool)
+                                              and math.isfinite(e[k]) for k in ("lat", "lon")):
+            return None
+    return st
+
+
+def stretch_key(event_id: str) -> str:
+    import hashlib
+    return "adv-" + hashlib.sha1(str(event_id).encode()).hexdigest()[:12]
+
+
+def stretch_candidate(ev: dict) -> dict | None:
+    """The trace candidate of an advisory record with a stretch (ADVISORY_KIND), keyed on the record only."""
+    st = stretch_of(ev)
+    if not st or not str(ev.get("status") or "").startswith("advisory"):
+        return None
+    a, b = st["start"], st["end"]
+    state = str((ev.get("raw") or {}).get("state") or "").upper() or None
+    slugs = [x for x in ev.get("water_slugs") or [] if x]
+    return {"key": stretch_key(ev["event_id"]), "kind": ADVISORY_KIND, "permit": None, "outfall": None,
+            "water_slug": slugs[0] if slugs else None, "lat": a["lat"], "lon": a["lon"],
+            "stop": {"lat": b["lat"], "lon": b["lon"]}, "name": st.get("water") or ev.get("waterbody_text"),
+            "sources": ["advisory-stretch"], "event_ids": [ev["event_id"]], "state": state, "rain_caution": False,
+            "advisory": {"event_id": ev["event_id"], "source_id": ev.get("source_id"),
+                         "source_record_id": ev.get("source_record_id"), "authority": ev.get("authority"),
+                         "source_url": ev.get("source_url"), "event_type": ev.get("event_type")},
+            "stretch": {"water": st.get("water"),
+                        **{side: {k: st[side].get(k) for k in ("name", "lat", "lon", "basis", "source", "url")}
+                           for side in ("start", "end")}},
+            "rule": STRETCH_RULE}
+
+
+def stretch_points(events_dir=None, now: datetime | None = None) -> list[dict]:
+    """Every advisory record with a stretch (stretch_candidate) that is in effect, or was lifted within
+    STRETCH_HISTORY_DAYS (its red stays in the 90-day history), from the events files. One trace each, cached like
+    the discharges' (CACHE_DAYS), traced again when either end moves. Only files that mention a stretch are parsed."""
+    from build.status import EVENTS_DIR
+    d = events_dir or EVENTS_DIR
+    since = (now or datetime.now(UTC)) - timedelta(days=STRETCH_HISTORY_DAYS)
+    out = {}
+    for p in sorted(d.glob("*.json")) if d.exists() else []:
+        try:
+            text = p.read_text()
+            if '"stretch"' not in text:
+                continue
+            doc = json.loads(text)
+        except Exception:
+            continue
+        for e in (doc.get("records") or doc.get("events") or []) if isinstance(doc, dict) else []:
+            if not isinstance(e, dict) or not e.get("event_id"):
+                continue
+            if e.get("status") != "advisory_active":
+                end = _t(e.get("ended_at"))
+                if end is None or end < since:
+                    continue
+            c = stretch_candidate(e)
+            if c:
+                out.setdefault(c["key"], c)
+    return [out[k] for k in sorted(out)]
+
+
+def stretch_moved(c: dict, d: dict) -> bool:
+    """Either end of an advisory stretch moved since its cached trace."""
+    if moved(c, d):
+        return True
+    a, b = c.get("stop") or {}, d.get("stop") or {}
+    if b.get("lat") is None:
+        return True
+    return abs(a["lat"] - b["lat"]) > MOVED_DEG or abs(a["lon"] - b["lon"]) > MOVED_DEG
+
+
+def retire_stretches(cands: list[dict], cached: dict[str, dict]) -> list[str]:
+    """Move the cached stretches whose advisory no longer has one (lifted more than STRETCH_HISTORY_DAYS ago, or its
+    record lost its stretch) to RETIRED_DIR. Returns the keys."""
+    live = {c["key"] for c in cands}
+    out = []
+    for k, d in sorted(cached.items()):
+        if d.get("kind") != ADVISORY_KIND or k in live:
+            continue
+        p = REACH_DIR / f"{k}.json"
+        if p.exists():
+            RETIRED_DIR.mkdir(parents=True, exist_ok=True)
+            d = {**d, "retired": {"at": now_iso(), "why": "the advisory no longer names a stretch in effect or lifted "
+                                                          f"within {STRETCH_HISTORY_DAYS} days"}}
+            write_json(RETIRED_DIR / p.name, d)
+            p.unlink()
+            out.append(k)
     return out
 
 
@@ -905,7 +1121,7 @@ def moved(c: dict, d: dict) -> bool:
 
 
 META_FIELDS = ("water_slug", "name", "sources", "state", "outfall_kind", "file", "reach_id", "reported_while_closed",
-               "rain_caution")
+               "rain_caution", "advisory", "stretch", "event_ids", "rule")
 
 
 def plan(cands: list[dict], cached: dict[str, dict], now: datetime) -> tuple[list[dict], list[tuple[dict, dict]]]:
@@ -919,6 +1135,12 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime) -> tuple[lis
         if c.get("sources") == ["event-point"]:
             if not d or not fresh_rec(d, now):
                 todo.append(((0, 0, ""), c))
+            continue
+        if c.get("kind") == ADVISORY_KIND:        # an advisory's stretch: as an event point, again when an end moves
+            if not d or not fresh_rec(d, now) or stretch_moved(c, d):
+                todo.append(((0, 0, ""), c))
+            elif any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
+                touch.append((c, d))
             continue
         if not d or moved(c, d) or d.get("model") == SH.MODEL:     # a shoreline stretch whose water is now a river
             todo.append(((1, kind, ""), c))
@@ -1005,7 +1227,7 @@ def write_index(cands: list[dict], skipped: dict[str, dict], cached: dict[str, d
     prev = read_json(REACH_INDEX) or {}
     rows = {}
     for c in cands:
-        if c.get("sources") == ["event-point"]:
+        if c.get("sources") in (["event-point"], ["advisory-stretch"]):
             continue
         d = cached.get(c["key"])
         row = {"permit": c["permit"], "outfall": c["outfall"], "state": c.get("state") or c["permit"][:2],
@@ -1675,7 +1897,7 @@ def run_traces(cands: list[dict], cap: float, budget: Budget, force: bool = Fals
             # a transient failure never replaces a good cached trace (or a tidal / lake answer); retried tomorrow
             prev["last_attempt"] = {"at": rec["fetched_at"], "error": rec["error"]}
             prev["fetched_at"] = (datetime.now(UTC) - timedelta(days=CACHE_DAYS - RETRY_FAIL_DAYS)).isoformat()
-            prev.update({f: c[f] for f in (*META_FIELDS, "lat", "lon") if f in c})    # retried by age, not as moved
+            prev.update({f: c[f] for f in (*META_FIELDS, "lat", "lon", "stop") if f in c})  # retried by age, not as moved
             rec = prev
         write_json(path, rec)
         cached[c["key"]] = rec
@@ -1746,6 +1968,13 @@ def main() -> int:
                         print(f"reaches: {len(retired)} cached traces of closed outfalls moved to {RETIRED_DIR.name}/: "
                               f"{', '.join(retired[:10])}{' ...' if len(retired) > 10 else ''}", flush=True)
                     pts = event_points()
+                    stretches = stretch_points()
+                    from build.status import EVENTS_DIR
+                    gone = retire_stretches(stretches, load_reaches()) if EVENTS_DIR.exists() else []
+                    if gone:
+                        print(f"reaches: {len(gone)} advisory stretches no longer in effect moved to {RETIRED_DIR.name}/",
+                              flush=True)
+                    pts += stretches
                     lake = [c for c in cands + pts if c.get("model") == SH.MODEL]
                     shore_run = run_shorelines(lake, waters, shore, log=log)
                     run, cached = run_traces([c for c in cands + pts if c.get("model") != SH.MODEL], cap,

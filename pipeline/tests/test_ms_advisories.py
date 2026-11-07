@@ -187,7 +187,11 @@ def test_the_pearl_river_and_trahon_creek_read_red_while_mdeqs_advisories_stand_
     assert pr["status"] == "red" and pr["status_by_category"]["beach"] == "red"
     assert pr["reasons"][0]["rule"] == "advisory_active"
     assert pr["reason_short"].startswith("Water contact advisory in effect · Mississippi Department of Environmental")
-    assert pr["reason_short"].endswith("from the mouth of Hanging Moss Creek to the Byram Swinging Bridge")
+    # no stretch traced here (reaches={}): the whole-water fallback, and the reason says so
+    assert pr["reason_short"].endswith("from the mouth of Hanging Moss Creek to the Byram Swinging Bridge"
+                                       " · stretch not traced: shown on the whole water")
+    assert pr["reasons"][0]["placement"] == "stretch_unmodeled"
+    assert "not traced yet" in pr["reasons"][0]["stretch_fallback"]
     # Trahon Creek is tied by its name once its record exists (the report-names pass builds it)
     assert st["placements"][t["event_id"]]["water_slugs"] == ["trahon-creek-ms"]
     assert st["waters"]["trahon-creek-ms"]["status"] == "red"
