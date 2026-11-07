@@ -222,8 +222,8 @@ def test_the_mississippi_register_rows():
     assert rows["ms-epa-echo-overflow-events"]["feed_source_id"] == "echo-sewer-overflow"
     assert rows["ms-mdeq-sso-report"]["basis_kind"] == "permit" and rows["ms-mdeq-sso-report"]["barrier"] == "no_web_page"
     news = rows["ms-mdeq-news-releases"]
-    assert news["monitored"] and news["method"] == "rss" and news["records"] is False   # a lift reads like an issue
-    assert rows["ms-mdeq-beach-monitoring-map"]["records"] is False
+    assert news["unmonitored_reason"] == "feed_ingested" and news["feed_source_id"] == "ms-mdeq-water-contact-advisories"
+    assert rows["ms-mdeq-beach-monitoring-map"]["feed_source_id"] == "ms-mdeq-beach-monitoring"
     assert rows["ms-mdeq-beach-signs"]["barrier"] == "signs_only"
     assert {r["operator_id"] for r in rows.values() if r["operator_id"]} == {"ms-jackson-jxn"}
     assert rows["ms-jackson-jxn-overflow-signs"]["barrier"] == "signs_only"

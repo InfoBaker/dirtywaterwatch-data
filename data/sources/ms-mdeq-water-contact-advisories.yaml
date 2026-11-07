@@ -4,12 +4,14 @@ url: "https://www.mdeq.ms.gov/category/news-release/feed/"
 homepage: "https://www.mdeq.ms.gov/category/news-release/feed/"
 kind: "rss"
 level: "state"
-# Notes (research/ms, status used, verified fetched, checked 2026-11-07): Watched every 3 hours by
-#   the notice-register monitor (row ms-mdeq-news-releases), no records: the feed's items carry the
-#   title only, and a release lifting an advisory reads like one issuing it, so a new release is
-#   listed for review. A reader that tells issue from lift and takes the water named would make
-#   these dated advisories. The advisories in effect before the first poll (the Pearl River below
-#   Jackson, Trahon Creek) are not records.
+# Notes (research/ms, status used, verified fetched, checked 2026-11-07): Read every refresh by
+#   pipeline/ingest/ms_mdeq_water_contact.py: a release titled 'Water Contact Advisory Issued for
+#   ...' opens an advisory (MDEQ's date, the release's own point and advice), a release titled '...
+#   Lifts Water Contact Advisor(y|ies) for ...' ends it; each clean read with no lift re-confirms
+#   it. The Pearl River advisory the 2026-09-02 release says 'remains in effect' is a record of its
+#   own, cited to that release. Beach releases are left to the beach layer. On 2026-11-07: 2
+#   advisories in effect (Trahon Creek, the Pearl River from Hanging Moss Creek to the Byram
+#   Swinging Bridge).
 # Access detail (research, quoted): MDEQ's news-release RSS feed (answered 200 on 2026-11-07). The
 #   2026-09-02 release issued a water contact advisory for an unnamed tributary of Trahon Creek and
 #   Trahon Creek to the Pearl River "due to an ongoing sewage bypass" and said "the longstanding
