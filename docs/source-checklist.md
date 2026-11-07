@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1326 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1334 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -36,7 +36,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | sd | 3 | 1 | 5 | 0 | 0 | 9 |
 | ms | 5 | 0 | 2 | 1 | 0 | 8 |
 | ne | 4 | 1 | 2 | 2 | 1 | 10 |
-| **all** | **468** | **228** | **376** | **189** | **65** | **1326** |
+| ak | 3 | 0 | 2 | 0 | 3 | 8 |
+| **all** | **471** | **228** | **378** | **189** | **68** | **1334** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1493,3 +1494,16 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ne-omaha-cso-program` | Omaha CSO Program website (omahacso.com) | rejected | fetched | prior_art | Fetched: capital-program site (projects, quarterly reports, LTCP); no overflow status, notification or sign information found. cityofomaha.org and publicworks.omaha.gov returned 403 to curl. |
 | `ne-title-126-release` | Title 126 Chapter 18 (proposed Chapter 1) release notification | rejected | search_only | law | Oil and hazardous substance releases (notice within 15 minutes; 2026 proposal allows up to 24 hours); does not address sewage. |
 | `ne-dwee-beachwatch-page` | Nebraska Beach Watch page | unreachable | search_only | advisories | 503 to WebFetch and connection reset to curl on 2026-11-03; described in DWEE release dwee.nebraska.gov/node/4996 (fetched). |
+
+## ak: Alaska (8)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ak-18-aac-72-940` | 18 AAC 72.940 Emergency notice (wastewater) | used | fetched | law | Regulator notice for wastewater emergencies (24 hours, written report in 7 days); no public-notice duty. |
+| `ak-cbj-cso-notices` | City and Borough of Juneau wastewater utility page: combined sewer overflow public notices | used | fetched | events | Juneau's permit-required CSO public notice channel; monitored for new notices. |
+| `ak-epa-sobe` | EPA eRule Sewer Overflow/Bypass Event reports (Alaska APDES permittees) | used | fetched | events | The only dated machine-readable overflow data for Alaska; read by the national eRule ingester (echo-sewer-overflow) with Alaska in its states. Juneau's CSOs are absent. |
+| `ak-ahab` | Alaska Harmful Algal Bloom Network (AHAB) and DEC shellfish PSP program | watch | fetched | advisories | Marine biotoxin focus (PSP); not sewage; monitored as a voluntary page. |
+| `ak-apdes-permits` | Wastewater discharge permits (Juneau-Douglas AK0023213, Mendenhall AK0022951) and DEC Water Permit Search | watch | fetched | permits | Juneau's CSO and overflow public-notice clauses read; the APDES standard conditions read in one permit; the other permits not read. |
+| `ak-awwu` | Anchorage Water and Wastewater Utility website | unreachable | fetched | events | The site answers 403 to scripted reads (2026-11-07); search found no overflow notice page; SOBE carries AWWU's events. |
+| `ak-dec-beach-program` | Alaska DEC Beach Program (BEACH Act monitoring) | unreachable | fetched | advisories | DEC's pages answer 403 behind a bot check (2026-11-07); the research URL had answered 404. |
+| `ak-dec-spill-database` | Alaska DEC Statewide Oil and Hazardous Substance Spills Database (PERP Spill Search) | unreachable | fetched | events | Bot wall; scope is oil and hazardous substances, so sewage may not be in it (unconfirmed). |
