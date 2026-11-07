@@ -680,11 +680,15 @@ def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh
         "edit": lambda n: [gh, "pr", "edit", str(n), "--title", ttl, "--body-file", str(body)],
         "create": [gh, "pr", "create", "--base", "main", "--head", branch, "--title", ttl,
                    "--body-file", str(body)],
+        # the same through GitHub's REST endpoint: `gh pr create` goes through GraphQL, which answered 502 five times on
+        # 2026-11-07 after the pull request had in fact been opened (the branch and the pull request both existed)
+        "create_rest": [gh, "api", "-X", "POST", "repos/{owner}/{repo}/pulls", "-f", "base=main", "-f", f"head={branch}",
+                        "-f", f"title={ttl}", "-F", f"body=@{body}"],
     }
 
 
 def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False, root: Path = ROOT,
-            gh: str = "gh", require_blocklist: bool = True) -> int:
+            gh: str = "gh", require_blocklist: bool = True, pause_s: float = 10.0) -> int:
     """Commit the changed registry files on batch/<st>-<date>, push, open or update the pull request. The privacy
     scan runs first, over the files and the body; any finding stops it before anything is committed."""
     st = valid_state(st, root)
@@ -717,8 +721,28 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
         r = subprocess.run(c["edit"](n), cwd=root)
         what = f"pull request #{n} updated"
     else:
-        r = subprocess.run(c["create"], cwd=root)
+        r = subprocess.run(c["create"], cwd=root, text=True, stderr=subprocess.PIPE)
+        if r.stderr:
+            print(r.stderr, end="", file=sys.stderr, flush=True)
         what = "pull request opened"
+    # a refusal is final (the repository's Actions permissions); a failed answer is not a missing pull request:
+    # GitHub's GraphQL endpoint answered 502 to `gh pr create` five times on 2026-11-07 with the pull request opened
+    # all the same. Look again (and update it), then try the REST endpoint, three rounds with a pause, before giving up.
+    if r.returncode != 0 and "not permitted" not in (getattr(r, "stderr", "") or ""):
+        for attempt in range(3):
+            time.sleep(pause_s * (attempt + 1))
+            found = subprocess.run(c["find"], cwd=root, text=True, stdout=subprocess.PIPE)
+            n = (found.stdout or "").strip()
+            if found.returncode == 0 and re.fullmatch(r"\d+", n):
+                r = subprocess.run(c["edit"](n), cwd=root)
+                what = f"pull request #{n} was open after all (GitHub answered the create with an error) and is updated"
+                if r.returncode == 0:
+                    break
+                continue
+            r = subprocess.run(c["create_rest"], cwd=root)
+            what = "pull request opened through the REST endpoint after the error"
+            if r.returncode == 0:
+                break
     if r.returncode != 0:
         print(f"::error::the branch {c['branch']} is pushed but the pull request was not opened or updated. If the "
               "message above says GitHub Actions may not create pull requests, allow it in the repository's Settings, "
