@@ -223461,5 +223461,2564 @@
   "source_areas": [
    "il"
   ]
+ },
+ {
+  "id": "ak-alakanuk",
+  "name": "City of Alakanuk",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573001",
+  "npdes_permits": [
+   "AKG573001"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Alakanuk"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573001 ALAKANUK LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-alakanuk"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-apsc-taps",
+  "name": "Alyeska Pipeline Service Company: Trans-Alaska Pipeline System (inventory record)",
+  "state": "AK",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "AKG320002",
+  "npdes_permits": [
+   "AKG320002"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits, 1 open CSO outfalls)",
+  "notification_channel": "None: not a sewer system (a pipeline general permit in EPA's CSO inventory).",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "North Pole"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: AKG320002 APSC - TRANS-ALASKA PIPELINE SYSTEM. A general permit for pipeline facilities that EPA's CSO inventory lists with one outfall; not a sewer system. No notice channel is claimed for it. Research row (research/ak/dischargers.json, checked 2026-11-03).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-apsc-taps"
+  ],
+  "source_areas": [
+   "ak"
+  ],
+  "short_name": "Alyeska Pipeline Service Company",
+  "legal_form": "business or industrial"
+ },
+ {
+  "id": "ak-awwu-anchorage",
+  "name": "Anchorage Water and Wastewater Utility (Municipality of Anchorage: Asplund, Eagle River and Girdwood plants and the collection system)",
+  "state": "AK",
+  "kind": "sso",
+  "npdes_permit": "AK0022551",
+  "npdes_permits": [
+   "AK0022551",
+   "AK0022543",
+   "AK0047856",
+   "AKG002440"
+  ],
+  "receiving_waters": [
+   "Cook Inlet",
+   "Fish Creek",
+   "Chester Creek",
+   "Ship Creek",
+   "Campbell Creek",
+   "KNIK ARM OF COOK INLET",
+   "Eagle River",
+   "Glacier Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 4 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. This operator files its reports through EPA's NeT-SewerOverflow, so they are published in EPA's sewer overflow tables (ECHO), a median one day after the start for Alaska's reports.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Anchorage",
+   "Eagle River",
+   "Girdwood"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0022551 ANCHORAGE, MUNICIPALITY OF - JOHN M. ASPLUND WPCF; AK0022543 EAGLE RIVER WW TREATMENT FACILITY; AK0047856 GIRDWOOD WW TREATMENT FACILITY; AKG002440 SPAR AVENUE SEWER SERVICE REPAIR. AKG002440 (a sewer service repair in Anchorage, EPA type municipal) is the utility's: it is Anchorage's only public sewer utility. Research row (research/ak/dischargers.json, checked 2026-11-03). EPA's sewer overflow tables: 43 current reports (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-awwu-anchorage"
+  ],
+  "source_areas": [
+   "ak"
+  ],
+  "short_name": "Anchorage Water and Wastewater Utility",
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-bering-strait-sd",
+  "name": "Bering Strait School District (school plants)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572056",
+  "npdes_permits": [
+   "AKG572056",
+   "AKG573024",
+   "AKG573034"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 4 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Diomede",
+   "Shishmaref",
+   "Teller"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572056 LITTLE DIOMEDE SCHOOL WWTF; AKG573024 TELLER SCHOOL WWTF; AKG573034 SHISHMAREF SCHOOL WW TREATMENT PLANT.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-bering-strait-sd"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Bering Strait School District",
+  "legal_form": "special district"
+ },
+ {
+  "id": "ak-bia-annette-bay",
+  "name": "U.S. Bureau of Indian Affairs (Annette Bay plant, Metlakatla)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG571012",
+  "npdes_permits": [
+   "AKG571012"
+  ],
+  "receiving_waters": [
+   "ANNETTE BAY ON NICHOLS PASSAGE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Metlakatla Indian Community"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG571012 INTERIOR, INDIAN AFFAIRS - ANNETTE BAY 1 WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-bia-annette-bay"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-bristol-bay-borough",
+  "name": "Bristol Bay Borough (Naknek and King Salmon lagoons)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573010",
+  "npdes_permits": [
+   "AKG573010",
+   "AKG573029"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "King Salmon",
+   "Naknek"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573010 NAKNEK LAGOON; AKG573029 KING SALMON LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-bristol-bay-borough"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Bristol Bay Borough",
+  "legal_form": "county"
+ },
+ {
+  "id": "ak-buckland",
+  "name": "City of Buckland",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573028",
+  "npdes_permits": [
+   "AKG573028"
+  ],
+  "receiving_waters": [
+   "Buckland River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Buckland"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573028 BUCKLAND LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-buckland"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-chuathbaluk",
+  "name": "City of Chuathbaluk",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573002",
+  "npdes_permits": [
+   "AKG573002"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 3 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Chuathbaluk"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573002 CHUATHBALUK WASTEWATER LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-chuathbaluk"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-cold-bay",
+  "name": "City of Cold Bay",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573003",
+  "npdes_permits": [
+   "AKG573003"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cold Bay"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573003 COLD BAY LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-cold-bay"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-cordova",
+  "name": "City of Cordova",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021547",
+  "npdes_permits": [
+   "AK0021547"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cordova"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021547 CORDOVA WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-cordova"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-deering",
+  "name": "City of Deering",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG571051",
+  "npdes_permits": [
+   "AKG571051"
+  ],
+  "receiving_waters": [
+   "Kotzebue Sound"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Deering"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG571051 DEERING WWT LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-deering"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-denali-np",
+  "name": "National Park Service, Denali National Park and Preserve (front country lagoon)",
+  "state": "AK",
+  "kind": "sso",
+  "npdes_permit": "AK0053775",
+  "npdes_permits": [
+   "AK0053775"
+  ],
+  "receiving_waters": [
+   "Nenana River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. This operator files its reports through EPA's NeT-SewerOverflow, so they are published in EPA's sewer overflow tables (ECHO), a median one day after the start for Alaska's reports.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Denali Park",
+   "Denali National Park"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0053775 DENALI NATIONAL PARK - FRONT COUNTRY WASTEWATER TREATMENT LAGOON. Research row (research/ak/dischargers.json, checked 2026-11-03). EPA's sewer overflow tables: 1 current reports (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-denali-np"
+  ],
+  "source_areas": [
+   "ak"
+  ],
+  "short_name": "Denali National Park and Preserve",
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-dillingham",
+  "name": "City of Dillingham",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573004",
+  "npdes_permits": [
+   "AKG573004"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Dillingham"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573004 DILLINGHAM LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-dillingham"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-dot-marine-highway",
+  "name": "Alaska Department of Transportation and Public Facilities, Alaska Marine Highway System (Sitka ferry terminal)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572043",
+  "npdes_permits": [
+   "AKG572043"
+  ],
+  "receiving_waters": [
+   "STARRIGAVIN BAY, SITKA SOUND"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sitka"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572043 ALASKA MARINE HIGHWAY SYSTEM - SITKA FERRY TERMINAL WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-dot-marine-highway"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Alaska Marine Highway System",
+  "legal_form": "state facility"
+ },
+ {
+  "id": "ak-doyon-utilities",
+  "name": "Doyon Utilities, LLC (Fort Greely)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573007",
+  "npdes_permits": [
+   "AKG573007"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Greely"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573007 FORT GREELY LAGOON. Privately owned: the company that runs the post's utilities.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-doyon-utilities"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Doyon Utilities",
+  "legal_form": "investor-owned utility"
+ },
+ {
+  "id": "ak-emmonak",
+  "name": "City of Emmonak",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573006",
+  "npdes_permits": [
+   "AKG573006"
+  ],
+  "receiving_waters": [
+   "Yukon River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Emmonak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573006 EMMONAK LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-emmonak"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-fairbanks-ghu",
+  "name": "Golden Heart Utilities, Inc. (Fairbanks; permit held with the City of Fairbanks)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0023451",
+  "npdes_permits": [
+   "AK0023451"
+  ],
+  "receiving_waters": [
+   "Chena River",
+   "Tanana River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fairbanks"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: AK0023451 CITY OF FAIRBANKS AND GOLDEN HEART UTILITIES INC WWTF. EPA types the permit mixed ownership and names the City of Fairbanks and Golden Heart Utilities, Inc.; the company is the private utility that runs Fairbanks's sewer service. Research row (research/ak/dischargers.json, checked 2026-11-03).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-fairbanks-ghu"
+  ],
+  "source_areas": [
+   "ak"
+  ],
+  "short_name": "Golden Heart Utilities",
+  "legal_form": "investor-owned utility"
+ },
+ {
+  "id": "ak-forest-park-ketchikan",
+  "name": "Forest Park plant (Ketchikan)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572019",
+  "npdes_permits": [
+   "AKG572019"
+  ],
+  "receiving_waters": [
+   "TONGASS NARROWS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ketchikan"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572019 FOREST PARK WWTF. EPA's record names the facility only (type NON-POTW); the permittee is not stated.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-forest-park-ketchikan"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ]
+ },
+ {
+  "id": "ak-galena",
+  "name": "City of Galena",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573037",
+  "npdes_permits": [
+   "AKG573037"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Galena"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573037 GALENA 2 LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-galena"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-haines",
+  "name": "Municipality of Haines",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021385",
+  "npdes_permits": [
+   "AK0021385"
+  ],
+  "receiving_waters": [
+   "PORTAGE COVE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Haines"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021385 HAINES, MUNICIPALITY OF WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-haines"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-homer",
+  "name": "City of Homer",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021245",
+  "npdes_permits": [
+   "AK0021245"
+  ],
+  "receiving_waters": [
+   "Kachemak Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Homer"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021245 HOMER WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-homer"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-hoonah",
+  "name": "City of Hoonah",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572022",
+  "npdes_permits": [
+   "AKG572022"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hoonah"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572022 HOONAH WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-hoonah"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-juneau-douglas",
+  "name": "City and Borough of Juneau (Juneau-Douglas, Mendenhall and Auke Bay plants)",
+  "state": "AK",
+  "kind": "cso",
+  "npdes_permit": "AK0023213",
+  "npdes_permits": [
+   "AK0023213",
+   "AK0022951",
+   "AKG572004"
+  ],
+  "receiving_waters": [
+   "Gastineau Channel",
+   "Auke Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 6 rows for these permits, 3 open CSO outfalls)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched. Permit AK0023213 (EPA-issued 2001, administratively continued) Part I.D.1.g: \"The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts\"; Part III.H.2.a: notification of the public of sewer overflows that may imminently and substantially endanger human health, under its overflow emergency response plan. The City and Borough's wastewater utility page lists its CSO public notices as PDFs (the last from November 2005; the page says no CSO has occurred since 2005): https://juneau.org/engineering-public-works/wastewater-utility.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Juneau",
+   "Douglas"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0023213 JUNEAU DOUGLAS WW TREATMENT FACILITY; AK0022951 MENDENHALL WWTP; AKG572004 AUKE BAY WWTF. Research row (research/ak/dischargers.json, checked 2026-11-03).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-juneau-douglas"
+  ],
+  "source_areas": [
+   "ak"
+  ],
+  "short_name": "City and Borough of Juneau",
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-kasigluk-traditional-council",
+  "name": "Kasigluk Traditional Council",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573039",
+  "npdes_permits": [
+   "AKG573039",
+   "AKG573041"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kasigluk"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573039 NEW KASIGLUK SEWAGE LAGOON_2; AKG573041 OLD KASIGLUK LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-kasigluk-traditional-council"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-kenai",
+  "name": "City of Kenai",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021377",
+  "npdes_permits": [
+   "AK0021377"
+  ],
+  "receiving_waters": [
+   "Cook Inlet"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kenai"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021377 KENAI WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-kenai"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-kenai-peninsula-borough-sd",
+  "name": "Kenai Peninsula Borough School District (McNeil Canyon school)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572027",
+  "npdes_permits": [
+   "AKG572027"
+  ],
+  "receiving_waters": [
+   "McNeil Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Homer"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572027 MCNEIL CANYON SCHOOL WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-kenai-peninsula-borough-sd"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Kenai Peninsula Borough School District",
+  "legal_form": "special district"
+ },
+ {
+  "id": "ak-ketchikan",
+  "name": "City of Ketchikan",
+  "state": "AK",
+  "kind": "sso",
+  "npdes_permit": "AK0021440",
+  "npdes_permits": [
+   "AK0021440"
+  ],
+  "receiving_waters": [
+   "Tongass Narrows",
+   "TONGASS NARROWS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. This operator files its reports through EPA's NeT-SewerOverflow, so they are published in EPA's sewer overflow tables (ECHO), a median one day after the start for Alaska's reports.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Ketchikan"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021440 KETCHIKAN, CITY OF WWTP. Research row (research/ak/dischargers.json, checked 2026-11-03). EPA's sewer overflow tables: 2 current reports (2026-11-04 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-ketchikan"
+  ],
+  "source_areas": [
+   "ak"
+  ],
+  "short_name": "City of Ketchikan",
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-ketchikan-gateway-borough",
+  "name": "Ketchikan Gateway Borough (Mountain Point and Waterfall Creek plants)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG571038",
+  "npdes_permits": [
+   "AKG571038",
+   "AKG572028"
+  ],
+  "receiving_waters": [
+   "Clover Passage",
+   "Revillagigedo Channel"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 3 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ketchikan"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG571038 WATERFALL CREEK SUBDIVISION SEWER OUTFALLS; AKG572028 MOUNTAIN POINT WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-ketchikan-gateway-borough"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Ketchikan Gateway Borough",
+  "legal_form": "county"
+ },
+ {
+  "id": "ak-kipnuk",
+  "name": "Native Village of Kipnuk",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573030",
+  "npdes_permits": [
+   "AKG573030"
+  ],
+  "receiving_waters": [
+   "unnamed pond"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kipnuk"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573030 KIPNUK COMMUNITY SEWAGE LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-kipnuk"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-kodiak",
+  "name": "City of Kodiak",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021555",
+  "npdes_permits": [
+   "AK0021555"
+  ],
+  "receiving_waters": [
+   "Woody Island Channel"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kodiak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021555 KODIAK WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-kodiak"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-kongiganak-traditional-council",
+  "name": "Kongiganak Traditional Council",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573008",
+  "npdes_permits": [
+   "AKG573008"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kongiganak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573008 KONGIGANAK LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-kongiganak-traditional-council"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-koyuk",
+  "name": "City of Koyuk",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG570023",
+  "npdes_permits": [
+   "AKG570023"
+  ],
+  "receiving_waters": [
+   "KOYUK INLET OF NORTON SOUND"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Koyuk"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG570023 KOYUK, CITY OF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-koyuk"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-ljdjh-yellowjacket",
+  "name": "LJDJH, LLC (Yellowjacket Oilfield Services camp, Prudhoe Bay)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572077",
+  "npdes_permits": [
+   "AKG572077"
+  ],
+  "receiving_waters": [
+   "Wetlands"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Prudhoe Bay"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572077 YELLOWJACKET OILFIELD SERVICES WWTF. Privately owned: a work camp's plant.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-ljdjh-yellowjacket"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "LJDJH, LLC",
+  "legal_form": "business or industrial"
+ },
+ {
+  "id": "ak-lower-kuskokwim-sd",
+  "name": "Lower Kuskokwim School District (school plants)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572005",
+  "npdes_permits": [
+   "AKG572005",
+   "AKG572023",
+   "AKG572026",
+   "AKG572098",
+   "AKG572141"
+  ],
+  "receiving_waters": [
+   "Tundra Pond"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 5 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Atmautluak",
+   "Napakiak",
+   "Newtok",
+   "Tuntutuliak",
+   "Tununak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572005 NEWTOK SCHOOL WWTF; AKG572023 JOANN A ALEXIE MEMORIAL SCHOOL WWTF; AKG572026 TUNTUTULIAK SCHOOL WWTF; AKG572098 PAUL T ALBERT HS WWTF; AKG572141 WILLIAM N. MILLER K-12 MEMORIAL SCHOOL WWTF. AKG572141 (the Napakiak school, EPA type school district) is joined here: Napakiak's school is in this district.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-lower-kuskokwim-sd"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Lower Kuskokwim School District",
+  "legal_form": "special district"
+ },
+ {
+  "id": "ak-mat-su-borough",
+  "name": "Matanuska-Susitna Borough (Talkeetna lagoon)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573033",
+  "npdes_permits": [
+   "AKG573033"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Talkeetna"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573033 TALKEETNA LAGOON. EPA types the permit county government; Talkeetna lies in the borough.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-mat-su-borough"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Matanuska-Susitna Borough",
+  "legal_form": "county"
+ },
+ {
+  "id": "ak-metlakatla",
+  "name": "Metlakatla Indian Community",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0053813",
+  "npdes_permits": [
+   "AK0053813"
+  ],
+  "receiving_waters": [
+   "NICHOLS PASSAGE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Metlakatla Indian Community"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0053813 METLAKATLA SEWER TREATMENT PLANT.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-metlakatla"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-mountain-village",
+  "name": "City of Mountain Village",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573031",
+  "npdes_permits": [
+   "AKG573031"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Mountain Village"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573031 MOUNTAIN VILLAGE LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-mountain-village"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-napaskiak",
+  "name": "Native Village of Napaskiak",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573011",
+  "npdes_permits": [
+   "AKG573011"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Napaskiak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573011 NAPASKIAK LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-napaskiak"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-nenana",
+  "name": "City of Nenana",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572031",
+  "npdes_permits": [
+   "AKG572031"
+  ],
+  "receiving_waters": [
+   "Tanana River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Nenana"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572031 NENANA WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-nenana"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-newtok-village-council",
+  "name": "Newtok Village Council (Mertarvik)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572115",
+  "npdes_permits": [
+   "AKG572115"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Mertarvik"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572115 MERTARVIK WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-newtok-village-council"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-nightmute",
+  "name": "City of Nightmute",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573013",
+  "npdes_permits": [
+   "AKG573013"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Nightmute"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573013 NIGHTMUTE LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-nightmute"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-noatak",
+  "name": "Native Village of Noatak",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573012",
+  "npdes_permits": [
+   "AKG573012"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Noatak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573012 NOATAK LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-noatak"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-north-pole",
+  "name": "City of North Pole",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021393",
+  "npdes_permits": [
+   "AK0021393"
+  ],
+  "receiving_waters": [
+   "Tanana River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "North Pole"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021393 NORTH POLE WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-north-pole"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-north-slope-borough",
+  "name": "North Slope Borough",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG571056",
+  "npdes_permits": [
+   "AKG571056",
+   "AKG572001",
+   "AKG572006",
+   "AKG572024",
+   "AKG572032",
+   "AKG572033",
+   "AKG572036",
+   "AKG572048",
+   "AKG572071",
+   "AKG573038"
+  ],
+  "receiving_waters": [
+   "Percolation Pit",
+   "Kigarak Lake",
+   "Chukchi Sea",
+   "Kaktovik Lagoon",
+   "McDermott Lake",
+   "unnamed pond",
+   "Kaseguluk Lagoon",
+   "Wetlands"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 11 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Atqasuk",
+   "Barrow",
+   "Kaktovik",
+   "Nuiqsut",
+   "Point Hope",
+   "Point Lay",
+   "Prudhoe Bay",
+   "Wainwright"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG571056 POINT HOPE WW TREATMENT FACILITY; AKG572001 ATQASUK WWTF; AKG572006 BARROW WWTF; AKG572024 KAKTOVIK WWTF; AKG572032 NSB SERVICE AREA 10 WWTF; AKG572033 NUIQSUT WWTF; AKG572036 POINT LAY WWTF; AKG572048 WAINWRIGHT WWTF; AKG572071 NSB TECHNICAL TRAINING CENTER WWTF; AKG573038 KAKTOVIK SEWAGE LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-north-slope-borough"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "county"
+ },
+ {
+  "id": "ak-northwest-arctic-borough-sd",
+  "name": "Northwest Arctic Borough School District (school plants)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572025",
+  "npdes_permits": [
+   "AKG572025",
+   "AKG572130"
+  ],
+  "receiving_waters": [
+   "CHUKCHI SEA"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kivalina",
+   "Kotzebue"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572025 MCQUEEN SCHOOL WWTF; AKG572130 KISIMGIUGTUQ SCHOOL WASTEWATER TREATMENT FACILITY. AKG572130 (the Kivalina school, EPA type school district) is joined here: the district runs the borough's schools.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-northwest-arctic-borough-sd"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Northwest Arctic Borough School District",
+  "legal_form": "special district"
+ },
+ {
+  "id": "ak-norton-sound-health-corporation",
+  "name": "Norton Sound Health Corporation (Diomede clinic)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572116",
+  "npdes_permits": [
+   "AKG572116"
+  ],
+  "receiving_waters": [
+   "Bering Strait"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Diomede"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: AKG572116 DIOMEDE HEALTH CLINIC WWTF. A regional tribal health organization's clinic plant (EPA facility type Corporation).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-norton-sound-health-corporation"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "institution"
+ },
+ {
+  "id": "ak-nps-glacier-bay",
+  "name": "National Park Service, Glacier Bay National Park and Preserve (Bartlett Cove)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572007",
+  "npdes_permits": [
+   "AKG572007"
+  ],
+  "receiving_waters": [
+   "Bartlett Cove"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Gustavus"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572007 BARTLETT COVE WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-nps-glacier-bay"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-palmer",
+  "name": "City of Palmer",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0022497",
+  "npdes_permits": [
+   "AK0022497"
+  ],
+  "receiving_waters": [
+   "Matanuska River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Palmer"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0022497 CITY OF PALMER WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-palmer"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-pelican",
+  "name": "City of Pelican",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0043532",
+  "npdes_permits": [
+   "AK0043532"
+  ],
+  "receiving_waters": [
+   "LISIANSKI INLET"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pelican"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0043532 PELICAN, CITY OF (WWTP).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-pelican"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-petersburg",
+  "name": "City of Petersburg",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021458",
+  "npdes_permits": [
+   "AK0021458"
+  ],
+  "receiving_waters": [
+   "FREDERICK SOUND"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Petersburg"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021458 PETERSBURG, CITY OF WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-petersburg"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-pilot-station",
+  "name": "City of Pilot Station",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573014",
+  "npdes_permits": [
+   "AKG573014"
+  ],
+  "receiving_waters": [
+   "Yukon River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pilot Station"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573014 PILOT STATION WASTEWATER LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-pilot-station"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-rampart",
+  "name": "Rampart tribal government (Rampart plant)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573044",
+  "npdes_permits": [
+   "AKG573044"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Rampart"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573044 RAMPART WASTEWATER TREATMENT FACILITY. EPA types the permit tribal government and names the facility only.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-rampart"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-saint-paul",
+  "name": "City of Saint Paul",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG527721",
+  "npdes_permits": [
+   "AKG527721"
+  ],
+  "receiving_waters": [
+   "Bering Sea"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "St. Paul"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG527721 CITY OF SAINT PAUL.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-saint-paul"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-schlumberger-east-camp",
+  "name": "Schlumberger Oilfield Services (East Camp, Prudhoe Bay)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572072",
+  "npdes_permits": [
+   "AKG572072"
+  ],
+  "receiving_waters": [
+   "wetland"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Prudhoe Bay"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572072 SCHLUMBERGER EAST CAMP WWTF. Privately owned: a work camp's plant.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-schlumberger-east-camp"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Schlumberger",
+  "legal_form": "business or industrial"
+ },
+ {
+  "id": "ak-selawik",
+  "name": "City of Selawik",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573019",
+  "npdes_permits": [
+   "AKG573019"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Selawik"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573019 SELAWIK  LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-selawik"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-seward",
+  "name": "City of Seward (Lowell Point and Spring Creek plants)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021890",
+  "npdes_permits": [
+   "AK0021890",
+   "AK0053724"
+  ],
+  "receiving_waters": [
+   "Resurrection Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Seward"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021890 LOWELL POINT WWTF; AK0053724 SPRING CREEK WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-seward"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "City of Seward",
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-shageluk",
+  "name": "City of Shageluk",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573040",
+  "npdes_permits": [
+   "AKG573040"
+  ],
+  "receiving_waters": [
+   "Innoko River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Shageluk"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573040 SHAGELUK SEWAGE LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-shageluk"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-shishmaref",
+  "name": "City of Shishmaref",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573020",
+  "npdes_permits": [
+   "AKG573020"
+  ],
+  "receiving_waters": [
+   "Chukchi Sea"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Shishmaref"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573020 SHISHMAREF LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-shishmaref"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-sitka",
+  "name": "City and Borough of Sitka",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021474",
+  "npdes_permits": [
+   "AK0021474"
+  ],
+  "receiving_waters": [
+   "SITKA SOUND (MIDDLE CHANNEL)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sitka"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021474 SITKA, CITY AND BOROUGH OF WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-sitka"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-skagway",
+  "name": "Municipality of Skagway",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0020010",
+  "npdes_permits": [
+   "AK0020010"
+  ],
+  "receiving_waters": [
+   "TAIYA INLET"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Skagway"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0020010 SKAGWAY, MUNICIPALITY OF - SKAGWAY WWTP - 301(H) WAIVER.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-skagway"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-soldotna",
+  "name": "City of Soldotna",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0020036",
+  "npdes_permits": [
+   "AK0020036"
+  ],
+  "receiving_waters": [
+   "Kenai River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Soldotna"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0020036 SOLDOTNA WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-soldotna"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-st-marys",
+  "name": "City of St. Mary's",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573016",
+  "npdes_permits": [
+   "AKG573016"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "St. Marys"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573016 ST  MARYS LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-st-marys"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-steelhead-barge",
+  "name": "Steelhead Barge plant (federal facility, Anchorage)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572111",
+  "npdes_permits": [
+   "AKG572111"
+  ],
+  "receiving_waters": [
+   "Shelter Cove"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Anchorage"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572111 STEELHEAD BARGE WWTF. EPA types it a federal facility and names the barge, not the agency.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-steelhead-barge"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-tetlin",
+  "name": "Tetlin tribal government (Tetlin lagoon)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573043",
+  "npdes_permits": [
+   "AKG573043"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Tetlin"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573043 TETLIN LAGOON. EPA types the permit tribal government; its permit name is a person's and is not used.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-tetlin"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "ak-thorne-bay",
+  "name": "City of Thorne Bay",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572045",
+  "npdes_permits": [
+   "AKG572045"
+  ],
+  "receiving_waters": [
+   "Thorne Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Thorne Bay"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572045 THORNE BAY WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-thorne-bay"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-togiak",
+  "name": "City of Togiak",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573025",
+  "npdes_permits": [
+   "AKG573025"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Togiak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573025 TOGIAK VILLAGE LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-togiak"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-unalakleet-river-lodge",
+  "name": "Unalakleet River Lodge",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572088",
+  "npdes_permits": [
+   "AKG572088"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Unalakleet"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572088 UNALAKLEET RIVER LODGE WWTF. Privately owned: a lodge's plant (EPA facility type Corporation).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-unalakleet-river-lodge"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "campground or resort"
+ },
+ {
+  "id": "ak-unalaska",
+  "name": "City of Unalaska",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0043451",
+  "npdes_permits": [
+   "AK0043451"
+  ],
+  "receiving_waters": [
+   "Unalaska Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Unalaska"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0043451 UNALASKA WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-unalaska"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-usaf-cape-newenham",
+  "name": "U.S. Air Force, Cape Newenham Long Range Radar Site",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572085",
+  "npdes_permits": [
+   "AKG572085"
+  ],
+  "receiving_waters": [
+   "Wetlands"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cape Newenham"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572085 CAPE NEWENHAM LRRS  WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-usaf-cape-newenham"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-usaf-eareckson",
+  "name": "U.S. Air Force, Eareckson Air Station (Shemya Island)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573005",
+  "npdes_permits": [
+   "AKG573005"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Shemya Island"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573005 USAF EARECKSON AIR STATION SHEMYA ISLAND LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-usaf-eareckson"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-uscg-kodiak",
+  "name": "U.S. Coast Guard, Base Kodiak",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0020648",
+  "npdes_permits": [
+   "AK0020648"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kodiak"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0020648 KODIAK US COAST GUARD WASTEWATER TREATMENT FACILITY  -USCG-.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-uscg-kodiak"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-usfs-kake",
+  "name": "U.S. Forest Service, Kake administrative site",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG572020",
+  "npdes_permits": [
+   "AKG572020"
+  ],
+  "receiving_waters": [
+   "Keku Strait"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kake"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG572020 FOREST SERVICE KAKE ADMIN SITE WWTF.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-usfs-kake"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "ak-valdez",
+  "name": "City of Valdez",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021431",
+  "npdes_permits": [
+   "AK0021431"
+  ],
+  "receiving_waters": [
+   "Valdez, Port"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Valdez"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021431 VALDEZ WW TREATMENT FACILITY.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-valdez"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-ward-cove-full-cycle",
+  "name": "Full Cycle - Power Systems and Supplies of Alaska, LLC (Ward Cove Industrial Site plant)",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0053384",
+  "npdes_permits": [
+   "AK0053384"
+  ],
+  "receiving_waters": [
+   "Ward Cove"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ketchikan"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0053384 WARD COVE INDUSTRIAL SITE WW TREATMENT FACILITY. Privately owned: a company's plant serving an industrial site (EPA facility type Corporation; SIC 4952); the permittee as DEC's permit notice names it. Not in the plant outfall table.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-ward-cove-full-cycle"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "short_name": "Full Cycle - Power Systems and Supplies of Alaska",
+  "legal_form": "business or industrial"
+ },
+ {
+  "id": "ak-white-mountain",
+  "name": "City of White Mountain",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AKG573027",
+  "npdes_permits": [
+   "AKG573027"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "White Mountain"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AKG573027 WHITE MOUNTAIN LAGOON.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-white-mountain"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-whittier",
+  "name": "City of Whittier",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0025402",
+  "npdes_permits": [
+   "AK0025402"
+  ],
+  "receiving_waters": [
+   "PASSAGE CANAL, PRINCE WM SOUND"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Whittier"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0025402 WHITTIER, CITY OF - WHITTIER WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-whittier"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "ak-wrangell",
+  "name": "City of Wrangell",
+  "state": "AK",
+  "kind": "plant",
+  "npdes_permit": "AK0021466",
+  "npdes_permits": [
+   "AK0021466"
+  ],
+  "receiving_waters": [
+   "ZIMOVIA STRAITS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the owner or operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Wrangell"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: AK0021466 WRANGELL, CITY OF WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ak-wrangell"
+  ],
+  "source_areas": [
+   "ak",
+   "federal"
+  ],
+  "legal_form": "city"
  }
 ]
