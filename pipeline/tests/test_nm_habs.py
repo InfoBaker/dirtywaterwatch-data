@@ -146,3 +146,67 @@ def test_nmeds_names_place_on_the_openboatlaunch_records_by_hand_alias(monkeypat
             assert R.resolve(ev)["water_slugs"] == [slug], name
     finally:
         S._GEOM_CACHE.clear()
+
+
+def _bloom_status(recs, now, monkeypatch, waters):
+    import tempfile
+    from datetime import datetime
+    from build import status as S
+    from tests.test_status import TEST_RULES
+    monkeypatch.setattr(S, "_RULES", TEST_RULES)
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    d = Path(tempfile.mkdtemp())
+    (d / "nm-nmed-hab-mapper.json").write_text(json.dumps({"source_id": "nm-nmed-hab-mapper", "ok": True,
+                                                           "last_ok_at": now, "meta": {}, "records": recs}))
+    st, _ = S.build(now=datetime.fromisoformat(now.replace("Z", "+00:00")), write=False, events_dir=d, waters=waters,
+                    outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=TEST_RULES, placement_cache=None)
+    return st
+
+
+def _nm_waters():
+    line = lambda pts: {"type": "LineString", "coordinates": pts}                        # noqa: E731
+    box = lambda x0, y0, x1, y1: {"type": "Polygon", "coordinates": [[[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0]]]}  # noqa: E731,E501
+    rg = [[-105.70, 36.60], [-105.708933612933, 36.5350084072185], [-105.73, 36.40], [-105.786769, 36.287421]]
+    return {"rio-grande-nm": {"slug": "rio-grande-nm", "name": "Rio Grande", "kind": "river", "state": "NM",
+                              "bbox": [-105.80, 36.28, -105.69, 36.61], "geometry": line(rg)},
+            "eagle-nest-lake-nm": {"slug": "eagle-nest-lake-nm", "name": "Eagle Nest Lake", "kind": "reservoir",
+                                   "state": "NM", "area_km2": 9.9, "bbox": [-105.28, 36.50, -105.23, 36.56],
+                                   "geometry": box(-105.28, 36.50, -105.23, 36.56)}}
+
+
+def test_a_bloom_on_a_river_is_a_point_and_on_a_lake_colours_the_lake(monkeypatch):
+    """Reaches, not whole rivers (owner's rule; final audit 2026-11-07): NMED's Rio Grande stations are listed on the
+    river's page and shown at their points in the bloom colour, but the Rio Grande record is not coloured; Eagle Nest
+    Lake, a reservoir, is coloured whole. Keyed on the water's kind, not the state."""
+    from build import status as S
+    recs, _ = build()
+    keep = [r for r in recs if r["waterbody_text"].startswith("Rio Grande") or r["waterbody_text"] == "Eagle Nest Lake"]
+    st = _bloom_status(copy.deepcopy(keep), "2026-11-07T12:00:00Z", monkeypatch, _nm_waters())
+    rg, en = st["waters"]["rio-grande-nm"], st["waters"]["eagle-nest-lake-nm"]
+    river_ids = {r["event_id"] for r in keep if r["waterbody_text"].startswith("Rio Grande")}
+    lake_id = next(r["event_id"] for r in keep if r["waterbody_text"] == "Eagle Nest Lake")
+    assert len(river_ids) == 2 and river_ids <= set(rg["events"])                 # listed on the river's page
+    assert rg["status"] == "grey"                                                 # the river is not coloured
+    pts = {a["event_id"]: a for a in st["advisory_points"]}
+    for eid in river_ids:                                                         # each station's marker is
+        assert pts[eid]["water_slugs"] == ["rio-grande-nm"] and pts[eid]["category"] == "bloom"
+        assert pts[eid]["status"] == "red"                                        # the authority's advisory
+    assert en["status"] == "red" and en["status_by_category"]["bloom"] == "red"   # the lake: whole, as before
+    assert lake_id in en["events"] and lake_id not in pts
+
+
+def test_any_advisory_without_a_stretch_on_a_river_stream_or_canal_is_a_point_whatever_the_state():
+    from build import status as S
+    hab = {"event_type": "hab_advisory", "status": "advisory_active", "raw": {}}
+    named = {"event_type": "beach_advisory", "status": "advisory_active", "raw": {"advisory_extent": "named_water"}}
+    shell = {"event_type": "shellfish_closure", "status": "advisory_active", "raw": {}}
+    sso = {"event_type": "sso", "status": "ended", "raw": {}}
+    for kind in ("river", "stream", "canal"):
+        for st in ("NM", "MS", "NE", "MI", "NY"):
+            w = {"kind": kind, "state": st}
+            assert S.advisory_on_river(hab, w) and S.advisory_on_river(named, w) and S.advisory_on_river(shell, w)
+            assert not S.advisory_on_river(named, w, stretched=True)              # the advisory-stretch path
+            assert not S.advisory_on_river(sso, w)                                # discharges: reaches
+    for kind in ("lake", "pond", "reservoir", "bay", "sound", None):
+        assert not S.advisory_on_river(hab, {"kind": kind})

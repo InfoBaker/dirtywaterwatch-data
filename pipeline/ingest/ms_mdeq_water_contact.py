@@ -36,8 +36,9 @@ Record rules
   - History: the feed holds ten releases, so the previous run's records are carried and updated; a record is never
     dropped because its release left the feed.
   - The water (2026-11-07 final audit): an advisory names its water, so it colours that water, not only a point.
-    raw.advisory_extent is "named_water" (build/status.py then puts its interval on the water it is placed on, a
-    river included, and keeps its marker where the water is not filled); raw.advisory_noun "Water contact advisory"
+    raw.advisory_extent is "named_water" (build/status.py then puts its interval on the water it is placed on and
+    keeps its marker where the water is not filled; on a river or stream with no stretch it is a point only,
+    status.advisory_on_river); raw.advisory_noun "Water contact advisory"
     is the label;
     raw.stretch gives the ends the release names ("from the culvert at ... to its confluence with the Pearl River"),
     the release's own point at the upstream end. Placement is by the water's name (waterbody_text), so a water whose
