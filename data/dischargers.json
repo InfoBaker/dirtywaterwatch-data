@@ -223557,7 +223557,7 @@
    "Eagle River",
    "Girdwood"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: AK0022551 ANCHORAGE, MUNICIPALITY OF - JOHN M. ASPLUND WPCF; AK0022543 EAGLE RIVER WW TREATMENT FACILITY; AK0047856 GIRDWOOD WW TREATMENT FACILITY; AKG002440 SPAR AVENUE SEWER SERVICE REPAIR. AKG002440 (a sewer service repair in Anchorage, EPA type municipal) is the utility's: it is Anchorage's only public sewer utility. Research row (research/ak/dischargers.json, checked 2026-11-03). EPA's sewer overflow tables: 43 current reports (2026-11-04 extract).",
+  "notes": "EPA ECHO ICIS-NPDES: AK0022551 ANCHORAGE, MUNICIPALITY OF - JOHN M. ASPLUND WPCF; AK0022543 EAGLE RIVER WW TREATMENT FACILITY; AK0047856 GIRDWOOD WW TREATMENT FACILITY; AKG002440 SPAR AVENUE SEWER SERVICE REPAIR. AKG002440 (Spar Avenue sewer service repair, EPA type municipal) is a general-permit discharge from a sewer repair, not a plant; filed here as Anchorage's only public sewer utility's. Research row (research/ak/dischargers.json, checked 2026-11-03). EPA's sewer overflow tables: 43 current reports (2026-11-04 extract).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -224050,7 +224050,7 @@
   "towns": [
    "Ketchikan"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: AKG572019 FOREST PARK WWTF. EPA's record names the facility only (type NON-POTW); the permittee is not stated.",
+  "notes": "EPA ECHO ICIS-NPDES: AKG572019 FOREST PARK WWTF. EPA's record names the facility only; the permittee is not stated. EPA types it NON-POTW (not a public plant), which suggests a private owner; DEC's general-permit authorization could not be read (DEC's pages refuse automated reads), so the legal form is left unknown.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -224207,7 +224207,7 @@
   "water_slugs": [],
   "outfall_count": 6,
   "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 6 rows for these permits, 3 open CSO outfalls)",
-  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched. Permit AK0023213 (EPA-issued 2001, administratively continued) Part I.D.1.g: \"The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts\"; Part III.H.2.a: notification of the public of sewer overflows that may imminently and substantially endanger human health, under its overflow emergency response plan. The City and Borough's wastewater utility page lists its CSO public notices as PDFs (the last from November 2005; the page says no CSO has occurred since 2005): https://juneau.org/engineering-public-works/wastewater-utility.",
+  "notification_channel": "No Alaska statute or rule requires public notice of a sewer overflow or bypass. 18 AAC 72.940 requires the operator of a wastewater system to report to the Department of Environmental Conservation (DEC) within 24 hours when a spill or other event threatens public health or water quality, when a sludge carry-over, washout or overflow occurs, or when part of the treatment works is bypassed, and to send a written report within seven days; the APDES permits' standard conditions (Appendix A, Part 3.4) require an oral report within 24 hours and a written report within five days. DEC does not post the reports. Its reports were not found in EPA's sewer overflow tables. Permit AK0023213 (EPA-issued 2001, administratively continued) Part I.D.1.g: \"The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts\"; Part II.H.2.a: notification of the public of sewer overflows that may imminently and substantially endanger human health, under its overflow emergency response plan. The City and Borough's wastewater utility page lists its CSO public notices as PDFs (the last from November 2005; the page says no CSO has occurred since 2005): https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -225539,7 +225539,7 @@
  },
  {
   "id": "ak-steelhead-barge",
-  "name": "Steelhead Barge plant (federal facility, Anchorage)",
+  "name": "Steelhead Barge plant (federal facility, Carroll Inlet)",
   "state": "AK",
   "kind": "plant",
   "npdes_permit": "AKG572111",
@@ -225556,9 +225556,9 @@
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Anchorage"
+   "Ketchikan"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: AKG572111 STEELHEAD BARGE WWTF. EPA types it a federal facility and names the barge, not the agency.",
+  "notes": "EPA ECHO ICIS-NPDES: AKG572111 STEELHEAD BARGE WWTF. EPA types it a federal facility and names the barge, not the agency. EPA's city (Anchorage) is a mailing city: the discharge point (55.54 N, -131.35) and the permit's limit sets are in Carroll Inlet (Shoal Cove, Scow Bay) near Ketchikan.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [

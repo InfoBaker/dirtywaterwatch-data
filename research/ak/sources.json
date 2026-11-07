@@ -87,7 +87,7 @@
     "access": [
       "html"
     ],
-    "access_detail": "HTTP 403 to WebFetch and curl: a DataDome 'Please enable JS and disable any ad blocker' bot wall. Spill data page https://www.dec.alaska.gov/spar/ppr/spill-information/spill-data (search). Contact decsparspilldata@alaska.gov. Still 403 on 2026-11-07.",
+    "access_detail": "HTTP 403 to automated reads: a DataDome 'Please enable JS and disable any ad blocker' bot wall. Spill data page https://www.dec.alaska.gov/spar/ppr/spill-information/spill-data (search). Contact decsparspilldata@alaska.gov. Still 403 on 2026-11-07.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -142,7 +142,7 @@
   },
   {
     "id": "ak-apdes-permits",
-    "name": "APDES individual permits (Juneau-Douglas AK0023213, Anchorage Asplund AK0022551) and DEC Water Permit Search",
+    "name": "Wastewater discharge permits (Juneau-Douglas AK0023213, Mendenhall AK0022951) and DEC Water Permit Search",
     "jurisdiction": "AK",
     "operator": "Alaska Department of Environmental Conservation",
     "operator_type": "state",
@@ -157,7 +157,7 @@
     "access": [
       "pdf"
     ],
-    "access_detail": "DEC's permit search and wastewater pages answer 403 (DataDome) to scripted reads on 2026-11-07. Read instead on the City and Borough of Juneau's site: AK0023213 (EPA-issued 2001, expired 2006, administratively continued) Part I.D.1.g 'The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts' and Part III.H.2.a (public notification of overflows that may imminently and substantially endanger human health); AK0022951 (APDES, 2014) Appendix A Part 3.4 Twenty-four Hour Reporting: orally within 24 hours, in writing within five days, to DEC.",
+    "access_detail": "DEC's permit search and wastewater pages answer 403 (DataDome) to scripted reads on 2026-11-07. Read instead on the City and Borough of Juneau's site: AK0023213 (EPA-issued 2001, expired 2006, administratively continued) Part I.D.1.g 'The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts' and Part II.H.2.a (public notification of overflows that may imminently and substantially endanger human health); AK0022951 (APDES, 2014) Appendix A Part 3.4 Twenty-four Hour Reporting: orally within 24 hours, in writing within five days, to DEC.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -221,11 +221,11 @@
     ],
     "waters_covered": null,
     "water_slugs": [],
-    "url": "https://aoos.org/alaska-hab-network/",
+    "url": "https://ahab.aoos.org/",
     "access": [
       "html"
     ],
-    "access_detail": "Answered 200 on 2026-11-07: links to HAB alerts and shellfish poisoning pages; no machine-readable alert layer found.",
+    "access_detail": "Answered 200 on 2026-11-07 after a redirect from https://aoos.org/alaska-hab-network/: links to HAB alerts and shellfish poisoning pages; no machine-readable alert layer found.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -289,12 +289,12 @@
     ],
     "waters_covered": "Gastineau Channel (Juneau-Douglas CSO outfalls)",
     "water_slugs": [],
-    "url": "https://juneau.org/engineering-public-works/wastewater-utility",
+    "url": "https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division",
     "access": [
       "html",
       "pdf"
     ],
-    "access_detail": "Answered 200 on 2026-11-07. The 'Combined Sewer Overflows' section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'. Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification).",
+    "access_detail": "Answered 200 on 2026-11-07 after a 301 from https://juneau.org/engineering-public-works/wastewater-utility. The 'Combined Sewer Overflows' section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'. Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification).",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],

@@ -36,23 +36,45 @@ def test_every_alaska_permit_is_in_exactly_one_operator_row():
     assert by["ak-apsc-taps"]["kind"] == "cso_closed_or_none"
     assert {"AK0022551", "AK0022543", "AK0047856"} <= set(by["ak-awwu-anchorage"]["npdes_permits"])
     assert by["ak-fairbanks-ghu"]["legal_form"] == "investor-owned utility"
+    assert by["ak-steelhead-barge"]["towns"] == ["Ketchikan"] and "Anchorage" not in by["ak-steelhead-barge"]["name"]
+    assert "not searched" not in by["ak-juneau-douglas"]["notification_channel"]
 
 
-def test_no_name_from_epas_permit_name_field_reaches_a_row():
-    """EPA's permit_name reads '<person> - <body>' for many Alaska permits: the person half never appears."""
-    people = set()
+BODY = re.compile(r"\b(?:City|Borough|District|Council|Village|Community|Corporation|Corp|LLC|Inc|Utilities|Utility|"
+                  r"Services|Service|Dept|Department|NPS|Park|Interior|Defense|Navy|Army|Force|School|Municipality|"
+                  r"Health|Systems|Tribe|Tribal|Native|Traditional|Highway|AWWU|Facility|Lagoon|WWTF|WWTP)\b", re.I)
+
+
+def _person_parts():
+    """Person-shaped parts of EPA's Alaska permit names: every field that is not all capitals is split at '-' and ','
+    and each part without a body word that reads as two or more capitalised words (an inner capital and Jr/Sr allowed)
+    is kept, the whole field included when it holds no body word at all."""
+    parts = set()
     for f in ("outfalls-plants-us.json", "outfalls-us.json"):
         doc = json.loads((ROOT / "data" / f).read_text())
         for r in doc["outfalls"] if isinstance(doc, dict) else doc:
-            pn = str(r.get("permit_name") or "")
-            m = re.match(r"^([A-Z][a-z]+(?: [A-Z][a-z]+)+(?:,? (?:Jr|Sr)\.?)?)\s*[-,]\s*\S", pn)
-            if str(r.get("npdes_permit") or "").startswith("AK") and m:
-                people.add(m.group(1).strip(" ,"))
-    assert len(people) > 30                              # the field does carry them
+            pn = str(r.get("permit_name") or "").strip()
+            if not str(r.get("npdes_permit") or "").startswith("AK") or not pn or pn.isupper():
+                continue
+            for part in re.split(r"\s*[-,]\s*", pn):
+                part = re.sub(r"\s+(?:Jr|Sr)\.?$", "", part.strip(" ,."))
+                if part and not BODY.search(part) and re.fullmatch(r"[A-Z][A-Za-z']+(?: [A-Z][A-Za-z']+)+", part):
+                    parts.add(part)
+    return parts
+
+
+def test_no_name_from_epas_permit_name_field_reaches_a_row():
+    """EPA's permit_name often reads '<person> - <body>', and sometimes is a person's name alone: no such name, and no
+    two-word start of one, appears in the operator rows or the register (the names are read here, never listed)."""
+    people = _person_parts()
+    assert len(people) > 40                              # the field does carry them
     blob = json.dumps(_ak_rows())
     reg = (ROOT / "data" / "notice-channels" / "ak.json").read_text()
+    text = (ROOT / "research" / "ak" / "state-text.md").read_text()
     for p in people:
-        assert p not in blob and p not in reg, "a contact's name reached a row"
+        two = " ".join(p.split()[:2])
+        for t in (blob, reg, text):
+            assert p not in t and two not in t, "a contact's name reached a row"
 
 
 def test_register_rows_per_operator_and_juneau():
@@ -65,7 +87,15 @@ def test_register_rows_per_operator_and_juneau():
         assert row["barrier"] == "no_web_page"
     cso = ids["ak-juneau-douglas-cso-public-notification"]
     assert cso["monitored"] and cso["urls"] and "Part I.D.1.g" in cso["legal_basis"] and cso["entry"]["start"]
-    assert ids["ak-juneau-douglas-sso-public-notification"]["barrier"] == "not_verified"
+    sso = ids["ak-juneau-douglas-sso-public-notification"]
+    assert sso["barrier"] == "not_verified" and "Part II.H.2.a" in sso["legal_basis"] and "III.H" not in sso["legal_basis"]
+    assert "Part II.H.2.a" in next(r for r in _ak_rows() if r["id"] == "ak-juneau-douglas")["notification_channel"]
+    for pmt, part in (("AK0023213", "Part I.C.7"), ("AK0022951", "Part 2.5")):
+        sign = ids[f"ak-juneau-douglas-outfall-signs-{pmt.lower()}"]
+        assert sign["permit"] == pmt and part in sign["legal_basis"] and sign["urls"] == []
+        assert sign["barrier"] == "signs_only"
+    assert cso["urls"] == ["https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division"]
+    assert ids["ak-ahab-network"]["urls"] == ["https://ahab.aoos.org/"]
     assert ids["ak-epa-echo-overflow-events"]["feed_source_id"] == "echo-sewer-overflow"
     assert ids["ak-dec-spill-database"]["barrier"] == "bot_wall"
     assert "ak-apsc-taps-dec-emergency-notice" not in ids

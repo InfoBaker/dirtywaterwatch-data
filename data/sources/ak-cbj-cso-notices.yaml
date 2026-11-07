@@ -1,12 +1,13 @@
 id: "ak-cbj-cso-notices"
 name: "City and Borough of Juneau wastewater utility page: combined sewer overflow public notices"
-url: "https://juneau.org/engineering-public-works/wastewater-utility"
-homepage: "https://juneau.org/engineering-public-works/wastewater-utility"
+url: "https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division"
+homepage: "https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division"
 kind: "html"
 level: "utility"
 # Notes (research/ak, status used, verified fetched, checked 2026-11-07): Juneau's permit-required
 #   CSO public notice channel; monitored for new notices.
-# Access detail (research, quoted): Answered 200 on 2026-11-07. The 'Combined Sewer Overflows'
+# Access detail (research, quoted): Answered 200 on 2026-11-07 after a 301 from
+#   https://juneau.org/engineering-public-works/wastewater-utility. The 'Combined Sewer Overflows'
 #   section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No
 #   Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'.
 #   Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification).
@@ -24,7 +25,7 @@ role: "events"
 event_types: ["cso"]
 states: ["AK"]
 access: ["html", "pdf"]
-access_detail: "Answered 200 on 2026-11-07. The 'Combined Sewer Overflows' section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'. Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification)."
+access_detail: "Answered 200 on 2026-11-07 after a 301 from https://juneau.org/engineering-public-works/wastewater-utility. The 'Combined Sewer Overflows' section lists public notices as PDFs (September 2004; 18 and 21 November 2005) and says 'No Combined Sewer Overflow since 2005'; posted 'to fully comply with the EPA discharge permit'. Read by the notice-page monitor (register row ak-juneau-douglas-cso-public-notification)."
 machine_readable: false
 legal_basis: "NPDES permit AK0023213, Part I.D.1.g"
 checked: "2026-11-07"
