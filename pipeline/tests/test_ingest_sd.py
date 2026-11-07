@@ -347,7 +347,25 @@ def test_a_general_permits_report_counts_under_its_state(monkeypatch):
                        ("RIS000002", "RI"), ("NHG580001", "NH")]:
         assert S.event_state({"npdes_permit": permit, "source_id": "echo-sewer-overflow"}) == st
     assert S.event_state({"npdes_permit": "NN0020001", "source_id": "echo-sewer-overflow"}) is None
-    assert S.event_state({"npdes_permit": "SDGX21580", "source_id": "echo-sewer-overflow"}) is None
+    assert S.event_state({"npdes_permit": "SDGXX1580", "source_id": "echo-sewer-overflow"}) is None
+
+
+def test_every_permit_form_names_its_state_and_nothing_else_does(monkeypatch):
+    """Review 2026-11-07 (sd-final P1-1): the forms in EPA's overflow tables and the registries, individual, general and
+    state series (RISS: 42 Rhode Island reports; GAIS: 4 Georgia reports had no state with one letter allowed), and the
+    texts that are no permit."""
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", {"SD", "IL", "GA", "RI", "NH", "MA", "ME", "CT", "AK", "AZ", "DC", "MD", "VA"})
+    for permit, st in [("SD0023574", "SD"), ("SDG821580", "SD"), ("ILG580253", "IL"), ("GAG640118", "GA"),
+                       ("GAJ020132", "GA"), ("GAU060009", "GA"), ("GAIS12148", "GA"), ("GAIS10096", "GA"),
+                       ("RISS00024", "RI"), ("RI0100315", "RI"), ("NHG580013", "NH"), ("NH0100625", "NH"),
+                       ("MA0102598", "MA"), ("MAG640000", "MA"), ("MAR050000", "MA"), ("ME0100013", "ME"),
+                       ("CT0100145", "CT"), ("AK0021245", "AK"), ("AKG572000", "AK"), ("AZ0020001", "AZ"),
+                       ("DC0021199", "DC"), ("MDR055500", "MD"), ("VAN010000", "VA")]:
+        assert S.event_state({"npdes_permit": permit, "source_id": "echo-sewer-overflow"}) == st, permit
+    for other in ["NN0020001", "NN0030333", "", None, "big-sioux-river-sd", "sd0023574", "110000123456", "N/A",
+                  "SDGXX1580", "TX0047236", "CTDEEP", "GSN001234", " SD0023574"]:
+        assert S.event_state({"npdes_permit": other, "source_id": "echo-sewer-overflow"}) is None, other
     W = {"big-sioux-river-sd": {"slug": "big-sioux-river-sd", "name": "Big Sioux River", "kind": "river",
                                 "state": "SD", "towns": [], "bbox": [-97.21, 42.49, -96.44, 45.32]}}
     R = S.Resolver(W, [], {}, {}, {})

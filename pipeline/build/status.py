@@ -865,10 +865,11 @@ def event_state(ev: dict) -> str | None:
     own = raw.get("state").strip().upper() if isinstance(raw.get("state"), str) else ""
     if len(own) == 2 and own in known:
         return own
-    # the permit's prefix: an individual permit ("SD0023574") or a general permit's, whose third letter names the
-    # series ("SDG821580", "ILG640063", "GAU020000", "RIS000002", "NHG580001"); without the letter a general permit's
-    # report had no state, so it was not placed by name, not counted and not coloured (SD final audit 2026-11-07)
-    m = re.match(r"([A-Z]{2})[A-Z]?\d", str(ev.get("npdes_permit") or ""))
+    # the permit's prefix: an individual permit ("SD0023574") or a general permit's or a state series', whose one or
+    # two letters after the state name the series ("SDG821580", "ILG640063", "GAU020000", "NHG580001", and in EPA's
+    # overflow tables Rhode Island's sewer systems "RISS00024" and Georgia's "GAIS12148"); without them the report had
+    # no state, so it was not placed by name, not counted and not coloured (SD final audit 2026-11-07, review P1-1)
+    m = re.match(r"([A-Z]{2})[A-Z]{0,2}\d", str(ev.get("npdes_permit") or ""))
     if m and m.group(1) in known:
         return m.group(1)
     if isinstance(raw.get("state"), str) and raw["state"][:2].upper() in known:
