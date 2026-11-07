@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1288 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1296 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -32,7 +32,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
-| **all** | **453** | **225** | **364** | **183** | **63** | **1288** |
+| ms | 3 | 2 | 2 | 1 | 0 | 8 |
+| **all** | **456** | **227** | **366** | **184** | **63** | **1296** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1431,3 +1432,16 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-norc-river-reversal-analysis` | NORC/UChicago "rain" project: parse MWRD river reversals and CSOs | rejected | search_only | prior_art | Prior art; one-off analysis. |
 | `il-evanston-cso-plan` | City of Evanston CSO Public Notification Plan | unreachable | fetched | law | Suburban CSO plans point to MWRD alerts; this one moved. |
 | `il-mwrd-tarp-levels` | MWRD TARP reservoir levels map service | unreachable | fetched | hydrography | Token-protected; reservoir fullness would be a leading indicator of CSOs. |
+
+## ms: Mississippi (8)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ms-epa-sobe` | EPA SOBE (eRule Phase 2) sewer overflow and bypass event reports, Mississippi permits | used | fetched | events | Read by the national eRule ingester with Mississippi in its states (Central time, free text scrubbed): the all-versions extract of 2026-11-04 held 358 current Mississippi events from 47 permits (SSO 314, bypass 43, CSO 1); 248 kept from 27 permits (243 naming a receiving water), 110 dropped (108 naming no water with only land or no observable impacts, 1 building backup, 1 bypass whose water is 'None'). Report received a median 4 days after the start (90th percentile 41 days). Every row has coordinates; 15 have no volume. |
+| `ms-mdeq-netsso-guidance` | MDEQ "Reporting Sanitary Sewer Overflows or Bypasses in Mississippi" (NeT-SewerOverflow flyer) | used | fetched | law | Regulator-report deadlines (24 hours; 5-day electronic report from 2025-12-21). |
+| `ms-mdeq-water-contact-advisories` | MDEQ water contact advisories for rivers after large SSOs (e.g. Pearl River) | used | fetched | advisories | Polled every 3 hours by the notice-register monitor (row ms-mdeq-news-releases): a new release naming a water contact advisory becomes a dated record. The advisories in effect before the first poll (the Pearl River below Jackson, Trahon Creek) are not records. |
+| `ms-hab` | Mississippi HABs | candidate | fetched | advisories | Coastal HAB advisories and closures as eventtype HAB on the beach layer; read with it when that module is built. |
+| `ms-mdeq-beach-monitoring` | Mississippi Beach Monitoring Program (BeachMonitoringView FeatureServer) | candidate | fetched | advisories | Best beach feed in the group, not yet read: an advisory and a closure are two separate flags on each station, with MDEQ's own start date as text and no end. The generic snapshot reader takes one state field and dates events by poll, which would drop MDEQ's start date and the closure flag; the generic layer reader would keep a lifted advisory in effect until it ages out. No station was under advisory or closure on 2026-11-07 (21 stations, Enterococci, last samples 2026-10-26 to 2026-11-05), so the lifted state could not be observed. Needs a small module (both flags, the start date, lifted when the flags clear). |
+| `ms-jxn-water` | JXN Water (Jackson sewer under federal interim stipulated order, 2023) | watch | search_only | events | Events reach SOBE; quarterly reports give totals. |
+| `ms-mdeq-beach-alerts` | MDEQ beach advisory text and email alerts | watch | fetched | advisories | Retired for routine advisories on 2026-09-08 (MDEQ news release of that day: "communicated through posted beach signage and the MDEQ Beach Monitoring website rather than text alerts and news releases"); the beach layer is the source. |
+| `ms-mdeq-npdes-points` | MDEQ Current_NPDES_Points hosted layer | rejected | fetched | outfalls | Facility points of every MDEQ-regulated site (9,188 rows on 2026-11-07: plant entrances, addresses and agency staff assignments), not outfall points; no improvement on EPA's permitted-feature points. |
