@@ -74,6 +74,7 @@ BASIN_ONLY = re.compile(r"^\s*(?:the\s+)?(?:canadian|red|sulphur|cypress|sabine|
                         r"lavaca|guadalupe|san\s+antonio|nueces|rio\s+grande(?=\s+(?:river\s+)?basin)|neches[-\s]trinity|trinity[-\s]san\s+jacinto|"
                         r"san\s+jacinto[-\s]brazos|brazos[-\s]colorado|colorado[-\s]lavaca|lavaca[-\s]guadalupe|"
                         r"san\s+antonio[-\s]nueces|nueces[-\s]rio\s+grande)(?:\s+(?:river\s+)?basin)?\W*$", re.I)
+SEGMENT_NAME = re.compile(r"^\s*(.+?)\s+(below|above)\s+(.+?)\s*$", re.I)
 SEGMENT_ONLY = re.compile(r"^\s*(?:segment\s*(?:no\.?|number|#)?\s*)?\d{3,4}[a-z]{0,2}\s*\.?\s*$", re.I)
 NOT_SEWAGE_MATERIAL = re.compile(r"^\s*(?:rock|water\s*\(h2o\)|water)\s*$", re.I)
 EPA_ID = re.compile(r"WASTEWATER-EPA ID-(TX\d{7})")
@@ -171,6 +172,16 @@ def tx_tceq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
                                     else "TCEQ's river basin, not a water the spill reached" if BASIN_ONLY.match(text)
                                     else "TCEQ's field says no receiving water was given")
         rec["waterbody_text"] = None
+    # a TCEQ segment name "X Below Y" or "X Above Y" names the segment's own water, X ("Brazos River Below Navasota
+    # River" is the Brazos, not the Navasota; final audit 2026-11-07 P2-1), also where the national list carries the
+    # segment name on the downstream water's record (EPA's reach codes); "... Above Tidal" is a water's own segment name
+    # ("Buffalo Bayou Above Tidal") and stays
+    text = F.clean(rec.get("waterbody_text"))
+    seg = SEGMENT_NAME.match(text) if text else None
+    if seg and not re.match(r"^tidal\b", seg.group(3), re.I):
+        notes["_water_text_as_given"] = text
+        notes["_water_text_why"] = f"TCEQ's segment name: the segment's own water is {seg.group(1)}"
+        rec["waterbody_text"] = seg.group(1)
     # the operator
     look = _lookups(ctx)
     permit, basis, wq = federal_permit(row, look)

@@ -602,10 +602,14 @@ STREET_AHEAD = re.compile(r"^\W*(?:\S+\s+){0,7}?(?:street|st|road|rd|drive|dr|la
                           r"ct|circle|cir|trail|trl|parkway|pkwy|bend|crossing|place|pl|loop|terrace|ter|cove|cv|path|"
                           r"highway|hwy|run)\b\.?", re.I)
 STREET_HOUSE = re.compile(
-    r"(?:(?<![\w.,/:#-])|(?<=#))(\d{1,6}[A-Za-z]?)(?=\s{1,2}(?:(?:block\s+of|at|on|in|of)\s{1,2})?"
-    r"(?:[NSEW]\.?\s{0,2}){0,3}\s?(?:(?:[A-Za-z][\w'.-]*\s{1,2}){1,3}(?:street|st|road|rd|drive|dr|lane|ln|avenue|ave|"
+    r"(?:(?<![\w.,/:#-])|(?<=#))(\d{1,6}[A-Za-z]?(?:-\d{1,6}[A-Za-z]?)*)(?=\s{1,2}(?:(?:block\s+of|at|on|in|of)\s{1,2})?"
+    r"(?:[NSEW]\.?\s{0,2}){0,3}\s?(?:\d{1,3}(?:st|nd|rd|th)\b|(?:[A-Za-z][\w'.-]*\s{1,2}){1,3}(?:street|st|road|rd|drive|dr|lane|ln|avenue|ave|"
     r"blvd|boulevard|way|court|ct|circle|cir|trail|trl|parkway|pkwy|bend|crossing|place|pl|loop|terrace|ter|cove|cv|"
-    r"path|run|Qzqx[a-z]+)\b|Qzqx[a-z]+))", re.I)
+    r"path|run|trace|fwy|freeway|expy|expressway|pass|row|square|sq|plaza|walk|hollow|holw|ridge|glen|park|"
+    r"Qzqx[a-z]+)\b|Qzqx[a-z]+))", re.I)
+# a range of house numbers ("17613-17645-17661 Northern Harrier", "606-608 Port St") before a name is an address, street
+# word or not
+HOUSE_RANGE = re.compile(r"(?<![\w.,/:#-])\d{2,6}[A-Za-z]?(?:-\d{2,6}[A-Za-z]?)+(?=\s{1,2}(?:[NSEW]\.?\s{1,2})?[A-Z])")
 UNIT_NUMBER = re.compile(r"\b(lot|apt|apartment|unit|suite|ste|space|spc|trailer|bldg|building)\.?\s*(?:no\.?|#)?\s*\d+[A-Za-z]?\b",
                          re.I)
 
@@ -632,9 +636,10 @@ def scrub_strict(text):
         return f"Qzqx{tag}"
     t = ROAD_NUMBER.sub(hold, text)
     t = SEGMENT_BEFORE_WATER.sub(lambda m: m.group(0) if STREET_AHEAD.match(t[m.end():]) else hold(m), t)
-    t = re.sub(r"/(?=\s*\d)", "/ ", t)
+    t = re.sub(r"(?<=[A-Za-z.)])/(?=\s*\d)", "/ ", t)        # "Line Break/1967 ...", not a date "12/18/2024"
     t = UNIT_NUMBER.sub(lambda m: f"{m.group(1)} [house number removed]", t)
     t = scrub_people(MI.free_text(t))
+    t = HOUSE_RANGE.sub("[house number removed]", t)
     t = STREET_HOUSE.sub(lambda m: m.group(0) if (m.start() and t[m.start() - 1] == "#" and len(m.group(1)) < 3)
                          else "[house number removed]", t)      # whatever stands before it ("No. 19", "LS 8015", "MH 11770 at")
     def back(m):

@@ -987,7 +987,11 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 # unless the point is within NAME_MATCH_M of the record. ADEM's layers give no county, so the county is the one whose
 # outline (data/reference/al-counties.json, Census TIGERweb) holds the point. A record with no outline cannot be
 # measured from a point; its box still places it in a county ("Cowan Creek" in Fairhope is not Ferguson's).
-COUNTY_STATES = {"AL": "al-counties.json"}
+COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json"}
+# States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
+# raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
+# rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
+COUNTY_FIELD_STATES = {"TX"}
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
@@ -1014,6 +1018,17 @@ def point_county(state: str, lat, lon) -> tuple[str, str] | None:
     return None
 
 
+def named_county(state: str, name) -> tuple[str, str] | None:
+    """(geoid, name) of the county a report's own county field names ("Lubbock County", "LUBBOCK"), or None."""
+    n = re.sub(r"\s+county$", "", str(name or "").strip(), flags=re.I).lower().replace(".", "")
+    if not n:
+        return None
+    for geoid, cname, _ in state_counties(state):
+        if cname.lower().replace(".", "") in (n, f"{n} county") or re.sub(r"\s+county$", "", cname.lower()) == n:
+            return geoid, cname
+    return None
+
+
 def record_counties(state: str, w: dict) -> frozenset:
     """The geoids of the counties a record's box, padded by NAME_MATCH_M, reaches (empty without a box)."""
     b = w.get("bbox")
@@ -1037,11 +1052,15 @@ def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, s
         return list(slugs), None
     lat, lon = ev.get("lat"), ev.get("lon")
     here = point_county(state, lat, lon)
+    field = False
+    if here is None and state in COUNTY_FIELD_STATES:
+        here = named_county(state, (ev.get("raw") or {}).get("county"))
+        field = here is not None
     if here is None:
         return list(slugs), None
     kept, off = [], []
     for x in slugs:
-        d = distance(x, lat, lon)
+        d = distance(x, lat, lon) if lat is not None and lon is not None else None
         rc = record_counties(state, waters.get(x) or {})
         if (d is not None and d <= NAME_MATCH_M) or not rc or here[0] in rc:     # no box: nothing to judge by
             kept.append(x)
@@ -1049,8 +1068,18 @@ def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, s
             off.append(x)
     if not off:
         return kept, None
-    return kept, (f"the record(s) of that name ({', '.join(off)}) do not reach {here[1]}, the county of the "
-                  "report's point")
+    return kept, (f"the record(s) of that name ({', '.join(off)}) do not reach {here[1]}, the county "
+                  + ("the report gives" if field else "of the report's point"))
+
+
+NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so it is listed with its county and placed "
+                   "on no water (never on its permit's outfalls' water)")
+
+
+def named_water_only(ev: dict) -> bool:
+    """Whether the record's source places it only on the water it names (raw._placement "named_water_only")."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("_placement") == "named_water_only"
 
 
 def event_state(ev: dict) -> str | None:
@@ -2323,8 +2352,12 @@ class Resolver:
                 return True
             return False
 
+        # a source whose rule places a report only on the water it names (raw._placement named_water_only: Texas's TCEQ
+        # table, which gives no point or outfall): never on its permit's outfalls' water, never by a point (final
+        # audit 2026-11-07 P1-1); a report naming no water stays unplaced, listed with its county
+        named_only = named_water_only(ev)
         yielded = False
-        if PLACE_STEPS["registry_first"]:
+        if PLACE_STEPS["registry_first"] and not named_only:
             reg = self.registry_first(ev, state, known, neg)
             if reg and reg[0]:
                 return placed(reg[0], "outfall_registry", reg[1], [note], outfalls=reg[2])
@@ -2341,7 +2374,7 @@ class Resolver:
                     known = []
             if known:
                 return placed(known, match, note, [relaxed[x] for x in known if x in relaxed])
-        o = None if yielded else self.by_outfall(ev.get("npdes_permit"), ev.get("outfall_id"))
+        o = None if (yielded or named_only) else self.by_outfall(ev.get("npdes_permit"), ev.get("outfall_id"))
         if o and o["water_slug"] not in neg:
             return placed([o["water_slug"]], "outfall_registry",
                           f"placed by outfall {o['outfall']} of permit {o['npdes_permit']} (outfall registry): "
@@ -2355,7 +2388,7 @@ class Resolver:
                 slugs = []
             if slugs:
                 return placed(slugs, "name", nnote or note, [relaxed[x] for x in slugs if x in relaxed])
-        near = on_a_water()
+        near = None if named_only else on_a_water()
         if near:
             return placed([near[1]], "geometry", f"point {round(near[0])} m from the water")
         reason = None
@@ -2364,7 +2397,8 @@ class Resolver:
         # a water text that matched no record (one that may name a water: not "N/A", not a storm drain) still lets
         # the outfalls the report names place it (outfall_ids)
         unmatched = not names_none and PLACE_STEPS["outfall_ids"] and not no_water_text(text)
-        if PLACE_STEPS["registry"] and (names_none or unmatched) and not no_water_flag(ev) and not aside:
+        if PLACE_STEPS["registry"] and (names_none or unmatched) and not no_water_flag(ev) and not aside \
+                and not named_only:
             slugs, match, rnote, outs = self.by_registry(ev, state, names_none)
             slugs = [x for x in slugs or [] if x not in neg] or None
             if slugs:
@@ -2384,6 +2418,8 @@ class Resolver:
             out.pop("unplaced_reason", None)
             out["no_receiving_water"] = nw
             return out
+        if named_only and not text and not out.get("unplaced_reason"):
+            out["unplaced_reason"] = NAMED_ONLY_NONE
         if ambiguous and not out.get("unplaced_reason"):
             out["unplaced_reason"] = "ambiguous name"
         if reason and not out.get("unplaced_reason"):
@@ -3258,6 +3294,7 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
     return {"source_id": sid, "ok": f.get("ok"), "error": f.get("error"), "fetched_at": f.get("fetched_at"),
             "last_ok_at": f.get("last_ok_at"), "count": f.get("records"), "fixture": f.get("fixture"),
             "expected_cadence_hours": cad,
+            "published_in_batches": bool((f.get("meta") or {}).get("published_in_batches")),
             "cadence_from": "frozen" if frozen else "registry" if reg_cad is not None else "default",
             "registry_ids": reg.get("ids") or [],
             "stale": bool(reasons), "stale_reason": "; ".join(reasons) or None}
