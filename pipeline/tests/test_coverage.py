@@ -183,14 +183,18 @@ def test_a_state_whose_dated_reports_come_only_from_epas_tables_names_epa_as_the
     cov = C.coverage(evs, [], feeds, registry, [], {}, iso(NOW), source_levels=levels)
     ms, wa = cov["states"]["MS"], cov["states"]["WA"]
     assert ms["grade"] == "Dated reports"
-    assert ms["sentence"] == ("Mississippi's operators' overflow reports are published by the U.S. Environmental "
-                              "Protection Agency, days to weeks after the event; the newest is from Nov 1, 2026.")
+    assert ms["sentence"] == ("Overflow reports from sewer operators in Mississippi are published by the U.S. "
+                              "Environmental Protection Agency; the newest is from Nov 1, 2026.")
     assert wa["sentence"].startswith("Washington publishes dated overflow reports; the newest is from")
     # without the levels (an older caller) the sentence is the state's, as before
     old = C.coverage(evs, [], feeds, registry, [], {}, iso(NOW))
     assert old["states"]["MS"]["sentence"].startswith("Mississippi publishes dated overflow reports")
     # delayed: the same subject, with the delay's wording
     g, s = C.grade_of("MS", {**cov["states"]["MS"], "latest_dated": iso(NOW - 60 * D)}, NOW, federal=True)
-    assert g == "Dated reports, delayed" and s.startswith("Mississippi's operators' overflow reports are published by "
-                                                          "the U.S. Environmental Protection Agency, days to weeks after "
-                                                          "the event, but the newest is from")
+    assert g == "Dated reports, delayed" and s.startswith("Overflow reports from sewer operators in Mississippi are "
+                                                          "published by the U.S. Environmental Protection Agency, but "
+                                                          "the newest is from")
+    # the District reads with its article, and a state whose name ends in s takes no possessive
+    assert C.grade_of("DC", {**cov["states"]["MS"]}, NOW, federal=True)[1].startswith(
+        "Overflow reports from sewer operators in the District of Columbia are published by")
+    assert "Illinois's" not in C.grade_of("IL", {**cov["states"]["MS"]}, NOW, federal=True)[1]
