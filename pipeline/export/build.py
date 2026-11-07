@@ -1640,9 +1640,13 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     pts = []
     for ap in st.get("advisory_points") or []:
         e = by_event.get(ap["event_id"])
-        if not e or e.get("lat") is None or e.get("lon") is None:
+        if not e:
             continue
-        lon, lat = round(float(e["lon"]), 5), round(float(e["lat"]), 5)
+        # a report with no point of its own (Hawaii): the marker at the point of the water record status gave it
+        src = e if e.get("lat") is not None and e.get("lon") is not None else ap
+        if src.get("lat") is None or src.get("lon") is None:
+            continue
+        lon, lat = round(float(src["lon"]), 5), round(float(src["lat"]), 5)
         pts.append({"type": "Feature", "id": e["event_id"], "geometry": {"type": "Point", "coordinates": [lon, lat]},
                     "properties": {"event_id": e["event_id"], "lat": lat, "lon": lon, "status": ap["status"],
                                    "rule": ap.get("rule"), "type": e["event_type"], "event_status": e.get("status"),
@@ -1650,6 +1654,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                                    "authority": e.get("authority"), "name": e.get("waterbody_text"),
                                    "started": e.get("started_at"), "ended": e.get("ended_at"), "until": ap.get("until"),
                                    "water_slugs": ap.get("water_slugs") or [], "why": ap.get("why"),
+                                   **({"point_basis": ap["point_basis"]} if ap.get("point_basis") else {}),
                                    # replay: the strictest of these for the hour, not today's status
                                    "intervals": ap.get("intervals") or [],
                                    "fixture": e.get("fixture", False), "file": e.get("file")}})

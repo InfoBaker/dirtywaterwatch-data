@@ -143,6 +143,9 @@
  "halifax-river-fl": [
   "Halifax Intracoastal Waterway"
  ],
+ "honokohau-small-boat-harbor-hi": [
+  "Honokohau Harbor"
+ ],
  "huron-river-mi": [
   "HURON"
  ],
@@ -154,6 +157,15 @@
  ],
  "jones-falls-md": [
   "Jones Fall"
+ ],
+ "kalauao-stream-hi": [
+  "Kalauau Stream"
+ ],
+ "kawaihae-bay-hi": [
+  "Kawaihae Harbor"
+ ],
+ "keehi-lagoon-hi": [
+  "Keehi Lagoon"
  ],
  "lake-avalon-nm": [
   "Avalon Lake"
@@ -264,6 +276,9 @@
  ],
  "patapsco-river-md": [
   "Baltimore Harbor"
+ ],
+ "pearl-harbor-hi": [
+  "East Loch"
  ],
  "pequonnock-river-ct": [
   "Pequannock River",

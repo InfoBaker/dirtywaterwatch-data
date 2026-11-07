@@ -62,13 +62,14 @@ ROWS = {
     "hi-honolulu-env": ("City and County of Honolulu, Department of Environmental Services (Honouliuli, Sand Island, "
                         "Kailua Regional, Waianae and Wahiawa plants and the collection system)",
                         "City and County of Honolulu", "city", "sso",
-                        "EPA lists two permits for the Honouliuli plant (HI0020877, HI0021954). The Wahiawa plant has "
+                        "EPA lists two permits for the Honouliuli plant: HI0021954, and HI0020877, terminated "
+                        "05/31/2026. The Wahiawa plant has "
                         "no permit in EPA's plant table."),
     "hi-hawaii-county": ("County of Hawaii, Department of Environmental Management (Hilo, Papaikou-Paukaa and Kulaimano "
                          "plants and the collection system)", "County of Hawaii", "county", "sso", None),
     "hi-kauai-county": ("County of Kauai, Wastewater Management Division (Wailua, Waimea and Lihue plants and the "
                         "collection system)", "County of Kauai", "county", "sso",
-                        "HIF014798 is a second EPA record of the Wailua plant (receiving water Konohiki Stream)."),
+                        None),
     "hi-maui-county": ("County of Maui, Department of Environmental Management (Kihei, Lahaina and Wailuku-Kahului "
                        "plants and the collection system)", "County of Maui", "county", "sso",
                        "EPA lists no NPDES permit for the county's plants, which dispose of treated wastewater to "
@@ -89,6 +90,11 @@ ROWS = {
                                     "EPA records it. Not in the plant outfall table."),
 }
 TOWN_FIX = {"Honolulu County": None, "Pearl Harbor": "Honolulu"}
+# final audit 2026-11-07 P2-3, from EPA ECHO read 2026-11-07 (scripts/hi_outfall_corrections.py, data/outfalls-hi.json)
+TERMINATED = {"HI0020877": "terminated 05/31/2026 (EPA ECHO: Terminated, individual NPDES permit)"}
+NOT_SEWAGE = {"HIF014798": ("a general-permit coverage at the Wailua plant (EPA ECHO: General Permit Covered Facility under "
+                            "master permit HIR000000, other id R90H876, effective 07/10/2025, no POTW component), very "
+                            "probably its storm-water coverage, not a sewage discharge permit")}
 # the research's receiving waters that name no water ("Oahu streams", "Kihei coast") are left out; "Nawiliwili" is the bay
 WATER_FIX = {"Oahu streams": None, "Kihei coast": None, "Lahaina coast": None, "Nawiliwili": "Nawiliwili Bay"}
 
@@ -121,7 +127,7 @@ def load_epa() -> dict[str, dict]:
 
 
 def build(epa: dict[str, dict], research: list[dict]) -> tuple[list[dict], dict]:
-    missing = sorted(set(epa) - set(PERMITS))
+    missing = sorted(set(epa) - set(PERMITS))   # HIF014798 is mapped so that its note lands on the Kauai row
     if missing:
         raise SystemExit(f"Hawaii permits with no row: {missing}")
     groups: dict[str, list[str]] = {rid: [] for rid in ROWS}
@@ -136,6 +142,9 @@ def build(epa: dict[str, dict], research: list[dict]) -> tuple[list[dict], dict]
         first = [x.strip() for x in str((r0 or {}).get("npdes_permit") or "").split(";")][0].split(" ")[0]
         if first in permits:
             permits = [first] + [p for p in permits if p != first]
+        other = [p for p in permits if p in NOT_SEWAGE]             # not a sewage permit: out of the permittee's list
+        permits = [p for p in permits if p not in NOT_SEWAGE]
+        permits = [p for p in permits if p not in TERMINATED] + [p for p in permits if p in TERMINATED]   # active first
         towns = list((r0 or {}).get("towns") or [])
         for p in permits:
             t = title(epa[p].get("city") or "")
@@ -144,7 +153,7 @@ def build(epa: dict[str, dict], research: list[dict]) -> tuple[list[dict], dict]
                 towns.append(t)
         waters = [WATER_FIX.get(w, w) for w in (r0 or {}).get("receiving_waters") or []]
         waters = list(dict.fromkeys([w for w in waters if w] + [title(w) for p in permits for w in epa[p]["waters"]]))
-        n_out = sum(epa[p]["outfalls"] for p in permits)
+        n_out = sum(epa[p]["outfalls"] for p in permits if p not in TERMINATED)
         facs = "; ".join(f"{p} {epa[p]['facility']}" for p in permits)
         note = f"EPA ECHO ICIS-NPDES: {facs}." if facs else "EPA ECHO ICIS-NPDES: no permit."
         if why:
@@ -163,6 +172,10 @@ def build(epa: dict[str, dict], research: list[dict]) -> tuple[list[dict], dict]
                "notification_signup_url": PORTAL, "towns": towns, "notes": note,
                "verified": "fetched", "checked": CHECKED, "aliases": [rid],
                "source_areas": ["hi"] + ([] if r0 else ["federal"]), "short_name": short, "legal_form": lf}
+        pnote = [f"{p}: {TERMINATED[p]}" for p in permits if p in TERMINATED] + \
+                [f"{p} is not listed as a sewage permit: {NOT_SEWAGE[p]}" for p in other]
+        if pnote:
+            row["permit_note"] = "; ".join(pnote) + "."
         rows.append(row)
     stats = {"rows": len(rows), "permits": sum(len(r["npdes_permits"]) for r in rows),
              "by_form": dict(Counter(r.get("legal_form") for r in rows)),
