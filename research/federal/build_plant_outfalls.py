@@ -186,15 +186,8 @@ def permit_limit_kinds(limits):
 _PU = []
 
 
-def public_permit_name(v):
-    """ICIS PERMIT_NAME as the public file carries it: None when it names a person in place of a body (EPA often fills
-    the field with a contact person): no body's word, and a person's name, whole or in a part joined by '&', 'and' or
-    a comma, by scripts/private_utilities.person_like (the check the private-utility list uses). A person named beside
-    a body ("<a person> - City of X") is not caught here; docs/reviews/2026-11-04-plant-outfalls-codes-review.md in
-    the site repository."""
-    s = (v or '').strip()
-    if not s:
-        return None
+def _public_names():
+    """scripts/private_utilities (and scripts/ on the path for scripts/permit_names)."""
     if not _PU:
         from pathlib import Path
         root = Path(__file__).resolve().parents[2]
@@ -203,7 +196,19 @@ def public_permit_name(v):
                 sys.path.insert(0, str(d))
         import private_utilities
         _PU.append(private_utilities)
-    pu = _PU[0]
+    return _PU[0]
+
+
+def public_permit_name(v):
+    """ICIS PERMIT_NAME as the public file carries it: None when it names a person in place of a body (EPA often fills
+    the field with a contact person): no body's word, and a person's name, whole or in a part joined by '&', 'and' or
+    a comma, by scripts/private_utilities.person_like (the check the private-utility list uses). A person named beside
+    a body ("<a person> - City of X") is cut after the rows are built (scripts/permit_names.scrub_rows, which reads the
+    row's city and facility name and marks the row permit_name_scrubbed)."""
+    s = (v or '').strip()
+    if not s:
+        return None
+    pu = _public_names()
     if pu.has_org_word(s):
         return s
     parts = [x.strip(' .,') for x in re.split(r'\s*[;,()/&]\s*|\s+-\s*|\s*-\s+|\s+and\s+', pu.clean(s), flags=re.I)]
@@ -723,6 +728,11 @@ def main(argv):
     }
     out_rows.sort(key=lambda r: (r['state'] or '', r['npdes_permit'], str(r.get('outfall') or '')))
     cso_suspects.sort(key=lambda r: (r['state'] or '', r['npdes_permit'], str(r.get('outfall') or '')))
+    # a contact person EPA puts before the body ('<a person> - City of X') is cut from permit_name, and the row
+    # marked permit_name_scrubbed (scripts/permit_names.py, the rule the committed file was scrubbed with)
+    _public_names()
+    import permit_names
+    doc['counts']['permit_names_scrubbed'] = sum(permit_names.scrub_rows(out_rows).values())
     with open(OUT, 'w') as fh:
         fh.write('{\n')
         for k, v in doc.items():
