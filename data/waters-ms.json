@@ -1,0 +1,4249 @@
+{
+ "state": "MS",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 190,
+ "waters": [
+  {
+   "slug": "aberdeen-lake-ms",
+   "name": "Aberdeen Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Aberdeen",
+    "Amory"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "becker-bottom-access-ms",
+    "blue-bluff-campground-ms",
+    "blue-bluff-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "aliceville-lake-columbus-ms",
+   "name": "Aliceville Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -88.31074,
+    33.2106,
+    -88.26518,
+    33.27849
+   ],
+   "wikidata": "Q4726213",
+   "charted": true,
+   "area_km2": 8.547,
+   "launches": [
+    "pratt-s-camp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "aliceville-lake-ms",
+   "name": "Aliceville Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "luxapalila-cr-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "archusa-creek-water-park-ms",
+   "name": "Archusa Creek Water Park",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Quitman"
+   ],
+   "bbox": [
+    -88.72544,
+    32.02367,
+    -88.69957,
+    32.05504
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.67,
+   "launches": [
+    "archusa-creek-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "arkabutla-lake-ms",
+   "name": "Arkabutla Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Coldwater",
+    "Hernando",
+    "Kelleys Crossing",
+    "Pleasant Hill"
+   ],
+   "bbox": [
+    -90.13189,
+    34.69536,
+    -90.00585,
+    34.81717
+   ],
+   "wikidata": "Q4791648",
+   "charted": false,
+   "area_km2": 34.658,
+   "launches": [
+    "bayou-point-ms",
+    "coldwater-point-ms",
+    "dub-patton-ms",
+    "hernando-point-ms",
+    "kelly-s-crossing-ms",
+    "mud-hole-boat-ramp-ms",
+    "pleasant-hill-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bailey-lake-ms",
+   "name": "Bailey Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Toomsuba"
+   ],
+   "bbox": [
+    -88.52793,
+    32.42052,
+    -88.51429,
+    32.43065
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.613,
+   "launches": [
+    "lake-tom-bailey-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bars-branch-ms",
+   "name": "Bars Branch",
+   "kind": "stream",
+   "state": "MS",
+   "towns": [
+    "Conerly"
+   ],
+   "bbox": [
+    -90.37278,
+    31.17286,
+    -90.27782,
+    31.20819
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hwy-98-bridge-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bay-of-saint-louis-ms",
+   "name": "Bay of Saint Louis",
+   "kind": "bay",
+   "state": "MS",
+   "towns": [
+    "Bay Saint Louis"
+   ],
+   "bbox": [
+    -89.37861,
+    30.30522,
+    -89.22903,
+    30.37699
+   ],
+   "wikidata": "Q4874232",
+   "charted": true,
+   "area_km2": 38.805,
+   "launches": [
+    "cedar-point-boat-launch-ms",
+    "cedar-point-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bay-springs-lake-ms",
+   "name": "Bay Springs Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Belmont",
+    "East Prentiss",
+    "Paden",
+    "Tishomingo"
+   ],
+   "bbox": [
+    -88.35284,
+    34.52263,
+    -88.2635,
+    34.64067
+   ],
+   "wikidata": "Q4874102",
+   "charted": true,
+   "area_km2": 24.31,
+   "launches": [
+    "bayberry-ms",
+    "cotton-springs-ramp-ms",
+    "crow-s-neck-ms",
+    "gin-branch-ms",
+    "mcdougal-branch-ms",
+    "piney-grove-ms",
+    "piney-grove-campground-ms",
+    "sander-s-landing-ms",
+    "west-damsite-marina-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bayou-caddy-ms",
+   "name": "Bayou Caddy",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Lakeshore"
+   ],
+   "bbox": [
+    -89.47911,
+    30.23527,
+    -89.44346,
+    30.24462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bayou-caddy-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-lake-ms",
+   "name": "Beaver Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Mantachie",
+    "Polkville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-lake-landing-ms",
+    "old-beaver-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "belzoni-old-river-cutoff-ms",
+   "name": "Belzoni Old River Cutoff",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Belzoni"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "belzoni-old-river-cutoff-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bernard-bayou-industrial-seaway-ms",
+   "name": "Bernard Bayou Industrial Seaway",
+   "kind": "bay",
+   "state": "MS",
+   "towns": [
+    "Biloxi",
+    "D'Iberville"
+   ],
+   "bbox": [
+    -89.04331,
+    30.39016,
+    -88.83537,
+    30.43428
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 22.359,
+   "launches": [
+    "causeway-park-boat-ramp-ms",
+    "d-iberville-marina-ms",
+    "forrest-ave-boat-launch-ms",
+    "bernard-bayou-industrial-seaway-boat-launch-near-biloxi-ms",
+    "lee-street-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bernard-bayou-ms",
+   "name": "Bernard Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Gulfport",
+    "Handsboro"
+   ],
+   "bbox": [
+    -89.10994,
+    30.40445,
+    -89.0022,
+    30.44766
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "gulfport-lake-ms",
+    "handsboro-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-black-river-bentonia-ms",
+   "name": "Big Black River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Bentonia",
+    "Canton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-black-hwy-16-ms",
+    "big-black-river-hwy-49-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-black-river-ms",
+   "name": "Big Black River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Durant",
+    "Galloway",
+    "Goodman",
+    "Vaiden",
+    "Winona"
+   ],
+   "bbox": [
+    -91.05452,
+    32.05121,
+    -89.12044,
+    33.66069
+   ],
+   "wikidata": "Q1042217",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-black-35-hwy-ms",
+    "big-black-hwy-12-ms",
+    "big-black-river-hwy-61-ms",
+    "hwy-14-big-black-ms",
+    "hwy-407-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-lake-ms",
+   "name": "Big Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lucedale",
+    "Moss Point"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-lake-ramp-ms",
+    "pascagoula-wma-lucedale-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-slough-ms",
+   "name": "Big Slough",
+   "kind": "stream",
+   "state": "MS",
+   "towns": [
+    "Wade"
+   ],
+   "bbox": [
+    -88.62018,
+    30.63481,
+    -88.59943,
+    30.6531
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parkers-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-sunflower-river-ms",
+   "name": "Big Sunflower River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Indianola",
+    "Murphy",
+    "Rolling Fork"
+   ],
+   "bbox": [
+    -90.81261,
+    32.66987,
+    -90.52159,
+    34.24852
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-sunflower-river-boat-launch-ms",
+    "jordan-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-creek-ms",
+   "name": "Black Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Batt Place",
+    "Brooklyn",
+    "Lucedale",
+    "Purvis",
+    "Wiggins"
+   ],
+   "bbox": [
+    -89.42108,
+    30.69583,
+    -88.66644,
+    31.21495
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-creek-landing-ms",
+    "big-creek-landing-brooklyn-ms",
+    "cypress-creek-landing-ms",
+    "fairley-bridge-landing-ms",
+    "flurry-landing-ramp-ms",
+    "hwy-26-ramp-ms",
+    "hwy-57-ramp-ms",
+    "janice-landing-ms",
+    "moody-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bluff-lake-ms",
+   "name": "Bluff Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Starkville"
+   ],
+   "bbox": [
+    -88.8039,
+    33.27031,
+    -88.77667,
+    33.29691
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.664,
+   "launches": [
+    "bluff-lake-ramp-ms",
+    "cypress-cove-primitive-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-chitto-river-ms",
+   "name": "Bogue Chitto River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Bogue Chitto",
+    "Tylertown",
+    "Vaughts"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bogue-chitto-water-park-ms",
+    "busby-landing-ms",
+    "stallings-bridge-landing-ms",
+    "walker-s-bridge-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-homa-ms",
+   "name": "Bogue Homa",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Richton"
+   ],
+   "bbox": [
+    -89.02909,
+    31.34434,
+    -89.02165,
+    31.36998
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hwy-42-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-phalia-ms",
+   "name": "Bogue Phalia",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Leland"
+   ],
+   "bbox": [
+    -90.9192,
+    33.22516,
+    -90.72967,
+    33.887
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fratesis-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bonita-reservoir-ms",
+   "name": "Bonita Reservoir",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Meridian"
+   ],
+   "bbox": [
+    -88.66666,
+    32.35876,
+    -88.66054,
+    32.36313
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.176,
+   "launches": [
+    "bonita-reservoir-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bouie-river-ms",
+   "name": "Bouie River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Bowie",
+    "Hattiesburg",
+    "Sumrall"
+   ],
+   "bbox": [
+    -89.63396,
+    31.3466,
+    -89.28539,
+    31.55712
+   ],
+   "wikidata": "Q4949464",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hwy-49-landing-ms",
+    "pepps-point-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brushy-lake-ms",
+   "name": "Brushy Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Hollandale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "leroy-percy-state-park-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "buckatunna-creek-ms",
+   "name": "Buckatunna Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Denham"
+   ],
+   "bbox": [
+    -88.53764,
+    31.50647,
+    -88.5019,
+    31.65632
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dehamn-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burnside-lake-ms",
+   "name": "Burnside Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Burnside",
+    "Philadelphia"
+   ],
+   "bbox": [
+    -89.10738,
+    32.84258,
+    -89.09783,
+    32.84423
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "burnside-lake-boat-launch-ms",
+    "hwy-15-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "butler-lake-ms",
+   "name": "Butler Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Ellis Cliffs"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "st-catherine-creek-nwr-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "buttahatchee-river-ms",
+   "name": "Buttahatchee River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Caledonia"
+   ],
+   "bbox": [
+    -88.50068,
+    33.65657,
+    -88.11617,
+    33.93682
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cockerham-bridge-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cane-creek-ms",
+   "name": "Cane Creek",
+   "kind": "stream",
+   "state": "MS",
+   "towns": [
+    "Canton"
+   ],
+   "bbox": [
+    -89.91717,
+    32.5016,
+    -89.91615,
+    32.51241
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cane-creek-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cane-lake-ms",
+   "name": "Cane Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Jackson County"
+   ],
+   "bbox": [
+    -88.63371,
+    30.64692,
+    -88.63017,
+    30.64918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.018,
+   "launches": [
+    "cane-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cassidy-bayou-ms",
+   "name": "Cassidy Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Sumner"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sumner-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chautauqua-lake-ms",
+   "name": "Chautauqua Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Crystal Springs"
+   ],
+   "bbox": [
+    -90.36799,
+    31.99599,
+    -90.36282,
+    32.00023
+   ],
+   "wikidata": "Q34767388",
+   "charted": false,
+   "area_km2": 0.085,
+   "launches": [
+    "crystal-springs-lake-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chewalla-lake-ms",
+   "name": "Chewalla Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Holly Springs"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chewalla-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chickasawhay-river-ms",
+   "name": "Chickasawhay River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "De Soto",
+    "Leakesville",
+    "Old Avera",
+    "Quitman",
+    "Robinsons Junction",
+    "Shubuta",
+    "Stonewall",
+    "Waynesboro"
+   ],
+   "bbox": [
+    -88.82058,
+    30.98136,
+    -88.53115,
+    32.18244
+   ],
+   "wikidata": "Q1072169",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chicora-boat-ramp-ms",
+    "desoto-boat-ramp-ms",
+    "highway-63-boat-ramp-ms",
+    "highway-84-pat-harrison-ms",
+    "hillsbrook-landing-ms",
+    "leaksville-ramp-ms",
+    "quitman-ms",
+    "shubuta-boat-ramp-ms",
+    "stonewall-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "choctaw-lake-ms",
+   "name": "Choctaw Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Ackerman"
+   ],
+   "bbox": [
+    -89.14691,
+    33.27106,
+    -89.13805,
+    33.28074
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.354,
+   "launches": [
+    "choctaw-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chotard-lake-ms",
+   "name": "Chotard Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Bellevule",
+    "Chotard"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "laney-s-camp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chunky-river-ms",
+   "name": "Chunky River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Chunky"
+   ],
+   "bbox": [
+    -88.98802,
+    32.18244,
+    -88.8203,
+    32.36292
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chunky-river-hwy-80-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cochran-dead-river-ms",
+   "name": "Cochran Dead River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pascagoual-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coldwater-river-ms",
+   "name": "Coldwater River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Coldwater",
+    "Crenshaw",
+    "Hernando",
+    "Lambert",
+    "Marks",
+    "Savage"
+   ],
+   "bbox": [
+    -90.40287,
+    34.18352,
+    -89.32842,
+    34.94425
+   ],
+   "wikidata": "Q5142591",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "campbell-white-landing-ms",
+    "creshaw-boat-ramp-ms",
+    "hwy-51-landing-ms",
+    "marks-boat-ramp-ms",
+    "savage-ramp-ms",
+    "snow-s-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "columbus-lake-ms",
+   "name": "Columbus Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Columbus",
+    "Waverly"
+   ],
+   "bbox": [
+    -88.52522,
+    33.51807,
+    -88.45631,
+    33.55844
+   ],
+   "wikidata": "Q5150069",
+   "charted": true,
+   "area_km2": 9.382,
+   "launches": [
+    "barton-ferry-ms",
+    "charles-younger-ramp-ms",
+    "eastbank-ramp-ms",
+    "waverly-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-ms",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Jackson"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crystal-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cumbest-bayou-ms",
+   "name": "Cumbest Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Pascagoula"
+   ],
+   "bbox": [
+    -88.45334,
+    30.35506,
+    -88.43671,
+    30.39963
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bayou-cumbest-public-boat-launch-ms",
+    "grand-bature-road-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cypress-lake-ms",
+   "name": "Cypress Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Oxford"
+   ],
+   "bbox": [
+    -89.33333,
+    34.38757,
+    -89.32716,
+    34.39343
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.167,
+   "launches": [
+    "cypress-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dacy-lake-ms",
+   "name": "Dacy Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pascagoula-wma-ms-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "davis-bayou-ms",
+   "name": "Davis Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ocean Springs"
+   ],
+   "bbox": [
+    -88.80934,
+    30.38173,
+    -88.7458,
+    30.40605
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "davis-bayou-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "davis-eddy-ms",
+   "name": "Davis Eddy",
+   "kind": "bay",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "davis-eddy-ramp-pas-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "davis-lake-ms",
+   "name": "Davis Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "New Houlka"
+   ],
+   "bbox": [
+    -88.95181,
+    34.03699,
+    -88.93258,
+    34.0496
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.694,
+   "launches": [
+    "davis-lake-rec-area-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deer-bayou-ms",
+   "name": "Deer Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Yazoo City"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "strickland-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deer-creek-ms",
+   "name": "Deer Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Arcola"
+   ],
+   "bbox": [
+    -91.00659,
+    32.86839,
+    -90.82742,
+    33.50258
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "arcola-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "desoto-lake-ms",
+   "name": "Desoto Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Hillhouse Landing",
+    "Sunflower Landing"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "desoto-lake-park-ms",
+    "hillhouse-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dry-creek-lake-ms",
+   "name": "Dry Creek Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Magee"
+   ],
+   "bbox": [
+    -89.73643,
+    31.74691,
+    -89.72913,
+    31.75647
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.182,
+   "launches": [
+    "pat-harrison-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eagle-lake-ms",
+   "name": "Eagle Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Vicksburg"
+   ],
+   "bbox": [
+    -91.07079,
+    32.47961,
+    -90.98399,
+    32.53399
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.878,
+   "launches": [
+    "eagle-lake-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elvis-presley-lake-ms",
+   "name": "Elvis Presley Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Tupelo"
+   ],
+   "bbox": [
+    -88.6657,
+    34.29558,
+    -88.64819,
+    34.32067
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.157,
+   "launches": [
+    "elvis-presley-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "english-lake-ms",
+   "name": "English Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Goodman"
+   ],
+   "bbox": [
+    -89.92847,
+    33.0257,
+    -89.923,
+    33.0318
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.135,
+   "launches": [
+    "holmes-county-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "enid-lake-ms",
+   "name": "Enid Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Hubbard Creek",
+    "Lakeside",
+    "Long Branch",
+    "Oakland",
+    "Wallace Creek",
+    "Water Valley",
+    "Water Valley Landing"
+   ],
+   "bbox": [
+    -89.90724,
+    34.11123,
+    -89.74343,
+    34.17293
+   ],
+   "wikidata": "Q768090",
+   "charted": false,
+   "area_km2": 37.354,
+   "launches": [
+    "bynum-creek-ms",
+    "chickasaw-ms",
+    "cossar-lower-ms",
+    "cossar-upper-ms",
+    "long-branch-ms",
+    "mccurdy-point-ms",
+    "persimmon-hill-lower-ms",
+    "persimmon-hill-upper-ms",
+    "plum-point-ms",
+    "point-pleasant-ms",
+    "prophet-bridge-ms",
+    "wallace-creek-ms",
+    "water-valley-landing-ms",
+    "wildcat-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "escatawpa-river-ms",
+   "name": "Escatawpa River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Moss Point"
+   ],
+   "bbox": [
+    -88.5611,
+    30.41791,
+    -88.39993,
+    30.94055
+   ],
+   "wikidata": "Q5397133",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brown-bridge-road-614-ms",
+    "hwy-63-ramp-ms",
+    "pollock-ferry-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fletcher-lake-ms",
+   "name": "Fletcher Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Jackson County"
+   ],
+   "bbox": [
+    -88.64204,
+    30.64618,
+    -88.63474,
+    30.64918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.055,
+   "launches": [
+    "fletcher-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flint-creek-reservoir-ms",
+   "name": "Flint Creek Reservoir",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Wiggins"
+   ],
+   "bbox": [
+    -89.14493,
+    30.86785,
+    -89.12156,
+    30.90828
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.959,
+   "launches": [
+    "flint-creek-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "four-mile-creek-ms",
+   "name": "Four Mile Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Moss Point"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "four-mile-creek-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "geiger-lake-ms",
+   "name": "Geiger Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Wallis"
+   ],
+   "bbox": [
+    -89.24791,
+    31.13378,
+    -89.23461,
+    31.15437
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.944,
+   "launches": [
+    "paul-b-johnson-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gilliard-lake-ms",
+   "name": "Gilliard Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Adams County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "st-catherine-creek-nwr-adams-county-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goff-dead-river-ms",
+   "name": "Goff Dead River",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": [
+    -88.71035,
+    30.78462,
+    -88.70566,
+    30.79172
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.06,
+   "launches": [
+    "goff-basin-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "golden-memorial-lake-ms",
+   "name": "Golden Memorial Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Walnut Grove"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "golden-memorial-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "graham-lake-ms",
+   "name": "Graham Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Jackson County"
+   ],
+   "bbox": [
+    -88.63805,
+    30.61742,
+    -88.63345,
+    30.62186
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.048,
+   "launches": [
+    "graham-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greentree-reservoir-ms",
+   "name": "Greentree Reservoir",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Louin"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "green-tree-reservoir-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grenada-lake-ms",
+   "name": "Grenada Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Bryant",
+    "Choctaw",
+    "Graysport Crossing",
+    "Grenada",
+    "Gums Crossing",
+    "Kirkman Landing",
+    "Turkey Creek"
+   ],
+   "bbox": [
+    -89.77774,
+    33.78933,
+    -89.51785,
+    33.91449
+   ],
+   "wikidata": "Q1545634",
+   "charted": false,
+   "area_km2": 82.482,
+   "launches": [
+    "bryant-ms",
+    "carver-point-ms",
+    "choctaw-ms",
+    "grenada-landing-ms",
+    "gum-s-crossing-ms",
+    "hugh-white-state-park-ms",
+    "north-abutment-ms",
+    "north-graysport-ms",
+    "outlet-channel-ms",
+    "piney-woods-ms",
+    "skuna-turkey-ms",
+    "south-graysport-ms",
+    "torrance-ms",
+    "wolf-creek-ms",
+    "young-s-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "halstead-bayou-ms",
+   "name": "Halstead Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ocean Springs"
+   ],
+   "bbox": [
+    -88.80098,
+    30.39436,
+    -88.79343,
+    30.39736
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "halstead-bayou-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "haynes-lake-ms",
+   "name": "Haynes Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Tishomingo"
+   ],
+   "bbox": [
+    -88.19729,
+    34.6141,
+    -88.19081,
+    34.62034
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.14,
+   "launches": [
+    "tishomingo-state-park-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hobolochitto-creek-ms",
+   "name": "Hobolochitto Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Picayune"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dan-taberer-memorial-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "homochitto-river-ms",
+   "name": "Homochitto River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Doloroso"
+   ],
+   "bbox": [
+    -91.50906,
+    31.30455,
+    -90.6239,
+    31.71406
+   ],
+   "wikidata": "Q5891041",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "homochitto-river-hwy-61-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-crossroads-ms",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Crossroads"
+   ],
+   "bbox": [
+    -89.82027,
+    30.76941,
+    -89.81696,
+    30.77294
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.032,
+   "launches": [
+    "horseshoe-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-gibson-landing-ms",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Gibson Landing"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "horseshoe-lake-pas-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-ms",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Tchula"
+   ],
+   "bbox": [
+    -90.31124,
+    33.21537,
+    -90.23176,
+    33.26713
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.796,
+   "launches": [
+    "horseshoe-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hutson-lake-ms",
+   "name": "Hutson Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Riverview Estates"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hutson-lake-pas-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ivy-lake-ms",
+   "name": "Ivy Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Quitman"
+   ],
+   "bbox": [
+    -88.69836,
+    32.09815,
+    -88.68685,
+    32.10325
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.178,
+   "launches": [
+    "clarko-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jefferson-davis-lake-ms",
+   "name": "Jefferson Davis Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Prentiss"
+   ],
+   "bbox": [
+    -89.84345,
+    31.56031,
+    -89.83275,
+    31.56958
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.382,
+   "launches": [
+    "lake-jeff-davis-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jourdan-river-ms",
+   "name": "Jourdan River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Diamondhead"
+   ],
+   "bbox": [
+    -89.5546,
+    30.33527,
+    -89.35782,
+    30.52115
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "jourdan-river-shores-ramp-bayou-talla-boat-launch-ms",
+    "mcleod-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kemper-county-lake-ms",
+   "name": "Kemper County Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Bloomfield"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kemper-lake-main-ramp-ms",
+    "kemper-lake-north-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-beulah-ms",
+   "name": "Lake Beulah",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Beulah"
+   ],
+   "bbox": [
+    -91.04128,
+    33.75972,
+    -90.98685,
+    33.80296
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.358,
+   "launches": [
+    "lake-beulah-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bill-waller-ms",
+   "name": "Lake Bill Waller",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -89.72766,
+    31.19031,
+    -89.71208,
+    31.20293
+   ],
+   "wikidata": "Q6474979",
+   "charted": false,
+   "area_km2": 0.705,
+   "launches": [
+    "lake-bill-waller-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bogue-homa-ms",
+   "name": "Lake Bogue Homa",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Cleo"
+   ],
+   "bbox": [
+    -89.0282,
+    31.70015,
+    -88.99945,
+    31.72576
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.198,
+   "launches": [
+    "bogue-homa-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bolivar-ms",
+   "name": "Lake Bolivar",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lake Vista"
+   ],
+   "bbox": [
+    -91.09618,
+    33.5986,
+    -91.04997,
+    33.65575
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.494,
+   "launches": [
+    "w-fisher-johnson-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-calling-panther-ms",
+   "name": "Lake Calling Panther",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Crystal Springs"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "calling-panther-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-claude-bennett-ms",
+   "name": "Lake Claude Bennett",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Pachuta"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "claude-bennett-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-columbia-ms",
+   "name": "Lake Columbia",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -89.7409,
+    31.18184,
+    -89.73048,
+    31.19222
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.335,
+   "launches": [
+    "lake-columbia-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-dockery-ms",
+   "name": "Lake Dockery",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Gary Estates"
+   ],
+   "bbox": [
+    -90.27068,
+    32.19634,
+    -90.26336,
+    32.20328
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.166,
+   "launches": [
+    "lake-dockery-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ferguson-greenville-ms",
+   "name": "Lake Ferguson",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Greenville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "warfield-point-miss-r-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ferguson-ms",
+   "name": "Lake Ferguson",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Greenville"
+   ],
+   "bbox": [
+    -91.1002,
+    33.37118,
+    -91.05368,
+    33.44515
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.809,
+   "launches": [
+    "greenville-city-front-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-george-ms",
+   "name": "Lake George",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Enola"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-george-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hazle-ms",
+   "name": "Lake Hazle",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Hazlehurst"
+   ],
+   "bbox": [
+    -90.4043,
+    31.86716,
+    -90.3996,
+    31.87189
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "lake-hazle-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lamar-bruce-ms",
+   "name": "Lake Lamar Bruce",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Saltillo"
+   ],
+   "bbox": [
+    -88.67191,
+    34.38703,
+    -88.65332,
+    34.40936
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.061,
+   "launches": [
+    "lamar-bruce-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lee-ms",
+   "name": "Lake Lee",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Wayside"
+   ],
+   "bbox": [
+    -91.08963,
+    33.23307,
+    -91.04118,
+    33.28994
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.723,
+   "launches": [
+    "kirk-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lincoln-ms",
+   "name": "Lake Lincoln",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Wesson"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-lincoln-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lowndes-ms",
+   "name": "Lake Lowndes",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lakeover Estates"
+   ],
+   "bbox": [
+    -88.30416,
+    33.42237,
+    -88.29188,
+    33.44013
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.536,
+   "launches": [
+    "lake-lowndes-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mary-crawford-ms",
+   "name": "Lake Mary Crawford",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Monticello"
+   ],
+   "bbox": [
+    -90.16543,
+    31.57208,
+    -90.15295,
+    31.58133
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.513,
+   "launches": [
+    "lake-mary-crawford-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mary-ms",
+   "name": "Lake Mary",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Loch Leven"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-mary-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mike-conner-ms",
+   "name": "Lake Mike Conner",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Collins"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-mike-conner-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-monroe-ms",
+   "name": "Lake Monroe",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Lake Monroe East Subdivision"
+   ],
+   "bbox": [
+    -88.5702,
+    33.94136,
+    -88.56201,
+    33.95608
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.389,
+   "launches": [
+    "lake-monroe-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-perry-ms",
+   "name": "Lake Perry",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Beaumont"
+   ],
+   "bbox": [
+    -88.91137,
+    31.12505,
+    -88.89919,
+    31.13631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.308,
+   "launches": [
+    "lake-perry-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-prentiss-walker-ms",
+   "name": "Lake Prentiss Walker",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Mize"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-prentiss-walker-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tangipahoa-ms",
+   "name": "Lake Tangipahoa",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "McComb"
+   ],
+   "bbox": [
+    -90.53448,
+    31.17437,
+    -90.51603,
+    31.19671
+   ],
+   "wikidata": "Q34929801",
+   "charted": false,
+   "area_km2": 1.686,
+   "launches": [
+    "percy-quin-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-walthall-ms",
+   "name": "Lake Walthall",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Tylertown"
+   ],
+   "bbox": [
+    -90.13634,
+    31.05803,
+    -90.12933,
+    31.06678
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.138,
+   "launches": [
+    "lake-walthall-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-washington-alhambra-ms",
+   "name": "Lake Washington",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Alhambra"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spillway-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-washington-ms",
+   "name": "Lake Washington",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Erwin",
+    "Glen Allan",
+    "Leota"
+   ],
+   "bbox": [
+    -91.08449,
+    33.01588,
+    -91.03009,
+    33.1054
+   ],
+   "wikidata": "Q16893920",
+   "charted": false,
+   "area_km2": 10.477,
+   "launches": [
+    "glen-allen-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leaf-river-ms",
+   "name": "Leaf River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Beaumont",
+    "Ellisville",
+    "Hattiesburg",
+    "McLain",
+    "New Augusta",
+    "Reddochs"
+   ],
+   "bbox": [
+    -89.4539,
+    30.98136,
+    -88.72948,
+    32.31145
+   ],
+   "wikidata": "Q1810486",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "84-highway-ms",
+    "beaumont-boat-ramp-ms",
+    "eastabuchie-park-ms",
+    "farlow-landing-ms",
+    "highway-588-ms",
+    "highway-590-ms",
+    "leaf-river-landing-ms",
+    "mclain-landing-ms",
+    "old-augusta-landing-ms",
+    "simms-bridge-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "legion-lake-ms",
+   "name": "Legion Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Louisville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "legion-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-black-creek-water-park-ms",
+   "name": "Little Black Creek Water Park",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Purvis"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-black-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-creek-ms",
+   "name": "Little Creek",
+   "kind": "stream",
+   "state": "MS",
+   "towns": [
+    "Ellisville"
+   ],
+   "bbox": [
+    -89.3458,
+    31.64007,
+    -89.331,
+    31.71504
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-creek-10-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-owl-lake-ms",
+   "name": "Little Owl Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Tupelo"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-owl-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-round-lake-ms",
+   "name": "Little Round Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Greenwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-round-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-sunflower-river-ms",
+   "name": "Little Sunflower River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Little Sunflower"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dummy-line-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-tallahatchie-river-abbeville-ms",
+   "name": "Little Tallahatchie River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Abbeville"
+   ],
+   "bbox": [
+    -89.79717,
+    34.4094,
+    -88.87912,
+    34.66196
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "frank-walker-landing-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-tallahatchie-river-batesville-ms",
+   "name": "Little Tallahatchie River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Batesville"
+   ],
+   "bbox": [
+    -90.12531,
+    34.15762,
+    -89.81629,
+    34.40635
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-51-landing-ms",
+    "weir-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-tallahatchie-river-ms",
+   "name": "Little Tallahatchie River",
+   "kind": "canal",
+   "state": "MS",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": [
+    -90.18402,
+    34.0056,
+    -90.12334,
+    34.15762
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "paducah-wells-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loakfoma-lake-ms",
+   "name": "Loakfoma Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Starkville"
+   ],
+   "bbox": [
+    -88.78582,
+    33.25138,
+    -88.77088,
+    33.26824
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.629,
+   "launches": [
+    "loakfoma-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "log-loader-lake-ms",
+   "name": "Log Loader Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Riverton Landing"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "port-of-rosedale-miss-r-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-branch-bayou-ms",
+   "name": "Long Branch Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Hugo"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tallahatchie-nwr-hugo-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-creek-reservoir-ms",
+   "name": "Long Creek Reservoir",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Meridian"
+   ],
+   "bbox": [
+    -88.62503,
+    32.32415,
+    -88.61168,
+    32.34033
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.754,
+   "launches": [
+    "long-creek-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-rines-lake-ms",
+   "name": "Lower Rines Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lower-rines-ramp-pas-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "luxapallila-creek-ms",
+   "name": "Luxapallila Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -88.40042,
+    33.49296,
+    -88.12336,
+    33.57075
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sheriff-s-office-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "magee-s-creek-ms",
+   "name": "Magee's Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Lexie"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "magee-s-creek-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marathon-lake-ms",
+   "name": "Marathon Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Sun"
+   ],
+   "bbox": [
+    -89.3615,
+    32.19568,
+    -89.35587,
+    32.2052
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.154,
+   "launches": [
+    "marathon-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mary-walker-bayou-ms",
+   "name": "Mary Walker Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Gautier"
+   ],
+   "bbox": [
+    -88.65189,
+    30.38555,
+    -88.60948,
+    30.4071
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.393,
+   "launches": [
+    "gautier-city-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mayes-lake-ms",
+   "name": "Mayes Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Flowood"
+   ],
+   "bbox": [
+    -90.14709,
+    32.32638,
+    -90.14221,
+    32.33143
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "lefleur-s-bluff-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maynor-creek-ms",
+   "name": "Maynor Creek",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Waynesboro"
+   ],
+   "bbox": [
+    -88.7273,
+    31.64153,
+    -88.70664,
+    31.66883
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.639,
+   "launches": [
+    "maynor-creek-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mccrea-dead-river-ms",
+   "name": "Mccrea Dead River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Pascagoula River Estates"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mccrae-dead-river-pas-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mcinnis-bayou-ms",
+   "name": "McInnis Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Moss Point"
+   ],
+   "bbox": [
+    -88.57464,
+    30.38918,
+    -88.55695,
+    30.4176
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.269,
+   "launches": [
+    "choctaw-marina-mcinnis-bayou-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mississippi-river-chute-63-ms",
+   "name": "Mississippi River Chute 63",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Stokely"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "qua-paw-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mississippi-river-ms",
+   "name": "Mississippi River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Friars Point",
+    "Mayersville",
+    "Mhoon Landing",
+    "Natchez",
+    "Norfolk",
+    "Port Gibson",
+    "Terrene Landing",
+    "Vicksburg"
+   ],
+   "bbox": [
+    -91.66176,
+    30.98706,
+    -90.06076,
+    35.36142
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "adams-county-port-ms",
+    "claiborne-county-port-high-water-ramp-ms",
+    "claiborne-county-port-low-water-ramp-ms",
+    "delta-landing-ms",
+    "horn-lake-pass-bass-landing-ms",
+    "letourneau-landing-ms",
+    "mayersville-landing-ms",
+    "mhoon-landing-ms",
+    "port-of-port-gibson-high-water-ramp-ms",
+    "terrene-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mississippi-sound-ms",
+   "name": "Mississippi Sound",
+   "kind": "sound",
+   "state": "MS",
+   "towns": [
+    "Bay Saint Louis",
+    "Biloxi",
+    "Gulfport",
+    "Long Beach",
+    "Mississippi City",
+    "Ocean Springs",
+    "Pascagoula",
+    "Pass Christian"
+   ],
+   "bbox": [
+    -89.48073,
+    30.04958,
+    -88.11551,
+    30.39398
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1723.785,
+   "launches": [
+    "bayou-cassotte-ladner-rd-landing-ms",
+    "biloxi-harbor-ms",
+    "gulfport-small-craft-harbor-ms",
+    "kuhn-st-boat-launch-ms",
+    "lake-mars-boat-ramp-ms",
+    "long-beach-small-craft-harbor-ms",
+    "mississippi-sound-boat-launch-near-mississippi-city-ms",
+    "mississippi-sound-boat-launch-near-pass-christian-ms",
+    "washington-st-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moon-lake-ms",
+   "name": "Moon Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Coahoma",
+    "Lula",
+    "Moon"
+   ],
+   "bbox": [
+    -90.56722,
+    34.40242,
+    -90.49549,
+    34.46008
+   ],
+   "wikidata": "Q6907498",
+   "charted": false,
+   "area_km2": 8.701,
+   "launches": [
+    "moon-lake-landing-ms",
+    "moon-lake-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nanawaya-creek-ms",
+   "name": "Nanawaya Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Coy"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "nanawaya-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neshoba-county-lake-ms",
+   "name": "Neshoba County Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Philadelphia"
+   ],
+   "bbox": [
+    -89.01131,
+    32.702,
+    -89.00203,
+    32.71382
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.617,
+   "launches": [
+    "neshoba-county-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "noxubee-river-ms",
+   "name": "Noxubee River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Macon",
+    "Shuqualak"
+   ],
+   "bbox": [
+    -88.71268,
+    32.98862,
+    -88.45961,
+    33.19224
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kohen-landing-ms",
+    "norvell-coleman-landing-ms",
+    "noxubee-wild-and-scenic-river-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "o-leary-lake-ms",
+   "name": "O'Leary Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Moss Point"
+   ],
+   "bbox": [
+    -88.53575,
+    30.40989,
+    -88.52233,
+    30.41547
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.162,
+   "launches": [
+    "moss-point-city-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "okatibbee-lake-ms",
+   "name": "Okatibbee Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Meridian",
+    "Pine Springs"
+   ],
+   "bbox": [
+    -88.81405,
+    32.47418,
+    -88.77083,
+    32.53478
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.368,
+   "launches": [
+    "collinsville-ms",
+    "gin-creek-ms",
+    "okatibbee-reservoir-w-bank-ms",
+    "pat-harrison-water-park-1-ms",
+    "pat-harrison-water-park-2-ms",
+    "pine-springs-ms",
+    "twiddley-branch-campground-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "okhissa-lake-ms",
+   "name": "Okhissa Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Bude"
+   ],
+   "bbox": [
+    -90.85059,
+    31.39774,
+    -90.80827,
+    31.4387
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.675,
+   "launches": [
+    "okhissa-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oktibbeha-county-lake-ms",
+   "name": "Oktibbeha County Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Waterfront Estates"
+   ],
+   "bbox": [
+    -88.95377,
+    33.50113,
+    -88.93222,
+    33.51644
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.54,
+   "launches": [
+    "small-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "old-fort-bayou-ms",
+   "name": "Old Fort Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ocean Springs"
+   ],
+   "bbox": [
+    -88.85797,
+    30.4186,
+    -88.77216,
+    30.42701
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hwy-609-old-fort-bayou-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "old-natchez-trace-lake-ms",
+   "name": "Old Natchez Trace Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Pontotoc"
+   ],
+   "bbox": [
+    -88.917,
+    34.2425,
+    -88.88368,
+    34.2645
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.539,
+   "launches": [
+    "trace-park-ramp-1-ms",
+    "trace-park-ramp-2-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "old-river-ms",
+   "name": "Old River",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Crossroads"
+   ],
+   "bbox": [
+    -89.81355,
+    30.78704,
+    -89.80249,
+    30.7949
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.117,
+   "launches": [
+    "crossroads-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parker-bayou-ms",
+   "name": "Parker Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Bee Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parker-bayou-access-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pascagoula-river-ms",
+   "name": "Pascagoula River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Coll Town",
+    "Escatawpa",
+    "Gibson Landing",
+    "Lucedale",
+    "Merrill",
+    "Moss Point",
+    "Pascagoula",
+    "Pascagoula River Estates",
+    "Poticaw Landing",
+    "Three Rivers"
+   ],
+   "bbox": [
+    -88.77495,
+    30.345,
+    -88.55744,
+    30.98136
+   ],
+   "wikidata": "Q55262",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bellview-ms",
+    "big-creek-ramp-ms",
+    "i-10-boat-landing-ms",
+    "jaycee-boat-launch-ms",
+    "lighthouse-park-boat-launch-ms",
+    "max-s-landing-ramp-ms",
+    "merrill-ramp-ms",
+    "old-coast-guard-station-launch-ms",
+    "old-spanish-fort-ms",
+    "pascagoula-river-park-launch-ms",
+    "pascagoula-wma-ms",
+    "roy-o-cumbest-ramp-ms",
+    "smith-s-camp-ramp-ms",
+    "ward-bayou-wma-ms",
+    "wilkerson-ferry-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pearl-river-ms",
+   "name": "Pearl River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Battle Bluff",
+    "Canton",
+    "Carthage",
+    "Columbia",
+    "Flowood",
+    "Georgetown",
+    "Lena",
+    "Logtown",
+    "Monticello",
+    "Pearlington",
+    "Philadelphia",
+    "Picayune"
+   ],
+   "bbox": [
+    -90.25485,
+    30.15572,
+    -89.17616,
+    32.83424
+   ],
+   "wikidata": "Q1739672",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "allen-landing-ms",
+    "atwood-water-park-ms",
+    "coal-bluff-ms",
+    "columbia-water-park-ms",
+    "georgetown-landing-ms",
+    "hwy-44-landing-ms",
+    "hwy-98-landing-ms",
+    "leake-county-water-park-ms",
+    "lelfleur-s-bluff-state-park-ms",
+    "logtown-boat-launch-ms",
+    "lowhead-dam-ms",
+    "pearl-r-nanih-waiya-wma-ms",
+    "pearlington-landing-ms",
+    "ratlif-ferry-ms",
+    "ross-barnett-spillway-ms",
+    "ross-barnett-spillway-ramp-ms",
+    "south-carthage-landing-ms",
+    "walkaih-bluff-ms",
+    "wanilla-water-park-ms",
+    "yates-crossing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "perry-martin-lake-ms",
+   "name": "Perry Martin Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Rosedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "perry-martin-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pickwick-lake-ms",
+   "name": "Pickwick Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Cooks Landing",
+    "Cross Roads",
+    "Eastport",
+    "High Point",
+    "Iuka"
+   ],
+   "bbox": [
+    -88.26164,
+    34.72734,
+    -87.62476,
+    35.08865
+   ],
+   "wikidata": "Q7190954",
+   "charted": true,
+   "area_km2": 149.083,
+   "launches": [
+    "elks-landing-ms",
+    "frank-williams-landing-ms",
+    "goat-island-ms",
+    "indian-creek-cove-ms",
+    "jp-coleman-state-park-ms",
+    "jp-coleman-state-park-cooks-landing-ms",
+    "jp-coleman-state-park-camp-ground-ms",
+    "robinson-landing-ms",
+    "scrugg-s-bridge-ms",
+    "steel-bridge-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pierce-lake-ms",
+   "name": "Pierce Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Pascagoula River Estates"
+   ],
+   "bbox": [
+    -88.74431,
+    30.84359,
+    -88.74075,
+    30.84824
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.055,
+   "launches": [
+    "pierce-lake-ramp-pas-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pipes-lake-ms",
+   "name": "Pipes Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Garden City"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pipes-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pontotoc-lake-ms",
+   "name": "Pontotoc Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Pontotoc"
+   ],
+   "bbox": [
+    -89.02845,
+    34.23035,
+    -89.01595,
+    34.23976
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.252,
+   "launches": [
+    "howard-stafford-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pool-b-ms",
+   "name": "Pool B",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Beans Ferry",
+    "Smithville"
+   ],
+   "bbox": [
+    -88.42604,
+    34.06239,
+    -88.37616,
+    34.25766
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.312,
+   "launches": [
+    "beans-ferry-ms",
+    "edd-sanderson-landing-ms",
+    "glover-wilkins-lock-ms",
+    "ironwood-bluff-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pool-c-ms",
+   "name": "Pool C",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Fulton"
+   ],
+   "bbox": [
+    -88.42925,
+    34.25795,
+    -88.40687,
+    34.36304
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.719,
+   "launches": [
+    "jamie-whitten-ramp-ms",
+    "peppertown-old-hwy-178-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "puskus-lake-ms",
+   "name": "Puskus Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Oxford"
+   ],
+   "bbox": [
+    -89.35884,
+    34.43571,
+    -89.34699,
+    34.44275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.31,
+   "launches": [
+    "puskus-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-creek-ms",
+   "name": "Red Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ramsey Springs",
+    "Vestry",
+    "Wiggins"
+   ],
+   "bbox": [
+    -89.34195,
+    30.69469,
+    -88.66804,
+    30.94159
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "city-bridge-landing-ms",
+    "ramsey-springs-landing-ms",
+    "vestry-ramp-hwy-57-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rines-lake-ms",
+   "name": "Rines Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "upper-rines-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roebuck-lake-ms",
+   "name": "Roebuck Lake",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Itta Bena"
+   ],
+   "bbox": [
+    -90.31857,
+    33.44009,
+    -90.23564,
+    33.52711
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.296,
+   "launches": [
+    "kimbrough-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rose-hill-lake-ms",
+   "name": "Rose Hill Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Parkersburg"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rose-hill-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ross-branch-ms",
+   "name": "Ross Branch",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Winston"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ross-branch-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ross-r-barnett-reservoir-ms",
+   "name": "Ross R Barnett Reservoir",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Ashland Estates",
+    "Barnes Prairie",
+    "Brandon",
+    "Canton",
+    "Harbourview",
+    "Lakeshore",
+    "Madisonville",
+    "Natchez Trace Village",
+    "Ridgeland",
+    "The Breakers",
+    "Timber Lakes",
+    "Turtle Creek"
+   ],
+   "bbox": [
+    -90.09424,
+    32.37271,
+    -89.87544,
+    32.56849
+   ],
+   "wikidata": "Q4397897",
+   "charted": false,
+   "area_km2": 88.302,
+   "launches": [
+    "brown-s-landing-ms",
+    "fannin-landing-ms",
+    "goshen-camp-ground-ms",
+    "goshen-south-landing-ms",
+    "haley-creek-landing-ms",
+    "main-harbor-landing-ms",
+    "pelahatchie-shore-park-ms",
+    "rankin-landing-ms",
+    "safe-harbor-ms",
+    "tommy-s-trading-post-ms",
+    "turtle-creek-ms",
+    "twin-harbors-landing-ms",
+    "waterwood-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sale-lake-ms",
+   "name": "Sale Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Esperance Landing"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "st-catherine-creek-nwr-esperance-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sardis-lake-ms",
+   "name": "Sardis Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Abbeville",
+    "Batesville",
+    "Hayes Crossing",
+    "Lespedeza",
+    "Oxford",
+    "Teckville",
+    "Wyatt Crossing"
+   ],
+   "bbox": [
+    -89.81343,
+    34.38448,
+    -89.50712,
+    34.55235
+   ],
+   "wikidata": "Q2224795",
+   "charted": false,
+   "area_km2": 114.11,
+   "launches": [
+    "beach-point-ms",
+    "clear-creek-ms",
+    "coles-point-ms",
+    "coontown-1-ms",
+    "coontown-2-ms",
+    "coontown-3-ms",
+    "engineer-s-point-1-ms",
+    "engineer-s-point-2-ms",
+    "graham-lake-ms",
+    "hurricane-landing-1-ms",
+    "hurricane-landing-2-ms",
+    "lespedeza-point-ms",
+    "lower-lake-ms",
+    "pats-bluff-ms",
+    "teckville-landing-1-ms",
+    "teckville-landing-2-ms",
+    "teckville-low-level-boat-ramp-ms",
+    "wyatts-crossing-1-ms",
+    "wyatts-crossing-2-ms",
+    "wyatts-crossing-3-ms",
+    "wyatts-crossing-4-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "simmons-bayou-ms",
+   "name": "Simmons Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ocean Springs"
+   ],
+   "bbox": [
+    -88.77315,
+    30.37145,
+    -88.74289,
+    30.3821
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "blue-heron-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "simpson-county-lake-ms",
+   "name": "Simpson County Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Magee"
+   ],
+   "bbox": [
+    -89.79476,
+    31.91207,
+    -89.78596,
+    31.92118
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.274,
+   "launches": [
+    "simpson-county-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "six-mile-cuttoff-ms",
+   "name": "Six Mile Cuttoff",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Katzenmeyer"
+   ],
+   "bbox": [
+    -90.89282,
+    32.44777,
+    -90.73217,
+    32.72059
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sunflower-diversion-canal-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "six-mile-lake-ms",
+   "name": "Six Mile Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Greenwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "six-mile-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spring-lake-ms",
+   "name": "Spring Lake",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Holly Springs"
+   ],
+   "bbox": [
+    -89.46956,
+    34.65995,
+    -89.46512,
+    34.66856
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "wall-doxey-state-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "st-martin-bayou-ms",
+   "name": "St Martin Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "D'Iberville"
+   ],
+   "bbox": [
+    -88.88935,
+    30.42584,
+    -88.86658,
+    30.43427
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brittany-avenue-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stinson-creek-ms",
+   "name": "Stinson Creek",
+   "kind": "stream",
+   "state": "MS",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -88.47004,
+    33.60454,
+    -88.44666,
+    33.60869
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dwayne-hayes-rec-area-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stoval-bayou-ms",
+   "name": "Stoval Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Friars Point"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stoval-bayou-landing-south-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "strong-river-ms",
+   "name": "Strong River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "D'Lo"
+   ],
+   "bbox": [
+    -90.13696,
+    31.84567,
+    -89.70536,
+    32.12905
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "d-lo-water-park-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tallahala-creek-ms",
+   "name": "Tallahala Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ellisville",
+    "Hattiesburg"
+   ],
+   "bbox": [
+    -89.19442,
+    31.22528,
+    -89.07855,
+    31.74946
+   ],
+   "wikidata": "Q34917223",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-29-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tallahatchie-river-ms",
+   "name": "Tallahatchie River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Webb"
+   ],
+   "bbox": [
+    -90.28204,
+    33.53131,
+    -90.17093,
+    34.18352
+   ],
+   "wikidata": "Q2390504",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "strider-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ten-landing-lake-ms",
+   "name": "Ten Landing Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Picayune"
+   ],
+   "bbox": [
+    -89.8087,
+    30.68734,
+    -89.80428,
+    30.69984
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.05,
+   "launches": [
+    "old-river-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tennessee-tombigbee-waterway-ms",
+   "name": "Tennessee-Tombigbee Waterway",
+   "kind": "canal",
+   "state": "MS",
+   "towns": [
+    "Amory",
+    "Burnsville",
+    "Mantachie",
+    "Moores Mill",
+    "Sandy Springs"
+   ],
+   "bbox": [
+    -88.53023,
+    33.95181,
+    -88.2387,
+    34.92047
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "amory-rec-area-ms",
+    "beaver-lake-ms",
+    "burnsville-ramp-ms",
+    "saucer-creek-ramp-ms",
+    "walker-s-levee-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tibbee-creek-ms",
+   "name": "Tibbee Creek",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Tibbee"
+   ],
+   "bbox": [
+    -88.69653,
+    33.51992,
+    -88.48964,
+    33.57309
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tibbee-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tippah-lake-ms",
+   "name": "Tippah Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Ripley"
+   ],
+   "bbox": [
+    -88.96096,
+    34.78188,
+    -88.94872,
+    34.79553
+   ],
+   "wikidata": "Q1748899",
+   "charted": false,
+   "area_km2": 0.529,
+   "launches": [
+    "tippah-lake-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tippo-bayou-ms",
+   "name": "Tippo Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Hugo"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tallahatchie-nwr-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tishkill-lake-ms",
+   "name": "Tishkill Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Klein"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tishkill-lake-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tombigbee-river-ms",
+   "name": "Tombigbee River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Aberdeen",
+    "Amory",
+    "Columbus",
+    "East Aberdeen",
+    "Forreston",
+    "Fulton",
+    "Marietta",
+    "New Hamilton",
+    "Smithville",
+    "West Fulton"
+   ],
+   "bbox": [
+    -88.55095,
+    33.21555,
+    -88.28649,
+    34.3935
+   ],
+   "wikidata": "Q2297877",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "devil-s-elbow-ms",
+    "dewayne-hayes-campground-boat-ramp-ms",
+    "east-fork-landing-ms",
+    "frog-level-landing-ms",
+    "hamilton-landing-ms",
+    "hwy-278-landing-ms",
+    "morgan-s-landing-ms",
+    "peppertown-tombigbee-r-ms",
+    "town-creek-campground-ms",
+    "walker-s-levee-old-river-ms",
+    "west-lowndes-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "turkey-fork-reservoir-ms",
+   "name": "Turkey Fork Reservoir",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Bothwell"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "turkey-fork-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuscumbia-river-canal-ms",
+   "name": "Tuscumbia River Canal",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Corinth"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tuscumbia-wma-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wasp-lake-ms",
+   "name": "Wasp Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Deovolente"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wasp-lake-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willow-lake-ms",
+   "name": "Willow Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Tallula"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "willow-lake-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-lake-ms",
+   "name": "Wolf Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Yazoo City"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ivanhoe-landing-ms",
+    "wolf-lake-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-river-ms",
+   "name": "Wolf River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Pass Christian"
+   ],
+   "bbox": [
+    -89.43038,
+    30.35644,
+    -89.19408,
+    30.8023
+   ],
+   "wikidata": "Q18217744",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "merlin-necaise-boat-launch-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yalobusha-river-ms",
+   "name": "Yalobusha River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Grenada",
+    "Holcomb",
+    "Leflore",
+    "Sabougla"
+   ],
+   "bbox": [
+    -90.18067,
+    33.55207,
+    -89.07689,
+    34.00115
+   ],
+   "wikidata": "Q2599098",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hwy-8-boat-ramp-ms",
+    "malmaison-boat-ramp-ms",
+    "north-main-ms",
+    "south-abutment-a-east-boat-ramp-ms",
+    "upper-yalobusha-boat-ramp-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yazoo-river-ms",
+   "name": "Yazoo River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Belzoni",
+    "Greenwood",
+    "Twin Lake",
+    "Vicksburg",
+    "Yazoo City"
+   ],
+   "bbox": [
+    -90.92509,
+    32.33525,
+    -90.16741,
+    33.55207
+   ],
+   "wikidata": "Q1201857",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "claborne-st-landing-ms",
+    "powell-landing-ms",
+    "redwood-landing-ms",
+    "vicksburg-waterfront-ms",
+    "yazoo-city-landing-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yockanookany-river-ms",
+   "name": "Yockanookany River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Kosciusko"
+   ],
+   "bbox": [
+    -89.68363,
+    32.66899,
+    -89.6685,
+    32.81719
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sanders-landing-ms"
+   ],
+   "advisories": []
+  }
+ ]
+}
