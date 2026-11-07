@@ -153,6 +153,7 @@ def run(rows: list[dict], prev: list[dict], at: str) -> tuple[list[dict], dict]:
 
 def snapshot(rows: list[dict]) -> list[dict]:
     return [{"id": a.get("ID"), "name": name_of(a), "water": a.get("WaterbodyN"), "code": code_of(a),
+             "lat": a.get("Latitude"), "lon": a.get("Longitude"),
              "last_sample_date": sample_day(a.get("Date")), "results_pdf": a.get("URL")} for a in rows]
 
 
