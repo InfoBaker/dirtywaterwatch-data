@@ -1,0 +1,4021 @@
+{
+ "state": "AK",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 186,
+ "waters": [
+  {
+   "slug": "alaganik-river-ak",
+   "name": "Alaganik River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -145.73278,
+    60.36542,
+    -145.17856,
+    60.45357
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alaganik-slough-road-information-area-and-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alaganik-slough-ak",
+   "name": "Alaganik Slough",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -145.22727,
+    60.43499,
+    -145.20871,
+    60.44408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "alaganik-slough-canoe-boat-upper-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alava-bay-ak",
+   "name": "Alava Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.15634,
+    55.21708,
+    -131.10585,
+    55.23624
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.876,
+   "launches": [
+    "alava-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "amalga-harbor-ak",
+   "name": "Amalga Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -134.79284,
+    58.48642,
+    -134.78659,
+    58.49235
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.174,
+   "launches": [
+    "amalga-harbor-boat-and-kayak-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "anchor-pass-ak",
+   "name": "Anchor Pass",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.42992,
+    55.95945,
+    -131.39284,
+    55.99578
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.481,
+   "launches": [
+    "anchor-pass-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "anton-larsen-bay-ak",
+   "name": "Anton Larsen Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Ouzinkie"
+   ],
+   "bbox": [
+    -152.64352,
+    57.83697,
+    -152.61578,
+    57.87385
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.456,
+   "launches": [
+    "anton-larsen-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "auke-bay-ak",
+   "name": "Auke Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -134.72666,
+    58.34191,
+    -134.64175,
+    58.38711
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 20.041,
+   "launches": [
+    "statter-harbor-boat-launch-auke-bay-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "auke-lake-ak",
+   "name": "Auke Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -134.63894,
+    58.38121,
+    -134.6223,
+    58.39266
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.989,
+   "launches": [
+    "auke-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bailey-bay-ak",
+   "name": "Bailey Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Bell Island Hot Springs"
+   ],
+   "bbox": [
+    -131.63138,
+    55.93703,
+    -131.61348,
+    55.98581
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.119,
+   "launches": [
+    "bailey-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bar-point-basin-ak",
+   "name": "Bar Point Basin",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Ketchikan"
+   ],
+   "bbox": [
+    -131.6903,
+    55.34783,
+    -131.67683,
+    55.35292
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.321,
+   "launches": [
+    "bar-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beach-lake-ak",
+   "name": "Beach Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Wasilla"
+   ],
+   "bbox": [
+    -149.56594,
+    61.40118,
+    -149.55357,
+    61.40831
+   ],
+   "wikidata": "Q49299168",
+   "charted": true,
+   "area_km2": 0.568,
+   "launches": [
+    "beach-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-beaver-lake-ak",
+   "name": "Big Beaver Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Big Lake"
+   ],
+   "bbox": [
+    -149.84155,
+    61.57698,
+    -149.81881,
+    61.58919
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.977,
+   "launches": [
+    "big-beaver-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-lake-ak",
+   "name": "Big Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Big Lake"
+   ],
+   "bbox": [
+    -149.97181,
+    61.51282,
+    -149.82665,
+    61.55557
+   ],
+   "wikidata": "Q124618160",
+   "charted": false,
+   "area_km2": 19.461,
+   "launches": [
+    "big-lake-boat-launch-ak",
+    "big-lake-north-boat-launch-ak",
+    "big-lake-south-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "birch-creek-ak",
+   "name": "Birch Creek",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -145.74981,
+    65.25932,
+    -144.2386,
+    66.27911
+   ],
+   "wikidata": "Q864994",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "birch-creek-bridge-ak",
+    "lower-birch-creek-wayside-ak",
+    "upper-birch-creek-wayside-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "birch-lake-ak",
+   "name": "Birch Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -146.68169,
+    64.30483,
+    -146.64131,
+    64.32862
+   ],
+   "wikidata": "Q49299510",
+   "charted": false,
+   "area_km2": 5.651,
+   "launches": [
+    "birch-lake-boat-launch-ak",
+    "birch-lake-boat-launch-ak-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blind-pass-ak",
+   "name": "Blind Pass",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.68717,
+    55.8762,
+    -131.63106,
+    55.90708
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.991,
+   "launches": [
+    "blind-pass-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burroughs-bay-ak",
+   "name": "Burroughs Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.24916,
+    55.98397,
+    -131.07003,
+    56.07893
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 32.297,
+   "launches": [
+    "klahini-bay-buoy-day-use-area-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canoe-lake-ak",
+   "name": "Canoe Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.70195,
+    60.7124,
+    -150.68545,
+    60.72185
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.708,
+   "launches": [
+    "swan-lake-canoe-route-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carroll-inlet-ak",
+   "name": "Carroll Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Ketchikan"
+   ],
+   "bbox": [
+    -131.48234,
+    55.30033,
+    -131.28744,
+    55.64275
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 82.994,
+   "launches": [
+    "icehouse-cove-buoy-camping-area-ak",
+    "shoal-cove-osten-island-buoy-site-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chatanika-river-ak",
+   "name": "Chatanika River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Olnes"
+   ],
+   "bbox": [
+    -149.30192,
+    64.97078,
+    -146.34732,
+    65.29565
+   ],
+   "wikidata": "Q2961511",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chatanika-river-boat-launch-elliot-highway-bridge-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chena-river-ak",
+   "name": "Chena River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Badger",
+    "College",
+    "Fairbanks",
+    "North Pole",
+    "Pleasant Valley"
+   ],
+   "bbox": [
+    -147.91482,
+    64.78861,
+    -146.18234,
+    65.04882
+   ],
+   "wikidata": "Q1069837",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "28-mile-river-access-ak",
+    "chena-river-canoe-access-at-the-peger-bridge-pioneer-park-ak",
+    "flat-creek-slough-boat-launch-ak",
+    "graehl-park-landing-ak",
+    "chena-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chilkat-inlet-ak",
+   "name": "Chilkat Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Haines",
+    "Mud Bay"
+   ],
+   "bbox": [
+    -135.48283,
+    59.07635,
+    -135.30739,
+    59.20307
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 81.593,
+   "launches": [
+    "chilkat-state-park-launch-ramp-ak",
+    "letnikof-cove-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chilkat-river-ak",
+   "name": "Chilkat River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Covenant Life",
+    "Klukwan"
+   ],
+   "bbox": [
+    -136.05857,
+    59.34561,
+    -135.75813,
+    59.74305
+   ],
+   "wikidata": "Q271001",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "council-grounds-launch-ramp-ak",
+    "kelsall-road-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chilkoot-lake-ak",
+   "name": "Chilkoot Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Lutak"
+   ],
+   "bbox": [
+    -135.63573,
+    59.33161,
+    -135.56198,
+    59.37615
+   ],
+   "wikidata": "Q5098982",
+   "charted": false,
+   "area_km2": 10.28,
+   "launches": [
+    "chilkoot-lake-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chisana-river-ak",
+   "name": "Chisana River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Northway Junction"
+   ],
+   "bbox": [
+    -142.22888,
+    62.02291,
+    -141.26005,
+    63.05214
+   ],
+   "wikidata": "Q1074816",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chisana-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chukchi-sea-ak",
+   "name": "Chukchi Sea",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Utqiaġvik"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 81383.824,
+   "launches": [
+    "chukchi-sea-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clarence-strait-ak",
+   "name": "Clarence Strait",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Whale Pass"
+   ],
+   "bbox": [
+    -133.19827,
+    54.72011,
+    -131.34628,
+    56.35642
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3654.653,
+   "launches": [
+    "whale-pass-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clearwater-lake-ak",
+   "name": "Clearwater Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Delta Junction"
+   ],
+   "bbox": [
+    -145.61184,
+    64.07314,
+    -145.54164,
+    64.09336
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.406,
+   "launches": [
+    "clearwater-lake-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coffman-cove-ak",
+   "name": "Coffman Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Coffman Cove"
+   ],
+   "bbox": [
+    -132.85402,
+    56.00012,
+    -132.82916,
+    56.02839
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.736,
+   "launches": [
+    "coffman-cove-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cook-inlet-ak",
+   "name": "Cook Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Anchor Point",
+    "Ninilchik"
+   ],
+   "bbox": [
+    -153.70932,
+    58.89932,
+    -148.96166,
+    61.52693
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 23176.87,
+   "launches": [
+    "whiskey-gulch-beach-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cushman-lake-ak",
+   "name": "Cushman Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Fairbanks"
+   ],
+   "bbox": [
+    -147.74072,
+    64.79143,
+    -147.71144,
+    64.80001
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.235,
+   "launches": [
+    "tanana-lakes-recreation-area-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dangerous-river-ak",
+   "name": "Dangerous River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -139.26892,
+    59.39097,
+    -139.01254,
+    59.43434
+   ],
+   "wikidata": "Q49888409",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dangerous-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deadman-lake-ak",
+   "name": "Deadman Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -141.56036,
+    62.87018,
+    -141.53968,
+    62.89225
+   ],
+   "wikidata": "Q49301450",
+   "charted": false,
+   "area_km2": 2.366,
+   "launches": [
+    "deadman-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "delong-lake-ak",
+   "name": "Delong Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Anchorage"
+   ],
+   "bbox": [
+    -149.96173,
+    61.16088,
+    -149.95304,
+    61.16408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.132,
+   "launches": [
+    "delong-lake-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "delta-river-ak",
+   "name": "Delta River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -146.07014,
+    63.01916,
+    -145.73371,
+    64.15607
+   ],
+   "wikidata": "Q1184924",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "upper-tangle-lake-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "desper-creek-ak",
+   "name": "Desper Creek",
+   "kind": "stream",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -141.09679,
+    62.66044,
+    -141.04226,
+    62.69119
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "desper-creek-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dolly-varden-lake-ak",
+   "name": "Dolly Varden Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.79807,
+    60.69831,
+    -150.768,
+    60.7144
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.64,
+   "launches": [
+    "dolly-varden-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "douglas-boat-harbor-ak",
+   "name": "Douglas Boat Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Juneau"
+   ],
+   "bbox": [
+    -134.39029,
+    58.27406,
+    -134.38455,
+    58.27703
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.084,
+   "launches": [
+    "mike-pusich-douglas-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "echo-cove-ak",
+   "name": "Echo Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -134.93702,
+    58.65927,
+    -134.90586,
+    58.68651
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.448,
+   "launches": [
+    "echo-cove-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eklutna-lake-ak",
+   "name": "Eklutna Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Palmer"
+   ],
+   "bbox": [
+    -149.14991,
+    61.33567,
+    -148.98749,
+    61.40905
+   ],
+   "wikidata": "Q1323285",
+   "charted": false,
+   "area_km2": 20.751,
+   "launches": [
+    "eklutna-lake-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "el-capitan-passage-ak",
+   "name": "El Capitan Passage",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -133.41082,
+    55.88051,
+    -133.25245,
+    56.16847
+   ],
+   "wikidata": "Q49111211",
+   "charted": true,
+   "area_km2": 120.071,
+   "launches": [
+    "el-capitan-boating-site-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elephant-lake-ak",
+   "name": "Elephant Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Soldotna"
+   ],
+   "bbox": [
+    -151.0128,
+    60.58469,
+    -150.98105,
+    60.60344
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.932,
+   "launches": [
+    "spirit-lake-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "engineer-lake-ak",
+   "name": "Engineer Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.3358,
+    60.4728,
+    -150.3077,
+    60.48347
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.436,
+   "launches": [
+    "engineer-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eyak-river-ak",
+   "name": "Eyak River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Eyak"
+   ],
+   "bbox": [
+    -145.74669,
+    60.42902,
+    -145.6342,
+    60.53209
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.613,
+   "launches": [
+    "eyak-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fielding-lake-ak",
+   "name": "Fielding Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -145.73761,
+    63.15254,
+    -145.63521,
+    63.19181
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.998,
+   "launches": [
+    "fielding-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "finger-lake-ak",
+   "name": "Finger Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Palmer"
+   ],
+   "bbox": [
+    -149.30062,
+    61.59505,
+    -149.25775,
+    61.61309
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.2,
+   "launches": [
+    "finger-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fortymile-river-ak",
+   "name": "Fortymile River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -141.75102,
+    64.24022,
+    -140.63935,
+    64.38297
+   ],
+   "wikidata": "Q1439158",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fortymile-bridge-wayside-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "freshwater-bay-ak",
+   "name": "Freshwater Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Freshwater Bay"
+   ],
+   "bbox": [
+    -135.22577,
+    57.80608,
+    -134.93661,
+    57.95437
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 86.302,
+   "launches": [
+    "freshwater-bay-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fritz-cove-ak",
+   "name": "Fritz Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -134.67041,
+    58.31091,
+    -134.60209,
+    58.34768
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 9.8,
+   "launches": [
+    "north-douglas-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "frosty-bay-ak",
+   "name": "Frosty Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.98397,
+    56.0573,
+    -131.95944,
+    56.07163
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.111,
+   "launches": [
+    "frosty-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glacier-bay-ak",
+   "name": "Glacier Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Gustavus"
+   ],
+   "bbox": [
+    -137.13268,
+    58.37114,
+    -135.79426,
+    59.09219
+   ],
+   "wikidata": "Q4389292",
+   "charted": true,
+   "area_km2": 1865.975,
+   "launches": [
+    "glacier-bay-boat-launch-near-gustavus-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gulkana-river-ak",
+   "name": "Gulkana River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Gulkana"
+   ],
+   "bbox": [
+    -145.74103,
+    62.21976,
+    -145.35303,
+    63.10424
+   ],
+   "wikidata": "Q948529",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gulkana-river-at-richardson-highway-bridge-ak",
+    "gulkana-river-boat-launch-ak-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gwenn-lake-ak",
+   "name": "Gwenn Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -149.6807,
+    61.29668,
+    -149.67505,
+    61.29883
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "gwen-lake-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hamilton-bay-ak",
+   "name": "Hamilton Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Kake"
+   ],
+   "bbox": [
+    -133.89112,
+    56.87533,
+    -133.72762,
+    56.91386
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 26.031,
+   "launches": [
+    "hamilton-bay-boat-launch-ak",
+    "seal-point-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harding-lake-ak",
+   "name": "Harding Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Harding Lake"
+   ],
+   "bbox": [
+    -146.89435,
+    64.40643,
+    -146.81838,
+    64.43555
+   ],
+   "wikidata": "Q49302827",
+   "charted": false,
+   "area_km2": 15.884,
+   "launches": [
+    "harding-lake-state-recreation-area-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harris-harbor-ak",
+   "name": "Harris Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Juneau"
+   ],
+   "bbox": [
+    -134.43108,
+    58.29995,
+    -134.42553,
+    58.30335
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.089,
+   "launches": [
+    "harris-harbor-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "helm-bay-ak",
+   "name": "Helm Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -132.03748,
+    55.58757,
+    -131.89515,
+    55.68003
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 23.693,
+   "launches": [
+    "helm-creek-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hidden-lake-ak",
+   "name": "Hidden Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.32574,
+    60.46548,
+    -150.20053,
+    60.50209
+   ],
+   "wikidata": "Q49302954",
+   "charted": false,
+   "area_km2": 10.288,
+   "launches": [
+    "hidden-lake-campground-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hoonah-harbor-ak",
+   "name": "Hoonah Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Hoonah"
+   ],
+   "bbox": [
+    -135.46379,
+    58.10372,
+    -135.44022,
+    58.12028
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.46,
+   "launches": [
+    "hoonah-boat-launch-harbor-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hot-springs-slough-ak",
+   "name": "Hot Springs Slough",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Manley Hot Springs"
+   ],
+   "bbox": [
+    -150.82084,
+    64.97719,
+    -150.47128,
+    65.01458
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "manley-hot-springs-landing-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-ak",
+   "name": "Island Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Nikiski"
+   ],
+   "bbox": [
+    -151.3286,
+    60.69796,
+    -151.29573,
+    60.71022
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.717,
+   "launches": [
+    "island-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jakolof-bay-ak",
+   "name": "Jakolof Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Jakolof Bay"
+   ],
+   "bbox": [
+    -151.54049,
+    59.44678,
+    -151.48618,
+    59.46935
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.855,
+   "launches": [
+    "jakalof-bay-dock-and-skiff-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jean-lake-ak",
+   "name": "Jean Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.18256,
+    60.49831,
+    -150.16456,
+    60.51318
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.857,
+   "launches": [
+    "gene-lake-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-lake-ak",
+   "name": "Johnson Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Kasilof"
+   ],
+   "bbox": [
+    -151.27061,
+    60.28611,
+    -151.25746,
+    60.29595
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.542,
+   "launches": [
+    "johnson-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kachemak-bay-ak",
+   "name": "Kachemak Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Homer"
+   ],
+   "bbox": [
+    -151.8862,
+    59.42484,
+    -150.96375,
+    59.81641
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1243.997,
+   "launches": [
+    "homer-spit-community-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kanuti-river-ak",
+   "name": "Kanuti River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -153.00944,
+    66.16619,
+    -150.06735,
+    66.5245
+   ],
+   "wikidata": "Q1728215",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kanuti-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kasaan-bay-ak",
+   "name": "Kasaan Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Hollis"
+   ],
+   "bbox": [
+    -132.74382,
+    55.35848,
+    -132.15763,
+    55.62686
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 307.304,
+   "launches": [
+    "hollis-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kashwitna-river-ak",
+   "name": "Kashwitna River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Willow"
+   ],
+   "bbox": [
+    -150.10323,
+    61.91115,
+    -148.87809,
+    62.02354
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "susitna-landing-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kasilof-river-ak",
+   "name": "Kasilof River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Cohoe",
+    "Kasilof"
+   ],
+   "bbox": [
+    -151.30424,
+    60.23298,
+    -151.16569,
+    60.38604
+   ],
+   "wikidata": "Q1140704",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "kasilof-river-state-recreation-site-boat-launch-ak",
+    "tustumena-lake-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "keku-strait-ak",
+   "name": "Keku Strait",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Kake"
+   ],
+   "bbox": [
+    -134.27214,
+    56.77735,
+    -133.75044,
+    57.05987
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 440.061,
+   "launches": [
+    "kake-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kelly-lake-ak",
+   "name": "Kelly Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.39257,
+    60.51257,
+    -150.3654,
+    60.52078
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.9,
+   "launches": [
+    "kelly-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kenai-lake-ak",
+   "name": "Kenai Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Lawing",
+    "Primrose",
+    "Snug Harbor"
+   ],
+   "bbox": [
+    -149.83314,
+    60.33315,
+    -149.34471,
+    60.49481
+   ],
+   "wikidata": "Q200967",
+   "charted": false,
+   "area_km2": 86.81,
+   "launches": [
+    "cooper-landing-boat-launch-ak",
+    "kenai-lake-boat-launch-near-snug-harbor-ak",
+    "kenai-lake-primrose-boat-launch-ak",
+    "quartz-creek-campground-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kenai-river-ak",
+   "name": "Kenai River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Kenai",
+    "Naptowne",
+    "Ridgeway",
+    "Soldotna"
+   ],
+   "bbox": [
+    -151.26213,
+    60.40302,
+    -149.80844,
+    60.55
+   ],
+   "wikidata": "Q846419",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bing-s-landing-campground-and-boat-launch-ak",
+    "centennial-park-ak",
+    "east-redoubt-ak",
+    "jim-s-landing-boat-launch-ak",
+    "kenai-city-dock-boat-launch-ak",
+    "pillars-boat-launch-ak",
+    "sportsman-s-landing-campground-launch-ramp-ak",
+    "swiftwater-park-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "klawock-inlet-ak",
+   "name": "Klawock Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Klawock"
+   ],
+   "bbox": [
+    -133.17223,
+    55.49039,
+    -133.05392,
+    55.60214
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 31.548,
+   "launches": [
+    "klawock-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "klu-bay-ak",
+   "name": "Klu Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.46743,
+    55.83638,
+    -131.43398,
+    55.8458
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.969,
+   "launches": [
+    "klu-bay-buoy-trailhead-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "klutina-river-ak",
+   "name": "Klutina River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Copper Center"
+   ],
+   "bbox": [
+    -146.16926,
+    61.38056,
+    -145.28217,
+    61.95426
+   ],
+   "wikidata": "Q1321272",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "klutina-lake-road-milepost-4-ak",
+    "klutina-river-launch-new-richardson-highway-row-ak",
+    "klutina-river-launch-old-richardson-highway-row-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knik-arm-ak",
+   "name": "Knik Arm",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Anchorage"
+   ],
+   "bbox": [
+    -149.98519,
+    61.22146,
+    -149.33007,
+    61.52379
+   ],
+   "wikidata": "Q16893527",
+   "charted": true,
+   "area_km2": 440.112,
+   "launches": [
+    "ship-creek-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kodiak-harbor-ak",
+   "name": "Kodiak Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Kodiak"
+   ],
+   "bbox": [
+    -152.41304,
+    57.78312,
+    -152.39002,
+    57.79059
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.39,
+   "launches": [
+    "st-paul-harbor-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kootznahoo-inlet-ak",
+   "name": "Kootznahoo Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Angoon"
+   ],
+   "bbox": [
+    -134.60505,
+    57.48659,
+    -134.4503,
+    57.55728
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 22.908,
+   "launches": [
+    "angoon-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kruzgamepa-river-ak",
+   "name": "Kruzgamepa River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -165.18835,
+    64.9118,
+    -164.60691,
+    65.12998
+   ],
+   "wikidata": "Q14680102",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pilgram-river-gravel-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kuskokwim-river-ak",
+   "name": "Kuskokwim River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Bethel"
+   ],
+   "bbox": [
+    -162.54535,
+    60.06649,
+    -154.56738,
+    63.12094
+   ],
+   "wikidata": "Q60067",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bethel-small-boat-harbor-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kuzitrin-river-ak",
+   "name": "Kuzitrin River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -165.39839,
+    65.12367,
+    -163.28608,
+    65.4491
+   ],
+   "wikidata": "Q1794782",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "kuzitrin-river-gravel-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kvichak-river-ak",
+   "name": "Kvichak River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Igiugig"
+   ],
+   "bbox": [
+    -157.18174,
+    58.82067,
+    -155.88788,
+    59.33081
+   ],
+   "wikidata": "Q1569668",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "igiugig-boat-landing-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "labouchere-bay-ak",
+   "name": "Labouchere Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Labouchere Bay"
+   ],
+   "bbox": [
+    -133.65932,
+    56.28368,
+    -133.6197,
+    56.31338
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.763,
+   "launches": [
+    "labouchere-bay-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-aleknagik-ak",
+   "name": "Lake Aleknagik",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Aleknagik"
+   ],
+   "bbox": [
+    -159.0546,
+    59.26673,
+    -158.59976,
+    59.45667
+   ],
+   "wikidata": "Q1800850",
+   "charted": false,
+   "area_km2": 123.96,
+   "launches": [
+    "aleknagik-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-louise-ak",
+   "name": "Lake Louise",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -146.63418,
+    62.27621,
+    -146.45865,
+    62.38168
+   ],
+   "wikidata": "Q1343275",
+   "charted": false,
+   "area_km2": 94.528,
+   "launches": [
+    "lake-louise-developed-concrete-boat-ramp-ak",
+    "lake-louise-state-park-developed-shallow-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nunavaugaluk-ak",
+   "name": "Lake Nunavaugaluk",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -159.07508,
+    59.14892,
+    -158.83938,
+    59.32019
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 115.932,
+   "launches": [
+    "snake-lake-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-merganser-lake-ak",
+   "name": "Little Merganser Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.63983,
+    60.7285,
+    -150.63429,
+    60.73066
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "merganser-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-susitna-river-ak",
+   "name": "Little Susitna River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Houston"
+   ],
+   "bbox": [
+    -150.29649,
+    61.26865,
+    -149.07237,
+    61.85171
+   ],
+   "wikidata": "Q1865830",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "little-susitna-public-use-facility-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "logging-cabin-creek-ak",
+   "name": "Logging Cabin Creek",
+   "kind": "stream",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -142.29656,
+    63.7293,
+    -142.20581,
+    63.86543
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "logging-cabin-creek-wayside-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "longmere-lake-ak",
+   "name": "Longmere Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Soldotna"
+   ],
+   "bbox": [
+    -150.91975,
+    60.4922,
+    -150.90139,
+    60.5098
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.935,
+   "launches": [
+    "longmere-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-fire-lake-ak",
+   "name": "Lower Fire Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -149.55218,
+    61.34816,
+    -149.53959,
+    61.35748
+   ],
+   "wikidata": "Q49304944",
+   "charted": false,
+   "area_km2": 0.382,
+   "launches": [
+    "lower-fire-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-omer-lake-ak",
+   "name": "Lower Omer Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.32285,
+    60.4502,
+    -150.3107,
+    60.46109
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.734,
+   "launches": [
+    "lower-ohmer-lake-canoe-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "luck-lake-ak",
+   "name": "Luck Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Coffman Cove"
+   ],
+   "bbox": [
+    -132.78045,
+    55.92524,
+    -132.75739,
+    55.95269
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.751,
+   "launches": [
+    "luck-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lutak-inlet-ak",
+   "name": "Lutak Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Haines"
+   ],
+   "bbox": [
+    -135.55662,
+    59.27825,
+    -135.44099,
+    59.32542
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 18.25,
+   "launches": [
+    "lutak-inlet-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marguerite-bay-ak",
+   "name": "Marguerite Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.65456,
+    55.688,
+    -131.62079,
+    55.70958
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.496,
+   "launches": [
+    "margaret-bay-dock-day-use-area-ak",
+    "marguerite-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mendenhall-lake-ak",
+   "name": "Mendenhall Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Juneau"
+   ],
+   "bbox": [
+    -134.59182,
+    58.41228,
+    -134.53774,
+    58.44553
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.128,
+   "launches": [
+    "mendenhall-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mink-bay-ak",
+   "name": "Mink Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -130.73484,
+    55.01834,
+    -130.68498,
+    55.09386
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.597,
+   "launches": [
+    "mink-bay-buoy-trailhead-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mirror-lake-ak",
+   "name": "Mirror Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Wasilla"
+   ],
+   "bbox": [
+    -149.42089,
+    61.42254,
+    -149.40862,
+    61.42891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.408,
+   "launches": [
+    "mirror-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "monti-bay-ak",
+   "name": "Monti Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Yakutat"
+   ],
+   "bbox": [
+    -139.83876,
+    59.54204,
+    -139.73097,
+    59.58789
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 25.256,
+   "launches": [
+    "yakutat-harbor-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moose-river-ak",
+   "name": "Moose River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Sterling"
+   ],
+   "bbox": [
+    -150.75778,
+    60.5347,
+    -150.30878,
+    60.67332
+   ],
+   "wikidata": "Q130532764",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "izaak-walton-state-recreation-site-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mosquito-fork-ak",
+   "name": "Mosquito Fork",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Chicken"
+   ],
+   "bbox": [
+    -143.79074,
+    63.84617,
+    -141.91236,
+    64.13072
+   ],
+   "wikidata": "Q3324844",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mosquito-fork-bridge-wayside-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mosquito-lake-ak",
+   "name": "Mosquito Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Covenant Life"
+   ],
+   "bbox": [
+    -136.03013,
+    59.44948,
+    -136.01564,
+    59.46784
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.682,
+   "launches": [
+    "mosquito-lake-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "naha-bay-ak",
+   "name": "Naha Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Loring"
+   ],
+   "bbox": [
+    -131.71602,
+    55.55674,
+    -131.61544,
+    55.61722
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 28.046,
+   "launches": [
+    "naha-bay-dock-picnic-site-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "naknek-river-ak",
+   "name": "Naknek River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "King Salmon",
+    "Naknek"
+   ],
+   "bbox": [
+    -157.05143,
+    58.61412,
+    -156.44284,
+    58.7457
+   ],
+   "wikidata": "Q3062302",
+   "charted": true,
+   "area_km2": 39.738,
+   "launches": [
+    "lake-camp-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nancy-lake-ak",
+   "name": "Nancy Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Willow"
+   ],
+   "bbox": [
+    -150.02873,
+    61.67347,
+    -149.97193,
+    61.70755
+   ],
+   "wikidata": "Q6962793",
+   "charted": false,
+   "area_km2": 4.932,
+   "launches": [
+    "nancy-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neck-lake-ak",
+   "name": "Neck Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Whale Pass"
+   ],
+   "bbox": [
+    -133.23504,
+    56.08877,
+    -133.14474,
+    56.10775
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.266,
+   "launches": [
+    "neck-lake-access-boating-site-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nenana-river-ak",
+   "name": "Nenana River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Healy",
+    "Nenana"
+   ],
+   "bbox": [
+    -149.35804,
+    63.32615,
+    -147.73015,
+    64.56559
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 37.558,
+   "launches": [
+    "nenana-10th-street-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "niukluk-river-ak",
+   "name": "Niukluk River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Council"
+   ],
+   "bbox": [
+    -164.23672,
+    64.80815,
+    -163.44482,
+    65.20461
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "niukluk-river-gravel-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nome-creek-ak",
+   "name": "Nome Creek",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -147.13561,
+    65.32864,
+    -146.52906,
+    65.43427
+   ],
+   "wikidata": "Q131993252",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "nome-creek-put-in-point-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nome-river-ak",
+   "name": "Nome River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Nome"
+   ],
+   "bbox": [
+    -165.32247,
+    64.48331,
+    -165.20721,
+    64.86898
+   ],
+   "wikidata": "Q16895878",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "nome-river-gravel-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nushagak-bay-ak",
+   "name": "Nushagak Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Nelsonville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bradford-point-beach-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "orca-inlet-ak",
+   "name": "Orca Inlet",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Cordova"
+   ],
+   "bbox": [
+    -146.14939,
+    60.43125,
+    -145.67197,
+    60.63149
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 179.247,
+   "launches": [
+    "orca-inlet-boat-launch-near-cordova-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "paddle-lake-ak",
+   "name": "Paddle Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.51541,
+    60.75965,
+    -150.50156,
+    60.77496
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.665,
+   "launches": [
+    "swanson-river-canoe-launch-ak-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "palmer-slough-ak",
+   "name": "Palmer Slough",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Wasilla"
+   ],
+   "bbox": [
+    -149.61304,
+    61.47472,
+    -149.26488,
+    61.5458
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "rabbit-slough-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "paxson-lake-ak",
+   "name": "Paxson Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -145.60825,
+    62.85184,
+    -145.50355,
+    62.98719
+   ],
+   "wikidata": "Q49308019",
+   "charted": false,
+   "area_km2": 25.879,
+   "launches": [
+    "paxson-lake-blm-campground-developed-ramp-ak",
+    "paxson-lake-blm-undeveloped-ramp-ak",
+    "paxson-lake-northern-undeveloped-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "peterson-lake-ak",
+   "name": "Peterson Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.40626,
+    60.51761,
+    -150.39258,
+    60.52519
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.593,
+   "launches": [
+    "peterson-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "phocena-bay-ak",
+   "name": "Phocena Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Ketchikan"
+   ],
+   "bbox": [
+    -131.81345,
+    55.17613,
+    -131.80256,
+    55.18539
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.581,
+   "launches": [
+    "phocena-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piledriver-slough-ak",
+   "name": "Piledriver Slough",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Moose Creek"
+   ],
+   "bbox": [
+    -147.28739,
+    64.55733,
+    -147.0526,
+    64.71878
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "piledriver-slough-canoe-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "placer-river-ak",
+   "name": "Placer River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -149.06838,
+    60.61473,
+    -148.98592,
+    60.83399
+   ],
+   "wikidata": "Q124980245",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "placer-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "portage-cove-ak",
+   "name": "Portage Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Haines"
+   ],
+   "bbox": [
+    -135.4425,
+    59.22348,
+    -135.40666,
+    59.24396
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.539,
+   "launches": [
+    "portage-cove-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "portage-lakes-ak",
+   "name": "Portage Lakes",
+   "kind": "pond",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.54925,
+    60.73001,
+    -150.54072,
+    60.73466
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "swan-lake-canoe-route-launch-ak-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "princess-bay-ak",
+   "name": "Princess Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.04245,
+    55.36523,
+    -130.99435,
+    55.40977
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 11.194,
+   "launches": [
+    "princess-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pullen-creek-ak",
+   "name": "Pullen Creek",
+   "kind": "stream",
+   "state": "AK",
+   "towns": [
+    "Skagway"
+   ],
+   "bbox": [
+    -135.32247,
+    59.45122,
+    -135.30919,
+    59.4569
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "skagway-small-boat-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "punchbowl-cove-ak",
+   "name": "Punchbowl Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -130.81192,
+    55.52328,
+    -130.77149,
+    55.55838
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 6.033,
+   "launches": [
+    "punchbowl-cove-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quartz-lake-ak",
+   "name": "Quartz Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Delta Junction"
+   ],
+   "bbox": [
+    -145.85142,
+    64.19832,
+    -145.7866,
+    64.22646
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.938,
+   "launches": [
+    "quartz-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rainbow-lake-ak",
+   "name": "Rainbow Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.81775,
+    60.7123,
+    -150.80019,
+    60.72444
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.021,
+   "launches": [
+    "rainbow-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "redoubt-lake-ak",
+   "name": "Redoubt Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Sitka"
+   ],
+   "bbox": [
+    -135.34449,
+    56.84622,
+    -135.13353,
+    56.92367
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 17.904,
+   "launches": [
+    "redoubt-bay-mooring-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "resurrection-bay-ak",
+   "name": "Resurrection Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Lowell Point",
+    "Seward"
+   ],
+   "bbox": [
+    -149.60565,
+    59.83878,
+    -149.2832,
+    60.14401
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 367.734,
+   "launches": [
+    "northeast-harbor-ramp-ak",
+    "southwest-harbor-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rocky-lake-ak",
+   "name": "Rocky Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Big Lake"
+   ],
+   "bbox": [
+    -149.83744,
+    61.55376,
+    -149.82007,
+    61.55722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.356,
+   "launches": [
+    "rocky-lake-state-recreation-site-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "round-tangle-lake-ak",
+   "name": "Round Tangle Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -146.00994,
+    63.0499,
+    -145.97332,
+    63.06647
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.52,
+   "launches": [
+    "round-tangle-lake-boat-launch-ak",
+    "tangle-lakes-campground-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sagavanirktok-river-ak",
+   "name": "Sagavanirktok River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -149.09271,
+    68.16199,
+    -147.96782,
+    70.32711
+   ],
+   "wikidata": "Q1569192",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sagavanirktok-happy-valley-gravel-pit-ak",
+    "sagavanirktok-mile-325-ice-cut-improvised-ramp-ak",
+    "sagavanirktok-river-mi-344-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-herman-bay-ak",
+   "name": "Saint Herman Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Kodiak"
+   ],
+   "bbox": [
+    -152.42207,
+    57.77333,
+    -152.40577,
+    57.78303
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.603,
+   "launches": [
+    "st-herman-harbor-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salcha-river-ak",
+   "name": "Salcha River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Aurora Lodge"
+   ],
+   "bbox": [
+    -146.984,
+    64.46068,
+    -143.923,
+    65.095
+   ],
+   "wikidata": "Q3469654",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "salcha-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-lake-ak",
+   "name": "Salmon Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -165.08495,
+    64.88876,
+    -164.95684,
+    64.91928
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.448,
+   "launches": [
+    "salmon-lake-campground-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-river-ak",
+   "name": "Salmon River",
+   "kind": "stream",
+   "state": "AK",
+   "towns": [
+    "Gustavus"
+   ],
+   "bbox": [
+    -135.76994,
+    58.3984,
+    -135.73246,
+    58.48324
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "salmon-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "san-alberto-bay-ak",
+   "name": "San Alberto Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Craig"
+   ],
+   "bbox": [
+    -133.30648,
+    55.44941,
+    -133.13821,
+    55.58727
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 130.06,
+   "launches": [
+    "craig-false-island-launch-ramp-ak",
+    "craig-north-cove-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sand-lake-ak",
+   "name": "Sand Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Anchorage"
+   ],
+   "bbox": [
+    -149.97724,
+    61.14687,
+    -149.95423,
+    61.1538
+   ],
+   "wikidata": "Q7415823",
+   "charted": false,
+   "area_km2": 0.474,
+   "launches": [
+    "sand-lake-public-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sarkar-creek-ak",
+   "name": "Sarkar Creek",
+   "kind": "stream",
+   "state": "AK",
+   "towns": [
+    "New Tokeen"
+   ],
+   "bbox": [
+    -133.24093,
+    55.93636,
+    -133.06433,
+    55.9751
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sarkar-creek-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sarker-lake-ak",
+   "name": "Sarker Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -133.23285,
+    55.92887,
+    -133.19161,
+    55.96904
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.885,
+   "launches": [
+    "sarkar-lake-access-boating-site-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scandinavian-creek-ak",
+   "name": "Scandinavian Creek",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Dillingham"
+   ],
+   "bbox": [
+    -158.48172,
+    59.03709,
+    -158.47603,
+    59.04642
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.098,
+   "launches": [
+    "dillingham-harbor-boat-launch-16x120-ak",
+    "dillingham-harbor-boat-launch-30x90-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scottie-creek-ak",
+   "name": "Scottie Creek",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -141.04022,
+    62.6318,
+    -140.97446,
+    62.64428
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "scottie-creek-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sealing-cove-ak",
+   "name": "Sealing Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Sitka"
+   ],
+   "bbox": [
+    -135.35386,
+    57.04719,
+    -135.34789,
+    57.04927
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.07,
+   "launches": [
+    "sealing-cove-boat-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "seldovia-harbor-ak",
+   "name": "Seldovia Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Seldovia"
+   ],
+   "bbox": [
+    -151.72025,
+    59.43441,
+    -151.71258,
+    59.43863
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.15,
+   "launches": [
+    "seldovia-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "seventeen-mile-lake-ak",
+   "name": "Seventeen Mile Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Sutton"
+   ],
+   "bbox": [
+    -148.98621,
+    61.71203,
+    -148.96556,
+    61.71903
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.575,
+   "launches": [
+    "seventeen-mile-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "short-bay-ak",
+   "name": "Short Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.53264,
+    55.97941,
+    -131.51133,
+    56.00452
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.785,
+   "launches": [
+    "short-bay-buoy-trailhead-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-bay-ak",
+   "name": "Silver Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Sitka"
+   ],
+   "bbox": [
+    -135.25094,
+    56.97573,
+    -135.1281,
+    57.04345
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 13.622,
+   "launches": [
+    "silver-bay-mooring-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sitka-sound-ak",
+   "name": "Sitka Sound",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Sitka"
+   ],
+   "bbox": [
+    -135.85146,
+    56.70877,
+    -135.27266,
+    57.17626
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1157.89,
+   "launches": [
+    "crescent-harbor-boat-launch-ramp-ak",
+    "eagle-beach-launch-area-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "situk-river-ak",
+   "name": "Situk River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Situk"
+   ],
+   "bbox": [
+    -139.57428,
+    59.45019,
+    -139.41001,
+    59.63213
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "nine-mile-bridge-ak",
+    "situk-river-9-mile-bridge-ak",
+    "situk-river-lower-landing-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skilak-lake-ak",
+   "name": "Skilak Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.52186,
+    60.38431,
+    -150.1197,
+    60.47293
+   ],
+   "wikidata": "Q2292328",
+   "charted": false,
+   "area_km2": 150.583,
+   "launches": [
+    "lower-skilak-lake-campground-launch-ramp-ak",
+    "upper-skilak-lake-campground-and-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smitty-s-cove-ak",
+   "name": "Smitty's Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Whittier"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "whittier-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smugglers-cove-ak",
+   "name": "Smugglers Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -131.97858,
+    55.5688,
+    -131.9391,
+    55.597
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.491,
+   "launches": [
+    "smugglers-cove-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "snake-river-ak",
+   "name": "Snake River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Nome"
+   ],
+   "bbox": [
+    -165.56143,
+    64.49938,
+    -165.39451,
+    64.70034
+   ],
+   "wikidata": "Q7547059",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "snake-river-boat-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "solomon-river-ak",
+   "name": "Solomon River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Solomon"
+   ],
+   "bbox": [
+    -164.43541,
+    64.55128,
+    -164.22279,
+    64.78931
+   ],
+   "wikidata": "Q131344863",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "solomon-river-gravel-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-fortymile-river-ak",
+   "name": "South Fork Fortymile River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Chicken"
+   ],
+   "bbox": [
+    -141.91236,
+    64.04916,
+    -141.73613,
+    64.24287
+   ],
+   "wikidata": "Q3492250",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-fork-bridge-wayside-ak",
+    "south-fork-fortymile-river-boat-launch-near-chicken-ak-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-pass-ak",
+   "name": "South Pass",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Hydaburg"
+   ],
+   "bbox": [
+    -132.89467,
+    55.16266,
+    -132.83737,
+    55.2216
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 14.367,
+   "launches": [
+    "hydaburg-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-rolly-lake-ak",
+   "name": "South Rolly Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Willow"
+   ],
+   "bbox": [
+    -150.14053,
+    61.66442,
+    -150.12015,
+    61.67199
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.704,
+   "launches": [
+    "south-rolly-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "starrigavan-bay-ak",
+   "name": "Starrigavan Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Sitka"
+   ],
+   "bbox": [
+    -135.39122,
+    57.12671,
+    -135.36793,
+    57.13973
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.815,
+   "launches": [
+    "starrigavin-boat-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "steamer-bay-ak",
+   "name": "Steamer Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -132.72898,
+    56.13483,
+    -132.66155,
+    56.19475
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.256,
+   "launches": [
+    "steamer-bay-buoy-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stormy-lake-ak",
+   "name": "Stormy Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -151.06747,
+    60.76732,
+    -151.02833,
+    60.79002
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.434,
+   "launches": [
+    "stormy-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "summit-lake-ak",
+   "name": "Summit Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Gilpatricks"
+   ],
+   "bbox": [
+    -149.52077,
+    60.62291,
+    -149.49314,
+    60.64162
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.545,
+   "launches": [
+    "summit-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sumner-strait-ak",
+   "name": "Sumner Strait",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Wrangell"
+   ],
+   "bbox": [
+    -134.15583,
+    55.91731,
+    -132.38164,
+    56.60919
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2651.5,
+   "launches": [
+    "banana-point-boat-launch-ak",
+    "heritage-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swanson-river-ak",
+   "name": "Swanson River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -151.02948,
+    60.68659,
+    -150.48695,
+    60.86922
+   ],
+   "wikidata": "Q7653742",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "swanson-river-canoe-launch-ak",
+    "swanson-river-takeout-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "taiya-river-ak",
+   "name": "Taiya River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Skagway"
+   ],
+   "bbox": [
+    -135.35549,
+    59.48725,
+    -135.26104,
+    59.69765
+   ],
+   "wikidata": "Q771153",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "raft-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "taku-lake-ak",
+   "name": "Taku Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Anchorage"
+   ],
+   "bbox": [
+    -149.88471,
+    61.1489,
+    -149.87968,
+    61.15154
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.075,
+   "launches": [
+    "taku-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "talkeetna-river-ak",
+   "name": "Talkeetna River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Talkeetna"
+   ],
+   "bbox": [
+    -150.13135,
+    62.16755,
+    -148.42404,
+    62.5989
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.97,
+   "launches": [
+    "talkeetna-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tanana-river-ak",
+   "name": "Tanana River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Big Delta",
+    "Chena Ridge",
+    "Tanacross"
+   ],
+   "bbox": [
+    -152.0141,
+    63.04677,
+    -141.87005,
+    65.16523
+   ],
+   "wikidata": "Q393769",
+   "charted": false,
+   "area_km2": 36.223,
+   "launches": [
+    "big-delta-boat-launch-ak",
+    "chena-pump-wayside-boat-launch-ak",
+    "tanana-river-tok-ak",
+    "tanana-river-access-ak",
+    "tanana-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tazlina-river-ak",
+   "name": "Tazlina River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Copperville"
+   ],
+   "bbox": [
+    -146.24432,
+    62.00657,
+    -145.38899,
+    62.08993
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.122,
+   "launches": [
+    "tazlina-river-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tolovana-river-ak",
+   "name": "Tolovana River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -149.8778,
+    64.84644,
+    -147.79279,
+    65.70478
+   ],
+   "wikidata": "Q3530614",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "minto-village-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tolsona-lake-ak",
+   "name": "Tolsona Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Tolsona"
+   ],
+   "bbox": [
+    -146.05986,
+    62.10821,
+    -146.03902,
+    62.12651
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.124,
+   "launches": [
+    "tolsona-lake-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "trollers-creek-ak",
+   "name": "Trollers Creek",
+   "kind": "stream",
+   "state": "AK",
+   "towns": [
+    "Clover Pass"
+   ],
+   "bbox": [
+    -131.80106,
+    55.45506,
+    -131.79136,
+    55.47151
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "knudson-cove-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tsirku-river-ak",
+   "name": "Tsirku River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Klukwan"
+   ],
+   "bbox": [
+    -136.41302,
+    59.26711,
+    -135.85906,
+    59.39739
+   ],
+   "wikidata": "Q2458401",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chilkat-lake-landing-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuxekan-passage-ak",
+   "name": "Tuxekan Passage",
+   "kind": "sound",
+   "state": "AK",
+   "towns": [
+    "Naukati Bay"
+   ],
+   "bbox": [
+    -133.25999,
+    55.76585,
+    -133.1566,
+    55.87466
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 39.662,
+   "launches": [
+    "naukati-bay-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "twentymile-river-ak",
+   "name": "Twentymile River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Girdwood"
+   ],
+   "bbox": [
+    -149.00752,
+    60.84112,
+    -148.81432,
+    61.06272
+   ],
+   "wikidata": "Q54872264",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "twentymile-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "unalakleet-river-ak",
+   "name": "Unalakleet River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Unalakleet"
+   ],
+   "bbox": [
+    -160.78647,
+    63.86015,
+    -159.20434,
+    64.33928
+   ],
+   "wikidata": "Q763999",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "unalakleet-river-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "union-lake-ak",
+   "name": "Union Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Soldotna"
+   ],
+   "bbox": [
+    -151.03564,
+    60.51791,
+    -151.02596,
+    60.52654
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.503,
+   "launches": [
+    "sports-lake-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-trail-lake-ak",
+   "name": "Upper Trail Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Moose Pass"
+   ],
+   "bbox": [
+    -149.42375,
+    60.45897,
+    -149.33769,
+    60.53533
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.729,
+   "launches": [
+    "moose-pass-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walker-cove-ak",
+   "name": "Walker Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -130.90144,
+    55.70607,
+    -130.70117,
+    55.76309
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 18.654,
+   "launches": [
+    "walker-cove-buoy-day-use-area-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walker-fork-ak",
+   "name": "Walker Fork",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -141.76423,
+    64.02664,
+    -141.04991,
+    64.09872
+   ],
+   "wikidata": "Q125246651",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "walker-fork-campground-ak",
+    "walker-fork-campground-boat-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watson-lake-ak",
+   "name": "Watson Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -150.47399,
+    60.53408,
+    -150.46169,
+    60.54173
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.376,
+   "launches": [
+    "watson-lake-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-dennison-fork-ak",
+   "name": "West Fork Dennison Fork",
+   "kind": "river",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -143.20929,
+    63.53934,
+    -142.04765,
+    63.90835
+   ],
+   "wikidata": "Q125256583",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "west-fork-campground-river-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "winter-harbor-ak",
+   "name": "Winter Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -133.24372,
+    55.75355,
+    -133.22703,
+    55.7739
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.661,
+   "launches": [
+    "winter-harbor-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wood-river-ak",
+   "name": "Wood River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Wood River"
+   ],
+   "bbox": [
+    -158.60054,
+    59.03744,
+    -158.41553,
+    59.27453
+   ],
+   "wikidata": "Q2593079",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wood-river-access-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "woodpecker-cove-ak",
+   "name": "Woodpecker Cove",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -132.83156,
+    56.49666,
+    -132.8181,
+    56.50142
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.212,
+   "launches": [
+    "woodpecker-boat-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wrangell-narrows-ak",
+   "name": "Wrangell Narrows",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Petersburg"
+   ],
+   "bbox": [
+    -133.00012,
+    56.51017,
+    -132.905,
+    56.83345
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 57.276,
+   "launches": [
+    "papkes-landing-launch-ak",
+    "south-harbor-launch-ramp-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yukon-river-ak",
+   "name": "Yukon River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Circle",
+    "Eagle",
+    "Galena"
+   ],
+   "bbox": [
+    -164.76958,
+    61.54892,
+    -139.43019,
+    66.60015
+   ],
+   "wikidata": "Q104437",
+   "charted": false,
+   "area_km2": 216.957,
+   "launches": [
+    "circle-boat-launch-ak",
+    "eagle-boat-launch-ak",
+    "yukon-river-boat-launch-ak",
+    "yukon-river-boat-launch-ak-2"
+   ],
+   "advisories": []
+  }
+ ]
+}
