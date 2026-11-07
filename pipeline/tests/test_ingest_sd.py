@@ -334,3 +334,64 @@ def test_missing_water_names_are_normalised_and_the_bloom_lakes_carry_their_coun
                      "Lake Poinsett": ["Hamlin County"], "Twin Lakes": ["Spink County"],
                      "Wall Lake": ["Minnehaha County"]}
     assert all(r["name"] != "Unnamed" for r in doc["rows"])
+
+
+# ---------------------------------------------------------------- final audit 2026-11-07: a general permit's state
+
+def test_a_general_permits_report_counts_under_its_state(monkeypatch):
+    """SDG821580's bypass to the Big Sioux River had no state (the permit's prefix was read only before a digit), so
+    it was not placed by name, not counted and not coloured; the same held for ILG, GAU, RIS and NHG permits."""
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", {"SD", "IL", "GA", "RI", "NH"})
+    for permit, st in [("SDG821580", "SD"), ("SD0023574", "SD"), ("ILG640063", "IL"), ("GAU020000", "GA"),
+                       ("RIS000002", "RI"), ("NHG580001", "NH")]:
+        assert S.event_state({"npdes_permit": permit, "source_id": "echo-sewer-overflow"}) == st
+    assert S.event_state({"npdes_permit": "NN0020001", "source_id": "echo-sewer-overflow"}) is None
+    assert S.event_state({"npdes_permit": "SDGXX1580", "source_id": "echo-sewer-overflow"}) is None
+
+
+def test_every_permit_form_names_its_state_and_nothing_else_does(monkeypatch):
+    """Review 2026-11-07 (sd-final P1-1): the forms in EPA's overflow tables and the registries, individual, general and
+    state series (RISS: 42 Rhode Island reports; GAIS: 4 Georgia reports had no state with one letter allowed), and the
+    texts that are no permit."""
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", {"SD", "IL", "GA", "RI", "NH", "MA", "ME", "CT", "AK", "AZ", "DC", "MD", "VA"})
+    for permit, st in [("SD0023574", "SD"), ("SDG821580", "SD"), ("ILG580253", "IL"), ("GAG640118", "GA"),
+                       ("GAJ020132", "GA"), ("GAU060009", "GA"), ("GAIS12148", "GA"), ("GAIS10096", "GA"),
+                       ("RISS00024", "RI"), ("RI0100315", "RI"), ("NHG580013", "NH"), ("NH0100625", "NH"),
+                       ("MA0102598", "MA"), ("MAG640000", "MA"), ("MAR050000", "MA"), ("ME0100013", "ME"),
+                       ("CT0100145", "CT"), ("AK0021245", "AK"), ("AKG572000", "AK"), ("AZ0020001", "AZ"),
+                       ("DC0021199", "DC"), ("MDR055500", "MD"), ("VAN010000", "VA")]:
+        assert S.event_state({"npdes_permit": permit, "source_id": "echo-sewer-overflow"}) == st, permit
+    for other in ["NN0020001", "NN0030333", "", None, "big-sioux-river-sd", "sd0023574", "110000123456", "N/A",
+                  "SDGXX1580", "TX0047236", "CTDEEP", "GSN001234", " SD0023574"]:
+        assert S.event_state({"npdes_permit": other, "source_id": "echo-sewer-overflow"}) is None, other
+    W = {"big-sioux-river-sd": {"slug": "big-sioux-river-sd", "name": "Big Sioux River", "kind": "river",
+                                "state": "SD", "towns": [], "bbox": [-97.21, 42.49, -96.44, 45.32]}}
+    R = S.Resolver(W, [], {}, {}, {})
+    ev = {"event_id": "echo-sewer-overflow:SDG821580:2:1", "source_id": "echo-sewer-overflow",
+          "npdes_permit": "SDG821580", "event_type": "bypass", "waterbody_text": "Big Sioux River",
+          "lat": 44.721946, "lon": -97.041613, "water_slugs": [], "water_match": "none", "raw": {}}
+    assert R.resolve(ev)["water_slugs"] == ["big-sioux-river-sd"]
+
+
+def test_operator_rows_state_no_unread_permit_duty_as_fact():
+    """Final audit 2026-11-07 (review P2-1 carried to the operator rows): the public channel text says no statute was
+    found and that the two combined sewer permits are expected to require notice; neither permit was read."""
+    rows = [o for o in json.loads((ROOT / "data" / "dischargers.json").read_text()) if o["state"] == "SD"]
+    text = [o["notification_channel"] for o in rows]
+    assert len(rows) == 369
+    assert all(t.startswith("No South Dakota statute or rule was found that requires") for t in text)
+    assert not any("must notify the public" in t for t in text)
+    cso = [o for o in rows if o["kind"] == "cso"]
+    assert len(cso) == 2 and all("is expected to require public notice" in o["notification_channel"] for o in cso)
+
+
+def test_splitrock_creek_is_split_rock_creek():
+    """Final audit 2026-11-07: Brandon's bypass (SD0022535) names 'Splitrock Creek'; the record is Split Rock Creek,
+    whose extent holds the report's point."""
+    from build import status as S
+    W = S.load_waters()
+    assert "split-rock-creek-sd" in W and "Splitrock Creek" in (W["split-rock-creek-sd"].get("aliases") or [])
+    b = W["split-rock-creek-sd"]["bbox"]
+    assert b[0] <= -96.594722 <= b[2] and b[1] <= 43.599056 <= b[3]
