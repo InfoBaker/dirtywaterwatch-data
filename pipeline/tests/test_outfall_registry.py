@@ -309,7 +309,7 @@ def test_the_live_states_are_the_rules_list_exactly(tmp_path, monkeypatch):
     assert S.states() == live
     from build import reaches as R
     assert R.live_states() == live
-    assert RF.radar_states() == live
+    assert RF.radar_states() == live - RF.OUTSIDE_RADAR_GRID      # the radar grid is the contiguous states'
     waters = {"ohio-river-oh": {"state": "OH"}, "mill-river-ma": {"state": "MA"}}
     assert S.derive_states(waters, rules) == live                    # a water record opens no state
     assert "OH" in S.derive_states(waters, rules, live_only=False)    # a tool working beyond the live states

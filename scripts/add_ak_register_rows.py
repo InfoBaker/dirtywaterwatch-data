@@ -151,7 +151,9 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                 id=f"{oid}-cso-public-notification", operator_id=oid, name=name, permit="AK0023213",
                 channel_kind="operator_page", urls=[JUNEAU_PAGE], method="html", legal_basis=Q_CSO,
                 basis_kind="permit", monitored=True, unmonitored_reason=None, publishes="notices", every_hours=24,
-                noun="CSO public notification",
+                # page health first (collection checklist section 3; Alaska final audit 2026-11-07): records on
+                # after a reviewer reads the first snapshots
+                records=False, noun="CSO public notification",
                 entry={"start": r"^Combined Sewer Overflows$", "end": r"^Juneau-Douglas Treatment Facility$"},
                 sources=["ak-apdes-permits"],
                 note=("The City and Borough's wastewater utility page lists its combined sewer overflow public notices "

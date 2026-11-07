@@ -697,6 +697,7 @@
    "unmonitored_reason": null,
    "publishes": "notices",
    "every_hours": 24,
+   "records": false,
    "noun": "CSO public notification",
    "entry": {
     "start": "^Combined Sewer Overflows$",

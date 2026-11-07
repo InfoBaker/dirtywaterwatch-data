@@ -96,6 +96,11 @@ GRID_HOURS = (1, 24)           # read as grids every hour
 BACKFILL_HOURS = (48, 72)      # read as grids only when a permittee's history lacks the windows they imply
 PRODUCT = "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)"
 SHARED_SITE_STATES = ("NJ",)  # its permits on the permittees' shared site (ingest/nj_cso_likely.py) keep the site
+# The radar product is the contiguous United States grid (conus_QPE_*: 20 to 55 N, 130 to 60 W). A live state outside it
+# is not read: its points would have no value, and Juneau (58.3 N) with the pipeline row at Prudhoe Bay (70.26 N) would
+# stretch the one export box from 5,575 x 1,648 to 8,146 x 3,883 pixels for every state (Alaska final audit,
+# 2026-11-07). Its combined sewer permits stay in out/coverage.json rain_caution_states with covered false.
+OUTSIDE_RADAR_GRID = frozenset({"AK", "HI", "PR", "VI", "GU", "AS", "MP"})
 # a point's source tag by registry file (rainfall.json outfalls[].source; a national file: "echo-registry")
 REGISTRY_SOURCE = {"data/outfalls-new-england.json": "echo", "data/outfalls-mid-atlantic.json": "echo-mid-atlantic",
                    "data/build/outfalls-reported.json": "reported-cso"}   # a combined sewer outfall the reports place
@@ -229,12 +234,13 @@ def point_key(lat: float, lon: float) -> str:
 
 def radar_states(live: set[str] | None = None) -> set[str]:
     """The states whose combined sewer outfalls the radar reads: the live states (build/status.py states(), the
-    one list the site's state pages and the export use). In New Jersey the permits on the permittees' shared site
-    are left to it (cso_outfalls); its other permits are read like any other state's."""
+    one list the site's state pages and the export use) inside the radar grid (OUTSIDE_RADAR_GRID left out). In
+    New Jersey the permits on the permittees' shared site are left to it (cso_outfalls); its other permits are read
+    like any other state's."""
     if live is None:
         from build import status as status_mod
         live = status_mod.states()
-    return {str(s).upper() for s in live}
+    return {str(s).upper() for s in live} - OUTSIDE_RADAR_GRID
 
 
 def cso_outfalls(live: set[str] | None = None) -> list[dict]:

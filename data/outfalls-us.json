@@ -19,19 +19,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010680423",
    "lat": 58.3000526,
    "lon": -134.417196,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "gastineau-channel-ak",
+   "water_name": "Gastineau Channel",
+   "water_kind": "bay",
+   "distance_m": 143,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no record named 'Gastineau Channel' in AK",
-   "water_match": "none: no record named 'Gastineau Channel' in AK",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
+   "water_match": "receiving water: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 002 the receiving water 'Gastineau Channel'; Gastineau Channel (gastineau-channel-ak, Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon), 143 m from the point",
+   "water_matched_by": "scripts/ak_gate_ties.py (AK go-live gates, 2026-11-07)",
+   "receiving_water_override": {
+    "water": "Gastineau Channel",
+    "basis": "EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 002 the receiving water 'Gastineau Channel' (AK go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "AK0023213",
@@ -49,19 +52,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010680423",
    "lat": 58.299956,
    "lon": -134.406599,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "gastineau-channel-ak",
+   "water_name": "Gastineau Channel",
+   "water_kind": "bay",
+   "distance_m": 80,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no record named 'Gastineau Channel' in AK",
-   "water_match": "none: no record named 'Gastineau Channel' in AK",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
+   "water_match": "receiving water: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 003 the receiving water 'Gastineau Channel'; Gastineau Channel (gastineau-channel-ak, Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon), 80 m from the point",
+   "water_matched_by": "scripts/ak_gate_ties.py (AK go-live gates, 2026-11-07)",
+   "receiving_water_override": {
+    "water": "Gastineau Channel",
+    "basis": "EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 003 the receiving water 'Gastineau Channel' (AK go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "AK0023213",
@@ -79,18 +85,22 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010680423",
    "lat": 58.277201,
    "lon": -134.392257,
-   "water_slug": "douglas-boat-harbor-ak",
-   "water_name": "Douglas Boat Harbor",
+   "water_slug": "gastineau-channel-ak",
+   "water_name": "Gastineau Channel",
    "water_kind": "bay",
-   "distance_m": 174,
+   "distance_m": 52,
    "alternatives": [],
-   "match": "geometry",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 174 m from Douglas Boat Harbor (douglas-boat-harbor-ak), the nearest openboatlaunch water within 400 m; the receiving water ('Gastineau Channel') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_match": "receiving water: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 004 the receiving water 'Gastineau Channel'; Gastineau Channel (gastineau-channel-ak, Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon), 52 m from the point",
+   "water_matched_by": "scripts/ak_gate_ties.py (AK go-live gates, 2026-11-07)",
+   "receiving_water_override": {
+    "water": "Gastineau Channel",
+    "basis": "EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 004 the receiving water 'Gastineau Channel' (AK go-live gates 2026-11-07)"
+   }
   },
   {
    "npdes_permit": "AKG320002",
@@ -118,8 +128,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; NHD builder: NHDPlus V2.1, which this step reads, has no data for Alaska (NLDI snaps no point there)",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; NHD builder: NHDPlus V2.1, which this step reads, has no data for Alaska (NLDI snaps no point there)",
    "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
@@ -169977,5 +169987,27 @@
   "WA": 544,
   "WI": 1780,
   "WV": 126
- }
+ },
+ "excluded_not_sewage": [
+  {
+   "npdes_permit": "AKG320002",
+   "permittee": "APSC - TRANS-ALASKA PIPELINE SYSTEM",
+   "state": "AK",
+   "city": "NORTH POLE",
+   "sic_codes": [
+    "1382",
+    "4612",
+    "4922"
+   ],
+   "naics_codes": [
+    "213112",
+    "486110",
+    "486210"
+   ],
+   "external_outfalls": 1,
+   "reason": "not_a_combined_sewer",
+   "why": "EPA's own record shows a crude-oil pipeline, not a combined sewer system: the CSO inventory's one feature of the permit is a pump station's tank utilidor",
+   "basis": "ECHO (dfr_rest_services.get_dfr and eff_rest_services.download_effluent_chart for AKG320002, read 2026-11-07): facility 'APSC - TRANS-ALASKA PIPELINE SYSTEM', SIC 1382 (Oil and Gas Exploration Services), 4612 (Crude Petroleum Pipelines), 4922 (Natural Gas Transmission), NAICS 213112, 486110, 486210; EPA's CSO inventory lists one feature, 08AA 'PS01 TK110/TK110 Utilidors' at Pump Station 1, Prudhoe Bay, status 'CSO|DEW', with no limit or report 2023-2026 (the permit's limits are at pump stations 3 to 6); not a combined sewer outfall (Alaska final audit 2026-11-07)"
+  }
+ ]
 }
