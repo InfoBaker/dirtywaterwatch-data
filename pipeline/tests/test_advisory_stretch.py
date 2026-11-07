@@ -110,6 +110,14 @@ def test_an_end_off_the_path_draws_nothing_and_says_why(no_requests):
     assert R.outcome(rec) == "no_trace"
 
 
+def test_an_end_at_or_above_the_start_draws_nothing():
+    # review 2026-11-07 (advisory reach P2-1): an end upstream of the start, within 1 km of the path, snapped to the
+    # path's first point and drew a red stretch of 0 km
+    for end in (MOUTH, (MOUTH[0], MOUTH[1] + 0.003)):
+        segs, why, info = R.stretch_segments(LINES, ATTRS, 40.0, "Pearl River", end, MOUTH)
+        assert segs == [] and why == "stretch_end_not_downstream" and "not downstream" in info["end"]["why"]
+
+
 def test_a_lake_before_the_end_stops_the_stretch_there():
     attrs = copy.deepcopy(ATTRS)
     lines = R.ordered(LINES, attrs)

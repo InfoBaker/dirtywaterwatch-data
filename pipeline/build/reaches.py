@@ -58,9 +58,9 @@ advisory from the mouth of Hanging Moss Creek to the Byram Swinging Bridge), in 
 comid/position, as an event point, navigation to STRETCH_SEARCH x the cap), cached CACHE_DAYS under
 adv-<sha1 of the event id>.json, traced again when an end moves; cut at the point of the path nearest the
 downstream end (cut_reason "stretch_end"), or earlier at tide, a lake or the cap (an end past the cap is cut at the
-cap and stretch_trace.end says so); an end more than STRETCH_END_MAX_M from the path draws nothing
-("stretch_end_off_path"). The record carries the advisory (event id, authority, link), both ends with their basis and
-citation, the length and the rule applied (STRETCH_RULE). A stretch whose advisory has left the history is retired.
+cap and stretch_trace.end says so); an end more than STRETCH_END_MAX_M from the path ("stretch_end_off_path") or
+not below the start (STRETCH_MIN_KM, "stretch_end_not_downstream") draws nothing. The record carries the advisory
+(event id, authority, link), both ends with their basis and citation, the length and the rule applied (STRETCH_RULE). A stretch whose advisory has left the history is retired.
 
 Flows: gauges per river (data/build/gauges-by-river.json, from the gauge table in
 research/hydrography/report.md 2.7, with each gauge's NHDPlus COMID, mean annual flow and drainage
@@ -122,6 +122,7 @@ ADVISORY_KIND = "advisory_stretch"
 STRETCH_SEARCH = 2.0          # x cap_km: how far downstream the end is looked for (an end past the cap is said so)
 STRETCH_END_MAX_M = 1000.0    # the end's point must lie this close to the traced path, else no stretch is drawn
 STRETCH_LEAD_MAX_KM = 1.0     # a start at a tributary's mouth: at most this much of the tributary is left out
+STRETCH_MIN_KM = 0.1          # an end nearest the path this close to its start is not downstream of it: nothing drawn
 STRETCH_HISTORY_DAYS = 90     # status.HISTORY_DAYS: a lifted advisory's stretch is kept while its red is in history
 STRETCH_RULE = ("the stretch the authority's advisory names, traced from its upstream end down the NHDPlus V2.1 main "
                 "stem (USGS NLDI, else EPA's NHDPlus service) to the point of the path nearest its downstream end; cut "
@@ -414,6 +415,10 @@ def stretch_segments(flowlines: list[dict], attrs: dict, cap: float, water: str 
         info["end"]["why"] = (f"the end's point lies {off_m / 1000:.1f} km from the traced path (more than "
                               f"{STRETCH_END_MAX_M / 1000:g} km): the stretch is not drawn")
         return [], "stretch_end_off_path", info
+    if km_end < STRETCH_MIN_KM:
+        info["end"]["why"] = (f"the end's point lies nearest the start of the traced path ({km_end * 1000:.0f} m down "
+                              f"it): it is not downstream of the start, so the stretch is not drawn")
+        return [], "stretch_end_not_downstream", info
     segs, why = build_segments(lines, attrs, min(cap, km_end))
     if why == "cap_km" and km_end <= cap:
         why = "stretch_end"
