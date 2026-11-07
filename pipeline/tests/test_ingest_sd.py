@@ -315,3 +315,22 @@ def test_register_rows_say_per_permit_what_is_filed_and_how_the_authority_was_re
     epa = [r for r in rows.values() if r["id"].endswith("-overflow-report") and "EPA Region 8" in r["note"]]
     assert epa and all("not from the permit text" in r["note"] for r in epa)
     assert not any("No public notice is required" in r["note"] for r in rows.values())
+
+
+def test_missing_water_names_are_normalised_and_the_bloom_lakes_carry_their_counties():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("sd_names", ROOT / "scripts" / "sd_report_water_names.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    assert m.norm("gold run creek") == "Gold Run Creek"
+    assert m.norm("Scatterwood via Drainage ditch") == "Scatterwood"
+    assert m.norm("Spearfish Creek / Rubble Site Cell") == "Spearfish Creek"
+    assert m.norm("unname tributary of snake creek") == "Unnamed tributary of Snake Creek"
+    assert m.norm("Tributary to the Big Sioux River") == "Unnamed tributary of Big Sioux River"
+    assert m.norm("Unnamed") is None
+    doc = json.loads((ROOT / "research" / "sd" / "receiving-waters-missing.json").read_text())
+    lakes = {r["name"]: r.get("counties") for r in doc["rows"] if "sd-danr-hab-advisories" in r["sources"]}
+    assert lakes == {"Clear Lake": ["Hamlin County"], "Lake Albert": ["Kingsbury County"],
+                     "Lake Poinsett": ["Hamlin County"], "Twin Lakes": ["Spink County"],
+                     "Wall Lake": ["Minnehaha County"]}
+    assert all(r["name"] != "Unnamed" for r in doc["rows"])

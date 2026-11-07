@@ -1,33 +1,9 @@
 {
  "about": "Receiving-water names in SD's reports (EPA's overflow tables for South Dakota permits, the extract of 2026-11-04, and DANR's harmful algal bloom advisories, read 2026-11-07) that data/receiving-waters-national.json does not hold for SD, by name as typed, with the number of reports giving each. Reports that say the discharge reached no water are left out.",
  "state": "SD",
- "waters": 17,
- "reports": 20,
+ "waters": 15,
+ "reports": 16,
  "rows": [
-  {
-   "name": "tributary to mud creek",
-   "reports": 3,
-   "permits": [
-    "SD0022187"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     45.446215,
-     -98.109311
-    ],
-    [
-     45.444867,
-     -98.097274
-    ],
-    [
-     45.446,
-     -98.109
-    ]
-   ]
-  },
   {
    "name": "Dry Run Creek",
    "reports": 2,
@@ -42,6 +18,9 @@
      43.697667,
      -97.992417
     ]
+   ],
+   "as_typed": [
+    "Dry Run Creek"
    ]
   },
   {
@@ -53,6 +32,9 @@
    ],
    "counties": [
     "Hamlin County"
+   ],
+   "as_typed": [
+    "Clear Lake"
    ]
   },
   {
@@ -69,6 +51,9 @@
      45.050196,
      -97.323078
     ]
+   ],
+   "as_typed": [
+    "Dry Lake"
    ]
   },
   {
@@ -80,7 +65,44 @@
    ],
    "counties": [
     "Kingsbury County"
+   ],
+   "as_typed": [
+    "Lake Albert"
    ]
+  },
+  {
+   "name": "Lake Francis",
+   "reports": 1,
+   "permits": [
+    "SDG921784"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     43.444833,
+     -96.822667
+    ]
+   ],
+   "as_typed": [
+    "lake francis"
+   ]
+  },
+  {
+   "name": "Lake Poinsett",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "sd-danr-hab-advisories"
+   ],
+   "counties": [
+    "Hamlin County"
+   ],
+   "as_typed": [
+    "Lake Poinsett"
+   ],
+   "in_national_list": true
   },
   {
    "name": "McCook Lake",
@@ -96,10 +118,13 @@
      42.550249,
      -96.511671
     ]
+   ],
+   "as_typed": [
+    "McCook Lake"
    ]
   },
   {
-   "name": "Scatterwood via Drainage ditch",
+   "name": "Scatterwood",
    "reports": 1,
    "permits": [
     "SD0022519"
@@ -112,10 +137,13 @@
      45.441722,
      -99.005612
     ]
+   ],
+   "as_typed": [
+    "Scatterwood via Drainage ditch"
    ]
   },
   {
-   "name": "Spearfish Creek / Rubble Site Cell",
+   "name": "Spearfish Creek",
    "reports": 1,
    "permits": [
     "SD0020044"
@@ -128,10 +156,27 @@
      44.550351,
      -103.866191
     ]
+   ],
+   "as_typed": [
+    "Spearfish Creek / Rubble Site Cell"
    ]
   },
   {
-   "name": "Tributary to Battle Creek",
+   "name": "Twin Lakes",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "sd-danr-hab-advisories"
+   ],
+   "counties": [
+    "Spink County"
+   ],
+   "as_typed": [
+    "Twin Lakes"
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Battle Creek",
    "reports": 1,
    "permits": [
     "SD0028620"
@@ -144,10 +189,13 @@
      44.395109,
      -103.594654
     ]
+   ],
+   "as_typed": [
+    "Tributary to Battle Creek"
    ]
   },
   {
-   "name": "Tributary to the Big Sioux River",
+   "name": "Unnamed tributary of Big Sioux River",
    "reports": 1,
    "permits": [
     "SD0023388"
@@ -160,33 +208,9 @@
      44.244361,
      -96.806361
     ]
-   ]
-  },
-  {
-   "name": "Twin Lakes",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "sd-danr-hab-advisories"
    ],
-   "counties": [
-    "Spink County"
-   ]
-  },
-  {
-   "name": "Unnamed",
-   "reports": 1,
-   "permits": [
-    "SD0020753"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     44.369526,
-     -97.11816
-    ]
+   "as_typed": [
+    "Tributary to the Big Sioux River"
    ]
   },
   {
@@ -203,6 +227,9 @@
      44.318094,
      -103.789031
     ]
+   ],
+   "as_typed": [
+    "Unnamed tributary of Whitewood Creek"
    ]
   },
   {
@@ -214,10 +241,13 @@
    ],
    "counties": [
     "Minnehaha County"
+   ],
+   "as_typed": [
+    "Wall Lake"
    ]
   },
   {
-   "name": "West branch of Lac Qui Parle River",
+   "name": "West Branch of Lac Qui Parle River",
    "reports": 1,
    "permits": [
     "SDG820591"
@@ -230,39 +260,17 @@
      44.799786,
      -96.453586
     ]
+   ],
+   "as_typed": [
+    "West branch of Lac Qui Parle River"
    ]
-  },
+  }
+ ],
+ "left_out": [
   {
-   "name": "lake francis",
+   "name": "Unnamed",
    "reports": 1,
-   "permits": [
-    "SDG921784"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     43.444833,
-     -96.822667
-    ]
-   ]
-  },
-  {
-   "name": "unname tributary of snake creek",
-   "reports": 1,
-   "permits": [
-    "SD0021474"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     43.325389,
-     -96.77525
-    ]
-   ]
+   "reason": "names no water"
   }
  ]
 }
