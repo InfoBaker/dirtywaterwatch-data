@@ -135,7 +135,7 @@ AGENCY = [
 JACKSON_ROWS = [
     {"id": "ms-jackson-jxn-news-releases", "channel_kind": "operator_page",
      "urls": ["https://jxnwater.com/newservice/"], "method": "html", "legal_basis": Q_JXN, "basis_kind": "law",
-     "monitored": True, "unmonitored_reason": None, "publishes": "notices", "every_hours": 6,
+     "monitored": True, "unmonitored_reason": None, "publishes": "notices", "records": False, "every_hours": 6,
      "noun": "News releases",
      "note": ("JXN Water's news page (answered 200 on 2026-11-07), where the overflow response plan's news releases for "
               "significant overflows would appear; whether they are posted here was not checked. (ms-jxn-water)"),

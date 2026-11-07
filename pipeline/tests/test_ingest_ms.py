@@ -233,6 +233,9 @@ def test_the_mississippi_register_rows():
     assert rows["ms-mdeq-beach-signs"]["barrier"] == "signs_only"
     assert {r["operator_id"] for r in rows.values() if r["operator_id"]} == {"ms-jackson-jxn"}
     assert rows["ms-jackson-jxn-overflow-signs"]["barrier"] == "signs_only"
+    # a new monitored row starts as page health only (docs/collection-checklist.md §3): records stay off until a
+    # reviewer has seen dated overflow notices in its snapshots that no feed carries
+    assert all(r.get("records") is False for r in rows.values() if r["monitored"])
     assert not any("@" in json.dumps(r) for r in rows.values())
 
 
