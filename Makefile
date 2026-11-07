@@ -59,6 +59,10 @@
 #                  Arizona: echo_sewer_overflow_events (EPA's overflow tables, AZ permits: the statewide record of
 #                  AZPDES overflows and bypasses, with ADEQ's waterbody identifiers named from
 #                  data/reference/az-adeq-wbids.json; scripts/az_adeq_wbids.py refreshes that file by hand)
+#                  New Mexico: echo_sewer_overflow_events (EPA's overflow tables, NM permits and the Navajo Nation's
+#                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
+#                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
+#                  advisory map layer, blooms; ingest/nm_transforms.py)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
