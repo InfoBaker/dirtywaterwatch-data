@@ -58,17 +58,22 @@ def _bbox(v):
     return [round(float(x), 5) for x in v] if isinstance(v, list) and len(v) == 4 else None
 
 
+def OW_launches(d):
+    from ingest.obl_waters import launches
+    return launches(d)
+
+
 def extract(water_dir: Path = OBL_WATER_DIR) -> list[dict]:
     rows = []
     for f in sorted(glob.glob(str(water_dir / "*-va.json"))):
         d = json.loads(Path(f).read_text())
-        if d.get("state") != STATE or not d.get("slug"):
-            continue
+        if d.get("state") != STATE or not d.get("slug") or (d.get("status") or "active") != "active":
+            continue            # a renamed, merged or deleted record of openboatlaunch's API is no water record
         rows.append({
             "slug": d["slug"], "name": d.get("name"), "kind": d.get("kind"), "state": STATE,
             "towns": d.get("towns") or [], "bbox": _bbox(d.get("bbox")), "wikidata": d.get("wikidata"),
             "charted": d.get("charted"), "area_km2": d.get("area_km2"),
-            "launches": [l.get("s") for l in d.get("launches") or [] if isinstance(l, dict) and l.get("s")],
+            "launches": [l["slug"] for l in OW_launches(d) if l["visibility"] == "published"],
             "advisories": d.get("advisories") or [],
         })
     return sorted(rows, key=lambda r: r["slug"])

@@ -5,9 +5,11 @@ name: State water batch
 #   gh workflow run state-build.yml -f state=MI -f steps="extract obl-check waters ties"
 #   gh workflow run state-build.yml -f state=FL -f steps="osm ties" -f osm_budget=1200
 # The steps are scripts/state_batch.py's (its docstring says what each runs): extract, obl-check, registry, waters,
-# osm, ties. openboatlaunch's water records and outlines come from R2 state/obl-water.tar.gz (packed once on a machine
-# with the openboatlaunch checkout; docs/state-builder-brief.md has the command), restored read only into
-# ../openboatlaunch/out, where the pipeline reads them: `extract` writes the state's data/waters-<st>.json from them,
+# osm, ties. openboatlaunch's water records and outlines come from its API (scripts/state_paths.py fetch-obl, the
+# national bulk file, at most once a day; key OBL_API_KEY) or else from R2 state/obl-water.tar.gz (the last good copy
+# the hourly refresh saves), into ../openboatlaunch/out, where the pipeline reads them; with the key, `extract` reads
+# the state's list from the API (states/{ST}/waters) and the folder is its fallback. The batch never saves the folder:
+# `extract` writes the state's data/waters-<st>.json from them,
 # and `waters`, `osm` and `ties` measure against their outlines (OBL_WATER_DIR). Not in R2: a warning (extract then
 # refuses and ties without an outline are held, as before); there but not fetched or not readable: the batch stops.
 # `osm` is the waters step with OpenStreetMap's pass given osm_budget seconds (up to 20 minutes; Overpass answers
@@ -69,6 +71,7 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
       PYTHONUNBUFFERED: '1'
       # the inputs reach the shell as variables only, never pasted into a script; state_batch.py validates them
       STATE: ${{ inputs.state }}
@@ -107,20 +110,24 @@ jobs:
             echo "::error::state/build.tar.gz is in R2 but could not be fetched"; exit 1
           fi
           find data/build -name '._*' -delete 2>/dev/null || true
-      - name: Restore openboatlaunch's water records and outlines from R2 (state/obl-water.tar.gz; read only, never saved)
+      - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
         run: |
-          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl), where
-          # ingest.obl_waters and build/status.py's outlines read them. Before the raw caches, so a batch stopped here
-          # never saves them. Not in R2: a warning; there but not fetched or not readable: the batch stops, since its
-          # ties would be measured without the outlines.
-          rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
-          if [ "$rc" = 0 ]; then
-            python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
-              || { echo "::error::state/obl-water.tar.gz is in R2 but could not be read; the batch stops"; exit 1; }
-          elif [ "$rc" = 3 ]; then
-            echo "::warning::state/obl-water.tar.gz is not in R2 yet: no openboatlaunch records or outlines this run (extract refuses; a tie that needs an outline is held)"
-          else
-            echo "::error::state/obl-water.tar.gz is in R2 but could not be fetched; the batch stops"; exit 1
+          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl rules),
+          # where ingest.obl_waters and build/status.py's outlines read them. fetch-obl first (the API's national file,
+          # sha256 checked; on any failure, said in the log, the R2 copy). Before the raw caches, so a batch stopped
+          # here never saves them. R2 copy not there: a warning; there but not fetched or not readable: the batch
+          # stops, since its ties would be measured without the outlines.
+          rc=0; python3 -I scripts/state_paths.py fetch-obl || rc=$?
+          if [ "$rc" != 0 ]; then
+            rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
+            if [ "$rc" = 0 ]; then
+              python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
+                || { echo "::error::state/obl-water.tar.gz is in R2 but could not be read; the batch stops"; exit 1; }
+            elif [ "$rc" = 3 ]; then
+              echo "::warning::state/obl-water.tar.gz is not in R2 yet: no openboatlaunch records or outlines this run (extract refuses; a tie that needs an outline is held)"
+            else
+              echo "::error::state/obl-water.tar.gz is in R2 but could not be fetched; the batch stops"; exit 1
+            fi
           fi
           rm -f obl-water.tar.gz
       - name: Restore the raw caches from R2

@@ -23,7 +23,9 @@ the pull request that carries the changed registry files to a person for review.
                                           the caches each time) and open the pull request, or update the open one
 
 Steps (--steps, space- or comma-separated; run in this order whatever order they are given in):
-  extract    python -m ingest.obl_waters --state <ST> --from <obl-dir> --out ../data/waters-<st>.json (from pipeline/):
+  extract    python -m ingest.obl_waters --state <ST> [--from-api] --from <obl-dir> --out ../data/waters-<st>.json:
+             with OBL_API_KEY set, the state's records from openboatlaunch's API (states/{ST}/waters, paged; the
+             folder below is the fallback when the API cannot be read), else
              the state's openboatlaunch water records from the snapshot the workflows restore from R2
              (state/obl-water.tar.gz, scripts/state_paths.py unpack-obl, into ../openboatlaunch/out beside the
              checkout); the snapshot date comes from its out/meta.json. Refused at run time, before anything is
@@ -283,7 +285,10 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
                 raise Refused(f"extract: data/waters-{st.lower()}.json is another file (not {st}'s openboatlaunch "
                               "extract, e.g. a leftover New England regional file), which the extract "
                               "would overwrite; that state's extract needs another file name first")
-            cmds.append(Cmd(s, [py, "-m", "ingest.obl_waters", "--state", st, "--from", water_arg,
+            # with the API key here, the state's list from openboatlaunch's API (states/{ST}/waters, paged), the
+            # restored folder the fallback; without it, the folder
+            api = ["--from-api"] if os.environ.get("OBL_API_KEY") else []
+            cmds.append(Cmd(s, [py, "-m", "ingest.obl_waters", "--state", st, *api, "--from", water_arg,
                                 "--out", f"../data/waters-{st.lower()}.json"], cwd="pipeline"))
         elif s == "obl-check":
             cmds.append(Cmd(s, [py, "scripts/state_batch.py", "obl-check", "--state", st]))
@@ -327,7 +332,10 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
 def extract_ready(obl_dir: Path | None, state: str | None = None, root: Path = ROOT) -> tuple[bool, str]:
     """Whether the extract step can run: the snapshot folder is here, its out/meta.json gives a date, and (with state)
     it holds the state's records: none, or fewer than half the records of the extract on file, is a partial snapshot,
-    which would empty or cut data/waters-<st>.json."""
+    which would empty or cut data/waters-<st>.json. With OBL_API_KEY set the extract reads openboatlaunch's API
+    (ingest.obl_waters --from-api refuses a partial answer itself), so only the state code matters here."""
+    if os.environ.get("OBL_API_KEY"):
+        return True, ""
     if obl_dir is None or not Path(obl_dir).is_dir():
         return False, ("extract: no openboatlaunch snapshot (out/water) beside the checkout or at --obl-dir: "
                        f"{OBL_KEY} is not in R2 (or was not restored). Upload it once from a "

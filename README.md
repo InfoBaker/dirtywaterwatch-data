@@ -54,15 +54,42 @@ changed registry files and the counts, for a person to review. It never runs bes
 its queue, which holds one waiting run, so dispatch one batch at a time and not while a refresh is waiting.
 `scripts/state_batch.py` is the same batch by hand (`plan` prints the commands without running them).
 
-openboatlaunch's water records and their outlines come from the private state object `state/obl-water.tar.gz`
-(its `out/water` and `out/meta.json`), restored read only into `../openboatlaunch/out` beside the checkout, where the
-pipeline reads them, by both workflows; neither ever saves it. With it in R2 no step needs the openboatlaunch checkout
-or OpenStreetMap from a particular machine: the `extract` step writes a state's `data/waters-<st>.json` from it
-(`ingest.obl_waters`, dated from the snapshot's `meta.json`), the `waters`, `osm` and `ties` steps measure against
-its outlines, and the `osm` step gives OpenStreetMap's Overpass pass up to 20 minutes (`osm_budget`, with `budget_s` at most 3,780 s
-together; GitHub's runners reach Overpass), resumed by the next dispatch. A new openboatlaunch snapshot is uploaded the same way it was
-first (on a machine with the openboatlaunch checkout, from the site repository's folder so `worker/` has wrangler;
-wrangler uploads up to 300 MiB, and the batch refuses an extract without `meta.json`'s date):
+openboatlaunch's water records and their outlines come from openboatlaunch's API (`https://openboatlaunch.org/api/v1/`,
+read only, one way), with the private state object `state/obl-water.tar.gz` as the last good copy:
+
+- **The national file.** At the start of both workflows `scripts/state_paths.py fetch-obl` asks the API's `meta`
+  (with its ETag: a 304 most hours) and, when there is a snapshot it has not pulled, downloads `bulk/national.tar.gz`,
+  checks it against its `.sha256` file and the sha256 in `meta`, and unpacks it into `../openboatlaunch/out` with the
+  same rules as the R2 restore (`water/<slug>.json` and `meta.json` only). It pulls at most once a day. When it is
+  not needed, or on any failure (no key, the API down, a wrong checksum: the log says which), the workflow restores
+  the R2 copy as before, and without either the run goes on without outlines.
+- **The hourly changes.** The refresh's first stage (`make obl-sync`, `ingest.obl_changes`) asks `changes?since=` the
+  last `until`, fetches each changed record by slug, writes it into the folder and rewrites the affected live states'
+  `data/waters-<st>.json`. A renamed or merged water becomes a `slug_aliases` entry on its successor, so reports,
+  outfall rows and pages follow the new slug; an outline change shows in the record's `geometry_hash` and the
+  placement is redone. Every rename, merge and deletion, and every outline change on a water with a report showing,
+  is listed in `data/build/obl-changes.json` and printed in the run log as a `status.md:` line for review. A rewritten
+  extract is rewritten again each hour until the change is committed here.
+- **The fallback copy.** When the API changed the folder, the refresh packs it (`state_paths.py pack-obl`) and saves it
+  to R2 as `state/obl-water.tar.gz`; if that upload fails, the run's record of what it pulled is put back
+  (`obl-not-saved`) so the next run asks again.
+- **A state's extract.** The batch's `extract` step reads the state from the API's `states/{ST}/waters` (paged,
+  without outlines) when the key is there, with the restored folder as its fallback.
+
+The records carry openboatlaunch's API fields (`water_id`, `gnis_id`, `geometry_hash`, `geometry_tolerance_m`,
+`status`, `successor_slug`, `previous_slugs`, `updated_at`); launches the API serves as unpublished (private,
+commercial and club launches, as points with no personal fields) are kept in the extract as `launches_unpublished`,
+and the site shows published launches only. The older copy's records (short launch keys) are still read.
+
+**The key.** The API takes `Authorization: Bearer <key>`. Set it as the repository's GitHub Actions secret
+`OBL_API_KEY` (Settings, Secrets and variables, Actions); both workflows pass it to their steps as an environment
+variable. For a run by hand, put it in the environment variable `OBL_API_KEY` only. The pipeline never prints, logs
+or writes the key; never commit it. Without it everything runs from the R2 copy as before. The API's answers worth
+keeping (its `meta` and a state's pages) are cached under `data/raw/obl-api` with the other raw caches.
+
+Until the API path has run for a while, the copy can still be uploaded by hand from a machine with the
+openboatlaunch checkout (from the site repository's folder so `worker/` has wrangler; wrangler uploads up to
+300 MiB, and the batch refuses an extract without `meta.json`'s date):
 
     COPYFILE_DISABLE=1 tar -czf /tmp/obl-water.tar.gz -C ../openboatlaunch/out water meta.json && (cd worker && npx wrangler r2 object put dirtywaterwatch-data/state/obl-water.tar.gz --file /tmp/obl-water.tar.gz --remote)
 

@@ -47,7 +47,7 @@ def test_make_refresh_times_every_feed_extra_step_and_stage(tmp_path):
     assert r.returncode == 0, r.stdout + r.stderr
     names = [line.split("\t")[0] for line in tf.read_text().splitlines()]
     stages = [n for n in names if n.startswith("stage.")]
-    assert stages == ["stage.ingest", "stage.provisional-outfalls", "stage.reaches", "stage.build", "stage.charts",
+    assert stages == ["stage.obl-sync", "stage.ingest", "stage.provisional-outfalls", "stage.reaches", "stage.build", "stage.charts",
                       "stage.export"]
     for n in ("ingest.fl_doh_beaches", "ingest.nj_outfalls", "ingest.nj_cso_likely", "waters-nhd", "conditions",
               "rainfall", "rain-thresholds", "status"):
