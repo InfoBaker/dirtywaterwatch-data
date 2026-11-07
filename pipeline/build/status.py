@@ -325,6 +325,8 @@ RULES = {
     "day_start_caution": ("yellow", "Report dated to the day only, with no end: caution from the start of that day"),
     "text_caution": ("yellow", "Water named in the notice's text; the notice's form said no water was reached: "
                                "the site's caution, not an advisory"),
+    "citizen_caution": ("yellow", "Reported by a member of the public, not confirmed by an authority: the site's "
+                                  "caution, not an advisory"),
     "end_never_reported": ("grey", "Unresolved: no end reported (off the map after 30 days)"),
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
@@ -2275,6 +2277,29 @@ def text_over_flag(ev: dict) -> bool:
     return raw.get("reached_water") == TEXT_OVER_FLAG
 
 
+# A sewage report filed by a member of the public (raw.report_provenance "citizen": the Florida DEP PNP notices a
+# resident filed). Its classification is the report's own (a sewage overflow), its provenance is marked apart, and its
+# colour is the site's caution only (rule citizen_caution, never red): what would be red is yellow, cited as the
+# public's report, never as an authority's confirmation (SOL 2026-11-07 wave 1 P1-5; err on the side of safety).
+CITIZEN = "citizen"
+CITIZEN_NOTE = "filed by a member of the public; no authority has confirmed the discharge"
+
+
+def citizen_report(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("report_provenance") == CITIZEN
+
+
+def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None:
+    """Turn a red interval into the site's caution under rule (no authority window applies)."""
+    was = iv["rule"]
+    iv["color"], iv["label"], iv["rule"] = RULES[rule][0], RULES[rule][1], rule
+    iv["window_hours"] = iv["window_basis"] = None
+    iv["rule_applied"] = {"rule": applied, "replaces": was, "hours": None,
+                          "rationale": f"{basis}: placed on the water under the site's caution, never red "
+                                       "(no authority window applies)", "source": source}
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2295,12 +2320,13 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             iv["text_over_flag"] = basis
             if iv["color"] == "red":
-                was = iv["rule"]
-                iv["color"], iv["label"], iv["rule"] = RULES["text_caution"][0], RULES["text_caution"][1], "text_caution"
-                iv["window_hours"] = iv["window_basis"] = None      # no authority window applies
-                iv["rule_applied"] = {"rule": "placement.text_over_flag", "replaces": was, "hours": None,
-                                      "rationale": f"{basis}: placed on the water under the site's caution, never red "
-                                                   "(no authority window applies)", "source": ev.get("source_url")}
+                _caution_only(iv, "text_caution", "placement.text_over_flag", basis, ev.get("source_url"))
+    if out and citizen_report(ev):
+        basis = str((ev.get("raw") or {}).get("_provenance_note") or CITIZEN_NOTE)
+        for iv in out:
+            iv["citizen_report"] = basis
+            if iv["color"] == "red":
+                _caution_only(iv, "citizen_caution", "provenance.citizen_report", basis, ev.get("source_url"))
     return out
 
 
@@ -2782,11 +2808,14 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
     for ev in events:
         if ev.get("_fixture") or ev.get("time_precision") in COARSE_PRECISION or ev.get("duplicate_of"):
             continue
+        if citizen_report(ev):
+            continue        # a member of the public's report never absorbs (nor is absorbed by) an operator's report
         if ev.get("event_type") not in DISCHARGE_TYPES or not ev.get("npdes_permit"):
             continue
-        t = parse_time(ev.get("started_at"))
+        tz = event_zone(ev)
+        t = ev_time(ev, "started_at", tz=tz)
         if t:
-            groups[(ev["npdes_permit"], t.astimezone(LOCAL).date())].append(ev)
+            groups[(ev["npdes_permit"], t.astimezone(tz).date())].append(ev)   # the day in the report's own zone
     dup = {}
     dry = {}
 
