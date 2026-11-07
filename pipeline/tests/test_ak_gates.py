@@ -242,7 +242,9 @@ def test_the_birch_lake_report_places_on_the_anchorage_record_never_on_delta_jun
 def test_alaskas_names_file_does_not_mark_birch_lake_as_delta_junctions():
     d = json.loads((ROOT / "research" / "ak" / "receiving-waters-missing.json").read_text())
     assert not [r for r in d.get("resolved") or [] if "birch-lake-ak" in (r.get("slugs") or [])]
-    assert [r for r in d["rows"] if r["name"] == "Birch Lake"]
+    # the names pass (batch/ak-2026-11-07) resolved the report's name to the Anchorage record, so the row may be
+    # gone from the file; wherever Birch Lake still appears as an Alaska target, it is the Anchorage record
     nhd = json.loads((DATA / "waters-nhd.json").read_text())
+    assert any(w["slug"] == "birch-lake-anchorage-ak" for w in nhd["waters"])
     t = [x for x in nhd["targets"] if x.get("state") == "AK" and x.get("name") == "Birch Lake"]
-    assert t and all(x["slugs"] == ["birch-lake-anchorage-ak"] for x in t)
+    assert all(x["slugs"] == ["birch-lake-anchorage-ak"] for x in t)

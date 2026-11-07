@@ -22,15 +22,15 @@
    "water_slug": "gastineau-channel-ak",
    "water_name": "Gastineau Channel",
    "water_kind": "bay",
-   "distance_m": 146,
+   "distance_m": 143,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Gastineau Channel' by name; Gastineau Channel (gastineau-channel-ak, hand record, census), 146 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 002 the receiving water 'Gastineau Channel'; Gastineau Channel (gastineau-channel-ak, Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon), 143 m from the point",
+   "water_matched_by": "scripts/ak_gate_ties.py (AK go-live gates, 2026-11-07)",
    "receiving_water_override": {
     "water": "Gastineau Channel",
     "basis": "EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 002 the receiving water 'Gastineau Channel' (AK go-live gates 2026-11-07)"
@@ -55,15 +55,15 @@
    "water_slug": "gastineau-channel-ak",
    "water_name": "Gastineau Channel",
    "water_kind": "bay",
-   "distance_m": 82,
+   "distance_m": 80,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Gastineau Channel' by name; Gastineau Channel (gastineau-channel-ak, hand record, census), 82 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 003 the receiving water 'Gastineau Channel'; Gastineau Channel (gastineau-channel-ak, Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon), 80 m from the point",
+   "water_matched_by": "scripts/ak_gate_ties.py (AK go-live gates, 2026-11-07)",
    "receiving_water_override": {
     "water": "Gastineau Channel",
     "basis": "EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 003 the receiving water 'Gastineau Channel' (AK go-live gates 2026-11-07)"
@@ -88,15 +88,15 @@
    "water_slug": "gastineau-channel-ak",
    "water_name": "Gastineau Channel",
    "water_kind": "bay",
-   "distance_m": 65,
+   "distance_m": 52,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Gastineau Channel' by name; Gastineau Channel (gastineau-channel-ak, hand record, census), 65 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 004 the receiving water 'Gastineau Channel'; Gastineau Channel (gastineau-channel-ak, Census TIGER/Line hand record, data/waters-nhd.json; distance to its polygon), 52 m from the point",
+   "water_matched_by": "scripts/ak_gate_ties.py (AK go-live gates, 2026-11-07)",
    "receiving_water_override": {
     "water": "Gastineau Channel",
     "basis": "EPA permit AK0023213 (City and Borough of Juneau, Juneau-Douglas plant, effective 2001-12-27, the copy the City and Borough publishes) authorizes discharge 'to receiving waters named the Gastineau Channel' (cover page, outfall 001) and 'from the outfalls specified herein to the Gastineau Channel' (Part I); Table I.D.1 lists the combined sewer outfalls N-11, N11.2 and N-15.1 (Douglas); EPA's CSO inventory give outfall 004 the receiving water 'Gastineau Channel' (AK go-live gates 2026-11-07)"
@@ -128,8 +128,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; NHD builder: NHDPlus V2.1, which this step reads, has no data for Alaska (NLDI snaps no point there)",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; NHD builder: NHDPlus V2.1, which this step reads, has no data for Alaska (NLDI snaps no point there)",
    "water_matched_by": "ingest.outfall_waters (2026-11-07)"
   },
   {
@@ -87462,8 +87462,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Missouri River' by name; Missouri River (missouri-river-ne, openboatlaunch), 946 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 105 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 946 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
    "receiving_water_override": {
     "water": "Missouri River",
     "basis": "EPA's CSO inventory gives outfall 105 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
@@ -87495,8 +87495,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Missouri River' by name; Missouri River (missouri-river-ne, openboatlaunch), 999 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 106 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 999 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
    "receiving_water_override": {
     "water": "Missouri River",
     "basis": "EPA's CSO inventory gives outfall 106 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
@@ -87529,8 +87529,8 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
-   "water_match": "name: its receiving water 'Missouri River' by name; Missouri River (missouri-river-ne, openboatlaunch), 1052 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 107 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 1052 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
    "point_shared_by": 2,
    "receiving_water_override": {
     "water": "Missouri River",
@@ -87563,8 +87563,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Missouri River' by name; Missouri River (missouri-river-ne, openboatlaunch), 547 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 108 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River; Missouri River (missouri-river-ne, openboatlaunch record; distance to its line as published on its water page, 2026-11-07), 547 m from the point",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
    "receiving_water_override": {
     "water": "Missouri River",
     "basis": "EPA's CSO inventory gives outfall 108 of permit NE0133680 (Omaha's combined sewer system) the receiving water 'Outfall channel to Missouri River': the channel carries the overflow to the Missouri River (NE go-live gates 2026-11-07)"
@@ -87990,12 +87990,12 @@
    "in_icis": "YES",
    "permit_status": "EFF",
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110012804787",
-   "lat": 41.27685,
-   "lon": -95.92526,
+   "lat": null,
+   "lon": null,
    "water_slug": "little-papillion-creek-ne",
    "water_name": "Little Papillion Creek",
    "water_kind": "stream",
-   "distance_m": 10930,
+   "distance_m": null,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
@@ -88003,9 +88003,12 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'Little Papillion Creek' by name; Little Papillion Creek (little-papillion-creek-ne, NHDPlus V2.1 record), 10930 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)",
-   "point_shared_by": 2
+   "water_match": "receiving water: EPA's CSO inventory gives outfall 205R the receiving water 'Little Papillion Creek'; Little Papillion Creek (little-papillion-creek-ne, NHDPlus V2.1 record), by name; the row has no point of its own (coords_problem)",
+   "water_matched_by": "scripts/ne_gate_ties.py (NE go-live gates, 2026-11-07)",
+   "point_shared_by": 2,
+   "echo_lat": 41.27685,
+   "echo_lon": -95.92526,
+   "coords_problem": "EPA's inventory gives no point for outfall 205R (City of Omaha Retention Treatment Basin, 64th and Dupont); the row's point was the facility's, shared with outfall 107 on the Missouri riverfront and 10.9 km from Little Papillion Creek, so it is not this outfall's place and is not used"
   },
   {
    "npdes_permit": "NE0133680",

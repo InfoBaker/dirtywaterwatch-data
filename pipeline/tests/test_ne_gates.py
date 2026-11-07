@@ -154,7 +154,9 @@ def test_no_beach_watch_record_places_on_a_river():
 def test_the_report_names_file_leaves_the_south_dakota_lake_out():
     d = json.loads((ROOT / "research" / "ne" / "receiving-waters-missing.json").read_text())
     assert not [r for r in d["rows"] if "yankton" in r["name"].lower()]
-    assert d["waters"] == len(d["rows"]) == 40 and d["named_waters"] == 37 and d["reports"] == sum(r["reports"] for r in d["rows"])
+    # the names pass rewrites the file to what is still missing (40 rows before batch/ne-2026-11-07), so only the
+    # file's own counts are pinned
+    assert d["waters"] == len(d["rows"]) >= 1 and d["reports"] == sum(r["reports"] for r in d["rows"])
 
 
 def test_the_cross_state_rule_is_keyed_narrowly():
