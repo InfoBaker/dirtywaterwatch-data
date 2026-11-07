@@ -52,9 +52,9 @@ LAW = ("No Alaska statute or rule requires public notice of a sewer overflow or 
 SOBE = (" This operator files its reports through EPA's NeT-SewerOverflow, so they are published in EPA's sewer "
         "overflow tables (ECHO), a median one day after the start for Alaska's reports.")
 NO_SOBE = " Its reports were not found in EPA's sewer overflow tables; the operator's own pages were not searched."
-JUNEAU_PAGE = "https://juneau.org/engineering-public-works/wastewater-utility"
+JUNEAU_PAGE = "https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division"
 JUNEAU = (" Permit AK0023213 (EPA-issued 2001, administratively continued) Part I.D.1.g: \"The permittee must ensure "
-          "that the public receives adequate notification of CSO occurrences and CSO impacts\"; Part III.H.2.a: "
+          "that the public receives adequate notification of CSO occurrences and CSO impacts\"; Part II.H.2.a: "
           "notification of the public of sewer overflows that may imminently and substantially endanger human health, "
           "under its overflow emergency response plan. The City and Borough's wastewater utility page lists its CSO "
           f"public notices as PDFs (the last from November 2005; the page says no CSO has occurred since 2005): "
@@ -104,8 +104,9 @@ PERMITS = {
 ROWS = {
     "ak-awwu-anchorage": ("Anchorage Water and Wastewater Utility (Municipality of Anchorage: Asplund, Eagle River and "
                           "Girdwood plants and the collection system)", "Anchorage Water and Wastewater Utility", "city",
-                          "sso", "AKG002440 (a sewer service repair in Anchorage, EPA type municipal) is the "
-                          "utility's: it is Anchorage's only public sewer utility."),
+                          "sso", "AKG002440 (Spar Avenue sewer service repair, EPA type municipal) is a general-permit "
+                          "discharge from a sewer repair, not a plant; filed here as Anchorage's only public sewer "
+                          "utility's."),
     "ak-juneau-douglas": ("City and Borough of Juneau (Juneau-Douglas, Mendenhall and Auke Bay plants)",
                           "City and Borough of Juneau", "city", "cso", None),
     "ak-ketchikan": ("City of Ketchikan", "City of Ketchikan", "city", "sso", None),
@@ -158,7 +159,10 @@ ROWS = {
     "ak-nps-glacier-bay": ("National Park Service, Glacier Bay National Park and Preserve (Bartlett Cove)", None,
                            "federal facility", "plant", None),
     "ak-forest-park-ketchikan": ("Forest Park plant (Ketchikan)", None, None, "plant",
-                                 "EPA's record names the facility only (type NON-POTW); the permittee is not stated."),
+                                 "EPA's record names the facility only; the permittee is not stated. EPA types it "
+                                 "NON-POTW (not a public plant), which suggests a private owner; DEC's general-permit "
+                                 "authorization could not be read (DEC's pages refuse automated reads), so the legal "
+                                 "form is left unknown."),
     "ak-usfs-kake": ("U.S. Forest Service, Kake administrative site", None, "federal facility", "plant", None),
     "ak-hoonah": ("City of Hoonah", None, "city", "plant", None),
     "ak-northwest-arctic-borough-sd": ("Northwest Arctic Borough School District (school plants)",
@@ -181,8 +185,10 @@ ROWS = {
                               None),
     "ak-unalakleet-river-lodge": ("Unalakleet River Lodge", None, "campground or resort", "plant",
                                   "Privately owned: a lodge's plant (EPA facility type Corporation)."),
-    "ak-steelhead-barge": ("Steelhead Barge plant (federal facility, Anchorage)", None, "federal facility", "plant",
-                           "EPA types it a federal facility and names the barge, not the agency."),
+    "ak-steelhead-barge": ("Steelhead Barge plant (federal facility, Carroll Inlet)", None, "federal facility", "plant",
+                           "EPA types it a federal facility and names the barge, not the agency. EPA's city "
+                           "(Anchorage) is a mailing city: the discharge point (55.54 N, -131.35) and the permit's "
+                           "limit sets are in Carroll Inlet (Shoal Cove, Scow Bay) near Ketchikan."),
     "ak-newtok-village-council": ("Newtok Village Council (Mertarvik)", None, "tribal", "plant", None),
     "ak-norton-sound-health-corporation": ("Norton Sound Health Corporation (Diomede clinic)", None, "institution",
                                            "plant", "A regional tribal health organization's clinic plant (EPA "
@@ -224,6 +230,7 @@ ROWS = {
 PRIVATE_FORMS = {"investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
                  "campground or resort", "private club", "business or industrial", "institution",
                  "facility (permittee not named)"}
+TOWNS = {"ak-steelhead-barge": ["Ketchikan"]}   # EPA's city is a mailing city (the row's note)
 EXTRA = {   # permits held by a row that are in neither EPA table: permit -> (facility, city, waters)
     "AK0053384": ("WARD COVE INDUSTRIAL SITE WW TREATMENT FACILITY", "KETCHIKAN", ["Ward Cove"]),
 }
@@ -264,9 +271,9 @@ def channel(rid: str, permits: list[str], kind: str) -> str:
     if kind == "cso_closed_or_none":
         return "None: not a sewer system (a pipeline general permit in EPA's CSO inventory)."
     filers = [p for p in permits if p in SOBE_FILERS]
+    if rid == "ak-juneau-douglas":   # its own page was read: the template's "not searched" does not apply
+        return LAW + " Its reports were not found in EPA's sewer overflow tables." + JUNEAU
     text = LAW + (SOBE if filers else NO_SOBE)
-    if rid == "ak-juneau-douglas":
-        text += JUNEAU
     return text
 
 
@@ -284,7 +291,7 @@ def build(epa: dict[str, dict], research: list[dict]) -> tuple[list[dict], dict]
         r0 = res.get(rid)
         if r0 and r0["npdes_permit"] in permits:   # the research's permit first
             permits = [r0["npdes_permit"]] + [p for p in permits if p != r0["npdes_permit"]]
-        towns = sorted({title(epa[p]["city"]) for p in permits if epa[p].get("city")})
+        towns = TOWNS.get(rid) or sorted({title(epa[p]["city"]) for p in permits if epa[p].get("city")})
         if r0:
             towns = list(dict.fromkeys((r0.get("towns") or []) + towns))
         waters = list(dict.fromkeys(([] if not r0 else r0.get("receiving_waters") or [])

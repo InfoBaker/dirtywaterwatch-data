@@ -13,7 +13,7 @@
    "name": "Alaska Harmful Algal Bloom Network",
    "channel_kind": "group_results",
    "urls": [
-    "https://aoos.org/alaska-hab-network/"
+    "https://ahab.aoos.org/"
    ],
    "method": "html",
    "legal_basis": null,
@@ -24,7 +24,7 @@
    "records": false,
    "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The network's page (HAB alerts, shellfish poisoning, monitoring links); marine biotoxins, not sewage. Answered 200 on 2026-11-07. No machine-readable alert layer found. Voluntary. (research/ak/sources.json ak-ahab)",
+   "note": "The network's page (HAB alerts, shellfish poisoning, monitoring links); marine biotoxins, not sewage. Answered 200 on 2026-11-07 after a redirect from https://aoos.org/alaska-hab-network/. No machine-readable alert layer found. Voluntary. (research/ak/sources.json ak-ahab)",
    "sources": [
     "ak-ahab"
    ],
@@ -688,7 +688,7 @@
    "name": "City and Borough of Juneau (Juneau-Douglas, Mendenhall and Auke Bay plants)",
    "channel_kind": "operator_page",
    "urls": [
-    "https://juneau.org/engineering-public-works/wastewater-utility"
+    "https://juneau.org/engineering-public-works/utilities-division/wastewater-utility-division"
    ],
    "method": "html",
    "legal_basis": "NPDES permit AK0023213, Part I.D.1.g: \"The permittee must ensure that the public receives adequate notification of CSO occurrences and CSO impacts\"",
@@ -705,7 +705,7 @@
    "sources": [
     "ak-apdes-permits"
    ],
-   "note": "The City and Borough's wastewater utility page lists its combined sewer overflow public notices \"in an effort to make the public aware of these events and to fully comply with the EPA discharge permit\": PDF notices from 2004 and November 2005, and \"No Combined Sewer Overflow since 2005\". Answered 200 on 2026-11-07; the CSO section is read. The permit's clause was read in the permit the page links.",
+   "note": "The City and Borough's wastewater utility page lists its combined sewer overflow public notices \"in an effort to make the public aware of these events and to fully comply with the EPA discharge permit\": PDF notices from 2004 and November 2005, and \"No Combined Sewer Overflow since 2005\". Answered 200 on 2026-11-07 after a 301 from https://juneau.org/engineering-public-works/wastewater-utility; the CSO section is read. The permit's clause was read in the permit the page links.",
    "barrier": null
   },
   {
@@ -737,6 +737,54 @@
    "state": "AK",
    "operator_id": "ak-juneau-douglas",
    "agency": null,
+   "permit": "AK0022951",
+   "checked": "2026-11-07",
+   "id": "ak-juneau-douglas-outfall-signs-ak0022951",
+   "name": "City and Borough of Juneau (Juneau-Douglas, Mendenhall and Auke Bay plants)",
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "APDES permit AK0022951, Part 2.5 (Identification Sign(s)): signs on the shoreline adjacent to the discharge point that \"inform the public that certain activities, such as harvesting of aquatic life for raw consumption and primary contact recreation, should not take place in the mixing zone\"",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Outfall signs",
+   "sources": [
+    "ak-apdes-permits"
+   ],
+   "note": "No web form: the shoreline sign(s) at permit AK0022951's outfall tell the public that contact recreation and raw shellfish harvest should not take place in the mixing zone. On site only. Other Alaska plant permits probably carry the same clause (not read).",
+   "barrier": "signs_only"
+  },
+  {
+   "state": "AK",
+   "operator_id": "ak-juneau-douglas",
+   "agency": null,
+   "permit": "AK0023213",
+   "checked": "2026-11-07",
+   "id": "ak-juneau-douglas-outfall-signs-ak0023213",
+   "name": "City and Borough of Juneau (Juneau-Douglas, Mendenhall and Auke Bay plants)",
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NPDES permit AK0023213, Part I.C.7 (Outfall Location Signs): signs on the shoreline near the mixing zone and outfall line that \"inform the public that certain activities, such as the harvesting of shellfish for raw consumption and contact recreation should not take place in the mixing zone\"",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Outfall signs",
+   "sources": [
+    "ak-apdes-permits"
+   ],
+   "note": "No web form: the shoreline sign(s) at permit AK0023213's outfall tell the public that contact recreation and raw shellfish harvest should not take place in the mixing zone. On site only. Other Alaska plant permits probably carry the same clause (not read).",
+   "barrier": "signs_only"
+  },
+  {
+   "state": "AK",
+   "operator_id": "ak-juneau-douglas",
+   "agency": null,
    "permit": "AK0023213",
    "checked": "2026-11-07",
    "id": "ak-juneau-douglas-sso-public-notification",
@@ -744,7 +792,7 @@
    "channel_kind": "operator_page",
    "urls": [],
    "method": null,
-   "legal_basis": "NPDES permit AK0023213, Part III.H.2.a: for sanitary sewer overflows that may imminently and substantially endanger human health, \"notification of the public, health agencies and other affected entities (e.g., public water systems)\", in accordance with the permittee's overflow emergency response plan",
+   "legal_basis": "NPDES permit AK0023213, Part II.H.2.a: for sanitary sewer overflows that may imminently and substantially endanger human health, \"notification of the public, health agencies and other affected entities (e.g., public water systems)\", in accordance with the permittee's overflow emergency response plan",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "other",
@@ -1740,7 +1788,7 @@
    "permit": "AKG572111",
    "checked": "2026-11-07",
    "id": "ak-steelhead-barge-dec-emergency-notice",
-   "name": "Steelhead Barge plant (federal facility, Anchorage)",
+   "name": "Steelhead Barge plant (federal facility, Carroll Inlet)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -1755,7 +1803,7 @@
     "ak-18-aac-72-940",
     "ak-apdes-permits"
    ],
-   "note": "No web channel found: Steelhead Barge plant (federal facility, Anchorage) reports overflows, bypasses and spills to DEC within 24 hours and in writing within days; DEC does not post them and no Alaska law requires the public to be told. Its reports were not found in EPA's overflow tables. (research/ak/report.md section 2)",
+   "note": "No web channel found: Steelhead Barge plant (federal facility, Carroll Inlet) reports overflows, bypasses and spills to DEC within 24 hours and in writing within days; DEC does not post them and no Alaska law requires the public to be told. Its reports were not found in EPA's overflow tables. (research/ak/report.md section 2)",
    "barrier": "no_web_page"
   },
   {
