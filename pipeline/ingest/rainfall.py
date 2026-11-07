@@ -96,6 +96,9 @@ MM_PER_IN = 25.4
 UNIT_BOUND_IN = {24: 30.0, 72: 45.0}   # a box maximum over this, read as inches, is impossible: millimetres (the
                                        # US 24-hour record is 43 in, Alvin, Texas, 1979; 72 hours about 60 in)
 UNITS_FOUND = "2026-11-07"
+UNIT_RULE = (f"unit decided from the data (found {UNITS_FOUND}): a box maximum over {UNIT_BOUND_IN[24]:g} (24 h) or "
+             f"{UNIT_BOUND_IN[72]:g} (72 h) is millimetres, the gauge check decides when it has a verdict, else the "
+             f"unit last determined; values in millimetres are divided by {MM_PER_IN} before use")
 # The gauge check (gauge_check): airport gauges, api.weather.gov /stations/{id}/observations (precipitation in mm),
 # against MRMS identify at the same place; a fixed small list, used when inside the box.
 GAUGES = {"KPVD": (41.72, -71.43), "KBOS": (42.36, -71.01), "KBDL": (41.94, -72.68), "KLGA": (40.78, -73.88),
@@ -109,6 +112,14 @@ GAUGE_EARLY, GAUGE_LATE = timedelta(minutes=20), timedelta(minutes=5)   # an obs
 GAUGE_RATIO_MM = (0.4, 2.5)    # MRMS / gauge in this range: millimetres; the same over 25.4: inches
 GAUGE_OBS_LIMIT = 6
 GAUGE_CACHE = RAW_DIR / "nws-gauges" / "observations.json"
+# Readings known to be millimetres before the check (repair_history_units): the unit from then on, until the bound
+# says otherwise, is millimetres (the last unit determined).
+KNOWN_MM_AT = {
+    "2026-11-03T13:00:00Z": "exportImage of conus_QPE_24H valid 2026-11-03T13:00Z over Calais, Maine "
+                            "(pipeline/tests/fixtures/mrms-qpe-24h-20261103T13Z.tif) and identify there: 3.8, 5.9 and "
+                            "4.6 at three points, box maximum 7.3, where IEM's MRMS daily rainfall at 45.12, -67.38 is "
+                            "0.02 in for 2026-11-02 and 0.22 in for 2026-11-03: millimetres",
+}
 BASELINE_REQUESTS_PER_HOUR = 384   # 319 identify + 196 forecast cells / 3 (2026-11-02, before the grid)
 FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails
 LOOKUP_MAX = 100               # new NWS /points lookups a run
@@ -714,10 +725,83 @@ def update_history(hist: dict | None, permits: dict[str, dict], now: datetime) -
         if r.get("h72") is not None and r.get("h48") is not None:
             put(vt - timedelta(hours=48), r["h72"] - r["h48"], overwrite=False)
     series = {p: a for p, a in series.items() if any(v is not None for v in a)}
-    return {"updated_at": iso(now), "start": iso(start), "step_hours": 1, "count": n,
-            "units": "inches: the largest NOAA MRMS radar-only 24-hour total over the permittee's outfall points, "
-                     "for the 24 hours ending at each hour (UTC)",
-            "source": MRMS_URL, "permits": series}
+    out = {"updated_at": iso(now), "start": iso(start), "step_hours": 1, "count": n,
+           "units": "inches: the largest NOAA MRMS radar-only 24-hour total over the permittee's outfall points, "
+                    "for the 24 hours ending at each hour (UTC); the service's values converted from millimetres "
+                    "when they are millimetres (rainfall.json mrms.units)",
+           "units_checked": old.get("units_checked") or {"from": iso(hour_floor(now)), "rule": UNIT_RULE},
+           "source": MRMS_URL, "permits": series}
+    if old.get("units_repair"):
+        out["units_repair"] = old["units_repair"]
+    return out
+
+
+def repair_history_units(hist: dict | None, now: datetime, known: dict | None = None) -> tuple[dict | None, dict]:
+    """Readings stored before the unit check (a history without units_checked) are rescaled to inches hour by hour
+    with the reader's rule: an hour whose largest value (over every permittee) is over the 24-hour bound is
+    millimetres; an hour at or after a reading known to be millimetres (KNOWN_MM_AT) is too; any other hour takes
+    the unit last determined before it, and before any, the service's stated inches (kept). Every value of a
+    millimetre hour (the hourly maxima and the earlier windows filled from the 48 and 72-hour totals alike) is
+    divided by 25.4. Returns (history, report); the history then carries units_checked and units_repair (what was
+    changed), so a second run changes nothing."""
+    known = KNOWN_MM_AT if known is None else known
+    if not hist or not hist.get("permits"):
+        return hist, {"changed": False, "reason": "no history"}
+    if hist.get("units_checked"):
+        return hist, {"changed": False, "reason": f"already checked (inches from {hist['units_checked'].get('from')})",
+                      "units_repair": hist.get("units_repair")}
+    start = parse_t(hist.get("start"))
+    if start is None:
+        return hist, {"changed": False, "reason": "no start hour"}
+    series = hist["permits"]
+    n = max(len(a) for a in series.values())
+    known_i = sorted((int((hour_floor(parse_t(t)) - start).total_seconds() // 3600), t) for t in known if parse_t(t))
+    unit = "mm" if any(i <= 0 for i, _ in known_i) else None
+    mm_hours, kept, bound_hours, values, ranges = [], 0, [], 0, []
+    max_before = max_after = None
+    for i in range(n):
+        col = [a[i] for a in series.values() if i < len(a) and a[i] is not None]
+        if any(j == i for j, _ in known_i):
+            unit = "mm"
+        if not col:
+            continue
+        mx = max(col)
+        max_before = mx if max_before is None else max(max_before, mx)
+        if mx > UNIT_BOUND_IN[24]:
+            unit = "mm"
+            bound_hours.append(i)
+        if unit != "mm":
+            kept += 1
+            max_after = mx if max_after is None else max(max_after, mx)
+            continue
+        mm_hours.append(i)
+        for a in series.values():
+            if i < len(a) and a[i] is not None:
+                a[i] = round(a[i] / MM_PER_IN, 2)
+                values += 1
+        mx2 = max(a[i] for a in series.values() if i < len(a) and a[i] is not None)
+        max_after = mx2 if max_after is None else max(max_after, mx2)
+        if ranges and ranges[-1][1] == i - 1:
+            ranges[-1][1] = i
+        else:
+            ranges.append([i, i])
+    at = lambda i: iso(start + timedelta(hours=i))  # noqa: E731
+    report = {"changed": bool(mm_hours), "at": iso(now), "hours_rescaled": len(mm_hours), "values_rescaled": values,
+              "hours_kept_as_inches": kept, "ranges": [[at(a), at(b)] for a, b in ranges],
+              "hours_over_bound": len(bound_hours), "first_hour_over_bound": at(bound_hours[0]) if bound_hours else None,
+              "largest_before": max_before, "largest_after": max_after, "bound_in": UNIT_BOUND_IN[24],
+              "evidence": {t: known[t] for _, t in known_i}, "last_unit": unit or "in",
+              "rule": "an hour whose largest value is over the bound, or at or after a reading known to be "
+                      "millimetres, is millimetres; else the unit last determined; else the stated inches"}
+    hist["units_repair"] = report
+    hist["units_checked"] = {"from": iso(hour_floor(now)), "rule": UNIT_RULE}
+    return hist, report
+
+
+def write_history(hist: dict) -> None:
+    tmp = HISTORY.with_suffix(".json.tmp")          # compact: about 2,000 numbers per permittee
+    tmp.write_text(json.dumps(hist, separators=(",", ":")))
+    tmp.replace(HISTORY)
 
 
 def permit_summary(points: dict[str, dict], outfalls: list[dict]) -> dict[str, dict]:
@@ -796,7 +880,10 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     raw, failed, problems = {}, {}, []
     grid_info: dict = {"used": False}
     read, sampled = None, 0
-    hist_old = read_json(HISTORY)
+    hist_old, hist_repair = repair_history_units(read_json(HISTORY), now)   # once: readings before the check
+    if not last_units and hist_repair.get("last_unit") == "mm":   # the repair's unit is the last one determined
+        last_units = {"units_read": "mm", "basis": "history_repair", "determined_at": iso(now),
+                      "evidence": {k: hist_repair.get(k) for k in ("first_hour_over_bound", "largest_before", "ranges")}}
 
     # the grid: every point from one export per accumulation
     if todo and not point_only:
@@ -960,10 +1047,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     permits = permit_summary(points, outfalls)
     counts = session.summary()
     if units:
-        units = {**units, "determined_at": iso(now), "service_states": "inches",
-                 "rule": f"unit decided from the data (found {UNITS_FOUND}): a box maximum over "
-                         f"{UNIT_BOUND_IN[24]:g} (24 h) or {UNIT_BOUND_IN[72]:g} (72 h) is millimetres; values in "
-                         f"millimetres are divided by {MM_PER_IN} before use"}
+        units = {**units, "determined_at": iso(now), "service_states": "inches", "rule": UNIT_RULE}
     last_determined = units if units and units["basis"] in ("physical_bound", "gauge_check") else last_units
     out = {
         "source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": ok, "error": error,
@@ -973,6 +1057,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                                                  "(per-point fallback); in inches, converted from millimetres when the "
                                                  "service's values are millimetres (units)",
                  "units": units or prev_mrms.get("units"), "units_last_determined": last_determined,
+                 "history_units_repair": hist_repair if hist_repair.get("changed") else prev_mrms.get("history_units_repair"),
                  "credit": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS)",
                  "read": read, "grid": grid_info,
                  "valid_time": iso(valid_time), "points": len(points), "outfalls": len(outfalls),
@@ -986,10 +1071,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     }
     write_json(OUT, out)
     if any(r.get("valid_time") for r in permits.values()):
-        hist = update_history(hist_old, permits, now)
-        tmp = HISTORY.with_suffix(".json.tmp")          # compact: about 2,000 numbers per permittee
-        tmp.write_text(json.dumps(hist, separators=(",", ":")))
-        tmp.replace(HISTORY)
+        write_history(update_history(hist_old, permits, now))
     return out
 
 
@@ -999,7 +1081,15 @@ def main() -> int:
     ap.add_argument("--no-qpf", action="store_true", help="skip the NWS forecast")
     ap.add_argument("--limit", type=int, help="at most N per-point MRMS calls this run (the fallback)")
     ap.add_argument("--points", action="store_true", help="per-point identify calls instead of the grid")
+    ap.add_argument("--repair-units", action="store_true",
+                    help="only rescale the history's readings stored before the unit check (also done by any run)")
     a = ap.parse_args()
+    if a.repair_units:
+        hist, rep = repair_history_units(read_json(HISTORY), datetime.now(UTC))
+        if rep.get("changed"):
+            write_history(hist)
+        print("rainfall --repair-units:", json.dumps({k: v for k, v in rep.items() if k != "evidence"}))
+        return 0
     t0 = time.time()
     out = run(force=a.force, qpf=not a.no_qpf, limit=a.limit, point_only=a.points)
     m, q, r = out["mrms"], out["qpf"], out["requests"]

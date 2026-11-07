@@ -604,3 +604,60 @@ def test_no_gauge_rain_skips_the_check(world, monkeypatch):
     g = out["mrms"]["units"]["gauge_check"]
     assert g["verdict"] is None and g["gauges_in_box"] == ["KTST"] and out["requests"]["mrms_identify"] == 1
     assert out["mrms"]["units"]["basis"] == "service_description"
+
+
+# ---------------------------------------------------------------- the history's readings from before the check
+
+def test_the_history_is_rescaled_once_hour_by_hour(world, monkeypatch):
+    now = datetime(2026, 11, 7, 3, 10, tzinfo=UTC)
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    n = 7 * 24
+    a, b = [None] * n, [None] * n
+    i = lambda t: int((t - start).total_seconds() // 3600)  # noqa: E731
+    a[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] = 0.5            # before any evidence: the stated inches, kept
+    b[i(datetime(2026, 11, 3, 13, tzinfo=UTC))] = 5.9           # the Calais reading known to be millimetres
+    a[i(datetime(2026, 11, 4, 1, tzinfo=UTC))] = 2.0            # after it: the unit last determined
+    a[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] = 59.1           # the storm: over the bound
+    b[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] = 12.7
+    hist = {"start": RF.iso(start), "permits": {"RI0100072": a, "ME0100013": b}}
+    (world["tmp"] / "rainfall-history.json").write_text(json.dumps(hist))
+    monkeypatch.setattr(sys, "argv", ["rainfall", "--repair-units"])
+    assert RF.main() == 0
+    got = json.loads((world["tmp"] / "rainfall-history.json").read_text())
+    ga, gb = got["permits"]["RI0100072"], got["permits"]["ME0100013"]
+    assert ga[i(datetime(2026, 11, 2, 5, tzinfo=UTC))] == 0.5
+    assert gb[i(datetime(2026, 11, 3, 13, tzinfo=UTC))] == 0.23
+    assert ga[i(datetime(2026, 11, 4, 1, tzinfo=UTC))] == 0.08
+    assert ga[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] == 2.33 and gb[i(datetime(2026, 11, 7, 0, tzinfo=UTC))] == 0.5
+    r = got["units_repair"]
+    assert r["hours_rescaled"] == 3 and r["values_rescaled"] == 4 and r["hours_kept_as_inches"] == 1
+    assert r["largest_before"] == 59.1 and r["largest_after"] == 2.33 and r["first_hour_over_bound"] == "2026-11-07T00:00:00Z"
+    assert r["ranges"][0][0] == "2026-11-03T13:00:00Z" and "2026-11-03T13:00:00Z" in r["evidence"]
+    assert got["units_checked"]["from"]
+    # a second run changes nothing; nor does the next reading, which keeps the record
+    again, rep = RF.repair_history_units(got, now)
+    assert rep["changed"] is False and again["permits"]["RI0100072"] == ga
+    kept = RF.update_history(got, {}, now)
+    assert kept["units_checked"] == got["units_checked"] and kept["units_repair"] == r
+
+
+def test_an_hour_over_the_bound_before_any_evidence_starts_the_millimetres(world):
+    start = datetime(2026, 11, 1, 0, 0, tzinfo=UTC)
+    hist = {"start": RF.iso(start), "permits": {"P": [0.4, 31.0, 3.0, None, 2.5]}}
+    got, rep = RF.repair_history_units(hist, start + 5 * H, known={})
+    assert got["permits"]["P"] == [0.4, 1.22, 0.12, None, 0.1] and rep["hours_kept_as_inches"] == 1
+
+
+def test_a_run_repairs_the_history_before_it_adds_its_reading(world):
+    steady(world)
+    path = world["tmp"] / "rainfall-history.json"
+    hist = json.loads(path.read_text())
+    for arr in hist["permits"].values():
+        arr[-30] = 40.0                                   # stored before the check, in millimetres
+    path.write_text(json.dumps(hist))
+    out = RF.run(now=NOW, session=FakeNOAA())
+    got = json.loads(path.read_text())
+    assert out["mrms"]["history_units_repair"]["hours_rescaled"] >= 1 and got["units_checked"]
+    assert all(arr[-30] == 1.57 for arr in got["permits"].values())
+    u = out["mrms"]["units"]                              # the repair's unit is the last one determined
+    assert u["units_read"] == "mm" and u["basis"] == "last_determined" and u["evidence"]["basis"] == "history_repair"
