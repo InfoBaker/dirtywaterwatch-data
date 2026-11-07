@@ -176,6 +176,9 @@ def test_beach_code_11_is_no_advisory_and_another_code_opens_one():
     r = recs[0]
     assert r["event_type"] == "beach_advisory" and r["status"] == "advisory_active"
     assert r["started_at"] == AT and r["time_precision"] == "poll" and r["waterbody_text"] == "Wolf Bay"
+    assert r["reported_at"] is None and r["source_updated_at"] is None and r["fetched_at"] == AT
+    assert r["raw"]["_first_seen_at"] == AT and r["raw"]["_last_seen_in_source"] == AT
+    assert "does not publish" in r["raw"]["code_undecoded"]
     assert r["raw"]["code"] == 7 and "does not publish" in r["raw"]["code_note"]
     assert r["raw"]["last_sample_date"] == "2026-11-03"
 
@@ -184,11 +187,26 @@ def test_beach_advisory_reconfirmed_then_lifted():
     first, _ = B.run(_stations({"AL436981": 7}), [], AT)
     later = "2026-11-08T14:00:00Z"
     again, stats = B.run(_stations({"AL436981": 3}), copy.deepcopy(first), later)
-    assert stats["opened"] == 0 and again[0]["source_updated_at"] == later
+    assert stats["opened"] == 0 and again[0]["source_updated_at"] is None
+    assert again[0]["raw"]["_last_seen_in_source"] == later and again[0]["raw"]["_first_seen_at"] == AT
     assert [c["code"] for c in again[0]["raw"]["codes_seen"]] == [7, 3]
     lifted, stats = B.run(_stations(), again, "2026-11-09T14:00:00Z")
     assert stats["lifted"] == 1 and lifted[0]["status"] == "advisory_lifted"
     assert lifted[0]["ended_at"] == "2026-11-09T14:00:00Z"
+
+
+def test_an_undecoded_beach_code_is_the_sites_caution_never_red():
+    from datetime import datetime, timezone
+    from build import status
+    recs, _ = B.run(_stations({"AL436981": 7}), [], AT)
+    now = datetime(2026, 11, 7, 18, tzinfo=timezone.utc)
+    ivs = status.event_intervals(recs[0], "AL", now)
+    assert ivs and all(iv["color"] != "red" for iv in ivs)
+    assert any(iv["rule"] == "code_caution" and iv["color"] == "yellow" for iv in ivs)
+    assert all("does not publish" in iv["code_undecoded"] for iv in ivs)
+    plain = copy.deepcopy(recs[0])
+    plain["raw"].pop("code_undecoded")
+    assert any(iv["color"] == "red" for iv in status.event_intervals(plain, "AL", now))   # the hook is what stops red
 
 
 def test_beach_station_missing_changes_nothing():

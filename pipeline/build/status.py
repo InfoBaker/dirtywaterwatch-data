@@ -328,6 +328,8 @@ RULES = {
                                "the site's caution, not an advisory"),
     "citizen_caution": ("yellow", "Reported by a member of the public, not confirmed by an authority: the site's "
                                   "caution, not an advisory"),
+    "code_caution": ("yellow", "A code on the source's map whose meaning the source does not publish: the site's "
+                               "caution, not an advisory"),
     "end_never_reported": ("grey", "Unresolved: no end reported (off the map after 30 days)"),
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
@@ -2291,6 +2293,15 @@ def citizen_report(ev: dict) -> bool:
     return raw.get("report_provenance") == CITIZEN
 
 
+# A record opened from a source's code whose meaning the source does not publish (raw.code_undecoded: the reason, as
+# ADEM's beach map code; ingest/al_adem_beaches.py). It is never shown as the authority's own advisory: what would be
+# red is the site's caution (rule code_caution), until the source states what its codes mean.
+def code_undecoded(ev: dict) -> str | None:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    v = raw.get("code_undecoded")
+    return v if isinstance(v, str) and v.strip() else None
+
+
 def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None:
     """Turn a red interval into the site's caution under rule (no authority window applies)."""
     was = iv["rule"]
@@ -2328,6 +2339,12 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
             iv["citizen_report"] = basis
             if iv["color"] == "red":
                 _caution_only(iv, "citizen_caution", "provenance.citizen_report", basis, ev.get("source_url"))
+    code_basis = code_undecoded(ev) if out else None
+    if code_basis:
+        for iv in out:
+            iv["code_undecoded"] = code_basis
+            if iv["color"] == "red":
+                _caution_only(iv, "code_caution", "provenance.code_undecoded", code_basis, ev.get("source_url"))
     return out
 
 
@@ -2974,7 +2991,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return f"{et} ended {endtxt}; caution to {int(h)} h after the end{who}{at}" if h else f"{et} ended {endtxt}{who}{at}"
     if rule == "no_end":
         return f"{et} with no reported end{who}{at}"
-    if rule == "text_caution":
+    if rule in ("text_caution", "code_caution"):
         was = (iv.get("rule_applied") or {}).get("replaces")
         what = {"ongoing": f"{et} ongoing", "discharge": f"{et} in progress",
                 "authority_window": f"{et} ended {endtxt}"}.get(was, et)
