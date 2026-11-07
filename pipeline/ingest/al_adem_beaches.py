@@ -3,7 +3,7 @@ ADEM's beach monitoring layer, polled into dated records -> data/build/events/al
 
 Source
   https://gis.adem.alabama.gov/arcgis/rest/services/BeachMonitoring_New/MapServer/15 (registry al-adem-beach-monitoring),
-  the stations layer behind ADEM's beach monitoring map (https://adem.alabama.gov/programs/coastal/beachMonitoring.cnt),
+  the stations layer behind ADEM's beach monitoring map (https://adem.alabama.gov/coastal/ademadph-coastal-alabama-beach-monitoring-program),
   public, no key, no licence or terms shown. 25 stations on 2026-11-07 (Gulf of Mexico, Mobile Bay, Perdido, Arnica,
   Wolf and Weeks bays, Perdido Pass, Dog and Fowl rivers), each with its BEACON id (ID), its name (Descriptio), the
   water (WaterbodyN), its point (Latitude, Longitude), the results PDF (URL), the last sample date (Date, "11/03/26")
@@ -48,7 +48,7 @@ from common import HEADERS, event, now_iso, read_json, save_raw, write_events
 
 SOURCE_ID = "al-adem-beach-monitoring"
 LAYER = "https://gis.adem.alabama.gov/arcgis/rest/services/BeachMonitoring_New/MapServer/15"
-SITE = "https://adem.alabama.gov/programs/coastal/beachMonitoring.cnt"
+SITE = "https://adem.alabama.gov/coastal/ademadph-coastal-alabama-beach-monitoring-program"
 FIELDS = ["OBJECTID", "ID", "Name", "Descriptio", "WaterbodyN", "Latitude", "Longitude", "File", "URL", "Date",
           "Advisory"]
 AUTHORITY = ("Alabama Department of Public Health and Alabama Department of Environmental Management, Coastal Alabama "
