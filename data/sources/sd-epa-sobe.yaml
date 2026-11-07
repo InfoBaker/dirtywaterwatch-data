@@ -1,0 +1,41 @@
+id: "sd-epa-sobe"
+name: "EPA NPDES sewer overflow and bypass event reports (eRule Phase 2, \"SOBE\"), South Dakota permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), South
+#   Dakota permits added 2026-11-07: times written in the zone of the event's own point (Mountain in the fifteen
+#   counties wholly west of the 49 CFR 71.7(b) boundary, data/reference/sd-mountain-time-counties.json; Central
+#   elsewhere), South Dakota's wordings for no water, a lagoon's emergency pond not a water, free text scrubbed.
+# Notes (research/sd, status used, verified fetched, checked 2026-11-07): The only dated, statewide,
+#   machine-readable overflow feed for South Dakota; the state has no public-notice law for sewage, and its
+#   permittees file their 5-day written reports through EPA's NeT-SewerOverflow. Read from the all-versions ZIP
+#   (current version of each report) on 2026-11-07, the current-version ZIP holding no tables since 2026-11-05.
+# Counts (2026-11-04 extract): 208 current SD rows from 56 permits; types SSO 167, BYP 40, CSO 1; structures:
+#   basement backup 33, manhole 33, broken pipe 31, pumping station 22, other 33, none given 56; report groups
+#   G9A 178, G9B (extreme events, report period only) 18, G9C (anticipated bypass) 12. Every row has a point, 186 a
+#   volume, 74 a receiving-water row. Starts by year: 2023 26, 2024 60, 2025 53, 2026 to 2 Nov 51, and 18 with
+#   only a report period. Top permits: Rapid City (SD0023574) 24, Sioux Falls (SD0022128) 20, Hot Springs
+#   (SD0022918) 19, Pierre (SD0020176) 15, Spearfish (SD0020044) 12, Aberdeen (SD0020702) 12, Mitchell (SD0023361)
+#   11, Watertown (SD0023370) 8; Lead's CSO permit (SD0027481) 3, filed as SSOs at a manhole to Gold Run Creek.
+#   No point is shared by more than four kept reports of one permit (the points are the events' own).
+# Kept and dropped: 56 kept from 30 permits (53 naming a receiving water, 1 aquatic-habitat impact, 2 by a water
+#   word in the description); 152 dropped: 97 SSOs naming no water and no water impact, 34 building backups, 21
+#   naming no water in words ("Does not apply- Do not discharge to any waters", "NA", a lagoon cell, the city's
+#   sewer system or plant, "Water never entered lake").
+# Time zone: 70 rows lie in the Mountain-time counties (13 kept), 138 in the Central (43 kept); the U.S. DOT
+#   time-zone layer agrees on 206 of 208 (the two others are the Oahe Dam's, on the river that is the boundary).
+# Cannot fill: published_at (no posting time; the extract date stands in); advice_text; valid_until.
+cadence: "EPA refreshes daily. South Dakota rows: 208 events from 56 permits; report received a median 5 days after the start (10% the same day, 10% 57 days or more after). Newest receipt on the 2026-11-04 extract: 2026-11-03; newest start 2026-11-02 17:00 (Rapid City, a bypass to Rapid Creek)."
+license: "EPA public data; no licence restriction stated on the ECHO download page."
+attribution: "U.S. EPA (ECHO), data entered by South Dakota permittees in NeT-SewerOverflow"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "cso"]
+states: ["SD"]
+access: ["csv"]
+access_detail: "Daily ZIP of CSV tables: sewer_overflow_bypass_report_events.csv joined on sewer_overflow_bypass_event_key to _types, _receiving_waters, _impacts, _causes, _corrective_actions; collection_system_permits.csv names the system. When the current-version ZIP fails, the all-versions ZIP (all_sewer_overflow_and_collection_systems_tables.zip) is read for the current version of each report. Filtered on permit_identifier LIKE SD%."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) and (l)(7) (24-hour and 5-day reports, as adopted in South Dakota surface water discharge permits); 40 CFR part 127 (eRule Phase 2, from 2025-12-21)"
+checked: "2026-11-07"
