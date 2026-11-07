@@ -1941,6 +1941,10 @@ def same_water_by_box(geom, w: dict, towns=()) -> tuple[bool | None, str]:
     return None, why
 
 
+# states whose new NHD records first map to an existing record of the same GNIS id (Texas final audit 2026-11-07 P2-6)
+GNIS_SAME_STATES = {"TX"}
+
+
 def existing_same_water(geom, towns, existing: dict, slugs) -> tuple[str | None, str | None]:
     """(slug, why): the same-named existing record (slugs) the NHD feature is, judged by its outline within
     SAME_WATER_M when on disk, else by its bounding box (same_water_by_box); (None, None) when none is."""
@@ -3468,6 +3472,14 @@ class Run:
             town = next(iter(rec.get("towns") or []), None) or next(iter(top_towns(t["towns"], 1)), None)
             rec["name"] = unnamed_name(None, town)
         rec.update(_targets=[], _weight=0, _slug_towns=Counter(), _key=k)
+        if t["state"] in GNIS_SAME_STATES:
+            # the same GNIS feature as an existing record of the state with no outline here to cut a remainder from:
+            # that record, not a second one (Texas final audit 2026-11-07 P2-6: openboatlaunch's rio-grande-tx-2 and the
+            # NHD build's rio-grande-el-paso-tx, GNIS 1385432; the San Antonio and Brazos rivers likewise, which left
+            # their reports ambiguous)
+            gs = self.existing_by_gnis(t["state"]).get(gnis_num(rec.get("gnis_id")))
+            if gs and S.water_geometry(gs, self.existing) is None:
+                return {"_existing": gs}
         same = same_named_existing(self.existing, t["state"], rec["name"])
         if not same:
             return rec
@@ -3490,6 +3502,15 @@ class Run:
                    note=rec["note"] + f"; only the part more than {SAME_WATER_M} m from {s} (that record covers the rest)")
         return rec
 
+    def existing_by_gnis(self, state: str) -> dict:
+        """{GNIS number: slug} of the state's existing records (openboatlaunch's and the hand records; not waters-extra)."""
+        cache = self.__dict__.setdefault("_by_gnis", {})
+        if state not in cache:
+            cache[state] = {gnis_num(e.get("gnis_id")): sl for sl, e in self.existing.items()
+                            if isinstance(e, dict) and str(e.get("state") or "").upper() == state
+                            and gnis_num(e.get("gnis_id")) and not e.get("extra")}
+        return cache[state]
+
     @staticmethod
     def new_row(t) -> dict:
         row = {"_key": t["key"], "state": t["state"], "name": t["name"],
@@ -3498,6 +3519,8 @@ class Run:
                "how": [], "reason": None, "_recs": []}
         if t.get("island"):                     # an island state's report row (Hawaii): one target per name and island
             row["island"] = t["island"]
+        if t.get("county"):                     # a county-field state's report row (Texas): one per name and county
+            row["county"] = t["county"]
         if t.get("define_by"):                  # a state build's target (the national list)
             row.update(define_by=t["define_by"], defined_by=None, permits=list(t.get("permits") or [])[:12],
                        _epa=[])
@@ -4635,8 +4658,8 @@ def write_names_file(path, meta: dict, state: str, rows: list[dict], resolved: l
     with the slugs and how), and the counts."""
     old_resolved = list(meta.get("resolved") or [])
     if resolved is not None:
-        done = {(r["name"], r.get("island")) for r in resolved}       # one per name and island (Hawaii)
-        resolved = [r for r in old_resolved if (r["name"], r.get("island")) not in done] + resolved
+        done = {(r["name"], r.get("island"), r.get("county")) for r in resolved}   # per name and island or county
+        resolved = [r for r in old_resolved if (r["name"], r.get("island"), r.get("county")) not in done] + resolved
     else:
         resolved = old_resolved
     resolved.sort(key=lambda r: (-r.get("reports", 0), r["name"]))
@@ -4664,7 +4687,7 @@ def write_names_file(path, meta: dict, state: str, rows: list[dict], resolved: l
 
 
 def has_record_at(resolver: S.Resolver, name: str, state: str, places: list[tuple], towns: list[str],
-                  per_place: bool = False, island: str | None = None):
+                  per_place: bool = False, island: str | None = None, county: str | None = None):
     """The water records the status resolver gives a report of this name in the state (the name, an alias or a stem,
     kept by the placement guard) at the reports' places: each point, else each town, else with no place. per_place:
     ([slugs], [the slugs kept at each point]) instead, so a name whose reports lie at several places is a record only
@@ -4674,7 +4697,8 @@ def has_record_at(resolver: S.Resolver, name: str, state: str, places: list[tupl
             [(None, None, tw) for tw in towns[:3]] or [(None, None, "")]
     out, at = [], []
     for lat, lon, tw in tries:
-        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw, **({"island": island} if island else {})},
+        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw, **({"island": island} if island else {}),
+                                              **({"county": county} if county else {})},
               "waterbody_text": name}
         slugs, _, _ = resolver.by_name(name, state, lat, lon, ev)
         kept = resolver.guard(slugs, ev)[0] if slugs else []
@@ -4719,9 +4743,13 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
         # an island state's row (Hawaii: research/hi/receiving-waters-missing.json gives each its island): one target per
         # name and island, so Waimea Bay off Oahu and off Kauai are two waters (final audit 2026-11-07 P1-1, P2-2)
         isl = r.get("island") if state in S.ISLAND_STATES and r.get("island") else None
+        # a county-field state's row (Texas: research/tx/receiving-waters-missing.json gives each its county; the reports
+        # have no point): one target per name and county, so Lubbock's Canyon Lake System is not Comal County's Canyon
+        # Lake (final audit 2026-11-07 P1-2)
+        cty = r.get("county") if state in S.COUNTY_FIELD_STATES and r.get("county") else None
         for p in parts:
             ws = words(p)
-            key = (state, compact(ws) + (f"@{compact(words(isl))}" if isl else ""))
+            key = (state, compact(ws) + (f"@{compact(words(isl))}" if isl else "") + (f"#{compact(words(cty))}" if cty else ""))
             t = targets.get(key)
             if t is None:
                 t = targets[key] = Target(state=state, key=f"{state}:reports:{key[1]}", names=Counter(), texts=Counter(),
@@ -4730,6 +4758,8 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
                                           tributary=False, notes=[], report_name=True)
                 if isl:
                     t["island"] = isl
+                if cty:
+                    t["county"] = cty
             t["names"][p] += r["reports"]
             t["texts"][r["name"]] += r["reports"]
             t["events"] += r["reports"]
@@ -4747,7 +4777,7 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
         t["words"] = words(t["name"])
         places = cluster_points(t["points"], n=3, sep_m=NEAR_M)
         slugs, at = has_record_at(resolver, t["name"], state, places, top_towns(t["towns"], 3),
-                                  per_place=True, island=t.get("island"))
+                                  per_place=True, island=t.get("island"), county=t.get("county"))
         own = [x for x in slugs if waters is None or holds_name(waters.get(x) or {}, t["name"])]
         if own and all(set(own) & set(k) for k in at):     # every point of the reports finds its record
             done.append((t, own))
@@ -5280,7 +5310,7 @@ def names_stats(state, path, rows, targets, done, out_rows, recs, skipped_reason
             "failed": dict(http.failed), "stopped": run.stopped}
 
 
-PLACE_KEYS = ("points", "towns", "places_from", "island", "place", "slug_hint")
+PLACE_KEYS = ("points", "towns", "places_from", "island", "county", "place", "slug_hint")
 UNPLACED = {
     "spelling": ("a water record holds this water but not this spelling ({slugs}): a report of it is not placed there "
                  "until the spelling is an alias (data/water-aliases.json)"),
@@ -5307,7 +5337,8 @@ def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> str | 
     why = "spelling"
     isl = row.get("island")
     for lat, lon, tw in tries:
-        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw, **({"island": isl} if isl else {})},
+        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw, **({"island": isl} if isl else {}),
+                                              **({"county": row["county"]} if row.get("county") else {})},
               "waterbody_text": text}
         got, note, ambiguous = resolver.by_name(text, state, lat, lon, ev)
         if got:
@@ -5359,6 +5390,9 @@ def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, plac
             continue
         if r.get("island") and state in S.ISLAND_STATES:
             mine = [x for x in out_rows if x.get("from") == REPORT_ROWS and x.get("island") == r["island"]]
+            trs = [next((x for x in mine if compact(x.get("name") or "") == compact(p)), None) for p in parts]
+        elif r.get("county") and state in S.COUNTY_FIELD_STATES:
+            mine = [x for x in out_rows if x.get("from") == REPORT_ROWS and x.get("county") == r["county"]]
             trs = [next((x for x in mine if compact(x.get("name") or "") == compact(p)), None) for p in parts]
         else:
             trs = [by_name.get(p) for p in parts]

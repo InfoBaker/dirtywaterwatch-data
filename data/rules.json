@@ -347,10 +347,11 @@
   },
   "day_start_caution": {
    "sources": [
-    "ga-epd-spills"
+    "ga-epd-spills",
+    "tx-tceq-sso-opendata"
    ],
    "hours": 72,
-   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
+   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
   }
  },
  "reach": {

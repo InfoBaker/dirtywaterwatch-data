@@ -216,23 +216,35 @@ def test_state_text_is_in_the_page_shape():
     assert "56,545" in t and "Mountain time in El Paso and Hudspeth" in t
 
 
-def test_missing_waters_list_names_waters_only_by_county_with_towns():
+def check_missing_waters(d: dict, national: dict) -> None:
+    """The invariants of research/tx/receiving-waters-missing.json, true both as the state build writes it and after a
+    water batch moves the names it resolves into `resolved` (final audit 2026-11-07 P2-4: the names change with each
+    batch; these do not)."""
+    def k(n):
+        return re.sub(r"[^a-z0-9]", "", (n or "").lower())
+    held = {k(n) for w in ((national.get("states") or {}).get("TX") or {}).get("waters") or []
+            for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or [])] if n}
+    rows, resolved = d["rows"], d.get("resolved") or []
+    assert d["state"] == "TX" and d["waters"] == len(rows)
+    assert not [r["name"] for r in rows if k(r["name"]) in held]                  # the national list's names left out
+    keys = [(r["name"], r["county"]) for r in rows]
+    assert len(keys) == len(set(keys))                                           # one row per name and county
+    for r in rows + resolved:
+        assert not re.search(r"\d", r["name"]) and "removed]" not in json.dumps(r)
+        assert r["name"] not in ("Unnamed Creek", "Not Provided", "Colorado")     # generic wording, basin label
+    for r in rows:
+        assert r["county"] and not re.search(r"\d", " ".join(r.get("spellings") or []))
+    # a name several counties share keeps one row or resolved entry per county, never one for all (final audit P1-2)
+    seen = set(keys) | {(r["name"], r.get("county")) for r in resolved}
+    assert ("Post Oak Creek", "Grayson County") in seen
+    for r in resolved:
+        if r["name"] == "Canyon Lake System":
+            assert "canyon-lake-tx" not in (r.get("slugs") or [])                 # Comal County's lake
+
+
+def test_missing_waters_list_holds_its_invariants():
     d = json.loads((ROOT / "research" / "tx" / "receiving-waters-missing.json").read_text())
-    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["TX"]["waters"]
-    have = {re.sub(r"[^a-z0-9]", "", n.lower()) for w in nat for n in [w["name"], w["key"]]}
-    assert d["state"] == "TX" and d["waters"] == len(d["rows"]) > 500
-    seen = Counter((r["name"], r["county"]) for r in d["rows"])
-    assert set(seen.values()) == {1}
-    for r in d["rows"]:
-        assert re.sub(r"[^a-z0-9]", "", r["name"].lower()) not in have
-        assert not re.search(r"\\d", r["name"]) and not re.search(r"\\d", " ".join(r["spellings"]))
-        assert "removed]" not in json.dumps(r) and r["county"]
-    names = {r["name"] for r in d["rows"]}
-    assert "Leon Creek" in names and "Unnamed Creek" not in names and "Not Provided" not in names
-    assert "Colorado" not in names                                         # TCEQ's basin label
-    poc = [r for r in d["rows"] if r["name"] == "Post Oak Creek"]
-    grayson = next(r for r in poc if r["county"] == "Grayson County")
-    assert grayson["towns"][0] == "Sherman" and grayson["gnis_name_of"] and len(poc) >= 2
+    check_missing_waters(d, json.loads((ROOT / "data" / "receiving-waters-national.json").read_text()))
 
 
 @pytest.mark.parametrize("text", ["Not Provided", "NOT PROVIDEDD", "NONE LISTED", "None listed in report", "n/a",
@@ -357,3 +369,54 @@ def test_a_read_torn_by_a_refresh_is_read_again_or_refused(monkeypatch):
     monkeypatch.setattr(socrata, "row_count", lambda b, s, u: 5)
     with pytest.raises(RuntimeError, match="table counts 5"):
         socrata.fetch({**block, "metadata": False}, None)
+
+
+def test_a_segment_name_below_another_water_names_its_own_water():
+    _, block = R.load_source("tx-tceq-sso-opendata")
+    rows = socrata.parse(block, (FIX / "tx_tceq_sso.json").read_bytes())
+    base = next(r for r in rows if r["incident_number"] == "900002")
+    extra = [dict(base, incident_number=f"95000{i}", receiving_water_body=t)
+             for i, t in enumerate(["Brazos River Below Navasota River", "Rio Grande Below Amistad Reservoir",
+                                    "Buffalo Bayou Above Tidal"])]
+    recs, _ = R.build("tx-tceq-sso-opendata", block, extra, FETCHED, (), None)
+    got = {r["source_record_id"]: r for r in recs}
+    assert got["950000"]["waterbody_text"] == "Brazos River" and "Navasota" in got["950000"]["raw"]["_water_text_as_given"]
+    assert got["950001"]["waterbody_text"] == "Rio Grande"
+    assert got["950002"]["waterbody_text"] == "Buffalo Bayou Above Tidal"
+
+
+@pytest.mark.parametrize("text,cut,kept", [
+    ("manholes at 17613-17645-17661 Northern Harrier Ct, 1026-1050-1058 Bat Hawk", ["17613", "1026"], []),
+    ("Property line between 606-608 Port St, Horseshoe Bay, TX 78657", ["606"], ["78657"]),
+    ("Grease/ 807 W 15th", ["807"], ["15th"]),
+    ("Line Blockage/12341 C. F. Hawn Fwy", ["12341"], []),
+    ("On 12/18/2024 a break near 29.7604, -95.3698", [], ["12/18/2024", "29.7604, -95.3698"]),
+])
+def test_the_audits_residual_house_numbers_are_cut_and_coordinates_stay(text, cut, kept):
+    out = F.scrub_strict(text)
+    assert all(c not in out for c in cut) and all(k in out for k in kept), out
+
+
+def test_a_name_only_tie_far_from_the_outfall_is_refused_in_texas():
+    from ingest import outfall_waters as OW
+
+    class MT:
+        waters = {"coon-lake-tx": {"name": "Coon Lake", "kind": "lake"}}
+
+        def dist(self, s, lat, lon):
+            return 930_000.0
+
+        def source_of(self, s):
+            return "nhd"
+
+        def no_outline(self, s):
+            return False
+
+        def evidence_of(self):
+            return {}
+    o = {"state": "TX", "npdes_permit": "TX0129500", "lat": 35.86, "lon": -101.97, "receiving_water_echo": "COON LAKE"}
+    OW.apply(o, {"slug": "coon-lake-tx", "step": "name", "how": "the only record of that name"}, MT())
+    assert o["water_slug"] is None and "930 km" in o["no_water_reason"]
+    o2 = {**o, "state": "OK", "npdes_permit": "OK0000001"}
+    OW.apply(o2, {"slug": "coon-lake-tx", "step": "name", "how": "the only record of that name"}, MT())
+    assert o2["water_slug"] == "coon-lake-tx"                              # other states unchanged
