@@ -172,6 +172,15 @@ South Dakota (permits SD...; research/sd/report.md section 2.2; not live until d
     'SSO - <number> <street> SE'), so SD is in FREE_TEXT_STATES (the Illinois scrub). The points are the events' own
     (no kept point is shared by more than four reports of one permit), so SD is not in REPEATED_POINT_STATES.
 
+Planned bypasses (every state; review 2026-11-07 P2-3)
+  An anticipated bypass notice (reporting requirement 'Anticipated bypass notice', code 4, or a report carrying the
+  anticipated-bypass text) gives the operator's planned start and end; a planned end can lie months ahead (Rapid City's
+  UV-building bypass to Rapid Creek, 2026-11-02 to 2027-04-30; Aberdeen's plant rebuild to Moccasin Creek, 2026-03-23
+  to 2028-06-01). While that end is still ahead of the run, the record is ongoing with the planned end as ended_at,
+  raw.end_is_planned true and raw.planned_end_note saying so; the status build keeps such an end (it is not a typing
+  error) and colours the discharge to it. Once the end has passed the record is ended, as any other. An end far ahead
+  on any other report is still treated as a typing error by the status build (unresolved.implausible_end).
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -676,6 +685,31 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
     return STATE_TZ[state], f"the zone of the counties outside the Mountain-time counties, where the event's point lies ({cite})"
 
 
+PLANNED_LABEL = "reporting requirement 'Anticipated bypass notice', or the anticipated-bypass text filled"
+
+
+def planned_notice(ev: dict) -> bool:
+    """The report is an anticipated (planned) bypass notice: its reporting requirement says so (code 4, 'Anticipated
+    bypass notice') or it carries the anticipated-bypass text. Keyed on the report type, never on the state."""
+    return (str(ev.get("sewer_overflow_bypass_reporting_requirement_code") or "").strip() == "4"
+            or (ev.get("sewer_overflow_reporting_requirement_desc") or "").strip().lower() == "anticipated bypass notice"
+            or bool((ev.get("anticipated_bypass_text") or "").strip()))
+
+
+def end_ahead(end: str, now: str) -> bool:
+    """The end lies after now (a date-only end counts to the end of its day; a naive time is compared as written)."""
+    try:
+        e = datetime.fromisoformat(end)
+        n = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if "T" not in end:
+        e = e.replace(hour=23, minute=59, second=59)
+    if e.tzinfo is None:
+        n = n.replace(tzinfo=None)
+    return e > n
+
+
 def scrub_free_text(d: dict, keys) -> dict:
     """The free-text values of d under keys through the Michigan list's scrub (owners' names, house numbers, emails,
     phones, staff names); d changed in place and returned."""
@@ -700,6 +734,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     disc = discharger_index()
     W = Waters()
     kept, dropped, why = [], [], Counter()
+    run_now = info.get("now") or now_iso()
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
@@ -800,9 +835,15 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["state"], raw["state_basis"] = dc_state, dc_basis
         if extreme:
             raw["extreme_event_note"] = "G9B extreme-event report: spills too numerous to list; times are the report period"
+        status = "ended" if end else "unknown"
+        if end and planned_notice(ev) and end_ahead(end, run_now):
+            status = "ongoing"     # the operator's planned end, still ahead (module docstring, Planned bypasses)
+            raw["end_is_planned"] = True
+            raw["planned_end_note"] = (f"the operator's planned end of an anticipated bypass ({PLANNED_LABEL}); the "
+                                       "bypass runs to it unless a later report changes it")
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
-            status="ended" if end else "unknown",
+            status=status,
             discharger_id=d.get("id"), discharger_name=dname, npdes_permit=permit,
             outfall_id=outfall if etype in ("cso", "bypass") else None,
             outfall_name=(reg or {}).get("outfall_name") or None,   # the description text stays in raw

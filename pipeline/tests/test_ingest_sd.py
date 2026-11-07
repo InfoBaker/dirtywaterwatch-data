@@ -20,9 +20,9 @@ def _fixture() -> dict:
     return json.loads((FIX / "sd_sobe_rows.json").read_text())
 
 
-def _build(tables=None):
+def _build(tables=None, now="2026-11-07T12:00:00Z"):
     t = copy.deepcopy(tables or _fixture())
-    return E.build(t, {"extract_date": "2026-11-04", "last_modified": "2026-11-04T12:21:15Z"})
+    return E.build(t, {"extract_date": "2026-11-04", "last_modified": "2026-11-04T12:21:15Z", "now": now})
 
 
 def test_south_dakota_is_read_with_the_point_zone_and_the_scrub():
@@ -258,3 +258,32 @@ def test_a_bloom_advisory_colours_its_lake_to_the_end_of_the_year():
     then = datetime(2027, 1, 2, 12, tzinfo=UTC)
     assert not [iv for iv in status.event_intervals(twin2, "SD", then)
                 if iv["start"] <= then and (iv["end"] is None or iv["end"] > then) and iv["color"]]
+
+
+# ---------------------------------------------------------------- planned bypasses (every state)
+
+def test_a_planned_bypass_runs_to_its_planned_end_and_is_coloured_to_it():
+    """Review 2026-11-07 P2-3: Rapid City's anticipated bypass of its UV building to Rapid Creek, planned to
+    2027-04-30, was written 'ended' and its end thrown away by the 31-day check."""
+    from datetime import UTC, datetime
+    from build import status
+    rc = next(r for r in _build()[0] if r["source_record_id"] == "SD0023574:23:1")
+    assert E.planned_notice(rc["raw"]) and rc["status"] == "ongoing" and rc["raw"]["end_is_planned"] is True
+    assert rc["ended_at"] == "2027-04-30T21:00:00-06:00" and "planned end" in rc["raw"]["planned_end_note"]
+    now = datetime(2026, 11, 20, 12, tzinfo=UTC)
+    assert status.end_not_credible(rc, now) is None
+    ivs = status.event_intervals(rc, "SD", now)
+    assert ivs[0]["rule"] == "discharge" and ivs[0]["end"] == status.parse_time("2027-04-30T21:00:00-06:00")
+    after = next(r for r in _build(now="2027-05-02T00:00:00Z")[0] if r["source_record_id"] == "SD0023574:23:1")
+    assert after["status"] == "ended" and "end_is_planned" not in after["raw"]       # once passed, an ordinary end
+
+
+def test_a_far_end_on_an_ordinary_report_is_still_taken_for_a_typo():
+    from datetime import UTC, datetime
+    from build import status
+    sf = next(r for r in _build()[0] if r["source_record_id"] == "SD0022128:20:1")
+    assert not E.planned_notice(sf["raw"])
+    typo = {**sf, "ended_at": "2036-10-16T20:00:00-05:00", "raw": dict(sf["raw"])}
+    assert "more than" in status.end_not_credible(typo, datetime(2026, 11, 7, 12, tzinfo=UTC))
+    labelled_elsewhere = {**typo, "raw": {**typo["raw"], "end_is_planned": "yes"}}   # only a True label counts
+    assert status.end_not_credible(labelled_elsewhere, datetime(2026, 11, 7, 12, tzinfo=UTC))
