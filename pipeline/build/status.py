@@ -2317,6 +2317,19 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 iv = _iv(ev, start, unlisted, rule, red, yellow)
                 iv["confirmed"] = iso(listed or start)
                 iv["ended_by"] = "no longer on the authority's map at this fetch"
+                if (ev.get("raw") or {}).get("_end_not_confirmed") is True and et not in ADVISORY_TYPES:
+                    # a sewage report under the authority's advisory that left its list without the authority's
+                    # cancellation (ingest/hi_doh_cwb_events.py): its end is not confirmed, so the rest of the 30 days
+                    # from the start is "end not confirmed" (hatched), never a clean end at our fetch
+                    days = float(((rules or {}).get("unresolved") or {}).get("unresolved_yellow_days") or 30)
+                    cap = start + timedelta(days=days)
+                    if cap > unlisted:
+                        un = _iv(ev, unlisted, cap, "unresolved", red, yellow)
+                        un["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
+                                              "rationale": "the advisory left the authority's list without its "
+                                                           "cancellation; the end is not confirmed",
+                                              "source": "data/rules.json"}
+                        return [iv, un]
                 return [iv]
             if et in AGING_TYPES:
                 confirmed = max(t for t in (start, parse_time(ev.get("source_updated_at")), listed) if t)
