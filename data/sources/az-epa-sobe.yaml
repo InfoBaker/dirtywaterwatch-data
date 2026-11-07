@@ -1,0 +1,50 @@
+id: "az-epa-sobe"
+name: "EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Arizona permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Arizona
+#   permits added 2026-11-07: times written with Phoenix offsets (-07:00 all year), ADEQ waterbody identifiers
+#   named from data/reference/az-adeq-wbids.json, washes and canals read as waters, denials and plant ponds
+#   not, the plant point a permit gives for many reports not used as the spill's, free text scrubbed.
+# Notes (research/az, status used, verified fetched, checked 2026-11-07): Read by the national eRule
+#   module (echo-sewer-overflow) with Arizona in its states since 2026-11-07: times in Phoenix time,
+#   ADEQ waterbody identifiers named, washes and canals read as waters, the plant's repeated point
+#   not used as the spill's. 2026-11-04 extract: 288 Arizona reports from 42 permits; 50 kept as
+#   reaching a water (26 SSO, 24 bypass, 18 permits), 238 dropped (222 with no evidence the sewage
+#   reached a water, 16 building backups).
+# Access detail (research, quoted): Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version
+#   ZIP (Last-Modified 2026-11-05) held only its metadata, so the module reads the current version
+#   of each report from the all-versions ZIP (all_sewer_overflow_and_collection_systems_tables.zip,
+#   2026-11-04 extract). Tables: report and event (start/end datetime, duration, volume, lat/lon,
+#   structure type, description), types, receiving waters, causes, impacts, corrective actions;
+#   collection-system permits.
+# Can fill: event_type, started_at, ended_at, reported_at (received date), coordinates, volume (44
+#   of 288), location_text, authority, source_record_id (event key), raw_record
+# Cannot fill: waterbody (mostly blank); advice_text; published_at (ECHO file date only); timezone
+#   (not stated; see notes)
+# Waters: 42 AZPDES permits statewide; receiving water on 25 of 288 events (otherwise blank or an
+#   ADEQ assessment-unit code such as AZ15070101-210)
+# History: 2019-09 to date (288 events: 2019 5, 2020 16, 2021 41, 2022 28, 2023 49, 2024 61, 2025
+#   35, 2026 53 by received year)
+# Research notes: 2026-11-04 extract: starts 2019-09-24 to 2026-10-28, received 2019-09-26 to
+#   2026-10-30, a median 3 days after the start (90th percentile 10). Volume on 44 of 288 reports,
+#   coordinates on 285, an end on 287. Receiving water named on 25 reports, mostly as ADEQ waterbody
+#   identifiers (AZ15060202-421), which ADEQ's WBID layers name (Unnamed Trib to Munds Creek). Most
+#   reports give the plant's point (Grand Canyon South Rim 30 of 32 at one point). Timestamps carry
+#   no zone: read as America/Phoenix (no daylight time). Pima County (Tucson) has no reports, though
+#   EPA's collection-system table lists its systems; APP-only collection systems are not in this
+#   table.
+cadence: "EPA refreshes daily. Arizona rows (2026-11-04 extract): 288 reports from 42 permits, SSO 264 and bypass 24; received a median 3 days after the start (90th percentile 10 days). Newest row: an SSO that started 2026-10-28 00:40 and was received 2026-10-30."
+license: "EPA public data; no licence restriction stated"
+attribution: "US EPA (data filed by AZPDES permittees through ADEQ myDEQ / EPA eRule)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["AZ"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP (Last-Modified 2026-11-05) held only its metadata, so the module reads the current version of each report from the all-versions ZIP (all_sewer_overflow_and_collection_systems_tables.zip, 2026-11-04 extract). Tables: report and event (start/end datetime, duration, volume, lat/lon, structure type, description), types, receiving waters, causes, impacts, corrective actions; collection-system permits."
+machine_readable: true
+legal_basis: "40 CFR 127 (eRule); AZPDES permit noncompliance reporting; A.A.C. R18-9-C305(F) for APP collection systems"
+checked: "2026-11-07"
