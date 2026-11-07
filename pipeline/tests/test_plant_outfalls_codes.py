@@ -271,7 +271,7 @@ def test_the_committed_registry_draws_no_water_plant_and_no_held_back_permit():
         assert held.get(p, {}).get("reason") in ("water_treatment_plant", "no_sewage_evidence"), p
     assert held["PAC100021"]["reason"] == "construction_project"
     assert all(x["reason"] in ("water_treatment_plant", "construction_project", "no_sewage_evidence",
-                                   "not_a_sewage_plant") and x["why"]
+                                   "not_a_sewage_plant", "stormwater_ms4", "groundwater_remediation") and x["why"]
                for x in held.values())
     assert not [r for r in doc["outfalls"] if r["npdes_permit"] in held]
     dis = json.loads((ROOT / "data" / "dischargers.json").read_text())

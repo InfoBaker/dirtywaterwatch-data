@@ -91,6 +91,13 @@ NOT_SEWAGE = {
     'not_a_sewage_plant': "EPA's own record shows no sewage plant or sewer system: ICIS-NPDES classes the facility "
                           "NON-POTW and gives it no SIC or NAICS code, and its limit sets name other discharges "
                           "(HAND_NOT_SEWAGE gives the record read)",
+    'stormwater_ms4': "EPA's own record shows a municipal separate storm sewer system (MS4) permit, not a sewage plant: "
+                      "its only permit component is 'Storm Water Medium/Large MS4s' (ECHO: 'Urban Stormwater "
+                      "(Medium/Large MS4)'), and it entered by ICIS's POTW owner indicator, which names a public owner, "
+                      "not a sewage discharge (HAND_NOT_SEWAGE gives the record read)",
+    'groundwater_remediation': "EPA's own record shows a groundwater cleanup discharge, not a sewage plant: the facility "
+                               "and its limit set are a remediation project's and its SIC code is not sewerage "
+                               "(HAND_NOT_SEWAGE gives the record read)",
 }
 # permits that enter by a POTW component (or another basis not_sewage() does not read) but whose EPA record shows no
 # sewage plant or sewer system: held back by hand, each with the record read (CA final audit, 2026-11-06)
@@ -99,6 +106,31 @@ HAND_NOT_SEWAGE = {
                  "2026-11-06): facility 'VESSEL TESTING A PILOT OCEANWELL', facility type NON-POTW, privately owned, no "
                  "SIC or NAICS code; its ICIS limit sets are 'DISCHARGE FROM TEST SITE A to F - BRINE OUTFALL' and "
                  "'- FRESHWATER OUTFALL' at six test sites offshore: a desalination test vessel, not a sewage plant",
+    # AZ final audit, 2026-11-07: the MS4 permits and Tucson's airport cleanup, in by the POTW indicator or component
+    'AZS000001': "ECHO (dfr_rest_services.get_dfr for AZS000001, read 2026-11-07, ICIS-NPDES extract 2026-10-30): "
+                 "facility 'CITY OF TUCSON MS4', program area 'Urban Stormwater (Medium/Large MS4)', no SIC or NAICS "
+                 "code, no limit set; the city's stormwater permit (Tucson's sewers are Pima County's), not a sewage plant",
+    'AZS000002': "ECHO (dfr_rest_services.get_dfr for AZS000002, read 2026-11-07, ICIS-NPDES extract 2026-10-30): "
+                 "facility 'PIMA COUNTY MS4', program area 'Urban Stormwater (Medium/Large MS4)', no SIC or NAICS code, "
+                 "no limit set; the county's stormwater permit, not a sewage plant",
+    'AZS000003': "ECHO (dfr_rest_services.get_dfr for AZS000003, read 2026-11-07, ICIS-NPDES extract 2026-10-30): "
+                 "facility 'CITY OF PHOENIX MS4', program area 'Urban Stormwater (Medium/Large MS4)', no SIC or NAICS "
+                 "code of its own, no limit set; the city's stormwater permit, not a sewage plant",
+    'AZS000005': "ECHO (dfr_rest_services.get_dfr for AZS000005, read 2026-11-07, ICIS-NPDES extract 2026-10-30): "
+                 "facility 'CITY OF TEMPE MS4', program area 'Urban Stormwater (Medium/Large MS4)', no SIC or NAICS "
+                 "code, no limit set; the city's stormwater permit, not a sewage plant",
+    'AZ0026417': "ECHO (dfr_rest_services.get_dfr for AZ0026417, read 2026-11-07, ICIS-NPDES extract 2026-10-30): "
+                 "facility 'TUCSON AIRPORT REMEDIATION PROJECT - CO-MINGLED PLUME', SIC 4581 (Airports, Flying Fields, "
+                 "& Services), its one limit set 'TUCSON AIRPORT REMEDIATION PROJECT - CO-MINGLED PL'; Tucson Water's "
+                 "discharge of treated groundwater from the airport plume, not a sewage plant",
+}
+# the reason and EPA's facility type of a hand-held permit when not not_a_sewage_plant / NON-POTW (sic codes as read)
+HAND_NOT_SEWAGE_KIND = {
+    'AZS000001': ('stormwater_ms4', 'POTW', []),
+    'AZS000002': ('stormwater_ms4', 'POTW', []),
+    'AZS000003': ('stormwater_ms4', 'POTW', []),
+    'AZS000005': ('stormwater_ms4', 'POTW', []),
+    'AZ0026417': ('groundwater_remediation', 'Municipal or Water District', ['4581']),
 }
 
 
@@ -133,9 +165,10 @@ def not_sewage(p, e, b, kinds):
 
 def hand_not_sewage_row(p, name, state, city, basis, outfalls):
     """The excluded_not_sewage entry of a permit held back by hand (HAND_NOT_SEWAGE), with the EPA record read."""
-    return {'npdes_permit': p, 'permittee': name, 'state': state, 'city': city, 'sic_codes': [], 'naics_codes': [],
-            'facility_type': 'NON-POTW', 'plant_basis': basis, 'external_outfalls': outfalls, 'sewage_limit_kinds': [],
-            'reason': 'not_a_sewage_plant', 'why': NOT_SEWAGE['not_a_sewage_plant'], 'basis': HAND_NOT_SEWAGE[p]}
+    reason, ftype, sic = HAND_NOT_SEWAGE_KIND.get(p, ('not_a_sewage_plant', 'NON-POTW', []))
+    return {'npdes_permit': p, 'permittee': name, 'state': state, 'city': city, 'sic_codes': list(sic), 'naics_codes': [],
+            'facility_type': ftype, 'plant_basis': basis, 'external_outfalls': outfalls, 'sewage_limit_kinds': [],
+            'reason': reason, 'why': NOT_SEWAGE[reason], 'basis': HAND_NOT_SEWAGE[p]}
 
 
 def permit_limit_kinds(limits):
@@ -278,7 +311,7 @@ def main(argv):
             not_sewage_rows.append(hand_not_sewage_row(p, (r['FACILITY_NAME'] or '').strip() or None, r['STATE_CODE'],
                                                        (r['CITY'] or '').strip() or None, b, len(perm[p]['exo'])))
             del universe[p]
-            excluded['no sewage plant by its EPA record (not_a_sewage_plant)'] += 1
+            excluded[f"no sewage plant by its EPA record ({not_sewage_rows[-1]['reason']})"] += 1
             continue
         why = not_sewage(p, perm[p], b, limit_kinds.get(p))
         if why:
@@ -539,7 +572,7 @@ def main(argv):
         if p in HAND_NOT_SEWAGE:
             not_sewage_rows.append(hand_not_sewage_row(p, (fac.get('FACILITY_NAME') or '').strip() or None, state,
                                                        (fac.get('CITY') or '').strip() or None, b, len(c['features'])))
-            excluded['no sewage plant by its EPA record (not_a_sewage_plant)'] += 1
+            excluded[f"no sewage plant by its EPA record ({not_sewage_rows[-1]['reason']})"] += 1
             continue
         rows_p, kept_feats = [], 0
         feats_xy = [f for f in c['features'] if num(f['lat']) is not None and num(f['lon']) is not None]
