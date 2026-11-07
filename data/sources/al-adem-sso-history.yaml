@@ -1,0 +1,43 @@
+id: "al-adem-sso-history"
+name: "ADEM SSO reports, all dates (SSOs_ALL_OB_ID MapServer layer 0)"
+url: "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0"
+homepage: "https://gis.adem.alabama.gov/sso/index.html"
+kind: "arcgis"
+level: "state"
+# Notes (research/al, status used, verified fetched, checked 2026-11-07): Read hourly by
+#   pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20
+#   hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since
+#   2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the
+#   receiving-water words name a water on 9,627, say none was reached on 4,111 and name only a storm
+#   drain or ditch or nothing on 1,020.
+# Access detail (research, quoted):
+#   https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0/query?where=...&outFields=*&f=json.
+#   Public, no key. 14,750 rows on 2026-11-03, first date_sso_began 2012-05-11, latest 2026-11-03
+#   13:03 (the same day; minutes of latency). maxRecordCount 2000; resultOffset paging fails
+#   ("Failed to execute query"), so page by object_id ranges; outStatistics fail. Coordinates in
+#   lat/long fields and as point geometry (NAD83 UTM 16N, wkid 26916). Samples
+#   raw/sso-history-sample.json, raw/sso-history-recent.json.
+# Can fill: source_record_id, event_type, started_at, ended_at, location_text, coordinates, volume,
+#   estimate_flag, waterbody, authority, source_status, revision_history (report version)
+# Cannot fill: reported_at (received_date is only in the live layer); published_at; cause (live
+#   layer only); timezone (dates look like local wall time stored as UTC epoch: 01:03 pm local began
+#   = 13:03 epoch)
+# Waters: statewide; receiving water free text (rec_stream, e.g. "Storm Drain(Tanyard Branch)")
+# History: 2012-05-11 to date (about 1,250 to 1,570 a year: 2019 1,572; 2022 1,443; 2024 1,244; 2025
+#   1,253)
+# Research notes: est_volume is a string, sometimes truncated (e.g. "<=1,0", "10,000 < gall"): take
+#   the full range from the live layer or the AEPACS PDF. Several older test services
+#   (SSO_ALL_AEPACS, SSO_ALL_Dates_ALT frozen at 9,830 rows to 2022-09-30) exist on the same server;
+#   use SSOs_ALL_OB_ID.
+cadence: "Continuous; the reporter files the 24-hour notice in AEPACS and it appears at once. Rule deadline: within 24 hours of becoming aware; 5-day follow-up."
+license: "No licence or terms shown on the service or the map page."
+attribution: "Alabama Department of Environmental Management"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["AL"]
+access: ["arcgis"]
+access_detail: "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0/query?where=...&outFields=*&f=json. Public, no key. 14,750 rows on 2026-11-03, first date_sso_began 2012-05-11, latest 2026-11-03 13:03 (the same day; minutes of latency). maxRecordCount 2000; resultOffset paging fails (\"Failed to execute query\"), so page by object_id ranges; outStatistics fail. Coordinates in lat/long fields and as point geometry (NAD83 UTM 16N, wkid 26916). Samples raw/sso-history-sample.json, raw/sso-history-recent.json."
+machine_readable: true
+legal_basis: "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) (immediate notification); r. 335-6-6-.02(hh) (notifiable SSO)"
+checked: "2026-11-07"

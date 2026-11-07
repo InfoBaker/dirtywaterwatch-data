@@ -1,0 +1,32 @@
+id: "al-adem-beach-monitoring"
+name: "ADEM / ADPH Coastal Alabama Beach Monitoring (BeachMonitoring_New MapServer layer 15)"
+url: "https://gis.adem.alabama.gov/arcgis/rest/services/BeachMonitoring_New/MapServer/15"
+homepage: "https://adem.alabama.gov/coastal/ademadph-coastal-alabama-beach-monitoring-program"
+kind: "arcgis"
+level: "state"
+# Notes (research/al, status used, verified fetched, checked 2026-11-07): Read hourly by
+#   pipeline/ingest/al_adem_beaches.py: 25 stations on 2026-11-07, all with advisory code 11; ADEM
+#   does not publish the codes' meaning, so 11 is read as no advisory and any other code opens a
+#   beach advisory (the side of caution).
+# Access detail (research, quoted):
+#   .../BeachMonitoring_New/MapServer/15/query?where=1%3D1&outFields=*&f=json. 30 stations; fields
+#   ID (BEACON id e.g. AL769933), Descriptio, WaterbodyN, Latitude, Longitude, URL (results PDF),
+#   Date (last sample, "11/02/26"), Advisory (small integer; all 11 on 2026-11-03; legend
+#   Green/Yellow/Red, so code meaning to confirm). Sample raw/beach-sample.json.
+# Can fill: coordinates, waterbody, source_updated_at, source_status
+# Cannot fill: valid_until; advice_text
+# Waters: 25 to 30 coastal stations (Gulf of Mexico, Mobile Bay, Perdido Bay, Dog and Fowl rivers)
+# History: current state only; PDFs per site
+# Research notes: The legend has a "Green" class; the site must not reuse that colour.
+cadence: "Weekly in season (May to October), less often off season"
+license: "None shown."
+attribution: "Alabama Department of Environmental Management with Alabama Department of Public Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["AL"]
+access: ["arcgis", "pdf"]
+access_detail: ".../BeachMonitoring_New/MapServer/15/query?where=1%3D1&outFields=*&f=json. 30 stations; fields ID (BEACON id e.g. AL769933), Descriptio, WaterbodyN, Latitude, Longitude, URL (results PDF), Date (last sample, \"11/02/26\"), Advisory (small integer; all 11 on 2026-11-03; legend Green/Yellow/Red, so code meaning to confirm). Sample raw/beach-sample.json."
+machine_readable: true
+legal_basis: "BEACH Act grant program"
+checked: "2026-11-07"

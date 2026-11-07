@@ -77,6 +77,10 @@
 #                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
 #                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
 #                  advisory map layer, blooms; ingest/nm_transforms.py)
+#                  Alabama: al_adem_sso (ADEM's SSO report layers: every report filed through AEPACS since 2012, posted
+#                  within minutes, with the live map's received time and cause; the last 60 days each hour, the whole
+#                  layer every 20 hours) and al_adem_beaches (ADEM and ADPH's coastal beach monitoring layer: an
+#                  advisory code other than 11 opens a beach advisory)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
