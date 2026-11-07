@@ -29,6 +29,8 @@ Rules
     DWEE within 24 hours and 5 days, filed through EPA's NeT-SewerOverflow, public in EPA's overflow tables weeks
     later; Omaha's CSO permit's public notification clause, not read). notification_signup_url null: no overflow
     e-mail list exists.
+  - EPA_ISSUED: the Indian-country permits EPA Region 7 issues (ECHO, read 2026-11-07); their rows say the report goes
+    to EPA, not DWEE, and say which agency issued the permit (review 2026-11-07 P2-4).
   - Idempotent: every row with state NE is rebuilt; other states' rows are left as they are; the Nebraska rows are
     written after the last row of the file in id order.
 """
@@ -56,6 +58,19 @@ OMAHA = (LAW + " As a combined sewer permittee (NE0133680) Omaha must notify the
          "and was not read. No web notice of Omaha's overflows was found (the CSO program site omahacso.com carries "
          "projects and reports only); Omaha Public Works announces large overflows through the news media.")
 CHANNEL = {"ne-omaha": OMAHA}
+# permits EPA Region 7 issues in Indian country (ECHO facility search, read 2026-11-07: IssuingAgency "EPA", permitting
+# agency "U.S. EPA", CWPIndianCntryFlg "Y"; the other 327 Nebraska permits of the rows are the State's). Nebraska's
+# NPDES authorization does not reach Indian country, so these permittees report to EPA, not to DWEE (review 2026-11-07
+# P2-4). The Omaha Reservation's villages (Walthill, Thurston, Pender, Rosalie, Emerson), Winnebago on the Winnebago
+# Reservation and Santee on the Santee Sioux Reservation.
+EPA_ISSUED = {"NE0021211", "NE0031739", "NE0040908", "NE0041351", "NE0046302", "NE0061263", "NE0113212", "NE0132641",
+              "NE0138932"}
+EPA_LAW = ("NPDES permit issued by EPA Region 7 (in Indian country, where Nebraska's NPDES authorization does not "
+           "apply: EPA's facility record gives the issuing agency as EPA, read 2026-11-07). No statute or rule requires "
+           "public notice of a sewage overflow or a bypass: the permit's standard conditions (40 CFR 122.41(l)(6)-(7)) "
+           "require a report to EPA within 24 hours and in writing within 5 days, filed through EPA's "
+           f"NeT-SewerOverflow, so the reports become public in EPA's overflow tables (ECHO, {SOBE_URL}). None of these "
+           "permits has a report there in the 2026-11-04 extract.")
 PRIVATE_FORMS = {"investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
                  "campground or resort", "private club", "business or industrial", "institution",
                  "facility (permittee not named)"}
@@ -259,7 +274,7 @@ def base_row(rid, name, permits, kind, legal_form, towns, waters, outfalls, note
            "outfalls_source": ("EPA ECHO ICIS-NPDES discharge points and the national CSO inventory "
                                f"(data/outfalls-plants-us.json, data/outfalls-us.json: {outfalls} rows for these permits)"
                                if outfalls else None),
-           "notification_channel": CHANNEL.get(rid, LAW + OWN_PAGES),
+           "notification_channel": CHANNEL.get(rid) or ((EPA_LAW if set(permits) <= EPA_ISSUED else LAW) + OWN_PAGES),
            "notification_feed_machine_readable": True,
            "notification_signup_url": None, "towns": towns, "notes": notes,
            "verified": "fetched" if research else "inferred", "checked": CHECKED,

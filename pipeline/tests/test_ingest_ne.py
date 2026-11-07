@@ -321,3 +321,19 @@ def test_a_retyped_report_naming_no_water_is_never_spread_over_the_operators_wat
     finally:
         S.PLACE_STEPS.update(saved)
         S._GEOM_CACHE.clear()
+
+
+# ---------------------------------------------------------------- review 2026-11-07 P2-4: EPA-issued permits
+
+def test_indian_country_permits_report_to_epa_not_dwee():
+    dis = {d["id"]: d for d in json.loads((ROOT / "data" / "dischargers.json").read_text()) if d.get("state") == "NE"}
+    reg = {r["id"]: r for r in json.loads((ROOT / "data" / "notice-channels" / "ne.json").read_text())["channels"]}
+    epa_ops = ("ne-omaha-tribe-macy", "ne-santee-sioux-nation", "ne-winnebago", "ne-walthill", "ne-thurston",
+               "ne-pender", "ne-rosalie", "ne-emerson")
+    for oid in epa_ops:
+        assert dis[oid]["notification_channel"].startswith("NPDES permit issued by EPA Region 7"), oid
+        assert "DWEE" not in dis[oid]["notification_channel"], oid
+        row = reg[f"{oid}-epa-report"]
+        assert "issued by EPA Region 7" in row["legal_basis"] and "DWEE" not in row["legal_basis"]
+        assert f"{oid}-dwee-epa-report" not in reg
+    assert "DWEE" in dis["ne-beatrice"]["notification_channel"] and "ne-beatrice-dwee-epa-report" in reg
