@@ -471,31 +471,80 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
 
 # ---------------------------------------------------------------- fetch, save, write
 
+# the platform metadata a block may keep: the fields the platforms read (socrata.source_updated_at,
+# arcgis.source_updated_at); a dataset's or layer's metadata also names its owner and editors, never kept
+SAFE_META = ("rowsUpdatedAt", "editingInfo.lastEditDate")
+SAFE_ROWS_FORMAT = "dww-safe-rows/1"
+
+
+def safe_meta(meta: dict | None) -> dict | None:
+    """Only SAFE_META of the platform's metadata (nested keys kept nested), or None."""
+    if not isinstance(meta, dict):
+        return None
+    out: dict = {}
+    for path in SAFE_META:
+        v, ok = meta, True
+        for k in path.split("."):
+            if isinstance(v, dict) and k in v:
+                v = v[k]
+            else:
+                ok = False
+                break
+        if ok and not isinstance(v, (dict, list)):
+            d = out
+            *head, last = path.split(".")
+            for k in head:
+                d = d.setdefault(k, {})
+            d[last] = v
+    return out
+
+
+def safe_payload(rows: list[dict], block: dict, meta: dict | None) -> bytes:
+    """What data/raw keeps of a response: the rows the block's filter keeps, each cut to its safe fields with free
+    text scrubbed (fieldmap.safe_row), and the safe metadata; never the response itself (SOL wave 1 P1-7)."""
+    doc = {"format": SAFE_ROWS_FORMAT, "rows": [F.safe_row(r, block)[0] for r in rows if keep_row(r, block)],
+           "meta": safe_meta(meta)}
+    return json.dumps(doc, ensure_ascii=False, sort_keys=True, default=str).encode()
+
+
+def _saved_safe_rows(content: bytes) -> dict | None:
+    try:
+        doc = json.loads(content)
+    except (ValueError, UnicodeDecodeError):
+        return None
+    return doc if isinstance(doc, dict) and doc.get("format") == SAFE_ROWS_FORMAT else None
+
+
 def fetch_rows(source_id: str, block: dict, file: str | None, meta_file: str | None) -> tuple[list[dict], dict | None, str | None]:
-    """(rows, platform metadata, path of the saved raw response). A fetched response is kept in data/raw/<source>/
-    (on the machine that runs the fetch) when its content changed since the last saved one, before it is parsed,
-    so a response that fails to parse is kept too."""
+    """(rows, platform metadata, path of the saved raw record). A fetched response is parsed first; data/raw/<source>/
+    (on the machine that runs the fetch) then keeps only safe_payload (the filtered rows' safe fields, scrubbed, and
+    SAFE_META) when that changed since the last saved one. A response that fails to parse is not kept. A file saved
+    this way replays with --file (its rows are already safe)."""
     mod = platform(block["platform"])
     if file:
         content = Path(file).read_bytes()
+        saved = _saved_safe_rows(content)
+        if saved is not None:
+            return list(saved.get("rows") or []), saved.get("meta"), None
         pmeta = json.loads(Path(meta_file).read_text()) if meta_file else None
-        return mod.parse(block, content), pmeta, None
+        return mod.parse(block, content), safe_meta(pmeta), None
     got = mod.fetch(block, session(block))
+    rows = mod.parse(block, got.content)
+    meta = safe_meta(got.meta)
+    payload = safe_payload(rows, block, meta)
     state_path = STATE_DIR / f"{source_id}-fetch.json"
     state = read_json(state_path, {}) or {}
-    sha = hashlib.sha256(got.content + (got.meta_bytes or b"")).hexdigest()
+    sha = hashlib.sha256(payload).hexdigest()
     raw_path = state.get("raw_path")
     if sha != state.get("sha256"):
-        p = save_raw(source_id, got.content, got.ext)
-        if got.meta_bytes:
-            p.with_suffix(".meta.json").write_bytes(got.meta_bytes)
+        p = save_raw(source_id, payload, "json")
         raw_path = str(p.relative_to(ROOT))
         state = {"sha256": sha, "raw_path": raw_path, "saved_at": now_iso(),
                  "versions_saved": int(state.get("versions_saved") or 0) + 1}
     state["fetched_at"] = now_iso()
     state["bytes"] = len(got.content)
     write_json(state_path, state)
-    return mod.parse(block, got.content), got.meta, raw_path
+    return rows, meta, raw_path
 
 
 def public_meta(block_meta: dict) -> dict:

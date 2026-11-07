@@ -59,7 +59,9 @@ WORD_RE = re.compile(r"[A-Za-z][A-Za-z'’]*\.?|[A-Za-z](?:\.[A-Za-z])+\.?")
 # where a field is cut into parts; a dash between letters with no space is a joined place name (Matanuska-Susitna)
 # unless a body's word follows it ('-City of')
 _BODY_AFTER_DASH = r"(?:city|village|town|borough|county|municipality|native|tribal|state|dept|department|school)\b"
-SPLIT_RE = re.compile(rf"(\s+[-–—]+\s*|\s*[-–—]+\s+|\s*[-–—]+(?=(?i:{_BODY_AFTER_DASH}))|\s*[,;]\s*)")
+SPLIT_RE = re.compile(rf"(\s+[-–—]+\s*|\s*[-–—]+\s+|\s*[-–—]+(?=(?i:{_BODY_AFTER_DASH}))|\s*[,;]\s*"
+                      r"|\s*[(\[]\s*|\s*[)\]]\s*)")
+_OPEN, _CLOSE = "([", ")]"
 # a corporate form after a comma belongs to the name before it ('Example Foods, Inc.')
 CORP_TAIL = re.compile(r",\s*(inc|llc|l\.l\.c|ltd|lp|l\.p|llp|pc|p\.c|pllc|corp|co|company|corporation)\b\.?", re.I)
 BARE_INVERTED = re.compile(r"^(?:the\s+)?(?:city|town|village|borough|county|township|municipality|parish|"
@@ -151,7 +153,9 @@ def scrub_permit_name(v, city: str | None = None, facility: str | None = None) -
                 continue
             # a person leads EPA's field; after the body, only a name with a common given name is taken for one
             # (a part after the body is more often the plant's own name)
-            if person_part(text, rest, city, facility) and (i == 0 or pu.person_like(text)):
+            # a part in brackets is an aside ('City of X (<a person>)'): the shape alone marks the contact
+            bracketed = i > 0 and any(c in seps[i - 1] for c in _OPEN)
+            if person_part(text, rest, city, facility) and (i == 0 or bracketed or pu.person_like(text)):
                 drop |= idx
                 break
     if not drop:
@@ -162,10 +166,36 @@ def scrub_permit_name(v, city: str | None = None, facility: str | None = None) -
         return cut, cut != s
     kept = [i for i in range(len(parts)) if i not in drop and parts[i].strip()]
     out = parts[kept[0]]
-    for j in kept[1:]:
-        out += seps[j - 1] + parts[j]
-    out = re.sub(r"\s+", " ", out.replace("\x00", ",")).strip(" ,;-–—")
+    for j in range(kept[0] + 1, len(parts)):
+        sep = seps[j - 1]
+        if any(c in sep for c in _OPEN + _CLOSE):
+            out += f" {sep.strip()} "               # a bracket stays until _balance pairs it or drops it
+        elif j in kept:
+            out += sep
+        if j in kept:
+            out += parts[j]
+    out = re.sub(r"\s+", " ", _balance(out).replace("\x00", ",")).strip(" ,;-–—")
     return (out or None), out != s
+
+
+def _balance(s: str) -> str:
+    """Brackets left without a partner (or empty) once a bracketed part or the part before one is dropped."""
+    keep = [True] * len(s)
+    stack: list[int] = []
+    for i, c in enumerate(s):
+        if c in _OPEN:
+            stack.append(i)
+        elif c in _CLOSE:
+            if stack and s[stack[-1]] == _OPEN[_CLOSE.index(c)]:
+                j = stack.pop()
+                if not s[j + 1:i].strip(" ,;-–—"):
+                    keep[j] = keep[i] = False
+            else:
+                keep[i] = False
+    for j in stack:
+        keep[j] = False
+    out = "".join(c for c, k in zip(s, keep) if k)
+    return re.sub(r"\s+([)\]])", r"\1", re.sub(r"([(\[])\s+", r"\1", out))
 
 
 def scrub_rows(rows: list[dict]) -> Counter:
