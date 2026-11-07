@@ -18,7 +18,13 @@ The law (research/ms/report.md §2.1 in the site repository; profile research/ms
     routine advisories go to beach signs and the map only, no longer to text alerts and news releases (MDEQ news
     release of 2026-09-08). Ad hoc water contact advisories for rivers (Trahon Creek and the Pearl River below
     Jackson, 2026-09-02) come as MDEQ news releases.
-Rows: AGENCY and JACKSON below; each checked 2026-11-07 with one GET with the project user agent.
+  - Per operator (every Mississippi row of data/dischargers.json, 2026-11-07 final audit): <id>-overflow-report
+    (permit basis): the 24-hour report to MDEQ and the 5-day report through NeT-SewerOverflow, which reaches the
+    public only through EPA's tables (the echo-sewer-overflow feed), as South Dakota's and Nebraska's rows give it.
+    The duty falls on each operator (collection checklist §2), and without these rows the coverage file counted only
+    the City of Jackson as an operator and read Mississippi as "1 of 1" operators posting each overflow online.
+Rows: AGENCY, JACKSON and the per-operator rows below; each URL checked 2026-11-07 with one GET with the project user
+agent.
 A rerun replaces every ms- row it makes. Validated before writing.
 """
 from __future__ import annotations
@@ -135,7 +141,7 @@ AGENCY = [
 JACKSON_ROWS = [
     {"id": "ms-jackson-jxn-news-releases", "channel_kind": "operator_page",
      "urls": ["https://jxnwater.com/newservice/"], "method": "html", "legal_basis": Q_JXN, "basis_kind": "law",
-     "monitored": True, "unmonitored_reason": None, "publishes": "notices", "every_hours": 6,
+     "monitored": True, "unmonitored_reason": None, "publishes": "notices", "records": False, "every_hours": 6,
      "noun": "News releases",
      "note": ("JXN Water's news page (answered 200 on 2026-11-07), where the overflow response plan's news releases for "
               "significant overflows would appear; whether they are posted here was not checked. (ms-jxn-water)"),
@@ -160,12 +166,41 @@ def base(**kw) -> dict:
     return r
 
 
+Q_PERMIT = ("NPDES permit {permit}: standard conditions, a report of a sanitary sewer overflow or bypass to MDEQ within "
+            "24 hours and an electronic report within 5 days through EPA's NeT-SewerOverflow (MDEQ's NeT-SewerOverflow "
+            "flyer; 40 CFR 122.41(l)(6) and part 127; permit text not read)")
+PRIVATE = {"investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
+           "campground or resort", "private club", "business or industrial", "institution",
+           "facility (permittee not named)"}
+
+
+def operator_rows(dis: list[dict]) -> list[dict]:
+    """One permit row per Mississippi operator: the report to MDEQ, public only through EPA's tables."""
+    rows = []
+    for op in dis:
+        if op.get("state") != "MS":
+            continue
+        oid, name, permit = op["id"], op["name"], op.get("npdes_permit")
+        private = " The permit binds the holder, public or private." if op.get("legal_form") in PRIVATE else ""
+        rows.append(finish(base(
+            id=f"{oid}-overflow-report", operator_id=oid, name=name, permit=permit, channel_kind="feed", urls=[],
+            method=None, legal_basis=Q_PERMIT.format(permit=permit), basis_kind="permit", monitored=False,
+            unmonitored_reason="feed_ingested", feed_source_id="echo-sewer-overflow", publishes="notices",
+            noun="Report to the state", sources=["ms-epa-sobe", "ms-mdeq-netsso-guidance"],
+            note=(f"{name} reports each sewer overflow and bypass to MDEQ within 24 hours and files the 5-day report "
+                  "through NeT-SewerOverflow; the report is published in EPA's overflow tables, read by the "
+                  f"echo-sewer-overflow feed. No public-notice requirement was found.{private} "
+                  "(research/ms/report.md §2.1)"))))
+    return rows
+
+
 def rows_for(dis: list[dict]) -> list[dict]:
     op = next((d for d in dis if d["id"] == JACKSON), None)
     if op is None:
         raise SystemExit(f"{JACKSON} is not in data/dischargers.json: run scripts/add_ms_operators.py first")
     out = [finish(base(**r)) for r in AGENCY]
     out += [finish(base(operator_id=JACKSON, name=op["name"], permit=op["npdes_permit"], **r)) for r in JACKSON_ROWS]
+    out += operator_rows(dis)
     return out
 
 

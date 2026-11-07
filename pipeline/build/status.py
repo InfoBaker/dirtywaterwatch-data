@@ -2573,6 +2573,21 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
     return found
 
 
+def names_its_water(ev: dict) -> bool:
+    """An authority's advisory for the water it names (MDEQ's water contact advisories: raw.extent "named_water"):
+    it colours the water it is placed on, a river included (as NYC DEP's waterbody advisories colour theirs), and on
+    a water that is not filled it also keeps its marker, so the map still shows it. Other beach, rain and HAB
+    advisories speak for a beach or a station, not the whole water (colours_whole_water)."""
+    return (ev.get("raw") or {}).get("advisory_extent") == "named_water"
+
+
+def stretch_text(ev: dict | None) -> str:
+    """' · from X to Y' for an advisory whose source names its ends (raw.stretch), else ''."""
+    s = ((ev or {}).get("raw") or {}).get("stretch") or {}
+    a, b = (s.get("from") or {}).get("name"), (s.get("to") or {}).get("name")
+    return f" · from the {a} to the {b}" if a and b else ""
+
+
 def colours_whole_water(w: dict) -> bool:
     """Beach, rain and HAB advisories colour a whole water only on a lake, pond or reservoir under
     SMALL_WATER_KM2 (an unknown area counts as small)."""
@@ -2770,7 +2785,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
     if iv.get("rule") == "rain_likely":
         from build import rain_likely as rain_mod
         return rain_mod.short(iv, where(iv))
-    et = TYPE_LABEL.get(iv.get("event_type"), "Report")
+    et = ((ev or {}).get("raw") or {}).get("advisory_noun") or TYPE_LABEL.get(iv.get("event_type"), "Report")
     who = (ev or {}).get("discharger_name") or (ev or {}).get("authority") or ""
     who = f" · {who}" if who else ""
     end = parse_time(iv.get("ended_at"))
@@ -2809,7 +2824,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return (f"{et} reported to the day only, with no end; caution to {int(h)} h from the start of that day{who}{at}"
                 if h else f"{et} reported to the day only, with no end{who}{at}")
     if rule in ("advisory_active", "rain_advisory"):
-        return f"{et} in effect{who}"
+        return f"{et} in effect{who}{stretch_text(ev)}"
     return f"{iv['label']}{who}"
 
 
@@ -3100,7 +3115,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 continue
             if ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug]):
                 point_on.append(slug)
-                continue
+                if not names_its_water(ev):
+                    continue                   # a beach's or station's advisory: its marker only
             if slug in carried:
                 continue                       # a reach carries it (below)
             tag = None
@@ -3172,7 +3188,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
                                              for iv in sorted(ivs, key=lambda x: x["start"])],
                                "_ivs": ivs,
-                               "why": "water is not a lake, pond or reservoir under 50 km²" if point_on else "not placed on a water"})
+                               "why": ("the advisory covers the water it names; the marker is its point"
+                                       if point_on and names_its_water(ev) else
+                                       "water is not a lake, pond or reservoir under 50 km²" if point_on
+                                       else "not placed on a water")})
 
     # the current map's monthly marks: an outfall whose latest report is a month total with discharge, its month
     # ended within MONTHLY_CURRENT_DAYS (docs/plan.md §2.x)

@@ -164,3 +164,37 @@ def test_barriers_and_how_each_states_operators_tell_the_public():
     evs = [rec("ma-massdep", "1", "MA", NOW - 2 * D, "minute")]
     cov = C.coverage(evs, WATERS, FEEDS, REGISTRY, [], RULES, iso(NOW), register=reg)
     assert cov["states"]["MA"]["told_online"]["online"] == 2 and "barriers" in cov["states"]["MA"]
+
+
+def test_a_state_whose_dated_reports_come_only_from_epas_tables_names_epa_as_the_publisher(monkeypatch):
+    """Mississippi's reports reach the public only through EPA's eRule tables (registry row level federal): the
+    sentence says so, not "Mississippi publishes"; Washington, with Ecology's own feed beside EPA's, is unchanged."""
+    monkeypatch.setattr(S, "_STATES", {"MS", "WA"})
+    evs = [rec("echo-sewer-overflow", f"ms{i}", "MS", NOW - (i + 2) * D, "minute", event_type="sso",
+               reported_at=iso(NOW - i * D)) for i in range(4)]
+    evs += [rec("echo-sewer-overflow", f"wa{i}", "WA", NOW - (i + 2) * D, "minute", event_type="sso",
+                reported_at=iso(NOW - i * D)) for i in range(2)]
+    evs += [rec("wa-ecology-sewage-spills", f"we{i}", "WA", NOW - (i + 2) * D, "minute", event_type="sso",
+                reported_at=iso(NOW - i * D)) for i in range(3)]
+    feeds = [{"source_id": "echo-sewer-overflow", "registry_ids": ["fed-echo"], "expected_cadence_hours": 24},
+             {"source_id": "wa-ecology-sewage-spills", "registry_ids": ["wa-ecology"], "expected_cadence_hours": 24}]
+    registry = [{"id": "wa-ecology", "name": "Ecology", "states": ["WA"], "event_types": ["sso"]}]
+    levels = {"echo-sewer-overflow": ["federal"], "wa-ecology-sewage-spills": ["state"]}
+    cov = C.coverage(evs, [], feeds, registry, [], {}, iso(NOW), source_levels=levels)
+    ms, wa = cov["states"]["MS"], cov["states"]["WA"]
+    assert ms["grade"] == "Dated reports"
+    assert ms["sentence"] == ("Overflow reports from sewer operators in Mississippi are published by the U.S. "
+                              "Environmental Protection Agency; the newest is from Nov 1, 2026.")
+    assert wa["sentence"].startswith("Washington publishes dated overflow reports; the newest is from")
+    # without the levels (an older caller) the sentence is the state's, as before
+    old = C.coverage(evs, [], feeds, registry, [], {}, iso(NOW))
+    assert old["states"]["MS"]["sentence"].startswith("Mississippi publishes dated overflow reports")
+    # delayed: the same subject, with the delay's wording
+    g, s = C.grade_of("MS", {**cov["states"]["MS"], "latest_dated": iso(NOW - 60 * D)}, NOW, federal=True)
+    assert g == "Dated reports, delayed" and s.startswith("Overflow reports from sewer operators in Mississippi are "
+                                                          "published by the U.S. Environmental Protection Agency, but "
+                                                          "the newest is from")
+    # the District reads with its article, and a state whose name ends in s takes no possessive
+    assert C.grade_of("DC", {**cov["states"]["MS"]}, NOW, federal=True)[1].startswith(
+        "Overflow reports from sewer operators in the District of Columbia are published by")
+    assert "Illinois's" not in C.grade_of("IL", {**cov["states"]["MS"]}, NOW, federal=True)[1]
