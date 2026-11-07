@@ -66,7 +66,8 @@ Privacy: the layers carry no reporter, contact or certifier field (none is reque
   the permit stays. LOCATION_OF_DISCHARGE,
   rec_stream and cause_of_discharge are typed by the permittee and often give a street address, frequently a home's
   ("2306 PEER CT", "Into Private Residence"): common.scrub_text runs on each (e-mails, phones, staff names) and then
-  common.strip_house_numbers removes every street address's house number (the street and ADEM's point stay), as
+  common.strip_house_numbers removes every street address's house number (the street and ADEM's point stay), then
+  strip_al_house_numbers the forms it leaves (lettered avenues and courts, lists of numbers, titled names), as
   California's and Washington's spill feeds do; build.redact runs over the records last. tests/test_ingest_al.py
   proves a house number, an e-mail and a phone number never reach a record.
 A language-model pass could later read the long free-text receiving-water parts that the rules leave as "other
@@ -90,7 +91,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from build import redact
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, event, now_iso, path_notes_to_meta, read_json,
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, HOUSE_NUMBER_REMOVED, NAME_REMOVED, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, scrub_text, strip_house_numbers, write_events, write_json)
 
 SOURCE_ID = "al-adem-sso-history"
@@ -198,14 +199,51 @@ def iso(dt: datetime | None) -> str | None:
     return dt.isoformat() if dt else None
 
 
+# A house number common.strip_house_numbers leaves: Birmingham's lettered avenues and courts put the street word first
+# ("4201 AVENUE T", "6716 COURT N"), lists of numbers ("1100, 1105, 1201 Avenue K") and named streets with a title
+# ("1203 Dr Martin Luther King Jr Drive"). Here any number (or list) of up to six digits followed by a word is a house
+# number, unless a route or unit word is next to it ("Hwy 29", "Lift Station 18", "100 yds", "2 inch") or it is part of a
+# decimal, a coordinate, an id ("#3219", "SSO-00212633") or an ordinal ("21st"). Keyed on Alabama (this module only).
+_UNIT = (r"(?:feet|foot|ft|yards?|yds?|miles?|mi|meters?|m|inch(?:es)?|in|gallons?|gals?|gal|gpm|gpd|mgd|psi|lbs?|"
+         r"pounds?|hours?|hrs?|minutes?|mins?|seconds?|days?|weeks?|am|pm|a\.m\.|p\.m\.|percent|sq|square|x|by|lf|"
+         r"linear|cubic|cy|degrees?|mph|loads?|times?|of|to|and|or|from|%)")
+_NUM = r"\d{1,6}[A-Za-z]?"
+AL_HOUSE_RE = re.compile(rf"(?<![\w.,/:#-]){_NUM}(?:[ ]{{0,2}},[ ]{{0,2}}(?:(?:and|&)[ ]{{1,2}})?{_NUM}|"
+                         rf"[ ]{{1,2}}(?:and|&)[ ]{{1,2}}{_NUM})*(?=[ ]{{1,2}}(?![ ]*{_UNIT}\b)(?i:[NSEW]\.?[ ]{{1,2}})?[A-Za-z])",
+                         re.I)
+ROUTE_WORD = re.compile(r"(?i)\b(?:US|SR|CR|S\.?R\.?|C\.?R\.?|Hwy|Highway|Route|Rte|Interstate|I|Exit|Mile|Marker|MM|"
+                        r"Ave|Avenue|Street|St|Road|Rd|Court|Ct|Lane|Ln|Drive|Dr|Circle|Cir|Place|Pl|Terrace|Way|"
+                        r"Trail|Pkwy)[ .#-]{0,3}$")
+# an identifier before a number ("Manhole 4698", "Lift Station 18"): the number is the asset's, unless a street word
+# follows within four words ("Lift Station 2734 Morgan Russell Road", "lot 2096 Gadwell Drive": an address)
+ID_WORD = re.compile(r"(?i)\b(?:Lot|Unit|Suite|Ste|Apt|Bldg|Building|Station|LS|PS|No|Number|Manhole|MH|Pump|Site|"
+                     r"Phase|Section|Basin|Outfall|Line|Main|Gate|Pier|Box)[ .#-]{0,3}$")
+STREET_AFTER = re.compile(r"(?i)^(?:[ ]{1,2}[A-Za-z][\w'.-]*){0,4}?[ ]{1,2}(?:Road|Rd|Street|St|Lane|Ln|Drive|Dr|Avenue|"
+                          r"Ave|Circle|Cir|Court|Ct|Way|Place|Pl|Blvd|Boulevard|Pkwy|Parkway|Trail|Trl|Terrace|Cove|Cv|"
+                          r"Loop|Run|Pike)\b")
+
+
+def strip_al_house_numbers(v: str) -> str:
+    """strip_house_numbers' leftovers (AL_HOUSE_RE): a leading house number or a list of them before a word."""
+    def repl(m):
+        before = v[max(0, m.start() - 16):m.start()]
+        if ROUTE_WORD.search(before):
+            return m.group(0)
+        if ID_WORD.search(before) and not STREET_AFTER.match(v[m.end():]):
+            return m.group(0)
+        return HOUSE_NUMBER_REMOVED
+    return AL_HOUSE_RE.sub(repl, v)
+
+
 def clean_text(v) -> str | None:
-    """Free text as typed, scrubbed: e-mails, phones, staff names, then every street address's house number."""
+    """Free text as typed, scrubbed: e-mails, phones, staff names, then every street address's house number
+    (common.strip_house_numbers, then strip_al_house_numbers for the forms it leaves)."""
     if v is None:
         return None
     s = " ".join(str(v).split())
     if not s:
         return None
-    return strip_house_numbers(scrub_text(s)) or None
+    return strip_al_house_numbers(strip_house_numbers(scrub_text(s))) or None
 
 
 def fnum(v):

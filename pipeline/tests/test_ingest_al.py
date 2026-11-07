@@ -111,12 +111,31 @@ def test_volumes_as_adem_states_them():
 def test_personal_data_never_reaches_a_record():
     recs, _ = _build()
     text = "\n".join(s for r in recs.values() for s in strings(r))
-    for gone in ("Pat Q Sample", "1234 Sample", "905 Example", "205-555-0142", "ops@example.org", "77 Sample"):
+    for gone in ("Pat Q Sample", "1234 Sample", "905 Example", "205-555-0142", "ops@example.org", "77 Sample",
+                 "9901", "9902", "9903", "9905", "9907", "9909"):
         assert gone not in text
+    assert recs["SSO-00207548"]["outfall_name"] == "[house number removed] AVENUE T, BIRMINGHAM, 35208"
+    assert recs["SSO-00009766"]["outfall_name"] == "[house number removed] COURT N"
+    assert recs["SSO-00007989"]["outfall_name"] == "[house number removed] Avenue K"
+    assert recs["SSO-00209294"]["outfall_name"] == "[house number removed] Dr Sample Example Jr Drive"
     assert recs["SSO-00000285"]["outfall_name"] == "[house number removed] Sample Ct"
     p = recs["SSO-00007280"]
     assert p["discharger_name"] == common.NAME_REMOVED and p["raw"]["row"]["permittee"] == common.NAME_REMOVED
     assert p["npdes_permit"] == "AL0060976"
+
+
+def test_house_numbers_on_lettered_streets_and_lists_are_removed_but_routes_and_assets_stay():
+    c = S.clean_text
+    assert c("9901 AVENUE T, BIRMINGHAM") == "[house number removed] AVENUE T, BIRMINGHAM"
+    assert c("9902 COURT N") == "[house number removed] COURT N"
+    assert c("9903, 9905, 9907 Avenue K") == "[house number removed] Avenue K"
+    assert c("9909 Dr Sample Example Jr Drive") == "[house number removed] Dr Sample Example Jr Drive"
+    assert c("Lift Station 9911 Sample Russell Road") == "Lift Station [house number removed] Sample Russell Road"
+    assert c("in front of lot 9913 Sample Drive") == "in front of lot [house number removed] Sample Drive"
+    for kept in ("Old Highway 280 Chelsea", "Hwy 29 East", "Lift Station 18", "Manhole 4698 located near the creek",
+                 "Manhole #3219", "100 yds off of Sample st.", "2 inch force main", "30.517569, -87.914948",
+                 "duplicate to SSO-00212633", "intersection of County Road 12 and 65 Foley Alabama"):
+        assert c(kept) == kept, kept
 
 
 def test_history_is_carried_and_a_full_read_marks_missing_reports():
