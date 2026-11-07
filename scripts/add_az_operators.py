@@ -6,7 +6,9 @@ Usage (after pipeline/ingest/echo_sewer_overflow_events.py has written its event
 Inputs
   1. data/outfalls-plants-us.json: EPA's ICIS-NPDES permits with state AZ (133: AZPDES plant permits, the construction
      (AZC...), de minimis (AZDM/AZMS...), pretreatment (AZPT...) and MS4 (AZS...) coverages EPA lists with them, and six
-     Navajo Nation permits NN...). permit_name is the owner as EPA records it.
+     Navajo Nation permits NN...). permit_name is the owner as EPA records it. The permits the file holds back as no
+     sewage plant (excluded_not_sewage: the four MS4 permits and Tucson's airport groundwater cleanup, AZ final audit
+     2026-11-07) get no row, whatever input names them, so Tempe and Tucson have none.
   2. research/az/dischargers.json (75 rows): the 42 permits with reports in EPA's overflow tables and the major permits.
      Each research id stays as an alias of the row that holds its permit, so the overflow module's discharger_id
      (the research id) resolves (common.discharger_alias_map).
@@ -73,21 +75,18 @@ GROUPS = {
     "az-city-of-phoenix": ("City of Phoenix Water Services (91st Avenue, 23rd Avenue and Cave Creek plants)",
                            "City of Phoenix", "city",
                            ["AZ0020524", "AZ0020559", "AZ0024465", "AZ0026727", "AZC111068", "AZC111487", "AZC113055",
-                            "AZC113158", "AZC113300", "AZPT00006", "AZS000003"],
+                            "AZC113158", "AZC113300", "AZPT00006"],
                            "The 91st Avenue plant is operated by Phoenix for the regional SROG partners."),
     "az-pima-county": ("Pima County (Regional Wastewater Reclamation Department, Tucson area)",
                        "Pima County Regional Wastewater Reclamation", "county",
                        ["AZ0020001", "AZ0020923", "AZ0022250", "AZ0024121", "AZ0024937", "AZ0026107", "AZPT00013",
-                        "AZ0025291", "AZ0026093", "AZS000002"],
+                        "AZ0025291", "AZ0026093"],
                        "The Regional Wastewater Reclamation Department runs the Tucson area's sewers and plants (Tres "
                        "Rios, Agua Nueva, Avra Valley, Green Valley, Mount Lemmon). EPA's collection-system table lists "
                        "its systems, but no overflow or bypass report under any of its permits is in EPA's overflow "
                        "tables (2026-11-04 extract). AZ0025291 (the Stadium District's Kino environmental restoration "
-                       "project), AZ0026093 (Solid Waste Management) and AZS000002 (the county MS4) are not sewage "
-                       "permits."),
-    "az-city-of-tucson": ("City of Tucson", "City of Tucson", "city", ["AZ0026417", "AZS000001"],
-                          "Tucson's sewers are Pima County's. AZ0026417 is Tucson Water's airport groundwater "
-                          "remediation discharge and AZS000001 the city MS4: neither is a sewage permit."),
+                       "project) and AZ0026093 (Solid Waste Management) are not sewage permits; the county MS4 "
+                       "(AZS000002) is held back from the plants file as no sewage plant."),
     "az-city-of-mesa": ("City of Mesa Water Resources (Northwest, Southeast and Greenfield plants)", "City of Mesa",
                         "city", ["AZ0024031", "AZ0024627", "AZ0025151", "AZ0025241", "AZPT00005"], None),
     "az-city-of-buckeye": ("City of Buckeye", "City of Buckeye", "city",
@@ -263,6 +262,13 @@ def wbid_name(w: str) -> str:
     return hit["name"] if hit and hit.get("name") else w
 
 
+def held_back() -> set[str]:
+    """The Arizona permits data/outfalls-plants-us.json holds back as no sewage plant (excluded_not_sewage)."""
+    return {x["npdes_permit"].upper() for x in json.loads(PLANTS.read_text()).get("excluded_not_sewage") or []
+            if x.get("state") == "AZ" and x.get("reason") in ("stormwater_ms4", "groundwater_remediation",
+                                                              "not_a_sewage_plant")}
+
+
 def plants() -> dict[str, list[dict]]:
     out: dict[str, list[dict]] = defaultdict(list)
     for r in json.loads(PLANTS.read_text())["outfalls"]:
@@ -328,7 +334,11 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
     public_by_name = {c["npdes_permit"]: c for c in cand["public_by_name"]}
     allr, kept = epa_reports()
     systems = collection_systems()
-    permits = sorted(set(pl) | set(research) | set(cands) | set(public_by_name) | set(allr))
+    # permits the plants file holds back as no sewage plant by EPA's record (excluded_not_sewage: the MS4 permits and
+    # Tucson's airport groundwater cleanup, AZ final audit 2026-11-07) get no row: an operator holding only such permits
+    # (Tempe, Tucson) is no sewer operator, and the register leaves them out (scripts/add_az_register_rows.py LEFT_OUT)
+    held = held_back()
+    permits = sorted((set(pl) | set(research) | set(cands) | set(public_by_name) | set(allr)) - held)
     clash = sorted(p for p in permits if p in held_elsewhere)
     if clash:
         raise SystemExit(f"permits already held by another row: {clash}")

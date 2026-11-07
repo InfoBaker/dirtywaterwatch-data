@@ -224372,8 +224372,7 @@
    "AZC113055",
    "AZC113158",
    "AZC113300",
-   "AZPT00006",
-   "AZS000003"
+   "AZPT00006"
   ],
   "receiving_waters": [
    "Az Canal Diversion Channel",
@@ -224381,8 +224380,8 @@
    "UNNAMED WASH"
   ],
   "water_slugs": [],
-  "outfall_count": 17,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 17 rows)",
+  "outfall_count": 16,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 16 rows)",
   "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
@@ -224390,7 +224389,7 @@
    "Phoenix",
    "Phoenix Water Services"
   ],
-  "notes": "EPA ICIS-NPDES: AZ0020524 City of Phoenix - 91St Avenue WWTP; AZ0020559 City of Phoenix - 23Rd Avenue WWTP; AZ0024465 Cave Creek WRP; AZ0026727 City of Phoenix - Cave Creek Water Reclamation Plant; AZC111068 City of Phoenix - 23Rd Avenue WWTP; AZC111487 City of Phoenix - Cave Creek Water Reclamation Plant; AZC113055 City of Phoenix - Cave Creek Water Reclamation Plant; AZC113158 City of Phoenix - 91St Avenue WWTP; AZC113300 City of Phoenix - 23Rd Avenue WWTP; AZPT00006 City of Phoenix - 23Rd Avenue WWTP; AZS000003 City of Phoenix MS4. The construction coverages (AZC...) at the plants are held by the contractors EPA records: Felix Construction Company, Sundt Construction, Inc.. EPA's overflow tables (2026-11-04 extract): 47 report(s), 2 with evidence the discharge reached a water. The 91st Avenue plant is operated by Phoenix for the regional SROG partners.",
+  "notes": "EPA ICIS-NPDES: AZ0020524 City of Phoenix - 91St Avenue WWTP; AZ0020559 City of Phoenix - 23Rd Avenue WWTP; AZ0024465 Cave Creek WRP; AZ0026727 City of Phoenix - Cave Creek Water Reclamation Plant; AZC111068 City of Phoenix - 23Rd Avenue WWTP; AZC111487 City of Phoenix - Cave Creek Water Reclamation Plant; AZC113055 City of Phoenix - Cave Creek Water Reclamation Plant; AZC113158 City of Phoenix - 91St Avenue WWTP; AZC113300 City of Phoenix - 23Rd Avenue WWTP; AZPT00006 City of Phoenix - 23Rd Avenue WWTP. The construction coverages (AZC...) at the plants are held by the contractors EPA records: Felix Construction Company, Sundt Construction, Inc.. EPA's overflow tables (2026-11-04 extract): 47 report(s), 2 with evidence the discharge reached a water. The 91st Avenue plant is operated by Phoenix for the regional SROG partners.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -224398,8 +224397,7 @@
    "az-az0020524",
    "az-az0020559",
    "az-az0024465",
-   "az-az0026727",
-   "az-azs000003"
+   "az-az0026727"
   ],
   "source_areas": [
    "az"
@@ -224504,38 +224502,6 @@
   ]
  },
  {
-  "id": "az-city-of-tempe",
-  "name": "City of Tempe",
-  "short_name": "City of Tempe",
-  "legal_form": "city",
-  "state": "AZ",
-  "kind": "plant",
-  "npdes_permit": "AZS000005",
-  "npdes_permits": [
-   "AZS000005"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
-  "notification_signup_url": null,
-  "towns": [
-   "Tempe"
-  ],
-  "notes": "EPA ICIS-NPDES: AZS000005 City of Tempe MS4. No report under these permits is in EPA's overflow tables (2026-11-04 extract).",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "az-city-of-tempe",
-   "az-azs000005"
-  ],
-  "source_areas": [
-   "az"
-  ]
- },
- {
   "id": "az-city-of-tolleson",
   "name": "City of Tolleson",
   "short_name": "City of Tolleson",
@@ -224594,40 +224560,6 @@
   "checked": "2026-11-07",
   "aliases": [
    "az-city-of-tombstone"
-  ],
-  "source_areas": [
-   "az"
-  ]
- },
- {
-  "id": "az-city-of-tucson",
-  "name": "City of Tucson",
-  "short_name": "City of Tucson",
-  "legal_form": "city",
-  "state": "AZ",
-  "kind": "sso",
-  "npdes_permit": "AZ0026417",
-  "npdes_permits": [
-   "AZ0026417",
-   "AZS000001"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
-  "notification_signup_url": null,
-  "towns": [
-   "Tucson"
-  ],
-  "notes": "EPA ICIS-NPDES: AZ0026417 Tucson Airport Remediation Project - Co-Mingled Plume; AZS000001 City of Tucson MS4. No report under these permits is in EPA's overflow tables (2026-11-04 extract). Tucson's sewers are Pima County's. AZ0026417 is Tucson Water's airport groundwater remediation discharge and AZS000001 the city MS4: neither is a sewage permit.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "az-city-of-tucson",
-   "az-az0026417",
-   "az-azs000001"
   ],
   "source_areas": [
    "az"
@@ -225284,15 +225216,14 @@
    "AZ0025291",
    "AZ0026093",
    "AZ0026107",
-   "AZPT00013",
-   "AZS000002"
+   "AZPT00013"
   ],
   "receiving_waters": [
    "SANTA CRUZ RIVER"
   ],
   "water_slugs": [],
-  "outfall_count": 11,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 11 rows)",
+  "outfall_count": 10,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 10 rows)",
   "notification_channel": "No Arizona statute or rule requires the public to be told of a sewage release when it happens. A.A.C. R18-9-C305(F) requires a report to ADEQ within 24 hours of a release that is an imminent and substantial threat to public health or the environment (over 2,000 gallons, or over 50 gallons reaching a stream, a street, a public area or a building) and a written report within five business days; AZPDES permits carry the same 24-hour and five-day noncompliance reports (40 CFR 122.41(l)(6)). The only public duty is a warning sign at a location with more than three reportable releases in 12 months, kept up until 12 months pass without one (R18-9-C305(G)). AZPDES permittees file their reports in ADEQ's myDEQ, and EPA publishes them in its overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) a few days later. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
@@ -225301,7 +225232,7 @@
    "Sahuarita",
    "Tucson"
   ],
-  "notes": "EPA ICIS-NPDES: AZ0020001 Pima County - Tres Rios WWRF; AZ0020923 Pima County - Water Reclamatio; AZ0022250 Pima County - WWMD - Mount Lemmon WWTP; AZ0024121 Pima County - WWMD - Avra Valley WWTF; AZ0024937 Pima County - WWMD - Green Valley BNRO - WWTP; AZ0025291 Ed Pastor Kino Environmental Restoration Project; AZ0026093 Shannon Road/El Camino Del Cerro; AZ0026107 Agua Nueva WRF; AZPT00013 Pima County - Tres Rios WWRF; AZS000002 Pima County MS4. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The Regional Wastewater Reclamation Department runs the Tucson area's sewers and plants (Tres Rios, Agua Nueva, Avra Valley, Green Valley, Mount Lemmon). EPA's collection-system table lists its systems, but no overflow or bypass report under any of its permits is in EPA's overflow tables (2026-11-04 extract). AZ0025291 (the Stadium District's Kino environmental restoration project), AZ0026093 (Solid Waste Management) and AZS000002 (the county MS4) are not sewage permits.",
+  "notes": "EPA ICIS-NPDES: AZ0020001 Pima County - Tres Rios WWRF; AZ0020923 Pima County - Water Reclamatio; AZ0022250 Pima County - WWMD - Mount Lemmon WWTP; AZ0024121 Pima County - WWMD - Avra Valley WWTF; AZ0024937 Pima County - WWMD - Green Valley BNRO - WWTP; AZ0025291 Ed Pastor Kino Environmental Restoration Project; AZ0026093 Shannon Road/El Camino Del Cerro; AZ0026107 Agua Nueva WRF; AZPT00013 Pima County - Tres Rios WWRF. No report under these permits is in EPA's overflow tables (2026-11-04 extract). The Regional Wastewater Reclamation Department runs the Tucson area's sewers and plants (Tres Rios, Agua Nueva, Avra Valley, Green Valley, Mount Lemmon). EPA's collection-system table lists its systems, but no overflow or bypass report under any of its permits is in EPA's overflow tables (2026-11-04 extract). AZ0025291 (the Stadium District's Kino environmental restoration project) and AZ0026093 (Solid Waste Management) are not sewage permits; the county MS4 (AZS000002) is held back from the plants file as no sewage plant.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -225311,8 +225242,7 @@
    "az-az0024121",
    "az-az0024937",
    "az-az0025291",
-   "az-az0026107",
-   "az-azs000002"
+   "az-az0026107"
   ],
   "source_areas": [
    "az"
