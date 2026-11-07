@@ -647,6 +647,9 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
 # read last, in this order, tagged extra: OSM receiving waters, DC's NHD waters (ingest/dc_waters.py), the NHD
 # receiving waters (ingest/waters_from_nhd.py)
 EXTRA_WATER_FILES = ("waters-extra.json", "waters-dc.json", "waters-nhd.json")
+# regional openboatlaunch files (the six New England states' records in one file, as of 2026-11-01): below the state
+# extracts (load_waters; review 2026-11-07 P2-1)
+REGIONAL_WATER_FILES = ("waters-new-england.json",)
 
 # Aliases written by hand, {water slug: [alias text, ...]}, merged into the records' own aliases at load. The
 # water files are rewritten by their generators (ingest/waters_from_nhd.py, ingest/md_waters.py, ...), so a
@@ -706,9 +709,18 @@ def load_waters(include_nhd: bool = True) -> dict[str, dict]:
     of that merge (a slug with no record) are left in ALIAS_PROBLEMS for build(), except for include_nhd=False,
     where the NHD records they may name are not loaded."""
     waters = {}
-    paths = [DATA_DIR / "waters-ne.json"] + sorted(p for p in DATA_DIR.glob("waters-*.json")
-                                                   if p.name != "waters-ne.json" and p.name not in EXTRA_WATER_FILES)
+    state_files = sorted(p for p in DATA_DIR.glob("waters-*.json")
+                         if p.name != "waters-ne.json" and p.name not in EXTRA_WATER_FILES + REGIONAL_WATER_FILES)
+    # a regional file comes after the state extracts: a state's own extract wins where both carry a slug (its
+    # renames and changes take effect), and a regional record of a state that has its own extract is not loaded
+    # (a slug openboatlaunch renamed stays an alias, not a record); the regional record's other fields are kept
+    paths = [DATA_DIR / "waters-ne.json"] + state_files + [DATA_DIR / n for n in REGIONAL_WATER_FILES]
     paths += [DATA_DIR / n for n in EXTRA_WATER_FILES if include_nhd or n != "waters-nhd.json"]
+    own = set()
+    for p in state_files:
+        m = re.fullmatch(r"waters-([a-z]{2})\.json", p.name)
+        if m:
+            own.add(m.group(1).upper())
     for path in paths:
         try:
             d = read_json(path)
@@ -722,6 +734,13 @@ def load_waters(include_nhd: bool = True) -> dict[str, dict]:
                 continue
             if path.name in EXTRA_WATER_FILES:
                 w = {**w, "extra": True}
+            if path.name in REGIONAL_WATER_FILES:
+                have = waters.get(w["slug"])
+                if have is not None:
+                    waters[w["slug"]] = {**w, **have}      # the state extract's fields win, the regional extras stay
+                    continue
+                if str(w.get("state") or "").upper() in own:
+                    continue
             kept = waters.setdefault(w["slug"], w)
             if kept is not w and w.get("slug_aliases"):
                 # the same slug in a later file (a state extract beside the regional New England file): the slugs

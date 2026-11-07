@@ -78,25 +78,6 @@ jobs:
             echo "::error::state/build.tar.gz is in R2 but could not be fetched; nothing is published or saved this run"; exit 1
           fi
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
-      - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
-        run: |
-          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl rules).
-          # fetch-obl pulls the API's national bulk file (sha256 checked) at most once a day and only for a new
-          # snapshot; otherwise, or on any failure (said in the log), the R2 copy is restored as before. Never stops
-          # the refresh: without either it runs with no outlines here.
-          rc=0; python3 -I scripts/state_paths.py fetch-obl || rc=$?
-          if [ "$rc" != 0 ]; then
-            rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
-            if [ "$rc" = 0 ]; then
-              python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
-                || echo "::warning::state/obl-water.tar.gz could not be read; this run goes on without openboatlaunch's outlines"
-            elif [ "$rc" = 3 ]; then
-              echo "::warning::state/obl-water.tar.gz is not in R2 yet; this run goes on without openboatlaunch's outlines"
-            else
-              echo "::warning::state/obl-water.tar.gz could not be fetched; this run goes on without openboatlaunch's outlines"
-            fi
-          fi
-          rm -f obl-water.tar.gz
       - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
         id: restore_raw
         run: |
@@ -113,6 +94,26 @@ jobs:
             echo "keep=1" >> "$GITHUB_OUTPUT"
             echo "::warning::the raw cache could not be fetched; this run starts from the answers it fetches and keeps the stored one"
           fi
+      - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
+        run: |
+          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl rules).
+          # fetch-obl pulls the API's national bulk file (sha256 checked) at most once a day and only for a new
+          # snapshot; otherwise, or on any failure (said in the log), the R2 copy is restored as before. Never stops
+          # the refresh: without either it runs with no outlines here. After the raw caches, whose data/raw/obl-api
+          # holds the cached meta and its ETag (a 304 most hours).
+          rc=0; python3 -I scripts/state_paths.py fetch-obl || rc=$?
+          if [ "$rc" != 0 ]; then
+            rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
+            if [ "$rc" = 0 ]; then
+              python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
+                || echo "::warning::state/obl-water.tar.gz could not be read; this run goes on without openboatlaunch's outlines"
+            elif [ "$rc" = 3 ]; then
+              echo "::warning::state/obl-water.tar.gz is not in R2 yet; this run goes on without openboatlaunch's outlines"
+            else
+              echo "::warning::state/obl-water.tar.gz could not be fetched; this run goes on without openboatlaunch's outlines"
+            fi
+          fi
+          rm -f obl-water.tar.gz
       - name: Backfill (one-time history loads named in the dispatch input, before the refresh)
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.backfill != ''
         env:

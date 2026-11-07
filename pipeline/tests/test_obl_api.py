@@ -227,7 +227,7 @@ def test_a_hand_field_on_file_is_kept_and_a_partial_answer_refused(tmp_path):
     obl_waters.extract("RI", FIX / "water", p)
     w = {x["slug"]: x for x in json.loads(p.read_text())["waters"]}
     assert w["100-acre-cove-ri"]["aliases"] == ["Hundred Acre Cove"]
-    p.write_text(json.dumps({"state": "RI", "waters": [{"slug": f"w{i}-ri"} for i in range(7)]}))
+    p.write_text(json.dumps({"state": "RI", "waters": [{"slug": f"w{i}-ri"} for i in range(13)]}))
     with pytest.raises(obl_waters.Partial):
         obl_waters.extract("RI", FIX / "water", p)
 
@@ -463,3 +463,138 @@ def test_the_batch_extract_reads_the_api_when_the_key_is_here(monkeypatch):
     assert KEY not in " ".join(cmd.argv)
     monkeypatch.delenv("OBL_API_KEY")
     assert "--from-api" not in B.plan("RI", "extract").cmds[0].argv
+
+
+# ---------------------------------------------------------------- review 2026-11-07 (P1-1, P2-1, P2-2, P2-3, P3)
+
+def folder_copy(tmp_path):
+    w = tmp_path / "obl" / "out" / "water"
+    w.mkdir(parents=True)
+    (w.parent / "meta.json").write_text((FIX / "meta.json").read_text())
+    for p in (FIX / "water").glob("*.json"):
+        (w / p.name).write_text(p.read_text())
+    return w
+
+
+def test_a_deleted_or_moved_water_on_file_stays_as_a_tombstone(tmp_path):
+    w = folder_copy(tmp_path)
+    p = tmp_path / "waters-ri.json"
+    obl_waters.extract("RI", w, p)
+    # openboatlaunch deletes 100 Acre Cove and moves Coddington Cove into another state's record
+    (w / "100-acre-cove-ri.json").write_text(json.dumps({**rec("100-acre-cove-ri"), "status": "deleted",
+                                                          "geometry": None, "retired_at": "2026-11-08T00:00:00+00:00"}))
+    (w / "coddington-cove-ri.json").write_text(json.dumps({**rec("coddington-cove-ri"), "status": "renamed",
+                                                           "successor_slug": "coddington-cove-ma"}))
+    out = obl_waters.extract("RI", w, p)
+    ws = {x["slug"]: x for x in json.loads(p.read_text())["waters"]}
+    assert ws["100-acre-cove-ri"]["status"] == "deleted" and ws["100-acre-cove-ri"]["name"] == "100 Acre Cove"
+    assert ws["100-acre-cove-ri"]["retired_at"] == "2026-11-08T00:00:00+00:00"
+    assert ws["coddington-cove-ri"]["status"] == "moved" and ws["coddington-cove-ri"]["successor_slug"] == "coddington-cove-ma"
+    assert out["_read"]["kept as deleted"] == 1 and out["_read"]["kept as moved"] == 1
+    # a record no longer served at all is kept too, and a merge within the state is an alias, not a tombstone
+    (w / "sakonnet-river-ri.json").unlink()
+    obl_waters.extract("RI", w, p)
+    ws = {x["slug"]: x for x in json.loads(p.read_text())["waters"]}
+    assert ws["sakonnet-river-ri"]["status"] == "not_in_snapshot" and "blue-bill-cove-ri" not in ws
+    # the tombstone is still a water record the status build resolves
+    assert ws["sakonnet-river-ri"]["slug"] == "sakonnet-river-ri"
+
+
+def test_a_deletion_in_the_changes_keeps_the_water_and_says_so(api, tmp_path, capsys):
+    water, data, status = changes_setup(tmp_path, api)
+    sf = data / "build" / "obl-changes.json"
+    sf.write_text(json.dumps({"until": "2026-11-07T03:00:00+00:00"}))
+    status.write_text(json.dumps({"waters": {"100-acre-cove-ri": {"status": "red", "events": ["e1", "e2"]}}}))
+    del api.records["100-acre-cove-ri"]
+    api.deleted["100-acre-cove-ri"] = {**rec("100-acre-cove-ri"), "status": "deleted", "geometry": None}
+    api.changes = [{"slug": "100-acre-cove-ri", "change": "deleted", "at": "2026-11-07T04:12:00+00:00", "state": "RI"}]
+    obl_changes.check(water, sf, status, data_dir=data)
+    ws = {x["slug"]: x for x in json.loads((data / "waters-ri.json").read_text())["waters"]}
+    assert ws["100-acre-cove-ri"]["status"] == "deleted"
+    out = capsys.readouterr().out
+    assert ("status.md: - 04:12Z: openboatlaunch deleted 100-acre-cove-ri (RI); kept in the extract as deleted "
+            "(2 report(s) on it), until its reports and outfalls are moved by hand.") in out
+    no_key(out)
+
+
+def test_the_state_extract_wins_over_the_new_england_file_after_a_rename(tmp_path, monkeypatch):
+    from build import status as S
+    old = {"slug": "old-pond-ri", "name": "Old Pond", "state": "RI", "aliases": ["The Old Pond"]}
+    keep = {"slug": "big-pond-ri", "name": "Big Pond (2026-11-01)", "state": "RI", "osm_note": "kept"}
+    other = {"slug": "far-pond-xx", "name": "Far Pond", "state": "XX"}
+    (tmp_path / "waters-new-england.json").write_text(json.dumps({"waters": [old, keep, other]}))
+    (tmp_path / "waters-ri.json").write_text(json.dumps({"state": "RI", "waters": [
+        {"slug": "new-pond-ri", "name": "New Pond", "state": "RI", "slug_aliases": ["old-pond-ri"]},
+        {"slug": "big-pond-ri", "name": "Big Pond", "state": "RI"}]}))
+    monkeypatch.setattr(S, "DATA_DIR", tmp_path)
+    ws = S.load_waters()
+    assert "old-pond-ri" not in ws and S.SLUG_ALIASES["old-pond-ri"] == "new-pond-ri"
+    assert ws["big-pond-ri"]["name"] == "Big Pond" and ws["big-pond-ri"]["osm_note"] == "kept"
+    assert "far-pond-xx" in ws                       # a regional record of a state with no extract of its own
+
+
+def test_more_changes_than_a_run_fetches_are_logged_from_the_list_and_move_on(api, tmp_path, capsys):
+    water, data, status = changes_setup(tmp_path, api)
+    sf = data / "build" / "obl-changes.json"
+    sf.write_text(json.dumps({"until": "2026-11-07T03:00:00+00:00"}))
+    api.changes = [{"slug": f"w{i}-ri", "change": "changed", "at": "2026-11-07T04:00:00+00:00", "state": "RI"}
+                   for i in range(5)]
+    api.changes.append({"slug": "sapowet-cove-ri", "change": "merged", "successor_slug": "sakonnet-river-ri",
+                        "at": "2026-11-07T04:30:00+00:00", "state": "RI"})
+    st = obl_changes.check(water, sf, status, max_records=3, data_dir=data)
+    assert st["need_full"] and st["until"] == "2026-11-07T05:00:00+00:00"
+    assert [e["slug"] for e in st["log"]] == ["sapowet-cove-ri"]
+    assert not any(p.startswith("waters/") for p, *_ in api.seen)            # nothing fetched one by one
+    # need_full overrides the once-a-day limit, and the run after the pull rewrites every live state
+    from datetime import datetime, timezone
+    t = datetime(2026, 11, 7, 6, tzinfo=timezone.utc)
+    st = json.loads(sf.read_text())
+    st["national"] = {"snapshot": api.meta["snapshot"], "fetched_at": "2026-11-07T05:30:00Z"}
+    sf.write_text(json.dumps(st))
+    dest = water.parent.parent / "pulled" / "out"
+    assert SP.fetch_obl(dest, sf, now=t) == 0
+    st = json.loads(sf.read_text())
+    assert st["full_pulled"] and "need_full" not in st
+    st["pending_states"] = []
+    sf.write_text(json.dumps(st))
+    st = obl_changes.check(water, sf, status, data_dir=data)
+    assert "full_pulled" not in st
+    assert "every live state's extract is rewritten" in capsys.readouterr().out
+
+
+def test_the_daily_pull_request_carries_the_rewrites_and_the_review_lines(tmp_path):
+    spec = importlib.util.spec_from_file_location("obl_extracts", ROOT / "scripts" / "obl_extracts.py")
+    E = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(E)
+    w = folder_copy(tmp_path)
+    data = tmp_path / "data"
+    (data / "build").mkdir(parents=True)
+    (data / "rules.json").write_text(json.dumps({"live_states": ["RI", "DC", "IL"]}))
+    (data / "waters-ri.json").write_text(json.dumps({"state": "RI", "source": "openboatlaunch out/water snapshot 2026-11-01",
+                                                     "waters": [{"slug": "100-acre-cove-ri", "advisories": ["x"]}]}))
+    (data / "waters-dc.json").write_text(json.dumps({"source": "USGS NHD", "waters": [{"slug": "rock-creek-dc"}]}))
+    sf = data / "build" / "obl-changes.json"
+    line = "- 04:12Z: openboatlaunch merged sapowet-cove-ri into sakonnet-river-ri (RI); its reports and outfalls follow by slug_aliases."
+    sf.write_text(json.dumps({"until": "2026-11-07T05:00:00+00:00",
+                              "log": [{"at": "2026-11-07T04:12:00+00:00", "status_line": line}]}))
+    from datetime import datetime, timezone
+    body = tmp_path / "body.md"
+    res = E.run(w, body, data_dir=data, state_file=sf, now=datetime(2026, 11, 7, 6, tzinfo=timezone.utc))
+    assert res["RI"] == "rewritten" and res["DC"] == "not an openboatlaunch extract"
+    assert res["IL"] == "no extract on file" and not (data / "waters-il.json").exists()
+    text = body.read_text()
+    assert "| RI | rewritten | 1 to 3 | 2 |" in text and line in text
+    ws = {x["slug"]: x for x in json.loads((data / "waters-ri.json").read_text())["waters"]}
+    assert ws["100-acre-cove-ri"]["advisories"] == ["x"]          # the API has none: the ones on file are kept
+    B = sys.modules.get("state_batch") or E._batch()
+    c = B.publish_cmds("RI", "2026-11-07", body, ["data/waters-ri.json"], label="obl",
+                       pr_title="openboatlaunch extracts, 2026-11-07")
+    assert c["branch"] == "batch/obl-2026-11-07" and "main" not in c["commit"][-1][-1]
+    wf = (ROOT / ".github" / "workflows" / "obl-extracts.yml").read_text()
+    assert "obl_extracts.py publish" in wf and "object put" not in wf and "${{ secrets.OBL_API_KEY }}" in wf
+
+
+def test_meta_and_changes_answer_quickly_or_give_up(api):
+    assert obl_api.QUICK_TIMEOUT <= 30 and obl_api.QUICK_TRIES <= 2
+    rt = (ROOT / ".github" / "workflows" / "refresh.yml").read_text()
+    assert rt.index("- name: Restore the raw caches from R2") < rt.index("python3 -I scripts/state_paths.py fetch-obl ||")
