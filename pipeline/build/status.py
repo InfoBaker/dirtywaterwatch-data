@@ -2295,10 +2295,25 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             and (ev.get("raw") or {}).get(sc.get("flag") or "_agency_label_only"):
         # a sample the agency labels a risk with no advisory (Nebraska's elevated E. coli): the site's caution from
         # the sample, never the authority's advisory rule (review 2026-11-07 P2-2)
-        iv = _iv(ev, start, start + timedelta(hours=float(sc["hours"])), "sample_caution", None, yellow)
+        until = start + timedelta(hours=float(sc["hours"]))
+        raw = ev.get("raw") or {}
+        notice_end = None
+        if raw.get("_caution_to_notice_end") is True:
+            # the agency keeps a notice up while it retests (Hawaii's beach notifications, ingest/hi_doh_cwb_events.py):
+            # the caution runs to the later of its hours and the notice's closing, or the last read that listed it
+            # while it is open (review 2026-11-07 P2-2); keyed on the record's flag, so other feeds are unchanged
+            notice_end = (parse_time(raw.get("_notice_closed_at")) or end
+                          or parse_time(raw.get("_last_seen_in_source")))
+            if notice_end is not None and notice_end > until:
+                until = notice_end
+        iv = _iv(ev, start, until, "sample_caution", None, yellow)
         iv["rule_applied"] = {"rule": "unresolved.sample_caution", "hours": float(sc["hours"]),
-                              "label": (ev.get("raw") or {}).get("_agency_label"),
+                              "label": raw.get("_agency_label"),
                               "rationale": sc.get("rationale"), "source": "data/rules.json"}
+        if notice_end is not None and until == notice_end:
+            iv["rule_applied"]["extended_to"] = {
+                "until": iso(notice_end), "basis": raw.get("_notice_end_basis") or "the agency's notice was still posted",
+                "source": ev.get("source_url")}
         return [iv]
     if et in ADVISORY_TYPES or st in ("advisory_active", "advisory_lifted"):
         rule = "rain_advisory" if et == "rain_advisory" else "advisory_active"
@@ -2319,17 +2334,31 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 iv["ended_by"] = "no longer on the authority's map at this fetch"
                 if (ev.get("raw") or {}).get("_end_not_confirmed") is True and et not in ADVISORY_TYPES:
                     # a sewage report under the authority's advisory that left its list without the authority's
-                    # cancellation (ingest/hi_doh_cwb_events.py): its end is not confirmed, so the rest of the 30 days
-                    # from the start is "end not confirmed" (hatched), never a clean end at our fetch
-                    days = float(((rules or {}).get("unresolved") or {}).get("unresolved_yellow_days") or 30)
-                    cap = start + timedelta(days=days)
-                    if cap > unlisted:
-                        un = _iv(ev, unlisted, cap, "unresolved", red, yellow)
-                        un["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
-                                              "rationale": "the advisory left the authority's list without its "
-                                                           "cancellation; the end is not confirmed",
-                                              "source": "data/rules.json"}
-                        return [iv, un]
+                    # cancellation (ingest/hi_doh_cwb_events.py): its end is not confirmed, never a clean end at our
+                    # fetch. "End not confirmed" (hatched) to day 30 from the start and for at least the site's caution
+                    # hours after the unlisting, even past day 30 (review 2026-11-07 P2-1); then the end-never-reported
+                    # note to day 90, as for any unresolved record (no_end)
+                    u = (rules or {}).get("unresolved") or {}
+                    days = float(u.get("unresolved_yellow_days") or 30)
+                    hours = float(((rules or {}).get("yellow") or {}).get("default_hours") or 72)
+                    hatch_until = max(start + timedelta(days=days), unlisted + timedelta(hours=hours))
+                    iv["ended_by"] = ("no longer on the authority's list at this fetch, with no cancellation: "
+                                      "the end is not confirmed")
+                    un = _iv(ev, unlisted, hatch_until, "unresolved", red, yellow)
+                    un["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
+                                          "hours_after_unlisting": hours,
+                                          "rationale": "the advisory left the authority's list without its "
+                                                       "cancellation; the end is not confirmed",
+                                          "source": "data/rules.json"}
+                    out = [iv, un]
+                    note_until = max(hatch_until, start + timedelta(days=NOTE_DAYS))
+                    if note_until > hatch_until:
+                        note = _iv(ev, hatch_until, note_until, "end_never_reported", red, yellow)
+                        note["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
+                                                "rationale": u.get("end_assumed_rationale")
+                                                or u.get("unresolved_yellow_rationale"), "source": "data/rules.json"}
+                        out.append(note)
+                    return out
                 return [iv]
             if et in AGING_TYPES:
                 confirmed = max(t for t in (start, parse_time(ev.get("source_updated_at")), listed) if t)

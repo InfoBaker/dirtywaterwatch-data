@@ -1,25 +1,25 @@
 {
- "about": "Water names in Hawaii's reports that data/receiving-waters-national.json does not hold for HI: the Department of Health Clean Water Branch's advisories (the newest 500 events, read on 2026-11-07: sewage spills, permit exceedances, Brown Water Advisories, beach advisories and retest notices), each name as the notices give it with diacritics and the okina folded (the feed spells a water both ways: Kane'ohe and Kaneohe), with the number of records giving it, the islands it is named on and the towns near it. The notices give no coordinates. A name two islands share is one row here: build one record per island (same_name_on_islands); the feed places a record only on a water of its own island.",
+ "about": "Water names in Hawaii's reports that data/receiving-waters-national.json does not hold for HI: the Department of Health Clean Water Branch's advisories (the newest 500 events, read on 2026-11-07: sewage spills, permit exceedances, Brown Water Advisories, beach advisories and retest notices), each name as the notices give it with diacritics and the okina folded (the feed spells a water both ways: Kane'ohe and Kaneohe), with the number of records giving it, the islands it is named on and the towns near it. The notices give no coordinates. A name two islands share has one row per island (island, place and slug_hint say which): build one record each (same_name_on_islands); the feed places a record only on a water of its own island. The towns are the Census places nearest each water, assigned by hand from the water's known place (the notices give no coordinates).",
  "state": "HI",
  "checked": "2026-11-07",
- "waters": 56,
+ "waters": 58,
  "reports": 160,
  "held_by_national_list": {
   "Hilo Bay": 16
  },
  "same_name_on_islands": [
   {
-   "name": "Waimea Bay",
-   "islands": {
-    "Oahu": 20,
-    "Kauai": 2
-   }
-  },
-  {
    "name": "Kailua Bay",
    "islands": {
     "Oahu": 17,
     "Hawaii": 2
+   }
+  },
+  {
+   "name": "Waimea Bay",
+   "islands": {
+    "Oahu": 20,
+    "Kauai": 2
    }
   }
  ],
@@ -30,16 +30,15 @@
  "rows": [
   {
    "name": "Waimea Bay",
-   "reports": 22,
-   "islands": {
-    "Oahu": 20,
-    "Kauai": 2
-   },
+   "island": "Oahu",
+   "place": "Waimea Bay, Oahu",
+   "slug_hint": "waimea-bay-oahu-hi",
+   "reports": 20,
    "towns": [
-    "Honolulu",
-    "Lihue"
+    "Pupukea",
+    "Haleiwa"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town); Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -48,22 +47,20 @@
     "hi-doh-cwb-events-api"
    ],
    "event_types": {
-    "rain_advisory": 18,
+    "rain_advisory": 16,
     "beach_advisory": 4
    }
   },
   {
    "name": "Kailua Bay",
-   "reports": 19,
-   "islands": {
-    "Oahu": 17,
-    "Hawaii": 2
-   },
+   "island": "Oahu",
+   "place": "Kailua Bay, Oahu",
+   "slug_hint": "kailua-bay-oahu-hi",
+   "reports": 17,
    "towns": [
-    "Honolulu",
-    "Hilo"
+    "Kailua"
    ],
-   "towns_basis": "Oahu: the operator's town; Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [
     "HI0021296",
     "HI0110078"
@@ -76,20 +73,20 @@
    ],
    "event_types": {
     "plant_bypass": 15,
-    "rain_advisory": 3,
-    "sso": 1
+    "rain_advisory": 2
    }
   },
   {
    "name": "Pearl Harbor",
+   "island": "Oahu",
+   "place": "Pearl Harbor, Oahu",
+   "slug_hint": "pearl-harbor-oahu-hi",
    "reports": 11,
-   "islands": {
-    "Oahu": 11
-   },
    "towns": [
-    "Honolulu"
+    "Pearl City",
+    "Aiea"
    ],
-   "towns_basis": "Oahu: the operator's town",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [
     "HI0110086"
    ],
@@ -106,14 +103,14 @@
   },
   {
    "name": "Sharks Cove",
+   "island": "Oahu",
+   "place": "Sharks Cove, Oahu",
+   "slug_hint": "sharks-cove-oahu-hi",
    "reports": 9,
-   "islands": {
-    "Oahu": 9
-   },
    "towns": [
-    "Honolulu"
+    "Pupukea"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -127,14 +124,15 @@
   },
   {
    "name": "Wailua Bay",
+   "island": "Kauai",
+   "place": "Wailua Bay, Kauai",
+   "slug_hint": "wailua-bay-kauai-hi",
    "reports": 8,
-   "islands": {
-    "Kauai": 8
-   },
    "towns": [
-    "Lihue"
+    "Wailua",
+    "Kapaa"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -148,14 +146,15 @@
   },
   {
    "name": "Honolii Cove",
+   "island": "Hawaii",
+   "place": "Honolii Cove, Hawaii",
+   "slug_hint": "honolii-cove-hawaii-hi",
    "reports": 7,
-   "islands": {
-    "Hawaii": 7
-   },
    "towns": [
+    "Paukaa",
     "Hilo"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -169,14 +168,15 @@
   },
   {
    "name": "Hanalei Bay",
+   "island": "Kauai",
+   "place": "Hanalei Bay, Kauai",
+   "slug_hint": "hanalei-bay-kauai-hi",
    "reports": 4,
-   "islands": {
-    "Kauai": 4
-   },
    "towns": [
-    "Lihue"
+    "Hanalei",
+    "Princeville"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -190,14 +190,14 @@
   },
   {
    "name": "Honokohau Harbor",
+   "island": "Hawaii",
+   "place": "Honokohau Harbor, Hawaii",
+   "slug_hint": "honokohau-harbor-hawaii-hi",
    "reports": 4,
-   "islands": {
-    "Hawaii": 4
-   },
    "towns": [
-    "Hilo"
+    "Kalaoa"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -212,14 +212,14 @@
   },
   {
    "name": "Nawiliwili Bay",
+   "island": "Kauai",
+   "place": "Nawiliwili Bay, Kauai",
+   "slug_hint": "nawiliwili-bay-kauai-hi",
    "reports": 4,
-   "islands": {
-    "Kauai": 4
-   },
    "towns": [
     "Lihue"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -233,14 +233,14 @@
   },
   {
    "name": "Kahului Harbor",
+   "island": "Maui",
+   "place": "Kahului Harbor, Maui",
+   "slug_hint": "kahului-harbor-maui-hi",
    "reports": 3,
-   "islands": {
-    "Maui": 3
-   },
    "towns": [
-    "Wailuku"
+    "Kahului"
    ],
-   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -254,14 +254,14 @@
   },
   {
    "name": "Keokea Bay",
+   "island": "Hawaii",
+   "place": "Keokea Bay, Hawaii",
+   "slug_hint": "keokea-bay-hawaii-hi",
    "reports": 3,
-   "islands": {
-    "Hawaii": 3
-   },
    "towns": [
-    "Hilo"
+    "Hawi"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -275,14 +275,15 @@
   },
   {
    "name": "Kuapa Pond",
+   "island": "Oahu",
+   "place": "Kuapa Pond, Oahu",
+   "slug_hint": "kuapa-pond-oahu-hi",
    "reports": 3,
-   "islands": {
-    "Oahu": 3
-   },
    "towns": [
+    "Urban Honolulu",
     "Hawaii Kai"
    ],
-   "towns_basis": "Oahu: the towns the notices give",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [
     "HI0020303"
    ],
@@ -299,14 +300,14 @@
   },
   {
    "name": "Maunalua Bay",
+   "island": "Oahu",
+   "place": "Maunalua Bay, Oahu",
+   "slug_hint": "maunalua-bay-oahu-hi",
    "reports": 3,
-   "islands": {
-    "Oahu": 3
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -321,14 +322,15 @@
   },
   {
    "name": "Nuupia Pond",
+   "island": "Oahu",
+   "place": "Nuupia Pond, Oahu",
+   "slug_hint": "nuupia-pond-oahu-hi",
    "reports": 3,
-   "islands": {
-    "Oahu": 3
-   },
    "towns": [
-    "Honolulu"
+    "Kailua",
+    "Kaneohe"
    ],
-   "towns_basis": "Oahu: the operator's town",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [
     "HI0021296"
    ],
@@ -345,14 +347,14 @@
   },
   {
    "name": "Palolo Stream",
+   "island": "Oahu",
+   "place": "Palolo Stream, Oahu",
+   "slug_hint": "palolo-stream-oahu-hi",
    "reports": 3,
-   "islands": {
-    "Oahu": 3
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -366,14 +368,14 @@
   },
   {
    "name": "Pokai Bay",
+   "island": "Oahu",
+   "place": "Pokai Bay, Oahu",
+   "slug_hint": "pokai-bay-oahu-hi",
    "reports": 3,
-   "islands": {
-    "Oahu": 3
-   },
    "towns": [
-    "Honolulu"
+    "Waianae"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -388,14 +390,14 @@
   },
   {
    "name": "Ahuimanu Stream",
+   "island": "Oahu",
+   "place": "Ahuimanu Stream, Oahu",
+   "slug_hint": "ahuimanu-stream-oahu-hi",
    "reports": 2,
-   "islands": {
-    "Oahu": 2
-   },
    "towns": [
-    "Honolulu"
+    "Ahuimanu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -409,14 +411,15 @@
   },
   {
    "name": "East Loch",
+   "island": "Oahu",
+   "place": "East Loch, Oahu",
+   "slug_hint": "east-loch-oahu-hi",
    "reports": 2,
-   "islands": {
-    "Oahu": 2
-   },
    "towns": [
-    "Honolulu"
+    "Pearl City",
+    "Aiea"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -430,14 +433,14 @@
   },
   {
    "name": "Honaunau Bay",
+   "island": "Hawaii",
+   "place": "Honaunau Bay, Hawaii",
+   "slug_hint": "honaunau-bay-hawaii-hi",
    "reports": 2,
-   "islands": {
-    "Hawaii": 2
-   },
    "towns": [
-    "Hilo"
+    "Honaunau-Napoopoo"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -451,15 +454,38 @@
    }
   },
   {
-   "name": "Kalihi Stream",
+   "name": "Kailua Bay",
+   "island": "Hawaii",
+   "place": "Kailua Bay, Hawaii",
+   "slug_hint": "kailua-bay-hawaii-hi",
    "reports": 2,
-   "islands": {
-    "Oahu": 2
-   },
    "towns": [
-    "Honolulu"
+    "Holualoa",
+    "Kalaoa"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1,
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kalihi Stream",
+   "island": "Oahu",
+   "place": "Kalihi Stream, Oahu",
+   "slug_hint": "kalihi-stream-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -473,14 +499,14 @@
   },
   {
    "name": "Kiilae Bay",
+   "island": "Hawaii",
+   "place": "Kiilae Bay, Hawaii",
+   "slug_hint": "kiilae-bay-hawaii-hi",
    "reports": 2,
-   "islands": {
-    "Hawaii": 2
-   },
    "towns": [
-    "Hilo"
+    "Honaunau-Napoopoo"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -494,14 +520,14 @@
   },
   {
    "name": "Lake Wilson",
+   "island": "Oahu",
+   "place": "Lake Wilson, Oahu",
+   "slug_hint": "lake-wilson-oahu-hi",
    "reports": 2,
-   "islands": {
-    "Oahu": 2
-   },
    "towns": [
-    "Honolulu"
+    "Wahiawa"
    ],
-   "towns_basis": "Oahu: the operator's town",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -516,14 +542,14 @@
   },
   {
    "name": "Puako Bay",
+   "island": "Hawaii",
+   "place": "Puako Bay, Hawaii",
+   "slug_hint": "puako-bay-hawaii-hi",
    "reports": 2,
-   "islands": {
-    "Hawaii": 2
-   },
    "towns": [
-    "Hilo"
+    "Puako"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -537,14 +563,14 @@
   },
   {
    "name": "Puhi Bay",
+   "island": "Hawaii",
+   "place": "Puhi Bay, Hawaii",
+   "slug_hint": "puhi-bay-hawaii-hi",
    "reports": 2,
-   "islands": {
-    "Hawaii": 2
-   },
    "towns": [
     "Hilo"
    ],
-   "towns_basis": "Hawaii: the operator's town",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [
     "HI0021377"
    ],
@@ -561,14 +587,14 @@
   },
   {
    "name": "Wailoa River",
+   "island": "Hawaii",
+   "place": "Wailoa River, Hawaii",
+   "slug_hint": "wailoa-river-hawaii-hi",
    "reports": 2,
-   "islands": {
-    "Hawaii": 2
-   },
    "towns": [
     "Hilo"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -583,14 +609,14 @@
   },
   {
    "name": "Wailupe Stream",
+   "island": "Oahu",
+   "place": "Wailupe Stream, Oahu",
+   "slug_hint": "wailupe-stream-oahu-hi",
    "reports": 2,
-   "islands": {
-    "Oahu": 2
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -604,14 +630,15 @@
   },
   {
    "name": "Waimanalo Bay",
+   "island": "Oahu",
+   "place": "Waimanalo Bay, Oahu",
+   "slug_hint": "waimanalo-bay-oahu-hi",
    "reports": 2,
-   "islands": {
-    "Oahu": 2
-   },
    "towns": [
-    "Honolulu"
+    "Waimanalo",
+    "Waimanalo Beach"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -625,15 +652,36 @@
    }
   },
   {
-   "name": "Ala Moana Lagoon",
-   "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
+   "name": "Waimea Bay",
+   "island": "Kauai",
+   "place": "Waimea Bay, Kauai",
+   "slug_hint": "waimea-bay-kauai-hi",
+   "reports": 2,
    "towns": [
-    "Honolulu"
+    "Waimea"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Ala Moana Lagoon",
+   "island": "Oahu",
+   "place": "Ala Moana Lagoon, Oahu",
+   "slug_hint": "ala-moana-lagoon-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -647,14 +695,14 @@
   },
   {
    "name": "Ala Wai Boat Harbor",
+   "island": "Oahu",
+   "place": "Ala Wai Boat Harbor, Oahu",
+   "slug_hint": "ala-wai-boat-harbor-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -668,14 +716,14 @@
   },
   {
    "name": "Ala Wai Canal",
+   "island": "Oahu",
+   "place": "Ala Wai Canal, Oahu",
+   "slug_hint": "ala-wai-canal-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -689,14 +737,14 @@
   },
   {
    "name": "Anaehoomalu Bay",
+   "island": "Hawaii",
+   "place": "Anaehoomalu Bay, Hawaii",
+   "slug_hint": "anaehoomalu-bay-hawaii-hi",
    "reports": 1,
-   "islands": {
-    "Hawaii": 1
-   },
    "towns": [
-    "Hilo"
+    "Waikoloa Village"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -710,14 +758,14 @@
   },
   {
    "name": "Anahola Bay",
+   "island": "Kauai",
+   "place": "Anahola Bay, Kauai",
+   "slug_hint": "anahola-bay-kauai-hi",
    "reports": 1,
-   "islands": {
-    "Kauai": 1
-   },
    "towns": [
-    "Lihue"
+    "Anahola"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -731,14 +779,14 @@
   },
   {
    "name": "Hanapepe Salt Pond",
+   "island": "Kauai",
+   "place": "Hanapepe Salt Pond, Kauai",
+   "slug_hint": "hanapepe-salt-pond-kauai-hi",
    "reports": 1,
-   "islands": {
-    "Kauai": 1
-   },
    "towns": [
-    "Lihue"
+    "Hanapepe"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -752,14 +800,14 @@
   },
   {
    "name": "Honolulu Harbor",
+   "island": "Oahu",
+   "place": "Honolulu Harbor, Oahu",
+   "slug_hint": "honolulu-harbor-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -773,14 +821,14 @@
   },
   {
    "name": "Kahaluu Bay",
+   "island": "Hawaii",
+   "place": "Kahaluu Bay, Hawaii",
+   "slug_hint": "kahaluu-bay-hawaii-hi",
    "reports": 1,
-   "islands": {
-    "Hawaii": 1
-   },
    "towns": [
-    "Hilo"
+    "Kahaluu-Keauhou"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -794,14 +842,15 @@
   },
   {
    "name": "Kahana Bay",
+   "island": "Oahu",
+   "place": "Kahana Bay, Oahu",
+   "slug_hint": "kahana-bay-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Punaluu",
+    "Kaaawa"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -815,14 +864,14 @@
   },
   {
    "name": "Kalauao Stream",
+   "island": "Oahu",
+   "place": "Kalauao Stream, Oahu",
+   "slug_hint": "kalauao-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Aiea"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -836,14 +885,14 @@
   },
   {
    "name": "Kalauau Stream",
+   "island": "Oahu",
+   "place": "Kalauau Stream, Oahu",
+   "slug_hint": "kalauau-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Aiea"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -857,14 +906,14 @@
   },
   {
    "name": "Kalihiwai Bay",
+   "island": "Kauai",
+   "place": "Kalihiwai Bay, Kauai",
+   "slug_hint": "kalihiwai-bay-kauai-hi",
    "reports": 1,
-   "islands": {
-    "Kauai": 1
-   },
    "towns": [
-    "Lihue"
+    "Kilauea"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -878,14 +927,14 @@
   },
   {
    "name": "Kamanaiki Stream",
+   "island": "Oahu",
+   "place": "Kamanaiki Stream, Oahu",
+   "slug_hint": "kamanaiki-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -899,14 +948,14 @@
   },
   {
    "name": "Kaneohe Bay",
+   "island": "Oahu",
+   "place": "Kaneohe Bay, Oahu",
+   "slug_hint": "kaneohe-bay-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Kaneohe"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -920,14 +969,14 @@
   },
   {
    "name": "Kaopala Bay",
+   "island": "Maui",
+   "place": "Kaopala Bay, Maui",
+   "slug_hint": "kaopala-bay-maui-hi",
    "reports": 1,
-   "islands": {
-    "Maui": 1
-   },
    "towns": [
-    "Wailuku"
+    "Napili-Honokowai"
    ],
-   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -941,14 +990,14 @@
   },
   {
    "name": "Kawa Stream",
+   "island": "Oahu",
+   "place": "Kawa Stream, Oahu",
+   "slug_hint": "kawa-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Kaneohe"
    ],
-   "towns_basis": "Oahu: the operator's town",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -962,14 +1011,14 @@
   },
   {
    "name": "Kawaihae Harbor",
+   "island": "Hawaii",
+   "place": "Kawaihae Harbor, Hawaii",
+   "slug_hint": "kawaihae-harbor-hawaii-hi",
    "reports": 1,
-   "islands": {
-    "Hawaii": 1
-   },
    "towns": [
-    "Hilo"
+    "Kawaihae"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -983,14 +1032,14 @@
   },
   {
    "name": "Keehi Lagoon",
+   "island": "Oahu",
+   "place": "Keehi Lagoon, Oahu",
+   "slug_hint": "keehi-lagoon-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1004,14 +1053,15 @@
   },
   {
    "name": "Keoniloa Bay",
+   "island": "Kauai",
+   "place": "Keoniloa Bay, Kauai",
+   "slug_hint": "keoniloa-bay-kauai-hi",
    "reports": 1,
-   "islands": {
-    "Kauai": 1
-   },
    "towns": [
-    "Lihue"
+    "Poipu",
+    "Koloa"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1025,14 +1075,14 @@
   },
   {
    "name": "Kua Bay",
+   "island": "Hawaii",
+   "place": "Kua Bay, Hawaii",
+   "slug_hint": "kua-bay-hawaii-hi",
    "reports": 1,
-   "islands": {
-    "Hawaii": 1
-   },
    "towns": [
-    "Hilo"
+    "Kalaoa"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1046,14 +1096,15 @@
   },
   {
    "name": "Kukuiula Bay",
+   "island": "Kauai",
+   "place": "Kukuiula Bay, Kauai",
+   "slug_hint": "kukuiula-bay-kauai-hi",
    "reports": 1,
-   "islands": {
-    "Kauai": 1
-   },
    "towns": [
-    "Lihue"
+    "Poipu",
+    "Koloa"
    ],
-   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1067,14 +1118,15 @@
   },
   {
    "name": "Maalaea Bay",
+   "island": "Maui",
+   "place": "Maalaea Bay, Maui",
+   "slug_hint": "maalaea-bay-maui-hi",
    "reports": 1,
-   "islands": {
-    "Maui": 1
-   },
    "towns": [
-    "Wailuku"
+    "Maalaea",
+    "Kihei"
    ],
-   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1088,14 +1140,14 @@
   },
   {
    "name": "Maalaea Harbor",
+   "island": "Maui",
+   "place": "Maalaea Harbor, Maui",
+   "slug_hint": "maalaea-harbor-maui-hi",
    "reports": 1,
-   "islands": {
-    "Maui": 1
-   },
    "towns": [
-    "Wailuku"
+    "Maalaea"
    ],
-   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1109,14 +1161,14 @@
   },
   {
    "name": "Makiki Stream",
+   "island": "Oahu",
+   "place": "Makiki Stream, Oahu",
+   "slug_hint": "makiki-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1130,14 +1182,14 @@
   },
   {
    "name": "Manoa Stream",
+   "island": "Oahu",
+   "place": "Manoa Stream, Oahu",
+   "slug_hint": "manoa-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Urban Honolulu"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1151,14 +1203,14 @@
   },
   {
    "name": "Pauoa Bay",
+   "island": "Hawaii",
+   "place": "Pauoa Bay, Hawaii",
+   "slug_hint": "pauoa-bay-hawaii-hi",
    "reports": 1,
-   "islands": {
-    "Hawaii": 1
-   },
    "towns": [
-    "Hilo"
+    "Puako"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1172,14 +1224,14 @@
   },
   {
    "name": "Puha Stream",
+   "island": "Oahu",
+   "place": "Puha Stream, Oahu",
+   "slug_hint": "puha-stream-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Waimanalo"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1193,14 +1245,14 @@
   },
   {
    "name": "Wailuku River",
+   "island": "Hawaii",
+   "place": "Wailuku River, Hawaii",
+   "slug_hint": "wailuku-river-hawaii-hi",
    "reports": 1,
-   "islands": {
-    "Hawaii": 1
-   },
    "towns": [
     "Hilo"
    ],
-   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"
@@ -1214,14 +1266,14 @@
   },
   {
    "name": "Yokohama Bay",
+   "island": "Oahu",
+   "place": "Yokohama Bay, Oahu",
+   "slug_hint": "yokohama-bay-oahu-hi",
    "reports": 1,
-   "islands": {
-    "Oahu": 1
-   },
    "towns": [
-    "Honolulu"
+    "Makaha"
    ],
-   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
    "permits": [],
    "sources": [
     "hi-doh-cwb-events-api"

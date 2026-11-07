@@ -1,5 +1,5 @@
 id: "hi-doh-cwb-events-api"
-name: "Hawaii Department of Health water quality advisories and events (CWB portal API, eha-cloud.doh.hawaii.gov)"
+name: "Hawaii Department of Health, Clean Water Branch: water quality advisories and events (eha-cloud portal API)"
 url: "https://eha-cloud.doh.hawaii.gov/cwb/api/events"
 homepage: "https://eha-cloud.doh.hawaii.gov/cwb/"
 kind: "api"
@@ -35,7 +35,7 @@ level: "state"
 #   with a house number (removed by the ingester).
 cadence: "Posted by the Department as notices are issued (the newest, 2026-11-07 01:24 UTC, hours before the read). Median days from posting to cancellation in the newest 500: Sewage Spill 6.7 (n=50), Permit Exceedance 4.3 (n=14), Brown Water Advisory 7.9 (n=261), Beach Advisory 4.9 (n=50), Beach Notification 1.0 (n=104)."
 license: "none stated"
-attribution: "Hawaii State Department of Health"
+attribution: "Hawaii Department of Health, Clean Water Branch"
 enabled: true
 role: "events"
 event_types: ["sso", "bypass", "plant_bypass", "rain_advisory", "beach_advisory"]

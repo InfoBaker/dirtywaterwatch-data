@@ -103,11 +103,12 @@ def test_staff_fields_and_house_numbers_never_reach_a_record():
     assert HI.scrub_address("Kihei Pump Station #6 on South Kihei Road") == "Kihei Pump Station #6 on South Kihei Road"
 
 
-def test_no_field_that_reaches_a_page_title_says_safe_or_clean():
+def test_the_authority_is_named_in_full_and_no_other_title_field_says_safe_or_clean():
     # the event pages' meta descriptions carry the authority, the operator and the water (site audit-seo FORBIDDEN):
     # the Department's "Clean Water Branch" is named in raw only
     for r in build()[0]:
-        for k in ("authority", "discharger_name", "waterbody_text"):
+        assert r["authority"] == "Hawaii Department of Health, Clean Water Branch"   # the audit strips authority names
+        for k in ("discharger_name", "waterbody_text"):
             assert not re.search(r"\b(safe|clean)\b", str(r.get(k) or ""), re.I), (r["source_record_id"], k)
 
 
@@ -222,14 +223,52 @@ def test_an_open_sewage_advisory_that_leaves_the_list_is_end_not_confirmed():
     assert meta["carried"] == 1 and r["status"] == "advisory_active"
     assert r["raw"]["_unlisted_since"] == "2026-11-08T12:00:00Z" and r["raw"]["_end_not_confirmed"] is True
     ivs = S.event_intervals(r, "HI", datetime(2026, 11, 9, tzinfo=UTC), None, rules)
-    assert [(i["color"], i["rule"]) for i in ivs] == [("red", "advisory_active"), ("unresolved", "unresolved")]
-    assert ivs[0]["end"] == S.parse_time("2026-11-08T12:00:00Z")
-    assert ivs[1]["end"] == S.parse_time(r["started_at"]) + timedelta(days=30)
+    start = S.parse_time(r["started_at"])
+    assert [(i["color"], i["rule"]) for i in ivs] == [("red", "advisory_active"), ("unresolved", "unresolved"),
+                                                      ("grey", "end_never_reported")]
+    assert ivs[0]["end"] == S.parse_time("2026-11-08T12:00:00Z") and "not confirmed" in ivs[0]["ended_by"]
+    assert ivs[1]["end"] == start + timedelta(days=30)                      # unlisted on day 8: hatched to day 30
+    assert ivs[2]["end"] == start + timedelta(days=90)                      # then the end-never-reported note
     # a Brown Water Advisory that leaves the list simply ends there (no flag): other feeds' behaviour is unchanged
     b = by_id(recs)
     assert "_end_not_confirmed" not in b["2193"]["raw"]
     plain = {**r, "raw": {k: v for k, v in r["raw"].items() if k != "_end_not_confirmed"}}
     assert len(S.event_intervals(plain, "HI", datetime(2026, 11, 9, tzinfo=UTC), None, rules)) == 1
+
+
+@pytest.mark.parametrize("day", [10, 40])
+def test_an_unlisted_sewage_advisory_is_hatched_for_at_least_72_hours_even_after_day_30(day):
+    rules = S.load_rules()
+    r = by_id(build()[0])["2183"]
+    start = S.parse_time(r["started_at"])
+    gone = start + timedelta(days=day)
+    r = {**r, "raw": {**r["raw"], "_unlisted_since": gone.isoformat(), "_end_not_confirmed": True}}
+    ivs = S.event_intervals(r, "HI", gone + timedelta(days=100), None, rules)
+    assert [i["rule"] for i in ivs] == ["advisory_active", "unresolved", "end_never_reported"]
+    assert ivs[0]["end"] == gone and ivs[1]["start"] == gone and ivs[1]["color"] == "unresolved"
+    assert ivs[1]["end"] == max(start + timedelta(days=30), gone + timedelta(hours=72))
+    assert ivs[2]["end"] == start + timedelta(days=90) and ivs[2]["rule_applied"]["rationale"]
+
+
+def test_a_retest_caution_runs_until_the_department_closes_the_notice():
+    rules = S.load_rules()
+    now = datetime(2026, 11, 7, 13, tzinfo=UTC)
+    n = by_id(build()[0])["2179"]
+    sample = S.parse_time(n["started_at"])
+    assert n["raw"]["_notice_closed_at"] == n["ended_at"] == "2026-10-30T13:59:30-10:00"
+    late = {**n, "raw": {**n["raw"], "_notice_closed_at": (sample + timedelta(hours=130)).isoformat()}}
+    iv = S.event_intervals(late, "HI", now, None, rules)[0]
+    assert iv["rule"] == "sample_caution" and iv["end"] == sample + timedelta(hours=130)
+    assert iv["rule_applied"]["extended_to"]["source"] == n["source_url"] and iv["red_rule"] is None
+    early = {**n, "raw": {**n["raw"], "_notice_closed_at": (sample + timedelta(hours=30)).isoformat()}}
+    iv = S.event_intervals(early, "HI", now, None, rules)[0]
+    assert iv["end"] == sample + timedelta(hours=72) and "extended_to" not in iv["rule_applied"]
+    raw_open = {k: v for k, v in n["raw"].items() if k != "_notice_closed_at"}
+    opened = {**n, "ended_at": None, "raw": {**raw_open, "_last_seen_in_source": (sample + timedelta(days=5)).isoformat()}}
+    assert S.event_intervals(opened, "HI", now, None, rules)[0]["end"] == sample + timedelta(days=5)
+    # Nebraska's samples carry no flag: unchanged
+    plain = {**late, "raw": {k: v for k, v in late["raw"].items() if k != "_caution_to_notice_end"}}
+    assert S.event_intervals(plain, "HI", now, None, rules)[0]["end"] == sample + timedelta(hours=72)
 
 
 def test_an_outage_keeps_the_records(tmp_path):
@@ -272,6 +311,9 @@ def test_register_rows_per_operator_and_the_departments_channels():
         row = reg[f"{r['id']}-doh-cwb-report"]
         assert row["unmonitored_reason"] == "feed_ingested" and row["feed_source_id"] == HI.SOURCE_ID
         assert row["basis_kind"] == "law" and "11-62" in row["legal_basis"]
+        press, signs = reg[f"{r['id']}-press-release"], reg[f"{r['id']}-warning-signs"]
+        assert "press release" in press["legal_basis"] and press["barrier"] == "not_verified"
+        assert "warning signs" in signs["legal_basis"] and signs["barrier"] == "signs_only"
     assert reg["hi-doh-cwb-advisories"]["feed_source_id"] == HI.SOURCE_ID
     assert reg["hi-doh-cwb-spill-reports"]["urls"] == [] and reg["hi-doh-cwb-signs"]["barrier"] == "signs_only"
     dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
@@ -281,7 +323,9 @@ def test_register_rows_per_operator_and_the_departments_channels():
 def test_rules_row_and_the_retest_caution():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     hi = rules["red"]["by_state"]["HI"]
-    assert hi["hours"] is None and "11-62" in hi["source"] and "Brown Water" in hi["basis"]
+    assert hi["hours"] is None and "Appendix B" in hi["source"] and "Brown Water" in hi["basis"]
+    assert "press release" in hi["basis"] and "Virginia" in hi["rationale"] and "sample" in hi["rationale"]
+    assert hi["source"].count("Clean Water Branch") == 1
     assert not re.search(r"\b(safe|clean)\b", hi["basis"], re.I)
     assert HI.SOURCE_ID in rules["unresolved"]["sample_caution"]["sources"]
     assert "HI" not in rules["live_states"]
@@ -294,7 +338,9 @@ def test_state_text_is_in_the_page_shape():
               "Known problems in the data", "What this site does about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
-    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t
+    body = t.replace("Clean Water Branch", "")                               # the agency's name, not a verdict
+    assert not re.search(r"\b(safe|clean)\b", body, re.I) and ".json" not in t
+    assert "press release" in t and "Appendix B" in t and "whichever is later" in t
     assert not re.search(r"\b(owner|decision|coordinator)\b", t, re.I)
     assert "Brown Water Advisories" in t and "contiguous United States" in t
 
@@ -305,4 +351,8 @@ def test_missing_waters_list_leaves_out_what_the_national_list_holds():
     assert d["state"] == "HI" and d["waters"] == len(d["rows"]) and "Hilo Bay" not in names
     assert {"Kaneohe Bay", "Pearl Harbor", "Ala Wai Canal", "Lake Wilson"} <= names
     assert {s["name"] for s in d["same_name_on_islands"]} == {"Waimea Bay", "Kailua Bay"}
-    assert all(r["towns"] for r in d["rows"])
+    rows = {(r["name"], r["island"]): r for r in d["rows"]}
+    assert {("Waimea Bay", "Oahu"), ("Waimea Bay", "Kauai"), ("Kailua Bay", "Oahu"), ("Kailua Bay", "Hawaii")} <= set(rows)
+    assert rows[("Waimea Bay", "Kauai")]["towns"] == ["Waimea"] and rows[("Waimea Bay", "Oahu")]["towns"][0] == "Pupukea"
+    assert rows[("Waimea Bay", "Kauai")]["slug_hint"] == "waimea-bay-kauai-hi"
+    assert all(r["towns"] and "county seat" not in r["towns_basis"] for r in d["rows"])

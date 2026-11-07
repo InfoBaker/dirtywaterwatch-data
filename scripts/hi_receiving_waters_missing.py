@@ -5,11 +5,10 @@ Usage: pipeline/.venv/bin/python -I scripts/hi_receiving_waters_missing.py [--ev
 
 Reads the Department of Health's records as the feed wrote them (data/build/events/hi-doh-cwb-events-api.json, or
 --events): each record's raw._water_names (the waters its notice names, read by ingest/hi_doh_cwb_events.py). A name
-the national list holds for Hawaii is left out. Each row: the name, the number of records giving it, the islands and
-the records per island, towns (the towns the records give, then the operators' towns, else the island's county seat,
-with towns_basis saying which), permits, sources and the event types. The file is keyed by name, so a name two islands
-share (Waimea Bay on Oahu and on Kauai) is one row with both islands: same_name_on_islands lists them for the batch,
-which must build one record per island. Beaches and shores the Department names without a water (Kalapaki Beach Park,
+the national list holds for Hawaii is left out. One row per name and island: the name, the island and place ("Waimea
+Bay, Kauai") with a slug hint, the number of records, towns (the Census places nearest the water, by hand from its known
+place, NEAR; else the towns the notices give), permits, sources and the event types. same_name_on_islands lists the
+names on two islands: the batch must build one record per island. Beaches and shores the Department names without a water (Kalapaki Beach Park,
 North Shore) are counted in places_not_waters, not listed as rows.
 """
 from __future__ import annotations
@@ -27,6 +26,37 @@ from ingest import hi_doh_cwb_events as HI  # noqa: E402
 OUT = ROOT / "research" / "hi" / "receiving-waters-missing.json"
 EVENTS = ROOT / "data" / "build" / "events" / f"{HI.SOURCE_ID}.json"
 SEATS = {v[0]: v[1] for v in HI.ISLANDS.values()}
+# (name, island) -> the Census places (2020 places and CDPs) nearest the water, by hand from the water's known place
+# (review 2026-11-07 P2-5: the county seat is tens of kilometres off; the notices give no coordinates, so these are
+# not geocoded from them)
+NEAR = {
+    ("Waimea Bay", "Oahu"): ["Pupukea", "Haleiwa"], ("Waimea Bay", "Kauai"): ["Waimea"],
+    ("Kailua Bay", "Oahu"): ["Kailua"], ("Kailua Bay", "Hawaii"): ["Holualoa", "Kalaoa"],
+    ("Pearl Harbor", "Oahu"): ["Pearl City", "Aiea"], ("East Loch", "Oahu"): ["Pearl City", "Aiea"],
+    ("Kalauao Stream", "Oahu"): ["Aiea"], ("Kalauau Stream", "Oahu"): ["Aiea"],
+    ("Sharks Cove", "Oahu"): ["Pupukea"], ("Kahana Bay", "Oahu"): ["Punaluu", "Kaaawa"],
+    ("Kaneohe Bay", "Oahu"): ["Kaneohe"], ("Kawa Stream", "Oahu"): ["Kaneohe"],
+    ("Ahuimanu Stream", "Oahu"): ["Ahuimanu"], ("Nuupia Pond", "Oahu"): ["Kailua", "Kaneohe"],
+    ("Puha Stream", "Oahu"): ["Waimanalo"], ("Waimanalo Bay", "Oahu"): ["Waimanalo", "Waimanalo Beach"],
+    ("Pokai Bay", "Oahu"): ["Waianae"], ("Yokohama Bay", "Oahu"): ["Makaha"], ("Lake Wilson", "Oahu"): ["Wahiawa"],
+    **{(n, "Oahu"): ["Urban Honolulu"] for n in (
+        "Ala Moana Lagoon", "Ala Wai Boat Harbor", "Ala Wai Canal", "Honolulu Harbor", "Keehi Lagoon", "Kalihi Stream",
+        "Kamanaiki Stream", "Makiki Stream", "Manoa Stream", "Palolo Stream", "Wailupe Stream", "Maunalua Bay",
+        "Kuapa Pond")},
+    ("Wailua Bay", "Kauai"): ["Wailua", "Kapaa"], ("Hanalei Bay", "Kauai"): ["Hanalei", "Princeville"],
+    ("Nawiliwili Bay", "Kauai"): ["Lihue"], ("Anahola Bay", "Kauai"): ["Anahola"],
+    ("Kalihiwai Bay", "Kauai"): ["Kilauea"], ("Kukuiula Bay", "Kauai"): ["Poipu", "Koloa"],
+    ("Keoniloa Bay", "Kauai"): ["Poipu", "Koloa"], ("Hanapepe Salt Pond", "Kauai"): ["Hanapepe"],
+    ("Kahului Harbor", "Maui"): ["Kahului"], ("Kaopala Bay", "Maui"): ["Napili-Honokowai"],
+    ("Maalaea Bay", "Maui"): ["Maalaea", "Kihei"], ("Maalaea Harbor", "Maui"): ["Maalaea"],
+    ("Honolii Cove", "Hawaii"): ["Paukaa", "Hilo"], ("Puhi Bay", "Hawaii"): ["Hilo"],
+    ("Wailoa River", "Hawaii"): ["Hilo"], ("Wailuku River", "Hawaii"): ["Hilo"],
+    ("Honokohau Harbor", "Hawaii"): ["Kalaoa"], ("Kua Bay", "Hawaii"): ["Kalaoa"],
+    ("Keokea Bay", "Hawaii"): ["Hawi"], ("Honaunau Bay", "Hawaii"): ["Honaunau-Napoopoo"],
+    ("Kiilae Bay", "Hawaii"): ["Honaunau-Napoopoo"], ("Kahaluu Bay", "Hawaii"): ["Kahaluu-Keauhou"],
+    ("Puako Bay", "Hawaii"): ["Puako"], ("Pauoa Bay", "Hawaii"): ["Puako"],
+    ("Anaehoomalu Bay", "Hawaii"): ["Waikoloa Village"], ("Kawaihae Harbor", "Hawaii"): ["Kawaihae"],
+}
 
 
 def national_keys() -> set[str]:
@@ -49,8 +79,9 @@ def build(records: list[dict], checked: str) -> dict:
             if HI.key(n) in have:
                 held[n] += 1
                 continue
-            o = rows.setdefault(n, {"name": n, "reports": 0, "islands": Counter(), "towns": defaultdict(Counter),
-                                    "permits": set(), "event_types": Counter()})
+            o = rows.setdefault((n, raw.get("island") or "unknown"),
+                                {"name": n, "reports": 0, "islands": Counter(), "towns": defaultdict(Counter),
+                                 "permits": set(), "event_types": Counter()})
             o["reports"] += 1
             isl = raw.get("island") or "unknown"
             o["islands"][isl] += 1
@@ -64,33 +95,32 @@ def build(records: list[dict], checked: str) -> dict:
                 o["permits"].add(r["npdes_permit"])
             o["event_types"][r["event_type"]] += 1
     out_rows = []
-    for n, o in sorted(rows.items(), key=lambda kv: (-kv[1]["reports"], kv[0])):
-        towns, basis = [], []
-        for isl, _ in o["islands"].most_common():
-            given = [t for t, c in o["towns"][isl].most_common() if c > 0]
-            ops = [t for t, c in o["towns"][isl].most_common() if c == 0]
-            if given:
-                towns += given[:2]
-                basis.append(f"{isl}: the towns the notices give")
-            elif ops:
-                towns += ops[:1]
-                basis.append(f"{isl}: the operator's town")
-            elif isl in SEATS:
-                towns.append(SEATS[isl])
-                basis.append(f"{isl}: the island's county seat (the notices name no town)")
-        out_rows.append({"name": n, "reports": o["reports"], "islands": dict(o["islands"]),
-                         "towns": list(dict.fromkeys(towns)), "towns_basis": "; ".join(basis),
-                         "permits": sorted(o["permits"]), "sources": [HI.SOURCE_ID], "places_from": [HI.SOURCE_ID],
-                         "event_types": dict(o["event_types"])})
-    shared = [{"name": r["name"], "islands": r["islands"]} for r in out_rows if len(r["islands"]) > 1]
+    for (n, isl), o in sorted(rows.items(), key=lambda kv: (-kv[1]["reports"], kv[0])):
+        near = NEAR.get((n, isl))
+        given = [t for t, c in o["towns"][isl].most_common() if c > 0]
+        if near:
+            towns, basis = near + [t for t in given if t not in near], "the nearest Census places, by hand from the water's known place"
+        elif given:
+            towns, basis = given[:2], "the towns the notices give"
+        else:
+            towns, basis = [SEATS.get(isl, "Honolulu")], "the island's county seat (no nearer place known)"
+        out_rows.append({"name": n, "island": isl, "place": f"{n}, {isl}",
+                         "slug_hint": f"{HI.key(n).replace(' ', '-')}-{isl.lower()}-hi", "reports": o["reports"],
+                         "towns": towns, "towns_basis": basis, "permits": sorted(o["permits"]),
+                         "sources": [HI.SOURCE_ID], "places_from": [HI.SOURCE_ID], "event_types": dict(o["event_types"])})
+    names = Counter(r["name"] for r in out_rows)
+    shared = [{"name": n, "islands": {r["island"]: r["reports"] for r in out_rows if r["name"] == n}}
+              for n in sorted(names) if names[n] > 1]
     return {
         "about": ("Water names in Hawaii's reports that data/receiving-waters-national.json does not hold for HI: the "
                   f"Department of Health Clean Water Branch's advisories (the newest 500 events, read on {checked}: sewage "
                   "spills, permit exceedances, Brown Water Advisories, beach advisories and retest notices), each name as "
                   "the notices give it with diacritics and the okina folded (the feed spells a water both ways: "
                   "Kane'ohe and Kaneohe), with the number of records giving it, the islands it is named on and the towns "
-                  "near it. The notices give no coordinates. A name two islands share is one row here: build one record "
-                  "per island (same_name_on_islands); the feed places a record only on a water of its own island."),
+                  "near it. The notices give no coordinates. A name two islands share has one row per island (island, place and "
+                  "slug_hint say which): build one record each (same_name_on_islands); the feed places a record only on a "
+                  "water of its own island. The towns are the Census places nearest each water, assigned by hand from "
+                  "the water's known place (the notices give no coordinates)."),
         "state": "HI", "checked": checked, "waters": len(out_rows), "reports": sum(r["reports"] for r in out_rows),
         "held_by_national_list": dict(held), "same_name_on_islands": shared,
         "places_not_waters": {"records": places, "note": ("records whose notice names a beach, park or shore and no "
