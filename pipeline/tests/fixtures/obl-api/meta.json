@@ -1,0 +1,31 @@
+{
+ "snapshot": "20261107T025245Z",
+ "built": "2026-11-07T02:52:45+00:00",
+ "schema_version": 1,
+ "license": "ODbL-1.0",
+ "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+ "attribution": "OpenBoatLaunch and OpenStreetMap contributors",
+ "kinds": [
+  "bay",
+  "canal",
+  "lake",
+  "pond",
+  "reservoir",
+  "river",
+  "sound",
+  "stream"
+ ],
+ "geometry_tolerance_m": 17,
+ "counts": {
+  "RI": {
+   "active": 89,
+   "renamed": 0,
+   "merged": 18,
+   "deleted": 0,
+   "with_geometry": 84,
+   "with_page": 88,
+   "launches_published": 146,
+   "launches_unpublished": 5
+  }
+ }
+}

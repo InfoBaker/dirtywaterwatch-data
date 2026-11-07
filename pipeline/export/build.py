@@ -1067,10 +1067,16 @@ def obl_build_launches(state: str | None) -> dict[str, list]:
     return _OBL_BUILD[state]
 
 
+def obl_launch_row(r) -> dict | None:
+    """A launch of an openboatlaunch water record in the long keys (ingest/obl_waters.py launch: either shape)."""
+    from ingest.obl_waters import launch
+    return launch(r)
+
+
 def launches_for(water_slug: str, state: str | None = None) -> list[dict]:
     """The water's launches as objects with coordinates: the published ones from openboatlaunch's
-    out/water/<slug>.json (s slug, n name, k kind, st state, t town, x lon, y lat, f fee, a 'r' when
-    restricted), then the build data's private, commercial and other unpublished launches on the same
+    out/water/<slug>.json (the API's long keys slug, name, kind, state, town, lon, lat, fee, access, visibility;
+    or the older short keys s n k st t x y f, a 'r' when restricted), then the build data's private, commercial and other unpublished launches on the same
     water. Each has an access class, operator and website where present, and the openboatlaunch page
     as url only when the launch is published there."""
     p = status_mod.OBL_WATER_DIR / f"{water_slug}.json"
@@ -1081,16 +1087,21 @@ def launches_for(water_slug: str, state: str | None = None) -> list[dict]:
     build = {r["slug"]: r for r in obl_build_launches(state).get(water_slug, [])}
     out, seen = [], set()
     for r in rows:
-        if not isinstance(r, dict) or not r.get("s") or r["s"] in seen:
+        # openboatlaunch's long launch keys (its API, 2026-11-07) or the short ones of the older copy; a launch the API
+        # serves as "unpublished" (private, commercial, club: a point with no personal fields) is not shown from here,
+        # as before: only the build folder's records add those (the export's rule is unchanged)
+        r = obl_launch_row(r)
+        if r is None or r["slug"] in seen or r["visibility"] != "published":
             continue
-        seen.add(r["s"])
-        b = build.get(r["s"]) or {}
-        lat, lon = r.get("y"), r.get("x")
-        o = {"slug": r["s"], "name": r.get("n"), "kind": r.get("k"), "town": r.get("t"), "state": r.get("st"),
-             "water_slug": water_slug, "lat": round(float(lat), 6) if lat is not None else None,
-             "lon": round(float(lon), 6) if lon is not None else None, "fee": r.get("f"),
-             "access": b.get("access") or ("public_restricted" if r.get("a") == "r" else "public"),
-             "url": LAUNCH_URL.format(slug=r["s"])}
+        seen.add(r["slug"])
+        b = build.get(r["slug"]) or {}
+        lat, lon = r.get("lat"), r.get("lon")
+        o = {"slug": r["slug"], "name": r.get("name"), "kind": r.get("kind"), "town": r.get("town"),
+             "state": r.get("state"), "water_slug": water_slug,
+             "lat": round(float(lat), 6) if lat is not None else None,
+             "lon": round(float(lon), 6) if lon is not None else None, "fee": r.get("fee"),
+             "access": b.get("access") or r.get("access") or "public",
+             "url": LAUNCH_URL.format(slug=r["slug"])}
         for k in ("operator", "website"):
             if b.get(k):
                 o[k] = b[k]

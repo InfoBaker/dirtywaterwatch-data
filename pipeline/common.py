@@ -111,6 +111,26 @@ def stamp() -> str:
     return datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
 
 
+def gnis_num(x) -> int | None:
+    """A GNIS feature id as a number, so '00597915' (NHD's eight-digit text) and 597915 (openboatlaunch's API, from
+    Wikidata, no leading zeros) compare equal. None for no id or one that is not a number."""
+    if x is None or isinstance(x, bool):
+        return None
+    try:
+        n = int(str(x).strip())
+    except ValueError:
+        return None
+    return n if n > 0 else None
+
+
+def same_gnis(a, b) -> bool:
+    """Two GNIS ids name the same feature: equal as numbers (gnis_num), or the same non-empty text."""
+    if a in (None, "") or b in (None, ""):
+        return False
+    na, nb = gnis_num(a), gnis_num(b)
+    return na == nb if na is not None and nb is not None else str(a).strip() == str(b).strip()
+
+
 def write_json(path: Path, obj) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")

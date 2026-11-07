@@ -1,0 +1,62 @@
+name: openboatlaunch extracts
+# Daily: every live state's openboatlaunch extract (data/waters-<st>.json) rewritten from the folder the hourly refresh
+# keeps current (its API, else the R2 copy state/obl-water.tar.gz), with the slug aliases of renames and merges and the
+# tombstones of deleted and moved waters, on a branch batch/obl-<date> with a pull request listing the counts and the
+# review entries (scripts/obl_extracts.py), for a person to review and merge. Nothing is committed to main and nothing
+# is saved to R2: the build state is restored read only (the review list and the name blocklist the privacy scan
+# needs). Its own concurrency group: it reads R2 only, so it never waits on or cancels a refresh or a state batch.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 4 * * *'   # daily, outside the refresh's minute
+
+concurrency:
+  group: obl-extracts
+  cancel-in-progress: false
+
+permissions:
+  contents: write        # to push the batch branch
+  pull-requests: write   # to open or update its pull request
+
+jobs:
+  extracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip, cache-dependency-path: pipeline/requirements.txt }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: python -m venv .venv && .venv/bin/pip install -q -r requirements.txt
+        working-directory: pipeline
+      - run: npm install -g wrangler@4
+      - name: Restore pipeline state from R2 (read only here)
+        run: |
+          rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            tar -xzf build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked"; exit 1; }
+          elif [ "$rc" != 3 ]; then
+            echo "::error::state/build.tar.gz is in R2 but could not be fetched"; exit 1
+          fi
+          find data/build -name '._*' -delete 2>/dev/null || true
+      - name: openboatlaunch's water records (its API, else the last good copy in R2)
+        run: |
+          rc=0; python3 -I scripts/state_paths.py fetch-obl || rc=$?
+          if [ "$rc" != 0 ]; then
+            python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz \
+              && python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
+              || { echo "::error::no openboatlaunch folder: nothing to rewrite"; exit 1; }
+          fi
+          rm -f obl-water.tar.gz
+      - name: Rewrite the live states' extracts
+        run: pipeline/.venv/bin/python scripts/obl_extracts.py run --body data/build/obl-extracts-pr.md
+      - name: Branch and pull request (the changed extracts, for a person to review)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: pipeline/.venv/bin/python scripts/obl_extracts.py publish --body data/build/obl-extracts-pr.md

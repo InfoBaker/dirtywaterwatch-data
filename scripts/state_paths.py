@@ -20,7 +20,10 @@ Three state objects:
                            ingest.waters_from_nhd measure ties and duplicates against, ingest.obl_waters --from for a
                            state's extract, whose snapshot date it takes from out/meta.json); never saved by them.
                            Missing: a warning (the outlines are absent, as before). There but unreadable: the batch
-                           stops, the hourly refresh warns and goes on.
+                           stops, the hourly refresh warns and goes on. Since the openboatlaunch API (2026-11-07)
+                           the workflows first try fetch-obl (below) and restore this object only when the API was
+                           not used; the refresh saves the folder back here (pack-obl) whenever the API changed it,
+                           so this object is the last good copy, the fallback when the API is down.
 
 Restore order: build.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
 only after a run that ended well (a cancelled or failed refresh never overwrites the saved state). A state object
@@ -45,6 +48,26 @@ that cannot be read is replaced by the next good run's.
                                                             object, or one with no water record, writes nothing (exit
                                                             1); a record over 256 MB is skipped, an object over 8 GB
                                                             unpacked refused; never into a folder in a git checkout
+    python3 -I scripts/state_paths.py fetch-obl [--to DIR] [--force]
+                                                            openboatlaunch's national bulk file from its API
+                                                            (pipeline/obl_api.py; key in OBL_API_KEY, never printed):
+                                                            meta (ETag, a 304 most hours), then bulk/national.tar.gz
+                                                            and its .sha256, checked against both, unpacked with the
+                                                            unpack-obl rules into DIR (swapped in whole). At most one
+                                                            national pull a day (unless the changes check asked for
+                                                            one: need_full), and none while the snapshot is the
+                                                            one last pulled (data/build/obl-changes.json "national"):
+                                                            the R2 copy plus the hourly changes check
+                                                            (ingest.obl_changes) is then current. Exit 0 unpacked from
+                                                            the API; 4 the API was not used (no key, not needed, or any
+                                                            failure, said in the log): restore the R2 copy as before
+    python3 -I scripts/state_paths.py pack-obl FILE [--from DIR] [--always]
+                                                            pack DIR (water/ and meta.json, regular files only) for R2
+                                                            state/obl-water.tar.gz when the API changed it this run
+                                                            (fetch-obl or ingest.obl_changes leave the mark
+                                                            .dww-changed there); exit 0 packed, 3 nothing to save
+    python3 -I scripts/state_paths.py obl-not-saved         that pack was not uploaded: data/build/obl-changes.json's
+                                                            national pull and changes until go back to before the run
     python3 -I scripts/state_paths.py check-size FILE [--max-mb N] [--hard-mb N]
                                                             exit 1 when a tarball is over the cap; with --hard-mb,
                                                             over the cap is a warning and only over N fails
@@ -93,6 +116,10 @@ OBL_OUT = ROOT.parent / "openboatlaunch" / "out"
 OBL_RECORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*(\.[A-Za-z0-9_-]+)*\.json")
 # a water record's outline is a few MB at most (a Great Lake's): a member over OBL_MEMBER_MAX is skipped and counted,
 # and an object that unpacks to more than OBL_TOTAL_MAX in all is refused (a damaged or wrong object, never a snapshot)
+OBL_CHANGES = ROOT / "data" / "build" / "obl-changes.json"   # the API state: national pull, changes until (shared)
+OBL_MARK = ".dww-changed"          # left in OBL_OUT when the API changed the folder this run: pack-obl saves it
+OBL_NATIONAL_MIN_H = 24.0          # a national bulk pull at most once a day
+NOT_USED = 4
 OBL_MEMBER_MAX = 256 * 1024 * 1024
 OBL_TOTAL_MAX = 8 * 1024 * 1024 * 1024
 
@@ -128,6 +155,10 @@ RAW_CACHE: tuple[Entry, ...] = (
     Entry("data/raw/nws-gauges/observations.json",
           "ingest/rainfall.py gauge_check(): the airport gauges' latest observations and MRMS identify at them, per "
           "valid time, so a rerun in the same hour asks again for none of them (the unit cross-check, 2026-11-07)"),
+    Entry("data/raw/obl-api",
+          "pipeline/obl_api.py: openboatlaunch's API meta with its ETag (the hourly meta check answers 304 and needs "
+          "the body it confirms) and the state pages a state build read, with their snapshot (a second build on the "
+          "same snapshot asks again for nothing)"),
     Entry("data/raw/ri-nbc/rigis-nbc-sewer-overflows.json",
           "ingest/ri_nbc.py: the RIGIS outfall layer, refetched after 30 days"),
     Entry("data/raw/ri-ridoh-beaches/ridohgis-beaches-view.json",
@@ -396,6 +427,194 @@ def unpack_obl(src: Path, dest: Path = OBL_OUT, member_max: int = OBL_MEMBER_MAX
     return counts
 
 
+def _obl_api():
+    """pipeline/obl_api.py, loaded by its path (this script runs with -I, before the virtual environment exists)."""
+    import importlib.util
+    if "obl_api" in sys.modules:
+        return sys.modules["obl_api"]
+    spec = importlib.util.spec_from_file_location("obl_api", ROOT / "pipeline" / "obl_api.py")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["obl_api"] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def read_obl_changes(path: Path = OBL_CHANGES) -> dict:
+    try:
+        d = json.loads(Path(path).read_text())
+    except (OSError, ValueError):
+        return {}
+    return d if isinstance(d, dict) else {}
+
+
+def write_obl_changes(d: dict, path: Path = OBL_CHANGES) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(d, indent=1, ensure_ascii=False))
+    tmp.replace(path)
+
+
+def _iso_time(s) -> datetime | None:
+    try:
+        t = datetime.fromisoformat(str(s).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return t if t.tzinfo else t.replace(tzinfo=timezone.utc)
+
+
+def _swap_in(staging: Path, dest: Path) -> None:
+    """Put the unpacked staging folder at dest (the old folder removed), so a reader never sees half of each."""
+    import shutil
+    old = dest.with_name(dest.name + ".old")
+    if old.exists():
+        shutil.rmtree(old)
+    if dest.exists():
+        dest.rename(old)
+    staging.rename(dest)
+    if old.exists():
+        shutil.rmtree(old, ignore_errors=True)
+
+
+def fetch_obl(dest: Path = OBL_OUT, state_file: Path = OBL_CHANGES, force: bool = False,
+              now: datetime | None = None) -> int:
+    """The national bulk file from openboatlaunch's API into dest: FETCHED (0) or NOT_USED (4, with the reason said;
+    the workflow then restores the R2 copy). Never raises for an API failure; never prints the key."""
+    import shutil
+    import tempfile
+    api = _obl_api()
+    now = now or datetime.now(timezone.utc)
+    st0 = read_obl_changes(state_file)
+    if st0:
+        # cleared at the start, so an early return never leaves an older run's value for obl-not-saved to restore
+        st0["national_before"] = st0.get("national")
+        write_obl_changes(st0, state_file)
+    if not api.key():
+        say("openboatlaunch API: no OBL_API_KEY here; the R2 copy is restored instead")
+        return NOT_USED
+    dest = Path(dest)
+    if (repo := in_git_checkout(dest)) is not None:
+        say(f"openboatlaunch API: {dest} is in a git checkout ({repo.name}): not written over; the R2 copy is used")
+        return NOT_USED
+    try:
+        m = api.meta()
+    except api.ApiError as ex:
+        print(f"::warning::openboatlaunch API meta could not be read ({ex}); the R2 copy is restored instead", flush=True)
+        return NOT_USED
+    snap = m.get("snapshot")
+    st = read_obl_changes(state_file)
+    last = st.get("national") if isinstance(st.get("national"), dict) else {}
+    when = _iso_time(last.get("fetched_at")) if last else None
+    full = bool(st.get("need_full"))               # ingest.obl_changes: the change history did not reach (410)
+    if not force and not full and last.get("snapshot") == snap and (dest / "water").is_dir():
+        say(f"openboatlaunch API: snapshot {snap} is the one pulled at {last.get('fetched_at')}; the folder is current")
+        return NOT_USED
+    if not force and not full and last.get("snapshot") == snap:
+        say(f"openboatlaunch API: snapshot {snap} is the one pulled at {last.get('fetched_at')} and saved to R2; "
+            "the R2 copy is restored")
+        return NOT_USED
+    if not force and not full and when is not None and (now - when).total_seconds() < OBL_NATIONAL_MIN_H * 3600:
+        say(f"openboatlaunch API: snapshot {snap} is newer than the one pulled at {last.get('fetched_at')}, but the "
+            f"national file is pulled at most once a day; the R2 copy is restored and the hourly changes check brings "
+            "it up to date")
+        return NOT_USED
+    if full:
+        say("openboatlaunch API: the changes check asked for a full pull (need_full): the national file is pulled")
+    nat = ((m.get("bulk") or {}).get("national") or {})
+    want = str(nat.get("sha256") or "").lower()
+    try:
+        path = api.path_of(nat.get("url") or "bulk/national.tar.gz")
+    except api.ApiError as ex:
+        print(f"::warning::openboatlaunch API: {ex}; the R2 copy is restored instead", flush=True)
+        return NOT_USED
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    work = Path(tempfile.mkdtemp(prefix=".obl-fetch-", dir=dest.parent))
+    try:
+        tgz = work / "national.tar.gz"
+        a = api.get(path, stream_to=tgz, accept_json=False, timeout=600)
+        if a.status != 200:
+            raise api.ApiError(f"{path}: HTTP {a.status}")
+        side = api.get(path + ".sha256", accept_json=False)
+        if side.status != 200:
+            raise api.ApiError(f"{path}.sha256: HTTP {side.status}")
+        stated = (side.body.decode("ascii", "replace").split() or [""])[0].lower()
+        if not re.fullmatch(r"[0-9a-f]{64}", stated):
+            raise api.ApiError(f"{path}.sha256 holds no sha256")
+        if a.sha256 != stated or (want and a.sha256 != want):
+            raise api.ApiError(f"{path}: sha256 does not match its .sha256 file or meta; not unpacked")
+        staging = work / "out"
+        counts = unpack_obl(tgz, staging)
+        try:
+            got = json.loads((staging / "meta.json").read_text()).get("snapshot")
+        except (OSError, ValueError, AttributeError):
+            got = None
+        if got and got != snap:
+            say(f"openboatlaunch API: the bulk file is snapshot {got}, meta said {snap} (replaced between the two "
+                "requests); the bulk file's is used")
+        (staging / OBL_MARK).write_text(now.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        _swap_in(staging, dest)
+    except (api.ApiError, Unreadable, OSError) as ex:
+        print(f"::warning::openboatlaunch API national file not used ({api.scrub(str(ex))}); the R2 copy is restored "
+              "instead", flush=True)
+        return NOT_USED
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+    st = read_obl_changes(state_file)
+    st["national"] = {"snapshot": got or snap, "built": m.get("built"), "fetched_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                      "bytes": a.size, "sha256": a.sha256, "records": counts["records"]}
+    if st.pop("need_full", None):
+        st["full_pulled"] = True                   # ingest.obl_changes then rewrites every live state from it
+    write_obl_changes(st, state_file)
+    say(f"openboatlaunch API: national snapshot {got or snap} ({mb(a.size)}, sha256 checked), {counts['records']} "
+        f"record(s) unpacked into {dest.name}/")
+    return FETCHED
+
+
+def pack_obl(out: Path, src: Path = OBL_OUT, always: bool = False) -> int:
+    """Pack src's water/ and meta.json (regular files) into out for R2 when the API changed it this run (the mark),
+    or always. FETCHED (0) packed, ABSENT (3) nothing to save."""
+    src = Path(src)
+    if not (src / "water").is_dir() or not (always or (src / OBL_MARK).exists()):
+        say("openboatlaunch folder unchanged by the API this run (or absent): state/obl-water.tar.gz is not saved")
+        return ABSENT
+
+    def regular(ti: tarfile.TarInfo):
+        if not (ti.isfile() or ti.isdir()) or any(x.startswith("._") for x in PurePosixPath(ti.name).parts):
+            return None
+        ti.uid = ti.gid = 0
+        ti.uname = ti.gname = ""
+        return ti
+
+    tmp = Path(out).with_name(Path(out).name + ".part")
+    with tarfile.open(tmp, "w:gz", compresslevel=6) as tf:
+        tf.add(src / "water", arcname="water", recursive=True, filter=regular)
+        if (src / "meta.json").is_file():
+            tf.add(src / "meta.json", arcname="meta.json", filter=regular)
+    tmp.replace(out)
+    say(f"openboatlaunch folder packed for R2: {mb(Path(out).stat().st_size)}")
+    return FETCHED
+
+
+def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
+    """The folder the API changed this run could not be saved to R2: put the national pull and the changes' until
+    back to where they were before this run (data/build/obl-changes.json "national_before", "until_before"), so the
+    next run, restoring the older R2 copy, pulls and asks for those changes again. Exit 0."""
+    if not (Path(src) / OBL_MARK).exists():
+        return 0
+    st = read_obl_changes(state_file)
+    if not st:
+        return 0
+    if "national_before" in st:
+        st["national"] = st.pop("national_before")
+    if "until_before" in st:
+        st["until"] = st.pop("until_before")
+        st.pop("etag", None)
+    write_obl_changes(st, state_file)
+    print("::warning::the openboatlaunch folder changed by the API was not saved to R2; the next run pulls those "
+          "changes again", flush=True)
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -411,6 +630,17 @@ def main(argv=None) -> int:
     s = sub.add_parser("unpack-obl")
     s.add_argument("file")
     s.add_argument("--to", default=str(OBL_OUT), help="openboatlaunch's out folder (default ../openboatlaunch/out)")
+    s = sub.add_parser("fetch-obl")
+    s.add_argument("--to", default=str(OBL_OUT), help="openboatlaunch's out folder (default ../openboatlaunch/out)")
+    s.add_argument("--force", action="store_true", help="pull the national file even if pulled today")
+    s.add_argument("--state-file", default=str(OBL_CHANGES), help="the API state (default data/build/obl-changes.json)")
+    s = sub.add_parser("pack-obl")
+    s.add_argument("file")
+    s.add_argument("--from", dest="src", default=str(OBL_OUT))
+    s.add_argument("--always", action="store_true")
+    s = sub.add_parser("obl-not-saved")
+    s.add_argument("--state-file", default=str(OBL_CHANGES))
+    s.add_argument("--from", dest="src", default=str(OBL_OUT))
     s = sub.add_parser("fetch")
     s.add_argument("key")
     s.add_argument("file")
@@ -428,6 +658,12 @@ def main(argv=None) -> int:
         except ValueError as ex:
             print(f"::error::{ex}", flush=True)
             return 2
+    if a.cmd == "fetch-obl":
+        return fetch_obl(Path(a.to), Path(a.state_file), force=a.force)
+    if a.cmd == "obl-not-saved":
+        return obl_not_saved(Path(a.state_file), Path(a.src))
+    if a.cmd == "pack-obl":
+        return pack_obl(Path(a.file), Path(a.src), a.always)
     if a.cmd == "unpack-obl":
         try:
             unpack_obl(Path(a.file), Path(a.to))

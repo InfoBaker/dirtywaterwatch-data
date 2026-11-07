@@ -184,7 +184,7 @@ from shapely.ops import linemerge, unary_union
 from shapely.strtree import STRtree
 
 from build import status as S
-from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, now_iso, read_json, write_json
+from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, gnis_num, now_iso, same_gnis, read_json, write_json
 from ingest import waters_extra as WX
 
 NLDI_HYDROLOCATION = "https://api.water.usgs.gov/nldi/linked-data/hydrolocation"
@@ -1974,6 +1974,8 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
     waters = list(doc.get("waters") or [])
     taken = set(existing) | {w["slug"] for w in waters if w.get("slug")}
     moved: dict[str, tuple[str, str, str]] = {}      # NHD slug -> (new slug, action, why)
+    by_gnis = {(str(e.get("state") or "").upper(), gnis_num(e.get("gnis_id"))): sl for sl, e in existing.items()
+               if isinstance(e, dict) and gnis_num(e.get("gnis_id")) and not e.get("extra")}
     aliases: dict[str, list[str]] = {}
     keep = []
     by_slug_rows = defaultdict(list)
@@ -1987,16 +1989,21 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
         if w["slug"] in KEEP_NHD_RECORD:
             keep.append(w)
             rest = [r for r in waters if r.get("covers_part_of") == w["slug"] and r.get("state") == w.get("state")
-                    and r.get("gnis_id") and r.get("gnis_id") == w.get("gnis_id")]
+                    and same_gnis(r.get("gnis_id"), w.get("gnis_id"))]
             if w["slug"] in existing and len(rest) == 1:
                 moved[w["slug"]] = (rest[0]["slug"], "kept", f"{KEEP_NHD_RECORD[w['slug']]}; its rows go to "
                                     f"{rest[0]['slug']}, the NHD record of the rest of the river")
             continue
         g = shape(w["geometry"])
-        same = same_named_existing(existing, w["state"], w.get("name"))
-        if w["slug"] in existing and w["slug"] not in same:
-            same.append(w["slug"])
-        s, why = existing_same_water(g, w.get("towns") or [], existing, same)
+        gs = by_gnis.get((str(w.get("state") or "").upper(), gnis_num(w.get("gnis_id"))))
+        if gs:
+            # the same GNIS feature (openboatlaunch's API carries GNIS ids from Wikidata, without NHD's leading zeros)
+            s, why = gs, f"the same GNIS feature ({gnis_num(w.get('gnis_id'))})"
+        else:
+            same = same_named_existing(existing, w["state"], w.get("name"))
+            if w["slug"] in existing and w["slug"] not in same:
+                same.append(w["slug"])
+            s, why = existing_same_water(g, w.get("towns") or [], existing, same)
         if s:
             ew = existing[s]
             have = {S.norm_name(ew.get("name") or "")} | {S.norm_name(a) for a in ew.get("aliases") or []}

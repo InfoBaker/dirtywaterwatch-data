@@ -23,7 +23,9 @@ the pull request that carries the changed registry files to a person for review.
                                           the caches each time) and open the pull request, or update the open one
 
 Steps (--steps, space- or comma-separated; run in this order whatever order they are given in):
-  extract    python -m ingest.obl_waters --state <ST> --from <obl-dir> --out ../data/waters-<st>.json (from pipeline/):
+  extract    python -m ingest.obl_waters --state <ST> [--from-api] --from <obl-dir> --out ../data/waters-<st>.json:
+             with OBL_API_KEY set, the state's records from openboatlaunch's API (states/{ST}/waters, paged; the
+             folder below is the fallback when the API cannot be read), else
              the state's openboatlaunch water records from the snapshot the workflows restore from R2
              (state/obl-water.tar.gz, scripts/state_paths.py unpack-obl, into ../openboatlaunch/out beside the
              checkout); the snapshot date comes from its out/meta.json. Refused at run time, before anything is
@@ -283,7 +285,10 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
                 raise Refused(f"extract: data/waters-{st.lower()}.json is another file (not {st}'s openboatlaunch "
                               "extract, e.g. a leftover New England regional file), which the extract "
                               "would overwrite; that state's extract needs another file name first")
-            cmds.append(Cmd(s, [py, "-m", "ingest.obl_waters", "--state", st, "--from", water_arg,
+            # with the API key here, the state's list from openboatlaunch's API (states/{ST}/waters, paged), the
+            # restored folder the fallback; without it, the folder
+            api = ["--from-api"] if os.environ.get("OBL_API_KEY") else []
+            cmds.append(Cmd(s, [py, "-m", "ingest.obl_waters", "--state", st, *api, "--from", water_arg,
                                 "--out", f"../data/waters-{st.lower()}.json"], cwd="pipeline"))
         elif s == "obl-check":
             cmds.append(Cmd(s, [py, "scripts/state_batch.py", "obl-check", "--state", st]))
@@ -327,7 +332,10 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
 def extract_ready(obl_dir: Path | None, state: str | None = None, root: Path = ROOT) -> tuple[bool, str]:
     """Whether the extract step can run: the snapshot folder is here, its out/meta.json gives a date, and (with state)
     it holds the state's records: none, or fewer than half the records of the extract on file, is a partial snapshot,
-    which would empty or cut data/waters-<st>.json."""
+    which would empty or cut data/waters-<st>.json. With OBL_API_KEY set the extract reads openboatlaunch's API
+    (ingest.obl_waters --from-api refuses a partial answer itself), so only the state code matters here."""
+    if os.environ.get("OBL_API_KEY"):
+        return True, ""
     if obl_dir is None or not Path(obl_dir).is_dir():
         return False, ("extract: no openboatlaunch snapshot (out/water) beside the checkout or at --obl-dir: "
                        f"{OBL_KEY} is not in R2 (or was not restored). Upload it once from a "
@@ -644,16 +652,18 @@ def other_changes(st: str, root: Path = ROOT) -> list[str]:
     return sorted({ln[3:].strip() for ln in (out or "").splitlines()} - keep)
 
 
-BATCH_BRANCH = re.compile(r"batch/[a-z]{2}-\d{4}-\d{2}-\d{2}")
+BATCH_BRANCH = re.compile(r"batch/([a-z]{2}|obl)-\d{4}-\d{2}-\d{2}")      # obl: scripts/obl_extracts.py
 
 
-def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh") -> dict:
-    branch = f"batch/{st.lower()}-{date}"
+def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh", label: str | None = None,
+                 pr_title: str | None = None) -> dict:
+    branch = f"batch/{(label or st).lower()}-{date}"
     # the push replaces the branch (--force): only ever a batch branch of this pattern, never main or another
     if not BATCH_BRANCH.fullmatch(branch):
         raise Refused(f"not a batch branch name: {branch!r}")
     who = ["-c", f"user.name={BOT[0]}", "-c", f"user.email={BOT[1]}"]
-    msg = f"{title(st, date)}: {', '.join(files)}"
+    ttl = pr_title or title(st, date)
+    msg = f"{ttl}: {', '.join(files)}"
     return {
         "branch": branch,
         "commit": [["git", "checkout", "-B", branch],
@@ -661,8 +671,8 @@ def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh
                    ["git", *who, "commit", "-m", msg],
                    ["git", "push", "--force", "origin", f"HEAD:refs/heads/{branch}"]],
         "find": [gh, "pr", "list", "--head", branch, "--state", "open", "--json", "number", "--jq", ".[0].number"],
-        "edit": lambda n: [gh, "pr", "edit", str(n), "--title", title(st, date), "--body-file", str(body)],
-        "create": [gh, "pr", "create", "--base", "main", "--head", branch, "--title", title(st, date),
+        "edit": lambda n: [gh, "pr", "edit", str(n), "--title", ttl, "--body-file", str(body)],
+        "create": [gh, "pr", "create", "--base", "main", "--head", branch, "--title", ttl,
                    "--body-file", str(body)],
     }
 
@@ -737,7 +747,8 @@ def _patterns(root: Path):
     return EMAIL_RE, PHONE_RE, (BlockScan(names) if names else None)
 
 
-def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT) -> int:
+def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT,
+         files: list[str] | None = None) -> int:
     """Exit 1 when a string new in the changed files (or a line of the texts) has an e-mail address or phone number
     shape or a blocklisted name; prints the file and the place, never the string."""
     email, phone, block = _patterns(root)
@@ -757,7 +768,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
             hits += 1
             print(f"::error::{where}: {k}", flush=True)
 
-    files = changed_files(valid_state(st, root), root)
+    files = changed_files(valid_state(st, root), root) if files is None else files
     for f in files:
         try:
             new = json.loads((root / f).read_text())
