@@ -36,8 +36,10 @@ over 25.4 inches) decides when it has a verdict, but cannot make values over the
 determined (rainfall.json mrms.units_last_determined); before any, the stated inches. Millimetres are divided by
 25.4 before anything uses them; rainfall.json mrms.units (and each reading's units_read) records the unit, the
 basis and the evidence; the identify check compares in the same unit. Point readings stored before the check are
-dropped and reread. The history's readings stored before it are rescaled once (repair_history_units, by any run or
-by --repair-units; the history then carries units_checked and units_repair).
+dropped and reread. The history's readings stored before it are rescaled once, every stored hour as millimetres
+(repair_history_units, by any run or by --repair-units; the history then carries units_checked, repair 2, and
+units_repair; a history the first version checked, which kept the hours before its first evidence, gets them rescaled
+by repair_second_pass).
 
     python -m ingest.rainfall --repair-units     only the history repair (a second run changes nothing)
 
@@ -126,9 +128,12 @@ GAUGES = {"KPVD": (41.72, -71.43), "KBOS": (42.36, -71.01), "KBDL": (41.94, -72.
 GAUGE_FIELDS = ((6, "precipitationLast6Hours"), (3, "precipitationLast3Hours"), (1, "precipitationLastHour"))
 GAUGE_MIN_MM = 2.0             # a gauge with less in the window gives no verdict
 GAUGE_IDENTIFY_MAX = 4         # identify calls a run for the gauge check (the wettest gauges)
-GAUGE_EARLY, GAUGE_LATE = timedelta(minutes=20), timedelta(minutes=5)   # an observation this close to the valid time
+GAUGE_EARLY = timedelta(minutes=20)   # observations from this long before the valid time up to it (an observation after
+                                      # it, a special report, counts only from the routine report a few minutes before)
+GAUGE_SETTLE = timedelta(minutes=20)  # observations fetched this long after the valid time are kept for it (the routine
+                                      # report at :51 to :56 reaches api.weather.gov some minutes later)
+GAUGE_TIMEOUT_S = 20                  # one attempt per station; the first failure skips the others (the run goes on)
 GAUGE_RATIO_MM = (0.4, 2.5)    # MRMS / gauge in this range: millimetres; the same over 25.4: inches
-GAUGE_OBS_LIMIT = 6
 GAUGE_CACHE = RAW_DIR / "nws-gauges" / "observations.json"
 # Readings known to be millimetres before the check (repair_history_units): the unit from then on, until the bound
 # says otherwise, is millimetres (the last unit determined).
@@ -138,6 +143,7 @@ KNOWN_MM_AT = {
                             "4.6 at three points, box maximum 7.3, where IEM's MRMS daily rainfall at 45.12, -67.38 is "
                             "0.02 in for 2026-11-02 and 0.22 in for 2026-11-03: millimetres",
 }
+REPAIR_VERSION = 2             # 1: hours before the first evidence kept as inches; 2: every stored hour millimetres
 BASELINE_REQUESTS_PER_HOUR = 384   # 319 identify + 196 forecast cells / 3 (2026-11-02, before the grid)
 FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails
 LOOKUP_MAX = 100               # new NWS /points lookups a run
@@ -377,17 +383,19 @@ def trim_observations(d: dict) -> list[dict]:
 
 
 def gauge_window(obs: list[dict], valid_time: datetime) -> dict | None:
-    """The observation closest to the MRMS valid time (from GAUGE_EARLY before to GAUGE_LATE after) and its
-    longest window with at least GAUGE_MIN_MM: {obs_time, hours, gauge_mm}; None when no gauge rain."""
-    near = [(abs((parse_t(o["t"]) - valid_time).total_seconds()), o) for o in obs if parse_t(o.get("t"))
-            and valid_time - GAUGE_EARLY <= parse_t(o["t"]) <= valid_time + GAUGE_LATE]
-    if not near:
-        return None
-    o = min(near, key=lambda x: x[0])[1]
+    """The gauge's amount for the window ending near the MRMS valid time: of the observations from GAUGE_EARLY before
+    the valid time up to it, the longest window with at least GAUGE_MIN_MM, taking the largest value of that window
+    (the routine report; a special report before it holds the amount since the last routine one, a little less, and
+    rows without precipitation, such as the five-minute rows, are passed over): {obs_time, hours, gauge_mm}; None when
+    no gauge rain. Observations after the valid time are left out: a special report there holds only the minutes
+    since the routine report (review 2026-11-07)."""
+    near = [o for o in obs if parse_t(o.get("t")) and valid_time - GAUGE_EARLY <= parse_t(o["t"]) <= valid_time]
     for h, _ in GAUGE_FIELDS:
-        v = o.get(f"h{h}")
-        if v is not None and v >= GAUGE_MIN_MM:
-            return {"obs_time": o["t"], "hours": h, "gauge_mm": v}
+        vals = [(o[f"h{h}"], o["t"]) for o in near if o.get(f"h{h}") is not None]
+        if vals:
+            v, t = max(vals)
+            if v >= GAUGE_MIN_MM:
+                return {"obs_time": t, "hours": h, "gauge_mm": v}
     return None
 
 
@@ -409,8 +417,9 @@ def gauge_verdict(pairs: list[dict]) -> dict:
 
 
 def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
-    """Once a run: the latest observations of the GAUGES inside the box (kept in GAUGE_CACHE, refetched when
-    fetched before the valid time's window closed), and MRMS identify at the wettest (at most GAUGE_IDENTIFY_MAX,
+    """Once a run: the observations of the GAUGES inside the box from GAUGE_EARLY before the valid time to it (kept in
+    GAUGE_CACHE per valid time, refetched when fetched less than GAUGE_SETTLE after it; one attempt each, and the
+    first failure skips the stations left, so api.weather.gov being down costs one timeout), and MRMS identify at the wettest (at most GAUGE_IDENTIFY_MAX,
     kept per valid time) where a gauge had at least GAUGE_MIN_MM: {verdict, ratio, ..., pairs, fetched}."""
     vt = parse_t(valid_time)
     cache = read_json(GAUGE_CACHE, {}) or {}
@@ -420,16 +429,23 @@ def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
     if not inside:
         return {"verdict": None, "text": "skipped: no gauge of the list in the box", "valid_time": valid_time,
                 "gauges_in_box": [], "fetched": 0, "errors": {}, "pairs": []}
-    fetched, errors, wet = 0, {}, []
+    fetched, errors, wet, down = 0, {}, [], False
     for st in inside:
         c = obs_c.get(st) or {}
-        if not (parse_t(c.get("fetched_at")) and parse_t(c["fetched_at"]) >= vt + GAUGE_LATE):
+        if not (c.get("valid_time") == valid_time and parse_t(c.get("fetched_at"))
+                and parse_t(c["fetched_at"]) >= vt + GAUGE_SETTLE):
+            if down:
+                errors[st] = "skipped: api.weather.gov failed for an earlier station this run"
+                continue
             try:
-                d = nws_get(session, f"{NWS}/stations/{st}/observations?limit={GAUGE_OBS_LIMIT}")
-                c = obs_c[st] = {"fetched_at": iso(now), "observations": trim_observations(d)}
+                r = session.get(f"{NWS}/stations/{st}/observations", headers=NWS_HEADERS, timeout=GAUGE_TIMEOUT_S,
+                                params={"start": iso(vt - GAUGE_EARLY), "end": iso(vt)})
+                r.raise_for_status()
+                c = obs_c[st] = {"valid_time": valid_time, "fetched_at": iso(now), "observations": trim_observations(r.json())}
                 fetched += 1
             except Exception as e:  # noqa: BLE001
                 errors[st] = f"{type(e).__name__}: {e}"[:200]
+                down = True
                 continue
         w = gauge_window(c.get("observations") or [], vt)
         if w:
@@ -747,25 +763,56 @@ def update_history(hist: dict | None, permits: dict[str, dict], now: datetime) -
            "units": "inches: the largest NOAA MRMS radar-only 24-hour total over the permittee's outfall points, "
                     "for the 24 hours ending at each hour (UTC); the service's values converted from millimetres "
                     "when they are millimetres (rainfall.json mrms.units)",
-           "units_checked": old.get("units_checked") or {"from": iso(hour_floor(now)), "rule": UNIT_RULE},
+           "units_checked": old.get("units_checked") or {"from": iso(hour_floor(now)), "rule": UNIT_RULE,
+                                                          "repair": REPAIR_VERSION},
            "source": MRMS_URL, "permits": series}
     if old.get("units_repair"):
         out["units_repair"] = old["units_repair"]
     return out
 
 
+def repair_second_pass(hist: dict, now: datetime) -> tuple[dict, dict]:
+    """A history the first repair (version 1) checked kept the hours before its first millimetre hour as inches; every
+    answer of the service seen is millimetres (review 2026-11-07, P1-1), so those hours are rescaled now: every value
+    before the first range the first repair rescaled (or, when it rescaled none, before the check), and never within
+    50 hours of the check (a later reading's earlier windows are filled up to 48 hours back)."""
+    chk, rep1 = hist["units_checked"], hist.get("units_repair") or {}
+    start, frm = parse_t(hist.get("start")), parse_t(chk.get("from"))
+    chk["repair"] = REPAIR_VERSION
+    if start is None or frm is None or not rep1.get("hours_kept_as_inches"):
+        return hist, {"changed": False, "reason": "second pass: nothing kept as inches"}
+    ranges = rep1.get("ranges") or []
+    cut = min([t for t in [parse_t(ranges[0][0]) if ranges else None] if t] + [frm - timedelta(hours=50)])
+    n_cut = int((hour_floor(cut) - start).total_seconds() // 3600)
+    hours, values = set(), 0
+    for a in hist["permits"].values():
+        for i in range(min(n_cut, len(a))):
+            if a[i] is not None:
+                a[i] = round(a[i] / MM_PER_IN, 2)
+                hours.add(i)
+                values += 1
+    report = {"changed": bool(values), "at": iso(now), "hours_rescaled": len(hours), "values_rescaled": values,
+              "before": iso(cut), "rule": "every hour stored before the first millimetre hour is millimetres too: no "
+                                          "answer of the service has been seen in inches"}
+    rep1["second_pass"] = report
+    hist["units_repair"] = rep1
+    return hist, report
+
+
 def repair_history_units(hist: dict | None, now: datetime, known: dict | None = None) -> tuple[dict | None, dict]:
-    """Readings stored before the unit check (a history without units_checked) are rescaled to inches hour by hour
-    with the reader's rule: an hour whose largest value (over every permittee) is over the 24-hour bound is
-    millimetres; an hour at or after a reading known to be millimetres (KNOWN_MM_AT) is too; any other hour takes
-    the unit last determined before it, and before any, the service's stated inches (kept). Every value of a
-    millimetre hour (the hourly maxima and the earlier windows filled from the 48 and 72-hour totals alike) is
-    divided by 25.4. Returns (history, report); the history then carries units_checked and units_repair (what was
-    changed), so a second run changes nothing."""
+    """Readings stored before the unit check (a history without units_checked) are rescaled to inches: every hour is
+    millimetres (no answer of the service has been seen in inches; review 2026-11-07, P1-1). The hours over the
+    24-hour bound and the readings known to be millimetres (KNOWN_MM_AT) are recorded as the evidence. Every value
+    (the hourly maxima and the earlier windows filled from the 48 and 72-hour totals alike) is divided by 25.4. A
+    history the first version checked (units_checked without repair 2) gets repair_second_pass. Returns (history,
+    report); the history then carries units_checked (repair 2) and units_repair (what was changed), so a second run
+    changes nothing."""
     known = KNOWN_MM_AT if known is None else known
     if not hist or not hist.get("permits"):
         return hist, {"changed": False, "reason": "no history"}
     if hist.get("units_checked"):
+        if (hist["units_checked"].get("repair") or 1) < REPAIR_VERSION:
+            return repair_second_pass(hist, now)
         return hist, {"changed": False, "reason": f"already checked (inches from {hist['units_checked'].get('from')})",
                       "units_repair": hist.get("units_repair")}
     start = parse_t(hist.get("start"))
@@ -774,7 +821,7 @@ def repair_history_units(hist: dict | None, now: datetime, known: dict | None = 
     series = hist["permits"]
     n = max(len(a) for a in series.values())
     known_i = sorted((int((hour_floor(parse_t(t)) - start).total_seconds() // 3600), t) for t in known if parse_t(t))
-    unit = "mm" if any(i <= 0 for i, _ in known_i) else None
+    unit = "mm"
     mm_hours, kept, bound_hours, values, ranges = [], 0, [], 0, []
     max_before = max_after = None
     for i in range(n):
@@ -809,10 +856,10 @@ def repair_history_units(hist: dict | None, now: datetime, known: dict | None = 
               "hours_over_bound": len(bound_hours), "first_hour_over_bound": at(bound_hours[0]) if bound_hours else None,
               "largest_before": max_before, "largest_after": max_after, "bound_in": UNIT_BOUND_IN[24],
               "evidence": {t: known[t] for _, t in known_i}, "last_unit": unit or "in",
-              "rule": "an hour whose largest value is over the bound, or at or after a reading known to be "
-                      "millimetres, is millimetres; else the unit last determined; else the stated inches"}
+              "rule": "every hour stored before the check is millimetres: no answer of the service has been seen in "
+                      "inches (the hours over the bound and the readings known to be millimetres are the evidence)"}
     hist["units_repair"] = report
-    hist["units_checked"] = {"from": iso(hour_floor(now)), "rule": UNIT_RULE}
+    hist["units_checked"] = {"from": iso(hour_floor(now)), "rule": UNIT_RULE, "repair": REPAIR_VERSION}
     return hist, report
 
 
