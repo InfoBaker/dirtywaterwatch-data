@@ -1614,7 +1614,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     cov = coverage_mod.coverage(
         csv_events, tracked, feeds, reg_rows, dis, status_mod.load_rules(), st.get("now"),
         rain_states=rain_caution_states(rain_block), notification_pages=coverage_mod.load_notification_pages(),
-        register=coverage_mod.load_register())
+        register=coverage_mod.load_register(),
+        # the level of each feed's registry rows, from the whole registry (EPA's national row is not a live row)
+        source_levels={sid: sorted({str((registry.get(rid) or {}).get("level") or "") for rid in h.get("registry_ids") or []}
+                                   - {""}) for sid, h in health.items()})
     cov["states"] = {k: v for k, v in (cov.get("states") or {}).items() if k in status_mod.states()}   # live only
     write_compact(OUT_DIR / "coverage.json", {"built": now_iso(), "status_now": st.get("now"), **cov})
 

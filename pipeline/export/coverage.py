@@ -130,11 +130,19 @@ def state_name(st: str) -> str:
     return STATE_NAMES.get(st, st)
 
 
-def grade_of(st: str, f: dict, as_of: datetime) -> tuple[str, str]:
-    """(grade, sentence) from a state's figures (the site's gradeOf)."""
+FEDERAL_PUBLISHER = "the U.S. Environmental Protection Agency"
+
+
+def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[str, str]:
+    """(grade, sentence) from a state's figures (the site's gradeOf). federal: every dated report of the state comes
+    from a feed whose registry rows are all federal (EPA's eRule tables): the state publishes no list of its own, so
+    the sentence says who does (2026-11-07 Mississippi final audit: "Mississippi publishes dated overflow reports"
+    stood above the state text's "The Department publishes no list")."""
     name = state_name(st)
     Name = "The District of Columbia" if name.startswith("District") else name
     in_name = "the District of Columbia" if st == "DC" else name
+    by = (f"{Name}'s operators' overflow reports are published by {FEDERAL_PUBLISHER}, days to weeks after the event"
+          if federal else None)
     if f["records_12m"] == 0:
         return "No public reports", (f"{Name} publishes no sewage overflow reports we can read; the map shows no "
                                      "discharges there because none are reported, not because none happen.")
@@ -143,9 +151,10 @@ def grade_of(st: str, f: dict, as_of: datetime) -> tuple[str, str]:
     lag = f.get("lag_days")
     if (f.get("dated_share") or 0) > DATED_OVER:
         if fresh and (lag is None or lag <= LAG_OK_DAYS):
-            return "Dated reports", f"{Name} publishes dated overflow reports; the newest is from {day_text(latest)}."
+            return "Dated reports", (f"{by}; the newest is from {day_text(latest)}." if by else
+                                     f"{Name} publishes dated overflow reports; the newest is from {day_text(latest)}.")
         return "Dated reports, delayed", (
-            f"{Name} publishes dated reports" + (f", but the newest is from {day_text(latest)}" if latest else "")
+            (by or f"{Name} publishes dated reports") + (f", but the newest is from {day_text(latest)}" if latest else "")
             + (f" and reports typically appear {round(lag)} days after a discharge" if lag is not None and lag > LAG_OK_DAYS else "")
             + f"; a quiet map in {in_name} can mean a report has not appeared yet.")
     if f["monthly_share"] >= f["annual_share"] and f["monthly_share"] > 0:
@@ -310,10 +319,13 @@ def load_notification_pages(path=None) -> dict | None:
 
 def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict], dischargers: list[dict], rules: dict,
              as_of, rain_states: dict | None = None, source_names: dict | None = None,
-             notification_pages: dict | None = None, register: dict | None = None) -> dict:
+             notification_pages: dict | None = None, register: dict | None = None,
+             source_levels: dict | None = None) -> dict:
     """out/coverage.json: {built_from, as_of, definitions, states: {ST: {...}}, waters: {slug: {...}},
     rain_caution_states}. events: the public records (with `state`, `superseded`, `duplicate_of`); waters: the tracked
-    water rows (slug, state, events); feeds and registry: out/sources.json's; rain_states: rain_caution_states."""
+    water rows (slug, state, events); feeds and registry: out/sources.json's; rain_states: rain_caution_states;
+    source_levels: {source_id: [the levels of its registry rows]} over the whole registry (a national row such as
+    EPA's eRule tables, states ["US"], is not among the live rows of out/sources.json)."""
     from export import csv as csv_mod
     now = status_mod.parse_time(as_of) or datetime.now(UTC)
     start = now - timedelta(days=365)
@@ -356,7 +368,9 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         ids = sorted({e.get("source_id") for e in evs} | {sid for sid in sewage_feeds if st in feed_states.get(sid, [])})
         own = {sid for sid in sewage_feeds if st in feed_states.get(sid, [])}
         f = _figures(evs, firsts_state.get(st, []), own, cadence, names, ids)
-        grade, sentence = grade_of(st, f, now)
+        dated = {e.get("source_id") for e in evs if is_dated(e)}
+        federal = bool(dated) and all(set((source_levels or {}).get(s) or []) == {"federal"} for s in dated)
+        grade, sentence = grade_of(st, f, now, federal=federal)
         states[st] = {"code": st, "name": state_name(st), "duty": duty_sentence(rules, st), **f, "grade": grade,
                       "sentence": sentence, "rain_caution": (rain_states or {}).get(st)}
     # what stands in the way, and how each state's operators tell the public (the channel register; §2.y)
