@@ -139,3 +139,95 @@ def test_main_reads_a_saved_zip_of_mississippi_rows(tmp_path, monkeypatch):
     doc = json.loads((tmp_path / "events" / "echo-sewer-overflow.json").read_text())
     assert doc["count"] == 7 and doc["meta"]["dropped"] == 4
     assert {"state": "MS", "outcome": "dropped", "reason": "building backup", "count": 1} in doc["meta"]["by_rule"]
+
+
+# ---------------------------------------------------------------- operator rows (scripts/add_ms_operators.py)
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def _ms_operators():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "MS"]
+
+
+def test_every_mississippi_permit_has_exactly_one_operator_row():
+    from collections import Counter
+    dis = _ms_operators()
+    held = Counter(p for r in dis for p in r["npdes_permits"])
+    assert all(n == 1 for n in held.values())
+    plants = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+    need = {r["npdes_permit"] for r in plants if r.get("state") == "MS"}
+    cand = json.loads((ROOT / "research" / "ms" / "private-utilities-candidates.json").read_text())
+    need |= {c["npdes_permit"] for c in cand["candidates"] + cand["public_by_name"]}
+    need |= {x["npdes_permit"] for x in json.loads((ROOT / "research" / "ms" / "federal-seed.json").read_text())
+             ["major_plant_permits"]}
+    assert need <= set(held)
+    by_id = {r["id"]: r for r in dis}
+    jxn = by_id["ms-jackson-jxn"]
+    assert set(jxn["npdes_permits"]) == {"MS0024295", "MS0044059", "MS0030295"} and jxn["legal_form"] == "city"
+    assert "JXN Water" in jxn["notification_channel"] and "news releases" in jxn["notification_channel"]
+    assert {"MS0045446", "MS0020249", "MS0021521", "MSU008001"} <= set(by_id["ms-jcua"]["npdes_permits"])
+    assert by_id["ms-jcua"]["legal_form"] == "authority"
+    assert by_id["ms-meridian"]["npdes_permits"] == ["MS0020117", "MS0055735"]
+    assert by_id["ms-hinds-community-college"]["legal_form"] == "state facility"   # EPA types it private
+    assert by_id["ms-cleary-heights-potw"]["legal_form"] is None                      # a subdivision's plant, not a town
+    assert by_id["ms-great-river-utility-operating-co-llc"]["legal_form"] == "investor-owned utility"
+    for r in dis:
+        assert "[name removed]" not in r["name"] and r["notification_signup_url"] is None
+        assert "24 hours" in r["notification_channel"]
+
+
+def test_the_operator_rows_are_reproducible():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("add_ms_operators", ROOT / "scripts" / "add_ms_operators.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
+    if not m.EVENTS.exists():          # the one permit only EPA's tables name needs the events file
+        import pytest
+        pytest.skip("no events file of EPA's tables in data/build")
+    out, _ = m.build(dis)
+    assert [r for r in out if r.get("state") == "MS"] == _ms_operators()
+
+
+def test_owner_names_from_epa_permit_names():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("add_ms_operators", ROOT / "scripts" / "add_ms_operators.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    o = lambda p, n, t="Municipal or Water District": m.owner(p, n, t)[:3]   # noqa: E731
+    assert o("X", "LAUREL POTW, NUMBER 2") == ("LAUREL", "Laurel municipal sewer system", "city")
+    assert o("X", "WEST POINT POTW, WEST")[0] == "WEST POINT"
+    assert o("X", "HARRISON CO UTIL AUTH, S20 D'IBERVILLE WWTF")[:2] == (
+        "HARRISON COUNTY UTILITY AUTHORITY", "Harrison County Utility Authority")
+    assert o("X", "DCRUA, OLIVE BRANCH POTW ROSS ROAD")[0] == "DESOTO COUNTY REGIONAL UTILITY AUTHORITY"
+    assert o("X", "COLUMBUS, CITY OF, REYNOLDS R RIDGLEY WWTP") == ("COLUMBUS", "City of Columbus", "city")
+    assert o("X", "JUMPERTOWN,TOWN OF, WWTF") == ("JUMPERTOWN", "Town of Jumpertown", "town")
+    assert o("X", "Mississippi Band of Choctaw Indians (Tucker WWTF)", "Tribal Government")[2] == "tribal"
+    assert o("X", "CLEARY HEIGHTS POTW")[2] is None
+
+
+# ---------------------------------------------------------------- the register (scripts/add_ms_register_rows.py)
+
+def test_the_mississippi_register_rows():
+    from ingest import notification_pages as NP
+    dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
+    doc = NP.load_register(ROOT / "data" / "notice-channels")
+    assert NP.validate_register(doc, dis, ROOT) == []
+    rows = {r["id"]: r for r in doc["channels"] if r["state"] == "MS"}
+    assert rows["ms-epa-echo-overflow-events"]["feed_source_id"] == "echo-sewer-overflow"
+    assert rows["ms-mdeq-sso-report"]["basis_kind"] == "permit" and rows["ms-mdeq-sso-report"]["barrier"] == "no_web_page"
+    news = rows["ms-mdeq-news-releases"]
+    assert news["monitored"] and news["method"] == "rss" and news["records"] is False   # a lift reads like an issue
+    assert rows["ms-mdeq-beach-monitoring-map"]["records"] is False
+    assert rows["ms-mdeq-beach-signs"]["barrier"] == "signs_only"
+    assert {r["operator_id"] for r in rows.values() if r["operator_id"]} == {"ms-jackson-jxn"}
+    assert rows["ms-jackson-jxn-overflow-signs"]["barrier"] == "signs_only"
+    assert not any("@" in json.dumps(r) for r in rows.values())
+
+
+def test_mississippi_rules_row_cites_the_law_and_is_not_live():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    ms = rules["red"]["by_state"]["MS"]
+    assert ms["hours"] is None and "24 hours" in ms["basis"] and "NeT-SewerOverflow" in ms["source"]
+    assert "MS" not in rules["live_states"]
