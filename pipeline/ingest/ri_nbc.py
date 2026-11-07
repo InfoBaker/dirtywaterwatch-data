@@ -43,7 +43,7 @@ Quirks:
   openboatlaunch waters by name; where an outfall sits on openboatlaunch's "Pawtucket River" stretch
   of the Seekonk/Blackstone (geometry within 150 m) that slug is added. Moshassuck, Woonasquatucket,
   West River and Bucklin Brook have no openboatlaunch record yet: water_slugs [] and water_match
-  "none", with the name kept in waterbody_text. ECHO's permit receiving water (data/outfalls-ne.json)
+  "none", with the name kept in waterbody_text. ECHO's permit receiving water (data/outfalls-new-england.json)
   and the RIGIS UTILITY_NBC_Sewer_Overflows_spf point (offset from the API point, STATUS) are kept
   in raw as cross-checks; the RIGIS layer is cached in data/raw/ri-nbc/ and refreshed every 30 days.
 - Raw responses are saved to data/raw/ri-nbc/ only when they differ from the last saved copy.
@@ -233,7 +233,7 @@ def load_rigis(session: requests.Session) -> dict:
 
 
 def load_echo_outfalls() -> dict:
-    reg = read_json(DATA_DIR / "outfalls-ne.json", {}) or {}
+    reg = read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}
     return {(o["npdes_permit"], o["outfall"]): o for o in reg.get("outfalls", [])
             if o["npdes_permit"] in ("RI0100315", "RI0100072")}
 

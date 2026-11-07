@@ -138,7 +138,7 @@ def repo(tmp_path: Path) -> Path:
                                          "targets": [{"state": "NC", "name": "Neuse River", "slugs": []}]})
     write(root, "data/outfalls-us.json", {"outfalls": [{"state": "NC", "npdes_permit": "NC0000001", "water_slug": None}]})
     write(root, "data/outfalls-plants-us.json", {"outfalls": []})
-    write(root, "data/outfalls-ne.json", {"outfalls": []})
+    write(root, "data/outfalls-new-england.json", {"outfalls": []})
     write(root, "data/outfalls-mid-atlantic.json", {"outfalls": []})
     git(root, "add", "-A")
     git(root, "commit", "-q", "-m", "seed")
@@ -678,6 +678,16 @@ def test_extract_refuses_a_snapshot_without_the_state_and_keeps_the_file(tmp_pat
     assert ("holds no NC water record" if snapshot == "none" else "1 NC water files") in s["results"][0]["counts"][0]
     assert (root / "data/waters-nc.json").read_text() == before
     assert "never" not in capsys.readouterr().out
+
+
+def test_new_england_file_does_not_block_nebraska_extract(tmp_path):
+    """New England's records are data/waters-new-england.json, so Nebraska's data/waters-ne.json is free to be written."""
+    root = repo(tmp_path)
+    write(root, "data/receiving-waters-national.json", {"states": {"NE": {"waters": []}}})
+    write(root, "data/waters-new-england.json", {"source": "New England", "count": 0, "waters": []})
+    assert not (root / "data/waters-ne.json").exists()
+    p = B.plan("NE", "extract", py=PY, root=root)
+    assert p.cmds[0].step == "extract" and p.cmds[0].argv[-1] == "../data/waters-ne.json"
 
 
 def test_obl_check_refuses_another_states_file(tmp_path):

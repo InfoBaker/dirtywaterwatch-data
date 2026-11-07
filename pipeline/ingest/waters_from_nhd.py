@@ -81,7 +81,7 @@ each phase and why the run stopped. (Run 41788856038 took 11 minutes with --budg
 before the budget started, 300 s of NHDPlus, a 62 s Overpass mirror check outside the OSM budget, 173 s of Overpass
 queries, and 82 s checking all 71,000 events twice and writing.)
 
-Targets: every outfall in data/outfalls-ne.json, data/outfalls-mid-atlantic.json and the state layers
+Targets: every outfall in data/outfalls-new-england.json, data/outfalls-mid-atlantic.json and the state layers
 (data/build/ma-cso-outfalls.json, me-cso-outfalls.json, nj-cso-outfalls.json) whose water_slug is
 empty or whose receiving-water name has no record in the same state (status.Resolver: the name, an
 alias or a stem, kept by the placement guard), plus every event in data/build/events/*.json that the
@@ -237,7 +237,7 @@ LAKE_FTYPES = {390: "lake", 436: "reservoir", 493: "bay", 466: "pond"}
 OTHER_BUILDER = {"DC": "DC's waters come from ingest/dc_waters.py (data/waters-dc.json)"}
 
 OUTFALL_FILES = [
-    ("outfalls-ne", DATA_DIR / "outfalls-ne.json", None),
+    ("outfalls-new-england", DATA_DIR / "outfalls-new-england.json", None),
     ("outfalls-mid-atlantic", DATA_DIR / "outfalls-mid-atlantic.json", None),
     ("ma-cso-outfalls", BUILD_DIR / "ma-cso-outfalls.json", "MA"),
     ("me-cso-outfalls", BUILD_DIR / "me-cso-outfalls.json", "ME"),

@@ -45,7 +45,7 @@ Mapping
   contact for at least 24-48hrs after rainfall ceases" (advice_window_hours 48, the upper bound, and
   the basis notes the clock is rainfall end, which the feed does not give). These are beach
   advisories, never discharge events: no comment in 2024-2026 names sewage as the cause.
-  water_slugs: the beach name is matched to an openboatlaunch water (data/waters-ne.csv) by name
+  water_slugs: the beach name is matched to an openboatlaunch water (data/waters-new-england.csv) by name
   where one Maine water's name appears in the beach name and the town or bbox confirms it
   (water_match 'name'); otherwise, when exactly one bay/sound whose towns include the management
   entity has a bbox containing the beach point, that one (water_match 'inferred'); else none.
@@ -189,7 +189,7 @@ class WaterMatcher:
         wj = read_json(DATA_DIR / "waters-me.json", {}) or {}
         for w in wj.get("waters", []):
             bbox[w["slug"]] = w.get("bbox")
-        with open(DATA_DIR / "waters-ne.csv", newline="") as f:
+        with open(DATA_DIR / "waters-new-england.csv", newline="") as f:
             for r in csv.DictReader(f):
                 if r["state"] != "ME":
                     continue

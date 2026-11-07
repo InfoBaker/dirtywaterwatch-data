@@ -21,8 +21,8 @@ Records
   a monthly total, and Chicopee reports 'MGD' under TOTAL/MAXIMUM with the monthly line 'not
   quantifiable' (NODI Q): those stay null with the figure and its coding in volume_text and raw,
   until the semantics are confirmed with EPA Region 1.
-  water_slugs and coordinates from data/outfalls-ne.json (permit + outfall); where the registry has
-  no slug, its ECHO receiving-water name against data/waters-ne.csv (water_match 'name').
+  water_slugs and coordinates from data/outfalls-new-england.json (permit + outfall); where the registry has
+  no slug, its ECHO receiving-water name against data/waters-new-england.csv (water_match 'name').
 
 Failures
   Any of the nine requests failing (after three tries) makes the run ok=False with the failed
@@ -65,7 +65,7 @@ def name_index() -> tuple[dict, dict]:
     import csv
     import re
     idx: dict = defaultdict(list)
-    with open(DATA_DIR / "waters-ne.csv", newline="") as f:
+    with open(DATA_DIR / "waters-new-england.csv", newline="") as f:
         for r in csv.DictReader(f):
             idx[(r["state"], re.sub(r"[^a-z0-9]", "", r["name"].lower()))].append(r)
     bbox = {w["slug"]: w.get("bbox") for w in (read_json(DATA_DIR / "waters-ma.json", {}) or {}).get("waters", [])}
@@ -131,7 +131,7 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     since = date.fromisoformat(args.since)
 
-    reg = read_json(DATA_DIR / "outfalls-ne.json", {}) or {}
+    reg = read_json(DATA_DIR / "outfalls-new-england.json", {}) or {}
     outfalls = {(o["npdes_permit"], str(o["outfall"]).upper()): o for o in reg.get("outfalls", [])}
     disc = {}
     for r in read_json(ROOT / "research/ma/dischargers.json", []) or []:

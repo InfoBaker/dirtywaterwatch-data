@@ -8,7 +8,7 @@
     python -m build.reaches --outfall MA0101613:013
 
 Outfalls: every registry outfall (common.load_outfall_registry when it exists, else
-status.load_registry_outfalls: data/outfalls-ne.json, data/outfalls-mid-atlantic.json, ...) in a live
+status.load_registry_outfalls: data/outfalls-new-england.json, data/outfalls-mid-atlantic.json, ...) in a live
 state (the covered states the export and the state pages use: status.states()), open (outfall_status
 without CLS), CSO outfalls first and treatment-plant outfalls (outfall_kind "plant") after them; plus
 data/build/ma-cso-outfalls.json (MassDEP layer; water from the registry row of the same permit +

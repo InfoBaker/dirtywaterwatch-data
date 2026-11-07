@@ -34,7 +34,7 @@ def write(d: Path, name: str, rows, raw: str | None = None):
 # ---------------------------------------------------------------- the loader
 
 def test_one_row_per_permit_and_outfall_number_and_the_more_specific_file_wins(tmp_path):
-    write(tmp_path, "outfalls-ne.json", [row("MA0100001", "001", water_slug="ne-river-ma"),
+    write(tmp_path, "outfalls-new-england.json", [row("MA0100001", "001", water_slug="ne-river-ma"),
                                          row("MA0100001", "1", water_slug="later-river-ma")])
     write(tmp_path, "outfalls-us.json", [row("MA0100001", "1", water_slug="us-river-ma"),
                                          row("OH0100001", "002", water_slug="ohio-river-oh")])
@@ -43,7 +43,7 @@ def test_one_row_per_permit_and_outfall_number_and_the_more_specific_file_wins(t
     rows = {(r["npdes_permit"], common.outfall_number(r["outfall"])): r for r in common.load_outfall_registry(tmp_path)}
     assert len(rows) == 3
     assert rows[("MA0100001", "1")]["water_slug"] == "ne-river-ma"                  # regional over national, first in file
-    assert rows[("MA0100001", "1")]["_file"] == "data/outfalls-ne.json"
+    assert rows[("MA0100001", "1")]["_file"] == "data/outfalls-new-england.json"
     assert rows[("MA0100001", "100")]["outfall_kind"] == "plant"                      # a plants file's rows are plants
     assert rows[("OH0100001", "2")]["outfall_kind"] == "cso"                          # the plant row never replaces it
     assert rows[("OH0100001", "2")]["_file"] == "data/outfalls-us.json"
@@ -63,7 +63,7 @@ def test_within_a_file_an_open_listing_replaces_a_closed_one_and_a_row_keeps_its
 
 
 def test_a_half_written_file_is_skipped_and_noted_and_the_others_still_load(tmp_path):
-    write(tmp_path, "outfalls-ne.json", [row("MA0100001", "001")])
+    write(tmp_path, "outfalls-new-england.json", [row("MA0100001", "001")])
     write(tmp_path, "outfalls-us.json", None, raw='{"outfalls": [{"npdes_permit": "OH01')
     rows = common.load_outfall_registry(tmp_path)
     assert [r["npdes_permit"] for r in rows] == ["MA0100001"]
@@ -72,7 +72,7 @@ def test_a_half_written_file_is_skipped_and_noted_and_the_others_still_load(tmp_
 
 
 def test_the_status_wrappers_read_the_whole_registry_and_placement_leaves_the_provisional_places_out(tmp_path, monkeypatch):
-    write(tmp_path, "outfalls-ne.json", [row("MA0100001", "001")])
+    write(tmp_path, "outfalls-new-england.json", [row("MA0100001", "001")])
     write(tmp_path, "outfalls-mid-atlantic.json", [row("PA0023736", "002"), row("PA0023736", "003")])
     write(tmp_path, "build/outfalls-reported.json", [row("PA0023736", "MH-7", outfall_kind="reported",
                                                          record_status="provisional")])
@@ -82,7 +82,7 @@ def test_the_status_wrappers_read_the_whole_registry_and_placement_leaves_the_pr
     assert all("_file" not in r for r in S.load_outfalls())
     placement = S.load_registry_outfalls()
     assert sorted(r["outfall"] for r in placement) == ["001", "002", "003"]
-    assert {r["_file"] for r in placement} == {"data/outfalls-ne.json", "data/outfalls-mid-atlantic.json"}
+    assert {r["_file"] for r in placement} == {"data/outfalls-new-england.json", "data/outfalls-mid-atlantic.json"}
     assert len(S.load_registry_outfalls(provisional=True)) == 4
 
 
@@ -123,7 +123,7 @@ LIVE = {"MA", "PA", "NY", "NJ"}
 
 
 def registry(tmp_path):
-    write(tmp_path, "outfalls-ne.json", [row("MA0100001", "001", water_slug="ne-river-ma", match="geometry+name"),
+    write(tmp_path, "outfalls-new-england.json", [row("MA0100001", "001", water_slug="ne-river-ma", match="geometry+name"),
                                          row("MA0100002", "005", outfall_status="CLS")])
     write(tmp_path, "outfalls-mid-atlantic.json", [
         row("PA0023736", "002", water_slug="susquehanna-river-pa", match="geometry+name", receiving_water_echo="Susquehanna River"),
@@ -257,7 +257,7 @@ def test_the_rain_coverage_lists_live_states_only(monkeypatch):
 def test_provisional_rows_as_the_report_step_writes_them(tmp_path):
     """The provisional step's own shape: outfall is its place id, the outfall ids its reports name in outfall_ids,
     water_slugs a list, water_match a short code, on_map, and a discharger_id that may be no operator page."""
-    write(tmp_path, "outfalls-ne.json", [row("CT0100366", "015"), row("CT0100366", "016")])
+    write(tmp_path, "outfalls-new-england.json", [row("CT0100366", "015"), row("CT0100366", "016")])
     rep = lambda rid, **f: {"id": rid, "source_id": "outfalls-reported", "npdes_permit": "CT0100366", "state": None,
                             "lat": 41.3, "lon": -72.9, "outfall": rid, "outfall_kind": "reported",
                             "record_status": "provisional", "confidence": "high", "report_count": 3,
@@ -379,7 +379,7 @@ def test_new_jersey_permits_off_the_shared_site_get_the_radar_caution_and_covera
 
 
 def test_an_aggregate_row_and_a_row_that_is_no_sewage_outfall_stay_off_the_map_and_the_radar(tmp_path, monkeypatch):
-    write(tmp_path, "outfalls-ne.json", [
+    write(tmp_path, "outfalls-new-england.json", [
         row("MA0100137", "C01", water_slug="connecticut-river-ma"), row("MA0100137", "C02"),
         row("MA0100137", "CSO", lat=None, lon=None, aggregate_of=["C01", "C02"], no_point_reason="x"),
         row("MAG250958", "003", outfall_status="CSO|NCW", outfall_kind="other", kind_note="cooling water")])

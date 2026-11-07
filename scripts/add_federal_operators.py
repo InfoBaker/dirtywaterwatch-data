@@ -5,7 +5,7 @@ Usage: pipeline/.venv/bin/python -I scripts/add_federal_operators.py [--dry-run]
 Owner, 2026-11-03: outfall rows with no operator page (out/outfalls.json discharger_id null). The export links an
 outfall to its operator by permit (export/outfalls.py permit_index: npdes_permit, npdes_permits), so a permit with no row
 in data/dischargers.json has no page. This reads every live-state row of data/outfalls-plants-us.json,
-data/outfalls-mid-atlantic.json and data/outfalls-ne.json (the permits only; the outfall rows are not touched), finds the
+data/outfalls-mid-atlantic.json and data/outfalls-new-england.json (the permits only; the outfall rows are not touched), finds the
 permits no registry row holds (as npdes_permit, in npdes_permits, or as an alias) and, for each:
 
   - skips a private permit (the owner has not decided on private utilities): a plant row whose basis is a permit
@@ -51,7 +51,7 @@ DIS = ROOT / "data" / "dischargers.json"
 REVIEW = ROOT / "docs" / "reviews" / "2026-11-03-federal-operators.md"
 LIVE = {"CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC"}
 FILES = {"plants": "data/outfalls-plants-us.json", "mid-atlantic": "data/outfalls-mid-atlantic.json",
-         "ne": "data/outfalls-ne.json"}
+         "new-england": "data/outfalls-new-england.json"}
 PRIVATE_TYPES = {"Privately Owned Facility", "Corporation", "NON-POTW"}
 # CSO-inventory permits that are no sewer operator's (ICIS_PERMITS: facility type POF, a college)
 SKIP_PRIVATE = {"MAG250958": "Rust-Oleum paint plant", "ME0001678": "Milford hydro dam", "MEU250309":
@@ -239,11 +239,11 @@ def build_row(group, counts):
             if t and t not in towns:
                 towns.append(t)
     n_out = sum(counts[p] for p in pids)
-    from_cso = any(c["files"] & {"mid-atlantic", "ne"} for _, c in group)
+    from_cso = any(c["files"] & {"mid-atlantic", "new-england"} for _, c in group)
     files = sorted({f for _, c in group for f in c["files"]})
     if from_cso:
         src = (f"EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, {n_out} {st} rows for this permit, joined in "
-               f"data/outfalls-{'ne' if st in ('CT', 'MA', 'ME', 'NH', 'RI', 'VT') else 'mid-atlantic'}.json)")
+               f"data/outfalls-{'new-england' if st in ('CT', 'MA', 'ME', 'NH', 'RI', 'VT') else 'mid-atlantic'}.json)")
         if "plants" in files:
             src += f"; treatment-plant outfalls from EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)"
     else:

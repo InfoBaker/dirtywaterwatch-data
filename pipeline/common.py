@@ -182,7 +182,7 @@ OUTFALL_REGISTRY_SKIPPED: list[str] = []
 
 
 def outfall_file_rank(name: str) -> int:
-    """How general a registry file is; the lower rank wins a duplicate outfall: a regional file (outfalls-ne.json,
+    """How general a registry file is; the lower rank wins a duplicate outfall: a regional file (outfalls-new-england.json,
     outfalls-mid-atlantic.json, or any other region) 0, the national CSO file (outfalls-us.json, outfalls-*-us.json)
     1, a treatment-plant file (outfalls-plants-us.json, any name with "plants") 2, so a plant row never replaces a
     combined sewer row; the provisional records from overflow reports (REPORTED_OUTFALLS) 3, below every official

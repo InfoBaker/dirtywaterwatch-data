@@ -78,7 +78,7 @@ def test_strip_personal_scrubs_names_at_any_depth():
 def test_repo_paths_are_told_from_source_text():
     assert common.has_repo_path("first receiving water in research/ri/dischargers.json")
     assert common.has_repo_path("research/ri/raw/nbc-outfalls-from-api.csv (inferred from site names and coordinates)")
-    assert common.has_repo_path("ECHO outfall registry (data/outfalls-ne.json)")
+    assert common.has_repo_path("ECHO outfall registry (data/outfalls-new-england.json)")
     assert common.has_repo_path("cached in data/raw/ri-nbc/")
     for t in ("Because there is no flow data/pump speed data, the City reported the maximum",
               "https://www.ri.gov/data/press/release.pdf", "20240404_Cessation_SSO_Pearl_St.pdf", "in/out/of service", 42, None):
@@ -88,13 +88,13 @@ def test_repo_paths_are_told_from_source_text():
 def test_path_notes_move_from_raw_to_meta():
     recs = [{"event_id": "x:1", "raw": {"keep": "ECHO says 3 days", "water_basis": "first receiving water in research/ri/dischargers.json",
                                         "placement": {"basis": "research/ri/raw/a.csv", "by": "Wilson Reservoir"},
-                                        "list": ["ok", "data/outfalls-ne.json"]}},
+                                        "list": ["ok", "data/outfalls-new-england.json"]}},
             {"event_id": "x:2", "raw": {"keep": 1}}]
     meta = common.path_notes_to_meta(recs, {"records": 2})
     assert recs[0]["raw"] == {"keep": "ECHO says 3 days", "placement": {"by": "Wilson Reservoir"}, "list": ["ok"]}
     assert meta == {"records": 2, "internal_notes": {"x:1": {
         "water_basis": "first receiving water in research/ri/dischargers.json",
-        "placement.basis": "research/ri/raw/a.csv", "list[1]": "data/outfalls-ne.json"}}}
+        "placement.basis": "research/ri/raw/a.csv", "list[1]": "data/outfalls-new-england.json"}}}
     assert recs[1]["raw"] == {"keep": 1}
 
 
@@ -119,7 +119,7 @@ def test_ri_echo_dfr_writes_no_file_paths_into_raw(tmp_path, monkeypatch):
     (raw_dir / D.SOURCE_ID / f"20261101T000000Z.{PERMIT}.json").write_text(json.dumps(DFR))
     ev_dir.mkdir()
     data_dir.mkdir()
-    (data_dir / "outfalls-ne.json").write_text(json.dumps({"outfalls": []}))
+    (data_dir / "outfalls-new-england.json").write_text(json.dumps({"outfalls": []}))
     # a record from an earlier run that ECHO no longer lists, written when raw still carried the path
     old = common.event(source_id=D.SOURCE_ID, source_record_id="old", event_type="bypass", status="ended",
                        npdes_permit=PERMIT, raw={"water_basis": "bypass at the treatment plant; plant receiving water: "
@@ -161,7 +161,7 @@ def test_ri_nbc_record_raw_names_no_files():
 def test_export_scrubs_events_written_under_older_rules():
     e = {"event_id": "ct-deep-annual:1", "outfall_name": "Outfall 004 (Inspector Eddy)", "advice_text": "Avoid contact for 48 hours",
          "raw": {"How incident was resolved": "Case was assigned to Inspector Eddy on 04/11/2025.", "inspector": "Eddy",
-                 "_water": {"via": "ECHO outfall registry (data/outfalls-ne.json)", "slug": "x"}}}
+                 "_water": {"via": "ECHO outfall registry (data/outfalls-new-england.json)", "slug": "x"}}}
     out = X.public_event(e)
     assert out["raw"] == {"How incident was resolved": "Case was assigned to Inspector [name removed] on 04/11/2025.",
                           "_water": {"slug": "x"}}

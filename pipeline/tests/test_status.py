@@ -354,7 +354,7 @@ def test_name_match_across_state_lines_is_rejected():
 
 
 def test_waters_extra_are_read_for_names_and_geometry(tmp_path, monkeypatch):
-    (tmp_path / "waters-ne.json").write_text(json.dumps({"waters": [
+    (tmp_path / "waters-new-england.json").write_text(json.dumps({"waters": [
         {"slug": "test-river-ma", "name": "Test River", "kind": "river", "state": "MA", "bbox": [-72, 42, -71.9, 42.0]}]}))
     (tmp_path / "waters-extra.json").write_text(json.dumps({"waters": [
         {"slug": "woonasquatucket-river-ri", "name": "Woonasquatucket River", "kind": "river", "state": "RI",
@@ -375,7 +375,7 @@ def test_waters_extra_are_read_for_names_and_geometry(tmp_path, monkeypatch):
 def test_waters_nhd_are_read_like_waters_extra(tmp_path, monkeypatch):
     """data/waters-nhd.json (ingest/waters_from_nhd.py) is read after waters-extra.json, tagged extra, its
     aliases match names and its inline geometry is the water's geometry; include_nhd=False leaves it out."""
-    (tmp_path / "waters-ne.json").write_text(json.dumps({"waters": [
+    (tmp_path / "waters-new-england.json").write_text(json.dumps({"waters": [
         {"slug": "test-river-ma", "name": "Test River", "kind": "river", "state": "MA", "bbox": [-72, 42, -71.9, 42.0]}]}))
     (tmp_path / "waters-extra.json").write_text(json.dumps({"waters": [
         {"slug": "mill-river-springfield-ma", "name": "Mill River", "kind": "river", "state": "MA", "source": "osm",
@@ -406,7 +406,7 @@ def test_waters_nhd_are_read_like_waters_extra(tmp_path, monkeypatch):
 
 def _alias_data(tmp_path, aliases):
     """A data dir with a Springfield (extra) and a Twomile Creek (NHD) record, and data/water-aliases.json."""
-    (tmp_path / "waters-ne.json").write_text(json.dumps({"waters": [
+    (tmp_path / "waters-new-england.json").write_text(json.dumps({"waters": [
         {"slug": "test-river-ma", "name": "Test River", "kind": "river", "state": "MA", "bbox": [-72, 42, -71.9, 42.0]}]}))
     (tmp_path / "waters-extra.json").write_text(json.dumps({"waters": [
         {"slug": "mill-river-springfield-ma", "name": "Mill River", "kind": "river", "state": "MA", "source": "osm",
@@ -451,7 +451,7 @@ def test_hand_aliases_leave_the_record_files_alone(tmp_path, monkeypatch):
     assert first["test-river-ma"]["aliases"] == ["The Test"]
     (tmp_path / "water-aliases.json").write_text(json.dumps({"test-river-ma": ["Other"]}))
     assert S.load_waters()["test-river-ma"]["aliases"] == ["Other"]          # not ["The Test", "Other"]
-    assert json.loads((tmp_path / "waters-ne.json").read_text())["waters"][0].get("aliases") is None
+    assert json.loads((tmp_path / "waters-new-england.json").read_text())["waters"][0].get("aliases") is None
 
 
 def test_hand_alias_for_an_unknown_slug_is_a_build_problem_not_an_error(tmp_path, monkeypatch):

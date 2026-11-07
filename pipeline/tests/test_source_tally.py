@@ -80,7 +80,7 @@ def make_project(root: Path, register=None, draft=None):
                                   "\"Distribution is discouraged\".\n\n4.4 [me] A Freedom of Access request to Maine DEP.\n")
     w(root / "data/build/name-blocklist.json", {"names": ["Jane Roe"]})
     # waters
-    w(root / "data/waters-ne.json", {"source": "openboatlaunch", "waters": [
+    w(root / "data/waters-new-england.json", {"source": "openboatlaunch", "waters": [
         water("mill-river-ma", "Mill River", "MA", ["Alpha"]), water("mill-river-2-ma", "Mill River", "MA", ["Beta"]),
         water("long-pond-ma", "Long Pond", "MA", ["Alpha"]), water("long-pond-2-ma", "Long Pond", "MA", ["Alpha"]),
         water("ma-no-geom", "No Geom Brook", "MA", ["Alpha"]), water("ct-river-ct", "Ct River", "CT", ["Gamma"])]})
@@ -95,7 +95,7 @@ def make_project(root: Path, register=None, draft=None):
     for s in ("mill-river-ma", "mill-river-2-ma", "long-pond-ma", "long-pond-2-ma", "ct-river-ct"):
         w(obl / f"{s}.json", {"slug": s, "geometry": GEOM})
     out = lambda permit, oid, st, slug: {"npdes_permit": permit, "outfall": oid, "state": st, "permittee": f"{permit} STP", "water_slug": slug}
-    w(root / "data/outfalls-ne.json", {"outfalls": [out("MA001", "1", "MA", "mill-river-ma"), out("MA001", "2", "MA", None),
+    w(root / "data/outfalls-new-england.json", {"outfalls": [out("MA001", "1", "MA", "mill-river-ma"), out("MA001", "2", "MA", None),
                                                     out("MA002", "1", "MA", "nonexistent-ma"), out("CT001", "1", "CT", "ct-river-ct")]})
     w(root / "data/outfalls-mid-atlantic.json", {"outfalls": [out("VA001", "1", "VA", None)]})
     w(root / "out/events.json", {"events": [
