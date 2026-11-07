@@ -264784,5 +264784,298 @@
   "source_areas": [
    "nm"
   ]
+ },
+ {
+  "id": "hi-aqua-engineers-schofield",
+  "name": "Aqua Engineers, Inc. (Schofield Barracks plant, Wahiawa)",
+  "state": "HI",
+  "kind": "plant",
+  "npdes_permit": "HI0110141",
+  "npdes_permits": [
+   "HI0110141"
+  ],
+  "receiving_waters": [
+   "Kaukonahua Stream, Kuakonahua And Waikele Streams",
+   "Kaukonahua Stream"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Wahiawa"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0110141 SCHOFIELD BARRACKS WASTEWATER TREATMENT PLANT. Privately owned: the company that owns and runs the Army post's wastewater system (EPA facility type Privately Owned Facility; SIC 4952); the permittee as EPA records it. Not in the plant outfall table.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-aqua-engineers-schofield"
+  ],
+  "source_areas": [
+   "hi",
+   "federal"
+  ],
+  "short_name": "Aqua Engineers",
+  "legal_form": "investor-owned utility"
+ },
+ {
+  "id": "hi-hawaii-american-water",
+  "name": "Hawaii-American Water Company (East Honolulu plant, Hawaii Kai)",
+  "state": "HI",
+  "kind": "sso",
+  "npdes_permit": "HI0020303",
+  "npdes_permits": [
+   "HI0020303"
+  ],
+  "receiving_waters": [
+   "Pacific Ocean"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Honolulu"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0020303 EAST HONOLULU WASTEWATER TREATMENT PLANT. Privately owned: the company that provides sewer service in Hawaii Kai (EPA facility type Privately Owned Facility; SIC 4952); the permittee as EPA records it. Not in the plant outfall table. The Department of Health's advisory list names its facilities in 2 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-hawaii-american-water"
+  ],
+  "source_areas": [
+   "hi",
+   "federal"
+  ],
+  "short_name": "Hawaii-American Water",
+  "legal_form": "investor-owned utility"
+ },
+ {
+  "id": "hi-hawaii-county",
+  "name": "County of Hawaii, Department of Environmental Management (Hilo, Papaikou-Paukaa and Kulaimano plants and the collection system)",
+  "state": "HI",
+  "kind": "sso",
+  "npdes_permit": "HI0021377",
+  "npdes_permits": [
+   "HI0021377",
+   "HI0020770",
+   "HI0021113"
+  ],
+  "receiving_waters": [
+   "Hilo Bay",
+   "Reeds Bay",
+   "Puhi Bay",
+   "Pacific Ocean"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 3 rows for these permits)",
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Hilo",
+   "Kailua-Kona",
+   "Pepeekeo"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0021377 HAWAII COUNTY HILO WWTP; HI0020770 KULAIMANO WASTEWATER TREATMENT PLANT; HI0021113 COUNTY OF HAWAII PAPAIKOU-PAUKAA WWTP. Research row (research/hi/dischargers.json, checked 2026-11-03). The Department of Health's advisory list names its facilities in 2 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-hawaii-county"
+  ],
+  "source_areas": [
+   "hi"
+  ],
+  "short_name": "County of Hawaii",
+  "legal_form": "county"
+ },
+ {
+  "id": "hi-honolulu-env",
+  "name": "City and County of Honolulu, Department of Environmental Services (Honouliuli, Sand Island, Kailua Regional, Waianae and Wahiawa plants and the collection system)",
+  "state": "HI",
+  "kind": "sso",
+  "npdes_permit": "HI0020877",
+  "npdes_permits": [
+   "HI0020877",
+   "HI0021296",
+   "HI0021953",
+   "HI0021954",
+   "HI0021956"
+  ],
+  "receiving_waters": [
+   "Mamala Bay",
+   "Kaneohe Bay",
+   "Honolulu Harbor",
+   "Ala Wai Canal",
+   "Pacific Ocean"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 5 rows for these permits)",
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Honolulu",
+   "Ewa Beach",
+   "Waianae",
+   "Kailua",
+   "Wahiawa"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0020877 C&CH HONOULIULI WWTP; HI0021296 C&CH KAILUA REGIONAL WWTP; HI0021953 C&CH WAIANAE WWTP; HI0021954 C&CH HONOULIULI WWTP; HI0021956 SAND ISLAND WASTEWATER TREATMENT PLANT. EPA lists two permits for the Honouliuli plant (HI0020877, HI0021954). The Wahiawa plant has no permit in EPA's plant table. Research row (research/hi/dischargers.json, checked 2026-11-03). The Department of Health's advisory list names its facilities in 18 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-honolulu-env"
+  ],
+  "source_areas": [
+   "hi"
+  ],
+  "short_name": "City and County of Honolulu",
+  "legal_form": "city"
+ },
+ {
+  "id": "hi-jbphh",
+  "name": "Joint Base Pearl Harbor-Hickam (wastewater treatment plant and collection system)",
+  "state": "HI",
+  "kind": "sso",
+  "npdes_permit": "HI0110086",
+  "npdes_permits": [
+   "HI0110086"
+  ],
+  "receiving_waters": [
+   "Pearl Harbor",
+   "Pacific Ocean"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Honolulu"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0110086 JOINT BASE PEARL HARBOR-HICKAM WASTEWATER TREATMENT PLANT. Research row (research/hi/dischargers.json, checked 2026-11-03). The Department of Health's advisory list names its facilities in 9 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-jbphh"
+  ],
+  "source_areas": [
+   "hi"
+  ],
+  "short_name": "Joint Base Pearl Harbor-Hickam",
+  "legal_form": "federal facility"
+ },
+ {
+  "id": "hi-kauai-county",
+  "name": "County of Kauai, Wastewater Management Division (Wailua, Waimea and Lihue plants and the collection system)",
+  "state": "HI",
+  "kind": "sso",
+  "npdes_permit": "HI0020257",
+  "npdes_permits": [
+   "HI0020257",
+   "HIF014798"
+  ],
+  "receiving_waters": [
+   "Wailua River",
+   "Waimea Bay (Kauai)",
+   "Nawiliwili Bay",
+   "Pacific Oceanoffshore Wailua"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Wailua",
+   "Waimea",
+   "Lihue"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0020257 COUNTY OF KAUAI WAILUA WWTP; HIF014798 WAILUA WASTEWATER TREATMENT PLANT. HIF014798 is a second EPA record of the Wailua plant (receiving water Konohiki Stream). Research row (research/hi/dischargers.json, checked 2026-11-03). The Department of Health's advisory list names its facilities in 2 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-kauai-county"
+  ],
+  "source_areas": [
+   "hi"
+  ],
+  "short_name": "County of Kauai",
+  "legal_form": "county"
+ },
+ {
+  "id": "hi-maui-county",
+  "name": "County of Maui, Department of Environmental Management (Kihei, Lahaina and Wailuku-Kahului plants and the collection system)",
+  "state": "HI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "npdes_permits": [],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Kihei",
+   "Lahaina",
+   "Kahului"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: no permit. EPA lists no NPDES permit for the county's plants, which dispose of treated wastewater to injection wells (research of 2026-11-03). Research row (research/hi/dischargers.json, checked 2026-11-03). The Department of Health's advisory list names its facilities in 1 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-maui-county"
+  ],
+  "source_areas": [
+   "hi"
+  ],
+  "short_name": "County of Maui",
+  "legal_form": "county"
+ },
+ {
+  "id": "hi-mcbh-kaneohe",
+  "name": "Marine Corps Base Hawaii (Kaneohe Bay water reclamation facility)",
+  "state": "HI",
+  "kind": "bypass",
+  "npdes_permit": "HI0110078",
+  "npdes_permits": [
+   "HI0110078"
+  ],
+  "receiving_waters": [
+   "Kaneohe Bay",
+   "Nu'upia Ponds",
+   "Pacific Ocean"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "HAR 11-62 Appendix B requires whoever owns or runs a wastewater system to report spills, overflows and discharges to the Hawaii Department of Health's Clean Water Branch; NPDES permits under HAR 11-55 add their own reporting conditions. The Department, not the operator, tells the public: it posts an advisory on its Clean Water Branch website (a machine-readable list this site reads), puts up signs at the water and sends e-mail notices by island. No Hawaii rule requiring the operator itself to tell the public was found; the operator's own web pages were not searched.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+  "towns": [
+   "Kaneohe"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: HI0110078 MARINE CORPS BASE HAWAII KANEOHE BAY WATER RECLAMATION FACILITY. Research row (research/hi/dischargers.json, checked 2026-11-03). The Department of Health's advisory list names its facilities in 4 of the newest 500 events (read 2026-11-07).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "hi-mcbh-kaneohe"
+  ],
+  "source_areas": [
+   "hi"
+  ],
+  "short_name": "Marine Corps Base Hawaii",
+  "legal_form": "federal facility"
  }
 ]

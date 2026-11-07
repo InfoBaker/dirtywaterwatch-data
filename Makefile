@@ -77,6 +77,10 @@
 #                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
 #                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
 #                  advisory map layer, blooms; ingest/nm_transforms.py)
+#                  Hawaii: hi_doh_cwb_events (the Department of Health Clean Water Branch's events endpoint, the newest
+#                  500 advisories every run: sewage spill and permit exceedance advisories in the Department's own
+#                  window, Brown Water Advisories as rainfall advisories, beach advisories and retest notices; placed
+#                  by the names the notices give, per island; no history backfill: the endpoint ignores paging)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

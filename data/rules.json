@@ -173,6 +173,12 @@
     "clock": "end_of_discharge",
     "basis": "New Mexico law sets no period after a sewage discharge during which the water is to be avoided, and no New Mexico statute or rule requires the public to be told when one happens. The person in charge of a facility must tell the New Mexico Environment Department orally within 24 hours of a discharge that may with reasonable probability injure health, animal or plant life, or property, in writing within a week, and report the corrective action within 15 days (20.6.2.1203 NMAC); the Department publishes no list of these notices. The U.S. Environmental Protection Agency issues New Mexico's discharge permits, which require a report to the agency within 24 hours and in writing within five days; the agency publishes the reports filed electronically in its overflow records, and few New Mexico permittees file them. On tribal land, including the Navajo Nation, the permits are federal and the state rule does not apply. This site marks a reported discharge while it runs and applies its own caution after it ends; a report of a discharge that reached no water is not shown on this site",
     "source": "20.6.2.1203.A NMAC; 40 CFR 122.41(l)(6); U.S. EPA sewer overflow and bypass event data (ECHO)"
+   },
+   "HI": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Hawaii sets no fixed period after a sewage discharge during which the water is to be avoided. Whoever owns or runs a wastewater system must report a spill, overflow or discharge to the Department of Health (Hawaii Administrative Rules chapter 11-62, Appendix B); wastewater permits under chapter 11-55 add their own reporting conditions. No Hawaii rule requiring the operator itself to tell the public was found: the Department does, with an advisory on its website, signs at the water and e-mail notices, and it advises the public to remain out of the affected waters until it cancels the advisory. This site shows that advisory as the authority's own window, from the time the Department posts it until the time it cancels it, and adds no window of its own after the Department cancels it. The Department's Brown Water Advisories, issued for storm-water runoff after heavy rain, are shown as rainfall advisories, not as sewage reports",
+    "source": "HAR 11-62 Appendix B; HAR 11-55; Hawaii State Department of Health, water quality advisories and events (eha-cloud.doh.hawaii.gov/cwb)"
    }
   },
   "by_discharger": {
@@ -245,7 +251,7 @@
    "rain_advisory": {
     "hours": null,
     "rationale": "We use the rainfall advisory and period stated by the issuing authority. The notice explains when its clock starts.",
-    "source": "Maine Healthy Beaches program; New York City DEP"
+    "source": "Maine Healthy Beaches program; New York City DEP; Hawaii State Department of Health (Brown Water Advisories)"
    },
    "hab_advisory": {
     "hours": null,
@@ -317,12 +323,13 @@
   },
   "sample_caution": {
    "sources": [
-    "ne-dwee-beachwatch"
+    "ne-dwee-beachwatch",
+    "hi-doh-cwb-events-api"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
-   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, never as the agency's advisory.",
-   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch"
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, never as the agency's advisory.",
+   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii State Department of Health (beach notifications)"
   },
   "day_start_caution": {
    "sources": [

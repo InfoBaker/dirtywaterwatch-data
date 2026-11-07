@@ -1,0 +1,1237 @@
+{
+ "about": "Water names in Hawaii's reports that data/receiving-waters-national.json does not hold for HI: the Department of Health Clean Water Branch's advisories (the newest 500 events, read on 2026-11-07: sewage spills, permit exceedances, Brown Water Advisories, beach advisories and retest notices), each name as the notices give it with diacritics and the okina folded (the feed spells a water both ways: Kane'ohe and Kaneohe), with the number of records giving it, the islands it is named on and the towns near it. The notices give no coordinates. A name two islands share is one row here: build one record per island (same_name_on_islands); the feed places a record only on a water of its own island.",
+ "state": "HI",
+ "checked": "2026-11-07",
+ "waters": 56,
+ "reports": 160,
+ "held_by_national_list": {
+  "Hilo Bay": 16
+ },
+ "same_name_on_islands": [
+  {
+   "name": "Waimea Bay",
+   "islands": {
+    "Oahu": 20,
+    "Kauai": 2
+   }
+  },
+  {
+   "name": "Kailua Bay",
+   "islands": {
+    "Oahu": 17,
+    "Hawaii": 2
+   }
+  }
+ ],
+ "places_not_waters": {
+  "records": 291,
+  "note": "records whose notice names a beach, park or shore and no water (Kalapaki Beach Park, North Shore): kept with no water"
+ },
+ "rows": [
+  {
+   "name": "Waimea Bay",
+   "reports": 22,
+   "islands": {
+    "Oahu": 20,
+    "Kauai": 2
+   },
+   "towns": [
+    "Honolulu",
+    "Lihue"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town); Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 18,
+    "beach_advisory": 4
+   }
+  },
+  {
+   "name": "Kailua Bay",
+   "reports": 19,
+   "islands": {
+    "Oahu": 17,
+    "Hawaii": 2
+   },
+   "towns": [
+    "Honolulu",
+    "Hilo"
+   ],
+   "towns_basis": "Oahu: the operator's town; Hawaii: the island's county seat (the notices name no town)",
+   "permits": [
+    "HI0021296",
+    "HI0110078"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "plant_bypass": 15,
+    "rain_advisory": 3,
+    "sso": 1
+   }
+  },
+  {
+   "name": "Pearl Harbor",
+   "reports": 11,
+   "islands": {
+    "Oahu": 11
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the operator's town",
+   "permits": [
+    "HI0110086"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "plant_bypass": 8,
+    "sso": 3
+   }
+  },
+  {
+   "name": "Sharks Cove",
+   "reports": 9,
+   "islands": {
+    "Oahu": 9
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 9
+   }
+  },
+  {
+   "name": "Wailua Bay",
+   "reports": 8,
+   "islands": {
+    "Kauai": 8
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 8
+   }
+  },
+  {
+   "name": "Honolii Cove",
+   "reports": 7,
+   "islands": {
+    "Hawaii": 7
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 7
+   }
+  },
+  {
+   "name": "Hanalei Bay",
+   "reports": 4,
+   "islands": {
+    "Kauai": 4
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 4
+   }
+  },
+  {
+   "name": "Honokohau Harbor",
+   "reports": 4,
+   "islands": {
+    "Hawaii": 4
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 2,
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Nawiliwili Bay",
+   "reports": 4,
+   "islands": {
+    "Kauai": 4
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 4
+   }
+  },
+  {
+   "name": "Kahului Harbor",
+   "reports": 3,
+   "islands": {
+    "Maui": 3
+   },
+   "towns": [
+    "Wailuku"
+   ],
+   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 3
+   }
+  },
+  {
+   "name": "Keokea Bay",
+   "reports": 3,
+   "islands": {
+    "Hawaii": 3
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 3
+   }
+  },
+  {
+   "name": "Kuapa Pond",
+   "reports": 3,
+   "islands": {
+    "Oahu": 3
+   },
+   "towns": [
+    "Hawaii Kai"
+   ],
+   "towns_basis": "Oahu: the towns the notices give",
+   "permits": [
+    "HI0020303"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2,
+    "bypass": 1
+   }
+  },
+  {
+   "name": "Maunalua Bay",
+   "reports": 3,
+   "islands": {
+    "Oahu": 3
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Nuupia Pond",
+   "reports": 3,
+   "islands": {
+    "Oahu": 3
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the operator's town",
+   "permits": [
+    "HI0021296"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "bypass": 2,
+    "sso": 1
+   }
+  },
+  {
+   "name": "Palolo Stream",
+   "reports": 3,
+   "islands": {
+    "Oahu": 3
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 3
+   }
+  },
+  {
+   "name": "Pokai Bay",
+   "reports": 3,
+   "islands": {
+    "Oahu": 3
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Ahuimanu Stream",
+   "reports": 2,
+   "islands": {
+    "Oahu": 2
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "East Loch",
+   "reports": 2,
+   "islands": {
+    "Oahu": 2
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "Honaunau Bay",
+   "reports": 2,
+   "islands": {
+    "Hawaii": 2
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kalihi Stream",
+   "reports": 2,
+   "islands": {
+    "Oahu": 2
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "Kiilae Bay",
+   "reports": 2,
+   "islands": {
+    "Hawaii": 2
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Lake Wilson",
+   "reports": 2,
+   "islands": {
+    "Oahu": 2
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the operator's town",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1,
+    "bypass": 1
+   }
+  },
+  {
+   "name": "Puako Bay",
+   "reports": 2,
+   "islands": {
+    "Hawaii": 2
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Puhi Bay",
+   "reports": 2,
+   "islands": {
+    "Hawaii": 2
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the operator's town",
+   "permits": [
+    "HI0021377"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "plant_bypass": 1
+   }
+  },
+  {
+   "name": "Wailoa River",
+   "reports": 2,
+   "islands": {
+    "Hawaii": 2
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Wailupe Stream",
+   "reports": 2,
+   "islands": {
+    "Oahu": 2
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "Waimanalo Bay",
+   "reports": 2,
+   "islands": {
+    "Oahu": 2
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Ala Moana Lagoon",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Ala Wai Boat Harbor",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Ala Wai Canal",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Anaehoomalu Bay",
+   "reports": 1,
+   "islands": {
+    "Hawaii": 1
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Anahola Bay",
+   "reports": 1,
+   "islands": {
+    "Kauai": 1
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Hanapepe Salt Pond",
+   "reports": 1,
+   "islands": {
+    "Kauai": 1
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Honolulu Harbor",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kahaluu Bay",
+   "reports": 1,
+   "islands": {
+    "Hawaii": 1
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kahana Bay",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kalauao Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kalauau Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kalihiwai Bay",
+   "reports": 1,
+   "islands": {
+    "Kauai": 1
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kamanaiki Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kaneohe Bay",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kaopala Bay",
+   "reports": 1,
+   "islands": {
+    "Maui": 1
+   },
+   "towns": [
+    "Wailuku"
+   ],
+   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kawa Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the operator's town",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kawaihae Harbor",
+   "reports": 1,
+   "islands": {
+    "Hawaii": 1
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Keehi Lagoon",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Keoniloa Bay",
+   "reports": 1,
+   "islands": {
+    "Kauai": 1
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kua Bay",
+   "reports": 1,
+   "islands": {
+    "Hawaii": 1
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Kukuiula Bay",
+   "reports": 1,
+   "islands": {
+    "Kauai": 1
+   },
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "Kauai: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Maalaea Bay",
+   "reports": 1,
+   "islands": {
+    "Maui": 1
+   },
+   "towns": [
+    "Wailuku"
+   ],
+   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Maalaea Harbor",
+   "reports": 1,
+   "islands": {
+    "Maui": 1
+   },
+   "towns": [
+    "Wailuku"
+   ],
+   "towns_basis": "Maui: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Makiki Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Manoa Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Pauoa Bay",
+   "reports": 1,
+   "islands": {
+    "Hawaii": 1
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Puha Stream",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Wailuku River",
+   "reports": 1,
+   "islands": {
+    "Hawaii": 1
+   },
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "Hawaii: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Yokohama Bay",
+   "reports": 1,
+   "islands": {
+    "Oahu": 1
+   },
+   "towns": [
+    "Honolulu"
+   ],
+   "towns_basis": "Oahu: the island's county seat (the notices name no town)",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  }
+ ]
+}
