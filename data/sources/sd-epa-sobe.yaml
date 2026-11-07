@@ -20,12 +20,17 @@ level: "federal"
 #   (SD0022918) 19, Pierre (SD0020176) 15, Spearfish (SD0020044) 12, Aberdeen (SD0020702) 12, Mitchell (SD0023361)
 #   11, Watertown (SD0023370) 8; Lead's CSO permit (SD0027481) 3, filed as SSOs at a manhole to Gold Run Creek.
 #   No point is shared by more than four kept reports of one permit (the points are the events' own).
-# Kept and dropped: 56 kept from 30 permits (53 naming a receiving water, 1 aquatic-habitat impact, 2 by a water
-#   word in the description); 152 dropped: 97 SSOs naming no water and no water impact, 34 building backups, 21
+# Kept and dropped: 57 kept from 30 permits (53 naming a receiving water, 1 aquatic-habitat impact, 2 by a water
+#   word in the description, 1 bypass "NA, all water was filtered before discharged"); 151 dropped: 97 SSOs naming no
+#   water and no water impact, 34 building backups, 20
 #   naming no water in words ("Does not apply- Do not discharge to any waters", "NA", a lagoon cell, the city's
 #   sewer system or plant, "Water never entered lake").
-# Time zone: 70 rows lie in the Mountain-time counties (13 kept), 138 in the Central (43 kept); the U.S. DOT
-#   time-zone layer agrees on 206 of 208 (the two others are the Oahe Dam's, on the river that is the boundary).
+# Time zone: 71 rows in the Mountain zone (14 kept: the fifteen Mountain-time counties and western Stanley County),
+#   137 in the Central (43 kept); the U.S. DOT time-zone layer agrees on 207 of 208 (the other is an Oahe Dam row on
+#   the river that is the boundary, dropped).
+# Planned bypasses: two kept anticipated bypass notices have planned ends months ahead (Rapid City SD0023574 to
+#   Rapid Creek, 2026-11-02 to 2027-04-30, 1,656,907,683 gallons, disinfection bypassed; Aberdeen SD0020702 to
+#   Moccasin Creek, 2026-03-23 to 2028-06-01); they are ongoing to their planned ends (raw.end_is_planned).
 # Cannot fill: published_at (no posting time; the extract date stands in); advice_text; valid_until.
 cadence: "EPA refreshes daily. South Dakota rows: 208 events from 56 permits; report received a median 5 days after the start (10% the same day, 10% 57 days or more after). Newest receipt on the 2026-11-04 extract: 2026-11-03; newest start 2026-11-02 17:00 (Rapid City, a bypass to Rapid Creek)."
 license: "EPA public data; no licence restriction stated on the ECHO download page."
