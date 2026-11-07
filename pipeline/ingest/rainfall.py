@@ -29,17 +29,17 @@ Point, RI, valid 2026-11-07T02:00Z: 1.6, 15.8, 26.7, 40.1, 51.3, 52.4, 52.4 for 
 Providence gauge 17.8 to 26.4 mm in the hour to 00:51Z), and already did on 2026-11-03 (the Calais export in
 tests/fixtures: 3.8 to 7.3 where IEM's MRMS daily is 0.22 in). So every run decides the unit from the data
 (decide_units), never from the description alone: a box maximum (the largest value in the grid blocks read, or in
-the run's identify answers) over 30 for 24 hours or 45 for 72 hours is millimetres (the US 24-hour record is 43 in,
-Alvin, Texas, 1979); the gauge check (gauge_check: airport gauges in the box from api.weather.gov, mm, against
+the run's identify answers) over 50 for 24 hours (the US record, 49.69 in, Kauai, 2018) or 155 for 72 hours (the
+world record, 154.7 in, La Reunion, 1980) is millimetres; the gauge check (gauge_check: airport gauges in the box from api.weather.gov, mm, against
 identify at the wettest, at most four, where one had 2 mm or more; MRMS/gauge 0.4 to 2.5 is millimetres, the same
-over 25.4 inches) decides when it has a verdict, but cannot make values over the bound inches; else the unit last
+over 25.4 inches) decides when it has a verdict (a conflict with the bound divides nothing); else the unit last
 determined (rainfall.json mrms.units_last_determined); before any, the stated inches. Millimetres are divided by
 25.4 before anything uses them; rainfall.json mrms.units (and each reading's units_read) records the unit, the
 basis and the evidence; the identify check compares in the same unit. Point readings stored before the check are
 dropped and reread. The history's readings stored before it are rescaled once, every stored hour as millimetres
-(repair_history_units, by any run or by --repair-units; the history then carries units_checked, repair 2, and
-units_repair; a history the first version checked, which kept the hours before its first evidence, gets them rescaled
-by repair_second_pass).
+(repair_history_units, by any run or by --repair-units; the history then carries units_checked, repair 3, and
+units_repair; a history an earlier version checked, which kept the hours before its first evidence, gets them rescaled
+by repair_second_pass, the hours a later reading backfilled excepted by their provenance, history backfilled).
 
     python -m ingest.rainfall --repair-units     only the history repair (a second run changes nothing)
 
@@ -118,12 +118,20 @@ CHECK_TOLERANCE_IN = 0.011     # grid and identify at the same point and valid t
 # Bucklin Point, RI, valid 2026-11-07T02:00Z: 51.3 for 24 hours, 2.0 in; maxValues 118.7). The unit of every grid
 # and identify answer is decided from the data (decide_units), never from the description alone.
 MM_PER_IN = 25.4
-UNIT_BOUND_IN = {24: 30.0, 72: 45.0}   # a box maximum over this, read as inches, is impossible: millimetres (the
-                                       # US 24-hour record is 43 in, Alvin, Texas, 1979; 72 hours about 60 in)
+# A box maximum over these, read as inches, is above every total ever recorded: millimetres (SOL wave2 P2-10: the
+# limits sit above the records they cite, never below them). 24 hours: the US record, 49.69 in at Waipa Garden, Kauai,
+# Hawaii, 14-15 April 2018 (NOAA NCEI State Climate Extremes Committee, 2019; above the contiguous record, 42 in at
+# Alvin, Texas, 1979). 72 hours: the world record, 3,930 mm (154.7 in) at Cratere Commerson, La Reunion, 24-27
+# February 1980 (WMO World Weather and Climate Extremes Archive). Thirty inches in a day is extreme, not impossible.
+UNIT_BOUND_IN = {24: 50.0, 72: 155.0}
+UNIT_BOUND_CITE = {24: "the US 24-hour record, 49.69 in, Waipa Garden, Kauai, Hawaii, 2018 (NOAA NCEI SCEC)",
+                   72: "the world 72-hour record, 3,930 mm (154.7 in), Cratere Commerson, La Reunion, 1980 (WMO)"}
 UNITS_FOUND = "2026-11-07"
-UNIT_RULE = (f"unit decided from the data (found {UNITS_FOUND}): a box maximum over {UNIT_BOUND_IN[24]:g} (24 h) or "
-             f"{UNIT_BOUND_IN[72]:g} (72 h) is millimetres, the gauge check decides when it has a verdict, else the "
-             f"unit last determined; values in millimetres are divided by {MM_PER_IN} before use")
+UNIT_RULE = (f"unit decided from the data (found {UNITS_FOUND}): a box maximum over {UNIT_BOUND_IN[24]:g} (24 h, "
+             f"{UNIT_BOUND_CITE[24]}) or {UNIT_BOUND_IN[72]:g} (72 h, {UNIT_BOUND_CITE[72]}) is millimetres, the "
+             f"gauge check decides when it has a verdict, and when the two conflict nothing is divided (the safety "
+             f"side) and the conflict is recorded; else the unit last determined; values in millimetres are divided "
+             f"by {MM_PER_IN} before use")
 # The gauge check (gauge_check): airport gauges, api.weather.gov /stations/{id}/observations (precipitation in mm),
 # against MRMS identify at the same place; a fixed small list, used when inside the box.
 GAUGES = {"KPVD": (41.72, -71.43), "KBOS": (42.36, -71.01), "KBDL": (41.94, -72.68), "KLGA": (40.78, -73.88),
@@ -148,7 +156,11 @@ KNOWN_MM_AT = {
                             "4.6 at three points, box maximum 7.3, where IEM's MRMS daily rainfall at 45.12, -67.38 is "
                             "0.02 in for 2026-11-02 and 0.22 in for 2026-11-03: millimetres",
 }
-REPAIR_VERSION = 2             # 1: hours before the first evidence kept as inches; 2: every stored hour millimetres
+REPAIR_VERSION = 3             # 1: hours before the first evidence kept as inches; 2: those rescaled, but never within
+                               # 50 hours of the check; 3: those too, told from the readings' backfills by provenance
+                               # (SOL wave2 P2-7)
+BACKFILL_REACH_H = 50          # a reading after the check fills windows up to 48 hours before its valid time, which
+                               # can be an hour before the check
 BASELINE_REQUESTS_PER_HOUR = 384   # 319 identify + 196 forecast cells / 3 (2026-11-02, before the grid)
 FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails
 LOOKUP_MAX = 100               # new NWS /points lookups a run
@@ -329,8 +341,9 @@ def group_points(outfalls: list[dict]) -> dict[str, dict]:
 # ---------------------------------------------------------------- the unit
 
 def bound_verdict(maxima: dict) -> dict | None:
-    """maxima {hours: the largest value read, in the service's unit}: millimetres when a 24-hour maximum is over
-    30 or a 72-hour maximum over 45 (impossible as inches); None when the bound cannot tell."""
+    """maxima {hours: the largest value read, in the service's unit}: millimetres when a 24-hour maximum is over the
+    US 24-hour record or a 72-hour maximum over the world 72-hour record (UNIT_BOUND_IN, impossible as inches); None
+    when the bound cannot tell."""
     over = {h: m for h, m in (maxima or {}).items() if h in UNIT_BOUND_IN and m is not None and m > UNIT_BOUND_IN[h]}
     if not over:
         return None
@@ -338,25 +351,31 @@ def bound_verdict(maxima: dict) -> dict | None:
     return {"units_read": "mm", "basis": "physical_bound",
             "evidence": {"box_max": {f"h{k}": v for k, v in sorted(over.items())},
                          "bound_in": {f"h{k}": UNIT_BOUND_IN[k] for k in sorted(over)},
-                         "text": f"the largest {h}-hour value read, {over[h]}, is over {UNIT_BOUND_IN[h]:g}, impossible "
-                                 f"as inches (US 24-hour record 43 in, Alvin, Texas, 1979): millimetres"}}
+                         "text": f"the largest {h}-hour value read, {over[h]}, is over {UNIT_BOUND_IN[h]:g}, above "
+                                 f"{UNIT_BOUND_CITE[h]}, impossible as inches: millimetres"}}
 
 
 def decide_units(maxima: dict, last: dict | None = None, gauge: dict | None = None) -> dict:
     """The unit of this run's MRMS values: {units_read: "mm" | "in", factor (divide by it for inches), basis,
-    evidence, box_max}. The gauge check (gauge_check) decides when it has a verdict, except that it cannot make
-    values over the physical bound inches (the conflict is recorded and the bound kept); then the physical bound;
-    else the last unit determined (last: rainfall.json mrms.units_last_determined); else the service's stated
-    inches."""
+    evidence, box_max}. The gauge check (gauge_check) decides when it has a verdict; then the physical bound; else
+    the last unit determined (last: rainfall.json mrms.units_last_determined); else the service's stated inches.
+    When the gauge check reads inches and the box maximum is over the bound, the evidence conflicts (SOL wave2 P2-10):
+    nothing is divided (dividing would cut every genuine reading, a 0.2 in among them, to a twenty-fifth: err on the
+    side of safety), both pieces are recorded, and the run's unit (basis "conflict") is not kept as the last
+    determined one."""
     box_max = {f"h{h}": v for h, v in sorted((maxima or {}).items()) if v is not None}
     b = bound_verdict(maxima)
     gv = (gauge or {}).get("verdict")
-    if gv in ("mm", "in") and not (gv == "in" and b):
+    if gv == "in" and b:
+        d = {"units_read": "in", "basis": "conflict",
+             "evidence": {"gauge_check": {k: v for k, v in gauge.items() if k != "pairs"},
+                          "physical_bound": b["evidence"]},
+             "conflict": f"the gauge check read inches ({gauge.get('text')}) but {b['evidence']['text']}; nothing is "
+                         f"divided (the safety side) and the unit is not kept as determined"}
+    elif gv in ("mm", "in"):
         d = {"units_read": gv, "basis": "gauge_check", "evidence": {k: v for k, v in gauge.items() if k != "pairs"}}
     elif b:
         d = dict(b)
-        if gv == "in":
-            d["conflict"] = f"the gauge check read inches ({gauge.get('text')}); the physical bound kept"
     elif last and last.get("units_read") in ("mm", "in"):
         d = {"units_read": last["units_read"], "basis": "last_determined",
              "evidence": {"determined_at": last.get("determined_at"), "basis": last.get("basis")}}
@@ -749,22 +768,29 @@ def update_history(hist: dict | None, permits: dict[str, dict], now: datetime) -
             if 0 <= j < n:
                 new[j] = v
         series[p] = new
+    # provenance (SOL wave2 P2-7): the hours each permittee's array holds from a 48 or 72-hour total (a backfill,
+    # already in inches), as against its own hour's reading; a reading for the hour itself replaces the mark
+    backfilled = {p: {h for h in hs if parse_t(h) and parse_t(h) >= start}
+                  for p, hs in (old.get("backfilled") or {}).items()}
     for p, r in permits.items():
         vt = parse_t(r.get("valid_time"))
         if vt is None:
             continue
         arr = series.setdefault(p, [None] * n)
+        filled = backfilled.setdefault(p, set())
 
         def put(t, v, overwrite=True):
             i = int((hour_floor(t) - start).total_seconds() // 3600)
             if 0 <= i < n and v is not None and (overwrite or arr[i] is None):
                 arr[i] = round(max(0.0, v), 2)
+                (filled.discard if overwrite else filled.add)(iso(start + timedelta(hours=i)))
         put(vt, r.get("h24"))
         if r.get("h48") is not None and r.get("h24") is not None:
             put(vt - timedelta(hours=24), r["h48"] - r["h24"], overwrite=False)
         if r.get("h72") is not None and r.get("h48") is not None:
             put(vt - timedelta(hours=48), r["h72"] - r["h48"], overwrite=False)
     series = {p: a for p, a in series.items() if any(v is not None for v in a)}
+    backfilled = {p: sorted(hs) for p, hs in sorted(backfilled.items()) if hs and p in series}
     out = {"updated_at": iso(now), "start": iso(start), "step_hours": 1, "count": n,
            "units": "inches: the largest NOAA MRMS radar-only 24-hour total over the permittee's outfall points, "
                     "for the 24 hours ending at each hour (UTC); the service's values converted from millimetres "
@@ -772,36 +798,71 @@ def update_history(hist: dict | None, permits: dict[str, dict], now: datetime) -
            "units_checked": old.get("units_checked") or {"from": iso(hour_floor(now)), "rule": UNIT_RULE,
                                                           "repair": REPAIR_VERSION},
            "source": MRMS_URL, "permits": series}
+    if backfilled:
+        out["backfilled"] = backfilled
+    # from this hour on every backfill is marked: an unmarked hour after it is the hour's own reading
+    out["backfilled_since"] = old.get("backfilled_since") or (iso(start) if not old.get("permits")
+                                                              else iso(hour_floor(now)))
     if old.get("units_repair"):
         out["units_repair"] = old["units_repair"]
     return out
 
 
 def repair_second_pass(hist: dict, now: datetime) -> tuple[dict, dict]:
-    """A history the first repair (version 1) checked kept the hours before its first millimetre hour as inches; every
-    answer of the service seen is millimetres (review 2026-11-07, P1-1), so those hours are rescaled now: every value
-    before the first range the first repair rescaled (or, when it rescaled none, before the check), and never within
-    50 hours of the check (a later reading's earlier windows are filled up to 48 hours back)."""
+    """A history an earlier repair checked (version 1 or 2) may still hold millimetres labelled as inches: version 1
+    kept the hours before its first millimetre hour (every answer of the service seen is millimetres: review
+    2026-11-07, P1-1), and version 2 rescaled those but never within BACKFILL_REACH_H hours of the check, where a
+    reading after the check may have filled an empty hour from a 48 or 72-hour total, already in inches (SOL wave2
+    P2-7). Every hour before the first range version 1 rescaled (else before the check) is an original reading in
+    millimetres, rescaled here exactly once, unless the history's provenance (backfilled) marks it a backfill. An hour
+    within BACKFILL_REACH_H hours of the check that the provenance does not mark is an original when the marks are
+    complete since the check (backfilled_since at or before it); otherwise it cannot be told apart: it is left as
+    stored (the larger reading: the safety side), listed in units_repair.third_pass.unresolved, and the history is
+    not marked repaired (units_checked.repair) while one such hour is in the window."""
     chk, rep1 = hist["units_checked"], hist.get("units_repair") or {}
     start, frm = parse_t(hist.get("start")), parse_t(chk.get("from"))
-    chk["repair"] = REPAIR_VERSION
     if start is None or frm is None or not rep1.get("hours_kept_as_inches"):
-        return hist, {"changed": False, "reason": "second pass: nothing kept as inches"}
+        chk["repair"] = REPAIR_VERSION
+        return hist, {"changed": False, "reason": "nothing kept as inches"}
     ranges = rep1.get("ranges") or []
-    cut = min([t for t in [parse_t(ranges[0][0]) if ranges else None] if t] + [frm - timedelta(hours=50)])
-    n_cut = int((hour_floor(cut) - start).total_seconds() // 3600)
-    hours, values = set(), 0
-    for a in hist["permits"].values():
-        for i in range(min(n_cut, len(a))):
-            if a[i] is not None:
-                a[i] = round(a[i] / MM_PER_IN, 2)
+    first = parse_t(ranges[0][0]) if ranges else None
+    cut = hour_floor(min(t for t in (first, frm) if t))      # before it: originals or backfills, never rescaled
+    reach = frm - timedelta(hours=BACKFILL_REACH_H)          # before it: no backfill can reach, originals only
+    third = rep1.get("third_pass") or {}
+    sp = rep1.get("second_pass") or {}
+    done = [parse_t(x) for x in (third.get("rescaled_before"),
+                                 sp.get("before") if (chk.get("repair") or 1) >= 2 else None) if x]
+    done_before = max(done) if done else None                # every original before it is rescaled already
+    marks = {p: set(hs) for p, hs in (hist.get("backfilled") or {}).items()}
+    since = parse_t(hist.get("backfilled_since"))
+    complete = since is not None and since <= frm             # every backfill since the check is marked
+    hours, values, unresolved, held = set(), 0, {}, set()
+    for p, a in hist["permits"].items():
+        for i, v in enumerate(a):
+            t = start + timedelta(hours=i)
+            if t >= cut:
+                break
+            if v is None or (done_before and t < done_before):
+                continue
+            if iso(t) in marks.get(p, ()):
+                continue                                     # a backfill: inches already
+            if t < reach or complete:
+                a[i] = round(v / MM_PER_IN, 2)
                 hours.add(i)
                 values += 1
+            elif v:
+                unresolved.setdefault(p, []).append(iso(t))
+                held.add(i)
     report = {"changed": bool(values), "at": iso(now), "hours_rescaled": len(hours), "values_rescaled": values,
-              "before": iso(cut), "rule": "every hour stored before the first millimetre hour is millimetres too: no "
-                                          "answer of the service has been seen in inches"}
-    rep1["second_pass"] = report
+              "rescaled_before": iso(max([min(cut, reach) if unresolved else cut] + ([done_before] if done_before else []))),
+              "unresolved": unresolved, "hours_unresolved": len(held),
+              "rule": "every hour stored before the first millimetre hour is millimetres too (no answer of the service "
+                      "has been seen in inches), except the hours a later reading filled from a 48 or 72-hour total "
+                      "(backfilled); an hour within 50 hours of the check without that provenance is left as stored "
+                      "(the larger reading) until it can be told apart"}
+    rep1["third_pass"] = report
     hist["units_repair"] = rep1
+    chk["repair"] = REPAIR_VERSION if not unresolved else min(chk.get("repair") or 1, REPAIR_VERSION - 1)
     return hist, report
 
 
