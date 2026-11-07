@@ -1,0 +1,5980 @@
+{
+ "state": "IL",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 246,
+ "waters": [
+  {
+   "slug": "argyle-lake-il",
+   "name": "Argyle Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Colchester"
+   ],
+   "bbox": [
+    -90.79891,
+    40.44929,
+    -90.78346,
+    40.46324
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.389,
+   "launches": [
+    "argyle-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "babb-slough-il",
+   "name": "Babb Slough",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Lacon"
+   ],
+   "bbox": [
+    -89.45271,
+    40.9336,
+    -89.41629,
+    41.01501
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.158,
+   "launches": [
+    "babb-slough-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "baldwin-lake-il",
+   "name": "Baldwin Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Red Bud"
+   ],
+   "bbox": [
+    -89.87896,
+    38.19919,
+    -89.85367,
+    38.2343
+   ],
+   "wikidata": "Q4850568",
+   "charted": false,
+   "area_km2": 7.623,
+   "launches": [
+    "baldwin-lake-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-dam-lake-il",
+   "name": "Beaver Dam Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Macoupin"
+   ],
+   "bbox": [
+    -89.9753,
+    39.20872,
+    -89.96638,
+    39.21479
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.229,
+   "launches": [
+    "beaver-dam-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beck-lake-il",
+   "name": "Beck Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Des Plaines"
+   ],
+   "bbox": [
+    -87.8757,
+    42.07126,
+    -87.86986,
+    42.07634
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.153,
+   "launches": [
+    "beck-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-bear-lake-il",
+   "name": "Big Bear Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Vernon Hills"
+   ],
+   "bbox": [
+    -87.9653,
+    42.24663,
+    -87.96142,
+    42.25071
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.104,
+   "launches": [
+    "big-bear-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-bend-lake-il",
+   "name": "Big Bend Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Des Plaines"
+   ],
+   "bbox": [
+    -87.87968,
+    42.04949,
+    -87.87329,
+    42.05299
+   ],
+   "wikidata": "Q32360660",
+   "charted": false,
+   "area_km2": 0.111,
+   "launches": [
+    "big-bend-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-branch-il",
+   "name": "Big Branch",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Edgington"
+   ],
+   "bbox": [
+    -90.83382,
+    41.43418,
+    -90.83209,
+    41.43857
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-branch-boat-launch-near-edgington-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-muddy-river-il",
+   "name": "Big Muddy River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Grand Tower",
+    "Murphysboro",
+    "Nason",
+    "Waltonville"
+   ],
+   "bbox": [
+    -89.52135,
+    37.56196,
+    -88.95645,
+    38.4275
+   ],
+   "wikidata": "Q859080",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-muddy-river-boat-launch-il",
+    "dareville-il",
+    "big-muddy-river-boat-launch-waltonville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-goose-lake-il",
+   "name": "Blue Goose Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Cutler"
+   ],
+   "bbox": [
+    -89.52951,
+    38.0163,
+    -89.52719,
+    38.02265
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.076,
+   "launches": [
+    "blue-goose-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-wing-lake-il",
+   "name": "Blue Wing Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Denmark"
+   ],
+   "bbox": [
+    -89.50448,
+    37.97851,
+    -89.49832,
+    37.99303
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.191,
+   "launches": [
+    "bluewing-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bonpas-creek-il",
+   "name": "Bonpas Creek",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Grayville"
+   ],
+   "bbox": [
+    -87.99228,
+    38.25759,
+    -87.93706,
+    38.72576
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bonpas-creek-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "boulder-lake-il",
+   "name": "Boulder Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.43582,
+    38.01605,
+    -89.42438,
+    38.02742
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.243,
+   "launches": [
+    "boulder-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "braidwood-lake-il",
+   "name": "Braidwood Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Braceville",
+    "Braidwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "braceville-boat-launch-il-3",
+    "braidwood-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bunker-hill-reservoir-number-2-il",
+   "name": "Bunker Hill Reservoir Number 2",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Bunker Hill"
+   ],
+   "bbox": [
+    -89.97825,
+    39.04844,
+    -89.97491,
+    39.05195
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "bunker-hill-reservoir-number-2-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burnham-harbor-south-basin-il",
+   "name": "Burnham Harbor South Basin",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Chicago"
+   ],
+   "bbox": [
+    -87.61309,
+    41.85494,
+    -87.60937,
+    41.86041
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.131,
+   "launches": [
+    "burnham-harbor-south-basin-boat-launch-near-chicago-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "busse-lake-main-pool-il",
+   "name": "Busse Lake - Main Pool",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Elk Grove Village"
+   ],
+   "bbox": [
+    -88.02639,
+    42.01647,
+    -87.9978,
+    42.04266
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.729,
+   "launches": [
+    "busse-lake-boat-launch-il",
+    "busse-lake-south-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cache-river-il",
+   "name": "Cache River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Cache",
+    "Perks",
+    "Pulaski",
+    "White Hill"
+   ],
+   "bbox": [
+    -89.27357,
+    37.09959,
+    -88.91422,
+    37.51765
+   ],
+   "wikidata": "Q5015966",
+   "charted": false,
+   "area_km2": 0.079,
+   "launches": [
+    "cache-bend-boat-ramp-il",
+    "cache-levee-access-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cache-river-old-channel-il",
+   "name": "Cache River Old Channel",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Golden Lily"
+   ],
+   "bbox": [
+    -89.25196,
+    37.07919,
+    -89.18598,
+    37.1007
+   ],
+   "wikidata": "Q5015966",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-cache-channel-access-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cal-sag-channel-il",
+   "name": "Cal-Sag Channel",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Crestwood",
+    "Worth"
+   ],
+   "bbox": [
+    -87.95012,
+    41.65095,
+    -87.64946,
+    41.69675
+   ],
+   "wikidata": "Q32359304",
+   "charted": true,
+   "area_km2": 0.676,
+   "launches": [
+    "alsip-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "calumet-river-il",
+   "name": "Calumet River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Burnham",
+    "Dolton"
+   ],
+   "bbox": [
+    -87.64946,
+    41.63765,
+    -87.529,
+    41.73371
+   ],
+   "wikidata": "Q2934412",
+   "charted": true,
+   "area_km2": 2.103,
+   "launches": [
+    "calumet-river-boat-launch-near-dolton-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canada-goose-lake-il",
+   "name": "Canada Goose Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Cutler"
+   ],
+   "bbox": [
+    -89.53964,
+    38.02265,
+    -89.525,
+    38.02606
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.233,
+   "launches": [
+    "goose-lake-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canton-chute-il",
+   "name": "Canton Chute",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Quincy"
+   ],
+   "bbox": [
+    -91.51066,
+    39.97957,
+    -91.45259,
+    40.13288
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bear-creek-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canvasback-lake-il",
+   "name": "Canvasback Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Denmark"
+   ],
+   "bbox": [
+    -89.53228,
+    37.9932,
+    -89.50434,
+    37.99603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "canvasback-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carbondale-reservoir-il",
+   "name": "Carbondale Reservoir",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Carbondale"
+   ],
+   "bbox": [
+    -89.23599,
+    37.69236,
+    -89.22238,
+    37.70035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.5,
+   "launches": [
+    "carbondale-reservoir-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carlson-lake-il",
+   "name": "Carlson Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Bath"
+   ],
+   "bbox": [
+    -90.21219,
+    40.17963,
+    -90.17131,
+    40.22077
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.574,
+   "launches": [
+    "carlson-lake-boat-launch-near-bath-il",
+    "carlson-lake-boat-launch-near-bath-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carlyle-reservoir-il",
+   "name": "Carlyle Reservoir",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Boulder",
+    "Carlyle",
+    "Huey",
+    "Keyesport",
+    "Tamalco"
+   ],
+   "bbox": [
+    -89.36067,
+    38.61207,
+    -89.20092,
+    38.80462
+   ],
+   "wikidata": "Q5043144",
+   "charted": false,
+   "area_km2": 93.617,
+   "launches": [
+    "allen-branch-boat-ramp-il",
+    "apache-boat-ramp-il",
+    "carlyle-reservoir-boat-launch-near-boulder-il-2",
+    "carlyle-reservoir-boat-launch-near-boulder-il-4",
+    "carlyle-reservoir-boat-launch-near-carlyle-il",
+    "coles-creek-recreation-area-high-water-boat-ramp-il",
+    "carlyle-reservoir-boat-launch-near-huey-il",
+    "carlyle-reservoir-boat-launch-near-carlyle-il-2",
+    "dam-west-recreation-area-boat-ramp-il",
+    "carlyle-reservoir-boat-launch-near-carlyle-il-5",
+    "hazlet-state-park-apache-high-water-boat-ramp-il",
+    "carlyle-reservoir-boat-launch-near-carlyle-il-3",
+    "carlyle-reservoir-boat-launch-near-keyesport-il-3",
+    "carlyle-reservoir-boat-launch-near-keyesport-il-2",
+    "patoka-access-il",
+    "peppenhorst-boat-and-kayak-launch-area-il",
+    "tamalco-high-water-ramp-il",
+    "tamalco-access-area-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "casey-fork-subimpoundment-dam-il",
+   "name": "Casey Fork Subimpoundment Dam",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Bonnie"
+   ],
+   "bbox": [
+    -88.93899,
+    38.18751,
+    -88.91834,
+    38.20919
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.828,
+   "launches": [
+    "bonnie-dam-access-il",
+    "casey-fork-subimpoundment-dam-boat-launch-il",
+    "pin-oak-flats-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-carbondale-il",
+   "name": "Cedar Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Carbondale"
+   ],
+   "bbox": [
+    -89.28871,
+    37.64479,
+    -89.25857,
+    37.67727
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.134,
+   "launches": [
+    "cedar-creek-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-il",
+   "name": "Cedar Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pomona"
+   ],
+   "bbox": [
+    -89.30577,
+    37.60863,
+    -89.25661,
+    37.64729
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.854,
+   "launches": [
+    "cedar-lake-pomona-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chicago-sanitary-and-ship-canal-il",
+   "name": "Chicago Sanitary and Ship Canal",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Chicago",
+    "Lemont",
+    "Summit"
+   ],
+   "bbox": [
+    -88.07803,
+    41.55402,
+    -87.67652,
+    41.8411
+   ],
+   "wikidata": "Q2353035",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "richard-j-daley-park-boat-launch-il",
+    "richard-j-daley-park-boat-launch-chicago-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "childrens-pond-il",
+   "name": "Childrens Pond",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Glasford"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "glasford-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-il",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Belgium Row"
+   ],
+   "bbox": [
+    -87.74467,
+    40.13712,
+    -87.73125,
+    40.14593
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.161,
+   "launches": [
+    "clear-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-pinckneyville-il",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.40379,
+    38.03279,
+    -89.39723,
+    38.03722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.053,
+   "launches": [
+    "clear-lake-boat-launch-pinckneyville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clinton-lake-il",
+   "name": "Clinton Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Birkbeck",
+    "Clinton",
+    "De Witt"
+   ],
+   "bbox": [
+    -88.88371,
+    40.12784,
+    -88.68907,
+    40.22205
+   ],
+   "wikidata": "Q5134179",
+   "charted": false,
+   "area_km2": 19.315,
+   "launches": [
+    "clinton-lake-boat-launch-near-birkbeck-il",
+    "mascoutin-il",
+    "north-fork-il",
+    "parnell-boat-access-area-il",
+    "weldon-boat-access-il",
+    "west-side-boat-access-area-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coal-creek-il",
+   "name": "Coal Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Buda",
+    "Sheffield"
+   ],
+   "bbox": [
+    -89.939,
+    41.275,
+    -89.59967,
+    41.43613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "coal-creek-boat-launch-near-buda-il",
+    "coal-creek-boat-launch-near-sheffield-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coffeen-lake-il",
+   "name": "Coffeen Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Coffeen"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "coffeen-lake-boat-launch-il",
+    "coffeen-lake-boat-launch-near-coffeen-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crab-orchard-lake-il",
+   "name": "Crab Orchard Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Carbondale",
+    "Carterville"
+   ],
+   "bbox": [
+    -89.15199,
+    37.68501,
+    -88.98945,
+    37.75857
+   ],
+   "wikidata": "Q5180225",
+   "charted": false,
+   "area_km2": 27.984,
+   "launches": [
+    "blue-heron-marina-campground-boat-launch-il",
+    "campground-loop-e-boat-ramp-il",
+    "crab-orchard-lake-boat-launch-near-carterville-il",
+    "crab-orchard-lake-spillway-boat-launch-il",
+    "crab-orchard-marina-boat-launch-il",
+    "greenbriar-boat-launch-il",
+    "loop-b-boat-launch-il",
+    "old-route-13-boat-launch-il",
+    "prarie-creek-rec-area-boat-launch-il",
+    "sr-148-boat-landing-il",
+    "west-end-boat-launch-il",
+    "wolf-creek-causeway-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crabapple-lake-il",
+   "name": "Crabapple Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Mount Sterling"
+   ],
+   "bbox": [
+    -90.94761,
+    39.8795,
+    -90.93458,
+    39.8882
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.212,
+   "launches": [
+    "crabapple-lake-boat-launch-near-mount-sterling-il",
+    "crabapple-lake-boat-launch-near-mount-sterling-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crane-lake-il",
+   "name": "Crane Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Browning"
+   ],
+   "bbox": [
+    -90.31561,
+    40.10834,
+    -90.26213,
+    40.12679
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.17,
+   "launches": [
+    "crane-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-slough-il",
+   "name": "Crooked Slough",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Hanover"
+   ],
+   "bbox": [
+    -90.40884,
+    42.202,
+    -90.32857,
+    42.26486
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "crooked-slough-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-pinckneyville-il",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.42424,
+    38.00484,
+    -89.4161,
+    38.00567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.022,
+   "launches": [
+    "crystal-lake-boat-launch-pinckneyville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dawson-lake-il",
+   "name": "Dawson Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Ellsworth"
+   ],
+   "bbox": [
+    -88.72758,
+    40.40202,
+    -88.71814,
+    40.41885
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.608,
+   "launches": [
+    "dawson-lake-boat-launch-near-ellsworth-il",
+    "dawson-lake-boat-launch-near-ellsworth-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "depue-lake-il",
+   "name": "Depue Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "DePue"
+   ],
+   "bbox": [
+    -89.33626,
+    41.30173,
+    -89.28811,
+    41.32305
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.06,
+   "launches": [
+    "depue-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "derby-lake-il",
+   "name": "Derby Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Sparta"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "derby-lake-boatramp-and-dock-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "des-plaines-river-il",
+   "name": "Des Plaines River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Channahon",
+    "Darien",
+    "Des Plaines",
+    "Gurnee",
+    "Libertyville",
+    "Lincolnshire",
+    "Lyons",
+    "Maywood",
+    "Mount Prospect",
+    "North Riverside",
+    "Russell",
+    "Schiller Park"
+   ],
+   "bbox": [
+    -88.26058,
+    41.38283,
+    -87.80819,
+    42.50663
+   ],
+   "wikidata": "Q8637",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "allison-woods-canoe-landing-il",
+    "dam-no-2-woods-canoe-landing-il",
+    "channahon-boat-launch-il",
+    "des-plaines-river-boat-launch-near-channahon-il",
+    "des-plaines-river-canoe-launch-at-gowe-park-il",
+    "des-plaines-river-boat-launch-near-wheeling-il",
+    "independence-grove-canoe-launch-il",
+    "irving-park-rd-picnic-area-canoe-landing-il",
+    "maywood-grove-canoe-landing-il",
+    "northwestern-woods-canoe-landing-il",
+    "oak-spring-canoe-launch-il",
+    "rivershire-park-and-nature-center-canoe-launch-village-of-lincolnshire-il",
+    "schuth-s-grove-il",
+    "sedge-meadow-canoe-launch-il",
+    "van-patten-woods-canoe-launch-il",
+    "captain-daniel-wright-woods-canoe-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "devil-s-kitchen-lake-il",
+   "name": "Devil's Kitchen Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Carbondale"
+   ],
+   "bbox": [
+    -89.1115,
+    37.59368,
+    -89.06078,
+    37.64577
+   ],
+   "wikidata": "Q5267416",
+   "charted": false,
+   "area_km2": 2.607,
+   "launches": [
+    "devil-s-kitchen-boat-ramp-il",
+    "devil-s-kitchen-line-13-boat-launch-il",
+    "devil-s-kitchen-line-6-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "diversey-harbor-il",
+   "name": "Diversey Harbor",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Chicago"
+   ],
+   "bbox": [
+    -87.635,
+    41.92612,
+    -87.63072,
+    41.933
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.116,
+   "launches": [
+    "diversey-harbor-boat-launch-near-chicago-il-5"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 1991) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "1991-06-11"
+    }
+   ]
+  },
+  {
+   "slug": "drake-lake-il",
+   "name": "Drake Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Virginia"
+   ],
+   "bbox": [
+    -90.0865,
+    39.99636,
+    -90.08043,
+    40.00536
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "drake-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "drost-park-lake-il",
+   "name": "Drost Park Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Maryville"
+   ],
+   "bbox": [
+    -89.95086,
+    38.72653,
+    -89.94836,
+    38.7307
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "drost-park-lake-boat-launch-near-maryville-il",
+    "drost-park-lake-boat-launch-near-maryville-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dunn-lake-il",
+   "name": "Dunn Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Fox Lake"
+   ],
+   "bbox": [
+    -88.19678,
+    42.41388,
+    -88.17598,
+    42.42864
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.371,
+   "launches": [
+    "dunn-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dupage-river-il",
+   "name": "DuPage River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Plainfield",
+    "Shorewood"
+   ],
+   "bbox": [
+    -88.24256,
+    41.41336,
+    -88.14755,
+    41.70252
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dupage-river-carry-in-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dutchman-lake-il",
+   "name": "Dutchman Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": [
+    -88.93214,
+    37.48544,
+    -88.91138,
+    37.49457
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.387,
+   "launches": [
+    "dutchman-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-kaskaskia-river-il",
+   "name": "East Fork Kaskaskia River",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Carlyle"
+   ],
+   "bbox": [
+    -89.23991,
+    38.68969,
+    -88.79855,
+    38.82362
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "carlyle-lake-sfwa-wood-duck-access-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-lake-il",
+   "name": "East Fork Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Olney"
+   ],
+   "bbox": [
+    -88.08156,
+    38.74783,
+    -88.02472,
+    38.77024
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.088,
+   "launches": [
+    "east-fork-lake-boat-launch-il",
+    "east-fork-lake-boat-launch-near-olney-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-channahon-il",
+   "name": "East Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Channahon"
+   ],
+   "bbox": [
+    -88.20593,
+    41.46368,
+    -88.20224,
+    41.46652
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.05,
+   "launches": [
+    "east-lake-carry-in-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-il",
+   "name": "East Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Sparta"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-lake-boatramp-and-dock-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-paris-il",
+   "name": "East Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Paris"
+   ],
+   "bbox": [
+    -87.69256,
+    39.62982,
+    -87.67596,
+    39.64734
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.663,
+   "launches": [
+    "east-lake-boat-launch-near-paris-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eureka-lake-il",
+   "name": "Eureka Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -89.28771,
+    40.70307,
+    -89.27645,
+    40.70703
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.133,
+   "launches": [
+    "eureka-lake-boat-launch-near-eureka-il",
+    "eureka-lake-boat-launch-near-eureka-il-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "evergreen-lake-il",
+   "name": "Evergreen Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Kappa"
+   ],
+   "bbox": [
+    -89.0616,
+    40.60803,
+    -89.00872,
+    40.65293
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.601,
+   "launches": [
+    "evergreen-lake-boat-launch-il",
+    "north-1200-east-road-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "final-cut-lake-il",
+   "name": "Final Cut Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Carrier Mills"
+   ],
+   "bbox": [
+    -88.65806,
+    37.71557,
+    -88.65136,
+    37.72501
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.062,
+   "launches": [
+    "cut-lake-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "forbes-lake-il",
+   "name": "Forbes Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Omega"
+   ],
+   "bbox": [
+    -88.77732,
+    38.70963,
+    -88.74466,
+    38.74573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.967,
+   "launches": [
+    "forbes-lake-boat-launch-near-omega-il",
+    "forbes-lake-boat-launch-near-omega-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fox-river-il",
+   "name": "Fox River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Algonquin",
+    "Antioch",
+    "Aurora",
+    "Batavia",
+    "Burtons Bridge",
+    "Carpentersville",
+    "Cary",
+    "Dayton",
+    "East Dundee",
+    "Elgin",
+    "Fox River Grove",
+    "Geneva"
+   ],
+   "bbox": [
+    -88.84086,
+    41.34242,
+    -88.16989,
+    42.73539
+   ],
+   "wikidata": "Q1440192",
+   "charted": true,
+   "area_km2": 0.414,
+   "launches": [
+    "boy-scout-island-boat-launch-il",
+    "fox-river-boat-launch-near-elgin-il",
+    "fox-river-boat-launch-il",
+    "fox-river-boat-launch-wauconda-il",
+    "fox-river-boat-launch-yorkville-il",
+    "fox-river-boat-launch-near-algonquin-il",
+    "fox-river-boat-launch-near-antioch-il",
+    "fox-river-boat-launch-near-batavia-il",
+    "fox-river-boat-launch-near-batavia-il-3",
+    "fox-river-boat-launch-near-geneva-il",
+    "fox-river-boat-launch-near-mchenry-il-7",
+    "river-mile-73-3-trout-park-il",
+    "river-mile-73-5-voyager-landing-forest-preserve-south-il",
+    "river-mile-73-6-voyager-landing-forest-preserve-north-il",
+    "shuh-shuh-gah-canoe-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gadwell-lake-il",
+   "name": "Gadwell Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Cutler"
+   ],
+   "bbox": [
+    -89.52718,
+    38.01378,
+    -89.5209,
+    38.01473
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "gadwell-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "galena-river-il",
+   "name": "Galena River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Galena"
+   ],
+   "bbox": [
+    -90.44972,
+    42.37419,
+    -90.34342,
+    42.56287
+   ],
+   "wikidata": "Q941044",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "galena-river-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "galum-lake-il",
+   "name": "Galum Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Conant"
+   ],
+   "bbox": [
+    -89.48081,
+    38.05003,
+    -89.47641,
+    38.0522
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.044,
+   "launches": [
+    "galum-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gladstone-lake-il",
+   "name": "Gladstone Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Gladstone"
+   ],
+   "bbox": [
+    -90.98203,
+    40.85207,
+    -90.97638,
+    40.85688
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.116,
+   "launches": [
+    "gladstone-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glen-o-jones-lake-il",
+   "name": "Glen O Jones Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Horseshoe"
+   ],
+   "bbox": [
+    -88.3952,
+    37.68225,
+    -88.38183,
+    37.69159
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.389,
+   "launches": [
+    "glen-o-jones-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goldeneye-lake-il",
+   "name": "Goldeneye Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.4765,
+    38.01997,
+    -89.45589,
+    38.03709
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.417,
+   "launches": [
+    "goldeneye-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gorden-moore-lake-il",
+   "name": "Gorden Moore Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Wood River"
+   ],
+   "bbox": [
+    -90.11693,
+    38.90278,
+    -90.11289,
+    38.90827
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.048,
+   "launches": [
+    "gordon-more-lake-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "governor-bond-lake-il",
+   "name": "Governor Bond Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Greenville"
+   ],
+   "bbox": [
+    -89.40335,
+    38.92219,
+    -89.34844,
+    38.95776
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.951,
+   "launches": [
+    "governor-bond-lake-boat-launch-near-greenville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grand-marais-lake-il",
+   "name": "Grand Marais Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Alorton"
+   ],
+   "bbox": [
+    -90.08973,
+    38.57517,
+    -90.08297,
+    38.58809
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.344,
+   "launches": [
+    "grand-marais-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grass-lake-il",
+   "name": "Grass Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Antioch",
+    "Grass Lake",
+    "Klondike"
+   ],
+   "bbox": [
+    -88.17914,
+    42.42583,
+    -88.13747,
+    42.46486
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.621,
+   "launches": [
+    "grass-lake-boat-launch-near-antioch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-wing-lake-il",
+   "name": "Green Wing Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Willisville"
+   ],
+   "bbox": [
+    -89.54726,
+    37.98784,
+    -89.53082,
+    37.99584
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.168,
+   "launches": [
+    "green-wing-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greenville-lake-il",
+   "name": "Greenville Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Greenville"
+   ],
+   "bbox": [
+    -89.44356,
+    38.89115,
+    -89.43723,
+    38.89591
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "greenville-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gridley-lake-il",
+   "name": "Gridley Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Philadelphia"
+   ],
+   "bbox": [
+    -90.07437,
+    39.95183,
+    -90.06495,
+    39.95567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "gridley-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gun-creek-il",
+   "name": "Gun Creek",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Ina"
+   ],
+   "bbox": [
+    -88.89208,
+    38.11709,
+    -88.76569,
+    38.18898
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cypress-view-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hastings-lake-il",
+   "name": "Hastings Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Lindenhurst"
+   ],
+   "bbox": [
+    -88.04241,
+    42.42301,
+    -88.03547,
+    42.42999
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.301,
+   "launches": [
+    "hastings-car-top-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "heidecke-lake-il",
+   "name": "Heidecke Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Aux Sable"
+   ],
+   "bbox": [
+    -88.37216,
+    41.35383,
+    -88.31191,
+    41.38662
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.712,
+   "launches": [
+    "heidecke-lake-boat-launch-il"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 1993) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "1993-10-15"
+    }
+   ]
+  },
+  {
+   "slug": "hennepin-canal-il",
+   "name": "Hennepin Canal",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Annawan",
+    "Atkinson",
+    "Colona",
+    "Geneseo",
+    "Mineral",
+    "Sheffield",
+    "Wyanet"
+   ],
+   "bbox": [
+    -90.39224,
+    41.2844,
+    -89.34241,
+    41.48449
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hennepin-canal-boat-launch-near-annawan-il",
+    "hennepin-canal-boat-launch-near-atkinson-il",
+    "hennepin-canal-boat-launch-near-geneseo-il",
+    "hennepin-canal-boat-launch-near-geneseo-il-2",
+    "hennepin-canal-boat-launch-near-geneseo-il-3",
+    "hennepin-canal-boat-launch-near-mineral-il",
+    "hennepin-canal-boat-launch-near-sheffield-il",
+    "hennepin-canal-boat-launch-near-sheffield-il-3",
+    "hennepin-canal-boat-launch-near-wyanet-il",
+    "hennepin-canal-carry-in-access-near-atkinson-il",
+    "rock-river-hennepin-canal-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hennepin-feeder-canal-il",
+   "name": "Hennepin Feeder Canal",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Mineral",
+    "Rock Falls",
+    "Tampico"
+   ],
+   "bbox": [
+    -89.791,
+    41.40809,
+    -89.67611,
+    41.7894
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hennepin-feeder-canal-boat-launch-il",
+    "hennepin-feeder-canal-boat-launch-near-mineral-il",
+    "hennepin-feeder-canal-boat-launch-near-rock-falls-il",
+    "hennepin-feeder-canal-boat-launch-near-tampico-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "heritage-lake-il",
+   "name": "Heritage Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Rantoul"
+   ],
+   "bbox": [
+    -88.13634,
+    40.28662,
+    -88.13199,
+    40.28961
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "heritage-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "heron-lake-il",
+   "name": "Heron Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.43232,
+    38.00702,
+    -89.42528,
+    38.00869
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.028,
+   "launches": [
+    "heron-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "homer-lake-il",
+   "name": "Homer Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Homer"
+   ],
+   "bbox": [
+    -87.9907,
+    40.05942,
+    -87.98151,
+    40.07846
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.32,
+   "launches": [
+    "homer-lake-boat-launch-near-homer-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-granite-city-il",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Granite City"
+   ],
+   "bbox": [
+    -90.12434,
+    38.67133,
+    -90.0669,
+    38.70888
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.727,
+   "launches": [
+    "horseshoe-lake-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-il",
+   "name": "Horseshoe Lake",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Mounds",
+    "Olive Branch",
+    "Roth",
+    "Tankville"
+   ],
+   "bbox": [
+    -89.36506,
+    37.10785,
+    -89.31687,
+    37.15843
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.1,
+   "launches": [
+    "horseshe-lake-boat-launch-il",
+    "horseshoe-lake-boat-launch-il",
+    "horseshoe-lake-boat-launch-roth-il",
+    "horseshoe-lake-boat-launch-il-2",
+    "horseshoe-lake-boat-launch-near-mounds-il",
+    "horseshoe-lake-boat-launch-near-roth-il",
+    "horseshoe-lake-boat-launch-near-tankville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horton-lake-il",
+   "name": "Horton Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Nauvoo"
+   ],
+   "bbox": [
+    -91.38477,
+    40.5448,
+    -91.37879,
+    40.54686
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.048,
+   "launches": [
+    "horton-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "illinois-river-il",
+   "name": "Illinois River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Banner",
+    "Bath",
+    "Beardstown",
+    "Bedford",
+    "Browning",
+    "Chillicothe",
+    "East Peoria",
+    "Florence",
+    "Frederick",
+    "Grafton",
+    "Hardin",
+    "Havana"
+   ],
+   "bbox": [
+    -90.64589,
+    38.95468,
+    -88.26058,
+    41.39987
+   ],
+   "wikidata": "Q8321",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bartonville-access-area-il",
+    "chillicothe-access-area-il",
+    "glades-backwater-il",
+    "glades-river-il",
+    "godar-diamond-river-access-area-il",
+    "grafton-il",
+    "hadleys-ldg-il",
+    "illinois-river-boat-launch-near-bath-il-2",
+    "illinois-river-boat-launch-near-havana-il-2",
+    "illinois-river-boat-launch-near-henry-il",
+    "illinois-river-boat-launch-near-la-salle-il",
+    "illinois-river-boat-launch-near-marseilles-il",
+    "illinois-river-boat-launch-near-morris-il",
+    "illinois-river-boat-launch-near-morris-il-2",
+    "illinois-river-boat-launch-near-north-utica-il",
+    "illinois-river-boat-launch-near-north-utica-il-2",
+    "ottawa-boat-launch-il",
+    "illinois-river-boat-launch-near-ottawa-il",
+    "illinois-river-boat-launch-near-ottawa-il-2",
+    "kingston-mines-access-area-il",
+    "lacon-public-access-il",
+    "liver-pool-access-il",
+    "illinois-river-boat-launch-near-michael-il",
+    "michael-ldg-public-access-il",
+    "sanganois-boat-launch-il",
+    "scott-county-naples-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "illinois-waterway-il",
+   "name": "Illinois Waterway",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Birch Island",
+    "Brussels"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gilead-boat-launch-il",
+    "lower-swan-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "inland-sea-il",
+   "name": "Inland Sea",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Danville"
+   ],
+   "bbox": [
+    -87.74102,
+    40.1452,
+    -87.73576,
+    40.14891
+   ],
+   "wikidata": "Q32361107",
+   "charted": false,
+   "area_km2": 0.094,
+   "launches": [
+    "inland-sea-boat-launch-il",
+    "lake-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-il",
+   "name": "Island Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Island Lake"
+   ],
+   "bbox": [
+    -88.20237,
+    42.27381,
+    -88.1932,
+    42.28267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.289,
+   "launches": [
+    "island-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-park-inner-harbor-il",
+   "name": "Jackson Park Inner Harbor",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Chicago"
+   ],
+   "bbox": [
+    -87.57911,
+    41.77574,
+    -87.5747,
+    41.78044
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.079,
+   "launches": [
+    "jackson-park-inner-harbor-boat-launch-near-chicago-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-lake-il",
+   "name": "Johnson Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Kewanee"
+   ],
+   "bbox": [
+    -89.89054,
+    41.3203,
+    -89.88092,
+    41.32833
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.228,
+   "launches": [
+    "johnson-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnston-city-lake-il",
+   "name": "Johnston City Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Pittsburg"
+   ],
+   "bbox": [
+    -88.86836,
+    37.79694,
+    -88.85764,
+    37.80262
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.241,
+   "launches": [
+    "johnston-city-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kankakee-river-il",
+   "name": "Kankakee River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Aroma Park",
+    "Bourbonnais",
+    "Channahon",
+    "Kankakee",
+    "Momence",
+    "River"
+   ],
+   "bbox": [
+    -88.26595,
+    41.07262,
+    -86.42399,
+    41.60436
+   ],
+   "wikidata": "Q8642",
+   "charted": true,
+   "area_km2": 20.18,
+   "launches": [
+    "area-9-boat-launch-il",
+    "kankakee-river-boat-launch-near-channahon-il",
+    "kankakee-river-boat-launch-near-kankakee-il-2",
+    "kankakee-river-boat-launch-near-momence-il",
+    "kankakee-river-boat-launch-near-river-il",
+    "wbdy-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaolin-pond-il",
+   "name": "Kaolin Pond",
+   "kind": "pond",
+   "state": "IL",
+   "towns": [
+    "Kaolin"
+   ],
+   "bbox": [
+    -89.30585,
+    37.51236,
+    -89.3039,
+    37.51324
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.011,
+   "launches": [
+    "kaolin-pond-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaskaskia-river-il",
+   "name": "Kaskaskia River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Allenville",
+    "Carlyle",
+    "Fayetteville",
+    "Red Bud",
+    "Shelbyville",
+    "Vandalia",
+    "Vernon"
+   ],
+   "bbox": [
+    -89.97298,
+    37.97307,
+    -88.33419,
+    40.17667
+   ],
+   "wikidata": "Q776873",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cox-bridge-boat-ramp-il",
+    "denham-pit-kayak-launch-il",
+    "fayetteville-boat-ramp-il",
+    "kaskaskia-river-boat-launch-near-carlyle-il",
+    "hitogi-boat-ramp-il",
+    "kaskaskia-river-boat-launch-near-red-bud-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaskaskia-river-navigation-pool-il",
+   "name": "Kaskaskia River Navigation Pool",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Baldwin",
+    "Ellis Grove",
+    "Evansville",
+    "New Athens",
+    "Red Bud"
+   ],
+   "bbox": [
+    -89.97463,
+    37.97807,
+    -89.88141,
+    38.31987
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.884,
+   "launches": [
+    "evansville-boat-ramp-il",
+    "joe-s-landing-boat-ramp-il",
+    "kaskaskia-river-navigation-pool-boat-launch-near-ellis-grove-il-2",
+    "kaskaskia-river-navigation-pool-boat-launch-near-ellis-grove-il",
+    "white-swan-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaskaskia-river-new-athens-il",
+   "name": "Kaskaskia River",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "New Athens"
+   ],
+   "bbox": [
+    -89.88824,
+    38.31949,
+    -89.8783,
+    38.33224
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.169,
+   "launches": [
+    "new-athens-public-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kinkaid-lake-il",
+   "name": "Kinkaid Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Ava",
+    "Murphysboro"
+   ],
+   "bbox": [
+    -89.51788,
+    37.77697,
+    -89.3966,
+    37.85189
+   ],
+   "wikidata": "Q6413902",
+   "charted": false,
+   "area_km2": 8.782,
+   "launches": [
+    "johnson-creek-boat-ramp-il",
+    "kinkaid-lake-boat-launch-il",
+    "mt-joy-boat-ramp-il",
+    "sharp-rock-falls-boating-site-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kinmundy-lake-kinmundy-il",
+   "name": "Kinmundy Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Kinmundy"
+   ],
+   "bbox": [
+    -88.86631,
+    38.7624,
+    -88.86145,
+    38.76598
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.052,
+   "launches": [
+    "kinmundy-lake-boat-launch-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kiser-creek-il",
+   "name": "Kiser Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Atlas"
+   ],
+   "bbox": [
+    -91.09541,
+    39.49412,
+    -91.06538,
+    39.63244
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "willow-access-south-il",
+    "willow-access-north-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kishwaukee-river-north-branch-il",
+   "name": "Kishwaukee River North Branch",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Belvidere",
+    "Cherry Valley",
+    "Marengo"
+   ],
+   "bbox": [
+    -88.98419,
+    42.20017,
+    -88.37643,
+    42.29764
+   ],
+   "wikidata": "Q7054247",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kishwaukee-river-north-branch-carry-in-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "l-p-dolan-lake-il",
+   "name": "L P Dolan Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "McLeansboro"
+   ],
+   "bbox": [
+    -88.40931,
+    38.05645,
+    -88.3975,
+    38.06553
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.295,
+   "launches": [
+    "l-p-dolan-lake-boat-launch-near-mcleansboro-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-carina-il",
+   "name": "Lake Carina",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Gurnee"
+   ],
+   "bbox": [
+    -87.93638,
+    42.35047,
+    -87.93218,
+    42.35509
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.095,
+   "launches": [
+    "lake-carina-car-top-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-carlton-il",
+   "name": "Lake Carlton",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Morrison"
+   ],
+   "bbox": [
+    -89.97325,
+    41.84289,
+    -89.95882,
+    41.84828
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.294,
+   "launches": [
+    "lake-carlton-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-centralia-il",
+   "name": "Lake Centralia",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -89.00674,
+    38.54239,
+    -88.98435,
+    38.56441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.991,
+   "launches": [
+    "lake-centralia-boat-launch-il"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020.",
+     "date": "2020-09-21",
+     "years": [
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-charles-il",
+   "name": "Lake Charles",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Vernon Hills"
+   ],
+   "bbox": [
+    -87.96694,
+    42.25537,
+    -87.96308,
+    42.26234
+   ],
+   "wikidata": "Q6475270",
+   "charted": false,
+   "area_km2": 0.161,
+   "launches": [
+    "lake-charles-carry-in-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-charleston-il",
+   "name": "Lake Charleston",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": [
+    -88.15392,
+    39.45919,
+    -88.13883,
+    39.47421
+   ],
+   "wikidata": "Q106405520",
+   "charted": false,
+   "area_km2": 1.31,
+   "launches": [
+    "lake-charleston-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-decatur-il",
+   "name": "Lake Decatur",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Decatur",
+    "Oreana"
+   ],
+   "bbox": [
+    -88.95649,
+    39.79862,
+    -88.83125,
+    39.91526
+   ],
+   "wikidata": "Q6475596",
+   "charted": false,
+   "area_km2": 11.961,
+   "launches": [
+    "lake-decatur-boat-launch-near-decatur-il-10",
+    "lake-decatur-boat-launch-near-decatur-il-7"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-glendale-il",
+   "name": "Lake Glendale",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Dixon Springs"
+   ],
+   "bbox": [
+    -88.66575,
+    37.41019,
+    -88.65223,
+    37.41515
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "cardinal-bay-boat-ramp-lake-glendale-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-glenn-shoals-il",
+   "name": "Lake Glenn Shoals",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Hillsboro"
+   ],
+   "bbox": [
+    -89.48296,
+    39.18653,
+    -89.44721,
+    39.24861
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.244,
+   "launches": [
+    "lake-glenn-shoals-boat-launch-hillsboro-il",
+    "lake-glenn-shoals-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-glenview-il",
+   "name": "Lake Glenview",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Glenview"
+   ],
+   "bbox": [
+    -87.82024,
+    42.0878,
+    -87.81539,
+    42.09523
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.172,
+   "launches": [
+    "gallery-park-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-jacksonville-il",
+   "name": "Lake Jacksonville",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Jacksonville"
+   ],
+   "bbox": [
+    -90.21625,
+    39.65874,
+    -90.17282,
+    39.67896
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.661,
+   "launches": [
+    "lake-jacksonville-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-le-aqua-na-il",
+   "name": "Lake Le-Aqua-Na",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Lena"
+   ],
+   "bbox": [
+    -89.8388,
+    42.41799,
+    -89.82753,
+    42.42225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.179,
+   "launches": [
+    "lake-le-aqua-na-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lou-yaeger-il",
+   "name": "Lake Lou Yaeger",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Litchfield"
+   ],
+   "bbox": [
+    -89.61866,
+    39.18594,
+    -89.58061,
+    39.27315
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.223,
+   "launches": [
+    "lake-lou-yaeger-boat-launch-litchfield-il",
+    "lake-lou-yaeger-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mattoon-neoga-il",
+   "name": "Lake Mattoon",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Neoga"
+   ],
+   "bbox": [
+    -88.47103,
+    39.35283,
+    -88.45253,
+    39.3809
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.832,
+   "launches": [
+    "lake-mattoon-boat-launch-near-neoga-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-michigan-il",
+   "name": "Lake Michigan",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Chicago",
+    "Evanston",
+    "Hammond",
+    "Highland Park",
+    "Lake Forest",
+    "North Chicago",
+    "Waukegan",
+    "Winnetka"
+   ],
+   "bbox": [
+    -88.04414,
+    41.60887,
+    -84.75193,
+    46.10169
+   ],
+   "wikidata": "Q1169",
+   "charted": true,
+   "area_km2": 60323.472,
+   "launches": [
+    "lake-michigan-boat-launch-near-hammond-il",
+    "church-street-power-boat-ramp-il",
+    "lake-michigan-boat-launch-near-highland-park-il",
+    "lake-michigan-boat-launch-near-waukegan-il",
+    "stepan-family-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mingo-il",
+   "name": "Lake Mingo",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Danville"
+   ],
+   "bbox": [
+    -87.73933,
+    40.20589,
+    -87.71716,
+    40.21929
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.659,
+   "launches": [
+    "lake-mingo-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-murphysboro-il",
+   "name": "Lake Murphysboro",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Murphysboro"
+   ],
+   "bbox": [
+    -89.38931,
+    37.77302,
+    -89.3737,
+    37.78627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.525,
+   "launches": [
+    "lake-murphysboro-boat-launch-il",
+    "lower-shady-cove-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nellie-il",
+   "name": "Lake Nellie",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Saint Elmo"
+   ],
+   "bbox": [
+    -88.8523,
+    39.04258,
+    -88.83754,
+    39.05033
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.215,
+   "launches": [
+    "lake-nellie-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-of-the-woods-il",
+   "name": "Lake of the Woods",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Mahomet"
+   ],
+   "bbox": [
+    -88.38287,
+    40.19731,
+    -88.37349,
+    40.20115
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.118,
+   "launches": [
+    "lake-of-the-woods-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-paradise-il",
+   "name": "Lake Paradise",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Paradise"
+   ],
+   "bbox": [
+    -88.44352,
+    39.41243,
+    -88.4267,
+    39.4283
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.672,
+   "launches": [
+    "lake-paradise-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pittsfield-il",
+   "name": "Lake Pittsfield",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Pittsfield"
+   ],
+   "bbox": [
+    -90.76221,
+    39.62856,
+    -90.74227,
+    39.64921
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.844,
+   "launches": [
+    "lake-pittsfield-boat-launch-il",
+    "lake-pittsfield-boat-launch-near-pittsfield-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sara-effingham-il",
+   "name": "Lake Sara",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Effingham"
+   ],
+   "bbox": [
+    -88.62018,
+    39.1277,
+    -88.61172,
+    39.13448
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.11,
+   "launches": [
+    "lake-sara-boat-launch-near-effingham-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sara-il",
+   "name": "Lake Sara",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Effingham"
+   ],
+   "bbox": [
+    -88.66662,
+    39.12348,
+    -88.61652,
+    39.14298
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.31,
+   "launches": [
+    "lake-sara-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-shelbyville-il",
+   "name": "Lake Shelbyville",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Allenville",
+    "Bethany",
+    "Bruce",
+    "Findlay",
+    "Shelbyville",
+    "Sullivan",
+    "Todds Point"
+   ],
+   "bbox": [
+    -88.78708,
+    39.40777,
+    -88.54799,
+    39.60001
+   ],
+   "wikidata": "Q6477710",
+   "charted": false,
+   "area_km2": 44.178,
+   "launches": [
+    "bethany-boat-ramp-il",
+    "bruce-west-boat-ramp-il",
+    "coal-shaft-south-boat-ramp-il",
+    "lake-shelbyville-boat-launch-il-8",
+    "lake-shelbyville-boat-launch-il-3",
+    "lake-shelbyville-boat-launch-near-shelbyville-il-2",
+    "eden-street-boat-ramp-il",
+    "forrest-w-wood-access-area-il",
+    "f-w-bo-wood-highwater-boat-ramp-il",
+    "findlay-marina-boat-ramp-il",
+    "fishook-impoundment-boat-ramp-il",
+    "high-water-boat-ramp-il",
+    "johnathon-creek-boat-ramp-il",
+    "johnson-s-bluff-boat-ramp-il",
+    "lake-shelbyville-boat-launch-il",
+    "lake-shelbyville-boat-launch-near-shelbyville-il",
+    "lake-shelbyville-boat-launch-near-shelbyville-il-3",
+    "lake-shelbyville-boat-launch-il-9",
+    "lone-point-high-water-boat-ramp-il",
+    "maqrina-il",
+    "old-nelson-boat-ramp-il",
+    "lake-shelbyville-boat-launch-il-2",
+    "high-water-ramp-shelbyville-il",
+    "strickland-il",
+    "whitley-creek-recreation-area-sullivan-il",
+    "wilborn-creek-boat-ramp-il",
+    "wilborn-creek-high-water-boat-ramp-il",
+    "high-water-il",
+    "woodard-road-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-springfield-il",
+   "name": "Lake Springfield",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Chatham",
+    "Cotton Hill",
+    "Springfield",
+    "Woodside"
+   ],
+   "bbox": [
+    -89.69893,
+    39.66615,
+    -89.57825,
+    39.76194
+   ],
+   "wikidata": "Q6477811",
+   "charted": false,
+   "area_km2": 15.646,
+   "launches": [
+    "lake-springfield-boat-launch-near-springfield-il-4",
+    "lake-springfield-boat-launch-near-chatham-il",
+    "marine-point-boat-launch-cotton-hill-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-taylorville-il",
+   "name": "Lake Taylorville",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Taylorville"
+   ],
+   "bbox": [
+    -89.27686,
+    39.46992,
+    -89.24151,
+    39.53115
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.238,
+   "launches": [
+    "lake-taylorville-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tecumseh-il",
+   "name": "Lake Tecumseh",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Elizabethtown"
+   ],
+   "bbox": [
+    -88.32749,
+    37.48152,
+    -88.32379,
+    37.48444
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.049,
+   "launches": [
+    "lake-tecumseh-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-vermilion-il",
+   "name": "Lake Vermilion",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Danville"
+   ],
+   "bbox": [
+    -87.65467,
+    40.15578,
+    -87.63214,
+    40.20309
+   ],
+   "wikidata": "Q6478250",
+   "charted": false,
+   "area_km2": 3.198,
+   "launches": [
+    "lake-vermilion-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lasalle-county-nuclear-station-cooling-pond-il",
+   "name": "LaSalle County Nuclear Station Cooling Pond",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Seneca"
+   ],
+   "bbox": [
+    -88.6755,
+    41.24236,
+    -88.61756,
+    41.2671
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.162,
+   "launches": [
+    "lasalle-county-nuclear-station-cooling-pond-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lincoln-trail-state-park-lake-il",
+   "name": "Lincoln Trail State Park Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Marshall"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "marshall-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-cache-number-5-reservoir-il",
+   "name": "Little Cache Number 5 Reservoir",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": [
+    -88.87018,
+    37.48765,
+    -88.86597,
+    37.48856
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.029,
+   "launches": [
+    "little-cache-boatramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-grassy-lake-il",
+   "name": "Little Grassy Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Carbondale",
+    "Makanda"
+   ],
+   "bbox": [
+    -89.15838,
+    37.59848,
+    -89.11732,
+    37.64884
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.502,
+   "launches": [
+    "giant-city-kayak-launch-il",
+    "little-grassy-lake-nw-boat-launch-il",
+    "little-grassy-lake-boat-launch-near-carbondale-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lock-canal-18-il",
+   "name": "Lock Canal 18",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Oquawka"
+   ],
+   "bbox": [
+    -91.03518,
+    40.87583,
+    -91.0174,
+    40.89032
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lock-canal-18-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lock-canal-no-13-il",
+   "name": "Lock Canal No. 13",
+   "kind": "canal",
+   "state": "IL",
+   "towns": [
+    "Fulton"
+   ],
+   "bbox": [
+    -90.15951,
+    41.89294,
+    -90.14961,
+    41.91487
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lock-and-dam-13-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-il",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Belgium Row",
+    "Danville"
+   ],
+   "bbox": [
+    -87.74476,
+    40.12472,
+    -87.72738,
+    40.13674
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "long-lake-boat-launch-il",
+    "long-lake-boat-launch-near-danville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-round-lake-beach-il",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Round Lake Beach"
+   ],
+   "bbox": [
+    -88.14141,
+    42.36773,
+    -88.11502,
+    42.38153
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.599,
+   "launches": [
+    "long-lake-car-top-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-turner-landing-il",
+   "name": "Long Lake",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Turner Landing"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loon-lake-il",
+   "name": "Loon Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Plano"
+   ],
+   "bbox": [
+    -88.52743,
+    41.63006,
+    -88.52131,
+    41.63247
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.07,
+   "launches": [
+    "loon-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loon-lake-loon-lake-il",
+   "name": "Loon Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Loon Lake"
+   ],
+   "bbox": [
+    -88.09011,
+    42.44821,
+    -88.07794,
+    42.45672
+   ],
+   "wikidata": "Q6675631",
+   "charted": false,
+   "area_km2": 0.67,
+   "launches": [
+    "loon-lake-boat-launch-near-loon-lake-il"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2009) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2009-11-22"
+    }
+   ]
+  },
+  {
+   "slug": "lost-lake-il",
+   "name": "Lost Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.40979,
+    38.02568,
+    -89.40081,
+    38.02785
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.042,
+   "launches": [
+    "lost-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-flat-pond-il",
+   "name": "Lower Flat Pond",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Batchtown"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cockrell-hollow-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-stump-lake-il",
+   "name": "Lower Stump Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Rosedale"
+   ],
+   "bbox": [
+    -90.57256,
+    38.98951,
+    -90.56085,
+    39.02087
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.09,
+   "launches": [
+    "stump-lake-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lusk-creek-il",
+   "name": "Lusk Creek",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Eddyville",
+    "Golconda"
+   ],
+   "bbox": [
+    -88.57895,
+    37.36582,
+    -88.47578,
+    37.58311
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lusk-creek-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mallard-bay-il",
+   "name": "Mallard Bay",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Marseilles"
+   ],
+   "bbox": [
+    -88.70077,
+    41.31983,
+    -88.69988,
+    41.32056
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.003,
+   "launches": [
+    "mallard-bay-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mallard-lake-il",
+   "name": "Mallard Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Denmark"
+   ],
+   "bbox": [
+    -89.50372,
+    37.98047,
+    -89.48622,
+    37.99505
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.262,
+   "launches": [
+    "mallard-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mccullom-lake-il",
+   "name": "McCullom Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "McHenry"
+   ],
+   "bbox": [
+    -88.29815,
+    42.35559,
+    -88.28241,
+    42.36553
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.005,
+   "launches": [
+    "mccullom-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "meredosia-lake-il",
+   "name": "Meredosia Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Beardstown",
+    "Meredosia"
+   ],
+   "bbox": [
+    -90.57357,
+    39.84406,
+    -90.52361,
+    39.9059
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.99,
+   "launches": [
+    "meredosia-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mermet-lake-il",
+   "name": "Mermet Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Joppa",
+    "Mermet"
+   ],
+   "bbox": [
+    -88.85616,
+    37.24951,
+    -88.82702,
+    37.26685
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.13,
+   "launches": [
+    "mermet-lake-boat-launch-near-joppa-il",
+    "mermet-lake-boat-launch-near-joppa-il-2",
+    "mermet-lake-boat-launch-near-joppa-il-3",
+    "mermet-lake-boat-launch-near-mermet-il",
+    "mermet-lake-boat-launch-near-mermet-il-2",
+    "mermet-lake-boat-launch-near-mermet-il-3",
+    "mermet-lake-boat-launch-near-mermet-il-4",
+    "mermet-lake-boat-launch-near-mermet-il-5",
+    "mermet-lake-boat-launch-near-mermet-il-6"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-fork-vermilion-river-il",
+   "name": "Middle Fork Vermilion River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Belgium Row",
+    "Danville",
+    "Higginsville"
+   ],
+   "bbox": [
+    -88.23766,
+    40.1036,
+    -87.71726,
+    40.48977
+   ],
+   "wikidata": "Q6841425",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "higginsville-bridge-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-lake-il",
+   "name": "Mill Creek Lake",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Clarksville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clarksville-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mississippi-river-il",
+   "name": "Mississippi River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Albany",
+    "Alton",
+    "Andalusia",
+    "Atlas",
+    "Blanding",
+    "Brussels",
+    "Chester",
+    "Cordova",
+    "Dallas City",
+    "East Carondelet",
+    "East Dubuque",
+    "East Moline"
+   ],
+   "bbox": [
+    -91.51211,
+    36.94402,
+    -89.10061,
+    42.5251
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "10th-street-boat-launch-il",
+    "albany-municipal-boat-ramp-il",
+    "alton-riverfront-il",
+    "andalusia-slough-boat-ramp-il",
+    "big-slough-landing-boat-launch-il",
+    "blanchard-island-boat-ramp-il",
+    "blanding-landing-recreation-area-boat-launch-il",
+    "canton-chute-boat-ramp-il",
+    "cattail-slough-recreation-area-boat-launch-il",
+    "cincinnati-landing-il",
+    "ferry-landing-boat-launch-il",
+    "fulton-harbor-boat-launch-il",
+    "gosline-access-area-boat-ramp-il",
+    "grand-tower-ramp-il",
+    "hamilton-public-boat-ramp-il",
+    "john-hay-boat-ramp-il",
+    "keithsburg-boat-ramp-il",
+    "marquette-park-north-boat-launch-il",
+    "marquette-park-south-boat-launch-il",
+    "mickelson-s-landing-boat-launch-il",
+    "mississippi-river-boat-launch-near-andalusia-il",
+    "mississippi-river-boat-launch-near-dallas-city-il",
+    "east-moline-boat-launch-il",
+    "hampton-boat-launch-il-2",
+    "mississippi-river-boat-launch-near-keithsburg-il-2",
+    "mississippi-river-boat-launch-near-moline-il",
+    "oquawka-boat-launch-il",
+    "mississippi-river-boat-launch-near-oquawka-il",
+    "mississippi-river-boat-launch-near-quincy-il-5",
+    "port-byron-boat-launch-il",
+    "putney-s-landing-il",
+    "red-s-landing-river-il",
+    "red-slanding-backwaters-il",
+    "rip-rap-landing-il",
+    "royal-landing-il",
+    "schuler-s-shady-grove-boat-ramp-il",
+    "sunfish-lake-boat-ramp-il",
+    "thomson-causeway-recreation-area-boat-launch-il",
+    "two-rivers-north-access-il",
+    "two-rivers-marina-pike-il",
+    "village-of-hamburg-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-lake-il",
+   "name": "Muddy Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Nason"
+   ],
+   "bbox": [
+    -89.01694,
+    38.17504,
+    -88.9951,
+    38.19452
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.138,
+   "launches": [
+    "north-nanson-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newton-lake-il",
+   "name": "Newton Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Newton"
+   ],
+   "bbox": [
+    -88.31462,
+    38.8841,
+    -88.25439,
+    38.95358
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.328,
+   "launches": [
+    "newton-lake-boat-launch-near-newton-il",
+    "newton-lake-boat-launch-near-newton-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nippersink-creek-il",
+   "name": "Nippersink Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Pistakee",
+    "Ringwood",
+    "Wonder Lake"
+   ],
+   "bbox": [
+    -88.47657,
+    42.38481,
+    -88.19059,
+    42.4693
+   ],
+   "wikidata": "Q7039576",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "keystone-landing-il",
+    "pioneer-landing-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nippersink-lake-il",
+   "name": "Nippersink Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Fox Lake",
+    "Klondike"
+   ],
+   "bbox": [
+    -88.19382,
+    42.40218,
+    -88.15013,
+    42.42821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.791,
+   "launches": [
+    "nippersink-lake-boat-launch-near-klondike-il"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2009) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2009-10-21"
+    }
+   ]
+  },
+  {
+   "slug": "north-branch-chicago-river-il",
+   "name": "North Branch Chicago River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Chicago",
+    "Evanston",
+    "Glenview",
+    "Morton Grove",
+    "Niles",
+    "Skokie"
+   ],
+   "bbox": [
+    -87.79764,
+    41.8864,
+    -87.63776,
+    42.08761
+   ],
+   "wikidata": "Q643284",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "linne-woods-canoe-landing-il",
+    "river-park-canoe-landing-il",
+    "river-park-canoe-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-il",
+   "name": "North Fork",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Patoka"
+   ],
+   "bbox": [
+    -89.21595,
+    38.73756,
+    -88.85078,
+    38.85327
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-fork-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-salt-creek-il",
+   "name": "North Fork Salt Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "De Witt"
+   ],
+   "bbox": [
+    -88.82795,
+    40.21041,
+    -88.71338,
+    40.40194
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-fork-salt-creek-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-point-marina-il",
+   "name": "North Point Marina",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Winthrop Harbor"
+   ],
+   "bbox": [
+    -87.80581,
+    42.48195,
+    -87.79869,
+    42.48997
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.325,
+   "launches": [
+    "north-point-marina-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "number-six-lake-il",
+   "name": "Number Six Lake",
+   "kind": "pond",
+   "state": "IL",
+   "towns": [
+    "Oakwood"
+   ],
+   "bbox": [
+    -87.7394,
+    40.11876,
+    -87.73485,
+    40.12626
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.054,
+   "launches": [
+    "number-six-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ohio-river-il",
+   "name": "Ohio River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Brookport",
+    "Cairo",
+    "Cave-in-Rock",
+    "Elizabethtown",
+    "Golconda",
+    "Joppa",
+    "Metropolis",
+    "Mound City",
+    "Old Shawneetown",
+    "Olmsted",
+    "Rosiclare"
+   ],
+   "bbox": [
+    -89.17741,
+    36.9835,
+    -87.98862,
+    37.7999
+   ],
+   "wikidata": "Q4915",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "golconda-marina-ramp-il",
+    "cairo-boat-launch-il",
+    "ohio-river-boat-ramp-il",
+    "tower-rock-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "old-lake-hillsboro-il",
+   "name": "Old Lake Hillsboro",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Hillsboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-lake-hillsboro-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "olson-lake-il",
+   "name": "Olson Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Machesney Park"
+   ],
+   "bbox": [
+    -88.96299,
+    42.35248,
+    -88.95099,
+    42.35683
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.152,
+   "launches": [
+    "olson-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "one-horse-gap-lake-il",
+   "name": "One Horse Gap Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Leisure City"
+   ],
+   "bbox": [
+    -88.45019,
+    37.51301,
+    -88.4437,
+    37.5178
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.107,
+   "launches": [
+    "one-horse-gap-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "otter-lake-il",
+   "name": "Otter Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Nilwood"
+   ],
+   "bbox": [
+    -89.91814,
+    39.40603,
+    -89.88776,
+    39.44484
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.183,
+   "launches": [
+    "otter-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pecatonica-river-il",
+   "name": "Pecatonica River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Damascus",
+    "Freeport",
+    "McConnell",
+    "Pecatonica",
+    "Winslow"
+   ],
+   "bbox": [
+    -89.84257,
+    42.28005,
+    -89.08889,
+    42.59027
+   ],
+   "wikidata": "Q12249012",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "damascus-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "peelman-pond-il",
+   "name": "Peelman Pond",
+   "kind": "pond",
+   "state": "IL",
+   "towns": [
+    "Oakwood"
+   ],
+   "bbox": [
+    -87.73333,
+    40.1204,
+    -87.72792,
+    40.12432
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.023,
+   "launches": [
+    "peelman-pond-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "peoria-lake-il",
+   "name": "Peoria Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Long Shore Park",
+    "Peoria",
+    "Rome",
+    "Spring Bay"
+   ],
+   "bbox": [
+    -89.59189,
+    40.67542,
+    -89.4368,
+    40.92441
+   ],
+   "wikidata": "Q7166146",
+   "charted": true,
+   "area_km2": 61.658,
+   "launches": [
+    "peoria-lake-boat-launch-near-peoria-il-6",
+    "peoria-lake-boat-launch-near-peoria-il-4",
+    "peoria-lake-boat-launch-near-peoria-il",
+    "peoria-lake-boat-launch-near-rome-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piasa-creek-il",
+   "name": "Piasa Creek",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Clifton Terrace",
+    "Lockhaven"
+   ],
+   "bbox": [
+    -90.29615,
+    38.92076,
+    -90.09681,
+    39.11744
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "piasa-creek-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pierce-lake-il",
+   "name": "Pierce Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Machesney Park"
+   ],
+   "bbox": [
+    -88.98771,
+    42.34353,
+    -88.96581,
+    42.35196
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.653,
+   "launches": [
+    "pierce-lake-boat-launch-near-machesney-park-il",
+    "pierce-lake-boat-launch-near-machesney-park-il-2"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2016) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2016-08-07"
+    }
+   ]
+  },
+  {
+   "slug": "pinckneyville-reservoir-il",
+   "name": "Pinckneyville Reservoir",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.41458,
+    38.09665,
+    -89.39524,
+    38.11163
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.683,
+   "launches": [
+    "pinckneyville-reservoir-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pine-lake-il",
+   "name": "Pine Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.4081,
+    38.01315,
+    -89.40219,
+    38.01654
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.04,
+   "launches": [
+    "pine-lake-boat-launch-pinckneyville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pintail-lake-il",
+   "name": "Pintail Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Denmark"
+   ],
+   "bbox": [
+    -89.49649,
+    37.99849,
+    -89.49321,
+    38.00274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.107,
+   "launches": [
+    "pintail-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "plum-creek-il",
+   "name": "Plum Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Dixon"
+   ],
+   "bbox": [
+    -89.52395,
+    41.84359,
+    -89.49951,
+    41.88358
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "page-park-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "plum-river-il",
+   "name": "Plum River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Savanna"
+   ],
+   "bbox": [
+    -90.15494,
+    42.07177,
+    -89.98396,
+    42.34024
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.654,
+   "launches": [
+    "plum-river-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pohman-slough-il",
+   "name": "Pohman Slough",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Marshall Landing"
+   ],
+   "bbox": [
+    -90.5084,
+    38.9342,
+    -90.48515,
+    38.96643
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.271,
+   "launches": [
+    "pohman-slough-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pool-24-il",
+   "name": "Pool 24",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Pleasant Hill"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pleasant-hill-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "possum-pond-il",
+   "name": "Possum Pond",
+   "kind": "pond",
+   "state": "IL",
+   "towns": [
+    "Danville"
+   ],
+   "bbox": [
+    -87.7409,
+    40.15042,
+    -87.73799,
+    40.15209
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.025,
+   "launches": [
+    "possum-pond-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potter-lake-il",
+   "name": "Potter Lake",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Rock Island"
+   ],
+   "bbox": [
+    -90.60645,
+    41.48474,
+    -90.6011,
+    41.49347
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.18,
+   "launches": [
+    "potter-lake-boat-launch-near-rock-island-il-4"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pounds-hollow-lake-il",
+   "name": "Pounds Hollow Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Shawneetown"
+   ],
+   "bbox": [
+    -88.27667,
+    37.61223,
+    -88.26948,
+    37.62159
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "pounds-hollow-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powerton-lake-il",
+   "name": "Powerton Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pekin"
+   ],
+   "bbox": [
+    -89.72333,
+    40.53751,
+    -89.68368,
+    40.56024
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.64,
+   "launches": [
+    "powerton-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prairie-lake-il",
+   "name": "Prairie Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Virginia"
+   ],
+   "bbox": [
+    -90.07083,
+    39.97313,
+    -90.05112,
+    39.99618
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.816,
+   "launches": [
+    "prairie-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quincy-bay-il",
+   "name": "Quincy Bay",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Quincy"
+   ],
+   "bbox": [
+    -91.42442,
+    39.95233,
+    -91.41408,
+    39.98128
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.882,
+   "launches": [
+    "quincy-bay-boat-launch-near-quincy-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quiver-lake-il",
+   "name": "Quiver Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Liverpool"
+   ],
+   "bbox": [
+    -90.05069,
+    40.32924,
+    -89.91349,
+    40.42627
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 23.119,
+   "launches": [
+    "quiver-lake-boat-launch-near-liverpool-il",
+    "quiver-lake-boat-launch-near-liverpool-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raccoon-lake-il",
+   "name": "Raccoon Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Centralia"
+   ],
+   "bbox": [
+    -89.10898,
+    38.53384,
+    -89.06424,
+    38.5481
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.387,
+   "launches": [
+    "raccoon-lake-boat-launch-il"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/e916019b725e4acca7d666e760b74b5f#",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-07-17",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ramsey-lake-il",
+   "name": "Ramsey Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Ramsey"
+   ],
+   "bbox": [
+    -89.13647,
+    39.15961,
+    -89.126,
+    39.16755
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.175,
+   "launches": [
+    "ramsey-lake-boat-launch-il"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/e916019b725e4acca7d666e760b74b5f#",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-07-17",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "randolph-county-lake-il",
+   "name": "Randolph County Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -89.80142,
+    37.9699,
+    -89.79394,
+    37.98082
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.274,
+   "launches": [
+    "randolph-county-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-hills-lake-il",
+   "name": "Red Hills Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Sumner"
+   ],
+   "bbox": [
+    -87.83974,
+    38.72197,
+    -87.8298,
+    38.72969
+   ],
+   "wikidata": "Q34918549",
+   "charted": false,
+   "area_km2": 0.155,
+   "launches": [
+    "red-hills-lake-boat-launch-near-sumner-il",
+    "red-hills-lake-boat-launch-near-sumner-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "redhead-lake-il",
+   "name": "Redhead Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.46009,
+    38.02878,
+    -89.44668,
+    38.04068
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.24,
+   "launches": [
+    "redhead-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rend-lake-il",
+   "name": "Rend Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Benton",
+    "Bonnie",
+    "Ina",
+    "Nason",
+    "Sesser",
+    "Waltonville"
+   ],
+   "bbox": [
+    -89.01367,
+    38.03493,
+    -88.88845,
+    38.1875
+   ],
+   "wikidata": "Q7312773",
+   "charted": false,
+   "area_km2": 70.779,
+   "launches": [
+    "waltonville-il",
+    "bluegill-hole-il",
+    "south-nanson-il",
+    "south-bonnie-access-il",
+    "rend-lake-boat-launch-il-3",
+    "rend-lake-boat-launch-near-benton-il-3",
+    "ina-boat-ramp-il",
+    "jackie-branch-boat-ramp-il",
+    "north-end-boat-ramp-il",
+    "north-end-east-boat-ramp-il",
+    "marcum-branch-il",
+    "sandusky-creek-il",
+    "rend-lake-boat-launch-benton-il",
+    "rend-lake-boat-launch-il",
+    "rend-lake-boat-launch-ina-il",
+    "rend-lake-boat-launch-near-bonnie-il",
+    "rend-lake-boat-launch-near-bonnie-il-2",
+    "rend-lake-boat-launch-near-waltonville-il",
+    "rend-lake-boat-launch-il-4",
+    "sandy-creek-benton-il",
+    "turnip-patch-il",
+    "rend-lake-boat-launch-near-benton-il",
+    "wayne-fitzgerald-state-park-campground-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rice-lake-il",
+   "name": "Rice Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Banner"
+   ],
+   "bbox": [
+    -89.95935,
+    40.44495,
+    -89.89995,
+    40.49398
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.27,
+   "launches": [
+    "rice-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ringneck-lake-il",
+   "name": "Ringneck Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.48562,
+    38.02208,
+    -89.47923,
+    38.02573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "ring-neck-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-river-il",
+   "name": "Rock River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Byron",
+    "Cleveland",
+    "Coal Valley",
+    "Dixon",
+    "Erie",
+    "Loves Park",
+    "Lyndon",
+    "Machesney Park",
+    "Milan",
+    "Moline",
+    "Nelson",
+    "Oregon"
+   ],
+   "bbox": [
+    -90.61945,
+    41.45505,
+    -89.01465,
+    42.50505
+   ],
+   "wikidata": "Q1852004",
+   "charted": true,
+   "area_km2": 4.741,
+   "launches": [
+    "harold-s-landing-il",
+    "lawrence-park-il",
+    "macktown-forest-preserve-boat-ramp-il",
+    "prophetstown-state-park-il",
+    "rock-river-boat-launch-near-byron-il",
+    "rock-river-boat-launch-near-byron-il-2",
+    "rock-river-boat-launch-near-dixon-il-4",
+    "rock-river-boat-launch-near-dixon-il-2",
+    "rock-river-boat-launch-near-loves-park-il-4",
+    "rock-river-boat-launch-near-loves-park-il-2",
+    "rock-river-boat-launch-near-lyndon-il",
+    "rock-river-boat-launch-near-machesney-park-il",
+    "rock-river-boat-launch-near-oregon-il",
+    "rock-river-boat-launch-near-oregon-il-2",
+    "rock-river-boat-launch-near-rock-falls-il-4",
+    "rock-river-boat-launch-near-rock-falls-il-2",
+    "rock-river-boat-launch-near-rock-falls-il-3",
+    "rock-river-boat-launch-near-rockford-il-3",
+    "rock-river-boat-launch-near-rockton-il",
+    "rock-river-boat-launch-near-roscoe-il-4"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-il",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Round Lake Beach"
+   ],
+   "bbox": [
+    -88.08907,
+    42.35901,
+    -88.07205,
+    42.37376
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.973,
+   "launches": [
+    "round-lake-boat-launch-il"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2012) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2012-07-12"
+    }
+   ]
+  },
+  {
+   "slug": "royal-lake-il",
+   "name": "Royal Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Deer Plain"
+   ],
+   "bbox": [
+    -90.51143,
+    38.92649,
+    -90.49147,
+    38.94762
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.291,
+   "launches": [
+    "royal-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saganashkee-slough-il",
+   "name": "Saganashkee Slough",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Palos Hills"
+   ],
+   "bbox": [
+    -87.90738,
+    41.68895,
+    -87.87508,
+    41.6977
+   ],
+   "wikidata": "Q38250789",
+   "charted": true,
+   "area_km2": 1.534,
+   "launches": [
+    "saganashkee-slough-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sahara-woods-lake-il",
+   "name": "Sahara Woods Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Carrier Mills"
+   ],
+   "bbox": [
+    -88.67992,
+    37.72118,
+    -88.67121,
+    37.72737
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.376,
+   "launches": [
+    "sahara-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salem-reservoir-il",
+   "name": "Salem Reservoir",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -88.94992,
+    38.64025,
+    -88.94302,
+    38.65429
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.263,
+   "launches": [
+    "salem-reservoir-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salt-creek-brookfield-il",
+   "name": "Salt Creek",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Brookfield",
+    "Villa Park",
+    "Westchester",
+    "Western Springs"
+   ],
+   "bbox": [
+    -88.10483,
+    41.81819,
+    -87.83191,
+    42.11313
+   ],
+   "wikidata": "Q16984309",
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "salt-creek-boat-launch-near-brookfield-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salt-creek-il",
+   "name": "Salt Creek",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Greenview",
+    "Lincoln"
+   ],
+   "bbox": [
+    -89.82579,
+    40.04791,
+    -88.88245,
+    40.15821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "salt-creek-carry-in-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salt-fork-il",
+   "name": "Salt Fork",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Bucktown",
+    "Homer"
+   ],
+   "bbox": [
+    -88.08033,
+    40.02926,
+    -87.71726,
+    40.15242
+   ],
+   "wikidata": "Q7405847",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "salt-fork-boat-launch-near-bucktown-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sam-dale-lake-il",
+   "name": "Sam Dale Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Flora"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "flora-boat-launch-il",
+    "flora-boat-launch-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sam-parr-lake-il",
+   "name": "Sam Parr Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Newton"
+   ],
+   "bbox": [
+    -88.12838,
+    39.01284,
+    -88.11176,
+    39.03263
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.574,
+   "launches": [
+    "sam-parr-lake-boat-launch-near-newton-il",
+    "sam-parr-lake-boat-launch-near-newton-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sangamon-river-il",
+   "name": "Sangamon River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Chandlerville",
+    "Decatur",
+    "Lewisburg",
+    "Petersburg",
+    "Riverton",
+    "Springfield"
+   ],
+   "bbox": [
+    -90.43338,
+    39.74243,
+    -88.30069,
+    40.45618
+   ],
+   "wikidata": "Q1807373",
+   "charted": true,
+   "area_km2": 1.109,
+   "launches": [
+    "lower-dam-canoe-access-il",
+    "new-salem-il",
+    "sangamon-river-boat-launch-il",
+    "wycles-road-canoe-access-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sangchris-lake-il",
+   "name": "Sangchris Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Tovey"
+   ],
+   "bbox": [
+    -89.53191,
+    39.56263,
+    -89.43029,
+    39.6548
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.557,
+   "launches": [
+    "sangchris-lake-boat-launch-near-tovey-il",
+    "sangchris-lake-boat-launch-near-tovey-il-2",
+    "sangchris-lake-boat-launch-near-tovey-il-3",
+    "strawkus-point-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "savanna-bay-il",
+   "name": "Savanna Bay",
+   "kind": "bay",
+   "state": "IL",
+   "towns": [
+    "Savanna"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "miller-s-landing-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sewell-lake-il",
+   "name": "Sewell Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Banner",
+    "Kingston Mines",
+    "Radville"
+   ],
+   "bbox": [
+    -89.90174,
+    40.43704,
+    -89.8112,
+    40.5075
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.704,
+   "launches": [
+    "north-lake-causeway-ramp-il",
+    "sewell-lake-boat-launch-il",
+    "skyranch-boat-ramp-il",
+    "south-lake-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shabbona-lake-il",
+   "name": "Shabbona Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Shabbona"
+   ],
+   "bbox": [
+    -88.87491,
+    41.7368,
+    -88.85185,
+    41.75378
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.282,
+   "launches": [
+    "shabbona-lake-boat-launch-near-shabbona-il",
+    "shabbona-lake-boat-launch-near-shabbona-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shoveler-lake-il",
+   "name": "Shoveler Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Willisville"
+   ],
+   "bbox": [
+    -89.53018,
+    37.98055,
+    -89.52957,
+    37.98782
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "shoveler-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-grafton-il",
+   "name": "Silver Lake",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Grafton"
+   ],
+   "bbox": [
+    -90.4954,
+    38.94861,
+    -90.4733,
+    38.96714
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.632,
+   "launches": [
+    "calhoun-point-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-il",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Highland"
+   ],
+   "bbox": [
+    -89.70422,
+    38.76437,
+    -89.66542,
+    38.82283
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.302,
+   "launches": [
+    "silver-lake-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skokie-river-il",
+   "name": "Skokie River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Northfield"
+   ],
+   "bbox": [
+    -87.87341,
+    42.08655,
+    -87.75704,
+    42.30932
+   ],
+   "wikidata": "Q7536171",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tower-road-accessible-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "snakeden-hollow-lake-il",
+   "name": "Snakeden Hollow Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Victoria"
+   ],
+   "bbox": [
+    -90.08768,
+    41.00514,
+    -90.06572,
+    41.02081
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.576,
+   "launches": [
+    "snakeden-hollow-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spoon-river-il",
+   "name": "Spoon River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Havana",
+    "London Mills"
+   ],
+   "bbox": [
+    -90.36613,
+    40.30066,
+    -89.75625,
+    41.14656
+   ],
+   "wikidata": "Q3966983",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "spoon-river-boat-launch-near-london-mills-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sportsman-s-lake-il",
+   "name": "Sportsman's Lake",
+   "kind": "pond",
+   "state": "IL",
+   "towns": [
+    "Danville",
+    "Oakwood"
+   ],
+   "bbox": [
+    -87.74934,
+    40.15354,
+    -87.73944,
+    40.15868
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.126,
+   "launches": [
+    "sportsman-s-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spring-lake-pinckneyville-il",
+   "name": "Spring Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.4106,
+    38.00414,
+    -89.4039,
+    38.01002
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.032,
+   "launches": [
+    "spring-lake-boat-launch-near-pinckneyville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "st-elmo-old-city-reservoir-il",
+   "name": "St. Elmo Old City Reservoir",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Saint Elmo"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "st-elmo-old-city-reservoir-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "staunton-reservoir-il",
+   "name": "Staunton Reservoir",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Staunton"
+   ],
+   "bbox": [
+    -89.78385,
+    39.04119,
+    -89.76718,
+    39.05291
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.516,
+   "launches": [
+    "staunton-reservoir-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sterling-lake-il",
+   "name": "Sterling Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Rosecrans"
+   ],
+   "bbox": [
+    -87.94544,
+    42.46845,
+    -87.93343,
+    42.48065
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.357,
+   "launches": [
+    "sterlink-lake-boat-launch-il"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2001) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2001-04-28"
+    }
+   ]
+  },
+  {
+   "slug": "stump-lake-il",
+   "name": "Stump Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Brussels"
+   ],
+   "bbox": [
+    -90.56457,
+    38.97382,
+    -90.54521,
+    39.01494
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.1,
+   "launches": [
+    "dabb-s-access-il",
+    "pere-marquette-state-park-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sugar-creek-il",
+   "name": "Sugar Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Dixon Springs"
+   ],
+   "bbox": [
+    -88.71204,
+    37.34265,
+    -88.61697,
+    37.43815
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sugar-creek-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "super-lake-il",
+   "name": "Super Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Cutler"
+   ],
+   "bbox": [
+    -89.52038,
+    38.00399,
+    -89.48926,
+    38.03
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.171,
+   "launches": [
+    "super-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-il",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Brussels",
+    "Rosedale"
+   ],
+   "bbox": [
+    -90.58855,
+    38.96189,
+    -90.5522,
+    39.03759
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.267,
+   "launches": [
+    "blooms-landing-boat-launch-il",
+    "swan-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "teal-lake-il",
+   "name": "Teal Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "New Athens"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "teal-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "turkey-bayou-il",
+   "name": "Turkey Bayou",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Murphysboro"
+   ],
+   "bbox": [
+    -89.41719,
+    37.68262,
+    -89.41101,
+    37.68772
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.068,
+   "launches": [
+    "turkey-bayou-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "turning-basin-il",
+   "name": "Turning Basin",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Chicago"
+   ],
+   "bbox": [
+    -87.66556,
+    41.84272,
+    -87.6634,
+    41.84523
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.04,
+   "launches": [
+    "park-no-571-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-stump-lake-il",
+   "name": "Upper Stump Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Rosedale"
+   ],
+   "bbox": [
+    -90.56984,
+    39.01961,
+    -90.56342,
+    39.03845
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.75,
+   "launches": [
+    "upper-stump-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "vermilion-river-il",
+   "name": "Vermilion River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Cornell",
+    "Pontiac",
+    "Streator"
+   ],
+   "bbox": [
+    -89.06802,
+    40.81529,
+    -88.50908,
+    41.32078
+   ],
+   "wikidata": "Q7921609",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "vermilion-river-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wabash-river-il",
+   "name": "Wabash River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Darwin",
+    "Grayville",
+    "Hutsonville",
+    "Mount Carmel",
+    "Saint Francisville"
+   ],
+   "bbox": [
+    -88.0997,
+    37.7999,
+    -87.46977,
+    39.40842
+   ],
+   "wikidata": "Q196183",
+   "charted": true,
+   "area_km2": 0.248,
+   "launches": [
+    "grayville-boat-launch-il",
+    "wabash-river-boat-launch-near-hutsonville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walnut-point-lake-il",
+   "name": "Walnut Point Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Oakland"
+   ],
+   "bbox": [
+    -88.03907,
+    39.69436,
+    -88.02781,
+    39.7043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.21,
+   "launches": [
+    "walnut-point-lake-boat-launch-near-oakland-il",
+    "walnut-point-lake-boat-launch-near-oakland-il-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walton-lake-il",
+   "name": "Walton Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Litchfield"
+   ],
+   "bbox": [
+    -89.66238,
+    39.15378,
+    -89.65522,
+    39.16173
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.116,
+   "launches": [
+    "walton-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "washington-county-lake-il",
+   "name": "Washington County Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Nashville"
+   ],
+   "bbox": [
+    -89.36163,
+    38.26748,
+    -89.33953,
+    38.29284
+   ],
+   "wikidata": "Q123225715",
+   "charted": false,
+   "area_km2": 0.869,
+   "launches": [
+    "washington-county-lake-boat-launch-il",
+    "washington-county-lake-boat-launch-nashville-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watson-lake-il",
+   "name": "Watson Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Batchtown"
+   ],
+   "bbox": [
+    -90.6966,
+    39.06156,
+    -90.67454,
+    39.08599
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.823,
+   "launches": [
+    "prairie-pond-boat-launch-with-dock-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "waverly-lake-il",
+   "name": "Waverly Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Franklin"
+   ],
+   "bbox": [
+    -90.02543,
+    39.5994,
+    -90.0038,
+    39.61579
+   ],
+   "wikidata": "Q20710096",
+   "charted": false,
+   "area_km2": 0.402,
+   "launches": [
+    "waverly-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "weldon-springs-lake-il",
+   "name": "Weldon Springs Lake",
+   "kind": "reservoir",
+   "state": "IL",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -88.92608,
+    40.1183,
+    -88.9215,
+    40.12475
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "weldon-springs-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wesseln-lake-il",
+   "name": "Wesseln Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Pinckneyville"
+   ],
+   "bbox": [
+    -89.42889,
+    38.02565,
+    -89.40368,
+    38.03228
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "wesseln-lake-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-lake-paris-il",
+   "name": "West Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Paris"
+   ],
+   "bbox": [
+    -87.71323,
+    39.63417,
+    -87.69268,
+    39.64287
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.285,
+   "launches": [
+    "west-lake-boat-launch-near-paris-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-okaw-river-il",
+   "name": "West Okaw River",
+   "kind": "river",
+   "state": "IL",
+   "towns": [
+    "Bethany"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "west-okaw-river-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-point-creek-il",
+   "name": "West Point Creek",
+   "kind": "stream",
+   "state": "IL",
+   "towns": [
+    "Cap au Gris"
+   ],
+   "bbox": [
+    -90.68085,
+    38.99659,
+    -90.63791,
+    39.00123
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "west-point-creek-boat-launch-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whispering-willow-lake-il",
+   "name": "Whispering Willow Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Alorton"
+   ],
+   "bbox": [
+    -90.10935,
+    38.59327,
+    -90.09459,
+    38.60532
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.408,
+   "launches": [
+    "whispering-willow-boat-ramp-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wightman-lake-il",
+   "name": "Wightman Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Lacon"
+   ],
+   "bbox": [
+    -89.4406,
+    40.99711,
+    -89.42638,
+    41.02402
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.979,
+   "launches": [
+    "marshall-sfwa-spring-branch-unit-il"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-lake-il",
+   "name": "Wolf Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Hammond"
+   ],
+   "bbox": [
+    -87.53892,
+    41.65422,
+    -87.509,
+    41.69314
+   ],
+   "wikidata": "Q7334521",
+   "charted": false,
+   "area_km2": 3.151,
+   "launches": [
+    "wolf-lake-boat-launch-near-hammond-il",
+    "wolf-lake-boat-launch-near-hammond-il-2",
+    "wolf-lake-boat-launch-near-hammond-il-3"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2013) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2013-05-01"
+    }
+   ]
+  },
+  {
+   "slug": "wood-lake-il",
+   "name": "Wood Lake",
+   "kind": "lake",
+   "state": "IL",
+   "towns": [
+    "Sullivan"
+   ],
+   "bbox": [
+    -88.62052,
+    39.52449,
+    -88.61079,
+    39.52908
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "wood-s-lake-west-boat-ramp-il"
+   ],
+   "advisories": []
+  }
+ ]
+}
