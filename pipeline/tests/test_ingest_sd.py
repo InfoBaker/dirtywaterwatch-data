@@ -38,6 +38,7 @@ def test_the_mountain_counties_file_cites_the_boundary_and_holds_fifteen_countie
         f"{n} County" for n in ("Bennett", "Butte", "Corson", "Custer", "Dewey", "Fall River", "Haakon", "Harding",
                                 "Jackson", "Lawrence", "Meade", "Oglala Lakota", "Pennington", "Perkins", "Ziebach")]
     assert [c["county"] for c in doc["split_counties"]] == ["Stanley County"]
+    assert doc["split_counties"][0]["central_part"] and doc["split_counties"][0]["mountain_share"] > 0.8
     assert "tigerweb.geo.census.gov" in doc["source"]["url"]
 
 
@@ -48,6 +49,10 @@ def test_the_zone_is_the_zone_of_the_events_own_point():
     assert E.point_zone("SD", 44.37, -100.35)[0] == "America/Chicago"          # Pierre, Hughes County
     tz, basis = E.point_zone("SD", 44.355, -100.37)                           # Fort Pierre, Stanley County (split)
     assert tz == "America/Chicago" and "Stanley County" in basis and "split" in basis
+    tz, basis = E.point_zone("SD", 44.4382, -100.3926)                        # Oahe Dam, western Stanley County
+    assert tz == "America/Denver" and "west of the boundary" in basis and "Fort Pierre" not in basis
+    tz, basis = E.point_zone("SD", 43.0, -100.0)                              # Todd County, Central
+    assert tz == "America/Chicago" and "outside the fifteen" in basis
     tz, basis = E.point_zone("SD", None, None)
     assert tz == "America/Chicago" and basis.startswith("no point given")
     assert E.point_zone("IL", 41.9, -87.6) == (None, None)                     # a one-zone state is not read by point
