@@ -1,8 +1,20 @@
 {
  "about": "Receiving-water names in AZ's reports (EPA's overflow tables for Arizona permits, the 2026-11-04 extract read on 2026-11-07, with the Navajo Nation's reports located in Arizona) that data/receiving-waters-national.json does not hold for AZ, by name as the record gives it (an ADEQ waterbody identifier named as ADEQ's layer names it), with the number of reports giving each. Reports that say the discharge reached no water are left out.",
  "state": "AZ",
- "waters": 9,
- "reports": 24,
+ "waters": 6,
+ "reports": 21,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in AZ": 6
+ },
+ "resolved_names": 3,
+ "resolved_reports": 3,
+ "build": {
+  "date": "2026-11-07",
+  "command": "python -m ingest.waters_from_nhd --names research/az/receiving-waters-missing.json --state AZ",
+  "records_built": 3,
+  "names_resolved": 3,
+  "network_requests": 10
+ },
  "rows": [
   {
    "name": "Black Creek Wash",
@@ -22,7 +34,8 @@
    "spellings": [
     "Black Creek wash",
     "BLACK CREEK WASH"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in AZ; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "name": "Unnamed Trib to Munds Creek",
@@ -44,6 +57,10 @@
      34.93524,
      -111.64818
     ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in AZ; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "parts": [
+    "Munds Creek"
    ]
   },
   {
@@ -70,7 +87,8 @@
      33.80058,
      -111.98892
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in AZ; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Buckeye Canal",
@@ -93,7 +111,8 @@
      33.363481,
      -112.582124
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in AZ; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Az Canal Diversion Channel",
@@ -109,23 +128,8 @@
      33.569479,
      -112.084755
     ]
-   ]
-  },
-  {
-   "name": "Laguna Creek",
-   "reports": 1,
-   "permits": [
-    "NN0020281"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     36.733111,
-     -110.230611
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in AZ; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "name": "Munds Creek",
@@ -148,50 +152,65 @@
      34.93524,
      -111.64818
     ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in AZ; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Laguna Creek",
+   "reports": 1,
+   "slugs": [
+    "laguna-creek-az"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     36.733111,
+     -110.230611
+    ]
    ]
   },
   {
    "name": "Pinal Creek",
    "reports": 1,
-   "permits": [
-    "AZ0020249"
+   "slugs": [
+    "pinal-creek-az"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "adeq_wbids": {
-    "AZ15060103-280B": {
-     "origin": "Unnamed (receives Globe WWTP)",
-     "terminus": "GLOBE WWTP @ 33°26'53.96\"/110°49'23.21\""
-    }
-   },
+   "how": "record built from the name",
    "points": [
     [
      33.396093,
      -110.788279
     ]
+   ],
+   "places_failed": [
+    {
+     "lon": -110.78828,
+     "lat": 33.39609,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.39609, -110.78828) (the nearest is 19.9 km away)"
+    }
    ]
   },
   {
    "name": "Sand Tank Wash",
    "reports": 1,
-   "permits": [
-    "AZ0020231"
+   "slugs": [
+    "sand-tank-wash-az"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "adeq_wbids": {
-    "AZ15070101-004": {
-     "origin": "Headwaters",
-     "terminus": "TERMINUS @ 32°58'54.1\"/112°43'07.31\""
-    }
-   },
+   "how": "record built from the name",
    "points": [
     [
      32.96969,
      -112.74837
     ]
+   ],
+   "places_failed": [
+    {
+     "lon": -112.74837,
+     "lat": 32.96969,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.96969, -112.74837) (the nearest is 4.1 km away)"
+    }
    ]
   }
  ]
