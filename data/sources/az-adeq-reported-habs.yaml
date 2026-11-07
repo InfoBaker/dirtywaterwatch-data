@@ -1,0 +1,23 @@
+id: "az-adeq-reported-habs"
+name: "ADEQ AZHABs \"Currently Reported\" harmful algal bloom list"
+url: "https://azdeq.gov/reported-habs"
+homepage: "https://azdeq.gov/reported-habs"
+kind: "html"
+level: "state"
+# Notes (research/az, status candidate, verified search_only, checked 2026-11-03): Only state HAB
+#   list; HTML behind a bot wall; testing is voluntary for lake managers.
+# Access detail (research, quoted): 403 to curl and WebFetch; search snippet shows a page last
+#   revised 2026-06-12 listing Lake Mohave (Placer Cove danger, Eagle Wash warning, lake-wide
+#   watch). Reporting form azdeq.gov/AZHABs/Reporting.
+cadence: "irregular (page revision dates)"
+license: "none stated"
+attribution: "Arizona Department of Environmental Quality"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["AZ"]
+access: ["html"]
+access_detail: "403 to curl and WebFetch; search snippet shows a page last revised 2026-06-12 listing Lake Mohave (Placer Cove danger, Eagle Wash warning, lake-wide watch). Reporting form azdeq.gov/AZHABs/Reporting."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"
