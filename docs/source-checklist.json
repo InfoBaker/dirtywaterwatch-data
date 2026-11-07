@@ -55684,5 +55684,619 @@
   "checked": "2026-11-03",
   "notes": "",
   "area": "hi"
+ },
+ {
+  "id": "al-adem-sso-history",
+  "name": "ADEM SSO reports, all dates (SSOs_ALL_OB_ID MapServer layer 0)",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "statewide; receiving water free text (rec_stream, e.g. \"Storm Drain(Tanyard Branch)\")",
+  "water_slugs": [],
+  "url": "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0/query?where=...&outFields=*&f=json. Public, no key. 14,750 rows on 2026-11-03, first date_sso_began 2012-05-11, latest 2026-11-03 13:03 (the same day; minutes of latency). maxRecordCount 2000; resultOffset paging fails (\"Failed to execute query\"), so page by object_id ranges; outStatistics fail. Coordinates in lat/long fields and as point geometry (NAD83 UTM 16N, wkid 26916). Samples raw/sso-history-sample.json, raw/sso-history-recent.json.",
+  "machine_readable": true,
+  "sample_record": {
+   "object_id": 14749,
+   "sso_report_id": "SSO-00215084",
+   "sso_report_version": 1,
+   "lat": 30.6256621,
+   "long": -87.809991,
+   "LOCATION_OF_DISCHARGE": "north side of Pursley at end of rd",
+   "rec_stream": "",
+   "date_sso_began": 1793710980000,
+   "date_sso_stopped": null,
+   "sso_ongoing_ind": "Yes",
+   "est_volume": null,
+   "permittee": "Baldwin County Sewer Service, LLC",
+   "facility_site_name": "Spanish Fort Sewer WWTP",
+   "permit_no": "AL0042234"
+  },
+  "fields": [
+   "object_id",
+   "sso_report_id",
+   "sso_report_version",
+   "lat",
+   "long",
+   "LOCATION_OF_DISCHARGE",
+   "rec_stream",
+   "date_sso_began",
+   "date_sso_stopped",
+   "sso_ongoing_ind",
+   "est_volume",
+   "permittee",
+   "facility_site_name",
+   "permit_no",
+   "ESRI_OID",
+   "Shape"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "started_at",
+   "ended_at",
+   "location_text",
+   "coordinates",
+   "volume",
+   "estimate_flag",
+   "waterbody",
+   "authority",
+   "source_status",
+   "revision_history (report version)"
+  ],
+  "cannot_fill": [
+   "reported_at (received_date is only in the live layer)",
+   "published_at",
+   "cause (live layer only)",
+   "timezone (dates look like local wall time stored as UTC epoch: 01:03 pm local began = 13:03 epoch)"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Continuous; the reporter files the 24-hour notice in AEPACS and it appears at once. Rule deadline: within 24 hours of becoming aware; 5-day follow-up.",
+  "history": "2012-05-11 to date (about 1,250 to 1,570 a year: 2019 1,572; 2022 1,443; 2024 1,244; 2025 1,253)",
+  "license": "No licence or terms shown on the service or the map page.",
+  "legal_basis": "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) (immediate notification); r. 335-6-6-.02(hh) (notifiable SSO)",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20 hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since 2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the receiving-water words name a water on 9,627, say none was reached on 4,113 and name only a storm drain or ditch or nothing on 1,018.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "est_volume is a string, sometimes truncated (e.g. \"<=1,0\", \"10,000 < gall\"): take the full range from the live layer or the AEPACS PDF. Several older test services (SSO_ALL_AEPACS, SSO_ALL_Dates_ALT frozen at 9,830 rows to 2022-09-30) exist on the same server; use SSOs_ALL_OB_ID.",
+  "area": "al"
+ },
+ {
+  "id": "al-adem-sso-map-live",
+  "name": "ADEM Sanitary Sewer Overflow Map (SSO_Service MapServer layer 0, current SSOs)",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "statewide; current SSOs only",
+  "water_slugs": [],
+  "url": "https://gis.adem.alabama.gov/sso/index.html",
+  "access": [
+   "arcgis",
+   "map_only"
+  ],
+  "access_detail": "https://gis.adem.alabama.gov/arcgis/rest/services/SSO_Service/MapServer/0/query?where=1%3D1&outFields=*&f=json. 27 rows on 2026-11-03. Per ADEM, SSOs \"are displayed on the map for 10 days after the SSO has ceased\"; ongoing ones stay (one from 2018 still shows). Popup links to eFile per permit. Sample raw/sso-sample.json, raw/sso-all27.json.",
+  "machine_readable": true,
+  "sample_record": {
+   "sso_report_id": "SSO-00214479",
+   "sso_report_version": "1",
+   "permit_no": "AL0050237",
+   "permittee": "City of Auburn",
+   "facility_site": "H.C. Morgan WPCF",
+   "report_type": "Final Report",
+   "received_date": "Oct 30 2026 12:30PM",
+   "date_sso_began": "2026-10-30 08:30 am",
+   "date_sso_stopped": "2026-10-30 10:30 am",
+   "sso_ongoing_ind": "No",
+   "est_volume": "1200",
+   "volume_color": "blue",
+   "receiving_stream": "Ground Absorbed;Moores Mill Creek",
+   "lattitude_decimal": 32.613377,
+   "longitude_decimal": -85.459838,
+   "cause_of_discharge": "Wooded area behind this address."
+  },
+  "fields": [
+   "sso_report_id",
+   "sso_report_version",
+   "e2_submission_id",
+   "permit_no",
+   "permittee",
+   "facility_site",
+   "report_type",
+   "received_date",
+   "date_sso_began",
+   "date_sso_stopped",
+   "sso_ongoing_ind",
+   "est_volume",
+   "volume_color",
+   "location_of_discharge",
+   "receiving_stream",
+   "lattitude_decimal",
+   "longitude_decimal",
+   "cause_of_discharge"
+  ],
+  "fills_event_fields": [
+   "reported_at (received_date)",
+   "started_at",
+   "ended_at",
+   "coordinates",
+   "volume",
+   "waterbody",
+   "source_status (report_type: Initial/Final)"
+  ],
+  "cannot_fill": [
+   "history beyond the 10-day window"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Minutes (row received 2026-11-03 1:40 PM present the same afternoon)",
+  "history": "rolling: ongoing plus 10 days after end",
+  "license": "None shown.",
+  "legal_basis": "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) (immediate notification); r. 335-6-6-.02(hh) (notifiable SSO)",
+  "status": "used",
+  "status_reason": "Read with the history layer by pipeline/ingest/al_adem_sso.py: 31 reports on 2026-11-07; gives ADEM's received time, the report type, the cause and the volume range in full (the history layer cuts it at 15 characters).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-adem-efile-sso",
+  "name": "ADEM eFile SSO report PDFs (per permit)",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "per permit",
+  "water_slugs": [],
+  "url": "http://app.adem.alabama.gov/efile/results.aspx?PermitNumber=AL0050237&DocType=SSO",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "ASP.NET results page per permit and DocType=SSO; lists AEPACS-signed PDFs (e.g. \"8299 AL0050237 081 10-30-2026 SSO AEPACS SSO-00214479.1.pdf\"); 107 SSO documents for Auburn. Each PDF is the full AEPACS form: start/stop, wet weather, volume range or value, source (lift station, manhole), counties, lat/long, address, receiving water, cause, and whether the 24-hour notice was on time.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [
+   "Master ID",
+   "Name",
+   "Permit Number",
+   "County",
+   "Date",
+   "Type",
+   "File Name"
+  ],
+  "fills_event_fields": [
+   "raw_record (the filed form)",
+   "advice_text (none)"
+  ],
+  "cannot_fill": [
+   "nothing beyond the layers except cause/wet-weather detail"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Same day as filing",
+  "history": "years (per permit)",
+  "license": "None shown.",
+  "legal_basis": "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) (immediate notification); r. 335-6-6-.02(hh) (notifiable SSO)",
+  "status": "watch",
+  "status_reason": "Citation target for each event (the signed form); not needed for ingest.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-adem-sso-email",
+  "name": "ADEM opt-in SSO email notification (by county)",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "by county chosen",
+  "water_slugs": [],
+  "url": "https://adem.alabama.gov/",
+  "access": [
+   "email"
+  ],
+  "access_detail": "Launched May 2017 at the request of Waterkeepers Alabama and Alabama Rivers Alliance; subscribers tick \"Sanitary Sewer Overflows\" and choose counties (per Coosa Riverkeeper instructions). Sign-up page not re-fetched.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "location_text"
+  ],
+  "cannot_fill": [
+   "all structured fields"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Per report",
+  "history": "none",
+  "license": "unknown",
+  "legal_basis": "agency practice",
+  "status": "watch",
+  "status_reason": "The ArcGIS layer carries the same events; owner may subscribe as a cross-check.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-adem-rule-335-6-6-12",
+  "name": "ADEM Admin. Code r. 335-6-6-.12(l)6.(v) Immediate notification",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "all NPDES permits",
+  "water_slugs": [],
+  "url": "https://adem.alabama.gov/",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Text quoted from the 2017 petition (raw/petition-2017-excerpt.txt) and the AEPACS SSO form instructions (raw/aepacs-sso-example.pdf).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "n/a",
+  "history": "n/a",
+  "license": "n/a",
+  "legal_basis": "Ala. Admin. Code r. 335-6-6-.12",
+  "status": "used",
+  "status_reason": "Legal basis for the public duty and the 24-hour/5-day clock.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-petition-2017-notice",
+  "name": "Petition to amend r. 335-6-6-.12 (Alabama Rivers Alliance and eight riverkeepers, March 2017)",
+  "jurisdiction": "AL",
+  "operator": "Alabama Rivers Alliance and riverkeeper groups",
+  "operator_type": "nonprofit",
+  "role": "law",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [],
+  "url": "https://static1.squarespace.com/static/5f887cbf23d461114a0cf95f/t/5f8f8172a0491a14cad1a507/1603240315476/Petition.3.7.17.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Asked for a minimum standard: notice within hours, web posting, media notice and an opt-in alert list. The Environmental Management Commission denied a 2018 follow-up petition (12-hour window) per Sierra Club Alabama; ADEM responded with the email list and the map.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "n/a",
+  "history": "n/a",
+  "license": "n/a",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Context for barriers.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-adem-beach-monitoring",
+  "name": "ADEM / ADPH Coastal Alabama Beach Monitoring (BeachMonitoring_New MapServer layer 15)",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management with Alabama Department of Public Health",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": "25 to 30 coastal stations (Gulf of Mexico, Mobile Bay, Perdido Bay, Dog and Fowl rivers)",
+  "water_slugs": [],
+  "url": "https://gis.adem.alabama.gov/arcgis/rest/services/BeachMonitoring_New/MapServer/15",
+  "access": [
+   "arcgis",
+   "pdf"
+  ],
+  "access_detail": ".../BeachMonitoring_New/MapServer/15/query?where=1%3D1&outFields=*&f=json. 30 stations; fields ID (BEACON id e.g. AL769933), Descriptio, WaterbodyN, Latitude, Longitude, URL (results PDF), Date (last sample, \"11/02/26\"), Advisory (small integer; all 11 on 2026-11-03; legend Green/Yellow/Red, so code meaning to confirm). Sample raw/beach-sample.json.",
+  "machine_readable": true,
+  "sample_record": {
+   "ID": "AL769933",
+   "Descriptio": "Alabama Point",
+   "WaterbodyN": "Gulf of Mexico",
+   "Latitude": 30.27694,
+   "Longitude": -87.54167,
+   "URL": "https://adem.alabama.gov/media/18619/download",
+   "Date": "11/02/26",
+   "Advisory": 11
+  },
+  "fields": [
+   "OBJECTID",
+   "ID",
+   "Name",
+   "Descriptio",
+   "WaterbodyN",
+   "Latitude",
+   "Longitude",
+   "File",
+   "URL",
+   "Date",
+   "Advisory"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "waterbody",
+   "source_updated_at",
+   "source_status"
+  ],
+  "cannot_fill": [
+   "valid_until",
+   "advice_text"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Weekly in season (May to October), less often off season",
+  "history": "current state only; PDFs per site",
+  "license": "None shown.",
+  "legal_basis": "BEACH Act grant program",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/al_adem_beaches.py: 25 stations on 2026-11-07, all with advisory code 11; ADEM does not publish the codes' meaning, so 11 is read as no advisory and any other code opens a beach advisory (the side of caution).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "The legend has a \"Green\" class; the site must not reuse that colour.",
+  "area": "al"
+ },
+ {
+  "id": "al-adem-outfall-map",
+  "name": "ADEM Outfall_Map_Data and MunicipalOutfalls MapServers",
+  "jurisdiction": "AL",
+  "operator": "Alabama Department of Environmental Management",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [
+   "permitted"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [],
+  "url": "https://gis.adem.alabama.gov/arcgis/rest/services/Outfall_Map_Data/MapServer",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Outfall_Map_Data layer 0 \"Discharge Types\" 502 rows; MunicipalOutfalls2 layer 16 \"Municipal Outfalls\". Not sampled (pagination not supported error on a default query).",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "coordinates"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "unknown",
+  "history": "unknown",
+  "license": "None shown.",
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Possibly better outfall points than ICIS; compare later.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-mobile-baykeeper-swim",
+  "name": "Mobile Baykeeper SWIM bacteria monitoring (Swim Guide affiliate)",
+  "jurisdiction": "AL",
+  "operator": "Mobile Baykeeper",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": "16 sites in Mobile and Baldwin counties",
+  "water_slugs": [],
+  "url": "https://mobilebaykeeper.org/swim",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Weekly April 1 to September 30, monthly otherwise; results to Swim Guide; season PDFs per site.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "source_updated_at"
+  ],
+  "cannot_fill": [
+   "event fields"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "weekly in season",
+  "history": "2023 season PDFs seen",
+  "license": "Swim Guide terms",
+  "legal_basis": "none",
+  "status": "watch",
+  "status_reason": "Swim Guide data access is by agreement.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-mawss-news",
+  "name": "Mobile Area Water and Sewer System overflow news posts",
+  "jurisdiction": "AL",
+  "operator": "Mobile Area Water and Sewer System",
+  "operator_type": "utility",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Mobile area creeks (Dog River, Halls Mill Creek, Eslava Creek)",
+  "water_slugs": [],
+  "url": "https://www.mawss.com/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Each overflow gets a news post (\"wastewater overflow 9830 howells ferry rd\", \"preliminary advisory\"); WordPress site, an RSS feed is likely but not fetched.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "location_text",
+   "volume",
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "same day",
+  "history": "2020s",
+  "license": "unknown",
+  "legal_basis": "r. 335-6-6-.12",
+  "status": "watch",
+  "status_reason": "Duplicates the ADEM layer; useful for advice text.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-jefferson-county-everbridge",
+  "name": "Jefferson County Environmental Services Everbridge overflow alerts",
+  "jurisdiction": "AL",
+  "operator": "Jefferson County Commission, Environmental Services Department",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Birmingham area (Cahaba, Valley, Village, Five Mile creeks)",
+  "water_slugs": [],
+  "url": "https://www.jccal.org/",
+  "access": [
+   "email",
+   "phone"
+  ],
+  "access_detail": "Everbridge opt-in alerts since March 2021 (first in Alabama, per Bham Now); GovDelivery bulletins for no-contact advisories.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "per event",
+  "history": "none",
+  "license": "unknown",
+  "legal_basis": "r. 335-6-6-.12",
+  "status": "watch",
+  "status_reason": "Owner sign-up only; ADEM layer carries the events.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-epa-sobe",
+  "name": "EPA SOBE (eRule) extract, Alabama rows",
+  "jurisdiction": "AL",
+  "operator": "US EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "n/a",
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "0 Alabama rows on 2026-11-03: Alabama permittees report in AEPACS, not NeT-SewerOverflow.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "daily",
+  "history": "n/a",
+  "license": "public domain",
+  "legal_basis": "40 CFR 127",
+  "status": "rejected",
+  "status_reason": "No Alabama rows.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
+ },
+ {
+  "id": "al-hab-none",
+  "name": "Alabama freshwater cyanobacteria advisories",
+  "jurisdiction": "AL",
+  "operator": "ADEM / ADPH",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab"
+  ],
+  "waters_covered": "none found",
+  "water_slugs": [],
+  "url": "https://adem.alabama.gov/",
+  "access": [],
+  "access_detail": "No state freshwater HAB advisory program found (NRDC scorecard: coastal bacteria only, no cyanotoxin sampling). Not searched on adph.org in depth.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "No program found.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "al"
  }
 ]
