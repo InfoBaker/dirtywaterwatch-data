@@ -27,7 +27,7 @@ on any value not on the list; on today's file it gives no warning.
 | public | `town` | a town, village, borough or township |
 | public | `county` | a county or parish, or its department |
 | public | `authority` | a public authority or commission created by law (a water and sewer authority, a utilities authority) |
-| public | `special district` | a special-purpose district (sanitary, utility, improvement, municipal utility district, public service district) |
+| public | `special district` | a special-purpose district (sanitary, utility, improvement, municipal utility district, public service district), or a New Mexico mutual domestic water consumers or sewage works association, a political subdivision under the Sanitary Projects Act (NMSA 1978, Chapter 3, Article 29), and a public school district |
 | public | `federal facility` | a federal installation (a military base, a national park, a federal prison) |
 | public | `state facility` | a state installation (a state park, university, prison or hospital) |
 | public | `tribal` | a tribal government or tribal utility |

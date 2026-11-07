@@ -1,6 +1,26 @@
 {
  "version": "2026-11-04a",
- "live_states": ["CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC", "NC", "GA", "MI", "FL", "WA", "IL", "CA"],
+ "live_states": [
+  "CT",
+  "MA",
+  "ME",
+  "NH",
+  "RI",
+  "VT",
+  "NJ",
+  "NY",
+  "PA",
+  "MD",
+  "VA",
+  "DC",
+  "NC",
+  "GA",
+  "MI",
+  "FL",
+  "WA",
+  "IL",
+  "CA"
+ ],
  "_live_states_doc": "The states and the District this site publishes: the one list of live states (2026-11-03g). build/status.py states() returns exactly this list; every public output (state pages, waters, the map's outfalls, the radar reads, coverage, the CSV downloads, the source tally) keeps to it, so water records and registry rows built nationally for other states sit in data/ without reaching the site. A state goes live by being added here, after docs/collection-checklist.md.",
  "red": {
   "doc": "Red covers reported ongoing discharges, post-discharge periods used by this site, and official advisories. The source and clock for each period are listed below. by_discharger entries (keyed by discharger id) take precedence over the state row.",
@@ -306,7 +326,9 @@
    "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch"
   },
   "day_start_caution": {
-   "sources": ["ga-epd-spills"],
+   "sources": [
+    "ga-epd-spills"
+   ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
   }
@@ -323,19 +345,90 @@
   "shoreline": {
    "doc": "The Great Lakes and Lake St. Clair are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page. Puget Sound is drawn the same way.",
    "lakes": [
-    {"name": "Lake Superior", "wikidata": "Q1066", "gnis_id": "1618946"},
-    {"name": "Lake Michigan", "wikidata": "Q1169", "gnis_id": "1623080"},
-    {"name": "Lake Huron", "wikidata": "Q1383", "gnis_id": "1624619"},
-    {"name": "Lake Erie", "wikidata": "Q5492", "gnis_id": "1075813"},
-    {"name": "Lake Ontario", "wikidata": "Q1062"},
-    {"name": "Lake St. Clair", "wikidata": "Q736707", "rationale": "Lake St. Clair joins Lake Huron to Lake Erie through the St. Clair and Detroit rivers and is part of the same Great Lakes system. It covers about 1,168 square kilometres and is shared with Ontario; a report from one outfall on its shore does not reach the whole lake, so the same shoreline stretch is drawn as on the Great Lakes."},
-    {"name": "Puget Sound", "wikidata": "Q604141", "kinds": ["sound"], "states": ["WA"], "rationale": "Puget Sound's main basin, off Seattle, covers about 470 square kilometres in the record used here, and the sound as a whole is several times larger. A report from one outfall on its shore does not reach the whole sound, so a stretch of shoreline is drawn at the outfall as on the Great Lakes: up to 20 kilometres along the shore each way, because tides and wind move the water along the shore in both directions. The stretch keeps the report's own advisory period, or this site's 72-hour caution after the reported end. The distance is our reading of the evidence from the Great Lakes and ocean shores, not a measurement in Puget Sound, and it may change. Contamination can reach beyond the stretch, and the rest of the sound is not shown as clean."},
-    {"name": "San Francisco Bay", "wikidata": "Q232264", "kinds": ["bay"], "states": ["CA"], "open_m": 1000, "rationale": "San Francisco Bay is a tidal estuary of several hundred square kilometres (its map record alone covers about 606 square kilometres, and with San Pablo and Suisun bays the estuary is larger), shared by dozens of cities and sewer agencies. A report from one outfall on its shore does not reach the whole bay, so the report is shown along a stretch of the bay's shore at the outfall, up to 20 kilometres each way, as on the Great Lakes and the open ocean, and the bay's outline stays uncoloured. Tides carry water back and forth along the shore twice a day, so the stretch runs both ways. The distance is the one this site uses on the Great Lakes and the ocean shore; it has not been measured in this bay, and it may change. The stretch keeps the report's own advisory period, or our caution after the reported end. Contamination can reach beyond the stretch, and the rest of the bay is not shown as clean."}
+    {
+     "name": "Lake Superior",
+     "wikidata": "Q1066",
+     "gnis_id": "1618946"
+    },
+    {
+     "name": "Lake Michigan",
+     "wikidata": "Q1169",
+     "gnis_id": "1623080"
+    },
+    {
+     "name": "Lake Huron",
+     "wikidata": "Q1383",
+     "gnis_id": "1624619"
+    },
+    {
+     "name": "Lake Erie",
+     "wikidata": "Q5492",
+     "gnis_id": "1075813"
+    },
+    {
+     "name": "Lake Ontario",
+     "wikidata": "Q1062"
+    },
+    {
+     "name": "Lake St. Clair",
+     "wikidata": "Q736707",
+     "rationale": "Lake St. Clair joins Lake Huron to Lake Erie through the St. Clair and Detroit rivers and is part of the same Great Lakes system. It covers about 1,168 square kilometres and is shared with Ontario; a report from one outfall on its shore does not reach the whole lake, so the same shoreline stretch is drawn as on the Great Lakes."
+    },
+    {
+     "name": "Puget Sound",
+     "wikidata": "Q604141",
+     "kinds": [
+      "sound"
+     ],
+     "states": [
+      "WA"
+     ],
+     "rationale": "Puget Sound's main basin, off Seattle, covers about 470 square kilometres in the record used here, and the sound as a whole is several times larger. A report from one outfall on its shore does not reach the whole sound, so a stretch of shoreline is drawn at the outfall as on the Great Lakes: up to 20 kilometres along the shore each way, because tides and wind move the water along the shore in both directions. The stretch keeps the report's own advisory period, or this site's 72-hour caution after the reported end. The distance is our reading of the evidence from the Great Lakes and ocean shores, not a measurement in Puget Sound, and it may change. Contamination can reach beyond the stretch, and the rest of the sound is not shown as clean."
+    },
+    {
+     "name": "San Francisco Bay",
+     "wikidata": "Q232264",
+     "kinds": [
+      "bay"
+     ],
+     "states": [
+      "CA"
+     ],
+     "open_m": 1000,
+     "rationale": "San Francisco Bay is a tidal estuary of several hundred square kilometres (its map record alone covers about 606 square kilometres, and with San Pablo and Suisun bays the estuary is larger), shared by dozens of cities and sewer agencies. A report from one outfall on its shore does not reach the whole bay, so the report is shown along a stretch of the bay's shore at the outfall, up to 20 kilometres each way, as on the Great Lakes and the open ocean, and the bay's outline stays uncoloured. Tides carry water back and forth along the shore twice a day, so the stretch runs both ways. The distance is the one this site uses on the Great Lakes and the ocean shore; it has not been measured in this bay, and it may change. The stretch keeps the report's own advisory period, or our caution after the reported end. Contamination can reach beyond the stretch, and the rest of the bay is not shown as clean."
+    }
    ],
    "oceans": [
-    {"name": "Atlantic Ocean", "wikidata": "Q97", "names": ["North Atlantic Ocean"], "states": ["FL"]},
-    {"name": "Gulf of America", "wikidata": "Q12570", "names": ["Gulf of Mexico"], "states": ["FL"]},
-    {"name": "Pacific Ocean", "wikidata": "Q98", "names": ["North Pacific Ocean"], "states": ["CA"]}
+    {
+     "name": "Atlantic Ocean",
+     "wikidata": "Q97",
+     "names": [
+      "North Atlantic Ocean"
+     ],
+     "states": [
+      "FL"
+     ]
+    },
+    {
+     "name": "Gulf of America",
+     "wikidata": "Q12570",
+     "names": [
+      "Gulf of Mexico"
+     ],
+     "states": [
+      "FL"
+     ]
+    },
+    {
+     "name": "Pacific Ocean",
+     "wikidata": "Q98",
+     "names": [
+      "North Pacific Ocean"
+     ],
+     "states": [
+      "CA"
+     ]
+    }
    ],
    "name_min_area_km2": 100,
    "min_area_km2": null,
@@ -380,7 +473,7 @@
   "min_discharge_days": 10,
   "threshold_rationale": "The amount is the 10th percentile of the rainfall on the days the operator discharged: nine discharge days in ten had more rain. It is computed for each operator with at least 10 such days. In Massachusetts it is the rainfall the operator itself reported in its sewage notification reports since July 2022. In Michigan, whose discharge list gives the operator's rainfall for the whole event rather than for one day, it is the NOAA MRMS radar's daily rainfall at the operator's outfalls on the days its reported combined sewer and retention basin discharges began since 2015, the larger of that day's total and the day before's. Operators without that history use a published rule below.",
   "threshold_source": "MassDEP Sewage Notification Data System, via the EEA Data Portal (Verified Data Reports, rainfall reported by each permittee); Michigan EGLE, MiEnviro CSO/SSO List, with NOAA MRMS daily rainfall via the Iowa Environmental Mesonet",
-  "compare": "The NOAA MRMS radar-only rainfall estimate for the 24 hours to the latest hour, read every hour at each outfall from the radar grid.",
+  "compare": "The NOAA MRMS radar-only rainfall estimate for the 24 hours to the latest hour, read every hour at each outfall from the radar grid. NOAA's radar rainfall service labels its values as inches but has been publishing millimetres; since November 7, 2026 this site works out the unit from the values themselves and from nearby airport rain gauges, converts to inches, and records with each reading the unit it read.",
   "tail_hours": 48,
   "tail_rationale": "The caution lasts 48 hours after the 24-hour rainfall total falls back below the amount, as Massachusetts advises avoiding contact during rainstorms and for 48 hours after they end.",
   "tail_source": "Massachusetts 314 CMR 16.09(4)",
