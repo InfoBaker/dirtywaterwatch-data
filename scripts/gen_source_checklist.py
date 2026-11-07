@@ -50,6 +50,10 @@ AREA_TITLES = {
     "wa": "Washington",
     "ca": "California",
     "il": "Illinois",
+    "az": "Arizona",
+    "sd": "South Dakota",
+    "ms": "Mississippi",
+    "ne": "Nebraska",
     "ak": "Alaska",
 }
 

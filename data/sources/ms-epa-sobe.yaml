@@ -1,0 +1,49 @@
+id: "ms-epa-sobe"
+name: "EPA NPDES sewer overflow and bypass event reports (eRule Phase 2, \"SOBE\"), Mississippi permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Mississippi
+#   permits added 2026-11-07: times written with Central offsets (America/Chicago; Mississippi is wholly Central), free
+#   text scrubbed of house numbers, the City of Jackson's shorthand creek names ('EUBANKS', 'TOWN') read as the NHD creek
+#   of that name when the report's point lies within 3.5 km of it (eight names, and three of Meridian's misspellings;
+#   Belhaven, Caney, Eastover and Three Mile kept as typed, and one EUBANKS report 15.4 km from the creek).
+# Notes (research/ms, status used, verified fetched, checked 2026-11-07): MDEQ requires the 24-hour report and, from
+#   2025-12-21, the 5-day electronic report through EPA's NeT-SewerOverflow, so this is the statewide record; MDEQ
+#   publishes no list of its own. The all-versions extract of 2026-11-04 (the current-version ZIP held only its
+#   metadata file on 2026-11-05 and 2026-11-07) held 358 current Mississippi events from 47 permits: SSO 314,
+#   bypass 43, CSO 1 (a single CSO-typed row naming no water). 246 kept from 27 permits (243 naming a receiving
+#   water, 3 by a water impact or a water named in the text); 112 dropped (109 naming no water with only land or
+#   no observable impacts, 1 sewage backup in a building, 1 bypass whose receiving water is 'None', 1 whose
+#   description says the matter was algae, not sewage). 109 of the 358 have no receiving-water row at all.
+#   Every row has coordinates (each event's own: a manhole that overflows in each storm repeats its point; the
+#   Vicksburg plant's 21 bypasses give the plant's point); 15 have no volume; 11 extreme-event reports give the
+#   report period only (day precision).
+# Access detail (research, quoted): ECHO daily ZIP of CSV tables: sewer_overflow_bypass_report_events.csv joined on
+#   sewer_overflow_bypass_event_key to _types, _receiving_waters, _causes, _impacts, _corrective_actions;
+#   collection_system_permits.csv names the system. Filtered on permit_identifier LIKE MS%.
+# Can fill: source_record_id, event_type, started_at, ended_at, reported_at, waterbody, coordinates, volume, units,
+#   estimate_flag, authority, raw_record, jurisdiction
+# Cannot fill: published_at (the extract date stands in); advice_text; valid_until
+# Waters: statewide; every Mississippi NPDES permittee that files through NeT-SewerOverflow. Most named (rows, case
+#   and spaces aside): Davis Bayou 22, Mississippi River 21, Ocean Springs inner harbor 20, Sowashee Creek 15,
+#   Eubanks Creek 14, Pascagoula River 14, Fort Bayou 12, Hanging Moss Creek 11, Okatibbee Creek 11, Costapia Bayou 10.
+# History: event starts 2023-11-14 to 2026-11-02 (3 before 2026); 2026 by month of the 347 reports with event times:
+#   Jan 17, Feb 8, Mar 23, Apr 9, May 78, Jun 117, Jul 34, Aug 25, Sep 20, Oct 11, Nov (to the 2nd) 2; the other 11
+#   are storm reports (G9B) that give only the report period.
+# Top filers: Jackson County Utility Authority POTW 1C Ocean Springs (MS0045446) 88, City of Jackson Savanna Street
+#   (MS0024295) 82, Meridian (MS0020117) 33, Vicksburg (MS0022381) 21, JCUA Escatawpa (MS0021521) 16, Greenville
+#   (MS0020184) 14, Jackson Trahon and Big Creek (MS0044059) 11.
+cadence: "EPA refreshes daily. Mississippi rows: 358 events from 47 permits; report received a median 4 days after the start (90th percentile 41 days, 53 of 358 at 41 days or more; 0 to 162). Newest row in the 2026-11-04 extract: an event that started 2026-11-02 18:43, received 2026-11-03."
+license: "EPA public data; no licence restriction stated on the ECHO download page."
+attribution: "U.S. EPA (ECHO), data entered by Mississippi permittees in NeT-SewerOverflow"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["MS"]
+access: ["csv"]
+access_detail: "Daily ZIP of CSV tables: sewer_overflow_bypass_report_events.csv joined on sewer_overflow_bypass_event_key to _types, _receiving_waters, _causes, _impacts, _corrective_actions; collection_system_permits.csv names the system. Filtered on permit_identifier LIKE MS%. When the current-version ZIP holds no events table the module reads the current version of each report from the all-versions ZIP."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) and (l)(7); 40 CFR part 127 (eRule Phase 2, from 2025-12-21); MDEQ permit conditions (24-hour report; 5-day electronic report)"
+checked: "2026-11-07"

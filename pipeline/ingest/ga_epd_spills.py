@@ -80,18 +80,31 @@ Record rules
   - EPA's copy: Georgia permittees file 24-hour and 5-day reports in EPD's GEOS, and these reach EPA's Sewer Overflow
     and Bypass Event tables (ingest/echo_sewer_overflow_events.py, run before this module; for Georgia they carry
     times and an end but no volume, and mostly the plant's point). An EPD row pairs with the EPA record of the same
-    permit and begin day: the record whose receiving water is the same name first, when that name picks exactly one
-    row and one record (two spills of one system on one water that day are not told apart); else, when only one EPD
-    row and one EPA record of that permit and day remain unpaired and they do not contradict each other (two different
-    specific water names, or EPD's dry land against a water EPA names: raw._epa_not_paired), those two. Several left
-    on both sides are not paired (raw._epa_candidates). An end borrowed from the wrong report would be an invented end,
-    so every doubt leaves the EPD row without one. The EPD record is the public one (gallons, address, waterway,
-    cause, the map layer's point): it takes EPA's ended_at when it has none and EPA's end is the spill's own (minute
-    precision; an extreme-weather report's reporting period is not: raw._epa_end_not_used), with status ended,
-    raw._end_basis naming the EPA record and "EPA eRule report", and raw._epa_record; the EPA record is marked duplicate_of the EPD record, written back into
-    EPA's events file (data/build/events/echo-sewer-overflow.json). Unpaired EPA records stay as they are. The pairs
-    are recomputed on every run (earlier marks on both sides are cleared first), so a report EPA receives later
-    still finds its EPD row; the EPA module rewrites its file each run, and this module runs after it.
+    permit and begin day; the permit is the row's NPDES permit, or else the state permit EPD typed (GAJ / GAU land
+    application, GAIS), which EPA carries under the same number (pair_permit; never made the record's npdes_permit).
+    No day tolerance: EPA's times are local (their hours peak at midday) and the reports a day off in the 2026-11 data
+    were other spills of the same system. Copies count once on each side: EPA reports with the same start, end and
+    receiving water are one spill filed twice (all are marked duplicate_of the EPD record, raw._epa_record lists
+    them), and EPD rows of one key (the '~2' copies: same permit, day and address) naming the same water with the same
+    gallons (or one with none) are one spill listed twice (each takes the end; the later ones say so in _end_basis).
+    The record whose receiving water is the same name pairs first, when that name picks exactly one row and one record
+    (two spills of one system on one water that day are not told apart); else, when only one EPD row and one EPA
+    record of that permit and day remain unpaired and they do not contradict each other (two different specific water
+    names, or EPD's dry land against a water EPA names: raw._epa_not_paired), those two. Several left on both sides are
+    not paired (raw._epa_candidates). An end borrowed from the wrong report would be an invented end, so every doubt
+    leaves the EPD row without one. The EPD record is the public one (gallons, address, waterway, cause, the map
+    layer's point): it takes EPA's ended_at when it has none and EPA's end is the spill's own (minute precision; an
+    extreme-weather report's reporting period is not) and plausible (end_refused: not before EPA's start, not before
+    EPD's begin day, not more than MAX_EPA_SPAN, 30 days, after EPA's start; else raw._epa_end_not_used says why and
+    nothing is repaired), with status ended, raw._end_basis naming the EPA record and "EPA eRule report", and
+    raw._epa_record; the EPA record is marked duplicate_of the EPD record, written back into EPA's events file
+    (data/build/events/echo-sewer-overflow.json). EPA's reports that say no water was reached are not among its events
+    but in data/build/echo-sewer-overflow-dropped.json with their start and end: an EPD row that also says no water was
+    reached (dry land, or a waterway such as "Not Applicable" with no destination in waters of the State) takes such a
+    report's end when it is the only row left of its permit and day, the report the only one, and every EPA event of
+    that permit and day already paired (pair_dropped; raw._epa_dropped_record). Unpaired EPA records stay as they are.
+    The pairs are recomputed on every run (earlier marks on both sides are cleared first), so a report EPA receives
+    later still finds its EPD row; the EPA module rewrites its file each run, and this module runs after it.
 
 Privacy: the list names facilities and street addresses, no people. common.strip_personal runs on raw; the export's
   redactor (build/redact.py) runs over CAUSE and every other free text before the file is written.
@@ -142,6 +155,7 @@ import requests
 from build import redact
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, event, now_iso, read_json, write_events,
                     write_json, path_notes_to_meta)
+from ingest import echo_sewer_overflow_events as E
 
 SOURCE_ID = "ga-epd-spills"
 PAGE_URL = "https://epd.georgia.gov/sewage-spills-report"
@@ -149,6 +163,7 @@ FILE_URL = "https://epd.georgia.gov/document/document/sewagespillsreport{ymd}/do
 LAYER_URL = ("https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/"
              "FeatureServer/0/query")
 EPA_EVENTS = EVENTS_DIR / "echo-sewer-overflow.json"
+EPA_DROPPED = BUILD_DIR / "echo-sewer-overflow-dropped.json"    # EPA's reports of no water reached, with start and end
 RAW = RAW_DIR / SOURCE_ID
 ARCHIVE = BUILD_DIR / "archive" / SOURCE_ID     # every posting read, kept with the pipeline state (R2 state/)
 BACKFILL_DAYS = 400     # --backfill with no date: about 13 months, and never later than EPD_FIRST_POSTING
@@ -159,6 +174,7 @@ CATCH_UP_DAYS = 14
 MOVED_DAYS = 7
 BACKFILL_PAUSE_S = 1.0
 REAL_PERMIT = re.compile(r"^GA[0G]\d{6}$")      # an individual (GA0...) or general (GAG...) NPDES permit
+STATE_PERMIT = re.compile(r"^GA[A-Z]{1,2}\d{5,6}$")   # a state permit (GAJ, GAU, GAIS ...): paired with EPA only
 LINK = re.compile(r"/document/document/sewagespillsreport(\d{8})/download")
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 HEADER_ALIASES = {"spill_begin_date": "begin_date"}
@@ -513,7 +529,47 @@ EPA_BASIS = "EPA eRule report"                  # raw._end_basis of an EPD recor
 EPD_BASIS = "Georgia EPD spill list record"     # raw._duplicate_basis of an EPA record paired with an EPD row
 
 
-def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
+def pair_permit(r: dict) -> str | None:
+    """The permit an EPD row is paired on: its NPDES permit, else the state permit EPD typed (a land-application GAJ /
+    GAU or an industrial GAIS number), which EPA's tables carry under the same number (2026-11 extract: 29 such rows
+    met exactly one EPA report of that permit and day, the same water named in both)."""
+    if r.get("npdes_permit"):
+        return r["npdes_permit"]
+    p = str(((r.get("raw") or {}).get("row") or {}).get("permit_number") or "").strip().upper()
+    return p if STATE_PERMIT.match(p) else None
+
+
+def epa_copy_key(e: dict) -> tuple:
+    """Two EPA reports of one permit with the same start, end and receiving water are one spill filed twice (a 24-hour
+    and a 5-day report entered as separate forms: 2026-11 extract, e.g. 13:35 to 13:48 on one creek, twice)."""
+    return (e.get("started_at"), e.get("ended_at"), frozenset(epa_water_keys(e)))
+
+
+def epd_copy_key(r: dict) -> tuple:
+    """Rows of one key (permit, begin day, address: the '~2' copies) naming the same water are one spill listed twice
+    when their gallons agree (or one row has none yet): EPD re-lists a spill as a new row at the same address, and the
+    earlier row is then withdrawn or ages out beside it (2026-11: 22 such copies took an end on the 13 months of postings)."""
+    return (r["source_record_id"].split("~")[0], water_key(r.get("waterbody_text")))
+
+
+def _units(rows: list[dict], key, same) -> list[list[dict]]:
+    """Groups rows whose key is equal and that `same` accepts against the group's first row, in input order."""
+    units: list[list[dict]] = []
+    for x in rows:
+        for u in units:
+            if key(u[0]) == key(x) and same(u[0], x):
+                u.append(x)
+                break
+        else:
+            units.append([x])
+    return units
+
+
+def _same_gallons(a: dict, b: dict) -> bool:
+    return a.get("volume_gal") is None or b.get("volume_gal") is None or a["volume_gal"] == b["volume_gal"]
+
+
+def mark_epa_duplicates(records: list[dict], epa: list[dict], epa_dropped: list[dict] | None = None) -> Counter:
     """Pair EPD rows with EPA's records of the same permit and begin day (module docstring). The EPD record is the
     public one: it takes EPA's end when it has none (raw._end_basis) and the EPA record becomes duplicate_of it.
     Both lists are changed in place; every mark of an earlier run is cleared first, so pairs are recomputed."""
@@ -522,7 +578,7 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
         if (r["raw"].get("_end_basis") or "").startswith(EPA_BASIS):
             r["ended_at"], r["status"] = None, "unknown"
             r["raw"].pop("_end_basis", None)
-        for k in ("_epa_candidates", "_epa_record", "_epa_not_paired", "_epa_end_not_used"):
+        for k in ("_epa_candidates", "_epa_record", "_epa_dropped_record", "_epa_not_paired", "_epa_end_not_used"):
             r["raw"].pop(k, None)
     for e in epa:
         if ((e.get("raw") or {}).get("_duplicate_basis") or "").startswith(EPD_BASIS):
@@ -537,43 +593,121 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
         groups[(e["npdes_permit"], e["started_at"][:10])].append(e)
     mine = defaultdict(list)
     for r in records:
-        if r.get("duplicate_of") or not r.get("npdes_permit") or not r.get("started_at"):
+        p = pair_permit(r)
+        if r.get("duplicate_of") or not p or not r.get("started_at"):
             continue
-        mine[(r["npdes_permit"], r["started_at"][:10])].append(r)
+        if not r.get("npdes_permit"):
+            n["state_permit_rows"] += 1
+        mine[(p, r["started_at"][:10])].append(r)
     paired_epa = set()
+
+    def pair(unit: list[dict], eunit: list[dict], why: str) -> None:
+        for i, r in enumerate(unit):
+            n["end_" + _pair(r, eunit[0], why if i == 0 else why + COPY_NOTE.format(unit[0]["event_id"]),
+                             mark=i == 0)] += 1
+        for e in eunit[1:]:
+            e["duplicate_of"] = unit[0]["event_id"]
+            e.setdefault("raw", {})["_duplicate_basis"] = (f"{EPD_BASIS} {unit[0]['event_id']}: {why}; the same start, "
+                                                           f"end and receiving water as EPA report {eunit[0]['event_id']}"
+                                                           f" (one spill filed twice)")
+            n["epa_copies"] += 1
+        unit[0]["raw"]["_epa_record"] = eunit[0]["event_id"] if len(eunit) == 1 else [e["event_id"] for e in eunit]
+        if len(unit) > 1:
+            n["epd_copies"] += len(unit) - 1
+        paired_epa.update(e["event_id"] for e in eunit)
+
     for k, rs in mine.items():
-        es = list(groups.get(k, []))
-        if not es:
+        es_all = groups.get(k, [])
+        if not es_all:
             n["epd_without_epa"] += len(rs)
             continue
+        es = _units(es_all, epa_copy_key, lambda a, b: True)
+        units = _units(rs, epd_copy_key, _same_gallons)
         left = []
-        row_keys = Counter(water_key(r.get("waterbody_text")) for r in rs)
-        for r in rs:
-            wk = water_key(r.get("waterbody_text"))
-            hits = [e for e in es if wk and wk in epa_water_keys(e)]
-            if len(hits) == 1 and row_keys[wk] == 1:
+        unit_keys = Counter(water_key(u[0].get("waterbody_text")) for u in units)
+        for u in units:
+            wk = water_key(u[0].get("waterbody_text"))
+            hits = [eu for eu in es if wk and wk in epa_water_keys(eu[0])]
+            if len(hits) == 1 and unit_keys[wk] == 1:
                 es.remove(hits[0])
-                _pair(r, hits[0], "same permit, day and receiving water")
-                paired_epa.add(hits[0]["event_id"])
+                pair(u, hits[0], "same permit, day and receiving water")
                 n["paired_by_water"] += 1
             else:
                 if hits:                 # two spills of one permit, day and water: whose end is whose is not known
-                    n["same_water_ambiguous"] += 1
-                left.append(r)
-        if len(left) == 1 and len(es) == 1 and not contradicts(left[0], es[0]):
-            _pair(left[0], es[0], "the only EPD row and the only EPA report of this permit and day")
-            paired_epa.add(es[0]["event_id"])
+                    n["same_water_ambiguous"] += len(u)
+                left.append(u)
+        if len(left) == 1 and len(es) == 1 and not contradicts(left[0][0], es[0][0]):
+            pair(left[0], es[0], "the only EPD row and the only EPA report of this permit and day")
             n["paired_alone"] += 1
         elif left:
             if len(left) == 1 and len(es) == 1:
-                left[0]["raw"]["_epa_not_paired"] = (f"{es[0]['event_id']} is the only EPA report of this permit and "
-                                                     f"day, but {contradicts(left[0], es[0])}")
-                n["not_paired_contradiction"] += 1
-            for r in left:
-                r["raw"]["_epa_candidates"] = [e["event_id"] for e in es]
-            n["epd_without_epa"] += len(left)
+                for r in left[0]:
+                    r["raw"]["_epa_not_paired"] = (f"{es[0][0]['event_id']} is the only EPA report of this permit and "
+                                                   f"day, but {contradicts(left[0][0], es[0][0])}")
+                n["not_paired_contradiction"] += len(left[0])
+            for u in left:
+                for r in u:
+                    r["raw"]["_epa_candidates"] = [e["event_id"] for eu in es for e in eu]
+                n["epd_without_epa"] += len(u)
     n["epa_without_epd"] = sum(len(v) for v in groups.values()) - len(paired_epa)
+    pair_dropped(mine, groups, paired_epa, epa_dropped or [], n)
     return n
+
+
+def says_no_water(r: dict) -> bool:
+    """EPD's row says the spill stayed out of the water: dry land with no water named (raw.reached_water false), or a
+    waterway text naming none ('Not Applicable', 'Ditch', blank) with a destination that does not say waters of the
+    State or a CSO."""
+    if r["raw"].get("reached_water") is False:
+        return True
+    w = r.get("waterbody_text") or ""
+    dest = str((r["raw"].get("row") or {}).get("overflow_destination") or "")
+    return (not w or bool(NO_WATER.match(w)) or E.no_water(w, "GA")) and not WATER_DEST.search(dest)
+
+
+def pair_dropped(mine: dict, groups: dict, paired_epa: set, dropped: list[dict], n: Counter) -> None:
+    """EPA's reports that say the spill reached no water are not in EPA's events (ingest/echo_sewer_overflow_events.py
+    keeps them in echo-sewer-overflow-dropped.json with their start and end). An EPD row that also says no water was
+    reached takes such a report's end when, for that permit and day, it is the only EPD row (copies counted once) left
+    without an EPA report, every EPA report kept as an event is already paired, and the dropped report is the only one
+    (copies with the same start and end counted once): both say the same spill stayed on land or in a building.
+    2026-11: 173 EPD rows had a dropped EPA report of the same permit and day, 135 of them EPD's own dry land."""
+    dg = defaultdict(list)
+    for d in dropped:
+        start = E.naive(d.get("start"))
+        if str(d.get("permit") or "").startswith("GA") and start:
+            dg[(d["permit"], start[:10])].append({**d, "start": start, "end": E.naive(d.get("end"))})
+    for k, rs in mine.items():
+        if k not in dg or any(e["event_id"] not in paired_epa for e in groups.get(k, [])):
+            continue
+        rest = [r for r in rs if not any(r["raw"].get(x) for x in ("_epa_record", "_epa_candidates", "_epa_not_paired"))]
+        units = _units(rest, epd_copy_key, _same_gallons)
+        ds = _units(dg[k], lambda d: (d["start"], d["end"]), lambda a, b: True)
+        if len(units) != 1 or len(ds) != 1:
+            if units:
+                n["dropped_ambiguous"] += sum(len(u) for u in units)
+            continue
+        d = ds[0][0]
+        if not says_no_water(units[0][0]):
+            for r in units[0]:
+                r["raw"]["_epa_not_paired"] = (f"EPA report {d['source_record_id']} of this permit and day says the "
+                                               f"spill reached no water ({d.get('reason')}); EPD's row does not")
+            n["dropped_not_paired_water"] += len(units[0])
+            continue
+        e = {"event_id": f"{EPA_SOURCE}:{d['source_record_id']}", "started_at": d["start"], "ended_at": d["end"],
+             "time_precision": "minute"}
+        why = (f"the only EPD row and the only EPA report of this permit and day, both saying no water was reached; "
+               f"EPA's report is not among its events ({d.get('reason')})")
+        for i, r in enumerate(units[0]):
+            n["dropped_end_" + _pair(r, e, why if i == 0 else why + COPY_NOTE.format(units[0][0]["event_id"]),
+                                     mark=False)] += 1
+            r["raw"]["_epa_dropped_record"] = r["raw"].pop("_epa_record")    # not an event: nothing to mark duplicate
+        n["paired_dropped"] += 1
+
+
+EPA_SOURCE = "echo-sewer-overflow"
+COPY_NOTE = "; a second listing on EPD's list of the spill in {} (same address, water and gallons)"
+MAX_EPA_SPAN = timedelta(days=30)     # an EPA end more than this after EPA's start is not taken (module docstring)
 
 
 # a water key that names no particular water ("Unnamed tributary", "UT", "creek"): it contradicts no name
@@ -597,20 +731,55 @@ def contradicts(r: dict, e: dict) -> str | None:
     return None
 
 
-def _pair(r: dict, e: dict, why: str) -> None:
-    """The EPD record r stays primary; EPA's e is duplicate_of it. r takes e's end only when it has none and e's end is
-    the spill's own reported end (minute precision: not the reporting period of an extreme-weather report)."""
+def _naive_dt(s: str | None) -> datetime | None:
+    try:
+        return datetime.fromisoformat(s).replace(tzinfo=None) if s else None
+    except ValueError:
+        return None
+
+
+def end_refused(r: dict, e: dict) -> str | None:
+    """Why EPA's end cannot be the EPD spill's end, or None: it lies before EPA's own start (an a.m./p.m. or date slip:
+    12:42 to 03:45 the same day), before the day EPD says the spill began, or more than MAX_EPA_SPAN after EPA's start
+    (a year typed wrong: 2025-09-28 to 2026-09-29). Never repaired: the row keeps an unknown end."""
+    start, end = _naive_dt(e.get("started_at")), _naive_dt(e.get("ended_at"))
+    day = _naive_dt((r.get("started_at") or "")[:10])
+    if not start or not end:
+        return "EPA's start or end cannot be read"
+    if end < start:
+        return f"EPA's end {e['ended_at']} is before EPA's start {e['started_at']}"
+    if day and end < day:
+        return f"EPA's end {e['ended_at']} is before the day EPD says the spill began ({r['started_at'][:10]})"
+    if end - start > MAX_EPA_SPAN:
+        return (f"EPA's end {e['ended_at']} is {(end - start).days} days after its start {e['started_at']}, more than "
+                f"{MAX_EPA_SPAN.days}: not taken without a check")
+    return None
+
+
+def _pair(r: dict, e: dict, why: str, mark: bool = True) -> str:
+    """The EPD record r stays primary; EPA's e is duplicate_of it (mark; a second listing of the same spill on EPD's list
+    takes the end too but is not what EPA's record points to). r takes e's end only when it has none and e's end is the
+    spill's own reported end (minute precision: not the reporting period of an extreme-weather report) and plausible
+    (end_refused). Returns what happened to the end: taken, own (r has one), none, period or refused."""
     r["raw"]["_epa_record"] = e["event_id"]
-    if not r.get("ended_at") and e.get("ended_at") and e.get("time_precision") != "minute":
+    out = "own" if r.get("ended_at") else "none" if not e.get("ended_at") else ""
+    if not out and e.get("time_precision") != "minute":
         r["raw"]["_epa_end_not_used"] = (f"{e['event_id']} gives an end of {e['ended_at']} at {e.get('time_precision')} "
                                          f"precision (a reporting period, not the spill's own end)")
-    elif not r.get("ended_at") and e.get("ended_at"):
+        out = "period"
+    elif not out and (bad := end_refused(r, e)):
+        r["raw"]["_epa_end_not_used"] = f"{e['event_id']}: {bad}"
+        out = "refused"
+    elif not out:
         r["ended_at"], r["status"] = e["ended_at"], "ended"
         r["raw"]["_end_basis"] = (f"{EPA_BASIS} {e['event_id']} ({why}; EPA start {e.get('started_at')}, end "
                                   f"{e['ended_at']}, as given, presumably local time)")
-    e["duplicate_of"] = r["event_id"]
-    e.setdefault("raw", {})["_duplicate_basis"] = (f"{EPD_BASIS} {r['event_id']}: {why}; the state's list carries the "
-                                                   f"gallons, address and waterway")
+        out = "taken"
+    if mark:
+        e["duplicate_of"] = r["event_id"]
+        e.setdefault("raw", {})["_duplicate_basis"] = (f"{EPD_BASIS} {r['event_id']}: {why}; the state's list carries "
+                                                       f"the gallons, address and waterway")
+    return out
 
 
 # ---------------------------------------------------------------- fetch
@@ -767,7 +936,7 @@ CARRIED = ("_first_seen_at", "_read_from_archive")     # a rebuild keeps these f
 
 def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list[dict], layer: dict | None,
           epa: list[dict], permits: dict, fetched_at: str, rebuild: bool = False,
-          read_at: dict | None = None) -> tuple[list[dict], dict]:
+          read_at: dict | None = None, epa_dropped: list[dict] | None = None) -> tuple[list[dict], dict]:
     """Apply each posting (oldest first) to the previous records; then EPA pairing and the redactor.
 
     rebuild (--backfill, --rebuild): start from no records and apply every posting given, so an old posting is never
@@ -819,7 +988,7 @@ def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list
                 r["raw"]["_coords_kept_from_earlier_read"] = True
         stats["kept_from_previous_file_not_rebuilt"] = kept
     records = list(state.values())
-    stats["epa_pairing"] = dict(mark_epa_duplicates(records, epa))
+    stats["epa_pairing"] = dict(mark_epa_duplicates(records, epa, epa_dropped))
     records = redact.redact_events(records)
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     current = [r for r in records if not r["raw"].get("_missing_from_source_since") and not r["raw"].get("_aged_out_after")]
@@ -929,7 +1098,7 @@ def main(argv=None) -> int:
         epa_doc = read_json(EPA_EVENTS, {}) or {}
         epa = epa_doc.get("records", [])
         records, stats = build(postings, prev, layer, epa, load_permits(), fetched_at, rebuild=rebuild,
-                               read_at=read_at)
+                               read_at=read_at, epa_dropped=(read_json(EPA_DROPPED, {}) or {}).get("dropped", []))
     except Exception as e:  # noqa: BLE001 - a failed run keeps the previous records
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)

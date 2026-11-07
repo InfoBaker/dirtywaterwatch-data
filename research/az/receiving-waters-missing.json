@@ -1,0 +1,198 @@
+{
+ "about": "Receiving-water names in AZ's reports (EPA's overflow tables for Arizona permits, the 2026-11-04 extract read on 2026-11-07, with the Navajo Nation's reports located in Arizona) that data/receiving-waters-national.json does not hold for AZ, by name as the record gives it (an ADEQ waterbody identifier named as ADEQ's layer names it), with the number of reports giving each. Reports that say the discharge reached no water are left out.",
+ "state": "AZ",
+ "waters": 9,
+ "reports": 24,
+ "rows": [
+  {
+   "name": "Black Creek Wash",
+   "reports": 8,
+   "permits": [
+    "NN0021555"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     35.639444,
+     -109.080278
+    ]
+   ],
+   "spellings": [
+    "Black Creek wash",
+    "BLACK CREEK WASH"
+   ]
+  },
+  {
+   "name": "Unnamed Trib to Munds Creek",
+   "reports": 5,
+   "permits": [
+    "AZ0025879"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "adeq_wbids": {
+    "AZ15060202-421": {
+     "origin": "HEADWATERS",
+     "terminus": "MUNDS CREEK @ 34°56'03.19\"/111°38'53.56\""
+    }
+   },
+   "points": [
+    [
+     34.93524,
+     -111.64818
+    ]
+   ]
+  },
+  {
+   "name": "Andorra Wash",
+   "reports": 4,
+   "permits": [
+    "AZ0025828"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "adeq_wbids": {
+    "AZ15060106B-8861": {
+     "origin": "Confluence with Unnamed Trib",
+     "terminus": "Cave Creek"
+    },
+    "AZ15060106B-8233": {
+     "origin": "HEADWATERS",
+     "terminus": "Confluence with Unnamed Trib"
+    }
+   },
+   "plant_points": [
+    [
+     33.80058,
+     -111.98892
+    ]
+   ]
+  },
+  {
+   "name": "Buckeye Canal",
+   "reports": 2,
+   "permits": [
+    "AZ0025313"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "adeq_wbids": {
+    "AZ15070101-210": {
+     "origin": "SOUTH EXTENSION CANAL",
+     "terminus": "TERMINUS @ 33°21'34.86\"/112°41'03.31\" (HUC BNDRY 15070103)",
+     "flow_regime": "C-N.A."
+    }
+   },
+   "plant_points": [
+    [
+     33.363481,
+     -112.582124
+    ]
+   ]
+  },
+  {
+   "name": "Az Canal Diversion Channel",
+   "reports": 1,
+   "permits": [
+    "AZ0020524"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     33.569479,
+     -112.084755
+    ]
+   ]
+  },
+  {
+   "name": "Laguna Creek",
+   "reports": 1,
+   "permits": [
+    "NN0020281"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     36.733111,
+     -110.230611
+    ]
+   ]
+  },
+  {
+   "name": "Munds Creek",
+   "reports": 1,
+   "permits": [
+    "AZ0025879"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "adeq_wbids": {
+    "AZ15060202-415": {
+     "origin": "Casner Park Tank",
+     "terminus": "OAK CREEK @ 34°54'41.65\"/111°43'36.5\"",
+     "flow_regime": "Undetermined"
+    }
+   },
+   "points": [
+    [
+     34.93524,
+     -111.64818
+    ]
+   ]
+  },
+  {
+   "name": "Pinal Creek",
+   "reports": 1,
+   "permits": [
+    "AZ0020249"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "adeq_wbids": {
+    "AZ15060103-280B": {
+     "origin": "Unnamed (receives Globe WWTP)",
+     "terminus": "GLOBE WWTP @ 33°26'53.96\"/110°49'23.21\""
+    }
+   },
+   "points": [
+    [
+     33.396093,
+     -110.788279
+    ]
+   ]
+  },
+  {
+   "name": "Sand Tank Wash",
+   "reports": 1,
+   "permits": [
+    "AZ0020231"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "adeq_wbids": {
+    "AZ15070101-004": {
+     "origin": "Headwaters",
+     "terminus": "TERMINUS @ 32°58'54.1\"/112°43'07.31\""
+    }
+   },
+   "points": [
+    [
+     32.96969,
+     -112.74837
+    ]
+   ]
+  }
+ ]
+}
