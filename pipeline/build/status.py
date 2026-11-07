@@ -933,6 +933,38 @@ def outfall_name_id(row: dict) -> str | None:
     return norm_oid(m.group(1)) if m else None
 
 
+# States whose reports carry an island (raw.island) and no point: a name resolves only to a record on that island
+ISLAND_STATES = {"HI"}
+
+
+def water_island(w: dict) -> str | None:
+    """The island (ingest.hi_doh_cwb_events.ISLANDS key) a Hawaii water record lies on, from its box's centre; None
+    without a box or off every island's box."""
+    from ingest import hi_doh_cwb_events as HI
+    b = w.get("bbox")
+    if not (isinstance(b, (list, tuple)) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b)):
+        return None
+    for k in HI.ISLANDS:
+        if HI.on_island(w, k):
+            return k
+    return None
+
+
+def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]:
+    """(the slugs on the report's island, why others were set aside). A report with no island keeps them all."""
+    from ingest import hi_doh_cwb_events as HI
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    isl = HI.key(raw.get("island") or "").replace(" ", "")
+    if isl not in HI.ISLANDS:
+        return list(slugs), None
+    kept = [x for x in slugs if water_island(waters.get(x) or {}) == isl]
+    off = [x for x in slugs if x not in kept]
+    if not off:
+        return kept, None
+    return kept, (f"the record(s) of that name ({', '.join(off)}) do not lie on {HI.ISLANDS[isl][0]}, the report's "
+                  "island (or have no box to show it)")
+
+
 def event_state(ev: dict) -> str | None:
     """The state a report counts under: the record's own two-letter raw.state first (an overflow outside its
     permit's state: DC Water's Potomac Interceptor rows in Montgomery County carry raw.state MD with
@@ -1652,6 +1684,15 @@ class Resolver:
         out, notes, ambiguous = [], [], False
         for n in sorted(names):
             slugs = found[n]
+            if state in ISLAND_STATES:
+                # Hawaii's reports give an island, never a point: a name two islands share ("Kailua Bay" off Oahu and
+                # off Kona) goes only to the record on the report's island (final audit 2026-11-07 P1-1)
+                kept, why = island_slugs(slugs, ev or {}, self.waters)
+                if why:
+                    notes.append(f"'{n}': {why}")
+                slugs = kept
+                if not slugs:
+                    continue
             if len(slugs) == 1:
                 out.append(slugs[0])
                 continue
