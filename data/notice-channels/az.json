@@ -25,7 +25,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Arizona Department of Corrections, Rehabilitation and Reentry (ASPC Eyman, Florence) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Arizona Department of Corrections, Rehabilitation and Reentry (ASPC Eyman, Florence) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -108,8 +108,10 @@
    "id": "az-adeq-reported-habs",
    "name": "Arizona Department of Environmental Quality (reported harmful algal blooms)",
    "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://azdeq.gov/reported-habs"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
@@ -143,7 +145,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Alpine Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Alpine Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -168,7 +170,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "American Ranch Domestic Water Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "American Ranch Domestic Water Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -193,7 +195,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Apache Junction Sewer District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Apache Junction Sewer District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (9 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -218,7 +220,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Arizona City Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Arizona City Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -243,7 +245,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Arizona State Parks and Trails (Patagonia Lake State Park) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Arizona State Parks and Trails (Patagonia Lake State Park) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -268,7 +270,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "The Estates at Pine Canyon - Unit One (permit AZ0024902) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "The Estates at Pine Canyon - Unit One (permit AZ0024902) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -293,7 +295,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Miami Wastewater Reclamation Facility reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Miami Wastewater Reclamation Facility reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -318,7 +320,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Big Park Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Big Park Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -343,7 +345,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Bison Ranch Owners Association reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Bison Ranch Owners Association reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -368,7 +370,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Black Canyon Ranch RV Resort reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Black Canyon Ranch RV Resort reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -393,7 +395,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Avondale reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Avondale reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -418,7 +420,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Benson reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Benson reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -443,7 +445,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Bisbee reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Bisbee reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (2 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -468,7 +470,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Buckeye reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Buckeye reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (22 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -493,7 +495,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Bullhead City reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Bullhead City reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (7 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -518,7 +520,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Casa Grande reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Casa Grande reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (12 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -543,7 +545,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Cottonwood reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Cottonwood reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (15 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -568,7 +570,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of El Mirage reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of El Mirage reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (5 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -593,7 +595,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Flagstaff Utilities (Wildcat Hill and Rio de Flag plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Flagstaff Utilities (Wildcat Hill and Rio de Flag plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (6 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -618,7 +620,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Globe reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Globe reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (5 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -643,7 +645,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Goodyear (157th Avenue, Corgett Wash and Rainbow Valley plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Goodyear (157th Avenue, Corgett Wash and Rainbow Valley plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (10 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -668,7 +670,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Holbrook reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Holbrook reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -693,7 +695,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Kingman (Hilltop and Downtown plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Kingman (Hilltop and Downtown plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -718,8 +720,28 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Mesa Water Resources (Northwest, Southeast and Greenfield plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Mesa Water Resources (Northwest, Southeast and Greenfield plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (13 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "AZ",
+   "operator_id": "az-city-of-mesa",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "az-city-of-mesa-wastewater-page",
+   "name": "City of Mesa",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "records": false,
+   "note": "Mesa's wastewater page (https://www.mesaaz.gov/Utilities/Water-Wastewater/Wastewater, 200 on 2026-11-07) describes the system and its three plants; no overflow notice or list was found.",
+   "barrier": "no_web_page"
   },
   {
    "state": "AZ",
@@ -743,7 +765,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Peoria reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Peoria reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (9 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -768,8 +790,28 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Phoenix Water Services (91st Avenue, 23rd Avenue and Cave Creek plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Phoenix Water Services (91st Avenue, 23rd Avenue and Cave Creek plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (47 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "AZ",
+   "operator_id": "az-city-of-phoenix",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "az-city-of-phoenix-sewer-service-page",
+   "name": "City of Phoenix",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "records": false,
+   "note": "Phoenix's sewer service page (https://www.phoenix.gov/administration/departments/waterservices/city-services-bill/general-service-issues.html, 200 on 2026-11-07) gives a hotline only for reporting overflows; no list or notice of overflows was found on the city's site.",
+   "barrier": "no_web_page"
   },
   {
    "state": "AZ",
@@ -793,8 +835,29 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Safford reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Safford reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "AZ",
+   "operator_id": null,
+   "agency": "City of Sedona",
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "az-city-of-sedona-wastewater",
+   "name": "City of Sedona (wastewater)",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.sedonaaz.gov/your-government/departments/wastewater"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "unknown",
+   "note": "Sedona's wastewater pages answer 403 to the project user agent (2026-11-07). Sedona holds no AZPDES permit, so its releases are not in EPA's tables; the press reported sewage spilling into Oak Creek (azfamily.com, 2026-11-02, search result read). An example of the APP-only gap: such a release reaches no public record but the press.",
+   "barrier": "bot_wall"
   },
   {
    "state": "AZ",
@@ -818,7 +881,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Show Low reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Show Low reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -843,7 +906,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Somerton reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Somerton reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -868,7 +931,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Tolleson reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Tolleson reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (6 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -893,7 +956,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Tombstone reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Tombstone reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -918,7 +981,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Willcox reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Willcox reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -943,7 +1006,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Williams reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Williams reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -968,7 +1031,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Winslow reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Winslow reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -993,8 +1056,29 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "City of Yuma reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "City of Yuma reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (17 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
+  },
+  {
+   "state": "AZ",
+   "operator_id": "az-city-of-yuma",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "az-city-of-yuma-utilities-page",
+   "name": "City of Yuma",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.yumaaz.gov/government/utilities"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "unknown",
+   "note": "Yuma's utilities page answers 403 to the project user agent (2026-11-07); whether it posts overflows is not known.",
+   "barrier": "bot_wall"
   },
   {
    "state": "AZ",
@@ -1017,7 +1101,7 @@
    "sources": [
     "az-epa-sobe"
    ],
-   "note": "Colorado River Sewage System Joint Venture (Parker)'s permits are EPA's (tribal land): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed); none are there in the 2026-11-04 extract. Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "note": "Colorado River Sewage System Joint Venture (Parker)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 0 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
    "barrier": null
   },
   {
@@ -1040,7 +1124,7 @@
    "feed_source_id": "echo-sewer-overflow",
    "publishes": "notices",
    "noun": "Data feed",
-   "note": "EPA's sewer overflow and bypass event tables (NPDES electronic reporting): Arizona's AZPDES permittees file their 24-hour and five-day reports in ADEQ's myDEQ and EPA publishes them (288 Arizona reports from 42 permits, September 2019 to 28 October 2026, in the 2026-11-04 extract; a median 3 days from start to receipt). No report from Pima County's permits. (research/az/report.md §2.2)",
+   "note": "EPA's sewer overflow and bypass event tables (NPDES electronic reporting): Arizona's AZPDES permittees file their 24-hour and five-day reports in ADEQ's myDEQ and EPA publishes them (288 Arizona reports from 42 permits, September 2019 to 28 October 2026, in the 2026-11-04 extract; a median 3 days from start to receipt), and the Navajo Nation's reports under EPA's own permits (52 located in Arizona, February 2024 to October 2026). No report from Pima County's permits. (research/az/report.md §2.2)",
    "sources": [
     "fed-echo-sewer-overflow-bypass-events",
     "az-epa-sobe"
@@ -1069,7 +1153,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "EPCOR Water Arizona reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "EPCOR Water Arizona reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1094,7 +1178,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Frito-Lay North America (Casa Grande plant) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Frito-Lay North America (Casa Grande plant) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1119,7 +1203,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Global Water - Hassayampa Utilities reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Global Water - Hassayampa Utilities reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1144,7 +1228,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Global Water - Palo Verde Utilities reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Global Water - Palo Verde Utilities reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (11 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1169,7 +1253,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "National Park Service, Grand Canyon National Park (South Rim and North Rim plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "National Park Service, Grand Canyon National Park (South Rim and North Rim plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (33 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1194,7 +1278,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "International Boundary and Water Commission (Nogales International Wastewater Treatment Plant) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "International Boundary and Water Commission (Nogales International Wastewater Treatment Plant) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1219,7 +1303,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Kings Ranch Unit 2 Domestic Wastewater Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Kings Ranch Unit 2 Domestic Wastewater Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1244,7 +1328,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Liberty Utilities (Litchfield Park) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Liberty Utilities (Litchfield Park) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (6 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1269,7 +1353,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Liberty Utilities (Sarival) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Liberty Utilities (Sarival) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1321,7 +1405,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Mountain Pass Utility Company (SaddleBrooke Ranch) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Mountain Pass Utility Company (SaddleBrooke Ranch) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1345,7 +1429,31 @@
    "sources": [
     "az-epa-sobe"
    ],
-   "note": "Navajo Tribal Utility Authority (Chinle, Kayenta, Tuba City, Window Rock, Ganado and Twin Arrows plants)'s permits are EPA's (tribal land): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed); none are there in the 2026-11-04 extract. Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "note": "Navajo Tribal Utility Authority (Chinle, Kayenta, Tuba City, Window Rock, Ganado and Twin Arrows plants)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 52 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "barrier": null
+  },
+  {
+   "state": "AZ",
+   "operator_id": "az-navajo-tribal-utility-authority",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "az-navajo-tribal-utility-authority-sso-plan",
+   "name": "Navajo Tribal Utility Authority",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.ntua.com/assets/sso-response-plan---final.pdf"
+   ],
+   "method": "pdf",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "note": "NTUA's sanitary sewer overflow response plan (PDF, answered 200 on 2026-11-07); read for changes. Its public notice steps were not read in full. Filed voluntary: the permit clause that may require it was not read.",
    "barrier": null
   },
   {
@@ -1354,12 +1462,12 @@
    "agency": null,
    "permit": "NN0021610",
    "checked": "2026-11-07",
-   "id": "az-nn0021610-adeq-report",
+   "id": "az-nn0021610-epa-report",
    "name": "Sewage plant near Cameron (permit NN0021610)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
-   "legal_basis": "AZPDES permit NN0021610: the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), filed in ADEQ's myDEQ; A.A.C. R18-9-C305(F)(1)(a): \"A permittee shall report to the Department, by telephone, facsimile, or on the applicable notification form on the Department's Internet web site, any release that is an imminent and substantial threat to public health or the environment as soon as practical, but no later than 24 hours of becoming aware of the release\"; (F)(1)(b) a written report within five business days",
+   "legal_basis": "NPDES permit NN0021610 (EPA Region 9, tribal land): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to EPA",
    "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
@@ -1367,10 +1475,9 @@
    "publishes": "notices",
    "noun": "EPA report",
    "sources": [
-    "az-epa-sobe",
-    "az-law-r18-9-c305"
+    "az-epa-sobe"
    ],
-   "note": "Sewage plant near Cameron (permit NN0021610) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Sewage plant near Cameron (permit NN0021610)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 0 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
    "barrier": null
   },
   {
@@ -1395,7 +1502,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Northern Gila County Sanitary District (Payson) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Northern Gila County Sanitary District (Payson) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (6 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1447,7 +1554,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Oracle Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Oracle Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1472,7 +1579,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Pima County (Regional Wastewater Reclamation Department, Tucson area) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Pima County (Regional Wastewater Reclamation Department, Tucson area) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1520,7 +1627,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Pinetop-Lakeside Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Pinetop-Lakeside Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1545,7 +1652,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Pinewood Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Pinewood Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (9 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1593,7 +1700,7 @@
    "sources": [
     "az-epa-sobe"
    ],
-   "note": "San Carlos Apache Tribe (Six Mile lagoon plant)'s permits are EPA's (tribal land): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed); none are there in the 2026-11-04 extract. Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "note": "San Carlos Apache Tribe (Six Mile lagoon plant)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 0 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
    "barrier": null
   },
   {
@@ -1628,8 +1735,10 @@
    "id": "az-tempe-town-lake",
    "name": "City of Tempe (Tempe Town Lake)",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.tempe.gov/government/community-services/tempe-town-lake"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
@@ -1663,7 +1772,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Cave Creek reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Cave Creek reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (4 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1688,7 +1797,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Florence (North Florence and South plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Florence (North Florence and South plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (4 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1713,7 +1822,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Gila Bend reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Gila Bend reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (2 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1738,7 +1847,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Jerome reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Jerome reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1763,7 +1872,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Kearny reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Kearny reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1788,7 +1897,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Mammoth reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Mammoth reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1813,7 +1922,31 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Marana reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Marana reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (7 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "barrier": null
+  },
+  {
+   "state": "AZ",
+   "operator_id": "az-town-of-marana",
+   "agency": null,
+   "permit": null,
+   "checked": "2026-11-07",
+   "id": "az-town-of-marana-news",
+   "name": "Town of Marana",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.maranaaz.gov/Government/News"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "note": "The town's news list, where Marana has posted its sewage overflows (in 2021: storm-diluted sewage diverted to a retention basin in North Marana, a trail closed for sewage cleanup). Answered 200 on 2026-11-07. Voluntary.",
    "barrier": null
   },
   {
@@ -1838,7 +1971,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Patagonia reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Patagonia reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1863,7 +1996,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Prescott Valley reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Prescott Valley reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (14 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1888,7 +2021,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Quartzsite reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Quartzsite reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1913,7 +2046,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Snowflake reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Snowflake reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1938,7 +2071,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Superior reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Superior reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (1 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1963,7 +2096,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Wickenburg (Wickenburg and Wickenburg Ranch plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Wickenburg (Wickenburg and Wickenburg Ranch plants) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -1988,7 +2121,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Town of Winkelman reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Town of Winkelman reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2013,7 +2146,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Trillium Land Company reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Trillium Land Company reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2038,7 +2171,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Tusayan Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Tusayan Sanitary District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2062,7 +2195,7 @@
    "sources": [
     "az-epa-sobe"
    ],
-   "note": "Upper Village of Moenkopi (Hopi Tribe)'s permits are EPA's (tribal land): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed); none are there in the 2026-11-04 extract. Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "note": "Upper Village of Moenkopi (Hopi Tribe)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 0 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
    "barrier": null
   },
   {
@@ -2087,7 +2220,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "U.S. Bureau of Reclamation, Lower Colorado Basin (Hoover Dam plant and Yuma Desalting Plant) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "U.S. Bureau of Reclamation, Lower Colorado Basin (Hoover Dam plant and Yuma Desalting Plant) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2112,7 +2245,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "U.S. Forest Service, Apache-Sitgreaves National Forests (Black Mesa Ranger District) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "U.S. Forest Service, Apache-Sitgreaves National Forests (Black Mesa Ranger District) reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2137,7 +2270,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Utility Source, LLC reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Utility Source, LLC reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2162,7 +2295,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Valle Airpark, LLC reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Valle Airpark, LLC reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). The rule and the permit bind the holder, public or private. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2187,7 +2320,7 @@
     "az-epa-sobe",
     "az-law-r18-9-c305"
    ],
-   "note": "Virgin River Domestic Wastewater Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start. No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
+   "note": "Virgin River Domestic Wastewater Improvement District reports its releases to ADEQ; EPA publishes the AZPDES reports in its overflow tables, read by the echo-sewer-overflow feed, a median 3 days after the start (0 report(s) under its permits in the 2026-11-04 extract). No public notice is required beyond the warning sign at a location with repeated releases (az-r18-9-c305-warning-signs). (research/az/report.md §2.1)",
    "barrier": null
   },
   {
@@ -2211,7 +2344,7 @@
    "sources": [
     "az-epa-sobe"
    ],
-   "note": "White Mountain Apache Tribe (Whiteriver, Hon-Dah, Sunrise and Cyclone plants)'s permits are EPA's (tribal land): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed); none are there in the 2026-11-04 extract. Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
+   "note": "White Mountain Apache Tribe (Whiteriver, Hon-Dah, Sunrise and Cyclone plants)'s permits are EPA's (Indian country): reports go to EPA, which publishes the reports filed electronically in its overflow tables (read by the echo-sewer-overflow feed; 0 located in Arizona in the 2026-11-04 extract). Arizona's collection-system rule does not apply on tribal land. (research/az/report.md §3)",
    "barrier": null
   }
  ]

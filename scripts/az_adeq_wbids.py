@@ -16,6 +16,7 @@ Rerun when a new code appears unresolved (the module keeps the code as typed and
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -35,7 +36,10 @@ UA = {"User-Agent": "DirtyWaterWatch/1.0 (+https://dirtywaterwatch.org)"}
 
 
 def clean(v):
-    return " ".join(str(v).split()) if v not in (None, "") else None
+    """Whitespace collapsed; a degree sign the layer stores as '?' between digits ('36?51'30.33"') put back."""
+    if v in (None, ""):
+        return None
+    return re.sub(r"(?<=\d)\?(?=\d)", "\u00b0", " ".join(str(v).split()))
 
 
 def fetch(url: str, fields: str) -> list[dict]:
