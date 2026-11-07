@@ -1,0 +1,1289 @@
+{
+ "about": "Water names in Hawaii's reports that data/receiving-waters-national.json does not hold for HI: the Department of Health Clean Water Branch's advisories (the newest 500 events, read on 2026-11-07: sewage spills, permit exceedances, Brown Water Advisories, beach advisories and retest notices), each name as the notices give it with diacritics and the okina folded (the feed spells a water both ways: Kane'ohe and Kaneohe), with the number of records giving it, the islands it is named on and the towns near it. The notices give no coordinates. A name two islands share has one row per island (island, place and slug_hint say which): build one record each (same_name_on_islands); the feed places a record only on a water of its own island. The towns are the Census places nearest each water, assigned by hand from the water's known place (the notices give no coordinates).",
+ "state": "HI",
+ "checked": "2026-11-07",
+ "waters": 58,
+ "reports": 160,
+ "held_by_national_list": {
+  "Hilo Bay": 16
+ },
+ "same_name_on_islands": [
+  {
+   "name": "Kailua Bay",
+   "islands": {
+    "Oahu": 17,
+    "Hawaii": 2
+   }
+  },
+  {
+   "name": "Waimea Bay",
+   "islands": {
+    "Oahu": 20,
+    "Kauai": 2
+   }
+  }
+ ],
+ "places_not_waters": {
+  "records": 291,
+  "note": "records whose notice names a beach, park or shore and no water (Kalapaki Beach Park, North Shore): kept with no water"
+ },
+ "rows": [
+  {
+   "name": "Waimea Bay",
+   "island": "Oahu",
+   "place": "Waimea Bay, Oahu",
+   "slug_hint": "waimea-bay-oahu-hi",
+   "reports": 20,
+   "towns": [
+    "Pupukea",
+    "Haleiwa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 16,
+    "beach_advisory": 4
+   }
+  },
+  {
+   "name": "Kailua Bay",
+   "island": "Oahu",
+   "place": "Kailua Bay, Oahu",
+   "slug_hint": "kailua-bay-oahu-hi",
+   "reports": 17,
+   "towns": [
+    "Kailua"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [
+    "HI0021296",
+    "HI0110078"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "plant_bypass": 15,
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Pearl Harbor",
+   "island": "Oahu",
+   "place": "Pearl Harbor, Oahu",
+   "slug_hint": "pearl-harbor-oahu-hi",
+   "reports": 11,
+   "towns": [
+    "Pearl City",
+    "Aiea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [
+    "HI0110086"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "plant_bypass": 8,
+    "sso": 3
+   }
+  },
+  {
+   "name": "Sharks Cove",
+   "island": "Oahu",
+   "place": "Sharks Cove, Oahu",
+   "slug_hint": "sharks-cove-oahu-hi",
+   "reports": 9,
+   "towns": [
+    "Pupukea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 9
+   }
+  },
+  {
+   "name": "Wailua Bay",
+   "island": "Kauai",
+   "place": "Wailua Bay, Kauai",
+   "slug_hint": "wailua-bay-kauai-hi",
+   "reports": 8,
+   "towns": [
+    "Wailua",
+    "Kapaa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 8
+   }
+  },
+  {
+   "name": "Honolii Cove",
+   "island": "Hawaii",
+   "place": "Honolii Cove, Hawaii",
+   "slug_hint": "honolii-cove-hawaii-hi",
+   "reports": 7,
+   "towns": [
+    "Paukaa",
+    "Hilo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 7
+   }
+  },
+  {
+   "name": "Hanalei Bay",
+   "island": "Kauai",
+   "place": "Hanalei Bay, Kauai",
+   "slug_hint": "hanalei-bay-kauai-hi",
+   "reports": 4,
+   "towns": [
+    "Hanalei",
+    "Princeville"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 4
+   }
+  },
+  {
+   "name": "Honokohau Harbor",
+   "island": "Hawaii",
+   "place": "Honokohau Harbor, Hawaii",
+   "slug_hint": "honokohau-harbor-hawaii-hi",
+   "reports": 4,
+   "towns": [
+    "Kalaoa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 2,
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Nawiliwili Bay",
+   "island": "Kauai",
+   "place": "Nawiliwili Bay, Kauai",
+   "slug_hint": "nawiliwili-bay-kauai-hi",
+   "reports": 4,
+   "towns": [
+    "Lihue"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 4
+   }
+  },
+  {
+   "name": "Kahului Harbor",
+   "island": "Maui",
+   "place": "Kahului Harbor, Maui",
+   "slug_hint": "kahului-harbor-maui-hi",
+   "reports": 3,
+   "towns": [
+    "Kahului"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 3
+   }
+  },
+  {
+   "name": "Keokea Bay",
+   "island": "Hawaii",
+   "place": "Keokea Bay, Hawaii",
+   "slug_hint": "keokea-bay-hawaii-hi",
+   "reports": 3,
+   "towns": [
+    "Hawi"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 3
+   }
+  },
+  {
+   "name": "Kuapa Pond",
+   "island": "Oahu",
+   "place": "Kuapa Pond, Oahu",
+   "slug_hint": "kuapa-pond-oahu-hi",
+   "reports": 3,
+   "towns": [
+    "Urban Honolulu",
+    "Hawaii Kai"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [
+    "HI0020303"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2,
+    "bypass": 1
+   }
+  },
+  {
+   "name": "Maunalua Bay",
+   "island": "Oahu",
+   "place": "Maunalua Bay, Oahu",
+   "slug_hint": "maunalua-bay-oahu-hi",
+   "reports": 3,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Nuupia Pond",
+   "island": "Oahu",
+   "place": "Nuupia Pond, Oahu",
+   "slug_hint": "nuupia-pond-oahu-hi",
+   "reports": 3,
+   "towns": [
+    "Kailua",
+    "Kaneohe"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [
+    "HI0021296"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "bypass": 2,
+    "sso": 1
+   }
+  },
+  {
+   "name": "Palolo Stream",
+   "island": "Oahu",
+   "place": "Palolo Stream, Oahu",
+   "slug_hint": "palolo-stream-oahu-hi",
+   "reports": 3,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 3
+   }
+  },
+  {
+   "name": "Pokai Bay",
+   "island": "Oahu",
+   "place": "Pokai Bay, Oahu",
+   "slug_hint": "pokai-bay-oahu-hi",
+   "reports": 3,
+   "towns": [
+    "Waianae"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Ahuimanu Stream",
+   "island": "Oahu",
+   "place": "Ahuimanu Stream, Oahu",
+   "slug_hint": "ahuimanu-stream-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Ahuimanu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "East Loch",
+   "island": "Oahu",
+   "place": "East Loch, Oahu",
+   "slug_hint": "east-loch-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Pearl City",
+    "Aiea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "Honaunau Bay",
+   "island": "Hawaii",
+   "place": "Honaunau Bay, Hawaii",
+   "slug_hint": "honaunau-bay-hawaii-hi",
+   "reports": 2,
+   "towns": [
+    "Honaunau-Napoopoo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kailua Bay",
+   "island": "Hawaii",
+   "place": "Kailua Bay, Hawaii",
+   "slug_hint": "kailua-bay-hawaii-hi",
+   "reports": 2,
+   "towns": [
+    "Holualoa",
+    "Kalaoa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1,
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kalihi Stream",
+   "island": "Oahu",
+   "place": "Kalihi Stream, Oahu",
+   "slug_hint": "kalihi-stream-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "Kiilae Bay",
+   "island": "Hawaii",
+   "place": "Kiilae Bay, Hawaii",
+   "slug_hint": "kiilae-bay-hawaii-hi",
+   "reports": 2,
+   "towns": [
+    "Honaunau-Napoopoo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Lake Wilson",
+   "island": "Oahu",
+   "place": "Lake Wilson, Oahu",
+   "slug_hint": "lake-wilson-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Wahiawa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1,
+    "bypass": 1
+   }
+  },
+  {
+   "name": "Puako Bay",
+   "island": "Hawaii",
+   "place": "Puako Bay, Hawaii",
+   "slug_hint": "puako-bay-hawaii-hi",
+   "reports": 2,
+   "towns": [
+    "Puako"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Puhi Bay",
+   "island": "Hawaii",
+   "place": "Puhi Bay, Hawaii",
+   "slug_hint": "puhi-bay-hawaii-hi",
+   "reports": 2,
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [
+    "HI0021377"
+   ],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "plant_bypass": 1
+   }
+  },
+  {
+   "name": "Wailoa River",
+   "island": "Hawaii",
+   "place": "Wailoa River, Hawaii",
+   "slug_hint": "wailoa-river-hawaii-hi",
+   "reports": 2,
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Wailupe Stream",
+   "island": "Oahu",
+   "place": "Wailupe Stream, Oahu",
+   "slug_hint": "wailupe-stream-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 2
+   }
+  },
+  {
+   "name": "Waimanalo Bay",
+   "island": "Oahu",
+   "place": "Waimanalo Bay, Oahu",
+   "slug_hint": "waimanalo-bay-oahu-hi",
+   "reports": 2,
+   "towns": [
+    "Waimanalo",
+    "Waimanalo Beach"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1,
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Waimea Bay",
+   "island": "Kauai",
+   "place": "Waimea Bay, Kauai",
+   "slug_hint": "waimea-bay-kauai-hi",
+   "reports": 2,
+   "towns": [
+    "Waimea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 2
+   }
+  },
+  {
+   "name": "Ala Moana Lagoon",
+   "island": "Oahu",
+   "place": "Ala Moana Lagoon, Oahu",
+   "slug_hint": "ala-moana-lagoon-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Ala Wai Boat Harbor",
+   "island": "Oahu",
+   "place": "Ala Wai Boat Harbor, Oahu",
+   "slug_hint": "ala-wai-boat-harbor-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Ala Wai Canal",
+   "island": "Oahu",
+   "place": "Ala Wai Canal, Oahu",
+   "slug_hint": "ala-wai-canal-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Anaehoomalu Bay",
+   "island": "Hawaii",
+   "place": "Anaehoomalu Bay, Hawaii",
+   "slug_hint": "anaehoomalu-bay-hawaii-hi",
+   "reports": 1,
+   "towns": [
+    "Waikoloa Village"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Anahola Bay",
+   "island": "Kauai",
+   "place": "Anahola Bay, Kauai",
+   "slug_hint": "anahola-bay-kauai-hi",
+   "reports": 1,
+   "towns": [
+    "Anahola"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Hanapepe Salt Pond",
+   "island": "Kauai",
+   "place": "Hanapepe Salt Pond, Kauai",
+   "slug_hint": "hanapepe-salt-pond-kauai-hi",
+   "reports": 1,
+   "towns": [
+    "Hanapepe"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Honolulu Harbor",
+   "island": "Oahu",
+   "place": "Honolulu Harbor, Oahu",
+   "slug_hint": "honolulu-harbor-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kahaluu Bay",
+   "island": "Hawaii",
+   "place": "Kahaluu Bay, Hawaii",
+   "slug_hint": "kahaluu-bay-hawaii-hi",
+   "reports": 1,
+   "towns": [
+    "Kahaluu-Keauhou"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kahana Bay",
+   "island": "Oahu",
+   "place": "Kahana Bay, Oahu",
+   "slug_hint": "kahana-bay-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Punaluu",
+    "Kaaawa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kalauao Stream",
+   "island": "Oahu",
+   "place": "Kalauao Stream, Oahu",
+   "slug_hint": "kalauao-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Aiea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kalauau Stream",
+   "island": "Oahu",
+   "place": "Kalauau Stream, Oahu",
+   "slug_hint": "kalauau-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Aiea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kalihiwai Bay",
+   "island": "Kauai",
+   "place": "Kalihiwai Bay, Kauai",
+   "slug_hint": "kalihiwai-bay-kauai-hi",
+   "reports": 1,
+   "towns": [
+    "Kilauea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kamanaiki Stream",
+   "island": "Oahu",
+   "place": "Kamanaiki Stream, Oahu",
+   "slug_hint": "kamanaiki-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kaneohe Bay",
+   "island": "Oahu",
+   "place": "Kaneohe Bay, Oahu",
+   "slug_hint": "kaneohe-bay-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Kaneohe"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kaopala Bay",
+   "island": "Maui",
+   "place": "Kaopala Bay, Maui",
+   "slug_hint": "kaopala-bay-maui-hi",
+   "reports": 1,
+   "towns": [
+    "Napili-Honokowai"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kawa Stream",
+   "island": "Oahu",
+   "place": "Kawa Stream, Oahu",
+   "slug_hint": "kawa-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Kaneohe"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Kawaihae Harbor",
+   "island": "Hawaii",
+   "place": "Kawaihae Harbor, Hawaii",
+   "slug_hint": "kawaihae-harbor-hawaii-hi",
+   "reports": 1,
+   "towns": [
+    "Kawaihae"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Keehi Lagoon",
+   "island": "Oahu",
+   "place": "Keehi Lagoon, Oahu",
+   "slug_hint": "keehi-lagoon-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Keoniloa Bay",
+   "island": "Kauai",
+   "place": "Keoniloa Bay, Kauai",
+   "slug_hint": "keoniloa-bay-kauai-hi",
+   "reports": 1,
+   "towns": [
+    "Poipu",
+    "Koloa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Kua Bay",
+   "island": "Hawaii",
+   "place": "Kua Bay, Hawaii",
+   "slug_hint": "kua-bay-hawaii-hi",
+   "reports": 1,
+   "towns": [
+    "Kalaoa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Kukuiula Bay",
+   "island": "Kauai",
+   "place": "Kukuiula Bay, Kauai",
+   "slug_hint": "kukuiula-bay-kauai-hi",
+   "reports": 1,
+   "towns": [
+    "Poipu",
+    "Koloa"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Maalaea Bay",
+   "island": "Maui",
+   "place": "Maalaea Bay, Maui",
+   "slug_hint": "maalaea-bay-maui-hi",
+   "reports": 1,
+   "towns": [
+    "Maalaea",
+    "Kihei"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Maalaea Harbor",
+   "island": "Maui",
+   "place": "Maalaea Harbor, Maui",
+   "slug_hint": "maalaea-harbor-maui-hi",
+   "reports": 1,
+   "towns": [
+    "Maalaea"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Makiki Stream",
+   "island": "Oahu",
+   "place": "Makiki Stream, Oahu",
+   "slug_hint": "makiki-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Manoa Stream",
+   "island": "Oahu",
+   "place": "Manoa Stream, Oahu",
+   "slug_hint": "manoa-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Urban Honolulu"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Pauoa Bay",
+   "island": "Hawaii",
+   "place": "Pauoa Bay, Hawaii",
+   "slug_hint": "pauoa-bay-hawaii-hi",
+   "reports": 1,
+   "towns": [
+    "Puako"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  },
+  {
+   "name": "Puha Stream",
+   "island": "Oahu",
+   "place": "Puha Stream, Oahu",
+   "slug_hint": "puha-stream-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Waimanalo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "sso": 1
+   }
+  },
+  {
+   "name": "Wailuku River",
+   "island": "Hawaii",
+   "place": "Wailuku River, Hawaii",
+   "slug_hint": "wailuku-river-hawaii-hi",
+   "reports": 1,
+   "towns": [
+    "Hilo"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "beach_advisory": 1
+   }
+  },
+  {
+   "name": "Yokohama Bay",
+   "island": "Oahu",
+   "place": "Yokohama Bay, Oahu",
+   "slug_hint": "yokohama-bay-oahu-hi",
+   "reports": 1,
+   "towns": [
+    "Makaha"
+   ],
+   "towns_basis": "the nearest Census places, by hand from the water's known place",
+   "permits": [],
+   "sources": [
+    "hi-doh-cwb-events-api"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "event_types": {
+    "rain_advisory": 1
+   }
+  }
+ ]
+}

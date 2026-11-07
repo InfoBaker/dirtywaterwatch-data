@@ -173,6 +173,13 @@
     "clock": "end_of_discharge",
     "basis": "New Mexico law sets no period after a sewage discharge during which the water is to be avoided, and no New Mexico statute or rule requires the public to be told when one happens. The person in charge of a facility must tell the New Mexico Environment Department orally within 24 hours of a discharge that may with reasonable probability injure health, animal or plant life, or property, in writing within a week, and report the corrective action within 15 days (20.6.2.1203 NMAC); the Department publishes no list of these notices. The U.S. Environmental Protection Agency issues New Mexico's discharge permits, which require a report to the agency within 24 hours and in writing within five days; the agency publishes the reports filed electronically in its overflow records, and few New Mexico permittees file them. On tribal land, including the Navajo Nation, the permits are federal and the state rule does not apply. This site marks a reported discharge while it runs and applies its own caution after it ends; a report of a discharge that reached no water is not shown on this site",
     "source": "20.6.2.1203.A NMAC; 40 CFR 122.41(l)(6); U.S. EPA sewer overflow and bypass event data (ECHO)"
+   },
+   "HI": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Hawaii sets no fixed period after a sewage discharge during which the water is to be avoided. For a spill into state waters, whoever owns or runs a wastewater system must notify the Department of Health immediately, send a press release to the news media for a spill of 1,000 gallons or more or one that threatens public health, post warning signs where the public has access, sample the affected waters until the Department says to stop, and report in writing within five working days (Hawaii Administrative Rules chapter 11-62, Appendix B); wastewater permits under chapter 11-55 add their own reporting conditions. The Department posts an advisory on its website and sends e-mail notices, and advises the public to remain out of the affected waters until it cancels the advisory. This site shows that advisory as the authority's own window, from the time the Department posts it until the time it cancels it. The Department's Brown Water Advisories, issued for storm-water runoff after heavy rain, are shown as rainfall advisories, not as sewage reports",
+    "rationale": "After the Department of Health cancels a sewage advisory, this site shows no caution period of its own: the advisory is the authority's own window for the water, the rule has the operator sample the affected waters until the Department says to stop and leaves the removal of the warning signs to the Department, and the site follows the authority's window in the same way for the Virginia Department of Health's advisories. A sewage advisory that leaves the Department's list without a cancellation is shown as end not confirmed",
+    "source": "HAR 11-62-06(g) and Appendix B (Responses for Wastewater Spills, Overflows, and Discharges, July 1, 2014), sections 2 and 7 to 9; HAR 11-55; Hawaii Department of Health, Clean Water Branch, water quality advisories and events (eha-cloud.doh.hawaii.gov/cwb)"
    }
   },
   "by_discharger": {
@@ -317,11 +324,12 @@
   },
   "sample_caution": {
    "sources": [
-    "ne-dwee-beachwatch"
+    "ne-dwee-beachwatch",
+    "hi-doh-cwb-events-api"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
-   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, never as the agency's advisory.",
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done), never as the agency's advisory.",
    "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch"
   },
   "day_start_caution": {

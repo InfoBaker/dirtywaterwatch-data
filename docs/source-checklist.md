@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1343 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1349 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -38,7 +38,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ne | 4 | 1 | 2 | 2 | 1 | 10 |
 | ak | 3 | 0 | 2 | 0 | 3 | 8 |
 | nm | 3 | 0 | 3 | 2 | 1 | 9 |
-| **all** | **474** | **228** | **381** | **191** | **69** | **1343** |
+| hi | 3 | 0 | 2 | 1 | 0 | 6 |
+| **all** | **477** | **228** | **383** | **192** | **69** | **1349** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1522,3 +1523,14 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nm-ocd-spills` | NM Oil Conservation Division spills database | rejected | search_only | events | Oil and gas only. |
 | `nm-swim-guide` | Swim Guide affiliates in New Mexico (Rio Grande Waterkeeper?) | rejected | search_only | monitoring | None found (search only). |
 | `nm-rio-grande-bacteria` | Rio Grande (Albuquerque reach) E. coli / bosque bacteria sampling | unreachable | inferred | monitoring | No public program found in the time box (lead from the task prompt). |
+
+## hi: Hawaii (6)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `hi-doh-cwb-events-api` | Hawaii Department of Health, Clean Water Branch: water quality advisories and events (eha-cloud portal API) | used | fetched | events | Read every refresh by the Hawaii ingester: sewage spill and permit exceedance advisories are sewage reports in the Department's own window (posted to cancelled); Brown Water Advisories are rainfall advisories, a separate category; beach advisories are beach advisories and retest notifications get the site's sample caution. Places are read by rules from the notices' text, per island; no coordinates. |
+| `hi-har-11-55` | HAR 11-55 Water pollution control (NPDES; standard permit conditions) | used | search_only | law | NPDES authority; a draft amendment was out for comment Jan-Feb 2026 (search). |
+| `hi-har-11-62-app-b` | HAR 11-62 Appendix B: Responses for Wastewater Spills, Overflows, and Discharges (July 1, 2014) | used | fetched | law | Read 2026-11-07 in the Department's copy of chapter 11-62 (effective 2016-03-21). For a spill into state waters the owner or its agent shall immediately notify the CWB, immediately send a press release for spills of 1,000 gallons or more (or lesser ones that threaten public health) to AP, newspapers, TV, the Department's Communications Office and the CWB, immediately post warning signs where public access is possible (the director authorizes removal), monitor the receiving water (enterococci; Clostridium perfringens in fresh or brackish water) until told to stop, and report in writing within five working days. |
+| `hi-doh-news-releases` | Hawaii DOH news releases (sewage spill warnings) | watch | search_only | news | Large spills also get a press release; the CWB API is the systematic channel. |
+| `hi-swim-guide-surfrider` | Surfrider Blue Water Task Force (Hawaii chapters) and Swim Guide | watch | search_only | prior_art | Volunteer bacteria sampling; prior art. |
+| `hi-epa-sobe` | EPA eRule SOBE extract (Hawaii) | rejected | fetched | events | 0 Hawaii events in the local extract on 2026-11-03. |
