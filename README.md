@@ -77,7 +77,7 @@ read only, one way), with the private state object `state/obl-water.tar.gz` as t
   state's openboatlaunch extract from the folder once a day and puts the changed files on a branch `batch/obl-<date>`
   with a pull request listing the counts and the review lines, for a person to review and merge; nothing is committed
   to main by a workflow. A state with no extract on file gets its first one from the state batch's `extract` step, and
-  an extract built from another source (DC's, from NHD) is never rewritten. In the six New England states the state
+  an extract built from another source (DC's, from NHD) is merged, never replaced: its records that are openboatlaunch's by slug or GNIS id (compared as numbers) take openboatlaunch's outline and fields, the waters only openboatlaunch has are added, and its own are kept. In the six New England states the state
   extracts take precedence over `data/waters-new-england.json`.
 - **The fallback copy.** When the API changed the folder, the refresh packs it (`state_paths.py pack-obl`) and saves it
   to R2 as `state/obl-water.tar.gz`; if that upload fails, the run's record of what it pulled is put back

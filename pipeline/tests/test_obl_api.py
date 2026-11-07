@@ -598,3 +598,98 @@ def test_meta_and_changes_answer_quickly_or_give_up(api):
     assert obl_api.QUICK_TIMEOUT <= 30 and obl_api.QUICK_TRIES <= 2
     rt = (ROOT / ".github" / "workflows" / "refresh.yml").read_text()
     assert rt.index("- name: Restore the raw caches from R2") < rt.index("python3 -I scripts/state_paths.py fetch-obl ||")
+
+
+# ---------------------------------------------------------------- the District of Columbia (an NHD-built extract merged)
+
+DC_FIX = FIX / "dc"
+
+
+def test_gnis_ids_compare_as_numbers():
+    from common import gnis_num
+    assert gnis_num("00597915") == gnis_num(597915) == gnis_num("597915") == 597915
+    assert gnis_num(None) is None and gnis_num("") is None and gnis_num("n/a") is None and gnis_num("0") is None
+    assert gnis_num(True) is None
+    from common import same_gnis
+    assert same_gnis("00532032", 532032) and not same_gnis("00532032", "532033") and not same_gnis(None, None)
+    assert same_gnis("long-river-nc", "long-river-nc") and not same_gnis("", "")
+
+
+def dc_setup(tmp_path):
+    """Our NHD-built DC extract (three records: the Anacostia under another slug, two streams openboatlaunch lacks)
+    and a folder with openboatlaunch's real Anacostia and Kingman Lake records."""
+    water = tmp_path / "obl" / "out" / "water"
+    water.mkdir(parents=True)
+    (water.parent / "meta.json").write_text((FIX / "meta.json").read_text())
+    for p in DC_FIX.glob("*.json"):
+        (water / p.name).write_text(p.read_text())
+    line = {"type": "LineString", "coordinates": [[-77.0, 38.9], [-76.99, 38.91]]}
+    ours = {"source": "USGS National Map NHD flowlines (pipeline/ingest/dc_waters.py)", "built": "2026-11-03T02:27:57Z",
+            "skipped": [{"slug": "kingman-lake-dc"}], "count": 3, "waters": [
+                {"slug": "anacostia-river-nhd-dc", "name": "Anacostia River", "kind": "river", "state": "DC",
+                 "gnis_id": "00532032", "geometry": line, "bbox": [-77.0, 38.9, -76.99, 38.91], "towns": ["Washington"],
+                 "launches": [], "advisories": [], "aliases": ["Eastern Branch"], "reachcodes": ["02070010000001"]},
+                {"slug": "rock-creek-dc", "name": "Rock Creek", "kind": "river", "state": "DC", "gnis_id": "00531463",
+                 "geometry": line, "launches": [], "advisories": []},
+                {"slug": "oxon-run-dc", "name": "Oxon Run", "kind": "stream", "state": "DC", "gnis_id": "00532036",
+                 "geometry": line, "launches": [], "advisories": []}]}
+    data = tmp_path / "data"
+    (data / "build").mkdir(parents=True)
+    (data / "waters-dc.json").write_text(json.dumps(ours))
+    (data / "rules.json").write_text(json.dumps({"live_states": ["DC"]}))
+    return water, data
+
+
+def test_an_nhd_built_extract_is_merged_by_slug_and_numeric_gnis_id(tmp_path):
+    water, data = dc_setup(tmp_path)
+    p = data / "waters-dc.json"
+    out = obl_waters.extract("DC", water, p)
+    d = json.loads(p.read_text())
+    ws = {w["slug"]: w for w in d["waters"]}
+    assert sorted(ws) == ["anacostia-river-nhd-dc", "kingman-lake-dc", "oxon-run-dc", "rock-creek-dc"]
+    ana = ws["anacostia-river-nhd-dc"]                   # ours, matched by GNIS 00532032 = 532032
+    assert ana["record_from"] == "nhd+openboatlaunch" and ana["outline_from"] == "openboatlaunch"
+    assert ana["geometry"] == rec_dc("anacostia-river-dc")["geometry"] and ana["bbox"] == rec_dc("anacostia-river-dc")["bbox"]
+    assert ana["water_id"] == "anacostia-river-md" and ana["gnis_id"] == "00532032"     # shared id recorded; our text kept
+    assert ana["slug_aliases"] == ["anacostia-river-dc"] and ana["aliases"] == ["Eastern Branch"]
+    assert ana["reachcodes"] == ["02070010000001"] and ana["name"] == "Anacostia River"
+    assert len(ana["launches"]) == 4 and len(ana["launches_unpublished"]) == 1
+    king = ws["kingman-lake-dc"]
+    assert king["record_from"] == "openboatlaunch" and king["geometry"]["type"] == "Polygon" and king["advisories"] == []
+    assert ws["rock-creek-dc"].get("record_from") is None and "water_id" not in ws["rock-creek-dc"]   # ours, kept
+    assert d["merged"]["matched"] == ["anacostia-river-nhd-dc"] and d["merged"]["added"] == ["kingman-lake-dc"]
+    assert sorted(d["merged"]["own"]) == ["oxon-run-dc", "rock-creek-dc"] and d["count"] == 4
+    assert d["source"].startswith("USGS National Map NHD flowlines") and "kingman-lake-dc added from openboatlaunch" in d["source"]
+    assert d["built"] == "2026-11-03T02:27:57Z" and d["state"] == "DC" and out["_read"]["matched"] == 1
+    # a second merge changes nothing
+    before = p.read_bytes()
+    obl_waters.extract("DC", water, p)
+    assert json.loads(p.read_text()) == json.loads(before)
+
+
+def rec_dc(slug):
+    return json.loads((DC_FIX / f"{slug}.json").read_text())
+
+
+def test_the_hourly_rewrite_merges_dc_and_leaves_it_alone_without_dc_records(api, tmp_path):
+    water, data = dc_setup(tmp_path)
+    assert obl_changes.rewrite({"DC"}, water, None, data) == {"DC": "rewritten"}
+    assert obl_changes.rewrite({"DC"}, water, None, data) == {"DC": "current"}
+    for p in water.glob("*-dc.json"):
+        p.unlink()
+    water2, data2 = dc_setup(tmp_path / "b")
+    for p in water2.glob("*-dc.json"):
+        p.unlink()
+    before = (data2 / "waters-dc.json").read_bytes()
+    assert obl_changes.rewrite({"DC"}, water2, None, data2) == {"DC": "current"}
+    assert (data2 / "waters-dc.json").read_bytes() == before
+
+
+def test_the_nhd_build_drops_its_record_of_a_water_openboatlaunch_has_by_gnis_id(monkeypatch):
+    from ingest import waters_from_nhd as N
+    line = {"type": "LineString", "coordinates": [[-77.0, 38.9], [-76.99, 38.91]]}
+    doc = {"waters": [{"slug": "eastern-branch-dc", "name": "Eastern Branch", "kind": "river", "state": "DC",
+                       "gnis_id": "00532032", "geometry": line, "towns": []}], "targets": []}
+    existing = {"anacostia-river-dc": {**rec_dc("anacostia-river-dc"), "launches": []}}
+    new, actions, aliases = N.resolve_existing_duplicates(doc, existing, ["DC"], when="2026-11-07")
+    assert new["waters"] == [] and aliases == {"anacostia-river-dc": ["Eastern Branch"]}
