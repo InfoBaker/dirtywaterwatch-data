@@ -1,0 +1,286 @@
+{
+ "about": "The Mississippi permits in EPA's sewer overflow and bypass tables (extract of 2026-11-04), with their report counts and the collection systems EPA names for the reports kept.",
+ "extract_date": "2026-11-04",
+ "permits": {
+  "MS0020117": {
+   "reports": 33,
+   "kept": 33,
+   "collection_systems": [
+    "Meridian Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0020176": {
+   "reports": 3,
+   "kept": 1,
+   "collection_systems": []
+  },
+  "MS0020184": {
+   "reports": 14,
+   "kept": 1,
+   "collection_systems": [
+    "Greenville Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0020249": {
+   "reports": 9,
+   "kept": 9,
+   "collection_systems": [
+    "Pascagoula Sanitary Sewer Collection System",
+    "Moss Point Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0020303": {
+   "reports": 5,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0020494": {
+   "reports": 2,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0020567": {
+   "reports": 2,
+   "kept": 2,
+   "collection_systems": []
+  },
+  "MS0020818": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0020826": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0021156": {
+   "reports": 3,
+   "kept": 1,
+   "collection_systems": [
+    "Philadelphia Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0021521": {
+   "reports": 16,
+   "kept": 5,
+   "collection_systems": [
+    "Escatawpa Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0021555": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": []
+  },
+  "MS0022381": {
+   "reports": 21,
+   "kept": 21,
+   "collection_systems": []
+  },
+  "MS0023159": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": [
+    "East Biloxi Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0023230": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0023761": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0023922": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": [
+    "Hazlehurst Activated Sludge Sanitary Sewer Collect"
+   ]
+  },
+  "MS0024147": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": [
+    "Brookhaven Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0024163": {
+   "reports": 8,
+   "kept": 1,
+   "collection_systems": []
+  },
+  "MS0024295": {
+   "reports": 82,
+   "kept": 65,
+   "collection_systems": [
+    "Jackson Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0024848": {
+   "reports": 2,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0024953": {
+   "reports": 2,
+   "kept": 2,
+   "collection_systems": [
+    "Shaw Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0029033": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0029513": {
+   "reports": 8,
+   "kept": 3,
+   "collection_systems": [
+    "Olive Branch Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0030333": {
+   "reports": 3,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0033596": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0033961": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0034487": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0036111": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0036145": {
+   "reports": 2,
+   "kept": 1,
+   "collection_systems": [
+    "Starkville Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0036234": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": [
+    "Morton Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0042161": {
+   "reports": 3,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0042455": {
+   "reports": 3,
+   "kept": 2,
+   "collection_systems": [
+    "Canton  Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0043010": {
+   "reports": 4,
+   "kept": 4,
+   "collection_systems": [
+    "Gautier  Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0043141": {
+   "reports": 3,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0043478": {
+   "reports": 2,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0043494": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0044059": {
+   "reports": 11,
+   "kept": 6,
+   "collection_systems": [
+    "Jackson Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0044504": {
+   "reports": 3,
+   "kept": 2,
+   "collection_systems": [
+    "Lucedale Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0045446": {
+   "reports": 88,
+   "kept": 78,
+   "collection_systems": [
+    "Ocena Springs Sanitary Sewer Collection System",
+    "JCUA Sanitary Sewer Collection System",
+    "West Jackson Co utility Sanitary Sewer Collection"
+   ]
+  },
+  "MS0048691": {
+   "reports": 1,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0051756": {
+   "reports": 2,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0057011": {
+   "reports": 3,
+   "kept": 1,
+   "collection_systems": [
+    "HCUA Tradition Sanitary Sewer Collection System"
+   ]
+  },
+  "MS0060011": {
+   "reports": 2,
+   "kept": 0,
+   "collection_systems": []
+  },
+  "MS0061191": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": []
+  },
+  "MS0061204": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": [
+    "HCUA South Woolmarket Sanitary Sewer Collection Sy"
+   ]
+  },
+  "MS0061328": {
+   "reports": 1,
+   "kept": 1,
+   "collection_systems": [
+    "Corinth Sanitary Sewer Collection System"
+   ]
+  }
+ }
+}

@@ -1,0 +1,264 @@
+"""MDEQ water contact advisories (Mississippi): the advisories the Mississippi Department of Environmental Quality issues
+and lifts by news release for streams and rivers after sewage discharges, as dated advisory records.
+
+Source
+  https://www.mdeq.ms.gov/category/news-release/feed/ (registry: ms-mdeq-water-contact-advisories), MDEQ's news
+  releases as RSS (the ten latest), no key; each release's own page for its text. MDEQ keeps no list of the advisories
+  in effect: a release issues one ("Water Contact Advisory Issued for Section of Trahon Creek", 2026-09-02) and a
+  later release lifts it ("MDEQ Lifts Water Contact Advisories for Long Beach and Biloxi East Central Beach",
+  2026-09-01). No law requires the releases; they are MDEQ's practice.
+
+Record rules
+  - A release is an issue when its title reads "Water Contact Advisory Issued for <waters>" (or "MDEQ Issues Water
+    Contact Advisory for ..."), a lift when it reads "... Lifts Water Contact Advisor(y|ies) for <waters>"; every other
+    release (air quality, programmes) is not read. The waters are the title's, split at commas and "and" ("Section
+    of" dropped). A release whose waters are all beaches is left to MDEQ's beach layer (ingest/ms_mdeq_beaches.py):
+    since 2026-09-08 routine beach advisories go to the layer and signs only.
+  - An issue opens one record: event_type beach_advisory (the beach and advisory category, docs/plan.md §3: a water
+    contact advisory, not a discharge report), status advisory_active, started_at the release's date in Central
+    time (time_precision day: MDEQ gives the day it issues the advisory), published_at and reported_at the feed's
+    pubDate, advice_text MDEQ's own sentence ("MDEQ recommends that people avoid ..."), raw.release_text the
+    release's paragraphs. The point is the release's own: the first "(32.194572 N, 90.250330 W)" its text gives
+    (coord_source "source"); a release with none has no point.
+  - A lift ends every open record one of whose waters it names: status advisory_lifted, ended_at the lift release's
+    date (day), raw.lifted_by its title, link and date.
+  - MDEQ lifts by release, so an advisory stays MDEQ's word until a lift is published. Each run that reads the feed
+    without error and finds no lift for an open record re-confirms it: source_updated_at is that run's fetch time and
+    raw.confirmed_by says so (the status build keeps an advisory red while its source re-confirms it). A failed run
+    confirms nothing, so an advisory whose feed stops answering ages out after the status build's 14 days.
+  - STANDING: advisories in effect that no release in the feed issued, each cited to the release that says so. One on
+    2026-11-07: "the longstanding water contact advisory for the section of the Pearl River from Hanging Moss Creek to
+    the Byram Swinging bridge remains in effect" (the 2026-09-02 release). Its start is not stated: started_at is that
+    release's date, the earliest date the record can stand on, and raw.start_basis says the advisory began earlier.
+    Its point is the stretch's upstream end, the mouth of Hanging Moss Creek in the USGS Geographic Names Information
+    System (GNIS 670883, Streams (Mouth) layer); no public point for the Byram Swinging Bridge was found, so the
+    downstream end is named only (raw.stretch). It is lifted like any other.
+  - History: the feed holds ten releases, so the previous run's records are carried and updated; a record is never
+    dropped because its release left the feed.
+
+Privacy: the feed's dc:creator (an MDEQ staff name) is never read; only titles, links, dates and the release text are.
+Run from pipeline/:  python -m ingest.ms_mdeq_water_contact [--file feed.xml [--pages DIR]]
+"""
+from __future__ import annotations
+
+import html
+import re
+import sys
+from datetime import datetime
+from email.utils import parsedate_to_datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+import requests
+
+import common
+from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+
+SOURCE_ID = "ms-mdeq-water-contact-advisories"
+FEED = "https://www.mdeq.ms.gov/category/news-release/feed/"
+TZ = ZoneInfo("America/Chicago")
+AUTHORITY = "Mississippi Department of Environmental Quality (water contact advisory)"
+ISSUE = re.compile(r"^(?:MDEQ\s+)?(?:Issues?\s+)?(?:a\s+)?Water Contact Advisor(?:y|ies)\s+(?:Issued\s+)?for\s+(.+?)\s*$", re.I)
+LIFT = re.compile(r"\bLift(?:s|ed)?\s+(?:the\s+)?Water Contact Advisor(?:y|ies)\s+(?:for|on)\s+(.+?)\s*$", re.I)
+COORD = re.compile(r"\((\d{2}\.\d+)\s*N,\s*(\d{2,3}\.\d+)\s*W\)")
+STANDING = [{
+    "key": "pearl-river-hanging-moss-creek-to-byram-swinging-bridge",
+    "waters": ["Pearl River"],
+    "waterbody_text": "Pearl River",   # the stretch it covers is raw.stretch
+    "cited_url": "https://www.mdeq.ms.gov/water-contact-advisory-issued-for-section-of-trahon-creek/",
+    "cited_date": "2026-09-02",
+    "quote": ("The longstanding water contact advisory for the section of the Pearl River from Hanging Moss Creek to the "
+              "Byram Swinging bridge remains in effect."),
+    "advice": ("MDEQ recommends that people avoid water contact recreational activities such as swimming, wading and "
+               "fishing in these waters."),
+    "point": (32.351817, -90.112036),
+    "stretch": {"from": {"name": "mouth of Hanging Moss Creek", "lat": 32.351817, "lon": -90.112036,
+                         "source": "USGS GNIS 670883, Streams (Mouth)"},
+                "to": {"name": "Byram Swinging Bridge", "lat": None, "lon": None,
+                       "source": "named in the release; no public point found"}},
+}]
+
+
+def items(body: bytes) -> list[dict]:
+    """[{title, link, date}] of an RSS body (no XML parser; dc:creator is never read)."""
+    t = body.decode("utf-8", "replace")
+    out = []
+    for m in re.finditer(r"(?is)<item\b[^>]*>(.*?)</item>", t):
+        blk = m.group(1)
+
+        def tag(n):
+            x = re.search(rf"(?is)<{n}\b[^>]*>(.*?)</{n}>", blk)
+            v = re.sub(r"(?s)<!\[CDATA\[(.*?)\]\]>", r"\1", x.group(1)) if x else ""
+            return re.sub(r"\s+", " ", html.unescape(html.unescape(v))).strip()
+        out.append({"title": tag("title"), "link": tag("link"), "date": tag("pubDate")})
+    return out
+
+
+def kind(title: str) -> tuple[str | None, list[str]]:
+    """('issue' | 'lift' | None, the waters the title names)."""
+    for k, pat in (("lift", LIFT), ("issue", ISSUE)):
+        m = pat.search(title or "")
+        if m:
+            w = re.sub(r"(?i)^(?:a\s+|the\s+)?section\s+of\s+(?:the\s+)?", "", m.group(1)).strip(" .")
+            return k, [x.strip() for x in re.split(r",\s*(?:and\s+)?|\s+and\s+", w) if x.strip()]
+    return None, []
+
+
+def key(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (s or "").lower())
+
+
+def slug(s: str) -> str:
+    return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", (s or "").lower())).strip("-")
+
+
+def page_paragraphs(body: str) -> list[str]:
+    """The release's paragraphs (the post content), tags removed."""
+    m = re.search(r'(?is)class="col-md-12 post-content">(.*?)(?:<div class="col-md-12 more-news"|</article>)', body)
+    blk = m.group(1) if m else body
+    paras = [re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", p))).strip()
+             for p in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", blk)]
+    return [p for p in paras if p]
+
+
+def release_day(date: str) -> str | None:
+    try:
+        return parsedate_to_datetime(date).astimezone(TZ).date().isoformat()
+    except (TypeError, ValueError):
+        return None
+
+
+def release_iso(date: str) -> str | None:
+    try:
+        return parsedate_to_datetime(date).astimezone(TZ).isoformat()
+    except (TypeError, ValueError):
+        return None
+
+
+def issue_record(it: dict, waters: list[str], paras: list[str] | None) -> dict:
+    text = " ".join(paras or [])
+    c = COORD.search(text)
+    lat, lon = (float(c.group(1)), -float(c.group(2))) if c else (None, None)
+    advice = next((p for p in paras or [] if re.search(r"\brecommends\b", p, re.I)), None)
+    day = release_day(it["date"])
+    return event(
+        source_id=SOURCE_ID, source_record_id=f"{slug('-'.join(waters))}-{day}", event_type="beach_advisory",
+        status="advisory_active", waterbody_text="; ".join(waters), lat=lat, lon=lon,
+        coord_source="source" if c else None, started_at=day, time_precision="day",
+        reported_at=release_iso(it["date"]), published_at=release_iso(it["date"]), authority=AUTHORITY,
+        advice_text=advice, source_url=it["link"] or FEED,
+        raw={"state": "MS", "title": it["title"], "waters": waters, "release_text": paras,
+             "page_read": paras is not None,
+             "time_basis": "day: the date of MDEQ's release issuing the advisory (Central time)",
+             "coords_basis": "the release's own coordinates" if c else "the release gives no point"})
+
+
+def standing_record(s: dict) -> dict:
+    lat, lon = s["point"]
+    return event(
+        source_id=SOURCE_ID, source_record_id=s["key"], event_type="beach_advisory", status="advisory_active",
+        waterbody_text=s["waterbody_text"], lat=lat, lon=lon, coord_source="gnis", started_at=s["cited_date"],
+        time_precision="day", reported_at=s["cited_date"], published_at=s["cited_date"], authority=AUTHORITY,
+        advice_text=s["advice"], source_url=s["cited_url"],
+        raw={"state": "MS", "waters": s["waters"], "quote": s["quote"], "stretch": s["stretch"],
+             "start_basis": ("MDEQ's release of this date says the advisory 'remains in effect'; it began earlier, "
+                             "on a date the release does not give"),
+             "time_basis": "day: the date of the release that says the advisory is in effect"})
+
+
+def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) -> tuple[list[dict], dict]:
+    """(records, stats) from the feed, the release pages ({link: html or None}) and the previous records."""
+    recs = {r["event_id"]: r for r in prev}
+    stats = {"releases": 0, "issues": 0, "lifts": 0, "beach_left_to_layer": 0, "lifted": 0}
+    its = items(feed)
+    stats["releases"] = len(its)
+    for s in STANDING:
+        r = standing_record(s)
+        recs.setdefault(r["event_id"], r)
+    lifts = []
+    for it in sorted(its, key=lambda x: release_iso(x["date"]) or ""):
+        k, waters = kind(it["title"])
+        if not k:
+            continue
+        if all(re.search(r"\bbeach\b", w, re.I) for w in waters):
+            stats["beach_left_to_layer"] += 1
+            continue
+        if k == "lift":
+            stats["lifts"] += 1
+            lifts.append((it, waters))
+            continue
+        stats["issues"] += 1
+        body = pages.get(it["link"])
+        r = issue_record(it, waters, page_paragraphs(body) if body else None)
+        if r["event_id"] in recs:
+            old = recs[r["event_id"]]
+            if not old["raw"].get("page_read") and r["raw"]["page_read"]:   # the page was out last time
+                r.update(status=old["status"], ended_at=old.get("ended_at"))
+                r["raw"]["lifted_by"] = old["raw"].get("lifted_by")
+                recs[r["event_id"]] = r
+            continue
+        recs[r["event_id"]] = r
+    for it, waters in lifts:
+        day = release_day(it["date"])
+        names = {key(w) for w in waters}
+        for r in recs.values():
+            if r["status"] != "advisory_active" or not day or (r.get("started_at") or "") > day:
+                continue
+            if names & {key(w) for w in r["raw"].get("waters") or []}:
+                r["status"], r["ended_at"] = "advisory_lifted", day
+                r["raw"]["lifted_by"] = {"title": it["title"], "link": it["link"], "date": day}
+                stats["lifted"] += 1
+    for r in recs.values():
+        if r["status"] == "advisory_active":
+            r["source_updated_at"] = at
+            r["raw"]["confirmed_by"] = (f"MDEQ's news-release feed read at {at}: no release lifting this advisory among "
+                                        f"its {len(its)} latest releases")
+        r["fetched_at"] = at
+    out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
+    stats["open"] = sum(1 for r in out if r["status"] == "advisory_active")
+    return out, stats
+
+
+def fetch() -> tuple[bytes, dict[str, str | None]]:
+    r = requests.get(FEED, headers=HEADERS, timeout=60)
+    r.raise_for_status()
+    save_raw(SOURCE_ID, r.content, "xml")
+    pages = {}
+    for it in items(r.content):
+        k, waters = kind(it["title"])
+        if k == "issue" and it["link"] and not all(re.search(r"\bbeach\b", w, re.I) for w in waters):
+            try:
+                p = requests.get(it["link"], headers=HEADERS, timeout=60)
+                pages[it["link"]] = p.text if p.ok else None
+            except requests.RequestException:
+                pages[it["link"]] = None
+    return r.content, pages
+
+
+def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
+    prev = (read_json(path, {}) or {}).get("records") or []
+    try:
+        if "--file" in argv:
+            feed = Path(argv[argv.index("--file") + 1]).read_bytes()
+            pdir = Path(argv[argv.index("--pages") + 1]) if "--pages" in argv else None
+            pages = {}
+            for it in items(feed):
+                f = pdir / f"{slug(it['link'].rstrip('/').rsplit('/', 1)[-1])}.html" if pdir else None
+                pages[it["link"]] = f.read_text() if f and f.exists() else None
+        else:
+            feed, pages = fetch()
+    except (requests.RequestException, OSError) as e:
+        write_events(SOURCE_ID, [], ok=False, error=str(e))
+        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        return 1
+    recs, stats = run(feed, pages, prev, now_iso())
+    out = write_events(SOURCE_ID, recs, meta={"registry_ids": [SOURCE_ID], "url": FEED, **stats,
+                                              "cadence": "every refresh; MDEQ releases a few times a month"})
+    print(f"{SOURCE_ID}: {len(recs)} records ({stats['open']} in effect) -> {out}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

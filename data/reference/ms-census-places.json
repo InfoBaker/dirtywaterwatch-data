@@ -1,0 +1,1206 @@
+{
+ "source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_28.txt",
+ "about": "Mississippi's incorporated places and their class, from the Census Bureau's 2024 Gazetteer place file (census-designated places left out).",
+ "places": {
+  "Abbeville": {
+   "class": "town",
+   "geoid": "2800100"
+  },
+  "Aberdeen": {
+   "class": "city",
+   "geoid": "2800180"
+  },
+  "Ackerman": {
+   "class": "town",
+   "geoid": "2800300"
+  },
+  "Algoma": {
+   "class": "town",
+   "geoid": "2800820"
+  },
+  "Alligator": {
+   "class": "town",
+   "geoid": "2800940"
+  },
+  "Amory": {
+   "class": "city",
+   "geoid": "2801260"
+  },
+  "Anguilla": {
+   "class": "town",
+   "geoid": "2801500"
+  },
+  "Arcola": {
+   "class": "town",
+   "geoid": "2801820"
+  },
+  "Artesia": {
+   "class": "town",
+   "geoid": "2802100"
+  },
+  "Ashland": {
+   "class": "town",
+   "geoid": "2802140"
+  },
+  "Baldwyn": {
+   "class": "city",
+   "geoid": "2802700"
+  },
+  "Bassfield": {
+   "class": "town",
+   "geoid": "2803580"
+  },
+  "Batesville": {
+   "class": "city",
+   "geoid": "2803620"
+  },
+  "Bay Springs": {
+   "class": "city",
+   "geoid": "2804060"
+  },
+  "Bay St. Louis": {
+   "class": "city",
+   "geoid": "2803980"
+  },
+  "Beaumont": {
+   "class": "town",
+   "geoid": "2804500"
+  },
+  "Beauregard": {
+   "class": "village",
+   "geoid": "2804540"
+  },
+  "Belmont": {
+   "class": "town",
+   "geoid": "2805100"
+  },
+  "Belzoni": {
+   "class": "city",
+   "geoid": "2805140"
+  },
+  "Benoit": {
+   "class": "town",
+   "geoid": "2805220"
+  },
+  "Bentonia": {
+   "class": "town",
+   "geoid": "2805380"
+  },
+  "Beulah": {
+   "class": "town",
+   "geoid": "2805820"
+  },
+  "Big Creek": {
+   "class": "village",
+   "geoid": "2806060"
+  },
+  "Biloxi": {
+   "class": "city",
+   "geoid": "2806220"
+  },
+  "Blue Mountain": {
+   "class": "town",
+   "geoid": "2807060"
+  },
+  "Blue Springs": {
+   "class": "village",
+   "geoid": "2807100"
+  },
+  "Bolton": {
+   "class": "town",
+   "geoid": "2807540"
+  },
+  "Booneville": {
+   "class": "city",
+   "geoid": "2807780"
+  },
+  "Boyle": {
+   "class": "town",
+   "geoid": "2808180"
+  },
+  "Brandon": {
+   "class": "city",
+   "geoid": "2808300"
+  },
+  "Braxton": {
+   "class": "village",
+   "geoid": "2808460"
+  },
+  "Brookhaven": {
+   "class": "city",
+   "geoid": "2808820"
+  },
+  "Brooksville": {
+   "class": "town",
+   "geoid": "2808980"
+  },
+  "Bruce": {
+   "class": "town",
+   "geoid": "2809180"
+  },
+  "Bude": {
+   "class": "town",
+   "geoid": "2809460"
+  },
+  "Burnsville": {
+   "class": "town",
+   "geoid": "2809820"
+  },
+  "Byhalia": {
+   "class": "town",
+   "geoid": "2810060"
+  },
+  "Byram": {
+   "class": "city",
+   "geoid": "2810140"
+  },
+  "Caledonia": {
+   "class": "town",
+   "geoid": "2810460"
+  },
+  "Calhoun City": {
+   "class": "town",
+   "geoid": "2810580"
+  },
+  "Canton": {
+   "class": "city",
+   "geoid": "2811100"
+  },
+  "Carrollton": {
+   "class": "town",
+   "geoid": "2811580"
+  },
+  "Carthage": {
+   "class": "city",
+   "geoid": "2811780"
+  },
+  "Cary": {
+   "class": "town",
+   "geoid": "2811820"
+  },
+  "Centreville": {
+   "class": "town",
+   "geoid": "2812740"
+  },
+  "Charleston": {
+   "class": "city",
+   "geoid": "2812900"
+  },
+  "Chunky": {
+   "class": "town",
+   "geoid": "2813580"
+  },
+  "Clarksdale": {
+   "class": "city",
+   "geoid": "2813820"
+  },
+  "Cleveland": {
+   "class": "city",
+   "geoid": "2814260"
+  },
+  "Clinton": {
+   "class": "city",
+   "geoid": "2814420"
+  },
+  "Coahoma": {
+   "class": "town",
+   "geoid": "2814580"
+  },
+  "Coffeeville": {
+   "class": "town",
+   "geoid": "2814740"
+  },
+  "Coldwater": {
+   "class": "town",
+   "geoid": "2814900"
+  },
+  "Collins": {
+   "class": "city",
+   "geoid": "2815140"
+  },
+  "Columbia": {
+   "class": "city",
+   "geoid": "2815340"
+  },
+  "Columbus": {
+   "class": "city",
+   "geoid": "2815380"
+  },
+  "Como": {
+   "class": "town",
+   "geoid": "2815500"
+  },
+  "Corinth": {
+   "class": "city",
+   "geoid": "2815700"
+  },
+  "Courtland": {
+   "class": "town",
+   "geoid": "2815980"
+  },
+  "Crawford": {
+   "class": "town",
+   "geoid": "2816420"
+  },
+  "Crenshaw": {
+   "class": "town",
+   "geoid": "2816460"
+  },
+  "Crosby": {
+   "class": "town",
+   "geoid": "2816620"
+  },
+  "Crowder": {
+   "class": "town",
+   "geoid": "2816940"
+  },
+  "Cruger": {
+   "class": "town",
+   "geoid": "2816980"
+  },
+  "Crystal Springs": {
+   "class": "city",
+   "geoid": "2817060"
+  },
+  "D'Iberville": {
+   "class": "city",
+   "geoid": "2819180"
+  },
+  "D'Lo": {
+   "class": "town",
+   "geoid": "2819340"
+  },
+  "De Kalb": {
+   "class": "town",
+   "geoid": "2818340"
+  },
+  "Decatur": {
+   "class": "town",
+   "geoid": "2818180"
+  },
+  "Derma": {
+   "class": "town",
+   "geoid": "2818940"
+  },
+  "Diamondhead": {
+   "class": "city",
+   "geoid": "2819100"
+  },
+  "Doddsville": {
+   "class": "town",
+   "geoid": "2819420"
+  },
+  "Drew": {
+   "class": "city",
+   "geoid": "2820020"
+  },
+  "Duck Hill": {
+   "class": "town",
+   "geoid": "2820260"
+  },
+  "Dumas": {
+   "class": "town",
+   "geoid": "2820340"
+  },
+  "Duncan": {
+   "class": "town",
+   "geoid": "2820380"
+  },
+  "Durant": {
+   "class": "city",
+   "geoid": "2820500"
+  },
+  "Ecru": {
+   "class": "town",
+   "geoid": "2821340"
+  },
+  "Eden": {
+   "class": "village",
+   "geoid": "2821420"
+  },
+  "Edwards": {
+   "class": "town",
+   "geoid": "2821580"
+  },
+  "Ellisville": {
+   "class": "city",
+   "geoid": "2822020"
+  },
+  "Enterprise": {
+   "class": "town",
+   "geoid": "2822580"
+  },
+  "Ethel": {
+   "class": "town",
+   "geoid": "2823220"
+  },
+  "Eupora": {
+   "class": "city",
+   "geoid": "2823420"
+  },
+  "Falcon": {
+   "class": "town",
+   "geoid": "2824180"
+  },
+  "Falkner": {
+   "class": "town",
+   "geoid": "2824220"
+  },
+  "Farmington": {
+   "class": "town",
+   "geoid": "2824420"
+  },
+  "Fayette": {
+   "class": "city",
+   "geoid": "2824500"
+  },
+  "Flora": {
+   "class": "town",
+   "geoid": "2824940"
+  },
+  "Florence": {
+   "class": "city",
+   "geoid": "2824980"
+  },
+  "Flowood": {
+   "class": "city",
+   "geoid": "2825100"
+  },
+  "Forest": {
+   "class": "city",
+   "geoid": "2825340"
+  },
+  "French Camp": {
+   "class": "town",
+   "geoid": "2826020"
+  },
+  "Friars Point": {
+   "class": "town",
+   "geoid": "2826060"
+  },
+  "Fulton": {
+   "class": "city",
+   "geoid": "2826300"
+  },
+  "Gattman": {
+   "class": "village",
+   "geoid": "2826780"
+  },
+  "Gautier": {
+   "class": "city",
+   "geoid": "2826860"
+  },
+  "Georgetown": {
+   "class": "town",
+   "geoid": "2826980"
+  },
+  "Glen": {
+   "class": "town",
+   "geoid": "2827540"
+  },
+  "Glendora": {
+   "class": "village",
+   "geoid": "2827660"
+  },
+  "Gloster": {
+   "class": "town",
+   "geoid": "2827820"
+  },
+  "Gluckstadt": {
+   "class": "city",
+   "geoid": "2827900"
+  },
+  "Golden": {
+   "class": "town",
+   "geoid": "2827940"
+  },
+  "Goodman": {
+   "class": "town",
+   "geoid": "2828220"
+  },
+  "Greenville": {
+   "class": "city",
+   "geoid": "2829180"
+  },
+  "Greenwood": {
+   "class": "city",
+   "geoid": "2829340"
+  },
+  "Grenada": {
+   "class": "city",
+   "geoid": "2829460"
+  },
+  "Gulfport": {
+   "class": "city",
+   "geoid": "2829700"
+  },
+  "Gunnison": {
+   "class": "town",
+   "geoid": "2829900"
+  },
+  "Guntown": {
+   "class": "town",
+   "geoid": "2829940"
+  },
+  "Hatley": {
+   "class": "town",
+   "geoid": "2830980"
+  },
+  "Hattiesburg": {
+   "class": "city",
+   "geoid": "2831020"
+  },
+  "Hazlehurst": {
+   "class": "city",
+   "geoid": "2831220"
+  },
+  "Heidelberg": {
+   "class": "town",
+   "geoid": "2831420"
+  },
+  "Hernando": {
+   "class": "city",
+   "geoid": "2831780"
+  },
+  "Hickory": {
+   "class": "town",
+   "geoid": "2831980"
+  },
+  "Hickory Flat": {
+   "class": "town",
+   "geoid": "2832020"
+  },
+  "Hollandale": {
+   "class": "city",
+   "geoid": "2832900"
+  },
+  "Holly Springs": {
+   "class": "city",
+   "geoid": "2833100"
+  },
+  "Horn Lake": {
+   "class": "city",
+   "geoid": "2833700"
+  },
+  "Houston": {
+   "class": "city",
+   "geoid": "2833900"
+  },
+  "Indianola": {
+   "class": "city",
+   "geoid": "2834740"
+  },
+  "Inverness": {
+   "class": "town",
+   "geoid": "2835020"
+  },
+  "Isola": {
+   "class": "town",
+   "geoid": "2835220"
+  },
+  "Itta Bena": {
+   "class": "city",
+   "geoid": "2835260"
+  },
+  "Iuka": {
+   "class": "city",
+   "geoid": "2835300"
+  },
+  "Jackson": {
+   "class": "city",
+   "geoid": "2836000"
+  },
+  "Jonestown": {
+   "class": "town",
+   "geoid": "2836800"
+  },
+  "Jumpertown": {
+   "class": "town",
+   "geoid": "2837040"
+  },
+  "Kilmichael": {
+   "class": "town",
+   "geoid": "2837560"
+  },
+  "Kosciusko": {
+   "class": "city",
+   "geoid": "2838320"
+  },
+  "Kossuth": {
+   "class": "village",
+   "geoid": "2838360"
+  },
+  "Lake": {
+   "class": "town",
+   "geoid": "2838600"
+  },
+  "Lambert": {
+   "class": "town",
+   "geoid": "2839080"
+  },
+  "Laurel": {
+   "class": "city",
+   "geoid": "2839640"
+  },
+  "Leakesville": {
+   "class": "town",
+   "geoid": "2839840"
+  },
+  "Learned": {
+   "class": "town",
+   "geoid": "2839880"
+  },
+  "Leland": {
+   "class": "city",
+   "geoid": "2840280"
+  },
+  "Lena": {
+   "class": "town",
+   "geoid": "2840360"
+  },
+  "Lexington": {
+   "class": "city",
+   "geoid": "2840600"
+  },
+  "Liberty": {
+   "class": "town",
+   "geoid": "2840640"
+  },
+  "Long Beach": {
+   "class": "city",
+   "geoid": "2841680"
+  },
+  "Louin": {
+   "class": "town",
+   "geoid": "2842200"
+  },
+  "Louise": {
+   "class": "town",
+   "geoid": "2842240"
+  },
+  "Louisville": {
+   "class": "city",
+   "geoid": "2842280"
+  },
+  "Lucedale": {
+   "class": "city",
+   "geoid": "2842440"
+  },
+  "Lula": {
+   "class": "town",
+   "geoid": "2842600"
+  },
+  "Lumberton": {
+   "class": "city",
+   "geoid": "2842640"
+  },
+  "Lyon": {
+   "class": "town",
+   "geoid": "2842960"
+  },
+  "Maben": {
+   "class": "town",
+   "geoid": "2842980"
+  },
+  "Macon": {
+   "class": "city",
+   "geoid": "2844240"
+  },
+  "Madison": {
+   "class": "city",
+   "geoid": "2844520"
+  },
+  "Magee": {
+   "class": "city",
+   "geoid": "2844600"
+  },
+  "Magnolia": {
+   "class": "city",
+   "geoid": "2844680"
+  },
+  "Mantachie": {
+   "class": "town",
+   "geoid": "2844920"
+  },
+  "Mantee": {
+   "class": "village",
+   "geoid": "2844960"
+  },
+  "Marietta": {
+   "class": "town",
+   "geoid": "2845120"
+  },
+  "Marion": {
+   "class": "town",
+   "geoid": "2845160"
+  },
+  "Marks": {
+   "class": "city",
+   "geoid": "2845240"
+  },
+  "Mathiston": {
+   "class": "town",
+   "geoid": "2845720"
+  },
+  "Mayersville": {
+   "class": "town",
+   "geoid": "2846000"
+  },
+  "McComb": {
+   "class": "city",
+   "geoid": "2843280"
+  },
+  "McCool": {
+   "class": "town",
+   "geoid": "2843400"
+  },
+  "McLain": {
+   "class": "town",
+   "geoid": "2843840"
+  },
+  "Meadville": {
+   "class": "town",
+   "geoid": "2846200"
+  },
+  "Mendenhall": {
+   "class": "city",
+   "geoid": "2846600"
+  },
+  "Meridian": {
+   "class": "city",
+   "geoid": "2846640"
+  },
+  "Merigold": {
+   "class": "town",
+   "geoid": "2846720"
+  },
+  "Metcalfe": {
+   "class": "town",
+   "geoid": "2846880"
+  },
+  "Mize": {
+   "class": "town",
+   "geoid": "2848240"
+  },
+  "Monticello": {
+   "class": "town",
+   "geoid": "2848560"
+  },
+  "Montrose": {
+   "class": "town",
+   "geoid": "2848640"
+  },
+  "Moorhead": {
+   "class": "city",
+   "geoid": "2848760"
+  },
+  "Morgan City": {
+   "class": "town",
+   "geoid": "2848800"
+  },
+  "Morton": {
+   "class": "city",
+   "geoid": "2849080"
+  },
+  "Moss Point": {
+   "class": "city",
+   "geoid": "2849240"
+  },
+  "Mound Bayou": {
+   "class": "city",
+   "geoid": "2849320"
+  },
+  "Mount Olive": {
+   "class": "town",
+   "geoid": "2849520"
+  },
+  "Myrtle": {
+   "class": "town",
+   "geoid": "2850280"
+  },
+  "Natchez": {
+   "class": "city",
+   "geoid": "2850440"
+  },
+  "Nettleton": {
+   "class": "city",
+   "geoid": "2850880"
+  },
+  "New Albany": {
+   "class": "city",
+   "geoid": "2851000"
+  },
+  "New Augusta": {
+   "class": "town",
+   "geoid": "2851040"
+  },
+  "New Hebron": {
+   "class": "town",
+   "geoid": "2851360"
+  },
+  "New Houlka": {
+   "class": "town",
+   "geoid": "2851420"
+  },
+  "Newton": {
+   "class": "city",
+   "geoid": "2851720"
+  },
+  "North Carrollton": {
+   "class": "town",
+   "geoid": "2852400"
+  },
+  "Noxapater": {
+   "class": "town",
+   "geoid": "2852880"
+  },
+  "Oakland": {
+   "class": "town",
+   "geoid": "2853200"
+  },
+  "Ocean Springs": {
+   "class": "city",
+   "geoid": "2853520"
+  },
+  "Okolona": {
+   "class": "city",
+   "geoid": "2853680"
+  },
+  "Olive Branch": {
+   "class": "city",
+   "geoid": "2854040"
+  },
+  "Osyka": {
+   "class": "town",
+   "geoid": "2854640"
+  },
+  "Oxford": {
+   "class": "city",
+   "geoid": "2854840"
+  },
+  "Pace": {
+   "class": "town",
+   "geoid": "2854920"
+  },
+  "Pachuta": {
+   "class": "town",
+   "geoid": "2854960"
+  },
+  "Paden": {
+   "class": "village",
+   "geoid": "2855000"
+  },
+  "Pascagoula": {
+   "class": "city",
+   "geoid": "2855360"
+  },
+  "Pass Christian": {
+   "class": "city",
+   "geoid": "2855400"
+  },
+  "Pearl": {
+   "class": "city",
+   "geoid": "2855760"
+  },
+  "Pelahatchie": {
+   "class": "town",
+   "geoid": "2856200"
+  },
+  "Petal": {
+   "class": "city",
+   "geoid": "2856800"
+  },
+  "Philadelphia": {
+   "class": "city",
+   "geoid": "2856960"
+  },
+  "Picayune": {
+   "class": "city",
+   "geoid": "2857160"
+  },
+  "Pickens": {
+   "class": "town",
+   "geoid": "2857200"
+  },
+  "Pittsboro": {
+   "class": "village",
+   "geoid": "2858360"
+  },
+  "Plantersville": {
+   "class": "town",
+   "geoid": "2858440"
+  },
+  "Polkville": {
+   "class": "town",
+   "geoid": "2858960"
+  },
+  "Pontotoc": {
+   "class": "city",
+   "geoid": "2859160"
+  },
+  "Pope": {
+   "class": "village",
+   "geoid": "2859240"
+  },
+  "Poplarville": {
+   "class": "city",
+   "geoid": "2859480"
+  },
+  "Port Gibson": {
+   "class": "city",
+   "geoid": "2859560"
+  },
+  "Potts Camp": {
+   "class": "town",
+   "geoid": "2859720"
+  },
+  "Prentiss": {
+   "class": "town",
+   "geoid": "2859920"
+  },
+  "Puckett": {
+   "class": "village",
+   "geoid": "2860360"
+  },
+  "Purvis": {
+   "class": "city",
+   "geoid": "2860480"
+  },
+  "Quitman": {
+   "class": "city",
+   "geoid": "2860720"
+  },
+  "Raleigh": {
+   "class": "town",
+   "geoid": "2860840"
+  },
+  "Raymond": {
+   "class": "city",
+   "geoid": "2861160"
+  },
+  "Renova": {
+   "class": "town",
+   "geoid": "2861890"
+  },
+  "Richland": {
+   "class": "city",
+   "geoid": "2862400"
+  },
+  "Richton": {
+   "class": "town",
+   "geoid": "2862480"
+  },
+  "Ridgeland": {
+   "class": "city",
+   "geoid": "2862520"
+  },
+  "Rienzi": {
+   "class": "town",
+   "geoid": "2862560"
+  },
+  "Ripley": {
+   "class": "city",
+   "geoid": "2862600"
+  },
+  "Rolling Fork": {
+   "class": "city",
+   "geoid": "2863560"
+  },
+  "Rosedale": {
+   "class": "city",
+   "geoid": "2863720"
+  },
+  "Roxie": {
+   "class": "town",
+   "geoid": "2864080"
+  },
+  "Ruleville": {
+   "class": "city",
+   "geoid": "2864200"
+  },
+  "Sallis": {
+   "class": "town",
+   "geoid": "2864800"
+  },
+  "Saltillo": {
+   "class": "city",
+   "geoid": "2864840"
+  },
+  "Sandersville": {
+   "class": "town",
+   "geoid": "2864920"
+  },
+  "Sardis": {
+   "class": "town",
+   "geoid": "2865560"
+  },
+  "Satartia": {
+   "class": "village",
+   "geoid": "2865680"
+  },
+  "Schlater": {
+   "class": "town",
+   "geoid": "2866080"
+  },
+  "Scooba": {
+   "class": "town",
+   "geoid": "2866160"
+  },
+  "Sebastopol": {
+   "class": "town",
+   "geoid": "2866280"
+  },
+  "Seminary": {
+   "class": "town",
+   "geoid": "2866400"
+  },
+  "Senatobia": {
+   "class": "city",
+   "geoid": "2866440"
+  },
+  "Shannon": {
+   "class": "town",
+   "geoid": "2866720"
+  },
+  "Shaw": {
+   "class": "city",
+   "geoid": "2867000"
+  },
+  "Shelby": {
+   "class": "city",
+   "geoid": "2867040"
+  },
+  "Sherman": {
+   "class": "town",
+   "geoid": "2867200"
+  },
+  "Shubuta": {
+   "class": "town",
+   "geoid": "2867520"
+  },
+  "Shuqualak": {
+   "class": "town",
+   "geoid": "2867640"
+  },
+  "Sidon": {
+   "class": "town",
+   "geoid": "2867840"
+  },
+  "Silver City": {
+   "class": "town",
+   "geoid": "2867920"
+  },
+  "Silver Creek": {
+   "class": "town",
+   "geoid": "2867960"
+  },
+  "Slate Springs": {
+   "class": "village",
+   "geoid": "2868320"
+  },
+  "Sledge": {
+   "class": "town",
+   "geoid": "2868400"
+  },
+  "Smithville": {
+   "class": "town",
+   "geoid": "2868720"
+  },
+  "Snow Lake Shores": {
+   "class": "town",
+   "geoid": "2868960"
+  },
+  "Soso": {
+   "class": "town",
+   "geoid": "2869160"
+  },
+  "Southaven": {
+   "class": "city",
+   "geoid": "2869280"
+  },
+  "Starkville": {
+   "class": "city",
+   "geoid": "2870240"
+  },
+  "State Line": {
+   "class": "town",
+   "geoid": "2870320"
+  },
+  "Stonewall": {
+   "class": "town",
+   "geoid": "2870760"
+  },
+  "Sturgis": {
+   "class": "town",
+   "geoid": "2871320"
+  },
+  "Summit": {
+   "class": "town",
+   "geoid": "2871480"
+  },
+  "Sumner": {
+   "class": "town",
+   "geoid": "2871520"
+  },
+  "Sumrall": {
+   "class": "town",
+   "geoid": "2871560"
+  },
+  "Sunflower": {
+   "class": "town",
+   "geoid": "2871600"
+  },
+  "Sylvarena": {
+   "class": "village",
+   "geoid": "2872040"
+  },
+  "Taylor": {
+   "class": "village",
+   "geoid": "2872360"
+  },
+  "Taylorsville": {
+   "class": "town",
+   "geoid": "2872400"
+  },
+  "Tchula": {
+   "class": "town",
+   "geoid": "2872440"
+  },
+  "Terry": {
+   "class": "town",
+   "geoid": "2872680"
+  },
+  "Thaxton": {
+   "class": "town",
+   "geoid": "2872760"
+  },
+  "Tillatoba": {
+   "class": "town",
+   "geoid": "2873440"
+  },
+  "Tishomingo": {
+   "class": "town",
+   "geoid": "2873720"
+  },
+  "Toccopola": {
+   "class": "town",
+   "geoid": "2873760"
+  },
+  "Tremont": {
+   "class": "town",
+   "geoid": "2874400"
+  },
+  "Tunica": {
+   "class": "town",
+   "geoid": "2874760"
+  },
+  "Tupelo": {
+   "class": "city",
+   "geoid": "2874840"
+  },
+  "Tutwiler": {
+   "class": "town",
+   "geoid": "2875040"
+  },
+  "Tylertown": {
+   "class": "town",
+   "geoid": "2875160"
+  },
+  "Union": {
+   "class": "town",
+   "geoid": "2875360"
+  },
+  "Utica": {
+   "class": "town",
+   "geoid": "2875760"
+  },
+  "Vaiden": {
+   "class": "town",
+   "geoid": "2875880"
+  },
+  "Vardaman": {
+   "class": "town",
+   "geoid": "2876320"
+  },
+  "Verona": {
+   "class": "city",
+   "geoid": "2876560"
+  },
+  "Vicksburg": {
+   "class": "city",
+   "geoid": "2876720"
+  },
+  "Walls": {
+   "class": "town",
+   "geoid": "2877400"
+  },
+  "Walnut": {
+   "class": "town",
+   "geoid": "2877480"
+  },
+  "Walnut Grove": {
+   "class": "town",
+   "geoid": "2877520"
+  },
+  "Walthall": {
+   "class": "village",
+   "geoid": "2877640"
+  },
+  "Water Valley": {
+   "class": "city",
+   "geoid": "2878000"
+  },
+  "Waveland": {
+   "class": "city",
+   "geoid": "2878200"
+  },
+  "Waynesboro": {
+   "class": "city",
+   "geoid": "2878360"
+  },
+  "Webb": {
+   "class": "town",
+   "geoid": "2878480"
+  },
+  "Weir": {
+   "class": "town",
+   "geoid": "2878520"
+  },
+  "Wesson": {
+   "class": "town",
+   "geoid": "2878640"
+  },
+  "West": {
+   "class": "town",
+   "geoid": "2878680"
+  },
+  "West Point": {
+   "class": "city",
+   "geoid": "2879120"
+  },
+  "Wiggins": {
+   "class": "city",
+   "geoid": "2880160"
+  },
+  "Winona": {
+   "class": "city",
+   "geoid": "2880760"
+  },
+  "Winstonville": {
+   "class": "town",
+   "geoid": "2880800"
+  },
+  "Woodland": {
+   "class": "village",
+   "geoid": "2881000"
+  },
+  "Woodville": {
+   "class": "town",
+   "geoid": "2881120"
+  },
+  "Yazoo City": {
+   "class": "city",
+   "geoid": "2881520"
+  }
+ }
+}
