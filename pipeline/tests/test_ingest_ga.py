@@ -218,8 +218,9 @@ def test_several_left_on_both_sides_stay_unpaired_and_pairs_are_recomputed():
                                                                                  "echo-sewer-overflow:d"]
     assert reports[2]["duplicate_of"] is None and reports[4]["duplicate_of"] is None   # unpaired EPA records stay
     assert r["3"]["ended_at"] is None and not any(x["duplicate_of"] for x in r.values())
-    assert stats["epa_pairing"] == {"paired_by_water": 1, "paired_alone": 1, "epd_without_epa": 3,
-                                    "epa_without_epd": 3}
+    assert {k: v for k, v in stats["epa_pairing"].items() if not k.startswith("end_")} == {
+        "paired_by_water": 1, "paired_alone": 1, "epd_without_epa": 3, "epa_without_epd": 3}
+    assert stats["epa_pairing"]["end_taken"] == 2
     # the next run without EPA's reports clears the end taken from them
     again, _ = pair_run([], prev=list(r.values()))
     assert again["12"]["ended_at"] is None and again["12"]["status"] == "unknown" and "_end_basis" not in again["12"]["raw"]
@@ -480,3 +481,130 @@ def test_a_general_permit_coverage_number_is_an_npdes_permit():
     assert r["12"]["npdes_permit"] == "GAG640013" and r["12"]["discharger_id"] == "ga-gag640013"
     assert r["12"]["raw"]["_epa_record"] == "echo-sewer-overflow:a"
     assert r["9"]["npdes_permit"] is None and r["4"]["npdes_permit"] is None
+
+
+# ---------------------------------------------------------------- EPA's copy: the widened pairing (2026-11-07)
+# Rows modelled on the 13 months of postings and EPA's 2026-11-04 extract (permits, addresses and times are made up).
+
+def test_a_state_permit_row_pairs_with_epas_report_under_the_same_number():
+    """EPD lists land-application systems under their state permit (GAJ / GAU), which EPA's tables carry as is: the
+    row stays without an NPDES permit but takes the end of the one EPA report of that number and day."""
+    rows = [row(PERMIT_NUMBER="GAJ020999", WATERWAY_IMPACTED="Keg Creek"),
+            row(OVERFLOW_LOCATION="9 Oak Rd", PERMIT_NUMBER="GAU060999", WATERWAY_IMPACTED="Camp Creek")]
+    reports = [epa("a", "2026-10-29", "Keg Creek", permit="GAJ020999"),
+               epa("b", "2026-10-29", "Big River", permit="GAU060999")]
+    recs, stats = run([posting("2026-11-02", rows)], epa=reports)
+    r = {x["outfall_name"].split()[0]: x for x in recs}
+    assert r["12"]["npdes_permit"] is None and r["12"]["ended_at"] == "2026-10-29T11:00:00"
+    assert reports[0]["duplicate_of"] == r["12"]["event_id"] and "same permit, day and receiving water" in r["12"]["raw"]["_end_basis"]
+    assert r["9"]["ended_at"] is None and reports[1]["duplicate_of"] is None      # another water: a different spill
+    assert stats["epa_pairing"]["state_permit_rows"] == 2
+    assert G.pair_permit({"npdes_permit": None, "raw": {"row": {"permit_number": "pending"}}}) is None
+
+
+def test_one_spill_filed_twice_with_epa_is_one_report():
+    """Two EPA reports with the same start, end and water (a 24-hour and a 5-day form) are one spill: the EPD row
+    pairs with the first and both EPA records become its duplicates. Different times stay two spills."""
+    reports = [epa("a", "2026-10-29", "Cooper Creek"), epa("b", "2026-10-29", "Cooper Creek")]
+    recs, stats = run([posting("2026-11-02", [row(WATERWAY_IMPACTED="Cooper Creek")])], epa=reports)
+    assert recs[0]["ended_at"] == "2026-10-29T11:00:00" and recs[0]["raw"]["_epa_record"] == [
+        "echo-sewer-overflow:a", "echo-sewer-overflow:b"]
+    assert all(e["duplicate_of"] == recs[0]["event_id"] for e in reports) and stats["epa_pairing"]["epa_copies"] == 1
+    assert "filed twice" in reports[1]["raw"]["_duplicate_basis"]
+    reports = [epa("a", "2026-10-29", "Cooper Creek"), {**epa("b", "2026-10-29", "Cooper Creek"),
+                                                         "started_at": "2026-10-29T15:00:00", "ended_at": "2026-10-29T16:00:00"}]
+    recs, _ = run([posting("2026-11-02", [row(WATERWAY_IMPACTED="Cooper Creek")])], epa=reports)
+    assert recs[0]["ended_at"] is None and len(recs[0]["raw"]["_epa_candidates"]) == 2
+
+
+def test_a_spill_listed_twice_by_epd_takes_the_end_on_both_rows():
+    """EPD re-lists a spill as a second row at the same address (the '~2' copy) with the same water and gallons: one
+    spill, so one EPA report gives both rows its end. Different gallons: possibly two spills, no end."""
+    twice = [row(WATERWAY_IMPACTED="Butler Creek", QUANTITY_GALLONS="609"),
+             row(WATERWAY_IMPACTED="Butler Creek", QUANTITY_GALLONS="609")]
+    reports = [epa("a", "2026-10-29", "Butler Creek")]
+    recs, stats = run([posting("2026-11-02", twice)], epa=reports)
+    assert sorted(x["source_record_id"][-2:] for x in recs) == ["00", "~2"]
+    assert all(x["ended_at"] == "2026-10-29T11:00:00" for x in recs) and stats["epa_pairing"]["epd_copies"] == 1
+    first = next(x for x in recs if "~" not in x["source_record_id"])
+    assert reports[0]["duplicate_of"] == first["event_id"]
+    assert "second listing" in next(x for x in recs if "~" in x["source_record_id"])["raw"]["_end_basis"]
+    differ = [twice[0], row(WATERWAY_IMPACTED="Butler Creek", QUANTITY_GALLONS="163")]
+    recs, _ = run([posting("2026-11-02", differ)], epa=[epa("a", "2026-10-29", "Butler Creek")])
+    assert all(x["ended_at"] is None for x in recs)
+    other_address = [twice[0], row(OVERFLOW_LOCATION="9 Oak Rd", WATERWAY_IMPACTED="Butler Creek",
+                                   QUANTITY_GALLONS="609")]
+    recs, _ = run([posting("2026-11-02", other_address)], epa=[epa("a", "2026-10-29", "Butler Creek")])
+    assert all(x["ended_at"] is None for x in recs)
+
+
+def test_an_implausible_epa_end_is_not_taken():
+    """EPA's end before its own start (12:42 to 03:45), before EPD's begin day, or a year after its start (a year
+    typed wrong) is not taken: the reports still pair, the row keeps an unknown end, raw._epa_end_not_used says why."""
+    cases = [({"started_at": "2026-10-29T12:42:00", "ended_at": "2026-10-29T03:45:00"}, "before EPA's start"),
+             ({"started_at": "2026-10-29T09:00:00", "ended_at": "2027-10-29T09:30:00"}, "365 days after"),
+             ({"started_at": "2026-10-29T09:00:00", "ended_at": "2026-12-15T09:30:00"}, "47 days after")]
+    for times, why in cases:
+        rep = {**epa("a", "2026-10-29", "Test Creek"), **times}
+        recs, stats = run([posting("2026-11-02", [row(WATERWAY_IMPACTED="Test Creek")])], epa=[rep])
+        assert recs[0]["ended_at"] is None and recs[0]["status"] == "unknown", why
+        assert why in recs[0]["raw"]["_epa_end_not_used"] and rep["duplicate_of"] == recs[0]["event_id"]
+        assert stats["epa_pairing"]["end_refused"] == 1
+    r = {"started_at": "2026-10-30", "raw": {}}
+    assert "before the day EPD says" in G.end_refused(r, epa("a", "2026-10-29", "x"))
+    ok = {**epa("a", "2026-10-29", "x"), "ended_at": "2026-11-20T10:00:00"}     # three weeks: taken
+    assert G.end_refused({"started_at": "2026-10-29", "raw": {}}, ok) is None
+
+
+def test_a_report_the_day_before_or_after_does_not_pair():
+    """No day tolerance: EPA's times are local (their hours peak at midday) and the reports a day off in the
+    2026-11 data were other spills of the same system, so a report of another day never lends its end."""
+    recs, _ = run([posting("2026-11-02", [row(WATERWAY_IMPACTED="Test Creek")])],
+                  epa=[{**epa("a", "2026-10-28", "Test Creek"), "started_at": "2026-10-28T23:50:00"}])
+    assert recs[0]["ended_at"] is None and "_epa_record" not in recs[0]["raw"]
+
+
+def dropped_report(srid, start, end, water="N/A", permit="GA0000001", reason="receiving water stated as none"):
+    return {"source_record_id": srid, "permit": permit, "reason": reason, "type": ["SSO"], "structure": "",
+            "impacts": [], "receiving_water": [water], "start": start, "end": end, "description": ""}
+
+
+def test_a_dry_land_spill_takes_the_end_of_epas_report_that_also_says_no_water():
+    """EPA's module keeps reports of no water reached out of its events; when EPD's row also says dry land and it is
+    the only row and that the only report of the permit and day, the row takes the report's end (cited, not marked
+    duplicate: the report is not an event)."""
+    dry = row(WATERWAY_IMPACTED="N/A", OVERFLOW_DESTINATION="Dry Land Overflow", QUANTITY_GALLONS="520")
+    drop = [dropped_report("GA0000001:M-1:1", "2026-10-29 19:31:00", "2026-10-29 19:57:00")]
+    recs, stats = G.build([posting("2026-11-02", [dry])], [], None, [], {"GA0000001": "ga-test-water"},
+                          "2026-11-04T00:00:00Z", epa_dropped=drop)
+    r = recs[0]
+    assert r["raw"]["reached_water"] is False and r["ended_at"] == "2026-10-29T19:57:00" and r["status"] == "ended"
+    assert r["raw"]["_epa_dropped_record"] == "echo-sewer-overflow:GA0000001:M-1:1" and "_epa_record" not in r["raw"]
+    assert "both saying no water was reached" in r["raw"]["_end_basis"] and stats["epa_pairing"]["paired_dropped"] == 1
+    # EPD names a water while EPA says none: not the same account, no end
+    wet = row(WATERWAY_IMPACTED="Shoal Creek")
+    recs, stats = G.build([posting("2026-11-02", [wet])], [], None, [], {}, "2026-11-04T00:00:00Z", epa_dropped=drop)
+    assert recs[0]["ended_at"] is None and "reached no water" in recs[0]["raw"]["_epa_not_paired"]
+    # two dropped reports of that day, or two dry-land rows: whose end is whose is not known
+    two = drop + [dropped_report("GA0000001:M-2:1", "2026-10-29 08:00:00", "2026-10-29 08:25:00")]
+    recs, stats = G.build([posting("2026-11-02", [dry])], [], None, [], {}, "2026-11-04T00:00:00Z", epa_dropped=two)
+    assert recs[0]["ended_at"] is None and stats["epa_pairing"]["dropped_ambiguous"] == 1
+    rows = [dry, row(OVERFLOW_LOCATION="9 Oak Rd", WATERWAY_IMPACTED="N/A", OVERFLOW_DESTINATION="Dry Land Overflow")]
+    recs, _ = G.build([posting("2026-11-02", rows)], [], None, [], {}, "2026-11-04T00:00:00Z", epa_dropped=drop)
+    assert all(x["ended_at"] is None for x in recs)
+    # an EPA event of that permit and day left unpaired could be this spill: no end from a dropped report either
+    recs, _ = G.build([posting("2026-11-02", [dry])], [], None, [epa("a", "2026-10-29", "Test Creek")], {},
+                      "2026-11-04T00:00:00Z", epa_dropped=drop)
+    assert recs[0]["ended_at"] is None
+
+
+def test_epas_dropped_reports_keep_their_end_and_receipt_date():
+    ev = {"permit_identifier": "GA0000001", "program_report_form_set_id": "M-1", "sewer_overflow_bypass_event_id_ext": "1",
+          "sewer_overflow_bypass_event_key": "k1", "sewer_overflow_bypass_start_datetime": "2026-10-29 19:31:00",
+          "sewer_overflow_bypass_end_datetime": "2026-10-29 19:57:00", "program_report_received_date": "2026-10-30",
+          "sewer_overflow_structure_type_desc": "Manhole", "sewer_overflow_bypass_description_text": ""}
+    tables = {"events": [ev], "types": [{"sewer_overflow_bypass_event_key": "k1", "sewer_overflow_bypass_type_code": "SSO",
+                                         "sewer_overflow_bypass_type_desc": "SSO", "sewer_overflow_bypass_type_code_sequence": "1"}],
+              "waters": [{"sewer_overflow_bypass_event_key": "k1", "name_receiving_water": "DID NOT ENTER STATE WATERS"}]}
+    kept, dropped, _ = E.build(tables, {"extract_date": "2026-11-04"})
+    assert not kept and dropped[0]["end"] == "2026-10-29 19:57:00" and dropped[0]["received"] == "2026-10-30"
