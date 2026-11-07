@@ -125,6 +125,9 @@ RAW_CACHE: tuple[Entry, ...] = (
           "of a Great Lakes record that has none (its state's waters in the lake; downloaded once, 10 MB)"),
     Entry("data/raw/iem-iemre",
           "build/rain_thresholds.py: IEM's MRMS daily rainfall per outfall point and year (past years final)"),
+    Entry("data/raw/nws-gauges/observations.json",
+          "ingest/rainfall.py gauge_check(): the airport gauges' latest observations and MRMS identify at them, per "
+          "valid time, so a rerun in the same hour asks again for none of them (the unit cross-check, 2026-11-07)"),
     Entry("data/raw/ri-nbc/rigis-nbc-sewer-overflows.json",
           "ingest/ri_nbc.py: the RIGIS outfall layer, refetched after 30 days"),
     Entry("data/raw/ri-ridoh-beaches/ridohgis-beaches-view.json",

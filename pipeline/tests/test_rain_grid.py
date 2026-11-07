@@ -262,8 +262,9 @@ class FakeNOAA:
     """The MRMS ImageServer and api.weather.gov as the run sees them, from rain_at()."""
     IDS = {1: 101, 24: 124, 48: 148, 72: 172}
 
-    def __init__(self, export_fails=False, identify_off=0.0, scale=1.0, wet=None):
+    def __init__(self, export_fails=False, identify_off=0.0, scale=1.0, wet=None, gauges=None):
         self.headers: dict = {}
+        self.gauges = gauges or {}                  # station: [(minutes before VALID, mm in the last hour)]
         self.export_fails, self.identify_off = export_fails, identify_off
         self.scale, self.wet = scale, wet or {}     # scale 25.4: the service answering millimetres
         self.calls: list[str] = []
@@ -297,6 +298,13 @@ class FakeNOAA:
             vals = [str(self.raw(lat, lon, h) + (self.identify_off if h == 24 else 0)) for h in RF.HOURS]
             return Resp(body={"properties": {"Values": vals}, "catalogItems": {"features": [
                 {"attributes": {"name": n, "idp_validendtime": vt}} for n in names]}})
+        if kind == "nws_stations":
+            st = url.split("/stations/")[1].split("/")[0]
+            return Resp(body={"features": [{"properties": {
+                "timestamp": RF.iso(VALID - timedelta(minutes=mins)),
+                "precipitationLastHour": {"unitCode": "wmoUnit:mm", "value": mm},
+                "precipitationLast3Hours": {"unitCode": "wmoUnit:mm", "value": None}}}
+                for mins, mm in self.gauges.get(st, [])]})
         if kind == "nws_points":
             lat, lon = (float(v) for v in url.rsplit("/", 1)[1].split(","))
             return Resp(body={"properties": {"gridId": "BOX", "gridX": round(-lon * 40), "gridY": round(lat * 40)}})
@@ -328,6 +336,7 @@ def world(tmp_path, monkeypatch):
     monkeypatch.setattr(RF, "OUT", tmp_path / "rainfall.json")
     monkeypatch.setattr(RF, "HISTORY", tmp_path / "rainfall-history.json")
     monkeypatch.setattr(RF, "GRIDS", tmp_path / "nws-gridpoints.json")
+    monkeypatch.setattr(RF, "GAUGE_CACHE", tmp_path / "raw" / "nws-gauges" / "observations.json")
     monkeypatch.setattr(RF, "save_raw", lambda *a, **k: None)
     monkeypatch.setattr(RF.time, "sleep", lambda s: None)
     return {"outfalls": outs, "n_ne": n_ne, "tmp": tmp_path}
@@ -529,4 +538,69 @@ def test_a_reading_from_before_the_unit_check_is_not_kept(world):
     (world["tmp"] / "rainfall.json").write_text(json.dumps(prev))
     out = RF.run(now=NOW, session=FakeNOAA())        # this hour's reading is new, not the unmarked one
     assert out["points"]["42.00,-75.00"]["mrms"]["h24"] == rain_at(42.0, -75.0)
+    assert out["mrms"]["units"]["basis"] == "service_description"
+
+
+# ---------------------------------------------------------------- the gauge check
+
+def test_gauge_window_and_verdict():
+    obs = [{"t": RF.iso(VALID - timedelta(minutes=69)), "h1": 20.0, "h3": None, "h6": None},   # too early
+           {"t": RF.iso(VALID - timedelta(minutes=9)), "h1": 1.5, "h3": 12.0, "h6": None}]
+    assert RF.gauge_window(obs, VALID) == {"obs_time": RF.iso(VALID - timedelta(minutes=9)), "hours": 3, "gauge_mm": 12.0}
+    assert RF.gauge_window(obs[:1], VALID) is None
+    assert RF.gauge_window([{"t": RF.iso(VALID), "h1": 1.9, "h3": None, "h6": None}], VALID) is None   # under 2 mm
+    mm = RF.gauge_verdict([{"station": "KPVD", "gauge_mm": 12.0, "mrms_as_read": 15.8}])
+    assert mm["verdict"] == "mm" and mm["ratio"] == 1.317
+    inch = RF.gauge_verdict([{"station": "KPVD", "gauge_mm": 12.0, "mrms_as_read": 0.5}])
+    assert inch["verdict"] == "in"
+    assert RF.gauge_verdict([{"station": "KPVD", "gauge_mm": 12.0, "mrms_as_read": 3.0}])["verdict"] is None
+    assert RF.gauge_verdict([])["verdict"] is None and "skipped" in RF.gauge_verdict([])["text"]
+    assert RF.trim_observations({"features": [{"properties": {
+        "timestamp": "2026-11-07T00:51:00+00:00", "precipitationLastHour": {"unitCode": "wmoUnit:mm", "value": 17.8},
+        "precipitationLast3Hours": {"unitCode": "wmoUnit:in", "value": 1.0}}}]}) == [
+        {"t": "2026-11-07T00:51:00+00:00", "h1": 17.8, "h3": None, "h6": None}]
+
+
+GAUGE_PT = (42.06, -74.97)          # an outfall point: rain_at 0.62 in for 24 hours, 0.15 in for one
+
+
+def test_the_gauge_check_decides_the_unit_when_the_bound_cannot(world, monkeypatch):
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT})
+    fake = FakeNOAA(scale=25.4, gauges={"KTST": [(9, 3.8)]})
+    out = RF.run(now=NOW, session=fake)
+    u = out["mrms"]["units"]
+    h1_mm = round(rain_at(*GAUGE_PT, 1) * 25.4, 2)
+    assert u["units_read"] == "mm" and u["basis"] == "gauge_check" and u["gauge_check"]["ratio"] == round(h1_mm / 3.8, 3)
+    assert u["gauge_check"]["pairs"][0]["hours"] == 1 and u["box_max"]["h24"] < 30          # the bound could not tell
+    assert out["mrms"]["units_last_determined"]["basis"] == "gauge_check"
+    assert abs(out["points"]["42.06,-74.97"]["mrms"]["h24"] - rain_at(*GAUGE_PT)) <= 0.01
+    r = out["requests"]
+    assert r["nws_stations"] == 1 and r["mrms_identify"] == 2          # the check's identify and one gauge's
+    # the same hour again (forced): the gauge answers come from the cache
+    again = RF.run(now=NOW + timedelta(minutes=20), session=FakeNOAA(scale=25.4, gauges={"KTST": [(9, 3.8)]}),
+                   force=True)
+    assert again["requests"]["nws_stations"] == 0 and again["requests"]["mrms_identify"] == 1
+    assert again["mrms"]["units"]["basis"] == "gauge_check"
+    # inches when the service answers inches
+    (world["tmp"] / "raw" / "nws-gauges" / "observations.json").unlink()
+    inch = RF.run(now=NOW, session=FakeNOAA(gauges={"KTST": [(9, 3.8)]}), force=True)
+    assert inch["mrms"]["units"]["units_read"] == "in" and inch["mrms"]["units"]["basis"] == "gauge_check"
+    assert inch["points"]["42.06,-74.97"]["mrms"]["h24"] == rain_at(*GAUGE_PT)
+
+
+def test_a_gauge_reading_inches_cannot_keep_impossible_values(world, monkeypatch):
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT})
+    out = RF.run(now=NOW, session=FakeNOAA(scale=1.0, wet={(42.0, -75.0): 51.3}, gauges={"KTST": [(9, 3.8)]}))
+    u = out["mrms"]["units"]
+    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and "gauge check read inches" in u["conflict"]
+
+
+def test_no_gauge_rain_skips_the_check(world, monkeypatch):
+    steady(world)
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": GAUGE_PT, "KFAR": (30.0, -90.0)})
+    out = RF.run(now=NOW, session=FakeNOAA(scale=25.4, gauges={"KTST": [(9, 0.3)]}))
+    g = out["mrms"]["units"]["gauge_check"]
+    assert g["verdict"] is None and g["gauges_in_box"] == ["KTST"] and out["requests"]["mrms_identify"] == 1
     assert out["mrms"]["units"]["basis"] == "service_description"
