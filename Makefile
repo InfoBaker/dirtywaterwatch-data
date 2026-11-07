@@ -56,6 +56,9 @@
 #                  il_mwrd_possible_cso (MWRD's daily-reset map of possible CSO events, polled), il_mwrd_lake_reversals
 #                  (MWRD's table of reversals to Lake Michigan since 1985; needs pdftotext), il_idph_beachguard (IDPH's
 #                  list of beach advisories in effect and each listed beach's page); il_mwrd is a helper
+#                  Arizona: echo_sewer_overflow_events (EPA's overflow tables, AZ permits: the statewide record of
+#                  AZPDES overflows and bypasses, with ADEQ's waterbody identifiers named from
+#                  data/reference/az-adeq-wbids.json; scripts/az_adeq_wbids.py refreshes that file by hand)
 #                  South Dakota: echo_sewer_overflow_events (EPA's overflow tables, SD permits: the statewide record,
 #                  the 5-day written reports; times in the zone of the event's point, Mountain or Central, from
 #                  data/reference/sd-mountain-time-counties.json, written by scripts/sd_mountain_time_counties.py),
