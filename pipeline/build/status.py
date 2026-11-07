@@ -982,6 +982,77 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
                   "island (or have no box to show it)")
 
 
+# States whose reports carry a point and whose name placement is county-aware (Alabama, final audit 2026-11-07 P2-2): a
+# name resolves only to a record whose box, padded by NAME_MATCH_M, reaches the county the report's own point lies in,
+# unless the point is within NAME_MATCH_M of the record. ADEM's layers give no county, so the county is the one whose
+# outline (data/reference/al-counties.json, Census TIGERweb) holds the point. A record with no outline cannot be
+# measured from a point; its box still places it in a county ("Cowan Creek" in Fairhope is not Ferguson's).
+COUNTY_STATES = {"AL": "al-counties.json"}
+_COUNTIES: dict[str, list] = {}
+_RECORD_COUNTIES: dict[tuple, frozenset] = {}
+
+
+def state_counties(state: str) -> list:
+    """[(geoid, name, shapely geometry)] of a COUNTY_STATES state ([] without the file)."""
+    if state not in _COUNTIES:
+        from shapely.geometry import shape
+        path = DATA_DIR / "reference" / COUNTY_STATES[state]
+        doc = read_json(path, {}) or {}
+        _COUNTIES[state] = [(c["geoid"], c["county"], shape(c["geometry"])) for c in doc.get("counties") or []]
+    return _COUNTIES[state]
+
+
+def point_county(state: str, lat, lon) -> tuple[str, str] | None:
+    """(geoid, name) of the county holding the point, or None."""
+    if lat is None or lon is None:
+        return None
+    from shapely.geometry import Point
+    p = Point(float(lon), float(lat))
+    for geoid, name, g in state_counties(state):
+        if g.covers(p):
+            return geoid, name
+    return None
+
+
+def record_counties(state: str, w: dict) -> frozenset:
+    """The geoids of the counties a record's box, padded by NAME_MATCH_M, reaches (empty without a box)."""
+    b = w.get("bbox")
+    if not (isinstance(b, (list, tuple)) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b)):
+        return frozenset()
+    key = (state, tuple(b))
+    if key not in _RECORD_COUNTIES:
+        from shapely.geometry import box
+        pad = NAME_MATCH_M / 111_000
+        bx = box(b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad)
+        _RECORD_COUNTIES[key] = frozenset(g for g, _, geom in state_counties(state) if geom.intersects(bx))
+    return _RECORD_COUNTIES[key]
+
+
+def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, str | None]:
+    """(the slugs a report's county allows, why others were set aside). A slug within NAME_MATCH_M of the point stays,
+    and so does a record with no box (nothing to judge it by); a report with no point, or a point in no county, keeps
+    them all."""
+    state = event_state(ev) or ""
+    if state not in COUNTY_STATES:
+        return list(slugs), None
+    lat, lon = ev.get("lat"), ev.get("lon")
+    here = point_county(state, lat, lon)
+    if here is None:
+        return list(slugs), None
+    kept, off = [], []
+    for x in slugs:
+        d = distance(x, lat, lon)
+        rc = record_counties(state, waters.get(x) or {})
+        if (d is not None and d <= NAME_MATCH_M) or not rc or here[0] in rc:     # no box: nothing to judge by
+            kept.append(x)
+        else:
+            off.append(x)
+    if not off:
+        return kept, None
+    return kept, (f"the record(s) of that name ({', '.join(off)}) do not reach {here[1]}, the county of the "
+                  "report's point")
+
+
 def event_state(ev: dict) -> str | None:
     """The state a report counts under: the record's own two-letter raw.state first (an overflow outside its
     permit's state: DC Water's Potomac Interceptor rows in Montgomery County carry raw.state MD with
@@ -1705,6 +1776,17 @@ class Resolver:
                 # Hawaii's reports give an island, never a point: a name two islands share ("Kailua Bay" off Oahu and
                 # off Kona) goes only to the record on the report's island (final audit 2026-11-07 P1-1)
                 kept, why = island_slugs(slugs, ev or {}, self.waters)
+                if why:
+                    notes.append(f"'{n}': {why}")
+                slugs = kept
+                if not slugs:
+                    continue
+            if state in COUNTY_STATES:
+                # Alabama: a name several counties share ("Cowan Creek" in Fairhope and near Ferguson) goes only to a
+                # record reaching the county of the report's point (final audit 2026-11-07 P2-2)
+                kept, why = county_slugs(slugs, {**(ev or {}), "lat": lat, "lon": lon,
+                                                 "raw": {"state": state, **((ev or {}).get("raw") or {})}},
+                                         self.waters, self.distance_m)
                 if why:
                     notes.append(f"'{n}': {why}")
                 slugs = kept
