@@ -20,7 +20,10 @@ def test_advisory_opens_on_a_yes_sample_and_lifts_on_the_next_no():
     assert len(recs) == 1 and stats["samples_read"] == 4
     r = recs[0]
     assert r["event_type"] == "beach_advisory" and r["status"] == "advisory_lifted"
-    assert r["started_at"] == "2026-10-12T00:00:00-04:00" and r["ended_at"] == "2026-10-26T00:00:00-04:00"
+    # Bay County keeps Central time (wave 1 P1-3); the clean sample of October 26 was first read on November 4, more
+    # than three days later and never seen open: the end is the site's bound, not the collection date (P1-4)
+    assert r["started_at"] == "2026-10-12T00:00:00-05:00" and r["ended_at"] == "2026-10-30T00:00:00-05:00"
+    assert r["raw"]["clean_sample_date"] == "2026-10-26" and r["raw"]["ended_at_precision"] == "bound"
     assert r["time_precision"] == "day" and r["event_id"] == "fl-doh-beaches:FL289095-8th-street:1317"
     # the same advisory is one record across runs
     again, _ = B.build([POINT], {B.point_key(POINT): PAGE}, recs, "2026-11-05T00:00:00Z")
@@ -31,7 +34,7 @@ def test_open_advisory_is_active():
     page = PAGE.split("</tr>", 1)[1]          # drop the newest (Advisory No) row
     recs, _ = B.build([POINT], {B.point_key(POINT): "<table>" + page}, [], "x")
     assert recs[0]["status"] == "advisory_active" and recs[0]["ended_at"] is None
-    assert recs[0]["source_updated_at"] == "2026-10-12T00:00:00-04:00"
+    assert recs[0]["source_updated_at"] == "2026-10-12T00:00:00-05:00"
 
 
 # ---------------------------------------------------------------- review 2026-11-04
