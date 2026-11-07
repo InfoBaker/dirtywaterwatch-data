@@ -227486,7 +227486,7 @@
   "towns": [
    "Grand Island"
   ],
-  "notes": "23 SOBE events, latest start 2026-10-06. Research row (research/ne/dischargers.json, checked 2026-11-03); EPA's permit name 'Grand Island WWTF'.",
+  "notes": "23 SOBE events, latest start 2026-10-06. No receiving water given in the rows. Research row (research/ne/dischargers.json, checked 2026-11-03); EPA's permit name 'Grand Island WWTF'.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -228672,7 +228672,7 @@
   "towns": [
    "Lincoln"
   ],
-  "notes": "NE0112488 Lincoln Northeast WRRF: 5 SOBE events, latest start 2025-12-14. NE0036820 Lincoln Theresa Street WRRF: No SOBE rows under this permit. Research rows ne-lincoln-northeast, ne-lincoln-theresa (research/ne/dischargers.json, checked 2026-11-03), joined as one operator.",
+  "notes": "NE0112488 Lincoln Northeast WRRF: 5 SOBE events, latest start 2025-12-14. Lincoln Transportation and Utilities not searched. NE0036820 Lincoln Theresa Street WRRF: No SOBE rows under this permit. Research rows ne-lincoln-northeast, ne-lincoln-theresa (research/ne/dischargers.json, checked 2026-11-03), joined as one operator.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [

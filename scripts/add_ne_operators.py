@@ -7,8 +7,8 @@ Inputs
      tables. Omaha's three permits (the CSO permit NE0133680, Papillion Creek WRRF NE0112810, Missouri River WRRF
      NE0036358) are one operator, the City of Omaha, and Lincoln's two (Northeast NE0112488, Theresa Street NE0036820)
      one, the City of Lincoln: each joined row keeps the research ids as aliases, so the overflow module's discharger
-     ids (taken from the research rows) resolve to it. Two research rows carry text in their kind field; every research
-     row is kind "sso" here (EPA's overflow tables carry their reports) and Omaha's "cso".
+     ids (taken from the research rows) resolve to it. Every research row is kind "sso" here (EPA's overflow tables
+     carry their reports) and Omaha's "cso".
   2. data/outfalls-plants-us.json and data/outfalls-us.json: every Nebraska permit EPA lists (322 plant permits, the one
      CSO inventory permit). Nebraska's permit names are mostly the plant's ("BEATRICE WWTF"), so the operator is read
      from the name: a plant named for the town it lies in is that town's (one row per town key, so "HERMAN WWTF" and
