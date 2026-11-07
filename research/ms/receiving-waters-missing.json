@@ -1,0 +1,891 @@
+{
+ "about": "Receiving-water names in MS's reports (EPA's overflow tables for Mississippi permits, the extract of 2026-11-04) that data/receiving-waters-national.json does not hold for MS, by name as typed (spellings that differ only in case, spaces or punctuation counted together), with the number of reports giving each and up to five of their points. The City of Jackson's shorthand names are given as the NHD creeks the ingester reads them as. Reports that say the discharge reached no water are left out.",
+ "state": "MS",
+ "waters": 42,
+ "reports": 163,
+ "rows": [
+  {
+   "name": "Davis bayou",
+   "reports": 22,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "spellings": [
+    "Davis Bayou",
+    "Davis bayou"
+   ],
+   "points": [
+    [
+     30.407073,
+     -88.773729
+    ],
+    [
+     30.406989,
+     -88.750421
+    ],
+    [
+     30.403328,
+     -88.791635
+    ],
+    [
+     30.410522,
+     -88.789255
+    ],
+    [
+     30.410703,
+     -88.789951
+    ]
+   ]
+  },
+  {
+   "name": "Ocean springs inner harbor",
+   "reports": 20,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.410104,
+     -88.818958
+    ],
+    [
+     30.408935,
+     -88.818006
+    ],
+    [
+     30.406396,
+     -88.815708
+    ],
+    [
+     30.40712,
+     -88.816301
+    ],
+    [
+     30.409941,
+     -88.817936
+    ]
+   ]
+  },
+  {
+   "name": "Eubanks Creek",
+   "reports": 14,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.370587,
+     -90.192763
+    ],
+    [
+     32.361361,
+     -90.164864
+    ],
+    [
+     32.33603,
+     -90.169037
+    ],
+    [
+     32.351361,
+     -90.154071
+    ],
+    [
+     32.355519,
+     -90.177598
+    ]
+   ]
+  },
+  {
+   "name": "Fort bayou",
+   "reports": 12,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "spellings": [
+    "Fort Bayou",
+    "Fort bayou"
+   ],
+   "points": [
+    [
+     30.420706,
+     -88.790072
+    ],
+    [
+     30.412388,
+     -88.799862
+    ],
+    [
+     30.411933,
+     -88.797442
+    ],
+    [
+     30.413151,
+     -88.804398
+    ],
+    [
+     30.412502,
+     -88.802818
+    ]
+   ]
+  },
+  {
+   "name": "Hanging Moss Creek",
+   "reports": 11,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.360313,
+     -90.153728
+    ],
+    [
+     32.371576,
+     -90.140981
+    ],
+    [
+     32.373463,
+     -90.142687
+    ],
+    [
+     32.358825,
+     -90.120578
+    ],
+    [
+     32.369897,
+     -90.115783
+    ]
+   ]
+  },
+  {
+   "name": "OKATIBBEE CREEK",
+   "reports": 11,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "spellings": [
+    "OKATIBBEE CREEK",
+    "Okatibbee Creek",
+    "okatibbee creek"
+   ],
+   "points": [
+    [
+     32.355384,
+     -88.744533
+    ],
+    [
+     32.359596,
+     -88.740767
+    ],
+    [
+     32.355538,
+     -88.744534
+    ],
+    [
+     32.37015,
+     -88.74581
+    ],
+    [
+     32.355221,
+     -88.744533
+    ]
+   ]
+  },
+  {
+   "name": "Lynch Creek",
+   "reports": 7,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.308268,
+     -90.238333
+    ],
+    [
+     32.295203,
+     -90.240454
+    ],
+    [
+     32.306082,
+     -90.24031
+    ],
+    [
+     32.338549,
+     -90.268767
+    ],
+    [
+     32.328407,
+     -90.248744
+    ]
+   ]
+  },
+  {
+   "name": "Purple Creek",
+   "reports": 7,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.391323,
+     -90.103933
+    ],
+    [
+     32.369897,
+     -90.115783
+    ],
+    [
+     32.392629,
+     -90.101666
+    ],
+    [
+     32.398449,
+     -90.133792
+    ]
+   ]
+  },
+  {
+   "name": "Weeks bayou",
+   "reports": 7,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "spellings": [
+    "Weeks Bayou",
+    "Weeks bayou"
+   ],
+   "points": [
+    [
+     30.405731,
+     -88.81144
+    ],
+    [
+     30.397679,
+     -88.810686
+    ]
+   ]
+  },
+  {
+   "name": "BELHAVEN",
+   "reports": 6,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.318497,
+     -90.172365
+    ],
+    [
+     32.309787,
+     -90.169321
+    ],
+    [
+     32.294989,
+     -90.178139
+    ],
+    [
+     32.318088,
+     -90.1784
+    ],
+    [
+     32.319455,
+     -90.170987
+    ]
+   ]
+  },
+  {
+   "name": "Trahon Creek",
+   "reports": 6,
+   "permits": [
+    "MS0044059"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.219313,
+     -90.251674
+    ],
+    [
+     32.254379,
+     -90.307587
+    ],
+    [
+     32.216663,
+     -90.245427
+    ],
+    [
+     32.24724,
+     -90.308065
+    ],
+    [
+     32.262648,
+     -90.315483
+    ]
+   ]
+  },
+  {
+   "name": "CANEY",
+   "reports": 4,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.257819,
+     -90.239505
+    ],
+    [
+     32.244226,
+     -90.226061
+    ],
+    [
+     32.266287,
+     -90.248876
+    ],
+    [
+     32.257262,
+     -90.235562
+    ]
+   ]
+  },
+  {
+   "name": "EASTOVER",
+   "reports": 2,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.339597,
+     -90.13789
+    ],
+    [
+     32.341693,
+     -90.145275
+    ]
+   ]
+  },
+  {
+   "name": "Hardy Creek",
+   "reports": 2,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.271211,
+     -90.2337
+    ],
+    [
+     32.271654,
+     -90.237494
+    ]
+   ]
+  },
+  {
+   "name": "Heron Bayou",
+   "reports": 2,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.39445,
+     -88.756734
+    ]
+   ]
+  },
+  {
+   "name": "Porter's Bayou",
+   "reports": 2,
+   "permits": [
+    "MS0024953"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     33.601088,
+     -90.768943
+    ]
+   ]
+  },
+  {
+   "name": "Roadside ditch",
+   "reports": 2,
+   "permits": [
+    "MS0029513",
+    "MS0036234"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.351192,
+     -89.640235
+    ],
+    [
+     34.955372,
+     -89.901477
+    ]
+   ]
+  },
+  {
+   "name": "Unnamed creek",
+   "reports": 2,
+   "permits": [
+    "MS0020117",
+    "MS0024147"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "spellings": [
+    "Unnamed Creek",
+    "Unnamed creek"
+   ],
+   "points": [
+    [
+     31.606355,
+     -90.455367
+    ],
+    [
+     32.381081,
+     -88.733684
+    ]
+   ]
+  },
+  {
+   "name": "Big Cedar Creek",
+   "reports": 1,
+   "permits": [
+    "MS0044504"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.906583,
+     -88.594389
+    ]
+   ]
+  },
+  {
+   "name": "Big Cedar Creek Headwaters",
+   "reports": 1,
+   "permits": [
+    "MS0044504"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.910229,
+     -88.59526
+    ]
+   ]
+  },
+  {
+   "name": "Biloxi Bay",
+   "reports": 1,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.409384,
+     -88.817173
+    ]
+   ]
+  },
+  {
+   "name": "Chico Bayou",
+   "reports": 1,
+   "permits": [
+    "MS0020249"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.348034,
+     -88.522945
+    ]
+   ]
+  },
+  {
+   "name": "Drainage Ditch",
+   "reports": 1,
+   "permits": [
+    "MS0029513"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     34.938056,
+     -89.8475
+    ]
+   ]
+  },
+  {
+   "name": "Forth Bayou Creek",
+   "reports": 1,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.475983,
+     -88.757545
+    ]
+   ]
+  },
+  {
+   "name": "GALLAGHER CREEK",
+   "reports": 1,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.385314,
+     -88.719705
+    ]
+   ]
+  },
+  {
+   "name": "Halstead bayou",
+   "reports": 1,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.395891,
+     -88.800418
+    ]
+   ]
+  },
+  {
+   "name": "Keegans Bayou",
+   "reports": 1,
+   "permits": [
+    "MS0023159"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.405672,
+     -88.897187
+    ]
+   ]
+  },
+  {
+   "name": "Lake Yazoo",
+   "reports": 1,
+   "permits": [
+    "MS0020249"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.364556,
+     -88.561833
+    ]
+   ]
+  },
+  {
+   "name": "Newell Branch Creek",
+   "reports": 1,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.40592,
+     -88.67849
+    ]
+   ]
+  },
+  {
+   "name": "Nolehoe Creek",
+   "reports": 1,
+   "permits": [
+    "MS0029513"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     34.960046,
+     -89.914973
+    ]
+   ]
+  },
+  {
+   "name": "OAKTIBEE CREEK",
+   "reports": 1,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.355538,
+     -88.744534
+    ]
+   ]
+  },
+  {
+   "name": "OKATIBBEE CREED",
+   "reports": 1,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.355538,
+     -88.744584
+    ]
+   ]
+  },
+  {
+   "name": "Ocean Springs Harbor - Biloxi Bay",
+   "reports": 1,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.409462,
+     -88.81802
+    ]
+   ]
+  },
+  {
+   "name": "Old Fort Bayou",
+   "reports": 1,
+   "permits": [
+    "MS0045446"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.421772,
+     -88.720002
+    ]
+   ]
+  },
+  {
+   "name": "Rabbit Creek",
+   "reports": 1,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.545885,
+     -88.605088
+    ]
+   ]
+  },
+  {
+   "name": "Robinson Bayou",
+   "reports": 1,
+   "permits": [
+    "MS0021521"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     30.492713,
+     -88.558805
+    ]
+   ]
+  },
+  {
+   "name": "SAWASHEE CREEK",
+   "reports": 1,
+   "permits": [
+    "MS0020117"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.39779,
+     -88.666039
+    ]
+   ]
+  },
+  {
+   "name": "THREE MILE",
+   "reports": 1,
+   "permits": [
+    "MS0024295"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.280967,
+     -90.2354
+    ]
+   ]
+  },
+  {
+   "name": "Turner Creek/Bridge Creek",
+   "reports": 1,
+   "permits": [
+    "MS0061328"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     34.909016,
+     -88.515668
+    ]
+   ]
+  },
+  {
+   "name": "Unnamed creek/roadside ditch",
+   "reports": 1,
+   "permits": [
+    "MS0023922"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     31.865222,
+     -90.404925
+    ]
+   ]
+  },
+  {
+   "name": "local drainage ditch",
+   "reports": 1,
+   "permits": [
+    "MS0021156"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     32.779681,
+     -89.113569
+    ]
+   ]
+  },
+  {
+   "name": "unnamed creek/tributary of Bogue Chitto river",
+   "reports": 1,
+   "permits": [
+    "MS0021555"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     31.272861,
+     -90.462056
+    ]
+   ]
+  }
+ ]
+}
