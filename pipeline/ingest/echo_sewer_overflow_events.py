@@ -142,13 +142,13 @@ South Dakota (permits SD...; research/sd/report.md section 2.2; not live until d
   South Dakota has no public-notice law for sewage; its permittees file their 5-day written overflow and bypass reports
   through EPA's NeT-SewerOverflow, so this dataset is the state's only dated, event-level record (2026-11-04 extract:
   208 current SD rows from 56 permits, starts April 2023 to 2026-11-02; SSO 167, BYP 40, CSO 1; every row with a
-  point, 186 with a volume; received a median 5 days after the start, 10% the same day, 10% 57 days or more). 56 are
-  kept, from 30 permits; 152 dropped: 97 SSOs naming no water and no water impact, 34 building backups, 21 naming no
+  point, 186 with a volume; received a median 5 days after the start, 10% the same day, 10% 57 days or more). 57 are
+  kept, from 30 permits; 151 dropped: 97 SSOs naming no water and no water impact, 34 building backups, 20 naming no
   water in words. Lead's CSO permit (SD0027481) files its Gold Run Creek overflows as SSOs at a manhole; they are kept
   by the water they name. Four South Dakota habits are handled here, for SD permits only, so every other state's records
   are unchanged (checked on that extract: 1,809 kept and 1,741 dropped records of the other states identical):
   - Time zone. The state straddles Central and Mountain time, so one zone would mislabel a third of the reports
-    (Central for the whole state: 70 of 208 rows, 13 of 56 kept; Mountain: 138 rows, 43 kept). The rule uses public
+    (Central for the whole state: 71 of 208 rows, 14 of 57 kept; Mountain: 137 rows, 43 kept). The rule uses public
     records only: the event's own point against the outlines of the counties the Mountain zone covers. The boundary is
     49 CFR 71.7(b) (down the Missouri River from North Dakota to Pierre, then along the north line of Jones County and
     the west lines of Jones, Mellette and Todd counties); it leaves fifteen counties wholly in the Mountain zone (Bennett,
