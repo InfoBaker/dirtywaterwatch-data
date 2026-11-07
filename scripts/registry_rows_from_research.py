@@ -60,6 +60,7 @@ HOMEPAGES = {
     "nc-dwr-algal-bloom-reports": "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
     "nc-fish-kill-algal-bloom": "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
     "wa-ecology-sewage-spills": "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills",
+    "hi-doh-cwb-events-api": "https://eha-cloud.doh.hawaii.gov/cwb/",
     "wa-kc-cso-status-csv": "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status",
     "nc-wnc-rec-monitoring": "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-monitoring-program",
     "sd-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",

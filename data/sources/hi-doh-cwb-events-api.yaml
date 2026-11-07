@@ -1,0 +1,47 @@
+id: "hi-doh-cwb-events-api"
+name: "Hawaii Department of Health, Clean Water Branch: water quality advisories and events (eha-cloud portal API)"
+url: "https://eha-cloud.doh.hawaii.gov/cwb/api/events"
+homepage: "https://eha-cloud.doh.hawaii.gov/cwb/"
+kind: "api"
+level: "state"
+# Ingester: pipeline/ingest/hi_doh_cwb_events.py (source id hi-doh-cwb-events-api).
+# Notes (research/hi, status used, verified fetched, checked 2026-11-07): Read every refresh by the
+#   Hawaii ingester: sewage spill and permit exceedance advisories are sewage reports in the
+#   Department's own window (posted to cancelled); Brown Water Advisories are rainfall advisories, a
+#   separate category; beach advisories are beach advisories and retest notifications get the site's
+#   sample caution. Places are read by rules from the notices' text, per island; no coordinates.
+# Access detail (research, quoted): The public portal https://eha-cloud.doh.hawaii.gov/cwb/ calls
+#   api/events. A GET with the header 'Accept: application/json' returns JSON {page,
+#   totalResultsCount, list} (without it, an HTML snapshot). No key. It returns the newest 500 of
+#   1,901 events (2023-01-01 to 2026-11-07 on 2026-11-07); the page, skip and take parameters are
+#   ignored, so older history is not read. createdBy and updatedBy hold the Department's staff
+#   e-mail addresses and are never read. E-mail notifications by island through the portal's
+#   subscription form.
+# Can fill: source_record_id (id), event_type (type), source_status (status Open/Closed),
+#   published_at (postedDate), valid_until / ended_at of the advisory (closedDate, signRemovalDate),
+#   waterbody and location_text (locationName, 'Affected waters'), volume (text 'Volume:' in 17 of
+#   65 sewage events), advice_text (description), authority (DOH), source_updated_at (updatedOn),
+#   raw_record
+# Cannot fill: coordinates (locations array empty in all 500); spill start time as a field
+#   (sometimes in text); operator as a field (in title/text)
+# Waters: statewide coastal waters, streams and harbors; all islands
+# History: 1,901 events in all on 2026-11-07; the endpoint returns the newest 500 (2023-01-01 to
+#   2026-11-07). Types in the newest 500 (read 2026-11-07): Brown Water Advisory 279, Beach
+#   Notification 104, Beach Advisory 52, Sewage Spill 50, Permit Exceedance 15; 21 open.
+# Research notes: Undocumented API behind a public page; descriptionHtml contains links. Titles
+#   sometimes carry a street address. Times (read 2026-11-07): postedDate, closedDate, createdOn and
+#   updatedOn are UTC without a zone mark; signRemovalDate is closedDate in Hawaii time;
+#   postedDateHst is the UTC date, not the Hawaii date. Some sewage notices give a street address
+#   with a house number (removed by the ingester).
+cadence: "Posted by the Department as notices are issued (the newest, 2026-11-07 01:24 UTC, hours before the read). Median days from posting to cancellation in the newest 500: Sewage Spill 6.7 (n=50), Permit Exceedance 4.3 (n=14), Brown Water Advisory 7.9 (n=261), Beach Advisory 4.9 (n=50), Beach Notification 1.0 (n=104)."
+license: "none stated"
+attribution: "Hawaii Department of Health, Clean Water Branch"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "plant_bypass", "rain_advisory", "beach_advisory"]
+states: ["HI"]
+access: ["json", "email", "html"]
+access_detail: "The public portal https://eha-cloud.doh.hawaii.gov/cwb/ calls api/events. A GET with the header 'Accept: application/json' returns JSON {page, totalResultsCount, list} (without it, an HTML snapshot). No key. It returns the newest 500 of 1,901 events (2023-01-01 to 2026-11-07 on 2026-11-07); the page, skip and take parameters are ignored, so older history is not read. createdBy and updatedBy hold the Department's staff e-mail addresses and are never read. E-mail notifications by island through the portal's subscription form."
+machine_readable: true
+legal_basis: "HAR 11-62 Appendix B (wastewater spills, overflows and discharges); HAR 11-55 NPDES"
+checked: "2026-11-07"

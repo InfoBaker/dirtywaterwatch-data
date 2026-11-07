@@ -1,9 +1,9 @@
 [
   {
     "id": "hi-doh-cwb-events-api",
-    "name": "Hawaii DOH Clean Water Branch water quality advisories and events (eha-cloud CWB portal API)",
+    "name": "Hawaii Department of Health, Clean Water Branch: water quality advisories and events (eha-cloud portal API)",
     "jurisdiction": "HI",
-    "operator": "Hawaii State Department of Health, Clean Water Branch",
+    "operator": "Hawaii Department of Health, Clean Water Branch",
     "operator_type": "state",
     "role": "events",
     "event_types": [
@@ -21,7 +21,7 @@
       "email",
       "html"
     ],
-    "access_detail": "Public AngularJS portal https://eha-cloud.doh.hawaii.gov/cwb/ calls api/events. GET with header 'Accept: application/json' returns JSON {page,totalResultsCount,list} (without it, an HTML snapshot). No auth. Returns the newest 500 of 1,898 events (2023-01 to 2026-11-03); page/skip/take parameters were ignored, so deeper history needs the right paging parameter (unknown). Sample raw/cwb-events-sample.json (createdBy/updatedBy staff emails removed). Email notifications by island via the portal's subscription form.",
+    "access_detail": "The public portal https://eha-cloud.doh.hawaii.gov/cwb/ calls api/events. A GET with the header 'Accept: application/json' returns JSON {page, totalResultsCount, list} (without it, an HTML snapshot). No key. It returns the newest 500 of 1,901 events (2023-01-01 to 2026-11-07 on 2026-11-07); the page, skip and take parameters are ignored, so older history is not read. createdBy and updatedBy hold the Department's staff e-mail addresses and are never read. E-mail notifications by island through the portal's subscription form.",
     "machine_readable": true,
     "sample_record": {
       "id": 2174,
@@ -86,19 +86,19 @@
     ],
     "has_coordinates": false,
     "has_outfall_ids": false,
-    "cadence": "Posted by DOH as notices are issued; the newest Brown Water Advisory was posted 2026-11-03 21:09 UTC, minutes before the fetch. Sewage Spill advisories stayed open a median 6.8 days (n=50).",
-    "history": "1,898 events since at least 2023-01; types in newest 500: Brown Water Advisory 280, Beach Notification 104, Beach Advisory 51, Sewage Spill 50, Permit Exceedance 15.",
+    "cadence": "Posted by the Department as notices are issued (the newest, 2026-11-07 01:24 UTC, hours before the read). Median days from posting to cancellation in the newest 500: Sewage Spill 6.7 (n=50), Permit Exceedance 4.3 (n=14), Brown Water Advisory 7.9 (n=261), Beach Advisory 4.9 (n=50), Beach Notification 1.0 (n=104).",
+    "history": "1,901 events in all on 2026-11-07; the endpoint returns the newest 500 (2023-01-01 to 2026-11-07). Types in the newest 500 (read 2026-11-07): Brown Water Advisory 279, Beach Notification 104, Beach Advisory 52, Sewage Spill 50, Permit Exceedance 15; 21 open.",
     "license": "none stated",
     "legal_basis": "HAR 11-62 Appendix B (wastewater spills, overflows and discharges); HAR 11-55 NPDES",
-    "status": "candidate",
-    "status_reason": "Statewide, machine-readable, dated authority advisories with open/closed status: Tier A. Sewage Spill and Permit Exceedance give the red window (DOH's own: 'remain out of the affected waters until this advisory has been cancelled'). Brown Water Advisories are rain-runoff advisories: a separate category.",
+    "status": "used",
+    "status_reason": "Read every refresh by the Hawaii ingester: sewage spill and permit exceedance advisories are sewage reports in the Department's own window (posted to cancelled); Brown Water Advisories are rainfall advisories, a separate category; beach advisories are beach advisories and retest notifications get the site's sample caution. Places are read by rules from the notices' text, per island; no coordinates.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "Undocumented API behind a public page; descriptionHtml contains links. Titles sometimes carry a street address."
+    "checked": "2026-11-07",
+    "notes": "Undocumented API behind a public page; descriptionHtml contains links. Titles sometimes carry a street address. Times (read 2026-11-07): postedDate, closedDate, createdOn and updatedOn are UTC without a zone mark; signRemovalDate is closedDate in Hawaii time; postedDateHst is the UTC date, not the Hawaii date. Some sewage notices give a street address with a house number (removed by the ingester)."
   },
   {
     "id": "hi-har-11-62-app-b",
-    "name": "HAR 11-62 Appendix B: responses for wastewater spills, overflows and discharges",
+    "name": "HAR 11-62 Appendix B: Responses for Wastewater Spills, Overflows, and Discharges (July 1, 2014)",
     "jurisdiction": "HI",
     "operator": "Hawaii State Department of Health",
     "operator_type": "state",
@@ -109,7 +109,7 @@
     ],
     "waters_covered": null,
     "water_slugs": [],
-    "url": "https://regulations.justia.com/states/hawaii/title-11/subtitle-1/chapter-62/appendix-b",
+    "url": "https://health.hawaii.gov/opppd/files/2026/08/chapter-11-62-HAR-effective-2016.03.21.pdf",
     "access": [
       "html"
     ],
@@ -124,11 +124,11 @@
     "cadence": null,
     "history": null,
     "license": null,
-    "legal_basis": "HAR 11-62 Appendix B s.9",
+    "legal_basis": "HAR 11-62-06(g); Appendix B sections 2, 7, 8 and 9",
     "status": "used",
-    "status_reason": "Owner or agent reports spills to the Clean Water Branch; deadline text not read (Justia blocks scripted reads).",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status_reason": "Read 2026-11-07 in the Department's copy of chapter 11-62 (effective 2016-03-21). For a spill into state waters the owner or its agent shall immediately notify the CWB, immediately send a press release for spills of 1,000 gallons or more (or lesser ones that threaten public health) to AP, newspapers, TV, the Department's Communications Office and the CWB, immediately post warning signs where public access is possible (the director authorizes removal), monitor the receiving water (enterococci; Clostridium perfringens in fresh or brackish water) until told to stop, and report in writing within five working days.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
