@@ -1,18 +1,18 @@
 {
  "about": "Water names in TX's records that data/receiving-waters-national.json does not hold for TX: TCEQ's Sanitary Sewer Overflows table (data.texas.gov 8kc5-95uk, read 2026-11-07, every report since 2010; the receiving water a report gives, once per report), one row per name and county, with the towns of the operators that reported it (nearest first by reports), the permits and TCEQ segment codes. A name the national list carries only as a GNIS name of another water is kept, with that water in gnis_name_of (Post Oak Creek in Grayson County is not the Red River). Records naming no water and texts that are not a water's name are left out (by_reason). Texas Beach Watch names no water: its stations are placed by their points. Written by scripts/tx_report_water_names.py.",
  "state": "TX",
- "waters": 1047,
- "names": 945,
- "reports": 4775,
- "reports_on_listed_waters": 1740,
+ "waters": 1048,
+ "names": 944,
+ "reports": 4780,
+ "reports_on_listed_waters": 1771,
  "by_reason": {
   "no water given (TCEQ's wordings, segment numbers, basin names)": 41631,
-  "a watershed or segment label, not a water": 3608,
+  "a watershed or segment label, not a water": 3573,
   "the text names no water or says none was reached": 2776,
-  "no water word in the text": 748,
+  "no water word in the text": 745,
   "a generic wording, no water's own name ('Unnamed Creek')": 584,
-  "the text carries a number, a street or a plant, not only a water's name": 361,
-  "the text kept a removed name or house number": 233
+  "the text carries a number, a street or a plant, not only a water's name": 360,
+  "the text kept a removed name or house number": 236
  },
  "rows": [
   {
@@ -1649,6 +1649,26 @@
    ]
   },
   {
+   "name": "Nueces River",
+   "reports": 9,
+   "county": "Dimmit County",
+   "towns": [
+    "Carrizo Springs"
+   ],
+   "permits": [
+    "TX0025976"
+   ],
+   "sources": [
+    "tx-tceq-sso-opendata"
+   ],
+   "gnis_name_of": [
+    "Neches River Tidal"
+   ],
+   "spellings": [
+    "Nueces River"
+   ]
+  },
+  {
    "name": "San Marcos River",
    "reports": 9,
    "county": "Hays County",
@@ -2175,26 +2195,6 @@
    ]
   },
   {
-   "name": "Nueces River",
-   "reports": 6,
-   "county": "Dimmit County",
-   "towns": [
-    "Carrizo Springs"
-   ],
-   "permits": [
-    "TX0025976"
-   ],
-   "sources": [
-    "tx-tceq-sso-opendata"
-   ],
-   "gnis_name_of": [
-    "Neches River Tidal"
-   ],
-   "spellings": [
-    "Nueces River"
-   ]
-  },
-  {
    "name": "Private Pond",
    "reports": 6,
    "county": "Tarrant County",
@@ -2472,6 +2472,31 @@
    ],
    "spellings": [
     "Linney Creek"
+   ]
+  },
+  {
+   "name": "Medina River",
+   "reports": 5,
+   "county": "Medina County",
+   "towns": [
+    "Castroville"
+   ],
+   "permits": [],
+   "sources": [
+    "tx-tceq-sso-opendata"
+   ],
+   "gnis_name_of": [
+    "Medina River Above Medina Lake",
+    "Medina River Below Medina Diversion Lake",
+    "Salado Creek"
+   ],
+   "segments": [
+    "1903"
+   ],
+   "spellings": [
+    "MEDINA RIVER",
+    "Medina River",
+    "medina river"
    ]
   },
   {
@@ -2994,30 +3019,6 @@
    ],
    "spellings": [
     "McGee Gully"
-   ]
-  },
-  {
-   "name": "Medina River",
-   "reports": 4,
-   "county": "Medina County",
-   "towns": [
-    "Castroville"
-   ],
-   "permits": [],
-   "sources": [
-    "tx-tceq-sso-opendata"
-   ],
-   "gnis_name_of": [
-    "Medina River Above Medina Lake",
-    "Medina River Below Medina Diversion Lake",
-    "Salado Creek"
-   ],
-   "segments": [
-    "1903"
-   ],
-   "spellings": [
-    "MEDINA RIVER",
-    "medina river"
    ]
   },
   {
@@ -4029,6 +4030,26 @@
    ],
    "spellings": [
     "MEDINA RIVER"
+   ]
+  },
+  {
+   "name": "Nueces River",
+   "reports": 3,
+   "county": "La Salle County",
+   "towns": [
+    "Cotulla"
+   ],
+   "permits": [
+    "TX0027499"
+   ],
+   "sources": [
+    "tx-tceq-sso-opendata"
+   ],
+   "gnis_name_of": [
+    "Neches River Tidal"
+   ],
+   "spellings": [
+    "Nueces River"
    ]
   },
   {
@@ -6286,26 +6307,6 @@
    ]
   },
   {
-   "name": "Nueces River",
-   "reports": 2,
-   "county": "La Salle County",
-   "towns": [
-    "Cotulla"
-   ],
-   "permits": [
-    "TX0027499"
-   ],
-   "sources": [
-    "tx-tceq-sso-opendata"
-   ],
-   "gnis_name_of": [
-    "Neches River Tidal"
-   ],
-   "spellings": [
-    "Nueces River"
-   ]
-  },
-  {
    "name": "Parker Creek",
    "reports": 2,
    "county": "Walker County",
@@ -6371,26 +6372,6 @@
    ],
    "spellings": [
     "Possibly Canyon Lake System"
-   ]
-  },
-  {
-   "name": "Rio Grande Below International Dam",
-   "reports": 2,
-   "county": "El Paso County",
-   "towns": [
-    "El Paso"
-   ],
-   "permits": [
-    "TX0026751"
-   ],
-   "sources": [
-    "tx-tceq-sso-opendata"
-   ],
-   "segments": [
-    "2308"
-   ],
-   "spellings": [
-    "Rio Grande Below International Dam"
    ]
   },
   {
@@ -8098,21 +8079,6 @@
    "spellings": [
     "Brays Bayou Tidal portion of the Houston Ship Channel/Buffalo Bayou Tidal"
    ]
-  },
-  {
-   "name": "Brazos River Below Navasota River, River",
-   "reports": 1,
-   "county": "Fort Bend County",
-   "towns": [
-    "Sugar Land"
-   ],
-   "permits": [
-    "TX0111872"
-   ],
-   "sources": [
-    "tx-tceq-sso-opendata"
-   ],
-   "spellings": []
   },
   {
    "name": "Bridgeport Reservoir",
@@ -10255,6 +10221,25 @@
    ],
    "spellings": [
     "FRIO"
+   ]
+  },
+  {
+   "name": "Frio River",
+   "reports": 1,
+   "county": "McMullen County",
+   "towns": [
+    "Tilden"
+   ],
+   "permits": [],
+   "sources": [
+    "tx-tceq-sso-opendata"
+   ],
+   "gnis_name_of": [
+    "Frio River above Choke Canyon",
+    "NUECES/LOWER FRIO RIVER"
+   ],
+   "spellings": [
+    "Frio River"
    ]
   },
   {
@@ -12596,6 +12581,22 @@
     "Neches River Tidal"
    ],
    "spellings": []
+  },
+  {
+   "name": "Nueces River",
+   "reports": 1,
+   "county": "Webb County",
+   "towns": [],
+   "permits": [],
+   "sources": [
+    "tx-tceq-sso-opendata"
+   ],
+   "gnis_name_of": [
+    "Neches River Tidal"
+   ],
+   "spellings": [
+    "Nueces River"
+   ]
   },
   {
    "name": "Nueces River",
@@ -17500,6 +17501,23 @@
    ],
    "spellings": [
     "dry creek which leads to Ellison Creek Resevoir"
+   ]
+  },
+  {
+   "name": "e Brazos River",
+   "reports": 1,
+   "county": "Waller County",
+   "towns": [
+    "Prairie View"
+   ],
+   "permits": [
+    "TX0111201"
+   ],
+   "sources": [
+    "tx-tceq-sso-opendata"
+   ],
+   "spellings": [
+    "e Brazos River"
    ]
   },
   {

@@ -113,6 +113,10 @@ LINE_ONLY_FCODES = {55800, 56600}   # NHDPlus artificial path, coastline (Matche
 TIGHT_M = 400               # match_outfalls' distance: a record this close to the point is "geometry"
 POINT_M = S.OUTFALL_POINT_M  # the snap for an outfall with no usable name
 POINT_WRONG_M = 10_000      # a point this far from its named water in the permittee's town is not the outfall's
+# a tie by name only (no record of the name near the point) is refused beyond this distance from the outfall's point, by
+# state (Texas final audit 2026-11-07 P2-5: Dumas's TX0129500 on Brazoria County's Coon Lake, 930 km away; Glen Rose's
+# Paluxy River for two permits elsewhere): the same name names another water there. Other states unchanged.
+NAME_ONLY_CAP_M = {"TX": 25_000}
 OUTSIDE_STATE_M = 2_000     # a point this far outside its state's (shoreline-clipped) outline is outside the state
 
 # texts that name a watershed or a basin, not a water
@@ -1036,6 +1040,16 @@ def apply(o: dict, res: dict, mt: Matcher) -> None:
         d = mt.dist(s, o.get("lat"), o.get("lon"))
         text = text_of(o)
         named = bool(text) and not why_not_a_name(text) and not S.names_disagree(text, w.get("name"))
+        cap = NAME_ONLY_CAP_M.get(str(o.get("state") or "").upper())
+        if cap and d is not None and d > TIGHT_M and d > cap:
+            res = {"reason": (f"the only record of the receiving water's name ({w.get('name')}, {s}) lies "
+                              f"{d / 1000:.0f} km from the outfall's point, beyond {cap // 1000} km: another water of "
+                              "that name")}
+            o.update(water_slug=None, water_name=None, water_kind=None, distance_m=None, match="none")
+            o["water_match"] = "none: " + res["reason"]
+            o["no_water_reason"] = res["reason"]
+            o["water_matched_by"] = by
+            return
         o.update(water_slug=s, water_name=w.get("name"), water_kind=w.get("kind"), distance_m=m(d))
         # match_outfalls' vocabulary (status.Resolver.row_water, rain_likely, ny_sprtk and ma_massdep read it)
         o["match"] = ("geometry+name" if named and d is not None and d <= TIGHT_M else
