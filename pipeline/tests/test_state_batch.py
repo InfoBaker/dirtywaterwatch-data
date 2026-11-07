@@ -156,6 +156,11 @@ def test_obl_check(tmp_path):
     assert "predates them" in lines[2]                                  # 0 counted, 2 on file now
     ok, lines = B.obl_check("OH", root)
     assert not ok and "ingest.obl_waters --state OH" in lines[0]
+    # SOL wave1 P2-11: a correctly shaped empty extract is not accepted
+    write(root, "data/waters-nc.json", {"state": "NC", "source": "openboatlaunch out/water snapshot 2026-11-02",
+                                        "count": 0, "waters": []})
+    ok, lines = B.obl_check("nc", root)
+    assert not ok and "holds no water record" in lines[0]
 
 
 def fake_step(code: str) -> list[str]:

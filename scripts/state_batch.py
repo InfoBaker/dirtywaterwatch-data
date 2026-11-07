@@ -397,6 +397,12 @@ def obl_check(state: str, root: Path = ROOT) -> tuple[bool, list[str]]:
                      f"{OBL_KEY}), then python3 -I scripts/gen_receiving_waters.py; then the NHD pass")
         return False, lines
     n = len(d["waters"])
+    if not n:
+        # a correctly shaped empty extract is a failed extract (a snapshot whose files did not decode), never a
+        # state with no waters (SOL wave1 P2-11)
+        lines.append(f"{st}: data/waters-{st.lower()}.json holds no water record; extract it again from a whole "
+                     f"openboatlaunch snapshot (python -m ingest.obl_waters --state {st}) before the NHD pass")
+        return False, lines
     lines.append(f"{st}: openboatlaunch extract data/waters-{st.lower()}.json: {n} records ({d.get('source') or 'no source line'})")
     slugs = water_slugs(root)
     on_file = sum(1 for s in slugs.values() if s == st)
