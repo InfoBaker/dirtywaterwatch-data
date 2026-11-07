@@ -1,0 +1,352 @@
+{
+"layer": "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0",
+"fetched_at": "2026-11-07T13:54:00Z",
+"pages": [
+{
+"features": [
+{
+"attributes": {
+"object_id": 1863,
+"sso_report_id": "SSO-00008447",
+"sso_report_version": 3,
+"lat": 32.380482,
+"long": -87.5106,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 0",
+"rec_stream": "Freetown Creek",
+"date_sso_began": 1521392400000,
+"date_sso_stopped": null,
+"sso_ongoing_ind": "Yes",
+"est_volume": "250,000 < gal",
+"permittee": "City of Uniontown",
+"facility_site_name": "Uniontown Wastewater Treatment Facility",
+"permit_no": "AL0063657"
+}
+},
+{
+"attributes": {
+"object_id": 13007,
+"sso_report_id": "SSO-00212910",
+"sso_report_version": 14,
+"lat": 32.3662171,
+"long": -86.9967661,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 1",
+"rec_stream": "Ground Absorbed;A short discharge into a manhole and now contained to the lift station.\n\nThis is a duplicate to Schedule SSO-00212633",
+"date_sso_began": 1743588000000,
+"date_sso_stopped": null,
+"sso_ongoing_ind": "Yes",
+"est_volume": "500,000 < gall",
+"permittee": "Dallas County Water And Sewer Authority",
+"facility_site_name": "Dallas County WWTP",
+"permit_no": "AL0043176"
+}
+},
+{
+"attributes": {
+"object_id": 12761,
+"sso_report_id": "SSO-00212633",
+"sso_report_version": 2,
+"lat": 32.36623,
+"long": -86.996783,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 2",
+"rec_stream": "Ground Absorbed",
+"date_sso_began": 1742742000000,
+"date_sso_stopped": 1742806800000,
+"sso_ongoing_ind": "No",
+"est_volume": "<=1,0",
+"permittee": "Dallas County Water And Sewer Authority",
+"facility_site_name": "Dallas County WWTP",
+"permit_no": "AL0043176"
+}
+},
+{
+"attributes": {
+"object_id": 10,
+"sso_report_id": "SSO-00000285",
+"sso_report_version": 1,
+"lat": 33.2334,
+"long": -86.4798,
+"LOCATION_OF_DISCHARGE": "1234 Sample Ct",
+"rec_stream": "Ground Absorbed",
+"date_sso_began": 1369565100000,
+"date_sso_stopped": 1369572300000,
+"sso_ongoing_ind": "No",
+"est_volume": "<1,000 ",
+"permittee": "Town of Wilsonville",
+"facility_site_name": "Wilsonville WWTP",
+"permit_no": "AL0021491"
+}
+},
+{
+"attributes": {
+"object_id": 8593,
+"sso_report_id": "SSO-00207548",
+"sso_report_version": 2,
+"lat": 33.643912,
+"long": -86.559865,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 4",
+"rec_stream": "Storm Drain(Little Cahaba Creek)",
+"date_sso_began": 1673254080000,
+"date_sso_stopped": 1673265240000,
+"sso_ongoing_ind": "No",
+"est_volume": "930",
+"permittee": "Jefferson County Commission Environmental Services Department",
+"facility_site_name": "Trussville WRF",
+"permit_no": "AL0022934"
+}
+},
+{
+"attributes": {
+"object_id": 3,
+"sso_report_id": "SSO-00000031",
+"sso_report_version": 1,
+"lat": 33.1643,
+"long": -86.318,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 5",
+"rec_stream": "Ground Absorbed;Drainage Ditch",
+"date_sso_began": 1336698000000,
+"date_sso_stopped": 1336719600000,
+"sso_ongoing_ind": "No",
+"est_volume": ">=1,000",
+"permittee": "Utilities Board of the City of Sylacauga",
+"facility_site_name": "J Earl Ham WWTP",
+"permit_no": "AL0020001"
+}
+},
+{
+"attributes": {
+"object_id": 3157,
+"sso_report_id": "SSO-00009766",
+"sso_report_version": 2,
+"lat": 34.584982,
+"long": -87.682683,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 6",
+"rec_stream": "UT to Stinking Bear Creek",
+"date_sso_began": 1548246180000,
+"date_sso_stopped": 1548285300000,
+"sso_ongoing_ind": "No",
+"est_volume": "100,000 < gal",
+"permittee": "Town of Littleville",
+"facility_site_name": "Littleville WWTP",
+"permit_no": "AL0056278"
+}
+},
+{
+"attributes": {
+"object_id": 1443,
+"sso_report_id": "SSO-00007989",
+"sso_report_version": 2,
+"lat": 34.555705,
+"long": -87.002527,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 7",
+"rec_stream": "Tennessee River (Wheeler Lake);Storm Drain",
+"date_sso_began": 1514810820000,
+"date_sso_stopped": 1514819340000,
+"sso_ongoing_ind": "No",
+"est_volume": "600.00",
+"permittee": "Decatur Utilities",
+"facility_site_name": "Decatur Utilities WWTP",
+"permit_no": "AL0048593"
+}
+},
+{
+"attributes": {
+"object_id": 9818,
+"sso_report_id": "SSO-00209294",
+"sso_report_version": 1,
+"lat": 30.5473176,
+"long": -87.7002874,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 8",
+"rec_stream": "Rock Creek is the discharge destination but isnt listed in creeks or rivers ",
+"date_sso_began": 1661374800000,
+"date_sso_stopped": 1661400000000,
+"sso_ongoing_ind": "No",
+"est_volume": "25,000 < gall",
+"permittee": "City of Robertsdale",
+"facility_site_name": "Robertsdale WWTP",
+"permit_no": "AL0042838"
+}
+},
+{
+"attributes": {
+"object_id": 1173,
+"sso_report_id": "SSO-00007692",
+"sso_report_version": 1,
+"lat": 33.6473,
+"long": -85.8041,
+"LOCATION_OF_DISCHARGE": "Behind the home at 905 Example Dr, call 205-555-0142 or ops@example.org",
+"rec_stream": "Backup into Building/Residence",
+"date_sso_began": 1507715100000,
+"date_sso_stopped": 1507715400000,
+"sso_ongoing_ind": "No",
+"est_volume": "<1,000 ",
+"permittee": "The Water Works & Sewer Board of the City of Anniston",
+"facility_site_name": "Choccolocco Creek WWTP",
+"permit_no": "AL0022195"
+}
+},
+{
+"attributes": {
+"object_id": 323,
+"sso_report_id": "SSO-00006342",
+"sso_report_version": 2,
+"lat": 33.5494,
+"long": -86.6474,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 10",
+"rec_stream": "",
+"date_sso_began": 1488538800000,
+"date_sso_stopped": 1489071600000,
+"sso_ongoing_ind": "No",
+"est_volume": ">=10,000",
+"permittee": "Phoenix Water Resources, LLC",
+"facility_site_name": "Eastwood Mobile Home Village WWTP",
+"permit_no": "AL0056685"
+}
+},
+{
+"attributes": {
+"object_id": 2123,
+"sso_report_id": "SSO-00008717",
+"sso_report_version": 3,
+"lat": 32.800645,
+"long": -85.641334,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 11",
+"rec_stream": "Ground Absorbed;UT to Invalid Named Receiving Water Not Migrated;Drainage Ditch",
+"date_sso_began": 1527588600000,
+"date_sso_stopped": 1529058600000,
+"sso_ongoing_ind": "No",
+"est_volume": "<=1,000",
+"permittee": "Town of Camp Hill",
+"facility_site_name": "Camp Hill Lagoon",
+"permit_no": "AL0024210"
+}
+},
+{
+"attributes": {
+"object_id": 8561,
+"sso_report_id": "SSO-00015194",
+"sso_report_version": 2,
+"lat": 30.655505,
+"long": -87.908027,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 12",
+"rec_stream": "Ground Absorbed;D'olive Creek;Excavated pit",
+"date_sso_began": 1635844800000,
+"date_sso_stopped": 1635931200000,
+"sso_ongoing_ind": "No",
+"est_volume": "<=1,0",
+"permittee": "Utilities Board of the City of Daphne",
+"facility_site_name": "Daphne Water Reclamation Facility",
+"permit_no": "AL0027561"
+}
+},
+{
+"attributes": {
+"object_id": 338,
+"sso_report_id": "SSO-00006394",
+"sso_report_version": 1,
+"lat": 33.4171,
+"long": -86.1344,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 13",
+"rec_stream": "Ground Absorbed",
+"date_sso_began": 1489651200000,
+"date_sso_stopped": 1489654800000,
+"sso_ongoing_ind": "No",
+"est_volume": "10,000 < gall",
+"permittee": "City of Talladega Water and Sewer",
+"facility_site_name": "Talladega Main WWTP",
+"permit_no": "AL0022357"
+}
+},
+{
+"attributes": {
+"object_id": 5918,
+"sso_report_id": "SSO-00012537",
+"sso_report_version": 1,
+"lat": 32.45,
+"long": -86.4,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 14",
+"rec_stream": "Ground Absorbed;private pond",
+"date_sso_began": 1586849400000,
+"date_sso_stopped": 1586852640000,
+"sso_ongoing_ind": "No",
+"est_volume": "1,000 < gall",
+"permittee": "City Of Prattville",
+"facility_site_name": "Prattville Pine Creek Clean Water Facility",
+"permit_no": "AL0027723"
+}
+},
+{
+"attributes": {
+"object_id": 12483,
+"sso_report_id": "SSO-00212317",
+"sso_report_version": 2,
+"lat": 33.456272,
+"long": -86.719166,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 15",
+"rec_stream": "It has been determined through further investigation and laboratory sampling this was not a sanitary sewer overflow.",
+"date_sso_began": 1728053520000,
+"date_sso_stopped": 1728053520000,
+"sso_ongoing_ind": "No",
+"est_volume": "0",
+"permittee": "Jefferson County Commission Environmental Services Department",
+"facility_site_name": "Cahaba River WRF",
+"permit_no": "AL0023027"
+}
+},
+{
+"attributes": {
+"object_id": 14753,
+"sso_report_id": "SSO-00215084",
+"sso_report_version": 2,
+"lat": 30.6256621,
+"long": -87.809991,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 16",
+"rec_stream": "Ground Absorbed;pump truck",
+"date_sso_began": 1793710980000,
+"date_sso_stopped": 1793712600000,
+"sso_ongoing_ind": "No",
+"est_volume": "1000",
+"permittee": "Baldwin County Sewer Service, LLC",
+"facility_site_name": "Spanish Fort Sewer WWTP",
+"permit_no": "AL0042234"
+}
+},
+{
+"attributes": {
+"object_id": 14331,
+"sso_report_id": "SSO-00214479",
+"sso_report_version": 1,
+"lat": 32.613377,
+"long": -85.459838,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 17",
+"rec_stream": "Ground Absorbed;UT to Moores Mill Creek",
+"date_sso_began": 1793349000000,
+"date_sso_stopped": 1793356200000,
+"sso_ongoing_ind": "No",
+"est_volume": "1200",
+"permittee": "City of Auburn",
+"facility_site_name": "H.C. Morgan WPCF",
+"permit_no": "AL0050237"
+}
+},
+{
+"attributes": {
+"object_id": 838,
+"sso_report_id": "SSO-00007280",
+"sso_report_version": 1,
+"lat": 33.9503,
+"long": -86.9146,
+"LOCATION_OF_DISCHARGE": "Manhole near Example Lift Station 18",
+"rec_stream": "Ground Absorbed",
+"date_sso_began": 1500293400000,
+"date_sso_stopped": 1500293700000,
+"sso_ongoing_ind": "No",
+"est_volume": "<1,000 ",
+"permittee": "Pat Q Sample",
+"facility_site_name": "Country Park WWTP",
+"permit_no": "AL0060976"
+}
+}
+]
+}
+]
+}

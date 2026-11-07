@@ -1,0 +1,49 @@
+{
+"features": [
+{
+"attributes": {
+"OBJECTID": 1,
+"ID": "AL769933",
+"Name": "AL_PT",
+"Descriptio": "Alabama Point",
+"WaterbodyN": "Gulf of Mexico",
+"Latitude": 30.27694,
+"Longitude": -87.54167,
+"File": "Alabama Point Public Beach, Gulf of Mexico",
+"URL": "https://adem.alabama.gov/media/18619/download",
+"Date": "11/02/26",
+"Advisory": 11
+}
+},
+{
+"attributes": {
+"OBJECTID": 11,
+"ID": "AL824748",
+"Name": "F_HOPE",
+"Descriptio": "Fairhope Public Beach",
+"WaterbodyN": "Mobile Bay",
+"Latitude": 30.52807,
+"Longitude": -87.90956,
+"File": "Fairhope Municipal Park, Mobile Bay",
+"URL": "https://adem.alabama.gov/media/18620/download",
+"Date": "11/03/26",
+"Advisory": 11
+}
+},
+{
+"attributes": {
+"OBJECTID": 21,
+"ID": "AL436981",
+"Name": "OB_WP",
+"Descriptio": "Orange Beach Waterfront Park",
+"WaterbodyN": "Wolf Bay",
+"Latitude": 30.2948,
+"Longitude": -87.5751,
+"File": "Orange Beach Waterfront Park, Wolf Bay",
+"URL": "https://adem.alabama.gov/media/18628/download",
+"Date": "11/03/26",
+"Advisory": 11
+}
+}
+]
+}
