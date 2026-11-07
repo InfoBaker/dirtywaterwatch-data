@@ -1,0 +1,160 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 100,
+    "ASSESSMENT_UNIT_NAME": "Eagle Nest Lake",
+    "STATION_NAME": "Eagle Nest Lake",
+    "MLOC_LATITUDE": 36.53417,
+    "MLOC_LONGITUDE": -105.254726,
+    "Location_Details": "HABs verified throughout lake.",
+    "Last_Monitored": "10/1/2026 10:01:00 AM",
+    "CHARACTERISTIC_NAME": "Microcystin",
+    "HAB_Status": "WARNING",
+    "Category_Override": null,
+    "Advisory_Details": "Entire lake under WARNING advisory.",
+    "Map_Upload_Date": "2026-10-09",
+    "Station_ID": "05ENSixMileRec",
+    "ReportedValue_ug_L": "24.8"
+   },
+   "geometry": {
+    "x": -105.254726,
+    "y": 36.53417
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 101,
+    "ASSESSMENT_UNIT_NAME": "Quemado Lake",
+    "STATION_NAME": "Quemado Lake",
+    "MLOC_LATITUDE": 34.138,
+    "MLOC_LONGITUDE": -108.496,
+    "Location_Details": "HABs verified near dock, dam, juniper access point, and south coves. ",
+    "Last_Monitored": "10/15/2026 1:00:00 PM",
+    "CHARACTERISTIC_NAME": "Microcystin",
+    "HAB_Status": "WARNING",
+    "Category_Override": null,
+    "Advisory_Details": "Entire lake under WARNING advisory",
+    "Map_Upload_Date": "2026-10-23",
+    "Station_ID": "74QLDamRecSite",
+    "ReportedValue_ug_L": "244.5",
+    "SWQB_internal_notes": "Called Pat Example at 505-555-0100 about the dock sample"
+   },
+   "geometry": {
+    "x": -108.496,
+    "y": 34.138
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 103,
+    "ASSESSMENT_UNIT_NAME": "Springer Lake",
+    "STATION_NAME": "Springer Lake",
+    "MLOC_LATITUDE": 36.41708,
+    "MLOC_LONGITUDE": -104.65259,
+    "Location_Details": "Sampled locations by dock/boat ramp",
+    "Last_Monitored": "09/03/2026 1:50:00 PM",
+    "CHARACTERISTIC_NAME": "Microcystin",
+    "HAB_Status": "MONITORED",
+    "Category_Override": null,
+    "Advisory_Details": null,
+    "Map_Upload_Date": "2026-09-29",
+    "Station_ID": "05SpringerLBRrec",
+    "ReportedValue_ug_L": "<0.15"
+   },
+   "geometry": {
+    "x": -104.65258999999999,
+    "y": 36.41707999999999
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 108,
+    "ASSESSMENT_UNIT_NAME": "San Gregorio Lake",
+    "STATION_NAME": "San Gregorio Lake",
+    "MLOC_LATITUDE": 36.03944,
+    "MLOC_LONGITUDE": -106.84913,
+    "Location_Details": "Sampled locations by south/southwest shoreline",
+    "Last_Monitored": "2026-06-23 11:28:00 AM",
+    "CHARACTERISTIC_NAME": "Microcystin",
+    "HAB_Status": "MONITORED",
+    "Category_Override": null,
+    "Advisory_Details": null,
+    "Map_Upload_Date": "2026-07-01",
+    "Station_ID": "33SanGregRDRec",
+    "ReportedValue_ug_L": "<0.1"
+   },
+   "geometry": {
+    "x": -106.84913000000002,
+    "y": 36.03943999999998
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 143,
+    "ASSESSMENT_UNIT_NAME": "Rio Grande (Embudo Creek to Rio Pueblo de Taos)",
+    "STATION_NAME": "Day Use Site: BLM Orilla Verde Recreation Area",
+    "MLOC_LATITUDE": 36.287421,
+    "MLOC_LONGITUDE": -105.786769,
+    "Location_Details": "Day Use Site: BLM Orilla Verde Recreation Area",
+    "Last_Monitored": "8/17/2026 10:26:00 AM",
+    "CHARACTERISTIC_NAME": "Anatoxin",
+    "HAB_Status": "WATCH",
+    "Category_Override": null,
+    "Advisory_Details": "Entire Orilla Verde area is under a WATCH advisory. See <a href=\"https://www.blm.gov/announcement/blm-notifies-public-harmful-algal-blooms-within-rio-grande-del-norte-national-monument\" target=\"_blank\"> BLM press release</a>.",
+    "Map_Upload_Date": "2026-08-20",
+    "Station_ID": "Near - 28RGrand658.7",
+    "ReportedValue_ug_L": "2.1"
+   },
+   "geometry": {
+    "x": -105.786769,
+    "y": 36.28742099999998
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 144,
+    "ASSESSMENT_UNIT_NAME": "Rio Grande (Rio Pueblo de Taos to Red River)",
+    "STATION_NAME": "John Dunn Bridge to Taos Junction Bridge",
+    "MLOC_LATITUDE": 36.5350084072185,
+    "MLOC_LONGITUDE": -105.708933612933,
+    "Location_Details": "John Dunn Bridge to Taos Junction Bridge",
+    "Last_Monitored": "10-13-2026",
+    "CHARACTERISTIC_NAME": "Anatoxin",
+    "HAB_Status": "WATCH",
+    "Category_Override": null,
+    "Advisory_Details": "John Dunn Bridge area is under a WATCH advisory. Additionally, the entire stretch from John Dunn Bridge to Taos Junction Bridge is under a WATCH advisory.",
+    "Map_Upload_Date": "2026-10-30",
+    "Station_ID": "Near - 28RGrand690.9",
+    "ReportedValue_ug_L": "0.92"
+   },
+   "geometry": {
+    "x": -105.708933612933,
+    "y": 36.535008407218484
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 146,
+    "ASSESSMENT_UNIT_NAME": "Nichols Reservoir",
+    "STATION_NAME": "Nichols Reservoir",
+    "MLOC_LATITUDE": 35.69085,
+    "MLOC_LONGITUDE": -105.87709,
+    "Location_Details": "Entire Lake ",
+    "Last_Monitored": "9/24/2026 9:15:00 AM",
+    "CHARACTERISTIC_NAME": "Microcystins",
+    "HAB_Status": "WATCH",
+    "Category_Override": null,
+    "Advisory_Details": "Entire Lake",
+    "Map_Upload_Date": "2026-09-30",
+    "Station_ID": "30NicholsDp",
+    "ReportedValue_ug_L": "<0.15"
+   },
+   "geometry": {
+    "x": -105.87709,
+    "y": 35.69085
+   }
+  }
+ ]
+}

@@ -195,7 +195,7 @@ New Mexico (permits NM..., and the Navajo Nation's NN... where the event's point
 section 2.2; not live until data/rules.json says so)
   EPA Region 6 issues New Mexico's permits, so their 24-hour and five-day noncompliance reports go to EPA, and those filed
   electronically reach this dataset. Few do (2026-11-04 extract): 2 reports under New Mexico permits, both the Town of
-  Taos's (NM0024066, 2026-02 and 2026-10), although EPA's collection-system table lists 59 New Mexico permits
+  Taos's (NM0024066, 2026-02 and 2026-10), although EPA's collection-system table lists 55 New Mexico permits
   (Albuquerque, Santa Fe and Las Cruces among them); and 4 Navajo Nation reports whose point lies in New Mexico (3 under
   the Shiprock plant's NN0020621, 2024-06 to 2025-11, and one under Window Rock's NN0021555, 2026-08, a broken line just
   east of the state line). New Mexico's own notice rule (20.6.2.1203 NMAC: an oral report to NMED within 24 hours)
