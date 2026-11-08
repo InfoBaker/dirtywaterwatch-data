@@ -109,6 +109,11 @@
 #                  DEQ edits it), or_oha_beaches (OHA's beach conditions table, a snapshot: ADVISORY and SEWAGE, in
 #                  season) and the generic ArcGIS block or-oha-hab-advisories (OHA's bloom advisories and
 #                  precautions; ingest/or_transforms.py)
+#                  Tennessee: the generic CSV block tn-tdec-events-report (TDEC's Events Report, an APEX table of
+#                  every overflow, release and bypass since 2020: dates only, county, city and street, no water; the
+#                  session step opens the page first; ingest/tn_transforms.py) and the generic ArcGIS block
+#                  tn-tdec-hab-advisory-status (TDEC's HAB advisories, advisory fields only), and
+#                  tn_tdec_posted_streams (TDEC's posted-streams PDF: standing water-contact advisories, read daily)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

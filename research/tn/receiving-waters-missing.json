@@ -1,0 +1,618 @@
+{
+ "about": "Receiving-water names in Tennessee's records that data/receiving-waters-national.json does not hold for TN: the waters TDEC's HAB advisory layer names (the records read on 2026-11-07, with up to five of their points; rounded to 0.001 degree) and the 25 stream segments of TDEC's posted-streams list under a standing water-contact advisory (Rev. August 2026, 25 segments, with their counties). Spellings that differ only in case, spaces or punctuation are counted together. TDEC's Events Report names no receiving water. Names that are not a water's own ('pond', 'Unnamed (...)', a description of a place) are left out and counted in left_out.",
+ "state": "TN",
+ "waters": 42,
+ "reports": 45,
+ "rows": [
+  {
+   "name": "Beaver Lake",
+   "reports": 3,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.141,
+     -89.823
+    ],
+    [
+     35.141,
+     -89.822
+    ],
+    [
+     35.141,
+     -89.823
+    ]
+   ]
+  },
+  {
+   "name": "Johnson Road Park Lake",
+   "reports": 2,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.069,
+     -89.745
+    ],
+    [
+     35.069,
+     -89.745
+    ]
+   ]
+  },
+  {
+   "name": "Beaver Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Sullivan County"
+   ]
+  },
+  {
+   "name": "Boundless Farms lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Fayette County"
+   ],
+   "points": [
+    [
+     35.201,
+     -89.633
+    ]
+   ]
+  },
+  {
+   "name": "Boyd Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Grundy County"
+   ]
+  },
+  {
+   "name": "Browns Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Davidson County"
+   ]
+  },
+  {
+   "name": "Casper lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.372,
+     -89.838
+    ]
+   ]
+  },
+  {
+   "name": "Citico Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Hamilton County"
+   ]
+  },
+  {
+   "name": "Coro Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.009,
+     -90.115
+    ]
+   ]
+  },
+  {
+   "name": "Cypress Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Shelby County"
+   ]
+  },
+  {
+   "name": "Davie Plantation Park Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.221,
+     -89.761
+    ]
+   ]
+  },
+  {
+   "name": "Davies Plantation Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.222,
+     -89.762
+    ]
+   ]
+  },
+  {
+   "name": "Dickson Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Dickson County"
+   ],
+   "points": [
+    [
+     36.081,
+     -87.405
+    ]
+   ]
+  },
+  {
+   "name": "Dry Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Davidson County"
+   ]
+  },
+  {
+   "name": "Dudley Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Sevier County"
+   ]
+  },
+  {
+   "name": "East Fork Third Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Knox County"
+   ]
+  },
+  {
+   "name": "First Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Knox County"
+   ]
+  },
+  {
+   "name": "Gibson Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Davidson County"
+   ]
+  },
+  {
+   "name": "Goose Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Knox County"
+   ]
+  },
+  {
+   "name": "Hester Rd (Dog Park) Lake Shelby Farms",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.14,
+     -89.809
+    ]
+   ]
+  },
+  {
+   "name": "Hester Rd Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.139,
+     -89.809
+    ]
+   ]
+  },
+  {
+   "name": "Johnson Road Park Lower Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.069,
+     -89.744
+    ]
+   ]
+  },
+  {
+   "name": "Jones Pond",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.14,
+     -89.834
+    ]
+   ]
+  },
+  {
+   "name": "Lake Tenley",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.241,
+     -89.863
+    ]
+   ]
+  },
+  {
+   "name": "Lake Watauga (Centennial Park)",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Davidson County"
+   ],
+   "points": [
+    [
+     36.15,
+     -86.812
+    ]
+   ]
+  },
+  {
+   "name": "Lake at Belle Forest",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Davidson County"
+   ],
+   "points": [
+    [
+     36.081,
+     -86.918
+    ]
+   ]
+  },
+  {
+   "name": "Lever Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Williamson County"
+   ],
+   "points": [
+    [
+     36.005,
+     -87.071
+    ]
+   ]
+  },
+  {
+   "name": "Little Duck River",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Coffee County"
+   ]
+  },
+  {
+   "name": "McCrory Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Davidson County"
+   ]
+  },
+  {
+   "name": "Meads Quarry Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Knox County"
+   ],
+   "points": [
+    [
+     35.952,
+     -83.866
+    ]
+   ]
+  },
+  {
+   "name": "Norris Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Union County"
+   ],
+   "points": [
+    [
+     36.403,
+     -83.838
+    ]
+   ]
+  },
+  {
+   "name": "Old Hickory Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Wilson County"
+   ],
+   "points": [
+    [
+     36.273,
+     -86.511
+    ]
+   ]
+  },
+  {
+   "name": "Poplar Tree Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.304,
+     -90.07
+    ]
+   ]
+  },
+  {
+   "name": "Richland Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Davidson County"
+   ]
+  },
+  {
+   "name": "Second Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Knox County"
+   ]
+  },
+  {
+   "name": "Sinking Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Washington County"
+   ]
+  },
+  {
+   "name": "Stringers Branch",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Hamilton County"
+   ]
+  },
+  {
+   "name": "Third Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Knox County"
+   ]
+  },
+  {
+   "name": "Tributary to Grays Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.147,
+     -89.743
+    ]
+   ]
+  },
+  {
+   "name": "Turkey Creek",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Hamblen County"
+   ]
+  },
+  {
+   "name": "Walnut Grove Lake",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-hab-advisory-status"
+   ],
+   "counties": [
+    "Shelby County"
+   ],
+   "points": [
+    [
+     35.123,
+     -89.786
+    ]
+   ]
+  },
+  {
+   "name": "Wilson Branch",
+   "reports": 1,
+   "sources": [
+    "tn-tdec-bacteriological-advisories"
+   ],
+   "counties": [
+    "Clay County"
+   ]
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Chattanooga Creek",
+   "reports": 1,
+   "how": "the national list holds a water of that name in the same county"
+  },
+  {
+   "name": "Coal Creek",
+   "reports": 1,
+   "how": "the national list holds a water of that name in the same county"
+  },
+  {
+   "name": "Cumberland River",
+   "reports": 1,
+   "how": "the national list holds a water of that name in the same county"
+  },
+  {
+   "name": "Duck River",
+   "reports": 1,
+   "how": "the national list holds a water of that name in the same county"
+  },
+  {
+   "name": "East Fork Poplar Creek",
+   "reports": 1,
+   "how": "the national list holds a water of that name in the same county"
+  },
+  {
+   "name": "Trace Creek",
+   "reports": 1,
+   "how": "the national list holds a water of that name in the same county"
+  }
+ ],
+ "left_out": [
+  {
+   "text": "(a description, not a water's name)",
+   "reports": 3
+  },
+  {
+   "text": "pond",
+   "reports": 2
+  },
+  {
+   "text": "unknown",
+   "reports": 1
+  }
+ ]
+}

@@ -44,11 +44,11 @@ SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
                "record", "transform", "waters", "dedupe", "post", "history", "meta", "raw_notes", "decoded_times",
                "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
-               "short_runs_to_accept", "free_text_scrub"}
+               "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords"}
 PLATFORM_KEYS = {
     "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows", "if_changed"},
     "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata"},
-    "csv": {"url", "params", "csv"}, "json": {"url", "params", "json"}, "rss": {"url", "params"},
+    "csv": {"url", "params", "csv", "session"}, "json": {"url", "params", "json"}, "rss": {"url", "params"},
     "atom": {"url", "params"},
 }
 REQUIRED_KEYS = {"socrata": {"domain", "dataset"}, "arcgis": {"url"}, "csv": {"url"}, "json": {"url"}, "rss": {"url"},
@@ -185,6 +185,21 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
         of = block["out_fields"]
         if not isinstance(of, list) or set(of) - set(block.get("safe_fields") or []):
             errs.append("arcgis out_fields is a list of safe fields (never *)")
+    rc = block.get("round_coords")
+    if rc is not None and (isinstance(rc, bool) or not isinstance(rc, int) or not 0 <= rc <= 6):
+        errs.append("round_coords is a whole number of decimals, 0 to 6")
+    if set(block.get("operator_fields") or []) - set(block.get("safe_fields") or []):
+        errs.append("operator_fields are safe fields")
+    if inner == "csv" and block.get("session") is not None:
+        sp = block["session"]
+        if not isinstance(sp, dict) or set(sp) != {"url", "pattern"} or "{session}" not in str(block.get("url")):
+            errs.append("csv session is {url, pattern} and the download url holds {session}")
+        else:
+            try:
+                if "session" not in re.compile(sp["pattern"]).groupindex:
+                    errs.append("csv session pattern needs a group named session")
+            except re.error as e:
+                errs.append(f"csv session pattern: {e}")
     if inner == "socrata" and block.get("format") not in (None, "json", "csv"):
         errs.append("socrata format is json or csv")
     if block.get("if_changed") is not None:
