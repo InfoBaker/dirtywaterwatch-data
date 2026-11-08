@@ -15,8 +15,8 @@ level: "state"
 #   sewage reports (353 sso, 22 plant_bypass, 2 bypass); 47 dropped by the exclude filters (29 industrial, process or
 #   trade wastewater; 10 another material in a sewer, drain or plant; 5 backups inside buildings; 3 drinking-water
 #   plants). Of the 377: 61 marked as the public's reports (dumping, RV, portable toilets, complaints), 62 titled only
-#   "wastewater" (kept as sewage), 19 naming a water in the title, 37 with no date. By year of discovery: 18 to 38 a
-#   year since 2014 (2021: 34, 2022: 38, 2023: 32, 2024: 19, 2025: 37, 2026 to 11-07: 25). Most in Salt Lake (102),
+#   "wastewater" (kept as sewage), 19 naming a water in the title, 37 with no date. By year of discovery: 19 to 38 a
+#   year since 2017 (2014 to 2016: 10 to 18; 2021: 34, 2022: 38, 2023: 32, 2024: 19, 2025: 37, 2026 to 11-07: 25). Most in Salt Lake (102),
 #   Utah (50), Weber (28) and Davis (26) counties. One (American Fork, 2026-08-17) is also EPA's eRule report and is
 #   linked to it (duplicate_of).
 # Not in the layer: an end time, a receipt or report time, an operator or permit, a volume (only in the summary, not
