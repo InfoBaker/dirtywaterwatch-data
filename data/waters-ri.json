@@ -1,7 +1,7 @@
 {
  "state": "RI",
- "source": "openboatlaunch out/water snapshot 2026-11-01",
- "count": 88,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 89,
  "waters": [
   {
    "slug": "100-acre-cove-ri",
@@ -12,10 +12,10 @@
     "Barrington"
    ],
    "bbox": [
-    -71.32411,
+    -71.324111,
     41.7367,
-    -71.29442,
-    41.78049
+    -71.294419,
+    41.780582
    ],
    "wikidata": null,
    "charted": true,
@@ -23,6 +23,15 @@
    "launches": [
     "walker-farm-ri"
    ],
+   "water_id": "100-acre-cove-ri",
+   "gnis_id": null,
+   "geometry_hash": "904bf2827d043446afed29016a2ab01350c26784c475ed38503e63d276838e95",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -35,9 +44,9 @@
     "North Kingstown"
    ],
    "bbox": [
-    -71.42023,
+    -71.420229,
     41.61766,
-    -71.40153,
+    -71.401531,
     41.62669
    ],
    "wikidata": "Q49372188",
@@ -46,6 +55,15 @@
    "launches": [
     "allen-harbor-ri"
    ],
+   "water_id": "allen-harbor-ri",
+   "gnis_id": "1218114",
+   "geometry_hash": "dbc072a7ea61570dcd5a9ed7d4c27d1320facfb8bfd10338cc8f6b933069d8de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -57,10 +75,10 @@
     "Alton"
    ],
    "bbox": [
-    -71.72253,
-    41.43789,
-    -71.71453,
-    41.44629
+    -71.722532,
+    41.437889,
+    -71.714528,
+    41.446295
    ],
    "wikidata": null,
    "charted": false,
@@ -68,6 +86,15 @@
    "launches": [
     "alton-pond-landing-ri"
    ],
+   "water_id": "alton-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "9605e0f770fa133cf4ded330ba3cde9e2fbd6cdcddd4a1e9954c44b34745a426",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -79,10 +106,10 @@
     "South Kingstown"
    ],
    "bbox": [
-    -71.51597,
-    41.4577,
-    -71.51105,
-    41.46151
+    -71.515967,
+    41.457701,
+    -71.51091,
+    41.461512
    ],
    "wikidata": null,
    "charted": false,
@@ -90,6 +117,15 @@
    "launches": [
     "asa-pond-carry-in-access-ri"
    ],
+   "water_id": "asa-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "700a09e614c5446bed193704066ef1edb86c45f4f00acfcffe212092c4668cba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -101,10 +137,10 @@
     "Rockville"
    ],
    "bbox": [
-    -71.76055,
-    41.49934,
-    -71.75111,
-    41.5024
+    -71.760549,
+    41.499344,
+    -71.751105,
+    41.502401
    ],
    "wikidata": null,
    "charted": false,
@@ -112,6 +148,15 @@
    "launches": [
     "ashville-pond-carry-in-access-ri"
    ],
+   "water_id": "ashville-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "3e8e29b8fba4ff2b861f9b9f0d6b5194cc4f650b21dab398bd7fb03b9f16feb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -123,10 +168,10 @@
     "West Kingston"
    ],
    "bbox": [
-    -71.56703,
-    41.49875,
+    -71.567035,
+    41.498749,
     -71.56299,
-    41.50531
+    41.505341
    ],
    "wikidata": "Q49299057",
    "charted": false,
@@ -134,6 +179,15 @@
    "launches": [
     "barber-pond-carry-in-access-ri"
    ],
+   "water_id": "barbers-pond-ri",
+   "gnis_id": "1219571",
+   "geometry_hash": "deccd3ba5e9746335c1655b87bfa4b4d1cb5216e67021d70f4ec09fde1c92b65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -159,10 +213,10 @@
     "Barrington"
    ],
    "bbox": [
-    -71.32847,
+    -71.328472,
     41.73258,
-    -71.28989,
-    41.78069
+    -71.289886,
+    41.780694
    ],
    "wikidata": "Q4863684",
    "charted": true,
@@ -170,6 +224,15 @@
    "launches": [
     "barrington-river-boat-launch-ri"
    ],
+   "water_id": "barrington-river-ri",
+   "gnis_id": "1219587",
+   "geometry_hash": "e0670ca8e42a0674ac3d1e404edf56cc8876d6f32425a719087ba1a5e0be89d2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -181,10 +244,10 @@
     "West Greenwich"
    ],
    "bbox": [
-    -71.81757,
-    41.5689,
-    -71.77832,
-    41.58396
+    -71.817575,
+    41.568896,
+    -71.778323,
+    41.583965
    ],
    "wikidata": null,
    "charted": false,
@@ -192,6 +255,15 @@
    "launches": [
     "beach-pond-ri"
    ],
+   "water_id": "beach-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "d3fe961cb833a30c358dc57db3b9606aac75c30669655fbc0626cc84893efe3d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -203,10 +275,10 @@
     "Richmond"
    ],
    "bbox": [
-    -71.64668,
-    41.44763,
-    -71.62261,
-    41.57562
+    -71.646682,
+    41.447632,
+    -71.622608,
+    41.575617
    ],
    "wikidata": null,
    "charted": false,
@@ -214,6 +286,15 @@
    "launches": [
     "beaver-river-carry-in-access-ri"
    ],
+   "water_id": "beaver-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "4be1bfbbbd4440285acdd11f7881125b5e48c2d286fc653944d813fdfb45fc79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -225,10 +306,10 @@
     "North Kingstown"
    ],
    "bbox": [
-    -71.48542,
-    41.55807,
-    -71.47258,
-    41.56952
+    -71.485421,
+    41.55799,
+    -71.472583,
+    41.569518
    ],
    "wikidata": null,
    "charted": false,
@@ -236,6 +317,15 @@
    "launches": [
     "bellville-pond-boat-launch-ri"
    ],
+   "water_id": "belleville-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "3842df0719a9683d12749299ea89bc86124dc64a211db34ed0957555d3d4b5df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -247,10 +337,10 @@
     "West Greenwich"
    ],
    "bbox": [
-    -71.62251,
-    41.6207,
-    -71.61145,
-    41.66522
+    -71.622508,
+    41.620705,
+    -71.611449,
+    41.665224
    ],
    "wikidata": null,
    "charted": false,
@@ -258,6 +348,15 @@
    "launches": [
     "big-river-weaver-hill-rd-ri"
    ],
+   "water_id": "big-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "797e6b61f09822a93280bc3e8690d61311449d688d7c15e7f738ad98ef620a29",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -269,10 +368,10 @@
     "Wakefield"
    ],
    "bbox": [
-    -71.50441,
-    41.41871,
-    -71.50014,
-    41.42259
+    -71.504405,
+    41.418712,
+    -71.499804,
+    41.422587
    ],
    "wikidata": null,
    "charted": true,
@@ -280,6 +379,15 @@
    "launches": [
     "pond-st-ri"
    ],
+   "water_id": "billington-cove-ri",
+   "gnis_id": null,
+   "geometry_hash": "ab0c63d90145d0eb07bc4fc8b0c9331b76732f17664b2f3230a963a300089723",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -293,10 +401,10 @@
     "Woonsocket"
    ],
    "bbox": [
-    -71.55495,
-    41.87643,
-    -71.38029,
-    42.01837
+    -71.554953,
+    41.876434,
+    -71.380238,
+    42.018533
    ],
    "wikidata": "Q880926",
    "charted": true,
@@ -308,6 +416,15 @@
     "manville-ri",
     "river-island-park-ri"
    ],
+   "water_id": "blackstone-river-ma",
+   "gnis_id": "1218929",
+   "geometry_hash": "11125e0d2f7a23d8ea76fe2335c0d155bc978a8163d8663a8ab924cab2ca124b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -319,9 +436,9 @@
     "New Shoreham"
    ],
    "bbox": [
-    -72.19765,
-    41.01561,
-    -71.475,
+    -72.197649,
+    41.01553,
+    -71.475001,
     41.37697
    ],
    "wikidata": "Q4927148",
@@ -329,6 +446,20 @@
    "area_km2": 1401.966,
    "launches": [
     "hand-launch-ri"
+   ],
+   "water_id": "block-island-sound-ri",
+   "gnis_id": "1217616",
+   "geometry_hash": "8340d74e15c4375d5739d8fe8eaa41e91945daff80db2f51512076cb2c81a818",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "old-breach-cut-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "old-breach-cut-ri"
    ],
    "advisories": []
   },
@@ -341,10 +472,10 @@
     "Glocester"
    ],
    "bbox": [
-    -71.78019,
-    41.91645,
-    -71.75844,
-    41.92703
+    -71.780188,
+    41.916431,
+    -71.758421,
+    41.927033
    ],
    "wikidata": null,
    "charted": false,
@@ -352,6 +483,15 @@
    "launches": [
     "bowdish-reservoir-boat-launch-ri"
    ],
+   "water_id": "bowdish-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "3cdd3bb26ee2e5ba1aa323484fe067080b1899da5c8eaf43477475dea5916004",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -363,10 +503,10 @@
     "Forestdale"
    ],
    "bbox": [
-    -71.64599,
-    41.95423,
-    -71.55032,
-    42.00928
+    -71.645992,
+    41.954227,
+    -71.550275,
+    42.009278
    ],
    "wikidata": "Q49863688",
    "charted": false,
@@ -374,6 +514,15 @@
    "launches": [
     "branch-river-carry-in-access-ri"
    ],
+   "water_id": "branch-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "6f4cdbf73fec65cb0b529952dd4da224e66631c18a98f67111b2e0dad2db0f21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -385,10 +534,10 @@
     "West Greenwich"
    ],
    "bbox": [
-    -71.70378,
-    41.59543,
-    -71.6985,
-    41.60268
+    -71.703778,
+    41.59541,
+    -71.698469,
+    41.602682
    ],
    "wikidata": null,
    "charted": false,
@@ -396,6 +545,15 @@
    "launches": [
     "breakhart-pond-carry-in-access-ri"
    ],
+   "water_id": "breakheart-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "b5473c4bfc22790b9d47525b0aeaa9768f92a48779e8569edce6c6bd755bbbc7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -407,10 +565,10 @@
     "Barrington"
    ],
    "bbox": [
-    -71.32647,
-    41.73155,
+    -71.326467,
+    41.731549,
     -71.31386,
-    41.73733
+    41.737327
    ],
    "wikidata": "Q49700110",
    "charted": false,
@@ -419,6 +577,15 @@
     "brickyard-pond-boat-launch-ri",
     "brickyard-pond-carry-in-access-ri"
    ],
+   "water_id": "brickyard-pond-ri",
+   "gnis_id": "1219849",
+   "geometry_hash": "c9e9111e462fe75287feba40d32f5919e2d4be117d806dc166b4a37431d31ac6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -445,10 +612,10 @@
     "Bristol"
    ],
    "bbox": [
-    -71.24696,
-    41.69574,
-    -71.2408,
-    41.70392
+    -71.246959,
+    41.695741,
+    -71.240801,
+    41.703919
    ],
    "wikidata": null,
    "charted": true,
@@ -456,6 +623,15 @@
    "launches": [
     "bristol-narrows-ri"
    ],
+   "water_id": "bristol-narrows-ri",
+   "gnis_id": null,
+   "geometry_hash": "dd808fc3564d6f1c5b38ab9aa71c83b7eb9f5f79f607ca3e4222b8a73a1a5486",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -467,10 +643,10 @@
     "Richmond"
    ],
    "bbox": [
-    -71.69297,
-    41.55574,
-    -71.68552,
-    41.56152
+    -71.692973,
+    41.555742,
+    -71.685521,
+    41.561517
    ],
    "wikidata": null,
    "charted": false,
@@ -478,6 +654,15 @@
    "launches": [
     "browning-mill-pond-carry-in-access-ri"
    ],
+   "water_id": "browning-mill-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "a6115cd28574c3c8e6373ebe37d903310978e90017990a5b468849153466b650",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -489,10 +674,10 @@
     "West Greenwich"
    ],
    "bbox": [
-    -71.60764,
-    41.6419,
-    -71.59604,
-    41.64543
+    -71.607637,
+    41.641904,
+    -71.596043,
+    41.645429
    ],
    "wikidata": "Q49700186",
    "charted": false,
@@ -500,6 +685,15 @@
    "launches": [
     "big-river-burnt-saw-mill-rd-ri"
    ],
+   "water_id": "capwell-mill-pond-ri",
+   "gnis_id": "1218290",
+   "geometry_hash": "cab47e835bf654e9b962f1f22b1b56975146f08e093ab2e9e03fae65858b970e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -511,10 +705,10 @@
     "Greene"
    ],
    "bbox": [
-    -71.7768,
-    41.69313,
-    -71.76875,
-    41.70014
+    -71.776801,
+    41.693127,
+    -71.768462,
+    41.700145
    ],
    "wikidata": "Q49300267",
    "charted": false,
@@ -522,6 +716,15 @@
    "launches": [
     "carbuncle-pond-boat-launch-ri"
    ],
+   "water_id": "carbuncle-pond-ri",
+   "gnis_id": "1218236",
+   "geometry_hash": "7c0b08c04c82edfb6a7923ed082ddaa0553aa09d8674daa0a7687b34d8672c7c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -547,9 +750,9 @@
     "North Kingstown"
    ],
    "bbox": [
-    -71.45434,
-    41.52045,
-    -71.44409,
+    -71.454345,
+    41.520446,
+    -71.444095,
     41.52596
    ],
    "wikidata": null,
@@ -558,6 +761,15 @@
    "launches": [
     "gilbert-stuart-ri"
    ],
+   "water_id": "carr-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "ddaba3f3e8e2a010a8472052816ca49b858678a62ca3ca6f294404888ac5a0ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -584,9 +796,9 @@
    ],
    "bbox": [
     -71.80139,
-    41.37589,
-    -71.78832,
-    41.38442
+    41.375885,
+    -71.788319,
+    41.384423
    ],
    "wikidata": "Q49300451",
    "charted": false,
@@ -594,6 +806,15 @@
    "launches": [
     "chapman-pond-boat-launch-ri"
    ],
+   "water_id": "chapman-pond-ri",
+   "gnis_id": "1217644",
+   "geometry_hash": "ee4fcdd4771c31cdb377f23ab254811190130027cd76e4485487bd9250f59897",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -605,9 +826,9 @@
     "West Kingston"
    ],
    "bbox": [
-    -71.56896,
-    41.45015,
-    -71.5468,
+    -71.568963,
+    41.450146,
+    -71.546801,
     41.48742
    ],
    "wikidata": null,
@@ -616,6 +837,15 @@
    "launches": [
     "taylors-landing-ri"
    ],
+   "water_id": "chipuxet-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "172b8961406287a3bdbb423b51e373d05f72df0e22774a2dbae844054c303a51",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -627,16 +857,56 @@
     "Glocester"
    ],
    "bbox": [
-    -71.78974,
-    41.92136,
-    -71.78638,
-    41.92522
+    -71.789738,
+    41.921147,
+    -71.786382,
+    41.925221
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.055,
    "launches": [
     "clarkville-pond-boat-launch-ri"
+   ],
+   "water_id": "clarkville-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "e26167b4cd97d7ecce1279308c1c662f96f7d3e82c01ac6995c72a71902173fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coddington-cove-ri",
+   "name": "Coddington Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Middletown"
+   ],
+   "bbox": [
+    -71.325519,
+    41.519481,
+    -71.311291,
+    41.537169
+   ],
+   "wikidata": "Q49375272",
+   "charted": true,
+   "area_km2": 1.695,
+   "launches": [],
+   "water_id": "coddington-cove-ri",
+   "gnis_id": "1218133",
+   "geometry_hash": "4894cba5b901d4be05bb54781eb90803c00ea7beae8181bc48c9a78eba3b2a97",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "stillwater-basin-ri"
    ],
    "advisories": []
   },
@@ -650,9 +920,9 @@
     "Newport"
    ],
    "bbox": [
-    -71.39884,
-    41.44256,
-    -71.30316,
+    -71.398839,
+    41.4425,
+    -71.303161,
     41.57266
    ],
    "wikidata": null,
@@ -664,6 +934,27 @@
     "kings-park-ri",
     "washington-st-ri",
     "willow-street-boat-ramp-ri"
+   ],
+   "water_id": "east-passage-ri",
+   "gnis_id": null,
+   "geometry_hash": "514c33c6ac4881ae8558e89d52d03e1dc580aa030b5db5747a8010a4f9af8cd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "newport-harbor-ri",
+    "sheffield-cove-ri",
+    "west-cove-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "coasters-harbor-boat-launch-ri",
+    "cranston-cove-boat-launch-ri"
+   ],
+   "slug_aliases": [
+    "newport-harbor-ri",
+    "sheffield-cove-ri",
+    "west-cove-ri"
    ],
    "advisories": []
   },
@@ -677,9 +968,9 @@
    ],
    "bbox": [
     -71.64795,
-    41.66525,
-    -71.59393,
-    41.71805
+    41.665249,
+    -71.593928,
+    41.718055
    ],
    "wikidata": null,
    "charted": false,
@@ -687,6 +978,15 @@
    "launches": [
     "zeke-s-bridge-ri"
    ],
+   "water_id": "flat-river-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "9b0778796f5a7552c9cb57c467688125fa31c06f954a72a8e925dbe5091c182c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -720,6 +1020,15 @@
    "launches": [
     "fogland-boat-launch-ri"
    ],
+   "water_id": "fogland-ri",
+   "gnis_id": "1219473",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -731,10 +1040,10 @@
     "Jamestown"
    ],
    "bbox": [
-    -71.39808,
-    41.48821,
-    -71.39437,
-    41.4922
+    -71.398077,
+    41.488214,
+    -71.394371,
+    41.492202
    ],
    "wikidata": null,
    "charted": true,
@@ -742,6 +1051,15 @@
    "launches": [
     "fort-getty-ri"
    ],
+   "water_id": "fox-hill-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "d6cf71bf391b47877f8d2ec7d49b3f8d05bca25742e8b03ebee9a7669c29019b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -753,10 +1071,10 @@
     "Smithfield"
    ],
    "bbox": [
-    -71.51818,
-    41.88859,
-    -71.5065,
-    41.90183
+    -71.518185,
+    41.888389,
+    -71.506496,
+    41.901825
    ],
    "wikidata": null,
    "charted": false,
@@ -764,6 +1082,15 @@
    "launches": [
     "georgiaville-pond-boat-launch-ri"
    ],
+   "water_id": "georgiaville-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "28aaa498843ea22c86430e281ac8a7217feb2a8745d1e66c35d8d276f29021f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -795,10 +1122,10 @@
     "Warwick"
    ],
    "bbox": [
-    -71.46257,
-    41.70277,
-    -71.4547,
-    41.70759
+    -71.462575,
+    41.702774,
+    -71.45468,
+    41.707592
    ],
    "wikidata": "Q35701771",
    "charted": false,
@@ -806,6 +1133,15 @@
    "launches": [
     "gorton-pond-carry-in-access-ri"
    ],
+   "water_id": "gorton-pond-ri",
+   "gnis_id": "1218414",
+   "geometry_hash": "dc08394933da453ca28b1d8a71bdd9efa15522d2e18b46fb01e9b54422f1c1f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -817,10 +1153,10 @@
     "New Shoreham"
    ],
    "bbox": [
-    -71.58987,
-    41.18073,
-    -71.56935,
-    41.2034
+    -71.589867,
+    41.180734,
+    -71.569352,
+    41.203403
    ],
    "wikidata": null,
    "charted": true,
@@ -828,6 +1164,15 @@
    "launches": [
     "great-salt-pond-boat-launch-ri"
    ],
+   "water_id": "great-salt-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "ed7d58c2a544517c2e0ee7f7a7cdbfc94b306314cdb4b8618d388996f2a834d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -839,10 +1184,10 @@
     "East Greenwich"
    ],
    "bbox": [
-    -71.45654,
-    41.64691,
-    -71.4402,
-    41.66642
+    -71.456544,
+    41.646911,
+    -71.440143,
+    41.666417
    ],
    "wikidata": null,
    "charted": true,
@@ -852,6 +1197,15 @@
     "goddard-park-ri",
     "long-street-boat-ramp-ri"
    ],
+   "water_id": "greenwich-cove-ri",
+   "gnis_id": null,
+   "geometry_hash": "22ecf1a95c868351ae676e26b7ba31a517c0eaa90323c567cb9bef3517bac6eb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -863,10 +1217,10 @@
     "Hope"
    ],
    "bbox": [
-    -71.57233,
-    41.73106,
-    -71.56402,
-    41.73817
+    -71.572328,
+    41.730941,
+    -71.564017,
+    41.738169
    ],
    "wikidata": null,
    "charted": false,
@@ -874,6 +1228,15 @@
    "launches": [
     "pawtuxet-river-ri"
    ],
+   "water_id": "hope-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "4ad18c1d5fa93396e3308e8d9ee253e75326708273e3a0790efba13fcfee5efb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -887,7 +1250,7 @@
    "bbox": [
     -71.7115,
     41.82403,
-    -71.70766,
+    -71.707656,
     41.82672
    ],
    "wikidata": null,
@@ -896,6 +1259,15 @@
    "launches": [
     "hopkins-mill-pond-carry-in-access-ri"
    ],
+   "water_id": "hopkins-mills-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "2b41f9a83b161b2c2619a3b611700f7e22c93315ae6a28b615383cf41ae90beb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -907,10 +1279,10 @@
     "Narragansett"
    ],
    "bbox": [
-    -71.47556,
+    -71.475559,
     41.47314,
-    -71.46138,
-    41.4879
+    -71.461381,
+    41.487911
    ],
    "wikidata": "Q7357777",
    "charted": false,
@@ -918,6 +1290,15 @@
    "launches": [
     "indian-lake-boat-launch-ri"
    ],
+   "water_id": "indian-lake-ri",
+   "gnis_id": "1219920",
+   "geometry_hash": "ad497fd0ab1529a61ffac93aada54d68d07698e011c6f2153146ae941170b12a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -943,10 +1324,10 @@
     "Fiskeville"
    ],
    "bbox": [
-    -71.55112,
-    41.75076,
-    -71.54684,
-    41.75458
+    -71.551123,
+    41.750589,
+    -71.546838,
+    41.754852
    ],
    "wikidata": null,
    "charted": false,
@@ -954,6 +1335,15 @@
    "launches": [
     "jl-curran-ri"
    ],
+   "water_id": "john-l-curran-upper-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "88960b740cb2b34c276e1afaf592d99a8c7169dcf2a72d8ead5834f78166d249",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -985,10 +1375,10 @@
     "Glocester"
    ],
    "bbox": [
-    -71.69679,
-    41.87213,
-    -71.68433,
-    41.88721
+    -71.696794,
+    41.871952,
+    -71.684326,
+    41.887211
    ],
    "wikidata": null,
    "charted": false,
@@ -996,6 +1386,15 @@
    "launches": [
     "keech-pond-boat-launch-ri"
    ],
+   "water_id": "keech-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "98957f561b265757021564a5c06324dd9a2ab67c8fa2b14af812498472b4d901",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1021,10 +1420,10 @@
     "Tiogue"
    ],
    "bbox": [
-    -71.55692,
-    41.66874,
-    -71.54419,
-    41.68493
+    -71.556957,
+    41.668484,
+    -71.544189,
+    41.685132
    ],
    "wikidata": "Q49702951",
    "charted": false,
@@ -1033,6 +1432,15 @@
     "tiogue-lake-north-glen-drive-ri",
     "tiogue-lake-boat-launch-ri"
    ],
+   "water_id": "lake-tiogue-ri",
+   "gnis_id": "1218309",
+   "geometry_hash": "d1ad8a1daeb72537c297469442c085c6a1b6fab7a99fd6b8e1f9c19dd8294197",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1062,9 +1470,9 @@
     "Glocester"
    ],
    "bbox": [
-    -71.75991,
-    41.91307,
-    -71.75316,
+    -71.759906,
+    41.913072,
+    -71.753157,
     41.91936
    ],
    "wikidata": "Q6478419",
@@ -1073,6 +1481,15 @@
    "launches": [
     "lake-washington-boat-launch-ri"
    ],
+   "water_id": "lake-washington-ri",
+   "gnis_id": "1219238",
+   "geometry_hash": "e594853019f0dde0cac5e4ff402d7bd7f6d37d2bba60e753531458a1167af812",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1084,10 +1501,10 @@
     "Hope Valley"
    ],
    "bbox": [
-    -71.72935,
-    41.50842,
-    -71.71314,
-    41.52307
+    -71.729352,
+    41.508418,
+    -71.713142,
+    41.523072
    ],
    "wikidata": "Q49304500",
    "charted": false,
@@ -1095,6 +1512,15 @@
    "launches": [
     "locustville-pond-boat-launch-ri"
    ],
+   "water_id": "locustville-pond-ri",
+   "gnis_id": "1217881",
+   "geometry_hash": "a7898490fdc6b1a697e9427066994d02b4ec65dbb6c50c3f73234fc55144036d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1109,7 +1535,7 @@
     -71.43572,
     41.78912,
     -71.42944,
-    41.79986
+    41.799863
    ],
    "wikidata": "Q85846577",
    "charted": false,
@@ -1117,6 +1543,15 @@
    "launches": [
     "j-t-owens-ri"
    ],
+   "water_id": "mashapaug-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "125175f5d284556fc3860f4986fb3fe01d3a5fce151ccdb190eaadcc919ad16a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1149,10 +1584,10 @@
     "Wood River Junction"
    ],
    "bbox": [
-    -71.69192,
-    41.43783,
-    -71.68926,
-    41.44396
+    -71.691924,
+    41.437833,
+    -71.689258,
+    41.443961
    ],
    "wikidata": null,
    "charted": false,
@@ -1160,6 +1595,15 @@
    "launches": [
     "meadow-brook-pond-carry-in-access-ri"
    ],
+   "water_id": "meadow-brook-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "499b8178610c897fcca0dd87f8c4a5756434a1df5d7feb17cca77da7411f0b71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1171,10 +1615,10 @@
     "Rockville"
    ],
    "bbox": [
-    -71.78789,
-    41.51373,
-    -71.73427,
-    41.5274
+    -71.787892,
+    41.513727,
+    -71.734269,
+    41.527397
    ],
    "wikidata": null,
    "charted": false,
@@ -1182,6 +1626,15 @@
    "launches": [
     "moscow-pond-ri"
    ],
+   "water_id": "moscow-brook-ri",
+   "gnis_id": null,
+   "geometry_hash": "827b21c8db2e4f471345d8beec3b04e2734585622abd149686a06c9c4a712b19",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1204,10 +1657,10 @@
     "Warwick"
    ],
    "bbox": [
-    -71.45822,
+    -71.458219,
     41.44754,
-    -71.13216,
-    41.8273
+    -71.132161,
+    41.827299
    ],
    "wikidata": "Q1241943",
    "charted": true,
@@ -1236,6 +1689,34 @@
     "sunrise-drive-boat-ramp-ri",
     "wilson-park-ri"
    ],
+   "water_id": "narragansett-bay-ma",
+   "gnis_id": "1218465",
+   "geometry_hash": "6ccb4e4ee414d479bc882727d8529f7dcd9befdd85cb6077da1481cb7b9287fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "brenton-cove-ri",
+    "bristol-harbor-ri",
+    "bullock-cove-ri",
+    "chase-cove-ri",
+    "kickamuit-river-ri",
+    "mill-cove-ri",
+    "pawtuxet-cove-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kickamuit-river-boat-launch-ri"
+   ],
+   "slug_aliases": [
+    "brenton-cove-ri",
+    "bristol-harbor-ri",
+    "bullock-cove-ri",
+    "chase-cove-ri",
+    "kickamuit-river-ri",
+    "mill-cove-ri",
+    "pawtuxet-cove-ri"
+   ],
    "advisories": []
   },
   {
@@ -1254,6 +1735,20 @@
     "narrow-river-boat-launch-ri",
     "narrow-river-ri"
    ],
+   "water_id": "narrow-river-ri",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "pettaquamscutt-cove-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "pettaquamscutt-cove-ri"
+   ],
    "advisories": []
   },
   {
@@ -1265,10 +1760,10 @@
     "Charlestown"
    ],
    "bbox": [
-    -71.69876,
-    41.34334,
-    -71.62614,
-    41.38133
+    -71.698758,
+    41.343344,
+    -71.626143,
+    41.38135
    ],
    "wikidata": "Q7358712",
    "charted": true,
@@ -1279,6 +1774,15 @@
     "ninigret-pond-boat-launch-ri",
     "ninigret-pond-carry-in-access-ri"
    ],
+   "water_id": "ninigret-pond-ri",
+   "gnis_id": "1217630",
+   "geometry_hash": "ae009151a02b5b7b70b1d313f5b309ee1de23ffcae314cafd9151de669b10b99",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1291,9 +1795,9 @@
    ],
    "bbox": [
     -71.43852,
-    41.88663,
-    -71.42644,
-    41.89679
+    41.886635,
+    -71.426375,
+    41.896793
    ],
    "wikidata": "Q49702231",
    "charted": false,
@@ -1301,6 +1805,15 @@
    "launches": [
     "olney-pond-boat-launch-ri"
    ],
+   "water_id": "olney-pond-ri",
+   "gnis_id": "1218939",
+   "geometry_hash": "f35e5f530b701cfa4f7b4ac5990d582378e7203af216b6517b1bf47dc36c3967",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1328,9 +1841,9 @@
    ],
    "bbox": [
     -71.71897,
-    41.92269,
-    -71.70245,
-    41.95188
+    41.922694,
+    -71.702452,
+    41.951884
    ],
    "wikidata": null,
    "charted": false,
@@ -1339,6 +1852,15 @@
     "echo-lake-ri",
     "union-pond-ri"
    ],
+   "water_id": "pascoag-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "af8063354874e0cee249e794fd29e99a0ea74d86cf8f1be9dad7760801fadb9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1350,10 +1872,10 @@
     "Warwick"
    ],
    "bbox": [
-    -71.39081,
-    41.74453,
-    -71.3826,
-    41.74784
+    -71.390809,
+    41.744534,
+    -71.382597,
+    41.747941
    ],
    "wikidata": null,
    "charted": true,
@@ -1361,6 +1883,15 @@
    "launches": [
     "passeonkquis-cove-boat-launch-ri"
    ],
+   "water_id": "passeonkquis-cove-ri",
+   "gnis_id": null,
+   "geometry_hash": "ec58d0a11282e0ba4cbb092faf8cbbe18d165a8b67d7071720bff702d0b733b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1375,10 +1906,10 @@
     "Wood River Junction"
    ],
    "bbox": [
-    -71.85984,
-    41.32036,
-    -71.59025,
-    41.46108
+    -71.859838,
+    41.320364,
+    -71.590253,
+    41.461079
    ],
    "wikidata": null,
    "charted": true,
@@ -1390,6 +1921,15 @@
     "richmond-landing-ri",
     "white-rock-ri"
    ],
+   "water_id": "pawcatuck-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "77ebf85e9e0b7e09d5404caaf05c70d314aeae9e72f78c2c9fc3aaf0fc46d514",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1401,10 +1941,10 @@
     "Pawtucket"
    ],
    "bbox": [
-    -71.38432,
-    41.85743,
-    -71.37689,
-    41.87643
+    -71.384324,
+    41.857432,
+    -71.376891,
+    41.876434
    ],
    "wikidata": null,
    "charted": true,
@@ -1413,6 +1953,15 @@
     "old-state-pier-ri",
     "town-landing-ri"
    ],
+   "water_id": "pawtucket-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "f636b196fa9129e52b315af18202fa9d9bbe7e90522338fc21e648fae3b3ea01",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1425,10 +1974,10 @@
     "Pawtuxet"
    ],
    "bbox": [
-    -71.51043,
-    41.71519,
-    -71.3763,
-    41.76818
+    -71.510431,
+    41.715192,
+    -71.376299,
+    41.768321
    ],
    "wikidata": null,
    "charted": true,
@@ -1437,6 +1986,15 @@
     "aborn-street-boat-ramp-ri",
     "pawtuxet-village-park-ri"
    ],
+   "water_id": "pawtuxet-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "c50876b04bd067d3f62d168ae23ba279f5e132a7ea3a8761fdacdf054a63e172",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1452,10 +2010,10 @@
     "Wakefield"
    ],
    "bbox": [
-    -71.52602,
-    41.37483,
-    -71.48974,
-    41.43008
+    -71.526019,
+    41.374834,
+    -71.489741,
+    41.430181
    ],
    "wikidata": "Q7208059",
    "charted": true,
@@ -1464,6 +2022,17 @@
     "galilee-ri",
     "gooseberry-rd-ri",
     "marina-park-ri"
+   ],
+   "water_id": "point-judith-pond-ri",
+   "gnis_id": "1219862",
+   "geometry_hash": "30e417c810126313f305acdbdabada49e5e4e78514656649d5bf2b286f7b28fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "camp-fuller-kayaks-ri"
    ],
    "advisories": []
   },
@@ -1476,10 +2045,10 @@
     "Potowomut"
    ],
    "bbox": [
-    -71.4582,
-    41.6301,
-    -71.45339,
-    41.63631
+    -71.458204,
+    41.630103,
+    -71.453362,
+    41.636405
    ],
    "wikidata": null,
    "charted": false,
@@ -1487,6 +2056,15 @@
    "launches": [
     "potowomut-pond-carry-in-access-ri"
    ],
+   "water_id": "potowomut-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "af2d1518c16afdf9c860c58f3151350d809a291e6b91eb8c174ff2848b0bbcaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1498,10 +2076,10 @@
     "Providence"
    ],
    "bbox": [
-    -71.40991,
-    41.72244,
-    -71.34545,
-    41.82664
+    -71.409913,
+    41.722443,
+    -71.345452,
+    41.826641
    ],
    "wikidata": "Q7252469",
    "charted": true,
@@ -1509,6 +2087,15 @@
    "launches": [
     "corliss-landing-ri"
    ],
+   "water_id": "providence-river-ri",
+   "gnis_id": "1219586",
+   "geometry_hash": "750ef242e82a3a68753d50cfb304fb177fb2d408104ee6b1249829c29f24b821",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1520,10 +2107,10 @@
     "Quonochontaug"
    ],
    "bbox": [
-    -71.72323,
+    -71.723226,
     41.33073,
-    -71.71758,
-    41.33663
+    -71.717578,
+    41.336626
    ],
    "wikidata": null,
    "charted": true,
@@ -1531,6 +2118,15 @@
    "launches": [
     "quonochontaug-breachway-boat-launch-ri"
    ],
+   "water_id": "quonochontaug-breachway-ri",
+   "gnis_id": null,
+   "geometry_hash": "06823986d91a6e5cf1abe3175ac4a6b47dbecd9b2b9fe00c6615a8807fef1d1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1543,9 +2139,9 @@
     "Newport"
    ],
    "bbox": [
-    -71.57821,
-    41.15328,
-    -70.8,
+    -71.578209,
+    41.153282,
+    -70.800001,
     41.50925
    ],
    "wikidata": "Q2148190",
@@ -1554,6 +2150,22 @@
    "launches": [
     "kings-beach-ri",
     "monahan-s-dock-ri"
+   ],
+   "water_id": "rhode-island-sound-ri",
+   "gnis_id": "1219860",
+   "geometry_hash": "bf453a5ab581cc7b045026d70e4c989c4b9b523022166127ae374ce64609282e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "castle-hill-cove-ri",
+    "river-ledge-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "castle-hill-cove-ri",
+    "river-ledge-ri"
    ],
    "advisories": []
   },
@@ -1566,10 +2178,10 @@
     "Richmond"
    ],
    "bbox": [
-    -71.70622,
-    41.54937,
-    -71.6643,
-    41.59648
+    -71.706221,
+    41.549369,
+    -71.664299,
+    41.596482
    ],
    "wikidata": null,
    "charted": false,
@@ -1577,6 +2189,15 @@
    "launches": [
     "roaring-brook-pond-carry-in-access-ri"
    ],
+   "water_id": "roaring-brook-ri",
+   "gnis_id": null,
+   "geometry_hash": "844aa8a11958bd5aa08813c388c2a2a2a7c6baad0dca38e2ccdfe69e88531100",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1588,10 +2209,10 @@
     "New Shoreham"
    ],
    "bbox": [
-    -71.57357,
-    41.21904,
-    -71.56562,
-    41.22487
+    -71.573694,
+    41.219044,
+    -71.565621,
+    41.224865
    ],
    "wikidata": null,
    "charted": true,
@@ -1599,6 +2220,15 @@
    "launches": [
     "corn-neck-road-ri"
    ],
+   "water_id": "sachem-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "47c972e3ead4cc0010e0c036e99050ca4db01c2ceff217df590ebd7ce684a8f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1624,10 +2254,10 @@
     "Little Compton"
    ],
    "bbox": [
-    -71.1964,
-    41.46358,
-    -71.19195,
-    41.46851
+    -71.196399,
+    41.463581,
+    -71.191931,
+    41.468619
    ],
    "wikidata": "Q49390560",
    "charted": true,
@@ -1635,6 +2265,15 @@
    "launches": [
     "sakonnet-point-ri"
    ],
+   "water_id": "sakonnet-harbor-ri",
+   "gnis_id": "1217835",
+   "geometry_hash": "6db3e990fdb102fce6a0cd15aa51efcd5bed8b806b7e0079680902552fbfcab3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1648,10 +2287,10 @@
     "Tiverton"
    ],
    "bbox": [
-    -71.24779,
-    41.4621,
-    -71.18935,
-    41.65766
+    -71.247789,
+    41.462101,
+    -71.189351,
+    41.657659
    ],
    "wikidata": null,
    "charted": true,
@@ -1661,6 +2300,24 @@
     "seapowet-ri",
     "stone-bridge-boat-ri",
     "third-beach-ri"
+   ],
+   "water_id": "sakonnet-river-ri",
+   "gnis_id": null,
+   "geometry_hash": "1750da5c3c15768e8ecbcdedc9d217756a376a1e2c79ccb85a10813ff642400d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "blue-bill-cove-ri",
+    "sachuest-bay-ri",
+    "sapowet-cove-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "blue-bill-cove-ri",
+    "sachuest-bay-ri",
+    "sapowet-cove-ri"
    ],
    "advisories": []
   },
@@ -1673,10 +2330,10 @@
     "East Providence"
    ],
    "bbox": [
-    -71.39748,
-    41.81034,
-    -71.37374,
-    41.85743
+    -71.397477,
+    41.810337,
+    -71.373735,
+    41.857432
    ],
    "wikidata": "Q7445810",
    "charted": true,
@@ -1684,6 +2341,15 @@
    "launches": [
     "bold-point-ri"
    ],
+   "water_id": "seekonk-river-ri",
+   "gnis_id": "1218732",
+   "geometry_hash": "93642232726938fba504f5ac6e57c05410c6323361c4848aeefc75379c2b4b59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1701,6 +2367,15 @@
    "launches": [
     "shippee-saw-mill-pond-carry-in-access-ri"
    ],
+   "water_id": "shippee-saw-mill-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1712,9 +2387,9 @@
     "North Kingstown"
    ],
    "bbox": [
-    -71.47479,
-    41.53535,
-    -71.46928,
+    -71.474795,
+    41.535348,
+    -71.469283,
     41.54096
    ],
    "wikidata": null,
@@ -1723,6 +2398,15 @@
    "launches": [
     "silver-spring-lake-boat-launch-ri"
    ],
+   "water_id": "silver-spring-lake-ri",
+   "gnis_id": null,
+   "geometry_hash": "9b4f73994c817546ea9482a99c9dd3ee300505055f934f4d672bc891b9e9ba3e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1734,10 +2418,10 @@
     "Little Compton"
    ],
    "bbox": [
-    -71.15066,
-    41.53647,
-    -71.14647,
-    41.54308
+    -71.150656,
+    41.536403,
+    -71.146468,
+    41.543076
    ],
    "wikidata": null,
    "charted": false,
@@ -1745,6 +2429,15 @@
    "launches": [
     "cold-brook-ri"
    ],
+   "water_id": "simmons-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "01b971f0e5bfcfa90c17f419640e6e42b99e073662ab366850e44afd92161120",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1756,10 +2449,10 @@
     "Glocester"
    ],
    "bbox": [
-    -71.68878,
-    41.88424,
-    -71.6733,
-    41.903
+    -71.688775,
+    41.884241,
+    -71.673299,
+    41.903068
    ],
    "wikidata": null,
    "charted": false,
@@ -1767,6 +2460,15 @@
    "launches": [
     "smith-sayles-reservoir-ri"
    ],
+   "water_id": "smith-and-sayles-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "a23332b37fee50633056939538901d2c30d9707e163a6b3b149a952b2b3aa721",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1792,13 +2494,27 @@
    "towns": [
     "Burrillville"
    ],
-   "bbox": null,
+   "bbox": [
+    -71.666273,
+    41.97818,
+    -71.657508,
+    41.98761
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "spring-lake-boat-launch-ri"
    ],
+   "water_id": "spring-lake-ri",
+   "gnis_id": "1218796",
+   "geometry_hash": "e574a2cc497283517cc3b9399688d8b625ffc5e1a83533b1cb57ded6e7a52339",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1810,10 +2526,10 @@
     "Tiverton"
    ],
    "bbox": [
-    -71.1649,
-    41.62709,
-    -71.14796,
-    41.65496
+    -71.164897,
+    41.627085,
+    -71.147961,
+    41.654959
    ],
    "wikidata": "Q49311492",
    "charted": false,
@@ -1821,6 +2537,15 @@
    "launches": [
     "stafford-pond-boat-launch-ri"
    ],
+   "water_id": "stafford-pond-ri",
+   "gnis_id": "1218537",
+   "geometry_hash": "831a2903ec4a7793abc7982152e80885d8704025da81797176c80bcf6f35556f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1847,9 +2572,9 @@
     "Pawtuxet"
    ],
    "bbox": [
-    -71.38971,
-    41.76763,
-    -71.38367,
+    -71.389709,
+    41.767634,
+    -71.383671,
     41.77198
    ],
    "wikidata": null,
@@ -1858,6 +2583,15 @@
    "launches": [
     "stillhouse-cove-boat-launch-ri"
    ],
+   "water_id": "stillhouse-cove-ri",
+   "gnis_id": null,
+   "geometry_hash": "879ee455c3d388144b64df1c0fff513b31ee671ac54f97c221259b5129bd3628",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1869,10 +2603,10 @@
     "Smithfield"
    ],
    "bbox": [
-    -71.55472,
-    41.89851,
-    -71.54001,
-    41.91861
+    -71.554724,
+    41.898511,
+    -71.540008,
+    41.918605
    ],
    "wikidata": null,
    "charted": false,
@@ -1880,6 +2614,15 @@
    "launches": [
     "stump-pond-ri"
    ],
+   "water_id": "stillwater-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "24d02f32906619c3dff88f049625f3ec704efe675fed790ab0cc2c7d212ff1c7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1891,10 +2634,10 @@
     "Exeter"
    ],
    "bbox": [
-    -71.57366,
-    41.63296,
-    -71.56609,
-    41.63702
+    -71.573663,
+    41.632959,
+    -71.566089,
+    41.637023
    ],
    "wikidata": null,
    "charted": false,
@@ -1902,6 +2645,15 @@
    "launches": [
     "tarbox-pond-carry-in-access-ri"
    ],
+   "water_id": "tarbox-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "d627307af72da5f41d1a3dd701b73c47a525cbeabc752e02f23045ebb6245895",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1913,10 +2665,10 @@
     "North Smithfield"
    ],
    "bbox": [
-    -71.59816,
-    41.96231,
-    -71.59014,
-    41.96517
+    -71.598162,
+    41.962311,
+    -71.590141,
+    41.965173
    ],
    "wikidata": null,
    "charted": false,
@@ -1924,6 +2676,15 @@
    "launches": [
     "tarkiln-pond-carry-in-access-ri"
    ],
+   "water_id": "tarkiln-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "91ace877d78874119bbcfc3937bbfc5ef37f4d49ce9752d8862081fc0d1bc048",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1935,10 +2696,10 @@
     "West Greenwich"
    ],
    "bbox": [
-    -71.75899,
-    41.64465,
-    -71.75249,
-    41.65177
+    -71.758993,
+    41.644646,
+    -71.752492,
+    41.65179
    ],
    "wikidata": null,
    "charted": false,
@@ -1946,6 +2707,15 @@
    "launches": [
     "tillinghast-pond-carry-in-access-ri"
    ],
+   "water_id": "tillinghast-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "d2e7bf7183519d2106d6fc89eb81d763c186a7054387df6301d7d4742d43591a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1956,13 +2726,27 @@
    "towns": [
     "South Kingstown"
    ],
-   "bbox": null,
+   "bbox": [
+    -71.557133,
+    41.417566,
+    -71.547378,
+    41.426467
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "tucker-pond-boat-launch-ri"
    ],
+   "water_id": "tucker-pond-ri",
+   "gnis_id": "1217791",
+   "geometry_hash": "d0e42823cee2a0acc11530405de1bc7dee0f48f99538bed942fd186c9c240106",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1975,9 +2759,9 @@
     "Slatersville"
    ],
    "bbox": [
-    -71.67984,
-    41.95331,
-    -71.55702,
+    -71.679841,
+    41.953309,
+    -71.557015,
     41.99967
    ],
    "wikidata": null,
@@ -1988,6 +2772,15 @@
     "mill-pond-ri",
     "slatersville-reservoir-ri"
    ],
+   "water_id": "upper-slatersville-reservoir-ri",
+   "gnis_id": null,
+   "geometry_hash": "9bf44f895502041e27ea21d28175c1c7b81c52f6c7ab2f9f5c5d0239d1446565",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1999,10 +2792,10 @@
     "Burrillville"
    ],
    "bbox": [
-    -71.79853,
-    41.96017,
-    -71.78638,
-    41.97037
+    -71.798526,
+    41.960168,
+    -71.786376,
+    41.970366
    ],
    "wikidata": "Q49703080",
    "charted": false,
@@ -2010,6 +2803,15 @@
    "launches": [
     "wakefield-pond-boat-launch-ri"
    ],
+   "water_id": "wakefield-pond-ri",
+   "gnis_id": "1218872",
+   "geometry_hash": "8f26962309410e1a153e9bcf1420b3a3bd425b293b922067d8aa415212710c48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2021,10 +2823,10 @@
     "Burrillville"
    ],
    "bbox": [
-    -71.77512,
+    -71.775119,
     41.99382,
-    -71.76201,
-    42.02161
+    -71.762009,
+    42.021606
    ],
    "wikidata": "Q7357772",
    "charted": false,
@@ -2032,6 +2834,15 @@
    "launches": [
     "wallum-lake-carry-in-access-ri"
    ],
+   "water_id": "wallum-lake-ma",
+   "gnis_id": "610713",
+   "geometry_hash": "353526da25f0f670fe9df33cf82c07d8c262683f2c3ea8662dee5671e503e06b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2043,9 +2854,9 @@
     "Warren"
    ],
    "bbox": [
-    -71.29737,
-    41.70368,
-    -71.28745,
+    -71.297371,
+    41.703682,
+    -71.287258,
     41.73258
    ],
    "wikidata": "Q7970451",
@@ -2054,6 +2865,15 @@
    "launches": [
     "town-dock-ri"
    ],
+   "water_id": "warren-river-ri",
+   "gnis_id": "1218489",
+   "geometry_hash": "3725ce3151aaefebb8968732db36f5232fcd5722858618fdaa2cd072b2e40de4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2065,10 +2885,10 @@
     "Warwick"
    ],
    "bbox": [
-    -71.39709,
-    41.68287,
-    -71.38118,
-    41.69966
+    -71.397089,
+    41.682866,
+    -71.381107,
+    41.699659
    ],
    "wikidata": null,
    "charted": true,
@@ -2076,6 +2896,15 @@
    "launches": [
     "oakland-beach-ri"
    ],
+   "water_id": "warwick-cove-ri",
+   "gnis_id": null,
+   "geometry_hash": "4edae4420f8377295c9df5a2661bb9cda7504ecf6b84d0caa716c35c35aba156",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2087,10 +2916,10 @@
     "Charlestown"
    ],
    "bbox": [
-    -71.70537,
-    41.37431,
-    -71.67894,
-    41.39326
+    -71.705373,
+    41.374313,
+    -71.678938,
+    41.393264
    ],
    "wikidata": "Q7348593",
    "charted": false,
@@ -2098,6 +2927,15 @@
    "launches": [
     "barton-c-hurley-landing-ri"
    ],
+   "water_id": "watchaug-pond-ri",
+   "gnis_id": "1217669",
+   "geometry_hash": "9709878d5c185e1a900090374ef6e37ab22c5227b9a1e84e5656eef3f405f0c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2123,10 +2961,10 @@
     "Middletown"
    ],
    "bbox": [
-    -71.29241,
-    41.5718,
+    -71.292409,
+    41.571801,
     -71.28453,
-    41.58411
+    41.584109
    ],
    "wikidata": "Q49394838",
    "charted": true,
@@ -2134,6 +2972,15 @@
    "launches": [
     "weaver-cove-boat-launch-ri"
    ],
+   "water_id": "weaver-cove-ri",
+   "gnis_id": "1218152",
+   "geometry_hash": "394fbd6f5c78e3f1a0367357f4e51ec0659461465946d10dc000f00f954859c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2145,9 +2992,9 @@
     "Saunderstown"
    ],
    "bbox": [
-    -71.43593,
+    -71.435929,
     41.44616,
-    -71.37121,
+    -71.371212,
     41.57664
    ],
    "wikidata": null,
@@ -2155,6 +3002,20 @@
    "area_km2": 37.056,
    "launches": [
     "south-ferry-rd-ri"
+   ],
+   "water_id": "west-passage-ri",
+   "gnis_id": null,
+   "geometry_hash": "49c5b1b378eb5276a10f6de0ae05feed7df5f75738fd9658b47a5172ef910756",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "dutch-island-harbor-ri"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "dutch-island-harbor-ri"
    ],
    "advisories": []
   },
@@ -2167,10 +3028,10 @@
     "East Providence"
    ],
    "bbox": [
-    -71.35719,
-    41.77554,
-    -71.3545,
-    41.78058
+    -71.357194,
+    41.775272,
+    -71.354397,
+    41.780585
    ],
    "wikidata": null,
    "charted": false,
@@ -2178,6 +3039,15 @@
    "launches": [
     "willet-pond-carry-in-access-ri"
    ],
+   "water_id": "willett-pond-ri",
+   "gnis_id": null,
+   "geometry_hash": "60f7ceb2639846eafb4b4e1b85866952dfb2915a1aeeec690a27f149d2965913",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2189,9 +3059,9 @@
     "Burrillville"
    ],
    "bbox": [
-    -71.73728,
-    41.96568,
-    -71.72206,
+    -71.737284,
+    41.965684,
+    -71.722056,
     41.97347
    ],
    "wikidata": "Q49703220",
@@ -2200,6 +3070,15 @@
    "launches": [
     "wilson-reservoir-boat-launch-ri"
    ],
+   "water_id": "wilson-reservoir-ri",
+   "gnis_id": "1218792",
+   "geometry_hash": "30a462b7e4e17763a9a6f26a8e0a86e068bb2d2cdea1d4b8f3ab84c42501b231",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2229,10 +3108,10 @@
     "Wyoming"
    ],
    "bbox": [
-    -71.81846,
-    41.42828,
-    -71.68725,
-    41.64446
+    -71.818464,
+    41.428282,
+    -71.687246,
+    41.644457
    ],
    "wikidata": "Q8032259",
    "charted": false,
@@ -2246,6 +3125,15 @@
     "wood-river-rte-165-ri",
     "wyoming-dam-ri"
    ],
+   "water_id": "wood-river-ri",
+   "gnis_id": "212234",
+   "geometry_hash": "80a5fff4e6103e7b8edeca7af4902c2ad694bb005ccc1c0677d5276416cc2e7f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2257,10 +3145,10 @@
     "South Kingstown"
    ],
    "bbox": [
-    -71.59284,
-    41.4285,
-    -71.55779,
-    41.4506
+    -71.592841,
+    41.428503,
+    -71.557785,
+    41.450595
    ],
    "wikidata": "Q38250829",
    "charted": false,
@@ -2268,6 +3156,15 @@
    "launches": [
     "worden-pond-boat-launch-ri"
    ],
+   "water_id": "worden-pond-ri",
+   "gnis_id": "1217798",
+   "geometry_hash": "84dd6da01fb589a0607dda4afd9dfb9a614da5aae1e9289f355c5d351e7527d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",

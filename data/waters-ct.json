@@ -1,7 +1,7 @@
 {
  "state": "CT",
- "source": "openboatlaunch out/water snapshot 2026-11-01",
- "count": 151,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 157,
  "waters": [
   {
    "slug": "amos-lake-ct",
@@ -12,10 +12,10 @@
     "Preston"
    ],
    "bbox": [
-    -71.98103,
-    41.51104,
-    -71.9716,
-    41.52285
+    -71.981029,
+    41.510918,
+    -71.971604,
+    41.522866
    ],
    "wikidata": "Q31810436",
    "charted": false,
@@ -23,6 +23,15 @@
    "launches": [
     "amos-lake-boat-launch-ct"
    ],
+   "water_id": "amos-lake-ct",
+   "gnis_id": "205089",
+   "geometry_hash": "f4b8a853b02ae38018583e70c28de11b9ad49804e84b76d888c9d87c098bda7a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -35,9 +44,9 @@
    ],
    "bbox": [
     -73.24208,
-    41.14296,
-    -73.22337,
-    41.16792
+    41.142961,
+    -73.223372,
+    41.167949
    ],
    "wikidata": null,
    "charted": true,
@@ -45,6 +54,15 @@
    "launches": [
     "ash-creek-open-space-ct"
    ],
+   "water_id": "ash-creek-ct",
+   "gnis_id": null,
+   "geometry_hash": "bbba5fce3b17d1bfcd36cf8376c309b5fe65391eb642ec2742e0076c7237c1f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -56,10 +74,10 @@
     "Preston"
    ],
    "bbox": [
-    -71.98176,
-    41.49007,
+    -71.981851,
+    41.490072,
     -71.97582,
-    41.49563
+    41.495625
    ],
    "wikidata": "Q31810437",
    "charted": false,
@@ -67,6 +85,15 @@
    "launches": [
     "avery-pond-boat-launch-ct"
    ],
+   "water_id": "avery-pond-ct",
+   "gnis_id": "205168",
+   "geometry_hash": "69de7b37a484204d7e90d0affc85c513456da1750db2b22d172ffef59a713d11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -78,10 +105,10 @@
     "Colchester"
    ],
    "bbox": [
-    -72.40108,
-    41.53283,
+    -72.401075,
+    41.532654,
     -72.39184,
-    41.55125
+    41.551412
    ],
    "wikidata": null,
    "charted": false,
@@ -89,6 +116,15 @@
    "launches": [
     "babcock-pond-boat-launch-ct"
    ],
+   "water_id": "babcock-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "020cfde2d84e675c222c887862a77613e4d61d2118a033039120a2b7674ecf35",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -100,10 +136,10 @@
     "Old Lyme"
    ],
    "bbox": [
-    -72.34979,
-    41.28252,
-    -72.32323,
-    41.3022
+    -72.349789,
+    41.282521,
+    -72.323226,
+    41.302199
    ],
    "wikidata": null,
    "charted": true,
@@ -111,6 +147,15 @@
    "launches": [
     "great-island-boat-launch-ct"
    ],
+   "water_id": "back-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "6005dbcff5bb2a983e6304fde55207b4f2e9d0f7fbb45d4ff17274cc4f832a17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -122,10 +167,10 @@
     "New Fairfield"
    ],
    "bbox": [
-    -73.52676,
-    41.45749,
-    -73.5199,
-    41.46783
+    -73.526763,
+    41.457378,
+    -73.519902,
+    41.467832
    ],
    "wikidata": "Q31810439",
    "charted": false,
@@ -133,6 +178,15 @@
    "launches": [
     "ball-pond-boat-launch-ct"
    ],
+   "water_id": "ball-pond-ct",
+   "gnis_id": "205234",
+   "geometry_hash": "3edbcbaacedf0a4ad65481fd3c891f44ccf188fc0bd25841d18aeed48be31b98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -145,10 +199,10 @@
     "Morris"
    ],
    "bbox": [
-    -73.23425,
-    41.68598,
-    -73.20423,
-    41.71785
+    -73.234251,
+    41.685979,
+    -73.204184,
+    41.717849
    ],
    "wikidata": "Q18148874",
    "charted": false,
@@ -156,6 +210,15 @@
    "launches": [
     "bantam-lake-boat-launch-ct"
    ],
+   "water_id": "bantam-lake-ct",
+   "gnis_id": "205246",
+   "geometry_hash": "b9f0417331e77129c82bb6457283bcbbffd2b074d7a61b460a04fc985f749de6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -167,10 +230,10 @@
     "East Haddam"
    ],
    "bbox": [
-    -72.42454,
-    41.48335,
-    -72.40302,
-    41.49926
+    -72.424543,
+    41.483348,
+    -72.403018,
+    41.499257
    ],
    "wikidata": "Q31810445",
    "charted": false,
@@ -178,6 +241,15 @@
    "launches": [
     "bashan-lake-boat-launch-ct"
    ],
+   "water_id": "bashan-lake-ct",
+   "gnis_id": "205292",
+   "geometry_hash": "e4827ba59eea01d7cc86ecd30dcfb78ed937e878aeaf1d0a57807c92e486f07a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -190,9 +262,9 @@
    ],
    "bbox": [
     -72.79405,
-    41.70586,
-    -72.78058,
-    41.71599
+    41.705858,
+    -72.780582,
+    41.715988
    ],
    "wikidata": null,
    "charted": false,
@@ -200,6 +272,15 @@
    "launches": [
     "batterson-park-pond-boat-launch-ct"
    ],
+   "water_id": "batterson-park-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "bbee8cffbf24ae149682ce9cf81bfd99c9c0ef39882cc968ce056cb3d7f45ca2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -211,10 +292,10 @@
     "Voluntown"
    ],
    "bbox": [
-    -71.81757,
-    41.5689,
-    -71.77832,
-    41.58396
+    -71.817575,
+    41.568896,
+    -71.778323,
+    41.583965
    ],
    "wikidata": null,
    "charted": false,
@@ -222,6 +303,15 @@
    "launches": [
     "beach-pond-boat-launch-ct"
    ],
+   "water_id": "beach-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "d3fe961cb833a30c358dc57db3b9606aac75c30669655fbc0626cc84893efe3d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -233,10 +323,10 @@
     "Old Saybrook"
    ],
    "bbox": [
-    -72.38051,
-    41.26803,
-    -72.37208,
-    41.27184
+    -72.380511,
+    41.268027,
+    -72.372079,
+    41.271841
    ],
    "wikidata": null,
    "charted": true,
@@ -244,6 +334,15 @@
    "launches": [
     "south-cove-boat-launch-ct"
    ],
+   "water_id": "beamon-creek-ct",
+   "gnis_id": null,
+   "geometry_hash": "db89e14fff0485c3164a4ba93b32f6ba68e292f9741e1296b0d43a44450c47d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -256,16 +355,30 @@
     "Mystic"
    ],
    "bbox": [
-    -71.99257,
-    41.3289,
+    -71.992569,
+    41.328901,
     -71.98417,
-    41.33772
+    41.337719
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.436,
    "launches": [
     "spicer-memorial-park-ct"
+   ],
+   "water_id": "bebee-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "ce30523a79768327c676e2093cc469afa1855a3cac079303f2e7d763fef7afbc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "beebe-cove-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "beebe-cove-ct"
    ],
    "advisories": []
   },
@@ -278,10 +391,10 @@
     "Middlefield"
    ],
    "bbox": [
-    -72.7356,
-    41.50805,
-    -72.72722,
-    41.52096
+    -72.735602,
+    41.508046,
+    -72.727225,
+    41.520958
    ],
    "wikidata": "Q6474974",
    "charted": false,
@@ -289,6 +402,15 @@
    "launches": [
     "beseck-lake-boat-launch-ct"
    ],
+   "water_id": "beseck-lake-ct",
+   "gnis_id": "205459",
+   "geometry_hash": "deef6e37c713d61e36f3438d3b318d186a0907dac9779263c5cc6abf3e64a5d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -301,9 +423,9 @@
    ],
    "bbox": [
     -72.1263,
-    41.73033,
+    41.730332,
     -72.12485,
-    41.73384
+    41.733844
    ],
    "wikidata": null,
    "charted": false,
@@ -311,6 +433,15 @@
    "launches": [
     "beaver-brook-pond-boat-launch-ct"
    ],
+   "water_id": "bibbins-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "f093b286fb546656c9c52ef36945ea14763a0f8db61404aaffe4514ffea49f84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -322,9 +453,9 @@
     "Union"
    ],
    "bbox": [
-    -72.13239,
-    41.99175,
-    -72.12582,
+    -72.132386,
+    41.991748,
+    -72.125687,
     41.99816
    ],
    "wikidata": null,
@@ -333,6 +464,15 @@
    "launches": [
     "bigelow-pond-boat-launch-ct"
    ],
+   "water_id": "bigelow-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "41304d5f739a6e8e0845fc184ab6388f146a21d05df9352e992e45ad69ac8bb3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -344,9 +484,9 @@
     "North Stonington"
    ],
    "bbox": [
-    -71.87901,
-    41.50232,
-    -71.87026,
+    -71.879007,
+    41.502324,
+    -71.870263,
     41.51289
    ],
    "wikidata": "Q31810462",
@@ -355,6 +495,15 @@
    "launches": [
     "billings-lake-boat-launch-ct"
    ],
+   "water_id": "billings-lake-ct",
+   "gnis_id": "205507",
+   "geometry_hash": "eb5bd9904821672f4c313315faa12838a12e0f04ae3db8a77e5a85a8f2557569",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -366,10 +515,10 @@
     "Bristol"
    ],
    "bbox": [
-    -72.95067,
-    41.68829,
-    -72.94819,
-    41.69254
+    -72.950671,
+    41.68809,
+    -72.948193,
+    41.692623
    ],
    "wikidata": null,
    "charted": false,
@@ -377,6 +526,15 @@
    "launches": [
     "birge-pond-boat-launch-ct"
    ],
+   "water_id": "birge-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "5fb8201b86cf864c71d1705d7d3e784e1df44e889e58bd379b70f966e3d7df6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -389,9 +547,9 @@
    ],
    "bbox": [
     -72.75235,
-    41.51971,
-    -72.7421,
-    41.52749
+    41.519713,
+    -72.741976,
+    41.527494
    ],
    "wikidata": null,
    "charted": false,
@@ -399,6 +557,15 @@
    "launches": [
     "black-pond-boat-launch-ct"
    ],
+   "water_id": "black-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "6984c6b3aef3664ba012e1034681978bf10dc352ce51b28ac6c52f9482d5d46a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -411,9 +578,9 @@
    ],
    "bbox": [
     -72.07449,
-    41.96716,
-    -72.06544,
-    41.97275
+    41.967161,
+    -72.065442,
+    41.9728
    ],
    "wikidata": "Q32842987",
    "charted": false,
@@ -421,6 +588,15 @@
    "launches": [
     "black-pond-boat-launch-woodstock-ct"
    ],
+   "water_id": "black-pond-woodstock-ct",
+   "gnis_id": "205554",
+   "geometry_hash": "8c6d95c9096d93359477cbd223155ca65aa5aca23c5b633d40fe0280181dde1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -432,10 +608,10 @@
     "North Stonington"
    ],
    "bbox": [
-    -71.90015,
-    41.5051,
+    -71.900152,
+    41.505099,
     -71.89102,
-    41.51132
+    41.511318
    ],
    "wikidata": null,
    "charted": false,
@@ -443,6 +619,15 @@
    "launches": [
     "anderson-pond-boat-launch-ct"
    ],
+   "water_id": "blue-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "a0084e0bd98e44901f872f492b3e09cb0429426b9b34fe67ecc2410161c47c46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -455,15 +640,29 @@
    ],
    "bbox": [
     -72.83355,
-    41.2512,
-    -72.81732,
-    41.2591
+    41.251201,
+    -72.817321,
+    41.259102
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.558,
    "launches": [
     "branford-river-boat-launch-ct"
+   ],
+   "water_id": "branford-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "85b36cb34ec82539a4f3dfb4bb0b9690caa7f3862626825172f1a589a6ca9c0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "lindsey-cove-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "lindsey-cove-ct"
    ],
    "advisories": []
   },
@@ -476,10 +675,10 @@
     "Branford"
    ],
    "bbox": [
-    -72.80523,
+    -72.805232,
     41.27498,
-    -72.76191,
-    41.34059
+    -72.761913,
+    41.340594
    ],
    "wikidata": null,
    "charted": true,
@@ -487,6 +686,15 @@
    "launches": [
     "branford-high-school-car-top-boat-launch-ct"
    ],
+   "water_id": "branford-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "be071ced6fa2f392c9d1ca941e8ca85c9eae39be90d5db7930440c62c7f4213a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -498,10 +706,10 @@
     "Bridgeport"
    ],
    "bbox": [
-    -73.18657,
-    41.14844,
-    -73.13731,
-    41.17522
+    -73.186568,
+    41.148441,
+    -73.137301,
+    41.175219
    ],
    "wikidata": null,
    "charted": true,
@@ -509,6 +717,15 @@
    "launches": [
     "newfield-avenue-boat-ramp-ct"
    ],
+   "water_id": "bridgeport-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "f33ed67a5d073dc1a72a9f21350634eee5e0445caeb02267a07f47af8a2163cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -520,10 +737,10 @@
     "Torrington"
    ],
    "bbox": [
-    -73.1025,
-    41.86515,
-    -73.09317,
-    41.87448
+    -73.102691,
+    41.865032,
+    -73.093132,
+    41.874554
    ],
    "wikidata": null,
    "charted": false,
@@ -531,6 +748,15 @@
    "launches": [
     "burr-pond-boat-launch-ct"
    ],
+   "water_id": "burr-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "30e172d1f63351c507380be7148d13170e58d6bb95af582e434c0f1ba0b9b35e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -542,16 +768,30 @@
     "Bridgeport"
    ],
    "bbox": [
-    -73.21812,
-    41.15291,
-    -73.2007,
-    41.16686
+    -73.218125,
+    41.152911,
+    -73.200697,
+    41.166859
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.31,
    "launches": [
     "brewster-street-boat-launch-ct"
+   ],
+   "water_id": "cedar-creek-ct",
+   "gnis_id": null,
+   "geometry_hash": "31e152174f18a0a7e362704d8e26aaca98bc5c0f98d5d982399df749c37d9f13",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "brewster-cove-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "brewster-cove-ct"
    ],
    "advisories": []
   },
@@ -564,10 +804,10 @@
     "Chester"
    ],
    "bbox": [
-    -72.50295,
-    41.39732,
-    -72.49626,
-    41.40579
+    -72.502948,
+    41.397081,
+    -72.496265,
+    41.405795
    ],
    "wikidata": null,
    "charted": false,
@@ -575,6 +815,15 @@
    "launches": [
     "cedar-lake-boat-launch-ct"
    ],
+   "water_id": "cedar-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "d6e1df750c026de1fbfbd580f27114447a0974f41610d2f4a6b679c516046e1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -586,16 +835,56 @@
     "Westbrook"
    ],
    "bbox": [
-    -72.49879,
-    41.29424,
-    -72.49449,
-    41.30379
+    -72.498787,
+    41.294239,
+    -72.494433,
+    41.303792
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.114,
    "launches": [
     "menunketesuck-wildlife-management-area-ct"
+   ],
+   "water_id": "chapman-mill-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "9b39f8d65c55da95e9ff2d6851a471fa25452190a2f4ba89f89a33c472027095",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clark-cove-ct",
+   "name": "Clark Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Gales Ferry"
+   ],
+   "bbox": [
+    -72.09122,
+    41.430264,
+    -72.085088,
+    41.43392
+   ],
+   "wikidata": "Q31812949",
+   "charted": true,
+   "area_km2": 0.051,
+   "launches": [],
+   "water_id": "clark-cove-ct",
+   "gnis_id": "206298",
+   "geometry_hash": "2e59a314430894fd86123827188e3d3b6e533979a8e2f1c5c7e3b2adf10ce3de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "clark-cove-boat-launch-ct"
    ],
    "advisories": []
   },
@@ -608,10 +897,10 @@
     "Norwalk"
    ],
    "bbox": [
-    -73.39847,
-    41.06685,
-    -73.35471,
-    41.10216
+    -73.398469,
+    41.066852,
+    -73.354711,
+    41.102159
    ],
    "wikidata": null,
    "charted": true,
@@ -619,6 +908,20 @@
    "launches": [
     "calf-pasture-beach-ct",
     "canfield-crossing-subdivision-ct"
+   ],
+   "water_id": "cockenoe-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "2bcf550aa5f94ee0b0084483928a0705dffe0badde55e86ee5ccb91e7a07228e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "charles-creek-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "charles-creek-ct"
    ],
    "advisories": []
   },
@@ -631,10 +934,10 @@
     "Colebrook"
    ],
    "bbox": [
-    -73.06172,
-    42.0046,
-    -73.03631,
-    42.06127
+    -73.061716,
+    42.004598,
+    -73.036313,
+    42.061463
    ],
    "wikidata": "Q34881110",
    "charted": false,
@@ -643,6 +946,15 @@
     "colebrook-river-lake-boat-launch-ct",
     "colebrook-river-lake-boat-launch-near-colebrook-ct-2"
    ],
+   "water_id": "colebrook-river-lake-ct",
+   "gnis_id": "206373",
+   "geometry_hash": "f567f94ade468d295fcfea1126bcb0229e7820b2cc3552ac6fa324430ff9302f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -665,10 +977,10 @@
     "Old Lyme"
    ],
    "bbox": [
-    -72.66538,
-    41.27156,
-    -72.33266,
-    42.07219
+    -72.665384,
+    41.271559,
+    -72.332657,
+    42.072191
    ],
    "wikidata": "Q379648",
    "charted": true,
@@ -687,6 +999,20 @@
     "pilgrim-landing-ct",
     "smith-neck-town-landing-ct"
    ],
+   "water_id": "connecticut-river-ct",
+   "gnis_id": "206425",
+   "geometry_hash": "d57bf86773d8e59755107a1e3aa6428ae1ecf47c3997196ca517967f535e80a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "connecticut-river-boat-launch-east-haddam-ct",
+    "connecticut-river-boat-launch-east-hartford-ct",
+    "connecticut-river-boat-launch-ct-4",
+    "connecticut-river-boat-launch-hartford-ct"
+   ],
    "advisories": []
   },
   {
@@ -699,16 +1025,30 @@
     "Stamford"
    ],
    "bbox": [
-    -73.50803,
-    41.03636,
-    -73.48911,
-    41.04926
+    -73.508029,
+    41.036363,
+    -73.489113,
+    41.049349
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 1.246,
    "launches": [
     "weed-beach-ct"
+   ],
+   "water_id": "cove-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "44fcacaace635a68231a7497bf29267adc4eb282c2d6825c4fdd5d91c7df0f83",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "holly-pond-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "holly-pond-ct"
    ],
    "advisories": []
   },
@@ -721,10 +1061,10 @@
     "Coventry"
    ],
    "bbox": [
-    -72.33533,
-    41.76522,
-    -72.30732,
-    41.78356
+    -72.335331,
+    41.765223,
+    -72.307319,
+    41.783777
    ],
    "wikidata": "Q31810847",
    "charted": false,
@@ -732,6 +1072,15 @@
    "launches": [
     "coventry-lake-boat-launch-ct"
    ],
+   "water_id": "coventry-lake-ct",
+   "gnis_id": "212663",
+   "geometry_hash": "777c12de32ce551d9dc2480133e86c858e4c0b97783d424da6606e94b4767236",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -745,7 +1094,7 @@
    "bbox": [
     -72.3796,
     41.93167,
-    -72.36797,
+    -72.367971,
     41.94512
    ],
    "wikidata": "Q34718814",
@@ -754,6 +1103,15 @@
    "launches": [
     "crystal-lake-boat-launch-ct"
    ],
+   "water_id": "crystal-lake-ct",
+   "gnis_id": "206553",
+   "geometry_hash": "3975a51c4f4bcfe04ad7c2bf93c9e04315a9e4b950d16e588b7ef85e72ef2475",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -765,10 +1123,10 @@
     "Middletown"
    ],
    "bbox": [
-    -72.64038,
-    41.51584,
-    -72.63689,
-    41.52532
+    -72.640583,
+    41.515838,
+    -72.636887,
+    41.525318
    ],
    "wikidata": null,
    "charted": false,
@@ -776,6 +1134,15 @@
    "launches": [
     "crystal-lake-boat-launch-middletown-ct"
    ],
+   "water_id": "crystal-lake-middletown-ct",
+   "gnis_id": null,
+   "geometry_hash": "4aef5cf1e3594a03d3f3c3a0b753869daa85d6d056d30d946308044946342240",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -787,10 +1154,10 @@
     "East Lyme"
    ],
    "bbox": [
-    -72.20266,
-    41.32519,
-    -72.19604,
-    41.33033
+    -72.202664,
+    41.325187,
+    -72.196042,
+    41.330326
    ],
    "wikidata": "Q31810498",
    "charted": false,
@@ -798,6 +1165,15 @@
    "launches": [
     "dodge-pond-boat-launch-ct"
    ],
+   "water_id": "dodge-pond-ct",
+   "gnis_id": "206706",
+   "geometry_hash": "9ed9b43747879794019428e2e7998b0089e3d4911e8b7078485c43b775526ce1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -809,10 +1185,10 @@
     "Goshen"
    ],
    "bbox": [
-    -73.24308,
-    41.81044,
-    -73.23549,
-    41.81788
+    -73.243077,
+    41.810415,
+    -73.235488,
+    41.817885
    ],
    "wikidata": null,
    "charted": false,
@@ -820,6 +1196,15 @@
    "launches": [
     "dog-pond-boat-launch-ct"
    ],
+   "water_id": "dog-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "d09f632fc810e3a6e8a8c14221fda8577ca8907718a38f915adff48f95866cb7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -832,9 +1217,9 @@
    ],
    "bbox": [
     -72.67003,
-    41.50766,
-    -72.6662,
-    41.51461
+    41.507657,
+    -72.666195,
+    41.514606
    ],
    "wikidata": "Q34883957",
    "charted": false,
@@ -842,6 +1227,15 @@
    "launches": [
     "dooley-pond-boat-launch-ct"
    ],
+   "water_id": "dooley-pond-ct",
+   "gnis_id": "206720",
+   "geometry_hash": "bf82e8226c3a3a8a862746d892ba09851ac6037208b401f86f24f9b7355c2e4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -853,10 +1247,10 @@
     "Coventry"
    ],
    "bbox": [
-    -72.28956,
-    41.78448,
-    -72.28042,
-    41.79272
+    -72.289565,
+    41.784482,
+    -72.280424,
+    41.792722
    ],
    "wikidata": null,
    "charted": false,
@@ -864,6 +1258,15 @@
    "launches": [
     "eagleville-pond-boat-launch-ct"
    ],
+   "water_id": "eagleville-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "28ae811b17a8b0fe5dcb71b4fc0ad668523f234b4504de48a4c5db5309344c57",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -875,10 +1278,10 @@
     "Guilford"
    ],
    "bbox": [
-    -72.68519,
-    41.26999,
-    -72.6441,
-    41.32741
+    -72.685189,
+    41.269967,
+    -72.644105,
+    41.327412
    ],
    "wikidata": null,
    "charted": true,
@@ -886,6 +1289,15 @@
    "launches": [
     "east-river-boat-launch-ct"
    ],
+   "water_id": "east-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "055999ae3b41edaaf5e6861c9c32f2ff34b666cd1d24139992d4c2295c58dbfd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -897,10 +1309,10 @@
     "Essex"
    ],
    "bbox": [
-    -72.49771,
-    41.3301,
+    -72.497705,
+    41.33009,
     -72.37934,
-    41.36797
+    41.367969
    ],
    "wikidata": "Q5432491",
    "charted": true,
@@ -909,6 +1321,15 @@
     "bushnell-park-ct",
     "essex-town-dock-ct"
    ],
+   "water_id": "falls-river-ct",
+   "gnis_id": "207022",
+   "geometry_hash": "cd68856dda7cebaf3e7ab10fa6e9479bd0a9bc5a1e586a97575fcd546e0736d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -926,10 +1347,10 @@
     "Windsor"
    ],
    "bbox": [
-    -72.95826,
-    41.71993,
-    -72.63132,
-    41.91764
+    -72.958259,
+    41.719931,
+    -72.631322,
+    41.917642
    ],
    "wikidata": "Q3066962",
    "charted": false,
@@ -938,6 +1359,15 @@
     "farmington-river-boat-launch-avon-ct",
     "farmington-river-boat-launch-windsor-ct"
    ],
+   "water_id": "farmington-river-ct",
+   "gnis_id": "207042",
+   "geometry_hash": "b7d443d3282e536849029309729d27ddada6b6609a9dbe995debef5e2bdc651a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -949,9 +1379,9 @@
     "Groton"
    ],
    "bbox": [
-    -72.06462,
-    41.24995,
-    -71.85479,
+    -72.064618,
+    41.249951,
+    -71.854791,
     41.34252
    ],
    "wikidata": "Q31812973",
@@ -959,6 +1389,20 @@
    "area_km2": 65.88,
    "launches": [
     "bayberry-lane-boat-launch-ct"
+   ],
+   "water_id": "fishers-island-sound-ct",
+   "gnis_id": null,
+   "geometry_hash": "b66f6cef3082d828739d080a7034bd7612432e6ea6b6bec47f6a744c02393a28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "baker-cove-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "baker-cove-ct"
    ],
    "advisories": []
   },
@@ -972,10 +1416,10 @@
     "Point O'Woods"
    ],
    "bbox": [
-    -72.27115,
-    41.29945,
-    -72.24879,
-    41.41953
+    -72.27131,
+    41.299447,
+    -72.248786,
+    41.419525
    ],
    "wikidata": null,
    "charted": true,
@@ -983,6 +1427,15 @@
    "launches": [
     "four-mile-river-boat-launch-ct"
    ],
+   "water_id": "fourmile-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "e778ce67a5922a19dea6630804fa1cad9a03a08e0c663790cc8fcd59aa7954c3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -996,10 +1449,10 @@
     "Salem"
    ],
    "bbox": [
-    -72.23544,
-    41.50137,
-    -72.21716,
-    41.52629
+    -72.235444,
+    41.501371,
+    -72.217058,
+    41.526295
    ],
    "wikidata": "Q5522606",
    "charted": false,
@@ -1007,6 +1460,15 @@
    "launches": [
     "gardner-lake-boat-launch-ct"
    ],
+   "water_id": "gardner-lake-ct",
+   "gnis_id": "207253",
+   "geometry_hash": "7adbae09081a97e3c615348c84c6fb394e4cd8e9f9ab0cac82ba51c99fe34a46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1018,10 +1480,10 @@
     "Griswold"
    ],
    "bbox": [
-    -71.88898,
-    41.55186,
-    -71.87034,
-    41.5674
+    -71.888981,
+    41.551864,
+    -71.870343,
+    41.567401
    ],
    "wikidata": null,
    "charted": false,
@@ -1029,6 +1491,15 @@
    "launches": [
     "glasgo-pond-boat-launch-ct"
    ],
+   "water_id": "glasgo-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "aa9e0141a8238a977f80f10903a2ea4227e463d035526502bab3958a5b6ecb4d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1040,10 +1511,10 @@
     "East Lyme"
    ],
    "bbox": [
-    -72.21435,
-    41.33615,
-    -72.20725,
-    41.34909
+    -72.214353,
+    41.336071,
+    -72.207247,
+    41.349236
    ],
    "wikidata": null,
    "charted": false,
@@ -1051,6 +1522,15 @@
    "launches": [
     "gorton-pond-boat-launch-ct"
    ],
+   "water_id": "gorton-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "e22a100f457aa0880298bde4d73bccc84d4d50fd3caf288b8f958003185f8f2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1062,10 +1542,10 @@
     "Voluntown"
    ],
    "bbox": [
-    -71.81253,
-    41.52839,
-    -71.80603,
-    41.53662
+    -71.812532,
+    41.528394,
+    -71.806026,
+    41.536622
    ],
    "wikidata": "Q31810545",
    "charted": false,
@@ -1073,6 +1553,15 @@
    "launches": [
     "green-falls-reservoir-boat-launch-ct"
    ],
+   "water_id": "green-fall-pond-ct",
+   "gnis_id": "207478",
+   "geometry_hash": "2c76afbc04ce58589c98c936f1a9547c8ae4b0c36085107dbd0a4dd1f8208d86",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1084,10 +1573,10 @@
     "Guilford"
    ],
    "bbox": [
-    -72.67948,
-    41.25811,
-    -72.65818,
-    41.27261
+    -72.679479,
+    41.258111,
+    -72.658181,
+    41.272609
    ],
    "wikidata": null,
    "charted": true,
@@ -1095,6 +1584,15 @@
    "launches": [
     "sluice-creek-car-top-boat-launch-ct"
    ],
+   "water_id": "guilford-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "2544a84f41f312f9b9a979837e61dd3129edf894be2c9428c6e649dd59761336",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1106,10 +1604,10 @@
     "Eastford"
    ],
    "bbox": [
-    -72.1142,
-    41.83679,
-    -72.10669,
-    41.84511
+    -72.114201,
+    41.836786,
+    -72.106688,
+    41.845113
    ],
    "wikidata": null,
    "charted": false,
@@ -1117,6 +1615,15 @@
    "launches": [
     "halls-pond-boat-launch-ct"
    ],
+   "water_id": "halls-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "b41290633dfb838bf11b22c5f5d17304efdfa6822547555cd2f5c14acd98c28b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1128,10 +1635,10 @@
     "Clinton"
    ],
    "bbox": [
-    -72.52067,
-    41.26494,
-    -72.50278,
-    41.27059
+    -72.520669,
+    41.264862,
+    -72.502783,
+    41.270619
    ],
    "wikidata": null,
    "charted": true,
@@ -1139,6 +1646,15 @@
    "launches": [
     "clinton-town-beach-ct"
    ],
+   "water_id": "hammock-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "dcce899b956cccf1dc146215ac3fa7220c7ee3d8a9619f60f4d60a1939800127",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1150,10 +1666,10 @@
     "Hampton"
    ],
    "bbox": [
-    -72.06313,
-    41.82284,
-    -72.05589,
-    41.82989
+    -72.063135,
+    41.822843,
+    -72.055888,
+    41.830094
    ],
    "wikidata": "Q34888767",
    "charted": false,
@@ -1161,6 +1677,15 @@
    "launches": [
     "hampton-reservoir-boat-launch-ct"
    ],
+   "water_id": "hampton-reservoir-ct",
+   "gnis_id": "207651",
+   "geometry_hash": "e8b49526d5271e33423b8149afd6b1b711a055770c3c51825e059c3e8c934418",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1172,10 +1697,10 @@
     "Kent"
    ],
    "bbox": [
-    -73.48313,
-    41.68011,
-    -73.47298,
-    41.68891
+    -73.483133,
+    41.680011,
+    -73.472982,
+    41.688913
    ],
    "wikidata": "Q31810561",
    "charted": false,
@@ -1183,6 +1708,15 @@
    "launches": [
     "hatch-pond-boat-launch-ct"
    ],
+   "water_id": "hatch-pond-ct",
+   "gnis_id": "207711",
+   "geometry_hash": "c0494302edf649188d161c25cc8a42cfa5483f385c6a7ce6c037b91bbcb62010",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1194,10 +1728,10 @@
     "Haddam"
    ],
    "bbox": [
-    -72.56038,
-    41.48284,
-    -72.55838,
-    41.49347
+    -72.560379,
+    41.482838,
+    -72.558375,
+    41.493468
    ],
    "wikidata": "Q60763934",
    "charted": false,
@@ -1205,6 +1739,15 @@
    "launches": [
     "higganum-reservoir-boat-launch-ct"
    ],
+   "water_id": "higganum-reservoir-ct",
+   "gnis_id": "207809",
+   "geometry_hash": "ea12f64c1ddab1471c3519ceaa21f730eb6f56c9415e59276dc53bb96c39ad34",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1216,10 +1759,10 @@
     "Winchester"
    ],
    "bbox": [
-    -73.09892,
-    41.88889,
-    -73.07845,
-    41.92293
+    -73.098917,
+    41.888892,
+    -73.07842,
+    41.922933
    ],
    "wikidata": "Q30611948",
    "charted": false,
@@ -1227,6 +1770,15 @@
    "launches": [
     "highland-lake-boat-launch-ct"
    ],
+   "water_id": "highland-lake-ct",
+   "gnis_id": "207823",
+   "geometry_hash": "01d6dc62525346bab8dea8a062e8c6d369f35527c199c098cc73124f8dd8dfd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1238,10 +1790,10 @@
     "Hebron"
    ],
    "bbox": [
-    -72.37845,
+    -72.378446,
     41.67322,
-    -72.37248,
-    41.68171
+    -72.372459,
+    41.681714
    ],
    "wikidata": null,
    "charted": false,
@@ -1249,6 +1801,15 @@
    "launches": [
     "holbrook-pond-boat-launch-ct"
    ],
+   "water_id": "holbrook-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "a6ffa6410dc9bcd4416d1c000510b384bab75cce8df8ed851a60818a4fd89d54",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1260,10 +1821,10 @@
     "Griswold"
    ],
    "bbox": [
-    -71.94133,
-    41.58641,
-    -71.92046,
-    41.61068
+    -71.941333,
+    41.586408,
+    -71.920383,
+    41.610683
    ],
    "wikidata": "Q34890567",
    "charted": false,
@@ -1271,6 +1832,15 @@
    "launches": [
     "hopeville-pond-boat-launch-ct"
    ],
+   "water_id": "hopeville-pond-ct",
+   "gnis_id": "207943",
+   "geometry_hash": "ed8df542ea920d40bb05ee92fecc847af39e4a5f760c87bee913584cbf5c5dba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1282,10 +1852,10 @@
     "Salem"
    ],
    "bbox": [
-    -72.25318,
-    41.46076,
-    -72.24875,
-    41.46285
+    -72.253177,
+    41.460764,
+    -72.248754,
+    41.462848
    ],
    "wikidata": null,
    "charted": false,
@@ -1293,6 +1863,15 @@
    "launches": [
     "horse-pond-boat-launch-ct"
    ],
+   "water_id": "horse-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "5e27fb6092ab02d3b60ab35c098cca3e3376d7d425884619e365b92830eab44c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1310,10 +1889,10 @@
     "Stratford"
    ],
    "bbox": [
-    -73.51339,
-    41.16833,
+    -73.513392,
+    41.168328,
     -73.06521,
-    42.05027
+    42.050271
    ],
    "wikidata": "Q1631368",
    "charted": true,
@@ -1324,6 +1903,17 @@
     "charles-wheeler-wildlife-management-area-ct",
     "housatonic-river-boat-launch-ct",
     "sunnyside-boat-ramp-ct"
+   ],
+   "water_id": "housatonic-river-ct",
+   "gnis_id": "212670",
+   "geometry_hash": "f6cc7c58aaec161221f3243bf8de0dab7bced8a8a3deaef34f1e5296e773d9bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "housatonic-river-boat-launch-ct-7"
    ],
    "advisories": []
   },
@@ -1336,10 +1926,10 @@
     "Hartland"
    ],
    "bbox": [
-    -72.99469,
-    42.02119,
-    -72.99122,
-    42.02466
+    -72.994693,
+    42.021195,
+    -72.991224,
+    42.024657
    ],
    "wikidata": null,
    "charted": false,
@@ -1347,6 +1937,15 @@
    "launches": [
     "howells-pond-boat-launch-ct"
    ],
+   "water_id": "howells-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "4bb786b2537f40e0618b20f3f0ec6f29fda45bb04c5f867fc189db307c57cce6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1359,9 +1958,9 @@
    ],
    "bbox": [
     -72.55568,
-    41.27839,
-    -72.52223,
-    41.34133
+    41.278387,
+    -72.522233,
+    41.341329
    ],
    "wikidata": null,
    "charted": true,
@@ -1369,6 +1968,15 @@
    "launches": [
     "clinton-landing-ct"
    ],
+   "water_id": "indian-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "96650d922b57d266ff86f5f4fb7ba493fd778c86c142d3be169c9f07997db1f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1380,9 +1988,9 @@
     "Waterford"
    ],
    "bbox": [
-    -72.14129,
-    41.33845,
-    -72.13969,
+    -72.141292,
+    41.338205,
+    -72.139689,
     41.34016
    ],
    "wikidata": null,
@@ -1391,6 +1999,15 @@
    "launches": [
     "jordan-mill-park-ct"
    ],
+   "water_id": "jordan-mill-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "b557b50d40e1417cb4d8bba2ab7ca54cc261dc4fecb91966de427eec51c26e4c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1403,9 +2020,9 @@
    ],
    "bbox": [
     -72.72056,
-    41.24868,
-    -72.69756,
-    41.26579
+    41.248681,
+    -72.697561,
+    41.265825
    ],
    "wikidata": null,
    "charted": true,
@@ -1413,6 +2030,15 @@
    "launches": [
     "great-harbor-wildlife-management-area-ct"
    ],
+   "water_id": "joshua-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "e29bb9a01583b4854d2f3f3b5c8c3cf50a9e549dec7bef5d21731b4d8575fdbe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1424,10 +2050,10 @@
     "Waterford"
    ],
    "bbox": [
-    -72.18182,
-    41.3479,
-    -72.17678,
-    41.35291
+    -72.181823,
+    41.347901,
+    -72.176781,
+    41.35293
    ],
    "wikidata": null,
    "charted": true,
@@ -1435,6 +2061,15 @@
    "launches": [
     "kiddie-beach-ct"
    ],
+   "water_id": "keeny-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "757175e926434c4f2a40d8e66ac9278cbcba2526b728e967876eac7a5b36e4de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1451,10 +2086,10 @@
     "Sherman"
    ],
    "bbox": [
-    -73.49307,
-    41.42309,
+    -73.493067,
+    41.423036,
     -73.42377,
-    41.57837
+    41.578367
    ],
    "wikidata": "Q5032008",
    "charted": false,
@@ -1462,6 +2097,17 @@
    "launches": [
     "candlewood-lake-lattins-cove-boat-launch-ct",
     "candlewood-lake-squantz-cove-boat-launch-ct"
+   ],
+   "water_id": "lake-candlewood-ct",
+   "gnis_id": "206018",
+   "geometry_hash": "7048b10e26697153eef35b020c73c856b7f8c907532d5efbed194f369aabe3c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-candlewood-boat-launch-ct"
    ],
    "advisories": [
     {
@@ -1482,10 +2128,10 @@
     "East Haddam"
    ],
    "bbox": [
-    -72.33514,
-    41.50939,
-    -72.32446,
-    41.53153
+    -72.335139,
+    41.509371,
+    -72.324463,
+    41.531718
    ],
    "wikidata": "Q6476123",
    "charted": false,
@@ -1493,6 +2139,15 @@
    "launches": [
     "hayward-lake-boat-launch-ct"
    ],
+   "water_id": "lake-hayward-ct",
+   "gnis_id": "207749",
+   "geometry_hash": "58de41ed2b4eaa13d58b94d992148d63aff984c7fa6e905e1ea8a75bbe297f26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1504,10 +2159,10 @@
     "Shelton"
    ],
    "bbox": [
-    -73.15793,
-    41.32427,
-    -73.10149,
-    41.37778
+    -73.157932,
+    41.324273,
+    -73.101488,
+    41.377782
    ],
    "wikidata": null,
    "charted": true,
@@ -1515,6 +2170,15 @@
    "launches": [
     "lake-housatonic-boat-launch-ct"
    ],
+   "water_id": "lake-housatonic-ct",
+   "gnis_id": null,
+   "geometry_hash": "d941a2f8c17f15cd153bc6aa84cca4f76a7c08963e5cac8f275c703011e0a27e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "kind": "invasive",
@@ -1535,10 +2199,10 @@
     "Mill Plain"
    ],
    "bbox": [
-    -73.5086,
-    41.3818,
-    -73.49756,
-    41.38792
+    -73.508596,
+    41.381798,
+    -73.497558,
+    41.387916
    ],
    "wikidata": "Q31810660",
    "charted": false,
@@ -1546,6 +2210,15 @@
    "launches": [
     "lake-kenosia-boat-launch-ct"
    ],
+   "water_id": "lake-kenosia-ct",
+   "gnis_id": "208263",
+   "geometry_hash": "9fc07606bf8f5502248bd49a7aa3ec5eb384c25f6f0eadbe652fb2cc5eb51191",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1561,10 +2234,10 @@
     "Roxbury Falls"
    ],
    "bbox": [
-    -73.40675,
-    41.44421,
-    -73.29409,
-    41.54226
+    -73.406748,
+    41.444212,
+    -73.294094,
+    41.542265
    ],
    "wikidata": "Q6476633",
    "charted": false,
@@ -1573,6 +2246,15 @@
     "lake-lillinonah-pond-brook-boat-launch-ct",
     "lake-lillinonah-boat-launch-ct"
    ],
+   "water_id": "lake-lillinonah-ct",
+   "gnis_id": "208464",
+   "geometry_hash": "6b07b06ccbb4b52d3561906f9d949e2f444af3eb8c6cc15df0cb0879036a80c8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "kind": "invasive",
@@ -1593,9 +2275,9 @@
    ],
    "bbox": [
     -73.51057,
-    41.32066,
-    -73.50341,
-    41.32608
+    41.320658,
+    -73.503411,
+    41.326143
    ],
    "wikidata": null,
    "charted": false,
@@ -1603,6 +2285,15 @@
    "launches": [
     "pierrepont-lake-boat-launch-ct"
    ],
+   "water_id": "lake-naraneka-ct",
+   "gnis_id": null,
+   "geometry_hash": "5781620e16907812b2734887144e99f7d5e59952a6168a827c47c500455d9d06",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1614,10 +2305,10 @@
     "North Stonington"
    ],
    "bbox": [
-    -71.95021,
-    41.47828,
-    -71.94237,
-    41.49097
+    -71.950211,
+    41.478123,
+    -71.942371,
+    41.490967
    ],
    "wikidata": "Q31810692",
    "charted": false,
@@ -1625,6 +2316,15 @@
    "launches": [
     "lake-of-isles-boat-launch-ct"
    ],
+   "water_id": "lake-of-isles-ct",
+   "gnis_id": "209459",
+   "geometry_hash": "7845e1c70e0d6d5b7c0231730ff949f21cc40c802392421a0d140db15c9bce71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1636,10 +2336,10 @@
     "East Hampton"
    ],
    "bbox": [
-    -72.51188,
-    41.58512,
-    -72.49185,
-    41.60337
+    -72.511877,
+    41.585115,
+    -72.491808,
+    41.603375
    ],
    "wikidata": "Q34915492",
    "charted": false,
@@ -1647,6 +2347,15 @@
    "launches": [
     "lake-pocotopaug-boat-launch-ct"
    ],
+   "water_id": "lake-pocotopaug-ct",
+   "gnis_id": "209870",
+   "geometry_hash": "1325df9d653bda00123f17b77948a59d9828e77cd1f86b5969c359d49b0d7b59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1673,10 +2382,10 @@
     "New Preston"
    ],
    "bbox": [
-    -73.38364,
+    -73.383641,
     41.68269,
-    -73.34428,
-    41.70963
+    -73.344283,
+    41.709628
    ],
    "wikidata": "Q20657142",
    "charted": false,
@@ -1684,6 +2393,15 @@
    "launches": [
     "waramaug-lake-boat-launch-ct"
    ],
+   "water_id": "lake-waramaug-ct",
+   "gnis_id": "211809",
+   "geometry_hash": "96a0a9d70aaed9419ab3a5e1835f63337d13f8fb4eb3ad79d4b104c1b0685139",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1695,10 +2413,10 @@
     "Winchester"
    ],
    "bbox": [
-    -73.16281,
-    41.9078,
-    -73.14865,
-    41.9269
+    -73.162808,
+    41.907738,
+    -73.148648,
+    41.926899
    ],
    "wikidata": "Q34901956",
    "charted": false,
@@ -1706,6 +2424,15 @@
    "launches": [
     "winchester-lake-boat-launch-ct"
    ],
+   "water_id": "lake-winchester-ct",
+   "gnis_id": "212183",
+   "geometry_hash": "dd5ade1e1716dc9eff4265be3a113c05a95051e61361062f83332408861ee04a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1717,10 +2444,10 @@
     "Hamden"
    ],
    "bbox": [
-    -72.97013,
-    41.3512,
-    -72.96537,
-    41.36006
+    -72.970125,
+    41.351025,
+    -72.965322,
+    41.360061
    ],
    "wikidata": null,
    "charted": false,
@@ -1728,6 +2455,15 @@
    "launches": [
     "wintergreen-lake-boat-launch-ct"
    ],
+   "water_id": "lake-wintergreen-ct",
+   "gnis_id": null,
+   "geometry_hash": "f870ca32edf681d2618a2dab03cd00cd0c416fa7c876813fd507bf9277c63436",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1742,16 +2478,27 @@
     "Stevenson"
    ],
    "bbox": [
-    -73.29591,
-    41.38159,
-    -73.17101,
-    41.45353
+    -73.295912,
+    41.381391,
+    -73.171005,
+    41.453527
    ],
    "wikidata": "Q6478599",
    "charted": false,
    "area_km2": 3.895,
    "launches": [
     "lake-zoar-boat-launch-ct"
+   ],
+   "water_id": "lake-zoar-ct",
+   "gnis_id": "212322",
+   "geometry_hash": "b69e75f65454b4a3214279d70a04e4f22a99329c57f55ea44a40ef7e4eeab279",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-zoar-boat-launch-stevenson-ct"
    ],
    "advisories": [
     {
@@ -1772,10 +2519,10 @@
     "Ledyard"
    ],
    "bbox": [
-    -71.95103,
-    41.45702,
-    -71.94624,
-    41.46123
+    -71.951027,
+    41.456976,
+    -71.945959,
+    41.461234
    ],
    "wikidata": null,
    "charted": false,
@@ -1783,6 +2530,15 @@
    "launches": [
     "lantern-hill-boat-launch-ct"
    ],
+   "water_id": "lantern-hill-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "cdbbf328b8ec87a34a807649edab6ad91cfa8e4ea7be0dbc4181c366fc9c1838",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1794,10 +2550,10 @@
     "Kent"
    ],
    "bbox": [
-    -73.47638,
-    41.70323,
-    -73.47297,
-    41.70818
+    -73.476383,
+    41.703229,
+    -73.472972,
+    41.708441
    ],
    "wikidata": "Q31810730",
    "charted": false,
@@ -1805,6 +2561,15 @@
    "launches": [
     "leonard-pond-boat-launch-ct"
    ],
+   "water_id": "leonard-pond-ct",
+   "gnis_id": "208444",
+   "geometry_hash": "0954c61963d322636b13dab62941bc5b098e1322ec6f9b620f7544b58dc61fae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1816,10 +2581,10 @@
     "Old Lyme"
    ],
    "bbox": [
-    -72.34941,
-    41.307,
+    -72.349407,
+    41.306999,
     -72.32833,
-    41.34499
+    41.344986
    ],
    "wikidata": null,
    "charted": true,
@@ -1827,6 +2592,15 @@
    "launches": [
     "lieutenant-river-carry-in-access-ct"
    ],
+   "water_id": "lieutenant-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "7f43acd26966744295025bb9fc01edbe967568bf3699eacd23869350e01784f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1838,10 +2612,10 @@
     "Stonington"
    ],
    "bbox": [
-    -71.90537,
-    41.30705,
-    -71.84681,
-    41.34081
+    -71.905375,
+    41.307051,
+    -71.846808,
+    41.340811
    ],
    "wikidata": null,
    "charted": true,
@@ -1849,6 +2623,15 @@
    "launches": [
     "barn-island-boat-launch-ct"
    ],
+   "water_id": "little-narragansett-bay-ct",
+   "gnis_id": null,
+   "geometry_hash": "a34edfa7382d6d404a57ebd7fe078fd9428ac0bd20536302cb23fc60494b4d31",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1861,9 +2644,9 @@
    ],
    "bbox": [
     -71.84388,
-    42.01065,
-    -71.83781,
-    42.01814
+    42.010652,
+    -71.837814,
+    42.018141
    ],
    "wikidata": "Q31810739",
    "charted": false,
@@ -1871,6 +2654,15 @@
    "launches": [
     "little-pond-boat-launch-ct"
    ],
+   "water_id": "little-pond-ct",
+   "gnis_id": "208521",
+   "geometry_hash": "f02937cb55094870c706985bb84580af8e2a2cdbaecb5bca315946aaf055c0d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1893,10 +2685,10 @@
     "New Haven"
    ],
    "bbox": [
-    -73.80933,
+    -73.809328,
     40.77114,
-    -72.03828,
-    41.32187
+    -72.038281,
+    41.321896
    ],
    "wikidata": "Q867460",
    "charted": true,
@@ -1930,6 +2722,37 @@
     "west-wharf-beach-ct",
     "white-sands-beach-ct"
    ],
+   "water_id": "long-island-sound-ct",
+   "gnis_id": null,
+   "geometry_hash": "e5aa0b32857f5639abf8419cb868e2fe0b810622d61217fe12201629e7814c48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "clinton-harbor-ct",
+    "cove-river-ct",
+    "fenger-brook-ct",
+    "jordan-cove-ct",
+    "morris-creek-ct",
+    "old-field-creek-ct",
+    "pear-tree-point-cove-ct",
+    "west-shore-pond-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "new-haven-harbor-boat-launch-ct",
+    "lordship-boat-launch-ct"
+   ],
+   "slug_aliases": [
+    "clinton-harbor-ct",
+    "cove-river-ct",
+    "fenger-brook-ct",
+    "jordan-cove-ct",
+    "morris-creek-ct",
+    "old-field-creek-ct",
+    "pear-tree-point-cove-ct",
+    "west-shore-pond-ct"
+   ],
    "advisories": [],
    "aliases": [
     "Norwalk Harbor",
@@ -1945,10 +2768,10 @@
     "North Stonington"
    ],
    "bbox": [
-    -71.95167,
-    41.43722,
-    -71.94334,
-    41.45322
+    -71.951671,
+    41.437218,
+    -71.943344,
+    41.453305
    ],
    "wikidata": null,
    "charted": false,
@@ -1956,6 +2779,15 @@
    "launches": [
     "long-pond-boat-launch-ct"
    ],
+   "water_id": "long-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "2b4511c9a18af13f17f1f8c4bfa82b89377c9b5f6bd9bec9dbc265ded02bc04b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1967,10 +2799,10 @@
     "Bolton"
    ],
    "bbox": [
-    -72.43831,
-    41.79587,
-    -72.4256,
-    41.80844
+    -72.438308,
+    41.795866,
+    -72.425603,
+    41.808436
    ],
    "wikidata": "Q32844834",
    "charted": false,
@@ -1978,6 +2810,15 @@
    "launches": [
     "bolton-lake-lower-boat-launch-ct"
    ],
+   "water_id": "lower-bolton-lake-ct",
+   "gnis_id": "1771176",
+   "geometry_hash": "4ceba56f0e5e407701d110776faf7704d1e4479ef5a8f788efaabaab4f0870c8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1989,10 +2830,10 @@
     "Ridgefield"
    ],
    "bbox": [
-    -73.53383,
-    41.31539,
-    -73.52093,
-    41.32493
+    -73.533829,
+    41.315106,
+    -73.520933,
+    41.324988
    ],
    "wikidata": null,
    "charted": false,
@@ -2000,6 +2841,15 @@
    "launches": [
     "mamanasco-lake-boat-launch-ct"
    ],
+   "water_id": "mamanasco-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "7569ce467448f6775afad10641b3e02732e1cfec1dda0efb62492e9f1810e873",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2011,10 +2861,10 @@
     "Mansfield"
    ],
    "bbox": [
-    -72.18921,
-    41.74784,
-    -72.16127,
-    41.77941
+    -72.189207,
+    41.747837,
+    -72.161273,
+    41.779406
    ],
    "wikidata": "Q6751654",
    "charted": false,
@@ -2022,6 +2872,15 @@
    "launches": [
     "mansfield-hollow-dam-boat-launch-ct"
    ],
+   "water_id": "mansfield-hollow-lake-ct",
+   "gnis_id": "208702",
+   "geometry_hash": "2dfd5277f2b1dc22c8158e9400cff749893324e4774aa391e2a368716ae62f8f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2033,10 +2892,10 @@
     "Union"
    ],
    "bbox": [
-    -72.14034,
-    42.00492,
+    -72.140342,
+    42.004922,
     -72.12561,
-    42.02957
+    42.029567
    ],
    "wikidata": "Q6783081",
    "charted": false,
@@ -2044,6 +2903,15 @@
    "launches": [
     "mashapaug-lake-boat-launch-ct"
    ],
+   "water_id": "mashapaug-pond-ct",
+   "gnis_id": "208753",
+   "geometry_hash": "1c2590f4a1e80ac197e589baddd74192de117f59371a0b8d528a4b33bd22e92f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2055,16 +2923,56 @@
     "Westbrook"
    ],
    "bbox": [
-    -72.55328,
+    -72.553285,
     41.28114,
-    -72.47387,
-    41.39522
+    -72.473868,
+    41.395224
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "kirtland-landing-ct"
+   ],
+   "water_id": "menunketesuck-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "45ca7397b44348de218ba5bf9ebd2a1cb3f7604117a37b12bc3fa07fe986c9c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "merimere-reservoir-ct",
+   "name": "Merimere Reservoir",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Meriden"
+   ],
+   "bbox": [
+    -72.829545,
+    41.55455,
+    -72.822106,
+    41.568124
+   ],
+   "wikidata": "Q34907155",
+   "charted": false,
+   "area_km2": 0.235,
+   "launches": [],
+   "water_id": "merimere-reservoir-ct",
+   "gnis_id": "208836",
+   "geometry_hash": "b369137c09b324d096b5effbfe84d7975936baf7d6664ffc983335512348f9f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "merimere-reservoir-boat-launch-ct"
    ],
    "advisories": []
   },
@@ -2077,10 +2985,10 @@
     "Westbrook"
    ],
    "bbox": [
-    -72.49397,
-    41.33634,
-    -72.48326,
-    41.34437
+    -72.493973,
+    41.336342,
+    -72.483264,
+    41.344369
    ],
    "wikidata": null,
    "charted": false,
@@ -2088,6 +2996,15 @@
    "launches": [
     "messerschmidt-pond-boat-launch-ct"
    ],
+   "water_id": "messerschmidt-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "fc1a11ce567658dcc7c8476492de557946d7d8f014b73d6d758c0295f656bd94",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2099,10 +3016,10 @@
     "Essex"
    ],
    "bbox": [
-    -72.39191,
-    41.34812,
+    -72.391909,
+    41.347951,
     -72.38603,
-    41.35127
+    41.351271
    ],
    "wikidata": null,
    "charted": true,
@@ -2113,6 +3030,46 @@
     "mack-lane-water-access-area-ct",
     "nott-lane-open-space-ct",
     "scholes-lane-water-access-area-ct"
+   ],
+   "water_id": "middle-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "efec19326108e5997aded41a70b559296e55d7c1d42db2e4a0ab99c128099079",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-reservoir-ct",
+   "name": "Middle Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "East Killingly"
+   ],
+   "bbox": [
+    -71.811675,
+    41.84878,
+    -71.803532,
+    41.862572
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.457,
+   "launches": [],
+   "water_id": "middle-reservoir-ct",
+   "gnis_id": null,
+   "geometry_hash": "bc2d813860006331dd54155dcdcc272af786a13ab3958d4c1819c782e2e4022c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "middle-reservoir-boat-launch-east-killingly-ct"
    ],
    "advisories": []
   },
@@ -2126,9 +3083,9 @@
    ],
    "bbox": [
     -73.0576,
-    41.21288,
-    -73.05238,
-    41.22238
+    41.212884,
+    -73.052384,
+    41.222383
    ],
    "wikidata": "Q31813361",
    "charted": true,
@@ -2136,6 +3093,15 @@
    "launches": [
     "milford-municipal-boat-launch-ct"
    ],
+   "water_id": "milford-harbor-ct",
+   "gnis_id": "208885",
+   "geometry_hash": "0e0db54acc75c84e8dc2cb3fd831e53f37c52221ffc15daa299219882a21822c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2147,10 +3113,10 @@
     "Ledyard"
    ],
    "bbox": [
-    -72.09071,
-    41.41224,
-    -72.08472,
-    41.41703
+    -72.090705,
+    41.412207,
+    -72.084528,
+    41.417029
    ],
    "wikidata": "Q31813362",
    "charted": true,
@@ -2158,6 +3124,15 @@
    "launches": [
     "erickson-park-ct"
    ],
+   "water_id": "mill-cove-ct",
+   "gnis_id": "208898",
+   "geometry_hash": "33998270c4a1aafeef34cdbee41bf6892f6cae79f309098fef313344e43af687",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2169,10 +3144,10 @@
     "New Haven"
    ],
    "bbox": [
-    -72.91928,
-    41.2995,
-    -72.88415,
-    41.49935
+    -72.919282,
+    41.299502,
+    -72.884152,
+    41.499347
    ],
    "wikidata": null,
    "charted": true,
@@ -2180,6 +3155,15 @@
    "launches": [
     "east-rock-park-ct"
    ],
+   "water_id": "mill-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "c3d958183d289e22665431309bb568eba249abe6950ea5e1cdbb15232df8fe97",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2191,9 +3175,9 @@
     "Fairfield"
    ],
    "bbox": [
-    -73.27543,
-    41.13942,
-    -73.27229,
+    -73.275432,
+    41.139419,
+    -73.272294,
     41.15371
    ],
    "wikidata": null,
@@ -2202,6 +3186,15 @@
    "launches": [
     "perry-s-mill-ponds-ct"
    ],
+   "water_id": "mill-river-fairfield-ct",
+   "gnis_id": null,
+   "geometry_hash": "43a785df49a6d3b08f2e28315b660067f7b70f6ce82a4a168ba83a148642441a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2213,10 +3206,10 @@
     "Cornwall"
    ],
    "bbox": [
-    -73.29444,
-    41.80976,
-    -73.29087,
-    41.81291
+    -73.294435,
+    41.809757,
+    -73.290872,
+    41.812909
    ],
    "wikidata": "Q31810766",
    "charted": false,
@@ -2224,6 +3217,15 @@
    "launches": [
     "mohawk-pond-boat-launch-ct"
    ],
+   "water_id": "mohawk-pond-ct",
+   "gnis_id": "208983",
+   "geometry_hash": "69af87e6f36b55ea67bbfe1846032d62becae709102847762d0b11c6c828e649",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2235,10 +3237,10 @@
     "Columbia"
    ],
    "bbox": [
-    -72.31685,
-    41.66354,
-    -72.30935,
-    41.67945
+    -72.316845,
+    41.663541,
+    -72.309347,
+    41.679445
    ],
    "wikidata": "Q34908072",
    "charted": false,
@@ -2246,6 +3248,15 @@
    "launches": [
     "mono-pond-boat-launch-ct"
    ],
+   "water_id": "mono-pond-ct",
+   "gnis_id": "209000",
+   "geometry_hash": "574c6abf370bdaabb2dd6ccc570f607fffe6cf50b3b188f8aca4328868b0bbdc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2257,10 +3268,10 @@
     "East Haddam"
    ],
    "bbox": [
-    -72.42664,
-    41.49715,
+    -72.426644,
+    41.496834,
     -72.38404,
-    41.51744
+    41.517444
    ],
    "wikidata": null,
    "charted": false,
@@ -2269,6 +3280,15 @@
     "moodus-reservoir-lower-boat-launch-ct",
     "moodus-reservoir-upper-boat-launch-ct"
    ],
+   "water_id": "moodus-reservoir-ct",
+   "gnis_id": null,
+   "geometry_hash": "a7707f174d098ff9480d856a90ad8b37328b1ecac0774d3a57526fee08f56c17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2282,8 +3302,8 @@
    "bbox": [
     -72.19514,
     41.9615,
-    -72.19103,
-    41.96744
+    -72.191027,
+    41.967465
    ],
    "wikidata": null,
    "charted": false,
@@ -2291,6 +3311,15 @@
    "launches": [
     "morey-pond-boat-lauch-ct"
    ],
+   "water_id": "morey-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "b8f3f5de648dc6558395479a1c38a24c74b71e5f4522776bbe69958e248ad126",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2302,10 +3331,10 @@
     "Litchfield"
    ],
    "bbox": [
-    -73.28211,
-    41.69712,
-    -73.27415,
-    41.70417
+    -73.282111,
+    41.697123,
+    -73.274155,
+    41.704171
    ],
    "wikidata": "Q31810772",
    "charted": false,
@@ -2313,6 +3342,15 @@
    "launches": [
     "mount-tom-pond-boat-launch-ct"
    ],
+   "water_id": "mount-tom-pond-ct",
+   "gnis_id": "209096",
+   "geometry_hash": "c2653a7f622d68ff9f21997cbdfa47f221e8cb98e53b1722a32c5b93012d09a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2324,10 +3362,10 @@
     "Sharon"
    ],
    "bbox": [
-    -73.48071,
-    41.89469,
-    -73.46868,
-    41.91029
+    -73.480711,
+    41.894685,
+    -73.468681,
+    41.910506
    ],
    "wikidata": "Q31810778",
    "charted": false,
@@ -2335,6 +3373,15 @@
    "launches": [
     "mudge-pond-boat-launch-ct"
    ],
+   "water_id": "mudge-pond-ct",
+   "gnis_id": "209129",
+   "geometry_hash": "0ed01d3a0c5c2fe89f729a42e54facb8b8a491ed6602f6f9d4d72481e4828449",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2347,10 +3394,10 @@
     "Mystic"
    ],
    "bbox": [
-    -71.98793,
-    41.32129,
-    -71.95299,
-    41.35786
+    -71.98796,
+    41.321291,
+    -71.952991,
+    41.357859
    ],
    "wikidata": null,
    "charted": true,
@@ -2358,6 +3405,15 @@
    "launches": [
     "main-street-dock-and-beach-ct"
    ],
+   "water_id": "mystic-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "39ce54fdda96aa3b27080a21bae459c29e61fc405074fed37a2bd6d90e2d5cdd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2371,10 +3427,10 @@
     "Stonington"
    ],
    "bbox": [
-    -71.97229,
-    41.34825,
-    -71.95763,
-    41.39295
+    -71.972444,
+    41.348253,
+    -71.957631,
+    41.392954
    ],
    "wikidata": null,
    "charted": true,
@@ -2388,6 +3444,17 @@
     "steamboat-wharf-ct",
     "water-street-public-dock-and-launch-ct"
    ],
+   "water_id": "mystic-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "9d4eb4156dbda67e9175bd77615882c20d20fabd9eb3c7c090a3a723f17a523d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "mystic-river-boat-launch-ct-3"
+   ],
    "advisories": []
   },
   {
@@ -2399,9 +3466,9 @@
     "New London"
    ],
    "bbox": [
-    -72.10272,
-    41.31855,
-    -72.07301,
+    -72.102716,
+    41.318551,
+    -72.073011,
     41.4
    ],
    "wikidata": null,
@@ -2409,6 +3476,22 @@
    "area_km2": 7.868,
    "launches": [
     "city-pier-and-waterfront-park-ct"
+   ],
+   "water_id": "new-london-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "2d60dd3aa99826f8c802f675cc233edbb84d0ae5e243e34f327931baec21e2b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "winthrop-cove-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "u-s-coast-guard-station-new-london-ct"
+   ],
+   "slug_aliases": [
+    "winthrop-cove-ct"
    ],
    "advisories": []
   },
@@ -2421,9 +3504,9 @@
     "East Lyme"
    ],
    "bbox": [
-    -72.20494,
-    41.2879,
-    -72.16826,
+    -72.204936,
+    41.287901,
+    -72.168261,
     41.3243
    ],
    "wikidata": null,
@@ -2432,6 +3515,15 @@
    "launches": [
     "grand-street-boat-launch-ct"
    ],
+   "water_id": "niantic-bay-ct",
+   "gnis_id": null,
+   "geometry_hash": "80c30e0566d321f9d3f3169615aeae0d8f9cb4874f1c95dcb9dd5879675c639b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2444,10 +3536,10 @@
     "Waterford"
    ],
    "bbox": [
-    -72.19681,
-    41.32241,
-    -72.17649,
-    41.3711
+    -72.196811,
+    41.322408,
+    -72.176494,
+    41.371111
    ],
    "wikidata": null,
    "charted": true,
@@ -2456,6 +3548,15 @@
     "cini-memorial-park-ct",
     "niantic-river-boat-launch-ct"
    ],
+   "water_id": "niantic-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "e49ad19e3d246c70ff11c72e99e08fc3086f5eab72617a6baab9ad087a606412",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2467,9 +3568,9 @@
     "Old Saybrook"
    ],
    "bbox": [
-    -72.36899,
+    -72.368988,
     41.28466,
-    -72.35508,
+    -72.355084,
     41.2979
    ],
    "wikidata": null,
@@ -2478,6 +3579,15 @@
    "launches": [
     "old-saybrook-town-dock-ct"
    ],
+   "water_id": "north-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "fff86f669d40338da1555b75223a1f3a23d5c50c79a44ed82c375d3ef129bcbb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2489,10 +3599,10 @@
     "Essex"
    ],
    "bbox": [
-    -72.39779,
-    41.35232,
-    -72.38054,
-    41.37372
+    -72.397789,
+    41.352321,
+    -72.380541,
+    41.373719
    ],
    "wikidata": null,
    "charted": true,
@@ -2500,6 +3610,15 @@
    "launches": [
     "little-point-street-ct"
    ],
+   "water_id": "north-cove-essex-ct",
+   "gnis_id": null,
+   "geometry_hash": "4affd24c749a2aa642f0eb86c17c9ffe892cd3503b482e3ceb555b48e9fcd51c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2511,10 +3630,10 @@
     "Wallingford"
    ],
    "bbox": [
-    -72.78348,
-    41.48362,
-    -72.77593,
-    41.49033
+    -72.783478,
+    41.483403,
+    -72.775934,
+    41.490335
    ],
    "wikidata": "Q34911275",
    "charted": false,
@@ -2522,6 +3641,15 @@
    "launches": [
     "north-farms-boat-launch-ct"
    ],
+   "water_id": "north-farms-reservoir-ct",
+   "gnis_id": "209352",
+   "geometry_hash": "d1ef58481b393306f9eaef1ffca7a5030930bccd5138a1723cb8e058cb67e039",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2533,10 +3661,10 @@
     "Norwalk"
    ],
    "bbox": [
-    -73.47191,
+    -73.471909,
     41.09512,
-    -73.40947,
-    41.32435
+    -73.409474,
+    41.324354
    ],
    "wikidata": "Q7060790",
    "charted": true,
@@ -2544,6 +3672,15 @@
    "launches": [
     "veteran-s-memorial-park-ct"
    ],
+   "water_id": "norwalk-river-ct",
+   "gnis_id": "209409",
+   "geometry_hash": "d567f80de5183101d5a3323068d45e25f7d787e6608eb4e499a76b5d3c5bbea9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2555,10 +3692,10 @@
     "Lyme"
    ],
    "bbox": [
-    -72.30456,
-    41.38364,
-    -72.2995,
-    41.38864
+    -72.304563,
+    41.383638,
+    -72.299502,
+    41.388898
    ],
    "wikidata": "Q31810790",
    "charted": false,
@@ -2566,6 +3703,15 @@
    "launches": [
     "norwich-pond-boat-launch-ct"
    ],
+   "water_id": "norwich-pond-ct",
+   "gnis_id": "209411",
+   "geometry_hash": "75cb780015706aa34839f9ee85ab1805b83ea022b07f517287ed44d7d0b7fec4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2577,10 +3723,10 @@
     "Griswold"
    ],
    "bbox": [
-    -71.93449,
-    41.54557,
-    -71.889,
-    41.58483
+    -71.934487,
+    41.545569,
+    -71.888986,
+    41.584835
    ],
    "wikidata": null,
    "charted": false,
@@ -2588,6 +3734,15 @@
    "launches": [
     "pachaug-pond-boat-launch-ct"
    ],
+   "water_id": "pachaug-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "25ee741238b484d7d2bde6d48437f029dc6b6428b6a48835014b8e9a508a16a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2600,10 +3755,10 @@
     "Voluntown"
    ],
    "bbox": [
-    -71.98667,
-    41.55472,
-    -71.81748,
-    41.61061
+    -71.986668,
+    41.554724,
+    -71.817483,
+    41.610837
    ],
    "wikidata": "Q7121989",
    "charted": false,
@@ -2611,6 +3766,15 @@
    "launches": [
     "beachdale-pond-boat-launch-ct"
    ],
+   "water_id": "pachaug-river-ct",
+   "gnis_id": "209580",
+   "geometry_hash": "ba54a451ce7a9dc5ff365daf61b7cef549e98a58ed1c4ac25e816d968280c02e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2622,10 +3786,10 @@
     "Groton"
    ],
    "bbox": [
-    -72.01043,
-    41.32057,
-    -72.00098,
-    41.33182
+    -72.010425,
+    41.320512,
+    -72.000976,
+    41.331817
    ],
    "wikidata": null,
    "charted": true,
@@ -2633,6 +3797,15 @@
    "launches": [
     "tanglewood-park-ct"
    ],
+   "water_id": "palers-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "de15419044eaed01acbca0fe62cc9237534c933c2ee4552c906ed7995e87b181",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2644,10 +3817,10 @@
     "Winchester"
    ],
    "bbox": [
-    -73.15536,
-    41.89053,
-    -73.14451,
-    41.89958
+    -73.155356,
+    41.890508,
+    -73.144509,
+    41.899578
    ],
    "wikidata": null,
    "charted": false,
@@ -2655,6 +3828,15 @@
    "launches": [
     "park-pond-boat-launch-ct"
    ],
+   "water_id": "park-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "fca34773e591393b47723b38d779881215d05321dddb64b022ed11cae944633b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2666,10 +3848,10 @@
     "Hartford"
    ],
    "bbox": [
-    -72.66468,
-    41.75982,
-    -72.66243,
-    41.76012
+    -72.664675,
+    41.759823,
+    -72.662434,
+    41.760122
    ],
    "wikidata": "Q7137972",
    "charted": true,
@@ -2677,6 +3859,15 @@
    "launches": [
     "park-river-boat-launch-ct"
    ],
+   "water_id": "park-river-ct",
+   "gnis_id": "212786",
+   "geometry_hash": "4a524b253000501d9fcc384e6afc16e46ddb7d3632a12b5a1cd22c2ea78438b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2688,10 +3879,10 @@
     "Chester"
    ],
    "bbox": [
-    -72.53391,
-    41.40835,
-    -72.52404,
-    41.41534
+    -72.533914,
+    41.408352,
+    -72.524039,
+    41.415532
    ],
    "wikidata": null,
    "charted": false,
@@ -2699,6 +3890,15 @@
    "launches": [
     "pattaconk-lake-boat-launch-ct"
    ],
+   "water_id": "pattaconk-reservoir-ct",
+   "gnis_id": null,
+   "geometry_hash": "f8590d2196b1d545c3c2d49f78cb8c307e1c8ef7fa06819bd291a39d4413a2e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2710,10 +3910,10 @@
     "East Lyme"
    ],
    "bbox": [
-    -72.23702,
-    41.36654,
+    -72.237023,
+    41.366537,
     -72.22635,
-    41.379
+    41.379129
    ],
    "wikidata": null,
    "charted": false,
@@ -2721,6 +3921,15 @@
    "launches": [
     "pattagansett-lake-boat-launch-ct"
    ],
+   "water_id": "pattagansett-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "c56daa00ea920b29b7b0271757e629ef0379eed0add4f1e516beb0d190e56d7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2732,10 +3941,10 @@
     "Stonington"
    ],
    "bbox": [
-    -71.85984,
-    41.32036,
-    -71.74941,
-    41.41992
+    -71.859838,
+    41.320364,
+    -71.749406,
+    41.419919
    ],
    "wikidata": null,
    "charted": true,
@@ -2743,6 +3952,15 @@
    "launches": [
     "donahue-park-formerly-pawcatuck-park-ct"
    ],
+   "water_id": "pawcatuck-river-ct",
+   "gnis_id": null,
+   "geometry_hash": "27962f8409285e4954c9385b54d16a3b497506b8b42f46fb0b6cbf5b539c9f3f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2754,10 +3972,10 @@
     "Colchester"
    ],
    "bbox": [
-    -72.42497,
-    41.52433,
-    -72.41797,
-    41.53713
+    -72.424969,
+    41.524333,
+    -72.417975,
+    41.537286
    ],
    "wikidata": "Q31810802",
    "charted": false,
@@ -2765,6 +3983,15 @@
    "launches": [
     "pickerel-lake-boat-launch-ct"
    ],
+   "water_id": "pickerel-lake-ct",
+   "gnis_id": "209741",
+   "geometry_hash": "e8f5fe84a4537fc8d20db4283b925c6db9f7859e255ec373d1b4132e3ebf73f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2776,9 +4003,9 @@
     "Hampton"
    ],
    "bbox": [
-    -72.0883,
+    -72.088301,
     41.7749,
-    -72.07764,
+    -72.077636,
     41.79444
    ],
    "wikidata": null,
@@ -2787,6 +4014,15 @@
    "launches": [
     "pine-acres-lake-boat-launch-ct"
    ],
+   "water_id": "pine-acres-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "4c23d6ad64a6d5e27bcd3f8d5d43754dd17a861320ec5ceb800af43b3128846a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2798,10 +4034,10 @@
     "Ledyard"
    ],
    "bbox": [
-    -72.06158,
-    41.47096,
-    -72.04218,
-    41.48913
+    -72.061585,
+    41.470965,
+    -72.042177,
+    41.489134
    ],
    "wikidata": null,
    "charted": true,
@@ -2810,6 +4046,15 @@
     "poquetanuck-cove-car-top-boat-launch-ct",
     "william-r-haase-iv-memorial-canoe-kayak-launch-ct"
    ],
+   "water_id": "poquetanuck-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "26ab7b587669521d56a15e7ee99ecdc9f9e879aa2b62155dbecbc83bb980da79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2821,9 +4066,9 @@
     "Groton"
    ],
    "bbox": [
-    -72.0544,
-    41.31999,
-    -72.03445,
+    -72.054401,
+    41.319988,
+    -72.034453,
     41.37212
    ],
    "wikidata": "Q35264227",
@@ -2833,6 +4078,15 @@
     "bluff-point-boat-launch-ct",
     "peruzzotti-boat-launch-ct"
    ],
+   "water_id": "poquonock-river-ct",
+   "gnis_id": "209940",
+   "geometry_hash": "0cbe8dd4f68fd41cfa15808ff98b20c119c0e6bc53065f31b9c09a632a686ece",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2844,10 +4098,10 @@
     "East Lyme"
    ],
    "bbox": [
-    -72.25679,
-    41.3871,
-    -72.24108,
-    41.40001
+    -72.256788,
+    41.387101,
+    -72.241077,
+    41.400014
    ],
    "wikidata": "Q34915935",
    "charted": false,
@@ -2855,6 +4109,15 @@
    "launches": [
     "powers-lake-boat-launch-ct"
    ],
+   "water_id": "powers-lake-ct",
+   "gnis_id": "209973",
+   "geometry_hash": "8b5bcef4b1f986d2640ef9b9bb5cb91718d8f55e06c8d66389e67a3449b3cc32",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2866,16 +4129,30 @@
     "Deep River"
    ],
    "bbox": [
-    -72.42804,
-    41.37922,
-    -72.42234,
-    41.38899
+    -72.428039,
+    41.379221,
+    -72.422341,
+    41.389049
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.088,
    "launches": [
     "pratt-cove-carry-in-access-ct"
+   ],
+   "water_id": "pratt-creek-ct",
+   "gnis_id": null,
+   "geometry_hash": "93670e091217000ffaeac6943fef867ab43643404f514a1f0be73d29c12f8b04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "pratt-cove-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "pratt-cove-ct"
    ],
    "advisories": []
   },
@@ -2888,10 +4165,10 @@
     "Thompson"
    ],
    "bbox": [
-    -71.82959,
-    41.93941,
-    -71.81372,
-    41.96943
+    -71.829589,
+    41.939412,
+    -71.813719,
+    41.969434
    ],
    "wikidata": "Q18157069",
    "charted": false,
@@ -2899,6 +4176,15 @@
    "launches": [
     "quaddick-reservoir-boat-launch-ct"
    ],
+   "water_id": "quaddick-reservoir-ct",
+   "gnis_id": "210032",
+   "geometry_hash": "8ea1bf972b12b88b83c76aae48b3d6f88453907a977f762c8c23ca90704e920b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2911,9 +4197,9 @@
    ],
    "bbox": [
     -71.88993,
-    41.76859,
-    -71.88576,
-    41.78014
+    41.768593,
+    -71.885751,
+    41.780189
    ],
    "wikidata": "Q31810813",
    "charted": false,
@@ -2921,6 +4207,15 @@
    "launches": [
     "quinebaug-pond-boat-launch-ct"
    ],
+   "water_id": "quinebaug-pond-ct",
+   "gnis_id": "210056",
+   "geometry_hash": "8b7c265808a7b87d53e1359c2532244d10d59973d814cf7ef26b4651a2bf3a33",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2935,10 +4230,10 @@
     "North Haven"
    ],
    "bbox": [
-    -72.90576,
-    41.29799,
-    -72.81418,
-    41.69502
+    -72.905761,
+    41.297994,
+    -72.814178,
+    41.695025
    ],
    "wikidata": "Q3414549",
    "charted": true,
@@ -2947,6 +4242,20 @@
     "clifton-street-boat-launch-ct",
     "quinnipiac-river-public-access-ct",
     "quinnipiac-river-water-access-area-ct"
+   ],
+   "water_id": "quinnipiac-river-hamden-ct",
+   "gnis_id": "210066",
+   "geometry_hash": "fbed7e4d5817ad907e494f791ba6e837e3e6b1ee6b91e0d77a9349cce7e194a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "quinnipiac-river-ct"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "quinnipiac-river-ct"
    ],
    "advisories": []
   },
@@ -2959,10 +4268,10 @@
     "Guilford"
    ],
    "bbox": [
-    -72.70581,
-    41.38018,
-    -72.69522,
-    41.399
+    -72.705814,
+    41.379894,
+    -72.695216,
+    41.399038
    ],
    "wikidata": "Q31810814",
    "charted": false,
@@ -2970,6 +4279,15 @@
    "launches": [
     "quonnipaug-lake-boat-launch-ct"
    ],
+   "water_id": "quonnipaug-lake-ct",
+   "gnis_id": "210073",
+   "geometry_hash": "43da9e93960e48ea28169f43ff7c5dde9913795e6d09bbf5e5280729adfc61bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2982,10 +4300,10 @@
     "Windsor"
    ],
    "bbox": [
-    -72.7552,
-    41.88995,
-    -72.69361,
-    41.91628
+    -72.755202,
+    41.889947,
+    -72.693615,
+    41.916277
    ],
    "wikidata": null,
    "charted": false,
@@ -2993,6 +4311,15 @@
    "launches": [
     "rainbow-reservoir-boat-launch-ct"
    ],
+   "water_id": "rainbow-reservoir-ct",
+   "gnis_id": null,
+   "geometry_hash": "5d91dee51d39450d39df56ef97f06f9f4db2fc196818c926c24573747364596c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3004,10 +4331,10 @@
     "Old Lyme"
    ],
    "bbox": [
-    -72.31472,
-    41.34933,
-    -72.29465,
-    41.36785
+    -72.314723,
+    41.349334,
+    -72.294647,
+    41.367854
    ],
    "wikidata": null,
    "charted": false,
@@ -3015,6 +4342,15 @@
    "launches": [
     "rogers-lake-boat-launch-ct"
    ],
+   "water_id": "rogers-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "6aea78091d5aa22dca9a609ece568468fe9abe149f3da3c0bd9f85b7028cf516",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3026,10 +4362,10 @@
     "Killingly"
    ],
    "bbox": [
-    -71.86342,
-    41.76691,
-    -71.8621,
-    41.76957
+    -71.863502,
+    41.766817,
+    -71.861753,
+    41.769568
    ],
    "wikidata": null,
    "charted": false,
@@ -3037,6 +4373,15 @@
    "launches": [
     "ross-pond-boat-launch-ct"
    ],
+   "water_id": "ross-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "127cf543ada7094bf6448357b66691683fc2b77a9961a03c1866677482b94c17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3049,10 +4394,10 @@
     "Haddam"
    ],
    "bbox": [
-    -72.4887,
+    -72.488699,
     41.46471,
-    -72.42245,
-    41.57939
+    -72.422454,
+    41.579388
    ],
    "wikidata": "Q7405530",
    "charted": true,
@@ -3060,6 +4405,15 @@
    "launches": [
     "salmon-river-boat-launch-connecticut-river-ct"
    ],
+   "water_id": "salmon-river-ct",
+   "gnis_id": "210615",
+   "geometry_hash": "5dbf6399d4c0f6a2bd1d8c28f717434c8e09cc6af6e9331f73e9986f57319b24",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3071,10 +4425,10 @@
     "Westport"
    ],
    "bbox": [
-    -73.47799,
-    41.10884,
-    -73.34384,
-    41.35495
+    -73.477993,
+    41.108839,
+    -73.343804,
+    41.354945
    ],
    "wikidata": "Q7427199",
    "charted": true,
@@ -3082,6 +4436,15 @@
    "launches": [
     "saugatuck-river-boat-launch-ct"
    ],
+   "water_id": "saugatuck-river-ct",
+   "gnis_id": "210655",
+   "geometry_hash": "d862214fda99376177dfc162e8ecc37d5939b27cf658298b189b7997059f02af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3093,9 +4456,9 @@
     "Westport"
    ],
    "bbox": [
-    -73.34587,
-    41.11274,
-    -73.33293,
+    -73.346006,
+    41.112741,
+    -73.332926,
     41.12279
    ],
    "wikidata": null,
@@ -3105,6 +4468,15 @@
     "hillspoint-road-open-space-ct",
     "mill-pond-ct"
    ],
+   "water_id": "sherwood-millpond-ct",
+   "gnis_id": null,
+   "geometry_hash": "02206ae4205fc88cc3c043ee43f4602a122a1eccb07f72108a80f641399d8d1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3118,10 +4490,10 @@
     "Willimantic"
    ],
    "bbox": [
-    -72.1929,
-    41.52044,
-    -72.04109,
-    41.71289
+    -72.192899,
+    41.520442,
+    -72.041085,
+    41.712892
    ],
    "wikidata": "Q7495683",
    "charted": true,
@@ -3129,6 +4501,15 @@
    "launches": [
     "greeneville-dam-fishing-area-ct"
    ],
+   "water_id": "shetucket-river-norwich-ct",
+   "gnis_id": "210826",
+   "geometry_hash": "b6ec7a23b789aee4d9474f25ae338c54a028d7d03c3dd1bd2fb5bd5355f691cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3141,9 +4522,9 @@
    ],
    "bbox": [
     -72.77996,
-    41.57357,
-    -72.76629,
-    41.58697
+    41.573572,
+    -72.766291,
+    41.586969
    ],
    "wikidata": "Q139595734",
    "charted": false,
@@ -3151,6 +4532,15 @@
    "launches": [
     "silver-lake-boat-launch-ct"
    ],
+   "water_id": "silver-lake-ct",
+   "gnis_id": "210861",
+   "geometry_hash": "86d502425d08ea5c38f827e596d9ea0ef1fe75d292ffedc2820670d00d4832af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3163,9 +4553,9 @@
    ],
    "bbox": [
     -73.4865,
-    41.51003,
-    -73.47056,
-    41.54078
+    41.510032,
+    -73.470562,
+    41.540777
    ],
    "wikidata": "Q114289334",
    "charted": false,
@@ -3173,6 +4563,15 @@
    "launches": [
     "squantz-pond-boat-launch-ct"
    ],
+   "water_id": "squantz-pond-ct",
+   "gnis_id": "211112",
+   "geometry_hash": "3cb9dbdd9d0e8085f82d453917cde93b79dd2f7b2f15e2243904cbb1925e7943",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3184,10 +4583,10 @@
     "Stamford"
    ],
    "bbox": [
-    -73.55736,
-    41.01493,
-    -73.52886,
-    41.0488
+    -73.557359,
+    41.014931,
+    -73.528861,
+    41.048799
    ],
    "wikidata": null,
    "charted": true,
@@ -3195,6 +4594,15 @@
    "launches": [
     "john-j-boccuzzi-park-ct"
    ],
+   "water_id": "stamford-harbor-ct",
+   "gnis_id": null,
+   "geometry_hash": "f6b0ae7b9e340709c2dcf91baadb108f6542465e9005a30b63039a24ac2b765f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3206,10 +4614,10 @@
     "Torrington"
    ],
    "bbox": [
-    -73.15729,
-    41.83364,
+    -73.157294,
+    41.833637,
     -73.14728,
-    41.85185
+    41.852057
    ],
    "wikidata": null,
    "charted": false,
@@ -3217,6 +4625,15 @@
    "launches": [
     "stillwater-pond-boat-launch-ct"
    ],
+   "water_id": "stillwater-pond-ct",
+   "gnis_id": null,
+   "geometry_hash": "ec85f6f4d685f0508a1ec20234d78ed2660292f99f666f52026156d68bfae043",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3232,10 +4649,10 @@
     "New London"
    ],
    "bbox": [
-    -72.09722,
-    41.30904,
-    -72.07002,
-    41.52044
+    -72.097222,
+    41.309043,
+    -72.069922,
+    41.520442
    ],
    "wikidata": "Q3246856",
    "charted": true,
@@ -3246,6 +4663,15 @@
     "thames-river-boat-launch-ct",
     "town-of-montville-boat-launch-ct"
    ],
+   "water_id": "thames-river-ct",
+   "gnis_id": "211397",
+   "geometry_hash": "a72d26fa1d4dc0963d94bb89c3da34172eaaaa8c6071b70e3e5f547169038f26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3258,9 +4684,9 @@
    ],
    "bbox": [
     -73.26764,
-    41.83084,
+    41.830819,
     -73.25519,
-    41.84419
+    41.844191
    ],
    "wikidata": "Q34931690",
    "charted": false,
@@ -3268,6 +4694,15 @@
    "launches": [
     "tyler-pond-boat-launch-ct"
    ],
+   "water_id": "tyler-lake-ct",
+   "gnis_id": "212900",
+   "geometry_hash": "ddd76a5a2b1b98368beab9f55c9d29d80fe2f7f47ffc9a7642db017a9462e551",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3279,10 +4714,10 @@
     "Lyme"
    ],
    "bbox": [
-    -72.32224,
-    41.3711,
-    -72.30943,
-    41.37889
+    -72.322235,
+    41.371096,
+    -72.309426,
+    41.379038
    ],
    "wikidata": "Q31810842",
    "charted": false,
@@ -3290,6 +4725,15 @@
    "launches": [
     "uncas-pond-hog-pond-boat-launch-ct"
    ],
+   "water_id": "uncas-pond-ct",
+   "gnis_id": "211651",
+   "geometry_hash": "371586926af79a68beef2c72b8630bea8a7f9f06bdd8a0bad0f286ff1cfd0428",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3301,10 +4745,10 @@
     "Shelton"
    ],
    "bbox": [
-    -73.07482,
-    41.32213,
-    -73.06853,
-    41.32621
+    -73.074823,
+    41.322127,
+    -73.068526,
+    41.326209
    ],
    "wikidata": null,
    "charted": false,
@@ -3312,6 +4756,15 @@
    "launches": [
     "upper-ansonia-reservoir-boat-launch-ct"
    ],
+   "water_id": "upper-ansonia-reservoir-ct",
+   "gnis_id": null,
+   "geometry_hash": "72d8fd930e22e1f4f9519b72633fa7ac718a1e9056e860e5a46a58492bc37ba7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3323,16 +4776,56 @@
     "Vernon"
    ],
    "bbox": [
-    -72.42291,
-    41.81962,
-    -72.41506,
-    41.82735
+    -72.422907,
+    41.819621,
+    -72.415059,
+    41.827353
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.212,
    "launches": [
     "bolton-lake-upper-boat-launch-ct"
+   ],
+   "water_id": "upper-bolton-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "31e2811498e76f385434fc50197dc9b5104aadd11364313dfc5dd411058880f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-bungee-lake-ct",
+   "name": "Upper Bungee Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Lake Bungee"
+   ],
+   "bbox": [
+    -72.071824,
+    41.950961,
+    -72.059476,
+    41.961267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.464,
+   "launches": [],
+   "water_id": "upper-bungee-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "04f2e8ef0002bd7d7ec2c6a87bfccfd5b40ca960207f629032c3622e9132ff1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "upper-bungee-lake-boat-launch-ct"
    ],
    "advisories": []
   },
@@ -3345,10 +4838,10 @@
     "Salisbury"
    ],
    "bbox": [
-    -73.3936,
-    42.02029,
-    -73.37274,
-    42.03843
+    -73.393596,
+    42.020286,
+    -73.372744,
+    42.038654
    ],
    "wikidata": null,
    "charted": false,
@@ -3356,6 +4849,15 @@
    "launches": [
     "twin-lakes-boat-launch-ct"
    ],
+   "water_id": "washining-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "783839233f408e065b4ea4cb8781cb131ab0b472cdc23bd243ba9bf799b46555",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "kind": "invasive",
@@ -3376,16 +4878,56 @@
     "Stonington"
    ],
    "bbox": [
-    -71.88975,
-    41.33749,
-    -71.87786,
-    41.35989
+    -71.889749,
+    41.337491,
+    -71.877851,
+    41.359892
    ],
    "wikidata": "Q7983119",
    "charted": true,
    "area_km2": 0.693,
    "launches": [
     "saltwater-farm-vineyard-car-top-boat-launch-ct"
+   ],
+   "water_id": "wequetequock-cove-ct",
+   "gnis_id": "211913",
+   "geometry_hash": "df4b1d17f9f9c1ba24654d6aa0fa52a8552e0037b469e1d72fc0001cd04ef548",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-cove-ct",
+   "name": "West Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Mystic"
+   ],
+   "bbox": [
+    -71.995489,
+    41.319111,
+    -71.991001,
+    41.324499
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.12,
+   "launches": [],
+   "water_id": "west-cove-ct",
+   "gnis_id": null,
+   "geometry_hash": "0b662758605453ca01aeac81c918b85823aadeb10ce55660fdf2e242607ca59e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "west-cove-boat-launch-mystic-ct"
    ],
    "advisories": []
   },
@@ -3399,10 +4941,10 @@
     "Winsted"
    ],
    "bbox": [
-    -73.04671,
-    41.87338,
-    -73.03456,
-    41.89046
+    -73.046711,
+    41.873128,
+    -73.034558,
+    41.890698
    ],
    "wikidata": "Q35448392",
    "charted": false,
@@ -3410,6 +4952,15 @@
    "launches": [
     "west-hill-pond-boat-launch-ct"
    ],
+   "water_id": "west-hill-pond-ct",
+   "gnis_id": "211956",
+   "geometry_hash": "32a7878d34a2bd41bcbd9c5e42fcad965c215775fa5eae58064fa85eef74dcd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3421,10 +4972,10 @@
     "Goshen"
    ],
    "bbox": [
-    -73.25968,
-    41.85221,
-    -73.25353,
-    41.857
+    -73.259678,
+    41.852212,
+    -73.253529,
+    41.856999
    ],
    "wikidata": "Q34934983",
    "charted": false,
@@ -3432,6 +4983,15 @@
    "launches": [
     "west-side-pond-boat-launch-ct"
    ],
+   "water_id": "west-side-pond-ct",
+   "gnis_id": "211991",
+   "geometry_hash": "26766d33f80f8b685d1705f86ebb4b824a53014bcc5be0daf14befe71cf09826",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3443,9 +5003,9 @@
     "Thompson"
    ],
    "bbox": [
-    -71.91472,
-    41.94531,
-    -71.89683,
+    -71.914724,
+    41.945315,
+    -71.896832,
     41.96679
    ],
    "wikidata": null,
@@ -3453,6 +5013,46 @@
    "area_km2": 0.912,
    "launches": [
     "west-thompson-lake-boat-launch-ct"
+   ],
+   "water_id": "west-thompson-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "ae545aae07ed8dca7477d12e669ef905521340a314cf4d280ff141f29411df09",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "witches-woods-lake-ct",
+   "name": "Witches Woods Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Lake Bungee"
+   ],
+   "bbox": [
+    -72.07489,
+    41.943649,
+    -72.069878,
+    41.955396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.285,
+   "launches": [],
+   "water_id": "witches-woods-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "068021a354afe0318cfae3f6d973922c278146ecbd39b6f5f344351c9abbdf41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "witches-woods-lake-boat-launch-ct"
    ],
    "advisories": []
   },
@@ -3466,9 +5066,9 @@
    ],
    "bbox": [
     -73.19707,
-    42.0182,
-    -73.18945,
-    42.03646
+    42.018204,
+    -73.189452,
+    42.036459
    ],
    "wikidata": "Q31810857",
    "charted": false,
@@ -3476,6 +5076,15 @@
    "launches": [
     "wood-creek-pond-boat-launch-ct"
    ],
+   "water_id": "wood-creek-pond-ct",
+   "gnis_id": "212230",
+   "geometry_hash": "16a7d8f55e6148a26c972988558327f34b3e2d7c8954a120c5b363deb65a8aa0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3487,10 +5096,10 @@
     "North Stonington"
    ],
    "bbox": [
-    -71.87749,
-    41.48532,
-    -71.86852,
-    41.49335
+    -71.877492,
+    41.485317,
+    -71.868524,
+    41.493587
    ],
    "wikidata": null,
    "charted": false,
@@ -3498,6 +5107,15 @@
    "launches": [
     "wyassup-lake-boat-launch-ct"
    ],
+   "water_id": "wyassup-lake-ct",
+   "gnis_id": null,
+   "geometry_hash": "37d0833524848e67cc95aa6677a93c0f038df2de8b47875564601958d3783266",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3509,10 +5127,10 @@
     "Norwich"
    ],
    "bbox": [
-    -72.24283,
-    41.52044,
-    -72.07847,
-    41.57959
+    -72.242829,
+    41.520442,
+    -72.078466,
+    41.579589
    ],
    "wikidata": "Q8048984",
    "charted": true,
@@ -3520,6 +5138,15 @@
    "launches": [
     "howard-t-brown-park-ct"
    ],
+   "water_id": "yantic-river-ct",
+   "gnis_id": "212307",
+   "geometry_hash": "6fb53984f31cdf7af0a15adf095bff361d7062b50e073eab84f5d750260158da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]
