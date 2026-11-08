@@ -104,9 +104,16 @@ def test_missing_waters_list_leaves_out_what_the_national_list_holds():
     assert "Old Springfield Reservoir" in names and "Brashears Creek" in names | done
     assert not names & done
     by = {r["name"]: r for r in d["rows"]}
-    # MSD's outfalls off the Ohio by EPA's reach index (final audit 2026-11-08 P2-1)
-    assert by["Beargrass Creek"]["outfalls"] == 69 and by["Mill Creek"]["outfalls"] == 7
-    assert "5140101000472" in by["Beargrass Creek"]["reach_ids"] and by["Mill Creek"]["counties"] == ["Jefferson"]
+    # MSD's outfalls off the Ohio by EPA's reach index (final audit 2026-11-08 P2-1): on the list with their outfall
+    # counts and reach codes until a names pass builds the record, then under "resolved" with its record (re-check)
+    for name in ("Beargrass Creek", "South Fork Beargrass Creek", "Middle Fork Beargrass Creek", "Mill Creek"):
+        assert name in names | done, name
+        if name in by:
+            assert by[name]["outfalls"] and by[name]["reach_ids"] and by[name]["gnis_ids"] and by[name]["counties"] == ["Jefferson"]
+        else:
+            assert next(r for r in d["resolved"] if r["name"] == name).get("slugs")
+    if "South Fork Beargrass Creek" in by:
+        assert by["South Fork Beargrass Creek"]["outfalls"] == 41 and by["Mill Creek"]["gnis_ids"] == ["498252"]
 
 
 def test_operators_are_never_named_after_a_plant():
@@ -184,9 +191,44 @@ def test_msds_outfalls_take_their_own_reach_before_the_permit_level_label():
         def by_name(self, o, text):
             return "ohio-river-ky", "name"
 
+        def dist(self, s, lat, lon):
+            return 50.0
+
         by_nhd_target = by_builder_permit = lambda self, o, text: (None, None)
     o = {"npdes_permit": "KY0022411", "outfall": "108", "receiving_water_echo": "OHIO RIVER", "reach_id": "5140101000472",
          "state": "KY", "lat": 38.24, "lon": -85.7}
     assert OW.Matcher.match(Stub(), o)["slug"] == "beargrass-creek-ky"
     assert OW.Matcher.match(Stub(), {**o, "npdes_permit": "KY0021466"})["slug"] == "ohio-river-ky"
     assert OW.Matcher.match(Stub(), {**o, "reach_id": "5140101000008"})["slug"] == "ohio-river-ky"
+
+
+def test_msds_outfalls_take_the_reachs_own_name_near_their_point():
+    """Re-check 2026-11-08: the builder's Beargrass Creek record carries no reach code, so all 121 outfalls stayed on the
+    Ohio River; the reach's GNIS name, placed at the outfall's point and taken within 400 m, now decides. Hardin
+    County's Mill Creek, 37 km off, is not Louisville's."""
+    from ingest import outfall_waters as OW
+
+    class Stub:
+        def clear_row(self):
+            pass
+
+        def by_reach(self, o, text):
+            return None, None
+
+        def usable(self, s, o, step):
+            return True
+
+        def by_name(self, o, text):
+            return {"South Fork Beargrass Creek": ("south-fork-beargrass-creek-ky", "name"),
+                    "Mill Creek": ("mill-creek-ky", "name")}.get(text, ("ohio-river-ky", "name"))
+
+        def dist(self, s, lat, lon):
+            return {"south-fork-beargrass-creek-ky": 35.0, "mill-creek-ky": 37000.0}.get(s, 2300.0)
+
+        by_nhd_target = by_builder_permit = lambda self, o, text: (None, None)
+    o = {"npdes_permit": "KY0022411", "outfall": "108", "receiving_water_echo": "OHIO RIVER", "reach_id": "5140101000472",
+         "state": "KY", "lat": 38.24, "lon": -85.7}
+    hit = OW.Matcher.match(Stub(), o)
+    assert hit["slug"] == "south-fork-beargrass-creek-ky" and hit["step"] == "reach name" and "503905" in hit["how"]
+    assert OW.Matcher.match(Stub(), {**o, "reach_id": "5140101000484"})["slug"] == "ohio-river-ky"
+    assert OW.Matcher.match(Stub(), {**o, "npdes_permit": "KY0021466"})["slug"] == "ohio-river-ky"

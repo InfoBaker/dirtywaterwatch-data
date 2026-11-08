@@ -38,10 +38,13 @@ from ingest.ky_dow_swimming_advisories import STRETCHES  # noqa: E402
 SWIM = [(w, st, county, (pt[1], pt[2])) for _, _, w, st, _, county, pt in STRETCHES]
 
 
-# EPA's NHDPlus reach codes (outfalls-us.json reach_id) for MSD's outfalls off the Ohio River (final audit 2026-11-08)
-MSD_REACHES = {"5140101000472": "Beargrass Creek", "5140101000475": "Beargrass Creek",
-               "5140101000471": "Beargrass Creek", "5140101000175": "Beargrass Creek",
-               "5140101000484": "Mill Creek"}
+# EPA's NHDPlus reach codes (outfalls-us.json reach_id) for MSD's outfalls off the Ohio River (final audit 2026-11-08),
+# with the reach's own GNIS name and id (re-check 2026-11-08: most are on the South and Middle Forks, and Louisville's
+# Mill Creek is GNIS 498252, not Hardin County's 498262)
+MSD_REACHES = {"5140101000472": ("South Fork Beargrass Creek", "503905"),
+               "5140101000475": ("Middle Fork Beargrass Creek", "498112"),
+               "5140101000471": ("Beargrass Creek", "486584"), "5140101000175": ("Beargrass Creek", "486584"),
+               "5140101000484": ("Mill Creek", "498252")}   # GNIS names and ids: EPA NHDPlus V2.1 by reachcode
 
 
 def compact(s: str) -> str:
@@ -63,7 +66,7 @@ def main(argv: list[str]) -> int:
     spelling: dict[str, str] = {}
 
     counties: dict[str, set] = defaultdict(set)
-    outfalls, reach_ids = Counter(), defaultdict(set)
+    outfalls, reach_ids, gnis = Counter(), defaultdict(set), defaultdict(set)
 
     def add(n0: str, src: str, pt=None, permit=None, report=False, stretch=None, county=None):
         n = " ".join((n0 or "").split())
@@ -109,8 +112,10 @@ def main(argv: list[str]) -> int:
     for o in us:
         if o.get("npdes_permit") != "KY0022411" or str(o.get("outfall_status") or "").upper().startswith("CLS"):
             continue
-        name = MSD_REACHES.get(str(o.get("reach_id") or ""))
-        if name:
+        hit = MSD_REACHES.get(str(o.get("reach_id") or ""))
+        if hit:
+            name = hit[0]
+            gnis[name].add(hit[1])
             add(name, "ky-dow-cso-sites-layer", [o["lat"], o["lon"]] if o.get("lat") is not None else None,
                 "KY0022411", county="Jefferson")
             outfalls[name] += 1
@@ -118,7 +123,8 @@ def main(argv: list[str]) -> int:
     rows = [{"name": n, "reports": reports[n], "permits": sorted(permits[n]), "sources": sorted(sources[n])}
             | ({"points": points[n]} if points.get(n) else {}) | ({"stretches": stretches[n]} if stretches.get(n) else {})
             | ({"counties": sorted(counties[n])} if counties.get(n) else {})
-            | ({"outfalls": outfalls[n], "reach_ids": sorted(reach_ids[n])} if outfalls.get(n) else {})
+            | ({"outfalls": outfalls[n], "reach_ids": sorted(reach_ids[n]), "gnis_ids": sorted(gnis[n])}
+               if outfalls.get(n) else {})
             for n in sorted(set(sources), key=lambda x: (-reports[x], -outfalls[x], x))]
     doc = {"about": ("Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: "
                      "EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as "
