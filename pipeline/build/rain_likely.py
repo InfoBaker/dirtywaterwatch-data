@@ -216,18 +216,19 @@ def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict,
     site_default. trigger_basis: operator, state or default (TRIGGER_BASES); a state's entry that applies this site's
     default amount rather than a trigger of its own says so with "trigger_basis": "default" (Maryland, the District)."""
     row = ((thresholds or {}).get("permits") or {}).get(permit) or {}
-    if row.get("threshold_in") is not None and row.get("basis") == "history":
-        return {"threshold_in": float(row["threshold_in"]), "basis": row.get("basis"), "rule": row.get("rule"),
-                "text": row.get("basis_text"), "source": row.get("source"), "n_discharge_days": row.get("n_discharge_days"),
-                "since": row.get("since"), "until": row.get("until"), "name": row.get("name"), "kind": "operator_history",
-                "trigger_basis": "operator"}
     own = operator_rule(permit, rules, when) if operator else None
-    if own is not None:   # the operator's own published trigger (fallback.by_permit), in its season
+    if own is not None:   # the operator's own published trigger (fallback.by_permit), in its season; it comes before
+        # a history row too, so a rule the operator publishes is never replaced silently (review 2026-11-08 P3-5)
         return {"threshold_in": float(own["inches"]), "basis": "published",
                 "rule": f"rain_likely.fallback.by_permit.{permit}", "text": own.get("basis"), "source": own.get("source"),
                 "n_discharge_days": row.get("n_discharge_days"), "since": row.get("since"), "until": row.get("until"),
                 "name": row.get("name"), "kind": "operator_rule", "trigger_basis": "operator",
                 "tail_hours": own.get("tail_hours"), "months": own.get("months")}
+    if row.get("threshold_in") is not None and row.get("basis") == "history":
+        return {"threshold_in": float(row["threshold_in"]), "basis": row.get("basis"), "rule": row.get("rule"),
+                "text": row.get("basis_text"), "source": row.get("source"), "n_discharge_days": row.get("n_discharge_days"),
+                "since": row.get("since"), "until": row.get("until"), "name": row.get("name"), "kind": "operator_history",
+                "trigger_basis": "operator"}
     fb = ((rules or {}).get(RULE) or {}).get("fallback") or {}
     r = (fb.get("by_state") or {}).get((state or "").upper())
     key = f"rain_likely.fallback.by_state.{(state or '').upper()}" if r else "rain_likely.fallback.default"
