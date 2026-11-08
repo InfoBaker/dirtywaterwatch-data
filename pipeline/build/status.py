@@ -2554,6 +2554,14 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
             iv["code_undecoded"] = code_basis
             if iv["color"] == "red":
                 _caution_only(iv, "code_caution", "provenance.code_undecoded", code_basis, ev.get("source_url"))
+    # the authority's own name for its level, where it differs from "advisory" (OHA's "precaution", ingest/or_transforms.py):
+    # raw._interval_label replaces the rule's label on the record's advisory intervals; keyed on the field, so no other
+    # feed changes (review 2026-11-08 P2-2)
+    lab = (ev.get("raw") or {}).get("_interval_label") if out else None
+    if isinstance(lab, str) and lab.strip():
+        for iv in out:
+            if iv["rule"] == "advisory_active":
+                iv["label"] = lab
     return out
 
 

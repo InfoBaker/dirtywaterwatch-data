@@ -12,7 +12,8 @@ Source
   25 items on 2026-11-07: 13 sewage advisories (4 CSO, 9 sewage releases) from 2025-11-21 to 2026-10-22.
 
 Which items are read
-  An item is a sewage advisory when its title names "CSO", "combined sewer overflow" or "sewage" (TITLE_RE). Every
+  An item is a sewage advisory when its title names "CSO", "combined sewer overflow", "sewer overflow" or "sewage"
+  (TITLE_RE) and not treated wastewater or effluent (NOT_SEWAGE_TITLE). Every
   other item is not read (rates, traffic advisories, projects; "Treated wastewater that was not dechlorinated enters
   the Columbia Slough" of 2025-12-19 is treated effluent for which BES advised no precautions: not a sewage report).
   meta.not_read counts them.
@@ -41,8 +42,10 @@ Record rules (rules only: no model, no geocoding)
     as an upper bound (raw.ended_at_precision "bound"). A CSO advisory that gives only its expiry ("This advisory
     expired at 3:34am on March 16, 2026") and the advice "for 48 hours after it stops": the overflow's end is the
     expiry less those 48 hours, so the window drawn ends exactly at BES's expiry (raw.end_basis says so; the expiry is
-    raw.advisory_expires_at). Otherwise no end: status ongoing when the text says the release is ongoing, else unknown.
-    raw.ended_at_precision is minute (a stated time or a derived one), bound, or day.
+    raw.advisory_expires_at): that end is the latest the overflow can have stopped, so it is a bound (raw.ended_at_precision
+    "bound", "ended by"). Otherwise no end: status ongoing when the text says the release is ongoing, or when the City
+    advises avoiding a named water and states no end or stop (raw.status_basis: red while it stands, then "end not
+    confirmed"); else unknown. raw.ended_at_precision is minute (a stated time), bound, or day.
   - The City's window: an advisory that says "Avoid contact ... during the overflow and for 48 hours after it stops"
     carries advice_window_hours 48 with BES's sentence as advice_window_basis: the status build draws it as the
     authority's own red (rule red.event) from the start to 48 hours after the end, then the site's caution to 72 hours
@@ -102,10 +105,12 @@ DISCHARGER_ID = "or-portland-bes"
 CSO_PERMIT = "OR0026905"
 TIMEOUT = (60, 600)
 SAFE_FORMAT = "dww-or-bes-safe/1"
-TITLE_RE = re.compile(r"\b(?:CSO|combined\s+sewer\s+overflow|sewage)\b", re.I)
+TITLE_RE = re.compile(r"\b(?:CSO|combined\s+sewer\s+overflow|sewer\s+overflow|sewage)\b", re.I)
+# treated effluent (the plant's own discharge before a final step) is not a sewage report, whatever the title says
+NOT_SEWAGE_TITLE = re.compile(r"\btreated\s+(?:wastewater|effluent)\b", re.I)
 CSO_RE = re.compile(r"\bCSOs?\b|combined\s+sewer\s+overflow", re.I)
 # the page's article ends at the first of these lines; nothing after it is kept (the contact block is among them)
-CUT_RE = re.compile(r"^(?:Help prevent sewage releases|Contact|About Environmental Services|About CSOs|"
+CUT_RE = re.compile(r"^(?:Help prevent\b|(?:(?:Media|Press|News|Public)\s+)?Contacts?|About Environmental Services|About CSOs|"
                     r"Stay updated and learn more|See something we could improve|Related|Topics)\b", re.I)
 SKIP_LINES = {"label:", "in this article", "translate this page", "key details"}
 MONTHS = ("january february march april may june july august september october november december").split()
@@ -167,6 +172,8 @@ EXPIRY_RULES = [
     re.compile(rf"advisory has been issued for .{{0,80}}? through {T()},? {D()}", re.I),
 ]
 ONGOING = re.compile(r"\b(?:is|remains)\s+(?:currently\s+)?ongoing\b", re.I)
+AVOID_WATER = re.compile(r"\b(?:avoid|Avoid)\s+(?:contact with\s+)?(?:the\s+)?(?:[A-Z][a-z]+\s){1,3}"
+                         r"(?:River|Creek|Slough|Lake|Bay|Channel)\b")
 ADVICE48 = re.compile(r"for 48 hours after (?:it|the overflow|the release) (?:stops|stopped)", re.I)
 PRIVATE = re.compile(r"\bprivate (?:property|outfall)\b", re.I)
 NO_WATER = [re.compile(r"[^.]*\b(?:all )?(?:the )?sewage (?:currently )?remains in the [^.]*\.", re.I),
@@ -449,12 +456,17 @@ def records_for(it: dict, page: dict | None, fetched_at: str) -> list[dict]:
     expiry = find_expiry(text, yref)
     m48 = ADVICE48.search(text)
     if end is None and expiry is not None and m48:
-        end, eprec = expiry - timedelta(hours=48), "minute"
-        ebasis = ("the advisory's expiry less the 48 hours after the overflow stops that its advice gives: the window "
-                  "drawn ends at the City's own expiry")
+        # the City never says when the overflow stopped: its expiry less the 48 hours its advice gives is the latest
+        # the overflow can have stopped (ended by), so the end is a bound; the window drawn ends at the City's expiry
+        end, eprec = expiry - timedelta(hours=48), "bound"
+        ebasis = ("ended by this time: the advisory's expiry less the 48 hours after the overflow stops that its advice "
+                  "gives (the City does not state the stop); the window drawn ends at the City's own expiry")
     if end is not None and end < start:
         end, eprec, ebasis = None, None, None
-    status = "ended" if end is not None else ("ongoing" if ONGOING.search(text) else "unknown")
+    # an authority's advice to avoid a named water, with no end or stop stated, stands until the City ends it: ongoing
+    # (red while it runs, then "end not confirmed"), as when the text says the release is ongoing
+    avoid = AVOID_WATER.search(text)
+    status = "ended" if end is not None else ("ongoing" if ONGOING.search(text) or avoid else "unknown")
     waters = waters_of(text)
     no_water = next((m.group(0).strip() for rx in NO_WATER for m in [rx.search(text)] if m), None)
     private = bool(PRIVATE.search(text))
@@ -475,6 +487,11 @@ def records_for(it: dict, page: dict | None, fetched_at: str) -> list[dict]:
         raw["stretch_text"] = stretch.group(1).strip()
     if no_water and not waters:
         raw["reached_water"], raw["_no_water_reason"] = False, f"the advisory says: \"{no_water}\""
+    if status == "ongoing" and avoid and not ONGOING.search(text):
+        raw["status_basis"] = (f"the City's advice to avoid the water (\"{avoid.group(0)}\") with no end stated: in "
+                               "effect until the City ends it")
+    if "and/or" in text and len(waters) > 1:
+        raw["waters_note"] = "the City names the waters with \"and/or\"; both are kept (on the safe side)"
     if private:
         raw["private_source"] = True
         raw["operator_note"] = "the advisory says the release came from private property or a private outfall"
@@ -528,7 +545,7 @@ def fetch_safe(sess: requests.Session, prev: dict[str, dict]) -> dict:
     its = items(r.content)
     pages = {}
     for it in its:
-        if not TITLE_RE.search(it["title"] or ""):
+        if not TITLE_RE.search(it["title"] or "") or NOT_SEWAGE_TITLE.search(it["title"] or ""):
             continue
         old = prev.get(it.get("node") or "") or {}
         oraw = old.get("raw") or {}
@@ -548,7 +565,7 @@ def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[di
     recs: dict[str, dict] = {r["source_record_id"]: r for r in prev_records}
     read, not_read = 0, []
     for it in doc.get("items") or []:
-        if not TITLE_RE.search(it.get("title") or ""):
+        if not TITLE_RE.search(it.get("title") or "") or NOT_SEWAGE_TITLE.search(it.get("title") or ""):
             not_read.append(it.get("title"))
             continue
         page = (doc.get("pages") or {}).get(it.get("node") or "")

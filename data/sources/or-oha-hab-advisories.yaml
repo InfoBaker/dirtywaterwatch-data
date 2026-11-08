@@ -48,7 +48,7 @@ fetch:
     lat: {field: _y, parse: number}
     lon: {field: _x, parse: number}
     waterbody_text: WaterbodyName
-    authority: {const: "Oregon Health Authority (recreational use advisory)"}
+    authority: {const: "Oregon Health Authority"}       # the hook adds OHA's level: advisory or precaution
     source_url: {const: "https://www.oregon.gov/oha/ph/healthyenvironments/recreation/harmfulalgaeblooms/pages/blue-greenalgaeadvisories.aspx"}
   transform: "ingest.or_transforms.or_hab_record"
   dedupe: {repeats: suffix}

@@ -71,9 +71,29 @@ def florida_zone(lat, lon) -> str:
 # County to the southwest corner of T. 35 S., R. 37 E.; thence east to the Idaho-Oregon boundary". Malheur County north
 # of the south line of township 35 South is Mountain time; its part south of that line, and the rest of Oregon, Pacific.
 # The township line lies 210 miles south of the Willamette base line (45.5197 N): about 42.48 N. Malheur's outline here
-# is a box: its west line about 118.23 W, its north line about 44.30 N (the Baker County line runs near 44.3 N to 44.5 N
-# east of 118 W); a point within a few kilometres of either line should carry its county (oregon_zone's county).
+# is its Census outline (data/reference/or-counties.json) when the file is there, else a box: its west line about
+# 118.23 W, its north line about 44.30 N (the Baker County line runs near 44.3 N to 44.5 N east of 118 W).
 OR_MALHEUR_WEST, OR_MALHEUR_NORTH, OR_T35S_SOUTH = -118.23, 44.30, 42.48
+
+
+@functools.lru_cache(maxsize=1)
+def _malheur_outline():
+    """Malheur County's Census outline (data/reference/or-counties.json, scripts/or_counties.py), or None (the box)."""
+    try:
+        import json
+        from pathlib import Path
+
+        from shapely.geometry import shape
+        doc = json.loads((Path(__file__).resolve().parent.parent / "data" / "reference" / "or-counties.json").read_text())
+        c = next(x for x in doc["counties"] if x["county"] == "Malheur County")
+        return shape(c["geometry"])
+    except (OSError, ValueError, KeyError, StopIteration, ImportError):
+        return None
+
+
+def _point(lon, lat):
+    from shapely.geometry import Point
+    return Point(lon, lat)
 
 
 def oregon_zone(lat=None, lon=None, county: str | None = None) -> str:
@@ -86,7 +106,12 @@ def oregon_zone(lat=None, lon=None, county: str | None = None) -> str:
     if lat is None or lon is None:
         return MOUNTAIN if c == "malheur" else PACIFIC
     lat, lon = float(lat), float(lon)
-    in_malheur = c == "malheur" or (lon >= OR_MALHEUR_WEST and lat < OR_MALHEUR_NORTH)
+    if c == "malheur":
+        in_malheur = True
+    else:
+        outline = _malheur_outline()
+        in_malheur = (outline.covers(_point(lon, lat)) if outline is not None
+                      else lon >= OR_MALHEUR_WEST and lat < OR_MALHEUR_NORTH)
     return MOUNTAIN if in_malheur and lat >= OR_T35S_SOUTH else PACIFIC
 
 
