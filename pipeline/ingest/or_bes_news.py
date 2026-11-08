@@ -60,6 +60,9 @@ Record rules (rules only: no model, no geocoding)
     hole", "a nearby catch basin that reconnects to the city sewer") sets raw.reached_water false with the sentence as
     raw._no_water_reason: kept, listed, placed on no water. A text that names no water is kept and placed nowhere.
     No point: BES gives none, and a street named in the text is never geocoded.
+  - Placement (build/status.py NAMED_WATER_OUTFALL_STATES): a CSO advisory is placed on the water it names with the
+    permit's registry outfalls on that water, so their stretches are coloured; raw.keeps_rain_caution: the advisory
+    never switches off the radar's rain caution on the permit's outfalls.
   - Operator: a CSO advisory is Portland's (discharger or-portland-bes, permit OR0026905, the Columbia Boulevard plant's
     permit that covers the combined sewer outfalls). A sewage release BES says comes from private property or a
     private outfall names no operator (raw.private_source); any other is BES's collection system (discharger
@@ -490,6 +493,10 @@ def records_for(it: dict, page: dict | None, fetched_at: str) -> list[dict]:
     if status == "ongoing" and avoid and not ONGOING.search(text):
         raw["status_basis"] = (f"the City's advice to avoid the water (\"{avoid.group(0)}\") with no end stated: in "
                                "effect until the City ends it")
+    if is_cso:
+        # the City's advisory names the water, not the outfalls that overflowed: it never holds back the radar's rain
+        # caution on the permit's outfalls (build/rain_likely.py discharge_starts; go-live audit 2026-11-08 P1-1)
+        raw["keeps_rain_caution"] = True
     if "and/or" in text and len(waters) > 1:
         raw["waters_note"] = "the City names the waters with \"and/or\"; both are kept (on the safe side)"
     if private:

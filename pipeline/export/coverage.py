@@ -131,18 +131,27 @@ def state_name(st: str) -> str:
 
 
 FEDERAL_PUBLISHER = "the U.S. Environmental Protection Agency"
+# the grade sentence names the one operator whose feed gives every dated report only where the registry lists at least
+# this many sewer operators in the state: a one-operator jurisdiction (the District of Columbia) keeps its sentence
+# (Oregon final audit 2026-11-08 P2-3)
+MIN_OPERATORS_FOR_PUBLISHER = 2
 
 
-def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[str, str]:
+def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False, operator: str | None = None) -> tuple[str, str]:
     """(grade, sentence) from a state's figures (the site's gradeOf). federal: every dated report of the state comes
     from a feed whose registry rows are all federal (EPA's eRule tables): the state publishes no list of its own, so
     the sentence says who does (2026-11-07 Mississippi final audit: "Mississippi publishes dated overflow reports"
-    stood above the state text's "The Department publishes no list")."""
+    stood above the state text's "The Department publishes no list"). operator: every dated report comes from one
+    operator's own feed (its registry level "operator"), named by its attribution, so the sentence says so rather
+    than crediting the state (2026-11-08 Oregon final audit P2-3: all 13 of Oregon's were the City of Portland's)."""
     name = state_name(st)
     Name = "The District of Columbia" if name.startswith("District") else name
     in_name = "the District of Columbia" if st == "DC" else name
     # no possessive ("Massachusetts's") and no unsourced delay: the delayed sentence gives the state's own lag
     by = f"Overflow reports from sewer operators in {in_name} are published by {FEDERAL_PUBLISHER}" if federal else None
+    if by is None and operator:
+        who = operator if operator.lower().startswith("the ") else f"the {operator}"
+        by = f"Of the sewer operators in {in_name}, only {who} publishes dated reports"
     if f["records_12m"] == 0:
         # scoped to the grading window: a state with an older readable report on file (New Mexico's of June 2024)
         # must not be told it publishes nothing readable (SOL review 2026-11-07, site P2-8; the site's coverage.ts
@@ -382,7 +391,13 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         f = _figures(evs, firsts_state.get(st, []), own, cadence, names, ids, batches)
         dated = {e.get("source_id") for e in evs if is_dated(e)}
         federal = bool(dated) and all(set((source_levels or {}).get(s) or []) == {"federal"} for s in dated)
-        grade, sentence = grade_of(st, f, now, federal=federal)
+        operator = None
+        n_ops = sum(1 for r in dischargers or [] if isinstance(r, dict) and str(r.get("state") or "").upper() == st)
+        if len(dated) == 1 and n_ops >= MIN_OPERATORS_FOR_PUBLISHER:
+            sid = next(iter(dated))
+            if set((source_levels or {}).get(sid) or []) == {"operator"}:
+                operator = (reg.get(sid) or {}).get("attribution")
+        grade, sentence = grade_of(st, f, now, federal=federal, operator=operator)
         states[st] = {"code": st, "name": state_name(st), "duty": duty_sentence(rules, st), **f, "grade": grade,
                       "sentence": sentence, "rain_caution": (rain_states or {}).get(st)}
     # what stands in the way, and how each state's operators tell the public (the channel register; §2.y)
