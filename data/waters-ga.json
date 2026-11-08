@@ -1,7 +1,7 @@
 {
  "state": "GA",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 229,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 247,
  "waters": [
   {
    "slug": "abercorn-creek-ga",
@@ -12,10 +12,10 @@
     "Rincon"
    ],
    "bbox": [
-    -81.17806,
-    32.24758,
+    -81.178071,
+    32.247585,
     -81.15313,
-    32.26176
+    32.261829
    ],
    "wikidata": null,
    "charted": true,
@@ -23,6 +23,15 @@
    "launches": [
     "abercorn-creek-boat-launch-ga"
    ],
+   "water_id": "abercorn-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "8a41f112dbd2e2a336d78bf3e622d03c60d2789e64edb864a63d1aa18f06bc71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -35,9 +44,9 @@
    ],
    "bbox": [
     -82.31996,
-    31.25882,
-    -82.13995,
-    31.37767
+    31.258819,
+    -82.139949,
+    31.377666
    ],
    "wikidata": "Q4705144",
    "charted": false,
@@ -45,6 +54,15 @@
    "launches": [
     "odom-bluff-landing-ga"
    ],
+   "water_id": "alabaha-river-ga",
+   "gnis_id": "354271",
+   "geometry_hash": "122f3da1828bb735f2f7dce2d936b43e9d287b1440e04bbd12e9dad283f29fab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -57,10 +75,10 @@
     "Lakeland"
    ],
    "bbox": [
-    -83.64006,
-    30.53622,
-    -83.0099,
-    32.05735
+    -83.640058,
+    30.536221,
+    -83.009899,
+    32.057349
    ],
    "wikidata": "Q2830643",
    "charted": false,
@@ -70,6 +88,15 @@
     "lakeland-ga",
     "statenville-sr94-ga"
    ],
+   "water_id": "alapaha-river-fl",
+   "gnis_id": "309997",
+   "geometry_hash": "77756655f2f7c06e4c66533f22dc91fbcb4aebc4e1695a2be722ea5e68053858",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -86,10 +113,10 @@
     "Woodstock"
    ],
    "bbox": [
-    -84.73579,
-    34.03309,
-    -84.53078,
-    34.23245
+    -84.735788,
+    34.033089,
+    -84.530785,
+    34.232454
    ],
    "wikidata": null,
    "charted": false,
@@ -117,8 +144,29 @@
     "sweetwater-day-use-area-ga",
     "tanyard-creek-ga",
     "upper-stamp-creek-campground-ga",
-    "victoria-day-use-area-ga",
-    "victoria-day-use-area-acworth-ga"
+    "victoria-day-use-area-acworth-ga",
+    "victoria-day-use-area-ga"
+   ],
+   "water_id": "allatoona-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "4330e331d03b6ec46d64d174f5241c9514ebf6ed9bc7edac3e5c4af49113b991",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "allatoona-lake-boat-launch-near-emerson-ga",
+    "allatoona-lake-boat-launch-near-emerson-ga-2",
+    "allatoona-landing-marina-ga",
+    "glade-marina-ga",
+    "harbor-town-marina-ga",
+    "holiday-harbor-marina-ga",
+    "kellogg-creek-day-use-ranger-station-boat-ramp-ga",
+    "little-river-marina-ga",
+    "park-marina-ga",
+    "victoria-harbor-marina-ga",
+    "wilderness-camp-marina-ga"
    ],
    "advisories": []
   },
@@ -131,10 +179,10 @@
     "Gray"
    ],
    "bbox": [
-    -83.68804,
-    33.1155,
-    -83.68057,
-    33.12044
+    -83.688044,
+    33.115495,
+    -83.680573,
+    33.120437
    ],
    "wikidata": null,
    "charted": false,
@@ -142,6 +190,15 @@
    "launches": [
     "allison-lake-boat-launch-ga"
    ],
+   "water_id": "allisons-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "24ca724c9bf9a7448ef6d6751ee5e92628a2ca2a2be32fa68da1adcfc424bb5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -164,10 +221,10 @@
     "McNatt Falls"
    ],
    "bbox": [
-    -82.54369,
+    -82.543686,
     31.30331,
     -81.23442,
-    31.97144
+    31.971436
    ],
    "wikidata": "Q434188",
    "charted": true,
@@ -194,6 +251,17 @@
     "upper-wayne-county-landing-ga",
     "williamsburg-landing-sansavilla-wma-ga"
    ],
+   "water_id": "altamaha-river-ga",
+   "gnis_id": "354294",
+   "geometry_hash": "2514560da0e4acd8cdfb9351c41defbdf724567ccbbee5914ba8e958bc5baa36",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "davis-landing-ga"
+   ],
    "advisories": []
   },
   {
@@ -211,6 +279,15 @@
    "launches": [
     "rocky-mountain-pfa-antioch-west-ga"
    ],
+   "water_id": "antioch-lake-west-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -222,10 +299,10 @@
     "Dearing"
    ],
    "bbox": [
-    -82.42611,
-    33.37786,
-    -82.42357,
-    33.38088
+    -82.426112,
+    33.377864,
+    -82.423575,
+    33.380901
    ],
    "wikidata": null,
    "charted": false,
@@ -233,6 +310,15 @@
    "launches": [
     "mcduffie-pfa-clubhouse-ga"
    ],
+   "water_id": "arties-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": "d38892bd4de31bf70c3c1cf61eee352fd81922635d628bdc94eb42766ac7f4fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -244,10 +330,10 @@
     "Lakeland"
    ],
    "bbox": [
-    -83.17021,
-    30.98435,
-    -83.07196,
-    31.03818
+    -83.170211,
+    30.984355,
+    -83.071962,
+    31.038184
    ],
    "wikidata": null,
    "charted": false,
@@ -255,6 +341,15 @@
    "launches": [
     "banks-lake-boat-launch-ga"
    ],
+   "water_id": "banks-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "abcb174b56f9ab8234d84b175fd032f5e03a92dcf0d78e96d2b633a95544aff4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -266,10 +361,10 @@
     "Thomas Landing"
    ],
    "bbox": [
-    -81.26544,
-    31.55494,
-    -81.22708,
-    31.6266
+    -81.265439,
+    31.554941,
+    -81.227081,
+    31.626599
    ],
    "wikidata": null,
    "charted": true,
@@ -277,6 +372,15 @@
    "launches": [
     "barbour-river-landing-ga"
    ],
+   "water_id": "barbour-island-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "4cb5e295966bc98fadce90c8a58e5ae6d2696bea6be343277fcffe069f40279a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -288,10 +392,10 @@
     "Barnesville"
    ],
    "bbox": [
-    -84.13101,
-    33.11595,
-    -84.11086,
-    33.13324
+    -84.131011,
+    33.115877,
+    -84.110862,
+    33.133322
    ],
    "wikidata": null,
    "charted": false,
@@ -299,6 +403,15 @@
    "launches": [
     "barnesville-reservoir-boat-launch-ga"
    ],
+   "water_id": "barnesville-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "5fb081f4d6c40c78b9b5637876ae5b3b777444bed9ccef2498d10f31822df552",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -311,8 +424,8 @@
    ],
    "bbox": [
     -83.54306,
-    33.98118,
-    -83.51295,
+    33.981184,
+    -83.512951,
     33.99744
    ],
    "wikidata": null,
@@ -321,6 +434,15 @@
    "launches": [
     "bear-creek-reservoir-boat-launch-ga"
    ],
+   "water_id": "bear-creek-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "bba486647ef6187d0320a859315896f80a2cac4f283e0c4f26fb08cbb259eb79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -332,10 +454,10 @@
     "Washington"
    ],
    "bbox": [
-    -82.83504,
-    33.72906,
-    -82.82229,
-    33.73479
+    -82.835037,
+    33.729057,
+    -82.822288,
+    33.734791
    ],
    "wikidata": null,
    "charted": false,
@@ -343,6 +465,15 @@
    "launches": [
     "beaverdam-creek-lake-boat-launch-ga"
    ],
+   "water_id": "beaverdam-creek-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "87aa8802f5926a473a64a41096f37202a71634da1198212688dc513a64a2edd3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -354,9 +485,9 @@
     "Mansfield"
    ],
    "bbox": [
-    -83.72936,
+    -83.729359,
     33.44498,
-    -83.71932,
+    -83.719315,
     33.45444
    ],
    "wikidata": null,
@@ -365,6 +496,15 @@
    "launches": [
     "charlie-elliott-wildlife-center-ga-3"
    ],
+   "water_id": "bennett-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "235bb36ffc8de01bf8873de4d2e2c99a3e2223cbc0d819623d43215576d4c02c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -382,6 +522,15 @@
    "launches": [
     "big-lazer-pfa-boat-launch-ga"
    ],
+   "water_id": "big-lazer-pfa-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -399,6 +548,15 @@
    "launches": [
     "fort-stewart-big-metz-lake-ga"
    ],
+   "water_id": "big-metz-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -410,10 +568,10 @@
     "Bainbridge"
    ],
    "bbox": [
-    -84.55813,
-    30.93143,
-    -84.55024,
-    30.93574
+    -84.558127,
+    30.931433,
+    -84.550243,
+    30.935743
    ],
    "wikidata": null,
    "charted": false,
@@ -421,6 +579,15 @@
    "launches": [
     "big-slough-boat-launch-near-bainbridge-ga"
    ],
+   "water_id": "big-slough-ga",
+   "gnis_id": null,
+   "geometry_hash": "e31209a79eac185df2dd8931b4e499e4c0500c1898fe5c8ffd5fd6452351ddac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -432,10 +599,10 @@
     "Stockbridge"
    ],
    "bbox": [
-    -84.2944,
-    33.47685,
-    -84.27046,
-    33.49014
+    -84.294395,
+    33.476641,
+    -84.270463,
+    33.490144
    ],
    "wikidata": null,
    "charted": false,
@@ -443,6 +610,15 @@
    "launches": [
     "blalock-reservoir-ga"
    ],
+   "water_id": "blalock-resoirvoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "092bb4453a017058ec9a29a96d1d40674f8a4cd4d85b5e9ffadc5a1f4688d807",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -454,10 +630,10 @@
     "Macon"
    ],
    "bbox": [
-    -83.66687,
-    32.85581,
-    -83.65393,
-    32.86937
+    -83.666867,
+    32.855808,
+    -83.653931,
+    32.869372
    ],
    "wikidata": null,
    "charted": false,
@@ -465,6 +641,15 @@
    "launches": [
     "bragg-jam-south-river-access-ga"
    ],
+   "water_id": "bowman-branch-ga",
+   "gnis_id": null,
+   "geometry_hash": "b9b405ed23a446bf688f985ac3a17b3a6d5e250eca9984760d19bc0de8e84b8c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -477,10 +662,10 @@
     "Hiltonia"
    ],
    "bbox": [
-    -82.62942,
-    32.78893,
-    -81.42526,
-    33.46056
+    -82.629422,
+    32.788933,
+    -81.425263,
+    33.460559
    ],
    "wikidata": null,
    "charted": false,
@@ -489,6 +674,15 @@
     "brier-creek-sr73-ga",
     "ellison-bridge-cr142-ga"
    ],
+   "water_id": "brier-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "527121f92da1b50bba2104454141443272b6fe20e87bae90251ab0ce6decfb08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -500,9 +694,9 @@
     "Bell"
    ],
    "bbox": [
-    -83.17812,
-    33.95859,
-    -82.56568,
+    -83.178124,
+    33.958586,
+    -82.565681,
     34.28775
    ],
    "wikidata": null,
@@ -510,6 +704,47 @@
    "area_km2": null,
    "launches": [
     "broad-river-sr17-ga"
+   ],
+   "water_id": "broad-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "67d924d87ac9ba616cc5ae13ff969650e85aa1e4473064db9015b2e14e93eff2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broro-river-ga",
+   "name": "Broro River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Shellman Bluff"
+   ],
+   "bbox": [
+    -81.322139,
+    31.547541,
+    -81.314381,
+    31.571499
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.709,
+   "launches": [],
+   "water_id": "broro-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "767a791d965472ceefc496b18e3dc3024ee928ba3d0725b49bd490273b04461c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "fisherman-s-lodge-ga",
+    "shellman-bluff-fish-camp-ga"
    ],
    "advisories": []
   },
@@ -522,16 +757,56 @@
     "Melson"
    ],
    "bbox": [
-    -85.39593,
-    34.15314,
-    -85.36083,
-    34.16978
+    -85.395926,
+    34.153141,
+    -85.360833,
+    34.169777
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "brushy-branch-park-ga"
+   ],
+   "water_id": "brushy-branch-ga",
+   "gnis_id": null,
+   "geometry_hash": "382952f7c6a5f7361217c7d41dc92c2bf3d7a01d55c9494df933cb040360c7d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-river-ga",
+   "name": "Bull River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Talahi Island"
+   ],
+   "bbox": [
+    -80.967759,
+    31.923906,
+    -80.923231,
+    32.043951
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "bull-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "fa4af5600663e904f89e019eab4be97374e4e735c1045fe741ba5966a49b2713",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bull-river-marina-whitemarsh-island-ga"
    ],
    "advisories": []
   },
@@ -544,10 +819,10 @@
     "Woodbury"
    ],
    "bbox": [
-    -84.628,
+    -84.628001,
     32.96099,
-    -84.6131,
-    32.97606
+    -84.613099,
+    32.976118
    ],
    "wikidata": null,
    "charted": false,
@@ -555,6 +830,15 @@
    "launches": [
     "lake-meriwether-ga"
    ],
+   "water_id": "cane-creek-structure-number-two-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "f60351cc03eed5e0910bcc0f46048fd9b18de92f1b96d8f49532fceee8ce933f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -567,10 +851,10 @@
     "Daisy"
    ],
    "bbox": [
-    -82.20894,
+    -82.209309,
     31.95734,
-    -81.30847,
-    32.50387
+    -81.308473,
+    32.503871
    ],
    "wikidata": null,
    "charted": false,
@@ -579,6 +863,15 @@
     "canoochee-us280-ga",
     "state-highway-169-east-ga"
    ],
+   "water_id": "canoochee-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "d1307c32ff3948e51e80d0ca4585a31bd8ab4793f57f28f8bed3efe2ede51a9e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -592,9 +885,9 @@
    ],
    "bbox": [
     -84.67356,
-    34.58811,
-    -84.60089,
-    34.65415
+    34.588113,
+    -84.600888,
+    34.654153
    ],
    "wikidata": "Q5047252",
    "charted": false,
@@ -607,6 +900,18 @@
     "woodring-branch-camping-area-ga",
     "woodring-branch-day-use-area-ga"
    ],
+   "water_id": "carters-lake-ga",
+   "gnis_id": "327370",
+   "geometry_hash": "11e744d4fb870f32c7477f8f05bb15505261d21e85f804d2963854e669260b82",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "carters-lake-boat-launch-ga",
+    "carters-lake-marina-and-resort-ga"
+   ],
    "advisories": []
   },
   {
@@ -618,10 +923,10 @@
     "Darien"
    ],
    "bbox": [
-    -81.47695,
-    31.33691,
-    -81.44203,
-    31.35611
+    -81.476949,
+    31.336911,
+    -81.442031,
+    31.356109
    ],
    "wikidata": null,
    "charted": true,
@@ -629,6 +934,15 @@
    "launches": [
     "champney-river-boat-launch-ga"
    ],
+   "water_id": "champney-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "6e502c5ed01c2f792b669d54e725ea8042612821ddc5ec40142e5141447ba031",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -651,10 +965,10 @@
     "Rogers Mill"
    ],
    "bbox": [
-    -85.19917,
+    -85.199169,
     30.71149,
     -83.61559,
-    34.82209
+    34.822085
    ],
    "wikidata": "Q1068297",
    "charted": false,
@@ -686,6 +1000,18 @@
     "roswell-river-landing-boat-launch-ga",
     "rotary-park-ga"
    ],
+   "water_id": "chattahoochee-river-al",
+   "gnis_id": "354236",
+   "geometry_hash": "df6182a275e09cdb2b18b4a291cf57ee0add72a242bb244a9aa769873e34a6c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "chattahoochee-river-boat-launch-near-vinings-ga-2",
+    "paces-mill-boat-ramp-ga"
+   ],
    "advisories": []
   },
   {
@@ -698,10 +1024,10 @@
     "Long Bottom Ford"
    ],
    "bbox": [
-    -83.35332,
-    34.71598,
-    -83.09834,
-    35.03141
+    -83.353325,
+    34.715982,
+    -83.098338,
+    35.031413
    ],
    "wikidata": "Q834880",
    "charted": false,
@@ -710,6 +1036,15 @@
     "highway-28-put-in-ga",
     "highway-76-bridge-ga"
    ],
+   "water_id": "chattooga-river-ga",
+   "gnis_id": "1010187",
+   "geometry_hash": "717d85e7fb57ea67edecce657d0d6387d14779c09f8d69a0f5b5eddfe00e6241",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -723,10 +1058,10 @@
     "Young Harris"
    ],
    "bbox": [
-    -83.82575,
-    34.91839,
-    -83.71381,
-    35.03756
+    -83.825747,
+    34.918171,
+    -83.713701,
+    35.037555
    ],
    "wikidata": null,
    "charted": false,
@@ -735,6 +1070,18 @@
     "lake-chatuge-boat-ramp-ga",
     "mayor-s-park-ga",
     "chatuge-lake-boat-launch-near-hiawassee-ga"
+   ],
+   "water_id": "chatuge-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "903b401deda7f46aa7aad0bb91225695db63e782ca3efc6c89a98bd62a0b2057",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "boundary-waters-resort-marina-ga",
+    "the-ridges-resort-marina-ga"
    ],
    "advisories": []
   },
@@ -747,10 +1094,10 @@
     "Dahlonega"
    ],
    "bbox": [
-    -83.99736,
-    34.28493,
-    -83.8691,
-    34.67107
+    -83.997484,
+    34.284927,
+    -83.868898,
+    34.671186
    ],
    "wikidata": "Q5093400",
    "charted": false,
@@ -758,6 +1105,15 @@
    "launches": [
     "lumpkin-county-park-ga"
    ],
+   "water_id": "chestatee-river-ga",
+   "gnis_id": "355141",
+   "geometry_hash": "ba570c7cf61824c420cd8b3c8756db2a1e7deac80644d560cc3cb46d0c53ac69",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -770,8 +1126,8 @@
    ],
    "bbox": [
     -83.94152,
-    33.2434,
-    -83.92676,
+    33.243397,
+    -83.926763,
     33.25126
    ],
    "wikidata": null,
@@ -780,6 +1136,15 @@
    "launches": [
     "indian-springs-sp-ga"
    ],
+   "water_id": "chief-mcintosh-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "badcf4c4fa3c8beeb25acac7e07a111531dbeb1a3363bd5744fb32b312a9fe57",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -802,10 +1167,10 @@
     "Lisbon"
    ],
    "bbox": [
-    -82.64822,
-    33.57643,
-    -82.18099,
-    34.02519
+    -82.648224,
+    33.576034,
+    -82.180986,
+    34.025186
    ],
    "wikidata": "Q6477865",
    "charted": false,
@@ -850,6 +1215,20 @@
     "clarks-hill-lake-boat-launch-near-evans-ga-2",
     "windfield-campground-ga"
    ],
+   "water_id": "clarks-hill-lake-ga",
+   "gnis_id": "335836",
+   "geometry_hash": "791f618c65705fb8b7a9e95e1bf832004fe7ad9ca523b0410c5a93db8394ee93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "clarks-hill-marina-ga",
+    "raysville-marina-ga",
+    "soap-creek-lodge-marina-ga",
+    "trade-winds-marina-ga"
+   ],
    "advisories": []
   },
   {
@@ -861,9 +1240,9 @@
     "Fayetteville"
    ],
    "bbox": [
-    -84.38632,
+    -84.386318,
     33.41051,
-    -84.35248,
+    -84.352476,
     33.42383
    ],
    "wikidata": null,
@@ -872,6 +1251,15 @@
    "launches": [
     "j-w-smith-reservoir-ga"
    ],
+   "water_id": "club-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "f9c4c3fca6fe9a73f8996681c9a994d26560725ed31f9bc401c1eb6521369d47",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -883,10 +1271,10 @@
     "Columbia"
    ],
    "bbox": [
-    -85.08737,
-    31.30638,
-    -84.98723,
-    31.35715
+    -85.087366,
+    31.306378,
+    -84.987229,
+    31.357149
    ],
    "wikidata": null,
    "charted": false,
@@ -894,6 +1282,15 @@
    "launches": [
     "coheelee-creek-boat-launch-ga"
    ],
+   "water_id": "coheelee-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "979de2f189cfc07764dbd51a48eec88e6c2deb55bbf06aa98e74209328c6d74d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -906,10 +1303,10 @@
     "Rome"
    ],
    "bbox": [
-    -85.59216,
-    34.15841,
-    -85.17745,
-    34.25847
+    -85.592164,
+    34.158411,
+    -85.177449,
+    34.258467
    ],
    "wikidata": "Q1129913",
    "charted": false,
@@ -919,6 +1316,15 @@
     "mayo-lock-and-dam-ga",
     "old-river-road-ga"
    ],
+   "water_id": "coosa-river-al",
+   "gnis_id": "169321",
+   "geometry_hash": "25f241417602a0b21d297b2e5087079ade19acec6b11689b42c9bc340c527b99",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -930,10 +1336,10 @@
     "Calhoun"
    ],
    "bbox": [
-    -84.90303,
-    34.53322,
-    -84.4842,
-    34.69141
+    -84.903027,
+    34.533218,
+    -84.484202,
+    34.691407
    ],
    "wikidata": "Q5168080",
    "charted": false,
@@ -941,6 +1347,15 @@
    "launches": [
     "highway-225-boat-ramp-ga"
    ],
+   "water_id": "coosawattee-river-ga",
+   "gnis_id": "355303",
+   "geometry_hash": "2b3a1b12c592eda846f38b5b453c50297dd737d582cb0e1590314dcf52c17b53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -951,13 +1366,27 @@
    "towns": [
     "Altamaha"
    ],
-   "bbox": null,
+   "bbox": [
+    -82.20235,
+    31.989475,
+    -82.198068,
+    31.994591
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "cotton-patch-pond-boat-launch-ga"
    ],
+   "water_id": "cotton-patch-pond-ga",
+   "gnis_id": "341340",
+   "geometry_hash": "f4115ac81fdb618a65e11a337008f607cc21ffd72d8983a2c9e426ad9b4b8dd9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -969,10 +1398,10 @@
     "Fitzgerald"
    ],
    "bbox": [
-    -83.26625,
+    -83.266245,
     31.68225,
-    -83.26199,
-    31.68847
+    -83.261847,
+    31.688495
    ],
    "wikidata": null,
    "charted": false,
@@ -980,6 +1409,15 @@
    "launches": [
     "lakeview-park-ga"
    ],
+   "water_id": "county-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "5b475b8a450adafbc1b29f20e5f22f67ee47d73a8f9345023e249e05ec7f4876",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -992,10 +1430,10 @@
     "Harrietts Bluff"
    ],
    "bbox": [
-    -81.72396,
-    30.82896,
-    -81.48096,
-    30.87466
+    -81.723956,
+    30.828945,
+    -81.480962,
+    30.874655
    ],
    "wikidata": null,
    "charted": true,
@@ -1003,6 +1441,46 @@
    "launches": [
     "crooked-river-state-park-ga",
     "harriett-s-bluff-ga"
+   ],
+   "water_id": "crooked-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "e4971cd3a673311d7c868e4636a5c38e50d7b0e1b1b05be5e78d6160645c7f9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cumberland-sound-ga",
+   "name": "Cumberland Sound",
+   "kind": "sound",
+   "state": "GA",
+   "towns": [
+    "Saint Marys"
+   ],
+   "bbox": [
+    -81.536989,
+    30.696706,
+    -81.451611,
+    30.886576
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 35.307,
+   "launches": [],
+   "water_id": "cumberland-sound-fl",
+   "gnis_id": null,
+   "geometry_hash": "8d706916ae31d5010cd93e31eb6259f96339be8a559b6bf8d61b8f3f2998e124",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cumberland-sound-boat-launch-ga"
    ],
    "advisories": []
   },
@@ -1015,10 +1493,10 @@
     "Bainbridge"
    ],
    "bbox": [
-    -84.76856,
-    30.81241,
-    -84.76307,
-    30.81477
+    -84.768561,
+    30.812407,
+    -84.763068,
+    30.814936
    ],
    "wikidata": null,
    "charted": false,
@@ -1026,6 +1504,15 @@
    "launches": [
     "silver-lake-wma-cutoff-pond-ga"
    ],
+   "water_id": "cutoff-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": "24b54d4b1c10a47b91fb4b3ccd88d1f8695dbe7ef5603fa985cfce5293a2ea2c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1037,10 +1524,10 @@
     "Mansfield"
    ],
    "bbox": [
-    -83.72496,
-    33.45551,
-    -83.72175,
-    33.45891
+    -83.724961,
+    33.455514,
+    -83.721746,
+    33.458907
    ],
    "wikidata": null,
    "charted": false,
@@ -1048,6 +1535,15 @@
    "launches": [
     "charlie-elliott-wildlife-center-ga-4"
    ],
+   "water_id": "dairy-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "ed4edfc9265af20446bf62470b0779f11f45bc6487ae37530b29f8e767a74ba4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1065,6 +1561,15 @@
    "launches": [
     "fort-stewart-daisy-pond-ga"
    ],
+   "water_id": "daisy-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1076,10 +1581,10 @@
     "Darien"
    ],
    "bbox": [
-    -81.46448,
+    -81.464484,
     31.34771,
-    -81.33216,
-    31.38719
+    -81.332157,
+    31.387449
    ],
    "wikidata": null,
    "charted": true,
@@ -1087,6 +1592,15 @@
    "launches": [
     "darien-river-boat-launch-ga"
    ],
+   "water_id": "darien-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "d30b1c838d87e168804997a9e14e7f32005c77f87d4e9344b3a6de0a52b8861a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1098,10 +1612,10 @@
     "Dearing"
    ],
    "bbox": [
-    -82.42561,
+    -82.425806,
     33.38334,
-    -82.42356,
-    33.38665
+    -82.423564,
+    33.386652
    ],
    "wikidata": null,
    "charted": false,
@@ -1110,6 +1624,15 @@
     "mcduffie-pfa-bream-buster-ga",
     "mcduffie-pfa-bridge-ga"
    ],
+   "water_id": "dearing-number-10-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "7118ffbdc4b684d46730165c83621c94ebc6111a08e92946a27f89eb02305562",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1121,10 +1644,10 @@
     "Megahee"
    ],
    "bbox": [
-    -82.41788,
-    33.37963,
-    -82.41155,
-    33.38395
+    -82.417878,
+    33.379633,
+    -82.411548,
+    33.383947
    ],
    "wikidata": null,
    "charted": false,
@@ -1132,6 +1655,15 @@
    "launches": [
     "mcduffie-pfa-willow-ga"
    ],
+   "water_id": "dearing-number-11-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "2bb64f5ab9384f9e7ac0696d18ad2081e8d3469445c87393ed96009f9aea514a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1143,10 +1675,10 @@
     "Megahee"
    ],
    "bbox": [
-    -82.41837,
-    33.37835,
-    -82.41633,
-    33.38013
+    -82.418369,
+    33.378345,
+    -82.416328,
+    33.380218
    ],
    "wikidata": null,
    "charted": false,
@@ -1154,6 +1686,15 @@
    "launches": [
     "mcduffie-pfa-rod-bender-ga"
    ],
+   "water_id": "dearing-number-12-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "8d4fff0de53e12c4879f459854d50034115b95491f4898f4009a4b61f06a110d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1165,10 +1706,10 @@
     "Megahee"
    ],
    "bbox": [
-    -82.4142,
-    33.38366,
-    -82.41136,
-    33.38617
+    -82.414198,
+    33.383662,
+    -82.411363,
+    33.386169
    ],
    "wikidata": null,
    "charted": false,
@@ -1176,6 +1717,15 @@
    "launches": [
     "mcduffie-pfa-jones-ga"
    ],
+   "water_id": "dearing-number-13-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "0b9a588961ab8dcbc057e032488e86f60c844acf7f480579ab6eb73fcd820c00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1187,10 +1737,10 @@
     "Dearing"
    ],
    "bbox": [
-    -82.42182,
-    33.38688,
-    -82.41862,
-    33.39016
+    -82.421821,
+    33.386881,
+    -82.418624,
+    33.390159
    ],
    "wikidata": null,
    "charted": false,
@@ -1198,6 +1748,15 @@
    "launches": [
     "mcduffie-pfa-beaver-lodge-ga"
    ],
+   "water_id": "dearing-number-nine-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "ea7f94c25890e0e2b2532e0ff6bfdbaa26f06d3efd7c8689e82557819dea1dd8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1209,16 +1768,56 @@
     "Calhoun"
    ],
    "bbox": [
-    -84.76122,
-    34.51524,
-    -84.74694,
-    34.52916
+    -84.761218,
+    34.515117,
+    -84.746941,
+    34.529164
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.383,
    "launches": [
     "salacoa-creek-park-ga"
+   ],
+   "water_id": "defoor-walters-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "66378a01f613c6f9c650ab40099519431cee6aeb1256d37e1848c75f4ecd3dff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "delegal-creek-ga",
+   "name": "Delegal Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Skidaway Island"
+   ],
+   "bbox": [
+    -81.090855,
+    31.87601,
+    -81.056499,
+    31.918638
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.07,
+   "launches": [],
+   "water_id": "delegal-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "6cf4b8a6aa9ffd98cd9d9637e6141067f08a5675b053685dfc49e3be72373dff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "delegal-creek-boat-launch-ga"
    ],
    "advisories": []
   },
@@ -1231,10 +1830,10 @@
     "Fancy Hall"
    ],
    "bbox": [
-    -81.26655,
-    31.76826,
+    -81.266553,
+    31.768221,
     -81.25257,
-    31.79046
+    31.790459
    ],
    "wikidata": null,
    "charted": true,
@@ -1242,6 +1841,15 @@
    "launches": [
     "demeries-creek-boat-launch-ga"
    ],
+   "water_id": "demeries-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "57578b6a7a0f75f7545a7d2f4d6ffca9664ad46de619468cbf85d01eea6563f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1259,6 +1867,15 @@
    "launches": [
     "dodge-county-pfa-boat-launch-ga"
    ],
+   "water_id": "dodge-county-pfa-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1276,6 +1893,15 @@
    "launches": [
     "fort-stewart-dogwood-lake-ga"
    ],
+   "water_id": "dogwood-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1287,10 +1913,10 @@
     "Baxley"
    ],
    "bbox": [
-    -82.3236,
-    31.80691,
-    -82.31197,
-    31.81084
+    -82.323657,
+    31.806914,
+    -82.311974,
+    31.810843
    ],
    "wikidata": null,
    "charted": false,
@@ -1298,6 +1924,15 @@
    "launches": [
     "dunn-s-lake-ga"
    ],
+   "water_id": "dunns-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "897adeef08d889e24980b7e2b63e351107278df144e5a26fd2acff833c848a28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1309,9 +1944,9 @@
     "Bainbridge"
    ],
    "bbox": [
-    -84.59793,
-    30.89674,
-    -84.59117,
+    -84.597926,
+    30.896669,
+    -84.591167,
     30.90153
    ],
    "wikidata": null,
@@ -1319,6 +1954,46 @@
    "area_km2": 0.085,
    "launches": [
     "earle-may-ga"
+   ],
+   "water_id": "earle-may-boat-basin-ga",
+   "gnis_id": null,
+   "geometry_hash": "d4ee869b5c468140be2586eeeefd51a01b95776d378165d5dd6f393c71b99946",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-river-ga",
+   "name": "East River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Brunswick"
+   ],
+   "bbox": [
+    -81.52378,
+    31.126591,
+    -81.490151,
+    31.156857
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.533,
+   "launches": [],
+   "water_id": "east-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "ff723f98145c87d34c89103dc4b4f66db48f3cfe43a69bf0a7f67b3f8cc9cfc2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "brunswick-landing-marina-ga"
    ],
    "advisories": []
   },
@@ -1332,9 +2007,9 @@
     "Stillwell"
    ],
    "bbox": [
-    -81.18422,
-    32.3806,
-    -81.18177,
+    -81.184219,
+    32.380391,
+    -81.181771,
     32.38377
    ],
    "wikidata": null,
@@ -1344,6 +2019,15 @@
     "ebenezer-creek-boat-launch-ga",
     "long-bridge-landing-ga"
    ],
+   "water_id": "ebenezer-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "3e68d46cfe5476d67c5a43e4ac3c89d8b3a3988aba46ce8f8f770db69b23f760",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1362,10 +2046,10 @@
     "Rome"
    ],
    "bbox": [
-    -85.17745,
-    34.12024,
-    -84.01764,
-    34.6618
+    -85.177449,
+    34.120238,
+    -84.017638,
+    34.661804
    ],
    "wikidata": "Q968071",
    "charted": false,
@@ -1378,6 +2062,46 @@
     "old-hardin-bridge-landing-ga",
     "riverside-park-ga",
     "state-route-1-loop-ga"
+   ],
+   "water_id": "etowah-river-ga",
+   "gnis_id": "355719",
+   "geometry_hash": "6a2a3e624155f3fa4b2466bf89c8f1a97f8330bd202b61349579bb93b007cea6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "factory-creek-ga",
+   "name": "Factory Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Blakely"
+   ],
+   "bbox": [
+    -85.065303,
+    31.409008,
+    -85.015091,
+    31.435313
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "factory-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "a15ce11308dc25155822f91efd007372f7e801d883da5e25096de20c0f7ab148",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "factory-creek-boat-launch-ga"
    ],
    "advisories": []
   },
@@ -1396,6 +2120,15 @@
    "launches": [
     "flat-creek-pfa-boat-launch-ga"
    ],
+   "water_id": "flat-creek-pfa-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1420,7 +2153,7 @@
    "bbox": [
     -84.87177,
     30.71149,
-    -83.91947,
+    -83.919276,
     33.66872
    ],
    "wikidata": "Q1428859",
@@ -1444,6 +2177,18 @@
     "sprewell-bluff-east-wma-ga",
     "state-highway-32-ga"
    ],
+   "water_id": "flint-river-ga",
+   "gnis_id": "358207",
+   "geometry_hash": "119af204ed5a39117e10f71a69b129d071b9013e6b7034034b8b18491cc177d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "camper-s-haven-marina-ga",
+    "hwy-96-bridge-ga"
+   ],
    "advisories": []
   },
   {
@@ -1455,10 +2200,10 @@
     "Winder"
    ],
    "bbox": [
-    -83.74465,
-    33.95911,
-    -83.72314,
-    33.98032
+    -83.744646,
+    33.959109,
+    -83.723143,
+    33.980319
    ],
    "wikidata": null,
    "charted": false,
@@ -1467,6 +2212,15 @@
     "fort-yargo-sp-east-ga",
     "fort-yargo-sp-west-ga"
    ],
+   "water_id": "fort-yargo-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "2c5a632e0601895c72855e2a6ca4fce1c38c54d4d0c92ecce5e2dcacc432c617",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1478,16 +2232,56 @@
     "Mansfield"
    ],
    "bbox": [
-    -83.74354,
-    33.43942,
+    -83.743541,
+    33.439418,
     -83.72923,
-    33.44618
+    33.446179
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.269,
    "launches": [
     "charlie-elliott-wildlife-center-mansfield-ga"
+   ],
+   "water_id": "fox-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "7cab9824717ce9f37a4b7ccd2b5c34d514f8acce5e846a053875ba11bba8e4cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "frederica-river-ga",
+   "name": "Frederica River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Saint Simon Mills"
+   ],
+   "bbox": [
+    -81.422695,
+    31.128142,
+    -81.384538,
+    31.260496
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "frederica-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "0a7c4c9b9df83b2546d8465132f370b50bc41d23c44e255883a87bd4952bfc7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "st-simons-marina-ga"
    ],
    "advisories": []
   },
@@ -1506,6 +2300,15 @@
    "launches": [
     "silver-lake-wma-frog-pond-ga"
    ],
+   "water_id": "frog-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1517,10 +2320,10 @@
     "Lithia Springs"
    ],
    "bbox": [
-    -84.64983,
-    33.75343,
-    -84.62756,
-    33.7671
+    -84.649828,
+    33.753427,
+    -84.627565,
+    33.767102
    ],
    "wikidata": null,
    "charted": false,
@@ -1528,6 +2331,15 @@
    "launches": [
     "sweetwater-creek-sp-ga"
    ],
+   "water_id": "george-h-sparks-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "f020da10bf0e7a58b9895b87d5ed3036341fc9c6561750b735c9f83b5d770a33",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1545,6 +2357,15 @@
    "launches": [
     "hugh-m-gillis-pfa-lower-ga"
    ],
+   "water_id": "gillis-pfa-lower-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1562,6 +2383,15 @@
    "launches": [
     "hugh-m-gillis-pfa-upper-ga"
    ],
+   "water_id": "gillis-pfa-upper-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1573,10 +2403,10 @@
     "Camp Olvier"
    ],
    "bbox": [
-    -81.82738,
-    32.07252,
-    -81.8225,
-    32.07883
+    -81.827376,
+    32.072525,
+    -81.822307,
+    32.078831
    ],
    "wikidata": null,
    "charted": false,
@@ -1584,6 +2414,15 @@
    "launches": [
     "fort-stewart-glisson-s-mill-pond-ga"
    ],
+   "water_id": "glissons-millpond-ga",
+   "gnis_id": null,
+   "geometry_hash": "bc1149ba03c5e716a4904cfeaf4cfee31c5d6a11ae118d24de24868857551cb9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1594,13 +2433,27 @@
    "towns": [
     "Columbus"
    ],
-   "bbox": null,
+   "bbox": [
+    -85.120062,
+    32.609505,
+    -85.071563,
+    32.663368
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "goat-rock-marina-ga"
    ],
+   "water_id": "goat-rock-lake-ga",
+   "gnis_id": "337190",
+   "geometry_hash": "a5838d08198edac0ed4dd0049bfe63bf85aa4add1e406c3cdbfd626f04a986e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1619,6 +2472,15 @@
     "grand-bay-wma-ga",
     "grand-bay-wma-valdosta-ga"
    ],
+   "water_id": "grand-bay-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1631,8 +2493,8 @@
    ],
    "bbox": [
     -82.79933,
-    33.20534,
-    -82.77719,
+    33.205268,
+    -82.777189,
     33.21578
    ],
    "wikidata": null,
@@ -1640,6 +2502,46 @@
    "area_km2": 0.62,
    "launches": [
     "hamburg-sp-ga"
+   ],
+   "water_id": "hamburg-millpond-ga",
+   "gnis_id": null,
+   "geometry_hash": "b44ea62338512ec71c34e1507fa8bd5bb44502edbef42867eb0b0de6831edf23",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hampton-river-ga",
+   "name": "Hampton River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Brunswick"
+   ],
+   "bbox": [
+    -81.387436,
+    31.211671,
+    -81.295033,
+    31.310111
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.927,
+   "launches": [],
+   "water_id": "hampton-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "00597352fe16ff5561836c70b15d1f0bc58ff32513a2c18d5caf0f03159b7f0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hampton-river-club-marina-ga"
    ],
    "advisories": []
   },
@@ -1652,10 +2554,10 @@
     "Monroe"
    ],
    "bbox": [
-    -83.67151,
-    33.67267,
-    -83.62843,
-    33.72623
+    -83.671512,
+    33.672669,
+    -83.628433,
+    33.726225
    ],
    "wikidata": null,
    "charted": false,
@@ -1663,6 +2565,15 @@
    "launches": [
     "hard-labor-creek-regional-reservoir-boat-launch-ga"
    ],
+   "water_id": "hard-labor-creek-regional-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "bb471371f97b638c7839334ecfea23154d940256cb3c7d0a3299eb005dea14cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1674,10 +2585,10 @@
     "Thomas Landing"
    ],
    "bbox": [
-    -81.28984,
-    31.61022,
-    -81.28089,
-    31.62481
+    -81.289838,
+    31.610221,
+    -81.280891,
+    31.624819
    ],
    "wikidata": null,
    "charted": true,
@@ -1685,6 +2596,15 @@
    "launches": [
     "harris-neck-creek-boat-launch-ga"
    ],
+   "water_id": "harris-neck-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "af8c7eefcd6d7f27e440e38b801c7854bab235b05cb3d7978bcbe39f875ca0b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1696,10 +2616,10 @@
     "Paradise Acres"
    ],
    "bbox": [
-    -84.86616,
-    30.79663,
-    -84.85982,
-    30.80275
+    -84.866163,
+    30.796631,
+    -84.859819,
+    30.802843
    ],
    "wikidata": null,
    "charted": false,
@@ -1707,6 +2627,15 @@
    "launches": [
     "seminole-sp-harvel-pond-ga"
    ],
+   "water_id": "harvel-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": "25c32e03de819d841a0dac1bde953dcb0baec5d3856e434bf29642edde0a6dcc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1718,10 +2647,10 @@
     "Rio"
    ],
    "bbox": [
-    -84.37604,
-    33.27943,
-    -84.34643,
-    33.29545
+    -84.376036,
+    33.279249,
+    -84.346433,
+    33.295454
    ],
    "wikidata": null,
    "charted": false,
@@ -1729,6 +2658,15 @@
    "launches": [
     "heads-creek-reservoir-boat-launch-ga"
    ],
+   "water_id": "heads-creek-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "391bc0be0bcb46f7757c8aab3eee768e039f9320137d28ae52e87d83a6a8f233",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1746,6 +2684,15 @@
    "launches": [
     "rocky-mountain-pfa-heath-lake-ga"
    ],
+   "water_id": "heath-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1757,10 +2704,10 @@
     "Canton"
    ],
    "bbox": [
-    -84.49247,
-    34.26703,
-    -84.4619,
-    34.29627
+    -84.492468,
+    34.267031,
+    -84.461896,
+    34.296432
    ],
    "wikidata": null,
    "charted": false,
@@ -1768,6 +2715,15 @@
    "launches": [
     "hickory-log-creek-ga"
    ],
+   "water_id": "hickory-log-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "5f0b9aeea1c7a67229c2efcb519c6ca45907f6e3edddad1315c59dace3815af4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1779,10 +2735,10 @@
     "High Falls"
    ],
    "bbox": [
-    -84.04742,
-    33.17897,
-    -84.01557,
-    33.21251
+    -84.047655,
+    33.178972,
+    -84.015571,
+    33.212508
    ],
    "wikidata": null,
    "charted": false,
@@ -1791,6 +2747,15 @@
     "high-falls-sp-lake-ga",
     "high-falls-sp-lake-buck-cr-ga"
    ],
+   "water_id": "high-falls-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "13ebb1db84dc4ee6792c025d04b57d851ad4d566c8802a0504dfb826b6df37da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1802,10 +2767,10 @@
     "Hinesville"
    ],
    "bbox": [
-    -81.55925,
-    31.91152,
-    -81.55491,
-    31.91555
+    -81.559246,
+    31.911517,
+    -81.554908,
+    31.915547
    ],
    "wikidata": null,
    "charted": false,
@@ -1813,6 +2778,15 @@
    "launches": [
     "fort-stewart-holbrook-pond-ga"
    ],
+   "water_id": "holbrook-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": "75c9f6f505e08db09a63aca796cb77afb181031de94d9db1a2c33b9c05a67cb0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1824,10 +2798,10 @@
     "Mica"
    ],
    "bbox": [
-    -84.26366,
-    34.35271,
-    -84.24143,
-    34.37758
+    -84.263665,
+    34.352708,
+    -84.241376,
+    34.37762
    ],
    "wikidata": null,
    "charted": false,
@@ -1835,6 +2809,15 @@
    "launches": [
     "hollis-lathem-launch-ga"
    ],
+   "water_id": "hollis-g-lathem-reservoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "ad058cc77b8699e27ee6b3313adcea1220905f1893ec20bb7273d6a0436aed27",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1845,13 +2828,27 @@
    "towns": [
     "Georgetown"
    ],
-   "bbox": null,
+   "bbox": [
+    -81.185645,
+    31.944424,
+    -81.165783,
+    31.973579
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "bell-s-landing-ga"
    ],
+   "water_id": "hoover-creek-ga",
+   "gnis_id": "315627",
+   "geometry_hash": "4573eb7f7cb066cc81a1a75c75aa1b2c10af99a3afb1c1921a9c1375aaa2780e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1863,10 +2860,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.36649,
-    31.39393,
-    -83.36329,
-    31.3978
+    -83.366489,
+    31.393821,
+    -83.363292,
+    31.397795
    ],
    "wikidata": null,
    "charted": false,
@@ -1874,6 +2871,15 @@
    "launches": [
     "paradise-pfa-horseshoe-3-ga"
    ],
+   "water_id": "horseshoe-3-ga",
+   "gnis_id": null,
+   "geometry_hash": "0057482de98f3f517b54fb251f02cb0a37baed8c3ce8f34ebec734d46647daf7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1885,10 +2891,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.36379,
-    31.39033,
-    -83.35983,
-    31.39612
+    -83.363786,
+    31.390331,
+    -83.359827,
+    31.396119
    ],
    "wikidata": null,
    "charted": false,
@@ -1896,6 +2902,15 @@
    "launches": [
     "paradise-pfa-horseshoe-4-ga"
    ],
+   "water_id": "horseshoe-4-ga",
+   "gnis_id": null,
+   "geometry_hash": "1bac9c42341d3dc0a8c54dffa46780ab60f72c4902e29bbfba51abcc3eb2b782",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1907,9 +2922,9 @@
     "Enigma"
    ],
    "bbox": [
-    -83.36064,
-    31.39149,
-    -83.35603,
+    -83.360642,
+    31.391494,
+    -83.356029,
     31.39584
    ],
    "wikidata": null,
@@ -1918,6 +2933,15 @@
    "launches": [
     "paradise-pfa-horseshoe-5-ga"
    ],
+   "water_id": "horseshoe-5-ga",
+   "gnis_id": null,
+   "geometry_hash": "4b7c82942ba51abe66a1a6ea27c298a52b0fcdd48bbdcd9601bfee8c5980165f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1935,6 +2959,15 @@
    "launches": [
     "silver-lake-wma-house-pond-ga"
    ],
+   "water_id": "house-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1946,10 +2979,10 @@
     "Beaver Creek"
    ],
    "bbox": [
-    -83.69171,
-    32.49972,
-    -83.66606,
-    32.50982
+    -83.691707,
+    32.499716,
+    -83.666057,
+    32.509823
    ],
    "wikidata": null,
    "charted": false,
@@ -1957,6 +2990,15 @@
    "launches": [
     "houston-lake-boat-launch-ga"
    ],
+   "water_id": "houston-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "689e0e4bb44d9a930734fc7b227e7ec15498822480161952731791b51be96845",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1970,16 +3012,27 @@
     "Saddle Acres"
    ],
    "bbox": [
-    -83.92072,
-    33.31857,
-    -83.8148,
-    33.43865
+    -83.920717,
+    33.318497,
+    -83.814795,
+    33.438649
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 12.549,
    "launches": [
     "lloyd-shoals-park-ga"
+   ],
+   "water_id": "jackson-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "33a35380564bd33e41273acb3ea602216ce14ba189e54eabe255aba1a31df887",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bear-creek-marina-boat-ramp-ga"
    ],
    "advisories": []
   },
@@ -1992,10 +3045,10 @@
     "Macon"
    ],
    "bbox": [
-    -83.66377,
-    32.89965,
+    -83.663773,
+    32.899651,
     -83.64221,
-    32.92639
+    32.926392
    ],
    "wikidata": null,
    "charted": false,
@@ -2003,6 +3056,15 @@
    "launches": [
     "javors-lucas-lake-boat-launch-ga"
    ],
+   "water_id": "javors-lucas-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "4c8612a7b19be84c887bd2a160a28fae31fd5c6b03983ea039c078ee7471b8a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2014,16 +3076,27 @@
     "Brunswick"
    ],
    "bbox": [
-    -81.44098,
-    31.00119,
-    -81.41662,
-    31.10914
+    -81.440982,
+    31.001188,
+    -81.416622,
+    31.109144
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "jekyll-island-boat-ramp-ga"
+   ],
+   "water_id": "jekyll-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "7d0aafb500c8ccc56ace45adca7eee854f3d6c2739d860c6bcf2e7f6eaf5cb7f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "jekyll-harbor-marina-ga"
    ],
    "advisories": []
   },
@@ -2036,10 +3109,10 @@
     "Richmond Hill"
    ],
    "bbox": [
-    -81.36649,
-    31.81358,
-    -81.31785,
-    31.84728
+    -81.366489,
+    31.813581,
+    -81.317851,
+    31.84747
    ],
    "wikidata": null,
    "charted": true,
@@ -2047,6 +3120,15 @@
    "launches": [
     "richmond-hill-wma-egypt-island-ga"
    ],
+   "water_id": "jerico-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "47ccda0d375589d640d00e5637b78dce454f5572e75a0bbc3bc423cb464452dc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2059,9 +3141,9 @@
    ],
    "bbox": [
     -85.17158,
-    33.59915,
-    -85.16723,
-    33.6025
+    33.599154,
+    -85.167232,
+    33.602496
    ],
    "wikidata": null,
    "charted": false,
@@ -2069,6 +3151,15 @@
    "launches": [
     "john-tanner-sp-ga"
    ],
+   "water_id": "john-tanner-state-park-lake-a-ga",
+   "gnis_id": null,
+   "geometry_hash": "126f42b066f1ffd1bb9eec361922004627178b12c3411849c08fc7fff58368ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2080,16 +3171,56 @@
     "Midway"
    ],
    "bbox": [
-    -81.28815,
-    31.72555,
-    -81.25347,
-    31.74888
+    -81.288146,
+    31.725551,
+    -81.253471,
+    31.748879
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.658,
    "launches": [
     "liberty-county-regional-park-ga"
+   ],
+   "water_id": "jones-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "fc9b4ff9eec18ce2fd36a1e1951becc0abee9370e13409b0a136f7aa606f8c92",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kilkenny-creek-ga",
+   "name": "Kilkenny Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Richmond Hill"
+   ],
+   "bbox": [
+    -81.202968,
+    31.77067,
+    -81.172381,
+    31.828169
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.994,
+   "launches": [],
+   "water_id": "kilkenny-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "3b762e44c270ac875643e79745a3f259e73d44f905bbf344d57e07527e992bf0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kilkenny-marina-ga"
    ],
    "advisories": []
   },
@@ -2105,9 +3236,9 @@
     "Smithville"
    ],
    "bbox": [
-    -84.59591,
-    31.60773,
-    -84.14623,
+    -84.595913,
+    31.607646,
+    -84.146225,
     32.33573
    ],
    "wikidata": null,
@@ -2119,6 +3250,15 @@
     "sutton-s-landing-park-ga",
     "wallace-bins-sr118-ga"
    ],
+   "water_id": "kinchafoonee-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "7e8bf7e5f8273e752d686f536d1cf3e58a95278ace18792ca846caf257e4567a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2130,10 +3270,10 @@
     "LaFayette"
    ],
    "bbox": [
-    -85.26959,
+    -85.269595,
     34.72276,
-    -85.2531,
-    34.74885
+    -85.252895,
+    34.748845
    ],
    "wikidata": null,
    "charted": false,
@@ -2141,6 +3281,15 @@
    "launches": [
     "queen-city-lake-ga"
    ],
+   "water_id": "lafayette-city-resevoir-ga",
+   "gnis_id": null,
+   "geometry_hash": "5be31e08babe37d4f66eff643007464612ade7d40e045b405f6e0ec4064779fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2152,10 +3301,10 @@
     "Acworth"
    ],
    "bbox": [
-    -84.69378,
-    34.04646,
-    -84.66274,
-    34.06266
+    -84.693781,
+    34.046459,
+    -84.662739,
+    34.062664
    ],
    "wikidata": "Q6474665",
    "charted": false,
@@ -2163,6 +3312,15 @@
    "launches": [
     "acworth-beach-ga"
    ],
+   "water_id": "lake-acworth-ga",
+   "gnis_id": "310382",
+   "geometry_hash": "7a539d7e0d1c7faefd9393046e8115956278cb38b87233cbf39cc3fb83046b41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2174,10 +3332,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.35879,
-    31.38758,
-    -83.35564,
-    31.38978
+    -83.358788,
+    31.387582,
+    -83.355644,
+    31.389936
    ],
    "wikidata": null,
    "charted": false,
@@ -2185,6 +3343,15 @@
    "launches": [
     "paradise-pfa-lake-beaver-ga"
    ],
+   "water_id": "lake-beaver-ga",
+   "gnis_id": null,
+   "geometry_hash": "974e92c80798587a65f46f8bf39cbef4c0862e611c2006123ac673d65ce3cad1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2199,9 +3366,9 @@
    ],
    "bbox": [
     -83.97388,
-    31.83691,
-    -83.89286,
-    32.04606
+    31.836914,
+    -83.892797,
+    32.046061
    ],
    "wikidata": "Q1800865",
    "charted": false,
@@ -2210,6 +3377,18 @@
     "georgia-veterans-sp-middle-ga",
     "georgia-veterans-sp-north-ga",
     "georgia-veterans-sp-south-ga"
+   ],
+   "water_id": "lake-blackshear-ga",
+   "gnis_id": "311506",
+   "geometry_hash": "589de51c73a4f1a2203c8d49fd7dd2a64b50fb533433d0e3e472cef51aa1d23b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lakeshore-marina-ga",
+    "the-marina-at-lake-blackshear-resort-ga"
    ],
    "advisories": []
   },
@@ -2223,10 +3402,10 @@
     "Morganton"
    ],
    "bbox": [
-    -84.29787,
-    34.79727,
-    -84.23423,
-    34.88546
+    -84.297865,
+    34.797266,
+    -84.234054,
+    34.885459
    ],
    "wikidata": "Q6474997",
    "charted": false,
@@ -2235,6 +3414,17 @@
     "lake-blue-ridge-rec-area-ga",
     "lakewood-landing-ga",
     "morganton-point-ga"
+   ],
+   "water_id": "lake-blue-ridge-ga",
+   "gnis_id": "354784",
+   "geometry_hash": "169f351293ad9dc752c7366f8fd58ecab67eeb0d7ab36c44d122760060cdbaf7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-blue-ridge-marina-ga"
    ],
    "advisories": []
   },
@@ -2247,10 +3437,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.35697,
-    31.40295,
-    -83.35147,
-    31.41052
+    -83.356972,
+    31.402788,
+    -83.351354,
+    31.410524
    ],
    "wikidata": null,
    "charted": false,
@@ -2258,6 +3448,15 @@
    "launches": [
     "paradise-pfa-lake-bobben-ga"
    ],
+   "water_id": "lake-bobben-ga",
+   "gnis_id": null,
+   "geometry_hash": "8029bacaa27e569675a98e8b41a102ae107a6e514f1b59da7429f1c1df3fae99",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2269,10 +3468,10 @@
     "Crawfordville"
    ],
    "bbox": [
-    -82.90628,
-    33.56824,
-    -82.90156,
-    33.57121
+    -82.906284,
+    33.568237,
+    -82.901558,
+    33.571214
    ],
    "wikidata": null,
    "charted": false,
@@ -2280,6 +3479,15 @@
    "launches": [
     "a-h-stephens-sp-lake-buncombe-ga"
    ],
+   "water_id": "lake-buncombe-ga",
+   "gnis_id": null,
+   "geometry_hash": "c5b6f9599ba5610daa4a66148a2e8508ec5a680eadff85db39f5ba430e273077",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2292,10 +3500,10 @@
     "Clayton"
    ],
    "bbox": [
-    -83.58765,
-    34.79205,
-    -83.51489,
-    34.88858
+    -83.587655,
+    34.792051,
+    -83.514895,
+    34.888577
    ],
    "wikidata": null,
    "charted": false,
@@ -2305,6 +3513,15 @@
     "murray-cove-ga",
     "tallulah-river-ga"
    ],
+   "water_id": "lake-burton-ga",
+   "gnis_id": null,
+   "geometry_hash": "fe666e2d359cab2cb705cc7d33f9eaa03905cd629ae622b6769af4cda5ab0d34",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2316,10 +3533,10 @@
     "Carrollton"
    ],
    "bbox": [
-    -85.06429,
-    33.58926,
-    -85.04558,
-    33.59945
+    -85.064294,
+    33.589256,
+    -85.045578,
+    33.599446
    ],
    "wikidata": null,
    "charted": false,
@@ -2327,6 +3544,15 @@
    "launches": [
     "lake-carroll-boat-launch-ga"
    ],
+   "water_id": "lake-carroll-ga",
+   "gnis_id": null,
+   "geometry_hash": "e4ba6d98063f25f6caedc85a9512768425b229ea4f8998fe9af96d6b226f3e63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2339,8 +3565,8 @@
    ],
    "bbox": [
     -83.3921,
-    34.02512,
-    -83.37507,
+    34.024978,
+    -83.375018,
     34.04541
    ],
    "wikidata": null,
@@ -2349,6 +3575,15 @@
    "launches": [
     "lake-chapman-boat-launch-ga"
    ],
+   "water_id": "lake-chapman-ga",
+   "gnis_id": null,
+   "geometry_hash": "3c8915d176dff3a814cec4615414c2f267157fd0ef1209ec2641689836186253",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2360,10 +3595,10 @@
     "Thomasville"
    ],
    "bbox": [
-    -83.96177,
-    30.83579,
-    -83.95928,
-    30.84082
+    -83.961771,
+    30.835643,
+    -83.959283,
+    30.840815
    ],
    "wikidata": null,
    "charted": false,
@@ -2371,6 +3606,15 @@
    "launches": [
     "cherokee-lake-boat-launch-ga"
    ],
+   "water_id": "lake-cherokee-ga",
+   "gnis_id": null,
+   "geometry_hash": "dfaaab07655883cc5bffbdf18f1bf655f75e9c45bcccea82afa537de6260f73b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2382,10 +3626,10 @@
     "Chatsworth"
    ],
    "bbox": [
-    -84.65322,
-    34.85765,
-    -84.64796,
-    34.86158
+    -84.653216,
+    34.857653,
+    -84.647965,
+    34.861578
    ],
    "wikidata": "Q6475442",
    "charted": false,
@@ -2393,6 +3637,15 @@
    "launches": [
     "lake-conasauga-boat-launch-ga"
    ],
+   "water_id": "lake-conasauga-ga",
+   "gnis_id": "327506",
+   "geometry_hash": "8003ddfea5de21b9460745b00d96d645c0a10edd4154a1b78deb722f0390a5a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2404,10 +3657,10 @@
     "West Point"
    ],
    "bbox": [
-    -85.20049,
-    32.6563,
-    -85.065,
-    32.77001
+    -85.200486,
+    32.656295,
+    -85.064997,
+    32.770005
    ],
    "wikidata": "Q6476087",
    "charted": false,
@@ -2416,6 +3669,15 @@
     "blanton-creek-park-ga",
     "idle-hour-park-ga"
    ],
+   "water_id": "lake-harding-al",
+   "gnis_id": "1945742",
+   "geometry_hash": "a8f09de20191f3e718bb5c11d07d044812be4bee5a4747eb2a87af5e764e6664",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2430,10 +3692,10 @@
     "Toccoa"
    ],
    "bbox": [
-    -83.2826,
-    34.33757,
-    -82.65743,
-    34.76073
+    -83.282597,
+    34.337566,
+    -82.657431,
+    34.760734
    ],
    "wikidata": "Q1800945",
    "charted": false,
@@ -2467,6 +3729,18 @@
     "tugalo-state-park-ga",
     "watsadler-campground-ga"
    ],
+   "water_id": "lake-hartwell-ga",
+   "gnis_id": "356215",
+   "geometry_hash": "42ef0c6f0c00c175b85282b41bc530041a9efa6533f918e35d4f036e7bc79b35",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "harbor-light-marina-ga",
+    "hartwell-marina-ga"
+   ],
    "advisories": []
   },
   {
@@ -2478,10 +3752,10 @@
     "Woolsey Woods"
    ],
    "bbox": [
-    -84.44144,
-    33.31716,
+    -84.441444,
+    33.317162,
     -84.40831,
-    33.35272
+    33.352722
    ],
    "wikidata": null,
    "charted": false,
@@ -2489,6 +3763,15 @@
    "launches": [
     "lake-horton-park-ga"
    ],
+   "water_id": "lake-horton-ga",
+   "gnis_id": null,
+   "geometry_hash": "4a169ced53cfa98fd81ad35d6990227e4ef32cacaa47451d36baecce4c1f1536",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2500,10 +3783,10 @@
     "Lakeland"
    ],
    "bbox": [
-    -83.07905,
-    31.04223,
-    -83.07396,
-    31.04428
+    -83.079051,
+    31.042234,
+    -83.073957,
+    31.044282
    ],
    "wikidata": null,
    "charted": false,
@@ -2511,6 +3794,15 @@
    "launches": [
     "lake-irma-boat-launch-ga"
    ],
+   "water_id": "lake-irma-ga",
+   "gnis_id": null,
+   "geometry_hash": "bde99ad2d13731bac87cd38ed9aeaaa415b99bdfb359a8d3fcc456ef0d554bbc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2522,10 +3814,10 @@
     "Forsyth"
    ],
    "bbox": [
-    -83.86249,
-    33.02447,
+    -83.862488,
+    33.024467,
     -83.75191,
-    33.08627
+    33.086332
    ],
    "wikidata": null,
    "charted": false,
@@ -2534,6 +3826,15 @@
     "dames-ferry-park-ga",
     "holly-grove-park-ga"
    ],
+   "water_id": "lake-juliette-ga",
+   "gnis_id": null,
+   "geometry_hash": "f9e24e04703adc06eb27621b71b1b9046fb248d2ac96bb48185c583b6ff60114",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2545,10 +3846,10 @@
     "Peachtree City"
    ],
    "bbox": [
-    -84.59091,
-    33.42306,
-    -84.56936,
-    33.43998
+    -84.590912,
+    33.423057,
+    -84.569365,
+    33.440162
    ],
    "wikidata": "Q14686694",
    "charted": false,
@@ -2556,6 +3857,15 @@
    "launches": [
     "lake-kedron-boat-launch-ga"
    ],
+   "water_id": "lake-kedron-ga",
+   "gnis_id": "1940180",
+   "geometry_hash": "6dad28e492a1fbc6c3625e4a65b7f03fd3df2519739114b3c7382055f7bbc427",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2567,10 +3877,10 @@
     "Blakely"
    ],
    "bbox": [
-    -84.93536,
-    31.46343,
-    -84.92482,
-    31.47049
+    -84.935357,
+    31.463426,
+    -84.924815,
+    31.470493
    ],
    "wikidata": null,
    "charted": false,
@@ -2578,6 +3888,15 @@
    "launches": [
     "kolomoki-mounds-sp-kolomoki-lake-ga"
    ],
+   "water_id": "lake-kolomoki-ga",
+   "gnis_id": null,
+   "geometry_hash": "550ed067fe33034dceb17d564310a0c6380d80533435cd1e422852296316b3fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2600,10 +3919,10 @@
     "Lula"
    ],
    "bbox": [
-    -84.1211,
-    34.14627,
-    -83.68924,
-    34.43986
+    -84.121103,
+    34.146267,
+    -83.689228,
+    34.439863
    ],
    "wikidata": "Q3295796",
    "charted": false,
@@ -2660,6 +3979,29 @@
     "war-hill-park-ga",
     "young-deer-park-ga"
    ],
+   "water_id": "lake-lanier-ga",
+   "gnis_id": "322971",
+   "geometry_hash": "c96e3cc985435b9f54688e3017d2dc26334d8188117e290dc32c112bb79f3d21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "aqualand-marina-ga",
+    "aquamarina-lazy-days-ga",
+    "bald-ridge-marina-ga",
+    "bethel-park-ga",
+    "gainesville-marina-ga",
+    "habersham-marina-ga",
+    "hideaway-bay-marina-ga",
+    "holiday-marina-on-lake-lanier-ga",
+    "lake-lanier-boat-launch-near-olde-federal-pointe-ga",
+    "lake-lanier-boat-launch-near-olde-federal-pointe-ga-2",
+    "port-royale-marina-ga",
+    "sunrise-cove-marina-ga",
+    "lake-lanier-boat-launch-near-sugar-hill-ga-2"
+   ],
    "advisories": []
   },
   {
@@ -2671,10 +4013,10 @@
     "Jesup"
    ],
    "bbox": [
-    -82.05368,
-    31.56595,
-    -82.0365,
-    31.58821
+    -82.053676,
+    31.565828,
+    -82.036501,
+    31.588214
    ],
    "wikidata": null,
    "charted": false,
@@ -2682,6 +4024,15 @@
    "launches": [
     "lake-lindsay-grace-boat-launch-ga"
    ],
+   "water_id": "lake-lindsay-grace-ga",
+   "gnis_id": null,
+   "geometry_hash": "9eba5fc1ecbabbbc4a851c04ee81e4a18c5fcb312158d28439393dee51c7f53c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2699,6 +4050,46 @@
    "launches": [
     "evans-county-pfa-ga"
    ],
+   "water_id": "lake-longleaf-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-marvin-ga",
+   "name": "Lake Marvin",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Calhoun"
+   ],
+   "bbox": [
+    -85.090165,
+    34.559708,
+    -85.081999,
+    34.573394
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.313,
+   "launches": [],
+   "water_id": "lake-marvin-ga",
+   "gnis_id": null,
+   "geometry_hash": "b85e0d7a34a77a3a89354c93bea075e1ee394bf75fc654ffcf35d75e099c09fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-marvin-boat-launch-ga"
+   ],
    "advisories": []
   },
   {
@@ -2710,10 +4101,10 @@
     "Cresthill"
    ],
    "bbox": [
-    -81.08992,
-    31.99089,
-    -81.08445,
-    31.99698
+    -81.090007,
+    31.990812,
+    -81.084446,
+    31.996976
    ],
    "wikidata": null,
    "charted": false,
@@ -2721,6 +4112,15 @@
    "launches": [
     "lake-mayer-boat-launch-ga"
    ],
+   "water_id": "lake-mayer-ga",
+   "gnis_id": null,
+   "geometry_hash": "655920465a2b9a4e4e3e01495b955057f73f1a7451e16b48f20e8c030923ea3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2733,9 +4133,9 @@
    ],
    "bbox": [
     -82.4871,
-    31.78169,
-    -82.46976,
-    31.80125
+    31.781691,
+    -82.469763,
+    31.801247
    ],
    "wikidata": null,
    "charted": false,
@@ -2743,6 +4143,15 @@
    "launches": [
     "lake-mayers-boat-launch-ga"
    ],
+   "water_id": "lake-mayers-ga",
+   "gnis_id": null,
+   "geometry_hash": "fbcbc8a78d39fbfcec7483fd686d6f63ab07f08c075859e042c829d87b5e3568",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2754,10 +4163,10 @@
     "Peachtree City"
    ],
    "bbox": [
-    -84.6082,
-    33.35506,
-    -84.58328,
-    33.38819
+    -84.608198,
+    33.355057,
+    -84.583284,
+    33.388193
    ],
    "wikidata": null,
    "charted": false,
@@ -2765,6 +4174,15 @@
    "launches": [
     "lake-mcintosh-boat-ramp-ga"
    ],
+   "water_id": "lake-mcintosh-ga",
+   "gnis_id": null,
+   "geometry_hash": "6c1e6b4f9b8b3ccb6de0ff4e6ddc651459e54d17daee6fa19b93575c91cf8b39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2782,10 +4200,10 @@
     "Swords"
    ],
    "bbox": [
-    -83.35814,
-    33.34375,
-    -83.13871,
-    33.66538
+    -83.358145,
+    33.343746,
+    -83.138708,
+    33.665436
    ],
    "wikidata": "Q6477167",
    "charted": false,
@@ -2801,6 +4219,20 @@
     "sugar-creek-ga",
     "swords-recreation-area-ga"
    ],
+   "water_id": "lake-oconee-ga",
+   "gnis_id": "330982",
+   "geometry_hash": "cef449dc9e8a1d8c720c781b18aa2097c8fb8a29369015c3587737d6ac536daf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "blue-springs-marina-ga",
+    "boathouse-at-harbor-club-ga",
+    "fish-tale-marina-ga",
+    "sugar-creek-marina-ga"
+   ],
    "advisories": []
   },
   {
@@ -2812,10 +4244,10 @@
     "Columbus"
    ],
    "bbox": [
-    -85.08496,
-    32.51455,
-    -84.99106,
-    32.60954
+    -85.084962,
+    32.514547,
+    -84.991056,
+    32.609596
    ],
    "wikidata": null,
    "charted": false,
@@ -2823,6 +4255,15 @@
    "launches": [
     "lake-oliver-marina-ga"
    ],
+   "water_id": "lake-oliver-ga",
+   "gnis_id": null,
+   "geometry_hash": "b751fdb15270e7f3c1a8f0df30e679aec8b9c57d2552450c28810f01f6168e89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2834,10 +4275,10 @@
     "Augusta"
    ],
    "bbox": [
-    -82.01353,
-    33.49104,
-    -81.99812,
-    33.49935
+    -82.013527,
+    33.491042,
+    -81.998122,
+    33.499352
    ],
    "wikidata": null,
    "charted": false,
@@ -2845,6 +4286,15 @@
    "launches": [
     "lake-olmstead-boat-launch-ga"
    ],
+   "water_id": "lake-olmstead-ga",
+   "gnis_id": null,
+   "geometry_hash": "14a5909abe1fe77aa0135ccb7bfc35e8b3dc0bea571ae5bc58dcb22353396f84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2856,10 +4306,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.36103,
-    31.41205,
-    -83.35649,
-    31.41728
+    -83.361033,
+    31.412051,
+    -83.356494,
+    31.417284
    ],
    "wikidata": null,
    "charted": false,
@@ -2867,6 +4317,15 @@
    "launches": [
     "paradise-pfa-lake-paradise-ga"
    ],
+   "water_id": "lake-paradise-ga",
+   "gnis_id": null,
+   "geometry_hash": "d6d6681f3b3e418cae10ec045d7da04449d1ade58a884ac7c2486d56739751a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2878,10 +4337,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.36591,
-    31.39901,
-    -83.35553,
-    31.41119
+    -83.365909,
+    31.399011,
+    -83.355535,
+    31.411195
    ],
    "wikidata": null,
    "charted": false,
@@ -2889,6 +4348,15 @@
    "launches": [
     "paradise-pfa-lake-patrick-ga"
    ],
+   "water_id": "lake-patrick-ga",
+   "gnis_id": null,
+   "geometry_hash": "8139d65835e6426490434c19aaf25d4848582fcee7cd020072f9294c7278bbf5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2900,10 +4368,10 @@
     "Peachtree City"
    ],
    "bbox": [
-    -84.58104,
-    33.38454,
-    -84.56751,
-    33.40614
+    -84.581059,
+    33.384535,
+    -84.567506,
+    33.406137
    ],
    "wikidata": "Q34900567",
    "charted": false,
@@ -2913,6 +4381,15 @@
     "drake-field-kayak-launch-ga",
     "lake-peachtree-boat-launch-ga"
    ],
+   "water_id": "lake-peachtree-ga",
+   "gnis_id": "320315",
+   "geometry_hash": "87e1921448ebbd77cf3efa751227225703e3e6a59a1e13fc6c187470dfa01544",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2925,10 +4402,10 @@
     "Tallulah Falls"
    ],
    "bbox": [
-    -83.48902,
-    34.74087,
-    -83.41587,
-    34.77458
+    -83.489017,
+    34.740871,
+    -83.415867,
+    34.774583
    ],
    "wikidata": null,
    "charted": false,
@@ -2936,6 +4413,46 @@
    "launches": [
     "hall-s-marina-ga",
     "lake-rabun-beach-rec-area-ga"
+   ],
+   "water_id": "lake-rabun-ga",
+   "gnis_id": null,
+   "geometry_hash": "069fbfb24f488542ea5baf02ed38f1fc9b23b14097223831f26940b3ff192e89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-redwine-ga",
+   "name": "Lake Redwine",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Newnan"
+   ],
+   "bbox": [
+    -84.786399,
+    33.455792,
+    -84.760501,
+    33.470297
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.051,
+   "launches": [],
+   "water_id": "lake-redwine-ga",
+   "gnis_id": null,
+   "geometry_hash": "0f81b13b37216612e0d585e659fee669ed2c45ef485728ab77a9c07e138b263d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-redwine-boat-launch-ga"
    ],
    "advisories": []
   },
@@ -2948,10 +4465,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.36123,
+    -83.361229,
     31.38297,
-    -83.35628,
-    31.38748
+    -83.356277,
+    31.387477
    ],
    "wikidata": null,
    "charted": false,
@@ -2959,6 +4476,15 @@
    "launches": [
     "paradise-pfa-lake-russell-ga"
    ],
+   "water_id": "lake-russell-enigma-ga",
+   "gnis_id": null,
+   "geometry_hash": "f8a7ff1ee6cea2acf5873261edaa85361ea141f88172921dd5cc3ff14fa90549",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2970,10 +4496,10 @@
     "Cornelia"
    ],
    "bbox": [
-    -83.50058,
-    34.48515,
+    -83.500578,
+    34.485147,
     -83.48502,
-    34.4975
+    34.497533
    ],
    "wikidata": "Q34900911",
    "charted": false,
@@ -2982,6 +4508,15 @@
     "lake-russell-boat-launch-ga",
     "lake-russell-boat-launch-and-beach-ga"
    ],
+   "water_id": "lake-russell-ga",
+   "gnis_id": "329551",
+   "geometry_hash": "0899126f6663644321a4394d6969e223e25aea426abd6f2e653d264cd98fc764",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2993,10 +4528,10 @@
     "Rutledge"
    ],
    "bbox": [
-    -83.59692,
-    33.63792,
-    -83.57842,
-    33.65656
+    -83.596918,
+    33.637923,
+    -83.578425,
+    33.656572
    ],
    "wikidata": null,
    "charted": false,
@@ -3004,6 +4539,15 @@
    "launches": [
     "hard-labor-creek-sp-ga"
    ],
+   "water_id": "lake-rutledge-ga",
+   "gnis_id": null,
+   "geometry_hash": "5f2747f303ae3a49f67f603ff753af8e837642817473ac0495c5d4398c877762",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3015,9 +4559,9 @@
     "Clayton"
    ],
    "bbox": [
-    -83.52324,
-    34.75166,
-    -83.50066,
+    -83.523242,
+    34.751548,
+    -83.500656,
     34.79016
    ],
    "wikidata": null,
@@ -3026,6 +4570,15 @@
    "launches": [
     "lake-seed-boat-launch-ga"
    ],
+   "water_id": "lake-seed-ga",
+   "gnis_id": null,
+   "geometry_hash": "0e16a370f4978971a44c902b481502a13b3af99289f7f2cf3cc53983ebfb698f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3041,10 +4594,10 @@
     "Reynoldsville"
    ],
    "bbox": [
-    -84.88055,
-    30.81025,
-    -84.84079,
-    30.84819
+    -84.880607,
+    30.810249,
+    -84.840547,
+    30.848189
    ],
    "wikidata": null,
    "charted": false,
@@ -3057,6 +4610,17 @@
     "reynoldsville-park-ga",
     "seminole-sp-lake-seminole-ga",
     "spring-creek-park-ga"
+   ],
+   "water_id": "lake-seminole-bainbridge-ga",
+   "gnis_id": null,
+   "geometry_hash": "a38b901c1a17c013bbc8a14a6417bde720450594c14206c446d307739c3889e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "wingate-lodge-marina-ga"
    ],
    "advisories": []
   },
@@ -3072,10 +4636,10 @@
     "Paradise Acres"
    ],
    "bbox": [
-    -84.94308,
-    30.70631,
-    -84.6606,
-    30.87315
+    -84.943078,
+    30.706313,
+    -84.660597,
+    30.873146
    ],
    "wikidata": "Q3215219",
    "charted": false,
@@ -3090,6 +4654,18 @@
     "lake-seminole-wma-ranger-station-ga",
     "river-junction-landing-ga",
     "sealy-s-point-ga"
+   ],
+   "water_id": "lake-seminole-fl",
+   "gnis_id": "294149",
+   "geometry_hash": "40f997f3309c81b0f1e1972b911a82aba5e37f129c0700a28454c31ec824b025",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-seminole-boat-launch-near-jinks-ga-2",
+    "trails-end-resort-marina-ga"
    ],
    "advisories": []
   },
@@ -3107,8 +4683,8 @@
    "bbox": [
     -83.43295,
     33.13885,
-    -83.10172,
-    33.35112
+    -83.101715,
+    33.351116
    ],
    "wikidata": "Q6477788",
    "charted": false,
@@ -3122,6 +4698,63 @@
     "rocky-creek-ga",
     "seabrook-road-ga",
     "upper-sinclair-sr16-ga"
+   ],
+   "water_id": "lake-sinclair-ga",
+   "gnis_id": "326612",
+   "geometry_hash": "5965059517715f1258fb5ca77e38e0a22c833d0a532cf230e49410e0709b59a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bass-boat-house-ga",
+    "crooked-creek-marina-ga",
+    "greens-landing-ga",
+    "haslams-marina-ga",
+    "jere-shai-lakeside-ga",
+    "lake-side-bait-and-tackle-ga",
+    "lake-sinclair-boat-launch-near-crooked-creek-ga",
+    "lake-sinclair-boat-launch-near-crooked-creek-ga-3",
+    "lake-sinclair-boat-launch-near-crooked-creek-ga-4",
+    "lake-sinclair-boat-launch-near-milledgeville-ga-2",
+    "lake-sinclair-boat-launch-near-milledgeville-ga-3",
+    "little-river-park-marina-ga",
+    "sinclair-marina-ga",
+    "sunset-marina-and-inn-ga",
+    "t-d-cheek-public-fishing-area-ga",
+    "twin-bridges-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tamarack-ga",
+   "name": "Lake Tamarack",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Jasper"
+   ],
+   "bbox": [
+    -84.374348,
+    34.487359,
+    -84.361614,
+    34.499315
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.326,
+   "launches": [],
+   "water_id": "lake-tamarack-ga",
+   "gnis_id": null,
+   "geometry_hash": "5fcab29bbcdda4e723c902b8d47671ef107c614e196e432f90ecd62103ef0a04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-tamarack-boat-launch-ga"
    ],
    "advisories": []
   },
@@ -3137,10 +4770,10 @@
     "Sofkee Estates"
    ],
    "bbox": [
-    -83.84055,
-    32.81787,
-    -83.76418,
-    32.86142
+    -83.840553,
+    32.817873,
+    -83.764176,
+    32.861423
    ],
    "wikidata": null,
    "charted": false,
@@ -3150,6 +4783,15 @@
     "claystone-park-ga",
     "tobesofkee-rec-area-duck-pond-ga"
    ],
+   "water_id": "lake-tobesofkee-ga",
+   "gnis_id": null,
+   "geometry_hash": "2f1298f9fc12ff11f4995440c61c3b229852fa8def2442500824dacd1f29ab6b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3161,10 +4803,10 @@
     "Blairsville"
    ],
    "bbox": [
-    -83.97586,
+    -83.975855,
     34.73745,
-    -83.97095,
-    34.74091
+    -83.970952,
+    34.740915
    ],
    "wikidata": "Q3215280",
    "charted": false,
@@ -3172,6 +4814,15 @@
    "launches": [
     "lake-winfield-scott-boat-launch-ga"
    ],
+   "water_id": "lake-winfield-scott-ga",
+   "gnis_id": "330321",
+   "geometry_hash": "454177b194a2f2b3c7c883c2f8eee788864862a22a0c5ca1b852bf7c473116d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3185,10 +4836,10 @@
     "Lakeside"
    ],
    "bbox": [
-    -84.1767,
-    31.60183,
-    -84.01537,
-    31.65424
+    -84.176774,
+    31.601835,
+    -84.015304,
+    31.654236
    ],
    "wikidata": null,
    "charted": false,
@@ -3198,6 +4849,15 @@
     "lake-worth-boat-launch-ga",
     "turner-landing-park-ga"
    ],
+   "water_id": "lake-worth-ga",
+   "gnis_id": null,
+   "geometry_hash": "21b3365bf1b418aa9bc709b52d8a87e5e5666159e8cd4515e7656c2c2793d326",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3210,9 +4870,9 @@
    ],
    "bbox": [
     -84.92041,
-    31.46062,
-    -84.90876,
-    31.46488
+    31.460265,
+    -84.908765,
+    31.464882
    ],
    "wikidata": "Q34902068",
    "charted": false,
@@ -3220,6 +4880,15 @@
    "launches": [
     "kolomoki-mounds-sp-lake-yohola-ga"
    ],
+   "water_id": "lake-yohola-ga",
+   "gnis_id": "325629",
+   "geometry_hash": "7a921ee8453c605898d3717e9e5398b4e1f04aaa950dc235bc17e8562621538c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3231,10 +4900,10 @@
     "Waycross"
    ],
    "bbox": [
-    -82.22537,
-    31.13549,
-    -82.20954,
-    31.14607
+    -82.225375,
+    31.135371,
+    -82.209536,
+    31.146069
    ],
    "wikidata": null,
    "charted": false,
@@ -3242,6 +4911,15 @@
    "launches": [
     "laura-s-walker-sp-ga"
    ],
+   "water_id": "laura-s-walker-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "9e38f033576f861637334fbd1612a5a192259706f485882e2487e4338fe24b60",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3254,16 +4932,27 @@
     "Wilmington Island"
    ],
    "bbox": [
-    -80.92652,
-    31.98709,
-    -80.88199,
-    32.018
+    -80.926523,
+    31.987091,
+    -80.881991,
+    32.017999
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 1.135,
    "launches": [
     "lazaretto-creek-marina-ga"
+   ],
+   "water_id": "lazaretto-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "f94aee65d210718733f2f282f31201d4808ab00e880921f4a8c871f07c81ac3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tybee-island-marina-ga"
    ],
    "advisories": []
   },
@@ -3276,10 +4965,10 @@
     "Thomaston"
    ],
    "bbox": [
-    -84.6994,
-    32.73709,
-    -84.4009,
-    32.84795
+    -84.699404,
+    32.737095,
+    -84.400905,
+    32.847948
    ],
    "wikidata": null,
    "charted": false,
@@ -3287,6 +4976,15 @@
    "launches": [
     "lazer-creek-boat-launch-ga"
    ],
+   "water_id": "lazer-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "121f8f041a659d4bbe985ae828fb27e5ff7adf2630dec8e38deebafbd774611a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3298,10 +4996,10 @@
     "McRae-Helena"
    ],
    "bbox": [
-    -82.90561,
-    32.08545,
-    -82.89303,
-    32.10467
+    -82.905608,
+    32.085339,
+    -82.893027,
+    32.104674
    ],
    "wikidata": null,
    "charted": false,
@@ -3309,6 +5007,15 @@
    "launches": [
     "little-ocmulgee-sp-ga"
    ],
+   "water_id": "little-ocmulgee-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "10c5124e396e2284856694c0004f442ce221329ef677cecbec089d2ea34a9137",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3321,10 +5028,10 @@
     "Georgetown"
    ],
    "bbox": [
-    -81.32795,
-    31.87131,
-    -81.07573,
-    32.11471
+    -81.327952,
+    31.871314,
+    -81.075735,
+    32.114708
    ],
    "wikidata": null,
    "charted": true,
@@ -3332,6 +5039,15 @@
    "launches": [
     "coffee-bluff-marina-ga"
    ],
+   "water_id": "little-ogeechee-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "182237ead8ce0678e9c581bbdcaea356623cd2fe1a5979def1ef9ec6951a66ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3343,10 +5059,10 @@
     "Swainsboro"
    ],
    "bbox": [
-    -82.74001,
-    32.45344,
-    -82.40514,
-    32.91231
+    -82.740005,
+    32.453443,
+    -82.405137,
+    32.912305
    ],
    "wikidata": null,
    "charted": false,
@@ -3355,6 +5071,15 @@
     "hall-s-bridge-ga",
     "ohoopee-dunes-ramp-ga"
    ],
+   "water_id": "little-ohoopee-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "0d20fd83e697622995134d730cd04900faf7a66795d50d4c8c57f9a9b90a622f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3369,10 +5094,10 @@
     "Valdosta"
    ],
    "bbox": [
-    -83.63659,
-    30.84709,
-    -83.34646,
-    31.55516
+    -83.636592,
+    30.847091,
+    -83.346458,
+    31.555163
    ],
    "wikidata": null,
    "charted": false,
@@ -3383,6 +5108,15 @@
     "reed-bingham-sp-east-ga",
     "troupeville-landing-ga"
    ],
+   "water_id": "little-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "d55277be03ee4c32819328ac77499f67b952f7cc9e2036c84200d2c60cff7a39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3394,10 +5128,10 @@
     "Blackshear"
    ],
    "bbox": [
-    -82.05755,
-    31.29839,
-    -81.89267,
-    31.45462
+    -82.057555,
+    31.298386,
+    -81.892669,
+    31.454615
    ],
    "wikidata": null,
    "charted": false,
@@ -3405,6 +5139,15 @@
    "launches": [
     "zirkle-landing-ga"
    ],
+   "water_id": "little-satilla-river-blackshear-ga",
+   "gnis_id": null,
+   "geometry_hash": "29c751bc63e5b08e1cb45d429f3249f964c2405de1eebdb957a99dd715bb1854",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3416,10 +5159,10 @@
     "Brunswick"
    ],
    "bbox": [
-    -81.66811,
-    31.01599,
-    -81.43865,
-    31.13097
+    -81.668111,
+    31.015992,
+    -81.438654,
+    31.130973
    ],
    "wikidata": null,
    "charted": true,
@@ -3427,6 +5170,15 @@
    "launches": [
     "spring-bluff-us-17-ga"
    ],
+   "water_id": "little-satilla-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "a43da2a865206b611eecbdf70ca4211243a321b30743aac6f6692189bff7e3c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3444,6 +5196,15 @@
    "launches": [
     "louis-scott-stell-lake-boat-launch-ga"
    ],
+   "water_id": "louis-scott-stell-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3455,10 +5216,10 @@
     "Summerville"
    ],
    "bbox": [
-    -85.34642,
-    34.43853,
-    -85.3383,
-    34.44137
+    -85.346419,
+    34.438528,
+    -85.338304,
+    34.441372
    ],
    "wikidata": null,
    "charted": false,
@@ -3466,6 +5227,15 @@
    "launches": [
     "james-h-floyd-sp-lower-ga"
    ],
+   "water_id": "lower-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "f7f0c4c3625c6d58a3de8b3f169c6e09e73b7c3f1ddf4568e849ce71d411f1e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3477,10 +5247,10 @@
     "Covington"
    ],
    "bbox": [
-    -83.82903,
-    33.64765,
-    -83.7961,
-    33.69599
+    -83.829034,
+    33.647649,
+    -83.796098,
+    33.695991
    ],
    "wikidata": null,
    "charted": false,
@@ -3488,6 +5258,15 @@
    "launches": [
     "lake-varner-ga"
    ],
+   "water_id": "lower-williams-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "1cc54dcce893247c9fa18ff781abeb2a468f3fc790d0107018762435b87c1fb7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3499,10 +5278,10 @@
     "St. Simons"
    ],
    "bbox": [
-    -81.43459,
-    31.12814,
-    -81.38394,
-    31.30211
+    -81.434588,
+    31.128142,
+    -81.383942,
+    31.302109
    ],
    "wikidata": null,
    "charted": true,
@@ -3510,6 +5289,15 @@
    "launches": [
     "mackay-river-boat-launch-ga"
    ],
+   "water_id": "mackay-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "9e8a0071150cdcfab39b1d446eb3c19afcddccfbf9a34e3c24fbcfffc57b8067",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3521,10 +5309,10 @@
     "Perkins"
    ],
    "bbox": [
-    -81.95571,
+    -81.955714,
     32.88336,
-    -81.95214,
-    32.89088
+    -81.951852,
+    32.890877
    ],
    "wikidata": null,
    "charted": false,
@@ -3532,6 +5320,15 @@
    "launches": [
     "magnolia-springs-sp-ga"
    ],
+   "water_id": "magnolia-springs-state-park-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "ab1eae580bf04a29f81e15e575a5ae86949260331a1c305ed5e71c2f6bfce5db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3543,10 +5340,10 @@
     "Mansfield"
    ],
    "bbox": [
-    -83.73748,
-    33.45246,
-    -83.72903,
-    33.4576
+    -83.737484,
+    33.452457,
+    -83.729033,
+    33.457601
    ],
    "wikidata": null,
    "charted": false,
@@ -3554,6 +5351,15 @@
    "launches": [
     "charlie-elliott-wildlife-center-ga-2"
    ],
+   "water_id": "margery-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "ae2d55a5b43c2dca7195eb99fb3aeb8a7e3832e0951b808b6c82db4fbb725804",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3565,10 +5371,10 @@
     "Sunbury"
    ],
    "bbox": [
-    -81.27851,
-    31.7075,
-    -81.16107,
-    31.77416
+    -81.278508,
+    31.707501,
+    -81.161073,
+    31.774159
    ],
    "wikidata": null,
    "charted": true,
@@ -3576,6 +5382,15 @@
    "launches": [
     "sunbury-crab-co-restaurant-marina-ga"
    ],
+   "water_id": "medway-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "0b2b6dc2a39e2459bfdbf99460ba03edc132e4563b24b9ec51e377c0ee851e0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3587,16 +5402,30 @@
     "Athens"
    ],
    "bbox": [
-    -83.65568,
-    33.87485,
-    -83.34944,
-    34.15961
+    -83.655676,
+    33.874849,
+    -83.349436,
+    34.159607
    ],
    "wikidata": "Q131549923",
    "charted": false,
    "area_km2": null,
    "launches": [
     "ben-burton-park-ga"
+   ],
+   "water_id": "middle-oconee-river-ga",
+   "gnis_id": "328761",
+   "geometry_hash": "212601c200ced4d55c7522b686822ebe82fa3c38047f93aa2eca53d49b02e33d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "hunnicutt-creek-ga"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "slug_aliases": [
+    "hunnicutt-creek-ga"
    ],
    "advisories": []
   },
@@ -3609,16 +5438,56 @@
     "Gray"
    ],
    "bbox": [
-    -83.50315,
-    33.11782,
-    -83.49863,
-    33.12026
+    -83.503147,
+    33.117819,
+    -83.498626,
+    33.120469
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.036,
    "launches": [
     "miller-creek-lake-recreation-area-ga"
+   ],
+   "water_id": "miller-creek-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "416523d997e46a67d19c775552a3bf15d82966723155929ac2676d62cb522ec3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "murder-creek-ga",
+   "name": "Murder Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Resseaus Crossroads"
+   ],
+   "bbox": [
+    -83.750848,
+    33.215587,
+    -83.401101,
+    33.469181
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "murder-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "953d2d00bd3738c3943a0fa45f19d34e24d9be6c5454e97eb2c9e3756049766a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "murder-creek-boat-launch-ga"
    ],
    "advisories": []
   },
@@ -3631,10 +5500,10 @@
     "Doogan"
    ],
    "bbox": [
-    -84.66929,
-    34.94002,
-    -84.66708,
-    34.94211
+    -84.669285,
+    34.939887,
+    -84.666999,
+    34.942354
    ],
    "wikidata": null,
    "charted": false,
@@ -3642,6 +5511,15 @@
    "launches": [
     "murray-s-lake-boat-launch-ga"
    ],
+   "water_id": "murrays-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "a1b0b26cf67c9e43495a455c6c7b63c02309ffd421fe4b7076c798dfdd2bc58d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3654,10 +5532,10 @@
     "Whitehall"
    ],
    "bbox": [
-    -83.75643,
-    33.87752,
-    -83.34704,
-    34.38647
+    -83.756432,
+    33.877522,
+    -83.347039,
+    34.386472
    ],
    "wikidata": "Q131549765",
    "charted": false,
@@ -3666,6 +5544,15 @@
     "north-oconee-river-boat-launch-whitehall-ga",
     "north-oconee-river-boat-launch-ga"
    ],
+   "water_id": "north-oconee-river-ga",
+   "gnis_id": "319660",
+   "geometry_hash": "56aaef83f296a0d7a54bcaa6dcdd42ae081a061ec9107e5de941b397f81765cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3677,10 +5564,10 @@
     "Ridgeville"
    ],
    "bbox": [
-    -81.38489,
-    31.39205,
-    -81.31149,
-    31.41512
+    -81.384887,
+    31.391918,
+    -81.311485,
+    31.415287
    ],
    "wikidata": null,
    "charted": true,
@@ -3688,6 +5575,15 @@
    "launches": [
     "blue-n-hall-ga"
    ],
+   "water_id": "north-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "38a1054cff9c441f7c61c310cd755b7bdd72369d16357025527ae6c8de9ee411",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3698,12 +5594,28 @@
    "towns": [
     "Saint Marys"
    ],
-   "bbox": null,
+   "bbox": [
+    -81.564757,
+    30.724361,
+    -81.521122,
+    30.804498
+   ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "north-river-city-of-st-marys-ga"
+   ],
+   "water_id": "north-river-saint-marys-ga",
+   "gnis_id": "319670",
+   "geometry_hash": "27d46d3196e4f4093f5acaa92e8ade22dfd369acfa0576a523bb4384d75bea96",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "st-marys-boat-service-marina-ga"
    ],
    "advisories": []
   },
@@ -3722,9 +5634,9 @@
    ],
    "bbox": [
     -84.11573,
-    34.86001,
-    -83.98116,
-    34.96157
+    34.860008,
+    -83.981155,
+    34.961567
    ],
    "wikidata": null,
    "charted": false,
@@ -3735,6 +5647,18 @@
     "jacks-creek-ga",
     "nottely-lake-boat-launch-near-ivylog-ga",
     "poteete-creek-ga"
+   ],
+   "water_id": "nottely-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "132a1de76d7c2a67b0c90db12f36d3ab50e6dc0c384928c0a1b4225a106e138a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "nottely-lake-boat-launch-near-notalee-orchards-ga",
+    "nottely-marina-ga"
    ],
    "advisories": []
   },
@@ -3748,10 +5672,10 @@
     "Dawesville"
    ],
    "bbox": [
-    -84.32495,
+    -84.324945,
     30.61729,
-    -83.80043,
-    31.4221
+    -83.800337,
+    31.422102
    ],
    "wikidata": "Q3348721",
    "charted": false,
@@ -3761,6 +5685,15 @@
     "state-highway-93-ga",
     "us-hwy-19-ga"
    ],
+   "water_id": "ochlockonee-river-fl",
+   "gnis_id": "356441",
+   "geometry_hash": "fe6aa2f2e737649ac9f24663e59ca359a94b4090393f26abea2f36c6a9a110f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3778,6 +5711,15 @@
    "launches": [
     "ocmulgee-pfa-wma-ga"
    ],
+   "water_id": "ocmulgee-pfa-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3800,10 +5742,10 @@
     "Lumber City"
    ],
    "bbox": [
-    -83.8633,
-    31.77418,
-    -82.54369,
-    33.36828
+    -83.863304,
+    31.774177,
+    -82.543686,
+    33.368278
    ],
    "wikidata": "Q846627",
    "charted": false,
@@ -3842,6 +5784,18 @@
     "westlake-landing-ga",
     "wise-creek-canoe-launch-ga"
    ],
+   "water_id": "ocmulgee-river-ga",
+   "gnis_id": "356443",
+   "geometry_hash": "ac099bac9f84d8fc32e82f4dc32327c5a29c6445c99265f4b23dd6f225ed2f6b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "jacksonville-boat-landing-ga",
+    "mccranie-s-landing-ga"
+   ],
    "advisories": []
   },
   {
@@ -3862,10 +5816,10 @@
     "Soperton"
    ],
    "bbox": [
-    -83.34944,
-    31.95939,
+    -83.349436,
+    31.959386,
     -82.5392,
-    33.87882
+    33.878819
    ],
    "wikidata": "Q851368",
    "charted": false,
@@ -3888,6 +5842,15 @@
     "sinclair-dam-ga",
     "soperton-bridge-landing-ga"
    ],
+   "water_id": "oconee-river-ga",
+   "gnis_id": "354253",
+   "geometry_hash": "24cfb9764d0492c15d76758dcfe51206a2e4ea1c4bab798bdd3cd4c1b264c594",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3899,10 +5862,10 @@
     "Blakely"
    ],
    "bbox": [
-    -85.08669,
-    31.37414,
-    -85.04499,
-    31.38676
+    -85.086693,
+    31.374144,
+    -85.044991,
+    31.386764
    ],
    "wikidata": null,
    "charted": false,
@@ -3910,6 +5873,15 @@
    "launches": [
     "odom-creek-ga"
    ],
+   "water_id": "odum-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "aff28a01ba3b92b6aef9eb4dc3fd6de8eb471ae6fafe108997f00ddd34720af1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3927,10 +5899,10 @@
     "Wadley"
    ],
    "bbox": [
-    -82.90956,
+    -82.909564,
     31.82816,
-    -81.03202,
-    33.52006
+    -81.032021,
+    33.520056
    ],
    "wikidata": "Q130012",
    "charted": true,
@@ -3944,6 +5916,17 @@
     "state-highway-88-ga",
     "us-highway-1-sr4-ga"
    ],
+   "water_id": "ogeechee-river-ga",
+   "gnis_id": "354254",
+   "geometry_hash": "ad5d1015b440c0efc7d8ae1243d6cbcf4e9b974406b5063330778f6dd2bcde5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "fort-mcallister-marina-ga"
+   ],
    "advisories": []
   },
   {
@@ -3955,10 +5938,10 @@
     "Reidsville"
    ],
    "bbox": [
-    -82.81766,
-    31.89001,
-    -82.11088,
-    32.87435
+    -82.817727,
+    31.890006,
+    -82.110444,
+    32.874347
    ],
    "wikidata": null,
    "charted": false,
@@ -3968,6 +5951,15 @@
     "joy-bluff-landing-ga",
     "prison-landing-ga"
    ],
+   "water_id": "ohoopee-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "38a206067abf5651f6083e458d0432407857901f031cc40d3fcd80fc6c3fad11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3980,10 +5972,10 @@
     "Rome"
    ],
    "bbox": [
-    -85.17745,
-    34.25405,
-    -84.90303,
-    34.57768
+    -85.177449,
+    34.253983,
+    -84.903027,
+    34.577685
    ],
    "wikidata": "Q2024844",
    "charted": false,
@@ -3993,6 +5985,15 @@
     "highway-156-boat-ramp-ga",
     "state-highway-140-ga"
    ],
+   "water_id": "oostanaula-river-ga",
+   "gnis_id": "356448",
+   "geometry_hash": "0378d2455d65e19c780846e5824fa8a9db228c6ea486957c84a2f4b6cb5ce6a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4004,10 +6005,10 @@
     "Lawrenceville"
    ],
    "bbox": [
-    -83.91799,
-    33.90894,
-    -83.89945,
-    33.91567
+    -83.917991,
+    33.908944,
+    -83.899451,
+    33.915736
    ],
    "wikidata": null,
    "charted": false,
@@ -4015,6 +6016,15 @@
    "launches": [
     "tribble-mill-park-ozora-lake-ga"
    ],
+   "water_id": "ozora-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "43e09d7c99c86e3a8e2d936ec1375b0dc2dff9347c2b4dc6b6c9790be45258c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4026,10 +6036,10 @@
     "Hinesville"
    ],
    "bbox": [
-    -81.65059,
-    31.92666,
-    -81.64222,
-    31.93035
+    -81.650591,
+    31.926658,
+    -81.642217,
+    31.930351
    ],
    "wikidata": null,
    "charted": false,
@@ -4037,6 +6047,15 @@
    "launches": [
     "fort-stewart-taylor-s-creek-pond-ga"
    ],
+   "water_id": "p-34-ga",
+   "gnis_id": null,
+   "geometry_hash": "7660a88256c12bb2bbc754d96c1fc8e08590ff632b524b6426390ac64737d128",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4054,6 +6073,15 @@
    "launches": [
     "silver-lake-wma-panic-pond-ga"
    ],
+   "water_id": "panic-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4065,10 +6093,10 @@
     "Rome"
    ],
    "bbox": [
-    -85.20618,
-    34.16555,
-    -85.20106,
-    34.17423
+    -85.206179,
+    34.165546,
+    -85.201061,
+    34.174232
    ],
    "wikidata": null,
    "charted": false,
@@ -4076,6 +6104,15 @@
    "launches": [
     "paris-lake-boat-launch-ga"
    ],
+   "water_id": "paris-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "7e498d87ef2a446a1683b5e06f19d2809cae6f99c2660366a74fe64b3f8b1813",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4087,10 +6124,10 @@
     "Loganville"
    ],
    "bbox": [
-    -83.95678,
-    33.72945,
-    -83.92744,
-    33.76153
+    -83.956779,
+    33.729449,
+    -83.927442,
+    33.761687
    ],
    "wikidata": null,
    "charted": false,
@@ -4098,6 +6135,15 @@
    "launches": [
     "randy-poynter-ga"
    ],
+   "water_id": "parkers-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "75438705e0b753c151ce4f50f34709ed1249d87db10b9e2deb22388f150d0517",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4115,6 +6161,15 @@
    "launches": [
     "peeples-lake-boat-launch-ga"
    ],
+   "water_id": "peeples-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4132,6 +6187,15 @@
    "launches": [
     "fort-stewart-pineview-lake-ga"
    ],
+   "water_id": "pineview-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4143,10 +6207,10 @@
     "Brunswick"
    ],
    "bbox": [
-    -81.48995,
-    31.11813,
-    -81.44437,
-    31.14233
+    -81.489947,
+    31.118126,
+    -81.444148,
+    31.142325
    ],
    "wikidata": null,
    "charted": true,
@@ -4154,6 +6218,15 @@
    "launches": [
     "sidney-lanier-park-brunswick-ga"
    ],
+   "water_id": "plantation-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "549611c5221f8c92503b42d75b015c9ecb519a8c590e34eafede95fe76390099",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4165,10 +6238,10 @@
     "Forsyth"
    ],
    "bbox": [
-    -83.76043,
-    33.14506,
-    -83.75095,
-    33.15153
+    -83.760429,
+    33.145056,
+    -83.750953,
+    33.151535
    ],
    "wikidata": null,
    "charted": false,
@@ -4176,6 +6249,15 @@
    "launches": [
     "pond-2a-boat-launch-ga"
    ],
+   "water_id": "pond-2a-ga",
+   "gnis_id": null,
+   "geometry_hash": "06d27a20ae12fb0eb8d77de8bb7833e49502cf7efc39074bb3f841f2f8a5ae40",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4193,7 +6275,10 @@
    "launches": [
     "silver-lake-wma-star-pond-ga"
    ],
-   "advisories": []
+   "advisories": [],
+   "status": "deleted",
+   "successor_slug": null,
+   "retired_at": "2026-11-07T13:15:22+00:00"
   },
   {
    "slug": "redbird-creek-ga",
@@ -4204,9 +6289,9 @@
     "Georgetown"
    ],
    "bbox": [
-    -81.21908,
-    31.84093,
-    -81.15356,
+    -81.219079,
+    31.840931,
+    -81.153561,
     31.88861
    ],
    "wikidata": null,
@@ -4215,6 +6300,17 @@
    "launches": [
     "redbird-creek-fort-mcallister-historic-park-ga",
     "redbird-creek-boat-launch-near-georgetown-ga-2"
+   ],
+   "water_id": "redbird-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "61d22843de8770aee57f5bec8c3308937b838dcc33f7b5faa6d02a52ead56908",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "fort-mcallister-park-boat-ramp-ga"
    ],
    "advisories": []
   },
@@ -4233,6 +6329,15 @@
    "launches": [
     "reed-bingham-sp-west-ga"
    ],
+   "water_id": "reed-bingham-sp-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4244,10 +6349,10 @@
     "Carters"
    ],
    "bbox": [
-    -84.69538,
-    34.58309,
-    -84.6614,
-    34.61738
+    -84.695375,
+    34.582821,
+    -84.661401,
+    34.617382
    ],
    "wikidata": "Q64688727",
    "charted": false,
@@ -4255,6 +6360,15 @@
    "launches": [
     "coosawattee-carters-lake-wma-ga"
    ],
+   "water_id": "reregulation-reservoir-ga",
+   "gnis_id": "321525",
+   "geometry_hash": "273fee8cf7eadaddce9e4ebde75dfd084ffb4679d056e16bb2704cf0b55ecbb6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4266,10 +6380,10 @@
     "Grove Level"
    ],
    "bbox": [
-    -83.51608,
-    34.26459,
-    -83.49115,
-    34.27523
+    -83.516077,
+    34.264587,
+    -83.491146,
+    34.275232
    ],
    "wikidata": null,
    "charted": false,
@@ -4277,6 +6391,15 @@
    "launches": [
     "commerce-reservoir-51-ga"
    ],
+   "water_id": "reservoir-51-ga",
+   "gnis_id": null,
+   "geometry_hash": "b6b50bc83cdb68177e4a329aa5fdac6057d1ba85cce7d7edec1d6e2d1995ee4b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4287,13 +6410,27 @@
    "towns": [
     "Riceboro"
    ],
-   "bbox": null,
+   "bbox": [
+    -81.613709,
+    31.744583,
+    -81.405712,
+    31.795523
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "riceboro-creek-boat-launch-ga"
    ],
+   "water_id": "riceboro-creek-ga",
+   "gnis_id": "321563",
+   "geometry_hash": "ee8c6b5b19e27586252f137d4191c6380722d0a8ae9e0e18c4884f263c4fb4c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4308,10 +6445,10 @@
     "Ruckersville"
    ],
    "bbox": [
-    -82.82144,
-    34.02319,
-    -82.58151,
-    34.35851
+    -82.821441,
+    34.023189,
+    -82.581509,
+    34.358565
    ],
    "wikidata": "Q7337958",
    "charted": false,
@@ -4320,12 +6457,21 @@
     "coldwater-creek-ga",
     "dry-fork-creek-ga",
     "elbert-county-park-ga",
-    "richard-b-russell-sp-ga",
     "richard-b-russell-sp-elberton-ga",
+    "richard-b-russell-sp-ga",
     "richard-b-russell-sp-coldwater-ramp-ga",
     "richard-b-russell-sp-olympic-rowing-drive-ga",
     "shuck-pen-eddy-ga"
    ],
+   "water_id": "richard-b-russell-lake-ga",
+   "gnis_id": "325846",
+   "geometry_hash": "5cb0d09cc7095ceb2a3feec44fff40d7ba5f5edd59c5b3d31ac91b3934bd8973",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4343,6 +6489,15 @@
    "launches": [
     "fort-stewart-richmond-hill-pond-west-ga"
    ],
+   "water_id": "richmond-hill-pond-west-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4356,14 +6511,54 @@
    "bbox": [
     -83.39866,
     33.41297,
-    -83.38599,
-    33.42454
+    -83.385985,
+    33.424542
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.318,
    "launches": [
     "rock-eagle-lake-boat-launch-ga"
+   ],
+   "water_id": "rock-eagle-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "8bc8ec7731ebb7a4147403866a6d2706b1b37c3a6b4bc8b561da7d3c1be9da4f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saint-catherines-sound-ga",
+   "name": "Saint Catherines Sound",
+   "kind": "sound",
+   "state": "GA",
+   "towns": [
+    "Halfmoon Landing"
+   ],
+   "bbox": [
+    -81.30498,
+    31.656921,
+    -81.264654,
+    31.700229
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.102,
+   "launches": [],
+   "water_id": "saint-catherines-sound-ga",
+   "gnis_id": null,
+   "geometry_hash": "f5ca2a79753ab3d1ec6200b2d34f9face1e141e7f4db93c7f69cf5c975a48362",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "halfmoon-marina-ga"
    ],
    "advisories": []
   },
@@ -4379,10 +6574,10 @@
     "Saint Marys"
    ],
    "bbox": [
-    -82.24032,
-    30.35566,
+    -82.240316,
+    30.355656,
     -81.2914,
-    30.83026
+    30.830355
    ],
    "wikidata": "Q2886123",
    "charted": true,
@@ -4395,6 +6590,15 @@
     "temple-landing-ga",
     "traders-hill-ga"
    ],
+   "water_id": "saint-marys-river-fl",
+   "gnis_id": "306327",
+   "geometry_hash": "ff253528966ee1f98859f3b5e0e0e17b075cbb2034d6467862d45fcd71f4fb0b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4406,10 +6610,10 @@
     "Silk Hope"
    ],
    "bbox": [
-    -81.20595,
-    32.03816,
-    -81.19661,
-    32.04911
+    -81.206033,
+    32.038159,
+    -81.196613,
+    32.049109
    ],
    "wikidata": null,
    "charted": false,
@@ -4417,6 +6621,15 @@
    "launches": [
     "salt-creek-boat-launch-ga"
    ],
+   "water_id": "salt-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "3b7a5847024cab10b4fb52b460bd7ed0249dba80e707a81a52813f1131198477",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4428,10 +6641,10 @@
     "Daisy"
    ],
    "bbox": [
-    -81.80175,
-    32.12622,
-    -81.79105,
-    32.13275
+    -81.801753,
+    32.126225,
+    -81.791055,
+    32.132752
    ],
    "wikidata": null,
    "charted": false,
@@ -4440,6 +6653,15 @@
     "evans-county-pfa-daisy-ga",
     "evans-county-pfa-ga-2"
    ],
+   "water_id": "sands-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": "27141dcd3be872cfdd052b5ca552e99bc600dca9254732c4cfac9cac41a67868",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4452,16 +6674,27 @@
     "Pine Harbor"
    ],
    "bbox": [
-    -81.36164,
-    31.52793,
-    -81.19161,
-    31.54869
+    -81.361635,
+    31.527931,
+    -81.191611,
+    31.548688
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "bellville-ga"
+   ],
+   "water_id": "sapelo-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "051b3aeee836e68cfb069915cab857a5fad52b30f8aed4b90228b8f26f5a6709",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pine-harbor-marina-ga"
    ],
    "advisories": []
   },
@@ -4484,10 +6717,10 @@
     "Woodbine"
    ],
    "bbox": [
-    -83.08844,
-    30.88697,
-    -81.40125,
-    31.50427
+    -83.088441,
+    30.886546,
+    -81.401249,
+    31.504268
    ],
    "wikidata": "Q2386134",
    "charted": true,
@@ -4506,6 +6739,15 @@
     "warners-landing-ga",
     "woodbine-community-park-ga"
    ],
+   "water_id": "satilla-river-ga",
+   "gnis_id": "356520",
+   "geometry_hash": "2bfe4bd9728bfb03f2277583bdc067e03ab81a58c709b2593dc6219fad4e35a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4518,10 +6760,10 @@
     "Savannah"
    ],
    "bbox": [
-    -81.15692,
-    32.08751,
-    -81.09787,
-    32.17452
+    -81.156924,
+    32.087511,
+    -81.097872,
+    32.174519
    ],
    "wikidata": null,
    "charted": true,
@@ -4529,6 +6771,15 @@
    "launches": [
     "houlihan-park-ga"
    ],
+   "water_id": "savannah-river-front-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "bb12cb63476f37d5c420fd3229df57592d0b1e7023420d7fbce81f993a1fd7c0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4551,10 +6802,10 @@
     "Wilmington Island"
    ],
    "bbox": [
-    -82.85552,
-    32.03466,
-    -80.84834,
-    34.4439
+    -82.855807,
+    32.034661,
+    -80.848339,
+    34.443899
    ],
    "wikidata": "Q370750",
    "charted": true,
@@ -4572,6 +6823,19 @@
     "tuckasee-king-ga",
     "yuchi-wma-brighams-landing-ga"
    ],
+   "water_id": "savannah-river-ga",
+   "gnis_id": "1253486",
+   "geometry_hash": "d4f20bad9a199d81528f05804175479f6ebe717350653b700d65d9472821ad08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "savannah-river-boat-launch-near-ebenezer-ga-2",
+    "savannah-river-boat-launch-near-savannah-ga",
+    "savannah-river-boat-launch-near-wilmington-island-ga"
+   ],
    "advisories": []
   },
   {
@@ -4583,10 +6847,10 @@
     "Fouche"
    ],
    "bbox": [
-    -85.30429,
-    34.36337,
-    -85.28673,
-    34.37067
+    -85.304293,
+    34.363366,
+    -85.286731,
+    34.370671
    ],
    "wikidata": null,
    "charted": false,
@@ -4594,6 +6858,15 @@
    "launches": [
     "rocky-mountain-pfa-antioch-east-ga"
    ],
+   "water_id": "selman-lakes-ga",
+   "gnis_id": null,
+   "geometry_hash": "f055b7526174921252e612b3d5541700b44dceda31186cccc8b6977494bc13b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4605,10 +6878,10 @@
     "Bonanza"
    ],
    "bbox": [
-    -84.30705,
-    33.47861,
-    -84.29572,
-    33.48436
+    -84.307046,
+    33.478612,
+    -84.295716,
+    33.484356
    ],
    "wikidata": null,
    "charted": false,
@@ -4616,6 +6889,15 @@
    "launches": [
     "shamrock-reservoir-boat-launch-ga"
    ],
+   "water_id": "shamrock-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "73ae2fd7953e18cebf7db08fea763c5a33aaff4dd9b8388a8fa1f4869f48c232",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4627,10 +6909,10 @@
     "Prospect"
    ],
    "bbox": [
-    -83.7471,
-    33.42972,
-    -83.74257,
-    33.43486
+    -83.747101,
+    33.429718,
+    -83.742566,
+    33.434859
    ],
    "wikidata": null,
    "charted": false,
@@ -4638,6 +6920,15 @@
    "launches": [
     "charlie-elliott-wildlife-center-ga"
    ],
+   "water_id": "sheppard-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "cf23e48bb8d12ebb9a439d3742bdc5da6cdd7e704f049c2a7de36d0632bfc77a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4649,10 +6940,10 @@
     "Bainbridge"
    ],
    "bbox": [
-    -84.76292,
-    30.80778,
-    -84.74005,
-    30.82241
+    -84.762922,
+    30.807779,
+    -84.740051,
+    30.822466
    ],
    "wikidata": null,
    "charted": false,
@@ -4662,6 +6953,15 @@
     "silver-lake-wma-seminole-ga",
     "silver-lake-wma-south-ga"
    ],
+   "water_id": "silver-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "b3dfe5c31c9745c85a86fbc05ec7f3e6749c908016efe64e52f5c53b29f1e026",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4673,16 +6973,87 @@
     "Skidaway Island"
    ],
    "bbox": [
-    -81.07917,
-    31.93164,
-    -81.05655,
-    31.96539
+    -81.079169,
+    31.931641,
+    -81.056553,
+    31.965385
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "skidaway-narrows-community-park-ga"
+   ],
+   "water_id": "skidaway-narrows-ga",
+   "gnis_id": null,
+   "geometry_hash": "87bff71fb33dbfd62704e7b30c24bb7c718f0b6bf0c1a108e1287b5267cd1632",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skidaway-river-ga",
+   "name": "Skidaway River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Isle of Hope"
+   ],
+   "bbox": [
+    -81.056553,
+    31.965385,
+    -81.014645,
+    32.012477
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "skidaway-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "1a36661c2d68397b000c1178a3fed4cfd871339e47da7d445a8bb646faa21ba8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "isle-of-hope-marina-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-altamaha-river-ga",
+   "name": "South Altamaha River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Darien"
+   ],
+   "bbox": [
+    -81.480625,
+    31.287401,
+    -81.400621,
+    31.343958
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.687,
+   "launches": [],
+   "water_id": "south-altamaha-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "20a60a4a571b3de9810f42e40e2f27138e615990b549601cea351dd5a052f5a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "two-way-fish-camp-ga"
    ],
    "advisories": []
   },
@@ -4695,9 +7066,9 @@
     "Brunswick"
    ],
    "bbox": [
-    -81.5689,
-    31.12931,
-    -81.52883,
+    -81.568899,
+    31.129311,
+    -81.528831,
     31.15456
    ],
    "wikidata": null,
@@ -4707,6 +7078,15 @@
     "blythe-island-regional-park-ga",
     "south-brunswick-river-boat-launch-ga"
    ],
+   "water_id": "south-brunswick-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "76eda5dd42ca84e8c603889fb95873dc9e1df0bbf769e16708b68234e88f7d16",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4718,10 +7098,10 @@
     "Ringgold"
    ],
    "bbox": [
-    -85.17651,
-    34.90434,
-    -85.08245,
-    34.99447
+    -85.176505,
+    34.904342,
+    -85.082452,
+    34.994474
    ],
    "wikidata": "Q35312533",
    "charted": false,
@@ -4729,6 +7109,15 @@
    "launches": [
     "ringgold-recreational-complex-south-chick-creek-ga"
    ],
+   "water_id": "south-chickamauga-creek-ga",
+   "gnis_id": "329763",
+   "geometry_hash": "e54ebc413b6af2622f7d8c051e5a9645d40e7ccbbf2d920d41d59f975e27e82d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4740,10 +7129,10 @@
     "South Newport"
    ],
    "bbox": [
-    -81.53692,
-    31.54724,
-    -81.19032,
-    31.70065
+    -81.536922,
+    31.547244,
+    -81.190319,
+    31.700647
    ],
    "wikidata": null,
    "charted": true,
@@ -4751,6 +7140,15 @@
    "launches": [
     "south-newport-river-boat-launch-ga"
    ],
+   "water_id": "south-newport-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "0022b003c44a818a5f7bd717543cc7a7e0363b328f0b60d86d03b8d18ec41f9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4762,10 +7160,10 @@
     "Brinson"
    ],
    "bbox": [
-    -84.81686,
-    30.89508,
+    -84.816857,
+    30.895081,
     -84.71088,
-    31.49042
+    31.490418
    ],
    "wikidata": "Q7580440",
    "charted": false,
@@ -4773,6 +7171,15 @@
    "launches": [
     "brinson-bridge-landing-sr38-ga"
    ],
+   "water_id": "spring-creek-ga",
+   "gnis_id": "323388",
+   "geometry_hash": "651bc3e8ea62c98460eea09daf922dc75629e2c997a90008cad9dd0c2b98ccf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4784,10 +7191,10 @@
     "Macon"
    ],
    "bbox": [
-    -83.58934,
-    32.65966,
-    -83.49114,
-    32.85343
+    -83.589336,
+    32.659662,
+    -83.491138,
+    32.853429
    ],
    "wikidata": "Q35397812",
    "charted": false,
@@ -4795,6 +7202,15 @@
    "launches": [
     "stone-creek-boat-launch-ga"
    ],
+   "water_id": "stone-creek-ga",
+   "gnis_id": "323644",
+   "geometry_hash": "e16dcb19d16a66212087f7528df50c515bb6f79bf771e6d1530ff8e3c656d656",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4806,10 +7222,10 @@
     "Mountain Park"
    ],
    "bbox": [
-    -84.15271,
-    33.79555,
-    -84.12461,
-    33.82333
+    -84.152708,
+    33.795399,
+    -84.12438,
+    33.823334
    ],
    "wikidata": null,
    "charted": false,
@@ -4817,6 +7233,15 @@
    "launches": [
     "stone-mountain-lake-boat-launch-ga"
    ],
+   "water_id": "stone-mountain-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "f8e2cf5c08b4366eb70e4c0db07d33e506088cc702a941006df5c60cbe528d29",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4828,10 +7253,10 @@
     "Folkston"
    ],
    "bbox": [
-    -82.2755,
-    30.73513,
+    -82.275501,
+    30.735132,
     -82.13985,
-    30.81907
+    30.819074
    ],
    "wikidata": "Q7650554",
    "charted": false,
@@ -4840,6 +7265,15 @@
     "okefenokee-nwr-ga",
     "suwannee-canal-carry-in-access-ga"
    ],
+   "water_id": "suwannee-canal-ga",
+   "gnis_id": null,
+   "geometry_hash": "3c35d58eb5d4377f69190725854df6cdeff39b3bac5427d137db46b304596606",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4851,10 +7285,10 @@
     "Fargo"
    ],
    "bbox": [
-    -83.2534,
-    29.30644,
-    -82.33925,
-    30.83476
+    -83.253564,
+    29.306437,
+    -82.339247,
+    30.834787
    ],
    "wikidata": "Q2299655",
    "charted": false,
@@ -4863,6 +7297,15 @@
     "suwannee-river-sill-ga",
     "suwannee-river-visitor-center-ga"
    ],
+   "water_id": "suwannee-river-fl",
+   "gnis_id": "308455",
+   "geometry_hash": "26a17f2d53ab608aacdc24b3afc59753422076f6a26a8c9c7933ab6c9a4d7ef6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4874,10 +7317,10 @@
     "Enigma"
    ],
    "bbox": [
-    -83.35868,
-    31.39843,
-    -83.35529,
-    31.402
+    -83.358675,
+    31.398429,
+    -83.355289,
+    31.402002
    ],
    "wikidata": null,
    "charted": false,
@@ -4885,6 +7328,15 @@
    "launches": [
     "paradise-pfa-tacklebuster-lake-ga"
    ],
+   "water_id": "tacklebuster-ga",
+   "gnis_id": null,
+   "geometry_hash": "60e28a7bd0b6159f91ee91c87ece4051a5c8b1a62f074012b8e4940f12df324c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4898,10 +7350,10 @@
     "Pearl"
    ],
    "bbox": [
-    -82.82715,
-    34.06589,
-    -82.65325,
-    34.12988
+    -82.827146,
+    34.065891,
+    -82.653253,
+    34.129884
    ],
    "wikidata": null,
    "charted": false,
@@ -4909,6 +7361,17 @@
    "launches": [
     "middleton-ga",
     "pearl-mill-ga"
+   ],
+   "water_id": "tate-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "5275bf74c9687a4232f89d8ba2b1ec7776e235688fbe2618d5f40e718bddeea8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "beaverdam-marina-ga"
    ],
    "advisories": []
   },
@@ -4921,10 +7384,10 @@
     "Cairo"
    ],
    "bbox": [
-    -84.28233,
-    30.92066,
-    -84.24263,
-    30.95388
+    -84.282326,
+    30.920661,
+    -84.242631,
+    30.953875
    ],
    "wikidata": null,
    "charted": false,
@@ -4932,6 +7395,15 @@
    "launches": [
     "tired-creek-lake-boat-launch-ga"
    ],
+   "water_id": "tired-creek-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "73a7894b25b307cb42f9037cfc65a2cba59e89db48e18e3d17f02445ae236ced",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4946,10 +7418,10 @@
     "Wilscot"
    ],
    "bbox": [
-    -84.37126,
-    34.66657,
-    -84.06723,
-    34.98771
+    -84.371262,
+    34.666571,
+    -84.067099,
+    34.987714
    ],
    "wikidata": "Q7811968",
    "charted": false,
@@ -4962,6 +7434,15 @@
     "tammen-park-ga",
     "toccoa-river-park-ga"
    ],
+   "water_id": "toccoa-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "c4eb035d83a0475ba4dd385e7f7162fa99ff29bc8a4e44f0f278e3e36506e422",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4973,10 +7454,10 @@
     "Dublin"
    ],
    "bbox": [
-    -82.84119,
-    32.45883,
-    -82.83743,
-    32.46034
+    -82.841194,
+    32.458625,
+    -82.837435,
+    32.460552
    ],
    "wikidata": null,
    "charted": false,
@@ -4984,6 +7465,15 @@
    "launches": [
     "river-bend-wma-north-ga"
    ],
+   "water_id": "troup-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "8e5e64f61f4013af74809907df81bfc53d50e02eef54778b53cb0bad8c807cec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4995,10 +7485,10 @@
     "Tallulah Falls"
    ],
    "bbox": [
-    -83.36798,
-    34.71368,
-    -83.32572,
-    34.75629
+    -83.367983,
+    34.713682,
+    -83.325725,
+    34.756291
    ],
    "wikidata": "Q6478168",
    "charted": false,
@@ -5006,6 +7496,15 @@
    "launches": [
     "stoneplace-ga"
    ],
+   "water_id": "tugalo-lake-ga",
+   "gnis_id": "330060",
+   "geometry_hash": "d42ec15bc36271d9b629c58f976db4d1fa0dc30988a41f6882eacc607a3775b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5017,10 +7516,10 @@
     "Toccoa"
    ],
    "bbox": [
-    -83.354,
-    34.4439,
-    -82.85552,
-    34.71598
+    -83.353998,
+    34.443899,
+    -82.855524,
+    34.715982
    ],
    "wikidata": "Q2459279",
    "charted": false,
@@ -5028,6 +7527,15 @@
    "launches": [
     "walker-creek-ga"
    ],
+   "water_id": "tugaloo-river-ga",
+   "gnis_id": "330061",
+   "geometry_hash": "506e8280d1024612f6f6e0e7b7cc85ee7a4e22805dea71e31e65fe7dc5891813",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5040,15 +7548,27 @@
    ],
    "bbox": [
     -81.00551,
-    32.00738,
-    -80.96776,
-    32.04395
+    32.007199,
+    -80.967759,
+    32.043951
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "turners-creek-boat-launch-ga"
+   ],
+   "water_id": "turners-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "6403919663786b75d94c0ff2576fd878c4f13c04c89175dea8b2c892bd5c2c31",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hogan-s-marina-ga",
+    "turners-creek-boat-launch-wilmington-island-ga"
    ],
    "advisories": []
   },
@@ -5063,10 +7583,10 @@
     "Georgetown"
    ],
    "bbox": [
-    -81.64938,
+    -81.649383,
     31.12878,
-    -81.51973,
-    31.21984
+    -81.519733,
+    31.219838
    ],
    "wikidata": null,
    "charted": true,
@@ -5076,6 +7596,15 @@
     "turtle-river-ga-hwy-303-ga",
     "upper-turtle-river-ga-hwy-99-ga"
    ],
+   "water_id": "turtle-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "7996799e202321f07a34650b9685305c965910faf04b3b86f898313e41e6d704",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5088,8 +7617,8 @@
    ],
    "bbox": [
     -84.13491,
-    33.36747,
-    -83.92032,
+    33.367472,
+    -83.920324,
     33.42181
    ],
    "wikidata": null,
@@ -5098,6 +7627,15 @@
    "launches": [
     "tussahaw-reservoir-ga"
    ],
+   "water_id": "tussahaw-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "1d855abd4e690f428331833faef5ccbfa55eb8957814ad72e6450c5b379c7314",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5109,10 +7647,10 @@
     "Tybee Island"
    ],
    "bbox": [
-    -80.90588,
+    -80.905885,
     31.97662,
-    -80.84252,
-    31.99917
+    -80.842517,
+    31.999172
    ],
    "wikidata": null,
    "charted": true,
@@ -5120,6 +7658,15 @@
    "launches": [
     "tybee-creek-boat-launch-ga"
    ],
+   "water_id": "tybee-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "69fe0c26ef35a9ac62add373091f8e7572082ae1178947f9a4864ed85f15ae54",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5131,16 +7678,56 @@
     "Summerville"
    ],
    "bbox": [
-    -85.34065,
-    34.43508,
-    -85.33485,
-    34.44165
+    -85.340654,
+    34.435003,
+    -85.334846,
+    34.441654
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.073,
    "launches": [
     "james-h-floyd-sp-upper-ga"
+   ],
+   "water_id": "upper-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "b98ebf154b33fe506fb56e5013e51cfe8579693c4ca62d95a93bc18df23c9f1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "vernon-river-ga",
+   "name": "Vernon River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Montgomery"
+   ],
+   "bbox": [
+    -81.13641,
+    31.895899,
+    -81.094284,
+    31.953872
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "vernon-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "5c79fe667c27960406f1afa5c86aaf40a5573e06931033238743ee64424b5ae7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "boat-ramp-private-ga"
    ],
    "advisories": []
   },
@@ -5153,10 +7740,10 @@
     "Harrington"
    ],
    "bbox": [
-    -81.36003,
+    -81.360025,
     31.19437,
-    -81.32464,
-    31.23461
+    -81.324582,
+    31.234609
    ],
    "wikidata": null,
    "charted": true,
@@ -5164,6 +7751,15 @@
    "launches": [
     "village-creek-harrington-ga"
    ],
+   "water_id": "village-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "90bad19334fa4bda4b96e13e85a899e8fd9043e280159b3cb590e20c70dda4eb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5177,9 +7773,9 @@
    ],
    "bbox": [
     -85.15028,
-    31.90005,
-    -85.0245,
-    32.09307
+    31.900047,
+    -85.024498,
+    32.093069
    ],
    "wikidata": null,
    "charted": false,
@@ -5188,6 +7784,15 @@
     "florence-marina-sp-ga",
     "rood-creek-landing-ga"
    ],
+   "water_id": "walter-f-george-reservoir-coffinton-ga",
+   "gnis_id": null,
+   "geometry_hash": "43c7a1771da6860e1f75f9d03222f6ba5f42b52f7677e88c911c6da1a3c816e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5201,10 +7806,10 @@
     "Ricks Place"
    ],
    "bbox": [
-    -85.17738,
-    31.61367,
-    -85.03518,
-    31.78003
+    -85.177384,
+    31.613666,
+    -85.035179,
+    31.780034
    ],
    "wikidata": "Q7333077",
    "charted": false,
@@ -5215,6 +7820,17 @@
     "george-t-bagby-sp-ga",
     "pataula-creek-park-ga",
     "sandy-branch-ga"
+   ],
+   "water_id": "walter-f-george-reservoir-al",
+   "gnis_id": "324814",
+   "geometry_hash": "d3b28ce1dfd91d2da6ca08db769eef0721c1fcff4ab3a164dc84bab156146c7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "rmo-a-boat-ramp-ga"
    ],
    "advisories": []
   },
@@ -5228,9 +7844,9 @@
    ],
    "bbox": [
     -85.18149,
-    31.77657,
-    -85.1053,
-    31.90904
+    31.776575,
+    -85.105298,
+    31.909037
    ],
    "wikidata": "Q7333077",
    "charted": false,
@@ -5239,6 +7855,15 @@
     "lake-walter-f-george-wma-cool-branch-ga",
     "river-bluff-ga"
    ],
+   "water_id": "walter-f-george-reservoir-al",
+   "gnis_id": "324814",
+   "geometry_hash": "756328ea056d935f684e8e013684a6fafa6523aeded5aa11f37c9602ffa1e7a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5250,10 +7875,10 @@
     "Twin City"
    ],
    "bbox": [
-    -82.12681,
-    32.5449,
-    -82.11634,
-    32.55674
+    -82.126814,
+    32.544905,
+    -82.116341,
+    32.55687
    ],
    "wikidata": null,
    "charted": false,
@@ -5262,6 +7887,15 @@
     "george-l-smith-sp-ga",
     "george-l-smith-sp-twin-city-ga"
    ],
+   "water_id": "watson-pond-ga",
+   "gnis_id": null,
+   "geometry_hash": "ce9a7478b19852a76ae116742e98598cf99a099ef69f26a1ca2a89692c6480fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5275,9 +7909,9 @@
    ],
    "bbox": [
     -85.41777,
-    34.71455,
-    -85.19348,
-    34.99695
+    34.714493,
+    -85.193485,
+    34.996955
    ],
    "wikidata": "Q34867164",
    "charted": false,
@@ -5287,6 +7921,15 @@
     "fort-oglethorpe-ga",
     "lee-gordon-s-mills-ga"
    ],
+   "water_id": "west-chickamauga-creek-ga",
+   "gnis_id": "330213",
+   "geometry_hash": "48c31ef9ee42d8e7abc97980915ba03839b35d36684d18ef31f237d586951254",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5309,10 +7952,10 @@
     "The Crossings"
    ],
    "bbox": [
-    -85.26492,
-    32.9158,
-    -84.98902,
-    33.24942
+    -85.264923,
+    32.915796,
+    -84.988889,
+    33.249416
    ],
    "wikidata": "Q7335398",
    "charted": false,
@@ -5345,6 +7988,19 @@
     "yellow-jacket-ga",
     "west-point-lake-willow-crest-lake-boat-launch-near-foxcroft-ga"
    ],
+   "water_id": "west-point-lake-willow-crest-lake-al",
+   "gnis_id": "325064",
+   "geometry_hash": "c92eef1fc48491d25199494d06e7c83bd856e311a219812d39b6a7b3698c3cec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "autry-park-boat-ramp-ga",
+    "autry-park-boat-ramp-ga-2",
+    "highland-marina-resort-ga"
+   ],
    "advisories": []
   },
   {
@@ -5357,16 +8013,27 @@
     "Shellman Bluff"
    ],
    "bbox": [
-    -81.36428,
+    -81.364279,
     31.54744,
-    -81.33922,
-    31.58345
+    -81.339217,
+    31.583445
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "white-chimney-creek-ga"
+   ],
+   "water_id": "white-chimney-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "817616d230f2c30b0f6ec062f06dac829a9bf514b9a54882720139de8b7e0d86",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "belle-bluff-marina-ga"
    ],
    "advisories": []
   },
@@ -5379,10 +8046,10 @@
     "Gay"
    ],
    "bbox": [
-    -84.73188,
-    33.12197,
-    -84.51827,
-    33.44208
+    -84.731878,
+    33.121966,
+    -84.518275,
+    33.442076
    ],
    "wikidata": null,
    "charted": false,
@@ -5390,6 +8057,15 @@
    "launches": [
     "joe-kurz-wma-ga"
    ],
+   "water_id": "white-oak-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "8a8083ff49b8faf4f8a1779d63f671ce925c3c77a85d4fcb84d34a850d03c376",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5401,10 +8077,10 @@
     "White Oak"
    ],
    "bbox": [
-    -81.74456,
-    30.99497,
-    -81.63654,
-    31.045
+    -81.744557,
+    30.994966,
+    -81.636539,
+    31.045003
    ],
    "wikidata": null,
    "charted": true,
@@ -5412,6 +8088,15 @@
    "launches": [
     "white-oak-creek-boat-launch-ga"
    ],
+   "water_id": "white-oak-creek-white-oak-ga",
+   "gnis_id": null,
+   "geometry_hash": "8ec08d699933712fcfc5485cc9e9205a0a5042dc7638fb4c220c232756deb704",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5429,6 +8114,15 @@
    "launches": [
     "prospect-boat-launch-ga"
    ],
+   "water_id": "whitetail-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5443,10 +8137,10 @@
     "Wilmington Island"
    ],
    "bbox": [
-    -81.04931,
-    31.92391,
-    -80.93543,
-    32.07382
+    -81.049306,
+    31.923906,
+    -80.935431,
+    32.07406
    ],
    "wikidata": null,
    "charted": true,
@@ -5454,6 +8148,19 @@
    "launches": [
     "f-w-spencer-ga",
     "thunderbolt-ga"
+   ],
+   "water_id": "wilmington-river-ga",
+   "gnis_id": null,
+   "geometry_hash": "173619d5c6b1a5877bdbf9c3d6e7faa83e975816dbff46fdc919029fe3eadfa4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bahia-bleu-marina-ga",
+    "landings-harbor-marina-ga",
+    "savannah-bend-marina-ga"
    ],
    "advisories": []
   },
@@ -5467,9 +8174,9 @@
    ],
    "bbox": [
     -83.48492,
-    30.56945,
-    -83.25648,
-    31.32473
+    30.569452,
+    -83.256479,
+    31.324734
    ],
    "wikidata": "Q3569502",
    "charted": false,
@@ -5480,6 +8187,15 @@
     "nankin-boat-ramp-ga",
     "state-line-madison-highway-ga"
    ],
+   "water_id": "withlacoochee-river-ga",
+   "gnis_id": "294198",
+   "geometry_hash": "c49408d7bd0c21bccfe58f29db78be9bd1d6cc45621e09f816152eb3ab4b8d63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5491,16 +8207,56 @@
     "Dahlonega"
    ],
    "bbox": [
-    -84.0127,
-    34.50802,
-    -83.95877,
-    34.66392
+    -84.012701,
+    34.508021,
+    -83.958771,
+    34.663923
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "wimpy-mill-park-ga"
+   ],
+   "water_id": "yahoola-creek-ga",
+   "gnis_id": null,
+   "geometry_hash": "0a1fb07cb9ab2d8c8118147b9c5ea1cde3ef29c0ce862c9265a58bafa1a88462",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yeomans-lake-ga",
+   "name": "Yeomans Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Paradise Park"
+   ],
+   "bbox": [
+    -81.71291,
+    31.550725,
+    -81.711304,
+    31.553215
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.017,
+   "launches": [],
+   "water_id": "yeomans-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "879a71e48e77f59dcadd3b1bf3ca7d1fa9b2ae3150789d01b97020c12418fb7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "paradise-park-ga"
    ],
    "advisories": []
   },
@@ -5514,10 +8270,10 @@
     "Tugaloo"
    ],
    "bbox": [
-    -83.35538,
-    34.68099,
-    -83.33591,
-    34.71322
+    -83.355384,
+    34.680988,
+    -83.335734,
+    34.713218
    ],
    "wikidata": "Q6478588",
    "charted": false,
@@ -5526,6 +8282,15 @@
     "lake-yonah-boat-launch-ga",
     "yonah-campground-ga"
    ],
+   "water_id": "yonah-lake-ga",
+   "gnis_id": "356656",
+   "geometry_hash": "7f0efc79daef3d3449e6eb4b3bfb8509b03e3ba32bcc2be1b97f42170b8d4ec9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]

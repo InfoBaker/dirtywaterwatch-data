@@ -1,7 +1,7 @@
 {
  "state": "MD",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 229,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 250,
  "waters": [
   {
    "slug": "acton-cove-md",
@@ -12,10 +12,10 @@
     "Annapolis"
    ],
    "bbox": [
-    -76.494,
-    38.97335,
-    -76.49057,
-    38.97528
+    -76.493999,
+    38.973351,
+    -76.490573,
+    38.975279
    ],
    "wikidata": null,
    "charted": true,
@@ -24,6 +24,15 @@
     "acton-cove-park-md",
     "market-st-wharf-md"
    ],
+   "water_id": "acton-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "a7027b413d970072edd0021caf8b10940a5b94f36204f85493a440af64fa18ea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -35,9 +44,9 @@
     "Powellville"
    ],
    "bbox": [
-    -75.37767,
-    38.33077,
-    -75.37322,
+    -75.377672,
+    38.33067,
+    -75.373139,
     38.33555
    ],
    "wikidata": null,
@@ -46,6 +55,15 @@
    "launches": [
     "adkins-mill-park-md"
    ],
+   "water_id": "adkins-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "5e97e529952e428e25d354a5bdeb8682d3844f2fa8783dc929c2abcc974c1a0b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -57,10 +75,10 @@
     "Bowie"
    ],
    "bbox": [
-    -76.74259,
-    38.93242,
-    -76.73784,
-    38.93447
+    -76.742588,
+    38.932415,
+    -76.737838,
+    38.934469
    ],
    "wikidata": null,
    "charted": false,
@@ -68,6 +86,15 @@
    "launches": [
     "allen-pond-park-md"
    ],
+   "water_id": "allen-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "700a40fac6ac9b9dfb8107ed00436f4876871b365f759b48fda3f057228fb532",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -79,10 +106,10 @@
     "Bladensburg"
    ],
    "bbox": [
-    -76.94428,
-    38.91701,
-    -76.93872,
-    38.94248
+    -76.944284,
+    38.917007,
+    -76.938491,
+    38.942476
    ],
    "wikidata": "Q483607",
    "charted": true,
@@ -91,6 +118,15 @@
     "bladensburg-waterfront-park-boat-ramp-md",
     "bladensburg-waterfront-park-soft-access-md"
    ],
+   "water_id": "anacostia-river-md",
+   "gnis_id": "532032",
+   "geometry_hash": "5eaeeec79000f2aa015f85b245b024ce462b31db51b5569b88d256c5ec54df0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -105,10 +141,10 @@
     "Sharpsburg"
    ],
    "bbox": [
-    -77.74749,
+    -77.747488,
     39.41642,
     -77.58027,
-    39.7288
+    39.728799
    ],
    "wikidata": "Q575145",
    "charted": false,
@@ -121,6 +157,15 @@
     "rose-s-mill-park-soft-access-md",
     "shepherdstown-pike-bridge-md"
    ],
+   "water_id": "antietam-creek-md",
+   "gnis_id": "591698",
+   "geometry_hash": "a7f5d33968fef1b47b97fa98cb928c098a082d08511674ad084aba1c5c5b4b25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -132,10 +177,10 @@
     "Ocean City"
    ],
    "bbox": [
-    -75.13401,
-    38.3856,
-    -75.05505,
-    38.47276
+    -75.134013,
+    38.385602,
+    -75.055049,
+    38.472761
    ],
    "wikidata": "Q4808611",
    "charted": true,
@@ -145,6 +190,15 @@
     "caribbean-drive-boat-ramp-md",
     "northside-park-md"
    ],
+   "water_id": "assawoman-bay-de",
+   "gnis_id": "582951",
+   "geometry_hash": "83817e58603e697641a714162c4abb476d5c7c606ccf9b885366a908a721705f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -179,6 +233,15 @@
     "ellen-o-moyer-nature-park-at-back-creek-md",
     "sixth-street-pocket-park-md"
    ],
+   "water_id": "back-creek-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -194,10 +257,10 @@
     "North Point Village"
    ],
    "bbox": [
-    -76.51178,
-    39.17597,
-    -76.2902,
-    39.31174
+    -76.511784,
+    39.175973,
+    -76.290195,
+    39.311743
    ],
    "wikidata": "Q4839144",
    "charted": true,
@@ -207,6 +270,18 @@
     "edgemere-senior-center-and-park-md",
     "rocky-point-park-north-md",
     "rocky-point-park-south-md"
+   ],
+   "water_id": "back-river-md",
+   "gnis_id": "582987",
+   "geometry_hash": "9af3ac7f3def254daf52e4735f906c21d6cff5bd7de7e2591c1e6742eea8f79d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "back-river-boat-launch-near-dundalk-md",
+    "back-river-boat-launch-near-edgemere-md-2"
    ],
    "advisories": []
   },
@@ -225,6 +300,15 @@
    "launches": [
     "neavitt-landing-md"
    ],
+   "water_id": "balls-creek-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -236,10 +320,10 @@
     "Mardela Springs"
    ],
    "bbox": [
-    -75.815,
-    38.44737,
-    -75.67689,
-    38.46666
+    -75.815003,
+    38.447374,
+    -75.676892,
+    38.466656
    ],
    "wikidata": null,
    "charted": true,
@@ -248,6 +332,15 @@
     "mardela-springs-boat-ramp-md",
     "mardela-springs-soft-access-md"
    ],
+   "water_id": "barren-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "26a7c5426cee9be4d2dc65a6969bc4e5a0ad1274dab78b8d20c2c69ca19a74bd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -261,8 +354,8 @@
    "bbox": [
     -76.52659,
     39.21432,
-    -76.47693,
-    39.27322
+    -76.476928,
+    39.273227
    ],
    "wikidata": null,
    "charted": true,
@@ -270,6 +363,15 @@
    "launches": [
     "fleming-community-center-and-park-md"
    ],
+   "water_id": "bear-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "c8fe2f371587430e0bf6a483e8c415d0620e6ddd3d33bfe58c9fff62df0a2c5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -281,10 +383,10 @@
     "Church Creek"
    ],
    "bbox": [
-    -76.29199,
-    38.41426,
-    -76.21566,
-    38.46776
+    -76.291988,
+    38.414251,
+    -76.215656,
+    38.467764
    ],
    "wikidata": null,
    "charted": true,
@@ -292,6 +394,15 @@
    "launches": [
     "smithville-bridge-md"
    ],
+   "water_id": "beaverdam-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "d205e47d9b110c78c1db7ab9c8d355f43212ced0e0b37a5494175cf91473b2d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -303,10 +414,10 @@
     "Taneytown"
    ],
    "bbox": [
-    -77.27052,
-    39.60082,
-    -76.90628,
-    39.69813
+    -77.270515,
+    39.600675,
+    -76.906172,
+    39.698132
    ],
    "wikidata": null,
    "charted": false,
@@ -314,6 +425,15 @@
    "launches": [
     "hapes-mill-road-soft-access-md"
    ],
+   "water_id": "big-pipe-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "dd8301df6c2f11c80a489d093cedc4bebca9b1b71bd5c5103deae71d6969de2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -325,10 +445,10 @@
     "Big Pool"
    ],
    "bbox": [
-    -78.02184,
+    -78.021843,
     39.60592,
-    -78.00574,
-    39.62676
+    -78.005737,
+    39.626763
    ],
    "wikidata": "Q51288903",
    "charted": false,
@@ -336,6 +456,15 @@
    "launches": [
     "fort-frederick-state-park-big-pool-boat-ramp-md"
    ],
+   "water_id": "big-pool-lake-md",
+   "gnis_id": "583229",
+   "geometry_hash": "164a931476aaaca019e1ab9e4b7635387267deb926e63edca777d36fd79aa16e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -350,10 +479,10 @@
     "Middle River"
    ],
    "bbox": [
-    -76.42173,
-    39.30185,
-    -76.28865,
-    39.41206
+    -76.421734,
+    39.301852,
+    -76.288649,
+    39.412064
    ],
    "wikidata": "Q4915891",
    "charted": true,
@@ -365,6 +494,15 @@
     "mariner-point-park-soft-access-north-md",
     "mariner-point-park-soft-access-south-md"
    ],
+   "water_id": "bird-river-md",
+   "gnis_id": "583247",
+   "geometry_hash": "e9e0445cafeddc736da7a9c6aa30145007d306693189b287b723def52362a5ef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -383,6 +521,15 @@
     "bar-neck-landing-md",
     "black-walnut-cove-landing-md"
    ],
+   "water_id": "blackwalnut-cove-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -398,9 +545,9 @@
    ],
    "bbox": [
     -76.2476,
-    38.34314,
-    -75.99312,
-    38.50214
+    38.343144,
+    -75.993118,
+    38.502245
    ],
    "wikidata": null,
    "charted": true,
@@ -408,6 +555,20 @@
    "launches": [
     "blackwater-national-wildlife-refuge-md",
     "shorter-s-wharf-md"
+   ],
+   "water_id": "blackwater-river-md",
+   "gnis_id": null,
+   "geometry_hash": "d4fb1c20f5c45b20bc263c49246f44012f1224953969efac81d686abab21b789",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "blackwater-river-boat-launch-near-cambridge-md",
+    "blackwater-river-boat-launch-near-elliott-md",
+    "refuge-boat-ramp-md",
+    "usfws-boat-ramp-md"
    ],
    "advisories": []
   },
@@ -420,10 +581,10 @@
     "Clear Spring"
    ],
    "bbox": [
-    -77.94558,
-    39.69607,
-    -77.94112,
-    39.70227
+    -77.945581,
+    39.696067,
+    -77.941037,
+    39.702272
    ],
    "wikidata": "Q32843286",
    "charted": false,
@@ -431,6 +592,15 @@
    "launches": [
     "indian-springs-wma-blairs-valley-lake-md"
    ],
+   "water_id": "blairs-valley-lake-md",
+   "gnis_id": "594331",
+   "geometry_hash": "012d2139348b7568cd4acf296f3c0401df3b1bd56b19cf32bf97604938d4720c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -441,12 +611,57 @@
    "towns": [
     "Vienna"
    ],
-   "bbox": null,
+   "bbox": [
+    -75.938741,
+    38.322001,
+    -75.930359,
+    38.332932
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "blue-point-md"
+   ],
+   "water_id": "blue-point-branch-md",
+   "gnis_id": "583300",
+   "geometry_hash": "a94bd95a6c990d2ec3ffe934f9c9441e151ef95a0c5816857fde5ea9672c7b4d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bodkin-creek-md",
+   "name": "Bodkin Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Pinehurst on the Bodkin"
+   ],
+   "bbox": [
+    -76.485221,
+    39.112554,
+    -76.438095,
+    39.135491
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.36,
+   "launches": [],
+   "water_id": "bodkin-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "f3404982c55be596a21619d268ddb6f0003eac964ab6b0796b3e09e07c4799fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bodkin-creek-boat-launch-md"
    ],
    "advisories": []
   },
@@ -461,10 +676,10 @@
     "Two Rivers"
    ],
    "bbox": [
-    -75.94516,
-    39.43946,
-    -75.78223,
-    39.48942
+    -75.945156,
+    39.439461,
+    -75.782226,
+    39.489417
    ],
    "wikidata": "Q4938074",
    "charted": true,
@@ -472,6 +687,15 @@
    "launches": [
     "bohemia-river-bridge-soft-access-md"
    ],
+   "water_id": "bohemia-river-md",
+   "gnis_id": "583317",
+   "geometry_hash": "125542d9e53e6fc831c998bcef8797bdfe4a3396d6311e7e58b7b759a71243e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -486,8 +710,8 @@
    "bbox": [
     -76.70157,
     38.24127,
-    -76.62222,
-    38.29523
+    -76.622101,
+    38.295229
    ],
    "wikidata": null,
    "charted": true,
@@ -500,6 +724,15 @@
     "newtowne-neck-state-park-paddle-in-campsite-east-md",
     "newtowne-neck-state-park-soft-access-md"
    ],
+   "water_id": "breton-bay-md",
+   "gnis_id": null,
+   "geometry_hash": "556419615b885271b448c08f131b7bb2396199726bba95b3c48d94c16016ada5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -511,10 +744,10 @@
     "Darlington"
    ],
    "bbox": [
-    -76.41285,
-    39.66065,
-    -76.2256,
-    39.71836
+    -76.412847,
+    39.660651,
+    -76.225597,
+    39.718362
    ],
    "wikidata": null,
    "charted": false,
@@ -523,6 +756,15 @@
     "broad-creek-public-landing-boat-ramp-md",
     "broad-creek-public-landing-soft-access-md"
    ],
+   "water_id": "broad-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "d1ce9c8bbfdc551a6cad7fe51c86a3e4febcba4384a2188530981e239f6977ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -534,10 +776,10 @@
     "St. Michaels"
    ],
    "bbox": [
-    -76.2905,
-    38.69766,
+    -76.290503,
+    38.697665,
     -76.18316,
-    38.80719
+    38.807189
    ],
    "wikidata": null,
    "charted": true,
@@ -545,6 +787,15 @@
    "launches": [
     "west-chew-street-soft-access-md"
    ],
+   "water_id": "broad-creek-st-michaels-md",
+   "gnis_id": null,
+   "geometry_hash": "601ffc23830d9abec4fe52dae02a02181c8877e6309bd85dccd4883b40958e1f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -556,10 +807,10 @@
     "Oakland"
    ],
    "bbox": [
-    -79.3752,
-    39.40733,
-    -79.35866,
-    39.42334
+    -79.375197,
+    39.407307,
+    -79.358656,
+    39.423344
    ],
    "wikidata": null,
    "charted": false,
@@ -567,6 +818,15 @@
    "launches": [
     "broadford-recreational-park-md"
    ],
+   "water_id": "broadford-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "335108279c6412f4537dbdc0d0d7fab705c077c735f170f5505f883c070ad18e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -578,16 +838,58 @@
     "Cambridge"
    ],
    "bbox": [
-    -76.27497,
-    38.54523,
-    -76.25948,
-    38.57711
+    -76.274969,
+    38.545231,
+    -76.259481,
+    38.577111
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 2.108,
    "launches": [
     "ragged-point-md"
+   ],
+   "water_id": "brooks-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "216234c4c3126fa7771122556a1c21b33118b7b53fd8302b2b00a1e266b9c944",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "browns-creek-md",
+   "name": "Browns Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Dundalk",
+    "Essex",
+    "Middle River"
+   ],
+   "bbox": [
+    -76.403576,
+    39.265188,
+    -76.396224,
+    39.272212
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.208,
+   "launches": [],
+   "water_id": "browns-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "aef531c440f804d742b204b5db2b483945e2e9436e8f609fc56db8b43e2db24c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "browns-creek-boat-launch-near-essex-md"
    ],
    "advisories": []
   },
@@ -601,10 +903,10 @@
     "Dundalk"
    ],
    "bbox": [
-    -76.50857,
-    39.24517,
-    -76.49378,
-    39.25628
+    -76.508569,
+    39.245171,
+    -76.493781,
+    39.256279
    ],
    "wikidata": null,
    "charted": true,
@@ -616,6 +918,15 @@
     "merritt-point-park-soft-access-md",
     "watersedge-park-md"
    ],
+   "water_id": "bullneck-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "f7f23d312b864e71b0ae3ac4ed34eb1a1126ec3c63a717cc5f6374c04b3dfd24",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -628,10 +939,10 @@
     "Riverside"
    ],
    "bbox": [
-    -76.28704,
-    39.33842,
-    -76.21548,
-    39.47853
+    -76.287044,
+    39.338422,
+    -76.215479,
+    39.478675
    ],
    "wikidata": "Q5001405",
    "charted": true,
@@ -639,6 +950,15 @@
    "launches": [
     "willoughby-beach-public-landing-md"
    ],
+   "water_id": "bush-river-md",
+   "gnis_id": "583506",
+   "geometry_hash": "9eecde6186c066d6db9a6469bd1035f5bd4502695d05094213cac13885d9fdb4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -649,12 +969,57 @@
    "towns": [
     "Cambridge"
    ],
-   "bbox": null,
+   "bbox": [
+    -76.0738,
+    38.563615,
+    -76.061223,
+    38.585574
+   ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "trenton-street-md"
+   ],
+   "water_id": "cambridge-creek-md",
+   "gnis_id": "583554",
+   "geometry_hash": "5a35be2115686128ba42c3e52cc39be166468b7d9a3b5ee2eeed4c4b3e51fd03",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carter-creek-md",
+   "name": "Carter Creek",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Wiggins Corner"
+   ],
+   "bbox": [
+    -76.364141,
+    38.876539,
+    -76.352858,
+    38.881819
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.163,
+   "launches": [],
+   "water_id": "carter-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "dfe848d0ea510fe0ae6a72a7f319aeb7fae6c0fab92f9523124d5ffcd2df1579",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "carter-creek-boat-launch-md"
    ],
    "advisories": []
   },
@@ -667,10 +1032,10 @@
     "Bowie"
    ],
    "bbox": [
-    -76.7962,
-    39.02677,
-    -76.78749,
-    39.03297
+    -76.796199,
+    39.026775,
+    -76.787487,
+    39.032968
    ],
    "wikidata": "Q32854156",
    "charted": false,
@@ -678,6 +1043,15 @@
    "launches": [
     "cash-lake-boat-ramp-md"
    ],
+   "water_id": "cash-lake-md",
+   "gnis_id": "597198",
+   "geometry_hash": "fd95acf8aae2723b9a4123425006ff2ea0f747a5cf49b8b3bc7c248a729d63b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -689,10 +1063,10 @@
     "Point of Rocks"
    ],
    "bbox": [
-    -77.62145,
-    39.20969,
-    -77.54454,
-    39.27742
+    -77.621449,
+    39.209691,
+    -77.544538,
+    39.277424
    ],
    "wikidata": "Q5053819",
    "charted": false,
@@ -700,6 +1074,15 @@
    "launches": [
     "mckimmey-landing-md"
    ],
+   "water_id": "catoctin-creek-md",
+   "gnis_id": "1464547",
+   "geometry_hash": "6a7c5b2eef51cbd124c1078ff290c0f122db4363a281c2540b350c4b151fc2f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -711,10 +1094,10 @@
     "Ellicott City"
    ],
    "bbox": [
-    -76.8683,
-    39.24006,
-    -76.85216,
-    39.24512
+    -76.868303,
+    39.240059,
+    -76.852158,
+    39.245122
    ],
    "wikidata": "Q7351785",
    "charted": false,
@@ -722,6 +1105,15 @@
    "launches": [
     "centennial-lake-boat-launch-md"
    ],
+   "water_id": "centennial-lake-md",
+   "gnis_id": "2772403",
+   "geometry_hash": "de062ad081d0c4299ce72b9cd0163e5b222eb6ffafaa24c7798ede9a16109bdf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -747,10 +1139,10 @@
     "Taylors Island"
    ],
    "bbox": [
-    -76.30594,
-    38.47166,
-    -76.29613,
-    38.48455
+    -76.305939,
+    38.471658,
+    -76.296133,
+    38.484549
    ],
    "wikidata": null,
    "charted": true,
@@ -758,6 +1150,15 @@
    "launches": [
     "taylors-island-md"
    ],
+   "water_id": "chapel-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "2118c502f8c41c3f34e560fcc73991ee34a17eb215d985da43e8b5799b0c028c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -770,16 +1171,27 @@
     "Dans"
    ],
    "bbox": [
-    -75.89343,
-    39.5114,
-    -75.71325,
-    39.54393
+    -75.893426,
+    39.511403,
+    -75.713247,
+    39.543934
    ],
    "wikidata": "Q5092885",
    "charted": true,
    "area_km2": null,
    "launches": [
     "chesapeake-city-boat-ramp-md"
+   ],
+   "water_id": "chesapeake-and-delaware-canal-md",
+   "gnis_id": "583730",
+   "geometry_hash": "8bbab14bd224bad64b7b2e7b3136f48bf18ed7aca323c1b994ca47b9bc31566c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "chesapeake-and-delaware-canal-boat-launch-md"
    ],
    "advisories": []
   },
@@ -794,10 +1206,10 @@
     "Tobytown"
    ],
    "bbox": [
-    -77.32882,
-    38.9052,
+    -77.328819,
+    38.905103,
     -77.07908,
-    39.06716
+    39.067163
    ],
    "wikidata": null,
    "charted": true,
@@ -810,6 +1222,15 @@
     "swains-lock-canal-md",
     "violettes-lock-lock-23-md"
    ],
+   "water_id": "chesapeake-and-ohio-canal-md",
+   "gnis_id": null,
+   "geometry_hash": "ccc481dcdf86323d7bf063cb84edc0e588fac573fb74ffb9369665006ad1c164",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -822,9 +1243,9 @@
     "Scotland"
    ],
    "bbox": [
-    -76.40575,
-    37.575,
-    -75.89282,
+    -76.405748,
+    37.575001,
+    -75.892824,
     38.4
    ],
    "wikidata": null,
@@ -834,6 +1255,15 @@
     "elms-beach-park-md",
     "point-lookout-state-park-pet-beach-md"
    ],
+   "water_id": "chesapeake-bay-lexington-md",
+   "gnis_id": null,
+   "geometry_hash": "368f851a2e0e5ac3203d84f580c67a3695daae39140665cef68646322a8f5351",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -856,10 +1286,10 @@
     "North Beach"
    ],
    "bbox": [
-    -76.53407,
-    38.48845,
-    -75.98041,
-    39.55242
+    -76.534069,
+    38.488451,
+    -75.980351,
+    39.552417
    ],
    "wikidata": null,
    "charted": true,
@@ -868,7 +1298,6 @@
     "allen-s-lane-md",
     "beverly-triton-beach-soft-access-md",
     "breezy-point-beach-and-campground-md",
-    "chesapeake-bay-boat-launch-near-havre-de-grace-md-2",
     "city-yacht-basin-havre-de-grace-md",
     "downs-park-bay-side-beach-soft-access-md",
     "elk-neck-state-park-north-east-beach-area-md",
@@ -882,7 +1311,20 @@
     "rock-hall-beach-ferry-park-md",
     "sandy-point-east-beach-md",
     "sandy-point-soft-access-md",
+    "chesapeake-bay-boat-launch-near-havre-de-grace-md-2",
     "terrapin-nature-park-md"
+   ],
+   "water_id": "chesapeake-bay-md",
+   "gnis_id": null,
+   "geometry_hash": "b146a85292a4077919017fc411824eb8593e2644258a12a9caade02ebfc0f7de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "chesapeake-bay-boat-launch-near-rock-hall-md",
+    "chesapeake-bay-boat-launch-near-stevensville-md"
    ],
    "advisories": []
   },
@@ -901,10 +1343,10 @@
     "Rolphs"
    ],
    "bbox": [
-    -76.32734,
-    38.96646,
-    -75.83476,
-    39.26191
+    -76.327343,
+    38.966457,
+    -75.834759,
+    39.261912
    ],
    "wikidata": "Q5093696",
    "charted": true,
@@ -923,6 +1365,15 @@
     "shadding-reach-md",
     "wilmer-park-md"
    ],
+   "water_id": "chester-river-md",
+   "gnis_id": "597230",
+   "geometry_hash": "090c3a4567b9be608d3b5086f37bd643c3547466f6fa70d6c9f37e5aa7036cf9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -934,10 +1385,10 @@
     "Vienna"
    ],
    "bbox": [
-    -75.9801,
-    38.42332,
-    -75.87588,
-    38.55696
+    -75.980096,
+    38.423316,
+    -75.875798,
+    38.556957
    ],
    "wikidata": null,
    "charted": false,
@@ -945,6 +1396,15 @@
    "launches": [
     "new-bridge-md"
    ],
+   "water_id": "chicamacomico-river-md",
+   "gnis_id": null,
+   "geometry_hash": "a15bace3bfdaa3d234338c22af42827462b170909ee3917f14b8a632962798b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -960,10 +1420,10 @@
     "Stockton"
    ],
    "bbox": [
-    -75.43802,
-    37.9375,
-    -75.15842,
-    38.29467
+    -75.438021,
+    37.937498,
+    -75.158417,
+    38.294668
    ],
    "wikidata": "Q5100322",
    "charted": true,
@@ -975,6 +1435,15 @@
     "public-landing-soft-access-md",
     "taylors-landing-md"
    ],
+   "water_id": "chincoteague-bay-md",
+   "gnis_id": "583758",
+   "geometry_hash": "ea6a5b3a4b560ba3caeb55811624cc418b2eba40795d4086bb717b3043381ab0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -994,10 +1463,10 @@
     "Trappe"
    ],
    "bbox": [
-    -76.39617,
+    -76.396168,
     38.49079,
-    -75.72953,
-    39.07207
+    -75.729527,
+    39.072067
    ],
    "wikidata": "Q773991",
    "charted": true,
@@ -1018,6 +1487,89 @@
     "two-johns-landing-md",
     "windy-hill-landing-md"
    ],
+   "water_id": "choptank-river-md",
+   "gnis_id": null,
+   "geometry_hash": "3c833c00bce722366a1e8243cc06ed0fdfc99590e9cfe5c45cc3ed74f113099b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "choptank-river-boat-launch-near-denton-md",
+    "choptank-river-boat-launch-near-denton-md-2",
+    "choptank-river-boat-launch-near-lyford-landing-md",
+    "secretary-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "church-cove-md",
+   "name": "Church Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Bluestone Estates"
+   ],
+   "bbox": [
+    -76.417199,
+    38.16148,
+    -76.405691,
+    38.165299
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.154,
+   "launches": [],
+   "water_id": "church-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "b5efd8c893769fd56e55013871c2b3df29dd8c5522893937787f4058cf1bb8c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "church-cove-boat-launch-near-bluestone-estates-md",
+    "church-cove-boat-launch-near-bluestone-estates-md-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "church-creek-church-creek-md",
+   "name": "Church Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Church Creek"
+   ],
+   "bbox": [
+    -76.185085,
+    38.497997,
+    -76.155529,
+    38.52831
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.491,
+   "launches": [],
+   "water_id": "church-creek-church-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "be9dc03e308c06218747185a662913e38e2806190864ec904e4a0bf93a402e7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "church-creek-boat-launch-near-church-creek-md",
+    "church-creek-boat-launch-near-church-creek-md-2",
+    "church-creek-boat-launch-near-church-creek-md-3",
+    "church-creek-boat-launch-near-church-creek-md-4",
+    "church-creek-boat-launch-near-church-creek-md-5",
+    "church-creek-boat-launch-near-church-creek-md-6",
+    "church-creek-boat-launch-near-church-creek-md-7"
+   ],
    "advisories": []
   },
   {
@@ -1035,6 +1587,15 @@
    "launches": [
     "homeport-farm-park-md"
    ],
+   "water_id": "church-creek-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1046,9 +1607,9 @@
     "Gaithersburg"
    ],
    "bbox": [
-    -77.25792,
-    39.13892,
-    -77.2403,
+    -77.257923,
+    39.138922,
+    -77.240301,
     39.14561
    ],
    "wikidata": null,
@@ -1057,6 +1618,15 @@
    "launches": [
     "seneca-creek-state-park-clopper-lake-md"
    ],
+   "water_id": "clopper-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "7b8504bc421972b6caa64433c998931d7c80721a0f763f338765e9da364ca374",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1082,9 +1652,9 @@
     "Annapolis"
    ],
    "bbox": [
-    -76.50175,
-    38.9804,
-    -76.48612,
+    -76.501749,
+    38.980301,
+    -76.486121,
     38.98693
    ],
    "wikidata": null,
@@ -1093,6 +1663,15 @@
    "launches": [
     "robert-eades-park-md"
    ],
+   "water_id": "college-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "8956d70341a3a3ffee6d949132eb9de47cc85dd01d60c67d44a613c298279e98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1104,10 +1683,10 @@
     "Conowingo Mobile Home Park"
    ],
    "bbox": [
-    -76.20638,
-    39.67979,
-    -76.16548,
-    39.86142
+    -76.206381,
+    39.679786,
+    -76.165484,
+    39.861417
    ],
    "wikidata": "Q5162366",
    "charted": false,
@@ -1115,6 +1694,15 @@
    "launches": [
     "conowingo-creek-landing-md"
    ],
+   "water_id": "conowingo-creek-md",
+   "gnis_id": "583867",
+   "geometry_hash": "58bf96d15674a64488e454d60f6e851497b360f1327fc442efb9ab6bf45e23aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1126,10 +1714,10 @@
     "Scotland"
    ],
    "bbox": [
-    -76.35327,
-    38.03791,
-    -76.32209,
-    38.06141
+    -76.353269,
+    38.037911,
+    -76.322092,
+    38.061409
    ],
    "wikidata": null,
    "charted": true,
@@ -1137,6 +1725,15 @@
    "launches": [
     "point-lookout-state-park-swimming-beach-md"
    ],
+   "water_id": "cornfield-harbor-md",
+   "gnis_id": null,
+   "geometry_hash": "340340d0415bed9398e22db508d8760001951e53193912e7ffd246df60cb4df2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1149,10 +1746,10 @@
     "Solomons"
    ],
    "bbox": [
-    -76.53574,
-    38.33517,
-    -76.48651,
-    38.35868
+    -76.535742,
+    38.335173,
+    -76.486515,
+    38.358684
    ],
    "wikidata": null,
    "charted": true,
@@ -1160,6 +1757,15 @@
    "launches": [
     "clarkes-landing-md"
    ],
+   "water_id": "cuckold-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "e25c7e4d97d87caf124cbab8baec47da92dc7b4e08c8aecc749e0a3456154a0c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1171,9 +1777,9 @@
     "Wittman"
    ],
    "bbox": [
-    -76.30507,
-    38.78345,
-    -76.2938,
+    -76.305069,
+    38.783451,
+    -76.293801,
     38.79322
    ],
    "wikidata": null,
@@ -1182,6 +1788,15 @@
    "launches": [
     "cummings-creek-landing-md"
    ],
+   "water_id": "cummings-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "fd019a43494e0b69d9f20d63036cfe24e54450f0a3b8a30c10bfcdf7c23dcc6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1195,10 +1810,10 @@
     "Glen Burnie"
    ],
    "bbox": [
-    -76.58612,
-    39.1834,
-    -76.5401,
-    39.22818
+    -76.586115,
+    39.183403,
+    -76.540102,
+    39.228184
    ],
    "wikidata": null,
    "charted": true,
@@ -1206,6 +1821,17 @@
    "launches": [
     "solleys-cove-park-boat-ramp-md",
     "solleys-cove-park-soft-access-md"
+   ],
+   "water_id": "curtis-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "a401c0501c98704b96f5b2a523f208aa289014de43350970a3ef7e8e564536fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "curtis-creek-boat-launch-near-brooklyn-park-md"
    ],
    "advisories": []
   },
@@ -1219,9 +1845,9 @@
    ],
    "bbox": [
     -75.88533,
-    38.18597,
-    -75.87748,
-    38.20027
+    38.18594,
+    -75.877481,
+    38.200269
    ],
    "wikidata": null,
    "charted": true,
@@ -1229,6 +1855,15 @@
    "launches": [
     "dames-quarter-md"
    ],
+   "water_id": "dames-quarter-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "c8c484e2364d207eb882c431ee57306215de1db529d801304b553fc5c139febc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1240,10 +1875,10 @@
     "Middle River"
    ],
    "bbox": [
-    -76.4314,
-    39.31669,
-    -76.42346,
-    39.32468
+    -76.431499,
+    39.316685,
+    -76.423459,
+    39.324677
    ],
    "wikidata": null,
    "charted": true,
@@ -1251,6 +1886,15 @@
    "launches": [
     "wilson-point-park-md"
    ],
+   "water_id": "dark-head-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "91953216143a9987dd9df35d5200eca6c271e4d1d5029ad5ce38f49ef80808ac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "usgs-nas-dreissenid-mussels",
@@ -1282,6 +1926,15 @@
    "launches": [
     "deal-island-wma-boat-ramp-impoundment-north-md"
    ],
+   "water_id": "deal-island-impoundment-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1297,10 +1950,10 @@
     "Thayerville"
    ],
    "bbox": [
-    -79.39239,
-    39.44844,
-    -79.2496,
-    39.55942
+    -79.392393,
+    39.448437,
+    -79.249598,
+    39.559418
    ],
    "wikidata": "Q14213258",
    "charted": false,
@@ -1308,6 +1961,18 @@
    "launches": [
     "deep-creek-lake-state-park-boat-ramp-md",
     "deep-creek-lake-state-park-soft-access-md"
+   ],
+   "water_id": "deep-creek-lake-md",
+   "gnis_id": "584060",
+   "geometry_hash": "975582216cc5d2b620d468e0107b8db36fdeeefb6eea16b06c441d5d761955bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "deep-creek-lake-boat-launch-near-mchenry-md",
+    "deep-creek-lake-boat-launch-near-thayerville-md"
    ],
    "advisories": []
   },
@@ -1326,6 +1991,15 @@
    "launches": [
     "franklin-point-state-park-md"
    ],
+   "water_id": "deep-creek-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1340,10 +2014,10 @@
     "Street"
    ],
    "bbox": [
-    -76.63349,
-    39.59785,
-    -76.1466,
-    39.74261
+    -76.633494,
+    39.597846,
+    -76.146604,
+    39.742612
    ],
    "wikidata": "Q5250705",
    "charted": false,
@@ -1355,6 +2029,15 @@
     "rocks-state-park-rapid-s-soft-access-md",
     "walters-mill-canoe-kayak-launch-md"
    ],
+   "water_id": "deer-creek-md",
+   "gnis_id": "584079",
+   "geometry_hash": "2be8fbf72630b3b22cc3989d41b1ff2683c2f97e0df0b64de18e784c313c0381",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1372,6 +2055,15 @@
    "launches": [
     "dogwood-harbor-md"
    ],
+   "water_id": "dogwood-harbor-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1383,9 +2075,9 @@
     "Detour"
    ],
    "bbox": [
-    -77.29109,
-    39.60082,
-    -77.26978,
+    -77.291093,
+    39.600824,
+    -77.269784,
     39.60759
    ],
    "wikidata": null,
@@ -1394,6 +2086,15 @@
    "launches": [
     "double-pipe-creek-park-soft-access-md"
    ],
+   "water_id": "double-pipe-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "0521b89366b48e1525cefefa232fa6044e26221560bd8e3d42637184e70d4eda",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1405,10 +2106,10 @@
     "Baltimore"
    ],
    "bbox": [
-    -76.37276,
-    39.34054,
-    -76.34922,
-    39.35939
+    -76.372759,
+    39.340541,
+    -76.349221,
+    39.359389
    ],
    "wikidata": null,
    "charted": true,
@@ -1416,6 +2117,15 @@
    "launches": [
     "marshy-point-nature-center-and-park-md"
    ],
+   "water_id": "dundee-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "731b5c230392a5d61a5d35a9a7cfdd84ae68ad5208ba8fb9e51dfcaa36433dbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1427,10 +2137,10 @@
     "Chestertown"
    ],
    "bbox": [
-    -76.16705,
-    39.12149,
-    -76.1125,
-    39.18615
+    -76.167048,
+    39.121486,
+    -76.112348,
+    39.186145
    ],
    "wikidata": null,
    "charted": true,
@@ -1438,6 +2148,15 @@
    "launches": [
     "broadneck-landing-md"
    ],
+   "water_id": "east-fork-langford-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "24c7c2842ec67b566b730419208eac6788478c914d418cfc4159f2fad5ecf9a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1454,9 +2173,9 @@
     "Wittman"
    ],
    "bbox": [
-    -76.38088,
-    38.7207,
-    -76.18446,
+    -76.380879,
+    38.720696,
+    -76.184463,
     38.9483
    ],
    "wikidata": "Q5330010",
@@ -1469,6 +2188,15 @@
     "eastern-bay-boat-launch-near-sherwood-md",
     "romancoke-fishing-pier-and-soft-access-md"
    ],
+   "water_id": "eastern-bay-md",
+   "gnis_id": "597369",
+   "geometry_hash": "a6421cc057f3f594145f18b51977ad646bf3298aa6728bf0cb075efb23436963",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1489,8 +2217,8 @@
     "White Crystal Beach"
    ],
    "bbox": [
-    -76.00821,
-    39.42861,
+    -76.008211,
+    39.428615,
     -75.81729,
     39.594
    ],
@@ -1501,6 +2229,43 @@
     "elk-neck-state-park-rogues-harbor-md",
     "elk-river-park-md",
     "stemmers-run-md"
+   ],
+   "water_id": "elk-river-md",
+   "gnis_id": "584276",
+   "geometry_hash": "01ba249d0d81754c3e9a23ff04ebc7a44ea536fc21d8ee354c98ed48f90b6b72",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "elk-river-boat-launch-near-white-crystal-beach-md-5"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ewens-bay-md",
+   "name": "Ewens Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Bristolwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "ewens-bay-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ewens-bay-boat-launch-md"
    ],
    "advisories": []
   },
@@ -1514,10 +2279,10 @@
     "Georgetown"
    ],
    "bbox": [
-    -76.21283,
-    39.23126,
-    -76.1699,
-    39.26956
+    -76.212833,
+    39.231256,
+    -76.169901,
+    39.269563
    ],
    "wikidata": null,
    "charted": true,
@@ -1525,6 +2290,15 @@
    "launches": [
     "fairlee-landing-md"
    ],
+   "water_id": "fairlee-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "df31c7ca6e476407ebeaf60c21d1d7f53c01ff6b3d28043119b58f853e93d00f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1536,9 +2310,9 @@
     "Toddville"
    ],
    "bbox": [
-    -76.09968,
-    38.30445,
-    -76.05659,
+    -76.099677,
+    38.304453,
+    -76.056589,
     38.33239
    ],
    "wikidata": null,
@@ -1547,6 +2321,15 @@
    "launches": [
     "toddville-md"
    ],
+   "water_id": "farm-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "0d664fca0cb54470b9cbdddea73c92abae7c64b7128c7071128859a0b3ad4664",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1559,16 +2342,27 @@
     "Waterview"
    ],
    "bbox": [
-    -76.06137,
-    38.1756,
-    -75.81271,
-    38.37476
+    -76.061368,
+    38.175595,
+    -75.812707,
+    38.374763
    ],
    "wikidata": "Q5455002",
    "charted": true,
    "area_km2": 148.302,
    "launches": [
     "crocheron-md"
+   ],
+   "water_id": "fishing-bay-md",
+   "gnis_id": "584381",
+   "geometry_hash": "9098842d9d2c4ed313f7ddf03cb40680463365bba2e1742528fb46f8eb4a6494",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "fishing-bay-boat-launch-md"
    ],
    "advisories": []
   },
@@ -1581,10 +2375,10 @@
     "Chesapeake Beach"
    ],
    "bbox": [
-    -76.56201,
-    38.6665,
-    -76.53275,
-    38.6923
+    -76.562009,
+    38.666502,
+    -76.532747,
+    38.692303
    ],
    "wikidata": null,
    "charted": true,
@@ -1592,6 +2386,19 @@
    "launches": [
     "chesapeake-beach-boat-ramps-east-md",
     "chesapeake-beach-boat-ramps-west-md"
+   ],
+   "water_id": "fishing-creek-chesapeake-beach-md",
+   "gnis_id": null,
+   "geometry_hash": "4881ca1c63aa4e84e9516a54d7826013722bdfeca18762ec62036b69c4899b68",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "fishing-creek-boat-launch-near-chesapeake-beach-md",
+    "fishing-creek-boat-launch-near-chesapeake-beach-md-2",
+    "fishing-creek-boat-launch-near-chesapeake-beach-md-3"
    ],
    "advisories": []
   },
@@ -1604,10 +2411,10 @@
     "Fishing Creek"
    ],
    "bbox": [
-    -76.23633,
-    38.34472,
-    -76.22755,
-    38.35283
+    -76.236329,
+    38.344721,
+    -76.227553,
+    38.352829
    ],
    "wikidata": null,
    "charted": true,
@@ -1615,6 +2422,15 @@
    "launches": [
     "tylers-cove-md"
    ],
+   "water_id": "fishing-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "4e38d59cddd983b2ebcdcc5fda0e40115759d448e6be9f7793fa1b73bbea22b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1626,9 +2442,9 @@
     "Hollywood"
    ],
    "bbox": [
-    -76.53566,
-    38.35029,
-    -76.52034,
+    -76.535659,
+    38.350291,
+    -76.520342,
     38.35839
    ],
    "wikidata": null,
@@ -1637,6 +2453,15 @@
    "launches": [
     "forrest-landing-md"
    ],
+   "water_id": "forrest-landing-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "51f3f62a29a641c7249907867b82671a58dcee0d293ea51f7eccaade9162aacb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1648,10 +2473,10 @@
     "Ridge"
    ],
    "bbox": [
-    -76.39474,
+    -76.394738,
     38.1192,
-    -76.38226,
-    38.12442
+    -76.382257,
+    38.124423
    ],
    "wikidata": "Q49377636",
    "charted": true,
@@ -1659,6 +2484,15 @@
    "launches": [
     "fox-harbor-landing-md"
    ],
+   "water_id": "fox-harbor-md",
+   "gnis_id": "594714",
+   "geometry_hash": "d1e65fe9364672c8301328a0055d61b33cb7356f53d4594bd5a4e98bb9399bd9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1671,9 +2505,9 @@
    ],
    "bbox": [
     -75.9539,
-    39.35014,
-    -75.93886,
-    39.3657
+    39.349946,
+    -75.938856,
+    39.365702
    ],
    "wikidata": null,
    "charted": true,
@@ -1681,6 +2515,15 @@
    "launches": [
     "freeman-creek-boat-launch-near-glencoe-md"
    ],
+   "water_id": "freeman-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "82fa604fe291199475561b8a1e62a59b1eb509d572fd18bb682f52176609ed2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1692,10 +2535,10 @@
     "Charlotte Hall"
    ],
    "bbox": [
-    -76.8592,
-    38.48654,
+    -76.859203,
+    38.486209,
     -76.85291,
-    38.49679
+    38.496791
    ],
    "wikidata": null,
    "charted": false,
@@ -1704,6 +2547,15 @@
     "gilbert-run-park-boat-ramp-md",
     "gilbert-run-park-soft-access-md"
    ],
+   "water_id": "gilbert-run-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "ee087720d6bbadd5e041dc34d4ccad24ed40ce96e74a118543e0efa89f10adc0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1715,10 +2567,10 @@
     "Chester"
    ],
    "bbox": [
-    -76.26597,
-    38.95877,
-    -76.25869,
-    38.96514
+    -76.265968,
+    38.958769,
+    -76.258692,
+    38.965295
    ],
    "wikidata": null,
    "charted": true,
@@ -1726,6 +2578,15 @@
    "launches": [
     "goodhands-creek-landing-md"
    ],
+   "water_id": "goodhands-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "7dd08e3f39def6bdb8dcbae5420a89bc7e3406e71509a0c57f8ff610f297f6da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1743,6 +2604,15 @@
    "launches": [
     "rumbley-md"
    ],
+   "water_id": "goose-creek-md",
+   "gnis_id": "584648",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1754,10 +2624,10 @@
     "Saint Michaels"
    ],
    "bbox": [
-    -76.26862,
-    38.74854,
-    -76.25263,
-    38.76293
+    -76.268924,
+    38.748544,
+    -76.252627,
+    38.762933
    ],
    "wikidata": null,
    "charted": true,
@@ -1765,6 +2635,15 @@
    "launches": [
     "grace-creek-boat-launch-md"
    ],
+   "water_id": "grace-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "961977c51451d3e99fc20d7e8de18b03f383cc1b8eabe78e4b3fa006c76b5ee2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1782,6 +2661,15 @@
    "launches": [
     "grammers-cove-boat-launch-md"
    ],
+   "water_id": "grammers-cove-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1793,9 +2681,9 @@
     "Queenstown"
    ],
    "bbox": [
-    -76.14514,
-    38.88123,
-    -76.13651,
+    -76.145424,
+    38.881231,
+    -76.136506,
     38.89203
    ],
    "wikidata": null,
@@ -1804,6 +2692,15 @@
    "launches": [
     "wye-island-soft-access-md"
    ],
+   "water_id": "granary-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "f328c44136ce2a425e470bdd29d1fd6a6c88467f0179bcbaab9205c71a417065",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1815,10 +2712,10 @@
     "Rock Hall"
    ],
    "bbox": [
-    -76.2283,
-    39.07379,
-    -76.18171,
-    39.14008
+    -76.228303,
+    39.073785,
+    -76.181714,
+    39.140076
    ],
    "wikidata": null,
    "charted": true,
@@ -1826,6 +2723,15 @@
    "launches": [
     "gray-s-inn-landing-md"
    ],
+   "water_id": "grays-inn-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "71b8a907bbf24027c9b4468df15580898cc2fd57c17881009c0e36ad8217d884",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1838,10 +2744,10 @@
     "Gaithersburg"
    ],
    "bbox": [
-    -77.33599,
-    39.12447,
-    -77.1733,
-    39.28077
+    -77.335987,
+    39.124473,
+    -77.173302,
+    39.280766
    ],
    "wikidata": null,
    "charted": false,
@@ -1850,6 +2756,15 @@
     "great-seneca-creek-boat-launch-md",
     "seneca-creek-state-park-riffle-ford-road-creek-access-md"
    ],
+   "water_id": "great-seneca-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "82d48d02b1f591dbdb7bb05adbeb4a2b1d411189bba58dab838e30bc72a9c76d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1861,10 +2776,10 @@
     "Boonsboro"
    ],
    "bbox": [
-    -77.62123,
-    39.53565,
+    -77.621234,
+    39.53561,
     -77.61591,
-    39.54161
+    39.541614
    ],
    "wikidata": null,
    "charted": false,
@@ -1872,6 +2787,15 @@
    "launches": [
     "greenbrier-state-park-md"
    ],
+   "water_id": "greenbrier-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "bfd2a96871c5f50f4a636ada4ca6d2fce44de661a10f84756b92ad67f852016b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1883,8 +2807,8 @@
     "Chase"
    ],
    "bbox": [
-    -76.37752,
-    39.30222,
+    -76.377515,
+    39.302221,
     -76.28859,
     39.4132
    ],
@@ -1894,6 +2818,15 @@
    "launches": [
     "hammerman-day-use-area-gunpowder-falls-state-park-md"
    ],
+   "water_id": "gunpowder-river-md",
+   "gnis_id": null,
+   "geometry_hash": "1bafc16216639b8910314ab894ae24943247d4b3df25e8bded8ababc1218115e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1905,8 +2838,8 @@
     "Annapolis"
    ],
    "bbox": [
-    -76.51515,
-    38.93172,
+    -76.515149,
+    38.931721,
     -76.50527,
     38.94219
    ],
@@ -1916,6 +2849,15 @@
    "launches": [
     "quiet-waters-park-md"
    ],
+   "water_id": "harness-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "82e8853257c9fb6485ad002404ecee13141bad2f67296b2f699e68263caa272d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1927,10 +2869,10 @@
     "Sherwood"
    ],
    "bbox": [
-    -76.32648,
-    38.72635,
-    -76.25667,
-    38.81906
+    -76.326484,
+    38.726351,
+    -76.256674,
+    38.81913
    ],
    "wikidata": "Q16980284",
    "charted": true,
@@ -1938,6 +2880,15 @@
    "launches": [
     "sherwood-pier-soft-access-md"
    ],
+   "water_id": "harris-creek-md",
+   "gnis_id": "584881",
+   "geometry_hash": "ec30e22a2312e69ff49f8e422898c45f473d1ae1fbc16ba7d60cb579ee8a192d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1951,10 +2902,10 @@
     "Middle River"
    ],
    "bbox": [
-    -76.40513,
-    39.2477,
-    -76.35523,
-    39.28043
+    -76.405129,
+    39.247701,
+    -76.355231,
+    39.280429
    ],
    "wikidata": null,
    "charted": true,
@@ -1962,6 +2913,15 @@
    "launches": [
     "hart-miller-island-state-park-md"
    ],
+   "water_id": "hawk-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "c95a450ca012bec03ea89ae1b2b240548dfe402573cf9194f78626216dbefebc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1973,10 +2933,10 @@
     "Rose Haven"
    ],
    "bbox": [
-    -76.56051,
-    38.72706,
-    -76.5274,
-    38.77804
+    -76.560508,
+    38.727057,
+    -76.527404,
+    38.778037
    ],
    "wikidata": null,
    "charted": true,
@@ -1984,6 +2944,15 @@
    "launches": [
     "rose-haven-memorial-park-md"
    ],
+   "water_id": "herring-bay-md",
+   "gnis_id": null,
+   "geometry_hash": "cfbb24f5170e72c5ecf1f96aff650b768b1bd395619b3f486b625ae5401f193c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2001,6 +2970,15 @@
    "launches": [
     "tall-timbers-landing-md"
    ],
+   "water_id": "herring-creek-md",
+   "gnis_id": "594745",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2012,10 +2990,10 @@
     "Oakland"
    ],
    "bbox": [
-    -79.4622,
-    39.45304,
-    -79.45231,
-    39.45826
+    -79.462204,
+    39.453038,
+    -79.452306,
+    39.458263
    ],
    "wikidata": null,
    "charted": false,
@@ -2023,6 +3001,15 @@
    "launches": [
     "herrington-manor-state-park-md"
    ],
+   "water_id": "herrington-manor-recreation-area-reservoir-md",
+   "gnis_id": null,
+   "geometry_hash": "24de3a86313b3b10e3b6eb369ffff15849c658ff3245f1990c091a238aaff441",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2034,9 +3021,9 @@
     "Rock Hall"
    ],
    "bbox": [
-    -76.21395,
-    39.10726,
-    -76.20226,
+    -76.213947,
+    39.107257,
+    -76.202257,
     39.12103
    ],
    "wikidata": null,
@@ -2046,6 +3033,15 @@
     "harrington-md",
     "skinner-s-neck-md"
    ],
+   "water_id": "herringtown-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "70c7256c5f4604c52ea77f758ca3941752550301b684801a68d0f2c04e8c5e46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2058,10 +3054,10 @@
     "Wingate"
    ],
    "bbox": [
-    -76.23834,
-    38.20952,
-    -76.07066,
-    38.39548
+    -76.238336,
+    38.209523,
+    -76.07064,
+    38.395477
    ],
    "wikidata": "Q16892371",
    "charted": true,
@@ -2069,6 +3065,15 @@
    "launches": [
     "hoopersville-md"
    ],
+   "water_id": "honga-river-md",
+   "gnis_id": "585041",
+   "geometry_hash": "68644727f87e8b1a9b8e41340147108c4e036e17bf12ea228b28d523b2358403",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2080,10 +3085,10 @@
     "Thurmont"
    ],
    "bbox": [
-    -77.46451,
-    39.62257,
-    -77.45576,
-    39.62898
+    -77.464508,
+    39.622574,
+    -77.455759,
+    39.628977
    ],
    "wikidata": "Q47468905",
    "charted": false,
@@ -2091,6 +3096,15 @@
    "launches": [
     "cunningham-falls-state-park-md"
    ],
+   "water_id": "hunting-creek-lake-md",
+   "gnis_id": "594325",
+   "geometry_hash": "a74466d514486c48d30bab088bd0b38afd873055127070c8200893f2bc56adc4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2117,10 +3131,10 @@
     "Preston"
    ],
    "bbox": [
-    -75.94873,
-    38.67453,
-    -75.89974,
-    38.69559
+    -75.948729,
+    38.674526,
+    -75.899741,
+    38.695592
    ],
    "wikidata": null,
    "charted": true,
@@ -2128,6 +3142,15 @@
    "launches": [
     "hunting-creek-bridge-md"
    ],
+   "water_id": "hunting-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "e1bb8077633a929e8cc38aabcbd002bd5a6b9e9ce8fd029166860c1c15e389d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2140,9 +3163,9 @@
    ],
    "bbox": [
     -75.98814,
-    38.34528,
-    -75.93518,
-    38.39385
+    38.345283,
+    -75.935183,
+    38.393855
    ],
    "wikidata": null,
    "charted": true,
@@ -2150,6 +3173,15 @@
    "launches": [
     "island-creek-md"
    ],
+   "water_id": "indian-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "6437e17d05900345acfb04e3471c0ff1f62a22af46cbd75217d390a984e5ee17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2167,6 +3199,15 @@
    "launches": [
     "kirwins-wharf-md"
    ],
+   "water_id": "insley-cove-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2178,10 +3219,10 @@
     "Cambridge"
    ],
    "bbox": [
-    -75.95117,
-    38.38892,
-    -75.89445,
-    38.42489
+    -75.951168,
+    38.388916,
+    -75.894449,
+    38.424894
    ],
    "wikidata": null,
    "charted": false,
@@ -2189,6 +3230,15 @@
    "launches": [
     "island-pond-soft-access-md"
    ],
+   "water_id": "island-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "8efad3a74b1790da8f9e1a5970f47ec362c8ff149df01a54790a2e37c7f0ee7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2203,9 +3253,9 @@
    ],
    "bbox": [
     -75.16767,
-    38.32594,
-    -75.06826,
-    38.39018
+    38.325941,
+    -75.068259,
+    38.390178
    ],
    "wikidata": "Q6084084",
    "charted": true,
@@ -2215,6 +3265,15 @@
     "homer-gudelsky-park-md",
     "isle-of-wight-park-soft-access-md"
    ],
+   "water_id": "isle-of-wight-bay-md",
+   "gnis_id": "585168",
+   "geometry_hash": "62185006fa0e9a5700ec6cd7cd315fd72c3749cc843a24350cc521e3ee17263d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2240,10 +3299,10 @@
     "Crisfield"
    ],
    "bbox": [
-    -75.86436,
-    37.95157,
-    -75.84092,
-    37.96585
+    -75.864357,
+    37.951572,
+    -75.840919,
+    37.965846
    ],
    "wikidata": "Q49380676",
    "charted": true,
@@ -2251,6 +3310,15 @@
    "launches": [
     "jenkins-creek-boat-launch-md"
    ],
+   "water_id": "jenkins-creek-md",
+   "gnis_id": "585212",
+   "geometry_hash": "58c993257d9af624bd96555e3635206176a63e9e6402c2605e5daa5b4bad3d3e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2262,10 +3330,10 @@
     "Kitzmiller"
    ],
    "bbox": [
-    -79.16274,
-    39.4025,
-    -79.11871,
-    39.43597
+    -79.162741,
+    39.402499,
+    -79.118714,
+    39.435974
    ],
    "wikidata": "Q6179058",
    "charted": false,
@@ -2273,6 +3341,15 @@
    "launches": [
     "jennings-randolph-lake-boat-launch-md"
    ],
+   "water_id": "jennings-randolph-lake-md",
+   "gnis_id": "583296",
+   "geometry_hash": "186b540ce1730dff4f3883e7370516dca41a95ed3a3cd3a682ef5f3e097d970d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2285,9 +3362,9 @@
    ],
    "bbox": [
     -75.6031,
-    38.37192,
-    -75.58894,
-    38.39578
+    38.371917,
+    -75.588944,
+    38.395782
    ],
    "wikidata": null,
    "charted": false,
@@ -2295,6 +3372,15 @@
    "launches": [
     "rose-street-md"
    ],
+   "water_id": "johnson-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "50d709ec794b05bab76426b0f3be8fd1be27c4254d0ce647c0d7a9a5b78d4b03",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2306,9 +3392,9 @@
     "Edgemere"
    ],
    "bbox": [
-    -76.45854,
-    39.22723,
-    -76.44974,
+    -76.458539,
+    39.227231,
+    -76.449741,
     39.2296
    ],
    "wikidata": null,
@@ -2317,6 +3403,15 @@
    "launches": [
     "sparrows-point-park-md"
    ],
+   "water_id": "jones-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "0f90d525d1f2ded5f81725693e6fcc0cfe67f5f6cf5a2de972d25c999f514782",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2328,10 +3423,10 @@
     "Taylors Island"
    ],
    "bbox": [
-    -76.26462,
-    38.47851,
-    -76.26114,
-    38.48988
+    -76.264624,
+    38.478515,
+    -76.260857,
+    38.489938
    ],
    "wikidata": null,
    "charted": false,
@@ -2339,6 +3434,15 @@
    "launches": [
     "parsons-creek-ditch-access-point-md"
    ],
+   "water_id": "joseph-stewart-s-canal-md",
+   "gnis_id": null,
+   "geometry_hash": "32a0bd7899d61686c0403ec54b03164f073e9850bec0a4a842965a7431ce78b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2350,10 +3454,10 @@
     "Providence"
    ],
    "bbox": [
-    -76.02375,
-    38.77445,
-    -75.96798,
-    38.79736
+    -76.023749,
+    38.774452,
+    -75.967978,
+    38.797359
    ],
    "wikidata": null,
    "charted": true,
@@ -2361,6 +3465,15 @@
    "launches": [
     "kings-creek-preserve-md"
    ],
+   "water_id": "kings-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "76e4d225b7e838fad8ec81903efeb17e4a4ca4b1f9749edc02892138d3b3581d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2372,10 +3485,10 @@
     "Trappe"
    ],
    "bbox": [
-    -76.11905,
-    38.62659,
-    -76.07766,
-    38.66018
+    -76.119051,
+    38.626589,
+    -76.077659,
+    38.660175
    ],
    "wikidata": null,
    "charted": true,
@@ -2383,6 +3496,15 @@
    "launches": [
     "trappe-landing-md"
    ],
+   "water_id": "la-trappe-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "df9f5d51b495cd533275da42d488302c2f71afd526bc834ee61ba8ff0eea930a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2394,9 +3516,9 @@
     "Scotland"
    ],
    "bbox": [
-    -76.35563,
-    38.05028,
-    -76.32494,
+    -76.355633,
+    38.050277,
+    -76.324945,
     38.06519
    ],
    "wikidata": null,
@@ -2408,6 +3530,15 @@
     "point-lookout-state-park-camp-store-md",
     "point-lookout-state-park-boat-ramps-md"
    ],
+   "water_id": "lake-conoy-md",
+   "gnis_id": null,
+   "geometry_hash": "45940b588fdb657b3a8bbda64d29191231e71134f38200f76e7d84bf63bd173b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2420,10 +3551,10 @@
     "Pleasant Valley"
    ],
    "bbox": [
-    -78.66324,
-    39.69674,
-    -78.6409,
-    39.71544
+    -78.663351,
+    39.696742,
+    -78.640895,
+    39.715561
    ],
    "wikidata": "Q6476069",
    "charted": false,
@@ -2432,6 +3563,15 @@
     "rocky-gap-state-park-boat-ramp-md",
     "rocky-gap-state-park-soft-access-md"
    ],
+   "water_id": "lake-habeeb-md",
+   "gnis_id": "594349",
+   "geometry_hash": "8427fa0a3f72efb98c72e0b7a4851f93d9a4bd75f91711a4bf9ea382c661e165",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2444,10 +3584,10 @@
     "Rockville"
    ],
    "bbox": [
-    -77.13197,
-    39.11433,
-    -77.12718,
-    39.12944
+    -77.131972,
+    39.114333,
+    -77.127178,
+    39.129459
    ],
    "wikidata": "Q6477078",
    "charted": false,
@@ -2455,6 +3595,15 @@
    "launches": [
     "rock-creek-regional-park-at-lake-needwood-md"
    ],
+   "water_id": "lake-needwood-md",
+   "gnis_id": "594303",
+   "geometry_hash": "fe13ab5e091b435495e47b693d5b76ea7b3ef242ab6bb0aed8fb3473c3d044f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2480,10 +3629,10 @@
     "Baltimore"
    ],
    "bbox": [
-    -76.64611,
-    39.37855,
-    -76.63822,
-    39.39045
+    -76.646113,
+    39.378483,
+    -76.638217,
+    39.390447
    ],
    "wikidata": "Q6477540",
    "charted": false,
@@ -2491,6 +3640,15 @@
    "launches": [
     "robert-e-lee-park-md"
    ],
+   "water_id": "lake-roland-md",
+   "gnis_id": "598364",
+   "geometry_hash": "e0668fc3435f52270df33aa22827a888347718a39c6ff301770cafc9b51fd5d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2508,6 +3666,15 @@
    "launches": [
     "langrells-creek-md"
    ],
+   "water_id": "langrells-creek-nanticoke-river-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2519,10 +3686,10 @@
     "Easton"
    ],
    "bbox": [
-    -76.19686,
+    -76.196863,
     38.7959,
-    -76.15886,
-    38.82807
+    -76.158864,
+    38.828072
    ],
    "wikidata": null,
    "charted": true,
@@ -2530,6 +3697,15 @@
    "launches": [
     "tunis-mills-bridge-landing-md"
    ],
+   "water_id": "leeds-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "4fb589871ed5c0e7b9a290e60777d504759ae4497a9d12873ef3445049f69472",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2541,9 +3717,9 @@
     "Salisbury"
    ],
    "bbox": [
-    -75.56524,
-    38.42194,
-    -75.55012,
+    -75.565418,
+    38.421941,
+    -75.550119,
     38.4337
    ],
    "wikidata": null,
@@ -2552,6 +3728,15 @@
    "launches": [
     "leonards-mill-park-md"
    ],
+   "water_id": "leonard-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "4f0fba6086273c95c8c9a1c8af9d3dc11d1bf43d95205915f288d4d2983fc8f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2565,9 +3750,9 @@
    ],
    "bbox": [
     -76.95299,
-    39.37666,
-    -76.86261,
-    39.49848
+    39.376657,
+    -76.862615,
+    39.498475
    ],
    "wikidata": "Q6541929",
    "charted": false,
@@ -2575,6 +3760,15 @@
    "launches": [
     "liberty-reservoir-boat-launch-md"
    ],
+   "water_id": "liberty-reservoir-md",
+   "gnis_id": "585412",
+   "geometry_hash": "2202d8c722684d292f97ad9c5ebe9abd1d45a5750adeccf0c1d959afed35452e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2586,10 +3780,10 @@
     "Big Pool"
    ],
    "bbox": [
-    -78.08689,
-    39.64906,
-    -78.02519,
-    39.73035
+    -78.086893,
+    39.649061,
+    -78.025189,
+    39.730345
    ],
    "wikidata": "Q6543481",
    "charted": false,
@@ -2597,6 +3791,15 @@
    "launches": [
     "camp-harding-park-md"
    ],
+   "water_id": "licking-creek-md",
+   "gnis_id": "585415",
+   "geometry_hash": "4d516d1312abb160db3b2e75a76e59f4490e3026960edce992871dc4b73d6bc0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2608,10 +3811,10 @@
     "Crisfield"
    ],
    "bbox": [
-    -75.89993,
-    37.95006,
-    -75.84758,
-    38.00956
+    -75.899929,
+    37.950061,
+    -75.847581,
+    38.009559
    ],
    "wikidata": null,
    "charted": true,
@@ -2621,6 +3824,15 @@
     "somers-cove-md",
     "wellington-beach-and-park-md"
    ],
+   "water_id": "little-annemessex-river-md",
+   "gnis_id": null,
+   "geometry_hash": "b2b4809d2a346f88dbde7eb3b9cb1f0f56590bb2004dd18b7d0677e21f1707ea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2633,9 +3845,9 @@
    ],
    "bbox": [
     -76.09975,
-    38.42114,
-    -76.0333,
-    38.52179
+    38.421138,
+    -76.033296,
+    38.521791
    ],
    "wikidata": null,
    "charted": false,
@@ -2643,6 +3855,46 @@
    "launches": [
     "key-wallace-drive-soft-access-md",
     "little-blackwater-soft-access-md"
+   ],
+   "water_id": "little-blackwater-river-md",
+   "gnis_id": null,
+   "geometry_hash": "983d5e33deceb08455176a47a421c32dec1421e8a9cdd5ee0dc5879dea88e1ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-choptank-river-md",
+   "name": "Little Choptank River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Town Point Estates"
+   ],
+   "bbox": [
+    -76.366549,
+    38.519866,
+    -76.175321,
+    38.597056
+   ],
+   "wikidata": "Q6649557",
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "little-choptank-river-md",
+   "gnis_id": "585446",
+   "geometry_hash": "268ac7073181e9a7579cba694ffd9a16bc8377b0fe61c267e5a66367300e4baa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "town-point-estates-boat-launch-md"
    ],
    "advisories": []
   },
@@ -2655,10 +3907,10 @@
     "Chester"
    ],
    "bbox": [
-    -76.28591,
-    38.93527,
-    -76.27826,
-    38.94208
+    -76.285911,
+    38.935267,
+    -76.278264,
+    38.942079
    ],
    "wikidata": null,
    "charted": true,
@@ -2666,6 +3918,15 @@
    "launches": [
     "little-creek-landing-md"
    ],
+   "water_id": "little-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "405fb383c772840736c5ed7ba1c935cd1bf0a24ebdd7d35a0e7345b8aef5e8cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2677,10 +3938,10 @@
     "Elkton Landing"
    ],
    "bbox": [
-    -75.93239,
+    -75.932388,
     39.59321,
-    -75.84073,
-    39.75819
+    -75.840729,
+    39.758189
    ],
    "wikidata": null,
    "charted": true,
@@ -2688,6 +3949,15 @@
    "launches": [
     "little-elk-creek-boat-launch-md"
    ],
+   "water_id": "little-elk-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "4f248a49152f2eb95bb1fce34d1c375be124e436e21c48edfe05384ad0bbb0a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2699,10 +3969,10 @@
     "Queenstown"
    ],
    "bbox": [
-    -76.16535,
-    38.98577,
-    -76.15827,
-    38.99587
+    -76.165632,
+    38.985765,
+    -76.158011,
+    38.995866
    ],
    "wikidata": null,
    "charted": true,
@@ -2710,6 +3980,15 @@
    "launches": [
     "queenstown-dock-md"
    ],
+   "water_id": "little-queenstown-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "629ccbbfdad0c29ef6a7cc41477fae7d22dba2adcd67b6a8855820b924b315ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2721,10 +4000,10 @@
     "Boyds"
    ],
    "bbox": [
-    -77.31869,
-    39.18336,
-    -77.28364,
-    39.2095
+    -77.318692,
+    39.183356,
+    -77.283541,
+    39.209499
    ],
    "wikidata": "Q6651884",
    "charted": false,
@@ -2733,6 +4012,15 @@
     "black-hill-regional-park-boat-ramp-md",
     "black-hill-regional-park-soft-access-md"
    ],
+   "water_id": "little-seneca-lake-md",
+   "gnis_id": "588606",
+   "geometry_hash": "a9cd10a0d40ddc5de714ce42cf24e604c06a2d08da3de53d9f3d47462b25825e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2744,10 +4032,10 @@
     "Timonium"
    ],
    "bbox": [
-    -76.61957,
-    39.42792,
-    -76.53678,
-    39.49583
+    -76.619572,
+    39.427922,
+    -76.536776,
+    39.49598
    ],
    "wikidata": "Q6665000",
    "charted": false,
@@ -2755,6 +4043,15 @@
    "launches": [
     "loch-raven-fishing-center-md"
    ],
+   "water_id": "loch-raven-reservoir-md",
+   "gnis_id": "585530",
+   "geometry_hash": "ca56bbe312d1b3a8efdb925b7847a6677a47ff00389f8526373c93c998fc1750",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2767,9 +4064,9 @@
    ],
    "bbox": [
     -77.1392,
-    38.9644,
-    -77.13885,
-    38.96467
+    38.964401,
+    -77.138851,
+    38.964672
    ],
    "wikidata": "Q34864147",
    "charted": false,
@@ -2777,6 +4074,15 @@
    "launches": [
     "lock-7-boat-ramp-md"
    ],
+   "water_id": "lock-7-md",
+   "gnis_id": "1713174",
+   "geometry_hash": "989b7ab84acab0a8105ce7167940aa207bd5e049efde2683431f8c04b3050232",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2788,10 +4094,10 @@
     "Pasadena"
    ],
    "bbox": [
-    -76.44487,
-    39.11268,
-    -76.43962,
-    39.11934
+    -76.444869,
+    39.112681,
+    -76.439621,
+    39.119339
    ],
    "wikidata": null,
    "charted": true,
@@ -2799,6 +4105,15 @@
    "launches": [
     "downs-park-locust-cove-soft-access-md"
    ],
+   "water_id": "locust-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "8a1f6c004e56ed4635596d5a5d1fe674b1070567d9495ff60a7088bcf7d66912",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2816,6 +4131,15 @@
    "launches": [
     "madison-md"
    ],
+   "water_id": "madison-bay-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2837,10 +4161,10 @@
     "Tree Tops"
    ],
    "bbox": [
-    -76.59607,
-    39.04324,
-    -76.42198,
-    39.12031
+    -76.596074,
+    39.043222,
+    -76.421981,
+    39.120314
    ],
    "wikidata": "Q6732381",
    "charted": true,
@@ -2848,6 +4172,20 @@
    "launches": [
     "beachwood-park-md",
     "spriggs-farm-park-soft-access-md"
+   ],
+   "water_id": "magothy-river-md",
+   "gnis_id": "585660",
+   "geometry_hash": "27cfa97c79ee30fc34860e4ae2bdf0e8cfc95ddbfdd3c6dcf9618aa7a84ec404",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "magothy-river-boat-launch-near-eagle-hill-md",
+    "magothy-river-boat-launch-near-eagle-hill-md-2",
+    "magothy-river-boat-launch-near-tree-tops-md",
+    "oakleigh-forest-community-boat-ramp-md"
    ],
    "advisories": []
   },
@@ -2860,10 +4198,10 @@
     "Nanjemoy"
    ],
    "bbox": [
-    -77.27201,
-    38.46421,
+    -77.272012,
+    38.464206,
     -77.26512,
-    38.47796
+    38.477963
    ],
    "wikidata": "Q6744306",
    "charted": true,
@@ -2872,6 +4210,15 @@
     "mallows-bay-boat-ramp-md",
     "mallows-bay-soft-access-md"
    ],
+   "water_id": "mallows-bay-md",
+   "gnis_id": "585669",
+   "geometry_hash": "bab24945861ca3f00663eed335e617c0f7c72c3bce77f8530abab9ff8c2ab68b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2883,16 +4230,56 @@
     "Princess Anne"
    ],
    "bbox": [
-    -75.78974,
-    38.15012,
-    -75.69084,
-    38.21606
+    -75.789735,
+    38.150118,
+    -75.690835,
+    38.216057
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "manokin-river-park-soft-access-md"
+   ],
+   "water_id": "manokin-river-md",
+   "gnis_id": null,
+   "geometry_hash": "0e1b4ba8814a2b05844a3c7e9506543172a7a5ac47a2c0bc11d38f00427bcbf1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marley-creek-md",
+   "name": "Marley Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Glen Burnie"
+   ],
+   "bbox": [
+    -76.605942,
+    39.144349,
+    -76.577098,
+    39.188059
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.956,
+   "launches": [],
+   "water_id": "marley-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "db13bc13c4ce3bc84fe97ead97963eda31f3786ee1e8bec33c9e7e5e77b92d34",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "marley-creek-boat-launch-near-glen-burnie-md-3"
    ],
    "advisories": []
   },
@@ -2906,10 +4293,10 @@
     "Kent Narrows"
    ],
    "bbox": [
-    -76.24105,
-    38.94999,
-    -76.21312,
-    38.96536
+    -76.241051,
+    38.949994,
+    -76.213122,
+    38.965355
    ],
    "wikidata": null,
    "charted": true,
@@ -2917,6 +4304,15 @@
    "launches": [
     "chesapeake-bay-environmental-center-md"
    ],
+   "water_id": "marshy-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "a44d6718644fc7b85d92552b83e95c18816a6a86f0522baebd89df6f5f5bd479",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2929,10 +4325,10 @@
     "Federalsburg"
    ],
    "bbox": [
-    -75.8252,
+    -75.825266,
     38.524,
-    -75.75379,
-    38.71874
+    -75.753788,
+    38.71888
    ],
    "wikidata": "Q14692151",
    "charted": true,
@@ -2942,6 +4338,17 @@
     "northwest-fork-dock-park-md",
     "recreation-park-and-marina-boat-ramp-md",
     "recreation-park-and-marina-soft-access-md"
+   ],
+   "water_id": "marshyhope-creek-md",
+   "gnis_id": "582839",
+   "geometry_hash": "4b48d465f22407d0a798e1116ff39036b941e0eaaf87de6a3c973e03ac88fc11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "marshyhope-creek-boat-launch-near-brookview-md"
    ],
    "advisories": []
   },
@@ -2954,10 +4361,10 @@
     "Accokeek"
    ],
    "bbox": [
-    -77.11995,
-    38.57718,
-    -76.83059,
-    38.66485
+    -77.119947,
+    38.577179,
+    -76.830588,
+    38.664851
    ],
    "wikidata": null,
    "charted": false,
@@ -2965,6 +4372,15 @@
    "launches": [
     "mason-springs-soft-access-md"
    ],
+   "water_id": "mattawoman-creek-accokeek-md",
+   "gnis_id": null,
+   "geometry_hash": "78a75b83d4a3d02927c4c616cbb9587ccb4fb459c85e010a3dab7ef9259b7bb2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2977,9 +4393,9 @@
     "Marbury"
    ],
    "bbox": [
-    -77.22134,
+    -77.221339,
     38.55303,
-    -77.13303,
+    -77.133031,
     38.59699
    ],
    "wikidata": null,
@@ -2991,6 +4407,15 @@
     "smallwood-state-park-soft-access-md",
     "sweden-point-marina-smallwood-state-park-boat-ramps-md"
    ],
+   "water_id": "mattawoman-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "5632747d1e46ab48dde9284b75c969de8f713941d77a157f41af639f37f851ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3002,10 +4427,10 @@
     "Vienna"
    ],
    "bbox": [
-    -76.00548,
-    38.29971,
+    -76.005605,
+    38.299712,
     -75.99491,
-    38.30587
+    38.305871
    ],
    "wikidata": null,
    "charted": true,
@@ -3013,6 +4438,15 @@
    "launches": [
     "elliott-s-island-boat-ramp-mccready-s-md"
    ],
+   "water_id": "mccreadys-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "0911165b1fe57821a9cd82340127d242880db9ac5e1d0238c55def62518c4526",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3023,13 +4457,27 @@
    "towns": [
     "Leonardtown"
    ],
-   "bbox": null,
+   "bbox": [
+    -76.659056,
+    38.278421,
+    -76.589625,
+    38.363982
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "port-of-leonardtown-park-md"
    ],
+   "water_id": "mcintosh-run-md",
+   "gnis_id": "594819",
+   "geometry_hash": "ff3eca5a7556a34c8d8d06315b88136d201e9d8fd2d8f023fa7e264bc6980ed9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3041,9 +4489,9 @@
     "Annapolis"
    ],
    "bbox": [
-    -76.4065,
-    39.0087,
-    -76.40077,
+    -76.406502,
+    39.008704,
+    -76.400767,
     39.01567
    ],
    "wikidata": null,
@@ -3052,6 +4500,15 @@
    "launches": [
     "sandy-point-state-park-boat-ramps-md"
    ],
+   "water_id": "mezick-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "c57915e4263ecd35e3043921cfa451b5c3115f9f10a3e94d2b1236e32277a256",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3063,10 +4520,10 @@
     "Baltimore"
    ],
    "bbox": [
-    -76.63101,
-    39.25521,
-    -76.61526,
-    39.27411
+    -76.631007,
+    39.255205,
+    -76.615263,
+    39.274122
    ],
    "wikidata": null,
    "charted": true,
@@ -3076,6 +4533,15 @@
     "middle-branch-park-soft-access-east-md",
     "middle-branch-park-soft-access-west-md"
    ],
+   "water_id": "middle-branch-patapsco-river-md",
+   "gnis_id": null,
+   "geometry_hash": "ca95cba0e0f9bebad018ae0d890cade342a0ebb260ca40e79e28b6f8eb2ec16f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3087,10 +4553,10 @@
     "Middle River"
    ],
    "bbox": [
-    -76.44736,
-    39.29,
-    -76.38386,
-    39.3327
+    -76.447362,
+    39.289998,
+    -76.383864,
+    39.332701
    ],
    "wikidata": null,
    "charted": true,
@@ -3098,6 +4564,15 @@
    "launches": [
     "hawthorne-park-md"
    ],
+   "water_id": "middle-river-md",
+   "gnis_id": null,
+   "geometry_hash": "8c6ac7f27b55a69221889434be3c5e1d1b50ceb63ee3d58c6732b341be49d947",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3111,10 +4586,10 @@
     "St. Michaels"
    ],
    "bbox": [
-    -76.22562,
-    38.7533,
-    -76.09731,
-    38.8503
+    -76.225621,
+    38.753299,
+    -76.097313,
+    38.850304
    ],
    "wikidata": "Q6851527",
    "charted": true,
@@ -3125,6 +4600,15 @@
     "st-michaels-boat-ramp-south-md",
     "villa-road-landing-md"
    ],
+   "water_id": "miles-river-md",
+   "gnis_id": "585844",
+   "geometry_hash": "052d798521baa2d855ef9b99bf7f76ee066a6f6bd1f46de37ec6e94dfa6bce0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3136,10 +4620,10 @@
     "Perryville"
    ],
    "bbox": [
-    -76.05755,
-    39.54736,
-    -76.04484,
-    39.5571
+    -76.057552,
+    39.547365,
+    -76.044843,
+    39.557125
    ],
    "wikidata": null,
    "charted": true,
@@ -3147,6 +4631,15 @@
    "launches": [
     "perryville-community-park-soft-access-md"
    ],
+   "water_id": "mill-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "3aa8134e049b5adcdc9dc0116a130c2ab7d8f85eeed8e35f53bbdd868e12f9f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3158,10 +4651,10 @@
     "Centreville"
    ],
    "bbox": [
-    -76.07801,
-    39.01706,
+    -76.078013,
+    39.017055,
     -76.04841,
-    39.05642
+    39.056417
    ],
    "wikidata": null,
    "charted": true,
@@ -3169,6 +4662,46 @@
    "launches": [
     "centreville-landing-md",
     "centreville-wharf-and-soft-launch-md"
+   ],
+   "water_id": "mill-stream-branch-md",
+   "gnis_id": null,
+   "geometry_hash": "23aeb2b83c31aeeda0b20961e18619f8e28ad147fb607c5453b23cea93abc92d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "millburn-creek-md",
+   "name": "Millburn Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Dutchmans Cove"
+   ],
+   "bbox": [
+    -76.427519,
+    38.165991,
+    -76.424082,
+    38.172467
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.111,
+   "launches": [],
+   "water_id": "millburn-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "319d343fcf537ed37307c83ebd62d27a2b137cf0a159b980823e02a66734bf7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "millburn-creek-boat-launch-md"
    ],
    "advisories": []
   },
@@ -3181,16 +4714,56 @@
     "Salisbury"
    ],
    "bbox": [
-    -75.61339,
-    38.36409,
+    -75.613393,
+    38.364087,
     -75.61166,
-    38.36735
+    38.367346
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.019,
    "launches": [
     "waterside-community-park-md"
+   ],
+   "water_id": "mitchell-pond-3-md",
+   "gnis_id": null,
+   "geometry_hash": "b2d22dfd8eadf771eb73293bb40510c6d5e8545c631ddc47b64c49db162aafef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "molls-cove-md",
+   "name": "Molls Cove",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Saint Inigoes Shores"
+   ],
+   "bbox": [
+    -76.428674,
+    38.152435,
+    -76.421256,
+    38.158196
+   ],
+   "wikidata": "Q49385406",
+   "charted": true,
+   "area_km2": 0.132,
+   "launches": [],
+   "water_id": "molls-cove-md",
+   "gnis_id": "594835",
+   "geometry_hash": "948aebf9595d4c2a56dcafc9bc985179799e19a888d057ecaa1ee326ec699279",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "coast-guard-station-street-inigoes-md"
    ],
    "advisories": []
   },
@@ -3208,9 +4781,9 @@
     "Walkersville"
    ],
    "bbox": [
-    -77.45589,
-    39.22286,
-    -77.21455,
+    -77.455889,
+    39.222856,
+    -77.214554,
     39.71999
    ],
    "wikidata": "Q1118332",
@@ -3228,6 +4801,15 @@
     "riverside-park-md",
     "rocky-ridge-maryland-rt-77-bridge-md"
    ],
+   "water_id": "monocacy-river-md",
+   "gnis_id": "585931",
+   "geometry_hash": "5f2b4b8edf954446e81aa80d4c080afe0a90695316e61e37fdb1c4a742e62a48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3239,10 +4821,10 @@
     "Chestertown"
    ],
    "bbox": [
-    -76.04602,
-    39.22636,
-    -75.96061,
-    39.31161
+    -76.046018,
+    39.226362,
+    -75.960607,
+    39.311608
    ],
    "wikidata": null,
    "charted": true,
@@ -3250,6 +4832,46 @@
    "launches": [
     "morgnec-md",
     "riley-s-mill-md"
+   ],
+   "water_id": "morgan-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "ccc527424c1ef705ec65e9308adf1b3335e5b8e525ee8a0dc8d234d71e587a4b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-creek-md",
+   "name": "Muddy Creek",
+   "kind": "stream",
+   "state": "MD",
+   "towns": [
+    "Saint Pauls"
+   ],
+   "bbox": [
+    -76.806054,
+    39.696521,
+    -76.779445,
+    39.724734
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "muddy-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "535bbbc2299d5e0b8df965c16667ca1962489e3cf95f03d8553d8341203c1a4f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "muddy-creek-boat-launch-md"
    ],
    "advisories": []
   },
@@ -3261,13 +4883,27 @@
    "towns": [
     "Tyaskin"
    ],
-   "bbox": null,
+   "bbox": [
+    -75.863707,
+    38.262958,
+    -75.833876,
+    38.274979
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "ellis-bay-wildlife-management-area-md"
    ],
+   "water_id": "muddy-hole-creek-md",
+   "gnis_id": "586099",
+   "geometry_hash": "8a821bdf60a51129d75d8b25aadab862ab119b91591385552bceb932325b5d25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3285,6 +4921,15 @@
    "launches": [
     "myrtle-grove-wildlife-management-area-md"
    ],
+   "water_id": "myrtle-grove-lake-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3296,10 +4941,10 @@
     "Broomes Island"
    ],
    "bbox": [
-    -76.55447,
-    38.42225,
-    -76.54811,
-    38.42582
+    -76.554473,
+    38.422226,
+    -76.548114,
+    38.425822
    ],
    "wikidata": null,
    "charted": true,
@@ -3307,6 +4952,15 @@
    "launches": [
     "nan-s-cove-soft-access-md"
    ],
+   "water_id": "nan-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "96d495f9163a766adf0fb5be5e32bc5b1be9b7d9eebef8981fcde990621d2e78",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3318,10 +4972,10 @@
     "Nanjemoy"
    ],
    "bbox": [
-    -77.1979,
-    38.39314,
-    -77.11053,
-    38.4534
+    -77.197901,
+    38.393137,
+    -77.110532,
+    38.453531
    ],
    "wikidata": null,
    "charted": true,
@@ -3330,6 +4984,15 @@
     "friendship-landing-boat-ramp-md",
     "friendship-landing-soft-access-md"
    ],
+   "water_id": "nanjemoy-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "1e71c52ccb3903f4f445ebc2515fff86c01dd1f7947d4c220f3a3255bcce2f4c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3344,10 +5007,10 @@
     "Vienna"
    ],
    "bbox": [
-    -76.20319,
-    38.05895,
-    -75.58971,
-    38.64405
+    -76.203187,
+    38.058952,
+    -75.589709,
+    38.644051
    ],
    "wikidata": "Q2720679",
    "charted": true,
@@ -3364,6 +5027,18 @@
     "roaring-point-park-md",
     "vienna-waterfront-park-md"
    ],
+   "water_id": "nanticoke-river-de",
+   "gnis_id": "586142",
+   "geometry_hash": "0aa1dce1e6fe16fd235ae919baacd6a66eae900263c3b72d12e5436b46a90089",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "nanticoke-river-boat-launch-near-nanticoke-md-3",
+    "nanticoke-river-boat-launch-near-nanticoke-md-4"
+   ],
    "advisories": []
   },
   {
@@ -3376,9 +5051,9 @@
    ],
    "bbox": [
     -75.46764,
-    38.15949,
-    -75.42208,
-    38.20566
+    38.159486,
+    -75.422081,
+    38.205658
    ],
    "wikidata": null,
    "charted": false,
@@ -3386,6 +5061,15 @@
    "launches": [
     "red-house-road-bridge-md"
    ],
+   "water_id": "nassawango-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "d229cad2cbe4a04d6a20d405423c13203cf8f531ece9ae66dcc16ab9a0a920c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3398,10 +5082,10 @@
     "Newburg"
    ],
    "bbox": [
-    -76.88597,
-    38.27047,
-    -76.86558,
-    38.2819
+    -76.885969,
+    38.270471,
+    -76.865578,
+    38.282079
    ],
    "wikidata": "Q49386195",
    "charted": true,
@@ -3409,6 +5093,15 @@
    "launches": [
     "southern-park-and-pier-md"
    ],
+   "water_id": "neale-sound-md",
+   "gnis_id": "586152",
+   "geometry_hash": "0478401e107f002ac92912f7fdcceebea71fdf99854e8a721f76d4f5d8c74def",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3423,7 +5116,7 @@
     -79.12268,
     39.63277,
     -79.11924,
-    39.63704
+    39.637049
    ],
    "wikidata": null,
    "charted": false,
@@ -3431,6 +5124,15 @@
    "launches": [
     "new-germany-state-park-md"
    ],
+   "water_id": "new-germany-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "6d60c2b00431af21acc51c1ea106c1bf3cb76ae1c86b993ae933b6e2fbf6dfc2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3446,8 +5148,8 @@
    ],
    "bbox": [
     -79.49401,
-    39.20173,
-    -78.58694,
+    39.201731,
+    -78.586939,
     39.64869
    ],
    "wikidata": "Q14006686",
@@ -3462,6 +5164,15 @@
     "spring-gap-md",
     "westernport-soft-access-md"
    ],
+   "water_id": "north-branch-potomac-river-md",
+   "gnis_id": "586218",
+   "geometry_hash": "d2d143dbc8281f990a8b7ef6a165ed76f70d040908b356ec553d554b05be18d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3476,10 +5187,10 @@
     "Red Point"
    ],
    "bbox": [
-    -76.00712,
-    39.529,
-    -75.9434,
-    39.59931
+    -76.007125,
+    39.528998,
+    -75.943315,
+    39.599345
    ],
    "wikidata": "Q15262509",
    "charted": true,
@@ -3489,6 +5200,15 @@
     "charlestown-wharf-soft-access-md",
     "north-east-community-park-soft-access-md"
    ],
+   "water_id": "north-east-river-md",
+   "gnis_id": "586257",
+   "geometry_hash": "80eb2d618badb9e2037abf5df2d1e4297c9f2b125dc420ec2009f75ca281ed44",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3500,10 +5220,10 @@
     "Baltimore"
    ],
    "bbox": [
-    -76.61189,
-    39.25919,
-    -76.56873,
-    39.28662
+    -76.611885,
+    39.259194,
+    -76.568727,
+    39.286623
    ],
    "wikidata": null,
    "charted": true,
@@ -3512,6 +5232,15 @@
     "boston-street-pier-park-md",
     "canton-waterfront-park-md"
    ],
+   "water_id": "northwest-harbor-md",
+   "gnis_id": null,
+   "geometry_hash": "481cb47ba42d7f66f338e77fea49757e2d0282dbc6e2889fbc61ffc677002566",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [],
    "aliases": [
     "NW Harbor"
@@ -3527,9 +5256,9 @@
    ],
    "bbox": [
     -76.17984,
-    38.74228,
-    -76.16785,
-    38.75374
+    38.742279,
+    -76.167851,
+    38.753735
    ],
    "wikidata": null,
    "charted": false,
@@ -3537,6 +5266,46 @@
    "launches": [
     "oak-creek-landing-boat-ramp-md",
     "oak-creek-landing-soft-access-md"
+   ],
+   "water_id": "oak-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "2ab2caf3470321efc42a7a113c80cd8e6ddedf28f99474490caf8f9aaafb7ca2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oakland-cove-md",
+   "name": "Oakland Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Tall Timbers"
+   ],
+   "bbox": [
+    -76.515089,
+    38.161911,
+    -76.501731,
+    38.170019
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.221,
+   "launches": [],
+   "water_id": "oakland-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "6355dc1a9490aad6bf53779ca9e5ce195df6210c35cd01f5de7e15fa24201908",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "oakland-cove-boat-launch-md"
    ],
    "advisories": []
   },
@@ -3549,10 +5318,10 @@
     "Conowingo"
    ],
    "bbox": [
-    -76.15968,
-    39.65083,
-    -76.06263,
-    39.76557
+    -76.159684,
+    39.650833,
+    -76.062428,
+    39.765566
    ],
    "wikidata": "Q15263410",
    "charted": false,
@@ -3560,6 +5329,15 @@
    "launches": [
     "conowingo-park-md"
    ],
+   "water_id": "octoraro-creek-md",
+   "gnis_id": "586288",
+   "geometry_hash": "4d3a34a22c9da983954ad1a59874e9ef0bf86404425662b0110d48bef3e14bd5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3572,10 +5350,10 @@
     "Edgewood"
    ],
    "bbox": [
-    -76.28457,
+    -76.284569,
     39.43567,
-    -76.24966,
-    39.45106
+    -76.249662,
+    39.451056
    ],
    "wikidata": null,
    "charted": true,
@@ -3586,6 +5364,15 @@
     "otter-point-creek-soft-access-md",
     "otter-point-landing-boat-ramp-md"
    ],
+   "water_id": "otter-point-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "65c79a3dd21d8038bbc9008a4ee37e41036a0cf44385036e79bb7c1a7aaf526b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3597,10 +5384,10 @@
     "Shady Side"
    ],
    "bbox": [
-    -76.51468,
-    38.84175,
-    -76.50084,
-    38.84756
+    -76.514679,
+    38.841751,
+    -76.500841,
+    38.847559
    ],
    "wikidata": null,
    "charted": true,
@@ -3610,6 +5397,15 @@
     "discovery-village-soft-access-md",
     "shady-side-park-soft-access-md"
    ],
+   "water_id": "parish-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "35434b59dab8bc4b3c5957484461df40b7618b6ef725deba1650d8167d1446e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3621,9 +5417,9 @@
     "Eden"
    ],
    "bbox": [
-    -75.6876,
-    38.28538,
-    -75.62287,
+    -75.687603,
+    38.285377,
+    -75.622874,
     38.30273
    ],
    "wikidata": null,
@@ -3632,6 +5428,15 @@
    "launches": [
     "douglas-nichols-park-md"
    ],
+   "water_id": "passerdyke-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "b2f9c35d7c648b83d62dec1496fa3fb3df1b239a8723586462ceed734231b996",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3651,10 +5456,10 @@
     "Turner Station"
    ],
    "bbox": [
-    -76.88244,
-    39.14311,
-    -76.32477,
-    39.34992
+    -76.882437,
+    39.143109,
+    -76.324768,
+    39.349973
    ],
    "wikidata": "Q2748733",
    "charted": true,
@@ -3671,6 +5476,15 @@
     "southwest-area-park-md",
     "turner-station-park-md"
    ],
+   "water_id": "patapsco-river-md",
+   "gnis_id": "597875",
+   "geometry_hash": "cdb06a4009c82e3b53185705e1bb217ae8daf7d615d329ebe1e0f9ec3969e040",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3694,9 +5508,9 @@
    ],
    "bbox": [
     -77.18696,
-    38.29162,
-    -76.29807,
-    39.347
+    38.291622,
+    -76.298075,
+    39.347002
    ],
    "wikidata": "Q432641",
    "charted": true,
@@ -3708,6 +5522,7 @@
     "davidsonville-park-soft-access-md",
     "governor-bridge-natural-area-gardner-canoe-launch-md",
     "greenwell-state-park-md",
+    "patuxent-river-carry-in-access-md",
     "hallowing-point-boat-ramps-md",
     "hallowing-point-soft-access-md",
     "jackson-s-landing-boat-ramp-md",
@@ -3717,7 +5532,6 @@
     "kings-landing-park-md",
     "lower-marlboro-wharf-soft-access-md",
     "myrtle-point-park-soft-launch-md",
-    "patuxent-river-carry-in-access-md",
     "patuxent-river-wetlands-park-wayson-s-canoe-kayak-md",
     "patuxent-riverkeeper-center-in-nottingham-md",
     "queen-anne-canoe-launch-md",
@@ -3726,6 +5540,46 @@
     "solomons-boat-ramps-md",
     "solomons-soft-access-md",
     "wooten-s-landing-soft-access-md"
+   ],
+   "water_id": "patuxent-river-md",
+   "gnis_id": "597880",
+   "geometry_hash": "75a78cb7e6fa2b4db04a8d91aa680a14725a7330e86f3b63d70953d924698fa6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "phillips-creek-md",
+   "name": "Phillips Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -76.228552,
+    38.563452,
+    -76.216235,
+    38.587998
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "phillips-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "c327d43a7cdb3273cedf42e810f240cd20e68ba4896cbc3fb06a9bfb6559ac98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "phillips-creek-boat-launch-md"
    ],
    "advisories": []
   },
@@ -3738,10 +5592,10 @@
     "Easton"
    ],
    "bbox": [
-    -76.1264,
+    -76.126403,
     38.85727,
-    -76.10421,
-    38.87521
+    -76.104205,
+    38.875214
    ],
    "wikidata": null,
    "charted": true,
@@ -3749,6 +5603,15 @@
    "launches": [
     "pickering-creek-audubon-center-md"
    ],
+   "water_id": "pickering-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "84c7207f3fc5dcf15ddb001d9ff0aed6c92b90756054fa405a5bbbe60cadfece",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3760,10 +5623,10 @@
     "Piney Point"
    ],
    "bbox": [
-    -76.53177,
-    38.13673,
-    -76.51564,
-    38.14556
+    -76.531769,
+    38.136731,
+    -76.515644,
+    38.145739
    ],
    "wikidata": null,
    "charted": true,
@@ -3771,6 +5634,15 @@
    "launches": [
     "piney-point-museum-soft-access-md"
    ],
+   "water_id": "piney-point-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "d2e7d18893bcfb3221b8e4878abd3c9c1bc68189e6eaec4298cb5b60b7e11c39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3782,10 +5654,10 @@
     "Sykesville"
    ],
    "bbox": [
-    -76.99612,
-    39.3851,
-    -76.97443,
-    39.4091
+    -76.996119,
+    39.385102,
+    -76.974435,
+    39.409105
    ],
    "wikidata": null,
    "charted": false,
@@ -3794,6 +5666,15 @@
     "piney-run-park-boat-ramps-md",
     "piney-run-park-soft-access-md"
    ],
+   "water_id": "piney-run-reservoir-md",
+   "gnis_id": null,
+   "geometry_hash": "ee31ab794261b5af0a7b3c45d540f703cc749debd0b77623e8633be90ae1dce8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3806,10 +5687,10 @@
     "Fort Washington"
    ],
    "bbox": [
-    -77.04509,
-    38.69141,
-    -76.8379,
-    38.79353
+    -77.045087,
+    38.691411,
+    -76.837896,
+    38.793533
    ],
    "wikidata": null,
    "charted": true,
@@ -3817,6 +5698,47 @@
    "launches": [
     "fort-washington-marina-md",
     "piscataway-park-farmington-landing-md"
+   ],
+   "water_id": "piscataway-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "0729b492a5b03abe0b144bd748bd3988430209876b60ffee219d1fd7c0c771fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "plum-point-creek-md",
+   "name": "Plum Point Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Plum Point"
+   ],
+   "bbox": [
+    -76.521279,
+    38.612026,
+    -76.514531,
+    38.616231
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.04,
+   "launches": [],
+   "water_id": "plum-point-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "281d7590e5c5364b6812ce22e99902b9d6123349d790ec0316ecae1feeb7f2aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "breezy-point-marina-md",
+    "breezy-point-marina-plum-point-md"
    ],
    "advisories": []
   },
@@ -3833,10 +5755,10 @@
     "Snow Hill"
    ],
    "bbox": [
-    -76.14761,
-    37.89667,
-    -75.30857,
-    38.45926
+    -76.147614,
+    37.896666,
+    -75.308475,
+    38.459259
    ],
    "wikidata": null,
    "charted": true,
@@ -3856,6 +5778,15 @@
     "sturgis-park-soft-access-md",
     "winter-quarters-landing-md"
    ],
+   "water_id": "pocomoke-river-md",
+   "gnis_id": null,
+   "geometry_hash": "25d1fd09d39c4322087654e70f21ef99d5648bb634bc313b65c67a6d67e468f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3868,9 +5799,9 @@
    ],
    "bbox": [
     -75.9054,
-    37.73386,
+    37.733857,
     -75.62853,
-    37.98917
+    37.989173
    ],
    "wikidata": "Q7206510",
    "charted": true,
@@ -3878,6 +5809,15 @@
    "launches": [
     "rumbly-point-md"
    ],
+   "water_id": "pocomoke-sound-md",
+   "gnis_id": "586619",
+   "geometry_hash": "61d7ef3aa92fb06a33c103ee6a3556462f5f2dec85d6008dc65cd453855f397c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3889,10 +5829,10 @@
     "Vienna"
    ],
    "bbox": [
-    -75.94186,
-    38.34735,
-    -75.89952,
-    38.36395
+    -75.941856,
+    38.347352,
+    -75.899486,
+    38.363949
    ],
    "wikidata": null,
    "charted": false,
@@ -3900,6 +5840,15 @@
    "launches": [
     "green-s-island-md"
    ],
+   "water_id": "pokata-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "e1bb2da1dc507d53bb160031bf76891c439faebe5da5862b9a9f284b6a558545",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3911,9 +5860,9 @@
     "Port Tobacco"
    ],
    "bbox": [
-    -77.03855,
-    38.39711,
-    -77.00661,
+    -77.038555,
+    38.397106,
+    -77.006607,
     38.51492
    ],
    "wikidata": null,
@@ -3922,6 +5871,15 @@
    "launches": [
     "chapel-point-state-park-md"
    ],
+   "water_id": "port-tobacco-river-md",
+   "gnis_id": null,
+   "geometry_hash": "9da8367d6dcfa4a12e592e86b840c2361be9f5922c61bbaadbdbf5ac6836fbaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3944,10 +5902,10 @@
     "Hancock"
    ],
    "bbox": [
-    -78.58694,
-    37.87065,
-    -76.16186,
-    39.69715
+    -78.586939,
+    37.870653,
+    -76.161862,
+    39.697154
    ],
    "wikidata": "Q179444",
    "charted": true,
@@ -3970,6 +5928,7 @@
     "fort-frederick-state-park-soft-launch-md",
     "four-locks-md",
     "lime-kiln-md",
+    "potomac-river-boat-launch-near-antietam-md",
     "little-tonoloway-hancock-md",
     "lock-29-lander-md",
     "lock-33-east-md",
@@ -3980,11 +5939,10 @@
     "mccoys-ferry-md",
     "mcmahons-mill-md",
     "noland-s-ferry-md",
+    "potomac-river-boat-launch-near-sharpsburg-md",
     "point-of-rocks-md",
-    "potomac-river-boat-launch-near-antietam-md",
     "potomac-river-boat-launch-near-potomac-woodlands-md",
     "potomac-river-boat-launch-near-sandy-hook-md",
-    "potomac-river-boat-launch-near-sharpsburg-md",
     "snyders-landing-md",
     "st-clement-s-island-museum-md",
     "st-clement-s-island-state-park-md",
@@ -3993,6 +5951,17 @@
     "taylors-landing-east-md",
     "taylors-landing-west-md",
     "whites-ferry-md"
+   ],
+   "water_id": "potomac-river-md",
+   "gnis_id": "597915",
+   "geometry_hash": "d2ad01f377d7cec780f232a94073693afee333d4f242f1759d7aa271d2e72ef6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "potomac-river-boat-launch-near-poolesville-md-2"
    ],
    "advisories": []
   },
@@ -4005,10 +5974,10 @@
     "Sharpsburg"
    ],
    "bbox": [
-    -77.84772,
-    39.49326,
-    -77.82663,
-    39.51245
+    -77.847717,
+    39.493262,
+    -77.826626,
+    39.512445
    ],
    "wikidata": "Q34915864",
    "charted": false,
@@ -4017,6 +5986,15 @@
     "big-slackwater-md",
     "dam-4-md"
    ],
+   "water_id": "potomac-river-reservoir-md",
+   "gnis_id": "594363",
+   "geometry_hash": "a617db4953cf959e09976213ab87960459264a00de68d468c10d1e9b491d3030",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4028,10 +6006,10 @@
     "Williamsport"
    ],
    "bbox": [
-    -77.83196,
-    39.59497,
+    -77.831956,
+    39.594965,
     -77.82808,
-    39.60202
+    39.602018
    ],
    "wikidata": null,
    "charted": false,
@@ -4039,6 +6017,15 @@
    "launches": [
     "williamsport-md"
    ],
+   "water_id": "potomac-river-reservoir-williamsport-md",
+   "gnis_id": null,
+   "geometry_hash": "e4d5378a5c1de42ac68ad0391d78b5f8f77152826aad9786f346dcdd455f9302",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4050,10 +6037,10 @@
     "Hampstead"
    ],
    "bbox": [
-    -76.77815,
-    39.61552,
-    -76.70688,
-    39.68292
+    -76.778146,
+    39.615522,
+    -76.706878,
+    39.682922
    ],
    "wikidata": "Q7242310",
    "charted": false,
@@ -4061,6 +6048,15 @@
    "launches": [
     "prettyboy-reservoir-boat-launch-md"
    ],
+   "water_id": "prettyboy-reservoir-md",
+   "gnis_id": "586703",
+   "geometry_hash": "10a97253cc00030ce6e7506cb8fa07cad8ea6eb9e90fca379befc32677e3f2bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4073,10 +6069,10 @@
     "Kent Narrows"
    ],
    "bbox": [
-    -76.26312,
-    38.92439,
-    -76.2282,
-    38.97112
+    -76.263119,
+    38.924389,
+    -76.228204,
+    38.971124
    ],
    "wikidata": null,
    "charted": true,
@@ -4084,6 +6080,15 @@
    "launches": [
     "kent-narrows-landing-md"
    ],
+   "water_id": "prospect-bay-md",
+   "gnis_id": null,
+   "geometry_hash": "8729935636da4782af2ca29585372957272d7ae08d1e53dc7678d5e22ff2f010",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4095,10 +6100,10 @@
     "Elliott"
    ],
    "bbox": [
-    -76.10022,
-    38.35011,
-    -76.04352,
-    38.36537
+    -76.100224,
+    38.350111,
+    -76.043517,
+    38.365366
    ],
    "wikidata": null,
    "charted": false,
@@ -4106,6 +6111,15 @@
    "launches": [
     "liner-s-road-boat-ramp-md"
    ],
+   "water_id": "raccoon-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "c317adbab1b40cb98512a231377a001e21917562b6fbbb9402096eaa4c9b07f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4117,10 +6131,10 @@
     "Queen Anne"
    ],
    "bbox": [
-    -75.9453,
-    38.9669,
-    -75.94006,
-    38.96978
+    -75.945297,
+    38.966902,
+    -75.940061,
+    38.969777
    ],
    "wikidata": null,
    "charted": false,
@@ -4130,6 +6144,15 @@
     "tuckahoe-state-park-soft-access-east-md",
     "tuckahoe-state-park-soft-access-west-md"
    ],
+   "water_id": "recreation-lake-one-md",
+   "gnis_id": null,
+   "geometry_hash": "65f6b1646e40b5cb90e6d8618de05aa41423c572885a41c0b1507e1df9579cfc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4142,10 +6165,10 @@
     "Mayo"
    ],
    "bbox": [
-    -76.56276,
-    38.86301,
-    -76.51022,
-    38.90356
+    -76.562763,
+    38.863011,
+    -76.510178,
+    38.903561
    ],
    "wikidata": null,
    "charted": true,
@@ -4154,6 +6177,15 @@
     "carr-s-wharf-md",
     "rhode-river-boat-launch-near-mayo-md-2"
    ],
+   "water_id": "rhode-river-md",
+   "gnis_id": null,
+   "geometry_hash": "6052ddef8c269e6afc1d38fca898917829bec79e4d097b6b91468e0ee2d4a087",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4165,10 +6197,10 @@
     "Rock Hall"
    ],
    "bbox": [
-    -76.25037,
-    39.13008,
-    -76.23929,
-    39.13539
+    -76.250371,
+    39.130083,
+    -76.239294,
+    39.135393
    ],
    "wikidata": null,
    "charted": true,
@@ -4177,6 +6209,18 @@
     "bayside-landing-park-md",
     "green-lane-md",
     "sharp-street-md"
+   ],
+   "water_id": "rock-hall-harbor-md",
+   "gnis_id": null,
+   "geometry_hash": "7db1848e28aaa42de7700e4f154426b1d807b2b086fb4590b57d3baf27f17185",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "rock-hall-harbor-boat-launch-near-rock-hall-md",
+    "rock-hall-harbor-boat-launch-near-rock-hall-md-2"
    ],
    "advisories": []
   },
@@ -4190,10 +6234,10 @@
     "Silver Spring"
    ],
    "bbox": [
-    -76.96434,
-    39.11532,
-    -76.87376,
-    39.14738
+    -76.964339,
+    39.115322,
+    -76.873762,
+    39.147376
    ],
    "wikidata": "Q7350741",
    "charted": false,
@@ -4203,6 +6247,15 @@
     "scott-s-cove-recreation-area-md",
     "supplee-lane-recreation-area-md"
    ],
+   "water_id": "rocky-gorge-reservoir-md",
+   "gnis_id": "597978",
+   "geometry_hash": "b98918fbd40776c1b4f51dff79d679025ebd23278ea807877d6f615a6914b66a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4214,10 +6267,10 @@
     "Avenue"
    ],
    "bbox": [
-    -76.80079,
-    38.23228,
-    -76.77525,
-    38.25159
+    -76.800789,
+    38.232283,
+    -76.775248,
+    38.251629
    ],
    "wikidata": null,
    "charted": true,
@@ -4225,6 +6278,15 @@
    "launches": [
     "river-springs-landing-md"
    ],
+   "water_id": "saint-catherine-sound-md",
+   "gnis_id": null,
+   "geometry_hash": "9a1ab0e776238ae72218c992c6b3011c6f37a85abb7c021d56f6e5d1e4cdb1fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4242,6 +6304,15 @@
    "launches": [
     "saint-celments-bay-boat-launch-md"
    ],
+   "water_id": "saint-celments-bay-md",
+   "gnis_id": "594564",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4253,10 +6324,10 @@
     "Compton"
    ],
    "bbox": [
-    -76.74984,
-    38.23681,
-    -76.69869,
-    38.31747
+    -76.749839,
+    38.236811,
+    -76.698692,
+    38.317479
    ],
    "wikidata": null,
    "charted": true,
@@ -4264,6 +6335,15 @@
    "launches": [
     "newtowne-neck-state-park-paddle-in-campsite-west-md"
    ],
+   "water_id": "saint-clements-bay-md",
+   "gnis_id": null,
+   "geometry_hash": "6a749663fce32e6c9c23077ba70dd647b0f8fb64f5a9540a66f3c8e926803b86",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4275,10 +6355,10 @@
     "Piney Point"
    ],
    "bbox": [
-    -76.52661,
-    38.11811,
-    -76.46623,
-    38.17176
+    -76.526606,
+    38.118113,
+    -76.466231,
+    38.171759
    ],
    "wikidata": null,
    "charted": true,
@@ -4286,6 +6366,15 @@
    "launches": [
     "piney-point-recreation-area-md"
    ],
+   "water_id": "saint-george-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "937ea344d50bd470d95a70c3a16b472a4207a754af620badbd18c1b049ed47b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4298,16 +6387,27 @@
     "Ocean Pines"
    ],
    "bbox": [
-    -75.20277,
-    38.38902,
-    -75.10856,
-    38.44428
+    -75.202767,
+    38.389017,
+    -75.108561,
+    38.444277
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 7.716,
    "launches": [
     "shell-mill-landing-md"
+   ],
+   "water_id": "saint-martin-river-md",
+   "gnis_id": null,
+   "geometry_hash": "55932a753a25e130e44b198eb0e78739e5c1f6a82e0034a947f31aa0e1b81df7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "white-horse-park-boat-launch-md"
    ],
    "advisories": []
   },
@@ -4320,10 +6420,10 @@
     "Leonardtown"
    ],
    "bbox": [
-    -76.56147,
-    38.25041,
-    -76.53255,
-    38.2637
+    -76.561471,
+    38.250405,
+    -76.532554,
+    38.263704
    ],
    "wikidata": null,
    "charted": false,
@@ -4331,6 +6431,15 @@
    "launches": [
     "st-mary-s-lake-md"
    ],
+   "water_id": "saint-mary-s-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "95d22b143e503f871de5a1a2d5d5b4e1167f94857473b04fc22e2441514eae65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4350,10 +6459,10 @@
     "Mount Harmon"
    ],
    "bbox": [
-    -76.11029,
-    39.34587,
-    -75.75951,
-    39.39487
+    -76.110295,
+    39.345875,
+    -75.759507,
+    39.394874
    ],
    "wikidata": null,
    "charted": true,
@@ -4363,6 +6472,15 @@
     "foxhole-landing-md",
     "fredericktown-boat-ramp-md"
    ],
+   "water_id": "sassafras-river-md",
+   "gnis_id": null,
+   "geometry_hash": "b79e00b3a1f8361a7ca6ae02d89f82427a388e164a0fe12120dd67a8d0be195f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4375,10 +6493,10 @@
     "Swanton"
    ],
    "bbox": [
-    -79.15459,
-    39.50578,
-    -79.13125,
-    39.54424
+    -79.154589,
+    39.505782,
+    -79.131252,
+    39.544241
    ],
    "wikidata": "Q7361749",
    "charted": false,
@@ -4387,6 +6505,15 @@
     "big-run-state-park-boat-ramp-md",
     "dry-run-boat-ramp-md"
    ],
+   "water_id": "savage-river-reservoir-md",
+   "gnis_id": "587227",
+   "geometry_hash": "a6fe1505ac63debe8c8d0d046b6581bd34303ac4c9e72a0a34f7cade2cabcffe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4398,10 +6525,10 @@
     "Ulmstead Estates"
    ],
    "bbox": [
-    -76.48031,
-    39.05948,
-    -76.47825,
-    39.06159
+    -76.480309,
+    39.059481,
+    -76.478251,
+    39.061589
    ],
    "wikidata": null,
    "charted": true,
@@ -4409,6 +6536,15 @@
    "launches": [
     "scheides-cove-carry-in-access-md"
    ],
+   "water_id": "scheides-cove-md",
+   "gnis_id": null,
+   "geometry_hash": "f76932e5862dffc4a5265685d8ae0909b75091d1f42c0c11858bcf2c1fbf2b6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4420,10 +6556,10 @@
     "Salisbury"
    ],
    "bbox": [
-    -75.57274,
+    -75.572741,
     38.34547,
-    -75.55814,
-    38.35295
+    -75.558136,
+    38.353121
    ],
    "wikidata": "Q34922313",
    "charted": false,
@@ -4431,6 +6567,15 @@
    "launches": [
     "schumaker-park-soft-access-md"
    ],
+   "water_id": "schumaker-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "d058cb2e721f95bc654e7341390dd1c98faaf037e8fb1e8c3600ec742a2bbc89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4445,8 +6590,8 @@
    ],
    "bbox": [
     -77.34351,
-    39.06532,
-    -77.32932,
+    39.065316,
+    -77.329323,
     39.14383
    ],
    "wikidata": "Q7450289",
@@ -4458,6 +6603,15 @@
     "seneca-creek-landing-soft-access-md",
     "seneca-creek-state-park-rt-28-parking-lot-creek-access-md"
    ],
+   "water_id": "seneca-creek-md",
+   "gnis_id": "587271",
+   "geometry_hash": "792b34d7897efb99091a4854bc104a7698d6ee2613032829f6f651b29e9a5c43",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4480,10 +6634,10 @@
     "Winchester-on-the-Severn"
    ],
    "bbox": [
-    -76.61858,
-    38.94048,
-    -76.45425,
-    39.08417
+    -76.618579,
+    38.940475,
+    -76.454247,
+    39.084169
    ],
    "wikidata": "Q4321264",
    "charted": true,
@@ -4493,6 +6647,19 @@
     "jonas-green-park-md",
     "severn-avenue-pocket-park-md",
     "severn-river-boat-launch-near-arden-on-the-severn-md-2"
+   ],
+   "water_id": "severn-river-md",
+   "gnis_id": "587285",
+   "geometry_hash": "b5243c4ad7447763b606064446a5db1dbb862ed99591ec4ad9d103c4eff31c11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "severn-river-boat-launch-near-arnold-md",
+    "severn-river-boat-launch-near-epping-forest-md",
+    "severn-river-boat-launch-near-severn-grove-md"
    ],
    "advisories": []
   },
@@ -4505,10 +6672,10 @@
     "Stevensville"
    ],
    "bbox": [
-    -76.3488,
-    38.9058,
-    -76.32368,
-    38.92934
+    -76.348799,
+    38.905781,
+    -76.323676,
+    38.929339
    ],
    "wikidata": null,
    "charted": true,
@@ -4516,6 +6683,15 @@
    "launches": [
     "shipping-creek-landing-md"
    ],
+   "water_id": "shipping-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "c46673dfdffd0330b913af715cc6ca7355d4a8100a24ed1d5602227a0f097562",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4527,10 +6703,10 @@
     "Rock Hall"
    ],
    "bbox": [
-    -76.19685,
-    39.15729,
-    -76.1829,
-    39.18995
+    -76.196846,
+    39.157288,
+    -76.182896,
+    39.189952
    ],
    "wikidata": null,
    "charted": false,
@@ -4538,6 +6714,15 @@
    "launches": [
     "shipyard-landing-md"
    ],
+   "water_id": "shipyard-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "10e006b253374354346bf02aa2ef3a39f24d87b24bbc84f26455df078faec603",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4552,9 +6737,9 @@
     "Snug Harbor"
    ],
    "bbox": [
-    -75.1925,
-    38.18365,
-    -75.09701,
+    -75.192502,
+    38.183654,
+    -75.097006,
     38.32646
    ],
    "wikidata": "Q7522421",
@@ -4567,6 +6752,15 @@
     "south-point-md",
     "west-ocean-city-md"
    ],
+   "water_id": "sinepuxent-bay-md",
+   "gnis_id": "587375",
+   "geometry_hash": "ca62703157b6f8be25e24ba74c43c7fee7b1384abb3e9c13bd2956b4914872b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4578,10 +6772,10 @@
     "Cordova"
    ],
    "bbox": [
-    -76.10189,
-    38.88142,
-    -76.06165,
-    38.89293
+    -76.101886,
+    38.881357,
+    -76.061654,
+    38.892933
    ],
    "wikidata": null,
    "charted": true,
@@ -4589,6 +6783,15 @@
    "launches": [
     "skipton-creek-landing-md"
    ],
+   "water_id": "skipton-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "e589ca0e338dee660daa3f43dd6f616b8455bf31889da15c2585b798cf36fa09",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4600,10 +6803,10 @@
     "St. Ingoes"
    ],
    "bbox": [
-    -76.42005,
-    38.10699,
+    -76.420055,
+    38.106993,
     -76.40248,
-    38.14301
+    38.143009
    ],
    "wikidata": "Q49392337",
    "charted": true,
@@ -4612,6 +6815,15 @@
     "st-inigoes-landing-md",
     "st-inigoes-soft-access-md"
    ],
+   "water_id": "smith-creek-md",
+   "gnis_id": "594959",
+   "geometry_hash": "f9bbf498120f44321f2459ee6db144410c41dedd427beb42325253d9a4fc3011",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4623,16 +6835,124 @@
     "Federalsburg"
    ],
    "bbox": [
-    -75.7382,
-    38.77384,
-    -75.72879,
-    38.78865
+    -75.738205,
+    38.773819,
+    -75.728793,
+    38.788646
    ],
    "wikidata": "Q34924423",
    "charted": false,
    "area_km2": 0.174,
    "launches": [
     "smithville-lake-boat-launch-md"
+   ],
+   "water_id": "smithville-lake-md",
+   "gnis_id": "587405",
+   "geometry_hash": "0397a53d83b4522ff9494b03a46eec852f24c1c6667bcdc5b69496d742aa2dbb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-branch-md",
+   "name": "South Branch",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Church Creek",
+    "Paw Paw Acres"
+   ],
+   "bbox": [
+    -76.146537,
+    38.517572,
+    -76.141296,
+    38.533695
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.27,
+   "launches": [],
+   "water_id": "south-branch-md",
+   "gnis_id": null,
+   "geometry_hash": "aeeed3be40a0ae63641a6676fe783c3767749987a6e68f61cf1794a6e8ddd41b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "south-branch-boat-launch-near-church-creek-md",
+    "south-branch-boat-launch-near-church-creek-md-2",
+    "south-branch-boat-launch-near-paw-paw-acres-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-river-md",
+   "name": "South River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Annapolis Neck",
+    "Glen Isle"
+   ],
+   "bbox": [
+    -76.613857,
+    38.876201,
+    -76.395836,
+    38.986123
+   ],
+   "wikidata": "Q7568320",
+   "charted": true,
+   "area_km2": 23.124,
+   "launches": [],
+   "water_id": "south-river-md",
+   "gnis_id": "587470",
+   "geometry_hash": "c7c0e88106609509048772c9598a0eb3fdbba771f112de15034d23b77412b27a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "south-river-boat-launch-near-glen-isle-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "southeast-branch-md",
+   "name": "Southeast Branch",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Church Creek",
+    "Paw Paw Acres"
+   ],
+   "bbox": [
+    -76.143799,
+    38.524191,
+    -76.118259,
+    38.532861
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.281,
+   "launches": [],
+   "water_id": "southeast-branch-md",
+   "gnis_id": null,
+   "geometry_hash": "7c058b137dc6e702ac4f2517f74c350eb30544b848d86973ab61351487379cba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "southeast-branch-boat-launch-near-church-creek-md",
+    "southeast-branch-boat-launch-near-paw-paw-acres-md"
    ],
    "advisories": []
   },
@@ -4645,10 +6965,10 @@
     "Church Hill"
    ],
    "bbox": [
-    -76.05034,
-    39.1318,
-    -75.97615,
-    39.16306
+    -76.050337,
+    39.131754,
+    -75.976147,
+    39.163065
    ],
    "wikidata": null,
    "charted": true,
@@ -4656,6 +6976,15 @@
    "launches": [
     "southeast-creek-landing-md"
    ],
+   "water_id": "southeast-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "2ff8cccecba0c6febccce1b99e4c7e346ab89f4910db1347ea94c5d242fc54cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4668,10 +6997,10 @@
     "Eastport"
    ],
    "bbox": [
-    -76.50713,
-    38.9652,
-    -76.48005,
-    38.97773
+    -76.507133,
+    38.965205,
+    -76.480051,
+    38.977729
    ],
    "wikidata": "Q35327687",
    "charted": true,
@@ -4689,6 +7018,15 @@
     "thompson-street-park-md",
     "truxtun-park-md"
    ],
+   "water_id": "spa-creek-md",
+   "gnis_id": "591731",
+   "geometry_hash": "8a52c158c56a666d9438262a24cf4442e1c592c05d97f8a88406229bb8077e57",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4700,10 +7038,10 @@
     "Great Mills"
    ],
    "bbox": [
-    -76.55095,
-    38.23082,
-    -76.49066,
-    38.32253
+    -76.550947,
+    38.230589,
+    -76.490656,
+    38.322533
    ],
    "wikidata": null,
    "charted": false,
@@ -4711,6 +7049,15 @@
    "launches": [
     "great-mills-canoe-kayak-launch-md"
    ],
+   "water_id": "st-marys-river-md",
+   "gnis_id": null,
+   "geometry_hash": "a7579fc2f020797866017485dd4e1e0745044e200b6e6352a2cfda9bfb71fc27",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4722,10 +7069,10 @@
     "Pocomoke City"
    ],
    "bbox": [
-    -75.56781,
-    38.07922,
-    -75.56564,
-    38.08166
+    -75.567808,
+    38.079127,
+    -75.565644,
+    38.081657
    ],
    "wikidata": null,
    "charted": false,
@@ -4733,6 +7080,15 @@
    "launches": [
     "stevenson-pond-soft-access-md"
    ],
+   "water_id": "stevenson-s-pond-md",
+   "gnis_id": null,
+   "geometry_hash": "b5fcfee59a1871be9bcd3f403d36e99739c3d3c8ba58b2b47f9891f3a557e98b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4745,16 +7101,58 @@
     "Worton"
    ],
    "bbox": [
-    -76.13234,
+    -76.132341,
     39.31757,
-    -76.0852,
-    39.33427
+    -76.085205,
+    39.334394
    ],
    "wikidata": "Q35390083",
    "charted": true,
    "area_km2": 1.9,
    "launches": [
     "still-pond-station-park-md"
+   ],
+   "water_id": "still-pond-creek-md",
+   "gnis_id": "587559",
+   "geometry_hash": "5084c31052512618d3bdeef65f586bff3eaf177b617e1da0ebed643b3db125f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "still-pond-creek-boat-launch-near-kinnairds-point-md-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stone-lake-md",
+   "name": "Stone Lake",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Savage"
+   ],
+   "bbox": [
+    -76.841946,
+    39.138011,
+    -76.836979,
+    39.141484
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.102,
+   "launches": [],
+   "water_id": "stone-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "73751dda26d9cf0c56d5bc3c6617e2447ce9760d92e720cc283d96160eebad41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "stone-lake-boat-launch-md"
    ],
    "advisories": []
   },
@@ -4768,16 +7166,57 @@
     "Pasadena"
    ],
    "bbox": [
-    -76.56063,
-    39.14229,
-    -76.51148,
-    39.17251
+    -76.560627,
+    39.142292,
+    -76.511481,
+    39.172509
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 2.607,
    "launches": [
     "green-haven-wharf-soft-access-md"
+   ],
+   "water_id": "stony-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "ed3e5c82e29e038673e7f562f1b8548269c30de63dcac8d80ebf56a2b78c5afa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sue-creek-md",
+   "name": "Sue Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Essex",
+    "Middle River"
+   ],
+   "bbox": [
+    -76.419696,
+    39.280501,
+    -76.395767,
+    39.294233
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.92,
+   "launches": [],
+   "water_id": "sue-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "05d352101b9ab4398da811add950c12a8f61fa018bca895c995bc57a16ac2554",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "sue-creek-boat-launch-near-middle-river-md-4"
    ],
    "advisories": []
   },
@@ -4794,10 +7233,10 @@
     "Whiteford"
    ],
    "bbox": [
-    -76.3368,
-    39.54231,
-    -76.07502,
-    39.82312
+    -76.336799,
+    39.542308,
+    -76.075024,
+    39.823121
    ],
    "wikidata": "Q27538",
    "charted": true,
@@ -4813,6 +7252,15 @@
     "susquehanna-state-park-lapidum-md",
     "water-street-boat-ramp-md"
    ],
+   "water_id": "susquehanna-river-md",
+   "gnis_id": "591690",
+   "geometry_hash": "da84e36e472d6c5e9b3ae8b88fb9752bc87b65a42e99d9f6b1acfa7fe3ff0962",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4830,10 +7278,10 @@
     "Westover"
    ],
    "bbox": [
-    -76.05646,
-    37.77655,
-    -75.73542,
-    38.21911
+    -76.056461,
+    37.776549,
+    -75.735422,
+    38.219111
    ],
    "wikidata": "Q7682972",
    "charted": true,
@@ -4847,11 +7295,20 @@
     "janes-island-state-park-boat-ramp-md",
     "janes-island-state-park-soft-access-md",
     "raccoon-point-recreation-area-md",
-    "saint-peters-creek-md",
     "tangier-sound-boat-launch-md",
+    "saint-peters-creek-md",
     "tylerton-md",
     "wenona-harbor-public-boat-ramp-md"
    ],
+   "water_id": "tangier-sound-md",
+   "gnis_id": "587689",
+   "geometry_hash": "7ad8d4f629f968ce688adc3c73aa395c08365478af989035215f5d8fbdc9948d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4863,10 +7320,10 @@
     "Rock Hall"
    ],
    "bbox": [
-    -76.25374,
-    39.13994,
-    -76.24335,
-    39.1542
+    -76.253743,
+    39.139842,
+    -76.243352,
+    39.154204
    ],
    "wikidata": "Q49393708",
    "charted": true,
@@ -4874,6 +7331,15 @@
    "launches": [
     "spring-cove-landing-md"
    ],
+   "water_id": "the-haven-md",
+   "gnis_id": "595097",
+   "geometry_hash": "8fde3d581c08901a074f6570e9378802fe3f2ad48c86d525c75d4fa114eb8297",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4885,10 +7351,10 @@
     "Stevensville"
    ],
    "bbox": [
-    -76.32245,
+    -76.322449,
     38.94948,
-    -76.31025,
-    38.97649
+    -76.310249,
+    38.976489
    ],
    "wikidata": null,
    "charted": true,
@@ -4897,6 +7363,15 @@
     "thompson-creek-landing-boat-ramp-md",
     "thompson-creek-landing-soft-access-md"
    ],
+   "water_id": "thompson-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "f819d872cb020ede9bb5ccb9242eda128bdb144384af14f00c273e80294d5a07",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4914,6 +7389,15 @@
    "launches": [
     "tilghman-creek-landing-md"
    ],
+   "water_id": "tilghman-creek-md",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4926,9 +7410,9 @@
    ],
    "bbox": [
     -78.15891,
-    39.69293,
-    -78.14025,
-    39.75156
+    39.692935,
+    -78.140254,
+    39.751564
    ],
    "wikidata": "Q7821616",
    "charted": false,
@@ -4936,6 +7420,15 @@
    "launches": [
     "tonoloway-creek-boat-launch-md"
    ],
+   "water_id": "tonoloway-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "6de3b8330802257eb2a553f9b00373058a1e99a85640db6a1cc7f5c3575e281e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4947,10 +7440,10 @@
     "Oxford"
    ],
    "bbox": [
-    -76.17158,
+    -76.171576,
     38.68446,
     -76.15844,
-    38.69827
+    38.698273
    ],
    "wikidata": "Q7829938",
    "charted": true,
@@ -4958,6 +7451,15 @@
    "launches": [
     "oxford-boat-ramp-md"
    ],
+   "water_id": "town-creek-md",
+   "gnis_id": "587846",
+   "geometry_hash": "ab6e402c8fb71f52e01918d299b8b719ec6088d8fe1b43d62ea4e51c1845465b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4969,10 +7471,10 @@
     "Cambridge"
    ],
    "bbox": [
-    -76.03346,
-    38.19765,
-    -75.96614,
-    38.52026
+    -76.033459,
+    38.197652,
+    -75.966139,
+    38.520257
    ],
    "wikidata": null,
    "charted": true,
@@ -4981,6 +7483,15 @@
     "bestpitch-ferry-boat-ramp-md",
     "transquaking-river-access-md"
    ],
+   "water_id": "transquaking-river-md",
+   "gnis_id": null,
+   "geometry_hash": "09ed1783dc55b7dce3a32fc5e223d5e38f8d86e0460f534d98f4b92dfc2c4d1a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4993,10 +7504,10 @@
     "Royal Oak"
    ],
    "bbox": [
-    -76.2042,
-    38.64491,
-    -76.07652,
-    38.76835
+    -76.204196,
+    38.644907,
+    -76.076519,
+    38.768351
    ],
    "wikidata": null,
    "charted": true,
@@ -5006,6 +7517,15 @@
     "easton-point-landing-md",
     "easton-point-park-soft-access-md"
    ],
+   "water_id": "tred-avon-river-md",
+   "gnis_id": null,
+   "geometry_hash": "4f3b11eb321d4a23ae41cc86fb5f66281984f0638e278a2d3065312c19723515",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5018,10 +7538,10 @@
     "Dayton"
    ],
    "bbox": [
-    -77.05255,
-    39.19167,
-    -76.99337,
-    39.24927
+    -77.052549,
+    39.191669,
+    -76.993366,
+    39.249269
    ],
    "wikidata": "Q7350748",
    "charted": false,
@@ -5032,6 +7552,15 @@
     "pig-tail-recreation-area-at-triadelphia-reservoir-lake-md",
     "triadelphia-recreation-area-md"
    ],
+   "water_id": "triadelphia-reservoir-md",
+   "gnis_id": "587870",
+   "geometry_hash": "5e350981a7f140c4514b445b5b15d4bae270d24688feca835045535bbfdee89a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -5061,10 +7590,10 @@
     "Hillsboro"
    ],
    "bbox": [
-    -75.95322,
-    38.81232,
-    -75.89596,
-    38.98901
+    -75.953216,
+    38.812322,
+    -75.895962,
+    38.989006
    ],
    "wikidata": "Q7851024",
    "charted": true,
@@ -5076,6 +7605,15 @@
     "reese-landing-md",
     "stoney-point-landing-md"
    ],
+   "water_id": "tuckahoe-creek-md",
+   "gnis_id": "598183",
+   "geometry_hash": "83443018cecd554e393f03bd5869d5b7010a608dd3973ad31e8fd730799f0386",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5087,10 +7625,10 @@
     "Kennedyville"
    ],
    "bbox": [
-    -75.99037,
-    39.33988,
-    -75.96823,
-    39.35992
+    -75.990371,
+    39.339881,
+    -75.968233,
+    39.359935
    ],
    "wikidata": null,
    "charted": true,
@@ -5098,6 +7636,15 @@
    "launches": [
     "turner-s-creek-boat-launch-md"
    ],
+   "water_id": "turner-s-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "ef69f43b5a3ed21b9c2be66727baa43d8d99d80ad9ad9dbee231edddfe4df4f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5109,10 +7656,10 @@
     "Millington"
    ],
    "bbox": [
-    -75.85975,
-    39.23721,
-    -75.85355,
-    39.2478
+    -75.859748,
+    39.237211,
+    -75.853393,
+    39.247802
    ],
    "wikidata": null,
    "charted": false,
@@ -5120,6 +7667,15 @@
    "launches": [
     "unicorn-millpond-lake-md"
    ],
+   "water_id": "unicorn-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "3e5ffb1fa1472e42c0f2da9773fb720b28fc3e5aaa659b695bbe61abf91938bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5131,9 +7687,9 @@
     "Worton"
    ],
    "bbox": [
-    -76.02769,
-    39.27921,
-    -76.02044,
+    -76.027687,
+    39.278972,
+    -76.020364,
     39.29208
    ],
    "wikidata": null,
@@ -5142,6 +7698,15 @@
    "launches": [
     "urieville-lake-md"
    ],
+   "water_id": "urieville-community-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "b7ec31dc5de615b4b11cca3f31bad0da6d6f15fc719c7db93b065b212034c09e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5153,10 +7718,10 @@
     "Nanjemoy"
    ],
    "bbox": [
-    -77.26575,
-    38.42411,
-    -77.25664,
-    38.44129
+    -77.265748,
+    38.424111,
+    -77.256638,
+    38.441289
    ],
    "wikidata": null,
    "charted": true,
@@ -5164,6 +7729,15 @@
    "launches": [
     "nanjemoy-wildlife-mgmt-area-formerly-purse-state-park-md"
    ],
+   "water_id": "wades-bay-md",
+   "gnis_id": null,
+   "geometry_hash": "a06ccbcf7b0103e7d24068af21e04798e1a8fd762bee54babb573f85f2f18560",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5175,10 +7749,10 @@
     "Church Creek"
    ],
    "bbox": [
-    -76.21148,
-    38.36855,
+    -76.211479,
+    38.368551,
     -76.2,
-    38.39001
+    38.390178
    ],
    "wikidata": null,
    "charted": true,
@@ -5186,6 +7760,15 @@
    "launches": [
     "golden-hill-md"
    ],
+   "water_id": "wallace-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "43b45388801c6b7caf5047ffc2a3dedbf997d1f320802039e15cc2d63665e438",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5197,10 +7780,10 @@
     "Stevensville"
    ],
    "bbox": [
-    -76.34507,
-    38.9351,
+    -76.345069,
+    38.935101,
     -76.31525,
-    38.95689
+    38.956969
    ],
    "wikidata": null,
    "charted": true,
@@ -5208,6 +7791,15 @@
    "launches": [
     "warehouse-creek-landing-md"
    ],
+   "water_id": "warehouse-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "e63fa0a479da5628d3f73a1b9ed777a1e82dc7d0caf952885a180649ac91bf7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5220,10 +7812,10 @@
     "Great Oak Manor"
    ],
    "bbox": [
-    -76.18116,
-    39.26721,
-    -76.14409,
-    39.29901
+    -76.181165,
+    39.267208,
+    -76.144087,
+    39.299072
    ],
    "wikidata": null,
    "charted": true,
@@ -5231,6 +7823,15 @@
    "launches": [
     "warton-creek-boat-launch-near-buck-neck-landing-md"
    ],
+   "water_id": "warton-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "65bbb6ddb0667369ffbe65e1cc9c1b1ddf248e427775ff42aec9d3baabbacb0c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5242,10 +7843,10 @@
     "Secretary"
    ],
    "bbox": [
-    -75.98106,
-    38.6013,
-    -75.95076,
-    38.61234
+    -75.981057,
+    38.601296,
+    -75.950761,
+    38.612337
    ],
    "wikidata": null,
    "charted": true,
@@ -5253,6 +7854,15 @@
    "launches": [
     "secretary-md"
    ],
+   "water_id": "warwick-river-md",
+   "gnis_id": null,
+   "geometry_hash": "cc7e896f22a7aecb49fb2ab2a555311f194d4fb6b2bea30e82c59c5b06c2178b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5264,10 +7874,10 @@
     "Denton"
    ],
    "bbox": [
-    -75.84652,
-    38.85299,
-    -75.75309,
-    38.88734
+    -75.846521,
+    38.852957,
+    -75.753087,
+    38.887339
    ],
    "wikidata": null,
    "charted": true,
@@ -5276,6 +7886,15 @@
     "martinak-state-park-boat-ramp-md",
     "martinak-state-park-soft-access-md"
    ],
+   "water_id": "watts-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "6b71b925bf0cdf067696af71890a1ca837583a05f2cac32e0759d4e8852130ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5287,10 +7906,10 @@
     "Annapolis"
    ],
    "bbox": [
-    -76.52468,
-    38.98828,
-    -76.5006,
-    39.001
+    -76.524681,
+    38.988278,
+    -76.500597,
+    39.001002
    ],
    "wikidata": "Q34851233",
    "charted": true,
@@ -5298,6 +7917,15 @@
    "launches": [
     "tucker-street-md"
    ],
+   "water_id": "weems-creek-md",
+   "gnis_id": "588102",
+   "geometry_hash": "e682ac7fa8dda4f014c19f164796f1ec9c0a5796320b23d3d81452558815477d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5309,9 +7937,9 @@
     "Galesville"
    ],
    "bbox": [
-    -76.55453,
-    38.82296,
-    -76.49666,
+    -76.554529,
+    38.822932,
+    -76.496656,
     38.87298
    ],
    "wikidata": null,
@@ -5319,6 +7947,19 @@
    "area_km2": 9.237,
    "launches": [
     "galesville-wharf-md"
+   ],
+   "water_id": "west-river-md",
+   "gnis_id": null,
+   "geometry_hash": "cfa301c04aab3ba57f03df40f2f2bd6584dd023ded68009e50c3fabb761443fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "west-river-boat-launch-near-galesville-md",
+    "west-river-boat-launch-near-galesville-md-2",
+    "west-river-boat-launch-near-galesville-md-3"
    ],
    "advisories": []
   },
@@ -5332,9 +7973,9 @@
    ],
    "bbox": [
     -76.82035,
-    38.78422,
-    -76.7121,
-    38.9234
+    38.784216,
+    -76.712103,
+    38.923396
    ],
    "wikidata": null,
    "charted": true,
@@ -5343,6 +7984,15 @@
     "iron-pot-landing-md",
     "mount-calvert-historical-archaeological-park-md"
    ],
+   "water_id": "western-branch-patuxent-river-md",
+   "gnis_id": null,
+   "geometry_hash": "b689dcef75603cfc04397faf3f07d9a44f78c4f2b98da85f557f5c4a535e6f75",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5354,10 +8004,10 @@
     "Tyaskin"
    ],
    "bbox": [
-    -75.89366,
+    -75.893661,
     38.32083,
-    -75.81656,
-    38.3357
+    -75.816564,
+    38.335697
    ],
    "wikidata": null,
    "charted": true,
@@ -5366,6 +8016,15 @@
     "tyaskin-park-md",
     "wetipquin-park-md"
    ],
+   "water_id": "wetipquin-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "3db6f4d6b949d1870818459e680f7acf4e0bf1c2d96cc1d5b4cd0b1fac23880a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5377,10 +8036,10 @@
     "Avenue"
    ],
    "bbox": [
-    -76.79467,
-    38.25369,
-    -76.78489,
-    38.26954
+    -76.794667,
+    38.253691,
+    -76.784891,
+    38.269539
    ],
    "wikidata": null,
    "charted": true,
@@ -5388,6 +8047,15 @@
    "launches": [
     "paul-ellis-landing-md"
    ],
+   "water_id": "whites-neck-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "6a5ad4d00e10e73a658c7f1df847f8531743cadf48cb524d2c8304330260d90a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5403,10 +8071,10 @@
     "Newburg"
    ],
    "bbox": [
-    -76.93959,
-    38.22503,
-    -76.80194,
-    38.41963
+    -76.939595,
+    38.225033,
+    -76.801599,
+    38.419633
    ],
    "wikidata": null,
    "charted": true,
@@ -5417,6 +8085,15 @@
     "hatton-creek-md",
     "wicomico-shores-landing-md"
    ],
+   "water_id": "wicomico-river-md",
+   "gnis_id": null,
+   "geometry_hash": "83ccdd4998be728938d0c5b025280e38bc7537ee474a352211c1fa9196d18060",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5431,10 +8108,10 @@
     "Tyaskin"
    ],
    "bbox": [
-    -75.87209,
-    38.22669,
-    -75.6042,
-    38.36482
+    -75.872091,
+    38.226688,
+    -75.604201,
+    38.365021
    ],
    "wikidata": "Q7998475",
    "charted": true,
@@ -5448,6 +8125,48 @@
     "webster-s-cove-md",
     "whitehaven-soft-access-md"
    ],
+   "water_id": "wicomico-river-mt-vernon-md",
+   "gnis_id": "588236",
+   "geometry_hash": "e1c5e7516a0ffc2fea612b9f988c225b0860a64278a4d96e10a7a022005190bd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "nitshdale-landing-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "winchester-creek-md",
+   "name": "Winchester Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Grasonville"
+   ],
+   "bbox": [
+    -76.206822,
+    38.958777,
+    -76.193563,
+    38.974267
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.311,
+   "launches": [],
+   "water_id": "winchester-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "36aad11276ae7a18ad6895d72c0adc7ec4e1cc3d5d261ddf006303b9e0ec5fce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "winchester-creek-boat-launch-near-grasonville-md"
+   ],
    "advisories": []
   },
   {
@@ -5459,16 +8178,60 @@
     "Worton"
    ],
    "bbox": [
-    -76.1752,
-    39.2687,
+    -76.175199,
+    39.268698,
     -76.15794,
-    39.2944
+    39.294482
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 1.262,
    "launches": [
     "green-point-landing-md"
+   ],
+   "water_id": "worton-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "c6e73813ff6391c7c25d594840961fb53a258eb51d0d97794330ead6c940ff82",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wrights-creek-md",
+   "name": "Wrights Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -75.990911,
+    38.572148,
+    -75.987999,
+    38.582174
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.097,
+   "launches": [],
+   "water_id": "wrights-creek-md",
+   "gnis_id": null,
+   "geometry_hash": "8e257cc6eaf55eff9aa4e8990ab5c0609d29f548ad8a1c57abd85879d0f6f317",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "wrights-creek-boat-launch-near-cambridge-md",
+    "wrights-creek-boat-launch-near-cambridge-md-2",
+    "wrights-creek-boat-launch-near-cambridge-md-3",
+    "wrights-creek-boat-launch-near-cambridge-md-4",
+    "wrights-creek-boat-launch-near-cambridge-md-5"
    ],
    "advisories": []
   },
@@ -5481,10 +8244,10 @@
     "Wye Mills"
    ],
    "bbox": [
-    -76.20556,
-    38.84624,
-    -76.08032,
-    38.94621
+    -76.205561,
+    38.846238,
+    -76.080319,
+    38.946207
    ],
    "wikidata": null,
    "charted": true,
@@ -5492,6 +8255,15 @@
    "launches": [
     "wye-landing-md"
    ],
+   "water_id": "wye-east-river-md",
+   "gnis_id": null,
+   "geometry_hash": "db2a5e266871ca701127b378b2b251c150bf9e4af8105e3b86153bbbb97f0086",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5503,8 +8275,8 @@
     "Queenstown"
    ],
    "bbox": [
-    -76.08042,
-    38.94092,
+    -76.080417,
+    38.940923,
     -76.06705,
     38.95007
    ],
@@ -5514,6 +8286,15 @@
    "launches": [
     "wye-mills-lake-md"
    ],
+   "water_id": "wye-mills-community-lake-md",
+   "gnis_id": null,
+   "geometry_hash": "58e5344de87fc452c24bebfcf96077a5e623a48baa3d3b9bd6644ae0a05d162d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5525,10 +8306,10 @@
     "Queenstown"
    ],
    "bbox": [
-    -76.19947,
-    38.86157,
-    -76.13794,
-    38.99046
+    -76.199472,
+    38.861565,
+    -76.137941,
+    38.990465
    ],
    "wikidata": null,
    "charted": true,
@@ -5537,6 +8318,15 @@
     "bennett-s-point-landing-md",
     "bryantown-landing-md"
    ],
+   "water_id": "wye-river-md",
+   "gnis_id": null,
+   "geometry_hash": "2a65935cf7f27e8ae5c1c697bcdf12952b0f16ae2da098ab534f983128584954",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5548,10 +8338,10 @@
     "Friendsville"
    ],
    "bbox": [
-    -79.41633,
-    39.68078,
-    -79.34605,
-    39.79856
+    -79.416335,
+    39.680782,
+    -79.345838,
+    39.798556
    ],
    "wikidata": "Q7348452",
    "charted": false,
@@ -5559,6 +8349,15 @@
    "launches": [
     "youghiogheny-reservoir-mill-run-recreation-area-md"
    ],
+   "water_id": "youghiogheny-river-lake-md",
+   "gnis_id": "1193703",
+   "geometry_hash": "3e0114ca9ba60d70083ffabac9d6d4994edd0e29d632d62e0156970f3fd24d21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5572,9 +8371,9 @@
    ],
    "bbox": [
     -79.49904,
-    39.25632,
-    -79.35598,
-    39.7964
+    39.256324,
+    -79.355666,
+    39.796404
    ],
    "wikidata": "Q1470734",
    "charted": false,
@@ -5585,6 +8384,15 @@
     "hoyes-run-md",
     "sang-run-md"
    ],
+   "water_id": "youghiogheny-river-md",
+   "gnis_id": "595217",
+   "geometry_hash": "7939ec17dad5b1a3d02fb08894579b2c3f6dde34b2115ab7ac9777fadb511ca8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]
