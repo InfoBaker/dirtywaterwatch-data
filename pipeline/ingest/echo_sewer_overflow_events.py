@@ -372,6 +372,19 @@ section 2.2; not live until data/rules.json says so)
   - A Navajo Nation report dropped for New Mexico or Arizona carries "state" in the dropped file, so the state scripts
     count it under the state it was placed in.
 
+Utah (permits UT...; research/ut/report.md section 2.2; not live until data/rules.json says so)
+  Utah issues its own permits (UPDES); its sewer overflow rule (R317-801-4) sends Class 1 overflows to the Division of
+  Water Quality by telephone within 24 hours and in writing within five days, and no list of them is published. EPA's
+  collection-system table lists 188 Utah permits, but the 2026-11-04 all-versions extract holds one Utah report: the
+  Timpanogos Special Service District's bypass line struck by a vehicle at American Fork (UT0023639, 2026-08-17 14:39 to
+  14:49, 1,000 gallons, receiving water "Storm water outfall", received 2026-08-25). The rules below are keyed on UT:
+  - Time zone: STATE_TZ gives America/Denver (Utah keeps one zone).
+  - The report's longitude is filed without its minus sign (111.798013): UT is in SIGN_REPAIR_PREFIXES, so a positive
+    longitude whose negative lies in the Four Corners states' box is read as west, as for New Mexico.
+  - Utah's other public record, DEQ's spill hotline log (ut-deq-environmental-incidents), holds the same overflow; that
+    feed marks its row duplicate_of this one (ingest/ut_transforms.ut_incidents_post).
+  - No free-text or repeated-point rule: the one description names no person or address.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -403,10 +416,10 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
-            "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver"}
+            "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
@@ -460,7 +473,7 @@ POINT_PLACED_PREFIXES = {"NN"}
 PERMIT_TZ = {"NN": "America/Denver"}
 # permit prefixes whose positive longitude is read as west when its negative lies in SIGN_REPAIR_BOX (module docstring,
 # New Mexico): [lon_min, lat_min, lon_max, lat_max] around Arizona, New Mexico, Utah and Colorado
-SIGN_REPAIR_PREFIXES = {"NM", "NN"}
+SIGN_REPAIR_PREFIXES = {"NM", "NN", "UT"}
 SIGN_REPAIR_BOX = (-114.9, 31.3, -102.0, 42.0)
 # states whose kept reports that name a receiving water but describe the flow going to the plant's lagoon carry a note
 # saying why they are shown (module docstring, New Mexico; review 2026-11-07 P2-3)

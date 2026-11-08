@@ -1,0 +1,587 @@
+{
+ "about": "Water names in Utah's records that data/receiving-waters-national.json does not hold for UT: the water a sewage report's title names (DEQ's Environmental Incidents layer, read 2026-11-07), the water each advisory site of DWQ's Recreational Waters Map lies on, and EPA's receiving water on Utah's eRule reports; one row per name and county, with the record counts by source and the bounding box [west, south, east, north] of the records' points. Records naming no water and texts that name a drain or outfall are left out (by_reason). Written by scripts/ut_report_water_names.py.",
+ "state": "UT",
+ "waters": 41,
+ "records": 80,
+ "records_on_listed_waters": 24,
+ "by_reason": {
+  "no water named": 368,
+  "a drain, outfall or street, not a water": 1
+ },
+ "rows": [
+  {
+   "name": "San Juan River",
+   "county": null,
+   "records": 7,
+   "sources": {
+    "ut-dwq-recreational-advisories": 7
+   },
+   "box": [
+    -109.8547,
+    37.1469,
+    -109.4948,
+    37.2821
+   ]
+  },
+  {
+   "name": "Scofield Reservoir",
+   "county": null,
+   "records": 6,
+   "sources": {
+    "ut-dwq-recreational-advisories": 6
+   },
+   "box": [
+    -111.1665,
+    39.7628,
+    -111.1166,
+    39.8071
+   ]
+  },
+  {
+   "name": "Strawberry Reservoir",
+   "county": null,
+   "records": 5,
+   "sources": {
+    "ut-dwq-recreational-advisories": 5
+   },
+   "box": [
+    -111.1541,
+    40.1248,
+    -111.0358,
+    40.2347
+   ]
+  },
+  {
+   "name": "Pineview Reservoir",
+   "county": null,
+   "records": 4,
+   "sources": {
+    "ut-dwq-recreational-advisories": 4
+   },
+   "box": [
+    -111.8057,
+    41.2544,
+    -111.7828,
+    41.2748
+   ]
+  },
+  {
+   "name": "Rockport Reservoir",
+   "county": null,
+   "records": 4,
+   "sources": {
+    "ut-dwq-recreational-advisories": 4
+   },
+   "box": [
+    -111.4079,
+    40.7731,
+    -111.3923,
+    40.7868
+   ]
+  },
+  {
+   "name": "Starvation Reservoir",
+   "county": null,
+   "records": 4,
+   "sources": {
+    "ut-dwq-recreational-advisories": 4
+   },
+   "box": [
+    -110.4597,
+    40.1803,
+    -110.4315,
+    40.214
+   ]
+  },
+  {
+   "name": "Deer Creek Reservoir",
+   "county": null,
+   "records": 3,
+   "sources": {
+    "ut-dwq-recreational-advisories": 3
+   },
+   "box": [
+    -111.5072,
+    40.4162,
+    -111.4809,
+    40.4445
+   ]
+  },
+  {
+   "name": "Gunlock Reservoir",
+   "county": null,
+   "records": 3,
+   "sources": {
+    "ut-dwq-recreational-advisories": 3
+   },
+   "box": [
+    -113.7742,
+    37.2528,
+    -113.7731,
+    37.2576
+   ]
+  },
+  {
+   "name": "Mantua Reservoir",
+   "county": null,
+   "records": 3,
+   "sources": {
+    "ut-dwq-recreational-advisories": 3
+   },
+   "box": [
+    -111.9421,
+    41.5006,
+    -111.9254,
+    41.5108
+   ]
+  },
+  {
+   "name": "Bear Lake",
+   "county": "Rich County",
+   "records": 2,
+   "sources": {
+    "ut-deq-environmental-incidents": 2
+   },
+   "box": [
+    -111.3747,
+    41.8499,
+    -111.3014,
+    41.9032
+   ]
+  },
+  {
+   "name": "Big East Lake",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -111.6428,
+    39.933,
+    -111.6415,
+    39.9364
+   ]
+  },
+  {
+   "name": "Echo Reservoir",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -111.4085,
+    40.9472,
+    -111.3996,
+    40.957
+   ]
+  },
+  {
+   "name": "Fremont River",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -111.2479,
+    38.2836,
+    -111.2352,
+    38.2886
+   ]
+  },
+  {
+   "name": "Lake Powell",
+   "county": "San Juan County",
+   "records": 2,
+   "sources": {
+    "ut-deq-environmental-incidents": 2
+   },
+   "box": [
+    -110.7206,
+    37.4629,
+    -110.7182,
+    37.4731
+   ]
+  },
+  {
+   "name": "Lower Virgin River",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -113.2773,
+    37.1769,
+    -113.008,
+    37.1942
+   ]
+  },
+  {
+   "name": "Panguitch Lake",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -112.6273,
+    37.7236,
+    -112.6201,
+    37.7284
+   ]
+  },
+  {
+   "name": "Salem Pond",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -111.6761,
+    40.0473,
+    -111.6751,
+    40.0513
+   ]
+  },
+  {
+   "name": "Sulphur Creek",
+   "county": null,
+   "records": 2,
+   "sources": {
+    "ut-dwq-recreational-advisories": 2
+   },
+   "box": [
+    -111.2595,
+    38.2872,
+    -111.2477,
+    38.2915
+   ]
+  },
+  {
+   "name": "Babylon Trail Creek",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -113.3489,
+    37.2026,
+    -113.3489,
+    37.2026
+   ]
+  },
+  {
+   "name": "Baker Reservoir",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -113.6388,
+    37.3763,
+    -113.6388,
+    37.3763
+   ]
+  },
+  {
+   "name": "Bountiful Pond",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -111.9208,
+    40.9071,
+    -111.9208,
+    40.9071
+   ]
+  },
+  {
+   "name": "Brighton Canal",
+   "county": "Salt Lake County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.9781,
+    40.7369,
+    -111.9781,
+    40.7369
+   ]
+  },
+  {
+   "name": "Calf Creek",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -111.4141,
+    37.794,
+    -111.4141,
+    37.794
+   ]
+  },
+  {
+   "name": "Deer Creek Reservoir",
+   "county": "Wasatch County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.5167,
+    40.4141,
+    -111.5167,
+    40.4141
+   ]
+  },
+  {
+   "name": "Fifth Water Hot Springs",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -111.318,
+    40.0825,
+    -111.318,
+    40.0825
+   ]
+  },
+  {
+   "name": "Gordon Creek",
+   "county": "Morgan County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.8195,
+    41.1515,
+    -111.8195,
+    41.1515
+   ]
+  },
+  {
+   "name": "Hobble Creek",
+   "county": "Utah County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.4988,
+    40.1362,
+    -111.4988,
+    40.1362
+   ]
+  },
+  {
+   "name": "Jordanelle Reservoir",
+   "county": "Wasatch County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.4222,
+    40.6168,
+    -111.4222,
+    40.6168
+   ]
+  },
+  {
+   "name": "Lake Powell",
+   "county": "Kane County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.3367,
+    37.0828,
+    -111.3367,
+    37.0828
+   ]
+  },
+  {
+   "name": "Lake at the Hills",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -113.087,
+    37.6621,
+    -113.087,
+    37.6621
+   ]
+  },
+  {
+   "name": "Manila Creek Pond",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -111.7524,
+    40.3984,
+    -111.7524,
+    40.3984
+   ]
+  },
+  {
+   "name": "McClellan Lake",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -111.6429,
+    39.9392,
+    -111.6429,
+    39.9392
+   ]
+  },
+  {
+   "name": "North Creek",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -113.1006,
+    37.2627,
+    -113.1006,
+    37.2627
+   ]
+  },
+  {
+   "name": "North Fork of the Virgin River",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -112.948,
+    37.2847,
+    -112.948,
+    37.2847
+   ]
+  },
+  {
+   "name": "Pack Creek",
+   "county": "Grand County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -109.5004,
+    38.5395,
+    -109.5004,
+    38.5395
+   ]
+  },
+  {
+   "name": "Panguitch Creek",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -112.5873,
+    37.7461,
+    -112.5873,
+    37.7461
+   ]
+  },
+  {
+   "name": "Red Creek Reservoir",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -112.6819,
+    37.8662,
+    -112.6819,
+    37.8662
+   ]
+  },
+  {
+   "name": "Salina Creek",
+   "county": "Sevier County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.8538,
+    38.9418,
+    -111.8538,
+    38.9418
+   ]
+  },
+  {
+   "name": "South Fork River",
+   "county": "Utah County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.538,
+    40.342,
+    -111.538,
+    40.342
+   ]
+  },
+  {
+   "name": "Strawberry Reservoir",
+   "county": "Wasatch County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.0471,
+    40.1439,
+    -111.0471,
+    40.1439
+   ]
+  },
+  {
+   "name": "Willard Pond",
+   "county": null,
+   "records": 1,
+   "sources": {
+    "ut-dwq-recreational-advisories": 1
+   },
+   "box": [
+    -112.0581,
+    41.4226,
+    -112.0581,
+    41.4226
+   ]
+  }
+ ]
+}
