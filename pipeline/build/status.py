@@ -669,6 +669,14 @@ _US_CODES = frozenset("AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA 
                       "NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY PR VI GU AS MP".split())
 
 
+def own_state(r: dict, sid: str | None = None) -> str | None:
+    """The state a record is from by its own fields, for the live-only rule: event_state without its last fallback (the
+    state of its first water slug: an Alabama report whose ingester named a Georgia water is Alabama's, not Georgia's),
+    then _state_of_any (the record's state whether or not live). None: nothing of its own tells (kept, as before).
+    event_state itself is unchanged for every other caller."""
+    return event_state({**r, "water_slugs": []}) or _state_of_any(r, sid or str(r.get("source_id") or ""))
+
+
 def _state_of_any(r: dict, sid: str) -> str | None:
     """A record's state whether or not that state is live (event_state knows the live states only): the record's
     raw.state, its state field, then the two-letter prefix of its source id or event id when that is a US code."""
@@ -724,7 +732,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             r["_file"] = p.name
             r.setdefault("source_id", sid)
             if live_up is not None:
-                st = event_state(r) or _state_of_any(r, sid)
+                st = own_state(r, sid)      # never the state of a live water it names (own_state)
                 if st and st not in live_up:
                     NOT_LIVE.append((sid, st))
                     continue
