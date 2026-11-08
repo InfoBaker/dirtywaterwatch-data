@@ -1,0 +1,73 @@
+id: "ut-dwq-recreational-advisories"
+name: "Utah DWQ Recreational Waters Map (HAB and E. coli advisories) AutoMap_Source_Data feature service"
+url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/AutoMap_Source_Data/FeatureServer/0"
+homepage: "https://deq.utah.gov/water-quality/recreational-water-quality-home"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS reader (the fetch block below) with the hook ingest/ut_transforms.ut_rec_record. The
+#   layer behind DWQ's Recreational Waters Map holds one row per monitored site with its current advisory, as local
+#   health departments and DWQ post it: harmful algal bloom advisories (blooms category) and E. coli advisories (the
+#   bacteria category), each with its date and the latest sample date. "Looks Good" and an empty advisory are no
+#   current advisory: not records (grey on the map, never clean). Every fetch that still finds an advisory confirms it
+#   (history.confirm_while_listed); the first fetch that no longer finds it ends it.
+# Real fetch 2026-11-07 (layer last edited 2026-11-07): 167 sites; 84 with an advisory (55 Warning HAB, 1 Danger HAB,
+#   3 HAB health watch, 5 Warning Mats, 8 Mats CF, 11 Warning E coli, 1 E coli health watch); 48 Looks Good, 35 empty.
+#   "Mats CF" is, by DWQ's web map, a few harmful algae mats observed by its monitoring team, not an advisory level:
+#   shown with the site's caution only. Labels are read without case, spaces or dots ("E coli" and "Ecoli" alike); a
+#   label the hook does not know is kept by its words with the site's caution, never grey.
+# Not in the layer: when an advisory was lifted (a lifted advisory leaves the layer), the sample results, earlier
+#   seasons (a separate Automap_Data_Advisories_Update layer was last edited 2026-07-01).
+cadence: "weekly in season (May to October); edited 2026-11-07"
+license: "none stated"
+attribution: "Utah Department of Environmental Quality, Division of Water Quality, with local health departments"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory", "beach_advisory"]
+states: ["UT"]
+registry_ids: ["ut-dwq-recreational-advisories"]
+access: ["arcgis"]
+access_detail: "Feeds the Instant App appid 32380dfdeb014695b0c5a9b77a5aa90b (webmap 213cdc781ebd4faf97e0d4af5a79c5fa) linked from deq.utah.gov/water-quality/recreational-water-quality-home; habs.utah.gov returned 403 to scripts on 2026-11-03."
+machine_readable: true
+legal_basis: "Local health department authority to post advisories and close waters; DWQ's recreational HAB and E. coli guidance"
+checked: "2026-11-07"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/AutoMap_Source_Data/FeatureServer/0"
+  order_by: "FID"
+  cursor_field: "FID"
+  metadata: true
+  time_zone: "America/Denver"
+  bounds: [-114.1, 36.95, -109.0, 42.05]
+  # the layer may be cut back between seasons: a short answer is the season, not a failure
+  min_rows_ratio: 0.0
+  safe_fields: [FID, MLID, Waterbody, Site_Name, Public_Name, Monitored_Date, Lat, Long, Advisory, Advisory_Date,
+                Additional_Advisory_Notes]
+  reviewed_fields:
+    Site_Name: "the monitoring site's name (a beach, a boat ramp, a park: 'Zion National Park', 'South End')"
+    Public_Name: "the site's public name on DWQ's map (a park or beach)"
+  free_text: [Additional_Advisory_Notes]
+  # no current advisory: not a record (grey, never clean)
+  filter: [{field: Advisory, regex: "^\\s*(looks\\s+good|none|null|)\\s*$", exclude: true}]
+  record:
+    source_record_id: {template: "{MLID}-{Advisory|slug}-{@started_at|compact|default:nodate}"}
+    started_at: {field: Advisory_Date, parse: epoch_ms}
+    event_type: {const: unknown}
+    lat: {field: Lat, parse: number}
+    lon: {field: Long, parse: number}
+    waterbody_text: Waterbody
+    outfall_name: {field: [Public_Name, Site_Name]}
+    authority: {const: "Utah Division of Water Quality and the local health department (Recreational Waters Map)"}
+    source_url: {const: "https://deq.utah.gov/water-quality/recreational-water-quality-home"}
+  transform: "ingest.ut_transforms.ut_rec_record"
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    confirm_while_listed: true
+    track:
+      Advisory: {key: _advisory_seen, label: advisory}
+  meta:
+    credit: "Utah Department of Environmental Quality, Division of Water Quality, Recreational Waters Map"
+    license: "none stated"
+    caveat: "DWQ's map shows each site's current advisory, as the local health departments issue them, and DWQ's own observations of algae mats; it does not say when an advisory was lifted."
+    time_basis: "Advisory_Date, the advisory's date (stored as midnight Mountain time; read as a date). Monitored_Date, the latest sample, is kept with the record."

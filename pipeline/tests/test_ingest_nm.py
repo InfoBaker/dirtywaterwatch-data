@@ -44,7 +44,7 @@ def placed(r):
 
 def test_new_mexico_is_read_with_its_zone_and_scrub():
     assert "NM" in E.STATES and E.STATE_TZ["NM"] == "America/Denver" and "NM" in E.FREE_TEXT_STATES
-    assert "NM" not in E.REPEATED_POINT_STATES and E.SIGN_REPAIR_PREFIXES == {"NM", "NN"}
+    assert "NM" not in E.REPEATED_POINT_STATES and {"NM", "NN"} <= E.SIGN_REPAIR_PREFIXES
     assert E.PERMIT_TZ["NN"] == E.STATE_TZ["NM"]          # the Navajo Nation's clock is New Mexico's: no split
 
 

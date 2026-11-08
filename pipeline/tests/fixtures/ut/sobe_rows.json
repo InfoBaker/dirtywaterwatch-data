@@ -1,0 +1,169 @@
+{
+ "about": "Real rows of EPA's sewer overflow tables (2026-11-04 all-versions extract, current version of each report): the one report under a Utah permit (Timpanogos Special Service District, UT0023639, 2026-08-17), its child rows, and the collection-system rows of three Utah permits. No names.",
+ "events": [
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_description_text": "An unauthorized vehicle hit the bypass pipeline",
+   "sewer_overflow_bypass_reporting_requirement_code": "1",
+   "sewer_overflow_reporting_requirement_desc": "5-day reporting for noncompliance that may endanger health or the environment",
+   "wet_weather_occurance_indicator": "N",
+   "sewer_overflow_structure_type_code": "BRO",
+   "sewer_overflow_structure_type_desc": "Broken Pipe",
+   "sewer_overflow_structure_type_code_other_text": "",
+   "collection_system_identifier": "001",
+   "permitted_feature_identifier": "",
+   "latitude_measure": "40.347502",
+   "longitude_measure": "111.798013",
+   "sewer_overflow_bypass_duration_hours": "0.17",
+   "sewer_overflow_bypass_start_datetime": "2026-08-17 14:39:00",
+   "sewer_overflow_bypass_end_datetime": "2026-08-17 14:49:00",
+   "discharge_quantification_method_code": "BPJ",
+   "discharge_quantification_method_desc": "Best Professional Judgement",
+   "sewer_overflow_bypass_discharge_volume_gallons": "1000.00",
+   "sewer_overflow_bypass_discharge_rate_gph": "",
+   "anticipated_bypass_text": "",
+   "anticipated_bypass_expect_limit_violation": "",
+   "anticipated_bypass_expect_limit_violation_text": "",
+   "payload_id": "317575070",
+   "event_transaction_type": "N",
+   "program_report_received_date": "2026-08-25",
+   "program_report_start_date": "2026-08-17",
+   "program_report_end_date": "2026-08-17",
+   "electronic_submission_type_code": "ES1",
+   "electr_submission_type_desc": "EPA electronic reporting system",
+   "program_report_npdes_data_group_number_code": "G9A",
+   "transaction_type": "N",
+   "collection_system_owner_type_code": "CTG",
+   "collection_system_owner_type_desc": "Municipality",
+   "collection_system_population": "3598"
+  }
+ ],
+ "systems": [
+  {
+   "permit_identifier": "UTG580206",
+   "collection_system_identifier": "001",
+   "collection_system_name": "Eagle Mountain SSCS",
+   "collection_system_owner_type_code": "CTG",
+   "collection_system_owner_type_desc": "Municipality",
+   "collection_system_population": "49738",
+   "percent_collection_system_css": "0",
+   "payload_id": "278353253",
+   "received_date": "2025-03-04 17:33:32",
+   "transaction_type": "R"
+  },
+  {
+   "permit_identifier": "UT0021725",
+   "collection_system_identifier": "001",
+   "collection_system_name": "Salt Lake City WRF SSCS",
+   "collection_system_owner_type_code": "CTG",
+   "collection_system_owner_type_desc": "Municipality",
+   "collection_system_population": "200478",
+   "percent_collection_system_css": "0",
+   "payload_id": "278353096",
+   "received_date": "2025-03-04 17:33:32",
+   "transaction_type": "R"
+  },
+  {
+   "permit_identifier": "UT0023639",
+   "collection_system_identifier": "001",
+   "collection_system_name": "Timpanogos SSD SSCS",
+   "collection_system_owner_type_code": "CTG",
+   "collection_system_owner_type_desc": "Municipality",
+   "collection_system_population": "3598",
+   "percent_collection_system_css": "0",
+   "payload_id": "278353104",
+   "received_date": "2025-03-04 17:33:32",
+   "transaction_type": "R"
+  }
+ ],
+ "types": [
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_type_code_id": "27210",
+   "sewer_overflow_bypass_type_code": "SSO",
+   "sewer_overflow_bypass_type_desc": "Sanitary Sewer Overflow Event",
+   "sewer_overflow_bypass_type_code_sequence": "1"
+  }
+ ],
+ "waters": [
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_receiving_water_id": "22313",
+   "name_receiving_water": "Storm water outfall "
+  }
+ ],
+ "impacts": [
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_impact_id": "29620",
+   "sewer_overflow_bypass_impact_code": "NOI",
+   "sewer_overflow_bypass_impact_desc": "No observable impacts",
+   "sewer_overflow_bypass_impact_other_text": ""
+  }
+ ],
+ "causes": [
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_cause_id": "29841",
+   "sewer_overflow_bypass_cause_code": "BPO",
+   "sewer_overflow_bypass_cause_desc": "Broken Pipe - Other",
+   "sewer_overflow_bypass_cause_other_text": ""
+  }
+ ],
+ "actions": [
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_corrective_action_id": "32915",
+   "sewer_overflow_bypass_corrective_action_code": "DIS",
+   "sewer_overflow_bypass_corrective_action_desc": "Disinfection Treatment of Sewer Overflow or Bypass",
+   "sewer_overflow_bypass_corrective_action_other_text": ""
+  },
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_corrective_action_id": "32916",
+   "sewer_overflow_bypass_corrective_action_code": "LIM",
+   "sewer_overflow_bypass_corrective_action_desc": "Limit Access to Areas Affected by Sewer Overflow or Bypass (including posting signs)",
+   "sewer_overflow_bypass_corrective_action_other_text": ""
+  },
+  {
+   "permit_identifier": "UT0023639",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_key": "27224",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_corrective_action_id": "32914",
+   "sewer_overflow_bypass_corrective_action_code": "FBP",
+   "sewer_overflow_bypass_corrective_action_desc": "Fix Broken Pipe",
+   "sewer_overflow_bypass_corrective_action_other_text": ""
+  }
+ ],
+ "treatment": []
+}

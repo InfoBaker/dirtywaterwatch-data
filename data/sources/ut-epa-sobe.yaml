@@ -1,0 +1,28 @@
+id: "ut-epa-sobe"
+name: "EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Utah permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Utah
+#   permits added 2026-11-07: times with Mountain offsets, a longitude missing its minus sign read as west. DEQ's
+#   spill hotline log (ut-deq-environmental-incidents) holds the same overflow and marks its row duplicate_of this one.
+# Real read 2026-11-07: the current-version ZIP (Last-Modified 2026-11-05) held only its metadata, so the module read
+#   the current version of each report from the all-versions ZIP (2026-11-04 extract). One report under a Utah permit:
+#   the Timpanogos Special Service District (UT0023639), a bypass line struck by a vehicle at American Fork, 2026-08-17
+#   14:39 to 14:49, 1,000 gallons (best professional judgement), receiving water "Storm water outfall", no observable
+#   impact, received 2026-08-25 (8 days after the start). Its longitude is filed as 111.798013 (read as west). EPA's
+#   collection-system table lists 188 Utah permits (62 individual UPDES permits with a plant, 126 general-permit
+#   collection systems); none other has filed a report.
+cadence: "EPA refreshes daily. Utah rows (2026-11-04 extract): 1 report (SSO), received 8 days after the start."
+license: "EPA public data"
+attribution: "US EPA (data filed by Utah's permittees through EPA's NeT eRule tool)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["UT"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP held only its metadata; the module reads the all-versions ZIP's current rows. One Utah report (Timpanogos SSD, UT0023639, 2026-08-17, 1,000 gallons); 188 Utah permits in EPA's collection-system table."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) and Part 127 (electronic reporting); Utah Admin. Code R317-801-4 (the report to DWQ) leaves no public record"
+checked: "2026-11-07"

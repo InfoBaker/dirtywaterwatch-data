@@ -72,6 +72,9 @@ HOMEPAGES = {
     "sd-danr-hab-2026-samples": "https://danr.sd.gov/Conservation/WatershedProtection/HAB.aspx",
     "ne-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "ne-dwee-beachwatch": "https://dwee.nebraska.gov/node/4996",
+    "ut-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+    "ut-deq-environmental-incidents": "https://deq.utah.gov/environmental-response-and-remediation/environmental-incidents",
+    "ut-dwq-recreational-advisories": "https://deq.utah.gov/water-quality/recreational-water-quality-home",
 }
 
 
