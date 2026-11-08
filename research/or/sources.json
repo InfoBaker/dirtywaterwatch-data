@@ -351,8 +351,8 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Registered as a monitored page (page health). The table can be read as a snapshot (ADVISORY as OHA's beach advisory, SEWAGE as OHA's sewage advisory) when the 2027 season opens; no advisory rows existed to test a reader on 2026-11-07.",
+    "status": "used",
+    "status_reason": "Read every refresh as a snapshot by the Oregon ingester: ADVISORY as OHA's beach advisory, SEWAGE as OHA's sewage advisory; OPEN and NO MONITORING are no record. Out of season on 2026-11-07 (33 beaches, all NO MONITORING): the reader is tested on a fixture in the page's markup; check its first reads in May 2027.",
     "verified": "fetched",
     "checked": "2026-11-07",
     "notes": ""

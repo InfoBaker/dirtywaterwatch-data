@@ -41,8 +41,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | hi | 3 | 0 | 6 | 1 | 0 | 10 |
 | al | 5 | 0 | 6 | 2 | 0 | 13 |
 | tx | 4 | 0 | 7 | 1 | 0 | 12 |
-| or | 6 | 2 | 5 | 1 | 0 | 14 |
-| **all** | **492** | **230** | **405** | **196** | **69** | **1392** |
+| or | 7 | 1 | 5 | 1 | 0 | 14 |
+| **all** | **493** | **229** | **405** | **196** | **69** | **1392** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1585,10 +1585,10 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `or-deq-oers-spills-2013-2025` | Oregon DEQ: All spills reported to OERS and verified by DEQ, 2013-08-01 to 2025-03-27 (ArcGIS FeatureServer) | used | fetched | events | Read once as a frozen archive by the Oregon ingester: the 2,371 sewage rows (2013-07-24 to 2025-03-27) with DEQ's point, the report date and time, gallons and the affected water where given; the narrative, title and address are never read. The layer is checked each run for an edit. |
 | `or-deq-sso-report-form` | Oregon DEQ Sanitary Sewer Overflow Report Form (5-day written report) | used | search_only | law | Shows the regulator report: OERS by phone within 24 hours, written within 5 days, with a public notification section. |
 | `or-oar-340-142` | OAR 340-142-0040 Required reporting (spills to OERS) | used | search_only | law | Immediate phone report to OERS for reportable releases; sewage is reported through permits. |
+| `or-oha-beach-monitoring` | Oregon Beach Monitoring Program advisories (OHA with DEQ) | used | fetched | advisories | Read every refresh as a snapshot by the Oregon ingester: ADVISORY as OHA's beach advisory, SEWAGE as OHA's sewage advisory; OPEN and NO MONITORING are no record. Out of season on 2026-11-07 (33 beaches, all NO MONITORING): the reader is tested on a fixture in the page's markup; check its first reads in May 2027. |
 | `or-oha-hab-advisories` | OHA cyanoHAB recreational use advisories (ArcGIS FeatureServer) | used | fetched | advisories | Read every refresh through the generic ArcGIS block: OHA's advisories and precautions (39 of 64 rows on 2026-11-07: 5 Advisory, 34 Precaution) as algal-bloom advisories; 'Below Human RUV' and 'Advisory/Precaution Lifted' are no current advisory. |
 | `or-schedule-f-public-notice` | DEQ NPDES/WPCF General Conditions (Schedule F): public notification of effluent violation or overflow | used | search_only | law | Oregon's public duty is a permit condition, not a statute. |
 | `or-bes-big-pipe-tracker` | Portland Big Pipe Tracker (gauge and 72-hour chart) | candidate | fetched | monitoring | Registered as a monitored page: the tracker's current-advisory sentence and the gauge's fill level. A fill level is not a report of an overflow, so it colours nothing; the advisories themselves are read from the news feed. |
-| `or-oha-beach-monitoring` | Oregon Beach Monitoring Program advisories (OHA with DEQ) | candidate | fetched | advisories | Registered as a monitored page (page health). The table can be read as a snapshot (ADVISORY as OHA's beach advisory, SEWAGE as OHA's sewage advisory) when the 2027 season opens; no advisory rows existed to test a reader on 2026-11-07. |
 | `or-astoria-cso-page` | City of Astoria Wastewater / CSO page | watch | fetched | outfalls | Background only; 38 open CSO outfalls to the Columbia River and Youngs Bay; no event notices on the page (answered 200 on 2026-11-07). Registered with the barrier: no web channel. |
 | `or-bes-cso-email` | Portland Combined Sewer Overflow Advisories email list (GovDelivery) | watch | fetched | events | Owner sign-up; duplicates the RSS. |
 | `or-corvallis-spill-plan` | City of Corvallis Public Notification & Spill Response Plan | watch | fetched | law | The plan page answered 200 on 2026-11-07 (navigation only extracted); signs and media contacts for larger discharges; no event list. Registered with the barrier: no web channel. |

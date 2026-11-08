@@ -81,7 +81,9 @@ def test_cso_advisory_window_is_the_citys_own():
     assert r["started_at"] == "2026-03-12T06:26:00-07:00" and r["time_precision"] == "minute"
     # only the expiry is given: the end is the expiry less BES's 48 hours, so the window ends at BES's own expiry
     assert r["raw"]["advisory_expires_at"] == "2026-03-16T03:34:00-07:00"
-    assert r["ended_at"] == "2026-03-14T03:34:00-07:00" and r["raw"]["ended_at_precision"] == "minute"
+    # P2-1 (review 2026-11-08): the City never states the stop, so the derived end is a bound ("ended by")
+    assert r["ended_at"] == "2026-03-14T03:34:00-07:00" and r["raw"]["ended_at_precision"] == "bound"
+    assert r["raw"]["end_basis"].startswith("ended by")
     assert r["advice_window_hours"] == 48 and "48 hours after it stops" in r["advice_window_basis"]
     assert r["published_at"] == "2026-03-12T09:14:00-07:00" and r["source_updated_at"] == "2026-03-12T09:15:00-07:00"
     assert r["reported_at"] is None and r["raw"]["stretch_text"] == "downstream of the Ross Island Bridge"
@@ -167,7 +169,8 @@ def test_oers_types_waters_and_reached_water():
     assert r["waterbody_text"] == "Columbia River" and r["raw"]["waterway_place"] == "Astoria"
     r = recs["2013-1512"]
     assert r["event_type"] == "sso" and r["raw"]["reached_water"] is False and r["volume_gal"] == 200
-    assert recs["2017-1160"]["event_type"] == "unknown" and recs["2017-1160"]["raw"]["_source_type"] == "Private Residence"
+    r = recs["2017-1160"]                                                     # P2-3: a private residence's sewage
+    assert r["event_type"] == "sso" and r["raw"]["_source_type"] == "Private Residence" and "_type_basis" in r["raw"]
     r = recs["2023-0731"]
     assert r["waterbody_text"] is None and r["volume_gal"] == 50000          # "Unknown, Madras" names no water
     r = recs["2016-0260"]
@@ -212,11 +215,11 @@ def test_hab_block_validates_and_keeps_advisories_and_precautions_only():
     _, block = R.load_source("or-oha-hab-advisories")
     assert R.validate_block(block, "or-oha-hab-advisories") == []
     recs, stats = hab()
-    assert set(recs) == {"South & mainstream Umpqua River", "Detroit Lake", "Owyhee Reservoir"}
+    assert set(recs) == {"South Umpqua River; Umpqua River", "Detroit Lake", "Owyhee Reservoir"}
     for r in recs.values():
         assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active" and r["time_precision"] == "day"
         assert r["lat"] is not None and r["raw"]["_last_seen_in_source"] == FETCHED
-    u = recs["South & mainstream Umpqua River"]
+    u = recs["South Umpqua River; Umpqua River"]
     assert u["raw"]["_hab_level"] == "Advisory" and "PERMANENT RECREATIONAL USE ADVISORY" in u["advice_text"]
     assert u["started_at"] == "2024-01-01T00:00:00-08:00"
     assert recs["Detroit Lake"]["raw"]["_hab_level"] == "Precaution" and recs["Detroit Lake"]["raw"]["county_2"] == "Linn"
@@ -268,7 +271,8 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["or-deq-oers-reports"]["barrier"] == "phone_only" and reg["or-deq-oers-reports"]["urls"] == []
     assert reg["or-deq-oers-spills-archive"]["feed_source_id"] == "or-deq-oers-spills-2013-2025"
     assert reg["or-oha-hab-advisories"]["feed_source_id"] == "or-oha-hab-advisories"
-    assert reg["or-portland-bes-big-pipe-tracker"]["monitored"] and reg["or-oha-beach-conditions"]["monitored"]
+    assert reg["or-portland-bes-big-pipe-tracker"]["monitored"]
+    assert reg["or-oha-beach-conditions"]["feed_source_id"] == "or-oha-beach-monitoring"
 
 
 def test_rules_row_cites_the_law_and_sets_no_window():
@@ -322,3 +326,108 @@ def test_oers_waterway_text():
     assert O.waterway("Willamette, Oak Lodge") == (["Willamette River"], "Oak Lodge")
     assert O.waterway("Possible impact to creek") == ([], None) and O.waterway("NULL") == ([], None)
     assert O.waterway("nye creek") == (["Nye Creek"], None)
+
+
+# ---------------------------------------------------------------- the review of 2026-11-08
+
+def intervals(ev, now="2026-11-08T00:00:00+00:00"):
+    from datetime import datetime
+    from build import status as S
+    return S.event_intervals(ev, "OR", datetime.fromisoformat(now), None, S.load_rules())
+
+
+def test_p2_3_a_private_homes_sewage_report_carries_the_caution():
+    r = oers()[0]["2017-1160"]
+    ivs = intervals(r, "2017-04-12T00:00:00+00:00")
+    assert ivs and ivs[0]["color"] == "yellow" and ivs[0]["category"] == "sewage"
+    from build import status as S
+    assert r["event_type"] in S.DISCHARGE_TYPES
+
+
+def test_p2_4_an_advice_to_avoid_a_water_with_no_end_is_red_then_hatched():
+    r = bes()[0]["56908"]
+    assert r["status"] == "ongoing" and "avoid the Willamette River" in r["raw"]["status_basis"]
+    ivs = intervals(r, "2025-12-10T00:00:00+00:00")
+    assert ivs[0]["color"] == "red" and ivs[0]["rule"] == "ongoing"
+    assert any(iv["rule"] == "unresolved" for iv in ivs)
+    assert bes()[0]["58937"]["status"] == "unknown"                            # no water to avoid: unchanged
+
+
+def test_p2_5_a_failed_read_clears_on_the_next_unchanged_read(tmp_path, monkeypatch):
+    import common
+    monkeypatch.setattr(O, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    assert O.main(["--file", str(FIX / "or_oers" / "rows.json")]) == 0
+
+    def boom(sess):
+        raise RuntimeError("timeout")
+    monkeypatch.setattr(O, "metadata", boom)
+    assert O.main([]) == 1
+    d = json.loads((tmp_path / f"{O.SOURCE_ID}.json").read_text())
+    assert d["ok"] is False and d["count"] == 10
+    monkeypatch.setattr(O, "metadata", lambda sess: {"name": "x", "hasStaticData": True,
+                                                       "lastEditDate": O.FROZEN_EDIT_MS})
+    monkeypatch.setattr(O, "query", lambda sess: (_ for _ in ()).throw(AssertionError("rows read again")))
+    assert O.main([]) == 0
+    d = json.loads((tmp_path / f"{O.SOURCE_ID}.json").read_text())
+    assert d["ok"] is True and d["error"] is None and d["count"] == 10 and d["meta"]["frozen"] is True
+
+
+def test_p2_2_ohas_precaution_is_labelled_a_precaution():
+    recs = hab()[0]
+    p, a = recs["Detroit Lake"], recs["South Umpqua River; Umpqua River"]
+    assert p["authority"] == "Oregon Health Authority (recreational use precaution)"
+    assert p["raw"]["advisory_noun"] == "Cyanobacteria precaution (Oregon Health Authority)"
+    assert a["authority"] == "Oregon Health Authority (recreational use advisory)" and "_interval_label" not in a["raw"]
+    ivs = intervals(p)
+    assert ivs[0]["category"] == "bloom" and "precaution" in ivs[0]["label"] and "not an advisory" in ivs[0]["label"]
+    assert a["raw"]["_water_as_given"] == "South & mainstream Umpqua River"
+
+
+def test_p2_6_misspellings_are_aliased_not_sent_to_the_batch():
+    aliases = json.loads((ROOT / "data" / "water-aliases.json").read_text())
+    assert aliases["tualatin-river-or"] == ["Tualitan River"] and "Coquile River" in aliases["coquille-river-or"]
+    d = json.loads((ROOT / "research" / "or" / "receiving-waters-missing.json").read_text())
+    bad = {re.sub(r"[^a-z0-9]", "", a.lower()) for k, v in aliases.items() if k.endswith("-or") for a in v}
+    assert not [r["name"] for r in d["rows"] if re.sub(r"[^a-z0-9]", "", r["name"].lower()) in bad]
+    assert d["aliased"]["Tualitan River"] == 2
+    from ingest import or_transforms as T
+    assert T.water_names("Brownlee Reservoir - Powder Arm") == ["Brownlee Reservoir"]
+
+
+def test_p2_7_ohas_beach_table_advisory_and_sewage():
+    from ingest import or_oha_beaches as OB
+    rows = OB.rows_of((FIX / "or_oha_beach" / "status.html").read_bytes())
+    assert [r["status"] for r in rows] == ["ADVISORY", "OPEN", "SEWAGE", "NO MONITORING"]
+    recs, stats = OB.build(rows, [], FETCHED)
+    by = {r["waterbody_text"]: r for r in recs}
+    assert set(by) == {"Seaside Beach", "Cannon Beach"} and stats["open_records"] == 2
+    assert by["Seaside Beach"]["event_type"] == "beach_advisory" and by["Cannon Beach"]["event_type"] == "sso"
+    assert by["Cannon Beach"]["status"] == "advisory_active" and by["Cannon Beach"]["time_precision"] == "poll"
+    assert by["Cannon Beach"]["raw"]["county"] == "Clatsop" and "Sewage spills" in by["Cannon Beach"]["advice_text"]
+    assert intervals(by["Cannon Beach"], "2026-11-08T00:00:00+00:00")[0]["color"] == "red"
+    # the next read shows Cannon Beach open: OHA's window ends there; Seaside still listed
+    later = "2026-11-08T05:00:00Z"
+    rows2 = [dict(r, status="OPEN") if r["beach"] == "Cannon Beach" else r for r in rows]
+    recs2, stats2 = OB.build(rows2, json.loads(json.dumps(recs)), later)
+    by2 = {r["waterbody_text"]: r for r in recs2}
+    assert by2["Cannon Beach"]["raw"]["_unlisted_since"] == later and stats2["open_records"] == 1
+    assert by2["Seaside Beach"]["raw"]["_last_seen_in_source"] == later and len(recs2) == 2
+
+
+def test_p3_small_fixes():
+    # Malheur north of 44.30 N by its Census outline (P3-2)
+    assert zones.oregon_zone(44.31, -118.10) == zones.MOUNTAIN
+    # a sewer overflow title is read; treated effluent is not (P3-6)
+    assert B.TITLE_RE.search("Sewer overflow to Johnson Creek")
+    assert B.NOT_SEWAGE_TITLE.search("Treated wastewater that was not dechlorinated enters the Columbia Slough")
+    # a renamed contact heading still ends the article (P3-7)
+    page = (FIX / "or_bes" / "page_contact.html").read_text().replace("<h2>Help prevent sewage releases</h2>", "") \
+        .replace("<h2>Contact</h2>", "<h2>Media contact</h2>")
+    lines = B.page_lines(page)
+    no_personal(lines)
+    # a volume under one gallon is text, never 0 gallons (P3-1)
+    rows, _ = O.load_file(str(FIX / "or_oers" / "rows.json"))
+    a = dict(rows[0], Q_released_gal=0.5, Quantity_Unknown="No", UOM="Gallons")
+    r = O.record(a, "x", FETCHED)
+    assert r["volume_gal"] is None and r["volume_text"] == "0.5 gallons"
