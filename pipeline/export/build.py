@@ -927,7 +927,9 @@ def live_jurisdiction_events(events: list[dict], live: set[str]) -> tuple[list[d
     Records with no jurisdiction prefix (epa-echo) are kept as before."""
     kept, n = [], 0
     for e in events:
-        if status_mod.event_state(e):
+        # the record's own state, never that of a live water it names (an Alabama report whose ingester named a
+        # Georgia water is Alabama's; status.own_state, the status build's live-only rule)
+        if status_mod.event_state({**e, "water_slugs": []}):
             kept.append(e)
             continue
         pref = None
