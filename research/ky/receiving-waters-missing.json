@@ -1,55 +1,22 @@
 {
  "about": "Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as reaching a water), Louisville MSD's discharge notices, the Division of Water's HAB Viewer (every point's lake in the layer read on 2026-11-07) and the Division's standing swimming advisories (the waters and stretches the page names), with the number of records giving each. The form's placeholders ('Unnamed Tributary or Unknown', 'Unnamed') and reports that say the discharge reached no water are left out.",
  "state": "KY",
- "waters": 22,
- "reports": 14,
+ "waters": 3,
+ "reports": 2,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in KY": 2,
+  "49 NHD waters of that name in KY, none within reach of the reports' places": 1
+ },
+ "resolved_names": 19,
+ "resolved_reports": 12,
+ "build": {
+  "date": "2026-11-08",
+  "command": "python -m ingest.waters_from_nhd --names research/ky/receiving-waters-missing.json --state KY",
+  "records_built": 13,
+  "names_resolved": 19,
+  "network_requests": 0
+ },
  "rows": [
-  {
-   "name": "Brashears Creek",
-   "reports": 1,
-   "permits": [
-    "KY0028142"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ]
-  },
-  {
-   "name": "Catron Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "points": [
-    [
-     36.82954,
-     -83.325186
-    ]
-   ],
-   "stretches": [
-    "all of it"
-   ],
-   "counties": [
-    "Harlan"
-   ]
-  },
-  {
-   "name": "Cedar Creek",
-   "reports": 1,
-   "permits": [
-    "KY0098540"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     38.121111,
-     -85.593611
-    ]
-   ]
-  },
   {
    "name": "Doe Run Lake",
    "reports": 1,
@@ -64,79 +31,8 @@
      37.99797,
      -86.110596
     ]
-   ]
-  },
-  {
-   "name": "East Hickman Creek",
-   "reports": 1,
-   "permits": [
-    "KY0021504"
    ],
-   "sources": [
-    "echo-sewer-overflow"
-   ]
-  },
-  {
-   "name": "Little Huckleberry Creek",
-   "reports": 1,
-   "permits": [
-    "KY0106143"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     38.4175,
-     -85.61111
-    ]
-   ]
-  },
-  {
-   "name": "Little Stoner Creek",
-   "reports": 1,
-   "permits": [
-    "KY0037991"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ]
-  },
-  {
-   "name": "Long Run",
-   "reports": 1,
-   "permits": [
-    "KY0102784"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     38.22406,
-     -85.47036
-    ]
-   ]
-  },
-  {
-   "name": "Martins Fork Cumberland River",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "points": [
-    [
-     36.845096,
-     -83.324074
-    ]
-   ],
-   "stretches": [
-    "from Harlan to the Cawood Water Plant"
-   ],
-   "counties": [
-    "Harlan"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in KY; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Old Springfield Reservoir",
@@ -150,194 +46,8 @@
      37.688574,
      -85.231588
     ]
-   ]
-  },
-  {
-   "name": "Straight Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
    ],
-   "points": [
-    [
-     36.762871,
-     -83.691866
-    ]
-   ],
-   "stretches": [
-    "all of it"
-   ],
-   "counties": [
-    "Bell"
-   ]
-  },
-  {
-   "name": "Three Mile Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "points": [
-    [
-     39.050902,
-     -84.493835
-    ]
-   ],
-   "stretches": [
-    "all of it"
-   ],
-   "counties": [
-    "Campbell"
-   ]
-  },
-  {
-   "name": "Town Fork",
-   "reports": 1,
-   "permits": [
-    "KY0100404"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ]
-  },
-  {
-   "name": "West Hickman Creek",
-   "reports": 1,
-   "permits": [
-    "KY0021504"
-   ],
-   "sources": [
-    "echo-sewer-overflow"
-   ]
-  },
-  {
-   "name": "South Fork Beargrass Creek",
-   "reports": 0,
-   "permits": [
-    "KY0022411"
-   ],
-   "sources": [
-    "ky-dow-cso-sites-layer"
-   ],
-   "points": [
-    [
-     38.215278,
-     -85.711111
-    ],
-    [
-     38.240833,
-     -85.736111
-    ],
-    [
-     38.251944,
-     -85.727778
-    ],
-    [
-     38.244444,
-     -85.735278
-    ],
-    [
-     38.243889,
-     -85.735556
-    ]
-   ],
-   "counties": [
-    "Jefferson"
-   ],
-   "outfalls": 41,
-   "reach_ids": [
-    "5140101000472"
-   ],
-   "gnis_ids": [
-    "503905"
-   ]
-  },
-  {
-   "name": "Beargrass Creek",
-   "reports": 0,
-   "permits": [
-    "KY0022411"
-   ],
-   "sources": [
-    "ky-dow-cso-sites-layer"
-   ],
-   "points": [
-    [
-     38.256667,
-     -85.731389
-    ],
-    [
-     38.256389,
-     -85.715
-    ],
-    [
-     38.258611,
-     -85.731389
-    ],
-    [
-     38.260833,
-     -85.719167
-    ],
-    [
-     38.258333,
-     -85.720556
-    ]
-   ],
-   "counties": [
-    "Jefferson"
-   ],
-   "outfalls": 14,
-   "reach_ids": [
-    "5140101000175",
-    "5140101000471"
-   ],
-   "gnis_ids": [
-    "486584"
-   ]
-  },
-  {
-   "name": "Middle Fork Beargrass Creek",
-   "reports": 0,
-   "permits": [
-    "KY0022411"
-   ],
-   "sources": [
-    "ky-dow-cso-sites-layer"
-   ],
-   "points": [
-    [
-     38.237222,
-     -85.695
-    ],
-    [
-     38.251111,
-     -85.723611
-    ],
-    [
-     38.251667,
-     -85.718889
-    ],
-    [
-     38.233889,
-     -85.688333
-    ],
-    [
-     38.248333,
-     -85.700278
-    ]
-   ],
-   "counties": [
-    "Jefferson"
-   ],
-   "outfalls": 14,
-   "reach_ids": [
-    "5140101000475"
-   ],
-   "gnis_ids": [
-    "498112"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in KY; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Mill Creek",
@@ -379,15 +89,200 @@
    ],
    "gnis_ids": [
     "498252"
+   ],
+   "reason": "49 NHD waters of that name in KY, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -85.75861,
+     "lat": 38.23472,
+     "reason": "no NHD water of that name within 2 km of the reports' point (38.23472, -85.75861) (the nearest is 6.0 km away)"
+    }
+   ]
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Brashears Creek",
+   "reports": 1,
+   "slugs": [
+    "brashears-creek-ky"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Catron Creek",
+   "reports": 1,
+   "slugs": [
+    "catron-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     36.82954,
+     -83.325186
+    ]
+   ]
+  },
+  {
+   "name": "Cedar Creek",
+   "reports": 1,
+   "slugs": [
+    "cedar-creek-louisville-jefferson-county-metro-government-balance-ky"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.121111,
+     -85.593611
+    ]
+   ]
+  },
+  {
+   "name": "East Hickman Creek",
+   "reports": 1,
+   "slugs": [
+    "east-hickman-creek-ky"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Huckleberry Creek",
+   "reports": 1,
+   "slugs": [
+    "little-huckleberry-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.4175,
+     -85.61111
+    ]
+   ]
+  },
+  {
+   "name": "Little Stoner Creek",
+   "reports": 1,
+   "slugs": [
+    "little-stoner-creek-ky"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Long Run",
+   "reports": 1,
+   "slugs": [
+    "long-run-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.22406,
+     -85.47036
+    ]
+   ]
+  },
+  {
+   "name": "Martins Fork Cumberland River",
+   "reports": 1,
+   "slugs": [
+    "martins-fork-cumberland-river-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     36.845096,
+     -83.324074
+    ]
+   ]
+  },
+  {
+   "name": "Straight Creek",
+   "reports": 1,
+   "slugs": [
+    "straight-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     36.762871,
+     -83.691866
+    ]
+   ]
+  },
+  {
+   "name": "Three Mile Creek",
+   "reports": 1,
+   "slugs": [
+    "threemile-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.050902,
+     -84.493835
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -84.49384,
+     "lat": 39.0509,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.05090, -84.49384) (the nearest is 81.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Town Fork",
+   "reports": 1,
+   "slugs": [
+    "town-fork-ky"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "West Hickman Creek",
+   "reports": 1,
+   "slugs": [
+    "west-hickman-creek-ky"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Beargrass Creek",
+   "reports": 0,
+   "slugs": [
+    "beargrass-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.256667,
+     -85.731389
+    ],
+    [
+     38.256389,
+     -85.715
+    ],
+    [
+     38.258611,
+     -85.731389
+    ],
+    [
+     38.260833,
+     -85.719167
+    ],
+    [
+     38.258333,
+     -85.720556
+    ]
    ]
   },
   {
    "name": "Caneyville Reservoir",
    "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-hab-viewer"
+   "slugs": [
+    "caneyville-reservoir-ky"
    ],
+   "how": "record built from the name",
    "points": [
     [
      37.43914,
@@ -398,10 +293,10 @@
   {
    "name": "Kentucky Lake",
    "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-hab-viewer"
+   "slugs": [
+    "kentucky-lake-ky"
    ],
+   "how": "a water record already holds the name",
    "points": [
     [
      36.64213,
@@ -412,10 +307,10 @@
   {
    "name": "Lake Malone",
    "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-hab-viewer"
+   "slugs": [
+    "lake-malone-ky"
    ],
+   "how": "a water record already holds the name",
    "points": [
     [
      37.027409,
@@ -424,12 +319,72 @@
    ]
   },
   {
+   "name": "Middle Fork Beargrass Creek",
+   "reports": 0,
+   "slugs": [
+    "middle-fork-beargrass-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.237222,
+     -85.695
+    ],
+    [
+     38.251111,
+     -85.723611
+    ],
+    [
+     38.251667,
+     -85.718889
+    ],
+    [
+     38.233889,
+     -85.688333
+    ],
+    [
+     38.248333,
+     -85.700278
+    ]
+   ]
+  },
+  {
+   "name": "South Fork Beargrass Creek",
+   "reports": 0,
+   "slugs": [
+    "south-fork-beargrass-creek-ky"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.215278,
+     -85.711111
+    ],
+    [
+     38.240833,
+     -85.736111
+    ],
+    [
+     38.251944,
+     -85.727778
+    ],
+    [
+     38.244444,
+     -85.735278
+    ],
+    [
+     38.243889,
+     -85.735556
+    ]
+   ]
+  },
+  {
    "name": "Williamstown Lake",
    "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-hab-viewer"
+   "slugs": [
+    "williamstown-lake-ky"
    ],
+   "how": "a water record already holds the name",
    "points": [
     [
      38.656383,
