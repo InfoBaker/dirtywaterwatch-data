@@ -26,7 +26,9 @@ Records
 
 Failures
   Any of the nine requests failing (after three tries) makes the run ok=False with the failed
-  requests named; the previous records stay. The research samples are not used as a fallback:
+  requests named; the previous records stay. Each try waits at most 30 s for an answer, and after five failed or
+  timed-out tries in a row the run asks nothing more ("stopped after 5 failures"; REQUEST_TIMEOUT,
+  MAX_CONSECUTIVE_FAILURES). The research samples are not used as a fallback:
   they cover two parameters over shorter windows and would make a partial history look complete.
 
 Lag and cadence
@@ -86,21 +88,45 @@ def water_by_name(o: dict | None, idx: dict, bbox: dict) -> list[str]:
     return [hits[0]["slug"]] if len(hits) == 1 else []
 
 
-def fetch(permit: str, code: str, since: date) -> tuple[dict | None, str]:
+# A request budget (run 42440292355, 2026-11-08: EPA's DMR service did not answer, and nine requests of three tries with
+# a 120 s timeout held the hourly refresh 3,219 s): each try waits at most REQUEST_TIMEOUT (connect, read), and after
+# MAX_CONSECUTIVE_FAILURES failed or timed-out tries in a row no more requests are made this run; the run is then not
+# ok, says "stopped after N failures" and keeps the previous run's records (main). A good answer resets the count.
+REQUEST_TIMEOUT = (10, 30)
+MAX_CONSECUTIVE_FAILURES = 5
+
+
+class Budget:
+    def __init__(self, limit: int = MAX_CONSECUTIVE_FAILURES):
+        self.limit, self.consecutive = limit, 0
+
+    @property
+    def stopped(self) -> bool:
+        return self.consecutive >= self.limit
+
+
+def fetch(permit: str, code: str, since: date, budget: Budget | None = None) -> tuple[dict | None, str]:
+    budget = budget or Budget()
     params = {"output": "JSON", "p_id": permit, "parameter_code": code,
               "start_date": since.strftime("%m/%d/%Y"), "end_date": date.today().strftime("%m/%d/%Y")}
+    err = "not asked"
     for i in range(3):
+        if budget.stopped:
+            return None, f"not asked (stopped after {budget.consecutive} failures)"
         try:
-            r = requests.get(URL, params=params, headers=HEADERS, timeout=120)
+            r = requests.get(URL, params=params, headers=HEADERS, timeout=REQUEST_TIMEOUT)
             r.raise_for_status()
             js = r.json()
             if (js.get("Results") or {}).get("Message") != "Success":
                 raise ValueError(str(js)[:200])
             save_raw(SOURCE_ID, r.content, f"{permit}-{code}.json")
+            budget.consecutive = 0
             return js["Results"], "live"
         except (requests.RequestException, ValueError) as e:
             err = f"{type(e).__name__}: {e}"
-            time.sleep(3 * (i + 1))
+            budget.consecutive += 1
+            if not budget.stopped:
+                time.sleep(3 * (i + 1))
     return None, f"failed ({err})"
 
 
@@ -142,9 +168,10 @@ def main(argv=None) -> int:
     cells: dict[tuple, dict] = defaultdict(dict)
     names: dict[str, str] = {}
     fetch_log, skipped_internal = {}, Counter()
+    budget = Budget()
     for permit in PERMITS:
         for code, label in PARAMS.items():
-            res, how = fetch(permit, code, since)
+            res, how = fetch(permit, code, since, budget)
             fetch_log[f"{permit}:{code}"] = how
             if not res:
                 continue
@@ -165,9 +192,11 @@ def main(argv=None) -> int:
                             cells[key][label] = row
             time.sleep(1)
 
+    stop = f"stopped after {budget.consecutive} failures; " if budget.stopped else ""
     if not any(h == "live" for h in fetch_log.values()):
-        write_events(SOURCE_ID, [], ok=False, error=f"all requests failed: {fetch_log}")
-        print(f"{SOURCE_ID}: all requests failed", file=sys.stderr)
+        # write_events with ok=False keeps the previous run's records
+        write_events(SOURCE_ID, [], ok=False, error=f"{stop}all requests failed: {fetch_log}")
+        print(f"{SOURCE_ID}: {stop}all requests failed; the previous records are kept", file=sys.stderr)
         return 1
 
     # an outfall with two monitoring lines in the same month (Chicopee 007) gets :1 / :2
@@ -257,7 +286,7 @@ def main(argv=None) -> int:
     if failed:
         # a partial pull never refreshes the feed: ok=False, previous records kept (a first run with
         # nothing to keep writes what it has, still ok=False)
-        err = "requests failed: " + "; ".join(f"{k} {v}" for k, v in failed.items())
+        err = stop + "requests failed: " + "; ".join(f"{k} {v}" for k, v in failed.items())
         path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
         prev = read_json(path, {}) or {}
         if prev.get("records") or not records:
