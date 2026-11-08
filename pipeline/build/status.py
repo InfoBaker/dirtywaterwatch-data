@@ -1029,6 +1029,8 @@ COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer giv
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
 COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county too (a row with no point)
+COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives points and a county field (two Gordon Creeks)
+COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}

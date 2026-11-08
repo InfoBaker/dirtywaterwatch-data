@@ -117,3 +117,31 @@ def test_points_are_kept_to_three_decimals_and_private_homes_to_their_county():
     h = next(r for r in recs if r["source_record_id"] == "99000010")
     assert h["lat"] is None and h["lon"] is None and "_x" not in h["raw"]["row"] and h["raw"]["county"]
     assert "41.7412" not in json.dumps(h) and "Northing" not in json.dumps(recs)
+
+
+# ---------------------------------------------------------------- P2-3, P2-5: county-aware names, the missing list
+
+def test_a_morgan_county_gordon_creek_report_is_not_placed_on_carbon_countys_creek(monkeypatch):
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"UT"})                # Utah as it will be once live
+    assert "UT" in S.COUNTY_STATES and "UT" in S.COUNTY_FIELD_STATES
+    waters = {"gordon-creek-ut": {"slug": "gordon-creek-ut", "state": "UT", "name": "Gordon Creek",
+                                  "bbox": [-110.95, 39.62, -110.75, 39.72]}}        # Carbon County, near Helper
+    ev = {"lat": 41.151, "lon": -111.82, "raw": {"state": "UT", "county": "Morgan County"}, "npdes_permit": None,
+          "source_id": "ut-deq-environmental-incidents"}
+    kept, why = S.county_slugs(["gordon-creek-ut"], ev, waters, lambda s, la, lo: 180_000.0)
+    assert kept == [] and "Morgan" in why
+    withheld = {**ev, "lat": None, "lon": None}                                # a private home's report: the field
+    kept, why = S.county_slugs(["gordon-creek-ut"], withheld, waters, lambda s, la, lo: None)
+    assert kept == [] and "the county the report gives" in why
+
+
+def test_the_missing_list_carries_places_and_the_unplaced_advisories():
+    d = json.loads((ROOT / "research" / "ut" / "receiving-waters-missing.json").read_text())
+    by = {(r["name"], r["county"]): r for r in d["rows"]}
+    g = by[("Gordon Creek", "Morgan County")]
+    assert g["reports"] == 1 and g["points"] and g["points"][0][0] > 41
+    for name in ("Big East Lake", "Red Creek Reservoir", "Sulphur Creek", "North Creek", "Babylon Trail Creek",
+                 "Manila Creek Pond", "Fifth Water Hot Springs"):
+        r = next(x for x in d["rows"] if x["name"] == name)
+        assert r["reports"] >= 1 and "ut-dwq-recreational-advisories" in r["sources"] and r["points"]
+    assert all(r["county"] for r in d["rows"])
