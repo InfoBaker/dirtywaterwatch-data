@@ -2693,6 +2693,9 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         red = {"rule": "red.authority_advisory", "hours": None, "clock": None, "source": ev.get("source_url"),
                "rationale": "in effect while the authority keeps the advisory (aged out 14 days after the "
                             "last confirmation when no end is given)"}
+        if system_wide_advisory(ev):    # final audit 2026-11-08 P3-1: its own age-out (SYSTEM_WIDE_CONFIRM_HOURS)
+            red["rationale"] = (f"in effect while the authority keeps the advisory (aged out {SYSTEM_WIDE_CONFIRM_HOURS} "
+                                "hours after the last read that showed it)")
 
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
