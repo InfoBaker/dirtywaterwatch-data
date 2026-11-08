@@ -94,6 +94,12 @@
 #                  the sewage rows by a title rule, dated to the day of discovery, the public's reports marked;
 #                  ingest/ut_transforms.py) and ut-dwq-recreational-advisories (DWQ's map of bloom and E. coli
 #                  advisories), and echo_sewer_overflow_events (EPA's overflow tables, UT permits)
+#                  Oregon: or_bes_news (Portland Environmental Services' CSO and sewage advisories: the news RSS and
+#                  each advisory's page, the City's 48-hour window), or_deq_oers_spills (DEQ's OERS spills 2013 to
+#                  March 2025, the sewage rows as a frozen archive: the layer's metadata each run, the rows only when
+#                  DEQ edits it), or_oha_beaches (OHA's beach conditions table, a snapshot: ADVISORY and SEWAGE, in
+#                  season) and the generic ArcGIS block or-oha-hab-advisories (OHA's bloom advisories and
+#                  precautions; ingest/or_transforms.py)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

@@ -1,0 +1,35 @@
+id: "or-bes-news-rss"
+name: "City of Portland Environmental Services news RSS: CSO Advisories and Sewage Advisories"
+url: "https://www.portland.gov/bes/news/rss"
+homepage: "https://www.portland.gov/bes/news"
+kind: "rss"
+level: "operator"
+# Ingester: pipeline/ingest/or_bes_news.py (source id or-bes-news-rss): the feed every refresh, each advisory's page
+#   once (again when BES updates it), rules only.
+# Read 2026-11-07: 25 items, 13 of them sewage advisories (4 CSO Advisories, 9 sewage releases) from 2025-11-21 to
+#   2026-10-22, 14 records (one advisory reports two releases). The other 12 items (rates, traffic advisories,
+#   projects, a release of treated effluent for which BES advised no precautions) are not read.
+# Times: each page's Published and Updated (Portland time); the start and end from the text (the overflow's stated
+#   start, the time crews responded, or the day only). The RSS pubDate follows the page's last update (the
+#   2025-12-18 CSO advisory's pubDate is its expiry) and is never the start. The four CSO advisories were published
+#   0.4, 2.2, 2.8 and 13.9 hours after the overflow began; the sewage releases 3.7 to 33.5 hours after (one update a
+#   month later).
+# The City's window: a CSO advisory, and a sewage release to the Willamette, says "Avoid contact with the river in the
+#   affected area during the overflow and for 48 hours after it stops" (6 of 14 records): the authority's own red. A
+#   CSO advisory's stretch: "the Willamette River downstream of the Ross Island Bridge".
+# Privacy: the pages' contact block (the public information officer) and everything after the article are cut before
+#   anything is kept; house numbers and telephone numbers are removed.
+# No coordinates; the Big Pipe Tracker gauge and the GovDelivery e-mail list are separate channels (the register).
+cadence: "Issued during the event: a CSO advisory within about half an hour to 14 hours of the overflow's start; updated when the overflow ends and the advisory expires (48 hours after)."
+license: "none stated"
+attribution: "City of Portland Environmental Services"
+enabled: true
+role: "events"
+event_types: ["cso", "sso"]
+states: ["OR"]
+registry_ids: ["or-bes-news-rss"]
+access: ["rss", "html"]
+access_detail: "RSS 2.0 at https://www.portland.gov/bes/news/rss (the 25 latest news items: title, link, description, guid with the page's node id, pubDate), no key; each item's page at portland.gov gives Published, Updated and the advisory's text."
+machine_readable: true
+legal_basis: "DEQ NPDES permit general conditions (Schedule F): public notification of an overflow that threatens public health, by the permittee's Emergency Response and Public Notification Plan; permit OR0026905"
+checked: "2026-11-07"

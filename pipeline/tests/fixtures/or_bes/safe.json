@@ -1,0 +1,184 @@
+{
+ "format": "dww-or-bes-safe/1",
+ "feed": "https://www.portland.gov/bes/news/rss",
+ "items": [
+  {
+   "title": "Advisory: Sewage Release to Woods Creek in Southwest Portland",
+   "link": "https://www.portland.gov/bes/news/2026/10/22/advisory-sewage-release-woods-creek-southwest-portland",
+   "guid": "https://www.portland.gov/node/64402#2026-10-22T09:30:00",
+   "node": "64402",
+   "pub_date": "Thu, 22 Oct 2026 09:30:00 -0700",
+   "description": "On Wednesday, October 21, City crews responded to a sewage release near SW 59th Ave. and SW Logan Ct. in Southwest Portland. The sewage release is impacting Woods Creek, a tributary to Fanno Creek. As a precaution, the public is advised to avoid Woods Creek and Fanno Creek west of SW 59th Ave."
+  },
+  {
+   "title": "Portland sewer, stormwater, and water rates to increase July 1, 2026",
+   "link": "https://www.portland.gov/water/customer-service/news/2026/6/24/portland-sewer-stormwater-and-water-rates-increase-july-1",
+   "guid": "https://www.portland.gov/node/61813#2026-06-24T09:30:00",
+   "node": "61813",
+   "pub_date": "Wed, 24 Jun 2026 09:30:00 -0700",
+   "description": "On July 1, sewer and stormwater rates will increase 5.15 percent and water rates will increase 8.1 percent. Together, these changes will increase the typical single-family residential customer's bill by 6.36 percent, or about $10.20 per month. Bills will also include a new Flood Safety Benefit Fee."
+  },
+  {
+   "title": "CSO Advisory: Heavy rain leads to combined sewer overflow to the Willamette River",
+   "link": "https://www.portland.gov/bes/news/2026/3/12/cso-advisory-heavy-rain-leads-combined-sewer-overflow-willamette-river",
+   "guid": "https://www.portland.gov/node/59515#2026-03-12T09:15:00",
+   "node": "59515",
+   "pub_date": "Thu, 12 Mar 2026 09:15:00 -0700",
+   "description": "A combined sewer overflow (CSO) advisory has been issued for the Willamette River."
+  },
+  {
+   "title": "Sewage Advisory: Crews respond to sewage release in NW Portland",
+   "link": "https://www.portland.gov/bes/news/2026/2/12/sewage-advisory-crews-respond-sewage-release-nw-portland",
+   "guid": "https://www.portland.gov/node/58937#2026-02-12T15:54:21",
+   "node": "58937",
+   "pub_date": "Thu, 12 Feb 2026 15:54:21 -0800",
+   "description": "On Tuesday, February 12, City crews responded to reports of a sewage leak from an excavation hole on NW Beuhla Vista Terrace"
+  },
+  {
+   "title": "Advisory: Sewage release to the Willamette River during pump station maintenance",
+   "link": "https://www.portland.gov/bes/news/2026/1/7/advisory-sewage-release-willamette-river-during-pump-station-maintenance",
+   "guid": "https://www.portland.gov/node/57715#2026-01-07T16:00:00",
+   "node": "57715",
+   "pub_date": "Wed, 07 Jan 2026 16:00:00 -0800",
+   "description": "A sewage advisory has been issued for the Willamette River through 9:01 a.m., January 8, 2026."
+  },
+  {
+   "title": "Treated wastewater that was not dechlorinated enters the Columbia Slough outside the City’s primary wastewater treatment plant",
+   "link": "https://www.portland.gov/bes/news/2025/12/19/treated-wastewater-was-not-dechlorinated-enters-columbia-slough-outside-citys",
+   "guid": "https://www.portland.gov/node/57213#2025-12-19T16:24:58",
+   "node": "57213",
+   "pub_date": "Fri, 19 Dec 2025 16:24:58 -0800",
+   "description": "On Friday, December 19, a leak near a pump station at the Columbia Boulevard Wastewater Treatment Plant in North Portland was observed to be leaking wastewater to the Columbia Slough."
+  },
+  {
+   "title": "Sewage Advisory: Sewage Release in South Portland Impacting the Willamette River",
+   "link": "https://www.portland.gov/bes/news/2025/12/9/sewage-advisory-sewage-release-south-portland-impacting-willamette-river",
+   "guid": "https://www.portland.gov/node/56908#2025-12-19T06:30:00",
+   "node": "56908",
+   "pub_date": "Fri, 19 Dec 2025 06:30:00 -0800",
+   "description": "Around noon on December 9, and again around 8 p.m. on December 18, City crews reported a sewage release on S Fielding Rd in South Portland. The release is from private property and is impacting a stormwater inlet that discharges to the Willamette River."
+  },
+  {
+   "title": "Sewage Advisory: Crews Respond to Sewage Release in South Portland",
+   "link": "https://www.portland.gov/bes/news/2025/12/5/sewage-advisory-crews-respond-sewage-release-south-portland",
+   "guid": "https://www.portland.gov/node/56798#2025-12-05T12:53:01",
+   "node": "56798",
+   "pub_date": "Fri, 05 Dec 2025 12:53:01 -0800",
+   "description": "On Friday, December 5, City crews responded to a sewage release on S Corbett Ave near its intersection with S California St in South Portland. The release has stopped. As a precaution, the public is advised to follow posted signage in the area."
+  },
+  {
+   "title": "Advisory: Combined Sewer Overflow Released from Elk Rock Pump Station",
+   "link": "https://www.portland.gov/bes/news/2025/11/28/advisory-combined-sewer-overflow-released-elk-rock-pump-station",
+   "guid": "https://www.portland.gov/node/56546#2025-11-28T13:56:10",
+   "node": "56546",
+   "pub_date": "Fri, 28 Nov 2025 13:56:10 -0800",
+   "description": "A combined sewer overflow (CSO) advisory has been issued for the Willamette River and/or Columbia Slough."
+  }
+ ],
+ "pages": {
+  "64402": {
+   "published": "October 22, 2026 9:30 am",
+   "updated": null,
+   "label": "News article",
+   "lines": [
+    "On Wednesday, October 21, City crews responded to a sewage release near SW 59th Ave. and SW Logan Ct. in Southwest Portland. The sewage release is impacting Woods Creek, a tributary to Fanno Creek. As a precaution, the public is advised to avoid Woods Creek and Fanno Creek west of SW 59th Ave.",
+    "On Wednesday afternoon, crews responded to a report of a sewage release flowing into Woods Creek. The release is currently ongoing. The sewage release is coming from a private property, and the cause is still under investigation.",
+    "As a precaution, the public is advised to avoid contact with Woods Creek and Fanno Creek west of SW 59th Ave due to the possibility of increased bacteria in the water. Warning signs have been posted, and the public is advised to follow all posted signs in the area."
+   ]
+  },
+  "59515": {
+   "published": "March 12, 2026 9:14 am",
+   "updated": "March 12, 2026 9:15 am",
+   "label": "News article",
+   "lines": [
+    "A combined sewer overflow (CSO) advisory has been issued for the Willamette River.",
+    "This advisory expired at 3:34am on March 16, 2026",
+    "About the CSO",
+    "The CSO affects the stretch of the Willamette River downstream of the Ross Island Bridge.",
+    "The overflow began around 6:26 am on March 12 and is ongoing at the time of this posting.",
+    "This advisory may be updated as needed.",
+    "Public advisory",
+    "Avoid contact with the river in the affected area during the overflow and for 48 hours after it stops due to increased bacteria levels.",
+    "Recreational activities such as swimming, paddleboarding, kayaking, and other activities with contact with the river are not advised during this time."
+   ]
+  },
+  "58937": {
+   "published": "February 12, 2026 3:54 pm",
+   "updated": null,
+   "label": "Press release",
+   "lines": [
+    "On Tuesday, February 12, City crews responded to reports of a sewage leak from an excavation hole on NW Beuhla Vista Terrace",
+    "At approximately 10:40 am on February 12, City crews responded to reports of a sewage release from a broken pipe near [house number removed] NW Beuhla Vista Terrace near its intersection with NW MacLeay Blvd. As a precaution, the public is advised to follow posted signage in the area.",
+    "The overflow was caused by a local excavation project that damaged a sewer line. Crews are working to identify the sewage release, clear the sewer main, and restore service. Crews estimate that 600 gallons overflowed the pipe so far, but all sewage currently remains in the excavation hole.",
+    "As a precaution, maintenance crews have placed warning signs near the release. The public should obey posted signs in the area.",
+    "Environmental Services reminds the public that most are preventable. The most common causes of sewage releases are pipes clogged with household debris, such as cooking grease that is sent down kitchen drains or wet wipes that are flushed. Both belong in the trash, not down the drain.",
+    "Environmental Services advises the public to",
+    "follow these tips to prevent clogs and overflows",
+    "in homes and businesses and to prevent sewage releases:",
+    "Only flush human waste and toilet paper (wet wipes are NOT flushable).",
+    "Never pour grease down drains: Collect grease, oil, and fat in a can and then into the garbage. Grease that is liquid when poured down drains will become solid once in pipes.",
+    "Don't put anything down storm drains, which are intended for rainfall only.",
+    "If you experience or see a sewer overflow, contact the City's hotline at any hour of the day at",
+    "[phone removed]",
+    "."
+   ]
+  },
+  "57715": {
+   "published": "January 7, 2026 4:00 pm",
+   "updated": null,
+   "label": "Press release",
+   "lines": [
+    "A sewage advisory has been issued for the Willamette River through 9:01 a.m., January 8, 2026.",
+    "This advisory has expired.",
+    "A sewage release from an outfall just downstream of the Morisson Bridge occurred at approximately 9:01 a.m. on January 6, 2026, and lasted about two minutes. An estimated 1,995 gallons were released to the Willamette River.",
+    "The release is believed to have been caused by a temporary operational issue at a pump station during maintenance activity.",
+    "Public Advisory:",
+    "Avoid contact with the river in the affected area during the release and for 48 hours after it stops, due to potential increases in bacteria levels.",
+    "Recreational activities such as swimming, paddleboarding, kayaking, and other activities with contact with the river are not advised during this time."
+   ]
+  },
+  "56908": {
+   "published": "December 9, 2025 5:11 pm",
+   "updated": "December 19, 2025 6:30 am",
+   "label": "News article",
+   "lines": [
+    "Around noon on December 9, and again around 8 p.m. on December 18, City crews reported a sewage release on S Fielding Rd in South Portland. The release is from private property and is impacting a stormwater inlet that discharges to the Willamette River.",
+    "As a precaution, the public is advised to avoid the Willamette River downstream of S Fielding Rd and follow any posted signage in the area.",
+    "An estimated 2,250 gallons had been released during the December 9 sewage release, and an estimated 1,500 gallons during the December 18 release. The cause of the overflows is heavy rain."
+   ]
+  },
+  "56798": {
+   "published": "December 5, 2025 12:53 pm",
+   "updated": null,
+   "label": "News article",
+   "lines": [
+    "On Friday, December 5, City crews responded to a sewage release on S Corbett Ave near its intersection with S California St in South Portland. The release has stopped. As a precaution, the public is advised to follow posted signage in the area.",
+    "Around 9:10 a.m., crews responded to a sewage release from a maintenance hole. An estimated 2,750 gallons flowed from the maintenance hole to a nearby catch basin that reconnects to the city sewer."
+   ]
+  },
+  "56546": {
+   "published": "November 28, 2025 1:56 pm",
+   "updated": null,
+   "label": "News article",
+   "lines": [
+    "A combined sewer overflow (CSO) advisory has been issued for the Willamette River and/or Columbia Slough.",
+    "Start Time:",
+    "Midnight 11/28/25",
+    "Affected Area:",
+    "Release occurred at the Elk Rock Pump Station located at [house number removed] SW Riverwood Rd. The pump station is located on the westside of the river about a quarter mile north from Elk Rock and Spring Park Natural Area between the Sellwood Bridge and the Lake Oswego Railroad Bridge",
+    "Status:",
+    "Estimation of volume released is approximately 5,000 gallons and stopped at O1:15 am 11/28/2025.",
+    "Cause:",
+    "Due to a PGE power outage that started around 11:30 pm 11/27/2025",
+    "Public advisory",
+    "Avoid contact with the river",
+    "in the affected area during the overflow and for",
+    "48 hours after it stops",
+    "due to increased bacteria levels.",
+    "Recreational activities such as swimming and boating are",
+    "not advised",
+    "during this time."
+   ]
+  }
+ }
+}
