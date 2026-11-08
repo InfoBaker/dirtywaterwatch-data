@@ -1,0 +1,29 @@
+id: "or-bes-big-pipe-tracker"
+name: "Portland Big Pipe Tracker (gauge and 72-hour chart)"
+url: "https://www.portland.gov/bes/big-pipe-tracker"
+homepage: "https://www.portland.gov/bes/big-pipe-tracker"
+kind: "html"
+level: "municipal"
+# Notes (research/or, status candidate, verified fetched, checked 2026-11-07): Registered as a
+#   monitored page: the tracker's current-advisory sentence and the gauge's fill level. A fill level
+#   is not a report of an overflow, so it colours nothing; the advisories themselves are read from
+#   the news feed.
+# Access detail (research, quoted): The tracker page (https://www.portland.gov/bes/big-pipe-tracker)
+#   says 'Current CSO Advisories: There is no current CSO advisory in effect.' (2026-11-07); the
+#   gauge (https://www.portlandoregon.gov/bes/bigpipe/gauge.cfm) answered 'BES Big Pipe Gauge 0 %
+#   Nov 7, 2026 3:45 pm'. 'Data are updated every 15 minutes, with up to a 45-minute lag time.' A
+#   72-hour chart (chart.cfm). Email list: GovDelivery ORPORTLAND_ENT signup 39493.
+# Can fill: source_updated_at, source_status (100% means overflow)
+# Cannot fill: started_at exactly; volume
+cadence: "15 minutes"
+license: "none stated"
+attribution: "City of Portland Bureau of Environmental Services"
+enabled: true
+role: "monitoring"
+event_types: ["cso"]
+states: ["OR"]
+access: ["html"]
+access_detail: "The tracker page (https://www.portland.gov/bes/big-pipe-tracker) says 'Current CSO Advisories: There is no current CSO advisory in effect.' (2026-11-07); the gauge (https://www.portlandoregon.gov/bes/bigpipe/gauge.cfm) answered 'BES Big Pipe Gauge 0 % Nov 7, 2026 3:45 pm'. 'Data are updated every 15 minutes, with up to a 45-minute lag time.' A 72-hour chart (chart.cfm). Email list: GovDelivery ORPORTLAND_ENT signup 39493."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-07"

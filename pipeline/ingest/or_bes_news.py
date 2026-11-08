@@ -20,7 +20,8 @@ Which items are read
 Record rules (rules only: no model, no geocoding)
   - Key: the item's node (the guid "https://www.portland.gov/node/57178#2025-12-21T02:00:00" -> "57178"); the guid's
     time changes when BES updates the page, and the page is then read again. A second release the same advisory
-    reports ("Around noon on December 9, and again around 8 p.m. on December 18") is its own record "<node>-2".
+    reports ("Around noon on December 9, and again around 8 p.m. on December 18") is its own record "<node>-2", its
+    published_at the page's update (the second release was announced there).
   - Type: cso when the title or text says "CSO" or "combined sewer overflow" (BES's word), else sso ("sewage
     release"); raw._type_basis says which.
   - Times, all America/Los_Angeles (Portland; raw.time_zone): BES's page gives "Published" and, when edited,
@@ -501,7 +502,9 @@ def records_for(it: dict, page: dict | None, fetched_at: str) -> list[dict]:
             raw2 = {**raw, "start_basis": "the second release the same advisory reports (\"and again ...\"): it "
                                           "began at or before this time", "release": 2}
             recs.append(event(source_record_id=f"{it.get('node') or slug(it.get('link'))}-2",
-                              **{**base, "started_at": s2.isoformat(), "time_precision": "minute"}, raw=raw2))
+                              **{**base, "started_at": s2.isoformat(), "time_precision": "minute",
+                                 # announced in the page's update, not its first publication
+                                 "published_at": (upd or pub).isoformat() if (upd or pub) else None}, raw=raw2))
     return recs
 
 
