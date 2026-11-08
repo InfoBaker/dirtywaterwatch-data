@@ -4,7 +4,7 @@ the Internet Archive's copies of the page, an MSD-02 notice with its house numbe
 layer's five points of 2026-11-07), and SD1's own rain trigger in the rain caution (rules.json
 rain_likely.fallback.by_permit)."""
 import json
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import common
@@ -276,3 +276,44 @@ def test_the_state_file_and_the_raw_save_keep_no_house_number(tmp_path, monkeypa
     state = (tmp_path / "state.json").read_text()
     assert "1234" not in state and "[house number removed] EXAMPLE DR" in state
     assert saved and all(b"1234" not in s for s in saved)
+
+
+# ---------------------------------------------------------------- review 2026-11-08 P2-3: SD1's season per episode
+
+def _sd1_world(now, values):
+    from build import status as S
+    from tests import test_rain_likely as T
+    w = T.rain_world(values=values, now=now)
+    w["rain"]["thresholds"] = {}                       # no history: the published rules decide
+    fb = w["rules"]["rain_likely"]["fallback"]
+    w["rules"] = {**w["rules"], "rain_likely": {**w["rules"]["rain_likely"], "fallback": {**fb, "by_permit": {
+        T.PERMIT: {"inches": 0.25, "tail_hours": 72, "time_zone": "America/New_York", "months": [5, 6, 7, 8, 9, 10],
+                   "basis": "the operator's rule", "source": "the operator"}}}}}
+    return S, w
+
+
+def test_sd1s_season_is_read_by_the_episodes_start_in_local_time(monkeypatch):
+    from build import status as S0
+    from tests import test_rain_likely as T
+    monkeypatch.setattr(S0, "_RULES", T.TEST_RULES)
+    H = timedelta(hours=1)
+    # 22:00 on 31 October in Kentucky (02:00Z on 1 November): an October storm that fell below 54 hours ago is
+    # still under SD1's 72 hours (the build's UTC month had switched to the default 48 hours: grey)
+    now = datetime(2026, 11, 1, 2, tzinfo=UTC)
+    S, w = _sd1_world(now, T.wet(range(55, 61), v=1.2))
+    st, _ = S.build(now=now, write=False, **w)
+    pond = st["waters"]["other-pond-ma"]
+    assert pond["status"] == "yellow" and pond["reasons"][0]["rain"]["threshold_in"] == 0.25
+    assert pond["reasons"][0]["until"].startswith(S.iso(now - 54 * H + 72 * H)[:16])
+    # an April 30 rain of 0.2 inch is under the default 0.1 inch, also once May has begun (it went grey)
+    now = datetime(2026, 5, 1, 12, tzinfo=UTC)
+    S, w = _sd1_world(now, T.wet(range(14, 21), v=0.2))
+    st, _ = S.build(now=now, write=False, **w)
+    pond = st["waters"]["other-pond-ma"]
+    assert pond["status"] == "yellow" and pond["reasons"][0]["rain"]["threshold_in"] == 0.1
+
+
+def test_the_operator_rule_reads_its_months_in_its_own_zone():
+    rule = {"inches": 0.25, "months": [5, 6, 7, 8, 9, 10], "time_zone": "America/New_York"}
+    assert RL.in_season(rule, datetime(2026, 11, 1, 2, tzinfo=UTC))           # 31 October, 22:00 local
+    assert not RL.in_season(rule, datetime(2026, 5, 1, 3, tzinfo=UTC))        # 30 April, 23:00 local

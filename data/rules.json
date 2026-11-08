@@ -550,6 +550,7 @@
     "KY0021466": {
      "inches": 0.25,
      "tail_hours": 72,
+    "time_zone": "America/New_York",
      "months": [
       5,
       6,
