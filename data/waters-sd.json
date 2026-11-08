@@ -1,7 +1,7 @@
 {
  "state": "SD",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 224,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 231,
  "waters": [
   {
    "slug": "amsden-lake-sd",
@@ -12,10 +12,10 @@
     "Groton"
    ],
    "bbox": [
-    -97.97805,
+    -97.978048,
     45.35214,
-    -97.95576,
-    45.36218
+    -97.955759,
+    45.362176
    ],
    "wikidata": null,
    "charted": false,
@@ -23,6 +23,15 @@
    "launches": [
     "amsden-dam-lua-sd"
    ],
+   "water_id": "amsden-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "2b887d531ef6abc47c77cc7e65e04ccfe568acbaf430650091ab66c6119d684d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -47,13 +56,27 @@
    "towns": [
     "Chester"
    ],
-   "bbox": null,
+   "bbox": [
+    -96.880255,
+    43.865531,
+    -96.867456,
+    43.870913
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "anderson-slough-boat-launch-sd"
    ],
+   "water_id": "anderson-slough-sd",
+   "gnis_id": "1253653",
+   "geometry_hash": "3097c9dfb65e9e4cd0b034b9add259c3738e1192980f1759adada9d9cf8b209a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -66,10 +89,10 @@
     "Hot Springs"
    ],
    "bbox": [
-    -103.46143,
-    43.27285,
-    -103.37127,
-    43.34358
+    -103.461429,
+    43.272855,
+    -103.371272,
+    43.343575
    ],
    "wikidata": null,
    "charted": false,
@@ -85,6 +108,15 @@
     "sheps-canyon-lua-sd",
     "sheps-canyon-ra-sd"
    ],
+   "water_id": "angostura-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "982a50a03a03e7b0f7b790582156bd448372d39f0d0e59a01874aa01aa43fc5a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -93,17 +125,60 @@
    "kind": "lake",
    "state": "SD",
    "towns": [
-    "Clark",
-    "Webster"
+    "Clark"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.735857,
+    44.82512,
+    -97.709476,
+    44.834949
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
-    "antelope-lake-pwa-sd",
+    "antelope-lake-pwa-sd"
+   ],
+   "water_id": "antelope-lake-sd",
+   "gnis_id": "1253665",
+   "geometry_hash": "74d9442b1482dd920169fd2064d53d90a1aaa9a351edf12b1f11de8cf6a1a2c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "antelope-lake-webster-sd",
+   "name": "Antelope Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": [
+    -97.492054,
+    45.276428,
+    -97.466356,
+    45.297939
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
     "antelope-lake-waa-sd"
    ],
+   "water_id": "antelope-lake-webster-sd",
+   "gnis_id": "1253666",
+   "geometry_hash": "d6fc2db1ef0517d77d8af0777485d1be9820892360a57eb9ae4c556b9e32aba0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -117,8 +192,8 @@
    "bbox": [
     -97.76625,
     44.98896,
-    -97.75245,
-    44.99753
+    -97.752453,
+    44.997813
    ],
    "wikidata": null,
    "charted": false,
@@ -126,6 +201,15 @@
    "launches": [
     "baileys-lake-waa-sd"
    ],
+   "water_id": "baileys-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "c15cf1c331a1d4547ed276a50efcaed120ee192b04e4da4c29c70e9489a90bbf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -137,10 +221,10 @@
     "Sturgis"
    ],
    "bbox": [
-    -103.45466,
-    44.45024,
-    -103.43339,
-    44.46098
+    -103.454659,
+    44.450244,
+    -103.433393,
+    44.460983
    ],
    "wikidata": null,
    "charted": false,
@@ -148,6 +232,15 @@
    "launches": [
     "bear-butte-lua-sd"
    ],
+   "water_id": "bear-butte-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "72f119dbc0167fe86743fd1dbbd7df7b94a310b51e0f9a586464edb4ed60905a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -159,10 +252,10 @@
     "Winner"
    ],
    "bbox": [
-    -99.81047,
+    -99.810471,
     43.30735,
-    -99.80645,
-    43.31271
+    -99.806233,
+    43.312714
    ],
    "wikidata": null,
    "charted": false,
@@ -170,6 +263,15 @@
    "launches": [
     "beaulieu-pwa-sd"
    ],
+   "water_id": "beaulieu-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "ac7ec395c6c6a717a4f9d3f9ea8857c9a4733e6582e8ccebe482d82e99397cc5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -181,10 +283,10 @@
     "Yankton"
    ],
    "bbox": [
-    -97.45019,
-    43.00929,
-    -97.44308,
-    43.01788
+    -97.450313,
+    43.009142,
+    -97.443082,
+    43.017875
    ],
    "wikidata": "Q25204338",
    "charted": false,
@@ -192,6 +294,15 @@
    "launches": [
     "beaver-pwa-yankton-sd"
    ],
+   "water_id": "beaver-lake-sd",
+   "gnis_id": "1253822",
+   "geometry_hash": "a6f1c8d7ed786dd5c978334bad0a664d2c39b43364eb9c790df02bcc2724b691",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -204,10 +315,10 @@
     "Fruitdale"
    ],
    "bbox": [
-    -103.77557,
+    -103.775567,
     44.69,
-    -103.66905,
-    44.78427
+    -103.669051,
+    44.784271
    ],
    "wikidata": null,
    "charted": false,
@@ -217,6 +328,15 @@
     "rocky-point-ra-east-sd",
     "rocky-point-ra-west-sd"
    ],
+   "water_id": "belle-fourche-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "5ee2b18c51d2a862e6c201908723d9d2ad409dedff2f20fc087c893305dd6a1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -238,10 +358,10 @@
     "Watertown"
    ],
    "bbox": [
-    -97.21111,
-    42.49001,
-    -96.43655,
-    45.32187
+    -97.21122,
+    42.489525,
+    -96.43634,
+    45.321873
    ],
    "wikidata": "Q859274",
    "charted": true,
@@ -265,6 +385,17 @@
     "oakridge-pwa-sd",
     "riverside-city-park-small-vessel-ramp-sd",
     "south-canoe-launch-sd"
+   ],
+   "water_id": "big-sioux-river-ia",
+   "gnis_id": "1253923",
+   "geometry_hash": "2bc8515064bf50137797cac271e9b8a1aa5ce5b6d8fc1cbbbedcd506752eb9b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "big-sioux-river-trent-sd"
    ],
    "advisories": [
     {
@@ -295,10 +426,10 @@
     "South Dakota Park"
    ],
    "bbox": [
-    -96.80587,
-    45.29978,
-    -96.44946,
-    45.5585
+    -96.805871,
+    45.299778,
+    -96.449465,
+    45.558496
    ],
    "wikidata": "Q859342",
    "charted": false,
@@ -311,6 +442,15 @@
     "big-stone-rearing-ponds-lua-sd",
     "smith-gpa-kayak-area-sd"
    ],
+   "water_id": "big-stone-lake-mn",
+   "gnis_id": "640135",
+   "geometry_hash": "5fa44bcb601fcfce03a0b1b43c320f37544cdaab4bda9ac24790fbc5630e0d90",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -336,10 +476,10 @@
     "Custer"
    ],
    "bbox": [
-    -103.5177,
-    43.77511,
-    -103.51252,
-    43.78058
+    -103.517697,
+    43.775113,
+    -103.512519,
+    43.780662
    ],
    "wikidata": null,
    "charted": false,
@@ -347,6 +487,15 @@
    "launches": [
     "bismark-lake-boat-launch-sd"
    ],
+   "water_id": "bismark-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "db86e368e00bf797d08d2fa5cd8418899bbb92cbe8d6572ea5a7910238fbaab8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -359,10 +508,10 @@
     "Webster"
    ],
    "bbox": [
-    -97.43894,
-    45.22406,
-    -97.26508,
-    45.32751
+    -97.438935,
+    45.224061,
+    -97.265084,
+    45.327509
    ],
    "wikidata": "Q25204340",
    "charted": false,
@@ -370,6 +519,17 @@
    "launches": [
     "bitter-east-pwa-sd",
     "nw-bitter-kotzea-sd"
+   ],
+   "water_id": "bitter-lake-sd",
+   "gnis_id": "1265617",
+   "geometry_hash": "d42441e349bb48bda54f4f8c9b1235a9fcd63b936de511f98d1e7eb11b5a9b96",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bitter-lodge-pwa-sd"
    ],
    "advisories": [
     {
@@ -400,9 +560,17 @@
    "charted": false,
    "area_km2": null,
    "launches": [
-    "black-slough-boat-launch-sd",
-    "black-slough-boat-launch-sd-2"
+    "black-slough-boat-launch-sd"
    ],
+   "water_id": "black-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -414,8 +582,8 @@
     "Waubay"
    ],
    "bbox": [
-    -97.32499,
-    45.34114,
+    -97.324989,
+    45.341145,
     -97.27568,
     45.3645
    ],
@@ -425,6 +593,15 @@
    "launches": [
     "blue-dog-hatchery-waa-sd"
    ],
+   "water_id": "blue-dog-lake-sd",
+   "gnis_id": "1253980",
+   "geometry_hash": "05fb50778cb39d420c82474ea3822fcd73ddf0b49046803b2f5e216660203c28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -456,6 +633,15 @@
    "launches": [
     "blyth-slough-boat-launch-sd"
    ],
+   "water_id": "blyth-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -467,10 +653,10 @@
     "Kennebec"
    ],
    "bbox": [
-    -99.95853,
-    43.87896,
-    -99.94122,
-    43.89604
+    -99.958533,
+    43.878964,
+    -99.941189,
+    43.896037
    ],
    "wikidata": null,
    "charted": false,
@@ -478,6 +664,15 @@
    "launches": [
     "brakke-pwa-sd"
    ],
+   "water_id": "brakke-dam-sd",
+   "gnis_id": null,
+   "geometry_hash": "b29eee6cfebde5353f4150201ab4887254f0c973bb4ea13ce944802ab685bf5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -490,9 +685,9 @@
     "Brant Lake South"
    ],
    "bbox": [
-    -96.9761,
-    43.91094,
-    -96.93012,
+    -96.976103,
+    43.910937,
+    -96.929987,
     43.93237
    ],
    "wikidata": "Q28912638",
@@ -502,6 +697,15 @@
     "east-brandt-pwa-sd",
     "west-brant-pwa-sd"
    ],
+   "water_id": "brant-lake-sd",
+   "gnis_id": "1254045",
+   "geometry_hash": "644fc6c45241b49deffb2504f9e9c9ab1a27041341dbf78046eb6ee5fe00ecf1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -529,10 +733,10 @@
     "Huron"
    ],
    "bbox": [
-    -98.26518,
-    44.36425,
-    -98.19893,
-    44.39861
+    -98.265178,
+    44.364253,
+    -98.198927,
+    44.398606
    ],
    "wikidata": null,
    "charted": false,
@@ -540,6 +744,15 @@
    "launches": [
     "ravine-lake-pwa-sd"
    ],
+   "water_id": "broadland-creek-sd",
+   "gnis_id": null,
+   "geometry_hash": "17f67c88c4a4fea3434fd9088570fcb0559a19ef69e89fcc80c440422bfcd1ea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -550,13 +763,27 @@
    "towns": [
     "Arlington"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.120503,
+    44.316724,
+    -97.105688,
+    44.325631
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "brush-lake-boat-launch-sd"
    ],
+   "water_id": "brush-lake-sd",
+   "gnis_id": "1254098",
+   "geometry_hash": "8a980e43f0bc1c5335c1891cdf080cfc7b973a823990c0ff4f1c64390149c322",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -568,10 +795,10 @@
     "Chester"
    ],
    "bbox": [
-    -96.93207,
-    43.87273,
+    -96.932075,
+    43.872731,
     -96.89743,
-    43.88063
+    43.880785
    ],
    "wikidata": null,
    "charted": false,
@@ -579,6 +806,15 @@
    "launches": [
     "buffalo-slough-sd"
    ],
+   "water_id": "buffalo-creek-sd",
+   "gnis_id": null,
+   "geometry_hash": "ff72c23f61a535bba5feb301b203fb69a29df42beb099d4c211c1c81e3f8f835",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -604,6 +840,15 @@
     "south-buffalo-lake-pwa-east-sd",
     "south-buffalo-lake-pwa-west-sd"
    ],
+   "water_id": "buffalo-lakes-sd",
+   "gnis_id": "1254127",
+   "geometry_hash": "2964377cb84547aab00f65342afb726ed85bf96788d8437b2cd11a138eca01ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -616,7 +861,7 @@
    ],
    "bbox": [
     -96.81375,
-    44.93367,
+    44.933665,
     -96.7955,
     44.95625
    ],
@@ -626,6 +871,15 @@
    "launches": [
     "bullhead-lake-deuel-sd"
    ],
+   "water_id": "bullhead-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "99d87715ba1c1a77d22ef3cb2940e24455b5690099e8a486c7ecd82442d1e764",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "usgs-nas-dreissenid-mussels",
@@ -651,10 +905,10 @@
     "Burke"
    ],
    "bbox": [
-    -99.26358,
-    43.17336,
+    -99.263576,
+    43.173359,
     -99.25658,
-    43.17791
+    43.177912
    ],
    "wikidata": null,
    "charted": false,
@@ -662,6 +916,15 @@
    "launches": [
     "burke-lake-ra-sd"
    ],
+   "water_id": "burke-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "f2902b4c3cb6fc74ed9c5d534df824da9fd37d14e9455412f193381124fdd780",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -673,10 +936,10 @@
     "Kennebec"
    ],
    "bbox": [
-    -99.8503,
-    43.92529,
-    -99.83173,
-    43.93144
+    -99.850303,
+    43.925258,
+    -99.831726,
+    43.931439
    ],
    "wikidata": null,
    "charted": false,
@@ -684,6 +947,15 @@
    "launches": [
     "byre-pwa-sd"
    ],
+   "water_id": "byre-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "488da2f7595e88a6627b4ecbacdbde784af1c8ec0f049e5e22ad40227ebea3c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -695,10 +967,10 @@
     "Rapid City"
    ],
    "bbox": [
-    -103.29477,
-    44.05698,
-    -103.28679,
-    44.06078
+    -103.294772,
+    44.056976,
+    -103.286795,
+    44.060804
    ],
    "wikidata": null,
    "charted": false,
@@ -706,6 +978,15 @@
    "launches": [
     "canyon-lake-kayak-launch-sd"
    ],
+   "water_id": "canyon-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "d70355b9040e98cb1e4b76a6baae0e11dfc3700f42403e6c09a11587180c3fbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -717,10 +998,10 @@
     "Custer"
    ],
    "bbox": [
-    -103.4191,
+    -103.419102,
     43.79886,
-    -103.41397,
-    43.80434
+    -103.413965,
+    43.804344
    ],
    "wikidata": null,
    "charted": false,
@@ -728,6 +1009,15 @@
    "launches": [
     "custer-sp-center-sd"
    ],
+   "water_id": "center-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "70158a739de4491d92a4dcc632ee18649fde30213e802199db7fd82b1af3e817",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -739,10 +1029,10 @@
     "Highmore"
    ],
    "bbox": [
-    -99.59795,
-    44.39761,
-    -99.58881,
-    44.40621
+    -99.597952,
+    44.397609,
+    -99.588811,
+    44.406209
    ],
    "wikidata": null,
    "charted": false,
@@ -750,6 +1040,15 @@
    "launches": [
     "chapelle-lake-boat-launch-sd"
    ],
+   "water_id": "chapelle-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "39d48f019b2959f72548af236167e6d672aca54e24600c13d689e3645a4d1759",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -761,8 +1060,8 @@
     "Bryant"
    ],
    "bbox": [
-    -97.53549,
-    44.53719,
+    -97.535489,
+    44.537191,
     -97.49825,
     44.56176
    ],
@@ -772,6 +1071,15 @@
    "launches": [
     "cherry-lake-gpa-sd"
    ],
+   "water_id": "cherry-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "9ac5085c3c4c513e8f4270c41dfe639688159c97b87525f120d641412f7a95a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -783,10 +1091,10 @@
     "Hot Springs"
    ],
    "bbox": [
-    -104.10161,
-    43.25155,
-    -100.70305,
-    44.78179
+    -104.101614,
+    43.251424,
+    -100.703045,
+    44.781793
    ],
    "wikidata": "Q2116752",
    "charted": false,
@@ -794,6 +1102,15 @@
    "launches": [
     "cheyenne-canoe-access-sd"
    ],
+   "water_id": "cheyenne-river-sd",
+   "gnis_id": "1267017",
+   "geometry_hash": "d521fe410f1aeb5095d5a082f7a4b53e33c36fd4ee79fee21f146b24cb985e56",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -805,10 +1122,10 @@
     "Clear Lake"
    ],
    "bbox": [
-    -97.3791,
+    -97.379096,
     45.68213,
-    -97.34006,
-    45.70685
+    -97.340058,
+    45.706916
    ],
    "wikidata": null,
    "charted": false,
@@ -816,6 +1133,15 @@
    "launches": [
     "clear-lake-lua-sd"
    ],
+   "water_id": "clear-lake-clear-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "4f0903f3adefa57e77c1f4c9eb086689769d8074ee955c358c9b2c2d28871d89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -838,17 +1164,29 @@
    "kind": "lake",
    "state": "SD",
    "towns": [
-    "Colton",
-    "Watertown"
+    "Colton"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.021542,
+    43.751364,
+    -97.005206,
+    43.776046
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
-    "clear-lake-pwa-sd",
-    "clear-lake-wwa-sd"
+    "clear-lake-pwa-sd"
    ],
+   "water_id": "clear-lake-colton-sd",
+   "gnis_id": "1265627",
+   "geometry_hash": "29d0ebc953e141825602380edd8b6986a392ef8a3d44bb691c0f5c905b0d2fab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -860,10 +1198,10 @@
     "Clear Lake"
    ],
    "bbox": [
-    -96.66951,
-    44.74561,
-    -96.64465,
-    44.76433
+    -96.669508,
+    44.745478,
+    -96.644646,
+    44.764333
    ],
    "wikidata": "Q25204134",
    "charted": false,
@@ -871,6 +1209,46 @@
    "launches": [
     "clear-pwa-sd"
    ],
+   "water_id": "clear-lake-sd",
+   "gnis_id": "1254395",
+   "geometry_hash": "35f08f73141dce72757436fe8266aed41aae2cf571328920c228c0d770e08e82",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-watertown-sd",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Watertown"
+   ],
+   "bbox": [
+    -97.191027,
+    44.757992,
+    -97.158566,
+    44.774598
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clear-lake-wwa-sd"
+   ],
+   "water_id": "clear-lake-watertown-sd",
+   "gnis_id": "1254394",
+   "geometry_hash": "5ad6fb3cdbee0a74029172c7d77f940e7e105fd0469f0bb79b0967059e62e7f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -882,10 +1260,10 @@
     "Hot Springs"
    ],
    "bbox": [
-    -103.49121,
-    43.45424,
-    -103.48424,
-    43.46088
+    -103.491208,
+    43.454241,
+    -103.484239,
+    43.460879
    ],
    "wikidata": null,
    "charted": false,
@@ -893,6 +1271,15 @@
    "launches": [
     "coldbrook-reservoir-ra-sd"
    ],
+   "water_id": "cold-brook-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "dad2b016b41373bb39ddee7df54a06402d8600215a0eaa5f302ff7fcc7f1efe3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -904,10 +1291,10 @@
     "Armour"
    ],
    "bbox": [
-    -98.29847,
-    43.40762,
-    -98.2865,
-    43.42212
+    -98.298466,
+    43.407621,
+    -98.286331,
+    43.422124
    ],
    "wikidata": null,
    "charted": false,
@@ -915,6 +1302,15 @@
    "launches": [
     "corsica-lake-boat-launch-sd"
    ],
+   "water_id": "corsica-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "303509dbe943af1bb9e8994f886a3dffb2fac12499bf475332404f8ab911817b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -926,10 +1322,10 @@
     "Lake City"
    ],
    "bbox": [
-    -97.43806,
-    45.72561,
-    -97.41531,
-    45.74267
+    -97.438055,
+    45.725613,
+    -97.415311,
+    45.742671
    ],
    "wikidata": "Q25204355",
    "charted": false,
@@ -937,6 +1333,46 @@
    "launches": [
     "cottonwood-lake-pwa-lake-city-sd"
    ],
+   "water_id": "cottonwood-lake-lake-city-sd",
+   "gnis_id": "1265630",
+   "geometry_hash": "488ebe9b3814c9165ce07cd4c3c8a7e5c57360528837bcb0f7aa39f078d5ca6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-onida-sd",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Onida"
+   ],
+   "bbox": [
+    -99.91876,
+    44.826267,
+    -99.890489,
+    44.844693
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cottonwood-pwa-sd"
+   ],
+   "water_id": "cottonwood-lake-onida-sd",
+   "gnis_id": "1254488",
+   "geometry_hash": "17f674d06e2cee88cecb60595aea60a97bccbfc9783bd88017b0829eb68cf56e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -948,10 +1384,10 @@
     "Redfield"
    ],
    "bbox": [
-    -98.69644,
-    44.77434,
-    -98.65238,
-    44.80617
+    -98.696442,
+    44.774341,
+    -98.652377,
+    44.806169
    ],
    "wikidata": null,
    "charted": false,
@@ -959,6 +1395,17 @@
    "launches": [
     "cottonwood-northeast-pwa-sd",
     "cottonwood-southwest-pwa-sd"
+   ],
+   "water_id": "cottonwood-lake-redfield-sd",
+   "gnis_id": null,
+   "geometry_hash": "e8d2ab2f6ec568445c20d1f13eddad721fc7f92880c3b84ae87f10cfe0fe5c74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cottonwood-appel-s-landing-sd"
    ],
    "advisories": [
     {
@@ -982,17 +1429,29 @@
    "kind": "lake",
    "state": "SD",
    "towns": [
-    "Bradley",
-    "Onida"
+    "Bradley"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.718761,
+    45.120105,
+    -97.678333,
+    45.134388
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
-    "cottonwood-lake-pwa-sd",
-    "cottonwood-pwa-sd"
+    "cottonwood-lake-pwa-sd"
    ],
+   "water_id": "cottonwood-lake-sd",
+   "gnis_id": "1254491",
+   "geometry_hash": "f89ea49cdea870502738f66c3a8788c6e6e5b3a2c3a8125fe435f1daef2b7610",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1004,10 +1463,10 @@
     "Erskine"
    ],
    "bbox": [
-    -103.57503,
-    43.43807,
-    -103.56597,
-    43.44269
+    -103.575026,
+    43.438075,
+    -103.565966,
+    43.442784
    ],
    "wikidata": null,
    "charted": false,
@@ -1015,6 +1474,15 @@
    "launches": [
     "cottonwood-springs-boat-launch-sd"
    ],
+   "water_id": "cottonwood-springs-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "7b16e6d3db7614a8939ed38e92bd6dc7267b6ac7f7caaf27df0ae819e1558795",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1026,10 +1494,10 @@
     "Cresbard"
    ],
    "bbox": [
-    -99.01856,
-    45.17123,
-    -99.00162,
-    45.17695
+    -99.018557,
+    45.171234,
+    -99.001623,
+    45.176955
    ],
    "wikidata": null,
    "charted": false,
@@ -1037,6 +1505,15 @@
    "launches": [
     "cresbard-pwa-sd"
    ],
+   "water_id": "cresbard-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "b290d5b4accd6af42b45f552e13ce1c9d0bda750b87c7e792f00b82ffa1cd2fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1048,10 +1525,10 @@
     "Crow Lake"
    ],
    "bbox": [
-    -98.73603,
-    43.95455,
-    -98.70844,
-    43.97478
+    -98.736028,
+    43.954551,
+    -98.708442,
+    43.974784
    ],
    "wikidata": null,
    "charted": false,
@@ -1059,6 +1536,15 @@
    "launches": [
     "crow-lake-boat-launch-sd"
    ],
+   "water_id": "crow-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "0ff9cf065458cce5d48e1ec5d922f571a3589101ba1cc3fc36fcff017ab3ed59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1069,7 +1555,12 @@
    "towns": [
     "New Underwood"
    ],
-   "bbox": null,
+   "bbox": [
+    -102.774037,
+    44.235379,
+    -102.754121,
+    44.248819
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
@@ -1077,6 +1568,15 @@
     "curlew-lake-boat-launch-sd",
     "curlew-lake-low-water-sd"
    ],
+   "water_id": "curlew-lake-sd",
+   "gnis_id": "1259223",
+   "geometry_hash": "890e84de1059def4ce5615ee1d102222a69807ea1634414b5d7260cabcff777e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1087,13 +1587,27 @@
    "towns": [
     "Wagner"
    ],
-   "bbox": null,
+   "bbox": [
+    -98.179266,
+    43.065373,
+    -98.174896,
+    43.070889
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "dante-pwa-sd"
    ],
+   "water_id": "dante-lake-sd",
+   "gnis_id": "1254602",
+   "geometry_hash": "7c96bfb7d8348b897f4ca27ea9399cc451b45c117c1f955c3a46200433efd8df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1105,10 +1619,10 @@
     "Deerfield"
    ],
    "bbox": [
-    -103.82718,
-    44.00844,
-    -103.78441,
-    44.03341
+    -103.827175,
+    44.008442,
+    -103.784407,
+    44.033412
    ],
    "wikidata": null,
    "charted": false,
@@ -1118,6 +1632,15 @@
     "deerfield-dutchman-pwa-sd",
     "deerfield-lake-boat-launch-sd"
    ],
+   "water_id": "deerfield-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "e260581f4465ff7fe1b92978b44f67e43548c29bcc2c8c6343f235c5d90c4e5a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1128,13 +1651,27 @@
    "towns": [
     "Franklin"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.110722,
+    43.833908,
+    -97.094177,
+    43.847866
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "diamond-lake-boat-launch-sd"
    ],
+   "water_id": "diamond-lake-sd",
+   "gnis_id": "1254685",
+   "geometry_hash": "9bb12e6d6ef2e436cc5f8291042a20cbf884a95fd1430221bc004f458e8542d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1145,13 +1682,27 @@
    "towns": [
     "Tripp County"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.906418,
+    43.166378,
+    -99.88071,
+    43.173912
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "dog-ear-pwa-sd"
    ],
+   "water_id": "dog-ear-lake-sd",
+   "gnis_id": "1254720",
+   "geometry_hash": "0815d0bc5fd4ddf1eb3e912c8963fa1afeef496ebf322859ed6c6110f09d859b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1174,6 +1725,15 @@
    "launches": [
     "dry-pwa-sd"
    ],
+   "water_id": "dry-lake-florence-sd",
+   "gnis_id": null,
+   "geometry_hash": "19cfb4d77e76a11b6c9e781270c2555bb161905aaa955d7ac791b0602e3de945",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1185,9 +1745,9 @@
     "Hillcrest Colony"
    ],
    "bbox": [
-    -97.73773,
-    44.90978,
-    -97.62167,
+    -97.737731,
+    44.909784,
+    -97.621674,
     44.98886
    ],
    "wikidata": null,
@@ -1196,6 +1756,15 @@
    "launches": [
     "dry-lake-l-pwa-sd"
    ],
+   "water_id": "dry-lake-number-one-sd",
+   "gnis_id": null,
+   "geometry_hash": "2910461bee76e1b0c14b7e25c24f2db8b4067f6fc44d9abe4e0ed07563e68460",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1218,6 +1787,15 @@
    "launches": [
     "dry-lake-2-pwa-sd"
    ],
+   "water_id": "dry-lake-number-two-sd",
+   "gnis_id": null,
+   "geometry_hash": "71981e8cf698a118b454cce452473724c15daa7259233778c486e1c7902f08c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1231,7 +1809,7 @@
    ],
    "bbox": [
     -97.0775,
-    44.60194,
+    44.601942,
     -97.03825,
     44.6525
    ],
@@ -1239,10 +1817,19 @@
    "charted": false,
    "area_km2": 8.67,
    "launches": [
-    "dry-lake-boat-launch-sd",
     "dry-lake-boat-launch-hayti-sd",
+    "dry-lake-boat-launch-sd",
     "sioux-poinsett-gpa-north-sd"
    ],
+   "water_id": "dry-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "365475ac11ae35b4f8875c4564909f0b41325e05c07ad43f95fc3ba79a0e2cb3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -1268,10 +1855,10 @@
     "Agency Village"
    ],
    "bbox": [
-    -97.20716,
-    45.55592,
-    -97.15008,
-    45.6154
+    -97.207161,
+    45.555916,
+    -97.149992,
+    45.615499
    ],
    "wikidata": "Q49301934",
    "charted": false,
@@ -1279,6 +1866,15 @@
    "launches": [
     "drywood-pwa-sd"
    ],
+   "water_id": "drywood-lakes-sd",
+   "gnis_id": "1254789",
+   "geometry_hash": "472de9c1ab5ba4bea79874c7ecb72cf05fe3bbbff945fd806468ff155d6b1a9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1290,10 +1886,10 @@
     "Faith"
    ],
    "bbox": [
-    -102.06151,
-    44.97388,
-    -102.04526,
-    44.99088
+    -102.061508,
+    44.973876,
+    -102.045264,
+    44.990883
    ],
    "wikidata": null,
    "charted": false,
@@ -1301,6 +1897,15 @@
    "launches": [
     "durkee-pwa-sd"
    ],
+   "water_id": "dupree-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "0cdbb4642be99807b37a7c2d7fec61783d3c47b3d41c75f2d9ba6989ba4dfaee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1312,10 +1917,10 @@
     "Eagle Butte"
    ],
    "bbox": [
-    -101.21088,
-    45.04107,
-    -101.20103,
-    45.04694
+    -101.210883,
+    45.04081,
+    -101.201034,
+    45.046935
    ],
    "wikidata": null,
    "charted": false,
@@ -1323,6 +1928,15 @@
    "launches": [
     "eagle-butte-boat-launch-sd"
    ],
+   "water_id": "eagle-butte-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "12440063687810398e7ceafffeeca6e9f97f9844d90218583cedae72d9c1159a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1334,16 +1948,56 @@
     "Brown County"
    ],
    "bbox": [
-    -98.7483,
-    45.85232,
-    -98.6733,
-    45.9101
+    -98.748305,
+    45.852247,
+    -98.673228,
+    45.910099
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 4.238,
    "launches": [
     "elm-lake-dam-pwa-sd"
+   ],
+   "water_id": "elk-lake-brown-county-sd",
+   "gnis_id": null,
+   "geometry_hash": "f7a0e31b4c96c68c18c9606c0a6feb5797f46edfc584b11d38f36d93d48bf24e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-lake-sd",
+   "name": "Elk Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Frederick"
+   ],
+   "bbox": [
+    -98.697229,
+    45.910152,
+    -98.671724,
+    45.938566
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.964,
+   "launches": [],
+   "water_id": "elk-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "3b20e91c7016815eccd41187b1b7e0baecc2f5ab8051f52b2a9456d8ce4df99d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "elm-lake-resort-sd"
    ],
    "advisories": []
   },
@@ -1356,10 +2010,10 @@
     "Enemy Swim"
    ],
    "bbox": [
-    -97.29759,
-    45.42742,
-    -97.23047,
-    45.45628
+    -97.297587,
+    45.427422,
+    -97.230475,
+    45.456276
    ],
    "wikidata": null,
    "charted": false,
@@ -1368,6 +2022,15 @@
     "enemy-swim-lua-sandy-beach-sd",
     "enemy-swim-pwa-church-bay-sd"
    ],
+   "water_id": "enemy-swim-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "00907fbed66c72596f0c42e66b1e21b5cce849453a3f64357f818f8c1e38c970",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -1393,10 +2056,10 @@
     "Eureka"
    ],
    "bbox": [
-    -99.6463,
-    45.76857,
-    -99.63527,
-    45.78133
+    -99.646301,
+    45.768568,
+    -99.635267,
+    45.781444
    ],
    "wikidata": null,
    "charted": false,
@@ -1405,6 +2068,15 @@
     "eureka-east-pwa-sd",
     "eureka-west-pwa-sd"
    ],
+   "water_id": "eureka-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "1ef666a15a0659e22950076902eb016b8b445713d37577d01fb46f60a2f08a84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1415,13 +2087,27 @@
    "towns": [
     "Fairfax"
    ],
-   "bbox": null,
+   "bbox": [
+    -98.881007,
+    43.041062,
+    -98.875061,
+    43.049921
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "fairfax-pwa-sd"
    ],
+   "water_id": "fairfax-lake-sd",
+   "gnis_id": "1254980",
+   "geometry_hash": "0f7770ea8ffd4c364ebd91d495ca44895a63cf3eb574455b3b8d24ce2d215877",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1433,10 +2119,10 @@
     "Presho"
    ],
    "bbox": [
-    -100.0169,
-    43.93681,
-    -100.0037,
-    43.94918
+    -100.016903,
+    43.936811,
+    -100.003696,
+    43.949258
    ],
    "wikidata": null,
    "charted": false,
@@ -1444,6 +2130,15 @@
    "launches": [
     "fate-pwa-sd"
    ],
+   "water_id": "fate-dam-sd",
+   "gnis_id": null,
+   "geometry_hash": "763fdc769a517059601ea0b0324f9ef32055e3c29bab37b2bec6f66ab260be7c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1456,9 +2151,9 @@
    ],
    "bbox": [
     -98.40302,
-    43.71917,
-    -98.37976,
-    43.73127
+    43.719169,
+    -98.379757,
+    43.731271
    ],
    "wikidata": null,
    "charted": false,
@@ -1466,6 +2161,15 @@
    "launches": [
     "fish-lake-wfa-sd"
    ],
+   "water_id": "fish-lake-plankinton-sd",
+   "gnis_id": null,
+   "geometry_hash": "e628bc779f6011d666b669df7256d52c8aa40d108864b9d9830951a4dfe6afbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1477,9 +2181,9 @@
     "Astoria"
    ],
    "bbox": [
-    -96.49093,
-    44.59058,
-    -96.46689,
+    -96.490926,
+    44.590582,
+    -96.466749,
     44.61123
    ],
    "wikidata": null,
@@ -1488,6 +2192,15 @@
    "launches": [
     "fish-lake-waa-sd"
    ],
+   "water_id": "fish-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "9ac698f0edbf37529ef27370f6e3cff954fa58c650318eb06650ebe38deeb845",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1499,10 +2212,10 @@
     "Summerville"
    ],
    "bbox": [
-    -102.18618,
+    -102.186184,
     45.77462,
-    -102.16653,
-    45.78292
+    -102.166526,
+    45.782917
    ],
    "wikidata": null,
    "charted": false,
@@ -1510,6 +2223,15 @@
    "launches": [
     "flat-creek-boat-launch-sd"
    ],
+   "water_id": "flat-creek-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "f8a9a9c01cad3da4fb2f481a10b9ae7813cb3771a8224d94198e45bdbb43f1c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1527,6 +2249,15 @@
    "launches": [
     "fods-slough-boat-launch-sd"
    ],
+   "water_id": "fods-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1538,10 +2269,10 @@
     "Fordham Colony"
    ],
    "bbox": [
-    -97.93514,
-    44.76261,
-    -97.92526,
-    44.77645
+    -97.935144,
+    44.76252,
+    -97.925257,
+    44.776451
    ],
    "wikidata": null,
    "charted": false,
@@ -1549,6 +2280,15 @@
    "launches": [
     "fordham-pwa-sd"
    ],
+   "water_id": "fordham-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "3eec7e09820e5688c18f8df95a70ee670076e50fd2f89d67f325ead91eae3bef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1560,10 +2300,10 @@
     "Salem"
    ],
    "bbox": [
-    -97.51956,
-    43.64091,
-    -97.50379,
-    43.65072
+    -97.519563,
+    43.640908,
+    -97.503785,
+    43.650716
    ],
    "wikidata": null,
    "charted": false,
@@ -1571,6 +2311,15 @@
    "launches": [
     "frosch-lake-sd"
    ],
+   "water_id": "forsch-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "cb2a9e5ab742cc10421f78875932b251af5f442d1d5016cecb3412c77d522327",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1584,8 +2333,8 @@
    "bbox": [
     -97.2935,
     44.82575,
-    -97.2351,
-    44.86441
+    -97.235098,
+    44.864413
    ],
    "wikidata": null,
    "charted": false,
@@ -1594,6 +2343,15 @@
     "goose-lake-gpa-sd",
     "goose-lake-waa-sd"
    ],
+   "water_id": "goose-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "4952f3b6d6ca5c2ae2c35f426905be820700a4dd6575dc835b16d3b075dd3fff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -1619,10 +2377,10 @@
     "Hartford"
    ],
    "bbox": [
-    -97.05438,
+    -97.054376,
     43.58191,
-    -97.02569,
-    43.59851
+    -97.02558,
+    43.59859
    ],
    "wikidata": null,
    "charted": false,
@@ -1630,6 +2388,15 @@
    "launches": [
     "grass-pwa-sd"
    ],
+   "water_id": "grass-lake-hartford-sd",
+   "gnis_id": null,
+   "geometry_hash": "5c1437bc289fafc5a1c91d8c028a7b46e5b8f60d03bc9742a06ec2e5f2721162",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1643,7 +2410,7 @@
    "bbox": [
     -97.41175,
     45.05475,
-    -97.35639,
+    -97.356388,
     45.08525
    ],
    "wikidata": "Q25204373",
@@ -1652,6 +2419,15 @@
    "launches": [
     "grass-lake-waa-sd"
    ],
+   "water_id": "grass-lake-sd",
+   "gnis_id": "1255342",
+   "geometry_hash": "fa1d5d3de69dce5d24b657ac5e99d02ab97747a785d2fcb216c462afc505fc66",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1663,10 +2439,10 @@
     "Salem"
    ],
    "bbox": [
-    -97.50664,
-    43.66495,
-    -97.50026,
-    43.67396
+    -97.506636,
+    43.664952,
+    -97.499968,
+    43.674016
    ],
    "wikidata": null,
    "charted": false,
@@ -1675,6 +2451,15 @@
     "gross-lake-boat-launch-sd",
     "gross-lake-gpa-west-sd"
    ],
+   "water_id": "gross-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "f6964433e941d2bc2a29de4930ad42fb768b8b31b8343b9c26828776f6537bf3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1686,10 +2471,10 @@
     "Hayes"
    ],
    "bbox": [
-    -101.01907,
-    44.36089,
-    -101.00734,
-    44.37234
+    -101.019073,
+    44.360892,
+    -101.00708,
+    44.372339
    ],
    "wikidata": null,
    "charted": false,
@@ -1697,6 +2482,15 @@
    "launches": [
     "hayes-lake-boat-launch-sd"
    ],
+   "water_id": "hayes-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "de3e665db4d95edc72f1c2cb1af1fe30b60f153ad57acb3c1ef23b8358e04ba6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1708,10 +2502,10 @@
     "Madison"
    ],
    "bbox": [
-    -97.16767,
-    43.98591,
-    -97.16156,
-    43.99019
+    -97.167673,
+    43.985912,
+    -97.161564,
+    43.990185
    ],
    "wikidata": null,
    "charted": false,
@@ -1719,6 +2513,15 @@
    "launches": [
     "herman-pond-canoe-launch-sd"
    ],
+   "water_id": "herman-pond-sd",
+   "gnis_id": null,
+   "geometry_hash": "2f139ac618cde02323183b66b8cacf12f63d132c4672d2463c8bae2eb786b7ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1729,13 +2532,27 @@
    "towns": [
     "Burke"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.204267,
+    43.097014,
+    -99.200237,
+    43.099956
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "herrick-pwa-sd"
    ],
+   "water_id": "herrick-lake-sd",
+   "gnis_id": "1255525",
+   "geometry_hash": "e4759dca84089760a057dddea0388cf2ce77cd2514ecebca0c8302d39435fed7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1747,10 +2564,10 @@
     "Britton"
    ],
    "bbox": [
-    -97.74602,
-    45.65657,
-    -97.73882,
-    45.66196
+    -97.746022,
+    45.656569,
+    -97.738816,
+    45.661965
    ],
    "wikidata": null,
    "charted": false,
@@ -1758,6 +2575,15 @@
    "launches": [
     "hickman-pwa-sd"
    ],
+   "water_id": "hickman-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "ed9de30739a8ff0b9c0780cb749ccba72dd9cbcfbf14d3fb74f12502db036f49",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1770,7 +2596,7 @@
    ],
    "bbox": [
     -97.64625,
-    45.18075,
+    45.180749,
     -97.62375,
     45.2105
    ],
@@ -1780,6 +2606,15 @@
    "launches": [
     "horseshoe-pwa-sd"
    ],
+   "water_id": "horseshoe-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "57c6c496555ca5cc3c5118cf72bdecbd3bf16496ebbe38508af2089f3aeed339",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "usgs-nas-dreissenid-mussels",
@@ -1805,10 +2640,10 @@
     "Sheep Flats"
    ],
    "bbox": [
-    -103.98388,
-    44.37001,
-    -103.97756,
-    44.37314
+    -103.983879,
+    44.370005,
+    -103.977559,
+    44.373137
    ],
    "wikidata": null,
    "charted": false,
@@ -1816,6 +2651,15 @@
    "launches": [
     "iron-creek-pwa-sd"
    ],
+   "water_id": "iron-creek-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "d0590e28c8ae81333ea543c1835b90da086a1cb4e59e60dc9c3455df697f091d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1827,10 +2671,10 @@
     "Isabel"
    ],
    "bbox": [
-    -101.42661,
-    45.43054,
-    -101.40879,
-    45.43879
+    -101.426605,
+    45.430536,
+    -101.408789,
+    45.438789
    ],
    "wikidata": null,
    "charted": false,
@@ -1838,6 +2682,15 @@
    "launches": [
     "isabel-pwa-sd"
    ],
+   "water_id": "isabel-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "36c44dac652dc8525326dd72d33b4b84eff71bf3e6a06bcd73b5fe55f99dc728",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1848,7 +2701,12 @@
    "towns": [
     "Montrose"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.138874,
+    43.790292,
+    -97.119769,
+    43.801162
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
@@ -1856,6 +2714,15 @@
     "island-lake-boat-launch-sd",
     "south-island-sd"
    ],
+   "water_id": "island-lake-sd",
+   "gnis_id": "1255792",
+   "geometry_hash": "9b6e683513b94902659206d36408a86f2ff3fc8bfe7d3c36440ebe194b17e4f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1878,10 +2745,10 @@
     "Woonsocket"
    ],
    "bbox": [
-    -98.49904,
-    42.85386,
-    -97.24573,
-    46.02297
+    -98.499115,
+    42.853859,
+    -97.245728,
+    46.022969
    ],
    "wikidata": "Q1542610",
    "charted": false,
@@ -1900,6 +2767,19 @@
     "verhelst-public-water-access-sd",
     "wolf-creek-pwa-sd"
    ],
+   "water_id": "james-river-nd",
+   "gnis_id": "1261082",
+   "geometry_hash": "5f2d1eb4285b2eb6af28e4e54c41399936b97ef1e26962a9014b73240597a98a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "columbia-dam-boat-launch-sd",
+    "james-river-forestburg-sd",
+    "james-river-boat-launch-sd"
+   ],
    "advisories": []
   },
   {
@@ -1917,6 +2797,15 @@
    "launches": [
     "johnson-slough-boat-launch-sd"
    ],
+   "water_id": "johnson-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1928,10 +2817,10 @@
     "Miller"
    ],
    "bbox": [
-    -98.95304,
-    44.46445,
-    -98.94269,
-    44.47663
+    -98.953037,
+    44.464416,
+    -98.942689,
+    44.476628
    ],
    "wikidata": null,
    "charted": false,
@@ -1939,6 +2828,15 @@
    "launches": [
     "jones-pwa-sd"
    ],
+   "water_id": "jones-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "b21a508eb11082adf6fb440ba81800315b44309ad31ee3519c4aa1a430bc7c73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1965,9 +2863,9 @@
     "Marshall County"
    ],
    "bbox": [
-    -97.52799,
-    45.64607,
-    -97.49304,
+    -97.527992,
+    45.646069,
+    -97.493036,
     45.6725
    ],
    "wikidata": "Q141626934",
@@ -1977,6 +2875,15 @@
     "kettle-cattail-lake-sd",
     "kettle-cattail-lake-kayak-launch-sd"
    ],
+   "water_id": "kettle-lake-sd",
+   "gnis_id": "1264389",
+   "geometry_hash": "2cd318b5d5ef3bdcd3c290784b5632294bf03e6469dd2fd72e97a431fdb59aad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1989,7 +2896,7 @@
    ],
    "bbox": [
     -97.18075,
-    44.49807,
+    44.498072,
     -97.12825,
     44.5625
    ],
@@ -1999,6 +2906,15 @@
    "launches": [
     "lake-albert-east-sd"
    ],
+   "water_id": "lake-albert-sd",
+   "gnis_id": null,
+   "geometry_hash": "6e88b11652b9f88aea296cd56d312bbcc0c08f70a0398113a43ec83fafe43986",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2027,13 +2943,27 @@
    "towns": [
     "Clear Lake"
    ],
-   "bbox": null,
+   "bbox": [
+    -96.654958,
+    44.865235,
+    -96.615316,
+    44.889462
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lake-alice-north-pwa-sd"
    ],
+   "water_id": "lake-alice-sd",
+   "gnis_id": "1253614",
+   "geometry_hash": "8144a9a3a0ad342940b05e3e0209c6d321e391947986df8060ed7e14c85dd44b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2045,10 +2975,10 @@
     "Harrisburg"
    ],
    "bbox": [
-    -96.63375,
-    43.43214,
+    -96.633746,
+    43.432143,
     -96.60996,
-    43.44282
+    43.442948
    ],
    "wikidata": "Q6474756",
    "charted": false,
@@ -2057,6 +2987,15 @@
     "alvin-pwa-sd",
     "lake-alvin-ra-sd"
    ],
+   "water_id": "lake-alvin-sd",
+   "gnis_id": "1253636",
+   "geometry_hash": "8cfe9ded26e937c211bffdc00c53824f4f917d5c842acb7e86a379caec2c3067",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2068,10 +3007,10 @@
     "Lake Andes"
    ],
    "bbox": [
-    -98.52885,
-    43.14958,
+    -98.528845,
+    43.149583,
     -98.38739,
-    43.24025
+    43.2405
    ],
    "wikidata": "Q49303579",
    "charted": false,
@@ -2079,6 +3018,15 @@
    "launches": [
     "center-unit-boat-launch-sd"
    ],
+   "water_id": "lake-andes-sd",
+   "gnis_id": "1265607",
+   "geometry_hash": "8f98b7c6286fddbce971450deb5a426f8f2acabdcd08a74bcb8718307c384312",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2090,10 +3038,10 @@
     "Mac's Corner"
    ],
    "bbox": [
-    -99.41526,
-    44.24009,
-    -99.40876,
-    44.2491
+    -99.415257,
+    44.240088,
+    -99.408757,
+    44.249097
    ],
    "wikidata": null,
    "charted": false,
@@ -2101,6 +3049,15 @@
    "launches": [
     "mission-lake-sd"
    ],
+   "water_id": "lake-boehm-sd",
+   "gnis_id": null,
+   "geometry_hash": "59a881ae4b368f80d58c4484d5ff620ee11a152cc22997e4553850b7bb9b50e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2125,6 +3082,15 @@
     "lake-byron-northwest-lua-sd",
     "lake-byron-south-pwa-sd"
    ],
+   "water_id": "lake-byron-sd",
+   "gnis_id": null,
+   "geometry_hash": "d6082908b80109a8e3a15c2348f55f89ac3e3fc99efdd6b518d7d83b929df10b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2136,10 +3102,10 @@
     "Brookings"
    ],
    "bbox": [
-    -96.87415,
-    44.18602,
-    -96.83446,
-    44.22389
+    -96.874149,
+    44.185887,
+    -96.834462,
+    44.223885
    ],
    "wikidata": null,
    "charted": false,
@@ -2147,6 +3113,15 @@
    "launches": [
     "lake-campbell-pwa-north-sd"
    ],
+   "water_id": "lake-campbell-sd",
+   "gnis_id": null,
+   "geometry_hash": "f0702be2b2dc0205f90b30a1a833188f1033ee18a4eb421fdd56cf0c2db94e30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2157,13 +3132,27 @@
    "towns": [
     "Carthage"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.712394,
+    44.173213,
+    -97.684012,
+    44.194506
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lake-carthage-lua-sd"
    ],
+   "water_id": "lake-carthage-sd",
+   "gnis_id": "1254258",
+   "geometry_hash": "8d3d5b226b3018f68046924e933fa797fccc1b501d5d17cddf50d2f0c8d98204",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2175,10 +3164,10 @@
     "Cavour"
    ],
    "bbox": [
-    -98.07314,
-    44.39427,
-    -98.03273,
-    44.41278
+    -98.073141,
+    44.394057,
+    -98.032701,
+    44.412788
    ],
    "wikidata": null,
    "charted": false,
@@ -2186,6 +3175,15 @@
    "launches": [
     "cavour-pwa-sd"
    ],
+   "water_id": "lake-cavour-sd",
+   "gnis_id": null,
+   "geometry_hash": "c1d81755751d4f49762e41a4d6a798cd2fce99f5419a9dae86b4c39cc27cea1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2197,10 +3195,10 @@
     "Clear Lake"
    ],
    "bbox": [
-    -96.49079,
-    44.70088,
-    -96.46508,
-    44.71364
+    -96.490792,
+    44.700833,
+    -96.465081,
+    44.713636
    ],
    "wikidata": null,
    "charted": false,
@@ -2208,6 +3206,15 @@
    "launches": [
     "lake-cochrane-waa-sd"
    ],
+   "water_id": "lake-cochrane-sd",
+   "gnis_id": null,
+   "geometry_hash": "9934acfe4df9de30719fad8bec61ac56ebf4d3b500b0dbdd2b4cc7601954e281",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -2239,6 +3246,15 @@
    "launches": [
     "lake-darling-boat-launch-sd"
    ],
+   "water_id": "lake-darling-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2250,10 +3266,10 @@
     "Dimock"
    ],
    "bbox": [
-    -97.93424,
-    43.46692,
-    -97.91815,
-    43.48028
+    -97.934242,
+    43.466822,
+    -97.918149,
+    43.480281
    ],
    "wikidata": null,
    "charted": false,
@@ -2261,6 +3277,15 @@
    "launches": [
     "dimock-pwa-sd"
    ],
+   "water_id": "lake-dimock-sd",
+   "gnis_id": null,
+   "geometry_hash": "ba206ef1c8538f95384454b01fc2584827e9066127a2edcc5caf3bda8c3c5dab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2273,9 +3298,9 @@
    ],
    "bbox": [
     -99.18047,
-    45.02794,
-    -99.16728,
-    45.03484
+    45.027944,
+    -99.167275,
+    45.035045
    ],
    "wikidata": null,
    "charted": false,
@@ -2283,6 +3308,15 @@
    "launches": [
     "lake-faulkton-lua-sd"
    ],
+   "water_id": "lake-faulkton-sd",
+   "gnis_id": null,
+   "geometry_hash": "cc1aa497642697e3e38ab6fb22e0ec741985bcb741144788e934849e811bc6f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2302,10 +3336,10 @@
     "Platte"
    ],
    "bbox": [
-    -99.47992,
-    43.04698,
-    -98.53785,
-    44.06076
+    -99.479923,
+    43.046978,
+    -98.537851,
+    44.060764
    ],
    "wikidata": "Q6475894",
    "charted": false,
@@ -2339,6 +3373,15 @@
     "whetstone-bay-lua-high-water-ramp-south-sd",
     "white-swan-lua-sd"
    ],
+   "water_id": "lake-francis-case-sd",
+   "gnis_id": "1255140",
+   "geometry_hash": "6dbdae735aa598fc76b089bb8a8aac20f50118efcf526de73d036a2a3bb6531a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -2364,10 +3407,10 @@
     "Clear Lake"
    ],
    "bbox": [
-    -96.53954,
-    44.81739,
-    -96.52811,
-    44.82479
+    -96.539542,
+    44.817354,
+    -96.528107,
+    44.824792
    ],
    "wikidata": null,
    "charted": false,
@@ -2375,6 +3418,15 @@
    "launches": [
     "lake-francis-boat-launch-sd"
    ],
+   "water_id": "lake-francis-sd",
+   "gnis_id": null,
+   "geometry_hash": "9e29ca37957c7f42cf60eb78fb2fa1e6ba525b6a5231a027a81853c0f499e8a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2386,10 +3438,10 @@
     "Buffalo"
    ],
    "bbox": [
-    -103.62961,
-    45.6023,
-    -103.6078,
-    45.62184
+    -103.629608,
+    45.602299,
+    -103.607803,
+    45.621835
    ],
    "wikidata": null,
    "charted": false,
@@ -2397,6 +3449,15 @@
    "launches": [
     "gardner-pwa-sd"
    ],
+   "water_id": "lake-gardner-sd",
+   "gnis_id": null,
+   "geometry_hash": "27dbb6ba1885290208424e4e57e112a9031deecdcb69b133f6f09cb4f6e76764",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2408,10 +3469,10 @@
     "Astoria"
    ],
    "bbox": [
-    -96.49858,
-    44.47347,
-    -96.42924,
-    44.50783
+    -96.498581,
+    44.473468,
+    -96.429245,
+    44.5079
    ],
    "wikidata": null,
    "charted": false,
@@ -2420,6 +3481,15 @@
     "lake-hendricks-lua-south-sd",
     "lake-hendricks-pwa-north-sd"
    ],
+   "water_id": "lake-hendricks-mn",
+   "gnis_id": null,
+   "geometry_hash": "7e6a125dcf38c2eb7f9b38243d24fd4c9f7a4ebf4b0fa87c7b238c71e910b0f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2445,10 +3515,10 @@
     "De Smet"
    ],
    "bbox": [
-    -97.51342,
-    44.31473,
-    -97.45166,
-    44.34589
+    -97.513419,
+    44.314731,
+    -97.451658,
+    44.345891
    ],
    "wikidata": null,
    "charted": false,
@@ -2456,6 +3526,15 @@
    "launches": [
     "lake-henry-lua-sd"
    ],
+   "water_id": "lake-henry-de-smet-sd",
+   "gnis_id": null,
+   "geometry_hash": "82c3b7ed070a5c8dd539195f066727b9886bb76100cae7785317cf9c8c2c2ea8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2467,10 +3546,10 @@
     "Scotland"
    ],
    "bbox": [
-    -97.70598,
-    43.1405,
-    -97.69303,
-    43.15106
+    -97.705984,
+    43.140449,
+    -97.693026,
+    43.151126
    ],
    "wikidata": null,
    "charted": false,
@@ -2478,6 +3557,15 @@
    "launches": [
     "henry-pwa-scotland-sd"
    ],
+   "water_id": "lake-henry-scotland-sd",
+   "gnis_id": null,
+   "geometry_hash": "e7886a9384841f6ae2e869de08475cad014fd1e05cacf4cdd972eef285594481",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2488,13 +3576,27 @@
    "towns": [
     "Winfred"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.33264,
+    43.903126,
+    -97.30983,
+    43.935302
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lake-henry-wpa-sd"
    ],
+   "water_id": "lake-henry-sd",
+   "gnis_id": "1265720",
+   "geometry_hash": "b0013e13c07af4e77f95e62e0e4808a53bfe351f9ac0f27e00ef0e396173cc20",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2506,10 +3608,10 @@
     "Madison"
    ],
    "bbox": [
-    -97.18761,
-    43.97208,
+    -97.187611,
+    43.972081,
     -97.15798,
-    44.0075
+    44.007496
    ],
    "wikidata": "Q49303697",
    "charted": false,
@@ -2519,6 +3621,15 @@
     "lake-herman-kayak-launch-sd",
     "lake-herman-sp-sd"
    ],
+   "water_id": "lake-herman-sd",
+   "gnis_id": "1255522",
+   "geometry_hash": "01109b81ae348b3876ed9f2560f6fccc3f55fc01a08144ab9db0f6458d895a14",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2546,10 +3657,10 @@
     "Gettysburg"
    ],
    "bbox": [
-    -100.1562,
-    45.08505,
-    -100.13655,
-    45.0935
+    -100.156195,
+    45.085006,
+    -100.136551,
+    45.093504
    ],
    "wikidata": null,
    "charted": false,
@@ -2557,6 +3668,15 @@
    "launches": [
     "hurley-pwa-sd"
    ],
+   "water_id": "lake-hurley-sd",
+   "gnis_id": null,
+   "geometry_hash": "2defa50afd30067bfd73b2e136327bb55c279b53d9388ce6248a338c640bea5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2569,10 +3689,10 @@
     "Watertown"
    ],
    "bbox": [
-    -97.25453,
-    44.89429,
-    -97.17013,
-    44.94976
+    -97.254532,
+    44.894288,
+    -97.170124,
+    44.949931
    ],
    "wikidata": "Q19698289",
    "charted": false,
@@ -2586,6 +3706,15 @@
     "sandy-shore-ra-sd",
     "stokes-thomas-park-sd"
    ],
+   "water_id": "lake-kampeska-sd",
+   "gnis_id": "1255901",
+   "geometry_hash": "95c5f26ea08f4d7f948a1383630e97280a410626ff82da16857888ce188de175",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -2610,13 +3739,27 @@
    "towns": [
     "Clear Lake"
    ],
-   "bbox": null,
+   "bbox": [
+    -96.67538,
+    44.800717,
+    -96.664359,
+    44.810803
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lake-ketchum-waa-sd"
    ],
+   "water_id": "lake-ketchum-sd",
+   "gnis_id": "1255926",
+   "geometry_hash": "410e510f7775a47dbae274910f104f1864c14fbe2cd774e69d6d83d8eba19868",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2628,10 +3771,10 @@
     "Canton"
    ],
    "bbox": [
-    -96.56901,
-    43.20239,
+    -96.569011,
+    43.202393,
     -96.55325,
-    43.21117
+    43.211173
    ],
    "wikidata": null,
    "charted": false,
@@ -2640,6 +3783,15 @@
     "lake-lakota-kayak-canoe-launch-sd",
     "newton-hills-sp-lake-lakota-sd"
    ],
+   "water_id": "lake-lakota-sd",
+   "gnis_id": null,
+   "geometry_hash": "f26e64821807c9f6f600cc53cd3a310ab9c00f4d7cad599b23a1fa018e7fc128",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2651,10 +3803,10 @@
     "Miller"
    ],
    "bbox": [
-    -99.15857,
-    44.62046,
+    -99.158566,
+    44.62035,
     -99.13058,
-    44.62895
+    44.628951
    ],
    "wikidata": null,
    "charted": false,
@@ -2662,6 +3814,15 @@
    "launches": [
     "lake-louise-ra-sd"
    ],
+   "water_id": "lake-louise-sd",
+   "gnis_id": null,
+   "geometry_hash": "9dc5e7e993754b8f255c346374c947a42f5fc85664180fcf8b1dfae994af7ca2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2687,9 +3848,9 @@
     "Madison"
    ],
    "bbox": [
-    -97.06556,
-    43.93528,
-    -96.98592,
+    -97.065563,
+    43.935278,
+    -96.985925,
     43.9785
    ],
    "wikidata": "Q28912639",
@@ -2700,6 +3861,15 @@
     "lake-madison-payne-pwa-sd",
     "walkers-point-ra-sd"
    ],
+   "water_id": "lake-madison-sd",
+   "gnis_id": "1256299",
+   "geometry_hash": "d6b07e60575f16494de5b27671bb6c77d929a293a7b7a1e6fda594ec06759b87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2725,13 +3895,27 @@
    "towns": [
     "Menno"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.613906,
+    43.261155,
+    -97.601561,
+    43.26628
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "menno-pwa-sd"
    ],
+   "water_id": "lake-menno-sd",
+   "gnis_id": "1256435",
+   "geometry_hash": "e6a87ca3e902614111534ee95a50b09d9ac7b048dfdcb74c440cdcb4b91a4211",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2743,10 +3927,10 @@
     "Mitchell"
    ],
    "bbox": [
-    -98.08633,
-    43.73173,
-    -98.02625,
-    43.76581
+    -98.086334,
+    43.731732,
+    -98.026028,
+    43.765807
    ],
    "wikidata": null,
    "charted": false,
@@ -2755,6 +3939,15 @@
     "lake-mitchell-boat-launch-sd",
     "lake-mitchell-northwest-sd"
    ],
+   "water_id": "lake-mitchell-sd",
+   "gnis_id": null,
+   "geometry_hash": "65323a75e9fe469f95b7363828d6ceca0e33fb9ea6af3d10e4a9d0f4a917946a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2793,10 +3986,10 @@
     "Lake Norden"
    ],
    "bbox": [
-    -97.21249,
-    44.58598,
-    -97.18625,
-    44.60648
+    -97.212492,
+    44.585976,
+    -97.186,
+    44.606533
    ],
    "wikidata": null,
    "charted": false,
@@ -2804,6 +3997,15 @@
    "launches": [
     "lake-norden-boat-launch-sd"
    ],
+   "water_id": "lake-norden-sd",
+   "gnis_id": null,
+   "geometry_hash": "7b4a500dc59f9c1d795b88a33dc48cfab9c8c966e7fbe97c8faf3937721b9718",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2820,10 +4022,10 @@
     "Webb Ranch"
    ],
    "bbox": [
-    -101.15135,
-    44.42671,
-    -100.2149,
-    46.62822
+    -101.151381,
+    44.42639,
+    -100.214898,
+    46.628424
    ],
    "wikidata": "Q474408",
    "charted": false,
@@ -2842,8 +4044,8 @@
     "indian-creek-ra-east-sd",
     "indian-creek-ra-west-sd",
     "lighthouse-point-lua-sd",
-    "little-bend-lua-sd",
     "little-bend-lua-hughes-county-sd",
+    "little-bend-lua-sd",
     "minneconjou-lua-south-sd",
     "oahe-forest-city-sd",
     "oahe-garrigan-s-landing-pwa-sd",
@@ -2867,6 +4069,15 @@
     "west-shore-pwa-sd",
     "west-whitlock-ra-sd"
    ],
+   "water_id": "lake-oahe-nd",
+   "gnis_id": "1266878",
+   "geometry_hash": "df7f2d45e3b9f1bfbb9cb6fe830b10599cbc9a86edc33ab7a3afa663efdfa8b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -2892,10 +4103,10 @@
     "Bruce"
    ],
    "bbox": [
-    -96.98408,
-    44.4245,
-    -96.95667,
-    44.45534
+    -96.984079,
+    44.424504,
+    -96.956672,
+    44.455455
    ],
    "wikidata": null,
    "charted": false,
@@ -2904,6 +4115,15 @@
     "oakwood-lakes-east-pwa-sd",
     "oakwood-lakes-north-pwa-sd"
    ],
+   "water_id": "lake-oakwood-sd",
+   "gnis_id": null,
+   "geometry_hash": "c3f71835871d268b0647722a25fa9f910cece307e7a9e9f55b7a17400b0e0b75",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2930,10 +4150,10 @@
     "Gary"
    ],
    "bbox": [
-    -96.48243,
-    44.71492,
-    -96.46769,
-    44.7237
+    -96.482426,
+    44.714924,
+    -96.467685,
+    44.723698
    ],
    "wikidata": null,
    "charted": false,
@@ -2941,6 +4161,15 @@
    "launches": [
     "lake-oliver-lua-sd"
    ],
+   "water_id": "lake-oliver-sd",
+   "gnis_id": null,
+   "geometry_hash": "42fa8abcc44b41f07508443dbdb0bfc102b406d28622d3a8df043e4cc3270d5c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -2966,10 +4195,10 @@
     "Mina"
    ],
    "bbox": [
-    -98.75716,
-    45.43824,
-    -98.71692,
-    45.49004
+    -98.757155,
+    45.43813,
+    -98.716899,
+    45.490131
    ],
    "wikidata": null,
    "charted": false,
@@ -2979,6 +4208,15 @@
     "mina-east-lua-sd",
     "mina-lake-ra-sd"
    ],
+   "water_id": "lake-parmley-sd",
+   "gnis_id": null,
+   "geometry_hash": "bb9660e5c437908ed80605dd2bd6e73476b4253c1b856873962ce5a5622dbb69",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2990,10 +4228,10 @@
     "Pollock"
    ],
    "bbox": [
-    -100.29589,
-    45.88509,
-    -100.24428,
-    45.91667
+    -100.295886,
+    45.885089,
+    -100.244166,
+    45.916673
    ],
    "wikidata": null,
    "charted": false,
@@ -3001,6 +4239,15 @@
    "launches": [
     "pocasse-pwa-sd"
    ],
+   "water_id": "lake-pocasse-sd",
+   "gnis_id": null,
+   "geometry_hash": "b332c0ef7cd80d44709a99382186639266d3bcd50eb53d7fae1a025aa5118082",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3014,10 +4261,10 @@
     "Stone Bridge"
    ],
    "bbox": [
-    -97.12954,
+    -97.129543,
     44.53475,
-    -97.04204,
-    44.60192
+    -97.042043,
+    44.601919
    ],
    "wikidata": "Q2839261",
    "charted": false,
@@ -3029,6 +4276,15 @@
     "lake-poinsett-sorenson-pwa-sd",
     "lake-poinsett-recreation-area-sd"
    ],
+   "water_id": "lake-poinsett-sd",
+   "gnis_id": "1257162",
+   "geometry_hash": "3f6d58e8148905f3ac133973a6a327aeddcadc541d91877d76deb77f1c64828e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -3076,10 +4332,10 @@
     "West Brule"
    ],
    "bbox": [
-    -100.41182,
-    44.03153,
-    -99.44598,
-    44.45012
+    -100.411823,
+    44.031528,
+    -99.445755,
+    44.450115
    ],
    "wikidata": null,
    "charted": false,
@@ -3108,6 +4364,15 @@
     "sharpe-west-oahe-tailrace-sd",
     "west-bend-ra-sd"
    ],
+   "water_id": "lake-sharpe-sd",
+   "gnis_id": null,
+   "geometry_hash": "3d005eb16bd1d86a2b1f55d1872e8e78fe4bdb6bea5a497402be701f969064a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -3144,6 +4409,15 @@
    "launches": [
     "lake-sinai-pwa-sd"
    ],
+   "water_id": "lake-sinai-sd",
+   "gnis_id": null,
+   "geometry_hash": "94c7c7849a63c0e0eff5a02da8f44538469d96904f61cf8eed62dcf697dc8d3f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3156,7 +4430,7 @@
    ],
    "bbox": [
     -97.20812,
-    44.55553,
+    44.555533,
     -97.16375,
     44.57425
    ],
@@ -3166,6 +4440,15 @@
    "launches": [
     "lake-john-sd"
    ],
+   "water_id": "lake-st-john-sd",
+   "gnis_id": null,
+   "geometry_hash": "780a391911c36caa7825bf99c061b3ea64c65d97465dc1e0b14e52c60674edaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3178,9 +4461,9 @@
    ],
    "bbox": [
     -97.50775,
-    44.15243,
-    -97.38356,
-    44.35423
+    44.152431,
+    -97.383562,
+    44.354235
    ],
    "wikidata": "Q6478028",
    "charted": false,
@@ -3192,6 +4475,15 @@
     "thompson-northeast-pwa-sd",
     "thompson-southwest-pwa-sd"
    ],
+   "water_id": "lake-thompson-sd",
+   "gnis_id": "1258536",
+   "geometry_hash": "20181b28091b390de61d025ab3499cbffe74f34a241303f31d51fdc6c0d02a03",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3203,10 +4495,10 @@
     "Roberts County"
    ],
    "bbox": [
-    -96.85907,
-    45.60623,
-    -96.60872,
-    45.77032
+    -96.859066,
+    45.606231,
+    -96.608717,
+    45.770325
    ],
    "wikidata": "Q1493200",
    "charted": false,
@@ -3215,6 +4507,15 @@
     "lake-traverse-waldo-waa-sd",
     "lake-travese-jensen-s-waa-sd"
    ],
+   "water_id": "lake-traverse-mn",
+   "gnis_id": "653270",
+   "geometry_hash": "4434d45814dea0d0953242cfd5902095bd2b63ab4860c79bd9c194799a479038",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -3241,10 +4542,10 @@
     "Rumpus Ridge"
    ],
    "bbox": [
-    -97.20539,
-    43.58523,
-    -97.16558,
-    43.62977
+    -97.205388,
+    43.585228,
+    -97.165585,
+    43.629776
    ],
    "wikidata": null,
    "charted": false,
@@ -3254,6 +4555,15 @@
     "lake-vermillion-ra-west-sd",
     "vermillion-kayak-launch-sd"
    ],
+   "water_id": "lake-vermillion-sd",
+   "gnis_id": null,
+   "geometry_hash": "92d6b78084c1218374f0ea1563e4082341a5523e28dfadc9c6d469e1b719847c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3266,9 +4576,9 @@
    ],
    "bbox": [
     -97.4858,
-    42.85073,
-    -97.4604,
-    42.87139
+    42.850735,
+    -97.460399,
+    42.871391
    ],
    "wikidata": "Q55616508",
    "charted": false,
@@ -3279,6 +4589,15 @@
     "pierson-ranch-sd",
     "yankton-pwa-sd"
    ],
+   "water_id": "lake-yankton-sd",
+   "gnis_id": null,
+   "geometry_hash": "d854a7526bfe2410cbeccc7d721cdb9860e6931e6821203dcafaf0f715c39b45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -3304,10 +4623,10 @@
     "Keystone"
    ],
    "bbox": [
-    -103.40043,
-    43.84723,
-    -103.39629,
-    43.85158
+    -103.400432,
+    43.847229,
+    -103.396293,
+    43.851577
    ],
    "wikidata": null,
    "charted": false,
@@ -3315,6 +4634,15 @@
    "launches": [
     "lakota-lake-kayak-launch-sd"
    ],
+   "water_id": "lakota-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "0ba7cfed8f733a5f468d03d19c888072c56d45221ecaf831a627bd94457e9c87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3326,10 +4654,10 @@
     "Spencer"
    ],
    "bbox": [
-    -97.58959,
-    43.66876,
-    -97.57221,
-    43.67725
+    -97.589587,
+    43.668765,
+    -97.571971,
+    43.677245
    ],
    "wikidata": null,
    "charted": false,
@@ -3337,6 +4665,15 @@
    "launches": [
     "lehrman-slough-pwa-sd"
    ],
+   "water_id": "lehrman-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": "faa6a5d568bd9d47e9ea1919195603b394b24b3c3440a2890710c9c58bf08a99",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3348,10 +4685,10 @@
     "Lemmon"
    ],
    "bbox": [
-    -102.02488,
-    45.77316,
-    -102.00826,
-    45.78382
+    -102.024882,
+    45.773157,
+    -102.008256,
+    45.783824
    ],
    "wikidata": null,
    "charted": false,
@@ -3359,6 +4696,15 @@
    "launches": [
     "east-lemmon-pwa-sd"
    ],
+   "water_id": "lemmon-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "111bc539e9c6b3ba48f930cd2942f2771d215ba1be4afa223d50a0f98a59e839",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3376,9 +4722,9 @@
    ],
    "bbox": [
     -97.90572,
-    42.82533,
-    -97.48107,
-    42.88139
+    42.825332,
+    -97.481071,
+    42.881386
    ],
    "wikidata": "Q7334123",
    "charted": false,
@@ -3396,6 +4742,15 @@
     "springfield-ra-sd",
     "tabor-lua-sd"
    ],
+   "water_id": "lewis-and-clark-lake-ne",
+   "gnis_id": "830688",
+   "geometry_hash": "7681adbe32ea7c07be285a633cf978e7336ea30ef07b752835a51d0694cd1c22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -3421,10 +4776,10 @@
     "Martin"
    ],
    "bbox": [
-    -101.55632,
-    43.15854,
-    -101.54411,
-    43.17687
+    -101.556317,
+    43.158317,
+    -101.544106,
+    43.176867
    ],
    "wikidata": null,
    "charted": false,
@@ -3433,6 +4788,15 @@
     "lwr-south-boat-launch-sd",
     "little-white-river-project-sd"
    ],
+   "water_id": "liitle-white-river-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "ffb4df18a8246acc80d0840f44b0044e475c56e589791abd5590c4bf4ce3e1e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3444,10 +4808,10 @@
     "Timber Lake"
    ],
    "bbox": [
-    -101.09506,
-    45.34581,
-    -101.08934,
-    45.34926
+    -101.095059,
+    45.345596,
+    -101.089249,
+    45.349258
    ],
    "wikidata": null,
    "charted": false,
@@ -3455,6 +4819,15 @@
    "launches": [
     "little-moreau-ra-sd"
    ],
+   "water_id": "little-moreau-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "4d783e329f28658b412aab3eefe3f4f3bbe14cbf9d27a953fa9483be4f507cbe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3466,10 +4839,10 @@
     "Peninsula Park"
    ],
    "bbox": [
-    -97.04736,
+    -97.047355,
     43.9263,
-    -96.99277,
-    43.94693
+    -96.992725,
+    43.947
    ],
    "wikidata": null,
    "charted": false,
@@ -3477,6 +4850,15 @@
    "launches": [
     "long-wpa-sd"
    ],
+   "water_id": "long-lake-peninsula-park-sd",
+   "gnis_id": null,
+   "geometry_hash": "a9ec23ada7e96da04d2e15e31d0fae0e7c54b1a77a8df309710c07b10efd9b9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3488,7 +4870,7 @@
     "Henry"
    ],
    "bbox": [
-    -97.41587,
+    -97.415872,
     44.89475,
     -97.379,
     44.96225
@@ -3500,6 +4882,15 @@
     "long-south-pwa-sd",
     "long-lake-boat-launch-sd"
    ],
+   "water_id": "long-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "cfbbe7b21dfbc8bb1de86d67b300fa80743648299a203e5463f11df65575eb13",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3511,10 +4902,10 @@
     "Hartford"
    ],
    "bbox": [
-    -97.0849,
-    43.57555,
-    -97.07252,
-    43.58643
+    -97.084901,
+    43.575547,
+    -97.072519,
+    43.586427
    ],
    "wikidata": null,
    "charted": false,
@@ -3522,6 +4913,15 @@
    "launches": [
     "loss-pwa-sd"
    ],
+   "water_id": "lost-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "596d50e71166d59641deecea02603bac2d1202b14808fc74a8f3e764d2ad72a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3533,10 +4933,10 @@
     "Webster"
    ],
    "bbox": [
-    -97.68203,
+    -97.682031,
     45.41338,
-    -97.63269,
-    45.46409
+    -97.632695,
+    45.464094
    ],
    "wikidata": null,
    "charted": false,
@@ -3544,6 +4944,15 @@
    "launches": [
     "lynn-lake-waa-sd"
    ],
+   "water_id": "lynn-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "cd6289a4b28ac4549034d736d54ff5d21896577b4747a1c0e31cf85529bd4384",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3555,10 +4964,10 @@
     "Mayfield"
    ],
    "bbox": [
-    -97.26926,
-    43.03656,
+    -97.269264,
+    43.036561,
     -97.25438,
-    43.05511
+    43.055105
    ],
    "wikidata": "Q6763971",
    "charted": false,
@@ -3566,6 +4975,15 @@
    "launches": [
     "marindahl-pwa-sd"
    ],
+   "water_id": "marindahl-lake-sd",
+   "gnis_id": "1256324",
+   "geometry_hash": "bfd56934c2a022f9949a4db7c1e13133d12715720e467a1771ca79fc347abd63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -3592,10 +5010,10 @@
     "North Sioux City"
    ],
    "bbox": [
-    -96.52495,
-    42.52501,
-    -96.50495,
-    42.55059
+    -96.524952,
+    42.524923,
+    -96.504949,
+    42.550595
    ],
    "wikidata": null,
    "charted": false,
@@ -3603,6 +5021,15 @@
    "launches": [
     "mccook-lake-boat-launch-sd"
    ],
+   "water_id": "mccook-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "83f774a0b69bb4fbfb80df172aa8d1060044e987559422d92f6ada738d65c959",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -3628,10 +5055,10 @@
     "Rapid City"
    ],
    "bbox": [
-    -103.22767,
-    44.08519,
-    -103.2255,
-    44.08605
+    -103.227674,
+    44.085185,
+    -103.225502,
+    44.086222
    ],
    "wikidata": null,
    "charted": false,
@@ -3639,6 +5066,15 @@
    "launches": [
     "memorial-kayak-launch-sd"
    ],
+   "water_id": "memorial-pond-sd",
+   "gnis_id": null,
+   "geometry_hash": "22e73f7be17afba69e63f5ca8196ff12abd983afca860d2c3fe09e2bba55a70a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3650,10 +5086,10 @@
     "Pierre"
    ],
    "bbox": [
-    -100.33338,
-    44.38014,
+    -100.333376,
+    44.380138,
     -100.33188,
-    44.38313
+    44.383133
    ],
    "wikidata": null,
    "charted": false,
@@ -3661,6 +5097,15 @@
    "launches": [
     "mickelson-pond-sd"
    ],
+   "water_id": "mickelson-fishing-pond-sd",
+   "gnis_id": null,
+   "geometry_hash": "fc94e8fc723b8d1dbc46626dc6da47a89e3c39f69a5d0b0e1af439aeaa9dc0ae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3678,6 +5123,15 @@
    "launches": [
     "middle-lynn-lake-access-sd"
    ],
+   "water_id": "middle-lynn-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3689,10 +5143,10 @@
     "Webster"
    ],
    "bbox": [
-    -97.39124,
-    45.38069,
-    -97.35254,
-    45.40163
+    -97.391245,
+    45.380694,
+    -97.352544,
+    45.401625
    ],
    "wikidata": "Q24061593",
    "charted": false,
@@ -3700,6 +5154,15 @@
    "launches": [
     "minnewasta-south-sunnybrook-waa-sd"
    ],
+   "water_id": "minnewasta-lake-sd",
+   "gnis_id": "1265669",
+   "geometry_hash": "35a4dc7f44c7efeacddc2c38c4d081bfe22d245e43b226a8d92e89bad12598a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -3726,8 +5189,8 @@
    ],
    "bbox": [
     -98.09749,
-    44.7839,
-    -98.08072,
+    44.783903,
+    -98.080716,
     44.80521
    ],
    "wikidata": null,
@@ -3736,6 +5199,15 @@
    "launches": [
     "mirage-pwa-sd"
    ],
+   "water_id": "mirage-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "4df244e831748dd6004db562922c93b27ec3922a9f691f84c5fd1b4936b1a3e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3750,10 +5222,10 @@
     "Vermillion"
    ],
    "bbox": [
-    -100.72225,
-    42.48204,
-    -96.4402,
-    46.42243
+    -100.722247,
+    42.479892,
+    -96.440205,
+    46.422428
    ],
    "wikidata": "Q5419",
    "charted": true,
@@ -3764,6 +5236,15 @@
     "running-water-pwa-sd",
     "spillway-lua-sd"
    ],
+   "water_id": "missouri-river-ia",
+   "gnis_id": "756398",
+   "geometry_hash": "7e0f74f98b356db7fa95e74774eac82109492d091153946fd92dad0cfbeadb6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3774,13 +5255,27 @@
    "towns": [
     "Glenham"
    ],
-   "bbox": null,
+   "bbox": [
+    -100.303449,
+    45.560712,
+    -100.284869,
+    45.579122
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "molstad-lake-boat-launch-sd"
    ],
+   "water_id": "molstad-lake-sd",
+   "gnis_id": "1256519",
+   "geometry_hash": "faefec8389a0eb3912a5df28599b375266c265e70607e0df0568135614866456",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3792,10 +5287,10 @@
     "Artesian"
    ],
    "bbox": [
-    -97.82078,
-    43.93393,
-    -97.81084,
-    43.94085
+    -97.820783,
+    43.933931,
+    -97.810719,
+    43.940845
    ],
    "wikidata": null,
    "charted": false,
@@ -3803,6 +5298,15 @@
    "launches": [
     "morris-lake-boat-launch-sd"
    ],
+   "water_id": "morris-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "becde8c1633a5fbb7e2034aa84edcc6fdede983d183f9d10868a7aa8f35134c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3814,10 +5318,10 @@
     "Corson County"
    ],
    "bbox": [
-    -101.64993,
-    45.9203,
-    -101.63135,
-    45.93236
+    -101.649928,
+    45.920296,
+    -101.631346,
+    45.932356
    ],
    "wikidata": null,
    "charted": false,
@@ -3825,6 +5329,15 @@
    "launches": [
     "east-morristown-pwa-sd"
    ],
+   "water_id": "morristown-east-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "7ddfef48d84c0af9cf40a141851d6c5af2b11f1fe7505b9cdba0c93419fd2273",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3836,10 +5349,10 @@
     "Morristown"
    ],
    "bbox": [
-    -101.76091,
-    45.90843,
+    -101.760907,
+    45.908256,
     -101.74932,
-    45.91924
+    45.919244
    ],
    "wikidata": null,
    "charted": false,
@@ -3847,6 +5360,15 @@
    "launches": [
     "west-morristown-pwa-sd"
    ],
+   "water_id": "morristown-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "381879ed3211c1e39ed36ce91b7daf62c85371750ee715ccc7ee63840190b7f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3858,10 +5380,10 @@
     "Hurley"
    ],
    "bbox": [
-    -97.056,
-    43.28961,
-    -97.04069,
-    43.30307
+    -97.056004,
+    43.289614,
+    -97.040688,
+    43.303095
    ],
    "wikidata": null,
    "charted": false,
@@ -3869,6 +5391,15 @@
    "launches": [
     "mud-lake-boat-launch-sd"
    ],
+   "water_id": "mud-lake-hurley-sd",
+   "gnis_id": null,
+   "geometry_hash": "e39acbeeb845f78922e3fc262484b2ca5905c6c258f3e4659dbdfb35d4b39d8c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3880,10 +5411,10 @@
     "Tulare"
    ],
    "bbox": [
-    -98.52242,
-    44.76284,
-    -98.50253,
-    44.77663
+    -98.522422,
+    44.762842,
+    -98.502526,
+    44.776632
    ],
    "wikidata": null,
    "charted": false,
@@ -3891,6 +5422,15 @@
    "launches": [
     "mud-pwa-sd"
    ],
+   "water_id": "mud-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "69e360b10a46adb9cbce1cb85ffbd1aaccb4a19b8d638e8d157d783edfdea189",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3901,13 +5441,27 @@
    "towns": [
     "Willow Lake"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.644668,
+    44.631159,
+    -97.634381,
+    44.641807
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "mud-lake-boat-launch-willow-lake-sd"
    ],
+   "water_id": "mud-lake-willow-lake-sd",
+   "gnis_id": "1256599",
+   "geometry_hash": "5069e67825d6e67199ba3eb30d9ad23c2f215ef8770da4a8010f075d13e1d0be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3925,6 +5479,15 @@
    "launches": [
     "murdo-lake-boat-launch-sd"
    ],
+   "water_id": "murdo-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3936,8 +5499,8 @@
     "Wall"
    ],
    "bbox": [
-    -102.2818,
-    43.97361,
+    -102.281805,
+    43.973615,
     -102.27106,
     43.98241
    ],
@@ -3947,6 +5510,15 @@
    "launches": [
     "new-wall-boat-launch-sd"
    ],
+   "water_id": "new-wall-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "1f0d782f39304a979b9900ad913b4cbd40f92cc98ccbec045c130c89af5bde59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3964,6 +5536,15 @@
    "launches": [
     "newell-city-pond-boat-launch-sd"
    ],
+   "water_id": "newell-city-pond-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3975,10 +5556,10 @@
     "Newell"
    ],
    "bbox": [
-    -103.40276,
-    44.83443,
-    -103.38501,
-    44.84746
+    -103.402758,
+    44.834429,
+    -103.385006,
+    44.847456
    ],
    "wikidata": null,
    "charted": false,
@@ -3986,6 +5567,15 @@
    "launches": [
     "newell-lake-boat-launch-sd"
    ],
+   "water_id": "newell-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "bbaafb7986d7ca7593bb66fdcb9a66e0245b2c24b1a1a3e898c17b1773b29048",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3997,10 +5587,10 @@
     "Veblen"
    ],
    "bbox": [
-    -97.47468,
-    45.75996,
-    -97.45585,
-    45.77542
+    -97.474678,
+    45.759959,
+    -97.455847,
+    45.775594
    ],
    "wikidata": null,
    "charted": false,
@@ -4008,6 +5598,15 @@
    "launches": [
     "nine-mile-pwa-sd"
    ],
+   "water_id": "nine-mile-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "ca17489d2d0680d1e73f029a88b80dae36344779968473df98da54479b568ec8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4019,10 +5618,10 @@
     "Edmunds County"
    ],
    "bbox": [
-    -98.76681,
-    45.23034,
-    -98.73883,
-    45.27074
+    -98.766806,
+    45.2303,
+    -98.738827,
+    45.270736
    ],
    "wikidata": null,
    "charted": false,
@@ -4030,6 +5629,15 @@
    "launches": [
     "north-scatterwood-pwa-sd"
    ],
+   "water_id": "north-scatterwood-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "cc5ce8d08299e0230f1446009da707a65105345258fd47ed6b13456d9b77a104",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4041,10 +5649,10 @@
     "Astoria"
    ],
    "bbox": [
-    -96.54108,
+    -96.541078,
     44.50488,
-    -96.51486,
-    44.52896
+    -96.514857,
+    44.529033
    ],
    "wikidata": null,
    "charted": false,
@@ -4052,6 +5660,15 @@
    "launches": [
     "oak-lake-pwa-sd"
    ],
+   "water_id": "oak-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "f174c841c2597b24f94d2a73f35645c1da0fd371e4e6398142f5719fa6464271",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4063,10 +5680,10 @@
     "Gettysburg"
    ],
    "bbox": [
-    -100.52014,
-    44.55696,
+    -100.520142,
+    44.556959,
     -99.74352,
-    44.98817
+    44.988167
    ],
    "wikidata": "Q49929302",
    "charted": false,
@@ -4074,6 +5691,15 @@
    "launches": [
     "potts-pwa-sd"
    ],
+   "water_id": "okobojo-creek-sd",
+   "gnis_id": "1266881",
+   "geometry_hash": "28e40239ed03ae1638b11a88abbc40263353fc119f17d950cb7a0cb275bcee51",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4085,10 +5711,10 @@
     "Opal"
    ],
    "bbox": [
-    -102.42463,
-    44.91014,
+    -102.424631,
+    44.909937,
     -102.41925,
-    44.91791
+    44.918215
    ],
    "wikidata": null,
    "charted": false,
@@ -4096,6 +5722,15 @@
    "launches": [
     "opal-lake-pwa-sd"
    ],
+   "water_id": "opal-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "5251628dd1e9701d180172fb0176725d44dd9d168c51083c0a44a142b196016a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4107,10 +5742,10 @@
     "Roslyn"
    ],
    "bbox": [
-    -97.52482,
-    45.57079,
-    -97.45253,
-    45.60487
+    -97.524822,
+    45.570787,
+    -97.452532,
+    45.604867
    ],
    "wikidata": null,
    "charted": false,
@@ -4118,6 +5753,15 @@
    "launches": [
     "opitz-pwa-sd"
    ],
+   "water_id": "opitz-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "581e133fa1c1b0a4d8dbd166ce91bb87b832bcf67d2190d479bf6bcf975fb744",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4130,8 +5774,8 @@
    ],
    "bbox": [
     -97.82308,
-    44.46717,
-    -97.81725,
+    44.466911,
+    -97.817196,
     44.4695
    ],
    "wikidata": null,
@@ -4140,6 +5784,15 @@
    "launches": [
     "osceola-lake-boat-launch-sd"
    ],
+   "water_id": "osceola-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "9e9ddcb2e7e818fc374d96e32d4938fe260437457b4e4214c4094fbcd98aa07c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4150,13 +5803,27 @@
    "towns": [
     "Bison"
    ],
-   "bbox": null,
+   "bbox": [
+    -102.412913,
+    45.459291,
+    -102.395892,
+    45.474085
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "owens-pwa-sd"
    ],
+   "water_id": "owen-lake-sd",
+   "gnis_id": "1266445",
+   "geometry_hash": "776cc08d2a802801edf033ccbdc4d796b96a29d6c2cd42a88a98b5262ca7d459",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4169,10 +5836,10 @@
     "Silver City"
    ],
    "bbox": [
-    -103.55545,
-    44.06046,
-    -103.48426,
-    44.08528
+    -103.555452,
+    44.060465,
+    -103.484264,
+    44.085283
    ],
    "wikidata": null,
    "charted": false,
@@ -4183,6 +5850,15 @@
     "pactola-north-pwa-sd",
     "pactola-south-pwa-sd"
    ],
+   "water_id": "pactola-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "386fe6844b087ce8b1993ebb2486457fae720102f56bfd94c4cbff7c0e3727fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -4208,10 +5884,10 @@
     "Watertown"
    ],
    "bbox": [
-    -97.22942,
-    44.85178,
-    -97.13229,
-    44.88435
+    -97.229422,
+    44.851782,
+    -97.132193,
+    44.884347
    ],
    "wikidata": "Q25204395",
    "charted": false,
@@ -4223,6 +5899,15 @@
     "pelican-lake-recreation-area-sd",
     "skinny-krull-access-sd"
    ],
+   "water_id": "pelican-lake-sd",
+   "gnis_id": "1257003",
+   "geometry_hash": "738fe93b2a9b8bbe4485600649e965401e6dbe3516a6a7caef9319e0d7908a5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -4248,10 +5933,10 @@
     "Enemy Swim"
    ],
    "bbox": [
-    -97.29074,
-    45.47705,
-    -97.26298,
-    45.52573
+    -97.290738,
+    45.476901,
+    -97.262976,
+    45.525726
    ],
    "wikidata": "Q7190798",
    "charted": false,
@@ -4262,6 +5947,15 @@
     "pickerel-lake-ra-west-sd",
     "pickerel-west-sd"
    ],
+   "water_id": "pickerel-lake-sd",
+   "gnis_id": "1265680",
+   "geometry_hash": "0874b440f88f47c0a3a0f576b50d878f949ad3eafffe13b6b9dd430a442510bd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -4287,10 +5981,10 @@
     "Pierpont"
    ],
    "bbox": [
-    -97.83689,
-    45.45721,
-    -97.82549,
-    45.46477
+    -97.836889,
+    45.457211,
+    -97.825487,
+    45.464799
    ],
    "wikidata": null,
    "charted": false,
@@ -4298,6 +5992,15 @@
    "launches": [
     "pierpont-lake-waa-sd"
    ],
+   "water_id": "pierpont-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "99317f805f0ede6dba242d84337430b6cfb204275f376ff69ec2b9c046b69bb3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4308,13 +6011,27 @@
    "towns": [
     "Groton"
    ],
-   "bbox": null,
+   "bbox": [
+    -98.000383,
+    45.335097,
+    -97.987064,
+    45.341749
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "pigors-pwa-sd"
    ],
+   "water_id": "pigors-lake-sd",
+   "gnis_id": "1257053",
+   "geometry_hash": "deeeddcfb920cf30b283a71565906bcf53f9ec8dd00dec8845bbe37a81b61cf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4325,13 +6042,27 @@
    "towns": [
     "Buffalo Lake"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.365163,
+    45.567021,
+    -97.312657,
+    45.5982
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "piyas-lake-boat-launch-sd"
    ],
+   "water_id": "piyas-lake-sd",
+   "gnis_id": "1257073",
+   "geometry_hash": "0dbee1f73978c54be4a48ae6afba420507a1b44a4c1b28014bc0dc74fe282555",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4343,8 +6074,8 @@
     "White Lake"
    ],
    "bbox": [
-    -98.78881,
-    43.65466,
+    -98.788807,
+    43.654658,
     -98.75891,
     43.68727
    ],
@@ -4354,6 +6085,15 @@
    "launches": [
     "platte-lake-boat-launch-sd"
    ],
+   "water_id": "platte-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "eb9ca7c74d3a69187f9b453ba6ce799b78e555de86a76ab00e4e0fb2a93ccb28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4371,6 +6111,15 @@
    "launches": [
     "price-lake-boat-launch-sd"
    ],
+   "water_id": "price-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4382,10 +6131,10 @@
     "McIntosh"
    ],
    "bbox": [
-    -101.28126,
-    45.92154,
-    -101.2624,
-    45.93078
+    -101.281257,
+    45.921537,
+    -101.262402,
+    45.930781
    ],
    "wikidata": null,
    "charted": false,
@@ -4393,6 +6142,15 @@
    "launches": [
     "pudwell-pwa-sd"
    ],
+   "water_id": "pudwell-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "8ed9eeaedc4e553d5617a880224420c3fa836ff30b8d3d0ae832856d9769f6ef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4404,10 +6162,10 @@
     "South Shore"
    ],
    "bbox": [
-    -96.95728,
-    45.10763,
-    -96.91983,
-    45.11665
+    -96.957285,
+    45.107635,
+    -96.919834,
+    45.116653
    ],
    "wikidata": null,
    "charted": false,
@@ -4415,6 +6173,15 @@
    "launches": [
     "punished-woman-s-south-pwa-sd"
    ],
+   "water_id": "punished-womans-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "84f03ab6f02b6eace338bf5387d8e9980b7e7972a961cc9b63626d245c3e71eb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4432,6 +6199,15 @@
    "launches": [
     "putney-sd"
    ],
+   "water_id": "putney-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4442,13 +6218,27 @@
    "towns": [
     "Tripp County"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.835767,
+    43.103018,
+    -99.830824,
+    43.11106
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "rahn-pwa-sd"
    ],
+   "water_id": "rahn-lake-sd",
+   "gnis_id": "1259678",
+   "geometry_hash": "c90e6f3380c2fb2584cfb1a7255f101a3e967fec442ce1138388f03b17f460b8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4460,10 +6250,10 @@
     "Pukwana"
    ],
    "bbox": [
-    -99.28374,
-    43.70014,
+    -99.283743,
+    43.700144,
     -99.188,
-    43.74715
+    43.747152
    ],
    "wikidata": null,
    "charted": false,
@@ -4471,6 +6261,15 @@
    "launches": [
     "red-lake-boat-launch-sd"
    ],
+   "water_id": "red-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "876b897d326db2514264a40a3381e20179455d920c59e71771799aeaa6117cc3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4482,10 +6281,10 @@
     "Redfield"
    ],
    "bbox": [
-    -98.5672,
-    44.87221,
-    -98.52691,
-    44.88617
+    -98.567202,
+    44.872171,
+    -98.526909,
+    44.886173
    ],
    "wikidata": null,
    "charted": false,
@@ -4493,6 +6292,15 @@
    "launches": [
     "lake-redfield-city-park-sd"
    ],
+   "water_id": "redfield-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "a8d4c153317cf9e74ccf6ae162fbfaab4a36814e7041d4731ab607e1dd1d15f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4503,13 +6311,27 @@
    "towns": [
     "Reliance"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.59911,
+    43.879482,
+    -99.592935,
+    43.890598
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "reliance-lake-boat-launch-sd"
    ],
+   "water_id": "reliance-lake-sd",
+   "gnis_id": "1257352",
+   "geometry_hash": "675b55c53f334bdf6f7707da821a1bf94a006ae7d30af6dc487c90a16e23b121",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4527,6 +6349,15 @@
    "launches": [
     "reynolds-slough-boat-launch-sd"
    ],
+   "water_id": "reynolds-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4535,13 +6366,27 @@
    "kind": "lake",
    "state": "SD",
    "towns": [],
-   "bbox": null,
+   "bbox": [
+    -99.367662,
+    44.808163,
+    -99.348,
+    44.81717
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "rezac-lake-boat-launch-sd"
    ],
+   "water_id": "rezac-lake-sd",
+   "gnis_id": "1257368",
+   "geometry_hash": "f8f41e6ee72fef460c5206f63f65e63d32be6d55482c8323b876f20541459701",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4550,13 +6395,27 @@
    "kind": "lake",
    "state": "SD",
    "towns": [],
-   "bbox": null,
+   "bbox": [
+    -99.469989,
+    44.822393,
+    -99.450546,
+    44.831057
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "rice-lake-boat-launch-sd"
    ],
+   "water_id": "rice-lake-sd",
+   "gnis_id": "1257372",
+   "geometry_hash": "d60935ee208e41e1b10fab873035f0b9c957e814cbec9aaa0972fd4afc490f9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4566,10 +6425,10 @@
    "state": "SD",
    "towns": [],
    "bbox": [
-    -100.41177,
-    44.14507,
-    -100.40827,
-    44.14889
+    -100.411772,
+    44.145069,
+    -100.408269,
+    44.148889
    ],
    "wikidata": null,
    "charted": false,
@@ -4577,6 +6436,15 @@
    "launches": [
     "richland-dam-usfs-sd"
    ],
+   "water_id": "richland-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "c10f2ccf4aa3ef9d6c8eb281e27324c0d7b7a4ef9f1e821c60378b898cf4dd9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4591,10 +6459,10 @@
     "Richmond Lake Heights Development"
    ],
    "bbox": [
-    -98.64703,
-    45.53097,
-    -98.59118,
-    45.61034
+    -98.647029,
+    45.530967,
+    -98.591177,
+    45.610341
    ],
    "wikidata": null,
    "charted": false,
@@ -4604,6 +6472,15 @@
     "richmond-dam-lua-sd",
     "richmond-lake-ra-sd"
    ],
+   "water_id": "richmond-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "215a30d1b54eee4c61c62881beedd083890bb475912d028c250e59306ed6a4e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4615,10 +6492,10 @@
     "Dallas"
    ],
    "bbox": [
-    -99.62745,
-    43.19736,
-    -99.61429,
-    43.20531
+    -99.627448,
+    43.197364,
+    -99.614287,
+    43.205309
    ],
    "wikidata": null,
    "charted": false,
@@ -4626,6 +6503,15 @@
    "launches": [
     "roosevelt-pwa-sd"
    ],
+   "water_id": "roosevelt-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "f2ce1ba46f1de1e45ad7bc5459cb2e55841d16248776b878dc812a429cb242a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4648,6 +6534,15 @@
    "launches": [
     "round-lake-boat-launch-sd"
    ],
+   "water_id": "round-lake-clark-sd",
+   "gnis_id": null,
+   "geometry_hash": "ac8d41fabda5cd2c0792d1fdf905821e3487237c2b6ce95f0905f1b7578a189a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4670,6 +6565,15 @@
    "launches": [
     "round-lake-deuel-sd"
    ],
+   "water_id": "round-lake-goodwin-sd",
+   "gnis_id": null,
+   "geometry_hash": "aeee97d2966b14b4eb896e4b7109871b7227adb69b93ed43a6717dc9ffdb2cc1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4681,10 +6585,10 @@
     "South Shore"
    ],
    "bbox": [
-    -96.91862,
-    45.1085,
-    -96.90691,
-    45.11673
+    -96.918618,
+    45.108504,
+    -96.906912,
+    45.116788
    ],
    "wikidata": null,
    "charted": false,
@@ -4692,6 +6596,15 @@
    "launches": [
     "round-benn-waa-sd"
    ],
+   "water_id": "round-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "475adf32ba552a9b314313aa6277a0df552c6cc07b4d3ac635d6b0e8b01bf9b8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4704,9 +6617,9 @@
    ],
    "bbox": [
     -97.48633,
-    45.67801,
-    -97.40938,
-    45.71236
+    45.678007,
+    -97.409384,
+    45.712485
    ],
    "wikidata": "Q49309452",
    "charted": false,
@@ -4718,6 +6631,15 @@
     "roy-lake-sp-east-sd",
     "roy-lake-sp-lodge-sd"
    ],
+   "water_id": "roy-lake-sd",
+   "gnis_id": "1257510",
+   "geometry_hash": "65b75aa66f402ff7442bac929339761a122d5b503232582fb1531c3832febb05",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -4744,9 +6666,9 @@
    ],
    "bbox": [
     -97.40726,
-    45.32345,
+    45.323455,
     -97.31175,
-    45.38096
+    45.381163
    ],
    "wikidata": "Q25204432",
    "charted": false,
@@ -4755,6 +6677,15 @@
     "north-rush-pwa-sd",
     "south-rush-pwa-sd"
    ],
+   "water_id": "rush-lake-sd",
+   "gnis_id": "1265689",
+   "geometry_hash": "5e5697c6848ddb7de64a7bc7e1300a626b5cc4e4ecae0d31204186cb1e283041",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -4779,13 +6710,58 @@
    "towns": [
     "Selby"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.946796,
+    45.626519,
+    -99.888268,
+    45.638067
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "salt-lake-gpa-sd",
     "salt-lake-pwa-sd"
+   ],
+   "water_id": "salt-lake-sd",
+   "gnis_id": "1257778",
+   "geometry_hash": "9d4dc787331e3619ace9fb3d56a002b6ed9cf119736569a08a4a11bf881fe2c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sand-lake-sd",
+   "name": "Sand Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -98.310533,
+    45.700994,
+    -98.240281,
+    45.77713
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 17.278,
+   "launches": [],
+   "water_id": "sand-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "eeb5e49f33b9d61c2a9bee98bb94802346356ef1fd3b7af7408f19850a73e00e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "sand-lake-boat-launch-sd"
    ],
    "advisories": []
   },
@@ -4799,9 +6775,9 @@
    ],
    "bbox": [
     -96.8305,
-    44.93357,
+    44.933573,
     -96.8085,
-    44.94586
+    44.946
    ],
    "wikidata": null,
    "charted": false,
@@ -4809,6 +6785,15 @@
    "launches": [
     "school-lake-waa-sd"
    ],
+   "water_id": "school-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "0e7fd70c67bef70eeb405c4c267cbf250f79c0a4c8212fce4485ed65b34a0fa5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4824,9 +6809,18 @@
    "charted": false,
    "area_km2": null,
    "launches": [
-    "scott-lake-boat-launch-sd",
-    "scott-lake-boat-launch-hartford-sd"
+    "scott-lake-boat-launch-hartford-sd",
+    "scott-lake-boat-launch-sd"
    ],
+   "water_id": "scott-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4839,10 +6833,10 @@
     "Shadehill"
    ],
    "bbox": [
-    -102.30598,
-    45.68143,
-    -102.19898,
-    45.79536
+    -102.305985,
+    45.681428,
+    -102.198984,
+    45.795358
    ],
    "wikidata": null,
    "charted": false,
@@ -4853,6 +6847,15 @@
     "shadehill-ra-ketterlings-point-sd",
     "shadehill-west-pwa-sd"
    ],
+   "water_id": "shadehill-reservoir-sd",
+   "gnis_id": null,
+   "geometry_hash": "14be0b207226246a3739b3c2d88e3ef0166ac9d7c7972a83bf9bef626d6232b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4864,10 +6867,10 @@
     "Hill City"
    ],
    "bbox": [
-    -103.48565,
-    43.96521,
-    -103.45056,
-    43.98173
+    -103.485654,
+    43.965208,
+    -103.450562,
+    43.981729
    ],
    "wikidata": null,
    "charted": false,
@@ -4876,6 +6879,15 @@
     "sheridan-north-pwa-sd",
     "sheridan-south-pwa-sd"
    ],
+   "water_id": "sheridan-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "8e7620f70fbf3d541e459281f16e491779cb6400c5c34c61698b4c75990a3056",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "sd-gfp-ais-waters",
@@ -4901,10 +6913,10 @@
     "Carpenter"
    ],
    "bbox": [
-    -98.11597,
-    44.44158,
-    -97.81496,
-    44.66008
+    -98.115972,
+    44.441577,
+    -97.814955,
+    44.660079
    ],
    "wikidata": "Q24061746",
    "charted": false,
@@ -4912,6 +6924,15 @@
    "launches": [
     "staum-dam-pwa-sd"
    ],
+   "water_id": "shue-creek-sd",
+   "gnis_id": "1266902",
+   "geometry_hash": "00578fe845c668e4312bba3af643d2d1b19ed96b54355b63004aae1fa2b9c2f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4923,10 +6944,10 @@
     "Freeman"
    ],
    "bbox": [
-    -97.42089,
-    43.44125,
-    -97.40021,
-    43.45496
+    -97.420885,
+    43.441247,
+    -97.400215,
+    43.454961
    ],
    "wikidata": null,
    "charted": false,
@@ -4934,6 +6955,15 @@
    "launches": [
     "silver-pwa-sd"
    ],
+   "water_id": "silver-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "3c9199c16c835d7b19ab351e6b70ca9b7c2683c67c8082259d1b19214eaf9d9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4951,6 +6981,15 @@
    "launches": [
     "simon-lake-boat-launch-sd"
    ],
+   "water_id": "simon-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4968,6 +7007,15 @@
    "launches": [
     "six-mile-pwa-sd"
    ],
+   "water_id": "six-mile-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4990,6 +7038,15 @@
    "launches": [
     "west-coteau-south-waa-sd"
    ],
+   "water_id": "south-coteau-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "34be46aa9ef083e0aec1f3521f0156608211977ff1432977fcccf3c755a5d144",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5002,7 +7059,7 @@
    ],
    "bbox": [
     -97.33025,
-    45.65614,
+    45.655941,
     -97.3085,
     45.68525
    ],
@@ -5012,6 +7069,15 @@
    "launches": [
     "south-red-iron-pwa-sd"
    ],
+   "water_id": "south-red-iron-lake-sd",
+   "gnis_id": "1258211",
+   "geometry_hash": "d9ee754ba10d57a1d2f553e39dc4d040b3bef39452c62a40e17db239e99f81b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5023,10 +7089,10 @@
     "Chelsea"
    ],
    "bbox": [
-    -98.76309,
-    45.18671,
-    -98.74525,
-    45.22997
+    -98.763088,
+    45.186706,
+    -98.745249,
+    45.230202
    ],
    "wikidata": null,
    "charted": false,
@@ -5034,6 +7100,15 @@
    "launches": [
     "south-scatterwood-boat-launch-sd"
    ],
+   "water_id": "south-scatterwood-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "89fbd59fefc662cca406677f3e939dc94a0212e02feab1c3fce4555eeba64a2c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5046,10 +7121,10 @@
     "Garretson"
    ],
    "bbox": [
-    -96.59595,
-    43.54898,
-    -96.43192,
-    43.80369
+    -96.595951,
+    43.548981,
+    -96.431916,
+    43.803691
    ],
    "wikidata": "Q35334581",
    "charted": false,
@@ -5057,6 +7132,15 @@
    "launches": [
     "split-rock-creek-carry-in-access-sd"
    ],
+   "water_id": "split-rock-creek-sd",
+   "gnis_id": null,
+   "geometry_hash": "7c6f29c42bde569c9b093c8cd6953eca53ecce1bca911b41342c26431032b44e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5067,13 +7151,27 @@
    "towns": [
     "Selby"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.851826,
+    45.419107,
+    -99.811604,
+    45.448978
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "spring-lake-boat-launch-sd"
    ],
+   "water_id": "spring-lake-sd",
+   "gnis_id": "1258278",
+   "geometry_hash": "1627206f41bcdb48d7bcb7de80bb779a5b4f538bb34ea7761d026cdcfd92b676",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5086,7 +7184,7 @@
    ],
    "bbox": [
     -97.4185,
-    44.96148,
+    44.961399,
     -97.39125,
     44.9875
    ],
@@ -5096,6 +7194,15 @@
    "launches": [
     "stink-lake-pwa-sd"
    ],
+   "water_id": "stink-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "1ee6817b130cc97f54c445cf58044616324de4ab5099d05d215a15c95a261228",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5107,10 +7214,10 @@
     "Custer"
    ],
    "bbox": [
-    -103.5308,
-    43.76466,
-    -103.50989,
-    43.77324
+    -103.530804,
+    43.764661,
+    -103.509885,
+    43.773244
    ],
    "wikidata": null,
    "charted": false,
@@ -5118,6 +7225,15 @@
    "launches": [
     "custer-sp-stockade-sd"
    ],
+   "water_id": "stockade-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "9ae663184a4157eb525749937d4f67748eb4489df61b9994caacb773c5934442",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5129,10 +7245,10 @@
     "Onida"
    ],
    "bbox": [
-    -100.19802,
-    44.70866,
-    -100.17812,
-    44.7302
+    -100.198024,
+    44.708476,
+    -100.178125,
+    44.730196
    ],
    "wikidata": null,
    "charted": false,
@@ -5140,6 +7256,15 @@
    "launches": [
     "sully-lake-pwa-sd"
    ],
+   "water_id": "sully-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "ce7f1eabb12fa535a383be563285bcb7e2dd8941921782661ee6d8b5e7c1e74b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5151,10 +7276,10 @@
     "Summit"
    ],
    "bbox": [
-    -97.01723,
-    45.27892,
-    -97.00317,
-    45.29
+    -97.017227,
+    45.2789,
+    -97.003168,
+    45.289997
    ],
    "wikidata": null,
    "charted": false,
@@ -5162,6 +7287,15 @@
    "launches": [
     "summit-lake-pwa-sd"
    ],
+   "water_id": "summit-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "223f7a6f93a57baad51a65b00510d60795a7d47038b868496e66039c2844068a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5172,13 +7306,27 @@
    "towns": [
     "Hoven"
    ],
-   "bbox": null,
+   "bbox": [
+    -99.896013,
+    45.275943,
+    -99.815019,
+    45.313037
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "swan-lake-boat-launch-sd"
    ],
+   "water_id": "swan-lake-hoven-sd",
+   "gnis_id": "1258465",
+   "geometry_hash": "7a1a009714dcc22de295f7a0c8f764d6a86c019cdff4cca7d05e1f45619eabb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5190,10 +7338,10 @@
     "Viborg"
    ],
    "bbox": [
-    -97.11267,
-    43.21599,
-    -97.09298,
-    43.22548
+    -97.112673,
+    43.215987,
+    -97.092979,
+    43.225481
    ],
    "wikidata": null,
    "charted": false,
@@ -5201,6 +7349,15 @@
    "launches": [
     "swan-pwa-sd"
    ],
+   "water_id": "swan-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "5fc750436945111e210dcf3437f69f9df88981488a22815ee4ac96bdabe5235a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5224,6 +7381,15 @@
     "swan-lake-boat-launch-webster-sd",
     "swan-lake-pwa-sd"
    ],
+   "water_id": "swan-lake-webster-sd",
+   "gnis_id": null,
+   "geometry_hash": "e70555086cbe527cc2587ba4a0eedf22b0977f754d891b2cfa8d949ec449d370",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5234,13 +7400,27 @@
    "towns": [
     "New Underwood"
    ],
-   "bbox": null,
+   "bbox": [
+    -102.679027,
+    44.191393,
+    -102.672911,
+    44.196506
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "tisdale-lake-boat-launch-sd"
    ],
+   "water_id": "tisdale-lake-sd",
+   "gnis_id": "1258566",
+   "geometry_hash": "528dd9e7ce57dfea2a939c169210757c755939e69e5d8edfeab0a4f1fb87dbbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5252,10 +7432,10 @@
     "Trail City"
    ],
    "bbox": [
-    -100.7588,
-    45.47657,
-    -100.74117,
-    45.48564
+    -100.758802,
+    45.476571,
+    -100.741174,
+    45.485643
    ],
    "wikidata": null,
    "charted": false,
@@ -5263,6 +7443,15 @@
    "launches": [
     "trail-city-pwa-sd"
    ],
+   "water_id": "trail-city-railroad-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "4299ea4039de6e31cf67f9560f0f1db209b0afca50be25d5fd6144d5d1e7ab66",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5273,13 +7462,27 @@
    "towns": [
     "Tripp"
    ],
-   "bbox": null,
+   "bbox": [
+    -98.082143,
+    43.199492,
+    -98.076321,
+    43.203697
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "tripp-lake-pwa-sd"
    ],
+   "water_id": "tripp-lake-sd",
+   "gnis_id": "1258619",
+   "geometry_hash": "858f4a291985d51ef0f3ea37d9e8d3fc2babdf14947b23db86321b9d6446fab9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5297,10 +7500,50 @@
    "launches": [
     "tuschen-lake-boat-launch-sd"
    ],
+   "water_id": "tuschen-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
-   "slug": "twin-lake-sd",
+   "slug": "twelvemile-creek-sd",
+   "name": "Twelvemile Creek",
+   "kind": "stream",
+   "state": "SD",
+   "towns": [
+    "Milltown"
+   ],
+   "bbox": [
+    -97.839614,
+    43.424512,
+    -97.799858,
+    43.457619
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "twelvemile-creek-sd",
+   "gnis_id": null,
+   "geometry_hash": "59c40dcbaa73b6b8f2b78976485a50995e496c3f4278e90d2a5f3c8bc299bb9c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "james-river-milltown-sd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lake-montrose-sd",
    "name": "Twin Lake",
    "kind": "lake",
    "state": "SD",
@@ -5312,9 +7555,41 @@
    "charted": false,
    "area_km2": null,
    "launches": [
-    "twin-lake-boat-launch-sd",
     "twin-lake-minnehaha-sd"
    ],
+   "water_id": "twin-lake-montrose-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lake-sd",
+   "name": "Twin Lake",
+   "kind": "lake",
+   "state": "SD",
+   "towns": [],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "twin-lake-boat-launch-sd"
+   ],
+   "water_id": "twin-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5325,13 +7600,27 @@
    "towns": [
     "Philip"
    ],
-   "bbox": null,
+   "bbox": [
+    -101.668551,
+    44.07411,
+    -101.645322,
+    44.083499
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "waggoner-lake-boat-launch-sd"
    ],
+   "water_id": "waggoner-lake-sd",
+   "gnis_id": "1258780",
+   "geometry_hash": "1d1fed7444eec612ab85e06f34460e1476dbb8a10d3732d462f9cbb19c65c1e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5343,10 +7632,10 @@
     "Hartford"
    ],
    "bbox": [
-    -96.96971,
-    43.52816,
-    -96.9529,
-    43.53935
+    -96.969707,
+    43.528099,
+    -96.952897,
+    43.539554
    ],
    "wikidata": null,
    "charted": false,
@@ -5354,6 +7643,15 @@
    "launches": [
     "wall-lake-lua-sd"
    ],
+   "water_id": "wall-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "120d703f38db6c4f595dc91f1fe03425d2c24b65e33c5649c57310c78ddb3738",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -5381,9 +7679,9 @@
     "Webster"
    ],
    "bbox": [
-    -97.49628,
-    45.35287,
-    -97.30782,
+    -97.496279,
+    45.352874,
+    -97.307821,
     45.47158
    ],
    "wikidata": "Q129567354",
@@ -5393,6 +7691,15 @@
     "south-waubay-kanago-pwa-sd",
     "waubay-lake-pwa-grenville-sd"
    ],
+   "water_id": "waubay-lake-sd",
+   "gnis_id": "1258844",
+   "geometry_hash": "ce9d8112b30ee10a12a1c081448727d9d90bf232e9214b296e30cda657e21ba7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5406,17 +7713,26 @@
    "bbox": [
     -97.0275,
     44.42779,
-    -96.98314,
+    -96.983136,
     44.4585
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 4.535,
    "launches": [
-    "oakwood-canoe-kayak-launch-sd",
     "oakwood-canoe-kayak-launch-bruce-sd",
+    "oakwood-canoe-kayak-launch-sd",
     "oakwood-lakes-sp-sd"
    ],
+   "water_id": "west-oakwood-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "e9016b2d0412890e43ff0c271bc0b1a1fd4042dcda66b61a003e91e9b2f62e68",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5434,6 +7750,15 @@
    "launches": [
     "west-stink-pwa-sd"
    ],
+   "water_id": "west-stink-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5445,10 +7770,10 @@
     "Britton"
    ],
    "bbox": [
-    -97.62256,
+    -97.622792,
     45.84532,
-    -97.60526,
-    45.86491
+    -97.605256,
+    45.865082
    ],
    "wikidata": null,
    "charted": false,
@@ -5456,6 +7781,15 @@
    "launches": [
     "white-lake-pwa-sd"
    ],
+   "water_id": "white-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "9360e5b8d6d96ae5a255bc4962e7fa88fa6d5da47eb738158e20af2ee9dc6688",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5480,6 +7814,15 @@
     "whitewood-lake-access-area-sd",
     "whitewood-south-sd"
    ],
+   "water_id": "whitewood-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "57a8245d9e92e8236f3e5519ba8a884781f71e8f70854ce968fa67e1f03dfdc1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5491,10 +7834,10 @@
     "Westport"
    ],
    "bbox": [
-    -98.63696,
+    -98.636956,
     45.70356,
-    -98.58861,
-    45.7154
+    -98.588608,
+    45.715399
    ],
    "wikidata": null,
    "charted": false,
@@ -5503,6 +7846,15 @@
     "willow-creek-boat-launch-sd",
     "willow-dam-sd"
    ],
+   "water_id": "willow-creek-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "43c1ed3d4012b8274fbf8403ca476b9bcceb46e543b55b276f69e0a96c8b5f01",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5513,13 +7865,27 @@
    "towns": [
     "Willow Lake"
    ],
-   "bbox": null,
+   "bbox": [
+    -97.650166,
+    44.64257,
+    -97.630056,
+    44.6585
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "willow-lake-boat-launch-sd"
    ],
+   "water_id": "willow-lake-sd",
+   "gnis_id": "1259027",
+   "geometry_hash": "c79dd8fbf0274bc6854f50663497d762e9c54da052b3aa5eb5500d787581521e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5531,10 +7897,10 @@
     "Plankinton"
    ],
    "bbox": [
-    -98.5976,
-    43.85626,
-    -98.57021,
-    43.86485
+    -98.597599,
+    43.856262,
+    -98.570213,
+    43.864848
    ],
    "wikidata": null,
    "charted": false,
@@ -5542,6 +7908,15 @@
    "launches": [
     "wilmarth-lake-pwa-sd"
    ],
+   "water_id": "wilmarth-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "018f2af20b123b9ea093d7a6de8528e98a8a3ebf515784edc48dd62ff3a6d440",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5564,6 +7939,15 @@
    "launches": [
     "wolf-slough-boat-launch-sd"
    ],
+   "water_id": "wolf-slough-sd",
+   "gnis_id": null,
+   "geometry_hash": "6ec64ea56bd834498acadc252f1ec75ef8a02b833975ca09dccee7d45596277c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5575,9 +7959,9 @@
     "Aberdeen"
    ],
    "bbox": [
-    -98.51599,
-    45.48737,
-    -98.51138,
+    -98.515992,
+    45.487373,
+    -98.511384,
     45.48986
    ],
    "wikidata": null,
@@ -5586,6 +7970,15 @@
    "launches": [
     "wylie-park-kayak-area-sd"
    ],
+   "water_id": "wylie-lake-sd",
+   "gnis_id": null,
+   "geometry_hash": "da6debe4c296eba2f9aa7ea177dd84f144325718e8b707081e75c8879725c17c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]

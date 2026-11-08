@@ -1,7 +1,7 @@
 {
  "state": "AZ",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 74,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 75,
  "waters": [
   {
    "slug": "alamo-lake-az",
@@ -10,10 +10,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -113.60205,
-    34.23196,
-    -113.56112,
-    34.27677
+    -113.602051,
+    34.231956,
+    -113.560999,
+    34.276774
    ],
    "wikidata": "Q4705968",
    "charted": false,
@@ -22,6 +22,15 @@
     "alamo-lake-main-boat-ramp-az",
     "cholla-boat-ramp-az"
    ],
+   "water_id": "alamo-lake-az",
+   "gnis_id": "553",
+   "geometry_hash": "61db9eede947b4e3155d24a8606ac961efd1f3cc7e939bf909a3e1e9f0d32cea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -33,10 +42,10 @@
     "Phoenix"
    ],
    "bbox": [
-    -112.14019,
-    33.37194,
-    -112.13528,
-    33.37663
+    -112.140194,
+    33.371938,
+    -112.135285,
+    33.376904
    ],
    "wikidata": "Q4738340",
    "charted": false,
@@ -44,6 +53,15 @@
    "launches": [
     "alvord-lake-boat-launch-az"
    ],
+   "water_id": "alvord-lake-az",
+   "gnis_id": "14180",
+   "geometry_hash": "8af2fe60985b37173850414c298e31b1215493beda549046db524071479533a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -53,16 +71,27 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.34504,
-    33.57265,
-    -111.16162,
-    33.67136
+    -111.345038,
+    33.572651,
+    -111.161619,
+    33.671595
    ],
    "wikidata": "Q616908",
    "charted": false,
    "area_km2": 9.97,
    "launches": [
     "burnt-corral-boat-ramp-az"
+   ],
+   "water_id": "apache-lake-az",
+   "gnis_id": "25703",
+   "geometry_hash": "5a17b309123e046644adaa7637e1ede469ca57a2d1cd702ace65684129247737",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "apache-lake-marina-boat-ramp-az"
    ],
    "advisories": [
     {
@@ -89,10 +118,10 @@
     "Oro Blanco"
    ],
    "bbox": [
-    -111.2549,
-    31.52535,
-    -111.24832,
-    31.5371
+    -111.254899,
+    31.525345,
+    -111.248324,
+    31.537102
    ],
    "wikidata": null,
    "charted": false,
@@ -100,6 +129,15 @@
    "launches": [
     "arivaca-lake-boat-launch-az"
    ],
+   "water_id": "arivaca-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "9b4baa054ff113514b53c16f9d37ceee1e8dce78d7f4728d2b9ce35a2f62b92a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -109,10 +147,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.40742,
-    35.01194,
-    -111.39796,
-    35.02677
+    -111.407421,
+    35.011936,
+    -111.397958,
+    35.026771
    ],
    "wikidata": "Q4806131",
    "charted": false,
@@ -120,6 +158,15 @@
    "launches": [
     "ashurst-lake-boat-launch-az"
    ],
+   "water_id": "ashurst-lake-az",
+   "gnis_id": "25812",
+   "geometry_hash": "c7beee2b6f59c2a5e8aaf7cfd5c83fa71b53643ce2859e36659ca8fe80839f4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -131,10 +178,10 @@
     "Rio Verde"
    ],
    "bbox": [
-    -111.66457,
-    33.81123,
-    -111.59302,
-    33.92564
+    -111.664568,
+    33.811225,
+    -111.593021,
+    33.925718
    ],
    "wikidata": "Q809448",
    "charted": false,
@@ -144,6 +191,15 @@
     "jojoba-boat-ramp-az",
     "yellow-cliffs-boat-ramp-az"
    ],
+   "water_id": "bartlett-reservoir-az",
+   "gnis_id": "26014",
+   "geometry_hash": "79ddac1e156c8f84a0ecc0e3c3b6ccd79dfa3478eb953cf589577773406e4d8a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -169,10 +225,10 @@
     "Eagar"
    ],
    "bbox": [
-    -109.30992,
-    34.14753,
-    -109.30268,
-    34.15698
+    -109.309916,
+    34.147409,
+    -109.302684,
+    34.157212
    ],
    "wikidata": "Q4878666",
    "charted": false,
@@ -180,6 +236,15 @@
    "launches": [
     "becker-lake-boat-launch-az"
    ],
+   "water_id": "becker-lake-az",
+   "gnis_id": "26164",
+   "geometry_hash": "9a83e6460ac2b2a40aece0555858f605c74b6110e4e1552cf7faca05099d2102",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -189,10 +254,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -109.43137,
-    33.87174,
-    -109.40885,
-    33.89101
+    -109.431368,
+    33.871737,
+    -109.408848,
+    33.891012
    ],
    "wikidata": "Q4905944",
    "charted": false,
@@ -203,6 +268,15 @@
     "railroad-cove-boat-ramp-az",
     "south-cove-boat-ramp-az"
    ],
+   "water_id": "big-lake-az",
+   "gnis_id": "39003",
+   "geometry_hash": "bb0706f668297e69f82e8e90fd8292e6aa1f238953b71a22d1eb2bc46964c006",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -228,10 +302,10 @@
     "Heber–Overgaard, Arizona"
    ],
    "bbox": [
-    -110.70405,
-    34.32478,
-    -110.69817,
-    34.33299
+    -110.704047,
+    34.324776,
+    -110.698172,
+    34.332991
    ],
    "wikidata": "Q880135",
    "charted": false,
@@ -239,6 +313,15 @@
    "launches": [
     "black-canyon-lake-boat-launch-az"
    ],
+   "water_id": "black-canyon-lake-az",
+   "gnis_id": "40153",
+   "geometry_hash": "23eeeecd9fef9458b3f669a761a5dc9f0a9108371740104298c423dd8d61adfc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -248,10 +331,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.2382,
-    34.5324,
-    -111.18067,
-    34.55899
+    -111.238196,
+    34.532397,
+    -111.180671,
+    34.558989
    ],
    "wikidata": null,
    "charted": false,
@@ -259,6 +342,15 @@
    "launches": [
     "blue-ridge-boat-launch-az"
    ],
+   "water_id": "blue-ridge-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "87ef068827b5c2358a964f4dac3c430b52fcf79e9e3848d2d100dc9f50866740",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -270,10 +362,10 @@
     "Northwoods"
    ],
    "bbox": [
-    -109.44872,
-    34.03524,
-    -109.44437,
-    34.04297
+    -109.448719,
+    34.035244,
+    -109.444374,
+    34.042966
    ],
    "wikidata": null,
    "charted": false,
@@ -281,6 +373,15 @@
    "launches": [
     "bunch-reservoir-boating-site-az"
    ],
+   "water_id": "bunch-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "c072eb95b81798ee933ffc156c964472473a15d2b73f34990ff1382372bd3d3e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -293,10 +394,10 @@
     "Tortilla Flat"
    ],
    "bbox": [
-    -111.44574,
-    33.52629,
-    -111.34395,
-    33.59058
+    -111.445739,
+    33.526262,
+    -111.343954,
+    33.590862
    ],
    "wikidata": "Q1033996",
    "charted": false,
@@ -306,6 +407,15 @@
     "laguna-boat-ramp-az",
     "palo-verde-boat-ramp-az"
    ],
+   "water_id": "canyon-lake-az",
+   "gnis_id": "27276",
+   "geometry_hash": "ff23c8363ee11cc014da48eea671f0fb66bc1b295845b7f4ee3774cfecdfa0dc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "usgs-nas-dreissenid-mussels",
@@ -332,9 +442,9 @@
    ],
    "bbox": [
     -112.22117,
-    35.24847,
-    -112.21413,
-    35.25262
+    35.248465,
+    -112.214129,
+    35.252616
    ],
    "wikidata": "Q5051463",
    "charted": false,
@@ -343,6 +453,15 @@
     "cataract-lake-boat-launch-near-williams-az",
     "cataract-lake-boat-launch-near-williams-az-2"
    ],
+   "water_id": "cataract-lake-az",
+   "gnis_id": "27364",
+   "geometry_hash": "30c96848e1c58f073622c515d992c5f7a2815c4d6b4ba528b2a55aadf51c95fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -354,10 +473,10 @@
     "Scottsdale"
    ],
    "bbox": [
-    -111.9084,
-    33.50993,
-    -111.90668,
-    33.51453
+    -111.908396,
+    33.509926,
+    -111.906495,
+    33.514527
    ],
    "wikidata": "Q5072940",
    "charted": false,
@@ -365,6 +484,15 @@
    "launches": [
     "chaparral-lake-boat-launch-az"
    ],
+   "water_id": "chaparral-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "4c9f2ce855bfed16c024b0278f27c0f93a76dcb6e3728e331d32cb922a65bdec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -374,10 +502,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -110.82953,
-    34.47607,
-    -110.8199,
-    34.51195
+    -110.829526,
+    34.476067,
+    -110.819897,
+    34.511947
    ],
    "wikidata": "Q5094319",
    "charted": false,
@@ -385,6 +513,15 @@
    "launches": [
     "chevelon-canyon-lake-boat-launch-az"
    ],
+   "water_id": "chevelon-canyon-lake-az",
+   "gnis_id": "27570",
+   "geometry_hash": "e114d1d2273bc493161e401629eafe7e19ebe4b32fe06d2114bacae2ae0f7174",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -410,10 +547,10 @@
     "Winslow"
    ],
    "bbox": [
-    -110.64375,
-    34.96883,
-    -110.63605,
-    34.97515
+    -110.643746,
+    34.968832,
+    -110.636053,
+    34.975391
    ],
    "wikidata": null,
    "charted": false,
@@ -421,6 +558,15 @@
    "launches": [
     "clear-creek-lake-boat-launch-az"
    ],
+   "water_id": "clear-creek-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "8f1983bd71ba134ee6a4a04750a03c55fc0c399aaf756acc1442f784cfd74a12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -432,10 +578,10 @@
     "Pima"
    ],
    "bbox": [
-    -109.86405,
-    32.80435,
-    -109.86155,
-    32.80712
+    -109.864052,
+    32.80415,
+    -109.861547,
+    32.807195
    ],
    "wikidata": null,
    "charted": false,
@@ -443,6 +589,15 @@
    "launches": [
     "cluff-reservoir-number-three-boat-launch-az"
    ],
+   "water_id": "cluff-reservoir-number-three-az",
+   "gnis_id": null,
+   "geometry_hash": "b9853ec4011147508093adfa93618bcbd17ba6e51ece927b250350a7561bf4fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -464,10 +619,10 @@
     "Willow Valley"
    ],
    "bbox": [
-    -114.74355,
-    32.71871,
-    -111.47882,
-    36.93794
+    -114.743552,
+    32.718713,
+    -111.478821,
+    36.937939
    ],
    "wikidata": "Q1265",
    "charted": false,
@@ -491,6 +646,21 @@
     "rotary-park-boat-ramp-az",
     "veteran-s-park-boat-ramp-az"
    ],
+   "water_id": "colorado-river-az",
+   "gnis_id": "45730",
+   "geometry_hash": "68481dfecb56211ecb1825affeaf0356f454fb39cfd2a65bf9bbf320b089ecc6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "colorado-river-boat-launch-near-bullhead-city-az-2",
+    "colorado-river-boat-launch-near-ehrenberg-az-4",
+    "fishers-resort-boat-ramp-az",
+    "riviera-marina-boat-ramp-az",
+    "topock66-az"
+   ],
    "advisories": []
   },
   {
@@ -503,9 +673,9 @@
    ],
    "bbox": [
     -109.63291,
-    34.4394,
-    -109.62661,
-    34.44878
+    34.439399,
+    -109.626605,
+    34.448944
    ],
    "wikidata": null,
    "charted": false,
@@ -513,6 +683,15 @@
    "launches": [
     "concho-lake-boat-launch-az"
    ],
+   "water_id": "concho-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "c5299e35b29f5e1c8426310e565314fc8783af91290a98de2c754b82044fdb6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -524,10 +703,10 @@
     "Eagar"
    ],
    "bbox": [
-    -109.4277,
-    33.89715,
-    -109.4155,
-    33.91757
+    -109.42792,
+    33.897152,
+    -109.415498,
+    33.917569
    ],
    "wikidata": "Q5184383",
    "charted": false,
@@ -537,6 +716,15 @@
     "crescent-lake-south-boat-ramp-az",
     "crescent-lake-west-boat-ramp-az"
    ],
+   "water_id": "crescent-lake-az",
+   "gnis_id": "28170",
+   "geometry_hash": "aef0d9f4f79c7add21cd45b76232d4d0ec8c7b9c7a1af7611c881f0c7949eca8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -548,10 +736,10 @@
     "Williams"
    ],
    "bbox": [
-    -112.13768,
-    35.2086,
-    -112.12528,
-    35.21317
+    -112.137685,
+    35.208597,
+    -112.125279,
+    35.213168
    ],
    "wikidata": "Q5288485",
    "charted": false,
@@ -559,6 +747,15 @@
    "launches": [
     "dogtown-reservoir-boat-launch-az"
    ],
+   "water_id": "dogtown-reservoir-az",
+   "gnis_id": "28521",
+   "geometry_hash": "101f13299b4315458db86196197c58093df7e288f8af8c62c045394badd487ae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -571,9 +768,9 @@
    ],
    "bbox": [
     -112.00704,
-    34.75171,
-    -112.00291,
-    34.75381
+    34.751708,
+    -112.002909,
+    34.753809
    ],
    "wikidata": null,
    "charted": false,
@@ -581,6 +778,15 @@
    "launches": [
     "east-lagoon-boat-launch-az"
    ],
+   "water_id": "east-lagoon-az",
+   "gnis_id": null,
+   "geometry_hash": "c5be0b59ab52e12a405391725010cc4b0ad1dd246af00499ce1e44aaaff06489",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -592,10 +798,10 @@
     "Show Low"
    ],
    "bbox": [
-    -110.07548,
+    -110.075478,
     34.26524,
-    -110.04804,
-    34.2781
+    -110.048043,
+    34.278096
    ],
    "wikidata": "Q7352006",
    "charted": false,
@@ -604,6 +810,15 @@
     "fool-hollow-lake-east-boat-ramp-az",
     "fool-hollow-lake-west-boat-ramp-az"
    ],
+   "water_id": "fool-hollow-lake-az",
+   "gnis_id": "29091",
+   "geometry_hash": "2b92b9ae02feb91d616d69b63c8633402727f5301eb64348643d6e09b6e16d6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -615,10 +830,10 @@
     "Morenci"
    ],
    "bbox": [
-    -114.55815,
-    32.67616,
-    -108.99326,
-    33.39022
+    -114.558151,
+    32.676163,
+    -108.993263,
+    33.390726
    ],
    "wikidata": "Q838143",
    "charted": false,
@@ -627,6 +842,15 @@
     "dry-canyon-boat-take-out-az",
     "gila-river-boat-put-in-az"
    ],
+   "water_id": "gila-river-az",
+   "gnis_id": "42838",
+   "geometry_hash": "dff59d9a883ec84a07bb10c39ad632c1418a33e61abbb1b371df7be247322396",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -638,10 +862,10 @@
     "Prescott"
    ],
    "bbox": [
-    -112.55207,
-    34.61609,
-    -112.54842,
-    34.61804
+    -112.552073,
+    34.615988,
+    -112.548417,
+    34.618044
    ],
    "wikidata": null,
    "charted": false,
@@ -649,6 +873,15 @@
    "launches": [
     "granite-basin-lake-boat-launch-az"
    ],
+   "water_id": "granite-basin-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "8ebd1b1a2830c8faf9c1d0d4fa5ae7da379c3c6a4fca5274d6b18a66c3fe7eea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -660,9 +893,9 @@
     "Payson"
    ],
    "bbox": [
-    -111.34664,
-    34.23078,
-    -111.34329,
+    -111.346642,
+    34.230781,
+    -111.343292,
     34.23267
    ],
    "wikidata": null,
@@ -671,6 +904,15 @@
    "launches": [
     "green-valley-park-main-lake-boat-launch-az"
    ],
+   "water_id": "green-valley-park-main-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "5c947e2cdd8819cae87d7088f840a65ca7ea87fc48afc6050b7febc39dd875fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -680,16 +922,56 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.74622,
-    33.9833,
-    -111.69033,
-    34.05706
+    -111.746217,
+    33.983224,
+    -111.690335,
+    34.057064
    ],
    "wikidata": "Q5906041",
    "charted": false,
    "area_km2": 9.662,
    "launches": [
     "ocotillo-boat-ramp-az"
+   ],
+   "water_id": "horseshoe-reservoir-az",
+   "gnis_id": "30197",
+   "geometry_hash": "0dc551cc5a6b32ad047943331a22f93b863f9c90842f5e037ce6133f2297ef2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "imperial-reservoir-az",
+   "name": "Imperial Reservoir",
+   "kind": "reservoir",
+   "state": "AZ",
+   "towns": [
+    "Yuma"
+   ],
+   "bbox": [
+    -114.490039,
+    32.88277,
+    -114.451322,
+    32.976156
+   ],
+   "wikidata": "Q6006835",
+   "charted": false,
+   "area_km2": 4.949,
+   "launches": [],
+   "water_id": "imperial-reservoir-az",
+   "gnis_id": "243787",
+   "geometry_hash": "64a3d5aa33aaa038118a390998b59d6277ceccd8f0331e92d63056df6c050d62",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hidden-shores-boat-ramp-az"
    ],
    "advisories": []
   },
@@ -702,10 +984,10 @@
     "Williams"
    ],
    "bbox": [
-    -112.16299,
-    35.28176,
-    -112.14542,
-    35.28813
+    -112.162985,
+    35.281759,
+    -112.145423,
+    35.288127
    ],
    "wikidata": "Q6347551",
    "charted": false,
@@ -713,6 +995,15 @@
    "launches": [
     "kaibab-lake-boat-launch-az"
    ],
+   "water_id": "kaibab-lake-az",
+   "gnis_id": "30700",
+   "geometry_hash": "322d1d066d87b84ef6104c12584c3aebf49729a4ced7ddeb86cdced927e0f5dd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -724,10 +1015,10 @@
     "Tucson"
    ],
    "bbox": [
-    -111.00961,
-    32.17921,
-    -111.0067,
-    32.18121
+    -111.009613,
+    32.179212,
+    -111.006701,
+    32.181212
    ],
    "wikidata": null,
    "charted": false,
@@ -735,6 +1026,15 @@
    "launches": [
     "kennedy-park-lake-boat-launch-az"
    ],
+   "water_id": "kennedy-park-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "cd84e8de0f55b1a0ce70c3b5830917e74f8bde44f19ff28a973e4d9bc2d0c1f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -744,10 +1044,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.31255,
-    34.89464,
-    -111.29715,
-    34.90046
+    -111.312547,
+    34.894645,
+    -111.297148,
+    34.900462
    ],
    "wikidata": "Q6414112",
    "charted": false,
@@ -755,6 +1055,15 @@
    "launches": [
     "kinnikinick-lake-boat-launch-az"
    ],
+   "water_id": "kinnikinick-lake-az",
+   "gnis_id": "30783",
+   "geometry_hash": "abdba7310f4c058e01438cc88ffcdd6d750e14b2c473640c81118a133951454e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -764,10 +1073,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.09478,
-    34.41803,
-    -111.0842,
-    34.43128
+    -111.094779,
+    34.418028,
+    -111.084199,
+    34.431279
    ],
    "wikidata": "Q6422972",
    "charted": false,
@@ -775,6 +1084,15 @@
    "launches": [
     "knoll-lake-boat-launch-az"
    ],
+   "water_id": "knoll-lake-az",
+   "gnis_id": "30804",
+   "geometry_hash": "497593c113f8859c2d5c468975e23c0093fe6a797347dfeb39f19cb385311044",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -787,10 +1105,10 @@
     "Parker Strip"
    ],
    "bbox": [
-    -114.40524,
-    34.28859,
-    -114.09693,
-    34.5324
+    -114.405243,
+    34.288589,
+    -114.096794,
+    34.532397
    ],
    "wikidata": "Q451522",
    "charted": false,
@@ -805,6 +1123,20 @@
     "windsor-pwc-boat-ramp-az",
     "windsor-south-boat-ramp-az"
    ],
+   "water_id": "lake-havasu-az",
+   "gnis_id": "243280",
+   "geometry_hash": "d60b16c2b3c84a84cd8c89c99f0ac2b483d0450b276de57323c240035dd39a8e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "havasu-rivieria-marina-az",
+    "havasu-springs-marina-boat-ramp-az",
+    "islander-resort-boat-ramp-az",
+    "lake-havasu-marina-boat-ramp-az"
+   ],
    "advisories": []
   },
   {
@@ -817,9 +1149,9 @@
     "Temple Bar"
    ],
    "bbox": [
-    -114.83948,
-    36.00097,
-    -114.09881,
+    -114.839482,
+    36.000973,
+    -114.098814,
     36.42515
    ],
    "wikidata": "Q654515",
@@ -830,6 +1162,15 @@
     "south-cove-boat-ramp-meadview-az",
     "temple-bar-marina-boat-ramp-az"
    ],
+   "water_id": "lake-mead-az",
+   "gnis_id": "7862",
+   "geometry_hash": "a16dd3be792bb13f949b027ddc9f367e481eda8ce01b1b087bf90abc840eae29",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -843,10 +1184,10 @@
     "Willow Beach"
    ],
    "bbox": [
-    -114.74455,
-    35.19572,
-    -114.56031,
-    36.01539
+    -114.744546,
+    35.195723,
+    -114.560313,
+    36.015387
    ],
    "wikidata": "Q1801012",
    "charted": false,
@@ -858,6 +1199,15 @@
     "willow-beach-boat-launch-az",
     "willow-beach-boat-ramp-az"
    ],
+   "water_id": "lake-mohave-az",
+   "gnis_id": null,
+   "geometry_hash": "34ea04acd875fb966e31a08df884bd3bed88f59b46b0b6c3199e4ae1d016c3f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -870,10 +1220,10 @@
     "Sun City West"
    ],
    "bbox": [
-    -112.32501,
+    -112.325046,
     33.84708,
-    -112.19556,
-    33.97442
+    -112.195565,
+    33.974419
    ],
    "wikidata": "Q46082605",
    "charted": false,
@@ -881,6 +1231,19 @@
    "launches": [
     "10-lane-boat-ramp-az",
     "castle-creek-4-lane-boat-ramp-az"
+   ],
+   "water_id": "lake-pleasant-az",
+   "gnis_id": "6845",
+   "geometry_hash": "c459c4b8b12f1a9f631d7c67c31378c2d1646b53e3dee37fce7a302567491072",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "north-boat-ramp-pleasant-harbor-marina-az",
+    "lake-pleasant-boat-launch-near-black-canyon-city-az",
+    "south-boat-ramp-scoprion-bay-marina-az"
    ],
    "advisories": [
     {
@@ -907,10 +1270,10 @@
     "Page"
    ],
    "bbox": [
-    -111.56748,
-    36.84441,
-    -110.28672,
-    37.90938
+    -111.567477,
+    36.844412,
+    -110.286717,
+    37.909378
    ],
    "wikidata": "Q667507",
    "charted": false,
@@ -920,6 +1283,15 @@
     "antelope-point-marina-boat-ramp-az",
     "wahweap-marina-boat-ramp-az"
    ],
+   "water_id": "lake-powell-az",
+   "gnis_id": "1431462",
+   "geometry_hash": "7bc558ae62cc34e98433044e27cb06f3baa354f1cf0945e9d9c9065aa3a61f5d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -931,10 +1303,10 @@
     "Tucson"
    ],
    "bbox": [
-    -110.81853,
-    32.1849,
-    -110.81533,
-    32.18758
+    -110.818526,
+    32.184724,
+    -110.815333,
+    32.187747
    ],
    "wikidata": null,
    "charted": false,
@@ -942,6 +1314,15 @@
    "launches": [
     "chuck-ford-boat-ramp-az"
    ],
+   "water_id": "lakeside-park-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "29b2d28215327649826793ace22c4810983ffba9955dc920a4dd0bb7abd0fd22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -951,10 +1332,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -109.50462,
-    33.93805,
-    -109.49822,
-    33.94387
+    -109.504623,
+    33.938046,
+    -109.498181,
+    33.943869
    ],
    "wikidata": null,
    "charted": false,
@@ -962,6 +1343,15 @@
    "launches": [
     "lee-valley-reservoir-boating-site-az"
    ],
+   "water_id": "lee-valley-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "6fec17e3dd195fa5ee2fc1bb8b75ff29d227671aa5a901c6440ff4943497f965",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -971,10 +1361,10 @@
    "state": "AZ",
    "towns": [],
    "bbox": [
-    -111.2221,
-    34.77644,
-    -111.19844,
-    34.79966
+    -111.222105,
+    34.776444,
+    -111.198437,
+    34.799659
    ],
    "wikidata": "Q1869365",
    "charted": false,
@@ -983,6 +1373,15 @@
     "long-lake-north-boat-ramp-az",
     "long-lake-south-boat-ramp-az"
    ],
+   "water_id": "long-lake-az",
+   "gnis_id": "31249",
+   "geometry_hash": "398de0c451505f0619f2b39587fb78ed7fe0aa52bbeed8b4747784b622fee29f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -994,10 +1393,10 @@
     "Flagstaff"
    ],
    "bbox": [
-    -111.58355,
-    35.09953,
-    -111.56046,
-    35.11249
+    -111.583554,
+    35.099533,
+    -111.560463,
+    35.112486
    ],
    "wikidata": null,
    "charted": false,
@@ -1005,6 +1404,15 @@
    "launches": [
     "lower-lake-mary-boat-launch-az"
    ],
+   "water_id": "lower-lake-mary-az",
+   "gnis_id": null,
+   "geometry_hash": "6ebb9c96161c7718ffc4ba60e01e6ca98d1cd84d429fe03920de9af6fccc4967",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1016,10 +1424,10 @@
     "Alpine"
    ],
    "bbox": [
-    -109.10327,
-    33.82769,
-    -109.07946,
-    33.83315
+    -109.103274,
+    33.827695,
+    -109.079465,
+    33.833148
    ],
    "wikidata": "Q6703541",
    "charted": false,
@@ -1028,6 +1436,15 @@
     "luna-lake-day-use-area-az",
     "luna-lake-marina-az"
    ],
+   "water_id": "luna-lake-az",
+   "gnis_id": "31403",
+   "geometry_hash": "3e867d1c1c95d21c606d6ca1b0edc463693c670b419bc0cf4f97871c4fe03d6b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1053,10 +1470,10 @@
     "Saint Johns"
    ],
    "bbox": [
-    -109.38514,
-    34.33349,
-    -109.34054,
-    34.37687
+    -109.385141,
+    34.333358,
+    -109.340543,
+    34.376875
    ],
    "wikidata": "Q1148694",
    "charted": false,
@@ -1064,6 +1481,15 @@
    "launches": [
     "lyman-lake-boat-launch-az"
    ],
+   "water_id": "lyman-lake-az",
+   "gnis_id": "7555",
+   "geometry_hash": "38f8458aec81a12bbbe4ab7814d277f222f7fdce1b43e1f20a5af0817ad72f15",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1089,10 +1515,10 @@
     "Prescott"
    ],
    "bbox": [
-    -112.38845,
-    34.51404,
-    -112.38218,
-    34.52241
+    -112.388452,
+    34.514036,
+    -112.382179,
+    34.522407
    ],
    "wikidata": "Q6709571",
    "charted": false,
@@ -1101,6 +1527,15 @@
     "lynx-lake-boat-launch-az",
     "lynx-lake-marina-store-az"
    ],
+   "water_id": "lynx-lake-az",
+   "gnis_id": "31414",
+   "geometry_hash": "cf91e4b7c00b6f765f8b04dc6cbe508a88a24aa8542a8f014674232e44faafaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1112,10 +1547,10 @@
     "Flagstaff"
    ],
    "bbox": [
-    -111.5386,
-    35.11393,
-    -111.53071,
-    35.12361
+    -111.538602,
+    35.113927,
+    -111.530619,
+    35.123606
    ],
    "wikidata": null,
    "charted": false,
@@ -1123,6 +1558,15 @@
    "launches": [
     "marshall-lake-boat-launch-az"
    ],
+   "water_id": "marshall-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "6170499e1276f0332af097268046dbf690305e2d1db3a3c23790f8c1c7dbf5d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1134,10 +1578,10 @@
     "Martinez Lake"
    ],
    "bbox": [
-    -114.49344,
-    32.97283,
-    -114.46036,
-    33.00257
+    -114.493441,
+    32.972829,
+    -114.460361,
+    33.002724
    ],
    "wikidata": "Q6777123",
    "charted": false,
@@ -1146,6 +1590,15 @@
     "martinez-lake-boat-ramp-az",
     "meers-point-boat-ramp-az"
    ],
+   "water_id": "martinez-lake-az",
+   "gnis_id": "7745",
+   "geometry_hash": "5e5fd2318c023f3ccec7da8ae34fa2fcf45b61ed6eac2b25fbf88a93a6208a6e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "usgs-nas-dreissenid-mussels",
@@ -1172,10 +1625,10 @@
     "Yuma"
    ],
    "bbox": [
-    -114.486,
-    32.81691,
+    -114.485996,
+    32.816909,
     -114.4468,
-    32.86686
+    32.866864
    ],
    "wikidata": null,
    "charted": false,
@@ -1184,6 +1637,15 @@
     "mittry-lake-main-boat-ramp-az",
     "mittry-lake-north-boat-ramp-az"
    ],
+   "water_id": "mittry-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "1ee5787907af0faebc8cde17e87f2a4e052034a4b5820fb299b7fa73ae64b293",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "usgs-nas-dreissenid-mussels",
@@ -1209,10 +1671,10 @@
     "Eagar"
    ],
    "bbox": [
-    -109.19483,
-    34.04528,
-    -109.18697,
-    34.06019
+    -109.194835,
+    34.045278,
+    -109.186967,
+    34.060189
    ],
    "wikidata": null,
    "charted": false,
@@ -1221,6 +1683,15 @@
     "nelson-reservoir-north-boat-ramp-az",
     "nelson-reservoir-south-boat-ramp-az"
    ],
+   "water_id": "nelson-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "df6000c6a9f72567e24973ab056c7209be79a24232e97b5ee3ec9e0e37f8e077",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1246,9 +1717,9 @@
     "Sierra Vista"
    ],
    "bbox": [
-    -110.45837,
-    31.42271,
-    -110.44712,
+    -110.458366,
+    31.422706,
+    -110.447119,
     31.43815
    ],
    "wikidata": "Q7138285",
@@ -1257,6 +1728,15 @@
    "launches": [
     "parker-lake-boating-site-az"
    ],
+   "water_id": "parker-canyon-lake-az",
+   "gnis_id": "41845",
+   "geometry_hash": "1d581cc203c74f8cea6a0ab518d8ce263ee0e6da6e0c05f6cbe3577f4ca73b06",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1269,9 +1749,9 @@
    ],
    "bbox": [
     -110.87007,
-    31.48872,
-    -110.84619,
-    31.50045
+    31.488723,
+    -110.846192,
+    31.500451
    ],
    "wikidata": "Q1538936",
    "charted": false,
@@ -1280,6 +1760,15 @@
     "patagonia-lake-marina-boat-ramp-az",
     "patagonia-lake-north-boat-ramp-az"
    ],
+   "water_id": "patagonia-lake-az",
+   "gnis_id": "36770",
+   "geometry_hash": "2d86beacdf4efddc2337bb8c663c651b3729823b01298a818669da4e0a580734",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1291,10 +1780,10 @@
     "Nogales"
    ],
    "bbox": [
-    -111.08942,
-    31.39908,
-    -111.08416,
-    31.40919
+    -111.089416,
+    31.399061,
+    -111.084156,
+    31.409189
    ],
    "wikidata": "Q7179682",
    "charted": false,
@@ -1302,6 +1791,15 @@
    "launches": [
     "pena-blanca-lake-boat-launch-az"
    ],
+   "water_id": "pena-blanca-lake-az",
+   "gnis_id": "36777",
+   "geometry_hash": "4e51d3cf2d138bbb345171e419befc38bf0be626a7d7d5a05e4b1dcc06d27dc4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1313,10 +1811,10 @@
     "Lake of the Woods"
    ],
    "bbox": [
-    -109.9895,
+    -109.989499,
     34.14301,
-    -109.9762,
-    34.15825
+    -109.976201,
+    34.158254
    ],
    "wikidata": null,
    "charted": false,
@@ -1324,6 +1822,15 @@
    "launches": [
     "rainbow-lake-boat-launch-az"
    ],
+   "water_id": "rainbow-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "858937bba279b2dabfe54c2198899b87fd80e3fa041fbbf002439f7d9414ac70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1335,8 +1842,8 @@
     "Buckshot"
    ],
    "bbox": [
-    -114.48622,
-    32.74098,
+    -114.486224,
+    32.740982,
     -114.48266,
     32.74383
    ],
@@ -1346,6 +1853,15 @@
    "launches": [
     "redondo-lake-boat-launch-az"
    ],
+   "water_id": "redondo-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "505867ffdd759c1f4708ffa7a3216902df4923c2919f999088546de805bcfced",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1357,10 +1873,10 @@
     "Pima"
    ],
    "bbox": [
-    -109.96572,
-    32.70621,
-    -109.96376,
-    32.70913
+    -109.965983,
+    32.706212,
+    -109.963758,
+    32.709131
    ],
    "wikidata": null,
    "charted": false,
@@ -1368,6 +1884,15 @@
    "launches": [
     "riggs-flat-boating-site-az"
    ],
+   "water_id": "riggs-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "4a5a829cd6d6aafaec9cf637ddf249fdb676c0d7fa622f3d14d4875747db0626",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1379,10 +1904,10 @@
     "Northwoods"
    ],
    "bbox": [
-    -109.44456,
-    34.02505,
-    -109.42926,
-    34.0379
+    -109.444556,
+    34.025049,
+    -109.429261,
+    34.037898
    ],
    "wikidata": null,
    "charted": false,
@@ -1390,6 +1915,15 @@
    "launches": [
     "river-reservoir-main-boating-site-az"
    ],
+   "water_id": "river-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "028b01a2fb7cd0db34fcc0d66eb78564b892b8613e8f18d04342c64b24401f11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1415,10 +1949,10 @@
     "Safford"
    ],
    "bbox": [
-    -109.70694,
-    32.75416,
-    -109.7005,
-    32.75703
+    -109.706936,
+    32.754158,
+    -109.700502,
+    32.757249
    ],
    "wikidata": null,
    "charted": false,
@@ -1426,6 +1960,15 @@
    "launches": [
     "roper-lake-boat-launch-az"
    ],
+   "water_id": "roper-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "1f860b4cc56e15ee7fb3bfa0763c74a52dfa2474c01488e01c03809c675cd3f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1437,10 +1980,10 @@
     "Fountain Hills"
    ],
    "bbox": [
-    -111.5395,
-    33.55332,
-    -111.44291,
-    33.58107
+    -111.539502,
+    33.553317,
+    -111.442905,
+    33.581067
    ],
    "wikidata": "Q2211948",
    "charted": false,
@@ -1448,6 +1991,17 @@
    "launches": [
     "saguaro-lake-east-boat-ramp-az",
     "saguaro-lake-west-boat-ramp-az"
+   ],
+   "water_id": "saguaro-lake-az",
+   "gnis_id": "33945",
+   "geometry_hash": "60ff719fd4146722cc2608cd51f1858720896466aa60c93f0b2ebb0dc2f594e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "saguaro-lake-marina-boat-ramp-az"
    ],
    "advisories": []
   },
@@ -1460,10 +2014,10 @@
     "Sahuarita"
    ],
    "bbox": [
-    -110.96817,
+    -110.968173,
     31.96941,
-    -110.96602,
-    31.97473
+    -110.966015,
+    31.974848
    ],
    "wikidata": "Q7351692",
    "charted": false,
@@ -1471,6 +2025,15 @@
    "launches": [
     "sahuarita-lake-boat-launch-az"
    ],
+   "water_id": "sahuarita-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "5af30140d09831308e6cddb25aa15d3a99fd3ede7219ff869c7b705c1029dda7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1483,10 +2046,10 @@
     "Rock House"
    ],
    "bbox": [
-    -112.30354,
-    33.37885,
-    -110.22582,
-    33.83835
+    -112.303544,
+    33.378854,
+    -110.225819,
+    33.838346
    ],
    "wikidata": "Q1341271",
    "charted": false,
@@ -1496,6 +2059,15 @@
     "phon-d-sutton-rap-az",
     "sr-288-bridge-rafting-take-out-az"
    ],
+   "water_id": "salt-river-az",
+   "gnis_id": "33995",
+   "geometry_hash": "e8249e440a2170564b3b76b4c943e9eb24d037f60c187e728b6f5db1881036e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1508,9 +2080,9 @@
    ],
    "bbox": [
     -109.96105,
-    34.17161,
-    -109.95648,
-    34.18069
+    34.171365,
+    -109.956479,
+    34.180689
    ],
    "wikidata": "Q7351559",
    "charted": false,
@@ -1518,6 +2090,15 @@
    "launches": [
     "scott-reservoir-boating-site-az"
    ],
+   "water_id": "scott-reservoir-az",
+   "gnis_id": "34163",
+   "geometry_hash": "71fc02c9824561a6a29503ad508fca4540e27258d4f4bc7491063aaef825a913",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1529,10 +2110,10 @@
     "Wagon Wheel"
    ],
    "bbox": [
-    -110.00621,
-    34.17731,
-    -109.99488,
-    34.1959
+    -110.006212,
+    34.177308,
+    -109.994885,
+    34.195902
    ],
    "wikidata": null,
    "charted": false,
@@ -1540,6 +2121,15 @@
    "launches": [
     "show-low-lake-boat-launch-az"
    ],
+   "water_id": "show-low-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "ce19e9e3af328ade8cd91236bc5a3bdf3b6ea9a4c45cc5cb6bba0813bd2e08cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1565,10 +2155,10 @@
     "Tucson"
    ],
    "bbox": [
-    -111.03405,
-    32.28219,
-    -111.03086,
-    32.28626
+    -111.034125,
+    32.282192,
+    -111.030739,
+    32.286361
    ],
    "wikidata": "Q7351694",
    "charted": false,
@@ -1577,6 +2167,15 @@
     "silverbell-lake-slipway-az",
     "silverbell-lake-slipway-south-az"
    ],
+   "water_id": "silverbell-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "c2a6a10fe7cae7db018f99cd1f9f0b6900be78e48449177c15d555c7ad848c1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1588,10 +2187,10 @@
     "Tempe"
    ],
    "bbox": [
-    -111.94951,
-    33.43016,
+    -111.949506,
+    33.430161,
     -111.91024,
-    33.43671
+    33.436712
    ],
    "wikidata": "Q2402621",
    "charted": false,
@@ -1599,6 +2198,15 @@
    "launches": [
     "tempe-town-lake-boat-launch-near-tempe-az"
    ],
+   "water_id": "tempe-town-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "d7f1310936e5f6753b1f73ff971c797eac6f67bdb4a00dbc799cd2f41a4ef620",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1612,10 +2220,10 @@
     "Roosevelt Estates"
    ],
    "bbox": [
-    -111.25391,
-    33.63594,
-    -110.96408,
-    33.76962
+    -111.253907,
+    33.635944,
+    -110.964077,
+    33.769622
    ],
    "wikidata": "Q1426999",
    "charted": false,
@@ -1630,6 +2238,17 @@
     "windy-hill-boat-ramp-bobcat-az",
     "windy-hill-boat-ramp-coyote-az",
     "windy-hill-boat-ramp-ringtail-az"
+   ],
+   "water_id": "theodore-roosevelt-lake-az",
+   "gnis_id": "42942",
+   "geometry_hash": "e608722c6ca984068bd16cf92ff512ab0cd502b203c41e49d4d0b742fb919ac9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "theodore-roosevelt-lake-boat-launch-az"
    ],
    "advisories": []
   },
@@ -1648,6 +2267,15 @@
    "launches": [
     "catfish-paradise-boat-ramp-az"
    ],
+   "water_id": "topock-bay-az",
+   "gnis_id": "12627",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1659,10 +2287,10 @@
     "Northwoods"
    ],
    "bbox": [
-    -109.44498,
-    34.02851,
-    -109.44094,
-    34.03425
+    -109.445103,
+    34.028513,
+    -109.440943,
+    34.034252
    ],
    "wikidata": null,
    "charted": false,
@@ -1670,6 +2298,15 @@
    "launches": [
     "tunnel-reservoir-boating-site-az"
    ],
+   "water_id": "tunnel-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "0af26753c28a4221c4e780682bb8e8b81474a0b03e6eb63a229ed81bbfb76d9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1695,10 +2332,10 @@
     "Prescott"
    ],
    "bbox": [
-    -112.45123,
-    34.49546,
-    -112.44662,
-    34.4999
+    -112.451232,
+    34.495461,
+    -112.446419,
+    34.499903
    ],
    "wikidata": null,
    "charted": false,
@@ -1706,6 +2343,15 @@
    "launches": [
     "goldwater-lake-az"
    ],
+   "water_id": "upper-goldwater-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "3b7eb2861baab8d68b3c018550f6e0bfe7053127d8c485c71ed808a9d1430a0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1717,10 +2363,10 @@
     "Flagstaff"
    ],
    "bbox": [
-    -111.53575,
-    35.04225,
-    -111.4574,
-    35.0809
+    -111.535749,
+    35.042167,
+    -111.457337,
+    35.080929
    ],
    "wikidata": "Q1250186",
    "charted": false,
@@ -1730,6 +2376,15 @@
     "upper-lake-mary-boat-ramp-1-az",
     "upper-lake-mary-boat-ramp-2-az"
    ],
+   "water_id": "upper-lake-mary-az",
+   "gnis_id": "35692",
+   "geometry_hash": "c8ec27395b5e0148015a66dc5cd63b523431b4838d73332a3161c024d2f8e5fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1743,10 +2398,10 @@
     "Rio Verde"
    ],
    "bbox": [
-    -112.46055,
-    33.54723,
-    -111.60469,
-    34.91723
+    -112.460552,
+    33.547233,
+    -111.604422,
+    34.917229
    ],
    "wikidata": "Q4107580",
    "charted": false,
@@ -1756,6 +2411,15 @@
     "verde-river-boat-launch-near-rio-verde-az",
     "verde-river-boat-launch-near-cottonwood-az"
    ],
+   "water_id": "verde-river-az",
+   "gnis_id": "35768",
+   "geometry_hash": "3d6b2f0a59be66d5d54e27396702101bce19cfe0a87a2b80e20bb796ed38b471",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1767,10 +2431,10 @@
     "Prescott"
    ],
    "bbox": [
-    -112.42559,
-    34.58203,
-    -112.41006,
-    34.59587
+    -112.425588,
+    34.582031,
+    -112.410058,
+    34.595874
    ],
    "wikidata": "Q7348497",
    "charted": false,
@@ -1779,6 +2443,15 @@
     "hillsdale-boat-ramp-az",
     "watson-lake-main-boat-ramp-az"
    ],
+   "water_id": "watson-lake-az",
+   "gnis_id": "35924",
+   "geometry_hash": "3c8d532b9c1c321cb85ba68fed27cdde08be43922fe178f07ff6f5b27f75a3b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1790,10 +2463,10 @@
     "Williams"
    ],
    "bbox": [
-    -112.01947,
-    35.11361,
-    -112.00838,
-    35.11968
+    -112.019467,
+    35.113613,
+    -112.008382,
+    35.119677
    ],
    "wikidata": "Q7351645",
    "charted": false,
@@ -1801,6 +2474,15 @@
    "launches": [
     "white-horse-lake-boat-launch-az"
    ],
+   "water_id": "white-horse-lake-az",
+   "gnis_id": "36077",
+   "geometry_hash": "41ae4eb95513a6eb45243210ae523b11047f9b25c996a194eb098d882194fa9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1812,9 +2494,9 @@
     "Prescott"
    ],
    "bbox": [
-    -112.44942,
-    34.5981,
-    -112.42992,
+    -112.449419,
+    34.598097,
+    -112.429921,
     34.61123
    ],
    "wikidata": null,
@@ -1823,6 +2505,15 @@
    "launches": [
     "willow-lake-boat-launch-az"
    ],
+   "water_id": "willow-lake-az",
+   "gnis_id": null,
+   "geometry_hash": "3d9c130a306f0fd820607994ad599b44f90221c3f0c535633ec6a0010c52ba9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1834,10 +2525,10 @@
     "Ponderosa Spring Subdivision"
    ],
    "bbox": [
-    -110.87936,
+    -110.879359,
     34.30115,
-    -110.86183,
-    34.31718
+    -110.861834,
+    34.317182
    ],
    "wikidata": "Q2581736",
    "charted": false,
@@ -1845,6 +2536,15 @@
    "launches": [
     "willow-springs-fishing-and-boating-site-az"
    ],
+   "water_id": "willow-springs-lake-az",
+   "gnis_id": "38184",
+   "geometry_hash": "b756d3b6f4decd290df3379d84136e6e8ca625e2d02b67f11dc6914641e89ff8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1856,10 +2556,10 @@
     "Pinetop-Lakeside"
    ],
    "bbox": [
-    -109.95388,
-    34.12446,
-    -109.94939,
-    34.1277
+    -109.953881,
+    34.124457,
+    -109.949391,
+    34.127699
    ],
    "wikidata": null,
    "charted": false,
@@ -1867,6 +2567,15 @@
    "launches": [
     "woodland-lake-park-boating-site-az"
    ],
+   "water_id": "woodland-reservoir-az",
+   "gnis_id": null,
+   "geometry_hash": "0e2fd4853dbef39a8e8702f2c710b4400548916a060649653f2a01e24a2486d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1878,10 +2587,10 @@
     "Sleepy Hollow"
    ],
    "bbox": [
-    -110.95971,
-    34.33296,
-    -110.93612,
-    34.34234
+    -110.959714,
+    34.332956,
+    -110.936121,
+    34.342342
    ],
    "wikidata": "Q7351190",
    "charted": false,
@@ -1889,6 +2598,15 @@
    "launches": [
     "woods-canyon-lake-area-az"
    ],
+   "water_id": "woods-canyon-lake-az",
+   "gnis_id": "36382",
+   "geometry_hash": "94c2b8ecc88f4ef38f711923e4b6a84d9548f5e6b0402e33cb65846810e3d49d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]

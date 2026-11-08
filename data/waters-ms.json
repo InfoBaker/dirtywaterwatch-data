@@ -1,7 +1,7 @@
 {
  "state": "MS",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 190,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 207,
  "waters": [
   {
    "slug": "aberdeen-lake-ms",
@@ -21,6 +21,17 @@
     "blue-bluff-campground-ms",
     "blue-bluff-ramp-ms"
    ],
+   "water_id": "aberdeen-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "aberdeen-marina-ms"
+   ],
    "advisories": []
   },
   {
@@ -32,10 +43,10 @@
     "Columbus"
    ],
    "bbox": [
-    -88.31074,
-    33.2106,
-    -88.26518,
-    33.27849
+    -88.310737,
+    33.210602,
+    -88.265176,
+    33.278492
    ],
    "wikidata": "Q4726213",
    "charted": true,
@@ -43,6 +54,15 @@
    "launches": [
     "pratt-s-camp-ms"
    ],
+   "water_id": "aliceville-lake-al",
+   "gnis_id": "135661",
+   "geometry_hash": "39e91b939761741c2b0d78f5e146979fcd98949e2c811eac207e6cc7f43ccd91",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -60,6 +80,15 @@
    "launches": [
     "luxapalila-cr-water-park-ms"
    ],
+   "water_id": "aliceville-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -71,9 +100,9 @@
     "Quitman"
    ],
    "bbox": [
-    -88.72544,
-    32.02367,
-    -88.69957,
+    -88.725441,
+    32.023597,
+    -88.699428,
     32.05504
    ],
    "wikidata": null,
@@ -82,6 +111,15 @@
    "launches": [
     "archusa-creek-water-park-ms"
    ],
+   "water_id": "archusa-creek-water-park-ms",
+   "gnis_id": null,
+   "geometry_hash": "4d6798490bfd417436fff2b0a3d479fa611265fded25fb602ba9a7b1752d2c3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -96,10 +134,10 @@
     "Pleasant Hill"
    ],
    "bbox": [
-    -90.13189,
-    34.69536,
-    -90.00585,
-    34.81717
+    -90.131887,
+    34.695358,
+    -90.005847,
+    34.817175
    ],
    "wikidata": "Q4791648",
    "charted": false,
@@ -113,6 +151,15 @@
     "mud-hole-boat-ramp-ms",
     "pleasant-hill-ms"
    ],
+   "water_id": "arkabutla-lake-ms",
+   "gnis_id": "690215",
+   "geometry_hash": "420bcccaf07e78a59d4b920bff14791bc13995b1a531092f194aa169368fc273",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -124,10 +171,10 @@
     "Toomsuba"
    ],
    "bbox": [
-    -88.52793,
-    32.42052,
-    -88.51429,
-    32.43065
+    -88.527928,
+    32.420517,
+    -88.514291,
+    32.430652
    ],
    "wikidata": null,
    "charted": false,
@@ -135,6 +182,15 @@
    "launches": [
     "lake-tom-bailey-ms"
    ],
+   "water_id": "bailey-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "b5107413e4095b47089d9f379990733cc57bb6c42ccb69ab2e900573e1564e52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -146,10 +202,10 @@
     "Conerly"
    ],
    "bbox": [
-    -90.37278,
-    31.17286,
-    -90.27782,
-    31.20819
+    -90.372781,
+    31.172858,
+    -90.277823,
+    31.208185
    ],
    "wikidata": null,
    "charted": false,
@@ -157,6 +213,15 @@
    "launches": [
     "hwy-98-bridge-ms"
    ],
+   "water_id": "bars-branch-ms",
+   "gnis_id": null,
+   "geometry_hash": "720226c1cbd8775eac411d57aae3eccb423e8c54e59dfe461533069d79ebebea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -165,13 +230,14 @@
    "kind": "bay",
    "state": "MS",
    "towns": [
-    "Bay Saint Louis"
+    "Bay Saint Louis",
+    "Diamondhead"
    ],
    "bbox": [
-    -89.37861,
-    30.30522,
-    -89.22903,
-    30.37699
+    -89.378614,
+    30.305222,
+    -89.229025,
+    30.376985
    ],
    "wikidata": "Q4874232",
    "charted": true,
@@ -179,6 +245,17 @@
    "launches": [
     "cedar-point-boat-launch-ms",
     "cedar-point-ramp-ms"
+   ],
+   "water_id": "bay-of-saint-louis-ms",
+   "gnis_id": "691608",
+   "geometry_hash": "26df19731fe238b25528fc9d7a47c3d48ecdc3726aaad59bad1b78731447858d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "diamondhead-marina-ms"
    ],
    "advisories": []
   },
@@ -194,10 +271,10 @@
     "Tishomingo"
    ],
    "bbox": [
-    -88.35284,
-    34.52263,
-    -88.2635,
-    34.64067
+    -88.352845,
+    34.522627,
+    -88.263495,
+    34.640667
    ],
    "wikidata": "Q4874102",
    "charted": true,
@@ -213,6 +290,15 @@
     "sander-s-landing-ms",
     "west-damsite-marina-ms"
    ],
+   "water_id": "bay-springs-lake-ms",
+   "gnis_id": "689863",
+   "geometry_hash": "280649c3d2b83e856786b1d5996448c9a3cf5984829db46f9d337f5997027977",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -224,10 +310,10 @@
     "Lakeshore"
    ],
    "bbox": [
-    -89.47911,
-    30.23527,
-    -89.44346,
-    30.24462
+    -89.479107,
+    30.235271,
+    -89.443461,
+    30.244621
    ],
    "wikidata": null,
    "charted": false,
@@ -235,6 +321,79 @@
    "launches": [
     "bayou-caddy-ramp-ms"
    ],
+   "water_id": "bayou-caddy-ms",
+   "gnis_id": null,
+   "geometry_hash": "8151ded74be61b6a2bc5f58fa8e3b400d288e77227a42c69f0bed16c80e7bd3e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bordages-marina-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bayou-la-croix-ms",
+   "name": "Bayou la Croix",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Waveland"
+   ],
+   "bbox": [
+    -89.476317,
+    30.3181,
+    -89.402179,
+    30.344213
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "bayou-la-croix-ms",
+   "gnis_id": null,
+   "geometry_hash": "6a22ed8b940e1a0adb177205d3e8f9b09d2b8bd3cb1d68f8ee76deb858ccecd6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bayou-lacroix-marina-ms"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-lake-mantachie-ms",
+   "name": "Beaver Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Mantachie"
+   ],
+   "bbox": [
+    -88.395992,
+    34.388117,
+    -88.394142,
+    34.399996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-beaver-lake-ramp-ms"
+   ],
+   "water_id": "beaver-lake-mantachie-ms",
+   "gnis_id": "666714",
+   "geometry_hash": "8ba9144a33e2c5165007f78ec3bb29aa6e6999deb51a51f007c8c4ee4f11a20a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -243,16 +402,59 @@
    "kind": "lake",
    "state": "MS",
    "towns": [
-    "Mantachie",
     "Polkville"
    ],
-   "bbox": null,
+   "bbox": [
+    -89.646836,
+    32.18379,
+    -89.640802,
+    32.188949
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
-    "beaver-lake-landing-ms",
-    "old-beaver-lake-ramp-ms"
+    "beaver-lake-landing-ms"
+   ],
+   "water_id": "beaver-lake-ms",
+   "gnis_id": "692512",
+   "geometry_hash": "d20db5dfe386f3984d3c462c509b74db8a289a7b03c909162ab0d151cd8b3068",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bee-lake-ms",
+   "name": "Bee Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Thornton"
+   ],
+   "bbox": [
+    -90.412447,
+    33.037314,
+    -90.32386,
+    33.088626
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "bee-lake-ms",
+   "gnis_id": "666748",
+   "geometry_hash": "5facdd10dbcee705617a1dd32e78af5f4f9c6aadc1ea718388be46ce548c3a85",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "bells-landing-ms"
    ],
    "advisories": []
   },
@@ -271,6 +473,15 @@
    "launches": [
     "belzoni-old-river-cutoff-boat-launch-ms"
    ],
+   "water_id": "belzoni-old-river-cutoff-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -283,10 +494,10 @@
     "D'Iberville"
    ],
    "bbox": [
-    -89.04331,
-    30.39016,
+    -89.043314,
+    30.390165,
     -88.83537,
-    30.43428
+    30.434283
    ],
    "wikidata": null,
    "charted": true,
@@ -298,6 +509,15 @@
     "bernard-bayou-industrial-seaway-boat-launch-near-biloxi-ms",
     "lee-street-boat-launch-ms"
    ],
+   "water_id": "bernard-bayou-industrial-seaway-ms",
+   "gnis_id": null,
+   "geometry_hash": "cf50770a3303439cff22db29879721df611f84c10d469185f5b4263d98a4be0c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -310,10 +530,10 @@
     "Handsboro"
    ],
    "bbox": [
-    -89.10994,
-    30.40445,
-    -89.0022,
-    30.44766
+    -89.109942,
+    30.404454,
+    -89.002196,
+    30.447664
    ],
    "wikidata": null,
    "charted": true,
@@ -321,6 +541,17 @@
    "launches": [
     "gulfport-lake-ms",
     "handsboro-boat-launch-ms"
+   ],
+   "water_id": "bernard-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "8ef5db2ec38bd226f25c6b58601cd4ff9b8e55e63ef94f0035e564d354196d91",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kremers-landing-ms"
    ],
    "advisories": []
   },
@@ -333,7 +564,12 @@
     "Bentonia",
     "Canton"
    ],
-   "bbox": null,
+   "bbox": [
+    -91.061095,
+    32.050881,
+    -89.120295,
+    33.694817
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
@@ -341,6 +577,15 @@
     "big-black-hwy-16-ms",
     "big-black-river-hwy-49-ms"
    ],
+   "water_id": "big-black-river-bentonia-ms",
+   "gnis_id": "690954",
+   "geometry_hash": "e3833968c9e2050b8b45cf1c18c9d966095a3365bd121ec99685c2ebebfe05fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -356,10 +601,10 @@
     "Winona"
    ],
    "bbox": [
-    -91.05452,
-    32.05121,
-    -89.12044,
-    33.66069
+    -91.054516,
+    32.050989,
+    -89.120439,
+    33.660686
    ],
    "wikidata": "Q1042217",
    "charted": true,
@@ -371,6 +616,41 @@
     "hwy-14-big-black-ms",
     "hwy-407-ramp-ms"
    ],
+   "water_id": "big-black-river-ms",
+   "gnis_id": "690954",
+   "geometry_hash": "a9e86ab0f1c4e212f0ad7f528554b37d22b03fdad433fd193956251b65fb1afe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-lake-lucedale-ms",
+   "name": "Big Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Lucedale"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pascagoula-wma-lucedale-ms"
+   ],
+   "water_id": "big-lake-lucedale-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -379,17 +659,29 @@
    "kind": "lake",
    "state": "MS",
    "towns": [
-    "Lucedale",
     "Moss Point"
    ],
-   "bbox": null,
+   "bbox": [
+    -88.629103,
+    30.597164,
+    -88.622338,
+    30.603654
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
-    "big-lake-ramp-ms",
-    "pascagoula-wma-lucedale-ms"
+    "big-lake-ramp-ms"
    ],
+   "water_id": "big-lake-ms",
+   "gnis_id": "667127",
+   "geometry_hash": "0f81a455925199baccc083d9c68c58a962a308bf23dd891fb3f8505d9c0bf858",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -401,10 +693,10 @@
     "Wade"
    ],
    "bbox": [
-    -88.62018,
-    30.63481,
+    -88.620182,
+    30.634808,
     -88.59943,
-    30.6531
+    30.653132
    ],
    "wikidata": null,
    "charted": false,
@@ -412,6 +704,15 @@
    "launches": [
     "parkers-lake-ramp-ms"
    ],
+   "water_id": "big-slough-ms",
+   "gnis_id": null,
+   "geometry_hash": "5c0784e7f7bbd0f09362c0d3344897694b5871682e0b8353a5aec415f0eb81ff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -425,10 +726,10 @@
     "Rolling Fork"
    ],
    "bbox": [
-    -90.81261,
-    32.66987,
+    -90.812613,
+    32.669872,
     -90.52159,
-    34.24852
+    34.248517
    ],
    "wikidata": null,
    "charted": false,
@@ -437,6 +738,15 @@
     "big-sunflower-river-boat-launch-ms",
     "jordan-landing-ms"
    ],
+   "water_id": "big-sunflower-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "f2a6b06605fb8aca6ea95e9b85360782eced005863ccff5b9da019085b70b754",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -452,17 +762,17 @@
     "Wiggins"
    ],
    "bbox": [
-    -89.42108,
-    30.69583,
-    -88.66644,
-    31.21495
+    -89.421077,
+    30.695421,
+    -88.666444,
+    31.214951
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
-    "big-creek-landing-ms",
     "big-creek-landing-brooklyn-ms",
+    "big-creek-landing-ms",
     "cypress-creek-landing-ms",
     "fairley-bridge-landing-ms",
     "flurry-landing-ramp-ms",
@@ -471,6 +781,15 @@
     "janice-landing-ms",
     "moody-landing-ms"
    ],
+   "water_id": "black-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "2e3da881114654eddfb7e8a18eceb1153a49ae489d53df409b30b1808ccd5197",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -482,10 +801,10 @@
     "Starkville"
    ],
    "bbox": [
-    -88.8039,
-    33.27031,
-    -88.77667,
-    33.29691
+    -88.803903,
+    33.270307,
+    -88.776666,
+    33.296914
    ],
    "wikidata": null,
    "charted": false,
@@ -493,6 +812,17 @@
    "launches": [
     "bluff-lake-ramp-ms",
     "cypress-cove-primitive-boat-ramp-ms"
+   ],
+   "water_id": "bluff-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "a5da52580ea7df7cb4917a9c11cf0a98624bfaab889e2d5b3e176f3a4185899a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bluff-lake-boat-launch-ms"
    ],
    "advisories": []
   },
@@ -516,6 +846,15 @@
     "stallings-bridge-landing-ms",
     "walker-s-bridge-water-park-ms"
    ],
+   "water_id": "bogue-chitto-river-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -527,10 +866,10 @@
     "Richton"
    ],
    "bbox": [
-    -89.02909,
-    31.34434,
-    -89.02165,
-    31.36998
+    -89.029095,
+    31.344338,
+    -89.021649,
+    31.369984
    ],
    "wikidata": null,
    "charted": false,
@@ -538,6 +877,15 @@
    "launches": [
     "hwy-42-landing-ms"
    ],
+   "water_id": "bogue-homa-ms",
+   "gnis_id": null,
+   "geometry_hash": "54ae1270f143a2e3a508bad743bb169f5e39709f6fe0ee16104fb9f199aee332",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -549,10 +897,10 @@
     "Leland"
    ],
    "bbox": [
-    -90.9192,
-    33.22516,
-    -90.72967,
-    33.887
+    -90.919204,
+    33.225156,
+    -90.729671,
+    33.887003
    ],
    "wikidata": null,
    "charted": false,
@@ -560,6 +908,15 @@
    "launches": [
     "fratesis-landing-ms"
    ],
+   "water_id": "bogue-phalia-ms",
+   "gnis_id": null,
+   "geometry_hash": "793972673bc4dbd95643ec77c5f998c858e44c02ee099a9197026644e194b9d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -571,10 +928,10 @@
     "Meridian"
    ],
    "bbox": [
-    -88.66666,
-    32.35876,
-    -88.66054,
-    32.36313
+    -88.666765,
+    32.358762,
+    -88.660536,
+    32.363133
    ],
    "wikidata": null,
    "charted": false,
@@ -582,6 +939,15 @@
    "launches": [
     "bonita-reservoir-boat-launch-ms"
    ],
+   "water_id": "bonita-reservoir-ms",
+   "gnis_id": null,
+   "geometry_hash": "dd1ff07f77751074353a0b5a64e85acff641716c801a089dfa4931809167b762",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -595,10 +961,10 @@
     "Sumrall"
    ],
    "bbox": [
-    -89.63396,
+    -89.633956,
     31.3466,
-    -89.28539,
-    31.55712
+    -89.285386,
+    31.557285
    ],
    "wikidata": "Q4949464",
    "charted": false,
@@ -606,6 +972,17 @@
    "launches": [
     "hwy-49-landing-ms",
     "pepps-point-ms"
+   ],
+   "water_id": "bouie-river-ms",
+   "gnis_id": "690980",
+   "geometry_hash": "acad80ba505ce022f6ba10a9832a6eb53d154ab540331e7532dbd4e5b0d0afe7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "glendale-ms"
    ],
    "advisories": []
   },
@@ -617,13 +994,27 @@
    "towns": [
     "Hollandale"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.938755,
+    33.165177,
+    -90.937552,
+    33.172091
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "leroy-percy-state-park-boat-ramp-ms"
    ],
+   "water_id": "brushy-lake-ms",
+   "gnis_id": "667702",
+   "geometry_hash": "fc19d1384af48efcbfb5c56ae2d47793ee0aafae73a0182786dd73b6aefe3de7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -635,9 +1026,9 @@
     "Denham"
    ],
    "bbox": [
-    -88.53764,
-    31.50647,
-    -88.5019,
+    -88.537641,
+    31.506348,
+    -88.501903,
     31.65632
    ],
    "wikidata": null,
@@ -646,6 +1037,15 @@
    "launches": [
     "dehamn-landing-ms"
    ],
+   "water_id": "buckatunna-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "a675595858244d18189e2ae061610ffbc840e9f41444cfbc4bafd483f0426002",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -658,10 +1058,10 @@
     "Philadelphia"
    ],
    "bbox": [
-    -89.10738,
-    32.84258,
-    -89.09783,
-    32.84423
+    -89.107385,
+    32.842576,
+    -89.097826,
+    32.844229
    ],
    "wikidata": null,
    "charted": false,
@@ -670,6 +1070,15 @@
     "burnside-lake-boat-launch-ms",
     "hwy-15-landing-ms"
    ],
+   "water_id": "burnside-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "4318efaa7b41b9f5dfffa46aa1528fef2d967f170704962c362a1deeb63ac0d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -680,13 +1089,27 @@
    "towns": [
     "Ellis Cliffs"
    ],
-   "bbox": null,
+   "bbox": [
+    -91.467752,
+    31.415741,
+    -91.440952,
+    31.434221
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "st-catherine-creek-nwr-ms"
    ],
+   "water_id": "butler-lake-ms",
+   "gnis_id": "667863",
+   "geometry_hash": "949048b919f0ae0bccb18205dbbbe1f95ef1a36cfd0e6d7de449cfe360e2f1f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -698,16 +1121,56 @@
     "Caledonia"
    ],
    "bbox": [
-    -88.50068,
-    33.65657,
-    -88.11617,
-    33.93682
+    -88.500684,
+    33.656574,
+    -88.116169,
+    33.936822
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": null,
    "launches": [
     "cockerham-bridge-ms"
+   ],
+   "water_id": "buttahatchee-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "f76889f334cab88f245de4717edcc041e6a93c418491041c5d407d618c7f4090",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "campbell-inside-bayou-ms",
+   "name": "Campbell Inside Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ansley"
+   ],
+   "bbox": [
+    -89.532199,
+    30.195081,
+    -89.46599,
+    30.221249
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.336,
+   "launches": [],
+   "water_id": "campbell-inside-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "fc3c7def6b0cec14322900fca4355c6041e14af5dc9cbbbfe19e60c7192f34e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lafrance-fish-camp-marina-ms"
    ],
    "advisories": []
   },
@@ -720,10 +1183,10 @@
     "Canton"
    ],
    "bbox": [
-    -89.91717,
-    32.5016,
-    -89.91615,
-    32.51241
+    -89.917167,
+    32.501603,
+    -89.916149,
+    32.512408
    ],
    "wikidata": null,
    "charted": false,
@@ -731,6 +1194,15 @@
    "launches": [
     "cane-creek-landing-ms"
    ],
+   "water_id": "cane-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "dd6eb9f3ec670bfd9bed52c4520ee676c14209d20c0b1a7301c77432342d3a22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -742,10 +1214,10 @@
     "Jackson County"
    ],
    "bbox": [
-    -88.63371,
-    30.64692,
-    -88.63017,
-    30.64918
+    -88.633911,
+    30.646745,
+    -88.630171,
+    30.649178
    ],
    "wikidata": null,
    "charted": false,
@@ -753,6 +1225,15 @@
    "launches": [
     "cane-lake-ramp-ms"
    ],
+   "water_id": "cane-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "31ac5319e47605a2e2758f1989da1a14ec3b12c7f40195c6f6d9ff2c07e8a6dd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -770,6 +1251,15 @@
    "launches": [
     "sumner-landing-ms"
    ],
+   "water_id": "cassidy-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -781,10 +1271,10 @@
     "Crystal Springs"
    ],
    "bbox": [
-    -90.36799,
+    -90.367986,
     31.99599,
-    -90.36282,
-    32.00023
+    -90.362817,
+    32.000234
    ],
    "wikidata": "Q34767388",
    "charted": false,
@@ -792,6 +1282,15 @@
    "launches": [
     "crystal-springs-lake-ms"
    ],
+   "water_id": "chautauqua-lake-ms",
+   "gnis_id": "668361",
+   "geometry_hash": "a420f997c6baffb9b21caa3872b664b6ef476ae4bab1cfc7cefe778e6e8035ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -802,13 +1301,27 @@
    "towns": [
     "Holly Springs"
    ],
-   "bbox": null,
+   "bbox": [
+    -89.344641,
+    34.723778,
+    -89.332576,
+    34.7437
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "chewalla-lake-boat-launch-ms"
    ],
+   "water_id": "chewalla-lake-ms",
+   "gnis_id": "704727",
+   "geometry_hash": "05bc3b67b1ff0d1a841fcb999aa7410b9abc252321ceb624c8e7284da49bd4ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -827,10 +1340,10 @@
     "Waynesboro"
    ],
    "bbox": [
-    -88.82058,
-    30.98136,
-    -88.53115,
-    32.18244
+    -88.820579,
+    30.981355,
+    -88.531149,
+    32.182444
    ],
    "wikidata": "Q1072169",
    "charted": false,
@@ -846,6 +1359,15 @@
     "shubuta-boat-ramp-ms",
     "stonewall-ms"
    ],
+   "water_id": "chickasawhay-river-ms",
+   "gnis_id": "692890",
+   "geometry_hash": "db13e267b52abe78a52517bcd40c90ad5f91613b7bbe7b0823a16017bae9242c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -857,10 +1379,10 @@
     "Ackerman"
    ],
    "bbox": [
-    -89.14691,
-    33.27106,
-    -89.13805,
-    33.28074
+    -89.146906,
+    33.271065,
+    -89.138051,
+    33.280745
    ],
    "wikidata": null,
    "charted": false,
@@ -868,6 +1390,15 @@
    "launches": [
     "choctaw-lake-boat-launch-ms"
    ],
+   "water_id": "choctaw-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "c8c23ca67d54cc5b40b3a8380c2b3bc28fa0994604f4a7cf53861d0845f4f855",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -886,6 +1417,17 @@
    "launches": [
     "laney-s-camp-ms"
    ],
+   "water_id": "chotard-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "chotard-landing-ms"
+   ],
    "advisories": []
   },
   {
@@ -897,10 +1439,10 @@
     "Chunky"
    ],
    "bbox": [
-    -88.98802,
-    32.18244,
-    -88.8203,
-    32.36292
+    -88.988016,
+    32.182444,
+    -88.820301,
+    32.362922
    ],
    "wikidata": null,
    "charted": false,
@@ -908,6 +1450,15 @@
    "launches": [
     "chunky-river-hwy-80-ms"
    ],
+   "water_id": "chunky-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "ae918e5b575b2218b2b41c7bc3460d3faff04c45bd10fbfbf42ac3e6745c5676",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -918,13 +1469,27 @@
    "towns": [
     "Lucedale"
    ],
-   "bbox": null,
+   "bbox": [
+    -88.726948,
+    30.913676,
+    -88.722014,
+    30.918572
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "pascagoual-wma-ms"
    ],
+   "water_id": "cochran-dead-river-ms",
+   "gnis_id": "690708",
+   "geometry_hash": "03d99337582342b0565ad90ada0d1844c2c252d49b219039cb5787b1051f38aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -941,10 +1506,10 @@
     "Savage"
    ],
    "bbox": [
-    -90.40287,
-    34.18352,
-    -89.32842,
-    34.94425
+    -90.402873,
+    34.183521,
+    -89.328418,
+    34.944255
    ],
    "wikidata": "Q5142591",
    "charted": false,
@@ -956,6 +1521,17 @@
     "marks-boat-ramp-ms",
     "savage-ramp-ms",
     "snow-s-landing-ms"
+   ],
+   "water_id": "coldwater-river-ms",
+   "gnis_id": "692942",
+   "geometry_hash": "a4963955da63c636cfc3b2d7e15e6de73a69ce37ea04f74733a334fbbe7db1bd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "outlet-channel-boat-ramp-ms"
    ],
    "advisories": []
   },
@@ -969,10 +1545,10 @@
     "Waverly"
    ],
    "bbox": [
-    -88.52522,
-    33.51807,
-    -88.45631,
-    33.55844
+    -88.525218,
+    33.518075,
+    -88.456312,
+    33.558441
    ],
    "wikidata": "Q5150069",
    "charted": true,
@@ -983,6 +1559,15 @@
     "eastbank-ramp-ms",
     "waverly-landing-ms"
    ],
+   "water_id": "columbus-lake-ms",
+   "gnis_id": "690831",
+   "geometry_hash": "db795e6933ee20a0516c2bc9b544407bf6e3d60413e1614c9028c58e9b5a4f82",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1000,6 +1585,15 @@
    "launches": [
     "crystal-lake-boat-launch-ms"
    ],
+   "water_id": "crystal-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1011,10 +1605,10 @@
     "Pascagoula"
    ],
    "bbox": [
-    -88.45334,
-    30.35506,
-    -88.43671,
-    30.39963
+    -88.453339,
+    30.355063,
+    -88.436706,
+    30.399625
    ],
    "wikidata": null,
    "charted": true,
@@ -1023,6 +1617,15 @@
     "bayou-cumbest-public-boat-launch-ms",
     "grand-bature-road-boat-ramp-ms"
    ],
+   "water_id": "cumbest-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "2519c5b90bc4ade9559a5c68191953cfecf34e5b740c0b13ae55036f20909b70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1035,9 +1638,9 @@
    ],
    "bbox": [
     -89.33333,
-    34.38757,
-    -89.32716,
-    34.39343
+    34.387571,
+    -89.327128,
+    34.393428
    ],
    "wikidata": null,
    "charted": false,
@@ -1045,6 +1648,15 @@
    "launches": [
     "cypress-lake-boat-launch-ms"
    ],
+   "water_id": "cypress-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "3d3ea2d6416cb6d25a0bb32d5b29c1c99761b912794a830aa230d97316365fbc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1062,6 +1674,15 @@
    "launches": [
     "pascagoula-wma-ms-2"
    ],
+   "water_id": "dacy-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1073,10 +1694,10 @@
     "Ocean Springs"
    ],
    "bbox": [
-    -88.80934,
-    30.38173,
+    -88.809342,
+    30.381729,
     -88.7458,
-    30.40605
+    30.406046
    ],
    "wikidata": null,
    "charted": true,
@@ -1084,6 +1705,15 @@
    "launches": [
     "davis-bayou-boat-launch-ms"
    ],
+   "water_id": "davis-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "d6a6ef8d0b4c5e3b34dd01c90f2f9df3c51910c2db699657409f41ec57fcb4d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1101,6 +1731,15 @@
    "launches": [
     "davis-eddy-ramp-pas-wma-ms"
    ],
+   "water_id": "davis-eddy-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1112,10 +1751,10 @@
     "New Houlka"
    ],
    "bbox": [
-    -88.95181,
-    34.03699,
-    -88.93258,
-    34.0496
+    -88.951815,
+    34.036985,
+    -88.932491,
+    34.049603
    ],
    "wikidata": null,
    "charted": false,
@@ -1123,6 +1762,15 @@
    "launches": [
     "davis-lake-rec-area-ms"
    ],
+   "water_id": "davis-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "672e6cb56a2e07a38da4d3e7766e1fc524d77cfd46b33c4b8c7dc1dc8e1eb37b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1140,6 +1788,15 @@
    "launches": [
     "strickland-landing-ms"
    ],
+   "water_id": "deer-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1151,10 +1808,10 @@
     "Arcola"
    ],
    "bbox": [
-    -91.00659,
-    32.86839,
-    -90.82742,
-    33.50258
+    -91.006586,
+    32.868391,
+    -90.827418,
+    33.502577
    ],
    "wikidata": null,
    "charted": false,
@@ -1162,6 +1819,15 @@
    "launches": [
     "arcola-landing-ms"
    ],
+   "water_id": "deer-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "5a6151c11529177fe3f349d956672fc06bd8853062c5af11c2189174b1c27b8d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1173,7 +1839,12 @@
     "Hillhouse Landing",
     "Sunflower Landing"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.901865,
+    34.134995,
+    -90.801897,
+    34.193479
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
@@ -1181,6 +1852,15 @@
     "desoto-lake-park-ms",
     "hillhouse-ms"
    ],
+   "water_id": "desoto-lake-ms",
+   "gnis_id": "65615",
+   "geometry_hash": "602bdb8f87c7805db47363276dcb00a206e075ff5fa6cb8e8a43571dcafed511",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1193,15 +1873,55 @@
    ],
    "bbox": [
     -89.73643,
-    31.74691,
-    -89.72913,
-    31.75647
+    31.746907,
+    -89.729132,
+    31.756472
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.182,
    "launches": [
     "pat-harrison-ms"
+   ],
+   "water_id": "dry-creek-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "29611e684d66420873f01af386d506048358e6770493fd26b616bdc92aa23a62",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dump-lake-ms",
+   "name": "Dump Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Germania"
+   ],
+   "bbox": [
+    -90.626453,
+    32.638499,
+    -90.59468,
+    32.65832
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "dump-lake-ms",
+   "gnis_id": "693134",
+   "geometry_hash": "002d4d20e889108aadf662995701216ee715a3b954b72a096c445dd1a476dc9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "pat-murphy-landing-ms"
    ],
    "advisories": []
   },
@@ -1214,16 +1934,56 @@
     "Vicksburg"
    ],
    "bbox": [
-    -91.07079,
-    32.47961,
-    -90.98399,
-    32.53399
+    -91.070791,
+    32.479607,
+    -90.983902,
+    32.533985
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 16.878,
    "launches": [
     "eagle-lake-landing-ms"
+   ],
+   "water_id": "eagle-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "a34db6311de847a47cdca13c52e51764d5ec0227a27aed92452cbe72138fb2da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "edwards-bayou-ms",
+   "name": "Edwards Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Waveland"
+   ],
+   "bbox": [
+    -89.386199,
+    30.314819,
+    -89.371649,
+    30.335753
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "edwards-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "b4412edeb270b4267ff9c4118b08ebe6f1ee0e624665d2ad365fee58afeaa207",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bay-marina-ms"
    ],
    "advisories": []
   },
@@ -1237,9 +1997,9 @@
    ],
    "bbox": [
     -88.6657,
-    34.29558,
-    -88.64819,
-    34.32067
+    34.295578,
+    -88.648188,
+    34.320928
    ],
    "wikidata": null,
    "charted": false,
@@ -1247,6 +2007,15 @@
    "launches": [
     "elvis-presley-lake-boat-launch-ms"
    ],
+   "water_id": "elvis-presley-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "39bbbee9aacfe6defa2e15fdf428d7b414e0d5ae1953970f3aae1fb1baa43892",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1258,10 +2027,10 @@
     "Goodman"
    ],
    "bbox": [
-    -89.92847,
+    -89.928467,
     33.0257,
-    -89.923,
-    33.0318
+    -89.923003,
+    33.031795
    ],
    "wikidata": null,
    "charted": false,
@@ -1269,6 +2038,15 @@
    "launches": [
     "holmes-county-state-park-ms"
    ],
+   "water_id": "english-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "302116c7443355349ebf2b9490e0b580bb4ccb393c4647b46e6a4c38c17c9986",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1286,10 +2064,10 @@
     "Water Valley Landing"
    ],
    "bbox": [
-    -89.90724,
-    34.11123,
+    -89.907243,
+    34.111128,
     -89.74343,
-    34.17293
+    34.172932
    ],
    "wikidata": "Q768090",
    "charted": false,
@@ -1310,6 +2088,15 @@
     "water-valley-landing-ms",
     "wildcat-ms"
    ],
+   "water_id": "enid-lake-ms",
+   "gnis_id": "691643",
+   "geometry_hash": "747f628661a002f85b2eaa7a7ec518fdba540c5dc1f6ef9f5aaea18e714a8a99",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1321,10 +2108,10 @@
     "Moss Point"
    ],
    "bbox": [
-    -88.5611,
+    -88.561103,
     30.41791,
-    -88.39993,
-    30.94055
+    -88.399926,
+    30.940555
    ],
    "wikidata": "Q5397133",
    "charted": true,
@@ -1333,6 +2120,17 @@
     "brown-bridge-road-614-ms",
     "hwy-63-ramp-ms",
     "pollock-ferry-ms"
+   ],
+   "water_id": "escatawpa-river-ms",
+   "gnis_id": "669807",
+   "geometry_hash": "a351fecee4ee3396c1ab87f6ad6ced7bb17085dafa471a0608cefc11f9caece1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "shingle-mill-landing-ms"
    ],
    "advisories": []
   },
@@ -1345,9 +2143,9 @@
     "Jackson County"
    ],
    "bbox": [
-    -88.64204,
-    30.64618,
-    -88.63474,
+    -88.642042,
+    30.646185,
+    -88.634736,
     30.64918
    ],
    "wikidata": null,
@@ -1356,6 +2154,15 @@
    "launches": [
     "fletcher-lake-ramp-ms"
    ],
+   "water_id": "fletcher-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "775be22324846783542c3d94ce5c30b4fc0395695ecc119b77c6b44e54e6b785",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1367,16 +2174,51 @@
     "Wiggins"
    ],
    "bbox": [
-    -89.14493,
-    30.86785,
-    -89.12156,
-    30.90828
+    -89.144935,
+    30.867851,
+    -89.121562,
+    30.908281
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 1.959,
    "launches": [
     "flint-creek-water-park-ms"
+   ],
+   "water_id": "flint-creek-reservoir-ms",
+   "gnis_id": null,
+   "geometry_hash": "69240583575ef9854c19438dd9eb5da6c91dd14535859c1b5a239e4b652e4ceb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-bayou-ms",
+   "name": "Fort Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Ocean Springs"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "fort-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "k-o-a-camp-ground-ms"
    ],
    "advisories": []
   },
@@ -1395,6 +2237,15 @@
    "launches": [
     "four-mile-creek-boat-launch-ms"
    ],
+   "water_id": "four-mile-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1407,9 +2258,9 @@
    ],
    "bbox": [
     -89.24791,
-    31.13378,
-    -89.23461,
-    31.15437
+    31.133732,
+    -89.234609,
+    31.154367
    ],
    "wikidata": null,
    "charted": false,
@@ -1417,6 +2268,15 @@
    "launches": [
     "paul-b-johnson-state-park-ms"
    ],
+   "water_id": "geiger-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "886cd3d122a680731b100c0a7781b107d58c8bb86cf28efaa8e831afe05e75a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1434,6 +2294,15 @@
    "launches": [
     "st-catherine-creek-nwr-adams-county-ms"
    ],
+   "water_id": "gilliard-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1445,10 +2314,10 @@
     "Lucedale"
    ],
    "bbox": [
-    -88.71035,
-    30.78462,
-    -88.70566,
-    30.79172
+    -88.710349,
+    30.784615,
+    -88.705427,
+    30.791719
    ],
    "wikidata": null,
    "charted": false,
@@ -1456,6 +2325,15 @@
    "launches": [
     "goff-basin-ramp-ms"
    ],
+   "water_id": "goff-dead-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "a7ed4666a1af3f18b1e0fde18e1beb688f79103c7a61d8d46216cf0dd242efc6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1473,6 +2351,15 @@
    "launches": [
     "golden-memorial-state-park-ms"
    ],
+   "water_id": "golden-memorial-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1484,10 +2371,10 @@
     "Jackson County"
    ],
    "bbox": [
-    -88.63805,
-    30.61742,
+    -88.638055,
+    30.617284,
     -88.63345,
-    30.62186
+    30.621859
    ],
    "wikidata": null,
    "charted": false,
@@ -1495,6 +2382,15 @@
    "launches": [
     "graham-lake-boat-launch-ms"
    ],
+   "water_id": "graham-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "3554b2f9a650d631ef1b16e47be7418b385b563a4d3190f74e60eabcc2f2f34b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1505,13 +2401,27 @@
    "towns": [
     "Louin"
    ],
-   "bbox": null,
+   "bbox": [
+    -89.355985,
+    32.110373,
+    -89.351628,
+    32.115452
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "green-tree-reservoir-boat-launch-ms"
    ],
+   "water_id": "greentree-reservoir-ms",
+   "gnis_id": "711523",
+   "geometry_hash": "3bdf18b8eb761e805e3582d7125dc57ddd91c9f64992bd78744cf94a0f7081ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1529,10 +2439,10 @@
     "Turkey Creek"
    ],
    "bbox": [
-    -89.77774,
+    -89.777742,
     33.78933,
-    -89.51785,
-    33.91449
+    -89.517846,
+    33.914488
    ],
    "wikidata": "Q1545634",
    "charted": false,
@@ -1554,6 +2464,15 @@
     "wolf-creek-ms",
     "young-s-landing-ms"
    ],
+   "water_id": "grenada-lake-ms",
+   "gnis_id": "693366",
+   "geometry_hash": "f72141e6793362faea92f5184541fa5acd6cbf31bc7c25825a28ec4f73018702",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1565,9 +2484,9 @@
     "Ocean Springs"
    ],
    "bbox": [
-    -88.80098,
+    -88.800982,
     30.39436,
-    -88.79343,
+    -88.793425,
     30.39736
    ],
    "wikidata": null,
@@ -1576,6 +2495,15 @@
    "launches": [
     "halstead-bayou-boat-launch-ms"
    ],
+   "water_id": "halstead-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "23ca4a69b846073ef32549af7e379d74984de185ea6bb7f3bf378588308adf17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1587,10 +2515,10 @@
     "Tishomingo"
    ],
    "bbox": [
-    -88.19729,
-    34.6141,
-    -88.19081,
-    34.62034
+    -88.197287,
+    34.614103,
+    -88.190807,
+    34.620336
    ],
    "wikidata": null,
    "charted": false,
@@ -1598,6 +2526,15 @@
    "launches": [
     "tishomingo-state-park-ramp-ms"
    ],
+   "water_id": "haynes-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "8060b1fe030701cfde729aa62573615da01e185e19aa2305e177df36c75f122c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1608,13 +2545,27 @@
    "towns": [
     "Picayune"
    ],
-   "bbox": null,
+   "bbox": [
+    -89.7458,
+    30.520077,
+    -89.692736,
+    30.551815
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "dan-taberer-memorial-boat-ramp-ms"
    ],
+   "water_id": "hobolochitto-creek-ms",
+   "gnis_id": "2678138",
+   "geometry_hash": "15fc6b0eaf3fb3a02c46732bf2ad82517408a05c188f4b1fed23fb8c5ae40d83",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1626,10 +2577,10 @@
     "Doloroso"
    ],
    "bbox": [
-    -91.50906,
-    31.30455,
-    -90.6239,
-    31.71406
+    -91.509061,
+    31.304554,
+    -90.623903,
+    31.714241
    ],
    "wikidata": "Q5891041",
    "charted": true,
@@ -1637,6 +2588,15 @@
    "launches": [
     "homochitto-river-hwy-61-ms"
    ],
+   "water_id": "homochitto-river-ms",
+   "gnis_id": "693517",
+   "geometry_hash": "b4f9f816985bbc629061167bc7cd2b3c102c22fcd3bce5c75ff0669ac9027de0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1648,10 +2608,10 @@
     "Crossroads"
    ],
    "bbox": [
-    -89.82027,
-    30.76941,
-    -89.81696,
-    30.77294
+    -89.820266,
+    30.769411,
+    -89.816957,
+    30.772939
    ],
    "wikidata": null,
    "charted": false,
@@ -1659,6 +2619,15 @@
    "launches": [
     "horseshoe-lake-ramp-ms"
    ],
+   "water_id": "horseshoe-lake-crossroads-ms",
+   "gnis_id": null,
+   "geometry_hash": "4923ad79b31ff87c4b393cdb3fb76e8229a08f98d5e7123f51109d5b56f10d35",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1669,13 +2638,27 @@
    "towns": [
     "Gibson Landing"
    ],
-   "bbox": null,
+   "bbox": [
+    -88.677182,
+    30.772126,
+    -88.67322,
+    30.777355
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "horseshoe-lake-pas-wma-ms"
    ],
+   "water_id": "horseshoe-lake-gibson-landing-ms",
+   "gnis_id": "671484",
+   "geometry_hash": "6d60758a6fedcb2a0890e1b2f898baf9b3be866b250ffc360a24e3e663b7864b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1689,8 +2672,8 @@
    "bbox": [
     -90.31124,
     33.21537,
-    -90.23176,
-    33.26713
+    -90.231761,
+    33.267128
    ],
    "wikidata": null,
    "charted": false,
@@ -1698,6 +2681,15 @@
    "launches": [
     "horseshoe-landing-ms"
    ],
+   "water_id": "horseshoe-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "0be4a843e4350107d2ff7f7fabb02617a84809c5fba02098c0b467721dc69036",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1708,13 +2700,27 @@
    "towns": [
     "Riverview Estates"
    ],
-   "bbox": null,
+   "bbox": [
+    -88.76517,
+    30.872036,
+    -88.761103,
+    30.876919
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "hutson-lake-pas-wma-ms"
    ],
+   "water_id": "hutson-lake-ms",
+   "gnis_id": "693574",
+   "geometry_hash": "8062a29103783787fb40214e7cc6b5010b6bd3d660be616491727c279e31d856",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1727,9 +2733,9 @@
    ],
    "bbox": [
     -88.69836,
-    32.09815,
-    -88.68685,
-    32.10325
+    32.098154,
+    -88.686847,
+    32.103254
    ],
    "wikidata": null,
    "charted": false,
@@ -1737,6 +2743,15 @@
    "launches": [
     "clarko-state-park-ms"
    ],
+   "water_id": "ivy-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "c6c974020c334b76457809a516a238f452a5e6cdfe501d583a2d87631a0dc1be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1748,16 +2763,57 @@
     "Prentiss"
    ],
    "bbox": [
-    -89.84345,
-    31.56031,
-    -89.83275,
-    31.56958
+    -89.84379,
+    31.560311,
+    -89.832755,
+    31.569577
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.382,
    "launches": [
     "lake-jeff-davis-ms"
+   ],
+   "water_id": "jefferson-davis-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "1979c99044c2d23649a41d0de7bb1fa5d39cd01be6e9eb14299665a23eb23885",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "john-s-bayou-ms",
+   "name": "John's Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Pascagoula"
+   ],
+   "bbox": [
+    -88.64393,
+    30.486021,
+    -88.633706,
+    30.500646
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "john-s-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "2d72ed457a11d44005138b16c8c75e63ccb95ecea403586aba5afac153dbc21c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "john-s-bayou-marina-ms",
+    "san-juan-marina-ms"
    ],
    "advisories": []
   },
@@ -1770,10 +2826,10 @@
     "Diamondhead"
    ],
    "bbox": [
-    -89.5546,
-    30.33527,
+    -89.554604,
+    30.335037,
     -89.35782,
-    30.52115
+    30.521152
    ],
    "wikidata": null,
    "charted": true,
@@ -1782,6 +2838,15 @@
     "jourdan-river-shores-ramp-bayou-talla-boat-launch-ms",
     "mcleod-park-ms"
    ],
+   "water_id": "jourdan-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "ebc87c644f92d8a615a698a35fa4d5a135058ea22d7affd973b6231f553422d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1800,6 +2865,15 @@
     "kemper-lake-main-ramp-ms",
     "kemper-lake-north-ramp-ms"
    ],
+   "water_id": "kemper-county-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1811,16 +2885,27 @@
     "Beulah"
    ],
    "bbox": [
-    -91.04128,
-    33.75972,
-    -90.98685,
-    33.80296
+    -91.041278,
+    33.759686,
+    -90.986832,
+    33.802988
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 3.358,
    "launches": [
     "lake-beulah-boat-launch-ms"
+   ],
+   "water_id": "lake-beulah-ms",
+   "gnis_id": null,
+   "geometry_hash": "3bd976df7ba08a3c5971e43f33a3c3386e67f5a422db3222b498734fc2279192",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "edmonds-young-ms"
    ],
    "advisories": []
   },
@@ -1833,9 +2918,9 @@
     "Columbia"
    ],
    "bbox": [
-    -89.72766,
-    31.19031,
-    -89.71208,
+    -89.727664,
+    31.190312,
+    -89.712081,
     31.20293
    ],
    "wikidata": "Q6474979",
@@ -1844,6 +2929,15 @@
    "launches": [
     "lake-bill-waller-boat-launch-ms"
    ],
+   "water_id": "lake-bill-waller-ms",
+   "gnis_id": "689650",
+   "geometry_hash": "b5715e57d53691d2a028b060bbc6a0b1215e3c2dfa75ab23a85204bae3a03163",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1855,10 +2949,10 @@
     "Cleo"
    ],
    "bbox": [
-    -89.0282,
-    31.70015,
-    -88.99945,
-    31.72576
+    -89.028202,
+    31.700155,
+    -88.999446,
+    31.725838
    ],
    "wikidata": null,
    "charted": false,
@@ -1866,6 +2960,15 @@
    "launches": [
     "bogue-homa-boat-launch-ms"
    ],
+   "water_id": "lake-bogue-homa-ms",
+   "gnis_id": null,
+   "geometry_hash": "65e1ed52a08ece10a4da19ad3d10d4bf2569475c9e7a5bcf0164c2e133a852c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1877,10 +2980,10 @@
     "Lake Vista"
    ],
    "bbox": [
-    -91.09618,
-    33.5986,
-    -91.04997,
-    33.65575
+    -91.096176,
+    33.598459,
+    -91.049774,
+    33.655754
    ],
    "wikidata": null,
    "charted": false,
@@ -1888,6 +2991,15 @@
    "launches": [
     "w-fisher-johnson-landing-ms"
    ],
+   "water_id": "lake-bolivar-ms",
+   "gnis_id": null,
+   "geometry_hash": "4b8c441d294442830fa6c8ed3b76cd66ad43c027048ebbc1b8cedc6cd243a126",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1905,6 +3017,15 @@
    "launches": [
     "calling-panther-boat-launch-ms"
    ],
+   "water_id": "lake-calling-panther-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1915,13 +3036,27 @@
    "towns": [
     "Pachuta"
    ],
-   "bbox": null,
+   "bbox": [
+    -89.039521,
+    32.096808,
+    -89.032073,
+    32.1062
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "claude-bennett-boat-launch-ms"
    ],
+   "water_id": "lake-claude-bennett-ms",
+   "gnis_id": "668527",
+   "geometry_hash": "3a51b148a9a4747b5647b631c4971356fa809d94342522bbf850d3706ac993ce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1933,10 +3068,10 @@
     "Columbia"
    ],
    "bbox": [
-    -89.7409,
-    31.18184,
-    -89.73048,
-    31.19222
+    -89.740896,
+    31.181839,
+    -89.730477,
+    31.192218
    ],
    "wikidata": null,
    "charted": false,
@@ -1944,6 +3079,15 @@
    "launches": [
     "lake-columbia-boat-launch-ms"
    ],
+   "water_id": "lake-columbia-ms",
+   "gnis_id": null,
+   "geometry_hash": "af94f9d3fc620c8880ad0768249142ef9a19af079935d77f8eb63b369b69ddbc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1955,10 +3099,10 @@
     "Gary Estates"
    ],
    "bbox": [
-    -90.27068,
-    32.19634,
-    -90.26336,
-    32.20328
+    -90.270676,
+    32.196342,
+    -90.263356,
+    32.203281
    ],
    "wikidata": null,
    "charted": false,
@@ -1966,6 +3110,15 @@
    "launches": [
     "lake-dockery-ramp-ms"
    ],
+   "water_id": "lake-dockery-ms",
+   "gnis_id": null,
+   "geometry_hash": "69c7c06a9d37c40bdf6dc3b72d202c551aa5a36cbb1d99bcc7d21e2308f7aa6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1983,6 +3136,15 @@
    "launches": [
     "warfield-point-miss-r-ms"
    ],
+   "water_id": "lake-ferguson-greenville-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1994,10 +3156,10 @@
     "Greenville"
    ],
    "bbox": [
-    -91.1002,
-    33.37118,
-    -91.05368,
-    33.44515
+    -91.100198,
+    33.371183,
+    -91.053681,
+    33.445154
    ],
    "wikidata": null,
    "charted": true,
@@ -2005,6 +3167,15 @@
    "launches": [
     "greenville-city-front-ms"
    ],
+   "water_id": "lake-ferguson-ms",
+   "gnis_id": null,
+   "geometry_hash": "30b5dc371acac2526f32b72617cdde245c7e6fe2106229c741920a2d7742644e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2022,6 +3193,15 @@
    "launches": [
     "lake-george-landing-ms"
    ],
+   "water_id": "lake-george-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2033,16 +3213,56 @@
     "Hazlehurst"
    ],
    "bbox": [
-    -90.4043,
-    31.86716,
+    -90.404297,
+    31.867157,
     -90.3996,
-    31.87189
+    31.871893
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.086,
    "launches": [
     "lake-hazle-boat-launch-ms"
+   ],
+   "water_id": "lake-hazle-ms",
+   "gnis_id": null,
+   "geometry_hash": "8d1382dce21f43973eeb0bf5f469339c176368185f70d5eac45ff374523f82e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-jackson-ms",
+   "name": "Lake Jackson",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Alhambra"
+   ],
+   "bbox": [
+    -91.116982,
+    33.046912,
+    -91.08096,
+    33.0648
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "lake-jackson-ms",
+   "gnis_id": "671790",
+   "geometry_hash": "3886e1927806aa0d1492a6704e5bd15b58e9a0deda90a29a198d8fa3697a1a24",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "bowman-ramp-ms"
    ],
    "advisories": []
   },
@@ -2055,10 +3275,10 @@
     "Saltillo"
    ],
    "bbox": [
-    -88.67191,
-    34.38703,
-    -88.65332,
-    34.40936
+    -88.671908,
+    34.387027,
+    -88.653117,
+    34.409408
    ],
    "wikidata": null,
    "charted": false,
@@ -2066,6 +3286,15 @@
    "launches": [
     "lamar-bruce-boat-launch-ms"
    ],
+   "water_id": "lake-lamar-bruce-ms",
+   "gnis_id": null,
+   "geometry_hash": "6bdb37f62bff4aa0760efc4733e84c68683f9073182fe1ff5bce80f819953f00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2077,10 +3306,10 @@
     "Wayside"
    ],
    "bbox": [
-    -91.08963,
-    33.23307,
-    -91.04118,
-    33.28994
+    -91.089635,
+    33.233067,
+    -91.041183,
+    33.289944
    ],
    "wikidata": null,
    "charted": false,
@@ -2088,6 +3317,15 @@
    "launches": [
     "kirk-landing-ms"
    ],
+   "water_id": "lake-lee-ms",
+   "gnis_id": null,
+   "geometry_hash": "efbf8d8c0ed470d2f210ce2933c3c3e5c6edc8f935f4bb92327ac7f406858ef5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2105,6 +3343,15 @@
    "launches": [
     "lake-lincoln-state-park-ms"
    ],
+   "water_id": "lake-lincoln-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2116,10 +3363,10 @@
     "Lakeover Estates"
    ],
    "bbox": [
-    -88.30416,
+    -88.304163,
     33.42237,
-    -88.29188,
-    33.44013
+    -88.291881,
+    33.440128
    ],
    "wikidata": null,
    "charted": false,
@@ -2127,6 +3374,15 @@
    "launches": [
     "lake-lowndes-ramp-ms"
    ],
+   "water_id": "lake-lowndes-ms",
+   "gnis_id": null,
+   "geometry_hash": "9e986e666096437fd0716fb25cb38ae6fecfe51419f6f39a0437b82ce5e17d9a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2138,10 +3394,10 @@
     "Monticello"
    ],
    "bbox": [
-    -90.16543,
-    31.57208,
-    -90.15295,
-    31.58133
+    -90.165427,
+    31.572083,
+    -90.152953,
+    31.581332
    ],
    "wikidata": null,
    "charted": false,
@@ -2149,6 +3405,15 @@
    "launches": [
     "lake-mary-crawford-boat-launch-ms"
    ],
+   "water_id": "lake-mary-crawford-ms",
+   "gnis_id": null,
+   "geometry_hash": "8d55331c3a93fc4c769fab5064e0d7547a12dd2a28c6364d82ab3a4787596cb5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2159,13 +3424,27 @@
    "towns": [
     "Loch Leven"
    ],
-   "bbox": null,
+   "bbox": [
+    -91.585861,
+    31.150715,
+    -91.523076,
+    31.241679
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lake-mary-landing-ms"
    ],
+   "water_id": "lake-mary-ms",
+   "gnis_id": "673216",
+   "geometry_hash": "3a77bbf770b732bdf49bc2e365c830ea952f7380f0649b7509bd2416d40ca8a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2183,6 +3462,15 @@
    "launches": [
     "lake-mike-conner-boat-launch-ms"
    ],
+   "water_id": "lake-mike-conner-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2194,10 +3482,10 @@
     "Lake Monroe East Subdivision"
    ],
    "bbox": [
-    -88.5702,
-    33.94136,
-    -88.56201,
-    33.95608
+    -88.570199,
+    33.941359,
+    -88.562013,
+    33.956079
    ],
    "wikidata": null,
    "charted": false,
@@ -2205,6 +3493,15 @@
    "launches": [
     "lake-monroe-boat-launch-ms"
    ],
+   "water_id": "lake-monroe-ms",
+   "gnis_id": null,
+   "geometry_hash": "0ff3b98f7a3de32fec058db061cc44160d934a4cbaed8abeda8197fd02db4b32",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2216,10 +3513,10 @@
     "Beaumont"
    ],
    "bbox": [
-    -88.91137,
-    31.12505,
-    -88.89919,
-    31.13631
+    -88.911366,
+    31.124925,
+    -88.89914,
+    31.136359
    ],
    "wikidata": null,
    "charted": false,
@@ -2227,6 +3524,15 @@
    "launches": [
     "lake-perry-boat-launch-ms"
    ],
+   "water_id": "lake-perry-ms",
+   "gnis_id": null,
+   "geometry_hash": "bd5c582250f8563625059f9245c18773e8dfdd46b75ba5e3ffcffcf9e4e1194e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2244,6 +3550,15 @@
    "launches": [
     "lake-prentiss-walker-boat-launch-ms"
    ],
+   "water_id": "lake-prentiss-walker-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2255,16 +3570,56 @@
     "McComb"
    ],
    "bbox": [
-    -90.53448,
-    31.17437,
-    -90.51603,
-    31.19671
+    -90.534477,
+    31.174371,
+    -90.516028,
+    31.196711
    ],
    "wikidata": "Q34929801",
    "charted": false,
    "area_km2": 1.686,
    "launches": [
     "percy-quin-state-park-ms"
+   ],
+   "water_id": "lake-tangipahoa-ms",
+   "gnis_id": "678557",
+   "geometry_hash": "646eea9f5051e6e02ecafa8a5b5848c9116e09999d3766bbf5fdcdcb825021b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tiak-o-khata-ms",
+   "name": "Lake Tiak-O' Khata",
+   "kind": "reservoir",
+   "state": "MS",
+   "towns": [
+    "Louisville"
+   ],
+   "bbox": [
+    -89.082019,
+    33.091609,
+    -89.072809,
+    33.09786
+   ],
+   "wikidata": "Q1801092",
+   "charted": false,
+   "area_km2": 0.239,
+   "launches": [],
+   "water_id": "lake-tiak-o-khata-ms",
+   "gnis_id": "678742",
+   "geometry_hash": "3d7aa9ba42c73e6b240e132a604dae6396b7c57692273d26cfb0162e88d97aa7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-tiak-o-khata-resort-ms"
    ],
    "advisories": []
   },
@@ -2277,10 +3632,10 @@
     "Tylertown"
    ],
    "bbox": [
-    -90.13634,
-    31.05803,
-    -90.12933,
-    31.06678
+    -90.136341,
+    31.058033,
+    -90.129333,
+    31.066776
    ],
    "wikidata": null,
    "charted": false,
@@ -2288,6 +3643,15 @@
    "launches": [
     "lake-walthall-boat-launch-ms"
    ],
+   "water_id": "lake-walthall-ms",
+   "gnis_id": null,
+   "geometry_hash": "876a8d19676bd164bbf22a29841772749d31ccc7f8c039705d26d78d37c3ec7a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2305,6 +3669,15 @@
    "launches": [
     "spillway-landing-ms"
    ],
+   "water_id": "lake-washington-alhambra-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2318,16 +3691,32 @@
     "Leota"
    ],
    "bbox": [
-    -91.08449,
-    33.01588,
-    -91.03009,
-    33.1054
+    -91.084487,
+    33.01574,
+    -91.030094,
+    33.105398
    ],
    "wikidata": "Q16893920",
    "charted": false,
    "area_km2": 10.477,
    "launches": [
     "glen-allen-ms"
+   ],
+   "water_id": "lake-washington-ms",
+   "gnis_id": "679361",
+   "geometry_hash": "44ccbf578dc0f350747ba68fa4046a7c08fe1b48326d707ffb4b8ee9c63a81fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "big-top-landing-ms",
+    "cypress-gardens-ms",
+    "ford-landing-ms",
+    "okeys-bait-shop-ms",
+    "roys-store-landing-ms",
+    "upper-lake-village-ms"
    ],
    "advisories": []
   },
@@ -2345,10 +3734,10 @@
     "Reddochs"
    ],
    "bbox": [
-    -89.4539,
-    30.98136,
+    -89.453901,
+    30.981355,
     -88.72948,
-    32.31145
+    32.311448
    ],
    "wikidata": "Q1810486",
    "charted": false,
@@ -2365,6 +3754,15 @@
     "old-augusta-landing-ms",
     "simms-bridge-ms"
    ],
+   "water_id": "leaf-river-ms",
+   "gnis_id": "693697",
+   "geometry_hash": "0a689167a5e896cbb3b331200aa480c90fb6358d2fc313e27bfb45474d831ebf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2382,6 +3780,15 @@
    "launches": [
     "legion-state-park-ms"
    ],
+   "water_id": "legion-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2399,6 +3806,15 @@
    "launches": [
     "little-black-water-park-ms"
    ],
+   "water_id": "little-black-creek-water-park-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2410,16 +3826,51 @@
     "Ellisville"
    ],
    "bbox": [
-    -89.3458,
+    -89.345861,
     31.64007,
     -89.331,
-    31.71504
+    31.715044
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "big-creek-10-ms"
+   ],
+   "water_id": "little-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "bbad9d39f35eededb57e65eb20f1347a3d757ce834ab1793c793baef9b888dc1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-eagle-lake-ms",
+   "name": "Little Eagle Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Honey Island"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "little-eagle-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "jones-landing-ms"
    ],
    "advisories": []
   },
@@ -2438,6 +3889,15 @@
    "launches": [
     "little-owl-lake-boat-launch-ms"
    ],
+   "water_id": "little-owl-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2455,6 +3915,15 @@
    "launches": [
     "little-round-landing-ms"
    ],
+   "water_id": "little-round-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2465,13 +3934,27 @@
    "towns": [
     "Little Sunflower"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.846826,
+    32.618666,
+    -90.720791,
+    32.87134
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "dummy-line-ms"
    ],
+   "water_id": "little-sunflower-river-ms",
+   "gnis_id": "693785",
+   "geometry_hash": "340c6dc2dd6097693f78acc3b3c495d1d5a75d2498e31cd45696d445bcb3f5fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2483,10 +3966,10 @@
     "Abbeville"
    ],
    "bbox": [
-    -89.79717,
-    34.4094,
-    -88.87912,
-    34.66196
+    -89.797173,
+    34.409398,
+    -88.879116,
+    34.661959
    ],
    "wikidata": null,
    "charted": false,
@@ -2494,6 +3977,15 @@
    "launches": [
     "frank-walker-landing-boat-ramp-ms"
    ],
+   "water_id": "little-tallahatchie-river-abbeville-ms",
+   "gnis_id": null,
+   "geometry_hash": "073623970f80f29bd6465dc6f0d60e4cf3fb942b8c2561229708f75bb3841a9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2506,9 +3998,9 @@
    ],
    "bbox": [
     -90.12531,
-    34.15762,
-    -89.81629,
-    34.40635
+    34.157621,
+    -89.816288,
+    34.406352
    ],
    "wikidata": null,
    "charted": false,
@@ -2517,6 +4009,15 @@
     "highway-51-landing-ms",
     "weir-ramp-ms"
    ],
+   "water_id": "little-tallahatchie-river-batesville-ms",
+   "gnis_id": null,
+   "geometry_hash": "0d4b2c7b7fb5c8ea9c79647cb174637b2775bedb93ba1d9f01637731b88c6f21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2528,10 +4029,10 @@
     "Charleston"
    ],
    "bbox": [
-    -90.18402,
-    34.0056,
-    -90.12334,
-    34.15762
+    -90.184018,
+    34.005601,
+    -90.123341,
+    34.157621
    ],
    "wikidata": null,
    "charted": false,
@@ -2539,6 +4040,15 @@
    "launches": [
     "paducah-wells-ms"
    ],
+   "water_id": "little-tallahatchie-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "f6de8101501262b564d5818cbda909086fbbeea94ffc7bd44927c403976dfe90",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2550,10 +4060,10 @@
     "Starkville"
    ],
    "bbox": [
-    -88.78582,
-    33.25138,
-    -88.77088,
-    33.26824
+    -88.785818,
+    33.251378,
+    -88.770883,
+    33.268384
    ],
    "wikidata": null,
    "charted": false,
@@ -2561,6 +4071,15 @@
    "launches": [
     "loakfoma-ramp-ms"
    ],
+   "water_id": "loakfoma-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "d493cc49b4cd04daee163c1abe1b5797a2f572e306312629411bbbb15c1177cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2578,6 +4097,15 @@
    "launches": [
     "port-of-rosedale-miss-r-ms"
    ],
+   "water_id": "log-loader-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2595,6 +4123,15 @@
    "launches": [
     "tallahatchie-nwr-hugo-ms"
    ],
+   "water_id": "long-branch-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2606,10 +4143,10 @@
     "Meridian"
    ],
    "bbox": [
-    -88.62503,
-    32.32415,
-    -88.61168,
-    32.34033
+    -88.625304,
+    32.324058,
+    -88.611678,
+    32.340331
    ],
    "wikidata": null,
    "charted": false,
@@ -2617,6 +4154,15 @@
    "launches": [
     "long-creek-boat-launch-ms"
    ],
+   "water_id": "long-creek-reservoir-ms",
+   "gnis_id": null,
+   "geometry_hash": "18b577c54078114963dcf7ba252ceebee56da49722316edbd91dd7e89afa467d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2627,13 +4173,27 @@
    "towns": [
     "Lucedale"
    ],
-   "bbox": null,
+   "bbox": [
+    -88.733838,
+    30.807894,
+    -88.729425,
+    30.812907
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lower-rines-ramp-pas-wma-ms"
    ],
+   "water_id": "lower-rines-lake-ms",
+   "gnis_id": "672924",
+   "geometry_hash": "be86e51b33673b3b74001be7c99e6ab92aa54d9239fccffa4a165f623bdcab5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2645,10 +4205,10 @@
     "Columbus"
    ],
    "bbox": [
-    -88.40042,
-    33.49296,
-    -88.12336,
-    33.57075
+    -88.400549,
+    33.492955,
+    -88.123358,
+    33.570751
    ],
    "wikidata": null,
    "charted": false,
@@ -2656,23 +4216,46 @@
    "launches": [
     "sheriff-s-office-ramp-ms"
    ],
+   "water_id": "luxapallila-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "be4a55d64f1097461eb0c9e3b9686db138c21ed23bff6842b07cfdebbd3ddff4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
    "slug": "magee-s-creek-ms",
-   "name": "Magee's Creek",
+   "name": "Magees Creek",
    "kind": "river",
    "state": "MS",
    "towns": [
     "Lexie"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.187566,
+    31.101853,
+    -90.058339,
+    31.304948
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "magee-s-creek-landing-ms"
    ],
+   "water_id": "magee-s-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "30aaa878d73d2575c29533f71eceeaadf3e35357db56215295703aeab9923d77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2684,10 +4267,10 @@
     "Sun"
    ],
    "bbox": [
-    -89.3615,
-    32.19568,
-    -89.35587,
-    32.2052
+    -89.361497,
+    32.195676,
+    -89.355784,
+    32.205198
    ],
    "wikidata": null,
    "charted": false,
@@ -2695,6 +4278,15 @@
    "launches": [
     "marathon-lake-boat-launch-ms"
    ],
+   "water_id": "marathon-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "18c1a3cfcd1fb00e92b10fedaa8b1acf4687a0f2b3b7cd10152e8a67b64fbb5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2706,16 +4298,29 @@
     "Gautier"
    ],
    "bbox": [
-    -88.65189,
-    30.38555,
-    -88.60948,
-    30.4071
+    -88.651886,
+    30.385555,
+    -88.609484,
+    30.407109
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.393,
    "launches": [
     "gautier-city-park-ms"
+   ],
+   "water_id": "mary-walker-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "d60be576981cf48b60da12b700239288fd92cd700befdd358b08bb3389c4d255",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "mary-walker-bayou-pas-r-ms",
+    "roy-fishing-camp-ms",
+    "tucie-ms"
    ],
    "advisories": []
   },
@@ -2728,10 +4333,10 @@
     "Flowood"
    ],
    "bbox": [
-    -90.14709,
-    32.32638,
-    -90.14221,
-    32.33143
+    -90.147094,
+    32.326378,
+    -90.142206,
+    32.331429
    ],
    "wikidata": null,
    "charted": false,
@@ -2739,6 +4344,15 @@
    "launches": [
     "lefleur-s-bluff-state-park-ms"
    ],
+   "water_id": "mayes-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "a0e2809d2f42fbecc8d784b10bb0301f939bc432bf7148df3c9e6ed3c1b62538",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2750,10 +4364,10 @@
     "Waynesboro"
    ],
    "bbox": [
-    -88.7273,
-    31.64153,
-    -88.70664,
-    31.66883
+    -88.727301,
+    31.641528,
+    -88.706637,
+    31.668833
    ],
    "wikidata": null,
    "charted": false,
@@ -2761,6 +4375,15 @@
    "launches": [
     "maynor-creek-water-park-ms"
    ],
+   "water_id": "maynor-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "0a257684e14757e14098110f060de80a070f14e947706b7055d69f3f2ae9e9d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2778,6 +4401,15 @@
    "launches": [
     "mccrae-dead-river-pas-wma-ms"
    ],
+   "water_id": "mccrea-dead-river-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2789,10 +4421,10 @@
     "Moss Point"
    ],
    "bbox": [
-    -88.57464,
-    30.38918,
+    -88.575025,
+    30.389183,
     -88.55695,
-    30.4176
+    30.417599
    ],
    "wikidata": null,
    "charted": true,
@@ -2800,6 +4432,15 @@
    "launches": [
     "choctaw-marina-mcinnis-bayou-ms"
    ],
+   "water_id": "mcinnis-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "1ec78872263460233d699fa44979275cf038e254d878df20d821dd657bd10f45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2817,6 +4458,15 @@
    "launches": [
     "qua-paw-landing-ms"
    ],
+   "water_id": "mississippi-river-chute-63-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2835,10 +4485,10 @@
     "Vicksburg"
    ],
    "bbox": [
-    -91.66176,
-    30.98706,
-    -90.06076,
-    35.36142
+    -91.661758,
+    30.987055,
+    -90.060761,
+    35.361425
    ],
    "wikidata": "Q1497",
    "charted": true,
@@ -2855,6 +4505,15 @@
     "port-of-port-gibson-high-water-ramp-ms",
     "terrene-landing-ms"
    ],
+   "water_id": "mississippi-river-ar",
+   "gnis_id": "1629903",
+   "geometry_hash": "4ddbdcb9d6c7ec088babfbebdb2870ed67323e716f468d0bc33c31f1bcd632da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2873,10 +4532,10 @@
     "Pass Christian"
    ],
    "bbox": [
-    -89.48073,
-    30.04958,
-    -88.11551,
-    30.39398
+    -89.480725,
+    30.049582,
+    -88.115511,
+    30.393999
    ],
    "wikidata": null,
    "charted": true,
@@ -2892,6 +4551,15 @@
     "mississippi-sound-boat-launch-near-pass-christian-ms",
     "washington-st-ramp-ms"
    ],
+   "water_id": "mississippi-sound-ms",
+   "gnis_id": null,
+   "geometry_hash": "bcc7f6c84df9f5f2b397ad503613eb1a3d9e6120d291a5489dad1bf02ab57c70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2905,10 +4573,10 @@
     "Moon"
    ],
    "bbox": [
-    -90.56722,
-    34.40242,
-    -90.49549,
-    34.46008
+    -90.567223,
+    34.402281,
+    -90.495492,
+    34.460084
    ],
    "wikidata": "Q6907498",
    "charted": false,
@@ -2916,6 +4584,17 @@
    "launches": [
     "moon-lake-landing-ms",
     "moon-lake-park-ms"
+   ],
+   "water_id": "moon-lake-ms",
+   "gnis_id": "673765",
+   "geometry_hash": "b7a0d65f147ea0235aa39b6ad6152874c98ddb1e645d8a6b526668481c5620eb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "mcmillin-ms"
    ],
    "advisories": []
   },
@@ -2934,6 +4613,15 @@
    "launches": [
     "nanawaya-landing-ms"
    ],
+   "water_id": "nanawaya-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2946,9 +4634,9 @@
    ],
    "bbox": [
     -89.01131,
-    32.702,
-    -89.00203,
-    32.71382
+    32.701998,
+    -89.002034,
+    32.713881
    ],
    "wikidata": null,
    "charted": false,
@@ -2956,6 +4644,15 @@
    "launches": [
     "neshoba-county-lake-boat-launch-ms"
    ],
+   "water_id": "neshoba-county-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "60b604c186c6622000051d1ada01f02dd92e5dcd620213ac7077e9941f6c9e20",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2968,10 +4665,10 @@
     "Shuqualak"
    ],
    "bbox": [
-    -88.71268,
-    32.98862,
-    -88.45961,
-    33.19224
+    -88.712679,
+    32.988616,
+    -88.459607,
+    33.192237
    ],
    "wikidata": null,
    "charted": false,
@@ -2981,6 +4678,15 @@
     "norvell-coleman-landing-ms",
     "noxubee-wild-and-scenic-river-landing-ms"
    ],
+   "water_id": "noxubee-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "66bf632b3db77f3cf5f786def4862d83fcfe3544696ae1fbcb8efcf084b83129",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2992,10 +4698,10 @@
     "Moss Point"
    ],
    "bbox": [
-    -88.53575,
-    30.40989,
-    -88.52233,
-    30.41547
+    -88.535755,
+    30.409891,
+    -88.522331,
+    30.415499
    ],
    "wikidata": null,
    "charted": true,
@@ -3003,6 +4709,15 @@
    "launches": [
     "moss-point-city-park-ms"
    ],
+   "water_id": "o-leary-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "80729782f28cb0a6dacea90a12b34b47b261f1a5c32d74cbfe32e45333fe3571",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3015,10 +4730,10 @@
     "Pine Springs"
    ],
    "bbox": [
-    -88.81405,
-    32.47418,
-    -88.77083,
-    32.53478
+    -88.814133,
+    32.474179,
+    -88.770832,
+    32.534779
    ],
    "wikidata": null,
    "charted": false,
@@ -3032,6 +4747,15 @@
     "pine-springs-ms",
     "twiddley-branch-campground-ms"
    ],
+   "water_id": "okatibbee-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "ebe1fe58fc9585a662c7aee57eed3badf0a5d08252fa16fd9fcf35b32d4c11ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3043,10 +4767,10 @@
     "Bude"
    ],
    "bbox": [
-    -90.85059,
-    31.39774,
-    -90.80827,
-    31.4387
+    -90.850593,
+    31.397736,
+    -90.808273,
+    31.438701
    ],
    "wikidata": null,
    "charted": false,
@@ -3054,6 +4778,15 @@
    "launches": [
     "okhissa-lake-boat-launch-ms"
    ],
+   "water_id": "okhissa-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "4012be6b0a24f30675bbfdec5fcdf8208c35d72d9e50a795270a49505299d5b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3065,10 +4798,10 @@
     "Waterfront Estates"
    ],
    "bbox": [
-    -88.95377,
-    33.50113,
-    -88.93222,
-    33.51644
+    -88.953773,
+    33.501133,
+    -88.932221,
+    33.516445
    ],
    "wikidata": null,
    "charted": false,
@@ -3076,6 +4809,15 @@
    "launches": [
     "small-lake-ramp-ms"
    ],
+   "water_id": "oktibbeha-county-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "868da7c6b952f84e96cfe64f1665585f33239ef92aef5c64a89ece1c8dac938d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3087,10 +4829,10 @@
     "Ocean Springs"
    ],
    "bbox": [
-    -88.85797,
-    30.4186,
-    -88.77216,
-    30.42701
+    -88.857969,
+    30.418602,
+    -88.772159,
+    30.427015
    ],
    "wikidata": null,
    "charted": true,
@@ -3098,6 +4840,15 @@
    "launches": [
     "hwy-609-old-fort-bayou-boat-launch-ms"
    ],
+   "water_id": "old-fort-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "ca98c48c5e7486a80624f4413256e49c748fee4a967696940ceaf5e66d73a44d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3109,10 +4860,10 @@
     "Pontotoc"
    ],
    "bbox": [
-    -88.917,
-    34.2425,
+    -88.916995,
+    34.242496,
     -88.88368,
-    34.2645
+    34.26464
    ],
    "wikidata": null,
    "charted": false,
@@ -3121,6 +4872,15 @@
     "trace-park-ramp-1-ms",
     "trace-park-ramp-2-ms"
    ],
+   "water_id": "old-natchez-trace-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "52822adb4c8b010d1569ca5d82b7cd403e40418deae8f36da668bf4aab907ea6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3132,16 +4892,56 @@
     "Crossroads"
    ],
    "bbox": [
-    -89.81355,
-    30.78704,
-    -89.80249,
-    30.7949
+    -89.813546,
+    30.787042,
+    -89.802412,
+    30.794901
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.117,
    "launches": [
     "crossroads-water-park-ms"
+   ],
+   "water_id": "old-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "9b513222058564d0f6d621a58ac8d50d945b1d93557098d4b4d7572313a4f556",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "paige-bayou-ms",
+   "name": "Paige Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Gautier"
+   ],
+   "bbox": [
+    -88.667529,
+    30.478421,
+    -88.648262,
+    30.494662
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "paige-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "2bca297f821f888861a18a7797012b79a5916ddd01e962e673581c51e4a2df1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "paige-bayou-marina-ms"
    ],
    "advisories": []
   },
@@ -3153,13 +4953,27 @@
    "towns": [
     "Bee Lake"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.34695,
+    33.017287,
+    -90.314226,
+    33.035766
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "parker-bayou-access-ms"
    ],
+   "water_id": "parker-bayou-ms",
+   "gnis_id": "675452",
+   "geometry_hash": "3cc7f659a397947d4c4d72b203a652e3aab23427f41cbbbf1e60b9f08a2d0e14",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3180,10 +4994,10 @@
     "Three Rivers"
    ],
    "bbox": [
-    -88.77495,
-    30.345,
-    -88.55744,
-    30.98136
+    -88.774947,
+    30.344997,
+    -88.557437,
+    30.981355
    ],
    "wikidata": "Q55262",
    "charted": true,
@@ -3204,6 +5018,21 @@
     "smith-s-camp-ramp-ms",
     "ward-bayou-wma-ms",
     "wilkerson-ferry-ramp-ms"
+   ],
+   "water_id": "pascagoula-river-ms",
+   "gnis_id": "694322",
+   "geometry_hash": "f2cc2b191309b3737e68d3b5d9f61992ed33ded1fe2ba883d7d49560c003b8e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cumbest-bluff-ms",
+    "ferguson-marina-ms",
+    "little-river-marina-ms",
+    "mac-fishing-camp-ms",
+    "poticaw-fishing-camp-ms"
    ],
    "advisories": []
   },
@@ -3227,10 +5056,10 @@
     "Picayune"
    ],
    "bbox": [
-    -90.25485,
-    30.15572,
-    -89.17616,
-    32.83424
+    -90.254845,
+    30.155721,
+    -89.176159,
+    32.834237
    ],
    "wikidata": "Q1739672",
    "charted": true,
@@ -3257,6 +5086,15 @@
     "wanilla-water-park-ms",
     "yates-crossing-ms"
    ],
+   "water_id": "pearl-river-la",
+   "gnis_id": "1627887",
+   "geometry_hash": "f2c241d3de8f078d591c68ee7a7ff8588cf3d6bea5f2b444b1fdfbf6dbe0816d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3274,6 +5112,15 @@
    "launches": [
     "perry-martin-lake-boat-launch-ms"
    ],
+   "water_id": "perry-martin-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3289,10 +5136,10 @@
     "Iuka"
    ],
    "bbox": [
-    -88.26164,
-    34.72734,
-    -87.62476,
-    35.08865
+    -88.261644,
+    34.727342,
+    -87.624755,
+    35.088649
    ],
    "wikidata": "Q7190954",
    "charted": true,
@@ -3302,12 +5149,24 @@
     "frank-williams-landing-ms",
     "goat-island-ms",
     "indian-creek-cove-ms",
-    "jp-coleman-state-park-ms",
     "jp-coleman-state-park-cooks-landing-ms",
+    "jp-coleman-state-park-ms",
     "jp-coleman-state-park-camp-ground-ms",
     "robinson-landing-ms",
     "scrugg-s-bridge-ms",
     "steel-bridge-boat-ramp-ms"
+   ],
+   "water_id": "pickwick-lake-al",
+   "gnis_id": "1326389",
+   "geometry_hash": "d326cac01778eb354be920d59c12dbc678b66b09aee26f4f1a359b28602a66b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "eastport-marina-ms",
+    "mills-creek-ms"
    ],
    "advisories": []
   },
@@ -3320,10 +5179,10 @@
     "Pascagoula River Estates"
    ],
    "bbox": [
-    -88.74431,
-    30.84359,
-    -88.74075,
-    30.84824
+    -88.744315,
+    30.843587,
+    -88.740751,
+    30.848236
    ],
    "wikidata": null,
    "charted": false,
@@ -3331,6 +5190,15 @@
    "launches": [
     "pierce-lake-ramp-pas-wma-ms"
    ],
+   "water_id": "pierce-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "2cec4103299e156171fcb6e10d6af28665fce0616693b56d0faee4c180541af3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3348,6 +5216,15 @@
    "launches": [
     "pipes-lake-boat-launch-ms"
    ],
+   "water_id": "pipes-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3360,9 +5237,9 @@
    ],
    "bbox": [
     -89.02845,
-    34.23035,
+    34.230348,
     -89.01595,
-    34.23976
+    34.239756
    ],
    "wikidata": null,
    "charted": false,
@@ -3370,6 +5247,15 @@
    "launches": [
     "howard-stafford-park-ms"
    ],
+   "water_id": "pontotoc-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "f0f39905e7032116775d62f75886f8176f9208d0720570c7cf878433d5491592",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3382,10 +5268,10 @@
     "Smithville"
    ],
    "bbox": [
-    -88.42604,
-    34.06239,
-    -88.37616,
-    34.25766
+    -88.426037,
+    34.062394,
+    -88.376163,
+    34.257661
    ],
    "wikidata": null,
    "charted": true,
@@ -3395,6 +5281,17 @@
     "edd-sanderson-landing-ms",
     "glover-wilkins-lock-ms",
     "ironwood-bluff-ms"
+   ],
+   "water_id": "pool-b-ms",
+   "gnis_id": null,
+   "geometry_hash": "3535b43e453ef6f802c40594714a8e78140547c3590c27402ec361dcd2b21863",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "smithville-marina-ms"
    ],
    "advisories": []
   },
@@ -3407,10 +5304,10 @@
     "Fulton"
    ],
    "bbox": [
-    -88.42925,
-    34.25795,
-    -88.40687,
-    34.36304
+    -88.429249,
+    34.257688,
+    -88.406871,
+    34.363094
    ],
    "wikidata": null,
    "charted": true,
@@ -3419,6 +5316,15 @@
     "jamie-whitten-ramp-ms",
     "peppertown-old-hwy-178-ms"
    ],
+   "water_id": "pool-c-ms",
+   "gnis_id": null,
+   "geometry_hash": "bcd5d1a4789402c37ac09f5a9f68b09210b04835145e7c61bea528a1cd4feb0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3430,10 +5336,10 @@
     "Oxford"
    ],
    "bbox": [
-    -89.35884,
-    34.43571,
-    -89.34699,
-    34.44275
+    -89.358843,
+    34.435713,
+    -89.346987,
+    34.442762
    ],
    "wikidata": null,
    "charted": false,
@@ -3441,6 +5347,15 @@
    "launches": [
     "puskus-boat-launch-ms"
    ],
+   "water_id": "puskus-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "f0a251a03cd6bba6d4302fc20ec7f975721d13feb4c7a58e27f371e8caaf6aa0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3454,10 +5369,10 @@
     "Wiggins"
    ],
    "bbox": [
-    -89.34195,
-    30.69469,
-    -88.66804,
-    30.94159
+    -89.341949,
+    30.694692,
+    -88.668044,
+    30.941748
    ],
    "wikidata": null,
    "charted": false,
@@ -3467,6 +5382,15 @@
     "ramsey-springs-landing-ms",
     "vestry-ramp-hwy-57-ms"
    ],
+   "water_id": "red-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "96a4013f091484292a6b38168b148f57ff3b99630c3ce504220f011eec0522cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3484,6 +5408,15 @@
    "launches": [
     "upper-rines-lake-ramp-ms"
    ],
+   "water_id": "rines-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3495,10 +5428,10 @@
     "Itta Bena"
    ],
    "bbox": [
-    -90.31857,
+    -90.318582,
     33.44009,
-    -90.23564,
-    33.52711
+    -90.235605,
+    33.527277
    ],
    "wikidata": null,
    "charted": false,
@@ -3506,6 +5439,15 @@
    "launches": [
     "kimbrough-landing-ms"
    ],
+   "water_id": "roebuck-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "c57bf91e10a4d3e19b1cd216e33383db2500079fd779bc0a56a353ca5b14ac4f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3523,6 +5465,15 @@
    "launches": [
     "rose-hill-lake-boat-launch-ms"
    ],
+   "water_id": "rose-hill-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3540,6 +5491,15 @@
    "launches": [
     "ross-branch-boat-launch-ms"
    ],
+   "water_id": "ross-branch-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3563,9 +5523,9 @@
    ],
    "bbox": [
     -90.09424,
-    32.37271,
-    -89.87544,
-    32.56849
+    32.372712,
+    -89.875436,
+    32.568491
    ],
    "wikidata": "Q4397897",
    "charted": false,
@@ -3585,6 +5545,17 @@
     "twin-harbors-landing-ms",
     "waterwood-boat-launch-ms"
    ],
+   "water_id": "ross-r-barnett-reservoir-ms",
+   "gnis_id": "676892",
+   "geometry_hash": "a629329d32f413b72afd6b7455d87216dbae6478d2bc7eb2f79990c1c69404fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pelahatchie-trading-post-ms"
+   ],
    "advisories": []
   },
   {
@@ -3602,6 +5573,15 @@
    "launches": [
     "st-catherine-creek-nwr-esperance-landing-ms"
    ],
+   "water_id": "sale-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3620,9 +5600,9 @@
    ],
    "bbox": [
     -89.81343,
-    34.38448,
-    -89.50712,
-    34.55235
+    34.384433,
+    -89.507116,
+    34.552347
    ],
    "wikidata": "Q2224795",
    "charted": false,
@@ -3650,6 +5630,15 @@
     "wyatts-crossing-3-ms",
     "wyatts-crossing-4-ms"
    ],
+   "water_id": "sardis-lake-ms",
+   "gnis_id": "694715",
+   "geometry_hash": "98ee80b80687ea86aab7a0ab7fcf6a37215a2d621ea63bfa8177a2fac782e698",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3661,10 +5650,10 @@
     "Ocean Springs"
    ],
    "bbox": [
-    -88.77315,
+    -88.773147,
     30.37145,
-    -88.74289,
-    30.3821
+    -88.742892,
+    30.382099
    ],
    "wikidata": null,
    "charted": true,
@@ -3672,6 +5661,15 @@
    "launches": [
     "blue-heron-boat-launch-ms"
    ],
+   "water_id": "simmons-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "ec3157eac7ddbc0f385fdfd36320dc3ccd8a57a6781491d27ad41c4d39872afc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3683,16 +5681,56 @@
     "Magee"
    ],
    "bbox": [
-    -89.79476,
-    31.91207,
-    -89.78596,
-    31.92118
+    -89.794757,
+    31.912073,
+    -89.785898,
+    31.921177
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.274,
    "launches": [
     "simpson-county-lake-boat-launch-ms"
+   ],
+   "water_id": "simpson-county-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "1a9deee83147a1cdb903ccc8ea6a8cdf67af3835875b824c1d49e9638c0d2fce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sioux-bayou-ms",
+   "name": "Sioux Bayou",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Gautier"
+   ],
+   "bbox": [
+    -88.660131,
+    30.40728,
+    -88.614807,
+    30.419742
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "sioux-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "49ce4fa2d3d1d56abb13236fc3fa7a5346e5e03834294657fa8eb1d83b22143d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "indian-point-ramp-ms"
    ],
    "advisories": []
   },
@@ -3705,10 +5743,10 @@
     "Katzenmeyer"
    ],
    "bbox": [
-    -90.89282,
-    32.44777,
-    -90.73217,
-    32.72059
+    -90.892821,
+    32.447774,
+    -90.732099,
+    32.720594
    ],
    "wikidata": null,
    "charted": false,
@@ -3716,6 +5754,15 @@
    "launches": [
     "sunflower-diversion-canal-ms"
    ],
+   "water_id": "six-mile-cuttoff-ms",
+   "gnis_id": null,
+   "geometry_hash": "f49498af657dd425c5d9c481d4e1478c36432285fcbf4a3be72d0944745de99f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3726,12 +5773,57 @@
    "towns": [
     "Greenwood"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.214257,
+    33.685024,
+    -90.186648,
+    33.709487
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "six-mile-landing-ms"
+   ],
+   "water_id": "six-mile-lake-ms",
+   "gnis_id": "677854",
+   "geometry_hash": "c903371766a3b13c699cfd96a003406fec5ec4e854f2662b8ecc329870430e77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sportsman-lake-ms",
+   "name": "Sportsman Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Richton"
+   ],
+   "bbox": [
+    -89.06322,
+    31.331046,
+    -89.053319,
+    31.335408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "sportsman-lake-ms",
+   "gnis_id": "683357",
+   "geometry_hash": "6fc47cab7b808ada641c6bc1029472ba2861162142d695e7ea963d5deeece7fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "sportsman-lake-boat-launch-ms"
    ],
    "advisories": []
   },
@@ -3744,10 +5836,10 @@
     "Holly Springs"
    ],
    "bbox": [
-    -89.46956,
-    34.65995,
-    -89.46512,
-    34.66856
+    -89.469564,
+    34.659822,
+    -89.464962,
+    34.668564
    ],
    "wikidata": null,
    "charted": false,
@@ -3755,6 +5847,15 @@
    "launches": [
     "wall-doxey-state-park-ms"
    ],
+   "water_id": "spring-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "7ed77adef642599d9906713d7ae643b7cd3631a501ee94b28062ed4fdbe80daf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3766,10 +5867,10 @@
     "D'Iberville"
    ],
    "bbox": [
-    -88.88935,
-    30.42584,
-    -88.86658,
-    30.43427
+    -88.889353,
+    30.425844,
+    -88.866582,
+    30.434492
    ],
    "wikidata": null,
    "charted": false,
@@ -3777,6 +5878,15 @@
    "launches": [
     "brittany-avenue-boat-launch-ms"
    ],
+   "water_id": "st-martin-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": "b67f0be4db0aac6f63b29c3970460e18d7abf5deafba4325e39660d33e3ef3ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3788,10 +5898,10 @@
     "Columbus"
    ],
    "bbox": [
-    -88.47004,
-    33.60454,
+    -88.470041,
+    33.604545,
     -88.44666,
-    33.60869
+    33.608686
    ],
    "wikidata": null,
    "charted": true,
@@ -3799,6 +5909,15 @@
    "launches": [
     "dwayne-hayes-rec-area-ms"
    ],
+   "water_id": "stinson-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "949528eaabaf8681b98daf783791c3bc70fffa049b14414ff36ba32b6e4899bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3816,6 +5935,15 @@
    "launches": [
     "stoval-bayou-landing-south-ms"
    ],
+   "water_id": "stoval-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3827,10 +5955,10 @@
     "D'Lo"
    ],
    "bbox": [
-    -90.13696,
-    31.84567,
-    -89.70536,
-    32.12905
+    -90.136956,
+    31.845667,
+    -89.705358,
+    32.129051
    ],
    "wikidata": null,
    "charted": false,
@@ -3838,6 +5966,15 @@
    "launches": [
     "d-lo-water-park-ms"
    ],
+   "water_id": "strong-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "cec75ed3e9d776861d70f3b8884592f9ff63c6477bdd766e20eaa9aad3ab2087",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3850,10 +5987,10 @@
     "Hattiesburg"
    ],
    "bbox": [
-    -89.19442,
-    31.22528,
-    -89.07855,
-    31.74946
+    -89.194416,
+    31.225275,
+    -89.078545,
+    31.749458
    ],
    "wikidata": "Q34917223",
    "charted": false,
@@ -3861,6 +5998,15 @@
    "launches": [
     "highway-29-ms"
    ],
+   "water_id": "tallahala-creek-ms",
+   "gnis_id": "694932",
+   "geometry_hash": "941e5729e52635641178d61f6271c869ad669a1f181403403d0179fb333fd278",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3874,8 +6020,8 @@
    "bbox": [
     -90.28204,
     33.53131,
-    -90.17093,
-    34.18352
+    -90.170928,
+    34.183521
    ],
    "wikidata": "Q2390504",
    "charted": false,
@@ -3883,6 +6029,15 @@
    "launches": [
     "strider-landing-ms"
    ],
+   "water_id": "tallahatchie-river-ms",
+   "gnis_id": "691621",
+   "geometry_hash": "0f884679b0dd41a9118e3a0a881e21affa8e335bc1da1cc725b262570b979a8c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3894,9 +6049,9 @@
     "Picayune"
    ],
    "bbox": [
-    -89.8087,
-    30.68734,
-    -89.80428,
+    -89.808699,
+    30.687336,
+    -89.804279,
     30.69984
    ],
    "wikidata": null,
@@ -3905,6 +6060,15 @@
    "launches": [
     "old-river-wma-ms"
    ],
+   "water_id": "ten-landing-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": "a2c57799c7b53e0ac4f6315c2ee0fc8ae8b51f5773ead73be267b985113e1c73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3920,10 +6084,10 @@
     "Sandy Springs"
    ],
    "bbox": [
-    -88.53023,
-    33.95181,
-    -88.2387,
-    34.92047
+    -88.530231,
+    33.951814,
+    -88.238698,
+    34.920474
    ],
    "wikidata": null,
    "charted": true,
@@ -3934,6 +6098,46 @@
     "burnsville-ramp-ms",
     "saucer-creek-ramp-ms",
     "walker-s-levee-ramp-ms"
+   ],
+   "water_id": "tennessee-tombigbee-waterway-ms",
+   "gnis_id": null,
+   "geometry_hash": "05a18957348e7e138525602c997a97f89688514cf7adb9ef4ae62377f807e4b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "thornburg-lake-ms",
+   "name": "Thornburg Lake",
+   "kind": "lake",
+   "state": "MS",
+   "towns": [
+    "Anna"
+   ],
+   "bbox": [
+    -91.378968,
+    31.687165,
+    -91.363752,
+    31.722669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "thornburg-lake-ms",
+   "gnis_id": "678722",
+   "geometry_hash": "b42108f853354cf9f52f6baa5bd4766ca93767224a2e054e41996e20e1172a0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [
+    "thornburg-lake-boat-launch-ms"
    ],
    "advisories": []
   },
@@ -3946,9 +6150,9 @@
     "Tibbee"
    ],
    "bbox": [
-    -88.69653,
-    33.51992,
-    -88.48964,
+    -88.696532,
+    33.519917,
+    -88.489642,
     33.57309
    ],
    "wikidata": null,
@@ -3957,6 +6161,15 @@
    "launches": [
     "tibbee-landing-ms"
    ],
+   "water_id": "tibbee-creek-ms",
+   "gnis_id": null,
+   "geometry_hash": "5ca96432ba2cabe1dc6cfc2d29be4659ff6d0378a3da7a6e97e6a4e164db4826",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3969,9 +6182,9 @@
    ],
    "bbox": [
     -88.96096,
-    34.78188,
-    -88.94872,
-    34.79553
+    34.781879,
+    -88.948715,
+    34.795534
    ],
    "wikidata": "Q1748899",
    "charted": false,
@@ -3979,6 +6192,15 @@
    "launches": [
     "tippah-lake-ramp-ms"
    ],
+   "water_id": "tippah-lake-ms",
+   "gnis_id": "705663",
+   "geometry_hash": "c052517d9655c371ccfc18d65b4f12637ee4acd4d24ba6c718fc3edb6cb7a17b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3996,6 +6218,15 @@
    "launches": [
     "tallahatchie-nwr-ms"
    ],
+   "water_id": "tippo-bayou-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4013,6 +6244,15 @@
    "launches": [
     "tishkill-lake-landing-ms"
    ],
+   "water_id": "tishkill-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4033,10 +6273,10 @@
     "West Fulton"
    ],
    "bbox": [
-    -88.55095,
+    -88.551051,
     33.21555,
-    -88.28649,
-    34.3935
+    -88.286447,
+    34.393495
    ],
    "wikidata": "Q2297877",
    "charted": true,
@@ -4054,6 +6294,17 @@
     "walker-s-levee-old-river-ms",
     "west-lowndes-landing-ms"
    ],
+   "water_id": "tombigbee-river-al",
+   "gnis_id": "158094",
+   "geometry_hash": "7af6c171a602f973a09c69b5c76cbfc673a40b738658c3cc8c09eddc211fe22a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "nashville-ferry-ms"
+   ],
    "advisories": []
   },
   {
@@ -4064,13 +6315,27 @@
    "towns": [
     "Bothwell"
    ],
-   "bbox": null,
+   "bbox": [
+    -88.709359,
+    31.335165,
+    -88.696874,
+    31.357531
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "turkey-fork-ramp-ms"
    ],
+   "water_id": "turkey-fork-reservoir-ms",
+   "gnis_id": "705244",
+   "geometry_hash": "fc10a885f0c7c96e1fe2b1753ed99b244387f01e0f7b72b2cb428163bdfdfdb8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4088,6 +6353,15 @@
    "launches": [
     "tuscumbia-wma-ms"
    ],
+   "water_id": "tuscumbia-river-canal-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4098,12 +6372,57 @@
    "towns": [
     "Deovolente"
    ],
-   "bbox": null,
+   "bbox": [
+    -90.484888,
+    33.201077,
+    -90.412296,
+    33.274248
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "wasp-lake-landing-ms"
+   ],
+   "water_id": "wasp-lake-ms",
+   "gnis_id": "679363",
+   "geometry_hash": "3fb5fcc7fa7f1733c620d136a7beccc8269f46ce7ace93c095a0c45577e02db8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-pascagoula-river-ms",
+   "name": "West Pascagoula River",
+   "kind": "river",
+   "state": "MS",
+   "towns": [
+    "Gautier"
+   ],
+   "bbox": [
+    -88.627756,
+    30.356753,
+    -88.60315,
+    30.505897
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "west-pascagoula-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "237604391b57fa11d41edcc7e44c1ae57dcbb03dfd764531cac9ac8179ba3b7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "old-oak-ms"
    ],
    "advisories": []
   },
@@ -4122,6 +6441,15 @@
    "launches": [
     "willow-lake-boat-launch-ms"
    ],
+   "water_id": "willow-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4140,6 +6468,15 @@
     "ivanhoe-landing-ms",
     "wolf-lake-landing-ms"
    ],
+   "water_id": "wolf-lake-ms",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4151,10 +6488,10 @@
     "Pass Christian"
    ],
    "bbox": [
-    -89.43038,
-    30.35644,
-    -89.19408,
-    30.8023
+    -89.430382,
+    30.356438,
+    -89.194077,
+    30.802303
    ],
    "wikidata": "Q18217744",
    "charted": true,
@@ -4162,6 +6499,15 @@
    "launches": [
     "merlin-necaise-boat-launch-ms"
    ],
+   "water_id": "wolf-river-ms",
+   "gnis_id": "695209",
+   "geometry_hash": "f13a1edf9169ab7f9927a3e285312435c41e4dbb08bcc465027cb429a5df9862",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4176,10 +6522,10 @@
     "Sabougla"
    ],
    "bbox": [
-    -90.18067,
-    33.55207,
-    -89.07689,
-    34.00115
+    -90.181193,
+    33.552065,
+    -89.076891,
+    34.001149
    ],
    "wikidata": "Q2599098",
    "charted": false,
@@ -4191,6 +6537,15 @@
     "south-abutment-a-east-boat-ramp-ms",
     "upper-yalobusha-boat-ramp-ms"
    ],
+   "water_id": "yalobusha-river-ms",
+   "gnis_id": "679910",
+   "geometry_hash": "dcce1f43d0faedc75f5113c1b2b55631aca1020b2323c372675d00d31e1cb5bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4206,10 +6561,10 @@
     "Yazoo City"
    ],
    "bbox": [
-    -90.92509,
-    32.33525,
-    -90.16741,
-    33.55207
+    -90.925094,
+    32.335255,
+    -90.167323,
+    33.552065
    ],
    "wikidata": "Q1201857",
    "charted": true,
@@ -4220,6 +6575,18 @@
     "redwood-landing-ms",
     "vicksburg-waterfront-ms",
     "yazoo-city-landing-ms"
+   ],
+   "water_id": "yazoo-river-ms",
+   "gnis_id": "695222",
+   "geometry_hash": "3a30fbec6075391ac288e27252331c25f064cca34adcacd66b79e24c8111e3d2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "yazoo-river-boat-launch-near-vicksburg-ms",
+    "yazoo-river-boat-launch-near-vicksburg-ms-2"
    ],
    "advisories": []
   },
@@ -4232,10 +6599,10 @@
     "Kosciusko"
    ],
    "bbox": [
-    -89.68363,
-    32.66899,
-    -89.6685,
-    32.81719
+    -89.683632,
+    32.668992,
+    -89.668496,
+    32.817192
    ],
    "wikidata": null,
    "charted": false,
@@ -4243,6 +6610,15 @@
    "launches": [
     "sanders-landing-ms"
    ],
+   "water_id": "yockanookany-river-ms",
+   "gnis_id": null,
+   "geometry_hash": "0726df554f077150b6e4d16ddd7f5af309f7ddea2af1f23597092354222c9bd3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]
