@@ -150,7 +150,7 @@
     "machine_readable": true,
     "sample_record": {
       "OERS_No": "2025-0798",
-      "Name": "Sewage - 2230 N Main Ave",
+      "Name": "Sewage - [house number removed] N Main Ave (the Name field is never read by the ingester)",
       "Date2": "2025-03-26",
       "Time": "15:26:00",
       "Q_released_gal": 100,
