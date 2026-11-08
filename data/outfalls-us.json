@@ -132662,8 +132662,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 114 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name (the nearest water's name ('Willamette River') shares a word with the receiving water ('Willamette Run') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 114 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026361",
@@ -132691,8 +132691,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 132 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name (the nearest water's name ('Willamette River') shares a word with the receiving water ('Willamette Run') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 132 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026361",
@@ -132720,8 +132720,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 132 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name (the nearest water's name ('Willamette River') shares a word with the receiving water ('Willamette Run') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 132 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026361",
@@ -132749,8 +132749,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 41 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name (the nearest water's name ('Willamette River') shares a word with the receiving water ('Willamette Run') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 41 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Willamette Run') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -132779,7 +132779,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 256 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -132808,7 +132808,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 202 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -132837,7 +132837,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 266 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -132866,7 +132866,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 44 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -132895,7 +132895,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 299 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -132923,8 +132923,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Willamette River (willamette-river-or) is the only water of the receiving water's name ('Willamette River') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Willamette River (willamette-river-or) is the only water of the receiving water's name ('Willamette River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -132953,8 +132953,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Willamette River (willamette-river-or) is the only water of the receiving water's name ('Willamette River') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Willamette River (willamette-river-or) is the only water of the receiving water's name ('Willamette River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -132984,7 +132984,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 320 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133014,7 +133014,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 284 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133043,7 +133043,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 327 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133072,7 +133072,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 220 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133102,7 +133102,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 325 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133131,8 +133131,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Willamette River (willamette-river-or) is the only water of the receiving water's name ('Willamette River') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Willamette River (willamette-river-or) is the only water of the receiving water's name ('Willamette River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133161,7 +133161,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 223 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133190,7 +133190,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 321 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133220,7 +133220,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 320 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133250,7 +133250,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 145 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133279,7 +133279,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 220 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133309,7 +133309,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 266 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133338,7 +133338,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 325 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133368,7 +133368,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 273 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133397,7 +133397,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 289 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133426,7 +133426,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 245 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133455,7 +133455,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 321 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -133485,7 +133485,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 257 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133514,7 +133514,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 81 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133543,7 +133543,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 76 m from Willamette River (willamette-river-or), whose name shares a word with the receiving water ('Willamette River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133572,7 +133572,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 250 m from Columbia Slough (columbia-slough-or), whose name shares a word with the receiving water ('Columbia Slough'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133601,7 +133601,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 106 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Columbia Slough') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133630,7 +133630,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 209 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Columbia Slough') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133659,7 +133659,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Columbia Slough (columbia-slough-or), whose name shares a word with the receiving water ('Columbia Slough'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133688,7 +133688,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 378 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Columbia Slough') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133717,7 +133717,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Columbia Slough (columbia-slough-or), whose name shares a word with the receiving water ('Columbia Slough'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133746,7 +133746,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Columbia Slough (columbia-slough-or), whose name shares a word with the receiving water ('Columbia Slough'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133775,7 +133775,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 374 m from Willamette River (willamette-river-or), the nearest openboatlaunch water within 400 m; the receiving water ('Columbia Slough') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0026905",
@@ -133803,8 +133803,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia Slough (columbia-slough-or) is the only water of the receiving water's name ('Columbia Slough') in the state, 2.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia Slough (columbia-slough-or) is the only water of the receiving water's name ('Columbia Slough') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0027561",
@@ -133833,7 +133833,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 45 m from Youngs Bay (youngs-bay-or), whose name shares a word with the receiving water ('Youngs Bay'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0027561",
@@ -133862,7 +133862,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 26 m from Youngs Bay (youngs-bay-or), whose name shares a word with the receiving water ('Youngs Bay'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0027561",
@@ -133891,7 +133891,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 18 m from Youngs Bay (youngs-bay-or), whose name shares a word with the receiving water ('Youngs Bay'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0027561",
@@ -133920,7 +133920,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 56 m from Youngs Bay (youngs-bay-or), whose name shares a word with the receiving water ('Youngs Bay'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "OR0027561",
@@ -133938,18 +133938,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1904,
    "lon": -123.85768,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2830,
+   "distance_m": 336,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 336 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.8 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.8 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -133967,18 +133974,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19229,
    "lon": -123.8458,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2763,
+   "distance_m": 223,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 223 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.8 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.8 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -133996,18 +134010,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.18994,
    "lon": -123.8504,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2968,
+   "distance_m": 447,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 447 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134025,18 +134046,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19131,
    "lon": -123.84759,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2850,
+   "distance_m": 318,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 318 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134054,18 +134082,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1914,
    "lon": -123.8404,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2926,
+   "distance_m": 367,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 367 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134083,18 +134118,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1915,
    "lon": -123.83966,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2924,
+   "distance_m": 361,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 361 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134112,18 +134154,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19111,
    "lon": -123.8384,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2982,
+   "distance_m": 415,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 415 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134141,18 +134190,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1915,
    "lon": -123.8376,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2949,
+   "distance_m": 378,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 378 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134170,18 +134226,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1917,
    "lon": -123.8364,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2941,
+   "distance_m": 366,
    "alternatives": [],
-   "match": "name_only",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 2.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 366 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (2.9 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134199,18 +134262,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1914,
    "lon": -123.83555,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 2984,
+   "distance_m": 406,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 406 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134228,18 +134298,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19111,
    "lon": -123.83448,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3029,
+   "distance_m": 447,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 447 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134257,18 +134334,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19101,
    "lon": -123.8336,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3051,
+   "distance_m": 466,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 466 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134286,18 +134370,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19092,
    "lon": -123.8325,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3074,
+   "distance_m": 485,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 485 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134315,18 +134406,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19062,
    "lon": -123.8316,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3118,
+   "distance_m": 525,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 525 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134344,18 +134442,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19023,
    "lon": -123.83007,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3179,
+   "distance_m": 581,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 581 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134373,18 +134478,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19013,
    "lon": -123.8287,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3206,
+   "distance_m": 603,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 603 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134402,18 +134514,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.18974,
    "lon": -123.82733,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3266,
+   "distance_m": 658,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 658 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134431,18 +134550,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.18964,
    "lon": -123.82606,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3292,
+   "distance_m": 679,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 679 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134460,18 +134586,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.18945,
    "lon": -123.8259,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3315,
+   "distance_m": 702,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 702 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134489,18 +134622,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19023,
    "lon": -123.8225,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3270,
+   "distance_m": 692,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 692 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134518,18 +134658,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19013,
    "lon": -123.8202,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3308,
+   "distance_m": 791,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 791 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134547,18 +134694,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19082,
    "lon": -123.81774,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3262,
+   "distance_m": 814,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 814 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.3 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134576,18 +134730,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1916,
    "lon": -123.8133,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3229,
+   "distance_m": 905,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 905 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134605,18 +134766,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19209,
    "lon": -123.8122,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3188,
+   "distance_m": 896,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 896 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134634,18 +134802,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19336,
    "lon": -123.8076,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3103,
+   "distance_m": 941,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 941 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134663,18 +134838,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19336,
    "lon": -123.806,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3122,
+   "distance_m": 1003,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1003 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134692,18 +134874,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19375,
    "lon": -123.8047,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3094,
+   "distance_m": 1013,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1013 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134721,18 +134910,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19454,
    "lon": -123.8014,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3047,
+   "distance_m": 1058,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1058 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134750,18 +134946,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19463,
    "lon": -123.79084,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3163,
+   "distance_m": 1457,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1457 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134779,18 +134982,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19561,
    "lon": -123.78937,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3073,
+   "distance_m": 1411,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1411 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134808,18 +135018,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.1963,
    "lon": -123.78555,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3042,
+   "distance_m": 1487,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1487 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.1 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134837,18 +135054,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19659,
    "lon": -123.7835,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3035,
+   "distance_m": 1536,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1536 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134866,18 +135090,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.19679,
    "lon": -123.78262,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3023,
+   "distance_m": 1549,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1549 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.0 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "OR0027561",
@@ -134895,18 +135126,25 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000723995",
    "lat": 46.196,
    "lon": -123.7781,
-   "water_slug": "columbia-river-or",
+   "water_slug": "columbia-river-umatilla-or",
    "water_name": "Columbia River",
    "water_kind": "river",
-   "distance_m": 3165,
+   "distance_m": 1806,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Columbia River (columbia-river-or) is the only water of the receiving water's name ('Columbia River') in the state, 3.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Columbia River' by name and the permittee's town (astoria): the only record of that name there; the research lists Columbia River for the permit (data/dischargers.json); Columbia River (columbia-river-umatilla-or, NHDPlus V2.1 record), 1806 m from the point; replaces scripts/match_outfalls.py's match by name alone to Columbia River (columbia-river-or): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "replaced_match": {
+    "water_slug": "columbia-river-or",
+    "water_name": "Columbia River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (3.2 km); a water of the same name (columbia-river-umatilla-or) lies within 2 km)"
+   }
   },
   {
    "npdes_permit": "PR0021555",
