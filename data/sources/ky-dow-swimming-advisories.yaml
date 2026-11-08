@@ -1,0 +1,33 @@
+id: "ky-dow-swimming-advisories"
+name: "Kentucky swimming advisories (DOW and Department for Public Health)"
+url: "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx"
+homepage: "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx"
+kind: "html"
+level: "state"
+# Notes (research/ky, status candidate, verified fetched, checked 2026-11-07): Standing advisories
+#   in prose with no dates and no table: registered as a watched channel (no records); a stretch
+#   model of the named reaches is an opportunity.
+# Access detail (research, quoted): Page fetched (raw/ky-dow-swimming-advisories-2026-11-03.html).
+#   Standing advisories 'in place for several years', no dates.
+# Can fill: advice_text, waterbody
+# Cannot fill: started_at; valid_until
+# Waters: Upper Cumberland River, North Fork Kentucky River, Licking River (Banklick Creek, Three
+#   Mile Creek)
+# Research notes: Quote: "People should avoid recreational contact with waters in the areas
+#   specified because of the bacteria, which occur in human and animal waste and indicate the
+#   presence of untreated or inadequately treated sewage." And: "The agencies also recommend against
+#   swimming or other full-body contact with surface waters immediately following heavy rainfall
+#   events ... due to an increased potential for exposure to ... bypasses from sewage collection
+#   systems, combined sewer overflows".
+cadence: null
+license: "none stated"
+attribution: "Kentucky Division of Water / Cabinet for Health and Family Services"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["KY"]
+access: ["html"]
+access_detail: "Page fetched (raw/ky-dow-swimming-advisories-2026-11-03.html). Standing advisories 'in place for several years', no dates."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-07"

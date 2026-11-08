@@ -62,6 +62,7 @@ STATE_NAMES = {"CT": "Connecticut", "MA": "Massachusetts", "RI": "Rhode Island",
                "SD": "South Dakota",
                "MS": "Mississippi", "NE": "Nebraska", "AK": "Alaska",
                "NM": "New Mexico", "HI": "Hawaii",
+               "KY": "Kentucky",
                "AL": "Alabama", "TX": "Texas"}
 PRECISION = {"address": 50, "intersection": 30, "pump_station": 100, "plant": 250, "frs_plant": 250}
 NEAR_OPERATOR_KM = 30
