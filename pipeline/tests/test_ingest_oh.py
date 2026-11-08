@@ -536,8 +536,47 @@ def test_a_qualified_water_is_not_placed_on_its_plain_namesake():
     assert res.by_name("Huron River", "MI", 42.25, -83.7)[0] == ["huron-river-mi"]
     assert S.qualified_only("huron river", " west branch huron river ")
     assert not S.qualified_only("west creek", " west creek ")
+
+
+def _water_boxes() -> dict:
+    """{slug: bbox} over every water file (openboatlaunch's extracts and the NHD build)."""
+    out = {}
+    for f in sorted((Path(__file__).parents[2] / "data").glob("waters-*.json")):
+        try:
+            d = json.loads(f.read_text())
+        except ValueError:
+            continue
+        for w in (d.get("waters") if isinstance(d, dict) else d) or []:
+            if isinstance(w, dict) and w.get("slug") and w.get("bbox"):
+                out.setdefault(w["slug"], w["bbox"])
+    return out
+
+
+def test_the_missing_list_carries_akrons_and_neorsds_waters():
+    """Audit P2-2 and the re-check of 2026-11-08: each water Akron's sites name is a missing row with its points, or
+    resolved (the water batch) to a record that holds those points (the rerun batch built little-cuyahoga-river-oh);
+    NEORSD's Mill Creek and Big Creek, which the batch did not build at Cleveland, are rows with the outfalls' points."""
     missing = json.loads((Path(__file__).parents[2] / "research" / "oh" / "receiving-waters-missing.json").read_text())
-    assert {"Little Cuyahoga River", "Ohio Canal", "Camp Brook"} <= {r["name"] for r in missing["rows"]}
+    rows = {r["name"]: r for r in missing["rows"]}
+    resolved = {r["name"]: r for r in missing.get("resolved") or []}
+    boxes = _water_boxes()
+    for name in ("Little Cuyahoga River", "Ohio Canal", "Camp Brook"):
+        assert name in rows or name in resolved, f"{name} is neither a missing row nor resolved"
+        if name in rows:
+            assert rows[name]["points"] and "oh-akron-cso-notifications" in rows[name]["sources"]
+        else:
+            r = resolved[name]
+            assert r["slugs"] and r["points"]
+            for slug in r["slugs"]:
+                b = boxes.get(slug)
+                if b:                  # the record is in this checkout: it holds the sites' points (about 1 km)
+                    assert all(b[0] - 0.01 <= lon <= b[2] + 0.01 and b[1] - 0.01 <= lat <= b[3] + 0.01
+                               for lat, lon in r["points"]), f"{name} resolved away from Akron's sites"
+    for name, n in (("Mill Creek", 19), ("Big Creek", 14)):
+        r = next((x for x in missing["rows"] if x["name"] == name and "OH0043991" in (x.get("permits") or [])), None)
+        assert r, f"NEORSD's {name} is not on the missing list"
+        assert len(r["points"]) == n and r["counties"] == ["Cuyahoga County"]
+        assert all(41.3 < lat < 41.6 and -81.9 < lon < -81.5 for lat, lon in r["points"])     # Cleveland
 
 
 def test_a_day_precision_start_prints_the_day_only():

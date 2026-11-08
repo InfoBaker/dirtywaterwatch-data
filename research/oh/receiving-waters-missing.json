@@ -11,8 +11,26 @@
   "oh-odh-beachguard": "5 records, fetched 2026-11-08"
  },
  "records_naming_a_water": 8190,
- "waters": 53,
- "reports": 548,
+ "waters": 20,
+ "reports": 350,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in OH": 10,
+  "1 NHD water of that name in OH, none within reach of the reports' places": 2,
+  "2 NHD waters of that name in OH, none within reach of the reports' places": 2,
+  "6 NHD waters of that name in OH, none within reach of the reports' places": 1,
+  "31 NHD waters of that name in OH, none within reach of the reports' places": 1,
+  "3 NHD waters of that name in OH, none within reach of the reports' places": 1,
+  "10 NHD waters of that name in OH, none within reach of the reports' places": 1
+ },
+ "resolved_names": 35,
+ "resolved_reports": 239,
+ "build": {
+  "date": "2026-11-08",
+  "command": "python -m ingest.waters_from_nhd --names research/oh/receiving-waters-missing.json --state OH",
+  "records_built": 33,
+  "names_resolved": 35,
+  "network_requests": 6
+ },
  "rows": [
   {
    "name": "Early Ditch",
@@ -26,25 +44,8 @@
      39.936714,
      -83.059178
     ]
-   ]
-  },
-  {
-   "name": "Adena Brook",
-   "reports": 165,
-   "permits": [],
-   "sources": [
-    "oh-columbus-sewer-overflow"
    ],
-   "points": [
-    [
-     40.045369,
-     -83.02028
-    ],
-    [
-     40.042415,
-     -83.026734
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Walhalla Ravine",
@@ -58,53 +59,8 @@
      40.029252,
      -83.002503
     ]
-   ]
-  },
-  {
-   "name": "Doan Brook",
-   "reports": 20,
-   "permits": [
-    "OH0043991"
    ],
-   "sources": [
-    "oh-neorsd-cso-notification-map"
-   ],
-   "points": [
-    [
-     41.507891,
-     -81.613216
-    ],
-    [
-     41.510379,
-     -81.614593
-    ],
-    [
-     41.518691,
-     -81.617922
-    ],
-    [
-     41.520927,
-     -81.618963
-    ],
-    [
-     41.510821,
-     -81.615839
-    ]
-   ]
-  },
-  {
-   "name": "Rush Run",
-   "reports": 15,
-   "permits": [],
-   "sources": [
-    "oh-columbus-sewer-overflow"
-   ],
-   "points": [
-    [
-     40.077092,
-     -83.022233
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Dugway Brook",
@@ -124,7 +80,8 @@
      41.547846,
      -81.607458
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Grand Lake",
@@ -154,33 +111,8 @@
      -84.421951
     ]
    ],
-   "note": "Grand Lake St. Marys (Auglaize and Mercer counties), the reservoir BeachGuard's beaches are on; not another Grand Lake"
-  },
-  {
-   "name": "Dry Run",
-   "reports": 3,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Auglaize",
-    "Mahoning"
-   ],
-   "points": [
-    [
-     40.570963,
-     -84.084555
-    ],
-    [
-     41.095897,
-     -80.631949
-    ],
-    [
-     41.095237,
-     -80.615892
-    ]
-   ]
+   "note": "Grand Lake St. Marys (Auglaize and Mercer counties), the reservoir BeachGuard's beaches are on; not another Grand Lake",
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Spring Creek",
@@ -200,94 +132,14 @@
      41.436739,
      -81.681896
     ]
-   ]
-  },
-  {
-   "name": "Brandywine Creek",
-   "reports": 2,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Summit"
-   ],
-   "points": [
-    [
-     41.269568,
-     -81.463941
-    ],
-    [
-     41.264967,
-     -81.45166
-    ]
-   ]
-  },
-  {
-   "name": "Carpenter Run",
-   "reports": 2,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Columbiana"
-   ],
-   "points": [
-    [
-     40.645086,
-     -80.574238
-    ],
-    [
-     40.617393,
-     -80.575356
-    ]
-   ]
-  },
-  {
-   "name": "PawPaw Creek",
-   "reports": 2,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Fairfield"
-   ],
-   "spellings": [
-    "PawPaw Creek",
-    "Pawpaw Creek"
-   ],
-   "points": [
-    [
-     39.837065,
-     -82.626458
-    ],
-    [
-     39.848601,
-     -82.598167
-    ]
-   ]
-  },
-  {
-   "name": "Polk Run",
-   "reports": 2,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Hamilton"
-   ],
-   "points": [
-    [
-     39.250379,
-     -84.293187
-    ],
-    [
-     39.250685,
-     -84.296631
-    ]
+   "reason": "6 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -81.68207,
+     "lat": 41.43656,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.43656, -81.68207) (the nearest is 30.9 km away)"
+    }
    ]
   },
   {
@@ -304,51 +156,8 @@
      41.552456,
      -81.599685
     ]
-   ]
-  },
-  {
-   "name": "Treadway Creek",
-   "reports": 2,
-   "permits": [
-    "OH0043991"
    ],
-   "sources": [
-    "oh-neorsd-cso-notification-map"
-   ],
-   "points": [
-    [
-     41.440227,
-     -81.690746
-    ],
-    [
-     41.440782,
-     -81.690272
-    ]
-   ]
-  },
-  {
-   "name": "West Creek",
-   "reports": 2,
-   "permits": [
-    "OH0043991"
-   ],
-   "sources": [
-    "oh-epa-spills-opendata",
-    "oh-neorsd-cso-notification-map"
-   ],
-   "counties": [
-    "Cuyahoga"
-   ],
-   "points": [
-    [
-     41.415563,
-     -81.674132
-    ],
-    [
-     41.383056,
-     -81.691506
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Big Run",
@@ -365,40 +174,14 @@
      39.907497,
      -83.0725
     ]
-   ]
-  },
-  {
-   "name": "Bill Moose Run",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Franklin"
-   ],
-   "points": [
-    [
-     40.070805,
-     -82.997612
-    ]
-   ]
-  },
-  {
-   "name": "Bradford Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Madison"
-   ],
-   "points": [
-    [
-     39.786505,
-     -83.37849
-    ]
+   "reason": "31 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -83.0725,
+     "lat": 39.9075,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.90750, -83.07250) (the nearest is 19.0 km away)"
+    }
    ]
   },
   {
@@ -416,58 +199,8 @@
      39.951169,
      -83.164866
     ]
-   ]
-  },
-  {
-   "name": "Crystal Lake",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-odh-beachguard"
    ],
-   "counties": [
-    "Summit"
-   ],
-   "points": [
-    [
-     41.162888,
-     -81.466965
-    ]
-   ]
-  },
-  {
-   "name": "Delaware Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Lucas"
-   ],
-   "points": [
-    [
-     41.605304,
-     -83.605339
-    ]
-   ]
-  },
-  {
-   "name": "East Fork Eagle Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Adams"
-   ],
-   "points": [
-    [
-     38.790651,
-     -83.543396
-    ]
-   ]
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Fitzgerald Ditch",
@@ -484,7 +217,8 @@
      40.016004,
      -83.264331
     ]
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Green Creek",
@@ -500,108 +234,14 @@
      41.552446,
      -81.543681
     ]
-   ]
-  },
-  {
-   "name": "Hemming Ditch",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Erie"
-   ],
-   "points": [
-    [
-     41.429799,
-     -82.657479
-    ]
-   ]
-  },
-  {
-   "name": "Hudson Run",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Summit"
-   ],
-   "points": [
-    [
-     40.999477,
-     -81.619769
-    ]
-   ]
-  },
-  {
-   "name": "Indian Guyan Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Lawrence"
-   ],
-   "points": [
-    [
-     38.516796,
-     -82.38697
-    ]
-   ]
-  },
-  {
-   "name": "Indian Trail Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Holmes"
-   ],
-   "points": [
-    [
-     40.548161,
-     -81.740131
-    ]
-   ]
-  },
-  {
-   "name": "Jamison Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Ashland"
-   ],
-   "points": [
-    [
-     40.855128,
-     -82.308106
-    ]
-   ]
-  },
-  {
-   "name": "Little Black Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Mercer"
-   ],
-   "points": [
-    [
-     40.664,
-     -84.708776
-    ]
+   "reason": "1 NHD water of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -81.54368,
+     "lat": 41.55245,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.55245, -81.54368) (the nearest is 123.2 km away)"
+    }
    ]
   },
   {
@@ -619,40 +259,14 @@
      40.732666,
      -81.100794
     ]
-   ]
-  },
-  {
-   "name": "Lucy Run",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Clermont"
-   ],
-   "points": [
-    [
-     39.059393,
-     -84.17919
-    ]
-   ]
-  },
-  {
-   "name": "Minnow Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Sandusky"
-   ],
-   "points": [
-    [
-     41.336652,
-     -83.131255
-    ]
+   "reason": "2 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -81.10079,
+     "lat": 40.73267,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.73267, -81.10079) (the nearest is 10.2 km away)"
+    }
    ]
   },
   {
@@ -670,23 +284,14 @@
      39.43908,
      -83.85152
     ]
-   ]
-  },
-  {
-   "name": "Moores Fork",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Clermont"
-   ],
-   "points": [
-    [
-     39.194541,
-     -84.094893
-    ]
+   "reason": "1 NHD water of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -83.85152,
+     "lat": 39.43908,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.43908, -83.85152) (the nearest is 8.9 km away)"
+    }
    ]
   },
   {
@@ -704,23 +309,14 @@
      41.157601,
      -81.439941
     ]
-   ]
-  },
-  {
-   "name": "Mud Run",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Madison"
-   ],
-   "points": [
-    [
-     39.730364,
-     -83.334255
-    ]
+   "reason": "2 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -81.43994,
+     "lat": 41.1576,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.15760, -81.43994) (the nearest is 3.8 km away)"
+    }
    ]
   },
   {
@@ -738,125 +334,10 @@
      -81.646834
     ]
    ],
-   "note": "NEORSD's wording for the Ohio Canal where it reaches the Cuyahoga River"
-  },
-  {
-   "name": "Oldtown Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Hocking"
-   ],
-   "points": [
-    [
-     39.544448,
-     -82.394754
-    ]
-   ]
-  },
-  {
-   "name": "Opossum Run",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Paulding"
-   ],
-   "points": [
-    [
-     41.14995,
-     -84.573442
-    ]
-   ]
-  },
-  {
-   "name": "Packer Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Ottawa"
-   ],
-   "points": [
-    [
-     41.52478,
-     -83.349235
-    ]
-   ]
-  },
-  {
-   "name": "Powers Brook",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Summit"
-   ],
-   "points": [
-    [
-     41.194995,
-     -81.432649
-    ]
-   ]
-  },
-  {
-   "name": "Pusheta Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Auglaize"
-   ],
-   "points": [
-    [
-     40.540817,
-     -84.201234
-    ]
-   ]
-  },
-  {
-   "name": "Rader Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Hancock"
-   ],
-   "points": [
-    [
-     41.157801,
-     -83.798663
-    ]
-   ]
-  },
-  {
-   "name": "Shantee Creek",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Lucas"
-   ],
-   "points": [
-    [
-     41.724077,
-     -83.517531
-    ]
+   "note": "NEORSD's wording for the Ohio Canal where it reaches the Cuyahoga River",
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "parts": [
+    "Ohio Canal"
    ]
   },
   {
@@ -874,23 +355,14 @@
      39.719221,
      -83.888349
     ]
-   ]
-  },
-  {
-   "name": "Smith Ditch",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
    ],
-   "counties": [
-    "Clark"
-   ],
-   "points": [
-    [
-     39.864822,
-     -83.998103
-    ]
+   "reason": "3 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -83.88835,
+     "lat": 39.71922,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.71922, -83.88835) (the nearest is 4.4 km away)"
+    }
    ]
   },
   {
@@ -908,27 +380,18 @@
      40.126111,
      -82.944444
     ]
+   ],
+   "reason": "10 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "places_failed": [
+    {
+     "lon": -82.94444,
+     "lat": 40.12611,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.12611, -82.94444) (the nearest is 74.5 km away)"
+    }
    ]
   },
   {
-   "name": "Springfield Lake Outlet",
-   "reports": 1,
-   "permits": [],
-   "sources": [
-    "oh-epa-spills-opendata"
-   ],
-   "counties": [
-    "Summit"
-   ],
-   "points": [
-    [
-     41.022077,
-     -81.434933
-    ]
-   ]
-  },
-  {
-   "name": "Little Cuyahoga River",
+   "name": "Camp Brook",
    "reports": 0,
    "permits": [
     "OH0023833"
@@ -936,33 +399,18 @@
    "sources": [
     "oh-akron-cso-notifications"
    ],
-   "sites": 16,
+   "sites": 1,
    "points": [
     [
-     41.112778,
-     -81.5275
-    ],
-    [
-     41.059444,
-     -81.474722
-    ],
-    [
-     41.063889,
-     -81.481389
-    ],
-    [
-     41.065,
-     -81.484722
-    ],
-    [
-     41.075,
-     -81.484167
+     41.092917,
+     -81.483472
     ]
    ],
    "counties": [
     "Summit County"
    ],
-   "note": "the national list maps it to the Cuyahoga River's record; it is its own river"
+   "note": "named by Akron's overflow sites; no record",
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Ohio Canal",
@@ -999,28 +447,758 @@
    "counties": [
     "Summit County"
    ],
-   "note": "named by Akron's overflow sites; no record"
+   "note": "named by Akron's overflow sites; no record",
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
-   "name": "Camp Brook",
-   "reports": 0,
+   "name": "Mill Creek",
+   "reports": 21,
    "permits": [
-    "OH0023833"
+    "OH0043991"
    ],
    "sources": [
-    "oh-akron-cso-notifications"
+    "oh-neorsd-cso-notification-map"
    ],
-   "sites": 1,
+   "outfalls": 19,
    "points": [
     [
-     41.092917,
-     -81.483472
+     41.434976,
+     -81.635315
+    ],
+    [
+     41.440078,
+     -81.632953
+    ],
+    [
+     41.440466,
+     -81.633038
+    ],
+    [
+     41.441948,
+     -81.633328
+    ],
+    [
+     41.444314,
+     -81.624939
+    ],
+    [
+     41.4434,
+     -81.623737
+    ],
+    [
+     41.441715,
+     -81.619764
+    ],
+    [
+     41.440026,
+     -81.596701
+    ],
+    [
+     41.440558,
+     -81.592292
+    ],
+    [
+     41.436279,
+     -81.579366
+    ],
+    [
+     41.426045,
+     -81.559444
+    ],
+    [
+     41.420623,
+     -81.624052
+    ],
+    [
+     41.425603,
+     -81.630413
+    ],
+    [
+     41.432864,
+     -81.606192
+    ],
+    [
+     41.44448,
+     -81.632872
+    ],
+    [
+     41.431056,
+     -81.633747
+    ],
+    [
+     41.437907,
+     -81.61295
+    ],
+    [
+     41.440107,
+     -81.596114
+    ],
+    [
+     41.435858,
+     -81.63658
     ]
    ],
    "counties": [
-    "Summit County"
+    "Cuyahoga County"
    ],
-   "note": "named by Akron's overflow sites; no record"
+   "reach_ids": [],
+   "note": "NEORSD's Mill Creek in Cleveland: the national list's Mill Creek holds other places' reaches; EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's CSO alerts map) place it"
+  },
+  {
+   "name": "Big Creek",
+   "reports": 20,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "outfalls": 14,
+   "points": [
+    [
+     41.446149,
+     -81.686923
+    ],
+    [
+     41.445343,
+     -81.703939
+    ],
+    [
+     41.447346,
+     -81.71002
+    ],
+    [
+     41.447186,
+     -81.712158
+    ],
+    [
+     41.450498,
+     -81.723487
+    ],
+    [
+     41.447768,
+     -81.734699
+    ],
+    [
+     41.448733,
+     -81.763891
+    ],
+    [
+     41.448692,
+     -81.763785
+    ],
+    [
+     41.44519,
+     -81.764593
+    ],
+    [
+     41.453227,
+     -81.766556
+    ],
+    [
+     41.451062,
+     -81.728003
+    ],
+    [
+     41.423864,
+     -81.801559
+    ],
+    [
+     41.448623,
+     -81.754696
+    ],
+    [
+     41.448758,
+     -81.763955
+    ]
+   ],
+   "counties": [
+    "Cuyahoga County"
+   ],
+   "reach_ids": [],
+   "note": "NEORSD's Big Creek in Cleveland: the national list's Big Creek holds other places' reaches; EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's CSO alerts map) place it"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Adena Brook",
+   "reports": 165,
+   "slugs": [
+    "adena-brook-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.045369,
+     -83.02028
+    ],
+    [
+     40.042415,
+     -83.026734
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -83.02028,
+     "lat": 40.04537,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.04537, -83.02028) (the nearest is 2.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Doan Brook",
+   "reports": 20,
+   "slugs": [
+    "doan-brook-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.507891,
+     -81.613216
+    ],
+    [
+     41.510379,
+     -81.614593
+    ],
+    [
+     41.518691,
+     -81.617922
+    ],
+    [
+     41.520927,
+     -81.618963
+    ],
+    [
+     41.510821,
+     -81.615839
+    ]
+   ]
+  },
+  {
+   "name": "Rush Run",
+   "reports": 15,
+   "slugs": [
+    "rush-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.077092,
+     -83.022233
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -83.02223,
+     "lat": 40.07709,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.07709, -83.02223) (the nearest is 105.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Dry Run",
+   "reports": 3,
+   "slugs": [
+    "dry-run-oh",
+    "dry-run-1071287-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.570963,
+     -84.084555
+    ],
+    [
+     41.095897,
+     -80.631949
+    ],
+    [
+     41.095237,
+     -80.615892
+    ]
+   ]
+  },
+  {
+   "name": "Brandywine Creek",
+   "reports": 2,
+   "slugs": [
+    "brandywine-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.269568,
+     -81.463941
+    ],
+    [
+     41.264967,
+     -81.45166
+    ]
+   ]
+  },
+  {
+   "name": "Carpenter Run",
+   "reports": 2,
+   "slugs": [
+    "carpenter-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.645086,
+     -80.574238
+    ],
+    [
+     40.617393,
+     -80.575356
+    ]
+   ]
+  },
+  {
+   "name": "PawPaw Creek",
+   "reports": 2,
+   "slugs": [
+    "pawpaw-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.837065,
+     -82.626458
+    ],
+    [
+     39.848601,
+     -82.598167
+    ]
+   ]
+  },
+  {
+   "name": "Polk Run",
+   "reports": 2,
+   "slugs": [
+    "polk-run-oh"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.250379,
+     -84.293187
+    ],
+    [
+     39.250685,
+     -84.296631
+    ]
+   ]
+  },
+  {
+   "name": "Treadway Creek",
+   "reports": 2,
+   "slugs": [
+    "treadway-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.440227,
+     -81.690746
+    ],
+    [
+     41.440782,
+     -81.690272
+    ]
+   ]
+  },
+  {
+   "name": "West Creek",
+   "reports": 2,
+   "slugs": [
+    "west-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.415563,
+     -81.674132
+    ],
+    [
+     41.383056,
+     -81.691506
+    ]
+   ]
+  },
+  {
+   "name": "Bill Moose Run",
+   "reports": 1,
+   "slugs": [
+    "bill-moose-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.070805,
+     -82.997612
+    ]
+   ]
+  },
+  {
+   "name": "Bradford Creek",
+   "reports": 1,
+   "slugs": [
+    "bradford-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.786505,
+     -83.37849
+    ]
+   ]
+  },
+  {
+   "name": "Crystal Lake",
+   "reports": 1,
+   "slugs": [
+    "crystal-lake-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.162888,
+     -81.466965
+    ]
+   ]
+  },
+  {
+   "name": "Delaware Creek",
+   "reports": 1,
+   "slugs": [
+    "delaware-creek-oh"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.605304,
+     -83.605339
+    ]
+   ]
+  },
+  {
+   "name": "East Fork Eagle Creek",
+   "reports": 1,
+   "slugs": [
+    "east-fork-eagle-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.790651,
+     -83.543396
+    ]
+   ]
+  },
+  {
+   "name": "Hemming Ditch",
+   "reports": 1,
+   "slugs": [
+    "hemming-ditch-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.429799,
+     -82.657479
+    ]
+   ]
+  },
+  {
+   "name": "Hudson Run",
+   "reports": 1,
+   "slugs": [
+    "hudson-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.999477,
+     -81.619769
+    ]
+   ]
+  },
+  {
+   "name": "Indian Guyan Creek",
+   "reports": 1,
+   "slugs": [
+    "indian-guyan-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.516796,
+     -82.38697
+    ]
+   ]
+  },
+  {
+   "name": "Indian Trail Creek",
+   "reports": 1,
+   "slugs": [
+    "indian-trail-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.548161,
+     -81.740131
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -81.74013,
+     "lat": 40.54816,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.54816, -81.74013) (the nearest is 3.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Jamison Creek",
+   "reports": 1,
+   "slugs": [
+    "jamison-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.855128,
+     -82.308106
+    ]
+   ]
+  },
+  {
+   "name": "Little Black Creek",
+   "reports": 1,
+   "slugs": [
+    "little-black-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.664,
+     -84.708776
+    ]
+   ]
+  },
+  {
+   "name": "Lucy Run",
+   "reports": 1,
+   "slugs": [
+    "lucy-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.059393,
+     -84.17919
+    ]
+   ]
+  },
+  {
+   "name": "Minnow Creek",
+   "reports": 1,
+   "slugs": [
+    "minnow-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.336652,
+     -83.131255
+    ]
+   ]
+  },
+  {
+   "name": "Moores Fork",
+   "reports": 1,
+   "slugs": [
+    "moores-fork-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.194541,
+     -84.094893
+    ]
+   ]
+  },
+  {
+   "name": "Mud Run",
+   "reports": 1,
+   "slugs": [
+    "mud-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.730364,
+     -83.334255
+    ]
+   ]
+  },
+  {
+   "name": "Oldtown Creek",
+   "reports": 1,
+   "slugs": [
+    "oldtown-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.544448,
+     -82.394754
+    ]
+   ]
+  },
+  {
+   "name": "Opossum Run",
+   "reports": 1,
+   "slugs": [
+    "opossum-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.14995,
+     -84.573442
+    ]
+   ]
+  },
+  {
+   "name": "Packer Creek",
+   "reports": 1,
+   "slugs": [
+    "packer-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.52478,
+     -83.349235
+    ]
+   ]
+  },
+  {
+   "name": "Powers Brook",
+   "reports": 1,
+   "slugs": [
+    "powers-brook-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.194995,
+     -81.432649
+    ]
+   ]
+  },
+  {
+   "name": "Pusheta Creek",
+   "reports": 1,
+   "slugs": [
+    "pusheta-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.540817,
+     -84.201234
+    ]
+   ]
+  },
+  {
+   "name": "Rader Creek",
+   "reports": 1,
+   "slugs": [
+    "rader-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.157801,
+     -83.798663
+    ]
+   ]
+  },
+  {
+   "name": "Shantee Creek",
+   "reports": 1,
+   "slugs": [
+    "shantee-creek-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.724077,
+     -83.517531
+    ]
+   ]
+  },
+  {
+   "name": "Smith Ditch",
+   "reports": 1,
+   "slugs": [
+    "smith-ditch-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.864822,
+     -83.998103
+    ]
+   ]
+  },
+  {
+   "name": "Springfield Lake Outlet",
+   "reports": 1,
+   "slugs": [
+    "springfield-lake-outlet-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.022077,
+     -81.434933
+    ]
+   ]
+  },
+  {
+   "name": "Little Cuyahoga River",
+   "reports": 0,
+   "slugs": [
+    "little-cuyahoga-river-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.112778,
+     -81.5275
+    ],
+    [
+     41.059444,
+     -81.474722
+    ],
+    [
+     41.063889,
+     -81.481389
+    ],
+    [
+     41.065,
+     -81.484722
+    ],
+    [
+     41.075,
+     -81.484167
+    ]
+   ]
   }
  ]
 }
