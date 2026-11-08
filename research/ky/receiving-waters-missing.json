@@ -1,7 +1,7 @@
 {
  "about": "Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as reaching a water), Louisville MSD's discharge notices, the Division of Water's HAB Viewer (every point's lake in the layer read on 2026-11-07) and the Division's standing swimming advisories (the waters and stretches the page names), with the number of records giving each. The form's placeholders ('Unnamed Tributary or Unknown', 'Unnamed') and reports that say the discharge reached no water are left out.",
  "state": "KY",
- "waters": 20,
+ "waters": 22,
  "reports": 14,
  "rows": [
   {
@@ -213,7 +213,92 @@
    ]
   },
   {
+   "name": "South Fork Beargrass Creek",
+   "reports": 0,
+   "permits": [
+    "KY0022411"
+   ],
+   "sources": [
+    "ky-dow-cso-sites-layer"
+   ],
+   "points": [
+    [
+     38.215278,
+     -85.711111
+    ],
+    [
+     38.240833,
+     -85.736111
+    ],
+    [
+     38.251944,
+     -85.727778
+    ],
+    [
+     38.244444,
+     -85.735278
+    ],
+    [
+     38.243889,
+     -85.735556
+    ]
+   ],
+   "counties": [
+    "Jefferson"
+   ],
+   "outfalls": 41,
+   "reach_ids": [
+    "5140101000472"
+   ],
+   "gnis_ids": [
+    "503905"
+   ]
+  },
+  {
    "name": "Beargrass Creek",
+   "reports": 0,
+   "permits": [
+    "KY0022411"
+   ],
+   "sources": [
+    "ky-dow-cso-sites-layer"
+   ],
+   "points": [
+    [
+     38.256667,
+     -85.731389
+    ],
+    [
+     38.256389,
+     -85.715
+    ],
+    [
+     38.258611,
+     -85.731389
+    ],
+    [
+     38.260833,
+     -85.719167
+    ],
+    [
+     38.258333,
+     -85.720556
+    ]
+   ],
+   "counties": [
+    "Jefferson"
+   ],
+   "outfalls": 14,
+   "reach_ids": [
+    "5140101000175",
+    "5140101000471"
+   ],
+   "gnis_ids": [
+    "486584"
+   ]
+  },
+  {
+   "name": "Middle Fork Beargrass Creek",
    "reports": 0,
    "permits": [
     "KY0022411"
@@ -227,31 +312,31 @@
      -85.695
     ],
     [
-     38.215278,
-     -85.711111
+     38.251111,
+     -85.723611
     ],
     [
-     38.256667,
-     -85.731389
+     38.251667,
+     -85.718889
     ],
     [
-     38.256389,
-     -85.715
+     38.233889,
+     -85.688333
     ],
     [
-     38.258611,
-     -85.731389
+     38.248333,
+     -85.700278
     ]
    ],
    "counties": [
     "Jefferson"
    ],
-   "outfalls": 69,
+   "outfalls": 14,
    "reach_ids": [
-    "5140101000175",
-    "5140101000471",
-    "5140101000472",
     "5140101000475"
+   ],
+   "gnis_ids": [
+    "498112"
    ]
   },
   {
@@ -291,6 +376,9 @@
    "outfalls": 7,
    "reach_ids": [
     "5140101000484"
+   ],
+   "gnis_ids": [
+    "498252"
    ]
   },
   {
