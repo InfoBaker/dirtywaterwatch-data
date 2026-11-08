@@ -47,7 +47,8 @@ COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields"
                "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords"}
 PLATFORM_KEYS = {
     "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows", "if_changed"},
-    "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata"},
+    "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata",
+               "query_retries", "retry_wait_s"},
     "csv": {"url", "params", "csv", "session"}, "json": {"url", "params", "json"}, "rss": {"url", "params"},
     "atom": {"url", "params"},
 }
