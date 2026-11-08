@@ -381307,19 +381307,15 @@
   "npdes_permits": [
    "UTG071774"
   ],
-  "receiving_waters": [
-   "Beer Creek"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "outfall_count": null,
+  "outfalls_source": null,
   "notification_channel": "Utah Admin. Code R317-801-4: a Class 1 sanitary sewer overflow (one that reaches waters of the state, exceeds 5,000 gallons, affects more than five private structures or any public, commercial or industrial building, or may be a risk to public health; R317-801-1(13)) is reported to the Division of Water Quality orally within 24 hours and in writing within five calendar days; Class 2 overflows go only in the annual sewer management report. DWQ publishes no list of the reports. An overflow becomes public when someone also calls DEQ's spill hotline (the Environmental Incidents layer) or the permittee files it electronically with EPA (its overflow tables, https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No duty to tell the public was found. The rule and the permit bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
-  "towns": [
-   "Payson"
-  ],
-  "notes": "EPA ICIS-NPDES: UTG071774 Payson Waste Water Treatment Plant. A construction dewatering coverage (general permit UTG07) at the Payson wastewater plant's project; not a sewer operator.",
+  "towns": [],
+  "notes": "UTG071774 is held back from the outfall registry: ICIS-NPDES extract 2026-10-30 (data/outfalls-plants-us.json, read 2026-11-08): a general permit coverage (GPC) under Utah's construction dewatering permit UTG07, permittee a construction company (Alder Construction) at the Payson wastewater plant's project, no POTW component; its limit sets ('Standard Monitoring', 'Outfall 1 Sanitary Sewer Manhole') monitor the dewatering point: a construction project's dewatering, not a sewage plant's outfall. A construction dewatering coverage (general permit UTG07) at the Payson wastewater plant's project; not a sewer operator.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382844,19 +382840,15 @@
   "npdes_permits": [
    "UTG072174"
   ],
-  "receiving_waters": [
-   "Provo River"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "outfall_count": null,
+  "outfalls_source": null,
   "notification_channel": "Utah Admin. Code R317-801-4: a Class 1 sanitary sewer overflow (one that reaches waters of the state, exceeds 5,000 gallons, affects more than five private structures or any public, commercial or industrial building, or may be a risk to public health; R317-801-1(13)) is reported to the Division of Water Quality orally within 24 hours and in writing within five calendar days; Class 2 overflows go only in the annual sewer management report. DWQ publishes no list of the reports. An overflow becomes public when someone also calls DEQ's spill hotline (the Environmental Incidents layer) or the permittee files it electronically with EPA (its overflow tables, https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No duty to tell the public was found. The rule and the permit bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
-  "towns": [
-   "Heber City"
-  ],
-  "notes": "EPA ICIS-NPDES: UTG072174 Uvu Sewer Lift Station. A construction dewatering coverage (general permit UTG07) at a sewer lift station project; not a sewer operator.",
+  "towns": [],
+  "notes": "UTG072174 is held back from the outfall registry: ICIS-NPDES extract 2026-10-30 (read 2026-11-08): a construction dewatering coverage (UTG07), facility 'UVU SEWER LIFT STATION', permittee a construction company, no POTW component: a construction project, not a sewage outfall. A construction dewatering coverage (general permit UTG07) at a sewer lift station project; not a sewer operator.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387296,19 +387288,15 @@
   "npdes_permits": [
    "UTG072162"
   ],
-  "receiving_waters": [
-   "Utah Lake"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "outfall_count": null,
+  "outfalls_source": null,
   "notification_channel": "Utah Admin. Code R317-801-4: a Class 1 sanitary sewer overflow (one that reaches waters of the state, exceeds 5,000 gallons, affects more than five private structures or any public, commercial or industrial building, or may be a risk to public health; R317-801-1(13)) is reported to the Division of Water Quality orally within 24 hours and in writing within five calendar days; Class 2 overflows go only in the annual sewer management report. DWQ publishes no list of the reports. An overflow becomes public when someone also calls DEQ's spill hotline (the Environmental Incidents layer) or the permittee files it electronically with EPA (its overflow tables, https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No duty to tell the public was found. The rule and the permit bind a private permittee as they bind a public one. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
-  "towns": [
-   "Provo"
-  ],
-  "notes": "EPA ICIS-NPDES: UTG072162 Mt. Vista Parkway Sewer Reroute Phase 2. A construction dewatering coverage (general permit UTG07) at a sewer reroute in Provo; not a sewer operator.",
+  "towns": [],
+  "notes": "UTG072162 is held back from the outfall registry: ICIS-NPDES extract 2026-10-30 (read 2026-11-08): a construction dewatering coverage (UTG07), facility 'MT. VISTA PARKWAY SEWER REROUTE PHASE 2', permittee a construction company, no POTW component: a construction project, not a sewage outfall. A construction dewatering coverage (general permit UTG07) at a sewer reroute in Provo; not a sewer operator.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [

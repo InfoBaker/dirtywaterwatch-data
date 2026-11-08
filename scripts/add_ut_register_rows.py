@@ -18,8 +18,8 @@ Rows
     telephone and letter; not published), or <id>-epa-report for a tribal permit (read through EPA's tables, the
     echo-sewer-overflow feed); an operator with a report in EPA's tables also gets its <id>-epa-report row.
   - Statewide: DEQ's spill hotline log (the ut-deq-environmental-incidents feed), DWQ's unpublished Class 1 reports, EPA's
-    tables, DWQ's recreational advisory layer (the ut-dwq-recreational-advisories feed) and its page, habs.utah.gov (403
-    to scripts), the old spill search site (expired certificate), Zion National Park's cyanobacteria page, the local
+    tables, DWQ's recreational advisory layer (the ut-dwq-recreational-advisories feed) and its page (habs.utah.gov now
+    redirects there), the old spill search site (expired certificate), Zion National Park's cyanobacteria page, the local
     health departments, Salt Lake County's Jordan River algae app, Utah Water Watch and Swim Guide.
 A rerun replaces every ut- row it makes. Validated before writing.
 """
@@ -44,7 +44,7 @@ INCIDENTS = "ut-deq-environmental-incidents"
 REC = "ut-dwq-recreational-advisories"
 ECHO = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 RULE_URL = "https://www.law.cornell.edu/regulations/utah/Utah-Admin-Code-R317-801-4"
-REC_PAGE = "https://deq.utah.gov/water-quality/recreational-water-quality-home"
+REC_PAGE = "https://deq.utah.gov/dwq/recreational-water-quality"
 LAW = "ut-law-r317-801"
 Q_RULE = ('Utah Admin. Code R317-801-4: "A Class 1 SSO shall be reported orally within 24 hrs and with a written report '
           'submitted to the DWQ within five calendar days"; R317-801-1(13) defines a Class 1 overflow (one that reaches '
@@ -104,14 +104,8 @@ AGENCY = [
      "unmonitored_reason": None, "publishes": "link_only", "link_text": "DWQ's Recreational Waters Map",
      "records": False, "every_hours": 24, "noun": "Voluntary page",
      "note": ("DWQ's recreational water page explains the bloom and E. coli advisories and links the map; watched for a "
-              "new map address. Voluntary."),
-     "sources": [REC]},
-    {"id": "ut-habs-utah-gov", "agency": "Utah Division of Water Quality",
-     "name": "Utah Division of Water Quality (habs.utah.gov)", "channel_kind": "state_alert_page",
-     "urls": ["https://habs.utah.gov/"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
-     "monitored": False, "unmonitored_reason": "bot_wall", "publishes": "unknown",
-     "note": ("DWQ's harmful algal bloom site answers 403 to scripts (2026-11-03); its advisories are read from the "
-              "map's layer instead (ut-dwq-recreational-advisories)."),
+              "new map address. Its old address and habs.utah.gov, which answered 403 to scripts on 2026-11-03, both "
+              "redirect here (2026-11-08). Voluntary."),
      "sources": [REC]},
     {"id": "ut-deq-spill-search", "agency": "Utah Department of Environmental Quality",
      "name": "Utah Department of Environmental Quality (Environmental Incidents search site)",
@@ -125,7 +119,7 @@ AGENCY = [
     {"id": "ut-nps-zion-cyanobacteria", "agency": "National Park Service, Zion National Park",
      "name": "Zion National Park (toxic cyanobacteria page)", "channel_kind": "shared_site",
      "urls": ["https://www.nps.gov/zion/planyourvisit/toxic-cyanobacteria-bloom-in-the-virgin-river-and-the-streams-"
-              "of-zion-national-park.html"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
+              "of-zion-national-park.htm"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
      "monitored": True, "unmonitored_reason": None, "publishes": "status", "records": False, "every_hours": 24,
      "noun": "Voluntary page",
      "note": ("The park's standing advisory on toxic cyanobacteria in the Virgin River and its forks, which DWQ's map "

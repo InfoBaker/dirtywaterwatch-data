@@ -210,7 +210,7 @@ def test_every_utah_permit_is_in_exactly_one_row():
     plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
               if r.get("state") == "UT"}
     research = {r["npdes_permit"] for r in json.loads((ROOT / "research" / "ut" / "dischargers.json").read_text())}
-    assert len(plants) == 93 and all(every[p] == 1 for p in plants | research)
+    assert len(plants) == 90 and all(every[p] == 1 for p in plants | research)        # 93 less the 3 dewatering coverages
     rows = ops()
     held = [p for r in rows for p in r["npdes_permits"]]
     assert len(held) == len(set(held)) == 221 and sum(1 for p in held if p.startswith("UTG580")) == 126
@@ -234,7 +234,7 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["ut-timpanogos-ssd-epa-report"]["feed_source_id"] == "echo-sewer-overflow"
     assert reg["ut-deq-environmental-incidents"]["feed_source_id"] == "ut-deq-environmental-incidents"
     assert reg["ut-dwq-recreational-advisories"]["feed_source_id"] == "ut-dwq-recreational-advisories"
-    assert reg["ut-habs-utah-gov"]["barrier"] == "bot_wall"
+    assert "ut-habs-utah-gov" not in reg and reg["ut-dwq-recreational-page"]["urls"] == ["https://deq.utah.gov/dwq/recreational-water-quality"]
     assert reg["ut-dwq-class-1-sso-reports"]["barrier"] == "no_web_page"
 
 
@@ -251,7 +251,12 @@ def test_state_text_is_in_the_page_shape():
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
               "Known problems in the data", "What this site does about it"):
         assert f"**{h}.**" in t
-    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    # the share line, filled with the go-live audit's counts (P2-4 applied) and the tail Utah needs (P2-6)
+    assert "of the 116 registered treatment-plant and sewer outfalls in Utah" in t and "90 (78 percent)" in t
+    assert "Utah's reports carry their own map points, so a report is placed by its point, and one that lies on no " \
+           "water is listed with its county, with no water coloured." in t
+    assert "appears on the map at its point with no water coloured" not in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
     assert "387" in t and "8,980" in t and "R317-801-4" in t
 

@@ -85,6 +85,8 @@ def parse(block: dict, content: bytes) -> list[dict]:
 
 
 def source_updated_at(block: dict, meta: dict | None, tz) -> str | None:
+    if not block.get("metadata"):        # a block that does not ask for the layer's edit time never uses one (a replay's
+        return None                      # saved metadata included; Utah go-live audit 2026-11-08 P1-2)
     ms = ((meta or {}).get("editingInfo") or {}).get("lastEditDate")
     try:
         return datetime.fromtimestamp(int(ms) / 1000, UTC).astimezone(tz).isoformat() if ms else None

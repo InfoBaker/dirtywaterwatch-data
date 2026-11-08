@@ -1029,6 +1029,8 @@ COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer giv
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
 COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county too (a row with no point)
+COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives points and a county field (two Gordon Creeks)
+COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
@@ -2555,10 +2557,15 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
                 _caution_only(iv, "citizen_caution", "provenance.citizen_report", basis, ev.get("source_url"))
     code_basis = code_undecoded(ev) if out else None
     if code_basis:
+        # raw._caution_label: the record's own words for a caution-only code the source does explain (DWQ's "Mats CF",
+        # an observation, not an advisory level; Utah go-live audit 2026-11-08 P2-1); keyed on the field
+        clab = (ev.get("raw") or {}).get("_caution_label")
         for iv in out:
             iv["code_undecoded"] = code_basis
             if iv["color"] == "red":
                 _caution_only(iv, "code_caution", "provenance.code_undecoded", code_basis, ev.get("source_url"))
+                if isinstance(clab, str) and clab.strip():
+                    iv["label"] = clab
     # the authority's own name for its level, where it differs from "advisory" (OHA's "precaution", ingest/or_transforms.py):
     # raw._interval_label replaces the rule's label on the record's advisory intervals; keyed on the field, so no other
     # feed changes (review 2026-11-08 P2-2)
