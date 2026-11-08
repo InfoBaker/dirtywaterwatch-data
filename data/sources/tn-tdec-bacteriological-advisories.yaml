@@ -1,0 +1,30 @@
+id: "tn-tdec-bacteriological-advisories"
+name: "TDEC Bacteriological and Fishing Advisories"
+url: "https://www.tn.gov/content/tn/environment/program-areas/wr-water-resources/watershed-stewardship/bacteriological-and-fishing-advisories.html"
+homepage: "https://www.tn.gov/content/tn/environment/program-areas/wr-water-resources/watershed-stewardship/bacteriological-and-fishing-advisories.html"
+kind: "pdf"
+level: "state"
+# Read by the module ingest/tn_tdec_posted_streams.py (source id tn-tdec-bacteriological-advisories,
+#   data/build/events/tn-tdec-bacteriological-advisories.json): the "Bacteriological Advisories in Tennessee" table of
+#   TDEC's posted-streams list (PDF), one standing water-contact advisory per segment, TDEC's own, red while listed.
+# Real read 2026-11-07 (Rev. August 2026): 25 segments (East 11, Southeast 3, Middle 10, West 1); 21 name sewer
+#   collection systems or a sewage plant among the sources (Nashville: the Cumberland River from Bordeaux Bridge, river
+#   mile 185.7, to the Woodland Street Bridge, 190.6, and Browns, Dry, Gibson, McCrory and Richland creeks and a McCrory
+#   tributary; Knoxville: First, Second, Third, East Fork Third and Goose creeks; Chattanooga Creek, Stringers Branch,
+#   a Citico Creek tributary; Coal, East Fork Poplar, Turkey, Dudley, Little Duck and Cypress creeks). No posting gives
+#   a date: the start is this site's first read that found it (poll), the list's revision kept as given.
+# Access detail (research, quoted): WebFetch 2026-11-03: no active water-contact advisory shown;
+#   last update 2026-08-25 (Cash Hollow Creek advisory lifted 2026-08-21); PDF list Rev. 08/25/2026.
+#   tn.gov returns 403 to curl.
+cadence: null
+license: "none stated"
+attribution: "TDEC"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["TN"]
+access: ["html", "pdf"]
+access_detail: "WebFetch 2026-11-03: no active water-contact advisory shown; last update 2026-08-25 (Cash Hollow Creek advisory lifted 2026-08-21); PDF list Rev. 08/25/2026. On 2026-11-07 the page and the PDF answered 200 to the project user agent: the PDF lists 24 stream segments under a standing water-contact advisory, with no dates; watched in the notice register (tn-tdec-bacteriological-advisories, tn-tdec-posted-streams-list), not read into records."
+machine_readable: true
+legal_basis: "TDEC posted-streams list: \"it is the responsibility of the Department of Environment and Conservation to post warning signs so that the public will be aware of the threat to public health\""
+checked: "2026-11-07"
