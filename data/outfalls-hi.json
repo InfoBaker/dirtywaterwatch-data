@@ -54,7 +54,7 @@
    "match": "none",
    "water_match": "none: no record named 'PACIFIC OCEAN' in HI",
    "no_water_reason": "no record named 'PACIFIC OCEAN' in HI",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "HIF014798",
@@ -98,7 +98,7 @@
    "distance_m": 71,
    "match": "geometry",
    "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 800005248 (EPA), no snapping; Konohiki Stream (konohiki-stream-hi, openboatlaunch), 71 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-07)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   }
  ]
 }
