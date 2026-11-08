@@ -790,14 +790,38 @@ def redact_status_texts(st: dict, r: Redactor, swaps_of: dict | None = None) -> 
 
 # ---------------------------------------------------------------- the blocklist self-check
 
-def blocklist_hits(out_dir: Path, names: list[str]) -> list[str]:
+def scan_stamp(names: list[str]) -> str:
+    """What a clean scan result rests on besides the text: the names and the scanning code (build/redact.py)."""
+    import hashlib
+    from build import redact as _redact
+    h = hashlib.sha256(json.dumps(sorted(names)).encode())
+    h.update(Path(_redact.__file__).read_bytes())
+    return h.hexdigest()
+
+
+def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None) -> list[str]:
     """The files of out_dir that carry a name of the owner's blocklist (data/build/name-blocklist.json),
     relative to out_dir: events.json, waters/*.json and the full records events/*.json (which the site serves as
-    /event/<id>/ and /data/records/<month>.json). The names are never printed, only where they are."""
+    /event/<id>/ and /data/records/<month>.json). The names are never printed, only where they are.
+    cache: a file of the content digests of texts found clean under the same names and scanning code (scan_stamp);
+    such a text is not searched again (2026-11-07 refresh-time profile: searching all 155,000 files took 290 of the
+    export's 730 s an hour, and nearly all are the same text as the hour before). A text with a hit is always searched;
+    the cache keeps only this run's clean digests, and holds digests only, never a name or a text."""
     scan = BlockScan(names)
     if not scan.phrases:
         return []
+    import hashlib
     out_dir = Path(out_dir)
+    stamp = scan_stamp(names) if cache else None
+    clean_before: set[str] = set()
+    if cache:
+        try:
+            c = json.loads(Path(cache).read_text())
+            if isinstance(c, dict) and c.get("stamp") == stamp:
+                clean_before = set(c.get("clean") or [])
+        except (OSError, ValueError):
+            pass
+    clean_now: list[str] = []
     # the map and list payloads too: the monthly marks, overlays, advisory points, reaches, active rows, rain and
     # coverage files carry labels and names copied from records (review 2026-11-03 SOL P1-1)
     paths = [out_dir / n for n in ("events.json",) + PUBLIC_PAYLOADS] + sorted((out_dir / "waters").glob("*.json")) \
@@ -808,8 +832,20 @@ def blocklist_hits(out_dir: Path, names: list[str]) -> list[str]:
             text = p.read_text(encoding="utf-8")
         except OSError:
             continue
+        if cache:
+            d = hashlib.blake2b(text.encode("utf-8"), digest_size=16).hexdigest()
+            if d in clean_before:
+                clean_now.append(d)
+                continue
         if scan.found(text):
             hits.append(str(p.relative_to(out_dir)))
+        elif cache:
+            clean_now.append(d)
+    if cache:
+        Path(cache).parent.mkdir(parents=True, exist_ok=True)
+        tmp = Path(cache).with_suffix(".tmp")
+        tmp.write_text(json.dumps({"stamp": stamp, "clean": sorted(set(clean_now))}, separators=(",", ":")))
+        tmp.replace(cache)
     return hits
 
 
@@ -847,6 +883,7 @@ PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overl
                    "outfalls.json")
 BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # the old hard stop; removed whenever the export runs
 HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name) a hit is in, for the next run's fix
+SCAN_CACHE = BUILD_DIR / "blocklist-scan-cache.json"  # digests of out/ texts found clean (blocklist_hits), saved state
 
 
 def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -> int:
@@ -855,7 +892,8 @@ def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -
     HITS_MARK and on the console, never the name, the run goes on and uploads, and the record is fixed with a rule
     on the next run. The old hard-stop mark is removed so the scripts never hold a publish. Returns the files checked."""
     names = blocklist(DATA_DIR) if names is None else names
-    hits = blocklist_hits(out_dir, names)
+    # the clean-text cache only for the real out/ (a test's folder never writes into data/build)
+    hits = blocklist_hits(out_dir, names, cache=SCAN_CACHE if Path(out_dir) == OUT_DIR else None)
     BLOCKED_MARK.unlink(missing_ok=True)
     if hits:
         write_json(HITS_MARK, {"at": now_iso(), "files": hits,
