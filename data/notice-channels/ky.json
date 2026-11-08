@@ -5183,20 +5183,19 @@
    "checked": "2026-11-07",
    "id": "ky-dow-swimming-advisories",
    "name": "Kentucky Division of Water (swimming advisories)",
-   "channel_kind": "state_alert_page",
+   "channel_kind": "feed",
    "urls": [
     "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx"
    ],
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ky-dow-swimming-advisories",
    "publishes": "status",
-   "records": false,
-   "every_hours": 24,
-   "noun": "Voluntary page",
-   "note": "Standing swimming advisories for E. coli \"in place for several years\" and \"in effect until further notice\": the Upper Cumberland River (Four Mile Bridge to Pineville, Wallins Creek to Harlan, Martins Fork, Catron Creek, Clover Fork, Straight Creek, Poor Fork, Looney Creek), the North Fork Kentucky River upstream of Chavies, and the Licking River from Banklick Creek to the Ohio with all of Banklick and Three Mile creeks; and general advice against full-body contact right after heavy rain, naming bypasses and combined sewer overflows. Prose with no dates and no table (answered 200 on 2026-11-07): watched for changes, no records made. Voluntary. (research/ky/report.md §2.5)",
+   "noun": "Data feed",
+   "note": "Standing swimming advisories for E. coli \"in place for several years\" and \"in effect until further notice\": the Upper Cumberland River (Four Mile Bridge to Pineville, Wallins Creek to Harlan, Martins Fork, Catron Creek, Clover Fork, Straight Creek, Poor Fork, Looney Creek), the North Fork Kentucky River upstream of Chavies, and the Licking River from Banklick Creek to the Ohio with all of Banklick and Three Mile creeks; and general advice against full-body contact right after heavy rain, naming bypasses and combined sewer overflows. Prose with no dates: read by the ky-dow-swimming-advisories feed as standing advisories from the first read that listed them. Voluntary. (research/ky/report.md §2.5)",
    "sources": [
     "ky-dow-swimming-advisories"
    ],

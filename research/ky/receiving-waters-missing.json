@@ -1,8 +1,8 @@
 {
  "about": "Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as reaching a water), Louisville MSD's discharge notices, the Division of Water's HAB Viewer (every point's lake in the layer read on 2026-11-07) and the Division's standing swimming advisories (the waters and stretches the page names), with the number of records giving each. The form's placeholders ('Unnamed Tributary or Unknown', 'Unnamed') and reports that say the discharge reached no water are left out.",
  "state": "KY",
- "waters": 20,
- "reports": 10,
+ "waters": 18,
+ "reports": 14,
  "rows": [
   {
    "name": "Brashears Creek",
@@ -12,12 +12,17 @@
    ],
    "sources": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Catron Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
    ],
-   "points": [
-    [
-     38.013889,
-     -85.355556
-    ]
+   "stretches": [
+    "all of it"
    ]
   },
   {
@@ -60,12 +65,6 @@
    ],
    "sources": [
     "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     37.941667,
-     -84.500556
-    ]
    ]
   },
   {
@@ -92,12 +91,6 @@
    ],
    "sources": [
     "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     38.03422,
-     -84.202674
-    ]
    ]
   },
   {
@@ -117,6 +110,17 @@
    ]
   },
   {
+   "name": "Martins Fork Cumberland River",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "from Harlan to the Cawood Water Plant"
+   ]
+  },
+  {
    "name": "Old Springfield Reservoir",
    "reports": 1,
    "permits": [],
@@ -131,6 +135,28 @@
    ]
   },
   {
+   "name": "Straight Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "all of it"
+   ]
+  },
+  {
+   "name": "Three Mile Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "all of it"
+   ]
+  },
+  {
    "name": "Town Fork",
    "reports": 1,
    "permits": [
@@ -138,12 +164,6 @@
    ],
    "sources": [
     "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     37.848889,
-     -84.61
-    ]
    ]
   },
   {
@@ -154,12 +174,6 @@
    ],
    "sources": [
     "echo-sewer-overflow"
-   ],
-   "points": [
-    [
-     37.941667,
-     -84.500556
-    ]
    ]
   },
   {
@@ -174,28 +188,6 @@
      37.43914,
      -86.463939
     ]
-   ]
-  },
-  {
-   "name": "Catron Creek",
-   "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "stretches": [
-    "all of it"
-   ]
-  },
-  {
-   "name": "Clover Fork",
-   "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "stretches": [
-    "all of it"
    ]
   },
   {
@@ -224,50 +216,6 @@
      37.027409,
      -87.059517
     ]
-   ]
-  },
-  {
-   "name": "Martins Fork",
-   "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "stretches": [
-    "Martins Fork Cumberland River from Harlan to the Cawood Water Plant"
-   ]
-  },
-  {
-   "name": "Poor Fork",
-   "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "stretches": [
-    "Harlan to Looney Creek"
-   ]
-  },
-  {
-   "name": "Straight Creek",
-   "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "stretches": [
-    "all of it"
-   ]
-  },
-  {
-   "name": "Three Mile Creek",
-   "reports": 0,
-   "permits": [],
-   "sources": [
-    "ky-dow-swimming-advisories"
-   ],
-   "stretches": [
-    "all of it"
    ]
   },
   {

@@ -4,9 +4,11 @@ url: "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-A
 homepage: "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx"
 kind: "html"
 level: "state"
-# Notes (research/ky, status candidate, verified fetched, checked 2026-11-07): Standing advisories
-#   in prose with no dates and no table: registered as a watched channel (no records); a stretch
-#   model of the named reaches is an opportunity.
+# Notes (research/ky, status used, verified fetched, checked 2026-11-08): Read by
+#   ingest/ky_dow_swimming_advisories.py: the page's list as standing advisories in the agencies'
+#   own words, one record per named stretch or water (12 on 2026-11-07), from the first read that
+#   listed it (the page gives no date), ended when a read no longer lists it; placed by the named
+#   water as a marker.
 # Access detail (research, quoted): Page fetched (raw/ky-dow-swimming-advisories-2026-11-03.html).
 #   Standing advisories 'in place for several years', no dates.
 # Can fill: advice_text, waterbody
@@ -24,10 +26,10 @@ license: "none stated"
 attribution: "Kentucky Division of Water / Cabinet for Health and Family Services"
 enabled: true
 role: "advisories"
-event_types: []
+event_types: ["beach_advisory"]
 states: ["KY"]
 access: ["html"]
 access_detail: "Page fetched (raw/ky-dow-swimming-advisories-2026-11-03.html). Standing advisories 'in place for several years', no dates."
 machine_readable: false
 legal_basis: null
-checked: "2026-11-07"
+checked: "2026-11-08"

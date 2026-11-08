@@ -17,7 +17,7 @@ Rows
     to the Division of Water (no web channel), with the operator's reports in EPA's tables counted in the note.
   - Statewide: EPA's tables as the statewide feed (stopped after January 2026), the Division's own intake and the
     Environmental Response Team's incident records (records request only), the Division's HAB Viewer (feed) and the
-    standing swimming advisories page (watched; undated prose, no records), ORSANCO's Ohio River bacteria pages (bot
+    standing swimming advisories page (feed: ingest/ky_dow_swimming_advisories.py), ORSANCO's Ohio River bacteria pages (bot
     wall), the CSO annual reports (sent to the Division, not posted).
   - Operators' own channels: Louisville MSD's Overflow Advisory Level (feed), its water quality e-mail list and
     Louisville Metro's GovDelivery bulletins (e-mail only); SD1's Wet Weather Overflow Notification Program (e-mail and
@@ -103,16 +103,17 @@ AGENCY = [
               "(research/ky/report.md §2.5)"),
      "sources": ["ky-dow-hab-viewer"]},
     {"id": "ky-dow-swimming-advisories", "agency": "Kentucky Division of Water and Department for Public Health",
-     "name": "Kentucky Division of Water (swimming advisories)", "channel_kind": "state_alert_page",
-     "urls": [SWIM_PAGE], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True,
-     "unmonitored_reason": None, "publishes": "status", "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "name": "Kentucky Division of Water (swimming advisories)", "channel_kind": "feed", "urls": [SWIM_PAGE],
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "feed_ingested", "feed_source_id": "ky-dow-swimming-advisories", "publishes": "status",
+     "noun": "Data feed",
      "note": ("Standing swimming advisories for E. coli \"in place for several years\" and \"in effect until further "
               "notice\": the Upper Cumberland River (Four Mile Bridge to Pineville, Wallins Creek to Harlan, Martins Fork, "
               "Catron Creek, Clover Fork, Straight Creek, Poor Fork, Looney Creek), the North Fork Kentucky River "
               "upstream of Chavies, and the Licking River from Banklick Creek to the Ohio with all of Banklick and Three "
               "Mile creeks; and general advice against full-body contact right after heavy rain, naming bypasses and "
-              "combined sewer overflows. Prose with no dates and no table (answered 200 on 2026-11-07): watched for "
-              "changes, no records made. Voluntary. (research/ky/report.md §2.5)"),
+              "combined sewer overflows. Prose with no dates: read by the ky-dow-swimming-advisories feed as standing "
+              "advisories from the first read that listed them. Voluntary. (research/ky/report.md \u00a72.5)"),
      "sources": ["ky-dow-swimming-advisories"]},
     {"id": "ky-orsanco-bacteria", "agency": "Ohio River Valley Water Sanitation Commission (ORSANCO)",
      "name": "ORSANCO (Ohio River bacteria results)", "channel_kind": "group_results",

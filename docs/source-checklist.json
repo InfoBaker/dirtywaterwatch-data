@@ -57307,7 +57307,7 @@
   "operator_type": "state",
   "role": "advisories",
   "event_types": [
-   "bacteria"
+   "beach_advisory"
   ],
   "waters_covered": "Upper Cumberland River, North Fork Kentucky River, Licking River (Banklick Creek, Three Mile Creek)",
   "water_slugs": [],
@@ -57333,10 +57333,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Standing advisories in prose with no dates and no table: registered as a watched channel (no records); a stretch model of the named reaches is an opportunity.",
+  "status": "used",
+  "status_reason": "Read by ingest/ky_dow_swimming_advisories.py: the page's list as standing advisories in the agencies' own words, one record per named stretch or water (12 on 2026-11-07), from the first read that listed it (the page gives no date), ended when a read no longer lists it; placed by the named water as a marker.",
   "verified": "fetched",
-  "checked": "2026-11-07",
+  "checked": "2026-11-08",
   "notes": "Quote: \"People should avoid recreational contact with waters in the areas specified because of the bacteria, which occur in human and animal waste and indicate the presence of untreated or inadequately treated sewage.\" And: \"The agencies also recommend against swimming or other full-body contact with surface waters immediately following heavy rainfall events ... due to an increased potential for exposure to ... bypasses from sewage collection systems, combined sewer overflows\".",
   "area": "ky"
  },
