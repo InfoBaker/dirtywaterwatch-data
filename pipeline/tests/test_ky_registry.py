@@ -97,9 +97,16 @@ def test_state_text_is_in_the_page_shape_and_says_what_the_site_does():
 def test_missing_waters_list_leaves_out_what_the_national_list_holds():
     d = json.loads((ROOT / "research" / "ky" / "receiving-waters-missing.json").read_text())
     names = {r["name"] for r in d["rows"]}
+    done = {r["name"] for r in d.get("resolved") or []}
     assert d["state"] == "KY" and "Banklick Creek" not in names and "Ohio River" not in names
     assert not {"Unnamed", "Unnamed Tributary Or Unknown", "Unnamed Tributary or Unknown"} & names
-    assert "Old Springfield Reservoir" in names and "Brashears Creek" in names
+    # a name the batch's names pass resolved moves to "resolved" (final audit 2026-11-08 P1-2): either is right
+    assert "Old Springfield Reservoir" in names and "Brashears Creek" in names | done
+    assert not names & done
+    by = {r["name"]: r for r in d["rows"]}
+    # MSD's outfalls off the Ohio by EPA's reach index (final audit 2026-11-08 P2-1)
+    assert by["Beargrass Creek"]["outfalls"] == 69 and by["Mill Creek"]["outfalls"] == 7
+    assert "5140101000472" in by["Beargrass Creek"]["reach_ids"] and by["Mill Creek"]["counties"] == ["Jefferson"]
 
 
 def test_operators_are_never_named_after_a_plant():
@@ -138,3 +145,48 @@ def test_state_text_says_what_the_data_shows():
     assert "a report that names no water and does not say one was reached" in t
     assert "289 open outfalls in the U.S. Environmental Protection Agency's national inventory (October 31, 2026" in t
     assert "standing swimming advisories are shown as the agencies' own" in t
+
+
+def test_collection_system_permits_are_no_outfalls_and_no_row_names_a_person():
+    """Final audit 2026-11-08 P2-4 and P3-8."""
+    from common import load_outfall_registry
+    rows = [o for o in load_outfall_registry(provisional=False) if o.get("state") == "KY"]
+    kyp = [o for o in rows if str(o["npdes_permit"]).startswith("KYP")]
+    assert kyp and all(o["outfall_kind"] == "other" for o in kyp) and len(kyp) == 56
+    counted = [o for o in rows if o["outfall_kind"] != "other" and not str(o.get("outfall_status") or "").upper().startswith("CLS")]
+    assert len(counted) == 617
+    bard = next(o for o in rows if o["npdes_permit"] == "KY0104027")
+    assert bard["outfall_kind"] == "plant" and "Riley" not in json.dumps(bard)
+    reg = {c["permit"] for c in register() if c.get("permit")}
+    assert {o["npdes_permit"] for o in kyp} <= reg | {p for r in ops() for p in r["npdes_permits"]}
+
+
+def test_the_state_text_says_the_advisories_are_marked_where_they_are():
+    t = (ROOT / "research" / "ky" / "state-text.md").read_text()
+    assert "as a marker on each stretch or water the page names" in t and "rather than drawn" not in t
+
+
+def test_msds_outfalls_take_their_own_reach_before_the_permit_level_label():
+    """Final audit 2026-11-08 P2-1: once the NHD builder has made Beargrass Creek from the outfall's reach code, the
+    reach decides for KY0022411, not EPA's one label 'OHIO RIVER'; any other permit keeps the name first."""
+    from ingest import outfall_waters as OW
+
+    class Stub:
+        def clear_row(self):
+            pass
+
+        def by_reach(self, o, text):
+            return ("beargrass-creek-ky", "reach") if o.get("reach_id") == "5140101000472" else (None, None)
+
+        def usable(self, s, o, step):
+            return True
+
+        def by_name(self, o, text):
+            return "ohio-river-ky", "name"
+
+        by_nhd_target = by_builder_permit = lambda self, o, text: (None, None)
+    o = {"npdes_permit": "KY0022411", "outfall": "108", "receiving_water_echo": "OHIO RIVER", "reach_id": "5140101000472",
+         "state": "KY", "lat": 38.24, "lon": -85.7}
+    assert OW.Matcher.match(Stub(), o)["slug"] == "beargrass-creek-ky"
+    assert OW.Matcher.match(Stub(), {**o, "npdes_permit": "KY0021466"})["slug"] == "ohio-river-ky"
+    assert OW.Matcher.match(Stub(), {**o, "reach_id": "5140101000008"})["slug"] == "ohio-river-ky"
