@@ -1,6 +1,6 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-08T13:30:48Z",
+ "built": "2026-11-08T13:35:22Z",
  "partial": false,
  "count": 6253,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
@@ -1890,7 +1890,7 @@
     }
    },
    "HI": {
-    "built": "2026-11-07T19:46:26Z",
+    "built": "2026-11-08T13:35:05Z",
     "targets": 6,
     "targets_by_define_by": {
      "reach": 2,
@@ -1959,51 +1959,49 @@
     },
     "write": {
      "mode": "merge",
-     "existing_records": 3821,
+     "existing_records": 6253,
      "run_records": 1,
-     "replaced": 0,
-     "added": 1,
-     "kept": 3821,
+     "replaced": 1,
+     "added": 0,
+     "kept": 6252,
      "dropped": 0,
-     "written": 3822
+     "written": 6253
     },
     "report_names": {
-     "built": "2026-11-07T19:46:56Z",
+     "built": "2026-11-08T13:35:20Z",
      "file": "research/hi/receiving-waters-missing.json",
-     "names": 58,
-     "reports": 160,
+     "names": 33,
+     "reports": 108,
      "names_no_water": 0,
-     "waters_named": 58,
-     "already_a_record": 17,
-     "targets": 41,
-     "targets_mapped": 8,
-     "records": 8,
-     "targets_failed": 33,
+     "waters_named": 33,
+     "already_a_record": 1,
+     "targets": 32,
+     "targets_mapped": 0,
+     "records": 0,
+     "targets_failed": 32,
      "failed_reasons": {
-      "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports": 33
+      "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports": 32
      },
-     "network_requests": 8,
+     "network_requests": 4,
      "requests": {
       "name2": 2,
-      "name4": 2,
-      "nhd-hr-near": 4
+      "name4": 2
      },
      "cached": {
       "tiger": 2,
-      "gnis2": 8,
-      "nhd-hr-near": 36
+      "nhd-hr-near": 39
      },
      "failed": {},
      "stopped": null,
      "write": {
       "mode": "merge",
-      "existing_records": 3822,
-      "run_records": 8,
+      "existing_records": 6253,
+      "run_records": 0,
       "replaced": 0,
-      "added": 8,
-      "kept": 3822,
+      "added": 0,
+      "kept": 6253,
       "dropped": 0,
-      "written": 3830
+      "written": 6253
      }
     }
    },
@@ -197151,9 +197149,13 @@
    "towns": [
     "Aiea"
    ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "slugs": [
+    "kalauao-stream-hi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
    "island": "Oahu",
    "from": "reports",
    "reports": 1
@@ -4978846,7 +4978848,7 @@
    "nhd_fcodes": [
     56600
    ],
-   "fetched_at": "2026-11-07T19:44:53Z",
+   "fetched_at": "2026-11-08T13:33:33Z",
    "towns_from": "the Census places of the outfalls' points",
    "note": "NHDPlus V2.1: the unnamed network flowline COMID 800013466, cut to the state and simplified to ~10 m",
    "targets": 1,
