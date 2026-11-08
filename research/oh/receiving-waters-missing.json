@@ -11,8 +11,8 @@
   "oh-odh-beachguard": "5 records, fetched 2026-11-08"
  },
  "records_naming_a_water": 8190,
- "waters": 20,
- "reports": 350,
+ "waters": 18,
+ "reports": 309,
  "by_reason": {
   "no NHD flowline or waterbody of that name in OH": 10,
   "1 NHD water of that name in OH, none within reach of the reports' places": 2,
@@ -22,14 +22,14 @@
   "3 NHD waters of that name in OH, none within reach of the reports' places": 1,
   "10 NHD waters of that name in OH, none within reach of the reports' places": 1
  },
- "resolved_names": 35,
- "resolved_reports": 239,
+ "resolved_names": 37,
+ "resolved_reports": 280,
  "build": {
   "date": "2026-11-08",
   "command": "python -m ingest.waters_from_nhd --names research/oh/receiving-waters-missing.json --state OH",
-  "records_built": 33,
-  "names_resolved": 35,
-  "network_requests": 6
+  "records_built": 34,
+  "names_resolved": 34,
+  "network_requests": 0
  },
  "rows": [
   {
@@ -449,17 +449,41 @@
    ],
    "note": "named by Akron's overflow sites; no record",
    "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Adena Brook",
+   "reports": 165,
+   "slugs": [
+    "adena-brook-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     40.045369,
+     -83.02028
+    ],
+    [
+     40.042415,
+     -83.026734
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -83.02028,
+     "lat": 40.04537,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.04537, -83.02028) (the nearest is 2.4 km away)"
+    }
+   ]
   },
   {
    "name": "Mill Creek",
    "reports": 21,
-   "permits": [
-    "OH0043991"
+   "slugs": [
+    "mill-creek-cleveland-oh"
    ],
-   "sources": [
-    "oh-neorsd-cso-notification-map"
-   ],
-   "outfalls": 19,
+   "how": "record built from the name",
    "points": [
     [
      41.434976,
@@ -537,23 +561,15 @@
      41.435858,
      -81.63658
     ]
-   ],
-   "counties": [
-    "Cuyahoga County"
-   ],
-   "reach_ids": [],
-   "note": "NEORSD's Mill Creek in Cleveland: the national list's Mill Creek holds other places' reaches; EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's CSO alerts map) place it"
+   ]
   },
   {
    "name": "Big Creek",
    "reports": 20,
-   "permits": [
-    "OH0043991"
+   "slugs": [
+    "big-creek-cleveland-oh"
    ],
-   "sources": [
-    "oh-neorsd-cso-notification-map"
-   ],
-   "outfalls": 14,
+   "how": "record built from the name",
    "points": [
     [
      41.446149,
@@ -612,36 +628,11 @@
      -81.763955
     ]
    ],
-   "counties": [
-    "Cuyahoga County"
-   ],
-   "reach_ids": [],
-   "note": "NEORSD's Big Creek in Cleveland: the national list's Big Creek holds other places' reaches; EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's CSO alerts map) place it"
-  }
- ],
- "resolved": [
-  {
-   "name": "Adena Brook",
-   "reports": 165,
-   "slugs": [
-    "adena-brook-oh"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     40.045369,
-     -83.02028
-    ],
-    [
-     40.042415,
-     -83.026734
-    ]
-   ],
    "places_failed": [
     {
-     "lon": -83.02028,
-     "lat": 40.04537,
-     "reason": "no NHD water of that name within 2 km of the reports' point (40.04537, -83.02028) (the nearest is 2.4 km away)"
+     "lon": -81.80156,
+     "lat": 41.42386,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.42386, -81.80156) (the nearest is 3.4 km away)"
     }
    ]
   },
