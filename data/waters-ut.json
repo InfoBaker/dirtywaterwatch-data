@@ -1,0 +1,3137 @@
+{
+ "state": "UT",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 97,
+ "waters": [
+  {
+   "slug": "adams-reservoir-ut",
+   "name": "Adams Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Layton"
+   ],
+   "bbox": [
+    -111.936676,
+    41.070442,
+    -111.929745,
+    41.073385
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.143,
+   "launches": [
+    "adams-reservoir-carry-in-access-ut"
+   ],
+   "water_id": "adams-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "e632bb434e8a6bc647878a63d45bc52de2349c3255e40db833bcdb120cbeb415",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-lake-ut",
+   "name": "Bear Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Garden City",
+    "Laketown",
+    "Pickelville"
+   ],
+   "bbox": [
+    -111.410421,
+    41.84589,
+    -111.255527,
+    42.122685
+   ],
+   "wikidata": "Q812997",
+   "charted": false,
+   "area_km2": 273.564,
+   "launches": [
+    "bear-lake-state-park-ut",
+    "bear-lake-boat-launch-near-garden-city-ut",
+    "bear-lake-state-park-boat-ramp-ut",
+    "rendezvous-beach-state-park-ut"
+   ],
+   "water_id": "bear-lake-id",
+   "gnis_id": "1438482",
+   "geometry_hash": "fb33f3fc1079497f0dcace91402ae81003f642dce9c69fd9ab961d9e27d0a34a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-river-ut",
+   "name": "Bear River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Corinne",
+    "Logan",
+    "Plain City",
+    "Tremonton"
+   ],
+   "bbox": [
+    -112.306942,
+    40.867291,
+    -110.828619,
+    42.268558
+   ],
+   "wikidata": "Q813008",
+   "charted": false,
+   "area_km2": 1.202,
+   "launches": [
+    "3-i-boat-launch-ut",
+    "3h-boat-launch-plain-city-ut",
+    "3h-boat-launch-ut",
+    "bear-river-3800-n-ut",
+    "corinne-ut",
+    "deweyville-ut",
+    "duckville-boat-launch-ut",
+    "h-line-boat-launch-ut",
+    "old-headquarters-boat-launch-ut"
+   ],
+   "water_id": "bear-river-ut",
+   "gnis_id": "1438485",
+   "geometry_hash": "459de6ae65290f7102a0bf637ff5bd4f8e776a3aba1ee46d8f0b43f45e5e7dac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-sand-wash-reservoir-ut",
+   "name": "Big Sand Wash Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Upalco"
+   ],
+   "bbox": [
+    -110.236957,
+    40.292818,
+    -110.214435,
+    40.31741
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.669,
+   "launches": [
+    "big-sand-state-park-ut"
+   ],
+   "water_id": "big-sand-wash-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "c555c3445455d47adaff6701038cb20555c55ba399f4ad3fa8389069ef690de6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bountiful-lake-ut",
+   "name": "Bountiful Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Bountiful"
+   ],
+   "bbox": [
+    -111.929388,
+    40.904055,
+    -111.920724,
+    40.907253
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "bountiful-lake-boat-launch-near-bountiful-ut"
+   ],
+   "water_id": "bountiful-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "21cc918aee1dde4ee6eea097bc3818dd1bedc32e8095a5a3f7868e6c63e1df4b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bridger-lake-ut",
+   "name": "Bridger Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -110.387798,
+    40.960756,
+    -110.385316,
+    40.965394
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.069,
+   "launches": [
+    "bridger-lake-boat-launch-ut"
+   ],
+   "water_id": "bridger-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "7972e1d5b41177a4faf37e4dae8bc931b4be6f261a34e370e7d421156f725d4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "browne-lake-ut",
+   "name": "Browne Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Manila"
+   ],
+   "bbox": [
+    -109.819482,
+    40.86169,
+    -109.809557,
+    40.867418
+   ],
+   "wikidata": "Q19874201",
+   "charted": false,
+   "area_km2": 0.178,
+   "launches": [
+    "browne-lake-boat-launch-ut"
+   ],
+   "water_id": "browne-lake-ut",
+   "gnis_id": "1439168",
+   "geometry_hash": "cec46837a685698462cca3f9c9fea07a58a944b0568ea11920d5e9510a54a6cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "burriston-ponds-ut",
+   "name": "Burriston Ponds",
+   "kind": "pond",
+   "state": "UT",
+   "towns": [
+    "Mona"
+   ],
+   "bbox": [
+    -111.867846,
+    39.795902,
+    -111.863774,
+    39.798162
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "burriston-ponds-carry-in-access-ut"
+   ],
+   "water_id": "burriston-ponds-ut",
+   "gnis_id": null,
+   "geometry_hash": "95f09ee14fb67760275ea05379c9548e60c53c62ce21efcd6040e2051ad9dfbf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "colorado-river-ut",
+   "name": "Colorado River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Castle Valley",
+    "Moab",
+    "Westwater"
+   ],
+   "bbox": [
+    -110.903428,
+    37.177244,
+    -108.932832,
+    39.196976
+   ],
+   "wikidata": "Q1265",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-bend-ut",
+    "cisco-landing-ut",
+    "cisco-wash-ut",
+    "dewey-bridge-ut",
+    "fish-ford-boat-ramp-ut",
+    "gold-bar-ut",
+    "hittle-bottom-ut",
+    "ida-gulch-rocky-rapid-ut",
+    "moab-bridge-ut",
+    "onion-creek-ut",
+    "potash-ut",
+    "sandy-beach-ut",
+    "take-out-beach-ut",
+    "westwater-boat-launch-ut"
+   ],
+   "water_id": "colorado-river-az",
+   "gnis_id": "45730",
+   "geometry_hash": "479571ce73e592cbb93b2bdc03089107a06466167df329ac1705906cf24df13d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crouse-reservoir-ut",
+   "name": "Crouse Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -109.18464,
+    40.71944,
+    -109.180273,
+    40.724436
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.131,
+   "launches": [
+    "crouse-reservoir-boat-launch-ut"
+   ],
+   "water_id": "crouse-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "4fa77292e7338c4e8f4f53fc206c6fe7392af481f180a192a899a3ecec70e7cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "currant-creek-reservoir-ut",
+   "name": "Currant Creek Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.067117,
+    40.331479,
+    -111.050916,
+    40.35244
+   ],
+   "wikidata": "Q42296961",
+   "charted": false,
+   "area_km2": 1.082,
+   "launches": [
+    "currant-creek-boat-ramp-ut"
+   ],
+   "water_id": "currant-creek-reservoir-ut",
+   "gnis_id": "1447833",
+   "geometry_hash": "b015b815f711ec3caabfc1b6c840214311d3450b8f3df9d230c2b0c882275e87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cutler-reservoir-ut",
+   "name": "Cutler Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Logan",
+    "Newton"
+   ],
+   "bbox": [
+    -112.048873,
+    41.73082,
+    -111.88481,
+    41.856893
+   ],
+   "wikidata": "Q5196880",
+   "charted": false,
+   "area_km2": 13.728,
+   "launches": [
+    "cutler-reservoir-3000-n-ut",
+    "cutler-reservoir-6200-n-ut",
+    "cutler-reservoir-sr-30-ut"
+   ],
+   "water_id": "cutler-reservoir-ut",
+   "gnis_id": "1440215",
+   "geometry_hash": "80204d7b5d67eec715499278c403f6e5b026a2070972e4869f60a85fe1f04c71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deer-creek-reservoir-ut",
+   "name": "Deer Creek Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Charleston",
+    "Heber City"
+   ],
+   "bbox": [
+    -111.529341,
+    40.405567,
+    -111.472236,
+    40.479307
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.412,
+   "launches": [
+    "deer-creek-charleston-boat-ramp-ut",
+    "deer-creek-island-ut",
+    "deer-creek-state-park-ut",
+    "sailboat-beach-boat-ramp-ut"
+   ],
+   "water_id": "deer-creek-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "d5616e3f5e3ceec871dd80d36ddfda59d0419d8405cf05ad7ca51b84ce2e0625",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-canyon-reservoir-ut",
+   "name": "East Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Morgan"
+   ],
+   "bbox": [
+    -111.601303,
+    40.879497,
+    -111.576527,
+    40.926715
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.316,
+   "launches": [
+    "east-canyon-reservoir-boat-launch-ut",
+    "east-canyon-boat-launch-ut"
+   ],
+   "water_id": "east-canyon-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "bdf41ac1dd713e0285e3522f56b1aac3cb424a041f2ea8c57183bc2d72babae5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-park-reservoir-ut",
+   "name": "East Park Reservoir",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -109.552647,
+    40.777639,
+    -109.54013,
+    40.792561
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.709,
+   "launches": [
+    "east-park-boat-ramp-ut"
+   ],
+   "water_id": "east-park-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "bef911efda1a5249f93890d6ce841640450b51633e32fd61aec501e65479df16",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "echo-reservoir-ut",
+   "name": "Echo Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Coalville"
+   ],
+   "bbox": [
+    -111.432814,
+    40.921833,
+    -111.397627,
+    40.967172
+   ],
+   "wikidata": "Q49700620",
+   "charted": false,
+   "area_km2": 5.018,
+   "launches": [
+    "echo-reservoir-boat-launch-ut"
+   ],
+   "water_id": "echo-reservoir-ut",
+   "gnis_id": "1427742",
+   "geometry_hash": "b8783a64d6ce48f741bac7411d437f3d719321b25f0c0de07ff06dec53d5a411",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "electric-lake-ut",
+   "name": "Electric Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Beaver Dams Summer Homes Area"
+   ],
+   "bbox": [
+    -111.239384,
+    39.598414,
+    -111.211274,
+    39.649988
+   ],
+   "wikidata": "Q5357416",
+   "charted": false,
+   "area_km2": 1.85,
+   "launches": [
+    "electric-lake-north-side-boating-site-ut"
+   ],
+   "water_id": "electric-lake-ut",
+   "gnis_id": "1447801",
+   "geometry_hash": "67a54306381e67ae87ed681d25e7ce6b62f1257221663be158e42d54b55e5a78",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ferron-reservoir-ut",
+   "name": "Ferron Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Manti"
+   ],
+   "bbox": [
+    -111.454649,
+    39.138763,
+    -111.449269,
+    39.145729
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "ferron-reservoir-boat-launch-ut"
+   ],
+   "water_id": "ferron-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "aafd0a8f1a14e7bf388e8121e928e93e8c48e56c753353fb3a98fbdbda411ce0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fish-lake-ut",
+   "name": "Fish Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Fishlake Resort",
+    "Lakeside Resort"
+   ],
+   "bbox": [
+    -111.738567,
+    38.519733,
+    -111.67749,
+    38.583013
+   ],
+   "wikidata": "Q5454541",
+   "charted": false,
+   "area_km2": 10.069,
+   "launches": [
+    "bowery-creek-ut",
+    "doctor-creek-ut",
+    "fish-lake-boat-launch-ut",
+    "pelican-point-ut",
+    "twin-creek-ut"
+   ],
+   "water_id": "fish-lake-ut",
+   "gnis_id": "1441083",
+   "geometry_hash": "66b59dc3fd6f2b0ed09b47486a64369fe53195d065bc991c3d5609fc6ec41a95",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flaming-gorge-reservoir-ut",
+   "name": "Flaming Gorge Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Dutch John",
+    "Manila"
+   ],
+   "bbox": [
+    -109.687166,
+    40.881807,
+    -109.38484,
+    41.471256
+   ],
+   "wikidata": "Q176598",
+   "charted": false,
+   "area_km2": 161.984,
+   "launches": [
+    "antelope-flat-ut",
+    "cedar-springs-ut",
+    "lucerne-valley-ut",
+    "mustang-ridge-boat-ramp-ut",
+    "sheep-creek-ut"
+   ],
+   "water_id": "flaming-gorge-reservoir-ut",
+   "gnis_id": "1441113",
+   "geometry_hash": "fcb119c1a2e384305728bef30a288f6058eeecde2abb06ece864d8920fb520a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "forsyth-reservoir-ut",
+   "name": "Forsyth Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Loa"
+   ],
+   "bbox": [
+    -111.538291,
+    38.516095,
+    -111.524987,
+    38.533459
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.65,
+   "launches": [
+    "forsyth-reservoir-boat-launch-ut"
+   ],
+   "water_id": "forsyth-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "3121ea01de965f010fbf58f57e21fe216e8e52355ef343cdc20f547625e04631",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "great-salt-lake-ut",
+   "name": "Great Salt Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Magna",
+    "West Point"
+   ],
+   "bbox": [
+    -112.949555,
+    40.677376,
+    -112.153608,
+    41.657668
+   ],
+   "wikidata": "Q178741",
+   "charted": false,
+   "area_km2": 2514.53,
+   "launches": [
+    "antelope-island-state-park-ut",
+    "great-salt-lake-state-marina-ut"
+   ],
+   "water_id": "great-salt-lake-ut",
+   "gnis_id": "1441459",
+   "geometry_hash": "c4285ef4d4aa642b99da33b11ed09380122fd9e311bb34570e93e37875fd332c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "great-salt-lake-ut-2",
+   "name": "Great Salt Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bear-river-bay-ut"
+   ],
+   "water_id": "great-salt-lake-ut-2",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "green-river-ut",
+   "name": "Green River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Browns Park",
+    "Dutch John",
+    "Green River",
+    "Leota",
+    "Ouray"
+   ],
+   "bbox": [
+    -110.17921,
+    38.187809,
+    -108.989821,
+    40.915011
+   ],
+   "wikidata": "Q952429",
+   "charted": false,
+   "area_km2": 0.199,
+   "launches": [
+    "bridgeport-ut",
+    "browns-park-ut",
+    "butler-wash-put-in-take-out-ut",
+    "crystal-geyser-ut",
+    "green-river-state-park-ut",
+    "indian-crossing-boat-ramp-ut",
+    "little-hole-ut",
+    "mineral-bottom-ut",
+    "nefertiti-ut",
+    "ouray-ut",
+    "pipeline-crossing-ut",
+    "rainbow-park-boat-launch-ut",
+    "sand-wash-ut",
+    "sheppard-boat-launch-ut",
+    "spillway-ut",
+    "split-mountain-boat-launch-ut",
+    "swallow-canyon-boat-ramp-ut",
+    "swaseys-ut"
+   ],
+   "water_id": "green-river-co",
+   "gnis_id": "1428399",
+   "geometry_hash": "88100fa7c39deb83672fbf8a016d2c911013fa581e7873ca338e4b07a0dedfc1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gunlock-reservoir-ut",
+   "name": "Gunlock Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Ivins"
+   ],
+   "bbox": [
+    -113.781822,
+    37.250603,
+    -113.769602,
+    37.270644
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.724,
+   "launches": [
+    "gunlock-state-park-ut"
+   ],
+   "water_id": "gunlock-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "8535dc3309488fe5275159c76041506a7170266ec9dd5a00fee2f928c948eb33",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gunnison-reservoir-ut",
+   "name": "Gunnison Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Sterling"
+   ],
+   "bbox": [
+    -111.711447,
+    39.205697,
+    -111.687785,
+    39.25659
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.057,
+   "launches": [
+    "gunnison-reservoir-boat-ramp-ut"
+   ],
+   "water_id": "gunnison-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "a041e0ce79d98ee87f99b02fdffb04f83b912aa5e96aa5147df9acd59da74289",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "highland-glen-pond-ut",
+   "name": "Highland Glen Pond",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Highland"
+   ],
+   "bbox": [
+    -111.781836,
+    40.414673,
+    -111.780556,
+    40.416494
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.016,
+   "launches": [
+    "highland-glen-pond-boat-launch-ut"
+   ],
+   "water_id": "highland-glen-pond-ut",
+   "gnis_id": null,
+   "geometry_hash": "524d30e0612db9d3c10ff314335106bd47094a9c681e8f6aba1ac26b1682209f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "huntington-lake-ut",
+   "name": "Huntington Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Huntington"
+   ],
+   "bbox": [
+    -110.954128,
+    39.341277,
+    -110.942068,
+    39.352572
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.83,
+   "launches": [
+    "huntington-state-park-ut"
+   ],
+   "water_id": "huntington-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "a9a6b65458ffe99006707a7e40156445cfd3b7ba8ba2abb961661bb6b1a07fac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "huntington-reservoir-ut",
+   "name": "Huntington Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Fairview"
+   ],
+   "bbox": [
+    -111.278607,
+    39.584327,
+    -111.26053,
+    39.596186
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.65,
+   "launches": [
+    "huntington-reservoir-mammoth-fishing-ut"
+   ],
+   "water_id": "huntington-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "c2a0e44fe8d661fc5380b479cd432ff270f806398ef64514a29f63d6edd4b3fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hyrum-reservoir-ut",
+   "name": "Hyrum Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Hyrum"
+   ],
+   "bbox": [
+    -111.873313,
+    41.60541,
+    -111.849015,
+    41.62721
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.808,
+   "launches": [
+    "hyrum-state-park-ut"
+   ],
+   "water_id": "hyrum-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "e5052dcf20b711a310a2425271985485c84accfa07833a74033b66b13c00888e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-flat-reservoir-ut",
+   "name": "Jackson Flat Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Kanab"
+   ],
+   "bbox": [
+    -112.519888,
+    37.006438,
+    -112.505785,
+    37.018294
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.72,
+   "launches": [
+    "jackson-flat-reservoir-boat-launch-ut"
+   ],
+   "water_id": "jackson-flat-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "1b1a76128b71948663db34f14823dfb61ee31c736a8158baf32f3cb5cadf9383",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "joes-valley-reservoir-ut",
+   "name": "Joes Valley Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.292323,
+    39.269973,
+    -111.27016,
+    39.317188
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.399,
+   "launches": [
+    "joes-valley-boat-ramp-east-ut",
+    "joes-valley-boat-ramp-west-ut",
+    "joes-valley-marina-ut"
+   ],
+   "water_id": "joes-valley-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "3bd850f2f0fef77a7b63772fac5b542b6baf95920c5f612b5944160f9e550e8e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-valley-reservoir-ut",
+   "name": "Johnson Valley Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Fremont"
+   ],
+   "bbox": [
+    -111.656936,
+    38.601258,
+    -111.632155,
+    38.618017
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.123,
+   "launches": [
+    "johnson-reservoir-recreation-site-ut"
+   ],
+   "water_id": "johnson-valley-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "5b672d09ca5c5e1cc5bf1d5146ee98d30c9d6341e144bec06d79bb1c17c89c0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jordan-river-ut",
+   "name": "Jordan River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Bluffdale",
+    "Midvale",
+    "Murray",
+    "North Salt Lake",
+    "Riverton",
+    "Salt Lake City",
+    "Sandy",
+    "Saratoga Springs",
+    "South Salt Lake",
+    "Taylorsville"
+   ],
+   "bbox": [
+    -111.975836,
+    40.356003,
+    -111.89192,
+    40.899594
+   ],
+   "wikidata": "Q2628381",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "7800-south-access-ut",
+    "fisher-mansion-boat-ramp-ut",
+    "gadsby-trailhead-boat-ramp-ut",
+    "general-holm-park-boat-ramp-ut",
+    "jordan-river-boat-launch-near-saratoga-springs-ut",
+    "jordan-river-rotary-park-ramp-ut",
+    "millcreek-trailhead-boat-ramp-ut",
+    "millrace-park-boat-ramp-ut",
+    "parry-farms-boat-ramp-ut",
+    "pioneer-crossing-park-boat-ramp-ut",
+    "porter-s-landing-ut",
+    "rc-park-boat-ramp-ut",
+    "jordan-river-carry-in-access-near-salt-lake-city-ut",
+    "shields-lane-trailhead-ramp-ut"
+   ],
+   "water_id": "jordan-river-ut",
+   "gnis_id": "1442221",
+   "geometry_hash": "eb1dd7329cbf5e78df14b9ed76962b78661ac183c5f8da556c3be0aa60150b21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jordanelle-reservoir-ut",
+   "name": "Jordanelle Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Heber City",
+    "Hideout"
+   ],
+   "bbox": [
+    -111.435273,
+    40.596711,
+    -111.344091,
+    40.656808
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.346,
+   "launches": [
+    "jordanelle-state-park-hailstone-north-ut",
+    "jordanelle-state-park-hailstone-south-ut",
+    "jordanelle-state-park-rock-cliff-ut",
+    "ross-creek-boat-ramp-non-motorized-ut"
+   ],
+   "water_id": "jordanelle-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "2a22500ac3bc2264808812c51e95a37a4a52dc1ad51b81d51ba0f6b352eb63c3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ken-s-lake-ut",
+   "name": "Ken's Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Moab"
+   ],
+   "bbox": [
+    -109.433208,
+    38.478813,
+    -109.425685,
+    38.484261
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.231,
+   "launches": [
+    "kens-lake-boat-ramp-ut"
+   ],
+   "water_id": "ken-s-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "720e5547e3b8ef375332f9a7543a42b93eb5d2b5766c3def0f955da99b6806be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "koosharem-reservoir-ut",
+   "name": "Koosharem Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Burrville",
+    "Koosharem"
+   ],
+   "bbox": [
+    -111.849504,
+    38.590951,
+    -111.831162,
+    38.612073
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.587,
+   "launches": [
+    "koosharem-rec-site-ut",
+    "koosharem-reservoir-recreation-site-ut"
+   ],
+   "water_id": "koosharem-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "1ad3416f2768308a50d5ec6a79633b5cad258823b8567960c35a2e6c5665309c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-at-the-hills-ut",
+   "name": "Lake at the Hills",
+   "kind": "pond",
+   "state": "UT",
+   "towns": [
+    "Cedar City"
+   ],
+   "bbox": [
+    -113.089075,
+    37.661076,
+    -113.087015,
+    37.663182
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "lake-at-the-hills-carry-in-access-ut"
+   ],
+   "water_id": "lake-at-the-hills-ut",
+   "gnis_id": null,
+   "geometry_hash": "4ea6b770706d4da5b6a197943d36e5c1b199253d780f75318ad5439b0f54f83d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-powell-ut",
+   "name": "Lake Powell",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Big Water",
+    "Bullfrog",
+    "Halls Crossing"
+   ],
+   "bbox": [
+    -111.567477,
+    36.844412,
+    -110.286717,
+    37.909378
+   ],
+   "wikidata": "Q667507",
+   "charted": false,
+   "area_km2": 518.752,
+   "launches": [
+    "bullfrog-boat-ramp-ut",
+    "hall-s-crossing-boat-ramp-ut",
+    "hite-boat-ramp-ut",
+    "stateline-boat-ramp-ut"
+   ],
+   "water_id": "lake-powell-az",
+   "gnis_id": "1431462",
+   "geometry_hash": "7bc558ae62cc34e98433044e27cb06f3baa354f1cf0945e9d9c9065aa3a61f5d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-powell-boat-launch-ut"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-park-reservoir-ut",
+   "name": "Long Park Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Manila"
+   ],
+   "bbox": [
+    -109.879018,
+    40.903324,
+    -109.842789,
+    40.911939
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.559,
+   "launches": [
+    "long-park-ut"
+   ],
+   "water_id": "long-park-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "f72541c549a5e9976251a3df09c39cb7a94b310f26d711958532d83473c5ab10",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lost-creek-reservoir-ut",
+   "name": "Lost Creek Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.401063,
+    41.182646,
+    -111.366134,
+    41.213552
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.482,
+   "launches": [
+    "lost-creek-state-park-ut"
+   ],
+   "water_id": "lost-creek-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "5d63415f2b86f11288750a61e89c644438e5cc4314f21384bb02cd2823d4522e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mantua-reservoir-ut",
+   "name": "Mantua Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Mantua"
+   ],
+   "bbox": [
+    -111.942483,
+    41.49738,
+    -111.922549,
+    41.513514
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.054,
+   "launches": [
+    "mantua-reservoir-boat-launch-ut"
+   ],
+   "water_id": "mantua-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "f5817e83327e830b8f66626055fe00bc9941ed358ff0d7963aa5b0a1cfe04d6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marsh-lake-ut",
+   "name": "Marsh Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -110.39753,
+    40.952484,
+    -110.394294,
+    40.962226
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.178,
+   "launches": [
+    "marsh-lake-boat-launch-ut"
+   ],
+   "water_id": "marsh-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "ad79540b879e656fbe0d4019508ce416c2b16bbb26ca9b8a835f5a151bbea897",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "matt-warner-reservoir-ut",
+   "name": "Matt Warner Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Browns Park"
+   ],
+   "bbox": [
+    -109.314684,
+    40.763853,
+    -109.280634,
+    40.776407
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.271,
+   "launches": [
+    "matt-warner-reservoir-boat-launch-ut"
+   ],
+   "water_id": "matt-warner-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "47026efabf87756545d2a8cb51651e5929273e06a61de4090b47d26472fb0670",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-meadow-reservoir-ut",
+   "name": "Mill Meadow Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Loa"
+   ],
+   "bbox": [
+    -111.569904,
+    38.494326,
+    -111.559412,
+    38.518084
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.634,
+   "launches": [
+    "mill-meadow-reservoir-boat-ramp-recreati-ut"
+   ],
+   "water_id": "mill-meadow-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "61588422c6a9969f49fb7f198d05045fe43760aab82efd569c5936f1934e24c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "millsite-reservoir-ut",
+   "name": "Millsite Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Ferron"
+   ],
+   "bbox": [
+    -111.214246,
+    39.089472,
+    -111.186425,
+    39.106275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.7,
+   "launches": [
+    "millsite-state-park-ut"
+   ],
+   "water_id": "millsite-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "0952ebc0c42bdbc51c19dd73b45f6edc9468e5883cd499658e9e5edcc36ca653",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "minersville-reservoir-ut",
+   "name": "Minersville Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Minersville"
+   ],
+   "bbox": [
+    -112.836418,
+    38.21419,
+    -112.795902,
+    38.256132
+   ],
+   "wikidata": "Q6864457",
+   "charted": false,
+   "area_km2": 4.035,
+   "launches": [
+    "minersville-reservoir-boat-launch-ut"
+   ],
+   "water_id": "minersville-reservoir-ut",
+   "gnis_id": "1430378",
+   "geometry_hash": "8a0c532cd0bd39cf5cd79f910d9e6249b10fd8b6e09baa99440a7a715acdf2d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mirror-lake-ut",
+   "name": "Mirror Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -110.890677,
+    40.701078,
+    -110.885348,
+    40.707838
+   ],
+   "wikidata": "Q6874581",
+   "charted": false,
+   "area_km2": 0.218,
+   "launches": [
+    "mirror-lake-boat-ramp-road-ut"
+   ],
+   "water_id": "mirror-lake-ut",
+   "gnis_id": "1443523",
+   "geometry_hash": "937d96bfc98c51272a799f52e582990daa6779a8d65ee3b7ff20069ca199e9c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mona-reservoir-ut",
+   "name": "Mona Reservoir",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Starr"
+   ],
+   "bbox": [
+    -111.877023,
+    39.820319,
+    -111.852536,
+    39.888839
+   ],
+   "wikidata": "Q6897711",
+   "charted": false,
+   "area_km2": 6.263,
+   "launches": [
+    "mona-reservoir-boat-launch-ut"
+   ],
+   "water_id": "mona-reservoir-ut",
+   "gnis_id": "1443550",
+   "geometry_hash": "365aca247c36e216b08f982e5621ade2819ba8c349a28348a023825a55235682",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "moon-lake-ut",
+   "name": "Moon Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Moon Lake Lodge"
+   ],
+   "bbox": [
+    -110.519672,
+    40.561657,
+    -110.486627,
+    40.599917
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.119,
+   "launches": [
+    "moon-lake-boat-ramp-ut"
+   ],
+   "water_id": "moon-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "6f218096a049b824e52311269abbaa786fe0347349908e827258455aa8c7fba2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-creek-ut",
+   "name": "Muddy Creek",
+   "kind": "river",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.484515,
+    38.4006,
+    -110.695889,
+    39.117402
+   ],
+   "wikidata": "Q6931648",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chute-of-muddy-launch-ut",
+    "chute-of-muddy-takeout-ut"
+   ],
+   "water_id": "muddy-creek-ut",
+   "gnis_id": "1438094",
+   "geometry_hash": "7521131f3b219525f9dca87c64f5e3bb07bad80e5ef22bb3f2c208c6ddb10dd2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "navajo-lake-ut",
+   "name": "Navajo Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Navajo Lake Lodge"
+   ],
+   "bbox": [
+    -112.810539,
+    37.518869,
+    -112.761211,
+    37.528898
+   ],
+   "wikidata": "Q7351445",
+   "charted": false,
+   "area_km2": 1.879,
+   "launches": [
+    "navajo-lake-boating-site-ut"
+   ],
+   "water_id": "navajo-lake-ut",
+   "gnis_id": "1443765",
+   "geometry_hash": "14caea5386484901a2415c3e2c55e313769e15ed121815a058ce6ee2594c37f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "newton-reservior-ut",
+   "name": "Newton Reservior",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Trenton"
+   ],
+   "bbox": [
+    -111.990794,
+    41.895837,
+    -111.971997,
+    41.911053
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.528,
+   "launches": [
+    "newton-reservior-boat-launch-ut"
+   ],
+   "water_id": "newton-reservior-ut",
+   "gnis_id": null,
+   "geometry_hash": "15d3d8171c63aa7ab23cc4979e72186abb43ec49ef6d8e6deb6be744cfa7f1fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-bay-ut",
+   "name": "North Bay",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Corinne"
+   ],
+   "bbox": [
+    -112.343807,
+    41.477847,
+    -112.205783,
+    41.526391
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 32.515,
+   "launches": [
+    "1a-boat-launch-ut",
+    "2c-boat-launch-ut",
+    "9-n-boat-launch-ut"
+   ],
+   "water_id": "north-bay-ut",
+   "gnis_id": null,
+   "geometry_hash": "de999fc6f3309232a03307a307ca613dc42bf3ab164de229e4a21684bea6dad1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-weber-river-ut",
+   "name": "North Fork Weber River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Plain City"
+   ],
+   "bbox": [
+    -112.271805,
+    41.178853,
+    -112.12662,
+    41.224265
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "ogden-bay-wma-airboat-launch-ut",
+    "ogden-bay-wma-small-boat-ut"
+   ],
+   "water_id": "north-fork-weber-river-ut",
+   "gnis_id": null,
+   "geometry_hash": "11338a1e9a4740f5d26fd769bf80bb2143534ae0bbc4b3228d8ffc6f09a45104",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "otter-creek-reservoir-ut",
+   "name": "Otter Creek Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Antimony"
+   ],
+   "bbox": [
+    -112.023082,
+    38.165031,
+    -111.965489,
+    38.241517
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.042,
+   "launches": [
+    "fisherman-beach-boat-ramp-ut",
+    "otter-creek-state-park-ut",
+    "tamarisk-point-boat-ramp-ut"
+   ],
+   "water_id": "otter-creek-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "c084fc97fc2347ff80cfca143c7b709840a9f91ffd06a9b23575c965969b9b7a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "palisade-lake-ut",
+   "name": "Palisade Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Sterling"
+   ],
+   "bbox": [
+    -111.673278,
+    39.201373,
+    -111.665255,
+    39.208331
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.309,
+   "launches": [
+    "palisade-state-park-ut"
+   ],
+   "water_id": "palisade-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "d0a9225f595b1f64c1418b26148cd45d9f9f073fa157ef861b8068fbf5c18e89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "panguitch-lake-ut",
+   "name": "Panguitch Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Lake View Resort",
+    "Panguitch Lake Resort"
+   ],
+   "bbox": [
+    -112.661186,
+    37.707523,
+    -112.623205,
+    37.725957
+   ],
+   "wikidata": "Q7336439",
+   "charted": false,
+   "area_km2": 4.351,
+   "launches": [
+    "panguitch-lake-south-ut",
+    "south-shore-boat-ramp-ut",
+    "wildlife-point-boat-ramp-ut"
+   ],
+   "water_id": "panguitch-lake-ut",
+   "gnis_id": "1447643",
+   "geometry_hash": "c71d841305225a801b6f7ea89424bdd50076e15f23166a5efbe91643dc11ae1d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "parowan-creek-ut",
+   "name": "Parowan Creek",
+   "kind": "stream",
+   "state": "UT",
+   "towns": [
+    "Brian Head"
+   ],
+   "bbox": [
+    -112.886139,
+    37.690961,
+    -112.807354,
+    37.837487
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bristlecone-pond-boat-ramp-ut"
+   ],
+   "water_id": "parowan-creek-ut",
+   "gnis_id": null,
+   "geometry_hash": "a2ba1bd49827fda92fc90407da04c3a7233736baa85f13c82f01db84b3b26b79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pelican-lake-ut",
+   "name": "Pelican Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Leota"
+   ],
+   "bbox": [
+    -109.703225,
+    40.182528,
+    -109.665121,
+    40.202495
+   ],
+   "wikidata": "Q49308086",
+   "charted": false,
+   "area_km2": 4.325,
+   "launches": [
+    "pelican-lake-boat-launch-ut"
+   ],
+   "water_id": "pelican-lake-ut",
+   "gnis_id": "1431166",
+   "geometry_hash": "5f0d535e081873df20b9f1b707a7eb4a420f370bc9df66fa07f7997eb58c4ccd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pineview-reservoir-ut",
+   "name": "Pineview Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Eden",
+    "Harbor View",
+    "Huntsville"
+   ],
+   "bbox": [
+    -111.842707,
+    41.248838,
+    -111.76945,
+    41.293495
+   ],
+   "wikidata": "Q62398228",
+   "charted": false,
+   "area_km2": 10.727,
+   "launches": [
+    "cemetery-point-marina-ut",
+    "pineview-reservoir-boat-launch-huntsville-ut",
+    "pineview-reservoir-boat-launch-ut",
+    "pineview-reservoir-north-arm-ut"
+   ],
+   "water_id": "pineview-reservoir-ut",
+   "gnis_id": "1444422",
+   "geometry_hash": "86b4245ffb8cb9148f76e3c5bcaed5b7cbbdaa74488fabb81f966d83505d93a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "piute-lake-ut",
+   "name": "Piute Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Junction"
+   ],
+   "bbox": [
+    -112.219157,
+    38.215957,
+    -112.18317,
+    38.324669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.359,
+   "launches": [
+    "piute-state-park-ut"
+   ],
+   "water_id": "piute-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "9a5b21df43d5f85ac41e59b1dcd6ba3613b58d091a20d0402a89bd3ec90d4052",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "posey-lake-ut",
+   "name": "Posey Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.697505,
+    37.935609,
+    -111.69418,
+    37.938761
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.047,
+   "launches": [
+    "posy-lake-ut"
+   ],
+   "water_id": "posey-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "c78878f24508120e7086d671164e56bbf476e6b89f3ac2b4133e6f7df1ba36c6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "price-river-ut",
+   "name": "Price River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.120345,
+    39.178978,
+    -110.105121,
+    39.846396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.655,
+   "launches": [
+    "price-river-put-in-ut"
+   ],
+   "water_id": "price-river-ut",
+   "gnis_id": null,
+   "geometry_hash": "4fd717826f25c12a1791d7654040969d5d557327a32896d709872b20803a4cb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "provo-river-ut",
+   "name": "Provo River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Heber City",
+    "Provo"
+   ],
+   "bbox": [
+    -111.743069,
+    40.234632,
+    -110.945176,
+    40.679981
+   ],
+   "wikidata": "Q4379655",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lower-provo-river-boat-launch-non-motorized-ut"
+   ],
+   "water_id": "provo-river-ut",
+   "gnis_id": "1444668",
+   "geometry_hash": "6ff8bff32db012e91944bef796085864da580e046d9ed43b3ddc1e8b0df56737",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "quail-creek-reservoir-ut",
+   "name": "Quail Creek Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Hurricane"
+   ],
+   "bbox": [
+    -113.395349,
+    37.174607,
+    -113.379846,
+    37.200012
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.988,
+   "launches": [
+    "quail-creek-state-park-north-ut",
+    "quail-creek-state-park-south-ut"
+   ],
+   "water_id": "quail-creek-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "55aad9cf4af61f6a41ee2079709398f34ce16685ad71f37b4f56a6b8cd34eced",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rattlesnake-creek-ut",
+   "name": "Rattlesnake Creek",
+   "kind": "stream",
+   "state": "UT",
+   "towns": [
+    "Harbor View"
+   ],
+   "bbox": [
+    -111.837698,
+    41.265861,
+    -111.821879,
+    41.270915
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "port-ramp-ut"
+   ],
+   "water_id": "rattlesnake-creek-ut",
+   "gnis_id": null,
+   "geometry_hash": "99504cae12031b117bb562cdd604f2c1515d54ec5cbde7292b36d13dcc6d8bfc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "recapture-reservoir-ut",
+   "name": "Recapture Reservoir",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Blanding"
+   ],
+   "bbox": [
+    -109.453955,
+    37.659659,
+    -109.431903,
+    37.676669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.858,
+   "launches": [
+    "recapture-reservoir-boat-launch-near-blanding-ut"
+   ],
+   "water_id": "recapture-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "5c54e0934b7a1325b320bd14d54f019cfe915fe4a73a56e922f3262a678a6514",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-fleet-reservoir-ut",
+   "name": "Red Fleet Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Vernal"
+   ],
+   "bbox": [
+    -109.450607,
+    40.564612,
+    -109.413476,
+    40.591303
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.679,
+   "launches": [
+    "red-fleet-state-park-ut"
+   ],
+   "water_id": "red-fleet-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "f59decfb67953010cf36d259a6aed9e8d4a012591b2a11676d9651005d23d31c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rockport-lake-ut",
+   "name": "Rockport Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Wanship"
+   ],
+   "bbox": [
+    -111.408848,
+    40.754916,
+    -111.372936,
+    40.789432
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.189,
+   "launches": [
+    "rockport-state-park-ut"
+   ],
+   "water_id": "rockport-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "54e2a1049ee126bdecfc43f9cb4323687aa465cfb586bcce477a1394a0397639",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salem-lake-ut",
+   "name": "Salem Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -111.679033,
+    40.047244,
+    -111.673574,
+    40.0536
+   ],
+   "wikidata": "Q104903039",
+   "charted": false,
+   "area_km2": 0.067,
+   "launches": [
+    "salem-lake-carry-in-access-ut"
+   ],
+   "water_id": "salem-lake-ut",
+   "gnis_id": "1445264",
+   "geometry_hash": "06bbd304502608f5c0c59378dfcca743919002e69144c6b855f7ed6e906a9fb9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "san-juan-river-ut",
+   "name": "San Juan River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Clay Hills Crossing",
+    "Mexican Hat",
+    "Tselakai Dezza"
+   ],
+   "bbox": [
+    -110.901832,
+    37.009313,
+    -109.038893,
+    37.320537
+   ],
+   "wikidata": "Q1542874",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clay-hills-crossing-boat-ramp-ut",
+    "mexican-hat-ut",
+    "sand-island-ut"
+   ],
+   "water_id": "san-juan-river-ut",
+   "gnis_id": "1454998",
+   "geometry_hash": "2e0f5776314384cc8c7267c79ac5d039b4a34b040e2e00581458982adc70cb73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "san-rafael-river-ut",
+   "name": "San Rafael River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Castle Dale"
+   ],
+   "bbox": [
+    -110.913252,
+    38.991434,
+    -110.506485,
+    39.152564
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.717,
+   "launches": [
+    "personal-watercraft-put-in-ut",
+    "personal-watercraft-take-out-ut-2"
+   ],
+   "water_id": "san-rafael-river-ut",
+   "gnis_id": null,
+   "geometry_hash": "f93f5b178ee34e5339f774258f91052b32c9c84923441b9ab1c84ceeb342f75b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sand-hollow-reservoir-ut",
+   "name": "Sand Hollow Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Hurricane"
+   ],
+   "bbox": [
+    -113.393415,
+    37.102437,
+    -113.359917,
+    37.127407
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.525,
+   "launches": [
+    "sand-hollow-state-park-ut",
+    "south-side-boat-ramp-ut"
+   ],
+   "water_id": "sand-hollow-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "29aacd7cff337dae4fd7af7be8ce69daf1c1970c4615b2919331c92834820c89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "scofield-reservoir-ut",
+   "name": "Scofield Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.172687,
+    39.748139,
+    -111.119966,
+    39.813996
+   ],
+   "wikidata": "Q7352052",
+   "charted": false,
+   "area_km2": 9.06,
+   "launches": [
+    "lake-side-day-use-area-boat-ramp-ut",
+    "scofield-state-park-ut",
+    "scofield-reservoir-boat-launch-ut"
+   ],
+   "water_id": "scofield-reservoir-ut",
+   "gnis_id": "1445381",
+   "geometry_hash": "c563b43416a1d7a6bb5067412275c497968c8d58148da64674626de5e2bddd15",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sheep-creek-reservoir-ut",
+   "name": "Sheep Creek Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Manila"
+   ],
+   "bbox": [
+    -109.859013,
+    40.887398,
+    -109.841975,
+    40.890996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.325,
+   "launches": [
+    "sheep-creek-lake-boat-launch-ut"
+   ],
+   "water_id": "sheep-creek-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "87fe4911dc695b4f7d1539b762daf9e57b328c1314bab86d5271890d781be7e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smith-and-morehouse-reservoir-ut",
+   "name": "Smith and Morehouse Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Oakley"
+   ],
+   "bbox": [
+    -111.108728,
+    40.745582,
+    -111.098493,
+    40.765315
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.774,
+   "launches": [
+    "smith-and-morehouse-east-ut",
+    "smith-morehouse-angler-parking-ut"
+   ],
+   "water_id": "smith-and-morehouse-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "93a8ececf6aae6d7fe128f28dfec56585e475f9b836b62bd22167d8d6ccee03b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-bay-ut",
+   "name": "South Bay",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -112.336678,
+    41.415608,
+    -112.19187,
+    41.469638
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 26.898,
+   "launches": [
+    "2-e-boat-launch-ut",
+    "2-w-boat-launch-ut",
+    "9-central-boat-launch-ut",
+    "9-s-delta-waterfowl-boat-launch-ut"
+   ],
+   "water_id": "south-bay-ut",
+   "gnis_id": null,
+   "geometry_hash": "b5626845d0a6028fef6ad353763636de7b2298658f32d89af073d8e601641404",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spirit-lake-ut",
+   "name": "Spirit Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -110.001828,
+    40.838298,
+    -109.996614,
+    40.84431
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.172,
+   "launches": [
+    "spirit-lake-boat-launch-ut"
+   ],
+   "water_id": "spirit-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "ea000b3fd414307f420eea09e01fdd500b9416524f6570d3df19f3f97995ca63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-lake-ut",
+   "name": "Spring Lake",
+   "kind": "pond",
+   "state": "UT",
+   "towns": [
+    "Spring Lake"
+   ],
+   "bbox": [
+    -111.746717,
+    40.003513,
+    -111.743381,
+    40.007605
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.045,
+   "launches": [
+    "spring-lake-carry-in-access-ut"
+   ],
+   "water_id": "spring-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "f0c50e2932c2b9bf705fd6b382da52c9c3f70e39b766b737cfa3e6d38e9b5500",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "starvation-reservoir-ut",
+   "name": "Starvation Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Duchesne"
+   ],
+   "bbox": [
+    -110.536041,
+    40.160511,
+    -110.422956,
+    40.223896
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.02,
+   "launches": [
+    "starvation-state-park-ut"
+   ],
+   "water_id": "starvation-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "bd1d24f90eb61c17d296a9adcfa35d2620379e5b2422a9706a3f3883c35e486a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stateline-reservoir-ut",
+   "name": "Stateline Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -110.396063,
+    40.970419,
+    -110.383024,
+    40.98981
+   ],
+   "wikidata": "Q7603941",
+   "charted": false,
+   "area_km2": 0.948,
+   "launches": [],
+   "water_id": "stateline-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "5215381f772331bf5a8a0573c84a876c48327ca6856bb93fc49c3e007dfc88ce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "stateline-campground-boat-ramp-road-ut"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "steinaker-reservoir-ut",
+   "name": "Steinaker Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Vernal"
+   ],
+   "bbox": [
+    -109.549291,
+    40.505613,
+    -109.522287,
+    40.53031
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.305,
+   "launches": [
+    "steinaker-state-park-ut"
+   ],
+   "water_id": "steinaker-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "2b7a9ea1fadf76d0fe2921bdbb24d75e62a018ae993f63ab2ac34a495eea4a54",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "strawberry-reservoir-ut",
+   "name": "Strawberry Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Bryants Fork Summer Home Area",
+    "East Portal"
+   ],
+   "bbox": [
+    -111.193892,
+    40.112214,
+    -111.021682,
+    40.236561
+   ],
+   "wikidata": "Q7336423",
+   "charted": false,
+   "area_km2": 64.8,
+   "launches": [
+    "aspen-boat-ramp-ut",
+    "strawberry-reservoir-boat-launch-ut-2",
+    "renegade-boat-ramp-ut",
+    "soldier-creek-boat-ramp-ut",
+    "strawberry-boat-ramp-ut",
+    "strawberry-reservoir-boat-launch-near-bryants-fork-summer-home-area-ut"
+   ],
+   "water_id": "strawberry-reservoir-ut",
+   "gnis_id": "1446189",
+   "geometry_hash": "1d44ea0b756f9fa834a98167d89806d32529840fe1102c4e67bc9c6e01236a52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tropic-reservoir-ut",
+   "name": "Tropic Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Tropic"
+   ],
+   "bbox": [
+    -112.257143,
+    37.591779,
+    -112.248747,
+    37.61294
+   ],
+   "wikidata": "Q49702973",
+   "charted": false,
+   "area_km2": 0.717,
+   "launches": [
+    "tropic-reservoir-boat-launch-ut"
+   ],
+   "water_id": "tropic-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "e3ed2eca220fc187826ad1084fb8e5b312b75619b6de6bbe434d1e13220347e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-enterprise-reservoir-ut",
+   "name": "Upper Enterprise Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Enterprise"
+   ],
+   "bbox": [
+    -113.88151,
+    37.50879,
+    -113.85811,
+    37.525146
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.189,
+   "launches": [
+    "enterprise-reservoir-boat-ramp-ut"
+   ],
+   "water_id": "upper-enterprise-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "e26235a20ac5a180105f2191eca25bac07885684b0ff5f6852ca0a51e91469ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-stillwater-reservoir-ut",
+   "name": "Upper Stillwater Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -110.707785,
+    40.55983,
+    -110.695035,
+    40.580753
+   ],
+   "wikidata": "Q7363391",
+   "charted": false,
+   "area_km2": 1.202,
+   "launches": [
+    "upper-stillwater-boat-ramp-ut"
+   ],
+   "water_id": "upper-stillwater-reservoir-ut",
+   "gnis_id": "2747038",
+   "geometry_hash": "6223ed1458c794105696e2792df3ca28265e900c9d6c1e8c00507bd847d26c1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "utah-lake-ut",
+   "name": "Utah Lake",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "American Fork",
+    "Lehi",
+    "Payson",
+    "Provo",
+    "Saratoga Resort",
+    "Saratoga Springs",
+    "Vineyard"
+   ],
+   "bbox": [
+    -111.943147,
+    40.00922,
+    -111.672543,
+    40.361708
+   ],
+   "wikidata": "Q729974",
+   "charted": false,
+   "area_km2": 360.492,
+   "launches": [
+    "american-fork-boat-harbor-ut",
+    "labaron-point-ut",
+    "lincoln-point-ut",
+    "lindon-boat-harbor-ut",
+    "millrace-north-ut",
+    "millrace-south-ut",
+    "saratoga-city-south-ut",
+    "saratoga-springs-ut",
+    "swedes-lane-ut",
+    "utah-lake-boat-launch-near-lehi-ut",
+    "utah-lake-state-park-ut",
+    "utah-lake-boat-launch-near-provo-ut-2",
+    "utah-lake-boat-launch-near-provo-ut-3",
+    "utah-lake-boat-launch-near-provo-ut-4"
+   ],
+   "water_id": "utah-lake-ut",
+   "gnis_id": "1446894",
+   "geometry_hash": "f90a719c4607667f7d10fae6b5bf837cf45b9a69962ba3d9dda8e2b503065d98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "white-river-ut",
+   "name": "White River",
+   "kind": "river",
+   "state": "UT",
+   "towns": [
+    "Bonanza"
+   ],
+   "bbox": [
+    -109.680358,
+    39.918453,
+    -108.712811,
+    40.107373
+   ],
+   "wikidata": "Q4468443",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "white-river-bonanza-boat-launch-ut",
+    "white-river-boat-launch-ut"
+   ],
+   "water_id": "white-river-co",
+   "gnis_id": "204653",
+   "geometry_hash": "8ae9af8f6288e781c323c74d56f7ebeb2987114d73d8e433e189764a787f45db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wide-hollow-reservoir-ut",
+   "name": "Wide Hollow Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Escalante"
+   ],
+   "bbox": [
+    -111.644841,
+    37.783487,
+    -111.630991,
+    37.791055
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.613,
+   "launches": [
+    "wide-hollow-reservoir-boat-launch-ut"
+   ],
+   "water_id": "wide-hollow-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "f798e48624ff1615c6e7238afa6fae40381a1582ba752b4d7353e2ed45f9ce4d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willard-bay-pond-ut",
+   "name": "Willard Bay Pond",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Willard"
+   ],
+   "bbox": [
+    -112.059628,
+    41.422324,
+    -112.055883,
+    41.423951
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.04,
+   "launches": [
+    "the-pond-boat-ramp-ut"
+   ],
+   "water_id": "willard-bay-pond-ut",
+   "gnis_id": null,
+   "geometry_hash": "6dfc0037a0b293a86b7c8c928fb61483f2344ff3b81d442cbd48d6ca60f69103",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willard-bay-ut",
+   "name": "Willard Bay",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Plain City",
+    "Willard"
+   ],
+   "bbox": [
+    -112.132476,
+    41.342355,
+    -112.043217,
+    41.420592
+   ],
+   "wikidata": "Q8003374",
+   "charted": false,
+   "area_km2": 40.059,
+   "launches": [
+    "exit-351-south-marina-ut",
+    "exit-357-ut",
+    "willard-bay-south-marina-ut",
+    "willard-bay-north-ut"
+   ],
+   "water_id": "willard-bay-ut",
+   "gnis_id": "1447373",
+   "geometry_hash": "b994c28f72508593060e97ac55ca1859c23d0600efc94f56d23a2414688f9851",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willow-lake-ut",
+   "name": "Willow Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [],
+   "bbox": [
+    -111.388943,
+    39.134116,
+    -111.382094,
+    39.13617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "willow-lake-campground-ut"
+   ],
+   "water_id": "willow-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "1388183f11816033c3cdf3eb586b30d69d5bee25106f01be228014aea0d490b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willow-spring-pond-ut",
+   "name": "Willow Spring Pond",
+   "kind": "lake",
+   "state": "UT",
+   "towns": [
+    "Enterprise"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "willow-spring-pond-carry-in-access-ut"
+   ],
+   "water_id": "willow-spring-pond-ut",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yankee-meadows-reservoir-ut",
+   "name": "Yankee Meadows Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Parowan"
+   ],
+   "bbox": [
+    -112.777286,
+    37.747154,
+    -112.771332,
+    37.754432
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.216,
+   "launches": [
+    "yankee-meadows-boat-launch-ut"
+   ],
+   "water_id": "yankee-meadows-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "7c0aa2cb9d9063d3e30a9d52aeb2f5ba87b56647b14784ec51ee0496b3d261b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yuba-lake-ut",
+   "name": "Yuba Lake",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Gunnison",
+    "Levan"
+   ],
+   "bbox": [
+    -112.033039,
+    39.214631,
+    -111.871779,
+    39.406298
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 36.911,
+   "launches": [
+    "yuba-state-park-ut",
+    "yuba-state-park-painted-rock-ut"
+   ],
+   "water_id": "yuba-lake-ut",
+   "gnis_id": null,
+   "geometry_hash": "58a65e54a697e6cf1363c94ed7729017bcb7a07ab25416881223594f1dd655ad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "zelph-calder-reservoir-ut",
+   "name": "Zelph Calder Reservoir",
+   "kind": "reservoir",
+   "state": "UT",
+   "towns": [
+    "Browns Park"
+   ],
+   "bbox": [
+    -109.217587,
+    40.728644,
+    -109.20027,
+    40.733136
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.336,
+   "launches": [
+    "calder-reservoir-ut"
+   ],
+   "water_id": "zelph-calder-reservoir-ut",
+   "gnis_id": null,
+   "geometry_hash": "ede24bd623062a7b4601c467c7806fce1f44f32559436e427d939e12ac7f3f39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}

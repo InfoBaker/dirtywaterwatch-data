@@ -1,188 +1,23 @@
 {
  "about": "Water names in Utah's records that data/receiving-waters-national.json does not hold for UT: the water a sewage report's title names (DEQ's Environmental Incidents layer), the water each advisory site of DWQ's Recreational Waters Map lies on, and EPA's receiving water on Utah's eRule reports; one row per name and county (the county of the record's point, else the county it gives), with the number of reports, how many are open now, up to five of their points ([lat, lon], 0.001 degree), their towns and sources, so the names pass builds each name where the reports are (Utah has a Gordon Creek in Morgan County and another in Carbon County). Records naming no water and texts that name a drain or outfall are left out (by_reason). Written by scripts/ut_report_water_names.py.",
  "state": "UT",
- "waters": 39,
- "reports": 80,
  "reports_on_listed_waters": 24,
+ "waters": 12,
+ "reports": 18,
  "by_reason": {
-  "no water named": 366,
-  "the same report as another source's": 1,
-  "a drain, outfall or street, not a water": 1
+  "no NHD flowline or waterbody of that name in UT": 11,
+  "2 NHD waters of that name in UT and the reports give no place to choose one": 1
+ },
+ "resolved_names": 27,
+ "resolved_reports": 62,
+ "build": {
+  "date": "2026-11-08",
+  "command": "python -m ingest.waters_from_nhd --names research/ut/receiving-waters-missing.json --state UT",
+  "records_built": 12,
+  "names_resolved": 27,
+  "network_requests": 0
  },
  "rows": [
-  {
-   "name": "San Juan River",
-   "reports": 7,
-   "county": "San Juan County",
-   "points": [
-    [
-     37.26,
-     -109.614
-    ],
-    [
-     37.147,
-     -109.854
-    ],
-    [
-     37.282,
-     -109.561
-    ],
-    [
-     37.258,
-     -109.62
-    ],
-    [
-     37.28,
-     -109.495
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 7
-   },
-   "open": 7,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Scofield Reservoir",
-   "reports": 6,
-   "county": "Carbon County",
-   "points": [
-    [
-     39.807,
-     -111.136
-    ],
-    [
-     39.789,
-     -111.129
-    ],
-    [
-     39.763,
-     -111.166
-    ],
-    [
-     39.769,
-     -111.141
-    ],
-    [
-     39.786,
-     -111.117
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 6
-   },
-   "open": 6,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Strawberry Reservoir",
-   "reports": 6,
-   "county": "Wasatch County",
-   "points": [
-    [
-     40.144,
-     -111.047
-    ],
-    [
-     40.235,
-     -111.137
-    ],
-    [
-     40.177,
-     -111.154
-    ],
-    [
-     40.125,
-     -111.153
-    ],
-    [
-     40.157,
-     -111.049
-    ]
-   ],
-   "towns": [
-    "Heber City"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 1,
-    "ut-dwq-recreational-advisories": 5
-   },
-   "open": 5,
-   "places_from": [
-    "ut-deq-environmental-incidents",
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Deer Creek Reservoir",
-   "reports": 4,
-   "county": "Wasatch County",
-   "points": [
-    [
-     40.414,
-     -111.517
-    ],
-    [
-     40.426,
-     -111.492
-    ],
-    [
-     40.445,
-     -111.481
-    ],
-    [
-     40.416,
-     -111.507
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-deq-environmental-incidents": 1,
-    "ut-dwq-recreational-advisories": 3
-   },
-   "open": 3,
-   "places_from": [
-    "ut-deq-environmental-incidents",
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Pineview Reservoir",
-   "reports": 4,
-   "county": "Weber County",
-   "points": [
-    [
-     41.264,
-     -111.799
-    ],
-    [
-     41.272,
-     -111.806
-    ],
-    [
-     41.254,
-     -111.79
-    ],
-    [
-     41.275,
-     -111.783
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 4
-   },
-   "open": 4,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
   {
    "name": "Rockport Reservoir",
    "reports": 4,
@@ -208,115 +43,8 @@
    "open": 4,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Starvation Reservoir",
-   "reports": 4,
-   "county": "Duchesne County",
-   "points": [
-    [
-     40.18,
-     -110.46
-    ],
-    [
-     40.214,
-     -110.432
-    ],
-    [
-     40.199,
-     -110.432
-    ],
-    [
-     40.192,
-     -110.456
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 4
-   },
-   "open": 4,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Gunlock Reservoir",
-   "reports": 3,
-   "county": "Washington County",
-   "points": [
-    [
-     37.257,
-     -113.774
-    ],
-    [
-     37.258,
-     -113.773
-    ],
-    [
-     37.253,
-     -113.774
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 3
-   },
-   "open": 3,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Mantua Reservoir",
-   "reports": 3,
-   "county": "Box Elder County",
-   "points": [
-    [
-     41.511,
-     -111.925
-    ],
-    [
-     41.506,
-     -111.942
-    ],
-    [
-     41.501,
-     -111.942
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 3
-   },
-   "open": 3,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Bear Lake",
-   "reports": 2,
-   "county": "Rich County",
-   "points": [
-    [
-     41.903,
-     -111.375
-    ],
-    [
-     41.85,
-     -111.301
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-deq-environmental-incidents": 2
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Big East Lake",
@@ -339,79 +67,8 @@
    "open": 2,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Echo Reservoir",
-   "reports": 2,
-   "county": "Summit County",
-   "points": [
-    [
-     40.947,
-     -111.4
-    ],
-    [
-     40.957,
-     -111.409
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 2
-   },
-   "open": 2,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Fremont River",
-   "reports": 2,
-   "county": "Wayne County",
-   "points": [
-    [
-     38.284,
-     -111.248
-    ],
-    [
-     38.289,
-     -111.235
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 2
-   },
-   "open": 2,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Lake Powell",
-   "reports": 2,
-   "county": "San Juan County",
-   "points": [
-    [
-     37.463,
-     -110.718
-    ],
-    [
-     37.473,
-     -110.721
-    ]
-   ],
-   "towns": [
-    "Halls Crossing",
-    "Montezuma Creek"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 2
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Lower Virgin River",
@@ -434,30 +91,8 @@
    "open": 2,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Panguitch Lake",
-   "reports": 2,
-   "county": "Garfield County",
-   "points": [
-    [
-     37.724,
-     -112.627
-    ],
-    [
-     37.728,
-     -112.62
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 2
-   },
-   "open": 2,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Salem Pond",
@@ -480,30 +115,8 @@
    "open": 2,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Sulphur Creek",
-   "reports": 2,
-   "county": "Wayne County",
-   "points": [
-    [
-     38.292,
-     -111.259
-    ],
-    [
-     38.287,
-     -111.248
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 2
-   },
-   "open": 2,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Babylon Trail Creek",
@@ -522,26 +135,8 @@
    "open": 1,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Baker Reservoir",
-   "reports": 1,
-   "county": "Washington County",
-   "points": [
-    [
-     37.376,
-     -113.639
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Bountiful Pond",
@@ -560,7 +155,8 @@
    "open": 1,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Brighton Canal",
@@ -581,26 +177,8 @@
    "open": 0,
    "places_from": [
     "ut-deq-environmental-incidents"
-   ]
-  },
-  {
-   "name": "Calf Creek",
-   "reports": 1,
-   "county": "Garfield County",
-   "points": [
-    [
-     37.794,
-     -111.414
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Fifth Water Hot Springs",
@@ -619,28 +197,8 @@
    "open": 1,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Gordon Creek",
-   "reports": 1,
-   "county": "Morgan County",
-   "points": [
-    [
-     41.151,
-     -111.82
-    ]
    ],
-   "towns": [
-    "Mountain Green"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 1
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Hobble Creek",
@@ -654,68 +212,8 @@
    "open": 0,
    "places_from": [
     "ut-deq-environmental-incidents"
-   ]
-  },
-  {
-   "name": "Jordanelle Reservoir",
-   "reports": 1,
-   "county": "Wasatch County",
-   "points": [
-    [
-     40.617,
-     -111.422
-    ]
    ],
-   "towns": [
-    "Park City"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 1
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
-  },
-  {
-   "name": "Lake Powell",
-   "reports": 1,
-   "county": "Kane County",
-   "points": [
-    [
-     37.083,
-     -111.337
-    ]
-   ],
-   "towns": [
-    "Big Water"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 1
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
-  },
-  {
-   "name": "Lake at the Hills",
-   "reports": 1,
-   "county": "Iron County",
-   "points": [
-    [
-     37.662,
-     -113.087
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
+   "reason": "2 NHD waters of that name in UT and the reports give no place to choose one"
   },
   {
    "name": "Manila Creek Pond",
@@ -734,144 +232,8 @@
    "open": 1,
    "places_from": [
     "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "McClellan Lake",
-   "reports": 1,
-   "county": "Utah County",
-   "points": [
-    [
-     39.939,
-     -111.643
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "North Creek",
-   "reports": 1,
-   "county": "Washington County",
-   "points": [
-    [
-     37.263,
-     -113.101
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "North Fork of the Virgin River",
-   "reports": 1,
-   "county": "Washington County",
-   "points": [
-    [
-     37.285,
-     -112.948
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Pack Creek",
-   "reports": 1,
-   "county": "Grand County",
-   "points": [
-    [
-     38.539,
-     -109.5
-    ]
-   ],
-   "towns": [
-    "Moab"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 1
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
-  },
-  {
-   "name": "Panguitch Creek",
-   "reports": 1,
-   "county": "Garfield County",
-   "points": [
-    [
-     37.746,
-     -112.587
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Red Creek Reservoir",
-   "reports": 1,
-   "county": "Iron County",
-   "points": [
-    [
-     37.866,
-     -112.682
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "ut-dwq-recreational-advisories": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ut-dwq-recreational-advisories"
-   ]
-  },
-  {
-   "name": "Salina Creek",
-   "reports": 1,
-   "county": "Sevier County",
-   "points": [
-    [
-     38.942,
-     -111.854
-    ]
-   ],
-   "towns": [
-    "Salina"
-   ],
-   "sources": {
-    "ut-deq-environmental-incidents": 1
-   },
-   "open": 0,
-   "places_from": [
-    "ut-deq-environmental-incidents"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "South Fork River",
@@ -892,7 +254,8 @@
    "open": 0,
    "places_from": [
     "ut-deq-environmental-incidents"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
   },
   {
    "name": "Willard Pond",
@@ -911,7 +274,655 @@
    "open": 1,
    "places_from": [
     "ut-dwq-recreational-advisories"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in UT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "San Juan River",
+   "reports": 7,
+   "slugs": [
+    "san-juan-river-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.26,
+     -109.614
+    ],
+    [
+     37.147,
+     -109.854
+    ],
+    [
+     37.282,
+     -109.561
+    ],
+    [
+     37.258,
+     -109.62
+    ],
+    [
+     37.28,
+     -109.495
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "San Juan County"
+  },
+  {
+   "name": "Scofield Reservoir",
+   "reports": 6,
+   "slugs": [
+    "scofield-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.807,
+     -111.136
+    ],
+    [
+     39.789,
+     -111.129
+    ],
+    [
+     39.763,
+     -111.166
+    ],
+    [
+     39.769,
+     -111.141
+    ],
+    [
+     39.786,
+     -111.117
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Carbon County"
+  },
+  {
+   "name": "Strawberry Reservoir",
+   "reports": 6,
+   "slugs": [
+    "strawberry-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.144,
+     -111.047
+    ],
+    [
+     40.235,
+     -111.137
+    ],
+    [
+     40.177,
+     -111.154
+    ],
+    [
+     40.125,
+     -111.153
+    ],
+    [
+     40.157,
+     -111.049
+    ]
+   ],
+   "towns": [
+    "Heber City"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents",
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Wasatch County"
+  },
+  {
+   "name": "Deer Creek Reservoir",
+   "reports": 4,
+   "slugs": [
+    "deer-creek-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.414,
+     -111.517
+    ],
+    [
+     40.426,
+     -111.492
+    ],
+    [
+     40.445,
+     -111.481
+    ],
+    [
+     40.416,
+     -111.507
+    ]
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents",
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Wasatch County"
+  },
+  {
+   "name": "Pineview Reservoir",
+   "reports": 4,
+   "slugs": [
+    "pineview-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.264,
+     -111.799
+    ],
+    [
+     41.272,
+     -111.806
+    ],
+    [
+     41.254,
+     -111.79
+    ],
+    [
+     41.275,
+     -111.783
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Weber County"
+  },
+  {
+   "name": "Starvation Reservoir",
+   "reports": 4,
+   "slugs": [
+    "starvation-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.18,
+     -110.46
+    ],
+    [
+     40.214,
+     -110.432
+    ],
+    [
+     40.199,
+     -110.432
+    ],
+    [
+     40.192,
+     -110.456
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Duchesne County"
+  },
+  {
+   "name": "Gunlock Reservoir",
+   "reports": 3,
+   "slugs": [
+    "gunlock-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.257,
+     -113.774
+    ],
+    [
+     37.258,
+     -113.773
+    ],
+    [
+     37.253,
+     -113.774
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "Mantua Reservoir",
+   "reports": 3,
+   "slugs": [
+    "mantua-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.511,
+     -111.925
+    ],
+    [
+     41.506,
+     -111.942
+    ],
+    [
+     41.501,
+     -111.942
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Box Elder County"
+  },
+  {
+   "name": "Bear Lake",
+   "reports": 2,
+   "slugs": [
+    "bear-lake-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.903,
+     -111.375
+    ],
+    [
+     41.85,
+     -111.301
+    ]
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "Rich County"
+  },
+  {
+   "name": "Echo Reservoir",
+   "reports": 2,
+   "slugs": [
+    "echo-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.947,
+     -111.4
+    ],
+    [
+     40.957,
+     -111.409
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Summit County"
+  },
+  {
+   "name": "Fremont River",
+   "reports": 2,
+   "slugs": [
+    "fremont-river-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.284,
+     -111.248
+    ],
+    [
+     38.289,
+     -111.235
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Wayne County"
+  },
+  {
+   "name": "Lake Powell",
+   "reports": 2,
+   "slugs": [
+    "lake-powell-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.463,
+     -110.718
+    ],
+    [
+     37.473,
+     -110.721
+    ]
+   ],
+   "towns": [
+    "Halls Crossing",
+    "Montezuma Creek"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "San Juan County"
+  },
+  {
+   "name": "Panguitch Lake",
+   "reports": 2,
+   "slugs": [
+    "panguitch-lake-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.724,
+     -112.627
+    ],
+    [
+     37.728,
+     -112.62
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Garfield County"
+  },
+  {
+   "name": "Sulphur Creek",
+   "reports": 2,
+   "slugs": [
+    "sulphur-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.292,
+     -111.259
+    ],
+    [
+     38.287,
+     -111.248
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Wayne County"
+  },
+  {
+   "name": "Baker Reservoir",
+   "reports": 1,
+   "slugs": [
+    "baker-reservoir-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.376,
+     -113.639
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "Calf Creek",
+   "reports": 1,
+   "slugs": [
+    "calf-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.794,
+     -111.414
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Garfield County"
+  },
+  {
+   "name": "Gordon Creek",
+   "reports": 1,
+   "slugs": [
+    "gordon-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.151,
+     -111.82
+    ]
+   ],
+   "towns": [
+    "Mountain Green"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "Morgan County",
+   "places_failed": [
+    {
+     "lon": -111.82,
+     "lat": 41.151,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.15100, -111.82000) (the nearest is 184.6 km away)"
+    },
+    {
+     "town": "Mountain Green",
+     "reason": "no NHD water of that name within 3 km of Mountain Green (the nearest is 181.1 km away)"
+    }
    ]
+  },
+  {
+   "name": "Jordanelle Reservoir",
+   "reports": 1,
+   "slugs": [
+    "jordanelle-reservoir-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.617,
+     -111.422
+    ]
+   ],
+   "towns": [
+    "Park City"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "Wasatch County"
+  },
+  {
+   "name": "Lake Powell",
+   "reports": 1,
+   "slugs": [
+    "lake-powell-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.083,
+     -111.337
+    ]
+   ],
+   "towns": [
+    "Big Water"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "Kane County"
+  },
+  {
+   "name": "Lake at the Hills",
+   "reports": 1,
+   "slugs": [
+    "lake-at-the-hills-ut"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.662,
+     -113.087
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Iron County"
+  },
+  {
+   "name": "McClellan Lake",
+   "reports": 1,
+   "slugs": [
+    "mcclellan-lake-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.939,
+     -111.643
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Utah County"
+  },
+  {
+   "name": "North Creek",
+   "reports": 1,
+   "slugs": [
+    "north-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.263,
+     -113.101
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "North Fork of the Virgin River",
+   "reports": 1,
+   "slugs": [
+    "north-fork-virgin-river-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.285,
+     -112.948
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "Pack Creek",
+   "reports": 1,
+   "slugs": [
+    "pack-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.539,
+     -109.5
+    ]
+   ],
+   "towns": [
+    "Moab"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "Grand County"
+  },
+  {
+   "name": "Panguitch Creek",
+   "reports": 1,
+   "slugs": [
+    "panguitch-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.746,
+     -112.587
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Garfield County"
+  },
+  {
+   "name": "Red Creek Reservoir",
+   "reports": 1,
+   "slugs": [
+    "red-creek-reservoir-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.866,
+     -112.682
+    ]
+   ],
+   "places_from": [
+    "ut-dwq-recreational-advisories"
+   ],
+   "county": "Iron County"
+  },
+  {
+   "name": "Salina Creek",
+   "reports": 1,
+   "slugs": [
+    "salina-creek-ut"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.942,
+     -111.854
+    ]
+   ],
+   "towns": [
+    "Salina"
+   ],
+   "places_from": [
+    "ut-deq-environmental-incidents"
+   ],
+   "county": "Sevier County"
   }
  ]
 }
