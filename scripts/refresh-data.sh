@@ -35,8 +35,16 @@ make refresh || { echo "make refresh failed: nothing uploaded; the workflow publ
 # failure leaves this script's exit status as it is
 NR_PY="$(pwd)/pipeline/.venv/bin/python"
 [ -x "$NR_PY" ] || NR_PY=python3
-sh scripts/timed.sh name-review sh -c 'cd pipeline && exec "$0" -m build.name_review --standing' "$NR_PY" \
-  || echo "name review failed: not blocking"
+# on a daily pass (pipeline/cadence.py daily: exit 3 when it ran well in the last day; any other answer runs it): it
+# rescans every record, about 3.5 minutes, for a review the owner reads, and nothing published or later reads it
+nr_due=0; (cd pipeline && exec "$NR_PY" -m cadence daily name-review) || nr_due=$?
+if [ "$nr_due" = 3 ]; then
+  echo "name review: on its daily pass, not due this run (data/build/feed-cadence.json)"
+elif sh scripts/timed.sh name-review sh -c 'cd pipeline && exec "$0" -m build.name_review --standing' "$NR_PY"; then
+  (cd pipeline && exec "$NR_PY" -m cadence ran name-review) || true
+else
+  echo "name review failed: not blocking"
+fi
 sh scripts/timed.sh tally make tally || echo "source tally failed"
 # the export's blocklist self-check (pipeline/export/build.py enforce_blocklist) found a private name in out/:
 # nothing is uploaded until an export passes it (the mark lists the files)
