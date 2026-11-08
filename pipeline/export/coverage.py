@@ -174,7 +174,7 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False, operator:
                                           "still shown.")
     if by is None and operator:
         who = operator if operator.lower().startswith("the ") else f"the {operator}"
-        by = f"Of the sewer operators in {in_name}, only {who} publishes dated reports"
+        by = f"In {in_name}, {who} publishes dated reports"     # the operator whose feed is read; not claimed the only one
     if f["records_12m"] == 0:
         # scoped to the grading window: a state with an older readable report on file (New Mexico's of June 2024)
         # must not be told it publishes nothing readable (SOL review 2026-11-07, site P2-8; the site's coverage.ts
