@@ -29,6 +29,8 @@ Records (a supplementary source)
     the amount is above zero, else volume_text keeps what was given ("not given" for 0 with no unit).
   - Place: the layer's point (coord_source source, raw.county the county). waterbody_text the waterway with its
     county number cut ("Alum Creek"); "NULL", "UNNAMED" and "99 - UNNAMED" are no water (raw.waterway_note). A
+    report whose point lies outside the county it gives (15 of 1,121 on 2026-11-08, 3 of them outside Ohio) keeps
+    the point in raw.point_not_used only and is placed by its county and named water (Ohio go-live audit P3-4). A
     report with a named water is placed on it, county-aware (pipeline/build/status.py COUNTY_STATES, the county of
     the report's point); one without is placed from its point by the status build's rules. Never geocoded from the
     place text.
@@ -52,7 +54,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import HEADERS, event, now_iso, save_raw, write_events
+from common import DATA_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
 
 SOURCE_ID = "oh-epa-spills-opendata"
 SERVICE = "https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer"
@@ -180,6 +182,21 @@ def volume(a: dict) -> tuple[int | None, str | None]:
     return None, "not given" if not uom or uom.upper() in ("NULL", "UNK") else f"0 {uom.lower()}"
 
 
+COUNTIES = DATA_DIR / "reference" / "oh-counties.json"
+_OUTLINES: list = []
+
+
+def point_county(lat, lon) -> str | None:
+    """The Ohio county (its name without "County") whose Census outline holds the point, or None (outside Ohio)."""
+    if not _OUTLINES:
+        from shapely.geometry import shape
+        doc = read_json(COUNTIES, {}) or {}
+        _OUTLINES.extend((re.sub(r"\s+County$", "", c["county"]), shape(c["geometry"])) for c in doc.get("counties") or [])
+    from shapely.geometry import Point
+    pt = Point(float(lon), float(lat))
+    return next((n for n, g in _OUTLINES if g.covers(pt)), None)
+
+
 def to_record(a: dict, now: str, rows: int = 1, products: list | None = None) -> dict | None:
     case = clean(a.get("casenumber"))
     if not case:
@@ -190,6 +207,14 @@ def to_record(a: dict, now: str, rows: int = 1, products: list | None = None) ->
     gal, vtext = volume(a)
     lat, lon = a.get("latitude"), a.get("longitude")
     county = clean(a.get("county"))
+    off_county = None
+    if isinstance(lat, (int, float)) and lat and isinstance(lon, (int, float)) and county:
+        here = point_county(lat, lon)
+        if here is None or here.lower() != county.lower():
+            # Ohio go-live audit P3-4: the point is not in the county the report gives (17 of 1,121; 3 outside Ohio):
+            # the point is kept in raw only, and the report is placed by its county and named water
+            off_county = {"lat": lat, "lon": lon, "point_county": here or "outside Ohio"}
+            lat = lon = None
     rec_amt = a.get("recovamount")
     raw = {"case": case, "product": product, "county": county, "district": clean(a.get("oepadist")),
            "place": place_name(a.get("city_twn")), "waterway": clean(a.get("waterway")),
@@ -203,6 +228,11 @@ def to_record(a: dict, now: str, rows: int = 1, products: list | None = None) ->
         raw["case_products"] = products
     if why:
         raw["waterway_note"] = why
+    if off_county:
+        where = ("outside Ohio" if off_county["point_county"] == "outside Ohio"
+                 else f"in {off_county['point_county']} County")
+        raw["point_not_used"] = {**off_county, "why": (f"the layer's point lies {where}, not in {county} County, the "
+                                                         "county the report gives: placed by its county and named water")}
     note = PRODUCT_NOTES.get(product.upper())
     if note:
         raw["product_note"] = note

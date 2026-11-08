@@ -1032,6 +1032,7 @@ COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county
 COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives points and a county field (two Gordon Creeks)
 COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
+COUNTY_FIELD_STATES.add("OH")    # Ohio: a spill whose point lies outside its county keeps only raw.county (audit P3-4)
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
