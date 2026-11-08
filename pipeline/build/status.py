@@ -888,23 +888,35 @@ def live_outfalls(rows: list[dict] | None = None, live: set[str] | None = None) 
 _GEOM_CACHE: dict[str, object] = {}
 
 
+def outline_of(d: dict):
+    """A record's whole outline: `geometry` and, in openboatlaunch's API shape (schema 1: its national bulk file, the
+    folder the cloud runs restore), `geometry_lines`, the line pieces of a water drawn both as an area and as lines (a
+    river's banks and its centre line), which the API's `geometry` then leaves out (openboatlaunch docs/api/v1.md).
+    Reading `geometry` alone gave such a river only its area pieces: on the batch runner the Jordan River was a few
+    polygons, so the NHD remainders cut against it covered nearly the whole river and the recheck found nothing to
+    cut (Utah go-live audit 2026-11-08, P1-1). None when there is neither."""
+    from shapely.geometry import GeometryCollection, shape
+    parts = [shape(d[k]) for k in ("geometry", "geometry_lines") if isinstance(d.get(k), dict) and d[k]]
+    parts = [p for p in parts if not p.is_empty]
+    if not parts:
+        return None
+    return parts[0] if len(parts) == 1 else GeometryCollection(parts)
+
+
 def water_geometry(slug: str, waters: dict | None = None):
-    """The water's shapely geometry from openboatlaunch's out/water/<slug>.json (or an inline
-    geometry in a waters-extra record); None when there is none."""
+    """The water's shapely geometry from openboatlaunch's out/water/<slug>.json (or an inline geometry in a
+    waters-extra record), its `geometry_lines` included (outline_of); None when there is none."""
     if slug in _GEOM_CACHE:
         return _GEOM_CACHE[slug]
-    from shapely.geometry import shape
     g = None
     w = (waters or {}).get(slug) or {}
     try:
         if w.get("geometry"):
-            g = shape(w["geometry"])
+            g = outline_of(w)
         else:
             p = OBL_WATER_DIR / f"{slug}.json"
             if p.exists():
-                d = json.loads(p.read_text())
-                if d.get("geometry"):
-                    g = shape(d["geometry"])
+                g = outline_of(json.loads(p.read_text()))
     except Exception:
         g = None
     _GEOM_CACHE[slug] = g

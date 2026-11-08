@@ -326,7 +326,10 @@ def merge_nhd(st: str, have: dict, waters: list[dict], raw_of, source: str, seen
     def outline(r: dict, a: dict) -> dict:
         raw = raw_of(a["slug"]) or {}
         if raw.get("geometry"):
-            r["geometry"], r["bbox"], r["outline_from"] = raw["geometry"], a.get("bbox") or r.get("bbox"), "openboatlaunch"
+            g = raw["geometry"]
+            if isinstance(raw.get("geometry_lines"), dict):     # the API shape keeps a river's line pieces apart
+                g = {"type": "GeometryCollection", "geometries": [g, raw["geometry_lines"]]}
+            r["geometry"], r["bbox"], r["outline_from"] = g, a.get("bbox") or r.get("bbox"), "openboatlaunch"
             for k in MERGE_SIZE:
                 if raw.get(k) is not None:
                     r[k] = raw[k]
