@@ -286,6 +286,8 @@ def add_water(d, st):
         return
     try:
         g = shape(d["geometry"])
+        if d.get("geometry_lines"):        # the API shape's line pieces (build/status.py outline_of)
+            g = unary_union([g, shape(d["geometry_lines"])])
     except Exception:
         return
     waters.append({"slug": d["slug"], "name": d["name"], "kind": d.get("kind"), "state": st,
