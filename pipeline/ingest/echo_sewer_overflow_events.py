@@ -1,6 +1,6 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
 Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona), South Dakota,
-Mississippi, Nebraska, Alaska and New Mexico (with the Navajo Nation's reports located in New Mexico).
+Mississippi, Nebraska, Alaska, New Mexico (with the Navajo Nation's reports located in New Mexico) and Kentucky.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -372,6 +372,57 @@ section 2.2; not live until data/rules.json says so)
   - A Navajo Nation report dropped for New Mexico or Arizona carries "state" in the dropped file, so the state scripts
     count it under the state it was placed in.
 
+Utah (permits UT...; research/ut/report.md section 2.2; not live until data/rules.json says so)
+  Utah issues its own permits (UPDES); its sewer overflow rule (R317-801-4) sends Class 1 overflows to the Division of
+  Water Quality by telephone within 24 hours and in writing within five days, and no list of them is published. EPA's
+  collection-system table lists 188 Utah permits, but the 2026-11-04 all-versions extract holds one Utah report: the
+  Timpanogos Special Service District's bypass line struck by a vehicle at American Fork (UT0023639, 2026-08-17 14:39 to
+  14:49, 1,000 gallons, receiving water "Storm water outfall", received 2026-08-25). The rules below are keyed on UT:
+  - Time zone: STATE_TZ gives America/Denver (Utah keeps one zone).
+  - The report's longitude is filed without its minus sign (111.798013): UT is in SIGN_REPAIR_PREFIXES, so a positive
+    longitude whose negative lies in the Four Corners states' box is read as west, as for New Mexico.
+  - Utah's other public record, DEQ's spill hotline log (ut-deq-environmental-incidents), holds the same overflow; that
+    feed marks its row duplicate_of this one (ingest/ut_transforms.ut_incidents_post).
+  - No free-text or repeated-point rule: the one description names no person or address.
+Kentucky (permits KY...; research/ky/report.md section 2.2; not live until data/rules.json says so)
+  Kentucky's own electronic reporting system (EPA's submission type ES2, form sets KY-...) sent its sewer overflow and
+  bypass reports to this dataset for two months only: the 2026-11-04 all-versions extract holds 43 current KY rows from
+  37 permits, started 2025-12-08 to 2026-01-08 and received 2025-12 (34) and 2026-01 (9), and none since; every row has
+  a point, a start and an end, 19 a volume; receipt a median 0 days after the start (the longest 5). Five Kentucky
+  habits are handled here, keyed on KY permits only, so every other state's records are unchanged (checked on that
+  extract: 2,225 kept and 2,445 dropped records of the other states identical):
+  - Time zone. Kentucky straddles Eastern and Central time along county lines (49 CFR 71.5(c)): the event's own point
+    against the outlines of the forty-one Central-time counties (data/reference/ky-central-time-counties.json, written
+    by scripts/ky_central_time_counties.py, which cites the rule and checks it against the U.S. DOT time-zone layer) is
+    read as America/Chicago; any other point as America/New_York (STATE_TZ); raw.timezone_note names the county that
+    decided it, and raw.time_zone carries the zone on every Kentucky record (wave 4 brief, the record's own clock).
+  - Type. The state's system files every event as a bypass (BYP) at a structure typed 'Other', although most are
+    collection-system overflows: the description's 'Nature of Incident' names a manhole, force main, lift or pump
+    station, lateral, clean-out or line break. A KY report typed BYP whose description names such a structure
+    (KY_SSO_TEXT) is read as a sanitary sewer overflow, with raw.type_as_filed "BYP" and raw.type_note; one that names
+    a bypass at the plant (KY_PLANT_BYPASS: 'BYPASS AT WQTC') or no structure stays a bypass.
+  - Receiving water. 'Unnamed Tributary or Unknown' and 'Unnamed' are the form's placeholders (STATE_NO_NAME["KY"]):
+    read as no name given, so the description decides. Its structured answers are read (ky_water_text): 'Receiving
+    into an unnamed tributary? Yes.' or 'Release To:' a creek, stream, river or lake is a water reached (no name); a
+    description saying 'No waterways impacted' or that the spill 'did not reach a waterbody' is a denial
+    (STATE_TEXT_DENIAL["KY"]: dropped, 'the report says no water was reached'); 'River City Controls' and other names
+    of firms and roads that hold a water word are not waters (STATE_NOT_A_WATER_TEXT["KY"]). A report that went to the
+    ground or a street and answers 'No' is dropped by the generic rule ('no evidence the discharge reached a water').
+  - The plant's point (PLANT_POINT_STATES; review 2026-11-08 P2-4): 12 of the 17 kept reports whose permit has a
+    point in EPA's plant list give a point within 250 m of it, several the plant's own, so a sewer overflow whose point
+    lies within REPEATED_POINT_PLANT_M (1,000 m) of its permit's plant point keeps it only in raw.reported_point with
+    raw.point_note, and is placed by the water it names or not at all; a bypass keeps its point (it is at the plant).
+    Kentucky's one to three reports per permit cannot meet the repeat count other states use, so no count is asked.
+  - The Cabinet's incident number ('Incident ID: 2559095') is kept in raw.ky_incident_id; one incident filed under two
+    permits (Frankfort's plant and a general permit, 2025-12-22) stays two reports, both dropped (ground, no water).
+  - Free text: the descriptions name the people who called in, responded and were notified ('Collections operator
+    <name> reported', '<name> responded', 'DO notified <name>', 'Duty Officer - <name>') and give phone numbers and
+    house numbers, so KY is in FREE_TEXT_STATES (the Illinois scrub) and its free text also goes through
+    ky_scrub_people (KY_PERSON_*: a capitalised name after a role word or before 'responded', 'reported' and the
+    like, or before a removed phone number, becomes [name removed]; firm words such as 'Brands', 'Park', 'Controls'
+    keep the phrase). The blocklist still runs on the export. Known problem: one Louisville MSD report gives an end
+    14 minutes before its start (2026-01-01, 'Cause/Duration of Incident: -14'); times are read as filed.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -403,19 +454,27 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
-            "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver"}
+            "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver",
+            "KY": "America/New_York"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
-POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
+POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json",
+                    "KY": "ky-central-time-counties.json"}   # Kentucky: the Central-time counties (module docstring)
+# states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
+ZONE_ALWAYS_STATES = {"KY"}
+# states whose sewer overflow at the plant's own point (within REPEATED_POINT_PLANT_M of a point EPA's plant list gives
+# the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
+# 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
+PLANT_POINT_STATES = {"KY"}
 # a state's part in another zone, by the event's own point: [(lon_min, lon_max, lat_min, lat_max)], zone. The Aleutian
 # Islands west of 169 deg 30 min W are Hawaii-Aleutian time (49 CFR 71.12; the rest of Alaska 71.11); module docstring
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
@@ -460,7 +519,7 @@ POINT_PLACED_PREFIXES = {"NN"}
 PERMIT_TZ = {"NN": "America/Denver"}
 # permit prefixes whose positive longitude is read as west when its negative lies in SIGN_REPAIR_BOX (module docstring,
 # New Mexico): [lon_min, lat_min, lon_max, lat_max] around Arizona, New Mexico, Utah and Colorado
-SIGN_REPAIR_PREFIXES = {"NM", "NN"}
+SIGN_REPAIR_PREFIXES = {"NM", "NN", "UT"}
 SIGN_REPAIR_BOX = (-114.9, 31.3, -102.0, 42.0)
 # states whose kept reports that name a receiving water but describe the flow going to the plant's lagoon carry a note
 # saying why they are shown (module docstring, New Mexico; review 2026-11-07 P2-3)
@@ -500,7 +559,9 @@ STATE_NO_WATER["NM"] = STATE_NO_WATER["AZ"]
 # receiving-water texts that name no water but do not deny one either: read as no name given, so the other rules
 # decide (South Dakota: "NA, all water was filtered before discharged." on a bypass that was discharged; review
 # 2026-11-07 P2-4)
-STATE_NO_NAME = {"SD": re.compile(r"^\s*n/?a\s*[,;:-].*\bdischarged?\b", re.I)}
+STATE_NO_NAME = {"SD": re.compile(r"^\s*n/?a\s*[,;:-].*\bdischarged?\b", re.I),
+                 # Kentucky's form placeholders (module docstring, Kentucky)
+                 "KY": re.compile(r"^\s*(?:unnamed(?:\s+tributary)?(?:\s+or\s+unknown)?|unknown)\s*\.?\s*$", re.I)}
 
 
 def named(waters: list[str], state: str | None) -> list[str]:
@@ -511,7 +572,13 @@ def named(waters: list[str], state: str | None) -> list[str]:
 
 # words that name a structure of the sewer system, not a water, taken out of the text before WATER_WORDS is read, for
 # the listed states only (South Dakota's lagoon systems pump to an "emergency pond", a holding cell of the plant)
-STATE_NOT_A_WATER_TEXT = {"SD": re.compile(r"\bemergency ponds?\b", re.I)}
+STATE_NOT_A_WATER_TEXT = {"SD": re.compile(r"\bemergency ponds?\b", re.I),
+                          # Kentucky: firms and roads named with a water word ('River City Controls')
+                          "KY": re.compile(r"\b(?:river|creek|lake|pond)\s+(?:city|controls?|road|rd|drive|dr|"
+                                           r"street|st|pike|lane|ln|avenue|ave|estates?|subdivision)\b", re.I)}
+# a description that says no water was reached (module docstring, Kentucky): the report is dropped with that reason
+STATE_TEXT_DENIAL = {"KY": re.compile(r"\bno\s+waterways?\s+(?:were\s+|was\s+)?impacted\b|"
+                                      r"\bdid\s*n[o']?t\s+reach\s+(?:a|any|the)\s+water\s*(?:body|way)\b", re.I)}
 
 
 def alias_reaches(bbox, lat, lon) -> bool:
@@ -609,6 +676,95 @@ def az_water_text(texts: str) -> str | None:
 
 
 STATE_WATER_TEXT = {"AZ": az_water_text}
+
+
+# Kentucky (module docstring): the form's structured answers in the description
+KY_TRIBUTARY_YES = re.compile(r"receiving\s+into\s+an?\s+unnamed\s+tributary\?\s*yes\b", re.I)
+KY_RELEASE_TO_WATER = re.compile(r"\brelease\s+to:\s*(creek|stream|river|lake|pond)\b", re.I)
+
+
+def ky_water_text(texts: str) -> str | None:
+    """Kentucky: the form's answer that a water was reached ('Receiving into an unnamed tributary? Yes.', 'Release
+    To: Creek'), as the words read; None otherwise."""
+    m = KY_TRIBUTARY_YES.search(texts) or KY_RELEASE_TO_WATER.search(texts)
+    return m.group(0) if m else None
+
+
+STATE_WATER_TEXT["KY"] = ky_water_text
+# Kentucky's types (module docstring): every report is filed BYP; the description's structure decides
+TYPE_FROM_TEXT_STATES = {"KY"}
+KY_SSO_TEXT = re.compile(r"\b(?:man\s?holes?|force\s*mains?|lift\s*stations?|pump\s*stations?|wet\s*wells?|"
+                         r"clean\s*-?\s*outs?|laterals?|sewer\s*(?:mains?|lines?)|line\s*breaks?|main\s*(?:break|leak)s?|"
+                         r"LS|PS|SSOs?|(?:lack of )?system capacity)\b", re.I)   # capacity: review 2026-11-08 P3-3
+KY_PLANT_BYPASS = re.compile(r"\bbypass\w*\s+at\s+(?:the\s+)?(?:wqtc|wwtp|stp|plant|treatment)\b|"
+                             r"\b(?:wqtc|wwtp|treatment\s+plant)\s+bypass", re.I)
+KY_TYPE_NOTE = ("filed as a bypass (Kentucky's system files every event so), but the description names a "
+                "collection-system structure ({what}): shown as a sewer overflow")
+
+
+def type_from_text(ev: dict, t_codes: list[str]) -> tuple[list[str], dict]:
+    """Kentucky (module docstring): (the type codes read, raw notes) for a report filed BYP."""
+    text = ev.get("sewer_overflow_bypass_description_text") or ""
+    if t_codes != ["BYP"] or KY_PLANT_BYPASS.search(text):
+        return t_codes, {}
+    m = KY_SSO_TEXT.search(text)
+    if not m:
+        return t_codes, {}
+    return ["SSO"], {"type_as_filed": "BYP", "type_note": KY_TYPE_NOTE.format(what=" ".join(m.group(0).split()))}
+
+
+# Kentucky's free text names people (module docstring): a capitalised two-word name after a role word, before a verb
+# of reporting, or before a removed phone number
+KY_NAME = r"[A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+(?:Mc|Mac|O')?[A-Z][a-z'-]+"
+KY_PERSON_BEFORE = re.compile(r"(\b(?i:operators?|notified|officer\s*-?|contacted|spoke\s+(?:with|to)|per|by|"
+                              r"superintendent|manager|director|supervisor|inspector|technician|foreman|mayor|"
+                              r"called|reported\s+by|caller)\s+)(" + KY_NAME + r")\b")
+KY_PERSON_VERB = re.compile(r"\b(" + KY_NAME + r")(?=\s+(?:responded|reported|stated|called|notified|advised|said|"
+                            r"observed|discovered|found)\b)")
+KY_PERSON_PHONE = re.compile(r"\b(" + KY_NAME + r")(?=\s*,[^.;]{0,80}\[phone removed\])")
+KY_FIRM_WORDS = {"brands", "park", "parks", "controls", "company", "co", "inc", "llc", "utilities", "utility", "water",
+                 "sewer", "district", "county", "city", "department", "dept", "station", "plant", "construction",
+                 "services", "service", "electric", "pump", "septic", "cleaners", "pipe", "contracting", "state",
+                 "msd", "wwtp", "wqtc", "stp", "authority", "commission", "road", "street", "creek", "river", "lake",
+                 "fork", "branch", "run", "lodge", "school", "church", "hospital", "center", "university", "college",
+                 "the", "a", "an", "and", "manhole", "lift", "force", "main", "ky", "kentucky", "dep", "ert", "dow"}
+
+
+def _ky_person(m: re.Match, g: int) -> str:
+    words = {w.lower().strip(".,") for w in m.group(g).split()}
+    nxt = m.string[m.end(g):m.end(g) + 30].split()
+    if words & KY_FIRM_WORDS or (nxt and nxt[0].lower().strip(".,") in KY_FIRM_WORDS):
+        return m.group(0)
+    return m.group(0)[:m.start(g) - m.start(0)] + "[name removed]" + m.group(0)[m.end(g) - m.start(0):]
+
+
+def ky_scrub_people(v: str) -> str:
+    """Kentucky's free text with the names of callers, responders and staff removed (module docstring)."""
+    v = KY_PERSON_BEFORE.sub(lambda m: _ky_person(m, 2), v)
+    v = KY_PERSON_PHONE.sub(lambda m: _ky_person(m, 1), v)
+    return KY_PERSON_VERB.sub(lambda m: _ky_person(m, 1), v)
+
+
+STATE_PERSON_SCRUB = {"KY": ky_scrub_people}
+# Kentucky's form writes durations and computed volumes as bare numbers ('Cause/Duration of Incident: 2615', '290 MIN X
+# 50 GAL = 14500'), which the house-number scrub took for addresses: a number after 'Duration of Incident:' or '=' is
+# kept (review 2026-11-08 P3-1)
+KEEP_NUMBER_STATES = {"KY"}
+KEEP_NUMBER = re.compile(r"((?:Duration of Incident:|=)\s*)(-?[\d,]+(?:\.\d+)?)\b", re.I)
+
+
+def protect_numbers(v: str) -> tuple[str, list[str]]:
+    toks: list[str] = []
+
+    def keep(m):
+        toks.append(m.group(2))
+        return f"{m.group(1)}KEEPNUM{len(toks) - 1}Q"
+    return KEEP_NUMBER.sub(keep, v), toks
+
+
+def restore_numbers(v: str, toks: list[str]) -> str:
+    return re.sub(r"KEEPNUM(\d+)Q", lambda m: toks[int(m.group(1))], v or "")
+KY_INCIDENT = re.compile(r"\bIncident ID:\s*(\d{5,9})\b")
 # Arizona: a water named only to deny it, and the plant's own ponds and basins, taken out before the water words
 STATE_NOT_WATER_TEXT = {"AZ": re.compile(
     r"(?i:\b(?:did\s*n[o']?t|does\s*n[o']?t|do\s*n[o']?t|never|no\s+impact\s+to)\s+(?:[\w-]+\s+){0,3}?"
@@ -1065,6 +1221,8 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
         texts = STREET_WATER[state].sub(" ", texts)
     if state in STATE_NOT_A_WATER_TEXT:
         texts = STATE_NOT_A_WATER_TEXT[state].sub(" ", texts)
+    if state in STATE_TEXT_DENIAL and STATE_TEXT_DENIAL[state].search(texts):   # module docstring, Kentucky
+        return False, "the report says no water was reached"
     held = bool(state == "AZ" and "BYP" in types and AZ_PLANT_HELD.search(texts))
     if state in STATE_NOT_WATER_TEXT:   # a water named only to deny it, the plant's own ponds (module docstring, Arizona)
         texts = STATE_NOT_WATER_TEXT[state].sub(" ", texts)
@@ -1193,9 +1351,10 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
         return STATE_TZ[state], (f"{county} is split by the boundary ({cite}) and the point lies on neither part of it "
                                  "in the U.S. DOT time-zone layer: read as Central")
     n = len(z["zone"])
-    words = {15: "fifteen", 18: "eighteen"}.get(n, str(n))
+    words = {15: "fifteen", 18: "eighteen", 41: "forty-one"}.get(n, str(n))
+    label = doc.get("zone_label", "Mountain")   # Kentucky's file lists Central-time counties
     split = " and ".join(c for c, *_ in z["split"])
-    return STATE_TZ[state], (f"the event's point lies outside the {words} Mountain-time counties"
+    return STATE_TZ[state], (f"the event's point lies outside the {words} {label}-time counties"
                              + (f" and {split}" if split else "") + f" ({cite})")
 
 
@@ -1250,7 +1409,9 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     kept, dropped, why = [], [], Counter()
     run_now = info.get("now") or now_iso()
     all_points = report_points(tables["events"])
-    plant_pts = plant_points({p for p, _, _ in all_points})
+    plant_pts = plant_points({p for p, _, _ in all_points}
+                             | {str(e.get("permit_identifier") or "") for e in tables["events"]
+                                if str(e.get("permit_identifier") or "")[:2] in PLANT_POINT_STATES})
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
@@ -1266,16 +1427,37 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         k = ev["sewer_overflow_bypass_event_key"]
         t_rows = sorted(types.get(k, []), key=lambda r: int(r.get("sewer_overflow_bypass_type_code_sequence") or 0))
         t_codes = [r["sewer_overflow_bypass_type_code"] for r in t_rows]
+        type_notes = {}
+        if state in TYPE_FROM_TEXT_STATES:   # Kentucky: every report filed BYP (module docstring)
+            t_codes, type_notes = type_from_text(ev, t_codes)
         w_names = [r["name_receiving_water"] for r in rws.get(k, [])]
         i_rows = imps.get(k, [])
         ok, reason = reached_water(ev, t_codes, w_names, i_rows, state)
         why[(state, "kept" if ok else "dropped", reason)] += 1
         srid = f"{permit}:{ev['program_report_form_set_id']}:{ev['sewer_overflow_bypass_event_id_ext'] or '0'}"
         if state in FREE_TEXT_STATES:
+            protected = {}
+            if state in KEEP_NUMBER_STATES:   # module docstring, Kentucky (review 2026-11-08 P3-1)
+                ev = dict(ev)
+                for f in FREE_TEXT_FIELDS:
+                    if isinstance(ev.get(f), str):
+                        ev[f], protected[f] = protect_numbers(ev[f])
             ev = scrub_free_text(dict(ev), FREE_TEXT_FIELDS)
+            for f, toks in protected.items():
+                ev[f] = restore_numbers(ev[f], toks)
             for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
                 for x in rows_:
                     scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
+            if state in STATE_PERSON_SCRUB:   # module docstring, Kentucky
+                people = STATE_PERSON_SCRUB[state]
+                for f in FREE_TEXT_FIELDS:
+                    if isinstance(ev.get(f), str):
+                        ev[f] = people(ev[f])
+                for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
+                    for x in rows_:
+                        for c in [c for c in x if c.endswith("_other_text")]:
+                            if isinstance(x.get(c), str):
+                                x[c] = people(x[c])
         if not ok:
             dropped.append({"source_record_id": srid, "permit": permit, "reason": reason,
                             "type": t_codes, "structure": ev.get("sewer_overflow_structure_type_desc"),
@@ -1357,6 +1539,14 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             lat, lon, coord_src = reg["lat"], reg["lon"], "outfall_layer"
         ev_tz, tz_basis = point_zone(state, lat, lon)
         ev_tz = PERMIT_TZ.get(permit[:2]) or ev_tz   # the Navajo Nation's clock (module docstring, Arizona)
+        plant_note = None
+        if state in PLANT_POINT_STATES and etype == "sso" and lat is not None and coord_src == "source":
+            near = min((metres((lat, lon), p_) for p_ in plant_pts.get(permit, [])), default=None)
+            if near is not None and near <= REPEATED_POINT_PLANT_M:   # module docstring, Kentucky
+                plant_note = ([lat, lon], f"the report's point lies {near:.0f} m from the point EPA's plant list gives "
+                              "the permit: taken as the plant's location, not the overflow's, so the report is "
+                              "placed by the water it names or not at all")
+                lat = lon = coord_src = None
         start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
@@ -1382,6 +1572,15 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             "reached_water_rule": reason, "timezone_note": tz_note(state, permit, ev_tz, tz_basis), "report_version": ev.get("program_report_form_id"),
         })
         raw.update(ne_notes)
+        raw.update(type_notes)
+        if plant_note:
+            raw["reported_point"], raw["point_note"] = plant_note
+        if state == "KY":   # the Cabinet's incident number (module docstring, Kentucky)
+            m_inc = KY_INCIDENT.search(ev.get("sewer_overflow_bypass_description_text") or "")
+            if m_inc:
+                raw["ky_incident_id"] = m_inc.group(1)
+        if ev_tz and state in ZONE_ALWAYS_STATES:
+            raw["time_zone"] = ev_tz
         if ev_tz and any(t and "T" not in t for t in (start, end)):
             # a date with no time keeps no offset: the zone it is a day of goes with it, so the status build ends the
             # day in the event's own zone, not New York's (SOL 2026-11-07 wave 2 P1-1)

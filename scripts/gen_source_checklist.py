@@ -56,9 +56,14 @@ AREA_TITLES = {
     "ne": "Nebraska",
     "ak": "Alaska",
     "nm": "New Mexico",
+    "ky": "Kentucky",
     "hi": "Hawaii",
+    "or": "Oregon",
     "al": "Alabama",
+    "ut": "Utah",
     "tx": "Texas",
+    "tn": "Tennessee",
+    "oh": "Ohio",
 }
 
 HEADER = """# Source checklist

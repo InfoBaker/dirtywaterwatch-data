@@ -1,0 +1,439 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4326
+ },
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Id",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "DERRID",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Title_EventName",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Nearest_City",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "County",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Date_Discovered",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Date_Discovered_For_Filter",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "SITEDESC",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "ReportLink",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Northing",
+   "type": "esriFieldTypeString"
+  },
+  {
+   "name": "Easting",
+   "type": "esriFieldTypeString"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 8641,
+    "Id": "00021105",
+    "DERRID": "020566",
+    "Title_EventName": "UPDATE American Fork - Sewage Release",
+    "Nearest_City": "AMERICAN FORK",
+    "County": "UTAH",
+    "Date_Discovered": "08/17/2026",
+    "Date_Discovered_For_Filter": 1786986000000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001TOVccAAH",
+    "Northing": 4466633,
+    "Easting": 432229
+   },
+   "geometry": {
+    "x": -111.7980017561479,
+    "y": 40.34749962876561
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8730,
+    "Id": "00021147",
+    "DERRID": "020608",
+    "Title_EventName": "Bear Lake - Sewage Release",
+    "Nearest_City": "None",
+    "County": "RICH",
+    "Date_Discovered": "09/04/2026",
+    "Date_Discovered_For_Filter": 1788490800000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001WHzlkAAD",
+    "Northing": 4639099,
+    "Easting": 468923
+   },
+   "geometry": {
+    "x": -111.37467874627738,
+    "y": 41.90322173210593
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 6984,
+    "Id": "00017465",
+    "DERRID": "15797",
+    "Title_EventName": "Moab - Sanitary Sewer Overflow",
+    "Nearest_City": "MOAB",
+    "County": "GRAND",
+    "Date_Discovered": "08/12/2022",
+    "Date_Discovered_For_Filter": 1660276800000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=5003d00000Bb4ONAAZ",
+    "Northing": 4268283,
+    "Easting": 628927
+   },
+   "geometry": {
+    "x": -109.52038241300195,
+    "y": 38.55363917157568
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 5485,
+    "Id": "00019583",
+    "DERRID": "019044",
+    "Title_EventName": "Sewage Bypass Failure - Syracuse",
+    "Nearest_City": "SYRACUSE",
+    "County": "DAVIS",
+    "Date_Discovered": null,
+    "Date_Discovered_For_Filter": null,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=5003d00000Bn5epAAB",
+    "Northing": 4547244,
+    "Easting": 408904
+   },
+   "geometry": {
+    "x": -112.08432814403271,
+    "y": 41.07134993731452
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8137,
+    "Id": "00020819",
+    "DERRID": "020280",
+    "Title_EventName": "Orem - Partially Treated Wastewater Release to Wetlands",
+    "Nearest_City": "OREM",
+    "County": "UTAH",
+    "Date_Discovered": "04/15/2026",
+    "Date_Discovered_For_Filter": 1776263040000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001E1YqOAAV",
+    "Northing": 4458932,
+    "Easting": 437369
+   },
+   "geometry": {
+    "x": -111.73672899743042,
+    "y": 40.278526373889946
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8505,
+    "Id": "00021034",
+    "DERRID": "020495",
+    "Title_EventName": "Personal RV Sewage Dump Ogden",
+    "Nearest_City": "OGDEN",
+    "County": "WEBER",
+    "Date_Discovered": "07/18/2026",
+    "Date_Discovered_For_Filter": 1784413800000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001PnzEjAAJ",
+    "Northing": 4565611,
+    "Easting": 418596
+   },
+   "geometry": {
+    "x": -111.97141894897362,
+    "y": 41.23780379472235
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8621,
+    "Id": "00021096",
+    "DERRID": "020557",
+    "Title_EventName": "Cedar City - Sewage Dumping",
+    "Nearest_City": "None",
+    "County": "IRON",
+    "Date_Discovered": "08/09/2026",
+    "Date_Discovered_For_Filter": 1786302000000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001Sq0cnAAB",
+    "Northing": 4183660,
+    "Easting": 314765
+   },
+   "geometry": {
+    "x": -113.10345821093877,
+    "y": 37.781535037419125
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 5666,
+    "Id": "00018050",
+    "DERRID": "16186",
+    "Title_EventName": "Mt. Carmel - Sewage release to Virgin RIver",
+    "Nearest_City": "MT CARMEL",
+    "County": "KANE",
+    "Date_Discovered": "03/15/2023",
+    "Date_Discovered_For_Filter": 1678852800000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=5003d00000Bb4ZIAAZ",
+    "Northing": 4123437,
+    "Easting": 340443
+   },
+   "geometry": {
+    "x": -112.79893828402851,
+    "y": 37.24382085059893
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8539,
+    "Id": "00019909",
+    "DERRID": "019370",
+    "Title_EventName": "Salt Lake City - Wastewater",
+    "Nearest_City": "SALT LAKE CITY",
+    "County": "SALT LAKE",
+    "Date_Discovered": "11/06/2024",
+    "Date_Discovered_For_Filter": 1730912400000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00000Au8bcAAB",
+    "Northing": 4508765,
+    "Easting": 426953
+   },
+   "geometry": {
+    "x": -111.86498769766672,
+    "y": 40.72657693875677
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8618,
+    "Id": "00021095",
+    "DERRID": "020556",
+    "Title_EventName": "Ogden - Acidic Wastewater Release",
+    "Nearest_City": "None",
+    "County": "WEBER",
+    "Date_Discovered": "08/12/2026",
+    "Date_Discovered_For_Filter": 1786517160000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001Sp3GFAAZ",
+    "Northing": 4567268,
+    "Easting": 398069
+   },
+   "geometry": {
+    "x": -112.21660317327697,
+    "y": 41.25039961897692
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 7709,
+    "Id": "00020404",
+    "DERRID": "019865",
+    "Title_EventName": "Eagle Mountain - Sewer Overflow into Homes",
+    "Nearest_City": "EAGLE MOUNTAIN",
+    "County": "UTAH",
+    "Date_Discovered": "09/01/2025",
+    "Date_Discovered_For_Filter": 1756695600000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00000o5TxfAAE",
+    "Northing": 4460974,
+    "Easting": 414120
+   },
+   "geometry": {
+    "x": -112.01044627176287,
+    "y": 40.29485637338999
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 7846,
+    "Id": "00020561",
+    "DERRID": "020022",
+    "Title_EventName": "SLC - Discharge from Water Treatment Plant",
+    "Nearest_City": "SALT LAKE CITY",
+    "County": "SALT LAKE",
+    "Date_Discovered": "11/22/2025",
+    "Date_Discovered_For_Filter": 1763833500000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00000x6hgDAAQ",
+    "Northing": 4518582,
+    "Easting": 429882
+   },
+   "geometry": {
+    "x": -111.83140897148462,
+    "y": 40.815259711889915
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 3008,
+    "Id": "00015512",
+    "DERRID": "13813",
+    "Title_EventName": "Salt Lake City -- Firefighting foam in sewer",
+    "Nearest_City": "SALT LAKE CITY",
+    "County": "SALT LAKE",
+    "Date_Discovered": "03/25/2019",
+    "Date_Discovered_For_Filter": 1553486400000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=5003d00000Bb3oSAAR",
+    "Northing": 4515629,
+    "Easting": 419189
+   },
+   "geometry": {
+    "x": -111.95780066802972,
+    "y": 40.787677946264544
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8651,
+    "Id": "00021110",
+    "DERRID": "020571",
+    "Title_EventName": "Millard County - Fuel Release Associated With AST",
+    "Nearest_City": "None",
+    "County": "MILLARD",
+    "Date_Discovered": "08/19/2026",
+    "Date_Discovered_For_Filter": 1787168700000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00001TgzHIAAZ",
+    "Northing": 4375258,
+    "Easting": 385134
+   },
+   "geometry": {
+    "x": -112.3363233660741,
+    "y": 39.51929177602979
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 7779,
+    "Id": "00020482",
+    "DERRID": "019943",
+    "Title_EventName": "Salt Lake City - Sewage Backup",
+    "Nearest_City": "WEST VALLEY CITY",
+    "County": "SALT LAKE",
+    "Date_Discovered": "10/09/2025",
+    "Date_Discovered_For_Filter": 1759973400000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=500eq00000sOiNOAA0",
+    "Northing": 4500803,
+    "Easting": 411029
+   },
+   "geometry": {
+    "x": -112.05239553210025,
+    "y": 40.653294686204944
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 5207,
+    "Id": "00018906",
+    "DERRID": "018367",
+    "Title_EventName": "Sewage Release- Vineyard",
+    "Nearest_City": "VINEYARD",
+    "County": "UTAH",
+    "Date_Discovered": null,
+    "Date_Discovered_For_Filter": null,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=5003d00000Bn5TTAAZ",
+    "Northing": 4461892,
+    "Easting": 436796
+   },
+   "geometry": {
+    "x": -111.74376094749182,
+    "y": 40.305148681914176
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 99001,
+    "Id": "99000001",
+    "DERRID": "None",
+    "Title_EventName": "Example and Sample's Vacuum Truck (Septic Service)",
+    "Nearest_City": "None",
+    "County": "MILLARD",
+    "Date_Discovered": "12/24/2011",
+    "Date_Discovered_For_Filter": 1324702800000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=EXAMPLE1",
+    "Northing": 4300000,
+    "Easting": 380000
+   },
+   "geometry": {
+    "x": -112.37,
+    "y": 38.85
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 99002,
+    "Id": "99000002",
+    "DERRID": "099999",
+    "Title_EventName": "Provo - Sewage at 1234 Example Lane, call 801-555-0142",
+    "Nearest_City": "PROVO",
+    "County": "UTAH",
+    "Date_Discovered": "10/02/2026",
+    "Date_Discovered_For_Filter": 1790960400000,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=EXAMPLE2",
+    "Northing": 4455000,
+    "Easting": 443000
+   },
+   "geometry": {
+    "x": -111.66,
+    "y": 40.24
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 99003,
+    "Id": "99000003",
+    "DERRID": "None",
+    "Title_EventName": "Example Town - Sewage Release",
+    "Nearest_City": "None",
+    "County": "None",
+    "Date_Discovered": null,
+    "Date_Discovered_For_Filter": null,
+    "SITEDESC": "Environmental Incidents",
+    "ReportLink": "https://deqspillsps.deq.utah.gov/s/pdfdownload?recordId=EXAMPLE3",
+    "Northing": 4500000,
+    "Easting": 420000
+   },
+   "geometry": {
+    "x": -111.95,
+    "y": 40.65
+   }
+  }
+ ]
+}

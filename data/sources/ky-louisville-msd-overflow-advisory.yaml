@@ -1,0 +1,39 @@
+id: "ky-louisville-msd-overflow-advisory"
+name: "Louisville MSD Overflow Advisory Level banner and notice nodes"
+url: "https://louisvillemsd.org/overflowalert"
+homepage: "https://louisvillemsd.org/overflowalert"
+kind: "html"
+level: "utility"
+# Notes (research/ky, status used, verified fetched, checked 2026-11-07): Polled by
+#   ingest/ky_louisville_msd.py (source id ky-louisville-msd-overflow-advisory): the banner as a
+#   snapshot state machine; MSD-01 as MSD's own advisory at each of MSD's open combined sewer
+#   outfalls, MSD-02 as a dated report.
+# Access detail (research, quoted): Advisory block on every page of louisvillemsd.org and at
+#   /overflowalert (raw/louisville-msd-overflowalert-2026-11-03.html). Each advisory is a Drupal
+#   node with a timestamp: node/31322 and node/31323 'MSD-01 Wet Weather Overflows.' stamped
+#   'November 3, 2026 3:00 AM' (raw/louisville-msd-node-31322-2026-11-03.html). Search results show
+#   event nodes 'MSD-02 2/18/2025 A Wet Weather Discharge has occurred' with a start time, and
+#   'MSD-02 4/6/2026 A Dry Weather Discharge has occurred.'; the 2025 node now returns 404, so old
+#   notices are removed.
+# Can fill: advice_text, published_at, started_at (MSD-02), authority
+# Cannot fill: outfall; coordinates; volume; ended_at; waterbody beyond 'Ohio River, streams'
+# Waters: Ohio River and streams in Louisville Metro (Jefferson County)
+# History: none kept on site (old nodes removed)
+# Research notes: MSD also says 'For more information, go to www.msdprojectwin.org'. An email list
+#   signup is in the footer ('Water Quality Email List Signup'); not subscribed. 2026-11-07: the
+#   banner read 'Conditions are normal' (level 3); the Internet Archive's copies show MSD-01
+#   (2024-02-29, 2025-09-04) and an MSD-02 notice (2025-02-19: a pump-station power outage to
+#   Pennsylvania Run, ongoing, more than 10,000 gallons). The advisory nodes of 2026-11-03 (31322,
+#   31323) answer 404.
+cadence: "set by MSD with rain; banner live on 2026-11-03"
+license: "none stated"
+attribution: "Louisville/Jefferson County Metropolitan Sewer District"
+enabled: true
+role: "advisories"
+event_types: ["cso", "sso"]
+states: ["KY"]
+access: ["html"]
+access_detail: "Advisory block on every page of louisvillemsd.org and at /overflowalert (raw/louisville-msd-overflowalert-2026-11-03.html). Each advisory is a Drupal node with a timestamp: node/31322 and node/31323 'MSD-01 Wet Weather Overflows.' stamped 'November 3, 2026 3:00 AM' (raw/louisville-msd-node-31322-2026-11-03.html). Search results show event nodes 'MSD-02 2/18/2025 A Wet Weather Discharge has occurred' with a start time, and 'MSD-02 4/6/2026 A Dry Weather Discharge has occurred.'; the 2025 node now returns 404, so old notices are removed."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-07"

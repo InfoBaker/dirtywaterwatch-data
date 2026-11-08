@@ -196,10 +196,10 @@
   "history": "2017 to date (RRS database earlier, P1 CAD since May 2017).",
   "license": "Copyright text: 'Office of Emergency Response, Ohio Environmental Protection Agency'; no licence statement.",
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Statewide, daily, with points, but only about 100 sewage incidents a year, no operator name, no start or end, waterway mostly NULL (12 of 100). Supplementary SSO signal, not the CSO record.",
+  "status": "used",
+  "status_reason": "Read daily by pipeline/ingest/oh_epa_spills.py as a supplementary source: the SEWAGE HUMAN, SEWAGE SLUDGE / BIOSOLIDS and WASTE WATER rows of both layers (1,121 cases, 2017 to 2026-11-05; 121 in 2026), day precision, no end, the call time in Ohio's wall clock, the waterway named on 218; WASTE WATER is kept as a possible sewage release with the product stated; AIR ODOR SEWAGE rows are not read.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-08",
   "notes": ""
  },
  {
@@ -309,10 +309,10 @@
   "history": "Last event per outfall only; annual CSO report PDFs.",
   "license": "Item licence: 'This information is for display purposes only ... makes no warranties ... expressly disclaims any liability'.",
   "legal_basis": "40 CFR 122.38; NEORSD permit OH0043991 and consent decree",
-  "status": "candidate",
-  "status_reason": "Best Ohio feed: live, machine-readable, metered outfalls with start, end and volume. Snapshot hourly.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_neorsd_cso.py (layers 4 and 5, safe fields): each new last wet- or dry-weather overflow per outfall becomes a dated cso record with NEORSD's start, end and volume, labelled metered (24 outfalls) or modelled (88) by NEORSD; 148 records from the first poll on 2026-11-08 (102 of them in 2026). The 112 outfalls' points and receiving waters improve EPA's rows (data/outfalls-oh.json).",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-08",
   "notes": "Lat/long in the attribute table are DMS strings; use the geometry. Volume units million gallons. Only 24 of 112 outfalls are metered ('Monitored'); others are modeled."
  },
  {
@@ -375,10 +375,10 @@
   "history": null,
   "license": null,
   "legal_basis": "40 CFR 122.38; Akron consent decree",
-  "status": "candidate",
-  "status_reason": "Live status per site; start/end/volume only in linked PDFs. Snapshot status.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_akron_cso.py: a site at status 1 opens a cso record dated by Akron's update time, ended at the first update back at 0 (poll precision); status 0 is no report. All 28 sites at 0 on 2026-11-08, so no record yet. The per-site PDFs are linked, not parsed.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-08",
   "notes": "icon field uses a green Google marker for status 0; never map that to green."
  },
  {
@@ -429,10 +429,10 @@
   "water_slugs": [],
   "url": "https://cso.clydeohio.org/",
   "access": [
-   "map_only"
+   "html"
   ],
-  "access_detail": null,
-  "machine_readable": false,
+  "access_detail": "The status map at https://cso.clydeohio.org/ (a script map) and yearly report pages https://cso.clydeohio.org/templates/cso-report.php?year=<yyyy> from 2017: an HTML table of each overflow's start and end date and time, cause, rainfall before and in total, volume (MG) and two concentrations. The page also names a staff contact, which is not read.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
@@ -443,10 +443,10 @@
   "history": null,
   "license": null,
   "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "candidate",
-  "status_reason": "Status site with notification plan PDFs; data endpoint not traced.",
+  "status": "used",
+  "status_reason": "Read daily by pipeline/ingest/oh_clyde_cso.py: 9 overflows of Clyde's one CSO (OH0024686 outfall 010, Raccoon Creek) in 2017 to 2026 (the newest 2026-04-01), each with start, end and volume; the counts match each page's own statement.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-08",
   "notes": ""
  },
  {
@@ -477,10 +477,10 @@
   "history": null,
   "license": null,
   "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "candidate",
-  "status_reason": "HTML table (PHP list) with location, begin date/time, end date/time, rainfall, estimated volume (MG); latest row seen 7/21/2026. Scrapeable.",
+  "status": "used",
+  "status_reason": "Read daily by pipeline/ingest/oh_bowling_green_cso.py: 37 overflows at Mercer and Poe roads, 2019 to 2026-07-21, each with begin, end and estimated volume; placed on the permit's one CSO outfall (OH0024139 002, North Branch Portage River).",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-08",
   "notes": ""
  },
  {
@@ -664,16 +664,18 @@
   "operator_type": "municipal",
   "role": "events",
   "event_types": [
-   "cso"
+   "cso",
+   "sso"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.columbus.gov/Services/Public-Utilities/About-Public-Utilities/The-Division-of-Sewage-Drainage/Wastewater-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs",
+  "url": "https://www.columbus.gov/Services/Columbus-Water-Power/About-Columbus-Water-Power/The-Division-of-Water-Reclamation/WW-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs",
   "access": [
-   "map_only"
+   "arcgis",
+   "html"
   ],
-  "access_detail": null,
-  "machine_readable": false,
+  "access_detail": "The FAQ page (moved under Columbus Water & Power; answered 200 on 2026-11-08) links 'View Overflow Map', an ArcGIS dashboard (24f57525213544e7b1ed6da19baf36a1) over https://maps2.columbus.gov/arcgis/rest/services/Applications/SSOCSO/MapServer: layer 0 'Overflow Location' (52 points), table 1 'Annual Summary', table 2 'Events' (8,542 rows, 2002 to 2026-09-29: TYPE, DISCHARGE_ID, DISCHARGE_LOCATION, RELIEF_LOCATION, INSPECTION_DATE, VOLUME in million gallons, NPDES_ID). No token.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
@@ -684,10 +686,10 @@
   "history": null,
   "license": null,
   "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "unreachable",
-  "status_reason": "HTTP 403 to curl on 2026-11-03; search shows a 'View Overflow Map' link and signage along the Olentangy, Scioto and Alum Creek.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
+  "status": "used",
+  "status_reason": "Read daily by pipeline/ingest/oh_columbus_overflows.py: 8,542 recorded overflows (4,462 CSO, 4,080 SSO; 291 in 2026 to 2026-09-29), each dated by the day the city found it at inspection (day precision, no end), with volume in million gallons on 4,742; CSO rows carry their permit and outfall by Ohio EPA's station code (Jackson Pike OH0024732, Southerly OH0024741); the site's point (46 of 50 sites) or EPA's outfall point; the city updates the data monthly, usually after the 15th.",
+  "verified": "fetched",
+  "checked": "2026-11-08",
   "notes": ""
  },
  {
@@ -920,10 +922,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Statewide advisory JSON with points, bacteria and HAB types, issuing organisation and reason.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories (5 on 2026-11-08: 4 HAB warnings at Grand Lake St. Marys since 20 May, 1 bacteria advisory since 31 July), lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. Past advisories: the API refuses the whole list (too large to serialise), so the archive grows from the polls.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-08",
   "notes": "Endpoint 'acceptadvisorynotifications' in the app code suggests an advisory notification sign-up."
  },
  {

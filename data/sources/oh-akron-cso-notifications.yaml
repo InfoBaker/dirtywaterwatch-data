@@ -1,0 +1,37 @@
+id: "oh-akron-cso-notifications"
+name: "City of Akron CSO Notifications (Akron Waterways Renewed overflow status map)"
+url: "https://www.akronwaterwaysrenewed.com/overflow-status"
+homepage: "https://www.akronwaterwaysrenewed.com/overflow-status"
+kind: "arcgis"
+level: "municipal"
+# Feed row: written by pipeline/ingest/oh_akron_cso.py (data/build/events/oh-akron-cso-notifications.json).
+# Built 2026-11-08: polled hourly; status 1 opens a cso record dated by the row's updatetime (Akron's wall clock,
+#   Eastern), the first update at 0 ends it (poll precision); status 0 is no report (Akron's green marker is never
+#   shown green here); any other status is caution only. 28 sites, all at 0 on 2026-11-08 (no record yet).
+# Columns excluded: icon (a marker colour), lat and long (text copies of the point). No field names a person.
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read hourly by
+#   pipeline/ingest/oh_akron_cso.py: a site at status 1 opens a cso record dated by Akron's update
+#   time, ended at the first update back at 0 (poll precision); status 0 is no report. All 28 sites
+#   at 0 on 2026-11-08, so no record yet. The per-site PDFs are linked, not parsed.
+# Access detail (research, quoted): Instant app bc566e306a7b45b8bd4e3634b1a80f78 -> web map
+#   057a895d131a4b1b9a4627ed00ddb82c ->
+#   https://agis.akronohio.gov/server/rest/services/City_of_Akron_CSO_Notifications/MapServer/0
+#   (fields name, lat, long, status, icon, note, updatetime, URL1, URL2). Each point links per-site
+#   PDFs (e.g. .../overflow/pdfs/Basin02.pdf) and daily totals PDFs. updatetime 2026-11-03 18:40 on
+#   all rows.
+# Can fill: source_status, coordinates, waterbody, source_updated_at
+# Cannot fill: started_at; ended_at; volume
+# Waters: Little Cuyahoga River, Cuyahoga River, Ohio Canal
+# Research notes: icon field uses a green Google marker for status 0; never map that to green.
+cadence: "Near real time; page: 'the real-time data has not yet been reviewed for accuracy. The official, verified data can be found in the monthly reports submitted by the City of Akron to the Ohio EPA.'"
+license: "none stated"
+attribution: "City of Akron"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["arcgis", "pdf"]
+access_detail: "Instant app bc566e306a7b45b8bd4e3634b1a80f78 -> web map 057a895d131a4b1b9a4627ed00ddb82c -> https://agis.akronohio.gov/server/rest/services/City_of_Akron_CSO_Notifications/MapServer/0 (fields name, lat, long, status, icon, note, updatetime, URL1, URL2). Each point links per-site PDFs (e.g. .../overflow/pdfs/Basin02.pdf) and daily totals PDFs. updatetime 2026-11-03 18:40 on all rows."
+machine_readable: true
+legal_basis: "40 CFR 122.38; Akron consent decree"
+checked: "2026-11-08"

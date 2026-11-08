@@ -77,6 +77,15 @@
 #                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
 #                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
 #                  advisory map layer, blooms; ingest/nm_transforms.py)
+#                  Kentucky: echo_sewer_overflow_events (EPA's overflow tables, KY permits: Kentucky's own system sent
+#                  its reports for December 2025 and January 2026 only; Eastern or Central time by the event's
+#                  county, data/reference/ky-central-time-counties.json), ky_louisville_msd (Louisville MSD's
+#                  Overflow Advisory Level banner, polled: MSD-01 advisories and MSD-02 notices; the state file
+#                  data/build/ky-louisville-msd-state.json is the archive) and the generic block ky-dow-hab-viewer
+#                  (the Division of Water's HAB Viewer layer, blooms; ingest/ky_transforms.py), ky_dow_swimming_advisories
+#                  (the Division's standing swimming advisories page, read as standing advisories; its state file
+#                  data/build/ky-dow-swimming-advisories-state.json); SD1's rain rule is in
+#                  data/rules.json rain_likely.fallback.by_permit
 #                  Hawaii: hi_doh_cwb_events (the Department of Health Clean Water Branch's events endpoint, the newest
 #                  500 advisories every run: sewage spill and permit exceedance advisories in the Department's own
 #                  window, Brown Water Advisories as rainfall advisories, beach advisories and retest notices; placed
@@ -90,6 +99,27 @@
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt
 #                  by scripts/tx_permit_crosswalk.py) and the generic ArcGIS block tx-glo-beach-watch (Texas Beach
 #                  Watch's coastal stations: High is the program's advisory, Medium its label)
+#                  Utah: the generic ArcGIS blocks ut-deq-environmental-incidents (DEQ's spill hotline log since 1991:
+#                  the sewage rows by a title rule, dated to the day of discovery, the public's reports marked;
+#                  ingest/ut_transforms.py) and ut-dwq-recreational-advisories (DWQ's map of bloom and E. coli
+#                  advisories), and echo_sewer_overflow_events (EPA's overflow tables, UT permits)
+#                  Oregon: or_bes_news (Portland Environmental Services' CSO and sewage advisories: the news RSS and
+#                  each advisory's page, the City's 48-hour window), or_deq_oers_spills (DEQ's OERS spills 2013 to
+#                  March 2025, the sewage rows as a frozen archive: the layer's metadata each run, the rows only when
+#                  DEQ edits it), or_oha_beaches (OHA's beach conditions table, a snapshot: ADVISORY and SEWAGE, in
+#                  season) and the generic ArcGIS block or-oha-hab-advisories (OHA's bloom advisories and
+#                  precautions; ingest/or_transforms.py)
+#                  Tennessee: the generic CSV block tn-tdec-events-report (TDEC's Events Report, an APEX table of
+#                  every overflow, release and bypass since 2020: dates only, county, city and street, no water; the
+#                  session step opens the page first; ingest/tn_transforms.py) and the generic ArcGIS block
+#                  tn-tdec-hab-advisory-status (TDEC's HAB advisories, advisory fields only), and
+#                  tn_tdec_posted_streams (TDEC's posted-streams PDF: standing water-contact advisories, read daily)
+#                  Ohio: oh_neorsd_cso (NEORSD's CSO alerts layers: each outfall's last wet- and dry-weather overflow,
+#                  snapshotted hourly into dated records, metered or modelled), oh_akron_cso (Akron's overflow status
+#                  layer: status 1 opens, 0 ends at the poll), oh_columbus_overflows (Columbus's overflow events table
+#                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
+#                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
+#                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

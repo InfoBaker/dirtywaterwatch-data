@@ -1,0 +1,33 @@
+id: "ky-sd1-wet-weather-notification"
+name: "SD1 Wet Weather Overflow Notification Program (Northern Kentucky)"
+url: "https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra"
+homepage: "https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra"
+kind: "html"
+level: "utility"
+# Notes (research/ky, status used, verified fetched, checked 2026-11-07): SD1's own published rule
+#   written into data/rules.json (rain_likely.fallback.by_permit.KY0021466): 0.25 inch of rain, a
+#   72-hour caution, May to October, applied from radar rainfall at SD1's combined sewer outfalls;
+#   the Ohio River stage part (above 38 feet) is not applied. The alerts themselves reach
+#   subscribers only.
+# Access detail (research, quoted): Page fetched (raw/sd1-wet-weather-notification-2026-11-03.html).
+#   Notifications by sign-up only (CivicPlus Notify Me); map of overflow areas PDF
+#   https://sd1.org/DocumentCenter/View/207/Local-Sewer-Overflows-PDF.
+# Can fill: advice_text, valid_until (72 hours)
+# Cannot fill: started_at; outfall; volume
+# Waters: Ohio River, Licking River, Banklick Creek and other streams in Boone, Campbell and Kenton
+#   counties
+# Research notes: SD1 posts CSO signs: "If you see these signs, avoid nearby water during and after
+#   rainfall for at least 72 hours." Its rule (0.25 inch, Ohio River 38 feet, 72 hours) matches the
+#   site's 72-hour yellow window.
+cadence: "Quote: \"We will only alert you during contact recreational season (May through October) when: Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties The Ohio River exceeds 38 feet\"; \"All advisories will remain in effect for 72 hours after rainfall or 72 hours after river levels drop below 38 feet.\""
+license: "none stated"
+attribution: "Sanitation District No. 1 of Northern Kentucky"
+enabled: true
+role: "advisories"
+event_types: ["cso", "sso"]
+states: ["KY"]
+access: ["email", "html", "pdf"]
+access_detail: "Page fetched (raw/sd1-wet-weather-notification-2026-11-03.html). Notifications by sign-up only (CivicPlus Notify Me); map of overflow areas PDF https://sd1.org/DocumentCenter/View/207/Local-Sewer-Overflows-PDF."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-07"

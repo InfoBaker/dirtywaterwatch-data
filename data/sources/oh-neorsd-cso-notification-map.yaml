@@ -1,0 +1,46 @@
+id: "oh-neorsd-cso-notification-map"
+name: "NEORSD CSO Alerts: map and status of outfalls (ArcGIS)"
+url: "https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/"
+homepage: "https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/"
+kind: "arcgis"
+level: "utility"
+# Feed row: written by pipeline/ingest/oh_neorsd_cso.py (data/build/events/oh-neorsd-cso-notification-map.json).
+# Built 2026-11-08: polled hourly; layers 4 (24 metered outfalls) and 5 (88 modelled); one cso record per outfall,
+#   weather kind and start; NEORSD's end when given (minute; a midnight-to-midnight row with a shorter duration is
+#   day-bounded), ongoing while CURRENTLYOVERFLOWING; volume in million gallons. First poll: 148 records (102 in 2026,
+#   the oldest dry-weather one 2013). Dates: epoch ms read as UTC instants (the service declares America/New_York).
+#   LAST_EDITED_DATE read three hours after the poll on 2026-11-08: kept in raw, not used as the update time.
+# Columns excluded: CREATED_USER and LAST_EDITED_USER (staff account names), PHOTO, LATITUDE and LONGITUDE (text
+#   copies of the point), CREATED_DATE, OVERFLOWDATE, WWOVERFLOW, DWOVERFLOW (an older scheme). A house number in
+#   LOCATION is cut.
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read hourly by
+#   pipeline/ingest/oh_neorsd_cso.py (layers 4 and 5, safe fields): each new last wet- or
+#   dry-weather overflow per outfall becomes a dated cso record with NEORSD's start, end and volume,
+#   labelled metered (24 outfalls) or modelled (88) by NEORSD; 148 records from the first poll on
+#   2026-11-08 (102 of them in 2026). The 112 outfalls' points and receiving waters improve EPA's
+#   rows (data/outfalls-oh.json).
+# Access detail (research, quoted): Web map 7b5a38fd82774d5f977611b3cf1a4a6e; service
+#   https://utility.arcgis.com/usrsvcs/servers/d1477ea79422426b90560e015ce2bad9/rest/services/Public/CSONotificationApp_PROD/MapServer
+#   layers 0 'Monitored Overflow Within Past 24 Hours', 1 'Overflow Within Past 24 Hours', 2/3
+#   'Within Past 72 Hours', 4 'Monitored CSO Outfall Location' (24), 5 'CSO Outfall Location' (88).
+#   Layers 0-3 empty on 2026-11-03; layer 4 LAST_EDITED_DATE 2026-11-04 03:00 UTC (hourly refresh).
+# Can fill: source_record_id, started_at, ended_at, volume, waterbody, coordinates,
+#   source_updated_at, location_text
+# Cannot fill: advice_text; revision_history
+# Waters: Lake Erie, Cuyahoga River, Big Creek, Mill Creek, Euclid Creek, Doan Brook and others in
+#   Cleveland region
+# History: Last event per outfall only; annual CSO report PDFs.
+# Research notes: Lat/long in the attribute table are DMS strings; use the geometry. Volume units
+#   million gallons. Only 24 of 112 outfalls are metered ('Monitored'); others are modeled.
+cadence: "Hourly refresh; holds only the last wet-weather and dry-weather overflow per outfall (LASTOVERFLOWSTART/END, volume in MG, duration h), so history must be built by snapshots."
+license: "Item licence: 'This information is for display purposes only ... makes no warranties ... expressly disclaims any liability'."
+attribution: "Northeast Ohio Regional Sewer District"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["arcgis", "map_only"]
+access_detail: "Web map 7b5a38fd82774d5f977611b3cf1a4a6e; service https://utility.arcgis.com/usrsvcs/servers/d1477ea79422426b90560e015ce2bad9/rest/services/Public/CSONotificationApp_PROD/MapServer layers 0 'Monitored Overflow Within Past 24 Hours', 1 'Overflow Within Past 24 Hours', 2/3 'Within Past 72 Hours', 4 'Monitored CSO Outfall Location' (24), 5 'CSO Outfall Location' (88). Layers 0-3 empty on 2026-11-03; layer 4 LAST_EDITED_DATE 2026-11-04 03:00 UTC (hourly refresh)."
+machine_readable: true
+legal_basis: "40 CFR 122.38; NEORSD permit OH0043991 and consent decree"
+checked: "2026-11-08"

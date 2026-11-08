@@ -1,0 +1,82 @@
+id: "tn-tdec-events-report"
+name: "TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts)"
+url: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140"
+homepage: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140"
+kind: "csv"
+level: "state"
+# Read through the generic CSV reader (the fetch block below; ingest/tn_transforms.py tn_tdec_record): source id
+#   tn-tdec-events-report, data/build/events/tn-tdec-events-report.json. Sewage: SSO, Unpermitted Discharge and Extreme
+#   Event as sso; Release as sso that reached no water by TDEC's definition (0400-40-05-.02(75)); Bypass, Upset and
+#   Washout as plant_bypass. A report with no end has the site's caution from the start of its day
+#   (data/rules.json unresolved.day_start_caution).
+# What the table holds (research 2026-11-03, the whole CSV read once): 12,857 rows from the 2020-2021 onboarding to
+#   2026-10-29 (2021 1,065; 2022 2,889; 2023 2,159; 2024 2,453; 2025 2,802; 2026 to 2026-11-03 1,480; 52 in October
+#   2026); event types SSO Wet Weather 5,817, Release [Sewer] Dry Weather 3,067, SSO Dry Weather 1,870, Release Wet
+#   Weather 1,406, Bypass 591, Upset 41, Extreme Event Report 30, Unpermitted Discharge 23, Washout 10; Date Event Ended
+#   blank on 11,104 rows; Metro Water Services (Nashville) 1,242 rows, Clarksville 908, Chattanooga 439; Memphis
+#   (TN0020711, TN0020729) none. The newest event was five days old when read: the rows track the five-day written report.
+# Fetch on 2026-11-07 from this pipeline's identified client: 403 Forbidden from the host's AWS load balancer on every
+#   path (the report, the map page 34152 and robots.txt), so this build's counts are the research's. The block stays
+#   live: each run that is refused writes ok false with the reason and keeps the previous records; the first run the
+#   host answers reads the table whole.
+# No receiving water, no coordinates, no time of day, no row id; CSO discharges (Nashville, Chattanooga, Clarksville)
+#   are permitted and never appear. The per-event PDF (TDEC Document Viewer, SewerOF) is the copy of record.
+cadence: "rows appear about five days after the event began (newest event 2026-10-29 when read on 2026-11-03)"
+license: "No licence; the page's disclaimer, quoted: \"This table is provided for informational purposes only and should not be used to determine compliance.\""
+attribution: "Tennessee Department of Environment and Conservation, Division of Water Resources"
+enabled: true
+role: "events"
+event_types: ["sso", "plant_bypass"]
+states: ["TN"]
+registry_ids: ["tn-tdec-events-report"]
+access: ["html", "csv"]
+access_detail: "Oracle APEX 24.2 interactive report (public, GUEST). The CSV is f?p=2005:34140:<session>:CSV:::: in the session the first GET opens (cookies kept). About 2 MB, 12,857 rows on 2026-11-03. On 2026-11-07 the host answered this pipeline's identified client 403 Forbidden (AWS load balancer) on every path."
+machine_readable: true
+legal_basis: "Tenn. Comp. R. & Regs. 0400-40-05-.07(2)(o); 0400-40-05-.07(2)(n)1"
+checked: "2026-11-07"
+fetch:
+  platform: "csv"
+  live: true
+  url: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140:{session}:CSV::::"
+  session:
+    url: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140"
+    pattern: "f\\?p=2005:34140:(?P<session>\\d+)"
+  csv: {encoding: "utf-8-sig"}
+  time_zone: "America/Chicago"   # dates only; each record names its county's zone (tn_tdec_record)
+  # every column of the table; none holds a reporter, a contact or free text about people
+  safe_fields: [efo_name, county, permit_type, permit_no, permittee_name, project_name, event_type,
+                estimated_volume_gal, date_event_began, date_event_ended, duration_hours, event_address, event_city]
+  reviewed_fields:
+    efo_name: "TDEC's environmental field office (Nashville, Knoxville, Chattanooga ...), a place"
+    permittee_name: "the permittee of record: a city, utility district or company; a name that is only a person's is removed (common.scrub_discharger, tn_tdec_record)"
+    project_name: "the permitted facility or collection system ('Metro Water Services - Dry Creek Water Reclamation Facility'); a name that is only a person's is removed (tn_tdec_record)"
+  free_text: [event_address, event_city, project_name]
+  operator_fields: [permittee_name, project_name]   # a name that is only a person's is removed before it is saved
+  free_text_scrub: "strict"
+  record:
+    # the table has no id: permit, start day, TDEC's type and the street after the house-number scrub
+    source_record_id: {template: "{permit_no|upper|slug|default:no-permit}-{@started_at|compact|default:nodate}-{event_type|slug|default:no-type}-{event_address|address|slug|default:no-address}"}
+    started_at: {field: date_event_began, parse: date, formats: ["%m/%d/%Y", "%Y-%m-%d"]}
+    ended_at: {field: date_event_ended, parse: date, formats: ["%m/%d/%Y", "%Y-%m-%d"]}
+    event_type: {const: sso}           # tn_tdec_record sets the type from TDEC's label
+    discharger_name: permittee_name
+    outfall_name: project_name
+    volume: {field: estimated_volume_gal, unit: gallons, estimate: estimated}
+    authority: {const: "Tennessee Department of Environment and Conservation, Division of Water Resources (Events Report)"}
+    source_url: {const: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140"}
+  transform: "ingest.tn_transforms.tn_tdec_record"
+  raw_notes:
+    _efo: {field: efo_name}
+    _permit_type: {field: permit_type}
+  dedupe: {repeats: suffix, order: ["-volume_gal"]}
+  history:
+    keep_missing: true
+    revisions: true
+    supersede:
+      - ["{permit_no|upper|default:-}", "{@started_at|day}", "{event_type|slug|default:-}"]
+  meta:
+    credit: "Tennessee Department of Environment and Conservation, Division of Water Resources, Events Report"
+    license: "No licence stated; TDEC's disclaimer: \"This table is provided for informational purposes only and should not be used to determine compliance.\""
+    caveat: "Filed by the permittee through MyTDEC Forms; the table gives dates without times, no receiving water and no location beyond a street and city, often no end date, and no combined sewer overflows (permitted discharges). A release is, by TDEC's definition, sewage that did not reach water. Memphis's systems have no rows."
+    time_basis: "Dates only (the day the event began and, where given, the day it ended); no time of day. Read in the county's zone: Eastern in East Tennessee, Central elsewhere."
+    placement_rule: "TDEC's table gives no coordinates and no receiving water: every report is listed with its county, city and permittee and placed on no water; it is never placed at the plant or geolocated from its address."
