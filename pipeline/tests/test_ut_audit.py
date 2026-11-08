@@ -51,6 +51,46 @@ def test_a_true_remainder_and_one_without_an_outline_stay(river):
     assert W.recheck_remainders(rows, [], {}) == [] and len(rows) == 2
 
 
+def test_on_a_runner_with_only_the_api_s_folder_the_recheck_still_recuts(tmp_path, monkeypatch):
+    """The batch runner's case (run 42442475851): no openboatlaunch build output, only the API's national bulk file
+    restored into out/water. There a river drawn as an area and as lines keeps its line pieces in `geometry_lines`
+    and only its area pieces in `geometry`; reading `geometry` alone, the Jordan River was a few polygons, so the
+    remainder built along its centre line lay "off" it and was kept. With both read, the recheck drops it."""
+    slug = "api-river-ut"
+    area = {"type": "Polygon", "coordinates": [[(-111.905, 40.50), (-111.895, 40.50), (-111.895, 40.51),
+                                                 (-111.905, 40.51), (-111.905, 40.50)]]}      # one wide stretch
+    lines = {"type": "MultiLineString", "coordinates": [[(-111.90, 40.51), (-111.90, 40.80)]]}  # the centre line
+    rec = {"slug": slug, "name": "Api River", "kind": "river", "state": "UT", "geometry": area,
+           "geometry_lines": lines, "geometry_tolerance_m": 17, "geometry_hash": "x"}       # the API's shape
+    (tmp_path / f"{slug}.json").write_text(json.dumps(rec))
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path)
+    monkeypatch.delitem(S._GEOM_CACHE, slug, raising=False)
+    g = S.water_geometry(slug, None)
+    assert g is not None and g.geom_type == "GeometryCollection" and g.bounds[3] >= 40.80   # the lines are read
+    # the remainder the runner built: the river less the area piece (the old reading), all along the centre line
+    rem = {"slug": "api-river-north-ut", "name": "Api River", "state": "UT", "covers_part_of": slug,
+           "geometry": mapping(LineString([(-111.9003, 40.52), (-111.9003, 40.79)])), "length_km": 30.0,
+           "bbox": [-111.9003, 40.52, -111.9003, 40.79]}
+    # with `geometry` alone the recheck finds nothing to cut (what the runner did)
+    monkeypatch.setitem(S._GEOM_CACHE, slug, shape(area))
+    rows = [dict(rem)]
+    assert W.recheck_remainders(rows, [], {}) == [] and len(rows) == 1
+    # with the whole outline it drops the remainder, and its target rows go to the river
+    monkeypatch.delitem(S._GEOM_CACHE, slug)
+    rows = [dict(rem)]
+    targets = [{"state": "UT", "name": "Api River", "slugs": ["api-river-north-ut"]}]
+    acts = W.recheck_remainders(rows, targets, {})
+    assert rows == [] and acts[0]["action"] == "dropped" and targets[0]["slugs"] == [slug]
+
+
+def test_an_outline_without_line_pieces_reads_as_before():
+    poly = {"type": "Polygon", "coordinates": [[(0, 0), (1, 0), (1, 1), (0, 0)]]}
+    assert S.outline_of({"geometry": poly, "geometry_lines": None}).geom_type == "Polygon"
+    assert S.outline_of({"geometry": None}) is None
+    only = S.outline_of({"geometry": None, "geometry_lines": {"type": "LineString", "coordinates": [(0, 0), (1, 1)]}})
+    assert only.geom_type == "LineString"
+
+
 def test_every_remainder_lies_off_its_rivers_outline():
     """The auditor's data test: for every NHD record with covers_part_of whose parent outline is on disk, under 10 per
     cent of its length lies within SAME_WATER_M of the parent."""
@@ -135,15 +175,59 @@ def test_a_morgan_county_gordon_creek_report_is_not_placed_on_carbon_countys_cre
     assert kept == [] and "the county the report gives" in why
 
 
+def _water_boxes() -> dict:
+    """{slug: bbox} over every water file (openboatlaunch's extracts and the NHD build)."""
+    out = {}
+    for f in sorted((ROOT / "data").glob("waters-*.json")):
+        try:
+            d = json.loads(f.read_text())
+        except ValueError:
+            continue
+        for w in (d.get("waters") if isinstance(d, dict) else d) or []:
+            if isinstance(w, dict) and w.get("slug") and w.get("bbox"):
+                out.setdefault(w["slug"], w["bbox"])
+    return out
+
+
+def _held(entry: dict, boxes: dict, pad: float = 0.01) -> bool:
+    """A resolved name's record holds the reports' points (its box, padded about 1 km)."""
+    pts = entry.get("points") or []
+    for s in entry.get("slugs") or []:
+        b = boxes.get(s)
+        if b and pts and all(b[0] - pad <= lon <= b[2] + pad and b[1] - pad <= lat <= b[3] + pad for lat, lon in pts):
+            return True
+    return False
+
+
 def test_the_missing_list_carries_places_and_the_unplaced_advisories():
+    """Each name the auditor found unplaced is either still a missing row with its places, or resolved (the water
+    batch) to a record that holds the reports' points: Gordon Creek in Morgan County, not Carbon County's (re-check of
+    2026-11-08: the rerun batch built Gordon Creek, Red Creek Reservoir, Sulphur Creek and North Creek at the reports'
+    points, so the test must accept a resolved record)."""
     d = json.loads((ROOT / "research" / "ut" / "receiving-waters-missing.json").read_text())
-    by = {(r["name"], r["county"]): r for r in d["rows"]}
-    g = by[("Gordon Creek", "Morgan County")]
-    assert g["reports"] == 1 and g["points"] and g["points"][0][0] > 41
+    rows = {(r["name"], r["county"]): r for r in d["rows"]}
+    resolved = {(r["name"], r.get("county")): r for r in d.get("resolved") or []}
+    boxes = _water_boxes()
+
+    def entry(name, county=None):
+        key = next((k for k in list(rows) + list(resolved) if k[0] == name and (county is None or k[1] == county)), None)
+        assert key is not None, f"{name} ({county}) is neither a missing row nor resolved"
+        return (rows.get(key), None) if key in rows else (None, resolved[key])
+
+    row, res = entry("Gordon Creek", "Morgan County")
+    g = row or res
+    assert g["points"] and g["points"][0][0] > 41                    # the report's point, north of Morgan
+    if row:
+        assert row["reports"] == 1
+    else:
+        assert _held(res, boxes), "Gordon Creek resolved to a record away from the Morgan County report"
     for name in ("Big East Lake", "Red Creek Reservoir", "Sulphur Creek", "North Creek", "Babylon Trail Creek",
                  "Manila Creek Pond", "Fifth Water Hot Springs"):
-        r = next(x for x in d["rows"] if x["name"] == name)
-        assert r["reports"] >= 1 and "ut-dwq-recreational-advisories" in r["sources"] and r["points"]
+        row, res = entry(name)
+        if row:
+            assert row["reports"] >= 1 and "ut-dwq-recreational-advisories" in row["sources"] and row["points"]
+        else:
+            assert _held(res, boxes), f"{name} resolved to a record that does not hold its points"
     assert all(r["county"] for r in d["rows"])
 
 
