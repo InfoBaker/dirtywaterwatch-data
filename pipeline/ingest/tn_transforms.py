@@ -59,7 +59,9 @@ Contact Advisory), and the advisory's dates (HAB_Status_date, HAB_end_date, date
     reporter's own free-text description: none of them is requested (out_fields are the safe fields). The point is
     the reporter's: rounded to 0.001 degree (about 100 m; coord_precision_m 150) in the record and in raw.row and
     data/raw (the block's round_coords). Where TDEC's private_property code says "No, private residence, or farm pond"
-    the record keeps only the county the point lies in: no point in the record or in raw.row (review 2026-11-08 P2-3).
+    the record keeps only the county the point lies in: no point in the record or in raw.row (review 2026-11-08 P2-3),
+    and no water text either: the reporter's words may name the home's street (final audit 2026-11-08 P2-4); the
+    record says "a private pond" (raw._water_text_withheld) and is placed on no water.
 """
 from __future__ import annotations
 
@@ -215,6 +217,7 @@ WINDOW_BASIS = ("TDEC's harmful algal bloom advisory: in effect from the date TD
                 "TDEC sets no fixed period")
 
 
+PRIVATE_WATER_TEXT = "a private pond (TDEC: private residence or farm pond; its name is not published)"
 PRIVATE_RESIDENCE = re.compile(r"private\s+residence|farm\s+pond", re.I)
 
 
@@ -249,6 +252,12 @@ def tn_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
             notes["row"] = {k: v for k, v in (notes.get("row") or row).items() if k not in ("_x", "_y")}
             notes["_point_withheld"] = ("TDEC marks this water a private residence or farm pond: only its county is "
                                         "published")
+            # the reporter's words for the water may name the home's street ("pond located near ... block of ..."):
+            # a generic text with the county, never the words (final audit 2026-11-08 P2-4)
+            if rec.get("waterbody_text"):
+                notes["row"] = {**notes["row"], "name_of_the_waterbody": PRIVATE_WATER_TEXT}
+                rec["waterbody_text"] = None
+                notes["_water_text_withheld"] = PRIVATE_WATER_TEXT
         else:
             rec["lat"], rec["lon"] = round(float(lat), 3), round(float(lon), 3)
             rec["coord_precision_m"] = 150

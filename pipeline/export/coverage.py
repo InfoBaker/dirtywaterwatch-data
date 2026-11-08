@@ -133,7 +133,20 @@ def state_name(st: str) -> str:
 FEDERAL_PUBLISHER = "the U.S. Environmental Protection Agency"
 
 
-def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[str, str]:
+REFUSED = re.compile(r"\b403\b|forbidden", re.I)
+
+
+def unreadable(feeds: list[dict]) -> str | None:
+    """'refused' when one of the state's own sewage feeds has never been read and its host answered 403 (Tennessee's
+    Events Report: final audit 2026-11-08 P1-2), 'failing' when one has never been read for another reason, else
+    None. A feed read once (last_ok_at) is never this: its reports are on file."""
+    bad = [f for f in feeds or [] if f.get("ok") is False and not f.get("last_ok_at") and not f.get("fixture")]
+    if not bad:
+        return None
+    return "refused" if any(REFUSED.search(str(f.get("error") or "")) for f in bad) else "failing"
+
+
+def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False, unread: str | None = None) -> tuple[str, str]:
     """(grade, sentence) from a state's figures (the site's gradeOf). federal: every dated report of the state comes
     from a feed whose registry rows are all federal (EPA's eRule tables): the state publishes no list of its own, so
     the sentence says who does (2026-11-07 Mississippi final audit: "Mississippi publishes dated overflow reports"
@@ -143,6 +156,15 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False) -> tuple[
     in_name = "the District of Columbia" if st == "DC" else name
     # no possessive ("Massachusetts's") and no unsourced delay: the delayed sentence gives the state's own lag
     by = f"Overflow reports from sewer operators in {in_name} are published by {FEDERAL_PUBLISHER}" if federal else None
+    if f["records_12m"] == 0 and unread:
+        # the state publishes reports this site cannot read: never "none are reported" (final audit 2026-11-08 P1-2;
+        # owner default: the label of a delayed source)
+        why = ("its server refuses this site's requests" if unread == "refused"
+               else "this site has not yet been able to read them")
+        return "Dated reports, delayed", (f"{Name} publishes dated overflow reports, but {why}, so none are shown here "
+                                          f"yet; a quiet map in {in_name} means those reports cannot be read, not that "
+                                          "none happen. The advisories and the rain caution this site can read are "
+                                          "still shown.")
     if f["records_12m"] == 0:
         # scoped to the grading window: a state with an older readable report on file (New Mexico's of June 2024)
         # must not be told it publishes nothing readable (SOL review 2026-11-07, site P2-8; the site's coverage.ts
@@ -342,9 +364,10 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
     start = now - timedelta(days=365)
     reg = {r.get("id"): r for r in registry or [] if isinstance(r, dict) and r.get("id")}
     # the site's sources: a feed takes its registry rows' event types and states
-    feed_types, feed_states, cadence, batches = {}, {}, {}, {}
+    feed_types, feed_states, cadence, batches, feed_rows = {}, {}, {}, {}, {}
     for f in feeds or []:
         sid = f.get("source_id")
+        feed_rows[sid] = f
         rows = [reg[i] for i in f.get("registry_ids") or [] if i in reg]
         feed_types[sid] = {t for r in rows for t in r.get("event_types") or []}
         feed_states[sid] = [str(x).upper() for r in rows for x in r.get("states") or []]
@@ -382,7 +405,8 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         f = _figures(evs, firsts_state.get(st, []), own, cadence, names, ids, batches)
         dated = {e.get("source_id") for e in evs if is_dated(e)}
         federal = bool(dated) and all(set((source_levels or {}).get(s) or []) == {"federal"} for s in dated)
-        grade, sentence = grade_of(st, f, now, federal=federal)
+        grade, sentence = grade_of(st, f, now, federal=federal,
+                                   unread=unreadable([feed_rows[s] for s in sorted(own) if s in feed_rows]))
         states[st] = {"code": st, "name": state_name(st), "duty": duty_sentence(rules, st), **f, "grade": grade,
                       "sentence": sentence, "rain_caution": (rain_states or {}).get(st)}
     # what stands in the way, and how each state's operators tell the public (the channel register; §2.y)

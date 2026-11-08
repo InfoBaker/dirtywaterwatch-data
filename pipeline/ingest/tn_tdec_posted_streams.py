@@ -23,12 +23,14 @@ Record rules
     (raw._last_seen_in_source); the first read that no longer finds it ends it (raw._unlisted_since: TDEC took it
     off its list). A failed read confirms nothing.
   - Place, by rules only: waterbody_text is the stream TDEC names and raw.county its county (the status build's
-    county-aware name placement, build/status.py COUNTY_FIELD_STATES); the point is the stream's mouth in the USGS
+    county-aware name placement, build/status.py COUNTY_FIELD_STATES), and raw._placement "named_water_only", so a
+    posting is never tied by its point to the water downstream (Boone Lake for Beaver Creek: final audit 2026-11-08
+    P1-1); a posting whose stream has no record is unplaced and drawn as its marker. The point is the stream's mouth in the USGS
     Geographic Names Information System for that name in that county (MOUTHS: the GNIS feature id, read from The
     National Map's geonames service, Streams (Mouth), on 2026-11-07; coord_source "gnis"), so on a stream the advisory
     is a marker, never the whole stream's colour (advisory_on_river); raw.advisory_extent "named_water". A segment
-    whose name has no GNIS mouth in its county (the Cumberland River in Davidson County: its mouth is in Kentucky)
-    has no point and is placed only by its name and county.
+    whose stream has no mouth in Tennessee (the Cumberland River in Davidson County) takes the downstream end of TDEC's
+    portion from the National Bridge Inventory (BRIDGES: the Woodland Street Bridge; coord_source "hand").
   - The PDF's text is read with ingest.nh_pdftext (positioned text): the stream column's lines grouped by their gaps
     are the segments; every other cell is assigned to the segment whose band holds it. Some words are set in a font
     whose text comes out shifted ("1 H H O H \\ ¶ V" for "Neeley's"): they are shifted back (unshift).
@@ -87,6 +89,7 @@ MOUTHS = {
     ("Richland Creek", "Davidson"): (1299362, 36.1642, -86.8883),
     ("Trace Creek", "Clay"): (1304147, 36.6095, -85.783),
     ("Wilson Branch", "Clay"): (1274793, 36.5562, -85.7805),
+    ("East Fork Third Creek", "Knox"): (1283411, 35.9551, -83.948),       # GNIS's name: East Third Creek
     ("Cypress Creek", "Shelby"): (1281924, 35.1865, -90.0159),          # the tributary to the Wolf River
 }
 
@@ -261,25 +264,41 @@ def water_name(stream: str) -> tuple[str, str | None]:
     return s, None
 
 
+# a posted segment of a river with no mouth in Tennessee: the point is the downstream end TDEC's portion names, from
+# the National Bridge Inventory (FHWA, NTAD National Bridge Inventory layer, read 2026-11-08): (name, county) ->
+# (structure number, lat, lon, the end it is)
+BRIDGES = {
+    ("Cumberland River", "Davidson"): ("19M32440001", 36.16687, -86.77637,
+                                       "the Woodland Street Bridge (river mile 190.6), the downstream end of the posting"),
+}
+
+
 def record(seg: dict, rev: str | None, at: str) -> dict:
     water, note = water_name(seg["stream"])
     counties = counties_of(seg["county"])
     mouth = next((MOUTHS[(water, c)] for c in counties if (water, c) in MOUTHS), None)
-    lat, lon = (mouth[1], mouth[2]) if mouth else (None, None)
+    bridge = None if mouth else next((BRIDGES[(water, c)] for c in counties if (water, c) in BRIDGES), None)
+    lat, lon = (mouth[1], mouth[2]) if mouth else (bridge[1], bridge[2]) if bridge else (None, None)
     raw = {"state": "TN", "county": f"{counties[0]} County" if counties else None,
            "counties": [f"{c} County" for c in counties], "region": seg["region"], "stream_as_listed": seg["stream"],
            "portion": seg["portion"], "cause": seg["comments"], "sewer_cause": bool(SEWER.search(seg["comments"] or "")),
            "list_revision": rev, "list_url": URL, "advisory_extent": EXTENT, "advisory_noun": NOUN,
            "start_basis": ("TDEC's list gives no date for the posting: the start is this site's first read of the list "
                            "that found it (time_precision poll); the posting began earlier"),
+           # the point is the marker only: the posting is placed by its stream's name and county, never by the point,
+           # which lies on the water downstream (final audit 2026-11-08 P1-1; build/status.py named_water_only)
+           "_placement": "named_water_only",
            "coords_basis": (f"the stream's mouth in the USGS Geographic Names Information System (feature {mouth[0]}, "
-                            f"Streams (Mouth), read 2026-11-07)" if mouth else
+                            f"Streams (Mouth), read 2026-11-07), the marker only" if mouth else
+                            f"{bridge[3]}, from the National Bridge Inventory (structure {bridge[0]}, read 2026-11-08), "
+                            f"the marker only" if bridge else
                             "no GNIS mouth of this name in this county: placed by its name and county only")}
     if note:
         raw["water_note"] = note
     return event(source_id=SOURCE_ID, source_record_id=slug(f"{seg['stream']}-{'-'.join(counties)}"),
                  event_type="beach_advisory", status="advisory_active", waterbody_text=water, lat=lat, lon=lon,
-                 coord_source="gnis" if mouth else None, coord_precision_m=500 if mouth else None, started_at=at,
+                 coord_source="gnis" if mouth else "hand" if bridge else None,
+                 coord_precision_m=500 if mouth else 100 if bridge else None, started_at=at,
                  time_precision="poll", authority=AUTHORITY, advice_text=ADVICE, source_url=URL, fetched_at=at, raw=raw)
 
 

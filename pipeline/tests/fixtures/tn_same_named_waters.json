@@ -1,0 +1,206 @@
+{
+ "boone-lake-tn": {
+  "slug": "boone-lake-tn",
+  "name": "Boone Lake",
+  "kind": "reservoir",
+  "state": "TN",
+  "towns": [
+   "Austin Springs",
+   "Blountville",
+   "Boring",
+   "Flourville",
+   "Gross Crossroad",
+   "Johnson City",
+   "Oak Grove",
+   "Spurgeon"
+  ],
+  "bbox": [
+   -82.438698,
+   36.379198,
+   -82.266436,
+   36.497748
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "cherokee-lake-tn": {
+  "slug": "cherokee-lake-tn",
+  "name": "Cherokee Lake",
+  "kind": "reservoir",
+  "state": "TN",
+  "towns": [
+   "Beans",
+   "Big Q Estates",
+   "Boggs",
+   "Cedar Hills",
+   "Galbraith",
+   "Jefferson City",
+   "Lakeshore Estates",
+   "Lakewood Estates",
+   "Mary Chapel",
+   "Mooresburg",
+   "Morristown",
+   "Needmore"
+  ],
+  "bbox": [
+   -83.516084,
+   36.126827,
+   -82.964846,
+   36.404209
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "cumberland-river-tn": {
+  "slug": "cumberland-river-tn",
+  "name": "Cumberland River",
+  "kind": "river",
+  "state": "TN",
+  "towns": [
+   "Bear Spring",
+   "Butlers Landing",
+   "Carthage",
+   "Celina",
+   "Charlotte Park",
+   "Clarksville",
+   "Cumberland City",
+   "Doddsville",
+   "Dover",
+   "Fox Bluff",
+   "Hartsville",
+   "Hendersonville"
+  ],
+  "bbox": [
+   -88.22325,
+   36.135441,
+   -85.276755,
+   37.050675
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "goose-creek-tn": {
+  "slug": "goose-creek-tn",
+  "name": "Goose Creek",
+  "kind": "river",
+  "state": "TN",
+  "towns": [
+   "Hartsville"
+  ],
+  "bbox": [
+   -86.161939,
+   36.355845,
+   -86.040616,
+   36.510342
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "stones-river-tn": {
+  "slug": "stones-river-tn",
+  "name": "Stones River",
+  "kind": "river",
+  "state": "TN",
+  "towns": [
+   "Nashville"
+  ],
+  "bbox": [
+   -86.667106,
+   35.985875,
+   -86.454688,
+   36.192813
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "tennessee-river-tn": {
+  "slug": "tennessee-river-tn",
+  "name": "Tennessee River",
+  "kind": "river",
+  "state": "TN",
+  "towns": [
+   "Cerro Gordo",
+   "Chattanooga",
+   "Clifton",
+   "Crump",
+   "Hamburg",
+   "Knoxville",
+   "Lakemoor Hills",
+   "Nash Landing",
+   "Perryville",
+   "Pyburn",
+   "Red Bank",
+   "Saltillo"
+  ],
+  "bbox": [
+   -88.318073,
+   34.372899,
+   -83.849455,
+   37.012854
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "wolf-river-tn": {
+  "slug": "wolf-river-tn",
+  "name": "Wolf River",
+  "kind": "river",
+  "state": "TN",
+  "towns": [
+   "Byrdstown",
+   "Wolf River"
+  ],
+  "bbox": [
+   -85.300245,
+   36.521882,
+   -84.900913,
+   36.633764
+  ],
+  "aliases": null,
+  "covers_part_of": null
+ },
+ "cumberland-river-celina-tn": {
+  "slug": "cumberland-river-celina-tn",
+  "name": "Cumberland River",
+  "kind": "river",
+  "state": "TN",
+  "towns": [
+   "Ashland City",
+   "Clarksville",
+   "Gainesboro",
+   "Green Hill",
+   "Hartsville/Trousdale County",
+   "Hendersonville",
+   "Nashville-Davidson metropolitan government (balance)",
+   "South Carthage"
+  ],
+  "bbox": [
+   -87.90978,
+   36.13553,
+   -85.50111,
+   36.66811
+  ],
+  "aliases": [
+   "CUMBERLAND RV",
+   "CUMBERLAND RV TR"
+  ],
+  "covers_part_of": "cumberland-river-tn"
+ },
+ "third-creek-tn": {
+  "slug": "third-creek-tn",
+  "name": "Third Creek",
+  "kind": "stream",
+  "state": "TN",
+  "towns": [
+   "Knoxville"
+  ],
+  "bbox": [
+   -84.01983,
+   35.94215,
+   -83.93544,
+   35.9906
+  ],
+  "aliases": [],
+  "covers_part_of": null
+ }
+}
