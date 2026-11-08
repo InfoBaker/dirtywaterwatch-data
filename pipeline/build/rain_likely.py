@@ -327,6 +327,10 @@ def discharge_starts(events: list[dict], skip: set[tuple[str, str]] | None = Non
             continue
         if system_wide_advisory(ev):
             continue            # an advisory of the risk of overflows never holds back the caution (review 2026-11-08 P2-2)
+        if (ev.get("raw") or {}).get("keeps_rain_caution") is True:
+            continue            # an authority's advisory naming a water, not the outfalls that overflowed (Portland's
+            #                     CSO advisories): it colours its outfalls' stretches and never switches the caution off
+            #                     on the permit's other outfalls (Oregon go-live audit 2026-11-08 P1-1)
         if (str(ev["npdes_permit"]).upper(), str(ev.get("outfall_id") or "").strip().upper()) in skip:
             continue
         et = ev.get("event_type")

@@ -15,8 +15,12 @@ What is read (privacy)
   SAFE_FIELDS only, requested by name (outFields). Never requested: Situation (the call narrative: it names callers,
   residents and contractors), Name (the incident's title, often a street address or a business or person's name),
   Address (the street address, often a private home: the point and the city carry the place), Latitude and Longitude
-  (text copies of Lat_DD and Lon_DD). data/raw keeps only the requested fields of the rows read, as the layer gave
-  them (save_safe), never another field. common.event runs common.strip_personal on raw.
+  (text copies of Lat_DD and Lon_DD). data/raw keeps only the requested fields of the rows read (safe_row), never
+  another field, with every point rounded to three decimals (about 100 m) before anything is saved: DEQ's points are
+  to about a metre and many are homes (Oregon go-live audit 2026-11-08 P2-1). A report whose Source is a private
+  residence or a septic tank (PRIVATE_SOURCES: 77 and 24 rows) keeps its county only: no point, no city
+  (raw._point_withheld), placed only on a water it names (raw._placement named_water_only), as Tennessee's rule does
+  for its bloom reporters. common.event runs common.strip_personal on raw.
 
 Record rules (rules only; no model, no geocoding)
   - Rows: Material "Sewage" (2,371). The category's other materials (Wastewater (Non-Sewage) 266, Biological Material
@@ -100,6 +104,23 @@ DRY_MEDIA = {"soil", "pavement", "building or facility", "sanitary sewer", "air"
 TYPES = {"sewer": "sso", "storm drain or outfall": "sso", "pipeline": "sso", "wastewater treatment plant": "bypass"}
 
 
+PRIVATE_SOURCES = {"private residence", "septic tank"}
+# DEQ points that contradict the row's own city (Oregon go-live audit 2026-11-08 P3-3): the point lies on the
+# Willamette, the city on the coast or in Mount Angel; the point is not used (raw._coords_rejected), the county kept
+BAD_POINTS = {"2017-2304": "DEQ's point lies on the Willamette River, far from the row's city (Seaside)",
+              "2020-3148": "DEQ's point lies on the Willamette River, not at the row's city (Mount Angel)"}
+POINT_DECIMALS = 3
+
+
+def safe_row(attrs: dict) -> dict:
+    """A row cut to SAFE_FIELDS with its point rounded to POINT_DECIMALS (module docstring: privacy)."""
+    row = {k: attrs.get(k) for k in SAFE_FIELDS}
+    for k in ("Lat_DD", "Lon_DD"):
+        if isinstance(row.get(k), (int, float)):
+            row[k] = round(float(row[k]), POINT_DECIMALS)
+    return row
+
+
 def clean(v) -> str:
     s = "" if v is None else str(v).strip()
     return "" if s.upper() == "NULL" else s
@@ -179,11 +200,14 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
     et = TYPES.get(src.lower(), "sso")
     waters, place = waterway(a.get("Affected_Waterway"))
     water = "; ".join(waters) or None
-    lat, lon = a.get("Lat_DD"), a.get("Lon_DD")
+    a = safe_row(a)
+    private = src.lower() in PRIVATE_SOURCES
+    lat, lon = (None, None) if private else (a.get("Lat_DD"), a.get("Lon_DD"))
+    bad = BAD_POINTS.get(clean(a.get("OERS_No")))
     raw = {"state": "OR", "time_zone": zone,
            "timezone_note": ("Mountain time: Malheur County north of township 35 South (49 CFR 71.9)"
                              if zone == zones.MOUNTAIN else "Pacific time"),
-           "oers_no": clean(a.get("OERS_No")), "city": clean(a.get("City")) or None,
+           "oers_no": clean(a.get("OERS_No")), "city": None if private else (clean(a.get("City")) or None),
            "county": clean(a.get("County")) or None, "region": clean(a.get("Region")) or None,
            "source": src or None, "source_category": clean(a.get("SourceCategory")) or None,
            "cause": clean(a.get("Cause")) or None, "activity": clean(a.get("Activity")) or None,
@@ -199,6 +223,13 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
         raw["_source_type"] = src or None
         raw["_type_basis"] = (f"DEQ's material is Sewage; the source is not a public sewer or plant ({src or 'not '
                               'given'}): kept as a sewage report")
+    if bad and lat is not None:
+        raw["_coords_rejected"], raw["_coords_rejected_reason"] = [lat, lon], bad
+        lat = lon = None
+    if private:
+        raw["_point_withheld"] = ("a report from a private residence or septic tank: DEQ's point and the city are not "
+                                  "published, only the county")
+        raw["_placement"] = "named_water_only"
     if place:
         raw["waterway_place"] = place
     if not (isinstance(lat, (int, float)) and isinstance(lon, (int, float))
@@ -264,7 +295,7 @@ def query(sess: requests.Session) -> list[dict]:
         if "error" in d:
             raise RuntimeError(f"layer error: {d['error']}")
         feats = d.get("features") or []
-        rows += [{k: (f.get("attributes") or {}).get(k) for k in SAFE_FIELDS} for f in feats]
+        rows += [safe_row(f.get("attributes") or {}) for f in feats]
         if not d.get("exceededTransferLimit") or not feats:
             return rows
         off += len(feats)
@@ -282,7 +313,7 @@ def load_file(path: str) -> tuple[list[dict], dict]:
     d = json.loads(Path(path).read_text())
     if d.get("format") != SAFE_FORMAT:
         raise ValueError(f"not a {SAFE_FORMAT} document")
-    return [{k: r.get(k) for k in SAFE_FIELDS} for r in d.get("rows") or []], d.get("meta") or {}
+    return [safe_row(r) for r in d.get("rows") or []], d.get("meta") or {}
 
 
 def main(argv: list[str] | None = None) -> int:

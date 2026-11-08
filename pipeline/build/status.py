@@ -156,6 +156,10 @@ PLACE_STEPS = {"registry": True, "relaxed_guard": True, "no_receiving_water": Tr
 # the name they give move onto the registry's water, New Bedford Harbor and Clarks Cove onto Buzzards Bay; with True,
 # 294 move onto the registry's water and 1,195 that the outfall_id alone had put on it move to the water they name).
 REGISTRY_YIELDS_TO_NAMED_WATER = True
+# States whose CSO reports name their water and permit but never an outfall: such a report is placed on the water it
+# names with the permit's open registry outfalls on that water (Resolver.named_water_outfalls), so their reaches are
+# coloured (Oregon: Portland's CSO advisories; go-live audit 2026-11-08 P1-1)
+NAMED_WATER_OUTFALL_STATES = {"OR"}
 # rules.placement.no_outfall_all_waters (data/rules.json, a switch): a CSO report that names no water and no outfall
 # is placed on every water its permit's registry outfalls reach (a permit the registry lacks: every receiving water
 # data/dischargers.json lists, CSO reports only since review 2026-11-03 P3-1), with this note
@@ -1637,6 +1641,28 @@ def bbox_extent_m(b) -> float | None:
     return math.hypot((b[2] - b[0]) * 111_320 * math.cos(lat), (b[3] - b[1]) * 110_574)
 
 
+# States whose NHD remainder records (covers_part_of: the part of a river more than 300 m from the river's own record,
+# ingest/waters_from_nhd.py) are read as the river they are part of when they lie within REMAINDER_PARENT_M of it: the
+# Columbia's remainder from Astoria to Umatilla held Astoria's 34 CSO outfalls on a second "Columbia River" page (Oregon
+# go-live audit 2026-11-08 P2-2). Keyed on the state, so no other state's placement changes.
+REMAINDER_PARENT_STATES = {"OR"}
+REMAINDER_PARENT_M = 2000
+
+
+def remainder_parents(waters: dict) -> dict[str, str]:
+    """{remainder slug: the record it covers_part_of} for REMAINDER_PARENT_STATES, when both exist and lie within
+    REMAINDER_PARENT_M of each other (a record with no geometry here cannot be measured and is left alone)."""
+    out = {}
+    for slug, w in waters.items():
+        parent = w.get("covers_part_of")
+        if w.get("state") not in REMAINDER_PARENT_STATES or not parent or parent not in waters or parent == slug:
+            continue
+        a, b = water_geometry(slug, waters), water_geometry(parent, waters)
+        if a is not None and b is not None and a.distance(b) * 111_320 <= REMAINDER_PARENT_M:
+            out[slug] = parent
+    return out
+
+
 def make_resolver(waters: dict | None = None) -> "Resolver":
     """The resolver build() uses, from the files on disk (charts, waters_from_nhd)."""
     return Resolver(load_waters() if waters is None else waters, load_registry_outfalls(), load_discharger_towns(),
@@ -1649,6 +1675,7 @@ class Resolver:
         """placement_rules: data/rules.json "placement" (None: read it)."""
         self.waters = waters
         self.slug_alias = slug_aliases(waters)          # an older slug of a record -> the record (P2-1)
+        self.slug_alias.update(remainder_parents(waters))   # Oregon: a river's remainder read as the river (P2-2)
         pr = (load_rules().get("placement") or {}) if placement_rules is None else placement_rules
         self.no_outfall_all_waters = bool(pr.get("no_outfall_all_waters"))
         self.discharger_towns = discharger_towns or {}
@@ -2179,6 +2206,25 @@ class Resolver:
             f"({d['names'][0] if d['names'] else self.waters[slug].get('name')}); weaker than the outfall registry: "
             f"the report names no water and no outfall"), []
 
+    def named_water_outfalls(self, ev: dict, state: str | None, slugs: list[str]) -> list[dict] | None:
+        """The permit's open registry outfalls on the waters a CSO report names, for a report that names its water and
+        its permit but no outfall (NAMED_WATER_OUTFALL_STATES: Portland's CSO advisories name "the Willamette River
+        downstream of the Ross Island Bridge", never an outfall; Oregon go-live audit 2026-11-08 P1-1). build() then
+        finds each outfall's reach, so the advisory colours the stretches below the outfalls on that water, not only
+        the water's page. None for any other report (keyed on the state, so no other state's placement changes)."""
+        permit = ev.get("npdes_permit")
+        if state not in NAMED_WATER_OUTFALL_STATES or ev.get("event_type") != "cso" or not permit \
+                or ev.get("outfall_id") not in (None, "") or outfall_ids_of(ev)[0]:
+            return None
+        out = []
+        for r in self.by_permit.get(permit) or []:
+            if str(r.get("outfall_status") or "").upper().startswith("CLS") or r.get("outfall") in (None, ""):
+                continue
+            s = self.row_water(r)[0]
+            if s in slugs:
+                out.append({"outfall": r.get("outfall"), "water_slug": s})
+        return out or None
+
     def registry_first(self, ev: dict, state: str | None, known: list[str], neg: set):
         """Registry first (PLACE_STEPS registry_first): ([slugs], note, outfalls) when the outfalls the report names
         (outfall_ids_of: its outfall_id, an outfall number in its outfall name, a per-outfall volume string) are rows
@@ -2425,7 +2471,8 @@ class Resolver:
             if yields_to_point(slugs, relaxed):
                 slugs = []
             if slugs:
-                return placed(slugs, "name", nnote or note, [relaxed[x] for x in slugs if x in relaxed])
+                return placed(slugs, "name", nnote or note, [relaxed[x] for x in slugs if x in relaxed],
+                              outfalls=self.named_water_outfalls(ev, state, slugs))
         near = None if named_only else on_a_water()
         if near:
             return placed([near[1]], "geometry", f"point {round(near[0])} m from the water")
