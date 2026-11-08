@@ -33,7 +33,7 @@ registry_ids: ["ut-deq-environmental-incidents"]
 access: ["arcgis", "csv", "pdf"]
 access_detail: "Public ArcGIS Online feature service (maxRecordCount 2000), no key. Each row links DEQ's PDF spill report (ReportLink, deqspillsps.deq.utah.gov). The older search site eqspillsps.deq.utah.gov failed TLS (expired certificate) on 2026-11-03."
 machine_readable: true
-legal_basis: "DEQ's spill hotline (Utah Code 19-5-114 and R317-801-4 send Class 1 sewer overflows to the Division of Water Quality, not necessarily to this log)"
+legal_basis: "DEQ's spill hotline (voluntary log); R317-801-4 sends Class 1 sewer overflows to the Division of Water Quality, not necessarily to this log"
 checked: "2026-11-07"
 fetch:
   platform: "arcgis"
