@@ -495,7 +495,7 @@ def test_p1_1_the_citys_advisory_never_switches_the_rain_caution_off():
 def test_p2_1_points_are_rounded_and_a_homes_report_keeps_its_county_only():
     rows, _ = O.load_file(str(FIX / "or_oers" / "rows.json"))
     assert all(r["Lat_DD"] is None or round(r["Lat_DD"], 3) == r["Lat_DD"] for r in rows)
-    assert O.safe_row({"Lat_DD": 44.515483, "Lon_DD": -124.03592})["Lat_DD"] == 44.515
+    assert O.safe_row({"Lat_DD": 44.123456, "Lon_DD": -123.654321})["Lat_DD"] == 44.123
     r = oers()[0]["2099-0002"]                                                 # a synthetic private residence
     assert r["lat"] is None and r["lon"] is None and r["coord_source"] is None and r["raw"]["city"] is None
     assert r["raw"]["county"] == "Lincoln" and r["raw"]["_placement"] == "named_water_only"
@@ -526,7 +526,7 @@ def test_p2_3_the_grade_sentence_names_the_one_publisher():
          "monthly_share": 0, "annual_share": 0}
     g, s = C.grade_of("OR", f, datetime(2026, 11, 8, tzinfo=UTC), operator="City of Portland Environmental Services")
     assert g == "Dated reports, delayed" and s.startswith(
-        "Of the sewer operators in Oregon, only the City of Portland Environmental Services publishes dated reports")
+        "In Oregon, the City of Portland Environmental Services publishes dated reports")
     assert C.grade_of("OR", f, datetime(2026, 11, 8, tzinfo=UTC))[1].startswith("Oregon publishes")
 
 
@@ -570,5 +570,5 @@ def _cov(n_ops: int, state="OR"):
 
 
 def test_p2_3_the_publisher_is_named_only_where_the_state_has_several_operators():
-    assert "only the City of Portland Environmental Services publishes" in _cov(2)
+    assert _cov(2).startswith("In Oregon, the City of Portland Environmental Services publishes") and "only" not in _cov(2)
     assert _cov(1).startswith("Oregon publishes")                 # one operator: the sentence is unchanged
