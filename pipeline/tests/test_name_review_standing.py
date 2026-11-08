@@ -92,6 +92,36 @@ def test_the_refresh_runs_the_review_after_the_export_and_never_blocks_on_it(tmp
                        timeout=60)
     assert r.returncode == want_rc, r.stdout + r.stderr
     calls = log.read_text().splitlines()
-    assert calls[:2] == ["make refresh", "python -m build.name_review --standing in pipeline"]
+    # the daily-pass check comes first (any answer but 3 runs the review: 0 due, 1 a failed check), and a good review
+    # is recorded (pipeline/cadence.py; 2026-11-07 refresh-time brief)
+    assert calls[:3] == ["make refresh", "python -m cadence daily name-review in pipeline",
+                         "python -m build.name_review --standing in pipeline"]
+    assert ("python -m cadence ran name-review in pipeline" in calls) is (review_rc == 0)
     assert ("upload" in calls) is (not blocked)
     assert ("name review failed: not blocking" in r.stdout) is (review_rc != 0)
+
+
+@pytest.mark.skipif(not shutil.which("sh"), reason="needs sh")
+def test_the_refresh_skips_the_review_when_it_ran_in_the_last_day(tmp_path):
+    """pipeline/cadence.py daily answers 3 (the review ran well less than a day ago): no review this run, the rest as
+    before."""
+    (tmp_path / "scripts").mkdir()
+    for n in ("refresh-data.sh", "timed.sh"):
+        shutil.copy(ROOT / "scripts" / n, tmp_path / "scripts" / n)
+    (tmp_path / "scripts" / "upload-current.sh").write_text("echo upload >> \"$LOG\"\n")
+    bin_ = tmp_path / "bin"
+    bin_.mkdir()
+    (bin_ / "make").write_text("#!/bin/sh\necho \"make $*\" >> \"$LOG\"\nexit 0\n")
+    py = tmp_path / "pipeline" / ".venv" / "bin" / "python"
+    py.parent.mkdir(parents=True)
+    py.write_text('#!/bin/sh\necho "python $*" >> "$LOG"\ncase "$*" in "-m cadence daily"*) exit 3 ;; esac\nexit 0\n')
+    for f in (bin_ / "make", py):
+        f.chmod(0o755)
+    log = tmp_path / "log.txt"
+    env = {**os.environ, "PATH": f"{bin_}:{os.environ['PATH']}", "LOG": str(log)}
+    r = subprocess.run(["sh", str(tmp_path / "scripts" / "refresh-data.sh")], capture_output=True, text=True, env=env,
+                       timeout=60)
+    assert r.returncode == 0, r.stdout + r.stderr
+    calls = log.read_text().splitlines()
+    assert not any("build.name_review" in c for c in calls) and "upload" in calls
+    assert "name review: on its daily pass, not due this run" in r.stdout

@@ -5,6 +5,13 @@
                                                                             "cadence:ok"; a feed of a state not
                                                                             yet live carries ":daily"
     python -m cadence ran ingest.al_adem_sso                                 that daily feed ran well now
+    python -m cadence daily name-review                                      exit 0 when that daily step is due, 3
+                                                                            when it ran in the last day (any other
+                                                                            exit: run it)
+
+The standing name review (build/name_review.py --standing, scripts/refresh-data.sh) is a daily step too: it writes
+only data/build/name-review.json and .md for the owner (no published file, no later step reads them), rescans every
+record (209 s of run 42417263287), and its ::warning:: on new candidate names comes once a day, not hourly.
 
 The rule (docs/refresh-time-brief-2026-11-07.md; data/rules.json `live_states` is the only switch): a feed belongs to
 a state when its name starts with a two-letter state code and an underscore or hyphen (`al_adem_sso`,
@@ -72,10 +79,16 @@ def due(names: list[str], live: set[str] | None, stamps: dict, now: datetime, ev
         if live is None or st is None or st in live:
             out.append(n)
             continue
-        last = _parse(stamps.get(n))
-        if run_all or last is None or now - last >= timedelta(hours=every_h) - SLACK or last > now + SLACK:
+        if daily_due(n, stamps, now, every_h, run_all):
             out.append(f"{n}:daily")
     return out
+
+
+def daily_due(name: str, stamps: dict, now: datetime, every_h: float = NOT_LIVE_EVERY_H, run_all: bool = False) -> bool:
+    """A step on a daily pass whatever the live states (the standing name review): due when its last good run is
+    every_h hours old or more (less SLACK), has never been, or its stamp is unreadable or in the future."""
+    last = _parse(stamps.get(name))
+    return run_all or last is None or now - last >= timedelta(hours=every_h) - SLACK or last > now + SLACK
 
 
 def load_live(data_dir: Path = DATA_DIR) -> set[str] | None:
@@ -96,7 +109,7 @@ def mark_ran(name: str, now: datetime, path: Path = CADENCE_FILE) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    if not argv or argv[0] not in ("due", "ran"):
+    if not argv or argv[0] not in ("due", "ran", "daily"):
         print(__doc__, file=sys.stderr)
         return 2
     now = datetime.now(UTC)
@@ -104,6 +117,11 @@ def main(argv: list[str] | None = None) -> int:
     # data/rules.json)
     stamps_path = Path(os.environ.get("DWW_CADENCE_FILE") or CADENCE_FILE)
     rules_dir = Path(os.environ["DWW_CADENCE_DATA_DIR"]) if os.environ.get("DWW_CADENCE_DATA_DIR") else DATA_DIR
+    if argv[0] == "daily":
+        if len(argv) != 2:
+            return 2
+        run_all = os.environ.get("FEEDS_ALL", "") in ("1", "yes", "true")
+        return 0 if daily_due(argv[1], read_stamps(stamps_path), now, run_all=run_all) else 3
     if argv[0] == "ran":
         for n in argv[1:]:
             mark_ran(n, now, stamps_path)
