@@ -136279,7 +136279,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 231 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0020575",
@@ -136308,7 +136308,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 50 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0020575",
@@ -136337,7 +136337,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 15 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0020575",
@@ -136355,19 +136355,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000566487",
    "lat": 36.158611,
    "lon": -86.832222,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cumberland-river-tn",
+   "water_name": "Cumberland River",
+   "water_kind": "river",
+   "distance_m": 1228,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Cumberland River-Browns Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Cumberland River-Browns Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Cumberland River-Browns Creek' by name; Cumberland River (cumberland-river-tn, openboatlaunch), 1228 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "TN0020575",
@@ -136396,7 +136395,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 148 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0020575",
@@ -136425,7 +136424,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 32 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0020656",
@@ -136454,7 +136453,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 75 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0020656",
@@ -136470,11 +136469,11 @@
    "in_icis": "YES",
    "permit_status": "EFF",
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000726251",
-   "lat": 36.0,
-   "lon": -87.0,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
+   "lat": null,
+   "lon": null,
+   "water_slug": "cumberland-river-tn",
+   "water_name": "Cumberland River",
+   "water_kind": "river",
    "distance_m": null,
    "alternatives": [
     {
@@ -136486,14 +136485,16 @@
      "name": "Cumberland River"
     }
    ],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "2+ openboatlaunch waters of the receiving water's name ('Cumberland River') in TN; none within 400 m of the point; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: 2+ openboatlaunch waters of the receiving water's name ('Cumberland River') in TN; none within 400 m of the point; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name and town: its receiving water 'Cumberland River' by name and the permittee's town (clarksville): the only record of that name there; the research lists Cumberland River for the permit (data/dischargers.json); Cumberland River (cumberland-river-tn, openboatlaunch), no point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "echo_lat": 36.0,
+   "echo_lon": -87.0,
+   "coords_problem": "ECHO's point (36.0, -87.0) is 17.6 km from cumberland-river-tn, the only 'Cumberland River' in the permittee's town; it cannot be this outfall's (a mistyped coordinate or another place's point)"
   },
   {
    "npdes_permit": "TN0020656",
@@ -136522,7 +136523,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 140 m from Cumberland River (cumberland-river-tn), whose name shares a word with the receiving water ('Cumberland River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0024210",
@@ -136540,19 +136541,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000536527",
    "lat": 35.021944,
    "lon": -85.306667,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "chattanooga-creek-tn",
+   "water_name": "Chattanooga Creek",
+   "water_kind": "stream",
+   "distance_m": 72,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Chattanooga Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Chattanooga Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "name: its receiving water 'Chattanooga Creek' by name; Chattanooga Creek (chattanooga-creek-tn, NHDPlus V2.1 record), 72 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
    "point_shared_by": 2
   },
   {
@@ -136571,19 +136571,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000536527",
    "lat": 35.021944,
    "lon": -85.306667,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "chattanooga-creek-tn",
+   "water_name": "Chattanooga Creek",
+   "water_kind": "stream",
+   "distance_m": 72,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Chattanooga Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Chattanooga Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "name: its receiving water 'Chattanooga Creek' by name; Chattanooga Creek (chattanooga-creek-tn, NHDPlus V2.1 record), 72 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
    "point_shared_by": 2
   },
   {
@@ -136613,7 +136612,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 60 m from Tennessee River (tennessee-river-tn), whose name shares a word with the receiving water ('Tennessee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0024210",
@@ -136642,7 +136641,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 144 m from Tennessee River (tennessee-river-tn), whose name shares a word with the receiving water ('Tennessee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0024210",
@@ -136671,7 +136670,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 61 m from Tennessee River (tennessee-river-tn), whose name shares a word with the receiving water ('Tennessee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0024210",
@@ -136700,7 +136699,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 80 m from Tennessee River (tennessee-river-tn), whose name shares a word with the receiving water ('Tennessee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0024210",
@@ -136729,7 +136728,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 102 m from Tennessee River (tennessee-river-tn), whose name shares a word with the receiving water ('Tennessee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "TN0024210",
@@ -136747,19 +136746,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000536527",
    "lat": 35.022222,
    "lon": -85.323611,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "chattanooga-creek-tn",
+   "water_name": "Chattanooga Creek",
+   "water_kind": "stream",
+   "distance_m": 148,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Chattanooga Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Chattanooga Creek'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Chattanooga Creek' by name; Chattanooga Creek (chattanooga-creek-tn, NHDPlus V2.1 record), 148 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "WA0020257",
