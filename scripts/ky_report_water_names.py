@@ -35,7 +35,13 @@ PLACEHOLDER = re.compile(r"^\s*(?:unnamed(?:\s+tributary)?(?:\s+or\s+unknown)?|u
 # national list's own spellings, "Clover Fork of the Cumberland River", "Poor Fork of the Cumberland River")
 sys.path.insert(0, str(ROOT / "pipeline"))
 from ingest.ky_dow_swimming_advisories import STRETCHES  # noqa: E402
-SWIM = [(w, st) for _, _, w, st, _ in STRETCHES]
+SWIM = [(w, st, county, (pt[1], pt[2])) for _, _, w, st, _, county, pt in STRETCHES]
+
+
+# EPA's NHDPlus reach codes (outfalls-us.json reach_id) for MSD's outfalls off the Ohio River (final audit 2026-11-08)
+MSD_REACHES = {"5140101000472": "Beargrass Creek", "5140101000475": "Beargrass Creek",
+               "5140101000471": "Beargrass Creek", "5140101000175": "Beargrass Creek",
+               "5140101000484": "Mill Creek"}
 
 
 def compact(s: str) -> str:
@@ -46,12 +52,20 @@ def main(argv: list[str]) -> int:
     hab_path = Path(argv[0]) if argv else HAB_DEFAULT
     nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["KY"]["waters"]
     have = {compact(n) for w in nat for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or [])] if n}
+    # names a names pass already resolved stay in "resolved" (with their record), never back on the list
+    prev = json.loads(OUT.read_text()) if OUT.exists() else {}
+    resolved = [r for r in prev.get("resolved") or [] if isinstance(r, dict)]
+    have |= {compact(r.get("name")) for r in resolved}
+    reasons = {compact(r["name"]): r.get("reason") for r in prev.get("rows") or [] if r.get("reason")}
     reports, permits, sources = Counter(), defaultdict(set), defaultdict(set)
     points: dict[str, list] = defaultdict(list)
     stretches: dict[str, list] = defaultdict(list)
     spelling: dict[str, str] = {}
 
-    def add(n0: str, src: str, pt=None, permit=None, report=False, stretch=None):
+    counties: dict[str, set] = defaultdict(set)
+    outfalls, reach_ids = Counter(), defaultdict(set)
+
+    def add(n0: str, src: str, pt=None, permit=None, report=False, stretch=None, county=None):
         n = " ".join((n0 or "").split())
         if not n or PLACEHOLDER.match(n) or compact(n) in have:
             return
@@ -64,6 +78,8 @@ def main(argv: list[str]) -> int:
             points[n].append(pt)
         if stretch:
             stretches[n].append(stretch)
+        if county:
+            counties[n].add(county)
 
     p = EVENTS / "echo-sewer-overflow.json"
     for r in json.loads(p.read_text()).get("records", []) if p.exists() else []:
@@ -83,11 +99,27 @@ def main(argv: list[str]) -> int:
                 pt = [round(g["y"], 6), round(g["x"], 6)] if g.get("x") is not None else None
                 add(a["HABNAME"], "ky-dow-hab-viewer", pt,
                     report=str(a.get("HABSTATUS") or "").lower() in ("warning", "danger"))
-    for n, stretch in SWIM:
-        add(n, "ky-dow-swimming-advisories", report=True, stretch=stretch)
+    for n, stretch, county, pt in SWIM:
+        add(n, "ky-dow-swimming-advisories", list(pt), report=True, stretch=stretch, county=county)
+    # MSD's combined sewer outfalls on Beargrass Creek and Mill Creek by EPA's reach index (final audit 2026-11-08
+    # P2-1): EPA's text for every one reads "OHIO RIVER", so the creeks were on no list; each row carries the outfall
+    # count, EPA's reach codes and the outfalls' points for the NHD pass, and outfall_waters' REACH_FIRST_PERMITS ties
+    # the outfalls to the record built from their own reach
+    us = json.loads((ROOT / "data" / "outfalls-us.json").read_text())["outfalls"]
+    for o in us:
+        if o.get("npdes_permit") != "KY0022411" or str(o.get("outfall_status") or "").upper().startswith("CLS"):
+            continue
+        name = MSD_REACHES.get(str(o.get("reach_id") or ""))
+        if name:
+            add(name, "ky-dow-cso-sites-layer", [o["lat"], o["lon"]] if o.get("lat") is not None else None,
+                "KY0022411", county="Jefferson")
+            outfalls[name] += 1
+            reach_ids[name].add(str(o["reach_id"]))
     rows = [{"name": n, "reports": reports[n], "permits": sorted(permits[n]), "sources": sorted(sources[n])}
             | ({"points": points[n]} if points.get(n) else {}) | ({"stretches": stretches[n]} if stretches.get(n) else {})
-            for n in sorted(set(sources), key=lambda x: (-reports[x], x))]
+            | ({"counties": sorted(counties[n])} if counties.get(n) else {})
+            | ({"outfalls": outfalls[n], "reach_ids": sorted(reach_ids[n])} if outfalls.get(n) else {})
+            for n in sorted(set(sources), key=lambda x: (-reports[x], -outfalls[x], x))]
     doc = {"about": ("Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: "
                      "EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as "
                      "reaching a water), Louisville MSD's discharge notices, the Division of Water's HAB Viewer (every "
@@ -95,7 +127,11 @@ def main(argv: list[str]) -> int:
                      "waters and stretches the page names), with the number of records giving each. The form's "
                      "placeholders ('Unnamed Tributary or Unknown', 'Unnamed') and reports that say the discharge "
                      "reached no water are left out."),
-           "state": "KY", "waters": len(rows), "reports": sum(reports.values()), "rows": rows}
+           "state": "KY", "waters": len(rows), "reports": sum(reports.values()), "rows": rows,
+           **({"resolved": resolved} if resolved else {})}
+    for r in rows:
+        if reasons.get(compact(r["name"])):
+            r["reason"] = reasons[compact(r["name"])]
     OUT.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
     print(f"{len(rows)} names, {sum(reports.values())} reports -> {OUT.relative_to(ROOT)}")
     for r in rows:

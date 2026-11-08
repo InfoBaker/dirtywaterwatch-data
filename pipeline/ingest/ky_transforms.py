@@ -10,9 +10,12 @@ the point's own zone); it never sets a coordinate.
 """
 from __future__ import annotations
 
+import re
+
 import zones
 from ingest.generic import fieldmap as F
 
+LAKE_NAME = re.compile(r"\b(?:lake|reservoir|pond)\b", re.I)
 WINDOW_BASIS = ("Kentucky Division of Water HAB Viewer: in effect while the Division's map shows the point under an "
                 "advisory status; the Division sets no fixed period")
 STARTED_BASIS = ("started_at is the point's HABSTART date as the Division gives it (the start of the status shown); "
@@ -27,6 +30,10 @@ def ky_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
                           + (f": {text}" if text else ".")) if level else None
     rec["advice_window_basis"] = WINDOW_BASIS
     notes["_started_basis"] = STARTED_BASIS
+    if LAKE_NAME.search(str(row.get("HABNAME") or "")):
+        # a bloom on a named lake or reservoir is placed on that water only, never on a stream near the point (final
+        # audit 2026-11-08 P2-3: Old Springfield Reservoir sat on Road Run); with no record it keeps its own marker
+        notes["_placement"] = "named_water_only"
     tz = zones.zone_for("KY", rec.get("lat"), rec.get("lon"))
     if tz:
         notes["time_zone"] = tz

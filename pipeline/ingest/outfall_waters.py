@@ -801,6 +801,12 @@ class Matcher:
         # an override names its water on a cited basis (a hand tie): it is a name even where the text rules would read
         # a street ditch ('Calumet Union Drainage Ditch', 2026-11-06)
         not_name = None if (o.get("receiving_water_override") or {}).get("water") else why_not_a_name(text)
+        if str(o.get("npdes_permit") or "").upper() in REACH_FIRST_PERMITS:
+            # a permit whose receiving-water text is one label for every outfall: the outfall's own reach first
+            s, how = self.by_reach(o, "")
+            if s and self.usable(s, o, "reach"):
+                return {"slug": s, "how": f"{how}; {REACH_FIRST_PERMITS[str(o['npdes_permit']).upper()]}",
+                        "step": "reach"}
         if text and not not_name:
             for step, fn in (("name", self.by_name), ("NHD builder", self.by_nhd_target), ("reach", self.by_reach),
                              ("NHD builder for the permit", self.by_builder_permit)):
@@ -887,6 +893,14 @@ class Matcher:
                         f"for this outfall")
         bits += [x for x in dict.fromkeys(getattr(self, "_refused", None) or []) if x not in bits]
         return "; ".join(bits)
+
+
+# permits whose EPA receiving-water text is one permit-level label for every outfall, so the outfall's own NHD reach
+# (EPA's reach code, a record the NHD builder made from it) is tried before the name (Kentucky final audit 2026-11-08
+# P2-1: Louisville MSD's 121 combined sewer outfalls all read "OHIO RIVER", while EPA's reach index puts 69 on
+# Beargrass Creek and its forks and 7 on Mill Creek). Until the builder has made those records the name decides as before.
+REACH_FIRST_PERMITS = {"KY0022411": "EPA's receiving-water text for this permit is the same label ('OHIO RIVER') on "
+                                    "every outfall, so the outfall's own reach decides"}
 
 
 def gnis_of(o: dict) -> str:

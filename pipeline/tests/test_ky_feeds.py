@@ -327,3 +327,43 @@ def test_sd1s_published_rule_comes_before_a_history_row():
     assert june["kind"] == "operator_rule" and june["threshold_in"] == 0.25
     dec = RL.threshold_for("KY0021466", "KY", hist, rules, datetime(2026, 12, 15, tzinfo=UTC))
     assert dec["kind"] == "operator_history" and dec["threshold_in"] == 0.4
+
+
+def test_a_bloom_on_a_named_reservoir_is_never_placed_on_a_stream_near_its_point(tmp_path):
+    """Final audit 2026-11-08 P2-3: Old Springfield Reservoir's advisory sat on road-run-ky."""
+    from build import status as S
+    block, (recs, _) = _habs()
+    r = recs[0]
+    assert r["waterbody_text"] == "Old Springfield Reservoir" and r["raw"]["_placement"] == "named_water_only"
+    d = tmp_path / "events"
+    d.mkdir()
+    (d / "ky-dow-hab-viewer.json").write_text(json.dumps({"source_id": "ky-dow-hab-viewer", "ok": True,
+                                                         "last_ok_at": "2026-11-07T23:00:00Z", "meta": {},
+                                                         "records": recs}))
+    lat, lon = r["lat"], r["lon"]
+    road = {"slug": "road-run-ky", "name": "Road Run", "kind": "stream", "state": "KY",
+            "bbox": [lon - 0.002, lat - 0.002, lon + 0.002, lat + 0.002],
+            "geometry": {"type": "LineString", "coordinates": [[lon - 0.002, lat - 0.001], [lon + 0.002, lat + 0.001]]}}
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = list(rules["live_states"]) + ["KY"]
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    st, _ = S.build(now=datetime(2026, 11, 8, tzinfo=UTC), write=False, events_dir=d, waters={"road-run-ky": road},
+                    outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False)
+    pts = [p for p in st["advisory_points"] if p["event_id"].startswith("ky-dow-hab-viewer")]
+    assert len(pts) == 1 and pts[0]["water_slugs"] == [] and pts[0]["status"] == "red"
+    assert (st["waters"].get("road-run-ky") or {}).get("status", "grey") == "grey"
+
+
+def test_msd01_rationale_says_its_own_age_out():
+    """Final audit 2026-11-08 P3-1."""
+    from build import status as S
+    r = _msd01()[0]
+    ivs = S.event_intervals(r, "KY", datetime(2026, 4, 1, 13, tzinfo=UTC), None, S.load_rules())
+    red = next(iv for iv in ivs if iv["color"] == "red")
+    assert "48 hours after the last read" in red["rule_applied"]["rationale"] and "14 days" not in red["rule_applied"]["rationale"]
+
+
+def test_msd_outfalls_ignore_the_kentucky_corrections_file():
+    assert len(K.msd_outfalls()) == 121

@@ -1,7 +1,7 @@
 {
  "about": "Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as reaching a water), Louisville MSD's discharge notices, the Division of Water's HAB Viewer (every point's lake in the layer read on 2026-11-07) and the Division's standing swimming advisories (the waters and stretches the page names), with the number of records giving each. The form's placeholders ('Unnamed Tributary or Unknown', 'Unnamed') and reports that say the discharge reached no water are left out.",
  "state": "KY",
- "waters": 18,
+ "waters": 20,
  "reports": 14,
  "rows": [
   {
@@ -21,8 +21,17 @@
    "sources": [
     "ky-dow-swimming-advisories"
    ],
+   "points": [
+    [
+     36.82954,
+     -83.325186
+    ]
+   ],
    "stretches": [
     "all of it"
+   ],
+   "counties": [
+    "Harlan"
    ]
   },
   {
@@ -116,8 +125,17 @@
    "sources": [
     "ky-dow-swimming-advisories"
    ],
+   "points": [
+    [
+     36.845096,
+     -83.324074
+    ]
+   ],
    "stretches": [
     "from Harlan to the Cawood Water Plant"
+   ],
+   "counties": [
+    "Harlan"
    ]
   },
   {
@@ -141,8 +159,17 @@
    "sources": [
     "ky-dow-swimming-advisories"
    ],
+   "points": [
+    [
+     36.762871,
+     -83.691866
+    ]
+   ],
    "stretches": [
     "all of it"
+   ],
+   "counties": [
+    "Bell"
    ]
   },
   {
@@ -152,8 +179,17 @@
    "sources": [
     "ky-dow-swimming-advisories"
    ],
+   "points": [
+    [
+     39.050902,
+     -84.493835
+    ]
+   ],
    "stretches": [
     "all of it"
+   ],
+   "counties": [
+    "Campbell"
    ]
   },
   {
@@ -174,6 +210,87 @@
    ],
    "sources": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Beargrass Creek",
+   "reports": 0,
+   "permits": [
+    "KY0022411"
+   ],
+   "sources": [
+    "ky-dow-cso-sites-layer"
+   ],
+   "points": [
+    [
+     38.237222,
+     -85.695
+    ],
+    [
+     38.215278,
+     -85.711111
+    ],
+    [
+     38.256667,
+     -85.731389
+    ],
+    [
+     38.256389,
+     -85.715
+    ],
+    [
+     38.258611,
+     -85.731389
+    ]
+   ],
+   "counties": [
+    "Jefferson"
+   ],
+   "outfalls": 69,
+   "reach_ids": [
+    "5140101000175",
+    "5140101000471",
+    "5140101000472",
+    "5140101000475"
+   ]
+  },
+  {
+   "name": "Mill Creek",
+   "reports": 0,
+   "permits": [
+    "KY0022411"
+   ],
+   "sources": [
+    "ky-dow-cso-sites-layer"
+   ],
+   "points": [
+    [
+     38.234722,
+     -85.758611
+    ],
+    [
+     38.234167,
+     -85.758889
+    ],
+    [
+     38.232778,
+     -85.758889
+    ],
+    [
+     38.230278,
+     -85.759444
+    ],
+    [
+     38.229167,
+     -85.759722
+    ]
+   ],
+   "counties": [
+    "Jefferson"
+   ],
+   "outfalls": 7,
+   "reach_ids": [
+    "5140101000484"
    ]
   },
   {
