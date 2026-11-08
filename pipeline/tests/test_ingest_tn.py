@@ -336,14 +336,40 @@ def test_a_posting_is_a_marker_on_its_named_stream_never_the_whole_stream():
     assert "TN" in S.COUNTY_FIELD_STATES
 
 
+def _record_slugs() -> set:
+    """Every water record's slug in data/waters-*.json (the batch's records, when it has run)."""
+    out = set()
+    for f in (Path(__file__).resolve().parents[2] / "data").glob("waters-*.json"):
+        d = json.loads(f.read_text())
+        ws = d.get("waters") if isinstance(d, dict) and "waters" in d else d
+        for w in (ws.values() if isinstance(ws, dict) else ws or []):
+            if isinstance(w, dict) and w.get("slug"):
+                out.add(w["slug"])
+    return out
+
+
+def _missing_or_built(doc: dict, name: str, county: str) -> dict:
+    """The row of this name and county: still missing (rows, with its county), or resolved by the batch to a record
+    that exists (resolved, with slugs held in data/waters-*.json), never resolved to another county's water."""
+    for r in doc["rows"]:
+        if r["name"] == name and county in (r.get("counties") or [r.get("county")]):
+            return r
+    slugs = _record_slugs()
+    for r in doc.get("resolved") or []:
+        if r["name"] == name and r.get("county") == county and r.get("slugs"):
+            assert set(r["slugs"]) <= slugs, (name, r["slugs"])
+            return r
+    raise AssertionError(f"{name} ({county}) is neither missing nor resolved to a record")
+
+
 def test_missing_waters_are_resolved_by_county():
     """Review 2026-11-08 P2-5 and P2-4: Beaver, Cypress and Richland creeks of the posted list are not the national
-    list's streams of those names elsewhere; the Centennial Park lake is Lake Watauga, Davidson County."""
+    list's streams of those names elsewhere; the Centennial Park lake is Lake Watauga, Davidson County. Each is on
+    the missing list with its county, or resolved by the water batch to a record built for it."""
     doc = json.loads((Path(__file__).resolve().parents[2] / "research" / "tn" / "receiving-waters-missing.json").read_text())
-    rows = {(r["name"], tuple(r.get("counties") or [])) for r in doc["rows"]}
     for name, county in (("Beaver Creek", "Sullivan County"), ("Cypress Creek", "Shelby County"),
                          ("Richland Creek", "Davidson County"), ("Lake Watauga (Centennial Park)", "Davidson County")):
-        assert (name, (county,)) in rows, name
+        _missing_or_built(doc, name, county)
     assert not any(r["name"] == "Watauga Lake" for r in doc["rows"])
 
 
@@ -404,18 +430,22 @@ def test_east_fork_third_creek_has_a_marker():
 
 def test_posted_streams_on_the_missing_list_carry_county_gnis_id_and_point():
     """Final audit P2-1 (Goose Creek in Knox County marked resolved against Hartsville's in Trousdale) and P2-2 (the
-    names pass had no place to choose the NHD water by): each posted row gives its county, GNIS id and mouth point."""
+    names pass had no place to choose the NHD water by): each posted row still missing gives its county, GNIS id and
+    mouth point; one the batch built is resolved, in its county, to a record that exists."""
     doc = json.loads((Path(__file__).resolve().parents[2] / "research" / "tn" / "receiving-waters-missing.json").read_text())
-    posted_rows = [r for r in doc["rows"] if "tn-tdec-bacteriological-advisories" in r["sources"]]
-    goose = [r for r in posted_rows if r["name"] == "Goose Creek"]
-    assert goose and goose[0]["county"] == "Knox County" and goose[0]["gnis_ids"] == ["1285668"]
-    assert not any(x["name"] == "Goose Creek" for x in doc["resolved"])
-    for r in posted_rows:
-        assert r["county"] and r["gnis_ids"] and r["points"], r["name"]
-    names = {r["name"] for r in posted_rows}
-    assert {"Beaver Creek", "Browns Creek", "Citico Creek", "Cypress Creek", "Dry Creek", "East Fork Third Creek",
-            "First Creek", "McCrory Creek", "Richland Creek", "Second Creek", "Sinking Creek", "Turkey Creek",
-            "Wilson Branch"} <= names
+    goose = _missing_or_built(doc, "Goose Creek", "Knox County")
+    assert "goose-creek-tn" not in (goose.get("slugs") or [])          # Hartsville's, Trousdale County
+    for r in doc["rows"]:
+        if "tn-tdec-bacteriological-advisories" in (r.get("sources") or []):
+            assert r["county"] and r["gnis_ids"] and r["points"], r["name"]
+    for name, county in (("Beaver Creek", "Sullivan County"), ("Browns Creek", "Davidson County"),
+                         ("Citico Creek", "Hamilton County"), ("Cypress Creek", "Shelby County"),
+                         ("Dry Creek", "Davidson County"), ("East Fork Third Creek", "Knox County"),
+                         ("First Creek", "Knox County"), ("McCrory Creek", "Davidson County"),
+                         ("Richland Creek", "Davidson County"), ("Second Creek", "Knox County"),
+                         ("Sinking Creek", "Washington County"), ("Turkey Creek", "Hamblen County"),
+                         ("Wilson Branch", "Clay County")):
+        _missing_or_built(doc, name, county)
 
 
 def test_the_public_sample_record_carries_no_house_number():
