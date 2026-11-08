@@ -103,7 +103,14 @@
     "outfall": "001",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -140,7 +147,14 @@
     "outfall": "002",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -177,7 +191,14 @@
     "outfall": "007",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 139,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 139 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -214,7 +235,14 @@
     "outfall": "013",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 82,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 82 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -251,7 +279,14 @@
     "outfall": "014",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 44,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 44 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -288,7 +323,14 @@
     "outfall": "017",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 51,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 51 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -325,7 +367,14 @@
     "outfall": "019",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 35,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 35 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -362,7 +411,14 @@
     "outfall": "020",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -399,7 +455,14 @@
     "outfall": "021",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 62,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 62 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -436,7 +499,14 @@
     "outfall": "022",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 1169,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 1169 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -473,7 +543,14 @@
     "outfall": "025",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 1421,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 1421 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -510,7 +587,14 @@
     "outfall": "027",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 1431,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 1431 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -547,7 +631,14 @@
     "outfall": "028",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 22,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 22 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -584,7 +675,14 @@
     "outfall": "030",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 1267,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 1267 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -621,7 +719,14 @@
     "outfall": "031",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 772,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 772 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -658,7 +763,14 @@
     "outfall": "032",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 41,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 41 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -695,7 +807,14 @@
     "outfall": "033",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 18,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 18 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -732,7 +851,14 @@
     "outfall": "035",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 81,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 81 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -769,7 +895,14 @@
     "outfall": "036",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 43,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 43 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -806,7 +939,14 @@
     "outfall": "037",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 50,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 50 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -843,7 +983,14 @@
     "outfall": "038",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 86,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 86 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -880,7 +1027,14 @@
     "outfall": "039",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 229,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 229 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -917,7 +1071,14 @@
     "outfall": "040",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 299,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 299 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -954,7 +1115,14 @@
     "outfall": "043",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "treadway-creek-oh",
+   "water_name": "Treadway Creek",
+   "water_kind": "stream",
+   "distance_m": 15,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Treadway Creek' by name; Treadway Creek (treadway-creek-oh, NHDPlus V2.1 record), 15 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -991,7 +1159,14 @@
     "outfall": "044",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "treadway-creek-oh",
+   "water_name": "Treadway Creek",
+   "water_kind": "stream",
+   "distance_m": 7,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Treadway Creek' by name; Treadway Creek (treadway-creek-oh, NHDPlus V2.1 record), 7 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1028,7 +1203,14 @@
     "outfall": "045",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 17,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 17 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1065,7 +1247,14 @@
     "outfall": "050",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 3,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 3 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1102,7 +1291,14 @@
     "outfall": "051",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 17,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 17 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1139,7 +1335,14 @@
     "outfall": "052",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 9,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 9 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1176,7 +1379,14 @@
     "outfall": "053",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 9,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 9 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1213,7 +1423,14 @@
     "outfall": "054",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 12,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 12 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1250,7 +1467,14 @@
     "outfall": "055",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 1129,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 1129 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1287,7 +1511,14 @@
     "outfall": "056",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 1117,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 1117 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1324,7 +1555,14 @@
     "outfall": "057",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 1109,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 1109 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1361,7 +1599,14 @@
     "outfall": "058",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 1578,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 1578 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1398,7 +1643,15 @@
     "outfall": "059",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Spring Creek' in OH",
+   "no_water_reason": "no record named 'Spring Creek' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1435,7 +1688,14 @@
     "outfall": "060",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 10,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 10 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1472,7 +1732,14 @@
     "outfall": "063",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "west-creek-oh",
+   "water_name": "West Creek",
+   "water_kind": "stream",
+   "distance_m": 396,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'West Creek' by name; West Creek (west-creek-oh, NHDPlus V2.1 record), 396 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1509,7 +1776,14 @@
     "outfall": "064",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "rocky-river-oh",
+   "water_name": "Rocky River",
+   "water_kind": "river",
+   "distance_m": 557,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Rocky River' by name; Rocky River (rocky-river-oh, openboatlaunch), 557 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1546,7 +1820,14 @@
     "outfall": "065",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "rocky-river-oh",
+   "water_name": "Rocky River",
+   "water_kind": "river",
+   "distance_m": 19,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Rocky River' by name; Rocky River (rocky-river-oh, openboatlaunch), 19 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1583,7 +1864,14 @@
     "outfall": "067",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "rocky-river-oh",
+   "water_name": "Rocky River",
+   "water_kind": "river",
+   "distance_m": 416,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Rocky River' by name; Rocky River (rocky-river-oh, openboatlaunch), 416 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1620,7 +1908,14 @@
     "outfall": "068",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "rocky-river-oh",
+   "water_name": "Rocky River",
+   "water_kind": "river",
+   "distance_m": 89,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Rocky River' by name; Rocky River (rocky-river-oh, openboatlaunch), 89 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1657,7 +1952,14 @@
     "outfall": "069",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 48,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 48 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1694,7 +1996,14 @@
     "outfall": "071",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1731,7 +2040,14 @@
     "outfall": "072",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 12,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 12 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1768,7 +2084,14 @@
     "outfall": "073",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 15,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 15 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1805,7 +2128,14 @@
     "outfall": "074",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 1345,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 1345 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1842,7 +2172,14 @@
     "outfall": "075",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 342,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 342 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1879,7 +2216,14 @@
     "outfall": "076",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 24,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 24 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1916,7 +2260,14 @@
     "outfall": "078",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 43,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 43 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1953,7 +2304,14 @@
     "outfall": "080",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 80,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 80 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -1990,7 +2348,14 @@
     "outfall": "081",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 47,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 47 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2027,7 +2392,14 @@
     "outfall": "084",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 60,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 60 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2064,7 +2436,14 @@
     "outfall": "086",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 54,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 54 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2101,7 +2480,14 @@
     "outfall": "087",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 33,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 33 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2138,7 +2524,14 @@
     "outfall": "088",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 28,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 28 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2175,7 +2568,14 @@
     "outfall": "090",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 80,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 80 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2212,7 +2612,14 @@
     "outfall": "091",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 61,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 61 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2249,7 +2656,14 @@
     "outfall": "092",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 51,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 51 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2286,7 +2700,14 @@
     "outfall": "093",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 3,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 3 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2323,7 +2744,14 @@
     "outfall": "094",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 3,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 3 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2360,7 +2788,14 @@
     "outfall": "095",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 2,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 2 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2397,7 +2832,14 @@
     "outfall": "096",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 11,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 11 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2434,7 +2876,14 @@
     "outfall": "097",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 5,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 5 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2471,7 +2920,14 @@
     "outfall": "098",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 7,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 7 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2508,7 +2964,14 @@
     "outfall": "099",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 1,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 1 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2545,7 +3008,14 @@
     "outfall": "200",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 4,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 4 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2582,7 +3052,14 @@
     "outfall": "201",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 18,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 18 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2619,7 +3096,14 @@
     "outfall": "202",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 13,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 13 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2656,7 +3140,14 @@
     "outfall": "203",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2693,7 +3184,14 @@
     "outfall": "204",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 5,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 5 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2730,7 +3228,14 @@
     "outfall": "205",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 192,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 192 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2767,7 +3272,14 @@
     "outfall": "206",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2804,7 +3316,14 @@
     "outfall": "207",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 5,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 5 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2841,7 +3360,14 @@
     "outfall": "208",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 4,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 4 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2878,7 +3404,14 @@
     "outfall": "209",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "euclid-creek-oh",
+   "water_name": "Euclid Creek",
+   "water_kind": "stream",
+   "distance_m": 70,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Euclid Creek' by name; Euclid Creek (euclid-creek-oh, NHDPlus V2.1 record), 70 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2915,7 +3448,14 @@
     "outfall": "210",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "euclid-creek-oh",
+   "water_name": "Euclid Creek",
+   "water_kind": "stream",
+   "distance_m": 28,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Euclid Creek' by name; Euclid Creek (euclid-creek-oh, NHDPlus V2.1 record), 28 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2952,7 +3492,15 @@
     "outfall": "211",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -2989,7 +3537,15 @@
     "outfall": "212",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3026,7 +3582,14 @@
     "outfall": "215",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 18,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 18 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3063,7 +3626,14 @@
     "outfall": "216",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 11,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 11 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3100,7 +3670,14 @@
     "outfall": "217",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 4,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 4 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3137,7 +3714,14 @@
     "outfall": "218",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 3,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 3 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3174,7 +3758,14 @@
     "outfall": "219",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 17,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 17 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3211,7 +3802,14 @@
     "outfall": "220",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 15,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 15 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3248,7 +3846,14 @@
     "outfall": "221",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 10,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 10 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3285,7 +3890,14 @@
     "outfall": "222",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 8,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 8 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3322,7 +3934,14 @@
     "outfall": "223",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 7,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 7 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3359,7 +3978,14 @@
     "outfall": "224",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 4,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 4 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3396,7 +4022,14 @@
     "outfall": "225",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 20,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 20 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3433,7 +4066,14 @@
     "outfall": "226",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 7,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 7 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3470,7 +4110,15 @@
     "outfall": "230",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Dugway Brook' in OH",
+   "no_water_reason": "no record named 'Dugway Brook' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3507,7 +4155,15 @@
     "outfall": "231",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Dugway Brook' in OH",
+   "no_water_reason": "no record named 'Dugway Brook' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3544,7 +4200,15 @@
     "outfall": "232",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Shaw Brook' in OH",
+   "no_water_reason": "no record named 'Shaw Brook' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3581,7 +4245,14 @@
     "outfall": "233",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 4486,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 4486 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3618,7 +4289,14 @@
     "outfall": "234",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "doan-brook-oh",
+   "water_name": "Doan Brook",
+   "water_kind": "stream",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Doan Brook' by name; Doan Brook (doan-brook-oh, NHDPlus V2.1 record), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3655,7 +4333,14 @@
     "outfall": "238",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "rocky-river-oh",
+   "water_name": "Rocky River",
+   "water_kind": "river",
+   "distance_m": 953,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Rocky River' by name; Rocky River (rocky-river-oh, openboatlaunch), 953 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3692,7 +4377,14 @@
     "outfall": "239",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "euclid-creek-oh",
+   "water_name": "Euclid Creek",
+   "water_kind": "stream",
+   "distance_m": 46,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Euclid Creek' by name; Euclid Creek (euclid-creek-oh, NHDPlus V2.1 record), 46 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3729,7 +4421,14 @@
     "outfall": "241",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 191,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 191 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3766,7 +4465,14 @@
     "outfall": "242",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "lake-erie-oh",
+   "water_name": "Lake Erie",
+   "water_kind": "lake",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Lake Erie' by name; Lake Erie (lake-erie-oh, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3803,7 +4509,14 @@
     "outfall": "243",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 455,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 455 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3840,7 +4553,15 @@
     "outfall": "245",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3877,7 +4598,14 @@
     "outfall": "246",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 6,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 6 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3914,7 +4642,14 @@
     "outfall": "247",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 1200,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 1200 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3951,7 +4686,15 @@
     "outfall": "249",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -3988,7 +4731,14 @@
     "outfall": "250",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "cuyahoga-river-oh",
+   "water_name": "Cuyahoga River",
+   "water_kind": "river",
+   "distance_m": 23,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Cuyahoga River' by name; Cuyahoga River (cuyahoga-river-oh, openboatlaunch), 23 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -4025,7 +4775,15 @@
     "outfall": "252",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Ohio Canal' in OH",
+   "no_water_reason": "no record named 'Ohio Canal' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -4062,7 +4820,14 @@
     "outfall": "254",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "rocky-river-oh",
+   "water_name": "Rocky River",
+   "water_kind": "river",
+   "distance_m": 554,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Rocky River' by name; Rocky River (rocky-river-oh, openboatlaunch), 554 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -4099,7 +4864,14 @@
     "outfall": "255",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "big-creek-cleveland-oh",
+   "water_name": "Big Creek",
+   "water_kind": "stream",
+   "distance_m": 1137,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Big Creek' by name; Big Creek (big-creek-cleveland-oh, NHDPlus V2.1 record), 1137 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -4136,7 +4908,15 @@
     "outfall": "256",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Green Creek' in OH",
+   "no_water_reason": "no record named 'Green Creek' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -4173,7 +4953,15 @@
     "outfall": "257",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Spring Creek' in OH",
+   "no_water_reason": "no record named 'Spring Creek' in OH",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "OH0043991",
@@ -4210,7 +4998,14 @@
     "outfall": "258",
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
-   }
+   },
+   "water_slug": "mill-creek-cleveland-oh",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 33,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mill Creek' by name; Mill Creek (mill-creek-cleveland-oh, NHDPlus V2.1 record), 33 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   }
  ]
 }
