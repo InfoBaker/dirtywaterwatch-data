@@ -1961,6 +1961,65 @@ def existing_same_water(geom, towns, existing: dict, slugs) -> tuple[str | None,
     return None, None
 
 
+REMAINDER_OVERLAP_MAX = 0.10   # a remainder with more of its length than this within SAME_WATER_M of its river is recut
+
+
+def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: dict | None = None,
+                       when: str | None = None) -> list[dict]:
+    """Remainders (covers_part_of rows) measured again against their river's outline on this machine (the Utah go-live
+    audit of 2026-11-08, P1-1: six remainders built against missing or older openboatlaunch outlines lay 85 to 100
+    per cent on the river they were cut from, so a report coloured one copy while the other stayed grey). A remainder
+    with more than REMAINDER_OVERLAP_MAX of its length within SAME_WATER_M of the outline is cut again; one left
+    shorter than REMAINDER_MIN_KM is dropped, and the target rows naming it go to the river. A row whose river has no
+    outline here is left as it is. Changes rows and targets in place; returns the actions."""
+    when = when or now_iso()[:10]
+    actions, moved, drop = [], {}, set()
+    for i, w in enumerate(rows):
+        parent = w.get("covers_part_of")
+        if not parent or not w.get("geometry"):
+            continue
+        eg = S.water_geometry(parent, existing)
+        if eg is None:
+            continue
+        g = shape(w["geometry"])
+        lat0 = g.centroid.y
+        gm, em = to_m_geom(g, lat0), to_m_geom(eg, lat0)
+        if gm.length <= 0:
+            continue
+        near = em.buffer(SAME_WATER_M)
+        share = gm.intersection(near).length / gm.length
+        if share <= REMAINDER_OVERLAP_MAX:
+            continue
+        rest_m = gm.difference(near)
+        k = np.array([111_320.0 * math.cos(math.radians(lat0)), 110_574.0])
+        rest = shapely.transform(rest_m, lambda c: c / k) if not rest_m.is_empty else None
+        rest = WX.as_multiline(rest) if rest is not None else None
+        why = (f"{share:.0%} of the record lay within {SAME_WATER_M} m of {parent}'s outline (a remainder cut against "
+               "an older or missing outline)")
+        if rest is None or rest.is_empty or WX.length_km(rest) < REMAINDER_MIN_KM:
+            drop.add(i)
+            moved[w["slug"]] = parent
+            actions.append({"slug": w["slug"], "action": "dropped", "to": parent, "why": why})
+            continue
+        gs = WX.as_multiline(WX.simplify(rest, SIMPLIFY_M))
+        b = gs.bounds
+        rows[i] = {**w, "geometry": mapping(gs), "length_km": round(WX.length_km(gs), 2),
+                   "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)]}
+        actions.append({"slug": w["slug"], "action": "recut", "to": parent, "why": why})
+    if drop:
+        rows[:] = [w for i, w in enumerate(rows) if i not in drop]
+    for t in targets or []:
+        hits = [x for x in t.get("slugs") or [] if x in moved]
+        if not hits:
+            continue
+        t["slugs"] = list(dict.fromkeys(moved.get(x, x) for x in t["slugs"]))
+        if t.get("reach_slugs"):
+            t["reach_slugs"] = {kk: moved.get(v, v) for kk, v in t["reach_slugs"].items()}
+        t["notes"] = list(dict.fromkeys(list(t.get("notes") or []) + [
+            f"{when}: the NHD record {x} was dropped: it lay on {moved[x]}, the record of this river" for x in hits]))
+    return actions
+
+
 def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | None = None) -> tuple[dict, list[dict], dict]:
     """The state build's records that duplicate an openboatlaunch record now on file (2026-11-04: the NC, GA and FL
     records were built while openboatlaunch's extracts for those states were absent, so 'record' rows and the
@@ -2082,6 +2141,11 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
         t["reason"] = None
         t["notes"] = list(dict.fromkeys(list(t.get("notes") or []) + [f"{when}: openboatlaunch's record: {why}"]))
         actions.append({"slug": None, "action": "mapped", "to": s, "row": t["name"], "why": why})
+    st_rows = [w for w in keep if w.get("state") in states]
+    rest_rows = [w for w in keep if w.get("state") not in states]
+    actions += recheck_remainders(st_rows, [t for t in doc.get("targets") or [] if t.get("state") in states], existing,
+                                  when)
+    keep = rest_rows + st_rows
     out = {**doc, "waters": sorted(keep, key=lambda r: r.get("slug") or ""), "count": len(keep)}
     return out, actions, aliases
 
@@ -2482,6 +2546,10 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
             if targets_rows is targets_out:
                 targets_rows = list(targets_out) + [r for r in prev.get("targets") or [] if r.get("state") in keep_states]
             skipped = list(skipped) + [r for r in prev.get("skipped") or [] if r.get("state") in keep_states]
+    # a remainder that lies on its river's outline as it is on this machine is cut again or dropped (recheck_remainders)
+    rechecked = recheck_remainders(rows, targets_rows)
+    if rechecked:
+        problems = list(problems) + [f"{a['slug']}: {a['action']} ({a['why']})" for a in rechecked]
     write_json(OUT, {
         "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); "
                   "hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the "

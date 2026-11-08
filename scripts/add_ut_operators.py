@@ -30,8 +30,8 @@ Rules
     tell the public was found. Tribal permits (NN..., COG..., the Ute Indian Tribe's UTG5894..): EPA Region 8's
     channel. notification_signup_url null: no overflow alert list was found; operators' own pages were not searched one
     by one (research/ut/report.md section 2.3).
-  - Idempotent: a rerun replaces the rows it wrote (state UT, source_areas ["ut"]) and leaves every other row as it
-    is; new rows go after the last row of the file.
+  - Idempotent: a rerun replaces the rows it wrote (state UT, source_areas ["ut"]) where they stood and leaves every
+    other row as it is; on a first run they go after the last row of the file.
 Writes data/dischargers.json (indent 1) and prints counts.
 """
 from __future__ import annotations
@@ -313,6 +313,13 @@ def plants() -> dict[str, list[dict]]:
     return out
 
 
+def held_back() -> dict[str, dict]:
+    """Utah's sewerage-code permits the plants file holds back as no sewage plant (excluded_not_sewage: the three
+    construction dewatering coverages, go-live audit 2026-11-08 P2-4): they keep their operator rows, with no outfall."""
+    return {x["npdes_permit"]: x for x in json.loads(PLANTS.read_text()).get("excluded_not_sewage") or []
+            if x.get("state") == "UT"}
+
+
 def systems() -> dict[str, dict]:
     sys.path.insert(0, str(ROOT / "pipeline"))
     from ingest import echo_sewer_overflow_events as E
@@ -352,7 +359,8 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             continue
         name, lf, note = collection_owner(p, s)
         owners[p] = ("ut-" + slug(name), name, name, lf, note)
-    permits = sorted((set(pl) | set(research) | set(cands) | set(sy) | set(reports)) - held_elsewhere)
+    held = {p: x for p, x in held_back().items() if p in OWNERS}     # the ones this state's rows hold
+    permits = sorted((set(pl) | set(research) | set(cands) | set(sy) | set(reports) | set(held)) - held_elsewhere)
     unknown = [p for p in permits if p not in owners]
     if unknown:
         raise SystemExit(f"permits without an owner: {unknown}")
@@ -391,6 +399,9 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             parts.append(f"EPA's overflow tables (2026-11-04 extract): {n} report(s).")
         elif sys_ps:
             parts.append("No report under these permits is in EPA's overflow tables (2026-11-04 extract).")
+        for p in ps:
+            if p in held:
+                parts.append(f"{p} is held back from the outfall registry: {held[p].get('basis') or held[p]['why']}.")
         if m.get("note"):
             parts.append(m["note"])
         tribal = m["lf"] == "tribal" or any(TRIBAL_PERMITS.match(p) for p in ps)
@@ -417,7 +428,12 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
              "held_elsewhere": sorted(p for p in (set(pl) | set(sy)) if p in held_elsewhere),
              "legal_form": dict(Counter(r.get("legal_form") for r in new)), "kind": dict(Counter(r["kind"] for r in new)),
              "private": sorted(r["id"] for r in new if r.get("legal_form") in PRIVATE_FORMS)}
-    return keep + new, stats
+    # the rows go where the file's Utah rows were (a rerun after other states' rows were appended moves nothing)
+    first = next((i for i, d in enumerate(dis) if d.get("state") == "UT" and "ut" in (d.get("source_areas") or [])), None)
+    if first is None:
+        return keep + new, stats
+    before = sum(1 for d in dis[:first] if not (d.get("state") == "UT" and "ut" in (d.get("source_areas") or [])))
+    return keep[:before] + new + keep[before:], stats
 
 
 def main(argv: list[str]) -> int:
