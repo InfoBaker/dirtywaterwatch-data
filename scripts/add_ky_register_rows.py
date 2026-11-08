@@ -11,7 +11,7 @@ The law (research/ky/report.md §2.1 in the site repository; research/ky/profile
     reporting system sent its sewer overflow and bypass reports to EPA's overflow tables for December 2025 and January
     2026 only.
   - No statute or regulation requiring public notice was found. Louisville MSD's advisory and SD1's alerts are their
-    own (assumed to come from their consent decrees, not read).
+    own; whether a permit or a consent decree requires them was not read (one permit row per CSO permittee says so).
 Rows
   - Per operator (every Kentucky row of data/dischargers.json): <id>-division-notice, the 401 KAR 5:065 telephone notice
     to the Division of Water (no web channel), with the operator's reports in EPA's tables counted in the note.
@@ -132,7 +132,7 @@ OWN = [
      "note": ("MSD's Overflow Advisory Level on every page of its site: MSD-01 'Wet Weather Overflows' (system-wide, "
               "avoid contact until 48 hours after the rain has stopped), MSD-02 notices of a discharge with its start "
               "time, address, receiving stream and amount, and 'Conditions are normal'. MSD removes old notices, so the "
-              "feed keeps every one it sees. Assumed to come from MSD's consent decree (not read). "
+              "feed keeps every one it sees. Whether MSD's permit or its consent decree requires the banner was not read. "
               "(research/ky/report.md §2.3)"),
      "sources": ["ky-louisville-msd-overflow-advisory"]},
     {"id": "ky-louisville-msd-email-list", "operator_id": MSD, "permit": None,
@@ -233,10 +233,33 @@ def operator_rows(dis: list[dict]) -> list[dict]:
     return rows
 
 
+def cso_permit_rows(dis: list[dict]) -> list[dict]:
+    """One row per combined sewer permittee (review 2026-11-08 P2-7): the public notification control of EPA's CSO
+    Control Policy is expected in its permit, but no Kentucky CSO permit's clause was read, so the row says so and the
+    register does not claim what the permit requires."""
+    rows = []
+    for op in dis:
+        if op.get("state") != "KY" or op.get("kind") != "cso":
+            continue
+        permit = next((p for p in op.get("npdes_permits") or [] if p), None)
+        rows.append(finish(base(
+            id=f"{op['id']}-cso-permit-notice", operator_id=op["id"], name=op["name"], permit=permit,
+            channel_kind="operator_page", urls=[], method=None,
+            legal_basis=(f"KPDES combined sewer permit {permit}: public notification of overflows is one of the nine "
+                         "minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which "
+                         "the permit is expected to carry; the permit's own clause was not read"),
+            basis_kind="permit", monitored=False, unmonitored_reason="other", publishes="unknown",
+            sources=["ky-law-401-kar-5-065"],
+            note=(f"What {op['name']}'s permit requires the public to be told, and how, was not verified in the research: "
+                  "the permit document was not read (Kentucky's permit documents were not found on the web in this "
+                  "pass). (research/ky/report.md §2.1)"))))
+    return rows
+
+
 def run(dry_run: bool = False) -> dict:
     doc = NP.load_register(REGISTER)
     dis = json.loads(DIS.read_text())
-    rows = operator_rows(dis)
+    rows = operator_rows(dis) + cso_permit_rows(dis)
     rows += [finish(base(**r)) for r in AGENCY + OWN]
     drop = tuple(r["id"] for r in doc["channels"] if r.get("state") == "KY")
     doc = merge(doc, rows, drop)
