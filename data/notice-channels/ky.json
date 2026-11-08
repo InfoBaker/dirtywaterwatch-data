@@ -709,6 +709,28 @@
    "agency": null,
    "permit": "KY0022373",
    "checked": "2026-11-07",
+   "id": "ky-city-of-ashland-cso-permit-notice",
+   "name": "City of Ashland",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0022373: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Ashland's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-ashland",
+   "agency": null,
+   "permit": "KY0022373",
+   "checked": "2026-11-07",
    "id": "ky-city-of-ashland-division-notice",
    "name": "City of Ashland",
    "channel_kind": "state_alert_page",
@@ -1327,6 +1349,28 @@
    ],
    "note": "City of Carrollton must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-catlettsburg",
+   "agency": null,
+   "permit": "KY0035467",
+   "checked": "2026-11-07",
+   "id": "ky-city-of-catlettsburg-cso-permit-notice",
+   "name": "City of Catlettsburg",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0035467: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Catlettsburg's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
   },
   {
    "state": "KY",
@@ -2084,6 +2128,28 @@
    "agency": null,
    "permit": "KY0022861",
    "checked": "2026-11-07",
+   "id": "ky-city-of-frankfort-cso-permit-notice",
+   "name": "City of Frankfort",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0022861: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Frankfort's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-frankfort",
+   "agency": null,
+   "permit": "KY0022861",
+   "checked": "2026-11-07",
    "id": "ky-city-of-frankfort-division-notice",
    "name": "City of Frankfort",
    "channel_kind": "state_alert_page",
@@ -2402,6 +2468,28 @@
    ],
    "note": "City of Hardinsburg must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-harlan",
+   "agency": null,
+   "permit": "KY0026093",
+   "checked": "2026-11-07",
+   "id": "ky-city-of-harlan-cso-permit-notice",
+   "name": "City of Harlan",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0026093: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Harlan's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
   },
   {
    "state": "KY",
@@ -3134,6 +3222,28 @@
    "agency": null,
    "permit": "KY0026115",
    "checked": "2026-11-07",
+   "id": "ky-city-of-loyall-cso-permit-notice",
+   "name": "City of Loyall",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0026115: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Loyall's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-loyall",
+   "agency": null,
+   "permit": "KY0026115",
+   "checked": "2026-11-07",
    "id": "ky-city-of-loyall-division-notice",
    "name": "City of Loyall",
    "channel_kind": "state_alert_page",
@@ -3259,6 +3369,28 @@
    "agency": null,
    "permit": "KY0020257",
    "checked": "2026-11-07",
+   "id": "ky-city-of-maysville-cso-permit-notice",
+   "name": "City of Maysville",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0020257: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Maysville's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-maysville",
+   "agency": null,
+   "permit": "KY0020257",
+   "checked": "2026-11-07",
    "id": "ky-city-of-maysville-division-notice",
    "name": "City of Maysville",
    "channel_kind": "state_alert_page",
@@ -3377,6 +3509,28 @@
    ],
    "note": "City of Monticello must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-morganfield",
+   "agency": null,
+   "permit": "KY0021440",
+   "checked": "2026-11-07",
+   "id": "ky-city-of-morganfield-cso-permit-notice",
+   "name": "City of Morganfield",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0021440: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Morganfield's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
   },
   {
    "state": "KY",
@@ -3752,6 +3906,28 @@
    ],
    "note": "City of Pikeville must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-city-of-pineville",
+   "agency": null,
+   "permit": "KY0024058",
+   "checked": "2026-11-07",
+   "id": "ky-city-of-pineville-cso-permit-notice",
+   "name": "City of Pineville",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0024058: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Pineville's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
   },
   {
    "state": "KY",
@@ -5958,6 +6134,28 @@
    "agency": null,
    "permit": "KY0020711",
    "checked": "2026-11-07",
+   "id": "ky-henderson-water-utility-cso-permit-notice",
+   "name": "City of Henderson (Henderson Water Utility)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0020711: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What City of Henderson (Henderson Water Utility)'s permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-henderson-water-utility",
+   "agency": null,
+   "permit": "KY0020711",
+   "checked": "2026-11-07",
    "id": "ky-henderson-water-utility-division-notice",
    "name": "City of Henderson (Henderson Water Utility)",
    "channel_kind": "state_alert_page",
@@ -6679,6 +6877,28 @@
    "agency": null,
    "permit": "KY0022411",
    "checked": "2026-11-07",
+   "id": "ky-louisville-msd-cso-permit-notice",
+   "name": "Louisville/Jefferson County Metropolitan Sewer District",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0022411: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What Louisville/Jefferson County Metropolitan Sewer District's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-louisville-msd",
+   "agency": null,
+   "permit": "KY0022411",
+   "checked": "2026-11-07",
    "id": "ky-louisville-msd-division-notice",
    "name": "Louisville/Jefferson County Metropolitan Sewer District",
    "channel_kind": "state_alert_page",
@@ -6741,7 +6961,7 @@
    "feed_source_id": "ky-louisville-msd-overflow-advisory",
    "publishes": "status",
    "noun": "Data feed",
-   "note": "MSD's Overflow Advisory Level on every page of its site: MSD-01 'Wet Weather Overflows' (system-wide, avoid contact until 48 hours after the rain has stopped), MSD-02 notices of a discharge with its start time, address, receiving stream and amount, and 'Conditions are normal'. MSD removes old notices, so the feed keeps every one it sees. Assumed to come from MSD's consent decree (not read). (research/ky/report.md §2.3)",
+   "note": "MSD's Overflow Advisory Level on every page of its site: MSD-01 'Wet Weather Overflows' (system-wide, avoid contact until 48 hours after the rain has stopped), MSD-02 notices of a discharge with its start time, address, receiving stream and amount, and 'Conditions are normal'. MSD removes old notices, so the feed keeps every one it sees. Whether MSD's permit or its consent decree requires the banner was not read. (research/ky/report.md §2.3)",
    "sources": [
     "ky-louisville-msd-overflow-advisory"
    ],
@@ -7327,6 +7547,28 @@
    "agency": null,
    "permit": "KY0022799",
    "checked": "2026-11-07",
+   "id": "ky-paducah-mccracken-jsa-cso-permit-notice",
+   "name": "Paducah/McCracken County Joint Sewer Agency",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0022799: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What Paducah/McCracken County Joint Sewer Agency's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-paducah-mccracken-jsa",
+   "agency": null,
+   "permit": "KY0022799",
+   "checked": "2026-11-07",
    "id": "ky-paducah-mccracken-jsa-division-notice",
    "name": "Paducah/McCracken County Joint Sewer Agency",
    "channel_kind": "state_alert_page",
@@ -7627,6 +7869,28 @@
    "agency": null,
    "permit": "KY0020095",
    "checked": "2026-11-07",
+   "id": "ky-rwra-cso-permit-notice",
+   "name": "Regional Water Resource Agency (Owensboro)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0020095: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What Regional Water Resource Agency (Owensboro)'s permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-rwra",
+   "agency": null,
+   "permit": "KY0020095",
+   "checked": "2026-11-07",
    "id": "ky-rwra-division-notice",
    "name": "Regional Water Resource Agency (Owensboro)",
    "channel_kind": "state_alert_page",
@@ -7720,6 +7984,28 @@
    ],
    "note": "Sanitation District #4 must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-sd1",
+   "agency": null,
+   "permit": "KY0021466",
+   "checked": "2026-11-07",
+   "id": "ky-sd1-cso-permit-notice",
+   "name": "Sanitation District No. 1 of Northern Kentucky",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "KPDES combined sewer permit KY0021466: public notification of overflows is one of the nine minimum controls of EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the permit's own clause was not read",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "sources": [
+    "ky-law-401-kar-5-065"
+   ],
+   "note": "What Sanitation District No. 1 of Northern Kentucky's permit requires the public to be told, and how, was not verified in the research: the permit document was not read (Kentucky's permit documents were not found on the web in this pass). (research/ky/report.md §2.1)",
+   "barrier": "not_verified"
   },
   {
    "state": "KY",

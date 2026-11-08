@@ -118,3 +118,23 @@ def test_operators_are_never_named_after_a_plant():
     assert by["ky-fort-knox"]["legal_form"] == "federal facility"
     assert not any("Riley" in json.dumps(r) for r in rows)
     assert all("Morris Forman" not in r["notes"] for r in rows)
+
+
+def test_each_cso_permittee_has_a_permit_row_that_says_the_clause_was_not_read():
+    """Review 2026-11-08 P2-7."""
+    reg = {c["id"]: c for c in register()}
+    cso = [r for r in ops() if r["kind"] == "cso"]
+    assert len(cso) == 13
+    for r in cso:
+        row = reg[f"{r['id']}-cso-permit-notice"]
+        assert row["basis_kind"] == "permit" and "not read" in row["legal_basis"] and row["barrier"] == "not_verified"
+    t = (ROOT / "research" / "ky" / "state-text.md").read_text()
+    assert "under their consent decrees" not in t and "terms were not read" in t
+
+
+def test_state_text_says_what_the_data_shows():
+    """Review 2026-11-08 P2-8 and P1-1."""
+    t = (ROOT / "research" / "ky" / "state-text.md").read_text()
+    assert "a report that names no water and does not say one was reached" in t
+    assert "289 open outfalls in the U.S. Environmental Protection Agency's national inventory (October 31, 2026" in t
+    assert "standing swimming advisories are shown as the agencies' own" in t
