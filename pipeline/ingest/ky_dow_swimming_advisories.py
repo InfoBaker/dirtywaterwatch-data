@@ -26,9 +26,13 @@ Records (a standing list read as a snapshot; review 2026-11-08 P1-1)
     missing) is ok=False: the records are kept and nothing is lifted.
   - A sentence of the list no rule recognises is kept as an "unknown" record with parse_error, so a new advisory is
     seen and never dropped.
-  - Placement by rules only: waterbody_text is the named water (the national list's spelling where it holds it), no
-    point and no geocoding; on a river or stream the status build shows a marker, never a whole-water colour. The
-    stretch's ends are in raw.stretch_text; drawing the stretch needs a public point for each end (not yet).
+  - Placement by rules only: waterbody_text is the named water (the national list's spelling where it holds it), and
+    each record carries one public point on its stretch (STRETCHES: a stream mouth or a town the agencies' description
+    names, a USGS GNIS feature, cited in raw.point_basis and raw.point_url; coord_source "stretch_point"), so the
+    status build draws the advisory's own marker on the named water and the point settles a name two records share
+    (the Cumberland River); raw.county is the county of that point. Never a whole-water colour. The Licking River
+    stretch, both of whose ends are GNIS stream mouths, also carries `stretch` (STRETCH_ENDS) and is drawn end to end
+    (final audit 2026-11-08 P1-1). No geocoding: the points are fixed in the module with their citations.
   Privacy: the page's contact block (a staff member) lies outside the list and is never read or saved; only the list's
   text is saved to data/raw/, and only when it changes.
 
@@ -62,31 +66,49 @@ ADVICE = ("Kentucky Division of Water and Division of Public Health Protection a
 START_BASIS = ("the first read of the agencies' page that listed it: the page gives no date, and says the advisories "
                "have been in place \"for several years\"; the advisory began long before this date")
 WINDOW_BASIS = "in effect \"until further notice\" (the agencies' page): shown while the page lists it"
-# (key, the rule that finds it in the list's text, the water placed on, the stretch in the page's words, area)
+GNIS = "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/{}"
+# (key, the rule that finds it in the list's text, the water placed on, the stretch in the page's words, area, county,
+# the marker's point on the stretch: (name, lat, lon, GNIS feature id, GNIS layer)); the points are USGS GNIS features
+# the page's own description names (a stream's mouth, a town on the stretch), read from the GNIS Streams (Mouth) and
+# Populated Places layers of carto.nationalmap.gov on 2026-11-08 (review: final audit 2026-11-08 P1-1)
 STRETCHES = [
     ("cumberland-four-mile-bridge-to-pineville", r"Cumberland River from Four Mile Bridge[^.]*?to Pineville",
      "Cumberland River", "from Four Mile Bridge (Highway 2014) to Pineville at the Highway 66 Bridge",
-     "Upper Cumberland River"),
+     "Upper Cumberland River", "Bell", ("Pineville", 36.762037, -83.694922, 500726, "Populated Places")),
     ("cumberland-wallins-creek-bridge-to-harlan", r"from Wallins Creek Bridge[^.]*?to Harlan", "Cumberland River",
-     "from Wallins Creek Bridge (Highway 219) to Harlan", "Upper Cumberland River"),
+     "from Wallins Creek Bridge (Highway 219) to Harlan", "Upper Cumberland River", "Harlan",
+     ("mouth of Wallins Creek", 36.826483, -83.416857, 506154, "Streams (Mouth)")),
     ("martins-fork-harlan-to-cawood", r"Martins Fork Cumberland River from Harlan to the Cawood Water Plant",
-     "Martins Fork Cumberland River", "from Harlan to the Cawood Water Plant", "Upper Cumberland River"),
-    ("catron-creek", r"All of Catron Creek", "Catron Creek", "all of it", "Upper Cumberland River"),
+     "Martins Fork Cumberland River", "from Harlan to the Cawood Water Plant", "Upper Cumberland River", "Harlan",
+     ("mouth of Martins Fork Cumberland River at Harlan", 36.845096, -83.324074, 497628, "Streams (Mouth)")),
+    ("catron-creek", r"All of Catron Creek", "Catron Creek", "all of it", "Upper Cumberland River", "Harlan",
+     ("mouth of Catron Creek", 36.82954, -83.325186, 489099, "Streams (Mouth)")),
     ("clover-fork", r"all of Clover Fork", "Clover Fork of the Cumberland River", "all of it",
-     "Upper Cumberland River"),
-    ("straight-creek", r"all of Straight Creek", "Straight Creek", "all of it", "Upper Cumberland River"),
+     "Upper Cumberland River", "Harlan",
+     ("mouth of Clover Fork Cumberland River at Harlan", 36.855566, -83.316596, 511423, "Streams (Mouth)")),
+    ("straight-creek", r"all of Straight Creek", "Straight Creek", "all of it", "Upper Cumberland River", "Bell",
+     ("mouth of Straight Creek at Pineville", 36.762871, -83.691866, 515746, "Streams (Mouth)")),
     ("poor-fork-harlan-to-looney-creek", r"Poor Fork from Harlan to Looney Creek",
-     "Poor Fork of the Cumberland River", "from Harlan to Looney Creek", "Upper Cumberland River"),
+     "Poor Fork of the Cumberland River", "from Harlan to Looney Creek", "Upper Cumberland River", "Harlan",
+     ("mouth of Looney Creek on Poor Fork", 36.978651, -82.988474, 497165, "Streams (Mouth)")),
     ("looney-creek-mouth-to-lynch", r"Looney Creek from the mouth to Lynch Water Plant Bridge", "Looney Creek",
-     "from the mouth to the Lynch Water Plant Bridge", "Upper Cumberland River"),
+     "from the mouth to the Lynch Water Plant Bridge", "Upper Cumberland River", "Harlan",
+     ("Lynch", 36.966212, -82.922388, 497363, "Populated Places")),
     ("north-fork-kentucky-above-chavies", r"North Fork of the Kentucky River upstream of Chavies",
-     "North Fork of Kentucky River", "upstream of Chavies", "Kentucky River"),
+     "North Fork of Kentucky River", "upstream of Chavies", "Kentucky River", "Perry",
+     ("Chavies", 37.347878, -83.356295, 511319, "Populated Places")),
     ("licking-banklick-to-ohio", r"Banklick Creek to the confluence with the Ohio River", "Licking River",
-     "from Banklick Creek to the confluence with the Ohio River", "Licking River"),
-    ("banklick-creek", r"includes all of Banklick Creek", "Banklick Creek", "all of it", "Licking River"),
+     "from Banklick Creek to the confluence with the Ohio River", "Licking River", "Kenton",
+     ("mouth of the Licking River", 39.091734, -84.503558, 513416, "Streams (Mouth)")),
+    ("banklick-creek", r"includes all of Banklick Creek", "Banklick Creek", "all of it", "Licking River", "Kenton",
+     ("mouth of Banklick Creek", 39.032846, -84.490502, 486315, "Streams (Mouth)")),
     ("three-mile-creek", r"includes all of Banklick Creek and Three Mile Creek", "Three Mile Creek", "all of it",
-     "Licking River"),
+     "Licking River", "Campbell", ("mouth of Threemile Creek", 39.050902, -84.493835, 505251, "Streams (Mouth)")),
 ]
+# a stretch whose two ends both have a GNIS point on the water: drawn end to end (the record's `stretch`, docs/plan.md
+# §3; build/reaches.py traces it as an advisory_stretch), upstream end first
+STRETCH_ENDS = {"licking-banklick-to-ohio": (("mouth of Banklick Creek", 39.032846, -84.490502, 486315),
+                                             ("mouth of the Licking River", 39.091734, -84.503558, 513416))}
 # sentences of the list that are commentary, not an advisory
 COMMENTARY = re.compile(r"^(?:Although|Inadequate|Efforts|Work by|The swimming advisory includes)\b", re.I)
 AREA_HEADINGS = {"Upper Cumberland River", "Kentucky River", "Licking River"}
@@ -147,7 +169,7 @@ def update(state: dict, text: str, at: str) -> dict:
 
 
 def records(state: dict) -> list[dict]:
-    by = {k: (w, st, area) for k, _, w, st, area in STRETCHES}
+    by = {k: (w, st, area, county, pt) for k, _, w, st, area, county, pt in STRETCHES}
     out = []
     for k, it in sorted(state.get("items", {}).items()):
         left = it.get("left_at")
@@ -158,11 +180,22 @@ def records(state: dict) -> list[dict]:
             raw.update(left_page_at=left, ended_at_precision="poll",
                        end_basis="the first read of the page that no longer listed it")
         if k in by:
-            water, stretch, area = by[k]
-            raw.update(stretch_text=stretch, area=area)
+            water, stretch, area, county, (pname, plat, plon, gid, layer) = by[k]
+            raw.update(stretch_text=stretch, area=area, county=county,
+                       point_basis=(f"{pname}: USGS GNIS feature {gid} ({layer} layer), a place the agencies' "
+                                    "description of the stretch names; the marker's point, not a sampling station"),
+                       point_url=GNIS.format(gid))
+            extra = {}
+            if k in STRETCH_ENDS:
+                ends = {}
+                for side, (en, la, lo, g) in zip(("start", "end"), STRETCH_ENDS[k]):
+                    ends[side] = {"name": en, "lat": la, "lon": lo, "basis": f"USGS GNIS feature {g}, Streams (Mouth)",
+                                  "source": f"USGS GNIS {g}, Streams (Mouth)", "url": GNIS.format(g)}
+                extra["stretch"] = {"water": water, **ends}
             out.append(event(source_id=SOURCE_ID, source_record_id=k, event_type="beach_advisory",
                              status="advisory_lifted" if left else "advisory_active", waterbody_text=water,
-                             water_slugs=[], water_match="none", started_at=it["first_seen"], ended_at=left,
+                             water_slugs=[], water_match="none", lat=plat, lon=plon, coord_source="stretch_point",
+                             coord_precision_m=None, **extra, started_at=it["first_seen"], ended_at=left,
                              time_precision="poll", reported_at=None, published_at=None, source_updated_at=None,
                              authority=AUTHORITY, advice_text=ADVICE, advice_window_hours=None,
                              advice_window_basis=WINDOW_BASIS, source_url=URL, raw=raw))
