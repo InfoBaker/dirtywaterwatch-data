@@ -1,7 +1,8 @@
 """How often the hourly refresh runs a feed: every hour for a live state, once a day for a state not yet live.
 
     python -m cadence due ingest.al_adem_sso generic.tx-glo-beach-watch ...   the names due this run, one line,
-                                                                            space-separated; a feed of a state not
+                                                                            space-separated, after the mark
+                                                                            "cadence:ok"; a feed of a state not
                                                                             yet live carries ":daily"
     python -m cadence ran ingest.al_adem_sso                                 that daily feed ran well now
 
@@ -99,15 +100,19 @@ def main(argv: list[str] | None = None) -> int:
         print(__doc__, file=sys.stderr)
         return 2
     now = datetime.now(UTC)
+    # tests point these elsewhere: the stamps file and the rules file (default data/build/feed-cadence.json and
+    # data/rules.json)
+    stamps_path = Path(os.environ.get("DWW_CADENCE_FILE") or CADENCE_FILE)
+    rules_dir = Path(os.environ["DWW_CADENCE_DATA_DIR"]) if os.environ.get("DWW_CADENCE_DATA_DIR") else DATA_DIR
     if argv[0] == "ran":
         for n in argv[1:]:
-            mark_ran(n, now)
+            mark_ran(n, now, stamps_path)
         return 0
     names = argv[1:]
     every = float(os.environ.get("NOT_LIVE_EVERY_H") or NOT_LIVE_EVERY_H)
     run_all = os.environ.get("FEEDS_ALL", "") in ("1", "yes", "true")
-    out = due(names, load_live(), read_stamps(), now, every, run_all)
-    print(" ".join(out))
+    out = due(names, load_live(rules_dir), read_stamps(stamps_path), now, every, run_all)
+    print(" ".join(["cadence:ok"] + out))
     chosen = {o.split(":")[0] for o in out}
     skipped = [n for n in names if n not in chosen]
     if skipped:

@@ -163,9 +163,9 @@ INGEST_MODULES = $(sort $(basename $(notdir $(shell grep -l '__name__ == .__main
 # Feed cadence (pipeline/cadence.py): a feed whose name starts with the code of a state not in data/rules.json
 # live_states (al_adem_sso, tx-glo-beach-watch) runs on a daily pass, not hourly: its records are neither coloured nor
 # exported until the state goes live, and the switch in live_states makes it hourly with no other edit. The last good
-# run of each is in data/build/feed-cadence.json; FEEDS_ALL=1 runs every feed. If the cadence check itself fails,
-# every feed runs (ALL).
-CADENCE_DUE = due=" $$(cd pipeline && $(PYTHON) -m cadence due $(1)) " || due=" ALL ";
+# run of each is in data/build/feed-cadence.json; FEEDS_ALL=1 runs every feed. A cadence check that fails or
+# answers without its "cadence:ok" mark runs every feed (ALL): a feed is never skipped by accident.
+CADENCE_DUE = due=" $$(cd pipeline && $(PYTHON) -m cadence due $(1)) "; case "$$due" in *" cadence:ok "*) ;; *) due=" ALL " ;; esac;
 CADENCE_GATE = case "$$due" in *" ALL "*|*" $(1) "*) d= ;; *" $(1):daily "*) d=daily ;; \
 	  *) echo "== $(1): a state not yet live; on its daily pass (data/build/feed-cadence.json)"; continue ;; esac;
 CADENCE_RAN = { [ -z "$$d" ] || (cd pipeline && $(PYTHON) -m cadence ran $(1)) || true; }
