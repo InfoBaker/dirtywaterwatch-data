@@ -26,7 +26,7 @@ officers since 1991, one row per incident with a point, edited daily. 8,980 rows
     UTC), a date only; since 2024 it carries a time rounded to the quarter hour whose clock the layer does not state
     (read as UTC it puts the American Fork bypass break of 2026-08-17 at 11:00 Mountain time, before the 14:39 start
     the operator reported to EPA; read as Mountain wall-clock time it is 17:00). The time of day is therefore not used:
-    it is kept as given in raw._decoded_times and the record is dated to the day. No row gives an end, a report time or
+    it is kept as given in raw._filter_time_as_given and the record is dated to the day. No row gives an end, a report time or
     a volume (the volume is only in the summary): ended_at, reported_at and volume_gal stay null, status unknown, so the
     status build applies its no-end caution from the start of the discovery day. 37 of the kept rows (most of them
     entered before 2014 or migrated without a date) have no date at all: kept, undated, never coloured.
