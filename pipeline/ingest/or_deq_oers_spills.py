@@ -36,8 +36,11 @@ Record rules (rules only; no model, no geocoding)
     vehicle, a business) -> unknown, still in the sewage category, with raw._source_type the layer's word.
   - Place: Lat_DD and Lon_DD are DEQ's point (coord_source "source"); a point outside Oregon's box is not used
     (raw._coords_rejected). Affected_Waterway is the water text: a placeholder (NULL, None, Unknown, N/A) is no water;
-    "Columbia River, Astoria" is the water "Columbia River" and the place "Astoria" (raw.waterway_place). The status
-    build places a report by the water it names (county-aware through its point) or by its point.
+    "Columbia River, Astoria" is the water "Columbia River" and the place "Astoria" (raw.waterway_place; TOWN_NAMES:
+    "Hood River" after a comma is the town); two waters ("Evans Creek and the Rogue River") are both kept, joined by
+    "; "; a text that names no water ("Possible impact to creek") is none; a name typed in lower or upper case is title
+    cased. The status build places a report by the water it names (county-aware through its point and county) or by
+    its point.
   - Reached water: MediaAffected lists what the spill reached. When it lists only Soil, Pavement, Building or Facility,
     Sanitary Sewer, Air or Groundwater and the row names no water, raw.reached_water is false with the media as
     raw._no_water_reason (kept, listed, placed on no water). Surface Water, Marine Water, Sediment, a storm drain or a
@@ -120,17 +123,49 @@ def times(a: dict, tz: ZoneInfo) -> tuple[str | None, str | None]:
     return datetime(day.year, day.month, day.day, tzinfo=tz).isoformat(), "day"
 
 
-def waterway(text: str) -> tuple[str | None, str | None]:
-    """(water, place) of Affected_Waterway: a placeholder is no water; 'Columbia River, Astoria' is the water and its
-    place; 'Unknown, Madras' is no water."""
+# towns whose names read as waters: after a comma they are the place ("Columbia River, Hood River": the Columbia at the
+# town of Hood River, reported from Cascade Locks and Mosier)
+TOWN_NAMES = {"hood river", "coos bay", "lake oswego", "rogue river", "myrtle creek", "grand ronde", "warm springs",
+              "astoria", "portland", "madras"}
+RIVER_STEMS = {"willamette", "columbia", "umpqua", "south umpqua", "north umpqua", "rogue", "santiam", "clackamas",
+               "tualatin", "deschutes", "snake", "john day", "coquille", "siuslaw", "mckenzie", "yamhill", "sandy",
+               "nehalem", "siletz", "yaquina", "alsea", "chetco", "klamath", "malheur", "owyhee", "grande ronde"}
+NOT_A_NAME = re.compile(r"\b(?:possible|possibly|impact|unnamed|unknown|nearby|local|potential)\b", re.I)
+
+
+def tidy(name: str) -> str:
+    n = re.sub(r"\s+", " ", name).strip(" .;:-")
+    n = re.sub(r"\s+(?:affected|impacted)$", "", n, flags=re.I)
+    n = re.sub(r"\s+via\b.*$", "", n, flags=re.I)              # "McKenzie River via outfall to creek"
+    return n.title() if (n.islower() or n.isupper()) else n
+
+
+def waterway(text: str) -> tuple[list[str], str | None]:
+    """(waters, place) of Affected_Waterway (rules only): a placeholder is no water ("NULL", "None", "Unknown, Madras");
+    "Columbia River, Astoria" and "Columbia River, Hood River" are the water and its town (TOWN_NAMES, or a part with no
+    water word); "Ames Creek, South Santiam River affected" and "Evans Creek and the Rogue River" are two waters; a
+    text that is no water's name ("Possible impact to creek") is none."""
     t = clean(text)
     if not t or PLACEHOLDER.match(t):
-        return None, None
-    if "," in t:
-        head, tail = t.split(",", 1)
-        if WATER_WORD.search(head) and not WATER_WORD.search(tail):
-            return head.strip(), tail.strip()
-    return t, None
+        return [], None
+    # (text, follows a comma?) parts: a town can follow a comma only
+    pieces = re.split(r"(\s*,\s*|\s+and\s+(?:the\s+)?(?=[A-Z]))", t)
+    parts = [(pieces[0], False)] + [(pieces[i + 1], "," in pieces[i]) for i in range(1, len(pieces) - 1, 2)]
+    waters, place = [], None
+    for i, (x, after_comma) in enumerate(parts):
+        x = tidy(x)
+        if not x:
+            continue
+        if x.lower() in RIVER_STEMS:
+            x = f"{x} River"                                     # "Willamette, Oak Lodge": the Willamette River
+        if i and after_comma and (x.lower() in TOWN_NAMES or not WATER_WORD.search(x)):
+            place = ", ".join(y for y in (place, x) if y)
+            continue
+        if NOT_A_NAME.search(x) or not WATER_WORD.search(x) or not x[:1].isupper():
+            continue
+        if x not in waters:
+            waters.append(x)
+    return waters, place
 
 
 def record(a: dict, key: str, fetched_at: str) -> dict:
@@ -139,7 +174,8 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
     start, prec = times(a, tz)
     src = clean(a.get("Source"))
     et = TYPES.get(src.lower(), "unknown")
-    water, place = waterway(a.get("Affected_Waterway"))
+    waters, place = waterway(a.get("Affected_Waterway"))
+    water = "; ".join(waters) or None
     lat, lon = a.get("Lat_DD"), a.get("Lon_DD")
     raw = {"state": "OR", "time_zone": zone,
            "timezone_note": ("Mountain time: Malheur County north of township 35 South (49 CFR 71.9)"
