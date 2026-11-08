@@ -25,19 +25,19 @@
   "records": 291,
   "note": "records whose notice names a beach, park or shore and no water (Kalapaki Beach Park, North Shore): kept with no water"
  },
- "waters": 33,
- "reports": 108,
+ "waters": 32,
+ "reports": 107,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in HI": 33
+  "no NHD flowline or waterbody of that name in HI": 32
  },
- "resolved_names": 25,
- "resolved_reports": 52,
+ "resolved_names": 26,
+ "resolved_reports": 53,
  "build": {
-  "date": "2026-11-07",
+  "date": "2026-11-08",
   "command": "python -m ingest.waters_from_nhd --names research/hi/receiving-waters-missing.json --state HI",
-  "records_built": 8,
-  "names_resolved": 25,
-  "network_requests": 8
+  "records_built": 0,
+  "names_resolved": 1,
+  "network_requests": 4
  },
  "rows": [
   {
@@ -593,28 +593,6 @@
    "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "Kalauau Stream",
-   "island": "Oahu",
-   "place": "Kalauau Stream, Oahu",
-   "slug_hint": "kalauau-stream-oahu-hi",
-   "reports": 1,
-   "towns": [
-    "Aiea"
-   ],
-   "towns_basis": "the nearest Census places, by hand from the water's known place",
-   "permits": [],
-   "sources": [
-    "hi-doh-cwb-events-api"
-   ],
-   "places_from": [
-    "hi-doh-cwb-events-api"
-   ],
-   "event_types": {
-    "sso": 1
-   },
-   "reason": "no NHD flowline or waterbody of that name in HI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
    "name": "Kalihiwai Bay",
    "island": "Kauai",
    "place": "Kalihiwai Bay, Kauai",
@@ -1052,6 +1030,23 @@
    "island": "Oahu",
    "place": "Kalauao Stream, Oahu",
    "slug_hint": "kalauao-stream-oahu-hi"
+  },
+  {
+   "name": "Kalauau Stream",
+   "reports": 1,
+   "slugs": [
+    "kalauao-stream-hi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Aiea"
+   ],
+   "places_from": [
+    "hi-doh-cwb-events-api"
+   ],
+   "island": "Oahu",
+   "place": "Kalauau Stream, Oahu",
+   "slug_hint": "kalauau-stream-oahu-hi"
   },
   {
    "name": "Kamanaiki Stream",
