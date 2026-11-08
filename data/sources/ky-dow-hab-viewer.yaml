@@ -1,0 +1,78 @@
+id: "ky-dow-hab-viewer"
+name: "Kentucky Division of Water HAB Viewer (harmful algal bloom observation points)"
+url: "https://watermaps.ky.gov/arcgis/rest/services/WebMapServices/HABService/MapServer/0"
+homepage: "https://watermaps.ky.gov/HABs"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS ingester (the fetch block below; ingest/ky_transforms.py writes the advisory text and
+#   the record's clock): source id ky-dow-hab-viewer, data/build/events/ky-dow-hab-viewer.json. Blooms, not sewage
+#   (hab_advisory, plum).
+# Notes (research/ky, verified fetched, checked 2026-11-07): watermaps.ky.gov/HABs redirects to the web app
+#   b4cecafe06ee4e9187b5bc4589006e1e, whose web map reads HABService layer 0 ("Observation Points"). 2026-11-07 fetch:
+#   5 points, all of the 2026 season (HABYEARS 2026): 1 Warning (Old Springfield Reservoir, "Recreational Public Health
+#   Advisory issued", microcystins 17.1 ug/L on 2026-10-26), 1 Below (Caneyville Reservoir: toxins detected below the
+#   advisory level), 3 NoDetect (Kentucky Lake near Irvin Cobb marina, Williamstown Lake, Lake Malone); HABEND empty
+#   on all five. The layer keeps the season's points (OBJECTIDs 3209 to 3526), so earlier seasons are gone from it.
+# Can fill: waterbody, coordinates, started_at (day), ended_at (day, when DOW sets HABEND), advice_text
+# Cannot fill: the advisory's extent along the shore; times of day
+cadence: "edited by the Division of Water as samples come in, May to October (season's-end state on 2026-11-07)"
+license: "none stated"
+attribution: "Kentucky Energy and Environment Cabinet, Division of Water"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["KY"]
+registry_ids: ["ky-dow-hab-viewer"]
+access: ["arcgis"]
+access_detail: "MapServer layer 0 of WebMapServices/HABService on watermaps.ky.gov, no token; fields OBJECTID, HABSTART and HABEND (dates stored as epoch milliseconds at UTC midnight), HABSTATUS (Warning, Below, NoDetect), HABNAME (the water), HABSTATDES (the Division's status text with the sample dates and toxin results), HABYEARS."
+machine_readable: true
+legal_basis: "Kentucky Division of Water harmful algal bloom program (recreational advisories issued with the Department for Public Health)"
+checked: "2026-11-07"
+# Generic ingester (docs/generic-ingesters.md). One record per point under an advisory status (Warning, and the
+#   stronger Danger the program also uses); a point sampled with toxins below the advisory level (Below) or none
+#   detected (NoDetect) is not a record: grey, "no report", never clean. Every fetch that still finds the record
+#   confirms it (history.confirm_while_listed), and the first that no longer finds it ends it (raw._unlisted_since).
+#   HABEND, when the Division sets it, is the advisory's end in the Division's words (advisory_lifted, day precision).
+#   The layer spans both of Kentucky's time zones and a block names one: the dates are dates (midnight: date), and the
+#   hook writes raw.time_zone from the point (zones.zone_for, the forty-one Central-time counties), so each day ends
+#   in its own county's clock. The fields hold no person.
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://watermaps.ky.gov/arcgis/rest/services/WebMapServices/HABService/MapServer/0"
+  order_by: "OBJECTID"
+  metadata: true
+  geometry: true
+  time_zone: "America/New_York"
+  bounds: [-89.6, 36.45, -81.9, 39.2]      # Kentucky; a point outside is not used (raw._coords_rejected)
+  safe_fields: [OBJECTID, HABSTART, HABEND, HABSTATUS, HABNAME, HABSTATDES, HABYEARS, _x, _y]
+  free_text: [HABSTATDES]
+  # sampled with no advisory (Below: toxins under the advisory level; NoDetect): not an advisory record
+  filter: [{field: HABSTATUS, regex: "^\\s*(below|nodetect|no ?detect|none|not detected|monitored|)\\s*$", exclude: true}]
+  record:
+    source_record_id: {template: "{OBJECTID}-{@started_at|compact|default:nodate}"}
+    started_at: {field: HABSTART, parse: epoch_ms, midnight: date}
+    ended_at: {field: HABEND, parse: epoch_ms, midnight: date}
+    event_type: {const: hab_advisory}
+    status: {field: HABSTATUS, upper: true, map: {WARNING: advisory_active, DANGER: advisory_active,
+                                                   ADVISORY: advisory_active, WATCH: advisory_active},
+             otherwise: unknown}
+    waterbody_text: HABNAME
+    lat: {field: _y, parse: number}
+    lon: {field: _x, parse: number}
+    authority: {const: "Kentucky Division of Water (HAB Viewer)"}
+    source_url: {const: "https://watermaps.ky.gov/HABs"}
+  transform: "ingest.ky_transforms.ky_hab_record"
+  raw_notes:
+    _hab_level: {field: HABSTATUS, upper: true}
+    _hab_season: HABYEARS
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    confirm_while_listed: true
+    track:
+      HABSTATUS: {key: _status_seen, label: status}
+  meta:
+    credit: "Kentucky Energy and Environment Cabinet, Division of Water, HAB Viewer"
+    caveat: "The Division's map shows each point's current status; the advisory's extent on the water is in the Division's text, not drawn."
+    time_basis: "HABSTART and HABEND are dates (stored at UTC midnight); each is read as a date in the zone of the point's county (Eastern, or Central in the forty-one western counties)."
