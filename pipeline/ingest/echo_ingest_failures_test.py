@@ -59,7 +59,7 @@ def test_dmr_one_failed_request_is_not_ok(dirs, monkeypatch):
     p.write_text(json.dumps(PREV))
     real = dmr.fetch
 
-    def fetch(permit, code, since):
+    def fetch(permit, code, since, budget=None):
         if (permit, code) == ("MA0101508", "82220"):
             return None, "failed (ConnectionError: simulated)"
         return {"Message": "Success", "CWPName": permit, "PermFeatures": []}, "live"
