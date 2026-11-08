@@ -1019,11 +1019,12 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 # unless the point is within NAME_MATCH_M of the record. ADEM's layers give no county, so the county is the one whose
 # outline (data/reference/al-counties.json, Census TIGERweb) holds the point. A record with no outline cannot be
 # measured from a point; its box still places it in a county ("Cowan Creek" in Fairhope is not Ferguson's).
-COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json"}
+COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json",
+                 "OR": "or-counties.json"}      # DEQ's OERS spills: a point and a county (scripts/or_counties.py)
 # States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
-COUNTY_FIELD_STATES = {"TX"}
+COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county too (a row with no point)
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
