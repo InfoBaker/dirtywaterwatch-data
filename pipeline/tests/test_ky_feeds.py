@@ -202,3 +202,77 @@ def test_kentucky_rules_row_cites_the_regulation_and_the_operators():
     for word in ("safe", "clean"):
         assert word not in ky["basis"].lower()
     assert "KY" not in rules["live_states"]
+
+
+# ---------------------------------------------------------------- review 2026-11-08: MSD-01 is one advisory
+
+def _msd01(lifted=False):
+    st = {}
+    K.update(st, _snap("msd01-2025-09-04.html"), "2026-04-01T12:00:00Z")
+    if lifted:
+        K.update(st, _snap("normal-2026-11-07.html"), "2026-04-01T14:00:00Z")
+    outs = [{"npdes_permit": "KY0022411", "outfall": f"00{i}", "outfall_status": "CSO", "lat": 38.25 + i / 100,
+             "lon": -85.7, "water_slug": "ohio-river-ky"} for i in range(3)]
+    return K.records(st, outs)
+
+
+def test_msd01_is_no_discharge_in_the_charts_and_one_advisory_per_water():
+    """P2-1: a banner at three outfalls was three CSO discharge events; now 0 events and the advisory once."""
+    from build import charts as C
+
+    class D:
+        pass
+    d = D()
+    d.events, d.superseded, d.duplicates, d.effective, d.dropped = _msd01(), set(), {}, {}, {}
+    d.waters = {"ohio-river-ky": {"state": "KY", "kind": "river", "name": "Ohio River"}}
+    d.status, d.slugs = {}, (lambda ev: ["ohio-river-ky"])
+    buckets, stats, _ = C.gather(d)
+    assert not any(bk.events for bk in buckets.values())
+    assert len(buckets[("water", "ohio-river-ky")].advisories) == 1
+    assert not any(k.startswith("counted") for k in stats)
+
+
+def test_msd01_never_absorbs_an_echo_report_of_the_same_day():
+    from build import status as S
+    echo = {"event_id": "echo-sewer-overflow:KY0022411:X:1", "source_id": "echo-sewer-overflow",
+            "event_type": "sso", "status": "ended", "npdes_permit": "KY0022411", "outfall_id": None,
+            "started_at": "2026-04-01T09:00:00-04:00", "ended_at": "2026-04-01T10:00:00-04:00",
+            "time_precision": "minute", "waterbody_text": "Beargrass Creek", "water_slugs": [], "raw": {}}
+    dup = S.find_duplicates(_msd01() + [echo])
+    assert echo["event_id"] not in dup and not any(k.startswith(K.SOURCE_ID) for k in dup)
+
+
+def test_after_msds_lift_the_sites_caution_follows_and_the_rain_caution_is_never_held_back():
+    """P2-2: the water went grey at the lift and the rain caution read 'suppressed' for 24 hours."""
+    from build import status as S
+    r = _msd01(lifted=True)[0]
+    ivs = S.event_intervals(r, "KY", datetime(2026, 4, 1, 20, tzinfo=UTC), None, S.load_rules())
+    red = [iv for iv in ivs if iv["color"] == "red"]
+    after = [iv for iv in ivs if iv["color"] == "yellow"]
+    assert red and red[0]["end"] == datetime(2026, 4, 1, 14, tzinfo=UTC)
+    assert after and after[0]["start"] == red[0]["end"] and (after[0]["end"] - after[0]["start"]).total_seconds() >= 72 * 3600
+    assert RL.discharge_starts(_msd01(lifted=True)) == {}
+
+
+def test_a_banner_no_read_confirms_ages_out_after_48_hours():
+    from build import status as S
+    r = _msd01()[0]                                   # active, last read 2026-04-01T12:00Z
+    ivs = S.event_intervals(r, "KY", datetime(2026, 4, 10, tzinfo=UTC), None, S.load_rules())
+    red = [iv for iv in ivs if iv["color"] == "red"]
+    assert red and red[0]["end"] == datetime(2026, 4, 3, 12, tzinfo=UTC)
+
+
+def test_the_state_file_and_the_raw_save_keep_no_house_number(tmp_path, monkeypatch):
+    """P2-6: the MSD-02 asset's house number was kept in the state file saved to R2."""
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(K, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(K, "msd_outfalls", lambda: OUTFALLS)
+    monkeypatch.setattr(K, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / "events" / f"{sid}.json", **kw))
+    saved = []
+    monkeypatch.setattr(K, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(K, "fetch", lambda: (MSD / "msd02-2025-02-19.html").read_text())
+    assert K.main(["--at", "2026-04-01T12:00:00Z"]) == 0
+    state = (tmp_path / "state.json").read_text()
+    assert "1234" not in state and "[house number removed] EXAMPLE DR" in state
+    assert saved and all(b"1234" not in s for s in saved)

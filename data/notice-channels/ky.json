@@ -155,6 +155,31 @@
   },
   {
    "state": "KY",
+   "operator_id": "ky-bee-creek-wwtp",
+   "agency": null,
+   "permit": "KY0072761",
+   "checked": "2026-11-07",
+   "id": "ky-bee-creek-wwtp-division-notice",
+   "name": "Bee Creek WWTP",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "Bee Creek WWTP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
    "operator_id": "ky-belfry-wwtp",
    "agency": null,
    "permit": "KY0108260",
@@ -730,12 +755,12 @@
   },
   {
    "state": "KY",
-   "operator_id": "ky-city-of-bardstown-town-creek",
+   "operator_id": "ky-city-of-bardstown",
    "agency": null,
    "permit": "KY0021237",
    "checked": "2026-11-07",
-   "id": "ky-city-of-bardstown-town-creek-division-notice",
-   "name": "City of Bardstown Town Creek",
+   "id": "ky-city-of-bardstown-division-notice",
+   "name": "City of Bardstown",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -750,7 +775,7 @@
     "ky-law-401-kar-5-065",
     "ky-sobe-erule-state-system"
    ],
-   "note": "City of Bardstown Town Creek must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "note": "City of Bardstown must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -876,31 +901,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of Bedford must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-bee-creek",
-   "agency": null,
-   "permit": "KY0072761",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-bee-creek-division-notice",
-   "name": "City of Bee Creek",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Bee Creek must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -1805,12 +1805,12 @@
   },
   {
    "state": "KY",
-   "operator_id": "ky-city-of-elizabethtown-valley-creek",
+   "operator_id": "ky-city-of-elizabethtown",
    "agency": null,
    "permit": "KY0022039",
    "checked": "2026-11-07",
-   "id": "ky-city-of-elizabethtown-valley-creek-division-notice",
-   "name": "City of Elizabethtown Valley Creek",
+   "id": "ky-city-of-elizabethtown-division-notice",
+   "name": "City of Elizabethtown",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -1825,7 +1825,7 @@
     "ky-law-401-kar-5-065",
     "ky-sobe-erule-state-system"
    ],
-   "note": "City of Elizabethtown Valley Creek must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "note": "City of Elizabethtown must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -1985,7 +1985,7 @@
    "permit": "KY0027405",
    "checked": "2026-11-07",
    "id": "ky-city-of-fleming-neon-division-notice",
-   "name": "City of Fleming Neon",
+   "name": "City of Fleming-Neon",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -2000,7 +2000,7 @@
     "ky-law-401-kar-5-065",
     "ky-sobe-erule-state-system"
    ],
-   "note": "City of Fleming Neon must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "note": "City of Fleming-Neon must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -2076,31 +2076,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of Fordsville must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-fort-knox",
-   "agency": null,
-   "permit": "KY0112721",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-fort-knox-division-notice",
-   "name": "City of Fort Knox",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Fort Knox must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -2255,31 +2230,6 @@
   },
   {
    "state": "KY",
-   "operator_id": "ky-city-of-golden-acres",
-   "agency": null,
-   "permit": "KY0044164",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-golden-acres-division-notice",
-   "name": "City of Golden Acres",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Golden Acres must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
    "operator_id": "ky-city-of-grand-rivers",
    "agency": null,
    "permit": "KY0110795",
@@ -2301,31 +2251,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of Grand Rivers must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-great-oaks",
-   "agency": null,
-   "permit": "KY0080845",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-great-oaks-division-notice",
-   "name": "City of Great Oaks",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Great Oaks must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -2605,12 +2530,12 @@
   },
   {
    "state": "KY",
-   "operator_id": "ky-city-of-hickman-east",
+   "operator_id": "ky-city-of-hickman",
    "agency": null,
    "permit": "KY0028436",
    "checked": "2026-11-07",
-   "id": "ky-city-of-hickman-east-division-notice",
-   "name": "City of Hickman East",
+   "id": "ky-city-of-hickman-division-notice",
+   "name": "City of Hickman",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -2625,7 +2550,7 @@
     "ky-law-401-kar-5-065",
     "ky-sobe-erule-state-system"
    ],
-   "note": "City of Hickman East must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "note": "City of Hickman must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -2826,31 +2751,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of Jenkins must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-jerry-l-riley",
-   "agency": null,
-   "permit": "KY0104027",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-jerry-l-riley-division-notice",
-   "name": "City of Jerry L Riley",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Jerry L Riley must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -3405,31 +3305,6 @@
   },
   {
    "state": "KY",
-   "operator_id": "ky-city-of-middlesboro",
-   "agency": null,
-   "permit": "KY0072885",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-middlesboro-division-notice",
-   "name": "City of Middlesboro",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Middlesboro must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: 1 report(s) in EPA's tables (2026-11-04 extract), 0 with evidence the discharge reached a water. No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
    "operator_id": "ky-city-of-midway",
    "agency": null,
    "permit": "KY0028410",
@@ -3630,31 +3505,6 @@
   },
   {
    "state": "KY",
-   "operator_id": "ky-city-of-muddy-creek",
-   "agency": null,
-   "permit": "KY0111449",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-muddy-creek-division-notice",
-   "name": "City of Muddy Creek",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Muddy Creek must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
    "operator_id": "ky-city-of-muldraugh",
    "agency": null,
    "permit": "KYP000051",
@@ -3751,31 +3601,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of New Haven must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-new-marion",
-   "agency": null,
-   "permit": "KY0113247",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-new-marion-division-notice",
-   "name": "City of New Marion",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of New Marion must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -4101,31 +3926,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of Raceland must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-russell-county",
-   "agency": null,
-   "permit": "KY0062995",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-russell-county-division-notice",
-   "name": "City of Russell County",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of Russell County must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -4476,31 +4276,6 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "City of Somerset must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "KY",
-   "operator_id": "ky-city-of-south-hopkins",
-   "agency": null,
-   "permit": "KY0066583",
-   "checked": "2026-11-07",
-   "id": "ky-city-of-south-hopkins-division-notice",
-   "name": "City of South Hopkins",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "ky-law-401-kar-5-065",
-    "ky-sobe-erule-state-system"
-   ],
-   "note": "City of South Hopkins must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -5780,6 +5555,31 @@
   },
   {
    "state": "KY",
+   "operator_id": "ky-fort-knox",
+   "agency": null,
+   "permit": "KY0112721",
+   "checked": "2026-11-07",
+   "id": "ky-fort-knox-division-notice",
+   "name": "U.S. Army, Fort Knox",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "U.S. Army, Fort Knox must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
    "operator_id": "ky-garrison-regional-wwtp",
    "agency": null,
    "permit": "KY0105422",
@@ -5880,6 +5680,31 @@
   },
   {
    "state": "KY",
+   "operator_id": "ky-golden-acres-wwtf",
+   "agency": null,
+   "permit": "KY0044164",
+   "checked": "2026-11-07",
+   "id": "ky-golden-acres-wwtf-division-notice",
+   "name": "Golden Acres WWTF",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "Golden Acres WWTF must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
    "operator_id": "ky-grant-county-stp",
    "agency": null,
    "permit": "KY0091634",
@@ -5926,6 +5751,31 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "Grayson STP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: 1 report(s) in EPA's tables (2026-11-04 extract), 0 with evidence the discharge reached a water. No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-great-oaks-wwtf",
+   "agency": null,
+   "permit": "KY0080845",
+   "checked": "2026-11-07",
+   "id": "ky-great-oaks-wwtf-division-notice",
+   "name": "Great Oaks WWTF",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "Great Oaks WWTF must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -7150,6 +7000,31 @@
   },
   {
    "state": "KY",
+   "operator_id": "ky-middlesboro-stp",
+   "agency": null,
+   "permit": "KY0072885",
+   "checked": "2026-11-07",
+   "id": "ky-middlesboro-stp-division-notice",
+   "name": "Middlesboro STP",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "Middlesboro STP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: 1 report(s) in EPA's tables (2026-11-04 extract), 0 with evidence the discharge reached a water. No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
    "operator_id": "ky-millstone-alternative-trmt-sys",
    "agency": null,
    "permit": "KY0103217",
@@ -7296,6 +7171,56 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "Mountain Water District must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-muddy-creek-wwtp",
+   "agency": null,
+   "permit": "KY0111449",
+   "checked": "2026-11-07",
+   "id": "ky-muddy-creek-wwtp-division-notice",
+   "name": "Muddy Creek WWTP",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "Muddy Creek WWTP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-new-marion-wwtp",
+   "agency": null,
+   "permit": "KY0113247",
+   "checked": "2026-11-07",
+   "id": "ky-new-marion-wwtp-division-notice",
+   "name": "New Marion WWTP",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "New Marion WWTP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {
@@ -7674,6 +7599,31 @@
   },
   {
    "state": "KY",
+   "operator_id": "ky-russell-county-regional-stp",
+   "agency": null,
+   "permit": "KY0062995",
+   "checked": "2026-11-07",
+   "id": "ky-russell-county-regional-stp-division-notice",
+   "name": "Russell County Regional STP",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "Russell County Regional STP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
    "operator_id": "ky-rwra",
    "agency": null,
    "permit": "KY0020095",
@@ -7969,6 +7919,31 @@
     "ky-sobe-erule-state-system"
    ],
    "note": "South 641 Water District must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "KY",
+   "operator_id": "ky-south-hopkins-regional-wwtp",
+   "agency": null,
+   "permit": "KY0066583",
+   "checked": "2026-11-07",
+   "id": "ky-south-hopkins-regional-wwtp-division-notice",
+   "name": "South Hopkins Regional WWTP",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "401 KAR 5:065 Section 2(5)(a): \"If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort ... or the appropriate regional field office\"; (b) the 24-hour environmental emergency telephone number after hours; and the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "ky-law-401-kar-5-065",
+    "ky-sobe-erule-state-system"
+   ],
+   "note": "South Hopkins Regional WWTP must tell the Division of Water immediately, by telephone only, of a spill, bypass or overflow that may endanger health or the environment (401 KAR 5:065 Section 2(5)); the Division publishes no list. Kentucky's system sent such reports to EPA's overflow tables for December 2025 and January 2026 only: no report under its permits in EPA's tables (2026-11-04 extract). No public notice is required. The permit itself was not read: the standard condition is assumed. (research/ky/report.md §2.1)",
    "barrier": "phone_only"
   },
   {

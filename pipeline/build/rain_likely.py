@@ -33,7 +33,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import UTC, datetime, timedelta
 
-from common import BUILD_DIR, DATA_DIR, load_outfall_registry, read_json
+from common import BUILD_DIR, DATA_DIR, load_outfall_registry, read_json, system_wide_advisory
 
 RULE = "rain_likely"
 # the site default where the state publishes no rain trigger of its own (owner, 2026-11-03: no other operator's
@@ -313,6 +313,8 @@ def discharge_starts(events: list[dict], skip: set[tuple[str, str]] | None = Non
     for ev in events:
         if ev.get("time_precision") in ("month", "year") or not ev.get("npdes_permit"):
             continue
+        if system_wide_advisory(ev):
+            continue            # an advisory of the risk of overflows never holds back the caution (review 2026-11-08 P2-2)
         if (str(ev["npdes_permit"]).upper(), str(ev.get("outfall_id") or "").strip().upper()) in skip:
             continue
         et = ev.get("event_type")

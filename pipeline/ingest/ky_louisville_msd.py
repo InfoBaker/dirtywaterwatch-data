@@ -17,8 +17,10 @@ Source
     level-3  "Conditions are normal" (no advisory: grey, "no report", never clean)
   MSD removes old notices (the advisory pages of 2025 and 2026-11-03 answer 404), so the page is a snapshot: this
   module keeps data/build/ky-louisville-msd-state.json, every notice seen with the polls that saw it. The state file
-  is the archive: do not delete it. Nothing in the block names a person; only the parsed block (level, title, text)
-  is ever saved to data/raw/ (the rest of the page is navigation), and only when it changes.
+  is the archive: do not delete it. The block's text goes through the free-text scrub as it is parsed (an MSD-02
+  asset address loses its house number, a phone number is removed), so only the scrubbed block (level, title, text)
+  is ever kept in the state file or saved to data/raw/ (the rest of the page is navigation), and only when it
+  changes.
 
 Records (a status snapshot turned into events; il_mwrd_possible_cso.py and ri_nbc.py are the models)
   - MSD-01 (owner default, wave 4 brief): the authority's own advisory, quoted as MSD's, red while the banner stands.
@@ -30,8 +32,12 @@ Records (a status snapshot turned into events; il_mwrd_possible_cso.py and ri_nb
     started_at is the first poll that saw the banner (time_precision poll; raw.start_basis says so) and
     reported_at, published_at and source_updated_at stay null; raw._last_seen_in_source is the last poll that saw it.
     When a later complete poll no longer shows it, the records become advisory_lifted with ended_at that poll and
-    raw.ended_at_precision "poll" (MSD withdrew it at or before then). MSD's "48 hours after the rain has stopped" is
-    MSD's own rule; the banner's withdrawal is MSD's statement that it no longer applies.
+    raw.ended_at_precision "poll" (MSD withdrew it at or before then). MSD's own window runs "until 48 hours after the
+    rain has stopped", which can outlast the banner, so the site's caution follows the lift (build/status.py).
+    One banner is one advisory (raw.advisory_key, the same on each outfall's copy): common.system_wide_advisory keeps
+    it out of the discharge counts, the duplicate match and the rain caution's notice suppression, and the charts
+    count it once per water (review 2026-11-08 P2-1, P2-2). An advisory still shown but no longer confirmed by a read
+    ages out 48 hours after the last read that showed it (P3-7).
   - MSD-02: a dated sewage report (event_type sso, or cso when the text names a combined sewer overflow) with MSD's
     times read in America/New_York (Jefferson County): started_at from DATE AND TIME DISCHARGE BEGAN (minute),
     ended_at from COMPLETED DATE/TIME when it gives a time (raw.ended_at_precision minute, status ended); ONGOING or
@@ -114,7 +120,14 @@ def parse(page: str) -> dict:
     h3 = H3_RE.search(content)
     title = _text(h3.group(1)) if h3 else None
     body = _text(content[h3.end():] if h3 else content)
-    return {"level": lv.group(1) if lv else None, "title": title, "text": body}
+    return {"level": lv.group(1) if lv else None, "title": title, "text": safe_text(body)}
+
+
+def safe_text(text: str) -> str:
+    """The notice's lines through the free-text scrub (house numbers, phones, names) before anything is kept: the
+    state file and the raw save hold only this (review 2026-11-08 P2-6; wave 4 rule 4)."""
+    from ingest.mi_egle_mienviro import free_text
+    return "\n".join(free_text(ln) for ln in (text or "").split("\n"))
 
 
 def code_of(snap: dict) -> str:
@@ -231,6 +244,7 @@ def msd01_records(a: dict, outfalls: list[dict]) -> list[dict]:
                "advisory_level": a.get("level"), "advisory_scope": "system-wide",
                "scope_note": ("MSD's advisory covers the Louisville Metro area's waters; shown at each of MSD's open "
                               "combined sewer outfalls, whose downstream reach it colours"),
+               "advisory_key": a["key"],
                "first_seen_at": a["first_seen"], "_last_seen_in_source": a.get("last_seen"),
                "start_basis": START_BASIS, "time_zone": "America/New_York", "county": "Jefferson",
                "outfall_source": o.get("source_id") or "EPA National CSO Inventory (ICIS-NPDES permitted features)"}
