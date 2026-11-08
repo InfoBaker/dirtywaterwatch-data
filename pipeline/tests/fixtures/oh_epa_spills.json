@@ -188,6 +188,30 @@
     "city_twn": "CINCINNATI                                             ",
     "waterway": "31 - Mill Creek                                        "
    }
+  },
+  {
+   "attributes": {
+    "objectid": 172,
+    "casenumber": "2610EPA0001939",
+    "reportedproduct": "SEWAGE HUMAN                                                               ",
+    "reportedamount": 0.0,
+    "reporteduom": "UNK ",
+    "recovamount": null,
+    "recovunit": null,
+    "spillmonth": "October     ",
+    "spilldom": 15,
+    "spillyear": 2026,
+    "spillmonthnum": 10,
+    "spilldoy": 288,
+    "county": "Harrison                 ",
+    "reporteddate": 1792075200000,
+    "locatedxy": "Y",
+    "latitude": 38.69809565,
+    "longitude": -81.49287073,
+    "oepadist": "ESW ",
+    "city_twn": "34/GREEN TWP                                           ",
+    "waterway": "34 - Sally Buffalo Creek                               "
+   }
   }
  ]
 }

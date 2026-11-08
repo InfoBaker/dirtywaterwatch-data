@@ -77,6 +77,19 @@
     "VOLUME": 37.7,
     "NPDES_ID": "4PF00000018"
    }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 4463,
+    "DISCHARGE_ID": 1,
+    "TYPE": "SSO",
+    "DISCHARGE_LOCATION": "Scioto River at Greenlawn dam",
+    "RELIEF_LOCATION": "",
+    "INSPECTION_DATE": "01/02/2004",
+    "INSPECTION_YEAR": "2004",
+    "VOLUME": 0.52,
+    "NPDES_ID": ""
+   }
   }
  ]
 }
