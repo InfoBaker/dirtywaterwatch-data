@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1402 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1414 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -43,7 +43,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | tx | 4 | 0 | 7 | 1 | 0 | 12 |
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
-| **all** | **497** | **229** | **408** | **198** | **70** | **1402** |
+| ky | 7 | 0 | 3 | 1 | 1 | 12 |
+| **all** | **504** | **229** | **411** | **199** | **71** | **1414** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1611,3 +1612,20 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `or-oak-lodge-sso-posts` | Oak Lodge Water Services overflow posts | watch | fetched | events | A small district that posts each overflow as a news article (2025-12-18: three lift stations, impacts to Kellogg Creek and the Willamette River, the advice to avoid contact for 48 hours afterwards). Registered as a monitored page; HTML only, no feed. |
 | `or-oda-shellfish` | Oregon Department of Agriculture shellfish closures (biotoxin and sewage) | watch | search_only | advisories | Commercial bay closures follow sewage events (e.g. Tillamook); a 2017 ArcGIS closure layer exists in the state org. Not fetched. |
 | `or-epa-sobe` | EPA eRule SOBE extract (Oregon permittees) | rejected | inferred | events | 0 Oregon events on 2026-11-03. |
+
+## ky: Kentucky (12)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ky-dow-cso-sites-layer` | Kentucky DOW Combined Sewer Overflow Sites (ArcGIS) | used | fetched | outfalls | The state's own register of active combined sewer outfall sites, read to check EPA's inventory: 285 of its 286 sites are EPA open outfalls at the same point (within 0.3 m), the other (KY0026093-001) is the Harlan plant's own outfall; EPA lists 4 open outfalls the layer does not (KY0020711-011, KY0022411-062, KY0022861-017 and -018), kept open. Its RecvWater field is the basin's main river (263 of 286 'OHIO RIVER'), not the outfall's water, and is not used. No state outfall file is needed. |
+| `ky-dow-hab-viewer` | Kentucky DOW HAB Viewer (HABService Observation Points) | used | fetched | advisories | Read through the generic ArcGIS ingester (fetch block in its source file): one record per point under an advisory status (Warning or Danger); Below and NoDetect are grey; each date in its point's own zone; blooms, not sewage. |
+| `ky-dow-swimming-advisories` | Kentucky swimming advisories (DOW and Department for Public Health) | used | fetched | advisories | Read by ingest/ky_dow_swimming_advisories.py: the page's list as standing advisories in the agencies' own words, one record per named stretch or water (12 on 2026-11-07), from the first read that listed it (the page gives no date), ended when a read no longer lists it; placed by the named water as a marker. |
+| `ky-law-401-kar-5-065` | 401 KAR 5:065 Section 2(5): KPDES reporting of spills, bypasses, upsets | used | fetched | law | The only overflow-reporting rule found: report to the Division of Water, no public notice duty. |
+| `ky-louisville-msd-overflow-advisory` | Louisville MSD Overflow Advisory Level banner and notice nodes | used | fetched | advisories | Polled by ingest/ky_louisville_msd.py (source id ky-louisville-msd-overflow-advisory): the banner as a snapshot state machine; MSD-01 as MSD's own advisory at each of MSD's open combined sewer outfalls, MSD-02 as a dated report. |
+| `ky-sd1-wet-weather-notification` | SD1 Wet Weather Overflow Notification Program (Northern Kentucky) | used | fetched | advisories | SD1's own published rule written into data/rules.json (rain_likely.fallback.by_permit.KY0021466): 0.25 inch of rain, a 72-hour caution, May to October, applied from radar rainfall at SD1's combined sewer outfalls; the Ohio River stage part (above 38 feet) is not applied. The alerts themselves reach subscribers only. |
+| `ky-sobe-erule-state-system` | EPA SOBE extract, Kentucky rows (state electronic reporting system, ES2) | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Kentucky in its states since 2026-11-07: the only dated, machine-readable record of Kentucky overflow reports with points, though Kentucky's system sent reports for two months only (December 2025 and January 2026). |
+| `ky-cso-annual-report-template` | KPDES CSO Annual Report template (Division of Water) | watch | search_only | permits | CSO permittees file annual reports by email to the Division; the reports are not posted (SD1 posts its own on sd1.org/247/Consent-Decree-Reports). |
+| `ky-lfucg-sso-consent-decree` | Lexington-Fayette Urban County Government sanitary sewer consent decree reports | watch | search_only | permits | SSO consent decree (2008, modified 2015 and 2024); no public overflow notice channel found. |
+| `ky-msd-govdelivery` | Louisville Metro GovDelivery bulletins (KYLOUISVILLE), MSD community messages | watch | search_only | news | Occasional large-event notices; email sign-up for owner. |
+| `ky-dep-ert-incidents` | Kentucky DEP Environmental Response Team incident records | rejected | search_only | events | No public web output; records request only. |
+| `ky-orsanco-bacteria` | ORSANCO contact recreation bacteria monitoring (Ohio River: Louisville and others) | unreachable | search_only | monitoring | Bot wall; shared with WV. |

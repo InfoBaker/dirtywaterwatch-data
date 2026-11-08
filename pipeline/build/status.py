@@ -51,6 +51,7 @@ from zoneinfo import ZoneInfo
 
 import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
+                    system_wide_advisory,
                     now_iso, read_json, rules_live_states, write_json)
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
@@ -181,6 +182,7 @@ SMALL_WATER_KM2 = 50
 # CONFIRM_DAYS after the source last confirmed it (the later of started_at and source_updated_at).
 AGING_TYPES = {"hab_advisory", "beach_advisory", "beach_closure", "rain_advisory", "shellfish_closure"}
 CONFIRM_DAYS = 14
+SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
 CHAR = {"red": "r", "yellow": "y", "unresolved": "u", "monthly": "m", "grey": "g"}
@@ -2666,9 +2668,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                         out.append(note)
                     return out
                 return [iv]
-            if et in AGING_TYPES:
+            if et in AGING_TYPES or system_wide_advisory(ev):
                 confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
-                until = confirmed + timedelta(days=CONFIRM_DAYS)
+                # a system-wide advisory read every hour (MSD-01) ages out SYSTEM_WIDE_CONFIRM_HOURS after the last
+                # read that showed it, so a page the feed can no longer read never keeps it red (review 2026-11-08 P3-7)
+                until = confirmed + (timedelta(hours=SYSTEM_WIDE_CONFIRM_HOURS) if system_wide_advisory(ev)
+                                     else timedelta(days=CONFIRM_DAYS))
                 out = [_iv(ev, start, until, rule, red, yellow)]
                 note = _iv(ev, until, max(until, start + timedelta(days=NOTE_DAYS)), "not_reconfirmed", red, yellow)
                 note["confirmed"] = iso(confirmed)
@@ -2683,7 +2688,14 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             told = [t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at")),
                                 pt(ev.get("source_updated_at"))) if t and t >= real_start]
             e = end or (min(told) if told else None)
-            return [_iv(ev, real_start, e, rule, red, yellow)] if e else []
+            out = [_iv(ev, real_start, e, rule, red, yellow)] if e else []
+            if out and system_wide_advisory(ev) and (yellow or {}).get("hours"):
+                # the authority's own window runs past its banner ("until 48 hours after the rain has stopped"), so
+                # the site's caution follows the lift (review 2026-11-08 P2-2)
+                iv = _iv(ev, e, e + timedelta(hours=float(yellow["hours"])), "caution", red, yellow)
+                iv["rule_applied"] = {**yellow, "after": "the authority's system-wide advisory was lifted"}
+                out.append(iv)
+            return out
         if end:
             return [_iv(ev, start, end, rule, red, yellow)]
         return [_iv(ev, start, start + timedelta(days=ADVISORY_NO_END_DAYS), "advisory_unconfirmed", red, yellow)]
@@ -3090,8 +3102,8 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
             continue
         if citizen_report(ev):
             continue        # a member of the public's report never absorbs (nor is absorbed by) an operator's report
-        if ev.get("event_type") not in DISCHARGE_TYPES or not ev.get("npdes_permit"):
-            continue
+        if ev.get("event_type") not in DISCHARGE_TYPES or not ev.get("npdes_permit") or system_wide_advisory(ev):
+            continue        # a system-wide advisory is no discharge report (review 2026-11-08 P2-1)
         tz = event_zone(ev)
         t = ev_time(ev, "started_at", tz=tz)
         if t:
