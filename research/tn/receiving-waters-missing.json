@@ -1,8 +1,8 @@
 {
  "about": "Receiving-water names in Tennessee's records that data/receiving-waters-national.json does not hold for TN: the waters TDEC's HAB advisory layer names (the records read on 2026-11-07, with up to five of their points; rounded to 0.001 degree) and the 25 stream segments of TDEC's posted-streams list under a standing water-contact advisory (Rev. August 2026, 25 segments, with their counties). Spellings that differ only in case, spaces or punctuation are counted together. TDEC's Events Report names no receiving water. Names that are not a water's own ('pond', 'Unnamed (...)', a description of a place) are left out and counted in left_out.",
  "state": "TN",
- "waters": 42,
- "reports": 45,
+ "waters": 41,
+ "reports": 44,
  "rows": [
   {
    "name": "Beaver Lake",
@@ -26,7 +26,8 @@
      35.141,
      -89.823
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Johnson Road Park Lake",
@@ -46,7 +47,8 @@
      35.069,
      -89.745
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Beaver Creek",
@@ -56,7 +58,17 @@
    ],
    "counties": [
     "Sullivan County"
-   ]
+   ],
+   "points": [
+    [
+     36.4884,
+     -82.319
+    ]
+   ],
+   "gnis_ids": [
+    "1327543"
+   ],
+   "county": "Sullivan County"
   },
   {
    "name": "Boundless Farms lake",
@@ -72,17 +84,8 @@
      35.201,
      -89.633
     ]
-   ]
-  },
-  {
-   "name": "Boyd Lake",
-   "reports": 1,
-   "sources": [
-    "tn-tdec-hab-advisory-status"
    ],
-   "counties": [
-    "Grundy County"
-   ]
+   "county": "Fayette County"
   },
   {
    "name": "Browns Creek",
@@ -92,7 +95,17 @@
    ],
    "counties": [
     "Davidson County"
-   ]
+   ],
+   "points": [
+    [
+     36.162,
+     -86.7433
+    ]
+   ],
+   "gnis_ids": [
+    "1278624"
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Casper lake",
@@ -108,7 +121,8 @@
      35.372,
      -89.838
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Citico Creek",
@@ -118,7 +132,17 @@
    ],
    "counties": [
     "Hamilton County"
-   ]
+   ],
+   "points": [
+    [
+     35.0537,
+     -85.2891
+    ]
+   ],
+   "gnis_ids": [
+    "1280568"
+   ],
+   "county": "Hamilton County"
   },
   {
    "name": "Coro Lake",
@@ -134,7 +158,8 @@
      35.009,
      -90.115
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Cypress Creek",
@@ -144,7 +169,17 @@
    ],
    "counties": [
     "Shelby County"
-   ]
+   ],
+   "points": [
+    [
+     35.1865,
+     -90.0159
+    ]
+   ],
+   "gnis_ids": [
+    "1281924"
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Davie Plantation Park Lake",
@@ -160,7 +195,8 @@
      35.221,
      -89.761
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Davies Plantation Lake",
@@ -176,7 +212,8 @@
      35.222,
      -89.762
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Dickson Lake",
@@ -192,7 +229,8 @@
      36.081,
      -87.405
     ]
-   ]
+   ],
+   "county": "Dickson County"
   },
   {
    "name": "Dry Creek",
@@ -202,7 +240,17 @@
    ],
    "counties": [
     "Davidson County"
-   ]
+   ],
+   "points": [
+    [
+     36.2873,
+     -86.6875
+    ]
+   ],
+   "gnis_ids": [
+    "1282943"
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Dudley Creek",
@@ -212,7 +260,17 @@
    ],
    "counties": [
     "Sevier County"
-   ]
+   ],
+   "points": [
+    [
+     35.7262,
+     -83.5124
+    ]
+   ],
+   "gnis_ids": [
+    "1283062"
+   ],
+   "county": "Sevier County"
   },
   {
    "name": "East Fork Third Creek",
@@ -222,7 +280,17 @@
    ],
    "counties": [
     "Knox County"
-   ]
+   ],
+   "points": [
+    [
+     35.9551,
+     -83.948
+    ]
+   ],
+   "gnis_ids": [
+    "1283411"
+   ],
+   "county": "Knox County"
   },
   {
    "name": "First Creek",
@@ -232,7 +300,17 @@
    ],
    "counties": [
     "Knox County"
-   ]
+   ],
+   "points": [
+    [
+     35.9604,
+     -83.9127
+    ]
+   ],
+   "gnis_ids": [
+    "1284297"
+   ],
+   "county": "Knox County"
   },
   {
    "name": "Gibson Creek",
@@ -242,7 +320,17 @@
    ],
    "counties": [
     "Davidson County"
-   ]
+   ],
+   "points": [
+    [
+     36.2464,
+     -86.7019
+    ]
+   ],
+   "gnis_ids": [
+    "1306479"
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Goose Creek",
@@ -252,7 +340,17 @@
    ],
    "counties": [
     "Knox County"
-   ]
+   ],
+   "points": [
+    [
+     35.9462,
+     -83.9227
+    ]
+   ],
+   "gnis_ids": [
+    "1285668"
+   ],
+   "county": "Knox County"
   },
   {
    "name": "Hester Rd (Dog Park) Lake Shelby Farms",
@@ -268,7 +366,8 @@
      35.14,
      -89.809
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Hester Rd Lake",
@@ -284,7 +383,8 @@
      35.139,
      -89.809
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Johnson Road Park Lower Lake",
@@ -300,7 +400,8 @@
      35.069,
      -89.744
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Jones Pond",
@@ -316,7 +417,8 @@
      35.14,
      -89.834
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Lake Tenley",
@@ -332,7 +434,8 @@
      35.241,
      -89.863
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Lake Watauga (Centennial Park)",
@@ -348,7 +451,8 @@
      36.15,
      -86.812
     ]
-   ]
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Lake at Belle Forest",
@@ -364,7 +468,8 @@
      36.081,
      -86.918
     ]
-   ]
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Lever Lake",
@@ -380,7 +485,8 @@
      36.005,
      -87.071
     ]
-   ]
+   ],
+   "county": "Williamson County"
   },
   {
    "name": "Little Duck River",
@@ -390,7 +496,17 @@
    ],
    "counties": [
     "Coffee County"
-   ]
+   ],
+   "points": [
+    [
+     35.4795,
+     -86.1105
+    ]
+   ],
+   "gnis_ids": [
+    "1291484"
+   ],
+   "county": "Coffee County"
   },
   {
    "name": "McCrory Creek",
@@ -400,7 +516,17 @@
    ],
    "counties": [
     "Davidson County"
-   ]
+   ],
+   "points": [
+    [
+     36.1665,
+     -86.6306
+    ]
+   ],
+   "gnis_ids": [
+    "1303497"
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Meads Quarry Lake",
@@ -416,7 +542,8 @@
      35.952,
      -83.866
     ]
-   ]
+   ],
+   "county": "Knox County"
   },
   {
    "name": "Norris Lake",
@@ -432,7 +559,8 @@
      36.403,
      -83.838
     ]
-   ]
+   ],
+   "county": "Union County"
   },
   {
    "name": "Old Hickory Lake",
@@ -448,7 +576,8 @@
      36.273,
      -86.511
     ]
-   ]
+   ],
+   "county": "Wilson County"
   },
   {
    "name": "Poplar Tree Lake",
@@ -464,7 +593,8 @@
      35.304,
      -90.07
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Richland Creek",
@@ -474,7 +604,17 @@
    ],
    "counties": [
     "Davidson County"
-   ]
+   ],
+   "points": [
+    [
+     36.1642,
+     -86.8883
+    ]
+   ],
+   "gnis_ids": [
+    "1299362"
+   ],
+   "county": "Davidson County"
   },
   {
    "name": "Second Creek",
@@ -484,7 +624,17 @@
    ],
    "counties": [
     "Knox County"
-   ]
+   ],
+   "points": [
+    [
+     35.9556,
+     -83.9213
+    ]
+   ],
+   "gnis_ids": [
+    "1301020"
+   ],
+   "county": "Knox County"
   },
   {
    "name": "Sinking Creek",
@@ -494,7 +644,17 @@
    ],
    "counties": [
     "Washington County"
-   ]
+   ],
+   "points": [
+    [
+     36.3393,
+     -82.2935
+    ]
+   ],
+   "gnis_ids": [
+    "1327021"
+   ],
+   "county": "Washington County"
   },
   {
    "name": "Stringers Branch",
@@ -504,7 +664,17 @@
    ],
    "counties": [
     "Hamilton County"
-   ]
+   ],
+   "points": [
+    [
+     35.087,
+     -85.3347
+    ]
+   ],
+   "gnis_ids": [
+    "1271598"
+   ],
+   "county": "Hamilton County"
   },
   {
    "name": "Third Creek",
@@ -514,7 +684,17 @@
    ],
    "counties": [
     "Knox County"
-   ]
+   ],
+   "points": [
+    [
+     35.9429,
+     -83.9352
+    ]
+   ],
+   "gnis_ids": [
+    "1272458"
+   ],
+   "county": "Knox County"
   },
   {
    "name": "Tributary to Grays Creek",
@@ -530,7 +710,8 @@
      35.147,
      -89.743
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Turkey Creek",
@@ -540,7 +721,17 @@
    ],
    "counties": [
     "Hamblen County"
-   ]
+   ],
+   "points": [
+    [
+     36.2612,
+     -83.2882
+    ]
+   ],
+   "gnis_ids": [
+    "1304193"
+   ],
+   "county": "Hamblen County"
   },
   {
    "name": "Walnut Grove Lake",
@@ -556,7 +747,8 @@
      35.123,
      -89.786
     ]
-   ]
+   ],
+   "county": "Shelby County"
   },
   {
    "name": "Wilson Branch",
@@ -566,7 +758,17 @@
    ],
    "counties": [
     "Clay County"
-   ]
+   ],
+   "points": [
+    [
+     36.5562,
+     -85.7805
+    ]
+   ],
+   "gnis_ids": [
+    "1274793"
+   ],
+   "county": "Clay County"
   }
  ],
  "resolved": [
@@ -604,15 +806,11 @@
  "left_out": [
   {
    "text": "(a description, not a water's name)",
-   "reports": 3
-  },
-  {
-   "text": "pond",
-   "reports": 2
-  },
-  {
-   "text": "unknown",
    "reports": 1
+  },
+  {
+   "text": "(none)",
+   "reports": 6
   }
  ]
 }

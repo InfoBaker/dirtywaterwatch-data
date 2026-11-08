@@ -198,3 +198,24 @@ def test_a_state_whose_dated_reports_come_only_from_epas_tables_names_epa_as_the
     assert C.grade_of("DC", {**cov["states"]["MS"]}, NOW, federal=True)[1].startswith(
         "Overflow reports from sewer operators in the District of Columbia are published by")
     assert "Illinois's" not in C.grade_of("IL", {**cov["states"]["MS"]}, NOW, federal=True)[1]
+
+
+def test_a_state_whose_source_refuses_this_site_is_never_told_none_are_reported(monkeypatch):
+    """Final audit 2026-11-08 TN P1-2: TDEC's Events Report answers 403, so Tennessee has no readable report; the grade
+    said "none are reported" while TDEC publishes 12,857 dated reports."""
+    monkeypatch.setattr(S, "_STATES", {"MA", "NJ", "ME", "PA", "VA", "CT", "TN"})
+    feeds = FEEDS + [{"source_id": "tn-tdec-events-report", "registry_ids": ["r-tn"], "expected_cadence_hours": 24,
+                      "ok": False, "last_ok_at": None,
+                      "error": "HTTPError: 403 Client Error: Forbidden for url: https://dataviewers.tdec.tn.gov/x"}]
+    registry = REGISTRY + [{"id": "r-tn", "name": "TDEC Events Report", "states": ["TN"],
+                            "event_types": ["sso", "plant_bypass"]}]
+    cov = C.coverage([], WATERS, feeds, registry, [], RULES, iso(NOW))
+    tn = cov["states"]["TN"]
+    assert tn["grade"] == "Dated reports, delayed"
+    assert "refuses" in tn["sentence"] and "none are reported" not in tn["sentence"]
+    assert tn["sentence"].startswith("Tennessee publishes dated overflow reports, but its server refuses")
+    # a feed read once keeps the usual rule (its reports are on file); one failing for another reason is not "refused"
+    assert C.unreadable([{"ok": False, "last_ok_at": "2026-11-01T00:00:00Z", "error": "403"}]) is None
+    assert C.unreadable([{"ok": False, "last_ok_at": None, "error": "ConnectTimeout"}]) == "failing"
+    # the other states' grades are unchanged
+    assert cov["states"]["CT"]["grade"] == build([])["states"]["CT"]["grade"]
