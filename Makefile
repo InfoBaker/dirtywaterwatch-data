@@ -172,6 +172,12 @@ OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
 PYTHON ?= $(if $(wildcard $(VENV_PY)),$(VENV_PY),$(OBL_PY))
 PY = cd pipeline && $(PYTHON)
 TIMED = sh $(abspath scripts/timed.sh)
+# every feed of the ingest loops runs under a wall-clock cap (scripts/timed.sh --cap): past it the feed is stopped,
+# logged "(exit 124, stopped at the cap)" and counted as failed, its previous events file kept whole, and the refresh
+# goes on. One feed's own cap: FEED_CAP_<name> in the environment (FEED_CAP_ingest_fl_doh_beaches=900; 0 is none);
+# a --backfill run has none.
+FEED_CAP_S ?= 600
+TIMED_FEED = $(TIMED) --cap $(FEED_CAP_S)
 
 FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
@@ -208,18 +214,18 @@ ingest:
 	for m in $(INGEST_PRE) $(filter-out $(INGEST_SKIP) $(INGEST_PRE) $(INGEST_SNAPSHOTS),$(INGEST_MODULES)); do \
 	  $(call CADENCE_GATE,ingest.$$m) \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) && $(call CADENCE_RAN,ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED_FEED) ingest.$$m $(PYTHON) -m ingest.$$m) && $(call CADENCE_RAN,ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@ids=$$(cd pipeline && $(PYTHON) -m ingest.generic --list) || echo "!! ingest.generic --list reported problems (exit $$?)"; \
 	$(call CADENCE_DUE,$$(for g in $$ids; do printf 'generic.%s ' "$$g"; done)) \
 	for g in $$ids; do \
 	  $(call CADENCE_GATE,generic.$$g) \
 	  echo "== ingest.generic $$g"; \
-	  (cd pipeline && $(TIMED) generic.$$g $(PYTHON) -m ingest.generic $$g) && $(call CADENCE_RAN,generic.$$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED_FEED) generic.$$g $(PYTHON) -m ingest.generic $$g) && $(call CADENCE_RAN,generic.$$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
 	done
 	@for m in $(INGEST_SNAPSHOTS); do \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED_FEED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@for t in $(INGEST_EXTRA); do \
 	  echo "== $$t"; \
