@@ -45,7 +45,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "name_note": "EPA records this plant under a person's name; shown under its operator and permit",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KY0104027 001"
+   "supersedes": "data/outfalls-plants-us.json KY0104027 001",
+   "water_slug": "beech-fork-bardstown-ky",
+   "water_name": "Beech Fork",
+   "water_kind": "river",
+   "distance_m": 66,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Beech Fork River' by name; Beech Fork (beech-fork-bardstown-ky, NHDPlus V2.1 record), 66 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000015",
@@ -85,7 +92,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000015"
+   "supersedes": "data/outfalls-plants-us.json KYP000015",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000032",
@@ -125,7 +140,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('BOWLING GREEN STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000032"
+   "supersedes": "data/outfalls-plants-us.json KYP000032",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000034",
@@ -165,7 +188,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('HAZARD STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000034"
+   "supersedes": "data/outfalls-plants-us.json KYP000034",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Elm Shoal Branch, Messer Branch, North Fork Kentucky River); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Elm Shoal Branch, Messer Branch, North Fork Kentucky River); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000035",
@@ -205,7 +236,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('GREENUP CO ENVIRONMENTAL COMM'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000035"
+   "supersedes": "data/outfalls-plants-us.json KYP000035",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'GREENUP CO ENVIRONMENTAL COMM' in KY",
+   "no_water_reason": "no record named 'GREENUP CO ENVIRONMENTAL COMM' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000036",
@@ -245,7 +284,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('EMINENCE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000036"
+   "supersedes": "data/outfalls-plants-us.json KYP000036",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000037",
@@ -285,7 +332,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000037"
+   "supersedes": "data/outfalls-plants-us.json KYP000037",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000038",
@@ -325,7 +380,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Greenup Co Environmental Comm'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000038"
+   "supersedes": "data/outfalls-plants-us.json KYP000038",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'Greenup Co Environmental Comm' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'Greenup Co Environmental Comm' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000039",
@@ -365,7 +428,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('GREENUP CO ENVIRONMENTAL COMM'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000039"
+   "supersedes": "data/outfalls-plants-us.json KYP000039",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'GREENUP CO ENVIRONMENTAL COMM' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'GREENUP CO ENVIRONMENTAL COMM' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000040",
@@ -405,7 +476,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('GREENUP CO ENVIRONMENTAL COMM'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000040"
+   "supersedes": "data/outfalls-plants-us.json KYP000040",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'GREENUP CO ENVIRONMENTAL COMM' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'GREENUP CO ENVIRONMENTAL COMM' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000041",
@@ -445,7 +524,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Williamstown STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000041"
+   "supersedes": "data/outfalls-plants-us.json KYP000041",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000042",
@@ -485,7 +572,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Henderson STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000042"
+   "supersedes": "data/outfalls-plants-us.json KYP000042",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Mock Roy Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Mock Roy Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000043",
@@ -525,7 +620,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('MADISONVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000043"
+   "supersedes": "data/outfalls-plants-us.json KYP000043",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Clear Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Clear Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000044",
@@ -565,7 +668,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('ASHLAND STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000044"
+   "supersedes": "data/outfalls-plants-us.json KYP000044",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Catletts Creek, Ice Dam Creek, Ohio River, Solida Creek, Twin Fork); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Catletts Creek, Ice Dam Creek, Ohio River, Solida Creek, Twin Fork); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000047",
@@ -605,7 +716,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('MADISONVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000047"
+   "supersedes": "data/outfalls-plants-us.json KYP000047",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Clear Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Clear Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000048",
@@ -645,7 +764,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('EDDYVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000048"
+   "supersedes": "data/outfalls-plants-us.json KYP000048",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000049",
@@ -687,7 +814,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('ASHLAND STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000049 001"
+   "supersedes": "data/outfalls-plants-us.json KYP000049 001",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Catletts Creek, Ice Dam Creek, Ohio River, Solida Creek, Twin Fork); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Catletts Creek, Ice Dam Creek, Ohio River, Solida Creek, Twin Fork); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000049",
@@ -703,8 +838,8 @@
    "reach_id": null,
    "reach_gnis_name": null,
    "nhdplus_id": null,
-   "lat": null,
-   "lon": null,
+   "lat": 38.706111,
+   "lon": -82.766389,
    "coords_from": null,
    "has_limits": true,
    "limit_set_names": [
@@ -726,13 +861,18 @@
    "source": "fed-echo-icis-npdes-national-dataset",
    "fetched_at": "2026-11-03T21:24:38Z",
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
-   "coords_problem": "EPA's point (38.706111, -82.766389) lies more than about 2 km outside KY; it falls inside OH",
-   "echo_lat": 38.706111,
-   "echo_lon": -82.766389,
    "echo_coords_from": "permitted_feature",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('ASHLAND STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000049 002"
+   "supersedes": "data/outfalls-plants-us.json KYP000049 002",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Catletts Creek, Ice Dam Creek, Ohio River, Solida Creek, Twin Fork); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Catletts Creek, Ice Dam Creek, Ohio River, Solida Creek, Twin Fork); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000050",
@@ -772,7 +912,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('NORTONVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000050"
+   "supersedes": "data/outfalls-plants-us.json KYP000050",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000051",
@@ -812,7 +960,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('FT KNOX STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000051"
+   "supersedes": "data/outfalls-plants-us.json KYP000051",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000054",
@@ -852,7 +1008,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('HENDERSON STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000054"
+   "supersedes": "data/outfalls-plants-us.json KYP000054",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Mock Roy Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Mock Roy Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000055",
@@ -892,7 +1056,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Providence STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000055"
+   "supersedes": "data/outfalls-plants-us.json KYP000055",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000056",
@@ -932,7 +1104,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('CARROLLTON STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000056"
+   "supersedes": "data/outfalls-plants-us.json KYP000056",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Goose Creek, Kentucky River, Lees Creek, Mill Creek, Whites Run); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Goose Creek, Kentucky River, Lees Creek, Mill Creek, Whites Run); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000057",
@@ -972,7 +1152,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000057"
+   "supersedes": "data/outfalls-plants-us.json KYP000057",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000060",
@@ -1012,7 +1200,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('MORGANFIELD STP, MORGANFILED STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000060"
+   "supersedes": "data/outfalls-plants-us.json KYP000060",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Mason Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Mason Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000061",
@@ -1054,7 +1250,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('LOUISA STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000061 001"
+   "supersedes": "data/outfalls-plants-us.json KYP000061 001",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Levisa Fork, Lick Creek, Mill Creek, Tug Fork); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Levisa Fork, Lick Creek, Mill Creek, Tug Fork); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000061",
@@ -1095,7 +1299,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('LOUISA STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000061 002"
+   "supersedes": "data/outfalls-plants-us.json KYP000061 002",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Levisa Fork, Lick Creek, Mill Creek, Tug Fork); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Levisa Fork, Lick Creek, Mill Creek, Tug Fork); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000062",
@@ -1135,7 +1347,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('CITY OF NORTONVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000062"
+   "supersedes": "data/outfalls-plants-us.json KYP000062",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'CITY OF NORTONVILLE STP' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'CITY OF NORTONVILLE STP' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000063",
@@ -1175,7 +1395,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('CITY OF LONDON STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000063"
+   "supersedes": "data/outfalls-plants-us.json KYP000063",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'CITY OF LONDON STP' in KY",
+   "no_water_reason": "no record named 'CITY OF LONDON STP' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000064",
@@ -1215,7 +1443,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('GREENVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000064"
+   "supersedes": "data/outfalls-plants-us.json KYP000064",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Caney Creek, Whiskey Run); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Caney Creek, Whiskey Run); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000065",
@@ -1255,7 +1491,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('CARLISLE CO SD #1'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000065"
+   "supersedes": "data/outfalls-plants-us.json KYP000065",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'CARLISLE CO SD #1' in KY",
+   "no_water_reason": "no record named 'CARLISLE CO SD #1' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000066",
@@ -1295,7 +1539,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('CARLISLE CO SD #1'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000066"
+   "supersedes": "data/outfalls-plants-us.json KYP000066",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'CARLISLE CO SD #1' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'CARLISLE CO SD #1' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000067",
@@ -1335,7 +1587,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Wilson Loop'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000067"
+   "supersedes": "data/outfalls-plants-us.json KYP000067",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000069",
@@ -1375,7 +1635,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Somerset STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000069"
+   "supersedes": "data/outfalls-plants-us.json KYP000069",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000070",
@@ -1416,7 +1684,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('CARROLLTON STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000070 001"
+   "supersedes": "data/outfalls-plants-us.json KYP000070 001",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Goose Creek, Kentucky River, Lees Creek, Mill Creek, Whites Run); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Goose Creek, Kentucky River, Lees Creek, Mill Creek, Whites Run); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000071",
@@ -1457,7 +1733,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('RICHMOND UTILITIES'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000071 001"
+   "supersedes": "data/outfalls-plants-us.json KYP000071 001",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: EPA's point lies on Otter Creek (9 m), not on a water named 'RICHMOND UTILITIES': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Otter Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "EPA's point lies on Otter Creek (9 m), not on a water named 'RICHMOND UTILITIES': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Otter Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000072",
@@ -1497,7 +1781,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('WEST HICKMAN STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000072"
+   "supersedes": "data/outfalls-plants-us.json KYP000072",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000073",
@@ -1537,7 +1829,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Lebanon STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000073"
+   "supersedes": "data/outfalls-plants-us.json KYP000073",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000074",
@@ -1577,7 +1877,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('BARBOURVILLE STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000074"
+   "supersedes": "data/outfalls-plants-us.json KYP000074",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Fighting Creek, Goodin Branch, Higgins Branch, Shy Mug Branch, Upper Goodin Branch); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Fighting Creek, Goodin Branch, Higgins Branch, Shy Mug Branch, Upper Goodin Branch); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000076",
@@ -1617,7 +1925,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('OHIO CO REGIONAL STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000076"
+   "supersedes": "data/outfalls-plants-us.json KYP000076",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'OHIO CO REGIONAL STP' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'OHIO CO REGIONAL STP' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000077",
@@ -1657,7 +1973,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('OHIO CO REGIONAL STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000077"
+   "supersedes": "data/outfalls-plants-us.json KYP000077",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'OHIO CO REGIONAL STP' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'OHIO CO REGIONAL STP' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000078",
@@ -1697,7 +2021,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('OHIO CO REGIONAL STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000078"
+   "supersedes": "data/outfalls-plants-us.json KYP000078",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'OHIO CO REGIONAL STP' in KY",
+   "no_water_reason": "no record named 'OHIO CO REGIONAL STP' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000079",
@@ -1737,7 +2069,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('KUTTAWA STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000079"
+   "supersedes": "data/outfalls-plants-us.json KYP000079",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Cumberland River, Cypress Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Cumberland River, Cypress Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000080",
@@ -1777,7 +2117,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Harrodsburg/Danville WWTP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000080"
+   "supersedes": "data/outfalls-plants-us.json KYP000080",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000081",
@@ -1793,8 +2141,8 @@
    "reach_id": null,
    "reach_gnis_name": null,
    "nhdplus_id": null,
-   "lat": null,
-   "lon": null,
+   "lat": 38.644,
+   "lon": 83.834,
    "coords_from": null,
    "has_limits": true,
    "limit_set_names": [
@@ -1816,13 +2164,18 @@
    "country": "US",
    "source": "fed-echo-npdes-discharge-points",
    "fetched_at": "2026-11-03T21:02:45Z",
-   "coords_problem": "EPA's point (38.644, 83.834) lies more than about 2 km outside KY; with the longitude sign flipped it would fall inside the state",
-   "echo_lat": 38.644,
-   "echo_lon": 83.834,
    "echo_coords_from": "permitted_feature",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Downing Drive'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000081 001"
+   "supersedes": "data/outfalls-plants-us.json KYP000081 001",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000082",
@@ -1862,7 +2215,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('BURNSIDE WTP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000082"
+   "supersedes": "data/outfalls-plants-us.json KYP000082",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Big South Fork Cumberland River, Cumberland River, Pitman Creek); no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Big South Fork Cumberland River, Cumberland River, Pitman Creek); no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000084",
@@ -1902,7 +2263,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000084"
+   "supersedes": "data/outfalls-plants-us.json KYP000084",
+   "water_slug": "red-river-ky",
+   "water_name": "Red River",
+   "water_kind": "river",
+   "distance_m": null,
+   "match": "name_only",
+   "water_match": "permit's receiving water: no receiving-water text; no point; the permit's only listed receiving water 'RED RIVER' (data/dischargers.json), the record of that name that reaches the permittee's town; Red River (red-river-ky, openboatlaunch), no point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000085",
@@ -1942,7 +2310,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('JUDY CREEK PUMP STATION, STANTON STP'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000085"
+   "supersedes": "data/outfalls-plants-us.json KYP000085",
+   "water_slug": "judy-creek-ky",
+   "water_name": "Judy Creek",
+   "water_kind": "stream",
+   "distance_m": 532,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'JUDY CREEK PUMP STATION and STANTON STP' by name; Judy Creek (judy-creek-ky, NHDPlus V2.1 record), 532 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000086",
@@ -1982,7 +2357,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000086"
+   "supersedes": "data/outfalls-plants-us.json KYP000086",
+   "water_slug": "east-fork-simpson-creek-ky",
+   "water_name": "East Fork Simpson Creek",
+   "water_kind": "stream",
+   "distance_m": null,
+   "match": "name_only",
+   "water_match": "permit's receiving water: no receiving-water text; no point; the permit's only listed receiving water 'EAST FORK OF SIMPSON CRK' (data/dischargers.json), the record of that name that reaches the permittee's town; East Fork Simpson Creek (east-fork-simpson-creek-ky, NHDPlus V2.1 record), no point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000087",
@@ -2022,7 +2404,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000087"
+   "supersedes": "data/outfalls-plants-us.json KYP000087",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000090",
@@ -2062,7 +2452,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('New Uhlens Branch Road'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000090"
+   "supersedes": "data/outfalls-plants-us.json KYP000090",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "no_water_reason": "no point in EPA's inventory; NHD builder: no NHD flowline or waterbody of that name in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000091",
@@ -2102,7 +2500,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000091"
+   "supersedes": "data/outfalls-plants-us.json KYP000091",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory; the permit's listed receiving waters (LITTLE SANDY RIVER / OHIO RIVER) cannot be told apart for this outfall",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory; the permit's listed receiving waters (LITTLE SANDY RIVER / OHIO RIVER) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000094",
@@ -2142,7 +2548,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000094"
+   "supersedes": "data/outfalls-plants-us.json KYP000094",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000095",
@@ -2182,7 +2596,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000095"
+   "supersedes": "data/outfalls-plants-us.json KYP000095",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000096",
@@ -2222,7 +2644,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000096"
+   "supersedes": "data/outfalls-plants-us.json KYP000096",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000097",
@@ -2260,7 +2690,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('City of Carlisle'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000097"
+   "supersedes": "data/outfalls-plants-us.json KYP000097",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no point in EPA's inventory; no record named 'City of Carlisle' in KY",
+   "no_water_reason": "no point in EPA's inventory; no record named 'City of Carlisle' in KY",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   },
   {
    "npdes_permit": "KYP000099",
@@ -2300,7 +2738,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water (none given here); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
-   "supersedes": "data/outfalls-plants-us.json KYP000099"
+   "supersedes": "data/outfalls-plants-us.json KYP000099",
+   "water_slug": "valley-creek-ky",
+   "water_name": "Valley Creek",
+   "water_kind": "stream",
+   "distance_m": 110,
+   "match": "geometry",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 3997594 (89 m): GNIS 'Valley Creek' (505940)); Valley Creek (valley-creek-ky, NHDPlus V2.1 record), 110 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
   }
  ]
 }
