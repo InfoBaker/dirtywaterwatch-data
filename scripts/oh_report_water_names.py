@@ -22,7 +22,18 @@ ROOT = Path(__file__).resolve().parent.parent
 EVENTS = ROOT / "data" / "build" / "events"
 OUT = ROOT / "research" / "oh" / "receiving-waters-missing.json"
 FEEDS = ["oh-neorsd-cso-notification-map", "oh-akron-cso-notifications", "oh-columbus-sewer-overflow",
-         "oh-bowling-green-cso-events", "oh-epa-spills-opendata", "oh-odh-beachguard"]
+         "oh-bowling-green-cso-events", "oh-clyde-cso-notification", "oh-epa-spills-opendata", "oh-odh-beachguard"]
+# waters the national list maps to another record, or lacks, that Akron's overflow sites name (its layer's notes):
+# listed so the batch builds their own records (Ohio go-live audit P2-2: the Little Cuyahoga was mapped to the
+# Cuyahoga River's record)
+AKRON_LAYER = ROOT / "data" / "raw" / "oh-akron" / "q.json"
+FORCED = {"Little Cuyahoga River": "the national list maps it to the Cuyahoga River's record; it is its own river",
+          "Ohio Canal": "named by Akron's overflow sites; no record",
+          "Camp Brook": "named by Akron's overflow sites; no record"}
+# names whose record is a particular water (the NHD pass must not take another of the same name)
+HINTS = {"grandlake": ("Grand Lake St. Marys (Auglaize and Mercer counties), the reservoir BeachGuard's beaches are on; "
+                       "not another Grand Lake"),
+         "ohiocanaltocuyahogariver": "NEORSD's wording for the Ohio Canal where it reaches the Cuyahoga River"}
 
 
 def compact(s: str) -> str:
@@ -71,7 +82,23 @@ def main(argv) -> int:
             row["spellings"] = sorted(typed[k])
         if points[k]:
             row["points"] = points[k]
+        if k in HINTS:
+            row["note"] = HINTS[k]
         rows.append(row)
+    akron = defaultdict(list)
+    if AKRON_LAYER.exists():
+        for f in json.loads(AKRON_LAYER.read_text()).get("features") or []:
+            a, g = f.get("attributes") or {}, f.get("geometry") or {}
+            m = re.search(r"receiving water for this overflow is (?:the )?(.+?)\.?\s*$", str(a.get("note") or ""), re.I)
+            if m and g.get("y") is not None:
+                akron[compact(m.group(1))].append([round(g["y"], 6), round(g["x"], 6)])
+    have_rows = {compact(r["name"]) for r in rows}
+    for name, why in FORCED.items():
+        if compact(name) in have_rows:
+            continue
+        rows.append({"name": name, "reports": 0, "permits": ["OH0023833"], "sources": ["oh-akron-cso-notifications"],
+                     "sites": len(akron.get(compact(name), [])), "points": akron.get(compact(name), [])[:5],
+                     "counties": ["Summit County"], "note": why})
     out = {"about": ("Receiving-water names in Ohio's reports (NEORSD's CSO alerts layers, Akron's overflow status "
                      "layer, Columbus's overflow events, Bowling Green's CSO events, the Ohio EPA spills that name a "
                      "waterway, and BeachGuard's beach waters) that data/receiving-waters-national.json does not hold "
