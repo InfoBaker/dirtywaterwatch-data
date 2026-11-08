@@ -54,6 +54,7 @@ def key(s: str) -> str:
 
 def main() -> int:
     sys.path.insert(0, str(ROOT / "pipeline"))
+    from ingest import tn_tdec_posted_streams as PS
     from ingest.tn_transforms import point_county
     nat = json.loads(NATIONAL.read_text())["states"].get("TN") or {}
     held: dict[str, set] = defaultdict(set)            # name key -> counties of the waters of that name
@@ -99,8 +100,23 @@ def main() -> int:
         row["reports"] += 1
         row["sources"] = sorted(set(row["sources"]) | {"tn-tdec-bacteriological-advisories"})
         row["counties"] = sorted(set(row["counties"]) | set(cs))
+        # the stream's GNIS mouth (or the posting's bridge) as the place the names pass chooses the NHD water by,
+        # and the GNIS id (final audit 2026-11-08 P2-2: "the reports give no place to choose one")
+        for c in counties:
+            m = PS.MOUTHS.get((name, c))
+            if m:
+                row.setdefault("gnis_ids", [])
+                if str(m[0]) not in row["gnis_ids"]:
+                    row["gnis_ids"].append(str(m[0]))
+                if [m[1], m[2]] not in row["points"]:
+                    row["points"].append([m[1], m[2]])
+            b = PS.BRIDGES.get((name, c))
+            if b and [b[1], b[2]] not in row["points"]:
+                row["points"].append([b[1], b[2]])
     out = sorted(rows.values(), key=lambda r: (-r["reports"], r["name"]))
     for r in out:
+        if r.get("counties"):
+            r["county"] = r["counties"][0]     # the names pass reads one county per row (COUNTY_FIELD_STATES)
         if not r["points"]:
             r.pop("points")
         if not r.get("counties"):

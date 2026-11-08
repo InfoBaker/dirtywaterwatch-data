@@ -1044,6 +1044,9 @@ COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county
 COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives points and a county field (two Gordon Creeks)
 COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
+# States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
+# (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
+REMAINDER_MERGE_STATES = {"TN"}
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
@@ -1896,6 +1899,8 @@ class Resolver:
                 slugs = kept
                 if not slugs:
                     continue
+            if state in REMAINDER_MERGE_STATES and len(slugs) > 1:
+                slugs = self.merge_remainders(slugs, lat, lon)
             if len(slugs) == 1:
                 out.append(slugs[0])
                 continue
@@ -1912,6 +1917,22 @@ class Resolver:
                 notes.append(f"'{n}' names {len(slugs)} waters in {state} ({', '.join(slugs)}); "
                              f"no point, and the discharger's towns do not pick one")
         return out, "; ".join(notes) or None, ambiguous
+
+    def merge_remainders(self, slugs: list, lat, lon) -> list:
+        """A river's remainder record (covers_part_of: the NHD record of the part the main record lacks) and its
+        main record are one river: a name both carry goes to the main record where the report's point lies within
+        NAME_MATCH_M of it, or where the report has no point; else both stay and the nearest is taken (final audit
+        2026-11-08 P2-3: cumberland-river-celina-tn and cumberland-river-tn both pass through Nashville)."""
+        parents = {x: self.waters[x].get("covers_part_of") for x in slugs}
+        out = []
+        for x in slugs:
+            p = parents.get(x)
+            if p in slugs:
+                d = self.distance_m(p, lat, lon) if lat is not None and lon is not None else 0.0
+                if d is not None and d <= NAME_MATCH_M:
+                    continue                      # the main record reaches the point: the remainder steps aside
+            out.append(x)
+        return out
 
     def distance_m(self, slug, lat, lon):
         key = (slug, round(lat, 4), round(lon, 4))
