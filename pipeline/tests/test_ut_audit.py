@@ -83,3 +83,18 @@ def test_undated_hotline_reports_take_no_layer_edit_time_and_the_newest_date_is_
     newest = max(r["started_at"] for r in recs if r["started_at"])
     assert f["latest_dated"][:10] == C.when_of({"started_at": newest}).isoformat()[:10]
     assert not f["latest_dated"].startswith("2026-11-07")
+
+
+# ---------------------------------------------------------------- P2-1: the Mats CF caution's label
+
+def test_no_utah_interval_label_says_the_code_is_unexplained():
+    from datetime import UTC, datetime
+    from ingest.generic import runner as R
+    _, block = R.load_source("ut-dwq-recreational-advisories")
+    rows = R.platform("arcgis").parse(block, (ROOT / "pipeline" / "tests" / "fixtures" / "ut" / "recreational.json").read_bytes())
+    recs, _ = R.build("ut-dwq-recreational-advisories", block, rows, "2026-11-08T01:00:00Z", (), None)
+    now = datetime(2026, 11, 8, 2, tzinfo=UTC)
+    labels = [iv["label"] for r in recs for iv in S.event_intervals(r, "UT", now)]
+    mats = [iv for r in recs if r["raw"]["_advisory_label"] == "Mats CF" for iv in S.event_intervals(r, "UT", now)]
+    assert mats and mats[0]["color"] == "yellow" and "observed by DWQ's monitoring team" in mats[0]["label"]
+    assert not [x for x in labels if "does not publish" in x]

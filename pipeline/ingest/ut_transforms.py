@@ -326,6 +326,8 @@ ADVISORY = {
 # caution only (raw.code_undecoded, the status build's code_caution): never shown as the authority's advisory
 OBSERVATION = {"MATSCF": ("DWQ's map describes \"Mats CF\" as a few harmful algae mats observed by its monitoring team, "
                           "not an advisory level: shown with the site's caution only")}
+CAUTION_LABEL = {"MATSCF": "Harmful algae mats observed by DWQ's monitoring team; not an advisory level: the site's "
+                            "caution"}
 NOT_ADVISORY = re.compile(r"^(?:LOOKSGOOD|NONE|NULL|)$")
 REC_WINDOW_BASIS = ("Utah's recreational water advisories: issued by the local health department with DWQ and shown "
                     "while DWQ's map lists them")
@@ -354,6 +356,7 @@ def ut_rec_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
         et, label = ADVISORY[level]
         if level in OBSERVATION:
             notes["code_undecoded"] = OBSERVATION[level]
+            notes["_caution_label"] = CAUTION_LABEL[level]
     elif not NOT_ADVISORY.match(level):
         # a label DWQ adds or respells: kept by its words, with the site's caution, never grey
         et = "hab_advisory" if re.search(r"HAB|MAT|ALGA|CYANO|TOXIN", level) else "beach_advisory"

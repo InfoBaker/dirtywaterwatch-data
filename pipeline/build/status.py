@@ -2555,10 +2555,15 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
                 _caution_only(iv, "citizen_caution", "provenance.citizen_report", basis, ev.get("source_url"))
     code_basis = code_undecoded(ev) if out else None
     if code_basis:
+        # raw._caution_label: the record's own words for a caution-only code the source does explain (DWQ's "Mats CF",
+        # an observation, not an advisory level; Utah go-live audit 2026-11-08 P2-1); keyed on the field
+        clab = (ev.get("raw") or {}).get("_caution_label")
         for iv in out:
             iv["code_undecoded"] = code_basis
             if iv["color"] == "red":
                 _caution_only(iv, "code_caution", "provenance.code_undecoded", code_basis, ev.get("source_url"))
+                if isinstance(clab, str) and clab.strip():
+                    iv["label"] = clab
     # the authority's own name for its level, where it differs from "advisory" (OHA's "precaution", ingest/or_transforms.py):
     # raw._interval_label replaces the rule's label on the record's advisory intervals; keyed on the field, so no other
     # feed changes (review 2026-11-08 P2-2)
