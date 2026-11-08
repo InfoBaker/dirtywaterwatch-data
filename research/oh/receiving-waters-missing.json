@@ -6,11 +6,12 @@
   "oh-akron-cso-notifications": "0 records, fetched 2026-11-08",
   "oh-columbus-sewer-overflow": "8542 records, fetched 2026-11-08",
   "oh-bowling-green-cso-events": "37 records, fetched 2026-11-08",
+  "oh-clyde-cso-notification": "9 records, fetched 2026-11-08",
   "oh-epa-spills-opendata": "1121 records, fetched 2026-11-08",
   "oh-odh-beachguard": "5 records, fetched 2026-11-08"
  },
- "records_naming_a_water": 8181,
- "waters": 50,
+ "records_naming_a_water": 8190,
+ "waters": 53,
  "reports": 548,
  "rows": [
   {
@@ -152,7 +153,8 @@
      40.541672,
      -84.421951
     ]
-   ]
+   ],
+   "note": "Grand Lake St. Marys (Auglaize and Mercer counties), the reservoir BeachGuard's beaches are on; not another Grand Lake"
   },
   {
    "name": "Dry Run",
@@ -735,7 +737,8 @@
      41.430979,
      -81.646834
     ]
-   ]
+   ],
+   "note": "NEORSD's wording for the Ohio Canal where it reaches the Cuyahoga River"
   },
   {
    "name": "Oldtown Creek",
@@ -923,6 +926,101 @@
      -81.434933
     ]
    ]
+  },
+  {
+   "name": "Little Cuyahoga River",
+   "reports": 0,
+   "permits": [
+    "OH0023833"
+   ],
+   "sources": [
+    "oh-akron-cso-notifications"
+   ],
+   "sites": 16,
+   "points": [
+    [
+     41.112778,
+     -81.5275
+    ],
+    [
+     41.059444,
+     -81.474722
+    ],
+    [
+     41.063889,
+     -81.481389
+    ],
+    [
+     41.065,
+     -81.484722
+    ],
+    [
+     41.075,
+     -81.484167
+    ]
+   ],
+   "counties": [
+    "Summit County"
+   ],
+   "note": "the national list maps it to the Cuyahoga River's record; it is its own river"
+  },
+  {
+   "name": "Ohio Canal",
+   "reports": 0,
+   "permits": [
+    "OH0023833"
+   ],
+   "sources": [
+    "oh-akron-cso-notifications"
+   ],
+   "sites": 6,
+   "points": [
+    [
+     41.08361,
+     -81.520278
+    ],
+    [
+     41.079167,
+     -81.523056
+    ],
+    [
+     41.079167,
+     -81.523056
+    ],
+    [
+     41.086389,
+     -81.519167
+    ],
+    [
+     41.086389,
+     -81.519167
+    ]
+   ],
+   "counties": [
+    "Summit County"
+   ],
+   "note": "named by Akron's overflow sites; no record"
+  },
+  {
+   "name": "Camp Brook",
+   "reports": 0,
+   "permits": [
+    "OH0023833"
+   ],
+   "sources": [
+    "oh-akron-cso-notifications"
+   ],
+   "sites": 1,
+   "points": [
+    [
+     41.092917,
+     -81.483472
+    ]
+   ],
+   "counties": [
+    "Summit County"
+   ],
+   "note": "named by Akron's overflow sites; no record"
   }
  ]
 }

@@ -41,6 +41,20 @@
     "x": -82.9432804334947,
     "y": 39.95633413196791
    }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 25,
+    "DISCHARGE": 1.0,
+    "OVERFLOW_TYPE": "CSO/SSO",
+    "LABEL": "CSO/SSO 1",
+    "DISCHARGELOCATION": "Scioto River at Greenlawn dam",
+    "NODEID": "0006C0524"
+   },
+   "geometry": {
+    "x": -83.00087275551135,
+    "y": 39.94168394870394
+   }
   }
  ]
 }

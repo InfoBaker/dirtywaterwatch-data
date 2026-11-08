@@ -1112,6 +1112,22 @@ def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, s
                   + ("the report gives" if field else "of the report's point"))
 
 
+# Words that make a different water of a named one: "Little Cuyahoga River", "Middle Fork ...", "West Branch Huron
+# River", "East Fork of the Little Miami River" (Ohio go-live audit P2-2). A name found in a report's text only right
+# after such a qualifier (and whose own name does not carry it) is not that water.
+QUALIFIER_BEFORE = re.compile(r"(?:\b(?:little|middle)|\b(?:east|west|north|south|middle)\s+(?:branch|fork)"
+                              r"(?:\s+of(?:\s+the)?)?)\s+$")
+
+
+def qualified_only(name: str, text: str) -> bool:
+    """Whether every occurrence of the normalised name in the normalised text follows a qualifier (QUALIFIER_BEFORE).
+    A record whose own name holds the qualifier matches as the longer name and is kept by the step before."""
+    if not name:
+        return False
+    hits = [m.start() for m in re.finditer(rf"(?<= ){re.escape(name)}(?= )", text)]
+    return bool(hits) and all(QUALIFIER_BEFORE.search(text[:i]) for i in hits)
+
+
 NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so it is listed with its county and placed "
                    "on no water (never on its permit's outfalls' water)")
 
@@ -1838,6 +1854,9 @@ class Resolver:
             found[norm_name(text)] = self.stems[(state, norm_name(text))]
         # drop names inside longer matched names ("mill river" in "north branch mill river")
         names = [n for n in found if not any(n != m and f" {n} " in f" {m} " for m in found)]
+        # a qualified water is not its plain-named namesake: "little cuyahoga river" is not "cuyahoga river", nor
+        # "west branch huron river" "huron river", when the qualified one has no record (Ohio go-live audit P2-2)
+        names = [n for n in names if not qualified_only(n, t)]
         out, notes, ambiguous = [], [], False
         for n in sorted(names):
             slugs = found[n]
@@ -3225,8 +3244,19 @@ def where(iv: dict) -> str:
     return PLACEMENT_TEXT.get(iv.get("placement") or "", "")
 
 
-def start_txt(iv: dict) -> str:
-    t = parse_time(iv.get("started_at"))
+def start_txt(iv: dict, ev: dict | None = None) -> str:
+    """The start as the short reason prints it: "Sep 15 14:05", or the day only ("Sep 15") for a report dated to the
+    day (time_precision day or coarser, or a bare date), so no time of day is invented (Ohio go-live audit P2-4)."""
+    v = iv.get("started_at")
+    prec = (ev or {}).get("time_precision")
+    if isinstance(v, str) and (prec in ("day", "month", "year") or re.fullmatch(r"\d{4}-\d{2}-\d{2}", v.strip())):
+        try:
+            d = datetime.fromisoformat(v.strip()[:10])
+        except ValueError:
+            d = None
+        if d:
+            return d.strftime("%b %-d")
+    t = parse_time(v)
     return t.astimezone(LOCAL).strftime("%b %-d %H:%M") if t else "an unknown time"
 
 
@@ -3257,9 +3287,9 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
     if rule == "ongoing":
         return f"{et} ongoing{who}{at}"
     if rule == "unresolved":
-        return f"{et} of {start_txt(iv)}: unresolved, no end reported{who}{at}"
+        return f"{et} of {start_txt(iv, ev)}: unresolved, no end reported{who}{at}"
     if rule == "end_never_reported":
-        return f"{et} of {start_txt(iv)}: unresolved, no end reported (off the map){who}"
+        return f"{et} of {start_txt(iv, ev)}: unresolved, no end reported (off the map){who}"
     if rule == "not_reconfirmed":
         c = parse_time(iv.get("confirmed"))
         return f"{et}: last confirmed {c.astimezone(LOCAL).strftime('%b %-d') if c else 'unknown'}; not re-confirmed{who}"

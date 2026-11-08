@@ -28,8 +28,8 @@ Records
     suffixes are open CSO outfalls of that permit in EPA's inventory) and "4PF00001006" is outfall 006 of OH0024741
     (Southerly; its only CSO outfall in EPA's inventory). raw.permit_basis says so. SSO rows carry no station code:
     no permit, outfall_id "SSO <discharge id>".
-  - Place: the site's point from layer 0 by discharge id and type (coord_source source; 46 of the 50 sites with events
-    have one), else EPA's permitted-feature point for the paired outfall (coord_source outfall_layer; never a plant's
+  - Place: the site's point from layer 0 by discharge id and type, a site typed "CSO/SSO" serving both (coord_source
+    source; all 50 sites with events have one), else EPA's permitted-feature point for the paired outfall (coord_source outfall_layer; never a plant's
     point); waterbody_text the water the location text starts with ("Scioto River at ...", "Alum Creek at ..."), else
     none (a ditch or a manhole is no named water). A site with neither is kept and placed nowhere.
   - advice_text the city's own words in its overflow map's description, quoted; the site's notes stay in raw.
@@ -169,9 +169,14 @@ def run(points: list[dict], events: list[dict], now: str, epa: dict | None = Non
     where = {}
     for p in points:
         try:
-            where[(int(p["DISCHARGE"]), str(p["OVERFLOW_TYPE"]).upper())] = p
+            num = int(p["DISCHARGE"])
         except (TypeError, ValueError, KeyError):
             continue
+        # a site the city types "CSO/SSO" (CSO/SSO 1 at the Greenlawn dam, CSO/SSO 6 north of S.R. 104) is the
+        # point of both its CSO and its SSO rows (Ohio go-live audit P2-3: 705 SSO rows had no point)
+        for typ in str(p.get("OVERFLOW_TYPE") or "").upper().split("/"):
+            if typ.strip():
+                where.setdefault((num, typ.strip()), p)
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for e in events:
         groups[(str(e.get("TYPE") or "").upper(), e.get("DISCHARGE_ID"), e.get("INSPECTION_DATE"))].append(e)
