@@ -234,7 +234,11 @@ def test_hab_layer_personal_fields_never_read():
     text = json.dumps(list(recs.values()))
     for s in PERSONAL:
         assert s not in text, s
-    assert "[house number removed]" in recs["905"]["waterbody_text"]
+    # a private residence's water text is never published, scrubbed or not (final audit 2026-11-08 P2-4)
+    p = recs["905"]
+    assert p["waterbody_text"] is None and "Example Blvd" not in json.dumps(p)
+    assert p["raw"]["_water_text_withheld"].startswith("a private pond") and p["water_slugs"] == []
+    assert recs["901"]["waterbody_text"] == "Example Quarry Lake"          # a public water keeps its name
     _, block = R.load_source("tn-tdec-hab-advisory-status")
     assert not {"first_name", "last_name", "phone_number", "e_mail_address", "comments"} & set(block["safe_fields"])
 
@@ -327,7 +331,7 @@ def test_a_posting_is_a_marker_on_its_named_stream_never_the_whole_stream():
     assert "stretch" not in first and S.names_its_water(first)
     assert S.advisory_on_river(first, {"kind": "river"})        # a stream with no stretch: a point there
     cum = next(x for x in recs if x["waterbody_text"] == "Cumberland River")
-    assert cum["lat"] is None and "name and county only" in cum["raw"]["coords_basis"]
+    assert cum["lat"] is not None and "National Bridge Inventory" in cum["raw"]["coords_basis"]
     assert next(x for x in recs if x["raw"]["stream_as_listed"].startswith("Cypress"))["waterbody_text"] == "Cypress Creek"
     assert "TN" in S.COUNTY_FIELD_STATES
 
@@ -341,3 +345,82 @@ def test_missing_waters_are_resolved_by_county():
                          ("Richland Creek", "Davidson County"), ("Lake Watauga (Centennial Park)", "Davidson County")):
         assert (name, (county,)) in rows, name
     assert not any(r["name"] == "Watauga Lake" for r in doc["rows"])
+
+
+# ---------------------------------------------------------------- final audit 2026-11-08
+
+TN_WATERS = json.loads((FIX / "tn_same_named_waters.json").read_text())
+
+
+def tn_resolver(monkeypatch):
+    import copy
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"TN"})
+    return S.Resolver(copy.deepcopy(TN_WATERS), [], placement_rules={})
+
+
+def test_every_posting_is_placed_by_its_name_only_never_by_its_mouth_point(monkeypatch):
+    """Final audit P1-1: Beaver Creek's posting was tied by its mouth point to Boone Lake, Turkey Creek's to Cherokee
+    Lake, both red as TDEC's advisory; 13 postings sat on the water downstream."""
+    recs, _ = posted()
+    assert all(r["raw"]["_placement"] == "named_water_only" for r in recs)
+    res = tn_resolver(monkeypatch)
+    placed = {r["raw"]["stream_as_listed"]: res.resolve(r) for r in recs}
+    for stream, pl in placed.items():
+        assert "boone-lake-tn" not in pl["water_slugs"] and "cherokee-lake-tn" not in pl["water_slugs"], stream
+        for slug in pl["water_slugs"]:                  # never a water whose name differs from the posting's
+            name = TN_WATERS[slug]["name"]
+            rec = next(r for r in recs if r["raw"]["stream_as_listed"] == stream)
+            assert name.lower() in rec["waterbody_text"].lower(), (stream, slug)
+    # as merged (no flag), the same posting landed on Boone Lake by its point: the test reproduces the failure
+    beaver = dict(next(r for r in recs if r["waterbody_text"] == "Beaver Creek"))
+    beaver["raw"] = {k: v for k, v in beaver["raw"].items() if k != "_placement"}
+    assert "boone-lake-tn" in res.resolve(beaver)["water_slugs"]
+    # every posting has a point for its marker, East Fork Third Creek's (GNIS East Third Creek) among them
+    assert all(r["lat"] is not None and r["lon"] is not None for r in recs)
+
+
+def test_the_cumberland_posting_has_its_bridge_point_and_lands_on_the_main_record(monkeypatch):
+    """Final audit P1-1 and P2-3: the Cumberland River at Nashville had no point and two overlapping records, so it
+    was unplaced with no marker."""
+    recs, _ = posted()
+    cum = next(r for r in recs if r["waterbody_text"] == "Cumberland River")
+    assert (cum["lat"], cum["lon"]) == (36.16687, -86.77637) and cum["coord_source"] == "hand"
+    assert "Woodland Street Bridge" in cum["raw"]["coords_basis"] and "19M32440001" in cum["raw"]["coords_basis"]
+    pl = tn_resolver(monkeypatch).resolve(cum)
+    assert pl["water_slugs"] == ["cumberland-river-tn"]
+    from build import status as S
+    res = tn_resolver(monkeypatch)
+    assert res.merge_remainders(["cumberland-river-tn", "cumberland-river-celina-tn"], 36.16687, -86.77637) == \
+        ["cumberland-river-tn"]
+    assert "TX" not in S.REMAINDER_MERGE_STATES          # every other state is unchanged
+
+
+def test_east_fork_third_creek_has_a_marker():
+    recs, _ = posted()
+    ef = next(r for r in recs if r["raw"]["stream_as_listed"] == "East Fork of Third Creek")
+    assert (ef["lat"], ef["lon"]) == (35.9551, -83.948) and "1283411" in ef["raw"]["coords_basis"]
+
+
+def test_posted_streams_on_the_missing_list_carry_county_gnis_id_and_point():
+    """Final audit P2-1 (Goose Creek in Knox County marked resolved against Hartsville's in Trousdale) and P2-2 (the
+    names pass had no place to choose the NHD water by): each posted row gives its county, GNIS id and mouth point."""
+    doc = json.loads((Path(__file__).resolve().parents[2] / "research" / "tn" / "receiving-waters-missing.json").read_text())
+    posted_rows = [r for r in doc["rows"] if "tn-tdec-bacteriological-advisories" in r["sources"]]
+    goose = [r for r in posted_rows if r["name"] == "Goose Creek"]
+    assert goose and goose[0]["county"] == "Knox County" and goose[0]["gnis_ids"] == ["1285668"]
+    assert not any(x["name"] == "Goose Creek" for x in doc["resolved"])
+    for r in posted_rows:
+        assert r["county"] and r["gnis_ids"] and r["points"], r["name"]
+    names = {r["name"] for r in posted_rows}
+    assert {"Beaver Creek", "Browns Creek", "Citico Creek", "Cypress Creek", "Dry Creek", "East Fork Third Creek",
+            "First Creek", "McCrory Creek", "Richland Creek", "Second Creek", "Sinking Creek", "Turkey Creek",
+            "Wilson Branch"} <= names
+
+
+def test_the_public_sample_record_carries_no_house_number():
+    """Final audit P2-5: the research's sample record put '201 McArthur Dr' into the public checklist."""
+    root = Path(__file__).resolve().parents[2]
+    for rel in ("docs/source-checklist.json", "research/tn/sources.json"):
+        text = (root / rel).read_text()
+        assert "201 McArthur" not in text, rel

@@ -21,7 +21,7 @@ level: "state"
 #   host answers reads the table whole.
 # No receiving water, no coordinates, no time of day, no row id; CSO discharges (Nashville, Chattanooga, Clarksville)
 #   are permitted and never appear. The per-event PDF (TDEC Document Viewer, SewerOF) is the copy of record.
-cadence: "rows appear about five days after the event began (newest event 2026-10-29 when read on 2026-11-03)"
+cadence: "24 hours (read each run; rows appear about five days after the event began: newest event 2026-10-29 when read on 2026-11-03)"
 license: "No licence; the page's disclaimer, quoted: \"This table is provided for informational purposes only and should not be used to determine compliance.\""
 attribution: "Tennessee Department of Environment and Conservation, Division of Water Resources"
 enabled: true

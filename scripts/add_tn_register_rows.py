@@ -205,7 +205,8 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             noun="Report to the state", sources=["tn-tdec-events-report", "tn-law-0400-40-05-07"],
             note=(f"{name} reports each release that could threaten health or the environment to TDEC within 24 hours "
                   "and in writing within five days through MyTDEC Forms; TDEC publishes the report in its Events Report "
-                  "about five days after the event, read by the tn-tdec-events-report feed." + private))))
+                  "about five days after the event, read by the tn-tdec-events-report feed, whose host has refused this "
+                  "site's client since 2026-11-07 (the tn-tdec-events-report row)." + private))))
         own = OWN_NOTICE.get(oid)
         if own:
             rows.append(finish(base(id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit,
