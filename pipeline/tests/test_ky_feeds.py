@@ -367,3 +367,58 @@ def test_msd01_rationale_says_its_own_age_out():
 
 def test_msd_outfalls_ignore_the_kentucky_corrections_file():
     assert len(K.msd_outfalls()) == 121
+
+
+# ---------------------------------------------------------------- the HAB Viewer's back-end failure (2026-11-08)
+
+class _Resp:
+    def __init__(self, body):
+        self.content = json.dumps(body).encode()
+        self.headers = {"content-type": "application/json"}
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return json.loads(self.content)
+
+
+class _Sess:
+    """Answers the layer's query with the server's error first, then the saved page; the layer's description after."""
+    def __init__(self, errors):
+        self.errors, self.calls = errors, 0
+
+    def get(self, url, params=None, timeout=None):
+        if url.endswith("/query"):
+            self.calls += 1
+            if self.calls <= self.errors:
+                return _Resp({"error": {"code": 400, "message": "Failed to execute query.", "details": []}})
+            return _Resp(json.loads((FIX / "ky_dow_hab.json").read_text()))
+        return _Resp({"name": "Observation Points"})
+
+
+def test_the_hab_viewers_query_error_is_asked_again_and_other_layers_are_unchanged(monkeypatch):
+    """Refresh run 42440292355: the server answered 'Failed to execute query.' (400) to a query it answered with all
+    five rows minutes later; the block asks again, other ArcGIS blocks fail at once as before."""
+    from ingest.generic import arcgis, runner
+    monkeypatch.setattr(arcgis.time, "sleep", lambda s: None)
+    _, block = runner.load_source("ky-dow-hab-viewer")
+    assert block["query_retries"] == 3 and not runner.validate_block(block)
+    sess = _Sess(errors=2)
+    rows = arcgis.parse(block, arcgis.fetch(block, sess).content)
+    assert sess.calls == 3 and len(rows) == 5
+    _, recs = None, runner.build("ky-dow-hab-viewer", block, rows, "2026-11-08T04:00:00Z", [])[0]
+    assert len(recs) == 1 and recs[0]["waterbody_text"] == "Old Springfield Reservoir"
+    other = {k: v for k, v in block.items() if k not in ("query_retries", "retry_wait_s")}
+    try:
+        arcgis.fetch(other, _Sess(errors=1))
+    except RuntimeError as e:
+        assert "Failed to execute query" in str(e)
+    else:
+        raise AssertionError("a block without query_retries fails at once")
+    try:
+        arcgis.fetch(block, _Sess(errors=9))
+    except RuntimeError as e:
+        assert "Failed to execute query" in str(e)
+    else:
+        raise AssertionError("a layer that keeps failing still fails the fetch")

@@ -43,6 +43,10 @@ fetch:
   order_by: "OBJECTID"
   metadata: true
   geometry: true
+  # the server answered "Failed to execute query." (code 400) to the refresh of 2026-11-08 03:59Z and the same query
+  # minutes later and since with all five rows: a back-end failure of the moment, not a rejected parameter; ask again
+  query_retries: 3
+  retry_wait_s: 30
   time_zone: "America/New_York"
   bounds: [-89.6, 36.45, -81.9, 39.2]      # Kentucky; a point outside is not used (raw._coords_rejected)
   safe_fields: [OBJECTID, HABSTART, HABEND, HABSTATUS, HABNAME, HABSTATDES, HABYEARS, _x, _y]
