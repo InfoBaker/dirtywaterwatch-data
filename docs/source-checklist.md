@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1378 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1388 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -41,7 +41,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | hi | 3 | 0 | 6 | 1 | 0 | 10 |
 | al | 5 | 0 | 6 | 2 | 0 | 13 |
 | tx | 4 | 0 | 7 | 1 | 0 | 12 |
-| **all** | **486** | **228** | **400** | **195** | **69** | **1378** |
+| ut | 4 | 0 | 3 | 2 | 1 | 10 |
+| **all** | **490** | **228** | **403** | **197** | **70** | **1388** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1575,3 +1576,18 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `tx-tceq-ww-outfalls` | TCEQ Wastewater Outfalls map service | watch | search_only | outfalls | State outfall points to compare with ICIS. |
 | `tx-watershed-groups` | Galveston Bay Foundation, Bayou City Waterkeeper, Texas Stream Team | watch | search_only | monitoring | Possible bacteria context. |
 | `tx-epa-sobe` | EPA SOBE (eRule) extract, Texas rows | rejected | fetched | events | Too sparse; TCEQ dataset is the feed. |
+
+## ut: Utah (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ut-deq-environmental-incidents` | Utah DEQ Environmental Incidents (DERR spill hotline reports) ArcGIS feature service | used | fetched | events | Read through the generic ArcGIS block (fetch block in its source file) with ingest/ut_transforms.py: the sewage rows picked by a rules-only title filter (377 of 8,980 on 2026-11-07), dated to the day of discovery in Mountain time, the public's reports marked; summaries, responsible parties and addresses never requested. |
+| `ut-dwq-recreational-advisories` | Utah DWQ Recreational Waters Map (HAB and E. coli advisories) AutoMap_Source_Data feature service | used | fetched | advisories | Read through the generic ArcGIS block (fetch block in its source file): algal bloom and E. coli advisories as separate categories, each while the map shows it; 'Looks Good' is no record (84 advisories at 167 sites on 2026-11-07). |
+| `ut-epa-sobe` | EPA ECHO SOBE (Utah rows) | used | fetched | events | Read by the national eRule module (echo-sewer-overflow) with Utah in its states since 2026-11-07: one Utah report in the 2026-11-04 extract (Timpanogos, 2026-08-17), its longitude's missing minus sign repaired. |
+| `ut-law-r317-801` | Utah Admin. Code R317-801 Utah Sewer Management Program (USMP): SSO classes and reporting | used | fetched | law | Fetched: Class 1 SSO oral within 24 hours, written in five calendar days; Class 2 annually; no public notice. |
+| `ut-nps-zion-cyanobacteria` | Zion National Park toxic cyanobacteria page | watch | search_only | advisories | Already folded into the DWQ layer (permanent advisory). |
+| `ut-slco-jordan-river-algae` | Salt Lake County "Algae Blooms - Jordan River Watershed" web app | watch | search_only | advisories | Found in ArcGIS search; not inspected. |
+| `ut-usu-water-watch` | Utah State University Extension recreational water monitoring map / Utah Water Watch | watch | search_only | monitoring | Volunteer monitoring partner named by DWQ; not fetched. |
+| `ut-dwq-hab-2017` | Utah DWQ Harmful_Algal_Bloom feature service (Utah Lake 2017) | rejected | fetched | monitoring | Static 2017 Utah Lake layer (last edit 2017-07-27). |
+| `ut-swim-guide` | Swim Guide affiliates in Utah | rejected | search_only | monitoring | None found (search only). |
+| `ut-deq-environmental-incidents-search` | Utah Environmental Incidents Database search site | unreachable | fetched | events | TLS certificate expired (curl) and HTTP 503 (WebFetch) on 2026-11-03; search results capped at 500 per the user guide. The ArcGIS layer replaces it. |
