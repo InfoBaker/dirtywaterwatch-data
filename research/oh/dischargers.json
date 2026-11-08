@@ -735,14 +735,14 @@
   "water_slugs": [],
   "outfall_count": 30,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 30 open, 4 closed",
-  "notification_channel": "Sewer Overflow FAQs page with overflow map link (HTTP 403 to curl): https://www.columbus.gov/Services/Public-Utilities/About-Public-Utilities/The-Division-of-Sewage-Drainage/Wastewater-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs",
-  "notification_feed_machine_readable": false,
+  "notification_channel": "Sewer Overflow FAQs page (answered 200 on 2026-11-08 at its new address) with an ArcGIS overflow dashboard of every recorded CSO and SSO by discharge point, date and volume: https://www.columbus.gov/Services/Columbus-Water-Power/About-Columbus-Water-Power/The-Division-of-Water-Reclamation/WW-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs ; dashboard https://columbus.maps.arcgis.com/apps/dashboards/24f57525213544e7b1ed6da19baf36a1",
+  "notification_feed_machine_readable": true,
   "towns": [
    "Columbus"
   ],
   "notes": "",
-  "verified": "search_only",
-  "checked": "2026-11-03"
+  "verified": "fetched",
+  "checked": "2026-11-08"
  },
  {
   "id": "oh-southerly-wastewater-treatment-plant-oh0024741",
@@ -1842,21 +1842,21 @@
   "checked": "2026-11-03"
  },
  {
-  "id": "oh-clyde-oh0024868",
+  "id": "oh-clyde-oh0024686",
   "name": "Clyde",
   "state": "OH",
   "kind": "cso",
-  "npdes_permit": "OH0024868",
+  "npdes_permit": "OH0024686",
   "receiving_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
-  "notification_channel": "CSO Notification System https://cso.clydeohio.org/ (map; endpoint not traced)",
-  "notification_feed_machine_readable": false,
+  "notification_channel": "CSO Notification System https://cso.clydeohio.org/ (a status map) and yearly CSO report pages, a table of each overflow's start, end, rainfall and volume since 2017: https://cso.clydeohio.org/templates/cso-report.php?year=2026",
+  "notification_feed_machine_readable": true,
   "towns": [],
-  "notes": "",
+  "notes": "Permit corrected to OH0024686 (EPA's CLYDE WWTP; the research had the digits transposed).",
   "verified": "fetched",
-  "checked": "2026-11-03"
+  "checked": "2026-11-08"
  },
  {
   "id": "oh-defiance-oh0024889",

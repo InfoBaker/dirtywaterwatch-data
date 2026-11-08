@@ -1,0 +1,193 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "objectid": 7840,
+    "casenumber": "2309EPA0001565",
+    "reportedproduct": "SEWAGE HUMAN                                                               ",
+    "reportedamount": 0.0,
+    "reporteduom": "NULL",
+    "recovamount": null,
+    "recovunit": null,
+    "spillmonth": "September   ",
+    "spilldom": 6,
+    "spillyear": 2023,
+    "spillmonthnum": 9,
+    "spilldoy": 249,
+    "county": "Franklin                 ",
+    "reporteddate": 1694008800000,
+    "locatedxy": "Y",
+    "latitude": 39.984577,
+    "longitude": -82.937936,
+    "oepadist": "CDO ",
+    "city_twn": "COLUMBUS                                               ",
+    "waterway": "25 - Alum Creek                                        "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 57,
+    "casenumber": "2610EPA0002036",
+    "reportedproduct": "SEWAGE SLUDGE / BIOSOLIDS                                                  ",
+    "reportedamount": 550000.0,
+    "reporteduom": "GAL ",
+    "recovamount": null,
+    "recovunit": null,
+    "spillmonth": "October     ",
+    "spilldom": 30,
+    "spillyear": 2026,
+    "spillmonthnum": 10,
+    "spilldoy": 303,
+    "county": "Fairfield                ",
+    "reporteddate": 1793351040000,
+    "locatedxy": "Y",
+    "latitude": 39.74137823,
+    "longitude": -82.66264812,
+    "oepadist": "CDO ",
+    "city_twn": "LANCASTER                                              ",
+    "waterway": "NULL                                                   "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 1315,
+    "casenumber": "2605EPA0000942",
+    "reportedproduct": "SEWAGE SLUDGE / BIOSOLIDS                                                  ",
+    "reportedamount": 0.0,
+    "reporteduom": "NULL",
+    "recovamount": null,
+    "recovunit": null,
+    "spillmonth": "May         ",
+    "spilldom": 30,
+    "spillyear": 2026,
+    "spillmonthnum": 5,
+    "spilldoy": 150,
+    "county": "Harrison                 ",
+    "reporteddate": 1780163100000,
+    "locatedxy": "Y",
+    "latitude": 40.37048566,
+    "longitude": -81.00444985,
+    "oepadist": "SEDO",
+    "city_twn": "JEWETT                                                 ",
+    "waterway": "99 - UNNAMED                                           "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 12974,
+    "casenumber": "2106EPA0000944",
+    "reportedproduct": "SEWAGE HUMAN                                                               ",
+    "reportedamount": 50.0,
+    "reporteduom": "GAL ",
+    "recovamount": null,
+    "recovunit": null,
+    "spillmonth": "NULL        ",
+    "spilldom": 0,
+    "spillyear": 2021,
+    "spillmonthnum": 0,
+    "spilldoy": 0,
+    "county": "NULL                     ",
+    "reporteddate": 1609891200000,
+    "locatedxy": "Y",
+    "latitude": 41.69794365,
+    "longitude": -80.79612481,
+    "oepadist": "NEDO",
+    "city_twn": "4/SAYBROOK TWP                                         ",
+    "waterway": "NULL                                                   "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 5757,
+    "casenumber": "2407EPA0001295",
+    "reportedproduct": "SEWAGE SLUDGE / BIOSOLIDS                                                  ",
+    "reportedamount": 0.0,
+    "reporteduom": "NULL",
+    "recovamount": 5000.0,
+    "recovunit": "LBS ",
+    "spillmonth": "July        ",
+    "spilldom": 29,
+    "spillyear": 2024,
+    "spillmonthnum": 7,
+    "spilldoy": 211,
+    "county": "Jackson                  ",
+    "reporteddate": 1722246247027,
+    "locatedxy": "Y",
+    "latitude": 39.1354246,
+    "longitude": -82.52277428,
+    "oepadist": "SEDO",
+    "city_twn": "WELLSTON                                               ",
+    "waterway": "99 - UNNAMED                                           "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 5759,
+    "casenumber": "2407EPA0001295",
+    "reportedproduct": "SEWAGE SLUDGE / BIOSOLIDS                                                  ",
+    "reportedamount": 0.0,
+    "reporteduom": "NULL",
+    "recovamount": 5.0,
+    "recovunit": "GAL ",
+    "spillmonth": "July        ",
+    "spilldom": 29,
+    "spillyear": 2024,
+    "spillmonthnum": 7,
+    "spilldoy": 211,
+    "county": "Jackson                  ",
+    "reporteddate": 1722246247027,
+    "locatedxy": "Y",
+    "latitude": 39.1354246,
+    "longitude": -82.52277428,
+    "oepadist": "SEDO",
+    "city_twn": "WELLSTON                                               ",
+    "waterway": "99 - UNNAMED                                           "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 339,
+    "casenumber": "2609EPA0001779",
+    "reportedproduct": "SEWAGE HUMAN                                                               ",
+    "reportedamount": 0.0,
+    "reporteduom": "NULL",
+    "recovamount": null,
+    "recovunit": null,
+    "spillmonth": "September   ",
+    "spilldom": 22,
+    "spillyear": 2026,
+    "spillmonthnum": 9,
+    "spilldoy": 265,
+    "county": "Lucas                    ",
+    "reporteddate": 1790035200000,
+    "locatedxy": "Y",
+    "latitude": 41.72997014,
+    "longitude": -83.46407594,
+    "oepadist": "NWDO",
+    "city_twn": "TOLEDO                                                 ",
+    "waterway": "NULL                                                   "
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 753,
+    "casenumber": "2608EPA0001434",
+    "reportedproduct": "WASTE WATER                                                                ",
+    "reportedamount": 10.0,
+    "reporteduom": "GAL ",
+    "recovamount": null,
+    "recovunit": null,
+    "spilldom": 6,
+    "spillmonthnum": 8,
+    "spillyear": 2026,
+    "county": "Hamilton                 ",
+    "reporteddate": 1786043280000,
+    "latitude": 39.179244,
+    "longitude": -84.50857934,
+    "oepadist": "SWDO",
+    "city_twn": "CINCINNATI                                             ",
+    "waterway": "31 - Mill Creek                                        "
+   }
+  }
+ ]
+}

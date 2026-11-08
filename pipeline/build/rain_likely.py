@@ -33,7 +33,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import UTC, datetime, timedelta
 
-from common import BUILD_DIR, DATA_DIR, load_outfall_registry, read_json
+from common import BUILD_DIR, DATA_DIR, load_outfall_registry, read_json, system_wide_advisory
 
 RULE = "rain_likely"
 # the site default where the state publishes no rain trigger of its own (owner, 2026-11-03: no other operator's
@@ -55,7 +55,8 @@ LABEL = "Discharge likely: heavy rain, no report received"
 TRIGGER_BASES = ("operator", "state", "default")
 LABEL_POSSIBLE = "Discharge possible: heavy rain, no report received"
 LABELS = {"operator": LABEL, "state": LABEL, "default": LABEL_POSSIBLE}
-BASIS_OF_KIND = {"operator_history": "operator", "shared_site": "operator", "state": "state", "site_default": "default"}
+BASIS_OF_KIND = {"operator_history": "operator", "shared_site": "operator", "state": "state", "site_default": "default",
+                 "operator_rule": "operator"}
 SOURCE_ID = "noaa-mrms-qpe-imageserver"
 QPF_SOURCE_ID = "nws-api-gridpoint-qpf"
 RAINFALL_SOURCE = "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total"
@@ -184,7 +185,30 @@ def discharger_index() -> dict[str, dict]:
     return out
 
 
-def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict) -> dict:
+def operator_rule(permit: str, rules: dict, when: datetime | None = None) -> dict | None:
+    """The operator's own published rain trigger for this permit (rules.json rain_likely.fallback.by_permit: inches,
+    tail_hours, months, basis, source; Northern Kentucky's SD1, wave 4), when it applies at `when` (its months, the
+    season the operator alerts in; any time when no months are given or `when` is None); None otherwise."""
+    r = ((((rules or {}).get(RULE) or {}).get("fallback") or {}).get("by_permit") or {}).get(permit)
+    if not r or r.get("inches") is None:
+        return None
+    if when is not None and r.get("months") and not in_season(r, when):
+        return None
+    return r
+
+
+def in_season(rule: dict, when: datetime) -> bool:
+    """Whether `when` falls in the operator rule's months, read in the rule's own zone (time_zone; the outfalls' clock),
+    never in UTC: 22:00 on 31 October in Kentucky is still October (review 2026-11-08 P2-3)."""
+    from zoneinfo import ZoneInfo
+    if not rule.get("months"):
+        return True
+    t = when if when.tzinfo else when.replace(tzinfo=UTC)
+    return t.astimezone(ZoneInfo(rule.get("time_zone") or "America/New_York")).month in rule["months"]
+
+
+def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict, when: datetime | None = None,
+                  operator: bool = True) -> dict:
     """The permittee's own threshold from its reporting history (rain-thresholds.json basis "history"), else the
     published rule for its state (rules.json rain_likely.fallback.by_state), else the site default; the published
     rule is read from rules.json on every path, so a row of rain-thresholds.json built before a state's rule was
@@ -192,6 +216,14 @@ def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict)
     site_default. trigger_basis: operator, state or default (TRIGGER_BASES); a state's entry that applies this site's
     default amount rather than a trigger of its own says so with "trigger_basis": "default" (Maryland, the District)."""
     row = ((thresholds or {}).get("permits") or {}).get(permit) or {}
+    own = operator_rule(permit, rules, when) if operator else None
+    if own is not None:   # the operator's own published trigger (fallback.by_permit), in its season; it comes before
+        # a history row too, so a rule the operator publishes is never replaced silently (review 2026-11-08 P3-5)
+        return {"threshold_in": float(own["inches"]), "basis": "published",
+                "rule": f"rain_likely.fallback.by_permit.{permit}", "text": own.get("basis"), "source": own.get("source"),
+                "n_discharge_days": row.get("n_discharge_days"), "since": row.get("since"), "until": row.get("until"),
+                "name": row.get("name"), "kind": "operator_rule", "trigger_basis": "operator",
+                "tail_hours": own.get("tail_hours"), "months": own.get("months")}
     if row.get("threshold_in") is not None and row.get("basis") == "history":
         return {"threshold_in": float(row["threshold_in"]), "basis": row.get("basis"), "rule": row.get("rule"),
                 "text": row.get("basis_text"), "source": row.get("source"), "n_discharge_days": row.get("n_discharge_days"),
@@ -293,6 +325,8 @@ def discharge_starts(events: list[dict], skip: set[tuple[str, str]] | None = Non
     for ev in events:
         if ev.get("time_precision") in ("month", "year") or not ev.get("npdes_permit"):
             continue
+        if system_wide_advisory(ev):
+            continue            # an advisory of the risk of overflows never holds back the caution (review 2026-11-08 P2-2)
         if (str(ev["npdes_permit"]).upper(), str(ev.get("outfall_id") or "").strip().upper()) in skip:
             continue
         et = ev.get("event_type")
@@ -411,15 +445,32 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
             continue                    # its caution comes from the shared site (_site_flags), never twice
         info = latest.get(permit) or {}
         state = info.get("state") or permit[:2]
-        thr = threshold_for(permit, state, thresholds, rules)
+        thr = threshold_for(permit, state, thresholds, rules, now)
         if thr["threshold_in"] is None:
             continue
         t_in = float(thr["threshold_in"])
+        # the operator's own caution length where its published rule gives one (fallback.by_permit), else the site's
+        tail_p = float(thr["tail_hours"]) if thr.get("tail_hours") is not None else tail
         dis = ((rain or {}).get("dischargers") or {}).get(permit) or {}
         name = dis.get("name") or thr.get("name") or info.get("name")
         keys, tags, reach_of, aside = targets(permit, waters, outfalls, info.get("outfalls") or [], reaches,
                                               reach_waters_fn)
-        eps = runs(series.get(permit) or [], start, t_in, now, tail, float(cfg["rainfall_stale_hours"])) if start else []
+        stale_h = float(cfg["rainfall_stale_hours"])
+        own = operator_rule(permit, rules)
+        if own is not None and own.get("months") and start:
+            # an operator rule with a season: each episode takes the rule of its own start, read in the outfalls'
+            # clock (review 2026-11-08 P2-3), never the build's time: in season the operator's amount and hours, out
+            # of season the state's rule or the default
+            t_own = threshold_for(permit, state, thresholds, rules, None)
+            t_def = threshold_for(permit, state, thresholds, rules, None, operator=False)
+            eps = sorted([(ep, t_own) for ep in runs(series.get(permit) or [], start, float(t_own["threshold_in"]), now,
+                                                     float(t_own.get("tail_hours") or tail), stale_h)
+                          if in_season(own, ep["start"])]
+                         + [(ep, t_def) for ep in runs(series.get(permit) or [], start, float(t_def["threshold_in"]),
+                                                      now, tail, stale_h) if not in_season(own, ep["start"])],
+                         key=lambda x: x[0]["start"])
+        else:
+            eps = [(ep, thr) for ep in runs(series.get(permit) or [], start, t_in, now, tail_p, stale_h)] if start else []
         blocks = [(s, s + supp) for s, _ in starts.get(permit, []) if s <= now]
         h24 = info.get("h24")
         qpf = info.get("qpf_24h_in")
@@ -438,7 +489,9 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "rain_expected": qpf is not None and qpf >= t_in,
                 "status": "no_reading" if h24 is None else "below", "episode": None, "suppressed_by": [],
                 "waters": sorted(tags), "reaches": keys, **({"set_aside": aside} if aside else {})}
-        for ep in eps:
+        for ep, thr_e in eps:
+            t_e = float(thr_e["threshold_in"])
+            tail_e = float(thr_e["tail_hours"]) if thr_e.get("tail_hours") is not None else tail
             eid = f"rain_likely:{permit}:{ep['start'].strftime('%Y%m%dT%H')}Z"
             pieces = [(a, b) for a, b in subtract(ep["start"], ep["end"], blocks)
                       if (b is None or b > h_start) and a <= now]
@@ -454,15 +507,15 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 continue
             rain_rec = {
                 "permit": permit, "discharger_name": name, "discharger_id": dis.get("id"), "state": state,
-                "threshold_in": t_in, "threshold_basis": thr["basis"], "threshold_rule": thr["rule"],
-                "threshold_text": thr["text"], "threshold_source": thr.get("source"), "threshold_kind": thr["kind"],
-                "trigger_basis": thr["trigger_basis"], "label": label_for(thr["trigger_basis"], cfg),
-                "n_discharge_days": thr["n_discharge_days"],
-                "history_since": thr["since"], "history_until": thr["until"],
+                "threshold_in": t_e, "threshold_basis": thr_e["basis"], "threshold_rule": thr_e["rule"],
+                "threshold_text": thr_e["text"], "threshold_source": thr_e.get("source"), "threshold_kind": thr_e["kind"],
+                "trigger_basis": thr_e["trigger_basis"], "label": label_for(thr_e["trigger_basis"], cfg),
+                "n_discharge_days": thr_e["n_discharge_days"],
+                "history_since": thr_e["since"], "history_until": thr_e["until"],
                 "peak_24h_in": round(ep["peak"], 2), "peak_at": iso(ep["peak_at"]),
                 "above_from": iso(ep["start"]), "last_above_at": iso(ep["last_above"]),
                 "dropped_below_at": iso(ep.get("dropped_at")), "until": iso(ep["end"]),
-                "until_rule": f"{tail:g} hours after the 24-hour total falls below the threshold",
+                "until_rule": f"{tail_e:g} hours after the 24-hour total falls below the threshold",
                 "rain_24h_in": h24, "valid_time": info.get("valid_time"), "point": _point(info.get("h24_point")),
                 "qpf_24h_in": qpf, "qpf_update_time": info.get("qpf_update_time"),
                 "rainfall_source": RAINFALL_SOURCE, "rainfall_source_id": SOURCE_ID,
@@ -473,15 +526,15 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "rainfall_stale": bool(ep.get("rainfall_stale")) or stale,
                 "suppressed_by": by_notice,
             }
-            rule_applied = {"rule": RULE, "threshold_in": t_in, "threshold_basis": thr["basis"], "tail_hours": tail,
-                            "trigger_basis": thr["trigger_basis"], "rationale": cfg["doc"], "source": cfg["source"]}
+            rule_applied = {"rule": RULE, "threshold_in": t_e, "threshold_basis": thr_e["basis"], "tail_hours": tail_e,
+                            "trigger_basis": thr_e["trigger_basis"], "rationale": cfg["doc"], "source": cfg["source"]}
             block["episodes"][eid] = {"permit": permit, "discharger_name": name, "discharger_id": dis.get("id"),
-                                      "state": state, "trigger_basis": thr["trigger_basis"],
+                                      "state": state, "trigger_basis": thr_e["trigger_basis"],
                                       "label": rain_rec["label"], "start": iso(ep["start"]),
                                       "end": iso(ep["end"]), "active": active, "in_effect": in_now,
                                       "pieces": [[iso(a), iso(b)] for a, b in pieces], "waters": sorted(tags),
                                       "reaches": keys, "rain": rain_rec}
-            _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail, keys, tags, reach_of, by_water, by_reach,
+            _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail_e, keys, tags, reach_of, by_water, by_reach,
                   SOURCE_ID, "NOAA MRMS radar estimate")
         block["permits"][permit] = prow
         for slug in tags:

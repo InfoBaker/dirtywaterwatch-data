@@ -524,6 +524,15 @@ def scrub_discharger(rec: dict) -> dict:
 OPTIONAL_EVENT_FIELDS = {"stretch"}
 
 
+def system_wide_advisory(ev: dict) -> bool:
+    """An authority's system-wide advisory shown at each of its outfalls (raw.advisory_scope "system-wide": Louisville
+    MSD's MSD-01 banner, ingest/ky_louisville_msd.py): an advisory, not a discharge report. It is never counted as a
+    discharge, never matched as a duplicate, never a notice that holds back the rain caution, and counted once per
+    water (raw.advisory_key) among the advisories (review 2026-11-08 P2-1, P2-2)."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("advisory_scope") == "system-wide"
+
+
 def event(**f) -> dict:
     """An event record with every field present (docs/plan.md §3); validates the enumerations."""
     rec = {

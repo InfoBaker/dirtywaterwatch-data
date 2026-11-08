@@ -1,0 +1,44 @@
+id: "ky-sobe-erule-state-system"
+name: "EPA SOBE extract, Kentucky rows (state electronic reporting system, ES2)"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Notes (research/ky, status used, verified fetched, checked 2026-11-07): Read by the national eRule
+#   module (echo-sewer-overflow) with Kentucky in its states since 2026-11-07: the only dated,
+#   machine-readable record of Kentucky overflow reports with points, though Kentucky's system sent
+#   reports for two months only (December 2025 and January 2026).
+# Access detail (research, quoted): Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version
+#   ZIP held only its metadata, so the module reads the current version of each report from the
+#   all-versions ZIP (2026-11-04 extract). 43 Kentucky reports from 37 permits, every one filed as a
+#   bypass (BYP) at a structure typed 'Other', submission type ES2 (Kentucky's own system), form
+#   sets KY-11256, KY-11276, KY-11286; started 2025-12-08 to 2026-01-08 (December 35, January 8),
+#   received December 2025 (34) and January 2026 (9); a point, a start and an end on all 43, a
+#   volume on 19. Receiving water: 'Unnamed Tributary or Unknown' on 26, 'Unnamed' on 4, a named
+#   stream or lake on 13.
+# Can fill: event_type, started_at, ended_at, reported_at, coordinates, volume, waterbody,
+#   source_record_id, raw_record
+# Cannot fill: advice_text; valid_until; published_at
+# Waters: statewide in principle; 43 rows in practice
+# History: 2025-12 to 2026-01
+# Research notes: 2026-11-04 extract: 20 kept as reaching a water (13 naming it, 3 answering
+#   'Receiving into an unnamed tributary? Yes', 4 whose text names a creek), 23 dropped (21 with no
+#   sign that a water was reached, 2 saying none was: 'No waterways impacted', 'did not reach a
+#   waterbody'). Kentucky's rules in the module: the zone by the event's point (Eastern, or Central
+#   in the forty-one western counties of 49 CFR 71.5(c)); a bypass whose description names a
+#   manhole, force main, lift or pump station or line break read as a sewer overflow; the form's
+#   placeholders read as no name; the callers', responders' and staff names in the descriptions
+#   scrubbed. Known problems: one Louisville MSD report ends 14 minutes before it starts; one
+#   incident is filed under two permits (Frankfort, 2025-12-22).
+cadence: "daily ECHO file; Kentucky reports received a median 0 days after the start (the longest 5), and none since January 2026"
+license: "EPA public data"
+attribution: "U.S. EPA ECHO (data from Kentucky DOW)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["KY"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP held only its metadata, so the module reads the current version of each report from the all-versions ZIP (2026-11-04 extract). 43 Kentucky reports from 37 permits, every one filed as a bypass (BYP) at a structure typed 'Other', submission type ES2 (Kentucky's own system), form sets KY-11256, KY-11276, KY-11286; started 2025-12-08 to 2026-01-08 (December 35, January 8), received December 2025 (34) and January 2026 (9); a point, a start and an end on all 43, a volume on 19. Receiving water: 'Unnamed Tributary or Unknown' on 26, 'Unnamed' on 4, a named stream or lake on 13."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-07"

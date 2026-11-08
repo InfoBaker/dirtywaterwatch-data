@@ -1,0 +1,39 @@
+id: "oh-columbus-sewer-overflow"
+name: "Columbus Sewer Overflow Discharge Information (SSO/CSO) and overflow map"
+url: "https://www.columbus.gov/Services/Columbus-Water-Power/About-Columbus-Water-Power/The-Division-of-Water-Reclamation/WW-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs"
+homepage: "https://www.columbus.gov/Services/Columbus-Water-Power/About-Columbus-Water-Power/The-Division-of-Water-Reclamation/WW-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs"
+kind: "arcgis"
+level: "municipal"
+# Feed row: written by pipeline/ingest/oh_columbus_overflows.py (data/build/events/oh-columbus-sewer-overflow.json).
+# Built 2026-11-08: daily; the Events table (offset paging) and the 52 discharge points; one cso or sso record per
+#   row (8,542: 4,462 CSO, 4,080 SSO, 2002 to 2026-09-29), started_at the day found at inspection (Eastern; on or
+#   before), no end; volume in million gallons (the dashboard's "Volume (MG)") on 4,742; CSO rows' permit and outfall
+#   by Ohio EPA's station code (4PF00000 Jackson Pike OH0024732: 4,331 rows; 4PF00001006 Southerly OH0024741: 131);
+#   the site's point (6,989), else EPA's outfall point (848); the City of Columbus as operator on every row. The
+#   dashboard offers no download; read from the public service behind it. Updated monthly, usually after the 15th.
+# Columns excluded: table 1 (annual counts derived from table 2), POINT_X, POINT_Y, GLOBALID. A house number in the
+#   location texts is cut before the raw save.
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read daily by
+#   pipeline/ingest/oh_columbus_overflows.py: 8,542 recorded overflows (4,462 CSO, 4,080 SSO; 291 in
+#   2026 to 2026-09-29), each dated by the day the city found it at inspection (day precision, no
+#   end), with volume in million gallons on 4,742; CSO rows carry their permit and outfall by Ohio
+#   EPA's station code (Jackson Pike OH0024732, Southerly OH0024741); the site's point (46 of 50
+#   sites) or EPA's outfall point; the city updates the data monthly, usually after the 15th.
+# Access detail (research, quoted): The FAQ page (moved under Columbus Water & Power; answered 200
+#   on 2026-11-08) links 'View Overflow Map', an ArcGIS dashboard (24f57525213544e7b1ed6da19baf36a1)
+#   over https://maps2.columbus.gov/arcgis/rest/services/Applications/SSOCSO/MapServer: layer 0
+#   'Overflow Location' (52 points), table 1 'Annual Summary', table 2 'Events' (8,542 rows, 2002 to
+#   2026-09-29: TYPE, DISCHARGE_ID, DISCHARGE_LOCATION, RELIEF_LOCATION, INSPECTION_DATE, VOLUME in
+#   million gallons, NPDES_ID). No token.
+cadence: null
+license: "none stated"
+attribution: "City of Columbus Department of Public Utilities"
+enabled: true
+role: "events"
+event_types: ["cso", "sso"]
+states: ["OH"]
+access: ["arcgis", "html"]
+access_detail: "The FAQ page (moved under Columbus Water & Power; answered 200 on 2026-11-08) links 'View Overflow Map', an ArcGIS dashboard (24f57525213544e7b1ed6da19baf36a1) over https://maps2.columbus.gov/arcgis/rest/services/Applications/SSOCSO/MapServer: layer 0 'Overflow Location' (52 points), table 1 'Annual Summary', table 2 'Events' (8,542 rows, 2002 to 2026-09-29: TYPE, DISCHARGE_ID, DISCHARGE_LOCATION, RELIEF_LOCATION, INSPECTION_DATE, VOLUME in million gallons, NPDES_ID). No token."
+machine_readable: true
+legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
+checked: "2026-11-08"

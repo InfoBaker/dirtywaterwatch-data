@@ -51,6 +51,7 @@ from zoneinfo import ZoneInfo
 
 import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
+                    system_wide_advisory,
                     now_iso, read_json, rules_live_states, write_json)
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
@@ -181,6 +182,7 @@ SMALL_WATER_KM2 = 50
 # CONFIRM_DAYS after the source last confirmed it (the later of started_at and source_updated_at).
 AGING_TYPES = {"hab_advisory", "beach_advisory", "beach_closure", "rain_advisory", "shellfish_closure"}
 CONFIRM_DAYS = 14
+SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
 CHAR = {"red": "r", "yellow": "y", "unresolved": "u", "monthly": "m", "grey": "g"}
@@ -1019,11 +1021,15 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 # unless the point is within NAME_MATCH_M of the record. ADEM's layers give no county, so the county is the one whose
 # outline (data/reference/al-counties.json, Census TIGERweb) holds the point. A record with no outline cannot be
 # measured from a point; its box still places it in a county ("Cowan Creek" in Fairhope is not Ferguson's).
-COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json"}
+# Ohio (wave 4): the spills layer's, NEORSD's, Akron's and BeachGuard's reports all carry a point (oh-counties.json).
+COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json", "OH": "oh-counties.json",
+                 "OR": "or-counties.json"}      # DEQ's OERS spills: a point and a county (scripts/or_counties.py)
+COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer gives points and names (no county field)
 # States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
-COUNTY_FIELD_STATES = {"TX"}
+COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county too (a row with no point)
+COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
@@ -2553,6 +2559,14 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
             iv["code_undecoded"] = code_basis
             if iv["color"] == "red":
                 _caution_only(iv, "code_caution", "provenance.code_undecoded", code_basis, ev.get("source_url"))
+    # the authority's own name for its level, where it differs from "advisory" (OHA's "precaution", ingest/or_transforms.py):
+    # raw._interval_label replaces the rule's label on the record's advisory intervals; keyed on the field, so no other
+    # feed changes (review 2026-11-08 P2-2)
+    lab = (ev.get("raw") or {}).get("_interval_label") if out else None
+    if isinstance(lab, str) and lab.strip():
+        for iv in out:
+            if iv["rule"] == "advisory_active":
+                iv["label"] = lab
     return out
 
 
@@ -2657,9 +2671,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                         out.append(note)
                     return out
                 return [iv]
-            if et in AGING_TYPES:
+            if et in AGING_TYPES or system_wide_advisory(ev):
                 confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
-                until = confirmed + timedelta(days=CONFIRM_DAYS)
+                # a system-wide advisory read every hour (MSD-01) ages out SYSTEM_WIDE_CONFIRM_HOURS after the last
+                # read that showed it, so a page the feed can no longer read never keeps it red (review 2026-11-08 P3-7)
+                until = confirmed + (timedelta(hours=SYSTEM_WIDE_CONFIRM_HOURS) if system_wide_advisory(ev)
+                                     else timedelta(days=CONFIRM_DAYS))
                 out = [_iv(ev, start, until, rule, red, yellow)]
                 note = _iv(ev, until, max(until, start + timedelta(days=NOTE_DAYS)), "not_reconfirmed", red, yellow)
                 note["confirmed"] = iso(confirmed)
@@ -2674,7 +2691,14 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             told = [t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at")),
                                 pt(ev.get("source_updated_at"))) if t and t >= real_start]
             e = end or (min(told) if told else None)
-            return [_iv(ev, real_start, e, rule, red, yellow)] if e else []
+            out = [_iv(ev, real_start, e, rule, red, yellow)] if e else []
+            if out and system_wide_advisory(ev) and (yellow or {}).get("hours"):
+                # the authority's own window runs past its banner ("until 48 hours after the rain has stopped"), so
+                # the site's caution follows the lift (review 2026-11-08 P2-2)
+                iv = _iv(ev, e, e + timedelta(hours=float(yellow["hours"])), "caution", red, yellow)
+                iv["rule_applied"] = {**yellow, "after": "the authority's system-wide advisory was lifted"}
+                out.append(iv)
+            return out
         if end:
             return [_iv(ev, start, end, rule, red, yellow)]
         return [_iv(ev, start, start + timedelta(days=ADVISORY_NO_END_DAYS), "advisory_unconfirmed", red, yellow)]
@@ -3091,8 +3115,8 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
             continue
         if citizen_report(ev):
             continue        # a member of the public's report never absorbs (nor is absorbed by) an operator's report
-        if ev.get("event_type") not in DISCHARGE_TYPES or not ev.get("npdes_permit"):
-            continue
+        if ev.get("event_type") not in DISCHARGE_TYPES or not ev.get("npdes_permit") or system_wide_advisory(ev):
+            continue        # a system-wide advisory is no discharge report (review 2026-11-08 P2-1)
         tz = event_zone(ev)
         t = ev_time(ev, "started_at", tz=tz)
         if t:

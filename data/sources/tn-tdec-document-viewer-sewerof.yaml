@@ -1,0 +1,20 @@
+id: "tn-tdec-document-viewer-sewerof"
+name: "TDEC Document Viewer: Sewer Overflow event report PDFs (copy of record)"
+url: "https://tdec.tn.gov/document-viewer/search/SewerOF"
+homepage: "https://tdec.tn.gov/document-viewer/search/SewerOF"
+kind: "html"
+level: "state"
+# Notes (research/tn, status candidate, verified search_only, checked 2026-11-03): Per-event PDFs
+#   from MyTDEC Forms (cause, receiving water likely); use to enrich large events.
+cadence: null
+license: "none stated"
+attribution: "TDEC"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["TN"]
+access: ["pdf", "html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

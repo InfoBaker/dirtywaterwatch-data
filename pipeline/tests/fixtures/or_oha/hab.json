@@ -1,0 +1,626 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "uniqueIdField": {
+  "name": "OBJECTID",
+  "isSystemMaintained": true
+ },
+ "globalIdFieldName": "GlobalID",
+ "serverGens": {
+  "minServerGen": 85739912,
+  "serverGen": 85739912
+ },
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4326,
+  "latestWkid": 4326
+ },
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "sqlType": "sqlTypeOther",
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "WaterbodyName",
+   "type": "esriFieldTypeString",
+   "alias": "Waterbody",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": null,
+   "defaultValue": null,
+   "description": "{\"value\":\"Name of waterbody\",\"fieldValueType\":\"nameOrTitle\"}"
+  },
+  {
+   "name": "AdvisoryStatus",
+   "type": "esriFieldTypeString",
+   "alias": "Advisory Status",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": {
+    "type": "codedValue",
+    "name": "HABs Advisories_AdvisoryStatus_93309dc1-02de-4688-85ee-77281d11de34",
+    "codedValues": [
+     {
+      "name": "Advisory",
+      "code": "Advisory"
+     },
+     {
+      "name": "Precaution",
+      "code": "Precaution"
+     },
+     {
+      "name": "Advisory/Precaution Lifted",
+      "code": "Advisory/Precaution Lifted"
+     },
+     {
+      "name": "Dog Illness or Death",
+      "code": "Dog Illness or Death"
+     },
+     {
+      "name": "Below Human RUV",
+      "code": "Below Human RUV"
+     },
+     {
+      "name": "Hidden",
+      "code": "Hidden"
+     }
+    ]
+   },
+   "defaultValue": null,
+   "description": "{\"value\":\"Level of advisory (Safe, Watch, or Advisory)\\n'Hidden' category used to hide advisories from map. \",\"fieldValueType\":\"typeOrCategory\"}"
+  },
+  {
+   "name": "Toxin",
+   "type": "esriFieldTypeString",
+   "alias": "Toxin Type",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": null,
+   "defaultValue": null,
+   "description": "{\"value\":\"Type of toxin present (e.g., Microcystin, Anatoxin-a, etc.)\",\"fieldValueType\":\"typeOrCategory\"}"
+  },
+  {
+   "name": "ToxinLevel_ppb",
+   "type": "esriFieldTypeDouble",
+   "alias": "Toxin Level (ppb)",
+   "sqlType": "sqlTypeOther",
+   "domain": null,
+   "defaultValue": null,
+   "description": "{\"value\":\"Measure of toxin present in ppb. \",\"fieldValueType\":\"countOrAmount\"}"
+  },
+  {
+   "name": "ToxinLevel",
+   "type": "esriFieldTypeString",
+   "alias": "Toxin Level",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "Details",
+   "type": "esriFieldTypeString",
+   "alias": "Details",
+   "sqlType": "sqlTypeOther",
+   "length": 1000,
+   "domain": null,
+   "defaultValue": null,
+   "description": "{\"value\":\"Further details about the HAB, which may include specifics on the nature and/or location of the bloom, recreational/health information, and/or when the advisory status changed. \",\"fieldValueType\":\"description\"}"
+  },
+  {
+   "name": "AdvisoryLink",
+   "type": "esriFieldTypeString",
+   "alias": "Link",
+   "sqlType": "sqlTypeOther",
+   "length": 500,
+   "domain": null,
+   "defaultValue": null,
+   "description": "{\"value\":\"Link to HABs advisory\",\"fieldValueType\":\"\"}"
+  },
+  {
+   "name": "Issue_Date",
+   "type": "esriFieldTypeDate",
+   "alias": "Date",
+   "sqlType": "sqlTypeOther",
+   "length": 8,
+   "domain": null,
+   "defaultValue": null,
+   "description": "{\"value\":\"Date that advisory was issued or lifted. Ignore time field - any time can be entered and won't be displayed on the map. \",\"fieldValueType\":\"dateAndTime\"}"
+  },
+  {
+   "name": "County_1",
+   "type": "esriFieldTypeString",
+   "alias": "County",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": {
+    "type": "codedValue",
+    "name": "HABs Advisories_County_1_42cac865-8af2-4274-8513-c2ba4897c4ae",
+    "codedValues": [
+     {
+      "name": "Baker",
+      "code": "Baker"
+     },
+     {
+      "name": "Benton",
+      "code": "Benton"
+     },
+     {
+      "name": "Clackamas",
+      "code": "Clackamas"
+     },
+     {
+      "name": "Clatsop",
+      "code": "Clatsop"
+     },
+     {
+      "name": "Columbia",
+      "code": "Columbia"
+     },
+     {
+      "name": "Coos",
+      "code": "Coos"
+     },
+     {
+      "name": "Crook",
+      "code": "Crook"
+     },
+     {
+      "name": "Curry",
+      "code": "Curry"
+     },
+     {
+      "name": "Deschutes",
+      "code": "Deschutes"
+     },
+     {
+      "name": "Douglas",
+      "code": "Douglas"
+     },
+     {
+      "name": "Gilliam",
+      "code": "Gilliam"
+     },
+     {
+      "name": "Grant",
+      "code": "Grant"
+     },
+     {
+      "name": "Harney",
+      "code": "Harney"
+     },
+     {
+      "name": "Hood River",
+      "code": "Hood River"
+     },
+     {
+      "name": "Jackson",
+      "code": "Jackson"
+     },
+     {
+      "name": "Jefferson",
+      "code": "Jefferson"
+     },
+     {
+      "name": "Josephine",
+      "code": "Josephine"
+     },
+     {
+      "name": "Klamath",
+      "code": "Klamath"
+     },
+     {
+      "name": "Lake",
+      "code": "Lake"
+     },
+     {
+      "name": "Lane",
+      "code": "Lane"
+     },
+     {
+      "name": "Lincoln",
+      "code": "Lincoln"
+     },
+     {
+      "name": "Linn",
+      "code": "Linn"
+     },
+     {
+      "name": "Malheur",
+      "code": "Malheur"
+     },
+     {
+      "name": "Marion",
+      "code": "Marion"
+     },
+     {
+      "name": "Morrow",
+      "code": "Morrow"
+     },
+     {
+      "name": "Multnomah",
+      "code": "Multnomah"
+     },
+     {
+      "name": "Polk",
+      "code": "Polk"
+     },
+     {
+      "name": "Sherman",
+      "code": "Sherman"
+     },
+     {
+      "name": "Tillamook",
+      "code": "Tillamook"
+     },
+     {
+      "name": "Umatilla",
+      "code": "Umatilla"
+     },
+     {
+      "name": "Wallowa",
+      "code": "Wallowa"
+     },
+     {
+      "name": "Wasco",
+      "code": "Wasco"
+     },
+     {
+      "name": "Washington",
+      "code": "Washington"
+     },
+     {
+      "name": "Wheeler",
+      "code": "Wheeler"
+     },
+     {
+      "name": "Yamhill",
+      "code": "Yamhill"
+     }
+    ]
+   },
+   "defaultValue": null,
+   "description": "{\"value\":\"County where HAB is located.\",\"fieldValueType\":\"nameOrTitle\"}"
+  },
+  {
+   "name": "County_2",
+   "type": "esriFieldTypeString",
+   "alias": "County",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": {
+    "type": "codedValue",
+    "name": "HABs Advisories_County_2_0811bf58-46ad-4542-823a-59993f6fc9f7",
+    "codedValues": [
+     {
+      "name": "Baker",
+      "code": "Baker"
+     },
+     {
+      "name": "Benton",
+      "code": "Benton"
+     },
+     {
+      "name": "Clackamas",
+      "code": "Clackamas"
+     },
+     {
+      "name": "Clatsop",
+      "code": "Clatsop"
+     },
+     {
+      "name": "Columbia",
+      "code": "Columbia"
+     },
+     {
+      "name": "Coos",
+      "code": "Coos"
+     },
+     {
+      "name": "Crook",
+      "code": "Crook"
+     },
+     {
+      "name": "Curry",
+      "code": "Curry"
+     },
+     {
+      "name": "Deschutes",
+      "code": "Deschutes"
+     },
+     {
+      "name": "Douglas",
+      "code": "Douglas"
+     },
+     {
+      "name": "Gilliam",
+      "code": "Gilliam"
+     },
+     {
+      "name": "Grant",
+      "code": "Grant"
+     },
+     {
+      "name": "Harney",
+      "code": "Harney"
+     },
+     {
+      "name": "Hood River",
+      "code": "Hood River"
+     },
+     {
+      "name": "Jackson",
+      "code": "Jackson"
+     },
+     {
+      "name": "Jefferson",
+      "code": "Jefferson"
+     },
+     {
+      "name": "Josephine",
+      "code": "Josephine"
+     },
+     {
+      "name": "Klamath",
+      "code": "Klamath"
+     },
+     {
+      "name": "Lake",
+      "code": "Lake"
+     },
+     {
+      "name": "Lane",
+      "code": "Lane"
+     },
+     {
+      "name": "Lincoln",
+      "code": "Lincoln"
+     },
+     {
+      "name": "Linn",
+      "code": "Linn"
+     },
+     {
+      "name": "Malheur",
+      "code": "Malheur"
+     },
+     {
+      "name": "Marion",
+      "code": "Marion"
+     },
+     {
+      "name": "Morrow",
+      "code": "Morrow"
+     },
+     {
+      "name": "Multnomah",
+      "code": "Multnomah"
+     },
+     {
+      "name": "Polk",
+      "code": "Polk"
+     },
+     {
+      "name": "Sherman",
+      "code": "Sherman"
+     },
+     {
+      "name": "Tillamook",
+      "code": "Tillamook"
+     },
+     {
+      "name": "Umatilla",
+      "code": "Umatilla"
+     },
+     {
+      "name": "Union",
+      "code": "Union"
+     },
+     {
+      "name": "Wallowa",
+      "code": "Wallowa"
+     },
+     {
+      "name": "Wasco",
+      "code": "Wasco"
+     },
+     {
+      "name": "Washington",
+      "code": "Washington"
+     },
+     {
+      "name": "Wheeler",
+      "code": "Wheeler"
+     },
+     {
+      "name": "Yamhill",
+      "code": "Yamhill"
+     }
+    ]
+   },
+   "defaultValue": null,
+   "description": "{\"value\":\"If HAB affects more than one county, enter second county here. \",\"fieldValueType\":\"nameOrTitle\"}"
+  },
+  {
+   "name": "StatusSort",
+   "type": "esriFieldTypeString",
+   "alias": "Status Sort",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": {
+    "type": "codedValue",
+    "name": "HABs Advisories_StatusSort_94b75845-e789-42af-8751-970887f2f52e",
+    "codedValues": [
+     {
+      "name": "1 - Advisory",
+      "code": "1Advisory"
+     },
+     {
+      "name": "2 - Precaution",
+      "code": "2Precaution"
+     },
+     {
+      "name": "3 - Dog Illness or Death",
+      "code": "3DogIllDeath"
+     },
+     {
+      "name": "4 - Advisory Lifted",
+      "code": "4Lifted"
+     },
+     {
+      "name": "5 - Below Human RUV",
+      "code": "5BelowRUV"
+     }
+    ]
+   },
+   "defaultValue": null,
+   "description": "{\"value\":\"This field is used to sort advisories in the Experience Builder web application. It will not be visible on the map. \",\"fieldValueType\":\"\"}"
+  },
+  {
+   "name": "EditDate",
+   "type": "esriFieldTypeDate",
+   "alias": "EditDate",
+   "sqlType": "sqlTypeOther",
+   "length": 8,
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "Above_PetRUV",
+   "type": "esriFieldTypeString",
+   "alias": "Above Pet RUV",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": {
+    "type": "codedValue",
+    "name": "HABs Advisories_Above_PetRUV_e04a6145-2dc6-4a9b-8839-962b34c1e182",
+    "codedValues": [
+     {
+      "name": "Yes",
+      "code": "Yes"
+     },
+     {
+      "name": "No",
+      "code": "No"
+     }
+    ]
+   },
+   "defaultValue": null
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 8,
+    "WaterbodyName": "South & mainstream Umpqua River",
+    "AdvisoryStatus": "Advisory",
+    "Toxin": null,
+    "ToxinLevel_ppb": null,
+    "ToxinLevel": null,
+    "Details": "PERMANENT RECREATIONAL USE ADVISORY. The advisory covers the South Umpqua River from Canyonville downstream to the confluence with the mainstream Umpqua River, and the mainstream Umpqua River downstream past Elkton to Sawyers Rapids. Pools in the bedrock along the rivers edge are known to develop algae blooms that can be harmful to pets and people if accidental ingestion occurs.",
+    "AdvisoryLink": "https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/HARMFULALGAEBLOOMS/Documents/Permanent%20Umpqua%20River%20Sign.jpg",
+    "Issue_Date": 1704096000000,
+    "County_1": "Douglas",
+    "County_2": null,
+    "StatusSort": "1Advisory",
+    "EditDate": 1735079219175,
+    "Above_PetRUV": "Yes"
+   },
+   "geometry": {
+    "x": -123.44629506210345,
+    "y": 43.26859255723524
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 84,
+    "WaterbodyName": "Detroit Lake",
+    "AdvisoryStatus": "Precaution",
+    "Toxin": "Microcystin",
+    "ToxinLevel_ppb": null,
+    "ToxinLevel": "0.28 ug/L",
+    "Details": "Precaution issued due to low-level presence of cyanobacteria.",
+    "AdvisoryLink": null,
+    "Issue_Date": 1781766000000,
+    "County_1": "Marion",
+    "County_2": "Linn",
+    "StatusSort": "2Precaution",
+    "EditDate": 1791929202046,
+    "Above_PetRUV": "Yes"
+   },
+   "geometry": {
+    "x": -122.18328050151243,
+    "y": 44.71202911840198
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 93,
+    "WaterbodyName": "Pine Hollow Reservoir",
+    "AdvisoryStatus": "Below Human RUV",
+    "Toxin": null,
+    "ToxinLevel_ppb": null,
+    "ToxinLevel": "Non-detect",
+    "Details": null,
+    "AdvisoryLink": null,
+    "Issue_Date": 1781766000000,
+    "County_1": "Wasco",
+    "County_2": null,
+    "StatusSort": "5BelowRUV",
+    "EditDate": 1781818557939,
+    "Above_PetRUV": "No"
+   },
+   "geometry": {
+    "x": -121.29272199045973,
+    "y": 45.24627140465548
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 94,
+    "WaterbodyName": "Timothy Lake",
+    "AdvisoryStatus": "Advisory/Precaution Lifted",
+    "Toxin": null,
+    "ToxinLevel_ppb": null,
+    "ToxinLevel": null,
+    "Details": "Initial precaution had been issued due to visible bloom on 7/14.",
+    "AdvisoryLink": null,
+    "Issue_Date": 1784617200000,
+    "County_1": "Clackamas",
+    "County_2": null,
+    "StatusSort": "4Lifted",
+    "EditDate": 1784649996168,
+    "Above_PetRUV": "No"
+   },
+   "geometry": {
+    "x": -121.78925252329665,
+    "y": 45.11965053231862
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 149,
+    "WaterbodyName": "Owyhee Reservoir",
+    "AdvisoryStatus": "Precaution",
+    "Toxin": "Saxitoxin",
+    "ToxinLevel_ppb": null,
+    "ToxinLevel": "0.27 ug/L",
+    "Details": "Precaution issued due to detection of toxins (see image below).",
+    "AdvisoryLink": null,
+    "Issue_Date": 1789974000000,
+    "County_1": "Malheur",
+    "County_2": null,
+    "StatusSort": "2Precaution",
+    "EditDate": 1790011234246,
+    "Above_PetRUV": null
+   },
+   "geometry": {
+    "x": -117.35101801365985,
+    "y": 43.56329378668109
+   }
+  }
+ ]
+}

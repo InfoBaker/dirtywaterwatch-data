@@ -1,0 +1,186 @@
+{
+ "objectIdFieldName": "FID",
+ "fields": [
+  {
+   "name": "MLID",
+   "type": "x"
+  },
+  {
+   "name": "Waterbody",
+   "type": "x"
+  },
+  {
+   "name": "Site_Name",
+   "type": "x"
+  },
+  {
+   "name": "Public_Name",
+   "type": "x"
+  },
+  {
+   "name": "Monitored_Date",
+   "type": "x"
+  },
+  {
+   "name": "Lat",
+   "type": "x"
+  },
+  {
+   "name": "Long",
+   "type": "x"
+  },
+  {
+   "name": "Advisory",
+   "type": "x"
+  },
+  {
+   "name": "Advisory_Date",
+   "type": "x"
+  },
+  {
+   "name": "Additional_Advisory_Notes",
+   "type": "x"
+  },
+  {
+   "name": "FID",
+   "type": "x"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "MLID": 1000001,
+    "Waterbody": "Calf Creek",
+    "Site_Name": null,
+    "Public_Name": null,
+    "Monitored_Date": "2026-05-05",
+    "Lat": 37.794022,
+    "Long": -111.414084,
+    "Advisory": "Mats CF",
+    "Advisory_Date": 1777960800000,
+    "Additional_Advisory_Notes": "Harmful algae mats (benthic cyanobacteria) were observed growing in the water by the Calf Creek Campground and parts of the Lower Calf Creek trail.",
+    "FID": 1
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000007,
+    "Waterbody": "Lower Virgin River",
+    "Site_Name": "George Barker",
+    "Public_Name": "George Barker",
+    "Monitored_Date": "2026-07-17",
+    "Lat": 37.17693,
+    "Long": -113.00798,
+    "Advisory": "Warning Mats",
+    "Advisory_Date": 1784268000000,
+    "Additional_Advisory_Notes": null,
+    "FID": 5
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000015,
+    "Waterbody": "Fifth Water Hot Springs",
+    "Site_Name": null,
+    "Public_Name": null,
+    "Monitored_Date": "2026-05-08",
+    "Lat": 40.082547,
+    "Long": -111.317975,
+    "Advisory": "E coli HW",
+    "Advisory_Date": 1784095200000,
+    "Additional_Advisory_Notes": "BE CAREFUL: Visitors have recently reported cases of Pseudomonas dermatitis (hot tub rash) after soaking in the pools.",
+    "FID": 7
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000019,
+    "Waterbody": "Newcastle Reservoir",
+    "Site_Name": "Newcastle Reservoir",
+    "Public_Name": "Newcastle Reservoir",
+    "Monitored_Date": "2026-08-10",
+    "Lat": 37.64813,
+    "Long": -113.521829999999,
+    "Advisory": "Looks Good",
+    "Advisory_Date": null,
+    "Additional_Advisory_Notes": null,
+    "FID": 10
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000020,
+    "Waterbody": "Baker Reservoir",
+    "Site_Name": "South End",
+    "Public_Name": "South End",
+    "Monitored_Date": "2026-10-15",
+    "Lat": 37.3762714554609,
+    "Long": -113.638820954128,
+    "Advisory": "Warning HAB",
+    "Advisory_Date": 1783490400000,
+    "Additional_Advisory_Notes": null,
+    "FID": 11
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000022,
+    "Waterbody": "Panguitch Creek",
+    "Site_Name": "White Bridge Campground",
+    "Public_Name": "White Bridge Campground",
+    "Monitored_Date": "2026-07-29",
+    "Lat": 37.746107,
+    "Long": -112.587337,
+    "Advisory": "HAB HW",
+    "Advisory_Date": 1785304800000,
+    "Additional_Advisory_Notes": null,
+    "FID": 13
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000024,
+    "Waterbody": "Mill Hollow Reservoir",
+    "Site_Name": "Northeast Alcove",
+    "Public_Name": "Northeast Alcove",
+    "Monitored_Date": "2026-08-05",
+    "Lat": 40.48867,
+    "Long": -111.10529897,
+    "Advisory": null,
+    "Advisory_Date": null,
+    "Additional_Advisory_Notes": null,
+    "FID": 15
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 1000031,
+    "Waterbody": "San Juan River",
+    "Site_Name": "Bluff Highway 162",
+    "Public_Name": "Bluff Highway 162",
+    "Monitored_Date": "2026-10-26",
+    "Lat": 37.27963,
+    "Long": -109.5076,
+    "Advisory": "Warning E coli",
+    "Advisory_Date": 1793253600000,
+    "Additional_Advisory_Notes": null,
+    "FID": 21
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 4917335,
+    "Waterbody": "Utah Lake",
+    "Site_Name": "Utah Lake at Lindon Marina Beach NE of launch ramps",
+    "Public_Name": "Lindon Marina (NE Ramps)",
+    "Monitored_Date": "2026-10-19",
+    "Lat": 40.32665206,
+    "Long": -111.76441644,
+    "Advisory": "Danger HAB",
+    "Advisory_Date": 1785823200000,
+    "Additional_Advisory_Notes": "\n",
+    "FID": 37
+   }
+  }
+ ]
+}
