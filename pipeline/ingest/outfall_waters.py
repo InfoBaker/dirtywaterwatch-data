@@ -807,6 +807,19 @@ class Matcher:
             if s and self.usable(s, o, "reach"):
                 return {"slug": s, "how": f"{how}; {REACH_FIRST_PERMITS[str(o['npdes_permit']).upper()]}",
                         "step": "reach"}
+            # the builder keeps no reach code for a record it built from a name (re-check 2026-11-08: Beargrass
+            # Creek's record has none), so the reach's own GNIS name (REACH_NAMES) is placed by name at the outfall's
+            # point, and taken only when the record lies within TIGHT_M of it (Hardin County's Mill Creek, 37 km off,
+            # is not Louisville's)
+            gn = REACH_NAMES.get(str(o.get("reach_id") or "").lstrip("0"))
+            if gn and o.get("lat") is not None:
+                s, how = self.by_name(o, gn[0])
+                d = self.dist(s, o.get("lat"), o.get("lon")) if s else None
+                if s and d is not None and d <= TIGHT_M and self.usable(s, o, "reach name"):
+                    return {"slug": s, "step": "reach name",
+                            "how": (f"the NHDPlus GNIS name '{gn[0]}' (GNIS {gn[1]}) of the reach {o.get('reach_id')} EPA "
+                                    f"gives the outfall: {how}; {m(d)} m from the point; "
+                                    f"{REACH_FIRST_PERMITS[str(o['npdes_permit']).upper()]}")}
         if text and not not_name:
             for step, fn in (("name", self.by_name), ("NHD builder", self.by_nhd_target), ("reach", self.by_reach),
                              ("NHD builder for the permit", self.by_builder_permit)):
@@ -901,6 +914,15 @@ class Matcher:
 # Beargrass Creek and its forks and 7 on Mill Creek). Until the builder has made those records the name decides as before.
 REACH_FIRST_PERMITS = {"KY0022411": "EPA's receiving-water text for this permit is the same label ('OHIO RIVER') on "
                                     "every outfall, so the outfall's own reach decides"}
+
+
+# the GNIS names of the NHDPlus reaches EPA puts REACH_FIRST_PERMITS' outfalls on (EPA NHDPlus V2.1 Network Flowline
+# layer, watersgeo.epa.gov NHDPlus/MapServer/2, by reachcode, read 2026-11-08); reach code without leading zeros
+REACH_NAMES = {"5140101000472": ("South Fork Beargrass Creek", "503905"),
+               "5140101000475": ("Middle Fork Beargrass Creek", "498112"),
+               "5140101000471": ("Beargrass Creek", "486584"), "5140101000175": ("Beargrass Creek", "486584"),
+               "5140101000484": ("Mill Creek", "498252"), "5140101000008": ("Ohio River", "425264"),
+               "5140101000010": ("Ohio River", "425264"), "5140101000011": ("Ohio River", "425264")}
 
 
 def gnis_of(o: dict) -> str:
