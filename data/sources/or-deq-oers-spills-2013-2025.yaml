@@ -10,9 +10,9 @@ level: "state"
 # Read 2026-11-07: 2,844 rows of the material category "Sewage, Stormwater, Wastewater, Floodwater, & Biological",
 #   2,371 of them Material "Sewage" (the records), 2013-07-24 to 2025-03-27; by year 2013 10, 2014 12, 2015 17, 2016
 #   13, 2017 17, 2018 201, 2019 330, 2020 284, 2021 403, 2022 339, 2023 319, 2024 310, 2025 (to March 27) 116. By
-#   source: sewer 1,864 (sso), treatment plant 210 (bypass), other sources 297 (private homes, septic tanks, vehicles,
-#   businesses: type unknown, still sewage). 2,369 with DEQ's point; 326 name a water (Affected_Waterway; NULL, None
-#   or Unknown on the rest); 1,063 list only soil, pavement, a building or the sanitary sewer as the media affected
+#   source: treatment plant 210 (bypass); sewers 1,864 and other sources 297 (private homes, septic tanks, vehicles,
+#   businesses: sewage reports with their source stated), 2,161 sso. 2,369 with DEQ's point; 323 name a water
+#   (Affected_Waterway; NULL, None or Unknown on the rest); 1,064 list only soil, pavement, a building or the sanitary sewer as the media affected
 #   (kept, placed on no water). 17 in Malheur County north of township 35 South (Mountain time).
 # Times: Date2 and Time are the date and time of the report to OERS; the layer gives no separate start and no end.
 # Never requested: Situation (the call narrative names callers, residents and contractors), Name (the incident

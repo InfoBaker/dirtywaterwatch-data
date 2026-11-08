@@ -93,7 +93,8 @@
 #                  Oregon: or_bes_news (Portland Environmental Services' CSO and sewage advisories: the news RSS and
 #                  each advisory's page, the City's 48-hour window), or_deq_oers_spills (DEQ's OERS spills 2013 to
 #                  March 2025, the sewage rows as a frozen archive: the layer's metadata each run, the rows only when
-#                  DEQ edits it) and the generic ArcGIS block or-oha-hab-advisories (OHA's bloom advisories and
+#                  DEQ edits it), or_oha_beaches (OHA's beach conditions table, a snapshot: ADVISORY and SEWAGE, in
+#                  season) and the generic ArcGIS block or-oha-hab-advisories (OHA's bloom advisories and
 #                  precautions; ingest/or_transforms.py)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags

@@ -1,29 +1,27 @@
 id: "or-oha-beach-monitoring"
-name: "Oregon Beach Monitoring Program advisories (OHA with DEQ)"
-url: "https://www.oregon.gov/oha/PH/HealthyEnvironments/Recreation/BeachWaterQuality/Pages/index.aspx"
+name: "Oregon Health Authority, Oregon Beach Monitoring Program: current beach conditions"
+url: "https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx"
 homepage: "https://www.oregon.gov/oha/PH/HealthyEnvironments/Recreation/BeachWaterQuality/Pages/index.aspx"
 kind: "html"
 level: "state"
-# Notes (research/or, status candidate, verified fetched, checked 2026-11-07): Registered as a
-#   monitored page (page health). The table can be read as a snapshot (ADVISORY as OHA's beach
-#   advisory, SEWAGE as OHA's sewage advisory) when the 2027 season opens; no advisory rows existed
-#   to test a reader on 2026-11-07.
-# Access detail (research, quoted): 'Check Current Beach Conditions'
-#   (https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx):
-#   an HTML table per coast (County, Beach, Status) with the statuses OPEN, ADVISORY, SEWAGE
-#   ('Sewage spills or major pollution events occurred. Avoid swimming or water contact.') and NO
-#   MONITORING; 'The 2026 monitoring season has ended' on 2026-11-07 (every beach NO MONITORING).
-#   GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by email request.
-# Waters: Oregon coast, 360 miles, May to September
-cadence: "Seasonal (May-Sept)"
+# Ingester: pipeline/ingest/or_oha_beaches.py (source id or-oha-beach-monitoring), a snapshot of the status table read
+#   every refresh. One table per coast, each row County | Beach | Status, the status one of OPEN, ADVISORY, SEWAGE
+#   ("Sewage spills or major pollution events occurred. Avoid swimming or water contact.") and NO MONITORING.
+#   ADVISORY opens a beach advisory; SEWAGE opens OHA's sewage advisory (sewage category); OPEN and NO MONITORING are
+#   no record. The page gives no dates: an advisory runs from the first read that shows it to the first that does not.
+# Read 2026-11-07: "The 2026 monitoring season has ended"; 33 beaches, all NO MONITORING, so no record. The reader was
+#   written from the page's markup for the 2027 season (mid-May to mid-September) and is tested on a fixture in that
+#   markup; check its first in-season reads. Advisory notices also by e-mail (GovDelivery ORHA_190).
+cadence: "In season (mid-May to mid-September) as OHA posts results; nothing out of season"
 license: "none stated"
-attribution: "Oregon Health Authority"
+attribution: "Oregon Health Authority, Oregon Beach Monitoring Program"
 enabled: true
 role: "advisories"
-event_types: ["beach_advisory"]
+event_types: ["beach_advisory", "sso"]
 states: ["OR"]
+registry_ids: ["or-oha-beach-monitoring"]
 access: ["html", "email"]
-access_detail: "'Check Current Beach Conditions' (https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx): an HTML table per coast (County, Beach, Status) with the statuses OPEN, ADVISORY, SEWAGE ('Sewage spills or major pollution events occurred. Avoid swimming or water contact.') and NO MONITORING; 'The 2026 monitoring season has ended' on 2026-11-07 (every beach NO MONITORING). GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by email request."
+access_detail: "An HTML table per coast (County, Beach, Status) on OHA's 'Check Current Beach Conditions' page; no key. GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by e-mail request."
 machine_readable: false
 legal_basis: null
 checked: "2026-11-07"

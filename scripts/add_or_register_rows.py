@@ -144,13 +144,14 @@ AGENCY = [
     {"id": "or-oha-beach-conditions", "agency": "Oregon Health Authority (Oregon Beach Monitoring Program)",
      "name": "Oregon Beach Monitoring Program (current beach conditions)", "channel_kind": "state_alert_page",
      "urls": ["https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx"],
-     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "status", "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "feed_ingested", "feed_source_id": "or-oha-beach-monitoring", "publishes": "status",
+     "noun": "Data feed",
      "signup_url": "https://public.govdelivery.com/accounts/ORHA/subscriber/new?topic_id=ORHA_190",
      "note": ("A table per coast (County, Beach, Status) with OPEN, ADVISORY, SEWAGE ('Sewage spills or major pollution "
               "events occurred. Avoid swimming or water contact.') and NO MONITORING; mid-May to mid-September. 'The "
-              "2026 monitoring season has ended' on 2026-11-07 (answered 200). Page health only until the 2027 season "
-              "gives advisory rows to test a reader on. (research/or/sources.json or-oha-beach-monitoring)"),
+              "2026 monitoring season has ended' on 2026-11-07 (answered 200). Read every refresh by the feed: ADVISORY as "
+              "OHA's beach advisory, SEWAGE as its sewage advisory. (research/or/sources.json or-oha-beach-monitoring)"),
      "sources": ["or-oha-beach-monitoring"]},
     {"id": "or-oha-beach-notices-email", "agency": "Oregon Health Authority (Oregon Beach Monitoring Program)",
      "name": "Oregon Beach Monitoring Program (advisory notices by e-mail)", "channel_kind": "email_list", "urls": [],
