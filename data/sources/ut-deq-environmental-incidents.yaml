@@ -43,7 +43,7 @@ fetch:
   url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/EnvironmentalIncidents/FeatureServer/0"
   order_by: "OBJECTID"
   geometry: true
-  metadata: true
+  metadata: false        # the layer's last edit is the source's health, never a record's time (go-live audit 2026-11-08 P1-2)
   time_zone: "America/Denver"
   bounds: [-114.1, 36.95, -109.0, 42.05]      # Utah; a point outside is not used (raw._coords_rejected)
   safe_fields: [OBJECTID, Id, DERRID, Title_EventName, Nearest_City, County, Date_Discovered,

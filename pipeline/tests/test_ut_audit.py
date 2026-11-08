@@ -65,3 +65,21 @@ def test_every_remainder_lies_off_its_rivers_outline():
         lat0 = g.centroid.y
         gm, em = W.to_m_geom(g, lat0), W.to_m_geom(eg, lat0)
         assert gm.intersection(em.buffer(W.SAME_WATER_M)).length / gm.length < 0.10, w["slug"]
+
+
+# ---------------------------------------------------------------- P1-2: no layer edit time on the records
+
+def test_undated_hotline_reports_take_no_layer_edit_time_and_the_newest_date_is_a_report_s():
+    from export import coverage as C
+    from ingest.generic import runner as R
+    _, block = R.load_source("ut-deq-environmental-incidents")
+    assert block.get("metadata") is False
+    rows = R.platform("arcgis").parse(block, (ROOT / "pipeline" / "tests" / "fixtures" / "ut" / "incidents.json").read_bytes())
+    meta = {"editingInfo": {"lastEditDate": 1794053173876}}               # 2026-11-07, the layer's last edit
+    recs, _ = R.build("ut-deq-environmental-incidents", block, rows, "2026-11-08T01:00:00Z", (), meta)
+    undated = [r for r in recs if not r["started_at"]]
+    assert undated and all(r["source_updated_at"] is None for r in undated)
+    f = C._figures(recs, [], {}, {}, {}, [])
+    newest = max(r["started_at"] for r in recs if r["started_at"])
+    assert f["latest_dated"][:10] == C.when_of({"started_at": newest}).isoformat()[:10]
+    assert not f["latest_dated"].startswith("2026-11-07")
