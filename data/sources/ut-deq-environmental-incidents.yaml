@@ -47,7 +47,11 @@ fetch:
   time_zone: "America/Denver"
   bounds: [-114.1, 36.95, -109.0, 42.05]      # Utah; a point outside is not used (raw._coords_rejected)
   safe_fields: [OBJECTID, Id, DERRID, Title_EventName, Nearest_City, County, Date_Discovered,
-                Date_Discovered_For_Filter, SITEDESC, ReportLink, Northing, Easting, _x, _y]
+                Date_Discovered_For_Filter, SITEDESC, ReportLink, _x, _y]
+  # every point kept to 0.001 degree (about 100 m) before anything is saved; the layer's UTM Northing and Easting (to
+  #   the metre) are never requested; a row whose title names a private home or septic system keeps its county only
+  #   (ut_transforms.PRIVATE_PLACE; go-live audit 2026-11-08 P2-2)
+  round_coords: 3
   reviewed_fields:
     Title_EventName: "DEQ's incident title (a place and the material, \"Moab - Sanitary Sewer Overflow\"); scrubbed strictly, and a title opening with a person's or family business's name is cut (ut_transforms.PERSON_TITLE)"
   free_text: [Title_EventName]
