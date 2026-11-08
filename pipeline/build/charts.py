@@ -62,7 +62,8 @@ from datetime import UTC, datetime, timedelta
 from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISION, DISCHARGE_TYPES, LOCAL, POINT_ADVISORY_TYPES,
                           colours_whole_water, end_not_credible, event_intervals, event_state, find_duplicates,
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
-from common import BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, system_wide_advisory, write_json
+from common import (BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, rules_live_states,
+                    system_wide_advisory, write_json)
 
 CHARTS_DIR = OUT_DIR / "charts"
 WINDOW_YEARS = 5                 # monthly charts: January of (this year - 4) to this month
@@ -288,7 +289,10 @@ class Data:
         self.now = now
         self.waters = live_waters(load_waters())     # the live states' records only (rules.json live_states)
         self.rules = load_rules()
-        files, events, problems = load_events(include_fixtures=False)
+        # the live states' records only, as the status build (--live-only) and the export take them: a record of a
+        # state not yet live has no event page, so it is neither counted on a live water (157 Alabama reports were,
+        # on Georgia and Mississippi waters) nor given a discharger chart (1,276 files for TX, AL, HI); 2026-11-08
+        files, events, problems = load_events(include_fixtures=False, live=rules_live_states(self.rules))
         # an event's discharger_id that the registry lists as an alias is the row's id here too (as in the
         # export), so a discharger's chart is one series under the id its page uses
         aliases = discharger_alias_map([d for d in read_json(DATA_DIR / "dischargers.json", []) or [] if isinstance(d, dict)])
