@@ -68,7 +68,7 @@ def test_register_rows_per_operator_and_the_operators_own_channels():
     assert reg["ky-sd1-cso-signs"]["barrier"] == "signs_only"
     assert reg["ky-orsanco-bacteria"]["barrier"] == "bot_wall"
     swim = reg["ky-dow-swimming-advisories"]
-    assert swim["monitored"] is True and swim["records"] is False
+    assert swim["feed_source_id"] == "ky-dow-swimming-advisories" and swim["barrier"] is None   # review P1-1
     assert not re.search(r"\b\d{3}[-.]\d{3}[-.]\d{4}\b", json.dumps([c.get("note") for c in register()]))
 
 

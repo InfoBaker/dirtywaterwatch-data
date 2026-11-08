@@ -13,8 +13,8 @@ Four sources:
     the events file when it holds one (MSD-01 advisories sit on the outfalls' own waters).
   - The Division of Water's HAB Viewer (ky-dow-hab-viewer): every point's water in the layer's saved response, not only
     the points under an advisory today (a lake is sampled all season and becomes a record when an advisory is issued).
-  - The Division's standing swimming advisories (ky-dow-swimming-advisories): the waters the page names (watched, no
-    records yet; listed so a stretch model of the advisories finds its waters).
+  - The Division's standing swimming advisories (ky-dow-swimming-advisories): the waters the feed places its records on
+    (ingest/ky_dow_swimming_advisories.STRETCHES), each listed advisory counted as a report.
 A name is compared with the national list's names and keys, case and punctuation aside. Each row: name, reports,
 points (the report's or the HAB point's own, up to five), permits, sources.
 """
@@ -31,15 +31,11 @@ EVENTS = ROOT / "data" / "build" / "events"
 HAB_DEFAULT = ROOT / "data" / "raw" / "ky-dow-hab" / "features.json"
 OUT = ROOT / "research" / "ky" / "receiving-waters-missing.json"
 PLACEHOLDER = re.compile(r"^\s*(?:unnamed(?:\s+tributary)?(?:\s+or\s+unknown)?|unknown)\s*$", re.I)
-# the waters the Division's swimming advisories page names (read 2026-11-07), with the stretch it gives
-SWIM = [("Cumberland River", "Four Mile Bridge (Highway 2014) to Pineville at the Highway 66 Bridge; Wallins Creek "
-                             "Bridge (Highway 219) to Harlan"),
-        ("Martins Fork", "Martins Fork Cumberland River from Harlan to the Cawood Water Plant"),
-        ("Catron Creek", "all of it"), ("Clover Fork", "all of it"), ("Straight Creek", "all of it"),
-        ("Poor Fork", "Harlan to Looney Creek"), ("Looney Creek", "the mouth to the Lynch Water Plant Bridge"),
-        ("North Fork Kentucky River", "upstream of Chavies"),
-        ("Licking River", "Banklick Creek to the confluence with the Ohio River"),
-        ("Banklick Creek", "all of it"), ("Three Mile Creek", "all of it")]
+# the waters the Division's swimming advisories page names, as the feed places them (review 2026-11-08 P3-4: the
+# national list's own spellings, "Clover Fork of the Cumberland River", "Poor Fork of the Cumberland River")
+sys.path.insert(0, str(ROOT / "pipeline"))
+from ingest.ky_dow_swimming_advisories import STRETCHES  # noqa: E402
+SWIM = [(w, st) for _, _, w, st, _ in STRETCHES]
 
 
 def compact(s: str) -> str:
@@ -88,7 +84,7 @@ def main(argv: list[str]) -> int:
                 add(a["HABNAME"], "ky-dow-hab-viewer", pt,
                     report=str(a.get("HABSTATUS") or "").lower() in ("warning", "danger"))
     for n, stretch in SWIM:
-        add(n, "ky-dow-swimming-advisories", stretch=stretch)
+        add(n, "ky-dow-swimming-advisories", report=True, stretch=stretch)
     rows = [{"name": n, "reports": reports[n], "permits": sorted(permits[n]), "sources": sorted(sources[n])}
             | ({"points": points[n]} if points.get(n) else {}) | ({"stretches": stretches[n]} if stretches.get(n) else {})
             for n in sorted(set(sources), key=lambda x: (-reports[x], x))]
