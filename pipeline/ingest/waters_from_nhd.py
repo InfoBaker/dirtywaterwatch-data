@@ -2020,6 +2020,70 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
     return actions
 
 
+OSM_LAKE_KINDS = {"lake", "pond", "reservoir"}
+OSM_LAKE_OVERLAP_MIN = 0.80    # an OSM lake with this share of its area on an existing lake's outline is that lake
+
+
+def recheck_osm_lakes(rows: list[dict], targets: list[dict] | None, existing: dict | None = None,
+                      when: str | None = None) -> list[dict]:
+    """Lake, pond and reservoir records built from OpenStreetMap (source "osm") that lie on an existing record's
+    outline (openboatlaunch's, or a waters-extra record's) are that water's copy and are dropped; the target rows
+    naming one go to the existing record (Ohio re-check of 2026-11-08, P1-2: lake-logan-falls-oh lay 100 per cent on
+    openboatlaunch's Lake Logan, so a spill coloured the copy while the real lake's page showed nothing). A copy is a
+    record with more than OSM_LAKE_OVERLAP_MIN of its area within an existing lake, pond or reservoir of its state,
+    whatever its name. Run at every write, as recheck_remainders is, so a batch drops a copy unaided. Changes rows and
+    targets in place; returns the actions."""
+    cands = [i for i, w in enumerate(rows) if w.get("source") == "osm" and w.get("kind") in OSM_LAKE_KINDS
+             and w.get("geometry") and w.get("bbox")]
+    if not cands:
+        return []
+    when = when or now_iso()[:10]
+    existing = existing_waters() if existing is None else existing
+    actions, moved, drop = [], {}, set()
+    for i in cands:
+        w = rows[i]
+        try:
+            g = shape(w["geometry"])
+        except Exception:
+            continue
+        if g.area <= 0:
+            continue
+        b = w["bbox"]
+        lat0 = g.centroid.y
+        gm = to_m_geom(g, lat0)
+        best = None
+        for slug, e in existing.items():
+            eb = e.get("bbox")
+            if slug == w.get("slug") or e.get("kind") not in OSM_LAKE_KINDS or \
+                    str(e.get("state") or "").upper() != str(w.get("state") or "").upper() or not eb or \
+                    eb[0] > b[2] or eb[2] < b[0] or eb[1] > b[3] or eb[3] < b[1]:
+                continue
+            eg = S.water_geometry(slug, existing)
+            if eg is None or eg.area <= 0:
+                continue
+            share = gm.intersection(to_m_geom(eg, lat0)).area / gm.area
+            if share > OSM_LAKE_OVERLAP_MIN and (best is None or share > best[0]):
+                best = (share, slug)
+        if best:
+            drop.add(i)
+            moved[w["slug"]] = best[1]
+            actions.append({"slug": w["slug"], "action": "dropped", "to": best[1],
+                            "why": f"{best[0]:.0%} of the OpenStreetMap record lay on {best[1]}'s outline (a copy)"})
+    if drop:
+        rows[:] = [w for i, w in enumerate(rows) if i not in drop]
+    for t in targets or []:
+        hits = [x for x in t.get("slugs") or [] if x in moved]
+        if not hits:
+            continue
+        t["slugs"] = list(dict.fromkeys(moved.get(x, x) for x in t["slugs"]))
+        if t.get("reach_slugs"):
+            t["reach_slugs"] = {kk: moved.get(v, v) for kk, v in t["reach_slugs"].items()}
+        t["notes"] = list(dict.fromkeys(list(t.get("notes") or []) + [
+            f"{when}: the OpenStreetMap record {x} was dropped: it lay on {moved[x]}, the record of this water"
+            for x in hits]))
+    return actions
+
+
 def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | None = None) -> tuple[dict, list[dict], dict]:
     """The state build's records that duplicate an openboatlaunch record now on file (2026-11-04: the NC, GA and FL
     records were built while openboatlaunch's extracts for those states were absent, so 'record' rows and the
@@ -2548,6 +2612,8 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
             skipped = list(skipped) + [r for r in prev.get("skipped") or [] if r.get("state") in keep_states]
     # a remainder that lies on its river's outline as it is on this machine is cut again or dropped (recheck_remainders)
     rechecked = recheck_remainders(rows, targets_rows)
+    # an OpenStreetMap lake lying on an existing lake's outline is that lake's copy and is dropped (recheck_osm_lakes)
+    rechecked += recheck_osm_lakes(rows, targets_rows)
     if rechecked:
         problems = list(problems) + [f"{a['slug']}: {a['action']} ({a['why']})" for a in rechecked]
     write_json(OUT, {
