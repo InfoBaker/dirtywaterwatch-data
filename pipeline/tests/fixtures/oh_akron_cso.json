@@ -1,0 +1,40 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "ESRI_OID": 1,
+    "name": "Cuyahoga St Storage Facility",
+    "lat": "41.112778",
+    "long": "-81.5275",
+    "status": "0",
+    "icon": "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+    "note": "The receiving water for this overflow is the Little Cuyahoga River.",
+    "updatetime": "2026-11-07 19:04:00",
+    "URL1": "https://www.akronwaterwaysrenewed.com/sites/default/files/overflow/pdfs/CSSF.pdf",
+    "URL2": "https://www.akronwaterwaysrenewed.com/sites/default/files/overflow/pdfs/BasinsDailyTotals.pdf"
+   },
+   "geometry": {
+    "x": -81.52749999999997,
+    "y": 41.11277800000005
+   }
+  },
+  {
+   "attributes": {
+    "ESRI_OID": 2,
+    "name": "Goodyear Retention Tank",
+    "lat": "41.059444",
+    "long": "-81.474722",
+    "status": "0",
+    "icon": "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+    "note": "The receiving water for this overflow is the Little Cuyahoga River.",
+    "updatetime": "2026-11-07 19:04:00",
+    "URL1": "https://www.akronwaterwaysrenewed.com/sites/default/files/overflow/pdfs/Basin02.pdf",
+    "URL2": "https://www.akronwaterwaysrenewed.com/sites/default/files/overflow/pdfs/BasinsDailyTotals.pdf"
+   },
+   "geometry": {
+    "x": -81.47472199999999,
+    "y": 41.05944400000004
+   }
+  }
+ ]
+}
