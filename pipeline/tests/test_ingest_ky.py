@@ -184,3 +184,34 @@ def test_main_reads_a_saved_zip_of_kentucky_rows(tmp_path, monkeypatch):
     assert doc["count"] == 8 and "KY" in doc["meta"]["states"]
     dropped = json.loads((tmp_path / "echo-sewer-overflow-dropped.json").read_text())
     assert dropped["count"] == 7 and "Jane Example" not in json.dumps(dropped)
+
+
+def test_a_sewer_overflow_at_the_plants_point_is_not_placed_there():
+    """Review 2026-11-08 P2-4: MSD's manhole overflow (no water named) sat at the Morris Forman plant's point, 250 m off,
+    and coloured the plant's reach; now its point is kept only as raw.reported_point. A bypass keeps its point."""
+    kept, _, _ = _by_id()
+    msd = kept["KY0022411:KY-11286:394"]
+    assert msd["lat"] is None and msd["lon"] is None and msd["coord_source"] is None
+    assert msd["raw"]["reported_point"] and "plant's location" in msd["raw"]["point_note"]
+    assert msd["raw"]["time_zone"] == "America/New_York"                       # the zone still from its own point
+    byp = kept["KY0098540:KY-11286:1552"]
+    assert byp["event_type"] == "bypass" and byp["lat"] is not None and "point_note" not in byp["raw"]
+    far = kept["KY0021466:KY-11276:1545"]                                       # SD1's Lakeview pump station
+    assert far["lat"] == 39.058611 and "point_note" not in far["raw"]
+    assert E.PLANT_POINT_STATES == {"KY"}
+
+
+def test_durations_and_computed_volumes_survive_the_house_number_scrub():
+    """Review 2026-11-08 P3-1: 'Cause/Duration of Incident: 80' read '[house number removed]'."""
+    kept, dropped, _ = _by_id()
+    assert "Cause/Duration of Incident: 80 " in kept["KY0022411:KY-11286:394"]["raw"]["sewer_overflow_bypass_description_text"]
+    t, toks = E.protect_numbers("290 MIN X 50 GAL = 14500 at 123 Example Lane")
+    out = E.restore_numbers(E.scrub_free_text({"d": t}, ["d"])["d"], toks)
+    assert "= 14500" in out and "123 Example" not in out
+    assert "123 Example" not in json.dumps(dropped)
+
+
+def test_a_lack_of_system_capacity_is_a_sewer_overflow():
+    codes, notes = E.type_from_text({"sewer_overflow_bypass_description_text":
+                                     "Nature of Incident: 4000000: EXAMPLE - LACK OF SYSTEM CAPACITY"}, ["BYP"])
+    assert codes == ["SSO"] and notes["type_as_filed"] == "BYP"

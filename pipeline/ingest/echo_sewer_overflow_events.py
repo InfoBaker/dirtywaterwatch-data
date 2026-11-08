@@ -396,6 +396,11 @@ Kentucky (permits KY...; research/ky/report.md section 2.2; not live until data/
     (STATE_TEXT_DENIAL["KY"]: dropped, 'the report says no water was reached'); 'River City Controls' and other names
     of firms and roads that hold a water word are not waters (STATE_NOT_A_WATER_TEXT["KY"]). A report that went to the
     ground or a street and answers 'No' is dropped by the generic rule ('no evidence the discharge reached a water').
+  - The plant's point (PLANT_POINT_STATES; review 2026-11-08 P2-4): 12 of the 17 kept reports whose permit has a
+    point in EPA's plant list give a point within 250 m of it, several the plant's own, so a sewer overflow whose point
+    lies within REPEATED_POINT_PLANT_M (1,000 m) of its permit's plant point keeps it only in raw.reported_point with
+    raw.point_note, and is placed by the water it names or not at all; a bypass keeps its point (it is at the plant).
+    Kentucky's one to three reports per permit cannot meet the repeat count other states use, so no count is asked.
   - The Cabinet's incident number ('Incident ID: 2559095') is kept in raw.ky_incident_id; one incident filed under two
     permits (Frankfort's plant and a general permit, 2025-12-22) stays two reports, both dropped (ground, no water).
   - Free text: the descriptions name the people who called in, responded and were notified ('Collections operator
@@ -447,6 +452,10 @@ POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-t
                     "KY": "ky-central-time-counties.json"}   # Kentucky: the Central-time counties (module docstring)
 # states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
 ZONE_ALWAYS_STATES = {"KY"}
+# states whose sewer overflow at the plant's own point (within REPEATED_POINT_PLANT_M of a point EPA's plant list gives
+# the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
+# 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
+PLANT_POINT_STATES = {"KY"}
 # a state's part in another zone, by the event's own point: [(lon_min, lon_max, lat_min, lat_max)], zone. The Aleutian
 # Islands west of 169 deg 30 min W are Hawaii-Aleutian time (49 CFR 71.12; the rest of Alaska 71.11); module docstring
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
@@ -673,7 +682,7 @@ STATE_WATER_TEXT["KY"] = ky_water_text
 TYPE_FROM_TEXT_STATES = {"KY"}
 KY_SSO_TEXT = re.compile(r"\b(?:man\s?holes?|force\s*mains?|lift\s*stations?|pump\s*stations?|wet\s*wells?|"
                          r"clean\s*-?\s*outs?|laterals?|sewer\s*(?:mains?|lines?)|line\s*breaks?|main\s*(?:break|leak)s?|"
-                         r"LS|PS|SSOs?)\b", re.I)
+                         r"LS|PS|SSOs?|(?:lack of )?system capacity)\b", re.I)   # capacity: review 2026-11-08 P3-3
 KY_PLANT_BYPASS = re.compile(r"\bbypass\w*\s+at\s+(?:the\s+)?(?:wqtc|wwtp|stp|plant|treatment)\b|"
                              r"\b(?:wqtc|wwtp|treatment\s+plant)\s+bypass", re.I)
 KY_TYPE_NOTE = ("filed as a bypass (Kentucky's system files every event so), but the description names a "
@@ -724,6 +733,24 @@ def ky_scrub_people(v: str) -> str:
 
 
 STATE_PERSON_SCRUB = {"KY": ky_scrub_people}
+# Kentucky's form writes durations and computed volumes as bare numbers ('Cause/Duration of Incident: 2615', '290 MIN X
+# 50 GAL = 14500'), which the house-number scrub took for addresses: a number after 'Duration of Incident:' or '=' is
+# kept (review 2026-11-08 P3-1)
+KEEP_NUMBER_STATES = {"KY"}
+KEEP_NUMBER = re.compile(r"((?:Duration of Incident:|=)\s*)(-?[\d,]+(?:\.\d+)?)\b", re.I)
+
+
+def protect_numbers(v: str) -> tuple[str, list[str]]:
+    toks: list[str] = []
+
+    def keep(m):
+        toks.append(m.group(2))
+        return f"{m.group(1)}KEEPNUM{len(toks) - 1}Q"
+    return KEEP_NUMBER.sub(keep, v), toks
+
+
+def restore_numbers(v: str, toks: list[str]) -> str:
+    return re.sub(r"KEEPNUM(\d+)Q", lambda m: toks[int(m.group(1))], v or "")
 KY_INCIDENT = re.compile(r"\bIncident ID:\s*(\d{5,9})\b")
 # Arizona: a water named only to deny it, and the plant's own ponds and basins, taken out before the water words
 STATE_NOT_WATER_TEXT = {"AZ": re.compile(
@@ -1369,7 +1396,9 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     kept, dropped, why = [], [], Counter()
     run_now = info.get("now") or now_iso()
     all_points = report_points(tables["events"])
-    plant_pts = plant_points({p for p, _, _ in all_points})
+    plant_pts = plant_points({p for p, _, _ in all_points}
+                             | {str(e.get("permit_identifier") or "") for e in tables["events"]
+                                if str(e.get("permit_identifier") or "")[:2] in PLANT_POINT_STATES})
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
@@ -1394,7 +1423,15 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         why[(state, "kept" if ok else "dropped", reason)] += 1
         srid = f"{permit}:{ev['program_report_form_set_id']}:{ev['sewer_overflow_bypass_event_id_ext'] or '0'}"
         if state in FREE_TEXT_STATES:
+            protected = {}
+            if state in KEEP_NUMBER_STATES:   # module docstring, Kentucky (review 2026-11-08 P3-1)
+                ev = dict(ev)
+                for f in FREE_TEXT_FIELDS:
+                    if isinstance(ev.get(f), str):
+                        ev[f], protected[f] = protect_numbers(ev[f])
             ev = scrub_free_text(dict(ev), FREE_TEXT_FIELDS)
+            for f, toks in protected.items():
+                ev[f] = restore_numbers(ev[f], toks)
             for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
                 for x in rows_:
                     scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
@@ -1489,6 +1526,14 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             lat, lon, coord_src = reg["lat"], reg["lon"], "outfall_layer"
         ev_tz, tz_basis = point_zone(state, lat, lon)
         ev_tz = PERMIT_TZ.get(permit[:2]) or ev_tz   # the Navajo Nation's clock (module docstring, Arizona)
+        plant_note = None
+        if state in PLANT_POINT_STATES and etype == "sso" and lat is not None and coord_src == "source":
+            near = min((metres((lat, lon), p_) for p_ in plant_pts.get(permit, [])), default=None)
+            if near is not None and near <= REPEATED_POINT_PLANT_M:   # module docstring, Kentucky
+                plant_note = ([lat, lon], f"the report's point lies {near:.0f} m from the point EPA's plant list gives "
+                              "the permit: taken as the plant's location, not the overflow's, so the report is "
+                              "placed by the water it names or not at all")
+                lat = lon = coord_src = None
         start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
@@ -1515,6 +1560,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         })
         raw.update(ne_notes)
         raw.update(type_notes)
+        if plant_note:
+            raw["reported_point"], raw["point_note"] = plant_note
         if state == "KY":   # the Cabinet's incident number (module docstring, Kentucky)
             m_inc = KY_INCIDENT.search(ev.get("sewer_overflow_bypass_description_text") or "")
             if m_inc:
