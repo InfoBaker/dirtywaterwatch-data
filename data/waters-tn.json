@@ -1,0 +1,6893 @@
+{
+ "state": "TN",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 179,
+ "waters": [
+  {
+   "slug": "acorn-lake-tn",
+   "name": "Acorn Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Acorn Hill"
+   ],
+   "bbox": [
+    -87.27692,
+    36.097249,
+    -87.267218,
+    36.102015
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.08,
+   "launches": [
+    "lake-acorn-small-boat-launch-tn"
+   ],
+   "water_id": "acorn-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "26603de91bce001056b6f26cef0c05331c614f590f2463558569cbfbc6574986",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bards-lake-tn",
+   "name": "Bards Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Chestnut Grove"
+   ],
+   "bbox": [
+    -87.925284,
+    36.554072,
+    -87.904806,
+    36.567934
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.995,
+   "launches": [
+    "bards-lake-boat-launch-tn"
+   ],
+   "water_id": "bards-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "424e75d46462cf10e7b4b0ba75b9bb14f98c3673e68a01ca5c9c9d7fe6ec9df4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "barren-fork-river-tn",
+   "name": "Barren Fork River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Crisp Spring",
+    "McMinnville"
+   ],
+   "bbox": [
+    -85.942397,
+    35.655013,
+    -85.726887,
+    35.699261
+   ],
+   "wikidata": "Q4863362",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pepper-branch-park-tn",
+    "riverfront-park-tn",
+    "rocket-park-tn"
+   ],
+   "water_id": "barren-fork-river-tn",
+   "gnis_id": "1276379",
+   "geometry_hash": "d61305c57f5322f5c7c5905b60d757a60734c2c075fdacedd5af7d20cd20f027",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "smooth-rapids-outfitters-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bedford-lake-tn",
+   "name": "Bedford Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Union Ridge"
+   ],
+   "bbox": [
+    -86.253462,
+    35.499462,
+    -86.244074,
+    35.506409
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "coy-gaither-bedford-lake-tn"
+   ],
+   "water_id": "bedford-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "8af40ce18f94f5c9991d95924d3500e7b10c0c553c068816741d42ba7aa61ac1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beech-lake-tn",
+   "name": "Beech Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -88.43791,
+    35.660706,
+    -88.408408,
+    35.708995
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.027,
+   "launches": [
+    "beech-lake-boat-launch-tn"
+   ],
+   "water_id": "beech-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "0673b976f7a7cce832de917741aea32e0924b8a078f70e67c403ca2bc71f7369",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bellwood-branch-tn",
+   "name": "Bellwood Branch",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Dover"
+   ],
+   "bbox": [
+    -87.768751,
+    36.502977,
+    -87.765097,
+    36.521689
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bellwood-landing-tn",
+    "teal-drive-boat-launch-tn"
+   ],
+   "water_id": "bellwood-branch-tn",
+   "gnis_id": null,
+   "geometry_hash": "d474ca34e901d76ba3f2442c3024ede32f963d0a88bf93a75e1bba9c5618550b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bennett-lake-tn",
+   "name": "Bennett Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Mineral Springs"
+   ],
+   "bbox": [
+    -85.542789,
+    35.046592,
+    -85.467205,
+    35.085655
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.636,
+   "launches": [
+    "bennett-s-lake-tn"
+   ],
+   "water_id": "bennett-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "9e840571b5beb1d092f0904e8daf29102f90e217411c78613cede3a7fbf6e118",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-lake-tn",
+   "name": "Big Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Hillville"
+   ],
+   "bbox": [
+    -89.164391,
+    35.470058,
+    -89.159755,
+    35.473288
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.066,
+   "launches": [
+    "big-lake-boat-launch-tn"
+   ],
+   "water_id": "big-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "d1a44c63552d4ba109a238a3cc4f91be8e1a0398db851024511f3e5e5410db17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bluecat-lake-tn",
+   "name": "Bluecat Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Santa Fe"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "williamsport-lakes-bluecat-tn"
+   ],
+   "water_id": "bluecat-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boone-lake-tn",
+   "name": "Boone Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Austin Springs",
+    "Blountville",
+    "Boring",
+    "Flourville",
+    "Gross Crossroad",
+    "Johnson City",
+    "Oak Grove",
+    "Spurgeon"
+   ],
+   "bbox": [
+    -82.438698,
+    36.379198,
+    -82.266436,
+    36.497748
+   ],
+   "wikidata": "Q893060",
+   "charted": false,
+   "area_km2": 15.133,
+   "launches": [
+    "airport-ramp-tn",
+    "boone-dam-tn",
+    "devault-bridge-tn",
+    "hwy-11e-new-devault-bridge-tn",
+    "pickens-bridge-tn",
+    "rainbow-bridge-tn",
+    "sugar-hollow-access-tn",
+    "winged-deer-park-tn"
+   ],
+   "water_id": "boone-lake-tn",
+   "gnis_id": "1326910",
+   "geometry_hash": "6d94f0f3f202bbdc18dcc2e78942836e8fdbcb2ff5ba456f74d76ba6b2f15eff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "boone-lake-marina-tn",
+    "davis-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "browns-creek-lake-tn",
+   "name": "Browns Creek Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -88.301961,
+    35.724261,
+    -88.2869,
+    35.740338
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.601,
+   "launches": [
+    "browns-creek-lake-ramp-tn"
+   ],
+   "water_id": "browns-creek-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "7ed603df210c5c369be62720b2296c8ad28facc7d8e344ae038b62e60dc3e11d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brush-creek-tn",
+   "name": "Brush Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Lillamay"
+   ],
+   "bbox": [
+    -87.063206,
+    36.233932,
+    -87.047736,
+    36.242792
+   ],
+   "wikidata": "Q32847189",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brush-creek-boat-launch-tn"
+   ],
+   "water_id": "brush-creek-tn",
+   "gnis_id": "1278673",
+   "geometry_hash": "1172e0d58a499d3447866c2b478876497ee089fa41c0f83b0cf1553284c2a67d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-river-tn",
+   "name": "Buffalo River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Linden",
+    "Lobelville",
+    "Metal Ford"
+   ],
+   "bbox": [
+    -87.865565,
+    35.420002,
+    -87.404425,
+    35.995863
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "canoe-launch-sr-13-at-buffalo-river-tn",
+    "hwy-412-at-buffalo-river-canoe-access-tn",
+    "metal-ford-canoe-access-tn"
+   ],
+   "water_id": "buffalo-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "4b74ab77f05ec2c51382caaad1f089e16be15bbb59afee70ebcde3a7a8c6ea6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "byrd-lake-tn",
+   "name": "Byrd Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Crossville"
+   ],
+   "bbox": [
+    -85.009889,
+    35.894798,
+    -84.997403,
+    35.900641
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.088,
+   "launches": [
+    "byrd-lake-carry-in-access-tn"
+   ],
+   "water_id": "byrd-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "46a3acc0b0436f4a63613b94a9bcd8c3835e6821c2cb54f5bab042cf69fdf475",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "calfkiller-river-tn",
+   "name": "Calfkiller River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Sparta"
+   ],
+   "bbox": [
+    -85.489929,
+    35.819542,
+    -85.308248,
+    36.10564
+   ],
+   "wikidata": "Q5019584",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "city-of-sparta-tn",
+    "city-of-sparta-2-tn"
+   ],
+   "water_id": "calfkiller-river-tn",
+   "gnis_id": "1305600",
+   "geometry_hash": "e0ec4f7a1c9714214a0b93a94149f4f6bec417293793b2337553dfcf012a811f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "candies-creek-tn",
+   "name": "Candies Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Gibson Farm Subdivision"
+   ],
+   "bbox": [
+    -84.993133,
+    35.011824,
+    -84.837189,
+    35.344974
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "candies-creek-boat-launch-tn"
+   ],
+   "water_id": "candies-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "84bc885bf9f4d554be69a9448073f3599892b99de11f227f60c0129419449ff9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cane-creek-lake-tn",
+   "name": "Cane Creek Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Cookeville"
+   ],
+   "bbox": [
+    -85.548139,
+    36.160495,
+    -85.535045,
+    36.165592
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.202,
+   "launches": [
+    "cane-creek-park-tn"
+   ],
+   "water_id": "cane-creek-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "d6c4b23a5fec9683021fabee7f02ec79f31324b699637156d987ece0703e3259",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "caney-fork-river-tn",
+   "name": "Caney Fork River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Belk",
+    "Caney Fork",
+    "Carthage",
+    "Club Springs",
+    "Cummingsville",
+    "Doyle",
+    "Fall City",
+    "Gordonsville",
+    "Joppa",
+    "Laurel Hill",
+    "McMinnville",
+    "Sparta"
+   ],
+   "bbox": [
+    -85.951598,
+    35.791222,
+    -85.155658,
+    36.248816
+   ],
+   "wikidata": "Q2936356",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "betty-s-island-boat-ramp-tn",
+    "bob-lowery-sr-boat-ramp-tn",
+    "buffalo-valley-boat-ramp-tn",
+    "happy-hollow-tn",
+    "hodges-bridge-ramp-tn",
+    "long-branch-tn",
+    "mitchell-ford-access-tn",
+    "plum-lee-ramp-tn",
+    "rock-island-state-park-tn",
+    "still-point-boat-ramp-tn",
+    "stonewall-boat-ramp-tn",
+    "three-islands-tn",
+    "tosh-reno-boat-ramp-tn",
+    "warren-county-boat-ramp-tn"
+   ],
+   "water_id": "caney-fork-river-tn",
+   "gnis_id": "1326386",
+   "geometry_hash": "9dfa465f5f980e2a08be8bf908781f1bda564a8012d041fec4338f20501a27b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cotten-s-marina-tn",
+    "horseshoe-bend-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "center-hill-lake-tn",
+   "name": "Center Hill Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Buckner",
+    "Carthage",
+    "Cookeville",
+    "Dowelltown",
+    "Hickey",
+    "Jefferson",
+    "Johnsons Chapel",
+    "Laurel Hill",
+    "Peeled Chestnut",
+    "Smithville",
+    "Williams Crossroads"
+   ],
+   "bbox": [
+    -85.879319,
+    35.885848,
+    -85.616631,
+    36.098416
+   ],
+   "wikidata": "Q5059308",
+   "charted": false,
+   "area_km2": 56.553,
+   "launches": [
+    "austin-bottom-canoe-access-tn",
+    "big-hurricane-creek-tn",
+    "center-hill-lake-boat-launch-near-laurel-hill-tn",
+    "cane-hollow-tn",
+    "center-hill-dam-boat-ramp-tn",
+    "cookeville-dock-tn",
+    "dubland-tn",
+    "edgar-evins-sp-ramp-2-tn",
+    "edgar-evins-sp-ramp-1-tn",
+    "center-hill-lake-boat-launch-near-johnsons-chapel-tn",
+    "floating-mill-recreation-area-tn",
+    "center-hill-lake-boat-launch-near-smithville-tn",
+    "hickey-access-area-boat-ramp-tn",
+    "holiday-haven-boat-ramp-tn",
+    "hurricane-bridge-ramp-tn",
+    "indian-creek-boat-ramp-tn",
+    "johnson-chapel-tn",
+    "lakeside-resort-tn",
+    "pucketts-point-tn",
+    "ragland-bottom-tn",
+    "ragland-bottom-campground-boat-ramp-tn",
+    "ramp-2-paddle-access-tn",
+    "south-shore-access-area-boat-ramp-tn"
+   ],
+   "water_id": "center-hill-lake-tn",
+   "gnis_id": "1313767",
+   "geometry_hash": "e41aab9ff192249836eb244a8a895d2427b941fbc222c4e24e6597b1b66c3ce2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "center-hill-marina-tn",
+    "edgar-evins-marina-tn",
+    "hidden-harbor-marina-tn",
+    "hurricane-marina-tn",
+    "marina-paddle-access-tn",
+    "pates-ford-marina-tn",
+    "sligo-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "champion-lake-tn",
+   "name": "Champion Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Fulton"
+   ],
+   "bbox": [
+    -89.863949,
+    35.596333,
+    -89.858718,
+    35.605928
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "champion-lake-boat-launch-tn"
+   ],
+   "water_id": "champion-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "0c4e7402b056623d9fc379992a110ffc8e47e7e6d4022ee2a1181a35f684c543",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cheatham-lake-ashland-city-tn",
+   "name": "Cheatham Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Ashland City",
+    "Chapmansboro",
+    "Fox Bluff"
+   ],
+   "bbox": [
+    -87.223795,
+    36.280166,
+    -87.084476,
+    36.320546
+   ],
+   "wikidata": "Q34767770",
+   "charted": true,
+   "area_km2": 3.854,
+   "launches": [
+    "bluff-creek-access-area-tn",
+    "cheatham-dam-campground-tn",
+    "cheatham-dam-ramp-tn",
+    "cheatham-lake-boat-launch-tn",
+    "doziers-boat-dock-tn",
+    "johnson-creek-fox-bluff-tn",
+    "sycamore-creek-boat-ramp-tn"
+   ],
+   "water_id": "cheatham-lake-ashland-city-tn",
+   "gnis_id": "1280308",
+   "geometry_hash": "6a25d8a33c20fedb92d9da09f4820a567604fec7785fe305856a354f917cecd9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cheatham-lake-tn",
+   "name": "Cheatham Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Ashland City"
+   ],
+   "bbox": [
+    -87.085824,
+    36.136235,
+    -86.914781,
+    36.282105
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.811,
+   "launches": [
+    "riverbluff-tn"
+   ],
+   "water_id": "cheatham-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "48a67a1518a120988ab73853a4a151fe45de5301cc485b5672a0ced4954583bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "harpeth-shoals-marina-tn",
+    "riverview-marina-formerly-ashland-city-dock-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cherokee-lake-tn",
+   "name": "Cherokee Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Beans",
+    "Big Q Estates",
+    "Boggs",
+    "Cedar Hills",
+    "Galbraith",
+    "Jefferson City",
+    "Lakeshore Estates",
+    "Lakewood Estates",
+    "Mary Chapel",
+    "Mooresburg",
+    "Morristown",
+    "Needmore"
+   ],
+   "bbox": [
+    -83.516084,
+    36.126827,
+    -82.964846,
+    36.404209
+   ],
+   "wikidata": "Q178970",
+   "charted": false,
+   "area_km2": 103.055,
+   "launches": [
+    "byrd-spring-branch-tn",
+    "caney-creek-tn",
+    "cedar-creek-acces-area-tn",
+    "cherokee-boat-launch-road-tn",
+    "church-house-point-canoe-access-tn",
+    "cherokee-lake-boat-launch-near-morristown-tn-2",
+    "fall-creek-recreation-area-tn",
+    "german-creek-access-area-tn",
+    "grainger-county-park-tn",
+    "greenlee-campground-tn",
+    "greenlee-campground-may-springs-tn",
+    "hwy-25e-1-tn",
+    "kidwells-ridge-tn",
+    "lambdin-branch-tn",
+    "melinda-ferry-tn",
+    "mossy-creek-canoe-access-tn",
+    "oak-grove-access-area-tn",
+    "oakland-hollow-access-area-tn",
+    "panther-creek-state-park-tn",
+    "poor-valley-tn",
+    "quarryville-tn",
+    "rock-haven-creek-tn",
+    "tva-brights-pike-canoe-access-tn",
+    "tva-cherokee-dam-tn",
+    "tva-holts-church-canoe-access-tn",
+    "tva-kellar-branch-canoe-access-tn",
+    "tva-lebanon-church-rd-canoe-access-tn",
+    "tate-springs-tn",
+    "three-springs-dock-road-canoe-access-tn",
+    "twin-churches-tn"
+   ],
+   "water_id": "cherokee-lake-tn",
+   "gnis_id": "1280322",
+   "geometry_hash": "16f0286758e815ac6c97ef9cbe44094c40e11233366c7a9a33b3e8c82eea6b88",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "black-oak-dock-tn",
+    "cardinal-cove-resort-inc-tn",
+    "cedar-hill-tn",
+    "fall-creek-boat-ramp-tn",
+    "german-creek-resort-tn",
+    "gilmore-dock-inc-tn",
+    "hamblen-boat-dock-tn",
+    "lakeside-marina-tn",
+    "wa-ni-village-boat-dock-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cherokee-reservoir-tn",
+   "name": "Cherokee Reservoir",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Bean Station"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "county-line-road-access-area-tn"
+   ],
+   "water_id": "cherokee-reservoir-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chickamauga-lake-tn",
+   "name": "Chickamauga Lake",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Arcadia Shores",
+    "Blue Springs",
+    "Breedenton",
+    "Coleman Subdivision",
+    "Dayton",
+    "Decatur",
+    "Harrison",
+    "Holly Heights",
+    "Kyle Subdivision",
+    "Lake Crest",
+    "Lakesite",
+    "Murray Hills"
+   ],
+   "bbox": [
+    -85.229039,
+    35.09332,
+    -84.762381,
+    35.622031
+   ],
+   "wikidata": "Q425851",
+   "charted": true,
+   "area_km2": 101.82,
+   "launches": [
+    "armstrong-tn",
+    "armstrong-ferry-recreation-area-tn",
+    "bear-branch-tn",
+    "blythes-ferry-meigs-county-tn",
+    "blythes-ferry-rhea-county-tn",
+    "booker-t-washington-state-park-tn",
+    "chester-frost-park-tn",
+    "chickamauga-lake-boat-launch-near-soddy-lake-heights-tn",
+    "chickamauga-lake-carry-in-access-near-lakesite-tn",
+    "chickamauga-lake-carry-in-access-near-theresa-heights-tn",
+    "cottonport-wma-access-area-tn",
+    "dayton-boat-dock-tn",
+    "chickamauga-lake-boat-launch-near-breedenton-tn",
+    "frazier-park-tn",
+    "garrison-tn",
+    "goodfield-creek-tn",
+    "grasshopper-recreation-area-tn",
+    "harrison-tn",
+    "harrison-bay-beach-paddle-access-tn",
+    "harrison-bay-state-park-tn",
+    "holly-circle-tn",
+    "hwy-30-ramps-decatur-tn",
+    "hwy-30-ramps-tn",
+    "iles-road-tn",
+    "island-view-closed-tn",
+    "lee-pike-tn",
+    "patterson-tn",
+    "pecan-point-tn",
+    "pinhook-tn",
+    "skull-island-ramp-tn",
+    "tyner-boat-ramp-tn",
+    "vincent-road-ramp-closed-tn",
+    "ware-branch-tn",
+    "wolftever-bridge-tn"
+   ],
+   "water_id": "chickamauga-lake-tn",
+   "gnis_id": "1326920",
+   "geometry_hash": "3e46b7adfccd9b96b50aceb2f0516e0935254e06e08d2ca48d8941ae29fffcf2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "blue-water-resort-and-marina-tn",
+    "chickamauga-dam-marina-tn",
+    "gold-point-marina-tn",
+    "harbor-lights-marina-inc-tn",
+    "hixson-marina-tn",
+    "island-cove-marina-resort-tn",
+    "lakeshore-marina-tn",
+    "lakesite-marina-tn",
+    "pyc-boat-ramp-tn",
+    "pine-harbor-marina-tn",
+    "sale-creek-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chilhowee-lake-tn",
+   "name": "Chilhowee Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Calderwood",
+    "Chilhowee"
+   ],
+   "bbox": [
+    -84.050397,
+    35.486573,
+    -83.979177,
+    35.557226
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.197,
+   "launches": [
+    "abram-s-creek-ramp-tn",
+    "tabcat-creek-tn"
+   ],
+   "water_id": "chilhowee-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "15b418b0b5d47051fe928112ce8ba9a5ee5c50d817e88db09c2480287c7e686b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "city-lake-tn",
+   "name": "City Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Poplar Estates"
+   ],
+   "bbox": [
+    -85.448549,
+    36.11839,
+    -85.430486,
+    36.131326
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "old-city-lake-tn"
+   ],
+   "water_id": "city-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "9d449161bf7333a26aea98ca95d9fa9fcf4d1c51428745cd23f2ace5b4959365",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-creek-tn",
+   "name": "Clear Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Frankfort",
+    "Howard Mill"
+   ],
+   "bbox": [
+    -85.000286,
+    36.090705,
+    -84.698907,
+    36.167231
+   ],
+   "wikidata": "Q34781055",
+   "charted": false,
+   "area_km2": 0.72,
+   "launches": [
+    "barnett-bridge-tn",
+    "jett-bridge-tn",
+    "lilly-bridge-tn"
+   ],
+   "water_id": "clear-creek-tn",
+   "gnis_id": "1305953",
+   "geometry_hash": "6fb53d35f29d66d8e355786b3e7027277c768f9b0a82057fdee9bfa00f941180",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-fork-tn",
+   "name": "Clear Fork",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Black Creek",
+    "Brewstertown",
+    "Shirley"
+   ],
+   "bbox": [
+    -84.812955,
+    36.293579,
+    -84.619679,
+    36.424661
+   ],
+   "wikidata": "Q5130711",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brewster-bridge-tn",
+    "burnt-mill-bridge-tn",
+    "peters-bridge-tn"
+   ],
+   "water_id": "clear-fork-tn",
+   "gnis_id": "1305959",
+   "geometry_hash": "3c474369e29de68411f2622d8772a1ccbfaa109765f0c2636edaed45629c6807",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clinch-river-chestnut-hills-tn",
+   "name": "Clinch River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Chestnut Hills",
+    "Kingston"
+   ],
+   "bbox": [
+    -84.534243,
+    35.86247,
+    -84.301179,
+    35.933523
+   ],
+   "wikidata": "Q1101503",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "clinch-river-boat-launch-near-kingston-tn",
+    "gallaher-tn"
+   ],
+   "water_id": "clinch-river-chestnut-hills-tn",
+   "gnis_id": "1307258",
+   "geometry_hash": "60b9742b2fc1647a123f3c759fee7d6085278a4aa6955d8dfbf539611e88b4a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clinch-river-tn",
+   "name": "Clinch River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Clinton",
+    "Livesay Mill",
+    "Norris",
+    "Norris Park",
+    "Rocky Top",
+    "Sneedville",
+    "Tazewell"
+   ],
+   "bbox": [
+    -84.29978,
+    35.875107,
+    -82.745462,
+    36.667361
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.928,
+   "launches": [
+    "clinton-lakefront-park-tn",
+    "dismal-bluff-tn",
+    "clinch-river-boat-launch-near-clinton-tn-3",
+    "highway-25e-bridge-access-tn",
+    "highway-61-bridge-tn",
+    "kyles-ford-canoe-access-tn",
+    "clinch-river-boat-launch-near-clinton-tn",
+    "miller-island-access-tn",
+    "miller-island-sfa-tn",
+    "peach-orchard-tn",
+    "sneedville-tn",
+    "songbird-canoe-access-tn",
+    "weir-dam-canoe-access-tn"
+   ],
+   "water_id": "clinch-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "99615799f037878a08e12c5b8108adece55158225ebb48c713f3e3cfcbb3f419",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "clinch-river-boat-launch-near-clinton-tn-4",
+    "clinch-river-boat-launch-near-clinton-tn-5",
+    "clinch-river-boat-launch-near-clinton-tn-6"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "collier-lake-tn",
+   "name": "Collier Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Jackson"
+   ],
+   "bbox": [
+    -88.731308,
+    35.629442,
+    -88.70684,
+    35.647621
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.129,
+   "launches": [
+    "access-area-1-tn"
+   ],
+   "water_id": "collier-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "5612b73612acc2a42669ac347314a1d46b03aaac501c050107960e30bb792e98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "collins-river-tn",
+   "name": "Collins River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Fall City",
+    "Isleford",
+    "McMinnville",
+    "Mount Olive",
+    "Rowland",
+    "Shellsford"
+   ],
+   "bbox": [
+    -85.742004,
+    35.454065,
+    -85.619924,
+    35.806105
+   ],
+   "wikidata": "Q5147398",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "king-s-ramp-tn",
+    "locke-bend-tn",
+    "myers-cove-tn",
+    "shellsford-access-tn",
+    "wanamaker-access-tn"
+   ],
+   "water_id": "collins-river-tn",
+   "gnis_id": "1281015",
+   "geometry_hash": "ba9e135e591de32b3a091dae0c632ef7b03a66a7d5d6452067c608c8b56133e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "old-vfw-access-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conasauga-river-tn",
+   "name": "Conasauga River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Conasauga"
+   ],
+   "bbox": [
+    -84.839986,
+    34.92603,
+    -84.636159,
+    35.011079
+   ],
+   "wikidata": "Q5158226",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "conasauga-small-boat-launch-tn"
+   ],
+   "water_id": "conasauga-river-tn",
+   "gnis_id": "327507",
+   "geometry_hash": "89b7964fee1515da76f94fad6c2bb3f35941ec276cf6c42e4bdc7433cb2bc5f0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cordell-hull-lake-tn",
+   "name": "Cordell Hull Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Carthage",
+    "Donoho",
+    "Gainesboro",
+    "Granville",
+    "Highland",
+    "Rough Point"
+   ],
+   "bbox": [
+    -85.950247,
+    36.234067,
+    -85.576409,
+    36.498117
+   ],
+   "wikidata": "Q5169941",
+   "charted": true,
+   "area_km2": 37.244,
+   "launches": [
+    "buffalo-ramp-tn",
+    "defeated-creek-recreation-area-boat-ramp-tn",
+    "flynn-s-lick-launch-area-boat-ramp-tn",
+    "high-school-ramp-tn",
+    "hollemans-bend-boat-ramp-tn",
+    "horseshoe-bend-ramp-tn",
+    "cordell-hull-lake-boat-launch-near-carthage-tn",
+    "indian-creek-campground-tn",
+    "cordell-hull-lake-boat-launch-near-carthage-tn-2",
+    "martins-creek-boat-ramp-tn",
+    "roaring-river-park-tn",
+    "cordell-hull-lake-boat-launch-near-gainesboro-tn",
+    "salt-lick-park-tn",
+    "smith-s-bend-boat-ramp-tn",
+    "sullivans-bend-boat-ramp-tn",
+    "sullivans-bend-ramp-2-tn",
+    "wartrace-park-tn",
+    "whites-bend-boat-ramp-tn"
+   ],
+   "water_id": "cordell-hull-lake-tn",
+   "gnis_id": "1303428",
+   "geometry_hash": "428168a689ce31c7c964dcd9125ffad45815ece9b546f46d3fa55e2c96cc7baa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "defeated-creek-marina-tn",
+    "granville-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "corker-slough-tn",
+   "name": "Corker Slough",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Lightfoot"
+   ],
+   "bbox": [
+    -89.672882,
+    35.773555,
+    -89.663984,
+    35.777364
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "19-boat-ramp-tn"
+   ],
+   "water_id": "corker-slough-tn",
+   "gnis_id": null,
+   "geometry_hash": "7f88a15244fc59b8bcd90c376298b32007c2709b0f242205876bdcf49a13219c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "couchville-lake-tn",
+   "name": "Couchville Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "La Vergne"
+   ],
+   "bbox": [
+    -86.549835,
+    36.09151,
+    -86.537701,
+    36.105425
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "couchville-lake-paddling-access-tn"
+   ],
+   "water_id": "couchville-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "b55a7e224fa22849c287ce900064145ff53b85e27a9cf7afc5310dcb4a410eec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cove-lake-tn",
+   "name": "Cove Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Caryville"
+   ],
+   "bbox": [
+    -84.221317,
+    36.299182,
+    -84.203986,
+    36.316531
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.566,
+   "launches": [
+    "cove-lake-carry-in-access-tn"
+   ],
+   "water_id": "cove-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "367d2abe474a3b9ccc714a1bbb3811539e66d1152ed01f71ba7b4ecff8812efc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crab-orchard-creek-tn",
+   "name": "Crab Orchard Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Pine Orchard",
+    "White Oak"
+   ],
+   "bbox": [
+    -84.699759,
+    35.944884,
+    -84.577257,
+    36.022586
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.262,
+   "launches": [
+    "camp-austin-road-bridge-tn"
+   ],
+   "water_id": "crab-orchard-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "09b7f71e66ebfa4771c1179f88f2491572bab28ac22c2ad679a58c885ae657af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cub-creek-lake-tn",
+   "name": "Cub Creek Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Parsons"
+   ],
+   "bbox": [
+    -88.255805,
+    35.777122,
+    -88.244695,
+    35.785226
+   ],
+   "wikidata": "Q34882010",
+   "charted": false,
+   "area_km2": 0.234,
+   "launches": [
+    "cub-creek-lake-paddle-access-tn"
+   ],
+   "water_id": "cub-creek-lake-tn",
+   "gnis_id": "1306217",
+   "geometry_hash": "d59661320b8046bbf0832e93a21c652c0995bd3ea94027c30cd3d1de613eda22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cumberland-river-south-fork-tn",
+   "name": "Cumberland River South Fork",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Helenwood",
+    "Huntsville",
+    "New River",
+    "Oneida",
+    "Speck"
+   ],
+   "bbox": [
+    -84.671837,
+    36.370172,
+    -84.449614,
+    36.625183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "confluence-tn",
+    "leatherwood-ford-tn",
+    "new-river-tn",
+    "o-w-tn",
+    "pine-creek-tn",
+    "station-camp-tn",
+    "towns-spring-road-tn"
+   ],
+   "water_id": "cumberland-river-south-fork-ky",
+   "gnis_id": null,
+   "geometry_hash": "500eb816155fdc5b0e7b8088803c530d1e866a5d005288f8231819f9fdc0613a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cumberland-river-tn",
+   "name": "Cumberland River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bear Spring",
+    "Butlers Landing",
+    "Carthage",
+    "Celina",
+    "Charlotte Park",
+    "Clarksville",
+    "Cumberland City",
+    "Doddsville",
+    "Dover",
+    "Fox Bluff",
+    "Hartsville",
+    "Hendersonville"
+   ],
+   "bbox": [
+    -88.22325,
+    36.135441,
+    -85.276755,
+    37.050675
+   ],
+   "wikidata": "Q1143718",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brimstone-creek-tn",
+    "butler-s-landing-launch-ramp-tn",
+    "cumberland-river-boat-launch-near-doddsville-tn",
+    "cleece-s-ferry-annex-road-tn",
+    "cleece-s-ferry-old-hickory-blvd-tn",
+    "commissary-tn",
+    "cordell-hull-dam-generator-side-boat-ramp-tn",
+    "cordell-hull-dam-lock-side-river-boat-ramp-tn",
+    "dover-landing-tn",
+    "fron-bridge-ramp-tn",
+    "hunters-point-tn",
+    "johnson-creek-gravel-ramp-tn",
+    "liberty-park-boat-ramp-tn",
+    "lock-b-northside-tn",
+    "lock-two-park-boat-ramp-tn",
+    "mcgregor-park-tn",
+    "neely-s-bend-boat-ramp-tn",
+    "old-hickory-dam-boat-ramp-tn",
+    "rome-boat-ramp-tn",
+    "shelby-park-boat-ramp-tn",
+    "south-carthage-boat-ramp-tn",
+    "twra-lock-b-southside-access-area-tn",
+    "twra-smith-s-branch-access-area-tn",
+    "taylor-s-landing-tn",
+    "trice-s-landing-tn"
+   ],
+   "water_id": "cumberland-river-ky",
+   "gnis_id": "517018",
+   "geometry_hash": "2de65e92e5ab468e08c85248eb45226bdfed3569aba775dc2ef39d78fc9e62b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "clarksville-marina-tn",
+    "montgomery-county-conservation-club-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "daddy-s-creek-tn",
+   "name": "Daddy's Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Obed Junction"
+   ],
+   "bbox": [
+    -84.948821,
+    35.890398,
+    -84.764787,
+    36.079477
+   ],
+   "wikidata": "Q38926536",
+   "charted": false,
+   "area_km2": 0.864,
+   "launches": [
+    "devils-breakfast-table-tn"
+   ],
+   "water_id": "daddy-s-creek-tn",
+   "gnis_id": "1306252",
+   "geometry_hash": "b97abf1384c1f51d2141f271fc1a49c207ae6efc9efedceb26f5f9fb049a007d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dale-hollow-lake-tn",
+   "name": "Dale Hollow Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Barnes",
+    "Byrdstown",
+    "Celina",
+    "Eastport",
+    "Fairview",
+    "Livingston",
+    "Neely Crossroads",
+    "Oak Hill",
+    "Saint John",
+    "Sunset",
+    "Thompsons Store",
+    "Willow Grove"
+   ],
+   "bbox": [
+    -85.462543,
+    36.450476,
+    -85.114349,
+    36.68046
+   ],
+   "wikidata": "Q5210483",
+   "charted": false,
+   "area_km2": 91.431,
+   "launches": [
+    "cove-creek-tn",
+    "gum-grove-boat-ramp-tn",
+    "gunnels-camp-tn",
+    "keisling-bottom-boat-ramp-tn",
+    "lillydale-boat-ramp-tn",
+    "lilydale-tn",
+    "obey-river-day-use-tn",
+    "obey-river-park-west-boat-ramp-tn",
+    "plank-yard-tn",
+    "pleasant-grove-day-use-area-tn",
+    "pleasant-grove-recreation-area-tn",
+    "sunset-dock-tn",
+    "willow-grove-campground-ramp-tn"
+   ],
+   "water_id": "dale-hollow-lake-ky",
+   "gnis_id": "1269513",
+   "geometry_hash": "775f51326de30da77b1d99975b6c5b430a43c88840aa709313f80e510aa5ea55",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "cedar-hill-marina-tn",
+    "cedar-hill-marina-and-resort-tn",
+    "dale-hollow-dam-overlook-boat-ramp-tn",
+    "dale-hollow-marina-tn",
+    "eagle-cove-marina-tn",
+    "east-port-marina-tn",
+    "holly-creek-dock-tn",
+    "holly-creek-marina-tn",
+    "horse-creek-marina-tn",
+    "horse-creek-resort-tn",
+    "livingston-marina-tn",
+    "mitchell-creek-marina-livingston-tn",
+    "mitchell-creek-marina-tn",
+    "star-point-dock-tn",
+    "sunset-marina-resort-tn",
+    "willow-grove-dock-resort-tn",
+    "willow-grove-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dogwood-lake-tn",
+   "name": "Dogwood Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Parsons"
+   ],
+   "bbox": [
+    -88.247766,
+    35.696149,
+    -88.227816,
+    35.722497
+   ],
+   "wikidata": "Q34883851",
+   "charted": false,
+   "area_km2": 1.616,
+   "launches": [
+    "dogwood-lake-boat-launch-tn"
+   ],
+   "water_id": "dogwood-lake-tn",
+   "gnis_id": "1302050",
+   "geometry_hash": "0a4f2b67428574b171b5fef542ef4b9bb27e5968889dbd53a756b2a4d080328c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "douglas-lake-tn",
+   "name": "Douglas Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Baneberry",
+    "Belmont",
+    "Dandridge",
+    "Fairgarden",
+    "Millican Grove",
+    "Newport",
+    "Oak Grove",
+    "Sandy Ridge",
+    "Sevierville",
+    "Shady Grove",
+    "Tryon",
+    "Union Grove"
+   ],
+   "bbox": [
+    -83.539187,
+    35.902904,
+    -83.190803,
+    36.124245
+   ],
+   "wikidata": "Q5301712",
+   "charted": false,
+   "area_km2": 105.776,
+   "launches": [
+    "dandridge-access-tn",
+    "douglas-lake-boat-launch-near-sevierville-tn-18",
+    "moon-hill-bridge-tn",
+    "nina-tn",
+    "shady-grove-tva-tn",
+    "spring-creek-tn",
+    "swanns-chapel-tn"
+   ],
+   "water_id": "douglas-lake-tn",
+   "gnis_id": "1282739",
+   "geometry_hash": "c425bea634494392807ac19f3694c24e8ddf679182e2fd33e1f315b788b65214",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cowboy-s-bar-and-grill-at-lakeside-tn",
+    "douglas-lake-boat-launch-near-baneberry-tn",
+    "douglas-lake-boat-launch-near-baneberry-tn-2",
+    "douglas-lake-boat-launch-near-baneberry-tn-3",
+    "douglas-lake-boat-launch-near-baneberry-tn-4",
+    "douglas-lake-boat-launch-near-baneberry-tn-5",
+    "douglas-lake-boat-launch-near-belmont-tn",
+    "douglas-lake-boat-launch-near-dandridge-tn-10",
+    "douglas-lake-boat-launch-near-dandridge-tn-100",
+    "douglas-lake-boat-launch-near-dandridge-tn-11",
+    "douglas-lake-boat-launch-near-dandridge-tn-119",
+    "douglas-lake-boat-launch-near-dandridge-tn-12",
+    "douglas-lake-boat-launch-near-dandridge-tn-122",
+    "douglas-lake-boat-launch-near-dandridge-tn-123",
+    "douglas-lake-boat-launch-near-dandridge-tn-124",
+    "douglas-lake-boat-launch-near-dandridge-tn-13",
+    "douglas-lake-boat-launch-near-dandridge-tn-14",
+    "douglas-lake-boat-launch-near-dandridge-tn-15",
+    "douglas-lake-boat-launch-near-dandridge-tn-16",
+    "douglas-lake-boat-launch-near-dandridge-tn-17",
+    "douglas-lake-boat-launch-near-dandridge-tn-18",
+    "douglas-lake-boat-launch-near-dandridge-tn-19",
+    "douglas-lake-boat-launch-near-dandridge-tn-20",
+    "douglas-lake-boat-launch-near-dandridge-tn-21",
+    "douglas-lake-boat-launch-near-dandridge-tn-22",
+    "douglas-lake-boat-launch-near-dandridge-tn-23",
+    "douglas-lake-boat-launch-near-dandridge-tn-24",
+    "douglas-lake-boat-launch-near-dandridge-tn-25",
+    "douglas-lake-boat-launch-near-dandridge-tn-26",
+    "douglas-lake-boat-launch-near-dandridge-tn-27",
+    "douglas-lake-boat-launch-near-dandridge-tn-28",
+    "douglas-lake-boat-launch-near-dandridge-tn-29",
+    "douglas-lake-boat-launch-near-dandridge-tn-30",
+    "douglas-lake-boat-launch-near-dandridge-tn-32",
+    "douglas-lake-boat-launch-near-dandridge-tn-33",
+    "douglas-lake-boat-launch-near-dandridge-tn-34",
+    "douglas-lake-boat-launch-near-dandridge-tn-35",
+    "douglas-lake-boat-launch-near-dandridge-tn-36",
+    "douglas-lake-boat-launch-near-dandridge-tn-38",
+    "douglas-lake-boat-launch-near-dandridge-tn-4",
+    "douglas-lake-boat-launch-near-dandridge-tn-40",
+    "douglas-lake-boat-launch-near-dandridge-tn-41",
+    "douglas-lake-boat-launch-near-dandridge-tn-42",
+    "douglas-lake-boat-launch-near-dandridge-tn-43",
+    "douglas-lake-boat-launch-near-dandridge-tn-44",
+    "douglas-lake-boat-launch-near-dandridge-tn-45",
+    "douglas-lake-boat-launch-near-dandridge-tn-46",
+    "douglas-lake-boat-launch-near-dandridge-tn-48",
+    "douglas-lake-boat-launch-near-dandridge-tn-49",
+    "douglas-lake-boat-launch-near-dandridge-tn-50",
+    "douglas-lake-boat-launch-near-dandridge-tn-51",
+    "douglas-lake-boat-launch-near-dandridge-tn-52",
+    "douglas-lake-boat-launch-near-dandridge-tn-53",
+    "douglas-lake-boat-launch-near-dandridge-tn-54",
+    "douglas-lake-boat-launch-near-dandridge-tn-55",
+    "douglas-lake-boat-launch-near-dandridge-tn-56",
+    "douglas-lake-boat-launch-near-dandridge-tn-57",
+    "douglas-lake-boat-launch-near-dandridge-tn-58",
+    "douglas-lake-boat-launch-near-dandridge-tn-59",
+    "douglas-lake-boat-launch-near-dandridge-tn-60",
+    "douglas-lake-boat-launch-near-dandridge-tn-61",
+    "douglas-lake-boat-launch-near-dandridge-tn-62",
+    "douglas-lake-boat-launch-near-dandridge-tn-63",
+    "douglas-lake-boat-launch-near-dandridge-tn-64",
+    "douglas-lake-boat-launch-near-dandridge-tn-65",
+    "douglas-lake-boat-launch-near-dandridge-tn-66",
+    "douglas-lake-boat-launch-near-dandridge-tn-67",
+    "douglas-lake-boat-launch-near-dandridge-tn-68",
+    "douglas-lake-boat-launch-near-dandridge-tn-69",
+    "douglas-lake-boat-launch-near-dandridge-tn-70",
+    "douglas-lake-boat-launch-near-dandridge-tn-74",
+    "douglas-lake-boat-launch-near-dandridge-tn-75",
+    "douglas-lake-boat-launch-near-dandridge-tn-76",
+    "douglas-lake-boat-launch-near-dandridge-tn-77",
+    "douglas-lake-boat-launch-near-dandridge-tn-78",
+    "douglas-lake-boat-launch-near-dandridge-tn-79",
+    "douglas-lake-boat-launch-near-dandridge-tn-80",
+    "douglas-lake-boat-launch-near-dandridge-tn-81",
+    "douglas-lake-boat-launch-near-dandridge-tn-82",
+    "douglas-lake-boat-launch-near-dandridge-tn-83",
+    "douglas-lake-boat-launch-near-dandridge-tn-84",
+    "douglas-lake-boat-launch-near-dandridge-tn-85",
+    "douglas-lake-boat-launch-near-dandridge-tn-86",
+    "douglas-lake-boat-launch-near-dandridge-tn-87",
+    "douglas-lake-boat-launch-near-dandridge-tn-88",
+    "douglas-lake-boat-launch-near-dandridge-tn-89",
+    "douglas-lake-boat-launch-near-dandridge-tn-9",
+    "douglas-lake-boat-launch-near-dandridge-tn-90",
+    "douglas-lake-boat-launch-near-dandridge-tn-91",
+    "douglas-lake-boat-launch-near-dandridge-tn-92",
+    "douglas-lake-boat-launch-near-dandridge-tn-93",
+    "douglas-lake-boat-launch-near-dandridge-tn-95",
+    "douglas-lake-boat-launch-near-dandridge-tn-96",
+    "douglas-lake-boat-launch-near-dandridge-tn-97",
+    "douglas-lake-boat-launch-near-dandridge-tn-98",
+    "douglas-lake-boat-launch-near-dandridge-tn-99",
+    "douglas-lake-boat-launch-near-fairgarden-tn",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-12",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-2",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-3",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-4",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-5",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-6",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-7",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-8",
+    "douglas-lake-boat-launch-near-sandy-ridge-tn-9",
+    "douglas-lake-boat-launch-near-sevierville-tn-10",
+    "douglas-lake-boat-launch-near-sevierville-tn-11",
+    "douglas-lake-boat-launch-near-sevierville-tn-12",
+    "douglas-lake-boat-launch-near-sevierville-tn-14",
+    "douglas-lake-boat-launch-near-sevierville-tn-15",
+    "douglas-lake-boat-launch-near-sevierville-tn-16",
+    "douglas-lake-boat-launch-near-sevierville-tn-22",
+    "douglas-lake-boat-launch-near-sevierville-tn-5",
+    "douglas-lake-boat-launch-near-tryon-tn",
+    "douglas-lake-boat-launch-near-tryon-tn-2",
+    "douglas-lake-boat-launch-near-white-pine-tn",
+    "douglas-lake-boat-launch-near-white-pine-tn-2",
+    "douglas-lake-boat-launch-near-white-pine-tn-3",
+    "douglas-lake-boat-launch-near-white-pine-tn-4",
+    "douglas-lake-boat-launch-near-white-pine-tn-5",
+    "douglas-lake-boat-launch-near-white-pine-tn-6",
+    "fanchers-campground-tn",
+    "inspiration-point-inc-tn",
+    "mountain-cove-marina-tn",
+    "mountain-harbor-inn-tn",
+    "oasis-cove-marina-tn",
+    "swann-s-marina-tn",
+    "the-point-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "duck-river-tn",
+   "name": "Duck River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Centerville",
+    "Chapel Hill",
+    "Columbia",
+    "Fikes Mill",
+    "Leftwich",
+    "Littlelot",
+    "Lobelville",
+    "Milltown",
+    "Normandy",
+    "Shelbyville",
+    "Taylortown",
+    "Waverly"
+   ],
+   "bbox": [
+    -87.934502,
+    35.44309,
+    -86.243314,
+    36.045685
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.159,
+   "launches": [
+    "carpenter-bridge-access-tn",
+    "centerville-park-ramp-tn",
+    "chickasaw-trace-park-tn",
+    "dement-bridge-tn",
+    "duck-river-mile-11-5-r-cold-branch-tn",
+    "fishermans-park-canoe-access-tn",
+    "fountain-creek-tn",
+    "henry-horton-park-tn",
+    "highway-48-bridge-tn",
+    "howard-bridge-road-access-tn",
+    "hurricane-mills-tn",
+    "hwy-82-bridge-tn",
+    "iron-bridge-access-tn",
+    "lillard-s-mill-tn",
+    "littlelot-road-bridge-tn",
+    "mullins-mill-bridge-tn",
+    "normandy-dam-ramp-tn",
+    "pollard-boat-launching-area-tn",
+    "river-access-3-take-out-tn",
+    "riverside-access-area-tn",
+    "shelbyville-city-park-tn",
+    "sowell-mill-pk-tn",
+    "three-forks-bridge-tn",
+    "warners-bridge-tn",
+    "williamsport-bridge-tn"
+   ],
+   "water_id": "duck-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "fe78310bbbe7307f2f455c22e7bdfc89cf7d7cb4fbb084c62a33577deb83d121",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-obey-river-tn",
+   "name": "East Fork Obey River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Riverton"
+   ],
+   "bbox": [
+    -85.121815,
+    36.442958,
+    -85.081428,
+    36.453758
+   ],
+   "wikidata": "Q56569092",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "compton-s-boat-ramp-tn"
+   ],
+   "water_id": "east-fork-obey-river-tn",
+   "gnis_id": "1303447",
+   "geometry_hash": "64656ed669b0b847ca03be5d1cbeadb4b3b6658661401b781583777e06e45bf8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-stones-river-tn",
+   "name": "East Fork Stones River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Mona",
+    "Smyrna",
+    "Walterhill"
+   ],
+   "bbox": [
+    -86.458709,
+    35.810274,
+    -85.975721,
+    35.988751
+   ],
+   "wikidata": "Q56569245",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-fork-boat-ramp-tn",
+    "mona-boat-ramp-tn",
+    "walter-hill-boat-ramp-tn"
+   ],
+   "water_id": "east-fork-stones-river-tn",
+   "gnis_id": "1283369",
+   "geometry_hash": "75f45272c90b49ded8f9f2cfccceb6f5d1413d4c3da67cb6b7ca0cb2351b5364",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eldridge-branch-tn",
+   "name": "Eldridge Branch",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Soddy-Daisy"
+   ],
+   "bbox": [
+    -85.064841,
+    35.288428,
+    -85.026226,
+    35.307891
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "eldridge-slough-ramp-tn"
+   ],
+   "water_id": "eldridge-branch-tn",
+   "gnis_id": null,
+   "geometry_hash": "35d327593ce2464dc9c9b11c63b3814fd9b989c12f91286c40884e3b4f457bcd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-river-tn",
+   "name": "Elk River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bethel",
+    "Elkton",
+    "Fayetteville",
+    "Hurdlow",
+    "Shady Grove",
+    "Smithland"
+   ],
+   "bbox": [
+    -87.030495,
+    34.967807,
+    -85.834423,
+    35.360177
+   ],
+   "wikidata": "Q5364109",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chenault-ford-tn",
+    "dabb-s-ford-bridge-tn",
+    "dickey-bridge-tn",
+    "farris-creek-bridge-canoe-access-tn",
+    "elk-river-boat-launch-tn",
+    "matt-gardner-elk-river-access-area-tn",
+    "old-dam-ford-tn",
+    "shiloh-bridge-canoe-access-tn",
+    "stone-bridge-park-paddle-craft-launch-tn",
+    "stump-shoals-tn",
+    "veto-access-area-tn"
+   ],
+   "water_id": "elk-river-al",
+   "gnis_id": "117929",
+   "geometry_hash": "f01efb231e0e3fdfeec4d5a96e8b59830ae5a218297766e23db28630caabb05e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "emory-river-tn",
+   "name": "Emory River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Deermont",
+    "Harriman",
+    "Nemo",
+    "Wartburg"
+   ],
+   "bbox": [
+    -84.677976,
+    35.887484,
+    -84.446519,
+    36.177835
+   ],
+   "wikidata": "Q1339067",
+   "charted": true,
+   "area_km2": 3.143,
+   "launches": [
+    "harriman-city-ramp-tn",
+    "montgomery-road-bridge-tn",
+    "nemo-tn",
+    "reister-access-tn"
+   ],
+   "water_id": "emory-river-tn",
+   "gnis_id": "1283771",
+   "geometry_hash": "08b052cc67b939f3a5179f30aba78994da2a22d849ad7183e167a6364c83f281",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fall-creek-falls-lake-tn",
+   "name": "Fall Creek Falls Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Fall Creek Mennonite Community"
+   ],
+   "bbox": [
+    -85.388836,
+    35.64339,
+    -85.35752,
+    35.66248
+   ],
+   "wikidata": "Q34885215",
+   "charted": false,
+   "area_km2": 1.1,
+   "launches": [
+    "fall-creek-falls-boat-dock-tn"
+   ],
+   "water_id": "fall-creek-falls-lake-tn",
+   "gnis_id": "1302011",
+   "geometry_hash": "6e2fd1e1934b114c7877719e2e6ec40e50faab320999c19183a93ee4317bf9a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flat-creek-tn",
+   "name": "Flat Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Huntsville"
+   ],
+   "bbox": [
+    -84.508537,
+    36.405027,
+    -84.497835,
+    36.423665
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "huntsville-reservoir-tn"
+   ],
+   "water_id": "flat-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "d4612edcf94cd2cdbf23e662a4b019b4512251f0421b836c2d50a47fdddc7c9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-loudoun-lake-tn",
+   "name": "Fort Loudoun Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Alcoa",
+    "Cactus Cove",
+    "Choto Hills",
+    "Farragut",
+    "Friendsville",
+    "Knoxville",
+    "Lenoir City",
+    "Little River",
+    "Louisville",
+    "Marmor",
+    "Singleton",
+    "Unitia"
+   ],
+   "bbox": [
+    -84.24506,
+    35.740664,
+    -83.915467,
+    35.909246
+   ],
+   "wikidata": "Q5471549",
+   "charted": true,
+   "area_km2": 47.013,
+   "launches": [
+    "carl-cowan-park-tn",
+    "concord-park-tn",
+    "fort-loudoun-lake-boat-launch-near-farragut-tn-6",
+    "gallagher-creek-tn",
+    "george-s-creek-tn",
+    "fort-loudoun-lake-boat-launch-near-knoxville-tn-3",
+    "ish-creek-tn",
+    "lakeland-dr-tn",
+    "lenoir-city-park-ramp-tn",
+    "fort-loudoun-lake-boat-launch-near-knoxville-tn",
+    "louisville-point-park-tn",
+    "lowe-s-ferry-tn",
+    "maxey-s-dock-tn",
+    "parks-ferry-tn",
+    "polland-creek-tn",
+    "rockford-access-tn",
+    "singleton-ramp-tn",
+    "stock-creek-tn",
+    "taliferro-bend-tn",
+    "unita-tn",
+    "yarberry-campground-tn"
+   ],
+   "water_id": "fort-loudoun-lake-tn",
+   "gnis_id": "1307966",
+   "geometry_hash": "03bce5cff3e291037af886e82613b350653ca164a4f5bfb7558386ecc4ec9cf2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "choto-marina-tn",
+    "concord-marina-tn",
+    "duncan-boat-dock-tn",
+    "fox-road-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fort-patrick-henry-lake-tn",
+   "name": "Fort Patrick Henry Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Colonial Heights",
+    "Kingsport"
+   ],
+   "bbox": [
+    -82.510528,
+    36.496778,
+    -82.471836,
+    36.511943
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.262,
+   "launches": [
+    "cooks-valley-tn",
+    "fort-patrick-henry-lake-boat-launch-tn",
+    "warriors-path-state-park-tn"
+   ],
+   "water_id": "fort-patrick-henry-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "0c1c182098ef92466c0b71d5c83be90ab0fe8f66952fb4605414bf13d2ca26fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-pillow-lake-tn",
+   "name": "Fort Pillow Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Oak Grove"
+   ],
+   "bbox": [
+    -89.844332,
+    35.628349,
+    -89.841977,
+    35.634725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.074,
+   "launches": [
+    "fort-pillow-lake-boat-launch-tn"
+   ],
+   "water_id": "fort-pillow-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "3edbc85e986fbfc38bc7fc998db0d1f0969ddb9908e137a7e9efb027a603e5ac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "french-broad-river-tn",
+   "name": "French Broad River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Baneberry",
+    "Boyds Creek",
+    "Del Rio",
+    "Lanceville",
+    "Newport",
+    "Rankin",
+    "Sevierville",
+    "Strawberry Plains",
+    "White Pine",
+    "Wolf Creek"
+   ],
+   "bbox": [
+    -83.850517,
+    35.907754,
+    -82.894345,
+    36.088866
+   ],
+   "wikidata": "Q478303",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cruze-landing-tn",
+    "douglas-tailwater-access-tn",
+    "highway-66-bridge-tn",
+    "leadvale-access-area-tn",
+    "french-broad-river-boat-launch-near-boyds-creek-tn",
+    "rankin-tn",
+    "sand-bar-launch-tn",
+    "seven-islands-tn",
+    "seven-islands-state-park-tn",
+    "walters-bridge-tn",
+    "weaver-bend-canoe-access-tn",
+    "wolf-creek-tn"
+   ],
+   "water_id": "french-broad-river-nc",
+   "gnis_id": "1306463",
+   "geometry_hash": "e62233ef44af8e7b6d3bb2be673691b297dafc0aeca80025c11dfb131cfa2b77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "highway-321-bridge-canoe-access-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "garrett-lake-tn",
+   "name": "Garrett Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Eagle Hill"
+   ],
+   "bbox": [
+    -88.559455,
+    36.325499,
+    -88.544156,
+    36.340816
+   ],
+   "wikidata": "Q34886570",
+   "charted": false,
+   "area_km2": 0.728,
+   "launches": [
+    "garrett-lake-boat-launch-tn"
+   ],
+   "water_id": "garrett-lake-tn",
+   "gnis_id": "1302507",
+   "geometry_hash": "44cbc6121ca5f972e5c264859022f35d357fd538e28adc178f43601d7be516a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gibson-county-lake-tn",
+   "name": "Gibson County Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Trenton"
+   ],
+   "bbox": [
+    -88.887585,
+    35.97644,
+    -88.864266,
+    35.999983
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.907,
+   "launches": [
+    "gibson-county-lake-boat-launch-tn"
+   ],
+   "water_id": "gibson-county-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "bce46b01934b3d20f9ec238ed26f0125d48fdc34bb6e653c577b044778f46ba9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "glenn-springs-lake-tn",
+   "name": "Glenn Springs Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Atoka"
+   ],
+   "bbox": [
+    -89.885925,
+    35.462571,
+    -89.86259,
+    35.481271
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.045,
+   "launches": [
+    "glen-springs-twra-ramp-tn"
+   ],
+   "water_id": "glenn-springs-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "aec16e928dfe4a197b7afcb118468351018a90619c2445932a4d01814a3d80e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "glover-basin-tn",
+   "name": "Glover Basin",
+   "kind": "bay",
+   "state": "TN",
+   "towns": [
+    "Walnut Log"
+   ],
+   "bbox": null,
+   "wikidata": "Q49378048",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "goose-pen-canoe-trail-canoe-ramp-tn"
+   ],
+   "water_id": "glover-basin-tn",
+   "gnis_id": "1311828",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "goldeneye-lake-tn",
+   "name": "Goldeneye Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Fikes Mill"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "williamsport-lakes-goldeneye-tn"
+   ],
+   "water_id": "goldeneye-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gooch-unit-e-lake-tn",
+   "name": "Gooch Unit E Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Crockett"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gooch-unit-e-ramp-tn"
+   ],
+   "water_id": "gooch-unit-e-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "goose-creek-tn",
+   "name": "Goose Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Hartsville"
+   ],
+   "bbox": [
+    -86.161939,
+    36.355845,
+    -86.040616,
+    36.510342
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "goose-creek-boat-launch-tn"
+   ],
+   "water_id": "goose-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "632dd495e0e89f88e47ea7ca7a05071439a0a3c8716df91aeff6fabccb5dd2ea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grasshopper-creek-tn",
+   "name": "Grasshopper Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Bluff View"
+   ],
+   "bbox": [
+    -85.04766,
+    35.282075,
+    -85.000675,
+    35.347758
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "grasshopper-recreation-area-bluff-view-tn"
+   ],
+   "water_id": "grasshopper-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "33bae6d32f29b3fd61e19814c4b9cf2869f1bee182c03f5c302095bc69f6cf02",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "guntersville-lake-tn",
+   "name": "Guntersville Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "New Hope",
+    "South Pittsburg"
+   ],
+   "bbox": [
+    -86.394613,
+    34.290613,
+    -85.615301,
+    35.038654
+   ],
+   "wikidata": "Q3561578",
+   "charted": true,
+   "area_km2": 213.664,
+   "launches": [
+    "blue-bridge-ramp-tn",
+    "jc-ramp-in-south-pittsburg-tn",
+    "nickajack-dam-reservation-tn"
+   ],
+   "water_id": "guntersville-lake-al",
+   "gnis_id": "119508",
+   "geometry_hash": "a665c25937d333b0115b40f6f45ed4fd302d245ded3d5cc9012ca06ea221bcb6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harpeth-river-tn",
+   "name": "Harpeth River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Dozier",
+    "Franklin",
+    "Kingston Springs",
+    "Newsom",
+    "Pegram",
+    "Shacklett"
+   ],
+   "bbox": [
+    -87.193863,
+    35.765719,
+    -86.645469,
+    36.304812
+   ],
+   "wikidata": "Q5663540",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "eastern-flank-canoe-ramp-tn",
+    "gossett-tract-small-boat-river-access-tn",
+    "harpeth-river-boat-launch-tn",
+    "harpeth-river-bridge-boat-ramp-tn",
+    "harpeth-river-campground-tn",
+    "harpeth-river-state-park-tn",
+    "harpeth-state-park-newsom-s-mill-tn",
+    "hidden-lake-river-access-tn",
+    "hwy-249-river-access-tn",
+    "hwy-70-small-boat-river-access-tn",
+    "kingston-springs-river-access-tn",
+    "narrows-small-boat-river-access-tn"
+   ],
+   "water_id": "harpeth-river-tn",
+   "gnis_id": "1303466",
+   "geometry_hash": "c7064257318c798d08e703efcda3b3363922bed8410f9e6bd21b2754a7b80573",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hatchie-river-tn",
+   "name": "Hatchie River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bolivar",
+    "Brownsville",
+    "Cotton Lake",
+    "Detroit",
+    "Hatchie",
+    "Middleton",
+    "Oak Grove",
+    "Pocahontas",
+    "Vildo"
+   ],
+   "bbox": [
+    -89.901844,
+    34.989281,
+    -88.78001,
+    35.652424
+   ],
+   "wikidata": "Q5681137",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-eddy-road-ramp-tn",
+    "coxs-bridge-tn",
+    "hatchie-river-boat-launch-tn",
+    "hatchie-river-boat-launch-near-brownsville-tn",
+    "hatchie-river-boat-launch-near-brownsville-tn-2",
+    "hatchie-river-boat-launch-near-brownsville-tn-3",
+    "hatchie-river-boat-launch-near-brownsville-tn-4",
+    "hatchie-river-boat-launch-near-brownsville-tn-5",
+    "hatchie-river-boat-launch-near-brownsville-tn-6",
+    "hatchie-river-boat-launch-near-brownsville-tn-7",
+    "hatchie-river-boat-launch-near-detroit-tn",
+    "hatchie-river-boat-launch-near-oak-grove-tn",
+    "highway-100-tn",
+    "highway-18-tn",
+    "highway-54-cotton-lake-tn",
+    "highway-57-tn",
+    "highway-64-tn",
+    "highway-76-tn",
+    "hop-in-tn"
+   ],
+   "water_id": "hatchie-river-tn",
+   "gnis_id": "1306552",
+   "geometry_hash": "f99787737c593cf21b608484ef8a60638234fd057e7646f9d35e5201a92f65c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "highway-51-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herb-parsons-lake-tn",
+   "name": "Herb Parsons Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Collierville"
+   ],
+   "bbox": [
+    -89.627712,
+    35.128724,
+    -89.612053,
+    35.14083
+   ],
+   "wikidata": "Q7352816",
+   "charted": false,
+   "area_km2": 0.579,
+   "launches": [
+    "bill-dance-lake-state-fishing-area-tn"
+   ],
+   "water_id": "herb-parsons-lake-tn",
+   "gnis_id": "1287484",
+   "geometry_hash": "fc232bdf39fba3050e8ff4563ea2d47c6c25a1eec723749ec441936ad9fdb029",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hickman-creek-tn",
+   "name": "Hickman Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Dover"
+   ],
+   "bbox": [
+    -87.912195,
+    36.457194,
+    -87.85758,
+    36.497437
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hickman-creek-boat-launch-tn"
+   ],
+   "water_id": "hickman-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "f54793c3cbc28b89aaaa8ce48ae50227f5b0d1a2b69fbdb1dd60c1407f090652",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hickman-creek-boat-launch-dover-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hiwassee-river-tn",
+   "name": "Hiwassee River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Austral",
+    "Benton",
+    "Big Spring",
+    "Calhoun",
+    "Charleston",
+    "Etowah",
+    "Marina Hills",
+    "Patty",
+    "Reliance"
+   ],
+   "bbox": [
+    -85.009968,
+    35.140447,
+    -84.192326,
+    35.41225
+   ],
+   "wikidata": "Q3138706",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "charleston-boat-ramp-tn",
+    "gee-creek-tn",
+    "highway-411-bridge-ramp-tn",
+    "old-patty-bridge-tn",
+    "patty-bridge-tn",
+    "powerhouse-boat-ramp-tn",
+    "tn-state-park-at-reliance-tn"
+   ],
+   "water_id": "hiwassee-river-nc",
+   "gnis_id": "1328447",
+   "geometry_hash": "cbc96907a277728ca6f12448a85478da64c69933c1dcae51d18cab8df10432c0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "agency-creek-campground-tn",
+    "b-b-marina-tn",
+    "two-rivers-campground-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holston-river-tn",
+   "name": "Holston River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Church Hill",
+    "Jefferson City",
+    "Knoxville",
+    "Rogersville",
+    "Strawberry Plains",
+    "Surgoinsville"
+   ],
+   "bbox": [
+    -83.859704,
+    35.958988,
+    -82.608001,
+    36.548771
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.691,
+   "launches": [
+    "asheville-hwy-access-area-tn",
+    "beech-creek-1-tn",
+    "beech-creek-2-tn",
+    "boyd-island-access-tn",
+    "cherokee-dam-tailwaters-tn",
+    "christian-bend-tn",
+    "church-hill-city-park-access-tn",
+    "john-sevier-steamplant-tn",
+    "laurel-run-park-tn",
+    "nance-s-ferry-tn",
+    "surgoinsville-bridge-tn"
+   ],
+   "water_id": "holston-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "25b7825a28dd6fdb71965f9e70725e207f9fc15bac2103e974101a199a2cce02",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "holston-river-boat-launch-near-jefferson-city-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "humboldt-lake-tn",
+   "name": "Humboldt Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Humboldt"
+   ],
+   "bbox": [
+    -88.990374,
+    35.817639,
+    -88.982096,
+    35.827815
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.286,
+   "launches": [
+    "davy-crockett-lake-tn"
+   ],
+   "water_id": "humboldt-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "da25cf115982e7b394a5a4e7e04c55050d2de4f32f6005c80e7267ba83b2d753",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hyde-lake-tn",
+   "name": "Hyde Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Cordova"
+   ],
+   "bbox": [
+    -89.840438,
+    35.134961,
+    -89.826093,
+    35.141625
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.254,
+   "launches": [
+    "hyde-lake-boat-launch-tn"
+   ],
+   "water_id": "hyde-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "c7c2da2b5e3978b003e6cf78534edc53f84214d7f43c84ae2c7bf131b6ef50c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "j-percy-priest-lake-tn",
+   "name": "J. Percy Priest Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "East Point",
+    "Harbor Isles",
+    "La Vergne",
+    "Mount Juliet",
+    "Murphree",
+    "Nashville",
+    "Priest Lake Park",
+    "Smith Springs",
+    "Smyrna"
+   ],
+   "bbox": [
+    -86.629105,
+    35.997512,
+    -86.42528,
+    36.163282
+   ],
+   "wikidata": "Q7167526",
+   "charted": false,
+   "area_km2": 51.037,
+   "launches": [
+    "anderson-boat-ramp-tn",
+    "bryant-s-grove-tn",
+    "j-percy-priest-lake-boat-launch-near-mount-juliet-tn",
+    "cook-recreation-area-tn",
+    "elm-hill-park-access-tn",
+    "fall-creek-tn",
+    "j-percy-priest-lake-boat-launch-near-smyrna-tn",
+    "hamilton-creek-boat-ramp-tn",
+    "hurricane-creek-tn",
+    "jefferson-springs-tn",
+    "lamar-hill-boat-ramp-tn",
+    "long-hunter-boat-ramp-tn",
+    "j-percy-priest-lake-boat-launch-near-nashville-tn",
+    "poole-s-knob-campground-tn",
+    "poole-s-knob-recreation-area-tn",
+    "seven-points-boat-ramp-tn",
+    "seven-points-rec-area-campground-tn",
+    "j-percy-priest-lake-boat-launch-near-smith-springs-tn",
+    "smith-s-spring-park-tn",
+    "stewarts-creek-tn",
+    "vivrett-creek-recreation-area-tn"
+   ],
+   "water_id": "j-percy-priest-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "76859781bf7a6305965ef4571b4f8980e11305f51412b7f4f34f83f17bb2727c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "elm-hill-marina-tn",
+    "fate-sanders-marina-tn",
+    "four-corners-boat-marina-tn",
+    "hamilton-creek-marina-tn",
+    "nashville-shores-water-park-canoe-access-tn",
+    "nashville-shores-yacht-club-and-marina-tn",
+    "percy-priest-marina-and-yacht-club-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "judd-slough-tn",
+   "name": "Judd Slough",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Brittsville",
+    "Marina Hills"
+   ],
+   "bbox": [
+    -84.979094,
+    35.325522,
+    -84.818162,
+    35.406251
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 13.151,
+   "launches": [
+    "grays-ferry-ramp-tn",
+    "hwy-58-bridge-tn"
+   ],
+   "water_id": "judd-slough-tn",
+   "gnis_id": null,
+   "geometry_hash": "db24bb8b0c3b30fa80e095e12759ec1b05951dafdf2800bef2a655db41d365fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kentucky-lake-tn",
+   "name": "Kentucky Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Antioch Harbor Resort",
+    "Bass Bay",
+    "Beaverdam Creek Subdivision",
+    "Big Sandy",
+    "Birdsong Heights",
+    "Buchanan Subdivision",
+    "Cabana Estates",
+    "Camden",
+    "Cherokee Heights",
+    "Cotton Patch Crossroads",
+    "Dover",
+    "Eagle Creek"
+   ],
+   "bbox": [
+    -88.290309,
+    35.58882,
+    -87.874043,
+    37.020558
+   ],
+   "wikidata": "Q2781219",
+   "charted": true,
+   "area_km2": 475.042,
+   "launches": [
+    "antioch-tn",
+    "boat-launch-dru-clear-lake-tn",
+    "bear-creek-ramp-tn",
+    "beaver-dam-state-ramp-tn",
+    "beech-bend-park-tn",
+    "beech-river-perryville-tn",
+    "bennetts-creek-boat-ramp-tn",
+    "big-oak-access-area-tn",
+    "big-sandy-access-area-tn",
+    "birdsong-creek-access-area-tn",
+    "boswell-landing-tn",
+    "britton-ford-tn",
+    "britton-ford-kayak-launch-tn",
+    "brodies-landing-tn",
+    "kentucky-lake-boat-launch-near-parsons-tn",
+    "cadenhead-kayak-launch-tn",
+    "camden-landing-access-area-tn",
+    "cherokee-heights-tn",
+    "clear-lake-boat-ramp-tn",
+    "crooked-creek-access-area-tn",
+    "danville-tn",
+    "danville-access-area-tn",
+    "dry-fork-tn",
+    "kentucky-lake-boat-launch-near-new-johnsonville-tn-2",
+    "elkhorn-overlook-hand-launch-tn",
+    "elkhorn-nobles-boat-ramp-tn",
+    "eva-access-area-tn",
+    "eva-beach-small-boat-launch-tn",
+    "fossil-point-access-tn",
+    "ginger-bay-tn",
+    "grassy-lake-boat-ramp-tn",
+    "gravel-pit-lakeview-manor-tn",
+    "gray-s-landing-tn",
+    "hallshire-access-area-tn",
+    "harmon-creek-access-area-tn",
+    "harmons-creek-wma-north-access-tn",
+    "harmons-creek-wma-south-accessible-tn",
+    "kentucky-lake-boat-launch-near-new-johnsonville-tn",
+    "kentucky-lake-boat-launch-near-perryville-tn",
+    "kentucky-lake-carry-in-access-near-oak-hill-tn",
+    "kentucky-lake-carry-in-access-near-oak-hill-tn-2",
+    "lashlees-crossing-access-tn",
+    "lick-creek-access-area-tn",
+    "lick-creek-of-perry-county-tn",
+    "little-birdsong-access-tn",
+    "little-crooked-creek-tn",
+    "morgan-s-creek-access-area-tn",
+    "nathan-bedford-forrest-state-park-tn",
+    "new-hope-access-area-tn",
+    "new-johnsonville-tn",
+    "new-johnsonville-pump-station-boat-launch-tn",
+    "nix-landing-access-area-tn",
+    "north-eagle-creek-access-area-tn",
+    "north-eagle-landing-boat-launch-tn",
+    "north-lake-access-tn",
+    "old-mill-landing-tn",
+    "peckerwood-landing-access-tn",
+    "pilot-knob-north-access-tn",
+    "pilot-knob-south-access-tn",
+    "pine-point-resort-tn",
+    "piney-campground-tn",
+    "piney-south-tn",
+    "pleasant-view-resort-tn",
+    "pool-1-boat-launch-tn",
+    "port-road-tn",
+    "spring-creek-paddling-launch-tn",
+    "springville-pumphouse-tn",
+    "sulphur-creek-tn",
+    "sunset-bay-resort-and-marina-boat-ramp-tn",
+    "swamp-creek-tn",
+    "tnwr-broadview-ramp-tn",
+    "tennessee-river-small-boat-launch-tn",
+    "trace-creek-small-boat-launch-tn",
+    "white-oak-creek-ramp-tn",
+    "woodland-shores-tn"
+   ],
+   "water_id": "kentucky-lake-ky",
+   "gnis_id": "1269701",
+   "geometry_hash": "27aec400bcb5cbccf212345fa7e5440f4aea3fe573d01c8ef95add5c4df07e70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "beaverdam-marina-tn",
+    "big-eagle-tn",
+    "birdsong-marina-tn",
+    "buchanan-resort-tn",
+    "country-junction-tn",
+    "cuba-landing-marina-tn",
+    "fat-daddy-s-tn",
+    "leatherwood-resort-marina-tn",
+    "mansard-island-resort-tn",
+    "mason-s-dock-tn",
+    "oak-haven-resort-tn",
+    "old-leatherwood-dock-tn",
+    "paris-landing-state-park-marina-tn",
+    "perryville-marina-tn",
+    "wildlife-cove-marina-access-area-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kentucky-reservoir-tn",
+   "name": "Kentucky Reservoir",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Clifton",
+    "Parsons"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beech-creek-ramp-tn",
+    "glenkirk-landing-tn"
+   ],
+   "water_id": "kentucky-reservoir-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "mermaid-marina-tn",
+    "riverstone-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-barkley-reservoir-tn",
+   "name": "Lake Barkley Reservoir",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Cumberland City",
+    "Dover",
+    "Indian Mound"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blue-creek-tn",
+    "dyer-s-creek-tn",
+    "guices-creek-tn",
+    "lick-creek-tn",
+    "north-cross-creek-tn",
+    "refuge-ramp-2-tn",
+    "riverbend-tn",
+    "spout-springs-tn",
+    "wells-creek-tn"
+   ],
+   "water_id": "lake-barkley-reservoir-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-barkley-tn",
+   "name": "Lake Barkley",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Bumpus Mills",
+    "Dover",
+    "Tobaccoport"
+   ],
+   "bbox": [
+    -88.234062,
+    36.523243,
+    -87.853073,
+    37.078045
+   ],
+   "wikidata": "Q6474916",
+   "charted": true,
+   "area_km2": 167.089,
+   "launches": [
+    "bumpus-mills-boat-ramp-tn",
+    "gatlin-point-tn",
+    "neville-bay-tn",
+    "saline-creek-boat-ramp-tn",
+    "tobacco-port-tn"
+   ],
+   "water_id": "lake-barkley-ky",
+   "gnis_id": "486356",
+   "geometry_hash": "55a6f9eb4958e1196d8997a6f2a28bf986b9bd26e371b6ccd5ef8c78ed8d7d6e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-isom-tn",
+   "name": "Lake Isom",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Ridgely"
+   ],
+   "bbox": [
+    -89.429311,
+    36.286451,
+    -89.408361,
+    36.310893
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.334,
+   "launches": [
+    "lake-isom-boat-ramp-tn"
+   ],
+   "water_id": "lake-isom-tn",
+   "gnis_id": null,
+   "geometry_hash": "242c40800db14c2999d654ea22f76b08369201be0caa01e4358788966ce4c605",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lindsay-tn",
+   "name": "Lake Lindsay",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Lawrenceburg"
+   ],
+   "bbox": [
+    -87.365402,
+    35.266423,
+    -87.358212,
+    35.279567
+   ],
+   "wikidata": "Q34882657",
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "lake-lindsay-carry-in-access-tn"
+   ],
+   "water_id": "lake-lindsay-tn",
+   "gnis_id": "1282089",
+   "geometry_hash": "64b6b9277c0dea6caa879d939e8751d5f220a35a2e0127007ddbd9f085f14c22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mckellar-tn",
+   "name": "Lake McKellar",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Memphis"
+   ],
+   "bbox": [
+    -90.17344,
+    35.070405,
+    -90.08129,
+    35.109641
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.947,
+   "launches": [],
+   "water_id": "lake-mckellar-tn",
+   "gnis_id": null,
+   "geometry_hash": "f60dd4c206a99324ef729ca79bff7470e02437332f9e460de42f5d81e10fa5f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ensley-tn",
+    "riverside-park-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-placid-tn",
+   "name": "Lake Placid",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Henderson"
+   ],
+   "bbox": [
+    -88.773443,
+    35.386984,
+    -88.765829,
+    35.391577
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.137,
+   "launches": [
+    "lake-placid-small-boat-launch-tn"
+   ],
+   "water_id": "lake-placid-tn",
+   "gnis_id": null,
+   "geometry_hash": "1a929fdb55a62f6d0867e504e58178f6766cca50b283804c6f4b83fb94497232",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "laurel-hill-lake-tn",
+   "name": "Laurel Hill Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "New Haven"
+   ],
+   "bbox": [
+    -87.553172,
+    35.328641,
+    -87.53159,
+    35.353417
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.082,
+   "launches": [
+    "laurel-hill-agency-lake-tn",
+    "laurel-hill-lake-boat-launch-tn"
+   ],
+   "water_id": "laurel-hill-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "ee4bb3ddd19d6b44e20c605c011642bfb52af0153321eb4983f5e0e4dd000866",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-lake-tn",
+   "name": "Little Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Hillville"
+   ],
+   "bbox": [
+    -89.156777,
+    35.470376,
+    -89.155014,
+    35.471947
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.012,
+   "launches": [
+    "little-lake-boat-launch-tn"
+   ],
+   "water_id": "little-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "7346bfa5f93235f42af25f4d42ccbe99d407524527f572b8deb8b5cc528b3cac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-tn",
+   "name": "Little River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Fairfield",
+    "Melrose",
+    "Miller Cove",
+    "Townsend"
+   ],
+   "bbox": [
+    -83.986818,
+    35.578753,
+    -83.48141,
+    35.880283
+   ],
+   "wikidata": "Q6651674",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bill-bennett-coulters-bridge-canoe-access-tn",
+    "peery-s-mill-tn",
+    "roadside-picnic-area-canoe-access-tn",
+    "walland-roadside-picnic-area-canoe-access-tn"
+   ],
+   "water_id": "little-river-tn",
+   "gnis_id": "1269746",
+   "geometry_hash": "135bebc6ca4f69095f80af4edb33e1a393b0947cbbcabdcee781f6a60f11e846",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "long-savannah-creek-tn",
+   "name": "Long Savannah Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Savannah Bay"
+   ],
+   "bbox": [
+    -85.077664,
+    35.153947,
+    -84.977118,
+    35.25081
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "savannah-bay-tn"
+   ],
+   "water_id": "long-savannah-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "6ee7b5a937ce824577589ae569b415802e190e0ded7bbb8d7d205bf58b13a735",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lookout-creek-tn",
+   "name": "Lookout Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Chattanooga"
+   ],
+   "bbox": [
+    -85.383574,
+    34.978252,
+    -85.343803,
+    35.027945
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cummings-hwy-lookout-creek-tn"
+   ],
+   "water_id": "lookout-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "c5188479cbe4e3747bf26c340eda01d21875410fb5286f5279f18f61f7ff6ef1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-blue-basin-tn",
+   "name": "Lower Blue Basin",
+   "kind": "bay",
+   "state": "TN",
+   "towns": [
+    "Blue Bank",
+    "Lake Drive"
+   ],
+   "bbox": [
+    -89.448215,
+    36.351447,
+    -89.404927,
+    36.406977
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.904,
+   "launches": [
+    "lower-blue-basin-carry-in-access-tn"
+   ],
+   "water_id": "lower-blue-basin-tn",
+   "gnis_id": null,
+   "geometry_hash": "8472c011294a353431026a11f68c633b2ecc77f16541f2a1658c5a9a8edb73ea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "maple-creek-lake-tn",
+   "name": "Maple Creek Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Clarksburg"
+   ],
+   "bbox": [
+    -88.256399,
+    35.856883,
+    -88.243747,
+    35.867914
+   ],
+   "wikidata": "Q34905698",
+   "charted": false,
+   "area_km2": 0.306,
+   "launches": [
+    "maples-creek-lake-boat-launch-tn"
+   ],
+   "water_id": "maple-creek-lake-tn",
+   "gnis_id": "1306723",
+   "geometry_hash": "9f4167e5540321be56c93e92a08536891328f4c7ffd76785af82882fecc1d34a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marrowbone-lake-tn",
+   "name": "Marrowbone Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Nashville"
+   ],
+   "bbox": [
+    -86.920091,
+    36.299211,
+    -86.907113,
+    36.30768
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.208,
+   "launches": [
+    "marrowbone-lake-boat-launch-tn"
+   ],
+   "water_id": "marrowbone-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "ce8b38ad41667fa19ed33557044db2f5e4a98545e7462447beb27d0069f7a6c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-creek-park-lake-tn",
+   "name": "Meadow Creek Park Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Monterey"
+   ],
+   "bbox": [
+    -85.190978,
+    36.102939,
+    -85.175067,
+    36.117354
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.239,
+   "launches": [
+    "meadow-creek-lake-tn"
+   ],
+   "water_id": "meadow-creek-park-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "b81b2fed8946d7bdeffed95322be7b680e257af65d339c2e435e7b1d94c59fc6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-park-lake-tn",
+   "name": "Meadow Park Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Crossville"
+   ],
+   "bbox": [
+    -85.124869,
+    35.882094,
+    -85.090534,
+    35.902714
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "meadow-park-lake-tn"
+   ],
+   "water_id": "meadow-park-lake-tn",
+   "gnis_id": "1293506",
+   "geometry_hash": "ce24c4db42e0ef91a2bac6962c9ee1b8107a4cdc489a519729c3abda01bcd879",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "melton-hill-lake-tn",
+   "name": "Melton Hill Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Conasauga Heights",
+    "Farragut",
+    "Kirkstall",
+    "Oak Ridge",
+    "Woodlawn"
+   ],
+   "bbox": [
+    -84.300605,
+    35.873412,
+    -84.103349,
+    36.048749
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 17.271,
+   "launches": [
+    "bull-run-park-tn",
+    "clark-center-park-boat-ramp-tn",
+    "guinn-road-park-tn",
+    "melton-hill-lake-boat-launch-near-farragut-tn-2",
+    "melton-hill-dam-reservation-tn",
+    "melton-hill-lake-boat-launch-near-oak-ridge-tn-2",
+    "melton-hill-lake-boat-launch-near-oak-ridge-tn-4",
+    "solway-ramp-tn"
+   ],
+   "water_id": "melton-hill-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "e7900cf2741380425f179378e7585065dba01f16481c7c85a3d77fac344aade7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "melton-hill-lake-boat-launch-near-conasauga-heights-tn",
+    "oak-ridge-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mfb-fishing-pond-tn",
+   "name": "MFB Fishing Pond",
+   "kind": "pond",
+   "state": "TN",
+   "towns": [
+    "Three Way"
+   ],
+   "bbox": [
+    -88.852823,
+    35.75378,
+    -88.849607,
+    35.75516
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.025,
+   "launches": [
+    "middle-fork-paddling-access-tn"
+   ],
+   "water_id": "mfb-fishing-pond-tn",
+   "gnis_id": null,
+   "geometry_hash": "e6f69dfd368b47cfe5d041d51b931660675011ff1d45141f89b987f6dd7a2d4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mississippi-river-tn",
+   "name": "Mississippi River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Boothspoint",
+    "Kennedy",
+    "Memphis"
+   ],
+   "bbox": [
+    -91.106111,
+    33.770176,
+    -89.409132,
+    36.580994
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bungee-access-area-tn",
+    "meeman-shelby-tn",
+    "memphis-yacht-club-tn",
+    "white-rock-tn"
+   ],
+   "water_id": "mississippi-river-ar",
+   "gnis_id": "1629903",
+   "geometry_hash": "181672c0a1c7f1640aaddf77f25ca45c5445866c6293c3196f7832899878ec3d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "mud-island-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-lake-hillville-tn",
+   "name": "New Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Hillville"
+   ],
+   "bbox": [
+    -89.168838,
+    35.470852,
+    -89.165436,
+    35.474032
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.07,
+   "launches": [
+    "new-lake-boat-launch-hillville-tn"
+   ],
+   "water_id": "new-lake-hillville-tn",
+   "gnis_id": null,
+   "geometry_hash": "2a1a30382136caf6942983622a42c0ec527c5548bde1a4105e5892332d5b44fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-lake-tn",
+   "name": "New Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Lewisburg"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "new-lake-boat-launch-tn"
+   ],
+   "water_id": "new-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-tn",
+   "name": "New River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Winona"
+   ],
+   "bbox": [
+    -84.463424,
+    36.208936,
+    -84.321176,
+    36.385917
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "river-road-access-tn"
+   ],
+   "water_id": "new-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "3c974cf0a5af6c636e03676630705881f956025658d25b67d7164d4953085b69",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nickajack-lake-tn",
+   "name": "Nickajack Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Haletown",
+    "Jasper",
+    "Ladds",
+    "New Hope"
+   ],
+   "bbox": [
+    -85.62151,
+    34.985081,
+    -85.530656,
+    35.047737
+   ],
+   "wikidata": "Q1217778",
+   "charted": true,
+   "area_km2": 13.647,
+   "launches": [
+    "anchor-inn-bait-tackle-tn",
+    "macedonia-church-cole-city-creek-tn",
+    "maple-view-day-use-area-tn",
+    "marion-county-park-tn",
+    "nickajack-dam-tn",
+    "shellmound-tn",
+    "tva-seredino-ramp-tn"
+   ],
+   "water_id": "nickajack-lake-tn",
+   "gnis_id": "1295741",
+   "geometry_hash": "8a69582ee10bcc973411fe2c62417aa4fcd63cda0dceede0a670940a1e2e75cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "marion-county-campground-2-nickajack-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nolichucky-river-tn",
+   "name": "Nolichucky River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bright Hope",
+    "Chestoa",
+    "Graham Mill",
+    "Greeneville",
+    "Morristown",
+    "Pate Hill"
+   ],
+   "bbox": [
+    -83.246549,
+    36.05062,
+    -82.411098,
+    36.211135
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bewleys-bridge-canoe-access-tn",
+    "chestoa-boat-launch-tn",
+    "davy-crockett-dam-canoe-access-tn",
+    "easterly-bridge-tn",
+    "hwy-321-bridge-access-tn",
+    "jackson-island-canoe-access-tn",
+    "joe-johnson-access-tn",
+    "jones-bridge-rd-tn",
+    "kinser-bridge-tn",
+    "kinser-park-tn"
+   ],
+   "water_id": "nolichucky-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "6a3b2a965d0e80f145ce2b7d58eada40c7722563b4fc504ec810cab0915a64f2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "nolichucky-river-boat-launch-near-morristown-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "normandy-lake-tn",
+   "name": "Normandy Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Normandy",
+    "Tullahoma"
+   ],
+   "bbox": [
+    -86.248333,
+    35.43161,
+    -86.182205,
+    35.503345
+   ],
+   "wikidata": "Q34911250",
+   "charted": false,
+   "area_km2": 8.422,
+   "launches": [
+    "barton-springs-boat-ramp-tn",
+    "boat-ramp-at-dam-tn",
+    "boyd-branch-access-tn",
+    "cedar-point-recreation-area-tn",
+    "normandy-wma-fishing-access-tn",
+    "ward-s-chapel-boat-ramp-tn"
+   ],
+   "water_id": "normandy-lake-tn",
+   "gnis_id": "1269831",
+   "geometry_hash": "f1379f183dd45fa21a5278c05cd5feb840009a175d223f186023da9706cb8b0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "norris-lake-tn",
+   "name": "Norris Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Alder",
+    "Beech Grove",
+    "Belmont",
+    "Braden",
+    "Caryville",
+    "Combs",
+    "Flat Hollow",
+    "Indian Creek",
+    "LaFollette",
+    "Lindsay Mill",
+    "Little Barren",
+    "Lone Mountain"
+   ],
+   "bbox": [
+    -84.194197,
+    36.223753,
+    -83.428127,
+    36.490568
+   ],
+   "wikidata": "Q18155107",
+   "charted": false,
+   "area_km2": 123.824,
+   "launches": [
+    "alder-springs-access-tn",
+    "anderson-county-park-tn",
+    "bear-creek-tn",
+    "beech-grove-winter-access-only-tn",
+    "big-ridge-tn",
+    "big-sycamore-tn",
+    "black-fox-tn",
+    "bridgeport-tn",
+    "brogran-s-access-area-tn",
+    "bunch-hollow-tn",
+    "campbell-county-park-tn",
+    "cedar-creek-bridge-tn",
+    "cove-creek-wma-tn",
+    "dark-hollow-tn",
+    "davis-creek-access-area-tn",
+    "doakes-creek-access-area-tn",
+    "earls-hollow-tn",
+    "fishermans-cove-tn",
+    "greenwelch-hollow-access-area-tn",
+    "griffith-lane-cedar-cr-bridge-tn",
+    "hwy-25-2-tn",
+    "loyston-point-tn",
+    "mattie-randolph-access-tn",
+    "new-perry-tn",
+    "norris-lake-boat-launch-near-maynardville-tn-6",
+    "oak-grove-tn",
+    "palmers-junction-tn",
+    "post-master-tn",
+    "stiner-cemetary-tn",
+    "whitman-hollow-tn",
+    "williams-creek-tn"
+   ],
+   "water_id": "norris-lake-tn",
+   "gnis_id": "1269832",
+   "geometry_hash": "360f0d36a479571591f17146de3dabadc8be2ae74f325558c4971ebe4bf5fc7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "beach-island-marina-tn",
+    "blue-springs-dock-tn",
+    "clearwater-cove-marina-tn",
+    "deerfield-cove-marina-tn",
+    "flat-hollow-marina-tn",
+    "flat-hollow-marina-resort-tn",
+    "hickory-star-marina-tn",
+    "indian-river-marina-tn",
+    "lakeview-dock-tn",
+    "lone-mountain-boat-dock-tn",
+    "norris-lake-boat-launch-near-norris-park-tn",
+    "mountain-lake-marina-tn",
+    "norris-dam-marina-tn",
+    "powell-valley-resort-tn",
+    "sequoyah-lodge-marina-inc-tn",
+    "shanghai-resort-tn",
+    "springs-dock-resort-tn",
+    "stardust-marina-tn",
+    "twin-cove-marina-tn",
+    "union-county-dock-tn",
+    "whitman-hollow-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "norris-reservoir-tn",
+   "name": "Norris Reservoir",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Caryville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ray-wilson-public-boat-ramp-tn"
+   ],
+   "water_id": "norris-reservoir-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-chickamauga-creek-tn",
+   "name": "North Chickamauga Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Hickory Woods",
+    "Northshore Estates",
+    "Red Bank"
+   ],
+   "bbox": [
+    -85.363367,
+    35.106109,
+    -85.213057,
+    35.267176
+   ],
+   "wikidata": "Q131216559",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lower-greenway-farm-tn",
+    "north-chickamauga-creek-carry-in-access-tn",
+    "upper-greenway-farm-tn"
+   ],
+   "water_id": "north-chickamauga-creek-tn",
+   "gnis_id": "1314147",
+   "geometry_hash": "c94f470ffdaee945dc6bec395dafc61b0cb5cec27c7a1ec4efdfbae1097e0301",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-forked-deer-river-tn",
+   "name": "North Fork Forked Deer River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Dyersburg",
+    "Parker"
+   ],
+   "bbox": [
+    -89.443673,
+    35.879998,
+    -88.810241,
+    36.033243
+   ],
+   "wikidata": "Q18157932",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parker-ditch-boat-ramp-tn"
+   ],
+   "water_id": "north-fork-forked-deer-river-tn",
+   "gnis_id": "1295887",
+   "geometry_hash": "c6883bff165c8768a72d2e5b450e2e2b6b6bcbbc20bfc979e1cf178d497060d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-indian-creek-tn",
+   "name": "North Indian Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Erwin"
+   ],
+   "bbox": [
+    -82.4347,
+    36.14277,
+    -82.250311,
+    36.1944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-indian-creek-boat-launch-tn"
+   ],
+   "water_id": "north-indian-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "cc00c843fa934737af6c32807c7f6e6d861230d2c0cc9d252f1ffd239373c6f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "obed-river-tn",
+   "name": "Obed River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Catoosa Country",
+    "Fairfield Glade"
+   ],
+   "bbox": [
+    -85.048003,
+    35.974586,
+    -84.648972,
+    36.099033
+   ],
+   "wikidata": "Q2008746",
+   "charted": false,
+   "area_km2": 1.399,
+   "launches": [
+    "adams-bridge-tn",
+    "potter-ford-tn"
+   ],
+   "water_id": "obed-river-tn",
+   "gnis_id": "1303513",
+   "geometry_hash": "672f89d37482957894155f18be5f861b5314556d129183a0490e9a68348a17d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "obey-river-tn",
+   "name": "Obey River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Cave Springs",
+    "Celina"
+   ],
+   "bbox": [
+    -85.514143,
+    36.450632,
+    -85.120171,
+    36.615015
+   ],
+   "wikidata": "Q7074899",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dale-hollow-dam-boat-ramp-tn",
+    "donaldson-park-tn",
+    "moody-boat-ramp-tn"
+   ],
+   "water_id": "obey-river-tn",
+   "gnis_id": "1306853",
+   "geometry_hash": "9e91463e29e42486cd2e69eb6db8478cada3adaa357b6b98f9b93d1aec525b9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "obion-river-tn",
+   "name": "Obion River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bradleytown",
+    "Dyersburg",
+    "Hales Point",
+    "Martin",
+    "Obion"
+   ],
+   "bbox": [
+    -89.647707,
+    35.906517,
+    -88.940663,
+    36.282156
+   ],
+   "wikidata": "Q7074971",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bogota-hwy-78-tn",
+    "bradley-town-boat-ramp-tn",
+    "highway-89-boat-ramp-tn",
+    "old-turnpike-road-boat-ramp-tn"
+   ],
+   "water_id": "obion-river-tn",
+   "gnis_id": "1296225",
+   "geometry_hash": "bddaed4c0d3f06de1e8b5d06cb0fbbe4ffa9e710227ac9d87015d084013f7b47",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ocoee-lake-tn",
+   "name": "Ocoee Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Benton",
+    "Parksville",
+    "YMCA Camp Ocoee"
+   ],
+   "bbox": [
+    -84.651239,
+    35.06753,
+    -84.567146,
+    35.118008
+   ],
+   "wikidata": "Q47006722",
+   "charted": false,
+   "area_km2": 6.841,
+   "launches": [
+    "east-parksville-boat-ramp-tn",
+    "kings-slough-tn",
+    "parksville-lake-tn"
+   ],
+   "water_id": "ocoee-lake-tn",
+   "gnis_id": "1304751",
+   "geometry_hash": "9aa56c2424c3d16359d68b4deac0aa99c630c2d3687eec1a7592b1e356b2ce36",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-ocoee-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ocoee-number-two-lake-tn",
+   "name": "Ocoee Number Two Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Caney Creek",
+    "Ducktown"
+   ],
+   "bbox": [
+    -84.567284,
+    35.040467,
+    -84.455405,
+    35.110246
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.211,
+   "launches": [
+    "big-creek-launch-tn",
+    "caney-creek-tn-2",
+    "rogers-branch-launch-tn",
+    "upper-put-in-tn"
+   ],
+   "water_id": "ocoee-number-two-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "35a534ed6ead7b6c6abb01414800cc5e2fe8ad29b3440499b8151870006e9d1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ocoee-river-tn",
+   "name": "Ocoee River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Benton",
+    "Parksville"
+   ],
+   "bbox": [
+    -84.693746,
+    34.987714,
+    -84.371262,
+    35.206431
+   ],
+   "wikidata": "Q7811968",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "nancy-ward-boat-ramp-tn",
+    "sugarloaf-mtn-park-tn"
+   ],
+   "water_id": "ocoee-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "9cbe88963b52d1c17808b84bdf61a54c2090b7791472b8beb2b9fd057344aa0b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-hickory-lake-tn",
+   "name": "Old Hickory Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Avondale",
+    "Bluegrass Meadows",
+    "Cairo",
+    "Cumberland Hills",
+    "Curtiswood",
+    "Delray Park Estates",
+    "Gallatin",
+    "Greenlawn",
+    "Harbor View",
+    "Hendersonville",
+    "Laguardo",
+    "Lakewood"
+   ],
+   "bbox": [
+    -86.661961,
+    36.236686,
+    -86.311531,
+    36.400118
+   ],
+   "wikidata": "Q7084201",
+   "charted": true,
+   "area_km2": 57.358,
+   "launches": [
+    "avondale-recreation-area-tn",
+    "bartons-creek-tn",
+    "bledsoe-creek-state-park-ramp-tn",
+    "bull-run-access-tn",
+    "cages-bend-campground-tn",
+    "cairo-boat-ramp-tn",
+    "cedar-creek-park-tn",
+    "cedar-grove-access-tn",
+    "ciaro-bend-tn",
+    "coles-ferry-tn",
+    "cripple-children-ramp-tn",
+    "davis-corner-access-tn",
+    "drakes-creek-boat-ramp-tn",
+    "gallatin-steam-plant-ramp-tn",
+    "laquardo-access-tn",
+    "lock-3-access-tn",
+    "lock-4-access-tn",
+    "lone-branch-tn",
+    "mallard-point-park-tn",
+    "martha-gallatin-boat-ramp-tn",
+    "metro-beach-boat-ramp-tn",
+    "old-union-hill-access-tn",
+    "rockland-park-tn",
+    "old-hickory-lake-boat-launch-near-hendersonville-tn-3",
+    "sanders-ferry-park-tn",
+    "saundersville-tn",
+    "shutes-branch-harbor-view-tn",
+    "shutes-branch-tn",
+    "special-needs-access-tn",
+    "stark-knob-tn",
+    "station-camp-creek-tn",
+    "tyree-access-tn",
+    "old-hickory-lake-boat-launch-near-delray-park-estates-tn",
+    "ziegler-s-fort-ramp-tn"
+   ],
+   "water_id": "old-hickory-lake-tn",
+   "gnis_id": "1269839",
+   "geometry_hash": "d0bd7696a264d33e5d13a90dcc34e89bc1c09f5634bbec41f25c845484148b45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "anchor-high-marina-tn",
+    "blackjack-cove-marina-tn",
+    "cedar-creek-marina-tn",
+    "cherokee-boat-dock-tn",
+    "old-hickory-lake-boat-launch-near-hendersonville-tn",
+    "old-hickory-lake-boat-launch-near-hendersonville-tn-4",
+    "old-hickory-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "old-hickory-reservoir-tn",
+   "name": "Old Hickory Reservoir",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Hartsville",
+    "Lebanon"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "misty-cove-tn",
+    "second-creek-tn"
+   ],
+   "water_id": "old-hickory-reservoir-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-muddy-lake-tn",
+   "name": "Old Muddy Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Tracy City"
+   ],
+   "bbox": [
+    -85.713188,
+    35.270001,
+    -85.712014,
+    35.271831
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.008,
+   "launches": [
+    "grundy-lakes-4-tn"
+   ],
+   "water_id": "old-muddy-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "76639a2d30638ad5ba97235c462fb462d5cf7fab3773dc4ca17f26784a0522a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oneida-city-park-pond-tn",
+   "name": "Oneida City Park Pond",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Oneida"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "oneida-city-park-tn"
+   ],
+   "water_id": "oneida-city-park-pond-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pickwick-lake-tn",
+   "name": "Pickwick Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Bruton Branch",
+    "Holiday Hills",
+    "Red Sulphur Springs",
+    "Savannah"
+   ],
+   "bbox": [
+    -88.261644,
+    34.727342,
+    -87.624755,
+    35.088649
+   ],
+   "wikidata": "Q7190954",
+   "charted": true,
+   "area_km2": 149.083,
+   "launches": [
+    "bruton-branch-state-park-tn",
+    "bruton-branch-state-recreation-area-tn",
+    "pickwick-lake-carry-in-access-tn",
+    "pickwick-state-park-ramp-1-tn",
+    "picwick-landing-state-park-ramp-2-tn",
+    "state-line-ramp-tn",
+    "tva-state-line-island-tn",
+    "yellow-creek-tn"
+   ],
+   "water_id": "pickwick-lake-al",
+   "gnis_id": "1326389",
+   "geometry_hash": "d326cac01778eb354be920d59c12dbc678b66b09aee26f4f1a359b28602a66b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pickwick-lake-boat-launch-tn",
+    "winn-springs-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pigeon-river-tn",
+   "name": "Pigeon River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bluffton",
+    "Browns",
+    "Denton",
+    "Newport"
+   ],
+   "bbox": [
+    -83.203416,
+    35.716517,
+    -83.023727,
+    36.026368
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bluffton-access-area-tn",
+    "denton-access-tn",
+    "newport-police-dept-tn",
+    "walters-powerhouse-access-tn"
+   ],
+   "water_id": "pigeon-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "d475dbf815863fab38669c7a48ec2a0a49529a1c8d59a90a383862f59a63e3d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tannery-island-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pine-lake-tn",
+   "name": "Pine Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -88.430982,
+    35.546816,
+    -88.398017,
+    35.569962
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.691,
+   "launches": [
+    "pine-lake-boat-launch-lexington-tn",
+    "pine-lake-boat-launch-tn"
+   ],
+   "water_id": "pine-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "c865e89dccf415946caecb97df54fa75ef332459be662ad602163e5fd4f334cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "piney-river-spring-city-tn",
+   "name": "Piney River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Spring City"
+   ],
+   "bbox": [
+    -84.955876,
+    35.645681,
+    -84.879309,
+    35.717152
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "piney-river-carry-in-access-tn"
+   ],
+   "water_id": "piney-river-spring-city-tn",
+   "gnis_id": null,
+   "geometry_hash": "64e3848495d9d617d54e0a6e8f20eff6c1544f6c34b3b2c325c01d4b25ae9b89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pinoak-lake-tn",
+   "name": "Pinoak Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -88.303334,
+    35.67498,
+    -88.273905,
+    35.723068
+   ],
+   "wikidata": "Q34915187",
+   "charted": false,
+   "area_km2": 2.537,
+   "launches": [
+    "pin-oak-lake-boat-launch-tn",
+    "pinoak-lake-boat-launch-tn"
+   ],
+   "water_id": "pinoak-lake-tn",
+   "gnis_id": "1306899",
+   "geometry_hash": "6be2fbb781a79b793f3340df5ab118e68fa83e2ef8759107b6f1d5fd76715692",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pool-five-tn",
+   "name": "Pool Five",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Bear Spring"
+   ],
+   "bbox": [
+    -87.752322,
+    36.445149,
+    -87.726158,
+    36.474369
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.164,
+   "launches": [
+    "refuge-ramp-3-tn",
+    "refuge-ramp-4-tn"
+   ],
+   "water_id": "pool-five-tn",
+   "gnis_id": null,
+   "geometry_hash": "adf37950bb0ce336a47aafd42b2e5afa5b62efc24d4bf8904437d6d04827aaa1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pool-fourteen-tn",
+   "name": "Pool Fourteen",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Cumberland City"
+   ],
+   "bbox": [
+    -87.70016,
+    36.440454,
+    -87.69231,
+    36.446452
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.054,
+   "launches": [
+    "bull-pasture-tn"
+   ],
+   "water_id": "pool-fourteen-tn",
+   "gnis_id": null,
+   "geometry_hash": "8a1dd52fcb7c89b68b5ec9495003b9a088b109acb28058c1a1c849de4cb56e9c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "poplar-tree-lake-tn",
+   "name": "Poplar Tree Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Memphis"
+   ],
+   "bbox": [
+    -90.071932,
+    35.300602,
+    -90.052562,
+    35.311669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.384,
+   "launches": [
+    "poplar-tree-lake-boat-launch-tn"
+   ],
+   "water_id": "poplar-tree-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "34c06a50064b33054e646f991e74f75fe0297a35bd00e2400cbaefcc9441e6e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "possum-creek-tn",
+   "name": "Possum Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Shady Acres"
+   ],
+   "bbox": [
+    -85.155941,
+    35.288255,
+    -85.081403,
+    35.350886
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "possom-creek-recreation-area-tn"
+   ],
+   "water_id": "possum-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "b476f39a83170c6e07c31bd5da2657e46ecb54518be5a407fe6d72b0fe67baf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "powell-river-tn",
+   "name": "Powell River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Alanthus Hill",
+    "Harrogate",
+    "New Tazewell",
+    "River View"
+   ],
+   "bbox": [
+    -83.842462,
+    36.404637,
+    -82.984141,
+    36.741121
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.919,
+   "launches": [
+    "lonesome-valley-tn",
+    "mulberry-creek-access-tn",
+    "powell-river-hwy-25e-32-river-access-tn",
+    "powell-river-preserve-state-natural-area-tn"
+   ],
+   "water_id": "powell-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "3e1a595081bbf4287b478b2b68241a5dc804e4923d5702e974fbce9bc48f3e58",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "price-creek-tn",
+   "name": "Price Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Cleveland"
+   ],
+   "bbox": [
+    -84.863901,
+    35.351248,
+    -84.824186,
+    35.43129
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "price-s-creek-east-tn"
+   ],
+   "water_id": "price-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "fc0277f8d5fc2baafe97fdef49f7c225b820a0cdef5fa6bd26ce9bed8fd50a5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-river-tn",
+   "name": "Red River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Adams",
+    "Clarksville",
+    "Port Royal"
+   ],
+   "bbox": [
+    -87.372045,
+    36.488909,
+    -86.512444,
+    36.701135
+   ],
+   "wikidata": "Q7304823",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "adam-s-ramp-tn",
+    "port-royal-state-park-tn",
+    "porters-chapel-public-boat-access-tn",
+    "red-river-trailhead-tn"
+   ],
+   "water_id": "red-river-tn",
+   "gnis_id": "501672",
+   "geometry_hash": "6f6a3cf90917c167df987f14fbef0178758c95fe4b289687cd9876f132ac55d2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "redbud-lake-tn",
+   "name": "Redbud Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Parsons"
+   ],
+   "bbox": [
+    -88.264026,
+    35.683132,
+    -88.252176,
+    35.703123
+   ],
+   "wikidata": "Q34918600",
+   "charted": false,
+   "area_km2": 0.767,
+   "launches": [
+    "red-bud-lake-boat-launch-tn"
+   ],
+   "water_id": "redbud-lake-tn",
+   "gnis_id": "1299090",
+   "geometry_hash": "0b474a5e97b74cd85165c89fdd47b6d02a31f6356b33d2d65231e3eb84d28f06",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "reelfoot-lake-tn",
+   "name": "Reelfoot Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Blue Bank",
+    "Edgewater Beach",
+    "Grays Camp",
+    "Samburg",
+    "Sunkist Beach",
+    "Tiptonville",
+    "Walnut Log"
+   ],
+   "bbox": [
+    -89.448215,
+    36.351424,
+    -89.317534,
+    36.480604
+   ],
+   "wikidata": "Q727901",
+   "charted": false,
+   "area_km2": 37.94,
+   "launches": [
+    "airpark-tn",
+    "champy-s-pocket-tn",
+    "grassy-island-tn",
+    "gray-s-camp-tn",
+    "keystone-tn",
+    "kirby-pocket-tn",
+    "lassiter-landing-tn",
+    "long-park-tn",
+    "lovell-s-landing-tn",
+    "sunset-court-tn",
+    "reelfoot-lake-boat-launch-near-samburg-tn",
+    "walnut-log-tn",
+    "washout-tn",
+    "whites-landing-tn"
+   ],
+   "water_id": "reelfoot-lake-tn",
+   "gnis_id": "1299172",
+   "geometry_hash": "ccabbf341dc3a9bf3289048117522b17dd353d298c280f3c07fa9b15342e5b96",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "reelfoot-watershed-lake-number-4-tn",
+   "name": "Reelfoot Watershed Lake Number 4",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Dixie"
+   ],
+   "bbox": [
+    -89.2093,
+    36.406892,
+    -89.195014,
+    36.415676
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.398,
+   "launches": [
+    "4-watershed-tn"
+   ],
+   "water_id": "reelfoot-watershed-lake-number-4-tn",
+   "gnis_id": null,
+   "geometry_hash": "04423101de19c8e9a1d0e3754fb79cd519dcf88c23976085ff0c200e7e8a4797",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "reelfoot-watershed-lake-tn",
+   "name": "Reelfoot Watershed Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Samburg"
+   ],
+   "bbox": [
+    -89.343575,
+    36.37359,
+    -89.334154,
+    36.383675
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.284,
+   "launches": [
+    "samburg-watershed-tn"
+   ],
+   "water_id": "reelfoot-watershed-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "f1e46926c97cb7d67bb35470987dce9d0424ab870cdededa1aad4e23448af418",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "richland-creek-tn",
+   "name": "Richland Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Pulaski",
+    "Richland Trace Subdivision",
+    "Wales"
+   ],
+   "bbox": [
+    -87.10656,
+    35.027607,
+    -86.924618,
+    35.279694
+   ],
+   "wikidata": "Q21197157",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "james-r-puryear-jr-access-area-at-richland-creek-tn",
+    "jim-potts-access-area-richland-creek-tn",
+    "vales-mill-access-area-tn"
+   ],
+   "water_id": "richland-creek-tn",
+   "gnis_id": "1299358",
+   "geometry_hash": "d8337961e117139ba03d7a72498b94bd1587ac33bf08a35675f7b69f58770a71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "roaring-river-tn",
+   "name": "Roaring River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Cookeville"
+   ],
+   "bbox": [
+    -85.648202,
+    36.338227,
+    -85.528929,
+    36.378373
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "the-boils-tn"
+   ],
+   "water_id": "roaring-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "16d84f752ca75c44a9e87ff05ab98981982bceb4b25180be570db3ebafaf3570",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sequatchie-river-tn",
+   "name": "Sequatchie River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Condra",
+    "Dunlap",
+    "Pikeville"
+   ],
+   "bbox": [
+    -85.460327,
+    35.261828,
+    -85.00764,
+    35.79277
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "m-a-patterson-tn",
+    "sequatchie-river-boat-launch-tn"
+   ],
+   "water_id": "sequatchie-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "1ef0a102bbf519de82a2f6ebc2e14c6b468d24a69d1de413e86d4c7f41a0e778",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sewee-creek-tn",
+   "name": "Sewee Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Forest Grove"
+   ],
+   "bbox": [
+    -84.79905,
+    35.563743,
+    -84.712504,
+    35.60206
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sewee-creek-boat-launch-tn"
+   ],
+   "water_id": "sewee-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "e10aca0be6e05af669371ae1c3ab6a05292d12069b4173fb3ad462857d9c8386",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shellcracker-lake-tn",
+   "name": "Shellcracker Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Fikes Mill"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "williamsport-lakes-shellcracker-tn"
+   ],
+   "water_id": "shellcracker-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shoal-creek-lawrenceburg-tn",
+   "name": "Shoal Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Lawrenceburg"
+   ],
+   "bbox": [
+    -87.349742,
+    35.230842,
+    -87.326635,
+    35.244785
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hope-springs-park-tn"
+   ],
+   "water_id": "shoal-creek-lawrenceburg-tn",
+   "gnis_id": null,
+   "geometry_hash": "c5b3d99dfdf8cd32e439c4032d66fad77e542390b272cf2be02ab470a61a7e04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shoal-creek-tn",
+   "name": "Shoal Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Iron City"
+   ],
+   "bbox": [
+    -87.610393,
+    34.830465,
+    -87.425234,
+    35.145458
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "iron-city-park-tn"
+   ],
+   "water_id": "shoal-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "84ac1fd8d6657f278e37a297a76fe6b7a1313de84feda8b8c17278950dfb6c43",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-chickamauga-creek-tn",
+   "name": "South Chickamauga Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Kings Point",
+    "Red Bank"
+   ],
+   "bbox": [
+    -85.270323,
+    34.983543,
+    -85.172446,
+    35.09091
+   ],
+   "wikidata": "Q35312533",
+   "charted": true,
+   "area_km2": 0.477,
+   "launches": [
+    "riverwalk-greenway-dock-south-chickamauga-creek-tn",
+    "sterchi-farm-kayak-launch-south-chickamauga-creek-tn"
+   ],
+   "water_id": "south-chickamauga-creek-ga",
+   "gnis_id": "329763",
+   "geometry_hash": "bb3d30ca48c31a7f6f8234f044340434681e3607633392e739ec115d30aa29fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-forked-deer-river-tn",
+   "name": "South Fork Forked Deer River",
+   "kind": "canal",
+   "state": "TN",
+   "towns": [
+    "Four Points",
+    "Owl City"
+   ],
+   "bbox": [
+    -89.435809,
+    35.39872,
+    -88.602804,
+    35.999816
+   ],
+   "wikidata": "Q18217375",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-54-tn",
+    "unionville-bat-ramp-tn"
+   ],
+   "water_id": "south-fork-forked-deer-river-tn",
+   "gnis_id": "1270865",
+   "geometry_hash": "613496768a719431a10bd8d8fc0416034694ed4c656c4d544c866e7c5fb0e026",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-holston-river-tn",
+   "name": "South Fork Holston River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Bluff City",
+    "Bristol",
+    "Emmett",
+    "Hickory Tree",
+    "Holston Hills",
+    "Kingsport",
+    "Rotherwood",
+    "Smith Shoals Subdivision"
+   ],
+   "bbox": [
+    -82.61186,
+    36.436628,
+    -81.903034,
+    36.654603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.365,
+   "launches": [
+    "big-springs-access-tn",
+    "bluff-city-park-tn",
+    "city-of-kingsport-access-tn",
+    "emmett-bridge-access-tn",
+    "south-fork-holston-river-boat-launch-near-holston-hills-tn-2",
+    "j-forrest-thomas-access-area-tn",
+    "smith-shoals-tn"
+   ],
+   "water_id": "south-fork-holston-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "4b939e14612988304c37a2865da67ff1c164af2c3cc72e7869dcdc510fc060b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-holston-lake-tn",
+   "name": "South Holston Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Bristol",
+    "Friendship",
+    "Painter Spring"
+   ],
+   "bbox": [
+    -82.105615,
+    36.48544,
+    -81.902691,
+    36.654594
+   ],
+   "wikidata": "Q7334967",
+   "charted": false,
+   "area_km2": 27.248,
+   "launches": [
+    "baumgardner-access-tn",
+    "hwy-421-access-area-tn",
+    "south-holston-lake-boat-launch-near-bristol-tn",
+    "sullivan-county-park-tn"
+   ],
+   "water_id": "south-holston-lake-tn",
+   "gnis_id": "1327073",
+   "geometry_hash": "34ddae3e8f0dc8dfa53ba1eb58803b513ccbe243fd5b5b14efc8fd5ae88d1faa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "standing-stone-lake-tn",
+   "name": "Standing Stone Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Livingston"
+   ],
+   "bbox": [
+    -85.420877,
+    36.461567,
+    -85.410039,
+    36.471582
+   ],
+   "wikidata": "Q34927918",
+   "charted": false,
+   "area_km2": 0.187,
+   "launches": [
+    "standing-stone-lake-carry-in-access-tn"
+   ],
+   "water_id": "standing-stone-lake-tn",
+   "gnis_id": "1303793",
+   "geometry_hash": "20e2c596ae87d9648caa94836ecc9b5812b6b906f2962cc150984b0c2d081b70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stones-river-tn",
+   "name": "Stones River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Nashville"
+   ],
+   "bbox": [
+    -86.667106,
+    35.985875,
+    -86.454688,
+    36.192813
+   ],
+   "wikidata": "Q17108887",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "heartland-ramp-tn"
+   ],
+   "water_id": "stones-river-tn",
+   "gnis_id": "1271506",
+   "geometry_hash": "d72acad2cacbea127f3cfe449410f7b37f1ed3b16f5b35490f42afe7c7db4942",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sugar-creek-tn",
+   "name": "Sugar Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Richardsons"
+   ],
+   "bbox": [
+    -89.942131,
+    35.495548,
+    -89.917777,
+    35.514515
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "sugar-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "8432c21c3702a0f1aca11d29b9e3963ea00f90369dc8001d7cff0558dd580ecc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "sugar-creek-boat-launch-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sycamore-creek-tn",
+   "name": "Sycamore Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Chapmansboro"
+   ],
+   "bbox": [
+    -87.132944,
+    36.297879,
+    -86.890972,
+    36.390463
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hwy-12-at-sycamore-creek-canoe-access-tn"
+   ],
+   "water_id": "sycamore-creek-tn",
+   "gnis_id": "1272002",
+   "geometry_hash": "6edfc18215fdf68b94d78df113dc7a2b6a5bc9d9d833394310a61e2fb344af4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sycamore-lake-tn",
+   "name": "Sycamore Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -88.379426,
+    35.550523,
+    -88.366055,
+    35.568106
+   ],
+   "wikidata": "Q34929140",
+   "charted": false,
+   "area_km2": 0.779,
+   "launches": [
+    "sycamore-lake-boat-launch-tn"
+   ],
+   "water_id": "sycamore-lake-tn",
+   "gnis_id": "1301925",
+   "geometry_hash": "986810d412e347906e8d43097b77cff74080d33e0009915d3cfece60c69009b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tellico-reservoir-tn",
+   "name": "Tellico Reservoir",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Citico Beach",
+    "Davis",
+    "Fort Loudon",
+    "Greenback",
+    "Howard",
+    "Lenoir City",
+    "Mount Zion",
+    "Pumpkin Center",
+    "Tallassee",
+    "Tellico Village",
+    "Toqua",
+    "Trigonia"
+   ],
+   "bbox": [
+    -84.287915,
+    35.458177,
+    -84.049973,
+    35.781599
+   ],
+   "wikidata": "Q7337794",
+   "charted": true,
+   "area_km2": 56.781,
+   "launches": [
+    "ballplay-creek-access-area-tn",
+    "citico-tn",
+    "clear-creek-tn",
+    "harrison-branch-tn",
+    "tellico-reservoir-carry-in-access-tn",
+    "lotterdale-cove-tn",
+    "lotterdale-cove-campground-tn",
+    "morganton-tn",
+    "notchey-creek-tn",
+    "poplar-springs-tn",
+    "tellico-reservoir-boat-launch-near-howard-tn",
+    "tva-canal-access-area-tn",
+    "tallassee-access-tn",
+    "toqua-tn",
+    "toqua-campground-tn",
+    "vonore-beach-boat-ramp-tn",
+    "whites-creek-swa-tn"
+   ],
+   "water_id": "tellico-reservoir-tn",
+   "gnis_id": "1327191",
+   "geometry_hash": "e3fc8db6f8e1d2d1905034e1f6182591f74547c4c616d5d9867e99d5491e1167",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tellico-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tellico-river-tn",
+   "name": "Tellico River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Big Creek",
+    "Tellico Plains"
+   ],
+   "bbox": [
+    -84.291693,
+    35.258318,
+    -84.06341,
+    35.603475
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-creek-tn",
+    "oosterneck-tn"
+   ],
+   "water_id": "tellico-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "fd51e456195db0398bbff60505bf5c31be363942a9cedaeb453829b3612a633e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tennessee-river-gorge-tn",
+   "name": "Tennessee River Gorge",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Chattanooga",
+    "Signal Mountain",
+    "Stanley"
+   ],
+   "bbox": [
+    -85.484231,
+    35.020119,
+    -85.3531,
+    35.12338
+   ],
+   "wikidata": "Q7700153",
+   "charted": true,
+   "area_km2": 8.186,
+   "launches": [
+    "raccoon-mountain-tn",
+    "suck-creek-tn",
+    "sullivans-boat-ramp-tn"
+   ],
+   "water_id": "tennessee-river-gorge-tn",
+   "gnis_id": null,
+   "geometry_hash": "8d889ed1343b9f4f65e17e658301a007dbab59f6ef9df31ea26ce79fcf6c8b72",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tennessee-river-gorge-boat-launch-near-signal-mountain-tn",
+    "tennessee-river-gorge-boat-launch-near-signal-mountain-tn-2",
+    "tennessee-river-gorge-boat-launch-near-signal-mountain-tn-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tennessee-river-mills-subdivision-tn",
+   "name": "Tennessee River",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Mills Subdivision"
+   ],
+   "bbox": [
+    -88.096568,
+    36.48936,
+    -88.057572,
+    36.50364
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.67,
+   "launches": [],
+   "water_id": "tennessee-river-ky",
+   "gnis_id": null,
+   "geometry_hash": "439f867022b9538fad036e87dd66fd9b88eceac74b8a9beb8fb9f511b8af1298",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cypress-bay-resort-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tennessee-river-tn",
+   "name": "Tennessee River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Cerro Gordo",
+    "Chattanooga",
+    "Clifton",
+    "Crump",
+    "Hamburg",
+    "Knoxville",
+    "Lakemoor Hills",
+    "Nash Landing",
+    "Perryville",
+    "Pyburn",
+    "Red Bank",
+    "Saltillo"
+   ],
+   "bbox": [
+    -88.318073,
+    34.372899,
+    -83.849455,
+    37.012854
+   ],
+   "wikidata": "Q193737",
+   "charted": true,
+   "area_km2": 4.566,
+   "launches": [
+    "cherokee-park-tn",
+    "coolidge-park-market-street-tn-river-tn",
+    "cravens-landing-tn",
+    "dickey-landing-tn",
+    "maclellan-island-tn-river-tn",
+    "tennessee-river-boat-launch-near-knoxville-tn",
+    "tennessee-river-boat-launch-near-knoxville-tn-3",
+    "old-clifton-ferry-tn",
+    "rivermont-tn",
+    "ross-s-landing-duck-boat-ramp-tn-river-tn",
+    "saltillo-landing-tn",
+    "savannah-tn",
+    "tennessee-river-boat-launch-near-knoxville-tn-2",
+    "tennessee-river-carry-in-access-tn",
+    "tn-river-park-tn",
+    "tn-riverpark-tn",
+    "tva-ramp-below-pickwick-tail-waters-tn",
+    "wayne-jerrold-s-city-park-tn",
+    "wilkinson-ferry-tn"
+   ],
+   "water_id": "tennessee-river-al",
+   "gnis_id": "517033",
+   "geometry_hash": "4888889beae94a88f4673d08e7c72d0a7d42041dfeadd07bd5a1365b3fe94649",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "abandon-boat-launch-tn",
+    "botel-tn",
+    "clifton-marina-tn",
+    "perkins-bluff-tn",
+    "river-heights-tn",
+    "rock-pile-tn",
+    "ross-s-landing-tn",
+    "wildlife-cove-village-and-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tims-ford-lake-tn",
+   "name": "Tims Ford Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Beech Hill",
+    "Estill Springs",
+    "Pleasant Grove",
+    "Ridgeville",
+    "Taylor Creek West Subdivision",
+    "Tullahoma",
+    "Winchester"
+   ],
+   "bbox": [
+    -86.31858,
+    35.177971,
+    -86.090305,
+    35.292076
+   ],
+   "wikidata": "Q7352948",
+   "charted": false,
+   "area_km2": 37.057,
+   "launches": [
+    "anderton-tn",
+    "cline-ridge-boat-ramp-tn",
+    "devil-s-step-boat-ramp-tn",
+    "dry-creek-boat-ramp-tn",
+    "tims-ford-lake-boat-launch-near-estill-springs-tn-2",
+    "estill-springs-park-tn",
+    "fairview-small-boat-launch-tn",
+    "lakeview-boat-ramp-tn",
+    "lost-creek-tn",
+    "neal-s-bridge-tn",
+    "pleasant-grove-boat-ramp-tn",
+    "rock-creek-boat-ramp-tn",
+    "turkey-creek-boat-ramp-tn",
+    "tims-ford-lake-boat-launch-near-winchester-tn-5"
+   ],
+   "water_id": "tims-ford-lake-tn",
+   "gnis_id": "1272660",
+   "geometry_hash": "ec4e2e83d3eaf1606e80fce4c8b24341aa23886a24fb3d498cd6829d8f98ced5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tims-ford-lake-boat-launch-near-tullahoma-tn",
+    "holiday-landing-marina-small-boat-launch-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "towee-creek-tn",
+   "name": "Towee Creek",
+   "kind": "stream",
+   "state": "TN",
+   "towns": [
+    "Etowah"
+   ],
+   "bbox": [
+    -84.450879,
+    35.193716,
+    -84.353118,
+    35.27422
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "towee-creek-launch-tn"
+   ],
+   "water_id": "towee-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "29da7b1724b06b96e4952405f4726cdec22a7f00ee00f421a6165604bdb5c980",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "travis-mcnatt-lake-tn",
+   "name": "Travis McNatt Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Selmer"
+   ],
+   "bbox": [
+    -88.733954,
+    35.045084,
+    -88.723266,
+    35.06376
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.583,
+   "launches": [
+    "travis-mcnatt-lake-boat-launch-tn"
+   ],
+   "water_id": "travis-mcnatt-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "6c2b7d1b8d913770d923f5d4b0fea9acee38d0a7e924538c8e3f22cfd9a44eac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turnbull-creek-tn",
+   "name": "Turnbull Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Kingston Springs"
+   ],
+   "bbox": [
+    -87.210312,
+    36.058932,
+    -87.125196,
+    36.103541
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ulrich-landing-park-tn"
+   ],
+   "water_id": "turnbull-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "cdd327db47b549a7140b4c49536678e1f391125a264661e5f6a1ed7de6382f2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "veterans-of-foreign-wars-lake-tn",
+   "name": "Veterans of Foreign Wars Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Center"
+   ],
+   "bbox": [
+    -87.484411,
+    35.354338,
+    -87.47579,
+    35.358142
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.099,
+   "launches": [
+    "vfw-lake-tn"
+   ],
+   "water_id": "veterans-of-foreign-wars-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "56854f34f39a77766006791814be1e8e4d7f9b7be45670bfdb90a3875d47e8fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wardlows-chute-tn",
+   "name": "Wardlows Chute",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Barr"
+   ],
+   "bbox": [
+    -89.719124,
+    35.842288,
+    -89.697401,
+    35.858728
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.292,
+   "launches": [
+    "wardlows-chute-boat-ramp-tn"
+   ],
+   "water_id": "wardlows-chute-tn",
+   "gnis_id": null,
+   "geometry_hash": "13f0974722d6723c47795ee7d0a05541d703a472d241831791f4fa184a10d8db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "watauga-lake-tn",
+   "name": "Watauga Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Butler",
+    "Doeville",
+    "Dry Hill",
+    "Elizabethton",
+    "Fish Springs",
+    "Little Milligan"
+   ],
+   "bbox": [
+    -82.131423,
+    36.277043,
+    -81.928231,
+    36.381692
+   ],
+   "wikidata": "Q2552452",
+   "charted": false,
+   "area_km2": 23.988,
+   "launches": [
+    "butler-ramp-tn",
+    "little-milligan-tn",
+    "little-milligan-ramp-tn",
+    "pioneer-landing-tn",
+    "rat-branch-bay-view-tn",
+    "sink-mountain-access-tn",
+    "watauga-dam-access-tn"
+   ],
+   "water_id": "watauga-lake-tn",
+   "gnis_id": "1273873",
+   "geometry_hash": "065c1661814602638e9c7f39eb342c75807010bdae771c2d3f916d2d1a9b81bd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "watauga-lakeshores-marina-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watauga-river-tn",
+   "name": "Watauga River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Central",
+    "Elizabethton",
+    "Hunter",
+    "Watauga",
+    "Wilbur"
+   ],
+   "bbox": [
+    -82.422591,
+    36.326522,
+    -82.114982,
+    36.447451
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blevins-bend-tn",
+    "hunter-bridge-tn",
+    "lovers-lane-access-tn",
+    "wagner-rd-tn",
+    "watauga-bluffs-canoe-access-tn",
+    "watauga-river-carry-in-access-near-elizabethton-tn",
+    "watauga-river-carry-in-access-near-elizabethton-tn-2",
+    "wilbur-dam-access-tn"
+   ],
+   "water_id": "watauga-river-tn",
+   "gnis_id": null,
+   "geometry_hash": "ac06fcac0df1b2e91600e23a4594fd395bdba343dc3e3c58d7dde3b900e43215",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "watts-bar-lake-tn",
+   "name": "Watts Bar Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Adolphus",
+    "Apollo Shores",
+    "Bayside",
+    "Bella Mara Estates",
+    "Blue Springs Resort",
+    "Bradbury",
+    "Cove Point",
+    "Crestwood",
+    "Culvahouse",
+    "Eagle Point",
+    "Eagle Point Heights",
+    "Eden of the Lake"
+   ],
+   "bbox": [
+    -84.861587,
+    35.615422,
+    -84.241828,
+    35.981111
+   ],
+   "wikidata": "Q7332226",
+   "charted": true,
+   "area_km2": 139.184,
+   "launches": [
+    "bell-cove-tn",
+    "big-springs-tn",
+    "blue-springs-marina-tn",
+    "browns-chapel-tn",
+    "bussell-ferry-tn",
+    "caney-creek-kingston-tn",
+    "city-of-loudon-tn",
+    "de-armond-tn",
+    "fooshee-tn",
+    "gravel-pit-tn",
+    "highway-72-tn",
+    "hog-back-ridge-tn",
+    "johnson-creek-tn",
+    "kingston-city-park-tn",
+    "kingston-steam-plant-tn",
+    "ladd-landing-tn",
+    "lakeview-tn",
+    "lakewood-tn",
+    "laurel-bluff-tn",
+    "little-dogwood-tn",
+    "little-emory-tn",
+    "melton-hill-dam-downstream-tn",
+    "moonlight-bay-tn",
+    "mourneys-cove-tn",
+    "old-kingston-rd-tn",
+    "rector-branch-tn",
+    "rhea-springs-tn",
+    "riley-creek-tn",
+    "rockwood-beach-tn",
+    "rockwood-ferry-tn",
+    "roddy-tn",
+    "shady-grove-tn",
+    "spring-city-boat-dock-tn",
+    "sugar-tree-tn",
+    "swan-pond-tn",
+    "watts-bar-lake-boat-launch-near-lenoir-city-tn-2",
+    "tom-fuller-ramp-tn",
+    "watts-bar-lake-boat-launch-near-spring-city-tn-2",
+    "watts-bar-dam-tn",
+    "whitestone-tn",
+    "winton-chapel-tn"
+   ],
+   "water_id": "watts-bar-lake-tn",
+   "gnis_id": "1304421",
+   "geometry_hash": "0ad2cb2c85edd6532afbc80756747afaff2fb76ba9fc8967a66b9fdb595f8f91",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "arrowhead-marina-resort-tn",
+    "bayside-marina-tn",
+    "blue-springs-marina-blue-springs-resort-tn",
+    "caney-creek-marina-tn",
+    "euchee-marina-tn",
+    "hornsby-hollow-tn",
+    "long-island-marina-tn",
+    "piney-point-resort-tn",
+    "rhea-harbor-tn",
+    "rockwood-marina-rv-park-tn",
+    "terrace-view-marina-tn",
+    "watts-bar-lake-boat-launch-near-cove-point-tn-2",
+    "watts-bar-lake-boat-launch-near-crestwood-tn-2",
+    "watts-bar-lake-boat-launch-near-crestwood-tn-3",
+    "watts-bar-lake-boat-launch-near-crestwood-tn-4",
+    "watts-bar-lake-boat-launch-near-crestwood-tn-5",
+    "watts-bar-lake-boat-launch-near-crestwood-tn-6",
+    "watts-bar-lake-boat-launch-near-kingston-tn",
+    "watts-bar-lake-boat-launch-near-kingston-tn-2",
+    "watts-bar-lake-boat-launch-near-kingston-tn-3",
+    "watts-bar-lake-boat-launch-near-kingston-tn-4",
+    "watts-bar-lake-boat-launch-near-scott-tn-2",
+    "watts-bar-lake-boat-launch-near-scott-tn-3",
+    "watts-bar-lake-boat-launch-near-scott-tn-4",
+    "watts-bar-lake-boat-launch-near-spring-city-tn-10",
+    "watts-bar-lake-boat-launch-near-spring-city-tn-6",
+    "watts-bar-lake-boat-launch-near-spring-city-tn-8",
+    "watts-bar-lake-boat-launch-near-spring-city-tn-9",
+    "watts-bar-lake-boat-launch-near-watts-bar-estates-tn-2",
+    "watts-bar-lake-boat-launch-near-watts-bar-estates-tn-3",
+    "watts-bar-lake-boat-launch-near-watts-bar-estates-tn-4",
+    "watts-bar-lake-boat-launch-near-watts-bar-estates-tn-5",
+    "whites-creek-marina-lakeside-resort-tn"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-chickamauga-creek-tn",
+   "name": "West Chickamauga Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Camp Jordan"
+   ],
+   "bbox": [
+    -85.210408,
+    34.979876,
+    -85.193485,
+    35.004876
+   ],
+   "wikidata": "Q34867164",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "camp-jordan-south-chick-tn",
+    "camp-jordan-west-chick-tn"
+   ],
+   "water_id": "west-chickamauga-creek-ga",
+   "gnis_id": "330213",
+   "geometry_hash": "028b0b16d268f7602de41226fb64ed49c73d38f26ebfb04cde873d549ad2d257",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-red-river-tn",
+   "name": "West Fork Red River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Clarksville"
+   ],
+   "bbox": [
+    -87.380061,
+    36.54326,
+    -87.34639,
+    36.669564
+   ],
+   "wikidata": "Q34872672",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "billy-dunlop-park-tn",
+    "robert-clark-park-tn"
+   ],
+   "water_id": "west-fork-red-river-tn",
+   "gnis_id": "1269347",
+   "geometry_hash": "f3c363e1bdfe745927e0a7597792cbc7345e404bcb146ad8b7e894bbaa069c0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-stones-river-tn",
+   "name": "West Fork Stones River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Battleground Estates",
+    "Murfreesboro",
+    "Smyrna"
+   ],
+   "bbox": [
+    -86.47314,
+    35.717048,
+    -86.410083,
+    35.985875
+   ],
+   "wikidata": "Q34873384",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "manson-pike-boat-ramp-tn",
+    "murfreesboro-greenway-tn",
+    "west-fork-tn"
+   ],
+   "water_id": "west-fork-stones-river-tn",
+   "gnis_id": "1304469",
+   "geometry_hash": "4187185236f19edd55517bbc56d3abdd3ef07808de8df319aa176d955c377781",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whippoorwill-lake-tn",
+   "name": "Whippoorwill Lake",
+   "kind": "lake",
+   "state": "TN",
+   "towns": [
+    "Santa Fe"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "williamsport-lakes-whipppoorwill-tn"
+   ],
+   "water_id": "whippoorwill-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "white-creek-tn",
+   "name": "White Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "High Point",
+    "Lavender"
+   ],
+   "bbox": [
+    -84.839626,
+    36.12233,
+    -84.782472,
+    36.201119
+   ],
+   "wikidata": "Q34890874",
+   "charted": false,
+   "area_km2": 0.22,
+   "launches": [
+    "lavender-bridge-tn",
+    "twin-bridge-tn"
+   ],
+   "water_id": "white-creek-tn",
+   "gnis_id": "1304519",
+   "geometry_hash": "4140e7d1ec33f24a362e51da70a86056fcabf6817b2c9423880199c26714f48f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "white-oak-canal-tn",
+   "name": "White Oak Canal",
+   "kind": "canal",
+   "state": "TN",
+   "towns": [
+    "Savannah"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "white-oak-boat-ramp-tn"
+   ],
+   "water_id": "white-oak-canal-tn",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "white-oak-creek-tn",
+   "name": "White Oak Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Saltillo"
+   ],
+   "bbox": [
+    -88.478729,
+    35.338071,
+    -88.203491,
+    35.380835
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sulphur-wells-road-white-oak-canal-boat-ramp-tn"
+   ],
+   "water_id": "white-oak-creek-tn",
+   "gnis_id": null,
+   "geometry_hash": "5d9f252f49e2c2dc24d00e9472060cc3551928e34111b0c7bd632168cf9b288a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whiteville-lake-tn",
+   "name": "Whiteville Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Whiteville"
+   ],
+   "bbox": [
+    -89.135277,
+    35.289212,
+    -89.125407,
+    35.301616
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.533,
+   "launches": [
+    "whiteville-lake-boat-launch-tn"
+   ],
+   "water_id": "whiteville-lake-tn",
+   "gnis_id": null,
+   "geometry_hash": "38529e264d30bb50e23552a1b7695062b3da891c3dbab4fb07facdb2c3a18663",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wilbur-lake-tn",
+   "name": "Wilbur Lake",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Horseshoe"
+   ],
+   "bbox": [
+    -82.127314,
+    36.32997,
+    -82.114473,
+    36.341616
+   ],
+   "wikidata": "Q1419249",
+   "charted": false,
+   "area_km2": 0.214,
+   "launches": [
+    "wilbur-reservoir-boat-ramp-tn"
+   ],
+   "water_id": "wilbur-lake-tn",
+   "gnis_id": "1327381",
+   "geometry_hash": "a490c768519010ee54d0a8986e9264e3386bd6193fb0267a2da0d527f69d3619",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-river-germantown-tn",
+   "name": "Wolf River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Germantown",
+    "La Grange",
+    "Moscow",
+    "Rossville"
+   ],
+   "bbox": [
+    -90.061238,
+    34.903667,
+    -89.140433,
+    35.202621
+   ],
+   "wikidata": "Q1538093",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bateman-bridge-tn",
+    "rossville-tn",
+    "shelby-farms-tn",
+    "wolf-river-at-yager-rd-tn"
+   ],
+   "water_id": "wolf-river-germantown-tn",
+   "gnis_id": "695208",
+   "geometry_hash": "2b7d640a146473e3f02a9b20a27350673b6cd9798c2c784944232ea6c1f189a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-river-harbor-tn",
+   "name": "Wolf River Harbor",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Memphis"
+   ],
+   "bbox": [
+    -90.067711,
+    35.138559,
+    -90.049671,
+    35.163143
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "wolf-river-harbor-tn",
+   "gnis_id": null,
+   "geometry_hash": "24740c8103bfefb41d113fe5f1c7466979fc7fdf7841d082eef62df32e7be9aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "wolf-river-harbor-boat-launch-near-memphis-tn-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-river-tn",
+   "name": "Wolf River",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Byrdstown",
+    "Wolf River"
+   ],
+   "bbox": [
+    -85.300245,
+    36.521882,
+    -84.900913,
+    36.633764
+   ],
+   "wikidata": "Q8029891",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "small-boat-launch-wolf-river-tn",
+    "wolf-river-bridge-tn"
+   ],
+   "water_id": "wolf-river-tn",
+   "gnis_id": "507027",
+   "geometry_hash": "12f3dccbb5fef3e7eb785dc008bca669a306eb98671857839e169f151faacf03",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "woods-reservoir-tn",
+   "name": "Woods Reservoir",
+   "kind": "reservoir",
+   "state": "TN",
+   "towns": [
+    "Arnold Village",
+    "Capitol Hill",
+    "Duncantown",
+    "Shady Grove"
+   ],
+   "bbox": [
+    -86.112525,
+    35.293369,
+    -85.991411,
+    35.334367
+   ],
+   "wikidata": "Q21197357",
+   "charted": false,
+   "area_km2": 13.509,
+   "launches": [
+    "check-in-station-road-boat-ramp-tn",
+    "clark-hill-boat-ramp-tn",
+    "franklin-county-boat-ramp-tn",
+    "morris-ferry-boat-ramp-tn",
+    "south-hap-arnold-boat-ramp-tn"
+   ],
+   "water_id": "woods-reservoir-tn",
+   "gnis_id": "1275089",
+   "geometry_hash": "2a814f77bb21657f79571b8fea044d2929d59fda8a11492f3e3a2e51a0e1dc37",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellow-creek-tn",
+   "name": "Yellow Creek",
+   "kind": "river",
+   "state": "TN",
+   "towns": [
+    "Cumberland City"
+   ],
+   "bbox": [
+    -87.579564,
+    36.115042,
+    -87.442766,
+    36.422898
+   ],
+   "wikidata": "Q34966192",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "twra-yellow-creek-access-tn"
+   ],
+   "water_id": "yellow-creek-tn",
+   "gnis_id": "1275277",
+   "geometry_hash": "f26ef402235042f4fe5e52fb01dd7bf8398ab487affeed6658381c9553d3850a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
