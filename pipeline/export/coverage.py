@@ -131,6 +131,10 @@ def state_name(st: str) -> str:
 
 
 FEDERAL_PUBLISHER = "the U.S. Environmental Protection Agency"
+# the grade sentence names the one operator whose feed gives every dated report only where the registry lists at least
+# this many sewer operators in the state: a one-operator jurisdiction (the District of Columbia) keeps its sentence
+# (Oregon final audit 2026-11-08 P2-3)
+MIN_OPERATORS_FOR_PUBLISHER = 2
 
 
 def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False, operator: str | None = None) -> tuple[str, str]:
@@ -388,7 +392,8 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         dated = {e.get("source_id") for e in evs if is_dated(e)}
         federal = bool(dated) and all(set((source_levels or {}).get(s) or []) == {"federal"} for s in dated)
         operator = None
-        if len(dated) == 1:
+        n_ops = sum(1 for r in dischargers or [] if isinstance(r, dict) and str(r.get("state") or "").upper() == st)
+        if len(dated) == 1 and n_ops >= MIN_OPERATORS_FOR_PUBLISHER:
             sid = next(iter(dated))
             if set((source_levels or {}).get(sid) or []) == {"operator"}:
                 operator = (reg.get(sid) or {}).get("attribution")
