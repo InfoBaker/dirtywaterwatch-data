@@ -90,6 +90,10 @@
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt
 #                  by scripts/tx_permit_crosswalk.py) and the generic ArcGIS block tx-glo-beach-watch (Texas Beach
 #                  Watch's coastal stations: High is the program's advisory, Medium its label)
+#                  Utah: the generic ArcGIS blocks ut-deq-environmental-incidents (DEQ's spill hotline log since 1991:
+#                  the sewage rows by a title rule, dated to the day of discovery, the public's reports marked;
+#                  ingest/ut_transforms.py) and ut-dwq-recreational-advisories (DWQ's map of bloom and E. coli
+#                  advisories), and echo_sewer_overflow_events (EPA's overflow tables, UT permits)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
