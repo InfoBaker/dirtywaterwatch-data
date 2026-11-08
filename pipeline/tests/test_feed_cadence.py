@@ -162,3 +162,44 @@ def test_the_refresh_script_runs_the_name_review_on_its_daily_pass_and_fails_ope
     assert 'if [ "$nr_due" = 3 ]' in gate and "-m build.name_review --standing" in gate
     assert gate.index("-m build.name_review --standing") < gate.index("-m cadence ran name-review")
     assert s.index("-m cadence daily name-review") < s.index("make tally")
+
+
+# ---------------------------------------------------------------- a skipped not-live feed changes nothing live
+
+def test_an_hour_with_the_not_live_feed_skipped_builds_the_live_states_byte_identically(monkeypatch):
+    """The status build (--live-only, as the refresh runs it) and the export's jurisdiction filter: the not-live state's
+    events file as the daily pass left it, or as an hourly run would have refreshed it, gives the same live output."""
+    from build import status as S
+    from export import build as X
+    from tests.test_status import NOW, TEST_RULES, ev, iso, tmp_events, world
+    rules = {**TEST_RULES, "live_states": ["MA"]}
+    monkeypatch.setattr(S, "_RULES", rules)
+    H = timedelta(hours=1)
+    live = [ev("1", status="ongoing", started_at=iso(NOW - 2 * H)), ev("2", status="ended",
+            started_at=iso(NOW - 30 * H), ended_at=iso(NOW - 28 * H))]
+
+    def build(al_records):
+        d = tmp_events(live)
+        (d / "al-adem-sso-history.json").write_text(json.dumps(
+            {"source_id": "al-adem-sso-history", "ok": True, "last_ok_at": iso(NOW), "meta": {}, "records": al_records}))
+        w = world(d)
+        w["rules"] = rules
+        st, hist = S.build(now=NOW, write=False, live_only=True, **w)
+        _, events, _ = S.load_events(d)
+        kept, _ = X.live_jurisdiction_events(events, {"MA"})
+        st.pop("built", None)
+        hist.pop("built", None)
+        # the not-live feed's own health line (its record count) is the one difference: the export publishes no
+        # feed health of a state not live (sources.json and coverage.json carry none of al-adem-sso-history)
+        al_health = st["sources"].pop("al-adem-sso-history")
+        assert al_health["source_id"] == "al-adem-sso-history"
+        return (json.dumps(st, sort_keys=True, default=str), json.dumps(hist, sort_keys=True, default=str),
+                json.dumps(sorted(e["event_id"] for e in kept)))
+
+    al = lambda i, h: {"event_id": f"al-adem-sso-history:{i}", "source_id": "al-adem-sso-history",  # noqa: E731
+                       "source_record_id": str(i), "event_type": "sso", "status": "ended", "raw": {"state": "AL"},
+                       "started_at": iso(NOW - h * H), "ended_at": iso(NOW - (h - 1) * H), "water_slugs": [],
+                       "waterbody_text": "Test River"}
+    stale = build([al(1, 40)])                       # as the daily pass left it
+    fresh = build([al(1, 40), al(2, 3), al(3, 1)])   # as an hourly run would have refreshed it
+    assert stale == fresh
