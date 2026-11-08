@@ -204,7 +204,7 @@ def _spills():
 def test_spills_waterway_county_number_cut_and_no_water():
     recs = _spills()
     named = [r for r in recs if r["waterbody_text"]]
-    assert sorted(r["waterbody_text"] for r in named) == ["Alum Creek", "Mill Creek"]
+    assert sorted(r["waterbody_text"] for r in named) == ["Alum Creek", "Mill Creek", "Sally Buffalo Creek"]
     r = next(x for x in named if x["waterbody_text"] == "Alum Creek")
     assert r["raw"]["county"] and r["raw"]["waterway"].startswith("25 - ")
     unnamed = next(r for r in recs if (r["raw"]["waterway"] or "").startswith("99 - UNNAMED"))
@@ -217,7 +217,8 @@ def test_spills_times_and_limits():
         assert r["ended_at"] is None and r["time_precision"] == "day"
         assert r["raw"]["time_zone"] == "America/New_York" and r["raw"]["state"] == "OH"
         assert r["reported_at"][-6:] in ("-04:00", "-05:00") and r["source_updated_at"] is None
-        assert "no operator" in r["raw"]["limits"] and r["advice_text"] is None and r["coord_source"] == "source"
+        assert "no operator" in r["raw"]["limits"] and r["advice_text"] is None
+        assert r["coord_source"] == ("source" if "point_not_used" not in r["raw"] else None)
         assert r["material"].startswith(("human sewage", "sewage sludge / biosolids", "waste water"))
 
 
@@ -229,7 +230,7 @@ def test_spills_volume_case_rows_and_missing_day():
     assert len(two) == 1 and two[0]["source_record_id"] == "2407EPA0001295"
     noday = next(r for r in recs if r["source_record_id"] == "2106EPA0000944")
     assert noday["started_at"] == "2021-01-06"       # the call's Eastern day (midnight typed) and "no spill day" in noday["raw"]["start_basis"]
-    assert len({r["event_id"] for r in recs}) == len(recs) == 7
+    assert len({r["event_id"] for r in recs}) == len(recs) == 8
 
 
 def test_spills_products_requested():
@@ -358,8 +359,12 @@ def test_columbus_events():
     assert {"cso-1:2005-01-03:018", "cso-1:2005-01-03:019", "cso-1:2005-01-01"} <= ids    # stable, not by object id
     tanks = next(r for r in recs if r["source_record_id"] == "cso-1:2005-01-03:018")
     assert tanks["npdes_permit"] == "OH0024732" and tanks["outfall_id"] == "018"          # Jackson Pike
-    assert tanks["coord_source"] == "outfall_layer" and tanks["lat"] is not None          # EPA's permitted-feature point
-    assert "EPA's point" in tanks["raw"]["place_note"]
+    assert tanks["coord_source"] == "source" and tanks["lat"] is not None    # the city's own "CSO/SSO 1" point
+    sso1 = next(r for r in recs if r["outfall_id"] == "SSO 1")              # go-live audit P2-3: had no point
+    assert sso1["coord_source"] == "source" and (sso1["lat"], sso1["lon"]) == (tanks["lat"], tanks["lon"])
+    # without the city's point, EPA's permitted-feature point for the paired outfall is used
+    alone = CO.run([], [e for e in evs if e.get("NPDES_ID") == "4PF00000018"][:1], NOW)[0][0]
+    assert alone["coord_source"] == "outfall_layer" and "EPA's point" in alone["raw"]["place_note"]
     assert CO.station_outfall("4PF00000018") == ("OH0024732", "018") and CO.station_outfall("") == (None, None)
     assert "inspection" in tanks["authority"] and tanks["advice_text"].startswith("To avoid any possible health effects")
     assert CO.water_of("Olentangy River below Fifth Ave. dam") == "Olentangy River"
@@ -503,3 +508,64 @@ def test_ohio_sources_in_the_shared_day_rule_leave_other_states_unchanged():
                "raw": {}}]
     for ev, st in zip(others, ("GA", "TX", "MD")):
         assert S.event_intervals(ev, st, now, rules=rules) == S.event_intervals(ev, st, now, rules=before)
+
+
+# Go-live audit 2026-11-08 ---------------------------------------------------------------------------------------------
+
+def _line(slug, name, state, coords):
+    xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+    return {"slug": slug, "name": name, "kind": "stream", "state": state, "towns": [], "aliases": [],
+            "bbox": [min(xs), min(ys), max(xs), max(ys)], "geometry": {"type": "LineString", "coordinates": coords}}
+
+
+def test_a_qualified_water_is_not_placed_on_its_plain_namesake():
+    """Audit P2-2: "Little Cuyahoga River" (Akron's note) and "West Branch Huron River" have no record: they are not
+    placed on the Cuyahoga's or the Huron's; the plain name still resolves, in Ohio and elsewhere."""
+    from build import status as S
+    ws = {"cuyahoga-river-oh": _line("cuyahoga-river-oh", "Cuyahoga River", "OH", [[-81.55, 41.10], [-81.65, 41.45]]),
+          "huron-river-oh": _line("huron-river-oh", "Huron River", "OH", [[-82.55, 41.25], [-82.55, 41.39]]),
+          "huron-river-mi": _line("huron-river-mi", "Huron River", "MI", [[-83.75, 42.27], [-83.60, 42.23]])}
+    res = S.Resolver(ws, [], placement_rules={})
+    akron = "The receiving water for this overflow is the Little Cuyahoga River."
+    assert res.by_name(akron, "OH", 41.11, -81.52)[0] == []
+    assert res.by_name("West Branch Huron River", "OH", 41.3, -82.6)[0] == []
+    assert res.by_name("East Fork of the Little Miami River", "OH", 39.1, -84.2)[0] == []
+    assert res.by_name("The receiving water for this overflow is the Cuyahoga River.", "OH", 41.13, -81.55)[0] == \
+        ["cuyahoga-river-oh"]
+    assert res.by_name("Little Cuyahoga River to the Cuyahoga River", "OH", 41.13, -81.55)[0] == ["cuyahoga-river-oh"]
+    assert res.by_name("Huron River", "MI", 42.25, -83.7)[0] == ["huron-river-mi"]
+    assert S.qualified_only("huron river", " west branch huron river ")
+    assert not S.qualified_only("west creek", " west creek ")
+    missing = json.loads((Path(__file__).parents[2] / "research" / "oh" / "receiving-waters-missing.json").read_text())
+    assert {"Little Cuyahoga River", "Ohio Canal", "Camp Brook"} <= {r["name"] for r in missing["rows"]}
+
+
+def test_a_day_precision_start_prints_the_day_only():
+    """Audit P2-4: start_txt (build/status.py; called by _short_reason for the unresolved reasons of every state)
+    prints the day only for a report dated to the day; a minute-precision record prints as before."""
+    from build import status as S
+    day = {"started_at": "2026-09-15"}
+    assert S.start_txt(day, {"time_precision": "day"}) == "Sep 15" and S.start_txt(day) == "Sep 15"
+    iv = {"started_at": "2026-10-30T10:00:00Z"}
+    assert S.start_txt(iv, {"time_precision": "minute"}) == S.start_txt(iv) == "Oct 30 06:00"
+    ev = {"event_type": "sso", "time_precision": "day", "discharger_name": "City of Columbus"}
+    text = S._short_reason({"rule": "unresolved", "started_at": "2026-09-15", "authority": "City of Columbus"}, ev)
+    assert "00:00" not in text and "Sep 15" in text
+
+
+def test_a_spill_point_outside_its_county_is_not_used():
+    """Audit P3-4: 2610EPA0001939 gives Harrison County, but its point lies in West Virginia: the point stays in raw
+    only; the report is placed by its county and the water it names (Ohio is a county-field state)."""
+    from build import status as S
+    r = next(x for x in _spills() if x["source_record_id"] == "2610EPA0001939")
+    assert r["lat"] is None and r["lon"] is None and r["coord_source"] is None
+    assert r["raw"]["point_not_used"]["point_county"] == "outside Ohio" and r["raw"]["county"] == "Harrison"
+    assert r["waterbody_text"] and "OH" in S.COUNTY_FIELD_STATES
+    assert all(x["lat"] is not None for x in _spills() if x["source_record_id"] == "2407EPA0001295")
+
+
+def test_state_text_explains_grand_lake_markers():
+    """Audit P2-5: Grand Lake St. Marys is over the 50 km² whole-water limit; the state text says why it shows
+    markers."""
+    text = (Path(__file__).parents[2] / "research" / "oh" / "state-text.md").read_text()
+    assert "Grand Lake St. Marys" in text and "50 square kilometres" in text and "markers" in text
