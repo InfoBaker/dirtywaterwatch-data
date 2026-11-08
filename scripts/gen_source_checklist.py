@@ -58,6 +58,7 @@ AREA_TITLES = {
     "nm": "New Mexico",
     "hi": "Hawaii",
     "al": "Alabama",
+    "ut": "Utah",
     "tx": "Texas",
 }
 
