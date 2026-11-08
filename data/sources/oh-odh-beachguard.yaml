@@ -1,0 +1,42 @@
+id: "oh-odh-beachguard"
+name: "Ohio Department of Health BeachGuard public (bathing beach and HAB advisories)"
+url: "https://publicapps.odh.ohio.gov/beachguardpublic/"
+homepage: "https://publicapps.odh.ohio.gov/beachguardpublic/"
+kind: "api"
+level: "state"
+# Feed row: written by pipeline/ingest/oh_odh_beachguard.py (data/build/events/oh-odh-beachguard.json).
+# Built 2026-11-08: polled hourly; the current-advisories list (5 on 2026-11-08: 4 HAB warnings at Grand Lake St.
+#   Marys since 2026-05-20, 1 bacteria advisory since 2026-07-31); CONTAM_ADV as beach advisories, HAB types as
+#   blooms; lifted at the first poll that no longer lists it (an empty list lifts only on the second empty poll).
+#   The past-advisory list is refused by the API whole (too large to serialise) and is not read.
+# Columns excluded: metadata and thisObject (scaffolding), the lookup ids, daysUnderAdvisory, isCurrentAdvisory.
+#   The comment is scrubbed (a name after a contact cue, phones, emails, house numbers).
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read hourly by
+#   pipeline/ingest/oh_odh_beachguard.py: current advisories (5 on 2026-11-08: 4 HAB warnings at
+#   Grand Lake St. Marys since 20 May, 1 bacteria advisory since 31 July), lifted at the first poll
+#   that no longer lists them; bacteria as beach advisories, HAB types as blooms. Past advisories:
+#   the API refuses the whole list (too large to serialise), so the archive grows from the polls.
+# Access detail (research, quoted): React app; JSON at
+#   https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist?queryParams={"filter":[{"isCurrentAdvisory":true}]}
+#   (unfiltered call fails: response exceeds 10 MB serializer limit), /api/advisorieslistlookups,
+#   /api/beacheslist (192 beaches with coordinates, EPA beach id, HUC). Advisory types CONTAM_ADV
+#   (bacteria), HAB_WATCH_ADV, HAB_WARNING_ADV, HAB_CAUTION. Current on 2026-11-03: 5 (4 HAB
+#   warnings at Grand Lake St. Marys since 2026-05-20; 1 bacteria advisory at Crystal Lake Club
+#   since 2026-07-31).
+# Can fill: event_type, started_at, authority, coordinates, waterbody, source_status, advice_text
+# Cannot fill: ended_at; volume
+# Waters: 192 public beaches (Lake Erie and inland, including state parks)
+# Research notes: Endpoint 'acceptadvisorynotifications' in the app code suggests an advisory
+#   notification sign-up.
+cadence: "As local health districts and ODNR post; season Memorial Day to Labor Day."
+license: "none stated"
+attribution: "Ohio Department of Health with ODNR and local health districts"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "hab_advisory"]
+states: ["OH"]
+access: ["api", "map_only"]
+access_detail: "React app; JSON at https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist?queryParams={\"filter\":[{\"isCurrentAdvisory\":true}]} (unfiltered call fails: response exceeds 10 MB serializer limit), /api/advisorieslistlookups, /api/beacheslist (192 beaches with coordinates, EPA beach id, HUC). Advisory types CONTAM_ADV (bacteria), HAB_WATCH_ADV, HAB_WARNING_ADV, HAB_CAUTION. Current on 2026-11-03: 5 (4 HAB warnings at Grand Lake St. Marys since 2026-05-20; 1 bacteria advisory at Crystal Lake Club since 2026-07-31)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-08"

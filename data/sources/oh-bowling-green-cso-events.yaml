@@ -1,0 +1,27 @@
+id: "oh-bowling-green-cso-events"
+name: "Bowling Green CSO Events yearly reporting table"
+url: "https://gis.bgohio.org/cso_events/dbo_cso_events_list.php"
+homepage: "https://gis.bgohio.org/cso_events/dbo_cso_events_list.php"
+kind: "html"
+level: "municipal"
+# Feed row: written by pipeline/ingest/oh_bowling_green_cso.py (data/build/events/oh-bowling-green-cso-events.json).
+# Built 2026-11-08: daily; the list page with pagesize=500 (37 rows, 2019-04 to 2026-07-21, one location, Mercer -
+#   Poe Rd); begin and end in Eastern time to the minute, estimated million gallons, rainfall as typed; placed on
+#   EPA's one CSO outfall for OH0024139 (002, North Branch Portage River, its permitted-feature point).
+# Columns: all seven are read; the table names no person.
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read daily by
+#   pipeline/ingest/oh_bowling_green_cso.py: 37 overflows at Mercer and Poe roads, 2019 to
+#   2026-07-21, each with begin, end and estimated volume; placed on the permit's one CSO outfall
+#   (OH0024139 002, North Branch Portage River).
+cadence: null
+license: "none stated"
+attribution: "City of Bowling Green"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
+checked: "2026-11-08"

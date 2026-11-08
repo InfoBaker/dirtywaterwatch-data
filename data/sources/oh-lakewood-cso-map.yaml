@@ -1,0 +1,21 @@
+id: "oh-lakewood-cso-map"
+name: "Lakewood CSO Notification System map"
+url: "https://cso.lakewoodoh.gov/"
+homepage: "https://cso.lakewoodoh.gov/"
+kind: "map_only"
+level: "municipal"
+# Notes (research/oh, status candidate, verified fetched, checked 2026-11-03): Leaflet map with
+#   status per site (in progress / past 48 hours / no recent / unknown meter data); data endpoint
+#   not traced; 'For a text-based list of all overflow locations, contact the City'.
+cadence: null
+license: "none stated"
+attribution: "City of Lakewood"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["map_only"]
+access_detail: null
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
+checked: "2026-11-03"

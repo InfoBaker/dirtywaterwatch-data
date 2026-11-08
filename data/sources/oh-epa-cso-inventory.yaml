@@ -1,0 +1,20 @@
+id: "oh-epa-cso-inventory"
+name: "EPA National CSO Inventory (Ohio extract)"
+url: null
+homepage: null
+kind: "csv"
+level: "federal"
+# Notes (research/oh, status used, verified fetched, checked 2026-11-03): Outfall points statewide.
+# Access detail (research, quoted): research/oh/federal-seed.json: 89 permits, 1,032 open outfalls.
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["OH"]
+access: ["csv"]
+access_detail: "research/oh/federal-seed.json: 89 permits, 1,032 open outfalls."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

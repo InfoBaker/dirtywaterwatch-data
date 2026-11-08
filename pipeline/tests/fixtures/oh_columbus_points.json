@@ -1,0 +1,46 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 13,
+    "DISCHARGE": 18.0,
+    "OVERFLOW_TYPE": "SSO",
+    "LABEL": "SSO 18",
+    "DISCHARGELOCATION": "Ditch that Parkwood crosses s/o Mock Road",
+    "NODEID": "0089T0487"
+   },
+   "geometry": {
+    "x": -82.95672064109762,
+    "y": 40.00951162498715
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 19,
+    "DISCHARGE": 40.0,
+    "OVERFLOW_TYPE": "SSO",
+    "LABEL": "SSO 40",
+    "DISCHARGELOCATION": "Rush Run at 36 inch storm sewer r/o 1234 Example Springs",
+    "NODEID": "0451T0644"
+   },
+   "geometry": {
+    "x": -83.02223284854193,
+    "y": 40.0770921303424
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 44,
+    "DISCHARGE": 44.0,
+    "OVERFLOW_TYPE": "CSO",
+    "LABEL": "CSO 44",
+    "DISCHARGELOCATION": "Alum Creek at 144 x 90 inch sewer e/o tank",
+    "NODEID": "0061C0671"
+   },
+   "geometry": {
+    "x": -82.9432804334947,
+    "y": 39.95633413196791
+   }
+  }
+ ]
+}
