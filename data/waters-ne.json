@@ -1,7 +1,7 @@
 {
  "state": "NE",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 211,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 212,
  "waters": [
   {
    "slug": "alexandria-lake-3-ne",
@@ -12,10 +12,10 @@
     "Alexandria"
    ],
    "bbox": [
-    -97.33628,
-    40.23082,
-    -97.32999,
-    40.23371
+    -97.336284,
+    40.230822,
+    -97.329993,
+    40.233706
    ],
    "wikidata": null,
    "charted": false,
@@ -23,6 +23,15 @@
    "launches": [
     "alexandria-state-recreation-area-paddlecraft-launch-ne"
    ],
+   "water_id": "alexandria-lake-3-ne",
+   "gnis_id": null,
+   "geometry_hash": "a6c6e9cc8e9f64483d1717fbcc99e066d16a7065e9b35b8d11650211e547c073",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -34,10 +43,10 @@
     "Ansley"
    ],
    "bbox": [
-    -99.39058,
-    41.28973,
-    -99.38622,
-    41.29223
+    -99.390577,
+    41.289727,
+    -99.386217,
+    41.292232
    ],
    "wikidata": null,
    "charted": false,
@@ -45,6 +54,15 @@
    "launches": [
     "ansley-park-ne"
    ],
+   "water_id": "ansley-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "71cf33d526f2b718e02a08a8ee6905eb9593b9bdc766d16baa7bf306726ffdf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -56,10 +74,10 @@
     "Diller"
    ],
    "bbox": [
-    -96.87479,
-    40.09774,
-    -96.86477,
-    40.1044
+    -96.874785,
+    40.097519,
+    -96.864755,
+    40.104404
    ],
    "wikidata": null,
    "charted": false,
@@ -67,6 +85,15 @@
    "launches": [
     "arrowhead-wma-ne"
    ],
+   "water_id": "arrowhead-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "dc64c8980ef48d248472eecc6c335ef6e4c86956937afc619da50c72b5887a7a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -78,10 +105,10 @@
     "Beatrice"
    ],
    "bbox": [
-    -96.68244,
-    40.31474,
-    -96.67733,
-    40.31734
+    -96.682445,
+    40.314737,
+    -96.677327,
+    40.317444
    ],
    "wikidata": null,
    "charted": false,
@@ -89,6 +116,15 @@
    "launches": [
     "bear-creek-lake-wma-ne"
    ],
+   "water_id": "bear-creek-reservoir-2-a-ne",
+   "gnis_id": null,
+   "geometry_hash": "7f7daecaa960d6c5ffcc7e2369fee185f76e70372b5af939b9567bb48d154795",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -100,9 +136,9 @@
     "Hyannis"
    ],
    "bbox": [
-    -101.74087,
-    41.99531,
-    -101.71713,
+    -101.740866,
+    41.995314,
+    -101.717134,
     42.00058
    ],
    "wikidata": null,
@@ -111,6 +147,15 @@
    "launches": [
     "avocet-wma-ne"
    ],
+   "water_id": "beem-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "8de20bc0595e599ebc135ed8bf4aa8206adf5a781c62f7fb1b3a74612914e176",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -122,10 +167,10 @@
     "Bennington"
    ],
    "bbox": [
-    -96.19643,
-    41.36493,
-    -96.17896,
-    41.3783
+    -96.196433,
+    41.364931,
+    -96.178964,
+    41.378298
    ],
    "wikidata": null,
    "charted": false,
@@ -134,6 +179,15 @@
     "bennington-lake-boat-launch-ne",
     "newport-landing-ne"
    ],
+   "water_id": "bennington-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "5c8be7aa21f4af116bb3122a5418c5e82d47006e84580b47f54186e08522e71f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -143,10 +197,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -100.63376,
-    42.61906,
-    -100.59067,
-    42.63743
+    -100.633756,
+    42.618859,
+    -100.590669,
+    42.637432
    ],
    "wikidata": null,
    "charted": false,
@@ -154,6 +208,15 @@
    "launches": [
     "big-alkali-wma-ne"
    ],
+   "water_id": "big-alkali-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "ddf4bc7b34eb201821f392df331bf1ae942b5c04b8388dbbc8c1fbaddfaef86a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -165,10 +228,10 @@
     "Papillion"
    ],
    "bbox": [
-    -96.08086,
-    41.15742,
-    -96.07813,
-    41.1613
+    -96.080865,
+    41.157422,
+    -96.078128,
+    41.161305
    ],
    "wikidata": null,
    "charted": false,
@@ -177,6 +240,15 @@
     "emergency-boat-ramp-ne",
     "emergency-boat-ramp-papillion-ne"
    ],
+   "water_id": "big-elk-lake-wp7-ne",
+   "gnis_id": null,
+   "geometry_hash": "bfe1269b3451e359a7ce0daac6ad2287b2b29fac3aec20df02c820e3d5148bc6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -188,10 +260,10 @@
     "Wymore"
    ],
    "bbox": [
-    -96.6991,
-    40.05453,
-    -96.68864,
-    40.06307
+    -96.699279,
+    40.054527,
+    -96.688527,
+    40.063073
    ],
    "wikidata": null,
    "charted": false,
@@ -199,6 +271,15 @@
    "launches": [
     "big-indian-recreation-area-ne"
    ],
+   "water_id": "big-indian-creek-reservoir-11-a-ne",
+   "gnis_id": null,
+   "geometry_hash": "ec41be07272202aa7e1d84561a7edfc2d726d72630ab3d1d55bd0edd56a9fd59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -225,10 +306,10 @@
     "North Platte"
    ],
    "bbox": [
-    -100.83903,
-    41.11533,
-    -100.83059,
-    41.11759
+    -100.839033,
+    41.115327,
+    -100.830586,
+    41.117593
    ],
    "wikidata": null,
    "charted": false,
@@ -236,6 +317,15 @@
    "launches": [
     "birdwood-wma-ne"
    ],
+   "water_id": "birdwood-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "686db508d6d9be05c23db5f4114aa630bfad841e1b3e8acc538818a8b7e61e22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -261,10 +351,10 @@
     "North Platte"
    ],
    "bbox": [
-    -100.90327,
-    41.12402,
-    -100.89465,
-    41.1264
+    -100.903268,
+    41.124023,
+    -100.894595,
+    41.126407
    ],
    "wikidata": null,
    "charted": false,
@@ -272,6 +362,15 @@
    "launches": [
     "east-hershey-wma-ne"
    ],
+   "water_id": "birdwood-lake-north-platte-ne",
+   "gnis_id": null,
+   "geometry_hash": "65dabd07b539fb4f8648b97975ebdc4781fe9239b8437dead2571a5bc3aeed0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -283,10 +382,10 @@
     "Elm Creek"
    ],
    "bbox": [
-    -99.39047,
-    40.68495,
-    -99.38162,
-    40.68924
+    -99.390468,
+    40.684945,
+    -99.38161,
+    40.689584
    ],
    "wikidata": null,
    "charted": false,
@@ -294,6 +393,15 @@
    "launches": [
     "blue-hole-west-wma-ne"
    ],
+   "water_id": "blue-hole-west-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "c878d7d18c7cbca983522ef1d0f425fc271ef8e75204c67123dae23b3ea47432",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -305,10 +413,10 @@
     "Mumper"
    ],
    "bbox": [
-    -102.44517,
-    41.70063,
-    -102.4241,
-    41.71746
+    -102.445172,
+    41.700476,
+    -102.424098,
+    41.717464
    ],
    "wikidata": null,
    "charted": false,
@@ -316,6 +424,15 @@
    "launches": [
     "blue-lake-boat-ramp-ne"
    ],
+   "water_id": "blue-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "26c2315cc5166b5b7d6a2bea03e33079ce7edb5b70c1f33a8eb85962cd403441",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -328,9 +445,9 @@
    ],
    "bbox": [
     -96.80489,
-    40.62607,
-    -96.78822,
-    40.64309
+    40.62598,
+    -96.788218,
+    40.64313
    ],
    "wikidata": "Q34878327",
    "charted": false,
@@ -340,6 +457,15 @@
     "bluestem-sra-area-3-ne",
     "bluestem-sra-area-5-ne"
    ],
+   "water_id": "bluestem-lake-ne",
+   "gnis_id": "827518",
+   "geometry_hash": "160d8b9eddd4adffe5738606f25545300c51ab13092e4d0da4958b0d3a7a6fd4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -381,10 +507,10 @@
     "Lexington"
    ],
    "bbox": [
-    -99.83254,
-    40.68577,
-    -99.82883,
-    40.68963
+    -99.832538,
+    40.685771,
+    -99.828831,
+    40.689632
    ],
    "wikidata": null,
    "charted": false,
@@ -392,6 +518,15 @@
    "launches": [
     "johnson-lake-sra-paddlecraft-launch-ne"
    ],
+   "water_id": "bossung-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "bea3b6c5516b1f49d4f421492b633359b908e74e7cd31c9b25012ee469dc883f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -403,10 +538,10 @@
     "Lincoln"
    ],
    "bbox": [
-    -96.78683,
-    40.86376,
-    -96.78244,
-    40.86767
+    -96.786875,
+    40.863757,
+    -96.782438,
+    40.867994
    ],
    "wikidata": "Q34878622",
    "charted": false,
@@ -414,6 +549,15 @@
    "launches": [
     "bowling-lake-boat-launch-ne"
    ],
+   "water_id": "bowling-lake-ne",
+   "gnis_id": "1899048",
+   "geometry_hash": "90acbb8261faf2b75e8d4a905be81d164718abf933635f6c6614b36c37dfd303",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -439,13 +583,27 @@
    "towns": [
     "Loup City"
    ],
-   "bbox": null,
+   "bbox": [
+    -98.993451,
+    41.277549,
+    -98.991883,
+    41.278715
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "loup-city-recreation-area-ne"
    ],
+   "water_id": "bowman-lake-ne",
+   "gnis_id": "2761355",
+   "geometry_hash": "c8343a53d75777a69d358263310409aa41f1e60d4152f5de84332645d80b1b3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -457,10 +615,10 @@
     "Hemingford"
    ],
    "bbox": [
-    -103.15321,
-    42.45017,
-    -103.07337,
-    42.46928
+    -103.153208,
+    42.450152,
+    -103.073366,
+    42.469277
    ],
    "wikidata": null,
    "charted": false,
@@ -468,6 +626,15 @@
    "launches": [
     "box-butte-sra-ne"
    ],
+   "water_id": "box-butte-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "37de79fbc0a5c4d988cd4bd64e1eac0988c8c36ce76221f85ba9d7193d73e159",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -495,10 +662,10 @@
     "Raymond"
    ],
    "bbox": [
-    -96.90203,
-    40.95937,
-    -96.85018,
-    40.99266
+    -96.902028,
+    40.959176,
+    -96.849925,
+    40.992658
    ],
    "wikidata": null,
    "charted": false,
@@ -511,6 +678,17 @@
     "branched-oak-lake-sra-area-2-ne",
     "branched-oak-lake-sra-area-4-ne",
     "branched-oak-lake-sra-area-5-ne"
+   ],
+   "water_id": "branched-oak-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "769da0d6e4cad92ee03cb27d9bcc6a34bdc0771b48e39f2f0d6a5a8a15877dea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "private-marina-ramp-ne"
    ],
    "advisories": [
     {
@@ -556,6 +734,15 @@
    "launches": [
     "bruning-dam-recreation-area-ne"
    ],
+   "water_id": "bruning-pit-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -567,10 +754,10 @@
     "Burchard"
    ],
    "bbox": [
-    -96.31177,
-    40.16182,
-    -96.29711,
-    40.17098
+    -96.311769,
+    40.161818,
+    -96.297106,
+    40.170979
    ],
    "wikidata": null,
    "charted": false,
@@ -578,6 +765,15 @@
    "launches": [
     "burchard-lake-wma-ne"
    ],
+   "water_id": "burchard-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "2ee879bb12bbe0bece3d04e33072a4393c9eefa754063a15af24fe810021b368",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -604,10 +800,10 @@
     "Mikes Meadows"
    ],
    "bbox": [
-    -99.30943,
-    41.82708,
-    -99.20529,
-    41.91093
+    -99.309433,
+    41.827079,
+    -99.205159,
+    41.910926
    ],
    "wikidata": null,
    "charted": false,
@@ -618,6 +814,15 @@
     "nunda-shoals-ne",
     "valley-view-flat-ne"
    ],
+   "water_id": "calamus-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "577551429f9e5cab04626ebaefd93cae04d0e8f9d6bf8c89f4d3fdffeb669d76",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -643,10 +848,10 @@
     "Taylor"
    ],
    "bbox": [
-    -100.00433,
-    41.80275,
-    -99.15183,
-    42.30623
+    -100.004333,
+    41.802752,
+    -99.151828,
+    42.306231
    ],
    "wikidata": "Q132462673",
    "charted": false,
@@ -654,6 +859,15 @@
    "launches": [
     "hannaman-bayou-ne"
    ],
+   "water_id": "calamus-river-ne",
+   "gnis_id": "827843",
+   "geometry_hash": "c16f9343ebe1b6c7cef31732af32e732d8943f7e032c52ac3766b415d78e103f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -665,10 +879,10 @@
     "Hayes Center"
    ],
    "bbox": [
-    -100.9319,
-    40.58452,
-    -100.92664,
-    40.593
+    -100.931898,
+    40.584521,
+    -100.926638,
+    40.593036
    ],
    "wikidata": null,
    "charted": false,
@@ -676,6 +890,15 @@
    "launches": [
     "hayes-center-wma-ne"
    ],
+   "water_id": "camp-hayes-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "95e2c15e54203aeef4cc152e95bf502a1c10566a9f300977896fed1f16b06ca0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -687,10 +910,10 @@
     "Omaha"
    ],
    "bbox": [
-    -95.93124,
-    41.28739,
-    -95.90171,
-    41.30411
+    -95.931306,
+    41.287389,
+    -95.901711,
+    41.304108
    ],
    "wikidata": "Q5047186",
    "charted": true,
@@ -698,6 +921,15 @@
    "launches": [
     "carter-lake-nebraska-boat-ramp-ne"
    ],
+   "water_id": "carter-lake-ia",
+   "gnis_id": "827953",
+   "geometry_hash": "4033fd978a45ee4434150cd64df20e06d584c8c42b25c60693348c838b4d2810",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -710,10 +942,10 @@
     "Spalding"
    ],
    "bbox": [
-    -98.88872,
-    41.36903,
-    -97.92494,
-    41.97111
+    -98.888723,
+    41.368721,
+    -97.924941,
+    41.971115
    ],
    "wikidata": null,
    "charted": false,
@@ -722,6 +954,15 @@
     "ericson-lake-rd-access-paddlecraft-launch-ne",
     "spalding-city-park-access-paddlecraft-launch-ne"
    ],
+   "water_id": "cedar-river-ne",
+   "gnis_id": null,
+   "geometry_hash": "9672449d737312f7ce8e9d3b2c42e537be35c25fed1d9a562997f00b4003a654",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -739,6 +980,15 @@
    "launches": [
     "bridgeport-sra-ne"
    ],
+   "water_id": "center-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -750,10 +1000,10 @@
     "Chappell"
    ],
    "bbox": [
-    -102.47018,
-    41.08123,
-    -102.46347,
-    41.08556
+    -102.470183,
+    41.081201,
+    -102.463429,
+    41.085562
    ],
    "wikidata": null,
    "charted": false,
@@ -761,6 +1011,15 @@
    "launches": [
     "chappell-lake-boat-launch-ne"
    ],
+   "water_id": "chappell-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "cf50a877848c74fef90acdb8b265e9833337a2a8e931c17ecac747312eda4e87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -786,10 +1045,10 @@
     "Crawford"
    ],
    "bbox": [
-    -103.44251,
-    42.66356,
-    -103.44099,
-    42.6648
+    -103.442506,
+    42.663564,
+    -103.440988,
+    42.664803
    ],
    "wikidata": null,
    "charted": false,
@@ -797,6 +1056,15 @@
    "launches": [
     "fort-robinson-sp-paddlecraft-launch-ne"
    ],
+   "water_id": "cherry-creek-pond-ne",
+   "gnis_id": null,
+   "geometry_hash": "39874f4000bb611f9392b80e65980a8975456be20e2b23a35976fd6f76442830",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -808,10 +1076,10 @@
     "Clatonia"
    ],
    "bbox": [
-    -96.8622,
-    40.4809,
-    -96.85797,
-    40.48798
+    -96.862196,
+    40.480895,
+    -96.857974,
+    40.487983
    ],
    "wikidata": null,
    "charted": false,
@@ -819,6 +1087,15 @@
    "launches": [
     "clatonia-public-use-area-ne"
    ],
+   "water_id": "clatonia-creek-reservoir-3-a-ne",
+   "gnis_id": null,
+   "geometry_hash": "aa058f813c5d39f5fac14f860e486b69ff5c66be0ca0ea157b13fcec0110b4f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -828,10 +1105,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -100.63992,
-    42.55091,
-    -100.60293,
-    42.56396
+    -100.639919,
+    42.550907,
+    -100.602928,
+    42.563962
    ],
    "wikidata": null,
    "charted": false,
@@ -839,6 +1116,15 @@
    "launches": [
     "clear-lake-boat-launch-ne"
    ],
+   "water_id": "clear-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "43e547de3786f0e627f4d6a0b7cbf873694aaeaa8e745c6ae7fbf19398fd29a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -850,10 +1136,10 @@
     "Denton"
    ],
    "bbox": [
-    -96.86074,
-    40.76084,
-    -96.84561,
-    40.7704
+    -96.860739,
+    40.760842,
+    -96.845607,
+    40.770474
    ],
    "wikidata": "Q34881305",
    "charted": false,
@@ -862,6 +1148,15 @@
     "conestoga-lake-sra-ne",
     "conestoga-sra-paddlecraft-launch-ne"
    ],
+   "water_id": "conestoga-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "9e8b33a8daf5d302459ec23465fb323a5acd5d0f1d28dc1da061ede225c04a78",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -873,10 +1168,10 @@
     "Kearney"
    ],
    "bbox": [
-    -99.15292,
-    40.70174,
-    -99.14316,
-    40.71221
+    -99.152918,
+    40.701743,
+    -99.143163,
+    40.712211
    ],
    "wikidata": null,
    "charted": false,
@@ -884,6 +1179,15 @@
    "launches": [
     "cottonmill-lake-boat-launch-ne"
    ],
+   "water_id": "cottonmill-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "89ee4e499c111ebae86f12b03073be70bad700cfc65f162add6fa67e018a7b5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -909,9 +1213,9 @@
     "Sprague"
    ],
    "bbox": [
-    -96.7686,
+    -96.768602,
     40.64509,
-    -96.76397,
+    -96.763973,
     40.64961
    ],
    "wikidata": null,
@@ -920,6 +1224,15 @@
    "launches": [
     "cottontail-wma-ne"
    ],
+   "water_id": "cottontail-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "41614ef05b2b7588a1dc0ce48f0df09b26e5bd8a13da4761034c79b28e1acf10",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -931,10 +1244,10 @@
     "Merriman"
    ],
    "bbox": [
-    -101.67926,
-    42.91033,
-    -101.6733,
-    42.91714
+    -101.679259,
+    42.910325,
+    -101.673304,
+    42.917137
    ],
    "wikidata": null,
    "charted": false,
@@ -942,6 +1255,15 @@
    "launches": [
     "cottonwood-lake-sra-ne"
    ],
+   "water_id": "cottonwood-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "5e156e834602dc0c1036b7ac1b2e7c436717289945f0795f228f86571b890e87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -973,6 +1295,15 @@
    "launches": [
     "south-pine-wma-ne"
    ],
+   "water_id": "cozad-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -982,10 +1313,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -102.42055,
-    41.68163,
-    -102.39185,
-    41.72199
+    -102.420548,
+    41.681522,
+    -102.391851,
+    41.72201
    ],
    "wikidata": null,
    "charted": false,
@@ -993,6 +1324,15 @@
    "launches": [
     "crescent-lake-wma-ne"
    ],
+   "water_id": "crescent-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "8631cd2e800a774dc086bc36799af0970a5a2f8aceb8a0937a3ab1f19c5fea26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1004,10 +1344,10 @@
     "South Sioux City"
    ],
    "bbox": [
-    -96.43333,
-    42.45005,
-    -96.42965,
-    42.45526
+    -96.433329,
+    42.450054,
+    -96.429421,
+    42.455272
    ],
    "wikidata": null,
    "charted": false,
@@ -1015,6 +1355,15 @@
    "launches": [
     "crystal-cove-park-ne"
    ],
+   "water_id": "crystal-cove-ne",
+   "gnis_id": null,
+   "geometry_hash": "43bf9bd5378d9d04f35a19bceee47cf9f21f8f668a2c7cb4b0bce3a6a6f8061e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1026,10 +1375,10 @@
     "Hastings"
    ],
    "bbox": [
-    -98.43911,
-    40.45455,
-    -98.43583,
-    40.45809
+    -98.439112,
+    40.454552,
+    -98.435813,
+    40.458155
    ],
    "wikidata": null,
    "charted": false,
@@ -1037,6 +1386,15 @@
    "launches": [
     "crystal-lake-paddlecraft-launch-ne"
    ],
+   "water_id": "crystal-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "3aa48146385fd43005040e42fb79728d948d940e9420913f764df3be9fa85029",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -1062,10 +1420,10 @@
     "Jansen"
    ],
    "bbox": [
-    -97.05225,
-    40.23547,
-    -97.04852,
-    40.24445
+    -97.052252,
+    40.235449,
+    -97.048519,
+    40.244454
    ],
    "wikidata": null,
    "charted": false,
@@ -1073,6 +1431,15 @@
    "launches": [
     "cub-creek-recreation-area-southern-ne"
    ],
+   "water_id": "cub-creek-reservoir-12-a-ne",
+   "gnis_id": null,
+   "geometry_hash": "23b758871fa4848519dd28b410f722100e5ec45824946e8c94ef1c4a7307f884",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1099,10 +1466,10 @@
     "Springview"
    ],
    "bbox": [
-    -99.92051,
-    42.82489,
-    -99.9093,
-    42.83132
+    -99.920515,
+    42.824892,
+    -99.909301,
+    42.831327
    ],
    "wikidata": null,
    "charted": false,
@@ -1110,6 +1477,15 @@
    "launches": [
     "cub-creek-recreation-area-northern-ne"
    ],
+   "water_id": "cub-creek-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "8fbaa3568aff90064f8415f7789505a1bf8eac203efbb7b71fdb8a23b8058d63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1121,10 +1497,10 @@
     "Prague"
    ],
    "bbox": [
-    -96.82697,
-    41.32178,
-    -96.81464,
-    41.32954
+    -96.826965,
+    41.321765,
+    -96.814635,
+    41.329583
    ],
    "wikidata": null,
    "charted": false,
@@ -1132,6 +1508,15 @@
    "launches": [
     "czechland-lake-recreation-area-ne"
    ],
+   "water_id": "czechland-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "5ad117ef300e59a7321a107fed323d74ea7c53cf820ef2fcf978d304ffc5b1d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1144,8 +1529,8 @@
    ],
    "bbox": [
     -98.78725,
-    41.4086,
-    -98.7425,
+    41.408599,
+    -98.742497,
     41.44775
    ],
    "wikidata": null,
@@ -1155,6 +1540,15 @@
     "davis-creek-main-boat-ramp-ne",
     "davis-creek-wma-ne"
    ],
+   "water_id": "davis-creek-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "9f97a9e6c07edcfa91fb42852e92c9f6a034226f5328ffdba519c46fba960a87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1166,10 +1560,10 @@
     "Louisville"
    ],
    "bbox": [
-    -96.21938,
-    40.92072,
-    -96.20386,
-    40.99415
+    -96.219377,
+    40.920725,
+    -96.203856,
+    40.994149
    ],
    "wikidata": null,
    "charted": false,
@@ -1177,6 +1571,15 @@
    "launches": [
     "platte-river-sp-paddlecraft-launch-ne"
    ],
+   "water_id": "decker-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "8396cae1af8920867ac71f13a754821a9ada4ca88ace1e90c78f663fd71acfe1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1190,8 +1593,8 @@
    "bbox": [
     -101.71521,
     41.95845,
-    -101.70633,
-    41.96627
+    -101.706329,
+    41.966265
    ],
    "wikidata": null,
    "charted": false,
@@ -1199,6 +1602,15 @@
    "launches": [
     "defair-wma-ne"
    ],
+   "water_id": "defair-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "c0f0ac7016c7c0884c049056ed4c42e098638668a76cc9bb2fe16ac7120be0d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1211,9 +1623,9 @@
    ],
    "bbox": [
     -96.04276,
-    41.49121,
-    -95.99065,
-    41.54741
+    41.491209,
+    -95.990653,
+    41.547412
    ],
    "wikidata": null,
    "charted": true,
@@ -1221,6 +1633,15 @@
    "launches": [
     "desoto-bend-nwr-ne"
    ],
+   "water_id": "desoto-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "e92d04491aa436e4d326508eb8d58cc229b64a038de0a42fd99b2ca77d3a3ec4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1231,9 +1652,9 @@
    "towns": [],
    "bbox": [
     -100.66494,
-    42.53964,
+    42.539641,
     -100.60904,
-    42.55013
+    42.550128
    ],
    "wikidata": null,
    "charted": false,
@@ -1244,6 +1665,15 @@
     "dewey-lake-east-4-ne",
     "dewey-lake-unit-4-boat-launch-ne"
    ],
+   "water_id": "dewey-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "fe3f649bc76f84e56569e70a54bb94f231c5baca1ec195c5d0b1e164c00488e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1255,10 +1685,10 @@
     "Odell"
    ],
    "bbox": [
-    -96.87304,
-    40.03796,
-    -96.86732,
-    40.04158
+    -96.873036,
+    40.037933,
+    -96.867323,
+    40.041578
    ],
    "wikidata": null,
    "charted": false,
@@ -1266,6 +1696,15 @@
    "launches": [
     "diamond-lake-wma-ne"
    ],
+   "water_id": "diamond-lake-big-indian-creek-reservoir-5-f-ne",
+   "gnis_id": null,
+   "geometry_hash": "b24e5f1ae3a5bdebb54638a157a246a58e32ede69dcb9533a968eed8817a7eb3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1277,10 +1716,10 @@
     "Peru"
    ],
    "bbox": [
-    -95.80141,
-    40.4978,
-    -95.75288,
-    40.50264
+    -95.801591,
+    40.497798,
+    -95.752878,
+    40.502642
    ],
    "wikidata": null,
    "charted": false,
@@ -1288,6 +1727,15 @@
    "launches": [
     "duck-creek-recreation-area-ne"
    ],
+   "water_id": "duck-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "51bc77e30eaf72625de368a599ecb1c0b9006f2da3f4a2b6a6b41c7809647ae3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1297,10 +1745,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -100.73154,
-    42.54106,
-    -100.72245,
-    42.54671
+    -100.731543,
+    42.540811,
+    -100.722451,
+    42.546708
    ],
    "wikidata": null,
    "charted": false,
@@ -1308,6 +1756,15 @@
    "launches": [
     "duck-lake-main-ramp-ne"
    ],
+   "water_id": "duck-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "25ac73bc5035eed47790a2fe5429a5b2c748b7682170ba885eaa0dc18a778551",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1325,6 +1782,15 @@
    "launches": [
     "eagle-scout-park-ne"
    ],
+   "water_id": "eagle-scout-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1342,6 +1808,15 @@
    "launches": [
     "bridgeport-sra-ne-2"
    ],
+   "water_id": "east-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1353,10 +1828,10 @@
     "Cozad"
    ],
    "bbox": [
-    -100.05137,
-    40.77197,
-    -100.02604,
-    40.78385
+    -100.051374,
+    40.771972,
+    -100.026039,
+    40.783847
    ],
    "wikidata": null,
    "charted": false,
@@ -1364,6 +1839,15 @@
    "launches": [
     "midway-canyon-reservoir-ne"
    ],
+   "water_id": "east-midway-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "4d7a5e6399e4b84cef8eb1371fd6594499afa98bbf340a9788fb072d052b7b1f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1375,10 +1859,10 @@
     "Hershey"
    ],
    "bbox": [
-    -101.05921,
-    41.14008,
-    -101.05061,
-    41.14145
+    -101.059208,
+    41.139867,
+    -101.050609,
+    41.141455
    ],
    "wikidata": null,
    "charted": false,
@@ -1386,6 +1870,15 @@
    "launches": [
     "east-sutherland-i-80-lake-ne"
    ],
+   "water_id": "east-sutherland-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "5f51eb8f6466253f240074f2d6d3acf0e5f7eb70efe53373ff332b09b54e96f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1402,9 +1895,9 @@
    ],
    "bbox": [
     -99.18326,
-    41.11882,
-    -96.25864,
-    42.61068
+    41.118822,
+    -96.258447,
+    42.610676
    ],
    "wikidata": "Q3051329",
    "charted": false,
@@ -1417,6 +1910,15 @@
     "waterloo-river-access-ne",
     "wisner-city-park-ne"
    ],
+   "water_id": "elkhorn-river-ne",
+   "gnis_id": "829066",
+   "geometry_hash": "5e8898302540c1e5d3c52daa79fdbb7b8a091b9f9e300046307cae1756b39ef6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1428,10 +1930,10 @@
     "Elwood"
    ],
    "bbox": [
-    -99.87857,
-    40.60239,
-    -99.84322,
-    40.64917
+    -99.878565,
+    40.602386,
+    -99.843219,
+    40.649169
    ],
    "wikidata": null,
    "charted": false,
@@ -1439,6 +1941,15 @@
    "launches": [
     "elwood-wma-ne"
    ],
+   "water_id": "elwood-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "f0aeb4141e6136d59ac673e16845c868722b3a767a57d24f726525c359343b00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1451,10 +1962,10 @@
     "Imperial"
    ],
    "bbox": [
-    -101.58083,
+    -101.580828,
     40.41846,
-    -101.51774,
-    40.44126
+    -101.517735,
+    40.441296
    ],
    "wikidata": null,
    "charted": false,
@@ -1464,6 +1975,15 @@
     "enders-reservoir-sra-center-dam-north-ne",
     "enders-reservoir-sra-no-name-bay-ne"
    ],
+   "water_id": "enders-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "85ab568e638bd1efe3fa425e5edf4ef0b9ba80859936d3ada7bee93edc6672d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1475,10 +1995,10 @@
     "Ericson"
    ],
    "bbox": [
-    -98.66829,
-    41.757,
-    -98.65295,
-    41.76927
+    -98.668294,
+    41.756995,
+    -98.652879,
+    41.769273
    ],
    "wikidata": null,
    "charted": false,
@@ -1486,6 +2006,15 @@
    "launches": [
     "lake-ericson-boat-ramp-ne"
    ],
+   "water_id": "ericson-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "4589fbc8045475b398d61feea3c8e636621461b8986ca117a1dbf52830c56ec8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1497,10 +2026,10 @@
     "Bennington"
    ],
    "bbox": [
-    -96.20104,
-    41.30876,
-    -96.18125,
-    41.33117
+    -96.201036,
+    41.308763,
+    -96.181003,
+    41.331169
    ],
    "wikidata": null,
    "charted": false,
@@ -1508,6 +2037,15 @@
    "launches": [
     "flanagan-lake-and-recreation-area-ne"
    ],
+   "water_id": "flanagan-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "fa6cb5caaccc8f9fb3fc87d628edc2e001823cec4daee5805f0007fe856b62e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -1533,13 +2071,27 @@
    "towns": [
     "North Platte"
    ],
-   "bbox": null,
+   "bbox": [
+    -100.676594,
+    41.087577,
+    -100.649605,
+    41.099384
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "fremont-slough-wma-ne"
    ],
+   "water_id": "fremont-slough-ne",
+   "gnis_id": "829412",
+   "geometry_hash": "8fc2b52e882158786f13f6f34e5659676d3d433a22b012944b964e496e1fe611",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1551,19 +2103,28 @@
     "Palisade"
    ],
    "bbox": [
-    -101.51779,
-    40.22149,
+    -101.517791,
+    40.221485,
     -100.82475,
-    40.42972
+    40.429715
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "frenchman-wma-ne",
-    "frenchman-wma-palisade-ne",
-    "frenchman-wma-ne-2"
+    "frenchman-wma-ne-2",
+    "frenchman-wma-palisade-ne"
    ],
+   "water_id": "frenchman-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "b266f29abe7e7a8f697a75c079846e2f1e68c856d986ce72c673dbfe638dba05",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1575,10 +2136,10 @@
     "Hyannis"
    ],
    "bbox": [
-    -101.75278,
-    42.01632,
-    -101.72826,
-    42.02448
+    -101.752899,
+    42.016268,
+    -101.728265,
+    42.024482
    ],
    "wikidata": null,
    "charted": false,
@@ -1586,6 +2147,15 @@
    "launches": [
     "frye-lake-wma-ne"
    ],
+   "water_id": "frye-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "44057d6d8412713b9d17416730fcf11e5810181d67a35489478059d27013379e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1597,10 +2167,10 @@
     "Cozad"
    ],
    "bbox": [
-    -99.98934,
+    -99.989341,
     40.72209,
-    -99.96889,
-    40.74287
+    -99.968889,
+    40.742869
    ],
    "wikidata": null,
    "charted": false,
@@ -1608,6 +2178,15 @@
    "launches": [
     "gallagher-canyon-sra-ne"
    ],
+   "water_id": "gallagher-canyon-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "079d834aa8b46aab57a0117a87360cf0b1aae8964f2dc2146bfd61a8803ddf6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1619,10 +2198,10 @@
     "Big Springs"
    ],
    "bbox": [
-    -102.128,
-    41.03847,
-    -102.12437,
-    41.04028
+    -102.127996,
+    41.038475,
+    -102.124375,
+    41.040414
    ],
    "wikidata": null,
    "charted": false,
@@ -1630,6 +2209,15 @@
    "launches": [
     "goldeneye-wma-ne"
    ],
+   "water_id": "goldeneye-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "bf44c830faed04c1c118b63a38c67c6f2d0bdc6162189593ad574eb434db90d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1641,10 +2229,10 @@
     "Chambers"
    ],
    "bbox": [
-    -98.57058,
+    -98.570584,
     42.10349,
-    -98.55448,
-    42.11603
+    -98.554478,
+    42.116344
    ],
    "wikidata": null,
    "charted": false,
@@ -1652,6 +2240,15 @@
    "launches": [
     "goose-lake-wma-ne"
    ],
+   "water_id": "goose-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "3f6db558731590395e548e827161c87b13e545074a6c6df8802bb335754d3ae8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -1678,10 +2275,10 @@
     "Crawford"
    ],
    "bbox": [
-    -103.42922,
-    42.65299,
-    -103.42703,
-    42.65891
+    -103.429219,
+    42.652992,
+    -103.427031,
+    42.658915
    ],
    "wikidata": null,
    "charted": false,
@@ -1691,6 +2288,15 @@
     "fort-robinson-sp-paddlecraft-launch-ne-2",
     "fort-robinson-sp-paddlecraft-launch-ne-3"
    ],
+   "water_id": "grabel-ponds-ne",
+   "gnis_id": null,
+   "geometry_hash": "43d4435c93523258004cf0e7521b729754611506e5706b132002d213dc9bdb87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1702,9 +2308,9 @@
     "Royal"
    ],
    "bbox": [
-    -98.12075,
-    42.36847,
-    -98.11358,
+    -98.120755,
+    42.368473,
+    -98.113578,
     42.37962
    ],
    "wikidata": null,
@@ -1714,6 +2320,15 @@
     "grove-lake-north-ramp-ne",
     "grove-lake-wma-south-ramp-ne"
    ],
+   "water_id": "grove-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "275c658ca20c36797cbd340855b03bd71b26263c4b17f88ded8d075af9305c58",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -1739,10 +2354,10 @@
     "Simeon"
    ],
    "bbox": [
-    -100.7035,
-    42.55682,
-    -100.65149,
-    42.57039
+    -100.703497,
+    42.556658,
+    -100.651493,
+    42.570388
    ],
    "wikidata": null,
    "charted": false,
@@ -1752,6 +2367,15 @@
     "hackberry-west-ramp-ne",
     "hackberry-lake-3b-boat-launch-ne"
    ],
+   "water_id": "hackberry-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "6878f074b2a4e842a10e4c16f85ec596cefb39f8fd337f76e04cd0f73bb8d345",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1764,10 +2388,10 @@
     "Republican City"
    ],
    "bbox": [
-    -99.39057,
-    40.02425,
-    -99.21056,
-    40.09738
+    -99.390574,
+    40.024246,
+    -99.210339,
+    40.097378
    ],
    "wikidata": "Q5658289",
    "charted": false,
@@ -1777,12 +2401,23 @@
     "gremlin-cove-ne",
     "hunter-cove-ne",
     "hunter-cove-low-water-ne",
-    "methodist-cove-ne",
     "methodist-cove-alma-ne",
+    "methodist-cove-ne",
     "methodist-cove-paddlecraft-launch-ne",
     "north-shore-marina-ne",
     "patterson-harbor-ne",
     "pelican-point-ne"
+   ],
+   "water_id": "harlan-county-lake-ne",
+   "gnis_id": "471770",
+   "geometry_hash": "14f8b30541662309a902e34911c5771104873a1f99af7596522405a24154edaa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "private-ramp-ne"
    ],
    "advisories": []
   },
@@ -1795,10 +2430,10 @@
     "Cambridge"
    ],
    "bbox": [
-    -100.25479,
-    40.37758,
-    -100.2134,
-    40.44251
+    -100.254793,
+    40.377577,
+    -100.213401,
+    40.442512
    ],
    "wikidata": null,
    "charted": false,
@@ -1806,6 +2441,15 @@
    "launches": [
     "medicine-creek-trail-3-ne"
    ],
+   "water_id": "harry-strunk-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "680ac7b611646e1e3403a4b935124479435bf72318f5a57b3dc04114a6654fe0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1817,10 +2461,10 @@
     "Hickman"
    ],
    "bbox": [
-    -96.57061,
-    40.60102,
-    -96.56584,
-    40.60535
+    -96.570609,
+    40.601021,
+    -96.565844,
+    40.605348
    ],
    "wikidata": null,
    "charted": false,
@@ -1828,6 +2472,15 @@
    "launches": [
     "hedgefield-boat-launch-ne"
    ],
+   "water_id": "hedgefield-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "a8e96d869a8cf8291f4251dc7ec97cf7ac6484806f1a27214ca3f5c735b4e27c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1839,10 +2492,10 @@
     "Hershey"
    ],
    "bbox": [
-    -100.99784,
-    41.13446,
-    -100.98326,
-    41.13591
+    -100.997835,
+    41.134377,
+    -100.983246,
+    41.136235
    ],
    "wikidata": null,
    "charted": false,
@@ -1850,6 +2503,15 @@
    "launches": [
     "hershey-wma-ne"
    ],
+   "water_id": "hershey-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "aaf3fba3cf2e1d92093accee1970df45c8cbead941793a4d625a2d876d03815c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -1881,6 +2543,15 @@
    "launches": [
     "holdrege-city-lake-ne"
    ],
+   "water_id": "holdrege-city-lake-north-park-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1892,10 +2563,10 @@
     "Lincoln"
    ],
    "bbox": [
-    -96.64092,
-    40.77185,
-    -96.62542,
-    40.78505
+    -96.640923,
+    40.771847,
+    -96.625424,
+    40.785046
    ],
    "wikidata": "Q34890432",
    "charted": false,
@@ -1904,6 +2575,15 @@
     "little-lake-ne",
     "main-lake-ne"
    ],
+   "water_id": "holmes-lake-ne",
+   "gnis_id": "827013",
+   "geometry_hash": "6bd6bc8ed973d9b9271449f145c1ab8f0f46dfce01874640d378bac7a8ea5072",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1942,10 +2622,10 @@
     "Bruno"
    ],
    "bbox": [
-    -96.96172,
-    41.30441,
+    -96.961719,
+    41.30439,
     -96.95515,
-    41.30685
+    41.306854
    ],
    "wikidata": null,
    "charted": false,
@@ -1953,6 +2633,15 @@
    "launches": [
     "homestead-lake-recreation-area-ne"
    ],
+   "water_id": "homestead-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "b22dae9289d5f263cdb9b007d27f3cb407d01256d91f490bb66558ec860cf4ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1965,9 +2654,9 @@
    ],
    "bbox": [
     -100.742,
-    40.34806,
-    -100.66374,
-    40.39091
+    40.348063,
+    -100.663745,
+    40.390914
    ],
    "wikidata": null,
    "charted": false,
@@ -1978,6 +2667,15 @@
     "red-willow-reservoir-south-ramp-ne",
     "willow-view-camp-ground-ne"
    ],
+   "water_id": "hugh-butler-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "4e1f53fe4352096b25c7fd2e16e7b294a7a14ab43488a9dd4fec2ffe83137de4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1989,10 +2687,10 @@
     "Butte"
    ],
    "bbox": [
-    -98.88462,
-    42.86628,
-    -98.88115,
-    42.86838
+    -98.884624,
+    42.866285,
+    -98.881153,
+    42.868376
    ],
    "wikidata": null,
    "charted": false,
@@ -2000,6 +2698,15 @@
    "launches": [
     "hull-lake-wma-ne"
    ],
+   "water_id": "hull-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "eaf51fc733e652e2d4e370e57dd7ec45c4bae9855fc81978fef19a5f91449ee6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2011,10 +2718,10 @@
     "Crawford"
    ],
    "bbox": [
-    -103.47648,
-    42.64814,
+    -103.476484,
+    42.648137,
     -103.47203,
-    42.65204
+    42.652222
    ],
    "wikidata": null,
    "charted": false,
@@ -2022,6 +2729,15 @@
    "launches": [
     "ice-house-pond-paddlecraft-launch-ne"
    ],
+   "water_id": "ice-house-ponds-ne",
+   "gnis_id": null,
+   "geometry_hash": "a523635f3adb640362127e10841cc718648d0c99a653a100b296688feaf3444f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2033,10 +2749,10 @@
     "Cozad"
    ],
    "bbox": [
-    -99.98483,
+    -99.984827,
     40.8386,
     -99.97988,
-    40.84106
+    40.841061
    ],
    "wikidata": null,
    "charted": false,
@@ -2044,6 +2760,15 @@
    "launches": [
     "cozad-wma-ne"
    ],
+   "water_id": "interstate-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "434504406e8769fd19b5a435845e1e3ddcb5146c4bfda10562409d9e3c2e9fb9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2061,6 +2786,15 @@
    "launches": [
     "iron-horse-trail-lake-recreation-area-ne"
    ],
+   "water_id": "iron-horse-trail-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2072,10 +2806,10 @@
     "Mumper"
    ],
    "bbox": [
-    -102.41047,
-    41.72689,
-    -102.38496,
-    41.74891
+    -102.410544,
+    41.726887,
+    -102.384961,
+    41.748907
    ],
    "wikidata": null,
    "charted": false,
@@ -2085,6 +2819,15 @@
     "island-lake-2-ne",
     "island-lake-3-ne"
    ],
+   "water_id": "island-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "2a7c21db35e045e803467a366e490c2b353a5e179c3292bfdb001e1ce4f3eb6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2096,10 +2839,10 @@
     "Brady"
    ],
    "bbox": [
-    -100.43062,
-    40.91836,
-    -100.3972,
-    40.96168
+    -100.430616,
+    40.918358,
+    -100.397197,
+    40.961682
    ],
    "wikidata": null,
    "charted": false,
@@ -2107,6 +2850,15 @@
    "launches": [
     "jeffrey-wma-ne"
    ],
+   "water_id": "jeffrey-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "88b260c234717db3e7e3ef591713560c778bf51ab67fec6e0a0babcdebe988e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2118,10 +2870,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.44749,
-    41.43102,
-    -96.44572,
-    41.43606
+    -96.447491,
+    41.431019,
+    -96.445724,
+    41.436144
    ],
    "wikidata": null,
    "charted": false,
@@ -2129,6 +2881,15 @@
    "launches": [
     "johnson-park-lake-ne"
    ],
+   "water_id": "johnson-lake-fremont-ne",
+   "gnis_id": null,
+   "geometry_hash": "729388a81dc9412fc63bdc1d8b28836acc93f281c69687e7c37eb31f6812cc64",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2141,9 +2902,9 @@
    ],
    "bbox": [
     -99.87996,
-    40.67516,
-    -99.81894,
-    40.71696
+    40.675165,
+    -99.818943,
+    40.716965
    ],
    "wikidata": null,
    "charted": false,
@@ -2153,6 +2914,15 @@
     "meedo-ramp-ne",
     "nautical-rose-boat-ramp-ne"
    ],
+   "water_id": "johnson-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "f638b58fde225ca07244078e4d96d1b09ddf73c6abf4b11769b415464d0c0ef1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2164,10 +2934,10 @@
     "Kearney"
    ],
    "bbox": [
-    -99.09494,
-    40.66755,
-    -99.08788,
-    40.669
+    -99.094937,
+    40.667515,
+    -99.087884,
+    40.669122
    ],
    "wikidata": null,
    "charted": false,
@@ -2175,6 +2945,15 @@
    "launches": [
     "kea-lake-boat-launch-ne"
    ],
+   "water_id": "kea-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "0e1efb727343261ba883216262c081cb252720c06f625da579074d897a700f44",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -2206,6 +2985,15 @@
    "launches": [
     "archway-lake-1-ne"
    ],
+   "water_id": "kearney-archway-foundation-pond-1-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2217,10 +3005,10 @@
     "Lincoln"
    ],
    "bbox": [
-    -96.76756,
-    40.67537,
+    -96.767556,
+    40.675368,
     -96.76361,
-    40.67768
+    40.677679
    ],
    "wikidata": null,
    "charted": false,
@@ -2228,6 +3016,15 @@
    "launches": [
     "killdeer-boat-launch-ne"
    ],
+   "water_id": "killdeer-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "1a38f182faaad804878c61cc2ce974ba0ea83bc5262b932ad7e4e72adcf70cbf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2239,10 +3036,10 @@
     "Humboldt"
    ],
    "bbox": [
-    -96.00003,
-    40.18135,
-    -95.98545,
-    40.19595
+    -96.000033,
+    40.181353,
+    -95.985453,
+    40.195954
    ],
    "wikidata": null,
    "charted": false,
@@ -2250,6 +3047,15 @@
    "launches": [
     "kirkman-s-cove-recreation-area-ne"
    ],
+   "water_id": "kirkman-s-cove-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "fa6af21bb675ec968e1690edfcc81374f3ca7e4cc046ecb9457dfb0241e7f846",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2281,10 +3087,10 @@
     "Hubbard"
    ],
    "bbox": [
-    -96.58466,
-    42.36979,
-    -96.56868,
-    42.38689
+    -96.584659,
+    42.369793,
+    -96.568652,
+    42.386889
    ],
    "wikidata": null,
    "charted": false,
@@ -2292,6 +3098,15 @@
    "launches": [
     "danish-alps-sra-ne"
    ],
+   "water_id": "kramper-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "8d1758b084ed4a9fa472472800a5168b5280ef2ff9168724a11bb6ff29577a9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -2319,9 +3134,9 @@
    ],
    "bbox": [
     -98.35746,
-    40.88765,
-    -98.34989,
-    40.89058
+    40.887654,
+    -98.349859,
+    40.890827
    ],
    "wikidata": null,
    "charted": false,
@@ -2329,6 +3144,15 @@
    "launches": [
     "l-e-ray-park-ne"
    ],
+   "water_id": "l-e-ray-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "f14bdaf023bb51e96c9ba847977916ffaecc9b436215e3b46f402b9317d284ae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2340,9 +3164,9 @@
     "Fremont"
    ],
    "bbox": [
-    -96.56387,
-    41.44825,
-    -96.55969,
+    -96.563872,
+    41.448246,
+    -96.559693,
     41.45123
    ],
    "wikidata": null,
@@ -2351,6 +3175,15 @@
    "launches": [
     "fremont-sra-1-ne"
    ],
+   "water_id": "lake-1-fremont-ne",
+   "gnis_id": null,
+   "geometry_hash": "97c4207c6ebd2efebc40b3f57c8559fa5819eee6832b05ec3e0552440006bb77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2362,10 +3195,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.54384,
-    41.44151,
-    -96.54091,
-    41.44321
+    -96.543841,
+    41.441514,
+    -96.540907,
+    41.443207
    ],
    "wikidata": null,
    "charted": false,
@@ -2373,6 +3206,15 @@
    "launches": [
     "fremont-sra-11-ne"
    ],
+   "water_id": "lake-11-ne",
+   "gnis_id": null,
+   "geometry_hash": "f3f42617b71731a84c7c87d6bdbd278b3b8988dd7c3f7c38375e820ef1b01ba1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2384,10 +3226,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.54015,
-    41.43999,
-    -96.53311,
-    41.44127
+    -96.540153,
+    41.439893,
+    -96.533115,
+    41.441331
    ],
    "wikidata": null,
    "charted": false,
@@ -2395,6 +3237,15 @@
    "launches": [
     "fremont-sra-12-ne"
    ],
+   "water_id": "lake-12-ne",
+   "gnis_id": null,
+   "geometry_hash": "8dab688d3bec9637c23686750fa9314b9d87d97d9dc483289637b50784445f67",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2406,10 +3257,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.53535,
-    41.43758,
+    -96.535354,
+    41.437581,
     -96.53213,
-    41.43965
+    41.439863
    ],
    "wikidata": null,
    "charted": false,
@@ -2417,6 +3268,15 @@
    "launches": [
     "fremont-sra-13-ne"
    ],
+   "water_id": "lake-13-ne",
+   "gnis_id": null,
+   "geometry_hash": "abc2e8543b2d1137daeec7f63c95ccb78a41371a4142b0f6f8974e5bbb28b986",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2428,10 +3288,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.55853,
-    41.44021,
+    -96.558527,
+    41.440162,
     -96.5543,
-    41.44258
+    41.442671
    ],
    "wikidata": null,
    "charted": false,
@@ -2439,6 +3299,15 @@
    "launches": [
     "fremont-sra-16-ne"
    ],
+   "water_id": "lake-16-ne",
+   "gnis_id": null,
+   "geometry_hash": "9b5bea3331d853958010b2205ca89338de37c536b64c2ca67e9314209ae64cdb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2450,10 +3319,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.54912,
-    41.43883,
-    -96.54483,
-    41.44016
+    -96.549118,
+    41.438831,
+    -96.544826,
+    41.440373
    ],
    "wikidata": null,
    "charted": false,
@@ -2461,6 +3330,15 @@
    "launches": [
     "fremont-sra-17-ne"
    ],
+   "water_id": "lake-17-ne",
+   "gnis_id": null,
+   "geometry_hash": "84f3410ee2cef875eaa1a1488e58603479504c89e852f14105fd4558ce09e7fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2472,10 +3350,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.54055,
-    41.43712,
-    -96.53691,
-    41.43805
+    -96.540548,
+    41.437115,
+    -96.536906,
+    41.438046
    ],
    "wikidata": null,
    "charted": false,
@@ -2483,6 +3361,15 @@
    "launches": [
     "fremont-sra-19-ne"
    ],
+   "water_id": "lake-19-ne",
+   "gnis_id": null,
+   "geometry_hash": "7e07a33eae25b33ee615a4b36a789c7c5ae777ae9dc5799decceb6c0b4ffba51",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2494,10 +3381,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.56809,
-    41.44864,
-    -96.56227,
-    41.45053
+    -96.568087,
+    41.4486,
+    -96.562271,
+    41.450526
    ],
    "wikidata": null,
    "charted": false,
@@ -2505,6 +3392,15 @@
    "launches": [
     "fremont-sra-2-ne"
    ],
+   "water_id": "lake-2-fremont-ne",
+   "gnis_id": null,
+   "geometry_hash": "1e6e184b42575f38ef52e71f4e3f5b2cabb84205d4372dc0467c59db0897c99f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2516,10 +3412,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.55834,
-    41.43421,
-    -96.54563,
-    41.43952
+    -96.558339,
+    41.434213,
+    -96.545631,
+    41.439522
    ],
    "wikidata": null,
    "charted": false,
@@ -2527,6 +3423,15 @@
    "launches": [
     "fremont-sra-20-ne"
    ],
+   "water_id": "lake-20-ne",
+   "gnis_id": null,
+   "geometry_hash": "db5d9c96ce4a08c23489ccfb8538b5fbfd1e22b3998fed2e01d4d7ff158c8265",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2538,10 +3443,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.57063,
-    41.44946,
-    -96.5684,
-    41.45101
+    -96.570627,
+    41.449465,
+    -96.568374,
+    41.451013
    ],
    "wikidata": null,
    "charted": false,
@@ -2549,6 +3454,15 @@
    "launches": [
     "fremont-sra-3-ne"
    ],
+   "water_id": "lake-3-ne",
+   "gnis_id": null,
+   "geometry_hash": "62c11b468cb0290ac266205300629786c8d32ffe4279b6542ff128c88409103c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2560,10 +3474,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.57778,
-    41.45004,
-    -96.57266,
-    41.45114
+    -96.577778,
+    41.450042,
+    -96.572663,
+    41.451139
    ],
    "wikidata": null,
    "charted": false,
@@ -2571,6 +3485,15 @@
    "launches": [
     "fremont-sra-4-ne"
    ],
+   "water_id": "lake-4-ne",
+   "gnis_id": null,
+   "geometry_hash": "378b1ca50b04018ef57f2b7d14456b137420bbabf30bf575d4f65619b92d21df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2582,10 +3505,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.57768,
-    41.44866,
-    -96.56959,
-    41.4498
+    -96.577681,
+    41.448659,
+    -96.569594,
+    41.449903
    ],
    "wikidata": null,
    "charted": false,
@@ -2593,6 +3516,15 @@
    "launches": [
     "fremont-sra-5-ne"
    ],
+   "water_id": "lake-5-ne",
+   "gnis_id": null,
+   "geometry_hash": "753efa9fb31a416bed08d7a71953f78677a3b53197332f6138aec4baf08b504e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2604,10 +3536,10 @@
     "Bennington"
    ],
    "bbox": [
-    -96.06209,
-    41.33797,
-    -96.0409,
-    41.36939
+    -96.062087,
+    41.337969,
+    -96.040898,
+    41.369393
    ],
    "wikidata": "Q5568746",
    "charted": false,
@@ -2616,6 +3548,15 @@
     "glenn-cunnigham-paddlecraft-launch-ne",
     "glenn-cunningham-main-boat-ramp-ne"
    ],
+   "water_id": "lake-cunningham-ne",
+   "gnis_id": "1769653",
+   "geometry_hash": "5b53f8d465f2c5699ded7f186220c7d9a8a46c3a21d9ac248a4dfb8e7c087684",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -2642,10 +3583,10 @@
     "Hastings"
    ],
    "bbox": [
-    -98.39989,
-    40.6081,
-    -98.38522,
-    40.61674
+    -98.399887,
+    40.608096,
+    -98.385219,
+    40.616741
    ],
    "wikidata": null,
    "charted": false,
@@ -2654,6 +3595,15 @@
     "hastings-ramp-2-ne",
     "lake-hastings-boat-launch-ne"
    ],
+   "water_id": "lake-hastings-ne",
+   "gnis_id": null,
+   "geometry_hash": "68adb04b0b22b2ab5c98167614736857284097b68e5dc95ac81529973c1bb105",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2665,10 +3615,10 @@
     "Gothenburg"
    ],
    "bbox": [
-    -100.16665,
-    40.93872,
-    -100.1611,
-    40.9431
+    -100.166651,
+    40.938722,
+    -100.161102,
+    40.943101
    ],
    "wikidata": null,
    "charted": false,
@@ -2676,6 +3626,15 @@
    "launches": [
     "lake-helen-boat-launch-ne"
    ],
+   "water_id": "lake-helen-ne",
+   "gnis_id": null,
+   "geometry_hash": "ddacb3719fd9431fa51612cb7fe3ce6c756b3dd37516a4c57375a67d51328e48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2687,9 +3646,9 @@
     "North Platte"
    ],
    "bbox": [
-    -100.80275,
-    41.01956,
-    -100.7567,
+    -100.802752,
+    41.019551,
+    -100.756697,
     41.05228
    ],
    "wikidata": null,
@@ -2703,6 +3662,15 @@
     "lake-maloney-sra-area-4-ne",
     "lake-maloney-south-ramp-ne"
    ],
+   "water_id": "lake-maloney-ne",
+   "gnis_id": null,
+   "geometry_hash": "2c9a1c82dfc1e78c709c7457a198a292662ffa80d48ab3661a687d00f5af4f10",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2718,10 +3686,10 @@
     "Ruthton"
    ],
    "bbox": [
-    -102.01692,
-    41.19732,
-    -101.66915,
-    41.30286
+    -102.016922,
+    41.1973,
+    -101.669154,
+    41.30292
    ],
    "wikidata": "Q6476851",
    "charted": false,
@@ -2744,6 +3712,17 @@
     "lake-mcconaughy-sra-spillway-bay-front-ne",
     "lake-mcconaughy-sra-spillway-bay-low-water-ne"
    ],
+   "water_id": "lake-mcconaughy-ne",
+   "gnis_id": "831115",
+   "geometry_hash": "fbcfee0370544848f36d3a48d8699fe611a500801172b285caf94271581ad97f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "vans-marina-ne"
+   ],
    "advisories": []
   },
   {
@@ -2755,10 +3734,10 @@
     "Scottsbluff"
    ],
    "bbox": [
-    -103.51756,
-    41.91833,
-    -103.47289,
-    41.94783
+    -103.517561,
+    41.918182,
+    -103.472886,
+    41.947825
    ],
    "wikidata": null,
    "charted": false,
@@ -2768,6 +3747,17 @@
     "lake-view-rock-ramp-ne",
     "main-canal-west-wind-ramp-ne",
     "scouts-rest-ne"
+   ],
+   "water_id": "lake-minatare-ne",
+   "gnis_id": null,
+   "geometry_hash": "ddc386719e1071918776f851c787e77a368ba0885f85c4c39224501de9306fb8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "rock-ramp-private-ne"
    ],
    "advisories": []
   },
@@ -2780,10 +3770,10 @@
     "Columbus"
    ],
    "bbox": [
-    -97.35935,
-    41.4844,
-    -97.34994,
-    41.4959
+    -97.359349,
+    41.484403,
+    -97.349861,
+    41.495903
    ],
    "wikidata": null,
    "charted": false,
@@ -2791,6 +3781,15 @@
    "launches": [
     "lake-north-boat-launch-ne"
    ],
+   "water_id": "lake-north-ne",
+   "gnis_id": null,
+   "geometry_hash": "4d5505d3b2cca83dd00e91338c10855a1124f8e3cfa6b23e88cc5bdf0ea4b206",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2802,10 +3801,10 @@
     "Ogallala"
    ],
    "bbox": [
-    -101.66873,
-    41.20969,
-    -101.63615,
-    41.23441
+    -101.668732,
+    41.209693,
+    -101.636153,
+    41.234414
    ],
    "wikidata": null,
    "charted": false,
@@ -2814,6 +3813,15 @@
     "lake-ogallala-north-boat-ramp-ne",
     "lake-ogallala-south-ramp-ne"
    ],
+   "water_id": "lake-ogallala-ne",
+   "gnis_id": null,
+   "geometry_hash": "2d35be7b88e526371164fdfa644011a206849b5f7aec967c07d29faf33fbafbf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2825,10 +3833,10 @@
     "Wahoo"
    ],
    "bbox": [
-    -96.61828,
-    41.23516,
-    -96.60318,
-    41.26591
+    -96.618284,
+    41.235155,
+    -96.603179,
+    41.265909
    ],
    "wikidata": null,
    "charted": false,
@@ -2836,6 +3844,15 @@
    "launches": [
     "lake-wanahoo-recreation-area-ne"
    ],
+   "water_id": "lake-wanahoo-ne",
+   "gnis_id": null,
+   "geometry_hash": "3b355fceeaed3396949662ff6e68851be5f630806f086e9a0aeb32d8e972de5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2847,10 +3864,10 @@
     "Valley"
    ],
    "bbox": [
-    -96.22774,
-    41.26321,
-    -96.21706,
-    41.27234
+    -96.227738,
+    41.263209,
+    -96.216931,
+    41.272336
    ],
    "wikidata": null,
    "charted": false,
@@ -2858,6 +3875,15 @@
    "launches": [
     "lawrence-youngman-boat-launch-ne"
    ],
+   "water_id": "lawrence-youngman-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "3d44eeb448e46c897c723c6ff8fcd362547243343f429d3a02253a704bf13132",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -2884,10 +3910,10 @@
     "Plymouth"
    ],
    "bbox": [
-    -96.98881,
-    40.25545,
-    -96.98341,
-    40.26167
+    -96.988806,
+    40.255327,
+    -96.983407,
+    40.261668
    ],
    "wikidata": null,
    "charted": false,
@@ -2895,6 +3921,15 @@
    "launches": [
     "leisure-lake-wma-ne"
    ],
+   "water_id": "leisure-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "d533915bbe9c48c0666c60aa425d5325d909d04860207f2a3ebddcb1fca133ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2909,9 +3944,9 @@
    ],
    "bbox": [
     -97.90572,
-    42.82533,
-    -97.48107,
-    42.88139
+    42.825332,
+    -97.481071,
+    42.881386
    ],
    "wikidata": "Q7334123",
    "charted": false,
@@ -2923,6 +3958,15 @@
     "south-shore-ne",
     "weigand-marina-ne"
    ],
+   "water_id": "lewis-and-clark-lake-ne",
+   "gnis_id": "830688",
+   "geometry_hash": "7681adbe32ea7c07be285a633cf978e7336ea30ef07b752835a51d0694cd1c22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2940,6 +3984,15 @@
    "launches": [
     "liberty-cove-recreation-area-ne"
    ],
+   "water_id": "liberty-cove-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2952,10 +4005,10 @@
     "Oakland"
    ],
    "bbox": [
-    -97.08369,
-    41.62017,
-    -96.48299,
-    42.43567
+    -97.083694,
+    41.620165,
+    -96.482584,
+    42.435671
    ],
    "wikidata": null,
    "charted": false,
@@ -2964,6 +4017,15 @@
     "bancroft-24th-rd-paddlecraft-launch-ne",
     "logan-creek-dredge-carry-in-access-ne"
    ],
+   "water_id": "logan-creek-dredge-ne",
+   "gnis_id": null,
+   "geometry_hash": "1315a9a498db70507014b08458224dfa742b4bc30f6a7a9b9e2e36d20c0a0721",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2974,9 +4036,9 @@
    "towns": [],
    "bbox": [
     -100.72768,
-    42.52287,
-    -100.7035,
-    42.53142
+    42.522866,
+    -100.703499,
+    42.531423
    ],
    "wikidata": null,
    "charted": false,
@@ -2985,6 +4047,15 @@
     "west-long-lake-east-boat-launch-ne",
     "west-long-lake-main-ramp-ne"
    ],
+   "water_id": "long-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "602b6fa9395fc3be41c00023c325e111dc279a99fd8c27e8d582af0ba143068e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2996,10 +4067,10 @@
     "Columbus"
    ],
    "bbox": [
-    -97.38767,
-    41.4887,
-    -97.36649,
-    41.49498
+    -97.387667,
+    41.488701,
+    -97.366495,
+    41.494979
    ],
    "wikidata": null,
    "charted": false,
@@ -3007,6 +4078,15 @@
    "launches": [
     "castner-s-crossing-ne"
    ],
+   "water_id": "loup-canal-ne",
+   "gnis_id": null,
+   "geometry_hash": "7bfbfdeb3db8dc4bd7deff2551c4e6e466d166621f3c502a12a9b411138f0cf1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3017,9 +4097,9 @@
    "towns": [],
    "bbox": [
     -101.06956,
-    42.68247,
-    -101.05502,
-    42.68739
+    42.682467,
+    -101.055018,
+    42.687385
    ],
    "wikidata": null,
    "charted": false,
@@ -3027,6 +4107,15 @@
    "launches": [
     "mckelvie-national-forest-ne"
    ],
+   "water_id": "lower-lord-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "00ede10cd4f93b1c8e3aa7e4e310e6d07a5eb0aa357bf35d5c83331ae3531d01",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3038,10 +4127,10 @@
     "Stanton"
    ],
    "bbox": [
-    -97.23957,
-    41.97401,
-    -97.23206,
-    41.98992
+    -97.239574,
+    41.973792,
+    -97.232058,
+    41.989923
    ],
    "wikidata": null,
    "charted": false,
@@ -3049,6 +4138,15 @@
    "launches": [
     "maskenthine-recreation-area-ne"
    ],
+   "water_id": "maskenthine-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "bc610c3b730a0f65320dd7a2ebae9bef2250a0945c085dcbbd268a0dc2f4637c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -3076,10 +4174,10 @@
     "Cambridge"
    ],
    "bbox": [
-    -100.22211,
-    40.27942,
-    -100.1449,
-    40.37852
+    -100.222113,
+    40.279424,
+    -100.144902,
+    40.378523
    ],
    "wikidata": null,
    "charted": false,
@@ -3088,6 +4186,15 @@
     "medicine-creek-trail-1-ne",
     "medicine-creek-trail-4-ne"
    ],
+   "water_id": "medicine-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "673672147e4e80f02871625be4baf4e026edc6f70de742d7b32ca192b82bb2f0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3099,10 +4206,10 @@
     "Memphis"
    ],
    "bbox": [
-    -96.44658,
-    41.09612,
-    -96.4363,
-    41.10297
+    -96.446575,
+    41.096115,
+    -96.436304,
+    41.103247
    ],
    "wikidata": null,
    "charted": false,
@@ -3110,6 +4217,15 @@
    "launches": [
     "memphis-lake-sra-ne"
    ],
+   "water_id": "memphis-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "ce9851d76e6ec08fd89c03ebb7a20e2d21c4c5d3cbe180567d8dd0ffd4f32dcb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3121,10 +4237,10 @@
     "Crete"
    ],
    "bbox": [
-    -96.8589,
-    40.6024,
-    -96.85278,
-    40.60725
+    -96.858905,
+    40.602397,
+    -96.852661,
+    40.607252
    ],
    "wikidata": null,
    "charted": false,
@@ -3132,6 +4248,15 @@
    "launches": [
     "merganser-wma-ne"
    ],
+   "water_id": "merganser-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "44ccd70956ce36ef60876c6e4ecd32565c893f2e1a1789ff030c42bac65ec4e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3141,10 +4266,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -101.00152,
+    -101.001518,
     42.57814,
-    -100.86176,
-    42.63745
+    -100.861758,
+    42.637445
    ],
    "wikidata": null,
    "charted": false,
@@ -3156,6 +4281,15 @@
     "powder-horn-ne",
     "snake-ne"
    ],
+   "water_id": "merritt-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "385dc45436a78f4f8aa4a8ed24036a475af6685fb7692c72247baa7f768494e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3167,10 +4301,10 @@
     "Kearney"
    ],
    "bbox": [
-    -99.07517,
-    40.65862,
-    -98.80627,
-    40.69628
+    -99.075175,
+    40.658623,
+    -98.806272,
+    40.696281
    ],
    "wikidata": null,
    "charted": false,
@@ -3178,6 +4312,15 @@
    "launches": [
     "bassway-strip-wma-ne"
    ],
+   "water_id": "middle-channel-platte-river-ne",
+   "gnis_id": null,
+   "geometry_hash": "9708f97f8ed09ccf6b6c987a89a995d28eb529e064e95735d2166586d7d83333",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3200,10 +4343,10 @@
     "Nebraska City"
    ],
    "bbox": [
-    -98.54664,
-    39.82105,
-    -94.87675,
-    43.05496
+    -98.546636,
+    39.821054,
+    -94.876755,
+    43.054965
    ],
    "wikidata": "Q5419",
    "charted": true,
@@ -3221,8 +4364,8 @@
     "indian-cave-ne",
     "indian-cave-backwater-paddlecraft-launch-ne",
     "mulberry-bend-ne",
-    "n-p-dodge-memorial-park-ne",
     "n-p-dodge-memorial-park-florence-ne",
+    "n-p-dodge-memorial-park-ne",
     "niobrara-confluence-wma-ne",
     "niobrara-landing-ne",
     "omandi-bend-ne",
@@ -3237,6 +4380,19 @@
     "sunshine-bottoms-ne",
     "verdel-landing-ne"
    ],
+   "water_id": "missouri-river-ia",
+   "gnis_id": "756398",
+   "geometry_hash": "b5e048fc81d3174927445e00431e2d36025156db787225687c3e19d2e377f53b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "airport-boat-ramp-private-ne",
+    "missouri-river-boat-launch-near-florence-ne",
+    "n-p-dodge-memorial-park-ne-2"
+   ],
    "advisories": []
   },
   {
@@ -3248,10 +4404,10 @@
     "Niobrara"
    ],
    "bbox": [
-    -98.05921,
-    42.74235,
-    -98.0469,
-    42.7669
+    -98.059215,
+    42.742355,
+    -98.046895,
+    42.766901
    ],
    "wikidata": null,
    "charted": false,
@@ -3259,6 +4415,15 @@
    "launches": [
     "niobrara-sp-ne"
    ],
+   "water_id": "mormon-canal-ne",
+   "gnis_id": null,
+   "geometry_hash": "770e0215f461334438853b4956c4f403f2d2a608888dc984914ecc50285faf11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3273,9 +4438,9 @@
    ],
    "bbox": [
     -104.19842,
-    42.41052,
+    42.410181,
     -98.0317,
-    42.90993
+    42.91001
    ],
    "wikidata": "Q1124558",
    "charted": false,
@@ -3288,6 +4453,15 @@
     "niobrara-river-carry-in-access-ne",
     "smith-falls-landing-paddlecraft-launch-ne"
    ],
+   "water_id": "niobrara-river-ne",
+   "gnis_id": "835960",
+   "geometry_hash": "8c7ada1ef4f6cbca63936ca83c417534d3a60374536d19c0a37400e15972a94f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3299,10 +4473,10 @@
     "Gibbon"
    ],
    "bbox": [
-    -98.83841,
-    40.70939,
+    -98.838411,
+    40.709388,
     -98.44523,
-    40.85026
+    40.850256
    ],
    "wikidata": null,
    "charted": false,
@@ -3310,6 +4484,15 @@
    "launches": [
     "windmill-sra-paddlecraft-launch-ne"
    ],
+   "water_id": "north-channel-platte-river-gibbon-ne",
+   "gnis_id": null,
+   "geometry_hash": "eccace3a48fc3f8eca52ccea5e1b912f15e346f06de619c8284234fd40cdadf0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3321,10 +4504,10 @@
     "Kearney"
    ],
    "bbox": [
-    -99.00389,
-    40.67535,
-    -98.99452,
-    40.67651
+    -99.003894,
+    40.675349,
+    -98.994516,
+    40.676509
    ],
    "wikidata": null,
    "charted": false,
@@ -3332,6 +4515,15 @@
    "launches": [
     "kearney-central-ave-paddlecraft-launch-ne"
    ],
+   "water_id": "north-channel-platte-river-ne",
+   "gnis_id": null,
+   "geometry_hash": "2d4d9a9ccafec83ef69df602173ab39e49db9253a623d9f4355551eb36387449",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3343,10 +4535,10 @@
     "Norfolk"
    ],
    "bbox": [
-    -97.62806,
-    41.99499,
-    -97.36481,
-    42.54003
+    -97.628112,
+    41.994991,
+    -97.364808,
+    42.540027
    ],
    "wikidata": null,
    "charted": false,
@@ -3357,6 +4549,15 @@
     "hyvee-parking-lot-take-out-paddlecraft-launch-ne",
     "winter-park-put-in-paddlecraft-launch-ne"
    ],
+   "water_id": "north-fork-elkhorn-river-ne",
+   "gnis_id": null,
+   "geometry_hash": "b0b8da45434b53f84ff574adbc62c01e0753b15564ea23c61f5533f63f6ce9d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3368,10 +4569,10 @@
     "Burwell"
    ],
    "bbox": [
-    -101.39057,
-    41.26246,
-    -98.39687,
-    42.42151
+    -101.390569,
+    41.262456,
+    -98.396869,
+    42.421556
    ],
    "wikidata": "Q107190748",
    "charted": false,
@@ -3379,6 +4580,15 @@
    "launches": [
     "riverside-park-paddlecraft-launch-ne"
    ],
+   "water_id": "north-loup-river-ne",
+   "gnis_id": "831710",
+   "geometry_hash": "8c07aad200f85d0d5d6481e80e6a3b58202e0447a0e6a33b11e63f3ce071097d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3391,9 +4601,9 @@
    ],
    "bbox": [
     -96.96478,
-    41.15964,
-    -96.96062,
-    41.16478
+    41.159634,
+    -96.960617,
+    41.164775
    ],
    "wikidata": null,
    "charted": false,
@@ -3401,6 +4611,15 @@
    "launches": [
     "timber-point-wma-ne"
    ],
+   "water_id": "north-oak-creek-reservoir-6-c-ne",
+   "gnis_id": null,
+   "geometry_hash": "d52954686c52cf01a9970e40576df0de41708b92b98566c81d0047c7a9d712e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3418,6 +4637,15 @@
    "launches": [
     "iron-horse-city-park-ne"
    ],
+   "water_id": "north-platte-i-80-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3430,10 +4658,10 @@
     "North Platte"
    ],
    "bbox": [
-    -104.26401,
-    41.11377,
-    -100.68151,
-    42.08033
+    -104.264011,
+    41.113766,
+    -100.681184,
+    42.080796
    ],
    "wikidata": "Q1755015",
    "charted": false,
@@ -3443,6 +4671,15 @@
     "cody-park-access-paddlecraft-launch-ne",
     "north-river-wma-paddlecraft-launch-ne"
    ],
+   "water_id": "north-platte-river-co",
+   "gnis_id": "204647",
+   "geometry_hash": "254e3981fa18439d7c38bc105e0b48de76e9c958501e0b0e722c02c158b1ed93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3454,10 +4691,10 @@
     "Crete"
    ],
    "bbox": [
-    -96.85087,
-    40.57482,
-    -96.84119,
-    40.58544
+    -96.850874,
+    40.574819,
+    -96.841185,
+    40.585621
    ],
    "wikidata": null,
    "charted": false,
@@ -3465,6 +4702,15 @@
    "launches": [
     "olive-creek-boat-launch-ne"
    ],
+   "water_id": "olive-creek-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "ba5b46cff62c76a6c028e96ea9edb312fba775f1b29e5d4f2a301462eadffb5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -3490,10 +4736,10 @@
     "Bushnell"
    ],
    "bbox": [
-    -103.8319,
-    41.22002,
-    -103.80978,
-    41.22959
+    -103.831901,
+    41.220024,
+    -103.809778,
+    41.229594
    ],
    "wikidata": null,
    "charted": false,
@@ -3503,6 +4749,15 @@
     "oliver-state-recreation-area-main-ramp-ne",
     "oliver-state-recreation-area-west-ramp-ne"
    ],
+   "water_id": "oliver-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "87031278b4d1557c2972da245e4f27baa3608350489733c46b182e4a59b065a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3520,6 +4775,15 @@
    "launches": [
     "oxbow-trail-recreation-area-ne"
    ],
+   "water_id": "oxbow-trail-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3537,6 +4801,15 @@
    "launches": [
     "oxford-city-lake-ne"
    ],
+   "water_id": "oxford-city-lake-george-mitchell-park-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3548,10 +4821,10 @@
     "Lincoln"
    ],
    "bbox": [
-    -96.88862,
-    40.83601,
-    -96.86204,
-    40.85916
+    -96.888624,
+    40.835915,
+    -96.862043,
+    40.859158
    ],
    "wikidata": null,
    "charted": false,
@@ -3560,6 +4833,15 @@
     "pawnee-lake-sra-ramp-1-ne",
     "pawnee-lake-sra-ramp-2-ne"
    ],
+   "water_id": "pawnee-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "3cf9c851cb1432546eb6b11164991fee1c7d56ceb00faee13a6522fa3d48a17c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -3606,6 +4888,15 @@
    "launches": [
     "pawnee-slough-wma-ne"
    ],
+   "water_id": "pawnee-slough-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3615,10 +4906,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -100.69917,
-    42.51741,
-    -100.63274,
-    42.53607
+    -100.699166,
+    42.517414,
+    -100.632741,
+    42.536069
    ],
    "wikidata": null,
    "charted": false,
@@ -3630,6 +4921,15 @@
     "pelican-lake-east-in-15c-boat-launch-ne",
     "pelican-lake-main-ramp-ne"
    ],
+   "water_id": "pelican-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "c13359b42071b35404a740e56911c4efb54d2f9ee5232bcd06a055a042c80069",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3639,10 +4939,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -99.43931,
-    42.27463,
-    -99.42571,
-    42.28166
+    -99.439444,
+    42.274629,
+    -99.425711,
+    42.281662
    ],
    "wikidata": null,
    "charted": false,
@@ -3650,6 +4950,15 @@
    "launches": [
     "peterson-lake-wma-ne"
    ],
+   "water_id": "peterson-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "a096722b6681b1d4b062ffb6f3d069f61a8ecde995e017b3b45a80fc9fa625d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3661,10 +4970,10 @@
     "Lexington"
    ],
    "bbox": [
-    -99.81762,
-    40.67194,
-    -99.74693,
-    40.69813
+    -99.817625,
+    40.671942,
+    -99.746928,
+    40.698132
    ],
    "wikidata": null,
    "charted": false,
@@ -3673,6 +4982,15 @@
     "phillips-canyon-sra-ne",
     "phillips-canyon-wma-ne"
    ],
+   "water_id": "philips-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "0b3d552d3955f0b7fa73ca6ede48e0b9e817e938c8be3633fdedc069f2713ad5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3684,10 +5002,10 @@
     "Ericson"
    ],
    "bbox": [
-    -98.53266,
-    41.75475,
-    -98.52894,
-    41.76074
+    -98.532662,
+    41.754751,
+    -98.528938,
+    41.760741
    ],
    "wikidata": "Q2091984",
    "charted": false,
@@ -3695,6 +5013,15 @@
    "launches": [
     "pibel-lake-recreation-area-ne"
    ],
+   "water_id": "pibel-reservoir-ne",
+   "gnis_id": "832086",
+   "geometry_hash": "9bb2e600ffffae1db857dcf87d82d9b4b4b6799cb3435696f88b357203ce29b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3706,10 +5033,10 @@
     "Pierce"
    ],
    "bbox": [
-    -97.52117,
-    42.20109,
-    -97.51676,
-    42.20359
+    -97.521172,
+    42.201089,
+    -97.516757,
+    42.203588
    ],
    "wikidata": null,
    "charted": false,
@@ -3717,6 +5044,15 @@
    "launches": [
     "gilman-park-ne"
    ],
+   "water_id": "pierce-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "461315d74fc7c8fa60904dd92012ef11e8e431f66fd0461e21b43a9fbff63118",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3729,9 +5065,9 @@
    ],
    "bbox": [
     -100.55866,
-    42.8824,
-    -100.55358,
-    42.88636
+    42.882398,
+    -100.553575,
+    42.886358
    ],
    "wikidata": null,
    "charted": false,
@@ -3739,6 +5075,15 @@
    "launches": [
     "valentine-mill-pond-ne"
    ],
+   "water_id": "pierce-milling-plant-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "461d4aea864b365573fdf98b9c41bdc4a82852cbcb6b812c1c9d8e7c46427016",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3750,10 +5095,10 @@
     "Pilger"
    ],
    "bbox": [
-    -97.04451,
-    42.02579,
-    -97.03971,
-    42.0327
+    -97.044514,
+    42.025785,
+    -97.039715,
+    42.032702
    ],
    "wikidata": null,
    "charted": false,
@@ -3761,6 +5106,15 @@
    "launches": [
     "pilger-recreation-area-ne"
    ],
+   "water_id": "pilger-reservoir-1-b-ne",
+   "gnis_id": null,
+   "geometry_hash": "0447f40dad7e5cfac7e1ba5391d312ef33e16bef2476fbfed6fa544fef3e8dae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3778,6 +5132,15 @@
    "launches": [
     "pioneer-trails-recreation-area-ne"
    ],
+   "water_id": "pioneer-trails-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3795,10 +5158,10 @@
     "South Bend"
    ],
    "bbox": [
-    -100.68151,
-    40.65444,
+    -100.681513,
+    40.654441,
     -95.87905,
-    41.46231
+    41.462306
    ],
    "wikidata": "Q655754",
    "charted": true,
@@ -3812,6 +5175,15 @@
     "schramm-state-park-paddlecraft-launch-ne",
     "tooley-park-paddlecraft-launch-ne"
    ],
+   "water_id": "platte-river-ne",
+   "gnis_id": "835915",
+   "geometry_hash": "c996bb51cd08265054a4055aca77809f019bf8ce7630d16ace83f24318818916",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3823,10 +5195,10 @@
     "Lexington"
    ],
    "bbox": [
-    -99.94216,
-    40.69882,
-    -99.91154,
-    40.72433
+    -99.942158,
+    40.698824,
+    -99.911543,
+    40.724333
    ],
    "wikidata": null,
    "charted": false,
@@ -3834,6 +5206,15 @@
    "launches": [
     "plum-creek-canyon-reservoir-wma-ne"
    ],
+   "water_id": "plum-creek-canyon-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "bb117440c2b4d8409bac5fe2d4445bfb783897646a299eebf2a28e85f54b38f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3845,10 +5226,10 @@
     "Kearney"
    ],
    "bbox": [
-    -99.02739,
-    40.67058,
-    -99.01868,
-    40.6723
+    -99.027388,
+    40.670578,
+    -99.018685,
+    40.672296
    ],
    "wikidata": null,
    "charted": false,
@@ -3856,6 +5237,15 @@
    "launches": [
     "bufflehead-wma-ne"
    ],
+   "water_id": "pony-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "b91adda632fe0dcd0bac296201f0dffd3e3a1514a43b553a582ace677c2d1139",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3867,10 +5257,10 @@
     "Ponca"
    ],
    "bbox": [
-    -96.84284,
-    42.57643,
-    -96.8287,
-    42.58962
+    -96.842968,
+    42.576434,
+    -96.828525,
+    42.589619
    ],
    "wikidata": null,
    "charted": false,
@@ -3878,6 +5268,15 @@
    "launches": [
     "powder-creek-boat-launch-ne"
    ],
+   "water_id": "powder-creek-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "fe56007da2d776c314afb929a6cbb09dfcf6e89608ed3c7db5a3a4eedc6a48e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -3909,6 +5308,15 @@
    "launches": [
     "prairie-owl-ne"
    ],
+   "water_id": "prairie-owl-lake-wilson-creek-4f-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3920,10 +5328,10 @@
     "Papillion"
    ],
    "bbox": [
-    -96.12016,
-    41.14921,
-    -96.10909,
-    41.16844
+    -96.120159,
+    41.149214,
+    -96.109085,
+    41.168443
    ],
    "wikidata": null,
    "charted": false,
@@ -3931,6 +5339,15 @@
    "launches": [
     "prairie-queen-boat-launch-ne"
    ],
+   "water_id": "prairie-queen-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "8b0eb8476755d55979b002d46b8b912818e03141993cbe63034f326aaa21b5e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -3958,10 +5375,10 @@
     "Bennington"
    ],
    "bbox": [
-    -96.20592,
-    41.36564,
-    -96.19747,
-    41.37372
+    -96.205921,
+    41.365642,
+    -96.197296,
+    41.373818
    ],
    "wikidata": null,
    "charted": false,
@@ -3969,6 +5386,15 @@
    "launches": [
     "prairie-view-recreation-area-ne"
    ],
+   "water_id": "prairie-view-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "860887bef256db6606120987b1413b9c30afa17398e64b767eb3e882e19a8008",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4000,6 +5426,15 @@
    "launches": [
     "pressey-wma-ne"
    ],
+   "water_id": "pressey-wma-pond-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4011,10 +5446,10 @@
     "Conterra"
    ],
    "bbox": [
-    -100.65872,
-    42.44771,
-    -100.63941,
-    42.45665
+    -100.658718,
+    42.447709,
+    -100.639406,
+    42.456876
    ],
    "wikidata": null,
    "charted": false,
@@ -4022,6 +5457,15 @@
    "launches": [
     "rat-beaver-wma-ne"
    ],
+   "water_id": "rat-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "f3ff544ef420f3a1e9864e21737617af2e7ab302d8229aa873dcfcb969fa9a2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4033,10 +5477,10 @@
     "Ravenna"
    ],
    "bbox": [
-    -98.89457,
-    41.0185,
-    -98.88965,
-    41.02516
+    -98.894567,
+    41.018337,
+    -98.889437,
+    41.025162
    ],
    "wikidata": null,
    "charted": false,
@@ -4044,6 +5488,15 @@
    "launches": [
     "ravenna-lake-boat-launch-ne"
    ],
+   "water_id": "ravenna-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "66fd48960b5653328a206c521fc6b7b9d1fa9cd971021bb50be6e0a94f2f4d63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4055,8 +5508,8 @@
     "York"
    ],
    "bbox": [
-    -97.63725,
-    40.86712,
+    -97.637252,
+    40.867116,
     -97.62484,
     40.87376
    ],
@@ -4066,6 +5519,15 @@
    "launches": [
     "bruce-l-anderson-recreation-area-ne"
    ],
+   "water_id": "recharge-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "1804dd8ec226c0ea916df9de933dd7ab2579a0e26e5041f3c9636b96d8cf98e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4078,9 +5540,9 @@
    ],
    "bbox": [
     -97.05825,
-    41.98275,
-    -97.05271,
-    41.98635
+    41.982687,
+    -97.052712,
+    41.986346
    ],
    "wikidata": null,
    "charted": false,
@@ -4088,6 +5550,15 @@
    "launches": [
     "red-fox-wma-ne"
    ],
+   "water_id": "red-fox-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "886a5541eae9588873818228dd7e96869c94577174d0039a6c4f233f600d47fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4099,10 +5570,10 @@
     "Haigler"
    ],
    "bbox": [
-    -101.76569,
-    40.08643,
-    -101.75923,
-    40.09879
+    -101.765687,
+    40.086427,
+    -101.759229,
+    40.098795
    ],
    "wikidata": null,
    "charted": false,
@@ -4110,6 +5581,15 @@
    "launches": [
     "rock-creek-lake-boat-launch-ne"
    ],
+   "water_id": "rock-creek-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "24c2221856b9895e416977ad5e19ac08c068ef95fc68eb71bbb681234e327880",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4121,10 +5601,10 @@
     "Blue Springs"
    ],
    "bbox": [
-    -96.58725,
+    -96.587253,
     40.21443,
-    -96.57645,
-    40.23055
+    -96.576423,
+    40.230547
    ],
    "wikidata": null,
    "charted": false,
@@ -4132,6 +5612,15 @@
    "launches": [
     "rockford-lake-sra-ne"
    ],
+   "water_id": "rockford-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "d58e1701b81984f5c9a009034b8f0436ea55a4922675740ee956b8aeed495970",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4157,10 +5646,10 @@
     "Ashland"
    ],
    "bbox": [
-    -96.76715,
-    40.61519,
-    -96.31188,
-    41.05176
+    -96.767146,
+    40.615186,
+    -96.311884,
+    41.051758
    ],
    "wikidata": null,
    "charted": false,
@@ -4168,6 +5657,15 @@
    "launches": [
     "catfish-run-wma-paddlecraft-launch-ne"
    ],
+   "water_id": "salt-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "0ced653492aae06b1e0a08dbd6aa254e35126834f31adc2b923235caa883e5cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4179,9 +5677,9 @@
     "Crete"
    ],
    "bbox": [
-    -96.88655,
-    40.61269,
-    -96.88413,
+    -96.886545,
+    40.612686,
+    -96.884126,
     40.61582
    ],
    "wikidata": null,
@@ -4190,6 +5688,15 @@
    "launches": [
     "wild-plum-wma-ne"
    ],
+   "water_id": "salt-creek-reservoir-26-a-ne",
+   "gnis_id": null,
+   "geometry_hash": "f942134e2f92ad42819549d1acc637370a9da5706c985b29fa447c42092c57d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4201,10 +5708,10 @@
     "Gordon"
    ],
    "bbox": [
-    -102.0443,
-    42.91575,
-    -102.03317,
-    42.92632
+    -102.044444,
+    42.915748,
+    -102.033172,
+    42.926411
    ],
    "wikidata": null,
    "charted": false,
@@ -4212,6 +5719,15 @@
    "launches": [
     "shell-lake-boat-launch-ne"
    ],
+   "water_id": "shell-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "52ac2ee3cd8aa16ee0759f17879a2533e62f888cb2042f12d408b401d045831a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4223,9 +5739,9 @@
     "Loup City"
    ],
    "bbox": [
-    -98.93241,
-    41.28782,
-    -98.86656,
+    -98.932413,
+    41.287823,
+    -98.866555,
     41.35075
    ],
    "wikidata": null,
@@ -4236,6 +5752,17 @@
     "sherman-reservoir-trail-10-ne",
     "thunder-bay-ne",
     "trail-8-paddlecraft-launch-ne"
+   ],
+   "water_id": "sherman-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "0360adfe47c6dcedf4c443d537a084ee01346fa996efef23c44787c81d986172",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "thunder-island-ne"
    ],
    "advisories": []
   },
@@ -4248,10 +5775,10 @@
     "Norfolk"
    ],
    "bbox": [
-    -97.44576,
-    42.03648,
-    -97.43694,
-    42.04326
+    -97.445757,
+    42.036479,
+    -97.436862,
+    42.043258
    ],
    "wikidata": null,
    "charted": false,
@@ -4260,6 +5787,15 @@
     "skyview-lake-west-ramp-ne",
     "skyview-park-east-ramp-ne"
    ],
+   "water_id": "skyview-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "59bc5794c374453fc90fd438185ccb3cfcd04a9a846ad0707a513f099292ba68",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4271,10 +5807,10 @@
     "Beaver Crossing"
    ],
    "bbox": [
-    -97.32694,
-    40.8055,
-    -97.32015,
-    40.82896
+    -97.326943,
+    40.805504,
+    -97.320145,
+    40.828961
    ],
    "wikidata": null,
    "charted": false,
@@ -4282,6 +5818,15 @@
    "launches": [
     "smith-creek-recreation-area-ne"
    ],
+   "water_id": "smith-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "3990dc513321e55b100d37be6af85eb02d845e3710e91aa36ac0722dbc1ee263",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4293,10 +5838,10 @@
     "Hinn Ranch"
    ],
    "bbox": [
-    -102.46254,
-    42.39834,
-    -102.44307,
-    42.4131
+    -102.462535,
+    42.398342,
+    -102.443068,
+    42.413096
    ],
    "wikidata": null,
    "charted": false,
@@ -4304,6 +5849,15 @@
    "launches": [
     "smith-lake-boat-launch-ne"
    ],
+   "water_id": "smith-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "1b91f607cd06823d3ec1c0f27533e1612d6db63cdbcba0a0021b1727ac06f4ff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4329,10 +5883,10 @@
     "Arnold"
    ],
    "bbox": [
-    -100.38018,
-    40.94973,
-    -98.64775,
-    41.52399
+    -100.380181,
+    40.949733,
+    -98.647746,
+    41.524082
    ],
    "wikidata": null,
    "charted": false,
@@ -4340,6 +5894,15 @@
    "launches": [
     "arnold-lake-ne"
    ],
+   "water_id": "south-loup-river-ne",
+   "gnis_id": null,
+   "geometry_hash": "a07753a5b0fe41db29f41fbbed4af8d2aa7b8e5545f97d101ceec42708edef84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4351,10 +5914,10 @@
     "Hickman"
    ],
    "bbox": [
-    -96.64845,
-    40.596,
-    -96.63524,
-    40.60657
+    -96.648449,
+    40.595998,
+    -96.635243,
+    40.606565
    ],
    "wikidata": null,
    "charted": false,
@@ -4362,6 +5925,15 @@
    "launches": [
     "stagecoach-boat-launch-ne"
    ],
+   "water_id": "stagecoach-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "6bd90aeaf0b8aa12631363f35ee44ae371a6e6c33f33d7c3204f0870a400efb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4387,10 +5959,10 @@
     "Bennington"
    ],
    "bbox": [
-    -96.13858,
-    41.3098,
-    -96.12209,
-    41.31758
+    -96.138799,
+    41.309796,
+    -96.122089,
+    41.317581
    ],
    "wikidata": "Q7598481",
    "charted": false,
@@ -4399,6 +5971,15 @@
     "standing-bear-main-boat-ramp-ne",
     "standing-bear-lake-boat-launch-ne"
    ],
+   "water_id": "standing-bear-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "e757c776f542400e0175ece2367745aba09bb74e170bf3e3920cb47fec453521",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4424,10 +6005,10 @@
     "Kearney"
    ],
    "bbox": [
-    -98.98359,
-    40.65327,
-    -98.97057,
-    40.65694
+    -98.983595,
+    40.653144,
+    -98.970569,
+    40.656939
    ],
    "wikidata": null,
    "charted": false,
@@ -4435,6 +6016,15 @@
    "launches": [
     "fort-kearny-sra-7-ne"
    ],
+   "water_id": "summer-haven-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "6c6c64ec8a091dab82265b66a7d6708584ae02d214bf207a9214a4f46a0b9558",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4446,10 +6036,10 @@
     "Tekamah"
    ],
    "bbox": [
-    -96.30196,
-    41.75147,
-    -96.28209,
-    41.76625
+    -96.301956,
+    41.751472,
+    -96.282092,
+    41.766253
    ],
    "wikidata": null,
    "charted": false,
@@ -4458,6 +6048,15 @@
     "summit-lake-boat-launch-ne",
     "summit-lake-sra-ne"
    ],
+   "water_id": "summit-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "24266f9fce3666b847d57e9849391f6fd30bde33349c29a9c13ac50e08be5b06",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4483,10 +6082,10 @@
     "Sutherland"
    ],
    "bbox": [
-    -101.1598,
-    41.08684,
-    -101.09968,
-    41.12558
+    -101.159801,
+    41.086844,
+    -101.099681,
+    41.125577
    ],
    "wikidata": null,
    "charted": false,
@@ -4495,6 +6094,15 @@
     "sutherland-reservoir-sra-hershey-beach-ne",
     "sutherland-reservoir-sra-inlet-west-ramp-ne"
    ],
+   "water_id": "sutherland-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "15a823e74ba37505ef9c6ce59c6d76495805114d80208607b32dbc5ca6a40a2f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -4526,6 +6134,15 @@
    "launches": [
     "swanton-wma-ne"
    ],
+   "water_id": "swan-creek-67-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4537,10 +6154,10 @@
     "Friend"
    ],
    "bbox": [
-    -97.25833,
-    40.50994,
-    -97.25146,
-    40.51646
+    -97.258334,
+    40.509937,
+    -97.251377,
+    40.516712
    ],
    "wikidata": null,
    "charted": false,
@@ -4548,6 +6165,15 @@
    "launches": [
     "swan-creek-wma-ne"
    ],
+   "water_id": "swan-creek-reservoir-5-c-ne",
+   "gnis_id": null,
+   "geometry_hash": "1574dd7e8c0503e63a83e006c43f83df9d48eb9c5889737b8818497a1fb8fcc3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -4575,10 +6201,10 @@
     "Tobias"
    ],
    "bbox": [
-    -97.26814,
+    -97.268138,
     40.45425,
-    -97.25965,
-    40.46469
+    -97.259645,
+    40.464695
    ],
    "wikidata": null,
    "charted": false,
@@ -4586,6 +6212,15 @@
    "launches": [
     "willard-l-meyer-recreation-area-ne"
    ],
+   "water_id": "swan-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "ded15f90ef0c44afb1b873c948075d6cf49b4f07960d17c3a33e6dafdcddef6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4597,10 +6232,10 @@
     "Swan Lake"
    ],
    "bbox": [
-    -99.04933,
-    42.16198,
-    -99.02639,
-    42.16952
+    -99.049327,
+    42.161971,
+    -99.026388,
+    42.169706
    ],
    "wikidata": null,
    "charted": false,
@@ -4608,6 +6243,15 @@
    "launches": [
     "swan-lake-boat-launch-ne"
    ],
+   "water_id": "swan-lake-swan-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "a644a9c689c036df61f702beaca8f698956e92e144a33cf66c5e9e400b979463",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4619,10 +6263,10 @@
     "Trenton"
    ],
    "bbox": [
-    -101.1504,
-    40.14542,
-    -101.06354,
-    40.17292
+    -101.150399,
+    40.145416,
+    -101.063539,
+    40.172924
    ],
    "wikidata": null,
    "charted": false,
@@ -4634,6 +6278,15 @@
     "swanson-reservoir-low-water-boat-ramp-ne",
     "swanson-reservoir-trail-3-ne"
    ],
+   "water_id": "swanson-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "2a055c0e4813e766651fdff6a8b491e629238f1541f55098ab5f492fee00b8f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -4659,10 +6312,10 @@
     "Kearney"
    ],
    "bbox": [
-    -99.10464,
-    40.67733,
-    -99.10106,
-    40.70309
+    -99.104882,
+    40.677326,
+    -99.101056,
+    40.703094
    ],
    "wikidata": null,
    "charted": false,
@@ -4670,6 +6323,15 @@
    "launches": [
     "yanney-park-access-paddlecraft-launch-ne"
    ],
+   "water_id": "tailrace-ne",
+   "gnis_id": null,
+   "geometry_hash": "0af8c04c987a8226e978ebe253ca95c9d73ceda303c7912e2dfa5322e5f954e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4687,6 +6349,15 @@
    "launches": [
     "yellowthroat-wma-ne"
    ],
+   "water_id": "tower-lake-fws-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4698,10 +6369,10 @@
     "Pleasant Dale"
    ],
    "bbox": [
-    -96.96114,
-    40.82342,
-    -96.94388,
-    40.84039
+    -96.961137,
+    40.823424,
+    -96.943878,
+    40.840388
    ],
    "wikidata": null,
    "charted": false,
@@ -4709,6 +6380,15 @@
    "launches": [
     "twin-lakes-wma-ne"
    ],
+   "water_id": "twin-lakes-ne",
+   "gnis_id": null,
+   "geometry_hash": "95823a32c76d452b6b69017f738f031ea44cbdd01949d55a339f5d70f4563959",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4734,10 +6414,10 @@
     "Ashland"
    ],
    "bbox": [
-    -96.30698,
-    41.02174,
-    -96.30383,
-    41.02392
+    -96.306985,
+    41.021739,
+    -96.303825,
+    41.023917
    ],
    "wikidata": null,
    "charted": false,
@@ -4745,6 +6425,15 @@
    "launches": [
     "centurylink-lake-main-boat-ramp-ne"
    ],
+   "water_id": "us-west-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "0190b6f108272c1d53ca23394691c01d3c8581dfd757b10a31eff000fd71e192",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4756,10 +6445,10 @@
     "Verdon"
    ],
    "bbox": [
-    -95.72707,
-    40.14593,
-    -95.72183,
-    40.14895
+    -95.727073,
+    40.145791,
+    -95.721826,
+    40.148953
    ],
    "wikidata": null,
    "charted": false,
@@ -4767,6 +6456,15 @@
    "launches": [
     "verdon-sra-ne"
    ],
+   "water_id": "verdon-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "1ae337088803d0600508bff13b5bf04d31350e8eed2be8f9287800e65cd78391",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4784,6 +6482,15 @@
    "launches": [
     "victoria-springs-boat-launch-ne"
    ],
+   "water_id": "victoria-springs-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4795,10 +6502,10 @@
     "Fremont"
    ],
    "bbox": [
-    -96.55854,
-    41.43839,
-    -96.53313,
-    41.44601
+    -96.558542,
+    41.438385,
+    -96.533131,
+    41.446012
    ],
    "wikidata": null,
    "charted": false,
@@ -4808,6 +6515,15 @@
     "fremont-sra-15-west-ne",
     "fremont-sra-18-ne"
    ],
+   "water_id": "victory-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "d7de60f7c31bb31b90370c7a285e0fc0f7429995e52e053d746637c04bb297b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4819,10 +6535,10 @@
     "Hickman"
    ],
    "bbox": [
-    -96.59148,
-    40.62077,
-    -96.57698,
-    40.64344
+    -96.591475,
+    40.620418,
+    -96.576978,
+    40.643438
    ],
    "wikidata": "Q34933903",
    "charted": false,
@@ -4831,6 +6547,15 @@
     "wagon-train-sra-ne",
     "wagon-train-sra-area-6-paddlecraft-launch-ne"
    ],
+   "water_id": "wagon-train-lake-ne",
+   "gnis_id": "834419",
+   "geometry_hash": "c70b71160768456e60672e234ba42390d90dc49215f5b8b1eb5216e460d7c885",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -4870,10 +6595,10 @@
     "Hay Springs"
    ],
    "bbox": [
-    -102.63109,
-    42.63375,
-    -102.62134,
-    42.64133
+    -102.631086,
+    42.633754,
+    -102.621344,
+    42.641327
    ],
    "wikidata": null,
    "charted": false,
@@ -4881,6 +6606,15 @@
    "launches": [
     "walgren-sra-ne"
    ],
+   "water_id": "walgren-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "0f00984f40fb1ea1c0d85b9580c4019eefc48dd9aa1558bdc9f5dfb8a67ca0b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4906,10 +6640,10 @@
     "Papillion"
    ],
    "bbox": [
-    -96.07388,
-    41.13459,
-    -96.06472,
-    41.14434
+    -96.074112,
+    41.134588,
+    -96.064716,
+    41.144342
    ],
    "wikidata": null,
    "charted": false,
@@ -4917,6 +6651,15 @@
    "launches": [
     "walnut-creek-recreation-area-ne"
    ],
+   "water_id": "walnut-creek-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "a8786de15c8f136ff469a95e3303613c55c5031ff9629d97c66cfa12fe79fc03",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -4943,16 +6686,56 @@
     "Crete"
    ],
    "bbox": [
-    -96.92905,
-    40.66543,
-    -96.92542,
-    40.66856
+    -96.929049,
+    40.665431,
+    -96.925418,
+    40.668567
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.057,
    "launches": [
     "walnut-creek-public-use-area-ne"
+   ],
+   "water_id": "walnut-creek-reservoir-number-2-ne",
+   "gnis_id": null,
+   "geometry_hash": "620f00c728623901943dec8ecd3ce284ba88b5c2079b4a8ade67478bd150c493",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waterford-lake-ne",
+   "name": "Waterford Lake",
+   "kind": "reservoir",
+   "state": "NE",
+   "towns": [
+    "Lincoln"
+   ],
+   "bbox": [
+    -96.587246,
+    40.816356,
+    -96.577768,
+    40.823467
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.234,
+   "launches": [],
+   "water_id": "waterford-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "2d220b0fa0f393b1feb8754840715e3d8c8d777e2fe2a084957a39af2577f038",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "waterford-lake-boat-launch-near-lincoln-ne-2"
    ],
    "advisories": []
   },
@@ -4965,10 +6748,10 @@
     "Simeon"
    ],
    "bbox": [
-    -100.70241,
-    42.5733,
-    -100.67314,
-    42.58043
+    -100.702406,
+    42.573301,
+    -100.673136,
+    42.58058
    ],
    "wikidata": null,
    "charted": false,
@@ -4977,6 +6760,15 @@
     "watt-s-lake-east-boat-launch-ne",
     "watts-lake-main-ramp-ne"
    ],
+   "water_id": "watts-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "c14e295f09d2067d138170cd67553e980cedc0805344e383688fe3beeb2fee5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4988,10 +6780,10 @@
     "Gretna"
    ],
    "bbox": [
-    -96.23488,
-    41.12671,
-    -96.1771,
-    41.14285
+    -96.234878,
+    41.126708,
+    -96.177103,
+    41.142854
    ],
    "wikidata": null,
    "charted": false,
@@ -4999,6 +6791,15 @@
    "launches": [
     "forest-city-paddlecraft-launch-ne"
    ],
+   "water_id": "wehrspann-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "3bb0bf4fbc569c744b9876c006c5a2a2c474d04052e45f02783a8d2c61837ccc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5010,9 +6811,9 @@
     "Gretna"
    ],
    "bbox": [
-    -96.16878,
-    41.14576,
-    -96.14771,
+    -96.168778,
+    41.145759,
+    -96.147706,
     41.1727
    ],
    "wikidata": null,
@@ -5021,6 +6822,15 @@
    "launches": [
     "chalco-hills-recreation-area-ne"
    ],
+   "water_id": "wehrspann-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "5099186b5d0d7dead2027cc88a9ce3312024a04b917a456895335bf9b0ff898c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -5046,10 +6856,10 @@
     "Wellfleet"
    ],
    "bbox": [
-    -100.74845,
-    40.75049,
-    -100.73583,
-    40.75647
+    -100.748454,
+    40.750488,
+    -100.735826,
+    40.756465
    ],
    "wikidata": null,
    "charted": false,
@@ -5057,6 +6867,15 @@
    "launches": [
     "wellfleet-lake-boat-launch-ne"
    ],
+   "water_id": "wellfleet-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "88844d1e52fc811603022c181fb0418985e58387fb4af36b5155b08f85af2b93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5068,10 +6887,10 @@
     "Cozad"
    ],
    "bbox": [
-    -100.01331,
-    40.85244,
-    -100.00632,
-    40.85545
+    -100.013306,
+    40.852439,
+    -100.006318,
+    40.855447
    ],
    "wikidata": null,
    "charted": false,
@@ -5079,6 +6898,15 @@
    "launches": [
     "west-cozad-boat-launch-ne"
    ],
+   "water_id": "west-cozad-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "d37ccf65bd2577d7450aa53804f0faef57d55b77b825119d4276342dfffb6f87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5091,9 +6919,9 @@
    ],
    "bbox": [
     -97.25701,
-    41.52913,
-    -96.9085,
-    41.77209
+    41.529126,
+    -96.908503,
+    41.772092
    ],
    "wikidata": null,
    "charted": false,
@@ -5103,6 +6931,15 @@
     "main-lake-ramp-south-of-91-ne",
     "maple-creek-recreation-area-ne"
    ],
+   "water_id": "west-fork-maple-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "31582c90abad7476c3ae2506f22433a086707b132c1efa9cd86892805fff5f9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5120,6 +6957,15 @@
    "launches": [
     "bridgeport-sra-ne-3"
    ],
+   "water_id": "west-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5137,6 +6983,15 @@
    "launches": [
     "west-wood-river-wma-ne"
    ],
+   "water_id": "west-wood-river-mm-299n-ne",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5148,10 +7003,10 @@
     "Whitney"
    ],
    "bbox": [
-    -103.32608,
-    42.7779,
-    -103.28053,
-    42.79653
+    -103.326083,
+    42.777866,
+    -103.280529,
+    42.796526
    ],
    "wikidata": null,
    "charted": false,
@@ -5159,6 +7014,15 @@
    "launches": [
     "whitney-lake-boat-launch-ne"
    ],
+   "water_id": "whitney-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "135605904a4203395c8f3cde17e0d8e160b0bdb650c78332b76cfa17b5e4739d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5170,10 +7034,10 @@
     "Blue Springs"
    ],
    "bbox": [
-    -96.50676,
+    -96.506755,
     40.14666,
-    -96.48897,
-    40.16301
+    -96.488971,
+    40.163008
    ],
    "wikidata": null,
    "charted": false,
@@ -5181,6 +7045,15 @@
    "launches": [
     "wolf-wildcat-wma-ne"
    ],
+   "water_id": "wildcat-creek-ne",
+   "gnis_id": null,
+   "geometry_hash": "a7bece2e90e21acc1202f7f02afe7c4aa51ac83dfac7aea92dd2ab4218434c77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5192,10 +7065,10 @@
     "Valparaiso"
    ],
    "bbox": [
-    -96.85009,
+    -96.850094,
     41.03215,
     -96.8356,
-    41.04571
+    41.045715
    ],
    "wikidata": null,
    "charted": false,
@@ -5203,6 +7076,15 @@
    "launches": [
     "wildwood-wma-ne"
    ],
+   "water_id": "wildwood-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "de8fe71ec48b479b94e7806452550e1dc00f8e69b7651d7a6c5dbfc6292ada02",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -5229,9 +7111,9 @@
     "Pierce"
    ],
    "bbox": [
-    -97.60093,
-    42.16618,
-    -97.55487,
+    -97.600929,
+    42.16608,
+    -97.554866,
     42.18395
    ],
    "wikidata": null,
@@ -5243,6 +7125,15 @@
     "willow-creek-sra-paddlecraft-launch-ne",
     "willow-creek-southwest-ne"
    ],
+   "water_id": "willow-creek-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "0375e147124bd1baf2a3cd10fd8534f197e16bae56d18625232b7adba80a20a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -5272,10 +7163,10 @@
    "state": "NE",
    "towns": [],
    "bbox": [
-    -100.09373,
+    -100.093734,
     42.23029,
-    -100.06571,
-    42.24259
+    -100.065711,
+    42.242592
    ],
    "wikidata": null,
    "charted": false,
@@ -5283,6 +7174,15 @@
    "launches": [
     "willow-lake-b-c-wma-ne"
    ],
+   "water_id": "willow-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "73eeb1417b60ea40c5a9363c01e0d4577739c778e958627d0d880b7c1898dcbf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5294,10 +7194,10 @@
     "Dunbar"
    ],
    "bbox": [
-    -96.05837,
-    40.70451,
-    -96.05603,
-    40.70785
+    -96.058373,
+    40.704372,
+    -96.055789,
+    40.707846
    ],
    "wikidata": null,
    "charted": false,
@@ -5305,6 +7205,15 @@
    "launches": [
     "wilson-creek-ne"
    ],
+   "water_id": "wilson-creek-reservoir-2-x-ne",
+   "gnis_id": null,
+   "geometry_hash": "a3f0589c1c470486db6103faa7c171df2e99a784c5dbc94c99b9e1035d3cb7d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5316,10 +7225,10 @@
     "Scottsbluff"
    ],
    "bbox": [
-    -103.53262,
-    41.95111,
-    -103.519,
-    41.96442
+    -103.532624,
+    41.950849,
+    -103.518966,
+    41.964416
    ],
    "wikidata": null,
    "charted": false,
@@ -5327,6 +7236,15 @@
    "launches": [
     "winters-creek-lake-boat-launch-ne"
    ],
+   "water_id": "winters-creek-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "2855c0ee7dc45e054982562cd975b1718a1c5abc7b6b3422ab4745acdb4b928f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5338,10 +7256,10 @@
     "Tecumseh"
    ],
    "bbox": [
-    -96.2052,
-    40.44887,
-    -96.20027,
-    40.45246
+    -96.205198,
+    40.448874,
+    -96.200275,
+    40.452457
    ],
    "wikidata": null,
    "charted": false,
@@ -5349,6 +7267,15 @@
    "launches": [
     "wirth-brothers-boat-launch-ne"
    ],
+   "water_id": "wirth-brothers-reservoir-ne",
+   "gnis_id": null,
+   "geometry_hash": "008c742303250f4875df586c828005e4eab0130fc1904cec3897057152ade056",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -5374,10 +7301,10 @@
     "Papillion"
    ],
    "bbox": [
-    -96.09903,
-    41.16188,
-    -96.09179,
-    41.16673
+    -96.099029,
+    41.161883,
+    -96.091785,
+    41.166728
    ],
    "wikidata": null,
    "charted": false,
@@ -5385,6 +7312,15 @@
    "launches": [
     "portal-recreation-area-ne"
    ],
+   "water_id": "wp6-ne",
+   "gnis_id": null,
+   "geometry_hash": "b62dcf299e489f12b8f7bda423929688a58cf119c55dd518961d60d8f4a47939",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5396,10 +7332,10 @@
     "Lincoln"
    ],
    "bbox": [
-    -96.7966,
-    40.71849,
-    -96.78024,
-    40.73273
+    -96.796603,
+    40.718488,
+    -96.780242,
+    40.732734
    ],
    "wikidata": null,
    "charted": false,
@@ -5407,6 +7343,15 @@
    "launches": [
     "yankee-hill-boat-launch-ne"
    ],
+   "water_id": "yankee-hill-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "44ea64e1ae189eb45045ee2b7294ccff4e36ffe9109a2b6a551ea7bb637abf56",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",
@@ -5432,10 +7377,10 @@
     "Gretna"
    ],
    "bbox": [
-    -96.18727,
-    41.21424,
-    -96.16065,
-    41.22447
+    -96.187266,
+    41.214238,
+    -96.160647,
+    41.224471
    ],
    "wikidata": null,
    "charted": false,
@@ -5443,6 +7388,15 @@
    "launches": [
     "zorinsky-lake-boat-launch-ne"
    ],
+   "water_id": "zorinsky-lake-ne",
+   "gnis_id": null,
+   "geometry_hash": "968000dce69f1e3c04d5a637bc3fdba7f76cb75d52b9838b2ef3299b10ec0042",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "ne-ngpc-ais-waters",

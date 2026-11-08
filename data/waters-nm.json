@@ -1,6 +1,6 @@
 {
  "state": "NM",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 42,
  "waters": [
   {
@@ -12,10 +12,10 @@
     "Abiquiu"
    ],
    "bbox": [
-    -106.52226,
-    36.23065,
+    -106.522264,
+    36.230643,
     -106.4265,
-    36.29601
+    36.296009
    ],
    "wikidata": "Q4667899",
    "charted": false,
@@ -25,6 +25,15 @@
     "abiquiu-lake-boat-launch-near-abiquiu-nm-3",
     "abiquiu-lake-boat-launch-near-abiquiu-nm-2"
    ],
+   "water_id": "abiquiu-lake-nm",
+   "gnis_id": "923786",
+   "geometry_hash": "7eb0451c075797ae95290583d8f5d434cdab2c97bed511190d17db3e9afaa706",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -36,10 +45,10 @@
     "Flora Vista"
    ],
    "bbox": [
-    -108.22261,
-    36.71333,
-    -107.86331,
-    37.06121
+    -108.222607,
+    36.713329,
+    -107.863311,
+    37.061209
    ],
    "wikidata": "Q2615286",
    "charted": false,
@@ -47,6 +56,15 @@
    "launches": [
     "animas-river-boat-launch-nm"
    ],
+   "water_id": "animas-river-nm",
+   "gnis_id": "900284",
+   "geometry_hash": "138995183841b83ded6dafbb10f5769a682e872c65ac728ac8bbcdb612e00921",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -57,13 +75,27 @@
    "towns": [
     "Mimbres"
    ],
-   "bbox": null,
+   "bbox": [
+    -108.001233,
+    32.881742,
+    -107.992344,
+    32.884602
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "bear-canyon-reservoir-boat-launch-nm"
    ],
+   "water_id": "bear-canyon-reservoir-nm",
+   "gnis_id": "898902",
+   "geometry_hash": "473079d02b54139958f05b4b37358ecfcf53e087deda4a7e8a9b3e7bbdf7fc7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -73,10 +105,10 @@
    "state": "NM",
    "towns": [],
    "bbox": [
-    -108.57917,
-    32.86386,
-    -108.57027,
-    32.86903
+    -108.579175,
+    32.863862,
+    -108.570266,
+    32.869025
    ],
    "wikidata": null,
    "charted": false,
@@ -85,6 +117,15 @@
     "bill-evans-lake-boat-launch-nm",
     "bill-evans-lake-carry-in-access-nm"
    ],
+   "water_id": "bill-evans-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "e287bca7dd9315fdb848f68542180a5c2c3e92e8a13d7f5825b00ccabcb34648",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -96,10 +137,10 @@
     "Baca / Kin Łigaaí"
    ],
    "bbox": [
-    -108.16356,
-    35.27606,
-    -108.10944,
-    35.32525
+    -108.163561,
+    35.275837,
+    -108.109438,
+    35.325251
    ],
    "wikidata": null,
    "charted": false,
@@ -110,6 +151,15 @@
     "bluewater-lake-boat-launch-near-baca-kin-igaai-nm-3",
     "bluewater-lake-boat-launch-near-baca-kin-igaai-nm-4"
    ],
+   "water_id": "bluewater-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "9b3719d77b99206964bb7fd2043836289781745a5e633ac8d83198118077b653",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -135,10 +185,10 @@
     "Carlsbad"
    ],
    "bbox": [
-    -104.4054,
-    32.53309,
-    -104.34977,
-    32.60522
+    -104.405512,
+    32.533093,
+    -104.349771,
+    32.605368
    ],
    "wikidata": "Q4957685",
    "charted": false,
@@ -148,6 +198,15 @@
     "brantley-lake-west-boat-ramp-nm",
     "brantley-lake-boat-launch-near-carlsbad-nm-2"
    ],
+   "water_id": "brantley-lake-nm",
+   "gnis_id": "2760643",
+   "geometry_hash": "d4b8c28cdf853e46db407131ec0e6bee758ff87c8c1057650ba325a8443ca94e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -160,7 +219,7 @@
    ],
    "bbox": [
     -107.3105,
-    32.89651,
+    32.896507,
     -107.286,
     32.971
    ],
@@ -172,6 +231,15 @@
     "caballo-lake-low-water-boat-ramp-nm",
     "caballo-lake-boat-launch-near-oasis-nm"
    ],
+   "water_id": "caballo-lake-nm",
+   "gnis_id": "887043",
+   "geometry_hash": "e12929189b862ac1f9095d39e5618e24b00fde60ced78c996a2de0a416b5ae2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -181,8 +249,8 @@
    "state": "NM",
    "towns": [],
    "bbox": [
-    -104.81262,
-    36.18202,
+    -104.812618,
+    36.182004,
     -104.79653,
     36.18982
    ],
@@ -193,6 +261,15 @@
     "charette-lake-boat-launch-nm",
     "charette-lake-boat-launch-nm-2"
    ],
+   "water_id": "charette-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "d0aa3745cc6632ded9838677afdd031697002b6f55ec0b0e3697e0b45e24824f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -219,17 +296,26 @@
    ],
    "bbox": [
     -103.30977,
-    36.57407,
-    -103.29515,
-    36.5819
+    36.574071,
+    -103.295147,
+    36.581899
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.293,
    "launches": [
-    "clayton-lake-boat-launch-nm",
-    "clayton-lake-boat-launch-near-clayton-nm"
+    "clayton-lake-boat-launch-near-clayton-nm",
+    "clayton-lake-boat-launch-nm"
    ],
+   "water_id": "clayton-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "6d8db9cf8d41b86d97a9a53ecffb8df646abe0580eb06e8a4d1bf04e0787d0e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -256,10 +342,10 @@
     "Cochiti"
    ],
    "bbox": [
-    -106.32622,
+    -106.326224,
     35.61352,
-    -106.2977,
-    35.67405
+    -106.297696,
+    35.674055
    ],
    "wikidata": "Q5775863",
    "charted": false,
@@ -270,6 +356,15 @@
     "santa-cruz-boat-ramp-nm",
     "tetilla-boat-ramp-nm"
    ],
+   "water_id": "cochiti-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "aa1fb190f7ff505ac63cd0975e0d8e6d36061ecb73f8eec60b86886de20bf36d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -296,10 +391,10 @@
     "Hooverville"
    ],
    "bbox": [
-    -104.25298,
-    35.36707,
-    -104.184,
-    35.42109
+    -104.253008,
+    35.367067,
+    -104.184001,
+    35.421085
    ],
    "wikidata": "Q5158618",
    "charted": false,
@@ -314,6 +409,15 @@
     "conchas-lake-boat-launch-near-hooverville-nm",
     "south-area-mid-water-boat-ramp-nm"
    ],
+   "water_id": "conchas-lake-nm",
+   "gnis_id": "897344",
+   "geometry_hash": "2c4abb1911b42443cf07995e528539ff08bf4441afc5ab4b77d1bda776019176",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -325,10 +429,10 @@
     "Eagle Nest"
    ],
    "bbox": [
-    -105.27301,
-    36.4948,
-    -105.22913,
-    36.54517
+    -105.273014,
+    36.494803,
+    -105.229134,
+    36.545363
    ],
    "wikidata": null,
    "charted": false,
@@ -337,6 +441,15 @@
     "eagle-nest-lake-boat-launch-near-eagle-nest-nm-2",
     "eagle-nest-lake-boat-launch-near-eagle-nest-nm"
    ],
+   "water_id": "eagle-nest-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "106bd3e8344324dff377d4610cc64d1c1ed2b8cb5c9c267056bfdbc4a2ca7855",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -363,9 +476,9 @@
    ],
    "bbox": [
     -106.77341,
-    36.58882,
-    -106.73163,
-    36.66535
+    36.588669,
+    -106.731625,
+    36.665351
    ],
    "wikidata": "Q5352314",
    "charted": false,
@@ -375,6 +488,15 @@
     "el-vado-reservoir-boat-launch-near-el-vado-nm-2",
     "el-vado-reservoir-boat-launch-near-el-vado-nm"
    ],
+   "water_id": "el-vado-reservoir-nm",
+   "gnis_id": "906103",
+   "geometry_hash": "b68ff83614821e86b8e7feec79dd0eba3bf1d389769c8ad436d7ee37004ba5a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -403,10 +525,10 @@
     "Truth or Consequences"
    ],
    "bbox": [
-    -107.21448,
-    33.14611,
-    -107.14319,
-    33.31876
+    -107.214478,
+    33.146111,
+    -107.143195,
+    33.318757
    ],
    "wikidata": "Q5359306",
    "charted": false,
@@ -420,6 +542,15 @@
     "elephant-butte-lake-boat-launch-near-rock-canyon-nm",
     "south-monticello-boat-ramp-nm"
    ],
+   "water_id": "elephant-butte-lake-nm",
+   "gnis_id": "888840",
+   "geometry_hash": "1444693eb514275c4ed6ec0dca0cecbc8f60b6a8dbb0b2ca26317b6e9b6d4155",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -431,10 +562,10 @@
     "Seven Springs"
    ],
    "bbox": [
-    -106.72977,
-    35.88155,
-    -106.72313,
-    35.88537
+    -106.729769,
+    35.881456,
+    -106.723133,
+    35.885375
    ],
    "wikidata": "Q49700692",
    "charted": false,
@@ -443,6 +574,15 @@
     "fenton-lake-boat-launch-nm",
     "fenton-lake-carry-in-access-nm"
    ],
+   "water_id": "fenton-lake-nm",
+   "gnis_id": "906257",
+   "geometry_hash": "470bdaa37196cda929701f6644ee2b66100febb41bee3818182ea9cd20e52a71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -454,10 +594,10 @@
     "Hobbs"
    ],
    "bbox": [
-    -103.16788,
+    -103.167876,
     32.74853,
-    -103.16502,
-    32.7504
+    -103.165023,
+    32.750402
    ],
    "wikidata": null,
    "charted": false,
@@ -465,6 +605,15 @@
    "launches": [
     "green-meadow-lake-boat-launch-nm"
    ],
+   "water_id": "green-meadow-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "05bfd3eea97a7f7b3928017dc1c47cb14b9b41e4ae77785dc6ac4a776f37d1b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -476,10 +625,10 @@
     "Ruidoso"
    ],
    "bbox": [
-    -105.68931,
-    33.31982,
+    -105.689313,
+    33.319824,
     -105.68338,
-    33.32375
+    33.323747
    ],
    "wikidata": null,
    "charted": false,
@@ -488,6 +637,15 @@
     "grindstone-lake-boat-launch-nm",
     "grindstone-lake-carry-in-access-nm"
    ],
+   "water_id": "grindstone-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "b0459a68a496ccf72775f7ee348e14e4a609d067f5172839b1c89b59c9ba0fd3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -499,10 +657,10 @@
     "Tierra Amarilla"
    ],
    "bbox": [
-    -106.74102,
-    36.66608,
-    -106.64081,
-    36.72381
+    -106.741019,
+    36.666081,
+    -106.640812,
+    36.723811
    ],
    "wikidata": "Q49701069",
    "charted": false,
@@ -514,6 +672,15 @@
     "la-laja-boat-ramp-nm",
     "heron-reservoir-boat-launch-near-tierra-amarilla-nm-3"
    ],
+   "water_id": "heron-reservoir-nm",
+   "gnis_id": null,
+   "geometry_hash": "ad185070a2b1712e0ba90eadda3dcf79c02f7a781838da65e584a8a667efb973",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -525,10 +692,10 @@
     "Farmington"
    ],
    "bbox": [
-    -108.22928,
-    36.80647,
-    -108.22382,
-    36.81312
+    -108.229283,
+    36.806468,
+    -108.223819,
+    36.813189
    ],
    "wikidata": null,
    "charted": false,
@@ -536,6 +703,15 @@
    "launches": [
     "jackson-lake-carry-in-access-nm"
    ],
+   "water_id": "jackson-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "d8ba02839b7d20808083e9664a9d41a631b48c7429eeb8b32054789b490bb55a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -547,10 +723,10 @@
     "Jal"
    ],
    "bbox": [
-    -103.19159,
+    -103.191593,
     32.09898,
-    -103.18799,
-    32.1007
+    -103.187991,
+    32.100847
    ],
    "wikidata": null,
    "charted": false,
@@ -558,6 +734,15 @@
    "launches": [
     "jal-lake-boat-launch-nm"
    ],
+   "water_id": "jal-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "86efc8a990a166542641b5742ee2562aebde3646edae00908be766e4a2bc49ad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -569,10 +754,10 @@
     "Carlsbad"
    ],
    "bbox": [
-    -104.27182,
-    32.49074,
-    -104.23765,
-    32.50985
+    -104.271823,
+    32.490743,
+    -104.237645,
+    32.509846
    ],
    "wikidata": null,
    "charted": false,
@@ -581,6 +766,15 @@
     "avalon-reservoir-boat-ramp-nm",
     "lake-avalon-boat-launch-nm"
    ],
+   "water_id": "lake-avalon-nm",
+   "gnis_id": null,
+   "geometry_hash": "4193423ffd1e548618bdf815f43a919acd4271849f720ab3284364e2866cb1f0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -592,10 +786,10 @@
     "Raton"
    ],
    "bbox": [
-    -104.37889,
-    36.98378,
-    -104.36709,
-    36.99561
+    -104.378886,
+    36.983713,
+    -104.367091,
+    36.995615
    ],
    "wikidata": "Q6476762",
    "charted": false,
@@ -604,6 +798,15 @@
     "lake-maloya-boat-launch-near-raton-nm",
     "lake-maloya-carry-in-access-nm"
    ],
+   "water_id": "lake-maloya-nm",
+   "gnis_id": "203747",
+   "geometry_hash": "93b0a397964f39a95aef972ed5f2f9c753ba6389b36f462002944cd5c239a96a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -613,10 +816,10 @@
    "state": "NM",
    "towns": [],
    "bbox": [
-    -108.16519,
-    33.02775,
-    -108.15425,
-    33.03401
+    -108.165189,
+    33.027754,
+    -108.154252,
+    33.034013
    ],
    "wikidata": null,
    "charted": false,
@@ -624,6 +827,15 @@
    "launches": [
     "lake-roberts-boat-launch-nm"
    ],
+   "water_id": "lake-roberts-nm",
+   "gnis_id": null,
+   "geometry_hash": "4f964e44e4adb3083dcfe6481f8e2c1e60bfcf13531dafb2d0ec932776e615ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -649,10 +861,10 @@
     "Lake Sumner"
    ],
    "bbox": [
-    -104.39921,
-    34.60523,
-    -104.36249,
-    34.65783
+    -104.399207,
+    34.605235,
+    -104.362493,
+    34.657833
    ],
    "wikidata": null,
    "charted": false,
@@ -663,6 +875,15 @@
     "lake-sumner-boat-launch-near-lake-sumner-nm-2",
     "lake-sumner-boat-launch-near-lake-sumner-nm"
    ],
+   "water_id": "lake-sumner-nm",
+   "gnis_id": null,
+   "geometry_hash": "290abe84e67bdb2d4166359b9e40fadbc2c5b53a95990516cf25133c4c857d14",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -674,10 +895,10 @@
     "Lake Van"
    ],
    "bbox": [
-    -104.35893,
-    33.19203,
-    -104.35407,
-    33.1961
+    -104.358932,
+    33.192033,
+    -104.354072,
+    33.196098
    ],
    "wikidata": null,
    "charted": false,
@@ -685,6 +906,15 @@
    "launches": [
     "lake-van-boat-launch-nm"
    ],
+   "water_id": "lake-van-nm",
+   "gnis_id": null,
+   "geometry_hash": "c3c55db49030a01fc7be085e825827c818361ba9f1efcb9c97617b0ad3be422d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -697,9 +927,9 @@
    ],
    "bbox": [
     -104.26743,
-    32.41058,
-    -104.21813,
-    32.49127
+    32.410578,
+    -104.218129,
+    32.491267
    ],
    "wikidata": null,
    "charted": false,
@@ -709,6 +939,15 @@
     "lower-transill-reservoir-boat-launch-near-carlsbad-nm-2",
     "lower-transill-reservoir-boat-launch-near-carlsbad-nm-4"
    ],
+   "water_id": "lower-transill-reservoir-nm",
+   "gnis_id": null,
+   "geometry_hash": "3d68af717f0b4b309c5631dca6298bf376ea8dcd2e8422898b06b9ee2963913a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -720,10 +959,10 @@
     "Monte Aplanado"
    ],
    "bbox": [
-    -105.4006,
-    35.94075,
-    -105.39558,
-    35.94375
+    -105.400599,
+    35.940653,
+    -105.395583,
+    35.943753
    ],
    "wikidata": "Q7357959",
    "charted": false,
@@ -731,6 +970,15 @@
    "launches": [
     "morphy-lake-boat-launch-nm"
    ],
+   "water_id": "morphy-lake-nm",
+   "gnis_id": "923960",
+   "geometry_hash": "6835f9e97b3b07aa3d416e885bff42e7a591e233e3e193481196f84a30dcd90b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -742,10 +990,10 @@
     "Navajo Dam"
    ],
    "bbox": [
-    -107.62007,
-    36.79629,
-    -107.35399,
-    37.04654
+    -107.620068,
+    36.796288,
+    -107.353989,
+    37.046544
    ],
    "wikidata": null,
    "charted": false,
@@ -753,6 +1001,17 @@
    "launches": [
     "navajo-lake-boat-launch-near-navajo-dam-nm",
     "navajo-lake-boat-launch-near-navajo-dam-nm-2"
+   ],
+   "water_id": "navajo-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "7f91ec6012e75f55a332f25d295b9e4045e89f9183c7cf69b929e0b1d254de08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pine-marina-boat-ramp-nm"
    ],
    "advisories": []
   },
@@ -765,10 +1024,10 @@
     "Maxwell"
    ],
    "bbox": [
-    -104.58945,
+    -104.589445,
     36.57636,
-    -104.57451,
-    36.58798
+    -104.574511,
+    36.588
    ],
    "wikidata": null,
    "charted": false,
@@ -777,6 +1036,15 @@
     "lake-13-boat-launch-nm",
     "number-thirteen-lake-carry-in-access-nm"
    ],
+   "water_id": "number-thirteen-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "66c116f78a088d909fdd01dc7cde76da7da40ce3a6605e0853c9595fb34fc34a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -789,10 +1057,10 @@
     "Loving"
    ],
    "bbox": [
-    -105.6933,
-    31.90155,
-    -103.91121,
-    35.97623
+    -105.693299,
+    31.901555,
+    -103.911207,
+    35.976232
    ],
    "wikidata": "Q1356561",
    "charted": false,
@@ -804,6 +1072,15 @@
     "pecos-river-carry-in-access-near-loving-nm",
     "pecos-river-carry-in-access-near-carlsbad-nm-2"
    ],
+   "water_id": "pecos-river-nm",
+   "gnis_id": "1384150",
+   "geometry_hash": "d9610ed96c67e5dcee9b2adbe124ea3f7deb8e12009e785dddaf94c40041e4b8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -813,10 +1090,10 @@
    "state": "NM",
    "towns": [],
    "bbox": [
-    -108.49755,
-    34.13114,
-    -108.48318,
-    34.13938
+    -108.497547,
+    34.131137,
+    -108.483177,
+    34.139376
    ],
    "wikidata": "Q49702402",
    "charted": false,
@@ -825,6 +1102,15 @@
     "quemado-boat-launch-nm",
     "quemado-lake-boat-launch-nm"
    ],
+   "water_id": "quemado-lake-nm",
+   "gnis_id": "923909",
+   "geometry_hash": "7a5e4c9251860b5ab316725086afda56d2bf86591c20b057cf7fa2a045db967f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -836,10 +1122,10 @@
     "El Vado"
    ],
    "bbox": [
-    -106.75204,
-    36.04165,
-    -106.08765,
-    37.00001
+    -106.752043,
+    36.041652,
+    -106.087589,
+    37.000011
    ],
    "wikidata": "Q7335176",
    "charted": false,
@@ -852,6 +1138,15 @@
     "skull-bridge-nm",
     "whirlpool-boat-launch-nm"
    ],
+   "water_id": "rio-chama-nm",
+   "gnis_id": "923661",
+   "geometry_hash": "8958e96c3c1561be3addf568387d66b5d585a7b150b62edd62fddb92854a4b2c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -871,10 +1166,10 @@
     "Williamsburg"
    ],
    "bbox": [
-    -107.30705,
-    31.78377,
-    -105.67104,
-    36.9962
+    -107.307053,
+    31.783765,
+    -105.670413,
+    36.996201
    ],
    "wikidata": "Q160636",
    "charted": false,
@@ -888,6 +1183,15 @@
     "rio-bravo-boat-takeout-nm",
     "taos-junction-bridge-boat-launch-nm"
    ],
+   "water_id": "rio-grande-co",
+   "gnis_id": "1385432",
+   "geometry_hash": "4bd909dd91e93fe42fce3c28963bea4e33eb0c16e282924cca4e85d2481e5a25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -900,10 +1204,10 @@
     "Navajo Dam"
    ],
    "bbox": [
-    -109.02704,
-    36.68534,
-    -107.16749,
-    37.04129
+    -109.027044,
+    36.685338,
+    -107.167486,
+    37.041289
    ],
    "wikidata": null,
    "charted": false,
@@ -914,6 +1218,15 @@
     "san-juan-river-boat-launch-near-navajo-dam-nm-3",
     "san-juan-river-boat-launch-near-bloomfield-nm"
    ],
+   "water_id": "san-juan-river-nm",
+   "gnis_id": null,
+   "geometry_hash": "9d20c06fa4ead2e7b7a93f7d4b9e4acf7a2ced2a137ff0478f020dc56188b0bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -926,10 +1239,10 @@
     "Potrero"
    ],
    "bbox": [
-    -105.92046,
+    -105.920457,
     35.9689,
-    -105.913,
-    35.97961
+    -105.912996,
+    35.979664
    ],
    "wikidata": null,
    "charted": false,
@@ -938,6 +1251,15 @@
     "santa-cruz-lake-boat-launch-espanola-nm",
     "santa-cruz-lake-boat-launch-nm"
    ],
+   "water_id": "santa-cruz-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "55039af53a74a1921099fde28294a1a397addcecdd7824bee006c099a2e24777",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -963,9 +1285,9 @@
     "Santa Rosa"
    ],
    "bbox": [
-    -104.69127,
-    35.02866,
-    -104.63256,
+    -104.691272,
+    35.028658,
+    -104.632558,
     35.07774
    ],
    "wikidata": null,
@@ -974,6 +1296,15 @@
    "launches": [
     "santa-rosa-lake-boat-launch-nm"
    ],
+   "water_id": "santa-rosa-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "f235c68722e1a4d776693b40d8b140dc0564901bddb07d33047c1b9bf27ab6ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -983,8 +1314,8 @@
    "state": "NM",
    "towns": [],
    "bbox": [
-    -108.49893,
-    33.4173,
+    -108.498929,
+    33.417298,
     -108.49304,
     33.42982
    ],
@@ -995,6 +1326,15 @@
     "snow-lake-boat-launch-nm",
     "snow-lake-carry-in-access-nm"
    ],
+   "water_id": "snow-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "7ba2dc86bfdfcc1e7082bc84feffa9b10269f8db730fdc40636e5acb9d18e591",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1006,10 +1346,10 @@
     "Springer"
    ],
    "bbox": [
-    -104.66349,
-    36.4086,
-    -104.64647,
-    36.424
+    -104.663488,
+    36.408556,
+    -104.646467,
+    36.424003
    ],
    "wikidata": null,
    "charted": false,
@@ -1018,6 +1358,15 @@
     "springer-lake-boat-launch-nm",
     "springer-lake-carry-in-access-nm"
    ],
+   "water_id": "springer-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "551d45716a2115540a9c965b29cb78970f611ebe9ec9fd08824ad766b47183c7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1030,8 +1379,8 @@
    ],
    "bbox": [
     -105.25138,
-    35.65503,
-    -105.22824,
+    35.655028,
+    -105.228244,
     35.67667
    ],
    "wikidata": null,
@@ -1041,6 +1390,15 @@
     "storrie-lake-boat-launch-nm",
     "storrie-lake-state-park-nm"
    ],
+   "water_id": "storrie-lake-nm",
+   "gnis_id": null,
+   "geometry_hash": "f81c9dd954593192d89f21f1bb8a70f16361bef8494e759242be5ee9df0dbe2b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1052,10 +1410,10 @@
     "Maxwell"
    ],
    "bbox": [
-    -104.67789,
-    36.56231,
-    -104.64947,
-    36.58651
+    -104.677912,
+    36.562312,
+    -104.649474,
+    36.586519
    ],
    "wikidata": null,
    "charted": false,
@@ -1063,6 +1421,15 @@
    "launches": [
     "stubblefield-reservoir-boat-launch-nm"
    ],
+   "water_id": "stubblefield-reservoir-nm",
+   "gnis_id": null,
+   "geometry_hash": "162548f10f9cf5d5be4d3644fc97c28dd0bd9ea01887e3ff7c82daae54691c42",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1087,13 +1454,27 @@
    "towns": [
     "Tucumcari"
    ],
-   "bbox": null,
+   "bbox": [
+    -103.704679,
+    35.174454,
+    -103.68777,
+    35.18893
+   ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "tucumcari-lake-boat-launch-nm"
    ],
+   "water_id": "tucumcari-lake-nm",
+   "gnis_id": "895881",
+   "geometry_hash": "67d7b9cba6797f47425ebdb67afecd587c3a5842223a2aa0bdec9d1c9864c6a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1106,10 +1487,10 @@
     "Logan"
    ],
    "bbox": [
-    -103.63914,
-    35.32003,
-    -103.44347,
-    35.3959
+    -103.639137,
+    35.320034,
+    -103.443468,
+    35.395899
    ],
    "wikidata": null,
    "charted": false,
@@ -1121,6 +1502,15 @@
     "ute-reservoir-boat-launch-near-logan-nm-2",
     "ute-reservoir-boat-launch-near-logan-nm"
    ],
+   "water_id": "ute-reservoir-nm",
+   "gnis_id": null,
+   "geometry_hash": "78333e1433fc3fa2dcc350827cd91cd99a767d701fc6e50f29fef044a05222b0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]

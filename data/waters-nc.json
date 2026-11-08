@@ -1,7 +1,7 @@
 {
  "state": "NC",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 251,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 267,
  "waters": [
   {
    "slug": "after-bay-reservoir-nc",
@@ -12,10 +12,10 @@
     "Semora"
    ],
    "bbox": [
-    -79.04633,
-    36.50555,
-    -78.99703,
-    36.53042
+    -79.046327,
+    36.505547,
+    -78.997032,
+    36.530417
    ],
    "wikidata": null,
    "charted": false,
@@ -23,6 +23,15 @@
    "launches": [
     "hyco-afterbay-nc"
    ],
+   "water_id": "after-bay-reservoir-nc",
+   "gnis_id": null,
+   "geometry_hash": "fd1cce202f5856ee1c1bde1b7ce1e1c6dd2fd94952c07b5e9f593fadbbc94c00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -37,9 +46,9 @@
     "Skinnersville"
    ],
    "bbox": [
-    -76.70026,
+    -76.700261,
     35.91877,
-    -75.6698,
+    -75.669801,
     36.16488
    ],
    "wikidata": null,
@@ -47,6 +56,22 @@
    "area_km2": 1139.102,
    "launches": [
     "midway-drive-nc"
+   ],
+   "water_id": "albemarle-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "1a25e8e8e0ff53cbc2185cb5ca4c517670175c1ab609353ad745e800d83e0d8b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "albemarle-sound-boat-launch-near-edenton-nc",
+    "albemarle-sound-boat-launch-near-edenton-nc-2",
+    "albemarle-sound-boat-launch-near-skinnersville-nc",
+    "albemarle-sound-boat-launch-near-skinnersville-nc-2",
+    "albemarle-sound-boat-launch-near-skinnersville-nc-3",
+    "albemarle-sound-boat-launch-near-skinnersville-nc-4"
    ],
    "advisories": []
   },
@@ -61,10 +86,10 @@
     "Fort Landing"
    ],
    "bbox": [
-    -76.28395,
-    35.57618,
-    -76.04648,
-    35.70278
+    -76.283945,
+    35.576184,
+    -76.046479,
+    35.702862
    ],
    "wikidata": "Q4062639",
    "charted": true,
@@ -72,6 +97,15 @@
    "launches": [
     "frying-pan-nc"
    ],
+   "water_id": "alligator-river-nc",
+   "gnis_id": "980142",
+   "geometry_hash": "c5f18625e0159a5a55e7eb56ec65e165fc46a3e3f708c07b6fae34df0c03f16d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -83,10 +117,10 @@
     "Murphy"
    ],
    "bbox": [
-    -84.29578,
-    35.13943,
-    -84.17765,
-    35.17913
+    -84.295784,
+    35.139427,
+    -84.177647,
+    35.179204
    ],
    "wikidata": null,
    "charted": false,
@@ -94,6 +128,15 @@
    "launches": [
     "apalachia-boat-launch-nc"
    ],
+   "water_id": "apalachia-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "0789cff17de4448ab7aa930b5216f5c0cd3eb65929cf8b6dea2b10fcfe6f7837",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -105,10 +148,10 @@
     "Apex"
    ],
    "bbox": [
-    -78.82521,
-    35.74707,
-    -78.81566,
-    35.75237
+    -78.825208,
+    35.746934,
+    -78.815655,
+    35.752367
    ],
    "wikidata": null,
    "charted": false,
@@ -116,6 +159,15 @@
    "launches": [
     "apex-community-park-nc"
    ],
+   "water_id": "apex-community-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "798703ff3490f3e966c6bae4c440cd688060025f83c4d4773fd2316ea97a66f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -128,10 +180,10 @@
     "Pilot Mountain"
    ],
    "bbox": [
-    -80.61142,
-    36.28539,
-    -80.52007,
-    36.56305
+    -80.611424,
+    36.285387,
+    -80.519939,
+    36.563048
    ],
    "wikidata": null,
    "charted": false,
@@ -142,6 +194,15 @@
     "luck-stone-nc",
     "tharrington-park-access-nc"
    ],
+   "water_id": "ararat-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "1f9a79bb403ed7b15a40895a642786d8116f8f55577c6be99e51fdff689df4b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -153,10 +214,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.13296,
-    36.29289,
-    -76.08062,
-    36.30719
+    -76.132964,
+    36.292891,
+    -76.080623,
+    36.307194
    ],
    "wikidata": null,
    "charted": true,
@@ -164,6 +225,15 @@
    "launches": [
     "treasure-point-community-access-nc"
    ],
+   "water_id": "areneuse-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "9710bace4ba3c8a979036553f791576cd3fd6c76a00f1b2271fdf9362fe5600c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -175,10 +245,10 @@
     "Manteo"
    ],
    "bbox": [
-    -75.68142,
-    35.87058,
-    -75.66316,
-    35.88419
+    -75.681418,
+    35.870583,
+    -75.663161,
+    35.884239
    ],
    "wikidata": null,
    "charted": true,
@@ -186,6 +256,15 @@
    "launches": [
     "roanoke-island-visitor-information-center-and-rest-area-nc"
    ],
+   "water_id": "ashbee-harbor-nc",
+   "gnis_id": null,
+   "geometry_hash": "20dde8822232c44e764a2528d551c6a9f9133739e4e5d47c971355f5590dda8d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -206,9 +285,9 @@
    ],
    "bbox": [
     -77.89006,
-    34.05898,
-    -76.67336,
-    34.75955
+    34.058978,
+    -76.673362,
+    34.759546
    ],
    "wikidata": null,
    "charted": true,
@@ -218,6 +297,57 @@
     "shell-rock-landing-nc",
     "surf-city-nc",
     "wrightsville-beach-nc"
+   ],
+   "water_id": "atlantic-intracoastal-waterway-nc",
+   "gnis_id": null,
+   "geometry_hash": "742a32942469d9aae51a12710e2a8c6c35060c460ae382379a6410ae4e1140a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "atlantic-intracoastal-waterway-boat-launch-near-chadwick-acres-nc",
+    "atlantic-intracoastal-waterway-boat-launch-near-chadwick-acres-nc-2",
+    "atlantic-intracoastal-waterway-boat-launch-near-sneads-ferry-nc-5"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-bay-nc",
+   "name": "Back Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Knotts Island"
+   ],
+   "bbox": [
+    -75.995779,
+    36.499301,
+    -75.875541,
+    36.723299
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 103.697,
+   "launches": [],
+   "water_id": "back-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": "3d24a654cf33e3813a60413cc796790527ff89780470b1e360a25e41b7ed62e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "back-bay-boat-launch-near-knotts-island-nc",
+    "back-bay-boat-launch-near-knotts-island-nc-15",
+    "back-bay-boat-launch-near-knotts-island-nc-2",
+    "back-bay-boat-launch-near-knotts-island-nc-3",
+    "back-bay-boat-launch-near-knotts-island-nc-4",
+    "back-bay-boat-launch-near-knotts-island-nc-5",
+    "back-bay-boat-launch-near-knotts-island-nc-6",
+    "back-bay-boat-launch-near-knotts-island-nc-7"
    ],
    "advisories": []
   },
@@ -236,6 +366,46 @@
    "launches": [
     "dike-gate-boat-ramp-nc"
    ],
+   "water_id": "back-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "back-sound-nc",
+   "name": "Back Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Harkers Island"
+   ],
+   "bbox": [
+    -76.649999,
+    34.643359,
+    -76.493411,
+    34.707489
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 41.251,
+   "launches": [],
+   "water_id": "back-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "dd87629189df6a83e96a464b3407c4419f95d90da197b35163f3f1d356d06017",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "back-sound-boat-launch-near-harkers-island-nc-2"
+   ],
    "advisories": []
   },
   {
@@ -250,10 +420,10 @@
     "Whitney"
    ],
    "bbox": [
-    -80.17705,
-    35.40791,
-    -80.06255,
-    35.51183
+    -80.177049,
+    35.407751,
+    -80.062549,
+    35.511915
    ],
    "wikidata": null,
    "charted": false,
@@ -264,6 +434,15 @@
     "cove-boat-launch-nc",
     "lakemont-nc"
    ],
+   "water_id": "badin-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "6911c719b6c4965e08adde7aea122c8ae8d2dae1d373a6f416db9206fbd35a9a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -291,10 +470,10 @@
     "Bald Head Island"
    ],
    "bbox": [
-    -77.99847,
-    33.85217,
-    -77.96287,
-    33.87705
+    -77.998469,
+    33.852169,
+    -77.962866,
+    33.877149
    ],
    "wikidata": null,
    "charted": true,
@@ -302,6 +481,15 @@
    "launches": [
     "village-creek-access-nc"
    ],
+   "water_id": "bald-head-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "12111f3b743c6a22d21e17d8b9a23de6c94a59c9645ce2f1dabe37aaaff9cef9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -313,10 +501,10 @@
     "Tuckasegee"
    ],
    "bbox": [
-    -83.07282,
-    35.21985,
+    -83.072823,
+    35.219852,
     -83.02042,
-    35.24959
+    35.249595
    ],
    "wikidata": null,
    "charted": false,
@@ -324,6 +512,15 @@
    "launches": [
     "bear-creek-boat-launch-nc"
    ],
+   "water_id": "bear-creek-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "53d222167ecb7950082f4a8a1868d56f221a359dca7a7dc4f53e054868d0cf1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -335,16 +532,87 @@
     "Hubert"
    ],
    "bbox": [
-    -77.20126,
-    34.61811,
-    -77.19294,
-    34.62662
+    -77.201259,
+    34.61796,
+    -77.192941,
+    34.626619
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.19,
    "launches": [
     "willis-landing-nc"
+   ],
+   "water_id": "bear-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "4e9ab986fed5f0f03ffdc0a7958107a41d3293a61289c8382f19b965cbcd7341",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-w-s-lake-number-three-nc",
+   "name": "Bear Creek W/S Lake Number Three",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Hood Swamp"
+   ],
+   "bbox": [
+    -77.882466,
+    35.411151,
+    -77.869916,
+    35.419549
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.205,
+   "launches": [],
+   "water_id": "bear-creek-w-s-lake-number-three-nc",
+   "gnis_id": null,
+   "geometry_hash": "978e1877a5b105e07432fc04fa5ee12c20e409a3afa2bed2264b02692516a77f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bear-creek-w-s-lake-number-three-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beard-creek-nc",
+   "name": "Beard Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Arapahoe"
+   ],
+   "bbox": [
+    -76.877485,
+    35.001901,
+    -76.847421,
+    35.094046
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.026,
+   "launches": [],
+   "water_id": "beard-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "3d77dc08d9332440b21db69ac35ad901359e18f9881e734752f9b03f0c58f66f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "beard-creek-boat-launch-near-arapahoe-nc"
    ],
    "advisories": []
   },
@@ -358,10 +626,10 @@
     "Morehead City"
    ],
    "bbox": [
-    -76.74961,
-    34.57511,
-    -76.61947,
-    34.79984
+    -76.749608,
+    34.575111,
+    -76.619471,
+    34.799838
    ],
    "wikidata": null,
    "charted": true,
@@ -370,6 +638,17 @@
     "chonch-s-point-access-nc",
     "beaufort-inlet-boat-launch-near-beaufort-nc-4",
     "west-beaufort-nc"
+   ],
+   "water_id": "beaufort-inlet-nc",
+   "gnis_id": null,
+   "geometry_hash": "95390e75906080b9b518da9e06d37ab8ee9e8d3ad054572a72ee6adb8f9d5a16",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "u-s-coast-guard-station-fort-macon-nc"
    ],
    "advisories": []
   },
@@ -383,10 +662,10 @@
     "Pine Hall"
    ],
    "bbox": [
-    -80.09357,
-    36.20913,
-    -80.00593,
-    36.3239
+    -80.093568,
+    36.209134,
+    -80.005932,
+    36.323963
    ],
    "wikidata": null,
    "charted": false,
@@ -395,6 +674,15 @@
     "pine-hall-nc",
     "piney-bluff-nc"
    ],
+   "water_id": "belews-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "fdd04adc334ebb81a0bfc6f0ca4f560f11ccc095d0e5710e7184c405b121ab65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -406,9 +694,9 @@
     "Valhalla"
    ],
    "bbox": [
-    -76.66655,
-    36.13944,
-    -76.65913,
+    -76.666555,
+    36.139438,
+    -76.658843,
     36.15459
    ],
    "wikidata": null,
@@ -417,6 +705,15 @@
    "launches": [
     "bennetts-millpond-nc"
    ],
+   "water_id": "bennett-mill-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": "b498fa3c0617601680311394640e39de8a8f77b7b5a1a1e28b699729d8eafac3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -442,10 +739,10 @@
     "Gatesville"
    ],
    "bbox": [
-    -76.75269,
-    36.29989,
-    -76.62777,
-    36.44334
+    -76.752687,
+    36.299895,
+    -76.627771,
+    36.443476
    ],
    "wikidata": null,
    "charted": true,
@@ -453,6 +750,15 @@
    "launches": [
     "bennetts-creek-town-park-nc"
    ],
+   "water_id": "bennetts-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "57fbc4b58b51dd13492701cd8416df28a3e18089855c05655db8de9ad78e809d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -465,10 +771,10 @@
     "Swepsonville"
    ],
    "bbox": [
-    -79.74862,
-    35.95226,
-    -79.36542,
-    36.05037
+    -79.748616,
+    35.952258,
+    -79.365424,
+    36.050372
    ],
    "wikidata": null,
    "charted": false,
@@ -477,6 +783,15 @@
     "great-alamance-creek-paddle-access-nc",
     "swepsonville-river-park-lower-access-nc"
    ],
+   "water_id": "big-alamance-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "0394a9f37a143338503d39658f1a81a2700c78f5c23b03e25fcdfcf0178e8593",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -488,10 +803,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.1571,
-    36.13223,
-    -76.10966,
-    36.1626
+    -76.15717,
+    36.132231,
+    -76.109655,
+    36.162599
    ],
    "wikidata": null,
    "charted": true,
@@ -499,6 +814,15 @@
    "launches": [
     "big-flatty-nc"
    ],
+   "water_id": "big-flatty-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "887348438d3d49b5d2842f31c4a61e2e25eec9e8377ec9ab806cffa84d10aef8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -510,10 +834,10 @@
     "Lumberton"
    ],
    "bbox": [
-    -78.94236,
-    34.45412,
-    -78.84345,
-    34.60012
+    -78.942357,
+    34.454123,
+    -78.843367,
+    34.600123
    ],
    "wikidata": null,
    "charted": false,
@@ -521,6 +845,15 @@
    "launches": [
     "lennons-bridge-nc"
    ],
+   "water_id": "big-swamp-nc",
+   "gnis_id": null,
+   "geometry_hash": "cf869f44d2f7b37846aa891792a86ab9bf7748d760925b748c230d6c6c052184",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -535,10 +868,10 @@
     "Rowan"
    ],
    "bbox": [
-    -78.31186,
-    34.33648,
-    -78.04435,
-    34.78963
+    -78.311863,
+    34.336483,
+    -78.044331,
+    34.789628
    ],
    "wikidata": "Q4921632",
    "charted": false,
@@ -547,6 +880,15 @@
     "hunts-bluff-nc",
     "ivanhoe-nc"
    ],
+   "water_id": "black-river-nc",
+   "gnis_id": "981539",
+   "geometry_hash": "233ffc76d7dd41f1f7c954fc477ab93c376c4a010420a8a0392ddbb83bd43157",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -559,10 +901,10 @@
     "Lilesville"
    ],
    "bbox": [
-    -79.91727,
-    34.9793,
-    -79.87153,
-    35.06532
+    -79.917274,
+    34.979302,
+    -79.871534,
+    35.065321
    ],
    "wikidata": null,
    "charted": false,
@@ -571,6 +913,15 @@
     "grassy-island-nc",
     "pee-dee-nc"
    ],
+   "water_id": "blewett-falls-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "22f0ef933b6204de20bc5028bf5f12f9e464add57163f72150e3597dea530050",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -583,9 +934,9 @@
     "Cotton Patch Landing"
    ],
    "bbox": [
-    -77.00646,
-    35.34482,
-    -76.94859,
+    -77.006459,
+    35.344823,
+    -76.948591,
     35.46261
    ],
    "wikidata": null,
@@ -594,6 +945,15 @@
    "launches": [
     "blounts-creek-boat-launch-nc"
    ],
+   "water_id": "blounts-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "08afdbcff342bfd7542391288c7374634603ec34f415f0163a610b71ddd10d42",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -605,10 +965,10 @@
     "Jacksonville"
    ],
    "bbox": [
-    -77.52939,
-    34.75636,
-    -77.44776,
-    34.7863
+    -77.529389,
+    34.756359,
+    -77.447758,
+    34.786302
    ],
    "wikidata": null,
    "charted": false,
@@ -616,6 +976,15 @@
    "launches": [
     "oakhurst-nature-park-nc"
    ],
+   "water_id": "blue-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "f40402e28591f817de9b5fa90f82913ad42a1b9b36ed39bc0773dd4939f389d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -628,10 +997,10 @@
     "Cedar Point"
    ],
    "bbox": [
-    -77.08879,
-    34.68907,
-    -77.07755,
-    34.69094
+    -77.088787,
+    34.688818,
+    -77.077551,
+    34.691173
    ],
    "wikidata": null,
    "charted": true,
@@ -640,6 +1009,15 @@
     "boathouse-creek-walking-trails-park-nc",
     "cedar-point-boat-launch-nc"
    ],
+   "water_id": "boathouse-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "5f221aacc125b02b99636fd1fae37fb2de6ec113b392be722c5fee610f7c82c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -651,16 +1029,27 @@
     "Swansboro"
    ],
    "bbox": [
-    -77.14158,
-    34.63114,
-    -77.0841,
-    34.68915
+    -77.141579,
+    34.631081,
+    -77.084101,
+    34.689149
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 13.618,
    "launches": [
     "bicentenntial-park-nc"
+   ],
+   "water_id": "bogue-inlet-nc",
+   "gnis_id": null,
+   "geometry_hash": "6d0755cb1335c2a195ee7278146089726ed034d06ffa387161a154a1777f8430",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bogue-inlet-boat-launch-near-swansboro-nc-2"
    ],
    "advisories": []
   },
@@ -682,10 +1071,10 @@
     "Point Emerald Villas"
    ],
    "bbox": [
-    -77.10956,
-    34.64055,
-    -76.69483,
-    34.72915
+    -77.109561,
+    34.640552,
+    -76.694827,
+    34.729148
    ],
    "wikidata": "Q4937828",
    "charted": true,
@@ -698,6 +1087,22 @@
     "south-10th-st-nc",
     "south-11th-street-water-access-nc"
    ],
+   "water_id": "bogue-sound-nc",
+   "gnis_id": "1009528",
+   "geometry_hash": "2cd754acb98def09b1fd804f34ec50cb5d073618a2c6a02a47e5c4a8e9c0f171",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bogue-sound-boat-launch-near-cape-carteret-nc-2",
+    "bogue-sound-boat-launch-near-cape-carteret-nc-3",
+    "bogue-sound-boat-launch-near-cape-carteret-nc-4",
+    "bogue-sound-boat-launch-near-cape-carteret-nc-6",
+    "bogue-sound-boat-launch-near-cape-carteret-nc-7",
+    "bogue-sound-boat-launch-near-newport-nc-4"
+   ],
    "advisories": []
   },
   {
@@ -709,10 +1114,10 @@
     "Cary"
    ],
    "bbox": [
-    -78.82907,
-    35.77402,
-    -78.82334,
-    35.78239
+    -78.829066,
+    35.774021,
+    -78.823336,
+    35.782389
    ],
    "wikidata": null,
    "charted": false,
@@ -720,6 +1125,15 @@
    "launches": [
     "bond-lake-boat-launch-near-cary-nc-2"
    ],
+   "water_id": "bond-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "5573c829f3e4932f2d6524b0c86828c3131d851d127bdef7c4209d484e5a3d3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -745,10 +1159,10 @@
     "Wallace"
    ],
    "bbox": [
-    -77.98187,
-    34.741,
-    -77.97841,
-    34.74869
+    -77.981874,
+    34.741001,
+    -77.978191,
+    34.748691
    ],
    "wikidata": null,
    "charted": false,
@@ -756,6 +1170,15 @@
    "launches": [
     "boney-mill-pond-carry-in-access-nc"
    ],
+   "water_id": "boney-mill-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": "9098796d3b36bbf8cf23cb0ee95ec224e95a29a6981ae5f53a886371ec6a9b59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -767,10 +1190,10 @@
     "New Bern"
    ],
    "bbox": [
-    -77.07087,
-    35.00832,
-    -77.01175,
-    35.07723
+    -77.070907,
+    35.008321,
+    -77.011748,
+    35.077231
    ],
    "wikidata": null,
    "charted": true,
@@ -779,6 +1202,15 @@
     "brices-creek-boat-launch-nc",
     "brice-creek-carry-in-access-near-new-bern-nc"
    ],
+   "water_id": "brice-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "8b515dbba270183b059b5a46e398df81caf91cfbf4f7002923323276572881c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -791,10 +1223,10 @@
     "Rutherfordton"
    ],
    "bbox": [
-    -82.29153,
-    35.0267,
-    -81.48823,
-    35.54956
+    -82.291526,
+    35.026705,
+    -81.488233,
+    35.549564
    ],
    "wikidata": "Q921949",
    "charted": false,
@@ -805,6 +1237,15 @@
     "us-hwy-221-nc",
     "us-hwy-221a-nc"
    ],
+   "water_id": "broad-river-alston-sc",
+   "gnis_id": "1251826",
+   "geometry_hash": "d56c78d8d500760325062531f6b23ad176263e565f1e9cf9fa4ac8da7396c411",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -822,6 +1263,15 @@
    "launches": [
     "broughton-pond-carry-in-access-nc"
    ],
+   "water_id": "broughton-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -834,10 +1284,10 @@
     "Clairmont"
    ],
    "bbox": [
-    -77.9903,
-    34.17931,
-    -77.95841,
-    34.25909
+    -77.990299,
+    34.179306,
+    -77.958413,
+    34.259093
    ],
    "wikidata": "Q4979534",
    "charted": true,
@@ -845,6 +1295,15 @@
    "launches": [
     "belville-riverwalk-park-nc"
    ],
+   "water_id": "brunswick-river-nc",
+   "gnis_id": "982048",
+   "geometry_hash": "8ac9bb038798d31f8f60a68b454017cd6fd645c2fe8df7291a15885e30390cf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -856,10 +1315,10 @@
     "Knightdale"
    ],
    "bbox": [
-    -78.42476,
-    35.58836,
-    -78.19744,
-    35.85214
+    -78.424908,
+    35.588362,
+    -78.197439,
+    35.852139
    ],
    "wikidata": null,
    "charted": false,
@@ -867,6 +1326,15 @@
    "launches": [
     "buffalo-creek-boat-launch-nc"
    ],
+   "water_id": "buffalo-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "d9382fa45d6dff6be6c76b5b178601297c0febee21deab7d3973700e95a53e9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -878,10 +1346,10 @@
     "Tapoco"
    ],
    "bbox": [
-    -83.98088,
-    35.44768,
-    -83.93663,
-    35.50251
+    -83.980881,
+    35.447681,
+    -83.936631,
+    35.502508
    ],
    "wikidata": null,
    "charted": false,
@@ -889,6 +1357,15 @@
    "launches": [
     "magazine-branch-take-out-nc"
    ],
+   "water_id": "calderwood-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "a267c6ef5cb0ed7ee78bda3e15526bcd9366de59e09cf1604bc2ba95c4f8fb01",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -900,10 +1377,10 @@
     "Oak Island"
    ],
    "bbox": [
-    -78.06735,
-    33.9342,
-    -78.05622,
-    33.94156
+    -78.067355,
+    33.934198,
+    -78.056223,
+    33.941557
    ],
    "wikidata": null,
    "charted": false,
@@ -911,6 +1388,15 @@
    "launches": [
     "bill-smith-park-nc"
    ],
+   "water_id": "calf-gully-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "739e314ff0be54ea84cf009a355d173469e8140f5650a31980872745de71514d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -922,10 +1408,10 @@
     "Marston"
    ],
    "bbox": [
-    -79.54998,
-    34.98826,
-    -79.54273,
-    34.99528
+    -79.549985,
+    34.988257,
+    -79.542725,
+    34.995281
    ],
    "wikidata": null,
    "charted": false,
@@ -933,6 +1419,15 @@
    "launches": [
     "kinney-cameron-access-nc"
    ],
+   "water_id": "camerons-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "574b8c1d17af40334dd74ca8cf4f88233a22cd1e2ab21614a715bfeb8a0ac0ae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -955,10 +1450,10 @@
     "Wilmington"
    ],
    "bbox": [
-    -79.05257,
-    33.88409,
+    -79.052567,
+    33.884086,
     -77.93276,
-    35.596
+    35.596004
    ],
    "wikidata": "Q1034421",
    "charted": true,
@@ -975,6 +1470,15 @@
     "tory-hole-nc",
     "william-o-huske-lock-and-dam-nc"
    ],
+   "water_id": "cape-fear-river-nc",
+   "gnis_id": "1023879",
+   "geometry_hash": "be64f7c31c36196f4e26ba2bed50071af26c122b691ffd81e6dddf857e9f3872",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -986,10 +1490,10 @@
     "Windsor"
    ],
    "bbox": [
-    -77.24786,
-    35.90172,
-    -76.73225,
-    36.19022
+    -77.247858,
+    35.901717,
+    -76.732251,
+    36.190221
    ],
    "wikidata": null,
    "charted": true,
@@ -1001,6 +1505,15 @@
     "sans-souci-ferry-nc",
     "windsor-nc"
    ],
+   "water_id": "cashie-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "4b5d281b71bdcd027a50fa94a6da7e90e3bc5893fbead4a8948b8c3e45c04558",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1016,10 +1529,10 @@
     "Taylorsville"
    ],
    "bbox": [
-    -82.28473,
-    35.1487,
-    -80.92443,
-    35.84789
+    -82.284726,
+    35.148543,
+    -80.924427,
+    35.848151
    ],
    "wikidata": "Q1050460",
    "charted": false,
@@ -1030,6 +1543,15 @@
     "north-bend-nc",
     "watermill-boat-ramp-nc"
    ],
+   "water_id": "catawba-river-nc",
+   "gnis_id": "1010097",
+   "geometry_hash": "6659be318af6471b50705e66a9631327c03b8a8d4b07fd1d47076e80925b09aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1041,9 +1563,9 @@
     "New Bern"
    ],
    "bbox": [
-    -77.11775,
-    34.92355,
-    -77.08815,
+    -77.117754,
+    34.923555,
+    -77.088153,
     34.9434
    ],
    "wikidata": null,
@@ -1052,6 +1574,15 @@
    "launches": [
     "catfish-lake-boat-launch-nc"
    ],
+   "water_id": "catfish-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "c0f4d53a8f02852dea6ab17fc80e8cb35c896a922d5d0a452ffb72a5ce35fe42",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1064,16 +1595,29 @@
     "Currituck"
    ],
    "bbox": [
-    -76.00132,
-    36.35998,
-    -75.92619,
-    36.43329
+    -76.001325,
+    36.359984,
+    -75.926187,
+    36.433293
    ],
    "wikidata": "Q34759797",
    "charted": true,
    "area_km2": 22.266,
    "launches": [
     "coinjock-nc"
+   ],
+   "water_id": "cedar-bay-nc",
+   "gnis_id": "982788",
+   "geometry_hash": "557e0f2ae22aea2c426fe2fe23b635415824422be89d411ea5f6261f0772cd07",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cedar-bay-boat-launch-near-currituck-nc-15",
+    "cedar-bay-boat-launch-near-currituck-nc-3",
+    "cedar-bay-boat-launch-near-currituck-nc-9"
    ],
    "advisories": []
   },
@@ -1086,10 +1630,10 @@
     "Tuckasegee"
    ],
    "bbox": [
-    -83.10003,
-    35.24245,
-    -83.07539,
-    35.25698
+    -83.100029,
+    35.242451,
+    -83.075395,
+    35.256979
    ],
    "wikidata": null,
    "charted": false,
@@ -1097,6 +1641,15 @@
    "launches": [
     "cedar-cliff-boat-launch-nc"
    ],
+   "water_id": "cedar-cliff-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "05c75b8f66c63d9abffc6021bb2e10589eddb1e9df9d5b11d5e18246f2d9537b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1108,10 +1661,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.22326,
-    36.28243,
-    -76.21678,
-    36.29758
+    -76.223257,
+    36.282428,
+    -76.216782,
+    36.297582
    ],
    "wikidata": null,
    "charted": false,
@@ -1120,6 +1673,15 @@
     "college-park-nc",
     "waterfront-park-nc"
    ],
+   "water_id": "charles-creek-elizabeth-city-nc",
+   "gnis_id": null,
+   "geometry_hash": "5f480b773dc98e95f3242e84db69feea89e5a3e13e00d7b68a8f36a1e3425870",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1132,10 +1694,10 @@
     "Hayesville"
    ],
    "bbox": [
-    -83.82575,
-    34.91839,
-    -83.71381,
-    35.03756
+    -83.825747,
+    34.918171,
+    -83.713701,
+    35.037555
    ],
    "wikidata": null,
    "charted": false,
@@ -1146,6 +1708,15 @@
     "jackrabbit-nc",
     "ledfords-chapel-nc"
    ],
+   "water_id": "chatuge-lake-ga",
+   "gnis_id": null,
+   "geometry_hash": "903b401deda7f46aa7aad0bb91225695db63e782ca3efc6c89a98bd62a0b2057",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1158,9 +1729,9 @@
     "Tapoco"
    ],
    "bbox": [
-    -83.93995,
-    35.32737,
-    -83.80197,
+    -83.939954,
+    35.327369,
+    -83.801966,
     35.44868
    ],
    "wikidata": null,
@@ -1174,6 +1745,15 @@
     "cheoah-river-mile-5-1-nc",
     "santeetlah-dam-put-in-nc"
    ],
+   "water_id": "cheoah-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "8e8ca42a632fe29148d961ebcecd4ea688d20c0bb0290b593af6faed032cc92c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1191,10 +1771,10 @@
     "Winton"
    ],
    "bbox": [
-    -76.95042,
-    36.0175,
-    -76.67162,
-    36.544
+    -76.950557,
+    36.017498,
+    -76.671621,
+    36.544004
    ],
    "wikidata": null,
    "charted": true,
@@ -1207,6 +1787,15 @@
     "shoups-landing-nc",
     "tunis-nc"
    ],
+   "water_id": "chowan-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "28891441b7958613fcc37abea8fc44c9ca1411013c510a487374639768eae671",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1219,9 +1808,9 @@
    ],
    "bbox": [
     -76.74965,
-    35.82906,
-    -76.68411,
-    35.92492
+    35.829065,
+    -76.684111,
+    35.924922
    ],
    "wikidata": "Q56514886",
    "charted": true,
@@ -1230,6 +1819,15 @@
     "bear-track-landing-conaby-creek-nc",
     "conaby-creek-boat-launch-nc"
    ],
+   "water_id": "conaby-creek-nc",
+   "gnis_id": "1019749",
+   "geometry_hash": "25986f573060b2c276a53cfce05aa24816587081784a3575cef63652c371a347",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1244,10 +1842,10 @@
     "Stantonsburg"
    ],
    "bbox": [
-    -78.1234,
-    35.33972,
-    -77.3907,
-    35.71612
+    -78.123402,
+    35.339723,
+    -77.390701,
+    35.716125
    ],
    "wikidata": null,
    "charted": false,
@@ -1257,6 +1855,15 @@
     "hookerton-nc",
     "snow-hill-nc"
    ],
+   "water_id": "contentnea-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "d65f35c7849109d84c24b8908783a01622887c5861aad4940135942238df9740",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1268,10 +1875,10 @@
     "Ela"
    ],
    "bbox": [
-    -83.39414,
-    35.45247,
-    -83.35195,
-    35.54234
+    -83.394144,
+    35.452469,
+    -83.351947,
+    35.542337
    ],
    "wikidata": null,
    "charted": false,
@@ -1279,6 +1886,15 @@
    "launches": [
     "cooper-creek-boat-launch-nc"
    ],
+   "water_id": "cooper-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "7b7fc2450ce06001372734993ddfbb85c4d2db532dbaa5c2ecef9a9d9d56352a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1296,10 +1912,10 @@
     "Straits"
    ],
    "bbox": [
-    -76.622,
-    34.67481,
-    -76.15191,
-    34.99903
+    -76.622002,
+    34.674811,
+    -76.151911,
+    34.999029
    ],
    "wikidata": null,
    "charted": true,
@@ -1307,6 +1923,19 @@
    "launches": [
     "oyster-creek-nc",
     "straits-landing-nc"
+   ],
+   "water_id": "core-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "4935ca248738d39e8ca66bf0ca43221d108cc02c2acccc8b7211189323d3e2a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "core-sound-boat-launch-near-davis-nc",
+    "core-sound-boat-launch-near-stacy-nc",
+    "core-sound-boat-launch-near-stacy-nc-5"
    ],
    "advisories": []
   },
@@ -1319,10 +1948,10 @@
     "Southport"
    ],
    "bbox": [
-    -78.03337,
+    -78.033373,
     33.91631,
-    -78.02742,
-    33.93141
+    -78.02727,
+    33.931411
    ],
    "wikidata": null,
    "charted": true,
@@ -1330,6 +1959,15 @@
    "launches": [
     "cottage-creek-carry-in-access-nc"
    ],
+   "water_id": "cottage-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "db3fca4350dd176d7d83828751011759ad83f79b5928b899a15c77b7837c5f16",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1341,10 +1979,10 @@
     "Yanceyville"
    ],
    "bbox": [
-    -79.55411,
-    36.29545,
+    -79.554111,
+    36.295453,
     -79.19542,
-    36.54521
+    36.545212
    ],
    "wikidata": null,
    "charted": false,
@@ -1352,6 +1990,15 @@
    "launches": [
     "s-r-farmer-lake-nc"
    ],
+   "water_id": "country-line-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "c5eaa1519fc1f105839af6f586e192bc17000c87c85ba4b7e380e1a5bc128eef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1363,10 +2010,10 @@
     "Hoffman"
    ],
    "bbox": [
-    -79.57047,
-    35.05088,
-    -79.56751,
-    35.05636
+    -79.570466,
+    35.050652,
+    -79.567512,
+    35.056356
    ],
    "wikidata": null,
    "charted": false,
@@ -1374,6 +2021,15 @@
    "launches": [
     "crappie-lake-carry-in-access-nc"
    ],
+   "water_id": "crappie-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "88e6d235e67acac78bf7a6a26feb543f5c1a09459233466c4118457460435895",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1385,10 +2041,10 @@
     "Laurel Hill"
    ],
    "bbox": [
-    -79.57842,
+    -79.578422,
     34.89271,
-    -79.5666,
-    34.89538
+    -79.566601,
+    34.895392
    ],
    "wikidata": null,
    "charted": false,
@@ -1396,6 +2052,15 @@
    "launches": [
     "crawford-lake-carry-in-access-nc"
    ],
+   "water_id": "crawford-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "56d5d9e099bf16de16521b4a0c004787461b76b5839301f86aded8fd591dee6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1409,8 +2074,8 @@
    ],
    "bbox": [
     -75.8072,
-    35.79604,
-    -75.64082,
+    35.796041,
+    -75.640821,
     35.95523
    ],
    "wikidata": null,
@@ -1421,6 +2086,15 @@
     "manns-harbor-nc",
     "weir-point-access-nc"
    ],
+   "water_id": "croatan-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "67d2a1cb2ec504e2dc03e4a982bdf76d0f2facdcc3012859578a447b5daabc04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1432,10 +2106,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.02631,
-    36.30959,
-    -76.00213,
-    36.3175
+    -76.026312,
+    36.309587,
+    -76.002133,
+    36.317495
    ],
    "wikidata": null,
    "charted": true,
@@ -1443,6 +2117,15 @@
    "launches": [
     "garrington-island-road-access-nc"
    ],
+   "water_id": "crooked-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "43c298ba90a0ff3513cbcf8289943bcade894bae05e675fbb2a0fa1914c228fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1464,10 +2147,10 @@
     "Waterlily"
    ],
    "bbox": [
-    -76.06214,
+    -76.062136,
     36.08046,
-    -75.74282,
-    36.60016
+    -75.742788,
+    36.600163
    ],
    "wikidata": "Q4251480",
    "charted": true,
@@ -1479,6 +2162,20 @@
     "office-boat-launch-nc",
     "poplar-branch-nc",
     "whalehead-club-heritage-park-nc"
+   ],
+   "water_id": "currituck-sound-nc",
+   "gnis_id": "1025273",
+   "geometry_hash": "12749ece6740d73f9b79cf8906d013bedc02073406818dae2cfed396126ef6f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "currituck-sound-boat-launch-near-currituck-nc-3",
+    "currituck-sound-boat-launch-near-knotts-island-nc",
+    "currituck-sound-boat-launch-near-waterlily-nc",
+    "currituck-sound-boat-launch-near-waterlily-nc-2"
    ],
    "advisories": []
   },
@@ -1497,10 +2194,10 @@
     "Westfield"
    ],
    "bbox": [
-    -80.45056,
-    36.3018,
-    -78.74852,
-    36.78222
+    -80.450751,
+    36.301802,
+    -78.748521,
+    36.782223
    ],
    "wikidata": "Q1159151",
    "charted": false,
@@ -1520,6 +2217,15 @@
     "pitzer-road-public-fishing-area-nc",
     "settles-bridge-access-nc"
    ],
+   "water_id": "dan-river-nc",
+   "gnis_id": "1465581",
+   "geometry_hash": "895e7992240036585d3e463f3500f40c73a127ee9a613d100938beb0b1647cdc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1533,10 +2239,10 @@
     "Oriental"
    ],
    "bbox": [
-    -76.81794,
-    34.99201,
-    -76.75427,
-    35.0333
+    -76.817943,
+    34.992013,
+    -76.754271,
+    35.033303
    ],
    "wikidata": null,
    "charted": true,
@@ -1544,6 +2250,15 @@
    "launches": [
     "dawson-creek-boat-launch-nc"
    ],
+   "water_id": "dawson-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "95a60619ee5d7b16da40dfc1cfb66b479d8822623eee6c28eb15fe0601dcc4e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1556,10 +2271,10 @@
     "Sanford"
    ],
    "bbox": [
-    -79.94846,
-    35.45646,
-    -79.05257,
-    35.99713
+    -79.948462,
+    35.456457,
+    -79.052567,
+    35.997131
    ],
    "wikidata": "Q5250264",
    "charted": false,
@@ -1569,6 +2284,15 @@
     "us-hwy-421-lee-county-nc",
     "worthville-road-nc"
    ],
+   "water_id": "deep-river-nc",
+   "gnis_id": "1023944",
+   "geometry_hash": "a72633291997f0495cc129ac433013f2b2cdb78651baceedf09c21cd30003f56",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1581,9 +2305,9 @@
    ],
    "bbox": [
     -76.38898,
-    36.38885,
-    -76.28541,
-    36.74606
+    36.388854,
+    -76.285409,
+    36.746061
    ],
    "wikidata": "Q2936090",
    "charted": true,
@@ -1591,6 +2315,15 @@
    "launches": [
     "dismal-swamp-state-park-and-welcome-center-nc"
    ],
+   "water_id": "dismal-swamp-canal-nc",
+   "gnis_id": "1502002",
+   "geometry_hash": "3dd117860a5b76137f9403b6c1fad5b481db9b9adb93a500e901226b6231d21d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1602,10 +2335,10 @@
     "Kitty Hawk"
    ],
    "bbox": [
-    -75.72014,
-    36.05135,
-    -75.71285,
-    36.07364
+    -75.720139,
+    36.051353,
+    -75.712719,
+    36.073637
    ],
    "wikidata": null,
    "charted": true,
@@ -1613,6 +2346,15 @@
    "launches": [
     "sandy-run-park-nc"
    ],
+   "water_id": "duck-pond-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "ff192df6a7095a12bb2a40cb55de3a7e6eeb28baf0132bdb2b575dfd0eab2290",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1624,10 +2366,10 @@
     "Southport"
    ],
    "bbox": [
-    -78.0587,
+    -78.058695,
     33.91998,
-    -78.03131,
-    33.9731
+    -78.031306,
+    33.973098
    ],
    "wikidata": null,
    "charted": true,
@@ -1635,6 +2377,15 @@
    "launches": [
     "oak-island-nc"
    ],
+   "water_id": "dutchman-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "a458cc5e9f6626c89ce5d0acdd71d1ecfa3e6b5d7f7429e3b35ec8fd21dd4d49",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1646,10 +2397,10 @@
     "Manns Harbor"
    ],
    "bbox": [
-    -75.825,
-    35.92171,
-    -75.81002,
-    35.93229
+    -75.824999,
+    35.921711,
+    -75.810021,
+    35.932289
    ],
    "wikidata": null,
    "charted": true,
@@ -1657,6 +2408,15 @@
    "launches": [
     "mashoes-nc"
    ],
+   "water_id": "east-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "42bb3d0cdfdea31f30bea8f2de4c87d6d0889f421cdac18fe59ca65a555ea76a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1668,10 +2428,10 @@
     "Durham"
    ],
    "bbox": [
-    -79.15819,
-    36.04188,
-    -78.81261,
-    36.12849
+    -79.158194,
+    36.041881,
+    -78.812606,
+    36.128495
    ],
    "wikidata": "Q2913438",
    "charted": false,
@@ -1679,6 +2439,15 @@
    "launches": [
     "eno-river-boat-launch-nc"
    ],
+   "water_id": "eno-river-nc",
+   "gnis_id": "984804",
+   "geometry_hash": "7439d85f9b3cdee60690e84a5e94b903fffc6ef94da1b0bb91df07a7c8be420f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1696,6 +2465,15 @@
    "launches": [
     "etheridge-pond-carry-in-access-nc"
    ],
+   "water_id": "etheridge-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1710,10 +2488,10 @@
     "Wake Forest"
    ],
    "bbox": [
-    -78.80589,
-    35.92928,
-    -78.57302,
-    36.10287
+    -78.805885,
+    35.929277,
+    -78.573025,
+    36.102867
    ],
    "wikidata": null,
    "charted": false,
@@ -1724,6 +2502,15 @@
     "ledge-rock-nc",
     "upper-bartons-creek-nc"
    ],
+   "water_id": "falls-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "9b2098931f6a2a2f726d0f0e4b0e1d545a736eefe93db157063a95f2ce31bb00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1750,10 +2537,10 @@
     "Badin"
    ],
    "bbox": [
-    -80.09565,
-    35.39218,
-    -80.07504,
-    35.41941
+    -80.095645,
+    35.392181,
+    -80.075037,
+    35.419413
    ],
    "wikidata": "Q5432488",
    "charted": false,
@@ -1761,6 +2548,15 @@
    "launches": [
     "falls-reservoir-boat-launch-near-badin-nc"
    ],
+   "water_id": "falls-reservoir-nc",
+   "gnis_id": "1017188",
+   "geometry_hash": "3396b85a5d90d6aa432dcde88874768963b523924f7dd0442780672802a8855d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1773,10 +2569,10 @@
     "Shelby"
    ],
    "bbox": [
-    -81.79359,
-    35.19294,
-    -81.54308,
-    35.53238
+    -81.793588,
+    35.192942,
+    -81.543083,
+    35.532382
    ],
    "wikidata": "Q5452567",
    "charted": false,
@@ -1786,6 +2582,15 @@
     "nc-hwy-10-nc",
     "shelby-nc"
    ],
+   "water_id": "first-broad-river-nc",
+   "gnis_id": "1023970",
+   "geometry_hash": "dabce933170c880ac38cb953c62135c1300b533103fd3b95df497942e4d0ef23",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1799,8 +2604,8 @@
    ],
    "bbox": [
     -80.87763,
-    36.2668,
-    -80.67459,
+    36.266798,
+    -80.674556,
     36.56322
    ],
    "wikidata": null,
@@ -1810,6 +2615,15 @@
     "bray-ford-access-nc",
     "old-highway-601-access-nc"
    ],
+   "water_id": "fisher-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "c4d746077ca16e1307cea6be744f7c8c1f176b57f98afd55509a6a7b3b04cc47",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1822,9 +2636,9 @@
    ],
    "bbox": [
     -79.39491,
-    35.25768,
-    -79.39147,
-    35.2609
+    35.257683,
+    -79.391469,
+    35.260961
    ],
    "wikidata": null,
    "charted": false,
@@ -1832,6 +2646,15 @@
    "launches": [
     "fly-rod-lake-boat-ramp-nc"
    ],
+   "water_id": "fly-rod-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "c6378e35f94fa68810b920c857d22f0b14706bfad539db197a4c8597f02c4764",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1846,10 +2669,10 @@
     "Robbinsville"
    ],
    "bbox": [
-    -83.80977,
-    35.33467,
-    -83.5052,
-    35.48456
+    -83.809766,
+    35.3345,
+    -83.505198,
+    35.484558
    ],
    "wikidata": "Q5465129",
    "charted": false,
@@ -1860,6 +2683,15 @@
     "lemmons-branch-nc",
     "tsali-nc"
    ],
+   "water_id": "fontana-lake-nc",
+   "gnis_id": "1011304",
+   "geometry_hash": "561367a859a418130f776911f9a9eda5c3dfc4ca5bebfe1a4ee35cf9576af58a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -1885,10 +2717,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.20383,
-    36.28608,
-    -76.19762,
-    36.2907
+    -76.203829,
+    36.286081,
+    -76.197622,
+    36.290699
    ],
    "wikidata": null,
    "charted": true,
@@ -1896,6 +2728,15 @@
    "launches": [
     "causeway-park-nc"
    ],
+   "water_id": "forbes-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": "68e7f31754b5e4a06adfff42e364c70203870b502ffa479d0c87aba51c7d4efa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1918,10 +2759,10 @@
     "Rosman"
    ],
    "bbox": [
-    -82.91965,
-    35.13539,
-    -82.52772,
-    35.94499
+    -82.919647,
+    35.135395,
+    -82.527717,
+    35.944986
    ],
    "wikidata": "Q478303",
    "charted": false,
@@ -1947,6 +2788,15 @@
     "westfeldt-park-nc",
     "woodfin-park-access-nc"
    ],
+   "water_id": "french-broad-river-nc",
+   "gnis_id": "1306463",
+   "geometry_hash": "07451ce4e05c723c8c8d494ba10f387fdb08b1e85edbe9f3e84dd2ac2f3d66ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1958,16 +2808,56 @@
     "Maysville"
    ],
    "bbox": [
-    -77.06187,
+    -77.061866,
     34.84909,
-    -77.01885,
-    34.88685
+    -77.018849,
+    34.886847
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 10.424,
    "launches": [
     "great-lake-boat-launch-nc"
+   ],
+   "water_id": "great-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "6dc8e858279bac5c9173eec392f1de6f31a709493db5b16abbd6ce0c9923eebc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "great-pond-nc",
+   "name": "Great Pond",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Roe"
+   ],
+   "bbox": [
+    -76.308846,
+    34.988518,
+    -76.304943,
+    34.991768
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.038,
+   "launches": [],
+   "water_id": "great-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": "4775fe7dc59c8e9a40ebceaade748cdd97587bcd6027ba1615235d643e68894b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "great-pond-boat-launch-near-roe-nc"
    ],
    "advisories": []
   },
@@ -1980,10 +2870,10 @@
     "Saluda"
    ],
    "bbox": [
-    -82.39937,
-    35.23337,
-    -81.96956,
-    35.34489
+    -82.399367,
+    35.233372,
+    -81.969556,
+    35.344971
    ],
    "wikidata": null,
    "charted": false,
@@ -1992,6 +2882,15 @@
     "big-rock-access-nc",
     "fishtop-access-nc"
    ],
+   "water_id": "green-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "8d25a5e2448364dce47980da991f308e084b4473b2530a8211bae2ed510135fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2003,10 +2902,10 @@
     "Oriental"
    ],
    "bbox": [
-    -76.75549,
-    35.00048,
+    -76.755494,
+    35.000484,
     -76.67533,
-    35.04449
+    35.044485
    ],
    "wikidata": null,
    "charted": true,
@@ -2014,6 +2913,15 @@
    "launches": [
     "oriental-nc"
    ],
+   "water_id": "greens-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "46fc36f6612910db886b2e6caa4b0bbc0d221acd6bb4a514497b579b2869b801",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2025,10 +2933,10 @@
     "Columbia"
    ],
    "bbox": [
-    -76.11782,
-    35.69085,
-    -76.10979,
-    35.69726
+    -76.117821,
+    35.690853,
+    -76.109791,
+    35.697261
    ],
    "wikidata": null,
    "charted": true,
@@ -2036,6 +2944,15 @@
    "launches": [
     "gum-neck-landing-nc"
    ],
+   "water_id": "gum-neck-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "4b099d40aef5d3a138e46fcf2616520a2dbd4981fb441712561c6cc2a4dab353",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2047,10 +2964,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.28558,
-    36.2162,
-    -76.26895,
-    36.25613
+    -76.285576,
+    36.216204,
+    -76.268947,
+    36.256128
    ],
    "wikidata": null,
    "charted": true,
@@ -2058,6 +2975,15 @@
    "launches": [
     "halls-creek-boat-launch-nc"
    ],
+   "water_id": "halls-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "a910debc51dcac85ad577e7661f376ad0ac8c8ef59db7123a68a871cea01c139",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2069,16 +2995,27 @@
     "Hamlet"
    ],
    "bbox": [
-    -79.69289,
-    34.88293,
-    -79.68291,
-    34.88928
+    -79.692894,
+    34.882928,
+    -79.682905,
+    34.889282
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.184,
    "launches": [
     "hamlet-city-park-nc"
+   ],
+   "water_id": "hamlet-city-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "b1c4868127f7a83644a7d184c00aee66a781f9d62677ffe08b4b11cc2dd7bfa8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hamlet-city-lake-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -2092,9 +3029,9 @@
    ],
    "bbox": [
     -76.8675,
-    34.85109,
-    -76.84627,
-    34.93594
+    34.851092,
+    -76.846007,
+    34.935939
    ],
    "wikidata": null,
    "charted": true,
@@ -2103,6 +3040,15 @@
     "percy-berry-nc",
     "percy-berry-boating-access-area-nc"
    ],
+   "water_id": "hancock-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "56695386846b4b847ec32c1ea44374ce6aff323f90ae101dec910fd278c8713d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2115,10 +3061,10 @@
     "New Hill"
    ],
    "bbox": [
-    -78.9886,
-    35.56653,
-    -78.89819,
-    35.64994
+    -78.988739,
+    35.566533,
+    -78.898186,
+    35.649942
    ],
    "wikidata": "Q1586205",
    "charted": false,
@@ -2128,6 +3074,15 @@
     "harris-lake-park-nc",
     "hollemans-crossing-nc"
    ],
+   "water_id": "harris-lake-nc",
+   "gnis_id": "1024879",
+   "geometry_hash": "0365ce520ced91793dee95fc4f165e509615a928ff1e9d6924c6d49e4e381c80",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2149,10 +3104,10 @@
     "Terrells"
    ],
    "bbox": [
-    -80.03726,
-    35.596,
-    -79.05052,
-    36.27631
+    -80.037257,
+    35.596004,
+    -79.050515,
+    36.276307
    ],
    "wikidata": "Q14707960",
    "charted": false,
@@ -2170,6 +3125,15 @@
     "swepsonville-river-park-upper-access-nc",
     "union-bridge-paddle-access-nc"
    ],
+   "water_id": "haw-river-nc",
+   "gnis_id": "986517",
+   "geometry_hash": "fcdce9d8eba99b3f645c03436b634375c157e551e613032f4ec5f7c4ef5c20b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2181,10 +3145,10 @@
     "Jamestown"
    ],
    "bbox": [
-    -79.96092,
-    35.99447,
-    -79.93599,
-    36.02375
+    -79.960921,
+    35.994467,
+    -79.935988,
+    36.023749
    ],
    "wikidata": null,
    "charted": false,
@@ -2192,6 +3156,15 @@
    "launches": [
     "high-point-city-lake-park-nc"
    ],
+   "water_id": "high-point-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "c3ef835cfc9e5e5ca174e52924e4e9c3760a5f1d6e69dea9c1328220bf42fcbe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2223,6 +3196,15 @@
    "launches": [
     "high-rock-access-nc"
    ],
+   "water_id": "high-rock-game-land-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2238,9 +3220,9 @@
    ],
    "bbox": [
     -80.40442,
-    35.58558,
-    -80.16805,
-    35.75037
+    35.585526,
+    -80.168045,
+    35.750373
    ],
    "wikidata": "Q1436627",
    "charted": false,
@@ -2249,6 +3231,15 @@
     "dutch-second-nc",
     "york-hill-yadkin-river-access-nc"
    ],
+   "water_id": "high-rock-lake-nc",
+   "gnis_id": "1023730",
+   "geometry_hash": "27fce12271b6731dbf6a76963f9dab323c3444e8faab776ad6c4662e70032534",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2274,10 +3265,10 @@
     "Rockingham"
    ],
    "bbox": [
-    -79.75025,
-    34.9367,
-    -79.73873,
-    34.93942
+    -79.750247,
+    34.936478,
+    -79.738729,
+    34.939465
    ],
    "wikidata": null,
    "charted": false,
@@ -2285,6 +3276,15 @@
    "launches": [
     "hinson-lake-carry-in-access-nc"
    ],
+   "water_id": "hinson-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "01600e74e3e320333a6c4e2fe1f9be55844a6b7e6687b8f0fe80c4a4e80435f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2298,10 +3298,10 @@
     "Ogreeta"
    ],
    "bbox": [
-    -84.20273,
-    35.0385,
-    -84.02307,
-    35.186
+    -84.202732,
+    35.038496,
+    -84.023074,
+    35.186003
    ],
    "wikidata": "Q122609903",
    "charted": false,
@@ -2313,6 +3313,18 @@
     "hiwassee-lake-boat-launch-near-murphy-nc",
     "payne-street-slipway-nc",
     "ramsey-bluff-nc"
+   ],
+   "water_id": "hiwassee-lake-nc",
+   "gnis_id": "1012084",
+   "geometry_hash": "7dad863a8ef7a902f1fcdada42e2ce828d540d080dc0256da0a074b52a6582c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "duke-s-hideaway-marina-slipway-nc",
+    "shooks-marina-slipway-nc"
    ],
    "advisories": []
   },
@@ -2326,10 +3338,10 @@
     "Murphy"
    ],
    "bbox": [
-    -84.34355,
-    34.93628,
-    -83.75549,
-    35.18547
+    -84.343546,
+    34.936284,
+    -83.755487,
+    35.185473
    ],
    "wikidata": "Q3138706",
    "charted": false,
@@ -2339,6 +3351,15 @@
     "hiwassee-street-slipway-nc",
     "mission-trailrace-access-nc"
    ],
+   "water_id": "hiwassee-river-nc",
+   "gnis_id": "1328447",
+   "geometry_hash": "1a7ad55bf08277d078ee657f5abfac192de26d26f9727d3826beda297db49077",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2350,10 +3371,10 @@
     "Burgaw"
    ],
    "bbox": [
-    -77.82895,
-    34.58852,
+    -77.828951,
+    34.588519,
     -77.64005,
-    34.67709
+    34.677089
    ],
    "wikidata": null,
    "charted": false,
@@ -2361,6 +3382,15 @@
    "launches": [
     "shelter-creek-nc"
    ],
+   "water_id": "holly-shelter-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "54cfd489c8c6996059fa26d3ff14af058813723759fbd04072b161a69ef75840",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2372,10 +3402,10 @@
     "Swan Quarter"
    ],
    "bbox": [
-    -76.21784,
-    35.39768,
-    -76.2096,
-    35.41944
+    -76.217844,
+    35.397682,
+    -76.209604,
+    35.419442
    ],
    "wikidata": null,
    "charted": false,
@@ -2383,6 +3413,15 @@
    "launches": [
     "hydeland-canal-boat-launch-nc"
    ],
+   "water_id": "hydeland-canal-nc",
+   "gnis_id": null,
+   "geometry_hash": "338e6d2b0ea1b9df0844bb286f4eb5a030a4f06e3b78f9d78fda33eefb398984",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2394,10 +3433,10 @@
     "Hoffman"
    ],
    "bbox": [
-    -79.57517,
-    35.01037,
-    -79.57191,
-    35.01186
+    -79.575168,
+    35.010366,
+    -79.571908,
+    35.011861
    ],
    "wikidata": null,
    "charted": false,
@@ -2405,6 +3444,15 @@
    "launches": [
     "indian-camp-access-nc"
    ],
+   "water_id": "indian-camp-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "a2ae48132bf7a3fcf31fe5a7c808eb561048a40c76e2b70ac5b18d2abcdc508a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2416,10 +3464,10 @@
     "Burlington"
    ],
    "bbox": [
-    -79.44538,
-    36.13639,
-    -79.44534,
-    36.13653
+    -79.445382,
+    36.136386,
+    -79.445339,
+    36.136532
    ],
    "wikidata": null,
    "charted": false,
@@ -2427,6 +3475,15 @@
    "launches": [
     "indian-valley-paddle-access-nc"
    ],
+   "water_id": "indian-valley-paddle-access-nc",
+   "gnis_id": null,
+   "geometry_hash": "f5f75288e68e30ac8f575eab6578120bab92054fb3fb1ab58c881d664f1d8873",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2439,9 +3496,9 @@
    ],
    "bbox": [
     -76.12497,
-    36.34618,
-    -76.04562,
-    36.36029
+    36.346183,
+    -76.045624,
+    36.360292
    ],
    "wikidata": null,
    "charted": false,
@@ -2449,6 +3506,15 @@
    "launches": [
     "indiantown-access-nc"
    ],
+   "water_id": "indiantown-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "f8ddafb9fb427ecd9e481a25d4a9831dc9141a50b9dfb6fea7a189cf07ab4df3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2465,10 +3531,10 @@
     "Sunset Beach"
    ],
    "bbox": [
-    -78.66752,
-    33.84217,
+    -78.667519,
+    33.842167,
     -78.32097,
-    33.97827
+    33.978271
    ],
    "wikidata": null,
    "charted": true,
@@ -2478,6 +3544,17 @@
     "holden-beach-nc",
     "ocean-isle-beach-nc",
     "sunset-beach-nc"
+   ],
+   "water_id": "intracoastal-waterway-calabash-nc",
+   "gnis_id": null,
+   "geometry_hash": "7e741bd265c6843f1fd35eeef85865d9f623e7d38a788c67e5efbd3ff683366c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "intracoastal-waterway-boat-launch-near-shallotte-nc"
    ],
    "advisories": []
   },
@@ -2496,6 +3573,15 @@
    "launches": [
     "turkey-creek-nc"
    ],
+   "water_id": "intracoastal-waterway-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2507,10 +3593,10 @@
     "Concord"
    ],
    "bbox": [
-    -80.62089,
-    35.36376,
-    -80.61693,
-    35.36532
+    -80.620888,
+    35.363758,
+    -80.616929,
+    35.365315
    ],
    "wikidata": null,
    "charted": false,
@@ -2518,6 +3604,15 @@
    "launches": [
     "frank-liske-park-nc"
    ],
+   "water_id": "jackson-training-school-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "257858e0223532a9da11a9328740877ba329a216115db259b0fff0336844cc3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2532,7 +3627,7 @@
    "bbox": [
     -81.73337,
     35.77863,
-    -81.65214,
+    -81.652136,
     36.11927
    ],
    "wikidata": null,
@@ -2541,6 +3636,17 @@
    "launches": [
     "corpening-bridge-access-area-nc",
     "johns-river-boat-launch-nc"
+   ],
+   "water_id": "johns-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "40ef8b631b7419249625a303a81035a39530162e09d03d1122b7dd9061e89866",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cascading-falls-nc"
    ],
    "advisories": []
   },
@@ -2553,16 +3659,56 @@
     "Stanley"
    ],
    "bbox": [
-    -81.00851,
-    35.38187,
-    -80.98167,
-    35.43015
+    -81.008506,
+    35.381874,
+    -80.981588,
+    35.430147
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "lucia-nc"
+   ],
+   "water_id": "johnson-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "107c3ae017cd74825ea3bfb5dcc3ae65506c354e75a101aef9aa0aaf592ab829",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jordan-creek-nc",
+   "name": "Jordan Creek",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Belhaven"
+   ],
+   "bbox": [
+    -76.635356,
+    35.450273,
+    -76.605997,
+    35.463451
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.573,
+   "launches": [],
+   "water_id": "jordan-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "2662e59bd0f37b4ad590a44d7ac38531781901157c7da4b313be4f7f003836a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "jordan-creek-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -2581,10 +3727,10 @@
     "Wilsonville"
    ],
    "bbox": [
-    -79.10467,
-    35.64128,
-    -78.94857,
-    35.86986
+    -79.104668,
+    35.641278,
+    -78.948481,
+    35.869856
    ],
    "wikidata": "Q6276690",
    "charted": false,
@@ -2594,6 +3740,46 @@
     "jordan-lake-boat-launch-near-pittsboro-nc-5",
     "robeson-creek-boat-ramp-nc",
     "jordan-lake-boat-launch-near-wilsonville-nc"
+   ],
+   "water_id": "jordan-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "12536fa22e9a22ce8526348ae108bde0ef19e37b5abfa7bc3a944c342d2c0c9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kendrick-creek-nc",
+   "name": "Kendrick Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Pleasant Grove"
+   ],
+   "bbox": [
+    -76.623519,
+    35.813522,
+    -76.594423,
+    35.939091
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "kendrick-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "8e1619b54503e1e1c02f475377d1b9233a82bd401c7a350007730e0b6b96d834",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "mackeys-marina-nc"
    ],
    "advisories": []
   },
@@ -2606,10 +3792,10 @@
     "Kernersville"
    ],
    "bbox": [
-    -80.1076,
-    36.14884,
-    -80.09964,
-    36.15493
+    -80.107597,
+    36.148841,
+    -80.09952,
+    36.154927
    ],
    "wikidata": null,
    "charted": false,
@@ -2617,6 +3803,15 @@
    "launches": [
     "kernersville-lake-carry-in-access-nc"
    ],
+   "water_id": "kernersville-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "ae8b3aabe327e7475804ef9508ac56af5c5a1e17dbf9f6b3766717439b15261f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2634,10 +3829,10 @@
     "Woodworth"
    ],
    "bbox": [
-    -78.75093,
-    36.3847,
-    -78.26784,
-    36.73305
+    -78.750931,
+    36.384705,
+    -78.267844,
+    36.733052
    ],
    "wikidata": "Q1700320",
    "charted": false,
@@ -2651,6 +3846,15 @@
     "henderson-point-park-west-boat-ramp-nc",
     "hibernia-nc"
    ],
+   "water_id": "kerr-lake-buggs-island-lake-nc",
+   "gnis_id": "1501629",
+   "geometry_hash": "0645f73fa311e29403cce25c0667ef6f483654bc142f246d8225942da96eec48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2662,9 +3866,9 @@
     "Engelhard"
    ],
    "bbox": [
-    -75.99785,
+    -75.997852,
     35.51192,
-    -75.98534,
+    -75.985344,
     35.51829
    ],
    "wikidata": null,
@@ -2673,6 +3877,15 @@
    "launches": [
     "engelhard-nc"
    ],
+   "water_id": "kitty-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "2214764ddec2083861f80c5819925dc86d6e4c5c5ca6f1aaf0672f93d222469f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2684,10 +3897,10 @@
     "Kill Devil Hills"
    ],
    "bbox": [
-    -75.73381,
-    36.01417,
-    -75.68743,
-    36.06029
+    -75.733807,
+    36.014171,
+    -75.687431,
+    36.060289
    ],
    "wikidata": null,
    "charted": true,
@@ -2695,6 +3908,15 @@
    "launches": [
     "avalon-beach-nc"
    ],
+   "water_id": "kitty-hawk-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": "5a238f8bcfaf9cd80f97ef5870837de59a8966889bfff683a53d9ec79634c3f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2706,10 +3928,10 @@
     "Elizabeth City"
    ],
    "bbox": [
-    -76.30203,
-    36.30514,
-    -76.20896,
-    36.35514
+    -76.302033,
+    36.305142,
+    -76.208957,
+    36.355143
    ],
    "wikidata": null,
    "charted": true,
@@ -2717,6 +3939,15 @@
    "launches": [
     "knobbs-creek-park-nc"
    ],
+   "water_id": "knobbs-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "2d6b0b448c629b66c5369cca45fcaf8b76befdc5782cba33b46189eb5c16353b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2728,16 +3959,27 @@
     "Knotts Island"
    ],
    "bbox": [
-    -75.91104,
-    36.48362,
-    -75.88147,
-    36.51265
+    -75.911043,
+    36.483624,
+    -75.881474,
+    36.512654
    ],
    "wikidata": "Q49381881",
    "charted": true,
    "area_km2": 5.593,
    "launches": [
     "brumley-road-nc"
+   ],
+   "water_id": "knotts-island-bay-nc",
+   "gnis_id": "988054",
+   "geometry_hash": "2ba134052921acf83e29e395947f92f5f4e8c2638a803e1b8293bcf9cbf8fecd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "knotts-island-bay-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -2750,9 +3992,9 @@
     "Sunny View"
    ],
    "bbox": [
-    -82.23552,
-    35.32636,
-    -82.18713,
+    -82.235515,
+    35.326361,
+    -82.187017,
     35.34852
    ],
    "wikidata": null,
@@ -2761,6 +4003,15 @@
    "launches": [
     "lake-adger-boat-launch-nc"
    ],
+   "water_id": "lake-adger-nc",
+   "gnis_id": null,
+   "geometry_hash": "75c39296e2038c4a1c07c49e3c50def0ff17eeb995ceed46fabc1a51867d01d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2772,10 +4023,10 @@
     "Hillsborough"
    ],
    "bbox": [
-    -79.13138,
-    36.07004,
-    -79.13023,
-    36.07126
+    -79.131648,
+    36.070037,
+    -79.130232,
+    36.071425
    ],
    "wikidata": null,
    "charted": false,
@@ -2783,6 +4034,15 @@
    "launches": [
     "lake-ben-johnson-boat-launch-nc"
    ],
+   "water_id": "lake-ben-johnson-nc",
+   "gnis_id": null,
+   "geometry_hash": "8d94ec3734d19452773ecbd153e4a3fd768d8ca7b7b33855533251c4d6ad4958",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2794,10 +4054,10 @@
     "Greensboro"
    ],
    "bbox": [
-    -79.88819,
-    36.14545,
-    -79.83714,
-    36.17729
+    -79.888186,
+    36.145452,
+    -79.837135,
+    36.177287
    ],
    "wikidata": null,
    "charted": false,
@@ -2805,6 +4065,15 @@
    "launches": [
     "lake-brandt-boat-launch-nc"
    ],
+   "water_id": "lake-brandt-nc",
+   "gnis_id": null,
+   "geometry_hash": "f2e6ca0f5fd015bc9b4e7e76a78fe1bbdc5458dd38674b5b73edad2462587287",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2816,10 +4085,10 @@
     "Burlington"
    ],
    "bbox": [
-    -79.44493,
-    36.17737,
-    -79.39366,
-    36.23305
+    -79.444934,
+    36.177374,
+    -79.393655,
+    36.23314
    ],
    "wikidata": null,
    "charted": false,
@@ -2827,6 +4096,15 @@
    "launches": [
     "lake-cammack-boat-launch-near-burlington-nc"
    ],
+   "water_id": "lake-cammack-nc",
+   "gnis_id": null,
+   "geometry_hash": "e6bd5a08a545095695be0262d286d6fde3bea858201ec9ebf2a3084d8e17df3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2838,8 +4116,8 @@
     "Morrisville"
    ],
    "bbox": [
-    -78.80944,
-    35.83036,
+    -78.809443,
+    35.830326,
     -78.78301,
     35.84733
    ],
@@ -2849,6 +4127,15 @@
    "launches": [
     "lake-crabtree-boat-launch-nc"
    ],
+   "water_id": "lake-crabtree-nc",
+   "gnis_id": "1002956",
+   "geometry_hash": "c9bc44da0e2b4d20a40b4f5a701ffaf595c84e9c5dfe5c72d68c6d275546b787",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -2874,9 +4161,9 @@
     "Oxford"
    ],
    "bbox": [
-    -78.63424,
-    36.29949,
-    -78.61817,
+    -78.634237,
+    36.299492,
+    -78.618167,
     36.30855
    ],
    "wikidata": null,
@@ -2885,6 +4172,15 @@
    "launches": [
     "lake-devin-carry-in-access-nc"
    ],
+   "water_id": "lake-devin-nc",
+   "gnis_id": null,
+   "geometry_hash": "076256158d673281d9054a76bdae73889a5de900832bbaf8417cc3a2e9284f53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2901,9 +4197,9 @@
    ],
    "bbox": [
     -78.3007,
-    36.464,
-    -77.80995,
-    36.62421
+    36.463995,
+    -77.809949,
+    36.624213
    ],
    "wikidata": "Q732199",
    "charted": false,
@@ -2913,6 +4209,17 @@
     "henrico-nc",
     "salmons-landing-nc",
     "summit-nc"
+   ],
+   "water_id": "lake-gaston-nc",
+   "gnis_id": "985605",
+   "geometry_hash": "acbcc6015ce6542794a89843a4889af0d8ea36a8e95144334c6fe000da9a42dc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-gaston-boat-launch-near-roanoke-rapids-nc"
    ],
    "advisories": []
   },
@@ -2925,9 +4232,9 @@
     "Cullowhee"
    ],
    "bbox": [
-    -83.17702,
-    35.13674,
-    -83.12195,
+    -83.177021,
+    35.136736,
+    -83.121947,
     35.19809
    ],
    "wikidata": null,
@@ -2937,6 +4244,15 @@
     "pine-creek-nc",
     "powerhouse-nc"
    ],
+   "water_id": "lake-glenville-nc",
+   "gnis_id": null,
+   "geometry_hash": "c7161ba57a0ee401b59c6cefbac7b350e95f3e151dc8a4748335f4a8c83d152b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2948,10 +4264,10 @@
     "Yadkinville"
    ],
    "bbox": [
-    -80.75141,
-    36.12569,
-    -80.73,
-    36.13853
+    -80.751411,
+    36.125695,
+    -80.729998,
+    36.138534
    ],
    "wikidata": null,
    "charted": false,
@@ -2959,6 +4275,15 @@
    "launches": [
     "lake-hampton-boat-launch-nc"
    ],
+   "water_id": "lake-hampton-nc",
+   "gnis_id": null,
+   "geometry_hash": "2ac540fe57433373757ac4448a9eb4bfbe06b68b56917414393719822973def8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2975,10 +4300,10 @@
     "Taylorsville"
    ],
    "bbox": [
-    -81.43799,
-    35.75501,
-    -81.19229,
-    35.83389
+    -81.437995,
+    35.755011,
+    -81.192191,
+    35.833886
    ],
    "wikidata": null,
    "charted": false,
@@ -2991,6 +4316,15 @@
     "oxford-nc",
     "wittenburg-nc"
    ],
+   "water_id": "lake-hickory-nc",
+   "gnis_id": null,
+   "geometry_hash": "afa9404907225c310a43de01570ee3e626f242133876f66cd04b6ee199e2ab98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3002,10 +4336,10 @@
     "Summerfield"
    ],
    "bbox": [
-    -79.90217,
-    36.14785,
-    -79.87895,
-    36.171
+    -79.902175,
+    36.147728,
+    -79.878851,
+    36.171003
    ],
    "wikidata": null,
    "charted": false,
@@ -3013,6 +4347,15 @@
    "launches": [
     "lake-higgins-marina-nc"
    ],
+   "water_id": "lake-higgins-nc",
+   "gnis_id": null,
+   "geometry_hash": "d10cce7561d0f2841b48eca788b35ddbd2070ce79e9a1707362f53ece224d5a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3025,10 +4368,10 @@
     "Nebo"
    ],
    "bbox": [
-    -81.99982,
+    -81.999819,
     35.71393,
-    -81.82004,
-    35.79624
+    -81.820038,
+    35.796236
    ],
    "wikidata": "Q1485910",
    "charted": false,
@@ -3039,6 +4382,15 @@
     "hidden-cove-boat-ramp-nc",
     "linville-river-nc"
    ],
+   "water_id": "lake-james-nc",
+   "gnis_id": "1012434",
+   "geometry_hash": "54bd4e196c7323635f7286ab638a70c7d7878491d18ce64fb799ebaa5d774c01",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3050,10 +4402,10 @@
     "Raleigh"
    ],
    "bbox": [
-    -78.72307,
+    -78.723069,
     35.75603,
-    -78.70465,
-    35.76802
+    -78.704653,
+    35.768023
    ],
    "wikidata": null,
    "charted": false,
@@ -3061,6 +4413,15 @@
    "launches": [
     "lake-johnson-park-nc"
    ],
+   "water_id": "lake-johnson-nc",
+   "gnis_id": null,
+   "geometry_hash": "8360cbd4d383b120e9f058d23b98a533148ef06c5648d8358b7bb290a8ab6de6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3072,10 +4433,10 @@
     "Arden"
    ],
    "bbox": [
-    -82.54733,
-    35.46285,
-    -82.52372,
-    35.48363
+    -82.547333,
+    35.462848,
+    -82.523719,
+    35.483627
    ],
    "wikidata": "Q34899233",
    "charted": false,
@@ -3083,6 +4444,15 @@
    "launches": [
     "lake-julian-carry-in-access-nc"
    ],
+   "water_id": "lake-julian-nc",
+   "gnis_id": "1017210",
+   "geometry_hash": "fdf7b6531cedaa1c99a26703d9bf21952fe0d32b8ac13158f45253a3fb39f677",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3095,15 +4465,26 @@
    ],
    "bbox": [
     -79.88034,
-    35.7351,
-    -79.85278,
-    35.75007
+    35.735096,
+    -79.852778,
+    35.750139
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.857,
    "launches": [
     "lake-lucas-carry-in-access-nc"
+   ],
+   "water_id": "lake-lucas-nc",
+   "gnis_id": null,
+   "geometry_hash": "c365794b3c478ceca54c5dffa7d9979d36705c84d1d83c65d96298412945081f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-lucas-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -3117,10 +4498,10 @@
     "Whitsett"
    ],
    "bbox": [
-    -79.60122,
-    36.01835,
-    -79.5014,
-    36.06005
+    -79.601216,
+    36.018354,
+    -79.501398,
+    36.060047
    ],
    "wikidata": null,
    "charted": false,
@@ -3129,6 +4510,15 @@
     "lake-mackintosh-boat-launch-nc",
     "lake-mackintosh-park-nc"
    ],
+   "water_id": "lake-mackintosh-nc",
+   "gnis_id": null,
+   "geometry_hash": "fa6aef3bc9811a6a155d55f91953e1758a30d93a754f3eb650c8eb99c082f41d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3140,9 +4530,9 @@
     "Swan Quarter"
    ],
    "bbox": [
-    -76.3167,
-    35.44795,
-    -76.0644,
+    -76.316697,
+    35.447954,
+    -76.064403,
     35.56299
    ],
    "wikidata": null,
@@ -3151,6 +4541,15 @@
    "launches": [
     "lake-mattamuskeet-boat-launch-nc"
    ],
+   "water_id": "lake-mattamuskeet-nc",
+   "gnis_id": null,
+   "geometry_hash": "869e34b3a15aac3d1248185e4242ed1251af13a468bc462060cad0e444e1a554",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3162,10 +4561,10 @@
     "Mebane"
    ],
    "bbox": [
-    -79.25048,
-    36.10201,
-    -79.23939,
-    36.10839
+    -79.250477,
+    36.101892,
+    -79.239388,
+    36.108388
    ],
    "wikidata": null,
    "charted": false,
@@ -3173,6 +4572,15 @@
    "launches": [
     "lake-michael-park-nc"
    ],
+   "water_id": "lake-michael-nc",
+   "gnis_id": null,
+   "geometry_hash": "8de8422b1b3566dfccd7e699b896d976a8b58ac2180a81831ce119785ca12636",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3192,10 +4600,10 @@
     "Mooresville"
    ],
    "bbox": [
-    -81.0921,
-    35.42733,
-    -80.8444,
-    35.75743
+    -81.092099,
+    35.427332,
+    -80.844403,
+    35.757426
    ],
    "wikidata": "Q1801020",
    "charted": false,
@@ -3207,6 +4615,32 @@
     "long-island-nc",
     "mccrary-creek-nc",
     "pinnacle-nc"
+   ],
+   "water_id": "lake-norman-nc",
+   "gnis_id": "991183",
+   "geometry_hash": "b97eab38f37e4ce0efdde73c418b96e250e0eae59f4516639b55f78969c9495b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cowan-s-ford-boat-ramp-nc",
+    "lnyc-rmc-ramp-nc",
+    "lake-norman-boat-launch-near-cornelius-nc-4",
+    "lake-norman-boat-launch-near-davidson-nc-3",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-10",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-3",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-4",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-5",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-6",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-7",
+    "lake-norman-boat-launch-near-lake-norman-of-catawba-nc-9",
+    "lake-norman-boat-launch-near-long-island-nc",
+    "lake-norman-marina-slipway-nc",
+    "lake-norman-rv-resort-slipway-nc",
+    "wildlife-woods-campground-slipway-nc"
    ],
    "advisories": []
   },
@@ -3220,10 +4654,10 @@
     "Roper"
    ],
    "bbox": [
-    -76.52588,
-    35.73366,
-    -76.40119,
-    35.80359
+    -76.525883,
+    35.733645,
+    -76.401194,
+    35.803587
    ],
    "wikidata": "Q6477356",
    "charted": false,
@@ -3231,6 +4665,15 @@
    "launches": [
     "cypress-point-access-nc"
    ],
+   "water_id": "lake-phelps-nc",
+   "gnis_id": "992118",
+   "geometry_hash": "17e145a92b5d59675a0106a8c0fa8574c305fdc42de007af4853ce88e7adaf35",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3242,10 +4685,10 @@
     "Asheville"
    ],
    "bbox": [
-    -82.62791,
+    -82.627914,
     35.48177,
-    -82.62372,
-    35.48379
+    -82.623716,
+    35.483792
    ],
    "wikidata": "Q34900735",
    "charted": false,
@@ -3253,6 +4696,15 @@
    "launches": [
     "lake-powhatan-carry-in-access-nc"
    ],
+   "water_id": "lake-powhatan-nc",
+   "gnis_id": "1014638",
+   "geometry_hash": "a8748e8b2ffa56df497f2765880a1cf5c657b9ccf6cfea1ec58ac771a4c996ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3264,10 +4716,10 @@
     "Raleigh"
    ],
    "bbox": [
-    -78.68713,
-    35.76274,
-    -78.67662,
-    35.76797
+    -78.687134,
+    35.762738,
+    -78.676622,
+    35.767968
    ],
    "wikidata": "Q34900773",
    "charted": false,
@@ -3275,6 +4727,15 @@
    "launches": [
     "lake-raleigh-boat-launch-nc"
    ],
+   "water_id": "lake-raleigh-nc",
+   "gnis_id": "999377",
+   "geometry_hash": "7414e407951afd249f6e233340a0494d1e8d6166a0b4878bccdf4308f5eab7dd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3289,10 +4750,10 @@
     "Valdese"
    ],
    "bbox": [
-    -81.65368,
-    35.76637,
-    -81.43589,
-    35.79199
+    -81.653682,
+    35.766371,
+    -81.435886,
+    35.791991
    ],
    "wikidata": null,
    "charted": false,
@@ -3304,6 +4765,15 @@
     "rhodhiss-boat-launch-nc",
     "lake-rhodhiss-boat-launch-near-valdese-nc"
    ],
+   "water_id": "lake-rhodhiss-nc",
+   "gnis_id": null,
+   "geometry_hash": "186712e29d36f587faf41e5d8d375452b44ef13ce3ee39e8592384587cf53f52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3315,10 +4785,10 @@
     "Fayetteville"
    ],
    "bbox": [
-    -79.04755,
-    35.03103,
-    -79.03592,
-    35.04328
+    -79.047554,
+    35.031027,
+    -79.035804,
+    35.043375
    ],
    "wikidata": null,
    "charted": false,
@@ -3326,6 +4796,15 @@
    "launches": [
     "lake-rim-boat-launch-nc"
    ],
+   "water_id": "lake-rim-nc",
+   "gnis_id": null,
+   "geometry_hash": "1e1519275b2ef08f5e31f0da5b6b7d4169440f9c73d4fe0b156a5dab5fe7e959",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3338,10 +4817,10 @@
     "Robbinsville"
    ],
    "bbox": [
-    -83.91035,
-    35.3135,
+    -83.910349,
+    35.313499,
     -83.80535,
-    35.37922
+    35.379216
    ],
    "wikidata": null,
    "charted": false,
@@ -3351,6 +4830,15 @@
     "cheoah-point-nc",
     "ranger-station-nc"
    ],
+   "water_id": "lake-santeetlah-nc",
+   "gnis_id": null,
+   "geometry_hash": "21f273eb993cdffc2707f3be76710e09b554531febef20fa35853c491749ebd2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3362,10 +4850,10 @@
     "Wilmington"
    ],
    "bbox": [
-    -78.01192,
-    34.28623,
-    -77.99034,
-    34.31807
+    -78.011924,
+    34.286033,
+    -77.990335,
+    34.318073
    ],
    "wikidata": null,
    "charted": true,
@@ -3373,6 +4861,15 @@
    "launches": [
     "sutton-lake-boat-launch-nc"
    ],
+   "water_id": "lake-sutton-nc",
+   "gnis_id": null,
+   "geometry_hash": "d5fbb46993a530c233507dbf7694c6c294828a87618cdb0f28ff97cb38132f5d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3387,10 +4884,10 @@
     "Norwood"
    ],
    "bbox": [
-    -80.12848,
-    35.20539,
-    -80.04414,
-    35.39608
+    -80.128478,
+    35.205395,
+    -80.044136,
+    35.396075
    ],
    "wikidata": "Q6478042",
    "charted": false,
@@ -3402,6 +4899,15 @@
     "stony-mountain-nc",
     "swift-island-nc"
    ],
+   "water_id": "lake-tillery-nc",
+   "gnis_id": "1024351",
+   "geometry_hash": "5ebfa6e2b1ff79a1981ca2838ce2dffde52814a0a631a6a257ecb64ddd4e12ac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3413,10 +4919,10 @@
     "Brown Summit"
    ],
    "bbox": [
-    -79.8169,
-    36.15967,
-    -79.73171,
-    36.21116
+    -79.816898,
+    36.159675,
+    -79.731706,
+    36.211163
    ],
    "wikidata": null,
    "charted": false,
@@ -3424,6 +4930,15 @@
    "launches": [
     "lake-townsend-boat-launch-nc"
    ],
+   "water_id": "lake-townsend-nc",
+   "gnis_id": null,
+   "geometry_hash": "70333ec0758e0c7071f266888f159d8f25ee078ca59355072ac493607bc3ef94",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3435,10 +4950,10 @@
     "Lake Waccamaw"
    ],
    "bbox": [
-    -78.55272,
+    -78.552721,
     34.25671,
-    -78.46807,
-    34.31708
+    -78.467876,
+    34.317346
    ],
    "wikidata": null,
    "charted": false,
@@ -3446,6 +4961,15 @@
    "launches": [
     "lake-waccamaw-boat-launch-nc"
    ],
+   "water_id": "lake-waccamaw-nc",
+   "gnis_id": null,
+   "geometry_hash": "4458a54894d453aae4dbfc6c014e965c022fe81aa6acdd84a05da152f2ba53a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3457,10 +4981,10 @@
     "Raleigh"
    ],
    "bbox": [
-    -78.73328,
-    35.68507,
-    -78.69402,
-    35.70582
+    -78.733281,
+    35.685042,
+    -78.694017,
+    35.705824
    ],
    "wikidata": null,
    "charted": false,
@@ -3468,6 +4992,15 @@
    "launches": [
     "lake-wheeler-park-nc"
    ],
+   "water_id": "lake-wheeler-nc",
+   "gnis_id": null,
+   "geometry_hash": "ce9d1f2ce659fe8d30c0328a3b235c78a6c5e5383ee0e2e8697a96211480d57b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3481,16 +5014,29 @@
     "Pineville"
    ],
    "bbox": [
-    -81.11229,
-    35.01249,
-    -80.98269,
-    35.25014
+    -81.112292,
+    35.012494,
+    -80.982685,
+    35.250145
    ],
    "wikidata": "Q1794421",
    "charted": false,
    "area_km2": 35.876,
    "launches": [
     "south-point-nc"
+   ],
+   "water_id": "lake-wylie-nc",
+   "gnis_id": "1227721",
+   "geometry_hash": "9685c0931b64237317f29bf9948fee8c53f4c5e8277a2496cbc1966a4db946b0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "long-cove-slipway-nc",
+    "terry-s-marina-slipway-nc",
+    "the-vineyards-on-lake-wylie-slipway-nc"
    ],
    "advisories": [
     {
@@ -3511,6 +5057,37 @@
    ]
   },
   {
+   "slug": "land-harbors-lake-nc",
+   "name": "Land Harbors Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Newland"
+   ],
+   "bbox": [
+    -81.895074,
+    36.036983,
+    -81.887289,
+    36.043858
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.176,
+   "launches": [],
+   "water_id": "land-harbors-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "713fdcc1fa28b86dbdd61b10c23ac9dca2c678028df545f61d9b54158c1d8f19",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "land-harbors-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
    "slug": "lewis-creek-nc",
    "name": "Lewis Creek",
    "kind": "river",
@@ -3519,10 +5096,10 @@
     "Lola"
    ],
    "bbox": [
-    -76.29378,
-    34.95,
-    -76.27981,
-    34.95669
+    -76.293779,
+    34.950001,
+    -76.279811,
+    34.956699
    ],
    "wikidata": null,
    "charted": true,
@@ -3530,6 +5107,15 @@
    "launches": [
     "lola-boat-ramp-nc"
    ],
+   "water_id": "lewis-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "d36d2cfb716501a6788ddbf7fa9a47fd3dc8195eb7613ce18969b1d4beb943aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3542,15 +5128,55 @@
    ],
    "bbox": [
     -79.12861,
-    35.46475,
-    -79.12421,
-    35.50015
+    35.464751,
+    -79.124209,
+    35.500155
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "san-lee-park-nc"
+   ],
+   "water_id": "lick-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "8bb100b5fe2cf01a2192bf3a0103e4d24dc22dca155878e7723e431416cd3848",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-port-brook-nc",
+   "name": "Little Port Brook",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Atlantic"
+   ],
+   "bbox": [
+    -76.343395,
+    34.884623,
+    -76.331905,
+    34.893265
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "little-port-brook-nc",
+   "gnis_id": null,
+   "geometry_hash": "6b4e2b7f6cf5179f0b01218f44c6913800334ef8fcaf7a1a12fe1e19239889a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "little-port-brook-boat-launch-near-atlantic-nc"
    ],
    "advisories": []
   },
@@ -3563,10 +5189,10 @@
     "Candor"
    ],
    "bbox": [
-    -79.93596,
-    35.09436,
-    -79.78227,
-    35.67789
+    -79.936137,
+    35.094361,
+    -79.782267,
+    35.677888
    ],
    "wikidata": null,
    "charted": false,
@@ -3574,6 +5200,15 @@
    "launches": [
     "troy-nc"
    ],
+   "water_id": "little-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "708c91b9ee64625c11889e7f8cf3830df156d74538c18c298e26cb30a859af19",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3585,10 +5220,10 @@
     "Woodville"
    ],
    "bbox": [
-    -76.39216,
-    36.11416,
-    -76.18238,
-    36.28892
+    -76.392163,
+    36.114162,
+    -76.182383,
+    36.288916
    ],
    "wikidata": null,
    "charted": true,
@@ -3596,6 +5231,15 @@
    "launches": [
     "county-line-boat-ramp-nc"
    ],
+   "water_id": "little-river-woodville-nc",
+   "gnis_id": null,
+   "geometry_hash": "6d95dab400ffff71ba6228076f004871370cebf2c56faa20bb0f618eaba2884c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3612,9 +5256,9 @@
     "Riverside"
    ],
    "bbox": [
-    -83.96519,
-    34.97216,
-    -83.36725,
+    -83.965192,
+    34.972164,
+    -83.366893,
     35.46662
    ],
    "wikidata": null,
@@ -3629,6 +5273,47 @@
     "sawmill-creek-access-nc",
     "tellico-creek-access-nc"
    ],
+   "water_id": "little-tennessee-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "2c8083e0f0d9291b0624c595acd0388e19a8b1cb054f43229a8214c31c8514b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lockwoods-folly-inlet-nc",
+   "name": "Lockwoods Folly Inlet",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Varnamtown"
+   ],
+   "bbox": [
+    -78.248789,
+    33.8971,
+    -78.197321,
+    33.928734
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.325,
+   "launches": [],
+   "water_id": "lockwoods-folly-inlet-nc",
+   "gnis_id": null,
+   "geometry_hash": "3b1236dd9059dc3499997ba2a00770418250f597eb9a8d60814c04ba3ede46df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lockwoods-folly-inlet-boat-launch-near-varnamtown-nc-2",
+    "lockwoods-folly-inlet-boat-launch-near-varnamtown-nc-3"
+   ],
    "advisories": []
   },
   {
@@ -3641,10 +5326,10 @@
     "Dixon Landing"
    ],
    "bbox": [
-    -78.27234,
+    -78.272335,
     33.91965,
-    -78.17728,
-    34.06768
+    -78.177282,
+    34.067681
    ],
    "wikidata": null,
    "charted": true,
@@ -3652,6 +5337,15 @@
    "launches": [
     "sunset-harbor-nc"
    ],
+   "water_id": "lockwoods-folly-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "60514c2bf319e963e6acee5743afd9617d4e8b617922cbc8e0df0dcaaf79dd56",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3663,10 +5357,10 @@
     "Vandemere"
    ],
    "bbox": [
-    -76.66788,
-    35.18495,
+    -76.667883,
+    35.184953,
     -76.65837,
-    35.18843
+    35.188433
    ],
    "wikidata": null,
    "charted": true,
@@ -3674,6 +5368,15 @@
    "launches": [
     "vandemere-nc"
    ],
+   "water_id": "log-pond-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "1f1406dfe33fc7ae58c71511d5af1ee9aa75653e136883b19d16413e62edaba8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3686,10 +5389,10 @@
     "Oak Island"
    ],
    "bbox": [
-    -79.18026,
-    33.21037,
-    -77.95947,
-    33.91473
+    -79.18034,
+    33.210372,
+    -77.959472,
+    33.914727
    ],
    "wikidata": null,
    "charted": true,
@@ -3697,6 +5400,15 @@
    "launches": [
     "bridgeview-park-nc"
    ],
+   "water_id": "long-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": "2ca6416e9699a391bb4f2fd02dc170075744b5f5f0ca2313d3b621774923b6a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3708,10 +5420,10 @@
     "Albemarle"
    ],
    "bbox": [
-    -80.23796,
-    35.34933,
-    -80.22536,
-    35.35944
+    -80.237962,
+    35.349326,
+    -80.225358,
+    35.359441
    ],
    "wikidata": null,
    "charted": false,
@@ -3719,6 +5431,15 @@
    "launches": [
     "albemarle-city-lake-nc"
    ],
+   "water_id": "long-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "173d19dc16ff46de7f4b61229af6d0b6ce8de2bb7e2ad4b23d4c39e33127ad79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3731,10 +5452,10 @@
     "Statesville"
    ],
    "bbox": [
-    -81.1248,
-    35.75659,
-    -81.07891,
-    35.7899
+    -81.124803,
+    35.756588,
+    -81.078915,
+    35.789905
    ],
    "wikidata": null,
    "charted": false,
@@ -3743,6 +5464,15 @@
     "lookout-shoals-boat-launch-nc",
     "sharon-nc"
    ],
+   "water_id": "lookout-shoals-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "70048c68905fa2ca4127db43eee2d63427698375c756880e330af88683ce2504",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3758,10 +5488,10 @@
     "Wagram"
    ],
    "bbox": [
-    -79.36603,
-    34.29933,
-    -78.92742,
-    34.96177
+    -79.366035,
+    34.299328,
+    -78.927421,
+    34.961774
    ],
    "wikidata": "Q3267277",
    "charted": false,
@@ -3773,6 +5503,15 @@
     "mcneils-bridge-nc",
     "wagram-nc"
    ],
+   "water_id": "lumber-river-nc",
+   "gnis_id": "989127",
+   "geometry_hash": "47d4f47b2c75e704fe3409e5275a96d3b53a967306362c347752d21556053253",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3784,10 +5523,10 @@
     "Wilmington"
    ],
    "bbox": [
-    -77.87576,
+    -77.875764,
     34.11544,
-    -77.82758,
-    34.1744
+    -77.827581,
+    34.174399
    ],
    "wikidata": null,
    "charted": true,
@@ -3795,6 +5534,15 @@
    "launches": [
     "trails-end-nc"
    ],
+   "water_id": "masonboro-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "3f1357138cd22db2e8fc8f5345d0381f53a32969d29998c09fd561fc3ffc1182",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3806,10 +5554,10 @@
     "Roxboro"
    ],
    "bbox": [
-    -78.89951,
-    36.43961,
-    -78.85174,
-    36.53662
+    -78.899514,
+    36.439406,
+    -78.851743,
+    36.536618
    ],
    "wikidata": null,
    "charted": false,
@@ -3818,6 +5566,15 @@
     "mayo-park-nc",
     "triple-springs-nc"
    ],
+   "water_id": "mayo-reservoir-nc",
+   "gnis_id": null,
+   "geometry_hash": "c0cbfef2a7c9a9d2c320b3a0f158b428837531ce24b3fcd060a88d699c3ce616",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3830,9 +5587,9 @@
     "Mayodan"
    ],
    "bbox": [
-    -79.99702,
-    36.39001,
-    -79.93502,
+    -79.997016,
+    36.390009,
+    -79.935018,
     36.54048
    ],
    "wikidata": "Q6797547",
@@ -3841,6 +5598,15 @@
    "launches": [
     "mayodan-access-nc"
    ],
+   "water_id": "mayo-river-nc",
+   "gnis_id": "989503",
+   "geometry_hash": "35c0afd8477506208d712715945bd6a648a0a223d9b9393f0a3eb320c9b5f64a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3852,10 +5618,10 @@
     "Hoffman"
    ],
    "bbox": [
-    -79.62755,
-    35.00477,
-    -79.61117,
-    35.00965
+    -79.627546,
+    35.004772,
+    -79.611173,
+    35.009652
    ],
    "wikidata": null,
    "charted": false,
@@ -3863,6 +5629,15 @@
    "launches": [
     "mckinney-lake-boat-launch-nc"
    ],
+   "water_id": "mckinney-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "c5b508054c65c0d52f05aaa915c6c549a66e87c07a08e14d6fdaef137e8857fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3875,9 +5650,9 @@
    ],
    "bbox": [
     -77.34847,
-    36.43153,
-    -76.94677,
-    36.55773
+    36.431525,
+    -76.946774,
+    36.557729
    ],
    "wikidata": "Q6809486",
    "charted": true,
@@ -3885,6 +5660,15 @@
    "launches": [
     "murfreesboro-nc"
    ],
+   "water_id": "meherrin-river-nc",
+   "gnis_id": "1025518",
+   "geometry_hash": "f2e8391808eee8998de79a7713a798e23352b9a19babdd8d3a16b297ea2a8f79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3896,10 +5680,10 @@
     "Eason Crossroads"
    ],
    "bbox": [
-    -76.70125,
+    -76.701249,
     36.42077,
-    -76.67017,
-    36.43718
+    -76.670075,
+    36.437198
    ],
    "wikidata": null,
    "charted": false,
@@ -3908,6 +5692,15 @@
     "gates-merchants-millpond-main-entrance-nc",
     "merchants-millpond-boat-launch-nc"
    ],
+   "water_id": "merchants-millpond-nc",
+   "gnis_id": null,
+   "geometry_hash": "7ce6b5f5b207c5491313dc69bea829fd1c6a63658897103bf271d2ee2f7fa09b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3925,6 +5718,15 @@
    "launches": [
     "thorofare-boat-ramp-nc"
    ],
+   "water_id": "merkle-hammock-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3936,10 +5738,10 @@
     "Leland"
    ],
    "bbox": [
-    -78.03771,
+    -78.037714,
     34.24523,
-    -78.01064,
-    34.25776
+    -78.010645,
+    34.257765
    ],
    "wikidata": null,
    "charted": false,
@@ -3947,6 +5749,15 @@
    "launches": [
     "cypress-cove-park-nc"
    ],
+   "water_id": "mill-creek-leland-nc",
+   "gnis_id": null,
+   "geometry_hash": "c10fc107212255bd9a0760e7c7da1062476cd18e0f8d6c57a92e6f0f3c469bb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3958,10 +5769,10 @@
     "Manns Harbor"
    ],
    "bbox": [
-    -75.9773,
-    35.77391,
-    -75.85497,
-    35.84514
+    -75.977299,
+    35.773907,
+    -75.854912,
+    35.845142
    ],
    "wikidata": null,
    "charted": true,
@@ -3970,6 +5781,15 @@
     "buffalo-city-canoe-kayak-access-nc",
     "milltail-creek-canoe-kayak-access-nc"
    ],
+   "water_id": "milltail-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "c1bd10fcb7d89a218b8036b8824d698b04b93a6d611da0037dc05b32f649b476",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3982,10 +5802,10 @@
     "Mount Holly"
    ],
    "bbox": [
-    -80.99642,
-    35.3339,
-    -80.91079,
-    35.38276
+    -80.996415,
+    35.333899,
+    -80.910794,
+    35.382757
    ],
    "wikidata": "Q6925014",
    "charted": false,
@@ -3994,6 +5814,15 @@
     "neck-road-nc",
     "riverbend-nc"
    ],
+   "water_id": "mountain-island-lake-nc",
+   "gnis_id": "990701",
+   "geometry_hash": "7b5a27caf60693736eb8ba324bdc86e2551d2ca63ba26b5c280d2d848174cd41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4006,9 +5835,9 @@
    ],
    "bbox": [
     -81.86583,
-    35.6964,
+    35.696403,
     -81.84614,
-    35.71361
+    35.713608
    ],
    "wikidata": null,
    "charted": false,
@@ -4016,6 +5845,15 @@
    "launches": [
     "muddy-creek-access-nc"
    ],
+   "water_id": "muddy-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "3b0288b947ae83637a2a4733bf6afa8e2603827b01c152898ac1e4852fffd79a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4028,10 +5866,10 @@
     "Topton"
    ],
    "bbox": [
-    -83.69766,
-    35.15547,
-    -83.63838,
-    35.19952
+    -83.697658,
+    35.155468,
+    -83.638375,
+    35.199518
    ],
    "wikidata": null,
    "charted": false,
@@ -4040,6 +5878,15 @@
     "choga-road-nc",
     "rocky-branch-nc"
    ],
+   "water_id": "nantahala-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "87b5b3653cd26cd0901ec5a09c615837696eb084f50781378910be06b1edd228",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4056,8 +5903,8 @@
     "Wesser"
    ],
    "bbox": [
-    -83.68193,
-    35.01821,
+    -83.682051,
+    35.018206,
     -83.50487,
     35.38137
    ],
@@ -4075,6 +5922,15 @@
     "upper-nantahala-river-white-oak-creek-nc",
     "nantahala-river-boat-launch-near-beechertown-nc-2"
    ],
+   "water_id": "nantahala-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "d4a759fabbaf650151ae617f3ce1043a07c51913463a8acd37ecc9a5ae1fe180",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4097,10 +5953,10 @@
     "Princeton"
    ],
    "bbox": [
-    -78.81261,
-    34.94876,
-    -76.49681,
-    36.09584
+    -78.812606,
+    34.948762,
+    -76.496806,
+    36.095837
    ],
    "wikidata": "Q1606944",
    "charted": true,
@@ -4124,6 +5980,15 @@
     "stevens-mill-nc",
     "union-street-park-nc"
    ],
+   "water_id": "neuse-river-nc",
+   "gnis_id": "1013910",
+   "geometry_hash": "a9f7680378e8609fd903dbd38f019d552f3f0388e2ff9d7efe0fe85c0213471c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4137,10 +6002,10 @@
     "Sneads Ferry"
    ],
    "bbox": [
-    -77.68023,
-    34.55423,
+    -77.680231,
+    34.554233,
     -77.35232,
-    34.97813
+    34.978126
    ],
    "wikidata": null,
    "charted": true,
@@ -4149,6 +6014,15 @@
     "jacksonville-landing-nc",
     "sneads-ferry-nc"
    ],
+   "water_id": "new-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "f068f44b8cea1efff9c7590dff757b33b1c3b0d8785646d3af15448701bfddbe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4160,10 +6034,10 @@
     "Sparta"
    ],
    "bbox": [
-    -81.35488,
-    36.54609,
-    -81.085,
-    36.58188
+    -81.354978,
+    36.546092,
+    -81.085003,
+    36.581884
    ],
    "wikidata": "Q952823",
    "charted": false,
@@ -4171,6 +6045,15 @@
    "launches": [
     "farmers-fish-camp-access-nc"
    ],
+   "water_id": "new-river-sparta-nc",
+   "gnis_id": "1552301",
+   "geometry_hash": "3535e2d509755872e1335b019567c60743b3b4934ac34897265e49cc9d2a759f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4182,10 +6065,10 @@
     "Old Weeksville"
    ],
    "bbox": [
-    -76.21339,
-    36.20519,
+    -76.213388,
+    36.205191,
     -76.0956,
-    36.25145
+    36.251529
    ],
    "wikidata": null,
    "charted": true,
@@ -4193,6 +6076,15 @@
    "launches": [
     "sawmill-park-nc"
    ],
+   "water_id": "newbegun-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "a02e7ff69ce09a5a591f4d85541fd03c8b324933d1036a987bdd6178a53265c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4210,6 +6102,15 @@
    "launches": [
     "newbold-pond-carry-in-access-nc"
    ],
+   "water_id": "newbold-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4222,10 +6123,10 @@
     "Newport"
    ],
    "bbox": [
-    -76.90999,
+    -76.909986,
     34.78272,
-    -76.87878,
-    34.79311
+    -76.878777,
+    34.793111
    ],
    "wikidata": null,
    "charted": false,
@@ -4234,6 +6135,15 @@
     "newport-nc",
     "newport-river-boat-launch-nc"
    ],
+   "water_id": "newport-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "88d918d3df4388dcb12886526bb06b17ce33d34cc2c521250ce0bf022706073f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4245,9 +6155,9 @@
     "Green Mountain"
    ],
    "bbox": [
-    -82.41813,
+    -82.418129,
     36.02897,
-    -82.32739,
+    -82.327391,
     36.08456
    ],
    "wikidata": null,
@@ -4256,6 +6166,15 @@
    "launches": [
     "poplar-boat-launch-nc"
    ],
+   "water_id": "nolichucky-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "caf49b664ef0c6a02f3f6d41c616de41355ecc03b6291b828f85f1062a53cebe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4267,10 +6186,10 @@
     "Lansing"
    ],
    "bbox": [
-    -81.69219,
-    36.33302,
-    -81.35187,
-    36.55037
+    -81.692193,
+    36.333015,
+    -81.351867,
+    36.550431
    ],
    "wikidata": "Q7055414",
    "charted": false,
@@ -4278,6 +6197,15 @@
    "launches": [
     "crumpler-access-nc"
    ],
+   "water_id": "north-fork-new-river-nc",
+   "gnis_id": "991227",
+   "geometry_hash": "cf30807d855f33201e3b18143459ff8cfe0148ee4ab9934a05f408824a65dc12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4291,10 +6219,10 @@
     "Spruce Pine"
    ],
    "bbox": [
-    -82.32739,
-    35.90025,
-    -81.88662,
-    36.12943
+    -82.327391,
+    35.900248,
+    -81.886623,
+    36.129433
    ],
    "wikidata": null,
    "charted": false,
@@ -4304,6 +6232,15 @@
     "red-hill-access-nc",
     "spruce-pine-riverside-park-nc"
    ],
+   "water_id": "north-toe-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "8e0a9c3f68ddb24d77eefd3943f9cf5d704231c600440add2805c31a9a8436be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4319,9 +6256,9 @@
     "Wallace"
    ],
    "bbox": [
-    -78.05145,
+    -78.051449,
     34.24009,
-    -77.811,
+    -77.810996,
     35.19401
    ],
    "wikidata": null,
@@ -4336,6 +6273,17 @@
     "sawpit-landing-nc",
     "waynes-landing-nc"
    ],
+   "water_id": "northeast-cape-fear-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "6e4cf8a1db1813f2148f41c3f9fb41dfd0d2397fb5373fb7fb4a00c870505050",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "northeast-cape-fear-river-boat-launch-nc"
+   ],
    "advisories": []
   },
   {
@@ -4347,10 +6295,10 @@
     "Murphy"
    ],
    "bbox": [
-    -84.1463,
-    34.98312,
-    -84.07061,
-    35.09109
+    -84.146296,
+    34.983116,
+    -84.070615,
+    35.091091
    ],
    "wikidata": "Q7063559",
    "charted": false,
@@ -4358,6 +6306,15 @@
    "launches": [
     "little-ranger-access-nc"
    ],
+   "water_id": "nottely-river-nc",
+   "gnis_id": "1014041",
+   "geometry_hash": "f8b1cbfbf1e314094a4c3e4e9c9e8997ea221d2f8535b94568838fa14b9f8381",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4369,10 +6326,10 @@
     "High Point"
    ],
    "bbox": [
-    -80.01989,
-    35.9945,
-    -79.97842,
-    36.04733
+    -80.019885,
+    35.994504,
+    -79.978422,
+    36.047333
    ],
    "wikidata": null,
    "charted": false,
@@ -4380,6 +6337,15 @@
    "launches": [
     "oak-hollow-lake-carry-in-access-nc"
    ],
+   "water_id": "oak-hollow-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "337172d48cbf22535532a876e484da439f72208d997895b3ad1fa0078e3022d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4391,10 +6357,10 @@
     "Whittier"
    ],
    "bbox": [
-    -83.3841,
-    35.44515,
-    -83.29701,
-    35.58781
+    -83.384095,
+    35.445151,
+    -83.297014,
+    35.587814
    ],
    "wikidata": "Q85790238",
    "charted": false,
@@ -4402,6 +6368,15 @@
    "launches": [
     "bryson-trailrace-access-nc"
    ],
+   "water_id": "oconaluftee-river-nc",
+   "gnis_id": "1014073",
+   "geometry_hash": "15c2840dc9d4ad8441b7416c236ceed6bb0251f17f14793d573dbeac3e966b7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4413,10 +6388,10 @@
     "Granite Falls"
    ],
    "bbox": [
-    -81.42124,
-    35.80054,
-    -81.40743,
-    35.81616
+    -81.421239,
+    35.800542,
+    -81.407429,
+    35.816156
    ],
    "wikidata": null,
    "charted": false,
@@ -4424,6 +6399,15 @@
    "launches": [
     "knox-landing-nc"
    ],
+   "water_id": "old-millpond-nc",
+   "gnis_id": null,
+   "geometry_hash": "04c863f02eb2aea2a3d9b54534e3f537c61d73678e40e6d83f5056cd70f96410",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4436,9 +6420,9 @@
     "Shell Bank"
    ],
    "bbox": [
-    -77.95928,
-    33.74128,
-    -76.52869,
+    -77.95984,
+    33.741281,
+    -76.528691,
     34.69723
    ],
    "wikidata": null,
@@ -4447,6 +6431,43 @@
    "launches": [
     "north-topsail-beach-town-park-canoe-launch-nc",
     "rodney-knowles-memorial-park-nc"
+   ],
+   "water_id": "onslow-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": "1b09cb9069fc454a7f5ca352110c1c3f5cd8f6be116fdc6236be98f4035bad46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oyster-creek-nc",
+   "name": "Oyster Creek",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Davis"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "oyster-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "oyster-creek-boat-launch-near-davis-nc",
+    "oyster-creek-boat-launch-near-davis-nc-2",
+    "oyster-creek-boat-launch-near-davis-nc-4"
    ],
    "advisories": []
   },
@@ -4466,16 +6487,28 @@
     "Washington Park"
    ],
    "bbox": [
-    -77.0857,
-    35.24496,
-    -76.47583,
-    35.55644
+    -77.085698,
+    35.244961,
+    -76.475835,
+    35.55676
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 290.112,
    "launches": [
     "havens-garden-nc"
+   ],
+   "water_id": "pamlico-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "eb69dea86f4af0ba8493d28949bce2188a957e1b7c6a11c289f0abf6cff36572",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pamlico-river-boat-launch-near-camp-hardee-nc",
+    "pamlico-river-boat-launch-near-spring-creek-nc"
    ],
    "advisories": []
   },
@@ -4499,10 +6532,10 @@
     "South Rodanthe"
    ],
    "bbox": [
-    -76.61262,
+    -76.612616,
     34.90362,
-    -75.46723,
-    35.79687
+    -75.467234,
+    35.796869
    ],
    "wikidata": "Q2033236",
    "charted": true,
@@ -4519,6 +6552,35 @@
     "rose-bay-nc",
     "stumpy-point-nc"
    ],
+   "water_id": "pamlico-sound-nc",
+   "gnis_id": "1023621",
+   "geometry_hash": "558ca4336b718ba70da902a21594e6421f408645fe70745cca0d679c369f85cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pamlico-sound-boat-launch-near-avon-nc",
+    "pamlico-sound-boat-launch-near-avon-nc-10",
+    "pamlico-sound-boat-launch-near-avon-nc-12",
+    "pamlico-sound-boat-launch-near-avon-nc-13",
+    "pamlico-sound-boat-launch-near-avon-nc-14",
+    "pamlico-sound-boat-launch-near-avon-nc-2",
+    "pamlico-sound-boat-launch-near-avon-nc-4",
+    "pamlico-sound-boat-launch-near-avon-nc-5",
+    "pamlico-sound-boat-launch-near-avon-nc-7",
+    "pamlico-sound-boat-launch-near-avon-nc-8",
+    "pamlico-sound-boat-launch-near-avon-nc-9",
+    "pamlico-sound-boat-launch-near-frisco-nc-10",
+    "pamlico-sound-boat-launch-near-frisco-nc-9",
+    "pamlico-sound-boat-launch-near-hatteras-nc",
+    "pamlico-sound-boat-launch-near-hatteras-nc-2",
+    "pamlico-sound-boat-launch-near-waves-nc-2",
+    "the-anchorage-inn-marina-slipway-nc",
+    "village-marina-nc",
+    "wind-over-waves-community-boat-ramp-private-nc"
+   ],
    "advisories": []
   },
   {
@@ -4530,10 +6592,10 @@
     "Belhaven"
    ],
    "bbox": [
-    -76.70071,
-    35.52616,
+    -76.700709,
+    35.526155,
     -76.60966,
-    35.60985
+    35.609847
    ],
    "wikidata": null,
    "charted": true,
@@ -4541,6 +6603,15 @@
    "launches": [
     "belhaven-nc"
    ],
+   "water_id": "pantego-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "36b4db30b4e48e472040696eab6a43547d990ac398a6ddf06295a231e0db0ae8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -4572,6 +6643,15 @@
    "launches": [
     "parch-corn-bay-boat-launch-nc"
    ],
+   "water_id": "parch-corn-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4585,10 +6665,10 @@
     "Texas"
    ],
    "bbox": [
-    -76.44354,
-    36.17645,
-    -76.03203,
-    36.4717
+    -76.443542,
+    36.176451,
+    -76.032032,
+    36.471786
    ],
    "wikidata": null,
    "charted": true,
@@ -4596,6 +6676,17 @@
    "launches": [
     "milltown-road-river-access-nc",
     "sawyers-creek-nc"
+   ],
+   "water_id": "pasquotank-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "275768c665a161847e32a8acb27a7c34c2c4a1e7d8502fd0e743120d7ce0df1d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "texas-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -4611,10 +6702,10 @@
     "Wadesboro"
    ],
    "bbox": [
-    -80.09784,
-    34.7969,
-    -79.84888,
-    35.38016
+    -80.097835,
+    34.796904,
+    -79.848601,
+    35.380158
    ],
    "wikidata": "Q2061230",
    "charted": false,
@@ -4627,6 +6718,15 @@
     "red-hill-nc",
     "rockingham-nc"
    ],
+   "water_id": "pee-dee-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "60aaf0bd90574f2dcacc3e33a66bddaf8e6e18b8008e54c53b385e2ce5b366a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4638,10 +6738,10 @@
     "Edenton"
    ],
    "bbox": [
-    -76.606,
-    36.05337,
-    -76.57976,
-    36.08833
+    -76.605997,
+    36.053373,
+    -76.579764,
+    36.088329
    ],
    "wikidata": null,
    "charted": true,
@@ -4649,6 +6749,15 @@
    "launches": [
     "queen-anne-park-nc"
    ],
+   "water_id": "pembroke-creek-edenton-nc",
+   "gnis_id": null,
+   "geometry_hash": "30a068797eca6ae7ef39a786b44a277c59de8e0a49b293d1971af0881daf03e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4661,9 +6770,9 @@
    ],
    "bbox": [
     -76.65006,
-    36.05457,
-    -76.61668,
-    36.06947
+    36.054571,
+    -76.616679,
+    36.069466
    ],
    "wikidata": null,
    "charted": true,
@@ -4671,6 +6780,15 @@
    "launches": [
     "pembroke-creek-boat-launch-near-edenton-nc-2"
    ],
+   "water_id": "pembroke-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "d18a0d1e97f8a879652d6643bddd6bb88cc91ef54ea8ec3bea5b7f4f67546c93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4684,10 +6802,10 @@
     "Winfall"
    ],
    "bbox": [
-    -76.54833,
-    36.10376,
-    -76.29265,
-    36.32414
+    -76.548329,
+    36.103761,
+    -76.292648,
+    36.324141
    ],
    "wikidata": null,
    "charted": true,
@@ -4700,6 +6818,15 @@
     "town-hall-access-nc",
     "winfall-landing-park-nc"
    ],
+   "water_id": "perquimans-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "bb646ca8cf03fe076e4dc6e3cb7e47edf09b163afc470664a176a9cfd9e7d547",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4711,10 +6838,10 @@
     "Greensboro"
    ],
    "bbox": [
-    -79.73595,
-    35.94981,
-    -79.73196,
-    35.95365
+    -79.735951,
+    35.949806,
+    -79.731962,
+    35.953713
    ],
    "wikidata": null,
    "charted": false,
@@ -4722,6 +6849,15 @@
    "launches": [
     "hagan-stone-park-nc"
    ],
+   "water_id": "pond-1-nc",
+   "gnis_id": null,
+   "geometry_hash": "d4ed8339621a45e262146a921e7e70aabc5f2912085320082e69f228599f6345",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4733,10 +6869,10 @@
     "Blowing Rock"
    ],
    "bbox": [
-    -81.73978,
-    36.13175,
-    -81.73121,
-    36.13951
+    -81.739781,
+    36.131754,
+    -81.731206,
+    36.139511
    ],
    "wikidata": "Q34916078",
    "charted": false,
@@ -4744,6 +6880,15 @@
    "launches": [
     "price-lake-boat-rentals-nc"
    ],
+   "water_id": "price-lake-nc",
+   "gnis_id": "992811",
+   "geometry_hash": "a4cfd150de943e34c541f5e307df7f6cf1513aaba2ef9674549454696339b123",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4756,10 +6901,10 @@
     "Makleyville"
    ],
    "bbox": [
-    -76.63109,
-    35.35871,
-    -76.43021,
-    35.63065
+    -76.631086,
+    35.358706,
+    -76.430209,
+    35.630647
    ],
    "wikidata": null,
    "charted": true,
@@ -4767,6 +6912,15 @@
    "launches": [
     "wrights-creek-nc"
    ],
+   "water_id": "pungo-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "471866dba9ca03c7635b5c87a607ea4d2f6a9b9f97a4b8289ae474fd8329e7e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4778,10 +6932,10 @@
     "Mebane"
    ],
    "bbox": [
-    -79.33249,
-    36.09791,
-    -79.28059,
-    36.1483
+    -79.332487,
+    36.097908,
+    -79.280591,
+    36.148303
    ],
    "wikidata": null,
    "charted": false,
@@ -4789,6 +6943,15 @@
    "launches": [
     "graham-mebane-lake-nc"
    ],
+   "water_id": "quaker-creek-reservoir-nc",
+   "gnis_id": null,
+   "geometry_hash": "1f221454a60ee68125db3ad42ad89c511a10eca891db42a9e4f26162185f8462",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4800,10 +6963,10 @@
     "Topton"
    ],
    "bbox": [
-    -83.65716,
-    35.27551,
-    -83.64839,
-    35.2821
+    -83.657162,
+    35.275515,
+    -83.648241,
+    35.28217
    ],
    "wikidata": null,
    "charted": false,
@@ -4811,6 +6974,15 @@
    "launches": [
     "queens-creek-access-nc"
    ],
+   "water_id": "queens-creek-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "241386e1ea5f89b06ced3ceec091c17eb21340a73ff9b2d20af7e3c33525916d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4822,10 +6994,10 @@
     "Bayboro"
    ],
    "bbox": [
-    -76.75556,
-    35.14966,
+    -76.755557,
+    35.149656,
     -76.72596,
-    35.15999
+    35.159992
    ],
    "wikidata": null,
    "charted": true,
@@ -4833,6 +7005,15 @@
    "launches": [
     "raccoon-creek-park-nc"
    ],
+   "water_id": "raccoon-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "feccefdeed9a2c5f7a247e6a3b34264cebba207566fad4573704418135a18070",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4844,10 +7025,10 @@
     "Dunn"
    ],
    "bbox": [
-    -78.65839,
-    35.22505,
-    -78.64662,
-    35.23677
+    -78.658387,
+    35.225045,
+    -78.646622,
+    35.236774
    ],
    "wikidata": null,
    "charted": false,
@@ -4855,6 +7036,15 @@
    "launches": [
     "rhodes-pond-boat-launch-nc"
    ],
+   "water_id": "rhodes-pond-nc",
+   "gnis_id": null,
+   "geometry_hash": "9a1a2acfa1dc8343f3fff540cf873f805bb2f721185531353173179a691b3168",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4866,16 +7056,56 @@
     "Winnabow"
    ],
    "bbox": [
-    -78.07246,
-    34.12353,
-    -78.05429,
-    34.16338
+    -78.072462,
+    34.123385,
+    -78.054291,
+    34.163378
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "rices-creek-boat-launch-nc"
+   ],
+   "water_id": "rice-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "870efdf222a60b06f53e364c88f28525957aceb22ae22b60062d64df16e45469",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "riggs-creek-nc",
+   "name": "Riggs Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Florence"
+   ],
+   "bbox": [
+    -76.619066,
+    35.14749,
+    -76.598081,
+    35.157343
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "riggs-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "7aeed62531f6d509051d054798610983cd5b9febb14d079fb685821a6026e611",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "riggs-creek-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -4894,6 +7124,15 @@
    "launches": [
     "river-park-north-nc"
    ],
+   "water_id": "river-park-north-ponds-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4906,10 +7145,10 @@
     "Roanoke Rapids"
    ],
    "bbox": [
-    -77.81149,
-    36.46152,
-    -77.67191,
-    36.50857
+    -77.811493,
+    36.461523,
+    -77.671912,
+    36.508573
    ],
    "wikidata": null,
    "charted": false,
@@ -4919,6 +7158,15 @@
     "thelma-nc",
     "vultare-nc"
    ],
+   "water_id": "roanoke-rapids-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "804375be5484cec65b8e68d24ae64f10846e2c1933b0ae20c5eff95dc99e7129",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4939,10 +7187,10 @@
     "Williamston"
    ],
    "bbox": [
-    -78.15211,
-    35.81293,
-    -76.69394,
-    36.57031
+    -78.152115,
+    35.812304,
+    -76.693943,
+    36.570311
    ],
    "wikidata": "Q1584933",
    "charted": true,
@@ -4960,6 +7208,15 @@
     "weldon-nc",
     "williamston-nc"
    ],
+   "water_id": "roanoke-river-nc",
+   "gnis_id": "1502110",
+   "geometry_hash": "bef244f1e4f07254940857dff8c2e37dc0aaf90765969eaf047dd325fb54d8a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4972,10 +7229,10 @@
     "Nags Head"
    ],
    "bbox": [
-    -75.72313,
-    35.81596,
-    -75.57116,
-    35.98476
+    -75.723131,
+    35.815955,
+    -75.571101,
+    35.984759
    ],
    "wikidata": null,
    "charted": true,
@@ -4985,6 +7242,15 @@
     "roanoke-sound-carry-in-access-nc",
     "washington-baum-bridge-nc"
    ],
+   "water_id": "roanoke-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "21ff2965f0fca48a587e068de02b7a1a8ff7a85b375bee206d89fae8be6ef2dd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4997,9 +7263,9 @@
    ],
    "bbox": [
     -82.96149,
-    35.79795,
-    -82.89496,
-    35.82225
+    35.797955,
+    -82.894957,
+    35.822246
    ],
    "wikidata": null,
    "charted": false,
@@ -5007,6 +7273,15 @@
    "launches": [
     "roaring-fork-boat-launch-nc"
    ],
+   "water_id": "roaring-fork-nc",
+   "gnis_id": null,
+   "geometry_hash": "a0a6fd7c92183dbd7732d4c186997946f51ad7608c2f2ba43fab18833d86dc47",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5018,16 +7293,56 @@
     "Swan Quarter"
    ],
    "bbox": [
-    -76.34664,
-    35.47521,
-    -76.30606,
-    35.47732
+    -76.346639,
+    35.475213,
+    -76.306063,
+    35.477317
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": null,
    "launches": [
     "rose-bay-canal-boat-launch-nc"
+   ],
+   "water_id": "rose-bay-canal-nc",
+   "gnis_id": null,
+   "geometry_hash": "7c8ec7b0fe59ac2c330f62d05fa009109869916b3a58e5a8d88a0bab6c2ddef6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "royal-oak-swamp-nc",
+   "name": "Royal Oak Swamp",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Supply"
+   ],
+   "bbox": [
+    -78.357095,
+    34.009174,
+    -78.250845,
+    34.034705
+   ],
+   "wikidata": "Q35281578",
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "royal-oak-swamp-nc",
+   "gnis_id": "993788",
+   "geometry_hash": "67e02b9a18c34df257897a636ac3d1f6db387574a6a69125862268c6180240f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "royal-oak-swamp-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -5040,10 +7355,10 @@
     "Winston-Salem"
    ],
    "bbox": [
-    -80.19319,
-    36.09103,
-    -80.15881,
-    36.11272
+    -80.193186,
+    36.091029,
+    -80.158809,
+    36.112725
    ],
    "wikidata": "Q34921210",
    "charted": false,
@@ -5051,6 +7366,15 @@
    "launches": [
     "salem-lake-boat-launch-nc"
    ],
+   "water_id": "salem-lake-nc",
+   "gnis_id": "1000064",
+   "geometry_hash": "5b22c44b97649023e33393eb9606d7b54dd1c87a0cefba918b4ef5c8f586ea2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5062,10 +7386,10 @@
     "Sealevel"
    ],
    "bbox": [
-    -76.425,
-    34.88669,
-    -76.40001,
-    34.91959
+    -76.424999,
+    34.886601,
+    -76.39981,
+    34.919859
    ],
    "wikidata": null,
    "charted": true,
@@ -5073,6 +7397,15 @@
    "launches": [
     "salters-creek-boat-launch-nc"
    ],
+   "water_id": "salters-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "a4a11ba509a8c55b7f69a2b24a0221906f1fb9d7024049728e9b4a7360e449d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5084,10 +7417,10 @@
     "Marston"
    ],
    "bbox": [
-    -79.51845,
-    34.99295,
-    -79.51638,
-    34.99952
+    -79.518445,
+    34.992954,
+    -79.516376,
+    34.999516
    ],
    "wikidata": null,
    "charted": false,
@@ -5095,6 +7428,15 @@
    "launches": [
     "scotland-lake-carry-in-access-nc"
    ],
+   "water_id": "scotland-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "448a1a506cf9759105821198dc27cfc880e0015c25f645d481bf1d3e1b278ffe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5107,10 +7449,10 @@
     "Creswell"
    ],
    "bbox": [
-    -76.44173,
-    35.85171,
-    -76.25496,
-    35.94172
+    -76.441732,
+    35.851706,
+    -76.254963,
+    35.941721
    ],
    "wikidata": null,
    "charted": true,
@@ -5120,6 +7462,15 @@
     "creswell-nc",
     "scuppernong-kayak-canoe-launch-nc"
    ],
+   "water_id": "scuppernong-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "213f19fff27e62eec4ca89c2dc930bd17d74548c9d027e254234793c9643cf61",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5131,10 +7482,10 @@
     "Burlington"
    ],
    "bbox": [
-    -79.33787,
+    -79.337875,
     35.94736,
-    -79.32446,
-    35.96694
+    -79.324462,
+    35.966941
    ],
    "wikidata": null,
    "charted": false,
@@ -5142,6 +7493,15 @@
    "launches": [
     "saxapahaw-lake-access-nc"
    ],
+   "water_id": "sellers-manufacturing-company-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "88ed5c98cf86c6e215d8777e78e7e751caadb780212cf2f16f65aab1fbb8365a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5154,9 +7514,9 @@
    ],
    "bbox": [
     -77.08079,
-    35.15526,
+    35.155261,
     -77.07745,
-    35.15817
+    35.158169
    ],
    "wikidata": null,
    "charted": true,
@@ -5164,6 +7524,15 @@
    "launches": [
     "martin-marietta-park-nc"
    ],
+   "water_id": "shad-cove-nc",
+   "gnis_id": null,
+   "geometry_hash": "d1917667557f9096ee551d14e3d72ae09fff4fd76360d65475e23c3f0cb77b31",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5175,10 +7544,10 @@
     "Whispering Pines"
    ],
    "bbox": [
-    -79.36627,
+    -79.366271,
     35.25528,
-    -79.35683,
-    35.26096
+    -79.356827,
+    35.260957
    ],
    "wikidata": null,
    "charted": false,
@@ -5186,6 +7555,15 @@
    "launches": [
     "shadow-lake-boat-ramp-nc"
    ],
+   "water_id": "shadow-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "1efd0559144ac205211611401e9e979851026a200006b03ec4d73bbc5ad1bb1a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5197,10 +7575,10 @@
     "Manteo"
    ],
    "bbox": [
-    -75.6698,
-    35.89686,
-    -75.64765,
-    35.91938
+    -75.669802,
+    35.896865,
+    -75.647526,
+    35.919383
    ],
    "wikidata": "Q49391702",
    "charted": true,
@@ -5209,6 +7587,15 @@
     "shallowbag-bay-boat-launch-nc",
     "roanoke-island-festival-park-nc"
    ],
+   "water_id": "shallowbag-bay-nc",
+   "gnis_id": "994571",
+   "geometry_hash": "50557a0558d6af9b749908173a513f6173f53eff83d661278ab13ee29c5a27e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5221,9 +7608,9 @@
    ],
    "bbox": [
     -76.19186,
-    36.51765,
-    -76.15444,
-    36.54014
+    36.517649,
+    -76.154444,
+    36.540139
    ],
    "wikidata": null,
    "charted": false,
@@ -5231,6 +7618,15 @@
    "launches": [
     "shingle-landing-nc"
    ],
+   "water_id": "shingle-landing-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "c12721aa2ff6d85464ed37979b5c5a187f6bfaf7c476770d0cf71ca709d771c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5242,10 +7638,10 @@
     "Aurora"
    ],
    "bbox": [
-    -76.63901,
-    35.25779,
-    -76.62939,
-    35.28342
+    -76.639012,
+    35.257794,
+    -76.629387,
+    35.283419
    ],
    "wikidata": null,
    "charted": true,
@@ -5253,6 +7649,15 @@
    "launches": [
     "smiths-creek-boat-launch-nc"
    ],
+   "water_id": "smith-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "0d18a597db0597f89ff297b9132e0cab49969ba1008c6a158a3f72165d37371c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5264,10 +7669,10 @@
     "Eden"
    ],
    "bbox": [
-    -79.77155,
-    36.48074,
-    -79.75005,
-    36.54604
+    -79.7717,
+    36.480735,
+    -79.750052,
+    36.546041
    ],
    "wikidata": null,
    "charted": false,
@@ -5275,6 +7680,15 @@
    "launches": [
     "island-ford-river-access-nc"
    ],
+   "water_id": "smith-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "94700c71b4c5cfdb2477f5815f21e8de77fcc0588f326441fab6faaa483fc581",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5286,10 +7700,10 @@
     "Carolina Beach"
    ],
    "bbox": [
-    -77.93949,
+    -77.939489,
     34.02426,
     -77.89006,
-    34.05898
+    34.058978
    ],
    "wikidata": null,
    "charted": true,
@@ -5297,6 +7711,15 @@
    "launches": [
     "snows-cut-boat-launch-nc"
    ],
+   "water_id": "snows-cut-nc",
+   "gnis_id": null,
+   "geometry_hash": "ab4b9eb76b819fbc331488110db7331135e474ef62644235fd6ac4358d4b3266",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5308,10 +7731,10 @@
     "Aurora"
    ],
    "bbox": [
-    -76.79301,
-    35.25349,
-    -76.65429,
-    35.38609
+    -76.793006,
+    35.253491,
+    -76.654287,
+    35.386093
    ],
    "wikidata": null,
    "charted": true,
@@ -5319,6 +7742,15 @@
    "launches": [
     "aurora-nc"
    ],
+   "water_id": "south-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "5f65ac6b50fdba9a220be67880ab9beaef746ad888b363fa0a4420e292163ba9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5335,10 +7767,10 @@
     "West Jefferson"
    ],
    "bbox": [
-    -81.65604,
-    36.20457,
-    -81.32264,
-    36.55266
+    -81.656168,
+    36.204573,
+    -81.322496,
+    36.552659
    ],
    "wikidata": "Q7567290",
    "charted": false,
@@ -5353,6 +7785,15 @@
     "todd-nc",
     "todd-island-access-nc"
    ],
+   "water_id": "south-fork-new-river-nc",
+   "gnis_id": "1015692",
+   "geometry_hash": "2b21ccb9ff795eb75742c01e8b67ea04262e857037a6bd1be991536079a4b71a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5365,10 +7806,10 @@
     "Ivanhoe"
    ],
    "bbox": [
-    -78.67229,
-    34.58117,
-    -78.26933,
-    35.20792
+    -78.672288,
+    34.581173,
+    -78.269332,
+    35.208053
    ],
    "wikidata": "Q7568323",
    "charted": false,
@@ -5377,6 +7818,15 @@
     "ennis-bridge-nc",
     "sloans-bridge-nc"
    ],
+   "water_id": "south-river-nc",
+   "gnis_id": "1022714",
+   "geometry_hash": "85799b52e03c8fc4b3779d7f5ad90b4523009af2268f941e9bf811561f4b9d31",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5388,10 +7838,10 @@
     "Burnsville"
    ],
    "bbox": [
-    -82.25036,
-    35.71106,
-    -82.17233,
-    35.94358
+    -82.250362,
+    35.711059,
+    -82.172325,
+    35.943584
    ],
    "wikidata": null,
    "charted": false,
@@ -5399,6 +7849,15 @@
    "launches": [
     "yancey-county-toe-river-campground-nc"
    ],
+   "water_id": "south-toe-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "6e827fedb9609ad610dde3a57136aed1afb87cfb483e25fd52bb0aa17798a4af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5411,10 +7870,10 @@
     "Salisbury"
    ],
    "bbox": [
-    -81.15636,
-    35.74516,
-    -80.45989,
-    36.03516
+    -81.156361,
+    35.745157,
+    -80.459888,
+    36.035234
    ],
    "wikidata": "Q7568976",
    "charted": false,
@@ -5425,6 +7884,15 @@
     "crowther-nc",
     "us-601-river-access-nc"
    ],
+   "water_id": "south-yadkin-river-nc",
+   "gnis_id": "995225",
+   "geometry_hash": "181bf1efcf439b2feac2b0d47eda9ca467906eba5d5144b3c6256a6fbcb3e3f0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5436,10 +7904,10 @@
     "Havelock"
    ],
    "bbox": [
-    -76.98989,
-    34.83571,
-    -76.91988,
-    34.89562
+    -76.989894,
+    34.835707,
+    -76.919877,
+    34.895616
    ],
    "wikidata": null,
    "charted": false,
@@ -5448,6 +7916,15 @@
     "slocum-creek-nc",
     "slocum-creek-waterfront-park-nc"
    ],
+   "water_id": "southwest-prong-slocum-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "d0a2425d665621213d596d3f27fb1444b0f27876c53071751ceda0f31905178d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5459,10 +7936,10 @@
     "Whispering Pines"
    ],
    "bbox": [
-    -79.39583,
-    35.24865,
-    -79.38054,
-    35.25963
+    -79.395827,
+    35.248646,
+    -79.380544,
+    35.259631
    ],
    "wikidata": null,
    "charted": false,
@@ -5470,6 +7947,15 @@
    "launches": [
     "spring-valley-lake-boat-ramp-nc"
    ],
+   "water_id": "spring-valley-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "4d581cb82d144e0ab7ef14a505833e5bf52c92c182d1cb791c12b0d160a00495",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5481,10 +7967,10 @@
     "Almond"
    ],
    "bbox": [
-    -83.56511,
-    35.35725,
-    -83.53973,
-    35.37412
+    -83.565111,
+    35.357246,
+    -83.539726,
+    35.374122
    ],
    "wikidata": null,
    "charted": false,
@@ -5492,6 +7978,15 @@
    "launches": [
     "finger-lakes-kayak-launch-nc"
    ],
+   "water_id": "stiles-branch-nc",
+   "gnis_id": null,
+   "geometry_hash": "a005b406630e47cf838cc46832334728b96a0a1aaa9cf19ee9740fbb4f876300",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5503,10 +7998,10 @@
     "Burlington"
    ],
    "bbox": [
-    -79.41379,
-    36.12749,
-    -79.40494,
-    36.15046
+    -79.413794,
+    36.127485,
+    -79.404935,
+    36.150456
    ],
    "wikidata": null,
    "charted": false,
@@ -5514,6 +8009,15 @@
    "launches": [
     "stoney-creek-lake-carry-in-access-nc"
    ],
+   "water_id": "stony-creek-reservoir-nc",
+   "gnis_id": null,
+   "geometry_hash": "3935ffffcd3ef3b9ba1eb7c7695249aba072ef37c38450689ea686f609945a70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5526,16 +8030,56 @@
     "North Topsail Beach"
    ],
    "bbox": [
-    -77.56823,
-    34.42352,
-    -77.40216,
-    34.51362
+    -77.568229,
+    34.423521,
+    -77.402161,
+    34.513619
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 14.147,
    "launches": [
     "west-onslow-beach-nc"
+   ],
+   "water_id": "stump-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "73a9063a1fe015a2ab043f3fe3e8e676b26eab72cf54f8afcedf7c4b69800bb0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stumpy-point-bay-nc",
+   "name": "Stumpy Point Bay",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Stumpy Point"
+   ],
+   "bbox": [
+    -75.780277,
+    35.677203,
+    -75.73658,
+    35.706259
+   ],
+   "wikidata": "Q28456819",
+   "charted": true,
+   "area_km2": 8.28,
+   "launches": [],
+   "water_id": "stumpy-point-bay-nc",
+   "gnis_id": "995629",
+   "geometry_hash": "c3442a1451c06c28f87f157afb22bf3175ef37278f66b2c7cb61a60a2b35281c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "stumpy-point-bay-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -5548,10 +8092,10 @@
     "New Bern"
    ],
    "bbox": [
-    -77.42952,
-    35.19128,
-    -77.08417,
-    35.56107
+    -77.429515,
+    35.191069,
+    -77.084169,
+    35.561066
    ],
    "wikidata": null,
    "charted": true,
@@ -5559,6 +8103,15 @@
    "launches": [
     "cool-springs-nc"
    ],
+   "water_id": "swift-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "57769e8e0ce4c3ea2e09195bac7349550e7a7b4405c9b90f6498624822ec042b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5570,10 +8123,10 @@
     "Tuckasegee"
    ],
    "bbox": [
-    -83.00344,
-    35.20935,
+    -83.003436,
+    35.209352,
     -82.98598,
-    35.21629
+    35.216289
    ],
    "wikidata": null,
    "charted": false,
@@ -5581,6 +8134,15 @@
    "launches": [
     "tanasee-creek-lake-boat-launch-nc"
    ],
+   "water_id": "tanasee-creek-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "307c4165e3b4ac46fab88c1903f562b8354f861c21a1e674aa5a8176c8f182f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5597,10 +8159,10 @@
     "Tarboro"
    ],
    "bbox": [
-    -78.8451,
-    35.5512,
-    -77.08472,
-    36.41501
+    -78.845102,
+    35.550887,
+    -77.084716,
+    36.415015
    ],
    "wikidata": "Q841725",
    "charted": false,
@@ -5616,6 +8178,15 @@
     "sunset-park-nc",
     "wilton-slopes-access-nc"
    ],
+   "water_id": "tar-river-nc",
+   "gnis_id": "1024343",
+   "geometry_hash": "c6538c7c3260fc23bb29a622c2dd7d54bd65c1f48432d0ee19cf935b5128e702",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5627,9 +8198,9 @@
     "Beaufort"
    ],
    "bbox": [
-    -76.67278,
-    34.70635,
-    -76.61688,
+    -76.672779,
+    34.706353,
+    -76.616879,
     34.71915
    ],
    "wikidata": null,
@@ -5639,6 +8210,47 @@
     "beaufort-nc",
     "fisherman-s-park-nc",
     "orange-street-nc"
+   ],
+   "water_id": "taylor-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "e8850c183b49c516e5f9e9d252e5b4e5ec126143e5a03f1154eb0036ed8a3a2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tempe-gut-nc",
+   "name": "Tempe Gut",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Lynch Beach"
+   ],
+   "bbox": [
+    -76.697855,
+    35.154054,
+    -76.689237,
+    35.169994
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "tempe-gut-nc",
+   "gnis_id": null,
+   "geometry_hash": "93013eaeb468c63b291d0f2fdbb2323058f3178b07c9bf091e446b04fc85d999",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tempe-gut-boat-launch-near-lynch-beach-nc",
+    "tempe-gut-boat-launch-near-lynch-beach-nc-2"
    ],
    "advisories": []
   },
@@ -5652,15 +8264,26 @@
    ],
    "bbox": [
     -79.38665,
-    35.26107,
-    -79.35912,
-    35.26869
+    35.261067,
+    -79.359117,
+    35.268688
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.752,
    "launches": [
     "thagard-lake-boat-ramp-nc"
+   ],
+   "water_id": "thagard-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "bede60ebfd3cc8f15018cdde2160f1e058f29897a099a58ae71ae5412a03ed90",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "little-river-marina-boat-ramp-nc"
    ],
    "advisories": []
   },
@@ -5673,10 +8296,10 @@
     "Kure Beach"
    ],
    "bbox": [
-    -77.94962,
-    33.94586,
-    -77.92342,
-    33.96058
+    -77.949619,
+    33.945861,
+    -77.923416,
+    33.960575
    ],
    "wikidata": null,
    "charted": true,
@@ -5684,6 +8307,15 @@
    "launches": [
     "federal-point-nc"
    ],
+   "water_id": "the-basin-nc",
+   "gnis_id": null,
+   "geometry_hash": "822253ea9d57346c3d702da29b1bc5ad8caac49053f9b47e0f7bfb2ffdbe8377",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5701,6 +8333,15 @@
    "launches": [
     "tillets-cove-boat-launch-nc"
    ],
+   "water_id": "tillets-cove-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5716,15 +8357,35 @@
    ],
    "bbox": [
     -77.74167,
-    34.29832,
-    -77.5533,
-    34.43824
+    34.298317,
+    -77.553301,
+    34.438239
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 21.869,
    "launches": [
     "hampstead-nc"
+   ],
+   "water_id": "topsail-sound-nc",
+   "gnis_id": null,
+   "geometry_hash": "945e75db0461580a33c4c501f6c218c79f0feac3f5e05c95c40ef3f26a20065d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "topsail-sound-boat-launch-near-kings-landing-nc-2",
+    "topsail-sound-boat-launch-near-kings-landing-nc-3",
+    "topsail-sound-boat-launch-near-kings-landing-nc-4",
+    "topsail-sound-boat-launch-near-kings-landing-nc-5",
+    "topsail-sound-boat-launch-near-kings-landing-nc-6",
+    "topsail-sound-boat-launch-near-kings-landing-nc-7",
+    "topsail-sound-boat-launch-near-kings-landing-nc-8",
+    "topsail-sound-boat-launch-near-kings-landing-nc-9",
+    "topsail-sound-boat-launch-near-topsail-beach-nc-3",
+    "topsail-sound-boat-launch-near-topsail-beach-nc-5"
    ],
    "advisories": []
   },
@@ -5737,10 +8398,10 @@
     "Washington"
    ],
    "bbox": [
-    -77.30402,
-    35.55266,
-    -77.08472,
-    35.79373
+    -77.304017,
+    35.552659,
+    -77.084716,
+    35.793728
    ],
    "wikidata": null,
    "charted": false,
@@ -5748,6 +8409,15 @@
    "launches": [
     "masons-landing-nc"
    ],
+   "water_id": "tranters-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "bef7f0271d2615534e7f880103c18267ca9a02e776cdacc5b6914e3083b5be86",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5763,10 +8433,10 @@
     "Trenton"
    ],
    "bbox": [
-    -77.74032,
+    -77.740316,
     35.00672,
-    -77.02262,
-    35.11348
+    -77.022619,
+    35.113521
    ],
    "wikidata": "Q15681349",
    "charted": true,
@@ -5777,6 +8447,17 @@
     "pollocksville-nc",
     "river-bend-kayak-canoe-launch-nc",
     "trenton-nc"
+   ],
+   "water_id": "trent-river-nc",
+   "gnis_id": "1024362",
+   "geometry_hash": "2d6a82f63a541783d7ddbd5d800f826606526eaed72a9b2e5cc4aeb3db2e1166",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "trent-river-boat-launch-near-new-bern-nc"
    ],
    "advisories": []
   },
@@ -5794,10 +8475,10 @@
     "Whittier"
    ],
    "bbox": [
-    -83.40078,
+    -83.400779,
     35.21055,
-    -83.00866,
-    35.45265
+    -83.008656,
+    35.452654
    ],
    "wikidata": null,
    "charted": false,
@@ -5811,6 +8492,15 @@
     "shook-cove-take-out-nc",
     "whittier-nc"
    ],
+   "water_id": "tuckasegee-river-cullowhee-nc",
+   "gnis_id": null,
+   "geometry_hash": "bf3f45be9e42a5d9a6a411a357d299b77f1dc6342fd4827a61b64420d33873a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5822,10 +8512,10 @@
     "Bryson City"
    ],
    "bbox": [
-    -83.52207,
-    35.42119,
-    -83.43232,
-    35.4526
+    -83.522073,
+    35.421187,
+    -83.432319,
+    35.452598
    ],
    "wikidata": null,
    "charted": false,
@@ -5834,6 +8524,15 @@
     "old-288-nc",
     "tuckasegee-access-nc"
    ],
+   "water_id": "tuckasegee-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "01087e9f778265fa39474570bff0e4246b09d67ffc75d227b9bd10d3d3260bfa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5847,10 +8546,10 @@
     "Richfield"
    ],
    "bbox": [
-    -80.23588,
-    35.48386,
-    -80.16701,
-    35.60077
+    -80.235878,
+    35.483862,
+    -80.167007,
+    35.600766
    ],
    "wikidata": null,
    "charted": false,
@@ -5859,6 +8558,15 @@
     "bringle-ferry-nc",
     "flat-creek-nc"
    ],
+   "water_id": "tuckertown-reservoir-nc",
+   "gnis_id": null,
+   "geometry_hash": "7a44909aef82dd8ce4f7beffe1dddf5a04f9df2dcde2b7575733acc1ebc7c0bc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": [
     {
      "source": "epa-freshwater-hab-reports",
@@ -5884,9 +8592,9 @@
     "Currituck"
    ],
    "bbox": [
-    -76.09857,
-    36.46084,
-    -76.05212,
+    -76.098574,
+    36.460845,
+    -76.052124,
     36.49997
    ],
    "wikidata": null,
@@ -5895,6 +8603,15 @@
    "launches": [
     "poyners-road-nc"
    ],
+   "water_id": "tull-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "e70e2b39759678d28f092fb62b80f1365c95856e0652c24d00e9be113d0299b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5912,6 +8629,15 @@
    "launches": [
     "upchurch-lake-carry-in-access-nc"
    ],
+   "water_id": "upchurch-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5924,10 +8650,10 @@
     "Reelsboro"
    ],
    "bbox": [
-    -76.98735,
-    35.03824,
-    -76.90531,
-    35.23657
+    -76.98748,
+    35.038243,
+    -76.905311,
+    35.236567
    ],
    "wikidata": null,
    "charted": true,
@@ -5935,6 +8661,15 @@
    "launches": [
     "lees-landing-nc"
    ],
+   "water_id": "upper-broad-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "1c210c17b81eb5bb75ec044a22f58c3727f53d3e67efa97d29137b4aa771f42c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5946,10 +8681,10 @@
     "Troy"
    ],
    "bbox": [
-    -80.0591,
-    35.38016,
-    -79.95117,
-    35.91329
+    -80.059101,
+    35.380158,
+    -79.951172,
+    35.913294
    ],
    "wikidata": "Q7903980",
    "charted": false,
@@ -5958,6 +8693,46 @@
     "low-water-bridge-access-nc",
     "nc-hwy-109-nc",
     "uwarrie-river-access-nc"
+   ],
+   "water_id": "uwharrie-river-nc",
+   "gnis_id": "1025076",
+   "geometry_hash": "feca961e0faade38ad4ba1073de38777c25eb719ec1f587054930f1d37e21659",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "village-point-lake-nc",
+   "name": "Village Point Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Clemmons"
+   ],
+   "bbox": [
+    -80.392117,
+    36.031812,
+    -80.389915,
+    36.034551
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.025,
+   "launches": [],
+   "water_id": "village-point-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "0d192ae47ad3c70f2d917c5f3e63b3821d65fb492f5a1430cb06e6b77b185651",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "village-point-lake-boat-launch-nc"
    ],
    "advisories": []
   },
@@ -5970,10 +8745,10 @@
     "Wilkesboro"
    ],
    "bbox": [
-    -81.30217,
-    36.09032,
-    -81.22664,
-    36.13576
+    -81.302237,
+    36.090325,
+    -81.226635,
+    36.135803
    ],
    "wikidata": "Q18159088",
    "charted": false,
@@ -5986,6 +8761,15 @@
     "keowee-boat-ramp-nc",
     "smitheys-creek-boat-ramp-nc"
    ],
+   "water_id": "w-kerr-scott-reservoir-nc",
+   "gnis_id": null,
+   "geometry_hash": "9beb0059704c893fa74b18056262aca1bd35ac365bc14dcbb02c81c086de8c1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -5998,16 +8782,27 @@
     "New Britton"
    ],
    "bbox": [
-    -78.65175,
-    33.94313,
-    -78.52215,
-    34.2609
+    -78.651753,
+    33.943131,
+    -78.522149,
+    34.260901
    ],
    "wikidata": "Q7958732",
    "charted": false,
    "area_km2": null,
    "launches": [
     "pireway-nc"
+   ],
+   "water_id": "waccamaw-river-nc",
+   "gnis_id": "1251304",
+   "geometry_hash": "9c64cc6e2efca5b86407d7532c45b1a36a504a106f7b89b77e35e6bbd292ca8d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "babson-s-boat-ramp-nc"
    ],
    "advisories": []
   },
@@ -6020,10 +8815,10 @@
     "Tuckasegee"
    ],
    "bbox": [
-    -83.16562,
-    35.19497,
-    -83.12058,
-    35.2682
+    -83.165621,
+    35.194969,
+    -83.120583,
+    35.268202
    ],
    "wikidata": null,
    "charted": false,
@@ -6031,6 +8826,15 @@
    "launches": [
     "tuckasegee-powerhouse-access-nc"
    ],
+   "water_id": "west-fork-tuckasegee-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "594b0f56445030980fd3c116dc01d91144d73c4ed9880d49fe362d31f3f247bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6042,10 +8846,10 @@
     "Goose Creek"
    ],
    "bbox": [
-    -76.07187,
-    36.22705,
-    -76.04918,
-    36.23748
+    -76.071869,
+    36.227051,
+    -76.049181,
+    36.237479
    ],
    "wikidata": null,
    "charted": true,
@@ -6053,6 +8857,15 @@
    "launches": [
     "one-mill-landing-park-nc"
    ],
+   "water_id": "wharf-bay-nc",
+   "gnis_id": null,
+   "geometry_hash": "1e8e4d8cb074093fcce79188eb3b0d560b39890c26e0fa82fe687bb70d27e615",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6064,10 +8877,10 @@
     "Whispering Pines"
    ],
    "bbox": [
-    -79.35685,
-    35.24866,
-    -79.35349,
-    35.25573
+    -79.356853,
+    35.248647,
+    -79.353494,
+    35.255729
    ],
    "wikidata": null,
    "charted": false,
@@ -6075,6 +8888,15 @@
    "launches": [
     "whisper-lake-boat-ramp-nc"
    ],
+   "water_id": "whisper-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "92475b4646fef06354a1d2c5cd20bc5b2b8e74000295143bc6cc4bc645578d3d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6087,9 +8909,9 @@
     "Maysville"
    ],
    "bbox": [
-    -77.36582,
-    34.78059,
-    -77.16599,
+    -77.365823,
+    34.780306,
+    -77.165994,
     34.93835
    ],
    "wikidata": null,
@@ -6100,6 +8922,15 @@
     "haywood-landing-nc",
     "long-point-boat-launch-nc"
    ],
+   "water_id": "white-oak-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "db6070f712c03a6af985f4bbf5e1ea00a73000d158c03a1a7522611da23a6dc4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6111,10 +8942,10 @@
     "Harrellsville"
    ],
    "bbox": [
-    -76.90574,
-    36.30158,
-    -76.75418,
-    36.34977
+    -76.905735,
+    36.301577,
+    -76.754181,
+    36.349772
    ],
    "wikidata": null,
    "charted": true,
@@ -6122,6 +8953,15 @@
    "launches": [
     "harrellsville-nc"
    ],
+   "water_id": "wiccacon-river-nc",
+   "gnis_id": null,
+   "geometry_hash": "e20a0a5ee13d049afb4edcaa7a081ae709350aa09c9497316be79970e9d9ec50",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6133,10 +8973,10 @@
     "Collettsville"
    ],
    "bbox": [
-    -81.80828,
-    35.88168,
-    -81.70898,
-    36.10534
+    -81.808276,
+    35.881678,
+    -81.708978,
+    36.105342
    ],
    "wikidata": null,
    "charted": false,
@@ -6144,6 +8984,15 @@
    "launches": [
     "wilson-creek-access-nc"
    ],
+   "water_id": "wilson-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "a25f94c26f730b7c4b33411f711fd2e83b9af9cef13f4e707cecc09544a57886",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6156,9 +9005,9 @@
    ],
    "bbox": [
     -83.00166,
-    35.21904,
-    -82.98356,
-    35.24301
+    35.219039,
+    -82.983559,
+    35.243006
    ],
    "wikidata": null,
    "charted": false,
@@ -6166,6 +9015,15 @@
    "launches": [
     "wolf-creek-boat-launch-nc"
    ],
+   "water_id": "wolf-creek-lake-nc",
+   "gnis_id": null,
+   "geometry_hash": "0dd60a930f3740b37f628a982b4b4f3da16fc60770ba0947cff8d7ecfaa67490",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6177,9 +9035,9 @@
     "Tuckasegee"
    ],
    "bbox": [
-    -83.0172,
-    35.21938,
-    -82.95893,
+    -83.017197,
+    35.219378,
+    -82.958932,
     35.30617
    ],
    "wikidata": null,
@@ -6188,6 +9046,15 @@
    "launches": [
     "balsam-lake-nc"
    ],
+   "water_id": "wolf-creek-nc",
+   "gnis_id": null,
+   "geometry_hash": "55ce69a2474d6bbc369d3a4394a8f95494513a3f83478c5ae54d555ed24676d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -6210,10 +9077,10 @@
     "North Wilkesboro"
    ],
    "bbox": [
-    -81.63333,
-    35.38016,
-    -80.05789,
-    36.28712
+    -81.633399,
+    35.380158,
+    -80.057889,
+    36.287802
    ],
    "wikidata": "Q1520726",
    "charted": false,
@@ -6239,6 +9106,15 @@
     "yadkin-shore-access-nc",
     "yadkin-valley-community-park-access-nc"
    ],
+   "water_id": "yadkin-river-nc",
+   "gnis_id": "1024415",
+   "geometry_hash": "0c3d1b22efa58325f3ae5f7061934485bf4b1d2fee7b3d9f242629c4de401543",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]

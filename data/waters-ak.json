@@ -1,7 +1,7 @@
 {
  "state": "AK",
- "source": "openboatlaunch out/water snapshot 2026-11-02",
- "count": 186,
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
+ "count": 192,
  "waters": [
   {
    "slug": "alaganik-river-ak",
@@ -10,10 +10,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -145.73278,
-    60.36542,
-    -145.17856,
-    60.45357
+    -145.732784,
+    60.365421,
+    -145.178557,
+    60.453573
    ],
    "wikidata": null,
    "charted": false,
@@ -21,6 +21,15 @@
    "launches": [
     "alaganik-slough-road-information-area-and-boat-launch-ak"
    ],
+   "water_id": "alaganik-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "3a457de063ee5f2b81b64bba45e77309072caad62caf4ebc8939e9c63a40715c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -30,10 +39,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -145.22727,
-    60.43499,
-    -145.20871,
-    60.44408
+    -145.227268,
+    60.434897,
+    -145.208646,
+    60.444122
    ],
    "wikidata": null,
    "charted": false,
@@ -41,6 +50,15 @@
    "launches": [
     "alaganik-slough-canoe-boat-upper-launch-ak"
    ],
+   "water_id": "alaganik-slough-ak",
+   "gnis_id": null,
+   "geometry_hash": "26c34368fff33b448a43953365181f38acd48e3f7d3a0d0b2b9b8868a2ba50b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -50,10 +68,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.15634,
-    55.21708,
-    -131.10585,
-    55.23624
+    -131.156339,
+    55.217082,
+    -131.105851,
+    55.236238
    ],
    "wikidata": null,
    "charted": true,
@@ -61,6 +79,15 @@
    "launches": [
     "alava-bay-buoy-ak"
    ],
+   "water_id": "alava-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "6e080f22b3ef7837d6784cd00d6663ee01e2c410d1ddb7dd0bd58de23b7022d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -70,10 +97,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -134.79284,
-    58.48642,
-    -134.78659,
-    58.49235
+    -134.792839,
+    58.486421,
+    -134.786591,
+    58.492347
    ],
    "wikidata": null,
    "charted": true,
@@ -81,6 +108,15 @@
    "launches": [
     "amalga-harbor-boat-and-kayak-launch-ak"
    ],
+   "water_id": "amalga-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "82980f2fd6173de6a43f22eb059b05ced6c6eed0f9b7d8113988e18a98f5caaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -90,10 +126,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.42992,
-    55.95945,
-    -131.39284,
-    55.99578
+    -131.429919,
+    55.959451,
+    -131.392841,
+    55.995779
    ],
    "wikidata": null,
    "charted": true,
@@ -101,6 +137,15 @@
    "launches": [
     "anchor-pass-buoy-ak"
    ],
+   "water_id": "anchor-pass-ak",
+   "gnis_id": null,
+   "geometry_hash": "09ec35afb47baf5ef2b8922741918f4e329ac6254a338f952d042f8d66d3da1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -112,10 +157,10 @@
     "Ouzinkie"
    ],
    "bbox": [
-    -152.64352,
-    57.83697,
-    -152.61578,
-    57.87385
+    -152.643519,
+    57.836971,
+    -152.615781,
+    57.873849
    ],
    "wikidata": null,
    "charted": true,
@@ -123,6 +168,15 @@
    "launches": [
     "anton-larsen-ramp-ak"
    ],
+   "water_id": "anton-larsen-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "71501969ac0921d0ac6ba7506ee7636bb7d39d5f257de2903abe4f5891313b5d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -133,9 +187,9 @@
    "towns": [],
    "bbox": [
     -134.72666,
-    58.34191,
-    -134.64175,
-    58.38711
+    58.341911,
+    -134.641751,
+    58.387107
    ],
    "wikidata": null,
    "charted": true,
@@ -143,6 +197,15 @@
    "launches": [
     "statter-harbor-boat-launch-auke-bay-ak"
    ],
+   "water_id": "auke-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "3ddc6bbd6ad26a3b8a217c6a3242a55cbb7c036719157cd1eca6613426592b5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -152,10 +215,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -134.63894,
-    58.38121,
-    -134.6223,
-    58.39266
+    -134.639109,
+    58.381068,
+    -134.622298,
+    58.392661
    ],
    "wikidata": null,
    "charted": false,
@@ -163,6 +226,15 @@
    "launches": [
     "auke-lake-boat-launch-ak"
    ],
+   "water_id": "auke-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "0f92ae298c7d4a80b7735f02cb06db492f3307d518357806943c98c9a596de6b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -174,10 +246,10 @@
     "Bell Island Hot Springs"
    ],
    "bbox": [
-    -131.63138,
-    55.93703,
+    -131.631379,
+    55.937031,
     -131.61348,
-    55.98581
+    55.985809
    ],
    "wikidata": null,
    "charted": true,
@@ -185,6 +257,15 @@
    "launches": [
     "bailey-bay-buoy-ak"
    ],
+   "water_id": "bailey-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "e523a6b6cf2a5dd86a1e7f824bddc397f07d0089bd9f20adafe0f745db5dfb6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -196,10 +277,10 @@
     "Ketchikan"
    ],
    "bbox": [
-    -131.6903,
-    55.34783,
-    -131.67683,
-    55.35292
+    -131.690299,
+    55.34765,
+    -131.676831,
+    55.352919
    ],
    "wikidata": null,
    "charted": true,
@@ -207,6 +288,15 @@
    "launches": [
     "bar-harbor-launch-ramp-ak"
    ],
+   "water_id": "bar-point-basin-ak",
+   "gnis_id": null,
+   "geometry_hash": "b31364f8e156803260df32c7550919fe15591a82a9120b76be8fc859e77b8cd2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -218,10 +308,10 @@
     "Wasilla"
    ],
    "bbox": [
-    -149.56594,
-    61.40118,
-    -149.55357,
-    61.40831
+    -149.565942,
+    61.401182,
+    -149.553567,
+    61.408312
    ],
    "wikidata": "Q49299168",
    "charted": true,
@@ -229,6 +319,15 @@
    "launches": [
     "beach-lake-boat-launch-ak"
    ],
+   "water_id": "beach-lake-ak",
+   "gnis_id": "1398679",
+   "geometry_hash": "14016392ba115676fb58c020b6e6af57679576a1459d2ae7bd88c654d754028c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -240,10 +339,10 @@
     "Big Lake"
    ],
    "bbox": [
-    -149.84155,
-    61.57698,
-    -149.81881,
-    61.58919
+    -149.841555,
+    61.576976,
+    -149.818807,
+    61.589334
    ],
    "wikidata": null,
    "charted": false,
@@ -251,6 +350,15 @@
    "launches": [
     "big-beaver-lake-boat-launch-ak"
    ],
+   "water_id": "big-beaver-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "ff18bcb13e01f6f15a97ebf10ad135e9ae469d08ad0054647aafc8c192e57b21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -262,10 +370,10 @@
     "Big Lake"
    ],
    "bbox": [
-    -149.97181,
-    61.51282,
-    -149.82665,
-    61.55557
+    -149.971811,
+    61.512818,
+    -149.826647,
+    61.555572
    ],
    "wikidata": "Q124618160",
    "charted": false,
@@ -275,6 +383,15 @@
     "big-lake-north-boat-launch-ak",
     "big-lake-south-boat-launch-ak"
    ],
+   "water_id": "big-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "14992a669958125cf6a6c88b7d9d95dd7ad9a8fac51892d5d0688e18d70b43ad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -284,9 +401,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -145.74981,
-    65.25932,
-    -144.2386,
+    -145.749807,
+    65.259321,
+    -144.238473,
     66.27911
    ],
    "wikidata": "Q864994",
@@ -297,6 +414,15 @@
     "lower-birch-creek-wayside-ak",
     "upper-birch-creek-wayside-ak"
    ],
+   "water_id": "birch-creek-ak",
+   "gnis_id": "1399058",
+   "geometry_hash": "a024fe10345b632c64b7f342a29bb0a6ab2f60ff75c76992c16c937d39f4d766",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -306,10 +432,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -146.68169,
-    64.30483,
-    -146.64131,
-    64.32862
+    -146.681685,
+    64.304793,
+    -146.641308,
+    64.328616
    ],
    "wikidata": "Q49299510",
    "charted": false,
@@ -318,6 +444,15 @@
     "birch-lake-boat-launch-ak",
     "birch-lake-boat-launch-ak-2"
    ],
+   "water_id": "birch-lake-ak",
+   "gnis_id": "1399070",
+   "geometry_hash": "0ba6fdd0aa639953504cc689570cf2d54cd5c724dbe5a861e4f7046973d0f559",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -327,10 +462,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.68717,
-    55.8762,
-    -131.63106,
-    55.90708
+    -131.687169,
+    55.876195,
+    -131.631062,
+    55.907079
    ],
    "wikidata": null,
    "charted": true,
@@ -338,6 +473,15 @@
    "launches": [
     "blind-pass-buoy-ak"
    ],
+   "water_id": "blind-pass-ak",
+   "gnis_id": null,
+   "geometry_hash": "20a8a130eb027d2ece4db79678bbfeb39ae4fce9a4939e3f57df7b8549cbec30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -347,10 +491,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.24916,
-    55.98397,
-    -131.07003,
-    56.07893
+    -131.249159,
+    55.983971,
+    -131.070033,
+    56.078932
    ],
    "wikidata": null,
    "charted": true,
@@ -358,6 +502,15 @@
    "launches": [
     "klahini-bay-buoy-day-use-area-ak"
    ],
+   "water_id": "burroughs-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "a1ce4e614582ed851e57b6d436affd602203d2634e73c7cadfcbf7b55fb29789",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -367,10 +520,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.70195,
-    60.7124,
-    -150.68545,
-    60.72185
+    -150.701951,
+    60.712397,
+    -150.685261,
+    60.722066
    ],
    "wikidata": null,
    "charted": false,
@@ -378,6 +531,15 @@
    "launches": [
     "swan-lake-canoe-route-launch-ak"
    ],
+   "water_id": "canoe-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "e6f20d26412e70faf599e4ac729b51dc44f052ef52bce411e8d75120ebaf45b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -389,10 +551,10 @@
     "Ketchikan"
    ],
    "bbox": [
-    -131.48234,
-    55.30033,
-    -131.28744,
-    55.64275
+    -131.482338,
+    55.300331,
+    -131.287381,
+    55.642846
    ],
    "wikidata": null,
    "charted": true,
@@ -401,6 +563,15 @@
     "icehouse-cove-buoy-camping-area-ak",
     "shoal-cove-osten-island-buoy-site-ak"
    ],
+   "water_id": "carroll-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "88d6af028e328209f1b6d6b38f46c93cc096b133eb28497a2e3d53523376ef55",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -412,10 +583,10 @@
     "Olnes"
    ],
    "bbox": [
-    -149.30192,
-    64.97078,
-    -146.34732,
-    65.29565
+    -149.301921,
+    64.970785,
+    -146.347316,
+    65.295654
    ],
    "wikidata": "Q2961511",
    "charted": false,
@@ -423,6 +594,15 @@
    "launches": [
     "chatanika-river-boat-launch-elliot-highway-bridge-ak"
    ],
+   "water_id": "chatanika-river-ak",
+   "gnis_id": "1400168",
+   "geometry_hash": "fab2074e84303b33b44403f1ac59261037f58d794fbb9b0a70dd0ce481308fd5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -438,10 +618,10 @@
     "Pleasant Valley"
    ],
    "bbox": [
-    -147.91482,
-    64.78861,
-    -146.18234,
-    65.04882
+    -147.915305,
+    64.788333,
+    -146.182343,
+    65.048823
    ],
    "wikidata": "Q1069837",
    "charted": false,
@@ -452,6 +632,22 @@
     "flat-creek-slough-boat-launch-ak",
     "graehl-park-landing-ak",
     "chena-river-boat-launch-ak"
+   ],
+   "water_id": "chena-river-ak",
+   "gnis_id": "1400201",
+   "geometry_hash": "a576dc7257c3e3b21d64d4fc2cf86ea0b24eb9cffd051506bcdd6ddce35157d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "chena-river-boat-launch-near-college-ak-3",
+    "chena-river-boat-launch-near-college-ak-4",
+    "chena-river-boat-launch-near-college-ak-5",
+    "chena-river-boat-launch-near-college-ak-6",
+    "chena-river-boat-launch-near-college-ak-8",
+    "chena-river-boat-launch-near-college-ak-9"
    ],
    "advisories": []
   },
@@ -465,10 +661,10 @@
     "Mud Bay"
    ],
    "bbox": [
-    -135.48283,
-    59.07635,
-    -135.30739,
-    59.20307
+    -135.482828,
+    59.076351,
+    -135.307391,
+    59.203069
    ],
    "wikidata": null,
    "charted": true,
@@ -477,6 +673,15 @@
     "chilkat-state-park-launch-ramp-ak",
     "letnikof-cove-launch-ramp-ak"
    ],
+   "water_id": "chilkat-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "a9badf0028fca298a0b54003cc552ad15ed5c74b1487030f16c7d44e14f86c50",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -489,9 +694,9 @@
     "Klukwan"
    ],
    "bbox": [
-    -136.05857,
-    59.34561,
-    -135.75813,
+    -136.058571,
+    59.345611,
+    -135.758129,
     59.74305
    ],
    "wikidata": "Q271001",
@@ -501,6 +706,15 @@
     "council-grounds-launch-ramp-ak",
     "kelsall-road-launch-ramp-ak"
    ],
+   "water_id": "chilkat-river-ak",
+   "gnis_id": "1421032",
+   "geometry_hash": "d0ac2ede2773fc9becdaaf5bc81209bed1e2f971aadff9dd4e7b04e1099dd94a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -512,10 +726,10 @@
     "Lutak"
    ],
    "bbox": [
-    -135.63573,
-    59.33161,
-    -135.56198,
-    59.37615
+    -135.635727,
+    59.331613,
+    -135.561983,
+    59.376146
    ],
    "wikidata": "Q5098982",
    "charted": false,
@@ -523,6 +737,15 @@
    "launches": [
     "chilkoot-lake-launch-ramp-ak"
    ],
+   "water_id": "chilkoot-lake-ak",
+   "gnis_id": "1421035",
+   "geometry_hash": "3c02058fc2e025e378d6c00f8e66e48f2f931d956ef1ce080381df3258125438",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -534,10 +757,10 @@
     "Northway Junction"
    ],
    "bbox": [
-    -142.22888,
-    62.02291,
-    -141.26005,
-    63.05214
+    -142.228875,
+    62.022668,
+    -141.260046,
+    63.052145
    ],
    "wikidata": "Q1074816",
    "charted": false,
@@ -545,6 +768,15 @@
    "launches": [
     "chisana-river-boat-launch-ak"
    ],
+   "water_id": "chisana-river-ak",
+   "gnis_id": "1400326",
+   "geometry_hash": "efda6314756d9770c033f1d965ec94b900af3f67df6e4ebbca70ef9300e5a0ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -562,6 +794,15 @@
    "launches": [
     "chukchi-sea-boat-launch-ak"
    ],
+   "water_id": "chukchi-sea-ak",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -573,10 +814,10 @@
     "Whale Pass"
    ],
    "bbox": [
-    -133.19827,
+    -133.198269,
     54.72011,
-    -131.34628,
-    56.35642
+    -131.346281,
+    56.356424
    ],
    "wikidata": null,
    "charted": true,
@@ -584,6 +825,15 @@
    "launches": [
     "whale-pass-launch-ramp-ak"
    ],
+   "water_id": "clarence-strait-ak",
+   "gnis_id": null,
+   "geometry_hash": "39c3be6a167941aa2cfe067bcce8aef422949b92b15bfb4d949ca3574a7b893f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -595,10 +845,10 @@
     "Delta Junction"
    ],
    "bbox": [
-    -145.61184,
-    64.07314,
-    -145.54164,
-    64.09336
+    -145.611843,
+    64.072978,
+    -145.541638,
+    64.093355
    ],
    "wikidata": null,
    "charted": false,
@@ -606,6 +856,15 @@
    "launches": [
     "clearwater-lake-launch-ak"
    ],
+   "water_id": "clearwater-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "c985afd00e825f834d28110e1d6139b41cf35de1c699bec2702c4fa2823b7d4d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -617,10 +876,10 @@
     "Coffman Cove"
    ],
    "bbox": [
-    -132.85402,
-    56.00012,
-    -132.82916,
-    56.02839
+    -132.854022,
+    56.00003,
+    -132.829161,
+    56.028389
    ],
    "wikidata": null,
    "charted": true,
@@ -628,6 +887,15 @@
    "launches": [
     "coffman-cove-launch-ramp-ak"
    ],
+   "water_id": "coffman-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "592830cb709a574f1b492d47a6c7ef4726a4a66aff14dd1e0b63866928a4f472",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -640,16 +908,59 @@
     "Ninilchik"
    ],
    "bbox": [
-    -153.70932,
-    58.89932,
-    -148.96166,
-    61.52693
+    -153.709323,
+    58.899321,
+    -148.961661,
+    61.526931
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 23176.87,
    "launches": [
     "whiskey-gulch-beach-launch-ak"
+   ],
+   "water_id": "cook-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "df29a38784d935bc8314ef8e3887b8eeeef3bbcda54db3e241f285ba8cc97f0f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "anchor-point-tractor-launch-ak",
+    "deep-creek-tractor-launch-ak"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "copper-river-ak",
+   "name": "Copper River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Gakona"
+   ],
+   "bbox": [
+    -145.436325,
+    60.286426,
+    -143.634351,
+    62.703637
+   ],
+   "wikidata": "Q1131444",
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "copper-river-ak",
+   "gnis_id": "1421207",
+   "geometry_hash": "3625c15a28dfb7503bf79a47e13ef663967085988d9dfbd3c19fb3b50c6e6af8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "copper-river-boat-launch-ak"
    ],
    "advisories": []
   },
@@ -663,9 +974,9 @@
    ],
    "bbox": [
     -147.74072,
-    64.79143,
-    -147.71144,
-    64.80001
+    64.791432,
+    -147.711435,
+    64.800015
    ],
    "wikidata": null,
    "charted": false,
@@ -673,6 +984,15 @@
    "launches": [
     "tanana-lakes-recreation-area-boat-launch-ak"
    ],
+   "water_id": "cushman-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "1d529bcdac9fd2877a5079a4c7f7a6be8bfa92a28362c6e4be255264663cef7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -682,9 +1002,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -139.26892,
-    59.39097,
-    -139.01254,
+    -139.268918,
+    59.390883,
+    -139.012536,
     59.43434
    ],
    "wikidata": "Q49888409",
@@ -693,6 +1013,15 @@
    "launches": [
     "dangerous-river-boat-launch-ak"
    ],
+   "water_id": "dangerous-river-ak",
+   "gnis_id": "1421358",
+   "geometry_hash": "c4bdef9b8a559778280f2238b20e06dbde1c1dc71be6e681f22d63a7e4812d7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -702,10 +1031,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -141.56036,
-    62.87018,
-    -141.53968,
-    62.89225
+    -141.560361,
+    62.870183,
+    -141.539676,
+    62.892249
    ],
    "wikidata": "Q49301450",
    "charted": false,
@@ -713,6 +1042,15 @@
    "launches": [
     "deadman-lake-boat-launch-ak"
    ],
+   "water_id": "deadman-lake-ak",
+   "gnis_id": "1401030",
+   "geometry_hash": "f9e1886cc5c155705cc75d7d088051088ca34de4f5d7de01066b4af259bf50a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -725,9 +1063,9 @@
    ],
    "bbox": [
     -149.96173,
-    61.16088,
-    -149.95304,
-    61.16408
+    61.160878,
+    -149.953037,
+    61.164083
    ],
    "wikidata": null,
    "charted": false,
@@ -735,6 +1073,15 @@
    "launches": [
     "delong-lake-launch-ak"
    ],
+   "water_id": "delong-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "430cb11951141d26ae8073ce7cc2de646a2e18053e26fdf344b4e496eb7a9857",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -744,9 +1091,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -146.07014,
-    63.01916,
-    -145.73371,
+    -146.070144,
+    63.019078,
+    -145.733707,
     64.15607
    ],
    "wikidata": "Q1184924",
@@ -755,6 +1102,15 @@
    "launches": [
     "upper-tangle-lake-launch-ak"
    ],
+   "water_id": "delta-river-ak",
+   "gnis_id": "1401105",
+   "geometry_hash": "e8f7704927db6413fa6972b06776b247ff5aedd47bbc25b74de433a37f1fd30b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -764,10 +1120,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -141.09679,
-    62.66044,
-    -141.04226,
-    62.69119
+    -141.096785,
+    62.660436,
+    -141.042261,
+    62.691192
    ],
    "wikidata": null,
    "charted": false,
@@ -775,6 +1131,15 @@
    "launches": [
     "desper-creek-boat-launch-ak"
    ],
+   "water_id": "desper-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "14e065d6ffdd499d2680c95ee610776bd893d076ed19127079f48c8d8893a6fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -784,10 +1149,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.79807,
-    60.69831,
-    -150.768,
-    60.7144
+    -150.798067,
+    60.698313,
+    -150.768002,
+    60.714403
    ],
    "wikidata": null,
    "charted": false,
@@ -795,6 +1160,15 @@
    "launches": [
     "dolly-varden-lake-boat-launch-ak"
    ],
+   "water_id": "dolly-varden-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "9c9d885409a16f9530af9b8e55b16344b59902c79a585fff1505ae6f17edf378",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -806,10 +1180,10 @@
     "Juneau"
    ],
    "bbox": [
-    -134.39029,
-    58.27406,
+    -134.390289,
+    58.274061,
     -134.38455,
-    58.27703
+    58.277029
    ],
    "wikidata": null,
    "charted": true,
@@ -817,6 +1191,15 @@
    "launches": [
     "mike-pusich-douglas-boat-launch-ak"
    ],
+   "water_id": "douglas-boat-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "5c1cd8531e15d76dbfaa693b49209cf41813359c7a78cfc63cb513e431794de3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -826,10 +1209,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -134.93702,
-    58.65927,
-    -134.90586,
-    58.68651
+    -134.937016,
+    58.659265,
+    -134.905718,
+    58.686513
    ],
    "wikidata": null,
    "charted": true,
@@ -837,6 +1220,15 @@
    "launches": [
     "echo-cove-boat-launch-ak"
    ],
+   "water_id": "echo-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "56c19d0e317fd4d2db7e14b1730169b3d9e0387ced223c0e8eed4e3aea22f641",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -848,10 +1240,10 @@
     "Palmer"
    ],
    "bbox": [
-    -149.14991,
-    61.33567,
+    -149.149913,
+    61.335639,
     -148.98749,
-    61.40905
+    61.409055
    ],
    "wikidata": "Q1323285",
    "charted": false,
@@ -859,6 +1251,15 @@
    "launches": [
     "eklutna-lake-boat-ramp-ak"
    ],
+   "water_id": "eklutna-lake-ak",
+   "gnis_id": "1401730",
+   "geometry_hash": "3c0a09697405725a3de027844b7b3f2ee8ec80934acd6e50e164f18196405e27",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -868,10 +1269,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -133.41082,
-    55.88051,
-    -133.25245,
-    56.16847
+    -133.410816,
+    55.880513,
+    -133.252446,
+    56.168474
    ],
    "wikidata": "Q49111211",
    "charted": true,
@@ -879,6 +1280,15 @@
    "launches": [
     "el-capitan-boating-site-ak"
    ],
+   "water_id": "el-capitan-passage-ak",
+   "gnis_id": "1421680",
+   "geometry_hash": "ab5c2ea7fbfaae6a0f920fb8b021a0c18d8b03f34da18ac37e331ae16ed1453f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -891,9 +1301,9 @@
    ],
    "bbox": [
     -151.0128,
-    60.58469,
-    -150.98105,
-    60.60344
+    60.584453,
+    -150.981049,
+    60.603439
    ],
    "wikidata": null,
    "charted": false,
@@ -901,6 +1311,15 @@
    "launches": [
     "spirit-lake-ak"
    ],
+   "water_id": "elephant-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "0c61bd56b1606a2ff2d5b775934f85413ca869a8f0990802b86d3dd422a7ff2c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -910,10 +1329,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.3358,
-    60.4728,
-    -150.3077,
-    60.48347
+    -150.335802,
+    60.472798,
+    -150.307702,
+    60.483467
    ],
    "wikidata": null,
    "charted": false,
@@ -921,6 +1340,15 @@
    "launches": [
     "engineer-lake-boat-launch-ak"
    ],
+   "water_id": "engineer-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "f8fc23655b1d12509b411802b0bbce53efedb54d35299f7748a86eed3c9b0a9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -932,10 +1360,10 @@
     "Eyak"
    ],
    "bbox": [
-    -145.74669,
+    -145.746689,
     60.42902,
-    -145.6342,
-    60.53209
+    -145.634197,
+    60.532089
    ],
    "wikidata": null,
    "charted": false,
@@ -943,6 +1371,15 @@
    "launches": [
     "eyak-river-boat-launch-ak"
    ],
+   "water_id": "eyak-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "78cfc22e675bf99261a5db0b8becee03a832fab06ec35a09a76611181c833fd5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -952,10 +1389,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -145.73761,
-    63.15254,
-    -145.63521,
-    63.19181
+    -145.737612,
+    63.152543,
+    -145.635206,
+    63.192031
    ],
    "wikidata": null,
    "charted": false,
@@ -963,6 +1400,15 @@
    "launches": [
     "fielding-lake-boat-launch-ak"
    ],
+   "water_id": "fielding-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "d7b000b3508d260e287ae42f2b344b3f5b512b785f6d131733bf4dd644bb5bc3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -974,8 +1420,8 @@
     "Palmer"
    ],
    "bbox": [
-    -149.30062,
-    61.59505,
+    -149.300618,
+    61.595048,
     -149.25775,
     61.61309
    ],
@@ -985,6 +1431,15 @@
    "launches": [
     "finger-lake-boat-launch-ak"
    ],
+   "water_id": "finger-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "b253a634db068ec78b546f1c4eacb3d9b89b193f54b9f49fc6a7e0b3ad12ff5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -994,10 +1449,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -141.75102,
-    64.24022,
-    -140.63935,
-    64.38297
+    -141.751018,
+    64.240223,
+    -140.639346,
+    64.382971
    ],
    "wikidata": "Q1439158",
    "charted": false,
@@ -1005,6 +1460,15 @@
    "launches": [
     "fortymile-bridge-wayside-ak"
    ],
+   "water_id": "fortymile-river-ak",
+   "gnis_id": "1402291",
+   "geometry_hash": "d1272a4f310f31b0cd68c274461e73f4e77a46e3b05adaaeacc4875cea4f2ef0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1016,10 +1480,10 @@
     "Freshwater Bay"
    ],
    "bbox": [
-    -135.22577,
-    57.80608,
-    -134.93661,
-    57.95437
+    -135.225768,
+    57.806081,
+    -134.936611,
+    57.954375
    ],
    "wikidata": null,
    "charted": true,
@@ -1027,6 +1491,15 @@
    "launches": [
     "freshwater-bay-boat-launch-ak"
    ],
+   "water_id": "freshwater-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "d8310d1e3190163eaf60d712c1baaf8669f1e11bc229dea2c887abd6f87d058d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1036,10 +1509,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -134.67041,
-    58.31091,
-    -134.60209,
-    58.34768
+    -134.670408,
+    58.310771,
+    -134.602091,
+    58.347679
    ],
    "wikidata": null,
    "charted": true,
@@ -1047,6 +1520,15 @@
    "launches": [
     "north-douglas-boat-launch-ak"
    ],
+   "water_id": "fritz-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "d9ca3fd508c19638f004dbb41d3671fe8a9a51659feecc32c51a7c8b32830066",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1056,10 +1538,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.98397,
-    56.0573,
-    -131.95944,
-    56.07163
+    -131.983969,
+    56.057301,
+    -131.959441,
+    56.071629
    ],
    "wikidata": null,
    "charted": true,
@@ -1067,6 +1549,15 @@
    "launches": [
     "frosty-bay-buoy-ak"
    ],
+   "water_id": "frosty-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "79d9684b1ca9e2bcb230156c22acc5c132b4b545d3ffaf7899b1227ab41eae77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1078,10 +1569,10 @@
     "Gustavus"
    ],
    "bbox": [
-    -137.13268,
+    -137.132685,
     58.37114,
-    -135.79426,
-    59.09219
+    -135.794263,
+    59.092186
    ],
    "wikidata": "Q4389292",
    "charted": true,
@@ -1089,6 +1580,15 @@
    "launches": [
     "glacier-bay-boat-launch-near-gustavus-ak"
    ],
+   "water_id": "glacier-bay-ak",
+   "gnis_id": "1422168",
+   "geometry_hash": "2f0339399349eeb4ec01c6b741648d83cfbf9ea27693eeeb902d7a1af48eeb9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1100,10 +1600,10 @@
     "Gulkana"
    ],
    "bbox": [
-    -145.74103,
-    62.21976,
-    -145.35303,
-    63.10424
+    -145.741031,
+    62.219763,
+    -145.353033,
+    63.104242
    ],
    "wikidata": "Q948529",
    "charted": false,
@@ -1112,6 +1612,15 @@
     "gulkana-river-at-richardson-highway-bridge-ak",
     "gulkana-river-boat-launch-ak-2"
    ],
+   "water_id": "gulkana-river-ak",
+   "gnis_id": "1403048",
+   "geometry_hash": "e57a8a2a31dfa90a604db8006354fe560fa5604e46944db29b7f9b26c4f36402",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1121,10 +1630,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -149.6807,
-    61.29668,
-    -149.67505,
-    61.29883
+    -149.680696,
+    61.296596,
+    -149.675049,
+    61.299082
    ],
    "wikidata": null,
    "charted": false,
@@ -1132,6 +1641,15 @@
    "launches": [
     "gwen-lake-ak"
    ],
+   "water_id": "gwenn-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "a95d37ff98fac919c80147aaad755788b821c7ed999915f8e8bfa36abcfebb12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1143,10 +1661,10 @@
     "Kake"
    ],
    "bbox": [
-    -133.89112,
+    -133.891118,
     56.87533,
-    -133.72762,
-    56.91386
+    -133.727621,
+    56.913859
    ],
    "wikidata": null,
    "charted": true,
@@ -1155,6 +1673,15 @@
     "hamilton-bay-boat-launch-ak",
     "seal-point-boat-ramp-ak"
    ],
+   "water_id": "hamilton-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "4167209cf85907b9d85cdda8dfefc8d63a792afa9d6c8014124851e6cbdb197d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1166,16 +1693,56 @@
     "Harding Lake"
    ],
    "bbox": [
-    -146.89435,
-    64.40643,
-    -146.81838,
-    64.43555
+    -146.894353,
+    64.406433,
+    -146.818292,
+    64.435555
    ],
    "wikidata": "Q49302827",
    "charted": false,
    "area_km2": 15.884,
    "launches": [
     "harding-lake-state-recreation-area-launch-ak"
+   ],
+   "water_id": "harding-lake-ak",
+   "gnis_id": "1403177",
+   "geometry_hash": "c408e7a6052771f207e6c01fd90bae1174d513749ecddc7afaa9c50a9c7c4e0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harriet-hunt-lake-ak",
+   "name": "Harriet Hunt Lake",
+   "kind": "lake",
+   "state": "AK",
+   "towns": [
+    "Ketchikan"
+   ],
+   "bbox": [
+    -131.599271,
+    55.482096,
+    -131.575446,
+    55.491722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.205,
+   "launches": [],
+   "water_id": "harriet-hunt-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "92e37a8a90fd547d1f396b25332cfbbb8ac4b5f0493c63c7c90ca6e4fc6e0e65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "harriet-hunt-lake-boat-launch-ak"
    ],
    "advisories": []
   },
@@ -1188,10 +1755,10 @@
     "Juneau"
    ],
    "bbox": [
-    -134.43108,
-    58.29995,
-    -134.42553,
-    58.30335
+    -134.431079,
+    58.299951,
+    -134.425531,
+    58.303349
    ],
    "wikidata": null,
    "charted": true,
@@ -1199,6 +1766,15 @@
    "launches": [
     "harris-harbor-boat-launch-ak"
    ],
+   "water_id": "harris-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "1b2b50d975559c6e4cad0f06132c238c35da41d1dec18a5026075b9d83ecce9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1208,10 +1784,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -132.03748,
-    55.58757,
-    -131.89515,
-    55.68003
+    -132.037479,
+    55.587571,
+    -131.895152,
+    55.680029
    ],
    "wikidata": null,
    "charted": true,
@@ -1219,6 +1795,15 @@
    "launches": [
     "helm-creek-buoy-ak"
    ],
+   "water_id": "helm-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "53ab73299be07fe316c64b55641c7ecdd577a5786592a50890baff80439e91f2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1228,10 +1813,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.32574,
-    60.46548,
-    -150.20053,
-    60.50209
+    -150.325736,
+    60.465483,
+    -150.200388,
+    60.502086
    ],
    "wikidata": "Q49302954",
    "charted": false,
@@ -1239,6 +1824,15 @@
    "launches": [
     "hidden-lake-campground-boat-launch-ak"
    ],
+   "water_id": "hidden-lake-ak",
+   "gnis_id": "1413131",
+   "geometry_hash": "177e20672c3d3a17c5b0953f90615d4793ec319d8687153a47afed57026618d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1250,10 +1844,10 @@
     "Hoonah"
    ],
    "bbox": [
-    -135.46379,
+    -135.463789,
     58.10372,
-    -135.44022,
-    58.12028
+    -135.440221,
+    58.120279
    ],
    "wikidata": null,
    "charted": true,
@@ -1261,6 +1855,15 @@
    "launches": [
     "hoonah-boat-launch-harbor-ak"
    ],
+   "water_id": "hoonah-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "1870873b7a52ac07641b394d098043ffeb9f4b7004eec47897f6c742b3e44f09",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1272,10 +1875,10 @@
     "Manley Hot Springs"
    ],
    "bbox": [
-    -150.82084,
-    64.97719,
-    -150.47128,
-    65.01458
+    -150.820838,
+    64.977194,
+    -150.471282,
+    65.014621
    ],
    "wikidata": null,
    "charted": false,
@@ -1283,6 +1886,15 @@
    "launches": [
     "manley-hot-springs-landing-ak"
    ],
+   "water_id": "hot-springs-slough-ak",
+   "gnis_id": null,
+   "geometry_hash": "8d0d91c1a6efc06e6a3eb336f42cd485dc34829fdea16d47fb43f5fd20aa7f4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1294,10 +1906,10 @@
     "Nikiski"
    ],
    "bbox": [
-    -151.3286,
-    60.69796,
-    -151.29573,
-    60.71022
+    -151.328599,
+    60.697962,
+    -151.295726,
+    60.710215
    ],
    "wikidata": null,
    "charted": false,
@@ -1305,6 +1917,15 @@
    "launches": [
     "island-lake-boat-launch-ak"
    ],
+   "water_id": "island-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "792b853df3a0b926080ee6d9752989b696e053305fa76bf077b3d94b679af933",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1316,10 +1937,10 @@
     "Jakolof Bay"
    ],
    "bbox": [
-    -151.54049,
-    59.44678,
-    -151.48618,
-    59.46935
+    -151.540488,
+    59.446779,
+    -151.486176,
+    59.469353
    ],
    "wikidata": null,
    "charted": true,
@@ -1327,6 +1948,15 @@
    "launches": [
     "jakalof-bay-dock-and-skiff-launch-ak"
    ],
+   "water_id": "jakolof-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "bfaf1e427c36c36ad85e235a959164da3f3cab7296e1e6009dfd1fdc1de6a681",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1336,10 +1966,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.18256,
-    60.49831,
-    -150.16456,
-    60.51318
+    -150.182564,
+    60.498313,
+    -150.164558,
+    60.51331
    ],
    "wikidata": null,
    "charted": false,
@@ -1347,6 +1977,15 @@
    "launches": [
     "gene-lake-boat-ramp-ak"
    ],
+   "water_id": "jean-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "8b70f6214d8bb085f610e252733395cb83b10344a9759d3fb9537c215948e536",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1358,10 +1997,10 @@
     "Kasilof"
    ],
    "bbox": [
-    -151.27061,
-    60.28611,
-    -151.25746,
-    60.29595
+    -151.270607,
+    60.286113,
+    -151.257464,
+    60.295952
    ],
    "wikidata": null,
    "charted": false,
@@ -1369,6 +2008,15 @@
    "launches": [
     "johnson-lake-boat-launch-ak"
    ],
+   "water_id": "johnson-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "3e6b2aba56493a8ba48aea4c11acfe90fd03751c5c32d04daf3567b945d4e8e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1381,15 +2029,26 @@
    ],
    "bbox": [
     -151.8862,
-    59.42484,
-    -150.96375,
-    59.81641
+    59.424841,
+    -150.963751,
+    59.816409
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 1243.997,
    "launches": [
     "homer-spit-community-boat-launch-ak"
+   ],
+   "water_id": "kachemak-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "346133f1852bbe2c0b09ad0b133b905dd80017e4cfad4e38378cd720faa10d21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kachemak-bay-boat-launch-ak"
    ],
    "advisories": []
   },
@@ -1400,10 +2059,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -153.00944,
-    66.16619,
-    -150.06735,
-    66.5245
+    -153.009436,
+    66.165773,
+    -150.067351,
+    66.524505
    ],
    "wikidata": "Q1728215",
    "charted": false,
@@ -1411,6 +2070,15 @@
    "launches": [
     "kanuti-boat-launch-ak"
    ],
+   "water_id": "kanuti-river-ak",
+   "gnis_id": "1404446",
+   "geometry_hash": "1d99c84e476953a38b83e91c083f7d17f8ea83c452736e121855fdb7a46d1a93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1422,10 +2090,10 @@
     "Hollis"
    ],
    "bbox": [
-    -132.74382,
-    55.35848,
+    -132.743821,
+    55.358484,
     -132.15763,
-    55.62686
+    55.627009
    ],
    "wikidata": null,
    "charted": true,
@@ -1433,6 +2101,15 @@
    "launches": [
     "hollis-launch-ramp-ak"
    ],
+   "water_id": "kasaan-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "d8eb51a45bb388aefe40ce4551cb7ebdcab5f8cf431179f20ada41778806d08c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1444,10 +2121,10 @@
     "Willow"
    ],
    "bbox": [
-    -150.10323,
-    61.91115,
-    -148.87809,
-    62.02354
+    -150.103231,
+    61.911153,
+    -148.878091,
+    62.023539
    ],
    "wikidata": null,
    "charted": false,
@@ -1455,6 +2132,15 @@
    "launches": [
     "susitna-landing-ak"
    ],
+   "water_id": "kashwitna-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "4d600ac474589b247aa3aeb228f4831765508e4ae7f90ba837913159f1082673",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1467,10 +2153,10 @@
     "Kasilof"
    ],
    "bbox": [
-    -151.30424,
-    60.23298,
-    -151.16569,
-    60.38604
+    -151.304243,
+    60.232979,
+    -151.165694,
+    60.386049
    ],
    "wikidata": "Q1140704",
    "charted": true,
@@ -1478,6 +2164,18 @@
    "launches": [
     "kasilof-river-state-recreation-site-boat-launch-ak",
     "tustumena-lake-ak"
+   ],
+   "water_id": "kasilof-river-ak",
+   "gnis_id": "1413284",
+   "geometry_hash": "98b063c95860bdfae7d89d6de40cd395c6a18a2a92ed19dd87f02d4da3d16797",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kasilof-river-boat-launch-near-cohoe-ak",
+    "kasilof-river-boat-launch-near-cohoe-ak-2"
    ],
    "advisories": []
   },
@@ -1490,10 +2188,10 @@
     "Kake"
    ],
    "bbox": [
-    -134.27214,
-    56.77735,
-    -133.75044,
-    57.05987
+    -134.272139,
+    56.777351,
+    -133.750441,
+    57.059874
    ],
    "wikidata": null,
    "charted": true,
@@ -1501,6 +2199,15 @@
    "launches": [
     "kake-harbor-launch-ramp-ak"
    ],
+   "water_id": "keku-strait-ak",
+   "gnis_id": null,
+   "geometry_hash": "ece34dca26c7c4bab60a9c85d25bbb67da62b6a9157df0893856705988a53cf5",
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1510,10 +2217,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.39257,
-    60.51257,
+    -150.392568,
+    60.512546,
     -150.3654,
-    60.52078
+    60.520826
    ],
    "wikidata": null,
    "charted": false,
@@ -1521,6 +2228,15 @@
    "launches": [
     "kelly-lake-boat-launch-ak"
    ],
+   "water_id": "kelly-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "915e2f5aeb2bb947f95c4ec3f17f53c365691badce866343720df7902f79ace3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1534,10 +2250,10 @@
     "Snug Harbor"
    ],
    "bbox": [
-    -149.83314,
-    60.33315,
-    -149.34471,
-    60.49481
+    -149.833138,
+    60.333151,
+    -149.344695,
+    60.494809
    ],
    "wikidata": "Q200967",
    "charted": false,
@@ -1548,6 +2264,15 @@
     "kenai-lake-primrose-boat-launch-ak",
     "quartz-creek-campground-ak"
    ],
+   "water_id": "kenai-lake-ak",
+   "gnis_id": "1423027",
+   "geometry_hash": "e10e7a8d679371daaabe40db85d05effbed031f7299edc4981fb33130be90bf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1562,9 +2287,9 @@
     "Soldotna"
    ],
    "bbox": [
-    -151.26213,
-    60.40302,
-    -149.80844,
+    -151.262127,
+    60.403023,
+    -149.808436,
     60.55
    ],
    "wikidata": "Q846419",
@@ -1580,6 +2305,19 @@
     "sportsman-s-landing-campground-launch-ramp-ak",
     "swiftwater-park-launch-ramp-ak"
    ],
+   "water_id": "kenai-river-ak",
+   "gnis_id": "1413302",
+   "geometry_hash": "f045768d2f760b9056f8c7ae6988bd77e72c7d4ebe6b1cee41e1bd112bd4063f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kenai-river-boat-launch-near-kenai-ak",
+    "kenai-river-boat-launch-near-kenai-ak-2",
+    "russian-river-ferry-boat-launch-ak"
+   ],
    "advisories": []
   },
   {
@@ -1591,10 +2329,10 @@
     "Klawock"
    ],
    "bbox": [
-    -133.17223,
-    55.49039,
-    -133.05392,
-    55.60214
+    -133.172269,
+    55.490391,
+    -133.053731,
+    55.602139
    ],
    "wikidata": null,
    "charted": true,
@@ -1602,6 +2340,15 @@
    "launches": [
     "klawock-launch-ramp-ak"
    ],
+   "water_id": "klawock-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "21a70f17644806906142633f54250703a1addbef6c90fcbea889cb86858c7432",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1611,10 +2358,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.46743,
-    55.83638,
-    -131.43398,
-    55.8458
+    -131.467429,
+    55.836381,
+    -131.433982,
+    55.845799
    ],
    "wikidata": null,
    "charted": true,
@@ -1622,6 +2369,15 @@
    "launches": [
     "klu-bay-buoy-trailhead-ak"
    ],
+   "water_id": "klu-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "d9ba91499560ac070004e858413d8305b06da0dbef710e8ad725ecf78a6ebada",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1633,10 +2389,10 @@
     "Copper Center"
    ],
    "bbox": [
-    -146.16926,
-    61.38056,
-    -145.28217,
-    61.95426
+    -146.169258,
+    61.380563,
+    -145.282169,
+    61.954257
    ],
    "wikidata": "Q1321272",
    "charted": false,
@@ -1646,6 +2402,15 @@
     "klutina-river-launch-new-richardson-highway-row-ak",
     "klutina-river-launch-old-richardson-highway-row-ak"
    ],
+   "water_id": "klutina-river-ak",
+   "gnis_id": "1404840",
+   "geometry_hash": "6fdcc25544fce166127d52441a3a87a68ac66b52b517842104a8ed5a3fd200f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1658,9 +2423,9 @@
    ],
    "bbox": [
     -149.98519,
-    61.22146,
-    -149.33007,
-    61.52379
+    61.221461,
+    -149.330073,
+    61.523792
    ],
    "wikidata": "Q16893527",
    "charted": true,
@@ -1668,6 +2433,15 @@
    "launches": [
     "ship-creek-boat-launch-ak"
    ],
+   "water_id": "knik-arm-ak",
+   "gnis_id": "1404854",
+   "geometry_hash": "214c521220798aa401fb7e043490d81c7d00f1a78f4ab1fe704ccb349a9b114b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1679,10 +2453,10 @@
     "Kodiak"
    ],
    "bbox": [
-    -152.41304,
-    57.78312,
+    -152.413039,
+    57.783121,
     -152.39002,
-    57.79059
+    57.790597
    ],
    "wikidata": null,
    "charted": true,
@@ -1690,6 +2464,15 @@
    "launches": [
     "st-paul-harbor-boat-launch-ak"
    ],
+   "water_id": "kodiak-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "b2fee5cc0655c9e9ad0f98023127cae830945198d5326273e6303a2feae933a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1701,10 +2484,10 @@
     "Angoon"
    ],
    "bbox": [
-    -134.60505,
-    57.48659,
-    -134.4503,
-    57.55728
+    -134.605053,
+    57.486588,
+    -134.450041,
+    57.55743
    ],
    "wikidata": null,
    "charted": true,
@@ -1712,6 +2495,15 @@
    "launches": [
     "angoon-boat-launch-ak"
    ],
+   "water_id": "kootznahoo-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "525d3b8e8cdb2f6f84cc2c68c5a19ee1647435ad664b6b0486d1043fcee2360e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1721,10 +2513,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -165.18835,
-    64.9118,
+    -165.188345,
+    64.911802,
     -164.60691,
-    65.12998
+    65.129975
    ],
    "wikidata": "Q14680102",
    "charted": false,
@@ -1732,6 +2524,15 @@
    "launches": [
     "pilgram-river-gravel-boat-launch-ak"
    ],
+   "water_id": "kruzgamepa-river-ak",
+   "gnis_id": "1407977",
+   "geometry_hash": "254f9957978461506c1b9945dba8d74204ad92ec6147a42ce7bed28296d91233",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1743,10 +2544,10 @@
     "Bethel"
    ],
    "bbox": [
-    -162.54535,
-    60.06649,
-    -154.56738,
-    63.12094
+    -162.545806,
+    60.066489,
+    -154.567384,
+    63.121156
    ],
    "wikidata": "Q60067",
    "charted": true,
@@ -1754,6 +2555,15 @@
    "launches": [
     "bethel-small-boat-harbor-boat-launch-ak"
    ],
+   "water_id": "kuskokwim-river-ak",
+   "gnis_id": "1416402",
+   "geometry_hash": "187a05d17aaac5c813670819552ece81a4daadfea25b28c23afeff005b1450aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1763,10 +2573,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -165.39839,
-    65.12367,
-    -163.28608,
-    65.4491
+    -165.398393,
+    65.123667,
+    -163.286083,
+    65.449926
    ],
    "wikidata": "Q1794782",
    "charted": true,
@@ -1774,6 +2584,15 @@
    "launches": [
     "kuzitrin-river-gravel-boat-launch-ak"
    ],
+   "water_id": "kuzitrin-river-ak",
+   "gnis_id": "1405111",
+   "geometry_hash": "6068595f9c542c654f9b68739e08d35dd62f75c7a59d6310281640faadaef2a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1786,9 +2605,9 @@
    ],
    "bbox": [
     -157.18174,
-    58.82067,
-    -155.88788,
-    59.33081
+    58.820675,
+    -155.887878,
+    59.330935
    ],
    "wikidata": "Q1569668",
    "charted": true,
@@ -1796,6 +2615,15 @@
    "launches": [
     "igiugig-boat-landing-ak"
    ],
+   "water_id": "kvichak-river-ak",
+   "gnis_id": "1405113",
+   "geometry_hash": "94ca9f4634d491f9b5979a557fa10d44290e40b263599dfb9b40205265aac582",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1807,10 +2635,10 @@
     "Labouchere Bay"
    ],
    "bbox": [
-    -133.65932,
-    56.28368,
-    -133.6197,
-    56.31338
+    -133.659325,
+    56.283682,
+    -133.619699,
+    56.313376
    ],
    "wikidata": null,
    "charted": true,
@@ -1818,6 +2646,15 @@
    "launches": [
     "labouchere-bay-launch-ramp-ak"
    ],
+   "water_id": "labouchere-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "e03e5a22a06d304cf139e844a796f685d39a37d4e2e65c9a0008cea21cbf1e7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1829,10 +2666,10 @@
     "Aleknagik"
    ],
    "bbox": [
-    -159.0546,
-    59.26673,
-    -158.59976,
-    59.45667
+    -159.054597,
+    59.266729,
+    -158.599759,
+    59.456672
    ],
    "wikidata": "Q1800850",
    "charted": false,
@@ -1840,6 +2677,15 @@
    "launches": [
     "aleknagik-access-ak"
    ],
+   "water_id": "lake-aleknagik-ak",
+   "gnis_id": "1398092",
+   "geometry_hash": "1d801bc58beb1b01e08e4493c20f646afb5f05a393a9dee6055f3da31c237b7a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1849,10 +2695,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -146.63418,
-    62.27621,
-    -146.45865,
-    62.38168
+    -146.634405,
+    62.276189,
+    -146.458654,
+    62.381677
    ],
    "wikidata": "Q1343275",
    "charted": false,
@@ -1861,6 +2707,15 @@
     "lake-louise-developed-concrete-boat-ramp-ak",
     "lake-louise-state-park-developed-shallow-boat-ramp-ak"
    ],
+   "water_id": "lake-louise-ak",
+   "gnis_id": null,
+   "geometry_hash": "399baea41e2d8c24d3bddf92ca47d3da3141986fb8ed08776a2653d4e0779678",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1870,10 +2725,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -159.07508,
-    59.14892,
-    -158.83938,
-    59.32019
+    -159.075079,
+    59.148922,
+    -158.839101,
+    59.320191
    ],
    "wikidata": null,
    "charted": false,
@@ -1881,6 +2736,15 @@
    "launches": [
     "snake-lake-access-ak"
    ],
+   "water_id": "lake-nunavaugaluk-ak",
+   "gnis_id": null,
+   "geometry_hash": "1b062c15e91f1ffcd90eac0d9eb76a9bd7123afb05a62ff20bf2e7aad94160c0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1890,9 +2754,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.63983,
-    60.7285,
-    -150.63429,
+    -150.639835,
+    60.728504,
+    -150.634285,
     60.73066
    ],
    "wikidata": null,
@@ -1901,6 +2765,15 @@
    "launches": [
     "merganser-lake-boat-launch-ak"
    ],
+   "water_id": "little-merganser-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "42bb069e6530b6c0928077ca0fa91019d63c97f2e84be4aed91cd2469706c9de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1912,10 +2785,10 @@
     "Houston"
    ],
    "bbox": [
-    -150.29649,
-    61.26865,
-    -149.07237,
-    61.85171
+    -150.296487,
+    61.268422,
+    -149.072374,
+    61.851709
    ],
    "wikidata": "Q1865830",
    "charted": true,
@@ -1923,6 +2796,15 @@
    "launches": [
     "little-susitna-public-use-facility-ak"
    ],
+   "water_id": "little-susitna-river-ak",
+   "gnis_id": "1405547",
+   "geometry_hash": "bc6c7aa9b201a9e70e96cd031383ab71606095ea8b1f488659432c67f23da997",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1932,10 +2814,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -142.29656,
-    63.7293,
-    -142.20581,
-    63.86543
+    -142.296563,
+    63.729303,
+    -142.205808,
+    63.865429
    ],
    "wikidata": null,
    "charted": false,
@@ -1943,6 +2825,15 @@
    "launches": [
     "logging-cabin-creek-wayside-ak"
    ],
+   "water_id": "logging-cabin-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "13b2d1147d206dacef128ea7c2de7ddbea4ae3e57685e1170592caf2c9818d39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1954,10 +2845,10 @@
     "Soldotna"
    ],
    "bbox": [
-    -150.91975,
-    60.4922,
-    -150.90139,
-    60.5098
+    -150.919749,
+    60.492151,
+    -150.901117,
+    60.509818
    ],
    "wikidata": null,
    "charted": false,
@@ -1965,6 +2856,15 @@
    "launches": [
     "longmere-lake-boat-launch-ak"
    ],
+   "water_id": "longmere-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "ea199fb059ffa71eaece8484977e6b3c71174c71a1186a5b6ebdcfcab2ecb3a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1974,10 +2874,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -149.55218,
-    61.34816,
-    -149.53959,
-    61.35748
+    -149.552177,
+    61.348155,
+    -149.539588,
+    61.357478
    ],
    "wikidata": "Q49304944",
    "charted": false,
@@ -1985,6 +2885,15 @@
    "launches": [
     "lower-fire-lake-boat-launch-ak"
    ],
+   "water_id": "lower-fire-lake-ak",
+   "gnis_id": "1405755",
+   "geometry_hash": "e8cc747e16516d8df742623957998e710f47230d59abe5c6be90f807be815104",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -1994,10 +2903,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.32285,
-    60.4502,
-    -150.3107,
-    60.46109
+    -150.322853,
+    60.449945,
+    -150.310703,
+    60.461093
    ],
    "wikidata": null,
    "charted": false,
@@ -2005,6 +2914,15 @@
    "launches": [
     "lower-ohmer-lake-canoe-launch-ak"
    ],
+   "water_id": "lower-omer-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "4029a74144583ad004da2ba863cca3a5f8e81b1ab0cb97759e1d0b0ac20e020f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2016,10 +2934,10 @@
     "Coffman Cove"
    ],
    "bbox": [
-    -132.78045,
-    55.92524,
-    -132.75739,
-    55.95269
+    -132.780448,
+    55.925121,
+    -132.757393,
+    55.952688
    ],
    "wikidata": null,
    "charted": false,
@@ -2027,6 +2945,15 @@
    "launches": [
     "luck-lake-boat-launch-ak"
    ],
+   "water_id": "luck-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "0ba2e168a8d9186f829f7c9254deb355af75abcc943098ae1fdbd79b27d1b884",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2038,10 +2965,10 @@
     "Haines"
    ],
    "bbox": [
-    -135.55662,
-    59.27825,
-    -135.44099,
-    59.32542
+    -135.556619,
+    59.278251,
+    -135.440991,
+    59.325419
    ],
    "wikidata": null,
    "charted": true,
@@ -2049,6 +2976,15 @@
    "launches": [
     "lutak-inlet-launch-ramp-ak"
    ],
+   "water_id": "lutak-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "d8e8720c9c4b67fefe06295b195f52ec6302a198604de7dcb51a755c6e44badc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2058,8 +2994,8 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.65456,
-    55.688,
+    -131.654558,
+    55.688001,
     -131.62079,
     55.70958
    ],
@@ -2070,6 +3006,15 @@
     "margaret-bay-dock-day-use-area-ak",
     "marguerite-bay-buoy-ak"
    ],
+   "water_id": "marguerite-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "1e3bafac71f3824b2bf38f38746d29b7c1efebd9d4a11c0d923a916c9044f07b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2082,9 +3027,9 @@
    ],
    "bbox": [
     -134.59182,
-    58.41228,
-    -134.53774,
-    58.44553
+    58.412276,
+    -134.537735,
+    58.445527
    ],
    "wikidata": null,
    "charted": false,
@@ -2092,6 +3037,15 @@
    "launches": [
     "mendenhall-lake-boat-launch-ak"
    ],
+   "water_id": "mendenhall-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "eb646780fe9222e8a2d7084f91cabbd69de1f29e3dc4f7129155588c62e1583a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2101,10 +3055,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -130.73484,
+    -130.734837,
     55.01834,
-    -130.68498,
-    55.09386
+    -130.684975,
+    55.093859
    ],
    "wikidata": null,
    "charted": true,
@@ -2112,6 +3066,15 @@
    "launches": [
     "mink-bay-buoy-trailhead-ak"
    ],
+   "water_id": "mink-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "deb599bd3f18ab578dfed120e998a87c8948e369bf889aad32137eb3476cd18f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2123,10 +3086,10 @@
     "Wasilla"
    ],
    "bbox": [
-    -149.42089,
-    61.42254,
-    -149.40862,
-    61.42891
+    -149.420893,
+    61.422398,
+    -149.408622,
+    61.428913
    ],
    "wikidata": null,
    "charted": false,
@@ -2134,6 +3097,15 @@
    "launches": [
     "mirror-lake-boat-launch-ak"
    ],
+   "water_id": "mirror-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "b2dc84b90347f570702af06621187984823a02e44d00a2c7289f56823ecf8dc5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2145,10 +3117,10 @@
     "Yakutat"
    ],
    "bbox": [
-    -139.83876,
-    59.54204,
-    -139.73097,
-    59.58789
+    -139.838759,
+    59.542041,
+    -139.730972,
+    59.588169
    ],
    "wikidata": null,
    "charted": true,
@@ -2156,6 +3128,15 @@
    "launches": [
     "yakutat-harbor-boat-launch-ak"
    ],
+   "water_id": "monti-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "4b9077e0214efd8b02dfa54aab3304ced3bda90daa4b8e0fdcecfdb7cec1c690",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2167,10 +3148,10 @@
     "Sterling"
    ],
    "bbox": [
-    -150.75778,
-    60.5347,
-    -150.30878,
-    60.67332
+    -150.757777,
+    60.534697,
+    -150.308781,
+    60.673325
    ],
    "wikidata": "Q130532764",
    "charted": false,
@@ -2178,6 +3159,15 @@
    "launches": [
     "izaak-walton-state-recreation-site-launch-ak"
    ],
+   "water_id": "moose-river-ak",
+   "gnis_id": "1413559",
+   "geometry_hash": "1d8884a8921e91bd8ff44b6e846f9e89687871b32018fbeef474e9bcfd5224f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2189,10 +3179,10 @@
     "Chicken"
    ],
    "bbox": [
-    -143.79074,
-    63.84617,
-    -141.91236,
-    64.13072
+    -143.790738,
+    63.84598,
+    -141.912364,
+    64.13079
    ],
    "wikidata": "Q3324844",
    "charted": false,
@@ -2200,6 +3190,15 @@
    "launches": [
     "mosquito-fork-bridge-wayside-ak"
    ],
+   "water_id": "mosquito-fork-ak",
+   "gnis_id": "1406635",
+   "geometry_hash": "6babdb653cdfce846ca753c265e5a33b77b0ec1a5e74bd2bdd6b94bdb9009df4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2211,10 +3210,10 @@
     "Covenant Life"
    ],
    "bbox": [
-    -136.03013,
-    59.44948,
+    -136.030135,
+    59.449476,
     -136.01564,
-    59.46784
+    59.467844
    ],
    "wikidata": null,
    "charted": false,
@@ -2222,6 +3221,15 @@
    "launches": [
     "mosquito-lake-launch-ramp-ak"
    ],
+   "water_id": "mosquito-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "66e283c1e8ca09da4d2cf0708105f07ed554c77ed74c8d2ca96837e1e25f90ae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2233,10 +3241,10 @@
     "Loring"
    ],
    "bbox": [
-    -131.71602,
-    55.55674,
-    -131.61544,
-    55.61722
+    -131.716018,
+    55.556741,
+    -131.615443,
+    55.617219
    ],
    "wikidata": null,
    "charted": true,
@@ -2244,6 +3252,15 @@
    "launches": [
     "naha-bay-dock-picnic-site-ak"
    ],
+   "water_id": "naha-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "b119b646369b84984010abbd1b1b8a114482d1cf5ceef887d539ae9d26d2cbab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2256,16 +3273,27 @@
     "Naknek"
    ],
    "bbox": [
-    -157.05143,
-    58.61412,
-    -156.44284,
-    58.7457
+    -157.051434,
+    58.614123,
+    -156.442837,
+    58.745702
    ],
    "wikidata": "Q3062302",
    "charted": true,
    "area_km2": 39.738,
    "launches": [
     "lake-camp-boat-launch-ak"
+   ],
+   "water_id": "naknek-river-ak",
+   "gnis_id": "1406800",
+   "geometry_hash": "90ca06e9d05d138f4b07badfb9e949738b3cd99aca1c9d07e160645abec3798b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "naknek-river-boat-launch-near-king-salmon-ak"
    ],
    "advisories": []
   },
@@ -2279,9 +3307,9 @@
    ],
    "bbox": [
     -150.02873,
-    61.67347,
-    -149.97193,
-    61.70755
+    61.673466,
+    -149.971929,
+    61.707552
    ],
    "wikidata": "Q6962793",
    "charted": false,
@@ -2289,6 +3317,15 @@
    "launches": [
     "nancy-lake-boat-launch-ak"
    ],
+   "water_id": "nancy-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "eec672ffc403b286c9202e94453bcb7f6edb4d2d6b02f1dec7c0bac6a9a4c3a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2300,10 +3337,10 @@
     "Whale Pass"
    ],
    "bbox": [
-    -133.23504,
-    56.08877,
-    -133.14474,
-    56.10775
+    -133.235043,
+    56.088768,
+    -133.144739,
+    56.107748
    ],
    "wikidata": null,
    "charted": false,
@@ -2311,6 +3348,15 @@
    "launches": [
     "neck-lake-access-boating-site-ak"
    ],
+   "water_id": "neck-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "fb48e13354d388afb51a42125b62bf4370f4cfbb51acf00adadc469738d3cc6e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2323,10 +3369,10 @@
     "Nenana"
    ],
    "bbox": [
-    -149.35804,
-    63.32615,
-    -147.73015,
-    64.56559
+    -149.358042,
+    63.326152,
+    -147.730146,
+    64.565589
    ],
    "wikidata": null,
    "charted": false,
@@ -2334,6 +3380,15 @@
    "launches": [
     "nenana-10th-street-boat-launch-ak"
    ],
+   "water_id": "nenana-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "932dd43eb84f24b458be9a3201f7f837d6a5c2930042c262160bb2b353a16bdb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2345,10 +3400,10 @@
     "Council"
    ],
    "bbox": [
-    -164.23672,
-    64.80815,
-    -163.44482,
-    65.20461
+    -164.236718,
+    64.808151,
+    -163.444817,
+    65.204615
    ],
    "wikidata": null,
    "charted": false,
@@ -2356,6 +3411,15 @@
    "launches": [
     "niukluk-river-gravel-boat-launch-ak"
    ],
+   "water_id": "niukluk-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "db934fdf03fcea8a2d4da49fe2d7eb28847e532a501bb69ec19363bda6ccc1f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2365,10 +3429,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -147.13561,
-    65.32864,
-    -146.52906,
-    65.43427
+    -147.135612,
+    65.328637,
+    -146.529057,
+    65.434266
    ],
    "wikidata": "Q131993252",
    "charted": false,
@@ -2376,6 +3440,15 @@
    "launches": [
     "nome-creek-put-in-point-ak"
    ],
+   "water_id": "nome-creek-ak",
+   "gnis_id": "1407126",
+   "geometry_hash": "aacd47c0f011439d3ec64eb9eefbd05711889376ca3cf024dab1d82d37c6b3f2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2387,10 +3460,10 @@
     "Nome"
    ],
    "bbox": [
-    -165.32247,
-    64.48331,
-    -165.20721,
-    64.86898
+    -165.322468,
+    64.483315,
+    -165.207211,
+    64.868984
    ],
    "wikidata": "Q16895878",
    "charted": true,
@@ -2398,6 +3471,15 @@
    "launches": [
     "nome-river-gravel-boat-launch-ak"
    ],
+   "water_id": "nome-river-ak",
+   "gnis_id": "1407127",
+   "geometry_hash": "1c45e56b637beb25e4c20d3d7aaa25cad2a513a9cc68653f8f7ae57c26b28039",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2415,6 +3497,15 @@
    "launches": [
     "bradford-point-beach-access-ak"
    ],
+   "water_id": "nushagak-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2426,10 +3517,10 @@
     "Cordova"
    ],
    "bbox": [
-    -146.14939,
-    60.43125,
-    -145.67197,
-    60.63149
+    -146.149389,
+    60.431251,
+    -145.671973,
+    60.631489
    ],
    "wikidata": null,
    "charted": true,
@@ -2437,6 +3528,15 @@
    "launches": [
     "orca-inlet-boat-launch-near-cordova-ak"
    ],
+   "water_id": "orca-inlet-ak",
+   "gnis_id": null,
+   "geometry_hash": "bde6c5bb574bcebf8087d95e08f26e5a154d82a73f0965c8164dc4359ca3e869",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2446,10 +3546,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.51541,
-    60.75965,
-    -150.50156,
-    60.77496
+    -150.515408,
+    60.759646,
+    -150.501473,
+    60.774957
    ],
    "wikidata": null,
    "charted": false,
@@ -2457,6 +3557,15 @@
    "launches": [
     "swanson-river-canoe-launch-ak-2"
    ],
+   "water_id": "paddle-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "12c7d1ea4b737150830b49b6ab2e8f125c43e49b3dd088e7a15c1a8e48266413",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2469,9 +3578,9 @@
    ],
    "bbox": [
     -149.61304,
-    61.47472,
-    -149.26488,
-    61.5458
+    61.474725,
+    -149.264879,
+    61.545802
    ],
    "wikidata": null,
    "charted": true,
@@ -2479,6 +3588,15 @@
    "launches": [
     "rabbit-slough-boat-ramp-ak"
    ],
+   "water_id": "palmer-slough-ak",
+   "gnis_id": null,
+   "geometry_hash": "4084fba93e8782c509036874d1f807db8c5fa55f5e1642a97a8e6e8ea9e63ba7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2488,10 +3606,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -145.60825,
-    62.85184,
-    -145.50355,
-    62.98719
+    -145.608255,
+    62.851841,
+    -145.503552,
+    62.987188
    ],
    "wikidata": "Q49308019",
    "charted": false,
@@ -2501,6 +3619,15 @@
     "paxson-lake-blm-undeveloped-ramp-ak",
     "paxson-lake-northern-undeveloped-ramp-ak"
    ],
+   "water_id": "paxson-lake-ak",
+   "gnis_id": "1407837",
+   "geometry_hash": "fdfd796a1f417a62c9567d95318c4ada872611daed09a26600498b1c7d3f2d1d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2510,10 +3637,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.40626,
-    60.51761,
-    -150.39258,
-    60.52519
+    -150.406259,
+    60.517607,
+    -150.392584,
+    60.525186
    ],
    "wikidata": null,
    "charted": false,
@@ -2521,6 +3648,15 @@
    "launches": [
     "peterson-lake-boat-launch-ak"
    ],
+   "water_id": "peterson-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "439013f8b7ac8216c5a5d7420016e164306b77b913342ceca0d8578c583409c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2532,10 +3668,10 @@
     "Ketchikan"
    ],
    "bbox": [
-    -131.81345,
-    55.17613,
-    -131.80256,
-    55.18539
+    -131.813449,
+    55.176131,
+    -131.802561,
+    55.18553
    ],
    "wikidata": null,
    "charted": true,
@@ -2543,6 +3679,15 @@
    "launches": [
     "phocena-bay-buoy-ak"
    ],
+   "water_id": "phocena-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "5311c1ee6b01bd550d7e9cc67b522ebfa154d82dfff08920abb4affcd9fcf408",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2554,10 +3699,10 @@
     "Moose Creek"
    ],
    "bbox": [
-    -147.28739,
-    64.55733,
+    -147.287391,
+    64.557327,
     -147.0526,
-    64.71878
+    64.718778
    ],
    "wikidata": null,
    "charted": false,
@@ -2565,6 +3710,15 @@
    "launches": [
     "piledriver-slough-canoe-launch-ak"
    ],
+   "water_id": "piledriver-slough-ak",
+   "gnis_id": null,
+   "geometry_hash": "433b71660fc81cc2a50fd81915362acfc8cb2e32b8ea02465524faa8af9db811",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2574,10 +3728,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -149.06838,
-    60.61473,
-    -148.98592,
-    60.83399
+    -149.068379,
+    60.614726,
+    -148.985921,
+    60.833992
    ],
    "wikidata": "Q124980245",
    "charted": true,
@@ -2585,6 +3739,15 @@
    "launches": [
     "placer-river-boat-launch-ak"
    ],
+   "water_id": "placer-river-ak",
+   "gnis_id": "1424292",
+   "geometry_hash": "b1d1d6b66c0205915e769c09a9c70546b06dc7cdb455cc35ff4ab66f1992e630",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2597,9 +3760,9 @@
    ],
    "bbox": [
     -135.4425,
-    59.22348,
-    -135.40666,
-    59.24396
+    59.223483,
+    -135.406664,
+    59.243959
    ],
    "wikidata": null,
    "charted": true,
@@ -2607,6 +3770,15 @@
    "launches": [
     "portage-cove-harbor-launch-ramp-ak"
    ],
+   "water_id": "portage-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "84945bcc10c0314c573823dd0689a8a63de4db83c33ce6313aed43fa1a8a09d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2616,10 +3788,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.54925,
-    60.73001,
-    -150.54072,
-    60.73466
+    -150.549252,
+    60.729995,
+    -150.540724,
+    60.734659
    ],
    "wikidata": null,
    "charted": false,
@@ -2627,6 +3799,15 @@
    "launches": [
     "swan-lake-canoe-route-launch-ak-2"
    ],
+   "water_id": "portage-lakes-ak",
+   "gnis_id": null,
+   "geometry_hash": "0749cddc16f3aeac616eee2f86d987b8a42a92b71c58085c8ea3a564f63645fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2636,8 +3817,8 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.04245,
-    55.36523,
+    -131.042446,
+    55.365231,
     -130.99435,
     55.40977
    ],
@@ -2647,6 +3828,15 @@
    "launches": [
     "princess-bay-buoy-ak"
    ],
+   "water_id": "princess-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "08a531eb024b1ba57d3b763598aad6feb62e9de02b7c5a7f6e67c0a21ea36d3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2658,10 +3848,10 @@
     "Skagway"
    ],
    "bbox": [
-    -135.32247,
-    59.45122,
-    -135.30919,
-    59.4569
+    -135.322472,
+    59.451217,
+    -135.309194,
+    59.456898
    ],
    "wikidata": null,
    "charted": true,
@@ -2669,6 +3859,15 @@
    "launches": [
     "skagway-small-boat-harbor-launch-ramp-ak"
    ],
+   "water_id": "pullen-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "f7b5d64e2e4f7def4ebf83ee70a2e981bfc50bfcb5f1a72d301df1566be2d8a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2678,10 +3877,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -130.81192,
-    55.52328,
-    -130.77149,
-    55.55838
+    -130.811919,
+    55.523284,
+    -130.771491,
+    55.558379
    ],
    "wikidata": null,
    "charted": true,
@@ -2689,6 +3888,15 @@
    "launches": [
     "punchbowl-cove-buoy-ak"
    ],
+   "water_id": "punchbowl-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "a42c52db265bcb32aa153964950df448186f167ad3c9d08cc609a2353103b562",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2700,8 +3908,8 @@
     "Delta Junction"
    ],
    "bbox": [
-    -145.85142,
-    64.19832,
+    -145.851415,
+    64.198221,
     -145.7866,
     64.22646
    ],
@@ -2711,6 +3919,15 @@
    "launches": [
     "quartz-lake-boat-launch-ak"
    ],
+   "water_id": "quartz-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "435b9f9cff6394dda0c0a859cd9a561c2b1433b9d70c435c755e1e35361412e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2720,9 +3937,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.81775,
-    60.7123,
-    -150.80019,
+    -150.817748,
+    60.712298,
+    -150.800186,
     60.72444
    ],
    "wikidata": null,
@@ -2731,6 +3948,15 @@
    "launches": [
     "rainbow-lake-boat-launch-ak"
    ],
+   "water_id": "rainbow-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "74ba4857f17914fe31fc3a00ded1eef4e27347d3bee6e9309c019bc18614bc93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2742,10 +3968,10 @@
     "Sitka"
    ],
    "bbox": [
-    -135.34449,
-    56.84622,
-    -135.13353,
-    56.92367
+    -135.344494,
+    56.846165,
+    -135.133532,
+    56.923668
    ],
    "wikidata": null,
    "charted": true,
@@ -2753,6 +3979,15 @@
    "launches": [
     "redoubt-bay-mooring-buoy-ak"
    ],
+   "water_id": "redoubt-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "534871216647e35a68afac0b3bd9c1cfd723194c049ca4c8af8910050220abc9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2765,10 +4000,10 @@
     "Seward"
    ],
    "bbox": [
-    -149.60565,
-    59.83878,
-    -149.2832,
-    60.14401
+    -149.605651,
+    59.838781,
+    -149.283101,
+    60.144099
    ],
    "wikidata": null,
    "charted": true,
@@ -2776,6 +4011,17 @@
    "launches": [
     "northeast-harbor-ramp-ak",
     "southwest-harbor-ramp-ak"
+   ],
+   "water_id": "resurrection-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "5f7a83b79ee5b63055281d1d4c0f8bcbe4e20c9bc539f64ac5008253d14b40cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "resurrection-bay-boat-launch-near-seward-ak"
    ],
    "advisories": []
   },
@@ -2789,9 +4035,9 @@
    ],
    "bbox": [
     -149.83744,
-    61.55376,
-    -149.82007,
-    61.55722
+    61.553759,
+    -149.820065,
+    61.557224
    ],
    "wikidata": null,
    "charted": false,
@@ -2799,6 +4045,15 @@
    "launches": [
     "rocky-lake-state-recreation-site-boat-launch-ak"
    ],
+   "water_id": "rocky-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "fa4a8e7897bc46a91ef6f889a14d12a1872a24bc87c2654344cc54b564e00c46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2808,10 +4063,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -146.00994,
-    63.0499,
-    -145.97332,
-    63.06647
+    -146.009942,
+    63.049895,
+    -145.973316,
+    63.066726
    ],
    "wikidata": null,
    "charted": false,
@@ -2820,6 +4075,15 @@
     "round-tangle-lake-boat-launch-ak",
     "tangle-lakes-campground-launch-ak"
    ],
+   "water_id": "round-tangle-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "f8a9b96176713a60eb9d92af01b483cc49517e14458c2ce6c1f4c05f453c4e41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2829,10 +4093,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -149.09271,
-    68.16199,
-    -147.96782,
-    70.32711
+    -149.092712,
+    68.161978,
+    -147.967815,
+    70.327106
    ],
    "wikidata": "Q1569192",
    "charted": false,
@@ -2842,6 +4106,15 @@
     "sagavanirktok-mile-325-ice-cut-improvised-ramp-ak",
     "sagavanirktok-river-mi-344-ak"
    ],
+   "water_id": "sagavanirktok-river-ak",
+   "gnis_id": "1408954",
+   "geometry_hash": "676f089e67ffd14dcc1edb118f3dd658122ba45fe0d51001074748afe9c9162d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2853,10 +4126,10 @@
     "Kodiak"
    ],
    "bbox": [
-    -152.42207,
-    57.77333,
-    -152.40577,
-    57.78303
+    -152.422069,
+    57.773331,
+    -152.405771,
+    57.783131
    ],
    "wikidata": null,
    "charted": true,
@@ -2864,6 +4137,15 @@
    "launches": [
     "st-herman-harbor-boat-launch-ak"
    ],
+   "water_id": "saint-herman-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "5c0c6c77a830b26020b872b47b51bcbe177015d7ae00a5829ac839b1ab2d41ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2875,10 +4157,10 @@
     "Aurora Lodge"
    ],
    "bbox": [
-    -146.984,
-    64.46068,
-    -143.923,
-    65.095
+    -146.983998,
+    64.460684,
+    -143.923002,
+    65.095002
    ],
    "wikidata": "Q3469654",
    "charted": false,
@@ -2886,6 +4168,15 @@
    "launches": [
     "salcha-river-boat-launch-ak"
    ],
+   "water_id": "salcha-river-ak",
+   "gnis_id": "1408991",
+   "geometry_hash": "53c25ec2079d3d3e772496cdd82f378369edd363e5cbd2953d6f9b494422081d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2895,10 +4186,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -165.08495,
-    64.88876,
+    -165.084948,
+    64.888765,
     -164.95684,
-    64.91928
+    64.919284
    ],
    "wikidata": null,
    "charted": false,
@@ -2906,6 +4197,15 @@
    "launches": [
     "salmon-lake-campground-boat-ramp-ak"
    ],
+   "water_id": "salmon-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "12590c6a4a5036d70f91921427cc0be8b4f8bb6c31fe119eaf3a8af7aacb5381",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2917,10 +4217,10 @@
     "Gustavus"
    ],
    "bbox": [
-    -135.76994,
-    58.3984,
-    -135.73246,
-    58.48324
+    -135.769944,
+    58.398401,
+    -135.732457,
+    58.483241
    ],
    "wikidata": null,
    "charted": true,
@@ -2928,6 +4228,15 @@
    "launches": [
     "salmon-river-boat-launch-ak"
    ],
+   "water_id": "salmon-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "d2d107383d9ab0e7d055b1c5c70dfb2e9e7d7bf7bb59c24daca441b4109b244e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2939,10 +4248,10 @@
     "Craig"
    ],
    "bbox": [
-    -133.30648,
-    55.44941,
+    -133.306477,
+    55.449411,
     -133.13821,
-    55.58727
+    55.587269
    ],
    "wikidata": null,
    "charted": true,
@@ -2951,6 +4260,15 @@
     "craig-false-island-launch-ramp-ak",
     "craig-north-cove-launch-ramp-ak"
    ],
+   "water_id": "san-alberto-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "9c1613f17e907502bcb13a44b505ef22a2a06b11ffd8c82b1262bf43ba3bf080",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2962,10 +4280,10 @@
     "Anchorage"
    ],
    "bbox": [
-    -149.97724,
-    61.14687,
-    -149.95423,
-    61.1538
+    -149.977244,
+    61.146872,
+    -149.954225,
+    61.153802
    ],
    "wikidata": "Q7415823",
    "charted": false,
@@ -2973,6 +4291,15 @@
    "launches": [
     "sand-lake-public-access-ak"
    ],
+   "water_id": "sand-lake-ak",
+   "gnis_id": "1409062",
+   "geometry_hash": "623f110702f80a62a8816f43efb3345d3d053a52cfbbec92ef955d918d210711",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -2984,10 +4311,10 @@
     "New Tokeen"
    ],
    "bbox": [
-    -133.24093,
-    55.93636,
-    -133.06433,
-    55.9751
+    -133.240932,
+    55.936358,
+    -133.064326,
+    55.975097
    ],
    "wikidata": null,
    "charted": true,
@@ -2995,6 +4322,15 @@
    "launches": [
     "sarkar-creek-boat-launch-ak"
    ],
+   "water_id": "sarkar-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "52eb7d1dcdc6dcb36613a32edd497f791bbcfee15e5d4e2d4f64624ebf3a8059",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3004,10 +4340,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -133.23285,
-    55.92887,
-    -133.19161,
-    55.96904
+    -133.232851,
+    55.928872,
+    -133.191612,
+    55.969036
    ],
    "wikidata": null,
    "charted": true,
@@ -3015,6 +4351,15 @@
    "launches": [
     "sarkar-lake-access-boating-site-ak"
    ],
+   "water_id": "sarker-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "a623f65cf126c5e496b7dc9dc4a71521ac7b28be9dc81184358363d81afcc273",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3026,10 +4371,10 @@
     "Dillingham"
    ],
    "bbox": [
-    -158.48172,
-    59.03709,
+    -158.481959,
+    59.037091,
     -158.47603,
-    59.04642
+    59.046418
    ],
    "wikidata": null,
    "charted": true,
@@ -3038,6 +4383,15 @@
     "dillingham-harbor-boat-launch-16x120-ak",
     "dillingham-harbor-boat-launch-30x90-ak"
    ],
+   "water_id": "scandinavian-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "8799673d3b24f04ff665bae456cb6698a414fc0e9cf7c05ebc518e9f4a72b143",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3047,9 +4401,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -141.04022,
-    62.6318,
-    -140.97446,
+    -141.040217,
+    62.631801,
+    -140.974462,
     62.64428
    ],
    "wikidata": null,
@@ -3058,6 +4412,15 @@
    "launches": [
     "scottie-creek-boat-launch-ak"
    ],
+   "water_id": "scottie-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "0fae245089ac9600c313f7a5dec5aef0e4792cd22955140346edb05a9db9401c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3069,9 +4432,9 @@
     "Sitka"
    ],
    "bbox": [
-    -135.35386,
+    -135.353859,
     57.04719,
-    -135.34789,
+    -135.347891,
     57.04927
    ],
    "wikidata": null,
@@ -3079,6 +4442,46 @@
    "area_km2": 0.07,
    "launches": [
     "sealing-cove-boat-launch-ramp-ak"
+   ],
+   "water_id": "sealing-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "254e77f1868586fbaa84293981532ad2a9e9d0df4715c090ec5e5df0e5cb1848",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "selawik-river-ak",
+   "name": "Selawik River",
+   "kind": "river",
+   "state": "AK",
+   "towns": [
+    "Selawik"
+   ],
+   "bbox": [
+    -160.176399,
+    66.278037,
+    -156.719169,
+    66.635505
+   ],
+   "wikidata": "Q686347",
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "selawik-river-ak",
+   "gnis_id": "1413933",
+   "geometry_hash": "da91e461cb891847f66d58842c2bb5e418e307b0394d66697123fbe44f75c5b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "selawik-river-boat-launch-ak"
    ],
    "advisories": []
   },
@@ -3091,10 +4494,10 @@
     "Seldovia"
    ],
    "bbox": [
-    -151.72025,
-    59.43441,
+    -151.720249,
+    59.434411,
     -151.71258,
-    59.43863
+    59.438679
    ],
    "wikidata": null,
    "charted": true,
@@ -3102,6 +4505,15 @@
    "launches": [
     "seldovia-boat-ramp-ak"
    ],
+   "water_id": "seldovia-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "0e9e157735f9e52a7c5bf0307c22aa408f3bce6602fdaf92a5818d52e4d121ef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3113,16 +4525,54 @@
     "Sutton"
    ],
    "bbox": [
-    -148.98621,
-    61.71203,
+    -148.986208,
+    61.712033,
     -148.96556,
-    61.71903
+    61.719231
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 0.575,
    "launches": [
     "seventeen-mile-lake-boat-launch-ak"
+   ],
+   "water_id": "seventeen-mile-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "45dedf32765b2ef061ba7ecb20c449af1fbcb40bd16cbe146f5e2fc2e94ca5e5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shallow-lake-ak",
+   "name": "Shallow Lake",
+   "kind": "pond",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -147.966729,
+    61.800905,
+    -147.953778,
+    61.803206
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [],
+   "water_id": "shallow-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "98cc98b2a883db214790f2894fc36cd727c0f485e3e752d128210617803e255d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "shallow-lake-boat-launch-ak"
    ],
    "advisories": []
   },
@@ -3133,10 +4583,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.53264,
-    55.97941,
-    -131.51133,
-    56.00452
+    -131.532639,
+    55.979411,
+    -131.511331,
+    56.004519
    ],
    "wikidata": null,
    "charted": true,
@@ -3144,6 +4594,15 @@
    "launches": [
     "short-bay-buoy-trailhead-ak"
    ],
+   "water_id": "short-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "ee0703c4c86468d9ce17983850d66ad975d12a5a4e8868cb07557de247929108",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3155,10 +4614,10 @@
     "Sitka"
    ],
    "bbox": [
-    -135.25094,
-    56.97573,
-    -135.1281,
-    57.04345
+    -135.250938,
+    56.975731,
+    -135.128102,
+    57.043445
    ],
    "wikidata": null,
    "charted": true,
@@ -3166,6 +4625,15 @@
    "launches": [
     "silver-bay-mooring-buoy-ak"
    ],
+   "water_id": "silver-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "c1aa1a0cfda2ee8c76d1f9dc9247e1110023a85f528b8bd1624ad7e058218af9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3177,10 +4645,10 @@
     "Sitka"
    ],
    "bbox": [
-    -135.85146,
-    56.70877,
-    -135.27266,
-    57.17626
+    -135.851459,
+    56.708771,
+    -135.272661,
+    57.176259
    ],
    "wikidata": null,
    "charted": true,
@@ -3189,6 +4657,15 @@
     "crescent-harbor-boat-launch-ramp-ak",
     "eagle-beach-launch-area-ak"
    ],
+   "water_id": "sitka-sound-ak",
+   "gnis_id": null,
+   "geometry_hash": "7f349549333d72a7a6ff26511dfbbabcb56202291b338a7dd36d71b110d2bcae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3200,10 +4677,10 @@
     "Situk"
    ],
    "bbox": [
-    -139.57428,
-    59.45019,
-    -139.41001,
-    59.63213
+    -139.574276,
+    59.450191,
+    -139.410006,
+    59.632135
    ],
    "wikidata": null,
    "charted": false,
@@ -3213,6 +4690,15 @@
     "situk-river-9-mile-bridge-ak",
     "situk-river-lower-landing-ak"
    ],
+   "water_id": "situk-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "16a14206d2178bc2c64a10cdff398a6f87e718019ca82baead5bb6a40f009b59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3222,10 +4708,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.52186,
-    60.38431,
-    -150.1197,
-    60.47293
+    -150.521858,
+    60.384314,
+    -150.119704,
+    60.472933
    ],
    "wikidata": "Q2292328",
    "charted": false,
@@ -3234,6 +4720,15 @@
     "lower-skilak-lake-campground-launch-ramp-ak",
     "upper-skilak-lake-campground-and-boat-ramp-ak"
    ],
+   "water_id": "skilak-lake-ak",
+   "gnis_id": "1414005",
+   "geometry_hash": "de455bf5cddd0ce0adb75a3bf37feac91e3e0a88810d0814fe8208c162b13454",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3251,6 +4746,15 @@
    "launches": [
     "whittier-boat-ramp-ak"
    ],
+   "water_id": "smitty-s-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3260,9 +4764,9 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -131.97858,
-    55.5688,
-    -131.9391,
+    -131.978579,
+    55.568801,
+    -131.939101,
     55.597
    ],
    "wikidata": null,
@@ -3271,6 +4775,15 @@
    "launches": [
     "smugglers-cove-buoy-ak"
    ],
+   "water_id": "smugglers-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "8c5cae78731788dff00b076b22b3658fb1422717d3f5cc037959114967c3433e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3282,10 +4795,10 @@
     "Nome"
    ],
    "bbox": [
-    -165.56143,
+    -165.561432,
     64.49938,
-    -165.39451,
-    64.70034
+    -165.394514,
+    64.700343
    ],
    "wikidata": "Q7547059",
    "charted": true,
@@ -3293,6 +4806,15 @@
    "launches": [
     "snake-river-boat-harbor-launch-ramp-ak"
    ],
+   "water_id": "snake-river-ak",
+   "gnis_id": "1409806",
+   "geometry_hash": "99120a565aa32f0659c37449d7b5036fbccef694232a6bbd75caa38fee8eb1a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3304,10 +4826,10 @@
     "Solomon"
    ],
    "bbox": [
-    -164.43541,
-    64.55128,
-    -164.22279,
-    64.78931
+    -164.435415,
+    64.551285,
+    -164.222795,
+    64.789311
    ],
    "wikidata": "Q131344863",
    "charted": false,
@@ -3315,6 +4837,15 @@
    "launches": [
     "solomon-river-gravel-boat-launch-ak"
    ],
+   "water_id": "solomon-river-ak",
+   "gnis_id": "1409874",
+   "geometry_hash": "c0093adea71540727b88b9eb1563411a5fc4e021ce20327c731ae849ea9ff24c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3326,10 +4857,10 @@
     "Chicken"
    ],
    "bbox": [
-    -141.91236,
-    64.04916,
-    -141.73613,
-    64.24287
+    -141.912364,
+    64.049161,
+    -141.736127,
+    64.242868
    ],
    "wikidata": "Q3492250",
    "charted": false,
@@ -3338,6 +4869,15 @@
     "south-fork-bridge-wayside-ak",
     "south-fork-fortymile-river-boat-launch-near-chicken-ak-2"
    ],
+   "water_id": "south-fork-fortymile-river-ak",
+   "gnis_id": "1409922",
+   "geometry_hash": "60660ae0d8e9f736a2860cfe41f924553eedff47c76d555ee50eac119655c6cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3349,9 +4889,9 @@
     "Hydaburg"
    ],
    "bbox": [
-    -132.89467,
-    55.16266,
-    -132.83737,
+    -132.894668,
+    55.162655,
+    -132.837288,
     55.2216
    ],
    "wikidata": null,
@@ -3360,6 +4900,15 @@
    "launches": [
     "hydaburg-launch-ramp-ak"
    ],
+   "water_id": "south-pass-ak",
+   "gnis_id": null,
+   "geometry_hash": "ff85c078a9883e202e88fb2fd50d39030f188aed307ae70fa87c7a14c5009f8e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3371,10 +4920,10 @@
     "Willow"
    ],
    "bbox": [
-    -150.14053,
-    61.66442,
-    -150.12015,
-    61.67199
+    -150.140532,
+    61.664422,
+    -150.120152,
+    61.671988
    ],
    "wikidata": null,
    "charted": false,
@@ -3382,6 +4931,15 @@
    "launches": [
     "south-rolly-lake-boat-launch-ak"
    ],
+   "water_id": "south-rolly-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "0c08c196bb17f8202095206abf4bd28c887a7343662485e1660aa6988bc3be12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3393,10 +4951,10 @@
     "Sitka"
    ],
    "bbox": [
-    -135.39122,
-    57.12671,
-    -135.36793,
-    57.13973
+    -135.391219,
+    57.126711,
+    -135.367931,
+    57.139729
    ],
    "wikidata": null,
    "charted": true,
@@ -3404,6 +4962,15 @@
    "launches": [
     "starrigavin-boat-launch-ramp-ak"
    ],
+   "water_id": "starrigavan-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "314f37121c2affaa0578e257c4e21de31f8319565e774e98418f3c4ce9e86c3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3414,9 +4981,9 @@
    "towns": [],
    "bbox": [
     -132.72898,
-    56.13483,
-    -132.66155,
-    56.19475
+    56.134741,
+    -132.661551,
+    56.194749
    ],
    "wikidata": null,
    "charted": true,
@@ -3424,6 +4991,15 @@
    "launches": [
     "steamer-bay-buoy-ak"
    ],
+   "water_id": "steamer-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "aded7498c346846923859e92421642bd00db53fd7e128630cd653b2c44bde83d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3433,10 +5009,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -151.06747,
-    60.76732,
-    -151.02833,
-    60.79002
+    -151.067473,
+    60.767316,
+    -151.028334,
+    60.790019
    ],
    "wikidata": null,
    "charted": false,
@@ -3444,6 +5020,15 @@
    "launches": [
     "stormy-lake-boat-launch-ak"
    ],
+   "water_id": "stormy-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "8b6c165c4f192ebd586521c9f7e43e66ad611ff6746f88c66a8f421a781fb0b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3455,10 +5040,10 @@
     "Gilpatricks"
    ],
    "bbox": [
-    -149.52077,
-    60.62291,
-    -149.49314,
-    60.64162
+    -149.520769,
+    60.62289,
+    -149.493139,
+    60.641621
    ],
    "wikidata": null,
    "charted": false,
@@ -3466,6 +5051,15 @@
    "launches": [
     "summit-lake-boat-launch-ak"
    ],
+   "water_id": "summit-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "9cdda498f5723b64e735275c4bea2e1a997fae4032cfdba34b40c0109643f45e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3477,10 +5071,10 @@
     "Wrangell"
    ],
    "bbox": [
-    -134.15583,
+    -134.155832,
     55.91731,
-    -132.38164,
-    56.60919
+    -132.381409,
+    56.609319
    ],
    "wikidata": null,
    "charted": true,
@@ -3489,6 +5083,15 @@
     "banana-point-boat-launch-ak",
     "heritage-harbor-launch-ramp-ak"
    ],
+   "water_id": "sumner-strait-ak",
+   "gnis_id": null,
+   "geometry_hash": "d75a9f139063220e5210b4458e55829d90beb91c1060797507a32a0019ffe53d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3498,10 +5101,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -151.02948,
-    60.68659,
-    -150.48695,
-    60.86922
+    -151.029479,
+    60.686586,
+    -150.48671,
+    60.869279
    ],
    "wikidata": "Q7653742",
    "charted": true,
@@ -3510,6 +5113,15 @@
     "swanson-river-canoe-launch-ak",
     "swanson-river-takeout-ak"
    ],
+   "water_id": "swanson-river-ak",
+   "gnis_id": "1414097",
+   "geometry_hash": "53a28487e3c81365a02c437684fde5f9c97586d7c0c5ab29df58f1e77a7218b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3521,10 +5133,10 @@
     "Skagway"
    ],
    "bbox": [
-    -135.35549,
-    59.48725,
+    -135.355488,
+    59.487252,
     -135.26104,
-    59.69765
+    59.697646
    ],
    "wikidata": "Q771153",
    "charted": true,
@@ -3532,6 +5144,15 @@
    "launches": [
     "raft-launch-ak"
    ],
+   "water_id": "taiya-river-ak",
+   "gnis_id": "1415157",
+   "geometry_hash": "aefbcd6c94de7c1e57469804ae349b15e8f9102c208a9c5942a1a67748ea709f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3543,10 +5164,10 @@
     "Anchorage"
    ],
    "bbox": [
-    -149.88471,
-    61.1489,
-    -149.87968,
-    61.15154
+    -149.884715,
+    61.148902,
+    -149.879682,
+    61.151544
    ],
    "wikidata": null,
    "charted": false,
@@ -3554,6 +5175,15 @@
    "launches": [
     "taku-lake-boat-launch-ak"
    ],
+   "water_id": "taku-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "e6817ddd35944133c026aff69620397d4830b4e66c708a3f12c87cfc12e68cd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3565,10 +5195,10 @@
     "Talkeetna"
    ],
    "bbox": [
-    -150.13135,
+    -150.131564,
     62.16755,
     -148.42404,
-    62.5989
+    62.598896
    ],
    "wikidata": null,
    "charted": false,
@@ -3576,6 +5206,15 @@
    "launches": [
     "talkeetna-river-boat-launch-ak"
    ],
+   "water_id": "talkeetna-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "604b1a489df642c5a40a8f21af9c85ceba5bfd4edfb3617584d9708e50a33310",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3589,10 +5228,10 @@
     "Tanacross"
    ],
    "bbox": [
-    -152.0141,
-    63.04677,
-    -141.87005,
-    65.16523
+    -152.014097,
+    63.046771,
+    -141.870046,
+    65.165225
    ],
    "wikidata": "Q393769",
    "charted": false,
@@ -3604,6 +5243,15 @@
     "tanana-river-access-ak",
     "tanana-river-boat-launch-ak"
    ],
+   "water_id": "tanana-river-ak",
+   "gnis_id": "1416408",
+   "geometry_hash": "b903b0bddf2151b3638bcc8fe40e546901e33d4a35953c218f6828a98e233140",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3615,16 +5263,54 @@
     "Copperville"
    ],
    "bbox": [
-    -146.24432,
-    62.00657,
+    -146.244325,
+    62.006575,
     -145.38899,
-    62.08993
+    62.090145
    ],
    "wikidata": null,
    "charted": false,
    "area_km2": 1.122,
    "launches": [
     "tazlina-river-launch-ak"
+   ],
+   "water_id": "tazlina-river-ak",
+   "gnis_id": null,
+   "geometry_hash": "3da9c18815539c8e806b69177bc7410d4d590d13ef8a2bedeac268b071e90210",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tee-harbor-ak",
+   "name": "Tee Harbor",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [],
+   "bbox": [
+    -134.767609,
+    58.410411,
+    -134.75664,
+    58.434289
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.639,
+   "launches": [],
+   "water_id": "tee-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "e43920ae15842330202e0d78ea2f54d3309146ec93d8d6489cf96ad4c6839040",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tee-harbor-boat-launch-ak"
    ],
    "advisories": []
   },
@@ -3635,10 +5321,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -149.8778,
-    64.84644,
-    -147.79279,
-    65.70478
+    -149.877799,
+    64.846444,
+    -147.792787,
+    65.704782
    ],
    "wikidata": "Q3530614",
    "charted": false,
@@ -3646,6 +5332,15 @@
    "launches": [
     "minto-village-launch-ak"
    ],
+   "water_id": "tolovana-river-ak",
+   "gnis_id": "1411069",
+   "geometry_hash": "94dc5c572c07a101f79927cf0876073e13487308c57af4961fe989b3a0e4d0e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3657,10 +5352,10 @@
     "Tolsona"
    ],
    "bbox": [
-    -146.05986,
-    62.10821,
-    -146.03902,
-    62.12651
+    -146.059864,
+    62.108212,
+    -146.039017,
+    62.126505
    ],
    "wikidata": null,
    "charted": false,
@@ -3668,6 +5363,15 @@
    "launches": [
     "tolsona-lake-launch-ak"
    ],
+   "water_id": "tolsona-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "b9ffe5632ff22179805162d38bb6a9822d4d68dc883efde96b384bf54ef555e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3679,10 +5383,10 @@
     "Clover Pass"
    ],
    "bbox": [
-    -131.80106,
-    55.45506,
-    -131.79136,
-    55.47151
+    -131.801061,
+    55.455059,
+    -131.791358,
+    55.471506
    ],
    "wikidata": null,
    "charted": true,
@@ -3690,6 +5394,15 @@
    "launches": [
     "knudson-cove-boat-launch-ak"
    ],
+   "water_id": "trollers-creek-ak",
+   "gnis_id": null,
+   "geometry_hash": "b0721748f3aed25b5b89c53e727db93fb26ea9be04076aed8843f3071b44f6a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3701,10 +5414,10 @@
     "Klukwan"
    ],
    "bbox": [
-    -136.41302,
-    59.26711,
-    -135.85906,
-    59.39739
+    -136.413016,
+    59.267112,
+    -135.859058,
+    59.397386
    ],
    "wikidata": "Q2458401",
    "charted": true,
@@ -3712,6 +5425,15 @@
    "launches": [
     "chilkat-lake-landing-ak"
    ],
+   "water_id": "tsirku-river-ak",
+   "gnis_id": "1415434",
+   "geometry_hash": "53f738e922b36bc77a637d3501097ed1dd984c22c1b362b7e314265e9ce33543",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3723,10 +5445,10 @@
     "Naukati Bay"
    ],
    "bbox": [
-    -133.25999,
-    55.76585,
-    -133.1566,
-    55.87466
+    -133.259987,
+    55.765847,
+    -133.156602,
+    55.874664
    ],
    "wikidata": null,
    "charted": true,
@@ -3734,6 +5456,15 @@
    "launches": [
     "naukati-bay-launch-ramp-ak"
    ],
+   "water_id": "tuxekan-passage-ak",
+   "gnis_id": null,
+   "geometry_hash": "3451d3853cf9476895bb8c586433e2afc8cc3da8b16ba027655476372983305b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3745,10 +5476,10 @@
     "Girdwood"
    ],
    "bbox": [
-    -149.00752,
-    60.84112,
-    -148.81432,
-    61.06272
+    -149.007521,
+    60.841122,
+    -148.814321,
+    61.062721
    ],
    "wikidata": "Q54872264",
    "charted": true,
@@ -3756,6 +5487,15 @@
    "launches": [
     "twentymile-river-boat-launch-ak"
    ],
+   "water_id": "twentymile-river-ak",
+   "gnis_id": "1415464",
+   "geometry_hash": "5fe07db60dea705543802caaf1a42b7bb6c05748a1a949ab94e106d75ccce32e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3767,10 +5507,10 @@
     "Unalakleet"
    ],
    "bbox": [
-    -160.78647,
-    63.86015,
-    -159.20434,
-    64.33928
+    -160.786473,
+    63.860148,
+    -159.204243,
+    64.339283
    ],
    "wikidata": "Q763999",
    "charted": true,
@@ -3778,6 +5518,15 @@
    "launches": [
     "unalakleet-river-boat-launch-ak"
    ],
+   "water_id": "unalakleet-river-ak",
+   "gnis_id": "1411519",
+   "geometry_hash": "22d1acc7542d0f935665f2972f686b38e42eb99ef0b15dadd569223cd7808c2c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3789,10 +5538,10 @@
     "Soldotna"
    ],
    "bbox": [
-    -151.03564,
-    60.51791,
-    -151.02596,
-    60.52654
+    -151.035639,
+    60.517911,
+    -151.025957,
+    60.526535
    ],
    "wikidata": null,
    "charted": false,
@@ -3800,6 +5549,15 @@
    "launches": [
     "sports-lake-ak"
    ],
+   "water_id": "union-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "dd521d70bf4567e650cab738256210c0a963bc97e3c68ef28b43241b09f9e4e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3811,10 +5569,10 @@
     "Moose Pass"
    ],
    "bbox": [
-    -149.42375,
-    60.45897,
-    -149.33769,
-    60.53533
+    -149.423747,
+    60.458967,
+    -149.337691,
+    60.535339
    ],
    "wikidata": null,
    "charted": false,
@@ -3822,6 +5580,15 @@
    "launches": [
     "moose-pass-ak"
    ],
+   "water_id": "upper-trail-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "72aa577117232a14cfd7525c5633375e611b61cf772fdfc4564ae8bd74b68dc5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3831,10 +5598,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -130.90144,
-    55.70607,
-    -130.70117,
-    55.76309
+    -130.901439,
+    55.706071,
+    -130.701171,
+    55.763087
    ],
    "wikidata": null,
    "charted": true,
@@ -3842,6 +5609,15 @@
    "launches": [
     "walker-cove-buoy-day-use-area-ak"
    ],
+   "water_id": "walker-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "89eb1fa3b0be18d1c9617e897e69e2aca630c9add2523bac4b2b34c1c106fa4c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3851,10 +5627,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -141.76423,
+    -141.764226,
     64.02664,
-    -141.04991,
-    64.09872
+    -141.049905,
+    64.098966
    ],
    "wikidata": "Q125246651",
    "charted": false,
@@ -3863,6 +5639,15 @@
     "walker-fork-campground-ak",
     "walker-fork-campground-boat-ramp-ak"
    ],
+   "water_id": "walker-fork-ak",
+   "gnis_id": "1411747",
+   "geometry_hash": "5c36624e73684c108b33cfee87d826f1f82741890471da6209e1f48b8a3f61c0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3872,10 +5657,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -150.47399,
-    60.53408,
-    -150.46169,
-    60.54173
+    -150.473987,
+    60.534084,
+    -150.461691,
+    60.541727
    ],
    "wikidata": null,
    "charted": false,
@@ -3883,6 +5668,15 @@
    "launches": [
     "watson-lake-boat-launch-ak"
    ],
+   "water_id": "watson-lake-ak",
+   "gnis_id": null,
+   "geometry_hash": "39f58a1f9f3602f6145856d30fe146b965509cfe03f39307f0fc70bde2b887f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3892,10 +5686,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -143.20929,
-    63.53934,
+    -143.209292,
+    63.539338,
     -142.04765,
-    63.90835
+    63.908352
    ],
    "wikidata": "Q125256583",
    "charted": false,
@@ -3903,6 +5697,15 @@
    "launches": [
     "west-fork-campground-river-access-ak"
    ],
+   "water_id": "west-fork-dennison-fork-ak",
+   "gnis_id": "1411866",
+   "geometry_hash": "a4bab45fc93fa4d284e8c22373f02557c7be9130d7158a4f46c99f8e9512316a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3912,16 +5715,57 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -133.24372,
-    55.75355,
+    -133.243723,
+    55.753547,
     -133.22703,
-    55.7739
+    55.773902
    ],
    "wikidata": null,
    "charted": true,
    "area_km2": 0.661,
    "launches": [
     "winter-harbor-access-ak"
+   ],
+   "water_id": "winter-harbor-ak",
+   "gnis_id": null,
+   "geometry_hash": "8fa1c441eb9ba262900d1dc3730d96052df274db27270f6ce4216a34bae6fdf0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "womens-bay-ak",
+   "name": "Womens Bay",
+   "kind": "bay",
+   "state": "AK",
+   "towns": [
+    "Kodiak"
+   ],
+   "bbox": [
+    -152.571107,
+    57.694626,
+    -152.447654,
+    57.758909
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 25.103,
+   "launches": [],
+   "water_id": "womens-bay-ak",
+   "gnis_id": null,
+   "geometry_hash": "978f4fa75471086cfb738739420025268e01a8e2601960b5914aede706482200",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "womens-bay-boat-launch-near-kodiak-ak-2",
+    "womens-bay-boat-launch-near-kodiak-ak-3"
    ],
    "advisories": []
   },
@@ -3934,10 +5778,10 @@
     "Wood River"
    ],
    "bbox": [
-    -158.60054,
-    59.03744,
-    -158.41553,
-    59.27453
+    -158.600543,
+    59.037438,
+    -158.415535,
+    59.274526
    ],
    "wikidata": "Q2593079",
    "charted": true,
@@ -3945,6 +5789,15 @@
    "launches": [
     "wood-river-access-ak"
    ],
+   "water_id": "wood-river-ak",
+   "gnis_id": "1412249",
+   "geometry_hash": "5b77d43f789628389bbc06d2292aa8d0e8b33af92c1a3cbf849ffcf04c1bc051",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3954,10 +5807,10 @@
    "state": "AK",
    "towns": [],
    "bbox": [
-    -132.83156,
-    56.49666,
-    -132.8181,
-    56.50142
+    -132.831557,
+    56.496661,
+    -132.818102,
+    56.501419
    ],
    "wikidata": null,
    "charted": true,
@@ -3965,6 +5818,15 @@
    "launches": [
     "woodpecker-boat-launch-ak"
    ],
+   "water_id": "woodpecker-cove-ak",
+   "gnis_id": null,
+   "geometry_hash": "c94a1a88b392224716a1ceeae37c82190c472f0e36daa87293d118973bcfcf2b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -3976,10 +5838,10 @@
     "Petersburg"
    ],
    "bbox": [
-    -133.00012,
-    56.51017,
-    -132.905,
-    56.83345
+    -133.000122,
+    56.510171,
+    -132.905001,
+    56.833449
    ],
    "wikidata": null,
    "charted": true,
@@ -3988,6 +5850,15 @@
     "papkes-landing-launch-ak",
     "south-harbor-launch-ramp-ak"
    ],
+   "water_id": "wrangell-narrows-ak",
+   "gnis_id": null,
+   "geometry_hash": "0fee4c9b5747c3a51de710c5d4d94d747cc2326a905aeebf8d95e7ec370ce17c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   },
   {
@@ -4001,10 +5872,10 @@
     "Galena"
    ],
    "bbox": [
-    -164.76958,
-    61.54892,
-    -139.43019,
-    66.60015
+    -164.769579,
+    61.546872,
+    -139.430191,
+    66.600149
    ],
    "wikidata": "Q104437",
    "charted": false,
@@ -4015,6 +5886,15 @@
     "yukon-river-boat-launch-ak",
     "yukon-river-boat-launch-ak-2"
    ],
+   "water_id": "yukon-river-ak",
+   "gnis_id": "1416412",
+   "geometry_hash": "032881f939b16a8dfc9e08da95a947eb5e1b067465b390dbd1a5ddea79c79d4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
    "advisories": []
   }
  ]
