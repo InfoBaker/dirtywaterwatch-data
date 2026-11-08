@@ -906,7 +906,7 @@
    "name": "Utah Division of Water Quality (Recreational Waters Map)",
    "channel_kind": "feed",
    "urls": [
-    "https://deq.utah.gov/water-quality/recreational-water-quality-home"
+    "https://deq.utah.gov/dwq/recreational-water-quality"
    ],
    "method": "html",
    "legal_basis": null,
@@ -932,7 +932,7 @@
    "name": "Utah Division of Water Quality (recreational water quality page)",
    "channel_kind": "state_alert_page",
    "urls": [
-    "https://deq.utah.gov/water-quality/recreational-water-quality-home"
+    "https://deq.utah.gov/dwq/recreational-water-quality"
    ],
    "method": "html",
    "legal_basis": null,
@@ -944,7 +944,7 @@
    "records": false,
    "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "DWQ's recreational water page explains the bloom and E. coli advisories and links the map; watched for a new map address. Voluntary.",
+   "note": "DWQ's recreational water page explains the bloom and E. coli advisories and links the map; watched for a new map address. Its old address and habs.utah.gov, which answered 403 to scripts on 2026-11-03, both redirect here (2026-11-08). Voluntary.",
    "sources": [
     "ut-dwq-recreational-advisories"
    ],
@@ -1504,30 +1504,6 @@
    ],
    "note": "No web channel found: Gunnison City reports a Class 1 overflow to DWQ by telephone within 24 hours and in writing within five days (R317-801-4); DWQ publishes no list (ut-dwq-class-1-sso-reports). An overflow becomes public only when someone also calls DEQ's spill hotline (ut-deq-environmental-incidents). No public notice is required. (research/ut/report.md §2.1)",
    "barrier": "no_web_page"
-  },
-  {
-   "state": "UT",
-   "operator_id": null,
-   "agency": "Utah Division of Water Quality",
-   "permit": null,
-   "checked": "2026-11-07",
-   "id": "ut-habs-utah-gov",
-   "name": "Utah Division of Water Quality (habs.utah.gov)",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://habs.utah.gov/"
-   ],
-   "method": "html",
-   "legal_basis": null,
-   "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "unknown",
-   "note": "DWQ's harmful algal bloom site answers 403 to scripts (2026-11-03); its advisories are read from the map's layer instead (ut-dwq-recreational-advisories).",
-   "sources": [
-    "ut-dwq-recreational-advisories"
-   ],
-   "barrier": "bot_wall"
   },
   {
    "state": "UT",
@@ -3074,7 +3050,7 @@
    "name": "Zion National Park (toxic cyanobacteria page)",
    "channel_kind": "shared_site",
    "urls": [
-    "https://www.nps.gov/zion/planyourvisit/toxic-cyanobacteria-bloom-in-the-virgin-river-and-the-streams-of-zion-national-park.html"
+    "https://www.nps.gov/zion/planyourvisit/toxic-cyanobacteria-bloom-in-the-virgin-river-and-the-streams-of-zion-national-park.htm"
    ],
    "method": "html",
    "legal_basis": null,
