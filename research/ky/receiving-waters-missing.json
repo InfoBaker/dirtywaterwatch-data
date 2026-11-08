@@ -1,0 +1,236 @@
+{
+ "about": "Water names in Kentucky's records that data/receiving-waters-national.json does not hold for KY: EPA's overflow tables (the 2026-11-04 extract read on 2026-11-07; the Kentucky reports kept as reaching a water), Louisville MSD's discharge notices, the Division of Water's HAB Viewer (every point's lake in the layer read on 2026-11-07) and the Division's standing swimming advisories (the waters and stretches the page names), with the number of records giving each. The form's placeholders ('Unnamed Tributary or Unknown', 'Unnamed') and reports that say the discharge reached no water are left out.",
+ "state": "KY",
+ "waters": 18,
+ "reports": 14,
+ "rows": [
+  {
+   "name": "Brashears Creek",
+   "reports": 1,
+   "permits": [
+    "KY0028142"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Catron Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "all of it"
+   ]
+  },
+  {
+   "name": "Cedar Creek",
+   "reports": 1,
+   "permits": [
+    "KY0098540"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.121111,
+     -85.593611
+    ]
+   ]
+  },
+  {
+   "name": "Doe Run Lake",
+   "reports": 1,
+   "permits": [
+    "KY0043478"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     37.99797,
+     -86.110596
+    ]
+   ]
+  },
+  {
+   "name": "East Hickman Creek",
+   "reports": 1,
+   "permits": [
+    "KY0021504"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Little Huckleberry Creek",
+   "reports": 1,
+   "permits": [
+    "KY0106143"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.4175,
+     -85.61111
+    ]
+   ]
+  },
+  {
+   "name": "Little Stoner Creek",
+   "reports": 1,
+   "permits": [
+    "KY0037991"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Long Run",
+   "reports": 1,
+   "permits": [
+    "KY0102784"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.22406,
+     -85.47036
+    ]
+   ]
+  },
+  {
+   "name": "Martins Fork Cumberland River",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "from Harlan to the Cawood Water Plant"
+   ]
+  },
+  {
+   "name": "Old Springfield Reservoir",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-hab-viewer"
+   ],
+   "points": [
+    [
+     37.688574,
+     -85.231588
+    ]
+   ]
+  },
+  {
+   "name": "Straight Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "all of it"
+   ]
+  },
+  {
+   "name": "Three Mile Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "ky-dow-swimming-advisories"
+   ],
+   "stretches": [
+    "all of it"
+   ]
+  },
+  {
+   "name": "Town Fork",
+   "reports": 1,
+   "permits": [
+    "KY0100404"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "West Hickman Creek",
+   "reports": 1,
+   "permits": [
+    "KY0021504"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Caneyville Reservoir",
+   "reports": 0,
+   "permits": [],
+   "sources": [
+    "ky-dow-hab-viewer"
+   ],
+   "points": [
+    [
+     37.43914,
+     -86.463939
+    ]
+   ]
+  },
+  {
+   "name": "Kentucky Lake",
+   "reports": 0,
+   "permits": [],
+   "sources": [
+    "ky-dow-hab-viewer"
+   ],
+   "points": [
+    [
+     36.64213,
+     -88.130057
+    ]
+   ]
+  },
+  {
+   "name": "Lake Malone",
+   "reports": 0,
+   "permits": [],
+   "sources": [
+    "ky-dow-hab-viewer"
+   ],
+   "points": [
+    [
+     37.027409,
+     -87.059517
+    ]
+   ]
+  },
+  {
+   "name": "Williamstown Lake",
+   "reports": 0,
+   "permits": [],
+   "sources": [
+    "ky-dow-hab-viewer"
+   ],
+   "points": [
+    [
+     38.656383,
+     -84.536824
+    ]
+   ]
+  }
+ ]
+}

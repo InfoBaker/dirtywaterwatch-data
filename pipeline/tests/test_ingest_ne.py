@@ -28,7 +28,7 @@ def _build(tables=None):
 
 def test_nebraska_is_read_with_the_point_zone_and_the_scrub():
     assert "NE" in E.STATES and E.STATE_TZ["NE"] == "America/Chicago" and E.STATE_TZ["IL"] == "America/Chicago"
-    assert E.POINT_ZONE_FILES == {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}
+    assert E.POINT_ZONE_FILES.items() >= {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json"}.items()
     assert "NE" in E.FREE_TEXT_STATES and "NE" not in E.REPEATED_POINT_STATES and "NE" not in E.STATE_NO_WATER
 
 

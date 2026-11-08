@@ -77,6 +77,15 @@
 #                  reports located in New Mexico: the only public record of New Mexico overflows; NMED's own notices
 #                  under 20.6.2.1203 NMAC are not published), and the generic block nm-nmed-hab-mapper (NMED's HAB
 #                  advisory map layer, blooms; ingest/nm_transforms.py)
+#                  Kentucky: echo_sewer_overflow_events (EPA's overflow tables, KY permits: Kentucky's own system sent
+#                  its reports for December 2025 and January 2026 only; Eastern or Central time by the event's
+#                  county, data/reference/ky-central-time-counties.json), ky_louisville_msd (Louisville MSD's
+#                  Overflow Advisory Level banner, polled: MSD-01 advisories and MSD-02 notices; the state file
+#                  data/build/ky-louisville-msd-state.json is the archive) and the generic block ky-dow-hab-viewer
+#                  (the Division of Water's HAB Viewer layer, blooms; ingest/ky_transforms.py), ky_dow_swimming_advisories
+#                  (the Division's standing swimming advisories page, read as standing advisories; its state file
+#                  data/build/ky-dow-swimming-advisories-state.json); SD1's rain rule is in
+#                  data/rules.json rain_likely.fallback.by_permit
 #                  Hawaii: hi_doh_cwb_events (the Department of Health Clean Water Branch's events endpoint, the newest
 #                  500 advisories every run: sewage spill and permit exceedance advisories in the Department's own
 #                  window, Brown Water Advisories as rainfall advisories, beach advisories and retest notices; placed

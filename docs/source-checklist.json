@@ -57967,5 +57967,548 @@
   "checked": "2026-11-03",
   "notes": "",
   "area": "or"
+ },
+ {
+  "id": "ky-law-401-kar-5-065",
+  "name": "401 KAR 5:065 Section 2(5): KPDES reporting of spills, bypasses, upsets",
+  "jurisdiction": "KY",
+  "operator": "Kentucky Energy and Environment Cabinet (regulation)",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://apps.legislature.ky.gov/law/kar/titles/401/005/065/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Regulation page fetched (raw/kar-401-5-065.html).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "401 KAR 5:065 Section 2(5)",
+  "status": "used",
+  "status_reason": "The only overflow-reporting rule found: report to the Division of Water, no public notice duty.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "Quote: \"Reporting shall be as established in 40 C.F.R. 122.41 except that: (a) If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort at (502) 564-3410 or the appropriate regional field office ... (b) If a report required by this subsection is made during other than normal business hours, it shall be made through the twenty-four (24) hour environmental emergency telephone number\". No duty to tell the public was found in the regulation.",
+  "area": "ky"
+ },
+ {
+  "id": "ky-sobe-erule-state-system",
+  "name": "EPA SOBE extract, Kentucky rows (state electronic reporting system, ES2)",
+  "jurisdiction": "KY",
+  "operator": "U.S. EPA ECHO (data from Kentucky DOW)",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": "statewide in principle; 43 rows in practice",
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP held only its metadata, so the module reads the current version of each report from the all-versions ZIP (2026-11-04 extract). 43 Kentucky reports from 37 permits, every one filed as a bypass (BYP) at a structure typed 'Other', submission type ES2 (Kentucky's own system), form sets KY-11256, KY-11276, KY-11286; started 2025-12-08 to 2026-01-08 (December 35, January 8), received December 2025 (34) and January 2026 (9); a point, a start and an end on all 43, a volume on 19. Receiving water: 'Unnamed Tributary or Unknown' on 26, 'Unnamed' on 4, a named stream or lake on 13.",
+  "machine_readable": true,
+  "sample_record": {
+   "permit_identifier": "KY0090956",
+   "sewer_overflow_bypass_start_datetime": "2025-12-31 14:00:00",
+   "sewer_overflow_bypass_end_datetime": "2025-12-31 16:00:00",
+   "sewer_overflow_bypass_discharge_volume_gallons": "120.00",
+   "latitude_measure": "38.297778",
+   "longitude_measure": "-85.439722",
+   "sewer_overflow_structure_type_desc": "Other",
+   "program_report_received_date": "2025-12-31"
+  },
+  "fields": [
+   "permit_identifier",
+   "program_report_received_date",
+   "sewer_overflow_bypass_start_datetime",
+   "sewer_overflow_bypass_end_datetime",
+   "sewer_overflow_bypass_discharge_volume_gallons",
+   "latitude_measure",
+   "longitude_measure",
+   "sewer_overflow_bypass_description_text",
+   "name_receiving_water (separate table)"
+  ],
+  "fills_event_fields": [
+   "event_type",
+   "started_at",
+   "ended_at",
+   "reported_at",
+   "coordinates",
+   "volume",
+   "waterbody",
+   "source_record_id",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "advice_text",
+   "valid_until",
+   "published_at"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "daily ECHO file; Kentucky reports received a median 0 days after the start (the longest 5), and none since January 2026",
+  "history": "2025-12 to 2026-01",
+  "license": "EPA public data",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read by the national eRule module (echo-sewer-overflow) with Kentucky in its states since 2026-11-07: the only dated, machine-readable record of Kentucky overflow reports with points, though Kentucky's system sent reports for two months only (December 2025 and January 2026).",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "2026-11-04 extract: 20 kept as reaching a water (13 naming it, 3 answering 'Receiving into an unnamed tributary? Yes', 4 whose text names a creek), 23 dropped (21 with no sign that a water was reached, 2 saying none was: 'No waterways impacted', 'did not reach a waterbody'). Kentucky's rules in the module: the zone by the event's point (Eastern, or Central in the forty-one western counties of 49 CFR 71.5(c)); a bypass whose description names a manhole, force main, lift or pump station or line break read as a sewer overflow; the form's placeholders read as no name; the callers', responders' and staff names in the descriptions scrubbed. Known problems: one Louisville MSD report ends 14 minutes before it starts; one incident is filed under two permits (Frankfort, 2025-12-22).",
+  "area": "ky"
+ },
+ {
+  "id": "ky-louisville-msd-overflow-advisory",
+  "name": "Louisville MSD Overflow Advisory Level banner and notice nodes",
+  "jurisdiction": "KY",
+  "operator": "Louisville/Jefferson County Metropolitan Sewer District",
+  "operator_type": "utility",
+  "role": "advisories",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Ohio River and streams in Louisville Metro (Jefferson County)",
+  "water_slugs": [],
+  "url": "https://louisvillemsd.org/overflowalert",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Advisory block on every page of louisvillemsd.org and at /overflowalert (raw/louisville-msd-overflowalert-2026-11-03.html). Each advisory is a Drupal node with a timestamp: node/31322 and node/31323 'MSD-01 Wet Weather Overflows.' stamped 'November 3, 2026 3:00 AM' (raw/louisville-msd-node-31322-2026-11-03.html). Search results show event nodes 'MSD-02 2/18/2025 A Wet Weather Discharge has occurred' with a start time, and 'MSD-02 4/6/2026 A Dry Weather Discharge has occurred.'; the 2025 node now returns 404, so old notices are removed.",
+  "machine_readable": false,
+  "sample_record": {
+   "level": "MSD-01 Wet Weather Overflows.",
+   "text": "Recent rainfall has created the risk of sewer overflows in the Louisville Metro area. Avoid contact with water in the Ohio River, streams, drainage ditches and standing water until 48 hours after the rain has stopped.",
+   "stamp": "November 3, 2026 3:00 AM"
+  },
+  "fields": [
+   "advisory level code (MSD-01, MSD-02)",
+   "title",
+   "text",
+   "date/time stamp",
+   "event start time (MSD-02 only)"
+  ],
+  "fills_event_fields": [
+   "advice_text",
+   "published_at",
+   "started_at (MSD-02)",
+   "authority"
+  ],
+  "cannot_fill": [
+   "outfall",
+   "coordinates",
+   "volume",
+   "ended_at",
+   "waterbody beyond 'Ohio River, streams'"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "set by MSD with rain; banner live on 2026-11-03",
+  "history": "none kept on site (old nodes removed)",
+  "license": "none stated",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Polled by ingest/ky_louisville_msd.py (source id ky-louisville-msd-overflow-advisory): the banner as a snapshot state machine; MSD-01 as MSD's own advisory at each of MSD's open combined sewer outfalls, MSD-02 as a dated report.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "MSD also says 'For more information, go to www.msdprojectwin.org'. An email list signup is in the footer ('Water Quality Email List Signup'); not subscribed. 2026-11-07: the banner read 'Conditions are normal' (level 3); the Internet Archive's copies show MSD-01 (2024-02-29, 2025-09-04) and an MSD-02 notice (2025-02-19: a pump-station power outage to Pennsylvania Run, ongoing, more than 10,000 gallons). The advisory nodes of 2026-11-03 (31322, 31323) answer 404.",
+  "area": "ky"
+ },
+ {
+  "id": "ky-sd1-wet-weather-notification",
+  "name": "SD1 Wet Weather Overflow Notification Program (Northern Kentucky)",
+  "jurisdiction": "KY",
+  "operator": "Sanitation District No. 1 of Northern Kentucky",
+  "operator_type": "utility",
+  "role": "advisories",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Ohio River, Licking River, Banklick Creek and other streams in Boone, Campbell and Kenton counties",
+  "water_slugs": [],
+  "url": "https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra",
+  "access": [
+   "email",
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Page fetched (raw/sd1-wet-weather-notification-2026-11-03.html). Notifications by sign-up only (CivicPlus Notify Me); map of overflow areas PDF https://sd1.org/DocumentCenter/View/207/Local-Sewer-Overflows-PDF.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "advice_text",
+   "valid_until (72 hours)"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "outfall",
+   "volume"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Quote: \"We will only alert you during contact recreational season (May through October) when: Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties The Ohio River exceeds 38 feet\"; \"All advisories will remain in effect for 72 hours after rainfall or 72 hours after river levels drop below 38 feet.\"",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "SD1's own published rule written into data/rules.json (rain_likely.fallback.by_permit.KY0021466): 0.25 inch of rain, a 72-hour caution, May to October, applied from radar rainfall at SD1's combined sewer outfalls; the Ohio River stage part (above 38 feet) is not applied. The alerts themselves reach subscribers only.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "SD1 posts CSO signs: \"If you see these signs, avoid nearby water during and after rainfall for at least 72 hours.\" Its rule (0.25 inch, Ohio River 38 feet, 72 hours) matches the site's 72-hour yellow window.",
+  "area": "ky"
+ },
+ {
+  "id": "ky-dow-cso-sites-layer",
+  "name": "Kentucky DOW Combined Sewer Overflow Sites (ArcGIS)",
+  "jurisdiction": "KY",
+  "operator": "Kentucky Division of Water / Division of Geographic Information",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://services3.arcgis.com/ghsX9CKghMvyYjBU/arcgis/rest/services/Ky_DOW_Combined_Sewer_Overflow_Sites_WM_gdb/FeatureServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Queried 2026-11-03: 286 features, all Active=1; saved raw/ky-dow-cso-sites-2026-11-03.json. Item modified 2026-10-30.",
+  "machine_readable": true,
+  "sample_record": {
+   "CSO_ID": "KY0020095-002",
+   "KPDES": "KY0020095",
+   "Permit_Name": "RWRA Max Rhoads WWTP",
+   "Feature_Desc": "Center Street CSO (Untreated CSO)",
+   "RecvWater": "OHIO RIVER",
+   "DD_Lat": 37.776509,
+   "DD_Lng": -87.102132
+  },
+  "fields": [
+   "CSO_ID",
+   "Active",
+   "KPDES",
+   "Feature_ID",
+   "Permit_Name",
+   "Feature_Desc",
+   "County",
+   "RecvWater",
+   "HUC12",
+   "DD_Lat",
+   "DD_Lng",
+   "XY_Method",
+   "ICIS_Report"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "waterbody"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": "CC0 (item licence: https://creativecommons.org/publicdomain/zero/1.0/) with a limitation-of-liability note",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "The state's own register of active combined sewer outfall sites, read to check EPA's inventory: 285 of its 286 sites are EPA open outfalls at the same point (within 0.3 m), the other (KY0026093-001) is the Harlan plant's own outfall; EPA lists 4 open outfalls the layer does not (KY0020711-011, KY0022411-062, KY0022861-017 and -018), kept open. Its RecvWater field is the basin's main river (263 of 286 'OHIO RIVER'), not the outfall's water, and is not used. No state outfall file is needed.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "2026-11-07 fetch: 286 features, all Active=1; 13 permits (Louisville MSD 120, SD1 88, Maysville 14, Henderson 14, Frankfort 14, Paducah 11, Owensboro 8, Ashland 8, Morganfield 2, Pineville 2, Harlan 2, Loyall 2, Catlettsburg 1); layer edited 2026-10-30.",
+  "area": "ky"
+ },
+ {
+  "id": "ky-dow-hab-viewer",
+  "name": "Kentucky DOW HAB Viewer (HABService Observation Points)",
+  "jurisdiction": "KY",
+  "operator": "Kentucky Division of Water",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://watermaps.ky.gov/arcgis/rest/services/WebMapServices/HABService/MapServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "watermaps.ky.gov/HABs redirects to web app b4cecafe06ee4e9187b5bc4589006e1e; its web map points at HABService. Layer 0 queried: 5 features in season's end state (raw/ky-hab-layer0-sample.json).",
+  "machine_readable": true,
+  "sample_record": {
+   "HABSTART": 1788912000000,
+   "HABEND": null,
+   "HABSTATUS": "Below",
+   "HABNAME": "Caneyville Reservoir",
+   "HABSTATDES": "Cyanotoxins Detected Below Advisory Level, Total Microcystins on 9/9/2026: 52.6 µg/L; ... on 10/20/2026: 0.567 µg/L.",
+   "HABYEARS": "2026"
+  },
+  "fields": [
+   "OBJECTID",
+   "HABSTART",
+   "HABEND",
+   "HABSTATUS",
+   "HABNAME",
+   "HABSTATDES",
+   "HABYEARS"
+  ],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at",
+   "waterbody",
+   "coordinates",
+   "advice_text"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "updated with each sampling round in season",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read through the generic ArcGIS ingester (fetch block in its source file): one record per point under an advisory status (Warning or Danger); Below and NoDetect are grey; each date in its point's own zone; blooms, not sewage.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "notes": "2026-11-07 fetch: 5 points of the 2026 season: Old Springfield Reservoir Warning (recreational advisory, microcystins 17.1 ug/L on 2026-10-26), Caneyville Reservoir Below, Kentucky Lake, Williamstown Lake and Lake Malone NoDetect; HABEND empty on all.",
+  "area": "ky"
+ },
+ {
+  "id": "ky-dow-swimming-advisories",
+  "name": "Kentucky swimming advisories (DOW and Department for Public Health)",
+  "jurisdiction": "KY",
+  "operator": "Kentucky Division of Water / Cabinet for Health and Family Services",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": "Upper Cumberland River, North Fork Kentucky River, Licking River (Banklick Creek, Three Mile Creek)",
+  "water_slugs": [],
+  "url": "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Page fetched (raw/ky-dow-swimming-advisories-2026-11-03.html). Standing advisories 'in place for several years', no dates.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "advice_text",
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "valid_until"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read by ingest/ky_dow_swimming_advisories.py: the page's list as standing advisories in the agencies' own words, one record per named stretch or water (12 on 2026-11-07), from the first read that listed it (the page gives no date), ended when a read no longer lists it; placed by the named water as a marker.",
+  "verified": "fetched",
+  "checked": "2026-11-08",
+  "notes": "Quote: \"People should avoid recreational contact with waters in the areas specified because of the bacteria, which occur in human and animal waste and indicate the presence of untreated or inadequately treated sewage.\" And: \"The agencies also recommend against swimming or other full-body contact with surface waters immediately following heavy rainfall events ... due to an increased potential for exposure to ... bypasses from sewage collection systems, combined sewer overflows\".",
+  "area": "ky"
+ },
+ {
+  "id": "ky-orsanco-bacteria",
+  "name": "ORSANCO contact recreation bacteria monitoring (Ohio River: Louisville and others)",
+  "jurisdiction": "KY",
+  "operator": "Ohio River Valley Water Sanitation Commission",
+  "operator_type": "other",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": "Ohio River at Pittsburgh, Wheeling, Huntington, Cincinnati, Louisville, Evansville",
+  "water_slugs": [],
+  "url": "https://www.orsanco.org/data/bacteria/",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "curl and WebFetch both got HTTP 403 (Cloudflare 'Just a moment...'). Search results: weekly results posted Fridays, April 1 to October 31; monthly PDF reports.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "weekly in season",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Bot wall; shared with WV.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "Criterion cited in the May 2026 report: E. coli 240 CFU/100 mL not exceeded in more than 25 percent of samples.",
+  "area": "ky"
+ },
+ {
+  "id": "ky-lfucg-sso-consent-decree",
+  "name": "Lexington-Fayette Urban County Government sanitary sewer consent decree reports",
+  "jurisdiction": "KY",
+  "operator": "Lexington-Fayette Urban County Government",
+  "operator_type": "municipal",
+  "role": "permits",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.epa.gov/sites/default/files/2013-09/documents/lexington-cd.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "SSO consent decree (2008, modified 2015 and 2024); no public overflow notice channel found.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "ky"
+ },
+ {
+  "id": "ky-dep-ert-incidents",
+  "name": "Kentucky DEP Environmental Response Team incident records",
+  "jurisdiction": "KY",
+  "operator": "Kentucky Department for Environmental Protection",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "spill"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://eec.ky.gov/Environmental-Protection/Waste/Pages/EmergencyResponseBranch.aspx",
+  "access": [
+   "phone"
+  ],
+  "access_detail": "24-hour environmental emergency line; incident numbers appear in SOBE rows ('Incident ID'). No public incident list found; records via open records request (KRS 224.10-210, KRS 61.872).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "No public web output; records request only.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "ky"
+ },
+ {
+  "id": "ky-msd-govdelivery",
+  "name": "Louisville Metro GovDelivery bulletins (KYLOUISVILLE), MSD community messages",
+  "jurisdiction": "KY",
+  "operator": "Louisville Metro Government",
+  "operator_type": "municipal",
+  "role": "news",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://content.govdelivery.com/accounts/KYLOUISVILLE/bulletins/3d25653",
+  "access": [
+   "email",
+   "html"
+  ],
+  "access_detail": "Search found an MSD community message PDF on a pump-station failure (2025-02-21, Admiral pump station) attached to a Louisville Metro bulletin.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Occasional large-event notices; email sign-up for owner.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "ky"
+ },
+ {
+  "id": "ky-cso-annual-report-template",
+  "name": "KPDES CSO Annual Report template (Division of Water)",
+  "jurisdiction": "KY",
+  "operator": "Kentucky Division of Water",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://eec.ky.gov/Environmental-Protection/Water/PermitCert/KPDES/Documents/CSO-AnnualReportTemplate.docx",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "CSO permittees file annual reports by email to the Division; the reports are not posted (SD1 posts its own on sd1.org/247/Consent-Decree-Reports).",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": "",
+  "area": "ky"
  }
 ]

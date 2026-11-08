@@ -204,6 +204,12 @@
     "clock": "end_of_discharge",
     "basis": "Oregon law sets no period after a sewage discharge during which the water is to be avoided, and no Oregon statute requires the public to be told of one. Every wastewater permit DEQ issues carries general conditions that require the permittee, when an overflow threatens public health, to alert the public, health agencies and other affected entities by its own Emergency Response and Public Notification Plan; no deadline and no channel are set. The permittee reports the overflow to the Oregon Emergency Response System by telephone within 24 hours and to DEQ in writing within five days, and neither report is published; DEQ's map layer of the spills it verified stops at March 27, 2025. The City of Portland publishes an advisory for each combined sewer overflow and for the sewage releases it reports, with the start and the stretch of water; its overflow advisories, and its releases to the Willamette, advise avoiding contact during the overflow and for 48 hours after it stops, and that window is used as the City's own where the advisory gives it. Times are read in Pacific time, and in Mountain time in Malheur County north of township 35 South. This site marks a reported discharge while it runs and applies its own caution after it ends; a report that says the sewage reached no water is listed but not placed on a water",
     "source": "DEQ NPDES permit general conditions (Schedule F) and WPCF domestic general conditions; OAR 340-142-0040; City of Portland Environmental Services, CSO and sewage advisories; Oregon DEQ, spills reported to OERS and verified by DEQ, 2013 to March 2025; 49 CFR 71.9"
+   },
+   "KY": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Kentucky law sets no period after a sewage discharge during which the water is to be avoided, and no Kentucky statute or rule requires the public to be told of a sewage overflow or a bypass. A permittee must tell the Division of Water immediately by telephone of a spill, bypass or overflow that may present an imminent or substantial danger to public health or the environment, and report it as the federal permit conditions require (401 KAR 5:065 Section 2(5)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to the U.S. Environmental Protection Agency's overflow records for December 2025 and January 2026 only. The Louisville and Jefferson County Metropolitan Sewer District posts its own overflow advisory on its website, asking people to avoid contact with the Ohio River, streams, drainage ditches and standing water \"until 48 hours after the rain has stopped\"; this site shows that advisory as the District's while the District's page carries it. Northern Kentucky's Sanitation District No. 1 alerts its subscribers from May to October when 0.25 inch of rain falls in its service area or the Ohio River rises above 38 feet, and keeps its advisories for 72 hours; this site applies the rainfall part of that rule at the District's combined sewer outfalls from radar rainfall. Times are read in Eastern time, and in Central time in the forty-one western counties. This site marks a reported discharge while it runs and applies its own caution after it ends; a report of a discharge that reached no water is not shown on this site",
+    "source": "401 KAR 5:065 Section 2(5); 40 CFR 122.41(l)(6); U.S. EPA sewer overflow and bypass event data (ECHO); Louisville MSD Overflow Advisory Level (louisvillemsd.org/overflowalert); SD1 Wet Weather Overflow Notification Program (sd1.org/218); 49 CFR 71.5(c)"
    }
   },
   "by_discharger": {
@@ -549,6 +555,25 @@
      "basis": "District and county agencies recommend not swimming for 48 hours after half an inch of rain, as Anacostia Riverkeeper publishes their advice; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
      "source": "Anacostia Riverkeeper, Swim Guide listings for the District of Columbia",
      "trigger_basis": "default"
+    }
+   },
+   "_by_permit_doc": "An operator's own published rain trigger for one permit, in the operator's season (months), with its own caution length (tail_hours): it applies before the state's rule, and outside its months the state's rule or the default applies (build/rain_likely.py operator_rule).",
+   "by_permit": {
+    "KY0021466": {
+     "inches": 0.25,
+     "tail_hours": 72,
+    "time_zone": "America/New_York",
+     "months": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "operator": "Sanitation District No. 1 of Northern Kentucky",
+     "basis": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+     "source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)"
     }
    }
   },

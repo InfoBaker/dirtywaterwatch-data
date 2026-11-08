@@ -4,9 +4,9 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
 
   STATE_ZONES  the zone of each state (its larger part for a state that straddles two: 49 CFR part 71).
   zone_for     the zone for a state and, where the state straddles two zones and the code knows the line, the point:
-               Florida by its Eastern-Central boundary (florida_zone), South Dakota and Nebraska by the county files of
-               data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone), Oregon by
-               Malheur County (oregon_zone). Any other
+               Florida by its Eastern-Central boundary (florida_zone), South Dakota, Nebraska and Kentucky by the county
+               files of data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone;
+               Kentucky's forty-one Central-time counties, 49 CFR 71.5(c)), Oregon by Malheur County (oregon_zone). Any other
                state gets STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
@@ -128,7 +128,7 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
         return florida_zone(lat, lon)
     if st == "OR":
         return oregon_zone(lat, lon)
-    if st in ("SD", "NE") and lat is not None and lon is not None:
+    if st in ("SD", "NE", "KY") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
         except (RuntimeError, ImportError, ValueError):
