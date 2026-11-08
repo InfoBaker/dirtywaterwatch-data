@@ -178,3 +178,74 @@ def test_advisories_looks_good_is_no_record_and_codes_are_read():
         assert r["time_precision"] == "day" and re.fullmatch(r"\d{4}-\d{2}-\d{2}T00:00:00-0[67]:00", r["started_at"])
         assert r["raw"]["time_zone"] == "America/Denver" and r["raw"]["_last_monitored"]
         assert r["reported_at"] is None and not re.search(r"\b(safe|clean)\b", r["advice_text"] or "", re.I)
+
+
+# ---------------------------------------------------------------- registry, register, rules, text, waters
+
+def ops():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "UT"]
+
+
+def test_every_utah_permit_is_in_exactly_one_row():
+    from ingest import dischargers_schema as DS
+    every = Counter(p for r in json.loads((ROOT / "data" / "dischargers.json").read_text())
+                    for p in dict.fromkeys([r.get("npdes_permit"), *(r.get("npdes_permits") or [])]) if p)
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "UT"}
+    research = {r["npdes_permit"] for r in json.loads((ROOT / "research" / "ut" / "dischargers.json").read_text())}
+    assert len(plants) == 93 and all(every[p] == 1 for p in plants | research)
+    rows = ops()
+    held = [p for r in rows for p in r["npdes_permits"]]
+    assert len(held) == len(set(held)) == 221 and sum(1 for p in held if p.startswith("UTG580")) == 126
+    tim = next(r for r in rows if r["id"] == "ut-timpanogos-ssd")
+    assert "ut-ut0023639" in tim["aliases"] and set(tim["npdes_permits"]) == {"UT0023639", "UTL023639"}
+    assert not DS.check_legal_forms(rows)
+    from build import redact
+    assert not [r["name"] for r in rows if redact.person_shaped(r["name"])]
+
+
+def test_register_rows_per_operator_and_the_state_channels():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "ut.json").read_text())["channels"]}
+    for r in ops():
+        tribal = r["legal_form"] == "tribal" or any(p.startswith(("NN", "COG", "UTG5894")) for p in r["npdes_permits"])
+        row = reg[f"{r['id']}-epa-report" if tribal else f"{r['id']}-dwq-report"]
+        assert row["operator_id"] == r["id"]
+        if not tribal:
+            assert "R317-801-4" in row["legal_basis"] and row["barrier"] == "no_web_page" and row["urls"] == []
+    assert reg["ut-timpanogos-ssd-epa-report"]["feed_source_id"] == "echo-sewer-overflow"
+    assert reg["ut-deq-environmental-incidents"]["feed_source_id"] == "ut-deq-environmental-incidents"
+    assert reg["ut-dwq-recreational-advisories"]["feed_source_id"] == "ut-dwq-recreational-advisories"
+    assert reg["ut-habs-utah-gov"]["barrier"] == "bot_wall"
+    assert reg["ut-dwq-class-1-sso-reports"]["barrier"] == "no_web_page"
+
+
+def test_rules_row_cites_the_law_and_sets_no_window():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    ut = rules["red"]["by_state"]["UT"]
+    assert ut["hours"] is None and "R317-801-4" in ut["source"] and "R317-801-1(13)" in ut["source"]
+    assert "UT" not in rules["live_states"] and not re.search(r"\b(safe|clean)\b", ut["basis"], re.I)
+
+
+def test_state_text_is_in_the_page_shape():
+    t = (ROOT / "research" / "ut" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: UT\nname: Utah\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
+    assert "377" in t and "8,980" in t and "R317-801-4" in t
+
+
+def test_missing_waters_list_leaves_out_the_national_lists_names():
+    d = json.loads((ROOT / "research" / "ut" / "receiving-waters-missing.json").read_text())
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+
+    def k(n):
+        return re.sub(r"[^a-z0-9]", "", (n or "").lower())
+    held = {k(n) for w in nat["states"]["UT"]["waters"]
+            for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
+    assert d["state"] == "UT" and d["waters"] == len(d["rows"]) > 0
+    assert not [r["name"] for r in d["rows"] if k(r["name"]) in held]
+    keys = [(r["name"], r["county"]) for r in d["rows"]]
+    assert len(keys) == len(set(keys)) and not [r for r in d["rows"] if re.search(r"(?i)storm|outfall", r["name"])]

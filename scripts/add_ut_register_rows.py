@@ -64,7 +64,7 @@ AGENCY = [
      "unmonitored_reason": "feed_ingested", "feed_source_id": INCIDENTS, "publishes": "notices", "noun": "Data feed",
      "note": ("The Division of Environmental Response and Remediation's public layer of incidents phoned in to DEQ's "
               "spill hotline since 1991, edited daily, with a point and a PDF report for each: 8,980 rows on "
-              "2026-11-07, 377 of them sewage reports by their titles (18 to 38 a year since 2014). It holds the "
+              "2026-11-07, 377 of them sewage reports by their titles (19 to 38 a year since 2017). It holds the "
               "overflows someone called in, not the Class 1 reports operators send DWQ. (research/ut/report.md §2.2)"),
      "sources": [INCIDENTS]},
     {"id": "ut-dwq-class-1-sso-reports", "agency": "Utah Division of Water Quality",
