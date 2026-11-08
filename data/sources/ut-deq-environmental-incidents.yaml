@@ -1,0 +1,76 @@
+id: "ut-deq-environmental-incidents"
+name: "Utah DEQ Environmental Incidents (DERR spill hotline reports) ArcGIS feature service"
+url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/EnvironmentalIncidents/FeatureServer/0"
+homepage: "https://deq.utah.gov/environmental-response-and-remediation/environmental-incidents"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS reader (the fetch block below) with the hooks in ingest/ut_transforms.py
+#   (ut_incident_record, ut_incidents_post). The layer is the Division of Environmental Response and Remediation's log
+#   of calls to DEQ's spill hotline and after-hours duty officers since 1991, every material; it has no type field and
+#   its incident summary (what was released, how much, where it went) names staff, callers and private addresses, so
+#   it is never requested. A row is a sewage report when its title names sewage (the first filter) and does not name
+#   another material or an indoor backup (the exclude filters). The keyword lists are ut_transforms.SEWAGE_WORDS and
+#   ut_transforms.NOT_SEWAGE (a test holds them equal to this block's filters).
+# Real fetch 2026-11-07 (layer last edited 2026-11-07): COUNTS_LINE
+# Not in the layer: an end time, a receipt or report time, an operator or permit, a volume (only in the summary, not
+#   requested), a receiving water (only in the summary, and in a few titles). Class 1 sewer overflows that operators
+#   report to the Division of Water Quality under R317-801-4 reach this layer only when someone also calls the hotline.
+cadence: "edited daily; newest incident one to two days before the fetch"
+license: "No licence stated on the layer; DEQ says incident locations are approximate"
+attribution: "Utah Department of Environmental Quality, Division of Environmental Response and Remediation"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "plant_bypass"]
+states: ["UT"]
+registry_ids: ["ut-deq-environmental-incidents"]
+access: ["arcgis", "csv", "pdf"]
+access_detail: "Public ArcGIS Online feature service (maxRecordCount 2000), no key. Each row links DEQ's PDF spill report (ReportLink, deqspillsps.deq.utah.gov). The older search site eqspillsps.deq.utah.gov failed TLS (expired certificate) on 2026-11-03."
+machine_readable: true
+legal_basis: "DEQ's spill hotline (Utah Code 19-5-114 and R317-801-4 send Class 1 sewer overflows to the Division of Water Quality, not necessarily to this log)"
+checked: "2026-11-07"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/EnvironmentalIncidents/FeatureServer/0"
+  order_by: "OBJECTID"
+  geometry: true
+  metadata: true
+  time_zone: "America/Denver"
+  bounds: [-114.1, 36.95, -109.0, 42.05]      # Utah; a point outside is not used (raw._coords_rejected)
+  safe_fields: [OBJECTID, Id, DERRID, Title_EventName, Nearest_City, County, Date_Discovered,
+                Date_Discovered_For_Filter, SITEDESC, ReportLink, Northing, Easting, _x, _y]
+  reviewed_fields:
+    Title_EventName: "DEQ's incident title (a place and the material, \"Moab - Sanitary Sewer Overflow\"); scrubbed strictly, and a title opening with a person's or family business's name is cut (ut_transforms.PERSON_TITLE)"
+  free_text: [Title_EventName]
+  free_text_scrub: strict
+  filter:
+    - {field: Title_EventName, regex: "\\bsew(?:age|er|ers)\\b|\\bSSOs?\\b|\\bseptic\\b|\\bwaste\\s*-?\\s*water\\b|\\blift\\s+station|\\bmanhole|\\beffluent\\b|\\bbypass\\b|\\bblack\\s*water\\b|\\bmotorhome\\b|\\bcamper\\b|\\bRV\\b|\\bport(?:a|able)[\\s-]*(?:pott\\w*|john|toilet)|\\bhoney\\s*bucket|\\bchemical\\s+toilet|\\bbiosolids?\\b|\\blagoons?\\b|\\bWWTP\\b|\\bPOTW\\b|\\btreatment\\s+plant|\\bwater\\s+reclamation|\\breclamation\\s+facility|\\bfecal\\b|\\bsanitary\\b|\\bsanitized\\s+sewer"}
+    # not sewage: industrial, process or trade wastewater
+    - {field: Title_EventName, regex: "\\bindustrial\\b|\\bprocess(?:ed)?\\b|\\bcarpet\\s+clean|\\bconcrete\\b|\\bcement\\b|\\bcar\\s+wash|\\bdairy\\b|\\bacidic\\b|\\balkaline\\b|\\blow\\s+ph\\b|\\bhydrocarbon\\b|\\breverse\\s+osmosis\\b|\\bIWWTP\\b|\\btoxicity\\b|\\bfood\\s+truck\\b|\\bgr[ae]y\\s*water\\b|\\bdumpsters?\\b", exclude: true}
+    # not sewage: a drinking-water plant
+    - {field: Title_EventName, regex: "(?<!waste )(?<!waste)\\bwater\\s+treatment\\s+plant\\b", exclude: true}
+    # not sewage: another material in a sewer, drain or plant
+    - {field: Title_EventName, regex: "\\bdiesel\\b|\\bfuel\\b|\\boil\\b|\\bsheen\\b|\\bfirefighting\\s+foam\\b|\\bchemicals?\\b(?!\\s+toilet)|\\bethylene\\b|\\bhydraulic\\b|\\bbird\\s+deaths\\b|\\bliquid\\s+from\\s+sewer\\s+drain\\b|\\bstorm\\s+sewer\\s+dumping\\b|\\bfire\\b", exclude: true}
+    # not sewage: a backup inside a building (basement or home)
+    - {field: Title_EventName, regex: "\\bbasements?\\b|\\bin(?:to)?\\s+homes?\\b|\\b\\d+\\s+residences\\b", exclude: true}
+  record:
+    source_record_id: Id
+    started_at: {field: Date_Discovered, parse: date, formats: ["%m/%d/%Y"]}
+    event_type: {const: sso}
+    status: {const: unknown}
+    lat: {field: _y, parse: number}
+    lon: {field: _x, parse: number}
+    outfall_name: Title_EventName
+    authority: {const: "Utah Department of Environmental Quality, Division of Environmental Response and Remediation (Environmental Incidents)"}
+    source_url: {field: ReportLink}
+  transform: "ingest.ut_transforms.ut_incident_record"
+  post: "ingest.ut_transforms.ut_incidents_post"
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Utah Department of Environmental Quality, Division of Environmental Response and Remediation, Environmental Incidents"
+    license: "No licence stated on the layer"
+    caveat: "DEQ's log of incidents phoned in to its spill hotline: it holds the sewer overflows someone reported there, not every overflow operators report to the Division of Water Quality. Locations are approximate; the layer gives the day an incident was discovered and no end or volume."
+    time_basis: "Date_Discovered, the day the incident was discovered, read in Mountain time. The layer's filter time (Date_Discovered_For_Filter) is kept as given and not used: it is midnight Eastern time on rows before 2024 and has no stated clock since."
