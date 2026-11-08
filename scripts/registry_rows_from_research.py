@@ -54,6 +54,7 @@ HOMEPAGES = {
     "ak-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "nm-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "nm-nmed-hab-mapper": "https://www.env.nm.gov/surface-water-quality/hab/",
+    "ky-sobe-erule-state-system": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "al-adem-sso-history": "https://gis.adem.alabama.gov/sso/index.html",
     "al-adem-sso-map-live": "https://gis.adem.alabama.gov/sso/index.html",
     "al-adem-beach-monitoring": "https://adem.alabama.gov/coastal/ademadph-coastal-alabama-beach-monitoring-program",

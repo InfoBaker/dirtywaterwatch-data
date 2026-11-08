@@ -52,7 +52,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "Downloaded the ECHO ZIP (1.1 MB) on 2026-11-03; KY rows are electronic_submission_type ES2 'Authorized NPDES program electronic reporting system', form set ids KY-112xx; description text begins 'Incident ID: nnnnnnn' (the Cabinet's incident number). Trimmed sample (description omitted) raw/sobe-ky-sample-2026-11-03.json.",
+  "access_detail": "Daily ZIP from ECHO (no auth). On 2026-11-07 the current-version ZIP held only its metadata, so the module reads the current version of each report from the all-versions ZIP (2026-11-04 extract). 43 Kentucky reports from 37 permits, every one filed as a bypass (BYP) at a structure typed 'Other', submission type ES2 (Kentucky's own system), form sets KY-11256, KY-11276, KY-11286; started 2025-12-08 to 2026-01-08 (December 35, January 8), received December 2025 (34) and January 2026 (9); a point, a start and an end on all 43, a volume on 19. Receiving water: 'Unnamed Tributary or Unknown' on 26, 'Unnamed' on 4, a named stream or lake on 13.",
   "machine_readable": true,
   "sample_record": {
    "permit_identifier": "KY0090956",
@@ -93,15 +93,15 @@
   ],
   "has_coordinates": true,
   "has_outfall_ids": false,
-  "cadence": "ECHO daily; but KY rows exist only for reports received 2025-12 (34) and 2026-01 (9); nothing since",
+  "cadence": "daily ECHO file; Kentucky reports received a median 0 days after the start (the longest 5), and none since January 2026",
   "history": "2025-12 to 2026-01",
   "license": "EPA public data",
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Proves Kentucky's state system can push events (with coordinates and incident ids) to EPA, but the flow stopped after January 2026. If it resumes this becomes Kentucky's statewide feed.",
+  "status": "used",
+  "status_reason": "Read by the national eRule module (echo-sewer-overflow) with Kentucky in its states since 2026-11-07: the only dated, machine-readable record of Kentucky overflow reports with points, though Kentucky's system sent reports for two months only (December 2025 and January 2026).",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "Description text names individuals (reporters, responders); never ingest it unfiltered. Receiving water is mostly 'Unnamed Tributary or Unknown'. Structure type is always 'Other'. 43 rows, 37 permits including KY0022411 (Louisville MSD) and KY0021466 (SD1)."
+  "checked": "2026-11-07",
+  "notes": "2026-11-04 extract: 20 kept as reaching a water (13 naming it, 3 answering 'Receiving into an unnamed tributary? Yes', 4 whose text names a creek), 23 dropped (21 with no sign that a water was reached, 2 saying none was: 'No waterways impacted', 'did not reach a waterbody'). Kentucky's rules in the module: the zone by the event's point (Eastern, or Central in the forty-one western counties of 49 CFR 71.5(c)); a bypass whose description names a manhole, force main, lift or pump station or line break read as a sewer overflow; the form's placeholders read as no name; the callers', responders' and staff names in the descriptions scrubbed. Known problems: one Louisville MSD report ends 14 minutes before it starts; one incident is filed under two permits (Frankfort, 2025-12-22)."
  },
  {
   "id": "ky-louisville-msd-overflow-advisory",
@@ -153,11 +153,11 @@
   "history": "none kept on site (old nodes removed)",
   "license": "none stated",
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Kentucky's most useful live notice: a dated system-wide advisory with a 48-hour after-rain rule, plus dated MSD-02 discharge notices. Needs a snapshot state machine (poll the banner, record level changes, follow node links).",
+  "status": "used",
+  "status_reason": "Polled by ingest/ky_louisville_msd.py (source id ky-louisville-msd-overflow-advisory): the banner as a snapshot state machine; MSD-01 as MSD's own advisory at each of MSD's open combined sewer outfalls, MSD-02 as a dated report.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "MSD also says 'For more information, go to www.msdprojectwin.org'. An email list signup is in the footer ('Water Quality Email List Signup'); not subscribed."
+  "checked": "2026-11-07",
+  "notes": "MSD also says 'For more information, go to www.msdprojectwin.org'. An email list signup is in the footer ('Water Quality Email List Signup'); not subscribed. 2026-11-07: the banner read 'Conditions are normal' (level 3); the Internet Archive's copies show MSD-01 (2024-02-29, 2025-09-04) and an MSD-02 notice (2025-02-19: a pump-station power outage to Pennsylvania Run, ongoing, more than 10,000 gallons). The advisory nodes of 2026-11-03 (31322, 31323) answer 404."
  },
  {
   "id": "ky-sd1-wet-weather-notification",
@@ -197,10 +197,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "A rule-based advisory (rain or river stage), not an event report; the site can reproduce the rule itself from rain and river gauges. Owner sign-up needed to see the email format.",
+  "status": "used",
+  "status_reason": "SD1's own published rule written into data/rules.json (rain_likely.fallback.by_permit.KY0021466): 0.25 inch of rain, a 72-hour caution, May to October, applied from radar rainfall at SD1's combined sewer outfalls; the Ohio River stage part (above 38 feet) is not applied. The alerts themselves reach subscribers only.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-07",
   "notes": "SD1 posts CSO signs: \"If you see these signs, avoid nearby water during and after rainfall for at least 72 hours.\" Its rule (0.25 inch, Ohio River 38 feet, 72 hours) matches the site's 72-hour yellow window."
  },
  {
@@ -257,10 +257,10 @@
   "license": "CC0 (item licence: https://creativecommons.org/publicdomain/zero/1.0/) with a limitation-of-liability note",
   "legal_basis": null,
   "status": "used",
-  "status_reason": "State CSO layer with outfall names and points; 286 active vs 289 open in the EPA inventory (13 permits; Louisville 120, SD1 88).",
+  "status_reason": "The state's own register of active combined sewer outfall sites, read to check EPA's inventory: 285 of its 286 sites are EPA open outfalls at the same point (within 0.3 m), the other (KY0026093-001) is the Harlan plant's own outfall; EPA lists 4 open outfalls the layer does not (KY0020711-011, KY0022411-062, KY0022861-017 and -018), kept open. Its RecvWater field is the basin's main river (263 of 286 'OHIO RIVER'), not the outfall's water, and is not used. No state outfall file is needed.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": ""
+  "checked": "2026-11-07",
+  "notes": "2026-11-07 fetch: 286 features, all Active=1; 13 permits (Louisville MSD 120, SD1 88, Maysville 14, Henderson 14, Frankfort 14, Paducah 11, Owensboro 8, Ashland 8, Morganfield 2, Pineville 2, Harlan 2, Loyall 2, Catlettsburg 1); layer edited 2026-10-30."
  },
  {
   "id": "ky-dow-hab-viewer",
@@ -311,11 +311,11 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Machine-readable HAB status with start/end; plum category.",
+  "status": "used",
+  "status_reason": "Read through the generic ArcGIS ingester (fetch block in its source file): one record per point under an advisory status (Warning or Danger); Below and NoDetect are grey; each date in its point's own zone; blooms, not sewage.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": ""
+  "checked": "2026-11-07",
+  "notes": "2026-11-07 fetch: 5 points of the 2026 season: Old Springfield Reservoir Warning (recreational advisory, microcystins 17.1 ug/L on 2026-10-26), Caneyville Reservoir Below, Kentucky Lake, Williamstown Lake and Lake Malone NoDetect; HABEND empty on all."
  },
  {
   "id": "ky-dow-swimming-advisories",
@@ -352,9 +352,9 @@
   "license": null,
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "Standing stream-reach advisories tied to sewage; show as authority advisories (red, quoted) on the named reaches.",
+  "status_reason": "Standing advisories in prose with no dates and no table: registered as a watched channel (no records); a stretch model of the named reaches is an opportunity.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-07",
   "notes": "Quote: \"People should avoid recreational contact with waters in the areas specified because of the bacteria, which occur in human and animal waste and indicate the presence of untreated or inadequately treated sewage.\" And: \"The agencies also recommend against swimming or other full-body contact with surface waters immediately following heavy rainfall events ... due to an increased potential for exposure to ... bypasses from sewage collection systems, combined sewer overflows\"."
  },
  {

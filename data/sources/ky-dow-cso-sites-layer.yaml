@@ -1,0 +1,30 @@
+id: "ky-dow-cso-sites-layer"
+name: "Kentucky DOW Combined Sewer Overflow Sites (ArcGIS)"
+url: "https://services3.arcgis.com/ghsX9CKghMvyYjBU/arcgis/rest/services/Ky_DOW_Combined_Sewer_Overflow_Sites_WM_gdb/FeatureServer/0"
+homepage: "https://services3.arcgis.com/ghsX9CKghMvyYjBU/arcgis/rest/services/Ky_DOW_Combined_Sewer_Overflow_Sites_WM_gdb/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ky, status used, verified fetched, checked 2026-11-07): The state's own register
+#   of active combined sewer outfall sites, read to check EPA's inventory: 285 of its 286 sites are
+#   EPA open outfalls at the same point (within 0.3 m), the other (KY0026093-001) is the Harlan
+#   plant's own outfall; EPA lists 4 open outfalls the layer does not (KY0020711-011, KY0022411-062,
+#   KY0022861-017 and -018), kept open. Its RecvWater field is the basin's main river (263 of 286
+#   'OHIO RIVER'), not the outfall's water, and is not used. No state outfall file is needed.
+# Access detail (research, quoted): Queried 2026-11-03: 286 features, all Active=1; saved
+#   raw/ky-dow-cso-sites-2026-11-03.json. Item modified 2026-10-30.
+# Can fill: coordinates, waterbody
+# Research notes: 2026-11-07 fetch: 286 features, all Active=1; 13 permits (Louisville MSD 120, SD1
+#   88, Maysville 14, Henderson 14, Frankfort 14, Paducah 11, Owensboro 8, Ashland 8, Morganfield 2,
+#   Pineville 2, Harlan 2, Loyall 2, Catlettsburg 1); layer edited 2026-10-30.
+cadence: null
+license: "CC0 (item licence: https://creativecommons.org/publicdomain/zero/1.0/) with a limitation-of-liability note"
+attribution: "Kentucky Division of Water / Division of Geographic Information"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["KY"]
+access: ["arcgis"]
+access_detail: "Queried 2026-11-03: 286 features, all Active=1; saved raw/ky-dow-cso-sites-2026-11-03.json. Item modified 2026-10-30."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-07"
