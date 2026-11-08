@@ -1,0 +1,82 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 888,
+    "DISCHARGE_ID": 44,
+    "TYPE": "CSO",
+    "DISCHARGE_LOCATION": "Alum Creek at 144x90 inch sewer e/o tank",
+    "RELIEF_LOCATION": "Alum Creek Storm Tank, Main & Alum Creek Dr.",
+    "INSPECTION_DATE": "04/01/2026",
+    "INSPECTION_YEAR": "2026",
+    "VOLUME": 81.63,
+    "NPDES_ID": "4PF00001006"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8285,
+    "DISCHARGE_ID": 40,
+    "TYPE": "SSO",
+    "DISCHARGE_LOCATION": "Rush Run at 36 inch storm sewer r/o 1234 Example Springs",
+    "RELIEF_LOCATION": "",
+    "INSPECTION_DATE": "03/24/2020",
+    "INSPECTION_YEAR": "2020",
+    "VOLUME": null,
+    "NPDES_ID": ""
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 6467,
+    "DISCHARGE_ID": 18,
+    "TYPE": "SSO",
+    "DISCHARGE_LOCATION": "ditch that Parkwood crosses s/o Mock Road",
+    "RELIEF_LOCATION": "",
+    "INSPECTION_DATE": "02/22/2022",
+    "INSPECTION_YEAR": "2022",
+    "VOLUME": null,
+    "NPDES_ID": ""
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 4,
+    "DISCHARGE_ID": 1,
+    "TYPE": "CSO",
+    "DISCHARGE_LOCATION": "Scioto River at Greenlawn dam",
+    "RELIEF_LOCATION": "Whittier St. Storm Standby Tanks",
+    "INSPECTION_DATE": "01/03/2005",
+    "INSPECTION_YEAR": "2005",
+    "VOLUME": 135.8,
+    "NPDES_ID": "4PF00000018"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 5,
+    "DISCHARGE_ID": 1,
+    "TYPE": "CSO",
+    "DISCHARGE_LOCATION": "Scioto River at Greenlawn dam",
+    "RELIEF_LOCATION": "Whittier St. Storm Standby Tanks Bypass",
+    "INSPECTION_DATE": "01/03/2005",
+    "INSPECTION_YEAR": "2005",
+    "VOLUME": 98.96,
+    "NPDES_ID": "4PF00000019"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1,
+    "DISCHARGE_ID": 1,
+    "TYPE": "CSO",
+    "DISCHARGE_LOCATION": "Scioto River at Greenlawn dam",
+    "RELIEF_LOCATION": "Whittier St. Storm Standby Tanks",
+    "INSPECTION_DATE": "01/01/2005",
+    "INSPECTION_YEAR": "2005",
+    "VOLUME": 37.7,
+    "NPDES_ID": "4PF00000018"
+   }
+  }
+ ]
+}

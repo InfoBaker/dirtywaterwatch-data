@@ -90,6 +90,12 @@
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt
 #                  by scripts/tx_permit_crosswalk.py) and the generic ArcGIS block tx-glo-beach-watch (Texas Beach
 #                  Watch's coastal stations: High is the program's advisory, Medium its label)
+#                  Ohio: oh_neorsd_cso (NEORSD's CSO alerts layers: each outfall's last wet- and dry-weather overflow,
+#                  snapshotted hourly into dated records, metered or modelled), oh_akron_cso (Akron's overflow status
+#                  layer: status 1 opens, 0 ends at the poll), oh_columbus_overflows (Columbus's overflow events table
+#                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
+#                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
+#                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

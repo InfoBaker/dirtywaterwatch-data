@@ -1,0 +1,21 @@
+id: "oh-lima-cso-activity"
+name: "Lima Combined Sewer Overflow Activity Report"
+url: "https://www.limaohio.gov/410/Combined-Sewer-Overflow-Activity-Report"
+homepage: "https://www.limaohio.gov/410/Combined-Sewer-Overflow-Activity-Report"
+kind: "html"
+level: "municipal"
+# Notes (research/oh, status candidate, verified fetched, checked 2026-11-03): Page lists 2026 '4
+#   hour Overflows' and '7 Day Supplemental Notifications' as dated PDFs (e.g. 9_12_26). PDF
+#   polling.
+cadence: null
+license: "none stated"
+attribution: "City of Lima"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["pdf", "html"]
+access_detail: null
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
+checked: "2026-11-03"

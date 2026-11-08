@@ -192,6 +192,12 @@
     "clock": "end_of_discharge",
     "basis": "Texas law sets no period after a sewage discharge during which the water is to be avoided, and nothing requires a sewage spill to be posted on the web. Every sewer overflow must be reported to the Texas Commission on Environmental Quality's regional office within 24 hours and in writing within five working days (30 TAC 305.125(9)); the Commission publishes these reports as open data in batches, months after they are made, with dates but no times and no locations. A local government's facility must also tell local officials and local media within 24 hours of a spill likely to affect a drinking-water source, of 50,000 gallons or more near one or in a sensitive area, or of 100,000 gallons or more (30 TAC 319.302). Texas Beach Watch recommends a beach advisory when a sample's enterococcus count is above 104 per 100 millilitres; local governments post it. Dates are read in Central time, and in Mountain time in El Paso and Hudspeth counties. This site marks a reported discharge from its start date to its end date and applies its own caution after it ends; a report is placed only on the water it names, and a report that names none is listed by its county",
     "source": "30 TAC 305.125(9); 30 TAC 319.301-319.303; TCEQ Sanitary Sewer Overflows (data.texas.gov 8kc5-95uk); Texas Beach Watch (Texas General Land Office); 49 CFR 71.9-71.10"
+   },
+   "OH": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Ohio sets no period after a sewage discharge during which the water is to be avoided, and no Ohio statute or rule requires the public to be told of a sewer overflow or a bypass: operators report them to Ohio EPA within 24 hours, and those reports are not published. Ohio's permit rule requires a permanent sign at every permitted outfall, combined sewer overflow and bypass outfalls included, and requires a major discharger near a drinking-water intake to notify the water supplier as soon as practicable. Combined sewer operators in the Lake Erie basin must notify the public within four hours of becoming aware of an overflow under their public notification plans (40 CFR 122.38); operators in the Ohio River basin notify under their permits. The Northeast Ohio Regional Sewer District, Akron, Columbus and Bowling Green publish their overflows; the Metropolitan Sewer District of Greater Cincinnati advises avoiding contact with streams for 72 hours after rain. Ohio EPA's spills layer lists the sewage spills called in to its emergency line, by day, with no end. This site marks a reported discharge while it runs and applies its own caution after it ends; a report with only a day is read in Eastern time",
+    "source": "OAC 3745-33-08(A)(12) and (F)(1); 40 CFR 122.38; 40 CFR 122.41(l)(6); NEORSD CSO alerts map; City of Akron overflow status map; City of Columbus Sewer Overflow Discharge Information; City of Bowling Green CSO events; Ohio EPA Spills (Office of Emergency Response); MSD of Greater Cincinnati CSO notification program"
    }
   },
   "by_discharger": {
@@ -348,7 +354,9 @@
   "day_start_caution": {
    "sources": [
     "ga-epd-spills",
-    "tx-tceq-sso-opendata"
+    "tx-tceq-sso-opendata",
+    "oh-epa-spills-opendata",
+    "oh-columbus-sewer-overflow"
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."

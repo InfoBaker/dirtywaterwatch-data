@@ -1,0 +1,928 @@
+{
+ "about": "Receiving-water names in Ohio's reports (NEORSD's CSO alerts layers, Akron's overflow status layer, Columbus's overflow events, Bowling Green's CSO events, the Ohio EPA spills that name a waterway, and BeachGuard's beach waters) that data/receiving-waters-national.json does not hold for OH, by name as the record gives it (spellings that differ only in case, spaces or punctuation counted together), with the number of records giving each, the counties the spills give and up to five of the records' points. Records that name no water are left out.",
+ "state": "OH",
+ "feeds_read": {
+  "oh-neorsd-cso-notification-map": "148 records, fetched 2026-11-08",
+  "oh-akron-cso-notifications": "0 records, fetched 2026-11-08",
+  "oh-columbus-sewer-overflow": "8542 records, fetched 2026-11-08",
+  "oh-bowling-green-cso-events": "37 records, fetched 2026-11-08",
+  "oh-epa-spills-opendata": "1121 records, fetched 2026-11-08",
+  "oh-odh-beachguard": "5 records, fetched 2026-11-08"
+ },
+ "records_naming_a_water": 8181,
+ "waters": 50,
+ "reports": 548,
+ "rows": [
+  {
+   "name": "Early Ditch",
+   "reports": 194,
+   "permits": [],
+   "sources": [
+    "oh-columbus-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.936714,
+     -83.059178
+    ]
+   ]
+  },
+  {
+   "name": "Adena Brook",
+   "reports": 165,
+   "permits": [],
+   "sources": [
+    "oh-columbus-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.045369,
+     -83.02028
+    ],
+    [
+     40.042415,
+     -83.026734
+    ]
+   ]
+  },
+  {
+   "name": "Walhalla Ravine",
+   "reports": 92,
+   "permits": [],
+   "sources": [
+    "oh-columbus-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.029252,
+     -83.002503
+    ]
+   ]
+  },
+  {
+   "name": "Doan Brook",
+   "reports": 20,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.507891,
+     -81.613216
+    ],
+    [
+     41.510379,
+     -81.614593
+    ],
+    [
+     41.518691,
+     -81.617922
+    ],
+    [
+     41.520927,
+     -81.618963
+    ],
+    [
+     41.510821,
+     -81.615839
+    ]
+   ]
+  },
+  {
+   "name": "Rush Run",
+   "reports": 15,
+   "permits": [],
+   "sources": [
+    "oh-columbus-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.077092,
+     -83.022233
+    ]
+   ]
+  },
+  {
+   "name": "Dugway Brook",
+   "reports": 4,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.548177,
+     -81.608028
+    ],
+    [
+     41.547846,
+     -81.607458
+    ]
+   ]
+  },
+  {
+   "name": "Grand Lake",
+   "reports": 4,
+   "permits": [],
+   "sources": [
+    "oh-odh-beachguard"
+   ],
+   "counties": [
+    "Auglaize"
+   ],
+   "points": [
+    [
+     40.50946,
+     -84.541168
+    ],
+    [
+     40.544998,
+     -84.440422
+    ],
+    [
+     40.542671,
+     -84.426231
+    ],
+    [
+     40.541672,
+     -84.421951
+    ]
+   ]
+  },
+  {
+   "name": "Dry Run",
+   "reports": 3,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Auglaize",
+    "Mahoning"
+   ],
+   "points": [
+    [
+     40.570963,
+     -84.084555
+    ],
+    [
+     41.095897,
+     -80.631949
+    ],
+    [
+     41.095237,
+     -80.615892
+    ]
+   ]
+  },
+  {
+   "name": "Spring Creek",
+   "reports": 3,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.436564,
+     -81.682069
+    ],
+    [
+     41.436739,
+     -81.681896
+    ]
+   ]
+  },
+  {
+   "name": "Brandywine Creek",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Summit"
+   ],
+   "points": [
+    [
+     41.269568,
+     -81.463941
+    ],
+    [
+     41.264967,
+     -81.45166
+    ]
+   ]
+  },
+  {
+   "name": "Carpenter Run",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Columbiana"
+   ],
+   "points": [
+    [
+     40.645086,
+     -80.574238
+    ],
+    [
+     40.617393,
+     -80.575356
+    ]
+   ]
+  },
+  {
+   "name": "PawPaw Creek",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Fairfield"
+   ],
+   "spellings": [
+    "PawPaw Creek",
+    "Pawpaw Creek"
+   ],
+   "points": [
+    [
+     39.837065,
+     -82.626458
+    ],
+    [
+     39.848601,
+     -82.598167
+    ]
+   ]
+  },
+  {
+   "name": "Polk Run",
+   "reports": 2,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Hamilton"
+   ],
+   "points": [
+    [
+     39.250379,
+     -84.293187
+    ],
+    [
+     39.250685,
+     -84.296631
+    ]
+   ]
+  },
+  {
+   "name": "Shaw Brook",
+   "reports": 2,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.552456,
+     -81.599685
+    ]
+   ]
+  },
+  {
+   "name": "Treadway Creek",
+   "reports": 2,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.440227,
+     -81.690746
+    ],
+    [
+     41.440782,
+     -81.690272
+    ]
+   ]
+  },
+  {
+   "name": "West Creek",
+   "reports": 2,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-epa-spills-opendata",
+    "oh-neorsd-cso-notification-map"
+   ],
+   "counties": [
+    "Cuyahoga"
+   ],
+   "points": [
+    [
+     41.415563,
+     -81.674132
+    ],
+    [
+     41.383056,
+     -81.691506
+    ]
+   ]
+  },
+  {
+   "name": "Big Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Franklin"
+   ],
+   "points": [
+    [
+     39.907497,
+     -83.0725
+    ]
+   ]
+  },
+  {
+   "name": "Bill Moose Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Franklin"
+   ],
+   "points": [
+    [
+     40.070805,
+     -82.997612
+    ]
+   ]
+  },
+  {
+   "name": "Bradford Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Madison"
+   ],
+   "points": [
+    [
+     39.786505,
+     -83.37849
+    ]
+   ]
+  },
+  {
+   "name": "Clover Groff Ditch",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Franklin"
+   ],
+   "points": [
+    [
+     39.951169,
+     -83.164866
+    ]
+   ]
+  },
+  {
+   "name": "Crystal Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-odh-beachguard"
+   ],
+   "counties": [
+    "Summit"
+   ],
+   "points": [
+    [
+     41.162888,
+     -81.466965
+    ]
+   ]
+  },
+  {
+   "name": "Delaware Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Lucas"
+   ],
+   "points": [
+    [
+     41.605304,
+     -83.605339
+    ]
+   ]
+  },
+  {
+   "name": "East Fork Eagle Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Adams"
+   ],
+   "points": [
+    [
+     38.790651,
+     -83.543396
+    ]
+   ]
+  },
+  {
+   "name": "Fitzgerald Ditch",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Madison"
+   ],
+   "points": [
+    [
+     40.016004,
+     -83.264331
+    ]
+   ]
+  },
+  {
+   "name": "Green Creek",
+   "reports": 1,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.552446,
+     -81.543681
+    ]
+   ]
+  },
+  {
+   "name": "Hemming Ditch",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Erie"
+   ],
+   "points": [
+    [
+     41.429799,
+     -82.657479
+    ]
+   ]
+  },
+  {
+   "name": "Hudson Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Summit"
+   ],
+   "points": [
+    [
+     40.999477,
+     -81.619769
+    ]
+   ]
+  },
+  {
+   "name": "Indian Guyan Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Lawrence"
+   ],
+   "points": [
+    [
+     38.516796,
+     -82.38697
+    ]
+   ]
+  },
+  {
+   "name": "Indian Trail Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Holmes"
+   ],
+   "points": [
+    [
+     40.548161,
+     -81.740131
+    ]
+   ]
+  },
+  {
+   "name": "Jamison Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Ashland"
+   ],
+   "points": [
+    [
+     40.855128,
+     -82.308106
+    ]
+   ]
+  },
+  {
+   "name": "Little Black Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Mercer"
+   ],
+   "points": [
+    [
+     40.664,
+     -84.708776
+    ]
+   ]
+  },
+  {
+   "name": "Little Sandy Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Stark"
+   ],
+   "points": [
+    [
+     40.732666,
+     -81.100794
+    ]
+   ]
+  },
+  {
+   "name": "Lucy Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Clermont"
+   ],
+   "points": [
+    [
+     39.059393,
+     -84.17919
+    ]
+   ]
+  },
+  {
+   "name": "Minnow Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Sandusky"
+   ],
+   "points": [
+    [
+     41.336652,
+     -83.131255
+    ]
+   ]
+  },
+  {
+   "name": "Moore Branch",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Clinton"
+   ],
+   "points": [
+    [
+     39.43908,
+     -83.85152
+    ]
+   ]
+  },
+  {
+   "name": "Moores Fork",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Clermont"
+   ],
+   "points": [
+    [
+     39.194541,
+     -84.094893
+    ]
+   ]
+  },
+  {
+   "name": "Mud Brook",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Summit"
+   ],
+   "points": [
+    [
+     41.157601,
+     -81.439941
+    ]
+   ]
+  },
+  {
+   "name": "Mud Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Madison"
+   ],
+   "points": [
+    [
+     39.730364,
+     -83.334255
+    ]
+   ]
+  },
+  {
+   "name": "Ohio Canal to Cuyahoga River",
+   "reports": 1,
+   "permits": [
+    "OH0043991"
+   ],
+   "sources": [
+    "oh-neorsd-cso-notification-map"
+   ],
+   "points": [
+    [
+     41.430979,
+     -81.646834
+    ]
+   ]
+  },
+  {
+   "name": "Oldtown Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Hocking"
+   ],
+   "points": [
+    [
+     39.544448,
+     -82.394754
+    ]
+   ]
+  },
+  {
+   "name": "Opossum Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Paulding"
+   ],
+   "points": [
+    [
+     41.14995,
+     -84.573442
+    ]
+   ]
+  },
+  {
+   "name": "Packer Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Ottawa"
+   ],
+   "points": [
+    [
+     41.52478,
+     -83.349235
+    ]
+   ]
+  },
+  {
+   "name": "Powers Brook",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Summit"
+   ],
+   "points": [
+    [
+     41.194995,
+     -81.432649
+    ]
+   ]
+  },
+  {
+   "name": "Pusheta Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Auglaize"
+   ],
+   "points": [
+    [
+     40.540817,
+     -84.201234
+    ]
+   ]
+  },
+  {
+   "name": "Rader Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Hancock"
+   ],
+   "points": [
+    [
+     41.157801,
+     -83.798663
+    ]
+   ]
+  },
+  {
+   "name": "Shantee Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Lucas"
+   ],
+   "points": [
+    [
+     41.724077,
+     -83.517531
+    ]
+   ]
+  },
+  {
+   "name": "Shawnee Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Greene"
+   ],
+   "points": [
+    [
+     39.719221,
+     -83.888349
+    ]
+   ]
+  },
+  {
+   "name": "Smith Ditch",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Clark"
+   ],
+   "points": [
+    [
+     39.864822,
+     -83.998103
+    ]
+   ]
+  },
+  {
+   "name": "Spring Run",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Franklin"
+   ],
+   "points": [
+    [
+     40.126111,
+     -82.944444
+    ]
+   ]
+  },
+  {
+   "name": "Springfield Lake Outlet",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "oh-epa-spills-opendata"
+   ],
+   "counties": [
+    "Summit"
+   ],
+   "points": [
+    [
+     41.022077,
+     -81.434933
+    ]
+   ]
+  }
+ ]
+}

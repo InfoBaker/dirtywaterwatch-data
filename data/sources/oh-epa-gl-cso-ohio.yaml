@@ -1,0 +1,24 @@
+id: "oh-epa-gl-cso-ohio"
+name: "EPA: Combined Sewer Overflows in the Great Lakes Basin, Ohio (operator list with websites and annual reports)"
+url: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-ohio"
+homepage: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-ohio"
+kind: "html"
+level: "federal"
+# Notes (research/oh, status used, verified fetched, checked 2026-11-03): Seeds the channel column
+#   for the Lake Erie basin operators.
+# Access detail (research, quoted): Fetched (raw/epa-gl-cso-ohio.html): 42 Lake Erie basin operators
+#   with website and annual report links.
+# Research notes: Van Wert: 'The CSO Annual Report is available for inspection at the City
+#   Wastewater Treatment Plant ... Not available electronically.'
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["OH"]
+access: ["html"]
+access_detail: "Fetched (raw/epa-gl-cso-ohio.html): 42 Lake Erie basin operators with website and annual report links."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

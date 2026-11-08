@@ -1,0 +1,22 @@
+id: "oh-toledo-cso"
+name: "Toledo Combined Sewer Overflows page"
+url: "https://toledo.oh.gov/residents/water/quality/combined-sewer-overflows-csos"
+homepage: "https://toledo.oh.gov/residents/water/quality/combined-sewer-overflows-csos"
+kind: "html"
+level: "municipal"
+# Notes (research/oh, status candidate, verified fetched, checked 2026-11-03): Status line ('Last
+#   updated: 11/03/2026 There are no combined sewer overflows at this time. The public will be
+#   notified within four hours of a documented CSO event.') and dated daily CSO report PDFs (latest
+#   09 05 26).
+cadence: null
+license: "none stated"
+attribution: "City of Toledo"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["html", "pdf"]
+access_detail: null
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
+checked: "2026-11-03"
