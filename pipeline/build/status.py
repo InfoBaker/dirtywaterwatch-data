@@ -673,6 +673,14 @@ _US_CODES = frozenset("AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA 
                       "NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY PR VI GU AS MP".split())
 
 
+def own_state(r: dict, sid: str | None = None) -> str | None:
+    """The state a record is from by its own fields, for the live-only rule: event_state without its last fallback (the
+    state of its first water slug: an Alabama report whose ingester named a Georgia water is Alabama's, not Georgia's),
+    then _state_of_any (the record's state whether or not live). None: nothing of its own tells (kept, as before).
+    event_state itself is unchanged for every other caller."""
+    return event_state({**r, "water_slugs": []}) or _state_of_any(r, sid or str(r.get("source_id") or ""))
+
+
 def _state_of_any(r: dict, sid: str) -> str | None:
     """A record's state whether or not that state is live (event_state knows the live states only): the record's
     raw.state, its state field, then the two-letter prefix of its source id or event id when that is a US code."""
@@ -728,7 +736,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             r["_file"] = p.name
             r.setdefault("source_id", sid)
             if live_up is not None:
-                st = event_state(r) or _state_of_any(r, sid)
+                st = own_state(r, sid)      # never the state of a live water it names (own_state)
                 if st and st not in live_up:
                     NOT_LIVE.append((sid, st))
                     continue
@@ -2998,22 +3006,32 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
     if key in _REACH_WATERS:
         return _REACH_WATERS[key]
     from shapely.geometry import Point
-    rivers = [(slug, w) for slug, w in waters.items() if w.get("kind") in RIVER_KINDS and w.get("bbox")]
+    pad = 0.01
+    segs = reach.get("segments") or []
+    mids = [sg["coords"][len(sg["coords"]) // 2] for sg in segs]
+    # only the river records whose box (padded) holds at least one segment midpoint can match: the same test as the
+    # loop below, done once per record for the whole reach (2026-11-07 refresh-time profile: testing every segment
+    # against every river record, COMIDs first, took 600 of status's 780 s an hour); the order of the records, and so
+    # of the result, is unchanged
+    if mids:
+        lo_x, hi_x = min(c[0] for c in mids), max(c[0] for c in mids)
+        lo_y, hi_y = min(c[1] for c in mids), max(c[1] for c in mids)
+    rivers = [(slug, w) for slug, w in waters.items() if mids and w.get("kind") in RIVER_KINDS and w.get("bbox")
+              and w["bbox"][0] - pad <= hi_x and lo_x <= w["bbox"][2] + pad
+              and w["bbox"][1] - pad <= hi_y and lo_y <= w["bbox"][3] + pad]
     found = []
-    for sg in reach.get("segments") or []:
-        c = sg["coords"][len(sg["coords"]) // 2]
-        pad = 0.01
+    for sg, c in zip(segs, mids):
         gnis = norm_name(sg.get("gnis_name") or "")
         for slug, w in rivers:
             b = w["bbox"]
             if slug in found:
                 continue
+            if not (b[0] - pad <= c[0] <= b[2] + pad and b[1] - pad <= c[1] <= b[3] + pad):
+                continue
             # the record holds the segment's own NHDPlus flowline (its COMIDs): the same water, whatever name NHDPlus
             # gives it (2026-11-06: NHDPlus names the Little Calumet River's flowlines 'Calumet River', review P1-1)
-            own = sg.get("comid") is not None and _comid_in(sg["comid"], w)
-            if gnis and not own and norm_name(w.get("name") or "") != gnis:
-                continue
-            if not (b[0] - pad <= c[0] <= b[2] + pad and b[1] - pad <= c[1] <= b[3] + pad):
+            if gnis and norm_name(w.get("name") or "") != gnis \
+                    and not (sg.get("comid") is not None and _comid_in(sg["comid"], w)):
                 continue
             g = water_geometry(slug, waters)
             if g is not None and g.distance(Point(c[0], c[1])) * 111_320 <= REACH_WATER_M:
@@ -3414,6 +3432,7 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
 
 PLACEMENT_CACHE = BUILD_DIR / "placement-cache.json"
 PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse their placement while nothing changed
+STAMP_IGNORED_WATER_KEYS = frozenset({"fetched_at", "targets"})    # bookkeeping of waters_from_nhd; placement reads neither
 
 
 def outline_files(waters) -> list:
@@ -3447,6 +3466,12 @@ def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules
     import hashlib
     import sys as _sys
     from build import redact as _redact
+    # the water records less the keys no placement reads and that change every hour without their water changing:
+    # ingest/waters_from_nhd.py stamps fetched_at with the build time and counts the record's targets each run, even for
+    # a record rebuilt from its cached answers, so with them in the stamp no hourly run ever reused a placement (run
+    # 42417263287: "reused for 0 of 142323"; 2026-11-07 refresh-time brief)
+    waters = {s: ({k: v for k, v in w.items() if k not in STAMP_IGNORED_WATER_KEYS} if isinstance(w, dict) else w)
+              for s, w in waters.items()}
     h = hashlib.sha256(json.dumps([waters, outline_files(waters), outfalls, discharger_towns, discharger_waters, rules,
                                    sorted(states), PLACE_STEPS], sort_keys=True, default=str).encode())
     for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__),
@@ -3941,7 +3966,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 by_cat[c] = r["status"]
         head = min(CATEGORIES, key=lambda c: (precedence(c, by_cat[c]), CATEGORIES.index(c)))
         # newest first; a start in the future as published is never the latest report: listed last
-        ev_ids = sorted(set(per_water_events.get(slug, [])),
+        # (ties in event-id order: from the set alone their order changed with Python's hash seed, run to run)
+        ev_ids = sorted(sorted(set(per_water_events.get(slug, []))),
                         key=lambda i: (not placements[i].get("future_start"), by_id[i].get("started_at") or ""),
                         reverse=True)
         stale = [{"source_id": s, "last_ok_at": health[s]["last_ok_at"], "reason": health[s]["stale_reason"]}
