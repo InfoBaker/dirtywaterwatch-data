@@ -82,7 +82,8 @@ STATE_NAMES = {"MA": "Massachusetts", "CT": "Connecticut", "RI": "Rhode Island",
                "MS": "Mississippi", "NE": "Nebraska", "AK": "Alaska",
                "NM": "New Mexico", "HI": "Hawaii",
                "AL": "Alabama", "TX": "Texas",
-               "UT": "Utah"}
+               "UT": "Utah",
+               "OR": "Oregon"}
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 

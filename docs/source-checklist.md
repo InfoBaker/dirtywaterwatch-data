@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1388 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1402 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -42,7 +42,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | al | 5 | 0 | 6 | 2 | 0 | 13 |
 | tx | 4 | 0 | 7 | 1 | 0 | 12 |
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
-| **all** | **490** | **228** | **403** | **197** | **70** | **1388** |
+| or | 7 | 1 | 5 | 1 | 0 | 14 |
+| **all** | **497** | **229** | **408** | **198** | **70** | **1402** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1591,3 +1592,22 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ut-dwq-hab-2017` | Utah DWQ Harmful_Algal_Bloom feature service (Utah Lake 2017) | rejected | fetched | monitoring | Static 2017 Utah Lake layer (last edit 2017-07-27). |
 | `ut-swim-guide` | Swim Guide affiliates in Utah | rejected | search_only | monitoring | None found (search only). |
 | `ut-deq-environmental-incidents-search` | Utah Environmental Incidents Database search site | unreachable | fetched | events | TLS certificate expired (curl) and HTTP 503 (WebFetch) on 2026-11-03; search results capped at 500 per the user guide. The ArcGIS layer replaces it. |
+
+## or: Oregon (14)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `or-bes-news-rss` | Portland Environmental Services news RSS (CSO Advisories and Sewage Advisories) | used | fetched | events | Read every refresh by the Oregon ingester (rules only): each CSO Advisory and Sewage Advisory is a dated sewage report with the start, end and stretch its text gives; the City's 48-hour window after the overflow stops is the authority's own red. 13 advisories (4 CSO) in the 25 items read 2026-11-07. |
+| `or-deq-oers-spills-2013-2025` | Oregon DEQ: All spills reported to OERS and verified by DEQ, 2013-08-01 to 2025-03-27 (ArcGIS FeatureServer) | used | fetched | events | Read once as a frozen archive by the Oregon ingester: the 2,371 sewage rows (2013-07-24 to 2025-03-27) with DEQ's point, the report date and time, gallons and the affected water where given; the narrative, title and address are never read. The layer is checked each run for an edit. |
+| `or-deq-sso-report-form` | Oregon DEQ Sanitary Sewer Overflow Report Form (5-day written report) | used | search_only | law | Shows the regulator report: OERS by phone within 24 hours, written within 5 days, with a public notification section. |
+| `or-oar-340-142` | OAR 340-142-0040 Required reporting (spills to OERS) | used | search_only | law | Immediate phone report to OERS for reportable releases; sewage is reported through permits. |
+| `or-oha-beach-monitoring` | Oregon Beach Monitoring Program advisories (OHA with DEQ) | used | fetched | advisories | Read every refresh as a snapshot by the Oregon ingester: ADVISORY as OHA's beach advisory, SEWAGE as OHA's sewage advisory; OPEN and NO MONITORING are no record. Out of season on 2026-11-07 (33 beaches, all NO MONITORING): the reader is tested on a fixture in the page's markup; check its first reads in May 2027. |
+| `or-oha-hab-advisories` | OHA cyanoHAB recreational use advisories (ArcGIS FeatureServer) | used | fetched | advisories | Read every refresh through the generic ArcGIS block: OHA's advisories and precautions (39 of 64 rows on 2026-11-07: 5 Advisory, 34 Precaution) as algal-bloom advisories; 'Below Human RUV' and 'Advisory/Precaution Lifted' are no current advisory. |
+| `or-schedule-f-public-notice` | DEQ NPDES/WPCF General Conditions (Schedule F): public notification of effluent violation or overflow | used | search_only | law | Oregon's public duty is a permit condition, not a statute. |
+| `or-bes-big-pipe-tracker` | Portland Big Pipe Tracker (gauge and 72-hour chart) | candidate | fetched | monitoring | Registered as a monitored page: the tracker's current-advisory sentence and the gauge's fill level. A fill level is not a report of an overflow, so it colours nothing; the advisories themselves are read from the news feed. |
+| `or-astoria-cso-page` | City of Astoria Wastewater / CSO page | watch | fetched | outfalls | Background only; 38 open CSO outfalls to the Columbia River and Youngs Bay; no event notices on the page (answered 200 on 2026-11-07). Registered with the barrier: no web channel. |
+| `or-bes-cso-email` | Portland Combined Sewer Overflow Advisories email list (GovDelivery) | watch | fetched | events | Owner sign-up; duplicates the RSS. |
+| `or-corvallis-spill-plan` | City of Corvallis Public Notification & Spill Response Plan | watch | fetched | law | The plan page answered 200 on 2026-11-07 (navigation only extracted); signs and media contacts for larger discharges; no event list. Registered with the barrier: no web channel. |
+| `or-oak-lodge-sso-posts` | Oak Lodge Water Services overflow posts | watch | fetched | events | A small district that posts each overflow as a news article (2025-12-18: three lift stations, impacts to Kellogg Creek and the Willamette River, the advice to avoid contact for 48 hours afterwards). Registered as a monitored page; HTML only, no feed. |
+| `or-oda-shellfish` | Oregon Department of Agriculture shellfish closures (biotoxin and sewage) | watch | search_only | advisories | Commercial bay closures follow sewage events (e.g. Tillamook); a 2017 ArcGIS closure layer exists in the state org. Not fetched. |
+| `or-epa-sobe` | EPA eRule SOBE extract (Oregon permittees) | rejected | inferred | events | 0 Oregon events on 2026-11-03. |
