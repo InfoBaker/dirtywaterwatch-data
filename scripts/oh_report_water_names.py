@@ -2,7 +2,8 @@
 data/receiving-waters-national.json does not hold for OH, for `python -m ingest.waters_from_nhd --names ... --state OH`.
 
 Usage (after the Ohio ingesters have written their events files):
-    pipeline/.venv/bin/python -I scripts/oh_report_water_names.py [--events-dir DIR]
+    pipeline/.venv/bin/python -I scripts/oh_report_water_names.py [--events-dir DIR] [--add-to FILE]
+(--add-to appends the NEORSD creek rows to an existing list, a batch's rewrite, without rebuilding it)
 
 Reads the waterbody_text of every Ohio feed's records (FEEDS: NEORSD's and Akron's outfall waters, Columbus's and Bowling
 Green's overflow sites, Ohio EPA's spills that name a waterway, BeachGuard's beach waters), counted once per record.
@@ -30,6 +31,42 @@ AKRON_LAYER = ROOT / "data" / "raw" / "oh-akron" / "q.json"
 FORCED = {"Little Cuyahoga River": "the national list maps it to the Cuyahoga River's record; it is its own river",
           "Ohio Canal": "named by Akron's overflow sites; no record",
           "Camp Brook": "named by Akron's overflow sites; no record"}
+# NEORSD's creeks the national list holds under the name only (with other cities' reaches and no Cleveland one), so the
+# batch built no record at Cleveland: 33 of NEORSD's outfalls (data/outfalls-oh.json) and their overflows sat on no
+# water (Ohio re-check 2026-11-08). Listed with the outfalls' own points; EPA gives no reach code for any of NEORSD's
+# outfalls (reach_id empty on all 133 of OH0043991's rows), so the points are the only place given.
+NEORSD_CREEKS = ("Mill Creek", "Big Creek")
+NEORSD_SOURCE = "oh-neorsd-cso-notification-map"
+
+
+def neorsd_rows(events: Path) -> list[dict]:
+    reg = json.loads((ROOT / "data" / "outfalls-oh.json").read_text())["outfalls"]
+    ev = events / f"{NEORSD_SOURCE}.json"
+    recs = json.loads(ev.read_text()).get("records") or [] if ev.exists() else []
+    out = []
+    for name in NEORSD_CREEKS:
+        rows = [r for r in reg if r.get("receiving_water_echo") == name]
+        out.append({"name": name, "reports": sum(1 for r in recs if r.get("waterbody_text") == name),
+                    "permits": ["OH0043991"], "sources": [NEORSD_SOURCE], "outfalls": len(rows),
+                    "points": [[r["lat"], r["lon"]] for r in rows], "counties": ["Cuyahoga County"], "reach_ids": [],
+                    "note": (f"NEORSD's {name} in Cleveland: the national list's {name} holds other places' reaches; "
+                             "EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's "
+                             "CSO alerts map) place it")})
+    return out
+
+
+def add_to(path: Path, events: Path) -> int:
+    """Append the forced NEORSD rows to an existing missing list (a batch's rewrite keeps its own keys)."""
+    d = json.loads(path.read_text())
+    have = {compact(r["name"]) + "|" + ",".join(r.get("permits") or []) for r in d.get("rows") or []}
+    added = [r for r in neorsd_rows(events) if compact(r["name"]) + "|OH0043991" not in have]
+    d["rows"] = (d.get("rows") or []) + added
+    d["waters"], d["reports"] = len(d["rows"]), sum(r.get("reports") or 0 for r in d["rows"])
+    path.write_text(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
+    print(f"{len(added)} NEORSD rows added -> {path}")
+    return 0
+
+
 # names whose record is a particular water (the NHD pass must not take another of the same name)
 HINTS = {"grandlake": ("Grand Lake St. Marys (Auglaize and Mercer counties), the reservoir BeachGuard's beaches are on; "
                        "not another Grand Lake"),
@@ -42,6 +79,8 @@ def compact(s: str) -> str:
 
 def main(argv) -> int:
     events = Path(argv[argv.index("--events-dir") + 1]) if "--events-dir" in argv else EVENTS
+    if "--add-to" in argv:
+        return add_to(Path(argv[argv.index("--add-to") + 1]), events)
     nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["OH"]["waters"]
     have = {compact(n) for w in nat for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or [])] if n}
     reports, permits, points, typed, sources, counties = (Counter(), defaultdict(set), defaultdict(list),
@@ -99,6 +138,7 @@ def main(argv) -> int:
         rows.append({"name": name, "reports": 0, "permits": ["OH0023833"], "sources": ["oh-akron-cso-notifications"],
                      "sites": len(akron.get(compact(name), [])), "points": akron.get(compact(name), [])[:5],
                      "counties": ["Summit County"], "note": why})
+    rows += neorsd_rows(events)
     out = {"about": ("Receiving-water names in Ohio's reports (NEORSD's CSO alerts layers, Akron's overflow status "
                      "layer, Columbus's overflow events, Bowling Green's CSO events, the Ohio EPA spills that name a "
                      "waterway, and BeachGuard's beach waters) that data/receiving-waters-national.json does not hold "
