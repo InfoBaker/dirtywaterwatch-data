@@ -1,19 +1,10 @@
 {
  "about": "Water names in OR's records that data/receiving-waters-national.json does not hold for OR: DEQ's OERS spill archive (2013 to March 2025, the 2,371 sewage reports; Affected_Waterway, once per report), Portland Environmental Services' advisories (the waters each names) and OHA's bloom advisories (the water's name), read 2026-11-07. One row per name and county, with the towns (most reports first), the source ids and the permits. Reports that say the sewage reached no water, or name none, are left out (by_reason). Names are kept as the source spells them. Written by scripts/or_report_water_names.py.",
  "state": "OR",
- "waters": 133,
- "names": 129,
- "reports": 175,
  "records_read": {
   "or-deq-oers-spills-2013-2025": 2371,
   "or-bes-news-rss": 14,
   "or-oha-hab-advisories": 39
- },
- "by_reason": {
-  "the report says the sewage reached no water": 1066,
-  "no water named": 986,
-  "held by the national list": 202,
-  "the text is not a water's name": 2
  },
  "aliased": {
   "Clackit Creek": 1,
@@ -28,99 +19,30 @@
   "Netanicum River": 1,
   "Tualitan River": 2
  },
+ "waters": 29,
+ "reports": 32,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in OR": 15,
+  "2 NHD waters of that name in OR, none within reach of the reports' places": 2,
+  "3 NHD waters of that name in OR, none within reach of the reports' places": 2,
+  "a wetland (not a named NHD water)": 2,
+  "1 NHD water of that name in OR, none within reach of the reports' places": 2,
+  "7 NHD waters of that name in OR, none within reach of the reports' places": 2,
+  "20 NHD waters of that name in OR and the reports give no place to choose one": 1,
+  "56 NHD waters of that name in OR, none within reach of the reports' places": 1,
+  "5 NHD waters of that name in OR and the reports give no place to choose one": 1,
+  "4 NHD waters of that name in OR, none within reach of the reports' places": 1
+ },
+ "resolved_names": 104,
+ "resolved_reports": 143,
+ "build": {
+  "date": "2026-11-08",
+  "command": "python -m ingest.waters_from_nhd --names research/or/receiving-waters-missing.json --state OR",
+  "records_built": 50,
+  "names_resolved": 104,
+  "network_requests": 0
+ },
  "rows": [
-  {
-   "name": "Agate Reservoir",
-   "county": "Jackson County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Agency Lake",
-   "county": "Klamath County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Amazon Creek",
-   "county": "Lane County",
-   "reports": 4,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Eugene"
-   ]
-  },
-  {
-   "name": "Ames Creek",
-   "county": "Linn County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Sweet Home"
-   ]
-  },
-  {
-   "name": "Antelope Creek",
-   "county": "Jackson County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Eagle Point"
-   ]
-  },
-  {
-   "name": "Arata Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Troutdale"
-   ]
-  },
-  {
-   "name": "Battle Creek",
-   "county": "Marion County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Beaverton Creek",
-   "county": "Washington County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Beaverton"
-   ]
-  },
   {
    "name": "Big Creek",
    "county": "Coos County",
@@ -131,1197 +53,8 @@
    "permits": [],
    "towns": [
     "Charleston"
-   ]
-  },
-  {
-   "name": "Big Creek",
-   "county": "Lincoln County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
    ],
-   "permits": [],
-   "towns": [
-    "Newport"
-   ]
-  },
-  {
-   "name": "Blue Lake",
-   "county": "Multnomah County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025",
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": [
-    "Fairview"
-   ]
-  },
-  {
-   "name": "Brownlee Reservoir",
-   "county": "Baker County",
-   "reports": 2,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Cedar Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Sandy"
-   ]
-  },
-  {
-   "name": "Cedar Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Gresham"
-   ]
-  },
-  {
-   "name": "Chehalem Creek",
-   "county": "Yamhill County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Nerberg"
-   ]
-  },
-  {
-   "name": "Claggett Creek",
-   "county": "Marion County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Keiser",
-    "Keizer"
-   ]
-  },
-  {
-   "name": "Clark Creek",
-   "county": "Marion County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Clatskanie River",
-   "county": "Columbia County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Clatskanie"
-   ]
-  },
-  {
-   "name": "Coalbank Slough",
-   "county": "Coos County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "spellings": [
-    "Coalbank Slough",
-    "Coal Bank Slough"
-   ],
-   "towns": [
-    "Coos Bay"
-   ]
-  },
-  {
-   "name": "Coast Fork Willamette River",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Cottage Grove"
-   ]
-  },
-  {
-   "name": "Coffee Lake Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Wilsonville"
-   ]
-  },
-  {
-   "name": "Cold Springs Reservoir",
-   "county": "Umatilla County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Cook Creek",
-   "county": "Douglas County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Sutherlin",
-    "Oakland"
-   ]
-  },
-  {
-   "name": "Cow Creek",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Glendale"
-   ]
-  },
-  {
-   "name": "Cullaby Lake",
-   "county": "Clatsop County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Depot Slough",
-   "county": "Lincoln County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Toledo"
-   ]
-  },
-  {
-   "name": "Detroit Lake",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Devils Lake",
-   "county": "Lincoln County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025",
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "spellings": [
-    "Devils lake",
-    "Devils Lake"
-   ],
-   "towns": [
-    "Lincoln City"
-   ]
-  },
-  {
-   "name": "Dexter Lake",
-   "county": "Lane County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Lowell"
-   ]
-  },
-  {
-   "name": "Diamond Lake",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Drews Reservoir",
-   "county": "Lake County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Lakeview"
-   ]
-  },
-  {
-   "name": "Eagle Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Eagle Creek"
-   ]
-  },
-  {
-   "name": "Eckman Lake",
-   "county": "Lincoln County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Elkton Creek",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Drain"
-   ]
-  },
-  {
-   "name": "Evans Creek",
-   "county": "Jackson County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Rogue River"
-   ]
-  },
-  {
-   "name": "Fanno Creek",
-   "county": "Multnomah County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025",
-    "or-bes-news-rss"
-   ],
-   "permits": [],
-   "towns": [
-    "Portland"
-   ]
-  },
-  {
-   "name": "Fish Hatchery Creek",
-   "county": "Josephine County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Grants Pass, OR"
-   ]
-  },
-  {
-   "name": "Galesville Reservoir",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Azalea"
-   ]
-  },
-  {
-   "name": "Gerber Reservoir",
-   "county": "Klamath County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Gilbert Creek",
-   "county": "Josephine County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Grants Pass"
-   ]
-  },
-  {
-   "name": "Glenn Creek",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Glenn Creek",
-   "county": "Polk County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Glenn Echo Wetlands",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Gladstone"
-   ]
-  },
-  {
-   "name": "Golf Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "PORTLAND"
-   ]
-  },
-  {
-   "name": "Hawn Creek",
-   "county": "Yamhill County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "spellings": [
-    "Hawn Creek",
-    "Hawn creek"
-   ],
-   "towns": [
-    "Carlton"
-   ]
-  },
-  {
-   "name": "Hells Canyon Reservoir",
-   "county": "Baker County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Hill Creek",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Creswell"
-   ]
-  },
-  {
-   "name": "Hoquarten Slough",
-   "county": "Tillamook County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Tillamook"
-   ]
-  },
-  {
-   "name": "Howard Prairie Lake",
-   "county": "Jackson County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Hunter Creek",
-   "county": "Curry County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Gold Beach"
-   ]
-  },
-  {
-   "name": "Hyatt Lake",
-   "county": "Jackson County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Indian Creek",
-   "county": "Hood River County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Hood River"
-   ]
-  },
-  {
-   "name": "Isthmus Slough",
-   "county": "Coos County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Coos Bay"
-   ]
-  },
-  {
-   "name": "Jackson Bottom Wetland",
-   "county": "Washington County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Hillsboro"
-   ]
-  },
-  {
-   "name": "Johnson Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Portland"
-   ]
-  },
-  {
-   "name": "Keene Creek",
-   "county": "Jackson County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Ashland"
-   ]
-  },
-  {
-   "name": "Kellogg Creek",
-   "county": "Clackamas County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Milwaukie, OR",
-    "Oak Grove",
-    "Milwaukie"
-   ]
-  },
-  {
-   "name": "Lake Ewauna",
-   "county": "Klamath County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Klamath Falls"
-   ]
-  },
-  {
-   "name": "Lake Selmac",
-   "county": "Josephine County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Lemolo Lake",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Lint Creek",
-   "county": "Lincoln County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Waldport"
-   ]
-  },
-  {
-   "name": "Little Pudding River",
-   "county": "Marion County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Looking Glass Creek",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Winston"
-   ]
-  },
-  {
-   "name": "Lost Creek",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Dexter"
-   ]
-  },
-  {
-   "name": "Louse Creek",
-   "county": "Josephine County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Merlin"
-   ]
-  },
-  {
-   "name": "Malheur River",
-   "county": "Malheur County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Ontario"
-   ]
-  },
-  {
-   "name": "McKay Reservoir",
-   "county": "Umatilla County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "McKenzie River",
-   "county": "Lane County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "spellings": [
-    "McKenzie River",
-    "McKenzie river"
-   ],
-   "towns": [
-    "Springfield",
-    "Springfield, OR"
-   ]
-  },
-  {
-   "name": "Mercer Lake",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Florence"
-   ]
-  },
-  {
-   "name": "Millican Creek",
-   "county": "Yamhill County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Lafayette, OR"
-   ]
-  },
-  {
-   "name": "Mill Pond Park Pond",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Portland"
-   ]
-  },
-  {
-   "name": "Miner Creek",
-   "county": "Coos County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Coos Bay"
-   ]
-  },
-  {
-   "name": "Muddy Creek Irrigation District Canal",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Coburg"
-   ]
-  },
-  {
-   "name": "Munson Creek",
-   "county": "Klamath County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Klamath Falls"
-   ]
-  },
-  {
-   "name": "Neawanna Creek",
-   "county": "Clatsop County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Seaside"
-   ]
-  },
-  {
-   "name": "Netarts Bay",
-   "county": "Tillamook County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Netarts"
-   ]
-  },
-  {
-   "name": "Newland Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Wilsonville"
-   ]
-  },
-  {
-   "name": "Nolan Slough",
-   "county": "Tillamook County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Tillamook"
-   ]
-  },
-  {
-   "name": "North Fork Clackamas River",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Estacada"
-   ]
-  },
-  {
-   "name": "North Fork Santiam River",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "North Tenmile Lake",
-   "county": "Coos County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "North Umpqua River",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Roseburg"
-   ]
-  },
-  {
-   "name": "Nye Creek",
-   "county": "Lincoln County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Newport"
-   ]
-  },
-  {
-   "name": "Ochoco Reservoir",
-   "county": "Crook County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Oswego Lake",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Owyhee Reservoir",
-   "county": "Malheur County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Palmer Creek",
-   "county": "Yamhill County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Dayton"
-   ]
-  },
-  {
-   "name": "Patterson Creek",
-   "county": "Tillamook County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Bay City"
-   ]
-  },
-  {
-   "name": "Penland Lake",
-   "county": "Morrow County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Pettit Reservoir",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Phillips Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Clackamas"
-   ]
-  },
-  {
-   "name": "Phillips Lake",
-   "county": "Baker County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Prineville Reservoir",
-   "county": "Crook County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Pringle Creek",
-   "county": "Marion County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Robert's Creek",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Roseburg (Green)"
-   ]
-  },
-  {
-   "name": "Rock Creek",
-   "county": "Washington County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Hillsboro"
-   ]
-  },
-  {
-   "name": "Russell Creek",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Eugene"
-   ]
-  },
-  {
-   "name": "Sandy River",
-   "county": "Clackamas County",
-   "reports": 4,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Sandy",
-    "Welches"
-   ]
-  },
-  {
-   "name": "Sanno Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Porltand"
-   ]
-  },
-  {
-   "name": "Schofield Creek",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Reedsport"
-   ]
-  },
-  {
-   "name": "Scoggins Creek",
-   "county": "Washington County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Gaston"
-   ]
-  },
-  {
-   "name": "Siletz River",
-   "county": "Lincoln County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Siletz"
-   ]
-  },
-  {
-   "name": "Siltcoos Lake",
-   "county": "Lane County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Silvies River",
-   "county": "Grant County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Seneca, OR",
-    "Seneca"
-   ]
-  },
-  {
-   "name": "Silvies River",
-   "county": "Harney County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Burns"
-   ]
-  },
-  {
-   "name": "Skunk Creek",
-   "county": "Josephine County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Grants Pass"
-   ]
-  },
-  {
-   "name": "South Fork Coquille River",
-   "county": "Coos County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Myrtle Pointe"
-   ]
-  },
-  {
-   "name": "South Fork Kellogg Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Oak Grove, OR"
-   ]
-  },
-  {
-   "name": "South Tenmile Lake",
-   "county": "Coos County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Stephen's Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Portland"
-   ]
+   "reason": "20 NHD waters of that name in OR and the reports give no place to choose one"
   },
   {
    "name": "Stevens Creek",
@@ -1333,224 +66,13 @@
    "permits": [],
    "towns": [
     "Portland"
-   ]
-  },
-  {
-   "name": "Sturgeon Lake",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
    ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Sutherlin Creek",
-   "county": "Douglas County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Roseburg",
-    "Sutherlin, OR"
-   ]
-  },
-  {
-   "name": "Suttle Lake",
-   "county": "Jefferson County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Tryon Creek",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Portland"
-   ]
-  },
-  {
-   "name": "Turner Creek",
-   "county": "Washington County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Hillsboro"
-   ]
-  },
-  {
-   "name": "Tutuilla Creek",
-   "county": "Umatilla County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Pendleton, OR"
-   ]
-  },
-  {
-   "name": "Umatilla River",
-   "county": "Umatilla County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Pendleton"
-   ]
-  },
-  {
-   "name": "Unity Reservoir",
-   "county": "Baker County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Upper Klamath Lake",
-   "county": "Klamath County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Vermont Creek",
-   "county": "Malheur County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Portland"
-   ]
-  },
-  {
-   "name": "Wain Creek",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Walling Pond",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Wapato Marsh at Oaks Bottom",
-   "county": "Multnomah County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "West Fork Little Pudding River",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "West Fork Pringle Creek",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Willamina Creek",
-   "county": "Yamhill County",
-   "reports": 3,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Willamina",
-    "Willamina, OR"
-   ]
-  },
-  {
-   "name": "Willow Creek Reservoir",
-   "county": "Morrow County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Wilson River",
-   "county": "Tillamook County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Tillamook"
-   ]
-  },
-  {
-   "name": "Winchester Creek",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Winchester Bay"
+   "reason": "2 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Portland",
+     "reason": "no NHD water of that name within 3 km of Portland (the nearest is 305.2 km away)"
+    }
    ]
   },
   {
@@ -1563,31 +85,1592 @@
    "permits": [],
    "towns": [
     "Portland"
+   ],
+   "reason": "3 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Portland",
+     "reason": "no NHD water of that name within 3 km of Portland (the nearest is 41.3 km away)"
+    }
    ]
   },
   {
-   "name": "Yachats River",
-   "county": "Lincoln County",
+   "name": "Cedar Creek",
+   "county": "Multnomah County",
    "reports": 1,
    "sources": [
     "or-deq-oers-spills-2013-2025"
    ],
    "permits": [],
    "towns": [
-    "Yachats"
+    "Gresham"
+   ],
+   "reason": "56 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Gresham",
+     "reason": "no NHD water of that name within 3 km of Gresham (the nearest is 10.3 km away)"
+    }
    ]
   },
   {
-   "name": "Yaquina Bay",
-   "county": "Lincoln County",
-   "reports": 2,
+   "name": "Elkton Creek",
+   "county": "Douglas County",
+   "reports": 1,
    "sources": [
     "or-deq-oers-spills-2013-2025"
    ],
    "permits": [],
    "towns": [
-    "Newport"
+    "Drain"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Fish Hatchery Creek",
+   "county": "Josephine County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Grants Pass, OR"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Glenn Echo Wetlands",
+   "county": "Clackamas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Gladstone"
+   ],
+   "reason": "a wetland (not a named NHD water)"
+  },
+  {
+   "name": "Jackson Bottom Wetland",
+   "county": "Washington County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Hillsboro"
+   ],
+   "reason": "a wetland (not a named NHD water)"
+  },
+  {
+   "name": "Keene Creek",
+   "county": "Jackson County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Ashland"
+   ],
+   "reason": "1 NHD water of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Ashland",
+     "reason": "no NHD water of that name within 3 km of Ashland (the nearest is 13.6 km away)"
+    }
    ]
+  },
+  {
+   "name": "Looking Glass Creek",
+   "county": "Douglas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Winston"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Mill Pond Park Pond",
+   "county": "Multnomah County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Portland"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Miner Creek",
+   "county": "Coos County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Coos Bay"
+   ],
+   "reason": "3 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Coos Bay",
+     "reason": "no NHD water of that name within 3 km of Coos Bay (the nearest is 5.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Muddy Creek Irrigation District Canal",
+   "county": "Lane County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Coburg"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Munson Creek",
+   "county": "Klamath County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Klamath Falls"
+   ],
+   "reason": "2 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Klamath Falls",
+     "reason": "no NHD water of that name within 3 km of Klamath Falls (the nearest is 71.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "North Fork Clackamas River",
+   "county": "Clackamas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Estacada"
+   ],
+   "reason": "1 NHD water of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Estacada",
+     "reason": "no NHD water of that name within 3 km of Estacada (the nearest is 7.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Penland Lake",
+   "county": "Morrow County",
+   "reports": 1,
+   "sources": [
+    "or-oha-hab-advisories"
+   ],
+   "permits": [],
+   "towns": [],
+   "reason": "no NHD flowline or waterbody of that name in OR; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Phillips Creek",
+   "county": "Clackamas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Clackamas"
+   ],
+   "reason": "5 NHD waters of that name in OR and the reports give no place to choose one"
+  },
+  {
+   "name": "Robert's Creek",
+   "county": "Douglas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Roseburg (Green)"
+   ],
+   "reason": "4 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Roseburg (Green)",
+     "reason": "no NHD water of that name within 3 km of Roseburg (Green) (the nearest is 3.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Russell Creek",
+   "county": "Lane County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Eugene"
+   ],
+   "reason": "7 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Eugene",
+     "reason": "no NHD water of that name within 3 km of Eugene (the nearest is 20.3 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Sanno Creek",
+   "county": "Multnomah County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Porltand"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Schofield Creek",
+   "county": "Douglas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Reedsport"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "South Fork Kellogg Creek",
+   "county": "Clackamas County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Oak Grove, OR"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Stephen's Creek",
+   "county": "Multnomah County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Portland"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Turner Creek",
+   "county": "Washington County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Hillsboro"
+   ],
+   "reason": "7 NHD waters of that name in OR, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Hillsboro",
+     "reason": "no NHD water of that name within 3 km of Hillsboro (the nearest is 24.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Vermont Creek",
+   "county": "Malheur County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Portland"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Wain Creek",
+   "county": "Marion County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Salem"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Walling Pond",
+   "county": "Marion County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Salem"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Wapato Marsh at Oaks Bottom",
+   "county": "Multnomah County",
+   "reports": 1,
+   "sources": [
+    "or-oha-hab-advisories"
+   ],
+   "permits": [],
+   "towns": [],
+   "reason": "no NHD flowline or waterbody of that name in OR; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Wapato Marsh"
+   ]
+  },
+  {
+   "name": "West Fork Pringle Creek",
+   "county": "Marion County",
+   "reports": 1,
+   "sources": [
+    "or-deq-oers-spills-2013-2025"
+   ],
+   "permits": [],
+   "towns": [
+    "Salem"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in OR; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Amazon Creek",
+   "reports": 4,
+   "slugs": [
+    "amazon-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Eugene"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Sandy River",
+   "reports": 4,
+   "slugs": [
+    "sandy-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Sandy",
+    "Welches"
+   ],
+   "county": "Clackamas County"
+  },
+  {
+   "name": "Ames Creek",
+   "reports": 3,
+   "slugs": [
+    "ames-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Sweet Home"
+   ],
+   "county": "Linn County"
+  },
+  {
+   "name": "Clatskanie River",
+   "reports": 3,
+   "slugs": [
+    "clatskanie-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Clatskanie"
+   ],
+   "county": "Columbia County"
+  },
+  {
+   "name": "Kellogg Creek",
+   "reports": 3,
+   "slugs": [
+    "kellogg-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Milwaukie, OR",
+    "Oak Grove",
+    "Milwaukie"
+   ],
+   "county": "Clackamas County"
+  },
+  {
+   "name": "McKenzie River",
+   "reports": 3,
+   "slugs": [
+    "mckenzie-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Springfield",
+    "Springfield, OR"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Neawanna Creek",
+   "reports": 3,
+   "slugs": [
+    "neawanna-creek-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Seaside"
+   ],
+   "county": "Clatsop County"
+  },
+  {
+   "name": "Nye Creek",
+   "reports": 3,
+   "slugs": [
+    "nye-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Newport"
+   ],
+   "county": "Lincoln County",
+   "places_failed": [
+    {
+     "town": "Newport",
+     "reason": "no NHD water of that name within 3 km of Newport (the nearest is 25.1 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Pringle Creek",
+   "reports": 3,
+   "slugs": [
+    "pringle-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Marion County"
+  },
+  {
+   "name": "Willamina Creek",
+   "reports": 3,
+   "slugs": [
+    "willamina-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Willamina",
+    "Willamina, OR"
+   ],
+   "county": "Yamhill County"
+  },
+  {
+   "name": "Battle Creek",
+   "reports": 2,
+   "slugs": [
+    "battle-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Marion County"
+  },
+  {
+   "name": "Big Creek",
+   "reports": 2,
+   "slugs": [
+    "big-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Newport"
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Blue Lake",
+   "reports": 2,
+   "slugs": [
+    "blue-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Fairview"
+   ],
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Brownlee Reservoir",
+   "reports": 2,
+   "slugs": [
+    "brownlee-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Baker County"
+  },
+  {
+   "name": "Claggett Creek",
+   "reports": 2,
+   "slugs": [
+    "claggett-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Keiser",
+    "Keizer"
+   ],
+   "county": "Marion County"
+  },
+  {
+   "name": "Clark Creek",
+   "reports": 2,
+   "slugs": [
+    "clark-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Marion County",
+   "places_failed": [
+    {
+     "town": "Salem",
+     "reason": "no NHD water of that name within 3 km of Salem (the nearest is 101.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Coalbank Slough",
+   "reports": 2,
+   "slugs": [
+    "coalbank-slough-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Coos Bay"
+   ],
+   "county": "Coos County"
+  },
+  {
+   "name": "Cook Creek",
+   "reports": 2,
+   "slugs": [
+    "cook-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Sutherlin",
+    "Oakland"
+   ],
+   "county": "Douglas County",
+   "places_failed": [
+    {
+     "town": "Oakland",
+     "reason": "no NHD water of that name within 3 km of Oakland (the nearest is 4.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Devils Lake",
+   "reports": 2,
+   "slugs": [
+    "devil-s-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lincoln City"
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Dexter Lake",
+   "reports": 2,
+   "slugs": [
+    "dexter-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lowell"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Fanno Creek",
+   "reports": 2,
+   "slugs": [
+    "fanno-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Portland"
+   ],
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Hawn Creek",
+   "reports": 2,
+   "slugs": [
+    "hawn-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Carlton"
+   ],
+   "county": "Yamhill County"
+  },
+  {
+   "name": "Little Pudding River",
+   "reports": 2,
+   "slugs": [
+    "little-pudding-river-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Marion County"
+  },
+  {
+   "name": "Silvies River",
+   "reports": 2,
+   "slugs": [
+    "silvies-river-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seneca, OR",
+    "Seneca"
+   ],
+   "county": "Grant County"
+  },
+  {
+   "name": "Sutherlin Creek",
+   "reports": 2,
+   "slugs": [
+    "sutherlin-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Roseburg",
+    "Sutherlin, OR"
+   ],
+   "county": "Douglas County"
+  },
+  {
+   "name": "Umatilla River",
+   "reports": 2,
+   "slugs": [
+    "umatilla-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pendleton"
+   ],
+   "county": "Umatilla County"
+  },
+  {
+   "name": "Yaquina Bay",
+   "reports": 2,
+   "slugs": [
+    "yaquina-bay-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Newport"
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Agate Reservoir",
+   "reports": 1,
+   "slugs": [
+    "agate-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Jackson County"
+  },
+  {
+   "name": "Agency Lake",
+   "reports": 1,
+   "slugs": [
+    "agency-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Klamath County"
+  },
+  {
+   "name": "Antelope Creek",
+   "reports": 1,
+   "slugs": [
+    "antelope-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Eagle Point"
+   ],
+   "county": "Jackson County"
+  },
+  {
+   "name": "Arata Creek",
+   "reports": 1,
+   "slugs": [
+    "arata-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Troutdale"
+   ],
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Beaverton Creek",
+   "reports": 1,
+   "slugs": [
+    "beaverton-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Beaverton"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "Cedar Creek",
+   "reports": 1,
+   "slugs": [
+    "cedar-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Sandy"
+   ],
+   "county": "Clackamas County"
+  },
+  {
+   "name": "Chehalem Creek",
+   "reports": 1,
+   "slugs": [
+    "chehalem-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Nerberg"
+   ],
+   "county": "Yamhill County"
+  },
+  {
+   "name": "Coast Fork Willamette River",
+   "reports": 1,
+   "slugs": [
+    "coast-fork-willamette-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Cottage Grove"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Coffee Lake Creek",
+   "reports": 1,
+   "slugs": [
+    "coffee-lake-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Wilsonville"
+   ],
+   "county": "Clackamas County"
+  },
+  {
+   "name": "Cold Springs Reservoir",
+   "reports": 1,
+   "slugs": [
+    "cold-springs-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Umatilla County"
+  },
+  {
+   "name": "Cow Creek",
+   "reports": 1,
+   "slugs": [
+    "cow-creek-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Glendale"
+   ],
+   "county": "Douglas County"
+  },
+  {
+   "name": "Cullaby Lake",
+   "reports": 1,
+   "slugs": [
+    "cullaby-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Clatsop County"
+  },
+  {
+   "name": "Depot Slough",
+   "reports": 1,
+   "slugs": [
+    "depot-slough-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Toledo"
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Detroit Lake",
+   "reports": 1,
+   "slugs": [
+    "detroit-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Marion County"
+  },
+  {
+   "name": "Diamond Lake",
+   "reports": 1,
+   "slugs": [
+    "diamond-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Douglas County"
+  },
+  {
+   "name": "Drews Reservoir",
+   "reports": 1,
+   "slugs": [
+    "drews-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lakeview"
+   ],
+   "county": "Lake County"
+  },
+  {
+   "name": "Eagle Creek",
+   "reports": 1,
+   "slugs": [
+    "eagle-creek-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Eagle Creek"
+   ],
+   "county": "Clackamas County"
+  },
+  {
+   "name": "Eckman Lake",
+   "reports": 1,
+   "slugs": [
+    "eckman-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Evans Creek",
+   "reports": 1,
+   "slugs": [
+    "evans-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Rogue River"
+   ],
+   "county": "Jackson County"
+  },
+  {
+   "name": "Galesville Reservoir",
+   "reports": 1,
+   "slugs": [
+    "galesville-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Azalea"
+   ],
+   "county": "Douglas County"
+  },
+  {
+   "name": "Gerber Reservoir",
+   "reports": 1,
+   "slugs": [
+    "gerber-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Klamath County"
+  },
+  {
+   "name": "Gilbert Creek",
+   "reports": 1,
+   "slugs": [
+    "gilbert-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Grants Pass"
+   ],
+   "county": "Josephine County"
+  },
+  {
+   "name": "Glenn Creek",
+   "reports": 1,
+   "slugs": [
+    "glenn-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Marion County"
+  },
+  {
+   "name": "Glenn Creek",
+   "reports": 1,
+   "slugs": [
+    "glenn-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Polk County"
+  },
+  {
+   "name": "Golf Creek",
+   "reports": 1,
+   "slugs": [
+    "golf-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "PORTLAND"
+   ],
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Hells Canyon Reservoir",
+   "reports": 1,
+   "slugs": [
+    "hells-canyon-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Baker County"
+  },
+  {
+   "name": "Hill Creek",
+   "reports": 1,
+   "slugs": [
+    "hill-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Creswell"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Hoquarten Slough",
+   "reports": 1,
+   "slugs": [
+    "hoquarten-slough-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Tillamook"
+   ],
+   "county": "Tillamook County"
+  },
+  {
+   "name": "Howard Prairie Lake",
+   "reports": 1,
+   "slugs": [
+    "howard-prairie-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Jackson County"
+  },
+  {
+   "name": "Hunter Creek",
+   "reports": 1,
+   "slugs": [
+    "hunter-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Gold Beach"
+   ],
+   "county": "Curry County"
+  },
+  {
+   "name": "Hyatt Lake",
+   "reports": 1,
+   "slugs": [
+    "hyatt-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Jackson County"
+  },
+  {
+   "name": "Indian Creek",
+   "reports": 1,
+   "slugs": [
+    "indian-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Hood River"
+   ],
+   "county": "Hood River County"
+  },
+  {
+   "name": "Isthmus Slough",
+   "reports": 1,
+   "slugs": [
+    "isthmus-slough-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Coos Bay"
+   ],
+   "county": "Coos County"
+  },
+  {
+   "name": "Johnson Creek",
+   "reports": 1,
+   "slugs": [
+    "johnson-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Portland"
+   ],
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Lake Ewauna",
+   "reports": 1,
+   "slugs": [
+    "lake-ewauna-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Klamath Falls"
+   ],
+   "county": "Klamath County"
+  },
+  {
+   "name": "Lake Selmac",
+   "reports": 1,
+   "slugs": [
+    "lake-selmac-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Josephine County"
+  },
+  {
+   "name": "Lemolo Lake",
+   "reports": 1,
+   "slugs": [
+    "lemolo-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Douglas County"
+  },
+  {
+   "name": "Lint Creek",
+   "reports": 1,
+   "slugs": [
+    "lint-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Waldport"
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Lost Creek",
+   "reports": 1,
+   "slugs": [
+    "lost-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Dexter"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Louse Creek",
+   "reports": 1,
+   "slugs": [
+    "louse-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Merlin"
+   ],
+   "county": "Josephine County"
+  },
+  {
+   "name": "Malheur River",
+   "reports": 1,
+   "slugs": [
+    "malheur-river-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Ontario"
+   ],
+   "county": "Malheur County"
+  },
+  {
+   "name": "McKay Reservoir",
+   "reports": 1,
+   "slugs": [
+    "mckay-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Umatilla County"
+  },
+  {
+   "name": "Mercer Lake",
+   "reports": 1,
+   "slugs": [
+    "mercer-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Florence"
+   ],
+   "county": "Lane County"
+  },
+  {
+   "name": "Millican Creek",
+   "reports": 1,
+   "slugs": [
+    "millican-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lafayette, OR"
+   ],
+   "county": "Yamhill County"
+  },
+  {
+   "name": "Netarts Bay",
+   "reports": 1,
+   "slugs": [
+    "netarts-bay-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Netarts"
+   ],
+   "county": "Tillamook County"
+  },
+  {
+   "name": "Newland Creek",
+   "reports": 1,
+   "slugs": [
+    "newland-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Wilsonville"
+   ],
+   "county": "Clackamas County"
+  },
+  {
+   "name": "Nolan Slough",
+   "reports": 1,
+   "slugs": [
+    "nolan-slough-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Tillamook"
+   ],
+   "county": "Tillamook County"
+  },
+  {
+   "name": "North Fork Santiam River",
+   "reports": 1,
+   "slugs": [
+    "north-santiam-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Marion County"
+  },
+  {
+   "name": "North Tenmile Lake",
+   "reports": 1,
+   "slugs": [
+    "north-tenmile-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Coos County"
+  },
+  {
+   "name": "North Umpqua River",
+   "reports": 1,
+   "slugs": [
+    "north-umpqua-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Roseburg"
+   ],
+   "county": "Douglas County"
+  },
+  {
+   "name": "Ochoco Reservoir",
+   "reports": 1,
+   "slugs": [
+    "ochoco-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Crook County"
+  },
+  {
+   "name": "Oswego Lake",
+   "reports": 1,
+   "slugs": [
+    "oswego-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Clackamas County"
+  },
+  {
+   "name": "Owyhee Reservoir",
+   "reports": 1,
+   "slugs": [
+    "owyhee-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Malheur County"
+  },
+  {
+   "name": "Palmer Creek",
+   "reports": 1,
+   "slugs": [
+    "palmer-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Dayton"
+   ],
+   "county": "Yamhill County"
+  },
+  {
+   "name": "Patterson Creek",
+   "reports": 1,
+   "slugs": [
+    "patterson-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Bay City"
+   ],
+   "county": "Tillamook County"
+  },
+  {
+   "name": "Pettit Reservoir",
+   "reports": 1,
+   "slugs": [
+    "pettit-reservoir-or"
+   ],
+   "how": "record built from the name",
+   "county": "Marion County"
+  },
+  {
+   "name": "Phillips Lake",
+   "reports": 1,
+   "slugs": [
+    "phillips-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Baker County"
+  },
+  {
+   "name": "Prineville Reservoir",
+   "reports": 1,
+   "slugs": [
+    "prineville-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Crook County"
+  },
+  {
+   "name": "Rock Creek",
+   "reports": 1,
+   "slugs": [
+    "rock-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Hillsboro"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "Scoggins Creek",
+   "reports": 1,
+   "slugs": [
+    "scoggins-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Gaston"
+   ],
+   "county": "Washington County"
+  },
+  {
+   "name": "Siletz River",
+   "reports": 1,
+   "slugs": [
+    "siletz-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Siletz"
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Siltcoos Lake",
+   "reports": 1,
+   "slugs": [
+    "siltcoos-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Lane County"
+  },
+  {
+   "name": "Silvies River",
+   "reports": 1,
+   "slugs": [
+    "silvies-river-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Burns"
+   ],
+   "county": "Harney County"
+  },
+  {
+   "name": "Skunk Creek",
+   "reports": 1,
+   "slugs": [
+    "skunk-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Grants Pass"
+   ],
+   "county": "Josephine County",
+   "places_failed": [
+    {
+     "town": "Grants Pass",
+     "reason": "no NHD water of that name within 3 km of Grants Pass (the nearest is 141.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "South Fork Coquille River",
+   "reports": 1,
+   "slugs": [
+    "south-fork-coquille-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Myrtle Pointe"
+   ],
+   "county": "Coos County"
+  },
+  {
+   "name": "South Tenmile Lake",
+   "reports": 1,
+   "slugs": [
+    "south-tenmile-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Coos County"
+  },
+  {
+   "name": "Sturgeon Lake",
+   "reports": 1,
+   "slugs": [
+    "sturgeon-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Suttle Lake",
+   "reports": 1,
+   "slugs": [
+    "suttle-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Jefferson County"
+  },
+  {
+   "name": "Tryon Creek",
+   "reports": 1,
+   "slugs": [
+    "tryon-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Portland"
+   ],
+   "county": "Multnomah County"
+  },
+  {
+   "name": "Tutuilla Creek",
+   "reports": 1,
+   "slugs": [
+    "tutuilla-creek-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Pendleton, OR"
+   ],
+   "county": "Umatilla County"
+  },
+  {
+   "name": "Unity Reservoir",
+   "reports": 1,
+   "slugs": [
+    "unity-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Baker County"
+  },
+  {
+   "name": "Upper Klamath Lake",
+   "reports": 1,
+   "slugs": [
+    "upper-klamath-lake-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Klamath County"
+  },
+  {
+   "name": "West Fork Little Pudding River",
+   "reports": 1,
+   "slugs": [
+    "west-fork-little-pudding-river-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Salem"
+   ],
+   "county": "Marion County"
+  },
+  {
+   "name": "Willow Creek Reservoir",
+   "reports": 1,
+   "slugs": [
+    "willow-creek-reservoir-or"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Morrow County"
+  },
+  {
+   "name": "Wilson River",
+   "reports": 1,
+   "slugs": [
+    "wilson-river-or"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Tillamook"
+   ],
+   "county": "Tillamook County"
+  },
+  {
+   "name": "Winchester Creek",
+   "reports": 1,
+   "slugs": [
+    "winchester-creek-winchester-bay-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Winchester Bay"
+   ],
+   "county": "Douglas County"
+  },
+  {
+   "name": "Yachats River",
+   "reports": 1,
+   "slugs": [
+    "yachats-river-or"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Yachats"
+   ],
+   "county": "Lincoln County"
   }
  ]
 }
