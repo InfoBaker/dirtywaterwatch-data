@@ -123,6 +123,19 @@ HAND_NOT_SEWAGE = {
                  "facility 'TUCSON AIRPORT REMEDIATION PROJECT - CO-MINGLED PLUME', SIC 4581 (Airports, Flying Fields, "
                  "& Services), its one limit set 'TUCSON AIRPORT REMEDIATION PROJECT - CO-MINGLED PL'; Tucson Water's "
                  "discharge of treated groundwater from the airport plume, not a sewage plant",
+    # UT go-live audit, 2026-11-08 (P2-4): Utah's construction dewatering coverages (general permit UTG070000) at sewer
+    # projects, in by the sewerage code and a public owner, with no POTW component
+    'UTG071774': "ICIS-NPDES extract 2026-10-30 (data/outfalls-plants-us.json, read 2026-11-08): a general permit "
+                 "coverage (GPC) under Utah's construction dewatering permit UTG07, permittee a construction company "
+                 "(Alder Construction) at the Payson wastewater plant's project, no POTW component; its limit sets "
+                 "('Standard Monitoring', 'Outfall 1 Sanitary Sewer Manhole') monitor the dewatering point: a "
+                 "construction project's dewatering, not a sewage plant's outfall",
+    'UTG072162': "ICIS-NPDES extract 2026-10-30 (read 2026-11-08): a construction dewatering coverage (UTG07), facility "
+                 "'MT. VISTA PARKWAY SEWER REROUTE PHASE 2', permittee a construction company, no POTW component: a "
+                 "construction project, not a sewage outfall",
+    'UTG072174': "ICIS-NPDES extract 2026-10-30 (read 2026-11-08): a construction dewatering coverage (UTG07), facility "
+                 "'UVU SEWER LIFT STATION', permittee a construction company, no POTW component: a construction "
+                 "project, not a sewage outfall",
 }
 # the reason and EPA's facility type of a hand-held permit when not not_a_sewage_plant / NON-POTW (sic codes as read)
 HAND_NOT_SEWAGE_KIND = {
@@ -131,6 +144,9 @@ HAND_NOT_SEWAGE_KIND = {
     'AZS000003': ('stormwater_ms4', 'POTW', []),
     'AZS000005': ('stormwater_ms4', 'POTW', []),
     'AZ0026417': ('groundwater_remediation', 'Municipal or Water District', ['4581']),
+    'UTG071774': ('construction_project', 'Municipality', ['4952']),
+    'UTG072162': ('construction_project', 'Municipality', ['4952']),
+    'UTG072174': ('construction_project', 'District', ['4952']),
 }
 
 

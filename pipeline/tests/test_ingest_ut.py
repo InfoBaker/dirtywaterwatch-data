@@ -210,7 +210,7 @@ def test_every_utah_permit_is_in_exactly_one_row():
     plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
               if r.get("state") == "UT"}
     research = {r["npdes_permit"] for r in json.loads((ROOT / "research" / "ut" / "dischargers.json").read_text())}
-    assert len(plants) == 93 and all(every[p] == 1 for p in plants | research)
+    assert len(plants) == 90 and all(every[p] == 1 for p in plants | research)        # 93 less the 3 dewatering coverages
     rows = ops()
     held = [p for r in rows for p in r["npdes_permits"]]
     assert len(held) == len(set(held)) == 221 and sum(1 for p in held if p.startswith("UTG580")) == 126

@@ -145,3 +145,21 @@ def test_the_missing_list_carries_places_and_the_unplaced_advisories():
         r = next(x for x in d["rows"] if x["name"] == name)
         assert r["reports"] >= 1 and "ut-dwq-recreational-advisories" in r["sources"] and r["points"]
     assert all(r["county"] for r in d["rows"])
+
+
+# ---------------------------------------------------------------- P2-4: construction dewatering is no sewage outfall
+
+def test_construction_dewatering_coverages_are_not_outfalls_but_keep_their_rows():
+    from common import load_outfall_registry
+    held = {"UTG071774", "UTG072162", "UTG072174"}
+    reg = [r for r in load_outfall_registry(provisional=False) if r.get("state") == "UT"]
+    assert not held & {r["npdes_permit"] for r in reg} and len(reg) == 116
+    doc = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())
+    ex = {x["npdes_permit"]: x for x in doc["excluded_not_sewage"]}
+    assert all(ex[p]["reason"] == "construction_project" and "UTG07" in ex[p]["basis"] for p in held)
+    ops = {p: r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "UT"
+           for p in r["npdes_permits"]}
+    assert all(ops[p]["outfall_count"] is None and "held back" in ops[p]["notes"] for p in held)
+    reg_rows = json.loads((ROOT / "data" / "notice-channels" / "ut.json").read_text())["channels"]
+    assert {"ut-alder-construction-dwq-report", "ut-fx-construction-dwq-report",
+            "ut-whitaker-construction-dwq-report"} <= {c["id"] for c in reg_rows}
