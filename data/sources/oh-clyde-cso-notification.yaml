@@ -1,0 +1,31 @@
+id: "oh-clyde-cso-notification"
+name: "Clyde CSO Notification System"
+url: "https://cso.clydeohio.org/"
+homepage: "https://cso.clydeohio.org/"
+kind: "html"
+level: "municipal"
+# Feed row: written by pipeline/ingest/oh_clyde_cso.py (data/build/events/oh-clyde-cso-notification.json).
+# Built 2026-11-08: daily; the yearly report pages (every year from 2017 on the first run, then this year and last);
+#   9 overflows, 2017-05-05 to 2026-04-01, start and end to the minute (Eastern), volume in million gallons; placed on
+#   EPA's open CSO outfall 010 of OH0024686 (Raccoon Creek, its permitted-feature point).
+# Columns: the eight event cells only; the page's staff contact (name, e-mail, phone) is never read or saved.
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read daily by
+#   pipeline/ingest/oh_clyde_cso.py: 9 overflows of Clyde's one CSO (OH0024686 outfall 010, Raccoon
+#   Creek) in 2017 to 2026 (the newest 2026-04-01), each with start, end and volume; the counts
+#   match each page's own statement.
+# Access detail (research, quoted): The status map at https://cso.clydeohio.org/ (a script map) and
+#   yearly report pages https://cso.clydeohio.org/templates/cso-report.php?year=<yyyy> from 2017: an
+#   HTML table of each overflow's start and end date and time, cause, rainfall before and in total,
+#   volume (MG) and two concentrations. The page also names a staff contact, which is not read.
+cadence: null
+license: "none stated"
+attribution: "City of Clyde"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["html"]
+access_detail: "The status map at https://cso.clydeohio.org/ (a script map) and yearly report pages https://cso.clydeohio.org/templates/cso-report.php?year=<yyyy> from 2017: an HTML table of each overflow's start and end date and time, cause, rainfall before and in total, volume (MG) and two concentrations. The page also names a staff contact, which is not read."
+machine_readable: true
+legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
+checked: "2026-11-08"

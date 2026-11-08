@@ -1,0 +1,42 @@
+id: "oh-epa-spills-opendata"
+name: "Ohio EPA Spills (current year and previous years), Office of Emergency Response"
+url: "https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer"
+homepage: "https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer"
+kind: "arcgis"
+level: "state"
+# Feed row: written by pipeline/ingest/oh_epa_spills.py (data/build/events/oh-epa-spills-opendata.json).
+# Built 2026-11-08: daily; layers 0 and 1, reportedproduct SEWAGE HUMAN (71 in 2026, 620 in 2017-2025), SEWAGE
+#   SLUDGE / BIOSOLIDS (31, 166) and WASTE WATER (20, 238): 1,146 rows, 1,121 cases, one sso record each; started_at
+#   the spill's day (day precision, Eastern), reported_at the call time (Ohio's wall clock stored as if UTC: read in
+#   Eastern time), no end; waterway named on 218 (its county number cut). WASTE WATER is kept with the product stated
+#   (the layer does not say whether it is sewage). Not read: AIR ODOR SEWAGE (3, 23), manure, grease, other products.
+# Columns excluded: spillmonth and spilldoy (copies of the day), locatedxy (a flag), recovproducttype. No field
+#   names a person.
+# Notes (research/oh, status used, verified fetched, checked 2026-11-08): Read daily by
+#   pipeline/ingest/oh_epa_spills.py as a supplementary source: the SEWAGE HUMAN, SEWAGE SLUDGE /
+#   BIOSOLIDS and WASTE WATER rows of both layers (1,121 cases, 2017 to 2026-11-05; 121 in 2026),
+#   day precision, no end, the call time in Ohio's wall clock, the waterway named on 218; WASTE
+#   WATER is kept as a possible sewage release with the product stated; AIR ODOR SEWAGE rows are not
+#   read.
+# Access detail (research, quoted): ArcGIS MapServer, layers 0 Spills_CurrentYear (2,357 incidents
+#   on 2026-11-03) and 1 Spills_PreviousYears (2017 on). Query e.g.
+#   https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer/0/query?where=reportedproduct%20LIKE%20%27SEWAGE%25%27&outFields=*&f=json.
+#   Sewage rows this year: 100 (SEWAGE HUMAN 70, SEWAGE SLUDGE / BIOSOLIDS 30); previous years 786
+#   since 2017. Also Spills2_Public MapServer (sites and products).
+# Can fill: source_record_id, event_type, reported_at, coordinates, volume, units, location_text,
+#   waterbody, raw_record
+# Cannot fill: started_at; ended_at; authority; advice_text; source_status
+# Waters: statewide; incidents reported to Ohio EPA's emergency hotline
+# History: 2017 to date (RRS database earlier, P1 CAD since May 2017).
+cadence: "Service description: updated daily; latest reported 2026-11-02."
+license: "Copyright text: 'Office of Emergency Response, Ohio Environmental Protection Agency'; no licence statement."
+attribution: "Ohio EPA Office of Emergency Response"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["OH"]
+access: ["arcgis", "api"]
+access_detail: "ArcGIS MapServer, layers 0 Spills_CurrentYear (2,357 incidents on 2026-11-03) and 1 Spills_PreviousYears (2017 on). Query e.g. https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer/0/query?where=reportedproduct%20LIKE%20%27SEWAGE%25%27&outFields=*&f=json. Sewage rows this year: 100 (SEWAGE HUMAN 70, SEWAGE SLUDGE / BIOSOLIDS 30); previous years 786 since 2017. Also Spills2_Public MapServer (sites and products)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-08"

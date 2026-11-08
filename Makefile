@@ -114,6 +114,12 @@
 #                  session step opens the page first; ingest/tn_transforms.py) and the generic ArcGIS block
 #                  tn-tdec-hab-advisory-status (TDEC's HAB advisories, advisory fields only), and
 #                  tn_tdec_posted_streams (TDEC's posted-streams PDF: standing water-contact advisories, read daily)
+#                  Ohio: oh_neorsd_cso (NEORSD's CSO alerts layers: each outfall's last wet- and dry-weather overflow,
+#                  snapshotted hourly into dated records, metered or modelled), oh_akron_cso (Akron's overflow status
+#                  layer: status 1 opens, 0 ends at the poll), oh_columbus_overflows (Columbus's overflow events table
+#                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
+#                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
+#                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

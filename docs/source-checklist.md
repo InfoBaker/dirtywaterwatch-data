@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1424 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -45,7 +45,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 1 | 4 | 1 | 0 | 10 |
-| **all** | **508** | **230** | **415** | **200** | **71** | **1424** |
+| oh | 11 | 3 | 7 | 1 | 2 | 24 |
+| **all** | **519** | **233** | **422** | **201** | **73** | **1448** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1645,3 +1646,32 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `tn-hamilton-wwta-quarterly` | Hamilton County WWTA consent decree quarterly reports | watch | search_only | events | SSO tables; covered by TDEC table (872 rows). |
 | `tn-harpeth-conservancy` | Harpeth Conservancy sewer overflow transparency page | watch | search_only | prior_art | Advocates real-time public reporting; notes Franklin and Brentwood post overflows with signs and web notice within days. |
 | `tn-orsanco-na` | ORSANCO (Tennessee is not on the Ohio main stem) | rejected | inferred | monitoring | TN is an ORSANCO member state but its waters are Cumberland/Tennessee; no TN sampling site. |
+
+## oh: Ohio (24)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `oh-akron-cso-notifications` | City of Akron CSO Notifications (Akron Waterways Renewed overflow status map) | used | fetched | events | Read hourly by pipeline/ingest/oh_akron_cso.py: a site at status 1 opens a cso record dated by Akron's update time, ended at the first update back at 0 (poll precision); status 0 is no report. All 28 sites at 0 on 2026-11-08, so no record yet. The per-site PDFs are linked, not parsed. |
+| `oh-bowling-green-cso-events` | Bowling Green CSO Events yearly reporting table | used | fetched | events | Read daily by pipeline/ingest/oh_bowling_green_cso.py: 37 overflows at Mercer and Poe roads, 2019 to 2026-07-21, each with begin, end and estimated volume; placed on the permit's one CSO outfall (OH0024139 002, North Branch Portage River). |
+| `oh-clyde-cso-notification` | Clyde CSO Notification System | used | fetched | events | Read daily by pipeline/ingest/oh_clyde_cso.py: 9 overflows of Clyde's one CSO (OH0024686 outfall 010, Raccoon Creek) in 2017 to 2026 (the newest 2026-04-01), each with start, end and volume; the counts match each page's own statement. |
+| `oh-columbus-sewer-overflow` | Columbus Sewer Overflow Discharge Information (SSO/CSO) and overflow map | used | fetched | events | Read daily by pipeline/ingest/oh_columbus_overflows.py: 8,542 recorded overflows (4,462 CSO, 4,080 SSO; 291 in 2026 to 2026-09-29), each dated by the day the city found it at inspection (day precision, no end), with volume in million gallons on 4,742; CSO rows carry their permit and outfall by Ohio EPA's station code (Jackson Pike OH0024732, Southerly OH0024741); the site's point (46 of 50 sites) or EPA's outfall point; the city updates the data monthly, usually after the 15th. |
+| `oh-epa-cso-inventory` | EPA National CSO Inventory (Ohio extract) | used | fetched | outfalls | Outfall points statewide. |
+| `oh-epa-gl-cso-ohio` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Ohio (operator list with websites and annual reports) | used | fetched | outfalls | Seeds the channel column for the Lake Erie basin operators. |
+| `oh-epa-spills-opendata` | Ohio EPA Spills (current year and previous years), Office of Emergency Response | used | fetched | events | Read daily by pipeline/ingest/oh_epa_spills.py as a supplementary source: the SEWAGE HUMAN, SEWAGE SLUDGE / BIOSOLIDS and WASTE WATER rows of both layers (1,121 cases, 2017 to 2026-11-05; 121 in 2026), day precision, no end, the call time in Ohio's wall clock, the waterway named on 218; WASTE WATER is kept as a possible sewage release with the product stated; AIR ODOR SEWAGE rows are not read. |
+| `oh-law-40cfr122-38` | 40 CFR 122.38 Great Lakes CSO public notification (Lake Erie basin permittees) | used | inferred | law | 4-hour public notice for Ohio CSO permittees in the Lake Erie basin (42 operators on EPA's Ohio list); implemented through their public notification plans. |
+| `oh-law-oac-3745-33-08` | OAC 3745-33-08 Generic NPDES permit conditions (outfall signs; notice to public water supply operators) | used | fetched | law | Ohio's only general rule touching public notice: permanent outfall signs, and notice to drinking-water intake operators near major discharges. |
+| `oh-neorsd-cso-notification-map` | NEORSD CSO Alerts: map and status of outfalls (ArcGIS) | used | fetched | events | Read hourly by pipeline/ingest/oh_neorsd_cso.py (layers 4 and 5, safe fields): each new last wet- or dry-weather overflow per outfall becomes a dated cso record with NEORSD's start, end and volume, labelled metered (24 outfalls) or modelled (88) by NEORSD; 148 records from the first poll on 2026-11-08 (102 of them in 2026). The 112 outfalls' points and receiving waters improve EPA's rows (data/outfalls-oh.json). |
+| `oh-odh-beachguard` | Ohio Department of Health BeachGuard public (bathing beach and HAB advisories) | used | fetched | advisories | Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories (5 on 2026-11-08: 4 HAB warnings at Grand Lake St. Marys since 20 May, 1 bacteria advisory since 31 July), lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. Past advisories: the API refuses the whole list (too large to serialise), so the archive grows from the polls. |
+| `oh-lakewood-cso-map` | Lakewood CSO Notification System map | candidate | fetched | events | Leaflet map with status per site (in progress / past 48 hours / no recent / unknown meter data); data endpoint not traced; 'For a text-based list of all overflow locations, contact the City'. |
+| `oh-lima-cso-activity` | Lima Combined Sewer Overflow Activity Report | candidate | fetched | events | Page lists 2026 '4 hour Overflows' and '7 Day Supplemental Notifications' as dated PDFs (e.g. 9_12_26). PDF polling. |
+| `oh-toledo-cso` | Toledo Combined Sewer Overflows page | candidate | fetched | events | Status line ('Last updated: 11/03/2026 There are no combined sewer overflows at this time. The public will be notified within four hours of a documented CSO event.') and dated daily CSO report PDFs (latest 09 05 26). |
+| `oh-bills-136ga` | Ohio 136th General Assembly bills on sewage notice | watch | search_only | law | No sewage-overflow notification bill found by search; HB 92 surfaced but its subject was not confirmed. |
+| `oh-elyria-cso` | Elyria Combined Sewer Overflow page | watch | fetched | events | Annual CSO reports and notification plan; links Lorain County Emergency Alerting System; Ordinance 521.11 prohibits swimming in the Black River within city limits. |
+| `oh-epa-noncompliance-sso-notification` | Ohio EPA NPDES non-compliance and SSO notification (24-hour report to Ohio EPA; SSO 5-day follow-up form) | watch | search_only | law | Regulator-only reports; no public output found. |
+| `oh-euclid-cso-notification` | Euclid Combined Sewer Overflow Public Notification | watch | fetched | events | Describes 17 CSO structures and the notification plan; no event list seen in the fetched page. |
+| `oh-msdgc-cso-activity-map` | MSD of Greater Cincinnati CSO Activity Map (Power BI) | watch | fetched | events | Power BI embed (app.powerbi.com/view?r=...), updated hourly, outfalls active now or in the past 72 hours; no machine-readable output. MSD advises avoiding streams for 72 hours after rain. |
+| `oh-sso-annual-reports` | Municipal SSO annual reports (Dayton, Elyria, Willoughby, Wooster, Middlefield, Montgomery County) | watch | search_only | events | Annual PDFs required by permits; annual precision only. |
+| `oh-upper-sandusky-cso-reports` | Upper Sandusky CSO public notification reports by year | watch | search_only | events | Yearly CSO report pages (2023-2025) per search. |
+| `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
+| `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
+| `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |

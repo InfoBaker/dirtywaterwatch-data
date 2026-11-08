@@ -1021,7 +1021,8 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 # unless the point is within NAME_MATCH_M of the record. ADEM's layers give no county, so the county is the one whose
 # outline (data/reference/al-counties.json, Census TIGERweb) holds the point. A record with no outline cannot be
 # measured from a point; its box still places it in a county ("Cowan Creek" in Fairhope is not Ferguson's).
-COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json",
+# Ohio (wave 4): the spills layer's, NEORSD's, Akron's and BeachGuard's reports all carry a point (oh-counties.json).
+COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json", "OH": "oh-counties.json",
                  "OR": "or-counties.json"}      # DEQ's OERS spills: a point and a county (scripts/or_counties.py)
 COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer gives points and names (no county field)
 # States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
