@@ -8,9 +8,9 @@ officers since 1991, one row per incident with a point, edited daily. 8,980 rows
     and the incident summary (the only field that says what was released, how much and where it went) carries staff
     names, callers and private addresses and is never requested. A row is a sewage report when its title
     (Title_EventName) names sewage by the words of SEWAGE_WORDS and none of NOT_SEWAGE (the fetch block's filter,
-    which keeps the same two lists, so only those rows reach data/raw/). The 2026-11-07 fetch: 8,980 rows; 425 titles
-    name sewage words; 385 kept as sewage reports; 40 dropped (NOT_SEWAGE: 29 industrial, process or trade wastewater,
-    5 backups inside buildings, 3 drinking-water plants, 3 other materials in a sewer or plant). The counts by reason are
+    which keeps the same two lists, so only those rows reach data/raw/). The 2026-11-07 fetch: 8,980 rows; 424 titles
+    name sewage words; 377 kept as sewage reports; 47 dropped (NOT_SEWAGE: 29 industrial, process or trade wastewater,
+    10 other materials in a sewer, drain or plant, 5 backups inside buildings, 3 drinking-water plants). The counts by reason are
     in the source file. A model pass could later read titles the rules leave unclear ("Waste Water Discharge"); a
     model never supplies a place or a colour.
   - Kind (raw._ut_kind) and event_type: a bypass named in the title -> bypass; a treatment plant, lagoon, effluent or
@@ -28,8 +28,8 @@ officers since 1991, one row per incident with a point, edited daily. 8,980 rows
     the operator reported to EPA; read as Mountain wall-clock time it is 17:00). The time of day is therefore not used:
     it is kept as given in raw._decoded_times and the record is dated to the day. No row gives an end, a report time or
     a volume (the volume is only in the summary): ended_at, reported_at and volume_gal stay null, status unknown, so the
-    status build applies its no-end caution from the start of the discovery day. 41 of the kept rows (most of them
-    entered before 1995 or migrated without a date) have no date at all: kept, undated, never coloured.
+    status build applies its no-end caution from the start of the discovery day. 37 of the kept rows (most of them
+    entered before 2014 or migrated without a date) have no date at all: kept, undated, never coloured.
   - Placement: every row carries a point (the layer's geometry, read in WGS 84; DEQ calls the locations approximate),
     so the status build places a row from its point; a water named in the title (WATER_IN_TITLE: "Sewage Release to Bear
     Lake", "Sewage in Gordon Creek") is the row's waterbody_text, matched by name within the status build's distance
@@ -167,6 +167,7 @@ def ut_incident_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if m:
         title = title[m.end():].strip()
         notes["_title_basis"] = "the title began with a person's or family business's name: cut"
+        notes["row"] = {**row, "Title_EventName": title}       # raw.row keeps the cut title, never the name
     rec["outfall_name"] = title or None
     notes["state"] = "UT"
     notes["time_zone"] = ZONE
