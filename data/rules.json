@@ -210,6 +210,12 @@
     "clock": "end_of_discharge",
     "basis": "Kentucky law sets no period after a sewage discharge during which the water is to be avoided, and no Kentucky statute or rule requires the public to be told of a sewage overflow or a bypass. A permittee must tell the Division of Water immediately by telephone of a spill, bypass or overflow that may present an imminent or substantial danger to public health or the environment, and report it as the federal permit conditions require (401 KAR 5:065 Section 2(5)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to the U.S. Environmental Protection Agency's overflow records for December 2025 and January 2026 only. The Louisville and Jefferson County Metropolitan Sewer District posts its own overflow advisory on its website, asking people to avoid contact with the Ohio River, streams, drainage ditches and standing water \"until 48 hours after the rain has stopped\"; this site shows that advisory as the District's while the District's page carries it. Northern Kentucky's Sanitation District No. 1 alerts its subscribers from May to October when 0.25 inch of rain falls in its service area or the Ohio River rises above 38 feet, and keeps its advisories for 72 hours; this site applies the rainfall part of that rule at the District's combined sewer outfalls from radar rainfall. Times are read in Eastern time, and in Central time in the forty-one western counties. This site marks a reported discharge while it runs and applies its own caution after it ends; a report of a discharge that reached no water is not shown on this site",
     "source": "401 KAR 5:065 Section 2(5); 40 CFR 122.41(l)(6); U.S. EPA sewer overflow and bypass event data (ECHO); Louisville MSD Overflow Advisory Level (louisvillemsd.org/overflowalert); SD1 Wet Weather Overflow Notification Program (sd1.org/218); 49 CFR 71.5(c)"
+   },
+   "TN": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Tennessee law sets no period after a sewage discharge during which the water is to be avoided, and no Tennessee statute or rule requires the public to be told of a sewer overflow or a bypass. Sanitary sewer overflows are prohibited, and every permit requires the permittee to report any release that could threaten health or the environment to the Tennessee Department of Environment and Conservation within 24 hours and in writing within five days (Tenn. Comp. R. & Regs. 0400-40-05-.07(2)(n) and (o)). The Department publishes the filed reports in its Events Report, about five days after the event, with dates but no times, no receiving water and no coordinates; combined sewer overflows in Nashville, Chattanooga and Clarksville are permitted discharges and are not in it. The Department posts standing water-contact advisories on streams with high bacteria levels and issues harmful algal bloom advisories with their dates. Dates are read in Eastern time in the thirty counties of East Tennessee and in Central time elsewhere. A release is, by the Department's definition, sewage that did not reach water (0400-40-05-.02(75)). This site marks a reported discharge from its start date to its end date and applies its own caution after it ends, or for 72 hours from the start of its day when no end is given; a report is listed by its county and placed on no water. Each posted stream is shown as the Department's own advisory for as long as its list carries it",
+    "source": "Tenn. Comp. R. & Regs. 0400-40-05-.02(75), .07(2)(n)1 and (2)(o); TDEC Division of Water Resources Events Report; TDEC Bacteriological and Fishing Advisories; TDEC HAB Advisory Status; 49 CFR 71.5(d)"
    }
   },
   "by_discharger": {
@@ -356,20 +362,22 @@
    "sources": [
     "ne-dwee-beachwatch",
     "hi-doh-cwb-events-api",
-    "tx-glo-beach-watch"
+    "tx-glo-beach-watch",
+    "tn-tdec-hab-advisory-status"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
-   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high; Texas Beach Watch's Medium level, enterococcus from 35 to 104 per 100 mL, at which the program recommends no advisory). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done), never as the agency's advisory.",
-   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii Department of Health, Clean Water Branch; Texas General Land Office, Texas Beach Watch"
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high; Texas Beach Watch's Medium level, enterococcus from 35 to 104 per 100 mL, at which the program recommends no advisory; a bloom reported to the Tennessee Department of Environment and Conservation for which it issued no advisory, confirmed or not yet assessed). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done; the Tennessee Department's end date for a bloom it followed up), never as the agency's advisory.",
+   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii Department of Health, Clean Water Branch; Texas General Land Office, Texas Beach Watch; Tennessee Department of Environment and Conservation, HAB Advisory Status"
   },
   "day_start_caution": {
    "sources": [
     "ga-epd-spills",
-    "tx-tceq-sso-opendata"
+    "tx-tceq-sso-opendata",
+    "tn-tdec-events-report"
    ],
    "hours": 72,
-   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
+   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
   }
  },
  "reach": {

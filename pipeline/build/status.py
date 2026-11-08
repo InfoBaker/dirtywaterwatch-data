@@ -1023,10 +1023,12 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 # measured from a point; its box still places it in a county ("Cowan Creek" in Fairhope is not Ferguson's).
 COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json",
                  "OR": "or-counties.json"}      # DEQ's OERS spills: a point and a county (scripts/or_counties.py)
+COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer gives points and names (no county field)
 # States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
 COUNTY_FIELD_STATES = {"TX", "OR"}           # Oregon: OERS rows give raw.county too (a row with no point)
+COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 

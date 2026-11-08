@@ -1,0 +1,73 @@
+id: "tn-tdec-hab-advisory-status"
+name: "TDEC HAB Advisory Status (Survey123 layer behind the Tennessee HAB Dashboard)"
+url: "https://services5.arcgis.com/bPacKTm9cauMXVfn/arcgis/rest/services/survey123_ecdde0d22aef4bc897dd90831ea05618/FeatureServer/0"
+homepage: "https://services5.arcgis.com/bPacKTm9cauMXVfn/arcgis/rest/services/survey123_ecdde0d22aef4bc897dd90831ea05618/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS reader with the hook ingest/tn_transforms.py tn_hab_record: source id
+#   tn-tdec-hab-advisory-status, data/build/events/tn-tdec-hab-advisory-status.json. Blooms, not sewage (hab_advisory).
+# Real fetch 2026-11-07 (the safe fields only): 71 bloom reports; advisory_issued No 33, Precautionary Advisory 18, No
+#   Contact Advisory 3, blank 17; hab_confirmed Yes 27, Green algae or plants 25, No Bloom 13, other 2, blank 4. The 21
+#   advisories run from 2023-03-27 (Meads Quarry Lake, No Contact) to 2026-09-24 (Lake Watauga in Nashville's Centennial
+#   Park, Precautionary); every one
+#   gives an end date (the latest 2026-10-28, Beaver Lake and a Shelby Farms lake), so none was in effect on 2026-11-07.
+#   Six confirmed blooms carry no advisory; six reports TDEC has not assessed give no status date (their observation date
+#   is the start). private_property marks 17 rows "No, private residence, or farm pond" (6 of the kept): their point is
+#   not published, only their county. Layer last edited 2026-10-28.
+# The layer also holds each reporter's first and last name, phone number and email, and the reporter's own description
+#   and answers: none is requested. The HAB field (codes 3 and 5, no domain) is kept as TDEC's code, not interpreted.
+cadence: "edited as reports arrive and TDEC follows up (in season, weekly)"
+license: "No licence statement on the service"
+attribution: "Tennessee Department of Environment and Conservation, Division of Water Resources"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["TN"]
+registry_ids: ["tn-tdec-hab-advisory-status"]
+access: ["arcgis"]
+access_detail: "Public Survey123 feature layer (71 rows on 2026-11-07). Query only the safe fields: the layer exposes reporters' names, phone numbers and emails to any client asking for every field."
+machine_readable: true
+legal_basis: "TDEC harmful algal bloom response program (no statute names a duty to publish)"
+checked: "2026-11-07"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://services5.arcgis.com/bPacKTm9cauMXVfn/arcgis/rest/services/survey123_ecdde0d22aef4bc897dd90831ea05618/FeatureServer/0"
+  order_by: "objectid"
+  cursor_field: "objectid"
+  geometry: true
+  metadata: true
+  time_zone: "America/Chicago"   # dates only; each record names its point's zone (tn_hab_record)
+  bounds: [-90.32, 34.98, -81.64, 36.68]      # Tennessee; a point outside is not used (raw._coords_rejected)
+  safe_fields: [objectid, name_of_the_waterbody, HAB, HAB_Status_date, HAB_end_date, hab_confirmed, advisory_issued,
+                please_enter_the_date_the_algal, private_property, _x, _y]
+  round_coords: 3      # the reporter's point, about 100 m, in raw.row and data/raw too
+  reviewed_fields:
+    name_of_the_waterbody: "the water's name as reported ('Beaver Lake', 'Tributary to Grays Creek'), not a person's; free text, scrubbed"
+    please_enter_the_date_the_algal: "the date the bloom was observed (alias 'Please enter the date the HAB was observed'): a date, not a person"
+    private_property: "TDEC's code for the water's access (alias 'Dataviewer'): accessible for recreation, a private lake, or a private residence or farm pond"
+  free_text: [name_of_the_waterbody]
+  free_text_scrub: "strict"
+  # a report TDEC found was no bloom, or green algae or plants: no statement about a bloom
+  filter: [{field: hab_confirmed, regex: "^\\s*(no bloom|green algae or plants)\\s*$", exclude: true}]
+  record:
+    source_record_id: {template: "{objectid}"}
+    started_at: {field: HAB_Status_date, parse: date, formats: ["%Y-%m-%d"]}
+    ended_at: {field: HAB_end_date, parse: date, formats: ["%Y-%m-%d"]}
+    event_type: {const: hab_advisory}
+    lat: {field: _y, parse: number}
+    lon: {field: _x, parse: number}
+    waterbody_text: name_of_the_waterbody
+    authority: {const: "Tennessee Department of Environment and Conservation (HAB Advisory Status)"}
+    # the record in the layer, asking only the safe fields
+    source_url: {template: "https://services5.arcgis.com/bPacKTm9cauMXVfn/arcgis/rest/services/survey123_ecdde0d22aef4bc897dd90831ea05618/FeatureServer/0/query?where=objectid%3D{objectid}&outFields=objectid,name_of_the_waterbody,HAB_Status_date,HAB_end_date,hab_confirmed,advisory_issued&f=html"}
+  transform: "ingest.tn_transforms.tn_hab_record"
+  raw_notes:
+    _hab_code: {field: HAB}
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Tennessee Department of Environment and Conservation, HAB Advisory Status (Tennessee HAB Dashboard)"
+    caveat: "Most rows begin as a report from the public; TDEC records whether it confirmed a bloom and whether it issued a Precautionary or No Contact advisory, with the advisory's dates."
+    time_basis: "Dates only (the advisory's start and end dates TDEC gives); read in the zone of the county the point lies in."

@@ -3,6 +3,10 @@
 fetch block keys
   platform: csv | json
   url: the download; params: query parameters
+  session (csv): {url, pattern}: a page to open first in the same session (cookies kept), whose final URL after
+       redirects holds the server's session id, captured by the regular expression's group "session" and put into
+       the download url's {session} (an Oracle APEX interactive report's CSV: f?p=<app>:<page>:<session>:CSV::::);
+       no match is an error, so a changed handshake fails the fetch instead of reading an error page
   csv: delimiter (","), encoding ("utf-8-sig"), skip_rows (lines before the header), headers: snake (the default:
        "FACILITY/COLLECTION_SYSTEM" -> facility_collection_system) or as_is
   json: records_path, the dotted path to the list of rows ("" = the document is the list; "features" with
@@ -66,9 +70,22 @@ def rows_of_json(doc, block: dict) -> list[dict]:
     return out
 
 
+def session_url(block: dict, sess) -> str:
+    """The download url, with {session} filled from the session page's final URL (the session key)."""
+    spec = block.get("session")
+    if not spec:
+        return block["url"]
+    r = get(sess, spec["url"])
+    m = re.search(spec["pattern"], r.url)
+    if not m or not m.groupdict().get("session"):
+        raise RuntimeError(f"no session id in the session page's final URL ({len(r.content)} bytes): the handshake "
+                           f"changed")
+    return block["url"].replace("{session}", m.group("session"))
+
+
 def fetch(block: dict, sess) -> Fetched:
     if block["platform"] == "csv":
-        r = get(sess, block["url"], block.get("params"))
+        r = get(sess, session_url(block, sess), block.get("params"))
         enc = (block.get("csv") or {}).get("encoding", "utf-8-sig")
         text = r.content.decode(enc)
         if "<html" in text[:500].lower():

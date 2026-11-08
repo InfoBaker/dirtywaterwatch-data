@@ -87,6 +87,8 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
 | `reviewed_fields` | `{field: reason}` for a safe field whose name looks personal but is not |
 | `free_text` | the safe fields the scrubbers run on |
 | `free_text_scrub` | `strict`: a filer's free text that can carry residents' names and home addresses also loses owners' and residents' names and every house number (Michigan's scrub, `mi_egle_mienviro.free_text`); absent: the standard scrub |
+| `operator_fields` | safe fields holding a permittee's or facility's name: one that reads as only a person's (a small private system filed under its owner) becomes "[name removed]" before the row is saved or mapped (`common.scrub_discharger`) |
+| `round_coords` | decimals the point (`_x`, `_y`) keeps before the row is saved or mapped: a reporter's point (3 is about 100 m) |
 | `filter` | `[{field, regex, exclude}]`: rows kept (all rules must hold) |
 | `bounds` | `[lon_min, lat_min, lon_max, lat_max]`: a point outside is not used (`raw._coords_rejected`) |
 | `record` | the field map, one entry per event field (below) |
@@ -280,6 +282,11 @@ fetch:
     authority: {const: "Example County Utilities"}
     source_url: {const: "https://data.example.gov/sewer/"}
 ```
+
+A download that needs a server session first (an Oracle APEX interactive report's CSV, `f?p=<app>:<page>:<session>:CSV::::`)
+names the page to open in `session: {url, pattern}`: the page's final URL after redirects gives the session id (the
+pattern's group `session`), which fills `{session}` in `url`; the cookies stay in the run's session. No match fails the
+fetch (`data/sources/tn-tdec-events-report.yaml`).
 
 ## JSON download
 

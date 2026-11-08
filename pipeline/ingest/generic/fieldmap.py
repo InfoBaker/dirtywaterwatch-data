@@ -33,8 +33,8 @@ from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from zoneinfo import ZoneInfo
 
-from common import (DATA_DIR, EVENT_TYPES, KEEP_KEYS, NAME_KEYS, PERSONAL_KEYS, STATUSES, end_after, parse_volume_gal,
-                    read_json, scrub_text)
+from common import (DATA_DIR, EVENT_TYPES, KEEP_KEYS, NAME_KEYS, NAME_REMOVED, PERSONAL_KEYS, STATUSES, end_after,
+                    parse_volume_gal, read_json, scrub_discharger, scrub_text)
 
 TIME_FIELDS = ("started_at", "ended_at", "reported_at", "published_at", "source_updated_at")
 PRECISIONS = {"minute", "hour", "day", "month", "year", "poll"}
@@ -588,6 +588,19 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
     for f in block.get("free_text") or ():
         if isinstance(out.get(f), str):
             out[f] = scrub_strict(out[f]) if strict else scrub(out[f])
+    # round_coords: a reporter's point (a bloom seen from a home) kept only to this many decimals, in the record's
+    # raw.row and in data/raw alike (opt-in per block; review 2026-11-08 TN P2-3)
+    nd = block.get("round_coords")
+    if nd is not None:
+        for f in ("_x", "_y"):
+            if isinstance(out.get(f), (int, float)):
+                out[f] = round(float(out[f]), int(nd))
+    # operator_fields: a permittee or facility name that reads as only a person's (a small private system filed under
+    # its owner) is removed before anything is saved or mapped (common.scrub_discharger); opt-in per block
+    for f in block.get("operator_fields") or ():
+        if isinstance(out.get(f), str) and out[f].strip():
+            if scrub_discharger({"discharger_name": out[f]})["discharger_name"] == NAME_REMOVED:
+                out[f] = NAME_REMOVED
     return out, dropped
 
 

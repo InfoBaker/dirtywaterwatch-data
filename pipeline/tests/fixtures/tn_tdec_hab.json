@@ -1,0 +1,181 @@
+{
+ "objectIdFieldName": "objectid",
+ "features": [
+  {
+   "attributes": {
+    "objectid": 901,
+    "name_of_the_waterbody": "Example Quarry Lake",
+    "HAB": "3",
+    "HAB_Status_date": "2023-03-27",
+    "HAB_end_date": "2023-04-18",
+    "hab_confirmed": "Yes",
+    "advisory_issued": "No Contact Advisory",
+    "please_enter_the_date_the_algal": null,
+    "private_property": "Yes, accessible for recreation",
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -83.8661234,
+    "y": 35.9521234
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 902,
+    "name_of_the_waterbody": "Example Park Lake",
+    "HAB": "3",
+    "HAB_Status_date": "2024-07-29",
+    "HAB_end_date": "2024-08-13",
+    "hab_confirmed": "Yes",
+    "advisory_issued": "Precautionary Advisory",
+    "please_enter_the_date_the_algal": null,
+    "private_property": "Yes, accessible for recreation",
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -86.6012345,
+    "y": 36.1012345
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 903,
+    "name_of_the_waterbody": "Example Road Lake",
+    "HAB": "3",
+    "HAB_Status_date": "2026-06-11",
+    "HAB_end_date": "2026-07-23",
+    "hab_confirmed": "Yes",
+    "advisory_issued": "No",
+    "please_enter_the_date_the_algal": null,
+    "private_property": null,
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -89.8512345,
+    "y": 35.1512345
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 904,
+    "name_of_the_waterbody": "Example Reservoir",
+    "HAB": "3",
+    "HAB_Status_date": "2026-08-28",
+    "HAB_end_date": null,
+    "hab_confirmed": "Yes",
+    "advisory_issued": null,
+    "please_enter_the_date_the_algal": null,
+    "private_property": null,
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -83.8381234,
+    "y": 36.4031234
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 905,
+    "name_of_the_waterbody": "pond near 99900 block of Example Blvd",
+    "HAB": "3",
+    "HAB_Status_date": null,
+    "HAB_end_date": null,
+    "hab_confirmed": null,
+    "advisory_issued": null,
+    "please_enter_the_date_the_algal": 1781193600000,
+    "private_property": "No, private residence, or farm",
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -86.6321234,
+    "y": 36.0011234
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 906,
+    "name_of_the_waterbody": "Example Farm Pond",
+    "HAB": "3",
+    "HAB_Status_date": null,
+    "HAB_end_date": null,
+    "hab_confirmed": "other",
+    "advisory_issued": "No",
+    "please_enter_the_date_the_algal": 1757001600000,
+    "private_property": "Yes, accessible for recreation",
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -84.4512345,
+    "y": 35.4012345
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 907,
+    "name_of_the_waterbody": "Example Green Lake",
+    "HAB": "3",
+    "HAB_Status_date": null,
+    "HAB_end_date": null,
+    "hab_confirmed": "Green algae or plants",
+    "advisory_issued": "No",
+    "please_enter_the_date_the_algal": null,
+    "private_property": null,
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -86.7112345,
+    "y": 36.0512345
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 908,
+    "name_of_the_waterbody": "Example Clear Lake",
+    "HAB": "3",
+    "HAB_Status_date": null,
+    "HAB_end_date": null,
+    "hab_confirmed": "No Bloom",
+    "advisory_issued": "No",
+    "please_enter_the_date_the_algal": null,
+    "private_property": null,
+    "first_name": "Jane",
+    "last_name": "Fixturename",
+    "phone_number": "615-555-0142",
+    "e_mail_address": "jfixture@example.com",
+    "comments": "seen from 4321 Fixture Rd"
+   },
+   "geometry": {
+    "x": -85.0612345,
+    "y": 35.8612345
+   }
+  }
+ ]
+}
