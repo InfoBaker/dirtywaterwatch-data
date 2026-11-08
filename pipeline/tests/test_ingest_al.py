@@ -233,7 +233,7 @@ def test_alabama_is_wired_in():
     root = Path(__file__).resolve().parents[2]
     rules = json.loads((root / "data" / "rules.json").read_text())
     assert rules["red"]["by_state"]["AL"]["hours"] is None
-    assert "AL" not in rules["live_states"]
+    assert "AL" in rules["live_states"]   # live since 2026-11-08 (final audit docs/checklists/2026-11-07-al-final.md)
     assert re.search(r'"al": "Alabama"', (root / "scripts" / "gen_source_checklist.py").read_text())
     for sid in ("al-adem-sso-history", "al-adem-sso-map-live", "al-adem-beach-monitoring"):
         assert (root / "data" / "sources" / f"{sid}.yaml").exists()

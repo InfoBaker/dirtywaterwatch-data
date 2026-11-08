@@ -344,7 +344,7 @@ def test_rules_row_and_the_retest_caution():
     assert hi["source"].count("Clean Water Branch") == 1
     assert not re.search(r"\b(safe|clean)\b", hi["basis"], re.I)
     assert HI.SOURCE_ID in rules["unresolved"]["sample_caution"]["sources"]
-    assert "HI" not in rules["live_states"]
+    assert "HI" in rules["live_states"]   # live since 2026-11-08 (final audit docs/checklists/2026-11-07-hi-final.md)
 
 
 def test_state_text_is_in_the_page_shape():

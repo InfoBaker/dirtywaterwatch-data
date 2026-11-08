@@ -279,7 +279,7 @@ def test_rules_row_cites_the_law_and_sets_no_window():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     r = rules["red"]["by_state"]["OR"]
     assert r["hours"] is None and "340-142-0040" in r["source"] and "Schedule F" in r["source"]
-    assert "Malheur County" in r["basis"] and "48 hours" in r["basis"] and "OR" not in rules["live_states"]
+    assert "Malheur County" in r["basis"] and "48 hours" in r["basis"] and "OR" in rules["live_states"]   # live since 2026-11-08
     assert not re.search(r"\b(safe|clean)\b", r["basis"], re.I)
 
 

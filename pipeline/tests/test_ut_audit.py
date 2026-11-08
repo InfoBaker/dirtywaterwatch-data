@@ -95,6 +95,13 @@ def test_every_remainder_lies_off_its_rivers_outline():
     """The auditor's data test: for every NHD record with covers_part_of whose parent outline is on disk, under 10 per
     cent of its length lies within SAME_WATER_M of the parent."""
     d = json.loads((ROOT / "data" / "waters-nhd.json").read_text())
+    # The cloud batches check remainders against openboatlaunch's API copy (whole outlines, with a river's centre
+    # lines in geometry_lines). A developer's folder is often openboatlaunch's own coarser build output, where the
+    # same remainder can score differently (Kentucky's Cumberland, Texas's Brazos on 2026-11-08): judge the data
+    # only against the copy the batches use.
+    samples = sorted(S.OBL_WATER_DIR.glob("*.json"))[:200] if S.OBL_WATER_DIR.is_dir() else []
+    if not any("geometry_lines" in json.loads(f.read_text()) for f in samples):
+        pytest.skip("OBL_WATER_DIR is not openboatlaunch's API copy (no geometry_lines field): the batches' outlines are needed")
     for w in d["waters"]:
         if not w.get("covers_part_of") or not w.get("geometry"):
             continue
