@@ -98,3 +98,22 @@ def test_no_utah_interval_label_says_the_code_is_unexplained():
     mats = [iv for r in recs if r["raw"]["_advisory_label"] == "Mats CF" for iv in S.event_intervals(r, "UT", now)]
     assert mats and mats[0]["color"] == "yellow" and "observed by DWQ's monitoring team" in mats[0]["label"]
     assert not [x for x in labels if "does not publish" in x]
+
+
+# ---------------------------------------------------------------- P2-2: private points
+
+def test_points_are_kept_to_three_decimals_and_private_homes_to_their_county():
+    from ingest.generic import runner as R
+    _, block = R.load_source("ut-deq-environmental-incidents")
+    assert block["round_coords"] == 3 and not {"Northing", "Easting"} & set(block["safe_fields"])
+    rows = R.platform("arcgis").parse(block, (ROOT / "pipeline" / "tests" / "fixtures" / "ut" / "incidents.json").read_bytes())
+    home = dict(rows[0], OBJECTID=99010, Id="99000010", Title_EventName="Garland - Sewage Release from Residence",
+                _x=-112.1612345, _y=41.7412345)
+    recs, _ = R.build("ut-deq-environmental-incidents", block, rows + [home], "2026-11-08T01:00:00Z", (), None)
+    for r in recs:
+        if r["lat"] is not None:
+            assert r["lat"] == round(r["lat"], 3) and r["lon"] == round(r["lon"], 3)
+            assert r["raw"]["row"]["_x"] == round(r["raw"]["row"]["_x"], 3)
+    h = next(r for r in recs if r["source_record_id"] == "99000010")
+    assert h["lat"] is None and h["lon"] is None and "_x" not in h["raw"]["row"] and h["raw"]["county"]
+    assert "41.7412" not in json.dumps(h) and "Northing" not in json.dumps(recs)

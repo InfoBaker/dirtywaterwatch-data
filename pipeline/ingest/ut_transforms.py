@@ -38,7 +38,8 @@ officers since 1991, one row per incident with a point, edited daily. 8,980 rows
     Lake", "Sewage in Gordon Creek") is the row's waterbody_text, matched by name within the status build's distance
     guard. The layer gives no operator or permit; a row is never tied to a plant by its town.
   - Privacy: only the safe fields are requested (Id, DERRID, Title_EventName, Nearest_City, County, Date_Discovered,
-    Date_Discovered_For_Filter, SITEDESC, ReportLink, Northing, Easting and the point). Never requested: Responsible_Party
+    Date_Discovered_For_Filter, SITEDESC, ReportLink and the point, kept to 0.001 degree before anything is saved); a
+    row whose title names a private home, property or septic system (PRIVATE_PLACE) keeps its county only. Never requested: Responsible_Party
     (businesses and private persons), Address_Location (private addresses), Incident_summary (staff, callers,
     complainants, addresses), Salesforce_Id and Map_Label. The title gets the strict scrub (owners' and residents' names
     and house numbers cut), and a title that is only a person's or a family business's name ("X and Y's Vacuum Truck")
@@ -127,6 +128,10 @@ PERSON_TITLE = re.compile(r"^\s*[A-Z][a-z]+(?:\s+(?:and|&)\s+[A-Z][a-z]+)?'s\s+"
 FILTER_TIME_NOTE = ("the layer's filter time as stored (an epoch, UTC): midnight Eastern time on rows before 2024 (a date "
                     "only); since 2024 the discovery time rounded to the quarter hour, whose UTC date is the layer's "
                     "Date_Discovered")
+# a title naming a private home, property or septic system: the record keeps its county, never the point
+PRIVATE_PLACE = re.compile(r"\bresiden(?:ce|ces|tial)\b|\bprivate\s+property\b|\bon\s+(?:private\s+)?property\b|"
+                           r"\bseptic\s+(?:tank|system|leak|release|failure|malfunction|discharge)s?\b|\bhomes?\b|"
+                           r"\bhouses?\b|\bapartments?\b|\b(?:back)?yard\b", re.I)
 ECHO_FILE = EVENTS_DIR / "echo-sewer-overflow.json"
 ECHO_LINK_M = 2_000
 STARTED_BASIS = ("started_at is the Mountain-time day the incident was discovered: the earlier of the layer's "
@@ -252,6 +257,17 @@ def ut_incident_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if did and did.lower() != "none":
         notes["derr_id"] = did
     notes["_coord_note"] = "DEQ: incident locations on the map are approximate"
+    if rec.get("lat") is not None and rec.get("lon") is not None:
+        if PRIVATE_PLACE.search(title):
+            rec["lat"] = rec["lon"] = None
+            rec["coord_source"] = None
+            notes["row"] = {k: v for k, v in (notes.get("row") or row).items() if k not in ("_x", "_y")}
+            notes["_point_withheld"] = ("the title names a private home, property or septic system: only its county "
+                                        "is kept")
+        else:
+            rec["lat"], rec["lon"] = round(float(rec["lat"]), 3), round(float(rec["lon"]), 3)
+            rec["coord_precision_m"] = 150
+            notes["_coords_rounded"] = "DEQ's point, kept to 0.001 degree (about 100 m)"
 
 
 def _echo_ut(path=None) -> list[dict]:
