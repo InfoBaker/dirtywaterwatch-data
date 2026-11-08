@@ -62,7 +62,7 @@ from datetime import UTC, datetime, timedelta
 from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISION, DISCHARGE_TYPES, LOCAL, POINT_ADVISORY_TYPES,
                           colours_whole_water, end_not_credible, event_intervals, event_state, find_duplicates,
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
-from common import BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, write_json
+from common import BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, system_wide_advisory, write_json
 
 CHARTS_DIR = OUT_DIR / "charts"
 WINDOW_YEARS = 5                 # monthly charts: January of (this year - 4) to this month
@@ -422,8 +422,8 @@ def gather(data: Data):
     for ev in data.events:
         eid = ev["event_id"]
         et = ev.get("event_type") or "unknown"
-        if is_total(ev):
-            continue
+        if is_total(ev) or system_wide_advisory(ev):
+            continue            # a system-wide advisory is counted with the advisories, never as a discharge
         if et not in DISCHARGE_TYPES and not (et == "unknown" and ev.get("source_id") in disch_sources):
             continue
         if eid in data.superseded:
@@ -512,7 +512,9 @@ def gather(data: Data):
             t.from_where[eid] = where
             (t.cov if via == "local" else t.cov_arriving).add(cov_key(ev))
 
-    # official advisories: waters only, where they colour the water (the map's rule)
+    # official advisories: waters only, where they colour the water (the map's rule); a system-wide advisory shown at
+    # many outfalls (common.system_wide_advisory) counts once per water (review 2026-11-08 P2-1)
+    seen_wide: set = set()
     for ev in data.events:
         eid = ev["event_id"]
         if is_total(ev) or eid in data.superseded or eid in data.duplicates:
@@ -524,6 +526,11 @@ def gather(data: Data):
             w = data.waters[slug]
             if ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(w):
                 continue
+            if system_wide_advisory(ev):
+                k = (slug, ev.get("source_id"), (ev.get("raw") or {}).get("advisory_key"))
+                if k in seen_wide:
+                    continue
+                seen_wide.add(k)
             bw = b("water", slug)
             bw.state = w.get("state")
             bw.advisories.append(eff)

@@ -381493,6 +381493,39 @@
   ]
  },
  {
+  "id": "ky-bee-creek-wwtp",
+  "name": "Bee Creek WWTP",
+  "short_name": "Bee Creek WWTP",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0072761",
+  "npdes_permits": [
+   "KY0072761"
+  ],
+  "receiving_waters": [
+   "Bee Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Murray"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0072761 Bee Creek WWTP. EPA records the permittee as the plant (\"Bee Creek WWTP\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-bee-creek-wwtp"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
   "id": "ky-belfry-wwtp",
   "name": "Belfry WWTP",
   "short_name": "Belfry WWTP",
@@ -382105,7 +382138,7 @@
   "towns": [
    "Adairville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020885 Adairville STP. EPA records the plant as \"Adairville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020885 Adairville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382138,7 +382171,7 @@
   "towns": [
    "Albany"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024295 Albany STP. EPA records the plant as \"Albany STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024295 Albany STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382205,7 +382238,7 @@
   "towns": [
    "Ashland"
   ],
-  "notes": "EPA ICIS-NPDES: KY0022373 Ashland STP. EPA's overflow tables (2026-11-04 extract): 3 Kentucky report(s), 0 with evidence the discharge reached a water. 8 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Ashland STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0022373 Ashland STP. EPA's overflow tables (2026-11-04 extract): 3 Kentucky report(s), 0 with evidence the discharge reached a water. 8 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382239,7 +382272,7 @@
   "towns": [
    "Auburn"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021202 Auburn WWTP. EPA records the plant as \"Auburn WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021202 Auburn WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382250,34 +382283,35 @@
   ]
  },
  {
-  "id": "ky-city-of-bardstown-town-creek",
-  "name": "City of Bardstown Town Creek",
-  "short_name": "City of Bardstown Town Creek",
+  "id": "ky-city-of-bardstown",
+  "name": "City of Bardstown",
+  "short_name": "City of Bardstown",
   "legal_form": "city",
   "state": "KY",
   "kind": "plant",
   "npdes_permit": "KY0021237",
   "npdes_permits": [
-   "KY0021237"
+   "KY0021237",
+   "KY0104027"
   ],
   "receiving_waters": [
-   "TOWN CRK & ROWAN CRK JUNCTION"
+   "TOWN CRK & ROWAN CRK JUNCTION",
+   "Beech Fork River"
   ],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
   "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Bardstown",
-   "Bardstown Town Creek"
+   "Bardstown"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021237 Bardstown Town Creek WWTP. EPA records the plant as \"Bardstown Town Creek WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021237 Bardstown Town Creek WWTP; KY0104027. EPA records this plant under the name it carries and types its owner a municipality at Bardstown; filed under the City of Bardstown with its Town Creek plant. The permit's owner of record was not read.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
-   "ky-city-of-bardstown-town-creek"
+   "ky-city-of-bardstown"
   ],
   "source_areas": [
    "ky"
@@ -382339,7 +382373,7 @@
   "towns": [
    "Barlow"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025747 Barlow STP. EPA records the plant as \"Barlow STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025747 Barlow STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382372,7 +382406,7 @@
   "towns": [
    "Beattyville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021121 Beattyville STP. EPA records the plant as \"Beattyville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021121 Beattyville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382438,45 +382472,11 @@
   "towns": [
    "Bedford"
   ],
-  "notes": "EPA ICIS-NPDES: KY0069825 Bedford STP. EPA records the plant as \"Bedford STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0069825 Bedford STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-bedford"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-bee-creek",
-  "name": "City of Bee Creek",
-  "short_name": "City of Bee Creek",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0072761",
-  "npdes_permits": [
-   "KY0072761"
-  ],
-  "receiving_waters": [
-   "Bee Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Murray",
-   "Bee Creek"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0072761 Bee Creek WWTP. EPA records the plant as \"Bee Creek WWTP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-bee-creek"
   ],
   "source_areas": [
    "ky"
@@ -382505,7 +382505,7 @@
   "towns": [
    "Benham"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025755 Benham STP. EPA records the plant as \"Benham STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025755 Benham STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382538,7 +382538,7 @@
   "towns": [
    "Benton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021172 Benton STP. EPA records the plant as \"Benton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021172 Benton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382605,7 +382605,7 @@
   "towns": [
    "Booneville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0033774 Booneville STP. EPA records the plant as \"Booneville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0033774 Booneville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382638,7 +382638,7 @@
   "towns": [
    "Bradfordsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0090719 Bradfordsville STP. EPA records the plant as \"Bradfordsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0090719 Bradfordsville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382672,7 +382672,7 @@
   "towns": [
    "Brandenburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021474 Brandenburg STP. EPA records the plant as \"Brandenburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021474 Brandenburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382705,7 +382705,7 @@
   "towns": [
    "Brodhead"
   ],
-  "notes": "EPA ICIS-NPDES: KY0047431 Brodhead WWTP. EPA records the plant as \"Brodhead WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0047431 Brodhead WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382738,7 +382738,7 @@
   "towns": [
    "Burkesville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0036854 Burkesville WWTP. EPA records the plant as \"Burkesville WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0036854 Burkesville WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382804,7 +382804,7 @@
   "towns": [
    "Butler"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021041 Butler STP. EPA records the plant as \"Butler STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021041 Butler STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382837,7 +382837,7 @@
   "towns": [
    "Cadiz"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026891 Cadiz STP. EPA records the plant as \"Cadiz STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026891 Cadiz STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382870,7 +382870,7 @@
   "towns": [
    "Calhoun"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020125 Calhoun WWTP. EPA records the plant as \"Calhoun WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020125 Calhoun WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382903,7 +382903,7 @@
   "towns": [
    "Calvert City"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021130 Calvert City STP. EPA records the plant as \"Calvert City STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021130 Calvert City STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -382969,7 +382969,7 @@
   "towns": [
    "Caneyville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0072044 Caneyville STP. EPA records the plant as \"Caneyville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0072044 Caneyville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383002,7 +383002,7 @@
   "towns": [
    "Carlisle"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020923 Carlisle STP. EPA records the plant as \"Carlisle STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020923 Carlisle STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383035,7 +383035,7 @@
   "towns": [
    "Carrollton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0104931 Carrollton Regional WWTP. EPA records the plant as \"Carrollton Regional WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0104931 Carrollton Regional WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383069,7 +383069,7 @@
   "towns": [
    "Catlettsburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0035467 Catlettsburg STP. 1 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Catlettsburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0035467 Catlettsburg STP. 1 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383136,7 +383136,7 @@
   "towns": [
    "Clarkson"
   ],
-  "notes": "EPA ICIS-NPDES: KY0090590 Clarkson STP. EPA records the plant as \"Clarkson STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0090590 Clarkson STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383169,7 +383169,7 @@
   "towns": [
    "Clay"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028096 Clay STP. EPA records the plant as \"Clay STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028096 Clay STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383236,7 +383236,7 @@
   "towns": [
    "Clinton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025275 Clinton STP. EPA records the plant as \"Clinton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025275 Clinton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383269,7 +383269,7 @@
   "towns": [
    "Cloverport"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026701 Cloverport STP. EPA records the plant as \"Cloverport STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026701 Cloverport STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383302,7 +383302,7 @@
   "towns": [
    "Corinth"
   ],
-  "notes": "EPA ICIS-NPDES: KY0098027 Corinth STP. EPA records the plant as \"Corinth STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0098027 Corinth STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383369,7 +383369,7 @@
   "towns": [
    "Crab Orchard"
   ],
-  "notes": "EPA ICIS-NPDES: KY0065897 Crab Orchard STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. EPA records the plant as \"Crab Orchard STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0065897 Crab Orchard STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383402,7 +383402,7 @@
   "towns": [
    "Cumberland"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021571 Cumberland STP. EPA records the plant as \"Cumberland STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021571 Cumberland STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383435,7 +383435,7 @@
   "towns": [
    "Cynthiana"
   ],
-  "notes": "EPA ICIS-NPDES: KY0105856 Cynthiana STP New. EPA records the plant as \"Cynthiana STP New\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0105856 Cynthiana STP New. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383468,7 +383468,7 @@
   "towns": [
    "Danville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0057193 Danville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant as \"Danville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0057193 Danville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383501,7 +383501,7 @@
   "towns": [
    "Dawson Springs"
   ],
-  "notes": "EPA ICIS-NPDES: KY0023868 Dawson Springs STP. EPA records the plant as \"Dawson Springs STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0023868 Dawson Springs STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383534,7 +383534,7 @@
   "towns": [
    "Drakesboro"
   ],
-  "notes": "EPA ICIS-NPDES: KY0066575 Drakesboro STP. EPA records the plant as \"Drakesboro STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0066575 Drakesboro STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383635,7 +383635,7 @@
   "towns": [
    "Eddyville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027979 Eddyville STP. EPA records the plant as \"Eddyville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027979 Eddyville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383668,7 +383668,7 @@
   "towns": [
    "Edmonton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028100 Edmonton STP. EPA records the plant as \"Edmonton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028100 Edmonton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383679,9 +383679,9 @@
   ]
  },
  {
-  "id": "ky-city-of-elizabethtown-valley-creek",
-  "name": "City of Elizabethtown Valley Creek",
-  "short_name": "City of Elizabethtown Valley Creek",
+  "id": "ky-city-of-elizabethtown",
+  "name": "City of Elizabethtown",
+  "short_name": "City of Elizabethtown",
   "legal_form": "city",
   "state": "KY",
   "kind": "plant",
@@ -383699,14 +383699,13 @@
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Elizabethtown",
-   "Elizabethtown Valley Creek"
+   "Elizabethtown"
   ],
-  "notes": "EPA ICIS-NPDES: KY0022039 Elizabethtown Valley Creek WWTP. EPA records the plant as \"Elizabethtown Valley Creek WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0022039 Elizabethtown Valley Creek WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
-   "ky-city-of-elizabethtown-valley-creek"
+   "ky-city-of-elizabethtown"
   ],
   "source_areas": [
    "ky"
@@ -383735,7 +383734,7 @@
   "towns": [
    "Elkhorn City"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020958 Elkhorn City STP. EPA records the plant as \"Elkhorn City STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020958 Elkhorn City STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383768,7 +383767,7 @@
   "towns": [
    "Elkton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0023442 Elkton STP. EPA records the plant as \"Elkton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0023442 Elkton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383801,7 +383800,7 @@
   "towns": [
    "Eminence"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026883 Eminence STP. EPA records the plant as \"Eminence STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026883 Eminence STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383870,7 +383869,7 @@
   "towns": [
    "Falmouth"
   ],
-  "notes": "EPA ICIS-NPDES: KY0106267 Falmouth STP New. EPA records the plant as \"Falmouth STP New\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0106267 Falmouth STP New. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383916,8 +383915,8 @@
  },
  {
   "id": "ky-city-of-fleming-neon",
-  "name": "City of Fleming Neon",
-  "short_name": "City of Fleming Neon",
+  "name": "City of Fleming-Neon",
+  "short_name": "City of Fleming-Neon",
   "legal_form": "city",
   "state": "KY",
   "kind": "plant",
@@ -383936,9 +383935,9 @@
   "notification_signup_url": null,
   "towns": [
    "Fleming-neon",
-   "Fleming Neon"
+   "Fleming-Neon"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027405 Fleming Neon STP. EPA records the plant as \"Fleming Neon STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027405 Fleming Neon STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -383971,7 +383970,7 @@
   "towns": [
    "Flemingsburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021229 Flemingsburg STP. EPA records the plant as \"Flemingsburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021229 Flemingsburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384035,44 +384034,11 @@
   "towns": [
    "Fordsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0054801 Fordsville STP. EPA records the plant as \"Fordsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0054801 Fordsville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-fordsville"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-fort-knox",
-  "name": "City of Fort Knox",
-  "short_name": "City of Fort Knox",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0112721",
-  "npdes_permits": [
-   "KY0112721"
-  ],
-  "receiving_waters": [
-   "UT to Mill Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Fort Knox"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0112721 Fort Knox WWTP. EPA records the plant as \"Fort Knox WWTP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-fort-knox"
   ],
   "source_areas": [
    "ky"
@@ -384139,7 +384105,7 @@
   "towns": [
    "Franklin"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027456 Franklin STP. EPA records the plant as \"Franklin STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027456 Franklin STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384205,7 +384171,7 @@
   "towns": [
    "Frenchburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0040584 Frenchburg STP. EPA records the plant as \"Frenchburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0040584 Frenchburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384238,7 +384204,7 @@
   "towns": [
    "Fulton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026913 Fulton STP. EPA records the plant as \"Fulton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026913 Fulton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384271,45 +384237,11 @@
   "towns": [
    "Gamaliel"
   ],
-  "notes": "EPA ICIS-NPDES: KY0095257 Gamaliel STP. EPA records the plant as \"Gamaliel STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0095257 Gamaliel STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-gamaliel"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-golden-acres",
-  "name": "City of Golden Acres",
-  "short_name": "City of Golden Acres",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0044164",
-  "npdes_permits": [
-   "KY0044164"
-  ],
-  "receiving_waters": [
-   "UT to Clarks River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Sharpe",
-   "Golden Acres"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0044164 Golden Acres WWTF. EPA records the plant as \"Golden Acres WWTF\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-golden-acres"
   ],
   "source_areas": [
    "ky"
@@ -384338,45 +384270,11 @@
   "towns": [
    "Grand Rivers"
   ],
-  "notes": "EPA ICIS-NPDES: KY0110795 Grand Rivers WWTP. EPA records the plant as \"Grand Rivers WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0110795 Grand Rivers WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-grand-rivers"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-great-oaks",
-  "name": "City of Great Oaks",
-  "short_name": "City of Great Oaks",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0080845",
-  "npdes_permits": [
-   "KY0080845"
-  ],
-  "receiving_waters": [
-   "Blizzard Pond Drainage Canal"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Paducah",
-   "Great Oaks"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0080845 Great Oaks WWTF. EPA records the plant as \"Great Oaks WWTF\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-great-oaks"
   ],
   "source_areas": [
    "ky"
@@ -384405,7 +384303,7 @@
   "towns": [
    "Greensburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0023841 Greensburg STP. EPA records the plant as \"Greensburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0023841 Greensburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384472,7 +384370,7 @@
   "towns": [
    "Guthrie"
   ],
-  "notes": "EPA ICIS-NPDES: KY0063649 Guthrie STP. EPA records the plant as \"Guthrie STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0063649 Guthrie STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384538,7 +384436,7 @@
   "towns": [
    "Hardin"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021016 Hardin STP. EPA records the plant as \"Hardin STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021016 Hardin STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384571,7 +384469,7 @@
   "towns": [
    "Hardinsburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028363 Hardinsburg STP. EPA records the plant as \"Hardinsburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028363 Hardinsburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384606,7 +384504,7 @@
    "Loyall",
    "Harlan"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026093 Harlan STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. 1 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Harlan STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026093 Harlan STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. 1 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384640,7 +384538,7 @@
   "towns": [
    "Harrodsburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027421 Harrodsburg STP. EPA records the plant as \"Harrodsburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027421 Harrodsburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384706,7 +384604,7 @@
   "towns": [
    "Hawesville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020087 Hawesville STP. EPA records the plant as \"Hawesville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020087 Hawesville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384750,9 +384648,9 @@
   ]
  },
  {
-  "id": "ky-city-of-hickman-east",
-  "name": "City of Hickman East",
-  "short_name": "City of Hickman East",
+  "id": "ky-city-of-hickman",
+  "name": "City of Hickman",
+  "short_name": "City of Hickman",
   "legal_form": "city",
   "state": "KY",
   "kind": "plant",
@@ -384770,14 +384668,13 @@
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Hickman",
-   "Hickman East"
+   "Hickman"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028436 Hickman East STP. EPA records the plant as \"Hickman East STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028436 Hickman East STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
-   "ky-city-of-hickman-east"
+   "ky-city-of-hickman"
   ],
   "source_areas": [
    "ky"
@@ -384839,7 +384736,7 @@
   "towns": [
    "Hindman"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027685 Hindman STP. EPA records the plant as \"Hindman STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027685 Hindman STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384872,7 +384769,7 @@
   "towns": [
    "Hodgenville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026379 Hodgenville STP. EPA records the plant as \"Hodgenville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026379 Hodgenville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384905,7 +384802,7 @@
   "towns": [
    "Hyden"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021245 Hyden STP. EPA records the plant as \"Hyden STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021245 Hyden STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384938,7 +384835,7 @@
   "towns": [
    "Irvington"
   ],
-  "notes": "EPA ICIS-NPDES: KY0092436 Irvington STP. EPA records the plant as \"Irvington STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0092436 Irvington STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -384971,7 +384868,7 @@
   "towns": [
    "Island"
   ],
-  "notes": "EPA ICIS-NPDES: KY0066605 Island STP. EPA records the plant as \"Island STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0066605 Island STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385004,7 +384901,7 @@
   "towns": [
    "Jackson"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021288 Jackson STP. EPA records the plant as \"Jackson STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021288 Jackson STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385037,45 +384934,11 @@
   "towns": [
    "Jenkins"
   ],
-  "notes": "EPA ICIS-NPDES: KY0038571 Jenkins STP. EPA records the plant as \"Jenkins STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0038571 Jenkins STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-jenkins"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-jerry-l-riley",
-  "name": "City of Jerry L Riley",
-  "short_name": "City of Jerry L Riley",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0104027",
-  "npdes_permits": [
-   "KY0104027"
-  ],
-  "receiving_waters": [
-   "Beech Fork River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Bardstown",
-   "Jerry L Riley"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0104027 Jerry L Riley STP. EPA records the plant as \"Jerry L Riley STP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-jerry-l-riley"
   ],
   "source_areas": [
    "ky"
@@ -385104,7 +384967,7 @@
   "towns": [
    "Kevil"
   ],
-  "notes": "EPA ICIS-NPDES: KY0033791 Kevil STP. EPA records the plant as \"Kevil STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0033791 Kevil STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385137,7 +385000,7 @@
   "towns": [
    "Kuttawa"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020419 Kuttawa STP. EPA records the plant as \"Kuttawa STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020419 Kuttawa STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385170,7 +385033,7 @@
   "towns": [
    "La Center"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020893 La Center WWTP. EPA records the plant as \"La Center WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020893 La Center WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385203,7 +385066,7 @@
   "towns": [
    "Lancaster"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020974 Lancaster WWTP. EPA records the plant as \"Lancaster WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020974 Lancaster WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385236,7 +385099,7 @@
   "towns": [
    "Lawrenceburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021067 Lawrenceburg STP. EPA records the plant as \"Lawrenceburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021067 Lawrenceburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385269,7 +385132,7 @@
   "towns": [
    "Lebanon"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026549 Lebanon STP. EPA records the plant as \"Lebanon STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026549 Lebanon STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385302,7 +385165,7 @@
   "towns": [
    "Lebanon Junction"
   ],
-  "notes": "EPA ICIS-NPDES: KY0104043 Lebanon Junction STP. EPA records the plant as \"Lebanon Junction STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0104043 Lebanon Junction STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385335,7 +385198,7 @@
   "towns": [
    "Leitchfield"
   ],
-  "notes": "EPA ICIS-NPDES: KY0022934 Leitchfield STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant as \"Leitchfield STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0022934 Leitchfield STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385368,7 +385231,7 @@
   "towns": [
    "Lewisburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024881 Lewisburg WWTP. EPA records the plant as \"Lewisburg WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024881 Lewisburg WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385401,7 +385264,7 @@
   "towns": [
    "Lewisport"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025241 Lewisport STP. EPA records the plant as \"Lewisport STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025241 Lewisport STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385434,7 +385297,7 @@
   "towns": [
    "Liberty"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026352 Liberty STP. EPA records the plant as \"Liberty STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026352 Liberty STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385467,7 +385330,7 @@
   "towns": [
    "Livermore"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020613 Livermore STP. EPA records the plant as \"Livermore STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020613 Livermore STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385500,7 +385363,7 @@
   "towns": [
    "Livingston"
   ],
-  "notes": "EPA ICIS-NPDES: KY0040703 Livingston STP. EPA records the plant as \"Livingston STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0040703 Livingston STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385566,7 +385429,7 @@
   "towns": [
    "Louisa"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027961 Louisa STP. EPA records the plant as \"Louisa STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027961 Louisa STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385600,7 +385463,7 @@
   "towns": [
    "Loyall"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026115 Loyall STP. 2 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Loyall STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026115 Loyall STP. 2 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385634,7 +385497,7 @@
   "towns": [
    "Lynch"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024279 Lynch STP. EPA records the plant as \"Lynch STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024279 Lynch STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385667,7 +385530,7 @@
   "towns": [
    "Madisonville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0098043 Madisonville STP West Side. EPA records the plant as \"Madisonville STP West Side\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0098043 Madisonville STP West Side. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385700,7 +385563,7 @@
   "towns": [
    "Manchester"
   ],
-  "notes": "EPA ICIS-NPDES: KY0029122 Manchester STP. EPA records the plant as \"Manchester STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0029122 Manchester STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385733,7 +385596,7 @@
   "towns": [
    "Martin"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026921 Martin STP. EPA records the plant as \"Martin STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026921 Martin STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385767,7 +385630,7 @@
   "towns": [
    "Maysville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020257 Maysville STP. 14 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Maysville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020257 Maysville STP. 14 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385802,44 +385665,11 @@
    "Mckee",
    "McKee"
   ],
-  "notes": "EPA ICIS-NPDES: KY0034444 McKee STP. EPA records the plant as \"McKee STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0034444 McKee STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-mckee"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-middlesboro",
-  "name": "City of Middlesboro",
-  "short_name": "City of Middlesboro",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "sso",
-  "npdes_permit": "KY0072885",
-  "npdes_permits": [
-   "KY0072885"
-  ],
-  "receiving_waters": [
-   "Yellow Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
-  "notification_signup_url": null,
-  "towns": [
-   "Middlesboro"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0072885 Middlesboro STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. EPA records the plant as \"Middlesboro STP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-middlesboro"
   ],
   "source_areas": [
    "ky"
@@ -385868,7 +385698,7 @@
   "towns": [
    "Midway"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028410 Midway STP. EPA records the plant as \"Midway STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028410 Midway STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385901,7 +385731,7 @@
   "towns": [
    "Milton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0088625 Milton STP. EPA records the plant as \"Milton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0088625 Milton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385934,7 +385764,7 @@
   "towns": [
    "Monticello"
   ],
-  "notes": "EPA ICIS-NPDES: KY0033847 Monticello STP. EPA records the plant as \"Monticello STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0033847 Monticello STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -385968,7 +385798,7 @@
   "towns": [
    "Morganfield"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021440 Morganfield WWTP. 2 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Morganfield WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021440 Morganfield WWTP. 2 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386035,7 +385865,7 @@
   "towns": [
    "Mount Olivet"
   ],
-  "notes": "EPA ICIS-NPDES: KY0104299 Mount Olivet STP. EPA records the plant as \"Mount Olivet STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0104299 Mount Olivet STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386068,7 +385898,7 @@
   "towns": [
    "Mount Vernon"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024694 Mount Vernon STP. EPA records the plant as \"Mount Vernon STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024694 Mount Vernon STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386101,45 +385931,11 @@
   "towns": [
    "Mount Washington"
   ],
-  "notes": "EPA ICIS-NPDES: KY0033804 Mount Washington STP. EPA records the plant as \"Mount Washington STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0033804 Mount Washington STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-mount-washington"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-muddy-creek",
-  "name": "City of Muddy Creek",
-  "short_name": "City of Muddy Creek",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0111449",
-  "npdes_permits": [
-   "KY0111449"
-  ],
-  "receiving_waters": [
-   "Muddy Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Richmond",
-   "Muddy Creek"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0111449 Muddy Creek WWTP. EPA records the plant as \"Muddy Creek WWTP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-muddy-creek"
   ],
   "source_areas": [
    "ky"
@@ -386201,7 +385997,7 @@
   "towns": [
    "Munfordville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0031755 Munfordville STP. EPA records the plant as \"Munfordville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0031755 Munfordville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386234,7 +386030,7 @@
   "towns": [
    "New Castle"
   ],
-  "notes": "EPA ICIS-NPDES: KY0031828 New Castle STP. EPA records the plant as \"New Castle STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0031828 New Castle STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386267,45 +386063,11 @@
   "towns": [
    "New Haven"
   ],
-  "notes": "EPA ICIS-NPDES: KY0034126 New Haven STP. EPA records the plant as \"New Haven STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0034126 New Haven STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-new-haven"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-new-marion",
-  "name": "City of New Marion",
-  "short_name": "City of New Marion",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0113247",
-  "npdes_permits": [
-   "KY0113247"
-  ],
-  "receiving_waters": [
-   "Rush Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Marion",
-   "New Marion"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0113247 New Marion WWTP. EPA records the plant as \"New Marion WWTP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-new-marion"
   ],
   "source_areas": [
    "ky"
@@ -386367,7 +386129,7 @@
   "towns": [
    "Olive Hill"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025925 Olive Hill STP. EPA records the plant as \"Olive Hill STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025925 Olive Hill STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386400,7 +386162,7 @@
   "towns": [
    "Owingsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024287 Owingsville STP. EPA records the plant as \"Owingsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024287 Owingsville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386433,7 +386195,7 @@
   "towns": [
    "Paris"
   ],
-  "notes": "EPA ICIS-NPDES: KY0090654 Paris STP. EPA records the plant as \"Paris STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0090654 Paris STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386466,7 +386228,7 @@
   "towns": [
    "Perryville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028355 Perryville STP. EPA records the plant as \"Perryville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028355 Perryville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386501,7 +386263,7 @@
   "towns": [
    "Pikeville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025291 Pikeville WWTP. EPA records the plant as \"Pikeville WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025291 Pikeville WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386535,7 +386297,7 @@
   "towns": [
    "Pineville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024058 Pineville STP. 2 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant as \"Pineville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024058 Pineville STP. 2 open combined sewer outfall(s) in EPA's national CSO inventory. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386708,7 +386470,7 @@
   "towns": [
    "Providence"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021296 Providence WWTP. EPA records the plant as \"Providence WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021296 Providence WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386784,40 +386546,6 @@
   ]
  },
  {
-  "id": "ky-city-of-russell-county",
-  "name": "City of Russell County",
-  "short_name": "City of Russell County",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0062995",
-  "npdes_permits": [
-   "KY0062995"
-  ],
-  "receiving_waters": [
-   "Lake Cumberland"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Jamestown",
-   "Russell County"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0062995 Russell County Regional STP. EPA records the plant as \"Russell County Regional STP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-russell-county"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
   "id": "ky-city-of-russell-springs",
   "name": "City of Russell Springs",
   "short_name": "City of Russell Springs",
@@ -386871,7 +386599,7 @@
   "towns": [
    "Russellville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020877 Russellville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. EPA records the plant as \"Russellville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020877 Russellville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386904,7 +386632,7 @@
   "towns": [
    "Sacramento"
   ],
-  "notes": "EPA ICIS-NPDES: KY0091731 Sacramento STP. EPA records the plant as \"Sacramento STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0091731 Sacramento STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386937,7 +386665,7 @@
   "towns": [
    "Salem"
   ],
-  "notes": "EPA ICIS-NPDES: KY0066541 Salem STP. EPA records the plant as \"Salem STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0066541 Salem STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -386970,7 +386698,7 @@
   "towns": [
    "Sandy Hook"
   ],
-  "notes": "EPA ICIS-NPDES: KY0052264 Sandy Hook STP. EPA records the plant as \"Sandy Hook STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0052264 Sandy Hook STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387003,7 +386731,7 @@
   "towns": [
    "Science Hill"
   ],
-  "notes": "EPA ICIS-NPDES: KY0094447 Science Hill STP. EPA records the plant as \"Science Hill STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0094447 Science Hill STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387036,7 +386764,7 @@
   "towns": [
    "Scottsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024783 Scottsville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant as \"Scottsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024783 Scottsville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387137,7 +386865,7 @@
   "towns": [
    "Shepherdsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0027359 Shepherdsville STP. EPA records the plant as \"Shepherdsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0027359 Shepherdsville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387170,7 +386898,7 @@
   "towns": [
    "Simpsonville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0065889 Simpsonville STP. EPA records the plant as \"Simpsonville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0065889 Simpsonville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387203,7 +386931,7 @@
   "towns": [
    "Smithland"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025836 Smithland STP. EPA records the plant as \"Smithland STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025836 Smithland STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387236,45 +386964,11 @@
   "towns": [
    "Somerset"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026611 Somerset STP. EPA records the plant as \"Somerset STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026611 Somerset STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
    "ky-city-of-somerset"
-  ],
-  "source_areas": [
-   "ky"
-  ]
- },
- {
-  "id": "ky-city-of-south-hopkins",
-  "name": "City of South Hopkins",
-  "short_name": "City of South Hopkins",
-  "legal_form": "city",
-  "state": "KY",
-  "kind": "plant",
-  "npdes_permit": "KY0066583",
-  "npdes_permits": [
-   "KY0066583"
-  ],
-  "receiving_waters": [
-   "UT of Drakes Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Nortonville",
-   "South Hopkins"
-  ],
-  "notes": "EPA ICIS-NPDES: KY0066583 South Hopkins Regional WWTP. EPA records the plant as \"South Hopkins Regional WWTP\" and types its owner a municipality: filed under the city.",
-  "verified": "fetched",
-  "checked": "2026-11-07",
-  "aliases": [
-   "ky-city-of-south-hopkins"
   ],
   "source_areas": [
    "ky"
@@ -387303,7 +386997,7 @@
   "towns": [
    "South Shore"
   ],
-  "notes": "EPA ICIS-NPDES: KY0026131 South Shore STP. EPA records the plant as \"South Shore STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0026131 South Shore STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387369,7 +387063,7 @@
   "towns": [
    "Sturgis"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025895 Sturgis STP. EPA records the plant as \"Sturgis STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025895 Sturgis STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387402,7 +387096,7 @@
   "towns": [
    "Taylorsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028142 Taylorsville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant as \"Taylorsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028142 Taylorsville STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387435,7 +387129,7 @@
   "towns": [
    "Tompkinsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020702 Tompkinsville STP. EPA records the plant as \"Tompkinsville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020702 Tompkinsville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387468,7 +387162,7 @@
   "towns": [
    "Trenton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020982 Trenton STP. EPA records the plant as \"Trenton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020982 Trenton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387501,7 +387195,7 @@
   "towns": [
    "Uniontown"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025844 Uniontown STP. EPA records the plant as \"Uniontown STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025844 Uniontown STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387534,7 +387228,7 @@
   "towns": [
    "Vanceburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0021512 Vanceburg STP. EPA records the plant as \"Vanceburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0021512 Vanceburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387568,7 +387262,7 @@
   "towns": [
    "Versailles"
   ],
-  "notes": "EPA ICIS-NPDES: KY0020621 Versailles STP. EPA records the plant as \"Versailles STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0020621 Versailles STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387601,7 +387295,7 @@
   "towns": [
    "Vine Grove"
   ],
-  "notes": "EPA ICIS-NPDES: KY0024988 Vine Grove STP. EPA records the plant as \"Vine Grove STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0024988 Vine Grove STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387634,7 +387328,7 @@
   "towns": [
    "Walton"
   ],
-  "notes": "EPA ICIS-NPDES: KY0039756 Walton STP. EPA records the plant as \"Walton STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0039756 Walton STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387667,7 +387361,7 @@
   "towns": [
    "Warsaw"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028118 Warsaw STP. EPA records the plant as \"Warsaw STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028118 Warsaw STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387733,7 +387427,7 @@
   "towns": [
    "West Liberty"
   ],
-  "notes": "EPA ICIS-NPDES: KY0089567 West Liberty STP. EPA records the plant as \"West Liberty STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0089567 West Liberty STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387766,7 +387460,7 @@
   "towns": [
    "West Point"
   ],
-  "notes": "EPA ICIS-NPDES: KY0022152 West Point STP. EPA records the plant as \"West Point STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0022152 West Point STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387832,7 +387526,7 @@
   "towns": [
    "Whitesburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0106283 Whitesburg STP New. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant as \"Whitesburg STP New\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0106283 Whitesburg STP New. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 1 with evidence the discharge reached a water. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387865,7 +387559,7 @@
   "towns": [
    "Whitesville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0054941 Whitesville STP. EPA records the plant as \"Whitesville STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0054941 Whitesville STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387898,7 +387592,7 @@
   "towns": [
    "Wickliffe"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025933 Wickliffe STP. EPA records the plant as \"Wickliffe STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025933 Wickliffe STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387931,7 +387625,7 @@
   "towns": [
    "Williamsburg"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028347 Williamsburg STP. EPA records the plant as \"Williamsburg STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028347 Williamsburg STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387964,7 +387658,7 @@
   "towns": [
    "Williamstown"
   ],
-  "notes": "EPA ICIS-NPDES: KY0109991 Williamstown Regional WRF. EPA records the plant as \"Williamstown Regional WRF\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0109991 Williamstown Regional WRF. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -387997,7 +387691,7 @@
   "towns": [
    "Wilmore"
   ],
-  "notes": "EPA ICIS-NPDES: KY0028428 Wilmore STP. EPA records the plant as \"Wilmore STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0028428 Wilmore STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -388030,7 +387724,7 @@
   "towns": [
    "Wingo"
   ],
-  "notes": "EPA ICIS-NPDES: KY0025852 Wingo STP. EPA records the plant as \"Wingo STP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0025852 Wingo STP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -388063,7 +387757,7 @@
   "towns": [
    "Worthington"
   ],
-  "notes": "EPA ICIS-NPDES: KY0022926 Worthington WWTP. EPA records the plant as \"Worthington WWTP\" and types its owner a municipality: filed under the city.",
+  "notes": "EPA ICIS-NPDES: KY0022926 Worthington WWTP. EPA records the plant under the city's name and types its owner a municipality: filed under the city (an incorporated place in the Census Bureau's list).",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -388766,6 +388460,39 @@
   ]
  },
  {
+  "id": "ky-fort-knox",
+  "name": "U.S. Army, Fort Knox",
+  "short_name": "Fort Knox",
+  "legal_form": "federal facility",
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0112721",
+  "npdes_permits": [
+   "KY0112721"
+  ],
+  "receiving_waters": [
+   "UT to Mill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Knox"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0112721 Fort Knox WWTP. The plant of Fort Knox, a U.S. Army installation (not an incorporated place); EPA types its owner a municipality. The permit's owner of record was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-fort-knox"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
   "id": "ky-garrison-regional-wwtp",
   "name": "Garrison Regional WWTP",
   "short_name": "Garrison Regional WWTP",
@@ -388904,6 +388631,39 @@
   ]
  },
  {
+  "id": "ky-golden-acres-wwtf",
+  "name": "Golden Acres WWTF",
+  "short_name": "Golden Acres WWTF",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0044164",
+  "npdes_permits": [
+   "KY0044164"
+  ],
+  "receiving_waters": [
+   "UT to Clarks River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sharpe"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0044164 Golden Acres WWTF. EPA records the permittee as the plant (\"Golden Acres WWTF\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-golden-acres-wwtf"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
   "id": "ky-grant-county-stp",
   "name": "Grant County STP",
   "short_name": "Grant County STP",
@@ -388964,6 +388724,39 @@
   "checked": "2026-11-07",
   "aliases": [
    "ky-grayson-stp"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
+  "id": "ky-great-oaks-wwtf",
+  "name": "Great Oaks WWTF",
+  "short_name": "Great Oaks WWTF",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0080845",
+  "npdes_permits": [
+   "KY0080845"
+  ],
+  "receiving_waters": [
+   "Blizzard Pond Drainage Canal"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Paducah"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0080845 Great Oaks WWTF. EPA records the permittee as the plant (\"Great Oaks WWTF\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-great-oaks-wwtf"
   ],
   "source_areas": [
    "ky"
@@ -390144,7 +389937,7 @@
    "Prospect",
    "Shepherdsville"
   ],
-  "notes": "EPA ICIS-NPDES: KY0022411 Morris Forman WQTC MSD; KY0022420 Hite Creek WQTC MSD; KY0029106 Hunting Creek N WQTC MSD; KY0034151 Louisville and Jefferson County MSD; KY0034177 Louisville and Jefferson County MSD; KY0034185; KY0034801 Louisville and Jefferson County MSD; KY0036501 Berrytown WQTC MSD; KY0040126 Louisville and Jefferson County MSD; KY0044261 Glenview Bluff WQTC MSD; KY0054674 Louisville and Jefferson County MSD; KY0060577 Louisville and Jefferson County MSD; KY0072168 Louisville and Jefferson County MSD; KY0076813 Louisville and Jefferson County MSD; KY0078956 Derek R Guthrie WQTC MSD; KY0094307 Louisville and Jefferson County MSD; KY0098540 Cedar Creek WQTC MSD; KY0102784 Floyds Fork WQTC MSD; KY0103900 Louisville and Jefferson County MSD; KY0106143 Louisville and Jefferson County MSD; KY0111716 Louisville and Jefferson County MSD. EPA's overflow tables (2026-11-04 extract): 6 Kentucky report(s), 6 with evidence the discharge reached a water. 121 open combined sewer outfall(s) in EPA's national CSO inventory. A metropolitan sewer district (KRS Chapter 76). KY0022411 is the Morris Forman Water Quality Treatment Center and the combined sewer system (121 open combined sewer outfalls in EPA's inventory, 120 in the Division of Water's layer). KY0034185 is filed here because its report in EPA's tables is in MSD's work-order format and names MSD's crews (Hillview); the permit's own record was not read.",
+  "notes": "EPA ICIS-NPDES: KY0022411; KY0022420 Hite Creek WQTC MSD; KY0029106; KY0034151 Louisville and Jefferson County MSD; KY0034177 Louisville and Jefferson County MSD; KY0034185; KY0034801 Louisville and Jefferson County MSD; KY0036501 Berrytown WQTC MSD; KY0040126 Louisville and Jefferson County MSD; KY0044261 Glenview Bluff WQTC MSD; KY0054674 Louisville and Jefferson County MSD; KY0060577 Louisville and Jefferson County MSD; KY0072168 Louisville and Jefferson County MSD; KY0076813 Louisville and Jefferson County MSD; KY0078956; KY0094307 Louisville and Jefferson County MSD; KY0098540 Cedar Creek WQTC MSD; KY0102784 Floyds Fork WQTC MSD; KY0103900 Louisville and Jefferson County MSD; KY0106143 Louisville and Jefferson County MSD; KY0111716 Louisville and Jefferson County MSD. EPA's overflow tables (2026-11-04 extract): 6 Kentucky report(s), 6 with evidence the discharge reached a water. 121 open combined sewer outfall(s) in EPA's national CSO inventory. A metropolitan sewer district (KRS Chapter 76). KY0022411 is MSD's main water quality treatment center and the combined sewer system (121 open combined sewer outfalls in EPA's inventory, 120 in the Division of Water's layer). KY0034185 is filed here because its report in EPA's tables is in MSD's work-order format (Hillview); the permit's own record was not read, so its owner is not confirmed.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "aliases": [
@@ -390498,6 +390291,39 @@
   ]
  },
  {
+  "id": "ky-middlesboro-stp",
+  "name": "Middlesboro STP",
+  "short_name": "Middlesboro STP",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "sso",
+  "npdes_permit": "KY0072885",
+  "npdes_permits": [
+   "KY0072885"
+  ],
+  "receiving_waters": [
+   "Yellow Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Middlesboro"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0072885 Middlesboro STP. EPA's overflow tables (2026-11-04 extract): 1 Kentucky report(s), 0 with evidence the discharge reached a water. EPA records the permittee as the plant (\"Middlesboro STP\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-middlesboro-stp"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
   "id": "ky-millstone-alternative-trmt-sys",
   "name": "Millstone Alternative Trmt Sys",
   "short_name": "Millstone Alternative Trmt Sys",
@@ -390691,6 +390517,72 @@
   "checked": "2026-11-07",
   "aliases": [
    "ky-mountain-water-district"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
+  "id": "ky-muddy-creek-wwtp",
+  "name": "Muddy Creek WWTP",
+  "short_name": "Muddy Creek WWTP",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0111449",
+  "npdes_permits": [
+   "KY0111449"
+  ],
+  "receiving_waters": [
+   "Muddy Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Richmond"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0111449 Muddy Creek WWTP. EPA records the permittee as the plant (\"Muddy Creek WWTP\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-muddy-creek-wwtp"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
+  "id": "ky-new-marion-wwtp",
+  "name": "New Marion WWTP",
+  "short_name": "New Marion WWTP",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0113247",
+  "npdes_permits": [
+   "KY0113247"
+  ],
+  "receiving_waters": [
+   "Rush Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Marion"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0113247 New Marion WWTP. EPA records the permittee as the plant (\"New Marion WWTP\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-new-marion-wwtp"
   ],
   "source_areas": [
    "ky"
@@ -391173,6 +391065,39 @@
   ]
  },
  {
+  "id": "ky-russell-county-regional-stp",
+  "name": "Russell County Regional STP",
+  "short_name": "Russell County Regional STP",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0062995",
+  "npdes_permits": [
+   "KY0062995"
+  ],
+  "receiving_waters": [
+   "Lake Cumberland"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Jamestown"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0062995 Russell County Regional STP. EPA records the permittee as the plant (\"Russell County Regional STP\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-russell-county-regional-stp"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
   "id": "ky-rwra",
   "name": "Regional Water Resource Agency (Owensboro)",
   "short_name": "RWRA",
@@ -391481,6 +391406,39 @@
   "checked": "2026-11-07",
   "aliases": [
    "ky-south-641-water-district"
+  ],
+  "source_areas": [
+   "ky"
+  ]
+ },
+ {
+  "id": "ky-south-hopkins-regional-wwtp",
+  "name": "South Hopkins Regional WWTP",
+  "short_name": "South Hopkins Regional WWTP",
+  "legal_form": null,
+  "state": "KY",
+  "kind": "plant",
+  "npdes_permit": "KY0066583",
+  "npdes_permits": [
+   "KY0066583"
+  ],
+  "receiving_waters": [
+   "UT of Drakes Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by telephone (the 24-hour environmental emergency line after hours) of a spill, bypass, upset or overflow that may present an imminent or substantial danger to public health or the environment, with the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)); the Division publishes no list of these reports. Kentucky's reporting system sent its reports to EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary) for December 2025 and January 2026 only. No duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Nortonville"
+  ],
+  "notes": "EPA ICIS-NPDES: KY0066583 South Hopkins Regional WWTP. EPA records the permittee as the plant (\"South Hopkins Regional WWTP\") and types the owner \"Municipality\"; the owner was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-07",
+  "aliases": [
+   "ky-south-hopkins-regional-wwtp"
   ],
   "source_areas": [
    "ky"

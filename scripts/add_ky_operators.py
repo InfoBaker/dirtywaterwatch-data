@@ -49,6 +49,7 @@ RESEARCH = ROOT / "research" / "ky" / "dischargers.json"
 CANDIDATES = ROOT / "research" / "ky" / "private-utilities-candidates.json"
 EVENTS = ROOT / "data" / "build" / "events" / "echo-sewer-overflow.json"
 DROPPED = ROOT / "data" / "build" / "echo-sewer-overflow-dropped.json"
+PLACES_FILE = ROOT / "data" / "reference" / "ky-census-places.json"
 CHECKED = "2026-11-07"
 ECHO = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 LAW = ("401 KAR 5:065 Section 2(5) requires the permittee to notify the Kentucky Division of Water immediately by "
@@ -75,10 +76,11 @@ SD1_CHANNEL = ("SD1's Wet Weather Overflow Notification Program (https://sd1.org
 OWNERS = {
     "KY0022411": ("ky-louisville-msd", "Louisville/Jefferson County Metropolitan Sewer District", "Louisville MSD",
                   "special district",
-                  "A metropolitan sewer district (KRS Chapter 76). KY0022411 is the Morris Forman Water Quality "
-                  "Treatment Center and the combined sewer system (121 open combined sewer outfalls in EPA's inventory, "
+                  "A metropolitan sewer district (KRS Chapter 76). KY0022411 is MSD's main water quality treatment "
+                  "center and the combined sewer system (121 open combined sewer outfalls in EPA's inventory, "
                   "120 in the Division of Water's layer). KY0034185 is filed here because its report in EPA's tables is "
-                  "in MSD's work-order format and names MSD's crews (Hillview); the permit's own record was not read."),
+                  "in MSD's work-order format (Hillview); the permit's own record was not read, so its owner is not "
+                  "confirmed."),
     "KY0022420": ("ky-louisville-msd", None, None, None, None),
     "KY0034185": ("ky-louisville-msd", None, None, None, None),
     "KY0021466": ("ky-sd1", "Sanitation District No. 1 of Northern Kentucky", "SD1", "special district",
@@ -116,6 +118,13 @@ OWNERS = {
                   "business or industrial",
                   "A general stormwater permit; its report in EPA's overflow tables (2025-12-08) names the company's "
                   "lift station and the company as responsible for the cleanup."),
+    "KY0104027": ("ky-city-of-bardstown", "City of Bardstown", "City of Bardstown", "city",
+                  "EPA records this plant under the name it carries and types its owner a municipality at Bardstown; "
+                  "filed under the City of Bardstown with its Town Creek plant. The permit's owner of record was not "
+                  "read."),
+    "KY0112721": ("ky-fort-knox", "U.S. Army, Fort Knox", "Fort Knox", "federal facility",
+                  "The plant of Fort Knox, a U.S. Army installation (not an incorporated place); EPA types its owner a "
+                  "municipality. The permit's owner of record was not read."),
     "KY0092118": ("ky-precoat-metals", "Precoat Metals", "Precoat Metals", "business or industrial",
                   "An industrial plant treating its own sewage (Hawesville); EPA types it privately owned."),
     "KY0112283": ("ky-mayslick-heritage-apartments", "Mayslick Heritage Apartments", "Mayslick Heritage Apartments",
@@ -191,6 +200,36 @@ def person(name: str) -> bool:
     return bool(name) and scrub_discharger({"discharger_name": name})["discharger_name"] == NAME_REMOVED
 
 
+_PLACES: dict[str, str] | None = None
+
+
+def places() -> dict[str, str]:
+    """compact name -> the Census spelling of each Kentucky incorporated place (data/reference/ky-census-places.json)."""
+    global _PLACES
+    if _PLACES is None:
+        doc = json.loads(PLACES_FILE.read_text())
+        _PLACES = {re.sub(r"[^a-z]", "", k.lower()): k for k in doc["places"]}
+    return _PLACES
+
+
+def place_prefix(town: str) -> str | None:
+    """The longest leading run of words of a plant's stem that is a Kentucky incorporated place ('Bardstown Town
+    Creek' -> 'Bardstown'), never for a county's name ('Russell County' is not the City of Russell); None otherwise
+    (review 2026-11-08 P2-5: an operator is never named after a plant)."""
+    if re.search(r"\bcounty\b|\bco\b", town, re.I):
+        return None
+    words = town.split()
+    for n in range(len(words), 0, -1):
+        hit = places().get(re.sub(r"[^a-z]", "", " ".join(words[:n]).lower()))
+        if hit:
+            return hit
+    return None
+
+
+# plants named after people: their names are not printed in an operator row's notes (review 2026-11-08 P2-5)
+PERSON_PLANT = re.compile(r"\b[A-Z][a-z]+ [A-Z]\.? [A-Z][a-z]+\b|\bMorris Forman\b", re.I)
+
+
 def default_owner(pn: str, ftype: str | None, cso_permit: bool = False) -> tuple[str, str, str | None, str | None]:
     """(id, name, legal form, note) for a plant EPA names: see the module docstring. A combined sewer permit's
     "<City> STP" is the city's (Kentucky's combined sewers are cities' old systems; research/ky/dischargers.json)."""
@@ -199,8 +238,8 @@ def default_owner(pn: str, ftype: str | None, cso_permit: bool = False) -> tuple
     t = ftype or ""
     if cso_permit and t != "Municipality":
         t = "Municipality"
-    if m:
-        city = smart_title(m.group(1))
+    if m and place_prefix(m.group(1)):
+        city = place_prefix(m.group(1))
         return f"ky-city-of-{slug(city)}", f"City of {city}", "city", None
     if DISTRICT.search(pn):
         name = smart_title(pn)
@@ -232,11 +271,12 @@ def default_owner(pn: str, ftype: str | None, cso_permit: bool = False) -> tuple
         return f"ky-{slug(name)}", name, "special district", "A public school district's plant."
     town = PLANT_WORDS.sub("", pn).strip(" -#0123456789")
     town = re.sub(r"\s+(New|#\s*\d+)$", "", town, flags=re.I).strip()
-    if t == "Municipality" and town and town != pn and not re.search(r"\d|subdivision|park|village|estates|camp|"
-                                                                      r"school|housing|industrial", town, re.I):
-        city = smart_title(town)
+    city = place_prefix(town) if t == "Municipality" and town and town != pn and not re.search(
+        r"\d|subdivision|park|village|estates|camp|school|housing|industrial", town, re.I) else None
+    if city:
         return (f"ky-city-of-{slug(city)}", f"City of {city}", "city",
-                f"EPA records the plant as \"{pn}\" and types its owner a municipality: filed under the city.")
+                "EPA records the plant under the city's name and types its owner a municipality: filed under the city "
+                "(an incorporated place in the Census Bureau's list).")
     name = smart_title(pn)
     return (f"ky-{slug(name)}", name, None,
             f"EPA records the permittee as the plant (\"{pn}\") and types the owner \"{t or 'not given'}\"; the owner "
@@ -346,7 +386,10 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
                                      if r.get("receiving_water_echo")]
                                     + [w for p in ps if p in cands for w in cands[p].get("receiving_waters_echo") or []]))[:10]
         open_cso = [r for r in crow if not str(r.get("outfall_status") or "").upper().startswith("CLS")]
-        facs = "; ".join(f"{p} {smart_title((plants.get(p) or [{}])[0].get('permit_name') or '')}".strip() for p in ps)
+        def fac(p):
+            n = smart_title((plants.get(p) or [{}])[0].get("permit_name") or "")
+            return p if PERSON_PLANT.search(n) else f"{p} {n}".strip()
+        facs = "; ".join(fac(p) for p in ps)
         note = f"EPA ICIS-NPDES: {facs}." if m["lf"] != "facility (permittee not named)" else f"EPA ICIS-NPDES: {ps[0]}."
         reports = sum(allr[p] for p in ps)
         if reports:

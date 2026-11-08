@@ -1,0 +1,1667 @@
+{
+ "source": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4 (Incorporated Places, STATE='21')",
+ "fetched": "2026-11-08",
+ "about": "Kentucky's incorporated places from the Census Bureau's TIGERweb Incorporated Places layer (census-designated places left out); read by scripts/add_ky_operators.py so an operator row is named 'City of X' only when X is an incorporated place.",
+ "places": {
+  "Adairville": {
+   "name": "Adairville city",
+   "geoid": "2100298"
+  },
+  "Albany": {
+   "name": "Albany city",
+   "geoid": "2100694"
+  },
+  "Alexandria": {
+   "name": "Alexandria city",
+   "geoid": "2100802"
+  },
+  "Allen": {
+   "name": "Allen city",
+   "geoid": "2100946"
+  },
+  "Anchorage": {
+   "name": "Anchorage city",
+   "geoid": "2101504"
+  },
+  "Arlington": {
+   "name": "Arlington city",
+   "geoid": "2102044"
+  },
+  "Ashland": {
+   "name": "Ashland city",
+   "geoid": "2102368"
+  },
+  "Auburn": {
+   "name": "Auburn city",
+   "geoid": "2102638"
+  },
+  "Audubon Park": {
+   "name": "Audubon Park city",
+   "geoid": "2102656"
+  },
+  "Augusta": {
+   "name": "Augusta city",
+   "geoid": "2102674"
+  },
+  "Bancroft": {
+   "name": "Bancroft city",
+   "geoid": "2103376"
+  },
+  "Barbourmeade": {
+   "name": "Barbourmeade city",
+   "geoid": "2103556"
+  },
+  "Barbourville": {
+   "name": "Barbourville city",
+   "geoid": "2103574"
+  },
+  "Bardstown": {
+   "name": "Bardstown city",
+   "geoid": "2103628"
+  },
+  "Bardwell": {
+   "name": "Bardwell city",
+   "geoid": "2103664"
+  },
+  "Barlow": {
+   "name": "Barlow city",
+   "geoid": "2103718"
+  },
+  "Beattyville": {
+   "name": "Beattyville city",
+   "geoid": "2104546"
+  },
+  "Beaver Dam": {
+   "name": "Beaver Dam city",
+   "geoid": "2104654"
+  },
+  "Bedford": {
+   "name": "Bedford city",
+   "geoid": "2104816"
+  },
+  "Beechwood Village": {
+   "name": "Beechwood Village city",
+   "geoid": "2105068"
+  },
+  "Bellefonte": {
+   "name": "Bellefonte city",
+   "geoid": "2105374"
+  },
+  "Bellemeade": {
+   "name": "Bellemeade city",
+   "geoid": "2105392"
+  },
+  "Bellevue": {
+   "name": "Bellevue city",
+   "geoid": "2105446"
+  },
+  "Bellewood": {
+   "name": "Bellewood city",
+   "geoid": "2105464"
+  },
+  "Benham": {
+   "name": "Benham city",
+   "geoid": "2105662"
+  },
+  "Benton": {
+   "name": "Benton city",
+   "geoid": "2105824"
+  },
+  "Berea": {
+   "name": "Berea city",
+   "geoid": "2105842"
+  },
+  "Berry": {
+   "name": "Berry city",
+   "geoid": "2105968"
+  },
+  "Blaine": {
+   "name": "Blaine city",
+   "geoid": "2107264"
+  },
+  "Bloomfield": {
+   "name": "Bloomfield city",
+   "geoid": "2107516"
+  },
+  "Blue Ridge Manor": {
+   "name": "Blue Ridge Manor city",
+   "geoid": "2107858"
+  },
+  "Bonnieville": {
+   "name": "Bonnieville city",
+   "geoid": "2108488"
+  },
+  "Booneville": {
+   "name": "Booneville city",
+   "geoid": "2108614"
+  },
+  "Bowling Green": {
+   "name": "Bowling Green city",
+   "geoid": "2108902"
+  },
+  "Bradfordsville": {
+   "name": "Bradfordsville city",
+   "geoid": "2109100"
+  },
+  "Brandenburg": {
+   "name": "Brandenburg city",
+   "geoid": "2109226"
+  },
+  "Bremen": {
+   "name": "Bremen city",
+   "geoid": "2109406"
+  },
+  "Briarwood": {
+   "name": "Briarwood city",
+   "geoid": "2109532"
+  },
+  "Brodhead": {
+   "name": "Brodhead city",
+   "geoid": "2109838"
+  },
+  "Broeck Pointe": {
+   "name": "Broeck Pointe city",
+   "geoid": "2109847"
+  },
+  "Bromley": {
+   "name": "Bromley city",
+   "geoid": "2109856"
+  },
+  "Brooksville": {
+   "name": "Brooksville city",
+   "geoid": "2110000"
+  },
+  "Brownsboro Farm": {
+   "name": "Brownsboro Farm city",
+   "geoid": "2110162"
+  },
+  "Brownsboro Village": {
+   "name": "Brownsboro Village city",
+   "geoid": "2110198"
+  },
+  "Brownsville": {
+   "name": "Brownsville city",
+   "geoid": "2110324"
+  },
+  "Buckhorn": {
+   "name": "Buckhorn city",
+   "geoid": "2110612"
+  },
+  "Burgin": {
+   "name": "Burgin city",
+   "geoid": "2111044"
+  },
+  "Burkesville": {
+   "name": "Burkesville city",
+   "geoid": "2111098"
+  },
+  "Burnside": {
+   "name": "Burnside city",
+   "geoid": "2111278"
+  },
+  "Butler": {
+   "name": "Butler city",
+   "geoid": "2111530"
+  },
+  "Cadiz": {
+   "name": "Cadiz city",
+   "geoid": "2111692"
+  },
+  "Calhoun": {
+   "name": "Calhoun city",
+   "geoid": "2111854"
+  },
+  "California": {
+   "name": "California city",
+   "geoid": "2111872"
+  },
+  "Calvert City": {
+   "name": "Calvert City city",
+   "geoid": "2112016"
+  },
+  "Camargo": {
+   "name": "Camargo city",
+   "geoid": "2112052"
+  },
+  "Cambridge": {
+   "name": "Cambridge city",
+   "geoid": "2112066"
+  },
+  "Campbellsburg": {
+   "name": "Campbellsburg city",
+   "geoid": "2112142"
+  },
+  "Campbellsville": {
+   "name": "Campbellsville city",
+   "geoid": "2112160"
+  },
+  "Campton": {
+   "name": "Campton city",
+   "geoid": "2112358"
+  },
+  "Caneyville": {
+   "name": "Caneyville city",
+   "geoid": "2112538"
+  },
+  "Carlisle": {
+   "name": "Carlisle city",
+   "geoid": "2112898"
+  },
+  "Carrollton": {
+   "name": "Carrollton city",
+   "geoid": "2113024"
+  },
+  "Carrsville": {
+   "name": "Carrsville city",
+   "geoid": "2113060"
+  },
+  "Catlettsburg": {
+   "name": "Catlettsburg city",
+   "geoid": "2113420"
+  },
+  "Cave City": {
+   "name": "Cave City city",
+   "geoid": "2113492"
+  },
+  "Centertown": {
+   "name": "Centertown city",
+   "geoid": "2113870"
+  },
+  "Central City": {
+   "name": "Central City city",
+   "geoid": "2113978"
+  },
+  "Clarkson": {
+   "name": "Clarkson city",
+   "geoid": "2115148"
+  },
+  "Clay": {
+   "name": "Clay city",
+   "geoid": "2115202"
+  },
+  "Clay City": {
+   "name": "Clay City city",
+   "geoid": "2115238"
+  },
+  "Clinton": {
+   "name": "Clinton city",
+   "geoid": "2115742"
+  },
+  "Cloverport": {
+   "name": "Cloverport city",
+   "geoid": "2115904"
+  },
+  "Coal Run Village": {
+   "name": "Coal Run Village city",
+   "geoid": "2116110"
+  },
+  "Cold Spring": {
+   "name": "Cold Spring city",
+   "geoid": "2116372"
+  },
+  "Coldstream": {
+   "name": "Coldstream city",
+   "geoid": "2116395"
+  },
+  "Columbia": {
+   "name": "Columbia city",
+   "geoid": "2116750"
+  },
+  "Columbus": {
+   "name": "Columbus city",
+   "geoid": "2116768"
+  },
+  "Concord": {
+   "name": "Concord city",
+   "geoid": "2116894"
+  },
+  "Corbin": {
+   "name": "Corbin city",
+   "geoid": "2117362"
+  },
+  "Corinth": {
+   "name": "Corinth city",
+   "geoid": "2117434"
+  },
+  "Corydon": {
+   "name": "Corydon city",
+   "geoid": "2117686"
+  },
+  "Covington": {
+   "name": "Covington city",
+   "geoid": "2117848"
+  },
+  "Crab Orchard": {
+   "name": "Crab Orchard city",
+   "geoid": "2117956"
+  },
+  "Creekside": {
+   "name": "Creekside city",
+   "geoid": "2118270"
+  },
+  "Crescent Springs": {
+   "name": "Crescent Springs city",
+   "geoid": "2118352"
+  },
+  "Crestview": {
+   "name": "Crestview city",
+   "geoid": "2118424"
+  },
+  "Crestview Hills": {
+   "name": "Crestview Hills city",
+   "geoid": "2118442"
+  },
+  "Crestwood": {
+   "name": "Crestwood city",
+   "geoid": "2118496"
+  },
+  "Crittenden": {
+   "name": "Crittenden city",
+   "geoid": "2118568"
+  },
+  "Crofton": {
+   "name": "Crofton city",
+   "geoid": "2118658"
+  },
+  "Crossgate": {
+   "name": "Crossgate city",
+   "geoid": "2118766"
+  },
+  "Cumberland": {
+   "name": "Cumberland city",
+   "geoid": "2119108"
+  },
+  "Cynthiana": {
+   "name": "Cynthiana city",
+   "geoid": "2119432"
+  },
+  "Danville": {
+   "name": "Danville city",
+   "geoid": "2119882"
+  },
+  "Dawson Springs": {
+   "name": "Dawson Springs city",
+   "geoid": "2120224"
+  },
+  "Dayton": {
+   "name": "Dayton city",
+   "geoid": "2120350"
+  },
+  "Dixon": {
+   "name": "Dixon city",
+   "geoid": "2121682"
+  },
+  "Douglass Hills": {
+   "name": "Douglass Hills city",
+   "geoid": "2122204"
+  },
+  "Dover": {
+   "name": "Dover city",
+   "geoid": "2122222"
+  },
+  "Drakesboro": {
+   "name": "Drakesboro city",
+   "geoid": "2122348"
+  },
+  "Druid Hills": {
+   "name": "Druid Hills city",
+   "geoid": "2122474"
+  },
+  "Dry Ridge": {
+   "name": "Dry Ridge city",
+   "geoid": "2122582"
+  },
+  "Earlington": {
+   "name": "Earlington city",
+   "geoid": "2123230"
+  },
+  "Eddyville": {
+   "name": "Eddyville city",
+   "geoid": "2123824"
+  },
+  "Edgewood": {
+   "name": "Edgewood city",
+   "geoid": "2123932"
+  },
+  "Edmonton": {
+   "name": "Edmonton city",
+   "geoid": "2123968"
+  },
+  "Ekron": {
+   "name": "Ekron city",
+   "geoid": "2124094"
+  },
+  "Elizabethtown": {
+   "name": "Elizabethtown city",
+   "geoid": "2124274"
+  },
+  "Elkhorn City": {
+   "name": "Elkhorn City city",
+   "geoid": "2124382"
+  },
+  "Elkton": {
+   "name": "Elkton city",
+   "geoid": "2124400"
+  },
+  "Elsmere": {
+   "name": "Elsmere city",
+   "geoid": "2124778"
+  },
+  "Eminence": {
+   "name": "Eminence city",
+   "geoid": "2124904"
+  },
+  "Erlanger": {
+   "name": "Erlanger city",
+   "geoid": "2125300"
+  },
+  "Eubank": {
+   "name": "Eubank city",
+   "geoid": "2125552"
+  },
+  "Evarts": {
+   "name": "Evarts city",
+   "geoid": "2125606"
+  },
+  "Ewing": {
+   "name": "Ewing city",
+   "geoid": "2125786"
+  },
+  "Fairfield": {
+   "name": "Fairfield city",
+   "geoid": "2126020"
+  },
+  "Fairview": {
+   "name": "Fairview city",
+   "geoid": "2126236"
+  },
+  "Falmouth": {
+   "name": "Falmouth city",
+   "geoid": "2126434"
+  },
+  "Ferguson": {
+   "name": "Ferguson city",
+   "geoid": "2127010"
+  },
+  "Fincastle": {
+   "name": "Fincastle city",
+   "geoid": "2127262"
+  },
+  "Flatwoods": {
+   "name": "Flatwoods city",
+   "geoid": "2127802"
+  },
+  "Fleming-Neon": {
+   "name": "Fleming-Neon city",
+   "geoid": "2127846"
+  },
+  "Flemingsburg": {
+   "name": "Flemingsburg city",
+   "geoid": "2127856"
+  },
+  "Florence": {
+   "name": "Florence city",
+   "geoid": "2127982"
+  },
+  "Fordsville": {
+   "name": "Fordsville city",
+   "geoid": "2128270"
+  },
+  "Forest Hills": {
+   "name": "Forest Hills city",
+   "geoid": "2128342"
+  },
+  "Fort Mitchell": {
+   "name": "Fort Mitchell city",
+   "geoid": "2128558"
+  },
+  "Fort Thomas": {
+   "name": "Fort Thomas city",
+   "geoid": "2128594"
+  },
+  "Fort Wright": {
+   "name": "Fort Wright city",
+   "geoid": "2128612"
+  },
+  "Fountain Run": {
+   "name": "Fountain Run city",
+   "geoid": "2128666"
+  },
+  "Fox Chase": {
+   "name": "Fox Chase city",
+   "geoid": "2128785"
+  },
+  "Frankfort": {
+   "name": "Frankfort city",
+   "geoid": "2128900"
+  },
+  "Franklin": {
+   "name": "Franklin city",
+   "geoid": "2128918"
+  },
+  "Fredonia": {
+   "name": "Fredonia city",
+   "geoid": "2129080"
+  },
+  "Frenchburg": {
+   "name": "Frenchburg city",
+   "geoid": "2129260"
+  },
+  "Fulton": {
+   "name": "Fulton city",
+   "geoid": "2129566"
+  },
+  "Gamaliel": {
+   "name": "Gamaliel city",
+   "geoid": "2129872"
+  },
+  "Georgetown": {
+   "name": "Georgetown city",
+   "geoid": "2130700"
+  },
+  "Germantown": {
+   "name": "Germantown city",
+   "geoid": "2130718"
+  },
+  "Ghent": {
+   "name": "Ghent city",
+   "geoid": "2130808"
+  },
+  "Glasgow": {
+   "name": "Glasgow city",
+   "geoid": "2131114"
+  },
+  "Glencoe": {
+   "name": "Glencoe city",
+   "geoid": "2131204"
+  },
+  "Glenview": {
+   "name": "Glenview city",
+   "geoid": "2131348"
+  },
+  "Glenview Hills": {
+   "name": "Glenview Hills city",
+   "geoid": "2131402"
+  },
+  "Glenview Manor": {
+   "name": "Glenview Manor city",
+   "geoid": "2131420"
+  },
+  "Goose Creek": {
+   "name": "Goose Creek city",
+   "geoid": "2131870"
+  },
+  "Goshen": {
+   "name": "Goshen city",
+   "geoid": "2131960"
+  },
+  "Grand Rivers": {
+   "name": "Grand Rivers city",
+   "geoid": "2132212"
+  },
+  "Gratz": {
+   "name": "Gratz city",
+   "geoid": "2132428"
+  },
+  "Graymoor-Devondale": {
+   "name": "Graymoor-Devondale city",
+   "geoid": "2132523"
+  },
+  "Grayson": {
+   "name": "Grayson city",
+   "geoid": "2132572"
+  },
+  "Green Spring": {
+   "name": "Green Spring city",
+   "geoid": "2132986"
+  },
+  "Greensburg": {
+   "name": "Greensburg city",
+   "geoid": "2132968"
+  },
+  "Greenup": {
+   "name": "Greenup city",
+   "geoid": "2133004"
+  },
+  "Greenville": {
+   "name": "Greenville city",
+   "geoid": "2133022"
+  },
+  "Guthrie": {
+   "name": "Guthrie city",
+   "geoid": "2133562"
+  },
+  "Hanson": {
+   "name": "Hanson city",
+   "geoid": "2134390"
+  },
+  "Hardin": {
+   "name": "Hardin city",
+   "geoid": "2134534"
+  },
+  "Hardinsburg": {
+   "name": "Hardinsburg city",
+   "geoid": "2134552"
+  },
+  "Harlan": {
+   "name": "Harlan city",
+   "geoid": "2134732"
+  },
+  "Harrodsburg": {
+   "name": "Harrodsburg city",
+   "geoid": "2134966"
+  },
+  "Hartford": {
+   "name": "Hartford city",
+   "geoid": "2135020"
+  },
+  "Hawesville": {
+   "name": "Hawesville city",
+   "geoid": "2135200"
+  },
+  "Hazard": {
+   "name": "Hazard city",
+   "geoid": "2135362"
+  },
+  "Hazel": {
+   "name": "Hazel city",
+   "geoid": "2135380"
+  },
+  "Hebron Estates": {
+   "name": "Hebron Estates city",
+   "geoid": "2135545"
+  },
+  "Henderson": {
+   "name": "Henderson city",
+   "geoid": "2135866"
+  },
+  "Heritage Creek": {
+   "name": "Heritage Creek city",
+   "geoid": "2136102"
+  },
+  "Hickman": {
+   "name": "Hickman city",
+   "geoid": "2136298"
+  },
+  "Hickory Hill": {
+   "name": "Hickory Hill city",
+   "geoid": "2136374"
+  },
+  "Highland Heights": {
+   "name": "Highland Heights city",
+   "geoid": "2136604"
+  },
+  "Hills and Dales": {
+   "name": "Hills and Dales city",
+   "geoid": "2136865"
+  },
+  "Hillview": {
+   "name": "Hillview city",
+   "geoid": "2136982"
+  },
+  "Hindman": {
+   "name": "Hindman city",
+   "geoid": "2137108"
+  },
+  "Hodgenville": {
+   "name": "Hodgenville city",
+   "geoid": "2137396"
+  },
+  "Hollow Creek": {
+   "name": "Hollow Creek city",
+   "geoid": "2137576"
+  },
+  "Hollyvilla": {
+   "name": "Hollyvilla city",
+   "geoid": "2137630"
+  },
+  "Hopkinsville": {
+   "name": "Hopkinsville city",
+   "geoid": "2137918"
+  },
+  "Horse Cave": {
+   "name": "Horse Cave city",
+   "geoid": "2138008"
+  },
+  "Houston Acres": {
+   "name": "Houston Acres city",
+   "geoid": "2138170"
+  },
+  "Hunters Hollow": {
+   "name": "Hunters Hollow city",
+   "geoid": "2138670"
+  },
+  "Hurstbourne": {
+   "name": "Hurstbourne city",
+   "geoid": "2138814"
+  },
+  "Hurstbourne Acres": {
+   "name": "Hurstbourne Acres city",
+   "geoid": "2138818"
+  },
+  "Hustonville": {
+   "name": "Hustonville city",
+   "geoid": "2138836"
+  },
+  "Hyden": {
+   "name": "Hyden city",
+   "geoid": "2138908"
+  },
+  "Independence": {
+   "name": "Independence city",
+   "geoid": "2139142"
+  },
+  "Indian Hills": {
+   "name": "Indian Hills city",
+   "geoid": "2139304"
+  },
+  "Inez": {
+   "name": "Inez city",
+   "geoid": "2139430"
+  },
+  "Irvine": {
+   "name": "Irvine city",
+   "geoid": "2139646"
+  },
+  "Irvington": {
+   "name": "Irvington city",
+   "geoid": "2139664"
+  },
+  "Island": {
+   "name": "Island city",
+   "geoid": "2139700"
+  },
+  "Jackson": {
+   "name": "Jackson city",
+   "geoid": "2139952"
+  },
+  "Jamestown": {
+   "name": "Jamestown city",
+   "geoid": "2140114"
+  },
+  "Jeffersontown": {
+   "name": "Jeffersontown city",
+   "geoid": "2140222"
+  },
+  "Jeffersonville": {
+   "name": "Jeffersonville city",
+   "geoid": "2140240"
+  },
+  "Jenkins": {
+   "name": "Jenkins city",
+   "geoid": "2140312"
+  },
+  "Junction City": {
+   "name": "Junction City city",
+   "geoid": "2141338"
+  },
+  "Keene": {
+   "name": "Keene city",
+   "geoid": "2141716"
+  },
+  "Kenton Vale": {
+   "name": "Kenton Vale city",
+   "geoid": "2142094"
+  },
+  "Kevil": {
+   "name": "Kevil city",
+   "geoid": "2142292"
+  },
+  "Kingsley": {
+   "name": "Kingsley city",
+   "geoid": "2142598"
+  },
+  "Kuttawa": {
+   "name": "Kuttawa city",
+   "geoid": "2143264"
+  },
+  "La Center": {
+   "name": "La Center city",
+   "geoid": "2143336"
+  },
+  "La Grange": {
+   "name": "La Grange city",
+   "geoid": "2143480"
+  },
+  "LaFayette": {
+   "name": "LaFayette city",
+   "geoid": "2143444"
+  },
+  "Lakeside Park": {
+   "name": "Lakeside Park city",
+   "geoid": "2143606"
+  },
+  "Lakeview Heights": {
+   "name": "Lakeview Heights city",
+   "geoid": "2143668"
+  },
+  "Lancaster": {
+   "name": "Lancaster city",
+   "geoid": "2143840"
+  },
+  "Langdon Place": {
+   "name": "Langdon Place city",
+   "geoid": "2143900"
+  },
+  "Lawrenceburg": {
+   "name": "Lawrenceburg city",
+   "geoid": "2144146"
+  },
+  "Lebanon": {
+   "name": "Lebanon city",
+   "geoid": "2144344"
+  },
+  "Lebanon Junction": {
+   "name": "Lebanon Junction city",
+   "geoid": "2144362"
+  },
+  "Leitchfield": {
+   "name": "Leitchfield city",
+   "geoid": "2144686"
+  },
+  "Lewisburg": {
+   "name": "Lewisburg city",
+   "geoid": "2145064"
+  },
+  "Lewisport": {
+   "name": "Lewisport city",
+   "geoid": "2145136"
+  },
+  "Lexington-Fayette": {
+   "name": "Lexington-Fayette urban county",
+   "geoid": "2146027"
+  },
+  "Liberty": {
+   "name": "Liberty city",
+   "geoid": "2146072"
+  },
+  "Lincolnshire": {
+   "name": "Lincolnshire city",
+   "geoid": "2146540"
+  },
+  "Livermore": {
+   "name": "Livermore city",
+   "geoid": "2147062"
+  },
+  "Livingston": {
+   "name": "Livingston city",
+   "geoid": "2147098"
+  },
+  "London": {
+   "name": "London city",
+   "geoid": "2147476"
+  },
+  "Loretto": {
+   "name": "Loretto city",
+   "geoid": "2147710"
+  },
+  "Louisa": {
+   "name": "Louisa city",
+   "geoid": "2147854"
+  },
+  "Louisville": {
+   "name": "Louisville city",
+   "geoid": "2148000"
+  },
+  "Louisville/Jefferson County metro government (balance)": {
+   "name": "Louisville/Jefferson County metro government (balance)",
+   "geoid": "2148006"
+  },
+  "Loyall": {
+   "name": "Loyall city",
+   "geoid": "2148288"
+  },
+  "Ludlow": {
+   "name": "Ludlow city",
+   "geoid": "2148378"
+  },
+  "Lynch": {
+   "name": "Lynch city",
+   "geoid": "2148540"
+  },
+  "Lyndon": {
+   "name": "Lyndon city",
+   "geoid": "2148558"
+  },
+  "Lynnview": {
+   "name": "Lynnview city",
+   "geoid": "2148648"
+  },
+  "Mackville": {
+   "name": "Mackville city",
+   "geoid": "2149206"
+  },
+  "Madisonville": {
+   "name": "Madisonville city",
+   "geoid": "2149368"
+  },
+  "Manchester": {
+   "name": "Manchester city",
+   "geoid": "2149656"
+  },
+  "Manor Creek": {
+   "name": "Manor Creek city",
+   "geoid": "2149800"
+  },
+  "Marion": {
+   "name": "Marion city",
+   "geoid": "2150034"
+  },
+  "Martin": {
+   "name": "Martin city",
+   "geoid": "2150286"
+  },
+  "Maryhill Estates": {
+   "name": "Maryhill Estates city",
+   "geoid": "2150412"
+  },
+  "Mayfield": {
+   "name": "Mayfield city",
+   "geoid": "2150898"
+  },
+  "Maysville": {
+   "name": "Maysville city",
+   "geoid": "2151024"
+  },
+  "McHenry": {
+   "name": "McHenry city",
+   "geoid": "2149098"
+  },
+  "McKee": {
+   "name": "McKee city",
+   "geoid": "2149116"
+  },
+  "Meadow Vale": {
+   "name": "Meadow Vale city",
+   "geoid": "2151258"
+  },
+  "Meadowbrook Farm": {
+   "name": "Meadowbrook Farm city",
+   "geoid": "2151193"
+  },
+  "Meadowview Estates": {
+   "name": "Meadowview Estates city",
+   "geoid": "2151294"
+  },
+  "Melbourne": {
+   "name": "Melbourne city",
+   "geoid": "2151438"
+  },
+  "Mentor": {
+   "name": "Mentor city",
+   "geoid": "2151564"
+  },
+  "Middlesborough": {
+   "name": "Middlesborough city",
+   "geoid": "2151924"
+  },
+  "Middletown": {
+   "name": "Middletown city",
+   "geoid": "2151978"
+  },
+  "Midway": {
+   "name": "Midway city",
+   "geoid": "2152140"
+  },
+  "Millersburg": {
+   "name": "Millersburg city",
+   "geoid": "2152302"
+  },
+  "Milton": {
+   "name": "Milton city",
+   "geoid": "2152590"
+  },
+  "Mockingbird Valley": {
+   "name": "Mockingbird Valley city",
+   "geoid": "2152842"
+  },
+  "Monterey": {
+   "name": "Monterey city",
+   "geoid": "2153076"
+  },
+  "Monticello": {
+   "name": "Monticello city",
+   "geoid": "2153130"
+  },
+  "Moorland": {
+   "name": "Moorland city",
+   "geoid": "2153328"
+  },
+  "Morehead": {
+   "name": "Morehead city",
+   "geoid": "2153418"
+  },
+  "Morganfield": {
+   "name": "Morganfield city",
+   "geoid": "2153472"
+  },
+  "Morgantown": {
+   "name": "Morgantown city",
+   "geoid": "2153490"
+  },
+  "Mortons Gap": {
+   "name": "Mortons Gap city",
+   "geoid": "2153616"
+  },
+  "Mount Olivet": {
+   "name": "Mount Olivet city",
+   "geoid": "2153976"
+  },
+  "Mount Sterling": {
+   "name": "Mount Sterling city",
+   "geoid": "2154084"
+  },
+  "Mount Vernon": {
+   "name": "Mount Vernon city",
+   "geoid": "2154174"
+  },
+  "Mount Washington": {
+   "name": "Mount Washington city",
+   "geoid": "2154228"
+  },
+  "Muldraugh": {
+   "name": "Muldraugh city",
+   "geoid": "2154480"
+  },
+  "Munfordville": {
+   "name": "Munfordville city",
+   "geoid": "2154570"
+  },
+  "Murray": {
+   "name": "Murray city",
+   "geoid": "2154642"
+  },
+  "Murray Hill": {
+   "name": "Murray Hill city",
+   "geoid": "2154660"
+  },
+  "Nebo": {
+   "name": "Nebo city",
+   "geoid": "2155092"
+  },
+  "New Castle": {
+   "name": "New Castle city",
+   "geoid": "2155596"
+  },
+  "New Haven": {
+   "name": "New Haven city",
+   "geoid": "2155758"
+  },
+  "Newport": {
+   "name": "Newport city",
+   "geoid": "2155884"
+  },
+  "Nicholasville": {
+   "name": "Nicholasville city",
+   "geoid": "2156136"
+  },
+  "Norbourne Estates": {
+   "name": "Norbourne Estates city",
+   "geoid": "2156550"
+  },
+  "North Middletown": {
+   "name": "North Middletown city",
+   "geoid": "2156820"
+  },
+  "Northfield": {
+   "name": "Northfield city",
+   "geoid": "2156730"
+  },
+  "Nortonville": {
+   "name": "Nortonville city",
+   "geoid": "2156910"
+  },
+  "Norwood": {
+   "name": "Norwood city",
+   "geoid": "2156928"
+  },
+  "Oak Grove": {
+   "name": "Oak Grove city",
+   "geoid": "2157090"
+  },
+  "Oakland": {
+   "name": "Oakland city",
+   "geoid": "2157144"
+  },
+  "Old Brownsboro Place": {
+   "name": "Old Brownsboro Place city",
+   "geoid": "2157658"
+  },
+  "Olive Hill": {
+   "name": "Olive Hill city",
+   "geoid": "2157918"
+  },
+  "Orchard Grass Hills": {
+   "name": "Orchard Grass Hills city",
+   "geoid": "2158200"
+  },
+  "Owensboro": {
+   "name": "Owensboro city",
+   "geoid": "2158620"
+  },
+  "Owenton": {
+   "name": "Owenton city",
+   "geoid": "2158692"
+  },
+  "Owingsville": {
+   "name": "Owingsville city",
+   "geoid": "2158710"
+  },
+  "Paducah": {
+   "name": "Paducah city",
+   "geoid": "2158836"
+  },
+  "Paintsville": {
+   "name": "Paintsville city",
+   "geoid": "2158962"
+  },
+  "Paris": {
+   "name": "Paris city",
+   "geoid": "2159196"
+  },
+  "Park City": {
+   "name": "Park City city",
+   "geoid": "2159232"
+  },
+  "Park Hills": {
+   "name": "Park Hills city",
+   "geoid": "2159255"
+  },
+  "Parkway Village": {
+   "name": "Parkway Village city",
+   "geoid": "2159322"
+  },
+  "Pembroke": {
+   "name": "Pembroke city",
+   "geoid": "2159934"
+  },
+  "Perryville": {
+   "name": "Perryville city",
+   "geoid": "2160258"
+  },
+  "Pewee Valley": {
+   "name": "Pewee Valley city",
+   "geoid": "2160492"
+  },
+  "Pikeville": {
+   "name": "Pikeville city",
+   "geoid": "2160852"
+  },
+  "Pineville": {
+   "name": "Pineville city",
+   "geoid": "2161248"
+  },
+  "Pioneer Village": {
+   "name": "Pioneer Village city",
+   "geoid": "2161356"
+  },
+  "Pippa Passes": {
+   "name": "Pippa Passes city",
+   "geoid": "2161374"
+  },
+  "Plantation": {
+   "name": "Plantation city",
+   "geoid": "2161554"
+  },
+  "Pleasureville": {
+   "name": "Pleasureville city",
+   "geoid": "2161788"
+  },
+  "Plum Springs": {
+   "name": "Plum Springs city",
+   "geoid": "2161860"
+  },
+  "Powderly": {
+   "name": "Powderly city",
+   "geoid": "2162652"
+  },
+  "Prestonsburg": {
+   "name": "Prestonsburg city",
+   "geoid": "2162940"
+  },
+  "Prestonville": {
+   "name": "Prestonville city",
+   "geoid": "2162958"
+  },
+  "Princeton": {
+   "name": "Princeton city",
+   "geoid": "2163138"
+  },
+  "Prospect": {
+   "name": "Prospect city",
+   "geoid": "2163264"
+  },
+  "Providence": {
+   "name": "Providence city",
+   "geoid": "2163372"
+  },
+  "Raceland": {
+   "name": "Raceland city",
+   "geoid": "2163858"
+  },
+  "Radcliff": {
+   "name": "Radcliff city",
+   "geoid": "2163912"
+  },
+  "Ravenna": {
+   "name": "Ravenna city",
+   "geoid": "2164092"
+  },
+  "Raywick": {
+   "name": "Raywick city",
+   "geoid": "2164146"
+  },
+  "Richlawn": {
+   "name": "Richlawn city",
+   "geoid": "2165208"
+  },
+  "Richmond": {
+   "name": "Richmond city",
+   "geoid": "2165226"
+  },
+  "River Bluff": {
+   "name": "River Bluff city",
+   "geoid": "2165559"
+  },
+  "Riverwood": {
+   "name": "Riverwood city",
+   "geoid": "2165766"
+  },
+  "Robards": {
+   "name": "Robards city",
+   "geoid": "2165874"
+  },
+  "Rochester": {
+   "name": "Rochester city",
+   "geoid": "2165982"
+  },
+  "Rockport": {
+   "name": "Rockport city",
+   "geoid": "2166216"
+  },
+  "Rolling Fields": {
+   "name": "Rolling Fields city",
+   "geoid": "2166486"
+  },
+  "Rolling Hills": {
+   "name": "Rolling Hills city",
+   "geoid": "2166504"
+  },
+  "Russell": {
+   "name": "Russell city",
+   "geoid": "2167458"
+  },
+  "Russell Springs": {
+   "name": "Russell Springs city",
+   "geoid": "2167494"
+  },
+  "Russellville": {
+   "name": "Russellville city",
+   "geoid": "2167512"
+  },
+  "Ryland Heights": {
+   "name": "Ryland Heights city",
+   "geoid": "2167602"
+  },
+  "Sacramento": {
+   "name": "Sacramento city",
+   "geoid": "2167638"
+  },
+  "Sadieville": {
+   "name": "Sadieville city",
+   "geoid": "2167656"
+  },
+  "Salem": {
+   "name": "Salem city",
+   "geoid": "2168052"
+  },
+  "Salt Lick": {
+   "name": "Salt Lick city",
+   "geoid": "2168160"
+  },
+  "Salyersville": {
+   "name": "Salyersville city",
+   "geoid": "2168232"
+  },
+  "Sanders": {
+   "name": "Sanders city",
+   "geoid": "2168358"
+  },
+  "Sandy Hook": {
+   "name": "Sandy Hook city",
+   "geoid": "2168556"
+  },
+  "Sardis": {
+   "name": "Sardis city",
+   "geoid": "2168646"
+  },
+  "Science Hill": {
+   "name": "Science Hill city",
+   "geoid": "2168952"
+  },
+  "Scottsville": {
+   "name": "Scottsville city",
+   "geoid": "2169114"
+  },
+  "Sebree": {
+   "name": "Sebree city",
+   "geoid": "2169222"
+  },
+  "Seneca Gardens": {
+   "name": "Seneca Gardens city",
+   "geoid": "2169384"
+  },
+  "Sharpsburg": {
+   "name": "Sharpsburg city",
+   "geoid": "2169852"
+  },
+  "Shelbyville": {
+   "name": "Shelbyville city",
+   "geoid": "2170050"
+  },
+  "Shepherdsville": {
+   "name": "Shepherdsville city",
+   "geoid": "2170086"
+  },
+  "Shively": {
+   "name": "Shively city",
+   "geoid": "2170284"
+  },
+  "Silver Grove": {
+   "name": "Silver Grove city",
+   "geoid": "2170644"
+  },
+  "Simpsonville": {
+   "name": "Simpsonville city",
+   "geoid": "2170752"
+  },
+  "Slaughters": {
+   "name": "Slaughters city",
+   "geoid": "2171130"
+  },
+  "Smithfield": {
+   "name": "Smithfield city",
+   "geoid": "2171364"
+  },
+  "Smithland": {
+   "name": "Smithland city",
+   "geoid": "2171382"
+  },
+  "Smiths Grove": {
+   "name": "Smiths Grove city",
+   "geoid": "2171454"
+  },
+  "Somerset": {
+   "name": "Somerset city",
+   "geoid": "2171688"
+  },
+  "Sonora": {
+   "name": "Sonora city",
+   "geoid": "2171724"
+  },
+  "South Carrollton": {
+   "name": "South Carrollton city",
+   "geoid": "2171814"
+  },
+  "South Shore": {
+   "name": "South Shore city",
+   "geoid": "2172210"
+  },
+  "Southgate": {
+   "name": "Southgate city",
+   "geoid": "2171976"
+  },
+  "Sparta": {
+   "name": "Sparta city",
+   "geoid": "2172372"
+  },
+  "Spring Mill": {
+   "name": "Spring Mill city",
+   "geoid": "2172770"
+  },
+  "Spring Valley": {
+   "name": "Spring Valley city",
+   "geoid": "2172790"
+  },
+  "Springfield": {
+   "name": "Springfield city",
+   "geoid": "2172660"
+  },
+  "St. Charles": {
+   "name": "St. Charles city",
+   "geoid": "2167710"
+  },
+  "St. Mary": {
+   "name": "St. Mary city",
+   "geoid": "2167890"
+  },
+  "St. Matthews": {
+   "name": "St. Matthews city",
+   "geoid": "2167944"
+  },
+  "St. Regis Park": {
+   "name": "St. Regis Park city",
+   "geoid": "2167998"
+  },
+  "Stamping Ground": {
+   "name": "Stamping Ground city",
+   "geoid": "2173038"
+  },
+  "Stanford": {
+   "name": "Stanford city",
+   "geoid": "2173110"
+  },
+  "Stanton": {
+   "name": "Stanton city",
+   "geoid": "2173164"
+  },
+  "Strathmoor Manor": {
+   "name": "Strathmoor Manor city",
+   "geoid": "2174064"
+  },
+  "Strathmoor Village": {
+   "name": "Strathmoor Village city",
+   "geoid": "2174082"
+  },
+  "Sturgis": {
+   "name": "Sturgis city",
+   "geoid": "2174316"
+  },
+  "Sycamore": {
+   "name": "Sycamore city",
+   "geoid": "2175190"
+  },
+  "Taylor Mill": {
+   "name": "Taylor Mill city",
+   "geoid": "2175738"
+  },
+  "Taylorsville": {
+   "name": "Taylorsville city",
+   "geoid": "2175810"
+  },
+  "Ten Broeck": {
+   "name": "Ten Broeck city",
+   "geoid": "2175963"
+  },
+  "Thornhill": {
+   "name": "Thornhill city",
+   "geoid": "2176380"
+  },
+  "Tompkinsville": {
+   "name": "Tompkinsville city",
+   "geoid": "2177160"
+  },
+  "Trenton": {
+   "name": "Trenton city",
+   "geoid": "2177592"
+  },
+  "Union": {
+   "name": "Union city",
+   "geoid": "2178384"
+  },
+  "Uniontown": {
+   "name": "Uniontown city",
+   "geoid": "2178492"
+  },
+  "Upton": {
+   "name": "Upton city",
+   "geoid": "2178672"
+  },
+  "Vanceburg": {
+   "name": "Vanceburg city",
+   "geoid": "2179068"
+  },
+  "Versailles": {
+   "name": "Versailles city",
+   "geoid": "2179482"
+  },
+  "Villa Hills": {
+   "name": "Villa Hills city",
+   "geoid": "2179698"
+  },
+  "Vine Grove": {
+   "name": "Vine Grove city",
+   "geoid": "2179734"
+  },
+  "Walton": {
+   "name": "Walton city",
+   "geoid": "2180490"
+  },
+  "Warfield": {
+   "name": "Warfield city",
+   "geoid": "2180616"
+  },
+  "Warsaw": {
+   "name": "Warsaw city",
+   "geoid": "2180706"
+  },
+  "Watterson Park": {
+   "name": "Watterson Park city",
+   "geoid": "2180913"
+  },
+  "Waverly": {
+   "name": "Waverly city",
+   "geoid": "2180958"
+  },
+  "Wayland": {
+   "name": "Wayland city",
+   "geoid": "2181012"
+  },
+  "Wellington": {
+   "name": "Wellington city",
+   "geoid": "2181372"
+  },
+  "West Buechel": {
+   "name": "West Buechel city",
+   "geoid": "2181624"
+  },
+  "West Liberty": {
+   "name": "West Liberty city",
+   "geoid": "2181858"
+  },
+  "West Point": {
+   "name": "West Point city",
+   "geoid": "2181930"
+  },
+  "Westwood": {
+   "name": "Westwood city",
+   "geoid": "2182164"
+  },
+  "Wheatcroft": {
+   "name": "Wheatcroft city",
+   "geoid": "2182200"
+  },
+  "Wheelwright": {
+   "name": "Wheelwright city",
+   "geoid": "2182272"
+  },
+  "White Plains": {
+   "name": "White Plains city",
+   "geoid": "2182722"
+  },
+  "Whitesburg": {
+   "name": "Whitesburg city",
+   "geoid": "2182776"
+  },
+  "Whitesville": {
+   "name": "Whitesville city",
+   "geoid": "2182830"
+  },
+  "Wickliffe": {
+   "name": "Wickliffe city",
+   "geoid": "2183064"
+  },
+  "Wilder": {
+   "name": "Wilder city",
+   "geoid": "2183172"
+  },
+  "Wildwood": {
+   "name": "Wildwood city",
+   "geoid": "2183208"
+  },
+  "Williamsburg": {
+   "name": "Williamsburg city",
+   "geoid": "2183334"
+  },
+  "Williamstown": {
+   "name": "Williamstown city",
+   "geoid": "2183406"
+  },
+  "Willisburg": {
+   "name": "Willisburg city",
+   "geoid": "2183424"
+  },
+  "Wilmore": {
+   "name": "Wilmore city",
+   "geoid": "2183550"
+  },
+  "Winchester": {
+   "name": "Winchester city",
+   "geoid": "2183676"
+  },
+  "Windy Hills": {
+   "name": "Windy Hills city",
+   "geoid": "2183784"
+  },
+  "Wingo": {
+   "name": "Wingo city",
+   "geoid": "2183856"
+  },
+  "Woodburn": {
+   "name": "Woodburn city",
+   "geoid": "2184414"
+  },
+  "Woodbury": {
+   "name": "Woodbury city",
+   "geoid": "2184432"
+  },
+  "Woodland Hills": {
+   "name": "Woodland Hills city",
+   "geoid": "2184486"
+  },
+  "Woodlawn": {
+   "name": "Woodlawn city",
+   "geoid": "2184522"
+  },
+  "Woodlawn Park": {
+   "name": "Woodlawn Park city",
+   "geoid": "2184576"
+  },
+  "Worthington": {
+   "name": "Worthington city",
+   "geoid": "2184864"
+  },
+  "Worthington Hills": {
+   "name": "Worthington Hills city",
+   "geoid": "2184891"
+  },
+  "Worthville": {
+   "name": "Worthville city",
+   "geoid": "2184900"
+  },
+  "Wurtland": {
+   "name": "Wurtland city",
+   "geoid": "2185008"
+  }
+ }
+}

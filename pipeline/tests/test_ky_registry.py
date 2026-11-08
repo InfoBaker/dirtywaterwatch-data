@@ -100,3 +100,21 @@ def test_missing_waters_list_leaves_out_what_the_national_list_holds():
     assert d["state"] == "KY" and "Banklick Creek" not in names and "Ohio River" not in names
     assert not {"Unnamed", "Unnamed Tributary Or Unknown", "Unnamed Tributary or Unknown"} & names
     assert "Old Springfield Reservoir" in names and "Brashears Creek" in names
+
+
+def test_operators_are_never_named_after_a_plant():
+    """Review 2026-11-08 P2-5: 'City of Jerry L Riley', 'City of Russell County', 'City of Fort Knox' and others."""
+    places = json.loads((ROOT / "data" / "reference" / "ky-census-places.json").read_text())["places"]
+    rows = ops()
+    for r in rows:
+        m = re.match(r"^City of ([^(]+?)(?: \(|$)", r["name"])
+        if r["legal_form"] == "city" and m:
+            assert m.group(1) in places, r["name"]
+    names = {r["name"] for r in rows}
+    assert not {"City of Jerry L Riley", "City of Russell County", "City of Fort Knox", "City of Bardstown Town Creek",
+                "City of Muddy Creek", "City of Bee Creek"} & names
+    by = {r["id"]: r for r in rows}
+    assert set(by["ky-city-of-bardstown"]["npdes_permits"]) == {"KY0021237", "KY0104027"}
+    assert by["ky-fort-knox"]["legal_form"] == "federal facility"
+    assert not any("Riley" in json.dumps(r) for r in rows)
+    assert all("Morris Forman" not in r["notes"] for r in rows)
