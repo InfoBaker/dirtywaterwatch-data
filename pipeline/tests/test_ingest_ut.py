@@ -251,7 +251,12 @@ def test_state_text_is_in_the_page_shape():
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
               "Known problems in the data", "What this site does about it"):
         assert f"**{h}.**" in t
-    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    # the share line, filled with the go-live audit's counts (P2-4 applied) and the tail Utah needs (P2-6)
+    assert "of the 116 registered treatment-plant and sewer outfalls in Utah" in t and "90 (78 percent)" in t
+    assert "Utah's reports carry their own map points, so a report is placed by its point, and one that lies on no " \
+           "water is listed with its county, with no water coloured." in t
+    assert "appears on the map at its point with no water coloured" not in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
     assert "387" in t and "8,980" in t and "R317-801-4" in t
 
