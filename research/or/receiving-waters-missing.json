@@ -1,9 +1,9 @@
 {
  "about": "Water names in OR's records that data/receiving-waters-national.json does not hold for OR: DEQ's OERS spill archive (2013 to March 2025, the 2,371 sewage reports; Affected_Waterway, once per report), Portland Environmental Services' advisories (the waters each names) and OHA's bloom advisories (the water's name), read 2026-11-07. One row per name and county, with the towns (most reports first), the source ids and the permits. Reports that say the sewage reached no water, or name none, are left out (by_reason). Names are kept as the source spells them. Written by scripts/or_report_water_names.py.",
  "state": "OR",
- "waters": 143,
- "names": 139,
- "reports": 181,
+ "waters": 133,
+ "names": 129,
+ "reports": 175,
  "records_read": {
   "or-deq-oers-spills-2013-2025": 2371,
   "or-bes-news-rss": 14,
@@ -12,8 +12,21 @@
  "by_reason": {
   "the report says the sewage reached no water": 1066,
   "no water named": 986,
-  "held by the national list": 195,
+  "held by the national list": 202,
   "the text is not a water's name": 2
+ },
+ "aliased": {
+  "Clackit Creek": 1,
+  "Claggitt Creek": 1,
+  "Coquile River": 1,
+  "Hoquarton Slough": 1,
+  "Kellog Creek": 1,
+  "Lake Eawana": 1,
+  "Liitle River": 1,
+  "Little Puddle River": 1,
+  "Neawanna River": 1,
+  "Netanicum River": 1,
+  "Tualitan River": 2
  },
  "rows": [
   {
@@ -148,17 +161,7 @@
   {
    "name": "Brownlee Reservoir",
    "county": "Baker County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
-   "name": "Brownlee Reservoir - Powder Arm",
-   "county": "Baker County",
-   "reports": 1,
+   "reports": 2,
    "sources": [
     "or-oha-hab-advisories"
    ],
@@ -202,27 +205,16 @@
    ]
   },
   {
-   "name": "Clackit Creek",
+   "name": "Claggett Creek",
    "county": "Marion County",
-   "reports": 1,
+   "reports": 2,
    "sources": [
     "or-deq-oers-spills-2013-2025"
    ],
    "permits": [],
    "towns": [
+    "Keiser",
     "Keizer"
-   ]
-  },
-  {
-   "name": "Claggitt Creek",
-   "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Keiser"
    ]
   },
   {
@@ -310,18 +302,6 @@
    "towns": [
     "Sutherlin",
     "Oakland"
-   ]
-  },
-  {
-   "name": "Coquile River",
-   "county": "Coos County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Myrtle Point"
    ]
   },
   {
@@ -611,7 +591,7 @@
    ]
   },
   {
-   "name": "Hoquarton Slough",
+   "name": "Hoquarten Slough",
    "county": "Tillamook County",
    "reports": 1,
    "sources": [
@@ -715,32 +695,21 @@
    ]
   },
   {
-   "name": "Kellog Creek",
-   "county": "Clackamas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Milwaukie, OR"
-   ]
-  },
-  {
    "name": "Kellogg Creek",
    "county": "Clackamas County",
-   "reports": 2,
+   "reports": 3,
    "sources": [
     "or-deq-oers-spills-2013-2025"
    ],
    "permits": [],
    "towns": [
+    "Milwaukie, OR",
     "Oak Grove",
     "Milwaukie"
    ]
   },
   {
-   "name": "Lake Eawana",
+   "name": "Lake Ewauna",
    "county": "Klamath County",
    "reports": 1,
    "sources": [
@@ -772,18 +741,6 @@
    "towns": []
   },
   {
-   "name": "Liitle River",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Glide"
-   ]
-  },
-  {
    "name": "Lint Creek",
    "county": "Lincoln County",
    "reports": 1,
@@ -798,19 +755,7 @@
   {
    "name": "Little Pudding River",
    "county": "Marion County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Salem"
-   ]
-  },
-  {
-   "name": "Little Puddle River",
-   "county": "Marion County",
-   "reports": 1,
+   "reports": 2,
    "sources": [
     "or-deq-oers-spills-2013-2025"
    ],
@@ -969,31 +914,7 @@
   {
    "name": "Neawanna Creek",
    "county": "Clatsop County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Seaside"
-   ]
-  },
-  {
-   "name": "Neawanna River",
-   "county": "Clatsop County",
-   "reports": 1,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Seaside"
-   ]
-  },
-  {
-   "name": "Netanicum River",
-   "county": "Clatsop County",
-   "reports": 1,
+   "reports": 3,
    "sources": [
     "or-deq-oers-spills-2013-2025"
    ],
@@ -1381,16 +1302,6 @@
    ]
   },
   {
-   "name": "South & mainstream Umpqua River",
-   "county": "Douglas County",
-   "reports": 1,
-   "sources": [
-    "or-oha-hab-advisories"
-   ],
-   "permits": [],
-   "towns": []
-  },
-  {
    "name": "South Tenmile Lake",
    "county": "Coos County",
    "reports": 1,
@@ -1467,19 +1378,6 @@
    "permits": [],
    "towns": [
     "Portland"
-   ]
-  },
-  {
-   "name": "Tualitan River",
-   "county": "Washington County",
-   "reports": 2,
-   "sources": [
-    "or-deq-oers-spills-2013-2025"
-   ],
-   "permits": [],
-   "towns": [
-    "Hillsboro",
-    "Tualatin"
    ]
   },
   {

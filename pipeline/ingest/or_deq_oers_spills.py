@@ -32,8 +32,11 @@ Record rules (rules only; no model, no geocoding)
     end. published_at and source_updated_at are null (the layer gives no per-row publication or edit time); the
     layer's last edit is meta.layer_last_edit.
   - Type (Source, the layer's own category): Sewer, Storm Drain or Outfall, Pipeline -> sso; Wastewater Treatment
-    Plant -> bypass (a release at a treatment plant); every other source (a private residence, a septic tank, a
-    vehicle, a business) -> unknown, still in the sewage category, with raw._source_type the layer's word.
+    Plant -> bypass (a release at a treatment plant); every other source (a private residence 77, a vehicle, a septic
+    tank 24, a business, Other, Unknown: 297 rows) -> sso as well, since DEQ's material is "Sewage": a sewage report
+    with its caution and in the counts, raw._source_type the layer's word and raw._type_basis saying the source is not
+    a public sewer. These are DEQ-verified OERS reports, not the public's own, so no citizen_caution applies (the layer
+    names no reporter).
   - Place: Lat_DD and Lon_DD are DEQ's point (coord_source "source"); a point outside Oregon's box is not used
     (raw._coords_rejected). Affected_Waterway is the water text: a placeholder (NULL, None, Unknown, N/A) is no water;
     "Columbia River, Astoria" is the water "Columbia River" and the place "Astoria" (raw.waterway_place; TOWN_NAMES:
@@ -173,7 +176,7 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
     tz = ZoneInfo(zone)
     start, prec = times(a, tz)
     src = clean(a.get("Source"))
-    et = TYPES.get(src.lower(), "unknown")
+    et = TYPES.get(src.lower(), "sso")
     waters, place = waterway(a.get("Affected_Waterway"))
     water = "; ".join(waters) or None
     lat, lon = a.get("Lat_DD"), a.get("Lon_DD")
@@ -192,8 +195,10 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
            "end_basis": "DEQ's layer gives no end for any spill",
            "_withheld": "the call narrative, the incident title and the street address are not read (they name people "
                         "and private homes)"}
-    if et == "unknown":
+    if src.lower() not in TYPES:
         raw["_source_type"] = src or None
+        raw["_type_basis"] = (f"DEQ's material is Sewage; the source is not a public sewer or plant ({src or 'not '
+                              'given'}): kept as a sewage report")
     if place:
         raw["waterway_place"] = place
     if not (isinstance(lat, (int, float)) and isinstance(lon, (int, float))
@@ -209,7 +214,9 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
     vol, vtext = None, None
     q, unit = a.get("Q_released_gal"), clean(a.get("UOM"))
     if clean(a.get("Quantity_Unknown")).lower() != "yes" and isinstance(q, (int, float)) and q > 0:
-        vol = int(round(q))
+        vol = int(round(q)) if q >= 1 else None
+        if vol is None:
+            vtext = f"{q:g} gallons"                 # under a gallon: kept as text, never rounded to 0
     if isinstance(a.get("Quantity_Released"), (int, float)) and unit and unit.lower() not in ("gallons", "none"):
         vtext = f"{a['Quantity_Released']:g} {unit}"
     return event(
@@ -294,6 +301,10 @@ def main(argv: list[str] | None = None) -> int:
             lmeta = metadata(sess)
             same = (prev.get("records") and (prev.get("meta") or {}).get("layer_last_edit_ms") == lmeta["lastEditDate"])
             if same and not args.backfill:
+                if not prev.get("ok"):
+                    # a failed read since the last good one: the layer answers again and is unchanged, so the archive's
+                    # records and meta are good as they are; the file is marked ok again (review 2026-11-08 P2-5)
+                    write_events(SOURCE_ID, prev["records"], ok=True, error=None, meta=prev.get("meta") or {})
                 print(f"{SOURCE_ID}: layer unchanged since {lmeta['lastEditDate']}; {len(prev['records'])} records kept")
                 return 0
             rows = query(sess)

@@ -10,7 +10,9 @@ names, Multnomah County), OHA's bloom advisories (or-oha-hab-advisories: the wat
 A report that says the sewage reached no water, or names none, is left out (by_reason). One row per name and county,
 with the number of records giving it, the towns (most reports first), the source ids and the permits. A name is held
 when the national list has it (name, key, a spelling seen) for OR, compared without case or punctuation; the name is
-kept as the source spells it ("Tualitan River", "Kellog Creek"): the names pass and the hand aliases decide.
+kept as the source spells it, except a misspelling with an Oregon hand alias in data/water-aliases.json ("Tualitan
+River", "Kellog Creek"), which is read as its record's name and counted in `aliased`. OHA's compound names arrive split
+by the ingester ("Brownlee Reservoir - Powder Arm" as Brownlee Reservoir).
 """
 from __future__ import annotations
 
@@ -30,6 +32,17 @@ NOT_A_WATER = re.compile(r"^(?:storm ?drains?|catch basins?|ground|soil|street|p
                          r"wetlands?|marsh|unnamed\b.*|various|multiple)$", re.I)
 WATER_WORD = re.compile(r"\b(?:river|creek|slough|lake|bay|ocean|reservoir|pond|channel|estuary|harbor|canal|fork|"
                         r"run|branch|wetlands?|marsh|inlet|lagoon|spring|brook|stream|arm)\b", re.I)
+
+
+ALIASES = ROOT / "data" / "water-aliases.json"
+
+
+def spelling_map() -> dict[str, str]:
+    """{misspelling key: the record's name} from the Oregon hand aliases (data/water-aliases.json, slugs ending "-or"):
+    "Tualitan River" is the Tualatin River (review 2026-11-08 P2-6)."""
+    d = json.loads(ALIASES.read_text())
+    return {key(a): slug.removesuffix("-or").replace("-", " ").title() for slug, al in d.items() if slug.endswith("-or")
+            for a in al}
 
 
 def key(s: str) -> str:
@@ -58,6 +71,8 @@ def county_of(r: dict) -> str | None:
 
 def main() -> int:
     held = held_names()
+    spell = spelling_map()
+    folded = Counter()
     rows: dict[tuple, dict] = {}
     towns: dict[tuple, Counter] = defaultdict(Counter)
     why = Counter()
@@ -78,6 +93,9 @@ def main() -> int:
                 if NOT_A_WATER.match(name) or not WATER_WORD.search(name):
                     why["the text is not a water's name"] += 1
                     continue
+                if key(name) in spell:                  # a misspelling with a hand alias: its record's name
+                    folded[name] += 1
+                    name = spell[key(name)]
                 if key(name) in held:
                     why["held by the national list"] += 1
                     continue
@@ -112,7 +130,9 @@ def main() -> int:
                      "by scripts/or_report_water_names.py."),
            "state": "OR", "waters": len(out_rows), "names": len({r["name"] for r in out_rows}),
            "reports": sum(r["reports"] for r in out_rows), "records_read": dict(read),
-           "by_reason": dict(why.most_common()), "rows": out_rows}
+           "by_reason": dict(why.most_common()),
+           "aliased": {k: v for k, v in sorted(folded.items())},   # read as the name of their hand alias
+           "rows": out_rows}
     OUT.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(f"{out['waters']} rows, {out['names']} names, {out['reports']} reports -> {OUT.relative_to(ROOT)}")
     return 0
