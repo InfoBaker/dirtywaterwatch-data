@@ -1,0 +1,32 @@
+id: "or-deq-oers-spills-2013-2025"
+name: "Oregon DEQ: all spills reported to OERS and verified by DEQ, 2013 to March 27, 2025 (ArcGIS FeatureServer), sewage rows"
+url: "https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/all_spills_Aug1_2013_Mar27_2025_pts/FeatureServer/1"
+homepage: "https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/all_spills_Aug1_2013_Mar27_2025_pts/FeatureServer/1"
+kind: "arcgis"
+level: "state"
+# Ingester: pipeline/ingest/or_deq_oers_spills.py (source id or-deq-oers-spills-2013-2025). A frozen layer: the events
+#   file carries meta.frozen, so it is never stale for its age (build/status.py); each run reads the layer's metadata
+#   only and reads the rows again only when DEQ edits the layer.
+# Read 2026-11-07: 2,844 rows of the material category "Sewage, Stormwater, Wastewater, Floodwater, & Biological",
+#   2,371 of them Material "Sewage" (the records), 2013-07-24 to 2025-03-27; by year 2013 10, 2014 12, 2015 17, 2016
+#   13, 2017 17, 2018 201, 2019 330, 2020 284, 2021 403, 2022 339, 2023 319, 2024 310, 2025 (to March 27) 116. By
+#   source: sewer 1,864 (sso), treatment plant 210 (bypass), other sources 297 (private homes, septic tanks, vehicles,
+#   businesses: type unknown, still sewage). 2,369 with DEQ's point; 326 name a water (Affected_Waterway; NULL, None
+#   or Unknown on the rest); 1,063 list only soil, pavement, a building or the sanitary sewer as the media affected
+#   (kept, placed on no water). 17 in Malheur County north of township 35 South (Mountain time).
+# Times: Date2 and Time are the date and time of the report to OERS; the layer gives no separate start and no end.
+# Never requested: Situation (the call narrative names callers, residents and contractors), Name (the incident
+#   title, often an address or a name), Address, and the text copies of the coordinates.
+cadence: "frozen: the layer was last edited 2025-04-01 and holds spills to 2025-03-27; no successor found"
+license: "none stated on the layer"
+attribution: "Oregon Department of Environmental Quality (Oregon Emergency Response System spill reports verified by DEQ)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["OR"]
+registry_ids: ["or-deq-oers-spills-2013-2025"]
+access: ["arcgis"]
+access_detail: "Hosted feature layer in the State of Oregon's ArcGIS Online organisation (uUvqNMGPm7axC2dD), hasStaticData true, public query, no key; maxRecordCount 2000."
+machine_readable: true
+legal_basis: "OAR 340-142-0040 (spill reporting to OERS); DEQ NPDES permit general conditions (Schedule F: oral report within 24 hours, written within 5 days)"
+checked: "2026-11-07"

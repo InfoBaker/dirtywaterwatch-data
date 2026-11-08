@@ -1,0 +1,29 @@
+id: "or-oha-beach-monitoring"
+name: "Oregon Beach Monitoring Program advisories (OHA with DEQ)"
+url: "https://www.oregon.gov/oha/PH/HealthyEnvironments/Recreation/BeachWaterQuality/Pages/index.aspx"
+homepage: "https://www.oregon.gov/oha/PH/HealthyEnvironments/Recreation/BeachWaterQuality/Pages/index.aspx"
+kind: "html"
+level: "state"
+# Notes (research/or, status candidate, verified fetched, checked 2026-11-07): Registered as a
+#   monitored page (page health). The table can be read as a snapshot (ADVISORY as OHA's beach
+#   advisory, SEWAGE as OHA's sewage advisory) when the 2027 season opens; no advisory rows existed
+#   to test a reader on 2026-11-07.
+# Access detail (research, quoted): 'Check Current Beach Conditions'
+#   (https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx):
+#   an HTML table per coast (County, Beach, Status) with the statuses OPEN, ADVISORY, SEWAGE
+#   ('Sewage spills or major pollution events occurred. Avoid swimming or water contact.') and NO
+#   MONITORING; 'The 2026 monitoring season has ended' on 2026-11-07 (every beach NO MONITORING).
+#   GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by email request.
+# Waters: Oregon coast, 360 miles, May to September
+cadence: "Seasonal (May-Sept)"
+license: "none stated"
+attribution: "Oregon Health Authority"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["OR"]
+access: ["html", "email"]
+access_detail: "'Check Current Beach Conditions' (https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx): an HTML table per coast (County, Beach, Status) with the statuses OPEN, ADVISORY, SEWAGE ('Sewage spills or major pollution events occurred. Avoid swimming or water contact.') and NO MONITORING; 'The 2026 monitoring season has ended' on 2026-11-07 (every beach NO MONITORING). GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by email request."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-07"

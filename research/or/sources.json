@@ -48,10 +48,10 @@
     "history": "Articles back to at least 2021 on portland.gov/bes/news; the RSS holds the latest items only.",
     "license": "none stated",
     "legal_basis": "NPDES OR0026905 CSO public notification; permit Schedule F public notification of overflow",
-    "status": "candidate",
-    "status_reason": "Best operator channel in Oregon: dated, with start, area, advice and expiry. RSS plus page parsing (rules, then the classifier for titles).",
+    "status": "used",
+    "status_reason": "Read every refresh by the Oregon ingester (rules only): each CSO Advisory and Sewage Advisory is a dated sewage report with the start, end and stretch its text gives; the City's 48-hour window after the overflow stops is the authority's own red. 13 advisories (4 CSO) in the 25 items read 2026-11-07.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": "Mix of CSO and SSO advisories with other news; filter by title."
   },
   {
@@ -70,7 +70,7 @@
     "access": [
       "html"
     ],
-    "access_detail": "Page shows 'Current CSO Advisories: There is no current CSO advisory in effect.' Gauge iframe https://www.portlandoregon.gov/bes/bigpipe/gauge.cfm returned 'BES Big Pipe Gauge 2 % Nov 3, 2026 3:00 pm' (raw/bigpipe-gauge-sample.html); chart.cfm for 72 hours. 'Data are updated every 15 minutes, with up to a 45-minute lag time.' Email list: GovDelivery ORPORTLAND_ENT signup 39493.",
+    "access_detail": "The tracker page (https://www.portland.gov/bes/big-pipe-tracker) says 'Current CSO Advisories: There is no current CSO advisory in effect.' (2026-11-07); the gauge (https://www.portlandoregon.gov/bes/bigpipe/gauge.cfm) answered 'BES Big Pipe Gauge 0 % Nov 7, 2026 3:45 pm'. 'Data are updated every 15 minutes, with up to a 45-minute lag time.' A 72-hour chart (chart.cfm). Email list: GovDelivery ORPORTLAND_ENT signup 39493.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -89,9 +89,9 @@
     "license": null,
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "Second signal for Portland CSOs (a 100% fill means overflow); the current-advisory sentence is a snapshot status.",
+    "status_reason": "Registered as a monitored page: the tracker's current-advisory sentence and the gauge's fill level. A fill level is not a report of an overflow, so it colours nothing; the advisories themselves are read from the news feed.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -212,10 +212,10 @@
     "history": "2013-08 to 2025-03",
     "license": "none stated on the layer",
     "legal_basis": "OAR 340-142 (spill reporting to OERS); permit Schedule F",
-    "status": "candidate",
-    "status_reason": "Backfill and SSO locations for a decade; frozen, so not a live feed. Ask DEQ whether it is refreshed.",
+    "status": "used",
+    "status_reason": "Read once as a frozen archive by the Oregon ingester: the 2,371 sewage rows (2013-07-24 to 2025-03-27) with DEQ's point, the report date and time, gallons and the affected water where given; the narrative, title and address are never read. The layer is checked each run for an edit.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": "Situation narratives contain names of callers and contractors: never ingest."
   },
   {
@@ -339,7 +339,7 @@
       "html",
       "email"
     ],
-    "access_detail": "'Check Current Beach Conditions' page; GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by email request.",
+    "access_detail": "'Check Current Beach Conditions' (https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx): an HTML table per coast (County, Beach, Status) with the statuses OPEN, ADVISORY, SEWAGE ('Sewage spills or major pollution events occurred. Avoid swimming or water contact.') and NO MONITORING; 'The 2026 monitoring season has ended' on 2026-11-07 (every beach NO MONITORING). GovDelivery topic ORHA_190 for advisory notices; a Beach Partner List by email request.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -352,9 +352,9 @@
     "license": null,
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "Coastal bacteria advisories; the current-conditions page format was not examined in the time box.",
+    "status_reason": "Registered as a monitored page (page health). The table can be read as a snapshot (ADVISORY as OHA's beach advisory, SEWAGE as OHA's sewage advisory) when the 2027 season opens; no advisory rows existed to test a reader on 2026-11-07.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -386,10 +386,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Plum layer for Oregon with issue dates and points.",
+    "status": "used",
+    "status_reason": "Read every refresh through the generic ArcGIS block: OHA's advisories and precautions (39 of 64 rows on 2026-11-07: 5 Advisory, 34 Precaution) as algal-bloom advisories; 'Below Human RUV' and 'Advisory/Precaution Lifted' are no current advisory.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": "Includes a 'PERMANENT RECREATIONAL USE ADVISORY' for the South Umpqua."
   },
   {
@@ -421,9 +421,9 @@
     "license": null,
     "legal_basis": null,
     "status": "watch",
-    "status_reason": "A small district that posts each overflow to the Willamette and Forest Creek; HTML only.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status_reason": "A small district that posts each overflow as a news article (2025-12-18: three lift stations, impacts to Kellogg Creek and the Willamette River, the advice to avoid contact for 48 hours afterwards). Registered as a monitored page; HTML only, no feed.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -455,9 +455,9 @@
     "license": null,
     "legal_basis": null,
     "status": "watch",
-    "status_reason": "Background only (page marked 2019); 38 CSO points; no event notices found.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status_reason": "Background only; 38 open CSO outfalls to the Columbia River and Youngs Bay; no event notices on the page (answered 200 on 2026-11-07). Registered with the barrier: no web channel.",
+    "verified": "fetched",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {
@@ -490,9 +490,9 @@
     "license": null,
     "legal_basis": null,
     "status": "watch",
-    "status_reason": "Plan page fetched (navigation only extracted); describes signs and media contacts for larger discharges; no event list.",
+    "status_reason": "The plan page answered 200 on 2026-11-07 (navigation only extracted); signs and media contacts for larger discharges; no event list. Registered with the barrier: no web channel.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-07",
     "notes": ""
   },
   {

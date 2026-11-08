@@ -118,6 +118,7 @@ def test_a_second_release_in_one_advisory_is_its_own_record():
     a, b = recs["56908"], recs["56908-2"]
     assert a["started_at"] == "2025-12-09T12:00:00-08:00" and b["started_at"] == "2025-12-18T20:00:00-08:00"
     assert a["discharger_id"] is None and a["volume_gal"] is None and "2,250" in a["volume_text"]
+    assert a["published_at"] == "2025-12-09T17:11:00-08:00" and b["published_at"] == "2025-12-19T06:30:00-08:00"
 
 
 def test_records_are_carried_when_their_item_leaves_the_feed():
