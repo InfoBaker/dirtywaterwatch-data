@@ -1,7 +1,7 @@
 id: "ut-dwq-recreational-advisories"
 name: "Utah DWQ Recreational Waters Map (HAB and E. coli advisories) AutoMap_Source_Data feature service"
 url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/AutoMap_Source_Data/FeatureServer/0"
-homepage: "https://deq.utah.gov/water-quality/recreational-water-quality-home"
+homepage: "https://deq.utah.gov/dwq/recreational-water-quality"
 kind: "arcgis"
 level: "state"
 # Read through the generic ArcGIS reader (the fetch block below) with the hook ingest/ut_transforms.ut_rec_record. The
@@ -26,7 +26,7 @@ event_types: ["hab_advisory", "beach_advisory"]
 states: ["UT"]
 registry_ids: ["ut-dwq-recreational-advisories"]
 access: ["arcgis"]
-access_detail: "Feeds the Instant App appid 32380dfdeb014695b0c5a9b77a5aa90b (webmap 213cdc781ebd4faf97e0d4af5a79c5fa) linked from deq.utah.gov/water-quality/recreational-water-quality-home; habs.utah.gov returned 403 to scripts on 2026-11-03."
+access_detail: "Feeds the Instant App appid 32380dfdeb014695b0c5a9b77a5aa90b (webmap 213cdc781ebd4faf97e0d4af5a79c5fa) linked from deq.utah.gov/dwq/recreational-water-quality (the old address and habs.utah.gov, which returned 403 to scripts on 2026-11-03, redirect there since 2026-11-08)."
 machine_readable: true
 legal_basis: "Local health department authority to post advisories and close waters; DWQ's recreational HAB and E. coli guidance"
 checked: "2026-11-07"
@@ -58,7 +58,7 @@ fetch:
     waterbody_text: Waterbody
     outfall_name: {field: [Public_Name, Site_Name]}
     authority: {const: "Utah Division of Water Quality and the local health department (Recreational Waters Map)"}
-    source_url: {const: "https://deq.utah.gov/water-quality/recreational-water-quality-home"}
+    source_url: {const: "https://deq.utah.gov/dwq/recreational-water-quality"}
   transform: "ingest.ut_transforms.ut_rec_record"
   dedupe: {repeats: suffix}
   history:

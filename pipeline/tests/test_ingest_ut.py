@@ -234,7 +234,7 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["ut-timpanogos-ssd-epa-report"]["feed_source_id"] == "echo-sewer-overflow"
     assert reg["ut-deq-environmental-incidents"]["feed_source_id"] == "ut-deq-environmental-incidents"
     assert reg["ut-dwq-recreational-advisories"]["feed_source_id"] == "ut-dwq-recreational-advisories"
-    assert reg["ut-habs-utah-gov"]["barrier"] == "bot_wall"
+    assert "ut-habs-utah-gov" not in reg and reg["ut-dwq-recreational-page"]["urls"] == ["https://deq.utah.gov/dwq/recreational-water-quality"]
     assert reg["ut-dwq-class-1-sso-reports"]["barrier"] == "no_web_page"
 
 
