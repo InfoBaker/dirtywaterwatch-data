@@ -242,7 +242,7 @@ def test_rules_row_cites_the_law_and_sets_no_window():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     ut = rules["red"]["by_state"]["UT"]
     assert ut["hours"] is None and "R317-801-4" in ut["source"] and "R317-801-1(13)" in ut["source"]
-    assert "UT" not in rules["live_states"] and not re.search(r"\b(safe|clean)\b", ut["basis"], re.I)
+    assert "UT" in rules["live_states"] and not re.search(r"(safe|clean)", ut["basis"], re.I)   # live since 2026-11-08
 
 
 def test_state_text_is_in_the_page_shape():

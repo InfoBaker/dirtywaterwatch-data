@@ -201,7 +201,7 @@ def test_kentucky_rules_row_cites_the_regulation_and_the_operators():
     assert "401 KAR 5:065" in ky["source"] and "49 CFR 71.5(c)" in ky["source"]
     for word in ("safe", "clean"):
         assert word not in ky["basis"].lower()
-    assert "KY" not in rules["live_states"]
+    assert "KY" in rules["live_states"]   # live since 2026-11-08 (final audit docs/checklists/2026-11-08-ky-final.md)
 
 
 # ---------------------------------------------------------------- review 2026-11-08: MSD-01 is one advisory

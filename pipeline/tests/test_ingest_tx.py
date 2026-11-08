@@ -201,7 +201,7 @@ def test_rules_row_cites_the_law_and_sets_no_window():
     tx = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["TX"]
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     assert tx["hours"] is None and "305.125(9)" in tx["source"] and "319.30" in tx["source"]
-    assert "El Paso and Hudspeth" in tx["basis"] and "TX" not in rules["live_states"]
+    assert "El Paso and Hudspeth" in tx["basis"] and "TX" in rules["live_states"]   # live since 2026-11-08
     assert not re.search(r"\b(safe|clean)\b", tx["basis"], re.I)
 
 
