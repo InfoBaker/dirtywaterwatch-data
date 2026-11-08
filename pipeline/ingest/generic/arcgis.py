@@ -9,10 +9,15 @@ fetch block keys
   geometry: true asks for points in WGS 84 (outSR 4326); each row then has _x and _y (map them to lon and lat)
   metadata: true asks the layer's description; its editingInfo.lastEditDate (epoch ms, UTC) becomes every
             record's source_updated_at
+  query_retries (0), retry_wait_s (20): a page the server answers with its own error ("Failed to execute query.",
+            the server's back end not answering for a moment) is asked again up to query_retries times, retry_wait_s
+            apart, before the fetch fails; for a layer seen to fail that way and answer the same query moments later
+            (the Kentucky Division of Water's HAB Viewer, 2026-11-08). Any other block is unchanged.
 """
 from __future__ import annotations
 
 import json
+import time
 from datetime import UTC, datetime
 
 from ingest.generic.base import Fetched, get, get_json, load_pages, pages_doc
@@ -37,6 +42,11 @@ def fetch(block: dict, sess) -> Fetched:
         if block.get("geometry"):
             params["outSR"] = 4326
         d = get_json(sess, f"{layer}/query", params, timeout=(15, 90))
+        for _try in range(int(block.get("query_retries", 0))):
+            if "error" not in d:
+                break
+            time.sleep(float(block.get("retry_wait_s", 20)))
+            d = get_json(sess, f"{layer}/query", params, timeout=(15, 90))
         if "error" in d:
             raise RuntimeError(f"ArcGIS error: {d['error']}")
         got = d.get("features") or []
