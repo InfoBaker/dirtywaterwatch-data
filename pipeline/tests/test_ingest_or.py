@@ -226,3 +226,99 @@ def test_hab_owyhee_is_on_mountain_time():
     r = hab()[0]["Owyhee Reservoir"]
     assert r["raw"]["time_zone"] == "America/Denver" and r["started_at"].endswith("-06:00")
     assert r["started_at"][:10] == "2026-09-21"
+
+
+# ---------------------------------------------------------------- registry, register, rules, text, waters
+
+def ops():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "OR"]
+
+
+def test_every_oregon_permit_is_in_exactly_one_row():
+    rows = ops()
+    held = [p for r in rows for p in r["npdes_permits"]]
+    assert len(held) == len(set(held)) == 168
+    epa = set()
+    for f in ("outfalls-us.json", "outfalls-plants-us.json"):
+        doc = json.loads((ROOT / "data" / f).read_text())
+        epa |= {r["npdes_permit"] for r in (doc["outfalls"] if isinstance(doc, dict) else doc)
+                if str(r.get("npdes_permit") or "").startswith("OR")}
+    assert epa <= set(held) and {"OR0030864", "OR0020834"} <= set(held)
+    by = {r["id"]: r for r in rows}
+    assert by["or-portland-bes"]["npdes_permits"] == ["OR0026905", "OR0026891"] and by["or-portland-bes"]["kind"] == "cso"
+    assert by["or-astoria"]["outfall_count"] == 38 and by["or-corvallis"]["kind"] == "cso"     # the CSO outfalls
+    assert len(by["or-clean-water-services"]["npdes_permits"]) == 4
+
+
+def test_legal_forms_are_controlled_and_no_individual_is_named():
+    from build import redact
+    from ingest import dischargers_schema as DS
+    rows = ops()
+    assert DS.check_legal_forms(rows) == []
+    assert not [r["name"] for r in rows if redact.person_shaped(r["name"])]
+
+
+def test_register_rows_per_operator_and_the_state_channels():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "or.json").read_text())["channels"]}
+    for r in ops():
+        row = reg[f"{r['id']}-public-notice"]
+        assert row["basis_kind"] == "permit" and "Emergency Response and Public Notification Plan" in row["legal_basis"]
+    assert reg["or-portland-bes-public-notice"]["feed_source_id"] == "or-bes-news-rss"
+    assert reg["or-astoria-public-notice"]["barrier"] == "no_web_page" and reg["or-corvallis-public-notice"]["barrier"] == "no_web_page"
+    assert reg["or-deq-oers-reports"]["barrier"] == "phone_only" and reg["or-deq-oers-reports"]["urls"] == []
+    assert reg["or-deq-oers-spills-archive"]["feed_source_id"] == "or-deq-oers-spills-2013-2025"
+    assert reg["or-oha-hab-advisories"]["feed_source_id"] == "or-oha-hab-advisories"
+    assert reg["or-portland-bes-big-pipe-tracker"]["monitored"] and reg["or-oha-beach-conditions"]["monitored"]
+
+
+def test_rules_row_cites_the_law_and_sets_no_window():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    r = rules["red"]["by_state"]["OR"]
+    assert r["hours"] is None and "340-142-0040" in r["source"] and "Schedule F" in r["source"]
+    assert "Malheur County" in r["basis"] and "48 hours" in r["basis"] and "OR" not in rules["live_states"]
+    assert not re.search(r"\b(safe|clean)\b", r["basis"], re.I)
+
+
+def test_state_text_is_in_the_page_shape():
+    t = (ROOT / "research" / "or" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: OR\nname: Oregon\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean|green)\b", t, re.I) and ".json" not in t and ".py" not in t
+    assert "2,371" in t and "March 27, 2025" in t and "township 35 South" in t
+
+
+def test_missing_waters_list_holds_its_invariants():
+    d = json.loads((ROOT / "research" / "or" / "receiving-waters-missing.json").read_text())
+    national = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+
+    def k(n):
+        return re.sub(r"[^a-z0-9]", "", (n or "").lower())
+    held = {k(n) for w in ((national.get("states") or {}).get("OR") or {}).get("waters") or []
+            for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or [])] if n}
+    rows = d["rows"]
+    assert d["state"] == "OR" and d["waters"] == len(rows)
+    assert not [r["name"] for r in rows if k(r["name"]) in held]
+    keys = [(k(r["name"]), r["county"]) for r in rows]
+    assert len(keys) == len(set(keys))
+    for r in rows:
+        assert r["county"] and r["county"].endswith("County") and not re.search(r"\d", r["name"])
+        assert "removed]" not in json.dumps(r) and not re.search(r"(?i)\bpossible\b|\bnull\b|\bunknown\b", r["name"])
+
+
+def test_oregon_name_placement_is_county_aware():
+    from build import status as S
+    assert "OR" in S.COUNTY_STATES and "OR" in S.COUNTY_FIELD_STATES
+    assert S.point_county("OR", 44.03, -116.96)[1] == "Malheur County"
+    assert S.point_county("OR", 46.19, -123.83)[1] == "Clatsop County"
+    assert S.named_county("OR", "Multnomah")[1] == "Multnomah County"
+
+
+def test_oers_waterway_text():
+    assert O.waterway("Columbia River, Hood River") == (["Columbia River"], "Hood River")
+    assert O.waterway("Evans Creek and the Rogue River") == (["Evans Creek", "Rogue River"], None)
+    assert O.waterway("Willamette, Oak Lodge") == (["Willamette River"], "Oak Lodge")
+    assert O.waterway("Possible impact to creek") == ([], None) and O.waterway("NULL") == ([], None)
+    assert O.waterway("nye creek") == (["Nye Creek"], None)
