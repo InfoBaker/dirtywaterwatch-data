@@ -11,14 +11,16 @@ level: "state"
 #   it is never requested. A row is a sewage report when its title names sewage (the first filter) and does not name
 #   another material or an indoor backup (the exclude filters). The keyword lists are ut_transforms.SEWAGE_WORDS and
 #   ut_transforms.NOT_SEWAGE (a test holds them equal to this block's filters).
-# Real fetch 2026-11-07 (layer last edited 2026-11-07 11:06 UTC): 8,980 rows, 424 whose title names sewage, 377 kept as
-#   sewage reports (353 sso, 22 plant_bypass, 2 bypass); 47 dropped by the exclude filters (29 industrial, process or
-#   trade wastewater; 10 another material in a sewer, drain or plant; 5 backups inside buildings; 3 drinking-water
-#   plants). Of the 377: 61 marked as the public's reports (dumping, RV, portable toilets, complaints), 62 titled only
-#   "wastewater" (kept as sewage), 19 naming a water in the title, 37 with no date. By year of discovery: 19 to 38 a
-#   year since 2017 (2014 to 2016: 10 to 18; 2021: 34, 2022: 38, 2023: 32, 2024: 19, 2025: 37, 2026 to 11-07: 25). Most in Salt Lake (102),
-#   Utah (50), Weber (28) and Davis (26) counties. One (American Fork, 2026-08-17) is also EPA's eRule report and is
-#   linked to it (duplicate_of).
+# Real fetch 2026-11-08 (layer last edited 2026-11-07): 8,980 rows, 435 whose title names sewage, 387 kept as sewage
+#   reports (360 sso, 25 plant_bypass, 2 bypass); 48 dropped by the exclude filters (30 industrial, process or trade
+#   wastewater, a refinery's included; 11 another material in a sewer, drain or plant; 5 backups inside buildings; 2
+#   drinking-water plants). Of the 387: 70 marked as the public's reports (dumping, human waste, RVs, portable toilets,
+#   complaints), 61 titled only "wastewater" (kept as sewage), 20 naming a water in the title, 39 with no date, 9 from
+#   before 2013 whose title names only the party (material "not stated in the title"). By the Mountain-time day of
+#   discovery: 20 to 38 a year since 2017 (2014 to 2016: 10 to 19; 2021: 37, 2022: 37, 2023: 32, 2024: 20, 2025: 38,
+#   2026 to 11-07: 25); 14 of the 83 since 2024 were discovered in the evening and are dated a day earlier than the
+#   layer's Date_Discovered (the UTC date). One (American Fork, 2026-08-17) is also EPA's eRule report and is linked
+#   to it (duplicate_of).
 # Not in the layer: an end time, a receipt or report time, an operator or permit, a volume (only in the summary, not
 #   requested), a receiving water (only in the summary, and in a few titles). Class 1 sewer overflows that operators
 #   report to the Division of Water Quality under R317-801-4 reach this layer only when someone also calls the hotline.
@@ -51,9 +53,9 @@ fetch:
   free_text: [Title_EventName]
   free_text_scrub: strict
   filter:
-    - {field: Title_EventName, regex: "\\bsew(?:age|er|ers)\\b|\\bSSOs?\\b|\\bseptic\\b|\\bwaste\\s*-?\\s*water\\b|\\blift\\s+station|\\bmanhole|\\beffluent\\b|\\bbypass\\b|\\bblack\\s*water\\b|\\bmotorhome\\b|\\bcamper\\b|\\bRV\\b|\\bport(?:a|able)[\\s-]*(?:pott\\w*|john|toilet)|\\bhoney\\s*bucket|\\bchemical\\s+toilet|\\bbiosolids?\\b|\\blagoons?\\b|\\bWWTP\\b|\\bPOTW\\b|\\btreatment\\s+plant|\\bwater\\s+reclamation|\\breclamation\\s+facility|\\bfecal\\b|\\bsanitary\\b|\\bsanitized\\s+sewer"}
+    - {field: Title_EventName, regex: "\\bsew(?:age|er|ers)\\b|\\bSSOs?\\b|\\bseptic\\b|\\bwaste\\s*-?\\s*water\\b|\\blift\\s+station|\\bmanhole|\\beffluent\\b|\\bbypass\\b|\\bblack\\s*water\\b|\\bmotorhomes?\\b|\\bcampers?\\b|\\bRVs?\\b|\\bport(?:a|able)[\\s-]*(?:pott\\w*|john|toilet)|\\bport(?:a|o)[\\s-]*j|\\bhoney\\s*bucket|\\bchemical\\s+toilet|\\bbiosolids?\\b|\\blagoons?\\b|\\bWWTP\\b|\\bPOTW\\b|\\btreatment\\s+plant|\\breclamation\\b|\\bfecal\\b|\\bsanitary\\b|\\bsanitized\\s+sewer|\\bhuman\\s+waste\\b|\\bseptage\\b|\\bactivated\\s+sludge\\b"}
     # not sewage: industrial, process or trade wastewater
-    - {field: Title_EventName, regex: "\\bindustrial\\b|\\bprocess(?:ed)?\\b|\\bcarpet\\s+clean|\\bconcrete\\b|\\bcement\\b|\\bcar\\s+wash|\\bdairy\\b|\\bacidic\\b|\\balkaline\\b|\\blow\\s+ph\\b|\\bhydrocarbon\\b|\\breverse\\s+osmosis\\b|\\bIWWTP\\b|\\btoxicity\\b|\\bfood\\s+truck\\b|\\bgr[ae]y\\s*water\\b|\\bdumpsters?\\b", exclude: true}
+    - {field: Title_EventName, regex: "\\bindustrial\\b|\\bprocess(?:ed)?\\b|\\bcarpet\\s+clean|\\bconcrete\\b|\\bcement\\b|\\bcar\\s+wash|\\bdairy\\b|\\bacidic\\b|\\balkaline\\b|\\blow\\s+ph\\b|\\bhydrocarbon\\b|\\breverse\\s+osmosis\\b|\\bIWWTP\\b|\\btoxicity\\b|\\bfood\\s+truck\\b|\\bgr[ae]y\\s*water\\b|\\bdumpsters?\\b|\\brefinery\\b", exclude: true}
     # not sewage: a drinking-water plant
     - {field: Title_EventName, regex: "(?<!waste )(?<!waste)\\bwater\\s+treatment\\s+plant\\b", exclude: true}
     # not sewage: another material in a sewer, drain or plant
@@ -80,4 +82,4 @@ fetch:
     credit: "Utah Department of Environmental Quality, Division of Environmental Response and Remediation, Environmental Incidents"
     license: "No licence stated on the layer"
     caveat: "DEQ's log of incidents phoned in to its spill hotline: it holds the sewer overflows someone reported there, not every overflow operators report to the Division of Water Quality. Locations are approximate; the layer gives the day an incident was discovered and no end or volume."
-    time_basis: "Date_Discovered, the day the incident was discovered, read in Mountain time. The layer's filter time (Date_Discovered_For_Filter) is kept as given and not used: it is midnight Eastern time on rows before 2024 and has no stated clock since."
+    time_basis: "The Mountain-time day the incident was discovered. The layer's filter time (Date_Discovered_For_Filter) is stored in UTC, and its Date_Discovered is that time's UTC date, a day late for an evening discovery: the record takes the earlier of Date_Discovered and the filter time's Mountain date. Rows before 2024 hold midnight Eastern time, a date only."

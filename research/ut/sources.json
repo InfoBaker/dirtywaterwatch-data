@@ -74,7 +74,7 @@
   "license": "No licence stated on the layer; DEQ says map locations are approximate",
   "legal_basis": "Utah DEQ spill hotline; R317-801-4 (Class 1 SSO oral report within 24 hours goes to DWQ, not necessarily here)",
   "status": "used",
-  "status_reason": "Read through the generic ArcGIS block (fetch block in its source file) with ingest/ut_transforms.py: the sewage rows picked by a rules-only title filter (377 of 8,980 on 2026-11-07), dated to the day of discovery in Mountain time, the public's reports marked; summaries, responsible parties and addresses never requested.",
+  "status_reason": "Read through the generic ArcGIS block (fetch block in its source file) with ingest/ut_transforms.py: the sewage rows picked by a rules-only title filter (387 of 8,980 on 2026-11-08), dated to the Mountain-time day of discovery, the public's reports marked; summaries, responsible parties and addresses never requested.",
   "verified": "fetched",
   "checked": "2026-11-07",
   "notes": "Incident summaries carry staff names, private addresses and complainants' descriptions: show only date, title, county, point and a cleaned summary. Free-text filter needed to pick sewage rows (dumping and RV complaints mixed in)."

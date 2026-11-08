@@ -1,11 +1,11 @@
 {
  "about": "Water names in Utah's records that data/receiving-waters-national.json does not hold for UT: the water a sewage report's title names (DEQ's Environmental Incidents layer, read 2026-11-07), the water each advisory site of DWQ's Recreational Waters Map lies on, and EPA's receiving water on Utah's eRule reports; one row per name and county, with the record counts by source and the bounding box [west, south, east, north] of the records' points. Records naming no water and texts that name a drain or outfall are left out (by_reason). Written by scripts/ut_report_water_names.py.",
  "state": "UT",
- "waters": 40,
- "records": 79,
+ "waters": 41,
+ "records": 80,
  "records_on_listed_waters": 24,
  "by_reason": {
-  "no water named": 358,
+  "no water named": 368,
   "a drain, outfall or street, not a water": 1
  },
  "rows": [
@@ -301,6 +301,20 @@
     40.9071,
     -111.9208,
     40.9071
+   ]
+  },
+  {
+   "name": "Brighton Canal",
+   "county": "Salt Lake County",
+   "records": 1,
+   "sources": {
+    "ut-deq-environmental-incidents": 1
+   },
+   "box": [
+    -111.9781,
+    40.7369,
+    -111.9781,
+    40.7369
    ]
   },
   {

@@ -12,7 +12,9 @@ level: "state"
 #   (history.confirm_while_listed); the first fetch that no longer finds it ends it.
 # Real fetch 2026-11-07 (layer last edited 2026-11-07): 167 sites; 84 with an advisory (55 Warning HAB, 1 Danger HAB,
 #   3 HAB health watch, 5 Warning Mats, 8 Mats CF, 11 Warning E coli, 1 E coli health watch); 48 Looks Good, 35 empty.
-#   "Mats CF" is a code whose meaning the layer and the map do not give: shown with the site's caution only.
+#   "Mats CF" is, by DWQ's web map, a few harmful algae mats observed by its monitoring team, not an advisory level:
+#   shown with the site's caution only. Labels are read without case, spaces or dots ("E coli" and "Ecoli" alike); a
+#   label the hook does not know is kept by its words with the site's caution, never grey.
 # Not in the layer: when an advisory was lifted (a lifted advisory leaves the layer), the sample results, earlier
 #   seasons (a separate Automap_Data_Advisories_Update layer was last edited 2026-07-01).
 cadence: "weekly in season (May to October); edited 2026-11-07"
@@ -67,5 +69,5 @@ fetch:
   meta:
     credit: "Utah Department of Environmental Quality, Division of Water Quality, Recreational Waters Map"
     license: "none stated"
-    caveat: "DWQ's map shows each site's current advisory; local health departments issue them, and an advisory is lifted only after results stay below DWQ's thresholds for two weeks."
+    caveat: "DWQ's map shows each site's current advisory, as the local health departments issue them, and DWQ's own observations of algae mats; it does not say when an advisory was lifted."
     time_basis: "Advisory_Date, the advisory's date (stored as midnight Mountain time; read as a date). Monitored_Date, the latest sample, is kept with the record."
