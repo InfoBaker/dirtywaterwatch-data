@@ -536,3 +536,39 @@ def test_p3_aliases_and_contradicting_points():
     rows, _ = O.load_file(str(FIX / "or_oers" / "rows.json"))
     r = O.record(dict(rows[1], OERS_No="2017-2304"), "2017-2304", FETCHED)
     assert r["lat"] is None and "Seaside" in r["raw"]["_coords_rejected_reason"]
+
+
+def test_p2_2_the_batch_ties_an_outfall_near_the_river_to_its_main_record():
+    from ingest import outfall_waters as OW
+
+    class MT:
+        waters = {"columbia-river-or": {"name": "Columbia River"},
+                  "columbia-river-umatilla-or": {"name": "Columbia River", "covers_part_of": "columbia-river-or"},
+                  "youngs-bay-or": {"name": "Youngs Bay"}}
+
+        def dist(self, slug, lat, lon):
+            return {"columbia-river-or": 1500 if lat == 46.19 else 9000}.get(slug)
+    s, note = OW.main_record("columbia-river-umatilla-or", 46.19, -123.83, MT())
+    assert s == "columbia-river-or" and "remainder piece columbia-river-umatilla-or" in note
+    assert OW.main_record("columbia-river-umatilla-or", 45.92, -119.3, MT()) == ("columbia-river-umatilla-or", None)
+    assert OW.main_record("columbia-river-umatilla-or", None, None, MT())[0] == "columbia-river-umatilla-or"
+    assert OW.main_record("youngs-bay-or", 46.19, -123.83, MT()) == ("youngs-bay-or", None)
+
+
+def _cov(n_ops: int, state="OR"):
+    from export import coverage as C
+    ev = {"event_id": "or-bes-news-rss:1", "source_id": "or-bes-news-rss", "event_type": "cso", "status": "ended",
+          "started_at": "2026-10-21T00:00:00-07:00", "ended_at": "2026-10-21T01:00:00-07:00", "time_precision": "minute",
+          "published_at": "2026-10-21T09:00:00-07:00", "raw": {"state": state}, "water_slugs": []}
+    feeds = [{"source_id": "or-bes-news-rss", "registry_ids": ["or-bes-news-rss"]}]
+    reg = [{"id": "or-bes-news-rss", "level": "operator", "states": [state], "event_types": ["cso"],
+            "attribution": "City of Portland Environmental Services"}]
+    dis = [{"id": f"x{i}", "state": state} for i in range(n_ops)]
+    cov = C.coverage([ev], [], feeds, reg, dis, {}, "2026-11-08T03:00:00Z",
+                     source_levels={"or-bes-news-rss": ["operator"]})
+    return cov["states"][state]["sentence"]
+
+
+def test_p2_3_the_publisher_is_named_only_where_the_state_has_several_operators():
+    assert "only the City of Portland Environmental Services publishes" in _cov(2)
+    assert _cov(1).startswith("Oregon publishes")                 # one operator: the sentence is unchanged

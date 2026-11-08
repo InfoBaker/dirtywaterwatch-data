@@ -1027,11 +1027,28 @@ def note_for_matcher_row(o: dict, waters: dict) -> str:
     return f"{name} ({slug}); scripts/match_outfalls.py ({mt})"
 
 
+REMAINDER_TIE_M = 2000
+
+
+def main_record(s: str, lat, lon, mt) -> tuple[str, str | None]:
+    """(slug, note): a remainder record (covers_part_of: the NHD pieces of a river more than 300 m from the river's own
+    record, ingest/waters_from_nhd.py) gives way to that main record when the outfall's point lies within
+    REMAINDER_TIE_M of it, so the river's one page lists its outfalls (Oregon go-live audit 2026-11-08 P2-2: Astoria's
+    34 CSO outfalls sat on columbia-river-umatilla-or). A point farther off, or none, keeps the remainder."""
+    parent = (mt.waters.get(s) or {}).get("covers_part_of")
+    if not parent or parent == s or parent not in mt.waters or lat is None or lon is None:
+        return s, None
+    d = mt.dist(parent, lat, lon)
+    if d is None or d > REMAINDER_TIE_M:
+        return s, None
+    return parent, (f"tied to {parent}, the river's own record ({m(d)} m from the point), not its remainder piece {s}")
+
+
 def apply(o: dict, res: dict, mt: Matcher) -> None:
     """Write one result into a registry row (in place)."""
     by = f"{BY_HERE} ({today()})"
     if res.get("slug"):
-        s = res["slug"]
+        s, remainder_note = main_record(res["slug"], o.get("lat"), o.get("lon"), mt)
         w = mt.waters[s]
         if res.get("coords_problem"):
             o["echo_lat"], o["echo_lon"] = o.get("lat"), o.get("lon")
@@ -1058,7 +1075,8 @@ def apply(o: dict, res: dict, mt: Matcher) -> None:
                             + (f", {m(d)} m from the point" if d is not None else
                                ", no point" if o.get("lat") is None else ", distance not measured")
                             + ((NO_OUTLINE_NOTE + (f"; kept as {mt.evidence_of()[s]}" if mt.evidence_of().get(s) else ""))
-                               if mt.no_outline(s) else ""))
+                               if mt.no_outline(s) else "")
+                            + (f"; {remainder_note}" if remainder_note else ""))
         o["water_matched_by"] = by
         o.pop("no_water_reason", None)
     else:
