@@ -160,19 +160,32 @@ INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), ru
 WATERS_NHD_BUDGET_S ?= 150
 WATERS_NHD_WALL_S ?= 300
 INGEST_MODULES = $(sort $(basename $(notdir $(shell grep -l '__name__ == .__main__.' pipeline/ingest/*.py 2>/dev/null | xargs grep -L 'not a feed' 2>/dev/null))))
+# Feed cadence (pipeline/cadence.py): a feed whose name starts with the code of a state not in data/rules.json
+# live_states (al_adem_sso, tx-glo-beach-watch) runs on a daily pass, not hourly: its records are neither coloured nor
+# exported until the state goes live, and the switch in live_states makes it hourly with no other edit. The last good
+# run of each is in data/build/feed-cadence.json; FEEDS_ALL=1 runs every feed. If the cadence check itself fails,
+# every feed runs (ALL).
+CADENCE_DUE = due=" $$(cd pipeline && $(PYTHON) -m cadence due $(1)) " || due=" ALL ";
+CADENCE_GATE = case "$$due" in *" ALL "*|*" $(1) "*) d= ;; *" $(1):daily "*) d=daily ;; \
+	  *) echo "== $(1): a state not yet live; on its daily pass (data/build/feed-cadence.json)"; continue ;; esac;
+CADENCE_RAN = { [ -z "$$d" ] || (cd pipeline && $(PYTHON) -m cadence ran $(1)) || true; }
 
 setup:
 	cd pipeline && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt pytest
 
 ingest:
-	@for m in $(INGEST_PRE) $(filter-out $(INGEST_SKIP) $(INGEST_PRE) $(INGEST_SNAPSHOTS),$(INGEST_MODULES)); do \
+	@$(call CADENCE_DUE,$(addprefix ingest.,$(INGEST_PRE) $(filter-out $(INGEST_SKIP) $(INGEST_PRE) $(INGEST_SNAPSHOTS),$(INGEST_MODULES)))) \
+	for m in $(INGEST_PRE) $(filter-out $(INGEST_SKIP) $(INGEST_PRE) $(INGEST_SNAPSHOTS),$(INGEST_MODULES)); do \
+	  $(call CADENCE_GATE,ingest.$$m) \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) && $(call CADENCE_RAN,ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@ids=$$(cd pipeline && $(PYTHON) -m ingest.generic --list) || echo "!! ingest.generic --list reported problems (exit $$?)"; \
+	$(call CADENCE_DUE,$$(for g in $$ids; do printf 'generic.%s ' "$$g"; done)) \
 	for g in $$ids; do \
+	  $(call CADENCE_GATE,generic.$$g) \
 	  echo "== ingest.generic $$g"; \
-	  (cd pipeline && $(TIMED) generic.$$g $(PYTHON) -m ingest.generic $$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) generic.$$g $(PYTHON) -m ingest.generic $$g) && $(call CADENCE_RAN,generic.$$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
 	done
 	@for m in $(INGEST_SNAPSHOTS); do \
 	  echo "== ingest.$$m"; \
