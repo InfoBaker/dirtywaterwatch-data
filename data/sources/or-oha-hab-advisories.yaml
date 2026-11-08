@@ -1,0 +1,63 @@
+id: "or-oha-hab-advisories"
+name: "Oregon Health Authority cyanobacteria (harmful algae bloom) recreational use advisories (ArcGIS FeatureServer)"
+url: "https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/HABs_Advisories_(Points)/FeatureServer/0"
+homepage: "https://www.oregon.gov/oha/ph/healthyenvironments/recreation/harmfulalgaeblooms/pages/blue-greenalgaeadvisories.aspx"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS ingester (the fetch block below; ingest/or_transforms.py writes the advisory text and
+#   the record's clock): source id or-oha-hab-advisories, data/build/events/or-oha-hab-advisories.json. Blooms, not
+#   sewage (hab_advisory, shown in plum).
+# Read 2026-11-07: 64 rows (Precaution 34, Below Human RUV 13, Advisory/Precaution Lifted 12, Advisory 5); 39 records
+#   (Advisory and Precaution); the layer last edited 2026-11-06. The South Umpqua and mainstream Umpqua rows carry OHA's
+#   "PERMANENT RECREATIONAL USE ADVISORY" (issued 2024-01-01). Creator and Editor (staff user names) and GlobalID are
+#   never requested. Issue_Date is a date stored as Pacific midnight (midnight: date).
+cadence: "edited as advisories are issued and lifted (OHA: 'updated regularly')"
+license: "none stated"
+attribution: "Oregon Health Authority, Harmful Algae Bloom program"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["OR"]
+registry_ids: ["or-oha-hab-advisories"]
+access: ["arcgis", "html"]
+access_detail: "HABs_Advisories_(Points)/FeatureServer/0 in the State of Oregon's ArcGIS Online organisation (uUvqNMGPm7axC2dD), public, no key; a polygon layer (HABs_Advisories_(Polygon2)) and an archive layer (OR_HABs_Advisory_Archive) also exist. OHA's public page lists the same advisories."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-07"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/HABs_Advisories_(Points)/FeatureServer/0"
+  order_by: "OBJECTID"
+  geometry: true
+  time_zone: "America/Los_Angeles"
+  bounds: [-124.8, 41.9, -116.4, 46.35]       # Oregon; a point outside is not used (raw._coords_rejected)
+  safe_fields: [OBJECTID, WaterbodyName, AdvisoryStatus, Toxin, ToxinLevel_ppb, ToxinLevel, Details, AdvisoryLink,
+                Issue_Date, County_1, County_2, StatusSort, Above_PetRUV, EditDate, _x, _y]
+  free_text: [Details]
+  # OHA's "Below Human RUV" (sampled, below its recreational use value) and "Advisory/Precaution Lifted" are no current
+  # advisory: not records (grey, no report)
+  filter: [{field: AdvisoryStatus, regex: "^\\s*(advisory|precaution)\\s*$"}]
+  record:
+    source_record_id: {template: "{OBJECTID}-{@started_at|compact|default:nodate}"}
+    started_at: {field: Issue_Date, parse: epoch_ms, midnight: date}
+    source_updated_at: {field: EditDate, parse: epoch_ms}
+    event_type: {const: hab_advisory}
+    status: {field: AdvisoryStatus, lower: true, map: {advisory: advisory_active, precaution: advisory_active},
+             otherwise: unknown}
+    lat: {field: _y, parse: number}
+    lon: {field: _x, parse: number}
+    waterbody_text: WaterbodyName
+    authority: {const: "Oregon Health Authority (recreational use advisory)"}
+    source_url: {const: "https://www.oregon.gov/oha/ph/healthyenvironments/recreation/harmfulalgaeblooms/pages/blue-greenalgaeadvisories.aspx"}
+  transform: "ingest.or_transforms.or_hab_record"
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    confirm_while_listed: true
+    track:
+      AdvisoryStatus: {key: _status_seen, label: status}
+  meta:
+    credit: "Oregon Health Authority, cyanobacteria recreational use advisories"
+    caveat: "OHA lists the waters under an advisory or a precaution and lifts them after its own sampling; the issue date is a date only. A precaution is OHA's lower level, issued for a visible bloom or a low toxin result."
+    time_basis: "Issue_Date is OHA's issue date (a date, read in Pacific time; Mountain in Malheur County north of township 35 South); EditDate is the row's last edit."

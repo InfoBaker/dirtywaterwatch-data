@@ -5,7 +5,8 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
   STATE_ZONES  the zone of each state (its larger part for a state that straddles two: 49 CFR part 71).
   zone_for     the zone for a state and, where the state straddles two zones and the code knows the line, the point:
                Florida by its Eastern-Central boundary (florida_zone), South Dakota and Nebraska by the county files of
-               data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone). Any other
+               data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone), Oregon by
+               Malheur County (oregon_zone). Any other
                state gets STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
@@ -65,6 +66,30 @@ def florida_zone(lat, lon) -> str:
     return CENTRAL
 
 
+# Oregon's Mountain-Pacific line (49 CFR 71.9(a), read in eCFR 2026-11-07): from the Idaho line "westerly along the north
+# line of Malheur County to the northwest corner of Malheur County; thence southerly along the west line of Malheur
+# County to the southwest corner of T. 35 S., R. 37 E.; thence east to the Idaho-Oregon boundary". Malheur County north
+# of the south line of township 35 South is Mountain time; its part south of that line, and the rest of Oregon, Pacific.
+# The township line lies 210 miles south of the Willamette base line (45.5197 N): about 42.48 N. Malheur's outline here
+# is a box: its west line about 118.23 W, its north line about 44.30 N (the Baker County line runs near 44.3 N to 44.5 N
+# east of 118 W); a point within a few kilometres of either line should carry its county (oregon_zone's county).
+OR_MALHEUR_WEST, OR_MALHEUR_NORTH, OR_T35S_SOUTH = -118.23, 44.30, 42.48
+
+
+def oregon_zone(lat=None, lon=None, county: str | None = None) -> str:
+    """Oregon's zone: Mountain in Malheur County north of township 35 South (49 CFR 71.9(a)), Pacific elsewhere. The
+    county, when the source gives it, decides whether the record is in Malheur; else the point against Malheur's box.
+    Malheur with no point is Mountain (the county's people and towns lie north of the line)."""
+    c = (county or "").strip().lower().removesuffix(" county")
+    if c and c != "malheur":
+        return PACIFIC
+    if lat is None or lon is None:
+        return MOUNTAIN if c == "malheur" else PACIFIC
+    lat, lon = float(lat), float(lon)
+    in_malheur = c == "malheur" or (lon >= OR_MALHEUR_WEST and lat < OR_MALHEUR_NORTH)
+    return MOUNTAIN if in_malheur and lat >= OR_T35S_SOUTH else PACIFIC
+
+
 @functools.lru_cache(maxsize=4096)
 def _county_zone(state: str, lat: float, lon: float) -> str | None:
     from ingest.echo_sewer_overflow_events import point_zone
@@ -76,6 +101,8 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     st = (state or "").upper()
     if st == "FL":
         return florida_zone(lat, lon)
+    if st == "OR":
+        return oregon_zone(lat, lon)
     if st in ("SD", "NE") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
