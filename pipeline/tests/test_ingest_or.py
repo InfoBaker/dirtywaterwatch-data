@@ -169,7 +169,7 @@ def test_oers_types_waters_and_reached_water():
     assert r["waterbody_text"] == "Columbia River" and r["raw"]["waterway_place"] == "Astoria"
     r = recs["2013-1512"]
     assert r["event_type"] == "sso" and r["raw"]["reached_water"] is False and r["volume_gal"] == 200
-    r = recs["2017-1160"]                                                     # P2-3: a private residence's sewage
+    r = recs["2099-0002"]                                                     # P2-3: a private residence's sewage
     assert r["event_type"] == "sso" and r["raw"]["_source_type"] == "Private Residence" and "_type_basis" in r["raw"]
     r = recs["2023-0731"]
     assert r["waterbody_text"] is None and r["volume_gal"] == 50000          # "Unknown, Madras" names no water
@@ -337,7 +337,7 @@ def intervals(ev, now="2026-11-08T00:00:00+00:00"):
 
 
 def test_p2_3_a_private_homes_sewage_report_carries_the_caution():
-    r = oers()[0]["2017-1160"]
+    r = oers()[0]["2099-0002"]
     ivs = intervals(r, "2017-04-12T00:00:00+00:00")
     assert ivs and ivs[0]["color"] == "yellow" and ivs[0]["category"] == "sewage"
     from build import status as S
@@ -388,7 +388,9 @@ def test_p2_6_misspellings_are_aliased_not_sent_to_the_batch():
     aliases = json.loads((ROOT / "data" / "water-aliases.json").read_text())
     assert aliases["tualatin-river-or"] == ["Tualitan River"] and "Coquile River" in aliases["coquille-river-or"]
     d = json.loads((ROOT / "research" / "or" / "receiving-waters-missing.json").read_text())
-    bad = {re.sub(r"[^a-z0-9]", "", a.lower()) for k, v in aliases.items() if k.endswith("-or") for a in v}
+    misspelt = {"claggett-creek-or", "coquille-river-or", "hoquarten-slough-or", "kellogg-creek-or", "lake-ewauna-or",
+                "little-pudding-river-or", "little-river-or", "neawanna-creek-or", "necanicum-river-or", "tualatin-river-or"}
+    bad = {re.sub(r"[^a-z0-9]", "", a.lower()) for k, v in aliases.items() if k in misspelt for a in v}
     assert not [r["name"] for r in d["rows"] if re.sub(r"[^a-z0-9]", "", r["name"].lower()) in bad]
     assert d["aliased"]["Tualitan River"] == 2
     from ingest import or_transforms as T
@@ -431,3 +433,106 @@ def test_p3_small_fixes():
     a = dict(rows[0], Q_released_gal=0.5, Quantity_Unknown="No", UOM="Gallons")
     r = O.record(a, "x", FETCHED)
     assert r["volume_gal"] is None and r["volume_text"] == "0.5 gallons"
+
+
+# ---------------------------------------------------------------- the go-live audit of 2026-11-08
+
+def _line(name, slug, coords, kind="river"):
+    xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+    return {"slug": slug, "name": name, "kind": kind, "state": "OR", "bbox": [min(xs), min(ys), max(xs), max(ys)],
+            "geometry": {"type": "LineString", "coordinates": coords}}
+
+
+WILL = _line("Willamette River", "willamette-river-or", [[-122.66, 45.50], [-122.68, 45.53], [-122.73, 45.58]])
+SLOUGH = _line("Columbia Slough", "columbia-slough-or", [[-122.75, 45.61], [-122.65, 45.59]])
+
+
+def _outfall(no, slug, lat, lon, status="CSO", permit="OR0026905"):
+    return {"npdes_permit": permit, "outfall": no, "outfall_status": status, "water_slug": slug,
+            "water_matched_by": "name", "match": "name", "lat": lat, "lon": lon, "state": "OR", "_file": "test"}
+
+
+OUTFALLS = [_outfall("001", "willamette-river-or", 45.51, -122.67), _outfall("002", "willamette-river-or", 45.53, -122.68),
+            _outfall("003", "columbia-slough-or", 45.60, -122.70), _outfall("004", "willamette-river-or", 45.52, -122.67,
+                                                                             status="CLS")]
+
+
+@pytest.fixture
+def oregon_live(monkeypatch):
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"OR"})
+    return S
+
+
+def test_p1_1_a_portland_cso_advisory_is_placed_on_its_outfalls_on_the_named_water(oregon_live):
+    S = oregon_live
+    res = S.Resolver({"willamette-river-or": WILL, "columbia-slough-or": SLOUGH}, OUTFALLS, placement_rules={})
+    pl = res.resolve(bes()[0]["59515"])
+    assert pl["water_slugs"] == ["willamette-river-or"]
+    assert [o["outfall"] for o in pl["outfalls"]] == ["001", "002"]          # open outfalls on the named water only
+    both = res.resolve(bes()[0]["56546"])                                     # "the Willamette River and/or Columbia Slough"
+    assert {o["outfall"] for o in both["outfalls"]} == {"001", "002", "003"}
+    # the outfalls' reaches are found, so the advisory colours them
+    reach = {"key": "r1", "permit": "OR0026905", "outfall": "001", "model": "river"}
+    idx = S.index_reaches({"r1": reach})
+    assert [r["key"] for r, _ in S.event_reaches(bes()[0]["59515"], pl, idx)] == ["r1"]
+    # a sewage release names no outfalls; another state's CSO report keeps its placement
+    assert "outfalls" not in res.resolve(bes()[0]["57715"])
+    other = dict(bes()[0]["59515"], raw={"state": "WA"}, event_id="x:1")
+    assert res.named_water_outfalls(other, "WA", ["willamette-river-or"]) is None
+
+
+def test_p1_1_the_citys_advisory_never_switches_the_rain_caution_off():
+    from build import rain_likely as RL
+    recs = bes()[0]
+    assert recs["59515"]["raw"]["keeps_rain_caution"] is True
+    assert "OR0026905" not in RL.discharge_starts([recs["59515"], recs["56546"]])
+    plain = json.loads(json.dumps(recs["59515"]))
+    plain["raw"].pop("keeps_rain_caution")
+    assert "OR0026905" in RL.discharge_starts([plain])                       # any other notice still holds it back
+
+
+def test_p2_1_points_are_rounded_and_a_homes_report_keeps_its_county_only():
+    rows, _ = O.load_file(str(FIX / "or_oers" / "rows.json"))
+    assert all(r["Lat_DD"] is None or round(r["Lat_DD"], 3) == r["Lat_DD"] for r in rows)
+    assert O.safe_row({"Lat_DD": 44.515483, "Lon_DD": -124.03592})["Lat_DD"] == 44.515
+    r = oers()[0]["2099-0002"]                                                 # a synthetic private residence
+    assert r["lat"] is None and r["lon"] is None and r["coord_source"] is None and r["raw"]["city"] is None
+    assert r["raw"]["county"] == "Lincoln" and r["raw"]["_placement"] == "named_water_only"
+    assert "44.123" not in json.dumps(r) and "Example" not in json.dumps(r)
+    assert "2017-1160" not in (FIX / "or_oers" / "rows.json").read_text()
+
+
+def test_p2_2_a_remainder_of_the_columbia_is_read_as_the_columbia(oregon_live):
+    S = oregon_live
+    main = _line("Columbia River", "columbia-river-or", [[-123.90, 46.20], [-123.70, 46.18]])
+    rest = dict(_line("Columbia River", "columbia-river-umatilla-or", [[-123.84, 46.193], [-123.80, 46.192]]),
+                covers_part_of="columbia-river-or")
+    far = dict(_line("Columbia River", "columbia-river-far-or", [[-119.30, 45.92], [-119.20, 45.93]]),
+               covers_part_of="columbia-river-or")
+    waters = {"columbia-river-or": main, "columbia-river-umatilla-or": rest, "columbia-river-far-or": far}
+    assert S.remainder_parents(waters) == {"columbia-river-umatilla-or": "columbia-river-or"}
+    res = S.Resolver(waters, [_outfall("010", "columbia-river-umatilla-or", 46.19, -123.83, permit="OR0027561")],
+                     placement_rules={})
+    assert res.canon("columbia-river-umatilla-or") == "columbia-river-or"
+    wa = {k: dict(v, state="WA") for k, v in waters.items()}
+    assert S.remainder_parents(wa) == {}                                       # keyed on Oregon
+
+
+def test_p2_3_the_grade_sentence_names_the_one_publisher():
+    from datetime import datetime, UTC
+    from export import coverage as C
+    f = {"records_12m": 13, "latest_dated": "2026-10-21T00:00:00-07:00", "lag_days": 0.44, "dated_share": 1.0,
+         "monthly_share": 0, "annual_share": 0}
+    g, s = C.grade_of("OR", f, datetime(2026, 11, 8, tzinfo=UTC), operator="City of Portland Environmental Services")
+    assert g == "Dated reports, delayed" and s.startswith(
+        "Of the sewer operators in Oregon, only the City of Portland Environmental Services publishes dated reports")
+    assert C.grade_of("OR", f, datetime(2026, 11, 8, tzinfo=UTC))[1].startswith("Oregon publishes")
+
+
+def test_p3_aliases_and_contradicting_points():
+    aliases = json.loads((ROOT / "data" / "water-aliases.json").read_text())
+    assert aliases["owyhee-lake-or"] == ["Owyhee Reservoir"] and aliases["dexter-reservoir-or"] == ["Dexter Lake"]
+    rows, _ = O.load_file(str(FIX / "or_oers" / "rows.json"))
+    r = O.record(dict(rows[1], OERS_No="2017-2304"), "2017-2304", FETCHED)
+    assert r["lat"] is None and "Seaside" in r["raw"]["_coords_rejected_reason"]

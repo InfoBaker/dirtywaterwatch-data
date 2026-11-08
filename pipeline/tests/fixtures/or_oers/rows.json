@@ -58,8 +58,8 @@
    "MediaAffected": "Soil",
    "Cause": "Unknown",
    "Activity": "Other",
-   "Lat_DD": 43.822988,
-   "Lon_DD": -117.12279
+   "Lat_DD": 43.823,
+   "Lon_DD": -117.123
   },
   {
    "OBJECTID": 10240,
@@ -85,8 +85,8 @@
    "MediaAffected": "Surface Water",
    "Cause": "Flooding",
    "Activity": "Sewage/Wastewater Treatment",
-   "Lat_DD": 44.61257,
-   "Lon_DD": -123.93109
+   "Lat_DD": 44.613,
+   "Lon_DD": -123.931
   },
   {
    "OBJECTID": 10700,
@@ -112,8 +112,8 @@
    "MediaAffected": "Surface Water",
    "Cause": "Unknown",
    "Activity": "Sewage/Wastewater Treatment",
-   "Lat_DD": 46.191053,
-   "Lon_DD": -123.84119
+   "Lat_DD": 46.191,
+   "Lon_DD": -123.841
   },
   {
    "OBJECTID": 56,
@@ -139,12 +139,12 @@
    "MediaAffected": "Soil",
    "Cause": "Equipment Failure",
    "Activity": "Material Transport",
-   "Lat_DD": 45.325756,
-   "Lon_DD": -122.612566
+   "Lat_DD": 45.326,
+   "Lon_DD": -122.613
   },
   {
-   "OBJECTID": 3376,
-   "OERS_No": "2017-1160",
+   "OBJECTID": 999998,
+   "OERS_No": "2099-0002",
    "Quantity_Unknown": "Yes",
    "Quantity_Released": null,
    "UOM": "NULL",
@@ -154,7 +154,7 @@
    "Time": "14:51:00",
    "Affected_Waterway": "NULL",
    "Report_Required": "No",
-   "City": "Seal Rock",
+   "City": "Example",
    "County": "Lincoln",
    "Region": "Western",
    "State": "OR",
@@ -166,8 +166,8 @@
    "MediaAffected": "Surface Water",
    "Cause": "Other",
    "Activity": "Other",
-   "Lat_DD": 44.515483,
-   "Lon_DD": -124.03592
+   "Lat_DD": 44.123456,
+   "Lon_DD": -123.654321
   },
   {
    "OBJECTID": 4470,
@@ -193,8 +193,8 @@
    "MediaAffected": "Pavement",
    "Cause": "Sewer Bypass",
    "Activity": "Material Transfer",
-   "Lat_DD": 46.090303,
-   "Lon_DD": -122.933498
+   "Lat_DD": 46.09,
+   "Lon_DD": -122.933
   },
   {
    "OBJECTID": 4471,
@@ -220,8 +220,8 @@
    "MediaAffected": "Pavement",
    "Cause": "Sewer Bypass",
    "Activity": "Material Transfer",
-   "Lat_DD": 46.090303,
-   "Lon_DD": -122.933498
+   "Lat_DD": 46.09,
+   "Lon_DD": -122.933
   },
   {
    "OBJECTID": 600,
@@ -247,8 +247,8 @@
    "MediaAffected": "Soil",
    "Cause": "Crash",
    "Activity": "Material Transport",
-   "Lat_DD": 45.81927,
-   "Lon_DD": -119.53924
+   "Lat_DD": 45.819,
+   "Lon_DD": -119.539
   },
   {
    "OBJECTID": 10593,
@@ -274,8 +274,8 @@
    "MediaAffected": "Soil",
    "Cause": "Sewer Bypass",
    "Activity": "Material Transport",
-   "Lat_DD": 44.6374,
-   "Lon_DD": -121.12445
+   "Lat_DD": 44.637,
+   "Lon_DD": -121.124
   },
   {
    "OBJECTID": 2168,
@@ -328,11 +328,12 @@
    "MediaAffected": "Soil",
    "Cause": "Equipment Failure",
    "Activity": "Material Transport",
-   "Lat_DD": 45.325756,
-   "Lon_DD": -122.612566,
+   "Lat_DD": 45.326,
+   "Lon_DD": -122.613,
    "Situation": "Caller Pat Example at 503-555-0142 reported sewage at 1234 SE Example St",
    "Name": "Sewage - 1234 SE Example St",
    "Address": "1234 SE Example St"
   }
- ]
+ ],
+ "note": "Real DEQ rows (points rounded to three decimals) except the synthetic 2099-0001 (personal fields the module never reads) and 2099-0002 (a private residence)."
 }
