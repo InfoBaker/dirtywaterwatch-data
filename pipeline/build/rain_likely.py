@@ -55,7 +55,8 @@ LABEL = "Discharge likely: heavy rain, no report received"
 TRIGGER_BASES = ("operator", "state", "default")
 LABEL_POSSIBLE = "Discharge possible: heavy rain, no report received"
 LABELS = {"operator": LABEL, "state": LABEL, "default": LABEL_POSSIBLE}
-BASIS_OF_KIND = {"operator_history": "operator", "shared_site": "operator", "state": "state", "site_default": "default"}
+BASIS_OF_KIND = {"operator_history": "operator", "shared_site": "operator", "state": "state", "site_default": "default",
+                 "operator_rule": "operator"}
 SOURCE_ID = "noaa-mrms-qpe-imageserver"
 QPF_SOURCE_ID = "nws-api-gridpoint-qpf"
 RAINFALL_SOURCE = "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total"
@@ -184,7 +185,19 @@ def discharger_index() -> dict[str, dict]:
     return out
 
 
-def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict) -> dict:
+def operator_rule(permit: str, rules: dict, when: datetime | None = None) -> dict | None:
+    """The operator's own published rain trigger for this permit (rules.json rain_likely.fallback.by_permit: inches,
+    tail_hours, months, basis, source; Northern Kentucky's SD1, wave 4), when it applies at `when` (its months, the
+    season the operator alerts in; any time when no months are given or `when` is None); None otherwise."""
+    r = ((((rules or {}).get(RULE) or {}).get("fallback") or {}).get("by_permit") or {}).get(permit)
+    if not r or r.get("inches") is None:
+        return None
+    if when is not None and r.get("months") and when.month not in r["months"]:
+        return None
+    return r
+
+
+def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict, when: datetime | None = None) -> dict:
     """The permittee's own threshold from its reporting history (rain-thresholds.json basis "history"), else the
     published rule for its state (rules.json rain_likely.fallback.by_state), else the site default; the published
     rule is read from rules.json on every path, so a row of rain-thresholds.json built before a state's rule was
@@ -197,6 +210,13 @@ def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict)
                 "text": row.get("basis_text"), "source": row.get("source"), "n_discharge_days": row.get("n_discharge_days"),
                 "since": row.get("since"), "until": row.get("until"), "name": row.get("name"), "kind": "operator_history",
                 "trigger_basis": "operator"}
+    own = operator_rule(permit, rules, when)
+    if own is not None:   # the operator's own published trigger (fallback.by_permit), in its season
+        return {"threshold_in": float(own["inches"]), "basis": "published",
+                "rule": f"rain_likely.fallback.by_permit.{permit}", "text": own.get("basis"), "source": own.get("source"),
+                "n_discharge_days": row.get("n_discharge_days"), "since": row.get("since"), "until": row.get("until"),
+                "name": row.get("name"), "kind": "operator_rule", "trigger_basis": "operator",
+                "tail_hours": own.get("tail_hours"), "months": own.get("months")}
     fb = ((rules or {}).get(RULE) or {}).get("fallback") or {}
     r = (fb.get("by_state") or {}).get((state or "").upper())
     key = f"rain_likely.fallback.by_state.{(state or '').upper()}" if r else "rain_likely.fallback.default"
@@ -411,15 +431,17 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
             continue                    # its caution comes from the shared site (_site_flags), never twice
         info = latest.get(permit) or {}
         state = info.get("state") or permit[:2]
-        thr = threshold_for(permit, state, thresholds, rules)
+        thr = threshold_for(permit, state, thresholds, rules, now)
         if thr["threshold_in"] is None:
             continue
         t_in = float(thr["threshold_in"])
+        # the operator's own caution length where its published rule gives one (fallback.by_permit), else the site's
+        tail_p = float(thr["tail_hours"]) if thr.get("tail_hours") is not None else tail
         dis = ((rain or {}).get("dischargers") or {}).get(permit) or {}
         name = dis.get("name") or thr.get("name") or info.get("name")
         keys, tags, reach_of, aside = targets(permit, waters, outfalls, info.get("outfalls") or [], reaches,
                                               reach_waters_fn)
-        eps = runs(series.get(permit) or [], start, t_in, now, tail, float(cfg["rainfall_stale_hours"])) if start else []
+        eps = runs(series.get(permit) or [], start, t_in, now, tail_p, float(cfg["rainfall_stale_hours"])) if start else []
         blocks = [(s, s + supp) for s, _ in starts.get(permit, []) if s <= now]
         h24 = info.get("h24")
         qpf = info.get("qpf_24h_in")
@@ -462,7 +484,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "peak_24h_in": round(ep["peak"], 2), "peak_at": iso(ep["peak_at"]),
                 "above_from": iso(ep["start"]), "last_above_at": iso(ep["last_above"]),
                 "dropped_below_at": iso(ep.get("dropped_at")), "until": iso(ep["end"]),
-                "until_rule": f"{tail:g} hours after the 24-hour total falls below the threshold",
+                "until_rule": f"{tail_p:g} hours after the 24-hour total falls below the threshold",
                 "rain_24h_in": h24, "valid_time": info.get("valid_time"), "point": _point(info.get("h24_point")),
                 "qpf_24h_in": qpf, "qpf_update_time": info.get("qpf_update_time"),
                 "rainfall_source": RAINFALL_SOURCE, "rainfall_source_id": SOURCE_ID,
@@ -473,7 +495,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "rainfall_stale": bool(ep.get("rainfall_stale")) or stale,
                 "suppressed_by": by_notice,
             }
-            rule_applied = {"rule": RULE, "threshold_in": t_in, "threshold_basis": thr["basis"], "tail_hours": tail,
+            rule_applied = {"rule": RULE, "threshold_in": t_in, "threshold_basis": thr["basis"], "tail_hours": tail_p,
                             "trigger_basis": thr["trigger_basis"], "rationale": cfg["doc"], "source": cfg["source"]}
             block["episodes"][eid] = {"permit": permit, "discharger_name": name, "discharger_id": dis.get("id"),
                                       "state": state, "trigger_basis": thr["trigger_basis"],
@@ -481,7 +503,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                                       "end": iso(ep["end"]), "active": active, "in_effect": in_now,
                                       "pieces": [[iso(a), iso(b)] for a, b in pieces], "waters": sorted(tags),
                                       "reaches": keys, "rain": rain_rec}
-            _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail, keys, tags, reach_of, by_water, by_reach,
+            _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail_p, keys, tags, reach_of, by_water, by_reach,
                   SOURCE_ID, "NOAA MRMS radar estimate")
         block["permits"][permit] = prow
         for slug in tags:
