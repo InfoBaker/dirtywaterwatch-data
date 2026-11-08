@@ -317,3 +317,13 @@ def test_the_operator_rule_reads_its_months_in_its_own_zone():
     rule = {"inches": 0.25, "months": [5, 6, 7, 8, 9, 10], "time_zone": "America/New_York"}
     assert RL.in_season(rule, datetime(2026, 11, 1, 2, tzinfo=UTC))           # 31 October, 22:00 local
     assert not RL.in_season(rule, datetime(2026, 5, 1, 3, tzinfo=UTC))        # 30 April, 23:00 local
+
+
+def test_sd1s_published_rule_comes_before_a_history_row():
+    """Review 2026-11-08 P3-5: a history row would have replaced SD1's rule silently."""
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    hist = {"permits": {"KY0021466": {"threshold_in": 0.4, "basis": "history", "rule": "rain_likely.percentile"}}}
+    june = RL.threshold_for("KY0021466", "KY", hist, rules, datetime(2026, 6, 15, tzinfo=UTC))
+    assert june["kind"] == "operator_rule" and june["threshold_in"] == 0.25
+    dec = RL.threshold_for("KY0021466", "KY", hist, rules, datetime(2026, 12, 15, tzinfo=UTC))
+    assert dec["kind"] == "operator_history" and dec["threshold_in"] == 0.4
