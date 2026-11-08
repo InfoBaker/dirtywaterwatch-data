@@ -55,6 +55,9 @@ Q_TRIBAL = ("NPDES permit {permit} (EPA Region 8, tribal land): the 24-hour and 
 Q_EPA = ("NPDES permit {permit}: the permittee's electronic sewer overflow reports to EPA (40 CFR 122.41(l)(6) and "
          "Part 127)")
 TRIBAL_PREFIX = ("NN", "COG", "UTG5894")
+CONTRACTORS = {"ut-alder-construction", "ut-fx-construction", "ut-whitaker-construction"}
+Q_DEWATER = ("UPDES general permit coverage {permit} (construction dewatering): the permit's noncompliance reports to "
+             "DWQ")
 
 AGENCY = [
     {"id": "ut-deq-environmental-incidents", "agency": "Utah Department of Environmental Quality",
@@ -64,7 +67,7 @@ AGENCY = [
      "unmonitored_reason": "feed_ingested", "feed_source_id": INCIDENTS, "publishes": "notices", "noun": "Data feed",
      "note": ("The Division of Environmental Response and Remediation's public layer of incidents phoned in to DEQ's "
               "spill hotline since 1991, edited daily, with a point and a PDF report for each: 8,980 rows on "
-              "2026-11-07, 377 of them sewage reports by their titles (19 to 38 a year since 2017). It holds the "
+              "2026-11-08, 387 of them sewage reports by their titles (20 to 38 a year since 2017). It holds the "
               "overflows someone called in, not the Class 1 reports operators send DWQ. (research/ut/report.md §2.2)"),
      "sources": [INCIDENTS]},
     {"id": "ut-dwq-class-1-sso-reports", "agency": "Utah Division of Water Quality",
@@ -91,7 +94,8 @@ AGENCY = [
      "urls": [REC_PAGE], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
      "unmonitored_reason": "feed_ingested", "feed_source_id": REC, "publishes": "status", "noun": "Data feed",
      "note": ("The map layer of the recreational sites DWQ and local health departments sample, each with its current "
-              "advisory: 167 sites on 2026-11-07, 84 under an advisory (72 algal bloom or algae mat, 12 E. coli). "
+              "advisory: 167 sites on 2026-11-07, 64 under an algal bloom or algae mat advisory, 8 where DWQ's team "
+              "observed a few algae mats (\"Mats CF\", not an advisory level) and 12 under an E. coli advisory. "
               "\"Looks Good\" means no current advisory. Blooms and bacteria, not sewage. (research/ut/report.md §2.5)"),
      "sources": [REC]},
     {"id": "ut-dwq-recreational-page", "agency": "Utah Division of Water Quality",
@@ -190,6 +194,16 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                       f"filed electronically in its overflow tables, read by the {FEED} feed (no report under its "
                       "permits in the 2026-11-04 extract). Utah's rule does not apply on tribal land. "
                       "(research/ut/report.md §3)"))))
+            continue
+        if op["id"] in CONTRACTORS:
+            rows.append(finish(base(
+                id=f"{oid}-dwq-report", operator_id=oid, name=name, permit=permit, channel_kind="state_alert_page",
+                urls=[], method=None, legal_basis=Q_DEWATER.format(permit=permit), basis_kind="permit",
+                monitored=False, unmonitored_reason="other", publishes="none", records=False,
+                noun="Report to the state", sources=[LAW],
+                note=(f"No web channel found: {name} holds a construction dewatering coverage at a sewer project; "
+                      "R317-801's overflow duty rests on the sewer system's owner, whose row carries it. The "
+                      "coverage's own noncompliance reports go to DWQ and are not published. (research/ut/report.md §3)"))))
             continue
         private = (" The rule binds the system's owner, public or private."
                    if op.get("legal_form") not in (None, "city", "town", "county", "authority", "special district",

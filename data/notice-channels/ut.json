@@ -7,15 +7,15 @@
    "state": "UT",
    "operator_id": "ut-alder-construction",
    "agency": null,
-   "permit": null,
+   "permit": "UTG071774",
    "checked": "2026-11-07",
    "id": "ut-alder-construction-dwq-report",
    "name": "Alder Construction",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
-   "legal_basis": "Utah Admin. Code R317-801-4: \"A Class 1 SSO shall be reported orally within 24 hrs and with a written report submitted to the DWQ within five calendar days\"; R317-801-1(13) defines a Class 1 overflow (one that reaches waters of the state, exceeds 5,000 gallons, affects more than five private structures or a public, commercial or industrial one, or may be a public health risk)",
-   "basis_kind": "law",
+   "legal_basis": "UPDES general permit coverage UTG071774 (construction dewatering): the permit's noncompliance reports to DWQ",
+   "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "none",
@@ -24,7 +24,7 @@
    "sources": [
     "ut-law-r317-801"
    ],
-   "note": "No web channel found: Alder Construction reports a Class 1 overflow to DWQ by telephone within 24 hours and in writing within five days (R317-801-4); DWQ publishes no list (ut-dwq-class-1-sso-reports). An overflow becomes public only when someone also calls DEQ's spill hotline (ut-deq-environmental-incidents). The rule binds the system's owner, public or private. No public notice is required. (research/ut/report.md §2.1)",
+   "note": "No web channel found: Alder Construction holds a construction dewatering coverage at a sewer project; R317-801's overflow duty rests on the sewer system's owner, whose row carries it. The coverage's own noncompliance reports go to DWQ and are not published. (research/ut/report.md §3)",
    "barrier": "no_web_page"
   },
   {
@@ -815,7 +815,7 @@
    "feed_source_id": "ut-deq-environmental-incidents",
    "publishes": "notices",
    "noun": "Data feed",
-   "note": "The Division of Environmental Response and Remediation's public layer of incidents phoned in to DEQ's spill hotline since 1991, edited daily, with a point and a PDF report for each: 8,980 rows on 2026-11-07, 377 of them sewage reports by their titles (19 to 38 a year since 2017). It holds the overflows someone called in, not the Class 1 reports operators send DWQ. (research/ut/report.md §2.2)",
+   "note": "The Division of Environmental Response and Remediation's public layer of incidents phoned in to DEQ's spill hotline since 1991, edited daily, with a point and a PDF report for each: 8,980 rows on 2026-11-08, 387 of them sewage reports by their titles (20 to 38 a year since 2017). It holds the overflows someone called in, not the Class 1 reports operators send DWQ. (research/ut/report.md §2.2)",
    "sources": [
     "ut-deq-environmental-incidents"
    ],
@@ -916,7 +916,7 @@
    "feed_source_id": "ut-dwq-recreational-advisories",
    "publishes": "status",
    "noun": "Data feed",
-   "note": "The map layer of the recreational sites DWQ and local health departments sample, each with its current advisory: 167 sites on 2026-11-07, 84 under an advisory (72 algal bloom or algae mat, 12 E. coli). \"Looks Good\" means no current advisory. Blooms and bacteria, not sewage. (research/ut/report.md §2.5)",
+   "note": "The map layer of the recreational sites DWQ and local health departments sample, each with its current advisory: 167 sites on 2026-11-07, 64 under an algal bloom or algae mat advisory, 8 where DWQ's team observed a few algae mats (\"Mats CF\", not an advisory level) and 12 under an E. coli advisory. \"Looks Good\" means no current advisory. Blooms and bacteria, not sewage. (research/ut/report.md §2.5)",
    "sources": [
     "ut-dwq-recreational-advisories"
    ],
@@ -1317,15 +1317,15 @@
    "state": "UT",
    "operator_id": "ut-fx-construction",
    "agency": null,
-   "permit": null,
+   "permit": "UTG072174",
    "checked": "2026-11-07",
    "id": "ut-fx-construction-dwq-report",
    "name": "FX Construction",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
-   "legal_basis": "Utah Admin. Code R317-801-4: \"A Class 1 SSO shall be reported orally within 24 hrs and with a written report submitted to the DWQ within five calendar days\"; R317-801-1(13) defines a Class 1 overflow (one that reaches waters of the state, exceeds 5,000 gallons, affects more than five private structures or a public, commercial or industrial one, or may be a public health risk)",
-   "basis_kind": "law",
+   "legal_basis": "UPDES general permit coverage UTG072174 (construction dewatering): the permit's noncompliance reports to DWQ",
+   "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "none",
@@ -1334,7 +1334,7 @@
    "sources": [
     "ut-law-r317-801"
    ],
-   "note": "No web channel found: FX Construction reports a Class 1 overflow to DWQ by telephone within 24 hours and in writing within five days (R317-801-4); DWQ publishes no list (ut-dwq-class-1-sso-reports). An overflow becomes public only when someone also calls DEQ's spill hotline (ut-deq-environmental-incidents). The rule binds the system's owner, public or private. No public notice is required. (research/ut/report.md §2.1)",
+   "note": "No web channel found: FX Construction holds a construction dewatering coverage at a sewer project; R317-801's overflow duty rests on the sewer system's owner, whose row carries it. The coverage's own noncompliance reports go to DWQ and are not published. (research/ut/report.md §3)",
    "barrier": "no_web_page"
   },
   {
@@ -4844,15 +4844,15 @@
    "state": "UT",
    "operator_id": "ut-whitaker-construction",
    "agency": null,
-   "permit": null,
+   "permit": "UTG072162",
    "checked": "2026-11-07",
    "id": "ut-whitaker-construction-dwq-report",
    "name": "Whitaker Construction Co., Inc.",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
-   "legal_basis": "Utah Admin. Code R317-801-4: \"A Class 1 SSO shall be reported orally within 24 hrs and with a written report submitted to the DWQ within five calendar days\"; R317-801-1(13) defines a Class 1 overflow (one that reaches waters of the state, exceeds 5,000 gallons, affects more than five private structures or a public, commercial or industrial one, or may be a public health risk)",
-   "basis_kind": "law",
+   "legal_basis": "UPDES general permit coverage UTG072162 (construction dewatering): the permit's noncompliance reports to DWQ",
+   "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "none",
@@ -4861,7 +4861,7 @@
    "sources": [
     "ut-law-r317-801"
    ],
-   "note": "No web channel found: Whitaker Construction Co., Inc. reports a Class 1 overflow to DWQ by telephone within 24 hours and in writing within five days (R317-801-4); DWQ publishes no list (ut-dwq-class-1-sso-reports). An overflow becomes public only when someone also calls DEQ's spill hotline (ut-deq-environmental-incidents). The rule binds the system's owner, public or private. No public notice is required. (research/ut/report.md §2.1)",
+   "note": "No web channel found: Whitaker Construction Co., Inc. holds a construction dewatering coverage at a sewer project; R317-801's overflow duty rests on the sewer system's owner, whose row carries it. The coverage's own noncompliance reports go to DWQ and are not published. (research/ut/report.md §3)",
    "barrier": "no_web_page"
   },
   {

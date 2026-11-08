@@ -62,7 +62,20 @@ def test_the_blocks_filter_is_the_modules_keyword_lists():
 @pytest.mark.parametrize("title,want", [
     ("Moab - Sanitary Sewer Overflow", "sso"),
     ("Sewage Bypass Failure - Syracuse", "bypass"),
-    ("Orem - Partially Treated Wastewater Release to Wetlands", "sso"),
+    ("Orem - Partially Treated Wastewater Release to Wetlands", "plant_bypass"),      # review P3-10
+    # review 2026-11-08 P2-2: sewage titles the first rules missed
+    ("Midvale Human Waste Dumping", "sso"),
+    ("Park Valley Box Elder - Human waste dumping", "sso"),
+    ("South Salt Lake- Improper human waste storage", "sso"),
+    ("ST GEORGE -- human waste", "sso"),
+    ("Complaint - Brighton Canal - fill & human waste", "sso"),
+    ("Cedar City Septage", "sso"),
+    ("Girls Camp Septage Dumping", "sso"),
+    ("SLC - Dumping Fluids from RVs", "sso"),
+    ("Spainish Fork Porto jJohn company", "sso"),
+    ("Orem - Rainfall event at Orem City Reclamation", "plant_bypass"),
+    ("Hyrum - Activated Sludge", "plant_bypass"),
+    ("SLC Chevron Refinery- Waste Water", None),                                        # review P3-2
     ("Hyrum - WWTP - Sewage Spill", "plant_bypass"),
     ("Orem - Effluent release into Powell Slough", "plant_bypass"),
     ("Personal RV Sewage Dump Ogden", "sso"),
@@ -96,6 +109,10 @@ def test_kept_and_dropped_rows_and_the_day_in_mountain_time():
     assert recs["Sewage Bypass Failure - Syracuse"]["event_type"] == "bypass"
     winter = recs["Moab - Sanitary Sewer Overflow"]["started_at"]
     assert winter.endswith("-06:00") or winter.endswith("-07:00")
+    # review P2-1: Date_Discovered is the UTC date; an evening discovery (21:00 Mountain on 09-03) is dated 09-03
+    bear = recs["Bear Lake - Sewage Release"]
+    assert bear["raw"]["row"]["Date_Discovered"] == "09/04/2026" and bear["raw"]["_filter_time_as_given"] == "2026-09-04T03:00:00Z"
+    assert bear["started_at"] == "2026-09-03T00:00:00-06:00" and "Mountain date" in bear["raw"]["_day_basis"]
     undated = recs["Example Town - Sewage Release"]
     assert undated["started_at"] is None and undated["raw"]["_undated"]
 
@@ -210,7 +227,9 @@ def test_register_rows_per_operator_and_the_state_channels():
         tribal = r["legal_form"] == "tribal" or any(p.startswith(("NN", "COG", "UTG5894")) for p in r["npdes_permits"])
         row = reg[f"{r['id']}-epa-report" if tribal else f"{r['id']}-dwq-report"]
         assert row["operator_id"] == r["id"]
-        if not tribal:
+        if r["id"] in ("ut-alder-construction", "ut-fx-construction", "ut-whitaker-construction"):
+            assert "R317-801-4" not in row["legal_basis"] and "dewatering" in row["legal_basis"]   # review P3-4
+        elif not tribal:
             assert "R317-801-4" in row["legal_basis"] and row["barrier"] == "no_web_page" and row["urls"] == []
     assert reg["ut-timpanogos-ssd-epa-report"]["feed_source_id"] == "echo-sewer-overflow"
     assert reg["ut-deq-environmental-incidents"]["feed_source_id"] == "ut-deq-environmental-incidents"
@@ -234,7 +253,7 @@ def test_state_text_is_in_the_page_shape():
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
-    assert "377" in t and "8,980" in t and "R317-801-4" in t
+    assert "387" in t and "8,980" in t and "R317-801-4" in t
 
 
 def test_missing_waters_list_leaves_out_the_national_lists_names():
@@ -249,3 +268,82 @@ def test_missing_waters_list_leaves_out_the_national_lists_names():
     assert not [r["name"] for r in d["rows"] if k(r["name"]) in held]
     keys = [(r["name"], r["county"]) for r in d["rows"]]
     assert len(keys) == len(set(keys)) and not [r for r in d["rows"] if re.search(r"(?i)storm|outfall", r["name"])]
+
+
+# ---------------------------------------------------------------- review 2026-11-08
+
+def test_the_discovery_day_is_the_earlier_of_the_utc_date_and_the_mountain_date():
+    from datetime import date, datetime, timezone
+
+    def ms(iso):
+        return int(datetime.fromisoformat(iso).replace(tzinfo=timezone.utc).timestamp() * 1000)
+    assert U.discovery_day("09/04/2026", ms("2026-09-04T03:00:00"))[0] == date(2026, 9, 3)      # 21:00 MDT
+    assert U.discovery_day("08/17/2026", ms("2026-08-17T17:00:00"))[0] == date(2026, 8, 17)     # 11:00 MDT
+    assert U.discovery_day("12/24/2011", ms("2011-12-24T05:00:00"))[0] == date(2011, 12, 24)    # midnight Eastern
+    assert U.discovery_day("07/04/2014", ms("2014-07-04T04:00:00"))[0] == date(2014, 7, 4)
+    assert U.discovery_day(None, None)[0] is None
+
+
+class _Ctx:
+    def __init__(self, echo):
+        self.extra = {"ut_echo_records": echo}
+
+
+def _row(**kw):
+    r = {"event_id": "ut-deq-environmental-incidents:x", "event_type": "sso", "lat": 40.3475, "lon": -111.798,
+         "started_at": "2026-08-17T00:00:00-06:00", "waterbody_text": None, "duplicate_of": None, "raw": {}}
+    r.update(kw)
+    return r
+
+
+def test_the_epa_link_keeps_the_public_and_other_waters_and_far_points_apart():
+    _, (kept, _, _) = echo_ut()
+    e = kept[0]
+    same = _row(event_id="a")
+    citizen = _row(event_id="b", raw={"report_provenance": "citizen"})
+    other_water = _row(event_id="c", waterbody_text="Jordan River")
+    e_named = dict(e, waterbody_text="Dry Creek")
+    far = _row(event_id="d", lat=40.3475 + 0.027)                     # about 3 km north
+    U.ut_incidents_post([same, citizen, far], _Ctx([e]))
+    assert same["duplicate_of"] == e["event_id"]
+    assert citizen["duplicate_of"] is None and far["duplicate_of"] is None
+    U.ut_incidents_post([other_water], _Ctx([e_named]))
+    assert other_water["duplicate_of"] is None and U.ECHO_LINK_M == 2_000
+
+
+def _advisory_rows(*labels):
+    return [{"FID": i, "MLID": 4000000 + i, "Waterbody": "Example Reservoir", "Site_Name": "Example Beach",
+             "Public_Name": "Example Beach", "Monitored_Date": "2026-10-20", "Lat": 40.5, "Long": -111.5,
+             "Advisory": lab, "Advisory_Date": (1791007200000 if i else None),
+             "Additional_Advisory_Notes": "Kayaking is OK"} for i, lab in enumerate(labels)]
+
+
+def test_a_respelled_or_new_advisory_label_is_never_grey():
+    _, block = R.load_source("ut-dwq-recreational-advisories")
+    rows = _advisory_rows("Mats CF", "Warning Ecoli", "E. coli HW", "Danger Toxin", "Looks Good", "Looks  good")
+    recs, _ = R.build("ut-dwq-recreational-advisories", block, rows, FETCHED, (), None)
+    by = {r["raw"]["_advisory_label"]: r for r in recs}
+    assert set(by) == {"Mats CF", "Warning Ecoli", "E. coli HW", "Danger Toxin"}
+    assert by["Warning Ecoli"]["event_type"] == "beach_advisory" and by["Warning Ecoli"]["status"] == "advisory_active"
+    assert "code_undecoded" not in by["Warning Ecoli"]["raw"] and by["E. coli HW"]["event_type"] == "beach_advisory"
+    t = by["Danger Toxin"]
+    assert t["event_type"] == "hab_advisory" and t["status"] == "advisory_active" and "Danger Toxin" in t["raw"]["code_undecoded"]
+    m = by["Mats CF"]                                                   # review P2-4 and P3-6, P3-7
+    assert "observed by its monitoring team" in m["raw"]["code_undecoded"] and "do not say" not in json.dumps(m)
+    assert m["started_at"] == "2026-10-20T00:00:00-06:00" and "Monitored_Date" in m["raw"]["_date_basis"]
+    assert "DWQ's note: Kayaking is OK" in by["Warning Ecoli"]["advice_text"]
+
+
+def test_the_texts_state_only_what_has_a_basis():
+    assert "two weeks" not in U.REC_WINDOW_BASIS and "no authority has confirmed" not in U.CITIZEN_NOTE
+    _, block = R.load_source("ut-dwq-recreational-advisories")
+    assert "two weeks" not in block["meta"]["caveat"]
+    _, inc = R.load_source("ut-deq-environmental-incidents")
+    assert "UTC" in inc["meta"]["time_basis"]
+    t = (ROOT / "research" / "ut" / "state-text.md").read_text()
+    assert "UTC" in t and "does not explain" not in t and "do not say" not in t and "two weeks" not in t
+    assert "64 sites under an algal bloom or algae mat advisory" in t
+
+
+def test_the_sign_repair_set_is_pinned():
+    assert E.SIGN_REPAIR_PREFIXES == {"NM", "NN", "UT"}
