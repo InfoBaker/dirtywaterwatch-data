@@ -1,0 +1,1140 @@
+{
+ "state": "HI",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 37,
+ "waters": [
+  {
+   "slug": "ala-wai-boat-harbor-hi",
+   "name": "Ala Wai Boat Harbor",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Honolulu"
+   ],
+   "bbox": [
+    -157.845169,
+    21.281351,
+    -157.839341,
+    21.288209
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.189,
+   "launches": [
+    "ala-wai-small-boat-harbor-hi"
+   ],
+   "water_id": "ala-wai-boat-harbor-hi",
+   "gnis_id": null,
+   "geometry_hash": "5e8983cf7f71f08d0c4f147af7c8afbcbb1c65b3c66f3f81cda0986da85fe17e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alalakeiki-channel-hi",
+   "name": "Alalakeiki Channel",
+   "kind": "sound",
+   "state": "HI",
+   "towns": [
+    "Wailea"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 700.241,
+   "launches": [
+    "kihei-boat-ramp-hi"
+   ],
+   "water_id": "alalakeiki-channel-hi",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hahaha-bay-hi",
+   "name": "Hāhaha Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Keʻanae"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "keanae-ramp-hi"
+   ],
+   "water_id": "hahaha-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hana-bay-hi",
+   "name": "Hana Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Hana"
+   ],
+   "bbox": [
+    -155.985798,
+    20.755981,
+    -155.970371,
+    20.768046
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.061,
+   "launches": [
+    "hana-boat-ramp-hi"
+   ],
+   "water_id": "hana-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "dc478718cca90f6033ae09a78f63c8dd9eba1e3136a01c6744f6c9315c339269",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hanalei-river-hi",
+   "name": "Hanalei River",
+   "kind": "river",
+   "state": "HI",
+   "towns": [
+    "Hanalei"
+   ],
+   "bbox": [
+    -159.497385,
+    22.075337,
+    -159.460361,
+    22.215004
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.064,
+   "launches": [
+    "hanalei-river-landing-hi"
+   ],
+   "water_id": "hanalei-river-hi",
+   "gnis_id": null,
+   "geometry_hash": "02afecac55f7664421a0aedbd6f14ceeae28593578aba78e83a494564e62d423",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hanapepe-bay-hi",
+   "name": "Hanapepe Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Port Allen"
+   ],
+   "bbox": [
+    -159.599237,
+    21.896114,
+    -159.587414,
+    21.904184
+   ],
+   "wikidata": "Q49378938",
+   "charted": true,
+   "area_km2": 0.585,
+   "launches": [
+    "port-allen-small-boat-harbor-hi"
+   ],
+   "water_id": "hanapepe-bay-hi",
+   "gnis_id": "359059",
+   "geometry_hash": "c30981d2bc1d4453f8800c6210b045cd3ba5f586b6f26cc48c146964b67b3759",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hickam-harbor-hi",
+   "name": "Hickam Harbor",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Aiea"
+   ],
+   "bbox": [
+    -157.957228,
+    21.309644,
+    -157.946243,
+    21.317595
+   ],
+   "wikidata": "Q49379443",
+   "charted": true,
+   "area_km2": 0.641,
+   "launches": [],
+   "water_id": "hickam-harbor-hi",
+   "gnis_id": "359165",
+   "geometry_hash": "9cec52f1ac14b30d4c85e7c5840fae3b68bf55327b21315ae81e2040bd3c2360",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hickam-harbor-boat-launch-hi"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "honokohau-small-boat-harbor-hi",
+   "name": "Honokōhau Small Boat Harbor",
+   "kind": "lake",
+   "state": "HI",
+   "towns": [
+    "Kailua-Kona"
+   ],
+   "bbox": [
+    -156.027175,
+    19.668234,
+    -156.02106,
+    19.670171
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.054,
+   "launches": [
+    "honokohau-small-boat-harbor-hi"
+   ],
+   "water_id": "honokohau-small-boat-harbor-hi",
+   "gnis_id": null,
+   "geometry_hash": "1598f0c4dbffc1f66354c6fa0b2f8f213e02daa2a99b7761b379e3fd306d5ce3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kahana-bay-hi",
+   "name": "Kahana Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kaʻaʻawa"
+   ],
+   "bbox": [
+    -157.876469,
+    21.553501,
+    -157.864061,
+    21.573329
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.2,
+   "launches": [
+    "kahana-bay-ramp-hi"
+   ],
+   "water_id": "kahana-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "ca694f67032b4cd68be801b9de2cd75bf14e7e2afecd60a09ac3f43ebb92e0de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kahoma-stream-hi",
+   "name": "Kahoma Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Lahaina"
+   ],
+   "bbox": [
+    -156.686325,
+    20.883023,
+    -156.589176,
+    20.9018
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mala-boat-ramp-hi"
+   ],
+   "water_id": "kahoma-stream-hi",
+   "gnis_id": null,
+   "geometry_hash": "c1fe74f4178a938af65ae8817030677db4dcc7003193263fe63602affdd85102",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kahului-harbor-hi",
+   "name": "Kahului Harbor",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kahului"
+   ],
+   "bbox": [
+    -156.478879,
+    20.89112,
+    -156.464941,
+    20.9007
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.746,
+   "launches": [
+    "kahului-boat-ramp-hi"
+   ],
+   "water_id": "kahului-harbor-hi",
+   "gnis_id": null,
+   "geometry_hash": "ba70a24712aa4608d3a88ce94ec7f0e80291c9d2c3da9cc5527a4e2c653e4ed4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kailua-bay-hi",
+   "name": "Kailua Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kailua-Kona"
+   ],
+   "bbox": [
+    -156.032189,
+    19.616111,
+    -155.987851,
+    19.647149
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.566,
+   "launches": [
+    "kailua-kona-wharf-hi"
+   ],
+   "water_id": "kailua-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "9a5c1f54fc87b7297b6b7fe1b94ddb490cb9283284cce58fc8db5007d02efcc5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kane-ohe-bay-hi",
+   "name": "Kane'ohe Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kāneʻohe"
+   ],
+   "bbox": [
+    -157.852494,
+    21.409882,
+    -157.75756,
+    21.513449
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 39.988,
+   "launches": [
+    "heeia-kea-small-boat-harbor-hi"
+   ],
+   "water_id": "kane-ohe-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "616ac3b212809b9492af0c7a24c4915808b8046e6109b71754b1fa8bae672c67",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kane-ohe-bay-boat-launch-near-kaneohe-hi-2",
+    "kane-ohe-bay-boat-launch-near-kaneohe-hi-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaulana-bay-hi",
+   "name": "Kaulana Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kaʻilikiʻi"
+   ],
+   "bbox": null,
+   "wikidata": "Q49381275",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kaulana-ramp-hi"
+   ],
+   "water_id": "kaulana-bay-hi",
+   "gnis_id": "365051",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kaunakakai-harbor-hi",
+   "name": "Kaunakakai Harbor",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kaunakakai"
+   ],
+   "bbox": [
+    -157.045509,
+    21.070121,
+    -157.013411,
+    21.095849
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.292,
+   "launches": [
+    "kaunakakai-small-boat-harbor-hi"
+   ],
+   "water_id": "kaunakakai-harbor-hi",
+   "gnis_id": null,
+   "geometry_hash": "65e3bed005ea8e5c1d392b1cdc785aa7daaf88bcb6b557483af5039fdbb08d7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kawaihae-bay-hi",
+   "name": "Kawaihae Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Kawaihae"
+   ],
+   "bbox": [
+    -155.89917,
+    19.959341,
+    -155.82234,
+    20.067829
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 60.816,
+   "launches": [
+    "kawaihae-boat-launch-hi",
+    "kawaihae-small-boat-harbor-hi"
+   ],
+   "water_id": "kawaihae-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "efede4d54ac410386e548621330d042c958489deaf7563a4aaa9f31285a4ee11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keauhou-bay-hi",
+   "name": "Keauhou Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Honalo"
+   ],
+   "bbox": [
+    -155.966247,
+    19.559899,
+    -155.962098,
+    19.562763
+   ],
+   "wikidata": "Q49381363",
+   "charted": true,
+   "area_km2": 0.071,
+   "launches": [
+    "keauhou-small-boat-harbor-hi"
+   ],
+   "water_id": "keauhou-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "1fd00c1c2b456778970722e27043f0b786f1fb6761b65997461ba9ea8539dffb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keehi-lagoon-hi",
+   "name": "Keʻehi Lagoon",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Honolulu"
+   ],
+   "bbox": [
+    -157.919695,
+    21.308951,
+    -157.889702,
+    21.331407
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.673,
+   "launches": [
+    "keehi-small-boat-harbor-hi",
+    "keehi-lagoon-boat-launch-hi"
+   ],
+   "water_id": "keehi-lagoon-hi",
+   "gnis_id": null,
+   "geometry_hash": "ae1c1798d025b0e523fea10492d036eb1a339ab6c2386b96c39a8f291c4cc62b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kikiaola-boat-harbor-hi",
+   "name": "Kikiaola Boat Harbor",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Waimea"
+   ],
+   "bbox": [
+    -159.693449,
+    21.957921,
+    -159.690711,
+    21.959359
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.031,
+   "launches": [
+    "kikiaola-small-boat-harbor-hi"
+   ],
+   "water_id": "kikiaola-boat-harbor-hi",
+   "gnis_id": null,
+   "geometry_hash": "54fa1e2bf5ae4501759b6bee6344906ace150b65bfaab9ae195543325b41999c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "konohiki-stream-hi",
+   "name": "Konohiki Stream",
+   "kind": "river",
+   "state": "HI",
+   "towns": [
+    "Kapaʻa"
+   ],
+   "bbox": [
+    -159.3822,
+    22.061579,
+    -159.316645,
+    22.083548
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "waikaea-boat-ramp-hi"
+   ],
+   "water_id": "konohiki-stream-hi",
+   "gnis_id": null,
+   "geometry_hash": "88282b299358b4ea7e19801f2f628a39973f669bfba03cb3799af8896b1729aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kukuiula-bay-hi",
+   "name": "Kukuiula Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Koloa"
+   ],
+   "bbox": [
+    -159.492761,
+    21.884066,
+    -159.487239,
+    21.885873
+   ],
+   "wikidata": "Q49382125",
+   "charted": true,
+   "area_km2": 0.068,
+   "launches": [
+    "kukuiula-small-boat-harbor-hi"
+   ],
+   "water_id": "kukuiula-bay-hi",
+   "gnis_id": "361551",
+   "geometry_hash": "99c40e4a8676abe18f4bd1b907e5b2e3e1eff8549627d0bd423c0b8e582254d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "maalaea-harbor-hi",
+   "name": "Maalaea Harbor",
+   "kind": "lake",
+   "state": "HI",
+   "towns": [
+    "Maʻalaea"
+   ],
+   "bbox": [
+    -156.513872,
+    20.790242,
+    -156.50962,
+    20.792401
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.051,
+   "launches": [
+    "maalaea-small-boat-harbor-hi"
+   ],
+   "water_id": "maalaea-harbor-hi",
+   "gnis_id": null,
+   "geometry_hash": "21b8c7b1aa410b95e962e4ac35075bf07c200bdbf8e6da8f68635aab4990b860",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "maliko-gulch-hi",
+   "name": "Māliko Gulch",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Haiku"
+   ],
+   "bbox": [
+    -156.339489,
+    20.794289,
+    -156.250598,
+    20.935522
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "maliko-boat-ramp-hi"
+   ],
+   "water_id": "maliko-gulch-hi",
+   "gnis_id": null,
+   "geometry_hash": "4752fcb00f4fb872eee6a3c9200b1789f778e1cd88c2f8357ac4a80ea32be83a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "manele-bay-hi",
+   "name": "Manele Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Lānaʻi City"
+   ],
+   "bbox": [
+    -156.892889,
+    20.714811,
+    -156.834861,
+    20.758549
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.302,
+   "launches": [
+    "manele-small-boat-harbor-hi"
+   ],
+   "water_id": "manele-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "d04faca2fc822c44ea1215523002e2efb8d3da2f4d0c3c74c322454e7fda2a30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "maunalua-bay-hi",
+   "name": "Maunalua Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "East Honolulu"
+   ],
+   "bbox": [
+    -157.756238,
+    21.25915,
+    -157.708521,
+    21.286669
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.032,
+   "launches": [
+    "maunalua-bay-ramp-hi"
+   ],
+   "water_id": "maunalua-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "daf4a4dbfaa008557c84a145c67adcb9782968f1c467536dfefcb4893abcf185",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "wailupe-neighborhood-private-boat-ramp-hi"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nawiliwili-bay-hi",
+   "name": "Nawiliwili Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Niumalu"
+   ],
+   "bbox": [
+    -159.389779,
+    21.915371,
+    -159.284031,
+    21.961054
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 15.869,
+   "launches": [
+    "nawiliwili-small-boat-harbor-hi"
+   ],
+   "water_id": "nawiliwili-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "58fb726487baf26a04ae632bf9d2b6dac9343b31d3eb55666861786222269185",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-pacific-ocean-hi",
+   "name": "North Pacific Ocean",
+   "kind": "sound",
+   "state": "HI",
+   "towns": [
+    "Lahaina"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 279404.6,
+   "launches": [
+    "lahaina-roadstead-hi"
+   ],
+   "water_id": "north-pacific-ocean-hi",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "sea-plane-ramp-hi-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "omokaa-bay-hi",
+   "name": "Omokaa Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Miloli‘i"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "milolii-landing-hi"
+   ],
+   "water_id": "omokaa-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pearl-harbor-hi",
+   "name": "Pearl Harbor",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Aiea",
+    "Ewa Beach",
+    "Pearl City"
+   ],
+   "bbox": [
+    -158.022958,
+    21.323136,
+    -157.93357,
+    21.388383
+   ],
+   "wikidata": "Q127091",
+   "charted": true,
+   "area_km2": 15.677,
+   "launches": [],
+   "water_id": "pearl-harbor-hi",
+   "gnis_id": "363230",
+   "geometry_hash": "3a5d47833e6e333198915b11c793480f6291e70e1286ec80dde34a38e47dd3d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pearl-harbor-boat-launch-near-aiea-hi",
+    "pearl-harbor-boat-launch-near-aiea-hi-2",
+    "pearl-harbor-boat-launch-near-ewa-beach-hi",
+    "pearl-harbor-boat-launch-near-ewa-beach-hi-2",
+    "pearl-harbor-boat-launch-near-pearl-city-hi"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pohoiki-bay-hi",
+   "name": "Pohoiki Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Pāhoa"
+   ],
+   "bbox": null,
+   "wikidata": "Q49388219",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pohoiki-ramp-hi"
+   ],
+   "water_id": "pohoiki-bay-hi",
+   "gnis_id": "1905554",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "poka-i-bay-hi",
+   "name": "Poka'i Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Waiʻanae"
+   ],
+   "bbox": [
+    -158.246869,
+    21.42525,
+    -158.187381,
+    21.452869
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.462,
+   "launches": [
+    "pokai-bay-boat-launch-hi",
+    "waianae-small-boat-harbor-hi"
+   ],
+   "water_id": "poka-i-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "b0a770fcf1ad1be795b84e2318ebe0d9d8568934b6103ccc5e975568e1ff0278",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "puako-bay-hi",
+   "name": "Puako Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Puakō"
+   ],
+   "bbox": [
+    -155.838279,
+    19.972261,
+    -155.83123,
+    19.977299
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.175,
+   "launches": [
+    "puako-ramp-hi"
+   ],
+   "water_id": "puako-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "f4844ad3e9003c2c90ec260cb43f59f51a9757309c9168442a1a474f69831ee4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waiakea-pond-hi",
+   "name": "Waiakea Pond",
+   "kind": "lake",
+   "state": "HI",
+   "towns": [
+    "Hilo"
+   ],
+   "bbox": [
+    -155.07762,
+    19.714511,
+    -155.073081,
+    19.718309
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.097,
+   "launches": [
+    "waiakea-pond-boat-launch-hi"
+   ],
+   "water_id": "waiakea-pond-hi",
+   "gnis_id": null,
+   "geometry_hash": "e36c42709893c7e2f23443f5dcdeed11bfc871f75a56a95b3e000cf39a55d4a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waialua-bay-hi",
+   "name": "Waialua Bay",
+   "kind": "bay",
+   "state": "HI",
+   "towns": [
+    "Haleʻiwa"
+   ],
+   "bbox": [
+    -158.164429,
+    21.588771,
+    -158.10316,
+    21.641059
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.641,
+   "launches": [
+    "haleiwa-small-boat-harbor-hi"
+   ],
+   "water_id": "waialua-bay-hi",
+   "gnis_id": null,
+   "geometry_hash": "6bc855935d5fee21b7ad90f66dec286654d4fcbef5dbb04a98f5ac545a407c70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waikomo-stream-hi",
+   "name": "Waikomo Stream",
+   "kind": "stream",
+   "state": "HI",
+   "towns": [
+    "Poʻipū"
+   ],
+   "bbox": [
+    -159.469132,
+    21.878963,
+    -159.463369,
+    21.905553
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "koloa-ramp-hi"
+   ],
+   "water_id": "waikomo-stream-hi",
+   "gnis_id": null,
+   "geometry_hash": "3e410f5772e9b943dd4add3bad9f1383cc6066d204d089967de9834629a5f850",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wailoa-river-hi",
+   "name": "Wailoa River",
+   "kind": "river",
+   "state": "HI",
+   "towns": [
+    "Hilo"
+   ],
+   "bbox": [
+    -155.080277,
+    19.714143,
+    -155.070348,
+    19.72388
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wailoa-sampan-basin-and-small-boat-harbor-hi"
+   ],
+   "water_id": "wailoa-river-hi",
+   "gnis_id": null,
+   "geometry_hash": "07c091649f0f4b7a8a6abe8b5429214b58a2eacaa7616222e12f5b476a8d6dbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wailua-river-hi",
+   "name": "Wailua River",
+   "kind": "river",
+   "state": "HI",
+   "towns": [
+    "Wailua"
+   ],
+   "bbox": [
+    -159.360426,
+    22.041808,
+    -159.335828,
+    22.049281
+   ],
+   "wikidata": "Q751872",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wailua-river-ramp-hi"
+   ],
+   "water_id": "wailua-river-hi",
+   "gnis_id": "364749",
+   "geometry_hash": "df956ac638ceba3060c9776cc2dcf581e73bf12906ae6b4989dfda88ae80544e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
