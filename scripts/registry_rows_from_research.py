@@ -59,6 +59,8 @@ HOMEPAGES = {
     "al-adem-beach-monitoring": "https://adem.alabama.gov/coastal/ademadph-coastal-alabama-beach-monitoring-program",
     "tx-tceq-sso-opendata": "https://www.tceq.texas.gov/compliance/investigation/ud-sso",
     "tx-glo-beach-watch": "https://www.texasbeachwatch.com/",
+    "tn-tdec-document-viewer-sewerof": "https://tdec.tn.gov/document-viewer/search/SewerOF",
+    "tn-tdec-bacteriological-advisories": "https://www.tn.gov/content/tn/environment/program-areas/wr-water-resources/watershed-stewardship/bacteriological-and-fishing-advisories.html",
     "nc-dwr-sso-2026": "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779",
     "nc-dwr-sso-2022-2025": "https://www.deq.nc.gov/about/divisions/water-resources/water-quality-permitting/information-sewer-system-overflows",
     "nc-rwq-advisories": "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality",

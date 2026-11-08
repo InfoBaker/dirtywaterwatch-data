@@ -74,10 +74,10 @@
   "history": "2020 onboarding to date: 2021 1,065; 2022 2,889; 2023 2,159; 2024 2,453; 2025 2,802; 2026 to date 1,480",
   "license": "Disclaimer quoted: \"This table is provided for informational purposes only and should not be used to determine compliance.\"",
   "legal_basis": "Tenn. Comp. R. & Regs. 0400-40-05-.07(2)(o)",
-  "status": "candidate",
-  "status_reason": "Tennessee's statewide, machine-readable, event-precision overflow table: build first. Day precision only, no receiving water, no CSO event type (CSOs are permitted discharges and are not in it).",
+  "status": "used",
+  "status_reason": "Read through the generic CSV reader (data/sources/tn-tdec-events-report.yaml): Tennessee's statewide table of every SSO, release, bypass, upset and washout since 2020, day precision, no receiving water, no CSO events. On 2026-11-07 the host answered 403 to the pipeline's identified client; the feed retries each run.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-07",
   "notes": "Event types: SSO Wet Weather 5,817; Release [Sewer] Dry 3,067; SSO Dry 1,870; Release Wet 1,406; Bypass 591; Upset 41; Extreme Event 30; Unpermitted 23; Washout 10. 'Date Event Ended' blank on 11,104 rows. Memphis (TN0020711, TN0020729) has no rows at all. Official PDF for each event in the FileNet viewer https://tdec.tn.gov/document-viewer/search/SewerOF."
  },
  {
@@ -192,10 +192,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Machine-readable HAB advisories with dates, but the public layer also exposes the reporting citizen's first and last name, phone and email; query only the advisory fields and never store the rest.",
+  "status": "used",
+  "status_reason": "Read through the generic ArcGIS reader (data/sources/tn-tdec-hab-advisory-status.yaml), advisory fields only: 71 bloom reports, 21 TDEC advisories with their dates (2026-11-07); the reporters' names, phones and emails are never requested.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-07",
   "notes": ""
  },
  {
@@ -227,10 +227,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Authority water-contact advisories (red) on named streams; poll the page and PDF.",
+  "status": "used",
+  "status_reason": "Read by ingest/tn_tdec_posted_streams.py: the posted-streams PDF's bacteriological table, 25 segments (Rev. August 2026), 21 naming sewer systems, as TDEC's standing water-contact advisories; no posting gives a date.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-07",
   "notes": ""
  },
  {

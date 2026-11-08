@@ -5,8 +5,9 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
   STATE_ZONES  the zone of each state (its larger part for a state that straddles two: 49 CFR part 71).
   zone_for     the zone for a state and, where the state straddles two zones and the code knows the line, the point:
                Florida by its Eastern-Central boundary (florida_zone), South Dakota and Nebraska by the county files of
-               data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone). Any other
-               state gets STATE_ZONES; a state the table does not know gets None (the caller's default).
+               data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone), Tennessee
+               by its county (a name, or the county a point lies in: tennessee_zone). Any other state gets STATE_ZONES;
+               a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
 from __future__ import annotations
@@ -71,11 +72,64 @@ def _county_zone(state: str, lat: float, lon: float) -> str | None:
     return point_zone(state, lat, lon)[0]
 
 
+# Tennessee (49 CFR 71.5(d)): the Eastern-Central line follows county lines; these thirty East Tennessee counties keep
+# Eastern time, the other sixty-five Central, none split (scripts/tn_eastern_time_counties.py checks them against the
+# U.S. DOT time-zone layer and writes their outlines to data/reference/tn-eastern-time-counties.json)
+TN_EASTERN_COUNTIES = frozenset({
+    "ANDERSON", "BLOUNT", "BRADLEY", "CAMPBELL", "CARTER", "CLAIBORNE", "COCKE", "GRAINGER", "GREENE", "HAMBLEN",
+    "HAMILTON", "HANCOCK", "HAWKINS", "JEFFERSON", "JOHNSON", "KNOX", "LOUDON", "MCMINN", "MEIGS", "MONROE", "MORGAN",
+    "POLK", "RHEA", "ROANE", "SCOTT", "SEVIER", "SULLIVAN", "UNICOI", "UNION", "WASHINGTON"})
+
+
+def tn_county_key(county) -> str:
+    """'McMinn County' -> 'MCMINN'."""
+    import re
+    c = re.sub(r"\s+county\s*$", "", str(county or "").strip(), flags=re.I)
+    return re.sub(r"^MC\s+", "MC", re.sub(r"\s+", " ", c).upper())      # "Mc Minn" is McMinn
+
+
+@functools.lru_cache(maxsize=1)
+def _tn_eastern_shapes():
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    from shapely.validation import make_valid
+    p = Path(__file__).resolve().parents[1] / "data" / "reference" / "tn-eastern-time-counties.json"
+    doc = json.loads(p.read_text())
+    return [(c["county"], make_valid(shape(c["geometry"]))) for c in doc["counties"]]
+
+
+def tn_point_county(lat, lon) -> str | None:
+    """The Eastern-time county a point lies in ('Knox County'), or None (a Central county, or no point)."""
+    if lat is None or lon is None:
+        return None
+    from shapely.geometry import Point
+    pt = Point(float(lon), float(lat))
+    for county, g in _tn_eastern_shapes():
+        if g.covers(pt):
+            return county
+    return None
+
+
+def tennessee_zone(county=None, lat=None, lon=None) -> str:
+    """Tennessee's zone: Eastern in the thirty TN_EASTERN_COUNTIES (by the county's name when given, else by the
+    county the point lies in), Central elsewhere and when neither is given (the state's larger part)."""
+    if county and str(county).strip():
+        return EASTERN if tn_county_key(county) in TN_EASTERN_COUNTIES else CENTRAL
+    try:
+        return EASTERN if tn_point_county(lat, lon) else CENTRAL
+    except (OSError, ImportError, ValueError):
+        return CENTRAL
+
+
 def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     """The IANA zone for a record of this state at this point (module docstring); None for an unknown state."""
     st = (state or "").upper()
     if st == "FL":
         return florida_zone(lat, lon)
+    if st == "TN" and lat is not None and lon is not None:
+        return tennessee_zone(lat=lat, lon=lon)
     if st in ("SD", "NE") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]

@@ -90,6 +90,11 @@
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt
 #                  by scripts/tx_permit_crosswalk.py) and the generic ArcGIS block tx-glo-beach-watch (Texas Beach
 #                  Watch's coastal stations: High is the program's advisory, Medium its label)
+#                  Tennessee: the generic CSV block tn-tdec-events-report (TDEC's Events Report, an APEX table of
+#                  every overflow, release and bypass since 2020: dates only, county, city and street, no water; the
+#                  session step opens the page first; ingest/tn_transforms.py) and the generic ArcGIS block
+#                  tn-tdec-hab-advisory-status (TDEC's HAB advisories, advisory fields only), and
+#                  tn_tdec_posted_streams (TDEC's posted-streams PDF: standing water-contact advisories, read daily)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
