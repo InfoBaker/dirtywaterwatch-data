@@ -117,10 +117,10 @@ SAFE = re.compile(r"[A-Za-z0-9._-]")
 SLIM_DROP = {"raw", "advice_text", "advice_window_basis", "fetched_at", "coord_source", "coord_precision_m",
              "placement_note"}
 INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ended_at", "water_slugs",
-                "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture"]
+                "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture", "sampled_at"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
                      "duplicate_of", "file"]
-SLIM_KEEP = {"event_id", "source_id", "event_type", "status", "water_slugs", "started_at", "ended_at", "fixture", "file"}
+SLIM_KEEP = {"event_id", "source_id", "event_type", "status", "water_slugs", "started_at", "ended_at", "sampled_at", "fixture", "file"}
 
 
 def event_file_name(event_id: str) -> str:
@@ -142,7 +142,7 @@ def index_obj(rec: dict) -> dict:
 
 
 def time_key(rec: dict) -> float:
-    for k in ("started_at", "reported_at", "published_at"):
+    for k in ("started_at", "reported_at", "published_at", "sampled_at"):
         t = status_mod.parse_time(rec.get(k))
         if t:
             return t.timestamp()

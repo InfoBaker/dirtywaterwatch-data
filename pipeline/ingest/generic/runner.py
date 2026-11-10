@@ -42,7 +42,7 @@ MIN_ROWS_RATIO = 0.5
 SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in a row is the source's new size
 # keys every block may carry, and the keys of each platform (every block setting is checked)
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
-               "record", "transform", "waters", "dedupe", "post", "history", "meta", "raw_notes", "decoded_times",
+               "record", "transform", "waters", "dedupe", "post", "after_history", "history", "meta", "raw_notes", "decoded_times",
                "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
                "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords"}
 PLATFORM_KEYS = {
@@ -454,8 +454,9 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
     tz = ZoneInfo(block.get("time_zone") or "UTC")
     mod = platform(block["platform"])
     sua = mod.source_updated_at(block, platform_meta, tz) if hasattr(mod, "source_updated_at") else None
+    prev_records = tuple(prev_records)
     ctx = F.Ctx(source_id=source_id, block=block, tz=tz, fetched_at=fetched_at, source_updated_at=sua,
-                extra={"platform_meta": platform_meta or {}, **(extra or {})})
+                extra={"platform_meta": platform_meta or {}, **(extra or {})}, previous_records=prev_records)
     kept = [r for r in rows if keep_row(r, block)]
     if block["platform"] == "snapshot":
         return mod.build(kept, ctx, extra.get("state") if extra else None)
@@ -475,6 +476,8 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
     # and again over everything kept
     records = redact.redact_events(records)
     hist = carry_history(records, list(prev_records), block, fetched_at)
+    for fn in F.listify(block.get("after_history")):
+        dups.update(F.resolve(fn)(records, ctx) or {})
     records = redact.redact_events(records)
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     mkey = (block.get("history") or {}).get("missing_key") or MISSING_KEY

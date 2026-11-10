@@ -6,8 +6,8 @@ statements of the agency, and a row is a record only when one of them is made (n
 others after reading them for the next week's statement):
   - HealthAlert 'YES' ("This beach is under health alert"): the sample's microcystin was above DWEE's and the
     Department of Health and Human Services' 8 micrograms per litre, which puts the lake on health alert and closes its
-    designated beach. event_type hab_advisory, status advisory_active: the authority's own alert, as of that week's
-    sample, until the agency's next sample at the station (ne_beachwatch_sequence).
+    designated beach. event_type hab_advisory: the authority's own alert flag for that sample. Advisory dates are
+    unknown unless polling supplies observation bounds (ne_beachwatch_sequence).
   - EColiRisk 'Elevated health risk for E. coli' (E. coli above 235 per 100 mL): the layer's label, but DWEE issues no
     advisory for E. coli. event_type beach_advisory (the beach category), status unknown, raw._agency_label_only and
     raw._agency_label (the agency's words): the status build gives it the site's caution for 72 hours from the sample
@@ -17,12 +17,14 @@ another state (OUT_OF_STATE_STATIONS: Lake Yankton, South Dakota) names that lak
 raw.state_basis: the status build places it only in that state (status.Resolver, place_elsewhere). A row with neither is
   marked raw._sample_only and is not a record.
 
-ne_beachwatch_sequence (post): the layer is weekly and an alert holds until the next sample says otherwise, so each
-alert record ends at the date of its station's next sample (review 2026-11-07 P2-3): advisory_lifted when that sample is
-not on alert (raw._lifted_by names it), ended when it is (raw._continued_by: the next week's record carries the alert
-on). An alert with no later sample stays advisory_active (the status build's 14-day aging is the fallback). The end is
-the next sample's date, not the Friday the agency posts it, which the layer does not give. The sample-only rows are then
-removed from the run's records.
+ne_beachwatch_sequence (after_history): sample dates are not advisory issue or lift dates. Historical
+samples keep sampled_at but no advisory timestamps, so they remain in their sample year's history without creating
+an invented red interval. Only the latest positive sample at a station, at most 14 days old when first observed,
+can open an observed advisory interval. Its start is that poll, not the sample date. A later sample or a corrected
+flag ends the observed interval at the poll that first shows the change (an upper bound, not an agency lift time).
+Unchanged historical rows never reconfirm an advisory; the usual 14-day aging applies from its last new observation.
+Legacy sample-derived intervals are removed on the next successful read, including rows carried from prior seasons.
+The safe source-field revisions are kept; sample-only rows are used for transitions and then removed.
 The sample date (ActivityStartDate) is stored as an epoch at midnight Central time (05:00 UTC in summer), a date with
 no time of day; the reader's midnight: date knows only UTC midnight, so the hook writes a Central-midnight value as the
 date, precision day (raw._date_basis). A value at any other time stays the time it is.
@@ -30,6 +32,8 @@ date, precision day (raw._date_basis). A value at any other time stays the time 
 from __future__ import annotations
 
 import re
+from copy import deepcopy
+from datetime import datetime
 
 from ingest.generic import fieldmap as F
 
@@ -68,9 +72,12 @@ def ne_beachwatch_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if ecoli:
         notes["_ecoli_risk"] = ecoli
     if alert:
-        rec["event_type"], rec["status"] = "hab_advisory", "advisory_active"
+        rec["sampled_at"] = rec.get("started_at")
+        rec["started_at"], rec["time_precision"] = None, None
+        rec["source_updated_at"] = None
+        rec["event_type"], rec["status"] = "hab_advisory", "unknown"
         rec["advice_text"] = (F.clean(row.get("HealthDescription")) or "This beach is under health alert") + \
-            (f" (microcystin {micro} micrograms per litre in the week's sample)" if micro else "")
+            (f" (microcystin {micro} micrograms per litre in the sample dated {rec['sampled_at']})" if micro else "")
         notes["_alert_basis"] = ALERT_RULE
     elif ecoli:
         rec["event_type"], rec["status"] = "beach_advisory", "unknown"
@@ -84,30 +91,132 @@ def ne_beachwatch_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
         notes["_sample_only"] = True
 
 
+CLOCK_VERSION = 1
+RECENT_SAMPLE_DAYS = 14
+CLOCK_NOTE = ("DWEE gives the sample date, not the advisory's issue or lift date. Any advisory times here are "
+              "the polls that first showed a recent alert or its change, not times published by DWEE.")
+
+
+def _sample_date(rec: dict, ctx: F.Ctx) -> str | None:
+    if rec.get("sampled_at"):
+        try:
+            datetime.fromisoformat(rec["sampled_at"])
+            return rec["sampled_at"]
+        except (TypeError, ValueError):
+            pass
+    raw = rec.get("raw") or {}
+    value = (raw.get("row") or {}).get("ActivityStartDate")
+    try:
+        return datetime.fromtimestamp(float(value) / 1000, ctx.tz).date().isoformat()
+    except (TypeError, ValueError, OverflowError, OSError):
+        # Before the clock migration, a date-only start came directly from the sample date.
+        # Retain that known date if the old snapshot no longer has the safe source field.
+        old = rec.get("started_at")
+        if not raw.get("_advisory_clock_version") and isinstance(old, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", old):
+            try:
+                return datetime.fromisoformat(old).date().isoformat()
+            except ValueError:
+                pass
+        return None
+
+
 @F.hook
 def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
-    """Each alert ends at its station's next sample; the sample-only rows leave the run (module docstring)."""
-    by_station: dict[str, list[dict]] = {}
+    """Use observations after history is joined; never infer an advisory date from a sample date."""
+    prev = {r["event_id"]: r for r in ctx.previous_records}
+    stations: dict[str, list[dict]] = {}
+    ecoli_corrections: dict[str, dict] = {}
+    n = {"alerts_open": 0, "alerts_lifted": 0, "alerts_continued": 0, "samples_dropped": 0,
+         "legacy_clocks_removed": 0}
     for r in records:
-        by_station.setdefault(r["raw"].get("_station") or "", []).append(r)
-    n = {"alerts_lifted": 0, "alerts_continued": 0, "alerts_open": 0, "samples_dropped": 0}
-    for rows in by_station.values():
-        rows.sort(key=lambda r: r.get("started_at") or "")
-        for i, r in enumerate(rows):
+        raw = r["raw"]
+        if raw.get("_ecoli_record_for"):
+            continue                         # separate caution; not another weekly sample
+        p = prev.get(r["event_id"]) or {}
+        sample = _sample_date(r, ctx)
+        if not sample and p:
+            sample = _sample_date(p, ctx)
+        station = raw.get("_station")
+        if sample and station:
+            stations.setdefault(station, []).append(r)
+        if r["event_type"] != "hab_advisory" and p.get("event_type") != "hab_advisory":
+            continue
+        # A corrected YES -> NO row retains the earlier observed advisory and its safe revision history.
+        # It is not mistaken for a vanished row and resurrected by keep_missing.
+        if r["event_type"] != "hab_advisory":
+            if r["event_type"] == "beach_advisory" and raw.get("_agency_label_only"):
+                # Retaining the HAB observation must not swallow the independent E. coli caution.
+                # The stable derived id lets later polls retain it without duplicating the source sample.
+                caution = deepcopy(r)
+                caution["event_id"] += ":ecoli"
+                caution["source_record_id"] += ":ecoli"
+                craw = caution["raw"]
+                craw["_ecoli_record_for"] = r["event_id"]
+                cprev = (prev.get(caution["event_id"]) or {}).get("raw") or {}
+                craw["_first_seen_at"] = cprev.get("_first_seen_at") or ctx.fetched_at
+                ecoli_corrections[caution["event_id"]] = caution
+            r["event_type"] = "hab_advisory"
+            raw.pop("_sample_only", None)
+            raw.pop("_agency_label_only", None)
+            raw.pop("_agency_label", None)
+            raw["_alert_basis"] = ALERT_RULE
+            r["advice_text"] = "The health-alert flag previously listed for this sample is no longer present."
+        praw = p.get("raw") or {}
+        observed = deepcopy(praw.get("_advisory_observed") or {}) if praw.get("_advisory_clock_version") == CLOCK_VERSION else {}
+        if praw and praw.get("_advisory_clock_version") != CLOCK_VERSION:
+            n["legacy_clocks_removed"] += 1
+            raw["_legacy_sample_clock_removed"] = {"started_at": p.get("started_at"), "ended_at": p.get("ended_at"),
+                                                    "reason": "These were sample dates, not advisory issue or lift dates."}
+        elif praw.get("_legacy_sample_clock_removed"):
+            raw["_legacy_sample_clock_removed"] = deepcopy(praw["_legacy_sample_clock_removed"])
+        r.update(sampled_at=sample, started_at=None, ended_at=None, time_precision=None,
+                 reported_at=None, published_at=None, source_updated_at=None, status="unknown")
+        raw.update(_advisory_clock_version=CLOCK_VERSION, _advisory_observed=observed, time_basis=CLOCK_NOTE)
+        for key in ("_lifted_by", "_continued_by", "_unlisted_since", "_last_seen_in_source", "ended_at_precision"):
+            raw.pop(key, None)
+
+    for rows in stations.values():
+        rows.sort(key=lambda r: (_sample_date(r, ctx), r["event_id"]))
+        current = [r for r in rows if not r["raw"].get("_missing_from_source_since") and not r.get("duplicate_of")]
+        latest = current[-1] if current else None
+        for r in rows:
             if r["event_type"] != "hab_advisory":
                 continue
-            nxt = next((x for x in rows[i + 1:] if (x.get("started_at") or "") > (r.get("started_at") or "")), None)
-            if nxt is None:
-                n["alerts_open"] += 1
-                continue
-            r["ended_at"] = nxt["started_at"]
-            if nxt["event_type"] == "hab_advisory":
-                r["status"], r["raw"]["_continued_by"] = "ended", nxt["source_record_id"]
-                n["alerts_continued"] += 1
+            raw = r["raw"]
+            observed = raw["_advisory_observed"]
+            positive = F.clean(raw.get("row", {}).get("HealthAlert")).upper() == "YES"
+            sample = _sample_date(r, ctx)
+            newer = next((x for x in current if _sample_date(x, ctx) > sample), None)
+            if observed.get("start") and not observed.get("end") and (newer or (r in current and not positive)):
+                observed.update(end=ctx.fetched_at, end_sample=(newer or r)["source_record_id"],
+                                end_reason="a newer sample was observed" if newer else "the source corrected the alert flag")
+                observed["continued"] = bool(newer and F.clean(newer["raw"].get("row", {}).get("HealthAlert")).upper() == "YES")
+            # A late first load of a historical season must not manufacture a current advisory. The freshness
+            # limit is the same 14-day horizon as the status build's unconfirmed-advisory aging.
+            age = (ctx.fetched_dt.astimezone(ctx.tz).date() - datetime.fromisoformat(sample).date()).days
+            prior = (prev.get(r["event_id"]) or {}).get("raw") or {}
+            corrected_to_yes = (positive and F.clean(prior.get("row", {}).get("HealthAlert")).upper() == "NO")
+            if r is latest and positive and 0 <= age <= RECENT_SAMPLE_DAYS and (not observed.get("start") or corrected_to_yes):
+                if observed.get("start"):
+                    periods = observed.get("earlier_periods", []) + [{k: v for k, v in observed.items() if k != "earlier_periods"}]
+                    observed.clear()
+                    observed["earlier_periods"] = periods
+                observed["start"] = ctx.fetched_at
+            if observed.get("start"):
+                r.update(started_at=observed["start"], time_precision="poll", ended_at=observed.get("end"),
+                         status=("ended" if observed.get("continued") else "advisory_lifted") if observed.get("end") else "advisory_active")
+                raw["_last_seen_in_source"] = observed["start"]
+                raw["start_basis"] = "the first poll that showed this recent health alert; its issue time is not published"
+                if observed.get("end"):
+                    raw["ended_at_precision"] = "poll"
+                    raw["end_basis"] = "the first poll showing the next sample or corrected flag, not an agency lift time"
+                    n["alerts_continued" if observed.get("continued") else "alerts_lifted"] += 1
+                else:
+                    n["alerts_open"] += 1
             else:
-                r["status"], r["raw"]["_lifted_by"] = "advisory_lifted", nxt["source_record_id"]
-                n["alerts_lifted"] += 1
-    keep = [r for r in records if not r["raw"].get("_sample_only")]
-    n["samples_dropped"] = len(records) - len(keep)
+                raw["start_basis"] = "historical sample; the advisory's issue and lift dates are not published"
+    n["samples_dropped"] = sum(bool(r["raw"].get("_sample_only")) for r in records)
+    keep = [r for r in records if not r["raw"].get("_sample_only") and r["event_id"] not in ecoli_corrections]
+    keep.extend(ecoli_corrections.values())
     records[:] = keep
     return n

@@ -718,6 +718,10 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
         if not isinstance(d, dict) or "records" not in d:
             problems.append(f"{p.name}: not an events file")
             continue
+        if (d.get("meta") or {}).get("stub") is True:
+            # A placeholder such as pa-crw makes no source request. Its generated timestamp is not a
+            # successful source check, and it must not count as a collected feed or source coverage.
+            continue
         fixture = bool((d.get("meta") or {}).get("fixture")) or p.stem.startswith("fixture-")
         if fixture and not include_fixtures:
             continue
@@ -2643,6 +2647,24 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     not used: the intervals are those of a record with no end, each with end_not_used (the published end, why, and
     the rule)."""
     rules = load_rules() if rules is None else rules
+    earlier = []
+    raw = ev.get("raw") or {}
+    if ev.get("source_id") == "ne-dwee-beachwatch" and ev.get("sampled_at") \
+            and ev.get("time_precision") == "poll" and raw.get("_advisory_clock_version") == 1:
+        # A corrected flag can reopen the same source sample. Replay its closed observation periods separately,
+        # through the same age-out rules as the current one, without filling the observed inactive gaps.
+        observed = raw.get("_advisory_observed") or {}
+        for period in observed.get("earlier_periods") or []:
+            if not isinstance(period, dict):
+                continue
+            ps, pe = parse_time(period.get("start")), parse_time(period.get("end"))
+            if ps is None or pe is None or pe <= ps:
+                continue
+            prior = {**ev, "started_at": period["start"], "ended_at": period["end"], "source_updated_at": None,
+                     "status": "ended" if period.get("continued") else "advisory_lifted",
+                     "raw": {**raw, "_advisory_observed": {}, "_last_seen_in_source": period["start"],
+                             "ended_at_precision": "poll"}}
+            earlier.extend(event_intervals(prior, state, now, water, rules))
     out = _event_intervals(ev, state, now, water, rules)
     why = end_not_credible(ev, now, rules) if out and ev.get("ended_at") else None
     if why:
@@ -2682,7 +2704,7 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             if iv["rule"] == "advisory_active":
                 iv["label"] = lab
-    return out
+    return earlier + out
 
 
 def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None, rules: dict) -> list[dict]:
@@ -2749,6 +2771,29 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         if system_wide_advisory(ev):    # final audit 2026-11-08 P3-1: its own age-out (SYSTEM_WIDE_CONFIRM_HOURS)
             red["rationale"] = (f"in effect while the authority keeps the advisory (aged out {SYSTEM_WIDE_CONFIRM_HOURS} "
                                 "hours after the last read that showed it)")
+
+        if et in AGING_TYPES and ev.get("sampled_at") and ev.get("time_precision") == "poll" \
+                and (end is None or end_precision(ev) == "poll"):
+            # A sample's later observed change is not an official lift date, nor evidence that the advisory
+            # remained in effect through a polling gap. Keep ended_at as the observed change, but never extend
+            # colour past the confirmation horizon, even when that change is learned months later (NE HAB).
+            listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
+            confirmed = max(start, listed) if listed else start
+            cap = confirmed + timedelta(days=CONFIRM_DAYS)
+            until = min(end, cap) if end else cap
+            red["rationale"] = (f"observed health alert, aged out {CONFIRM_DAYS} days after the last new confirmation; "
+                                "a later observed change does not confirm the intervening period or establish a lift date")
+            out = [_iv(ev, start, until, rule, red, yellow)]
+            out[0]["confirmed"] = iso(confirmed)
+            if end is None or end > cap:
+                note_until = max(cap, start + timedelta(days=NOTE_DAYS))
+                if end is not None:
+                    note_until = min(end, note_until)
+                if note_until > cap:
+                    note = _iv(ev, cap, note_until, "not_reconfirmed", red, yellow)
+                    note["confirmed"] = iso(confirmed)
+                    out.append(note)
+            return out
 
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
