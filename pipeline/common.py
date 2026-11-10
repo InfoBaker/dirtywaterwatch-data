@@ -521,7 +521,7 @@ def scrub_discharger(rec: dict) -> dict:
 #   stretch  an advisory that names a stretch of a river by its two ends, each end with a public point:
 #            {"water": name, "start": {name, lat, lon, basis, source, url}, "end": {...}}. build/reaches.py traces the
 #            stretch from start to end (reach kind "advisory_stretch") and build/status.py colours only that stretch.
-OPTIONAL_EVENT_FIELDS = {"stretch"}
+OPTIONAL_EVENT_FIELDS = {"stretch", "sampled_at"}  # source sample date, never an advisory issue/lift time
 
 
 def system_wide_advisory(ev: dict) -> bool:

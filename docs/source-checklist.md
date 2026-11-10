@@ -44,9 +44,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
-| tn | 4 | 1 | 4 | 1 | 0 | 10 |
+| tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **233** | **422** | **201** | **73** | **1448** |
+| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1640,9 +1640,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `tn-tdec-bacteriological-advisories` | TDEC Bacteriological and Fishing Advisories | used | fetched | advisories | Read by ingest/tn_tdec_posted_streams.py: the posted-streams PDF's bacteriological table, 25 segments (Rev. August 2026), 21 naming sewer systems, as TDEC's standing water-contact advisories; no posting gives a date. |
 | `tn-tdec-events-report` | TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts) | used | fetched | events | Read through the generic CSV reader (data/sources/tn-tdec-events-report.yaml): Tennessee's statewide table of every SSO, release, bypass, upset and washout since 2020, day precision, no receiving water, no CSO events. On 2026-11-07 the host answered 403 to the pipeline's identified client; the feed retries each run. |
 | `tn-tdec-hab-advisory-status` | TDEC HAB Advisory Status (Survey123 layer behind the Tennessee HAB Dashboard) | used | fetched | advisories | Read through the generic ArcGIS reader (data/sources/tn-tdec-hab-advisory-status.yaml), advisory fields only: 71 bloom reports, 21 TDEC advisories with their dates (2026-11-07); the reporters' names, phones and emails are never requested. |
+| `tn-clean-water-nashville` | Clean Water Nashville monthly sanitary and combined sewer overflow reports | candidate | fetched | events | Dated overflow reports are publicly available in monthly PDFs. The index is monitored; report extraction and deduplication against TDEC records are not implemented. |
 | `tn-tdec-document-viewer-sewerof` | TDEC Document Viewer: Sewer Overflow event report PDFs (copy of record) | candidate | search_only | events | Per-event PDFs from MyTDEC Forms (cause, receiving water likely); use to enrich large events. |
 | `tn-chattanooga-cd-quarterly` | Chattanooga consent decree quarterly reports (SSO tables) | watch | search_only | events | Quarterly PDF listing each SSO with date, location, volume and receiving water; TDEC table already covers the events. |
-| `tn-clean-water-nashville` | Clean Water Nashville (Metro Water Services overflow abatement program) | watch | search_only | outfalls | Map of CSO locations and consent decree reports; no event notices found. |
 | `tn-hamilton-wwta-quarterly` | Hamilton County WWTA consent decree quarterly reports | watch | search_only | events | SSO tables; covered by TDEC table (872 rows). |
 | `tn-harpeth-conservancy` | Harpeth Conservancy sewer overflow transparency page | watch | search_only | prior_art | Advocates real-time public reporting; notes Franklin and Brentwood post overflows with signs and web notice within days. |
 | `tn-orsanco-na` | ORSANCO (Tennessee is not on the Ohio main stem) | rejected | inferred | monitoring | TN is an ORSANCO member state but its waters are Cumberland/Tennessee; no TN sampling site. |

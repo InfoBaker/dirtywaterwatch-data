@@ -139,6 +139,8 @@ def test_adding_nebraska_changes_no_other_states_record(monkeypatch):
     """The same tables built with and without NE give identical records for every other state (also checked on the
     real 2026-11-04 extract: 1,809 kept and 1,741 dropped records of the other states identical)."""
     from tests.test_ingest_dc import _row
+    # This parity test does not test the DC boundary and must not fetch its uncached geometry.
+    monkeypatch.setattr(E, "dc_row_state", lambda lat, lon: (None, None))
     fx = _fixture()
     other = [_row(sewer_overflow_bypass_event_key="o1", latitude_measure="38.9300", longitude_measure="-77.0400"),
              _row(sewer_overflow_bypass_event_key="o2", permit_identifier="IL0000001", program_report_form_set_id="2",
@@ -195,11 +197,11 @@ def test_main_reads_a_saved_zip_of_nebraska_rows(tmp_path, monkeypatch):
 
 # ---------------------------------------------------------------- DWEE Beach Watch (generic ArcGIS block)
 
-def _beachwatch():
+def _beachwatch(rows=None, at="2026-11-07T01:14:00Z", prev=()):
     from ingest.generic import arcgis, runner
     _, block = runner.load_source("ne-dwee-beachwatch")
-    rows = arcgis.parse(block, (FIX / "ne_dwee_beachwatch.json").read_bytes())
-    return runner.build("ne-dwee-beachwatch", block, rows, "2026-11-07T01:14:00Z", [])
+    rows = arcgis.parse(block, (FIX / "ne_dwee_beachwatch.json").read_bytes()) if rows is None else rows
+    return runner.build("ne-dwee-beachwatch", block, rows, at, prev)
 
 
 def test_beachwatch_block_reads_the_whole_layer_with_its_hooks():
@@ -207,7 +209,7 @@ def test_beachwatch_block_reads_the_whole_layer_with_its_hooks():
     _, block = runner.load_source("ne-dwee-beachwatch")
     assert block["live"] is True and block["platform"] == "arcgis" and not runner.validate_block(block)
     assert "where" not in block                                              # every row: the next sample is needed
-    assert block["post"] == "ingest.ne_transforms.ne_beachwatch_sequence"
+    assert block["after_history"] == "ingest.ne_transforms.ne_beachwatch_sequence"
     assert block["time_zone"] == "America/Chicago"
 
 
@@ -215,7 +217,7 @@ def test_beachwatch_health_alert_is_the_authoritys_bloom_advisory_and_e_coli_a_c
     recs, stats = _beachwatch()
     by = {r["source_record_id"]: r for r in recs}
     rock = by["LBB1ROCKFD04-2026-w23"]
-    assert rock["event_type"] == "hab_advisory" and rock["started_at"] == "2026-06-08" and rock["time_precision"] == "day"
+    assert rock["event_type"] == "hab_advisory" and rock["sampled_at"] == "2026-06-08" and rock["started_at"] is None and rock["time_precision"] is None
     assert rock["waterbody_text"] == "Rockford Lake" and rock["outfall_name"] == "Rockford Lake at Beach"
     assert rock["advice_text"].startswith("This beach is under health alert") and "13.78" in rock["advice_text"]
     assert rock["lat"] == 40.223196 and rock["published_at"] is None
@@ -231,34 +233,177 @@ def test_beachwatch_health_alert_is_the_authoritys_bloom_advisory_and_e_coli_a_c
     assert stats["by_type"] == {"hab_advisory": 3, "beach_advisory": 2} and stats["duplicates"]["samples_dropped"] == 2
 
 
-def test_a_bloom_alert_ends_at_the_stations_next_sample():
-    """Rockford Lake: on alert in weeks 22 and 23, off in week 24 (the real sequence)."""
-    by = {r["source_record_id"]: r for r in _beachwatch()[0]}
-    w22, w23 = by["LBB1ROCKFD04-2026-w22"], by["LBB1ROCKFD04-2026-w23"]
-    assert w22["status"] == "ended" and w22["ended_at"] == "2026-06-08" and w22["raw"]["_continued_by"] == w23["source_record_id"]
-    assert w23["status"] == "advisory_lifted" and w23["ended_at"] == "2026-06-15"
-    assert w23["raw"]["_lifted_by"] == "LBB1ROCKFD04-2026-w24"
-    iron = by["LNE2IRONHT04-2026-w23"]                                       # no later sample in the fixture: open
-    assert iron["status"] == "advisory_active" and iron["ended_at"] is None
-
-
-def test_beachwatch_colours_red_to_the_lift_and_e_coli_with_the_sites_caution_only():
-    from datetime import UTC, datetime, timedelta
+def test_historical_samples_keep_their_dates_without_inventing_advisory_windows():
+    from datetime import UTC, datetime
     from build import status as S
     by = {r["source_record_id"]: r for r in _beachwatch()[0]}
-    now = datetime(2026, 9, 1, tzinfo=UTC)
-    rules = S.load_rules()
-    ivs = S.event_intervals(by["LBB1ROCKFD04-2026-w23"], "NE", now, None, rules)
-    assert [i["color"] for i in ivs] == ["red"] and ivs[0]["rule"] == "advisory_active"
-    chicago = S.ZoneInfo("America/Chicago")      # a Nebraska day ends at Central midnight (SOL 2026-11-07 wave 2 P1-1)
-    assert ivs[0]["end"] == S.end_of_local_day(S.parse_time("2026-06-15", chicago), chicago)   # the next sample's day
-    assert ivs[0]["end"].isoformat() == "2026-06-16T05:00:00+00:00"
-    ivs = S.event_intervals(by["LLP2BRNOAK09-2026-w21"], "NE", now, None, rules)
+    for rid in ("LBB1ROCKFD04-2026-w22", "LBB1ROCKFD04-2026-w23", "LNE2IRONHT04-2026-w23"):
+        r = by[rid]
+        assert r["sampled_at"].startswith("2026-06-") and r["status"] == "unknown"
+        assert all(r[k] is None for k in ("started_at", "ended_at", "reported_at", "published_at", "source_updated_at"))
+        assert S.event_intervals(r, "NE", datetime(2026, 11, 7, tzinfo=UTC), None, S.load_rules()) == []
+        assert S.event_intervals(r, "NE", datetime(2026, 6, 10, tzinfo=UTC), None, S.load_rules()) == []
+
+
+def _rock_rows():
+    from ingest.generic import arcgis, runner
+    _, block = runner.load_source("ne-dwee-beachwatch")
+    return [r for r in arcgis.parse(block, (FIX / "ne_dwee_beachwatch.json").read_bytes())
+            if r["StationID"] == "LBB1ROCKFD04"]
+
+
+def test_sequential_observations_never_use_mondays_sample_as_fridays_advisory_change():
+    from datetime import UTC, datetime
+    from build import status as S
+    rows = _rock_rows()
+    first = _beachwatch(rows[:1], "2026-06-05T16:00:00Z")[0]
+    assert first[0]["started_at"] == "2026-06-05T16:00:00Z" and first[0]["sampled_at"] == "2026-06-01"
+    repeat = _beachwatch(rows[:1], "2026-06-06T16:00:00Z", first)[0]
+    assert repeat[0]["started_at"] == first[0]["started_at"]
+    assert repeat[0]["raw"]["_last_seen_in_source"] == first[0]["started_at"]
+    second = _beachwatch(rows[:2], "2026-06-12T16:00:00Z", repeat)[0]
+    by = {r["source_record_id"]: r for r in second}
+    assert by["LBB1ROCKFD04-2026-w22"]["ended_at"] == "2026-06-12T16:00:00Z"
+    assert by["LBB1ROCKFD04-2026-w23"]["started_at"] == "2026-06-12T16:00:00Z"
+    final = _beachwatch(rows, "2026-06-19T16:00:00Z", second)[0]
+    r = next(r for r in final if r["source_record_id"].endswith("w23"))
+    assert r["status"] == "advisory_lifted" and r["ended_at"] == "2026-06-19T16:00:00Z"
+    assert r["time_precision"] == r["raw"]["ended_at_precision"] == "poll"
+    assert r["published_at"] is None and r["reported_at"] is None
+    ivs = S.event_intervals(r, "NE", datetime(2026, 6, 20, tzinfo=UTC), None, S.load_rules())
+    assert len(ivs) == 1 and ivs[0]["color"] == "red"
+    assert ivs[0]["start"].isoformat() == "2026-06-12T16:00:00+00:00"
+    assert ivs[0]["end"].isoformat() == "2026-06-19T16:00:00+00:00"
+    again = _beachwatch(rows, "2026-06-20T16:00:00Z", final)[0]
+    assert {r["event_id"]: r["ended_at"] for r in again} == {r["event_id"]: r["ended_at"] for r in final}
+
+
+def test_corrected_alert_flag_closes_at_observation_and_keeps_revisions():
+    from datetime import UTC, datetime
+    from build import status as S
+    rows = _rock_rows()[1:2]
+    first = _beachwatch(rows, "2026-06-12T16:00:00Z")[0]
+    corrected = copy.deepcopy(rows)
+    corrected[0]["HealthAlert"] = "NO"
+    second = _beachwatch(corrected, "2026-06-13T16:00:00Z", first)[0]
+    assert len(second) == 1 and second[0]["event_id"] == first[0]["event_id"]
+    assert second[0]["ended_at"] == "2026-06-13T16:00:00Z" and second[0]["status"] == "advisory_lifted"
+    assert second[0]["raw"]["_revisions"][-1]["old_values"]["HealthAlert"] == "YES"
+    repeat = _beachwatch(corrected, "2026-06-14T16:00:00Z", second)[0]
+    assert repeat[0]["ended_at"] == second[0]["ended_at"]
+    restored = _beachwatch(rows, "2026-06-15T16:00:00Z", repeat)[0]
+    assert restored[0]["started_at"] == "2026-06-15T16:00:00Z" and restored[0]["ended_at"] is None
+    assert restored[0]["raw"]["_advisory_observed"]["earlier_periods"][0]["end"] == "2026-06-13T16:00:00Z"
+    ivs = S.event_intervals(restored[0], "NE", datetime(2026, 6, 16, tzinfo=UTC), None, S.load_rules())
+    red = [iv for iv in ivs if iv["color"] == "red"]
+    assert [(iv["start"].isoformat(), iv["end"].isoformat()) for iv in red] == [
+        ("2026-06-12T16:00:00+00:00", "2026-06-13T16:00:00+00:00"),
+        ("2026-06-15T16:00:00+00:00", "2026-06-29T16:00:00+00:00")]
+    assert not any(iv["start"] <= datetime(2026, 6, 14, tzinfo=UTC) < iv["end"] for iv in ivs)
+
+
+def test_corrected_health_alert_retains_independent_ecoli_caution_without_duplicates():
+    from datetime import UTC, datetime, timedelta
+    from build import status as S
+    rows = _rock_rows()[1:2]
+    first = _beachwatch(rows, "2026-06-09T16:00:00Z")[0]
+    corrected = copy.deepcopy(rows)
+    corrected[0].update(HealthAlert="NO", EColiRisk="Elevated health risk for E. coli", EColi="400")
+    second = _beachwatch(corrected, "2026-06-10T16:00:00Z", first)[0]
+    assert len(second) == 2
+    hab = next(r for r in second if r["event_type"] == "hab_advisory")
+    caution = next(r for r in second if r["event_type"] == "beach_advisory")
+    assert hab["event_id"] == first[0]["event_id"] and hab["ended_at"] == "2026-06-10T16:00:00Z"
+    assert "_agency_label_only" not in hab["raw"]
+    assert caution["event_id"] == hab["event_id"] + ":ecoli" and caution["started_at"] == "2026-06-08"
+    ivs = S.event_intervals(caution, "NE", datetime(2026, 6, 10, 17, tzinfo=UTC), None, S.load_rules())
+    assert len(ivs) == 1 and ivs[0]["color"] == "yellow" and ivs[0]["category"] == "beach"
+    assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72)
+    repeat = _beachwatch(corrected, "2026-06-10T17:00:00Z", second)[0]
+    assert len(repeat) == 2 and {r["event_id"] for r in repeat} == {r["event_id"] for r in second}
+    assert next(r for r in repeat if r["event_type"] == "beach_advisory")["raw"]["_first_seen_at"] == "2026-06-10T16:00:00Z"
+    missing = _beachwatch([], "2026-06-10T18:00:00Z", repeat)[0]
+    assert len(missing) == 2 and all(r["raw"].get("_missing_from_source_since") for r in missing)
+    restored = _beachwatch(rows, "2026-06-11T16:00:00Z", missing)[0]
+    assert len(restored) == 2
+    assert next(r for r in restored if r["event_type"] == "hab_advisory")["started_at"] == "2026-06-11T16:00:00Z"
+
+
+def test_legacy_sample_clocks_are_removed_even_when_rows_are_carried_after_season_reset():
+    from datetime import UTC, datetime
+    from build import status as S
+    legacy = _beachwatch()[0]
+    for r in legacy:
+        if r["event_type"] == "hab_advisory":
+            r.update(started_at=r.pop("sampled_at"), ended_at="2026-06-15", status="advisory_lifted", time_precision="day")
+            r["raw"].pop("_advisory_clock_version")
+            r["raw"]["_lifted_by"] = "old-sample-key"
+    records, stats = _beachwatch([], "2027-01-04T12:00:00Z", legacy)
+    assert stats["duplicates"]["legacy_clocks_removed"] == 3
+    for r in records:
+        if r["event_type"] == "hab_advisory":
+            assert r["sampled_at"].startswith("2026-") and r["started_at"] is None and r["ended_at"] is None
+            assert "_lifted_by" not in r["raw"] and r["raw"]["_legacy_sample_clock_removed"]
+            assert S.event_intervals(r, "NE", datetime(2027, 1, 4, tzinfo=UTC), None, S.load_rules()) == []
+
+
+def test_legacy_sample_dates_survive_missing_raw_dates_and_malformed_dates_do_not_open_windows():
+    legacy = _beachwatch(_rock_rows()[1:2])[0]
+    old = legacy[0]
+    old.update(started_at=old.pop("sampled_at"), ended_at="2026-06-15", status="advisory_lifted")
+    old["raw"].pop("_advisory_clock_version")
+    old["raw"]["row"].pop("ActivityStartDate")
+    migrated = _beachwatch([], "2027-01-04T12:00:00Z", legacy)[0][0]
+    assert migrated["sampled_at"] == "2026-06-08" and migrated["started_at"] is None and migrated["ended_at"] is None
+    old.update(sampled_at="not a date", started_at="not a date")
+    invalid = _beachwatch([], "2027-01-04T12:00:00Z", legacy)[0][0]
+    assert invalid["sampled_at"] is None and invalid["started_at"] is None and invalid["ended_at"] is None
+
+
+def test_stale_latest_sample_does_not_open_an_advisory_and_missing_rows_do_not_lift_one():
+    from datetime import UTC, datetime
+    from build import status as S
+    rows = _rock_rows()[1:2]
+    late = _beachwatch(rows, "2026-07-01T16:00:00Z")[0][0]
+    assert late["sampled_at"] == "2026-06-08" and late["started_at"] is None
+    first = _beachwatch(rows, "2026-06-12T16:00:00Z")[0]
+    empty = _beachwatch([], "2026-06-13T16:00:00Z", first)[0][0]
+    assert empty["ended_at"] is None and empty["started_at"] == first[0]["started_at"]
+    stale = _beachwatch(rows, "2026-07-01T16:00:00Z", first)[0][0]
+    ivs = S.event_intervals(stale, "NE", datetime(2026, 7, 1, tzinfo=UTC), None, S.load_rules())
+    assert ivs[0]["end"].isoformat() == "2026-06-26T16:00:00+00:00"
+
+
+def test_late_observed_change_never_recolors_an_unconfirmed_gap():
+    from datetime import UTC, datetime
+    from build import status as S
+    rows = _rock_rows()[1:2]
+    first = _beachwatch(rows, "2026-06-12T16:00:00Z")[0]
+    for change in ("later_negative", "later_positive", "corrected_flag"):
+        later = copy.deepcopy(_rock_rows()[1:])
+        if change == "later_positive":
+            later[-1]["HealthAlert"] = "YES"
+        elif change == "corrected_flag":
+            later = copy.deepcopy(rows)
+            later[0]["HealthAlert"] = "NO"
+        records = _beachwatch(later, "2026-11-07T16:00:00Z", first)[0]
+        r = next(r for r in records if r["event_id"] == first[0]["event_id"])
+        assert r["ended_at"] == "2026-11-07T16:00:00Z"  # preserve the real observation, never invent an early lift
+        assert r["status"] == ("ended" if change == "later_positive" else "advisory_lifted")
+        ivs = S.event_intervals(r, "NE", datetime(2026, 11, 8, tzinfo=UTC), None, S.load_rules())
+        red = [iv for iv in ivs if iv["color"] == "red"]
+        assert len(red) == 1 and red[0]["end"].isoformat() == "2026-06-26T16:00:00+00:00"
+        assert any(iv["rule"] == "not_reconfirmed" for iv in ivs)
+        assert not any(iv["color"] == "red" and iv["start"] <= datetime(2026, 8, 1, tzinfo=UTC) < iv["end"] for iv in ivs)
+
+
+def test_e_coli_sample_caution_remains_unchanged():
+    from datetime import UTC, datetime, timedelta
+    from build import status as S
+    r = next(r for r in _beachwatch()[0] if r["source_record_id"] == "LLP2BRNOAK09-2026-w21")
+    ivs = S.event_intervals(r, "NE", datetime(2026, 9, 1, tzinfo=UTC), None, S.load_rules())
     assert len(ivs) == 1 and ivs[0]["color"] == "yellow" and ivs[0]["rule"] == "sample_caution"
     assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72) and ivs[0]["category"] == "beach"
-    assert ivs[0]["rule_applied"]["rule"] == "unresolved.sample_caution" and ivs[0]["red_rule"] is None
-    assert ivs[0]["rule_applied"]["label"] == "Elevated health risk for E. coli"
-    assert "advisory" not in ivs[0]["label"].split(";")[0].lower() or "no advisory" in ivs[0]["label"].lower()
 
 
 def test_beachwatch_records_keep_only_the_safe_fields():

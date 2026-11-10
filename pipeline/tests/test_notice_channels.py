@@ -18,6 +18,7 @@ def test_the_register_validates():
     errs = M.validate_layout(None, DIS, ROOT)
     assert errs == [], "\n".join(errs)
     assert DOC["schema"]["enums"] == M.ENUMS and set(DOC["schema"]["fields"]) == set(M.REQUIRED)
+    assert DOC["schema"]["optional_fields"] == M.OPTIONAL
 
 
 def test_every_new_jersey_cso_permit_has_a_row():
@@ -53,10 +54,13 @@ def errs_of(*rows):
 def test_validator_catches_mistakes():
     assert errs_of(row()) == []
     assert errs_of(row(basis_kind="voluntary", legal_basis=None)) == []          # voluntary needs no basis
+    assert errs_of(row(availability_only=True, records=False)) == []
+    assert errs_of(row(availability_only=False)) == []
     cases = {
         "unknown fields": row(colour="red"),
         "missing": {k: v for k, v in row().items() if k != "publishes"},
         "channel_kind": row(channel_kind="website"),
+        "availability_only is true or false": row(availability_only="true"),
         "basis_kind": row(basis_kind="custom"),
         "needs a legal_basis": row(legal_basis=None),
         "unmonitored_reason": row(monitored=False),
