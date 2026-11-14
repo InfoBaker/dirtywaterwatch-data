@@ -511,3 +511,90 @@ def test_public_wording_says_what_was_read():
     assert "exists in Nebraska" not in reg["ne-dwee-overflow-alerts"]["note"]
     for rid in ("ne-omaha-public-works-pages", "ne-dwee-beachwatch-page", "ne-douglas-county-health"):
         assert reg[rid]["urls"], rid                                          # the page's health is recorded
+
+
+# ---------------------------------------------------------------- review 2026-11-14 (Astra data P1-1 to P2-4)
+# tests/fixtures/ne_beachwatch_legacy_state.json holds state written by the code before the sample/observation clock
+# (992c406), built from rows of tests/fixtures/ne_dwee_beachwatch.json: the migration is tested on what production
+# saved, not on records made to look old.
+
+def _legacy(name):
+    return json.loads((FIX / "ne_beachwatch_legacy_state.json").read_text())[name]
+
+def test_astra_p1_1_migration_keeps_each_rows_event_id_when_a_record_key_repeats():
+    st = _legacy("duplicate_key")
+    old = {r["raw"]["row"]["OBJECTID"]: r["event_id"] for r in st["records"]}
+    assert old == {87: "ne-dwee-beachwatch:LBB1ROCKFD04-2026-w23~2"}     # the parent's suffix order
+    prev = st["records"]
+    for at in ("2026-06-12T17:00:00Z", "2026-06-13T16:00:00Z", "2026-06-14T16:00:00Z"):
+        recs = _beachwatch(st["rows"], at, prev)[0]
+        assert {r["raw"]["row"]["OBJECTID"]: r["event_id"] for r in recs} == old
+        prev = recs
+
+def test_astra_p1_2_migration_keeps_a_saved_observation_inside_its_horizon():
+    from datetime import UTC, datetime
+    from build import status as S
+    st = _legacy("active")
+    assert st["records"][0]["raw"]["_first_seen_at"] == "2026-06-12T16:00:00Z"
+    for at in ("2026-06-13T16:00:00Z", "2026-06-23T16:00:00Z"):              # inside and past the 14-day sample age
+        r = _beachwatch(st["rows"], at, st["records"])[0][0]
+        assert r["sampled_at"] == "2026-06-08" and r["started_at"] == "2026-06-12T16:00:00Z"
+        assert r["time_precision"] == "poll" and r["status"] == "advisory_active" and r["ended_at"] is None
+        assert r["raw"]["_legacy_sample_clock_removed"]["started_at"] == "2026-06-08"   # the invented start is gone
+        ivs = S.event_intervals(r, "NE", datetime(2026, 6, 24, tzinfo=UTC), None, S.load_rules())
+        red = [(iv["start"].isoformat(), iv["end"].isoformat()) for iv in ivs if iv["color"] == "red"]
+        assert red == [("2026-06-12T16:00:00+00:00", "2026-06-26T16:00:00+00:00")]
+
+def test_astra_p1_2_migration_bounds_a_saved_continuation_by_the_newer_samples_first_sighting():
+    st = _legacy("chain")
+    recs = {r["source_record_id"]: r for r in _beachwatch(st["rows"][-1], "2026-06-13T16:00:00Z", st["records"])[0]}
+    w22, w23 = recs["LBB1ROCKFD04-2026-w22"], recs["LBB1ROCKFD04-2026-w23"]
+    assert (w22["started_at"], w22["ended_at"], w22["status"]) == ("2026-06-05T16:00:00Z", "2026-06-12T16:00:00Z", "ended")
+    assert w22["raw"]["ended_at_precision"] == "poll" and w22["time_precision"] == "poll"
+    assert (w23["started_at"], w23["ended_at"], w23["status"]) == ("2026-06-12T16:00:00Z", None, "advisory_active")
+
+def test_astra_p2_3_a_blank_flag_is_not_a_lift_and_a_later_yes_reopens_after_a_no():
+    rows = _rock_rows()[1:2]
+    first = _beachwatch(rows, "2026-06-12T16:00:00Z")[0]
+    start = first[0]["started_at"]
+    for blank in (None, ""):
+        b = copy.deepcopy(rows)
+        b[0]["HealthAlert"] = blank
+        second = _beachwatch(b, "2026-06-13T16:00:00Z", first)[0]
+        assert len(second) == 1 and second[0]["event_id"] == first[0]["event_id"]
+        assert (second[0]["status"], second[0]["started_at"], second[0]["ended_at"]) == ("advisory_active", start, None)
+        third = _beachwatch(rows, "2026-06-14T16:00:00Z", second)[0][0]
+        assert (third["status"], third["started_at"], third["ended_at"]) == ("advisory_active", start, None)
+    neg, blank = copy.deepcopy(rows), copy.deepcopy(rows)
+    neg[0]["HealthAlert"], blank[0]["HealthAlert"] = "NO", None
+    closed = _beachwatch(neg, "2026-06-13T16:00:00Z", first)[0]
+    still = _beachwatch(blank, "2026-06-14T16:00:00Z", closed)[0]
+    assert still[0]["ended_at"] == "2026-06-13T16:00:00Z" and still[0]["status"] == "advisory_lifted"
+    reopened = _beachwatch(rows, "2026-06-15T16:00:00Z", still)[0][0]
+    assert reopened["started_at"] == "2026-06-15T16:00:00Z" and reopened["ended_at"] is None
+    assert reopened["raw"]["_advisory_observed"]["earlier_periods"][0]["end"] == "2026-06-13T16:00:00Z"
+
+def test_astra_p2_4_promoting_an_e_coli_sample_to_a_health_alert_keeps_its_caution():
+    from datetime import UTC, datetime, timedelta
+    from build import status as S
+    ec = copy.deepcopy(_rock_rows()[1:2])
+    ec[0].update(HealthAlert="NO", EColiRisk="Elevated health risk for E. coli", EColi="400")
+    first = _beachwatch(ec, "2026-06-09T16:00:00Z")[0]
+    assert [r["event_type"] for r in first] == ["beach_advisory"]
+    promoted = copy.deepcopy(ec)
+    promoted[0]["HealthAlert"] = "YES"
+    second = _beachwatch(promoted, "2026-06-10T16:00:00Z", first)[0]
+    assert len(second) == 2
+    hab = next(r for r in second if r["event_type"] == "hab_advisory")
+    caution = next(r for r in second if r["event_type"] == "beach_advisory")
+    assert hab["event_id"] == first[0]["event_id"] and hab["started_at"] == "2026-06-10T16:00:00Z"
+    assert caution["event_id"] == hab["event_id"] + ":ecoli" and caution["started_at"] == "2026-06-08"
+    ivs = S.event_intervals(caution, "NE", datetime(2026, 6, 10, 17, tzinfo=UTC), None, S.load_rules())
+    assert len(ivs) == 1 and ivs[0]["color"] == "yellow" and ivs[0]["category"] == "beach"
+    assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72)
+    for at in ("2026-06-10T17:00:00Z", "2026-06-11T16:00:00Z"):
+        again = _beachwatch(promoted, at, second)[0]
+        assert {r["event_id"] for r in again} == {r["event_id"] for r in second} and len(again) == 2
+        assert not any(r["raw"].get("_missing_from_source_since") for r in again)
+        assert next(r for r in again if r["event_type"] == "beach_advisory")["started_at"] == "2026-06-08"
+        second = again
