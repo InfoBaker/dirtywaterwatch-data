@@ -1,0 +1,6 @@
+{"features": [
+ {"attributes": {"STATUS": "Warning", "WATERBODY_ID": "LM9001", "WATERBODY_NAME": "EXAMPLE CO. SFL", "StatusDate": 1793379600000}, "geometry": {"x": -96.9852671, "y": 38.3206774}},
+ {"attributes": {"STATUS": "Warning", "WATERBODY_ID": "LM9001", "WATERBODY_NAME": "EXAMPLE CO. SFL", "StatusDate": 1793379600000}, "geometry": {"x": -96.98, "y": 38.33}},
+ {"attributes": {"STATUS": "Watch", "WATERBODY_ID": "LM9002", "WATERBODY_NAME": "SAMPLE LAKE", "StatusDate": 1793379600000}, "geometry": {"x": -101.75, "y": 37.95}},
+ {"attributes": {"STATUS": "Lift", "WATERBODY_ID": "LM9003", "WATERBODY_NAME": "LIFTED LAKE", "StatusDate": 1793379600000}, "geometry": {"x": -97.0, "y": 38.0}}
+]}

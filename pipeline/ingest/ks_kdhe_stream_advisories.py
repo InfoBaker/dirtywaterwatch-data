@@ -61,8 +61,8 @@ OFFSET_NOTE = "KDHE's feed gives -0600 year-round; the time is kept as the feed 
 
 def items(body: bytes) -> list[dict]:
     root = ET.fromstring(body)
-    return [{"title": html.unescape(it.findtext("title") or "").strip(), "link": (it.findtext("link") or "").strip(),
-             "date": (it.findtext("pubDate") or "").strip(),
+    return [{"title": " ".join(html.unescape(it.findtext("title") or "").split()), "link": (it.findtext("link") or "").strip(),
+             "date": " ".join((it.findtext("pubDate") or "").split()),
              "description": html.unescape(re.sub(r"<[^>]+>", " ", it.findtext("description") or "")).strip()}
             for it in root.iter("item")]
 
