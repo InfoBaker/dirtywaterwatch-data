@@ -34,7 +34,9 @@ and outfall, and EPA's row stays in data/outfalls-us.json untouched, named in `s
   - outfall_kind: "cso" for IDEM's CSO types; Remington's one "Domestic (Sanitary) Wastewater" point, a former SSO
     (004Z), and Muncie's inactive manhole point with no type are "other" (no combined sewer outfall).
   - receiving_water_echo: IDEM's Receiving_Stream; downstream_waters: the chain IDEM gives. The water record is tied by
-    the cloud batch (python -m ingest.outfall_waters --state IN), not here.
+    the cloud batch (python -m ingest.outfall_waters --state IN), not here; until it runs, EPA's tie for the same
+    outfall (water_slug, water_name, water_kind) is carried when IDEM's point lies within CARRY_TIE_M (500 m) of EPA's,
+    so no outfall loses the water EPA's row gave it (match "carried from EPA's row").
   - County names are kept as IDEM writes them; the clock of a record at the outfall is its county's
     (zones.indiana_zone).
 EPA's open rows that IDEM's layer lacks keep EPA's rows (listed under epa_not_in_state_layer).
@@ -79,6 +81,17 @@ def scrub_name(v: str | None) -> str | None:
             return m.group(0)
         return HOUSE_NUMBER_REMOVED
     return " ".join(_HOUSE.sub(cut, v).split()) or None
+
+
+CARRY_TIE_M = 500
+
+
+def _metres(lat1, lon1, lat2, lon2) -> float | None:
+    import math
+    if None in (lat1, lon1, lat2, lon2):
+        return None
+    k = math.cos(math.radians((float(lat1) + float(lat2)) / 2))
+    return math.hypot((float(lat1) - float(lat2)) * 111_195, (float(lon1) - float(lon2)) * 111_195 * k)
 
 
 def outfall_number(cso_number: str | None) -> str | None:
@@ -165,6 +178,12 @@ def build(doc: dict, epa_rows: list[dict], fetched_at: str) -> dict:
                                    "outfall_status": e.get("outfall_status"), "coords_from": e.get("coords_from"),
                                    "note": "EPA's national CSO inventory row; IDEM's layer gives the outfall's own "
                                            "point, receiving stream, downstream waters and IDEM's status"})
+            d = _metres(row["lat"], row["lon"], e.get("lat"), e.get("lon"))
+            if e.get("water_slug") and d is not None and d <= CARRY_TIE_M:
+                row.update(water_slug=e["water_slug"], water_name=e.get("water_name"), water_kind=e.get("water_kind"),
+                           match="carried from EPA's row",
+                           water_match=(f"EPA's tie for this outfall (data/outfalls-us.json, {e.get('match')}), carried: "
+                                        f"IDEM's point lies {d:.0f} m from EPA's; the water batch ties IDEM's point"))
         else:
             unpaired.append({"npdes_permit": permit, "outfall": num, "idem_status": a.get("Status")})
         rows.append(row)
