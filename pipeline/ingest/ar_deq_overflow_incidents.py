@@ -162,8 +162,15 @@ def parse_page(page: str) -> tuple[list[dict], int | None, int | None, str | Non
 
 
 def privacy_cut(row: dict) -> dict:
-    """A report whose impact is private property or a basement backup is often at a home: its location text is
-    dropped before anything is saved (location_withheld says why)."""
+    """Before anything is saved: a report whose impact is private property or a basement backup is often at a home, so
+    its location text is dropped (location_withheld says why); an impact that is not one of DEQ's checkbox labels is
+    the filer's own words, which can name people and homes, so only the water names it gives are kept
+    (ar_transforms.water_names; review 2026-11-14 P1-5)."""
+    from ingest import ar_transforms as T
+    impact = (row.get("impact") or "").strip()
+    if impact and not T.DEQ_IMPACTS.match(impact):
+        names, _ = T.water_names(impact)
+        row = {**row, "impact": "; ".join(names)}
     if PRIVATE_IMPACT.search(row.get("impact") or "") and row.get("location"):
         return {**row, "location": "", "location_withheld": "private property: DEQ's impact for this report"}
     return row

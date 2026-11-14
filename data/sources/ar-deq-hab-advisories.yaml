@@ -4,7 +4,9 @@ url: "https://adeq.state.ar.us/water/planning/hab/advisories.json"
 homepage: "https://adeq.state.ar.us/water/planning/hab/"
 kind: "json"
 level: "state"
-# Read through the generic JSON reader (the fetch block below; ingest/ar_transforms.py ar_hab_record): source id
+# Fetched by ingest/ar_deq_hab_advisories.py (which rounds a coordinate pair written inside a waterbody name to 0.001
+#   degree before anything is saved or keyed) and mapped through the fetch block below (ingest/ar_transforms.py
+#   ar_hab_record; live: false, the module runs it): source id
 #   ar-deq-hab-advisories, data/build/events/ar-deq-hab-advisories.json. The Harmful Algal Blooms page's "Current
 #   Advisories" table and its archive page are both drawn by the page's script from one file, advisories.json
 #   (waterbody, county, area, date posted, date lifted); the current table shows the rows with no lift date.
@@ -29,7 +31,8 @@ legal_basis: "DEQ's Harmful Algal Bloom Management Plan (2019): recreational use
 checked: "2026-11-14"
 fetch:
   platform: "json"
-  live: true
+  live: false
+  module: "ar_deq_hab_advisories"
   url: "https://adeq.state.ar.us/water/planning/hab/advisories.json"
   json: {records_path: "advisories"}
   time_zone: "America/Chicago"
@@ -48,6 +51,11 @@ fetch:
     keep_missing: true
     revisions: true
     confirm_while_listed: true
+    # a row DEQ corrects (a posting day or the water's spelling) is matched to its replacement by the water's key and
+    # county, or by the water and the posting day: the old one is then duplicate_of the corrected row
+    supersede:
+      - ["{waterbody|slug|default:-}", "{county|slug|default:-}", "{lifted|slug|default:-}"]
+      - ["{@started_at|day}", "{county|slug|default:-}"]
   meta:
     credit: "Arkansas Division of Environmental Quality, Harmful Algal Blooms: current advisories and archive"
     license: "No licence or terms stated on the page."

@@ -1,13 +1,12 @@
 {
  "about": "Water names in Arkansas's records that data/receiving-waters-national.json does not hold for AR: the waters the location text of a report in DEQ's Reported Noncompliance Incident Data names, when the filer's impact does not say it stayed on land (read 2026-11-14, reports since 2025-01-01), and the water each of DEQ's harmful algal bloom advisories names (52 advisories since 2014); one row per name and county (an overflow report's county is its permit plant's, an advisory's the county DEQ gives), with the number of reports, how many are open now, up to five points ([lat, lon], 0.001 degree: the advisories' GNIS points; overflow reports have none), the advisories' nearest towns and the sources. Records naming no water are left out (by_reason). Written by scripts/ar_report_water_names.py.",
  "state": "AR",
- "waters": 64,
- "reports": 237,
+ "waters": 65,
+ "reports": 238,
  "reports_on_listed_waters": 53,
  "by_reason": {
   "no water named": 2161,
-  "a copy of another record (DEQ lists some reports twice)": 25,
-  "a description of a place, not a water's name": 1
+  "a copy of another record (DEQ lists some reports twice)": 25
  },
  "rows": [
   {
@@ -839,6 +838,20 @@
    "open": 0,
    "places_from": [
     "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Leading Into Town Creek",
+   "reports": 1,
+   "county": "Hot Spring County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
    ]
   },
   {
