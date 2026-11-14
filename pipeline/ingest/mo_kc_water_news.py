@@ -93,7 +93,7 @@ WATER = re.compile(r"\b((?:(?:[A-Z][\w'’]*|of)\s+){0,3}" + WATER_WORDS + r")(?
 ENTRY = re.compile(r"\benter|\breach|\bflow|\bspill|\bleads?\b|\binto\b|\bdischarg|\bwent\b|\bsend|\bcarried", re.I)
 NO_WATER = re.compile(r"did not (?:reach|enter)|no (?:waste ?water|sewage) (?:reached|entered)|never reached", re.I)
 STREET = re.compile(r"\b(?:Drive|Road|Street|Avenue|Ave|Blvd|Highway|Parkway|Lane|Court)\b")    # "Spring Drive Bonhomme Creek"
-SKIP_WATERS = re.compile(r"^(?:the|a|an|of|local|nearby|small|unnamed)\b", re.I)
+SKIP_WATERS = re.compile(r"^(?:the|a|an|of|local|nearby|small|unnamed|national|scenic)\b", re.I)
 
 
 def items(body: bytes) -> list[dict]:
@@ -249,6 +249,7 @@ def waters(text: str) -> list[str]:
             name = re.sub(r"\s+", " ", m.group(1)).strip()
             name = re.sub(r"^(?:into|to|the|entered|entering|reached|reach|and|of)\s+", "", name, flags=re.I)
             name = re.sub(r"\bR\.$", "River", name)
+            name = re.sub(r"^(?:[A-Z]{1,3}\s+)+(?=[A-Z][a-z])", "", name)       # "AK A Brushy Creek" (a.k.a.)
             if SKIP_WATERS.match(name) or len(name.split()) < 2 or STREET.search(name):
                 continue
             if name not in out:
