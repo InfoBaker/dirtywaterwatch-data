@@ -143,7 +143,8 @@ def form(name: str, facility_type: str | None) -> str | None:
         return "state facility"
     if re.search(r"sanitary district|\bsd\b|utility district|sewerage district|sewerage dist|metro(politan)? sew|"
                  r"school district|sewerage commission|sewage commission|utility commission|wastewater control commission|"
-                 r"joint sewerage|joint s c\b|sewerage comm|sanitary commission|regional sewerage", n):
+                 r"joint sewerage|joint s c\b|sewerage comm|sanitary commission|regional sewerage|"
+                 r"\bcommissio\w*|\bcomm\b|sanitary distr|utility distr|\bs d\b|\bmsd\b|\bgbmsd\b|public schools", n):
         return "special district"
     if re.search(r"\bcounty\b", n):
         return "county"
