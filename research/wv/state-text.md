@@ -1,0 +1,21 @@
+---
+state: WV
+name: West Virginia
+updated: 2026-11-14
+---
+
+**What the law requires.** West Virginia's water rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to report it at once by telephone to the Department of Environmental Protection's emergency spill line, and sewer permits add the federal written reports. Nothing requires the public to be told, and the law sets no period after a discharge during which the water is to be avoided. A 2025 bill (HB 3217) that would have required the Department to give public notice within 24 hours of a reported sewage spill and to keep an online spill database has stayed in committee since March 2025. West Virginia has 61 combined sewer systems (sewage and rainwater in one pipe) with 519 open combined sewer outlets in the Department's outlet records (November 14, 2026), most of them small towns on the Ohio, Kanawha, Monongahela, West Fork and Tygart rivers.
+
+**What is published.** The Department publishes the location of every combined sewer outlet, with the stream it reaches, and a map of algal bloom advisories, which listed none on November 14, 2026. The combined sewer towns give notice by a sign at each outlet and a newspaper notice once a year. Charleston's sanitary board advises people "to avoid contact with the water around these outlets during these overflow events for at least 24 hours thereafter", and Morgantown's utility board advised avoiding contact for 72 hours after rain (its page as read on November 9, 2026). Every sewer permit's monthly reports reach the U.S. Environmental Protection Agency's public records weeks after the month: of the 61 combined sewer permits, two (Princeton and Beckley) report a monthly flow at one combined sewer outlet; Beckley's shows flow in 16 of the 21 months from January 2025 to September 2026, and Princeton's none.
+
+**What is not published.** No list of sewer overflows, bypasses or spills exists in West Virginia: not from the Department, not from the operators, and not in the federal overflow records, which hold no West Virginia report. No permit reports to the federal records the number, length or volume of its combined sewer overflows. The Department's document system, which holds the reports it receives, requires a login.
+
+**What stands in the way.** The only legal channel is a telephone call to the state. The combined sewer notices are printed once a year, with no date of any overflow. The Ohio River commission's bacteria results refuse automated reading. Morgantown's combined sewer page moved after November 9, 2026.
+
+**Known problems in the data.** The Department's outlet records and the federal inventory disagree on whether 16 outlets are open: the Department ended four of Follansbee's outlets in October 2026, and lists eleven of Philippi's and one of Charleston's as open that the federal inventory marks closed; this site follows the Department. One outlet's stream is spelled "Jim Rum".
+
+**What this site does about it.** With no reports to show, West Virginia's waters below each open combined sewer outlet are shown with this site's rain caution: when radar shows 0.1 inch of rain in 24 hours at an outlet, the water below it is shown yellow, as a discharge possible with no report received, while it rains and for 48 hours after. A month in which an operator reported flow from a combined sewer outlet is shown with the monthly mark, never as a dated discharge. An algal bloom on the Department's map is shown as the Department's advisory while the map lists it. Grey means no report, never clean water.
+
+{{share_line}}
+
+Of this state's reports on this site, {{dated_share}} are dated to the day or better; the newest dated report is from {{latest_dated}}. Coverage: {{grade}}.

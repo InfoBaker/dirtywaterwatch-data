@@ -181,6 +181,10 @@ def records(state: dict) -> list[dict]:
                    "receiving_water_as_given": water, "gallons_as_given": r.get("gallons_text"),
                    "time_zone": TZ, "layout_check": rep.get("check"),
                    "date_basis": "the table's Date column (a date; the City gives no time and no end)"}
+            per = rep.get("period") or []
+            if len(per) == 2 and not (per[0] <= r["date"] <= per[1]):
+                raw["date_note"] = (f"the date given lies outside the report's quarter ({per[0]} to {per[1]}); kept as "
+                                    "the City-Parish wrote it")
             if not named:
                 raw["placement_note"] = ("the City's table gives no receiving water ('None'): kept with its parish "
                                          "and permit, placed on no water")
