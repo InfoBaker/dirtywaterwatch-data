@@ -53,6 +53,8 @@ CFG = {
     "candidates": ROOT / "research" / "nd" / "private-utilities-candidates.json",
     "research_name": {"ND0023434": "City of Bismarck"},
     "form_by_name": {},
+    # a withheld permittee's facility whose words read as a public body ("... County Gascoyne"): named by place
+    "withheld_name": {"ND0026077": "Sewage plant at Gascoyne (permit ND0026077)"},
     "state_words": ("North Dakota", "ND"),
     "channel": channel,
 }

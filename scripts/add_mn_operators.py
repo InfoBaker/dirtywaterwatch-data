@@ -62,7 +62,8 @@ CFG = {
                      "Metropolitan Council-Rosemount": "special district",
                      "Western Lake Superior Sanitary District": "special district",
                      "Minneapolis Public Works and Metropolitan Council (joint CSO permit)": "city",
-                     "City of Duluth (sanitary collection system)": "city"},
+                     "City of Duluth (sanitary collection system)": "city",
+                     "Red Lake Gaming Enterprises Inc": "business or industrial"},   # a company (the Band's enterprise)
     "state_words": ("Minnesota", "MN"),
     "channel": channel,
 }

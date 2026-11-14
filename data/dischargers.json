@@ -470818,7 +470818,7 @@
   "id": "mn-red-lake-gaming-enterprises-inc",
   "name": "Red Lake Gaming Enterprises Inc",
   "short_name": "Red Lake Gaming Enterprises Inc",
-  "legal_form": "tribal",
+  "legal_form": "business or industrial",
   "state": "MN",
   "kind": "plant",
   "npdes_permit": "MNG585172",
@@ -470831,7 +470831,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -472561,41 +472561,6 @@
   ],
   "source_areas": [
    "mn"
-  ]
- },
- {
-  "id": "nd-american-colloid-county-gascoyne-permit-nd0026077",
-  "name": "American Colloid County Gascoyne (permit ND0026077)",
-  "short_name": "American Colloid County Gascoyne (permit ND0026077)",
-  "legal_form": "facility (permittee not named)",
-  "state": "ND",
-  "kind": "plant",
-  "npdes_permit": "ND0026077",
-  "npdes_permits": [
-   "ND0026077"
-  ],
-  "receiving_waters": [
-   "Drainage To Buffalo Creek",
-   "Unnamed to Buffalo Creek",
-   "Unnamed tributary of Buffalo Creek",
-   "Closed basin or open pits",
-   "Closed basin"
-  ],
-  "water_slugs": [],
-  "outfall_count": 9,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 9 rows)",
-  "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually. The rule and the permit bind a private permittee as they bind a public one.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [],
-  "notes": "Owner: EPA's permittee name reads as an individual's: not named here.",
-  "verified": "inferred",
-  "checked": "2026-11-14",
-  "aliases": [
-   "nd-american-colloid-county-gascoyne-permit-nd0026077"
-  ],
-  "source_areas": [
-   "nd"
   ]
  },
  {
@@ -484004,6 +483969,41 @@
   "checked": "2026-11-14",
   "aliases": [
    "nd-schmitz-inc"
+  ],
+  "source_areas": [
+   "nd"
+  ]
+ },
+ {
+  "id": "nd-sewage-plant-at-gascoyne-permit-nd0026077",
+  "name": "Sewage plant at Gascoyne (permit ND0026077)",
+  "short_name": "Sewage plant at Gascoyne (permit ND0026077)",
+  "legal_form": "facility (permittee not named)",
+  "state": "ND",
+  "kind": "plant",
+  "npdes_permit": "ND0026077",
+  "npdes_permits": [
+   "ND0026077"
+  ],
+  "receiving_waters": [
+   "Drainage To Buffalo Creek",
+   "Unnamed to Buffalo Creek",
+   "Unnamed tributary of Buffalo Creek",
+   "Closed basin or open pits",
+   "Closed basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 9 rows)",
+  "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually. The rule and the permit bind a private permittee as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA's permittee name reads as an individual's: not named here.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nd-sewage-plant-at-gascoyne-permit-nd0026077"
   ],
   "source_areas": [
    "nd"

@@ -429,7 +429,7 @@ Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data
   holds one Minnesota report, from the one Minnesota system EPA permits directly: the Bois Forte Band's Lake Vermilion
   collection system (MN0061310), a sanitary sewer overflow on 2024-06-18 (start and end that day, received 2024-06-25)
   to "Pike Bay Lake Vermilion Tower Minnesota". Keyed on MN only, so every other state's records are unchanged:
-  - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in ZONE_ALWAYS_STATES, so every
+  - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in STATE_ZONE_ALWAYS, so every
     Minnesota record carries raw.time_zone.
   - No free-text or repeated-point rule: the one report has no description and its own point.
 Lag and cadence
@@ -475,8 +475,9 @@ STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chi
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json",
                     "KY": "ky-central-time-counties.json"}   # Kentucky: the Central-time counties (module docstring)
 # states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
-ZONE_ALWAYS_STATES = {"KY",
-                      "MN"}
+ZONE_ALWAYS_STATES = {"KY"}
+# states of one zone whose records carry raw.time_zone (STATE_TZ) whatever their times' precision (Minnesota)
+STATE_ZONE_ALWAYS = {"MN"}
 # states whose sewer overflow at the plant's own point (within REPEATED_POINT_PLANT_M of a point EPA's plant list gives
 # the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
 # 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
@@ -1591,8 +1592,10 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             m_inc = KY_INCIDENT.search(ev.get("sewer_overflow_bypass_description_text") or "")
             if m_inc:
                 raw["ky_incident_id"] = m_inc.group(1)
-        if state in ZONE_ALWAYS_STATES and (ev_tz or STATE_TZ.get(state)):
-            raw["time_zone"] = ev_tz or STATE_TZ[state]      # Minnesota: one zone, no county file
+        if ev_tz and state in ZONE_ALWAYS_STATES:
+            raw["time_zone"] = ev_tz
+        if state in STATE_ZONE_ALWAYS and STATE_TZ.get(state):
+            raw["time_zone"] = STATE_TZ[state]          # Minnesota: one zone, no county file
         if ev_tz and any(t and "T" not in t for t in (start, end)):
             # a date with no time keeps no offset: the zone it is a day of goes with it, so the status build ends the
             # day in the event's own zone, not New York's (SOL 2026-11-07 wave 2 P1-1)
