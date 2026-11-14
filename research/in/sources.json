@@ -177,9 +177,9 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "State outfall layer better than EPA inventory (981 vs 671 open in EPA seed), with downstream water chain (waterbody_desc_2..4) and basin.",
+  "status_reason": "Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited); 845 rows with points, 835 paired with EPA's inventory, which they outrank.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": "Photo_Credit holds personal names; drop it on ingest."
  },
  {
@@ -211,10 +211,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "National monthly fallback; the only statewide CSO event signal for Indiana.",
+  "status": "used",
+  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only.",
   "verified": "inferred",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -246,10 +246,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "A handful of Indiana rows on 2026-11-03 (national brief); will grow if IDEM moves SSO reporting to NeT-SewerOverflow.",
+  "status": "used",
+  "status_reason": "Read by the national eRule module with IN in its states (2026-11-14): one Indiana report on the 2026-11-12 extract (Shelbyville's plant bypass, 2026-08-12); IDEM's own reports are not sent here until its move to NeT-SewerOverflow.",
   "verified": "inferred",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -382,10 +382,10 @@
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "candidate",
-  "status_reason": "'Current Status: NOT overflowing'; last overflow August 19th, 2025; list of prior events with volume (1.1 MG on 2025-08-19). Scrapeable, daily precision.",
+  "status": "unreachable",
+  "status_reason": "The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -400,7 +400,7 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://waterlooin.gov/category/combined-sewer-overflow/",
+  "url": "https://waterlooin.gov/cso-policy/",
   "access": [
    "html"
   ],
@@ -417,9 +417,9 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "watch",
-  "status_reason": "WordPress category of dated CSO notices (latest seen 04-01-2023, six pages).",
+  "status_reason": "The CSO policy page (https://waterlooin.gov/cso-policy/) links start and end notices as PDFs (three pairs, March and April 2026); the PDFs' text uses a font this build's reader cannot decode. Watched in the register.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -434,7 +434,7 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://goshenindiana.org/cso-notice",
+  "url": "https://goshen.in.gov/cso-notice/",
   "access": [
    "html"
   ],
@@ -451,9 +451,9 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "watch",
-  "status_reason": "Public-notice posts naming permit IN0025755 and outfall 008 (example 2018-02-20).",
+  "status_reason": "The notice page (https://goshen.in.gov/cso-notice/) holds one dated notice (2018-02-20) and the city's notification policy. Watched in the register.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -555,9 +555,9 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "unreachable",
-  "status_reason": "HTTP 403 to curl and WebFetch on 2026-11-03.",
+  "status_reason": "HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. A barrier (bot wall) in the register.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -588,10 +588,10 @@
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "unreachable",
-  "status_reason": "HTTP 403 to curl.",
+  "status": "watch",
+  "status_reason": "Readable on 2026-11-14: alerts go to an X account (@CSOAlerts, sign-in to read); the 2025 annual report and outfall map are PDFs. Watched in the register.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -623,9 +623,9 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "unreachable",
-  "status_reason": "HTTP 403 to curl.",
+  "status_reason": "HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -658,9 +658,9 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "unreachable",
-  "status_reason": "HTTP 403 to curl; search says notices by email on request or by calling the plant.",
+  "status_reason": "HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -762,10 +762,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Live state source but data are behind Power Apps entity-grid calls; Swim Guide mirrors it.",
+  "status": "watch",
+  "status_reason": "The portal shows 'There are no active Closures or Advisories' beside 'You don't have permissions to view these records' and 'Error completing request' (2026-11-14): the records need a sign-in. A barrier (login) in the register.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -879,10 +879,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Machine-readable HAB advisory levels with points.",
+  "status": "used",
+  "status_reason": "Read through the generic ArcGIS block (2026-11-14): 1,717 samples at 29 beaches, 2010 to 2026-09-14, each with IDEM's advisory level; 909 at an advisory level kept as IDEM's statements with their sample dates, never as advisory dates.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -912,9 +912,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Linked from IDEM algae page; not fetched.",
+  "status_reason": "Read 2026-11-14: park alerts by property; the blue-green algae lines are a standing general note ('Found in lakes year round. Don't drink the water. Shower after you swim.'), not a report of a bloom, so they are not records. Watched in the register.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
