@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1461 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| ar | 4 | 1 | 5 | 2 | 1 | 13 |
+| **all** | **523** | **235** | **426** | **203** | **74** | **1461** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1676,21 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## ar: Arkansas (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ar-adh-swim-beach-status` | Arkansas Department of Health, Arkansas Swim Beach Program: closed swim beaches | used | fetched | advisories | Read by this site as a standing list: each listed beach is a closure from the first read that lists it until a read no longer does. |
+| `ar-deq-hab-advisories` | Arkansas DEQ Harmful Algal Bloom current advisories table and news releases | used | fetched | advisories | Read by this site: the file behind the current-advisories table and the archive (advisories.json: 52 advisories since 2014, 4 in effect on 2026-11-14), with DEQ's posted and lifted days. |
+| `ar-deq-overflow-forms` | Arkansas DEQ 24-hour online overflow reporting forms | used | fetched | law | Regulator-report duty, quoted. |
+| `ar-deq-overflow-incidents` | Arkansas DEQ "Reported Noncompliance Incident Data" (SSO, bypass, upset, unpermitted discharge) search | used | fetched | events | Read by this site: every report whose overflow began since 2025-01-01 (2,449 rows read 2026-11-14), polled by start day with each window's count checked; statewide, dated to the day, usually received the next day; no coordinates, county or receiving-water field. |
+| `ar-deq-sso-access-db` | Arkansas DEQ NPDES_SSO_web.zip (full Access database) | candidate | fetched | events | A bulk snapshot of the same reports for history before 2025; the ZIP's Last-Modified is still 2025-08-13 (HEAD request 2026-11-14, 5,065,954 bytes); not parsed (Microsoft Access). |
+| `ar-deq-aquaview` | Arkansas DEQ AquaView (ArcGIS Experience) | watch | search_only | monitoring | Check for outfall and station layers. |
+| `ar-deq-email-lists` | Arkansas DEQ e-mail lists (news releases, including harmful algal bloom advisories) | watch | fetched | news | A voluntary notice channel (e-mail); the advisories it announces are read from advisories.json. |
+| `ar-deq-seek-complaints` | Arkansas DEQ SEEK complaints search | watch | search_only | events | Possible corroboration of overflows missing from the incident search; the public's complaints carry names and addresses and need a safe-field review before any reading. |
+| `ar-deq-water-quality-search` | Arkansas DEQ water-quality monitoring station search | watch | search_only | monitoring | Sample results, not advisories or discharge reports: context only. |
+| `ar-lrwra-sso-plan` | Little Rock Water Reclamation Authority SSO Response Plan (Sierra Club settlement) and overflow reporting line | watch | search_only | events | No web list. |
+| `ar-beaches` | Arkansas swimming beach monitoring | rejected | search_only | advisories | The 2026-11-03 'no beach program' finding was wrong: the Department of Health runs the Arkansas Swim Beach Program (ar-adh-swim-beach-status). |
+| `ar-epa-sobe` | EPA SOBE (eRule) extract, Arkansas rows | rejected | fetched | events | EPA's sewer overflow and bypass extracts dated 2026-11-12 (current and all versions) hold no Arkansas rows; DEQ publishes its own search instead. |
+| `ar-usace-swl-swim-beach-closures` | U.S. Army Corps of Engineers, Little Rock District: swim beach closures | unreachable | fetched | advisories | The host refuses this site's identified client (403); a barrier to record, not something to get around. |
