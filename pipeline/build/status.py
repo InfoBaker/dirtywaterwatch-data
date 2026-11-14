@@ -1061,6 +1061,8 @@ COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives p
 COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 COUNTY_FIELD_STATES.add("OH")    # Ohio: a spill whose point lies outside its county keeps only raw.county (audit P3-4)
+COUNTY_STATES["DE"] = "de-counties.json"; COUNTY_FIELD_STATES.add("DE")   # Delaware: DNREC's releases give the county (ZIP or town), no point
+COUNTY_STATES["SC"] = "sc-counties.json"; COUNTY_FIELD_STATES.add("SC")   # South Carolina: Florence's notices give the county, no point
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}

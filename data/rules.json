@@ -222,6 +222,18 @@
     "clock": "end_of_discharge",
     "basis": "Ohio sets no period after a sewage discharge during which the water is to be avoided, and no Ohio statute or rule requires the public to be told of a sewer overflow or a bypass: operators report them to Ohio EPA within 24 hours, and those reports are not published. Ohio's permit rule requires a permanent sign at every permitted outfall, combined sewer overflow and bypass outfalls included, and requires a major discharger near a drinking-water intake to notify the water supplier as soon as practicable. Combined sewer operators in the Lake Erie basin must notify the public within four hours of becoming aware of an overflow under their public notification plans (40 CFR 122.38); operators in the Ohio River basin notify under their permits. The Northeast Ohio Regional Sewer District, Akron, Columbus and Bowling Green publish their overflows; the Metropolitan Sewer District of Greater Cincinnati advises avoiding contact with streams for 72 hours after rain. Ohio EPA's spills layer lists the sewage spills called in to its emergency line, by day, with no end. This site marks a reported discharge while it runs and applies its own caution after it ends; a report with only a day is read in Eastern time",
     "source": "OAC 3745-33-08(A)(12) and (F)(1); 40 CFR 122.38; 40 CFR 122.41(l)(6); NEORSD CSO alerts map; City of Akron overflow status map; City of Columbus Sewer Overflow Discharge Information; City of Bowling Green CSO events; Ohio EPA Spills (Office of Emergency Response); MSD of Greater Cincinnati CSO notification program"
+   },
+   "DE": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Delaware sets no period after a sewage release during which the water is to be avoided. Anyone causing an environmental release, which for sewage means 10,000 gallons or more, must report it to the Department of Natural Resources and Environmental Control as soon as it is known; the Department must post it on its website no later than one business day after the report, and notify the district's legislators and registered neighbours within 12 hours. Discharges in compliance with a permit are exempt, so Wilmington's combined sewer overflows, the state's only ones, are not reported there: each outfall carries a sign. The Department's release list gives the release's time and place, not its end. The Department's Recreational Water Program posts advisories and closures at monitored beaches with their own start and end dates. This site marks a reported release while it runs and applies its own caution after it ends",
+    "source": "7 Del. C. 6002(20), 6014(b) and 6028(a); Delaware DNREC Environmental Release Notification System (Recent Releases); DNREC Recreational Water Program"
+   },
+   "SC": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "South Carolina sets no period after a sewage spill during which the water is to be avoided. A wastewater utility must report a significant spill (5,000 gallons or more of untreated or partially treated sewage) to the Department of Environmental Services within 24 hours and in writing within five days, and give public notice within 24 hours of discovering it, through a channel the law does not name; the Department gives the notice when the utility does not. Spills caused by natural disasters, a third party's direct act or other acts of God are excluded. The Department publishes no list of the reports it receives. The City of Florence posts a notice for each overflow of 5,000 gallons or more. The Department posts swimming advisories at its beach monitoring stations and harmful algal bloom watches and advisories. This site marks a reported spill while it runs and applies its own caution after it ends",
+    "source": "S.C. Code 48-1-95(A)(5), (B) and (E); City of Florence sanitary sewer overflow notices; SC DES Beach Monitoring; SC DES Harmful Algal Bloom Monitoring"
    }
   },
   "by_discharger": {
@@ -369,12 +381,13 @@
     "ne-dwee-beachwatch",
     "hi-doh-cwb-events-api",
     "tx-glo-beach-watch",
-    "tn-tdec-hab-advisory-status"
+    "tn-tdec-hab-advisory-status",
+    "de-dnrec-recreational-water"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
-   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high; Texas Beach Watch's Medium level, enterococcus from 35 to 104 per 100 mL, at which the program recommends no advisory; a bloom reported to the Tennessee Department of Environment and Conservation for which it issued no advisory, confirmed or not yet assessed). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done; the Tennessee Department's end date for a bloom it followed up), never as the agency's advisory.",
-   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii Department of Health, Clean Water Branch; Texas General Land Office, Texas Beach Watch; Tennessee Department of Environment and Conservation, HAB Advisory Status"
+   "rationale": "Some agencies label a sample result a health risk but issue no advisory for it (Nebraska's Beach Watch marks E. coli above 235 per 100 mL as an elevated health risk; no advisory is issued for E. coli; Hawaii's Department of Health posts a notification, not an advisory, while it retests a beach whose routine sample was high; Texas Beach Watch's Medium level, enterococcus from 35 to 104 per 100 mL, at which the program recommends no advisory; a bloom reported to the Tennessee Department of Environment and Conservation for which it issued no advisory, confirmed or not yet assessed; the 'Resampling Underway' notice Delaware's Department of Natural Resources and Environmental Control posts for a beach whose enterococcus result was high, in place of an advisory). The agency's words are quoted, and the site shows its own caution for 72 hours from the day of the sample, or until the agency closes its notice when that is later (Hawaii's retest notices stay posted until the retest is done; the Tennessee Department's end date for a bloom it followed up), never as the agency's advisory.",
+   "source": "Nebraska Department of Water, Energy, and Environment, Beach Watch; Hawaii Department of Health, Clean Water Branch; Texas General Land Office, Texas Beach Watch; Tennessee Department of Environment and Conservation, HAB Advisory Status; Delaware DNREC, Recreational Water Program"
   },
   "day_start_caution": {
    "sources": [
