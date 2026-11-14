@@ -10,9 +10,12 @@ Source
     50037 'Duration'                                          MO TOTAL  hr/mo  (hours of discharge)
     74063 'Overflow volume [SS0 volume, CSO volume]'          MO TOTAL  Mgal   (million gallons)
   A month with no overflow is filed NODI C ('No Discharge'). One request per permit and parameter, a short sleep
-  between them; each answer is kept with common.save_raw (data/raw/in-echo-dmr-cso/<stamp>.<permit>-<code>.json) and
-  doubles as the cache: a run reuses a copy fetched in the last CACHE_DAYS days with the same start date (--refresh
-  asks again), so ECHO is asked about once a week per permit.
+  between them; each answer is kept with common.save_raw (data/raw/in-echo-dmr-cso/<stamp>.<permit>-<code>.json, not
+  read back) and, compacted to the fields the records read, in the run-to-run cache data/build/in-echo-dmr-cso-cache.json
+  (data/build is kept between cloud runs; about 1 MB): a run reuses an answer fetched in the last CACHE_DAYS days with
+  the same start date (--refresh asks again), so ECHO is asked about once a week per permit and parameter. A run asks
+  at most MAX_LIVE_REQUESTS (the oldest answers first) and reads the rest from older answers (meta.not_asked_this_run),
+  so a run stays within the refresh's per-feed time cap; 276 requests took about 15 minutes on 2026-11-14.
 
 Permits
   Every Indiana permit with at least one open combined sewer outfall in the outfall registry (every data/outfalls-*.json
@@ -62,7 +65,7 @@ import requests
 
 import common
 import zones
-from common import DATA_DIR, HEADERS, RAW_DIR, event, now_iso, read_json, save_raw, write_events, write_json
+from common import BUILD_DIR, DATA_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
 
 SOURCE_ID = "in-echo-dmr-cso"
 URL = "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart"
@@ -72,6 +75,8 @@ AUTHORITY = ("EPA ECHO discharge monitoring reports (the operator's own monthly 
 DEFAULT_SINCE = "2025-01-01"
 SLEEP_S = 1.0
 CACHE_DAYS = 7
+MAX_LIVE_REQUESTS = 120        # a run asks at most this many; the rest wait for the next run (oldest first)
+CACHE_FILE = BUILD_DIR / "in-echo-dmr-cso-cache.json"
 REQUEST_TIMEOUT = 60
 MAX_CONSECUTIVE_FAILURES = 5
 # a filed volume implying more than this many million gallons an hour is kept as text only (one outfall-month on
@@ -109,24 +114,42 @@ def dischargers() -> dict[str, dict]:
     return out
 
 
-def cached(permit: str, code: str, since: date, today: date) -> tuple[dict | None, str | None]:
-    """A copy fetched in the last CACHE_DAYS days for this permit, parameter and start date, if any."""
-    d = RAW_DIR / SOURCE_ID
-    if not d.exists():
+def compact(res: dict) -> dict:
+    """The answer with only what the records read (the facility name, the start date and per outfall the three
+    parameters' DMR rows with RAW_FIELDS): the run-to-run cache (CACHE_FILE) stays small."""
+    feats = []
+    for f in res.get("PermFeatures") or []:
+        pars = [{"ParameterCode": par.get("ParameterCode"), "ParameterDesc": par.get("ParameterDesc"),
+                 "MonitoringLocationDesc": par.get("MonitoringLocationDesc"),
+                 "DischargeMonitoringReports": [{k: row.get(k) for k in ("MonitoringPeriodEndDate", *RAW_FIELDS)}
+                                                for row in par.get("DischargeMonitoringReports") or []]}
+                for par in f.get("Parameters") or [] if str(par.get("ParameterCode")) in PARAMS]
+        if pars:
+            feats.append({"PermFeatureNmbr": f.get("PermFeatureNmbr"), "PermFeatureTypeDesc": f.get("PermFeatureTypeDesc"),
+                          "Parameters": pars})
+    return {"Message": res.get("Message"), "CWPName": res.get("CWPName"), "StartDate": res.get("StartDate"),
+            "PermFeatures": feats}
+
+
+def load_cache() -> dict:
+    doc = read_json(CACHE_FILE, {}) or {}
+    return doc.get("answers") or {}
+
+
+def cached(cache: dict, permit: str, code: str, since: date, today: date, stale_ok: bool = False):
+    """(answer, how) from the cache: an answer fetched in the last CACHE_DAYS days for this permit, parameter and start
+    date ('cache'); with stale_ok, an older one ('stale cache'); (None, None) when there is none."""
+    e = cache.get(f"{permit}-{code}") or {}
+    if e.get("since") != since.isoformat() or not e.get("fetched"):
         return None, None
-    for p in sorted(d.glob(f"*.{permit}-{code}.json"), reverse=True):
-        try:
-            stamp = datetime.strptime(p.name[:8], "%Y%m%d").date()
-        except ValueError:
-            continue
-        if (today - stamp).days > CACHE_DAYS:
-            continue
-        try:
-            res = json.loads(p.read_text())["Results"]
-        except (ValueError, KeyError, OSError):
-            continue
-        if res.get("Message") == "Success" and res.get("StartDate") == since.strftime("%m/%d/%Y"):
-            return res, p.name
+    try:
+        age = (today - date.fromisoformat(e["fetched"])).days
+    except ValueError:
+        return None, None
+    if age <= CACHE_DAYS:
+        return e, f"cache (fetched {e['fetched']})"
+    if stale_ok:
+        return e, f"stale cache (fetched {e['fetched']}; not asked this run: request budget)"
     return None, None
 
 
@@ -334,28 +357,49 @@ def main(argv=None) -> int:
 
     reg = registry_outfalls()
     permits = permits_to_read(reg)
-    results, fetch_log = {}, {}
+    cache = {} if args.refresh else load_cache()
+    keys = [(p, c) for p in permits for c in PARAMS]
+    # the oldest (or never) fetched first, so a run cut short by the request budget leaves the freshest for later
+    keys.sort(key=lambda k: ((cache.get(f"{k[0]}-{k[1]}") or {}).get("fetched") or "", k))
+    results, fetch_log, live = {}, {}, 0
     failures_in_a_row, stopped = 0, False
-    for permit in permits:
-        for code in PARAMS:
-            key = f"{permit}-{code}"
-            res, name = (None, None) if args.refresh else cached(permit, code, since, today)
-            if res is not None:
-                results[(permit, code)], fetch_log[key] = res, f"cache ({name})"
+    for permit, code in keys:
+        key = f"{permit}-{code}"
+        e, how = cached(cache, permit, code, since, today)
+        if e is None and (stopped or live >= MAX_LIVE_REQUESTS):
+            e, how = cached(cache, permit, code, since, today, stale_ok=True)
+            if e is None:
+                fetch_log[key] = ("failed (not asked: stopped after "
+                                  f"{MAX_CONSECUTIVE_FAILURES} failures)" if stopped else
+                                  "not asked this run (request budget); no earlier answer")
                 continue
-            if stopped:
-                fetch_log[key] = f"failed (not asked: stopped after {MAX_CONSECUTIVE_FAILURES} failures)"
-                continue
-            if any(v == "live" for v in fetch_log.values()):
-                time.sleep(SLEEP_S)
-            res, how = fetch(permit, code, since)
+        if e is not None:
             fetch_log[key] = how
-            if res is None:
-                failures_in_a_row += 1
-                stopped = failures_in_a_row >= MAX_CONSECUTIVE_FAILURES
+            if e.get("invalid"):
+                fetch_log[key] = f"not in ECHO ({e['invalid']})"
             else:
-                failures_in_a_row = 0
-                results[(permit, code)] = res
+                results[(permit, code)] = e["results"]
+            continue
+        if live:
+            time.sleep(SLEEP_S)
+        live += 1
+        res, how = fetch(permit, code, since)
+        fetch_log[key] = how
+        if how.startswith("not in ECHO"):
+            cache[key] = {"fetched": today.isoformat(), "since": since.isoformat(), "invalid": how[13:-1]}
+            failures_in_a_row = 0
+        elif res is None:
+            failures_in_a_row += 1
+            stopped = failures_in_a_row >= MAX_CONSECUTIVE_FAILURES
+            old, _ = cached(cache, permit, code, since, today, stale_ok=True)
+            if old is not None and not old.get("invalid"):
+                results[(permit, code)] = old["results"]
+        else:
+            failures_in_a_row = 0
+            cache[key] = {"fetched": today.isoformat(), "since": since.isoformat(), "results": compact(res)}
+            results[(permit, code)] = cache[key]["results"]
+    write_json(CACHE_FILE, {"source_id": SOURCE_ID, "about": "compact ECHO answers per permit and parameter "
+                            "(ingest/in_echo_cso_monthly.py compact): the run-to-run cache", "answers": cache})
 
     if not results:
         write_events(SOURCE_ID, [], ok=False, error="all requests failed")
@@ -365,6 +409,17 @@ def main(argv=None) -> int:
     stats = defaultdict(Counter)
     cells, names = collect(results, reg, stats)
     records = build_records(cells, names, reg, dischargers(), stats)
+    # a permit this run could not read (budget, failure) with no earlier answer keeps the previous run's records
+    unread = {k.rsplit("-", 1)[0] for k, v in fetch_log.items()
+              if v.startswith(("not asked", "failed")) and not v.startswith("failed (not asked")} | \
+             {k.rsplit("-", 1)[0] for k, v in fetch_log.items() if v.startswith("failed (not asked")}
+    unread -= {p for (p, _c) in results}
+    if unread:
+        prev = (read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records") or []
+        carried = [r for r in prev if r.get("npdes_permit") in unread]
+        records += carried
+        stats["records_carried_from_previous_run"]["permits"] = len(unread)
+        stats["records_carried_from_previous_run"]["records"] = len(carried)
     per_permit = Counter(r["npdes_permit"] for r in records)
     meta = {"registry_ids": [SOURCE_ID, "fed-echo-effluent-charts-rest"], "since": args.since,
             "parameters": {c: n for c, n in PARAMS.items()}, "permits": permits,
@@ -376,6 +431,7 @@ def main(argv=None) -> int:
             "latest_month_by_outfall": latest_months(cells),
             "history_only": "month precision: the monthly mark, never red or yellow"}
     failed = {k: v for k, v in fetch_log.items() if v.startswith("failed")}
+    meta["not_asked_this_run"] = sorted(k for k, v in fetch_log.items() if v.startswith(("not asked", "stale")))
     if failed:
         err = f"{len(failed)} requests failed: " + "; ".join(f"{k} {v}" for k, v in list(failed.items())[:10])
         path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
