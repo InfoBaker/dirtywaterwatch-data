@@ -1,7 +1,7 @@
 ---
 state: NE
 name: Nebraska
-updated: 2026-11-07
+updated: 2026-11-09
 ---
 
 **What the law requires.** Nebraska has no statute or rule that requires the public to be told of a sewage overflow or a treatment plant bypass; the state's release-notification rule covers oil and hazardous substances, not sewage. Each sewage permit requires the operator to report an overflow or bypass to the Department of Water, Energy, and Environment within 24 hours and in writing within five days; those reports are filed through the U.S. Environmental Protection Agency's electronic reporting system. Nine permits in Indian country, on the Omaha, Winnebago and Santee Sioux reservations, are issued by the federal agency, and their holders report to it instead. Omaha, the state's one combined sewer operator (sewage and rainwater in one pipe, 25 open outfalls to the Missouri River and Papillion Creek's tributaries), holds a permit that is expected to require public notification of overflows; its text is held in the state's document viewer and its terms could not be read. The law sets no period after a discharge during which the water is to be avoided. The Department and the Department of Health and Human Services put a lake on health alert, and close its designated beach, when a weekly sample shows microcystin, a toxin of algal blooms, above 8 micrograms per litre.
