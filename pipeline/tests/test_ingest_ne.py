@@ -552,3 +552,24 @@ def test_astra_p1_2_migration_bounds_a_saved_continuation_by_the_newer_samples_f
     assert (w22["started_at"], w22["ended_at"], w22["status"]) == ("2026-06-05T16:00:00Z", "2026-06-12T16:00:00Z", "ended")
     assert w22["raw"]["ended_at_precision"] == "poll" and w22["time_precision"] == "poll"
     assert (w23["started_at"], w23["ended_at"], w23["status"]) == ("2026-06-12T16:00:00Z", None, "advisory_active")
+
+def test_astra_p2_3_a_blank_flag_is_not_a_lift_and_a_later_yes_reopens_after_a_no():
+    rows = _rock_rows()[1:2]
+    first = _beachwatch(rows, "2026-06-12T16:00:00Z")[0]
+    start = first[0]["started_at"]
+    for blank in (None, ""):
+        b = copy.deepcopy(rows)
+        b[0]["HealthAlert"] = blank
+        second = _beachwatch(b, "2026-06-13T16:00:00Z", first)[0]
+        assert len(second) == 1 and second[0]["event_id"] == first[0]["event_id"]
+        assert (second[0]["status"], second[0]["started_at"], second[0]["ended_at"]) == ("advisory_active", start, None)
+        third = _beachwatch(rows, "2026-06-14T16:00:00Z", second)[0][0]
+        assert (third["status"], third["started_at"], third["ended_at"]) == ("advisory_active", start, None)
+    neg, blank = copy.deepcopy(rows), copy.deepcopy(rows)
+    neg[0]["HealthAlert"], blank[0]["HealthAlert"] = "NO", None
+    closed = _beachwatch(neg, "2026-06-13T16:00:00Z", first)[0]
+    still = _beachwatch(blank, "2026-06-14T16:00:00Z", closed)[0]
+    assert still[0]["ended_at"] == "2026-06-13T16:00:00Z" and still[0]["status"] == "advisory_lifted"
+    reopened = _beachwatch(rows, "2026-06-15T16:00:00Z", still)[0][0]
+    assert reopened["started_at"] == "2026-06-15T16:00:00Z" and reopened["ended_at"] is None
+    assert reopened["raw"]["_advisory_observed"]["earlier_periods"][0]["end"] == "2026-06-13T16:00:00Z"
