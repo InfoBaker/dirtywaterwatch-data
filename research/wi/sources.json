@@ -12,7 +12,7 @@
   ],
   "waters_covered": "Milwaukee, Menomonee and Kinnickinnic Rivers, Milwaukee harbor and Lake Michigan; MMSD separate-sewer area",
   "water_slugs": [],
-  "url": "https://www.mmsd.com/about-us/news/storm-update-august-1st-2026",
+  "url": "https://www.mmsd.com/about-us/news",
   "access": [
    "html"
   ],
@@ -48,14 +48,14 @@
   ],
   "has_coordinates": false,
   "has_outfall_ids": false,
-  "cadence": "Posted with the 5-day letter: the 2026-08-01 overflow was posted 2026-08-06.",
+  "cadence": "Posted with the five-day letter to the DNR: the 2026-09-03 overflow on 2026-09-08, the 2026-08-01 overflow on 2026-08-06.",
   "history": "Posts back to at least 2006 (search); 2026 had 2,714 million gallons through April (2026OverflowVolumesVertical042426.pdf).",
   "license": "None stated; site copyright MMSD.",
   "legal_basis": "40 CFR 122.38; NR 210.21; WPDES permit WI0036820",
-  "status": "candidate",
-  "status_reason": "Dated, event-level public record for the state's largest CSO system, but HTML posts about 5 days after the event with no outfall detail.",
+  "status": "used",
+  "status_reason": "Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 18 Storm Updates and overflow letters from 2018-06-22 to 2026-09-08 give 26 dated reports (13 combined, 13 separate or unspecified sewer overflows), posted four to ten days after the overflow began.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": "Annual overflow volumes 1994-2026 in raw/mmsd-2026-overflow-volumes.txt (2025: 5,140 MG; 2024: 357 MG)."
  },
  {
@@ -96,10 +96,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "A change in \"Gallons Overflowed\" is a same-day signal that an overflow is under way; snapshot it.",
+  "status": "watch",
+  "status_reason": "MMSD says its counter's figures can be corrected and are unverified; a rise is never read as an overflow or its time (expansion research 2026-11-09). Watched for availability in the register.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -338,7 +338,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "0 Wisconsin event rows on 2026-11-03; 14 Wisconsin collection-system rows.",
+  "access_detail": "0 Wisconsin event rows in the current extract of 2026-11-12 (5,751 events) and the all-versions extract (6,710 events); 14 Wisconsin collection-system rows, all EPA permits on tribal land (one payload of 2025-03-04).",
   "machine_readable": true,
   "sample_record": null,
   "fields": [],
@@ -351,9 +351,9 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Wisconsin permittees report through WDNR Switchboard; nothing reaches EPA's event tables.",
+  "status_reason": "Rechecked 2026-11-14: Wisconsin permittees report through the DNR's Switchboard; no Wisconsin report reaches EPA's event tables. Watched in the register.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -402,11 +402,11 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": null,
+  "url": "https://www.superiorwi.gov/902/Combined-Sewer-Overflows",
   "access": [
    "html"
   ],
-  "access_detail": "Web search found no City notice page; WPR/KSTP report overflows at Superior and Ashland in news.",
+  "access_detail": "The expansion research of 2026-11-09 read the page: a 2026 table with columns for location, receiving water, impacted access areas, start, end and estimated quantity, with no filled rows, and the 2025 annual notice (no CSOs in 2025). On 2026-11-14 the host did not answer the build's client (connection timed out) or a second network (refused).",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -419,9 +419,9 @@
   "license": null,
   "legal_basis": null,
   "status": "unreachable",
-  "status_reason": "No public channel found for a Great Lakes CSO permittee that owes a 4-hour notice; needs a direct look at the City site and social accounts.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
+  "status_reason": "The City's CSO page exists (2026-11-09) but did not answer on 2026-11-14 and has shown no filled row to build a reader on; registered as a watched channel.",
+  "verified": "prior_inventory_only",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -516,10 +516,10 @@
   "history": "Current state only in the layer; reports app holds history.",
   "license": "None stated.",
   "legal_basis": "BEACH Act; NR 102 recreational criteria",
-  "status": "candidate",
-  "status_reason": "Machine-readable statewide beach status with E. coli value and dates.",
+  "status": "unreachable",
+  "status_reason": "Wisconsin Beach Health and its map layer (apps.dnr.wi.gov, dnrmaps.wi.gov) did not answer the build's client on 2026-11-14 (connection timed out; a second network refused); its fields and keys could not be read, so no reader was built. Registered as watched channels.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -656,6 +656,163 @@
   "status_reason": "Monthly fallback, unknown.",
   "verified": "inferred",
   "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-wdnr-serts-open-spills",
+  "name": "WDNR SERTS open spill incidents list",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://apps.dnr.wi.gov/rrbotw/sp-openspillincidents",
+  "access": [
+   "html",
+   "csv"
+  ],
+  "access_detail": "The expansion research of 2026-11-09 read the first page: 271 open incidents of every substance (ten a page), with SERTS id, incident date, county, municipality, substance, cause and the coordinator; CSV and Excel buttons untested. Closed incidents move to BRRTS. On 2026-11-14 the host did not answer (connection timed out; a second network refused).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [
+   "SERTS ID",
+   "incident date",
+   "county",
+   "municipality",
+   "substance",
+   "cause"
+  ],
+  "fills_event_fields": [
+   "started_at (date)",
+   "county"
+  ],
+  "cannot_fill": [
+   "receiving water",
+   "volume",
+   "end",
+   "permit"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "updated as incidents are logged; the state warns of omissions and delays",
+  "history": "open incidents only",
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Statewide mixed-spill list with some sewage incidents; unreachable from the build on 2026-11-14 and its export untested, so no reader was built. Registered as a watched channel.",
+  "verified": "prior_inventory_only",
+  "checked": "2026-11-14",
+  "notes": "Never store the coordinator field."
+ },
+ {
+  "id": "wi-wdnr-brrts-closed-spills",
+  "name": "WDNR BRRTS on the Web search (closed spill incidents)",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://apps.dnr.wi.gov/rrbotw/botw-search",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Search interface (expansion research 2026-11-09); no closed sewage query validated. Unreachable on 2026-11-14.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Where SERTS incidents go when they close; not reachable on 2026-11-14 and no query tested.",
+  "verified": "prior_inventory_only",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "wi-brookfield-sso-notices",
+  "name": "City of Brookfield SSO press releases",
+  "jurisdiction": "WI",
+  "operator": "City of Brookfield",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Fox River; Underwood Creek and the Menomonee River",
+  "water_slugs": [],
+  "url": "https://www.ci.brookfield.wi.us/DocumentCenter/View/24645/April-15-and-16-2026-SSO-Press-Release?bidId=",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "A three-location release of April 15-16, 2026 read in the expansion research (2026-11-09); no list page of releases found.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [
+   "location",
+   "receiving water",
+   "dates",
+   "gallons"
+  ],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "ad hoc",
+  "history": null,
+  "license": null,
+  "legal_basis": "s. NR 210.21(5), Wis. Adm. Code",
+  "status": "watch",
+  "status_reason": "Single PDF releases with no list page to poll; registered.",
+  "verified": "prior_inventory_only",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "wi-milwaukee-health-beach-report",
+  "name": "City of Milwaukee Health Department beach water report",
+  "jurisdiction": "WI",
+  "operator": "City of Milwaukee Health Department",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": "Bradford, McKinley and South Shore beaches (Lake Michigan)",
+  "water_slugs": [],
+  "url": "https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Linked from MMSD's CSO impacted-waters page; daily in season; not read in this build.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "daily, Memorial Day to Labor Day",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Off season on 2026-11-14; registered as a watched channel.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
   "notes": ""
  }
 ]
