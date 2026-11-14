@@ -10,18 +10,24 @@ Source
   on the water. The duty behind them: s. NR 210.21(5), Wis. Adm. Code (public notice of every overflow "promptly") and,
   for the combined sewer outfalls, 40 CFR 122.38 (Great Lakes Basin notice within four hours, which MMSD meets by other
   channels if at all: the post itself comes with the letter, five days or so after the overflow).
-  The full list read on 2026-11-14: 71 pages, 281 posts since 2016, of which 18 are Storm Updates or overflow letters
-  (2018-06-22 to 2026-09-08). The September 3, 2026 overflow was posted September 8; the August 1, 2026 overflow August 6.
+  The full list read on 2026-11-14: 71 pages, 281 posts since 2016, of which 21 are read: 18 Storm Updates or overflow
+  letters and 3 spill or release notices (2018-06-22 to 2026-09-08), giving 29 records (13 cso, 14 sso, 2 plant_bypass).
+  The September 3, 2026 overflow was posted September 8; the August 1, 2026 overflow August 6.
 
 Which posts are read
-  A post is read when its title names a storm update, an overflow alert or a letter about overflows (TITLE_RE). Every
-  other post (budgets, open houses, plant sales, "How MMSD's Deep Tunnel System Operates During Heavy Rain") is not;
-  meta.not_read counts them. A follow-up about an earlier storm (an open house, a modelling report) is not a report.
+  A post is read when its title names a storm update, an overflow alert, a letter about overflows, a sewer release or
+  overflow, or a wastewater or treatment plant spill (TITLE_RE), and is not a budget, programme, project or award
+  (NOT_TITLE): candidate(). Every other post (budgets, open houses, plant sales, "How MMSD's Deep Tunnel System Operates
+  During Heavy Rain") is not read and is not kept, not even its title. A follow-up about an earlier storm (an open
+  house, a modelling report) is not a report. A sentence is a report only when it carries a report cue (occurred,
+  took place, started, began, reported, a labelled figure) and no denial, hedge, forecast or prevention (NEGATED: "No
+  combined sewer overflow occurred", "may occur", "prevented"); a labelled zero ("0 gallons") is no report.
 
 Record rules (rules only: no model, no geocoding)
   - Key: the post's slug plus the overflow type, "<slug>:cso" and "<slug>:sso". A post that reports a combined sewer
     overflow and a separate sewer overflow gives two records.
-  - Type (raw._type_basis): cso when the post reports a combined sewer overflow (a labelled volume, "a combined sewer
+  - Type (raw._type_basis): plant_bypass for a spill at a treatment plant ("Treatment Plant Spill", "wastewater
+    spill"); a "sanitary sewer release" is sso. cso when the post reports a combined sewer overflow (a labelled volume, "a combined sewer
     overflow that took place / occurred / started", "initiated a combined sewer overflow", a letter labelled Combined
     Sewer Overflow); sso when it reports a separate or sanitary sewer overflow from MMSD's system (the same cues; a
     sentence about overflows "in local sewer systems" of the member municipalities is theirs, not MMSD's, and is kept
@@ -34,7 +40,10 @@ Record rules (rules only: no model, no geocoding)
     "February 27 to March 1st, 2023", "8-20-18", "starting on 3/14/2019"), precision day; a date with no year takes the
     post's year, or the year before when that would put it after the post. The last day of a stated range is kept as
     raw.period_end (the storm's dates, never the overflow's end). ended_at only from a stated end ("ended at 8:10 pm on
-    April 4, 2024"; "ended on March 1st, 2023, at 8:00 am"): raw.ended_at_precision minute, status ended. Otherwise no
+    April 4, 2024"; "ended on March 1st, 2023, at 8:00 am"; "began on January 6 at around 11:25 PM and continued until
+    2:22 AM on January 7, 2026"): raw.ended_at_precision minute, status ended. A stated time belongs to the overflow its
+    own sentence names; a sentence naming none gives it only when the post reports one type. A date with no year in a
+    post with no stamp and no list date stays unknown (never the reading machine's year). Otherwise no
     end (status unknown): data/rules.json unresolved.day_start_caution gives the site's 72-hour caution from the start
     of the day, then "end not confirmed".
   - Volume: the post's own figure for that type: a labelled one ("Combined Sewer Overflow: 357 Million Gallons",
@@ -49,20 +58,28 @@ Record rules (rules only: no model, no geocoding)
     water is placed by data/rules.json placement.no_outfall_all_waters on every water the permit's registry outfalls
     discharge to; one that names a water is placed on it with the permit's outfalls on that water
     (build/status.py NAMED_WATER_OUTFALL_STATES). A separate sewer overflow that names no water is listed with the
-    operator and placed nowhere. No point: MMSD gives none, and a street in the text is never geocoded.
+    operator and placed nowhere. A post that says the sewage reached no water ("No wastewater entered Lake Michigan or
+    nearby rivers") keeps raw.reached_water false with the sentence: listed, placed on no water. Every record carries
+    raw.county Milwaukee, so a name is placed only on a record reaching Milwaukee County (status.py COUNTY_FIELD_STATES).
+    No point: MMSD gives none, and a street in the text is never geocoded.
     raw.keeps_rain_caution: a post never switches off the radar's rain caution on the permit's outfalls.
   - Operator: Milwaukee Metropolitan Sewerage District, permit WI0036820 (its two water reclamation facilities and the
     combined sewer outfalls). The member municipalities' own overflows named in a post are not MMSD's records.
   - The year-to-date "Gallons Overflowed" counter, the Water Drop Alert (a request to use less water before a storm) and
     the deep tunnel's storage are never read as an overflow (MMSD says its counter can be corrected).
 
+Health: a post that cannot be read (a refused connection, an HTTP error, a page with no stamp or no text: an error or
+holding page) is not a revision: its records stand, it is listed in meta.retry and read again next run, and the run's
+error names it. Every known post is read again REVALIDATE_DAYS after its last read, wherever it is in the list, so a
+corrected volume or end is found.
 History: the first run (no events file) reads the whole list (BACKFILL_PAGES, stopping at the first empty or repeated
 page); later runs read two pages (eight posts, months of news); records already built are carried, never dropped
 because a post scrolled off. A post is read again when its stamp or
 title changes.
 
-Privacy: only each post's title, stamp, letter links and article lines are kept; the article is cut at MMSD's standing
-advice block ("Text WATERDROP ...") and telephone numbers and e-mails are scrubbed (common.scrub_text), house numbers
+Privacy: only the candidate posts' list items (titles scrubbed) and each one's stamp, letter links and article lines are
+kept; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
+"Media contact"), so the people named there are never kept, and telephone numbers and e-mails are scrubbed (common.scrub_text), house numbers
 removed (common.strip_house_numbers). data/raw keeps that safe document only.
 
 Failures: a list page that cannot be read writes ok=False and keeps the previous records; a post that cannot be read is
@@ -101,9 +118,15 @@ PERMIT = "WI0036820"
 DISCHARGER_ID = "wi-mmsd"
 DISCHARGER_NAME = "Milwaukee Metropolitan Sewerage District"
 AUTHORITY = "Milwaukee Metropolitan Sewerage District (Storm Update post; operator's report to the DNR)"
-MATERIAL = {"cso": "combined sewage and stormwater", "sso": "untreated sewage"}
+MATERIAL = {"cso": "combined sewage and stormwater", "sso": "untreated sewage",
+            "plant_bypass": "wastewater at a treatment plant"}
+REVALIDATE_DAYS = 30        # a known post is read again this long after its last read (a corrected volume or end)
 
-TITLE_RE = re.compile(r"storm update|overflow alert|letter to (?:the )?dnr about (?:recent )?overflows", re.I)
+TITLE_RE = re.compile(r"storm update|overflow alert|letter to (?:the )?dnr about (?:recent )?overflows|"
+                      r"sewer (?:release|overflow)|(?:wastewater|sewage) spill|treatment plant spill|"
+                      r"(?:sewage|wastewater) release", re.I)
+# budgets, projects and programmes that name overflows in their titles are not reports
+NOT_TITLE = re.compile(r"budget|proposed|reduc\w*|program|project|plant sale|award|approves|priorit", re.I)
 
 MONTHS = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6, "jul": 7, "aug": 8, "sep": 9, "oct": 10,
           "nov": 11, "dec": 12}
@@ -118,22 +141,34 @@ STAMP = re.compile(r"^\s*(\d{2})/(\d{2})/(\d{2})\s+(\d{1,2}):(\d{2}):?\s*([ap])\
 CLOCK = r"(?P<h>\d{1,2})(?::(?P<mi>\d{2}))?\s*(?P<ap>[ap])\.?\s*m\.?"
 ANY_DATE = rf"(?:{MON}\s+{DAY}(?:,?\s+(?:19|20)\d\d)?|\d{{1,2}}[/-]\d{{1,2}}[/-](?:\d{{4}}|\d{{2}}))"
 START_RX = [
+    re.compile(rf"\bbegan\s+on\s+(?P<d>{ANY_DATE})\s+at\s+(?:around\s+|approximately\s+)?{CLOCK}", re.I),
     re.compile(rf"\bstarted\s+(?:at\s+)?(?:approximately\s+)?{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\b(?:around|approximately|at)\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
 ]
 END_RX = [
+    re.compile(rf"\buntil\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\bended\s+at\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\bended\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+{CLOCK}", re.I),
 ]
 
 TYPE_WORDS = {"cso": re.compile(r"combined sewer overflows?|\bcsos?\b", re.I),
-              "sso": re.compile(r"(?:separate|sanitary) sewer overflows?|\bssos?\b", re.I)}
+              "sso": re.compile(r"(?:separate|sanitary) sewer overflows?|\bssos?\b|(?:sanitary )?sewer release|"
+                                r"sewage release", re.I),
+              "plant_bypass": re.compile(r"treatment plant (?:wastewater )?spill|wastewater spill", re.I)}
+# a statement that something did not happen, might happen or was prevented is not a report of an overflow
+NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|may|might|could|would|possible|potential|"
+                     r"potentially|forecast\w*|expected|avoid\w*|prevent\w*)\b", re.I)
+# the post says the sewage reached no water ("No wastewater entered Lake Michigan or nearby rivers")
+NO_WATER = re.compile(r"\bno (?:wastewater|sewage|overflow)\b[^.]{0,40}\b(?:entered|reached|went into|flowed into)\b[^.]*", re.I)
+# contact and media lines: the people named in them are not kept
+CONTACT = re.compile(r"^\s*(?:questions|contact|media contact|press contact|for more information|for media)\b", re.I)
 # a sentence about the type in general, a plan, a reduction or capacity: not a report of an overflow
 NOT_REPORT = re.compile(r"\b(?:reduc\w*|prevent\w*|risk of|invest\w*|plan\w*|since \d{4}|average|why|how|learn|"
                         r"protect\w*|captured|deep tunnel|storage|capacity|budget|project)\b", re.I)
 LOCAL = re.compile(r"local (?:and regional )?sewer systems?|systems? that are owned by municipalities|"
                    r"(?:were|was) reported by|municipal(?:ities|ity)? (?:sewer|system)", re.I)
-REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|initiated|resulted|reporting|reported|"
+REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|led to|spill\w*|initiated|resulted|"
+                        r"reporting|reported|"
                         r"regarding|estimated|volume)\b|:\s*\d", re.I)
 GENERIC_OVERFLOW = re.compile(r"\b(?:sewer )?overflows?\b", re.I)
 VOL = r"(?P<n>\d[\d,]*(?:\.\d+)?)\s*(?P<u>million|billion)?\s*gallons"
@@ -144,7 +179,7 @@ LABELLED = re.compile(
 FIGURE = re.compile(VOL, re.I)
 NOT_VOLUME = re.compile(r"\b(?:tunnel|storage|capacity|hold|reduc\w*|per day|a day|/\s*day|equals?|prevented|captured|"
                         r"flood|filled|rate|store|acres)\b", re.I)
-WATER_INTO = re.compile(r"\b(?:overflow|discharge|release)\w*\s+(?:\w+\s+){0,3}?(?:in)?to\s+(?:the\s+)?"
+WATER_INTO = re.compile(r"\b(?:overflow|discharge|release)\w*\s+(?:[\w-]+\s+){0,3}?(?:in)?to\s+(?:the\s+)?"
                         r"(?P<w>(?:[A-Z][a-z]+\s+){1,3}(?:Creek|River|Harbor|Canal)|Lake Michigan)\b")
 WATER_LISTED = re.compile(r"[–—-]\s*(?P<w>(?:[A-Z][a-z]+\s+){1,3}(?:Creek|River|Harbor|Canal)|Lake Michigan)\s*:\s*"
                           r"\d[\d,]*(?:\.\d+)?\s*(?:million\s+)?gallons")
@@ -206,13 +241,16 @@ def page_doc(content: bytes | str) -> dict | None:
         w = _words(raw)
         if not w:
             continue
-        if CUT.search(w):
-            break
+        if CUT.search(w) or CONTACT.search(w):
+            break                       # MMSD's standing advice block, or a contact block naming people
         lines.append(safe_line(w))
-    if not lines:
-        return None
     stamp = next((x for x in lines[:4] if STAMP.match(x)), None)
-    return {"stamp": stamp, "lines": [x for x in lines if x != stamp][:200], "letters": letters[:10]}
+    body = [x for x in lines if x != stamp]
+    # a post is read only when it has its stamp and a line of text below its title: an error or holding page that
+    # keeps the title container ("Temporarily unavailable") is not a revision of the post (Astra review P1-3)
+    if stamp is None or len(body) < 2:
+        return None
+    return {"stamp": stamp, "lines": body[:200], "letters": letters[:10]}
 
 
 # ---------------------------------------------------------------- dates
@@ -231,9 +269,11 @@ def _mk(y: int, m: int, d: int) -> date | None:
         return None
 
 
-def _resolve(m: int, d: int, y: int | None, ref: date) -> date | None:
+def _resolve(m: int, d: int, y: int | None, ref: date | None) -> date | None:
     if y:
         return _mk(y, m, d)
+    if ref is None:
+        return None                     # no year in the text and no dated post to take it from: unknown
     x = _mk(ref.year, m, d)
     if x and x > ref:
         x = _mk(ref.year - 1, m, d)
@@ -262,7 +302,8 @@ def period(text: str, ref: date) -> tuple[date, date | None, str] | None:
         last = None
         if m.group("d2"):
             m2 = MONTHS[m.group("m2")[:3].lower()] if m.group("m2") else m1
-            last = _mk(first.year + (1 if m2 < m1 else 0), m2, int(re.sub(r"\D", "", m.group("d2")))) if first else None
+            last = (_mk(first.year + (1 if m2 < m1 else 0), m2, int(re.sub(r"\D", "", m.group("d2"))))
+                    if first else None)
         if first:
             hits.append((m.start(), first, last, m.group(0)))
     for m in NUM_DATE.finditer(text):
@@ -313,32 +354,23 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     """The facts of one post: published time, period, stated start and end, the types reported, volume and waters
     per type, and the bases."""
     pub = stamp_time(doc.get("stamp"))
-    ref = pub.date() if pub else (_list_date(list_date) or date.today())
+    ref = pub.date() if pub else _list_date(list_date)     # never the clock of the machine reading it
     lines = doc.get("lines") or []
     body = "\n".join(lines)
     sents = sentences(body)
     lede = " ".join(sents[:3])
     per = period(title, ref) or period(lede, ref)
-    facts = {"published": pub, "period": per, "types": {}, "local": [], "start": None, "end": None}
-    # the stated start and end (minute)
-    for rx in START_RX:
-        m = rx.search(body)
-        if m:
-            d = parse_date(m.group("d"), ref)
-            if d:
-                facts["start"] = (_at(d, m), m.group(0))
-                break
-    for rx in END_RX:
-        m = rx.search(body)
-        if m:
-            d = parse_date(m.group("d"), ref)
-            if d:
-                facts["end"] = (_at(d, m), m.group(0))
-                break
+    facts = {"published": pub, "period": per, "types": {}, "local": [], "no_water": None}
     types: dict[str, dict] = {}
 
+    def affirmative(x: str) -> bool:
+        """A sentence that reports an overflow: a report cue, no denial, hedge, plan or prevention."""
+        return (bool(REPORT_CUE.search(x)) and not NEGATED.search(x) and not LOCAL.search(x)
+                and not any(_gal(z) == 0 for z in LABELLED.finditer(x)))
+
     def add(t: str, basis: str) -> dict:
-        x = types.setdefault(t, {"basis": basis, "volume": None, "volume_text": None, "covers": None, "waters": []})
+        x = types.setdefault(t, {"basis": basis, "volume": None, "volume_text": None, "covers": None, "waters": [],
+                                 "start": None, "end": None})
         return x
 
     for s in sents:
@@ -346,6 +378,8 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
             facts["local"].append(s)
     # labelled volumes first
     for m in LABELLED.finditer(body):
+        if _gal(m) == 0:
+            continue                    # "0 gallons": a stated zero is not a report
         label = m.group("label").lower()
         both = " and " in label
         t = "cso" if label.startswith("combined") else "sso"
@@ -361,10 +395,11 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                 x["volume"] = _gal(m)
     # sentences reporting a type
     for s in sents:
-        if LOCAL.search(s) or NOT_REPORT.search(s) and not LABELLED.search(s):
+        if LOCAL.search(s) or NOT_REPORT.search(s) and not LABELLED.search(s) \
+                or any(_gal(z) == 0 for z in LABELLED.finditer(s)):
             continue
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(s)]
-        if len(named) == 1 and REPORT_CUE.search(s):
+        if len(named) == 1 and affirmative(s):
             x = add(named[0], f"MMSD's post: \"{s[:240]}\"")
             figs = [f for f in FIGURE.finditer(s) if not NOT_VOLUME.search(s[max(0, f.start() - 60):f.end() + 20])]
             if x["volume_text"] is None and len(figs) == 1:
@@ -373,18 +408,24 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                 # "A separate sewer overflow occurred on June 18 ... The volume is estimated at 3.7 million gallons."
                 k = sents.index(s)
                 nxt = sents[k + 1] if k + 1 < len(sents) else ""
-                m2 = re.match(rf"the volume (?:is|was) estimated at\s*(?:approximately\s*)?{VOL}", nxt, re.I)
-                if m2 and not any(rx.search(nxt) for rx in TYPE_WORDS.values()):
-                    x["volume"], x["volume_text"] = _gal(m2), _words(m2.group(0))
+                figs2 = [f for f in FIGURE.finditer(nxt) if not NOT_VOLUME.search(nxt[max(0, f.start() - 60):f.end() + 20])]
+                if len(figs2) == 1 and not NEGATED.search(nxt) and not any(rx.search(nxt) for rx in TYPE_WORDS.values()):
+                    x["volume"], x["volume_text"] = _gal(figs2[0]), _words(figs2[0].group(0))
+    # a spill or release post whose title names it ("Treatment Plant Spill January 7, 2026")
+    for t in ("plant_bypass", "sso"):
+        if TYPE_WORDS[t].search(title) and not NEGATED.search(title) and not types:
+            add(t, f"MMSD's post is titled \"{title}\"")
     # the letters' own labels ("DNR Letter for: Combined Sewer Overflow / Separate Sewer Overflows")
-    for let in doc.get("letters") or []:
+    reported = any(affirmative(x) and (GENERIC_OVERFLOW.search(x) or any(r.search(x) for r in TYPE_WORDS.values()))
+                   for x in sents[:6])
+    for let in doc.get("letters") or [] if reported else []:
         for t, rx in TYPE_WORDS.items():
             if rx.search(let.get("label") or ""):
                 add(t, f"MMSD's letter to the DNR is labelled \"{let['label']}\"")
     # an unlabelled figure ("Overflow volume of 96 million gallons") belongs to the one type the post reports
     if len(types) <= 1:
         for s in sents:
-            if LOCAL.search(s) or NOT_VOLUME.search(s):
+            if LOCAL.search(s) or NOT_VOLUME.search(s) or NEGATED.search(s):
                 continue
             m = re.search(rf"overflow volume (?:of|was|is)?\s*(?:approximately\s*)?{VOL}", s, re.I)
             if m:
@@ -395,7 +436,7 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                 if x["volume_text"] is None:
                     x["volume"], x["volume_text"] = _gal(m), _words(m.group(0))
                 break
-    if not types and any(GENERIC_OVERFLOW.search(s) for s in sents[:4] + [title]):
+    if not types and any(GENERIC_OVERFLOW.search(x) and affirmative(x) for x in sents[:4]):
         add("sso", "MMSD's post reports sewer overflows without saying they were combined sewer overflows; typed as a "
                    "sanitary sewer overflow, the general case")
     # waters
@@ -422,6 +463,24 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                 for t in ("cso",):
                     if t in types and w in types[t]["waters"]:
                         types[t]["waters"].remove(w)
+    # stated starts and ends, each given to the overflow its own sentence names (Astra review P1-2): a sentence naming
+    # one type gives that type its times; one naming none gives them only when the post reports a single type
+    for x in sents:
+        named = [t for t, rx in TYPE_WORDS.items() if rx.search(x) and t in types]
+        owners = named if len(named) == 1 else ([next(iter(types))] if not named and len(types) == 1 else [])
+        for t in owners:
+            for key, rxs in (("start", START_RX), ("end", END_RX)):
+                if types[t][key]:
+                    continue
+                for rx in rxs:
+                    m = rx.search(x)
+                    d = parse_date(m.group("d"), ref) if m else None
+                    if d:
+                        types[t][key] = (_at(d, m), m.group(0))
+                        break
+    nw = NO_WATER.search(body)
+    if nw:
+        facts["no_water"] = _words(nw.group(0))
     facts["types"] = types
     return facts
 
@@ -443,7 +502,7 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
     for t, x in sorted(f["types"].items()):
         raw = {"state": "WI", "time_zone": TZ.key, "county": "Milwaukee", "title": item["title"], "slug": item["slug"],
                "stamp": doc.get("stamp"), "list_date": item.get("list_date"), "_type_basis": x["basis"],
-               "letters": doc.get("letters") or [], "keeps_rain_caution": True,
+               "letters": doc.get("letters") or [], "keeps_rain_caution": t == "cso",
                "text": " ".join(doc.get("lines") or [])[:4000]}
         if per:
             raw["period_text"], raw["period_start"] = per[2], per[0].isoformat()
@@ -455,21 +514,23 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
         if x["covers"]:
             raw["volume_covers"] = x["covers"]
         start, sprec = None, None
-        if f["start"] and (t == "cso" or len(f["types"]) == 1):
-            start, sprec = f["start"][0].isoformat(), "minute"
-            raw["start_basis"] = f"MMSD's post: \"{f['start'][1]}\""
+        if x["start"]:
+            start, sprec = x["start"][0].isoformat(), "minute"
+            raw["start_basis"] = f"MMSD's post: \"{x['start'][1]}\""
         elif per:
             start, sprec = per[0].isoformat(), "day"
             raw["start_basis"] = f"the first day of the dates the post gives (\"{per[2]}\"); no time of day stated"
         else:
             raw["start_basis"] = "the post states no date for the overflow"
         end = None
-        if f["end"] and (t == "cso" or len(f["types"]) == 1) and start:
-            if f["end"][0].isoformat() >= start:
-                end = f["end"][0].isoformat()
-                raw["ended_at_precision"], raw["end_basis"] = "minute", f"MMSD's post: \"{f['end'][1]}\""
+        first = x["start"][0] if x["start"] else (datetime(per[0].year, per[0].month, per[0].day, tzinfo=TZ) if per else None)
+        if x["end"] and first is not None and x["end"][0] >= first:
+            end = x["end"][0].isoformat()
+            raw["ended_at_precision"], raw["end_basis"] = "minute", f"MMSD's post: \"{x['end'][1]}\""
         if x["waters"]:
             raw["waters"] = x["waters"]
+        if f["no_water"] and not x["waters"]:
+            raw["reached_water"], raw["_no_water_reason"] = False, f"MMSD's post: \"{f['no_water']}\""
         rec = event(
             source_id=SOURCE_ID, source_record_id=f"{item['slug']}:{t}", event_type=t,
             status="ended" if end else "unknown",
@@ -487,66 +548,102 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
 
 # ---------------------------------------------------------------- run
 
-def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict]) -> dict:
-    items: list[dict] = []
+def candidate(title: str | None) -> bool:
+    """A post whose title names a storm update, an overflow letter, or a sewer release or spill (not a budget or a
+    programme that names overflows)."""
+    return bool(TITLE_RE.search(title or "")) and not NOT_TITLE.search(title or "")
+
+
+def _stale(raw: dict, fetched_at: str) -> bool:
+    try:
+        last = datetime.fromisoformat(str(raw.get("_doc_fetched_at")).replace("Z", "+00:00"))
+        now = datetime.fromisoformat(fetched_at.replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    return (now - last).days >= REVALIDATE_DAYS
+
+
+def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict], retry: list[dict] | None = None,
+               fetched_at: str | None = None) -> dict:
+    """The safe document: the candidate list items only (titles scrubbed), each candidate post's article, and the
+    posts that could not be read (failed). A post is read when it is new, its title or date changed, it failed last
+    time (retry), or its last read is REVALIDATE_DAYS old (a corrected volume or end; Astra review P2-8)."""
+    fetched_at = fetched_at or now_iso()
+    seen: list[dict] = []
     for n in range(1, pages + 1):
         r = sess.get(LIST_URL, params={PAGE_PARAM: n, **LIST_PARAMS}, headers=HEADERS, timeout=TIMEOUT)
         r.raise_for_status()
         found = list_items(r.content)
-        if not found or (items and found[0]["url"] in {i["url"] for i in items}):
+        if not found or (seen and found[0]["url"] in {i["url"] for i in seen}):
             if n == 1:
                 raise RuntimeError("no news items on the first list page (the layout may have changed)")
             break                       # past the last page (empty, or the CMS repeating a page)
-        items += found
+        seen += found
         time.sleep(PAUSE_S)
-    docs = {}
+    items = [{**i, "title": safe_line(i["title"])} for i in seen if candidate(i["title"])]
+    have = {i["slug"] for i in items}
+    # earlier failures and known posts beyond the pages read (their list item as last kept)
+    for extra in list(retry or []) + [{k: (r.get("raw") or {}).get(k2) for k, k2 in
+                                       (("url", "url"), ("slug", "slug"), ("title", "title"), ("list_date", "list_date"))}
+                                      for r in prev.values()]:
+        if extra.get("slug") and extra.get("url") and extra["slug"] not in have:
+            items.append(extra)
+            have.add(extra["slug"])
+    docs, failed = {}, []
+    retry_slugs = {x.get("slug") for x in retry or []}
     for it in items:
-        if not TITLE_RE.search(it["title"]):
-            continue
         old = (prev.get(it["slug"]) or {}).get("raw") or {}
-        if old.get("_doc") and old.get("title") == it["title"] and old.get("list_date") == it["list_date"]:
-            docs[it["slug"]] = old["_doc"]
-            continue
+        if old.get("_doc") and old.get("title") == it["title"] and old.get("list_date") == it["list_date"] \
+                and it["slug"] not in retry_slugs and not _stale(old, fetched_at):
+            continue                    # unchanged and read recently: the record stands as built
         try:
             p = sess.get(it["url"], headers=HEADERS, timeout=TIMEOUT)
             p.raise_for_status()
             d = page_doc(p.content)
             if d:
                 docs[it["slug"]] = d
-        except requests.RequestException:
-            pass
+            else:
+                failed.append({**it, "reason": "the page has no post stamp or no text (an error or holding page)"})
+        except requests.RequestException as e:
+            failed.append({**it, "reason": f"{type(e).__name__}"})
         time.sleep(PAUSE_S)
-    return {"format": SAFE_FORMAT, "list_url": LIST_URL, "pages": pages, "items": items, "posts": docs}
+    return {"format": SAFE_FORMAT, "list_url": LIST_URL, "pages": pages, "list_items_seen": len(seen),
+            "items": items, "posts": docs, "failed": failed}
 
 
 def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
     recs: dict[str, dict] = {r["source_record_id"]: r for r in prev_records}
-    read, not_read, pending = 0, 0, 0
+    read, not_read, pending, kept = 0, 0, 0, 0
     for it in doc.get("items") or []:
-        if not TITLE_RE.search(it.get("title") or ""):
+        if not candidate(it.get("title")):
             not_read += 1
             continue
         post = (doc.get("posts") or {}).get(it["slug"])
         if post is None:
+            # not read this run (unchanged, or it failed): the records built before stand as they were
             pending += 1
             continue
         new = records_for(it, post, fetched_at)
         mine = {r["source_record_id"] for r in new}
         for k in [k for k, r in recs.items() if (r.get("raw") or {}).get("slug") == it["slug"] and k not in mine]:
-            recs.pop(k)                 # the post no longer reports that type (MMSD edited it)
+            recs.pop(k)                 # a validated post no longer reports that type (MMSD edited it)
         for r in new:
             prev = recs.get(r["source_record_id"])
-            r["raw"]["_doc"] = post
+            r["raw"].update(_doc=post, url=it["url"], _doc_fetched_at=fetched_at)
             r["raw"]["_first_seen_at"] = ((prev or {}).get("raw") or {}).get("_first_seen_at") or fetched_at
             r["raw"]["_last_seen_in_source"] = fetched_at
             recs[r["source_record_id"]] = r
         read += 1
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
-    stats = {"items": len(doc.get("items") or []), "posts_read": read, "not_read": not_read, "posts_pending": pending,
-             "records": len(out), "by_type": {t: sum(1 for r in out if r["event_type"] == t) for t in ("cso", "sso")},
+    stats = {"list_items_seen": doc.get("list_items_seen", len(doc.get("items") or [])),
+             "candidates": len(doc.get("items") or []), "posts_read": read, "not_read": not_read,
+             "posts_not_read_this_run": pending, "posts_failed": len(doc.get("failed") or []),
+             "records": len(out),
+             "by_type": {t: sum(1 for r in out if r["event_type"] == t) for t in ("cso", "sso", "plant_bypass")},
              "with_volume": sum(1 for r in out if r.get("volume_gal") is not None),
              "with_stated_end": sum(1 for r in out if r.get("ended_at")),
              "water_named": sum(1 for r in out if r.get("waterbody_text")),
+             "no_water": sum(1 for r in out if (r.get("raw") or {}).get("reached_water") is False),
              "no_date": sum(1 for r in out if not r.get("started_at"))}
     return out, stats
 
@@ -558,7 +655,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--file", help="a saved safe document (data/raw/wi-mmsd-storm-updates/*.json) instead of the network")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
-    prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records") or []
+    prev_file = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    prev = prev_file.get("records") or []
+    retry = (prev_file.get("meta") or {}).get("retry") or []
     try:
         if args.file:
             doc = json.loads(Path(args.file).read_text())
@@ -566,7 +665,8 @@ def main(argv: list[str] | None = None) -> int:
                 raise ValueError(f"not a {SAFE_FORMAT} document")
         else:
             pages = args.pages or (PAGES if prev else BACKFILL_PAGES)
-            doc = fetch_safe(requests.Session(), pages, {(r.get("raw") or {}).get("slug"): r for r in prev})
+            doc = fetch_safe(requests.Session(), pages, {(r.get("raw") or {}).get("slug"): r for r in prev}, retry,
+                             fetched_at)
             save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False, indent=1), "json")
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
@@ -578,7 +678,12 @@ def main(argv: list[str] | None = None) -> int:
             "time_basis": ("published_at is the post's own stamp (Milwaukee time); the start and any end are the dates "
                            "and times the post states (raw.start_basis, raw.end_basis); the storm's last day is "
                            "raw.period_end, never the overflow's end")}
-    path = write_events(SOURCE_ID, recs, ok=True, error=None, meta=meta)
+    failed = doc.get("failed") or []
+    meta["retry"] = [{k: f.get(k) for k in ("url", "slug", "title", "list_date")} for f in failed]
+    err = ("; ".join(f"{f.get('slug')}: {f.get('reason')}" for f in failed)[:600] or None)
+    if err:
+        err = f"{len(failed)} post(s) could not be read and are retried next run ({err})"
+    path = write_events(SOURCE_ID, recs, ok=True, error=err, meta=meta)
     print(f"{SOURCE_ID}: {json.dumps(stats)} -> {path}")
     return 0
 
