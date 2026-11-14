@@ -32,6 +32,8 @@ Record rules
     are removed", is not a date and is never turned into one). A post that names no water is kept, placed on no water.
   - Volume: "N gallons" as MSD states it, estimated when it says estimated or approximately.
   - Operator: the Metropolitan St. Louis Sewer District (MSD Project Clear); the plant permit is not assigned.
+  - Place: no point; raw.counties names MSD's service area (St. Louis County and the City of St. Louis), so a water
+    named in the post is placed only on a record of that name that reaches one of them.
 
 Privacy: the posts name contractors and occasionally staff; only the parsed fields and the post text through the
 house-number and personal-data scrub are stored; data/raw keeps those fields only, never the response.
@@ -156,6 +158,7 @@ def record(p: dict, at: str) -> dict:
            "waters_named": ws, "reached_water": (False if re.search(r"did not reach|never reached|before it reached",
                                                                       text, re.I) and not ws else (True if ws else None)),
            "volume_text": vtext, "provenance": "operator", "modified_gmt": p.get("modified_gmt"),
+           "counties": ["St. Louis County", "St. Louis city"],
            "time_basis": "MSD's days and times, read as Central time (America/Chicago)"}
     return event(
         source_id=SOURCE_ID, source_record_id=str(p["id"]), event_type="plant_bypass" if plant else "sso",

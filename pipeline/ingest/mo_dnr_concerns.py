@@ -245,7 +245,8 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
     start = incident if incident and incident <= received else received
     operator = town
     raw = {"state": "MO", "time_zone": "America/Chicago", "concern_no": b["no"], "region": b["region"],
-           "county": f"{county} County" if county and county not in ("St. Louis",) else county,
+           "county": f"{county} County" if county and county != "St. Louis" else None,
+           "counties": ["St. Louis County", "St. Louis city"] if county == "St. Louis" else None,
            "investigated_on": investigated, "incident_date": incident, "concern_types": b["type"],
            "dnr_finding": find, "provenance": "operator" if find == "operator_reported" else "public",
            "citizen_caution": find != "operator_reported",

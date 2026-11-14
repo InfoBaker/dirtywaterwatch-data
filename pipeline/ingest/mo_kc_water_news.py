@@ -40,6 +40,8 @@ Record rules
   - event_type "sso" (a collection-system overflow); "plant_bypass" when the text names a treatment plant overflowing.
     status "unknown": the posts never publish an advisory lift, so the site's caution applies from the start.
   - Operator: the City of Kansas City, Missouri (KC Water); the plant permit is not assigned from the city name.
+  - Place: no point; raw.counties names the city's four counties (Jackson, Clay, Platte, Cass), so a water named in the
+    post is placed only on a record of that name that reaches one of them (build/status.py county_slugs).
 
 Privacy: the post titles and texts name street addresses ("near 4000 Mersington Ave."): every house number is dropped
 from the stored title, location and text (common.strip_house_numbers), and the media contact line and the boilerplate
@@ -72,6 +74,8 @@ TZ = ZoneInfo("America/Chicago")
 AUTHORITY = "KC Water (City of Kansas City, Missouri), news post"
 DISCHARGER_ID = "mo-kansas-city-mo0024911"
 DISCHARGER = "City of Kansas City, Missouri (KC Water)"
+# Kansas City, Missouri lies in four counties; a named water is placed only on a record that reaches one of them
+KC_COUNTIES = ["Jackson County", "Clay County", "Platte County", "Cass County"]
 NS = {"content": "http://purl.org/rss/1.0/modules/content/"}
 LIVE_PAGES = 2
 
@@ -286,7 +290,7 @@ def record(it: dict, at: str) -> dict | None:
            "waters_named": ws, "reached_water": False if NO_WATER.search(text) else (True if ws else None),
            "multiple_sites": bool(re.search(r"effects of heavy rain", title, re.I)), "place_text": place,
            "volume_text": vtext, "time_basis": "KC Water's clock times, read as Central time (America/Chicago)",
-           "provenance": "operator"}
+           "provenance": "operator", "counties": KC_COUNTIES}
     if t["end"]:
         raw["ended_at_precision"], raw["end_basis"] = "minute", t["end_basis"]
     if not t["start"]:
