@@ -191,15 +191,19 @@ def test_a_thin_quiet_range_never_removes_a_caution_the_fallback_shows(seed, p_i
 
 
 def _storm_days(sizes_followed, start=date(2020, 1, 1)):
-    """Synthetic daily rain: one-day storms six days apart, the followed ones first; spans for the followed ones."""
-    sizes_followed = sorted(sizes_followed, key=lambda x: not x[1])
-    sizes_followed = sizes_followed[:1] + sorted(sizes_followed[1:], key=lambda x: hash(x) % 7)
+    """Synthetic daily rain: one-day storms sixteen days apart (70 of them span three years, which a quiet range
+    needs), the followed ones first; spans for the followed ones."""
+    yes = [x for x in sizes_followed if x[1]]
+    no = [x for x in sizes_followed if not x[1]]
+    # spread evenly, a followed storm first: no long stretch without a report (that would read as a reporting gap)
+    placed = [(i / len(yes), 0, x) for i, x in enumerate(yes)] + [((j + 0.5) / len(no), 1, x) for j, x in enumerate(no)]
+    sizes_followed = [x for _, _, x in sorted(placed, key=lambda t: t[:2])]
     daily, spans, d = {}, [], start
     for size, followed in sizes_followed:
         daily[d] = size
         if followed:
             spans.append({"first": d, "last": d, "outfall": None, "precision": "minute", "source_id": "ma-massdep"})
-        d += timedelta(days=6)
+        d += timedelta(days=16)
     return daily, spans, d
 
 
@@ -360,7 +364,7 @@ def test_rules_json_history_block_matches_the_defaults_and_reads_plainly():
     keys = list(rl)
     assert keys.index("history") == keys.index("label_by_basis_rationale") + 1
     for k in ("rungs_in", "likely_share", "quiet_min_storms", "min_storms", "min_report_storms", "min_total_storms",
-              "min_period_days"):
+              "min_period_days", "quiet_min_period_days"):
         assert h[k] == RH.DEFAULTS[k] and h[f"{k}_rationale"], k
     assert h["system_changes"] == {} and h["_system_changes_doc"]
     assert RL.labels_by_level(json.loads((Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())) \

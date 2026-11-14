@@ -43,7 +43,7 @@ Definitions (pure functions below; rules.rain_likely.history overrides the numbe
                             below) after whose storms an overflow was reported at least likely_share (half) of the
                             time, and after at least that share of all storms of that band and larger together;
                             None when no band reaches it;
-               quiet        the storms below possible_in: "enough" only on quiet_min_storms (30) or more with none
+               quiet        the storms below possible_in: "enough" only on quiet_min_storms (30) or more, over quiet_min_period_days (three years), with none
                             followed by a report; only then does the site show no caution below possible_in.
 
 The safety guarantee: a history removes a caution the fallback would show only on a quiet range that is "enough";
@@ -74,6 +74,7 @@ DEFAULTS = {
     "min_storms": 10,           # storms in a band before it can set the "likely" level
     "likely_share": 0.5,        # "likely": an overflow was reported after at least half of the storms
     "quiet_min_storms": 30,     # no caution under the lowest reported overflow only on this many storms, none followed
+    "quiet_min_period_days": 1095,   # ... over at least three years of record
     "min_report_storms": 10,    # storms followed by a report before a history is used at all
     "min_total_storms": 20,
     "min_period_days": 365,
@@ -259,10 +260,10 @@ def drop_gaps(sts: list[dict], gap_list: list[tuple[date, date]]) -> list[dict]:
 
 
 def change_point(sts: list[dict], last: date, cfg: dict) -> dict | None:
-    """The most recent year boundary at which the share of storms followed by a report changed sharply (a two-proportion
+    """The year boundary at which the share of storms followed by a report changed sharply (a two-proportion
     z of change_z or more, change_min_storms storms on each side, at least change_min_days_after of record after it):
-    {year, before: [followed, storms], after: [followed, storms], z}; None when there is none. Only storms of the
-    second size class up (edges_in[1]) are compared: the smallest storms say little about the system. Pure."""
+    {year, before: [followed, storms], after: [followed, storms], z}; None when there is none. Of several such
+    boundaries the sharpest (largest |z|; the later on a tie). Only storms of the second rung up are compared: the smallest storms say little about the system. Pure."""
     floor = float(cfg["rungs_in"][1]) if len(cfg["rungs_in"]) > 1 else float(cfg["rungs_in"][0])
     big = [s for s in sts if s["size"] >= floor]
     years = sorted({s["first"].year for s in big})
@@ -283,7 +284,7 @@ def change_point(sts: list[dict], last: date, cfg: dict) -> dict | None:
         z = (hb / len(b) - ha / len(a)) / se
         if abs(z) >= float(cfg["change_z"]):
             cand = {"year": y, "before": [ha, len(a)], "after": [hb, len(b)], "z": round(z, 2)}
-            if best is None or y > best["year"]:
+            if best is None or (abs(z), y) > (abs(best["z"]), best["year"]):
                 best = cand
     return best
 
@@ -338,7 +339,8 @@ def likely_from(bands: list[dict], floor_in: float, cfg: dict) -> float | None:
     """The smallest rain that reads "likely": the lower edge of the lowest band (thin bands pooled downward) at or above
     floor_in in which an overflow was reported after at least likely_share of the storms, and after at least that share
     of all larger storms taken together. None when no band reaches it. Pure."""
-    pooled = pool_thin(bands, int(cfg["min_storms"]))
+    # only the bands at or above floor_in are pooled: a thin band below it never drags a band at it below the floor
+    pooled = pool_thin([b for b in bands if b["lo"] >= floor_in - 1e-9], int(cfg["min_storms"]))
     bar = float(cfg["likely_share"]) - 1e-9
     for i, c in enumerate(pooled):
         if c["lo"] < floor_in - 1e-9 or c["storms"] < int(cfg["min_storms"]):
@@ -378,7 +380,7 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
     spans = sorted(spans, key=lambda s: (s["first"], s["last"]))
     first = max(FIRST_DAY, min(s["first"] for s in spans)) if spans else None
     last = min(coverage_end, today - timedelta(days=int(cfg["lag_days"])))
-    if first is None or first > last:
+    if first is None or first > last or max(s["first"] for s in spans) < FIRST_DAY:
         if spans and max(s["first"] for s in spans) < FIRST_DAY:
             why = "its dated overflow reports are all from before 2015, where the rain record starts"
         elif spans:
@@ -439,8 +441,10 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
         quiet = count_range(share_sts, rungs[0], p_in) if p_in > rungs[0] else None
         out["possible_in"] = p_in
         out["likely_in"] = l_in
-        out["quiet"] = ({**quiet, "enough": quiet["storms"] >= int(cfg["quiet_min_storms"]) and quiet["followed"] == 0}
-                        if quiet else None)
+        # "enough" needs the count and the years: one wet year of small storms is not a record of a quiet system
+        long_enough = (last - share_first).days + 1 >= int(cfg["quiet_min_period_days"])
+        out["quiet"] = ({**quiet, "enough": quiet["storms"] >= int(cfg["quiet_min_storms"]) and quiet["followed"] == 0
+                         and long_enough} if quiet else None)
         out["possible"] = count_range(share_sts, p_in, l_in) if l_in is None or l_in > p_in else None
         out["likely"] = count_range(share_sts, l_in, None) if l_in is not None else None
     return out
@@ -458,10 +462,12 @@ def rain_points(points, max_points: int = 4, min_sep_km: float = 8.0) -> list[tu
     """The points the rain record is read at for one operator: the median of its outfall points (0.01 degree), then
     repeatedly the outfall point farthest from those chosen, while it is more than min_sep_km away, up to max_points
     (a spread-out system is read where its outfalls are; the live check takes the wettest outfall). Pure."""
-    pts = sorted({(round(float(a), 2), round(float(b), 2)) for a, b in points if a is not None and b is not None})
-    if not pts:
+    raw = [(float(a), float(b)) for a, b in points if a is not None and b is not None]
+    if not raw:
         return []
-    chosen = [(round(statistics.median(p[0] for p in pts), 2), round(statistics.median(p[1] for p in pts), 2))]
+    # the median over every outfall point, as build.rain_thresholds.centroid (the same cached files)
+    chosen = [(round(statistics.median(p[0] for p in raw), 2), round(statistics.median(p[1] for p in raw), 2))]
+    pts = sorted({(round(a, 2), round(b, 2)) for a, b in raw})
     while len(chosen) < max_points:
         far, dist = None, -1.0
         for p in pts:
@@ -521,9 +527,10 @@ def crosscheck(hist: dict | None, daily_by_permit: dict[str, dict[date, float]],
     operator's outfalls for the 24 hours ending at start + i hours, UTC) against this record: at each America/Chicago
     midnight, the live value for the 24 hours ending then against the record's total for the day that ends then,
     where either is at least min_in. Pure."""
-    note = ("the live check's 24-hour radar total (the wettest outfall) for the 24 hours ending at each midnight, "
+    note = ("the live check's saved 24-hour radar total for the operator, for the 24 hours ending at each midnight, "
             "America/Chicago, against this record's total for that calendar day (the wettest rain point), where "
-            f"either is at least {min_in} inch")
+            f"either is at least {min_in} inch; an indication only while the saved live readings are incomplete "
+            "(hours with no reading for an operator are not compared)")
     empty = {"from": None, "to": None, "operators": 0, "comparisons": 0, "live_higher": 0,
              "median_live_over_record": None}
     try:
