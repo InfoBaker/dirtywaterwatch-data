@@ -71,6 +71,7 @@ NOTICES = [
                   "operator_basis": ("the notice places the spill in Pueblo; the City of Pueblo's own follow-up (its "
                                      "news page, not readable on 2026-11-14) is the operator's account the research "
                                      "found; permit CO0026646 is the city's plant permit"),
+                  "county": "Pueblo",
                   "placement_hint": {"name": "Arkansas River", "county": "Pueblo", "state": "CO",
                                      "basis": "the notice: the sewage entered the Arkansas River in Pueblo"},
                   "volume_basis": "the figure the notice gives; how it was estimated is not stated"}},
@@ -91,6 +92,7 @@ NOTICES = [
                   "start_basis": "the notice: the advisory begins Monday, August 31, 2026",
                   "end_basis": ("no end given: CPW said it would update the advisory as sampling results became "
                                 "available; no update was found"),
+                  "county": "Bent",
                   "placement_hint": {"name": "John Martin Reservoir", "county": "Bent", "state": "CO",
                                      "basis": "the reservoir the advisory names (John Martin Reservoir State Park)"}}},
      ]},
@@ -111,6 +113,7 @@ NOTICES = [
                   "start_basis": ("the release date (August 13, 2026): the basin had been posted by then; the "
                                   "posting date is not given"),
                   "end_basis": "no end given and no later release found",
+                  "county": "Gunnison",
                   "placement_hint": {"name": "Blue Mesa Reservoir", "county": "Gunnison", "state": "CO",
                                      "basis": "the reservoir the release names"}}},
      ]},
@@ -127,6 +130,7 @@ NOTICES = [
           "raw": {"time_zone": TZ,
                   "start_basis": "the park page: \"As of August 3 at 7pm\" (2026, the season the page names)",
                   "not_a_record": "the boating closure for low reservoir levels on the same line",
+                  "county": "Adams",
                   "placement_hint": {"name": "Barr Lake", "county": "Adams", "state": "CO",
                                      "basis": "the reservoir of Barr Lake State Park"}}},
      ]},

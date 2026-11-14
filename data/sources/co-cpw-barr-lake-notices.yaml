@@ -1,0 +1,22 @@
+id: "co-cpw-barr-lake-notices"
+name: "Colorado Parks and Wildlife, Barr Lake State Park page notices (algae alert, boating closure)"
+url: "https://cpw.state.co.us/state-parks/barr-lake-state-park/barr-lake-state-park-activities-trails"
+homepage: "https://cpw.state.co.us/state-parks/barr-lake-state-park/barr-lake-state-park-activities-trails"
+kind: "html"
+level: "state"
+# Notes (research/co, status used, verified fetched, checked 2026-11-14): The park page's line "the
+#   reservoir is now on red alert due to high concentrations of toxic algae" (as of August 3, 2026,
+#   7 p.m.) is read as a standing advisory in the co-official-notices reviewed set; the low-water
+#   boating closure on the same line is not a water-quality record.
+cadence: null
+license: "none stated"
+attribution: "Colorado Parks and Wildlife"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["CO"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"

@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1460 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| co | 6 | 0 | 3 | 2 | 1 | 12 |
+| **all** | **525** | **234** | **424** | **203** | **74** | **1460** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1676,20 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## co: Colorado (12)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `co-cdphe-press-releases` | CDPHE and Colorado Parks and Wildlife press releases on major sewage spills (e.g. Pueblo, Arkansas River, August 2026) | used | fetched | events | CPW's water-contact advisory of 2026-08-30 after the Pueblo spill (read 2026-11-14) is read in the co-official-notices reviewed set with NPS's Blue Mesa release and Barr Lake's park notice. CDPHE's own news pages answered 403. |
+| `co-cdphe-toxic-algae-sheet` | CDPHE "Recent blooms for select water bodies" Google Sheet (toxic algae status) | used | fetched | advisories | Read 2026-11-14 as CSV (198 rows, 129 waters; the last update dated 2026-09-09): read by the co-cdphe-toxic-algae feed as algal-bloom advisories (a run of Caution, Warning or Third party rows per water, ended by the next No bloom reported row). CDPHE's landing page answered 403 to the build's client on 2026-11-14. |
+| `co-cpw-barr-lake-notices` | Colorado Parks and Wildlife, Barr Lake State Park page notices (algae alert, boating closure) | used | fetched | advisories | The park page's line "the reservoir is now on red alert due to high concentrations of toxic algae" (as of August 3, 2026, 7 p.m.) is read as a standing advisory in the co-official-notices reviewed set; the low-water boating closure on the same line is not a water-quality record. |
+| `co-law-crs-25-8-601` | C.R.S. 25-8-601(2): notify the Water Quality Control Division of spills | used | fetched | law | Fetched: notify the division "as soon as practicable"; no public notice. |
+| `co-nps-curecanti-advisories` | National Park Service, Curecanti National Recreation Area: algae news releases (Blue Mesa Reservoir) | used | fetched | advisories | The August 13, 2026 release (toxic algae at low levels in the Iola Basin, yellow caution signs) is read in the co-official-notices reviewed set; the park's news RSS did not answer on 2026-11-14. |
+| `co-permit-co0032999` | CDPS permit CO0032999 (South Platte Renew, Littleton/Englewood), Part II noncompliance notification | used | fetched | permits | Fetched 2022 public-notice draft: oral report within 24 hours, written within five working days, to the Division only. |
+| `co-cdphe-swim-beaches` | CDPHE swim beach (natural swimming area) monitoring, 5 CCR 1003-5 | watch | fetched | monitoring | No public results feed; closures list is HTML (none seen). The page answered 403 to the build's client on 2026-11-14; monitored. |
+| `co-douglas-county-spills` | Douglas County Health Department sewage and chemical spills page | watch | fetched | law | Explains reporting; no list. |
+| `co-epa-sobe` | EPA ECHO SOBE (Colorado) | watch | fetched | events | No Colorado report and no Colorado collection system in the current extract (5,751 events) or the all-versions extract (6,710 events) of 2026-11-14; watched. |
+| `co-cdphe-incident-reporting` | CDPHE Reportable Environmental Hazards Line and Online Incident Reporting System (Google Form) | rejected | fetched | events | Intake only; reports are not published. The page answered 403 to the build's client on 2026-11-14. |
+| `co-swim-guide` | Swim Guide affiliates in Colorado | rejected | search_only | monitoring | None found (search only). |
+| `co-pueblo-wastewater-notices` | City of Pueblo news (the August 2026 sewage discharge to the Arkansas River) | unreachable | fetched | events | The host did not answer the build's client on 2026-11-14 (connection timed out, the RSS route too); the register watches it. The spill is recorded from CPW's advisory. |
