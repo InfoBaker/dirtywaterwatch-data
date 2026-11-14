@@ -80,6 +80,8 @@ HOMEPAGES = {
     "ut-epa-sobe": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
     "ut-deq-environmental-incidents": "https://deq.utah.gov/environmental-response-and-remediation/environmental-incidents",
     "ut-dwq-recreational-advisories": "https://deq.utah.gov/water-quality/recreational-water-quality-home",
+    "wv-dep-npdes-outlets": "https://dep.wv.gov/Data/Pages/default.aspx",
+    "la-baton-rouge-quarterly-reports": "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/",
 }
 
 

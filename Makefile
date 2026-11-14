@@ -120,6 +120,12 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  West Virginia: wv_echo_cso_monthly (EPA's monthly DMRs at combined sewer outlets: two permits report flow
+#                  at an outlet; month precision; a weekly cache in data/build) and wv_dep_hab_advisories (DEP's algal bloom
+#                  advisory map, three layers, poll-dated); outlets from DEP's layer (data/outfalls-wv.json, built by hand with
+#                  scripts/build_wv_outfalls.py --fetch)
+#                  Louisiana: la_baton_rouge_quarterly (Baton Rouge's consent-decree quarterly reports, Part D collection-
+#                  system tables read with pypdf; a report used only when its rows match its own summary; each report once)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

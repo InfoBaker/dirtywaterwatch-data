@@ -1,0 +1,31 @@
+id: "wv-echo-dmr-cso"
+name: "EPA ECHO discharge monitoring reports: monthly flow at West Virginia combined sewer outlets"
+url: "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?output=JSON&p_id=WV0023183&parameter_code=50050&start_date=01/01/2025&end_date=11/14/2026"
+homepage: "https://echo.epa.gov/trends/loading-tool/water-pollution-search"
+kind: "api"
+level: "federal"
+# Feed row: written by pipeline/ingest/wv_echo_cso_monthly.py (data/build/events/wv-echo-dmr-cso.json).
+# Built 2026-11-14: every one of the 61 permits with an open combined sewer outlet in DEP's layer was asked once for all
+#   parameters, January 2025 to date. 59 file no line at any combined sewer outlet (their reports cover the plant's own
+#   outfalls). Two file a monthly line at outlet C002 ('Effluent Gross'): Princeton Sanitary Board (WV0023094) and the
+#   City of Beckley (WV0023183), each 50050 flow (MGD), total residual chlorine and fecal coliform. No West Virginia
+#   permit reports a number of overflows, hours or a volume at a combined sewer outlet.
+# Real read: Beckley's C002 16 months with flow reported (January 2025 to September 2026; daily maximum up to 5.8 MGD),
+#   5 months filed no discharge; Princeton's C002 21 months filed NODI C (no discharge). Median 24 days from the month's
+#   end to EPA's receipt.
+# Records: month precision (the monthly mark, never red or yellow; build/status.py EPA_MONTHLY_SOURCES); placed at the
+#   registry outlet (DEP's point; Beckley's C002 has no receiving stream in DEP's layer, so no water until the batch).
+# Cannot fill: the day or hour of a discharge; an end; a volume (the figure is a rate); the number of overflows.
+cadence: "weekly per permit (a compact cache in data/build), at most 25 requests a run; DMRs reach ECHO weeks after the month"
+license: "EPA public data (US government work)"
+attribution: "U.S. EPA ECHO (data reported by permittees to West Virginia DEP)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["WV"]
+registry_ids: ["wv-echo-dmr-cso", "fed-echo-effluent-charts-rest"]
+access: ["api"]
+access_detail: "ECHO Effluent Charts REST service, one request per permit for parameter 50050 with start_date 01/01/2025; no key. Answers carry the facility's name and address (a public plant), no person."
+machine_readable: true
+legal_basis: "WV/NPDES permits: monthly discharge monitoring reports (40 CFR 122.41(l)(4))"
+checked: "2026-11-14"

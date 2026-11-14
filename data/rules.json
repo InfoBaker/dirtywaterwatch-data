@@ -222,6 +222,18 @@
     "clock": "end_of_discharge",
     "basis": "Ohio sets no period after a sewage discharge during which the water is to be avoided, and no Ohio statute or rule requires the public to be told of a sewer overflow or a bypass: operators report them to Ohio EPA within 24 hours, and those reports are not published. Ohio's permit rule requires a permanent sign at every permitted outfall, combined sewer overflow and bypass outfalls included, and requires a major discharger near a drinking-water intake to notify the water supplier as soon as practicable. Combined sewer operators in the Lake Erie basin must notify the public within four hours of becoming aware of an overflow under their public notification plans (40 CFR 122.38); operators in the Ohio River basin notify under their permits. The Northeast Ohio Regional Sewer District, Akron, Columbus and Bowling Green publish their overflows; the Metropolitan Sewer District of Greater Cincinnati advises avoiding contact with streams for 72 hours after rain. Ohio EPA's spills layer lists the sewage spills called in to its emergency line, by day, with no end. This site marks a reported discharge while it runs and applies its own caution after it ends; a report with only a day is read in Eastern time",
     "source": "OAC 3745-33-08(A)(12) and (F)(1); 40 CFR 122.38; 40 CFR 122.41(l)(6); NEORSD CSO alerts map; City of Akron overflow status map; City of Columbus Sewer Overflow Discharge Information; City of Bowling Green CSO events; Ohio EPA Spills (Office of Emergency Response); MSD of Greater Cincinnati CSO notification program"
+   },
+   "WV": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "West Virginia law sets no period after a sewage discharge during which the water is to be avoided, and no West Virginia statute or rule requires the public to be told of a sewer overflow or a bypass. Whoever causes a spill or accidental discharge of sewage must report it by telephone to the Department of Environmental Protection's emergency spill line, and the permit's federal conditions add written reports; DEP publishes no list of these reports, and a 2025 bill that would have required public notice within 24 hours and an online spill database is pending in committee. West Virginia's combined sewer communities give notice by a sign at each outlet and a newspaper notice once a year; Charleston's sanitary board advises avoiding contact with the water around its outlets during overflow events and \"for at least 24 hours thereafter\", and Morgantown's utility board advised avoiding contact for 72 hours after rain (its page as read on November 9, 2026). No West Virginia permit reports the number or length of its combined sewer overflows to the U.S. Environmental Protection Agency; two report a monthly flow at one outlet, which this site shows as a monthly figure. This site shows its rain caution at every open combined sewer outlet in the Department's outlet layer (when radar shows 0.1 inch of rain in 24 hours there and no discharge is reported); an operator's own period is quoted as its own. Times are read in Eastern time",
+    "source": "47CSR11 (Water Resources Special Rules; DEP emergency spill line); 40 CFR 122.41(l)(6); EPA Combined Sewer Overflow Control Policy (59 FR 18688); WV DEP NPDES Outlets layer; U.S. EPA ECHO discharge monitoring reports; WV DEP algal bloom advisory map; Charleston Sanitary Board and Morgantown Utility Board combined sewer pages"
+   },
+   "LA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Louisiana law sets no period after a sewage discharge during which the water is to be avoided, and no Louisiana statute or rule requires the public to be told of a sewer overflow or a bypass. An unauthorized discharge is reported to the State Police hotline within the first hour when it is an emergency, or within 24 hours when it exceeds a reportable quantity, with a written report to the Department of Environmental Quality within seven days; the Department files the reports in its document system, whose search a CAPTCHA guards, and publishes no list. The City of Baton Rouge and Parish of East Baton Rouge lists every discharge from its collection systems in its quarterly reports under a federal consent decree, with the day, the cause, the receiving water and the gallons, but no time and no end; this site shows each such report with its caution for 72 hours from the start of its day. Louisiana has no municipal combined sewer system. Times are read in Central time. A report that names no receiving water is listed but not placed on a water",
+    "source": "LAC 33:I.3915, 3917 and 3925; 40 CFR 122.41(l)(6); LDEQ Single Point of Contact; City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D)"
    }
   },
   "by_discharger": {
@@ -382,7 +394,8 @@
     "tx-tceq-sso-opendata",
     "tn-tdec-events-report",
     "oh-epa-spills-opendata",
-    "oh-columbus-sewer-overflow"
+    "oh-columbus-sewer-overflow",
+    "la-baton-rouge-quarterly"
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
