@@ -256,9 +256,9 @@ def compact_iem(text: str, url: str, fetched_at: str) -> str:
 
 
 def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, session=None,
-              budget: RequestBudget | None = None) -> dict[date, float]:
+              budget: RequestBudget | None = None, fresh_s: float = 86400) -> dict[date, float]:
     """{date: MRMS daily inches} at the point; per-year files cached in data/raw/iem-iemre/, the
-    current year refetched when older than a day. Missing values are left out. With a budget (the
+    current year refetched when older than fresh_s seconds (a day; build/rain_history.py asks weekly). Missing values are left out. With a budget (the
     one-off radar thresholds, radar_build): every request counts against it (BudgetSpent when it is
     used up), and a refusal (HTTP 403, 429 or 5xx) or IEM_MAX_FAILURES failures in a row raise
     ServiceRefused instead of being printed and passed over."""
@@ -268,7 +268,7 @@ def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, s
     out = {}
     for y in years:
         p = IEM_DIR / f"{lat:.2f}_{lon:.2f}_{y}.json"
-        fresh = p.exists() and (y < this_year or time.time() - p.stat().st_mtime < 86400)
+        fresh = p.exists() and (y < this_year or time.time() - p.stat().st_mtime < fresh_s)
         if not fresh and not offline:
             d1 = date(y, 1, 1)
             d2 = min(date(y, 12, 31), datetime.now(UTC).date() - timedelta(days=1))

@@ -16,7 +16,10 @@ its outfalls with it), every outfall with coordinates or a water record, with or
 `rain` is null or the operator's "discharge likely" row of out/rain.json: {status ("likely" | "suppressed" |
 "below" | "no_reading"), rain_24h_in, threshold_in, threshold_kind, trigger_basis ("operator" | "state" | "default"),
 valid_time, episode}; only on open combined
-sewer outfalls (closed, plant and "reported" outfalls never drive the caution).
+sewer outfalls (closed, plant and "reported" outfalls never drive the caution). Where the operator levels are loaded
+(build/rain_history.py; the permit row carries "evidence") it also has level ("likely" | "possible": the operator's
+level, which applies to every one of its outfalls), caution_in, likely_in and outfall_history (null, or that outfall's
+own counts from out/rain-levels.json: {reports, storms, followed, lowest_reported, possible, likely}).
 
 Provisional places from the overflow reports (data/build/outfalls-reported.json, docs/national-outfalls.md: kind
 "reported", or "cso" for a combined sewer outfall the reports place) also carry record_status ("provisional" |
@@ -87,20 +90,29 @@ def permit_index(dischargers: list[dict]) -> dict[str, str]:
     return out
 
 
-def rain_of(permit_row: dict | None) -> dict | None:
+def rain_of(permit_row: dict | None, levels: dict | None = None, permit: str | None = None,
+            outfall_id: str | None = None) -> dict | None:
     if not isinstance(permit_row, dict):
         return None
     from build.rain_likely import basis_of          # a rain.json written before the basis was carried: worked out
-    return {**{k: permit_row.get(k) for k in RAIN_FIELDS}, "trigger_basis": basis_of(permit_row)}
+    out = {**{k: permit_row.get(k) for k in RAIN_FIELDS}, "trigger_basis": basis_of(permit_row)}
+    ev = permit_row.get("evidence")
+    if isinstance(ev, dict):                        # the operator levels (rain-levels.json) are loaded
+        from build.rain_thresholds import outfall_key as rt_key
+        outs = ((((levels or {}).get("permits") or {}).get(permit or "") or {}).get("outfalls") or {})
+        out.update({"level": permit_row.get("level") or ev.get("level"), "caution_in": ev.get("caution_in"),
+                    "likely_in": ev.get("likely_in"), "outfall_history": outs.get(rt_key(outfall_id) or "")})
+    return out
 
 
 def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | None = None, canon=None,
                  dischargers: list[dict] | None = None, rain_permits: dict | None = None, ma_layer=None,
-                 marks: list[dict] | None = None) -> list[dict]:
+                 marks: list[dict] | None = None, levels: dict | None = None) -> list[dict]:
     """The rows of out/outfalls.json (module docstring). registry: common.load_outfall_registry() rows; live: the
     live states; waters: the slugs of the water records (a slug that is no record is left out); canon: an older
     slug -> its record (status.SLUG_ALIASES); rain_permits: the rain block's "permits"; ma_layer: the MassDEP
-    layer's outfalls ({dep_id: row} or a list); marks: out/monthly-outfalls.json "outfalls"."""
+    layer's outfalls ({dep_id: row} or a list); marks: out/monthly-outfalls.json "outfalls"; levels: the operator
+    levels file (build/rain_history.load_levels(), out/rain-levels.json), for each outfall's own counts."""
     canon = canon or (lambda s: s)
     dischargers = dischargers or []
     by_permit = permit_index(dischargers)
@@ -136,7 +148,8 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
                "discharger_id": operator(permit, did),
                "permittee": o.get("permittee"), "state": st, "lat": lat, "lon": lon,
                "receiving_water": receiving_water(o), "water_slugs": slugs, "water_match": o.get("match"),
-               "rain": rain_of(rain_permits.get(permit)) if kind == "cso" and permit and not closed(o)
+               "rain": rain_of(rain_permits.get(permit), levels, permit, str(o.get("outfall") or ""))
+               if kind == "cso" and permit and not closed(o)
                and o.get("rain_caution") is not False else None}     # a lake reversal gate: not rain-driven
         if prov:                        # a place from the overflow reports: provisional, drawn apart on the map
             row.update({k: o.get(k) for k in PROVISIONAL_FIELDS})
@@ -223,6 +236,7 @@ def main(out_dir: Path = OUT_DIR, data_dir: Path = DATA_DIR, build_dir: Path = B
 
     waters = status_mod.load_waters()
     rain = read_json(Path(out_dir) / "rain.json", {}) or {}
+    levels = read_json(Path(out_dir) / "rain-levels.json", None)
     try:
         marks = (read_json(Path(out_dir) / "monthly-outfalls.json", {}) or {}).get("outfalls") or []
     except (OSError, ValueError, AttributeError):
@@ -230,7 +244,8 @@ def main(out_dir: Path = OUT_DIR, data_dir: Path = DATA_DIR, build_dir: Path = B
     dis, _ = load_dischargers()
     rows = outfall_rows(load_outfall_registry(data_dir), status_mod.states(), waters=set(waters),
                         canon=lambda s: status_mod.SLUG_ALIASES.get(s, s), dischargers=dis,
-                        rain_permits=rain.get("permits") or {}, ma_layer=ma_layer_rows(build_dir), marks=marks)
+                        rain_permits=rain.get("permits") or {}, ma_layer=ma_layer_rows(build_dir), marks=marks,
+                        levels=levels if isinstance(levels, dict) else None)
     write(rows, out_dir, now_iso())
     print(summary(rows))
     return rows
