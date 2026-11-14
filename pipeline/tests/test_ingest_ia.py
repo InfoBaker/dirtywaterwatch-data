@@ -89,3 +89,61 @@ def test_waterloo_caution_from_the_end():
     ivs = S.event_intervals(recs["2026-10-01T0552"], "IA", datetime.fromisoformat("2026-10-02T12:00:00+00:00"),
                             None, rules)
     assert ivs and ivs[0]["start"].isoformat().startswith("2026-10-01T10:52")
+
+
+# ---------------------------------------------------------------- DNR news releases
+
+from ingest import ia_dnr_news as N  # noqa: E402
+
+ART = {"https://www.iowadnr.gov/news-release/2026-08-04/wastewater-discharge-exampleton": "dnr-article-plant.html",
+       "https://www.iowadnr.gov/news-release/2026-10-01/statewide-bypasses": "dnr-article-statewide.html",
+       "https://www.iowadnr.gov/news-release/2026-04-28/company-wastewater": "dnr-article-company.html"}
+
+
+def news(tmp_path, monkeypatch):
+    monkeypatch.setattr(N, "STATE_PATH", tmp_path / "state.json")
+    out = {}
+    monkeypatch.setattr(N, "write_events", lambda sid, recs, **kw: out.update(recs=recs, **kw) or tmp_path)
+    monkeypatch.setattr(N, "get", lambda url: (_ for _ in ()).throw(AssertionError(f"no network in tests: {url}")))
+    args = ["--rss-file", str(FIX / "dnr-rss.xml"), "--at", AT]
+    for url, f in ART.items():
+        args += ["--article-file", f"{url}={FIX / f}"]
+    assert N.main(args) == 0
+    return {r["source_record_id"]: r for r in out["recs"]}, out["meta"]
+
+
+def test_dnr_news_titles_filter_and_company_wastewater_is_not_a_sewage_report(tmp_path, monkeypatch):
+    recs, meta = news(tmp_path, monkeypatch)
+    assert meta["not_municipal"] == ["Wastewater enters Fixture Creek near Sampleville"]
+    assert not any("manure" in k for k in recs)
+    assert len(recs) == 3
+
+
+def test_dnr_news_plant_bypass_times_from_the_text_never_the_release(tmp_path, monkeypatch):
+    recs, _ = news(tmp_path, monkeypatch)
+    r = recs["2026-08-04/wastewater-discharge-exampleton"]
+    assert r["event_type"] == "plant_bypass" and r["status"] == "ended"
+    assert r["started_at"] == "2026-07-25T14:00:00-05:00" and r["time_precision"] == "minute"
+    assert r["ended_at"] == "2026-07-27T16:00:00-05:00" and r["raw"]["ended_at_precision"] == "minute"
+    assert r["reported_at"] == "2026-07-26" and r["published_at"] == "2026-08-04"
+    assert r["waterbody_text"] == "Sample River" and r["volume_gal"] == 1_500_000 and r["estimate_flag"] == "estimated"
+    assert r["discharger_name"] == "City of Exampleton" and r["raw"]["county"] == "Example County"
+    assert "take caution and avoid the area" in r["advice_text"]
+    blob = json.dumps(recs)
+    assert "4321" not in blob and "555-0199" not in blob
+
+
+def test_dnr_news_sections_split_and_a_landmark_town_is_not_the_operator(tmp_path, monkeypatch):
+    recs, _ = news(tmp_path, monkeypatch)
+    s = recs["2026-10-01/statewide-bypasses"]
+    assert s["event_type"] == "bypass" and s["waterbody_text"] is None and s["raw"]["statewide"]
+    assert s["started_at"] is None and s["published_at"] == "2026-10-01"
+    c = recs["2026-10-01/statewide-bypasses#example-county"]
+    assert c["event_type"] == "sso" and c["material"] == "sewage sludge / biosolids"
+    assert c["waterbody_text"] == "Fixture Creek" and c["discharger_name"] is None
+    assert c["raw"]["county"] == "Example County" and "avoid Fixture Creek" in c["advice_text"]
+
+
+def test_dnr_news_a_date_after_the_release_month_is_last_year():
+    assert N._year_for(12, __import__("datetime").date(2026, 1, 5)) == 2025
+    assert N._year_for(1, __import__("datetime").date(2026, 1, 5)) == 2026
