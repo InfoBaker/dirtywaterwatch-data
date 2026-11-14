@@ -228,6 +228,12 @@
     "clock": "end_of_discharge",
     "basis": "Missouri sets no period after a sewage discharge during which the water is to be avoided, and no Missouri statute or rule requiring the public to be told of a sewer overflow or a bypass was found: permitted wastewater facilities report them to the Department of Natural Resources within 24 hours of discovery, through its online portal, and those reports are not published. The Department's monthly concern reports, issued two to four months later, list the concerns it investigated; a concern is the reporting party's account unless the Department's comments say what it found. Kansas City's KC Water and St. Louis's Metropolitan Sewer District post some overflows on their own websites, and combined sewer operators post signs at their outfalls. State park swim beaches are posted 'Swimming is Not Recommended' when weekly E. coli samples exceed the state standard. This site marks a reported discharge while it runs and applies its own caution after it ends; a concern reported by the public is shown with this site's caution only",
     "source": "Missouri Department of Natural Resources, sewer overflow reporting guidance (MoGEM) and Water Pollution Control concern reports; RSMo 640.080; KC Water news; MSD Project Clear alerts"
+   },
+   "KS": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Kansas sets no period after a sewage discharge during which the water is to be avoided, and no Kansas statute or rule requiring the public to be told of a sewer overflow or a bypass was found: an emergency or accidental sewage discharge is reported to the Kansas Department of Health and Environment immediately, and a planned bypass needs its approval seven days ahead; those reports are not published. KDHE issues a stream advisory, asking people to avoid contact with a stretch of water, when it judges one needed, and rescinds it by a later release; KDHE and the state parks agency post advisories for harmful algal blooms on lakes. The City of Leavenworth posts each of its sewer overflows. This site shows KDHE's advisories in KDHE's own window, marks a reported discharge while it runs and applies its own caution after it ends; four western counties keep Mountain time",
+    "source": "K.A.R. 28-16-27; KDHE stream advisories (news flash) and Harmful Algal Blooms map; City of Leavenworth Sanitary Sewer Overflow Transparency Reports; 49 CFR 71.7(d)"
    }
   },
   "by_discharger": {
