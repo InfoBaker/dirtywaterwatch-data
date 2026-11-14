@@ -43,9 +43,11 @@ Record rules
   - Place: no point; raw.counties names the city's four counties (Jackson, Clay, Platte, Cass), so a water named in the
     post is placed only on a record of that name that reaches one of them (build/status.py county_slugs).
 
-Privacy: the post titles and texts name street addresses ("near 4000 Mersington Ave."): every house number is dropped
+Privacy: the post titles and texts name street addresses ("near 1234 Example Ave."): every house number is dropped
 from the stored title, location and text (common.strip_house_numbers), and the media contact line and the boilerplate
-paragraphs are not kept. The post's own address (source_url, the citation) keeps the slug KC Water gave it; the feed's
+paragraphs are not kept; the post text itself is read in memory and never stored (only the parsed facts and the
+cleaned title are), and raw._placement "named_water_only" keeps a record off any geocoding: it is placed on the water
+it names or nowhere. The post's own address (source_url, the citation) keeps the slug KC Water gave it; the feed's
 tracking query is dropped. The feed's dc:creator (a staff account) is never read. data/raw keeps only the parsed safe
 fields of each item, never the response.
 Run from pipeline/:  python -m ingest.mo_kc_water_news [--backfill] [--file feed.xml ...]
@@ -273,7 +275,9 @@ def record(it: dict, at: str) -> dict | None:
     if not is_notice(title, text):
         return None
     pub = pub_dt(it)
-    t = times(text, pub.date() if pub else date.today())
+    if pub is None:                                   # no publication time: nothing to read a year or "today" by
+        return None
+    t = times(text, pub.date())
     v, flag, vtext = volume(text)
     ws = waters(text)
     plant = bool(re.search(r"treatment plant[^.]{0,60}\b(?:overflow|spill|bypass)|\bWWTP\b", text, re.I)) and \
@@ -281,7 +285,7 @@ def record(it: dict, at: str) -> dict | None:
     pid = post_id(it)
     place = place_text(title)
     raw = {"state": "MO", "time_zone": "America/Chicago", "title": common.strip_house_numbers(title),
-           "is_update": bool(UPDATE.match(it["title"])), "post_text": text[:1500], "start_kind": t["start_kind"],
+           "is_update": bool(UPDATE.match(it["title"])), "start_kind": t["start_kind"],
            "start_is_upper_bound": t["start_kind"] in ("response", "report", "stated"),
            "start_basis": {"start": "the time the post says the overflow began",
                            "response": "the time KC Water's crews responded; the overflow began at or before it",
@@ -291,7 +295,7 @@ def record(it: dict, at: str) -> dict | None:
            "waters_named": ws, "reached_water": False if NO_WATER.search(text) else (True if ws else None),
            "multiple_sites": bool(re.search(r"effects of heavy rain", title, re.I)), "place_text": place,
            "volume_text": vtext, "time_basis": "KC Water's clock times, read as Central time (America/Chicago)",
-           "provenance": "operator", "counties": KC_COUNTIES}
+           "provenance": "operator", "counties": KC_COUNTIES, "_placement": "named_water_only"}
     if t["end"]:
         raw["ended_at_precision"], raw["end_basis"] = "minute", t["end_basis"]
     if not t["start"]:
@@ -372,9 +376,11 @@ def run(feeds: list[bytes], prev: list[dict], at: str) -> tuple[list[dict], dict
 def safe_feed(body: bytes) -> bytes:
     """What data/raw keeps of a feed page: the parsed, scrubbed fields of each item, never the response."""
     keep = []
-    for it in items(body):
-        keep.append({"title": common.strip_house_numbers(it["title"]), "link": it["link"], "date": it["date"],
-                     "guid": it["guid"], "text": post_text(it["html"])[:1500]})
+    for it in items(body):                            # the notices only, their titles scrubbed; never the post text
+        if not is_notice(UPDATE.sub("", it["title"]), post_text(it["html"])) or "/news/" not in it["link"]:
+            continue
+        keep.append({"title": common.scrub_text(common.strip_house_numbers(it["title"])), "link": it["link"],
+                     "date": it["date"], "guid": it["guid"]})
     return json.dumps({"url": FEED, "items": keep}, ensure_ascii=False, indent=1).encode()
 
 
@@ -382,7 +388,7 @@ def fetch(backfill: bool) -> list[bytes]:
     out = []
     for n in range(1, 60 if backfill else LIVE_PAGES + 1):
         r = requests.get(FEED, params={"paged": n} if n > 1 else None, headers=HEADERS, timeout=(20, 120))
-        if r.status_code == 404:
+        if r.status_code == 404 and n > 1:           # past the last page; a 404 on the first page is a failure
             break
         r.raise_for_status()
         out.append(r.content)

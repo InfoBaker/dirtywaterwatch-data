@@ -4,7 +4,7 @@ overflow, as dated sewage reports.
 Source
   https://www.leavenworthks.gov/publicworks/page/sanitary-sewer-overflow-transparency-report (registry:
   ks-leavenworth-sso-transparency): an index of yearly pages (2020 to 2026), each listing that year's overflow pages
-  ("Sanitary Sewer Overflow Reported on April 27, 2026 570 Evergreen St"). Each overflow page is a short narrative by
+  ("Sanitary Sewer Overflow Reported on April 27, 2026 1234 Example St"). Each overflow page is a short narrative by
   the City's Water Pollution Control division: when staff were told or found it, the manhole or lift station, the
   stop time, the estimated gallons, where it went and the City's advice. The site answered the identified client on
   2026-11-14 (it answered 403 to plain clients on 2026-11-03). The hourly run reads the index, the current and last
@@ -61,6 +61,13 @@ EVENT_LINK = re.compile(r'href="(/publicworks/page/sanitary-sewer-overflow-[^"]+
 AMPM = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*(a|p)\.?\s*m\b\.?", re.I)
 ADVICE = re.compile(r"[^.]*\b(?:stay (?:away from|out of)|avoid)\b[^.]*\.", re.I)
 POSTED = re.compile(r"Posted\s+([A-Z][a-z]+)\.?\s*(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*([ap])\.?m", re.I)
+
+
+def record_id(path: str) -> str:
+    """The page's path name with its street numbers dropped ("sanitary-sewer-overflow-reported-april-27-2026-evergreen-
+    st"): the page address keeps the City's slug as the citation, the identifier carries no house number."""
+    slug = path.rstrip("/").rsplit("/", 1)[-1]
+    return re.sub(r"-\d+(?=-[a-z])(?!-20\d\d)", "", re.sub(r"(20\d\d)", r"\1", slug))
 
 
 def clock(m: re.Match) -> tuple[int, int]:
@@ -135,8 +142,17 @@ def record(path: str, h: str, at: str) -> dict:
         tm = next((m for m in AMPM.finditer(s) if m.start() > w.start()), None)
         if tm and day:
             h_, mi = clock(tm)
-            e = datetime(day.year, day.month, day.day, h_, mi, tzinfo=TZ)
-            if prec == "minute" and e < datetime.fromisoformat(start):
+            dm = DATE.search(s[w.start():])          # "stopped May 29 at 4 p.m.": the end clause's own date first
+            eday = day
+            if dm:
+                try:
+                    eday = date(int(dm.group(3)) if dm.group(3) else day.year, _month(dm.group(1)), int(dm.group(2)))
+                except (ValueError, StopIteration):
+                    eday = day
+            e = datetime(eday.year, eday.month, eday.day, h_, mi, tzinfo=TZ)
+            if not dm and re.search(r"next day|following day|next morning", s, re.I):
+                e += timedelta(days=1)
+            elif not dm and prec == "minute" and e < datetime.fromisoformat(start):
                 e += timedelta(days=1)
             end, end_basis = e.isoformat(), "the stop time the City's page gives"
         break
@@ -156,12 +172,13 @@ def record(path: str, h: str, at: str) -> dict:
             pub = None
     prison = bool(re.search(r"Bureau of Prisons|\bBOP\b", clean))
     raw = {"state": "KS", "time_zone": "America/Chicago", "county": "Leavenworth County",
-           "title": common.strip_house_numbers(title), "page_text": clean[:1500], "start_kind": kind,
+           "title": common.strip_house_numbers(title), "start_kind": kind,
            "start_is_upper_bound": kind in ("notified", "found", "arrived", "stated", None),
            "start_basis": ("the day in the page's title; the page gives no clock time it can be read by" if prec == "day"
                            else f"the time the City's page gives ({kind}); the overflow began at or before it"),
            "waters_named": ws, "reached_water": True if ws or re.search(r"\bcreek\b|\bstream\b", clean, re.I) else None,
            "volume_basis": "the City's estimate" if v else None, "provenance": "operator",
+           "_placement": "named_water_only",
            "time_basis": "the City's clock times, read as Central time (America/Chicago)"}
     if end:
         raw["ended_at_precision"], raw["end_basis"] = "minute", end_basis
@@ -169,7 +186,7 @@ def record(path: str, h: str, at: str) -> dict:
         raw["system_note"] = ("the page reports an overflow at a lift station serving the federal prison, which the "
                                 "page says is containing it; not assigned to the City")
     return event(
-        source_id=SOURCE_ID, source_record_id=path.rstrip("/").rsplit("/", 1)[-1], event_type="sso", status="unknown",
+        source_id=SOURCE_ID, source_record_id=record_id(path), event_type="sso", status="unknown",
         discharger_id=None if prison else DISCHARGER_ID, discharger_name=None if prison else DISCHARGER,
         outfall_name=place_of(title), waterbody_text=ws[0] if ws else None, started_at=start,
         time_precision=prec if start else None, ended_at=end, published_at=pub, reported_at=None, fetched_at=at,
@@ -195,7 +212,6 @@ def run(pages: dict[str, str], prev: list[dict], at: str) -> tuple[list[dict], d
 
 
 def fetch(prev: list[dict], backfill: bool) -> tuple[dict[str, str], list[str]]:
-    seen = {r["source_url"].replace(BASE, "") for r in prev}
     idx = requests.get(INDEX, headers=HEADERS, timeout=(20, 120))
     idx.raise_for_status()
     years = sorted(set(YEAR_LINK.findall(idx.text)), key=lambda x: x[1], reverse=True)
@@ -209,11 +225,10 @@ def fetch(prev: list[dict], backfill: bool) -> tuple[dict[str, str], list[str]]:
                   re.search(r"overflow-\d", p) or "kickapoo" in p]
     pages = {}
     for p in dict.fromkeys(paths):
-        if p in seen and not backfill:
-            continue
+        # the last two years' pages are read again each run, so a page the City corrects is read again
         r = requests.get(BASE + p, headers=HEADERS, timeout=(20, 120))
-        if r.ok:
-            pages[p] = r.text
+        r.raise_for_status()                          # a refused page is a failed run, never an empty one
+        pages[p] = r.text
     return pages, [y for y, _ in years]
 
 

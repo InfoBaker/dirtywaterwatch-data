@@ -9,10 +9,12 @@ level: "state"
 #   investigated, suspected source, city and county, type, the concerned party's text and the Department's comments).
 # Real fetch 2026-11-14: six reports (December 2025 to May 2026; the first three linked with the April 8 meeting, the
 #   rest with July 15; footers dated a week after the month, document pages revised up to two months later), 945
-#   concerns, 140 typed "Bypass or Sewer Overflow". The allegation filter: 4 dropped as private septic systems, 13 sent
-#   to a health department, 26 where the Department found nothing, 1 unreadable; 96 kept: 3 the operator's own report
-#   (cross-referenced to the SSO/Bypass Event System, St. Joseph's 25395 among them), 17 where the Department's
-#   comments report what it found, 76 the public's report with no finding stated (marked as the public's).
+#   concern entries, 140 typed "Bypass or Sewer Overflow", for 131 concerns (9 appear in two monthly reports; the
+#   later report's finding decides, so a concern a later report finds unsupported is withdrawn). The allegation filter,
+#   by each concern's latest entry: 4 dropped as private septic systems, 12 sent to a health department, 25 where the
+#   Department found nothing; 90 kept: 3 the operator's own report (cross-referenced to the SSO/Bypass Event System,
+#   St. Joseph's 25395 among them), 15 where the Department's comments report what it found, 72 the public's report
+#   with no finding stated (marked as the public's).
 # Kept per record: concern number, region, county, dates, types, finding, SSO event id, a named water and a city
 #   operator when the block names one. Never kept: the concern text, the comments, the suspected-source text, inspector
 #   initials (people and private homes). The PDF is read in memory and never saved.

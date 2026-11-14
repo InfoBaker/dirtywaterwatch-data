@@ -25,9 +25,12 @@ Record rules
   - A rescission ends every open record one of whose waters it names: status advisory_lifted, ended_at its pubDate
     (raw.ended_at_precision minute), raw.lifted_by its title and link. A rescission with no issue on record is counted
     (rescissions_without_issue) and kept in meta, never turned into a record with an invented start.
-  - Each run that reads the feed without error and finds no rescission re-confirms an open record
-    (raw._last_seen_in_source the poll time; source_updated_at stays null); a failed run confirms nothing, so an
-    advisory whose feed stops answering ages out after the status build's 14 days.
+  - One record per water the release names in its title or description (source_record_id the release id and the
+    water), so a partial rescission lifts only the waters it names; a rescission lifts a water only in its own county.
+  - A run that reads the feed re-confirms an open record (raw._last_seen_in_source the poll time; source_updated_at
+    stays null) only while the feed still holds the issuing release: past that, a missing rescission is no evidence,
+    so the advisory ages out after the status build's 14 days; a failed run confirms nothing.
+  - raw.time_zone by the release's county (pipeline/zones.py kansas_zone); raw._placement "named_water_only".
   - The feed's offsets read -0600 in October as in November (KDHE's server states Central Standard Time year-round);
     the time is kept as stated, raw.offset_note says so.
 
@@ -47,6 +50,7 @@ from pathlib import Path
 import requests
 
 import common
+import zones
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
 
 SOURCE_ID = "ks-kdhe-stream-advisories"
@@ -106,19 +110,38 @@ def cause_of(text: str) -> str:
     return "not stated"
 
 
-def issue_record(it: dict, waters: list[str], county: str | None) -> dict:
+DESC_WATERS = re.compile(r"\bfor\s+(.+?)(?:\s+(?:in|near|after|due|because)\b|[.;]|$)", re.I)
+
+
+def desc_waters(desc: str) -> list[str]:
+    """The waters a description lists after "for" ("... stream advisory for McIntyre Creek, Tuttle Creek Reservoir, the
+    Big Blue River, and the Kansas River"); a title may name only the first (Astra 2026-11-14 P1-2)."""
+    m = DESC_WATERS.search(desc or "")
+    if not m:
+        return []
+    ws, _ = split_waters(re.sub(r",?\s+and\s+", ", ", m.group(1)))
+    return [w for w in ws if re.search(r"\b(?:Creek|River|Lake|Reservoir|Branch|Fork|Inlet|Pond)\b", w)]
+
+
+def issue_records(it: dict, waters: list[str], county: str | None) -> list[dict]:
+    """One record per water the release names (title and description), so each colours and lifts on its own."""
     at = iso(it["date"])
     desc = it["description"]
-    return event(
-        source_id=SOURCE_ID, source_record_id=re.sub(r"\D", "", it["link"].rsplit("aid=", 1)[-1]) or key(it["title"]),
-        event_type="beach_advisory", status="advisory_active", waterbody_text=waters[0] if waters else None,
-        started_at=at, time_precision="minute", published_at=at, reported_at=at, authority=AUTHORITY,
-        advice_text=desc or None, source_url=it["link"],
-        raw={"state": "KS", "time_zone": "America/Chicago", "title": it["title"], "waters": waters, "county": county,
-             "cause": cause_of(f"{it['title']} {desc}"), "advisory_extent": "named_water",
-             "advisory_noun": "Stream advisory", "offset_note": OFFSET_NOTE,
-             "start_basis": "the time KDHE published the advisory; it may have begun earlier the same day",
-             "time_basis": "the feed's publication time (pubDate)"})
+    aid = re.sub(r"\D", "", it["link"].rsplit("aid=", 1)[-1]) or key(it["title"])
+    ws = list(dict.fromkeys(waters + [w for w in desc_waters(desc) if key(w) not in {key(x) for x in waters}]))
+    out = []
+    for w in ws or [None]:
+        out.append(event(
+            source_id=SOURCE_ID, source_record_id=f"{aid}-{key(w)}" if w else aid, event_type="beach_advisory",
+            status="advisory_active", waterbody_text=w, started_at=at, time_precision="minute", published_at=at,
+            reported_at=at, authority=AUTHORITY, advice_text=desc or None, source_url=it["link"],
+            raw={"state": "KS", "time_zone": zones.kansas_zone(county=county), "title": it["title"], "release": aid,
+                 "waters": [w] if w else [], "release_waters": ws, "county": county,
+                 "cause": cause_of(f"{it['title']} {desc}"), "advisory_extent": "named_water",
+                 "advisory_noun": "Stream advisory", "offset_note": OFFSET_NOTE, "_placement": "named_water_only",
+                 "start_basis": "the time KDHE published the advisory; it may have begun earlier the same day",
+                 "time_basis": "the feed's publication time (pubDate)"}))
+    return out
 
 
 def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
@@ -126,37 +149,43 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
     stats = {"releases": 0, "issues": 0, "rescissions": 0, "lifted": 0, "rescissions_without_issue": 0}
     its = items(feed)
     stats["releases"] = len(its)
+    oldest = min((iso(i["date"]) for i in its if iso(i["date"])), default=None)
     lifts, orphan = [], []
     for it in sorted(its, key=lambda x: iso(x["date"]) or ""):
         k, waters, county = kind(it["title"])
         if k == "issue":
             stats["issues"] += 1
-            r = issue_record(it, waters, county)
-            recs.setdefault(r["event_id"], r)
+            for r in issue_records(it, waters, county):
+                recs.setdefault(r["event_id"], r)
         elif k == "lift":
             stats["rescissions"] += 1
-            lifts.append((it, waters))
-    for it, waters in lifts:
+            lifts.append((it, waters + desc_waters(it["description"]), county))
+    for it, waters, county in lifts:
         when = iso(it["date"])
         names = {key(w) for w in waters}
         hit = False
         for r in recs.values():
             if r["status"] != "advisory_active" or (r.get("started_at") or "") > (when or ""):
                 continue
+            if county and r["raw"].get("county") and county != r["raw"]["county"]:
+                continue                                   # the same creek name in another county is another water
             if names & {key(w) for w in r["raw"].get("waters") or []}:
                 r["status"], r["ended_at"] = "advisory_lifted", when
                 r["raw"].update(ended_at_precision="minute", lifted_by={"title": it["title"], "link": it["link"],
                                                                          "date": when})
+                r["raw"].pop("confirmed_by", None)
                 stats["lifted"] += 1
                 hit = True
         if not hit and not any((r["raw"].get("lifted_by") or {}).get("link") == it["link"] for r in recs.values()):
             orphan.append({"title": it["title"], "link": it["link"], "date": when})
     stats["rescissions_without_issue"] = len(orphan)
     for r in recs.values():
-        if r["status"] == "advisory_active":
+        # a read confirms an open advisory only while the feed still reaches back to its issue: past that, a missing
+        # rescission is no evidence (the feed keeps about a month), and the status build's 14-day aging applies
+        if r["status"] == "advisory_active" and oldest and (r.get("started_at") or "") >= oldest:
             r["raw"]["_last_seen_in_source"] = at
-            r["raw"]["confirmed_by"] = (f"KDHE's news flash feed read at {at}: no rescission among its {len(its)} "
-                                        "latest releases")
+            r["raw"]["confirmed_by"] = (f"KDHE's news flash feed read at {at}: it still holds the issuing release and "
+                                        "no rescission")
         r["fetched_at"] = at
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     stats["open"] = sum(1 for r in out if r["status"] == "advisory_active")
@@ -165,7 +194,9 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
 
 
 def safe_feed(body: bytes) -> bytes:
-    return json.dumps({"url": FEED, "items": items(body)}, ensure_ascii=False, indent=1).encode()
+    """Only the stream advisory releases, never the rest of KDHE's news (Astra 2026-11-14 P1-9)."""
+    keep = [i for i in items(body) if kind(i["title"])[0]]
+    return json.dumps({"url": FEED, "items": keep}, ensure_ascii=False, indent=1).encode()
 
 
 def main(argv=None) -> int:

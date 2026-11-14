@@ -248,7 +248,7 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
            "county": f"{county} County" if county and county != "St. Louis" else None,
            "counties": ["St. Louis County", "St. Louis city"] if county == "St. Louis" else None,
            "investigated_on": investigated, "incident_date": incident, "concern_types": b["type"],
-           "dnr_finding": find, "provenance": "operator" if find == "operator_reported" else "public",
+           "dnr_finding": find, "provenance": "operator" if find == "operator_reported" else "public", "_placement": "named_water_only",
            "citizen_caution": find != "operator_reported",
            "sso_event_id": safe["sso_event_id"], "permit_named": permit.group(0) if permit else None,
            "facility_kind": kind, "waters_named": ws, "report_period": meta.get("period"),
@@ -277,10 +277,12 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
 def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str) -> tuple[list[dict], dict, list[dict]]:
     keys = _county_keys()
     recs = {r["event_id"]: r for r in prev}
-    stats, safe_rows = Counter(), []
+    stats, safe_rows, withdrawn = Counter(), [], []
+    parsed = []
     for pdf, meta in reports:
         bs, m2 = blocks(pdf)
-        meta = {**meta, **m2}
+        parsed.append((bs, {**meta, **m2}))
+    for bs, meta in sorted(parsed, key=lambda x: (x[1].get("period") or [""])[0]):   # older report periods first
         stats["concerns"] += len(bs)
         for b in bs:
             if SEWER_TYPE not in b["type"].lower():
@@ -289,6 +291,13 @@ def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str) -> tuple[l
             decision, rec, safe = record(b, meta, keys, at)
             stats[decision] += 1
             safe_rows.append(safe)
+            if rec is None and b.get("no") and f"{SOURCE_ID}:{b['no']}" in recs:
+                # a later report that finds the concern unsupported (or outside the sewer remit) withdraws the
+                # record an earlier report kept (Astra 2026-11-14 P1-7); a later keep restores it
+                gone = recs.pop(f"{SOURCE_ID}:{b['no']}")
+                withdrawn.append({"concern_no": b["no"], "decision": decision, "was": gone["raw"].get("dnr_finding"),
+                                  "report_period": meta.get("period")})
+                stats["withdrawn"] += 1
             if rec:
                 stats["kept_" + rec["raw"]["dnr_finding"]] += 1
                 old = recs.get(rec["event_id"])
@@ -297,7 +306,9 @@ def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str) -> tuple[l
     for r in recs.values():
         r["fetched_at"] = at
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
-    return out, dict(stats), safe_rows
+    st = dict(stats)
+    st["withdrawn_concerns"] = withdrawn
+    return out, st, safe_rows
 
 
 def fetch(prev: list[dict]) -> list[tuple[bytes, dict]]:

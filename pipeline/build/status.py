@@ -1063,6 +1063,7 @@ COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events R
 COUNTY_FIELD_STATES.add("OH")    # Ohio: a spill whose point lies outside its county keeps only raw.county (audit P3-4)
 COUNTY_STATES["MO"] = "mo-counties.json"       # Missouri: DNR's concern reports give a county field and no point
 COUNTY_FIELD_STATES.add("MO")
+COUNTY_LIST_STATES = {"MO"}    # raw.counties, an operator's several counties (KC Water, MSD), read for these states only
 COUNTY_STATES["KS"] = "ks-counties.json"       # Kansas: Leavenworth's and KDHE's reports give a county; HAB lakes a point
 COUNTY_FIELD_STATES.add("KS")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
@@ -1130,7 +1131,7 @@ def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, s
     here = point_county(state, lat, lon)
     field = False
     if here is None and state in COUNTY_FIELD_STATES:
-        names = (ev.get("raw") or {}).get("counties")
+        names = (ev.get("raw") or {}).get("counties") if state in COUNTY_LIST_STATES else None
         if isinstance(names, list) and names:      # an operator's area across county lines (KC Water: four counties)
             found = [c for c in (named_county(state, n) for n in names) if c]
             here = (frozenset(g for g, _ in found), " or ".join(n for _, n in found)) if found else None

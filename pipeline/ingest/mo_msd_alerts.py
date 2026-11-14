@@ -80,7 +80,7 @@ def text_of(h: str) -> str:
     ss = sentences(t)
     if len(ss) > 1 and ss[0] == ss[1]:
         t = " ".join(ss[1:])
-    return common.scrub_text(common.strip_house_numbers(t)).strip()
+    return common.scrub_names(common.scrub_text(common.strip_house_numbers(t))).strip()
 
 
 def pub_local(p: dict) -> datetime | None:
@@ -125,7 +125,9 @@ def record(p: dict, at: str) -> dict:
     title = common.strip_house_numbers(html.unescape(p["title"]["rendered"])).strip()
     text = text_of(p["content"]["rendered"])
     pub = pub_local(p)
-    pday = pub.date() if pub else date.today()
+    if pub is None:
+        raise ValueError(f"post {p.get('id')} has no publication time")
+    pday = pub.date()
     day, sent, how = event_day(text, pday)
     kind = start_kind(sent)
     if day is None:
@@ -148,7 +150,7 @@ def record(p: dict, at: str) -> dict:
                 ws.append(w)
     v, flag, vtext = volume(text)
     plant = bool(re.search(r"treatment plant", title, re.I))
-    raw = {"state": "MO", "time_zone": "America/Chicago", "title": title, "post_text": text[:1500],
+    raw = {"state": "MO", "time_zone": "America/Chicago", "title": title,
            "is_follow_up": bool(FOLLOW_UP.search(title)), "start_kind": kind, "day_read_from": how,
            "start_is_upper_bound": kind in ("discovered", "reported", "publication", "stated"),
            "start_basis": ("the post gives no day for the overflow: dated to the post's own day, on or before which it "
@@ -157,7 +159,7 @@ def record(p: dict, at: str) -> dict:
                            if kind in ("discovered", "reported") else f"the day the post gives ({how})"),
            "waters_named": ws, "reached_water": (False if re.search(r"did not reach|never reached|before it reached",
                                                                       text, re.I) and not ws else (True if ws else None)),
-           "volume_text": vtext, "provenance": "operator", "modified_gmt": p.get("modified_gmt"),
+           "volume_text": vtext, "provenance": "operator", "_placement": "named_water_only", "modified_gmt": p.get("modified_gmt"),
            "counties": ["St. Louis County", "St. Louis city"],
            "time_basis": "MSD's days and times, read as Central time (America/Chicago)"}
     return event(
@@ -223,7 +225,7 @@ def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict],
 def safe_posts(page: list[dict]) -> list[dict]:
     return [{"id": p["id"], "date_gmt": p.get("date_gmt"), "modified_gmt": p.get("modified_gmt"), "link": p["link"],
              "title": common.strip_house_numbers(html.unescape(p["title"]["rendered"])),
-             "text": text_of(p["content"]["rendered"])[:1500]} for p in page if is_notice(p)]
+             } for p in page if is_notice(p)]
 
 
 def fetch(backfill: bool) -> list[list[dict]]:
