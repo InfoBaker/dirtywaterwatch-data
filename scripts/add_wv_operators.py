@@ -69,7 +69,7 @@ OVERRIDES = [
 
 def build(dis: list[dict]) -> tuple[list[dict], dict]:
     plants = [r for r in json.loads(PLANTS.read_text())["outfalls"] if r.get("state") == ST]
-    cso_rows = json.loads(CSO.read_text())["outfalls"]
+    cso_rows = [r for r in json.loads(CSO.read_text())["outfalls"] if r.get("outfall_kind") == "cso"]
     open_cso = defaultdict(int)
     cso_permits = set()
     cso_waters = defaultdict(set)
@@ -79,13 +79,18 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             open_cso[r["npdes_permit"]] += 1
             if r.get("receiving_water_echo"):
                 cso_waters[r["npdes_permit"]].add(r["receiving_water_echo"])
+    import common as _c
+    common_key = lambda o: _c.outfall_number(o)  # noqa: E731
+    state_file = json.loads(CSO.read_text())["outfalls"]
+    not_outfalls = {(r["npdes_permit"], common_key(r.get("outfall"))) for r in state_file if r.get("outfall_kind") == "other"}
     by_permit: dict[str, dict] = {}
     for r in plants:
         p = r["npdes_permit"]
         e = by_permit.setdefault(p, {"permit_name": r.get("permit_name"), "permittee": r.get("permittee"),
                                      "facility_type": r.get("facility_type"), "city": r.get("city"), "waters": set(),
                                      "rows": 0, "source": "EPA ICIS-NPDES (data/outfalls-plants-us.json)"})
-        e["rows"] += 1
+        if str(r.get("outfall") or "").strip() and (p, common_key(r.get("outfall"))) not in not_outfalls:
+            e["rows"] += 1          # a discharge point: an outfall number, not kind other in the state file
         if r.get("receiving_water_echo"):
             e["waters"].add(clean(r["receiving_water_echo"]))
     for r in cso_rows:
