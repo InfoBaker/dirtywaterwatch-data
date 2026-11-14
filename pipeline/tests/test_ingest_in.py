@@ -454,3 +454,19 @@ def test_the_rules_row_and_the_missing_waters_list():
     assert miss["state"] == "IN" and {"Pouges Run", "Little Calumet River"} <= names
     assert not [r for r in miss["rows"] if r["name"].lower().startswith("unnamed")]
     assert all(len(p) == 2 and p == [round(p[0], 3), round(p[1], 3)] for r in miss["rows"] for p in r["points"])
+
+
+def test_a_monthly_grade_from_epas_reports_credits_epa_and_other_states_read_as_before():
+    from datetime import UTC, datetime
+
+    from export import coverage as C
+    f = {"records_12m": 4485, "dated_share": 0.0002, "monthly_share": 0.9998, "annual_share": 0.0,
+         "latest_dated": "2026-08-12T21:30:00-04:00", "lag_days": 1}
+    now = datetime(2026, 11, 14, tzinfo=UTC)
+    g, s = C.grade_of("IN", f, now, federal=True)
+    assert g == "Monthly totals only"
+    assert s.startswith("Monthly overflow totals from sewer operators in Indiana are published by the U.S. "
+                        "Environmental Protection Agency") and "Indiana publishes" not in s
+    g2, s2 = C.grade_of("NJ", f, now, federal=False)
+    assert s2 == ("New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there "
+                  "because none are reported by date, not because none happen.")
