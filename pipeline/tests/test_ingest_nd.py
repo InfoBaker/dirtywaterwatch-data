@@ -78,11 +78,12 @@ def test_bloom_records_are_deqs_own_advisories_dated_to_the_posting():
         assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active" and r["ended_at"] is None
         assert r["time_precision"] == "day" and r["started_at"] == r["published_at"] == r["raw"]["date_posted"]
         assert r["source_updated_at"] == "2026-10-08T19:44:26Z" and r["raw"]["_last_seen_in_source"] == FETCHED
-        assert r["lat"] is None and r["raw"]["placement_hint"]["state"] == "ND" and r["raw"]["state"] == "ND"
+        assert r["raw"]["placement_hint"]["state"] == "ND" and r["raw"]["state"] == "ND"
+        assert (r["lat"] is None) == ("marker_point" not in r["raw"])
     assert recs["Lake Tschida"]["raw"]["time_zone"] == zones.MOUNTAIN and recs["Lake Ilo"]["raw"]["time_zone"] == zones.MOUNTAIN
     assert recs["Lake Ashtabula"]["raw"]["time_zone"] == zones.CENTRAL
     assert recs["Devils Lake"]["raw"]["county"] == "Ramsey" and recs["Devils Lake"]["raw"]["counties"] == ["Ramsey", "Benson"]
-    assert recs["Devils Lake"]["source_record_id"] == "2026:devils-lake:ramsey-benson"
+    assert recs["Devils Lake"]["source_record_id"] == "devils-lake:benson-ramsey:advisory:2026-07-16"
     assert "toxins" in recs["Lake Tschida"]["advice_text"] and recs["Clear Lake"]["raw"]["level"] == "advisory"
 
 
@@ -105,16 +106,63 @@ def test_a_row_that_leaves_the_listing_ends_at_that_read_and_can_come_back():
                                                                                "to": "2026-11-16T18:00:00Z"}]
 
 
-def test_a_lake_moved_to_the_warning_table_keeps_its_record_and_its_first_posting():
+def test_p2_1_a_lake_moved_to_the_warning_table_is_a_new_posting_and_the_advisory_ends_at_the_read():
     first, _ = hab()
     prev = dict(first["Lake Tschida"])
-    prev["started_at"] = "2026-07-01"
-    prev["raw"] = dict(prev["raw"], level="advisory", _level_history=[{"level": "advisory", "seen_at": "2026-07-02T00:00:00Z",
-                                                                     "date": "2026-07-01"}])
-    recs, _ = hab(previous=[prev])
-    t = recs["Lake Tschida"]
-    assert t["started_at"] == "2026-07-01" and t["raw"]["level"] == "warning"
-    assert [h["level"] for h in t["raw"]["_level_history"]] == ["advisory", "warning"]
+    prev["source_record_id"] = "lake-tschida:grant:advisory:2026-07-01"
+    prev["event_id"] = "nd-deq-hab-listings:" + prev["source_record_id"]
+    prev["started_at"] = prev["published_at"] = "2026-07-01"
+    prev["raw"] = dict(prev["raw"], level="advisory", date_posted="2026-07-01")
+    recs, _ = H.build(PDF, "2026-11-15T18:00:00Z", [prev])
+    by = {r["source_record_id"]: r for r in recs}
+    old, new = by["lake-tschida:grant:advisory:2026-07-01"], by["lake-tschida:grant:warning:2026-08-26"]
+    assert old["status"] == "advisory_lifted" and old["ended_at"] == "2026-11-15T18:00:00Z"
+    assert new["status"] == "advisory_active" and new["started_at"] == "2026-08-26"     # never merged back to July
+
+
+def test_p2_1_absences_carry_and_county_order_is_one_key():
+    first, _ = hab()
+    d = first["Devils Lake"]
+    assert d["source_record_id"].startswith("devils-lake:benson-ramsey:")
+    back = dict(d, raw=dict(d["raw"], _unlisted_since="2026-11-15T18:00:00Z",
+                            _absences=[{"from": "2026-10-01T00:00:00Z", "to": "2026-10-02T00:00:00Z"}]))
+    recs, _ = H.build(PDF, "2026-11-16T18:00:00Z", [back])
+    dv = next(r for r in recs if r["waterbody_text"] == "Devils Lake")
+    assert dv["raw"]["_absences"] == [{"from": "2026-10-01T00:00:00Z", "to": "2026-10-02T00:00:00Z"},
+                                      {"from": "2026-11-15T18:00:00Z", "to": "2026-11-16T18:00:00Z"}]
+    again, _ = H.build(PDF, "2026-11-17T18:00:00Z", [dv])
+    assert next(r for r in again if r["waterbody_text"] == "Devils Lake")["raw"]["_absences"] == dv["raw"]["_absences"]
+
+
+def test_p1_5_a_damaged_row_or_a_missing_table_fails_and_lifts_nothing(monkeypatch):
+    items = H.page_items(PDF)
+    broken = [dict(i) for i in items if not i["text"].startswith("09/15")]      # Larimore Dam's date lost
+    monkeypatch.setattr(H, "page_items", lambda pdf: broken)
+    with pytest.raises(ValueError, match="could not be read whole"):
+        H.parse(PDF)
+    no_warnings = [i for i in items if i["y"] > 262]
+    monkeypatch.setattr(H, "page_items", lambda pdf: no_warnings)
+    with pytest.raises(ValueError, match="tables were not all found"):
+        H.parse(PDF)
+    empty = [i for i in items if re.sub(r"\s", "", i["text"]).lower() in ("a", "dvisories", "warning")]
+    monkeypatch.setattr(H, "page_items", lambda pdf: empty)
+    assert H.parse(PDF) == []                        # DEQ's own empty listing reads as empty, not as a failure
+
+
+def test_p1_1_each_listed_lake_with_an_nhd_outline_in_its_county_has_a_cited_point():
+    recs, _ = hab()
+    pts = json.loads((ROOT / "data" / "reference" / "nd-hab-lake-points.json").read_text())
+    assert len(pts["lakes"]) + len(pts["without_point"]) == 20 and len(pts["lakes"]) == 14
+    for r in recs.values():
+        p = r["raw"].get("marker_point")
+        if p is None:
+            assert r["lat"] is None
+            continue
+        assert (r["lat"], r["lon"]) == (p["lat"], p["lon"]) and p["gnis_id"] and round(r["lat"], 3) == r["lat"]
+        assert p["county"].removesuffix(" County") in r["raw"]["counties"]
+        assert zones.nd_point_county(r["lat"], r["lon"]) == p["county"]
+    assert recs["Clear Lake"]["lat"] is None          # no Clear Lake outline in Pierce County: no borrowed point
+    assert recs["Patterson Lake"]["raw"]["marker_point"]["gnis_name"] == "Edward Arthur Patterson Lake"
 
 
 # ---------------------------------------------------------------- the incident archive

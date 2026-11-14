@@ -40,6 +40,7 @@ Run from pipeline/:  python -m ingest.nd_deq_hab_listings [--file saved.pdf]
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 from email.utils import parsedate_to_datetime
@@ -90,31 +91,53 @@ def parse(pdf: bytes) -> list[dict]:
             continue
         y = next((k for k in rows if abs(k - it["y"]) <= 3), it["y"])
         rows.setdefault(y, []).append(it)
-    out, level = [], None
+    out, level, seen, broken = [], None, set(), []
     for y in sorted(rows, reverse=True):
         cells = sorted(rows[y], key=lambda i: i["x"])
         line = "".join(c["text"] for c in cells).strip()
         low = re.sub(r"\s+", "", line).lower()
         if low in ("advisories", "advisory"):
             level = "advisory"
+            seen.add(level)
             continue
         if low in ("warning", "warnings"):
             level = "warning"
+            seen.add(level)
             continue
-        if level is None or "lakename" in low:
+        if level is None or "lakename" in low or low in ("dateposted", "countydateposted"):
             continue
         lake = "".join(c["text"] for c in cells if c["x"] < 300).strip()
         county = "".join(c["text"] for c in cells if 300 <= c["x"] < 450).strip()
         dtext = "".join(c["text"] for c in cells if c["x"] >= 450).strip()
         m = DATE.match(re.sub(r"\s+", "", dtext))
         if not lake or not m:
+            broken.append(line)                 # a row with text that is not a whole lake, county and date
             continue
         lake = re.sub(r"\s*-\s*", " - ", re.sub(r"\s+", " ", lake))
         out.append({"level": level, "lake": lake, "counties": [c.strip() for c in county.split("/") if c.strip()],
                     "date": f"{m.group(3)}-{int(m.group(1)):02d}-{int(m.group(2)):02d}"})
-    if not out:
-        raise ValueError("no advisory or warning row read from the listing")
-    return out
+    if seen != {"advisory", "warning"}:
+        raise ValueError(f"the listing's tables were not all found (found: {sorted(seen) or 'none'})")
+    if broken:
+        raise ValueError(f"{len(broken)} row(s) of the listing could not be read whole: {broken[:3]}")
+    return out          # both tables found and every row read: an empty list is DEQ's own empty listing
+
+
+POINTS = Path(__file__).resolve().parents[2] / "data" / "reference" / "nd-hab-lake-points.json"
+
+
+def lake_point(lake: str, counties: list[str]) -> dict | None:
+    """The cited marker point of a listed lake (scripts/nd_hab_lake_points.py: inside the NHD waterbody of its GNIS name
+    in a county DEQ lists), or None."""
+    try:
+        doc = json.loads(POINTS.read_text())
+    except (OSError, ValueError):
+        return None
+    for r in doc.get("lakes") or []:
+        if r["lake"] == lake and set(r["counties"]) == set(counties):
+            return {"lat": r["lat"], "lon": r["lon"], "gnis_name": r["gnis_name"], "gnis_id": r["gnis_id"],
+                    "county": r["county"], "basis": r["basis"], "source": (doc.get("source") or {}).get("url")}
+    return None
 
 
 def zone_of(counties: list[str]) -> tuple[str, str]:
@@ -128,17 +151,13 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
     prev = {p["source_record_id"]: p for p in previous}
     out: dict[str, dict] = {}
     for x in rows:
-        srid = f"{x['date'][:4]}:{slug(x['lake'])}:{'-'.join(slug(c) for c in x['counties']) or 'no-county'}"
-        if srid in out:                       # the same lake in both tables: the warning, the later posting, wins
-            if out[srid]["raw"]["level"] == "warning":
-                continue
+        counties = sorted(x["counties"])
+        srid = (f"{slug(x['lake'])}:{'-'.join(slug(c) for c in counties) or 'no-county'}:{x['level']}:{x['date']}")
         old = prev.get(srid) or {}
         oraw = old.get("raw") or {}
         tz, basis = zone_of(x["counties"])
-        start = min(x["date"], old.get("started_at") or x["date"])
+        start = x["date"]                     # each posting is its own episode: a reposted lake is a new record
         hist = list(oraw.get("_level_history") or [{"level": x["level"], "seen_at": fetched, "date": x["date"]}])
-        if hist[-1]["level"] != x["level"]:
-            hist.append({"level": x["level"], "seen_at": fetched, "date": x["date"]})
         raw = {"lake": x["lake"], "counties": x["counties"], "county": (x["counties"] or [None])[0],
                "level": x["level"], "level_meaning": LEVEL_MEANING[x["level"]], "date_posted": x["date"],
                "date_note": "DEQ's Date Posted: the day DEQ posted the advisory or warning; bloom onset and sampling "
@@ -149,11 +168,19 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
                                            "state is not this one"},
                "_level_history": hist, "_first_seen_at": oraw.get("_first_seen_at") or fetched,
                "_last_seen_in_source": fetched}
+        absences = list(oraw.get("_absences") or [])
         if oraw.get("_unlisted_since"):
-            raw["_absences"] = list(oraw.get("_absences") or []) + [{"from": oraw["_unlisted_since"], "to": fetched}]
+            absences.append({"from": oraw["_unlisted_since"], "to": fetched})
+        if absences:
+            raw["_absences"] = absences
+        pt = lake_point(x["lake"], x["counties"])
+        if pt:
+            raw["marker_point"] = pt
         out[srid] = event(
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory", status="advisory_active",
             waterbody_text=x["lake"], started_at=start, time_precision="day", published_at=x["date"],
+            lat=pt["lat"] if pt else None, lon=pt["lon"] if pt else None,
+            coord_source="nhd_waterbody" if pt else None, coord_precision_m=100 if pt else None,
             source_updated_at=source_updated, fetched_at=fetched, authority=AUTHORITY,
             advice_text=LEVEL_MEANING[x["level"]], source_url=URL, raw=raw)
     lifted = 0
