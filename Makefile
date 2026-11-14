@@ -120,6 +120,12 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Delaware: de_dnrec_derns (DNREC's DERNS Recent Releases: the sewage and sanitary-wastewater
+#                  releases by rule, a few detail pages a run; state data/build/de-dnrec-derns-state.json) and
+#                  de_dnrec_recwater (DNREC's beach advisory history on data.delaware.gov and the FirstMap stations)
+#                  South Carolina: sc_florence_sso (the City of Florence's sewer overflow notices),
+#                  sc_des_advisories (DES's beach station layer, long-term and short-term advisories, and its bloom
+#                  delineations and watch table, polled; state data/build/sc-des-advisories-state.json)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

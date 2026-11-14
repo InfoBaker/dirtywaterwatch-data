@@ -107,7 +107,7 @@ def rows() -> list[dict]:
              unmonitored_reason="feed_ingested", feed_source_id="sc-des-beach-monitoring", publishes="status",
              noun="Data feed", sources=["sc-des-beach-monitoring"],
              note=("The S.C. Beach Access Guide's station layer: 123 stations on 2026-11-14, 21 under a long-term "
-                   "advisory (20 in Horry County, three at Edisto Beach), the rest 'No Advisory' (out of season)."),
+                   "advisory (18 in Horry County, three at Edisto Beach in Colleton County), the rest 'No Advisory' (out of season)."),
              barrier=None),
         base(agency=DES, id="sc-des-beach-page", name="SC DES (beach monitoring page)", channel_kind="state_alert_page",
              urls=["https://des.sc.gov/programs/bureau-water/aquatic-science/beach-monitoring"], method="html",
