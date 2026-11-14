@@ -92,6 +92,31 @@ NO_STATION_WATERS = {"silverlakedoverbeach": ("Silver Lake", "Kent"),
                      "lumspondbeachlumspondstatepark": ("Lums Pond", "New Castle")}
 COASTAL_NO_STATION = ("a beach DNREC no longer samples, with no station point on the map: listed by its name, not "
                       "drawn on the bay or the ocean")
+# the water each beach lies on, by the beach's name (DNREC names the bay stations after their bay, and the ocean and
+# Delaware Bay beaches by their town or park); a name no rule settles keeps the beach's name only
+BEACH_WATERS = [
+    (re.compile(r"^(Delaware Bay|Rehoboth Bay|Indian River Bay|Little Assawoman Bay) \d+$"), None),
+    (re.compile(r"Bayside|Dewey Beach Bayside", re.I), "Rehoboth Bay"),
+    (re.compile(r"^(Rehoboth Beach|Dewey Beach Oceanside|Bethany Beach|South Bethany Beach|Fenwick Island|"
+                r"Cape Henlopen Main Beach|Herring Point Beach|Deauville Beach|Ocean Beach Near Gordons Pond|"
+                r"Tower Road Beach - Oceanside|North Indian River Inlet Beach|South Indian River Inlet Beach|"
+                r"3 R's Road Beach|Key Box Road Beach|Conquest Road Beach)", re.I), "Atlantic Ocean"),
+    (re.compile(r"^(Lewes Beach|Slaughter Beach|Broadkill Beach|Bowers Beach|Prime Hook Beach|Cape Shores Beach|"
+                r"Augustine Beach|Woodland Beach|Cape Henlopen Fishing Pier)", re.I), "Delaware Bay"),
+    (re.compile(r"Little Assawoman|Assawoman Recreation Area", re.I), "Little Assawoman Bay"),
+    (re.compile(r"^Lake Como", re.I), "Lake Como"),
+    (re.compile(r"^(Holt's Landing|James Farm)", re.I), "Indian River Bay"),
+]
+
+
+def beach_water(unit: str | None) -> str | None:
+    for rx, water in BEACH_WATERS:
+        m = rx.search(unit or "")
+        if m:
+            return water or m.group(1)
+    return None
+
+
 LABEL_BASIS = ("DNREC resamples after a result above the enterococcus standard and has not posted an advisory: its "
                "label is quoted and the site shows its own caution, never DNREC's advisory")
 
@@ -162,11 +187,13 @@ def history_records(rows: list[dict], stations: dict[str, dict], today: date, fe
             raw["status_basis"] = f"no end date given and the start is more than {OPEN_NO_END_DAYS} days old"
         else:
             status = "advisory_active"
-        water = r.get("unitname")
+        water = beach_water(r.get("unitname")) or r.get("unitname")
+        if water != r.get("unitname"):
+            raw["water_basis"] = "the water the beach lies on, by the beach's name"
         if lat is not None:
             raw["point_basis"] = "DNREC's sampling station for this beach (FirstMap, Recreational Water Sampling Location)"
-        elif norm(water) in NO_STATION_WATERS:
-            water, raw["county"] = NO_STATION_WATERS[norm(water)]
+        elif norm(r.get("unitname")) in NO_STATION_WATERS:
+            water, raw["county"] = NO_STATION_WATERS[norm(r.get("unitname"))]
             raw["placement_note"] = "an inland beach with no station point on the map: placed on its lake by name"
         else:
             raw["placement_note"] = COASTAL_NO_STATION
@@ -183,7 +210,7 @@ def history_records(rows: list[dict], stations: dict[str, dict], today: date, fe
 
 def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_at: str, today: date) -> tuple[list[dict], dict]:
     """The current-status snapshot: records opened and closed at polls (module docstring)."""
-    open_hist = {norm(r["waterbody_text"]) for r in history
+    open_hist = {norm(r["raw"].get("unit_name")) for r in history
                  if r["status"] in ("advisory_active", "unknown") and (r.get("ended_at") or "9999") >= today.isoformat()
                  and (r.get("started_at") or "") <= today.isoformat()}
     state = {k: dict(v) for k, v in (prev.get("polls") or {}).items()}
@@ -220,7 +247,7 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
         else:
             status = "advisory_lifted" if v.get("ended_at") else "advisory_active"
         recs.append(event(source_id=SOURCE_ID, source_record_id=key, event_type=etype, status=status,
-                          waterbody_text=v["name"], outfall_name=v["name"], lat=lat, lon=lon, coord_source="station",
+                          waterbody_text=beach_water(v["name"]) or v["name"], outfall_name=v["name"], lat=lat, lon=lon, coord_source="station",
                           coord_precision_m=100, started_at=v["started_at"], ended_at=v.get("ended_at"),
                           time_precision="poll", fetched_at=fetched_at, authority=AUTHORITY,
                           source_url=BEACH_URL.format(v["unit_id"]), raw=raw))
