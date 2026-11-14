@@ -363,3 +363,94 @@ def test_an_invalid_permit_is_an_answer_not_a_failure(monkeypatch):
     monkeypatch.setattr(M.requests, "get", lambda *a, **k: R())
     res, how = M.fetch("IN0000009", "84165", M.date(2025, 1, 1))
     assert res is None and how.startswith("not in ECHO") and not how.startswith("failed")
+
+
+def test_the_dmr_cache_is_compact_and_a_run_keeps_to_its_request_budget(tmp_path, monkeypatch):
+    from ingest import in_echo_cso_monthly as M
+    res = _results()[("IN0000004", "84165")]
+    res["PermFeatures"][0]["Parameters"].append({"ParameterCode": "00530", "ParameterDesc": "Solids",
+                                                 "MonitoringLocationDesc": "Effluent Gross",
+                                                 "DischargeMonitoringReports": [_dmr("31-AUG-25", "9")]})
+    c = M.compact(res)
+    assert [p["ParameterCode"] for f in c["PermFeatures"] for p in f["Parameters"]] == ["84165", "84165", "84165"]
+    assert set(c["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]) <= \
+        {"MonitoringPeriodEndDate", *M.RAW_FIELDS}
+    today = M.date(2026, 11, 14)
+    cache = {"IN0000004-84165": {"fetched": "2026-11-10", "since": "2025-01-01", "results": c},
+             "IN0000004-50037": {"fetched": "2026-10-01", "since": "2025-01-01", "results": c}}
+    assert M.cached(cache, "IN0000004", "84165", M.date(2025, 1, 1), today)[1].startswith("cache")
+    assert M.cached(cache, "IN0000004", "50037", M.date(2025, 1, 1), today) == (None, None)
+    assert M.cached(cache, "IN0000004", "50037", M.date(2025, 1, 1), today, stale_ok=True)[1].startswith("stale")
+    # a run with a budget of one request asks one and reads the rest from older answers or the previous run
+    monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / "events" / f"{sid}.json", **kw))
+    common.write_json(M.CACHE_FILE, {"answers": cache})
+    monkeypatch.setattr(M, "registry_outfalls", lambda rows=None: _registry())
+    monkeypatch.setattr(M, "MAX_LIVE_REQUESTS", 1)
+    monkeypatch.setattr(M, "SLEEP_S", 0)
+    asked = []
+    monkeypatch.setattr(M, "fetch", lambda p, code, since: (asked.append(code) or _results()[(p, code)], "live"))
+    assert M.main(["--since", "2025-01-01"]) == 0
+    doc = json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
+    assert asked == ["74063"]                              # never fetched: asked first; the budget then ends
+    assert doc["meta"]["fetch"]["IN0000004-50037"].startswith("stale cache")
+    assert doc["meta"]["not_asked_this_run"] == ["IN0000004-50037"]
+    assert json.loads(M.CACHE_FILE.read_text())["answers"]["IN0000004-74063"]["fetched"]
+
+
+# ------------------------------------------------------------------------------------------------ registry and text
+
+def _rows(state="IN"):
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == state]
+
+
+def test_every_indiana_permit_is_in_one_operator_row_and_no_person_is_named():
+    from ingest import dischargers_schema as DS
+    rows = _rows()
+    permits = [p for r in rows for p in r["npdes_permits"]]
+    assert len(permits) == len(set(permits)) >= 750
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "IN"}
+    idem = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-in.json").read_text())["outfalls"]}
+    assert plants | idem <= set(permits)
+    assert DS.check_legal_forms(rows) == []
+    by = {r["id"]: r for r in rows}
+    assert by["in-city-of-la-porte"]["legal_form"] == "city" and by["in-town-of-waterloo"]["legal_form"] == "town"
+    assert by["in-citizens-energy-group-cwa-authority"]["kind"] == "cso"
+    assert set(by["in-city-of-south-bend"]["npdes_permits"]) == {"IN0024520", "INM024520"}
+    assert "Gifford" not in json.dumps(rows) and "Blucher" not in json.dumps(rows)   # plants named after people
+    holders = [r for r in rows if r["legal_form"] == "facility (permittee not named)"]
+    assert all(r["name"].startswith("Holder of permit") or "(permit IN" in r["name"] for r in holders)
+
+
+def test_the_register_names_every_operator_and_validates():
+    from ingest import notification_pages as NP
+    doc = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())
+    chans = doc["channels"]
+    ops = {r["operator_id"] for r in chans if r.get("operator_id")}
+    rows = _rows()
+    assert {r["id"] for r in rows} <= ops
+    assert {r["id"] for r in rows if r["kind"] == "cso"} <= {r["operator_id"] for r in chans
+                                                              if r["id"].endswith("-cso-notice")}
+    by = {r["id"]: r for r in chans}
+    assert by["in-fort-wayne-cso-notifications"]["barrier"] == "bot_wall"
+    assert by["in-idem-beachalert"]["barrier"] == "login_required"
+    assert by["in-mishawaka-cso-alerts-x"]["barrier"] == "login_required"
+    assert by["in-epa-echo-cso-dmr"]["feed_source_id"] == "in-echo-dmr-cso"
+    assert not [r for r in chans if r.get("barrier_review")]
+    full = NP.load_register(ROOT / "data" / "notice-channels")
+    assert NP.validate_register(full, json.loads((ROOT / "data" / "dischargers.json").read_text()), ROOT) == []
+
+
+def test_the_rules_row_and_the_missing_waters_list():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    row = rules["red"]["by_state"]["IN"]
+    assert row["hours"] is None and "327 IAC 5-2.1" in row["source"] and "49 CFR 71.5(b)" in row["source"]
+    assert "safe" not in row["basis"].lower() and "clean" not in row["basis"].lower()
+    miss = json.loads((ROOT / "research" / "in" / "receiving-waters-missing.json").read_text())
+    names = {r["name"] for r in miss["rows"]} | {r.get("name") for r in miss.get("resolved") or []}
+    assert miss["state"] == "IN" and {"Pouges Run", "Little Calumet River"} <= names
+    assert not [r for r in miss["rows"] if r["name"].lower().startswith("unnamed")]
+    assert all(len(p) == 2 and p == [round(p[0], 3), round(p[1], 3)] for r in miss["rows"] for p in r["points"])
