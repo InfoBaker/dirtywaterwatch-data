@@ -1,0 +1,383 @@
+{
+ "format": "wi-mmsd-storm-updates/1",
+ "list_url": "https://www.mmsd.com/about-us/news",
+ "pages": 71,
+ "items": [
+  {
+   "url": "https://www.mmsd.com/about-us/news/audit-operations-and-maintenance-oversight",
+   "slug": "audit-operations-and-maintenance-oversight",
+   "title": "Audit: Operations and Maintenance Oversight",
+   "list_date": "Nov 9, 2026, 11:00 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/bay-view-april-storm-meeting-update",
+   "slug": "bay-view-april-storm-meeting-update",
+   "title": "Bay View April Storm Meeting Update",
+   "list_date": "Oct 9, 2026, 4:00 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-september-3rd-2026",
+   "slug": "storm-update-september-3rd-2026",
+   "title": "MMSD Storm Update September 3rd, 2026",
+   "list_date": "Sep 8, 2026, 11:00 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-august-1st-2026",
+   "slug": "storm-update-august-1st-2026",
+   "title": "MMSD Storm Update August 1st, 2026",
+   "list_date": "Aug 6, 2026, 9:00 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/mmsd-storm-update-april-2026",
+   "slug": "mmsd-storm-update-april-2026",
+   "title": "MMSD Storm Update: April 2026",
+   "list_date": "Apr 24, 2026, 4:00 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/mmsd-proposed-budget-2026",
+   "slug": "mmsd-proposed-budget-2026",
+   "title": "Reducing Flooding, Sewer Overflows & Basement Backups Priorities in $193 Million Proposed 2026 Budgets",
+   "list_date": "Sep 8, 2025, 8:00 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/mmsd-storm-update-aug-9-11-2025",
+   "slug": "mmsd-storm-update-aug-9-11-2025",
+   "title": "MMSD Storm Update Aug 9-10, 2025",
+   "list_date": "Aug 15, 2025, 3:15 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/mmsd-storm-update-april-1-thru-4-2024",
+   "slug": "mmsd-storm-update-april-1-thru-4-2024",
+   "title": "MMSD Storm Update - April 1 thru 4, 2024",
+   "list_date": "Apr 8, 2024, 1:30 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/overflow-alert-february-27-2023",
+   "slug": "overflow-alert-february-27-2023",
+   "title": "MMSD Winter Storm Update - Feb 27 to Mar 1, 2023",
+   "list_date": "Mar 3, 2023, 10:00 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-september-11-12-2022",
+   "slug": "storm-update-september-11-12-2022",
+   "title": "Storm Update – September 11 & 12, 2022",
+   "list_date": "Sep 16, 2022, 1:45 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-july-10-2020-1",
+   "slug": "storm-update-july-10-2020-1",
+   "title": "STORM UPDATE - AUGUST 2, 2020",
+   "list_date": "Aug 3, 2020, 8:30 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-for-september-13-2019",
+   "slug": "storm-update-for-september-13-2019",
+   "title": "STORM UPDATE FOR SEPTEMBER 13, 2019",
+   "list_date": "Sep 18, 2019, 11:18 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/letter-to-dnr-about-recent-overflows",
+   "slug": "letter-to-dnr-about-recent-overflows",
+   "title": "LETTER TO DNR ABOUT RECENT OVERFLOWS",
+   "list_date": "Mar 19, 2019, 1:18 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-august-26-to-29",
+   "slug": "storm-update-august-26-to-29",
+   "title": "STORM UPDATE -AUGUST 26 TO 29",
+   "list_date": "Aug 31, 2018, 1:11 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/storm-update-june-18-19-2018",
+   "slug": "storm-update-june-18-19-2018",
+   "title": "STORM UPDATE – JUNE 18 & 19, 2018",
+   "list_date": "Jun 22, 2018, 2:26 PM"
+  }
+ ],
+ "posts": {
+  "storm-update-september-3rd-2026": {
+   "stamp": "09/08/26 11:00:am",
+   "lines": [
+    "MMSD Storm Update September 3rd, 2026",
+    "MMSD is reporting the following information ( see the 5-day letter ) to the Wisconsin Department of Natural Resources regarding a combined sewer overflow that occurred on September 3rd, 2026.",
+    "Intense rainfall triggered an isolated combined sewer overflow into Lincoln Creek at 32nd St. and Hampton in Milwaukee around 10:00 a.m. on 9-3-26. One rain gauge in the area measured two inches of rain in an hour.",
+    "Overflow Volume:",
+    "9/3/26 - Overflow volume of 331,500 gallons",
+    "One inch of rain in MMSD's service area equals 7.1 billion gallons of water.",
+    "To view a map of the impacted waters from the sewer overflow in the Greater Milwaukee area.",
+    "Additional Resources"
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/75b29248-5ef1-4b51-b15b-66365a10b6df/1627",
+     "label": "see"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/75b29248-5ef1-4b51-b15b-66365a10b6df/1627",
+     "label": "the 5-day letter"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/75b29248-5ef1-4b51-b15b-66365a10b6df/1627",
+     "label": "9/3/26 - Overflow volume of 331,500 gallons"
+    }
+   ]
+  },
+  "storm-update-august-1st-2026": {
+   "stamp": "08/06/26 09:00:am",
+   "lines": [
+    "MMSD Storm Update August 1st, 2026",
+    "MMSD is reporting the following information ( see 5-day letter ) to the Wisconsin Department of Natural Resources regarding a combined sewer overflow that took place on August 1, 2026.",
+    "Overflow Volume:",
+    "8/1/26 - Overflow volume of 96 million gallons.",
+    "One inch of rain in MMSD's service area equals 7.1 billion gallons of water.",
+    "To view a map of the impacted waters from the sewer overflow in the Greater Milwaukee area.",
+    "Rainfall exceeded three inches at numerous gauges from the afternoon of July 31 through August 1 st .",
+    "View Water Reclamation Facilities",
+    "Current Capacity",
+    "Additional Resources",
+    "Heavy Rains = Dangerous Rivers",
+    "Please be safe around our concrete-lined rivers. STAY OUT of the concrete-lined channel since the water is fast-moving and the concrete is slippery. Call 911 if someone is in danger. We need your help in keeping our community safe."
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/04ff9a5e-64d1-45da-9ea7-b7636d023718/1619",
+     "label": "see 5-day letter"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/04ff9a5e-64d1-45da-9ea7-b7636d023718/1619",
+     "label": "8/1/26 - Overflow volume of 96 million gallons."
+    }
+   ]
+  },
+  "mmsd-storm-update-april-2026": {
+   "stamp": "04/24/26 04:00:pm",
+   "lines": [
+    "MMSD Storm Update: April 2026",
+    "The Milwaukee Metropolitan Sewerage District (MMSD) reported the following information to the Wisconsin Department of Natural Resources (WDNR) regarding overflows that occurred following record-breaking rainfall from April 14-18, 2026.",
+    "Post-Storm Report to WDNR April 14 – 19, 2026",
+    "Overflow Volumes (in millions of gallons)",
+    "Greater Milwaukee Rainfall April 12 - April 18, 2026",
+    "Milwaukee Rain & Facility Information",
+    "How MMSD is Planning For Future Extreme Storms",
+    "The recent storms are part of a larger pattern of increasingly intense rainfall events in our region. MMSD is using data from these storms to analyze system performance, review infrastructure design standards, and adjust flood management strategies. Through the Executive Director’s Vision Forward 2035 . MMSD is accelerating our flood management projects to better protect neighborhoods, rivers, and Lake Michigan from increasingly severe storms.",
+    "Key Projects Being Accelerated",
+    "West Basin Stormwater Management : Designed to hold 31 million gallons and reduce flooding up to a 100-year storm, this project will now start construction in 2027, two years ahead of the 2029 schedule in the most recent budget.",
+    "Jackson Park & Kinnickinnic River Project : Will increase the park’s storage from 30 million gallons to 80 million gallons, helping keep stormwater away from nearby homes. Construction is now scheduled to begin in 2027, four years earlier than planned in the most recent budget.",
+    "Wilson Park Flood Storage: Following the August floods, MMSD met with County Parks leadership, and both agreed this needed to be a priority. In December 2025, an agreement was reached with the respective governing bodies to move the project forward. Following discussions with County Parks, construction is now prioritized to start in 2031, four years earlier than the original 2035 schedule. The project will hold approximately 70 million gallons and provide critical protection for nearby neighborhoods.",
+    "Wilson Park Creek Reach 3 : Significant progress has already been made, with about one-third of the work remaining to complete the basin, connect the river, and rebuild the 5th & 6th Street bridges. Final construction is planned for 2031–2032.",
+    "These four project areas will add 220 million gallons of flood storage along our rivers. MMSD’s goal is to have zero homes or businesses in the 1%-probability floodplain , which carries a higher risk of flooding damage. Since 1995, MMSD flood management projects have resulted in 2,548 structures no longer remaining in the floodplain . As of 2026, 1,405 structures remain in flood-prone areas . Over the past 30 years, MMSD has invested $631 million in flood management projects. To complete the remaining work in the region, an estimated $907 million is needed."
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/0d171c31-1362-4f10-b740-e7af6ada80ff/1580",
+     "label": "reported the following information"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/0d171c31-1362-4f10-b740-e7af6ada80ff/1580",
+     "label": "Post-Storm Report to WDNR April 14 – 19, 2026"
+    }
+   ]
+  },
+  "mmsd-storm-update-aug-9-11-2025": {
+   "stamp": "08/15/25 03:15:pm",
+   "lines": [
+    "MMSD Storm Update Aug 9-10, 2025",
+    "The Milwaukee Metropolitan Sewerage District (MMSD) is reporting the following information (see 5-day letter ) to the Wisconsin Department of Natural Resources regarding sewer overflows that occurred due to historic rainfall and flooding on August 9 through August 10, 2025.",
+    "Since 1995, MMSD has designed and constructed $585 million in flood management projects, including Lincoln Creek , County Grounds, Hart Park , Valley Park , and Pulaski Park , to name a few. All those projects provided levels of protection during the devastating storms that just occurred. Without those projects, damage in the region would have been much worse. MMSD has an additional $712 million in future flood management projects to get done, with significant work needed in the Kinnickinnic River Watershed, where there are 660 structures at high risk for flooding.",
+    "5-Day Letter to WNDR",
+    "Greater Milwaukee Rain Gauge Totals August 9 to 10, 2025",
+    "View Water Reclamation Facilities",
+    "Current Capacity",
+    "Record rainfall in the Greater Milwaukee area on August 9 and 10, 2025, resulted in life-threatening flash flooding, property damage, and overflows from local and regional sewer systems . MMSD received over 1,100 reports of water backing up into basements.",
+    "According to the MMSD area-wide rain gauge s (see map below), 14 areas received seven inches or more of rain in 24 hours. To illustrate the scale of this event, one inch of rain across our service area is equivalent to 7.1 billion gallons of water.",
+    "Overflow Volume:",
+    "8/9/25 - Combined Sewer Overflow and Sanitary Sewer Overflow: 5.14 billion gallons",
+    "One inch of rain in MMSD's service area equals 7.1 billion gallons of water.",
+    "To view a map of the impacted waters from the sewer overflow in the Greater Milwaukee area.",
+    "Do You Have Standing Water in Your Basement?",
+    "If you have standing water in your basement, DO NOT go into the basement! Electricity + Water = Danger .",
+    "Wait for the water to drain out of the basement before entering. Or, call a qualified electrician to disconnect the power before you enter a flooded basement.",
+    "Call your municipal public works department to report local flooding, and call your homeowners/renters insurance agent.",
+    "Please fill out the \"Report a Basement\" form to help track flooding in our area, which is shared with the 29 municipalities MMSD serves.",
+    "Report a Wet Basement",
+    "Flash Flood Safety",
+    "Stay out of floodwater — it may have sewage, chemicals, or trash. Never walk or drive through floodwater. Wear boots and gloves for cleanup, and wash your hands after.",
+    "Food Safety After Flooding . Throw away any food, drinks, or medicine that has come into contact with floodwater. Toss food in packages that are wet or damaged. Wash and sanitize dishes, utensils, and counters that came into contact with floodwater.",
+    "What to do if you have property damage",
+    "Report all property damage from flooding, lightning, or extreme wind from the storm to 2-1-1.",
+    "You can call 2-1-1 to report damage over the phone.",
+    "You can fill out a form online at 211wisconsin.communityos.org/damage-report to directly submit a damage report.",
+    "Looking for flood resources and guidance?",
+    "Please visit Milwaukee County website for up-to-date information.",
+    "Additional Flooding Resources:",
+    "IMPORTANT! Water in the Basement can be dangerous"
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/9c8685ea-28f3-4e55-81bf-c121e397b0ff/1525",
+     "label": "(see 5-day letter"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/9c8685ea-28f3-4e55-81bf-c121e397b0ff/1525",
+     "label": "5-Day Letter to WNDR"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/9c8685ea-28f3-4e55-81bf-c121e397b0ff/1525",
+     "label": "8/9/25 - Combined Sewer Overflow and Sanitary Sewer Overflow: 5.14 billion gallons"
+    }
+   ]
+  },
+  "mmsd-storm-update-april-1-thru-4-2024": {
+   "stamp": "04/08/24 01:30:pm",
+   "lines": [
+    "MMSD Storm Update - April 1 thru 4, 2024",
+    "The Milwaukee Metropolitan Sewerage District (MMSD) is reporting the following information to the Wisconsin Department of Natural Resources regarding a combined sewer overflow that occurred due to heavy rainfall from April 1 through April 4, 2024.",
+    "Combined Sewer Overflow: 357 Million Gallons",
+    "To reduce the risk of wastewater backing up into homes and businesses, a combined sewer overflow started at 5:55 pm on April 2, 2024, and ended at 8:10 pm on April 4, 2024. The combined sewer overflow event report was provided to the Wisconsin Department of Natural Resources.",
+    "MMSD Rain gauges showed that at least 15 areas in the service area received more than two inches of rain during this time period.",
+    "One inch of rain in MMSD's service area equals 7.1 billion gallons of water.",
+    "To view a map of the impacted waters from the sewer overflow in the Greater Milwaukee area.",
+    "Steps Take to Prevent Future Discharge",
+    "MMSD's 10-year investment calls for $2.1 billion in improvements to regional water reclamation facilities and sewers to reduce the risk of overflows and basement backups. Part of that spending includes the Private Property Inflow and Infiltration Reduction Program throughout our service area. The plan also calls for additional wetland protections through MMSD's Greenseams program , which is currently at more than 5,400 acres of land that can capture and store more than 3 billion gallons of rain and melting snow.",
+    "MMSD's Overflow Volume Since 1992:"
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/8a9200e9-24e6-44a5-89ac-3e82ab6d1ae6/1406",
+     "label": "combined sewer overflow event report"
+    }
+   ]
+  },
+  "overflow-alert-february-27-2023": {
+   "stamp": "03/03/23 10:00:am",
+   "lines": [
+    "MMSD Winter Storm Update - February 27 to March 1st, 2023",
+    "The Milwaukee Metropolitan Sewerage District (MMSD) reported the following information to the Wisconsin Department of Natural Resources regarding sewer overflows that resulted from the record-setting rain event from heavy rain and snowmelt on February 27, 2023, to March 1st, 2023.",
+    "Combined Sewer Overflow: 230 Million Gallons",
+    "To reduce the risk of wastewater backing up into homes and businesses, a combined sewer overflow started at 11:30 am on February 27, 2023, and ended on March 1st, 2023, at 8:00 am.",
+    "MMSD Rain gauges showed at least six areas in the service area that received more than two inches of rain on top of melting snow on February 27, 2023.",
+    "One inch of rain in MMSD's service area equals 7.1 billion gallons of water.",
+    "To view a map of the impacted waters from the sewer overflow in the Greater Milwaukee area.",
+    "As a region, we've invested over $4 billion to reduce sewer overflows. MMSD's current financial forecast through 2032 calls for investing $3.4 billion in clean water infrastructure, flood management , green infrastructure , and debt financing to help protect public health and Lake Michigan.",
+    "MMSD Water Reclamation Facilities and Deep Tunnels on February 27, 2023",
+    "MMSD's Overflow Volume Since 1992:"
+   ],
+   "letters": []
+  },
+  "storm-update-september-11-12-2022": {
+   "stamp": "09/16/22 01:45:pm",
+   "lines": [
+    "Storm Update – September 11 & 12, 2022",
+    "(Milwaukee, WI) – Record rainfall drenched the Milwaukee area on September 11 and 12, 2022, resulting in localized flooding, property damage, and overflows from local and regional sewer systems to reduce the risk of basement backups.",
+    "The National Weather Service (NWS) reported 4.78 inches of rain in Milwaukee on September 11, 2022. An additional one to two inches fell on September 12, 2022, raising two-day totals to 5-inches to 7-inches of rain (See map below).",
+    "One inch of rain on MMSD’s service area equals 7.1 billion gallons of water",
+    "To improve regional wastewater infrastructure and reduce the risk of flooding, the Milwaukee Metropolitan Sewerage District (MMSD) expects to invest more than $2 billion in projects over the next decade.",
+    "That includes funding Greenseams ® property acquisitions to permanently protect wetlands so they can safely store rainwater and snowmelt, helping reduce the risk of damage from flooding. The program is now safeguarding more than 5,000 acres of land (nearly eight-square miles) in the Milwaukee, Menomonee, Root, and Oak Creek watersheds that can capture and naturally store 2.8 billion gallons of water. The Greenseams® program has planted more than 117,000 native trees and restored about 1,000 acres of land to woodland, prairie, and wetland cover.",
+    "MMSD is reporting the following information to the Wisconsin Department of Natural Resources regarding sewer overflows that resulted from heavy rain on Sept. 11 and 12, 2022.",
+    "SEWER OVERFLOWS:",
+    "Combined Sewer Overflow: 751 million gallons",
+    "Separate Sewer Overflows (SSO): 4.93 million gallons",
+    "S. Howell Ave, South of Grange – Wilson Park Creek: 125,000 gallons; duration: 3.25 hours",
+    "S. 35 th & Manitoba – Kinnickinnic River: 1.6 million gallons; duration: 2.68 hours",
+    "S. Kinnikinic & St Francis – Lake Michigan: 295,000 gallons; duration: 2.12 hours",
+    "N. River Rd. & W. Green Tree Rd. – Milwaukee River: 2.9 million gallons; duration: 2.83 hours",
+    "Separate sewer overflows also occurred in local sewer systems in Brookfield, Cudahy, Elm Grove, and Menomonee Falls.",
+    "MMSD is a regional government agency that provides water reclamation and flood management services for about 1.1 million people in 28 communities in the Greater Milwaukee Area. It serves 411 square miles that cover all, or segments of, six watersheds. MMSD is a regional government agency established by state law.",
+    "#######"
+   ],
+   "letters": []
+  },
+  "storm-update-july-10-2020-1": {
+   "stamp": "08/03/20 08:30:pm",
+   "lines": [
+    "STORM UPDATE - AUGUST 2, 2020",
+    "MMSD is reporting information to the Wisconsin Department of Natural Resources today regarding a combined sewer overflow that occurred on August 2, 2020.",
+    "DNR Letter for Separate Sewer Overflow"
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/2978/1065",
+     "label": "Separate Sewer Overflow"
+    }
+   ]
+  },
+  "storm-update-for-september-13-2019": {
+   "stamp": "09/18/19 11:18:am",
+   "lines": [
+    "STORM UPDATE FOR SEPTEMBER 13, 2019",
+    "The following information is being reported to the Wisconsin Department of Natural Resources, regarding sewer overflows the took place last week.",
+    "To reduce the risk of basement backups, MMSD initiated a combined sewer overflow on 9-13-19 after intense storms dropped more rain on already saturated ground.",
+    "Numerous rain gauges measured 1.5 to 2 inches of rain between midnight and 1:30 a.m. with more rain falling after that time period.",
+    "At one point, the Deep Tunnel filled at a rate of 7.5 billion gallons per day, which, if sustained, would have filled the tunnel to its maximum capacity of 432 million gallons in 83 minutes.",
+    "The volume of the combined sewer overflow from September 13 and 14, 2019 is estimated at 282 million gallons. An isolated separate sewer overflow also occurred during the storm, estimated at a volume of 41,000 gallons. Further details can be found in the letters below.",
+    "With two combined sewer overflows in 2019, MMSD's has captured and cleaned 99% of all the water and wastewater that's entered the regional sewer system.",
+    "MMSD’s six-year financial plan calls for investing $1.4 billion into the regional sewer system and water reclamation facilities (including debt service to pay for previous projects).",
+    "5-Day CSO Letter",
+    "5-Day SSO Letter",
+    "Impacted Waters",
+    "How Can You Help Manage Water Where if Falls and Reduce Sewer Overflows?"
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/2246/914",
+     "label": "5-Day CSO Letter"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/2247/914",
+     "label": "5-Day SSO Letter"
+    }
+   ]
+  },
+  "letter-to-dnr-about-recent-overflows": {
+   "stamp": "03/19/19 01:18:pm",
+   "lines": [
+    "LETTER TO DNR ABOUT RECENT OVERFLOWS",
+    "MMSD is sending the letter below to the Wisconsin Department of Natural Resources regarding sewer overflows that took place starting on 3/14/2019.",
+    "As of midnight 3/18/19, the District has captured and cleaned 98.25% of all the wastewater and stormwater that's entered the regional sewer system in 2019.",
+    "SEE HOW WE'RE DOING",
+    "LETTER TO DNR",
+    "MMSD's six year spending forecast calls for investing $1.4 billion on regional water reclamation facilities and sewers to reduce the risk of sewer overflows and basement backups."
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/1894/847",
+     "label": "LETTER TO DNR"
+    }
+   ]
+  },
+  "storm-update-june-18-19-2018": {
+   "stamp": "06/22/18 02:26:pm",
+   "lines": [
+    "STORM UPDATE – JUNE 18 & 19, 2018",
+    "(Milwaukee, WI) – The Milwaukee Metropolitan Sewerage District (MMSD) is reporting the following information to the Wisconsin Department of Natural Resources regarding sewer overflows that resulted from heavy rain June 18 and 19, 2018.",
+    "In just under two hours, intense rainfall filled the Deep Tunnel 74% full (320 million gallons) on June 18. Rain and wastewater poured into the tunnel at a rate of 6.4 billion gallons per day at around 4:00 p.m. that day. The main Deep Tunnel holds 432 million gallons. To reduce the risk of basement backups, MMSD initiated a combined sewer overflow. MMSD rain gauges measured 4.04 inches at 35th St. and Fond du Lac Ave. in Milwaukee during the two-day storm. One inch of rain on MMSD’s service area equals 7.1 billion gallons of water.",
+    "The force of water rushing into sewers can cause collapsing air pockets that can launch manhole covers into the air. There were numerous reports of manhole covers popping off on June 18, leaving open holes in the street that lead directly into the sewer system. Always use extreme caution on flooded streets.",
+    "To increase treatment capacity and reduce sewer overflows, MMSD went into storm treatment mode at the Jones Island Water Reclamation Facility on June 18 and 19. The procedure is estimated to have reduced combined sewer overflows by 112 million gallons. Storm treatment involves pumping water directly out of the Deep Tunnel into disinfection chambers at Jones Island. While conducting this style of treatment, MMSD has never violated its discharge permit for state and federal treatment standards.",
+    "A separate sewer overflow occurred on June 18 at 35th St. and Roosevelt in Milwaukee. The volume is estimated at 3.7 million gallons. The combined sewer overflow volume is estimated at 360 million gallons. This is the first tunnel related overflow since September of 2016.",
+    "MMSD is a regional government agency that provides water reclamation and flood management services for about 1.1 million people in 28 communities in the Greater Milwaukee Area. It serves 411 square miles that cover all, or segments of, six watersheds. The District is a regional government agency established by state law."
+   ],
+   "letters": []
+  },
+  "storm-update-august-26-to-29": {
+   "stamp": "08/31/18 01:11:pm",
+   "lines": [
+    "STORM UPDATE -AUGUST 26 TO 29",
+    "MMSD is sharing two reports with the Wisconsin Department of Natural Resources regarding sewer overflows from heavy rain.",
+    "Combined sewer overflows from the storm are estimated at 295.7 million gallons.",
+    "An isolated separate sewer overflow occured during the storm with an estimated volume of 0.95 million gallons.",
+    "Combined Sewer Overflow Report",
+    "Separate Sewer Overflow Report"
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/1647/800",
+     "label": "Combined Sewer Overflow Report"
+    },
+    {
+     "url": "https://www.mmsd.com/download_file/view/1648/800",
+     "label": "Separate Sewer Overflow Report"
+    }
+   ]
+  }
+ }
+}
