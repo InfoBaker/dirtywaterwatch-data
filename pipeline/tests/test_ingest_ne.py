@@ -573,3 +573,28 @@ def test_astra_p2_3_a_blank_flag_is_not_a_lift_and_a_later_yes_reopens_after_a_n
     reopened = _beachwatch(rows, "2026-06-15T16:00:00Z", still)[0][0]
     assert reopened["started_at"] == "2026-06-15T16:00:00Z" and reopened["ended_at"] is None
     assert reopened["raw"]["_advisory_observed"]["earlier_periods"][0]["end"] == "2026-06-13T16:00:00Z"
+
+def test_astra_p2_4_promoting_an_e_coli_sample_to_a_health_alert_keeps_its_caution():
+    from datetime import UTC, datetime, timedelta
+    from build import status as S
+    ec = copy.deepcopy(_rock_rows()[1:2])
+    ec[0].update(HealthAlert="NO", EColiRisk="Elevated health risk for E. coli", EColi="400")
+    first = _beachwatch(ec, "2026-06-09T16:00:00Z")[0]
+    assert [r["event_type"] for r in first] == ["beach_advisory"]
+    promoted = copy.deepcopy(ec)
+    promoted[0]["HealthAlert"] = "YES"
+    second = _beachwatch(promoted, "2026-06-10T16:00:00Z", first)[0]
+    assert len(second) == 2
+    hab = next(r for r in second if r["event_type"] == "hab_advisory")
+    caution = next(r for r in second if r["event_type"] == "beach_advisory")
+    assert hab["event_id"] == first[0]["event_id"] and hab["started_at"] == "2026-06-10T16:00:00Z"
+    assert caution["event_id"] == hab["event_id"] + ":ecoli" and caution["started_at"] == "2026-06-08"
+    ivs = S.event_intervals(caution, "NE", datetime(2026, 6, 10, 17, tzinfo=UTC), None, S.load_rules())
+    assert len(ivs) == 1 and ivs[0]["color"] == "yellow" and ivs[0]["category"] == "beach"
+    assert ivs[0]["end"] - ivs[0]["start"] == timedelta(hours=72)
+    for at in ("2026-06-10T17:00:00Z", "2026-06-11T16:00:00Z"):
+        again = _beachwatch(promoted, at, second)[0]
+        assert {r["event_id"] for r in again} == {r["event_id"] for r in second} and len(again) == 2
+        assert not any(r["raw"].get("_missing_from_source_since") for r in again)
+        assert next(r for r in again if r["event_type"] == "beach_advisory")["started_at"] == "2026-06-08"
+        second = again

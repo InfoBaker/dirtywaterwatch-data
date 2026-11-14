@@ -173,6 +173,13 @@ def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
     ecoli_corrections: dict[str, dict] = {}
     n = {"alerts_open": 0, "alerts_lifted": 0, "alerts_continued": 0, "samples_dropped": 0,
          "legacy_clocks_removed": 0, "legacy_observations_kept": 0}
+    # A derived E. coli caution (event id <sample>:ecoli) has no source row of its own: carry_history marks it missing
+    # whenever it is not rebuilt. While its sample is listed it is not missing (review 2026-11-14, Astra data P2-4).
+    mkey = (ctx.block.get("history") or {}).get("missing_key") or "_missing_from_source_since"
+    listed = {r["event_id"] for r in records if not r["raw"].get(mkey) and not r["raw"].get("_ecoli_record_for")}
+    for r in records:
+        if r["raw"].get("_ecoli_record_for") in listed and r["raw"].get(mkey):
+            r["raw"] = {k: v for k, v in r["raw"].items() if k not in (mkey, "_unlisted_since")}
     for r in records:
         raw = r["raw"]
         if raw.get("_ecoli_record_for"):
@@ -210,6 +217,14 @@ def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
                                 "The health-alert flag previously listed for this sample is now blank in the source; "
                                 "a blank flag is not read as a lift.")
         praw = p.get("raw") or {}
+        if r["event_type"] == "hab_advisory" and p.get("event_type") == "beach_advisory" and praw.get("_agency_label_only"):
+            # The reverse correction: an E. coli caution already established for this sample is kept as the same
+            # derived record when its row gains the health alert (review 2026-11-14, Astra data P2-4).
+            caution = deepcopy(p)
+            caution["event_id"] += ":ecoli"
+            caution["source_record_id"] += ":ecoli"
+            caution["raw"]["_ecoli_record_for"] = r["event_id"]
+            ecoli_corrections[caution["event_id"]] = caution
         observed = deepcopy(praw.get("_advisory_observed") or {}) if praw.get("_advisory_clock_version") == CLOCK_VERSION else {}
         if praw and praw.get("_advisory_clock_version") != CLOCK_VERSION:
             n["legacy_clocks_removed"] += 1
