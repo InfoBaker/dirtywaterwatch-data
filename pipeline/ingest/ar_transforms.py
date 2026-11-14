@@ -93,7 +93,6 @@ NO_NAME = re.compile(r"^(unknown|unkown|unnamed|un-named|no name)\b", re.I)
 TRIB_BEFORE = re.compile(r"\btrib(?:utary|\.)?\s+(?:of|to)\s+(?:the\s+)?$", re.I)
 STREETY = re.compile(r"\b(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|circle|cir|court|ct|parkway|pkwy|"
                      r"loop|cove|cv|terrace|way|place|pl|trail|trl)\.?\s*$", re.I)
-ROW_IN_RECORD = {"date_started", "date_stopped", "date_reported", "volume_gal"}
 
 
 def water_names(text: str) -> tuple[list[str], list[str]]:
@@ -254,7 +253,6 @@ def ar_deq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     rec["waterbody_text"] = "; ".join(names) or None
     if names:
         notes["_water_basis"] = "the water the report's location text names (DEQ's search has no receiving-water field)"
-    notes["row"] = {k: v for k, v in row.items() if k not in ROW_IN_RECORD}
 
 
 @F.hook

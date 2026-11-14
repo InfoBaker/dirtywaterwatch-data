@@ -207,7 +207,7 @@ def test_the_module_replays_saved_rows_and_carries_records_before_the_window(tmp
                                  "meta": {"ar_search": {"window_start": "2026-11-05", "window_end": "2026-11-14"}}}))
     assert M.main(["--file", str(saved), "--out", str(out)]) == 0
     second = json.loads(out.read_text())
-    assert second["meta"]["rows_carried"] == 4
+    assert second["meta"]["rows_carried"] == 3        # 2, 3 and 4 November (the paper mill is not kept)
     assert not any(r["raw"].get("_missing_from_source_since") for r in second["records"])
     assert {r["event_id"] for r in second["records"]} == {r["event_id"] for r in first["records"]}
 
