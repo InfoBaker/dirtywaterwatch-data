@@ -72,9 +72,10 @@ def ne_beachwatch_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if ecoli:
         notes["_ecoli_risk"] = ecoli
     if alert:
+        # The sample date stays in started_at until ne_beachwatch_sequence (after_history) clears it: the block's
+        # dedupe orders repeated record keys by started_at, and a start cleared here would hand a saved event id to
+        # another source row (review 2026-11-14, Astra data P1-1).
         rec["sampled_at"] = rec.get("started_at")
-        rec["started_at"], rec["time_precision"] = None, None
-        rec["source_updated_at"] = None
         rec["event_type"], rec["status"] = "hab_advisory", "unknown"
         rec["advice_text"] = (F.clean(row.get("HealthDescription")) or "This beach is under health alert") + \
             (f" (microcystin {micro} micrograms per litre in the sample dated {rec['sampled_at']})" if micro else "")
