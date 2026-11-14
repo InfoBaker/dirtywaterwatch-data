@@ -120,6 +120,9 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Colorado: co_cdphe_toxic_algae (CDPHE's toxic algae status sheet: algal-bloom advisories by water)
+#                  and co_official_notices (a reviewed set of official notices: CPW's John Martin advisory after the
+#                  Pueblo spill, NPS's Blue Mesa release, Barr Lake's red alert; the state publishes no spill list)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

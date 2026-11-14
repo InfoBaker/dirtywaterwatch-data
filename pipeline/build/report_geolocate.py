@@ -67,6 +67,7 @@ STATE_NAMES = {"CT": "Connecticut", "MA": "Massachusetts", "RI": "Rhode Island",
                "OR": "Oregon",
                "KY": "Kentucky", "OH": "Ohio"}
 STATE_NAMES["TN"] = "Tennessee"
+STATE_NAMES["CO"] = "Colorado"
 PRECISION = {"address": 50, "intersection": 30, "pump_station": 100, "plant": 250, "frs_plant": 250}
 NEAR_OPERATOR_KM = 30
 TOWN_MISMATCH_NEAR_KM = 10
