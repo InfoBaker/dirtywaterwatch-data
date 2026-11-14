@@ -1,0 +1,37 @@
+id: "nv-state-parks-hab"
+name: "Nevada State Parks HAB advisory page"
+url: "https://parks.nv.gov/about/hab-advisory"
+homepage: "https://parks.nv.gov/about/hab-advisory"
+kind: "html"
+level: "state"
+# Read by pipeline/ingest/nv_state_parks_hab.py (2026-11-14): one hab_advisory record per water the page lists, the
+#   parks' level (Watch, Warning, Danger) and paragraph quoted, started at the first read that listed it (poll), the
+#   page's update date as source_updated_at, lifted at the first read that finds the water gone (an upper bound); a
+#   page missing any of the three sections keeps the previous records. Placed by the water's name and county, with a
+#   USGS GNIS point where GNIS holds the lake in that county (Marlette Lake, Wild Horse Reservoir).
+# Notes (research/nv, status used, verified fetched, checked 2026-11-14): Read by the
+#   nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level
+#   and words, the first read as the start. The live host refused the collector's connections on
+#   2026-11-14 (no answer on ports 443 and 80); the parser was built and tested on the Internet
+#   Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye
+#   Patch, Marlette Lake and Washoe Lake Watch).
+# Access detail (research, quoted): The page's three accordion sections (HAB Watch, Warning and
+#   Danger Advisories): one bold heading per water with its update date, then the parks' paragraph;
+#   'None at this time.' for an empty level.
+# Can fill: waterbody_text, source_updated_at, advice_text, status
+# Cannot fill: started_at (no issue date: the first read is used); ended_at (no lift date: the read
+#   that finds the water gone is used); lat/lon
+# History: current advisories only; the Internet Archive holds monthly copies since 2025-10
+# Research notes: Waters in Nevada state parks only.
+cadence: "updated when a level changes; no fixed schedule"
+license: "none stated"
+attribution: "Nevada Division of State Parks"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NV"]
+access: ["html"]
+access_detail: "The page's three accordion sections (HAB Watch, Warning and Danger Advisories): one bold heading per water with its update date, then the parks' paragraph; 'None at this time.' for an empty level."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

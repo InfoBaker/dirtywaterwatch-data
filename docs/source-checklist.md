@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1463 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| nv | 3 | 1 | 8 | 3 | 0 | 15 |
+| **all** | **522** | **235** | **429** | **204** | **73** | **1463** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1676,23 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## nv: Nevada (15)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nv-law-nac-445a-3473` | NAC 445A.345 to 445A.348 release notification (hazardous substances, spill hotline) | used | fetched | law | Fetched: release to surface water reported "as soon as practicable" by phone; land releases over 25 gallons by the first working day. |
+| `nv-law-sb276-2025` | Nevada SB 276 (2025): local governments must notify NDEP of sewage discharges; NDEP notifies affected tribes | used | fetched | law | Fetched: duty to notify NDEP electronically or by telephone, no deadline stated; tribe notice by NDEP; no public notice. Codified as NRS 445A.467 (official chapter, revision of 2026-04-15, read 2026-11-09). |
+| `nv-state-parks-hab` | Nevada State Parks HAB advisory page | used | fetched | advisories | Read by the nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level and words, the first read as the start. The live host refused the collector's connections on 2026-11-14 (no answer on ports 443 and 80); the parser was built and tested on the Internet Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch, Marlette Lake and Washoe Lake Watch). |
+| `nv-ndep-hab-dashboard` | Nevada HAB Dashboard (Office of State Epidemiology, Power BI) and weekly HAB email list | candidate | fetched | advisories | The only statewide bloom status, a Power BI report that draws its data as a picture: no rows, no download, no data endpoint (expansion research 2026-11-09). Registered as a channel with the barrier; a supported export is an owner request. |
+| `nv-ndep-hab-program` | NDEP harmful algal bloom program page | watch | fetched | advisories | Program page linking the statewide dashboard and the weekly e-mail update; watched for a data download (register row nv-ndep-hab-program). |
+| `nv-ndep-public-documents` | NDEP public document search (OnBase) | watch | fetched | context | Not all record series are online; whether sewage incident files are searchable was not verified. A records request for the NRS 445A.467 notices is the route. |
+| `nv-ndep-water-quality-data` | NDEP Water Quality Data Warehouse | watch | fetched | monitoring | Station results behind a search form; results and downloads not exercised. Samples, not notices. |
+| `nv-nps-lake-mead-habs` | NPS Lake Mead NRA HAB page | watch | fetched | advisories | Readable page of general advice; its page date is not an advisory date. Watched without records (register row nv-nps-lake-mead-habs). |
+| `nv-reno-environmental-control` | City of Reno Environmental Control (spill line) | watch | fetched | context | A telephone spill line and a record holder; no published list of overflows. |
+| `nv-snwa-watershed` | Southern Nevada Water Authority watershed monitoring | watch | fetched | monitoring | Lake Mead and Colorado River monitoring; the regional database is offered by e-mail request. Samples, not notices. |
+| `nv-tahoe-beaches` | Lake Tahoe beach bacteria monitoring | watch | fetched | monitoring | The Nevada Tahoe Conservation District's Nearshore Human Health page describes the monitoring with a 2023 report; its Lake Tahoe Info program page gave no readable results (2026-11-09). No current station results or closures found. |
+| `nv-truckee-river-news` | Reno/Sparks Truckee River sewage spill coverage (News 4, KNPR) | watch | search_only | news | The 2022 Sparks spill (estimates 214,000 to 2.5 million gallons to the Truckee) went unreported to NDEP and led to SB 276. |
+| `nv-epa-sobe` | EPA ECHO SOBE (Nevada) | rejected | fetched | events | No Nevada events and no Nevada collection systems in the current and all-versions extracts of 2026-11-12 (rechecked at the build). |
+| `nv-ndep-environmental-activities` | NDEP Nevada Environmental Activities portal (Report a Spill) | rejected | fetched | events | Intake only (an online form and account login); no public view of the notices found. The host did not answer the collector on 2026-11-14. |
+| `nv-swim-guide` | Swim Guide affiliates in Nevada | rejected | search_only | monitoring | None found (search only). |
