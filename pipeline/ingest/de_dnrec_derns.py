@@ -61,7 +61,10 @@ Lifecycle
     data/build/de-dnrec-derns-state.json (safe fields only) and carried, so a release that leaves the first pages is
     never dropped. Details are read for at most DETAILS_PER_RUN releases a run, newest first, and read again while a
     release is under RECHECK_DAYS old; a changed detail is kept with its earlier version's hash (raw._revisions).
-  - A list or search that cannot be read is ok=False: the previous records stay and nothing is dropped.
+  - A list, a search or a detail page that cannot be read is ok=False: the previous records stay and nothing is
+    dropped; a detail page that fails MAX_DETAIL_FAILURES reads is no longer asked for.
+  - raw._placement "named_water_only": a release is never geolocated from its street, plant or pump station
+    (build/provisional_outfalls.py); only a water its notes name places it.
 
 Privacy: the detail page's Contact Name, Contact Phone, Contact Email and Facility Address are never read; the
 Location and the release's text lose every house number (common.strip_house_numbers) and go through common.scrub_text
@@ -102,6 +105,7 @@ PAUSE_S = 1.5
 PAGES = 3
 DETAILS_PER_RUN = 40
 RECHECK_DAYS = 14
+MAX_DETAIL_FAILURES = 3   # a detail page that failed this many reads is no longer asked for (meta counts it)
 P = "ctl00$ctl00$ContentPlaceHolderBody$ContentPlaceHolder1$ucReleaseSearch$"
 SEARCH_TERMS = ["SEWAGE", "SEWER", "SANITARY", "SEPTIC", "WASTEWATER", "WASTE WATER", "GREY WATER", "GRAY WATER",
                 "EFFLUENT", "MIXED LIQUOR"]
@@ -185,7 +189,7 @@ OPERATORS = [
     (r"town\s+of\s+middletown|middletown\s+(?:public\s+works|waste\s*water|wwtp|sewer)", "de-town-of-middletown"),
     (r"town\s+of\s+laurel|laurel\s+(?:waste\s*water|wwtp|sewer|treatment)", "de-de0020125"),
     (r"(?:city\s+of\s+)?seaford\s+(?:waste\s*water|wwtp|sewer|treatment)|city\s+of\s+seaford", "de-de0020265"),
-    (r"howard\s+(?:h\.?\s+)?seymour|lewes\s+(?:waste\s*water|wwtp|treatment|board)|lewis\s+waste", "de-sussex-county"),
+    (r"howard\s+(?:h\.?\s+)?seymour|lewes\s+(?:waste\s*water|wwtp|treatment|board)|lewis\s+waste", "de-de0021512"),
     (r"rehoboth\s+(?:beach\s+)?(?:waste\s*water|wwtp|treatment)|city\s+of\s+rehoboth", "de-de0020028"),
     (r"selbyville", "de-de0020010"),
     (r"south\s+coastal", "de-sussex-county"),
@@ -506,6 +510,7 @@ def build_record(entry: dict, fetched_at: str) -> dict | None:
     names = waters_named(text, location, facility)
     released = d.get("released_to")
     raw = {"state": "DE", "time_zone": "America/New_York", "release_number": row.get("release_number"),
+           "_placement": "named_water_only",
            "query_key": entry["key"], "substance": d.get("substance") or row.get("substance"),
            "_class_basis": basis, "_type_basis": tbasis, "derns_status": d.get("status") or row.get("status"),
            "notification_issued": row.get("notify"), "notify_public": d.get("notify_public"),
@@ -575,7 +580,8 @@ def due_for_detail(state: dict, now_dt: datetime, limit: int) -> list[str]:
         if kind in ("not_candidate", "industrial", "treated_effluent") and e.get("detail") is not None:
             continue
         if e.get("detail") is None:
-            out.append(e["key"])
+            if e.get("detail_failures", 0) < MAX_DETAIL_FAILURES:
+                out.append(e["key"])
             continue
         t, _ = parse_time(e["list"].get("release_time"))
         try:
@@ -595,10 +601,13 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             d = client.detail(k)
         except requests.RequestException as e:
             n["details_failed"] += 1
+            state["rows"][k]["detail_failures"] = state["rows"][k].get("detail_failures", 0) + 1
             print(f"{SOURCE_ID}: detail {k}: {e}", file=sys.stderr)
             continue
         if d is None:
             n["details_failed"] += 1
+            e = state["rows"][k]
+            e["detail_failures"] = e.get("detail_failures", 0) + 1
             continue
         d = safe_detail(d)
         h = hashlib.sha256(json.dumps(d, sort_keys=True).encode()).hexdigest()[:16]
@@ -670,6 +679,13 @@ def run(args) -> int:
     state["format"], state["updated_at"] = SAFE_FORMAT, now
     write_json(STATE_PATH, state)
     save_raw(SOURCE_ID, json.dumps(state, indent=1, sort_keys=True), "json")
+    if counts.get("details_failed"):
+        # a detail page that failed (an error, or a page that is not a release's detail): the published records stay
+        # as they were (ok=False); what was read is kept in the state for the next run
+        write_events(SOURCE_ID, [], ok=False, error=f"{counts['details_failed']} release detail page(s) not read",
+                     meta=META)
+        print(f"{SOURCE_ID}: FAILED {counts}", file=sys.stderr)
+        return 1
     recs, reasons = build(state, now)
     write_events(SOURCE_ID, recs, meta={**META, "counts": {**counts, **reasons}})
     print(f"{SOURCE_ID}: {len(recs)} sewage records; {counts}; {reasons}")

@@ -99,6 +99,63 @@ def test_a_reused_page_address_never_overwrites_the_earlier_record():
     assert recs["1929-v2"]["started_at"] == "2025-11-02" and recs["1929-v2"]["raw"]["earlier_version_of_page"] == "1929"
 
 
+def test_a_contact_block_of_several_paragraphs_is_cut_whole():
+    page = (FIX / "florence_notice.html").read_text()
+    block = ("<h4><strong>Media Contacts:</strong></h4><p>Pat Example</p><p>Utilities Director</p>"
+             "<p>843-555-0142</p><p>pexample@example.org</p>")
+    page = page.replace(re.search(r"<h4>.*?</h4>", page, re.S).group(0), block)
+    # and a second block after the dateline
+    page = page.replace("<p>It is estimated", block + "<p>It is estimated")
+    nid, p = notice(page)
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, T0)
+    blob = json.dumps(st) + json.dumps(F.records(st, T0))
+    for s_ in PERSONAL + ["Utilities Director"]:
+        assert s_ not in blob, s_
+    assert p["volume_text"].startswith("more than 5,000 gallons")
+
+
+def test_a_sampling_reassurance_is_never_kept_as_record_text():
+    page = (FIX / "florence_notice.html").read_text().replace(
+        "<p>Residents are advised", "<p>The analyzed bacteriological samples from Jeffries Creek document that there "
+        "is no threat to public health or the environment.</p><p>Residents are advised")
+    nid, p = notice(page)
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, T0)
+    r = F.records(st, T0)[0]
+    assert p["sampling_statement_cut"] and "no threat" not in json.dumps(r)
+    assert r["raw"]["_placement"] == "named_water_only"
+
+
+def test_a_notice_page_that_cannot_be_read_fails_the_run(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(F, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(F, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(F, "PAUSE_S", 0)
+    (tmp_path / f"{F.SOURCE_ID}.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
+    (tmp_path / "state.json").write_text(json.dumps({"notices": {}, "backfilled_at": T0}))
+    listing = (FIX / "florence_list.html").read_text()
+
+    class Resp:
+        def __init__(self, text, code=200):
+            self.text, self.code = text, code
+
+        def raise_for_status(self):
+            if self.code >= 400:
+                raise F.requests.HTTPError(f"{self.code}")
+
+    class Sess:
+        headers = {}
+
+        def get(self, url, **k):
+            return Resp(listing) if "city-news" in url else Resp("refused", 403)
+    monkeypatch.setattr(F.requests, "Session", Sess)
+    assert F.main(["--pages", "1"]) == 1
+    out = json.loads((tmp_path / f"{F.SOURCE_ID}.json").read_text())
+    assert out["ok"] is False and out["records"] == [{"event_id": "x"}] and "not read" in out["error"]
+
+
 def test_only_overflow_titles_are_read_from_the_list():
     items = F.list_items((FIX / "florence_list.html").read_text())
     assert len(items) == 4
@@ -125,7 +182,11 @@ def test_long_term_advisories_are_standing_records_from_the_first_poll():
     assert "NOT to swim" in r["advice_text"] and r["raw"]["time_zone"] == "America/New_York"
 
 
-def test_a_station_that_leaves_the_layer_ends_at_that_poll_and_an_unknown_label_is_kept():
+def key_at(stat, t):
+    return f"{stat}-{re.sub(r'[^0-9T]', '', t)[:13]}"
+
+
+def test_a_station_given_another_value_ends_at_that_poll_and_an_unknown_label_is_kept():
     s = saved()
     _, state, _ = A.beach_records(s["beach"], {}, T0)
     later = copy.deepcopy(s["beach"])
@@ -136,11 +197,41 @@ def test_a_station_that_leaves_the_layer_ends_at_that_poll_and_an_unknown_label_
             f["attributes"]["ADVISORY"] = "Advisory Pending"           # a value DES has not used: never grey
     recs, state2, _ = A.beach_records(later, {"beach": state}, T1)
     by = {r["source_record_id"]: r for r in recs}
-    lc80 = by[f"LC-080-{T0[:10]}"]
+    lc80 = by[key_at("LC-080", T0)]
     assert lc80["status"] == "advisory_lifted" and lc80["ended_at"] == T1 and lc80["raw"]["ended_at_precision"] == "poll"
-    assert by[f"LC-081-{T0[:10]}"]["status"] == "advisory_active" and by[f"LC-081-{T0[:10]}"]["started_at"] == T0
-    odd = by[f"LC-109-{T1[:10]}"]
+    assert by[key_at("LC-081", T0)]["status"] == "advisory_active" and by[key_at("LC-081", T0)]["started_at"] == T0
+    odd = by[key_at("LC-109", T1)]
     assert odd["status"] == "unknown" and odd["raw"]["_agency_label_only"] and odd["raw"]["_agency_label"] == "Advisory Pending"
+
+
+def test_a_blank_value_or_an_absent_station_is_not_a_lift():
+    s = saved()
+    _, state, _ = A.beach_records(s["beach"], {}, T0)
+    later = [copy.deepcopy(f) for f in s["beach"] if f["attributes"]["STAT"] != "WAC-035"]     # station left out
+    for f in later:
+        if f["attributes"]["STAT"] == "LC-080":
+            f["attributes"]["ADVISORY"] = None                          # a blank field
+    recs, _, _ = A.beach_records(later, {"beach": state}, T1)
+    by = {r["raw"]["station"]: r for r in recs}
+    for stat in ("LC-080", "WAC-035"):
+        assert by[stat]["status"] == "advisory_active" and by[stat]["ended_at"] is None
+        assert by[stat]["raw"]["_missing_from_source_since"] == T1
+    assert "_missing_from_source_since" not in by["LC-081"]["raw"]
+
+
+def test_an_advisory_reopened_the_same_day_is_a_second_record():
+    s = saved()
+    one = [copy.deepcopy(f) for f in s["beach"] if f["attributes"]["STAT"] == "LC-080"]
+    _, st, _ = A.beach_records(one, {}, T0)
+    one[0]["attributes"]["ADVISORY"] = "No Advisory"
+    _, st, _ = A.beach_records(one, {"beach": st}, T1)
+    one[0]["attributes"]["ADVISORY"] = "Long-Term"
+    recs, st, _ = A.beach_records(one, {"beach": st}, T2)
+    by = {r["source_record_id"]: r for r in recs}
+    assert len(by) == 2
+    assert by[key_at("LC-080", T0)]["ended_at"] == T1 and by[key_at("LC-080", T2)]["started_at"] == T2
+    recs2, _, _ = A.beach_records(one, {"beach": st}, T2.replace("20:", "21:"))
+    assert {r["source_record_id"] for r in recs2} == set(by)                          # stable across later runs
 
 
 def test_a_short_term_advisory_and_a_closure_by_label():
@@ -164,16 +255,65 @@ def test_the_bloom_watch_is_des_own_dated_at_its_cove_and_ends_only_when_both_dr
     assert r["waterbody_text"] == "J. Strom Thurmond Reservoir" and r["outfall_name"] == "Cedar Point Cove"
     assert r["coord_source"] == "des_delineation" and 33.7 < r["lat"] < 33.9
     assert "Microcystis" in r["advice_text"]
-    # the page could not be read (table None): nothing ends
-    recs2, state2, _ = A.hab_records([], None, {"hab": state}, T1)
-    assert recs2[0]["status"] == "advisory_active" and recs2[0]["ended_at"] is None
-    # the table still lists it though the layer dropped it: still active
-    recs3, state3, _ = A.hab_records([], s["hab_table"], {"hab": state}, T1)
-    assert any(x["status"] == "advisory_active" for x in recs3)
+    key = r["source_record_id"]
+    # layer -> table only -> layer: one record, its point and organism kept, never ended in between
+    recs2, state2, _ = A.hab_records([], s["hab_table"], {"hab": state}, T1)
+    assert [x["source_record_id"] for x in recs2] == [key]
+    assert recs2[0]["status"] == "advisory_active" and recs2[0]["lat"] == r["lat"] and recs2[0]["raw"]["organism"]
+    recs3, state3, _ = A.hab_records(s["hab"], s["hab_table"], {"hab": state2}, T2)
+    assert [x["source_record_id"] for x in recs3] == [key] and recs3[0]["ended_at"] is None
     # neither lists it: ended at that poll
-    recs4, _, _ = A.hab_records([], [], {"hab": state}, T2)
+    recs4, _, _ = A.hab_records([], [], {"hab": state3}, T2)
     assert recs4[0]["status"] == "advisory_lifted" and recs4[0]["ended_at"] == T2
     assert recs4[0]["raw"]["ended_at_precision"] == "poll"
+
+
+def test_two_coves_issued_the_same_day_stay_two_records():
+    table = [{"level": "Advisory", "area": "Example Cove", "water": "Lake Example", "issued": "07/04/2026"},
+             {"level": "Advisory", "area": "Sample Cove", "water": "Lake Example", "issued": "07/04/2026"}]
+    recs, st, _ = A.hab_records([], table, {}, T0)
+    assert len(recs) == 2 and {r["raw"]["advisory_area"] for r in recs} == {"Example Cove", "Sample Cove"}
+    recs2, _, _ = A.hab_records([], table, {"hab": st}, T1)
+    assert {r["source_record_id"] for r in recs2} == {r["source_record_id"] for r in recs}
+
+
+def test_an_unreadable_table_fails_the_bloom_feed_and_keeps_its_records(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(A, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(A, "save_raw", lambda *a, **k: None)
+    (tmp_path / "sc-des-hab.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
+    s = saved()
+
+    class Resp:
+        def __init__(self, js=None, text=""):
+            self._js, self.text = js, text
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+
+    def fake_get(url, **k):
+        if "BW_Monitoring" in url:
+            return Resp({"features": s["beach"]})
+        if "algal_hydro" in url:
+            return Resp({"features": s["hab"]})
+        return Resp(text="<html><body>Please enable cookies</body></html>")
+    monkeypatch.setattr(A.requests, "get", fake_get)
+    assert A.main([]) == 1
+    out = json.loads((tmp_path / "sc-des-hab.json").read_text())
+    assert out["ok"] is False and out["records"] == [{"event_id": "x"}]
+    assert json.loads((tmp_path / "sc-des-beach-monitoring.json").read_text())["ok"] is True
+
+
+def test_points_are_rounded_before_anything_is_saved():
+    f = [{"attributes": {"STAT": "X"}, "geometry": {"x": -79.123456, "y": 33.654321}}]
+    assert A.safe_features(f, "geometry")[0]["geometry"] == {"x": -79.123, "y": 33.654}
+    for feat in saved()["beach"] + saved()["hab"]:
+        g = feat.get("geometry") or feat.get("centroid")
+        assert g["x"] == round(g["x"], 3) and g["y"] == round(g["y"], 3)
 
 
 def test_the_hab_table_reads_the_program_page_shape():

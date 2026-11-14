@@ -29,7 +29,8 @@ DERNS = "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
 LAW_6028 = ("7 Del. C. 6028(a): a person causing an environmental release (sewage of 10,000 gallons or more, 6002(20)) "
             "\"shall report such an incident to the Department as soon as the person has knowledge\"; DNREC posts it on "
             "its website \"no later than 1 business day after the release is reported\"; permitted discharges are exempt")
-LAW_6014 = ("7 Del. C. 6014(b): DNREC's central unified notification system notifies, within 12 hours of a release, the "
+LAW_6014 = ("7 Del. C. 6014(b): DNREC's central unified notification system notifies, within 12 hours after DNREC is "
+            "informed of a release, the "
             "district's State Representative and Senator, community groups within 5 miles and residents within 5 miles "
             "who have registered")
 

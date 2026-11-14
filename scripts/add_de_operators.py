@@ -54,7 +54,7 @@ RESEARCH_ROWS = {
     "de-kent-county": ([], "plant", "county", "Kent County", "Kent County Levy Court, Wastewater (Kent County "
                        "Regional Resource Recovery Facility)"),
     "de-city-of-dover": ([], "sso", "city", "City of Dover", "City of Dover Public Works (collection system)"),
-    "de-sussex-county": (["DE0050008", "DE0021512"], "plant", "county", "Sussex County",
+    "de-sussex-county": (["DE0050008"], "plant", "county", "Sussex County",
                          "Sussex County Engineering, Environmental Services (wastewater)"),
     "de-millsboro": ([], "sso", "town", "Town of Millsboro", "Town of Millsboro (wastewater)"),
 }
@@ -68,9 +68,9 @@ PLANTS = {
     "DE0021491": ("de-town-of-milton", "Town of Milton (Milton Water Reclamation Facility)", "town", "Milton",
                   "Tidewater Environmental Services operates the Milton plant under contract with the Town "
                   "(not verified against the permit)."),
-    "DE0021512": ("de-sussex-county", None, "county", "Lewes",
-                  "The Howard Seymour Water Reclamation Plant at Lewes, run for the Lewes Board of Public Works "
-                  "(ownership not verified against the permit; filed under Sussex County, which also serves Lewes)."),
+    "DE0021512": ("de-de0021512", "Howard Seymour Water Reclamation Plant, Lewes (permittee not recorded by EPA)", None,
+                  "Lewes", "EPA records the plant's name as the permittee; the owner was not verified against the "
+                  "permit, so the row is the permit's and names no owner."),
     "DE0050008": ("de-sussex-county", None, "county", "Frankford", "Sussex County's South Coastal Regional Wastewater "
                   "Facility."),
     "DE0020338": ("de-kent-county", None, "county", "Milford", "The Kent County Regional Resource Recovery Facility."),
