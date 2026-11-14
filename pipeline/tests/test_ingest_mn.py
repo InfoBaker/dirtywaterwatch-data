@@ -67,7 +67,7 @@ def test_each_spill_is_a_sewer_overflow_dated_to_the_day_the_council_responded()
         assert r["event_type"] == "sso" and r["time_precision"] == "day" and r["parse_error"] is None
         assert r["raw"]["time_zone"] == "America/Chicago" and r["discharger_id"] == "mn-mces"
         assert r["npdes_permit"] is None and r["reported_at"] is None and r["published_at"] is None
-        assert "not given apart from the response" in r["raw"]["start_basis"]
+        assert "the spill began on that day or before it" in r["raw"]["start_basis"]
         assert r["raw"]["time_of_day_words"] == "afternoon" and "T" not in r["started_at"]
     assert recs["Excelsior"]["started_at"] == "2026-05-29" and recs["Eagan"]["started_at"] == "2026-11-03"
     assert recs["Minneapolis and Golden Valley"]["started_at"] == "2026-07-09"
@@ -77,14 +77,13 @@ def test_each_spill_is_a_sewer_overflow_dated_to_the_day_the_council_responded()
 
 def test_the_councils_signs_are_its_window_and_their_removal_notice_ends_it():
     recs, _ = mces()
-    ex = recs["Excelsior"]
-    assert ex["status"] == "advisory_lifted" and ex["ended_at"] == "2026-06-01"
-    assert ex["raw"]["ended_at_precision"] == "day" and "the notice day bounds it" in ex["raw"]["end_basis"]
-    assert ex["raw"]["signs"] == {"wording": "Do Not Enter/ Sewage Spill", "posted_per_notice_of": "2026-05-29",
-                                  "removal_per_notice_of": "2026-06-01"}
+    ex = recs["Excelsior"]                    # the spill ended its day; the Council's window to the removal notice
+    assert ex["status"] == "ended" and ex["ended_at"] == "2026-05-29" and ex["raw"]["ended_at_precision"] == "day"
+    assert ex["advice_window_hours"] == 72.0 and "until its update of 2026-06-01" in ex["advice_window_basis"]
+    assert ex["raw"]["signs"]["removal_announced_on"] == "2026-06-01" and "not given" in ex["raw"]["signs"]["removal_note"]
     assert ex["raw"]["spill_stopped_on"] == "2026-05-29" and "Do Not Enter/ Sewage Spill" in ex["advice_text"]
     mp = recs["Minneapolis and Golden Valley"]
-    assert mp["status"] == "advisory_lifted" and mp["ended_at"] == "2026-07-16"
+    assert mp["status"] == "ended" and mp["ended_at"] == "2026-07-09" and mp["advice_window_hours"] == 168.0
     assert mp["raw"]["signs"]["posted_per_notice_of"] == "2026-07-10" and mp["raw"]["spill_stopped_on"] == "2026-07-09"
     eg = recs["Eagan"]                        # no signs: the spill's own stop, the day it was contained
     assert eg["status"] == "ended" and eg["ended_at"] == "2026-11-03" and "signs" not in eg["raw"]
@@ -273,3 +272,78 @@ def test_missing_waters_list_names_what_the_national_list_lacks():
     assert not [r["name"] for r in d["rows"] if k(r["name"]) in held]
     mud = next((r for r in d["rows"] if r["name"] == "Mud Pond"), None)
     assert mud is None or mud["county"] == "Hennepin County"
+
+
+# ---------------------------------------------------------------- review 2026-11-14 (Astra)
+
+def test_p1_2_a_stop_named_by_weekday_a_week_later_is_not_the_start_day():
+    page = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+            "</p><p>3/9/2026 - Second Notice</p><p>Crews stopped the spill Monday evening.</p>"
+            "<p>3/12/2026 - Third Notice</p><p>Signs warning the public \u201cDo Not Enter/ Sewage Spill\u201d have "
+            "been placed.</p><h3>Contact us</h3>")
+    r = M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, March 2026"}, M.parse_page(page), FETCHED,
+                    None)
+    assert r["started_at"] == "2026-03-02" and "spill_stopped_on" not in r["raw"]      # "Monday" of 3/9 is March 9
+    assert r["status"] == "advisory_active" and r["ended_at"] is None and r["advice_window_hours"] is None
+
+
+def test_p1_2_removal_announced_with_no_stop_ends_at_the_announcement_as_a_bound():
+    page = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+            " Signs warning the public \u201cDo Not Enter/ Sewage Spill\u201d will be placed.</p>"
+            "<p>3/20/2026 - Second Notice</p><p>Signs will be removed.</p><h3>Contact us</h3>")
+    r = M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, March 2026"}, M.parse_page(page), FETCHED,
+                    None)
+    assert r["status"] == "advisory_lifted" and r["ended_at"] == "2026-03-20" and r["raw"]["ended_at_precision"] == "bound"
+
+
+def test_p1_3_the_councils_window_then_grey_and_eagans_caution_in_central_time():
+    from datetime import datetime, timezone
+    from build import status as S
+    recs, _ = mces()
+    now = datetime(2026, 11, 14, 18, tzinfo=timezone.utc)
+
+    def at(r, y, mo, d, h):
+        c, ivs = S.status_at(S.event_intervals(r, "MN", now), datetime(y, mo, d, h, tzinfo=timezone.utc))
+        return c, [iv["rule"] for iv in ivs]
+    ex = recs["Excelsior"]
+    assert at(ex, 2026, 5, 29, 20)[0] == "red"                       # the spill's day
+    assert at(ex, 2026, 6, 1, 20) == ("red", ["authority_window"])   # the Council's signs, to the end of June 1 (CDT)
+    assert at(ex, 2026, 6, 2, 6)[0] == "grey"                        # 72 hours after the stop day: no further caution
+    eg = recs["Eagan"]
+    assert at(eg, 2026, 11, 6, 12)[0] == "yellow"                    # the site's caution, 72 hours after Nov 3 (CST)
+    assert at(eg, 2026, 11, 7, 7)[0] == "grey"
+
+
+def test_p1_4_an_error_page_keeps_the_previous_record_and_the_run_fails():
+    first, _ = mces()
+    ex_url = INDEX + "Excelsior-Wastewater-Spill-(1).aspx"
+    recs, meta = mces(previous=list(first.values()), extra_pages={ex_url: "<html><h1>Service unavailable</h1></html>"})
+    assert recs["Excelsior"] == first["Excelsior"] and meta["pages_unread"] == [ex_url]
+
+
+def test_p1_6_raw_save_is_scrubbed():
+    page = {"intro": "Call Pat Example at 612-555-0142 or pat@example.com; the spill at 1234 Example Street.",
+            "updates": [{"date": "2026-03-02", "heading": "Contact Inspector Example", "text": "x"}]}
+    out = json.dumps(M.scrubbed({"pages": {"u": page}}))
+    assert "612-555-0142" not in out and "pat@example.com" not in out and "1234 Example" not in out
+
+
+def test_p1_8_advice_quotes_the_signs_and_no_safety_assurance():
+    recs, _ = mces()
+    for r in recs.values():
+        assert not re.search(r"\bsafe\b|\bclean\b", json.dumps(r), re.I)
+    assert recs["Excelsior"]["advice_text"].startswith("The Council's signs at the affected areas")
+
+
+def test_p1_6_wlssd_free_text_is_scrubbed_and_p1_7_mn_epa_points_are_rounded():
+    _, block = R.load_source("mn-wlssd-overflows")
+    assert {"ReleaseAmount", "FacilityType", "StateWaters"} <= set(block["free_text"])
+    raw = json.loads((FIX / "wlssd.json").read_text())
+    raw["features"][0]["attributes"]["ReleaseAmount"] = "about 50 gallons, call 218-555-0142"
+    rows = R.platform("arcgis").parse(block, json.dumps(raw).encode())
+    recs, _ = R.build("mn-wlssd-overflows", block, rows, FETCHED, (), None)
+    assert "218-555-0142" not in json.dumps(recs)
+    r = E.build(echo_tables(), {"extract_date": "2026-11-12"})[0][0]
+    assert round(r["lat"], 3) == r["lat"] and round(r["lon"], 3) == r["lon"]
+    assert all(round(float(x["latitude_measure"]), 3) == float(x["latitude_measure"])
+               for x in echo_tables()["events"])

@@ -431,7 +431,8 @@ Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data
   to "Pike Bay Lake Vermilion Tower Minnesota". Keyed on MN only, so every other state's records are unchanged:
   - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in STATE_ZONE_ALWAYS, so every
     Minnesota record carries raw.time_zone.
-  - No free-text or repeated-point rule: the one report has no description and its own point.
+  - No free-text or repeated-point rule: the one report has no description and its own point; the point is kept to
+    0.001 degree (ROUND_POINT_STATES), in the record and in raw.
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -478,6 +479,8 @@ POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-t
 ZONE_ALWAYS_STATES = {"KY"}
 # states of one zone whose records carry raw.time_zone (STATE_TZ) whatever their times' precision (Minnesota)
 STATE_ZONE_ALWAYS = {"MN"}
+# states whose event points are kept to 0.001 degree before anything is saved (Minnesota; wave 4 rule 4)
+ROUND_POINT_STATES = {"MN"}
 # states whose sewer overflow at the plant's own point (within REPEATED_POINT_PLANT_M of a point EPA's plant list gives
 # the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
 # 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
@@ -1623,6 +1626,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["end_is_planned"] = True
             raw["planned_end_note"] = (f"the operator's planned end of an anticipated bypass ({PLANNED_LABEL}); the "
                                        "bypass runs to it unless a later report changes it")
+        if state in ROUND_POINT_STATES and lat is not None and lon is not None:
+            lat, lon = round(lat, 3), round(lon, 3)      # Minnesota: a reporter's point kept to 0.001 degree
+            for k in ("latitude_measure", "longitude_measure"):
+                if raw.get(k) not in (None, ""):
+                    raw[k] = f"{round(float(raw[k]), 3):.3f}"
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
             status=status,
