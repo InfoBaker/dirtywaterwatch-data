@@ -62,12 +62,24 @@ MUNI = re.compile(r"^(?:(?P<a>city|town|village|corporation)\s+of\s+(?P<x>.+)|(?
                   re.I)
 
 
+# Louisiana's permit names put the place first in several ways: "Bastrop, City of (Main Plant)", "Sarepta,town of",
+# "Downsville, Village-Downsville", "Plain Dealing, Town-WWTP", "Haynesville Town Of-WWTP (002)", "Moreauville WWT
+# Facility, Vill"
+MUNI_AFTER = re.compile(r"^(?P<y>[A-Za-z .']+?)\s*,\s*(?P<b>city|town|village|vill)\b|"
+                        r"^(?P<z>[A-Za-z .']+?)\s+(?P<c>city|town|village)\s+of\b", re.I)
+
+
 def municipal(s: str) -> tuple[str, str] | None:
     m = MUNI.match(s)
-    if not m:
+    if m:
+        kind = (m.group("a") or m.group("b")).lower()
+        place = clean(m.group("x") or m.group("y"))
+    elif (m := MUNI_AFTER.match(s)):
+        kind = (m.group("b") or m.group("c")).lower().replace("vill", "village").replace("villageage", "village")
+        place = clean(m.group("y") or m.group("z"))
+        place = re.sub(r"\s+(?:wwt|wwtp|stp|facility)\b.*$", "", place, flags=re.I).strip()
+    else:
         return None
-    kind = (m.group("a") or m.group("b")).lower()
-    place = clean(m.group("x") or m.group("y"))
     if not place or re.search(r"\b(?:llc|inc|corp|company)\b", place, re.I):
         return None
     if kind == "corporation":             # West Virginia's older towns are chartered as "the Corporation of <X>"
@@ -75,7 +87,7 @@ def municipal(s: str) -> tuple[str, str] | None:
     return f"{kind.title()} of {title(place)}", "city" if kind == "city" else "town"
 
 
-STRONG_COMPANY = re.compile(r"\b(?:llc|l\.l\.c|corporation|company|coal|incorporated)\b\.?", re.I)
+STRONG_COMPANY = re.compile(r"\b(?:llc|l\.l\.c|corporation|corp|company|coal|incorporated)\b\.?", re.I)
 RULES = [
     (re.compile(r"\b(?:u\.?\s?s\.?|united states|usda)\b.*\b(?:army|navy|air force|corps|department|forest|park|fish|"
                 r"service|protection)|\bcorps of engineers\b|\bnational (?:park|forest|guard)\b|\bveterans affairs\b|"
@@ -87,12 +99,13 @@ RULES = [
      "institution"),
     (re.compile(r"\b(?:public service district|psd|p\.s\.d\.?|sewerage district|sewer district|sanitation district|"
                 r"sanitary district|water district|waterworks district|utility district|water ?works district|"
-                r"water & sewer district|water and sewer district|sewerage dist|sd ?#?\s?\d+)\b", re.I),
+                r"water & sewer district|water and sewer district|sewerage dist|sd ?#?\s?\d+|development district|"
+                r"industrial district)\b", re.I),
      "special district"),
     (re.compile(r"\b(?:parish|county|cnty|co\.? schools|police jury|board of education)\b", re.I), "county"),
     (re.compile(r"\b(?:state of|state park|division of|department of (?:corrections|transportation|health|natural|"
                 r"environmental|highways|military|education|public safety|agriculture|wildlife)|wv dnr|dnr|"
-                r"university|state police|regional jail|correctional (?:center|complex)|corrections)\b", re.I),
+                r"university|state police|regional jail|correctional (?:center|complex)|corrections|la ?dotd|la dept)\b", re.I),
      "state facility"),
     (re.compile(r"\b(?:board|bd|commission|authority|auth|comm|boparc)\b", re.I), "authority"),
     (re.compile(r"\b(?:home ?owners|owners'? association|property owners|poa|hoa)\b", re.I), "homeowners' association"),
@@ -119,6 +132,10 @@ def owner(permit_name, permittee, facility_type, state: str, permit: str, overri
     m = municipal(raw)
     if m:
         return m[0], m[1], "municipal"
+    if re.search(r"\btribe\b|\bnation\b|\bband of\b", raw, re.I):
+        return title(raw), "tribal", "rule"
+    if re.search(r"\bparish\b|\bph\b", raw, re.I) and not STRONG_COMPANY.search(raw):
+        return re.sub(r"\bPh\b", "Parish", title(raw)), "county", "rule"
     if person_shaped(raw):
         return f"Holder of permit {permit}", "facility (permittee not named)", "person-shaped name withheld"
     name = title(raw)
