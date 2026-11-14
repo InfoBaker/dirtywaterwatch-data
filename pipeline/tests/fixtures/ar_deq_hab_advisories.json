@@ -1,0 +1,8 @@
+{"updated": "November 9, 2026", "advisories": [
+ {"waterbody": "Example Lake *", "county": "Perry County", "area": "Exampleville, AR", "date": "July 29, 2019", "lifted": "N/A"},
+ {"waterbody": "Lake June", "county": "LaFayette County", "area": "Stamps, AR", "date": "July 31, 2026", "lifted": ""},
+ {"waterbody": "Lake Desoto", "county": "Garland and Saline Counties", "area": "Hot Springs Village, AR", "date": "July 22, 2026", "lifted": "August 7, 2026"},
+ {"waterbody": "Sample River near Exampleville", "county": "Scott County", "area": "Exampleville, AR", "date": "August 7, 2020", "lifted": "N/A"},
+ {"waterbody": "Stream by Example Trail (coordinates 35.507114, -94.216947)", "county": "Crawford County", "area": "Alma, AR", "date": "June 24, 2026", "lifted": "July 23, 2026"},
+ {"waterbody": "Lake Catherine - Spencer Bay *", "county": "Garland and Hot Springs County", "area": "Malvern, AR", "date": "October 29, 2019", "lifted": "N/A"}
+]}
