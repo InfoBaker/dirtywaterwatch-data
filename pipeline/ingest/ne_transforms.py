@@ -20,8 +20,9 @@ raw.state_basis: the status build places it only in that state (status.Resolver,
 ne_beachwatch_sequence (after_history): sample dates are not advisory issue or lift dates. Historical
 samples keep sampled_at but no advisory timestamps, so they remain in their sample year's history without creating
 an invented red interval. Only the latest positive sample at a station, at most 14 days old when first observed,
-can open an observed advisory interval. Its start is that poll, not the sample date. A later sample or a corrected
-flag ends the observed interval at the poll that first shows the change (an upper bound, not an agency lift time).
+can open an observed advisory interval. Its start is that poll, not the sample date. A later sample or a flag
+corrected to NO ends the observed interval at the poll that first shows the change (an upper bound, not an agency
+lift time); a blank flag is unknown, not a lift, and a YES after a NO reopens the interval, the earlier one kept.
 Unchanged historical rows never reconfirm an advisory; the usual 14-day aging applies from its last new observation.
 Legacy sample-derived intervals are removed on the next successful read, including rows carried from prior seasons.
 The safe source-field revisions are kept; sample-only rows are used for transitions and then removed.
@@ -93,9 +94,14 @@ def ne_beachwatch_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
 
 
 CLOCK_VERSION = 1
+FLAG_CLOSED = "the source corrected the alert flag"
 RECENT_SAMPLE_DAYS = 14
 CLOCK_NOTE = ("DWEE gives the sample date, not the advisory's issue or lift date. Any advisory times here are "
               "the polls that first showed a recent alert or its change, not times published by DWEE.")
+
+
+def _flag(rec: dict) -> str:
+    return F.clean((rec.get("raw") or {}).get("row", {}).get("HealthAlert")).upper()
 
 
 def _sample_date(rec: dict, ctx: F.Ctx) -> str | None:
@@ -199,7 +205,10 @@ def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
             raw.pop("_agency_label_only", None)
             raw.pop("_agency_label", None)
             raw["_alert_basis"] = ALERT_RULE
-            r["advice_text"] = "The health-alert flag previously listed for this sample is no longer present."
+            r["advice_text"] = ("The health-alert flag previously listed for this sample is no longer present."
+                                if _flag(r) == "NO" else
+                                "The health-alert flag previously listed for this sample is now blank in the source; "
+                                "a blank flag is not read as a lift.")
         praw = p.get("raw") or {}
         observed = deepcopy(praw.get("_advisory_observed") or {}) if praw.get("_advisory_clock_version") == CLOCK_VERSION else {}
         if praw and praw.get("_advisory_clock_version") != CLOCK_VERSION:
@@ -225,18 +234,21 @@ def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
                 continue
             raw = r["raw"]
             observed = raw["_advisory_observed"]
-            positive = F.clean(raw.get("row", {}).get("HealthAlert")).upper() == "YES"
+            # Only an explicit NO ends an observation; a blank or missing flag is unknown, not a lift, so the
+            # observation stands and ages out as usual (review 2026-11-14, Astra data P2-3).
+            flag = _flag(r)
+            positive, negative = flag == "YES", flag == "NO"
             sample = _sample_date(r, ctx)
             newer = next((x for x in current if _sample_date(x, ctx) > sample), None)
-            if observed.get("start") and not observed.get("end") and (newer or (r in current and not positive)):
+            if observed.get("start") and not observed.get("end") and (newer or (r in current and negative)):
                 observed.update(end=ctx.fetched_at, end_sample=(newer or r)["source_record_id"],
-                                end_reason="a newer sample was observed" if newer else "the source corrected the alert flag")
+                                end_reason="a newer sample was observed" if newer else FLAG_CLOSED)
                 observed["continued"] = bool(newer and F.clean(newer["raw"].get("row", {}).get("HealthAlert")).upper() == "YES")
             # A late first load of a historical season must not manufacture a current advisory. The freshness
             # limit is the same 14-day horizon as the status build's unconfirmed-advisory aging.
             age = (ctx.fetched_dt.astimezone(ctx.tz).date() - datetime.fromisoformat(sample).date()).days
-            prior = (prev.get(r["event_id"]) or {}).get("raw") or {}
-            corrected_to_yes = (positive and F.clean(prior.get("row", {}).get("HealthAlert")).upper() == "NO")
+            # A YES after an observation the flag closed reopens it, whatever polls lay between (NO, blank).
+            corrected_to_yes = positive and bool(observed.get("end")) and observed.get("end_reason") == FLAG_CLOSED
             if r is latest and positive and 0 <= age <= RECENT_SAMPLE_DAYS and (not observed.get("start") or corrected_to_yes):
                 if observed.get("start"):
                     periods = observed.get("earlier_periods", []) + [{k: v for k, v in observed.items() if k != "earlier_periods"}]
