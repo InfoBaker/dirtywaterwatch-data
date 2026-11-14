@@ -229,7 +229,7 @@ def main(argv=None) -> int:
             time.sleep(1)
         write_json(path, cache)
     records, meta = build(cache, outlets)
-    meta.update({"registry_ids": [SOURCE_ID, "fed-echo-effluent-charts-rest"], "since": args.since,
+    meta.update({"registry_ids": [SOURCE_ID], "since": args.since,
                  "permits_asked": len(outlets), "fetch": fetch_log,
                  "permits_with_cso_lines": sorted(p for p, e in cache["permits"].items() if e.get("lines")),
                  "cadence": "weekly per permit; DMRs reach ECHO weeks after the month"})

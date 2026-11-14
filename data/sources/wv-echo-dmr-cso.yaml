@@ -23,7 +23,7 @@ enabled: true
 role: "events"
 event_types: ["cso"]
 states: ["WV"]
-registry_ids: ["wv-echo-dmr-cso", "fed-echo-effluent-charts-rest"]
+registry_ids: ["wv-echo-dmr-cso"]
 access: ["api"]
 access_detail: "ECHO Effluent Charts REST service, one request per permit for parameter 50050 with start_date 01/01/2025; no key. Answers carry the facility's name and address (a public plant), no person."
 machine_readable: true
