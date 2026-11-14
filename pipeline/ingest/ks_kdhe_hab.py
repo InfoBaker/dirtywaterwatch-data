@@ -61,7 +61,9 @@ def lakes(doc: dict) -> dict[str, dict]:
         if not level or not wid:
             continue
         sd = a.get("StatusDate")
-        row = out.setdefault(wid, {"name": str(a.get("WATERBODY_NAME") or "").strip().title(), "level": level,
+        name = re.sub(r"\bSfl\b", "State Fishing Lake", str(a.get("WATERBODY_NAME") or "").strip().title())
+        name = re.sub(r"\bCo\.\s", "County ", name)
+        row = out.setdefault(wid, {"name": name, "level": level,
                                    "status_date": (datetime.fromtimestamp(sd / 1000, timezone.utc)
                                                    .strftime("%Y-%m-%dT%H:%M:%SZ") if sd else None),
                                    "lat": None, "lon": None, "points": 0})
