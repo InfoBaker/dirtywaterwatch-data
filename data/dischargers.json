@@ -490663,8 +490663,8 @@
    "Arkansas R (110300101)"
   ],
   "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
   "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,

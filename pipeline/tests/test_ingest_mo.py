@@ -84,6 +84,26 @@ def test_kc_records_and_raw_save_carry_no_house_number_or_contact():
         assert p not in blob
 
 
+def test_kc_records_are_placed_by_named_water_only_and_the_raw_save_holds_no_post_text():
+    recs, _ = kc()
+    assert {r["raw"]["_placement"] for r in recs.values()} == {"named_water_only"}
+    assert not [r for r in recs.values() if "post_text" in r["raw"]]
+    saved = json.loads(K.safe_feed((FIX / "kc_feed.xml").read_bytes()))
+    assert len(saved["items"]) == 5 and not [i for i in saved["items"] if "text" in i]
+    assert not [i for i in saved["items"] if "Bonds" in i["title"]]
+
+
+def test_kc_first_page_404_is_a_failed_run(monkeypatch):
+    class Resp:
+        status_code, content = 404, b""
+
+        def raise_for_status(self):
+            raise K.requests.HTTPError("404")
+    monkeypatch.setattr(K.requests, "get", lambda *a, **k: Resp())
+    with pytest.raises(K.requests.HTTPError):
+        K.fetch(False)
+
+
 # ---------------------------------------------------------------- MSD
 
 def msd():
@@ -200,6 +220,30 @@ def test_concern_text_and_people_never_reach_records_or_the_raw_save():
         assert "info" not in r["raw"] and "comments" not in r["raw"] and "source" not in r["raw"]
 
 
+def test_a_later_report_that_finds_nothing_withdraws_the_concern():
+    meta = {"pdf_url": "https://dnr.mo.gov/example.pdf"}
+    head = [(350.25, 730, "February 01, 2026 and February 28, 2026"), (28.8, 20, "Friday, March 6, 2026"),
+            (525.8, 20, "Page 2 of 5")]
+    kept = _pdf(head + _block(640, "SWRO", "2/9/2026", "2/10/2026", ["City of Marble", "Hill"], "Bollinger",
+                              ["Bypass or Sewer Overflow"], 70010, "A lift station overflows.", "Referred to the city."))
+    head2 = [(350.25, 730, "March 01, 2026 and March 31, 2026"), (28.8, 20, "Monday, April 6, 2026"),
+             (525.8, 20, "Page 2 of 5")]
+    later = _pdf(head2 + _block(640, "SWRO", "2/9/2026", "3/3/2026", ["City of Marble", "Hill"], "Bollinger",
+                                ["Bypass or Sewer Overflow"], 70010, "A lift station overflows.",
+                                "No violations were observed; no further action."))
+    for order in ([(kept, meta), (later, meta)], [(later, meta), (kept, meta)]):     # the report periods decide
+        recs, stats, _ = C.run(order, [], AT)
+        assert recs == [] and stats["withdrawn"] == 1
+    first, _, _ = C.run([(kept, meta)], [], AT)
+    recs, stats, _ = C.run([(later, meta)], first, AT)                                # across runs too
+    assert recs == [] and stats["withdrawn_concerns"][0]["concern_no"] == "70010"
+
+
+def test_concerns_and_msd_are_placed_by_named_water_only():
+    assert {r["raw"]["_placement"] for r in concerns()[0].values()} == {"named_water_only"}
+    assert {r["raw"]["_placement"] for r in msd()[0].values()} == {"named_water_only"}
+
+
 # ---------------------------------------------------------------- DNR outfall layer
 
 def test_outfall_layer_supersedes_epa_rows_adds_new_ones_and_holds_back_the_ethanol_plant():
@@ -308,6 +352,16 @@ def test_single_county_field_behaves_as_before(mo_known):
     assert kept == ["brush-creek-kansas-city-mo"] and why.endswith("the county the report gives")
     ev = {"raw": {"state": "MO"}, "source_id": "mo-dnr-concern-reports"}
     assert S.county_slugs(["a", "b"], ev, {}, lambda *a: None) == (["a", "b"], None)
+
+
+def test_counties_list_is_not_read_for_other_states(monkeypatch):
+    """Tennessee's records carry raw.counties of their own; its placement is the same as before the Missouri rule
+    (Astra 2026-11-14 P1-10)."""
+    known = set(S.states()) | {"TN"}
+    monkeypatch.setattr(S, "states", lambda *a, **k: known)
+    ev = {"raw": {"state": "TN", "counties": ["Knox County"]}, "source_id": "tn-tdec-events-report"}
+    w = {"a-tn": {"bbox": [-83.95, 35.95, -83.90, 36.0]}, "b-tn": {"bbox": [-90.0, 35.1, -89.9, 35.2]}}
+    assert S.county_slugs(["a-tn", "b-tn"], ev, w, lambda *a: None) == (["a-tn", "b-tn"], None)
 
 
 # ---------------------------------------------------------------- state text and waters

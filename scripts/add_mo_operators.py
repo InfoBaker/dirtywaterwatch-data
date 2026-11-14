@@ -313,8 +313,17 @@ def channel(name: str, rs: list[dict], is_cso: bool, private: bool) -> str:
     return s
 
 
+def influent_only(x: dict) -> bool:
+    """A plant-table row whose limit sets describe only an influent connection to the collection system."""
+    names = [str(n) for n in x.get("limit_set_names") or []]
+    return bool(names) and any(re.search(r"\binfluent to\b", n, re.I) for n in names) and \
+        not any(re.search(r"effluent|discharge|outfall", n, re.I) for n in names)
+
+
 def make_row(rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:
-    rows = [x for p in ps for x in plants.get(p, [])]
+    # a permitted feature whose limits are an influent connection ("Influent to Collection System from ...") is not
+    # a discharge to a water (Astra 2026-11-14 P2-5): kept in the permit, not counted as an outfall
+    rows = [x for p in ps for x in plants.get(p, []) if not influent_only(x)]
     crow = [x for p in ps for x in cso.get(p, [])]
     open_cso = [x for x in crow if not str(x.get("outfall_status") or "").upper().startswith("CLS")]
     waters = list(dict.fromkeys([w for r in rs for w in r.get("receiving_waters") or []] +

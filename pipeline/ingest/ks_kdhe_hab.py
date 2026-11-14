@@ -11,8 +11,9 @@ Source
   layer, not the calendar, says what is in effect. Layer 2 holds the lakes' outlines (lake zones), not read here.
 
 Record rules (the accuracy-first clock: nothing is shown as KDHE's issue or lift time, since the layer gives neither)
-  - One record per lake per spell on the list: source_record_id the WATERBODY_ID and the poll day the spell was first
-    seen. event_type hab_advisory (the bloom category, plum), status advisory_active while the layer lists the lake
+  - One record per lake per spell on the list: source_record_id the WATERBODY_ID and the poll time the spell was
+    first seen (to the second, so a lake lifted and listed again the same day is a new spell).
+    event_type hab_advisory (the bloom category, plum), status advisory_active while the layer lists the lake
     under Hazard, Warning or Watch, raw.kdhe_level the current level and raw.levels each level with the poll that first
     showed it. advice_text names KDHE's level in KDHE's words ("Warning", "Watch", "Hazard").
   - started_at is the poll that first listed the lake (time_precision "poll"; raw.start_basis): on the first run that is
@@ -20,7 +21,8 @@ Record rules (the accuracy-first clock: nothing is shown as KDHE's issue or lift
     layer's StatusDate, KDHE's own "as of" date for its table, kept as such.
   - Each poll that lists the lake confirms the record (raw._last_seen_in_source). The first poll that no longer lists it,
     or lists it as Lift, ends the record: status advisory_lifted, ended_at that poll, raw.ended_at_precision "poll"
-    (an upper bound of KDHE's lift, which the layer does not date). A failed poll changes nothing.
+    (an upper bound of KDHE's lift, which the layer does not date). A failed poll changes nothing: an answer with no features list, an error, a truncation or a status
+    word KDHE does not use is a failed poll (check), never a lift of every lake.
   - The lake's point, kept to 0.001 degree; raw.time_zone from the point's county (pipeline/zones.py kansas_zone: the
     four western counties keep Mountain time).
 
@@ -73,7 +75,31 @@ def lakes(doc: dict) -> dict[str, dict]:
     return out
 
 
+def check(doc) -> None:
+    """A layer answer good enough to say which lakes are listed: anything else is a failed read, never a lift of every
+    advisory (Astra 2026-11-14 P1-1). A valid answer has a features list (possibly empty), no error and no truncation,
+    and every row's STATUS is one of KDHE's words."""
+    if not isinstance(doc, dict) or "error" in doc or not isinstance(doc.get("features"), list):
+        raise ValueError("the HAB layer's answer has no features list")
+    if doc.get("exceededTransferLimit"):
+        raise ValueError("the HAB layer's answer is truncated")
+    for f in doc["features"]:
+        st = str(((f or {}).get("attributes") or {}).get("STATUS") or "").strip().lower()
+        if st not in (*LEVELS, "lift"):
+            raise ValueError(f"unexpected HAB status {st!r}")
+
+
+def rounded(doc: dict) -> dict:
+    """The answer with every point kept to 0.001 degree, as saved in data/raw."""
+    out = {k: v for k, v in doc.items() if k != "features"}
+    out["features"] = [{"attributes": f.get("attributes"),
+                        "geometry": {k: round(float(v), 3) for k, v in (f.get("geometry") or {}).items()
+                                     if k in ("x", "y") and v is not None}} for f in doc.get("features") or []]
+    return out
+
+
 def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
+    check(doc)
     recs = {r["event_id"]: r for r in prev}
     open_by = {r["raw"].get("waterbody_id"): r for r in recs.values() if r["status"] == "advisory_active"}
     now = lakes(doc)
@@ -82,7 +108,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
         r = open_by.get(wid)
         if r is None:
             tz = zones.kansas_zone(lat=x["lat"], lon=x["lon"])
-            r = event(source_id=SOURCE_ID, source_record_id=f"{wid}-{at[:10]}", event_type="hab_advisory",
+            r = event(source_id=SOURCE_ID, source_record_id=f"{wid}-{re.sub(r'[^0-9]', '', at)[:14]}", event_type="hab_advisory",
                       status="advisory_active", waterbody_text=x["name"], lat=x["lat"], lon=x["lon"],
                       coord_source="source", coord_precision_m=100, started_at=at, time_precision="poll",
                       authority=AUTHORITY, advice_text=ADVICE[x["level"]], source_url=PAGE,
@@ -128,14 +154,13 @@ def main(argv=None) -> int:
                 "f": "json", "returnGeometry": "true"})
             r.raise_for_status()
             doc = r.json()
-            if "error" in doc:
-                raise ValueError(str(doc["error"]))
-            save_raw(SOURCE_ID, json.dumps(doc), "json")
+            check(doc)
+            save_raw(SOURCE_ID, json.dumps(rounded(doc)), "json")
+        recs, stats = run(doc, prev, now_iso())
     except (requests.RequestException, OSError, ValueError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats = run(doc, prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": LAYER, "page": PAGE, **stats,
         "credit": "Kansas Department of Health and Environment, Harmful Algal Blooms",
