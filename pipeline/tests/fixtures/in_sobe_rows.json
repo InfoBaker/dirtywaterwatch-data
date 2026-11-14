@@ -1,5 +1,5 @@
 {
- "about": "Indiana rows of EPA's sewer overflow and bypass tables: the one Indiana report of the 2026-11-12 extract (Shelbyville's plant bypass, as filed: no person named), and one synthetic report (key 'in-syn-1', permit IN0000001, an Example sewer overflow at a point in Evansville, Vanderburgh County) for the Central-time rule.",
+ "about": "Indiana rows of EPA's sewer overflow and bypass tables: the one Indiana report of the 2026-11-12 extract (Shelbyville's plant bypass, as filed: no person named; its point rounded to three decimals), and one synthetic report (key 'in-syn-1', permit IN0000001, an Example sewer overflow at a point in Evansville, Vanderburgh County) for the Central-time rule.",
  "extract_date": "2026-11-12",
  "events": [
   {
@@ -26,8 +26,8 @@
    "sewer_overflow_structure_type_code_other_text": "",
    "collection_system_identifier": "",
    "permitted_feature_identifier": "",
-   "latitude_measure": "39.528306",
-   "longitude_measure": "-85.792444",
+   "latitude_measure": "39.528",
+   "longitude_measure": "-85.792",
    "sewer_overflow_bypass_duration_hours": "17.42",
    "sewer_overflow_bypass_start_datetime": "2026-08-12 21:30:00",
    "sewer_overflow_bypass_end_datetime": "2026-08-13 14:55:00",

@@ -107,11 +107,11 @@ AGENCY = [
     {"id": "in-idem-beachalert", "agency": "Indiana Department of Environmental Management",
      "name": "Indiana Department of Environmental Management (BeachAlert)", "channel_kind": "state_alert_page",
      "urls": ["https://portal.idem.in.gov/BeachAlert/"], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "login", "publishes": "unknown",
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other", "publishes": "unknown",
      "note": ("The Lake Michigan and inland beach advisories and closures (an E. coli result above 235 cfu/100 mL makes "
-              "the beach manager post an alert): the portal says \"There are no active Closures or Advisories\" beside "
-              "\"You don't have permissions to view these records\" and \"Error completing request\" (2026-11-14), so "
-              "its records need a sign-in; alerts are sent to registered users."),
+              "the beach manager post an alert), in a Power Apps portal whose page loads its records by script from an "
+              "entity-grid service and a beach map; the page alone shows only templates, and the data calls were not "
+              "verified in the research (2026-11-14), so whether the records need a sign-in is not settled."),
      "sources": ["in-idem-beachalert"]},
     {"id": "in-dnr-advisories-closings", "agency": "Indiana Department of Natural Resources",
      "name": "Indiana Department of Natural Resources (state park advisories and closings)",
@@ -136,7 +136,7 @@ OWN = [
      "name": "City of South Bend", "channel_kind": "email_list", "urls": [], "method": None, "legal_basis": Q_522,
      "basis_kind": "law", "monitored": False, "unmonitored_reason": "email_only", "publishes": "notices",
      "signup_url": "https://southbendin.gov/department/public-works/utilities-division/waste-water/",
-     "note": "E-mail CSO notifications to people who sign up by telephone (574-277-8515); not subscribed.",
+     "note": "E-mail CSO notifications to people who sign up by telephone; not subscribed.",
      "sources": ["in-south-bend-cso"]},
     {"id": "in-south-bend-cso-page", "operator_id": "in-city-of-south-bend", "permit": "IN0024520",
      "name": "City of South Bend", "channel_kind": "operator_page",
