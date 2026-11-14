@@ -530,3 +530,25 @@ def test_astra_p1_1_migration_keeps_each_rows_event_id_when_a_record_key_repeats
         recs = _beachwatch(st["rows"], at, prev)[0]
         assert {r["raw"]["row"]["OBJECTID"]: r["event_id"] for r in recs} == old
         prev = recs
+
+def test_astra_p1_2_migration_keeps_a_saved_observation_inside_its_horizon():
+    from datetime import UTC, datetime
+    from build import status as S
+    st = _legacy("active")
+    assert st["records"][0]["raw"]["_first_seen_at"] == "2026-06-12T16:00:00Z"
+    for at in ("2026-06-13T16:00:00Z", "2026-06-23T16:00:00Z"):              # inside and past the 14-day sample age
+        r = _beachwatch(st["rows"], at, st["records"])[0][0]
+        assert r["sampled_at"] == "2026-06-08" and r["started_at"] == "2026-06-12T16:00:00Z"
+        assert r["time_precision"] == "poll" and r["status"] == "advisory_active" and r["ended_at"] is None
+        assert r["raw"]["_legacy_sample_clock_removed"]["started_at"] == "2026-06-08"   # the invented start is gone
+        ivs = S.event_intervals(r, "NE", datetime(2026, 6, 24, tzinfo=UTC), None, S.load_rules())
+        red = [(iv["start"].isoformat(), iv["end"].isoformat()) for iv in ivs if iv["color"] == "red"]
+        assert red == [("2026-06-12T16:00:00+00:00", "2026-06-26T16:00:00+00:00")]
+
+def test_astra_p1_2_migration_bounds_a_saved_continuation_by_the_newer_samples_first_sighting():
+    st = _legacy("chain")
+    recs = {r["source_record_id"]: r for r in _beachwatch(st["rows"][-1], "2026-06-13T16:00:00Z", st["records"])[0]}
+    w22, w23 = recs["LBB1ROCKFD04-2026-w22"], recs["LBB1ROCKFD04-2026-w23"]
+    assert (w22["started_at"], w22["ended_at"], w22["status"]) == ("2026-06-05T16:00:00Z", "2026-06-12T16:00:00Z", "ended")
+    assert w22["raw"]["ended_at_precision"] == "poll" and w22["time_precision"] == "poll"
+    assert (w23["started_at"], w23["ended_at"], w23["status"]) == ("2026-06-12T16:00:00Z", None, "advisory_active")
