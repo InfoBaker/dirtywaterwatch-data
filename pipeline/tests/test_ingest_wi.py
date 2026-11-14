@@ -93,7 +93,7 @@ def test_volume_sentences_and_reductions():
     recs = built()[0]
     assert recs["storm-update-june-18-19-2018:cso"]["volume_gal"] == 360_000_000     # not the 112 million "reduced"
     assert recs["storm-update-june-18-19-2018:sso"]["volume_gal"] == 3_700_000      # the next sentence's figure
-    assert recs["storm-update-june-18-19-2018:sso"]["raw"]["start_basis"].startswith("the first day")
+    assert recs["storm-update-june-18-19-2018:sso"]["raw"]["start_basis"].startswith("the date the post")
     assert recs["storm-update-for-september-13-2019:sso"]["volume_gal"] == 41_000
     assert recs["storm-update-for-september-13-2019:cso"]["volume_gal"] == 282_000_000
     assert recs["storm-update-august-26-to-29:cso"]["volume_gal"] == 295_700_000
@@ -434,3 +434,85 @@ def test_p2_8_a_known_post_is_read_again_after_thirty_days_and_a_retry_beyond_pa
     assert set(prev) | {"old-one"} <= asked       # every known post revalidated after 30 days, and the retry
     again = M.fetch_safe(FakeSession({1: p1}, {}), 1, prev, fetched_at="2026-11-20T18:00:00Z")
     assert again["failed"] == []                  # read six days ago: not asked for again
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-14, second pass
+
+def test_r2_p1_1_negated_labelled_volumes_and_negated_waters_make_nothing():
+    t = "MMSD Storm Update June 1, 2027"
+    assert _recs(t, [t, "No combined sewer overflow of 100 gallons occurred on June 1, 2027."]) == {}
+    assert _recs(t, [t, "A combined sewer overflow of 100 gallons may occur on June 1, 2027."]) == {}
+    r = _recs(t, [t, "A combined sewer overflow occurred on June 1, 2027.", "No overflow into Example Creek occurred."])
+    assert r["cso"]["waterbody_text"] is None
+
+
+def test_r2_p1_2_each_overflow_keeps_its_own_day_in_one_paragraph_or_two():
+    t = "MMSD Storm Update June 1-2, 2027"
+    one = "A combined sewer overflow occurred on June 1, 2027. A separate sewer overflow occurred on June 2, 2027."
+    for lines in ([t, one], [t, *one.split(". ", 1)]):
+        r = _recs(t, lines)
+        assert r["cso"]["started_at"] == "2027-06-01" and r["sso"]["started_at"] == "2027-06-02"
+    storm = _recs("MMSD Storm Update June 1-2, 2027", ["MMSD Storm Update June 1-2, 2027",
+                                                        "MMSD is reporting sewer overflows that resulted from rain."])
+    assert storm["sso"]["started_at"] == "2027-06-01" and "on or after this day" in storm["sso"]["raw"]["start_basis"]
+    assert storm["sso"]["raw"]["period_end"] == "2027-06-02"
+
+
+def test_r2_p1_3_an_expected_end_is_not_an_end():
+    t = "MMSD Storm Update June 1, 2027"
+    r = _recs(t, [t, "A combined sewer overflow started at 1:00 pm on June 1, 2027.",
+                  "The combined sewer overflow is expected to continue until 2:00 pm on June 2, 2027."])
+    assert r["cso"]["ended_at"] is None and r["cso"]["status"] == "unknown"
+
+
+def test_r2_p1_4_a_stamped_holding_page_keeps_the_records_and_main_fails_an_incomplete_read(monkeypatch, tmp_path):
+    recs, _ = built()
+    d = doc()
+    d["items"] = [i for i in d["items"] if i["slug"] == "storm-update-august-1st-2026"]
+    d["posts"] = {"storm-update-august-1st-2026": {"stamp": "08/06/26 09:00:am", "letters": [],
+                                                  "lines": ["MMSD Storm Update August 1st, 2026", "Temporarily unavailable"]}}
+    again, stats = M.build(d, list(recs.values()), FETCHED)
+    assert "storm-update-august-1st-2026:cso" in {r["source_record_id"] for r in again}
+    assert stats["posts_without_report"] == ["storm-update-august-1st-2026"]
+    written = {}
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, ok=True, error=None, meta=None: written.update(
+        ok=ok, error=error, meta=meta) or tmp_path / "x.json")
+    monkeypatch.setattr(M, "read_json", lambda *a, **k: {"records": list(recs.values())})
+    f = tmp_path / "doc.json"
+    f.write_text(json.dumps(d))
+    assert M.main(["--file", str(f)]) == 1
+    assert written["ok"] is False and "storm-update-august-1st-2026" in written["error"]
+    assert written["meta"]["retry"][0]["slug"] == "storm-update-august-1st-2026"
+
+
+def test_r2_p1_6_nothing_after_the_contact_line_is_kept_and_records_hold_no_prose():
+    html = ('<h1 class="ccm-block-page-title page-title">MMSD Storm Update Example</h1><div>01/02/27 09:00:am</div>'
+            '<p>MMSD is reporting a combined sewer overflow that took place on January 1, 2027.</p>'
+            '<p>Questions: call the office.</p>'
+            '<p><a href="https://www.mmsd.com/download_file/view/y/2">Pat Example</a></p>')
+    d = M.page_doc(html)
+    assert "Pat Example" not in json.dumps(d) and d["letters"] == []
+    r = M.records_for({"url": "u", "slug": "e", "title": "MMSD Storm Update Example", "list_date": None}, d, FETCHED)[0]
+    assert "text" not in r["raw"] and "_doc" not in r["raw"]
+
+
+def test_r3_source_yaml_names_every_emitted_category():
+    y = (ROOT / "data" / "sources" / "wi-mmsd-storm-updates.yaml").read_text()
+    types = {r["event_type"] for r in built()[0].values()}
+    line = next(x for x in y.splitlines() if x.startswith("event_types:"))
+    assert all(f'"{t}"' in line for t in types)
+
+
+def test_r2_p2_10_a_timed_start_with_no_end_gets_14_days_from_its_report_as_the_text_says():
+    from datetime import datetime, timedelta, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    r = built()[0]["storm-update-september-3rd-2026:cso"]
+    ivs = S.event_intervals(r, "WI", datetime(2026, 9, 9, tzinfo=timezone.utc), rules=rules)
+    told = datetime(2026, 9, 8, 16, tzinfo=timezone.utc)                  # the post's stamp, 11:00 CDT
+    assert (ivs[0]["rule"], ivs[0]["color"], ivs[0]["start"], ivs[0]["end"]) == \
+        ("no_end", "yellow", told, told + timedelta(days=14))
+    assert "one with a time but no end shows caution for 14 days from its report" in \
+        rules["red"]["by_state"]["WI"]["basis"]
+    t = (ROOT / "research" / "wi" / "state-text.md").read_text()
+    assert "one with a time but no end shows caution for 14 days from its report" in t
+    assert "under a Wisconsin permit" in t and "tribal land" in t
