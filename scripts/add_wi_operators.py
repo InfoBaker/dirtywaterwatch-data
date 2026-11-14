@@ -234,6 +234,11 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter, int]:
         rid = "wi-mmsd" if "WI0036820" in ps else (rs[0]["id"] if rs else f"wi-{slug(g['name'])}")
         if rid in ids:
             rid = f"{rid}-{ps[0].lower()}"
+        own = [r for r in rs if not r.get("npdes_permit")]
+        if own and not set(ps) & set(RESEARCH_NAME):
+            # an operator found through its own notice: the name it gives itself, not EPA's facility name
+            g = {**g, "name": tidy(own[0]["name"]), "basis": "the operator's own name on its overflow notice (research)",
+                 "legal_form": form(tidy(own[0]["name"]), None) or g["legal_form"]}
         new.append(make_row(rid, g, ps, rs, plants, cso))
         ids.add(rid)
         counts["rows with research" if rs else ("private rows" if g["private"] else "rows")] += 1

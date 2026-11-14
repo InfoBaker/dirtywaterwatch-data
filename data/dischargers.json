@@ -457366,7 +457366,7 @@
   "towns": [
    "Fennimore"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permit name (the owning body). Plants: Fennimore Wastewater Treatment Facility (WI0023981). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "notes": "Owner: the operator's own name on its overflow notice (research). Plants: Fennimore Wastewater Treatment Facility (WI0023981). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "aliases": [
@@ -457694,8 +457694,8 @@
  },
  {
   "id": "wi-fremont-sso",
-  "name": "Fremont Orihula Wolf River Joint S C",
-  "short_name": "Fremont Orihula Wolf River Joint S C",
+  "name": "Fremont-Orihula-Wolf River Joint Sewerage Commission",
+  "short_name": "Fremont-Orihula-Wolf River Joint Sewerage Commission",
   "legal_form": "special district",
   "state": "WI",
   "kind": "plant",
@@ -457713,7 +457713,7 @@
   "towns": [
    "Fremont"
   ],
-  "notes": "Owner: EPA ICIS-NPDES facility name (the owning body is not in the file). Plants: Fremont Orihula Wolf River Joint S C (WI0026158). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "notes": "Owner: the operator's own name on its overflow notice (research). Plants: Fremont Orihula Wolf River Joint S C (WI0026158). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "aliases": [
@@ -458314,7 +458314,7 @@
   "towns": [
    "Hortonville"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permit name (the owning body). Plants: Hortonville Wastewater Treatment Facility (WI0022896). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "notes": "Owner: the operator's own name on its overflow notice (research). Plants: Hortonville Wastewater Treatment Facility (WI0022896). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "aliases": [
@@ -459677,7 +459677,7 @@
   "towns": [
    "Menomonie"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permit name (the owning body). Plants: Menomonie Wastewater Treatment Facility (WI0024708). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "notes": "Owner: the operator's own name on its overflow notice (research). Plants: Menomonie Wastewater Treatment Facility (WI0024708). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "aliases": [
@@ -460333,8 +460333,8 @@
  },
  {
   "id": "wi-oconomowoc-sso",
-  "name": "Oconomowoc Wastewater Treatment Plnt",
-  "short_name": "Oconomowoc Wastewater Treatment Plnt",
+  "name": "Oconomowoc Utilities",
+  "short_name": "Oconomowoc Utilities",
   "legal_form": null,
   "state": "WI",
   "kind": "plant",
@@ -460354,7 +460354,7 @@
   "towns": [
    "Oconomowoc"
   ],
-  "notes": "Owner: EPA ICIS-NPDES facility name (the owning body is not in the file). Plants: Oconomowoc Wastewater Treatment Plnt (WI0021181). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "notes": "Owner: the operator's own name on its overflow notice (research). Plants: Oconomowoc Wastewater Treatment Plnt (WI0021181). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "aliases": [
@@ -461861,8 +461861,8 @@
  },
  {
   "id": "wi-stoughton-sso",
-  "name": "City of Stoughton",
-  "short_name": "City of Stoughton",
+  "name": "Stoughton Utilities",
+  "short_name": "Stoughton Utilities",
   "legal_form": "city",
   "state": "WI",
   "kind": "plant",
@@ -461882,7 +461882,7 @@
   "towns": [
    "Stoughton"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permit name (the owning body). Plants: Stoughton Wastewater Treatment Facility (WI0020338). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "notes": "Owner: the operator's own name on its overflow notice (research). Plants: Stoughton Wastewater Treatment Facility (WI0020338). SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "aliases": [
