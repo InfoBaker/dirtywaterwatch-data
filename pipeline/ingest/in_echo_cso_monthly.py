@@ -22,7 +22,8 @@ Records
   One per permit + outfall + month in which any of the three figures is above zero: event_type cso, status ended,
   started_at the first and ended_at the last day of the month, time_precision month, reported_at the DMR's
   ValueReceivedDate (the day EPA received it), volume_gal the month's million gallons times 1,000,000 when given,
-  volume_text 'N discharge events, H hours, V million gallons in YYYY-MM (monthly DMR totals)'. These are monthly
+  volume_text 'N discharge events, H hours, V million gallons in YYYY-MM (monthly DMR totals)'; a volume implying more
+  than MAX_MGAL_PER_HOUR million gallons an hour of the month's hours stays in the text only (raw.volume_note). These are monthly
   totals, not events: the status build gives them the monthly mark and never red or yellow (time_precision month;
   build/status.py EPA_MONTHLY_SOURCES), and the charts never add them to the discharge counts. NODI C months and months
   with every figure zero are not records; they are counted in meta and kept per outfall in
@@ -38,7 +39,9 @@ Lag and cadence
   The request covers --since (default 2025-01-01) to today, so late and revised DMRs are picked up.
 
 Failures
-  A permit whose requests fail three times is named in meta.fetch; the run is ok=False and the previous records stay
+  A permit ECHO calls invalid ('NPDES ID ... is invalid!': IN0020215 on 2026-11-14, a permit IDEM's layer lists that
+  ICIS does not hold) is named in meta.fetch as 'not in ECHO' and is no failure. A permit whose requests fail three
+  times is named in meta.fetch; the run is ok=False and the previous records stay
   (a first run with nothing to keep writes what it has, still ok=False). Each try waits at most REQUEST_TIMEOUT s; after
   MAX_CONSECUTIVE_FAILURES failed tries in a row the run asks nothing more.
 
@@ -71,6 +74,9 @@ SLEEP_S = 1.0
 CACHE_DAYS = 7
 REQUEST_TIMEOUT = 60
 MAX_CONSECUTIVE_FAILURES = 5
+# a filed volume implying more than this many million gallons an hour is kept as text only (one outfall-month on
+# 2026-11-14: 28,482 'Mgal' in 15 hours, IN0024741 001, 2026-09; the largest plausible ones run 2 to 4 an hour)
+MAX_MGAL_PER_HOUR = 100
 MGAL = {"Mgal": 1_000_000, "MG": 1_000_000, "MG/mo": 1_000_000, "gal": 1, "gal/mo": 1}
 RAW_FIELDS = ("DMRValueId", "DMRValueNmbr", "DMRUnitDesc", "StatisticalBaseDesc", "NODICode", "NODIDesc",
               "ValueReceivedDate", "DMRDueDate", "DaysLate", "VersionNmbr", "LimitSetScheduleId")
@@ -133,6 +139,9 @@ def fetch(permit: str, code: str, since: date) -> tuple[dict | None, str]:
             r = requests.get(URL, params=params, headers=HEADERS, timeout=REQUEST_TIMEOUT)
             r.raise_for_status()
             js = r.json()
+            msg = str(((js.get("Results") or {}).get("Error") or {}).get("ErrorMessage") or "")
+            if "is invalid" in msg:
+                return None, f"not in ECHO ({' '.join(msg.split())})"     # an answer, not a failure: never retried
             if (js.get("Results") or {}).get("Message") != "Success":
                 raise ValueError(str(js)[:200])
             save_raw(SOURCE_ID, r.content, f"{permit}-{code}.json")
@@ -274,13 +283,19 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
         lat, lon = o.get("lat"), o.get("lon")
         slug = o.get("water_slug")
         tz = zones.indiana_zone(county=o.get("county"), lat=lat, lon=lon)
+        vol_note = None
+        if fg["volume_gal"] and fg["hours"] and fg["volume_gal"] / 1e6 / fg["hours"] > MAX_MGAL_PER_HOUR:
+            vol_note = (f"the filed volume ({fg['volume_raw']} in {fg['hours']:g} hours) implies more than "
+                        f"{MAX_MGAL_PER_HOUR:g} million gallons an hour, likely gallons filed as million gallons: "
+                        "kept as filed in the text, not counted as a volume")
+            fg = dict(fg, volume_gal=None)
         raw = {"month": ym, "permit_feature": feat,
                "events": fg["events"], "hours": fg["hours"], "volume": fg["volume_raw"],
                "dmr": {name: {k: row.get(k) for k in RAW_FIELDS} | {"parameter": row.get("_param")}
                        for name, row in sorted(cell.items())},
                "receiving_water_registry": o.get("receiving_water_echo"),
                "outfall_registry_file": o.get("_file"), "outfall_status": o.get("outfall_status"),
-               "county": o.get("county"), "time_zone": tz,
+               "county": o.get("county"), "time_zone": tz, **({"volume_note": vol_note} if vol_note else {}),
                "note": ("the operator's monthly DMR totals for this outfall (events, hours, million gallons), not an "
                         "individual discharge: no day is given")}
         records.append(event(

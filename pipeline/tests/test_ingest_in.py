@@ -334,3 +334,32 @@ def test_a_recent_advisory_sample_opens_an_interval_at_the_poll_and_a_newer_samp
 def test_an_old_season_first_read_late_opens_nothing():
     recs, _ = _cyano(at="2026-11-14T18:00:00Z")
     assert all(r["started_at"] is None and r["status"] == "unknown" for r in recs)
+
+
+def test_an_implausible_monthly_volume_is_kept_as_text_only():
+    from collections import Counter, defaultdict
+
+    from ingest import in_echo_cso_monthly as M
+    res = _results()
+    res[("IN0000004", "74063")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]["DMRValueNmbr"] = "28482"
+    stats = defaultdict(Counter)
+    cells, names = M.collect(res, _registry(), stats)
+    r = M.build_records(cells, names, _registry(), {}, stats)[0]
+    assert r["volume_gal"] is None and "28482 million gallons" in r["volume_text"]
+    assert "not counted as a volume" in r["raw"]["volume_note"]
+
+
+def test_an_invalid_permit_is_an_answer_not_a_failure(monkeypatch):
+    from ingest import in_echo_cso_monthly as M
+
+    class R:
+        content = b"{}"
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"Results": {"Error": {"ErrorMessage": "NPDES ID  IN0000009 is invalid!"}}}
+    monkeypatch.setattr(M.requests, "get", lambda *a, **k: R())
+    res, how = M.fetch("IN0000009", "84165", M.date(2025, 1, 1))
+    assert res is None and how.startswith("not in ECHO") and not how.startswith("failed")
