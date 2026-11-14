@@ -253,3 +253,65 @@ def test_missing_waters_list_carries_the_bloom_lakes_with_their_counties():
     if "Clear Lake" in {r["name"] for r in d["rows"]}:
         assert names["Clear Lake"]["county"] == "Pierce County"
     assert d["waters"] == len(d["rows"])
+
+
+# ---------------------------------------------------------------- review 2026-11-14 (Astra), the archive
+
+class _Resp:
+    def __init__(self, text, status=200):
+        self.text, self.status_code = text, status
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise L.requests.HTTPError(f"{self.status_code}")
+
+
+class _Session:
+    def __init__(self, answers):
+        self.answers = list(answers)
+
+    def request(self, method, url, **kw):
+        return self.answers.pop(0)
+
+
+def test_p1_4_a_refused_or_malformed_archive_read_fails(monkeypatch):
+    monkeypatch.setattr(L.time, "sleep", lambda s: None)
+    page = (FIX / "legacy-search-sample.html").read_text()
+    with pytest.raises(L.requests.HTTPError):
+        L.fetch_search("sewage", _Session([_Resp("Access denied", 403)]))
+    with pytest.raises(ValueError, match="not its table"):
+        L.fetch_search("sewage", _Session([_Resp(page), _Resp("<html>Service unavailable</html>")]))
+    no_count = page.replace("Records: 10", "")
+    with pytest.raises(ValueError, match="no record count"):
+        L.fetch_search("sewage", _Session([_Resp(page), _Resp(no_count)]))
+    short = page.replace("Records: 10", "Records: 25")
+    with pytest.raises(ValueError, match="rows read of 25"):
+        L.fetch_search("sewage", _Session([_Resp(page), _Resp(short), _Resp(short)]))
+    assert len(L.fetch_search("sewage", _Session([_Resp(page), _Resp(page)]))) == 10
+
+
+def test_p1_4_a_report_that_leaves_the_archive_is_kept_and_marked():
+    recs, _, _ = legacy()
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    later, meta = L.build([r for r in rows if r["incident_id"] != "EIR9245"], "2026-12-20T00:00:00Z",
+                          list(recs.values()))
+    gone = next(r for r in later if r["source_record_id"] == "EIR9245")
+    assert gone["raw"]["_missing_from_source_since"] == "2026-12-20T00:00:00Z" and meta["carried_missing"] == 1
+
+
+def test_p2_2_nearby_incidents_are_not_duplicates_after_rounding():
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    a = next(r for r in rows if r["incident_id"] == "EIR10628")
+    b = dict(a, incident_id="EIR99999", latitude="47.8471", longitude="-102.6092")      # invented, same 0.001 cell
+    recs, _ = L.build([a, b], FETCHED)
+    assert all(r["duplicate_of"] is None for r in recs)
+    recs, _ = L.build([a, dict(a, incident_id="EIR99999")], FETCHED)                    # every value repeated
+    assert [r["duplicate_of"] for r in recs if r["source_record_id"] == "EIR99999"] == [
+        "nd-deq-eir-legacy-general:EIR10628"]
+
+
+def test_p1_6_archive_free_text_is_scrubbed_before_saving():
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    r = dict(rows[0], contaminant="Sewage from 1234 Example Street, call 701-555-0142")
+    out = json.dumps(L.safe_row(r)) + json.dumps(L.record(r, FETCHED))
+    assert "701-555-0142" not in out and "1234 Example" not in out
