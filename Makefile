@@ -120,6 +120,11 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Missouri: mo_kc_water_news (KC Water's overflow news posts through the site search's RSS feed; the
+#                  first two pages each run, `--backfill` for the 2016- archive), mo_msd_alerts (MSD Project Clear's own
+#                  overflow alerts and releases through its WordPress API; `--backfill` for 2013-) and mo_dnr_concerns
+#                  (DNR's monthly Water Pollution Control concern reports, the sewer overflow concerns with the allegation
+#                  filter; each PDF read once); data/outfalls-mo.json is DNR's outfall layer (scripts/mo_outfall_layer.py)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
