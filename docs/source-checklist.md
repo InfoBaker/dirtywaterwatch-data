@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1468 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| de | 3 | 0 | 5 | 1 | 0 | 9 |
+| sc | 5 | 0 | 3 | 1 | 2 | 11 |
+| **all** | **527** | **234** | **429** | **203** | **75** | **1468** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1677,33 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## de: Delaware (9)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `de-dnrec-derns-recent-releases` | DNREC Delaware Environmental Release Notification System (DERNS): Recent Releases | used | fetched | events | Read by pipeline/ingest/de_dnrec_derns.py: the public list's newest pages each run and every page of ten substance searches once (SEWAGE, WASTEWATER and the rest), the sewage and sanitary-wastewater releases kept by rule, each release's detail page read for its report time, Released To boxes, quantity and DNREC's notes (contacts never read). Statewide; sewage from 10,000 gallons must be reported; permitted CSOs exempt. |
+| `de-dnrec-recreational-water` | DNREC Recreational Water Sampling Locations (beach advisory layer) | used | fetched | advisories | Read by pipeline/ingest/de_dnrec_recwater.py: DNREC's advisory and closure history on data.delaware.gov (dataset ever-58ni, Public Domain, 474 rows since 2001 on 2026-11-14) with the FirstMap station layer's points and current status (the map service's legend decodes CurrentAdvisory: 0 Current Advisory, 1 Outside Advisory Area, 2 Resampling Enterococcus Spike, 3 Winter, 4 No Current Advisory). |
+| `de-law-7-del-c-6028` | 7 Del. C. 6028 Report of discharge of pollutant (and 6014(b) central notification; 6002(20) environmental release) | used | fetched | law | Release reporting to DNREC "as soon as the person has knowledge", web posting by DNREC no later than 1 business day after the report; DNREC notification to legislators and registered neighbours within 12 hours for sewage of 10,000 gallons or more. Permitted discharges exempt. |
+| `de-dnrec-hab` | DNREC harmful algal bloom advisories | watch | inferred | advisories | Not searched in depth. |
+| `de-dnrec-shellfish` | DNREC shellfish closures (e.g. Indian River Bay closure after the Millsboro wastewater release) | watch | search_only | advisories | Emergency closures announced by press release and GovDelivery bulletins; DE_Shellfish_Aquaculture_Areas layer exists. |
+| `de-epa-cso-dmr` | ECHO DMR monthly CSO counts for DE0020320 | watch | inferred | events | The national monthly fallback for Wilmington; whether the permit carries CSO event parameters is unknown. |
+| `de-wilmington-cso-locations` | City of Wilmington CSO_Locations ArcGIS layer | watch | fetched | outfalls | The City's CSO structures layer (45 structures in the 2026-11-03 research); not used in this build: EPA's inventory's 41 open outfalls stand until the layer's structure ids are matched to the permit's outfall numbers (owner question). |
+| `de-wilmington-cso-site` | City of Wilmington "What is a CSO, Anyway?" site | watch | fetched | events | Describes signs at every CSO and a real-time control system; no overflow status, map, list or sign-up. |
+| `de-epa-sobe` | EPA SOBE extract, DE rows | rejected | fetched | events | No Delaware row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel). |
+
+## sc: South Carolina (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `sc-des-beach-monitoring` | SC DES Beach Monitoring: beach stations with advisory status (BW_Monitoring_Stations layer 0) and S.C. Beach Access Guide | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: 123 stations on 2026-11-14, 21 Long-Term (standing advisories from the first poll), 102 No Advisory; short-term advisories in season from the poll that shows them. |
+| `sc-des-hab` | SC DES algal bloom program | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: DES's bloom delineations behind the HAB Monitoring Map (897 on 2026-11-14, one Watch: J. Strom Thurmond Reservoir, Cedar Point Cove, dated 2026-10-16) with the program page's table of active watches and advisories. |
+| `sc-des-sso-reporting` | SC DES sewer system overflow reporting (Satellite Sewer System Program forms; SSO compliance and enforcement document) | used | search_only | law | Since 1998 DES requires reporting of any SSO reaching state waters, any over about 500 gallons not reaching water, and any that may cause a health or environmental concern; public notification programs required for 5,000 gallons or more since July 2008 (per DES document and City of Florence). Reports go on a mailed or faxed form; no public list found. DES is said to receive about 600 reported overflows a year. |
+| `sc-florence-sso-notices` | City of Florence "Notification of Sanitary Sewer Overflow" posts | used | fetched | events | Read by pipeline/ingest/sc_florence_sso.py: the City's news list each run and each 'Notification of Sanitary Sewer Overflow' page (five on 2026-11-14, March 2024 to October 2025, Jeffries Creek), the media contacts cut, the City's days and figures as given. |
+| `sc-law-48-1-95` | S.C. Code 48-1-95 Wastewater utilities; procedures for significant spills | used | fetched | law | Public-notice duty: utilities must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated domestic sewage) within 24 hours of discovery; DES gives notice if the utility does not. No channel named. |
+| `sc-charleston-waterkeeper` | Charleston Waterkeeper water quality monitoring (Swim Guide) | watch | search_only | monitoring | Weekly summer bacteria sampling in Charleston harbor creeks, published on Swim Guide; also SSO advocacy. |
+| `sc-des-freshwater-swim-advisories` | SC DES freshwater Swimming Advisory sites (Water_Advisories layer 0) | watch | fetched | advisories | The layer answered (23 sites: name, station, point; contact and telephone fields not read) but carries no date or status and DES does not say what a site on it means; registered as a channel, not read as advisories until DES confirms (owner question). |
+| `sc-des-shellfish` | SC DES Shellfish Harvest monitoring stations and closures | watch | fetched | advisories | Station layer exists; emergency closures after spills not checked. |
+| `sc-epa-sobe` | EPA SOBE extract, SC rows | rejected | fetched | events | No South Carolina row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel). |
+| `sc-charleston-water-notices` | Charleston Water System overflow notices and West Ashley alert system (2026 settlement) | unreachable | fetched | events | www.charlestonwater.com did not answer this site's client on 2026-11-14 (TCP connection timed out, three attempts); its news page is a watched channel. The 2026-11-09 research read article 270 rewritten for a second break: an article address is not one overflow. |
+| `sc-des-sso-database` | SC DES SSO report records (internal) | unreachable | inferred | events | No public table, map or download of SSO reports found (searched DES site, DES ArcGIS server folders water, Hosted, Emergency_Response, and ArcGIS Online). Records request is the only route. |
