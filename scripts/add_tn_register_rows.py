@@ -116,12 +116,17 @@ AGENCY = [
               "(tn-tdec-hab-advisory-status)"),
      "sources": ["tn-tdec-hab-advisory-status"]},
     {"id": "tn-clean-water-nashville", "agency": "Metro Water Services (Clean Water Nashville)",
+     "operator_id": "tn-metro-water-services",
      "name": "Clean Water Nashville", "channel_kind": "operator_page",
-     "urls": ["https://www.cleanwaternashville.org/history-and-consent-decree"], "method": "html",
+     "urls": ["https://www.cleanwaternashville.org/monthly-regulatory-reports"], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "documents", "records": False, "every_hours": 24, "noun": "Consent decree page",
-     "note": ("Metro Water Services' consent decree program site (answered 200 on 2026-11-07): the history, a map of CSO "
-              "locations and the decree reports; no event notices found. Voluntary. (tn-clean-water-nashville)"),
+     "publishes": "documents", "records": False, "every_hours": 24, "noun": "Monthly overflow reports",
+     "checked": "2026-11-09",
+     "note": ("Metro Water Services publishes monthly SSO reports with event dates, locations, causes, durations and "
+              "volumes, and CSO reports with dates, durations and flows. The index lists 2021 through September 2026 "
+              "as checked on 2026-11-09. This index is monitored for changes; the linked reports are not yet parsed "
+              "or collected as events. These are delayed reports, not a real-time notice feed. Voluntary. "
+              "(tn-clean-water-nashville)"),
      "sources": ["tn-clean-water-nashville"]},
     {"id": "tn-chattanooga-cd-quarterly", "agency": "City of Chattanooga", "name": "City of Chattanooga",
      "channel_kind": "operator_page",
@@ -216,20 +221,29 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                 id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit, channel_kind="operator_page",
                 urls=[], method=None, legal_basis=None, basis_kind="voluntary", monitored=False,
                 unmonitored_reason="other", publishes="unknown", records=False, noun="Notice to the public",
+                checked="2026-11-09" if oid == "tn-metro-water-services" else CHECKED,
                 sources=["tn-law-0400-40-05-07"],
-                note=("No URL known (not searched individually): no Tennessee rule requires a permittee to tell the "
+                note=("Not searched individually for real-time alerts. Metro Water Services' monthly SSO and CSO "
+                      "reports are publicly available; their index is registered as tn-clean-water-nashville. "
+                      "Additional voluntary incident-alert channels have not been verified." if oid == "tn-metro-water-services" else
+                     ("No URL known (not searched individually): no Tennessee rule requires a permittee to tell the "
                       "public of an overflow, and this operator's own pages were not searched, so whether it posts "
-                      "notices online is not known."))))
+                      "notices online is not known.")))))
         if op.get("kind") == "cso":
             p = next((x for x in op.get("npdes_permits") or [] if x in ("TN0020575", "TN0020656", "TN0024210")), permit)
             rows.append(finish(base(
                 id=f"{oid}-cso-notice", operator_id=oid, name=name, permit=p, channel_kind="operator_page", urls=[],
                 method=None, legal_basis=Q_CSO.format(permit=p), basis_kind="permit", monitored=False,
                 unmonitored_reason="other", publishes="unknown", records=False, noun="CSO notice",
+                checked="2026-11-09" if oid == "tn-metro-water-services" else CHECKED,
                 sources=["tn-clean-water-nashville"] if oid == "tn-metro-water-services" else [],
-                note=("No URL known: no public notice of a combined sewer overflow event was found for this permittee, "
+                note=("Metro Water Services publishes delayed monthly CSO reports, registered as tn-clean-water-nashville. "
+                      "Not verified in the research: a real-time CSO notification channel or the permit's "
+                      "public-notification clause. The monthly reports do not establish compliance with that clause."
+                      if oid == "tn-metro-water-services" else
+                     ("No URL known: no public notice of a combined sewer overflow event was found for this permittee, "
                       "and the permit's public-notification clause is not verified in the research. CSO discharges are "
-                      "permitted and are not in TDEC's Events Report."))))
+                      "permitted and are not in TDEC's Events Report.")))))
     return rows
 
 

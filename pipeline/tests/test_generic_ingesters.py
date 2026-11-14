@@ -788,3 +788,27 @@ def test_a_response_that_fails_to_parse_is_not_saved(monkeypatch, tmp_path):
     with pytest.raises(ValueError):
         runner.fetch_rows("x-test", block(), None, None)
     assert saved == [] and states == []
+
+
+def test_optional_after_history_runs_after_carried_rows_without_changing_post_order(monkeypatch):
+    previous, _ = build_csv()
+    calls = []
+    original = F.resolve
+
+    def before(records, ctx):
+        calls.append("post")
+        assert all("_first_seen_at" not in r["raw"] for r in records)
+        assert len(records) == 1
+
+    def after(records, ctx):
+        calls.append("after_history")
+        assert len(records) == 3                         # two missing rows have now been carried
+        assert all(r["raw"]["_first_seen_at"] == FETCHED for r in records)
+        assert tuple(previous) == ctx.previous_records
+
+    hooks = {"test.before": before, "test.after": after}
+    monkeypatch.setattr(F, "resolve", lambda name: hooks[name] if name in hooks else original(name))
+    b = block(post="test.before", after_history="test.after")
+    runner.build("x-test", b, [{"report_id": "A1", "start": "2026-10-02", "kind": "CSO"}],
+                 "2026-11-05T12:00:00Z", previous)
+    assert calls == ["post", "after_history"]

@@ -102,6 +102,7 @@ class Ctx:
     fetched_at: str
     source_updated_at: str | None = None
     extra: dict = field(default_factory=dict)       # platform metadata, transform caches
+    previous_records: tuple = ()                 # read-only input for stateful after_history hooks
 
     @property
     def fetched_dt(self) -> datetime:
@@ -859,7 +860,9 @@ def validate(block: dict, source_id: str = "") -> list[str]:
     if bad_w:
         errs.append(f"waters: unknown keys {sorted(bad_w)}")
     hooks = [("transform", f) for f in listify(block.get("transform"))] + \
-            [("post", f) for f in listify(block.get("post"))] + [("waters.matcher", f) for f in listify(w.get("matcher"))]
+            [("post", f) for f in listify(block.get("post"))] + \
+            [("after_history", f) for f in listify(block.get("after_history"))] + \
+            [("waters.matcher", f) for f in listify(w.get("matcher"))]
     for k, fn in hooks:
         try:
             resolve(fn)

@@ -20,7 +20,7 @@ from export import csv as csv_export  # noqa: E402
 
 HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet_name,event_type,category,status,started_at,"
           "ended_at,end_reported,volume_gal,volume_text,lat,lon,towns,source_id,source_name,record_id,published_at,"
-          "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by").split(",")
+          "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by,sampled_at,time_precision,ended_at_precision").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 
@@ -93,7 +93,7 @@ def test_files_and_columns(tmp_path):
         "record_id": "1", "published_at": "2026-10-20T15:00:00-04:00", "reported_at": "", "source_updated_at": "",
         "retrieved_at": "2026-11-02T10:45:00Z", "report_url": "https://eeaonline.eea.state.ma.us/portal/x", "notice_url": "",
         # no page of its own (page_ids is empty here): its row on the state-year archive page
-        "site_url": "https://dirtywaterwatch.org/discharges/ma/2026/#ma-massdep~3A1", "duplicate_of": "", "superseded_by": ""}
+        "site_url": "https://dirtywaterwatch.org/discharges/ma/2026/#ma-massdep~3A1", "duplicate_of": "", "superseded_by": "", "sampled_at": "", "time_precision": "", "ended_at_precision": ""}
 
 
 def test_text_is_utf8_crlf_and_a_comma_and_quote_are_quoted(tmp_path):
@@ -159,10 +159,10 @@ def test_a_water_file_holds_what_the_water_page_lists_including_upstream_reports
     assert [r["record_id"] for r in read(out / "water/mill-river-ma.csv")] == ["up"]
 
 
-def test_duplicates_are_included_with_duplicate_of_and_superseded_by_as_the_last_columns(tmp_path):
+def test_duplicates_are_included_with_duplicate_of_and_superseded_by_columns(tmp_path):
     first, copy = ev("1"), ev("2", source_id="echo-sewer-overflow", duplicate_of="ma-massdep:1")
     out, _ = write(tmp_path, [first, copy])
-    assert header_of(out / "all-reports-2026.csv")[-2:] == ["duplicate_of", "superseded_by"]
+    assert header_of(out / "all-reports-2026.csv")[29:31] == ["duplicate_of", "superseded_by"]
     rows = {r["record_id"]: r for r in read(out / "all-reports-2026.csv")}
     assert rows["2"]["duplicate_of"] == "ma-massdep:1" and rows["1"]["duplicate_of"] == ""
     assert {r["record_id"] for r in read(out / "state/ma.csv")} == {"1", "2"}
@@ -343,3 +343,30 @@ def test_the_export_writes_the_csvs_and_counts_them_in_meta():
     assert "write_csvs" in src and '"csv_files": csv_files' in src and "OUT_DIR / \"csv\"" in src
     assert src.index("write_csvs") < src.index('"csv_files": csv_files') < src.index('write_compact(OUT_DIR / "meta.json"')
     assert src.index('write_compact(water_dir / f"{slug}.json"') < src.index("write_csvs")   # after the per-water files
+
+
+def test_historical_sample_keeps_its_year_and_archive_link_without_an_advisory_start(tmp_path):
+    sample = ev("sample", started=None, ended_at=None, published_at=None, reported_at=None,
+                source_updated_at=None, sampled_at="2025-06-09", event_type="hab_advisory", status="unknown",
+                fetched_at="2026-11-09T12:00:00Z")
+    public = X.public_event(sample)
+    assert public["sampled_at"] == "2025-06-09" and public["started_at"] is None
+    assert X.index_obj(public)["sampled_at"] == "2025-06-09"
+    assert X.time_key(public) == csv_export.time_key(public)
+    out, _ = write(tmp_path, [public], as_of="2026-11-09T12:00:00Z")
+    rows = read(out / "all-reports-2025.csv")
+    assert not (out / "all-reports-2026.csv").exists()
+    assert rows[0]["started_at"] == rows[0]["ended_at"] == ""
+    assert rows[0]["sampled_at"] == "2025-06-09" and rows[0]["end_reported"] == "false"
+    assert "/discharges/ma/2025/" in rows[0]["site_url"]
+    assert not csv_export.event_gets_page(public, csv_export.page_context([], as_of="2026-11-09T12:00:00Z"))
+
+
+def test_observed_sample_advisory_end_is_not_exported_as_agency_reported_end(tmp_path):
+    sample = ev("observed", started="2026-06-12T16:00:00Z", ended_at="2026-06-19T16:00:00Z",
+                sampled_at="2026-06-08", time_precision="poll", raw={"ended_at_precision": "poll"},
+                event_type="hab_advisory", status="advisory_lifted", published_at=None)
+    out, _ = write(tmp_path, [sample])
+    row = read(out / "all-reports-2026.csv")[0]
+    assert row["ended_at"] == "2026-06-19T16:00:00Z" and row["end_reported"] == "false"
+    assert row["time_precision"] == row["ended_at_precision"] == "poll"

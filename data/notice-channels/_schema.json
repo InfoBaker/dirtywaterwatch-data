@@ -29,6 +29,7 @@
    "entry": "{start, end}: regular expressions that cut this row's entry out of a page several rows share (from the first line matching start to the next line matching end)",
    "ignore_lines": "regular expressions of volatile lines (readings, clocks) left out of the text hash",
    "records": "false: never make records from this channel (default true)",
+   "availability_only": "true: monitor page availability without checking current status; requires records: false (no notice records from this row) (default false)",
    "dated_lines_are_notices": "true: any added dated line is a notice (an event table)",
    "default_event_type": "event type of a notice whose words name none (common.EVENT_TYPES)",
    "every_hours": "fetch at most this often (default: every refresh)",

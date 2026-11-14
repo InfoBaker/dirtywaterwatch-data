@@ -560,6 +560,35 @@ def test_closures_keep_an_explicit_end_and_age_out_without_one():
     assert colour(no_end, NOW - timedelta(days=2))[0] == "red"
 
 
+@pytest.mark.parametrize("status", ["advisory_active", "advisory_lifted", "ended"])
+def test_sample_observation_ageout_does_not_change_other_explicit_advisory_ends(status):
+    e = ev("e", event_type="hab_advisory", status=status, time_precision="poll",
+           started_at=iso(NOW - timedelta(days=30)), ended_at=iso(NOW - timedelta(days=2)))
+    ordinary = S.event_intervals(e, "MA", NOW, rules=TEST_RULES)
+    assert ordinary[0]["end"] == NOW - timedelta(days=2)
+    sampled = S.event_intervals({**e, "sampled_at": iso(NOW - timedelta(days=34))}, "MA", NOW, rules=TEST_RULES)
+    assert sampled[0]["end"] == NOW - timedelta(days=16)
+    assert sampled[0]["ended_at"] == e["ended_at"]  # observation evidence stays intact
+    assert sampled[1]["rule"] == "not_reconfirmed" and sampled[1]["end"] == NOW - timedelta(days=2)
+
+
+def test_nebraska_earlier_observation_periods_each_age_out_and_do_not_affect_other_feeds():
+    start, ended = iso(NOW - timedelta(days=40)), iso(NOW - timedelta(days=10))
+    raw = {"_advisory_clock_version": 1, "_advisory_observed": {"earlier_periods": [{"start": start, "end": ended}]}}
+    e = ev("sample", source_id="ne-dwee-beachwatch", event_type="hab_advisory", status="advisory_active",
+           started_at=iso(NOW - timedelta(days=3)), sampled_at=iso(NOW - timedelta(days=5)), time_precision="poll", raw=raw)
+    ivs = S.event_intervals(e, "NE", NOW, rules=TEST_RULES)
+    red = [iv for iv in ivs if iv["color"] == "red"]
+    assert len(red) == 2
+    assert red[0]["start"] == NOW - timedelta(days=40) and red[0]["end"] == NOW - timedelta(days=26)
+    assert red[0]["ended_at"] == ended  # retained observation end; no fabricated lift at the age-out
+    assert red[1]["start"] == NOW - timedelta(days=3) and red[1]["end"] == NOW + timedelta(days=11)
+    assert not any(iv["start"] <= NOW - timedelta(days=5) < iv["end"] for iv in ivs)
+    assert len([iv for iv in S.event_intervals({**e, "source_id": "another-feed"}, "MA", NOW, rules=TEST_RULES)
+                if iv["color"] == "red"]) == 1
+    assert raw["_advisory_observed"]["earlier_periods"] == [{"start": start, "end": ended}]
+
+
 def test_distribution_discouraged_files_are_withheld_unless_asked():
     d = tmp_events([])
     (d / "nh-des-swimming.json").write_text(json.dumps({

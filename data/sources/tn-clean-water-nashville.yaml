@@ -1,0 +1,27 @@
+id: "tn-clean-water-nashville"
+name: "Clean Water Nashville monthly sanitary and combined sewer overflow reports"
+url: "https://www.cleanwaternashville.org/monthly-regulatory-reports"
+homepage: "https://www.cleanwaternashville.org/monthly-regulatory-reports"
+kind: "html"
+level: "municipal"
+# Notes (research/tn, status candidate, verified fetched, checked 2026-11-09): Dated overflow
+#   reports are publicly available in monthly PDFs. The index is monitored; report extraction and
+#   deduplication against TDEC records are not implemented.
+# Access detail (research, quoted): Public monthly report index linking SSO and CSO PDFs; index
+#   verified on 2026-11-09. Individual PDF layouts and extraction have not been audited.
+# History: Monthly report links from January 2021 through September 2026 at the 2026-11-09 review.
+# Research notes: Availability of the monthly reports does not establish a real-time public-notice
+#   channel. Dates and fields are described by the official index; exact time precision requires
+#   inspection of the reports.
+cadence: "Monthly"
+license: "none stated"
+attribution: "Metro Water Services"
+enabled: true
+role: "events"
+event_types: ["cso", "sso"]
+states: ["TN"]
+access: ["html", "pdf"]
+access_detail: "Public monthly report index linking SSO and CSO PDFs; index verified on 2026-11-09. Individual PDF layouts and extraction have not been audited."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-09"
