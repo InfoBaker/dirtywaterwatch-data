@@ -1,0 +1,163 @@
+"""West Virginia DEP's algal bloom advisory map -> data/build/events/wv-dep-hab-advisories.json.
+
+Source
+  The map service behind DEP's Harmful Algal Blooms page (https://dep.wv.gov/WWE/watershed/Algae/Pages/
+  Harmful-Algal-Blooms.aspx): https://tagis.dep.wv.gov/arcgis/rest/services/webMercator/algae_advisories/MapServer
+  ("Algae advisories in West Virginia"), three layers: 1 'Algal Bloom Location' (points), 2 'Algal Bloom Segments'
+  (lines along a stream), 3 'Algal Bloom Area' (polygons on a lake). Fields: OBJECTID, Advisory (text), and
+  Date_Observed (DateObserved on layer 3), an esri date. Read 2026-11-14: every layer answered and held no row (DEP's
+  page also says no advisory is in effect; its table of reported blooms was last updated in August 2023). The layers
+  carry no person, no water name and no edit date.
+
+Records (a map of what is in effect, read as a snapshot)
+  - One record per row of any layer (source_record_id '<layer>-<OBJECTID>'), event_type hab_advisory (blooms, never
+    sewage), status advisory_active while the map shows it; advice_text is DEP's Advisory text in its words.
+  - started_at is the first read of the map that showed it (time_precision poll): DEP gives the day the bloom was
+    observed (raw.date_observed, a date on Eastern time), not the day an advisory was issued, so no issue date is
+    invented; reported_at, published_at and source_updated_at stay null. raw._last_seen_in_source is the latest read
+    that showed it, so the status build keeps it in effect while the map shows it.
+  - A row no longer on a map the module could read is lifted at that read (advisory_lifted, ended_at the read,
+    raw.ended_at_precision 'poll'), an upper bound, not DEP's lift time. A layer that answers with an error makes the
+    run ok=False: the records are kept and nothing is lifted.
+  - Placement by the agency's own geometry only: a point's position, a segment's middle vertex, an area's vertex mean,
+    rounded to three decimals (coord_source 'agency_layer'); raw.geometry_kind says which. No water name is invented.
+
+Run from pipeline/: python -m ingest.wv_dep_hab_advisories [--file saved.json] [--at 2026-11-14T12:00:00Z]
+Cadence: with the refresh (daily is enough; the map changes rarely).
+"""
+from __future__ import annotations
+
+import json
+import sys
+from datetime import UTC, datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+import requests
+
+from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+
+SOURCE_ID = "wv-dep-hab-advisories"
+SERVICE = "https://tagis.dep.wv.gov/arcgis/rest/services/webMercator/algae_advisories/MapServer"
+PAGE = "https://dep.wv.gov/WWE/watershed/Algae/Pages/Harmful-Algal-Blooms.aspx"
+LAYERS = {1: "point", 2: "segment", 3: "area"}
+STATE_PATH = BUILD_DIR / "wv-dep-hab-advisories-state.json"
+AUTHORITY = "West Virginia Department of Environmental Protection (algal bloom advisory map)"
+TZ = "America/New_York"
+START_BASIS = ("the first read of DEP's map that showed it: DEP gives the day the bloom was observed, not the day an "
+               "advisory was issued")
+WINDOW_BASIS = "in effect while DEP's map shows it; DEP sets no fixed period"
+
+
+def place(kind: str, g: dict) -> tuple[float | None, float | None]:
+    try:
+        if kind == "point":
+            x, y = g["x"], g["y"]
+        elif kind == "segment":
+            pts = [p for path in g.get("paths") or [] for p in path]
+            x, y = pts[len(pts) // 2]
+        else:
+            pts = [p for ring in g.get("rings") or [] for p in ring]
+            x, y = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
+        return round(float(y), 3), round(float(x), 3)
+    except (KeyError, IndexError, TypeError, ValueError, ZeroDivisionError):
+        return None, None
+
+
+def observed(attrs: dict) -> str | None:
+    v = attrs.get("Date_Observed", attrs.get("DateObserved"))
+    try:
+        return datetime.fromtimestamp(int(v) / 1000, UTC).astimezone(ZoneInfo(TZ)).date().isoformat() if v else None
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
+def rows_of(answers: dict) -> dict[str, dict]:
+    """{'<layer>-<OBJECTID>': {kind, advisory, date_observed, lat, lon}}; ValueError for a layer error."""
+    out = {}
+    for lid, kind in LAYERS.items():
+        doc = answers.get(str(lid))
+        if not isinstance(doc, dict) or "error" in doc or "features" not in doc:
+            raise ValueError(f"layer {lid} did not answer with features: {str(doc)[:200]}")
+        for f in doc["features"]:
+            a = f.get("attributes") or {}
+            lat, lon = place(kind, f.get("geometry") or {})
+            out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": " ".join(str(a.get("Advisory") or "").split()) or None,
+                                                 "date_observed": observed(a), "lat": lat, "lon": lon}
+    return out
+
+
+def update(state: dict, current: dict, at: str) -> dict:
+    items = state.setdefault("items", {})
+    for k, it in items.items():
+        if it.get("left_at") is None and k not in current:
+            it["left_at"] = at
+    for k, row in current.items():
+        it = items.get(k)
+        if it is None or it.get("left_at"):
+            it = items[k] = {"first_seen": at}
+        it.update(last_seen=at, **row)
+    state["last_poll"] = {"at": at, "listed": sorted(current)}
+    return state
+
+
+def records(state: dict) -> list[dict]:
+    out = []
+    for k, it in sorted((state.get("items") or {}).items()):
+        left = it.get("left_at")
+        raw = {"layer_row": k, "geometry_kind": it.get("kind"), "date_observed": it.get("date_observed"),
+               "date_observed_basis": "Date_Observed: the day DEP gives for the bloom's observation (a date, Eastern time)",
+               "first_seen_at": it["first_seen"], "_last_seen_in_source": it.get("last_seen"),
+               "start_basis": START_BASIS, "time_zone": TZ, "advisory_noun": "Algal bloom advisory"}
+        if left:
+            raw.update(ended_at_precision="poll", end_basis="the first read of DEP's map that no longer showed it")
+        adv = it.get("advisory")
+        out.append(event(source_id=SOURCE_ID, source_record_id=k, event_type="hab_advisory",
+                         status="advisory_lifted" if left else "advisory_active", waterbody_text=None,
+                         water_slugs=[], water_match="none", lat=it.get("lat"), lon=it.get("lon"),
+                         coord_source="agency_layer" if it.get("lat") is not None else None,
+                         started_at=it["first_seen"], ended_at=left, time_precision="poll", reported_at=None,
+                         published_at=None, source_updated_at=None, authority=AUTHORITY,
+                         advice_text=f"West Virginia DEP algal bloom map: {adv}" if adv else "West Virginia DEP algal bloom map (no advisory text given)",
+                         advice_window_hours=None, advice_window_basis=WINDOW_BASIS, source_url=PAGE, raw=raw))
+    return out
+
+
+def fetch() -> dict:
+    answers = {}
+    for lid in LAYERS:
+        r = requests.get(f"{SERVICE}/{lid}/query", headers=HEADERS, timeout=120,
+                         params={"where": "1=1", "outFields": "OBJECTID,Advisory,Date_Observed" if lid != 3 else
+                                 "OBJECTID,Advisory,DateObserved", "returnGeometry": "true", "outSR": "4326",
+                                 "f": "json"})
+        r.raise_for_status()
+        answers[str(lid)] = r.json()
+    return answers
+
+
+def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    at = argv[argv.index("--at") + 1] if "--at" in argv else now_iso()
+    try:
+        answers = json.loads(Path(argv[argv.index("--file") + 1]).read_text()) if "--file" in argv else fetch()
+        current = rows_of(answers)
+    except (requests.RequestException, OSError, ValueError) as e:
+        write_events(SOURCE_ID, [], ok=False, error=str(e))
+        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        return 1
+    state = read_json(STATE_PATH, {}) or {}
+    if "--file" not in argv and current and state.get("last_rows") != current:
+        save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "rows": current}, indent=1).encode(), "json")
+    state["last_rows"] = current
+    state = update(state, current, at)
+    write_json(STATE_PATH, state)
+    recs = records(state)
+    meta = {"registry_ids": [SOURCE_ID], "url": SERVICE, "last_poll": state.get("last_poll"),
+            "cadence": "with the refresh; the map lists only what is in effect"}
+    path = write_events(SOURCE_ID, recs, meta=meta)
+    print(f"{SOURCE_ID}: {sum(1 for r in recs if r['status'] == 'advisory_active')} on the map; {len(recs)} records -> {path}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
