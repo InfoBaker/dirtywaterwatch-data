@@ -9,7 +9,7 @@ level: "state"
 # Fetch 2026-11-14: 981 points on 110 permits; Active 578, Inactive 318, 'Active, Discharge Prohibited' 85; Untreated
 #   CSO 938, Treated CSO 41, one sanitary overflow point, one blank; 136 points have no geometry (131 Inactive). 845
 #   rows written (106 permits), 835 paired with EPA's inventory rows; 591 carry EPA's water tie (IDEM's point within
-#   500 m of EPA's) until the water batch ties IDEM's points. EPA lists 39 open outfalls IDEM's layer lacks (kept as
+#   500 m of EPA's) until the water batch ties IDEM's points. EPA lists 14 open outfalls IDEM's layer lacks (kept as
 #   EPA's rows). The layer gives each outfall's receiving stream and the chain of waters downstream (to the Wabash,
 #   the Ohio, Lake Michigan), its county, basin and watershed.
 # Columns excluded: Photo_Credit (people's names) and GlobalID are never asked for. House numbers in IDEM's location
