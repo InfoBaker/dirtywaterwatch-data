@@ -9,14 +9,17 @@ level: "state"
 #   "Recreational Water Quality Advisory", 88 lifts, 110 "Additional Information", 29 "Sampling to Resume in Spring",
 #   11 closures, 5 "Resampling Underway" (all five of 2026's rows), 4 fish-consumption rows; four system-test rows
 #   (2015, 2017) are left out. 239 records: 221 beach advisories and 7 closures with DNREC's own start and end dates,
-#   4 bloom advisories, 7 resampling notices kept with the site's caution only (DNREC's label, not an advisory).
+#   4 closures for algal blooms (bloom advisories), 5 resampling notices kept with the site's caution only (DNREC's
+#   label, not an advisory) and 2 advisories of 2009 with no end date (listed with the end not given, not standing).
 #   2026 had no advisory, only resampling notices.
 # The FirstMap layer (Environmental/DE_DNREC_Monitoring_Network FeatureServer 2) gives 47 stations with their points;
 #   the map service's legend decodes CurrentAdvisory (0 Current Advisory, 1 Outside Advisory Area, 2 Resampling
 #   Enterococcus Spike, 3 Winter - Not Currently Sampling, 4 No Current Advisory). All 47 were 3 on 2026-11-14. A
 #   station showing 0 or 2 with no history row in effect becomes a record from the poll that first shows it.
-# Places: 198 of the 239 records carry their station's point; Silver Lake (Dover) and Lums Pond beaches, no longer on
-#   the map, are placed on their lakes by name; six retired coastal beaches (32 records) are listed by name only.
+# Places: 198 of the 239 records carry their station's point; each beach is named by the water it lies on (Atlantic
+#   Ocean, Delaware Bay, Rehoboth, Indian River and Little Assawoman bays, Lake Como); Silver Lake (Dover) and Lums Pond
+#   beaches, no longer on the map, are placed on their lakes by name; 16 records of retired coastal beaches have no point
+#   and are listed, never drawn on the whole bay or ocean.
 # Dates only (no time of day), Eastern time. Bacteria and bloom advisories, not sewage reports.
 cadence: "Updated as DNREC issues and lifts advisories, Memorial Day to Labor Day; the map daily in season."
 license: "Public Domain (data.delaware.gov); none stated on the FirstMap layer"

@@ -137,12 +137,12 @@ def rows() -> list[dict]:
              barrier="not_verified"),
         base(agency=DES, id="sc-des-shellfish-closures", name="SC DES (shellfish closure map)",
              channel_kind="state_alert_page", urls=[], method=None, legal_basis=None, basis_kind="voluntary",
-             monitored=False, unmonitored_reason="app_only", publishes="notices", records=False,
+             monitored=False, unmonitored_reason="other", publishes="notices", records=False,
              noun="Voluntary page", sources=["sc-des-shellfish"],
              note=("The closure viewer (https://gis.des.sc.gov/shellfishclosures/) returned only its shell to a plain "
                    "client; closures after heavy rain are also announced in DES's news releases. Harvest restrictions, "
-                   "not swimming advisories or sewage reports."),
-             barrier=None, barrier_review="an app shell with no readable feature layer found; no login wall"),
+                   "not swimming advisories or sewage reports. Its feature layer was not verified in the research."),
+             barrier="not_verified"),
         base(agency=DES, id="sc-des-news", name="SC DES (news releases)", channel_kind="news_page",
              urls=["https://des.sc.gov/news"], method="html", legal_basis=None, basis_kind="voluntary", monitored=True,
              unmonitored_reason=None, publishes="notices", records=False, every_hours=24, noun="Voluntary page",

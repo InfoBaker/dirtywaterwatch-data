@@ -136,14 +136,17 @@ _WATER_WORD = r"(?:River|Creek|Run|Branch|Pond|Lake|Bay|Canal|Ditch|Gut|Prong|Ma
 _NOT_ROAD = (r"(?![ \t]+(?:Rd|Road|Dr|Drive|Ln|Lane|Blvd|Boulevard|Ave|Avenue|St|Street|Pike|Way|Ct|Court|Cir|Circle|"
              r"Pkwy|Parkway|Hwy|Highway|Plaza|Apartments?|Apts|Village|Estates|Farms?|Park|Pump|Lift|PS|Station|"
              r"Interceptor|Sewer|Elementary|School|Shopping|Center|Golf|Crossing|Commons|Development)\b)")
-_NOT_NAME_WORD = (r"(?!(?:and|or|the|into|in|to|from|near|nearby|of|at|on|by|onto|a|an|road|rd|street|st(?!\.)|drive|dr|lane|"
+_NOT_NAME_WORD = (r"(?!(?:and|or|the|into|in|to|from|near|nearby|of|at|on|by|onto|a|an|road|rd|street|drive|dr|lane|"
                   r"ln|avenue|ave|blvd|pike|way|court|ct|highway|hwy|route|rt|DE|Delaware|then|which|that|entered|"
                   r"reached|flowed|discharged|released|spilled|went|ran|traveled|travelled)\b)")
-WATER_NAME = re.compile(rf"\b((?:{_NOT_NAME_WORD}(?:[A-Z][A-Za-z'’.]+|St\.)[ \t]+){{1,3}}{_WATER_WORD})\b{_NOT_ROAD}",
+WATER_NAME = re.compile(rf"\b((?:{_NOT_NAME_WORD}(?:[A-Z][A-Za-z'’.]+|St\.?)[ \t]+){{1,3}}{_WATER_WORD})\b{_NOT_ROAD}",
                         re.I)
 NOT_A_WATER = re.compile(r"^(?:the|a|an|into|to|from|near|nearby|of|and|in|at|on|storm|unnamed|small|local|tidal|"
                          r"drainage|retention|detention|stormwater|storm\s+water|farm|irrigation|fire|fish|sediment|"
-                         r"holding|lagoon|sludge|equalization|aeration)\b", re.I)
+                         r"holding|lagoon|sludge|equalization|aeration|include|includes|including|adjacent|adajcent|"
+                         r"reaching|reached|reach|did|enter|entering|entered|is|was|discharge|wastewater|sewage|station|"
+                         r"no|named|community's|water|artesian|existing|nearest|towards?|camden|possibly|then|"
+                         r"flowing|flowed|went|caused|bridge|over|private|dupont\w*|wilmington|newark|dover)\b", re.I)
 NO_WATER_FORM = "DNREC's release form marks the release to {} only, and the release's text names no water"
 
 # the ZIP codes of Kent County (the rest of 199xx is Sussex; 197xx and 198xx are New Castle); 19963 (Milford) and
@@ -431,6 +434,7 @@ def waters_named(*texts: str | None) -> list[str]:
                 continue
             name = " ".join(w if w.isupper() is False else w.title() for w in words)
             name = " ".join(w[:1].upper() + w[1:] for w in name.split(" "))
+            name = re.sub(r"^St\.?\s", "St. ", name)
             if name.lower() not in {o.lower() for o in out}:
                 out.append(name)
     return out
