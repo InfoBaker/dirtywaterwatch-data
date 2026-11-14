@@ -121,14 +121,52 @@ def _sample_date(rec: dict, ctx: F.Ctx) -> str | None:
         return None
 
 
+def _legacy_observation(p: dict, sample: str | None, saved_by_station: dict, ctx: F.Ctx) -> dict:
+    """The observation a record saved by the code before the clock (no _advisory_clock_version) can prove: the poll
+    that first listed the health alert (raw._first_seen_at), when the sample was then at most RECENT_SAMPLE_DAYS old
+    and no newer sample of the station had been seen by then. The end is the first sighting of the station's next
+    saved sample, else the record's last saved poll (an upper bound). A sample first read late stays undated
+    (review 2026-11-14, Astra data P1-2)."""
+    praw = p.get("raw") or {}
+    first = praw.get("_first_seen_at")
+    if p.get("event_type") != "hab_advisory" or not sample or not isinstance(first, str) \
+            or F.clean((praw.get("row") or {}).get("HealthAlert")).upper() != "YES":
+        return {}
+    try:
+        seen = datetime.fromisoformat(first.replace("Z", "+00:00"))
+    except ValueError:
+        return {}
+    if not 0 <= (seen.astimezone(ctx.tz).date() - datetime.fromisoformat(sample).date()).days <= RECENT_SAMPLE_DAYS:
+        return {}
+    newer = sorted(fs for s, fs in saved_by_station.get(praw.get("_station"), []) if s > sample and fs)
+    if newer and newer[0] <= first:
+        return {}                            # a newer sample was already listed: never the station's latest
+    obs = {"start": first, "start_basis": "the first saved poll that listed this health alert (before the clock change)"}
+    if p.get("ended_at") or p.get("status") in ("ended", "advisory_lifted"):
+        later = [fs for fs in newer if fs > first]
+        end = later[0] if later else p.get("fetched_at")
+        if not end or end <= first:
+            return obs
+        obs.update(end=end, continued=p.get("status") == "ended", end_reason="a newer sample was observed",
+                   end_basis=("the first saved poll that listed the station's next sample" if later else
+                              "the last saved poll before the clock change, an upper bound; the first poll that showed "
+                              "the change was not saved"))
+    return obs
+
+
 @F.hook
 def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
     """Use observations after history is joined; never infer an advisory date from a sample date."""
     prev = {r["event_id"]: r for r in ctx.previous_records}
+    saved_by_station: dict[str, list[tuple[str, str | None]]] = {}
+    for q in ctx.previous_records:
+        qs = _sample_date(q, ctx)
+        if qs and (q.get("raw") or {}).get("_station"):
+            saved_by_station.setdefault(q["raw"]["_station"], []).append((qs, (q.get("raw") or {}).get("_first_seen_at")))
     stations: dict[str, list[dict]] = {}
     ecoli_corrections: dict[str, dict] = {}
     n = {"alerts_open": 0, "alerts_lifted": 0, "alerts_continued": 0, "samples_dropped": 0,
-         "legacy_clocks_removed": 0}
+         "legacy_clocks_removed": 0, "legacy_observations_kept": 0}
     for r in records:
         raw = r["raw"]
         if raw.get("_ecoli_record_for"):
@@ -166,6 +204,8 @@ def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
         observed = deepcopy(praw.get("_advisory_observed") or {}) if praw.get("_advisory_clock_version") == CLOCK_VERSION else {}
         if praw and praw.get("_advisory_clock_version") != CLOCK_VERSION:
             n["legacy_clocks_removed"] += 1
+            observed = _legacy_observation(p, sample, saved_by_station, ctx)
+            n["legacy_observations_kept"] += bool(observed)
             raw["_legacy_sample_clock_removed"] = {"started_at": p.get("started_at"), "ended_at": p.get("ended_at"),
                                                     "reason": "These were sample dates, not advisory issue or lift dates."}
         elif praw.get("_legacy_sample_clock_removed"):
@@ -207,10 +247,12 @@ def ne_beachwatch_sequence(records: list[dict], ctx: F.Ctx) -> dict:
                 r.update(started_at=observed["start"], time_precision="poll", ended_at=observed.get("end"),
                          status=("ended" if observed.get("continued") else "advisory_lifted") if observed.get("end") else "advisory_active")
                 raw["_last_seen_in_source"] = observed["start"]
-                raw["start_basis"] = "the first poll that showed this recent health alert; its issue time is not published"
+                raw["start_basis"] = observed.get("start_basis") or \
+                    "the first poll that showed this recent health alert; its issue time is not published"
                 if observed.get("end"):
                     raw["ended_at_precision"] = "poll"
-                    raw["end_basis"] = "the first poll showing the next sample or corrected flag, not an agency lift time"
+                    raw["end_basis"] = observed.get("end_basis") or \
+                        "the first poll showing the next sample or corrected flag, not an agency lift time"
                     n["alerts_continued" if observed.get("continued") else "alerts_lifted"] += 1
                 else:
                     n["alerts_open"] += 1
