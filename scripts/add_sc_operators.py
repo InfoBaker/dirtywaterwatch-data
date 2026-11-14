@@ -62,7 +62,6 @@ RESEARCH_ROWS = {
     "sc-bjwsa": ([], "sso", "authority", "BJWSA", "Beaufort-Jasper Water and Sewer Authority"),
     "sc-grand-strand": ([], "sso", "authority", "Grand Strand Water and Sewer Authority", None),
 }
-DISCHARGER_ALIAS = {"sc-florence": "sc-city-of-florence"}   # the ingester's id for Florence's row
 # owner key -> (row id, name, legal_form): one owner's spellings joined
 OWNERS = {
     "renewablewaterresources": ("sc-rewa", None, None),
@@ -303,7 +302,7 @@ def base_row(rid, name, permits, kind, lf, towns, waters, outfalls, notes, short
                              f"{outfalls} rows for these permits)" if outfalls else None),
          "notification_channel": CHANNEL.get(rid, LAW), "notification_feed_machine_readable": rid in CHANNEL and rid == "sc-florence",
          "notification_signup_url": None, "towns": towns, "notes": notes, "verified": "fetched", "checked": CHECKED,
-         "aliases": [rid] + ([DISCHARGER_ALIAS[rid]] if rid in DISCHARGER_ALIAS else []),
+         "aliases": [rid],
          "source_areas": ["sc"] + ([] if research else ["federal"])}
     if short:
         r["short_name"] = short

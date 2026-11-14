@@ -34,7 +34,7 @@ Record rules (rules only; no model, no geocoding)
   - Water: "on/near <Name> Creek|River|Branch|Swamp" in the title or text (WATER_RE); "Jefferies Creek" is the City's
     other spelling of Jeffries Creek (ALIASES, raw.water_alias). The stretch "downstream of <place>" is
     raw.stretch_text (house numbers removed). No point: a street near a manhole is never geocoded.
-  - Type sso; operator the City of Florence (discharger sc-city-of-florence), no permit (the collection system's
+  - Type sso; operator the City of Florence (discharger sc-florence), no permit (the collection system's
     overflow is not tied to the plant's permit).
   - A notice whose page is edited is read again. The page's address is reused only for the same overflow: when an
     edit changes the release date or the incident's day (a new overflow written over an old notice), the new text is
@@ -71,7 +71,7 @@ LIST_URL = BASE + "/city-news?page={}"
 STATE_PATH = BUILD_DIR / "sc-florence-sso-state.json"
 SAFE_FORMAT = "dww-sc-florence-safe/1"
 AUTHORITY = "City of Florence, South Carolina (Utilities)"
-DISCHARGER_ID = "sc-city-of-florence"
+DISCHARGER_ID = "sc-florence"
 TIMEOUT = (60, 300)
 PAUSE_S = 1.0
 PAGES = 2
