@@ -147,3 +147,86 @@ def test_dnr_news_sections_split_and_a_landmark_town_is_not_the_operator(tmp_pat
 def test_dnr_news_a_date_after_the_release_month_is_last_year():
     assert N._year_for(12, __import__("datetime").date(2026, 1, 5)) == 2025
     assert N._year_for(1, __import__("datetime").date(2026, 1, 5)) == 2026
+
+
+# ---------------------------------------------------------------- DNR field office (FOCOMP) bypass reports
+
+from ingest import ia_dnr_focomp as F  # noqa: E402
+
+FAC = {"st_fac_id": "399999001", "name": "Example City Of Stp", "city": "Exampleton", "county": "Polk",
+       "program_ids": ["7799001"], "types": ["Major Municipal"], "combined_sewer": False}
+PLANT = {"npdes_permit": "IA0099999", "city": "EXAMPLETON", "lat": 41.505, "lon": -93.505}
+
+
+def focomp(tmp_path, monkeypatch, state=None, at=AT):
+    fl = tmp_path / "facilities.json"
+    fl.write_text(json.dumps({"facilities": [FAC]}))
+    monkeypatch.setattr(F, "FACILITIES", fl)
+    monkeypatch.setattr(F, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(F, "iowa_plants", lambda: [PLANT, dict(PLANT, npdes_permit="IA0088888", city="ELSEWHERE")])
+    monkeypatch.setattr(F, "get", lambda url: (_ for _ in ()).throw(AssertionError(f"no network in tests: {url}")))
+    out = {}
+    monkeypatch.setattr(F, "write_events", lambda sid, recs, **kw: out.update(recs=recs, **kw) or tmp_path)
+    if state is not None:
+        (tmp_path / "state.json").write_text(json.dumps(state))
+    args = ["--at", at, "--facility-file", f"399999001={FIX / 'focomp-facility.html'}"]
+    for rid in ("900001", "900002", "900004"):
+        args += ["--report-file", f"{rid}={FIX / f'focomp-report-{rid}.html'}"]
+    assert F.main(args) == 0
+    return {r["source_record_id"]: r for r in out["recs"]}, out["meta"], json.loads((tmp_path / "state.json").read_text())
+
+
+def test_focomp_facility_page_lists_report_ids_types_and_dates_never_staff():
+    p = F.parse_facility((FIX / "focomp-facility.html").read_text())
+    assert [r["rid"] for r in p["reports"]] == ["900001", "900002", "900003", "900004", "100001"]
+    assert p["reports"][0] == {"rid": "900001", "label": "Wet weather bypass", "listed": "2026-09-25"}
+    assert (p["lat"], p["lon"]) == (41.5, -93.5)
+    assert "Pat Example" not in json.dumps(p)
+    with pytest.raises(ValueError):
+        F.parse_facility("<html>Service unavailable</html>")
+
+
+def test_focomp_report_read_safe_fields_only():
+    r = F.parse_report((FIX / "focomp-report-900001.html").read_text())
+    blob = json.dumps(r)
+    for personal in ("Jordan Example", "Casey Example", "555-0142", "pat@example.com", "1357", "2468"):
+        assert personal not in blob
+    assert r["receiving_stream"] == "Example River" and r["location_type"] == "WWTP" and r["closed"] == "Closed"
+    assert r["address"] == "[house number removed] Example Ave" and "outfall 004" in r["details"]
+
+
+def test_focomp_records_times_types_water_and_operator(tmp_path, monkeypatch):
+    recs, meta, _ = focomp(tmp_path, monkeypatch)
+    a = recs["900001"]
+    assert a["event_type"] == "plant_bypass" and a["status"] == "ended"
+    assert a["started_at"] == "2026-09-25T03:25:00-05:00" and a["time_precision"] == "minute"
+    assert a["ended_at"] == "2026-09-26T09:00:00-05:00" and a["raw"]["ended_at_precision"] == "minute"
+    assert a["reported_at"] == "2026-09-25T11:08:00-05:00"
+    assert a["waterbody_text"] == "Example River" and a["lat"] is None          # never the plant's point
+    assert a["volume_gal"] == 1_500_000 and a["npdes_permit"] == "IA0099999" and "m from DNR's point" in a["raw"]["permit_basis"]
+    assert a["raw"]["time_zone"] == "America/Chicago" and a["raw"]["county"] == "Polk County"
+    b = recs["900002"]                   # collection system, open, no end, gallons unknown, the incident's own point
+    assert b["event_type"] == "sso" and b["status"] == "unknown" and b["ended_at"] is None
+    assert b["volume_gal"] is None and b["waterbody_text"] is None and (b["lat"], b["lon"]) == (41.512, -93.499)
+    assert "900004" not in recs and meta["basement_backups_not_records"] == 1      # a basement backup: no record
+    assert "900003" not in recs                                                   # a compliance report: not read
+
+
+def test_focomp_queue_reads_new_reports_since_the_backfill_and_rereads_open_ones(tmp_path, monkeypatch):
+    _, _, state = focomp(tmp_path, monkeypatch)
+    assert "100001" in state["reports"] and not state["reports"]["100001"].get("read_at")
+    later = "2026-11-16T23:00:00Z"
+    todo = F.reports_to_read(state, later, 10)
+    assert ("399999001", "900002") in todo                       # open, read two days ago: due a re-read
+    assert ("399999001", "900001") not in todo                   # closed
+    assert ("399999001", "100001") not in todo                   # 2013: before the backfill
+    assert ("399999001", "900003") not in todo                   # a compliance report
+    assert F.due_facilities([FAC], state, later, 5) == [FAC]
+    assert F.due_facilities([FAC], state, "2026-11-15T01:00:00Z", 5) == []
+
+
+def test_focomp_report_leaving_the_page_keeps_its_record(tmp_path, monkeypatch):
+    _, _, state = focomp(tmp_path, monkeypatch)
+    F.fold_facility(state, FAC, {"reports": [], "lat": 41.5, "lon": -93.5}, "2026-11-20T00:00:00Z")
+    recs = {r["source_record_id"]: r for r in F.records(state, {FAC["st_fac_id"]: FAC}, [PLANT])}
+    assert recs["900001"]["raw"]["_unlisted_since"] == "2026-11-20T00:00:00Z"
