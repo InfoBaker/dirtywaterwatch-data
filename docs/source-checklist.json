@@ -60165,7 +60165,7 @@
    "api",
    "html"
   ],
-  "access_detail": "The site's WordPress REST API (wp-json/wp/v2/posts) answers the identified client: 845 posts on 2026-11-14, 275 under the District's own alerts, press-releases and post-types paths; 89 of them overflow notices since June 2013 (80 overflows, 9 follow-ups). The earlier bot-wall finding (2026-11-03) does not hold for these pages.",
+  "access_detail": "The site's WordPress REST API (wp-json/wp/v2/posts) answers the identified client: 845 posts on 2026-11-14, 275 under the District's own alerts, press-releases and post-types paths; 89 of them overflow notices since June 2013 (79 overflows, 10 follow-ups). The earlier bot-wall finding (2026-11-03) does not hold for these pages.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [],
