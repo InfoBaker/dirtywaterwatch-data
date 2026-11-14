@@ -53,7 +53,7 @@
   "license": "None stated; site copyright MMSD.",
   "legal_basis": "40 CFR 122.38; NR 210.21; WPDES permit WI0036820",
   "status": "used",
-  "status_reason": "Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 18 Storm Updates and overflow letters from 2018-06-22 to 2026-09-08 give 26 dated reports (13 combined, 13 separate or unspecified sewer overflows), posted four to ten days after the overflow began.",
+  "status_reason": "Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 21 posts read (18 Storm Updates and overflow letters, 3 spill or release notices) from 2018-06-22 to 2026-09-08 give 29 dated reports (13 combined, 14 separate or unspecified sewer overflows, 2 treatment plant spills), posted one to ten days after the overflow began (median five).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": "Annual overflow volumes 1994-2026 in raw/mmsd-2026-overflow-volumes.txt (2025: 5,140 MG; 2024: 357 MG)."

@@ -292,7 +292,10 @@ def make_row(rid, g, ps, rs, plants, cso, kind=None) -> dict:
     out = {"id": rid, "name": g["name"], "short_name": "MMSD" if rid == "wi-mmsd" else g["name"], "legal_form": lf,
            "state": "WI", "kind": kind or ("cso" if crow else "plant"), "npdes_permit": ps[0] if ps else None,
            "npdes_permits": ps, "receiving_waters": waters, "water_slugs": [],
-           "outfall_count": (len(open_cso) or len(rows) or None),
+           # only distinct discharge points EPA numbers count; a facility placeholder (no outfall number) does not
+           # (Astra review 2026-11-14 P2-11)
+           "outfall_count": (len(open_cso) or len({(x["npdes_permit"], x["outfall"]) for x in rows
+                                                   if x.get("outfall") not in (None, "")}) or None),
            "outfalls_source": ("EPA National CSO Inventory (data/outfalls-us.json)" if crow else
                                f"EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, {len(rows)} rows)"
                                if rows else None),
