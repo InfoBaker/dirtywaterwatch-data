@@ -1,6 +1,6 @@
 {
  "state": "AL",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 120,
  "waters": [
   {
@@ -3820,14 +3820,15 @@
    "gnis_id": "324814",
    "geometry_hash": "fd82b9adfa7c05bce68be6c20b7202d6994a61082632a79b67aa4a61c5add0ce",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [
     "u-s-coast-guard-aids-to-navigation-team-eufala-al"
    ],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "weeks-bay-al",
