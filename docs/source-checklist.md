@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1474 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| in | 8 | 0 | 14 | 0 | 4 | 26 |
+| **all** | **527** | **234** | **435** | **201** | **77** | **1474** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1676,34 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## in: Indiana (26)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `in-echo-dmr-cso` | EPA ECHO monthly DMR CSO counts for Indiana CSO permits | used | inferred | events | Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only. |
+| `in-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Indiana | used | inferred | events | Read by the national eRule module with IN in its states (2026-11-14): one Indiana report on the 2026-11-12 extract (Shelbyville's plant bypass, 2026-08-12); IDEM's own reports are not sent here until its move to NeT-SewerOverflow. |
+| `in-epa-cso-inventory` | EPA National CSO Inventory (Indiana extract) | used | fetched | outfalls | Baseline; IDEM layer is better. |
+| `in-epa-gl-cso-indiana` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana | used | fetched | outfalls | Seeds the channel column for Great Lakes basin operators. |
+| `in-idem-cso-outfall-layer` | IDEM Indiana CSO Outfall Map (ArcGIS) | used | fetched | outfalls | Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited); 845 rows with points, 835 paired with EPA's inventory, which they outrank. |
+| `in-idem-cyanobacteria` | IDEM Blue-Green Algae dashboard (cyanobacteria and toxin results at state park beaches) | used | fetched | advisories | Read through the generic ArcGIS block (2026-11-14): 1,717 samples at 29 beaches, 2010 to 2026-09-14, each with IDEM's advisory level; 909 at an advisory level kept as IDEM's statements with their sample dates, never as advisory dates. |
+| `in-law-327-iac-5-2-1` | 327 IAC 5-2.1 Combined Sewer Overflow Public Notification | used | fetched | law | Statewide CSO notification rule: notice to the affected public, to people who ask after an annual March newspaper notice, and to local health departments and downstream intakes, whenever a CSO is occurring or imminent; signs at access points. No web channel and no clock. |
+| `in-law-327-iac-5-2-2` | 327 IAC 5-2.2 Public notification requirements for CSOs to the Great Lakes Basin | used | fetched | law | Applies 40 CFR 122.38 (4-hour public notice) to Indiana CSO permittees in the Lake Michigan and Lake Erie basins (23 listed by EPA). |
+| `in-bills` | Indiana bills on CSO regulation (SB 449, 2023) | watch | search_only | law | 2023 bill to help CSO cities avoid violations; no 2025-2026 notification bill found (search only). |
+| `in-citizens-cso-warnings` | Citizens Energy Group CSO warnings (email), Indianapolis | watch | fetched | events | 2018 post: 'CSO warnings are issued via email by Citizens Energy Group when' as little as a quarter-inch of rain is forecast; mandated by the consent decree; avoid contact downstream for four days (search). Sign-up page not found; the 2026 CSO page URL returned 404. |
+| `in-dnr-advisories-closings` | Indiana DNR state parks lake advisories and closings | watch | search_only | advisories | Read 2026-11-14: park alerts by property; the blue-green algae lines are a standing general note ('Found in lakes year round. Don't drink the water. Shower after you swim.'), not a report of a bloom, so they are not records. Watched in the register. |
+| `in-evansville-ewsu-clear-path` | Evansville Water and Sewer Utility (Clear Path CSO program) | watch | fetched | events | Homepage links a Combined Sewer Overflow page; notification channel not traced. |
+| `in-goshen-cso-notice` | Goshen CSO Notice posts | watch | fetched | events | The notice page (https://goshen.in.gov/cso-notice/) holds one dated notice (2018-02-20) and the city's notification policy. Watched in the register. |
+| `in-hammond-cso-notification` | Hammond Sanitary District CSO notification program | watch | fetched | events | E-mail notification when CSOs discharge, by request sent to the district's postal address. |
+| `in-highland-sso-reports` | Highland bypass/overflow report PDFs | watch | search_only | events | Town posts its State Form 48373 SSO reports as PDFs (2025-2026). |
+| `in-idem-beachalert` | IDEM BeachAlert (Lake Michigan beach advisories and closures) | watch | fetched | advisories | The portal shows 'There are no active Closures or Advisories' beside 'You don't have permissions to view these records' and 'Error completing request' (2026-11-14): the records need a sign-in. A barrier (login) in the register. |
+| `in-idem-bypass-overflow-reporting` | IDEM Sewer Bypass/Overflow Incident Reporting (State Form 48373) | watch | fetched | law | Regulator-only reports. When IDEM moves to NeT-SewerOverflow, Indiana SSOs will appear in EPA's SOBE download (a handful already do). |
+| `in-idem-vfc` | IDEM Virtual File Cabinet (permit, compliance and incident documents) | watch | inferred | permits | Document search; bypass/overflow forms may be filed there; not an event feed. |
+| `in-mishawaka-cso` | Mishawaka Utilities CSO information | watch | search_only | events | Readable on 2026-11-14: alerts go to an X account (@CSOAlerts, sign-in to read); the 2025 annual report and outfall map are PDFs. Watched in the register. |
+| `in-south-bend-cso` | South Bend wastewater page (CSO notice sign-up by phone, annual notice, monthly reports) | watch | fetched | events | Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch. |
+| `in-swim-guide-indiana` | Swim Guide Indiana Lake Michigan beaches (mirror of BeachAlert) | watch | search_only | advisories | Mirrors state results; licence and lag unknown. |
+| `in-waterloo-cso-posts` | Waterloo CSO Public Notification posts | watch | fetched | events | The CSO policy page (https://waterlooin.gov/cso-policy/) links start and end notices as PDFs (three pairs, March and April 2026); the PDFs' text uses a font this build's reader cannot decode. Watched in the register. |
+| `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | unreachable | search_only | events | HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. A barrier (bot wall) in the register. |
+| `in-kendallville-cso` | Kendallville CSO page | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
+| `in-laporte-cso-status` | LaPorte combined sewer overflow status page | unreachable | fetched | events | The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. |
+| `in-speedway-cso` | Speedway CSO Public Notifications | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
