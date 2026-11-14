@@ -272,3 +272,121 @@ def ar_deq_not_sewage(records: list[dict], ctx: F.Ctx) -> dict:
         keep.append(r)
     records[:] = keep
     return {"not_sewage": n}
+
+
+# ---------------------------------------------------------------- DEQ harmful algal bloom advisories
+
+HAB_PAGE = "https://adeq.state.ar.us/water/planning/hab/"
+HAB_ADVICE = ("DEQ lists this water among the “recreational use health advisories issued and lifted throughout the "
+              "season for monitored and sampled water bodies” (Harmful Algal Blooms page)")
+HAB_STAR = ("DEQ's archive marks this row: “Advisory posted by partner agency or HAB confirmed, but no advisory "
+            "issued”")
+NOT_GIVEN = re.compile(r"^\s*(n/?a|none|-+)\s*$", re.I)
+COORDS = re.compile(r"\(\s*coordinates\s+(-?\d{1,2}\.\d+)\s*,\s*(-?\d{2,3}\.\d+)\s*\)", re.I)
+# the water's point in the USGS Geographic Names Information System for that name in the advisory's county (The National
+# Map geonames, layer 7 Other Hydrographic Features, read 2026-11-14): (name, county) -> (GNIS feature id, lat, lon).
+# Waters with no GNIS feature of that name in that county (Lake Hamilton, Lake Conway, Brewer Lake in Conway County,
+# Harris Brake Lake, Lake Nimrod, Lake Fayetteville, Lake Wilson in Washington County, Huston Lake, Mom's Lake, the
+# park ponds) have no point here and are placed by name and county only.
+GNIS_POINTS = {
+    ("bear creek lake", "Lee"): (74641, 34.711, -90.695),
+    ("bois d'arc lake", "Hempstead"): (75657, 33.555, -93.703),
+    ("gillham lake", "Howard"): (81042, 34.172, -94.322),       # GNIS files the reservoir under Sevier County
+    ("horsehead lake", "Johnson"): (80009, 35.560, -93.625),
+    ("horseshoe lake", "Crittenden"): (74912, 34.925, -90.340),
+    ("lake atalanta", "Benton"): (76207, 36.338, -94.098),
+    ("lake bennett", "Faulkner"): (79378, 35.286, -92.286),
+    ("lake catherine", "Garland"): (80152, 34.427, -92.887),    # GNIS: Hot Spring County, the lake's other county
+    ("lake charles", "Lawrence"): (79903, 36.073, -91.149),
+    ("lake desoto", "Garland"): (80351, 34.678, -93.018),
+    ("lake elmdale", "Washington"): (75705, 36.195, -94.213),
+    ("lake hogue", "Poinsett"): (81237, 35.583, -90.963),
+    ("lake june", "Lafayette"): (80580, 33.355, -93.492),
+    ("lake omaha", "Fulton"): (79677, 36.307, -91.597),
+    ("lake overcup", "Conway"): (79868, 35.203, -92.721),
+    ("lake poinsett", "Poinsett"): (80073, 35.531, -90.676),
+    ("lake sophia", "Garland"): (2787042, 34.634, -92.850),     # GNIS: Saline County, the lake's other county
+    ("spring lake", "Yell"): (80411, 35.154, -93.427),
+    ("victory lake", "Clay"): (75201, 36.413, -90.565),
+}
+
+
+def hab_water(text: str) -> tuple[str, str | None]:
+    """(the water's name, the qualifier DEQ adds): "Lake Catherine - Spencer Bay *" -> ("Lake Catherine", "Spencer
+    Bay"); "Huston Lake on Big Huston Creek" -> ("Huston Lake", "on Big Huston Creek"); the star and a coordinate
+    note are not part of the name."""
+    t = COORDS.sub("", text or "").replace("’", "'").rstrip(" *").strip()
+    m = re.match(r"^(.*?)\s+(?:-\s+(.+)|((?:on|near|by)\s+.+))$", t)
+    if m and not t.lower().startswith("stream"):
+        return m.group(1).strip(), (m.group(2) or m.group(3)).strip()
+    return t, None
+
+
+def hab_counties(text: str) -> list[str]:
+    """"Garland and Saline Counties", "Garland County and Saline County" -> ["Garland", "Saline"]."""
+    t = re.sub(r"\bcount(?:y|ies)\b", "", F.clean(text), flags=re.I)
+    out = [c.strip() for c in re.split(r"\s*(?:,|\band\b|&)\s*", t) if c.strip()]
+    out = [c.title() for c in out]                                         # "LaFayette" -> "Lafayette"
+    return ["Hot Spring" if c == "Hot Springs" else c for c in out]         # the county is Hot Spring
+
+
+@F.hook
+def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
+    notes["state"] = "AR"
+    notes["time_zone"] = TZ_NAME
+    notes["timezone_note"] = "Central time (Arkansas is wholly in the Central zone, 49 CFR 71.5(c)); dates only"
+    _local_midnights(rec)
+    raw_name = F.clean(row.get("waterbody"))
+    star = raw_name.endswith("*")
+    name, qualifier = hab_water(raw_name)
+    rec["event_type"] = "hab_advisory"
+    rec["waterbody_text"] = name or None
+    if qualifier:
+        notes["_water_qualifier"] = qualifier
+    counties = hab_counties(row.get("county"))
+    if counties:
+        notes["county"] = f"{counties[0]} County"
+        if len(counties) > 1:
+            notes["counties"] = [f"{c} County" for c in counties]
+    area = F.clean(row.get("area"))
+    if area:
+        notes["_nearest_area"] = area
+    notes["_placement"] = "named_water_only"
+    lifted = F.clean(row.get("lifted"))
+    if star:
+        # not DEQ's own advisory: the site's caution from the posting day (data/rules.json unresolved.sample_caution)
+        rec["status"] = "unknown"
+        rec["ended_at"] = None
+        notes["_agency_label_only"] = True
+        notes["_agency_label"] = HAB_STAR
+        rec["advice_text"] = HAB_STAR
+        if lifted and not NOT_GIVEN.match(lifted):
+            notes["_lifted_as_given"] = lifted
+    else:
+        rec["advice_text"] = HAB_ADVICE
+        if rec.get("ended_at"):
+            rec["status"] = "advisory_lifted"
+            notes["ended_at_precision"] = "day"
+            notes["end_basis"] = "DEQ's Date Lifted"
+        elif lifted and NOT_GIVEN.match(lifted):
+            # DEQ shows it as no longer in effect (its current table lists only rows with no lift date) but gives no
+            # lift date: no end is invented, and the status build draws no window without one
+            rec["status"] = "advisory_lifted"
+            notes["_lift_date_not_given"] = f"DEQ's Date Lifted reads “{lifted}”"
+        else:
+            rec["status"] = "advisory_active"
+            notes["start_basis"] = "DEQ's Date Posted"
+    # the point: DEQ's own coordinates where the row gives them, else the GNIS feature of that name in its county
+    m = COORDS.search(raw_name)
+    if m:
+        rec["lat"], rec["lon"] = round(float(m.group(1)), 3), round(float(m.group(2)), 3)
+        rec["coord_source"], rec["coord_precision_m"] = "source", 150
+        notes["_point_basis"] = "the coordinates DEQ gives in the advisory's waterbody name, rounded to 0.001 degree"
+    else:
+        pt = next((GNIS_POINTS[(name.lower(), c)] for c in counties if (name.lower(), c) in GNIS_POINTS), None)
+        if pt:
+            rec["lat"], rec["lon"] = pt[1], pt[2]
+            rec["coord_source"], rec["coord_precision_m"] = "gnis", 1000
+            notes["_point_basis"] = (f"the USGS GNIS feature {pt[0]} of this name in this county (The National Map "
+                                     "geonames, read 2026-11-14): the water, not where the bloom was sampled")
+    notes["advisory_extent"] = "named_water"
