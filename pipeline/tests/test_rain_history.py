@@ -30,6 +30,11 @@ def span(d0, d1=None, outfall=None, precision="minute"):
     return {"first": d0, "last": d1 or d0, "outfall": outfall, "precision": precision, "source_id": "x"}
 
 
+def an(h, **kw):
+    daily, spans, end, today = h
+    return R.analyse(daily, spans, end, CFG, today, **kw)
+
+
 def history(sizes, followed, start=D0, step=5, outfall=None):
     """(daily, spans, coverage_end, today) for storms of the given sizes, a report on each storm marked followed."""
     daily, days = series(sizes, start, step)
@@ -109,8 +114,8 @@ def band(lo, hi, n, k):
 
 
 def test_likely_needs_the_band_share_and_the_share_of_all_larger_storms():
-    # 0.25 band reaches half (6 of 10) but with everything larger only 16 of 40: not likely there
-    bands = [band(0.1, 0.25, 20, 2), band(0.25, 0.5, 10, 6), band(0.5, 1.0, 30, 10), band(1.0, None, 10, 9)]
+    # 0.25 band reaches half (6 of 10) but with everything larger only 23 of 50: not likely there
+    bands = [band(0.1, 0.25, 20, 2), band(0.25, 0.5, 10, 6), band(0.5, 1.0, 30, 8), band(1.0, None, 10, 9)]
     assert R.likely_from(bands, 0.1, CFG) == 1.0
     # with the larger storms over half too, the 0.25 band sets it
     bands[2] = band(0.5, 1.0, 30, 20)
@@ -136,32 +141,38 @@ def test_a_thin_bottom_remainder_joins_the_band_above():
 
 # ---------------------------------------------------------------- the quiet range
 
-def quiet_case(n_small, small_followed=0):
+def quiet_case(n_small, small_followed=0, step=16):      # step 16: 69 storms or more span three years
     sizes, followed = [], []
     for i in range(max(n_small, 40)):
-        if i < n_small:
-            sizes.append(0.15)
-            followed.append(i < small_followed)
         if i < 40:
             sizes.append(0.6)
             followed.append(True)
-    return history(sizes, followed)
+        if i < n_small:
+            sizes.append(0.15)
+            followed.append(i < small_followed)
+    return history(sizes, followed, step=step)
+
+
+def test_thirty_small_storms_in_under_three_years_are_not_enough():
+    a = an(quiet_case(30, step=7))          # 70 storms a week apart: 490 days of record
+    assert a["usable"] and a["possible_in"] == 0.5
+    assert a["quiet"]["storms"] == 30 and a["quiet"]["followed"] == 0 and a["quiet"]["enough"] is False
 
 
 def test_thirty_small_storms_none_followed_is_enough_to_show_no_caution_below():
-    a = R.analyse(*quiet_case(30), CFG)
+    a = an(quiet_case(30))
     assert a["usable"] and a["possible_in"] == 0.5 and a["lowest_reported"]["size_in"] == 0.6
     assert a["quiet"] == {"lo": 0.1, "hi": 0.5, "storms": 30, "followed": 0, "share": 0.0, "enough": True}
     assert a["likely_in"] == 0.5 and a["possible"] is None and a["likely"]["storms"] == 40
 
 
 def test_twenty_nine_small_storms_are_not_enough():
-    a = R.analyse(*quiet_case(29), CFG)
+    a = an(quiet_case(29))
     assert a["usable"] and a["quiet"]["storms"] == 29 and a["quiet"]["enough"] is False
 
 
 def test_one_followed_storm_in_the_quiet_range_moves_possible_down_to_it():
-    a = R.analyse(*quiet_case(40, small_followed=1), CFG)
+    a = an(quiet_case(40, small_followed=1))
     assert a["possible_in"] == 0.1 and a["quiet"] is None
     assert a["possible"] == {"lo": 0.1, "hi": 0.5, "storms": 40, "followed": 1, "share": 0.025}
 
@@ -169,14 +180,14 @@ def test_one_followed_storm_in_the_quiet_range_moves_possible_down_to_it():
 # ---------------------------------------------------------------- usable minimums
 
 def test_each_minimum_fails_with_its_reason():
-    a = R.analyse(*history([0.5] * 30, [True] * 9 + [False] * 21), CFG)
+    a = an(history([0.5] * 30, [True] * 9 + [False] * 21))
     assert not a["usable"] and a["why_not"] == "9 storms followed by a report; 10 are needed"
     assert "possible_in" not in a
-    a = R.analyse(*history([0.5] * 15, [True] * 15), CFG)
+    a = an(history([0.5] * 15, [True] * 15))
     assert a["why_not"] == "15 storms on record; 20 are needed"
-    a = R.analyse(*history([0.5] * 25, [True] * 25, step=4), CFG)
-    assert a["why_not"] == "100 days of record; 365 are needed"
-    a = R.analyse(*history([0.5] * 80, [True] * 80), CFG)
+    a = an(history([0.5] * 25, [True] * 25, step=4))
+    assert a["why_not"] == "101 days of record; 365 are needed"
+    a = an(history([0.5] * 80, [True] * 80))
     assert a["usable"] and a["why_not"] is None
 
 
@@ -260,9 +271,10 @@ def test_a_cited_change_starts_the_record_at_the_change():
 # ---------------------------------------------------------------- rain points, outfalls
 
 def test_rain_points_start_at_the_median_and_add_far_outfalls_only():
-    pts = [(42.10, -72.60), (42.11, -72.60), (42.12, -72.61), (42.50, -72.60), (42.10, -73.20), (42.13, -72.62)]
+    pts = [(42.10, -72.60), (42.11, -72.60), (42.12, -72.61), (42.50, -72.60), (42.10, -73.20), (42.13, -72.62),
+           (42.12, -72.61)]
     got = R.rain_points(pts)
-    assert got[0] == (42.12, -72.6)
+    assert got[0] == (42.12, -72.61)        # the median over every outfall point, repeats included
     assert set(got[1:]) == {(42.5, -72.6), (42.1, -73.2)} and len(got) == 3
     assert R.rain_points([(42.1, -72.6), (42.12, -72.61)]) == [(42.11, -72.6)]
     many = [(40 + i, -80.0) for i in range(8)]
@@ -271,9 +283,10 @@ def test_rain_points_start_at_the_median_and_add_far_outfalls_only():
 
 
 def test_outfall_counts_use_only_the_reports_that_name_the_outfall():
-    sizes = [0.15] * 40 + [0.6] * 40
+    sizes = [0.6, 0.15] * 40
     daily, days = series(sizes)
-    spans = [span(d, outfall="SPR010") for d in days[40:]] + [span(d, outfall="SPR012") for d in days[60:70]]
+    big = days[0::2]
+    spans = [span(d, outfall="SPR010") for d in big] + [span(d, outfall="SPR012") for d in big[20:30]]
     end = days[-1] + timedelta(days=5)
     a = R.analyse(daily, spans, end, CFG, end + timedelta(days=14))
     sts = a.pop("_storms")
@@ -312,8 +325,9 @@ def pass_inputs(n_permits=3):
 
 def run_pass(tmp_path, reader, have=lambda *a: True, prev=None, budget=100, **kw):
     daily, recs, outfalls = pass_inputs()
+    kw.setdefault("rules", {})
     return R.build(budget=budget, today=TODAY, now=NOW, sources=[("oh-src", recs)], outfalls=outfalls, skip=set(),
-                   rules={}, prev=prev or {}, by_discharger={}, reader=reader, have=have, live_history={},
+                   prev=prev or {}, by_discharger={}, reader=reader, have=have, live_history={},
                    out_path=tmp_path / "rain-levels.json", **kw)
 
 

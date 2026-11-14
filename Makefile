@@ -268,7 +268,7 @@ fixtures:
 	$(PY) -m build.fixtures
 
 build: $(if $(filter 1 yes true,$(FIXTURES)),fixtures,)
-	cd pipeline && $(TIMED) rain-history $(PYTHON) -m build.rain_history --if-older-h 20 || echo "!! rain history failed; the previous file stays"
+	cd pipeline && $(TIMED) rain-history $(PYTHON) -m build.rain_history --if-older-h 20 --budget 200 || echo "!! rain history failed; the previous file stays"
 	cd pipeline && $(TIMED) rain-thresholds $(PYTHON) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
 	cd pipeline && $(TIMED) status $(PYTHON) -m build.status $(FIXTURE_FLAG) --live-only
 
