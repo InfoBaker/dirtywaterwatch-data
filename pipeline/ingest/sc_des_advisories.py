@@ -5,7 +5,7 @@ Sources
   - Beach monitoring (registry sc-des-beach-monitoring): the S.C. Beach Access Guide's station layer,
     https://gis.des.sc.gov/gisserver/rest/services/water/BW_Monitoring_Stations/MapServer/0 (fields STAT, the
     station; COUNTY; ADVISORY; HUC_12; the point). 123 stations on 2026-11-14: 102 "No Advisory", 21 "Long-Term"
-    (20 in Horry County on the Grand Strand, LC-080 to LC-082 at Edisto Beach in Colleton County). DES samples about
+    (18 in Horry County on the Grand Strand, LC-080 to LC-082 at Edisto Beach in Colleton County). DES samples about
     122 points weekly from May 1 to October 1; a short-term advisory (one to two days) is issued after two consecutive
     results above 104 per 100 mL, or one above 500, and lifted when results fall below the standard; a long-term
     advisory stands, reassessed yearly, where stormwater makes high bacteria likely after rain. The guide's legend

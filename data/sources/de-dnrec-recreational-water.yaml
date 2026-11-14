@@ -1,0 +1,33 @@
+id: "de-dnrec-recreational-water"
+name: "Delaware DNREC Recreational Water Program: advisory history (data.delaware.gov) and sampling stations (FirstMap)"
+url: "https://data.delaware.gov/resource/ever-58ni.json"
+homepage: "https://recwaters.dnrec.delaware.gov/"
+kind: "api"
+level: "state"
+# Ingester: pipeline/ingest/de_dnrec_recwater.py (source id de-dnrec-recreational-water), rules only.
+# Read 2026-11-14: the history (dataset ever-58ni, Public Domain) held 474 rows from 2001-07-26 to 2026-09-02: 227
+#   "Recreational Water Quality Advisory", 88 lifts, 110 "Additional Information", 29 "Sampling to Resume in Spring",
+#   11 closures, 5 "Resampling Underway" (all five of 2026's rows), 4 fish-consumption rows; four system-test rows
+#   (2015, 2017) are left out. 239 records: 221 beach advisories and 7 closures with DNREC's own start and end dates,
+#   4 bloom advisories, 7 resampling notices kept with the site's caution only (DNREC's label, not an advisory).
+#   2026 had no advisory, only resampling notices.
+# The FirstMap layer (Environmental/DE_DNREC_Monitoring_Network FeatureServer 2) gives 47 stations with their points;
+#   the map service's legend decodes CurrentAdvisory (0 Current Advisory, 1 Outside Advisory Area, 2 Resampling
+#   Enterococcus Spike, 3 Winter - Not Currently Sampling, 4 No Current Advisory). All 47 were 3 on 2026-11-14. A
+#   station showing 0 or 2 with no history row in effect becomes a record from the poll that first shows it.
+# Places: 198 of the 239 records carry their station's point; Silver Lake (Dover) and Lums Pond beaches, no longer on
+#   the map, are placed on their lakes by name; six retired coastal beaches (32 records) are listed by name only.
+# Dates only (no time of day), Eastern time. Bacteria and bloom advisories, not sewage reports.
+cadence: "Updated as DNREC issues and lifts advisories, Memorial Day to Labor Day; the map daily in season."
+license: "Public Domain (data.delaware.gov); none stated on the FirstMap layer"
+attribution: "Delaware Department of Natural Resources and Environmental Control, Division of Watershed Stewardship"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure", "hab_advisory"]
+states: ["DE"]
+registry_ids: ["de-dnrec-recreational-water"]
+access: ["api", "arcgis"]
+access_detail: "Socrata https://data.delaware.gov/resource/ever-58ni.json ($select advisoryid, advstartdate, advenddate, advdesc, advcomment, advreason, advtype, unitname), no key; FirstMap FeatureServer layer 2 query (UnitName, UnitID, CurrentAdvisory, Latitude, Longitude), no token."
+machine_readable: true
+legal_basis: "Voluntary: DNREC's Recreational Water Program (EPA BEACH Act grant program); no Delaware statute requires the advisories"
+checked: "2026-11-14"
