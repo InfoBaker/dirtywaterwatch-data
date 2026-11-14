@@ -1,0 +1,607 @@
+{
+ "about": "Water names in Missouri's records that data/receiving-waters-national.json does not hold for MO: the water KC Water's and MSD's overflow posts and DNR's concern reports name, and the receiving stream of each combined sewer outfall on DNR's outfall layer; one row per name and county (the county a concern gives, else the counties of the operator's area), with the number of reports, the outfall count and points of the outfalls, and the operator, so the names pass builds each name where the reports are. Records naming no water are left out (by_reason). Written by scripts/mo_report_water_names.py.",
+ "state": "MO",
+ "waters": 35,
+ "reports": 70,
+ "reports_on_listed_waters": 75,
+ "by_reason": {
+  "no water named": 118,
+  "the same report as another source's": 15
+ },
+ "rows": [
+  {
+   "name": "Coldwater Creek",
+   "reports": 10,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 10
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Line Creek",
+   "reports": 6,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 6
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Burlington Creek",
+   "reports": 4,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 4
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Little Blue River",
+   "reports": 4,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 4
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "River des Peres",
+   "reports": 4,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 4
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Buckeye Creek",
+   "reports": 3,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 3
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Kiefer Creek",
+   "reports": 3,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 3
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Maline Creek",
+   "reports": 3,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 3
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Alex George Lake",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Dyke Branch Creek",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Little Shoal Creek",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Madisyn Branch",
+   "reports": 2,
+   "county": "St. Francois County",
+   "points": [],
+   "towns": [
+    "City of Iron Mountain"
+   ],
+   "sources": {
+    "mo-dnr-concern-reports": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ]
+  },
+  {
+   "name": "Penn Valley Lake",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Randolph Creek",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Round Grove Creek",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Town Fork Creek",
+   "reports": 2,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 2
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Blacksnake Creek",
+   "reports": 1,
+   "county": "Buchanan County",
+   "points": [],
+   "towns": [
+    "City of St. Joseph"
+   ],
+   "sources": {
+    "mo-dnr-concern-reports": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ]
+  },
+  {
+   "name": "Carter Creek",
+   "reports": 1,
+   "county": "Carter County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "mo-dnr-concern-reports": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ]
+  },
+  {
+   "name": "East Fork Line Creek",
+   "reports": 1,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Fall Creek",
+   "reports": 1,
+   "county": "Taney County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "mo-dnr-concern-reports": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ]
+  },
+  {
+   "name": "Fee Fee Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Fern Ridge Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Gingras Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Hampton Branch Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Humphrey Creek",
+   "reports": 1,
+   "county": "Miller County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "mo-dnr-concern-reports": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ]
+  },
+  {
+   "name": "Iron Mountain Lake",
+   "reports": 1,
+   "county": "Iron County",
+   "points": [],
+   "towns": [
+    "City of Iron Mountain"
+   ],
+   "sources": {
+    "mo-dnr-concern-reports": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ]
+  },
+  {
+   "name": "Keifer Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Mallard Lake",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Martigney Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Pebble Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "Riss Lake",
+   "reports": 1,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Searcy Branch",
+   "reports": 1,
+   "county": "Jackson County or Clay County or Platte County or Cass County",
+   "points": [],
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "sources": {
+    "mo-kc-water-overflow-notices": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ]
+  },
+  {
+   "name": "Smith Creek",
+   "reports": 1,
+   "county": "St. Louis County or St. Louis city",
+   "points": [],
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "sources": {
+    "mo-msd-stl-project-clear": 1
+   },
+   "open": 0,
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ]
+  },
+  {
+   "name": "River des Peres",
+   "reports": 0,
+   "county": "St. Louis County",
+   "points": [
+    [
+     38.545,
+     -90.27
+    ],
+    [
+     38.565,
+     -90.296
+    ],
+    [
+     38.584,
+     -90.311
+    ],
+    [
+     38.607,
+     -90.31
+    ],
+    [
+     38.609,
+     -90.309
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "mo-dnr-npdes-outfalls": 28
+   },
+   "open": 0,
+   "outfalls": 28,
+   "places_from": [
+    "mo-dnr-npdes-outfalls"
+   ]
+  },
+  {
+   "name": "Tributary to River des Peres",
+   "reports": 0,
+   "county": "St. Louis County",
+   "points": [
+    [
+     38.55,
+     -90.272
+    ],
+    [
+     38.551,
+     -90.271
+    ],
+    [
+     38.556,
+     -90.274
+    ],
+    [
+     38.557,
+     -90.279
+    ],
+    [
+     38.556,
+     -90.278
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "mo-dnr-npdes-outfalls": 38
+   },
+   "open": 0,
+   "outfalls": 38,
+   "places_from": [
+    "mo-dnr-npdes-outfalls"
+   ]
+  }
+ ]
+}
