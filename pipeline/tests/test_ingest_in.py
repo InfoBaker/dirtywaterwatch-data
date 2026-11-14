@@ -550,3 +550,64 @@ def test_a_newer_sample_with_an_unknown_level_does_not_end_an_advisory():
     c, _ = _cyano([_one_sample("Advisory"), _one_sample("Low Risk", "2026-09-14", 9002)], "2026-09-15T13:00:00Z", b)
     r = next(x for x in c if x["sampled_at"] == "2026-09-08")
     assert r["status"] == "advisory_lifted" and r["raw"]["ended_at_precision"] == "poll"
+
+
+def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None):
+    from ingest import in_echo_cso_monthly as M
+    monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / "events" / f"{sid}.json", **kw))
+    monkeypatch.setattr(M, "registry_outfalls", lambda rows=None: registry or _registry())
+    monkeypatch.setattr(M, "SLEEP_S", 0)
+    monkeypatch.setattr(M, "fetch", lambda p, code, since: (results.get((p, code)) or
+                                                            {"Message": "Success", "PermFeatures": []}, "live"))
+    assert M.main(["--since", "2025-01-01", "--refresh"]) == 0
+    return json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
+
+
+def test_a_month_the_source_drops_is_kept_and_one_it_corrects_to_no_discharge_is_withdrawn(tmp_path, monkeypatch):
+    """Astra review 2026-11-14 P1-2."""
+    first = _dmr_main(tmp_path, monkeypatch, _results())
+    assert [r["source_record_id"] for r in first["records"]] == ["IN0000004:002:2025-08"]
+    gone = _dmr_main(tmp_path, monkeypatch, {})                        # an empty successful answer
+    assert len(gone["records"]) == 1 and gone["records"][0]["raw"]["_missing_from_source_since"]
+    assert gone["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-09"   # the earlier zero kept
+    res = _results()
+    for code in ("84165", "50037", "74063"):
+        row = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
+        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge")
+    fixed = _dmr_main(tmp_path, monkeypatch, res)
+    assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
+
+
+def test_a_revised_dmr_row_wins_over_a_larger_earlier_value():
+    """Astra review 2026-11-14 P2-9."""
+    from ingest import in_echo_cso_monthly as M
+    old = dict(_dmr("31-AUG-25", "3"), VersionNmbr="0")
+    new = dict(_dmr("31-AUG-25", None, nodi="C", received="15-OCT-25"), VersionNmbr="1")
+    assert M.revision_key(new) > M.revision_key(old)
+    res = _results()
+    rows = res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
+    rows[:] = [dict(_dmr("31-AUG-25", "0", received="20-OCT-25"), VersionNmbr="1"),
+               dict(_dmr("31-AUG-25", "4"), VersionNmbr="0")]
+    from collections import Counter, defaultdict
+    cells, _ = M.collect(res, _registry(), defaultdict(Counter))
+    assert cells[("IN0000004", "002", "2025-08")]["events"]["DMRValueNmbr"] == "0"
+
+
+def test_a_plant_point_is_withheld_points_are_rounded_and_charts_get_events_and_hours():
+    """Astra review 2026-11-14 P1-4, P1-5 and P2-8."""
+    from collections import Counter, defaultdict
+
+    from build import charts
+    from ingest import in_echo_cso_monthly as M
+    reg = _registry()
+    reg[("IN0000004", "2")] = dict(reg[("IN0000004", "2")], lat=41.612345, lon=-86.712345)
+    cells, names = M.collect(_results(), reg, defaultdict(Counter))
+    r = M.build_records(cells, names, reg, {}, defaultdict(Counter))[0]
+    assert (r["lat"], r["lon"]) == (41.612, -86.712)
+    assert charts.total_measures(r) == {"gallons": 1_100_000.0, "events": 1.0, "hours": 4.0}
+    reg[("IN0000004", "2")] = dict(reg[("IN0000004", "2")], coords_from="facility")
+    r = M.build_records(cells, names, reg, {}, defaultdict(Counter))[0]
+    assert r["lat"] is None and r["coord_source"] is None and "plant's point" in r["raw"]["point_note"]

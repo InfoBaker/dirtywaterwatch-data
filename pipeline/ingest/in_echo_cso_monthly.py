@@ -36,6 +36,14 @@ Records
   zone (zones.indiana_zone: the month is a calendar month on that clock); the point, receiving water and water record
   come from the registry row.
 
+Revisions and history (Astra review 2026-11-14)
+  Two rows for one outfall, parameter and month: the higher VersionNmbr, then the later receipt, wins (revision_key),
+  never the larger value. Each run is reconciled with the previous file: a month the source no longer lists at all is
+  kept with raw._missing_from_source_since; a month the source now files as no discharge is withdrawn (counted in
+  meta.months_withdrawn_by_the_source); latest_month_by_outfall keeps the previous observation of an outfall this run
+  did not read. An outfall whose registry point is the treatment plant's (coords_from facility) gets no point
+  (raw.point_note); points are rounded to three decimals. raw.parameters gives the chart builder events and hours.
+
 Lag and cadence
   DMRs are due on the 28th of the following month in Indiana and ECHO refreshes weekly, so a month appears four to eight
   weeks after it ends (the median lag is measured from ValueReceivedDate and kept in meta.median_days_month_end_to_receipt).
@@ -167,7 +175,8 @@ def fetch(permit: str, code: str, since: date) -> tuple[dict | None, str]:
                 return None, f"not in ECHO ({' '.join(msg.split())})"     # an answer, not a failure: never retried
             if (js.get("Results") or {}).get("Message") != "Success":
                 raise ValueError(str(js)[:200])
-            save_raw(SOURCE_ID, r.content, f"{permit}-{code}.json")
+            # only what the records read is saved (the answer also carries the plant's street address)
+            save_raw(SOURCE_ID, json.dumps({"Results": compact(js["Results"])}).encode(), f"{permit}-{code}.json")
             return js["Results"], "live"
         except (requests.RequestException, ValueError) as e:
             err = f"{type(e).__name__}: {e}"
@@ -194,6 +203,19 @@ def num(v) -> float | None:
         return float(v) if v not in (None, "") else None
     except ValueError:
         return None
+
+
+def revision_key(row: dict) -> tuple:
+    """The order of two DMR rows for one outfall, parameter and month: the higher VersionNmbr (a revised report), then
+    the later ValueReceivedDate, then the row that says something (a value or a NODI code); never the larger value
+    (Astra review 2026-11-14 P2-9: a correction downward or to NODI C must win)."""
+    try:
+        version = int(str(row.get("VersionNmbr") or "0").strip() or 0)
+    except ValueError:
+        version = 0
+    received = ddmon(row.get("ValueReceivedDate")) or ""
+    says = num(row.get("DMRValueNmbr")) is not None or bool(row.get("NODICode"))
+    return version, received, says
 
 
 def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict) -> tuple[dict, dict]:
@@ -226,8 +248,7 @@ def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict) -> tup
                         stats["unparsed_period"][f"{permit}:{feat}:{pend}"] += 1
                         continue
                     prev = cells[(permit, feat, ym)].get(name)
-                    if prev is None or (num(prev.get("DMRValueNmbr")) is None and num(row.get("DMRValueNmbr")) is not None) \
-                            or (num(row.get("DMRValueNmbr")) or 0) > (num(prev.get("DMRValueNmbr")) or 0):
+                    if prev is None or revision_key(row) > revision_key(prev):
                         cells[(permit, feat, ym)][name] = dict(row, _pend=pend, _param=par.get("ParameterDesc"))
     return dict(cells), names
 
@@ -304,6 +325,12 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
         o = reg.get(common.outfall_key(permit, feat)) or {}
         d = disc.get(permit) or {}
         lat, lon = o.get("lat"), o.get("lon")
+        point_note = None
+        if str(o.get("coords_from") or "") == "facility" and lat is not None:
+            # EPA gives this outfall only the plant's point: not the outfall's place (review 2026-11-14 P1-4)
+            point_note, lat, lon = "the registry gives only the treatment plant's point for this outfall: not used", None, None
+        if lat is not None:
+            lat, lon = round(float(lat), 3), round(float(lon), 3)
         slug = o.get("water_slug")
         tz = zones.indiana_zone(county=o.get("county"), lat=lat, lon=lon)
         vol_note = None
@@ -319,6 +346,10 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
                "receiving_water_registry": o.get("receiving_water_echo"),
                "outfall_registry_file": o.get("_file"), "outfall_status": o.get("outfall_status"),
                "county": o.get("county"), "time_zone": tz, **({"volume_note": vol_note} if vol_note else {}),
+               **({"point_note": point_note} if point_note else {}),
+               # the chart builder's monthly measures (build/charts.py total_measures): events and hours
+               "parameters": {k: {"DMRValueNmbr": v} for k, v in (("events", fg["events"]), ("duration", fg["hours"]))
+                              if v is not None},
                "note": ("the operator's monthly DMR totals for this outfall (events, hours, million gallons), not an "
                         "individual discharge: no day is given")}
         records.append(event(
@@ -409,26 +440,38 @@ def main(argv=None) -> int:
     stats = defaultdict(Counter)
     cells, names = collect(results, reg, stats)
     records = build_records(cells, names, reg, dischargers(), stats)
-    # a permit this run could not read (budget, failure) with no earlier answer keeps the previous run's records
-    unread = {k.rsplit("-", 1)[0] for k, v in fetch_log.items()
-              if v.startswith(("not asked", "failed")) and not v.startswith("failed (not asked")} | \
-             {k.rsplit("-", 1)[0] for k, v in fetch_log.items() if v.startswith("failed (not asked")}
-    unread -= {p for (p, _c) in results}
-    if unread:
-        prev = (read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records") or []
-        carried = [r for r in prev if r.get("npdes_permit") in unread]
-        records += carried
-        stats["records_carried_from_previous_run"]["permits"] = len(unread)
-        stats["records_carried_from_previous_run"]["records"] = len(carried)
+    # reconcile with the previous run (review 2026-11-14 P1-2): a month the source no longer lists at all is kept,
+    # marked missing from the source; a month the source now reports as no discharge is withdrawn; a month whose
+    # cells now say nothing (no value, another NODI code) is kept as it was
+    prev_doc = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    ids = {r["event_id"] for r in records}
+    for r in prev_doc.get("records") or []:
+        if r.get("event_id") in ids:
+            continue
+        rk = (r.get("npdes_permit"), (r.get("raw") or {}).get("permit_feature") or r.get("outfall_id"),
+              (r.get("raw") or {}).get("month"))
+        cell = cells.get(rk)
+        if cell is not None and figures(cell)["said"]:
+            stats["months_withdrawn_by_the_source"][f"{rk[0]}:{rk[1]}:{rk[2]}"] += 1
+            continue
+        r = json.loads(json.dumps(r))
+        r["raw"].setdefault("_missing_from_source_since", now_iso())
+        records.append(r)
+        stats["records_carried_from_previous_run"]["records"] += 1
+    records.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
+    latest = dict((prev_doc.get("meta") or {}).get("latest_month_by_outfall") or {})
+    for k, v in latest_months(cells).items():
+        if k not in latest or v["month"] >= latest[k].get("month", ""):
+            latest[k] = v
     per_permit = Counter(r["npdes_permit"] for r in records)
-    meta = {"registry_ids": [SOURCE_ID, "fed-echo-effluent-charts-rest"], "since": args.since,
+    meta = {"registry_ids": [SOURCE_ID], "since": args.since,
             "parameters": {c: n for c, n in PARAMS.items()}, "permits": permits,
             "fetch": fetch_log, "records_per_permit": dict(sorted(per_permit.items())),
             "permits_without_records": sorted(set(permits) - set(per_permit)),
             "median_days_month_end_to_receipt": median_lag_days(records),
             **{k: dict(v) for k, v in stats.items()},
             "cadence": f"cached per permit and parameter for {CACHE_DAYS} days; DMRs reach ECHO weeks after the month",
-            "latest_month_by_outfall": latest_months(cells),
+            "latest_month_by_outfall": dict(sorted(latest.items())),
             "history_only": "month precision: the monthly mark, never red or yellow"}
     failed = {k: v for k, v in fetch_log.items() if v.startswith("failed")}
     meta["not_asked_this_run"] = sorted(k for k, v in fetch_log.items() if v.startswith(("not asked", "stale")))
