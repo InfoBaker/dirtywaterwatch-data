@@ -43,7 +43,10 @@ Polling window
   Each run reads the reports whose overflow began in the last WINDOW_DAYS days (two pages or so). Records whose start
   is older than the window were not asked for: they are carried from the previous events file as read (their safe
   row replayed), so they are never marked missing from the source; a report inside the window that DEQ no longer
-  lists is kept with the missing mark (history.keep_missing). --backfill FROM reads from that day, a month at a time.
+  lists is kept with the missing mark (history.keep_missing). Once a week (DEEP_EVERY_DAYS, meta.deep_read_at) the run
+  reads back to DEEP_FROM instead, about thirty requests, so a report filed months late (9 of the 2,449 read on
+  2026-11-14 reached DEQ more than 120 days after the overflow began) and a report DEQ removed are both seen.
+  --backfill FROM reads from that day, a month at a time.
 
 Run from pipeline/:  python -m ingest.ar_deq_overflow_incidents [--backfill 2025-01-01] [--file saved.json]
 """
@@ -68,6 +71,8 @@ SOURCE_ID = "ar-deq-overflow-incidents"
 URL = "https://adeq.state.ar.us/water/enforcement/sso/data.aspx"
 TZ = ZoneInfo("America/Chicago")
 WINDOW_DAYS = 120
+DEEP_FROM = date(2025, 1, 1)        # the first day this site reads; a weekly read goes back to it
+DEEP_EVERY_DAYS = 7
 PAGE_SIZE = 100
 PAUSE_S = 2.0
 TIMEOUT_S = 180
@@ -235,20 +240,20 @@ def started_day(row: dict) -> date | None:
         return None
 
 
-def carried_rows(prev_records: list[dict], window_start: date, have: set[str]) -> list[dict]:
+def carried_rows(prev_records: list[dict], window_start: date, polled: set[str]) -> list[dict]:
     """The safe rows of earlier records whose overflow began before the polled window (not asked for this run, so not
-    missing from the source); a record already marked missing stays as the history left it."""
+    missing from the source), DEQ's repeated rows included (the block's dedupe marks the copy again); a record already
+    marked missing stays as the history left it."""
     out = []
     for r in prev_records:
         raw = r.get("raw") or {}
         row = raw.get("row") or {}
         k = row.get("confirmation_no")
-        if not k or k in have or raw.get("_missing_from_source_since") or r.get("duplicate_of"):
+        if not k or k in polled or raw.get("_missing_from_source_since"):
             continue
         d = started_day(row)
         if d is not None and d < window_start:
             out.append({f: row.get(f, "") for f in SAFE_FIELDS})
-            have.add(k)
     return out
 
 
@@ -270,8 +275,16 @@ def main(argv: list[str] | None = None) -> int:
             rows, info = list(doc.get("rows") or []), dict((doc.get("meta") or {}).get("ar_search") or {})
             start = date.fromisoformat(info.get("window_start") or "1990-01-01")
         else:
-            start = date.fromisoformat(a.backfill) if a.backfill else today - timedelta(days=WINDOW_DAYS)
+            last_deep = (prev_doc.get("meta") or {}).get("deep_read_at")
+            deep = not last_deep or (datetime.fromisoformat(last_deep.replace("Z", "+00:00")).astimezone(TZ).date()
+                                     <= today - timedelta(days=DEEP_EVERY_DAYS))
+            start = (date.fromisoformat(a.backfill) if a.backfill
+                     else DEEP_FROM if deep else today - timedelta(days=WINDOW_DAYS))
             rows, info = fetch(start, today)
+            if start <= DEEP_FROM:
+                info["deep_read_at"] = fetched_at
+            elif last_deep:
+                info["deep_read_at"] = last_deep
     except (requests.RequestException, SearchFailed, ValueError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
@@ -283,8 +296,7 @@ def main(argv: list[str] | None = None) -> int:
         p = save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False, sort_keys=True).encode(), "json")
         raw_path = str(p.relative_to(ROOT))
     polled = len(rows)
-    have = {r.get("confirmation_no") for r in rows}
-    rows = rows + carried_rows(prev, start, have)
+    rows = rows + carried_rows(prev, start, {r.get("confirmation_no") for r in rows})
     try:
         records, stats = runner.build(SOURCE_ID, block, rows, fetched_at, prev, None)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
