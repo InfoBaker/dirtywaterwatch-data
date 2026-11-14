@@ -7,6 +7,7 @@ Run from pipeline/: python -m pytest tests -q
 """
 from __future__ import annotations
 
+import gzip
 import json
 import sys
 from datetime import timedelta
@@ -120,9 +121,10 @@ def nation(tmp_path, monkeypatch):
     monkeypatch.setattr(RF, "HISTORY", tmp_path / "rainfall-history.json")
     monkeypatch.setattr(RF, "GRIDS", tmp_path / "nws-gridpoints.json")
     monkeypatch.setattr(RF, "GAUGE_CACHE", tmp_path / "raw" / "nws-gauges" / "observations.json")
-    monkeypatch.setattr(RF, "save_raw", lambda *a, **k: None)
+    saved: list = []                                     # the raw files, as written
+    monkeypatch.setattr(RF, "save_raw", lambda src, data, ext: saved.append((src, json.loads(gzip.decompress(data)))))
     monkeypatch.setattr(RF.time, "sleep", lambda s: None)
-    world = {"outfalls": outs, "n_west": n_west, "tmp": tmp_path}
+    world = {"outfalls": outs, "n_west": n_west, "tmp": tmp_path, "saved": saved}
     world["baseline"] = steady(world)
     return world
 
@@ -149,6 +151,38 @@ class TileFails(FakeNOAA):
             if (xmin + xmax) / 2 < self.west_of:
                 return Resp(status=503, body={"error": "busy"})
         return super().get(url, params=params, headers=headers, timeout=timeout)
+
+
+class Faulty(FakeNOAA):
+    """The service answering some tiles' exports wrongly: which(x centre, y centre) gives "shift" (the image a pixel
+    west of the box asked), "empty" (no data everywhere), "flaky" (an error the first time only) or None."""
+
+    def __init__(self, which, **kw):
+        super().__init__(**kw)
+        self.which, self.seen = which, set()
+
+    def get(self, url, params=None, headers=None, timeout=None):
+        if RF.request_kind(url) != "mrms_export":
+            return super().get(url, params=params, headers=headers, timeout=timeout)
+        xmin, ymin, xmax, ymax = (float(v) for v in params["bbox"].split(","))
+        mode = self.which((xmin + xmax) / 2, (ymin + ymax) / 2)
+        key = (params["bbox"], params["mosaicRule"])
+        if mode == "flaky" and key not in self.seen:
+            self.seen.add(key)
+            self.calls.append("mrms_export")
+            return Resp(status=502, body={"error": "bad gateway"})
+        if mode in ("shift", "empty"):
+            self.calls.append("mrms_export")
+            w, hh = (int(v) for v in params["size"].split(","))
+            west = xmin - 0.01 if mode == "shift" else xmin
+            return Resp(content=make_tiff(w, hh, west, ymax, (lambda la, lo: rain_at(la, lo)) if mode == "shift"
+                                          else (lambda la, lo: G.NODATA), tile=64, lzw=False), ctype="image/tiff")
+        return super().get(url, params=params, headers=headers, timeout=timeout)
+
+
+def mrms_raw(world) -> dict:
+    """The run's raw MRMS file (the last written)."""
+    return [d for src, d in world["saved"] if src == "noaa-mrms-qpe"][-1]
 
 
 def test_a_national_set_is_read_in_tiles_with_the_values_one_box_gave(nation, monkeypatch):
@@ -236,17 +270,34 @@ def test_a_failed_tiles_points_take_the_grids_unit(nation):
     assert p["read"] == "point" and p["h24"] == rain_at(40.01, -100.01) and p["units_read"] == "mm"
 
 
-def test_a_fallback_answer_over_the_bound_against_the_grids_inches_divides_nothing(nation):
-    # the grid gives no evidence (the service's stated inches), a failed tile's identify answer is over the bound:
-    # a conflict, recorded; nothing is divided (the larger reading, the safety side)
-    fake = TileFails(west_of=-100.0, identify_wet={(40.01, -100.01): 60.0})
+def test_a_fallback_answer_over_the_bound_makes_the_whole_run_millimetres(nation):
+    # the grid alone gives no evidence (the service's stated inches); a failed tile's identify answer is over the
+    # bound: the unit is decided once from every value the run read (decide_units, the physical bound), so the grid's
+    # values and the fallback's are divided alike, and the change is recorded
+    fake = TileFails(west_of=-100.0, scale=25.4, identify_wet={(40.01, -100.01): 60.0})
     out = RF.run(now=NOW, session=fake)
-    m = out["mrms"]
-    assert m["units"]["units_read"] == "in"
+    u = out["mrms"]["units"]
+    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and "fallback" in u["with_fallback"]
     p = out["points"]["40.01,-100.01"]["mrms"]
-    assert p["read"] == "point" and p["h24"] == 60.0 and p["units_read"] == "in"
-    assert any("per-point fallback: the largest 24-hour value read, 60.0" in x and "nothing divided" in x
-               for x in m["problems"])
+    assert p["read"] == "point" and p["h24"] == round(60.0 / 25.4, 2) and p["units_read"] == "mm"
+    q = out["points"]["40.00,-75.00"]["mrms"]
+    assert q["read"] == "grid" and q["h24"] == rain_at(40.0, -75.0) and q["units_read"] == "mm"
+    assert out["mrms"]["units_last_determined"]["basis"] == "physical_bound"
+    assert any("decided again with the per-point fallback's answers" in x for x in out["mrms"]["problems"])
+
+
+def test_a_gauge_reading_inches_against_a_fallback_answer_over_the_bound_divides_nothing(nation, monkeypatch):
+    # the gauge check (on the grid's box) reads inches; a failed tile's identify answer is over the bound: the
+    # evidence conflicts (decide_units): nothing is divided, both pieces recorded, the unit not kept as determined
+    monkeypatch.setattr(RF, "GAUGES", {"KTST": (42.06, -74.97)})
+    fake = TileFails(west_of=-100.0, identify_wet={(40.01, -100.01): 60.0}, gauges={"KTST": [(9, 3.8)]})
+    out = RF.run(now=NOW, session=fake)
+    u = out["mrms"]["units"]
+    assert u["units_read"] == "in" and u["basis"] == "conflict" and u["factor"] == 1.0
+    assert u["evidence"]["gauge_check"]["verdict"] == "in" and u["evidence"]["physical_bound"]["box_max"]["h24"] == 60.0
+    assert out["mrms"]["units_last_determined"] is None
+    assert out["points"]["40.01,-100.01"]["mrms"]["h24"] == 60.0
+    assert out["points"]["42.06,-74.97"]["mrms"]["h24"] == rain_at(42.06, -74.97)
 
 
 def test_every_tile_failing_falls_back_and_fails_the_stage(nation):
@@ -258,7 +309,13 @@ def test_every_tile_failing_falls_back_and_fails_the_stage(nation):
     assert r["mrms_identify"] == RF.FALLBACK_MAX_CALLS
     assert not m["readings_ok"] and RF.exit_code(out) == 1 and out["ok"] is False
     assert "points in the radar grid have this hour's reading" in out["error"] and "per-point fallback" in out["error"]
-    assert "FALLBACK per point (grid read failed: ValueError: every grid tile failed (5)" in RF.summary_line(out, 1.0)
+    assert "FALLBACK per point (grid read failed: GridReadError: every grid tile failed (5)" in RF.summary_line(out, 1.0)
+    # the raw file keeps what the failed reads asked and got: the catalog and each tile's rejected attempts
+    raw = mrms_raw(nation)
+    assert raw["read"] == "point" and len(raw["answers"]) == RF.FALLBACK_MAX_CALLS and len(raw["grid_rejected"]) == 2
+    rej = raw["grid_rejected"][0]
+    assert rej["catalog"]["features"] and len(rej["tiles"]) == 5
+    assert all(len(a) == 2 and a[0]["error"] for a in rej["products"]["24"]["rejected"].values())
 
 
 def test_a_small_set_read_wholly_by_the_fallback_is_not_ok_but_exits_zero(tmp_path, monkeypatch):
@@ -285,3 +342,112 @@ def test_forecast_cells_deferred_by_design_never_fail_the_stage(nation, monkeypa
     out = RF.run(now=NOW, session=FakeNOAA())
     assert out["qpf"]["deferred"] > 0 and out["qpf"]["fetched"] == 3
     assert out["ok"] and RF.exit_code(out) == 0
+
+
+def test_a_misplaced_tile_and_an_empty_tile_are_failed_with_their_answers_kept(nation):
+    # the 100 W quadrants west of it answer a pixel off (misplaced: never sampled) and with no data at all
+    def which(x, y):
+        return ("shift" if y > 40 else "empty") if x < -100 else None
+    out = RF.run(now=NOW, session=Faulty(which))
+    m = out["mrms"]
+    assert sorted(m["grid"]["tiles_failed"]) == ["-120,20", "-120,40"]
+    assert "origin" in m["grid"]["tiles_failed"]["-120,40"] and "no 24-hour value at any" in m["grid"]["tiles_failed"]["-120,20"]
+    assert m["fallback"]["used"] and m["fallback"]["read"] == 8 and m["fresh"] == m["readable"]
+    for k, p in out["points"].items():                  # no misplaced value kept anywhere
+        lat, lon = map(float, k.split(","))
+        assert p["mrms"]["h24"] == rain_at(lat, lon) and p["mrms"]["read"] == ("point" if lon < -100 else "grid")
+    rej = mrms_raw(nation)["products"]["24"]["rejected"]
+    assert [len(rej["-120,40"]), len(rej["-120,20"])] == [2, 1]   # two misplaced answers; one answer of no data
+    assert all(a["sha256"] and a["bytes"] for a in rej["-120,40"])
+    assert rej["-120,20"][-1]["sha256"] and rej["-120,20"][-1]["width"] and "no 24-hour value" in rej["-120,20"][-1]["error"]
+    assert "-120,40" not in mrms_raw(nation)["products"]["24"]["tiles"]
+    assert out["requests"]["total"] <= 2 * nation["baseline"]
+
+
+def test_a_tile_read_on_its_second_attempt_is_no_fallback(nation):
+    out = RF.run(now=NOW, session=Faulty(lambda x, y: "flaky" if x < -100 and y > 40 else None))
+    m, r = out["mrms"], out["requests"]
+    assert not m["grid"]["tiles_failed"] and not m["fallback"]["used"] and out["ok"] and RF.exit_code(out) == 0
+    assert r["mrms_export"] == 2 * 5 + 2 and r["mrms_identify"] == 1  # each of its two exports failed once
+    tile = mrms_raw(nation)["products"]["24"]["tiles"]["-120,40"]
+    assert tile["sha256"] and tile["rejected"][0]["error"].startswith("RuntimeError: HTTP 502")
+
+
+def test_a_failed_tile_over_the_cap_leaves_points_stale_and_says_so(nation, monkeypatch):
+    monkeypatch.setattr(RF, "FALLBACK_MAX_CALLS", 5)
+    out = RF.run(now=NOW, session=TileFails(west_of=-100.0))
+    m = out["mrms"]
+    assert m["fallback"]["points"] == 8 and m["fallback"]["read"] == 5 and m["fallback"]["left"] == 3
+    assert m["fresh"] == m["readable"] - 3 and m["readings_ok"] and RF.exit_code(out) == 0 and out["ok"] is False
+    assert "5 of 8 point(s) read by identify, 3 left at the cap of 5" in out["error"]
+    assert "5 of 8 read, 3 left at the cap of 5" in RF.summary_line(out, 1.0)
+
+
+def test_a_check_that_disagrees_after_several_tiles_discards_the_whole_grid_and_keeps_its_evidence(nation):
+    out = RF.run(now=NOW, session=FakeNOAA(identify_off=0.5))
+    m = out["mrms"]
+    assert m["read"] == "point" and m["grid"]["used"] is False and m["grid"]["check"]["result"] == "differs"
+    assert m["fallback"]["used"] and "check at" in m["fallback"]["reason"]
+    assert all(p["mrms"]["read"] == "point" for p in out["points"].values() if p.get("mrms"))
+    rej = mrms_raw(nation)["grid_rejected"]
+    assert len(rej) == 1 and rej[0]["check"]["result"] == "differs" and rej[0]["check"]["answer"]
+    assert len(rej[0]["products"]["24"]["tiles"]) == 5 and len(rej[0]["values"]) == m["readable"]
+    assert out["requests"]["total"] <= 2 * nation["baseline"]
+
+
+def test_a_forced_rerun_reads_a_failed_tiles_points_by_point(nation):
+    RF.run(now=NOW, session=FakeNOAA())
+    fake = TileFails(west_of=-100.0)
+    out = RF.run(now=NOW + timedelta(minutes=10), session=fake, force=True)
+    m = out["mrms"]
+    assert m["fallback"]["used"] and m["fallback"]["points"] == m["fallback"]["read"] == 8
+    assert out["requests"]["mrms_identify"] == 8 + 1
+    assert all(p["mrms"]["read"] == ("point" if p["lon"] < -100 else "grid") for p in out["points"].values())
+
+
+class NoData(TileFails):
+    """Identify answering no data (MRMS -3) west of 100 W."""
+
+    def get(self, url, params=None, headers=None, timeout=None):
+        r = super().get(url, params=params, headers=headers, timeout=timeout)
+        if RF.request_kind(url) == "mrms_identify" and json.loads(params["geometry"])["x"] < -100:
+            body = r.json()
+            body["properties"]["Values"] = ["-3"] * len(body["properties"]["Values"])
+            return Resp(body=body)
+        return r
+
+
+def test_a_fallback_answer_of_no_data_is_not_a_fresh_reading(nation):
+    out = RF.run(now=NOW, session=NoData(west_of=-100.0))
+    m = out["mrms"]
+    west = [k for k, p in out["points"].items() if p["lon"] < -100]
+    assert all("mrms" not in out["points"][k] for k in west)              # nothing stored for them
+    assert {m["failed"][k] for k in west} == {"no 24-hour value in the answer"}
+    assert m["fresh"] == m["readable"] - 8 and m["fallback"]["read"] == 0 and m["fallback"]["failed"] == 8
+    assert out["ok"] is False
+
+
+def test_a_set_read_by_point_with_no_data_fails_the_stage(tmp_path, monkeypatch):
+    outs = [{"permit": "NE0000001", "outfall": str(n), "state": "NE", "name": "n", "lat": round(40.01 + n / 100, 2),
+             "lon": -100.01, "water_slug": None, "water_match": None, "distance_m": None, "source": "echo-registry"}
+            for n in range(10)]
+    monkeypatch.setattr(RF, "cso_outfalls", lambda: outs)
+    for name, f in (("OUT", "rainfall.json"), ("HISTORY", "rainfall-history.json"), ("GRIDS", "nws-gridpoints.json")):
+        monkeypatch.setattr(RF, name, tmp_path / f)
+    monkeypatch.setattr(RF, "GAUGE_CACHE", tmp_path / "gauges.json")
+    monkeypatch.setattr(RF, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(RF.time, "sleep", lambda s: None)
+    out = RF.run(now=NOW, session=NoData(west_of=0.0), qpf=False)     # every export fails, identify answers no data
+    m = out["mrms"]
+    assert m["fresh"] == 0 and not m["readings_ok"] and RF.exit_code(out) == 1 and out["ok"] is False
+
+
+def test_a_reading_of_an_old_product_is_not_fresh(nation):
+    # three hours after the product the service still serves (VALID): read, but stale; the stage fails loudly
+    out = RF.run(now=NOW + timedelta(hours=3), session=FakeNOAA())
+    m = out["mrms"]
+    assert m["read"] == "grid" and m["fetched"] == m["readable"] and m["valid_time"] == RF.iso(VALID)
+    assert m["fresh"] == 0 and not m["readings_ok"] and RF.exit_code(out) == 1 and out["ok"] is False
+    # an hour late is allowed (a product posted late)
+    late = RF.run(now=NOW + timedelta(hours=1), session=FakeNOAA(), force=True)
+    assert late["mrms"]["fresh"] == late["mrms"]["readable"] and late["ok"] and RF.exit_code(late) == 0
