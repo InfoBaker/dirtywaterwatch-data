@@ -172,7 +172,7 @@ def record(p: dict, at: str) -> dict:
 
 def place_key(title: str) -> str:
     title = re.sub(r"\s*\b(?:completed?|update[ds]?|halted)\b\s*$", "", title, flags=re.I).strip(" :-")
-    m = re.search(r"\b(?:in|near|at|into|along)\s+(?:the\s+)?([A-Z][\w .'-]+)$", title, re.I)
+    m = re.search(r".*\b(?:in|near|at|into|along)\s+(?:the\s+)?([A-Z][\w .'-]+)$", title, re.I)   # the last place
     return re.sub(r"[^a-z]", "", (m.group(1) if m else title).lower())
 
 
