@@ -74,7 +74,7 @@ AGENCY = [
      "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "feed_ingested",
      "feed_source_id": FEED, "publishes": "notices", "noun": "Data feed",
      "note": ("MMSD's Storm Update posts: what MMSD reported to the DNR after each overflow of its regional system, with "
-              "the dates, the volume and the letter; 18 posts from 2018-06-22 to 2026-09-08 among 282 news posts "
+              "the dates, the volume and the letter; 18 posts from 2018-06-22 to 2026-09-08 among 281 news posts "
               "(2026-11-14), posted four to ten days after the overflow began (the September 3, 2026 overflow on "
               "September 8). Read by the wi-mmsd-storm-updates feed. (research/wi/report.md §2.3)"),
      "sources": [FEED]},

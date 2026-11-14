@@ -10,7 +10,7 @@ Source
   on the water. The duty behind them: s. NR 210.21(5), Wis. Adm. Code (public notice of every overflow "promptly") and,
   for the combined sewer outfalls, 40 CFR 122.38 (Great Lakes Basin notice within four hours, which MMSD meets by other
   channels if at all: the post itself comes with the letter, five days or so after the overflow).
-  The full list read on 2026-11-14: 71 pages, 282 posts since 2016, of which 18 are Storm Updates or overflow letters
+  The full list read on 2026-11-14: 71 pages, 281 posts since 2016, of which 18 are Storm Updates or overflow letters
   (2018-06-22 to 2026-09-08). The September 3, 2026 overflow was posted September 8; the August 1, 2026 overflow August 6.
 
 Which posts are read
