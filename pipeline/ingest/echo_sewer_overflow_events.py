@@ -1,6 +1,7 @@
 """EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia,
 Washington State, Illinois, Arizona (with the Navajo Nation's reports located in Arizona), South Dakota,
-Mississippi, Nebraska, Alaska, New Mexico (with the Navajo Nation's reports located in New Mexico) and Kentucky.
+Mississippi, Nebraska, Alaska, New Mexico (with the Navajo Nation's reports located in New Mexico), Kentucky and
+Puerto Rico.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -422,6 +423,41 @@ Kentucky (permits KY...; research/ky/report.md section 2.2; not live until data/
     like, or before a removed phone number, becomes [name removed]; firm words such as 'Brands', 'Park', 'Controls'
     keep the phrase). The blocklist still runs on the export. Known problem: one Louisville MSD report gives an end
     14 minutes before its start (2026-01-01, 'Cause/Duration of Incident: -14'); times are read as filed.
+Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.json says so)
+  EPA Region 2 writes Puerto Rico's permits, and the Puerto Rico Aqueduct and Sewer Authority (PRASA, the island's
+  public sewer operator) files its overflow and bypass reports through NeT-SewerOverflow, so this dataset is Puerto
+  Rico's only dated, event-level sewage record (2026-11-12 extract: 940 current PR rows from 45 permits, starts
+  2025-04-03 to 2026-11-10; SSO 863, BYP 77, no CSO-typed row although the Puerto Nuevo permit has 12 combined sewer
+  outfalls; every row with a point, latitude positive and longitude negative, so no sign repair; 932 with a volume;
+  received a median 2 days after the start, 90th percentile 14). 252 are kept, from 35 permits; 688 dropped, every
+  one an SSO at a pump station, manhole or plant that names no water and reports only odour, aesthetic, land or no
+  observable impacts. The rules below are keyed on PR, so every other state's records are unchanged (checked on that
+  extract: 2,278 kept and 2,485 dropped records of the other states identical):
+  - Time zone: STATE_TZ gives America/Puerto_Rico (Atlantic Standard Time, UTC-4 all year; no daylight time, so no
+    hour is ever read twice); raw.time_zone on every record (RECORD_ZONE_STATES) and STATE_TZ_NOTE's wording, which
+    names Puerto Rico rather than a state.
+  - Language: the reports are written in English, Spanish or both ('RIO BAIROA' and 'BAIROA RIVER', 'Caribe Ocean',
+    'OCEANO ATLANTICO'); every text is kept as filed and nothing is translated. A receiving-water text made only of
+    generic words ('unnamed creek' 29, 'CREEK (UNKNOWN THE NAME)' 23, 'CAÑO (UNKNOWN THE NAME)' 6, 'QUEBRADA',
+    'RAVINE', 'Quebrada aledaña a la estación', 'STREET, MANGROVE AND BAY'; STATE_UNNAMED_WATER, pr_unnamed) says a
+    water was reached without naming it: kept ("receiving water reached, its name not given"), no water name
+    printed, raw.receiving_water_note says so; the report is placed by its own point.
+  - Water reached by impact: the impacts algal blooms (ALB) and eutrophication (EUT) can only happen in a water, so
+    for PR they count as a water reached (STATE_WATER_IMPACTS; 7 reports), and an impact text naming the storm drain
+    system ('STREET AND STORMWATER DRAINAGE', 'RAINWATER SYSTEM', 'RAINWATER LAGOON') or a water in Spanish or
+    English is a water, as storm drains are everywhere (pr_water_text; 4 reports).
+  - Descriptions: PRASA's description field names the structure, not what happened ('EA <place> (PUMP STATION)',
+    'EBAS <place>', 'PA <town> (WWTP)': estación de bombas, planta de alcantarillado), so a water word in it is a
+    place name ('EBAS RIO GRANDE PLAZA') and is not read as a water reached (DESCRIPTION_IS_PLACE_STATES).
+  - Points: a point several reports of one permit share is the named pump station or plant the descriptions give
+    (each shared point carries one structure's name), which is where the overflow happened, so PR is not in
+    REPEATED_POINT_STATES or PLANT_POINT_STATES and every point is kept.
+  - Free text: the 796 distinct free-text values of the extract (descriptions, other structure, cause, action and
+    impact texts) name structures, equipment and highways ('Carr. 306, Lajas'), no person and no street address;
+    PR is in FREE_TEXT_STATES (the Illinois scrub: house numbers, phones, e-mails) and EXTRA_PERSON_SCRUB removes a
+    name after a courtesy title ('Sr.', 'Sra.', 'Ing.', 'Lcdo.') should a future report carry one.
+  - Combined sewer outfalls: the 12 Puerto Nuevo outfalls (PR0021555) are in data/outfalls-pr.json from PRASA's own
+    layer; no report in this dataset is typed CSO, so none is matched to them.
 
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
@@ -455,10 +491,12 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
 STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY"}
+STATES |= {"PR"}   # Puerto Rico (module docstring)
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
             "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver",
             "KY": "America/New_York"}
+STATE_TZ["PR"] = "America/Puerto_Rico"   # Atlantic Standard Time all year, no daylight time
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json",
@@ -880,6 +918,57 @@ def navajo_point_state(lat, lon) -> str | None:
     return navajo_point_place(lat, lon)[0]
 
 
+# Puerto Rico (module docstring): PRASA's reports, keyed on PR only
+FREE_TEXT_STATES |= {"PR"}
+# receiving-water texts made only of generic words ('unnamed creek', 'CREEK (UNKNOWN THE NAME)', 'Quebrada aledana a la
+# estacion', 'STREET, MANGROVE AND BAY'): a water was reached, its name not given; never printed as a water's name
+PR_UNNAMED_WORDS = {"unnamed", "unknown", "the", "name", "near", "adjacent", "creek", "creeks", "stream", "ravine",
+                    "quebrada", "caño", "cano", "laguna", "artificial", "street", "mangrove", "and", "bay", "aledaña",
+                    "aledana", "a", "la", "estación", "estacion", "station"}
+
+
+def pr_unnamed(w: str) -> bool:
+    """Puerto Rico: a receiving-water text with no name in it, only generic words (PR_UNNAMED_WORDS)."""
+    words = re.findall(r"[^\W\d_]+", w.lower())
+    return bool(words) and all(x in PR_UNNAMED_WORDS for x in words)
+
+
+STATE_UNNAMED_WATER = {"PR": pr_unnamed}
+# impacts that can only happen in a water, read as a water reached for the listed states (ALB algal blooms, EUT
+# eutrophication); the national WATER_IMPACTS set is unchanged
+STATE_WATER_IMPACTS = {"PR": {"ALB", "EUT"}}
+# states whose description field names the structure (a pump station or plant: 'EA <place> (PUMP STATION)', 'PA
+# <town> (WWTP)'), so a water word in it is a place name ('EBAS RIO GRANDE PLAZA'), not evidence a water was reached
+DESCRIPTION_IS_PLACE_STATES = {"PR"}
+# Puerto Rico's impact texts in English and Spanish: a storm drain system is a water, as everywhere
+PR_WATER_TEXT = re.compile(r"\bstorm\s*water\s+drainage\b|\brain\s*water\s+(?:system|lagoon)s?\b|\bsource of water\b|"
+                           r"\b(?:quebradas?|r[ií]os?|caños?|lagunas?|bah[ií]as?|playas?|mar|oc[eé]anos?|charcas?|"
+                           r"manglar(?:es)?|mangroves?|alcantarillado\s+pluvial|sistema\s+pluvial)\b", re.I)
+
+
+def pr_water_text(texts: str) -> str | None:
+    """Puerto Rico: an impact text that names a water or the storm drain system, as the words read; None otherwise."""
+    m = PR_WATER_TEXT.search(texts)
+    return m.group(0) if m else None
+
+
+STATE_WATER_TEXT["PR"] = pr_water_text
+# a courtesy title before a capitalised name ('Sr. <name>', 'Ing. <name>'): the name is removed (no row of the
+# 2026-11-12 extract has one; the scrub guards the free text of future reports)
+PR_PERSON = re.compile(r"\b(?:Sr|Sra|Srta|Ing|Lcdo|Lcda|Dra?|Don|Doña|Mr|Mrs|Ms)\.?\s+"
+                       r"[A-ZÁÉÍÓÚÑ][\wáéíóúñü'-]+(?:\s+(?:de\s+(?:la\s+)?)?[A-ZÁÉÍÓÚÑ][\wáéíóúñü'-]+){0,3}")
+
+
+def pr_scrub_people(v: str) -> str:
+    return PR_PERSON.sub("[name removed]", v)
+
+
+EXTRA_PERSON_SCRUB = {"PR": pr_scrub_people}
+RECORD_ZONE_STATES = {"PR"}     # raw.time_zone on every record (as ZONE_ALWAYS_STATES does for Kentucky)
+STATE_TZ_NOTE = {"PR": ("ECHO gives event times without a timezone; read as America/Puerto_Rico (Atlantic Standard "
+                        "Time, UTC-4 all year: Puerto Rico keeps no daylight time), Puerto Rico's own clock")}
+
+
 TABLES = {
     "events": "sewer_overflow_bypass_report_events.csv",
     "types": "sewer_overflow_bypass_types.csv",
@@ -1209,12 +1298,16 @@ def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[d
             return False, "building backup"
     if waters and not real_waters:
         return False, "receiving water stated as none"
+    if real_waters and state in STATE_UNNAMED_WATER and all(STATE_UNNAMED_WATER[state](w) for w in real_waters):
+        return True, "receiving water reached, its name not given"
     if real_waters:
         return True, "receiving water named"
-    if codes & WATER_IMPACTS:
-        return True, "impact to a water (" + ",".join(sorted(codes & WATER_IMPACTS)) + ")"
+    water_impacts = WATER_IMPACTS | STATE_WATER_IMPACTS.get(state or "", set())
+    if codes & water_impacts:
+        return True, "impact to a water (" + ",".join(sorted(codes & water_impacts)) + ")"
     texts = " ".join([i.get("sewer_overflow_bypass_impact_other_text") or "" for i in impacts]
-                     + [ev.get("sewer_overflow_bypass_description_text") or ""])
+                     + ([] if state in DESCRIPTION_IS_PLACE_STATES else
+                        [ev.get("sewer_overflow_bypass_description_text") or ""]))
     if state in STATE_NOT_SEWAGE and STATE_NOT_SEWAGE[state].search(texts):
         return False, "the report says the matter was not sewage"
     if state in STREET_WATER:
@@ -1294,6 +1387,8 @@ def tz_note(state: str, permit: str = "", tz: str | None = None, basis: str | No
     if basis:   # a state of POINT_ZONE_FILES: the zone of the event's own point
         return (f"ECHO gives event times without a timezone; read as {tz}, {basis} (a fall-back hour that happens "
                 "twice is read as the first)")
+    if state in STATE_TZ_NOTE:   # a jurisdiction with its own wording (module docstring, Puerto Rico)
+        return STATE_TZ_NOTE[state]
     tz = STATE_TZ.get(state)
     return (f"ECHO gives event times without a timezone; read as {tz}, the permit's state's zone (a fall-back hour "
             "that happens twice is read as the first)") if tz else TZ_NOTE
@@ -1448,8 +1543,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
                 for x in rows_:
                     scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
-            if state in STATE_PERSON_SCRUB:   # module docstring, Kentucky
-                people = STATE_PERSON_SCRUB[state]
+            people = STATE_PERSON_SCRUB.get(state) or EXTRA_PERSON_SCRUB.get(state)
+            if people:   # module docstring, Kentucky and Puerto Rico
                 for f in FREE_TEXT_FIELDS:
                     if isinstance(ev.get(f), str):
                         ev[f] = people(ev[f])
@@ -1506,6 +1601,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             ne_notes["receiving_water_note"] = ("the report gives the receiving water as 'Unknown': kept (the report "
                                                 "says it reached one), no water named")
             real_w = [w for w in real_w if not UNKNOWN_WATER.match(w)]
+        if state in STATE_UNNAMED_WATER and any(STATE_UNNAMED_WATER[state](w) for w in real_w):
+            ne_notes["receiving_water_note"] = (
+                "the report gives the receiving water without its name ("
+                + "; ".join(repr(w) for w in real_w if STATE_UNNAMED_WATER[state](w)) + "): kept, no water named")
+            real_w = [w for w in real_w if not STATE_UNNAMED_WATER[state](w)]
         w_aliases = {}
         az_wbid = {}
         if state == "AZ":   # ADEQ's WBIDs -> ADEQ's names; what was filed stays in raw.receiving_waters
@@ -1581,6 +1681,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                 raw["ky_incident_id"] = m_inc.group(1)
         if ev_tz and state in ZONE_ALWAYS_STATES:
             raw["time_zone"] = ev_tz
+        if state in RECORD_ZONE_STATES:   # module docstring, Puerto Rico
+            raw["time_zone"] = ev_tz or STATE_TZ[state]
         if ev_tz and any(t and "T" not in t for t in (start, end)):
             # a date with no time keeps no offset: the zone it is a day of goes with it, so the status build ends the
             # day in the event's own zone, not New York's (SOL 2026-11-07 wave 2 P1-1)
