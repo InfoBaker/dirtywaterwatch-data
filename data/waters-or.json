@@ -1,6 +1,6 @@
 {
  "state": "OR",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 387,
  "waters": [
   {
@@ -1206,12 +1206,13 @@
    "gnis_id": null,
    "geometry_hash": "7ca22b3444a9a584b34f4c35c9b8968b1f9455d15520cd162f5689d1698f2ba1",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "bradley-lake-or",
@@ -1539,12 +1540,13 @@
    "gnis_id": "1118545",
    "geometry_hash": "74a80f5b29778ae41c73bfcb37527c39cf7dd8f9fa4835e86bfee377f9bf5fe2",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "canyon-creek-or",
@@ -3801,12 +3803,13 @@
    "gnis_id": null,
    "geometry_hash": "08db76a069b122de7e8c0503109ebd44af1fe587516e118d771d7b0febcc3af7",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "fish-lake-or-3",
@@ -3830,12 +3833,13 @@
    "gnis_id": null,
    "geometry_hash": "32ca46360d8c56781eb37005f485815b7e9d433a067ea0371dd730b07f42855c",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "flagstaff-lake-or",
@@ -6645,14 +6649,15 @@
    "gnis_id": null,
    "geometry_hash": "107032e334806201610f2c67f1d74cfe5d90a73d067d571d9c83719abaa5302d",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [
     "lost-lake-resort-or"
    ],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "lost-river-or",
@@ -9007,12 +9012,13 @@
    "gnis_id": null,
    "geometry_hash": "928ed1b02f6f7c34200f272ecf670c312dc670e977bf27c9f43349f66958e79d",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "rogue-river-or",
@@ -10493,12 +10499,13 @@
    "gnis_id": null,
    "geometry_hash": "5edb484e7f0b3c0da4a5534b2a309d556e713c6e0bd36b83467fc045d3e758b1",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "sunset-bay-or",
