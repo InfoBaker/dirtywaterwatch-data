@@ -256,3 +256,21 @@ def test_coverage_carries_the_health_table_for_register_states_only(monkeypatch)
     assert [o["wording"] for o in np_["operators"]] == ["No notification page found", "Not checked yet"]
     assert "notification_pages" not in got["states"]["MA"] and got["states"]["MA"] == base["states"]["MA"]
     assert {k: v for k, v in got["states"]["NJ"].items() if k != "notification_pages"} == base["states"]["NJ"]
+
+
+def test_astra_p2_6_an_availability_only_row_never_makes_records(tmp_path):
+    """Review 2026-11-14 (Astra data P2-6): availability_only must say records:false, and a row that omits it still
+    makes no record from a dated incident sentence; a records row sharing the URL keeps its own records."""
+    errs = M.validate_register({"schema_version": 1, "channels": [chan(availability_only=True)]})
+    assert any("availability_only needs records: false" in e for e in errs)
+    assert not any("availability_only" in e for e in
+                   M.validate_register({"schema_version": 1, "channels": [chan(availability_only=True, records=False)]}))
+    for row in (chan(availability_only=True), chan(availability_only=True, records=True)):
+        go = runner(tmp_path / str(row.get("records")), [row])
+        web = Web({URL: page(*BASE)})
+        go(web, "2026-11-03T15:00:00Z")
+        web.pages[URL] = page(*BASE, "A CSO discharge occurred at Outfall 002A on November 2, 2026.")
+        out = go(web, "2026-11-03T16:00:00Z")
+        assert out["records"] == [] and out["stats"]["records_new"] == 0
+    assert M.pages_of([chan(availability_only=True), chan(id="x-other")])[URL]["cfg"]["records"] is True
+    assert M.pages_of([chan(availability_only=True, records=True)])[URL]["cfg"]["records"] is False
