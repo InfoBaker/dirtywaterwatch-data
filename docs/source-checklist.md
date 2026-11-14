@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1461 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| mo | 6 | 0 | 5 | 2 | 0 | 13 |
+| **all** | **525** | **234** | **426** | **203** | **73** | **1461** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1676,21 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## mo: Missouri (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mo-dnr-concern-reports` | Missouri DNR Water Pollution Control concern reports (monthly PDFs) | used | fetched | events | Read by ingest/mo_dnr_concerns.py: the sewer overflow concerns with the allegation filter; the concern text (people, homes) is never stored. |
+| `mo-dnr-cso-areas` | Missouri DNR CSO Areas | used | fetched | outfalls | Combined-sewer service areas. |
+| `mo-dnr-npdes-outfalls` | Missouri DNR NPDES Waste Water Outfalls (CSO flag) | used | fetched | outfalls | Read by scripts/mo_outfall_layer.py into data/outfalls-mo.json: 146 CSO features on five permits (MSD Lemay 120), 26 of them EPA's rows. |
+| `mo-dnr-sso-reporting-mogem` | Missouri DNR sanitary sewer overflow and bypass reporting (MoGEM) | used | fetched | law | States the 24-hour duty to DNR and the MoGEM online reporting system; no public output and no public notice duty. |
+| `mo-kc-water-overflow-notices` | KC Water overflow press releases and Smart Sewer site | used | fetched | events | Read by ingest/mo_kc_water_news.py: KC Water's own overflow posts, a selective record; times, gallons and the named water from its text. |
+| `mo-msd-stl-project-clear` | MSD Project Clear (St. Louis) sewer overflow pages | used | fetched | events | Read by ingest/mo_msd_alerts.py: MSD's own overflow alerts and releases, a selective record (no rule requiring them was found); days, rarely times, never an end. |
+| `mo-dnr-beach-status` | Missouri DNR state park beach status (weekly E. coli) | watch | search_only | advisories | The beach status map is drawn by a script with per-beach pages; out of season on 2026-11-14, its data were not read. Registered and watched for availability. |
+| `mo-dnr-hab-map` | Missouri DNR Harmful Algal Bloom reports map | watch | search_only | advisories | An ArcGIS Experience app and a Survey123 form; the layer was not resolved in this build. Registered and watched for availability. |
+| `mo-dnr-meerts-search` | Missouri DNR MEERTS historical incident search | watch | fetched | events | Registered and watched; not read. |
+| `mo-dnr-merlin-search` | Missouri DNR MERLIN environmental emergency public search | watch | fetched | events | Registered and watched; a form, not read. |
+| `mo-swim-guide` | Swim Guide Missouri state park beaches | watch | search_only | prior_art | Lists Missouri state park beaches; most show 'No data available'. |
+| `mo-dnr-environmental-concern` | Missouri DNR environmental concern / 24-hour spill line | rejected | fetched | events | Intake only (573-634-2436); no public list. |
+| `mo-msdis-npdes-outfalls` | MSDIS MO_NPDES_Outfalls (University of Missouri copy) | rejected | search_only | outfalls | Copy of the DNR layer; use the DNR source. |
