@@ -1,0 +1,1075 @@
+{
+ "about": "Water names in Arkansas's records that data/receiving-waters-national.json does not hold for AR: the waters the location text of a report in DEQ's Reported Noncompliance Incident Data names, when the filer's impact does not say it stayed on land (read 2026-11-14, reports since 2025-01-01), and the water each of DEQ's harmful algal bloom advisories names (52 advisories since 2014); one row per name and county (an overflow report's county is its permit plant's, an advisory's the county DEQ gives), with the number of reports, how many are open now, up to five points ([lat, lon], 0.001 degree: the advisories' GNIS points; overflow reports have none), the advisories' nearest towns and the sources. Records naming no water are left out (by_reason). Written by scripts/ar_report_water_names.py.",
+ "state": "AR",
+ "waters": 64,
+ "reports": 237,
+ "reports_on_listed_waters": 53,
+ "by_reason": {
+  "no water named": 2161,
+  "a copy of another record (DEQ lists some reports twice)": 25,
+  "a description of a place, not a water's name": 1
+ },
+ "rows": [
+  {
+   "name": "Lake Hamilton",
+   "reports": 51,
+   "county": "Garland County",
+   "points": [],
+   "towns": [
+    "Hot Springs, AR"
+   ],
+   "sources": {
+    "ar-deq-overflow-incidents": 49,
+    "ar-deq-hab-advisories": 2
+   },
+   "open": 1,
+   "places_from": [
+    "ar-deq-hab-advisories",
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Gulpha Creek",
+   "reports": 33,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 33
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Hot Springs Creek",
+   "reports": 31,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 31
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Stokes Creek",
+   "reports": 18,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 18
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Massard Creek",
+   "reports": 11,
+   "county": "Sebastian County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 11
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Rivercliff Creek",
+   "reports": 7,
+   "county": "Marion County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 7
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Bull Shoals Lake",
+   "reports": 4,
+   "county": "Marion County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 4
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Lake Hogue",
+   "reports": 4,
+   "county": "Poinsett County",
+   "points": [
+    [
+     35.583,
+     -90.963
+    ]
+   ],
+   "towns": [
+    "Waldenburg, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 4
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Bois d'Arc Lake",
+   "reports": 3,
+   "county": "Hempstead County",
+   "points": [
+    [
+     33.555,
+     -93.703
+    ]
+   ],
+   "towns": [
+    "Hope, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 3
+   },
+   "open": 1,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Brewer Lake",
+   "reports": 3,
+   "county": "Conway County",
+   "points": [],
+   "towns": [
+    "Plumerville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 3
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Bennett",
+   "reports": 3,
+   "county": "Faulkner County",
+   "points": [
+    [
+     35.286,
+     -92.286
+    ]
+   ],
+   "towns": [
+    "Greenbrier, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 3
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake June",
+   "reports": 3,
+   "county": "Lafayette County",
+   "points": [
+    [
+     33.355,
+     -93.492
+    ]
+   ],
+   "towns": [
+    "Stamps, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 3
+   },
+   "open": 1,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Massaro Creek",
+   "reports": 3,
+   "county": "Sebastian County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 3
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Owl Creek",
+   "reports": 3,
+   "county": "Washington County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 3
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Deener Creek",
+   "reports": 2,
+   "county": "White County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Hamestring Creek",
+   "reports": 2,
+   "county": "Washington County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Hot Spring Creek",
+   "reports": 2,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Lake Catherine",
+   "reports": 2,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Lake Conway",
+   "reports": 2,
+   "county": "Faulkner County",
+   "points": [],
+   "towns": [
+    "Mayflower, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Desoto",
+   "reports": 2,
+   "county": "Garland County",
+   "points": [
+    [
+     34.678,
+     -93.018
+    ]
+   ],
+   "towns": [
+    "Hot Springs Village, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Sophia",
+   "reports": 2,
+   "county": "Saline County",
+   "points": [
+    [
+     34.634,
+     -92.85
+    ]
+   ],
+   "towns": [
+    "Hot Springs Village, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "McNeil Creek",
+   "reports": 2,
+   "county": "Saline County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Sulfur Creek",
+   "reports": 2,
+   "county": "Cleburne County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Town Creek",
+   "reports": 2,
+   "county": "Hot Spring County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 2
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Bear Creek Lake",
+   "reports": 1,
+   "county": "Lee County",
+   "points": [
+    [
+     34.711,
+     -90.695
+    ]
+   ],
+   "towns": [
+    "Marianna, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Columbia Hollow Branch",
+   "reports": 1,
+   "county": "Benton County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Gillham Lake",
+   "reports": 1,
+   "county": "Sevier County",
+   "points": [
+    [
+     34.172,
+     -94.322
+    ]
+   ],
+   "towns": [
+    "DeQueen, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Gin Creek",
+   "reports": 1,
+   "county": "White County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Gupha Creek",
+   "reports": 1,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Harris Brake Lake",
+   "reports": 1,
+   "county": "Perry County",
+   "points": [],
+   "towns": [
+    "Perryville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Heritage Park Lake",
+   "reports": 1,
+   "county": "Clay County",
+   "points": [],
+   "towns": [
+    "Piggott, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Horsehead Lake",
+   "reports": 1,
+   "county": "Johnson County",
+   "points": [
+    [
+     35.56,
+     -93.625
+    ]
+   ],
+   "towns": [
+    "Hunt, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Horseshoe Lake",
+   "reports": 1,
+   "county": "Crittenden County",
+   "points": [
+    [
+     34.925,
+     -90.34
+    ]
+   ],
+   "towns": [
+    "Horseshoe Lake, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Huddleston Creek",
+   "reports": 1,
+   "county": "Montgomery County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Hurricane Lake",
+   "reports": 1,
+   "county": "Saline County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Huston Lake",
+   "reports": 1,
+   "county": "Perry County",
+   "points": [],
+   "towns": [
+    "Perryville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Iams Dog Park Pond",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [],
+   "towns": [
+    "Fayetteville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Atalanta",
+   "reports": 1,
+   "county": "Benton County",
+   "points": [
+    [
+     36.338,
+     -94.098
+    ]
+   ],
+   "towns": [
+    "Rogers, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Catherine",
+   "reports": 1,
+   "county": "Hot Spring County",
+   "points": [
+    [
+     34.427,
+     -92.887
+    ]
+   ],
+   "towns": [
+    "Malvern, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Charles",
+   "reports": 1,
+   "county": "Lawrence County",
+   "points": [
+    [
+     36.073,
+     -91.149
+    ]
+   ],
+   "towns": [
+    "Powhatan, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Elmdale",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [
+    [
+     36.195,
+     -94.213
+    ]
+   ],
+   "towns": [
+    "Elm Springs, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Fayetteville",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [],
+   "towns": [
+    "Fayetteville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Flint Creek",
+   "reports": 1,
+   "county": "Benton County",
+   "points": [],
+   "towns": [
+    "Siloam Springs, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Nimrod",
+   "reports": 1,
+   "county": "Perry County",
+   "points": [],
+   "towns": [
+    "Ola, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Omaha",
+   "reports": 1,
+   "county": "Fulton County",
+   "points": [
+    [
+     36.307,
+     -91.597
+    ]
+   ],
+   "towns": [
+    "Cherokee Village, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Overcup",
+   "reports": 1,
+   "county": "Conway County",
+   "points": [
+    [
+     35.203,
+     -92.721
+    ]
+   ],
+   "towns": [
+    "Morrilton, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Poinsett",
+   "reports": 1,
+   "county": "Poinsett County",
+   "points": [
+    [
+     35.531,
+     -90.676
+    ]
+   ],
+   "towns": [
+    "Harrisburg, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lake Wilson",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [],
+   "towns": [
+    "Fayetteville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Lakewood Lake #1",
+   "reports": 1,
+   "county": "Pulaski County",
+   "points": [],
+   "towns": [
+    "North Little Rock, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Little Osage Creek",
+   "reports": 1,
+   "county": "Benton County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Mattocks Park Pond",
+   "reports": 1,
+   "county": "Union County",
+   "points": [],
+   "towns": [
+    "El Dorado, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Mollie Creek",
+   "reports": 1,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Molly Creek",
+   "reports": 1,
+   "county": "Garland County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Mom's Lake",
+   "reports": 1,
+   "county": "Clay County",
+   "points": [],
+   "towns": [
+    "Corning, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 1,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Mud Creek",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Niokaska Creek",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Old River Lake",
+   "reports": 1,
+   "county": "Pulaski County",
+   "points": [],
+   "towns": [
+    "Scott, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "River Mill Creek",
+   "reports": 1,
+   "county": "Sebastian County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Scull Creek",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Shawnee Town Branch",
+   "reports": 1,
+   "county": "Marion County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Spadra Creek",
+   "reports": 1,
+   "county": "Johnson County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Spring Lake",
+   "reports": 1,
+   "county": "Yell County",
+   "points": [
+    [
+     35.154,
+     -93.427
+    ]
+   ],
+   "towns": [
+    "Belleville, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  },
+  {
+   "name": "Tucker Creek",
+   "reports": 1,
+   "county": "Faulkner County",
+   "points": [],
+   "towns": [],
+   "sources": {
+    "ar-deq-overflow-incidents": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-overflow-incidents"
+   ]
+  },
+  {
+   "name": "Victory Lake",
+   "reports": 1,
+   "county": "Clay County",
+   "points": [
+    [
+     36.413,
+     -90.565
+    ]
+   ],
+   "towns": [
+    "Corning, AR"
+   ],
+   "sources": {
+    "ar-deq-hab-advisories": 1
+   },
+   "open": 0,
+   "places_from": [
+    "ar-deq-hab-advisories"
+   ]
+  }
+ ]
+}
