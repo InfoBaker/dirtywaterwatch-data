@@ -65,7 +65,9 @@ STATE_PUBLIC_NAME = {"NM": re.compile(r"\bmutual (?:domestic|sewage|sewer|water 
                      # under Ala. Code Title 11, Chapter 50, so their legal names carry "Inc." ("Grand Bay Water Works
                      # Board, Inc."); so is a town's governmental utility services corporation (Moody's)
                      "AL": re.compile(r"\b(?:water ?works|water|sewer|gas|utilities|utility)\b[\w\s,&]*\bboard\b|"
-                                      r"\bgovernmental utility services corporation\b", re.I)}
+                                      r"\bgovernmental utility services corporation\b", re.I),
+                     # Indiana's public school districts are "school corporations" (IC 20-18-2-16): public bodies
+                     "IN": re.compile(r"\bschool\s+corp(?:oration)?\b\.?", re.I)}
 PRIVATE_NAME = re.compile(r"\b(inc|llc|l\.l\.c|ltd|lp|corp|corporation|company|association|assn|poa|hoa|club|mhp|"
                           r"mhc)\b\.?", re.I)
 
