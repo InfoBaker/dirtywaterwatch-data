@@ -1,0 +1,29 @@
+id: "la-baton-rouge-quarterly-reports"
+name: "City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D)"
+url: "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/"
+homepage: "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/"
+kind: "pdf"
+level: "municipal"
+# Notes (research/la, status used, verified fetched, checked 2026-11-14): Read by the
+#   la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system
+#   equal the report's own summary): 219 discharges, October 2024 to September 2026 less the
+#   withheld quarters; Reports 91, 92 and 97 withheld.
+# Access detail (research, quoted): Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98
+#   (October 2024 to September 2026) fetched once each. Part D's collection-system tables: date,
+#   address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges
+#   are scanned forms.
+# Can fill: day, cause, receiving water, volume, permit
+# Cannot fill: time of day; end; coordinates
+# History: Reports since 2002 (read from Report 91)
+cadence: "quarterly, issued about a month after the quarter"
+license: "public record, none stated"
+attribution: "City of Baton Rouge and Parish of East Baton Rouge"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["LA"]
+access: ["pdf"]
+access_detail: "Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98 (October 2024 to September 2026) fetched once each. Part D's collection-system tables: date, address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges are scanned forms."
+machine_readable: false
+legal_basis: "Consent decree (2002), Paragraph 26, Section XI"
+checked: "2026-11-14"

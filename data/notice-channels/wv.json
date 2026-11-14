@@ -936,7 +936,7 @@
    "records": false,
    "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "Standing combined sewer notice: wet-weather overflows, signed outlets, avoid contact during an overflow and for at least 24 hours afterward; no dated overflows. Watched daily for a change.",
+   "note": "Standing combined sewer notice (read 2026-11-14): outlets may discharge in rain or heavy snow runoff; \"You are advised to avoid contact with the water around these outlets during these overflow events for at least 24 hours thereafter.\" No dated overflows. Watched daily for a change.",
    "sources": [
     "wv-charleston-cso-notice"
    ],
@@ -6648,24 +6648,20 @@
    "id": "wv-morgantown-cso-page",
    "name": "Morgantown Utility Board (City of Morgantown, permittee)",
    "channel_kind": "operator_page",
-   "urls": [
-    "https://mub.org/cso"
-   ],
-   "method": "html",
+   "urls": [],
+   "method": null,
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "other",
    "publishes": "documents",
    "records": false,
-   "every_hours": 24,
-   "noun": "Voluntary page",
-   "note": "Standing combined sewer notice: outlets on Deckers Creek, the Monongahela River, Popenoe Run and Burrough Run, avoid contact for 72 hours after rain, a January 2025 notice and a map (file-sharing links that did not open for this client); no dated overflows. Watched daily for a change.",
+   "note": "Standing combined sewer notice read on 2026-11-09 (mub.org/cso): outlets on Deckers Creek, the Monongahela River, Popenoe Run and Burrough Run, avoid contact for 72 hours after rain, a January 2025 notice and a map; no dated overflows. Both of the Board's combined sewer page addresses answered 404 on 2026-11-14 (moved): the new address is not verified in the research.",
    "sources": [
     "wv-mub-cso-current",
     "wv-mub-cso-public-notice-2025"
    ],
-   "barrier": null
+   "barrier": "not_verified"
   },
   {
    "state": "WV",

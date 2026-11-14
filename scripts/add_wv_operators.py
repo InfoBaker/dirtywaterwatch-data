@@ -47,9 +47,9 @@ OWN_CHANNELS = {
                   "and advises avoiding contact during an overflow and for at least 24 hours afterward; it lists no "
                   "dated overflows."),
     "WV0023124": ("https://mub.org/cso",
-                  " Morgantown Utility Board's combined sewer page lists its outlets on Deckers Creek, the Monongahela "
-                  "River, Popenoe Run and Burrough Run and advises avoiding contact for 72 hours after rain; it links "
-                  "a January 2025 notice and a map, and lists no dated overflows."),
+                  " Morgantown Utility Board's combined sewer page (read 2026-11-09; moved by 2026-11-14) listed its "
+                  "outlets on Deckers Creek, the Monongahela River, Popenoe Run and Burrough Run and advised avoiding "
+                  "contact for 72 hours after rain, with a January 2025 notice and a map; no dated overflows."),
     "WV0023230": ("https://www.wheelingwv.gov/departments/PublicWorks/water-pollution",
                   " Wheeling's Water Pollution Control page gives the system and a route to report problems; its "
                   "annual legal notice (2015) asked people to avoid contact for at least 24 hours after 0.10 inch of "

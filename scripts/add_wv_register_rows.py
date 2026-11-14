@@ -139,16 +139,18 @@ OWN = [
      "urls": ["https://csbwv.gov/index.php?Itemid=68&id=62&option=com_content&view=article"], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "none",
      "records": False, "every_hours": 24, "noun": "Voluntary page",
-     "note": ("Standing combined sewer notice: wet-weather overflows, signed outlets, avoid contact during an overflow and "
-              "for at least 24 hours afterward; no dated overflows. Watched daily for a change."),
+     "note": ("Standing combined sewer notice (read 2026-11-14): outlets may discharge in rain or heavy snow runoff; \"You "
+              "are advised to avoid contact with the water around these outlets during these overflow events for at "
+              "least 24 hours thereafter.\" No dated overflows. Watched daily for a change."),
      "sources": ["wv-charleston-cso-notice"]},
     {"id": "wv-morgantown-cso-page", "operator_id": "wv-city-of-morgantown", "permit": "WV0023124",
-     "name": "Morgantown Utility Board (City of Morgantown, permittee)", "channel_kind": "operator_page", "urls": ["https://mub.org/cso"],
-     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "documents", "records": False, "every_hours": 24, "noun": "Voluntary page",
-     "note": ("Standing combined sewer notice: outlets on Deckers Creek, the Monongahela River, Popenoe Run and Burrough "
-              "Run, avoid contact for 72 hours after rain, a January 2025 notice and a map (file-sharing links that did "
-              "not open for this client); no dated overflows. Watched daily for a change."),
+     "name": "Morgantown Utility Board (City of Morgantown, permittee)", "channel_kind": "operator_page", "urls": [],
+     "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
+     "publishes": "documents", "records": False,
+     "note": ("Standing combined sewer notice read on 2026-11-09 (mub.org/cso): outlets on Deckers Creek, the Monongahela "
+              "River, Popenoe Run and Burrough Run, avoid contact for 72 hours after rain, a January 2025 notice and a "
+              "map; no dated overflows. Both of the Board's combined sewer page addresses answered 404 on 2026-11-14 "
+              "(moved): the new address is not verified in the research."),
      "sources": ["wv-mub-cso-current", "wv-mub-cso-public-notice-2025"]},
     {"id": "wv-wheeling-water-pollution-page", "operator_id": "wv-city-of-wheeling", "permit": "WV0023230",
      "name": "City of Wheeling", "channel_kind": "operator_page",
