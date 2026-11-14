@@ -120,6 +120,11 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Arkansas: ar_deq_overflow_incidents (DEQ's Reported Noncompliance Incident Data, an HTML form
+#                  search read by start-day window, each window's count checked: every SSO, bypass, upset and
+#                  unpermitted discharge since 2025, day precision; ingest/ar_transforms.py), the generic JSON block
+#                  ar-deq-hab-advisories (DEQ's bloom advisories with the days posted and lifted) and
+#                  ar_adh_swim_beaches (the Department of Health's closed swim beaches, a standing list)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

@@ -18,7 +18,7 @@ level: "state"
 #   stop day blank on 89 rows; the day DEQ received the report is a median of 1 day after the overflow began (90th
 #   percentile 2 days; 9 reports more than 120 days late). The search goes back to 1993 (about 46,000 reports in all,
 #   most from 2001); the older ones are not read by this build. "Data current as of 11/13/2026" on the page.
-# 22 rows from industrial permits (paper and packaging mills, a gravel mine, a brick plant, two manufacturers) that
+# 26 rows from industrial permits (paper and packaging mills, a gravel mine, a brick plant and other plants) that
 #   are not sewer overflows are not sewage reports and are not kept (ar_deq_not_sewage).
 cadence: "every run (the last 120 days by start day, two or three requests); the page is refreshed daily"
 license: "No licence or terms shown on the page."
