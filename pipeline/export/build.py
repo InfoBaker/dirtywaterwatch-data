@@ -119,10 +119,11 @@ SAFE = re.compile(r"[A-Za-z0-9._-]")
 SLIM_DROP = {"raw", "advice_text", "advice_window_basis", "fetched_at", "coord_source", "coord_precision_m",
              "placement_note"}
 INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ended_at", "water_slugs",
-                "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture"]
+                "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture", "sampled_at",
+                "time_precision", "ended_at_precision"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
                      "duplicate_of", "file"]
-SLIM_KEEP = {"event_id", "source_id", "event_type", "status", "water_slugs", "started_at", "ended_at", "fixture", "file"}
+SLIM_KEEP = {"event_id", "source_id", "event_type", "status", "water_slugs", "started_at", "ended_at", "sampled_at", "fixture", "file"}
 
 
 def event_file_name(event_id: str) -> str:
@@ -134,8 +135,28 @@ def event_id_from_file(name: str) -> str:
     return re.sub(r"(?:~[0-9A-F]{2})+", lambda m: bytes.fromhex(m.group(0).replace("~", "")).decode(), stem)
 
 
+def bounds_precision(rec: dict) -> dict:
+    """The precision of the start and of the end (the end's own, slim `ended_at_precision` or raw.ended_at_precision,
+    else the start's; None with no end): a poll precision marks an observation bound, never an agency's issue or lift
+    time (review 2026-11-14, Astra data P2-5)."""
+    raw = rec.get("raw") if isinstance(rec.get("raw"), dict) else {}
+    end = rec.get("ended_at_precision") or raw.get("ended_at_precision") or rec.get("time_precision")
+    return {"time_precision": rec.get("time_precision"), "ended_at_precision": end if rec.get("ended_at") else None}
+
+
+def slim_event(rec: dict) -> dict:
+    """events.json's slim copy of a public record: no raw, advice or fetch time; the end's own precision is written as
+    `ended_at_precision` only where it differs from the start's (other records' rows are as before)."""
+    out = {k: v for k, v in rec.items() if k not in SLIM_DROP and (k in SLIM_KEEP or v not in (None, [], {}, ""))}
+    own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
+    if rec.get("ended_at") and own and own != rec.get("time_precision"):
+        out["ended_at_precision"] = own
+    return out
+
+
 def index_obj(rec: dict) -> dict:
     o = {k: rec.get(k) for k in INDEX_FIELDS}
+    o.update(bounds_precision(rec))
     o["state"] = rec.get("state") or status_mod.event_state(rec)     # public_record's, read with raw
     for k in ("lat", "lon"):
         if o[k] is not None:
@@ -144,7 +165,7 @@ def index_obj(rec: dict) -> dict:
 
 
 def time_key(rec: dict) -> float:
-    for k in ("started_at", "reported_at", "published_at"):
+    for k in ("started_at", "reported_at", "published_at", "sampled_at"):
         t = status_mod.parse_time(rec.get(k))
         if t:
             return t.timestamp()
@@ -1567,8 +1588,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         full["reach_band"] = reach_band.get(e["event_id"])
         write_compact(OUT_DIR / rec["file"], publicize(full))
         csv_events.append(rec)
-        out_events.append({k: v for k, v in rec.items()
-                           if k not in SLIM_DROP and (k in SLIM_KEEP or v not in (None, [], {}, ""))})
+        out_events.append(slim_event(rec))
     out_events.sort(key=time_key, reverse=True)
     by_event = {e["event_id"]: e for e in out_events}
     write_compact(OUT_DIR / "events-index.json", {
@@ -1711,6 +1731,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                                    "category": ap.get("category") or status_mod.category_of(e["event_type"]),
                                    "authority": e.get("authority"), "name": e.get("waterbody_text"),
                                    "started": e.get("started_at"), "ended": e.get("ended_at"), "until": ap.get("until"),
+                                   **bounds_precision(e),
                                    "water_slugs": ap.get("water_slugs") or [], "why": ap.get("why"),
                                    **({"point_basis": ap["point_basis"]} if ap.get("point_basis") else {}),
                                    # replay: the strictest of these for the hour, not today's status

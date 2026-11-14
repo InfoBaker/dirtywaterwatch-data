@@ -58,6 +58,8 @@ Page health (data/build/notice-pages/health.json; out/coverage.json states.<ST>.
   <date>", "Not listed on <link_text> since <date>", "No notification page found", "... not read"
   (login, bot check, image only, email only, app only), "Read as a feed", "Not checked yet". <Noun> is the
   row's `noun`, else "Notification page", or "Voluntary page" for a voluntary channel (never "required").
+  `availability_only: true` keeps the researched `publishes` classification but does not check status data:
+  a reachable page says "Page reachable; status data not checked"; a failed fetch keeps the unreachable wording.
   Per operator and permit (`operators`): the most telling of its channels' lines (ROLLUP_ORDER).
 
 Run from pipeline/:  python -m ingest.notification_pages [--state NJ] [--validate] [--write-schema] [--no-fetch]
@@ -143,6 +145,8 @@ OPTIONAL = {
              "(from the first line matching start to the next line matching end)",
     "ignore_lines": "regular expressions of volatile lines (readings, clocks) left out of the text hash",
     "records": "false: never make records from this channel (default true)",
+    "availability_only": "true: monitor page availability without checking current status; requires records: false "
+                         "(no notice records from this row) (default false)",
     "dated_lines_are_notices": "true: any added dated line is a notice (an event table)",
     "default_event_type": "event type of a notice whose words name none (common.EVENT_TYPES)",
     "every_hours": "fetch at most this often (default: every refresh)",
@@ -301,9 +305,12 @@ def validate_register(doc, dischargers: list[dict] | None = None, root: Path | N
         if ent is not None and not (isinstance(ent, dict) and _compiles(ent.get("start")) and ent.get("start")
                                     and _compiles(ent.get("end")) and ent.get("end")):
             errs.append(f"{where}: entry is {{start, end}} with regular expressions")
-        for k in ("records", "dated_lines_are_notices"):
+        for k in ("records", "dated_lines_are_notices", "availability_only"):
             if k in r and not isinstance(r[k], bool):
                 errs.append(f"{where}: {k} is true or false")
+        if r.get("availability_only") is True and r.get("records") is not False:
+            # review 2026-11-14 (Astra data P2-6): a page watched for availability makes no notice records
+            errs.append(f"{where}: availability_only needs records: false")
         if r.get("default_event_type") is not None and r["default_event_type"] not in EVENT_TYPES:
             errs.append(f"{where}: default_event_type {r['default_event_type']!r} is not an event type")
         if r.get("every_hours") is not None and not (isinstance(r["every_hours"], (int, float))
@@ -1044,10 +1051,11 @@ def channel_health(row: dict, snaps: dict[str, dict], now: datetime) -> dict:
             h["entry_listed"] = ent is not None
         lines += ent or []
     pat = row.get("status_pattern")
-    if pat:
+    availability_only = row.get("availability_only") is True
+    if pat and not availability_only:
         h["shown_text"] = shown_text(lines, pat)
     pub = row.get("publishes")
-    if pub == "status":
+    if pub == "status" and not availability_only:
         h["publishes_status"] = bool(h["shown_text"]) if pat else bool(h["reachable"])
     else:
         h["publishes_status"] = False
@@ -1059,6 +1067,9 @@ def channel_health(row: dict, snaps: dict[str, dict], now: datetime) -> dict:
         since_e = max(((s.get("entries") or {}).get(row["entry"]["start"]) or {}).get("since") or "" for s in ss) or None
         h.update({"wording": f"Not listed on {row.get('link_text') or 'the shared site'} since {day_text(since_e)}",
                   "wording_kind": "entry_missing", "wording_date": since_e})
+    elif availability_only:
+        h.update({"wording": "Page reachable; status data not checked", "wording_kind": "not_checked",
+                  "wording_date": h["last_ok"]})
     elif h["publishes_status"]:
         h.update({"wording": "Publishes a current status", "wording_kind": "status", "wording_date": h["last_ok"]})
     elif pub == "status":
@@ -1149,7 +1160,9 @@ def pages_of(channels: list[dict]) -> dict[str, dict]:
                 c["status_patterns"].append(r["status_pattern"])
             c["dated_lines_are_notices"] |= bool(r.get("dated_lines_are_notices"))
             c["default_event_type"] = c["default_event_type"] or r.get("default_event_type")
-            c["records"] |= r.get("records", True) is not False
+            # an availability-only row never turns records on, whatever its records says (validate_register requires
+            # records: false with it); another row of the same URL keeps its own setting (Astra data P2-6)
+            c["records"] |= r.get("records", True) is not False and r.get("availability_only") is not True
             c["shared"] |= r.get("channel_kind") == "shared_site"
     return pages
 

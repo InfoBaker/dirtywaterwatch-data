@@ -10,8 +10,8 @@ writes, under out_dir (the export passes out/csv):
                              reports)
   operator/<id>.csv          one file per discharger in out/dischargers.json with at least one report
   state/<st>.csv             one file per covered state, lowercase two-letter code
-  all-reports-<year>.csv     every report, one file per calendar year of started_at (reports with no
-                             start date are in the latest year's file)
+  all-reports-<year>.csv     every report, one file per calendar year of started_at, else sampled_at
+                             (reports with neither date are in the latest year's file)
 
 A water, operator or state file that would pass SPLIT_BYTES (24 MiB; the host takes none over 25 MiB) is
 written as <name>-<year>.csv files instead, split the same way, and the split is logged.
@@ -48,15 +48,16 @@ SITE = "https://dirtywaterwatch.org"
 COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id", "outlet_id", "outlet_name",
            "event_type", "category", "status", "started_at", "ended_at", "end_reported", "volume_gal", "volume_text", "lat", "lon",
            "towns", "source_id", "source_name", "record_id", "published_at", "reported_at", "source_updated_at",
-           "retrieved_at", "report_url", "notice_url", "site_url", "duplicate_of", "superseded_by"]
+           "retrieved_at", "report_url", "notice_url", "site_url", "duplicate_of", "superseded_by",
+           "sampled_at", "time_precision", "ended_at_precision"]
 LIST_SEP = ";"
 # children of out_dir this module owns (and replaces on every run); everything else in out_dir is left alone
 MANAGED_DIRS = ("water", "operator", "state")
-ALL_REPORTS = "all-reports"                 # all-reports-<year>.csv, one per calendar year of started_at
+ALL_REPORTS = "all-reports"                 # all-reports-<year>.csv, calendar year of started_at else sampled_at
 # keys of an event's `raw` that hold the link to an official notice or memo (a link only; the value must be http or https)
 RAW_NOTICE_KEYS = ("notice_url", "memo_pdf", "MoreInfo")
 # Event pages (site/src/lib/data.ts eventGetsPage, pageContext): a record that is not a history row gets one when it
-# started (else was reported, else published) within PAGE_DAYS days before the snapshot, sets a status now (active.json,
+# started (else was reported, published or sampled) within PAGE_DAYS days before the snapshot, sets a status now (active.json,
 # rain rows aside), stands behind a water's status (a non-grey reason) or is flagged unresolved on a water. Every
 # other record's site_url is its row on the state-year archive page (archivePage: ARCHIVE_SPLIT), else its entry in
 # the list of all reports (indexChunk: RECENT_DAYS). Keep these and SiteLinks in step with the site (review
@@ -71,6 +72,7 @@ MAX_FILE_BYTES = 25 * 1024 * 1024
 # a water, operator or state file over this is split by year (<name>-<year>.csv); the margin keeps it under the limit
 SPLIT_BYTES = 24 * 1024 * 1024
 STARTED = COLUMNS.index("started_at")
+SAMPLED = COLUMNS.index("sampled_at")
 _SAFE = re.compile(r"[A-Za-z0-9._-]")
 _CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 _FORMULA_START = ("=", "+", "-", "@", "\t", "\r")
@@ -83,8 +85,8 @@ def encode_id(s: str) -> str:
 
 
 def time_key(e: dict) -> float:
-    """Sort key: the start, else the report time, else the publication time (build.time_key)."""
-    for k in ("started_at", "reported_at", "published_at"):
+    """Sort key: start, report, publication or sample time, in that order (build.time_key)."""
+    for k in ("started_at", "reported_at", "published_at", "sampled_at"):
         t = status_mod.parse_time(e.get(k))
         if t:
             return t.timestamp()
@@ -248,7 +250,7 @@ def event_gets_page(e: dict, ctx: dict) -> bool:
     """site eventGetsPage: the one rule for which records get /event/<id>/."""
     if is_history_row(e):
         return False
-    first = _str(e.get("started_at")) or _str(e.get("reported_at")) or _str(e.get("published_at"))
+    first = _str(e.get("started_at")) or _str(e.get("reported_at")) or _str(e.get("published_at")) or _str(e.get("sampled_at"))
     t = status_mod.parse_time(first)
     if t is not None and t >= ctx["as_of"] - timedelta(days=PAGE_DAYS):
         return True
@@ -317,10 +319,10 @@ class SiteLinks:
 
     @staticmethod
     def minutes_of(e: dict) -> int | None:
-        """site indexTimes: the start, else the report time (reported, else published, else source update)."""
+        """site indexTimes: start, report, publication, sample or source update time, in that order."""
         m = _epoch_minutes(_str(e.get("started_at")))
         if m is None:
-            m = _epoch_minutes(_str(e.get("reported_at")) or _str(e.get("published_at")) or _str(e.get("source_updated_at")))
+            m = _epoch_minutes(_str(e.get("reported_at")) or _str(e.get("published_at")) or _str(e.get("sampled_at")) or _str(e.get("source_updated_at")))
         return m
 
     def day_of(self, e: dict) -> str | None:
@@ -393,11 +395,13 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     operator = e.get("discharger_name") or d.get("name")
     towns = _join_towns(_own_towns(e) or d.get("towns") or [])
     eid = e["event_id"]
+    ended_precision = status_mod.end_precision(e) if e.get("ended_at") else None
+    end_reported = bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
         _text(e.get("outfall_id")), _text(e.get("outfall_name")), _text(e.get("event_type")),
         _text(e.get("category") or status_mod.category_of(e.get("event_type"))), _text(e.get("status")),
-        _text(e.get("started_at")), _text(e.get("ended_at")), "true" if e.get("ended_at") else "false",
+        _text(e.get("started_at")), _text(e.get("ended_at")), "true" if end_reported else "false",
         _number(e.get("volume_gal")), _text(e.get("volume_text")),
         _number(e.get("lat"), 5), _number(e.get("lon"), 5),
         _text(towns), _text(e.get("source_id")), _text(ctx.source_names.get(e.get("source_id"), "")),
@@ -406,6 +410,7 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
         _url(e.get("source_url")), _notice_url(e),
         ctx.links.url(e),
         _text(e.get("duplicate_of")), _text(superseded_by(e, ctx.ids)),
+        _text(e.get("sampled_at")), _text(e.get("time_precision")), _text(ended_precision),
     ]
     return row, ops
 
@@ -419,13 +424,13 @@ def _write(path: Path, rows: list[list[str]]) -> None:
 
 
 def year_of(row: list[str]) -> str | None:
-    """The calendar year of a row's started_at as written (its first four digits), None when it has none."""
-    m = re.match(r"\s*(\d{4})-", row[STARTED])
+    """Calendar year of the start, else sample date as written; None when neither is supplied."""
+    m = re.match(r"\s*(\d{4})-", row[STARTED] or row[SAMPLED])
     return m.group(1) if m else None
 
 
 def by_year(rows: list[list[str]], idx, latest: str) -> dict[str, list[int]]:
-    """{year: row positions}, newest year first; rows with no start date go in the latest year's file (the
+    """{year: row positions}, newest year first; rows with no start or sample date go in the latest year's file (the
     latest year among these rows, else `latest`). Positions keep the newest-first order of `rows`."""
     dated: dict[str, list[int]] = defaultdict(list)
     undated = []

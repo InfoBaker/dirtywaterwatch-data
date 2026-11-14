@@ -6,7 +6,7 @@ kind: "api"
 level: "state"
 # Read through the generic ArcGIS reader (docs/generic-ingesters.md) with the hook ingest/ne_transforms.py
 #   (ne_beachwatch_record, ne_beachwatch_sequence). The layer holds every weekly sample of the season at 57 public
-#   beaches; every row is read, an alert ends at its station's next sample, and only the rows with a health alert or an
+#   beaches; every row is read; advisory transitions use observed changes, never sample dates, and only rows with a health alert or an
 #   elevated E. coli label become records.
 # Real fetch 2026-11-07: 1,022 rows, all of the 2026 season (sample weeks 20 to 37, 2026-05-18 to 2026-09-14), 57
 #   stations; 20 rows on health alert (microcystin above 8 micrograms per litre: Rockford Lake, Maskenthine Reservoir,
@@ -14,7 +14,7 @@ level: "state"
 #   with the elevated E. coli label (one row has both): 57 records. Dates are stored as midnight Central time
 #   (05:00 UTC in summer); read as dates.
 # Not in the layer: the time a sample was posted (Fridays, by the agency's release), the time an alert was lifted
-#   (an alert is ended at the station's next sample date), earlier seasons.
+#   (observations bound changes, never establish their official dates), earlier seasons.
 cadence: "weekly in season: samples taken Mondays, posted Fridays, mid-May to mid-September"
 license: "No licence statement on the service"
 attribution: "Nebraska Department of Water, Energy, and Environment, Beach Watch"
@@ -52,13 +52,14 @@ fetch:
     authority: {const: "Nebraska Department of Water, Energy, and Environment (Beach Watch)"}
     source_url: {const: "https://dwee.nebraska.gov/node/4996"}
   transform: "ingest.ne_transforms.ne_beachwatch_record"
-  post: "ingest.ne_transforms.ne_beachwatch_sequence"
+  after_history: "ingest.ne_transforms.ne_beachwatch_sequence"
   decoded_times: {parse: epoch_ms, fields: [ActivityStartDate]}
   dedupe: {repeats: suffix, order: [started_at]}
   history:
     keep_missing: true
+    revisions: true
   meta:
     credit: "Nebraska Department of Water, Energy, and Environment, Beach Watch"
     license: "No licence statement on the service"
-    caveat: "A health alert is the agency's statement as of the week's sample and holds until the beach's next weekly sample; the layer gives sample dates, not the day results were posted. DWEE issues no advisory for E. coli; the elevated E. coli label is quoted and shown with this site's caution."
-    time_basis: "Sample dates (the layer stores each as midnight Central time); no time of day is given."
+    caveat: "The layer gives sample dates, not advisory issue or lift dates. Historical samples have no invented advisory interval. A recent latest health alert is dated from the poll that first observes it; a later sample or corrected flag bounds its change at the poll that first sees it. DWEE issues no advisory for E. coli; the elevated E. coli label is quoted and shown with this site's caution."
+    time_basis: "sampled_at is the source sample date. Advisory started_at and ended_at, when present, are observation bounds (poll precision), never source issue or lift times."

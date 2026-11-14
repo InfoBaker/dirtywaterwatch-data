@@ -5909,15 +5909,15 @@
   },
   {
    "state": "TN",
-   "operator_id": null,
+   "operator_id": "tn-metro-water-services",
    "agency": "Metro Water Services (Clean Water Nashville)",
    "permit": null,
-   "checked": "2026-11-07",
+   "checked": "2026-11-09",
    "id": "tn-clean-water-nashville",
    "name": "Clean Water Nashville",
    "channel_kind": "operator_page",
    "urls": [
-    "https://www.cleanwaternashville.org/history-and-consent-decree"
+    "https://www.cleanwaternashville.org/monthly-regulatory-reports"
    ],
    "method": "html",
    "legal_basis": null,
@@ -5927,8 +5927,8 @@
    "publishes": "documents",
    "records": false,
    "every_hours": 24,
-   "noun": "Consent decree page",
-   "note": "Metro Water Services' consent decree program site (answered 200 on 2026-11-07): the history, a map of CSO locations and the decree reports; no event notices found. Voluntary. (tn-clean-water-nashville)",
+   "noun": "Monthly overflow reports",
+   "note": "Metro Water Services publishes monthly SSO reports with event dates, locations, causes, durations and volumes, and CSO reports with dates, durations and flows. The index lists 2021 through September 2026 as checked on 2026-11-09. This index is monitored for changes; the linked reports are not yet parsed or collected as events. These are delayed reports, not a real-time notice feed. Voluntary. (tn-clean-water-nashville)",
    "sources": [
     "tn-clean-water-nashville"
    ],
@@ -9129,7 +9129,7 @@
    "operator_id": "tn-metro-water-services",
    "agency": null,
    "permit": "TN0020575",
-   "checked": "2026-11-07",
+   "checked": "2026-11-09",
    "id": "tn-metro-water-services-cso-notice",
    "name": "Metro Water Services",
    "channel_kind": "operator_page",
@@ -9145,7 +9145,7 @@
    "sources": [
     "tn-clean-water-nashville"
    ],
-   "note": "No URL known: no public notice of a combined sewer overflow event was found for this permittee, and the permit's public-notification clause is not verified in the research. CSO discharges are permitted and are not in TDEC's Events Report.",
+   "note": "Metro Water Services publishes delayed monthly CSO reports, registered as tn-clean-water-nashville. Not verified in the research: a real-time CSO notification channel or the permit's public-notification clause. The monthly reports do not establish compliance with that clause.",
    "barrier": "not_verified"
   },
   {
@@ -9178,7 +9178,7 @@
    "operator_id": "tn-metro-water-services",
    "agency": null,
    "permit": "TN0020575",
-   "checked": "2026-11-07",
+   "checked": "2026-11-09",
    "id": "tn-metro-water-services-public-notice",
    "name": "Metro Water Services",
    "channel_kind": "operator_page",
@@ -9194,7 +9194,7 @@
    "sources": [
     "tn-law-0400-40-05-07"
    ],
-   "note": "No URL known (not searched individually): no Tennessee rule requires a permittee to tell the public of an overflow, and this operator's own pages were not searched, so whether it posts notices online is not known.",
+   "note": "Not searched individually for real-time alerts. Metro Water Services' monthly SSO and CSO reports are publicly available; their index is registered as tn-clean-water-nashville. Additional voluntary incident-alert channels have not been verified.",
    "barrier": "not_verified"
   },
   {
