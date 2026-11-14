@@ -757,16 +757,15 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "app_only",
+   "unmonitored_reason": "other",
    "publishes": "notices",
    "records": false,
    "noun": "Voluntary page",
    "sources": [
     "sc-des-shellfish"
    ],
-   "note": "The closure viewer (https://gis.des.sc.gov/shellfishclosures/) returned only its shell to a plain client; closures after heavy rain are also announced in DES's news releases. Harvest restrictions, not swimming advisories or sewage reports.",
-   "barrier": null,
-   "barrier_review": "an app shell with no readable feature layer found; no login wall"
+   "note": "The closure viewer (https://gis.des.sc.gov/shellfishclosures/) returned only its shell to a plain client; closures after heavy rain are also announced in DES's news releases. Harvest restrictions, not swimming advisories or sewage reports. Its feature layer was not verified in the research.",
+   "barrier": "not_verified"
   },
   {
    "state": "SC",
