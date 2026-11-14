@@ -52,6 +52,7 @@ from pathlib import Path
 
 import requests
 
+import common
 import zones
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
 
@@ -86,19 +87,30 @@ def _form(page: str) -> dict:
     return {n: html.unescape(v) for n, v in re.findall(r'name="(__[A-Z]+)"[^>]*value="([^"]*)"', page)}
 
 
+def _get(session: requests.Session, method: str, **kw) -> str:
+    r = session.request(method, URL, timeout=(20, 120), **kw)
+    r.raise_for_status()                          # a refusal or an error page is a failed read, never "no rows"
+    if "General Environmental Incidents" not in r.text:
+        raise ValueError(f"the archive answered a page that is not its table (HTTP {r.status_code})")
+    return r.text
+
+
 def fetch_search(word: str, session: requests.Session) -> list[dict]:
-    t = session.get(URL, timeout=(20, 120)).text
+    t = _get(session, "GET")
     time.sleep(2)
-    t = session.post(URL, data={**_form(t), "TextBoxSearch": word, "ButtonSearch": "Search", "TextBoxPageIndex": ""},
-                     timeout=(20, 120)).text
+    t = _get(session, "POST", data={**_form(t), "TextBoxSearch": word, "ButtonSearch": "Search", "TextBoxPageIndex": ""})
     rows, n = parse_page(t)
-    pages = -(-(n or 0) // 15)
-    for page in range(2, min(pages, 40) + 1):
+    if n is None:
+        raise ValueError(f"search {word!r}: the result gives no record count")
+    pages = -(-n // 15)
+    if pages > 40:
+        raise ValueError(f"search {word!r}: {n} records, more pages than the read allows")
+    for page in range(2, pages + 1):
         time.sleep(2)
-        t = session.post(URL, data={**_form(t), "TextBoxSearch": word, "TextBoxPageIndex": str(page),
-                                    "ButtonGotoPage": "Go"}, timeout=(20, 120)).text
+        t = _get(session, "POST", data={**_form(t), "TextBoxSearch": word, "TextBoxPageIndex": str(page),
+                                         "ButtonGotoPage": "Go"})
         rows += parse_page(t)[0]
-    if n is not None and len({r["incident_id"] for r in rows}) < n:
+    if len({r["incident_id"] for r in rows}) < n:
         raise ValueError(f"search {word!r}: {len(rows)} rows read of {n}")
     return rows
 
@@ -123,6 +135,8 @@ def keep(row: dict) -> bool:
 def safe_row(row: dict) -> dict:
     """The row as saved and kept in raw.row: the point rounded; a private place's point dropped."""
     out = {k: row.get(k) for k in COLUMNS}
+    if out.get("contaminant"):
+        out["contaminant"] = common.strip_house_numbers(common.scrub_text(out["contaminant"]))
     lat, lon = _num(row.get("latitude")), _num(row.get("longitude"))
     private = bool(PRIVATE_PLACE.search(row.get("contaminant") or ""))
     out["latitude"] = None if private or lat is None else round(lat, 3)
@@ -163,24 +177,40 @@ def record(row: dict, fetched: str) -> dict:
         raw=raw, parse_error=perr)
 
 
-def build(rows: list[dict], fetched: str) -> tuple[list[dict], dict]:
+def dup_key(row: dict) -> tuple:
+    """The values as DEQ wrote them (never the rounded point): one incident filed twice repeats every one."""
+    return tuple((row.get(k) or "").strip().lower() for k in ("date_incident", "county", "twn_rng_sec", "latitude",
+                                                              "longitude", "contaminant", "volume", "units"))
+
+
+def build(rows: list[dict], fetched: str, previous: list[dict] = ()) -> tuple[list[dict], dict]:
     by_id: dict[str, dict] = {}
     for r in rows:
         by_id.setdefault(r["incident_id"], r)
     kept = [r for r in by_id.values() if keep(r)]
-    recs = [record(r, fetched) for r in sorted(kept, key=lambda r: int(r["incident_id"][3:]))]
+    kept.sort(key=lambda r: int(r["incident_id"][3:]))
+    recs = [record(r, fetched) for r in kept]
     first: dict[tuple, str] = {}
-    for rec in recs:
-        k = (rec["started_at"], rec["lat"], rec["lon"], (rec["material"] or "").lower(), rec["volume_text"])
-        if k in first and rec["lat"] is not None:
+    for row, rec in zip(kept, recs):
+        k = dup_key(row)
+        if k in first and row.get("latitude"):
             rec["duplicate_of"] = first[k]
             rec["raw"]["_duplicate_basis"] = ("the same incident day, point, contaminant and volume as an earlier "
                                               "Incident ID: one incident filed twice")
         else:
             first.setdefault(k, rec["event_id"])
+    now_ids = {r["event_id"] for r in recs}
+    carried = 0
+    for p in previous:                    # a report that left the archive stays, marked (the status build decides)
+        if p.get("event_id") in now_ids:
+            continue
+        p = json.loads(json.dumps(p))
+        p["raw"]["_missing_from_source_since"] = p["raw"].get("_missing_from_source_since") or fetched
+        recs.append(p)
+        carried += 1
     recs.sort(key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
-    meta = {"registry_ids": ["nd-deq-eir-legacy-general"], "url": URL, "search_words": list(SEARCH_WORDS),
-            "rows_read": len(by_id), "kept": len(recs),
+    meta = {"carried_missing": carried,"registry_ids": ["nd-deq-eir-legacy-general"], "url": URL, "search_words": list(SEARCH_WORDS),
+            "rows_read": len(by_id), "kept": len(kept),
             "dropped_not_sewage": sorted(r["incident_id"] for r in by_id.values() if not keep(r)),
             "types": {t: sum(1 for r in recs if r["event_type"] == t) for t in ("sso", "plant_bypass")},
             "rows_read_at": fetched, "frozen": "1975 to 2020; DEQ's reports since 2021 are in its unified spill system",
@@ -215,7 +245,7 @@ def main(argv=None) -> int:
                 rows += fetch_search(w, s)
                 time.sleep(2)
             save_raw(SOURCE_ID, json.dumps([safe_row(r) for r in rows if keep(r)], indent=1), "json")
-        recs, meta = build(rows, fetched)
+        recs, meta = build(rows, fetched, prev.get("records") or [])
         if not recs:
             raise ValueError("no sewage row read from the archive")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
