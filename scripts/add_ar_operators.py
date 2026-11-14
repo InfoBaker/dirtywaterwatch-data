@@ -34,7 +34,7 @@ Rules
   - notification_channel says what Arkansas requires (the permits' Part II as DEQ states it: report every SSO, "no
     matter how small", every unanticipated bypass, upset and unpermitted discharge to DEQ within 24 hours and in most
     cases in writing within five days; no duty to tell the public) and where the reports become public (DEQ's
-    Reported Noncompliance Incident Data search, usually the next day). No operator sign-up was found:
+    Reported Noncompliance Incident Data search, current to the previous day). No operator sign-up was found:
     notification_signup_url null.
   - Idempotent: a rerun replaces the rows it wrote (source_areas ["ar"]), puts them after the last row in id order,
     and leaves every other row as it is.
@@ -65,8 +65,8 @@ BASE_LAW = ("Arkansas NPDES permits, Part II, as the Division of Environmental Q
             "it and, in most cases, in writing within five days, including “Any Sanitary Sewer Overflow (SSO), no "
             "matter how small”, any unanticipated bypass, any upset and any unpermitted discharge, whether or not "
             "it reaches water, on DEQ's 24-hour online forms. No rule requires notice to the public. DEQ publishes the "
-            "filed reports in its Reported Noncompliance Incident Data search (adeq.state.ar.us), usually the next "
-            "day, with dates, volume and the filer's impact but no receiving water or coordinates.")
+            "filed reports in its Reported Noncompliance Incident Data search (adeq.state.ar.us), current to the "
+            "previous day, with dates, volume and the filer's impact but no receiving water or coordinates.")
 PRIVATE_NOTE = " The rule binds every NPDES permittee, public or private."
 LRWRA_NOTE = (" Little Rock Water Reclamation Authority's SSO response plan (2023), from its settlement, provides for "
               "warning signs and public notification at overflows.")

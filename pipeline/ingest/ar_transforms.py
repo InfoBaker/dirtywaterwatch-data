@@ -17,8 +17,8 @@ field; no county.
     sewer overflow forms). DEQ's label stays in raw._source_type. The search also lists industrial permits: a report
     that is not an SSO, from a permit that is not one of EPA's Arkansas sewage plants (data/outfalls-plants-us.json),
     whose facility name reads as industrial (INDUSTRY) is not a sewage report: removed by ar_deq_not_sewage and
-    counted in meta.duplicates.not_sewage (2026-11-14: 22 rows of paper and packaging mills, a gravel mine, a brick
-    plant and two manufacturers).
+    counted in meta.duplicates.not_sewage (2026-11-14: 26 rows of paper and packaging mills, a gravel mine, a brick
+    plant and other plants).
   - Times: started_at is Date Overflow Started, ended_at Date Overflow Stopped (both day precision; the stop is the
     filer's own: raw.ended_at_precision day), reported_at Date Reported (the day DEQ received the form, day
     precision). A report with no stop day has no end (status unknown, "end not confirmed"); the source is in

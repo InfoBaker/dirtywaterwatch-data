@@ -59,7 +59,7 @@ AGENCY = [
      "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "feed_ingested",
      "feed_source_id": "ar-deq-overflow-incidents", "publishes": "notices", "noun": "Overflow reports search",
      "note": ("DEQ's Reported Noncompliance Incident Data search: every SSO, bypass, upset and unpermitted discharge "
-              "filed on its 24-hour online forms, usually by the next day, with the days it started and stopped, the "
+              "filed on its 24-hour online forms, current to the previous day, with the days it started and stopped, the "
               "volume, the filer's impact and a location text, but no coordinates, county or receiving water (2,449 "
               "reports from 2025-01-01 to 2026-11-14). A form search with no export endpoint; no rule requires DEQ to "
               "publish it. Read each run by the ar-deq-overflow-incidents feed. (ar-deq-overflow-incidents)"),
@@ -148,7 +148,7 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             noun="Report to the state", sources=["ar-deq-overflow-incidents", "ar-deq-overflow-forms"],
             note=(f"{name} reports every sanitary sewer overflow, unanticipated bypass, upset and unpermitted discharge to "
                   "DEQ within 24 hours on its online forms (in most cases with a five-day written report); DEQ publishes "
-                  "the report in its Reported Noncompliance Incident Data search, usually the next day, read by the "
+                  "the report in its Reported Noncompliance Incident Data search, current to the previous day, read by the "
                   "ar-deq-overflow-incidents feed." + private))))
         own = OWN_NOTICE.get(oid)
         if own:
