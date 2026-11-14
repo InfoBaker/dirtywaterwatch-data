@@ -118,6 +118,7 @@ SOURCE_LABEL = {
     "ri-dem-cyano": "Rhode Island Department of Environmental Management cyanobacteria advisories",
     "ri-ridoh-beaches": "Rhode Island Department of Health beach closures",
     "vt-advisories": "Vermont advisories (cyanobacteria, Burlington beaches)",
+    "in-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Indiana",
 }
 
 # Per-source caveats, by chart; {first} and {last} are the source's coverage dates, written out.
@@ -137,6 +138,7 @@ TOTAL_NOTES = {
     "me-dep-cso-annual": "Maine's Department of Environmental Protection reports one total per community and year, for all of its combined sewer outlets; the total is shown in full on each water the community's outlets reach. Event-days: calendar days with any combined sewer discharge in the community.",
     "echo-cso-dmr-monthly": "Monthly totals each operator files with the U.S. Environmental Protection Agency for each outlet (discharge monitoring reports). They describe the same discharges the state notices report, so they are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
     "nh-permittees": "Portsmouth publishes monthly combined sewer overflow volumes for each outlet, not individual discharges.",
+    "in-echo-dmr-cso": "Monthly totals each Indiana operator files for each combined sewer outlet (number of discharges, hours and million gallons in discharge monitoring reports, published by the U.S. Environmental Protection Agency weeks after the month). They are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
 }
 MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                "November", "December"]
