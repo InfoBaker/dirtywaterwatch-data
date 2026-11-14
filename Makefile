@@ -120,6 +120,12 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Indiana: in_echo_cso_monthly (EPA's discharge monitoring reports: each combined sewer outfall's
+#                  monthly events, hours and million gallons, month precision; a compact weekly cache in data/build,
+#                  at most 120 requests a run), echo_sewer_overflow_events (EPA's overflow tables, IN permits; Eastern or
+#                  Central time by the event's county, data/reference/in-central-time-counties.json) and the generic
+#                  ArcGIS block in-idem-cyanobacteria (IDEM's beach samples with IDEM's advisory level; ingest/
+#                  in_transforms.py); IDEM's outfall layer is data/outfalls-in.json (scripts/build_in_outfalls.py)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
