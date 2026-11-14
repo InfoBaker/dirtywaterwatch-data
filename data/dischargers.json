@@ -451371,5 +451371,542 @@
   "source_areas": [
    "oh"
   ]
+ },
+ {
+  "id": "nv-churchill-county",
+  "name": "Churchill County Public Works (Moody Lane Regional Water Reclamation Facility)",
+  "short_name": "Churchill County",
+  "legal_form": "county",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0023582",
+  "npdes_permits": [
+   "NV0023582"
+  ],
+  "receiving_waters": [
+   "LOWER CARSON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fallon"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0023582 Moody Lane Regional Water Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-churchill-county"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-fallon",
+  "name": "City of Fallon",
+  "short_name": "City of Fallon",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0020061",
+  "npdes_permits": [
+   "NV0020061"
+  ],
+  "receiving_waters": [
+   "NEW RIVER DRAIN VIA UNNAMED DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fallon"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0020061 Fallon Wastewater Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-fallon",
+   "nv-nv0020061"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-henderson",
+  "name": "City of Henderson (Kurt R. Segler Water Reclamation Facility)",
+  "short_name": "City of Henderson",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0022098",
+  "npdes_permits": [
+   "NV0022098"
+  ],
+  "receiving_waters": [
+   "LAS VEGAS WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Henderson"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0022098 Kurt R. Segler Water Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-henderson",
+   "nv-nv0022098"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-las-vegas",
+  "name": "City of Las Vegas (Water Pollution Control Facility)",
+  "short_name": "City of Las Vegas",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0020133",
+  "npdes_permits": [
+   "NV0020133"
+  ],
+  "receiving_waters": [
+   "LAS VEGAS WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Las Vegas"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0020133 City Of Las Vegas Water Pollution Control Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-las-vegas",
+   "nv-nv0020133"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-lovelock",
+  "name": "City of Lovelock",
+  "short_name": "City of Lovelock",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0020311",
+  "npdes_permits": [
+   "NV0020311"
+  ],
+  "receiving_waters": [
+   "HUMBOLDT SINK VIA THE LOVELOCK DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lovelock"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0020311 Lovelock Wastewater Treatment Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-lovelock"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-north-las-vegas",
+  "name": "City of North Las Vegas",
+  "short_name": "City of North Las Vegas",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0023647",
+  "npdes_permits": [
+   "NV0023647"
+  ],
+  "receiving_waters": [
+   "LAS VEGAS WASH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "EPA ICIS-NPDES: NV0023647 City Of North Las Vegas Water Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-north-las-vegas",
+   "nv-nv0023647"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-reno",
+  "name": "City of Reno (Stead Water Reclamation Facility)",
+  "short_name": "City of Reno",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0020168",
+  "npdes_permits": [
+   "NV0020168"
+  ],
+  "receiving_waters": [
+   "LEMON LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Reno"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0020168 Stead Wrf. No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the owner as \"RENO, CITY OF\" and the permit as expired (EXP).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-reno",
+   "nv-nv0020168"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-city-of-sparks",
+  "name": "City of Sparks (sewer collection system)",
+  "short_name": "City of Sparks",
+  "legal_form": "city",
+  "kind": "collection_system",
+  "towns": [
+   "Sparks"
+  ],
+  "notes": "The city's sewers deliver to the Truckee Meadows Water Reclamation Facility (NV0020150); the system holds no NPDES permit of its own. A 2022 spill from its system into the Truckee River was not reported to NDEP (NDEP's later findings, as reported by the press), the case that led to NRS 445A.467 (research/nv/report.md §2.3).",
+  "state": "NV",
+  "npdes_permit": null,
+  "npdes_permits": [],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-city-of-sparks",
+   "nv-sparks-collection"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-clark-county-water-reclamation-district",
+  "name": "Clark County Water Reclamation District (Flamingo and Laughlin water resource centers)",
+  "short_name": "Clark County Water Reclamation District",
+  "legal_form": "special district",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0021261",
+  "npdes_permits": [
+   "NV0021261",
+   "NV0021563"
+  ],
+  "receiving_waters": [
+   "LAS VEGAS WASH",
+   "COLORADO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Las Vegas",
+   "Laughlin"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0021261 Flamingo Water Resource Center; NV0021563 Laughlin Water Resource Center (Lwrc). No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-clark-county-water-reclamation-district",
+   "nv-nv0021261",
+   "nv-nv0021563"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-endeavour-llc-agts",
+  "name": "Endeavour, LLC (AGTS groundwater treatment system, Henderson)",
+  "short_name": "Endeavour, LLC",
+  "legal_form": "business or industrial",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0024112",
+  "npdes_permits": [
+   "NV0024112"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "A private permittee under an NDEP permit: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them; NRS 445A.467 binds local governments only. No public notice is required and none is published.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Henderson"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0024112 Endeavour, Llc - Agts. No report under these permits is in EPA's overflow tables (2026-11-12 extract). A groundwater remediation system (NAICS 562910) that EPA codes as sewerage (SIC 4952); not a sewage plant. EPA types the permittee a corporation; not in the plant registry, so no discharge point is counted here.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-endeavour-llc-agts"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-hawthorne-army-depot",
+  "name": "U.S. Army, Hawthorne Army Depot",
+  "short_name": "Hawthorne Army Depot",
+  "legal_form": "federal facility",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0021946",
+  "npdes_permits": [
+   "NV0021946"
+  ],
+  "receiving_waters": [
+   "EVAPORATION POND",
+   "EVAPORATON POND",
+   "WALKER LAKE",
+   "DUST SUPPRESSION",
+   "SUM"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 6 rows)",
+  "notification_channel": "A federal installation under an NDEP permit: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them; NRS 445A.467 binds local governments, not the federal government. No public notice is required and none is published.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hawthorne"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0021946 Hawthorne Army Depot. No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the contractor, Amentum Services, Inc., as permittee and the facility as federal; six discharge points, the receiving water given as an evaporation pond.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-hawthorne-army-depot"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-lander-county",
+  "name": "Lander County (Battle Mountain sewage treatment facility)",
+  "short_name": "Lander County",
+  "legal_form": "county",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0023167",
+  "npdes_permits": [
+   "NV0023167"
+  ],
+  "receiving_waters": [
+   "REESE RVR HUMBOLDT RVR"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 9 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Battle Mountain"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0023167 Battle Mountain Sewage Treatment Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-lander-county"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-naval-air-station-fallon",
+  "name": "U.S. Navy, Naval Air Station Fallon",
+  "short_name": "Naval Air Station Fallon",
+  "legal_form": "federal facility",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0110001",
+  "npdes_permits": [
+   "NV0110001"
+  ],
+  "receiving_waters": [
+   "LOWER DIAGONAL DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "A federal installation under an NDEP permit: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them; NRS 445A.467 binds local governments, not the federal government. No public notice is required and none is published.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fallon"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0110001 Naval Air Station Fallon. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-naval-air-station-fallon"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-nnsa-north-las-vegas",
+  "name": "U.S. Department of Energy, National Nuclear Security Administration (North Las Vegas Facility)",
+  "short_name": "NNSA North Las Vegas Facility",
+  "legal_form": "federal facility",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0023507",
+  "npdes_permits": [
+   "NV0023507"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "A federal installation under an NDEP permit: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them; NRS 445A.467 binds local governments, not the federal government. No public notice is required and none is published.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "North Las Vegas"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0023507 Nnsa/Nso North Las Vegas Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-nnsa-north-las-vegas"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-storey-county",
+  "name": "Storey County Public Works (Virginia City and Gold Hill plants)",
+  "short_name": "Storey County",
+  "legal_form": "county",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0020451",
+  "npdes_permits": [
+   "NV0020451",
+   "NV0024237"
+  ],
+  "receiving_waters": [
+   "SIX MILE CANYON CREEK",
+   "GOLD CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Gold Hill",
+   "Virginia City"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0020451 Virginia City Wastewater Treatment Plant; NV0024237 Gold Hill Treatment Plant. No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-storey-county"
+  ],
+  "source_areas": [
+   "nv"
+  ]
+ },
+ {
+  "id": "nv-truckee-meadows-wrf",
+  "name": "Truckee Meadows Water Reclamation Facility (Reno and Sparks)",
+  "short_name": "Truckee Meadows Water Reclamation Facility",
+  "legal_form": "city",
+  "state": "NV",
+  "kind": "plant",
+  "npdes_permit": "NV0020150",
+  "npdes_permits": [
+   "NV0020150"
+  ],
+  "receiving_waters": [
+   "TRUCKEE RIVER VIA STEAMBOAT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "The Nevada Division of Environmental Protection (NDEP) issues Nevada's NPDES permits: the permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which publishes no list of them, and EPA's overflow tables hold no Nevada report (2026-11-12 extract). NRS 445A.467 (2025) requires a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge to notify NDEP on its website or by telephone; NDEP notifies an Indian tribe that may be affected. No public notice is required and none is published (https://www.leg.state.nv.us/NRS/NRS-445A.html#NRS445ASec467). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Reno"
+  ],
+  "notes": "EPA ICIS-NPDES: NV0020150 Truckee Meadows Water Reclamation Facility. No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the facility itself as permittee. The regional plant treats the sewage of the Cities of Reno and Sparks (research/nv/report.md §3); the shares of ownership and operation were not read from the permit. The City of Sparks's collection system is its own row (nv-city-of-sparks).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "nv-truckee-meadows-wrf",
+   "nv-nv0020150"
+  ],
+  "source_areas": [
+   "nv"
+  ]
  }
 ]
