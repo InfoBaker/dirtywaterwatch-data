@@ -90,6 +90,7 @@ Run from pipeline/:  python -m ingest.wi_mmsd_storm_updates [--pages 2] [--file 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html as htmllib
 import json
 import re
@@ -229,20 +230,19 @@ def page_doc(content: bytes | str) -> dict | None:
     j = body.find("<footer")
     body = body[:j] if j > 0 else body
     body = re.sub(r"<(script|style|noscript)\b.*?</\1>", " ", body, flags=re.S | re.I)
-    letters = []
-    for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', body, re.S | re.I):
-        label = _words(re.sub(r"<[^>]+>", " ", m.group(2)))
-        if label and {"url": m.group(1), "label": safe_line(label)} not in letters:
-            letters.append({"url": m.group(1), "label": safe_line(label)})
-    text = re.sub(r"<(?:/?(?:p|div|li|ul|ol|h\d|tr|table|br|hr)\b)[^>]*>", "\n", body, flags=re.I)
-    text = re.sub(r"<[^>]+>", " ", text)
-    lines = []
-    for raw in text.split("\n"):
-        w = _words(raw)
+    # one boundary for text and links alike: blocks are read in order and nothing after the cut is kept, a letter's
+    # link label included (Astra review 2026-11-14 P1-6)
+    letters, lines = [], []
+    for block in re.split(r"<(?:/?(?:p|div|li|ul|ol|h\d|tr|table|br|hr)\b)[^>]*>", body, flags=re.I):
+        w = _words(re.sub(r"<[^>]+>", " ", block))
         if not w:
             continue
         if CUT.search(w) or CONTACT.search(w):
             break                       # MMSD's standing advice block, or a contact block naming people
+        for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', block, re.S | re.I):
+            label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))))
+            if label and {"url": m.group(1), "label": label} not in letters:
+                letters.append({"url": m.group(1), "label": label})
         lines.append(safe_line(w))
     stamp = next((x for x in lines[:4] if STAMP.match(x)), None)
     body = [x for x in lines if x != stamp]
@@ -340,7 +340,7 @@ def sentences(text: str) -> list[str]:
     """Sentences and lines; a decimal point, 'a.m.', 'St.' and 'Ave.' do not end one."""
     t = re.sub(r"\b([ap])\.m\.", r"\1m", text)
     t = re.sub(r"\b(St|Ave|No|Dr|Mt|U\.S)\.", r"\1", t)
-    parts = re.split(r"(?<=[.!?])(?<!\d\.)\s+(?=[A-Z(])|\n+", t)
+    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z(])|\n+", t)
     return [_words(p) for p in parts if _words(p)]
 
 
@@ -370,14 +370,14 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
 
     def add(t: str, basis: str) -> dict:
         x = types.setdefault(t, {"basis": basis, "volume": None, "volume_text": None, "covers": None, "waters": [],
-                                 "start": None, "end": None})
+                                 "start": None, "end": None, "day": None})
         return x
 
     for s in sents:
         if LOCAL.search(s):
             facts["local"].append(s)
     # labelled volumes first
-    for m in LABELLED.finditer(body):
+    for m in (m for x in sents if not NEGATED.search(x) and not LOCAL.search(x) for m in LABELLED.finditer(x)):
         if _gal(m) == 0:
             continue                    # "0 gallons": a stated zero is not a report
         label = m.group("label").lower()
@@ -439,9 +439,9 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     if not types and any(GENERIC_OVERFLOW.search(x) and affirmative(x) for x in sents[:4]):
         add("sso", "MMSD's post reports sewer overflows without saying they were combined sewer overflows; typed as a "
                    "sanitary sewer overflow, the general case")
-    # waters
+    # waters (never from a denial: "No overflow into Example Creek occurred")
     for s in sents:
-        if LOCAL.search(s):
+        if LOCAL.search(s) or NEGATED.search(s):
             continue
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(s)]
         for rx in (WATER_INTO, WATER_LISTED):
@@ -468,7 +468,13 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     for x in sents:
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(x) and t in types]
         owners = named if len(named) == 1 else ([next(iter(types))] if not named and len(types) == 1 else [])
+        if NEGATED.search(x):
+            continue                    # an expected, conditional or denied time is not a stated one (Astra P1-3)
         for t in owners:
+            if types[t].get("day") is None and len(named) == 1 and affirmative(x):
+                d = period(x, ref)
+                if d:
+                    types[t]["day"] = (d[0], d[2])      # the day the sentence about this overflow gives
             for key, rxs in (("start", START_RX), ("end", END_RX)):
                 if types[t][key]:
                     continue
@@ -478,9 +484,13 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                     if d:
                         types[t][key] = (_at(d, m), m.group(0))
                         break
-    nw = NO_WATER.search(body)
-    if nw:
-        facts["no_water"] = _words(nw.group(0))
+    for x in sents:
+        nw = NO_WATER.search(x)
+        if nw:
+            named = [t for t, rx in TYPE_WORDS.items() if rx.search(x) and t in types]
+            owners = named or (list(types) if len(types) == 1 else [])
+            for t in owners:
+                types[t]["no_water"] = _words(nw.group(0))
     facts["types"] = types
     return facts
 
@@ -502,8 +512,7 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
     for t, x in sorted(f["types"].items()):
         raw = {"state": "WI", "time_zone": TZ.key, "county": "Milwaukee", "title": item["title"], "slug": item["slug"],
                "stamp": doc.get("stamp"), "list_date": item.get("list_date"), "_type_basis": x["basis"],
-               "letters": doc.get("letters") or [], "keeps_rain_caution": t == "cso",
-               "text": " ".join(doc.get("lines") or [])[:4000]}
+               "letters": doc.get("letters") or [], "keeps_rain_caution": t == "cso"}
         if per:
             raw["period_text"], raw["period_start"] = per[2], per[0].isoformat()
             if per[1]:
@@ -517,20 +526,25 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
         if x["start"]:
             start, sprec = x["start"][0].isoformat(), "minute"
             raw["start_basis"] = f"MMSD's post: \"{x['start'][1]}\""
+        elif x["day"]:
+            start, sprec = x["day"][0].isoformat(), "day"
+            raw["start_basis"] = f"the date the post's sentence about this overflow gives (\"{x['day'][1]}\")"
         elif per:
             start, sprec = per[0].isoformat(), "day"
-            raw["start_basis"] = f"the first day of the dates the post gives (\"{per[2]}\"); no time of day stated"
+            raw["start_basis"] = (f"the first day of the dates the post gives for the storm (\"{per[2]}\"); the post "
+                                  "gives no date of its own for this overflow, so it began on or after this day")
         else:
             raw["start_basis"] = "the post states no date for the overflow"
         end = None
-        first = x["start"][0] if x["start"] else (datetime(per[0].year, per[0].month, per[0].day, tzinfo=TZ) if per else None)
+        d0 = date.fromisoformat(start[:10]) if start else None
+        first = x["start"][0] if x["start"] else (datetime(d0.year, d0.month, d0.day, tzinfo=TZ) if d0 else None)
         if x["end"] and first is not None and x["end"][0] >= first:
             end = x["end"][0].isoformat()
             raw["ended_at_precision"], raw["end_basis"] = "minute", f"MMSD's post: \"{x['end'][1]}\""
         if x["waters"]:
             raw["waters"] = x["waters"]
-        if f["no_water"] and not x["waters"]:
-            raw["reached_water"], raw["_no_water_reason"] = False, f"MMSD's post: \"{f['no_water']}\""
+        if x.get("no_water") and not x["waters"]:
+            raw["reached_water"], raw["_no_water_reason"] = False, f"MMSD's post: \"{x['no_water']}\""
         rec = event(
             source_id=SOURCE_ID, source_record_id=f"{item['slug']}:{t}", event_type=t,
             status="ended" if end else "unknown",
@@ -593,7 +607,7 @@ def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict], retry:
     retry_slugs = {x.get("slug") for x in retry or []}
     for it in items:
         old = (prev.get(it["slug"]) or {}).get("raw") or {}
-        if old.get("_doc") and old.get("title") == it["title"] and old.get("list_date") == it["list_date"] \
+        if old.get("_doc_hash") and old.get("title") == it["title"] and old.get("list_date") == it["list_date"] \
                 and it["slug"] not in retry_slugs and not _stale(old, fetched_at):
             continue                    # unchanged and read recently: the record stands as built
         try:
@@ -613,7 +627,7 @@ def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict], retry:
 
 def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
     recs: dict[str, dict] = {r["source_record_id"]: r for r in prev_records}
-    read, not_read, pending, kept = 0, 0, 0, 0
+    read, not_read, pending, unparsed = 0, 0, 0, []
     for it in doc.get("items") or []:
         if not candidate(it.get("title")):
             not_read += 1
@@ -624,12 +638,19 @@ def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[di
             pending += 1
             continue
         new = records_for(it, post, fetched_at)
+        before = [k for k, r in recs.items() if (r.get("raw") or {}).get("slug") == it["slug"]]
+        if not new and before:
+            # a stamped page that reports nothing where a report stood (a holding or error page with the title and
+            # stamp kept) is not read as a retraction: the records stand and the post is read again (Astra P1-4)
+            unparsed.append(it["slug"])
+            continue
         mine = {r["source_record_id"] for r in new}
         for k in [k for k, r in recs.items() if (r.get("raw") or {}).get("slug") == it["slug"] and k not in mine]:
             recs.pop(k)                 # a validated post no longer reports that type (MMSD edited it)
         for r in new:
             prev = recs.get(r["source_record_id"])
-            r["raw"].update(_doc=post, url=it["url"], _doc_fetched_at=fetched_at)
+            r["raw"].update(_doc_hash=hashlib.sha256(json.dumps(post, sort_keys=True).encode()).hexdigest()[:16],
+                            url=it["url"], _doc_fetched_at=fetched_at)
             r["raw"]["_first_seen_at"] = ((prev or {}).get("raw") or {}).get("_first_seen_at") or fetched_at
             r["raw"]["_last_seen_in_source"] = fetched_at
             recs[r["source_record_id"]] = r
@@ -638,6 +659,7 @@ def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[di
     stats = {"list_items_seen": doc.get("list_items_seen", len(doc.get("items") or [])),
              "candidates": len(doc.get("items") or []), "posts_read": read, "not_read": not_read,
              "posts_not_read_this_run": pending, "posts_failed": len(doc.get("failed") or []),
+             "posts_without_report": unparsed,
              "records": len(out),
              "by_type": {t: sum(1 for r in out if r["event_type"] == t) for t in ("cso", "sso", "plant_bypass")},
              "with_volume": sum(1 for r in out if r.get("volume_gal") is not None),
@@ -679,11 +701,19 @@ def main(argv: list[str] | None = None) -> int:
                            "and times the post states (raw.start_basis, raw.end_basis); the storm's last day is "
                            "raw.period_end, never the overflow's end")}
     failed = doc.get("failed") or []
-    meta["retry"] = [{k: f.get(k) for k in ("url", "slug", "title", "list_date")} for f in failed]
-    err = ("; ".join(f"{f.get('slug')}: {f.get('reason')}" for f in failed)[:600] or None)
-    if err:
-        err = f"{len(failed)} post(s) could not be read and are retried next run ({err})"
-    path = write_events(SOURCE_ID, recs, ok=True, error=err, meta=meta)
+    if failed or stats["posts_without_report"]:
+        # an incomplete read is not a successful one (Astra review P1-4): ok=False keeps the previous file's records
+        # and its last_ok_at; the failed posts are listed for the next run, which reads every post not yet built
+        why = "; ".join([f"{f.get('slug')}: {f.get('reason')}" for f in failed] +
+                        [f"{x}: a stamped page with no report where one stood" for x in stats["posts_without_report"]])
+        retry = [{k: f.get(k) for k in ("url", "slug", "title", "list_date")} for f in failed] + \
+                [{k: it.get(k) for k in ("url", "slug", "title", "list_date")} for it in doc.get("items") or []
+                 if it.get("slug") in stats["posts_without_report"]]
+        write_events(SOURCE_ID, [], ok=False, error=f"posts not read: {why}"[:800], meta={"retry": retry})
+        print(f"{SOURCE_ID}: incomplete ({why})", file=sys.stderr)
+        return 1
+    meta["retry"] = []
+    path = write_events(SOURCE_ID, recs, ok=True, error=None, meta=meta)
     print(f"{SOURCE_ID}: {json.dumps(stats)} -> {path}")
     return 0
 

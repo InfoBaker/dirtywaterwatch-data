@@ -5,7 +5,8 @@ homepage: "https://www.mmsd.com/about-us/news"
 kind: "html"
 level: "operator"
 # Ingester: pipeline/ingest/wi_mmsd_storm_updates.py (source id wi-mmsd-storm-updates): the news list two pages deep
-#   every refresh (eight posts), each Storm Update post once (again when its title or stamp changes), rules only.
+#   every refresh (eight posts; the whole list on a first run), each candidate post once, again when its title or date
+#   changes, when its read failed, and 30 days after its last read wherever it stands in the list; rules only.
 # Read 2026-11-14 (the whole list, 71 pages): 281 posts on mmsd.com since 2016, 21 of them read: 18 Storm Updates or
 #   overflow letters to the DNR and 3 spill or release notices, from 2018-06-22 to 2026-09-08, which give 29 dated
 #   reports: 13 combined sewer overflows, 14 separate sewer overflows or overflows the post does not call combined (5
@@ -25,12 +26,12 @@ level: "operator"
 #   municipalities' own overflows named in a post are kept as text on MMSD's record, not as their records.
 # Privacy: only titles, stamps, letter links and the article lines (cut at MMSD's standing advice block) are kept;
 #   telephone numbers, e-mails and house numbers are removed.
-cadence: "Posted with MMSD's five-day letter to the DNR, a few days after each overflow of the regional system; no RSS."
+cadence: "Posted with MMSD's five-day letter to the DNR, one to ten days (median five) after each overflow of the regional system or spill; no RSS."
 license: "none stated; site copyright MMSD"
 attribution: "Milwaukee Metropolitan Sewerage District"
 enabled: true
 role: "events"
-event_types: ["cso", "sso"]
+event_types: ["cso", "sso", "plant_bypass"]
 states: ["WI"]
 registry_ids: ["wi-mmsd-storm-updates"]
 access: ["html"]
