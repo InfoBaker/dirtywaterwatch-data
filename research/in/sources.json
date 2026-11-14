@@ -177,7 +177,7 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited); 845 rows with points, 835 paired with EPA's inventory, which they outrank.",
+  "status_reason": "Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited; 136 with no point); 985 rows, 966 paired with EPA's inventory, which they outrank; IDEM's status kept even where it gives no point.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": "Photo_Credit holds personal names; drop it on ingest."
@@ -763,7 +763,7 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "The portal shows 'There are no active Closures or Advisories' beside 'You don't have permissions to view these records' and 'Error completing request' (2026-11-14): the records need a sign-in. A barrier (login) in the register.",
+  "status_reason": "A Power Apps portal: the page holds only client-side templates (a no-advisories line, a permission message and an error message side by side) and loads its records from an entity-grid service and a beach map by script; those data calls were not verified (2026-11-14). Watched in the register, access not settled.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": ""

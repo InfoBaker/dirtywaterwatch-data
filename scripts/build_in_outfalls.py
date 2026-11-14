@@ -25,7 +25,7 @@ and outfall, and EPA's row stays in data/outfalls-us.json untouched, named in `s
     outfalls) stays as written.
   - A point with no geometry (136 on 2026-11-14, 131 of them Inactive) is no row: listed under no_point, and EPA's row
     for it, if any, stays.
-  - outfall_name: IDEM's text after "--", a house number in it cut (scrub_name: "1325 S State St" -> "[house number
+  - outfall_name: IDEM's text after "--", a house number in it cut (scrub_name: "1234 S Example St" -> "[house number
     removed] S State St"; route and structure numbers stay).
   - outfall_status: IDEM's Status. "Inactive" is written "CLS (inactive in IDEM's layer)" so the registry reads it as
     closed (common._closed) and no rain caution is drawn there; "Active" is "active (IDEM layer)"; "Active, Discharge
@@ -63,16 +63,16 @@ STATUS = {"active": "active (IDEM layer)",
           "active, discharge prohibited": "active, discharge prohibited (IDEM layer)",
           "inactive": "CLS (inactive in IDEM's layer)"}
 HOUSE_NUMBER_REMOVED = "[house number removed]"
-# a house number: 2 to 6 digits, not zero-led (an outfall or structure id: "001 Pond", "CS 002"), not after a route
-# or structure word ("Highway 67", "Co Rd 40", "Alley 31-32"), before a street name (a direction, a capitalised word or
-# a numbered street); distances ("800' North of") are not followed by a street word and stay
+# a house number: 2 to 6 digits, not zero-led (an outfall or structure id: "009 Basin", "CS 009"), not after a route
+# or structure word ("Highway 99", "Co Rd 99", "Alley 9-10"), before a street name (a direction, a capitalised word or
+# a numbered street); distances ("900' North of") are not followed by a street word and stay
 _HOUSE = re.compile(r"(?<![\w./&'#-])([1-9]\d{1,5}[A-Za-z]?)(?=\s+(?:[NSEW]\.?\s+)?(?:\d+(?:st|nd|rd|th)\b|[A-Z][a-z]))")
 _ROUTE_BEFORE = re.compile(r"(?:\b(?:Highway|Hwy|Route|Rte|SR|US|U\.S\.|State Road|CR|Co\.? Rd\.?|County Road|Road|Rd|"
                            r"I|Interstate|Alley|Outfall|CSO|CS|Station|Manhole|MH|Lift Station|LS)\.?)\s*$", re.I)
 
 
 def scrub_name(v: str | None) -> str | None:
-    """IDEM's location text with a house number cut ("1325 S State St" -> "[house number removed] S State St")."""
+    """IDEM's location text with a house number cut ("1234 S Example St" -> "[house number removed] S State St")."""
     if not v:
         return v
 
@@ -92,6 +92,39 @@ def _metres(lat1, lon1, lat2, lon2) -> float | None:
         return None
     k = math.cos(math.radians((float(lat1) + float(lat2)) / 2))
     return math.hypot((float(lat1) - float(lat2)) * 111_195, (float(lon1) - float(lon2)) * 111_195 * k)
+
+
+def _name_key(name) -> str:
+    s = re.sub(r"[^a-z0-9 ]+", " ", str(name or "").lower())
+    for pat, rep in ((r"\bfk\b", "fork"), (r"\bw\b", "west"), (r"\be\b", "east"), (r"\bn\b", "north"),
+                     (r"\bs\b", "south"), (r"\bcr\b", "creek"), (r"\br\b", "river"), (r"\bof the\b", " ")):
+        s = re.sub(pat, rep, s)
+    return " ".join(s.split())
+
+
+def names_agree(row: dict, e: dict) -> bool:
+    """IDEM's receiving stream is the very water EPA's tie names (its water_name, abbreviations aside): only then is
+    EPA's tie carried (review 2026-11-14 P1-3: IDEM's Little River is not EPA's tie, the Wabash River)."""
+    idem = _name_key(row.get("receiving_water_echo"))
+    return bool(idem) and idem == _name_key(e.get("water_name"))
+
+
+def sanitize(doc: dict) -> dict:
+    """The layer's answer as it may be saved: the safe fields only, the house numbers in IDEM's location text cut and
+    every point rounded to three decimals (review 2026-11-14 P1-5: nothing else reaches data/raw)."""
+    feats = []
+    for f in doc.get("features") or []:
+        a = {k: v for k, v in (f.get("attributes") or {}).items() if k in SAFE_FIELDS}
+        head, sep, rest = str(a.get("CSO_Number") or "").partition("--")
+        if sep:
+            a["CSO_Number"] = f"{head.strip()} -- {scrub_name(' '.join(rest.split())) or ''}".strip()
+        for k in ("X_Coordinate", "Y_Coordinate"):
+            if isinstance(a.get(k), (int, float)):
+                a[k] = round(float(a[k]), 3)
+        g = f.get("geometry") or {}
+        g = {k: round(float(g[k]), 3) for k in ("x", "y") if g.get(k) is not None} or None
+        feats.append({"attributes": a, "geometry": g})
+    return {"features": feats}
 
 
 def outfall_number(cso_number: str | None) -> str | None:
@@ -141,10 +174,10 @@ def build(doc: dict, epa_rows: list[dict], fetched_at: str) -> dict:
         num = outfall_number(a.get("CSO_Number"))
         if not permit:
             continue
-        if g.get("x") is None or g.get("y") is None:
+        has_point = g.get("x") is not None and g.get("y") is not None
+        if not has_point:
             no_point.append({"npdes_permit": permit, "outfall": num, "idem_status": a.get("Status"),
                              "objectid": a.get("OBJECTID")})
-            continue
         if not num:
             no_number.append({"npdes_permit": permit, "objectid": a.get("OBJECTID")})
             continue
@@ -163,8 +196,9 @@ def build(doc: dict, epa_rows: list[dict], fetched_at: str) -> dict:
                "county": _clean(a.get("County")), "basin": _clean(a.get("Basin")),
                "sub_basin": _clean(a.get("Sub_Basin")), "watershed": _clean(a.get("Watershed")),
                "wastewater_type": _clean(a.get("Wastewater_Type")),
-               "lat": round(float(g["y"]), 6), "lon": round(float(g["x"]), 6),
-               "coords_from": "state outfall layer", "outfall_kind": kind(a), "country": "US",
+               "lat": round(float(g["y"]), 3) if has_point else None,
+               "lon": round(float(g["x"]), 3) if has_point else None,
+               "coords_from": "state outfall layer" if has_point else None, "outfall_kind": kind(a), "country": "US",
                "source": SOURCE_ID, "source_url": LAYER, "page_url": PAGE_URL,
                "source_record_id": a.get("OBJECTID"), "idem_agency_interest_id": a.get("Agency_Interest_ID"),
                "fetched_at": fetched_at}
@@ -178,24 +212,47 @@ def build(doc: dict, epa_rows: list[dict], fetched_at: str) -> dict:
                                    "outfall_status": e.get("outfall_status"), "coords_from": e.get("coords_from"),
                                    "note": "EPA's national CSO inventory row; IDEM's layer gives the outfall's own "
                                            "point, receiving stream, downstream waters and IDEM's status"})
+            if not has_point:
+                # IDEM's status still decides (an Inactive row closes EPA's open one: review 2026-11-14 P1-4); the
+                # point is EPA's only where EPA gives the outfall's own feature point, never the plant's
+                if e.get("coords_from") == "permitted_feature" and e.get("lat") is not None:
+                    row.update(lat=round(float(e["lat"]), 3), lon=round(float(e["lon"]), 3),
+                               coords_from="EPA permitted feature (IDEM's layer gives no point)")
+                else:
+                    row["point_note"] = "neither IDEM's layer nor EPA's inventory gives this outfall's own point"
             d = _metres(row["lat"], row["lon"], e.get("lat"), e.get("lon"))
-            if e.get("water_slug") and d is not None and d <= CARRY_TIE_M:
+            if e.get("water_slug") and d is not None and d <= CARRY_TIE_M and names_agree(row, e):
                 row.update(water_slug=e["water_slug"], water_name=e.get("water_name"), water_kind=e.get("water_kind"),
                            match="carried from EPA's row",
                            water_match=(f"EPA's tie for this outfall (data/outfalls-us.json, {e.get('match')}), carried: "
-                                        f"IDEM's point lies {d:.0f} m from EPA's; the water batch ties IDEM's point"))
+                                        f"IDEM's point lies {d:.0f} m from EPA's and IDEM's receiving stream is the "
+                                        "water EPA's row names; the water batch ties IDEM's point"))
         else:
             unpaired.append({"npdes_permit": permit, "outfall": num, "idem_status": a.get("Status")})
         rows.append(row)
-    rows.sort(key=lambda r: (r["npdes_permit"], r["outfall"]))
     seen = {(r["npdes_permit"], _num_key(r["outfall"])) for r in rows}
+    # EPA's open outfalls that IDEM's layer lacks and that EPA places only at the plant: a row with no point, so the
+    # registry never puts their caution or reports at the plant (review 2026-11-14 P1-4)
+    for (p, n), e in sorted(epa.items()):
+        if (p, n) in seen or str(e.get("outfall_status") or "").upper().startswith("CLS") or e.get("coords_from") != "facility":
+            continue
+        rows.append({"npdes_permit": p, "permittee": e.get("permittee"), "state": "IN", "city": e.get("city"),
+                     "outfall": e["outfall"], "outfall_name": e.get("outfall_name"),
+                     "outfall_status": e.get("outfall_status"), "feature_type": e.get("feature_type") or "EXO",
+                     "receiving_water_echo": e.get("receiving_water_echo"), "lat": None, "lon": None,
+                     "coords_from": None, "outfall_kind": "cso", "country": "US",
+                     "source": "fed-echo-national-cso-inventory", "echo_url": e.get("echo_url"),
+                     "point_note": "EPA's inventory gives only the treatment plant's point; IDEM's layer lists no point",
+                     "supersedes": {"file": "data/outfalls-us.json", "npdes_permit": p, "outfall": e["outfall"],
+                                    "coords_from": "facility", "note": "the same row without the plant's point"}})
+    rows.sort(key=lambda r: (r["npdes_permit"], r["outfall"], r["lat"] is None))
     epa_missing = [{"npdes_permit": p, "outfall": e["outfall"], "outfall_status": e.get("outfall_status"),
                     "reason": "open in EPA's CSO inventory but not in IDEM's CSO outfall layer; EPA's row is kept"}
                    for (p, n), e in sorted(epa.items())
                    if (p, n) not in seen and not str(e.get("outfall_status") or "").upper().startswith("CLS")]
     counts: dict[str, int] = {}
     for r in rows:
-        counts[r["idem_status"] or "none"] = counts.get(r["idem_status"] or "none", 0) + 1
+        counts[r.get("idem_status") or "EPA only"] = counts.get(r.get("idem_status") or "EPA only", 0) + 1
     return {"source": (f"IDEM Indiana CSO Outfall Map, hosted layer {LAYER}, fetched {fetched_at}; EPA's rows for the "
                        "same permit and outfall (data/outfalls-us.json) are kept and named in supersedes"),
             "rule": ("one row per point of IDEM's layer with an outfall number; IDEM's point, receiving stream, "
@@ -219,7 +276,7 @@ def fetch() -> Path:
     if doc.get("error") or doc.get("exceededTransferLimit"):
         raise SystemExit(f"IDEM's layer answered {doc.get('error') or 'more than one page'}")
     RAW.parent.mkdir(parents=True, exist_ok=True)
-    RAW.write_text(json.dumps(doc))
+    RAW.write_text(json.dumps(sanitize(doc)))
     return RAW
 
 

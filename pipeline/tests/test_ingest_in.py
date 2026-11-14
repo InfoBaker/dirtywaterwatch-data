@@ -184,9 +184,11 @@ def test_idem_rows_supersede_epas_and_inactive_is_closed():
            {"npdes_permit": "IN0000003", "state": "IN", "outfall": "009", "outfall_status": "CSO", "permittee": "EXAMPLE WWTP"}]
     out = B.build(doc, epa, "2026-11-14T00:00:00Z")
     by = {r["outfall"]: r for r in out["outfalls"]}
-    assert set(by) == {"002", "003", "004", "005Z"} and out["no_point"][0]["outfall"] == "006"
+    assert set(by) == {"002", "003", "004", "005Z", "006"} and out["no_point"][0]["outfall"] == "006"
+    assert by["006"]["lat"] is None and by["006"]["outfall_status"].startswith("CLS")   # its status still counts
     assert by["002"]["supersedes"]["coords_from"] == "facility" and by["002"]["permittee"] == "EXAMPLE WWTP"
     assert (by["002"]["lat"], by["002"]["lon"]) == (39.9, -86.1) and by["002"]["coords_from"] == "state outfall layer"
+    assert by["003"]["lat"] == 40.0 and isinstance(by["003"]["lat"], float)
     assert by["002"]["downstream_waters"] == ["Example River", "Wabash River"]
     assert by["003"]["outfall_status"].startswith("CLS") and "house number removed" in by["003"]["outfall_name"]
     assert not by["004"]["outfall_status"].startswith("CLS")
@@ -203,7 +205,9 @@ def test_the_committed_outfall_file_is_the_registrys_indiana_layer():
            if r.get("state") == "IN"}
     row = next(r for r in doc["outfalls"] if r.get("supersedes"))
     assert reg[C.outfall_key(row["npdes_permit"], row["outfall"])]["_file"] == "data/outfalls-in.json"
-    assert all(abs(r["lat"] - 39.8) < 2.2 and -88.2 < r["lon"] < -84.7 for r in doc["outfalls"])
+    assert all(abs(r["lat"] - 39.8) < 2.2 and -88.2 < r["lon"] < -84.7 for r in doc["outfalls"] if r["lat"] is not None)
+    assert all(r["lat"] == round(r["lat"], 3) and r["lon"] == round(r["lon"], 3) for r in doc["outfalls"] if r["lat"])
+    assert not [r for r in doc["outfalls"] if r.get("coords_from") == "facility"]
 
 
 # ------------------------------------------------------------------------------------------------ EPA's monthly DMRs
@@ -436,7 +440,7 @@ def test_the_register_names_every_operator_and_validates():
                                                               if r["id"].endswith("-cso-notice")}
     by = {r["id"]: r for r in chans}
     assert by["in-fort-wayne-cso-notifications"]["barrier"] == "bot_wall"
-    assert by["in-idem-beachalert"]["barrier"] == "login_required"
+    assert by["in-idem-beachalert"]["barrier"] == "not_verified"            # review 2026-11-14 P2-10: templates only
     assert by["in-mishawaka-cso-alerts-x"]["barrier"] == "login_required"
     assert by["in-epa-echo-cso-dmr"]["feed_source_id"] == "in-echo-dmr-cso"
     assert not [r for r in chans if r.get("barrier_review")]
@@ -465,8 +469,11 @@ def test_a_monthly_grade_from_epas_reports_credits_epa_and_other_states_read_as_
     now = datetime(2026, 11, 14, tzinfo=UTC)
     g, s = C.grade_of("IN", f, now, federal=True)
     assert g == "Monthly totals only"
-    assert s.startswith("Monthly overflow totals from sewer operators in Indiana are published by the U.S. "
-                        "Environmental Protection Agency") and "Indiana publishes" not in s
+    assert s.startswith("Overflow reports from sewer operators in Indiana are published by the U.S. "
+                        "Environmental Protection Agency almost all as monthly totals, with few dated reports")
+    assert "Indiana publishes" not in s and "no dated" not in s
+    g0, s0 = C.grade_of("IN", dict(f, dated_share=0.0), now, federal=True)
+    assert s0.startswith("Monthly overflow totals from sewer operators in Indiana are published by the U.S.")
     g2, s2 = C.grade_of("NJ", f, now, federal=False)
     assert s2 == ("New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there "
                   "because none are reported by date, not because none happen.")
@@ -611,3 +618,48 @@ def test_a_plant_point_is_withheld_points_are_rounded_and_charts_get_events_and_
     reg[("IN0000004", "2")] = dict(reg[("IN0000004", "2")], coords_from="facility")
     r = M.build_records(cells, names, reg, {}, defaultdict(Counter))[0]
     assert r["lat"] is None and r["coord_source"] is None and "plant's point" in r["raw"]["point_note"]
+
+
+def test_epas_tie_is_carried_only_onto_the_same_named_water_and_epas_plant_points_never_reach_the_registry():
+    """Astra review 2026-11-14 P1-3 and P1-4 (synthetic permits, names and points)."""
+    B = _script("build_in_outfalls")
+    doc = {"features": [_idem(1, "IN0000007", "002C -- CSO", "Active", 40.0, -86.0, stream="Little Example River"),
+                        _idem(2, "IN0000007", "003C -- CSO", "Active", 40.001, -86.0, stream="Example River"),
+                        _idem(3, "IN0000007", "004C -- CSO", "Inactive", lat=None),
+                        _idem(4, "IN0000007", "006C -- CSO", "Active", lat=None)]}
+    tie = {"state": "IN", "npdes_permit": "IN0000007", "outfall_status": "CSO", "lat": 40.0005, "lon": -86.0,
+           "coords_from": "permitted_feature", "water_slug": "example-river-in", "water_name": "Example River",
+           "match": "name"}
+    epa = [dict(tie, outfall="002"), dict(tie, outfall="003"), dict(tie, outfall="004"),
+           dict(tie, outfall="006", coords_from="facility"), dict(tie, outfall="005", coords_from="facility")]
+    by = {r["outfall"]: r for r in B.build(doc, epa, "2026-11-14T00:00:00Z")["outfalls"]}
+    assert "water_slug" not in by["002"]                       # Little Example River is not the Example River
+    assert by["003"]["water_slug"] == "example-river-in"
+    assert by["004"]["outfall_status"].startswith("CLS") and by["004"]["lat"] == 40.001  # EPA's own feature point
+    assert by["006"]["lat"] is None and "own point" in by["006"]["point_note"]           # EPA's plant point withheld
+    assert by["005"]["lat"] is None and by["005"]["source"] == "fed-echo-national-cso-inventory"
+
+
+def test_the_saved_layer_answer_is_sanitized_before_it_is_written():
+    B = _script("build_in_outfalls")
+    doc = {"features": [_idem(1, "IN0000008", "002C -- CSO - 1234 S Example St", "Active", 40.123456, -86.654321)]}
+    out = B.sanitize(doc)
+    a, g = out["features"][0]["attributes"], out["features"][0]["geometry"]
+    assert "1234" not in json.dumps(out) and "Jane Example" not in json.dumps(out) and "Photo_Credit" not in a
+    assert g == {"x": -86.654, "y": 40.123} and a["X_Coordinate"] == -86.654
+    assert B.outfall_number(a["CSO_Number"]) == "002"
+
+
+def test_operators_are_never_named_after_a_plant_and_count_only_sewage_outlets():
+    """Astra review 2026-11-14 P2-7."""
+    import re
+    rows = _rows()
+    assert not [r["name"] for r in rows if re.search(r"\bWWTP\b|\bWWTF\b|Treatment Plant|\bSTP\b", r["name"])]
+    B = _script("add_in_operators")
+    assert B.owner_of_plant("EXAMPLE ESTATES WWTP", "Mixed Ownership (e.g., Public/Private)")[0] is None
+    assert B.owner_of_plant("EXAMPLE LAKE CD WWTP", "Municipal or Water District")[1] == "Example Lake CD"
+    assert not B.outfall_counts({"outfall": None})
+    assert not B.outfall_counts({"outfall": "002", "limit_set_names": ["GROUNDWATER FROM DEWATERING PIPE"]})
+    assert B.outfall_counts({"outfall": "001", "limit_set_names": ["MAIN OUTFALL"]})
+    holder = next(r for r in rows if "INJ043168" in r["npdes_permits"])
+    assert holder["name"] == "Holder of permit INJ043168" and holder["outfall_count"] is None

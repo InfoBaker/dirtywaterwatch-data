@@ -197,6 +197,11 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False, operator:
             + f"; a quiet map in {in_name} can mean a report has not appeared yet.")
     if f["monthly_share"] >= f["annual_share"] and f["monthly_share"] > 0:
         if federal:     # Indiana: the operators' monthly totals reach the public through EPA, not the state
+            if (f.get("dated_share") or 0) > 0:     # a few dated reports beside them (review 2026-11-14 P2-11)
+                return "Monthly totals only", (f"Overflow reports from sewer operators in {in_name} are published by "
+                                               f"{FEDERAL_PUBLISHER} almost all as monthly totals, with few dated "
+                                               "reports; the map shows few dated discharges there because few are "
+                                               "reported by date, not because few happen.")
             return "Monthly totals only", (f"Monthly overflow totals from sewer operators in {in_name} are published "
                                            f"by {FEDERAL_PUBLISHER}, not dated reports; the map shows no dated "
                                            "discharges there because none are reported by date, not because none "

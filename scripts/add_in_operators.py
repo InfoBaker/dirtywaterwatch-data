@@ -88,7 +88,7 @@ CHANNELS = {
         "report; the site answered this build's client with a bot check (HTTP 403, 2026-11-14). ",
         "https://utilities.cityoffortwayne.org/sewer-system/cso-notifications"),
     "in-city-of-south-bend": (
-        "South Bend sends e-mail CSO notifications to people who sign up by telephone (574-277-8515) and posts its "
+        "South Bend sends e-mail CSO notifications to people who sign up by telephone and posts its "
         "public notification plan, a yearly CSO notice and its monthly reports of operation as PDFs "
         "(https://southbendin.gov/department/public-works/utilities-division/waste-water/). ",
         "https://southbendin.gov/department/public-works/utilities-division/waste-water/"),
@@ -243,8 +243,16 @@ def place_prefix(stem: str) -> tuple[str, str] | None:
     return None
 
 
-def owner_of_plant(pn: str, ftype: str | None) -> tuple[str, str, str | None, str | None]:
-    """(id, name, legal form, note) for a plant EPA names (module docstring)."""
+def bare(pn: str) -> str:
+    """A plant name without its plant words ('Lake Bruce CD WWTP' -> 'Lake Bruce CD'): an operator is never named
+    after a plant (review 2026-11-14 P2-7)."""
+    out = PLANT_WORDS.sub("", " " + (pn or "")).strip(" -#,")
+    return out or pn
+
+
+def owner_of_plant(pn: str, ftype: str | None) -> tuple[str | None, str | None, str | None, str | None]:
+    """(id, name, legal form, note) for a plant EPA names (module docstring); (None, None, None, note) when the owner
+    cannot be read from the name, so the row is the permit's holder, unnamed."""
     pn = " ".join((pn or "").split())
     flat = pn.replace(".", "")
     t = ftype or ""
@@ -257,37 +265,37 @@ def owner_of_plant(pn: str, ftype: str | None) -> tuple[str, str, str | None, st
         if hit:
             return f"in-{hit[1]}-of-{slug(hit[0])}", f"{hit[1].capitalize()} of {hit[0]}", hit[1], None
     if DISTRICT.search(flat):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "special district", None
     if t.startswith("State"):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "state facility", None
     if t.startswith("Federal"):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "federal facility", None
     if re.search(r"\breuse authority\b|\bauthority\b", pn, re.I):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "authority", None
     if INSTITUTION.search(pn):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "institution", None
     if SCHOOL.search(pn) or re.search(r"\beducational center\b", pn, re.I):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "special district", "A public school corporation's plant."
     if INSTITUTION.search(pn):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "institution", None
     if MHP.search(pn):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "mobile-home park", None
     if CAMP.search(pn) or re.search(r"\bjellystone\b|\bwater park\b", pn, re.I):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "campground or resort", None
     if COUNTY_BODY.search(pn):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "county", None
     if STORE.search(pn):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "business or industrial", None
     stem = PLANT_WORDS.sub("", " " + pn).strip(" -#0123456789")
     hit = place_prefix(stem) if (t.startswith("Municipal") or t == "POTW" or not t) else None
@@ -296,12 +304,20 @@ def owner_of_plant(pn: str, ftype: str | None) -> tuple[str, str, str | None, st
                 f"EPA records the plant under the {hit[1]}'s name and types its owner a municipality: filed under the "
                 f"{hit[1]} (an incorporated place in the Census Bureau's list).")
     if COMPANY.search(pn):
-        name = smart_title(pn)
+        name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "business or industrial", None
-    name = smart_title(pn)
-    return (f"in-{slug(name)}", name, None,
-            f"EPA records the permittee as the plant (\"{pn}\") and types the owner \"{t or 'not given'}\"; the owner "
-            "was not read.")
+    return (None, None, None,
+            f"EPA records the permittee as the plant and types the owner \"{t or 'not given'}\"; the owner was not "
+            "read, so the row names the permit's holder, not the plant.")
+
+
+def outfall_counts(r: dict) -> bool:
+    """A plant row that is a sewage discharge point: it names an outfall and is no groundwater or dewatering outlet
+    (review 2026-11-14 P2-7: a collection-system row with no outfall number, Loogootee's dewatering outlet)."""
+    if not str(r.get("outfall") or "").strip():
+        return False
+    sets = " ".join(str(x) for x in r.get("limit_set_names") or [])
+    return not re.search(r"\bgroundwater\b|\bdewater", sets, re.I)
 
 
 def build(dis: list[dict]) -> tuple[list[dict], dict]:
@@ -345,7 +361,7 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             rid = OWNERS[p][0]
         elif c and (NAME_REMOVED in (c.get("permittee_as_recorded") or "") or person(c.get("permittee_as_recorded"))):
             fac = c.get("facility") or ""
-            name = (f"{smart_title(fac)} (permit {p})" if fac and NAME_REMOVED not in fac and not person(fac)
+            name = (f"{smart_title(bare(fac))} (permit {p})" if fac and NAME_REMOVED not in fac and not person(fac)
                     else f"Holder of permit {p}")
             rid = f"in-{p.lower()}"
             meta.setdefault(rid, {"name": name, "short": name, "lf": "facility (permittee not named)",
@@ -358,6 +374,8 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             if (p in cso or p in idem) and (ftype or "").startswith("Mixed"):
                 ftype = "Municipal or Water District"   # a combined sewer is a city's or town's old system
             rid, name, lf, note = owner_of_plant(pn, ftype)
+            if rid is None:
+                rid, name = f"in-{p.lower()}", f"Holder of permit {p}"
             if c and c.get("legal_form_proposed") and lf in (None, "business or industrial"):
                 lf = c["legal_form_proposed"]
             meta.setdefault(rid, {"name": name, "short": name, "lf": lf, "note": note})
@@ -382,7 +400,7 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
     new = []
     for rid, ps in sorted(by_row.items()):
         m = meta[rid]
-        prow = [r for p in ps for r in plants.get(p, [])]
+        prow = [r for p in ps for r in plants.get(p, []) if outfall_counts(r)]
         crow = [r for p in ps for r in idem.get(p, [])] or [r for p in ps for r in cso.get(p, [])]
         if [p for p in ps if p in idem]:
             crow = [r for p in ps for r in (idem.get(p) or cso.get(p, []))]
