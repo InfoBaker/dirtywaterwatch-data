@@ -92,8 +92,9 @@ DATE = re.compile(MONTH_RE + r"\s+(\d{1,2})\s*(?:st|nd|rd|th)?\b(?:\s*,?\s*(\d{4
 TIME = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*(a|p)\.?\s*m\b\.?|\b(noon|midnight)\b|"
                   r"\b(\d{1,2}):(\d{2})\s+(?:this|in the)\s+(morning|afternoon|evening)\b", re.I)
 WATER_WORDS = r"(?:Creek|River|R\.|Branch|Lake|Fork|Run)"
-WATER = re.compile(r"\b((?:(?:[A-Z][\w'’]*|of)\s+){0,3}" + WATER_WORDS + r")(?!\s+(?:Pump|Wastewater|Treatment|"
-                   r"Diversion|Basin|Lift|Interceptor|Park(?:way)?|Road|Rd|Drive|Dr|Blvd|Boulevard|Avenue|Ave|Street|St))")
+WATER = re.compile(r"\b((?:(?:[A-Z][\w'’-]*|of)\s+){0,3}" + WATER_WORDS + r")(?!\s+(?:Pump|Wastewater|Treatment|"
+                   r"Diversion|Basin|Lift|Interceptor|Park(?:way)?|Road|Rd|Drive|Dr|Blvd|Boulevard|Avenue|Ave|Street|St|Court|Ct|"
+                   r"Terrace|Way|Place|Lane|Circle|Trail|Estates|Subdivision))")
 ENTRY = re.compile(r"\benter|\breach|\bflow|\bspill|\bleads?\b|\binto\b|\bdischarg|\bwent\b|\bsend|\bcarried", re.I)
 NO_WATER = re.compile(r"did not (?:reach|enter)|no (?:waste ?water|sewage) (?:reached|entered)|never reached", re.I)
 STREET = re.compile(r"\b(?:Drive|Road|Street|Avenue|Ave|Blvd|Highway|Parkway|Lane|Court)\b")    # "Spring Drive Bonhomme Creek"
