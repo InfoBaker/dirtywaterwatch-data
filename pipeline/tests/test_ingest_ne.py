@@ -511,3 +511,22 @@ def test_public_wording_says_what_was_read():
     assert "exists in Nebraska" not in reg["ne-dwee-overflow-alerts"]["note"]
     for rid in ("ne-omaha-public-works-pages", "ne-dwee-beachwatch-page", "ne-douglas-county-health"):
         assert reg[rid]["urls"], rid                                          # the page's health is recorded
+
+
+# ---------------------------------------------------------------- review 2026-11-14 (Astra data P1-1 to P2-4)
+# tests/fixtures/ne_beachwatch_legacy_state.json holds state written by the code before the sample/observation clock
+# (992c406), built from rows of tests/fixtures/ne_dwee_beachwatch.json: the migration is tested on what production
+# saved, not on records made to look old.
+
+def _legacy(name):
+    return json.loads((FIX / "ne_beachwatch_legacy_state.json").read_text())[name]
+
+def test_astra_p1_1_migration_keeps_each_rows_event_id_when_a_record_key_repeats():
+    st = _legacy("duplicate_key")
+    old = {r["raw"]["row"]["OBJECTID"]: r["event_id"] for r in st["records"]}
+    assert old == {87: "ne-dwee-beachwatch:LBB1ROCKFD04-2026-w23~2"}     # the parent's suffix order
+    prev = st["records"]
+    for at in ("2026-06-12T17:00:00Z", "2026-06-13T16:00:00Z", "2026-06-14T16:00:00Z"):
+        recs = _beachwatch(st["rows"], at, prev)[0]
+        assert {r["raw"]["row"]["OBJECTID"]: r["event_id"] for r in recs} == old
+        prev = recs
