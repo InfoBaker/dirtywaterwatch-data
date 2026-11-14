@@ -1,6 +1,6 @@
 {
  "state": "TX",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 458,
  "waters": [
   {
@@ -13104,12 +13104,13 @@
    "gnis_id": "1385432",
    "geometry_hash": "affbaae4ecee623f65301769931daaa2377f6fa7f80e63e5d1525806b270f87e",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "sabine-lake-tx",
