@@ -21,16 +21,19 @@ Source
   row holds the filer's comments.
 
   Completeness: each window's "Recs Found" count is read from the page and the run fails (ok false, previous records
-  kept) unless the distinct confirmation numbers read equal it; a window DEQ reports as empty must say "Recs Found: 0"
-  in a page that has the result table, else the run fails too. Pages are read at 100 rows, sorted by the start date.
+  kept) unless the rows read equal it; a page without the result table or its count fails the run too, so a failed
+  search is never read as an empty one. A window holding more reports than one page (100 rows) is split in halves
+  and each half asked again, because DEQ sorts on the start day, which is not unique, and rows tied on it may change
+  places between page requests; only a single day with more than 100 reports would be paged.
 
 What is read (privacy)
   SAFE_FIELDS only. Never read: the Comments row (the filer's free text: it can name residents, staff and
   contractors), and nothing the page does not show (the forms also collect the filer's name, phone and e-mail; the
   search does not show them). Location, cause, action taken and type of overflow go through the strict free-text
   scrub (house numbers, unit numbers, phones, e-mails and people's names cut) before anything is saved; the facility
-  name that reads as only a person's becomes "[name removed]" (common.scrub_discharger). data/raw keeps only the
-  scrubbed safe rows (dww-safe-rows/1), never a page.
+  name that reads as only a person's becomes "[name removed]" (common.scrub_discharger). A report whose impact is
+  "SSO Affected Private Property (ground)" or "Basement Backup" keeps no location text at all (privacy_cut: often a
+  home). data/raw keeps only the scrubbed safe rows (dww-safe-rows/1), never a page.
 
 Record rules: the fetch block in data/sources/ar-deq-overflow-incidents.yaml and ingest/ar_transforms.py
   (ar_deq_record), through the generic field map, history and redaction (ingest/generic/runner.build); this module
@@ -89,7 +92,8 @@ DETAIL = {
     "Action Taken": "action_taken",
     "Type of Overflow": "overflow_type",
 }
-SAFE_FIELDS = list(COLUMNS.values()) + list(DETAIL.values())
+SAFE_FIELDS = list(COLUMNS.values()) + list(DETAIL.values()) + ["location_withheld"]
+PRIVATE_IMPACT = re.compile(r"affected\s+private\s+property|basement\s+backup", re.I)
 RECS = re.compile(r"Recs\s+Found</abbr>\s*:\s*(?:&nbsp;|\s)*([\d,]+)", re.I)
 PAGES = re.compile(r"<b>\s*/\s*([\d,]+)\s*</b>")
 CURRENT = re.compile(r"Data\s+current\s+as\s+of\s+(\d{1,2}/\d{1,2}/\d{4})", re.I)
@@ -145,10 +149,19 @@ def parse_page(page: str) -> tuple[list[dict], int | None, int | None, str | Non
                 key = DETAIL.get(lab.strip().rstrip(":").strip())
                 if key:
                     cur[key] = text(val)
+    rows = [privacy_cut(r) for r in rows]
     for r in rows:
         for f in SAFE_FIELDS:
             r.setdefault(f, "")
     return rows, found, pages, current
+
+
+def privacy_cut(row: dict) -> dict:
+    """A report whose impact is private property or a basement backup is often at a home: its location text is
+    dropped before anything is saved (location_withheld says why)."""
+    if PRIVATE_IMPACT.search(row.get("impact") or "") and row.get("location"):
+        return {**row, "location": "", "location_withheld": "private property: DEQ's impact for this report"}
+    return row
 
 
 def post(sess: requests.Session, data: dict) -> str:

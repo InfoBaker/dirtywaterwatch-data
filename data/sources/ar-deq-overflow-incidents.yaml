@@ -1,0 +1,73 @@
+id: "ar-deq-overflow-incidents"
+name: "Arkansas DEQ Reported Noncompliance Incident Data (sewer overflows, bypasses, upsets and unpermitted discharges)"
+url: "https://adeq.state.ar.us/water/enforcement/sso/data.aspx"
+homepage: "https://adeq.state.ar.us/water/enforcement/sso/data.aspx"
+kind: "html"
+level: "state"
+# Fetched by ingest/ar_deq_overflow_incidents.py (an HTML form search: the module posts the visible search fields and
+#   reads each window whole, splitting a window that holds more than one page), mapped through the fetch block below
+#   (ingest/ar_transforms.py ar_deq_record, ar_deq_not_sewage): source id ar-deq-overflow-incidents,
+#   data/build/events/ar-deq-overflow-incidents.json. The block is not live on its own (live: false): the module runs
+#   it with the rows it fetched.
+# What the search holds (read 2026-11-14, every report whose overflow began from 2025-01-01 to 2026-11-14, 23 monthly
+#   windows, each window's count checked): 2,449 rows, 2,423 distinct confirmation numbers (DEQ lists 26 reports
+#   twice); 2025 1,592, 2026 to 2026-11-14 857 (October 2026 45); DEQ's Type SSO 2,320, Unpermitted Discharge 61,
+#   Bypass 47, Upset 10, blank 11; Impact private property 779, public land only 729, reached receiving water 676,
+#   at the treatment plant 124, basement backup 23, blank 117, the filer's own words 1; 205 permits, the most
+#   reports from AR0021806 (Little Rock Water Reclamation Authority, Adams Field) 204, AR0033880 184, AR0033278 172;
+#   stop day blank on 89 rows; the day DEQ received the report is a median of 1 day after the overflow began (90th
+#   percentile 2 days; 9 reports more than 120 days late). The search goes back to 1993 (about 46,000 reports in all,
+#   most from 2001); the older ones are not read by this build. "Data current as of 11/13/2026" on the page.
+# 22 rows from industrial permits (paper and packaging mills, a gravel mine, a brick plant, two manufacturers) that
+#   are not sewer overflows are not sewage reports and are not kept (ar_deq_not_sewage).
+cadence: "every run (the last 120 days by start day, two or three requests); the page is refreshed daily"
+license: "No licence or terms shown on the page."
+attribution: "Arkansas Department of Energy and Environment, Division of Environmental Quality, Office of Water Quality (Enforcement Branch)"
+enabled: true
+role: "events"
+event_types: ["sso", "plant_bypass"]
+states: ["AR"]
+registry_ids: ["ar-deq-overflow-incidents"]
+access: ["html"]
+access_detail: "An ASP.NET page whose search is a plain HTML form POST (T_FacilityName, T_NPID, T_MiscSearch, four type boxes, T_DateStart and T_DateEnd on the day the overflow began) and whose result pages are the same POST with the page's hidden PageNo, RecordsPerPage (up to 100), Sort and SortASC; no session, cookie, token or view state. Ticking two or more type boxes returns nothing (they combine with AND), so the module ticks none (every type). Each window's Recs Found count is checked. Text, Excel and PDF exports of a query exist (download_query.aspx links generated per query) and are not used."
+machine_readable: false
+legal_basis: "NPDES permit Part II reporting conditions as DEQ states them on the incident page: notice within 24 hours of becoming aware and, in most cases, a five-day written report, for any SSO, unanticipated bypass, upset or unpermitted discharge"
+checked: "2026-11-14"
+fetch:
+  platform: "json"
+  live: false
+  url: "https://adeq.state.ar.us/water/enforcement/sso/data.aspx"
+  module: "ar_deq_overflow_incidents"
+  time_zone: "America/Chicago"
+  # the result table's columns and the detail row's labelled fields; the Comments row is never read
+  safe_fields: [permit_no, facility_name, location, location_withheld, date_started, date_stopped, date_reported,
+                volume_gal, impact, incident_type, environmental_damage, confirmation_no, cause, action_taken,
+                overflow_type]
+  reviewed_fields:
+    facility_name: "the permitted facility as DEQ names it ('VAN BUREN, CITY OF-MAIN PLANT'); a name that is only a person's is removed (operator_fields)"
+  free_text: [location, cause, action_taken, overflow_type, environmental_damage]
+  free_text_scrub: "strict"
+  operator_fields: [facility_name]
+  record:
+    source_record_id: {template: "{confirmation_no|lower|default:no-id}"}
+    started_at: {field: date_started, parse: date, formats: ["%m/%d/%Y"]}
+    ended_at: {field: date_stopped, parse: date, formats: ["%m/%d/%Y"]}
+    reported_at: {field: date_reported, parse: date, formats: ["%m/%d/%Y"]}
+    event_type: {const: sso}           # ar_deq_record sets the type from DEQ's label
+    discharger_name: facility_name
+    outfall_name: location
+    volume: {field: volume_gal, unit: gallons, estimate: estimated}
+    authority: {const: "Arkansas Division of Environmental Quality (Reported Noncompliance Incident Data)"}
+    source_url: {const: "https://adeq.state.ar.us/water/enforcement/sso/data.aspx"}
+  transform: "ingest.ar_transforms.ar_deq_record"
+  post: "ingest.ar_transforms.ar_deq_not_sewage"
+  dedupe: {repeats: suffix, order: ["-volume_gal"]}
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Arkansas Division of Environmental Quality, Reported Noncompliance Incident Data"
+    license: "No licence or terms stated on the page."
+    caveat: "Filed by the permittee on DEQ's 24-hour online forms; the search gives the days the overflow started and stopped, the day DEQ received the report, the volume, the impact the filer ticked and a location text, but no time of day, no coordinates, no county and no receiving-water field. Some reports have no stop day. Reports from industrial permits that are not sewer overflows are left out."
+    time_basis: "Dates only (the days the overflow started and stopped and the day DEQ received the report); no time of day. Read in Central time, Arkansas's only zone."
+    placement_rule: "DEQ's search gives no coordinates and no receiving-water field: a report is placed only on a water its location text names when the filer's impact does not rule water out, judged by the county of its permit's treatment plant; every other report is listed with its operator and placed on no water. A report is never placed at the plant or geolocated from its location text."
