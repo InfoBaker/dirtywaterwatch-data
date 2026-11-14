@@ -1,0 +1,284 @@
+"""South Carolina: the City of Florence's sanitary sewer overflow notices (ingest/sc_florence_sso.py), DES's beach
+station advisories and bloom watches (ingest/sc_des_advisories.py), and the state's registry rows, register, rules row,
+state text and missing-waters list. Fixtures: rows of the 2026-11-14 fetches (DES's layers and table) and a Florence
+notice whose contact block, telephone numbers and street numbers are invented (Example names). No network."""
+import copy
+import json
+import re
+from collections import Counter
+from pathlib import Path
+
+from ingest import sc_des_advisories as A
+from ingest import sc_florence_sso as F
+
+ROOT = Path(__file__).resolve().parents[2]
+FIX = Path(__file__).resolve().parent / "fixtures" / "sc"
+T0, T1, T2 = "2026-11-14T18:00:00Z", "2026-11-14T19:00:00Z", "2026-11-14T20:00:00Z"
+PERSONAL = ["Pat Example", "pexample@example.org", "843-555-0142", "555-0142", "555-0199", "1234 W", "5678 Sample"]
+
+
+def notice(page: str | None = None):
+    nid, title, paras = F.article(page or (FIX / "florence_notice.html").read_text())
+    return nid, F.parse_notice(title, paras)
+
+
+def florence_records(state):
+    return {r["source_record_id"]: r for r in F.records(state, T0)}
+
+
+# ---------------------------------------------------------------- Florence
+
+def test_the_notice_is_read_from_its_dateline_with_the_contacts_cut():
+    nid, p = notice()
+    assert nid == "1929"
+    assert p["release_date"] == "2025-08-15" and p["incident_day"] == "2025-08-15"
+    assert p["start_basis"].startswith("the day the City received notice")
+    assert p["volume_gal"] is None and p["volume_text"].startswith("more than 5,000 gallons")   # a lower bound
+    assert p["waters"] == ["Jeffries Creek"] and p["until_further_notice"]
+    assert "Avoid swimming" in p["advice"] and "W Example Street" in p["advice"]
+    assert "policy" not in (p["volume_text"] or "")
+
+
+def test_no_personal_string_reaches_a_record():
+    nid, p = notice()
+    st = {"notices": {}}
+    F.update_notice(st, "/news/notification-sanitary-sewer-overflow-jeffries-creek-1", nid, p, T0)
+    blob = json.dumps(F.records(st, T0)) + json.dumps(st)
+    for s in PERSONAL:
+        assert s not in blob, s
+    assert "[house number removed]" in blob
+
+
+def test_the_record_is_a_dated_sewage_report_in_eastern_time_with_no_end():
+    nid, p = notice()
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, T0)
+    r = florence_records(st)["1929"]
+    assert r["event_type"] == "sso" and r["status"] == "ongoing" and r["ended_at"] is None
+    assert r["started_at"] == "2025-08-15" and r["time_precision"] == "day" and r["published_at"] == "2025-08-15"
+    assert r["reported_at"] is None and r["raw"]["time_zone"] == "America/New_York"
+    assert r["discharger_id"] == "sc-florence" and r["npdes_permit"] is None
+    assert r["waterbody_text"] == "Jeffries Creek" and r["raw"]["county"] == "Florence"
+    assert "until further notice" in r["raw"]["status_basis"]
+    assert r["lat"] is None and r["lon"] is None
+
+
+def test_yesterday_and_a_spelling_and_an_estimate():
+    page = (FIX / "florence_notice.html").read_text()
+    page = page.replace("On Friday, August 15, the City of Florence received notice of",
+                        "The City of Florence is currently experiencing")
+    page = page.replace("Staff responded immediately upon being notified", "Staff responded to the area yesterday")
+    page = page.replace("more than 5,000 gallons", "an estimated 115,200 gallons").replace("Jeffries Creek", "Jefferies Creek")
+    _, p = notice(page)
+    assert p["incident_day"] == "2025-08-14" and "yesterday" in p["start_basis"] and "derived" in p["start_basis"]
+    assert p["volume_gal"] == 115200.0 and p["estimate_flag"] == "estimated"
+    assert p["waters"] == ["Jeffries Creek"] and p["aliases_seen"] == ["Jefferies Creek"]
+
+
+def test_a_reused_page_address_never_overwrites_the_earlier_record():
+    nid, p = notice()
+    st = {"notices": {}}
+    assert F.update_notice(st, "/news/x", nid, p, T0) == "new"
+    assert F.update_notice(st, "/news/x", nid, copy.deepcopy(p), T1) == "same"
+    # an edit to the same overflow (same dates): the record is revised in place
+    p2 = copy.deepcopy(p)
+    p2["advice"] = (p2["advice"] or "") + " Signs have been posted."
+    assert F.update_notice(st, "/news/x", nid, p2, T1) == "revised"
+    recs = florence_records(st)
+    assert set(recs) == {"1929"} and recs["1929"]["raw"]["_revisions"]
+    # the page rewritten for a later overflow: a second record, the first kept as it was
+    p3 = copy.deepcopy(p)
+    p3.update(release_date="2025-11-03", incident_day="2025-11-02", volume_text="an unknown volume")
+    first_before = florence_records(st)["1929"]
+    assert F.update_notice(st, "/news/x", nid, p3, T2) == "new_version"
+    recs = florence_records(st)
+    assert set(recs) == {"1929", "1929-v2"}
+    assert recs["1929"]["started_at"] == first_before["started_at"] == "2025-08-15"
+    assert recs["1929"]["volume_text"] == first_before["volume_text"]
+    assert recs["1929"]["raw"]["later_version"]["seen_at"] == T2
+    assert recs["1929-v2"]["started_at"] == "2025-11-02" and recs["1929-v2"]["raw"]["earlier_version_of_page"] == "1929"
+
+
+def test_only_overflow_titles_are_read_from_the_list():
+    items = F.list_items((FIX / "florence_list.html").read_text())
+    assert len(items) == 4
+    read = [s for s, t in items if F.TITLE_RE.search(t)]
+    assert read == ["/news/notification-sanitary-sewer-overflow-jeffries-creek-1"]
+
+
+# ---------------------------------------------------------------- DES beach stations and blooms
+
+def saved():
+    return json.loads((FIX / "advisories.json").read_text())
+
+
+def test_long_term_advisories_are_standing_records_from_the_first_poll():
+    s = saved()
+    recs, state, n = A.beach_records(s["beach"], {}, T0)
+    assert n["stations"] == 4 and n["Long-Term"] == 3 and n["No Advisory"] == 1
+    assert len(recs) == 3 and {r["raw"]["station"] for r in recs} == {"LC-080", "LC-081", "WAC-035"}
+    r = next(x for x in recs if x["raw"]["station"] == "LC-080")
+    assert r["event_type"] == "beach_advisory" and r["status"] == "advisory_active"
+    assert r["started_at"] == T0 and r["time_precision"] == "poll" and r["ended_at"] is None
+    assert r["raw"]["advisory_kind"] == "long-term" and "began before this poll" in r["raw"]["start_basis"]
+    assert r["lat"] == round(r["lat"], 3) and r["coord_source"] == "station" and r["raw"]["county"] == "Colleton"
+    assert "NOT to swim" in r["advice_text"] and r["raw"]["time_zone"] == "America/New_York"
+
+
+def test_a_station_that_leaves_the_layer_ends_at_that_poll_and_an_unknown_label_is_kept():
+    s = saved()
+    _, state, _ = A.beach_records(s["beach"], {}, T0)
+    later = copy.deepcopy(s["beach"])
+    for f in later:
+        if f["attributes"]["STAT"] == "LC-080":
+            f["attributes"]["ADVISORY"] = "No Advisory"
+        if f["attributes"]["STAT"] == "LC-109":
+            f["attributes"]["ADVISORY"] = "Advisory Pending"           # a value DES has not used: never grey
+    recs, state2, _ = A.beach_records(later, {"beach": state}, T1)
+    by = {r["source_record_id"]: r for r in recs}
+    lc80 = by[f"LC-080-{T0[:10]}"]
+    assert lc80["status"] == "advisory_lifted" and lc80["ended_at"] == T1 and lc80["raw"]["ended_at_precision"] == "poll"
+    assert by[f"LC-081-{T0[:10]}"]["status"] == "advisory_active" and by[f"LC-081-{T0[:10]}"]["started_at"] == T0
+    odd = by[f"LC-109-{T1[:10]}"]
+    assert odd["status"] == "unknown" and odd["raw"]["_agency_label_only"] and odd["raw"]["_agency_label"] == "Advisory Pending"
+
+
+def test_a_short_term_advisory_and_a_closure_by_label():
+    s = saved()
+    f = copy.deepcopy(s["beach"])
+    f[0]["attributes"]["ADVISORY"], f[1]["attributes"]["ADVISORY"] = "Temporary", "Emergency Closure"
+    recs, _, _ = A.beach_records(f, {}, T0)
+    kinds = {r["raw"]["station"]: (r["event_type"], r["raw"]["advisory_kind"]) for r in recs}
+    assert kinds[f[0]["attributes"]["STAT"]] == ("beach_advisory", "short-term")
+    assert kinds[f[1]["attributes"]["STAT"]] == ("beach_closure", "closure")
+
+
+def test_the_bloom_watch_is_des_own_dated_at_its_cove_and_ends_only_when_both_drop_it():
+    s = saved()
+    recs, state, n = A.hab_records(s["hab"], s["hab_table"], {}, T0)
+    assert len(recs) == 1 and n["table_rows"] == 1
+    r = recs[0]
+    assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active"
+    assert r["started_at"] == "2026-10-16" and r["time_precision"] == "day"
+    assert r["raw"]["advisory_level"] == "Watch" and r["raw"]["advisory_area"] == "Cedar Point Cove"
+    assert r["waterbody_text"] == "J. Strom Thurmond Reservoir" and r["outfall_name"] == "Cedar Point Cove"
+    assert r["coord_source"] == "des_delineation" and 33.7 < r["lat"] < 33.9
+    assert "Microcystis" in r["advice_text"]
+    # the page could not be read (table None): nothing ends
+    recs2, state2, _ = A.hab_records([], None, {"hab": state}, T1)
+    assert recs2[0]["status"] == "advisory_active" and recs2[0]["ended_at"] is None
+    # the table still lists it though the layer dropped it: still active
+    recs3, state3, _ = A.hab_records([], s["hab_table"], {"hab": state}, T1)
+    assert any(x["status"] == "advisory_active" for x in recs3)
+    # neither lists it: ended at that poll
+    recs4, _, _ = A.hab_records([], [], {"hab": state}, T2)
+    assert recs4[0]["status"] == "advisory_lifted" and recs4[0]["ended_at"] == T2
+    assert recs4[0]["raw"]["ended_at_precision"] == "poll"
+
+
+def test_the_hab_table_reads_the_program_page_shape():
+    page = ("<h2>HAB Watches &amp; Advisories</h2><p>Any active ...</p><table><tr><th>Advisory Level</th></tr>"
+            "<tr><td>Advisory</td><td>Example Cove</td><td>Lake Example</td><td>07/04/2026</td></tr></table>")
+    assert A.hab_table(page) == [{"level": "Advisory", "area": "Example Cove", "water": "Lake Example",
+                                  "issued": "07/04/2026"}]
+    assert A.hab_table("<p>no table here</p>") is None
+    recs, _, _ = A.hab_records([], A.hab_table(page), {}, T0)
+    assert recs[0]["raw"]["read_from"] == "table" and recs[0]["started_at"] == "2026-07-04" and recs[0]["lat"] is None
+
+
+def test_the_layer_requests_name_no_staff_field():
+    assert "Creator" not in A.HAB_LAYER and "Editor" not in A.HAB_LAYER and "GlobalID" not in A.BEACH_LAYER
+
+
+# ---------------------------------------------------------------- registry, register, rules, text, waters
+
+def ops():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "SC"]
+
+
+def test_every_south_carolina_permit_is_in_exactly_one_row():
+    from build import redact
+    from ingest import dischargers_schema as DS
+    every = Counter(p for r in json.loads((ROOT / "data" / "dischargers.json").read_text())
+                    for p in dict.fromkeys([r.get("npdes_permit"), *(r.get("npdes_permits") or [])]) if p)
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "SC"}
+    cand = json.loads((ROOT / "research" / "sc" / "private-utilities-candidates.json").read_text())
+    private = {c["npdes_permit"] for c in cand["candidates"]}
+    assert len(plants) == 213 and len(private) == 26
+    assert all(every[p] == 1 for p in plants | private), [p for p in plants | private if every[p] != 1]
+    rows = ops()
+    assert len({r["id"] for r in rows}) == len(rows)
+    ids = {r["id"] for r in rows}
+    research = {r["id"] for r in json.loads((ROOT / "research" / "sc" / "dischargers.json").read_text())}
+    assert research <= ids
+    assert not DS.check_legal_forms(rows)
+    assert not [r["name"] for r in rows if redact.person_shaped(r["name"])]
+    assert not [r for r in rows if "[name removed]" in r["name"]]
+    flo = next(r for r in rows if r["id"] == "sc-florence")
+    assert set(flo["npdes_permits"]) == {"SC0045462", "SC0025356"}
+
+
+def test_drinking_water_and_land_application_rows_are_kind_other():
+    doc = json.loads((ROOT / "data" / "outfalls-sc.json").read_text())
+    assert doc["count"] == len(doc["outfalls"]) == 10
+    assert all(r["outfall_kind"] == "other" and r["kind_note"] and r["supersedes"].startswith("data/outfalls-plants-us.json")
+               for r in doc["outfalls"])
+    assert {r["npdes_permit"] for r in doc["outfalls"]} == {"SC0048526", "SC0047724", "SC0049336", "SC0043583",
+                                                            "SCG646061", "SC0048461"}
+    import common
+    reg = [r for r in common.load_outfall_registry(provisional=False) if str(r.get("state")).upper() == "SC"]
+    assert sum(1 for r in reg if r.get("outfall_kind") == "other") == 10
+    assert not [r for r in reg if r.get("npdes_permit") == "SCG646061" and r.get("outfall_kind") != "other"]
+
+
+def test_register_rows_per_operator_and_the_state_channels():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "sc.json").read_text())["channels"]}
+    named = {c["operator_id"] for c in reg.values() if c.get("operator_id")}
+    assert {r["id"] for r in ops()} <= named
+    assert reg["sc-florence-sso-notices"]["feed_source_id"] == "sc-florence-sso-notices"
+    assert reg["sc-des-beach-monitoring"]["feed_source_id"] == "sc-des-beach-monitoring"
+    assert reg["sc-des-hab"]["feed_source_id"] == "sc-des-hab"
+    assert reg["sc-charleston-water-news"]["monitored"] and reg["sc-charleston-water-news"]["records"] is False
+    assert reg["sc-des-sso-reports"]["barrier"] == "no_web_page"
+    assert reg["sc-des-freshwater-swim-advisories"]["barrier"] == "not_verified"
+    assert reg["sc-rewa-public-notice"]["barrier"] == "not_verified" and "48-1-95(E)" in reg["sc-rewa-public-notice"]["legal_basis"]
+
+
+def test_rules_row_cites_the_law_and_sets_no_window():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    sc = rules["red"]["by_state"]["SC"]
+    assert sc["hours"] is None and "48-1-95" in sc["source"]
+    assert not re.search(r"\b(safe|clean)\b", sc["basis"], re.I)
+
+
+def test_state_text_is_in_the_page_shape():
+    t = (ROOT / "research" / "sc" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: SC\nname: South Carolina\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
+    assert "48-1-95" in t and "City of Florence" in t and "21 long-term" in t and "18 on the Grand Strand" in t
+
+
+def test_missing_waters_list_leaves_out_the_national_lists_names():
+    d = json.loads((ROOT / "research" / "sc" / "receiving-waters-missing.json").read_text())
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+
+    def k(n):
+        return re.sub(r"[^a-z0-9]", "", (n or "").lower())
+    held = {k(n) for w in (nat["states"].get("SC") or {}).get("waters", [])
+            for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
+    assert d["state"] == "SC" and d["waters"] == len(d["rows"])
+    unresolved = [r for r in d["rows"] if not r.get("resolved")]
+    assert not [r["name"] for r in unresolved if k(r["name"]) in held]
+
+
+def test_adding_the_states_leaves_the_other_states_lists_as_they_were():
+    from build import charts, status
+    assert status.COUNTY_STATES["UT"] == "ut-counties.json" and status.COUNTY_STATES["OH"] == "oh-counties.json"
+    assert {"TX", "OR", "UT", "TN", "OH"} <= status.COUNTY_FIELD_STATES
+    assert status.COUNTY_STATES["SC"] == "sc-counties.json" and "SC" in status.COUNTY_FIELD_STATES
+    assert charts.STATE_NAMES["SC"] == "South Carolina" and charts.STATE_NAMES["OH"] == "Ohio"

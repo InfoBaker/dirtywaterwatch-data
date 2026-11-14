@@ -1,0 +1,83 @@
+{
+ "format": "dww-sc-des-advisories-safe/1",
+ "note": "Rows of the 2026-11-14 fetch: DES's station layer (four stations) and bloom layer (the one Watch), and the HAB page's table.",
+ "beach": [
+  {
+   "attributes": {
+    "OBJECTID": 10,
+    "STAT": "LC-109",
+    "HUC_12": "030601100305",
+    "COUNTY": "Beaufort",
+    "ADVISORY": "No Advisory"
+   },
+   "geometry": {
+    "x": -80.82281035175197,
+    "y": 32.10753463359895
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 289,
+    "STAT": "LC-080",
+    "HUC_12": "030502060308",
+    "COUNTY": "Colleton",
+    "ADVISORY": "Long-Term"
+   },
+   "geometry": {
+    "x": -80.3376336685279,
+    "y": 32.478323610054716
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 306,
+    "STAT": "LC-081",
+    "HUC_12": "030502060308",
+    "COUNTY": "Colleton",
+    "ADVISORY": "Long-Term"
+   },
+   "geometry": {
+    "x": -80.34391613848787,
+    "y": 32.489118413165855
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1255,
+    "STAT": "WAC-035",
+    "HUC_12": "030402080307",
+    "COUNTY": "Horry",
+    "ADVISORY": "Long-Term"
+   },
+   "geometry": {
+    "x": -78.98103072777107,
+    "y": 33.595297922413565
+   }
+  }
+ ],
+ "hab": [
+  {
+   "attributes": {
+    "OBJECTID": 2937,
+    "NAME": "J. Strom Thurmond Reservoir",
+    "Algal_Bloom": "Microcystis",
+    "Date": 1792123200000,
+    "Advisory_Tier": "Watch",
+    "Recreational_Guidance": null,
+    "GlobalID": "c157db63-18ff-4fa0-8934-e6d19bbb8923"
+   },
+   "centroid": {
+    "x": -82.30775485462198,
+    "y": 33.81117549171548
+   }
+  }
+ ],
+ "hab_table": [
+  {
+   "level": "Watch",
+   "area": "Cedar Point Cove",
+   "water": "J. Strom Thurmond",
+   "issued": "10/16/2026"
+  }
+ ]
+}

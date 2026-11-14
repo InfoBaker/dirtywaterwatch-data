@@ -157,7 +157,7 @@ DE_TOWNS = {
                    "st. georges", "saint georges", "port penn", "talleyville", "greenville", "yorklyn", "montchanin",
                    "rockland", "christiana", "ardentown", "arden", "bellefonte", "minquadale", "brookside", "stanton",
                    "marshallton", "north star", "chapel hill", "boothwyn"],
-    "Kent": ["dover", "camden", "wyoming", "clayton", "hartly", "marydel", "cheswold", "kenton", "leipsic",
+    "Kent": ["dover", "smyrna", "camden", "wyoming", "clayton", "hartly", "marydel", "cheswold", "kenton", "leipsic",
              "little creek", "magnolia", "felton", "frederica", "harrington", "houston", "viola", "woodside",
              "bowers", "bowers beach", "rising sun", "kitts hummock", "farmington", "dover air force base"],
     "Sussex": ["georgetown", "lewes", "rehoboth", "rehoboth beach", "dewey beach", "milton", "millsboro", "seaford",
@@ -260,10 +260,26 @@ def parse_detail(page: str) -> dict | None:
 
 # ---------------------------------------------------------------- privacy
 
+# a person named after a verb of contact or an honorific in DNREC's notes ("Call Pat Example at ...", "spoke with
+# Ms. Example"): the name is cut (the blocklist and the export's redactor run again on every record)
+_HON = r"(?:Mr|Mrs|Ms|Miss|Dr)\.?"
+NAMED_PERSON = re.compile(rf"\b((?:[Cc]all(?:ed)?|[Cc]ontact(?:ed)?|[Ss]poke\s+(?:with|to)|[Tt]alked\s+(?:with|to)|"
+                          rf"[Rr]eported\s+by|[Cc]aller|[Pp]er|[Ii]nspector|[Oo]fficer|[Oo]wner|[Rr]esident|[Hh]omeowner)"
+                          rf"\s+)(?:{_HON}\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z'-]+)?|\b{_HON}\s+[A-Z][a-z'-]+")
+NOT_A_NAME = re.compile(r"^(?:the|a|an|DNREC|New|Kent|Sussex|City|Town|County|Public|Works|Special|Delaware|Artesian|"
+                        r"Tidewater|DelDOT|Dover|Newark|Wilmington)\b", re.I)
+
+
+def _cut_name(m: re.Match) -> str:
+    lead = m.group(1) or ""
+    rest = m.group(0)[len(lead):]
+    return m.group(0) if (lead and NOT_A_NAME.match(rest)) else lead + "[name removed]"
+
+
 def scrub(v: str | None) -> str | None:
     if not v:
         return v
-    return scrub_text(strip_house_numbers(v))
+    return NAMED_PERSON.sub(_cut_name, scrub_text(strip_house_numbers(v)))
 
 
 def scrub_facility(v: str | None) -> str | None:
@@ -591,6 +607,17 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
     return n
 
 
+def rescrub(state: dict) -> dict:
+    """The saved rows through today's scrub again (a rule added since they were saved applies to them too)."""
+    for e in state.get("rows", {}).values():
+        if e.get("list"):
+            e["list"] = {**e["list"], "location": scrub(e["list"].get("location")),
+                         "facility": scrub_facility(e["list"].get("facility"))}
+        if e.get("detail"):
+            e["detail"] = safe_detail(e["detail"])
+    return state
+
+
 def build(state: dict, fetched_at: str) -> tuple[list[dict], dict]:
     recs, reasons = [], {}
     for e in state["rows"].values():
@@ -616,12 +643,12 @@ def run(args) -> int:
     now = now_iso()
     now_dt = datetime.fromisoformat(now.replace("Z", "+00:00"))
     if args.file:
-        state = json.loads(open(args.file).read())
+        state = rescrub(json.loads(open(args.file).read()))
         recs, reasons = build(state, now)
         write_events(SOURCE_ID, recs, meta={**META, "counts": reasons}, path=args.out)
         print(f"{SOURCE_ID}: {len(recs)} records from {args.file}")
         return 0
-    state = read_json(STATE_PATH, None) or {"format": SAFE_FORMAT, "rows": {}}
+    state = rescrub(read_json(STATE_PATH, None) or {"format": SAFE_FORMAT, "rows": {}})
     client = Client()
     counts = {}
     try:

@@ -255,7 +255,7 @@ def records(state: dict, fetched_at: str) -> list[dict]:
                    "end_basis": "the City's notices give no end and the City publishes no lift",
                    "cause_text": p.get("cause_text"), "sampling_text": p.get("sampling_text"),
                    "stretch_text": p.get("stretch_text"), "release_text": p.get("text"),
-                   "county": "Florence", "first_seen_at": v.get("first_seen_at"),
+                   "county": "Florence", "town": "Florence", "first_seen_at": v.get("first_seen_at"),
                    "_last_seen_in_source": v.get("last_seen_at")}
             if p.get("aliases_seen"):
                 raw["water_alias"] = {a: ALIASES[a] for a in p["aliases_seen"]}
