@@ -54,7 +54,8 @@ import json
 import re
 import sys
 import time
-from datetime import date
+from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
 
@@ -102,7 +103,6 @@ SAME_DAY = re.compile(r"within hours|in under an hour|under an hour|within an ho
 SIGNS_UP = re.compile(r"[Ss]igns warning the public\s*[“\"](?P<q>[^”\"]+)[”\"]\s*(?:will be|have been|were)"
                       r"\s+placed")
 SIGNS_DOWN = re.compile(r"\b(?:signs?)\b[^.]*\b(?:will be|have been|were)\s+removed|\bwill be removed\b", re.I)
-UNTIL = re.compile(r"[^.]*\b(?:remain in place|until the area)\b[^.]*\.", re.I)
 
 
 def slug(s: str) -> str:
@@ -156,6 +156,23 @@ def parse_page(page: str) -> dict:
     return {"title": title, "intro": " ".join(intro), "updates": updates}
 
 
+def page_reads(parsed: dict) -> bool:
+    """A spill page reads as the Council's notice when its first account names the response day or it has a dated
+    update; an error or placeholder page does neither."""
+    return bool(RESPONDED.search(parsed.get("intro") or "") or parsed.get("updates"))
+
+
+def scrubbed(o):
+    """Every string with emails, phone numbers, staff names and street house numbers removed (before any save)."""
+    if isinstance(o, dict):
+        return {k: scrubbed(v) for k, v in common.strip_personal(o).items()}
+    if isinstance(o, list):
+        return [scrubbed(v) for v in o]
+    if isinstance(o, str):
+        return common.strip_house_numbers(common.scrub_text(o))
+    return o
+
+
 def label_city_month(label: str) -> tuple[str | None, int | None, int | None]:
     m = re.match(r"^(?P<c>.+?),\s*(?P<m>[A-Za-z]+)\s+(?P<y>\d{4})$", label or "")
     if not m or m.group("m").lower() not in MONTHS:
@@ -177,8 +194,8 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         yr = lab_year if lab_month == mo else (years[0] if years else lab_year)
         if yr:
             start = date(yr, mo, dy)
-            raw["start_basis"] = ("the day the Council says it responded; the spill's own start is not given apart "
-                                  "from the response")
+            raw["start_basis"] = ("the day the Council says it responded to the spill, the only day its notice "
+                                  "gives; the spill began on that day or before it")
             if m.group("wd") and WEEKDAYS[start.weekday()] != m.group("wd").lower():
                 perr.append(f"the weekday {m.group('wd')} does not fall on {start.isoformat()}")
         else:
@@ -197,7 +214,7 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     loc = next((s for s in re.split(r"(?<=\.)\s+", intro) if re.search(r"\b(?:occurred|at the intersection|located)\b",
                                                                       s, re.I)), None)
     if loc:
-        raw["location_text"] = common.strip_house_numbers(loc)
+        raw["location_text"] = common.strip_house_numbers(common.scrub_text(loc))
     alltext = " ".join([intro] + [u["text"] for u in updates])
     # the water
     w = REACHED.search(alltext)
@@ -224,12 +241,23 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     # the spill's own stop
     stopped = None
     if start:
-        for s in STOP.finditer(alltext):
-            sent = s.group(0)
-            wd = re.search(r"\b(" + "|".join(WEEKDAYS) + r")\b", sent, re.I)
-            if SAME_DAY.search(sent) or (wd and wd.group(1).lower() == WEEKDAYS[start.weekday()]):
-                stopped = start
-                raw["spill_stopped_words"] = sent.strip()
+        sections = [(start, intro)] + [(date.fromisoformat(u["date"]), u["text"]) for u in updates]
+        for when, text in sections:
+            for sm in STOP.finditer(text):
+                sent = sm.group(0)
+                wd = re.search(r"\b(" + "|".join(WEEKDAYS) + r")\b", sent, re.I)
+                if wd:      # the weekday named, on or before the section's own date (a later week is not the start day)
+                    back = (when.weekday() - WEEKDAYS.index(wd.group(1).lower())) % 7
+                    on = when - timedelta(days=back)
+                elif SAME_DAY.search(sent) and when == start:
+                    on = start
+                else:
+                    continue
+                if on == start:
+                    stopped = start
+                    raw["spill_stopped_words"] = sent.strip()
+                    break
+            if stopped:
                 break
     if stopped:
         raw["spill_stopped_on"] = stopped.isoformat()
@@ -238,21 +266,35 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
                for x in [SIGNS_UP.search(u["text"])] if x), None)
     down = next((u for u in updates if SIGNS_DOWN.search(u["text"])), None)
     status, ended, advice = ("ended" if stopped else "unknown"), (stopped.isoformat() if stopped else None), None
+    window_h, window_basis = None, None
     if up:
         quote = up[1].group("q").strip()
-        until = UNTIL.search(alltext)
-        advice = f"Signs: \"{quote}\"." + (f" {until.group(0).strip()}" if until else "")
+        advice = f"The Council's signs at the affected areas: \"{quote}\" (its notice of {up[0]})."
         raw["signs"] = {"wording": quote, "posted_per_notice_of": up[0]}
         if down:
-            status, ended = "advisory_lifted", down["date"]
-            raw["signs"]["removal_per_notice_of"] = down["date"]
-            raw["ended_at_precision"] = "day"
-            raw["end_basis"] = (f"the Council's update of {down['date']} says the signs will be removed (the removal's "
-                                "own day is not given; the notice day bounds it); the spill itself "
-                                + (f"stopped on {stopped.isoformat()}" if stopped else "has no stated end"))
+            raw["signs"]["removal_announced_on"] = down["date"]
+            raw["signs"]["removal_note"] = ("the update says the signs will be (or have been) removed; the removal's "
+                                            "own day is not given")
+            if stopped:
+                # the spill ended on its day; the Council's window runs on to the end of the day it announced removal
+                tz = ZoneInfo(TZ)
+                stop_end = datetime.combine(stopped + timedelta(days=1), datetime.min.time(), tz)
+                sign_end = datetime.combine(date.fromisoformat(down["date"]) + timedelta(days=1), datetime.min.time(), tz)
+                window_h = max(0.0, (sign_end - stop_end).total_seconds() / 3600)
+                window_basis = (f"the Council's \"{quote}\" signs stood from its notice of {up[0]} until its update of "
+                                f"{down['date']} said they would be removed (to the end of that day)")
+                raw["ended_at_precision"] = "day"
+                raw["end_basis"] = "the Council's account puts the stop on the day it responded"
+            else:
+                status, ended = "advisory_lifted", down["date"]
+                raw["ended_at_precision"] = "bound"
+                raw["end_basis"] = (f"no stop is given; the Council's update of {down['date']} says its signs will be "
+                                    "removed: the window ends with that day")
         else:
             status, ended = "advisory_active", None
-            raw["end_basis"] = "the signs stand until the Council says they are removed"
+            raw["end_basis"] = "the Council's signs stand until an update says they are removed"
+            if stopped:
+                raw["end_basis"] += f"; the spill itself stopped on {stopped.isoformat()}"
     elif stopped:
         raw["ended_at_precision"] = "day"
         raw["end_basis"] = "the Council's account puts the stop on the day it responded"
@@ -275,7 +317,8 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER_NAME, waterbody_text=waterbody,
         started_at=start.isoformat() if start else None, ended_at=ended, time_precision="day",
         source_updated_at=newest, fetched_at=fetched, material="untreated sewage", authority=AUTHORITY,
-        advice_text=advice, source_url=item["url"], raw=raw, parse_error="; ".join(perr) or None)
+        advice_text=advice, advice_window_hours=window_h, advice_window_basis=window_basis, source_url=item["url"],
+        raw=raw, parse_error="; ".join(perr) or None)
 
 
 def build(index_page: str, pages: dict[str, str | None], fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
@@ -292,7 +335,14 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
                 out[p["event_id"]] = p
             unread.append(it["url"])
             continue
-        rec = build_one(it, parse_page(page), fetched, prev_by_url.get(it["url"]))
+        parsed = parse_page(page)
+        if not page_reads(parsed):
+            if it["url"] in prev_by_url:            # a page that is not the notice (an error page): keep the record
+                p = prev_by_url[it["url"]]
+                out[p["event_id"]] = p
+                unread.append(it["url"])
+                continue
+        rec = build_one(it, parsed, fetched, prev_by_url.get(it["url"]))
         if not rec["raw"].get("county"):
             no_county.append(rec["raw"].get("city"))
         out[rec["event_id"]] = rec
@@ -348,10 +398,12 @@ def main(argv=None) -> int:
                     pages[it["url"]] = fetch(it["url"])
                 except requests.RequestException:
                     pages[it["url"]] = None
-            save_raw(SOURCE_ID, json.dumps({"index": parse_index(index),
-                                            "pages": {u: (parse_page(p) if p else None) for u, p in pages.items()}},
-                                           indent=1), "json")
+            save_raw(SOURCE_ID, json.dumps(scrubbed({"index": parse_index(index),
+                                                     "pages": {u: (parse_page(p) if p else None)
+                                                               for u, p in pages.items()}}), indent=1), "json")
         recs, meta = build(index, pages, fetched, prev)
+        if meta["pages_unread"]:
+            raise RuntimeError(f"spill pages not read: {', '.join(meta['pages_unread'])}")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)

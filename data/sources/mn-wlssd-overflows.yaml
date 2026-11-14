@@ -40,6 +40,7 @@ fetch:
   bounds: [-97.3, 43.4, -89.4, 49.45]      # Minnesota; a point outside is not used (raw._coords_rejected)
   safe_fields: [OBJECTID, OverflowDate, FacilityType, GlobalID, ReleaseAmount, StateWaters, _x, _y]
   round_coords: 3
+  free_text: [FacilityType, ReleaseAmount, StateWaters]
   record:
     source_record_id: GlobalID
     started_at: {field: OverflowDate, parse: epoch_ms, midnight: date}
