@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1461 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1471 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -47,7 +47,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
 | mo | 6 | 0 | 5 | 2 | 0 | 13 |
-| **all** | **525** | **234** | **426** | **203** | **73** | **1461** |
+| ks | 4 | 0 | 4 | 1 | 1 | 10 |
+| **all** | **529** | **234** | **430** | **204** | **74** | **1471** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1694,3 +1695,18 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mo-swim-guide` | Swim Guide Missouri state park beaches | watch | search_only | prior_art | Lists Missouri state park beaches; most show 'No data available'. |
 | `mo-dnr-environmental-concern` | Missouri DNR environmental concern / 24-hour spill line | rejected | fetched | events | Intake only (573-634-2436); no public list. |
 | `mo-msdis-npdes-outfalls` | MSDIS MO_NPDES_Outfalls (University of Missouri copy) | rejected | search_only | outfalls | Copy of the DNR layer; use the DNR source. |
+
+## ks: Kansas (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ks-kdhe-hab-status` | KDHE HAB Status service (Lake Points, Lake Status) | used | fetched | advisories | Read by ingest/ks_kdhe_hab.py: lakes under a Hazard, Warning or Watch, dated to the polls that list them. |
+| `ks-kdhe-stream-advisories` | KDHE stream advisories (news flash RSS) | used | fetched | advisories | Read by ingest/ks_kdhe_stream_advisories.py: issue and rescission pairs; the archive is what has been kept since the first read. |
+| `ks-law-kar-28-16-27` | K.A.R. 28-16-27: emergency or accidental discharge of sewage; report to the department | used | fetched | law | Immediate report to KDHE; planned bypass needs 7 days' notice and approval; no public notice. |
+| `ks-leavenworth-sso-transparency` | City of Leavenworth Sanitary Sewer Overflow Transparency Reports and per-event SSO pages | used | fetched | events | Read by ingest/ks_leavenworth_sso.py: the City's page per overflow, 2020 to 2026. |
+| `ks-kdhe-monitoring-sites` | KDHE Surface Water Monitoring Sites (lakes and streams) | watch | search_only | monitoring | Station locations for bacteria context; not an advisory source. |
+| `ks-kdhe-spills-dasc` | KDHE reported spills map layer (Spills_DASC) | watch | fetched | events | A lead: not a sewer-overflow record (few sewage rows, approximate points); registered and watched. |
+| `ks-topeka-stream-advisories` | City of Topeka stream advisories (Utilities, topeka.org news) | watch | search_only | advisories | City news answered 403 in the research; registered, not read. |
+| `ks-ug-kck-consent-decree` | Unified Government of Wyandotte County/Kansas City, Kansas: consent decree (2013) and overflow control plan | watch | search_only | permits | Collection System Release Response Plan under the decree; no public notice channel found. |
+| `ks-kdhe-incident-report` | KDHE incident report form and spill line | rejected | search_only | events | Intake form; no public incident list found. |
+| `ks-kdhe-hab-page` | KDHE HAB page and CivicAlerts press releases | unreachable | search_only | advisories | Answers 403 to automated clients (2026-11-14); the map layer carries the same lakes. |
