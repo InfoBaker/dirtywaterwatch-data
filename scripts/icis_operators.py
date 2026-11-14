@@ -166,7 +166,9 @@ def build(cfg: dict, dis: list[dict]) -> tuple[list[dict], Counter]:
             name, basis = c["permittee_as_recorded"], "EPA ICIS-NPDES permittee (private-utility candidates)"
         elif c.get("permittee_as_recorded") == REMOVED:
             fac = c.get("facility") if c.get("facility") not in (None, REMOVED) else None
-            groups[f"withheld:{p}"] = {"name": f"{tidy(fac, words)} (permit {p})" if fac else f"Sewage plant, permit {p}",
+            shown = (cfg.get("withheld_name") or {}).get(p) or (f"{tidy(fac, words)} (permit {p})" if fac
+                                                                 else f"Sewage plant, permit {p}")
+            groups[f"withheld:{p}"] = {"name": shown,
                                        "legal_form": "facility (permittee not named)", "permits": [p], "private": True,
                                        "basis": "EPA's permittee name reads as an individual's: not named here"}
             continue
