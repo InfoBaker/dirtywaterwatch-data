@@ -129,3 +129,79 @@ def test_a_water_outside_the_crosswalk_keeps_its_name_and_the_page_names_no_pers
     assert ex["raw"]["placement_hint"]["county"] is None and "crosswalk" in ex["raw"]["placement_note"]
     for text in (NOV25, AUG26):
         assert not re.search(r"@|\(\d{3}\)\s*\d{3}-\d{4}", text)
+
+
+# ---- the registry rows -----------------------------------------------------------------------------------------
+
+def _ops():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "NV"]
+
+
+def test_every_nevada_permit_is_in_exactly_one_row():
+    from collections import Counter
+    every = Counter(p for r in json.loads((ROOT / "data" / "dischargers.json").read_text())
+                    for p in dict.fromkeys([r.get("npdes_permit"), *(r.get("npdes_permits") or [])]) if p)
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "NV"}
+    cand = json.loads((ROOT / "research" / "nv" / "private-utilities-candidates.json").read_text())
+    wanted = plants | {c["npdes_permit"] for c in cand["candidates"]}
+    assert all(every[p] == 1 for p in wanted), [p for p in wanted if every[p] != 1]
+    held = {p for r in _ops() for p in r["npdes_permits"]}
+    assert "AZ0025160" not in held and wanted - held == {"AZ0025160"}      # Hoover Dam stays with Arizona's row
+    sparks = next(r for r in _ops() if r["id"] == "nv-city-of-sparks")
+    assert sparks["npdes_permits"] == [] and sparks["kind"] == "collection_system"
+
+
+def test_nevada_legal_forms_and_channels():
+    from ingest import dischargers_schema as DS
+    rows = _ops()
+    assert not DS.check_legal_forms(rows)
+    fed = {r["id"] for r in rows if r["legal_form"] == "federal facility"}
+    assert fed == {"nv-hawthorne-army-depot", "nv-nnsa-north-las-vegas", "nv-naval-air-station-fallon"}
+    for r in rows:
+        local = r["legal_form"] in ("city", "county", "special district")
+        assert ("NRS 445A.467 (2025) requires" in r["notification_channel"]) == local, r["id"]
+        assert not re.search(r"\bAmentum\b", r["name"])                    # a contractor is not the operator's name
+
+
+def test_nevada_register_rows():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
+    for r in _ops():
+        row = reg[f"{r['id']}-ndep-report"]
+        assert row["urls"] == [] and row["barrier"] == "no_web_page" and row["records"] is False
+        assert row["basis_kind"] == ("law" if r["legal_form"] in ("city", "county", "special district") else "permit")
+    assert reg["nv-state-parks-hab"]["feed_source_id"] == "nv-state-parks-hab"
+    assert reg["nv-ndep-sewage-notice"]["basis_kind"] == "law" and "445A.467" in reg["nv-ndep-sewage-notice"]["legal_basis"]
+    assert reg["nv-ndep-hab-dashboard"]["barrier"] == "image_only"
+    assert reg["nv-ndep-hab-email"]["barrier"] == "no_web_page"
+    assert reg["nv-city-of-reno-spill-line"]["barrier"] == "phone_only"
+    assert reg["nv-ndep-hab-program"]["monitored"] and reg["nv-nps-lake-mead-habs"]["monitored"]
+
+
+def test_nevada_rules_row_and_text():
+    nv = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["NV"]
+    assert nv["hours"] is None and "NRS 445A.467" in nv["source"] and "71.9(b)" in nv["source"]
+    assert not re.search(r"\b(safe|clean)\b", nv["basis"], re.I)
+    t = (ROOT / "research" / "nv" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: NV\nname: Nevada\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t
+    assert "NRS 445A.467" in t and "West Wendover" in t and "No sewage discharge report is published" in t
+
+
+def test_nevada_missing_waters_list():
+    d = json.loads((ROOT / "research" / "nv" / "receiving-waters-missing.json").read_text())
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["NV"]["waters"]
+    national = {w["key"] for w in nat}
+    assert d["state"] == "NV" and d["waters"] == len(d["rows"])
+    for r in d["rows"]:
+        assert r["name"].lower() not in national and r["county"]
+        # the batch may resolve a name to a record; a resolved name is listed under "resolved" with its record
+        assert r.get("sources") or r.get("resolved")
+    assert {r["name"] for r in d["rows"]} | {r["name"] for r in d.get("resolved", [])} >= {
+        "Lahontan Reservoir", "Rye Patch Reservoir", "Marlette Lake", "Washoe Lake"}
+    for name in P.WATERS:                                    # every water the crosswalk knows is listed with its county
+        assert any(r["name"] == name and r["county"] == P.WATERS[name][0] for r in d["rows"] + d.get("resolved", []))
