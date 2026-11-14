@@ -7,7 +7,8 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
                Florida by its Eastern-Central boundary (florida_zone), South Dakota, Nebraska and Kentucky by the county
                files of data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone;
                Kentucky's forty-one Central-time counties, 49 CFR 71.5(c)), Oregon by Malheur County (oregon_zone),
-               Tennessee by its county (a name, or the county a point lies in: tennessee_zone). Any other state gets
+               Tennessee by its county (a name, or the county a point lies in: tennessee_zone), Kansas by its county
+               (49 CFR 71.7(d): kansas_zone). Any other state gets
                STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
@@ -173,6 +174,51 @@ def tennessee_zone(county=None, lat=None, lon=None) -> str:
         return CENTRAL
 
 
+# Kansas (49 CFR 71.7(d), read in eCFR 2026-11-14): the Central-Mountain line runs along the east lines of Sherman,
+# Wallace, Greeley and Hamilton counties (with the north lines of Sherman, Logan's west part and Wichita between them),
+# so those four counties keep Mountain time and the other 101 Central; no county is split. A record's county is its
+# own county field when the source gives one, else the county whose Census outline (data/reference/ks-counties.json,
+# scripts/ks_counties.py) holds its point; with neither it is Central (the state's larger part).
+KS_MOUNTAIN_COUNTIES = frozenset({"SHERMAN", "WALLACE", "GREELEY", "HAMILTON"})
+
+
+@functools.lru_cache(maxsize=1)
+def _ks_county_shapes():
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    from shapely.validation import make_valid
+    p = Path(__file__).resolve().parents[1] / "data" / "reference" / "ks-counties.json"
+    doc = json.loads(p.read_text())
+    return [(c["county"], make_valid(shape(c["geometry"]))) for c in doc["counties"]]
+
+
+def ks_point_county(lat, lon) -> str | None:
+    """The Kansas county a point lies in ('Sherman County'), or None (outside Kansas, or no point)."""
+    if lat is None or lon is None:
+        return None
+    from shapely.geometry import Point
+    pt = Point(float(lon), float(lat))
+    for county, g in _ks_county_shapes():
+        if g.covers(pt):
+            return county
+    return None
+
+
+def kansas_zone(county=None, lat=None, lon=None) -> str:
+    """Kansas's zone: Mountain in the four KS_MOUNTAIN_COUNTIES (by the county's name when given, else by the county the
+    point lies in), Central elsewhere and when neither is given."""
+    c = tn_county_key(county) if county and str(county).strip() else None
+    if c is None:
+        try:
+            pc = ks_point_county(lat, lon)
+        except (OSError, ImportError, ValueError):
+            pc = None
+        c = tn_county_key(pc) if pc else None
+    return MOUNTAIN if c in KS_MOUNTAIN_COUNTIES else CENTRAL
+
+
 def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     """The IANA zone for a record of this state at this point (module docstring); None for an unknown state."""
     st = (state or "").upper()
@@ -182,6 +228,8 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
         return oregon_zone(lat, lon)
     if st == "TN" and lat is not None and lon is not None:
         return tennessee_zone(lat=lat, lon=lon)
+    if st == "KS" and lat is not None and lon is not None:
+        return kansas_zone(lat=lat, lon=lon)
     if st in ("SD", "NE", "KY") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
