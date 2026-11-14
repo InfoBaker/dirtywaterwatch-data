@@ -130,6 +130,11 @@
 #                  VA, DC)
 #                  (ingest/rainfall.py -> data/build/rainfall.json, rainfall-history.json); feeds the
 #                  "discharge likely; no report received" caution (docs/rain-likely.md)
+#   make rain-history  each combined sewer operator's rain levels ("possible", "likely") from its own dated
+#                  overflow reports against NOAA MRMS daily rain at its outfalls (build/rain_history.py ->
+#                  data/build/rain-levels.json; the seed copy is data/rain-levels.json). make build runs it with
+#                  --if-older-h 20, so the hourly refresh makes it a daily pass; at most 1500 point-service requests
+#                  a run (--budget), the rest continue from the cache on the next run
 #   make rain-thresholds  per-permittee rainfall thresholds from the MassDEP reports
 #                  (build/rain_thresholds.py -> data/build/rain-thresholds.json; run by make build)
 #   make rain-thresholds-radar  Georgia and Michigan operators' amounts from the radar on their discharge days
@@ -165,7 +170,7 @@
 # Until `make setup` has run, the openboatlaunch venv next door is used; `make test` uses it too
 # while pipeline/.venv has no pytest (`make setup` installs it).
 
-.PHONY: setup obl-sync ingest waters-nhd conditions rainfall rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
+.PHONY: setup obl-sync ingest waters-nhd conditions rainfall rain-history rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
 
 VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
@@ -241,6 +246,9 @@ conditions:
 rainfall:
 	$(PY) -m ingest.rainfall
 
+rain-history:
+	$(PY) -m build.rain_history
+
 rain-thresholds:
 	$(PY) -m build.rain_thresholds
 
@@ -260,6 +268,7 @@ fixtures:
 	$(PY) -m build.fixtures
 
 build: $(if $(filter 1 yes true,$(FIXTURES)),fixtures,)
+	cd pipeline && $(TIMED) rain-history $(PYTHON) -m build.rain_history --if-older-h 20 || echo "!! rain history failed; the previous file stays"
 	cd pipeline && $(TIMED) rain-thresholds $(PYTHON) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
 	cd pipeline && $(TIMED) status $(PYTHON) -m build.status $(FIXTURE_FLAG) --live-only
 

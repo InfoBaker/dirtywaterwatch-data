@@ -3996,6 +3996,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             **({"permit": iv.get("permit"), "rain": iv["rain"]} if iv.get("rain") else {}),
                             # which amount set it: operator, state or default (the label follows it)
                             **({"trigger_basis": iv.get("trigger_basis")} if iv["rule"] == "rain_likely" else {}),
+                            # the level the label follows, where the operator levels are loaded (rain_likely.LEVELS)
+                            **({"level": iv["level"]} if iv["rule"] == "rain_likely" and iv.get("level") else {}),
                             **({k: iv.get(k) for k in ("days", "events", "month", "received_at", "retrieved_at",
                                                        "monthly_label")} if iv["rule"] == "monthly" else {})})
         have = {r["event_id"] for r in reasons}
@@ -4023,8 +4025,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         # and badge do (rain_likely.strongest_basis); every other reason keeps its place
         at = [i for i, r in enumerate(reasons) if r["rule"] == "rain_likely"]
         if len(at) > 1:
-            rank = {b: n for n, b in enumerate(rain_mod.TRIGGER_BASES)}
-            for i, r in zip(at, sorted((reasons[i] for i in at), key=lambda r: rank.get(r.get("trigger_basis"), len(rank)))):
+            # by level first where the reasons carry one ("likely" before "possible"), else by basis as before
+            for i, r in zip(at, sorted((reasons[i] for i in at), key=rain_mod.reason_rank)):
                 reasons[i] = r
         by_cat = {c: "grey" for c in CATEGORIES}
         for r in reasons:
@@ -4095,6 +4097,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             # the amount behind the reach's rain caution now (operator, state, default), else None
                             "rain_trigger_basis": rain_mod.strongest_basis(iv.get("trigger_basis") for iv in act
                                                                             if iv["rule"] == "rain_likely"),
+                            **({"rain_level": rain_mod.strongest_level(iv.get("level") for iv in act
+                                                                       if iv["rule"] == "rain_likely")}
+                               if any(iv.get("level") for iv in act if iv["rule"] == "rain_likely") else {}),
                             **({"model": SH.MODEL, "states": r.get("states") or [], "waters": r.get("waters") or []}
                                if r.get("model") == SH.MODEL else {}),
                             # an advisory's named stretch: its own kind and category, the advisory and both ends
@@ -4187,7 +4192,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         "restricted_included": include_restricted, "withheld_sources": withheld,
         "rules": {k: {"status": v[0], "label": v[1],
                       # the caution's label by which amount applied (build/rain_likely.py label_by_basis)
-                      **({"label_by_basis": rain_mod.labels(rules)} if k == "rain_likely" else {})}
+                      **({"label_by_basis": rain_mod.labels(rules)} if k == "rain_likely" else {}),
+                      **({"label_by_level": rain_block["label_by_level"]}
+                         if k == "rain_likely" and rain_block.get("label_by_level") else {})}
                   for k, v in RULES.items()},
         "advisory_windows": {"file": "data/rules.json", "version": rules.get("version")},
         "constants": {"advisory_no_end_days": ADVISORY_NO_END_DAYS, "confirm_days": CONFIRM_DAYS,
