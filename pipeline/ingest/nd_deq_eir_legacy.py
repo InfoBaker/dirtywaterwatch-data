@@ -1,5 +1,5 @@
 """North Dakota Department of Environmental Quality: General Environmental Incidents, historical (1975 to 2020), the
-sewage rows -> data/build/events/nd-deq-eir-legacy.json
+sewage rows -> data/build/events/nd-deq-eir-legacy-general.json
 
 Source
   https://deq.nd.gov/FOIA/Spills/defaultarc.aspx/ (registry: nd-deq-eir-legacy-general; the trailing slash is part of
@@ -55,7 +55,7 @@ import requests
 import zones
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
 
-SOURCE_ID = "nd-deq-eir-legacy"
+SOURCE_ID = "nd-deq-eir-legacy-general"
 URL = "https://deq.nd.gov/FOIA/Spills/defaultarc.aspx/"
 REPORTS_URL = "https://deq.nd.gov/WQ/4_Spill_Investigations/Reports.aspx"
 AUTHORITY = "North Dakota Department of Environmental Quality (General Environmental Incidents, historical 1975-2020)"
