@@ -6,14 +6,15 @@ kind: "html"
 level: "operator"
 # Ingester: pipeline/ingest/wi_mmsd_storm_updates.py (source id wi-mmsd-storm-updates): the news list two pages deep
 #   every refresh (eight posts), each Storm Update post once (again when its title or stamp changes), rules only.
-# Read 2026-11-14 (the whole list, 71 pages): 281 posts on mmsd.com since 2016, 18 of them Storm Updates or overflow
-#   letters to the DNR from 2018-06-22 to 2026-09-08, which give 26 dated reports: 13 combined sewer overflows and 13
-#   separate sewer overflows or overflows the post does not call combined (typed sso, the basis stated). 16 carry
-#   MMSD's volume; 2 a stated start and end to the minute (April 2-4, 2024; February 27 to March 1, 2023); 2 name a
-#   water (Lincoln Creek, September 3, 2026; the four separate sewer overflows of September 11-12, 2022).
+# Read 2026-11-14 (the whole list, 71 pages): 281 posts on mmsd.com since 2016, 21 of them read: 18 Storm Updates or
+#   overflow letters to the DNR and 3 spill or release notices, from 2018-06-22 to 2026-09-08, which give 29 dated
+#   reports: 13 combined sewer overflows, 14 separate sewer overflows or overflows the post does not call combined (5
+#   typed sso with the basis stated) and 2 spills at a treatment plant (plant_bypass; one says no wastewater reached
+#   a water). 18 carry MMSD's volume; 3 a stated start and end to the minute; 3 name a water (Lincoln Creek twice,
+#   the four separate sewer overflows of September 11-12, 2022).
 # Times: the post's own stamp (Milwaukee time) is the publication; the start is the date or time the post states, the
 #   storm's last day is kept apart (raw.period_end) and is never the end. Posted 1 to 10 days after the overflow began
-#   (median 5 days over the 18 posts): the September 3, 2026 overflow on September 8, the August 1 overflow on August 6.
+#   (median 5 days over the 21 posts): the September 3, 2026 overflow on September 8, the August 1 overflow on August 6.
 #   A report dated to the day with no end gets the site's 72-hour caution from that day (unresolved.day_start_caution),
 #   so by the time a post appears its caution has usually run; the record stays in the water's history.
 # Placement: a combined sewer overflow that names no water is shown on every water MMSD's permitted outfalls discharge

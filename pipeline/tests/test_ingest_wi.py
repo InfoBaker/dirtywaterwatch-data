@@ -263,6 +263,13 @@ def test_every_wisconsin_permit_is_in_exactly_one_row():
     by = {r["id"]: r for r in rows}
     m = by["wi-mmsd"]
     assert m["npdes_permits"] == ["WI0036820"] and m["kind"] == "cso" and m["outfall_count"] == 114
+    # a facility placeholder with no outfall number is not an outfall (Astra review P2-11)
+    plants = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+    for r in rows:
+        if r["kind"] == "plant":
+            n = len({(x["npdes_permit"], x["outfall"]) for x in plants if x.get("state") == "WI"
+                     and x["npdes_permit"] in r["npdes_permits"] and x.get("outfall") not in (None, "")})
+            assert r["outfall_count"] == (n or None)
     assert {"wi-milwaukee-metro-sew-dist-combi", "wi-mmsd-sso"} <= set(m["aliases"]) and m["legal_form"] == "special district"
     assert by["wi-superior-sewage-disposal-system"]["outfall_count"] == 3
     assert by["wi-fremont-sso"]["npdes_permits"] == ["WI0026158"]
@@ -284,13 +291,17 @@ def test_register_rows_per_operator_and_the_state_channels():
             assert reg[f"{r['id']}-epa-report"]["barrier"] == "no_web_page"
         else:
             row = reg[f"{r['id']}-nr210-notice"]
-            assert row["operator_id"] == r["id"] and "NR 210.21(5)" in row["legal_basis"] and row["barrier"] == "print_only"
+            # the newspaper minimum alone does not show a notice is printed only (Astra review P2-12)
+            assert row["operator_id"] == r["id"] and "NR 210.21(5)" in row["legal_basis"] and row["barrier"] == "not_verified"
     assert reg["wi-mmsd-storm-updates"]["feed_source_id"] == "wi-mmsd-storm-updates"
     assert reg["wi-dnr-switchboard-sso-reports"]["barrier"] == "login_required"
     assert reg["wi-mmsd-cso-notification-plan"]["barrier"] == "image_only"
     assert reg["wi-mmsd-rain-facility-page"]["records"] is False      # a counter, never an overflow
-    for cid in ("wi-superior-cso-page", "wi-dnr-serts-open-spills", "wi-dnr-beach-health"):
-        assert reg[cid]["monitored"] is True and reg[cid]["records"] is False
+    assert reg["wi-superior-cso-page"]["monitored"] is True and reg["wi-superior-cso-page"]["records"] is False
+    # pages that can carry staff names are not fetched until a safe-field reader exists (Astra review P1-6)
+    for cid in ("wi-dnr-serts-open-spills", "wi-dnr-brrts-search", "wi-dnr-beach-health", "wi-dnr-beach-layer"):
+        assert reg[cid]["monitored"] is False and reg[cid]["records"] is False
+    assert not any(c["barrier"] == "print_only" for c in reg.values())
     named = {c["operator_id"] for c in reg.values() if c.get("legal_basis") and "122.38" in c["legal_basis"]}
     assert {"wi-mmsd", "wi-superior-sewage-disposal-system"} <= named   # every CSO permittee named
 
@@ -311,7 +322,11 @@ def test_state_text_is_in_the_page_shape_and_its_numbers_match_the_fetch():
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
-    assert "18 such posts" in t and "26 reports" in t and "13 combined sewer overflows" in t
+    # the counts the text gives, re-derived from the fixture's posts where it holds them all (the 2026 posts)
+    assert "21 such posts" in t and "29 reports" in t and "13 combined sewer overflows" in t
+    assert "2 spills at treatment plants" in t and "one to ten days" in t and "sends none" not in t
+    reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
+    assert not [c["id"] for c in reg if "four to ten days" in (c.get("note") or "")]
     assert "331,500 gallons into Lincoln Creek on September 3, 2026, posted on September 8" in t
 
 

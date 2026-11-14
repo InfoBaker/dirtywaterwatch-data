@@ -52,6 +52,11 @@ FEED = "wi-mmsd-storm-updates"
 LAW = "wi-law-nr-210-21"
 INSTR = "https://dnr.wisconsin.gov/sites/default/files/topic/Wastewater/WW_SSOFormInstructions.pdf"
 ECHO = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+# rows that would carry people's names (SERTS's coordinator, a health department's contact) are not fetched until a reader
+# keeps only safe fields: the register's page monitor saves the page it reads (Astra review 2026-11-14 P1-6)
+UNREACHED_NOT_WATCHED = (" On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second "
+                         "network (refused). Not fetched: its pages can carry staff names, and no reader that keeps only "
+                         "safe fields exists yet (channel not verified in the research beyond the expansion pass).")
 UNREACHED = (" On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network "
              "(connection refused); the row is watched so the refresh records when it answers.")
 Q_NR210 = ('s. NR 210.21(5), Wis. Adm. Code, as the DNR\'s form 3400-184 instructions give it: "All overflows (SSOs & '
@@ -74,8 +79,8 @@ AGENCY = [
      "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "feed_ingested",
      "feed_source_id": FEED, "publishes": "notices", "noun": "Data feed",
      "note": ("MMSD's Storm Update posts: what MMSD reported to the DNR after each overflow of its regional system, with "
-              "the dates, the volume and the letter; 18 posts from 2018-06-22 to 2026-09-08 among 281 news posts "
-              "(2026-11-14), posted four to ten days after the overflow began (the September 3, 2026 overflow on "
+              "the dates, the volume and the letter, and its spill and release notices; 21 posts from 2018-06-22 to 2026-09-08 among 281 news posts "
+              "(2026-11-14), posted one to ten days after the overflow began (the September 3, 2026 overflow on "
               "September 8). Read by the wi-mmsd-storm-updates feed. (research/wi/report.md §2.3)"),
      "sources": [FEED]},
     {"id": "wi-mmsd-rain-facility-page", "operator_id": MMSD, "name": "Milwaukee Metropolitan Sewerage District",
@@ -150,7 +155,7 @@ AGENCY = [
      "note": ("Every sanitary sewer and treatment facility overflow, public or private system, is reported to the DNR "
               "within 24 hours and on form 3400-184 (date, location, duration, volume, receiving water, coordinates "
               "and how the public was told) within five business days, through Switchboard, which only permittees "
-              "can open. The DNR publishes none of it and sends none to EPA's tables. (research/wi/report.md §1)"),
+              "can open. The DNR publishes none of it, and EPA's tables held no Wisconsin report on 2026-11-12. (research/wi/report.md §1)"),
      "sources": ["wi-wdnr-sso-report-page", "wi-wdnr-sso-form-instructions"]},
     {"id": "wi-dnr-sso-report-page", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (sanitary sewer overflow reporting page)",
@@ -164,42 +169,42 @@ AGENCY = [
     {"id": "wi-dnr-serts-open-spills", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (SERTS open spill incidents)",
      "channel_kind": "state_alert_page", "urls": ["https://apps.dnr.wi.gov/rrbotw/sp-openspillincidents"],
-     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True,
-     "unmonitored_reason": None, "publishes": "notices", "records": False, "every_hours": 24,
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "other", "publishes": "notices", "records": False,
      "noun": "Voluntary page",
      "note": ("The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on "
               "2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, "
               "cause, the coordinator's name). Closed incidents move to the BRRTS search, so a row that leaves the list "
               "has not ended. Not ingested: its export, paging and the share of sewage overflows it holds were not "
-              "tested." + UNREACHED),
+              "tested." + UNREACHED_NOT_WATCHED),
      "sources": ["wi-wdnr-serts-open-spills"]},
     {"id": "wi-dnr-brrts-search", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (BRRTS on the Web search)",
      "channel_kind": "state_alert_page", "urls": ["https://apps.dnr.wi.gov/rrbotw/botw-search"], "method": "html",
-     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "notices", "records": False, "availability_only": True, "every_hours": 168,
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
+     "publishes": "notices", "records": False,
      "noun": "Voluntary page",
      "note": ("The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no "
-              "closed sewage query was tested." + UNREACHED),
+              "closed sewage query was tested." + UNREACHED_NOT_WATCHED),
      "sources": ["wi-wdnr-brrts-closed-spills"]},
     {"id": "wi-dnr-beach-health", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (Wisconsin Beach Health)", "channel_kind": "state_alert_page",
      "urls": ["https://apps.dnr.wi.gov/beachhealth/"], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "status",
-     "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other", "publishes": "status",
+     "records": False, "noun": "Voluntary page",
      "note": ("The DNR's beach report: advisories and closures with their reason (E. coli, algae) and dates, Great "
               "Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in "
               "season (Memorial Day to Labor Day). Not ingested: its export and the map layer's keys were not read."
-              + UNREACHED),
+              + UNREACHED_NOT_WATCHED),
      "sources": ["wi-wdnr-beach-health"]},
     {"id": "wi-dnr-beach-layer", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (beach monitoring map layer)", "channel_kind": "feed",
      "urls": ["https://dnrmaps.wi.gov/arcgis2/rest/services/OGW_Beach_Monitoring/BEACH_MONITORING_LOCATIONS/MapServer/1"],
-     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "status", "records": False, "availability_only": True, "every_hours": 24,
+     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
+     "publishes": "status", "records": False,
      "noun": "Data feed",
      "note": ("The ArcGIS layer behind the beach map: 441 beaches with STATUS, BEACH_ACTION, ISSUED, SAMPLEDATE and "
-              "ECOLIVALUE (2026-11-03), \"No Data Available\" off season." + UNREACHED),
+              "ECOLIVALUE (2026-11-03), \"No Data Available\" off season." + UNREACHED_NOT_WATCHED),
      "sources": ["wi-wdnr-beach-health"]},
     {"id": "wi-dhs-algae", "agency": "Wisconsin Department of Health Services",
      "name": "Wisconsin Department of Health Services (harmful algal blooms)", "channel_kind": "state_alert_page",
@@ -222,8 +227,8 @@ AGENCY = [
      "name": "Wisconsin sewer system owners (newspaper notices under NR 210.21(5))", "channel_kind": "news_page",
      "urls": [], "method": None, "legal_basis": Q_NR210, "basis_kind": "law", "monitored": False,
      "unmonitored_reason": "other", "publishes": "unknown", "records": False,
-     "note": ("The DNR's minimum for an overflow that reaches surface water is a notice to a daily newspaper: printed "
-              "only unless the paper or the operator also posts it. Some operators post notices on their own sites "
+     "note": ("The DNR's minimum for an overflow that reaches surface water is a notice to a daily newspaper; whether "
+              "a paper puts it on the web varies by town and paper (town pages not surveyed). Some operators post notices on their own sites "
               "(Brookfield, Hortonville, Fox Crossing, Menomonie, Stoughton, Oconomowoc, Fennimore, Greenville were "
               "found by search); there is no list of them."),
      "sources": [LAW, "wi-municipal-sso-notices"]},
@@ -284,9 +289,10 @@ def operator_rows(dis: list[dict], research: dict[str, dict]) -> list[dict]:
             id=f"{oid}-nr210-notice", operator_id=oid, name=name, permit=None, channel_kind="news_page", urls=[],
             method=None, legal_basis=Q_NR210, basis_kind="law", monitored=False, unmonitored_reason="other",
             publishes="unknown", records=False, noun="Notification page", sources=[LAW],
-            note=(f"{name} gives notice of an overflow by its emergency response plan; the DNR's minimum, a notice to "
-                  "a daily newspaper, is printed only, and its report to the DNR is not published "
-                  f"(wi-dnr-switchboard-sso-reports).{private} Its own web channel was not searched individually."))))
+            note=(f"{name} gives notice of an overflow by its emergency response plan; the DNR's minimum is a notice to "
+                  "a daily newspaper, which does not by itself say whether the notice reaches the web, and its report "
+                  f"to the DNR is not published (wi-dnr-switchboard-sso-reports).{private} Its own web channel was not "
+                  "searched individually."))))
         r = research.get(oid)
         url = (r or {}).get("notification_channel") or ""
         if url.startswith("http"):
