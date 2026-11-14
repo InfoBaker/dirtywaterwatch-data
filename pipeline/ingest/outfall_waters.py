@@ -117,6 +117,7 @@ POINT_WRONG_M = 10_000      # a point this far from its named water in the permi
 # state (Texas final audit 2026-11-07 P2-5: Dumas's TX0129500 on Brazoria County's Coon Lake, 930 km away; Glen Rose's
 # Paluxy River for two permits elsewhere): the same name names another water there. Other states unchanged.
 NAME_ONLY_CAP_M = {"TX": 25_000}
+NAME_ONLY_CAP_M["IN"] = 25_000          # Indiana: the same rule (state builder brief 2026-11-14, rule 7)
 OUTSIDE_STATE_M = 2_000     # a point this far outside its state's (shoreline-clipped) outline is outside the state
 
 # texts that name a watershed or a basin, not a water

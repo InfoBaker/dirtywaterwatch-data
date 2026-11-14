@@ -79,12 +79,22 @@ def _sample(rec: dict) -> str:
     return str((rec.get("raw") or {}).get("_sample_date") or rec.get("sampled_at") or "")
 
 
+def _kind(rec: dict) -> str:
+    """'positive' (an advisory level), 'negative' (a Low Risk level) or 'unknown' (blank or a level not known here)."""
+    lv = str((rec.get("raw") or {}).get("_level") or "").strip().lower()
+    return "positive" if lv in ADVISORY_LEVELS else "negative" if lv in LOW_LEVELS else "unknown"
+
+
 @F.hook
 def in_cyano_sequence(records: list[dict], ctx: F.Ctx) -> dict:
-    """Observed advisory intervals only; never a sample date as an advisory date (module docstring)."""
+    """Observed advisory intervals only; never a sample date as an advisory date (module docstring). A blank or unknown
+    level says nothing: it neither ends an observed advisory nor counts as a newer sample (Astra review 2026-11-14
+    P1-1). An advisory a later read restores (Low Risk or blank, then an advisory level again) reopens at that read, the
+    earlier interval kept in raw._advisory_observed.earlier_periods."""
     prev = {r["event_id"]: r for r in ctx.previous_records}
     stations: dict[str, list[dict]] = {}
-    n = {"alerts_open": 0, "alerts_lifted": 0, "alerts_continued": 0, "samples_dropped": 0, "historical": 0}
+    n = {"alerts_open": 0, "alerts_lifted": 0, "alerts_continued": 0, "samples_dropped": 0, "historical": 0,
+         "unknown_level_reads": 0}
     for r in records:
         raw = r["raw"]
         if raw.get("_station") and _sample(r):
@@ -92,13 +102,17 @@ def in_cyano_sequence(records: list[dict], ctx: F.Ctx) -> dict:
         p = prev.get(r["event_id"]) or {}
         if r["event_type"] != "hab_advisory" and p.get("event_type") != "hab_advisory":
             continue
+        praw = p.get("raw") or {}
         if r["event_type"] != "hab_advisory":
-            # a level IDEM corrected below the advisory levels: the earlier observation is kept and closed below
+            # an earlier advisory-level read of this sample now Low Risk (a correction) or blank (says nothing)
             r["event_type"] = "hab_advisory"
             raw.pop("_sample_only", None)
-            raw["_level_corrected"] = True
-            r["advice_text"] = "The advisory level previously listed for this sample is no longer present."
-        praw = p.get("raw") or {}
+            if _kind(r) == "negative":
+                r["advice_text"] = "The advisory level previously listed for this sample is no longer present."
+            else:
+                r["advice_text"] = p.get("advice_text")
+                raw["_level_unknown_this_read"] = True
+                n["unknown_level_reads"] += 1
         observed = deepcopy(praw.get("_advisory_observed") or {}) if praw.get("_advisory_clock_version") == CLOCK_VERSION else {}
         r.update(sampled_at=_sample(r) or None, started_at=None, ended_at=None, time_precision=None,
                  reported_at=None, published_at=None, source_updated_at=None, status="unknown")
@@ -109,24 +123,32 @@ def in_cyano_sequence(records: list[dict], ctx: F.Ctx) -> dict:
     for rows in stations.values():
         rows.sort(key=lambda r: (_sample(r), r["event_id"]))
         current = [r for r in rows if not r["raw"].get("_missing_from_source_since") and not r.get("duplicate_of")]
-        latest = current[-1] if current else None
+        known = [r for r in current if _kind(r) != "unknown"]
+        latest = known[-1] if known else None
         for r in rows:
             if r["event_type"] != "hab_advisory":
                 continue
             raw = r["raw"]
             observed = raw["_advisory_observed"]
-            positive = str(raw.get("_level") or "").lower() in ADVISORY_LEVELS and not raw.get("_level_corrected")
+            kind = _kind(r)
             sample = _sample(r)
-            newer = next((x for x in current if _sample(x) > sample), None)
-            if observed.get("start") and not observed.get("end") and (newer or (r in current and not positive)):
+            newer = next((x for x in known if _sample(x) > sample), None)
+            if observed.get("start") and not observed.get("end") and (newer or (r in current and kind == "negative")):
                 observed.update(end=ctx.fetched_at, end_sample=(newer or r)["source_record_id"],
                                 end_reason="a newer sample was observed" if newer else "the source corrected the level")
-                observed["continued"] = bool(newer and str(newer["raw"].get("_level") or "").lower() in ADVISORY_LEVELS)
+                observed["continued"] = bool(newer and _kind(newer) == "positive")
             try:
                 age = (ctx.fetched_dt.astimezone(ctx.tz).date() - datetime.fromisoformat(sample).date()).days
             except ValueError:
                 age = None
-            if r is latest and positive and age is not None and 0 <= age <= RECENT_SAMPLE_DAYS and not observed.get("start"):
+            recent = age is not None and 0 <= age <= RECENT_SAMPLE_DAYS
+            if r is latest and kind == "positive" and recent and (not observed.get("start") or (
+                    observed.get("end") and observed.get("end_reason") == "the source corrected the level")):
+                if observed.get("start"):          # restored after a correction: a new interval, the old one kept
+                    periods = observed.get("earlier_periods", []) + [
+                        {k: v for k, v in observed.items() if k != "earlier_periods"}]
+                    observed.clear()
+                    observed["earlier_periods"] = periods
                 observed["start"] = ctx.fetched_at
             if observed.get("start"):
                 r.update(started_at=observed["start"], time_precision="poll", ended_at=observed.get("end"),
