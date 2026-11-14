@@ -85,6 +85,13 @@ CODES = {0: "Monitoring – Current Advisory", 1: "Monitoring – Outside Adviso
          2: "Monitoring – Resampling Enterococcus Spike", 3: "Winter – Not Currently Sampling",
          4: "Monitoring – No Current Advisory"}
 POLL_CODES = {0: ("beach_advisory", "advisory"), 2: ("beach_advisory", "label")}
+# beaches of the history that no longer have a station on the layer: an inland beach is placed on its lake by name
+# (a small lake, drawn whole); a coastal beach keeps its name only and is listed, never coloured as the whole bay or
+# ocean (raw.placement_note)
+NO_STATION_WATERS = {"silverlakedoverbeach": ("Silver Lake", "Kent"),
+                     "lumspondbeachlumspondstatepark": ("Lums Pond", "New Castle")}
+COASTAL_NO_STATION = ("a beach DNREC no longer samples, with no station point on the map: listed by its name, not "
+                      "drawn on the bay or the ocean")
 LABEL_BASIS = ("DNREC resamples after a result above the enterococcus standard and has not posted an advisory: its "
                "label is quoted and the site shows its own caution, never DNREC's advisory")
 
@@ -155,11 +162,17 @@ def history_records(rows: list[dict], stations: dict[str, dict], today: date, fe
             raw["status_basis"] = f"no end date given and the start is more than {OPEN_NO_END_DAYS} days old"
         else:
             status = "advisory_active"
+        water = r.get("unitname")
         if lat is not None:
             raw["point_basis"] = "DNREC's sampling station for this beach (FirstMap, Recreational Water Sampling Location)"
+        elif norm(water) in NO_STATION_WATERS:
+            water, raw["county"] = NO_STATION_WATERS[norm(water)]
+            raw["placement_note"] = "an inland beach with no station point on the map: placed on its lake by name"
+        else:
+            raw["placement_note"] = COASTAL_NO_STATION
         recs.append(event(
             source_id=SOURCE_ID, source_record_id=f"adv-{r.get('advisoryid')}", event_type=etype, status=status,
-            waterbody_text=r.get("unitname"), outfall_name=r.get("unitname"), lat=lat, lon=lon,
+            waterbody_text=water, outfall_name=r.get("unitname"), lat=lat, lon=lon,
             coord_source="station" if lat is not None else None, coord_precision_m=100 if lat is not None else None,
             started_at=start, ended_at=end, time_precision="day" if start else None,
             fetched_at=fetched_at, authority=AUTHORITY, advice_text=comment,
