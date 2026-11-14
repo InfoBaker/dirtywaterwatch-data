@@ -7,13 +7,15 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
                Florida by its Eastern-Central boundary (florida_zone), South Dakota, Nebraska and Kentucky by the county
                files of data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone;
                Kentucky's forty-one Central-time counties, 49 CFR 71.5(c)), Oregon by Malheur County (oregon_zone),
-               Tennessee by its county (a name, or the county a point lies in: tennessee_zone). Any other state gets
+               Tennessee by its county (a name, or the county a point lies in: tennessee_zone), Idaho by its county
+               and, in Idaho County, the Salmon River (idaho_zone). Any other state gets
                STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
 from __future__ import annotations
 
 import functools
+import re
 
 EASTERN, CENTRAL, MOUNTAIN, PACIFIC = "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles"
 
@@ -173,6 +175,52 @@ def tennessee_zone(county=None, lat=None, lon=None) -> str:
         return CENTRAL
 
 
+# Idaho (49 CFR 71.9(a) and (d), eCFR read 2026-11-14): north of the main channel of the Salmon River is Pacific time,
+# the rest Mountain; "All municipalities located upon the zone boundary line ... are in the mountain standard time
+# zone". Nine northern counties lie wholly north of the line; Idaho County is split by the river (scripts/id_counties.py
+# writes the counties' outlines and Idaho County's Pacific part, cut by the U.S. DOT time-zone layer, to
+# data/reference/id-counties.json).
+ID_PACIFIC_COUNTIES = frozenset({"BENEWAH", "BONNER", "BOUNDARY", "CLEARWATER", "KOOTENAI", "LATAH", "LEWIS",
+                                 "NEZ PERCE", "SHOSHONE"})
+ID_SPLIT_COUNTY = "IDAHO"
+
+
+@functools.lru_cache(maxsize=1)
+def _id_shapes():
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    doc = json.loads((Path(__file__).resolve().parents[1] / "data" / "reference" / "id-counties.json").read_text())
+    return ([(c["county"], shape(c["geometry"])) for c in doc["counties"]],
+            shape(doc["time_zone"]["pacific_part"]))
+
+
+def idaho_zone(county=None, lat=None, lon=None) -> str:
+    """Idaho's zone: Pacific in the nine ID_PACIFIC_COUNTIES and in Idaho County north of the Salmon River, Mountain
+    elsewhere. The county, when the source gives one, decides; in Idaho County the point decides (its Pacific part), and
+    Idaho County with no point is Pacific (Grangeville, the county seat, and most of its towns lie north of the river).
+    With no county, the county the point lies in; with neither, Mountain (the state's larger part)."""
+    c = re.sub(r"\s+county\s*$", "", str(county or "").strip(), flags=re.I).upper()
+    if not c and lat is not None and lon is not None:
+        try:
+            counties, _ = _id_shapes()
+            pt = _point(float(lon), float(lat))
+            c = next((re.sub(r"\s+County$", "", n).upper() for n, g in counties if g.covers(pt)), "")
+        except (OSError, ImportError, ValueError, KeyError):
+            c = ""
+    if c in ID_PACIFIC_COUNTIES:
+        return PACIFIC
+    if c == ID_SPLIT_COUNTY:
+        if lat is None or lon is None:
+            return PACIFIC
+        try:
+            return PACIFIC if _id_shapes()[1].covers(_point(float(lon), float(lat))) else MOUNTAIN
+        except (OSError, ImportError, ValueError, KeyError):
+            return PACIFIC
+    return MOUNTAIN
+
+
 def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     """The IANA zone for a record of this state at this point (module docstring); None for an unknown state."""
     st = (state or "").upper()
@@ -182,6 +230,8 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
         return oregon_zone(lat, lon)
     if st == "TN" and lat is not None and lon is not None:
         return tennessee_zone(lat=lat, lon=lon)
+    if st == "ID" and lat is not None and lon is not None:
+        return idaho_zone(lat=lat, lon=lon)
     if st in ("SD", "NE", "KY") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
