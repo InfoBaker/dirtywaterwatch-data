@@ -28,7 +28,8 @@ Record rules (rules only; no model, no geocoding)
     overflow can have begun (raw.start_basis).
   - No end: the notices give none. When the City advises avoiding the creek "until further notice" the record is
     status ongoing with raw.status_basis (the City's advice stands; the City publishes no lift), else unknown. A
-    reassurance about sampling is kept as text, never as an end.
+    reassurance about sampling ("no threat to public health") is cut from the kept text (raw.sampling_statement_cut):
+    never an end, never repeated as a safety statement.
   - Volume: "an estimated 115,200 gallons" is volume_gal (estimated); "more than 5,000 gallons" is volume_text only
     (a lower bound, not a measurement, and never a figure per manhole).
   - Water: "on/near <Name> Creek|River|Branch|Swamp" in the title or text (WATER_RE); "Jefferies Creek" is the City's
@@ -41,7 +42,9 @@ Record rules (rules only; no model, no geocoding)
     a new record "<node>-v<n>" and the earlier record is kept as it was (raw.later_version), so a reused address never
     overwrites an earlier report. An edit that keeps both dates updates the record (raw._revisions).
   - History: the list's first pages are read each run and the earlier notices are carried, so a notice that leaves
-    the first pages is never dropped. A list that cannot be read is ok=False and the records stay.
+    the first pages is never dropped; a notice still listed is read again weekly (REREAD_DAYS), whatever its age. A
+    list or a notice page that cannot be read is ok=False and the published records stay.
+  - raw._placement "named_water_only": never geolocated from a street or a plant (build/provisional_outfalls.py).
 
 Privacy: the media-contact block (a staff member's name, telephone and e-mail) and any "please contact" sentence are
 cut before the raw save; house numbers near manholes are removed. tests/test_ingest_sc.py proves a name, an e-mail,
@@ -76,7 +79,7 @@ TIMEOUT = (60, 300)
 PAUSE_S = 1.0
 PAGES = 2
 BACKFILL_PAGES = 45
-RECHECK_DAYS = 30
+REREAD_DAYS = 7          # a notice still on the list is read again weekly, whatever its age (an address can be reused)
 TITLE_RE = re.compile(r"sanitary\s+sewer\s+overflow|sewer\s+overflow|wastewater\s+overflow|sewage\s+(?:spill|overflow|"
                       r"release|discharge)", re.I)
 MONTHS = "january february march april may june july august september october november december".split()
@@ -106,6 +109,7 @@ SAMPLING = re.compile(r"[^.]*\b(?:sampl|test)\w*[^.]*\b(?:no\s+threat|safe|norma
 # the media-contact block and contact sentences are cut before anything is kept
 CUT = re.compile(r"^\s*(?:Media\s+Contacts?|Contacts?:|For\s+(?:further|more)\s+information|###)", re.I)
 CONTACT_SENTENCE = re.compile(r"[^.]*\b(?:[Pp]lease\s+contact|[Cc]ontact\s+[A-Z][a-z]+\s+[A-Z][a-z]+|or\s+SCDES\s+at)\b[^.]*\.?")
+CONTACT_LINE = re.compile(r"[\w.+-]+@[\w-]+\.|\(?\b\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b")
 DATELINE = re.compile(r"^\s*FLORENCE,\s*S\.?\s*C\.?\s*[–—-]", re.I)
 CLOSING = re.compile(r"^\s*The\s+information\s+provided\s+is\s+pursuant", re.I)
 POLICY = re.compile(r"[^.]*\b(?:policy|or\s+more)\b[^.]*\.", re.I)
@@ -141,10 +145,19 @@ def article(page: str) -> tuple[str | None, str | None, list[str]]:
         start = next((i for i, b in enumerate(blocks) if DATELINE.match(b)), None)
         head = [b for b in blocks[:start] if RELEASE_RE.search(b)] if start is not None else []
         rest = blocks[start:] if start is not None else []
+        in_contacts = False
         for t in head + rest:
             if CLOSING.match(t):
                 break
             if CUT.match(t):
+                in_contacts = bool(re.match(r"\s*(?:Media\s+)?Contacts?\b", t, re.I))
+                continue
+            if in_contacts:
+                if DATELINE.match(t) or len(t) > 160:
+                    in_contacts = False                # the contact block ends at the article's next paragraph
+                else:
+                    continue                           # a name, title, telephone or e-mail line of the block
+            if CONTACT_LINE.search(t):
                 continue
             t = CONTACT_SENTENCE.sub("", t).strip()
             if t:
@@ -210,9 +223,10 @@ def parse_notice(title: str | None, paras: list[str]) -> dict:
     out["until_further_notice"] = bool(UNTIL_FURTHER.search(out["advice"] or ""))
     c = CAUSE.search(body)
     out["cause_text"] = c.group(0).strip() if c else None
-    s = SAMPLING.search(body)
-    out["sampling_text"] = s.group(0).strip() if s else None
-    out["text"] = body
+    # a sentence reassuring about sampling ("no threat to public health") is never kept as the record's text: it is
+    # the City's statement, not an end, and this site never repeats a safety assurance (the notice's link cites it)
+    out["sampling_statement_cut"] = bool(SAMPLING.search(body))
+    out["text"] = SAMPLING.sub("", body).strip()
     return out
 
 
@@ -249,12 +263,14 @@ def records(state: dict, fetched_at: str) -> list[dict]:
             key = n["nid"] if i == 0 else f"{n['nid']}-v{i + 1}"
             start = p.get("incident_day") or p.get("release_date")
             raw = {"state": "SC", "time_zone": "America/New_York", "node": n["nid"], "slug": slug,
+                   "_placement": "named_water_only",
                    "title": p.get("title"), "release_date": p.get("release_date"),
                    "start_basis": p.get("start_basis") or ("the release's date, the latest the overflow can have begun"
                                                             " (the notice gives no earlier day)"),
                    "end_basis": "the City's notices give no end and the City publishes no lift",
-                   "cause_text": p.get("cause_text"), "sampling_text": p.get("sampling_text"),
-                   "stretch_text": p.get("stretch_text"), "release_text": p.get("text"),
+                   "cause_text": p.get("cause_text"), "sampling_statement_cut": p.get("sampling_statement_cut"),
+                   "stretch_text": p.get("stretch_text"),
+                   "release_text": SAMPLING.sub("", p.get("text") or "").strip() or None,
                    "county": "Florence", "town": "Florence", "first_seen_at": v.get("first_seen_at"),
                    "_last_seen_in_source": v.get("last_seen_at")}
             if p.get("aliases_seen"):
@@ -320,32 +336,41 @@ def run(args) -> int:
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     counts["items"] = len(items)
-    today = datetime.fromisoformat(now.replace("Z", "+00:00")).date()
+    now_dt = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    failures: list[str] = []
     for slug, title in dict(items).items():
         if not TITLE_RE.search(title):
             counts["not_read"] += 1
             continue
         known = state["notices"].get(slug)
-        if known:
-            rel = known["versions"][-1]["parsed"].get("release_date")
-            if rel and (today - date.fromisoformat(rel)).days > RECHECK_DAYS:
+        if known and pages != BACKFILL_PAGES:
+            last = known.get("last_read_at") or ""
+            if last and (now_dt - datetime.fromisoformat(last.replace("Z", "+00:00"))).days < REREAD_DAYS:
                 known["versions"][-1]["last_seen_at"] = now
                 continue
         try:
             r = s.get(BASE + slug, timeout=TIMEOUT)
             r.raise_for_status()
         except requests.RequestException as e:
-            print(f"{SOURCE_ID}: {slug}: {e}", file=sys.stderr)
+            failures.append(f"{slug}: {type(e).__name__}")
             continue
         time.sleep(PAUSE_S)
         nid, ttl, paras = article(r.text)
         if not nid or not paras:
+            failures.append(f"{slug}: no notice text on the page")
             continue
         counts["read"] += 1
         counts[update_notice(state, slug, nid, parse_notice(ttl or title, paras), now)] += 1
+        state["notices"][slug]["last_read_at"] = now
     state["updated_at"] = now
     write_json(STATE_PATH, state)
     save_raw(SOURCE_ID, json.dumps(state, indent=1, sort_keys=True), "json")
+    if failures:
+        # a notice page that could not be read: the earlier records stay as published (write_events ok=False); what
+        # was read is kept in the state and published by the next run that reads every page
+        write_events(SOURCE_ID, [], ok=False, error="notice pages not read: " + "; ".join(failures[:5]), meta=META)
+        print(f"{SOURCE_ID}: FAILED {failures}", file=sys.stderr)
+        return 1
     recs = records(state, now)
     write_events(SOURCE_ID, recs, meta={**META, "counts": counts})
     print(f"{SOURCE_ID}: {len(recs)} records; {counts}")

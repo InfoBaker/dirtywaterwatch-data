@@ -81,7 +81,7 @@ BOUNDS = (-83.4, 32.0, -78.5, 35.25)        # South Carolina; a point outside is
 BEACH_KINDS = [(re.compile(r"long", re.I), ("beach_advisory", "long-term")),
                (re.compile(r"closure|closed", re.I), ("beach_closure", "closure")),
                (re.compile(r"short|temporar", re.I), ("beach_advisory", "short-term"))]
-NO_ADVISORY = re.compile(r"^\s*(?:no\s+advisory|none|no\s+active\s+advisory|)\s*$", re.I)
+NO_ADVISORY = re.compile(r"^\s*(?:no\s+advisory|none|no\s+active\s+advisory)\s*$", re.I)
 LONG_TERM_ADVICE = ("SCDES: \"Long-term swimming advisories ... are issued for beach water monitoring locations that "
                     "have an increased possibility of high bacteria levels -- especially following rain events -- due "
                     "to stormwater runoff.\" \"An advisory means that SCDES advises you NOT to swim in those areas.\" "
@@ -155,13 +155,28 @@ def _norm(s: str | None) -> str:
 
 # ---------------------------------------------------------------- the beach stations
 
+def safe_features(features: list[dict] | None, geom_key: str) -> list[dict] | None:
+    """Features with their point rounded to three decimals (0.001 degree) before anything is saved."""
+    if features is None:
+        return None
+    out = []
+    for f in features:
+        lat, lon = _pt(f.get(geom_key))
+        g = {"x": lon, "y": lat} if lat is not None else None
+        out.append({"attributes": dict(f.get("attributes") or {}), geom_key: g})
+    return out
+
+
 def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict], dict, dict]:
     state = {k: dict(v) for k, v in (prev.get("beach") or {}).items()}
-    showing, counts = {}, {"stations": len(features)}
+    showing, explicit, counts = {}, {}, {"stations": len(features)}
     for f in features:
         a = f.get("attributes") or {}
         adv = (a.get("ADVISORY") or "").strip()
         counts[adv or "(blank)"] = counts.get(adv or "(blank)", 0) + 1
+        if not adv:
+            continue                                   # a blank field says nothing: no record opened or ended
+        explicit[a.get("STAT")] = adv
         if NO_ADVISORY.match(adv):
             continue
         showing[a.get("STAT")] = (a, f.get("geometry"), adv)
@@ -170,15 +185,22 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
                    None)
         lat, lon = _pt(geom)
         if cur is None:
-            state[f"{stat}-{now[:10]}"] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
+            state[f"{stat}-{re.sub(r'[^0-9T]', '', now)[:13]}"] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
                                            "huc12": a.get("HUC_12"), "lat": lat, "lon": lon, "started_at": now,
                                            "last_seen_at": now}
         else:
             cur.update(last_seen_at=now, lat=lat if lat is not None else cur.get("lat"),
                        lon=lon if lon is not None else cur.get("lon"))
     for v in state.values():
-        if not v.get("ended_at") and (v["station"] not in showing or showing[v["station"]][2] != v["label"]):
-            v["ended_at"] = now
+        if v.get("ended_at"):
+            continue
+        if v["station"] in explicit and explicit[v["station"]] != v["label"]:
+            v["ended_at"] = now                        # DES's layer now gives the station another value
+            v.pop("missing_since", None)
+        elif v["station"] not in explicit:
+            v["missing_since"] = v.get("missing_since") or now    # absent or blank: not a lift
+        else:
+            v.pop("missing_since", None)
     recs = []
     for key, v in sorted(state.items()):
         etype, kind = next((k for rx, k in BEACH_KINDS if rx.search(v["label"])), ("beach_advisory", None))
@@ -190,7 +212,10 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
                                "date" + ("; a long-term advisory stands from season to season, so it began before "
                                          "this poll" if kind == "long-term" else ""))}
         if v.get("ended_at"):
-            raw.update(ended_at_precision="poll", end_basis="the first poll of DES's station layer that no longer showed it")
+            raw.update(ended_at_precision="poll",
+                       end_basis="the first poll of DES's station layer that gave the station another value")
+        if v.get("missing_since"):
+            raw["_missing_from_source_since"] = v["missing_since"]
         if kind is None:
             raw.update(_agency_label_only=True, _agency_label=v["label"],
                        _label_basis="a value of DES's ADVISORY field this site does not know; kept with its caution")
@@ -210,44 +235,68 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
 
 # ---------------------------------------------------------------- blooms
 
+def match_hab(state: dict, o: dict, seen: set) -> str | None:
+    """The open record an observation continues: the same water and DES date, and the same area when both give one."""
+    for key, v in state.items():
+        if key in seen or v.get("ended_at"):
+            continue
+        if _norm(v.get("water")) != _norm(o["water"]) or (v.get("started_at") or "") != (o["started_at"] or ""):
+            continue
+        if v.get("area") and o.get("area") and v["area"].lower() != o["area"].lower():
+            continue
+        return key
+    return None
+
+
 def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now: str) -> tuple[list[dict], dict, dict]:
     state = {k: dict(v) for k, v in (prev.get("hab") or {}).items()}
-    showing, counts = {}, {"delineations_listed": len(features), "table_rows": None if table is None else len(table)}
-    used_rows = set()
+    counts = {"delineations_listed": len(features), "table_rows": None if table is None else len(table)}
+    obs, used_rows = [], set()
     for f in features:
         a = f.get("attributes") or {}
         tier = HAB_TIERS.get((a.get("Advisory_Tier") or "").strip().lower())
         if not tier:
             continue
         start, prec = _epoch_date(a.get("Date"))
-        key = f"{a.get('GlobalID') or a.get('OBJECTID')}-{(start or 'nodate')[:10]}"
         row = None
         for i, t in enumerate(table or []):
-            if _norm(t["water"]) and _norm(t["water"]) in _norm(a.get("NAME")) and _date(t["issued"]) == (start or "")[:10]:
-                row, _ = t, used_rows.add(i)
+            if i not in used_rows and _norm(t["water"]) and _norm(t["water"]) in _norm(a.get("NAME")) \
+                    and _date(t["issued"]) == (start or "")[:10]:
+                row = t
+                used_rows.add(i)
                 break
         lat, lon = _pt(f.get("centroid"))
-        showing[key] = {"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
-                        "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
-                        "area": (row or {}).get("area"), "lat": lat, "lon": lon, "from": "layer"}
+        obs.append({"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
+                    "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
+                    "area": (row or {}).get("area"), "lat": lat, "lon": lon, "from": "layer"})
     for i, t in enumerate(table or []):
         if i in used_rows:
             continue
-        tier = HAB_TIERS.get(t["level"].strip().lower(), t["level"].strip())
         start = _date(t["issued"])
-        key = f"table-{re.sub(r'[^a-z0-9]+', '-', t['water'].lower()).strip('-')}-{start or 'nodate'}"
-        showing[key] = {"tier": tier, "water": t["water"], "organism": None, "guidance": None, "started_at": start,
-                        "precision": "day" if start else None, "area": t["area"], "lat": None, "lon": None,
-                        "from": "table"}
-    for key, s in showing.items():
-        v = state.setdefault(key, {**s, "first_seen_at": now})
-        v.update({k: s[k] for k in ("tier", "area", "guidance") if s.get(k)})
+        obs.append({"tier": HAB_TIERS.get(t["level"].strip().lower(), t["level"].strip()), "water": t["water"],
+                    "organism": None, "guidance": None, "started_at": start, "precision": "day" if start else None,
+                    "area": t["area"] or None, "lat": None, "lon": None, "from": "table"})
+    seen = set()
+    for o in obs:
+        key = match_hab(state, o, seen)
+        if key is None:
+            base = (f"hab-{_norm(o['water']) or 'water'}-{o['started_at'] or 'nodate'}-"
+                    f"{re.sub(r'[^a-z0-9]+', '-', (o['area'] or 'area').lower()).strip('-')}")
+            key, n = base, 2
+            while key in state:
+                key, n = f"{base}-{n}", n + 1
+            state[key] = {**o, "first_seen_at": now}
+        v = state[key]
+        for k in ("tier", "area", "guidance", "organism", "lat", "lon"):
+            if o.get(k) is not None:
+                v[k] = o[k]                            # a table read keeps the layer's point and organism
+        v["from"] = "layer" if (o["from"] == "layer" or v.get("from") == "layer") else "table"
         v["last_seen_at"] = now
         v.pop("ended_at", None)
-    can_end = table is not None
+        seen.add(key)
     for key, v in state.items():
-        if can_end and key not in showing and not v.get("ended_at"):
-            v["ended_at"] = now
+        if key not in seen and not v.get("ended_at"):
+            v["ended_at"] = now                        # neither the layer nor the table lists it (both were read)
     recs = []
     for key, v in sorted(state.items()):
         start = v.get("started_at") or v.get("first_seen_at")
@@ -315,9 +364,12 @@ def run(args) -> int:
             p = requests.get(HAB_PAGE, headers=HEADERS, timeout=TIMEOUT)
             p.raise_for_status()
             table = hab_table(p.text)
+            if table is None:
+                raise ValueError("the program page's watches and advisories table was not found")
         except (requests.RequestException, ValueError, KeyError) as e:
             ok_h = False
             write_events(HAB_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=HAB_META)
+        beach, hab = safe_features(beach, "geometry"), safe_features(hab, "centroid")
         save_raw("sc-des-advisories", json.dumps({"format": SAFE_FORMAT, "beach": beach, "hab": hab,
                                                   "hab_table": table}), "json")
     new = dict(prev)

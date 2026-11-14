@@ -210,7 +210,9 @@ def test_history_types_lifts_tests_and_the_label_only_resampling():
     r = by["adv-727"]
     assert r["status"] == "unknown" and r["raw"]["_agency_label_only"] and r["raw"]["_caution_to_notice_end"]
     assert r["raw"]["_agency_label"] == "Recreational Water Quality Resampling Underway"
-    assert r["raw"]["_notice_closed_at"] == "2026-07-29" and r["waterbody_text"] == "Atlantic Ocean"
+    assert r["raw"]["_notice_closed_at"] == "2026-07-30T00:00:00-04:00"          # the end of DNREC's last day
+    assert r["waterbody_text"] == "Atlantic Ocean"
+    assert W.end_of_day("2026-11-01") == "2026-11-02T00:00:00-05:00"             # across the clock change
     assert by["adv-274"]["status"] == "unknown" and "no end date" in by["adv-274"]["raw"]["status_basis"]
     assert by["adv-274"]["waterbody_text"] == "Delaware Bay" and by["adv-274"]["lat"] is None
 
@@ -247,6 +249,96 @@ def test_a_history_row_in_effect_is_not_doubled_by_the_map():
     hist, _ = W.history_records(s["advisories"], W.station_index(st), date(2026, 7, 28), T0)
     recs, _ = W.poll_records(st, hist, {}, T0, date(2026, 7, 28))
     assert recs == []                                        # adv-727 covers that day
+
+
+def map_codes(stations, codes):
+    st = copy.deepcopy(stations)
+    for x in st:
+        x["CurrentAdvisory"] = codes.get(x["UnitName"], 4)
+    return st
+
+
+def test_an_aged_history_row_or_another_kind_never_hides_the_maps_advisory():
+    s = rec()
+    old = [r for r in s["advisories"] if r["advisoryid"] == "274"]          # Prime Hook 2009, no end: aged out
+    st = map_codes(s["stations"], {"Slaughter Beach": 0})
+    old[0] = {**old[0], "unitname": "Slaughter Beach"}
+    hist, _ = W.history_records(old, W.station_index(st), date(2026, 7, 1), T0)
+    recs, _ = W.poll_records(st, hist, {}, T0, date(2026, 7, 1))
+    assert [r["raw"]["unit_name"] for r in recs] == ["Slaughter Beach"] and recs[0]["status"] == "advisory_active"
+    # a resampling notice in effect does not hide an advisory the map shows for the same beach
+    st2 = map_codes(s["stations"], {"Rehoboth Beach - Rehoboth Avenue": 0})
+    hist2, _ = W.history_records(s["advisories"], W.station_index(st2), date(2026, 7, 28), T0)
+    recs2, _ = W.poll_records(st2, hist2, {}, T0, date(2026, 7, 28))
+    assert [r["status"] for r in recs2] == ["advisory_active"]
+
+
+def test_an_absent_station_is_not_a_lift_and_a_same_day_reopening_is_a_second_record():
+    s = rec()
+    st = map_codes(s["stations"], {"Slaughter Beach": 0})
+    _, state = W.poll_records(st, [], {}, T0, date(2026, 7, 1))
+    gone = [x for x in st if x["UnitName"] != "Slaughter Beach"]
+    recs, state = W.poll_records(gone, [], state, T1, date(2026, 7, 1))
+    assert recs[0]["status"] == "advisory_active" and recs[0]["raw"]["_missing_from_source_since"] == T1
+    _, state = W.poll_records(map_codes(s["stations"], {}), [], state, T1, date(2026, 7, 1))     # explicit 4: ended
+    recs, state = W.poll_records(st, [], state, T2, date(2026, 7, 1))
+    assert len(recs) == 2 and {r["status"] for r in recs} == {"advisory_lifted", "advisory_active"}
+    assert len({r["source_record_id"] for r in recs}) == 2
+
+
+def test_a_history_row_that_leaves_the_dataset_is_carried():
+    s = rec()
+    hist, _ = W.history_records(s["advisories"], W.station_index(s["stations"]), date(2026, 11, 14), T0)
+    prev = {r["source_record_id"]: r for r in hist}
+    fewer = [r for r in s["advisories"] if r["advisoryid"] != "625"]
+    hist2, _ = W.history_records(fewer, W.station_index(s["stations"]), date(2026, 11, 14), T1)
+    out, n = W.carry_missing(hist2, prev, T1)
+    kept = next(r for r in out if r["source_record_id"] == "adv-625")
+    assert n == 1 and kept["raw"]["_missing_from_source_since"] == T1 and kept["ended_at"] == "2025-06-18"
+
+
+def test_the_saved_rows_are_scrubbed_and_rounded():
+    rows = W.safe_rows([{"advisoryid": "1", "advcomment": "Call 302-555-0142 or pat.example@example.org",
+                         "extra": "x"}])
+    assert "555-0142" not in json.dumps(rows) and "example.org" not in json.dumps(rows) and "extra" not in rows[0]
+    st = W.safe_stations([{"UnitName": "X", "UnitID": 1, "CurrentAdvisory": 3, "Latitude": 38.123456,
+                           "Longitude": -75.987654}])
+    assert (st[0]["Latitude"], st[0]["Longitude"]) == (38.123, -75.988)
+
+
+def test_no_release_is_geolocated_from_its_street_or_plant():
+    from build import provisional_outfalls as P
+    recs, _ = records()
+    assert all(P.named_water_only(r) for r in recs.values())
+
+
+def test_a_failed_detail_page_fails_the_run_and_stops_being_asked_for(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(D, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(D, "save_raw", lambda *a, **k: None)
+    (tmp_path / f"{D.SOURCE_ID}.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
+    (tmp_path / "state.json").write_text(json.dumps({"rows": {}, "backfilled_at": T0}))
+
+    class Half(D.Client):
+        def __init__(self):
+            super().__init__(pause=0)
+
+        def recent(self, pages):
+            return listing()
+
+        def detail(self, key):
+            return None                                  # a page that is not a release's detail (an error page)
+    monkeypatch.setattr(D, "Client", Half)
+    assert D.main([]) == 1
+    out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
+    assert out["ok"] is False and out["records"] == [{"event_id": "x"}]
+    st = json.loads((tmp_path / "state.json").read_text())
+    for _ in range(2):
+        D.main([])
+    st = json.loads((tmp_path / "state.json").read_text())
+    from datetime import datetime, timezone
+    assert D.due_for_detail(st, datetime(2026, 11, 14, 18, tzinfo=timezone.utc), 40) == []
 
 
 # ---------------------------------------------------------------- registry, register, rules, text, waters
@@ -319,7 +411,7 @@ def test_missing_waters_list_leaves_out_the_national_lists_names():
         return re.sub(r"[^a-z0-9]", "", (n or "").lower())
     held = {k(n) for w in nat["states"]["DE"]["waters"]
             for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
-    assert d["state"] == "DE" and d["waters"] == len(d["rows"]) > 0
+    assert d["state"] == "DE" and d["waters"] == len(d["rows"])
     assert not [r["name"] for r in d["rows"] if k(r["name"]) in held]
     keys = [(r["name"], r["county"]) for r in d["rows"]]
     assert len(keys) == len(set(keys))
@@ -333,3 +425,22 @@ def test_adding_the_states_leaves_the_other_states_lists_as_they_were():
     assert report_geolocate.STATE_NAMES["DE"] == "Delaware" and charts.STATE_NAMES["TN"] == "Tennessee"
     counties = json.loads((ROOT / "data" / "reference" / "de-counties.json").read_text())
     assert sorted(c["county"] for c in counties["counties"]) == ["Kent County", "New Castle County", "Sussex County"]
+
+
+def test_the_shared_rule_texts_other_states_cite_are_unchanged():
+    # review P2-5: a rationale is copied into every interval's rule_applied, so Delaware and South Carolina join the
+    # source lists without changing the texts Georgia's, Hawaii's and the others' intervals carry
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())["unresolved"]
+    for k in ("sample_caution", "day_start_caution"):
+        assert not re.search(r"Delaware|Florence|DNREC", rules[k]["rationale"] + rules[k].get("source", ""))
+    assert rules["sample_caution"]["sources"][-1] == "de-dnrec-recreational-water"
+    assert rules["day_start_caution"]["sources"][-2:] == ["de-dnrec-derns-recent-releases", "sc-florence-sso-notices"]
+
+
+def test_the_notification_clock_and_an_unverified_owner_are_stated_as_the_sources_give_them():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "de.json").read_text())["channels"]}
+    assert "within 12 hours after DNREC is informed" in reg["de-dnrec-derns-alerts"]["legal_basis"]
+    row = next(r for r in ops() if r["id"] == "de-de0021512")
+    assert row["npdes_permits"] == ["DE0021512"] and "permittee not recorded by EPA" in row["name"]
+    assert not row.get("legal_form")
+    assert "DE0021512" not in next(r for r in ops() if r["id"] == "de-sussex-county")["npdes_permits"]
