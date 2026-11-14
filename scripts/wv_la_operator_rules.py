@@ -80,6 +80,9 @@ def municipal(s: str) -> tuple[str, str] | None:
         place = re.sub(r"\s+(?:wwt|wwtp|stp|facility)\b.*$", "", place, flags=re.I).strip()
     else:
         return None
+    # a facility word after the place is the plant, not the town: 'City of Jennings WWTP', 'Town of Henderson WWTP'
+    place = re.sub(r"\s*[-(]?\s*\b(?:wwtp|wwtf|wwt|stp|sewage treatment plant|wastewater treatment (?:plant|facility)|"
+                   r"oxidation pond|lagoon|plant|facility)\b.*$", "", place, flags=re.I).strip(" ,-")
     if not place or re.search(r"\b(?:llc|inc|corp|company)\b", place, re.I):
         return None
     if kind == "corporation":             # West Virginia's older towns are chartered as "the Corporation of <X>"
@@ -118,7 +121,7 @@ RULES = [
 def owner_text(permit_name: str, state: str) -> str:
     s = clean(permit_name)
     if state == "LA":
-        s = clean(re.split(r"\s*-\s+|\s+-\s*|-\s{1,2}(?=[A-Z])", s, maxsplit=1)[0])
+        s = clean(re.split(r"\s*-{1,2}\s+|\s+-{1,2}\s*|-{1,2}(?=[A-Z][a-z]|[A-Z]{2,})(?<=[a-z.)]-)", s, maxsplit=1)[0])
     return s
 
 
@@ -127,6 +130,12 @@ def owner(permit_name, permittee, facility_type, state: str, permit: str, overri
     for pat, name, form in overrides:
         if re.search(pat, raw, re.I) or re.search(pat, clean(permit_name), re.I) or re.search(pat, clean(permittee), re.I):
             return name, form, "override"
+    # Louisiana: when the permit name's owner part is a plant ('Pollock WWTP') and the permittee field is a town
+    # ('POLLOCK, TOWN OF'), the permittee field names the owner
+    if state == "LA" and permittee:
+        alt = municipal(owner_text(permittee, state))
+        if alt and not municipal(raw) and re.search(r"\b(?:wwtp|wwtf|stp|plant|facility|pond|lagoon)\b", raw, re.I):
+            return alt[0], alt[1], "municipal (permittee field)"
     if not raw or "name removed" in raw.lower():
         return f"Holder of permit {permit}", "facility (permittee not named)", "no name"
     m = municipal(raw)

@@ -1157,12 +1157,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-city-of-jennings-wwtp",
+   "operator_id": "la-city-of-jennings",
    "agency": null,
    "permit": "LA0041769",
    "checked": "2026-11-14",
-   "id": "la-city-of-jennings-wwtp-ldeq-report",
-   "name": "City of Jennings WWTP",
+   "id": "la-city-of-jennings-ldeq-report",
+   "name": "City of Jennings",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -1177,7 +1177,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "City of Jennings WWTP reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "City of Jennings reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -3955,31 +3955,6 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-pollock-wwtp",
-   "agency": null,
-   "permit": "LA0098558",
-   "checked": "2026-11-14",
-   "id": "la-pollock-wwtp-ldeq-report",
-   "name": "Pollock WWTP",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "LAC 33:I.3915 and 3917 (an emergency discharge to the Louisiana State Police hotline within the first hour; a discharge above a reportable quantity within 24 hours of learning of it) and LAC 33:I.3925 (a written 'Unauthorized Discharge Notification Report' to LDEQ within seven calendar days); other permit excursions to LDEQ's Single Point of Contact; the permit's standard conditions add the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "la-lac-33-i-ch39",
-    "la-ldeq-spoc"
-   ],
-   "note": "Pollock WWTP reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "LA",
    "operator_id": null,
    "agency": "Pontchartrain Conservancy",
    "permit": null,
@@ -4550,12 +4525,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-st-bernard-parish-riverbend-oxidation-pond-poydras-verret-wetland",
+   "operator_id": "la-st-bernard-parish",
    "agency": null,
    "permit": "LA0040185",
    "checked": "2026-11-14",
-   "id": "la-st-bernard-parish-riverbend-oxidation-pond-poydras-verret-wetland-ldeq-report",
-   "name": "St. Bernard Parish-Riverbend Oxidation Pond/poydras-Verret Wetland",
+   "id": "la-st-bernard-parish-ldeq-report",
+   "name": "St. Bernard Parish",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -4570,7 +4545,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "St. Bernard Parish-Riverbend Oxidation Pond/poydras-Verret Wetland reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "St. Bernard Parish reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -6027,31 +6002,6 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-town-of-eros-stp",
-   "agency": null,
-   "permit": "LAG560012",
-   "checked": "2026-11-14",
-   "id": "la-town-of-eros-stp-ldeq-report",
-   "name": "Town of Eros STP",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "LAC 33:I.3915 and 3917 (an emergency discharge to the Louisiana State Police hotline within the first hour; a discharge above a reportable quantity within 24 hours of learning of it) and LAC 33:I.3925 (a written 'Unauthorized Discharge Notification Report' to LDEQ within seven calendar days); other permit excursions to LDEQ's Single Point of Contact; the permit's standard conditions add the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "la-lac-33-i-ch39",
-    "la-ldeq-spoc"
-   ],
-   "note": "Town of Eros STP reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
-   "barrier": "phone_only"
-  },
-  {
-   "state": "LA",
    "operator_id": "la-town-of-evergreen",
    "agency": null,
    "permit": "LA0066893",
@@ -6427,12 +6377,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-town-of-henderson-wwtp",
+   "operator_id": "la-town-of-henderson",
    "agency": null,
    "permit": "LA0117609",
    "checked": "2026-11-14",
-   "id": "la-town-of-henderson-wwtp-ldeq-report",
-   "name": "Town of Henderson WWTP",
+   "id": "la-town-of-henderson-ldeq-report",
+   "name": "Town of Henderson",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -6447,7 +6397,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "Town of Henderson WWTP reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "Town of Henderson reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -6827,12 +6777,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-town-of-leonville-wwtp",
+   "operator_id": "la-town-of-leonville",
    "agency": null,
    "permit": "LA0114740",
    "checked": "2026-11-14",
-   "id": "la-town-of-leonville-wwtp-ldeq-report",
-   "name": "Town of Leonville WWTP",
+   "id": "la-town-of-leonville-ldeq-report",
+   "name": "Town of Leonville",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -6847,7 +6797,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "Town of Leonville WWTP reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "Town of Leonville reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -7127,12 +7077,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-town-of-maringouin-wwtf",
+   "operator_id": "la-town-of-maringouin",
    "agency": null,
    "permit": "LA0086771",
    "checked": "2026-11-14",
-   "id": "la-town-of-maringouin-wwtf-ldeq-report",
-   "name": "Town of Maringouin Wwtf",
+   "id": "la-town-of-maringouin-ldeq-report",
+   "name": "Town of Maringouin",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -7147,7 +7097,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "Town of Maringouin Wwtf reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "Town of Maringouin reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -7498,6 +7448,31 @@
     "la-ldeq-spoc"
    ],
    "note": "Town of Plain Dealing reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "barrier": "phone_only"
+  },
+  {
+   "state": "LA",
+   "operator_id": "la-town-of-pollock",
+   "agency": null,
+   "permit": "LA0098558",
+   "checked": "2026-11-14",
+   "id": "la-town-of-pollock-ldeq-report",
+   "name": "Town of Pollock",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "LAC 33:I.3915 and 3917 (an emergency discharge to the Louisiana State Police hotline within the first hour; a discharge above a reportable quantity within 24 hours of learning of it) and LAC 33:I.3925 (a written 'Unauthorized Discharge Notification Report' to LDEQ within seven calendar days); other permit excursions to LDEQ's Single Point of Contact; the permit's standard conditions add the reports of 40 CFR 122.41(l)(6)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "la-lac-33-i-ch39",
+    "la-ldeq-spoc"
+   ],
+   "note": "Town of Pollock reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -8602,12 +8577,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-village-of-estherwood-estherwood-stp",
+   "operator_id": "la-village-of-estherwood",
    "agency": null,
    "permit": "LA0064530",
    "checked": "2026-11-14",
-   "id": "la-village-of-estherwood-estherwood-stp-ldeq-report",
-   "name": "Village of Estherwood-Estherwood STP",
+   "id": "la-village-of-estherwood-ldeq-report",
+   "name": "Village of Estherwood",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -8622,7 +8597,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "Village of Estherwood-Estherwood STP reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "Village of Estherwood reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {
@@ -9052,12 +9027,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-village-of-parks-wwtf",
+   "operator_id": "la-village-of-parks",
    "agency": null,
    "permit": "LA0050006",
    "checked": "2026-11-14",
-   "id": "la-village-of-parks-wwtf-ldeq-report",
-   "name": "Village of Parks Wwtf",
+   "id": "la-village-of-parks-ldeq-report",
+   "name": "Village of Parks",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -9072,7 +9047,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "Village of Parks Wwtf reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "Village of Parks reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {

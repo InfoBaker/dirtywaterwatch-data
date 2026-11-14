@@ -26,7 +26,13 @@ it joins ("Buffalo Creek/Monongahela River"), 8-digit HUC, county and the outlet
     closed by the registry (common._closed), so no rain caution is drawn there.
   - receiving_water_echo: DEP's rstream; county: cnty_code (a county name).
   - The water record is tied by the cloud batch; until it runs EPA's tie for the same outfall is carried when DEP's
-    point lies within CARRY_TIE_M (500 m) of EPA's ("carried from EPA's row").
+    point lies within CARRY_TIE_M (500 m) of EPA's and DEP names the same water or none ("carried from EPA's row");
+    a different name, a qualified name ("Little Wheeling Creek" against "Wheeling Creek") or an unnamed tributary
+    ("UNT/...") is not carried (carry_refused): the batch ties DEP's own point and stream. Where DEP names no stream,
+    EPA's receiving water is kept, marked receiving_water_from.
+  - An EPA row under a different code for a paired outlet ('XXX2' for 'C002A') is written here under EPA's code, kind
+    other and closed (alias_of): one physical outlet, loaded once. A sewage permit EPA lists with no outfall number
+    (a collection system or a facility with no discharge point) is written kind other (state builder rule 6).
   - permittee: EPA's permittee for the permit (ICIS), else DEP's fac_name (an organisation for every CSO permit).
 EPA's open rows that DEP's layer lacks keep EPA's rows (epa_not_in_state_layer); the regional file outranks the national
 one (common.outfall_file_rank), so a paired EPA row is replaced and named in `supersedes`.
@@ -76,7 +82,29 @@ def _date(v) -> str | None:
     return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
 
 
-def build(rows: list[dict], epa_rows: list[dict], fetched_at: str) -> dict:
+def _first_name(text) -> str | None:
+    """DEP's chain 'Little Wheeling Creek/Wheeling Creek/Ohio River' -> 'Little Wheeling Creek'; an unnamed
+    tributary ('UNT/...') -> None."""
+    first = " ".join(str(text or "").split("/")[0].split())
+    return None if not first or re.match(r"(?i)^(unt|ut|unnamed)\b", first) else first
+
+
+def _name_key(name) -> str:
+    """Case, punctuation and 'River'/'Creek' abbreviations aside; a qualified name ('Little X') stays its own."""
+    s = re.sub(r"[^a-z0-9 ]+", " ", str(name or "").lower())
+    s = re.sub(r"\bcr\b|\bck\b", "creek", re.sub(r"\bfk\b", "fork", s))
+    # 'Ohio' and 'Ohio River', 'North Branch of Potomac River' and 'North Branch Potomac River', 'Tygart River Valley'
+    # and 'Tygart Valley River' are one name; a qualifier ('Little', 'Middle', 'Big') stays and keeps names apart
+    return " ".join(sorted(w for w in s.split() if w not in ("river", "r", "of", "the")))
+
+
+ALIAS_NOTE = ("EPA's inventory code for DEP's outlet {dep} of the same permit (paired by point, {d:.0f} m apart): one "
+              "physical outlet, shown once, as DEP's row; this row only retires EPA's code")
+NO_OUTFALL_NOTE = ("EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a "
+                   "facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count")
+
+
+def build(rows: list[dict], epa_rows: list[dict], fetched_at: str, plant_rows: list[dict] | None = None) -> dict:
     epa_wv = [r for r in epa_rows if r.get("state") == "WV"]
     epa = {(r["npdes_permit"], _num_key(r["outfall"])): r for r in epa_wv}
     permittee = {}
@@ -134,7 +162,19 @@ def build(rows: list[dict], epa_rows: list[dict], fetched_at: str) -> dict:
             if e["outfall"] != num:
                 row["epa_outfall"] = e["outfall"]
             d = _metres(row["lat"], row["lon"], e.get("lat"), e.get("lon"))
-            if e.get("water_slug") and d is not None and d <= CARRY_TIE_M:
+            dep_name = _first_name(row["receiving_water_echo"])
+            # the tie is EPA's water record: DEP's stream must name that water (not EPA's text, which can disagree
+            # with its own tie: 'Little Wheeling Creek' rows tied to Big Wheeling Creek)
+            same_name = bool(dep_name) and _name_key(dep_name) == _name_key(e.get("water_name"))
+            dep_blank = not (row["receiving_water_echo"] or "").strip()
+            if dep_blank and e.get("receiving_water_echo"):
+                row["receiving_water_echo"] = e["receiving_water_echo"]
+                row["receiving_water_from"] = "EPA's inventory row (DEP's layer names no stream for this outlet)"
+            same_name = same_name or dep_blank        # nothing in DEP's layer contradicts EPA's tie
+            if not same_name and e.get("water_slug"):
+                row["carry_refused"] = (f"EPA's tie ({e.get('water_name')}) not carried: DEP names the receiving stream "
+                                        f"{dep_name or 'not at all'}; the water batch ties DEP's point and stream")
+            if e.get("water_slug") and d is not None and d <= CARRY_TIE_M and same_name:
                 row.update(water_slug=e["water_slug"], water_name=e.get("water_name"), water_kind=e.get("water_kind"),
                            match="carried from EPA's row",
                            water_match=(f"EPA's tie for this outfall (data/outfalls-us.json, {e.get('match')}), carried: "
@@ -149,6 +189,28 @@ def build(rows: list[dict], epa_rows: list[dict], fetched_at: str) -> dict:
                    for (p, n), e in sorted(epa.items())
                    if (p, n) not in used and not str(e.get("outfall_status") or "").upper().startswith("CLS")]
     opened = [r for r in out if not r["dep_outlet_end"]]
+    # EPA's differently coded row for a paired outlet ('XXX2' for DEP's 'C002A'): the registry keys rows by permit and
+    # outfall number, so EPA's code would load as a second outlet; a row here under EPA's code, kind other and closed,
+    # retires it (one physical outlet, DEP's row) and keeps the provenance
+    aliases = []
+    for r in out:
+        if r.get("epa_outfall"):
+            e = epa[(r["npdes_permit"], _num_key(r["epa_outfall"]))]
+            d = _metres(r["lat"], r["lon"], e.get("lat"), e.get("lon")) or 0
+            aliases.append({**{k: e.get(k) for k in ("npdes_permit", "permittee", "state", "city", "outfall",
+                                                     "receiving_water_echo", "echo_url")},
+                            "lat": r["lat"], "lon": r["lon"], "outfall_kind": "other",
+                            "outfall_status": f"CLS (EPA's code for DEP outlet {r['outfall']})",
+                            "kind_note": ALIAS_NOTE.format(dep=r["outfall"], d=d), "alias_of": r["outfall"],
+                            "supersedes": f"data/outfalls-us.json {e['npdes_permit']} {e['outfall']}",
+                            "source": SOURCE_ID})
+    # sewage permits EPA lists with no discharge point: no outfall (state builder rule 6)
+    no_outfall = [{**{k: p.get(k) for k in ("npdes_permit", "permittee", "permit_name", "state", "city", "outfall",
+                                            "feature_type", "receiving_water_echo", "echo_url", "permit_status")},
+                   "outfall_kind": "other", "kind_note": NO_OUTFALL_NOTE, "lat": None, "lon": None,
+                   "supersedes": f"data/outfalls-plants-us.json {p['npdes_permit']} (no outfall number)"}
+                  for p in sorted(plant_rows or [], key=lambda x: x["npdes_permit"])
+                  if p.get("state") == "WV" and not str(p.get("outfall") or "").strip()]
     # where DEP and EPA disagree on open or closed, DEP (the permitting authority) is followed; listed for review
     differs = [{"npdes_permit": r["npdes_permit"], "outfall": r["outfall"], "dep": r["outfall_status"],
                 "epa": r["supersedes"]["outfall_status"]} for r in out if r.get("supersedes")
@@ -161,7 +223,9 @@ def build(rows: list[dict], epa_rows: list[dict], fetched_at: str) -> dict:
             "permits": len({r["npdes_permit"] for r in out}),
             "open": len(opened), "open_permits": len({r["npdes_permit"] for r in opened}),
             "paired_with_epa": len(out) - len(unpaired), "unpaired": unpaired, "no_point": no_point,
-            "epa_not_in_state_layer": epa_missing, "status_differs_from_epa": differs, "outfalls": out}
+            "epa_not_in_state_layer": epa_missing, "status_differs_from_epa": differs,
+            "epa_code_aliases": len(aliases), "plant_permits_without_outfall": len(no_outfall),
+            "outfalls": out + aliases + no_outfall}
 
 
 def fetch() -> Path:
@@ -185,7 +249,8 @@ def main(argv) -> int:
     doc = json.loads(Path(path).read_text())
     fetched = datetime.fromtimestamp(Path(path).stat().st_mtime, UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     epa_rows = json.loads((ROOT / "data" / "outfalls-us.json").read_text())["outfalls"]
-    out = build([f.get("attributes") or {} for f in doc.get("features") or []], epa_rows, fetched)
+    plants = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+    out = build([f.get("attributes") or {} for f in doc.get("features") or []], epa_rows, fetched, plants)
     OUT.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(f"{out['count']} DEP outlets on {out['permits']} permits ({out['open']} open on {out['open_permits']} permits; "
           f"{out['paired_with_epa']} paired with EPA's rows; {len(out['epa_not_in_state_layer'])} open EPA rows "
