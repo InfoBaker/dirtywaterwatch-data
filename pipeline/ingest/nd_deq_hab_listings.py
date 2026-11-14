@@ -16,12 +16,16 @@ Reading the PDF
   stream ends and the next begins ("Bowman - Haley Dam", the county of "Lake Darling"): the streams are joined in the
   page's order before the text is read (ingest.nh_pdftext's operators), then rows are rebuilt by their y position and
   the columns by x (the lake left of 300 pt, the county to 450 pt, the date beyond). Letters drawn apart ("N" + "orth
-  Lake Washington") are joined. A file with no row read writes ok=False and the previous records stay.
+  Lake Washington") are joined. A file in which either table heading is missing, or any row cannot be read whole as a
+  lake, county and date, writes ok=False and the previous records stay, so nothing is lifted by a bad read; both tables
+  found and empty is DEQ's own empty listing (review 2026-11-14 P1-5).
 
 Record rules
-  - One hab_advisory record per lake and county set per season: source_record_id <year of the date>:<lake>:<counties>
-    (DEQ gives no row id). raw.level "advisory" or "warning" (the table the row is in); a lake moved from one table to
-    the other keeps its record, with the change in raw._level_history.
+  - One hab_advisory record per posting: source_record_id <lake>:<counties in alphabetical order>:<level>:<Date Posted>
+    (DEQ gives no row id). raw.level "advisory" or "warning" (the table the row is in). A lake moved to the other table
+    or reposted after leaving the listing is a new posting and a new record; the earlier one ends at the read that no
+    longer lists it, so a gap is never rewritten as a standing advisory (review P2-1). A record that comes back under
+    the same key carries every earlier absence in raw._absences.
   - started_at: the Date Posted, precision day, DEQ's own posting of the advisory or warning (raw.date_note); bloom
     onset and sampling are not given. published_at the same day. source_updated_at the file's Last-Modified time.
   - Status: advisory_active while the row is listed (raw._last_seen_in_source each read: DEQ's own window, red); the
@@ -31,7 +35,11 @@ Record rules
   - Clock: raw.time_zone from the county (pipeline/zones.py north_dakota_zone, 49 CFR 71.7(a)): Mountain for the
     southwestern counties (Lake Tschida in Grant County, Bowman-Haley Dam in Bowman County, Patterson Lake in Stark
     County, Lake Ilo in Dunn County), Central elsewhere; a county set read in Mountain time if any county is.
-  - Place: no coordinates. Placed by the lake's name, county-aware: raw.county the first county DEQ gives (the status
+  - Marker: the listing gives no coordinates; a cited point inside the lake's NHD outline in a county DEQ lists
+    (data/reference/nd-hab-lake-points.json, scripts/nd_hab_lake_points.py; 14 of the 20 lakes of 2026-11-14) is the
+    record's lat/lon (coord_source nhd_waterbody, raw.marker_point with the GNIS id), so the advisory draws its marker
+    on a large lake too (review P1-1). A lake with no such outline gets none.
+  - Place: placed by the lake's name, county-aware: raw.county the first county DEQ gives (the status
     build's COUNTY_FIELD_STATES), raw.counties all of them, raw.placement_hint {name, counties, state}. A lake with no
     water record is listed in research/nd/receiving-waters-missing.json with its counties.
   - Privacy: lake, county and date only; the listing names no person.

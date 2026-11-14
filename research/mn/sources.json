@@ -301,8 +301,8 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Registered as a monitored channel (no feed): the City's press releases, one mutable page per notice (the Chester Creek notice of October 2024 kept its earlier warnings below the updates). Not read as events: no list or feed of the overflow notices was found.",
-  "verified": "fetched",
+  "status_reason": "Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found.",
+  "verified": "access_failed",
   "checked": "2026-11-14",
   "notes": ""
  },

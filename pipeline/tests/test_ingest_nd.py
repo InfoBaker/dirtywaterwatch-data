@@ -315,3 +315,13 @@ def test_p1_6_archive_free_text_is_scrubbed_before_saving():
     r = dict(rows[0], contaminant="Sewage from 1234 Example Street, call 701-555-0142")
     out = json.dumps(L.safe_row(r)) + json.dumps(L.record(r, FETCHED))
     assert "701-555-0142" not in out and "1234 Example" not in out
+
+
+def test_p2_3_a_plant_name_gets_no_legal_form_and_outfalls_are_rows_with_an_outfall():
+    by = {r["name"]: r for r in ops()}
+    assert by["New Town Water Resource Recovery Facility"]["legal_form"] is None
+    plants = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+    for r in ops():
+        rows = [x for x in plants if x.get("npdes_permit") in r["npdes_permits"]]
+        n = sum(1 for x in rows if x.get("outfall"))
+        assert r["outfall_count"] == (n or None)
