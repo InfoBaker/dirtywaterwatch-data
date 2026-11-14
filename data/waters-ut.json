@@ -1,6 +1,6 @@
 {
  "state": "UT",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 97,
  "waters": [
   {
@@ -745,12 +745,13 @@
    "gnis_id": null,
    "geometry_hash": null,
    "geometry_tolerance_m": null,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "green-river-ut",
