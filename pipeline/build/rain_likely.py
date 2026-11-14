@@ -1106,7 +1106,7 @@ def short(iv: dict, where: str = "") -> str:
     peak = r.get("peak_24h_in")
     thr = r.get("threshold_in")
     ev = r.get("evidence") or {}
-    if ev.get("basis") == "operator_history":
+    if ev.get("basis") == "operator_history" and ev.get("why_no_history") is None:
         amt = f" · {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours (radar)" if peak is not None else ""
         return f"{label}{who}{amt}{history_facts(ev)}{where}"
     kind = " (this site's default)" if (r.get("trigger_basis") or iv.get("trigger_basis")) == "default" else ""
