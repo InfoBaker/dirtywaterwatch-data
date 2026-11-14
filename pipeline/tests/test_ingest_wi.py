@@ -5,6 +5,7 @@ the privacy test are synthetic ("Example")."""
 from __future__ import annotations
 
 import json
+import sys
 from copy import deepcopy
 from pathlib import Path
 
@@ -14,6 +15,7 @@ import zones
 from ingest import wi_mmsd_storm_updates as M
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
 FIX = Path(__file__).resolve().parent / "fixtures" / "wi"
 FETCHED = "2026-11-14T18:00:00Z"
 
@@ -216,3 +218,121 @@ def test_fetch_stops_when_the_cms_repeats_page_one(monkeypatch):
     assert list(doc["posts"]) == ["storm-update-example"]   # only the storm update's page was asked for
     recs, _ = M.build(doc, [], FETCHED)
     assert recs[0]["started_at"] == "2026-09-03" and recs[0]["event_type"] == "cso"
+
+
+# ---------------------------------------------------------------- the state's files
+
+import re  # noqa: E402
+
+from build import status as S  # noqa: E402
+
+
+def ops() -> list[dict]:
+    return [d for d in json.loads((ROOT / "data" / "dischargers.json").read_text())
+            if d.get("state") == "WI" and "wi" in (d.get("source_areas") or [])]
+
+
+def test_a_day_dated_post_gets_72_hours_from_the_start_of_its_central_day():
+    from datetime import datetime, timedelta, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    r = built()[0]["storm-update-august-1st-2026:cso"]
+    ivs = S.event_intervals(r, "WI", datetime(2026, 8, 6, 15, tzinfo=timezone.utc), rules=rules)
+    day0 = datetime(2026, 8, 1, 5, tzinfo=timezone.utc)                  # midnight in Milwaukee (CDT)
+    assert (ivs[0]["rule"], ivs[0]["color"], ivs[0]["start"], ivs[0]["end"]) == \
+        ("day_start_caution", "yellow", day0, day0 + timedelta(hours=72))
+    stated = built()[0]["mmsd-storm-update-april-1-thru-4-2024:cso"]
+    assert S.event_intervals(stated, "WI", datetime(2024, 4, 8, tzinfo=timezone.utc), rules=rules)[0]["rule"] != \
+        "day_start_caution"
+
+
+def test_named_water_outfall_placement_is_keyed_on_wisconsin():
+    assert "WI" in S.NAMED_WATER_OUTFALL_STATES and "OR" in S.NAMED_WATER_OUTFALL_STATES
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    assert rules["placement"]["no_outfall_all_waters"] is True
+
+
+def test_every_wisconsin_permit_is_in_exactly_one_row():
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "WI"}
+    cso = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-us.json").read_text())["outfalls"]
+           if str(r.get("npdes_permit") or "").startswith("WI")}
+    rows = ops()
+    held = [p for r in rows for p in r["npdes_permits"]]
+    assert len(held) == len(set(held)) and set(held) == plants | cso
+    by = {r["id"]: r for r in rows}
+    m = by["wi-mmsd"]
+    assert m["npdes_permits"] == ["WI0036820"] and m["kind"] == "cso" and m["outfall_count"] == 114
+    assert {"wi-milwaukee-metro-sew-dist-combi", "wi-mmsd-sso"} <= set(m["aliases"]) and m["legal_form"] == "special district"
+    assert by["wi-superior-sewage-disposal-system"]["outfall_count"] == 3
+    assert by["wi-fremont-sso"]["npdes_permits"] == ["WI0026158"]
+    assert by["wi-village-of-stockbridge"]["legal_form"] == "town"                   # the village, not the band
+    assert by["wi-columbus-city-wwtf"]["legal_form"] == "city"                       # not a federal facility
+    tribal = [r for r in rows if r["legal_form"] == "tribal"]
+    from add_wi_operators import EPA_TRIBAL_PERMITS
+    assert all("EPA Region 5" in r["notification_channel"] for r in tribal if r["npdes_permits"][0] in EPA_TRIBAL_PERMITS)
+    assert all("NR 210.21(5)" in r["notification_channel"] for r in rows if r not in tribal)
+    assert all("122.38" in r["notification_channel"] for r in rows if r["kind"] == "cso")
+    assert sum(1 for r in rows if r["kind"] == "cso") == 2
+
+
+def test_register_rows_per_operator_and_the_state_channels():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]}
+    from add_wi_operators import EPA_TRIBAL_PERMITS
+    for r in ops():
+        if set(r["npdes_permits"]) & EPA_TRIBAL_PERMITS:
+            assert reg[f"{r['id']}-epa-report"]["barrier"] == "no_web_page"
+        else:
+            row = reg[f"{r['id']}-nr210-notice"]
+            assert row["operator_id"] == r["id"] and "NR 210.21(5)" in row["legal_basis"] and row["barrier"] == "print_only"
+    assert reg["wi-mmsd-storm-updates"]["feed_source_id"] == "wi-mmsd-storm-updates"
+    assert reg["wi-dnr-switchboard-sso-reports"]["barrier"] == "login_required"
+    assert reg["wi-mmsd-cso-notification-plan"]["barrier"] == "image_only"
+    assert reg["wi-mmsd-rain-facility-page"]["records"] is False      # a counter, never an overflow
+    for cid in ("wi-superior-cso-page", "wi-dnr-serts-open-spills", "wi-dnr-beach-health"):
+        assert reg[cid]["monitored"] is True and reg[cid]["records"] is False
+    named = {c["operator_id"] for c in reg.values() if c.get("legal_basis") and "122.38" in c["legal_basis"]}
+    assert {"wi-mmsd", "wi-superior-sewage-disposal-system"} <= named   # every CSO permittee named
+
+
+def test_rules_row_cites_the_law_and_sets_no_window():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    wi = rules["red"]["by_state"]["WI"]
+    assert wi["hours"] is None and "NR 210.21(5)" in wi["source"] and "122.38" in wi["source"]
+    assert not re.search(r"\b(safe|clean)\b", wi["basis"], re.I)
+    assert "wi-mmsd-storm-updates" in rules["unresolved"]["day_start_caution"]["sources"]
+
+
+def test_state_text_is_in_the_page_shape_and_its_numbers_match_the_fetch():
+    t = (ROOT / "research" / "wi" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: WI\nname: Wisconsin\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
+    assert "18 such posts" in t and "26 reports" in t and "13 combined sewer overflows" in t
+    assert "331,500 gallons into Lincoln Creek on September 3, 2026, posted on September 8" in t
+
+
+def test_missing_waters_list_leaves_out_the_national_lists_names():
+    d = json.loads((ROOT / "research" / "wi" / "receiving-waters-missing.json").read_text())
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+
+    def k(n):
+        return re.sub(r"[^a-z0-9]", "", (n or "").lower())
+    held = {k(n) for w in nat["states"]["WI"]["waters"]
+            for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
+    assert d["state"] == "WI" and d["waters"] == len(d["rows"])
+    assert not [r["name"] for r in d["rows"] if k(r["name"]) in held]
+    resolved = {k(x.get("name")) for x in d.get("resolved") or []}   # a batch may move a name under resolved
+    assert all(k(r["name"]) not in resolved for r in d["rows"])
+
+
+def test_no_personal_string_reaches_the_records():
+    d = doc()
+    p = d["posts"]["storm-update-august-1st-2026"]
+    p["lines"] = p["lines"] + [M.safe_line("Questions: Pat Example, 414-555-0199, pat.example@example.org, "
+                                           "1234 Example Ave")]
+    blob = json.dumps(built(d)[0])
+    for s in ("414-555-0199", "pat.example", "1234 Example"):
+        assert s not in blob
