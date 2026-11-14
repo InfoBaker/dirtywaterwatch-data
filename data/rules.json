@@ -395,10 +395,12 @@
     "tx-tceq-sso-opendata",
     "tn-tdec-events-report",
     "oh-epa-spills-opendata",
-    "oh-columbus-sewer-overflow"
+    "oh-columbus-sewer-overflow",
+    "de-dnrec-derns-recent-releases",
+    "sc-florence-sso-notices"
    ],
    "hours": 72,
-   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
+   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports; Delaware's release list when a release's time is given as exactly midnight, read as the day only; the City of Florence's overflow notices, which give the day the City learned of the overflow and no end). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
   }
  },
  "reach": {
