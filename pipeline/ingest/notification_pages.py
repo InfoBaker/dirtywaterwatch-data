@@ -145,8 +145,8 @@ OPTIONAL = {
              "(from the first line matching start to the next line matching end)",
     "ignore_lines": "regular expressions of volatile lines (readings, clocks) left out of the text hash",
     "records": "false: never make records from this channel (default true)",
-    "availability_only": "true: monitor page availability without checking current status; pair with records:false "
-                         "to disable notice records (default false)",
+    "availability_only": "true: monitor page availability without checking current status; requires records: false "
+                         "(no notice records from this row) (default false)",
     "dated_lines_are_notices": "true: any added dated line is a notice (an event table)",
     "default_event_type": "event type of a notice whose words name none (common.EVENT_TYPES)",
     "every_hours": "fetch at most this often (default: every refresh)",
@@ -308,6 +308,9 @@ def validate_register(doc, dischargers: list[dict] | None = None, root: Path | N
         for k in ("records", "dated_lines_are_notices", "availability_only"):
             if k in r and not isinstance(r[k], bool):
                 errs.append(f"{where}: {k} is true or false")
+        if r.get("availability_only") is True and r.get("records") is not False:
+            # review 2026-11-14 (Astra data P2-6): a page watched for availability makes no notice records
+            errs.append(f"{where}: availability_only needs records: false")
         if r.get("default_event_type") is not None and r["default_event_type"] not in EVENT_TYPES:
             errs.append(f"{where}: default_event_type {r['default_event_type']!r} is not an event type")
         if r.get("every_hours") is not None and not (isinstance(r["every_hours"], (int, float))
@@ -1157,7 +1160,9 @@ def pages_of(channels: list[dict]) -> dict[str, dict]:
                 c["status_patterns"].append(r["status_pattern"])
             c["dated_lines_are_notices"] |= bool(r.get("dated_lines_are_notices"))
             c["default_event_type"] = c["default_event_type"] or r.get("default_event_type")
-            c["records"] |= r.get("records", True) is not False
+            # an availability-only row never turns records on, whatever its records says (validate_register requires
+            # records: false with it); another row of the same URL keeps its own setting (Astra data P2-6)
+            c["records"] |= r.get("records", True) is not False and r.get("availability_only") is not True
             c["shared"] |= r.get("channel_kind") == "shared_site"
     return pages
 
