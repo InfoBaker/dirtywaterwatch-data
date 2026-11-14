@@ -133,3 +133,204 @@ def test_main_reads_a_saved_zip_of_indiana_rows(tmp_path, monkeypatch):
     assert E.main(["--file", str(_zip(tmp_path, _fixture()))]) == 0
     doc = json.loads((tmp_path / "events" / "echo-sewer-overflow.json").read_text())
     assert doc["count"] == 2 and "IN" in doc["meta"]["states"]
+
+
+# ------------------------------------------------------------------------------------------------ IDEM's outfall layer
+
+def _script(name):
+    import importlib.util
+    import sys
+    spec = importlib.util.spec_from_file_location(name, ROOT / "scripts" / f"{name}.py")
+    mod = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, str(ROOT / "scripts"))
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _idem(oid, permit, cso, status, lat=40.0, lon=-86.0, wtype="Untreated CSO", stream="Sample Creek"):
+    return {"attributes": {"OBJECTID": oid, "Agency_Interest_ID": 1, "City": "City of Example", "NPDES_Number": permit,
+                           "CSO_Number": cso, "Receiving_Stream": stream, "waterbody_desc_2": "Example River",
+                           "waterbody_desc_3": "Wabash River", "waterbody_desc_4": None, "Status": status,
+                           "County": "Marion", "Basin": "Patoka-White", "Sub_Basin": "Upper White",
+                           "Watershed": "Sample Creek", "Wastewater_Type": wtype, "X_Coordinate": lon,
+                           "Y_Coordinate": lat, "Photo_Credit": "Jane Example"},
+            "geometry": None if lat is None else {"x": lon, "y": lat}}
+
+
+def test_idem_outfall_numbers_and_names():
+    B = _script("build_in_outfalls")
+    assert B.outfall_number("002C -- CSO - Town Lake - Inactive") == "002"
+    assert B.outfall_number("011CP -- CSO - Authorized when WWTP exceeds cap") == "011"
+    assert B.outfall_number("11AC -- CSO - Example and Sample") == "11A"
+    assert B.outfall_number("004Z -- SSO") == "004Z"
+    assert B.outfall_number("A38 -- CSO - Example St and Sample St") == "A38"
+    assert B.outfall_number("CSO at the bridge") is None
+    assert B.scrub_name("CSO - 1234 S Example St") == "CSO - [house number removed] S Example St"
+    assert B.scrub_name("CSO - 800' North of 4321 Sample Ave.") == "CSO - 800' North of [house number removed] Sample Ave."
+    for keep in ("CSO - Highway 67 East of Highway 1", "CSO - 001 Pond", "CSO - CS 002 Pump Station",
+                 "CSO - Alley 31-32 North Side Blvd", "CSO - Example Rd 120\" S of Bridge"):
+        assert B.scrub_name(keep) == keep
+
+
+def test_idem_rows_supersede_epas_and_inactive_is_closed():
+    B = _script("build_in_outfalls")
+    doc = {"features": [_idem(1, "IN0000003", "002C -- CSO - Example Ave", "Active", 39.9, -86.1),
+                        _idem(2, "IN0000003", "003C -- CSO - 1234 Sample St - Inactive", "Inactive"),
+                        _idem(3, "IN0000003", "004C -- CSO - Example", "Active, Discharge Prohibited"),
+                        _idem(4, "IN0000003", "005Z -- SSO", "Inactive", wtype="Domestic (Sanitary) Wastewater"),
+                        _idem(5, "IN0000003", "006C -- CSO", "Inactive", lat=None)]}
+    epa = [{"npdes_permit": "IN0000003", "state": "IN", "outfall": "002", "outfall_status": "CSO", "permittee": "EXAMPLE WWTP",
+            "city": "EXAMPLE", "coords_from": "facility", "echo_url": "https://echo.epa.gov/x"},
+           {"npdes_permit": "IN0000003", "state": "IN", "outfall": "009", "outfall_status": "CSO", "permittee": "EXAMPLE WWTP"}]
+    out = B.build(doc, epa, "2026-11-14T00:00:00Z")
+    by = {r["outfall"]: r for r in out["outfalls"]}
+    assert set(by) == {"002", "003", "004", "005Z"} and out["no_point"][0]["outfall"] == "006"
+    assert by["002"]["supersedes"]["coords_from"] == "facility" and by["002"]["permittee"] == "EXAMPLE WWTP"
+    assert (by["002"]["lat"], by["002"]["lon"]) == (39.9, -86.1) and by["002"]["coords_from"] == "state outfall layer"
+    assert by["002"]["downstream_waters"] == ["Example River", "Wabash River"]
+    assert by["003"]["outfall_status"].startswith("CLS") and "house number removed" in by["003"]["outfall_name"]
+    assert not by["004"]["outfall_status"].startswith("CLS")
+    assert by["005Z"]["outfall_kind"] == "other" and by["002"]["outfall_kind"] == "cso"
+    assert out["epa_not_in_state_layer"][0]["outfall"] == "009"
+    assert "Jane Example" not in json.dumps(out) and "Photo_Credit" not in json.dumps(out)
+
+
+def test_the_committed_outfall_file_is_the_registrys_indiana_layer():
+    import common as C
+    doc = json.loads((ROOT / "data" / "outfalls-in.json").read_text())
+    assert doc["count"] == len(doc["outfalls"]) >= 800 and "Photo_Credit" not in json.dumps(doc)
+    reg = {C.outfall_key(r["npdes_permit"], r["outfall"]): r for r in C.load_outfall_registry(provisional=False)
+           if r.get("state") == "IN"}
+    row = next(r for r in doc["outfalls"] if r.get("supersedes"))
+    assert reg[C.outfall_key(row["npdes_permit"], row["outfall"])]["_file"] == "data/outfalls-in.json"
+    assert all(abs(r["lat"] - 39.8) < 2.2 and -88.2 < r["lon"] < -84.7 for r in doc["outfalls"])
+
+
+# ------------------------------------------------------------------------------------------------ EPA's monthly DMRs
+
+def _dmr(pend, value=None, nodi=None, unit="#/mo", received="28-SEP-25"):
+    return {"MonitoringPeriodEndDate": pend, "DMRValueNmbr": value, "DMRUnitDesc": unit if value else None,
+            "StatisticalBaseDesc": "MO TOTAL", "NODICode": nodi, "NODIDesc": "No Discharge" if nodi == "C" else None,
+            "ValueReceivedDate": received, "DMRValueId": f"v{pend}"}
+
+
+def _results():
+    def res(code, desc, unit, rows_by_feat):
+        return {"Message": "Success", "CWPName": "EXAMPLE WWTP", "StartDate": "01/01/2025",
+                "PermFeatures": [{"PermFeatureNmbr": f, "PermFeatureTypeDesc": "External Outfall",
+                                  "Parameters": [{"ParameterCode": code, "ParameterDesc": desc,
+                                                  "MonitoringLocationDesc": "Effluent Gross",
+                                                  "DischargeMonitoringReports": rows}]}
+                                 for f, rows in rows_by_feat.items()]}
+    return {
+        ("IN0000004", "84165"): res("84165", "Discharge event observation", "#/mo", {
+            "002": [_dmr("31-AUG-25", "1"), _dmr("30-SEP-25", nodi="C", received="28-OCT-25")],
+            "003": [_dmr("31-AUG-25", nodi="C")], "001": [_dmr("31-AUG-25", "4")]}),
+        ("IN0000004", "50037"): res("50037", "Duration", "hr/mo", {
+            "002": [_dmr("31-AUG-25", "4", unit="hr/mo"), _dmr("30-SEP-25", nodi="C", received="28-OCT-25")]}),
+        ("IN0000004", "74063"): res("74063", "Overflow volume", "Mgal", {
+            "002": [_dmr("31-AUG-25", "1.1", unit="Mgal"), _dmr("30-SEP-25", nodi="C", received="28-OCT-25")]}),
+    }
+
+
+def _registry():
+    return {("IN0000004", "2"): {"npdes_permit": "IN0000004", "outfall": "002", "state": "IN", "outfall_kind": "cso",
+                                 "outfall_status": "active (IDEM layer)", "lat": 41.6, "lon": -86.7,
+                                 "county": "LaPorte", "receiving_water_echo": "Sample Ditch", "water_slug": "sample-ditch-in",
+                                 "_file": "data/outfalls-in.json"},
+            ("IN0000004", "3"): {"npdes_permit": "IN0000004", "outfall": "003", "state": "IN", "outfall_kind": "cso",
+                                 "outfall_status": "active (IDEM layer)", "lat": 41.61, "lon": -86.71, "county": "LaPorte"}}
+
+
+def test_monthly_dmr_totals_are_one_month_precision_record_per_outfall_month():
+    from collections import Counter, defaultdict
+
+    from ingest import in_echo_cso_monthly as M
+    stats = defaultdict(Counter)
+    cells, names = M.collect(_results(), _registry(), stats)
+    recs = M.build_records(cells, names, _registry(), {}, stats)
+    assert len(recs) == 1
+    r = recs[0]
+    assert r["source_record_id"] == "IN0000004:002:2025-08" and r["event_type"] == "cso" and r["status"] == "ended"
+    assert (r["started_at"], r["ended_at"], r["time_precision"]) == ("2025-08-01", "2025-08-31", "month")
+    assert r["reported_at"] == "2025-09-28" and r["volume_gal"] == 1_100_000
+    assert r["volume_text"] == "1 discharge event, 4 hours, 1.1 million gallons in 2025-08 (monthly DMR totals)"
+    assert r["water_slugs"] == ["sample-ditch-in"] and r["lat"] == 41.6
+    assert r["raw"]["time_zone"] == "America/Chicago"                     # LaPorte County keeps Central time
+    assert stats["skipped_not_cso_outfall"]["IN0000004:001"] == 1          # the plant's own outfall
+    assert stats["no_discharge_months"]["IN0000004"] == 2                  # 002 in September, 003 in August
+    latest = M.latest_months(cells)
+    assert latest["IN0000004|002"] == {"month": "2025-09", "discharged": False, "events": 0.0, "received_at": "2025-10-28"}
+    assert latest["IN0000004|003"]["discharged"] is False
+
+
+def test_monthly_records_never_colour_and_are_an_epa_monthly_source():
+    from build import status
+    assert "in-echo-dmr-cso" in status.EPA_MONTHLY_SOURCES
+    from ingest import in_echo_cso_monthly as M
+    assert M.SOURCE_ID == "in-echo-dmr-cso" and set(M.PARAMS) == {"84165", "50037", "74063"}
+
+
+def test_permits_read_are_those_with_an_open_combined_sewer_outfall():
+    from ingest import in_echo_cso_monthly as M
+    reg = _registry()
+    reg[("IN0000005", "1")] = {"npdes_permit": "IN0000005", "outfall": "001", "state": "IN", "outfall_kind": "cso",
+                               "outfall_status": "CLS (inactive in IDEM's layer)"}
+    assert M.permits_to_read(reg) == ["IN0000004"]
+
+
+# ------------------------------------------------------------------------------------------------ IDEM's bloom samples
+
+def _cyano(rows=None, at="2026-11-14T18:00:00Z", prev=()):
+    from ingest.generic import arcgis, runner
+    _, block = runner.load_source("in-idem-cyanobacteria")
+    rows = arcgis.parse(block, (FIX / "in_idem_cyanobacteria.json").read_bytes()) if rows is None else rows
+    return runner.build("in-idem-cyanobacteria", block, rows, at, prev)
+
+
+def _cyano_rows():
+    from ingest.generic import arcgis, runner
+    _, block = runner.load_source("in-idem-cyanobacteria")
+    return arcgis.parse(block, (FIX / "in_idem_cyanobacteria.json").read_bytes())
+
+
+def test_cyano_block_reads_the_layer_with_its_hooks():
+    from ingest.generic import runner
+    _, block = runner.load_source("in-idem-cyanobacteria")
+    assert block["platform"] == "arcgis" and not runner.validate_block(block) and block["round_coords"] == 3
+    assert block["transform"] == "ingest.in_transforms.in_cyano_record"
+    assert block["after_history"] == "ingest.in_transforms.in_cyano_sequence"
+
+
+def test_advisory_level_samples_are_idems_bloom_records_and_low_risk_is_none():
+    recs, stats = _cyano()
+    assert len(recs) == 7                                  # 4 Advisory at Mississinewa, 3 Dog Park Closed
+    assert {r["event_type"] for r in recs} == {"hab_advisory"}
+    assert not [r for r in recs if "Low Risk" in str(r["raw"].get("_level"))]
+    r = next(x for x in recs if x["sampled_at"] == "2026-09-08" and "WMI" in x["source_record_id"])
+    assert r["started_at"] is None and r["ended_at"] is None and r["status"] == "unknown"   # the season is 67 days old
+    assert "Advisory" in r["advice_text"] and r["raw"]["time_zone"] == "America/New_York"
+    assert r["lat"] == round(r["lat"], 3) and r["raw"]["_placement"] == "named_water_only"
+
+
+def test_a_recent_advisory_sample_opens_an_interval_at_the_poll_and_a_newer_sample_closes_it():
+    rows = [r for r in _cyano_rows() if r.get("location_id") == "WWU-09-0027"]
+    rows.sort(key=lambda r: r["date_"])
+    before_last = [r for r in rows if r["date_"] < "2026-09-14"]
+    first, _ = _cyano(before_last, "2026-09-10T15:00:00Z")
+    open_ = next(r for r in first if r["sampled_at"] == "2026-09-08")
+    assert open_["status"] == "advisory_active" and open_["started_at"] == "2026-09-10T15:00:00Z"
+    assert open_["time_precision"] == "poll" and open_["ended_at"] is None
+    older = next(r for r in first if r["sampled_at"] == "2026-08-31")
+    assert older["started_at"] is None                     # not the latest sample: history only
+    second, _ = _cyano(rows, "2026-09-16T15:00:00Z", first)
+    was = next(r for r in second if r["sampled_at"] == "2026-09-08")
+    assert was["ended_at"] == "2026-09-16T15:00:00Z" and was["raw"]["ended_at_precision"] == "poll"
+    assert was["status"] == "ended"                        # the newer sample is also at an advisory level
+    now = next(r for r in second if r["sampled_at"] == "2026-09-14")
+    assert now["status"] == "advisory_active" and now["started_at"] == "2026-09-16T15:00:00Z"
+
+
+def test_an_old_season_first_read_late_opens_nothing():
+    recs, _ = _cyano(at="2026-11-14T18:00:00Z")
+    assert all(r["started_at"] is None and r["status"] == "unknown" for r in recs)
