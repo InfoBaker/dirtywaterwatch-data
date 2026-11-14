@@ -112,7 +112,7 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
         if e.get("legal_form") and how not in ("override",) and not name.startswith("Holder of permit"):
             form = e["legal_form"]
         hows[how] += 1
-        g = groups.setdefault(name, {"name": name, "legal_form": form, "permits": [], "waters": set(), "towns": set(),
+        g = groups.setdefault(slug(name), {"name": name, "legal_form": form, "permits": [], "waters": set(), "towns": set(),
                                      "aliases": [], "notes": [], "outfalls": 0, "sources": set()})
         g["permits"].append(p)
         g["waters"] |= e["waters"] | cso_waters.get(p, set())
@@ -125,7 +125,8 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             g["notes"].append(f"{p}: EPA records the permittee as \"{title(clean(e['permit_name'] or ''))}\""
                               if not name.startswith("Holder of permit") else f"{p}: the permittee's name is withheld")
     rows = []
-    for name, g in sorted(groups.items()):
+    for _, g in sorted(groups.items()):
+        name = g["name"]
         permits = sorted(g["permits"])
         cso = [p for p in permits if p in cso_permits]
         channel = LAW + (CSO_PRACTICE if cso else "")

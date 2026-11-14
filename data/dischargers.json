@@ -456897,39 +456897,6 @@
   ]
  },
  {
-  "id": "wv-harpers-ferry-water-works",
-  "name": "Harpers Ferry Water Works",
-  "short_name": "Harpers Ferry Water Works",
-  "legal_form": null,
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVR110091",
-  "npdes_permits": [
-   "WVR110091"
-  ],
-  "receiving_waters": [
-   "POTOMAC RIVER"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Hapers Ferry"
-  ],
-  "notes": "WVR110091: EPA records the permittee as \"Harpers Ferry Water Works\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-harpers-ferry-water-works"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
   "id": "wv-harpers-ferry-bolivar-public-service-district",
   "name": "Harpers Ferry-Bolivar Public Service District",
   "short_name": "Harpers Ferry-Bolivar Public Service District",
@@ -456957,6 +456924,39 @@
   "checked": "2026-11-14",
   "aliases": [
    "wv-harpers-ferry-bolivar-public-service-district"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-harpers-ferry-water-works",
+  "name": "Harpers Ferry Water Works",
+  "short_name": "Harpers Ferry Water Works",
+  "legal_form": null,
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVR110091",
+  "npdes_permits": [
+   "WVR110091"
+  ],
+  "receiving_waters": [
+   "POTOMAC RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hapers Ferry"
+  ],
+  "notes": "WVR110091: EPA records the permittee as \"Harpers Ferry Water Works\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-harpers-ferry-water-works"
   ],
   "source_areas": [
    "wv"
@@ -464054,72 +464054,6 @@
   ]
  },
  {
-  "id": "wv-us-army-corps-of-engineers",
-  "name": "US Army Corps of Engineers",
-  "short_name": "US Army Corps of Engineers",
-  "legal_form": "federal facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG551468",
-  "npdes_permits": [
-   "WVG551468"
-  ],
-  "receiving_waters": [
-   "Guyandotte Rv/Ohio Rv"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Justice"
-  ],
-  "notes": "WVG551468: EPA records the permittee as \"US Army Corps of Engineers\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-us-army-corps-of-engineers"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-us-customs-and-border-protection",
-  "name": "US Customs and Border Protection",
-  "short_name": "US Customs and Border Protection",
-  "legal_form": "federal facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG551448",
-  "npdes_permits": [
-   "WVG551448"
-  ],
-  "receiving_waters": [
-   "Flowing Springs Rn/Shenandoah Rv"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Harpers Ferry"
-  ],
-  "notes": "WVG551448: EPA records the permittee as \"US Customs and Border Protection\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-us-customs-and-border-protection"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
   "id": "wv-union-public-service-district",
   "name": "Union Public Service District",
   "short_name": "Union Public Service District",
@@ -464224,6 +464158,72 @@
   "checked": "2026-11-14",
   "aliases": [
    "wv-upshur-county-board-of-education"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-us-army-corps-of-engineers",
+  "name": "US Army Corps of Engineers",
+  "short_name": "US Army Corps of Engineers",
+  "legal_form": "federal facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG551468",
+  "npdes_permits": [
+   "WVG551468"
+  ],
+  "receiving_waters": [
+   "Guyandotte Rv/Ohio Rv"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Justice"
+  ],
+  "notes": "WVG551468: EPA records the permittee as \"US Army Corps of Engineers\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-us-army-corps-of-engineers"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-us-customs-and-border-protection",
+  "name": "US Customs and Border Protection",
+  "short_name": "US Customs and Border Protection",
+  "legal_form": "federal facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG551448",
+  "npdes_permits": [
+   "WVG551448"
+  ],
+  "receiving_waters": [
+   "Flowing Springs Rn/Shenandoah Rv"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Harpers Ferry"
+  ],
+  "notes": "WVG551448: EPA records the permittee as \"US Customs and Border Protection\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-us-customs-and-border-protection"
   ],
   "source_areas": [
    "wv"
@@ -464425,274 +464425,6 @@
   "checked": "2026-11-14",
   "aliases": [
    "wv-village-of-valley-grove"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-wv-department-of-agriculture",
-  "name": "WV Department of Agriculture",
-  "short_name": "WV Department of Agriculture",
-  "legal_form": "state facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG551312",
-  "npdes_permits": [
-   "WVG551312"
-  ],
-  "receiving_waters": [
-   "MILL CK/OHIO RV"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Ripley"
-  ],
-  "notes": "WVG551312: EPA records the permittee as \"WV Department of Agriculture\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-wv-department-of-agriculture"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-wv-department-of-transportation",
-  "name": "WV Department of Transportation",
-  "short_name": "WV Department of Transportation",
-  "legal_form": "state facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG417848",
-  "npdes_permits": [
-   "WVG417848"
-  ],
-  "receiving_waters": [
-   "UNT/Stony Ck/Cacapon Rv/Potamc Rv"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Great Cacapon"
-  ],
-  "notes": "WVG417848: EPA records the permittee as \"WV Department of Transportation\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-wv-department-of-transportation"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-wv-division-of-highways",
-  "name": "WV Division of Highways",
-  "short_name": "WV Division of Highways",
-  "legal_form": "state facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG414995",
-  "npdes_permits": [
-   "WVG414995",
-   "WVG415076"
-  ],
-  "receiving_waters": [
-   "CULVERT/NATURAL DRAINAGE/UNT/ALUM CK RM 1.23/COAL",
-   "POCATALICO CK/POCATALICO RV/KANAWHA RV"
-  ],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Charleston"
-  ],
-  "notes": "WVG414995: EPA records the permittee as \"WV Division of Highways\"; WVG415076: EPA records the permittee as \"WV Division of Highways\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-wv-division-of-highways"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-wv-division-of-natural-resources",
-  "name": "WV Division of Natural Resources",
-  "short_name": "WV Division of Natural Resources",
-  "legal_form": "state facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG411564",
-  "npdes_permits": [
-   "WVG411564",
-   "WVG416122",
-   "WVG417044",
-   "WVG417811",
-   "WVG550943",
-   "WVG551092",
-   "WVG551093",
-   "WVG551133",
-   "WVG551161",
-   "WVG551164",
-   "WVG551167",
-   "WVG551168",
-   "WVG551181",
-   "WVG551187",
-   "WVG551188",
-   "WVG551189",
-   "WVG551190",
-   "WVG551233",
-   "WVG551276",
-   "WVG551277",
-   "WVG551278",
-   "WVG551297",
-   "WVG551393",
-   "WVG551433",
-   "WVG551438",
-   "WVG551457",
-   "WVG551458",
-   "WVG551462",
-   "WVG551499"
-  ],
-  "receiving_waters": [
-   "BEARPEN BR/STILL RN/GUYANDOTTE RV/OHIO RV",
-   "BEAVER CK/GREENBRIER RV/NEW RV/KANAWHA RV",
-   "BLACK FK/CABIN CK/GUYANDOTTE RV/OHIO RV",
-   "BLUESTONE RV/NEW RV/KANAWHA RV",
-   "BUFFALO CK/GUYANDOTTE RV/OHIO RV",
-   "Beech Fork Lake/Twelvepole Ck/Ohio Rv",
-   "Big Coal Rv/Coal Rv/Kanawha Rv",
-   "CAMP CK/BLUESTONE RV/NEW RV/KANAWHA RV",
-   "DAVIS CK/KANAWHA RV",
-   "Davis Ck/Kanawha Rv",
-   "GREENBRIER RV/NEW RV/KANAWHA RV",
-   "Glade Ck/Manns Ck/New Rv/Kanawha Rv",
-   "INDIAN RN/SLEEPY CK/POTOMAC RV",
-   "ISLAND LICK RN/GREENBRIER RV/NEW RV/KANAWHA RV",
-   "LAUREL FK/LEFT FK/HOLLY RV/ELK RV/KANAWHA RV",
-   "Little Kanawha Rv",
-   "MANNS CK/NEW RV/KANAWHA RV",
-   "MIDDLE FORK RV/TYGART VALLEY RV/MONONGAHELA RV",
-   "NATURAL DRAINAGE/BLUESTONE RV/NEW RV/KANAWHA RV",
-   "NORTH FK/HUGHES RV/LITTLE KANAWHA RV"
-  ],
-  "water_slugs": [],
-  "outfall_count": 29,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Alum Creek",
-   "Barboursville",
-   "Berkeley Springs",
-   "Buckhannon",
-   "Cairo",
-   "Camp Creek",
-   "Charleston",
-   "Clifftop",
-   "Davis",
-   "Elizabeth",
-   "Grafton",
-   "Hacker Valley",
-   "Logan",
-   "Marlinton",
-   "Mullens",
-   "Pipestem"
-  ],
-  "notes": "WVG411564: EPA records the permittee as \"WV Division of Natural Resources\"; WVG416122: EPA records the permittee as \"WV Division of Natural Resources\"; WVG417044: EPA records the permittee as \"WV Division of Natural Resources\"; WVG417811: EPA records the permittee as \"WV Division of Natural Resources\"; WVG550943: EPA records the permittee as \"WV Division of Natural Resources\"; WVG551092: EPA records the permittee as \"WV Division of Natural Resources\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-wv-division-of-natural-resources"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-wv-office-of-miner-s-health-safety-and-training",
-  "name": "WV Office of Miner's Health, Safety and Training",
-  "short_name": "WV Office of Miner's Health, Safety and Training",
-  "legal_form": "state facility",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG551516",
-  "npdes_permits": [
-   "WVG551516"
-  ],
-  "receiving_waters": [
-   "LITTLE COAL RV/COAL RV/KANAWHA RV"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Julian"
-  ],
-  "notes": "WVG551516: EPA records the permittee as \"WV Office of Miner's Health, Safety and Training\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-wv-office-of-miner-s-health-safety-and-training"
-  ],
-  "source_areas": [
-   "wv"
-  ]
- },
- {
-  "id": "wv-wv-parkways-authority",
-  "name": "WV Parkways Authority",
-  "short_name": "WV Parkways Authority",
-  "legal_form": "authority",
-  "state": "WV",
-  "kind": "plant",
-  "npdes_permit": "WVG551405",
-  "npdes_permits": [
-   "WVG551405",
-   "WVG551520",
-   "WVG610697"
-  ],
-  "receiving_waters": [
-   "Bluestone Rv/New Rv/Kanawha Rv",
-   "PAINT CK/KANAWHA RV",
-   "Paint Creek/Kanawha River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 4,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Athens",
-   "Charleston",
-   "Standard"
-  ],
-  "notes": "WVG551405: EPA records the permittee as \"WV Parkways Authority\"; WVG551520: EPA records the permittee as \"WV Parkways Authority\"; WVG610697: EPA records the permittee as \"WV Parkways Authority\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "wv-wv-parkways-authority"
   ],
   "source_areas": [
    "wv"
@@ -465189,6 +464921,274 @@
   "checked": "2026-11-14",
   "aliases": [
    "wv-wood-county-parks-and-recreation-commission"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-wv-department-of-agriculture",
+  "name": "WV Department of Agriculture",
+  "short_name": "WV Department of Agriculture",
+  "legal_form": "state facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG551312",
+  "npdes_permits": [
+   "WVG551312"
+  ],
+  "receiving_waters": [
+   "MILL CK/OHIO RV"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ripley"
+  ],
+  "notes": "WVG551312: EPA records the permittee as \"WV Department of Agriculture\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-wv-department-of-agriculture"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-wv-department-of-transportation",
+  "name": "WV Department of Transportation",
+  "short_name": "WV Department of Transportation",
+  "legal_form": "state facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG417848",
+  "npdes_permits": [
+   "WVG417848"
+  ],
+  "receiving_waters": [
+   "UNT/Stony Ck/Cacapon Rv/Potamc Rv"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Great Cacapon"
+  ],
+  "notes": "WVG417848: EPA records the permittee as \"WV Department of Transportation\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-wv-department-of-transportation"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-wv-division-of-highways",
+  "name": "WV Division of Highways",
+  "short_name": "WV Division of Highways",
+  "legal_form": "state facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG414995",
+  "npdes_permits": [
+   "WVG414995",
+   "WVG415076"
+  ],
+  "receiving_waters": [
+   "CULVERT/NATURAL DRAINAGE/UNT/ALUM CK RM 1.23/COAL",
+   "POCATALICO CK/POCATALICO RV/KANAWHA RV"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Charleston"
+  ],
+  "notes": "WVG414995: EPA records the permittee as \"WV Division of Highways\"; WVG415076: EPA records the permittee as \"WV Division of Highways\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-wv-division-of-highways"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-wv-division-of-natural-resources",
+  "name": "WV Division of Natural Resources",
+  "short_name": "WV Division of Natural Resources",
+  "legal_form": "state facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG411564",
+  "npdes_permits": [
+   "WVG411564",
+   "WVG416122",
+   "WVG417044",
+   "WVG417811",
+   "WVG550943",
+   "WVG551092",
+   "WVG551093",
+   "WVG551133",
+   "WVG551161",
+   "WVG551164",
+   "WVG551167",
+   "WVG551168",
+   "WVG551181",
+   "WVG551187",
+   "WVG551188",
+   "WVG551189",
+   "WVG551190",
+   "WVG551233",
+   "WVG551276",
+   "WVG551277",
+   "WVG551278",
+   "WVG551297",
+   "WVG551393",
+   "WVG551433",
+   "WVG551438",
+   "WVG551457",
+   "WVG551458",
+   "WVG551462",
+   "WVG551499"
+  ],
+  "receiving_waters": [
+   "BEARPEN BR/STILL RN/GUYANDOTTE RV/OHIO RV",
+   "BEAVER CK/GREENBRIER RV/NEW RV/KANAWHA RV",
+   "BLACK FK/CABIN CK/GUYANDOTTE RV/OHIO RV",
+   "BLUESTONE RV/NEW RV/KANAWHA RV",
+   "BUFFALO CK/GUYANDOTTE RV/OHIO RV",
+   "Beech Fork Lake/Twelvepole Ck/Ohio Rv",
+   "Big Coal Rv/Coal Rv/Kanawha Rv",
+   "CAMP CK/BLUESTONE RV/NEW RV/KANAWHA RV",
+   "DAVIS CK/KANAWHA RV",
+   "Davis Ck/Kanawha Rv",
+   "GREENBRIER RV/NEW RV/KANAWHA RV",
+   "Glade Ck/Manns Ck/New Rv/Kanawha Rv",
+   "INDIAN RN/SLEEPY CK/POTOMAC RV",
+   "ISLAND LICK RN/GREENBRIER RV/NEW RV/KANAWHA RV",
+   "LAUREL FK/LEFT FK/HOLLY RV/ELK RV/KANAWHA RV",
+   "Little Kanawha Rv",
+   "MANNS CK/NEW RV/KANAWHA RV",
+   "MIDDLE FORK RV/TYGART VALLEY RV/MONONGAHELA RV",
+   "NATURAL DRAINAGE/BLUESTONE RV/NEW RV/KANAWHA RV",
+   "NORTH FK/HUGHES RV/LITTLE KANAWHA RV"
+  ],
+  "water_slugs": [],
+  "outfall_count": 29,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Alum Creek",
+   "Barboursville",
+   "Berkeley Springs",
+   "Buckhannon",
+   "Cairo",
+   "Camp Creek",
+   "Charleston",
+   "Clifftop",
+   "Davis",
+   "Elizabeth",
+   "Grafton",
+   "Hacker Valley",
+   "Logan",
+   "Marlinton",
+   "Mullens",
+   "Pipestem"
+  ],
+  "notes": "WVG411564: EPA records the permittee as \"WV Division of Natural Resources\"; WVG416122: EPA records the permittee as \"WV Division of Natural Resources\"; WVG417044: EPA records the permittee as \"WV Division of Natural Resources\"; WVG417811: EPA records the permittee as \"WV Division of Natural Resources\"; WVG550943: EPA records the permittee as \"WV Division of Natural Resources\"; WVG551092: EPA records the permittee as \"WV Division of Natural Resources\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-wv-division-of-natural-resources"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-wv-office-of-miner-s-health-safety-and-training",
+  "name": "WV Office of Miner's Health, Safety and Training",
+  "short_name": "WV Office of Miner's Health, Safety and Training",
+  "legal_form": "state facility",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG551516",
+  "npdes_permits": [
+   "WVG551516"
+  ],
+  "receiving_waters": [
+   "LITTLE COAL RV/COAL RV/KANAWHA RV"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Julian"
+  ],
+  "notes": "WVG551516: EPA records the permittee as \"WV Office of Miner's Health, Safety and Training\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-wv-office-of-miner-s-health-safety-and-training"
+  ],
+  "source_areas": [
+   "wv"
+  ]
+ },
+ {
+  "id": "wv-wv-parkways-authority",
+  "name": "WV Parkways Authority",
+  "short_name": "WV Parkways Authority",
+  "legal_form": "authority",
+  "state": "WV",
+  "kind": "plant",
+  "npdes_permit": "WVG551405",
+  "npdes_permits": [
+   "WVG551405",
+   "WVG551520",
+   "WVG610697"
+  ],
+  "receiving_waters": [
+   "Bluestone Rv/New Rv/Kanawha Rv",
+   "PAINT CK/KANAWHA RV",
+   "Paint Creek/Kanawha River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "West Virginia's Water Resources rules require whoever causes a spill or accidental discharge of pollutants, sewage included, to notify DEP's emergency spill line immediately (1-800-642-3074); the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). DEP publishes no list of these reports, and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Athens",
+   "Charleston",
+   "Standard"
+  ],
+  "notes": "WVG551405: EPA records the permittee as \"WV Parkways Authority\"; WVG551520: EPA records the permittee as \"WV Parkways Authority\"; WVG610697: EPA records the permittee as \"WV Parkways Authority\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wv-wv-parkways-authority"
   ],
   "source_areas": [
    "wv"
@@ -467669,18 +467669,20 @@
   "npdes_permit": "LA0103845",
   "npdes_permits": [
    "LA0103845",
-   "LA0103853"
+   "LA0103853",
+   "LA0115771"
   ],
   "receiving_waters": [
    "Mississippi River"
   ],
   "water_slugs": [],
-  "outfall_count": 2,
+  "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
+   "Saint Gabriel",
    "St. Gabriel",
    "Sunshine"
   ],
@@ -467722,37 +467724,6 @@
   "checked": "2026-11-14",
   "aliases": [
    "la-city-of-st-martinville"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-city-of-st-gabriel",
-  "name": "City of St. Gabriel",
-  "short_name": "City of St. Gabriel",
-  "legal_form": "city",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0115771",
-  "npdes_permits": [
-   "LA0115771"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Saint Gabriel"
-  ],
-  "notes": null,
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-city-of-st-gabriel"
   ],
   "source_areas": [
    "la"
@@ -468870,13 +468841,14 @@
  },
  {
   "id": "la-greater-ouachita-water-co-inc",
-  "name": "Greater Ouachita Water Co Inc",
-  "short_name": "Greater Ouachita Water Co Inc",
+  "name": "Greater Ouachita Water Co.,inc",
+  "short_name": "Greater Ouachita Water Co.,inc",
   "legal_form": "investor-owned utility",
   "state": "LA",
   "kind": "plant",
-  "npdes_permit": "LA0116424",
+  "npdes_permit": "LA0110485",
   "npdes_permits": [
+   "LA0110485",
    "LA0116424"
   ],
   "receiving_waters": [
@@ -468889,40 +468861,10 @@
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Monroe"
-  ],
-  "notes": "LA0116424: EPA records the permittee as \"Greater Ouachita Water Co Inc - US Hwy 165 N Regional Wwtf\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-greater-ouachita-water-co-inc"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-greater-ouachita-water-co-inc",
-  "name": "Greater Ouachita Water Co.,inc",
-  "short_name": "Greater Ouachita Water Co.,inc",
-  "legal_form": "investor-owned utility",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0110485",
-  "npdes_permits": [
-   "LA0110485"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 0,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
+   "Monroe",
    "West Monroe"
   ],
-  "notes": "LA0110485: EPA records the permittee as \"Greater Ouachita Water Co.,inc\"",
+  "notes": "LA0110485: EPA records the permittee as \"Greater Ouachita Water Co.,inc\"; LA0116424: EPA records the permittee as \"Greater Ouachita Water Co Inc - US Hwy 165 N Regional Wwtf\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -469119,37 +469061,6 @@
   ]
  },
  {
-  "id": "la-jefferson-davis-parish-sanitary-landfill",
-  "name": "Jefferson Davis Parish Sanitary Landfill",
-  "short_name": "Jefferson Davis Parish Sanitary Landfill",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0076660",
-  "npdes_permits": [
-   "LA0076660"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 7,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Welsh"
-  ],
-  "notes": "LA0076660: EPA records the permittee as \"Jefferson Davis Parish Sanitary Landfill\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-jefferson-davis-parish-sanitary-landfill"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
   "id": "la-jefferson-davis-parish-hathaway-h",
   "name": "Jefferson Davis Parish-Hathaway H",
   "short_name": "Jefferson Davis Parish-Hathaway H",
@@ -469175,6 +469086,37 @@
   "checked": "2026-11-14",
   "aliases": [
    "la-jefferson-davis-parish-hathaway-h"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-jefferson-davis-parish-sanitary-landfill",
+  "name": "Jefferson Davis Parish Sanitary Landfill",
+  "short_name": "Jefferson Davis Parish Sanitary Landfill",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0076660",
+  "npdes_permits": [
+   "LA0076660"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Welsh"
+  ],
+  "notes": "LA0076660: EPA records the permittee as \"Jefferson Davis Parish Sanitary Landfill\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-jefferson-davis-parish-sanitary-landfill"
   ],
   "source_areas": [
    "la"
@@ -469363,51 +469305,22 @@
   "npdes_permit": "LA0051161",
   "npdes_permits": [
    "LA0051161",
-   "LA0095273"
+   "LA0095273",
+   "LA0098094"
   ],
   "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 2,
+  "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Dequincy",
-   "Homer"
-  ],
-  "notes": "LA0051161: EPA records the permittee as \"La Dept of Public Safety & Corrections\"; LA0095273: EPA records the permittee as \"La Dept of Public Safety & Corrections\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-la-dept-of-public-safety-corrections"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-la-dept-of-public-safety-corrections",
-  "name": "La Dept. of Public Safety & Corrections",
-  "short_name": "La Dept. of Public Safety & Corrections",
-  "legal_form": "state facility",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0098094",
-  "npdes_permits": [
-   "LA0098094"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
+   "Homer",
    "Saint Gabriel"
   ],
-  "notes": "LA0098094: EPA records the permittee as \"La Dept. of Public Safety & Corrections- Elayn Hunt Correctional Center\"",
+  "notes": "LA0051161: EPA records the permittee as \"La Dept of Public Safety & Corrections\"; LA0095273: EPA records the permittee as \"La Dept of Public Safety & Corrections\"; LA0098094: EPA records the permittee as \"La Dept. of Public Safety & Corrections- Elayn Hunt Correctional Center\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -470755,13 +470668,14 @@
   "kind": "plant",
   "npdes_permit": "LA0039012",
   "npdes_permits": [
-   "LA0039012"
+   "LA0039012",
+   "LA0072541"
   ],
   "receiving_waters": [
    "5M"
   ],
   "water_slugs": [],
-  "outfall_count": 2,
+  "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
@@ -470769,38 +470683,7 @@
   "towns": [
    "Alexandria"
   ],
-  "notes": "LA0039012: EPA records the permittee as \"Rapides Parish Sewerage District No. 1 - Grundy Cooper Subdivision\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-rapides-parish-sewerage-district-no-1"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-rapides-parish-sewerage-district-no-1",
-  "name": "Rapides Parish Sewerage District No.1",
-  "short_name": "Rapides Parish Sewerage District No.1",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0072541",
-  "npdes_permits": [
-   "LA0072541"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Alexandria"
-  ],
-  "notes": "LA0072541: EPA records the permittee as \"Rapides Parish Sewerage District No.1\"",
+  "notes": "LA0039012: EPA records the permittee as \"Rapides Parish Sewerage District No. 1 - Grundy Cooper Subdivision\"; LA0072541: EPA records the permittee as \"Rapides Parish Sewerage District No.1\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -470970,6 +470853,44 @@
   ]
  },
  {
+  "id": "la-sewerage-and-water-board-of-new-orleans",
+  "name": "Sewerage and Water Board of New Orleans",
+  "short_name": "Sewerage and Water Board of New Orleans",
+  "legal_form": "authority",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0000086",
+  "npdes_permits": [
+   "LA0000086",
+   "LA0038091",
+   "LA0038105"
+  ],
+  "receiving_waters": [
+   "MISSISSIPPI RIVER/LEONIDAS CANAL",
+   "Mississippi River",
+   "ORLEANS CANAL/MISSISSIPPI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here. The Board publishes its consent-decree quarterly and annual reports; the Q3 2026 report (624 pages) holds no dated list of overflows.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": "https://www.swbno.org/Wastewater/ConsentDecree",
+  "towns": [
+   "New Orleans"
+  ],
+  "notes": null,
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-sewerage-and-water-board-of-new-orleans",
+   "la-swbno"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
   "id": "la-sewerage-district-1-of-iberia-parish-city-of-new-iberia",
   "name": "Sewerage District #1 of Iberia Parish & City of New Iberia",
   "short_name": "Sewerage District #1 of Iberia Parish & City of New Iberia",
@@ -471133,37 +471054,6 @@
  },
  {
   "id": "la-sewerage-district-no-1-of-tangipahoa-parish",
-  "name": "Sewerage District No. 1 of Tangipahoa Parish",
-  "short_name": "Sewerage District No. 1 of Tangipahoa Parish",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0123153",
-  "npdes_permits": [
-   "LA0123153"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Hammond"
-  ],
-  "notes": "LA0123153: EPA records the permittee as \"Sewerage District No. 1 of Tangipahoa Parish\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-sewerage-district-no-1-of-tangipahoa-parish"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-sewerage-district-no-1-of-tangipahoa-parish",
   "name": "Sewerage District No.1 of Tangipahoa Parish",
   "short_name": "Sewerage District No.1 of Tangipahoa Parish",
   "legal_form": "county",
@@ -471171,61 +471061,25 @@
   "kind": "plant",
   "npdes_permit": "LA0122611",
   "npdes_permits": [
-   "LA0122611"
+   "LA0122611",
+   "LA0123153"
   ],
   "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 1,
+  "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
+   "Hammond",
    "Ponchatoula"
   ],
-  "notes": "LA0122611: EPA records the permittee as \"Sewerage District No.1 of Tangipahoa Parish\"",
+  "notes": "LA0122611: EPA records the permittee as \"Sewerage District No.1 of Tangipahoa Parish\"; LA0123153: EPA records the permittee as \"Sewerage District No. 1 of Tangipahoa Parish\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
    "la-sewerage-district-no-1-of-tangipahoa-parish"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-sewerage-and-water-board-of-new-orleans",
-  "name": "Sewerage and Water Board of New Orleans",
-  "short_name": "Sewerage and Water Board of New Orleans",
-  "legal_form": "authority",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0000086",
-  "npdes_permits": [
-   "LA0000086",
-   "LA0038091",
-   "LA0038105"
-  ],
-  "receiving_waters": [
-   "MISSISSIPPI RIVER/LEONIDAS CANAL",
-   "Mississippi River",
-   "ORLEANS CANAL/MISSISSIPPI RIVER"
-  ],
-  "water_slugs": [],
-  "outfall_count": 4,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here. The Board publishes its consent-decree quarterly and annual reports; the Q3 2026 report (624 pages) holds no dated list of overflows.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": "https://www.swbno.org/Wastewater/ConsentDecree",
-  "towns": [
-   "New Orleans"
-  ],
-  "notes": null,
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-sewerage-and-water-board-of-new-orleans",
-   "la-swbno"
   ],
   "source_areas": [
    "la"
@@ -471324,304 +471178,6 @@
   "checked": "2026-11-14",
   "aliases": [
    "la-st-bernard-parish-govt"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-james-parish-government",
-  "name": "St James Parish Government",
-  "short_name": "St James Parish Government",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LAG536035",
-  "npdes_permits": [
-   "LAG536035"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Saint James"
-  ],
-  "notes": "LAG536035: EPA records the permittee as \"St James Parish Government - District 5 Senior Center\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-james-parish-government"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-john-the-baptist-parish",
-  "name": "St John the Baptist Parish",
-  "short_name": "St John the Baptist Parish",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0064092",
-  "npdes_permits": [
-   "LA0064092",
-   "LA0079588",
-   "LA0080454",
-   "LA0099759",
-   "LA0127097"
-  ],
-  "receiving_waters": [
-   "Maurepas Swamp",
-   "Mississippi River",
-   "SEG 0703 MISSISSIPPI RIVER BASIN"
-  ],
-  "water_slugs": [],
-  "outfall_count": 5,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Edgard",
-   "Laplace",
-   "Reserve",
-   "Vacherie"
-  ],
-  "notes": "LA0064092: EPA records the permittee as \"St John the Baptist Parish - Woodland Drive STP\"; LA0079588: EPA records the permittee as \"St John the Baptist Parish\"; LA0080454: EPA records the permittee as \"St John the Baptist Parish - Central WWTP\"; LA0099759: EPA records the permittee as \"St John the Baptist Parish - Wallace WWTP\"; LA0127097: EPA records the permittee as \"St John the Baptist Parish\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-john-the-baptist-parish"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-landry-parish-district-no-1",
-  "name": "St Landry Parish District No.1",
-  "short_name": "St Landry Parish District No.1",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0057401",
-  "npdes_permits": [
-   "LA0057401"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Opelousas"
-  ],
-  "notes": "LA0057401: EPA records the permittee as \"St Landry Parish District No.1\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-landry-parish-district-no-1"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-martin-parish-government",
-  "name": "St Martin Parish Government",
-  "short_name": "St Martin Parish Government",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0122718",
-  "npdes_permits": [
-   "LA0122718"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Broussard"
-  ],
-  "notes": "LA0122718: EPA records the permittee as \"St Martin Parish Government\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-martin-parish-government"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-martin-water-sewer-commission-1",
-  "name": "St Martin Water & Sewer Commission #1",
-  "short_name": "St Martin Water & Sewer Commission #1",
-  "legal_form": "authority",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0074349",
-  "npdes_permits": [
-   "LA0074349"
-  ],
-  "receiving_waters": [
-   "BAYOU MILHOMME"
-  ],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Stephensville"
-  ],
-  "notes": "LA0074349: EPA records the permittee as \"St Martin Water & Sewer Commission #1\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-martin-water-sewer-commission-1"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-mary-parish-wards-5-8-joint-sewer-commission",
-  "name": "St Mary Parish Wards 5&8 Joint Sewer Commission",
-  "short_name": "St Mary Parish Wards 5&8 Joint Sewer Commission",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0068381",
-  "npdes_permits": [
-   "LA0068381"
-  ],
-  "receiving_waters": [
-   "Intracoastal Waterway"
-  ],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Patterson"
-  ],
-  "notes": "LA0068381: EPA records the permittee as \"St Mary Parish Wards 5&8 Joint Sewer Commission - Regional Sewerage Treatment Fa\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-mary-parish-wards-5-8-joint-sewer-commission"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-mary-parish-water-sewer-no-5",
-  "name": "St Mary Parish Water & Sewer No.5",
-  "short_name": "St Mary Parish Water & Sewer No.5",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0088765",
-  "npdes_permits": [
-   "LA0088765"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Four Corners"
-  ],
-  "notes": "LA0088765: EPA records the permittee as \"St Mary Parish Water & Sewer No.5\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-mary-parish-water-sewer-no-5"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-tammany-par-sd-4",
-  "name": "St Tammany Par-Sd #4",
-  "short_name": "St Tammany Par-Sd #4",
-  "legal_form": "special district",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0043583",
-  "npdes_permits": [
-   "LA0043583"
-  ],
-  "receiving_waters": [
-   "PONCHITOLAWA CREEK"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Covington"
-  ],
-  "notes": "LA0043583: EPA records the permittee as \"St Tammany Par-Sd #4\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-tammany-par-sd-4"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-tammany-parish-sewerage-district-1",
-  "name": "St Tammany Parish Sewerage District #1",
-  "short_name": "St Tammany Parish Sewerage District #1",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0080403",
-  "npdes_permits": [
-   "LA0080403"
-  ],
-  "receiving_waters": [
-   "Bayou Tete L'Ours"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Covington"
-  ],
-  "notes": "LA0080403: EPA records the permittee as \"St Tammany Parish Sewerage District #1 - Covington Country Club Subdivision\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-tammany-parish-sewerage-district-1"
   ],
   "source_areas": [
    "la"
@@ -471730,39 +471286,111 @@
   ]
  },
  {
-  "id": "la-st-john-the-baptist-parish",
-  "name": "St. John the Baptist Parish",
-  "short_name": "St. John the Baptist Parish",
+  "id": "la-st-james-parish-government",
+  "name": "St James Parish Government",
+  "short_name": "St James Parish Government",
   "legal_form": "county",
   "state": "LA",
   "kind": "plant",
-  "npdes_permit": "LA0065951",
+  "npdes_permit": "LAG536035",
   "npdes_permits": [
-   "LA0065951",
-   "LA0069868",
-   "LA0079596"
+   "LAG536035"
   ],
-  "receiving_waters": [
-   "MISSISSIPPI RIVER",
-   "SEG 070301 LOWER MISSISSIPPI RIVER",
-   "SUNNYSIDE CANAL-LAKE MAUREPAS"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 3,
+  "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
+   "Saint James"
+  ],
+  "notes": "LAG536035: EPA records the permittee as \"St James Parish Government - District 5 Senior Center\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-james-parish-government"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-st-john-the-baptist-parish",
+  "name": "St John the Baptist Parish",
+  "short_name": "St John the Baptist Parish",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0064092",
+  "npdes_permits": [
+   "LA0064092",
+   "LA0065951",
+   "LA0069868",
+   "LA0079588",
+   "LA0079596",
+   "LA0080454",
+   "LA0099759",
+   "LA0127097"
+  ],
+  "receiving_waters": [
+   "MISSISSIPPI RIVER",
+   "Maurepas Swamp",
+   "Mississippi River",
+   "SEG 0703 MISSISSIPPI RIVER BASIN",
+   "SEG 070301 LOWER MISSISSIPPI RIVER",
+   "SUNNYSIDE CANAL-LAKE MAUREPAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Edgard",
    "Garyville",
    "Laplace",
-   "Reserve"
+   "Reserve",
+   "Vacherie"
   ],
-  "notes": "LA0065951: EPA records the permittee as \"St. John the Baptist Parish\"; LA0069868: EPA records the permittee as \"St. John the Baptist Parish - River Road Treatment Plant\"; LA0079596: EPA records the permittee as \"St. John the Baptist Parish - Garyville WWTP\"",
+  "notes": "LA0064092: EPA records the permittee as \"St John the Baptist Parish - Woodland Drive STP\"; LA0065951: EPA records the permittee as \"St. John the Baptist Parish\"; LA0069868: EPA records the permittee as \"St. John the Baptist Parish - River Road Treatment Plant\"; LA0079588: EPA records the permittee as \"St John the Baptist Parish\"; LA0079596: EPA records the permittee as \"St. John the Baptist Parish - Garyville WWTP\"; LA0080454: EPA records the permittee as \"St John the Baptist Parish - Central WWTP\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
    "la-st-john-the-baptist-parish"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-st-landry-parish-district-no-1",
+  "name": "St Landry Parish District No.1",
+  "short_name": "St Landry Parish District No.1",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0057401",
+  "npdes_permits": [
+   "LA0057401"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Opelousas"
+  ],
+  "notes": "LA0057401: EPA records the permittee as \"St Landry Parish District No.1\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-landry-parish-district-no-1"
   ],
   "source_areas": [
    "la"
@@ -471777,23 +471405,91 @@
   "kind": "plant",
   "npdes_permit": "LA0111457",
   "npdes_permits": [
-   "LA0111457"
+   "LA0111457",
+   "LA0122718"
   ],
   "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 1,
+  "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
+   "Broussard",
    "Cecilia"
   ],
-  "notes": "LA0111457: EPA records the permittee as \"St. Martin Parish Government\"",
+  "notes": "LA0111457: EPA records the permittee as \"St. Martin Parish Government\"; LA0122718: EPA records the permittee as \"St Martin Parish Government\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
    "la-st-martin-parish-government"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-st-martin-water-sewer-commission-1",
+  "name": "St Martin Water & Sewer Commission #1",
+  "short_name": "St Martin Water & Sewer Commission #1",
+  "legal_form": "authority",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0074349",
+  "npdes_permits": [
+   "LA0074349"
+  ],
+  "receiving_waters": [
+   "BAYOU MILHOMME"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Stephensville"
+  ],
+  "notes": "LA0074349: EPA records the permittee as \"St Martin Water & Sewer Commission #1\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-martin-water-sewer-commission-1"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-st-mary-parish-wards-5-8-joint-sewer-commission",
+  "name": "St Mary Parish Wards 5&8 Joint Sewer Commission",
+  "short_name": "St Mary Parish Wards 5&8 Joint Sewer Commission",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0068381",
+  "npdes_permits": [
+   "LA0068381"
+  ],
+  "receiving_waters": [
+   "Intracoastal Waterway"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Patterson"
+  ],
+  "notes": "LA0068381: EPA records the permittee as \"St Mary Parish Wards 5&8 Joint Sewer Commission - Regional Sewerage Treatment Fa\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-mary-parish-wards-5-8-joint-sewer-commission"
   ],
   "source_areas": [
    "la"
@@ -471895,6 +471591,70 @@
   ]
  },
  {
+  "id": "la-st-mary-parish-water-sewer-no-5",
+  "name": "St Mary Parish Water & Sewer No.5",
+  "short_name": "St Mary Parish Water & Sewer No.5",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0088765",
+  "npdes_permits": [
+   "LA0088765"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Four Corners"
+  ],
+  "notes": "LA0088765: EPA records the permittee as \"St Mary Parish Water & Sewer No.5\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-mary-parish-water-sewer-no-5"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-st-tammany-par-sd-4",
+  "name": "St Tammany Par-Sd #4",
+  "short_name": "St Tammany Par-Sd #4",
+  "legal_form": "special district",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0043583",
+  "npdes_permits": [
+   "LA0043583"
+  ],
+  "receiving_waters": [
+   "PONCHITOLAWA CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Covington"
+  ],
+  "notes": "LA0043583: EPA records the permittee as \"St Tammany Par-Sd #4\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-tammany-par-sd-4"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
   "id": "la-st-tammany-parish-government",
   "name": "St. Tammany Parish Government",
   "short_name": "St. Tammany Parish Government",
@@ -471942,6 +471702,39 @@
   "aliases": [
    "la-st-tammany",
    "la-st-tammany-parish-government"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-st-tammany-parish-sewerage-district-1",
+  "name": "St Tammany Parish Sewerage District #1",
+  "short_name": "St Tammany Parish Sewerage District #1",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0080403",
+  "npdes_permits": [
+   "LA0080403"
+  ],
+  "receiving_waters": [
+   "Bayou Tete L'Ours"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Covington"
+  ],
+  "notes": "LA0080403: EPA records the permittee as \"St Tammany Parish Sewerage District #1 - Covington Country Club Subdivision\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-st-tammany-parish-sewerage-district-1"
   ],
   "source_areas": [
    "la"
@@ -472113,39 +471906,6 @@
   ]
  },
  {
-  "id": "la-terrebonne-parish-recreation-district-8",
-  "name": "Terrebonne Parish Recreation District #8",
-  "short_name": "Terrebonne Parish Recreation District #8",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LAG531153",
-  "npdes_permits": [
-   "LAG531153",
-   "LAG531154"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Donner",
-   "Gibson"
-  ],
-  "notes": "LAG531153: EPA records the permittee as \"Terrebonne Parish Recreation District #8 - Donner Community Center\"; LAG531154: EPA records the permittee as \"Terrebonne Parish Recreation District #8 - Devon Keller Memorial Center\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-terrebonne-parish-recreation-district-8"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
   "id": "la-terrebonne-parish-houma-south",
   "name": "Terrebonne Parish-Houma-South",
   "short_name": "Terrebonne Parish-Houma-South",
@@ -472173,6 +471933,39 @@
   "checked": "2026-11-14",
   "aliases": [
    "la-terrebonne-parish-houma-south"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
+  "id": "la-terrebonne-parish-recreation-district-8",
+  "name": "Terrebonne Parish Recreation District #8",
+  "short_name": "Terrebonne Parish Recreation District #8",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LAG531153",
+  "npdes_permits": [
+   "LAG531153",
+   "LAG531154"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Donner",
+   "Gibson"
+  ],
+  "notes": "LAG531153: EPA records the permittee as \"Terrebonne Parish Recreation District #8 - Donner Community Center\"; LAG531154: EPA records the permittee as \"Terrebonne Parish Recreation District #8 - Devon Keller Memorial Center\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-terrebonne-parish-recreation-district-8"
   ],
   "source_areas": [
    "la"
@@ -476104,6 +475897,37 @@
   ]
  },
  {
+  "id": "la-union-parish-police-jury",
+  "name": "Union Parish Police Jury",
+  "short_name": "Union Parish Police Jury",
+  "legal_form": "county",
+  "state": "LA",
+  "kind": "plant",
+  "npdes_permit": "LA0068152",
+  "npdes_permits": [
+   "LA0068152"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
+  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Farmerville"
+  ],
+  "notes": "LA0068152: EPA records the permittee as \"Union Parish Police Jury\"",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "la-union-parish-police-jury"
+  ],
+  "source_areas": [
+   "la"
+  ]
+ },
+ {
   "id": "la-us-army-coe",
   "name": "US Army Coe",
   "short_name": "US Army Coe",
@@ -476261,37 +476085,6 @@
   ]
  },
  {
-  "id": "la-union-parish-police-jury",
-  "name": "Union Parish Police Jury",
-  "short_name": "Union Parish Police Jury",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0068152",
-  "npdes_permits": [
-   "LA0068152"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 5,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Farmerville"
-  ],
-  "notes": "LA0068152: EPA records the permittee as \"Union Parish Police Jury\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-union-parish-police-jury"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
   "id": "la-usfws",
   "name": "Usfws",
   "short_name": "Usfws",
@@ -476355,23 +476148,29 @@
  },
  {
   "id": "la-utilities-inc-of-louisiana",
-  "name": "Utilities Inc of Louisiana",
-  "short_name": "Utilities Inc of Louisiana",
+  "name": "Utilities, Inc. of Louisiana",
+  "short_name": "Utilities, Inc. of Louisiana",
   "legal_form": "investor-owned utility",
   "state": "LA",
   "kind": "plant",
   "npdes_permit": "LA0049794",
   "npdes_permits": [
    "LA0049794",
+   "LA0051179",
    "LA0055310",
    "LA0065714",
    "LA0065731",
+   "LA0065757",
+   "LA0066559",
    "LA0066567",
+   "LA0127436",
    "LA0127445",
    "LA0127496"
   ],
   "receiving_waters": [
+   "ABITA RIVER, TCHEFRUNCTE RIVER",
    "Flowers Bayou",
+   "GUM BAYOU",
    "Henderson Bayou",
    "LOCAL DRAINAGE",
    "Unnamed Ditch",
@@ -476385,77 +476184,11 @@
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
+   "Bastrop",
    "Covington",
    "Lake Charles",
    "Mandeville",
    "Prairieville",
-   "Slidell"
-  ],
-  "notes": "LA0049794: EPA records the permittee as \"Utilities Inc of Louisiana - Kingspoint Wastewater Treatment Plant\"; LA0055310: EPA records the permittee as \"Utilities Inc of Louisiana - Woodridge Wastewater Treatment Plant\"; LA0065714: EPA records the permittee as \"Utilities Inc of Louisiana - Huntwyck Village Wastewater Treatment Plant\"; LA0065731: EPA records the permittee as \"Utilities Inc of Louisiana - Quail Ridge Wastewater Treatment Plant\"; LA0066567: EPA records the permittee as \"Utilities Inc of Louisiana - Greenbriar WWTP\"; LA0127445: EPA records the permittee as \"Utilities Inc of Louisiana - Country Pines\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-utilities-inc-of-louisiana"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-utilities-inc-of-la",
-  "name": "Utilities Inc of la",
-  "short_name": "Utilities Inc of la",
-  "legal_form": "investor-owned utility",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0127436",
-  "npdes_permits": [
-   "LA0127436"
-  ],
-  "receiving_waters": [
-   "LOCAL DRAINAGE"
-  ],
-  "water_slugs": [],
-  "outfall_count": 0,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Bastrop"
-  ],
-  "notes": "LA0127436: EPA records the permittee as \"Utilities Inc of la - Woodland Acres Unit #1, 2, 3, 4, 5\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-utilities-inc-of-la"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-utilities-inc-of-louisiana",
-  "name": "Utilities Inc., of Louisiana",
-  "short_name": "Utilities Inc., of Louisiana",
-  "legal_form": "investor-owned utility",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0051179",
-  "npdes_permits": [
-   "LA0051179",
-   "LA0065757"
-  ],
-  "receiving_waters": [
-   "GUM BAYOU"
-  ],
-  "water_slugs": [],
-  "outfall_count": 0,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
    "Slidell"
   ],
   "notes": "LA0051179: EPA records the permittee as \"Utilities Inc., of Louisiana\"; LA0065757: EPA records the permittee as \"Utilities Inc., of Louisiana\"",
@@ -476463,39 +476196,6 @@
   "checked": "2026-11-14",
   "aliases": [
    "la-utilities-inc-of-louisiana"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-utilities-inc-of-la",
-  "name": "Utilities, Inc. of la",
-  "short_name": "Utilities, Inc. of la",
-  "legal_form": "investor-owned utility",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0066559",
-  "npdes_permits": [
-   "LA0066559"
-  ],
-  "receiving_waters": [
-   "ABITA RIVER, TCHEFRUNCTE RIVER"
-  ],
-  "water_slugs": [],
-  "outfall_count": 0,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Covington"
-  ],
-  "notes": "LA0066559: EPA records the permittee as \"Utilities, Inc. of La- Arrowwood Regional WWTP\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-utilities-inc-of-la"
   ],
   "source_areas": [
    "la"
