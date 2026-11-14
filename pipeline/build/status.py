@@ -160,6 +160,7 @@ REGISTRY_YIELDS_TO_NAMED_WATER = True
 # names with the permit's open registry outfalls on that water (Resolver.named_water_outfalls), so their reaches are
 # coloured (Oregon: Portland's CSO advisories; go-live audit 2026-11-08 P1-1)
 NAMED_WATER_OUTFALL_STATES = {"OR"}
+NAMED_WATER_OUTFALL_STATES.add("WI")  # Wisconsin: MMSD's Storm Update posts name a water (Lincoln Creek), never an outfall
 # rules.placement.no_outfall_all_waters (data/rules.json, a switch): a CSO report that names no water and no outfall
 # is placed on every water its permit's registry outfalls reach (a permit the registry lacks: every receiving water
 # data/dischargers.json lists, CSO reports only since review 2026-11-03 P3-1), with this note
