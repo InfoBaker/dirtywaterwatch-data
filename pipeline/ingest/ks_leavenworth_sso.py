@@ -26,7 +26,7 @@ Record rules
   - Water: a named creek or river the text says the sewage entered, ran or flowed into (Three-Mile Creek, Five-Mile
     Creek, Seven-Mile Creek); "the creek" with no name is kept as raw.reached_water True and placed on no water.
   - Operator: the City of Leavenworth (KS0036366's permittee); a page about another system's lift station (the federal
-    prison's) names that system in raw.operator_note and is not assigned to the City.
+    prison's) names that system in raw.system_note and is not assigned to the City.
   - Place: the street block of the title with its house number dropped (outfall_name); raw.county Leavenworth County.
 
 Privacy: the pages name streets and, once, a facility's telephone number; house numbers and telephone numbers are
@@ -116,6 +116,8 @@ def record(path: str, h: str, at: str) -> dict:
     ss = sentences(clean)
     start, prec, kind = (day.isoformat() if day else None), "day", None
     for s in ss[:3]:
+        if re.search(r"\b(?:ended|stopped|stopping|ceased)\b", s, re.I):
+            continue                                   # the stop time is never the start
         tm = AMPM.search(s)
         if tm and day:
             h_, mi = clock(tm)
@@ -164,7 +166,7 @@ def record(path: str, h: str, at: str) -> dict:
     if end:
         raw["ended_at_precision"], raw["end_basis"] = "minute", end_basis
     if prison:
-        raw["operator_note"] = ("the page reports an overflow at a lift station serving the federal prison, which the "
+        raw["system_note"] = ("the page reports an overflow at a lift station serving the federal prison, which the "
                                 "page says is containing it; not assigned to the City")
     return event(
         source_id=SOURCE_ID, source_record_id=path.rstrip("/").rsplit("/", 1)[-1], event_type="sso", status="unknown",
