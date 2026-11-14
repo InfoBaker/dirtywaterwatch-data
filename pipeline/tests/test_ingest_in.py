@@ -470,3 +470,83 @@ def test_a_monthly_grade_from_epas_reports_credits_epa_and_other_states_read_as_
     g2, s2 = C.grade_of("NJ", f, now, federal=False)
     assert s2 == ("New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there "
                   "because none are reported by date, not because none happen.")
+
+
+# ------------------------------------------------------------------------------------------------ review 2026-11-14
+
+def test_indiana_name_placement_is_county_aware(monkeypatch):
+    """Astra review 2026-11-14 P2-6: two same-named creeks in different counties; the report's point decides."""
+    from build import status as S
+    assert S.COUNTY_STATES["IN"] == "in-counties.json"
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"IN"})
+    assert S.point_county("IN", 39.77, -86.16)[1] == "Marion County"
+    assert S.point_county("IN", 41.68, -86.25)[1] == "St. Joseph County"
+    waters = {"mill-creek-marion-in": {"state": "IN", "bbox": [-86.20, 39.70, -86.10, 39.80]},
+              "mill-creek-st-joseph-in": {"state": "IN", "bbox": [-86.30, 41.60, -86.20, 41.70]}}
+    ev = {"source_id": "in-idem-cyanobacteria", "event_id": "in-idem-cyanobacteria:x", "lat": 41.65, "lon": -86.26,
+          "raw": {"state": "IN"}}
+    kept, why = S.county_slugs(list(waters), ev, waters, lambda slug, lat, lon: 50_000)
+    assert kept == ["mill-creek-st-joseph-in"] and "St. Joseph" in why
+    assert S.COUNTY_STATES["OH"] == "oh-counties.json" and "IN" not in S.COUNTY_FIELD_STATES
+
+
+def test_a_name_only_tie_beyond_25_km_is_refused_in_indiana():
+    from ingest import outfall_waters as OW
+    assert OW.NAME_ONLY_CAP_M == {"TX": 25_000, "IN": 25_000}
+
+    class MT:
+        waters = {"sample-creek-in": {"name": "Sample Creek", "kind": "river"}}
+        d = 0.0
+
+        def dist(self, s, lat, lon):
+            return self.d
+
+        def source_of(self, s):
+            return "nhd"
+
+        def no_outline(self, s):
+            return False
+
+        def evidence_of(self):
+            return {}
+    mt = MT()
+    for d, tied in ((24_000.0, True), (26_000.0, False), (100_000.0, False)):
+        mt.d = d
+        o = {"state": "IN", "npdes_permit": "IN0000006", "lat": 40.0, "lon": -86.0, "receiving_water_echo": "SAMPLE CREEK"}
+        OW.apply(o, {"slug": "sample-creek-in", "step": "name", "how": "the only record of that name"}, mt)
+        assert (o["water_slug"] == "sample-creek-in") is tied, d
+    o2 = {"state": "KY", "npdes_permit": "KY0000006", "lat": 37.0, "lon": -86.0, "receiving_water_echo": "SAMPLE CREEK"}
+    OW.apply(o2, {"slug": "sample-creek-in", "step": "name", "how": "the only record of that name"}, mt)
+    assert o2["water_slug"] == "sample-creek-in"                           # other states unchanged
+
+
+def _one_sample(level, date="2026-09-08", oid=9001):
+    return {"objectid": oid, "advisory_level": level, "beach_name": "Example Beach", "waterbody": "Example Lake",
+            "date_": date, "year_": 2026, "location_id": "EXA-01-0001", "sample_id": f"S{oid}",
+            "project": "2026 Example Project", "microcystin": -1, "_x": -86.0, "_y": 40.0}
+
+
+def test_a_blank_level_neither_lifts_nor_reopens_and_a_restored_advisory_reopens():
+    """Astra review 2026-11-14 P1-1: Advisory, blank, Advisory stays one open interval; Advisory, Low Risk, Advisory
+    closes at the Low Risk read and reopens at the next read, the first interval kept."""
+    a, _ = _cyano([_one_sample("Advisory")], "2026-09-09T12:00:00Z")
+    assert a[0]["status"] == "advisory_active" and a[0]["time_precision"] == "poll"
+    b, _ = _cyano([_one_sample("")], "2026-09-09T13:00:00Z", a)
+    assert b[0]["status"] == "advisory_active" and b[0]["ended_at"] is None and b[0]["raw"]["_level_unknown_this_read"]
+    c, _ = _cyano([_one_sample("Advisory")], "2026-09-09T14:00:00Z", b)
+    assert c[0]["status"] == "advisory_active" and c[0]["started_at"] == "2026-09-09T12:00:00Z"
+    d, _ = _cyano([_one_sample("Low Risk")], "2026-09-09T15:00:00Z", c)
+    assert d[0]["status"] == "advisory_lifted" and d[0]["ended_at"] == "2026-09-09T15:00:00Z"
+    e, _ = _cyano([_one_sample("Advisory")], "2026-09-09T16:00:00Z", d)
+    assert e[0]["status"] == "advisory_active" and e[0]["started_at"] == "2026-09-09T16:00:00Z"
+    assert e[0]["raw"]["_advisory_observed"]["earlier_periods"][0]["end"] == "2026-09-09T15:00:00Z"
+
+
+def test_a_newer_sample_with_an_unknown_level_does_not_end_an_advisory():
+    a, _ = _cyano([_one_sample("Advisory")], "2026-09-09T12:00:00Z")
+    b, _ = _cyano([_one_sample("Advisory"), _one_sample("", "2026-09-14", 9002)], "2026-09-15T12:00:00Z", a)
+    r = next(x for x in b if x["sampled_at"] == "2026-09-08")
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    c, _ = _cyano([_one_sample("Advisory"), _one_sample("Low Risk", "2026-09-14", 9002)], "2026-09-15T13:00:00Z", b)
+    r = next(x for x in c if x["sampled_at"] == "2026-09-08")
+    assert r["status"] == "advisory_lifted" and r["raw"]["ended_at_precision"] == "poll"

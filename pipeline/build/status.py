@@ -1054,6 +1054,7 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json", "OH": "oh-counties.json",
                  "OR": "or-counties.json"}      # DEQ's OERS spills: a point and a county (scripts/or_counties.py)
 COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer gives points and names (no county field)
+COUNTY_STATES["IN"] = "in-counties.json"       # Indiana: IDEM's outfalls and beach samples give points (scripts/in_counties.py)
 # States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
