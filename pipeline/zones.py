@@ -7,7 +7,8 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
                Florida by its Eastern-Central boundary (florida_zone), South Dakota, Nebraska and Kentucky by the county
                files of data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone;
                Kentucky's forty-one Central-time counties, 49 CFR 71.5(c)), Oregon by Malheur County (oregon_zone),
-               Tennessee by its county (a name, or the county a point lies in: tennessee_zone). Any other state gets
+               Tennessee by its county (a name, or the county a point lies in: tennessee_zone), Nevada by West
+               Wendover's city limits (nevada_zone, 49 CFR 71.9(b)). Any other state gets
                STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
@@ -173,6 +174,46 @@ def tennessee_zone(county=None, lat=None, lon=None) -> str:
         return CENTRAL
 
 
+# Nevada (49 CFR 71.9(b) and (d), read in eCFR 2026-11-14): the Mountain-Pacific line follows the Utah-Nevada boundary
+# except around the City of West Wendover, whose northern, western and southern limits it follows: West Wendover keeps
+# Mountain time, the rest of Nevada Pacific (towns that keep Mountain time by custom, such as Jackpot, are Pacific in
+# law). The city's outline: data/reference/nv-west-wendover.json (scripts/nv_west_wendover.py, TIGERweb Incorporated
+# Places); without the file, its box (114.113 W to the state line, 40.725 N to 40.756 N).
+NV_WEST_WENDOVER_BOX = (-114.1135, 40.7250, -114.0400, 40.7560)
+
+
+@functools.lru_cache(maxsize=1)
+def _west_wendover_outline():
+    try:
+        import json
+        from pathlib import Path
+
+        from shapely.geometry import shape
+        doc = json.loads((Path(__file__).resolve().parent.parent / "data" / "reference" / "nv-west-wendover.json").read_text())
+        return shape(doc["place"]["geometry"])
+    except (OSError, ValueError, KeyError, ImportError):
+        return None
+
+
+def nevada_zone(lat=None, lon=None, place: str | None = None) -> str:
+    """Nevada's zone: Mountain inside West Wendover's city limits (by the place's name when the source gives one, else
+    the point against the city's outline), Pacific elsewhere and when neither is given."""
+    if place and str(place).strip():
+        return MOUNTAIN if str(place).strip().lower().removesuffix(" city") == "west wendover" else PACIFIC
+    if lat is None or lon is None:
+        return PACIFIC
+    lat, lon = float(lat), float(lon)
+    outline = _west_wendover_outline()
+    if outline is not None:
+        # the city's east side is the state line: the strip between its rounded outline and the line is the city's
+        w, s_, e, n = outline.bounds
+        inside = outline.buffer(0.0005).covers(_point(lon, lat)) or (s_ <= lat <= n and e - 0.001 <= lon)
+    else:
+        w, s_, e, n = NV_WEST_WENDOVER_BOX
+        inside = w <= lon <= e and s_ <= lat <= n
+    return MOUNTAIN if inside else PACIFIC
+
+
 def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     """The IANA zone for a record of this state at this point (module docstring); None for an unknown state."""
     st = (state or "").upper()
@@ -182,6 +223,8 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
         return oregon_zone(lat, lon)
     if st == "TN" and lat is not None and lon is not None:
         return tennessee_zone(lat=lat, lon=lon)
+    if st == "NV":
+        return nevada_zone(lat, lon)
     if st in ("SD", "NE", "KY") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
