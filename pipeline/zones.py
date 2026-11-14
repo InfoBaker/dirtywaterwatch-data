@@ -7,7 +7,9 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
                Florida by its Eastern-Central boundary (florida_zone), South Dakota, Nebraska and Kentucky by the county
                files of data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone;
                Kentucky's forty-one Central-time counties, 49 CFR 71.5(c)), Oregon by Malheur County (oregon_zone),
-               Tennessee by its county (a name, or the county a point lies in: tennessee_zone). Any other state gets
+               Tennessee by its county (a name, or the county a point lies in: tennessee_zone), Indiana by its county
+               (a name, or the county a point lies in: indiana_zone, the twelve Central-time counties of 49 CFR
+               71.5(b)). Any other state gets
                STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
@@ -173,6 +175,36 @@ def tennessee_zone(county=None, lat=None, lon=None) -> str:
         return CENTRAL
 
 
+# Indiana (49 CFR 71.5(b), read in eCFR 2026-11-14): the Eastern-Central line follows county lines, leaving six
+# northwestern counties (Lake, Porter, LaPorte, Starke, Jasper, Newton) and six southwestern ones (Gibson, Posey,
+# Vanderburgh, Warrick, Spencer, Perry) wholly in Central time and the other eighty Eastern; none split
+# (scripts/in_central_time_counties.py checks them against the U.S. DOT time-zone layer and writes their outlines to
+# data/reference/in-central-time-counties.json, which the point rule reads through _county_zone)
+IN_CENTRAL_COUNTIES = frozenset({"GIBSON", "JASPER", "LAKE", "LAPORTE", "NEWTON", "PERRY", "PORTER", "POSEY", "SPENCER",
+                                 "STARKE", "VANDERBURGH", "WARRICK"})
+
+
+def in_county_key(county) -> str:
+    """'La Porte County' -> 'LAPORTE', 'St. Joseph' -> 'STJOSEPH' (spaces, periods and the word County dropped)."""
+    import re
+    c = re.sub(r"\s+county\s*$", "", str(county or "").strip(), flags=re.I)
+    return re.sub(r"[\s.']+", "", c).upper()
+
+
+def indiana_zone(county=None, lat=None, lon=None) -> str:
+    """Indiana's zone: Central in the twelve IN_CENTRAL_COUNTIES (by the county's name when given, else by the county
+    the point lies in, data/reference/in-central-time-counties.json), Eastern elsewhere and when neither is given (the
+    state's larger part)."""
+    if county and str(county).strip():
+        return CENTRAL if in_county_key(county) in IN_CENTRAL_COUNTIES else EASTERN
+    if lat is None or lon is None:
+        return EASTERN
+    try:
+        return _county_zone("IN", float(lat), float(lon)) or EASTERN
+    except (RuntimeError, ImportError, ValueError, OSError):
+        return EASTERN          # the county file missing: the state's larger part
+
+
 def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     """The IANA zone for a record of this state at this point (module docstring); None for an unknown state."""
     st = (state or "").upper()
@@ -182,6 +214,8 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
         return oregon_zone(lat, lon)
     if st == "TN" and lat is not None and lon is not None:
         return tennessee_zone(lat=lat, lon=lon)
+    if st == "IN":
+        return indiana_zone(lat=lat, lon=lon)
     if st in ("SD", "NE", "KY") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
