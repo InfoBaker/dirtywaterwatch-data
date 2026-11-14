@@ -369,7 +369,8 @@
     "ne-dwee-beachwatch",
     "hi-doh-cwb-events-api",
     "tx-glo-beach-watch",
-    "tn-tdec-hab-advisory-status"
+    "tn-tdec-hab-advisory-status",
+    "id-deq-cyanohab-risk-table"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
