@@ -222,6 +222,18 @@
     "clock": "end_of_discharge",
     "basis": "Ohio sets no period after a sewage discharge during which the water is to be avoided, and no Ohio statute or rule requires the public to be told of a sewer overflow or a bypass: operators report them to Ohio EPA within 24 hours, and those reports are not published. Ohio's permit rule requires a permanent sign at every permitted outfall, combined sewer overflow and bypass outfalls included, and requires a major discharger near a drinking-water intake to notify the water supplier as soon as practicable. Combined sewer operators in the Lake Erie basin must notify the public within four hours of becoming aware of an overflow under their public notification plans (40 CFR 122.38); operators in the Ohio River basin notify under their permits. The Northeast Ohio Regional Sewer District, Akron, Columbus and Bowling Green publish their overflows; the Metropolitan Sewer District of Greater Cincinnati advises avoiding contact with streams for 72 hours after rain. Ohio EPA's spills layer lists the sewage spills called in to its emergency line, by day, with no end. This site marks a reported discharge while it runs and applies its own caution after it ends; a report with only a day is read in Eastern time",
     "source": "OAC 3745-33-08(A)(12) and (F)(1); 40 CFR 122.38; 40 CFR 122.41(l)(6); NEORSD CSO alerts map; City of Akron overflow status map; City of Columbus Sewer Overflow Discharge Information; City of Bowling Green CSO events; Ohio EPA Spills (Office of Emergency Response); MSD of Greater Cincinnati CSO notification program"
+   },
+   "MN": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Minnesota sets no period after a sewage discharge during which the water is to be avoided. State law requires every owner of a sewer system or treatment plant, public or private, to report a discharge to the state immediately and then promptly tell potentially affected downstream users, the public, Tribal governments and drinking-water facilities by the fastest means it has, and to post signs at affected public use areas or tell the body that runs them; the reports go to the state Duty Officer and are not published, and no statewide list of the notices exists. The Metropolitan Council posts a page for each spill from its regional sewers in the Twin Cities, with the warning signs it puts up and takes down, and the Western Lake Superior Sanitary District maps its releases around Duluth. This site treats the Council's warning signs as its own window, marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "Minn. Stat. 115.061; Minnesota Pollution Control Agency guidance wq-wwprm1-43 and wq-wwprm1-59; Metropolitan Council, Wastewater Spills; Resource Renew (Western Lake Superior Sanitary District), overflow map"
+   },
+   "ND": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "North Dakota sets no period after a sewage discharge during which the water is to be avoided, and no North Dakota statute or rule requires the public to be told of a sewage discharge. A spill or discharge likely to pollute water must be reported to the Department of Environmental Quality immediately, and the permits require an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public list refuses automated reading; the Department's archive holds the reports of 1975 to 2020. The Department posts harmful algal bloom advisories and warnings by lake from May to December. Dates are read in Central time, and in Mountain time in the southwestern counties. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "N.D. Admin. Code 33.1-16-02.1-11(4); NDPDES general permit NDG420000 Part IV(F); North Dakota Department of Environmental Quality, General Environmental Incidents - Historical and harmful algal bloom listing; 49 CFR 71.7(a)"
    }
   },
   "by_discharger": {
@@ -382,7 +394,10 @@
     "tx-tceq-sso-opendata",
     "tn-tdec-events-report",
     "oh-epa-spills-opendata",
-    "oh-columbus-sewer-overflow"
+    "oh-columbus-sewer-overflow",
+    "mn-wlssd-overflows",
+    "mn-mces-spill-notices",
+    "nd-deq-eir-legacy-general"
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."

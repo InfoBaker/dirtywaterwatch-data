@@ -1,0 +1,26 @@
+id: "nd-deq-hab-listings"
+name: "ND DEQ harmful algal bloom advisories and warnings listing (PDF)"
+url: "https://www.deq.nd.gov/publications/WQ/3_WM/HABs/HABsListings.pdf"
+homepage: "https://deq.nd.gov/WQ/3_Watershed_Mgmt/8_HABS/Habs.aspx"
+kind: "pdf"
+level: "state"
+# Read by pipeline/ingest/nd_deq_hab_listings.py: one hab_advisory record per lake and county set per season, its level
+#   (advisory or warning) from the table it is in, dated to DEQ's Date Posted, active while listed and ended at the
+#   first read without it (precision poll: DEQ gives no lifting date); no coordinates, placed by name and county.
+# Real read 2026-11-14 (file last modified 2026-10-08 19:44 UTC): 14 advisories posted 2026-07-16 to 2026-10-05 and 6
+#   warnings posted 2026-06-29 to 2026-10-08, 20 lakes in 19 counties (Devils Lake on the Ramsey-Benson line); four in
+#   Mountain-time counties (Bowman-Haley Dam, Lake Tschida, Patterson Lake, Lake Ilo). DEQ's notices: listing updated
+#   1 May to 31 December; routine 2026 monitoring ended 30 September.
+cadence: "DEQ updates the listing from 1 May to 31 December; read every run"
+license: "none stated"
+attribution: "North Dakota Department of Environmental Quality"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["ND"]
+registry_ids: ["nd-deq-hab-listings"]
+access: ["pdf"]
+access_detail: "A one-page PDF: Advisories and Warning tables, each row lake, county and Date Posted; its text is split over eight content streams."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"
