@@ -347,3 +347,10 @@ def test_p1_6_wlssd_free_text_is_scrubbed_and_p1_7_mn_epa_points_are_rounded():
     assert round(r["lat"], 3) == r["lat"] and round(r["lon"], 3) == r["lon"]
     assert all(round(float(x["latitude_measure"]), 3) == float(x["latitude_measure"])
                for x in echo_tables()["events"])
+
+
+def test_p2_3_mn_facility_only_rows_count_no_outfall():
+    by = {r["name"]: r for r in ops()}
+    assert by["Arlington WWTP"]["legal_form"] is None
+    benson = next(r for r in ops() if r["id"] == "mn-benson")
+    assert benson["outfall_count"] is None and "0 outfalls of 1 rows" in benson["outfalls_source"]

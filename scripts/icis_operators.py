@@ -15,7 +15,9 @@ Inputs (per state)
 Grouping: permits whose permittee of record reads as the same body after normalising ("Little Falls city of" and
   "City of Little Falls") are one row. A name that gives only the plant ("Montevideo WWTP") stays its own row: the
   body is not guessed.
-Rules: legal_form from the name (form()); the notification channel is the state's law text, then the research row's
+Rules: legal_form from the name (form()); a name that gives only a plant ("Arlington WWTP", "New Town Water Resource
+  Recovery Facility") gets none, since EPA's facility type does not say who owns it; outfall_count counts the rows with
+  an outfall id (a facility-only row is a location, not an outfall); the notification channel is the state's law text, then the research row's
   channel; idempotent (a rerun replaces the rows it wrote: source_areas [<st>]); never an individual's name.
 """
 from __future__ import annotations
@@ -77,6 +79,12 @@ def compact(s: str, state_words: tuple[str, ...] = ()) -> str:
     return re.sub(r"[^a-z0-9]", "", s)
 
 
+PLANT_ONLY = re.compile(r"\b(?:wwtp|wwtf|wrrf|wrf|stp|wpcf|lagoons?|water resource recovery|wastewater treatment|"
+                        r"treatment (?:plant|facility)|facility)\b", re.I)
+BODY = re.compile(r"\b(?:city|town of|township|village|county|district|council|tribes?|tribal|band|nation|board|authority|"
+                  r"commission|state|university|department|air force|army|national|united states)\b", re.I)
+
+
 def form(name: str, facility_type: str | None, by_name: dict) -> str | None:
     n = name.lower()
     if name in by_name:
@@ -87,6 +95,8 @@ def form(name: str, facility_type: str | None, by_name: dict) -> str | None:
                  r"veterans|\bnfh\b|national fish hatchery|corps of engineers|bureau of", n) \
             or facility_type in ("Federal Facility (U.S. Government)", "FEDERAL"):
         return "federal facility"
+    if PLANT_ONLY.search(name) and not BODY.search(name):
+        return None             # a plant's name, not its owner's: the legal form is not read from EPA's type
     if re.search(r"state park|university|\bstate of\b|department of (natural resources|transportation|corrections)|"
                  r"correctional|rest area|\bdnr\b|\bdot\b", n) or facility_type == "State Government":
         return "state facility"
@@ -231,6 +241,7 @@ def build(cfg: dict, dis: list[dict]) -> tuple[list[dict], Counter]:
 def make_row(cfg, rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:
     words = tuple(cfg.get("state_words") or ())
     rows = [x for p in ps for x in plants.get(p, [])]
+    with_outfall = [x for x in rows if x.get("outfall")]      # a facility-only row (no outfall id) is not an outfall
     crow = [x for p in ps for x in cso.get(p, [])]
     open_cso = [x for x in crow if not str(x.get("outfall_status") or "").upper().startswith("CLS")]
     waters = list(dict.fromkeys([w for r in rs for w in r.get("receiving_waters") or []] +
@@ -254,10 +265,10 @@ def make_row(cfg, rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:
     return {"id": rid, "name": g["name"], "short_name": g["name"], "legal_form": lf, "state": cfg["state"],
             "kind": kind or ("cso" if open_cso else "plant"), "npdes_permit": ps[0] if ps else None,
             "npdes_permits": ps, "receiving_waters": waters, "water_slugs": [],
-            "outfall_count": (len(open_cso) or len(rows) or None),
+            "outfall_count": (len(open_cso) or len(with_outfall) or None),
             "outfalls_source": ("EPA National CSO Inventory (data/outfalls-us.json)" if open_cso else
-                                f"EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, {len(rows)} rows)"
-                                if rows else None),
+                                f"EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, {len(with_outfall)} "
+                                f"outfalls of {len(rows)} rows)" if rows else None),
             "notification_channel": cfg["channel"](rs, private, bool(open_cso)),
             "notification_feed_machine_readable": any(r.get("notification_feed_machine_readable") for r in rs),
             "notification_signup_url": None, "towns": towns, "notes": notes.strip(),

@@ -250,6 +250,6 @@ def north_dakota_zone(county=None, lat=None, lon=None) -> tuple[str, str]:
     if key in ND_MOUNTAIN_COUNTIES:
         return MOUNTAIN, f"{name} County keeps Mountain time ({ND_ZONE_CITE}; {how})"
     if key in ND_SPLIT_COUNTIES:
-        return MOUNTAIN, (f"{name} County is split by the line; read in Mountain time, the later day's end "
-                          f"({ND_ZONE_CITE}; {how})")
+        return MOUNTAIN, (f"{name} County is split by the line ({ND_ZONE_CITE}), which is not traced here: this site "
+                          f"reads it in Mountain time, the later day's end ({how})")
     return CENTRAL, f"{name} County keeps Central time ({ND_ZONE_CITE}; {how})"

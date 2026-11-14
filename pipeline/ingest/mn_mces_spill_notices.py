@@ -20,14 +20,17 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     is the index label's ("Excelsior, May 2026") when its month matches, else the earliest dated heading's. A part of
     the day ("afternoon") is kept in raw.time_of_day_words and never turned into an hour. The spill's own start is
     not given apart from the response; raw.start_basis says so.
-  - The spill's own end: only where the text puts the stop on the start day ("contained ... in under an hour", "stopped
-    the spill ... within hours", "stop the spill ... Thursday evening" when the spill was a Thursday): raw.spill_stopped_on,
-    precision day. Otherwise unknown; never invented.
-  - Signs: when the Council says it placed "Do Not Enter/ Sewage Spill" signs, that is its own advisory: the record is
-    advisory_active (the authority's window, red while it stands) until a dated update says the signs "will be removed"
-    or are removed; then advisory_lifted with ended_at that update's day (raw.ended_at_precision "day"; the removal's own
-    day is not given, the notice day bounds it). Without signs: status ended with ended_at the stop day when the text
-    gives one, else unknown with no end.
+  - The spill's own end: only where the text puts the stop on the start day ("contained ... in under an hour" in the
+    first account, "stop the spill ... Thursday evening" in an update, the Thursday on or before that update's date
+    being the start day): raw.spill_stopped_on, precision day. Otherwise unknown; never invented (review 2026-11-14
+    P1-2: a weekday a week later is not the start day).
+  - Signs: when the Council says it placed "Do Not Enter/ Sewage Spill" signs, that is its own advisory. While no update
+    says they will be removed, the record is advisory_active (red while it stands). Once a dated update says they will
+    be (or have been) removed: with a stop day, status ended at the stop day and advice_window_hours carries the
+    Council's window from the end of the stop day to the end of the update's day (red.event; the site's 72-hour caution
+    counts from the stop, review P1-3); with no stop, advisory_lifted ending on the update's day, ended_at_precision
+    "bound". The removal's own day is never given (raw.signs.removal_note). Without signs: ended at the stop day, else
+    unknown with no end. advice_text quotes the signs' wording only (no assurance from the notice, review P1-8).
   - Water: "Wastewater reached nearby Mud Pond" gives waterbody_text "Mud Pond" (raw.reached_water true). "No waterbodies
     were impacted" is raw.reached_water false with the Council's words (kept, placed on no water). A water named only
     as nearby or tested and found unaffected ("Bassett Creek and Wirth Lake are nearby", "did not impact the water
@@ -37,12 +40,14 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     and meta.cities_without_county names it. The street location sentence is kept through the house-number scrub.
   - Operator: discharger_id mn-mces (the Metropolitan Council's row); no plant permit is assigned (an interceptor spill
     is not a plant's discharge).
+  - A listed page that does not read as a notice (an error page: no response day, no dated update) keeps its previous
+    record, and a page that cannot be read fails the run (ok=False, every previous record kept; review P1-4).
   - Revisions: each page's text hash; a changed page appends {seen_at, sha256, headings} to raw._revisions. A page that
     leaves the list (one-year retention) keeps its record with raw.gone_from_index_since; one whose signs were still up
     gets raw._unlisted_since and raw._end_not_confirmed (hatched: the lifting was never seen). A page that cannot be
     read keeps its previous record. An index that cannot be read writes ok=False and every previous record stays.
-  - Privacy: the pages carry the Council's office contact only; only the parsed text below is saved (data/raw), every
-    string through common.strip_personal and the house-number scrub.
+  - Privacy: the pages carry the Council's office contact only; only the parsed text is saved (data/raw), every string
+    through common.strip_personal, scrub_text and the house-number scrub first (scrubbed(); review P1-6).
 
 Run from pipeline/:  python -m ingest.mn_mces_spill_notices [--dir saved_dir]   (index.html and the pages by name)
 """

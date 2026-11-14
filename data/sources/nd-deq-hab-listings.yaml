@@ -4,9 +4,10 @@ url: "https://www.deq.nd.gov/publications/WQ/3_WM/HABs/HABsListings.pdf"
 homepage: "https://deq.nd.gov/WQ/3_Watershed_Mgmt/8_HABS/Habs.aspx"
 kind: "pdf"
 level: "state"
-# Read by pipeline/ingest/nd_deq_hab_listings.py: one hab_advisory record per lake and county set per season, its level
+# Read by pipeline/ingest/nd_deq_hab_listings.py: one hab_advisory record per posting (lake, counties, level, date), its level
 #   (advisory or warning) from the table it is in, dated to DEQ's Date Posted, active while listed and ended at the
-#   first read without it (precision poll: DEQ gives no lifting date); no coordinates, placed by name and county.
+#   first read without it (precision poll: DEQ gives no lifting date); placed by name and county, marked at a cited point
+#   inside the lake's NHD outline in its county (14 of 20; data/reference/nd-hab-lake-points.json).
 # Real read 2026-11-14 (file last modified 2026-10-08 19:44 UTC): 14 advisories posted 2026-07-16 to 2026-10-05 and 6
 #   warnings posted 2026-06-29 to 2026-10-08, 20 lakes in 19 counties (Devils Lake on the Ramsey-Benson line); four in
 #   Mountain-time counties (Bowman-Haley Dam, Lake Tschida, Patterson Lake, Lake Ilo). DEQ's notices: listing updated
