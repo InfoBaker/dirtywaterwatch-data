@@ -16,13 +16,27 @@ degree (about 1 km, the MRMS grid); one point serves every outfall in it.
 Observed: NOAA MRMS radar-only QPE from the ImageServer `obs/mrms_qpe`
 (https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer), product valid
 end times "usually by 0:04 after the hour". Read as a grid (ingest/mrms_grid.py, since 2026-11-03): one
-catalog `query`, one `exportImage` each of the 1-hour and 24-hour totals over a box around every point,
-sampled here at each point (and the 48 and 72-hour totals when a permittee's history lacks the two
-earlier 24-hour windows they imply), then one `identify` at the wettest point as a check: a few requests
-an hour in place of one per point. When the grid read fails (or the check disagrees), the per-point path
-of before runs as the fallback: one `identify` per point (1/3/6/12/24/48/72-hour totals), three at a
-time, at most FALLBACK_MAX_CALLS points (one per permittee first, wettest first). Readings are kept per
-clock hour (rainfall.json; --force rereads). Negative values are no data.
+catalog `query`, then one `exportImage` each of the 1-hour and 24-hour totals per tile (since 2026-11-14: the
+20-degree squares that hold points, each box shrunk to its points and under the service's size limits; at most
+eight tiles for the contiguous United States, seven for the 2,384 points of 2026-11-14), sampled here at each point (and the 48 and 72-hour totals when a
+permittee's history lacks the two earlier 24-hour windows they imply), then one `identify` at the wettest point
+as a check: a few dozen requests an hour at most in place of one per point. A point outside the radar grid
+(mrms_grid.CONUS_EXTENT: a coordinate error, such as the Ohio outfall registered at 83.99 E that stretched the one
+box of before over the limit from 2026-11-08) is left out and listed (mrms.outside_grid). When a tile's 24-hour
+export fails, its points, and when the grid read fails (or the check disagrees), every point, go to the per-point
+path of before, the fallback: one `identify` per point (1/3/6/12/24/48/72-hour totals), three at a time, at most
+FALLBACK_MAX_CALLS points (one per permittee first, wettest first). Readings are kept per clock hour
+(rainfall.json; --force rereads). Negative values are no data.
+
+Outside the lower 48: the service also publishes alaska_QPE_*, hawaii_QPE_* and carib_QPE_* (Puerto Rico and the
+Virgin Islands) grids (catalog, 2026-11-14); this module reads conus_QPE_* only, so Alaska, Hawaii and Puerto Rico
+are not read (OUTSIDE_RADAR_GRID) and their combined sewer permits stay covered false in out/coverage.json.
+
+State and exit code: rainfall.json `ok` is true only when at least MIN_OK_SHARE of the points in the radar grid have
+this hour's reading and the per-point fallback was not needed; a fallback, even one that read every point it
+needed, sets ok false, names itself in `error`, `mrms.fallback` and the summary line (FALLBACK), and holds
+last_ok_at. The exit code is non-zero only when readings are missing (fewer than MIN_OK_SHARE fresh:
+mrms.readings_ok). The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and never fail the stage.
 
 Unit (found 2026-11-07): the service describes its values as inches, but answers millimetres (identify at Bucklin
 Point, RI, valid 2026-11-07T02:00Z: 1.6, 15.8, 26.7, 40.1, 51.3, 52.4, 52.4 for 1 to 72 hours; maxValues 118.7; the
@@ -604,21 +618,44 @@ def backfill_needed(hist: dict | None, permits: set[str], now: datetime) -> bool
     return False
 
 
+def export_tile(session, objectid: int, box: dict) -> tuple[bytes, "grid_mod.Grid"]:
+    """One tile's export, read and checked against the box asked for; one retry (a second failure raises)."""
+    last = None
+    for attempt in range(2):
+        try:
+            b = grid_mod.export(session, objectid, box)
+            g = grid_mod.Grid(b)
+            geo = grid_mod.check_georef(g, box)
+            if geo:
+                raise ValueError("; ".join(geo))
+            return b, g
+        except Exception as e:  # noqa: BLE001
+            last = e
+            if attempt == 0:
+                time.sleep(2)
+    raise last
+
+
 def read_grid(session, points: dict[str, dict], hours) -> dict:
-    """One catalog query and one export per accumulation, sampled at every point. Returns {values: {key:
-    {h1, h24, ...}}, maxima: {hours: the box maximum}, valid_time, products, box, problems, catalog}, the values in the
-    service's unit as read (run() decides the unit and converts); raises when the 24-hour grid cannot be
-    read, is not where it was asked, or has no value at most points."""
+    """One catalog query, then each accumulation exported tile by tile (mrms_grid.tiles: the 20-degree squares that
+    hold points, each box shrunk to its points, every box under the service's limits) and sampled at every point of
+    the tile. Returns {values: {key: {h1, h24, ...}}, maxima: {hours: the largest value read}, valid_time, products,
+    tiles, tiles_failed: {tile: error}, failed_points, box (around the tiles read), problems, catalog}, the values in
+    the service's unit as read (run() decides the unit and converts). A tile whose 24-hour export fails twice, is not
+    where it was asked, or has no 24-hour value at any of its points is failed: its points get no grid value and are
+    listed in failed_points (run() reads them by point, the fallback). Raises when the catalog cannot be read, every
+    tile fails, or the tiles read have no 24-hour value at most of their points."""
     names = [grid_mod.item_name(h) for h in hours]
     cat, cat_raw = grid_mod.catalog(session, names)
     n24 = grid_mod.item_name(24)
     if n24 not in cat:
         raise ValueError(f"{n24} not in the catalog answer")
     vt = cat[n24]["valid_time"]
-    box = grid_mod.grid_box([(p["lat"], p["lon"]) for p in points.values()])
     pts = {k: (p["lat"], p["lon"]) for k, p in points.items()}
+    tiles = grid_mod.tiles(pts)
     values: dict[str, dict] = {k: {} for k in points}
     products, problems, maxima = {}, [], {}
+    use = [24]
     for h in hours:
         name = grid_mod.item_name(h)
         c = cat.get(name)
@@ -628,33 +665,57 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
         if c["valid_time"] != vt:
             problems.append(f"{name} is valid to {c['valid_time']}, the 24-hour total to {vt}: not used")
             continue
-        try:
-            b = grid_mod.export(session, c["objectid"], box)
-            g = grid_mod.Grid(b)
-            geo = grid_mod.check_georef(g, box)
-            if geo:
-                raise ValueError("; ".join(geo))
-            got = grid_mod.sample(g, pts)
-        except Exception as e:  # noqa: BLE001
-            if h == 24:
-                raise
-            problems.append(f"{name}: {type(e).__name__}: {e}"[:300])
-            continue
-        for k, v in got.items():
-            values[k][f"h{h}"] = v
-        mx = [x for x in [g.max_read(), *got.values()] if x is not None]
-        maxima[h] = max(mx) if mx else None
-        products[str(h)] = {"item": name, "objectid": c["objectid"], "valid_time": c["valid_time"], "bytes": len(b),
-                            "sha256": hashlib.sha256(b).hexdigest(), **g.meta()}
-    missing = sum(1 for v in values.values() if v.get("h24") is None)
-    if missing > (1 - MIN_OK_SHARE) * len(values):
-        raise ValueError(f"the 24-hour grid has no value at {missing} of {len(values)} points")
+        products[str(h)] = {"item": name, "objectid": c["objectid"], "valid_time": c["valid_time"], "bytes": 0,
+                            "tiles": {}}
+        if h != 24:
+            use.append(h)
+    failed: dict[str, str] = {}
+    for t in tiles:
+        for h in use:                    # the 24-hour total first: a tile without it is failed, its others not read
+            name = grid_mod.item_name(h)
+            try:
+                b, g = export_tile(session, cat[name]["objectid"], t["box"])
+                got = grid_mod.sample(g, {k: pts[k] for k in t["keys"]})
+                if h == 24 and all(v is None for v in got.values()):
+                    raise ValueError(f"no 24-hour value at any of its {len(got)} point(s)")
+            except Exception as e:  # noqa: BLE001
+                err = f"{name}: {type(e).__name__}: {e}"[:300]
+                if h == 24:
+                    failed[t["tile"]] = err
+                    break
+                problems.append(f"tile {t['tile']} {err}")
+                continue
+            for k, v in got.items():
+                values[k][f"h{h}"] = v
+            mx = [x for x in [g.max_read(), *got.values()] if x is not None]
+            if mx:
+                maxima[h] = max(mx) if maxima.get(h) is None else max(maxima[h], *mx)
+            maxima.setdefault(h, None)
+            pr = products[str(h)]
+            pr["bytes"] += len(b)
+            pr["tiles"][t["tile"]] = {"bytes": len(b), "sha256": hashlib.sha256(b).hexdigest(), **g.meta()}
+    if len(failed) == len(tiles):
+        raise ValueError(f"every grid tile failed ({len(tiles)}): " + "; ".join(f"{k}: {v}" for k, v in failed.items()))
+    failed_points = sorted(k for t in tiles if t["tile"] in failed for k in t["keys"])
+    read_keys = [k for t in tiles if t["tile"] not in failed for k in t["keys"]]
+    missing = sum(1 for k in read_keys if values[k].get("h24") is None)
+    if missing > (1 - MIN_OK_SHARE) * len(read_keys):
+        raise ValueError(f"the 24-hour grid has no value at {missing} of {len(read_keys)} points")
     if missing:
         problems.append(f"no 24-hour value at {missing} point(s)")
+    if failed:
+        problems.append(f"{len(failed)} of {len(tiles)} grid tile(s) failed, their {len(failed_points)} point(s) read "
+                        f"by point: " + "; ".join(f"{k}: {v}" for k, v in failed.items())[:400])
     shrink = [k for k, v in values.items() if None not in (v.get("h1"), v.get("h24")) and v["h1"] > v["h24"] + 0.005]
     if shrink:
         problems.append(f"1-hour total above the 24-hour total at {len(shrink)} point(s), e.g. {shrink[0]}")
-    return {"values": values, "maxima": maxima, "valid_time": vt, "products": products, "box": box,
+    for k in failed_points:
+        values.pop(k, None)
+    tile_rows = [{"tile": t["tile"], "box": t["box"], "points": len(t["keys"]),
+                  **({"error": failed[t["tile"]]} if t["tile"] in failed else {})} for t in tiles]
+    return {"values": values, "maxima": maxima, "valid_time": vt, "products": products, "tiles": tile_rows,
+            "tiles_failed": failed, "failed_points": failed_points,
+            "box": grid_mod.union_box(t["box"] for t in tiles if t["tile"] not in failed),
             "problems": problems, "catalog": cat_raw}
 
 
@@ -1002,10 +1063,17 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 p[f] = old_points[k][f]
         if p.get("mrms") and not p["mrms"].get("units_read"):
             del p["mrms"]                      # read before the unit was checked (2026-11-07): reread, never kept
+    # a point outside the radar grid (a coordinate error in a registry, such as a longitude with its sign flipped) has
+    # no value there and would stretch a box for nothing: it is never read and never counted as missing
+    outside = sorted(k for k, p in points.items() if not grid_mod.in_extent(p["lat"], p["lon"]))
+    for k in outside:
+        points[k].pop("mrms", None)
+        points[k]["outside_grid"] = True
+    readable = [k for k in points if not points[k].get("outside_grid")]
     prev_mrms = prev.get("mrms") or {}
     last_units = prev_mrms.get("units_last_determined")
     units: dict | None = None
-    todo = [k for k, p in points.items() if needs_mrms(p.get("mrms"), now, force)]
+    todo = [k for k in readable if needs_mrms(points[k].get("mrms"), now, force)]
     base = session or requests.Session()
     base.headers.update(HEADERS)
     session = CountingSession(base)
@@ -1017,15 +1085,19 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         last_units = {"units_read": "mm", "basis": "history_repair", "determined_at": iso(now),
                       "evidence": {k: hist_repair.get(k) for k in ("first_hour_over_bound", "largest_before", "ranges")}}
 
-    # the grid: every point from one export per accumulation
+    # the grid: every point from its tile's export, one per accumulation per tile
+    fallback = {"used": False, "reason": None}
+    fb_todo: list[str] = []
     if todo and not point_only:
         hours = list(GRID_HOURS)
-        if backfill_needed(hist_old, {p for k in points for p in points[k]["permits"]}, now):
+        # the permittees with a point in the radar grid (one with none never gets a history to complete)
+        if backfill_needed(hist_old, {p for k in readable for p in points[k]["permits"]}, now):
             hours += list(BACKFILL_HOURS)
         g, chk, errs = None, None, []
+        grid_points = {k: points[k] for k in readable}
         for attempt in range(2):           # a product replaced between the query and the export: query again
             try:
-                g = read_grid(session, points, hours)
+                g = read_grid(session, grid_points, hours)
                 break
             except Exception as e:  # noqa: BLE001
                 errs.append(f"{type(e).__name__}: {e}"[:300])
@@ -1055,22 +1127,33 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                                      "units_read": units["units_read"]}
             problems.extend(g["problems"])
             read = "grid"
-            raw = {"read": "grid", "catalog": g["catalog"], "box": g["box"], "products": g["products"],
-                   "check": chk, "hours": hours, "units": units,
+            raw = {"read": "grid", "catalog": g["catalog"], "box": g["box"], "tiles": g["tiles"],
+                   "products": g["products"], "check": chk, "hours": hours, "units": units,
                    "values": {k: [v.get(f"h{h}") for h in hours] for k, v in g["values_as_read"].items()}}
-            grid_info = {"used": True, "valid_time": g["valid_time"], "box": g["box"], "products": g["products"],
+            grid_info = {"used": True, "valid_time": g["valid_time"], "box": g["box"], "tiles": g["tiles"],
+                         "tiles_read": len(g["tiles"]) - len(g["tiles_failed"]), "tiles_failed": g["tiles_failed"],
+                         "products": g["products"], "sampled": sampled,
                          "check": {k: v for k, v in (chk or {}).items() if k != "answer"}, "errors": errs}
+            # a failed tile's points: the per-point fallback (the grid's other points are not reread)
+            failed_set = set(g["failed_points"])
+            fb_todo = [k for k in todo if k in failed_set and needs_mrms(points[k].get("mrms"), now, False)]
+            if g["tiles_failed"]:
+                fallback = {"used": True, "reason": f"{len(g['tiles_failed'])} of {len(g['tiles'])} grid tile(s) "
+                                                    f"failed: " + "; ".join(g["tiles_failed"].values())[:300]}
         else:
             grid_info = {"used": False, "errors": errs}
             units = None
+            fb_todo = list(todo)
+            fallback = {"used": True, "reason": "grid read failed: " + "; ".join(errs)[:400]}
             problems.append("grid read failed; per-point fallback: " + "; ".join(errs)[:400])
-        todo = [k for k in todo if needs_mrms(points[k].get("mrms"), now, False)] if g is not None else todo
+    elif todo:
+        fb_todo = list(todo)               # --points: the per-point path by choice, not a fallback
 
     # the per-point path: the fallback (or --points)
-    if todo and read is None:
+    if fb_todo:
         cap = FALLBACK_MAX_CALLS if limit is None else min(limit, FALLBACK_MAX_CALLS)
-        order = fallback_order(points, todo, cap)
-        skipped = len(todo) - len(order)
+        order = fallback_order(points, fb_todo, cap)
+        skipped = len(fb_todo) - len(order)
         if skipped:
             problems.append(f"per-point fallback capped at {cap} calls: {skipped} point(s) keep their last reading")
         answers = {}
@@ -1099,24 +1182,36 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                     got[k] = m
                 else:
                     failed[k] = "no valid time"
-        if got:                                 # the unit from every answer of the run, then inches
+        if got:
             maxima = {h: max((m[f"h{h}"] for m in got.values() if m.get(f"h{h}") is not None), default=None)
                       for h in UNIT_BOUND_IN}
-            try:
-                box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
-            except ValueError:
-                box = None
-            gauge = run_gauge_check(session, box, max(m["valid_time"] for m in got.values()), now) if box else None
-            units = decide_units(maxima, last_units, gauge)
-            units["gauge_check"] = gauge
+            if units is None:                   # the unit from every answer of the run, then inches
+                try:
+                    box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
+                except ValueError:
+                    box = None
+                gauge = run_gauge_check(session, box, max(m["valid_time"] for m in got.values()), now) if box else None
+                units = decide_units(maxima, last_units, gauge)
+                units["gauge_check"] = gauge
+            elif units["units_read"] == "in" and bound_verdict(maxima):
+                # the grid's unit (the same service and hour) read inches, but a fallback answer is over the bound:
+                # nothing is divided (the larger reading, the safety side) and the conflict is recorded
+                problems.append("per-point fallback: " + bound_verdict(maxima)["evidence"]["text"]
+                                + f"; the run's unit ({units['basis']}) kept, nothing divided")
             for k, m in got.items():
                 for h in HOURS:
                     m[f"h{h}"] = to_inches(m.get(f"h{h}"), units["factor"])
                 m["units_read"] = units["units_read"]
                 points[k]["mrms"] = m
+        fallback.update(points=len(fb_todo), cap=cap, called=len(order), read=len(got), failed=len(order) - len(got),
+                        left=skipped)
         if answers:
-            read, sampled = "point", len(answers)
-            raw = {"read": "point", "answers": answers, "grid": grid_info, "units": units}
+            if read is None:
+                read, sampled = "point", len(answers)
+                raw = {"read": "point", "answers": answers, "grid": grid_info, "units": units}
+            else:                               # a failed tile's points, beside the grid's
+                sampled += len(answers)
+                raw["fallback"] = {"answers": answers, **{k: v for k, v in fallback.items() if k != "used"}}
     if raw:
         save_raw("noaa-mrms-qpe", gzip.compress(json.dumps(raw).encode()), "json.gz")
 
@@ -1169,13 +1264,33 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                             **qpf_next(g.get("values") or [], now)}
         grid_data = {c: g for c, g in grid_data.items() if c in cells}
 
-    fresh = [k for k, p in points.items() if not needs_mrms(p.get("mrms"), now, False)]
+    fresh = [k for k in readable if not needs_mrms(points[k].get("mrms"), now, False)]
     vts = [parse_t((p.get("mrms") or {}).get("valid_time")) for p in points.values() if p.get("mrms")]
     valid_time = max(vts) if vts else None
-    ok = bool(points) and len(fresh) >= MIN_OK_SHARE * len(points)
-    error = None if ok else (f"{len(fresh)} of {len(points)} points have this hour's reading; "
-                             f"{len(failed)} failed (e.g. {next(iter(failed.values()), '')})"
-                             + ("; " + "; ".join(grid_info.get("errors") or [])[:300] if grid_info.get("errors") else ""))
+    # readings_ok (the exit code): at least MIN_OK_SHARE of the points in the radar grid have this hour's reading. ok
+    # (the source's state): that, and the grid read without the per-point fallback; a fallback is never ok, even
+    # when it reads every point it needs. The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and
+    # never fail either.
+    readings_ok = bool(readable) and len(fresh) >= MIN_OK_SHARE * len(readable)
+    pfb = prev_mrms.get("fallback") or {}
+    if not todo and pfb.get("used") and prev_mrms.get("valid_time") == iso(valid_time):
+        # nothing to read this hour: the readings are the earlier run's, its fallback included
+        fallback = {**pfb, "carried_from": prev.get("fetched_at")}
+    ok = readings_ok and not fallback["used"]
+    reasons = []
+    if not readings_ok:
+        reasons.append(f"{len(fresh)} of {len(readable)} points in the radar grid have this hour's reading; "
+                       f"{len(failed)} failed" + (f" (e.g. {next(iter(failed.values()))})" if failed else ""))
+    if fallback["used"]:
+        reasons.append(f"per-point fallback ({fallback['reason']}): {fallback.get('read', 0)} of "
+                       f"{fallback.get('points', 0)} point(s) read by identify, {fallback.get('left', 0)} left at the "
+                       f"cap of {fallback.get('cap', FALLBACK_MAX_CALLS)}")
+    elif not readings_ok and grid_info.get("errors"):
+        reasons.append("; ".join(grid_info["errors"])[:300])
+    error = None if ok else "; ".join(reasons)[:600]
+    if outside:
+        problems.append(f"{len(outside)} point(s) outside the radar grid, not read: "
+                        + ", ".join(f"{k} ({', '.join(points[k]['outfalls'][:3])})" for k in outside[:10]))
     permits = permit_summary(points, outfalls)
     counts = session.summary()
     if units:
@@ -1194,7 +1309,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                  "read": read, "grid": grid_info,
                  "valid_time": iso(valid_time), "points": len(points), "outfalls": len(outfalls),
                  "permits": len(permits), "states": sorted({o["state"] for o in outfalls}),
-                 "fetched": sampled, "fresh": len(fresh),
+                 "readable": len(readable), "outside_grid": outside, "fetched": sampled, "fresh": len(fresh),
+                 "readings_ok": readings_ok, "fallback": fallback,
                  "failed": failed, "problems": problems[:50]},
         "qpf": {**qpf_info, "credit": "NOAA National Weather Service, api.weather.gov gridpoint forecast",
                 "grids": len(grid_data)},
@@ -1224,16 +1340,42 @@ def main() -> int:
         return 0
     t0 = time.time()
     out = run(force=a.force, qpf=not a.no_qpf, limit=a.limit, point_only=a.points)
-    m, q, r = out["mrms"], out["qpf"], out["requests"]
+    print(summary_line(out, time.time() - t0))
     wet = sorted(((rr.get("h24") or 0, p) for p, rr in out["permits"].items()), reverse=True)[:5]
-    print(f"rainfall: {m['points']} points ({m['outfalls']} outfalls, {m['permits']} permittees, "
-          f"{','.join(m['states'])}), read by {m['read'] or 'nothing'}, {m['fetched']} sampled, {m['fresh']} fresh, "
-          f"{len(m['failed'])} failed, valid {m['valid_time']}; QPF {q['grids']} grid cells ({q['fetched']} fetched, "
-          f"{q['cached']} cached, {q['deferred']} deferred, {q['lookups']} lookups, {q['lookups_deferred']} lookups "
-          f"deferred, {len(q['failed'])} failed); requests {r['total']} (MRMS {r['noaa_mrms']}, NWS {r['noaa_nws']}); "
-          f"ok={out['ok']} in {time.time() - t0:.0f} s")
     print("  wettest 24 h:", ", ".join(f"{p} {v:.2f} in" for v, p in wet))
-    return 0 if out["ok"] else 1
+    for line in out["mrms"]["problems"][:5]:
+        print("  problem:", line[:300])
+    return exit_code(out)
+
+
+def summary_line(out: dict, seconds: float) -> str:
+    """The run's one line: how the radar was read (the grid's tiles and exports, the fallback said loudly), the
+    readings fresh of the points in the radar grid, the forecast, and this run's requests by kind."""
+    m, q, r = out["mrms"], out["qpf"], out["requests"]
+    gi, fb = m.get("grid") or {}, m.get("fallback") or {}
+    if gi.get("used"):
+        how = (f"read by grid ({gi.get('tiles_read')} of {len(gi.get('tiles') or [])} tiles, {r['mrms_export']} "
+               f"exports), {gi.get('sampled')} sampled from the grid")
+    else:
+        how = f"read by {m['read'] or 'nothing'}, {m['fetched']} sampled"
+    if fb.get("used"):
+        how += (f"; FALLBACK per point ({fb.get('reason')}): {fb.get('read', 0)} of {fb.get('points', 0)} read, "
+                f"{fb.get('left', 0)} left at the cap of {fb.get('cap')}")[:400]
+    outside = f", {len(m['outside_grid'])} outside the radar grid" if m.get("outside_grid") else ""
+    return (f"rainfall: {m['points']} points ({m['outfalls']} outfalls, {m['permits']} permittees, "
+            f"{','.join(m['states'])}{outside}), {how}, {m['fresh']} fresh of {m['readable']}, {len(m['failed'])} failed, "
+            f"valid {m['valid_time']}; QPF {q['grids']} grid cells ({q['fetched']} fetched, {q['cached']} cached, "
+            f"{q['deferred']} deferred, {q['lookups']} lookups, {q['lookups_deferred']} lookups deferred, "
+            f"{len(q['failed'])} failed); requests {r['total']} (MRMS {r['noaa_mrms']}: {r['mrms_query']} query, "
+            f"{r['mrms_export']} export, {r['mrms_identify']} identify; NWS {r['noaa_nws']}); ok={out['ok']} "
+            f"readings_ok={m['readings_ok']} in {seconds:.0f} s")
+
+
+def exit_code(out: dict) -> int:
+    """Non-zero only when readings are missing: fewer than MIN_OK_SHARE of the points in the radar grid have this
+    hour's reading. A fallback that read what it needed says so in ok and the summary line, not in the exit code; the
+    forecast's deferrals never fail the stage."""
+    return 0 if (out.get("mrms") or {}).get("readings_ok") else 1
 
 
 if __name__ == "__main__":
