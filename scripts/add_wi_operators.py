@@ -60,6 +60,11 @@ BASE_LAW = ("Wisconsin requires public notice of every sanitary sewer overflow a
 GREAT_LAKES = (" As a combined sewer permittee in the Great Lakes Basin it also owes the public notice of 40 CFR 122.38: "
                "an initial notice no later than four hours after becoming aware of a discharge, under its public "
                "notification plan.")
+TRIBAL_LAW = ("A permit on tribal land, which EPA Region 5 issues and where Wisconsin's rule does not apply: the permit's "
+              "24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed "
+              "electronically in its sewer overflow tables "
+              "(https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); the extract of 2026-11-12 "
+              "holds no Wisconsin report. No public notice duty was found.")
 NOT_SEARCHED = " Its own public channel was not searched individually."
 
 RESEARCH_NAME = {"WI0036820": "Milwaukee Metropolitan Sewerage District",
@@ -285,7 +290,8 @@ def make_row(rid, g, ps, rs, plants, cso, kind=None) -> dict:
            "outfalls_source": ("EPA National CSO Inventory (data/outfalls-us.json)" if crow else
                                f"EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, {len(rows)} rows)"
                                if rows else None),
-           "notification_channel": channel(rs, bool(crow)),
+           "notification_channel": (TRIBAL_LAW + NOT_SEARCHED if set(ps) & EPA_TRIBAL_PERMITS
+                                    else channel(rs, bool(crow))),
            "notification_feed_machine_readable": False,
            "notification_signup_url": None, "towns": towns, "notes": notes.strip(),
            "verified": next((r["verified"] for r in rs if r.get("verified") == "fetched"),
