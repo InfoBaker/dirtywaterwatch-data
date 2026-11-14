@@ -2,19 +2,8 @@
  "format": "wi-mmsd-storm-updates/1",
  "list_url": "https://www.mmsd.com/about-us/news",
  "pages": 71,
+ "list_items_seen": 281,
  "items": [
-  {
-   "url": "https://www.mmsd.com/about-us/news/audit-operations-and-maintenance-oversight",
-   "slug": "audit-operations-and-maintenance-oversight",
-   "title": "Audit: Operations and Maintenance Oversight",
-   "list_date": "Nov 9, 2026, 11:00 AM"
-  },
-  {
-   "url": "https://www.mmsd.com/about-us/news/bay-view-april-storm-meeting-update",
-   "slug": "bay-view-april-storm-meeting-update",
-   "title": "Bay View April Storm Meeting Update",
-   "list_date": "Oct 9, 2026, 4:00 PM"
-  },
   {
    "url": "https://www.mmsd.com/about-us/news/storm-update-september-3rd-2026",
    "slug": "storm-update-september-3rd-2026",
@@ -34,16 +23,28 @@
    "list_date": "Apr 24, 2026, 4:00 PM"
   },
   {
-   "url": "https://www.mmsd.com/about-us/news/mmsd-proposed-budget-2026",
-   "slug": "mmsd-proposed-budget-2026",
-   "title": "Reducing Flooding, Sewer Overflows & Basement Backups Priorities in $193 Million Proposed 2026 Budgets",
-   "list_date": "Sep 8, 2025, 8:00 AM"
+   "url": "https://www.mmsd.com/about-us/news/treatment-plant-spill-january-7-2026",
+   "slug": "treatment-plant-spill-january-7-2026",
+   "title": "Treatment Plant Spill January 7, 2026",
+   "list_date": "Jan 7, 2026, 5:00 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/wastewater-spill-september-18",
+   "slug": "wastewater-spill-september-18",
+   "title": "Treatment Plant Wastewater Spill Update for September 18, 2025",
+   "list_date": "Sep 23, 2025, 5:03 PM"
   },
   {
    "url": "https://www.mmsd.com/about-us/news/mmsd-storm-update-aug-9-11-2025",
    "slug": "mmsd-storm-update-aug-9-11-2025",
    "title": "MMSD Storm Update Aug 9-10, 2025",
    "list_date": "Aug 15, 2025, 3:15 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/mmsd-sanitary-sewer-release-march-11-2025",
+   "slug": "mmsd-sanitary-sewer-release-march-11-2025",
+   "title": "Sanitary Sewer Release March, 11 2025",
+   "list_date": "Mar 14, 2025, 2:00 PM"
   },
   {
    "url": "https://www.mmsd.com/about-us/news/mmsd-storm-update-april-1-thru-4-2024",
@@ -92,6 +93,24 @@
    "slug": "storm-update-june-18-19-2018",
    "title": "STORM UPDATE – JUNE 18 & 19, 2018",
    "list_date": "Jun 22, 2018, 2:26 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/audit-operations-and-maintenance-oversight",
+   "slug": "audit-operations-and-maintenance-oversight",
+   "title": "Audit: Operations and Maintenance Oversight",
+   "list_date": "Nov 9, 2026, 11:00 AM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/bay-view-april-storm-meeting-update",
+   "slug": "bay-view-april-storm-meeting-update",
+   "title": "Bay View April Storm Meeting Update",
+   "list_date": "Oct 9, 2026, 4:00 PM"
+  },
+  {
+   "url": "https://www.mmsd.com/about-us/news/mmsd-proposed-budget-2026",
+   "slug": "mmsd-proposed-budget-2026",
+   "title": "Reducing Flooding, Sewer Overflows & Basement Backups Priorities in $193 Million Proposed 2026 Budgets",
+   "list_date": "Sep 8, 2025, 8:00 AM"
   }
  ],
  "posts": {
@@ -378,6 +397,50 @@
      "label": "Separate Sewer Overflow Report"
     }
    ]
+  },
+  "treatment-plant-spill-january-7-2026": {
+   "stamp": "01/07/26 05:00:pm",
+   "lines": [
+    "Treatment Plant Spill January 7, 2026",
+    "Equipment failure led to an estimated 150,000 gallons of wastewater spilling onto a patch of land at the Jones Island Water Reclamation Facility. No wastewater entered Lake Michigan or nearby rivers. The spill began on January 6 at around 11:25 PM and continued until 2:22 AM on January 7, 2026. The incident was reported to the Wisconsin Department of Natural Resources (WDNR) ."
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/758e32cb-44f7-4433-93d6-4239abf2792b/1553",
+     "label": "reported to the Wisconsin Department of Natural Resources (WDNR)"
+    }
+   ]
+  },
+  "wastewater-spill-september-18": {
+   "stamp": "09/23/25 05:03:pm",
+   "lines": [
+    "Treatment Plant Wastewater Spill Update for September 18, 2025",
+    "MMSD is reporting the following information to the Wisconsin Department of Natural Resources regarding the wastewater spill on September 18, 2025, at the South Shore Water Reclamation Facility ."
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/944e080b-b670-48cf-9dca-91a34801f614/1537",
+     "label": "reporting the following information"
+    }
+   ]
+  },
+  "mmsd-sanitary-sewer-release-march-11-2025": {
+   "stamp": "03/14/25 02:00:pm",
+   "lines": [
+    "Accidental Sanitary Sewer Release March 11, 2025",
+    "An accidental sanitary sewer release occurred on 3-11-25 into Lincoln Creek near 32nd Street and Hampton Avenue in Milwaukee. Workers from MMSD's contractor, Veolia Water Milwaukee , discharged approximately 9,600 gallons of sanitary sewage from a vacuum truck into a storm sewer that the crew mistakenly believed was a sanitary sewer.",
+    "MMSD notified the Wisconsin Department of Natural Resources , and reported the incident.",
+    "Steps Taken to Prevent Other Discharges",
+    "On March 12, 2025, Veolia crews plugged and cleaned the impacted storm sewer before reopening it for normal operation, and Veolia implemented a mandatory supervisor verification and approval process, requiring staff to confirm and obtain supervisor approval before decanting vacuum trucks. Veolia has additionally scheduled a refresher training for its field crews on proper discharge procedures and verification protocols for the week of March 17, 2025.",
+    "MMSD will continue to work with Veolia to determine why this happened and ensure that the proper decanting locations are used in future events."
+   ],
+   "letters": [
+    {
+     "url": "https://www.mmsd.com/download_file/view/e44ca201-7bde-41f5-869c-9c7da1f1910e/1487",
+     "label": "reported the incident."
+    }
+   ]
   }
- }
+ },
+ "failed": []
 }

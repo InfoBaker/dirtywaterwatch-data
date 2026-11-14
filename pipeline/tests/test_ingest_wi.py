@@ -33,10 +33,10 @@ def built(d: dict | None = None, prev: list[dict] | None = None) -> tuple[dict[s
 
 def test_only_storm_updates_and_overflow_letters_are_read():
     recs, stats = built()
-    assert stats["items"] == 15 and stats["posts_read"] == 12 and stats["not_read"] == 3
+    assert stats["candidates"] == 18 and stats["posts_read"] == 15 and stats["not_read"] == 3
     assert not any("budget" in k or "audit" in k or "meeting" in k for k in recs)
-    assert stats["records"] == len(recs) == 18
-    assert M.TITLE_RE.search("Reducing Flooding, Sewer Overflows & Basement Backups Priorities") is None
+    assert stats["records"] == len(recs) == 21
+    assert not M.candidate("Reducing Flooding, Sewer Overflows & Basement Backups Priorities")
 
 
 def test_dated_post_volume_and_publication_clock():
@@ -107,7 +107,7 @@ def test_letter_label_types_and_generic_overflows_never_unknown():
     assert g["started_at"] == "2019-03-14" and "general case" in g["raw"]["_type_basis"]
     a = recs["mmsd-storm-update-april-2026:sso"]
     assert a["started_at"] == "2026-04-14" and a["raw"]["period_end"] == "2026-04-18"
-    assert all(r["event_type"] in ("cso", "sso") for r in recs.values())
+    assert all(r["event_type"] in ("cso", "sso", "plant_bypass") for r in recs.values())
 
 
 def test_a_month_day_is_not_scrubbed_as_a_house_number():
@@ -151,11 +151,11 @@ def test_an_edited_post_drops_the_type_it_no_longer_reports():
 def test_counter_and_water_drop_alert_are_not_overflows():
     d = doc()
     d["items"] = [{"url": "https://www.mmsd.com/about-us/news/example", "slug": "example", "list_date": "Nov 1, 2026, 9:00 AM",
-                   "title": "Water Drop Alert issued: heavy rain expected"}]
+                   "title": "MMSD Storm Update: Water Drop Alert issued"}]
     d["posts"] = {"example": {"stamp": "11/01/26 09:00:am", "letters": [],
                               "lines": ["Gallons Overflowed: 2,810,937,528", "Please use less water."]}}
     recs, stats = built(d)
-    assert recs == {} and stats["not_read"] == 1
+    assert recs == {} and stats["posts_read"] == 1
 
 
 def test_page_doc_cuts_advice_block_and_scrubs():
@@ -213,7 +213,8 @@ def test_fetch_stops_when_the_cms_repeats_page_one(monkeypatch):
             b'</div><p>MMSD is reporting a combined sewer overflow that occurred on September 3rd, 2026.</p>')
     sess = FakeSession({1: p1, 2: p2}, {"storm-update-example": post})
     doc = M.fetch_safe(sess, M.BACKFILL_PAGES, {})
-    assert [i["slug"] for i in doc["items"]] == ["storm-update-example", "budget", "plant-sale"]
+    assert [i["slug"] for i in doc["items"]] == ["storm-update-example"]          # only candidates are kept
+    assert doc["list_items_seen"] == 3
     assert sum(1 for _, p in sess.asked if p) == 3          # page 3 repeated page 1: the walk stopped there
     assert list(doc["posts"]) == ["storm-update-example"]   # only the storm update's page was asked for
     recs, _ = M.build(doc, [], FETCHED)
@@ -331,8 +332,90 @@ def test_missing_waters_list_leaves_out_the_national_lists_names():
 def test_no_personal_string_reaches_the_records():
     d = doc()
     p = d["posts"]["storm-update-august-1st-2026"]
-    p["lines"] = p["lines"] + [M.safe_line("Questions: Pat Example, 414-555-0199, pat.example@example.org, "
-                                           "1234 Example Ave")]
+    html = ('<h1 class="ccm-block-page-title page-title">MMSD Storm Update August 1st, 2026</h1><div>08/06/26 09:00:am</div>'
+            '<p>MMSD is reporting a combined sewer overflow that took place on August 1, 2026.</p>'
+            '<p>Overflow volume of 96 million gallons.</p>'
+            '<p>Questions: Pat Example, 414-555-0199, pat.example@example.org, 1234 Example Ave</p>')
+    p.update(M.page_doc(html))
     blob = json.dumps(built(d)[0])
-    for s in ("414-555-0199", "pat.example", "1234 Example"):
-        assert s not in blob
+    for x in ("Pat Example", "414-555-0199", "pat.example", "1234 Example"):
+        assert x not in blob
+    assert built(d)[0]["storm-update-august-1st-2026:cso"]["volume_gal"] == 96_000_000
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-14
+
+def _post(lines, stamp="06/05/27 09:00:am", letters=()):
+    return {"stamp": stamp, "lines": list(lines), "letters": list(letters)}
+
+
+def _recs(title, lines, **kw):
+    return {r["event_type"]: r for r in M.records_for({"url": "u", "slug": "x", "title": title, "list_date": None},
+                                                       _post(lines, **kw), FETCHED)}
+
+
+def test_p1_1_denials_forecasts_and_zeros_make_no_report():
+    t = "MMSD Storm Update June 1, 2027"
+    assert _recs(t, [t, "No combined sewer overflow occurred on June 1, 2027."]) == {}
+    assert _recs(t, [t, "A combined sewer overflow may occur if rain continues."]) == {}
+    assert _recs(t, [t, "The deep tunnel prevented sewer overflows during the storm."]) == {}
+    assert _recs(t, [t, "Combined Sewer Overflow: 0 gallons"]) == {}
+    assert set(_recs(t, [t, "A combined sewer overflow occurred on June 1, 2027."])) == {"cso"}
+
+
+def test_p1_2_each_overflow_keeps_its_own_times_and_years_never_come_from_the_clock():
+    t = "MMSD Storm Update June 1-2"
+    r = _recs(t, [t, "A combined sewer overflow started at 1:00 pm on June 1, 2027, and ended at 3:00 pm on June 1, 2027.",
+                  "A separate sewer overflow started at 4:00 am on June 2, 2027, and ended at 6:00 am on June 2, 2027."])
+    assert r["cso"]["started_at"] == "2027-06-01T13:00:00-05:00" and r["cso"]["ended_at"] == "2027-06-01T15:00:00-05:00"
+    assert r["sso"]["started_at"] == "2027-06-02T04:00:00-05:00" and r["sso"]["ended_at"] == "2027-06-02T06:00:00-05:00"
+    # no stamp and no list date: a date with no year stays unknown, whatever the day it is read
+    f = M.read_post("Storm update", {"stamp": None, "lines": ["A combined sewer overflow occurred on June 1."]}, None)
+    assert f["period"] is None
+
+
+def test_p1_3_a_failed_or_holding_page_is_not_a_revision_and_is_retried(monkeypatch):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    assert M.page_doc('<h1 class="ccm-block-page-title page-title">MMSD Storm Update</h1><p>Temporarily unavailable</p>') is None
+    recs, _ = built()
+    prev = {(r.get("raw") or {}).get("slug"): r for r in recs.values()}
+    p1 = _list_page([("storm-update-september-3rd-2026", "MMSD Storm Update September 3rd, 2026")])
+
+    class Down(FakeSession):
+        def get(self, url, params=None, headers=None, timeout=None):
+            if params:
+                return FakeResp(p1)
+            raise M.requests.ConnectionError("refused")
+    doc = M.fetch_safe(Down({1: p1}, {}), 1, {k: v for k, v in prev.items() if k != "storm-update-september-3rd-2026"},
+                       fetched_at=FETCHED)
+    assert [f["slug"] for f in doc["failed"]] == ["storm-update-september-3rd-2026"]
+    again, stats = M.build(doc, list(recs.values()), FETCHED)
+    assert "storm-update-september-3rd-2026:cso" in {r["source_record_id"] for r in again}   # kept, not deleted
+    assert stats["posts_failed"] == 1
+
+
+def test_p1_4_spills_and_releases_are_read_and_a_no_water_spill_colours_nothing():
+    recs = built()[0]
+    p = recs["treatment-plant-spill-january-7-2026:plant_bypass"]
+    assert p["started_at"] == "2026-01-06T23:25:00-06:00" and p["ended_at"] == "2026-01-07T02:22:00-06:00"
+    assert p["volume_gal"] == 150_000 and p["raw"]["reached_water"] is False and p["waterbody_text"] is None
+    s = recs["mmsd-sanitary-sewer-release-march-11-2025:sso"]
+    assert s["started_at"] == "2025-03-11" and s["waterbody_text"] == "Lincoln Creek" and s["volume_gal"] == 9_600
+    assert "wastewater-spill-september-18:plant_bypass" in recs
+    assert not M.candidate("Proposed Budgets Would Lower Taxes in 2027 & Reduce Flooding, Overflows")
+    assert M.candidate("Sanitary Sewer Release March, 11 2025") and M.candidate("Treatment Plant Spill January 7, 2026")
+
+
+def test_p2_8_a_known_post_is_read_again_after_thirty_days_and_a_retry_beyond_page_two(monkeypatch):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    recs, _ = built()
+    prev = {(r.get("raw") or {}).get("slug"): r for r in recs.values()}
+    p1 = _list_page([("budget", "Budget news")])
+    sess = FakeSession({1: p1}, {k: b"<p>x</p>" for k in [*prev, "old-one"]})
+    doc = M.fetch_safe(sess, 1, prev, retry=[{"url": "https://www.mmsd.com/about-us/news/old-one", "slug": "old-one",
+                                              "title": "Storm Update - Old", "list_date": None}],
+                       fetched_at="2026-12-20T18:00:00Z")
+    asked = {M.slug_of(u) for u, p in sess.asked if not p}
+    assert set(prev) | {"old-one"} <= asked       # every known post revalidated after 30 days, and the retry
+    again = M.fetch_safe(FakeSession({1: p1}, {}), 1, prev, fetched_at="2026-11-20T18:00:00Z")
+    assert again["failed"] == []                  # read six days ago: not asked for again
