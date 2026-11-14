@@ -45,7 +45,7 @@ fetch:
                 overflow_type]
   reviewed_fields:
     facility_name: "the permitted facility as DEQ names it ('VAN BUREN, CITY OF-MAIN PLANT'); a name that is only a person's is removed (operator_fields)"
-  free_text: [location, cause, action_taken, overflow_type, environmental_damage]
+  free_text: [location, cause, action_taken, overflow_type, environmental_damage, impact]   # impact: DEQ's labels, or the filer's own words
   free_text_scrub: "strict"
   operator_fields: [facility_name]
   record:

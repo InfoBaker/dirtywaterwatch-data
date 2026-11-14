@@ -61,8 +61,8 @@ AGENCY = [
      "note": ("DEQ's Reported Noncompliance Incident Data search: every SSO, bypass, upset and unpermitted discharge "
               "filed on its 24-hour online forms, current to the previous day, with the days it started and stopped, the "
               "volume, the filer's impact and a location text, but no coordinates, county or receiving water (2,449 "
-              "reports from 2025-01-01 to 2026-11-14). A form search with no export endpoint; no rule requires DEQ to "
-              "publish it. Read each run by the ar-deq-overflow-incidents feed. (ar-deq-overflow-incidents)"),
+              "reports from 2025-01-01 to 2026-11-14). A form search whose Text, Excel and PDF exports are generated per query (not used here); no "
+              "rule requires DEQ to publish it. Read each run by the ar-deq-overflow-incidents feed. (ar-deq-overflow-incidents)"),
      "sources": ["ar-deq-overflow-incidents"]},
     {"id": "ar-deq-sso-access-db", "agency": DEQ, "name": DEQ, "channel_kind": "state_alert_page", "urls": [],
      "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",

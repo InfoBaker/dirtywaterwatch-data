@@ -11,7 +11,7 @@ field; no county.
     circumstances" and, in most cases, a five-day written report, for "Any Sanitary Sewer Overflow (SSO), no matter how
     small", any unanticipated bypass, any upset and "Any Unpermitted Discharge ... regardless of whether it reaches
     waters of the state". No duty to tell the public.
-  - Zone: Arkansas is wholly Central time (49 CFR 71.5(c)); each date is midnight in America/Chicago (raw.time_zone).
+  - Zone: Arkansas is wholly Central time (49 CFR part 71, the Central zone); each date is midnight in America/Chicago (raw.time_zone).
   - Kind (DEQ's Type): "SSO" -> sso; "Bypass" and "Upset" -> plant_bypass; "Unpermitted Discharge" -> sso (a release
     from a collection or treatment system other than through a permitted outfall); a blank type -> sso (filed on the
     sewer overflow forms). DEQ's label stays in raw._source_type. The search also lists industrial permits: a report
@@ -62,7 +62,7 @@ from ingest.generic import fieldmap as F
 
 TZ_NAME = "America/Chicago"
 TZ = ZoneInfo(TZ_NAME)
-ZONE_NOTE = "Central time (Arkansas is wholly in the Central zone, 49 CFR 71.5(c)); dates only"
+ZONE_NOTE = "Central time (Arkansas is wholly in the Central zone, 49 CFR part 71, the Central zone); dates only"
 FEDERAL = re.compile(r"^AR[0-9GR][0-9A-Z]\d{5}$")
 KINDS = [
     (re.compile(r"\bSSO\b", re.I), "sso"),
@@ -95,19 +95,39 @@ STREETY = re.compile(r"\b(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|cir
                      r"loop|cove|cv|terrace|way|place|pl|trail|trl)\.?\s*$", re.I)
 
 
+QUALIFIER_BEFORE = re.compile(r"\b(little|middle|upper|lower|big|east|west|north|south)((?:\s+(?:fork|branch|prong))"
+                              r"(?:\s+of(?:\s+the)?)?)?\s+$", re.I)
+# words a sentence goes on with after a lake's name ("Lake Hamilton Due to rain"): not part of it
+TRAIL_STOP = {"due", "used", "approximately", "approx", "was", "were", "from", "after", "near", "and", "the", "at",
+              "on", "in", "to", "area", "about", "around", "with", "by"}
+
+
+def _title(text: str) -> str:
+    """An all-capitals text read as a name ("INTO TOWN CREEK" -> "Into Town Creek")."""
+    t = text.title()
+    t = re.sub(r"\bMc(\w)", lambda m: "Mc" + m.group(1).upper(), t)
+    return re.sub(r"(?<=\w)'S\b", "'s", t)
+
+
 def water_names(text: str) -> tuple[list[str], list[str]]:
-    """(the waters a location text names, the water-like words it uses that name none)."""
+    """(the waters a location text names, the water-like words it uses that name none). A text written in capitals is
+    read as a title-cased one; a qualifier written in lower case before a name ("little Sample Creek") stays with it,
+    since a qualified name is another water; a name is never cut to a shorter one."""
+    text = text or ""
+    if text and not re.search(r"[a-z]", text):
+        text = _title(text)
     names, unused = [], []
-    for m in WATER_NAME.finditer(text or ""):
+    for m in WATER_NAME.finditer(text):
         words = m.group(1).split()
         while words and (words[0].lower().strip(".,") in LEAD or words[0] == "St"):
             words.pop(0)
+        if words and words[0].lower() == "lake":
+            while len(words) > 2 and words[-1].lower().strip(".,") in TRAIL_STOP:
+                words.pop()
         cand = " ".join(words).strip(" .,;")
         if STREET_AFTER.match(text[m.end():]) or (words and STREET_AFTER.match(words[-1])):
             unused.append(cand)                  # "Lake Lane", "Mill Creek Estates": a street or a place
             continue
-        if cand.lower().startswith("lake ") and len(words) > 2:
-            cand = " ".join(words[:2])           # "Lake Hamilton Due" is Lake Hamilton
         if len(words) < 2 and not cand.lower().startswith("lake "):
             if cand:
                 unused.append(cand)
@@ -115,9 +135,13 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
         if NO_NAME.match(cand) or STREETY.search(" ".join(words[:-1])):
             unused.append(cand)
             continue
-        if TRIB_BEFORE.search(text[:m.start()] + " ".join(m.group(1).split()[:len(m.group(1).split()) - len(words)])):
+        before = text[:m.start()] + " ".join(m.group(1).split()[:len(m.group(1).split()) - len(words)])
+        if TRIB_BEFORE.search(before):
             unused.append(f"a tributary of {cand}")
             continue
+        q = QUALIFIER_BEFORE.search(before.rstrip() + " ")
+        if q and not re.match(r"(little|middle|upper|lower|big|east|west|north|south)\b", cand, re.I):
+            cand = re.sub(r"\bOf\b", "of", re.sub(r"\bThe\b", "the", _title(q.group(0).strip()))) + " " + cand
         names.append(cand)
     return list(dict.fromkeys(names)), list(dict.fromkeys(unused))
 
@@ -232,8 +256,9 @@ def ar_deq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     names, unused = water_names(loc) if loc else ([], [])
     if impact and not DEQ_IMPACTS.match(impact):
         # the filer typed its own words in the impact box ("Village Creek"): the water it names
+        # (only the water names it gives are used; the text itself passed the strict scrub before any save)
         n2, u2 = water_names(impact)
-        names = list(dict.fromkeys(n2 + names)) if (n2 or u2) else list(dict.fromkeys([impact] + names))
+        names = list(dict.fromkeys(n2 + names))
         unused += u2
     if LAND_ONLY.search(impact or ""):
         notes["reached_water"] = False
@@ -309,6 +334,17 @@ GNIS_POINTS = {
 }
 
 
+DESCRIBED = re.compile(r"^(stream|creek|pond|lake|cove|inlet|spring)\b\s+(by|near|at|behind|east|west|north|south|"
+                       r"below|above|off)\b", re.I)
+
+
+def round_text_coords(text):
+    """DEQ's coordinates written in a waterbody name, rounded to 0.001 degree before anything is saved."""
+    if not isinstance(text, str):
+        return text
+    return COORDS.sub(lambda m: f"(coordinates {round(float(m.group(1)), 3)}, {round(float(m.group(2)), 3)})", text)
+
+
 def hab_water(text: str) -> tuple[str, str | None]:
     """(the water's name, the qualifier DEQ adds): "Lake Catherine - Spencer Bay *" -> ("Lake Catherine", "Spencer
     Bay"); "Huston Lake on Big Huston Creek" -> ("Huston Lake", "on Big Huston Creek"); the star and a coordinate
@@ -332,14 +368,22 @@ def hab_counties(text: str) -> list[str]:
 def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     notes["state"] = "AR"
     notes["time_zone"] = TZ_NAME
-    notes["timezone_note"] = "Central time (Arkansas is wholly in the Central zone, 49 CFR 71.5(c)); dates only"
+    notes["timezone_note"] = "Central time (Arkansas is wholly in the Central zone, 49 CFR part 71, the Central zone); dates only"
     _local_midnights(rec)
     raw_name = F.clean(row.get("waterbody"))
     star = raw_name.endswith("*")
     name, qualifier = hab_water(raw_name)
     rec["event_type"] = "hab_advisory"
-    rec["waterbody_text"] = name or None
+    described = bool(DESCRIBED.match(name or ""))
+    if described:
+        # "Stream by Waterfall Trail East of Lake Alma": a place described, not a water's name; the lake it mentions
+        # is not the affected water. Placed only by DEQ's own point when the row gives one.
+        rec["waterbody_text"] = None
+        notes["_water_description"] = name
+    else:
+        rec["waterbody_text"] = name or None
     if qualifier:
+        # "Lake Catherine - Spencer Bay": DEQ's advisory is for part of the lake, never the whole lake's colour
         notes["_water_qualifier"] = qualifier
     counties = hab_counties(row.get("county"))
     if counties:
@@ -349,7 +393,8 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     area = F.clean(row.get("area"))
     if area:
         notes["_nearest_area"] = area
-    notes["_placement"] = "named_water_only"
+    if not described:
+        notes["_placement"] = "named_water_only"
     lifted = F.clean(row.get("lifted"))
     if star:
         # not DEQ's own advisory: the site's caution from the posting day (data/rules.json unresolved.sample_caution)
@@ -387,4 +432,5 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
             rec["coord_source"], rec["coord_precision_m"] = "gnis", 1000
             notes["_point_basis"] = (f"the USGS GNIS feature {pt[0]} of this name in this county (The National Map "
                                      "geonames, read 2026-11-14): the water, not where the bloom was sampled")
-    notes["advisory_extent"] = "named_water"
+    if not described and not qualifier:
+        notes["advisory_extent"] = "named_water"      # DEQ names the lake itself as the advisory's water
