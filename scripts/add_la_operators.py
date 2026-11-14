@@ -63,6 +63,7 @@ OVERRIDES = [
     (r"shreveport", "City of Shreveport", "city"),
     (r"^bossier city", "City of Bossier City", "city"),
     (r"terrebonne ph(?:arish)? conso", "Terrebonne Parish Consolidated Government", "county"),
+    (r"^utilities,? inc\.? of (?:la|louisiana)\b", "Utilities, Inc. of Louisiana", "investor-owned utility"),
     (r"magnolia water utility operating", "Magnolia Water Utility Operating Company, LLC", "investor-owned utility"),
     (r"nati?onal water infrastructure", "National Water Infrastructure, LLC", "investor-owned utility"),
     (r"lafayette consolidated government|city of lafayette", "Lafayette Consolidated Government", "county"),
@@ -119,13 +120,13 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
         if e.get("legal_form") and how not in ("override",) and not name.startswith("Holder of permit"):
             form = e["legal_form"]
         hows[how] += 1
-        g = groups.setdefault(name, {"name": name, "legal_form": form, "permits": [], "waters": set(), "towns": set(),
+        g = groups.setdefault(slug(name), {"name": name, "legal_form": form, "permits": [], "waters": set(), "towns": set(),
                                      "aliases": [], "notes": [], "outfalls": 0, "sources": set()})
         g["permits"].append(p)
         g["waters"] |= e["waters"] | cso_waters.get(p, set())
         if e.get("city"):
             g["towns"].add(title(clean(e["city"]).split(",")[0]))
-        g["aliases"] += alias.get(p, []) + [x for x in by_owner.get(name, []) if x not in g["aliases"]]
+        g["aliases"] += alias.get(p, []) + [x for x in by_owner.get(g["name"], []) if x not in g["aliases"]]
         if e.get("industrial_cso"):
             g["notes"].append(f"{p}: EPA's combined sewer inventory lists this industrial plant's combined outfall; "
                               "not a municipal combined sewer outlet (data/outfalls-la.json)")
@@ -135,7 +136,8 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             g["notes"].append(f"{p}: EPA records the permittee as \"{title(clean(e['permit_name'] or ''))}\""
                               if not name.startswith("Holder of permit") else f"{p}: the permittee's name is withheld")
     rows = []
-    for name, g in sorted(groups.items()):
+    for _, g in sorted(groups.items()):
+        name = g["name"]
         permits = sorted(g["permits"])
         cso = [p for p in permits if p in cso_permits]
         channel = LAW
