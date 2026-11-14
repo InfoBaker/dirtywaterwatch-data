@@ -173,3 +173,46 @@ def test_page_doc_cuts_advice_block_and_scrubs():
 
 def test_wisconsin_is_central_time():
     assert zones.STATE_ZONES["WI"] == "America/Chicago"
+
+
+class FakeResp:
+    def __init__(self, body: bytes):
+        self.content = body
+
+    def raise_for_status(self):
+        return None
+
+
+class FakeSession:
+    """The news list: two real pages, then the CMS answering any later page with page one (as mmsd.com does)."""
+
+    def __init__(self, pages: dict[int, bytes], posts: dict[str, bytes]):
+        self.pages, self.posts, self.asked = pages, posts, []
+
+    def get(self, url, params=None, headers=None, timeout=None):
+        self.asked.append((url, (params or {}).get(M.PAGE_PARAM)))
+        if params:
+            return FakeResp(self.pages.get(params[M.PAGE_PARAM], self.pages[1]))
+        return FakeResp(self.posts[M.slug_of(url)])
+
+
+def _list_page(items: list[tuple[str, str]]) -> bytes:
+    rows = "".join(f'<div class="ccm-block-page-list-title"><a href="https://www.mmsd.com/about-us/news/{s}" '
+                   f'target="_self"><h3>{t}</h3></a></div><div class="ccm-block-page-list-date">Sep 8, 2026, 11:00 AM</div>'
+                   for s, t in items)
+    return rows.encode()
+
+
+def test_fetch_stops_when_the_cms_repeats_page_one(monkeypatch):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    p1 = _list_page([("storm-update-example", "MMSD Storm Update September 3rd, 2026"), ("budget", "Budget news")])
+    p2 = _list_page([("plant-sale", "Rain garden plant sale")])
+    post = (b'<h1 class="ccm-block-page-title page-title">MMSD Storm Update September 3rd, 2026</h1><div>09/08/26 11:00:am'
+            b'</div><p>MMSD is reporting a combined sewer overflow that occurred on September 3rd, 2026.</p>')
+    sess = FakeSession({1: p1, 2: p2}, {"storm-update-example": post})
+    doc = M.fetch_safe(sess, M.BACKFILL_PAGES, {})
+    assert [i["slug"] for i in doc["items"]] == ["storm-update-example", "budget", "plant-sale"]
+    assert sum(1 for _, p in sess.asked if p) == 3          # page 3 repeated page 1: the walk stopped there
+    assert list(doc["posts"]) == ["storm-update-example"]   # only the storm update's page was asked for
+    recs, _ = M.build(doc, [], FETCHED)
+    assert recs[0]["started_at"] == "2026-09-03" and recs[0]["event_type"] == "cso"

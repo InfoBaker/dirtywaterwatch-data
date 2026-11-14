@@ -56,8 +56,9 @@ Record rules (rules only: no model, no geocoding)
   - The year-to-date "Gallons Overflowed" counter, the Water Drop Alert (a request to use less water before a storm) and
     the deep tunnel's storage are never read as an overflow (MMSD says its counter can be corrected).
 
-History: the list is read two pages deep each run (eight posts, months of news); records already built are carried,
-never dropped because a post scrolled off; `--pages 71` reads the whole list. A post is read again when its stamp or
+History: the first run (no events file) reads the whole list (BACKFILL_PAGES, stopping at the first empty or repeated
+page); later runs read two pages (eight posts, months of news); records already built are carried, never dropped
+because a post scrolled off. A post is read again when its stamp or
 title changes.
 
 Privacy: only each post's title, stamp, letter links and article lines are kept; the article is cut at MMSD's standing
@@ -91,6 +92,7 @@ LIST_URL = BASE + "/about-us/news"
 PAGE_PARAM = "ccm_paging_p_b23285"
 LIST_PARAMS = {"ccm_order_by_b23285": "cv.cvDatePublic", "ccm_order_by_direction_b23285": "desc"}
 PAGES = 2
+BACKFILL_PAGES = 90         # the first run (no events file yet) reads the whole list: 71 pages on 2026-11-14
 PAUSE_S = 1.5
 TIMEOUT = 90
 SAFE_FORMAT = "wi-mmsd-storm-updates/1"
@@ -491,10 +493,10 @@ def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict]) -> dic
         r = sess.get(LIST_URL, params={PAGE_PARAM: n, **LIST_PARAMS}, headers=HEADERS, timeout=TIMEOUT)
         r.raise_for_status()
         found = list_items(r.content)
-        if not found:
+        if not found or (items and found[0]["url"] in {i["url"] for i in items}):
             if n == 1:
                 raise RuntimeError("no news items on the first list page (the layout may have changed)")
-            break
+            break                       # past the last page (empty, or the CMS repeating a page)
         items += found
         time.sleep(PAUSE_S)
     docs = {}
@@ -551,7 +553,8 @@ def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[di
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--pages", type=int, default=PAGES, help="news list pages to read (71 read the whole list)")
+    ap.add_argument("--pages", type=int, default=None,
+                    help=f"news list pages to read (default {PAGES}; {BACKFILL_PAGES} on a first run, the whole list)")
     ap.add_argument("--file", help="a saved safe document (data/raw/wi-mmsd-storm-updates/*.json) instead of the network")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
@@ -562,7 +565,8 @@ def main(argv: list[str] | None = None) -> int:
             if doc.get("format") != SAFE_FORMAT:
                 raise ValueError(f"not a {SAFE_FORMAT} document")
         else:
-            doc = fetch_safe(requests.Session(), args.pages, {(r.get("raw") or {}).get("slug"): r for r in prev})
+            pages = args.pages or (PAGES if prev else BACKFILL_PAGES)
+            doc = fetch_safe(requests.Session(), pages, {(r.get("raw") or {}).get("slug"): r for r in prev})
             save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False, indent=1), "json")
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")

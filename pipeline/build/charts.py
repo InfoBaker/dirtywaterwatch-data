@@ -87,6 +87,7 @@ STATE_NAMES = {"MA": "Massachusetts", "CT": "Connecticut", "RI": "Rhode Island",
                "OR": "Oregon",
                "KY": "Kentucky", "OH": "Ohio"}
 STATE_NAMES["TN"] = "Tennessee"
+STATE_NAMES["WI"] = "Wisconsin"
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
