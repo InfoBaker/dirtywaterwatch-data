@@ -184,6 +184,14 @@ def test_impact_decides_whether_water_was_reached_and_the_named_water_is_placed_
     ("INTO TOWN CREEK", ["Town Creek"], []),
     ("Lake Little Example", ["Lake Little Example"], []),
     ("Lake Hamilton Due to rain", ["Lake Hamilton"], []),
+    # re-review P1-4: a whole qualifier chain stays, a long name is never cut, capitals inside mixed text are read
+    ("overflowed into upper little Sample Creek", ["Upper Little Sample Creek"], []),
+    ("into upper Little Sample Creek", ["Upper Little Sample Creek"], []),
+    ("Lake One Two Three Four", ["Lake One Two Three Four"], []),
+    ("overflow into TOWN CREEK", ["Town Creek"], []),
+    ("MH 7 at Example St overflowed INTO FALLEN ASH CREEK", ["Fallen Ash Creek"], []),
+    ("SSO at MH 12 near Sample Creek", ["Sample Creek"], []),
+    ("Into One Two Three Four Five Six Seven Creek", [], ["One Two Three Four Five Six Seven Creek"]),
 ])
 def test_water_names_in_location_text(text, names, unused):
     assert T.water_names(text) == (names, unused)
