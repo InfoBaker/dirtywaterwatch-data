@@ -61,7 +61,9 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
   - Privacy: the pages carry the Council's office contact only. data/raw keeps the index and, per page, its title, its
     dated headings and its text's hash, not the narrative (raw_save_doc); the record's quoted sentences (NARRATIVE_KEYS)
     and advice go through common.strip_personal, scrub_text, the house-number scrub and the strict scrub with names
-    (scrubbed(); review P1-6, re-review P1-5).
+    (scrubbed(); review P1-6, re-review P1-5). The index label is scrubbed before the town is taken from it (raw.city,
+    raw.county_basis, meta.cities_without_county), and a failed run writes the previous records scrubbed the same way
+    (ok false, partial; verification pass 2 2026-11-15 P1-3).
 
 Run from pipeline/:  python -m ingest.mn_mces_spill_notices [--dir saved_dir]   (index.html and the pages by name)
 """
@@ -237,7 +239,7 @@ def scrubbed(o):
 # (the revision history's headings and the index label included, carried ones too; verification pass 2026-11-15 P1-5)
 NARRATIVE_KEYS = ("title", "location_text", "spill_stopped_words", "_reached_water_words", "_no_water_reason",
                   "updates", "signs", "time_of_day_words", "_revisions", "label", "_window_end_words", "end_basis",
-                  "advisory_from_basis")
+                  "advisory_from_basis", "city", "county_basis")
 
 
 def scrub_narrative(rec: dict) -> dict:
@@ -275,12 +277,15 @@ def label_city_month(label: str) -> tuple[str | None, int | None, int | None]:
 
 
 def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> dict:
-    city_label, lab_month, lab_year = label_city_month(item.get("label") or "")
+    # the index label scrubbed before anything is derived from it: the town (raw.city, raw.county_basis,
+    # meta.cities_without_county) never carries what the label's scrub removes (verification pass 2 2026-11-15 P1-3)
+    label = scrubbed(item.get("label") or "") or None
+    city_label, lab_month, lab_year = label_city_month(label or "")
     intro, updates = parsed["intro"], parsed["updates"]
     perr = []
     m = RESPONDED.search(intro)
     start = None
-    raw: dict = {"label": item.get("label"), "title": parsed["title"], "time_zone": TZ, "page_url": item["url"],
+    raw: dict = {"label": label, "title": parsed["title"], "time_zone": TZ, "page_url": item["url"],
                  "index_url": INDEX_URL}
     if m:
         mo, dy = MONTHS[m.group("month").lower()], int(m.group("day"))
@@ -509,7 +514,7 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
     recs = sorted((scrub_narrative(json.loads(json.dumps(r))) for r in out.values()), key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]),
                   reverse=True)
     meta = {"registry_ids": [SOURCE_ID], "url": INDEX_URL, "on_index": len(items), "pages_unread": unread,
-            "kept_from_previous": kept, "cities_without_county": sorted({c for c in no_county if c}),
+            "kept_from_previous": kept, "cities_without_county": sorted({scrubbed(c) for c in no_county if c}),
             "advisory_active": sum(1 for r in recs if r["status"] == "advisory_active"),
             "cadence": "index and each listed page read every run; the Council posts and updates a page per spill",
             "credit": "Metropolitan Council Environmental Services",
@@ -528,7 +533,8 @@ def fetch(url: str) -> str:
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     fetched = now_iso()
-    prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+    prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    prev = prev_doc.get("records", [])
     try:
         if "--dir" in argv:
             d = Path(argv[argv.index("--dir") + 1])
@@ -551,7 +557,14 @@ def main(argv=None) -> int:
         if meta["pages_unread"]:
             raise RuntimeError(f"spill pages not read: {', '.join(meta['pages_unread'])}")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        # the previous records are kept, but scrubbed as a successful run scrubs them (their quoted fields, revision
+        # headings and town included), so a failed run never re-saves text written before a scrub rule existed;
+        # health stays false and last_ok_at the previous one (partial; verification pass 2 2026-11-15 P1-3)
+        kept = [scrub_narrative(json.loads(json.dumps(p))) for p in prev]
+        cities = (prev_doc.get("meta") or {}).get("cities_without_county")
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=f"{type(e).__name__}: {e}",
+                     meta={"cities_without_county": sorted({scrubbed(c) for c in cities if c})}
+                     if isinstance(cities, list) else None)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)

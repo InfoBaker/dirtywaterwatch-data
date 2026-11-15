@@ -542,7 +542,8 @@ def test_v2_p3_a_first_seen_error_page_makes_no_record_and_fails_the_run(monkeyp
     monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: calls.append((list(recs), k)) or "x")
     monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else "<html><h1>Service unavailable</h1></html>")
     assert M.main([]) == 1
-    assert calls == [([], {"ok": False, "error": calls[0][1]["error"]})] and "not read" in calls[0][1]["error"]
+    assert calls == [([], {"ok": False, "partial": True, "error": calls[0][1]["error"], "meta": None})]
+    assert "not read" in calls[0][1]["error"]
 
 
 # ---------------------------------------------------------------- verification pass 2, 2026-11-15 (Astra), round 3
@@ -602,3 +603,57 @@ def test_r3_p1_1_the_signs_date_is_the_earliest_notice_whatever_the_page_order()
         assert c == "red" and "advisory_active" in rules
         assert _at(r, 2026, 3, 11, 18)[0] != "red"
     assert b["raw"]["updates"][0]["date"] == "2026-03-20"              # the page's own order is kept in the record
+
+
+_PERSON = "Reported by Pat Example at 1234 Example Street"
+
+
+def _main_env(monkeypatch, tmp_path, idx, page):
+    """main() against the real failure writer (common.write_events) on a file in tmp_path; returns (doc(), saved)."""
+    import common
+    saved = []
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: common.write_events(
+        sid, recs, path=tmp_path / f"{sid}.json", **k))
+    monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else page)
+    return (lambda: json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())), saved
+
+
+def test_r3_p1_3_a_label_scrub_reaches_the_town_and_the_meta_through_main(monkeypatch, tmp_path):
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           f'Example.aspx">Example City {_PERSON}</a>, March 2026</li></ul>')
+    doc, saved = _main_env(monkeypatch, tmp_path, idx, _page(intro_signs=False))
+    assert M.main([]) == 0
+    d = doc()
+    assert d["ok"] is True and d["records"][0]["raw"]["city"].startswith("Example City")
+    assert d["meta"]["cities_without_county"]                         # the town is listed, scrubbed
+    blob = json.dumps([d, saved])
+    assert "Pat Example" not in blob and "1234 Example" not in blob
+
+
+def test_r3_p1_3_a_failed_run_rescrubs_the_kept_records_and_stays_not_ok(monkeypatch, tmp_path):
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           'Example.aspx">Example City</a>, March 2026</li></ul>')
+    doc, saved = _main_env(monkeypatch, tmp_path, idx, _page(intro_signs=False))
+    assert M.main([]) == 0
+    first = doc()
+    # a file written before the scrub rules: revision headings, town, label and meta carry a person's text
+    old = copy.deepcopy(first)
+    raw = old["records"][0]["raw"]
+    raw["_revisions"] = [{"seen_at": FETCHED, "sha256": "x", "headings": [_PERSON]}]
+    raw["city"] = raw["label"] = f"Example City {_PERSON}"
+    old["meta"]["cities_without_county"] = [f"Example City {_PERSON}"]
+    (tmp_path / f"{M.SOURCE_ID}.json").write_text(json.dumps(old))
+
+    def boom(u):
+        raise M.requests.ConnectionError("down")
+    monkeypatch.setattr(M, "fetch", boom)
+    assert M.main([]) == 1
+    d = doc()
+    assert d["ok"] is False and "down" in d["error"] and d["last_ok_at"] == first["last_ok_at"]
+    assert [r["event_id"] for r in d["records"]] == [r["event_id"] for r in first["records"]]   # every record kept
+    assert d["records"][0]["raw"]["_revisions"][0]["headings"] and d["meta"]["cities_without_county"]
+    blob = json.dumps(d)
+    assert "Pat Example" not in blob and "1234 Example" not in blob
