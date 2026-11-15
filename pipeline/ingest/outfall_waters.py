@@ -99,7 +99,7 @@ from collections import Counter, defaultdict
 from datetime import date
 
 from build import status as S
-from common import BUILD_DIR, DATA_DIR, now_iso, read_json
+from common import BUILD_DIR, DATA_DIR, dumps_plants, now_iso, read_json
 from ingest import waters_from_nhd as N
 
 FILES = ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
@@ -1041,14 +1041,7 @@ def write_plants(path, doc: dict) -> None:
     """data/outfalls-plants-us.json in the layout research/federal/build_plant_outfalls.py wrote (the header keys one
     per line, then the rows), atomically."""
     tmp = path.with_suffix(path.suffix + ".tmp")
-    with open(tmp, "w") as fh:
-        fh.write("{\n")
-        for k, v in doc.items():
-            if k not in ("outfalls", "cso_features_not_in_inventory"):
-                fh.write(json.dumps(k) + ": " + json.dumps(v, ensure_ascii=False) + ",\n")
-        fh.write('"cso_features_not_in_inventory": [\n' + ",\n".join(
-            json.dumps(x, ensure_ascii=False) for x in doc.get("cso_features_not_in_inventory") or []) + "\n],\n")
-        fh.write('"outfalls": [\n' + ",\n".join(json.dumps(x, ensure_ascii=False) for x in doc["outfalls"]) + "\n]\n}\n")
+    tmp.write_text(dumps_plants(doc))
     tmp.replace(path)
 
 

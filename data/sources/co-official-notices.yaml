@@ -1,0 +1,30 @@
+id: "co-official-notices"
+name: "Colorado: selected official notices of sewage spills and water-contact or algae advisories (reviewed set)"
+url: "https://cpw.state.co.us/news/08302026/water-contact-advisory-john-martin-pueblo-sewage-spill-moves-downstream"
+homepage: "https://cpw.state.co.us/news"
+kind: "html"
+level: "state"
+# Ingester: pipeline/ingest/co_official_notices.py with pipeline/ingest/notice_set.py (source id co-official-notices): a
+#   reviewer transcribes each record beside the sentences it rests on; every run fetches each page and confirms them.
+# Read 2026-11-14: three pages, every quoted sentence found. Four records: the Pueblo spill (about 4.2 million gallons of
+#   untreated sewage to the Arkansas River on August 26-27, 2026, as CPW's notice states; operator the City of Pueblo,
+#   CO0026646), CPW's water-contact advisory for John Martin Reservoir and the Arkansas River at the park from August
+#   31, 2026 (no end given), NPS's Blue Mesa Reservoir toxic algae caution in the Iola Basin (release of August 13,
+#   2026) and Barr Lake State Park's standing red algae alert (as of August 3, 2026, 7 p.m.).
+# Not read: the City of Pueblo's own notices (the host did not answer, 2026-11-14), CDPHE's news (403). No page gives a
+#   lift; an advisory with no end ages out under the status build's 14-day rule, except Barr Lake's, which holds while
+#   the park page shows it and ends at the first read that does not (a poll bound).
+# Privacy: the pages are never saved (they name staff and give phone numbers); data/raw keeps the quotes found and a hash.
+cadence: "irregular: an agency notice when a large spill or bloom affects a recreation area; read every run"
+license: "none stated (state and federal government pages)"
+attribution: "Colorado Parks and Wildlife; National Park Service"
+enabled: true
+role: "events"
+event_types: ["sso", "hab_advisory"]
+states: ["CO"]
+registry_ids: ["co-cdphe-press-releases", "co-nps-curecanti-advisories", "co-cpw-barr-lake-notices"]
+access: ["html"]
+access_detail: "Three HTML pages (CPW news release, NPS news release, CPW park page); the sentences each record rests on are checked on every read."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"

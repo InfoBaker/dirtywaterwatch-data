@@ -1,0 +1,28 @@
+id: "co-cdphe-press-releases"
+name: "CDPHE and Colorado Parks and Wildlife press releases on major sewage spills (e.g. Pueblo, Arkansas River, August 2026)"
+url: "https://cpw.state.co.us/news/08302026/water-contact-advisory-john-martin-pueblo-sewage-spill-moves-downstream"
+homepage: "https://cpw.state.co.us/news/08302026/water-contact-advisory-john-martin-pueblo-sewage-spill-moves-downstream"
+kind: "html"
+level: "state"
+# Notes (research/co, status used, verified fetched, checked 2026-11-14): CPW's water-contact
+#   advisory of 2026-08-30 after the Pueblo spill (read 2026-11-14) is read in the
+#   co-official-notices reviewed set with NPS's Blue Mesa release and Barr Lake's park notice.
+#   CDPHE's own news pages answered 403.
+# Access detail (research, quoted): Pueblo spill: about 4.25 million gallons to the Arkansas River
+#   2026-08-26 to 08-27; CDPHE and Pueblo health advisory from Fountain Creek confluence to John
+#   Martin Reservoir; CPW water-contact advisory at John Martin Reservoir (lifted 2026-09-04 per
+#   news) and about 10 state wildlife areas. Advice: "avoid swimming, wading, tubing,
+#   paddleboarding, fishing, and other activities involving direct water contact" (CPW via KKTV).
+# Waters: case by case
+cadence: "only for major events"
+license: "none stated"
+attribution: "CDPHE; Colorado Parks and Wildlife"
+enabled: true
+role: "events"
+event_types: ["sso", "hab_advisory"]
+states: ["CO"]
+access: ["html"]
+access_detail: "Pueblo spill: about 4.25 million gallons to the Arkansas River 2026-08-26 to 08-27; CDPHE and Pueblo health advisory from Fountain Creek confluence to John Martin Reservoir; CPW water-contact advisory at John Martin Reservoir (lifted 2026-09-04 per news) and about 10 state wildlife areas. Advice: \"avoid swimming, wading, tubing, paddleboarding, fishing, and other activities involving direct water contact\" (CPW via KKTV)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"
