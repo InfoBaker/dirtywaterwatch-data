@@ -555,8 +555,18 @@ def check_swim(js, count) -> list[dict]:
     if not isinstance(count, dict) or not isinstance(count.get("count"), int) or count["count"] != len(feats):
         raise ValueError(f"the layer counts {(count or {}).get('count') if isinstance(count, dict) else None} sites "
                          f"and returned {len(feats)}")
-    if any(not str((f.get("attributes") or {}).get("Station") or "").strip() for f in feats):
-        raise ValueError("a site has no station identifier")
+    seen = set()
+    for f in feats:
+        a = f.get("attributes") or {}
+        stat, name = a.get("Station"), a.get("Name")
+        if not isinstance(stat, str) or not stat.strip():
+            raise ValueError("a site has no station identifier in text")
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError(f"site {stat.strip()} has no name in text")
+        norm = stat.strip().upper()
+        if norm in seen:                               # two features for one station: never one lifting the other
+            raise ValueError(f"station {stat.strip()} is listed twice")
+        seen.add(norm)
     return feats
 
 
@@ -667,8 +677,8 @@ def run(args) -> int:
             r.raise_for_status()
             c = requests.get(SWIM_COUNT, headers=HEADERS, timeout=TIMEOUT)
             c.raise_for_status()
-            swim = check_swim(r.json(), c.json())
-        except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError) as e:
+            swim = safe_features(check_swim(r.json(), c.json()), "geometry", SWIM_FIELDS)
+        except Exception as e:                         # any failure of this read is its own (Astra P1-3)
             ok_s, swim = False, None
             write_events(SWIM_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=SWIM_META, path=args.out_swim)
         try:
@@ -693,7 +703,6 @@ def run(args) -> int:
             ok_h = False
             write_events(HAB_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=HAB_META)
         beach, hab = safe_features(beach, "geometry"), safe_features(hab, "centroid")
-        swim = safe_features(swim, "geometry", SWIM_FIELDS)
         save_raw("sc-des-advisories", json.dumps({"format": SAFE_FORMAT, "beach": beach, "hab": hab,
                                                   "hab_table": table, "swim": swim}), "json")
     new = dict(prev)
@@ -706,9 +715,17 @@ def run(args) -> int:
         write_events(HAB_ID, recs, meta={**HAB_META, "counts": n}, path=args.out_hab)
         print(f"{HAB_ID}: {len(recs)} records; {n}")
     if ok_s:
-        recs, new["swim"], n = swim_records(swim, prev, now)
-        write_events(SWIM_ID, recs, meta={**SWIM_META, "counts": n}, path=args.out_swim)
-        print(f"{SWIM_ID}: {len(recs)} records; {n}")
+        # isolated: a failure while building these records keeps their previous records and state (ok false) and
+        # never stops the beach and bloom records and state from being committed (Astra review P1-3)
+        try:
+            recs, swim_state, n = swim_records(swim, prev, now)
+        except Exception as e:
+            ok_s = False
+            write_events(SWIM_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=SWIM_META, path=args.out_swim)
+        else:
+            new["swim"] = swim_state
+            write_events(SWIM_ID, recs, meta={**SWIM_META, "counts": n}, path=args.out_swim)
+            print(f"{SWIM_ID}: {len(recs)} records; {n}")
     if not args.file:
         write_json(STATE_PATH, new)
     return 0 if (ok_b and ok_h and ok_s is not False) else 1

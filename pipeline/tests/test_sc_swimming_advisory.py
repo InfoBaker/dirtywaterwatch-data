@@ -4,6 +4,7 @@ undated listing, one marker a site (ingest/sc_des_advisories.py swim_records). F
 import copy
 import json
 import re
+import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -136,13 +137,13 @@ class Resp:
         return self._js
 
 
-def run_with(monkeypatch, tmp_path, swim_js, swim_count, at):
+def run_with(monkeypatch, tmp_path, swim_js, swim_count, at, adv_path=None):
     import common
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
     monkeypatch.setattr(A, "STATE_PATH", tmp_path / "state.json")
     saved_raw = []
     monkeypatch.setattr(A, "save_raw", lambda name, body, ext: saved_raw.append(body))
-    adv = json.loads((FIX / "advisories.json").read_text())
+    adv = json.loads((adv_path or FIX / "advisories.json").read_text())
     page = ("<h2>HAB Watches &amp; Advisories</h2><table><tr><th>Advisory Level</th><th>Advisory Area</th>"
             "<th>Waterbody</th><th>Date Issued</th></tr><tr><td>Watch</td><td>Cedar Point Cove</td>"
             "<td>J. Strom Thurmond</td><td>10/16/2026</td></tr></table>")
@@ -250,6 +251,10 @@ def test_the_register_and_source_file_name_the_feed():
     assert row["feed_source_id"] == "sc-des-freshwater-swim-advisories" and row["channel_kind"] == "feed"
     assert row["unmonitored_reason"] == "feed_ingested" and row["barrier"] is None
     assert "Swimming Advisory" in row["note"]
+    # DES's swim-safety pages refuse automated clients and browsers alike: a recorded barrier (coordinator 2026-11-15)
+    page = reg["sc-des-swim-safety-page"]
+    assert page["barrier"] == "bot_wall" and page["unmonitored_reason"] == "bot_wall" and not page["monitored"]
+    assert any(u.endswith("/recreational-waters/swim-safety") for u in page["urls"])
     src = (ROOT / "data" / "sources" / "sc-des-freshwater-swim-advisories.yaml").read_text()
     assert 'id: "sc-des-freshwater-swim-advisories"' in src and "outFields OBJECTID, Name, Station" in src
 
@@ -259,3 +264,90 @@ def test_the_state_text_says_the_sites_are_shown_as_des_listing():
     assert "not coloured here" not in t and "is not shown here" not in t
     assert 'titled "Swimming Advisory"' in t and "23 river and lake sites" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I)
+
+
+# ---------------------------------------------------------------- Astra review (2026-11-15): P1-1 and P1-3
+
+@pytest.mark.parametrize("bad", ["duplicate", "duplicate_spelling", "list_station", "number_station", "number_name",
+                                 "no_name"])
+def test_a_duplicate_or_malformed_station_or_name_fails_the_read(bad):
+    d = layer()
+    fs = d["layer"]["features"]
+    if bad == "duplicate":
+        fs[4] = copy.deepcopy(fs[0])                           # the count still matches: five features
+    elif bad == "duplicate_spelling":
+        fs[4]["attributes"]["Station"] = " " + fs[0]["attributes"]["Station"].lower() + " "
+    elif bad == "list_station":
+        fs[0]["attributes"]["Station"] = ["R8-031"]
+    elif bad == "number_station":
+        fs[0]["attributes"]["Station"] = 8031
+    elif bad == "number_name":
+        fs[0]["attributes"]["Name"] = 123
+    elif bad == "no_name":
+        fs[0]["attributes"]["Name"] = None
+    with pytest.raises(ValueError):
+        A.check_swim(d["layer"], d["count"])
+
+
+def test_a_duplicate_station_read_keeps_every_held_site(monkeypatch, tmp_path):
+    d = layer()
+    rc, out, _, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T0)
+    held, state = out["records"], json.loads((tmp_path / "state.json").read_text())["swim"]
+    dup = copy.deepcopy(d["layer"])
+    dup["features"][4] = copy.deepcopy(dup["features"][0])
+    rc, out, _, _ = run_with(monkeypatch, tmp_path, dup, d["count"], T1)
+    assert rc == 1 and out["ok"] is False and out["records"] == held
+    assert not [r for r in out["records"] if r["ended_at"]]
+    assert json.loads((tmp_path / "state.json").read_text())["swim"] == state
+
+
+def test_a_malformed_swimming_read_never_costs_another_feed_its_records(monkeypatch, tmp_path):
+    # read 1 healthy; read 2: a beach station newly under a short-term advisory while the swimming layer sends a
+    # name that is not text; read 3 healthy, the beach station back to "No Advisory": its record must still be there
+    d = layer()
+    adv = json.loads((FIX / "advisories.json").read_text())
+    quiet = next(f for f in adv["beach"] if f["attributes"]["ADVISORY"] == "No Advisory")
+    stat = quiet["attributes"]["STAT"]
+
+    def beach_with(label):
+        b = copy.deepcopy(adv)
+        next(f for f in b["beach"] if f["attributes"]["STAT"] == stat)["attributes"]["ADVISORY"] = label
+        (tmp_path / "adv.json").write_text(json.dumps(b))
+
+    beach_with("No Advisory")
+    rc, swim1, _, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T0, adv_path=tmp_path / "adv.json")
+    assert rc == 0
+    bad = copy.deepcopy(d["layer"])
+    bad["features"][0]["attributes"]["Name"] = 123
+    beach_with("Short-Term")
+    rc, swim2, _, _ = run_with(monkeypatch, tmp_path, bad, d["count"], T1, adv_path=tmp_path / "adv.json")
+    assert rc == 1 and swim2["ok"] is False and swim2["records"] == swim1["records"]
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert st["swim"] and any(v["station"] == stat for v in st["beach"].values())      # the beach state committed
+    beach2 = json.loads((tmp_path / "sc-des-beach-monitoring.json").read_text())
+    assert beach2["ok"] is True and any(r["raw"]["station"] == stat for r in beach2["records"])
+    beach_with("No Advisory")
+    rc, swim3, _, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T2, adv_path=tmp_path / "adv.json")
+    assert rc == 0 and swim3["ok"] is True
+    beach3 = {r["raw"]["station"]: r for r in
+              json.loads((tmp_path / "sc-des-beach-monitoring.json").read_text())["records"]}
+    assert beach3[stat]["started_at"] == T1 and beach3[stat]["ended_at"] == T2       # kept, ended at the read
+    assert all(r["started_at"] == T0 for r in swim3["records"])
+
+
+def test_a_failure_while_building_the_swimming_records_is_isolated(monkeypatch, tmp_path):
+    d = layer()
+    rc, swim1, _, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T0)
+    state1 = json.loads((tmp_path / "state.json").read_text())
+
+    def boom(*a, **k):
+        raise AttributeError("'int' object has no attribute 'strip'")
+    monkeypatch.setattr(A, "swim_records", boom)
+    rc, swim2, _, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T1)
+    assert rc == 1 and swim2["ok"] is False and "AttributeError" in swim2["error"]
+    assert swim2["records"] == swim1["records"]
+    state2 = json.loads((tmp_path / "state.json").read_text())
+    assert state2["swim"] == state1["swim"]                                  # the swimming state as it was
+    assert state2["beach"] != state1["beach"]                                # the beach read committed (T1 seen)
+    assert json.loads((tmp_path / "sc-des-beach-monitoring.json").read_text())["ok"] is True
+    assert json.loads((tmp_path / "sc-des-hab.json").read_text())["ok"] is True
