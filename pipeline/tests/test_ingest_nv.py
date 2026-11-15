@@ -347,3 +347,19 @@ def test_p1_4_watched_nevada_pages_keep_no_body_and_no_text(tmp_path):
     assert saved == []
     blob = json.dumps(out["snaps"], default=str) + "".join(p.read_text() for p in (tmp_path / "store").rglob("*.json"))
     assert not any(p in blob for p in PRIVATE)
+
+
+def test_p1_3_nevada_cannot_go_live_without_a_successful_current_read():
+    import yaml
+    src = yaml.safe_load((ROOT / "data" / "sources" / "nv-state-parks-hab.yaml").read_text())
+    live = json.loads((ROOT / "data" / "rules.json").read_text())["live_states"]
+    if src.get("first_successful_read") is None:
+        assert "NV" not in live, "Nevada's only advisory feed has no successful current read"
+    else:
+        assert re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", src["first_successful_read"])
+    t = (ROOT / "research" / "nv" / "state-text.md").read_text()
+    assert "not yet made a current reading" in t and "last good reading is kept" not in t
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
+    assert "no successful current read" in reg["nv-state-parks-hab"]["note"]
+    # the archived copies are fixtures only: the ingester has no archive fallback
+    assert "archive.org" not in (Path(P.__file__)).read_text()

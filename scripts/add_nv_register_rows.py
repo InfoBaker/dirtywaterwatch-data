@@ -76,9 +76,9 @@ AGENCY = [
      "note": ("The parks' HAB Advisory page: the waters in state parks under a HAB Watch, Warning or Danger advisory, "
               "each with its update date (four Watch advisories in the Internet Archive's copy of 2026-08-13; the "
               "expansion research read Lahontan's November 2 downgrade to Warning and October 5 Watch notices for Rye "
-              "Patch and Wild Horse). Blooms, not sewage. Voluntary. The host refused the collector's connections on "
-              "2026-11-14 (no answer on ports 443 and 80, as ndep.nv.gov), so the feed is built and keeps its last "
-              "good read until the host answers.")},
+              "Patch and Wild Horse). Blooms, not sewage. Voluntary. The host did not answer the collector's ordinary "
+              "requests on 2026-11-14 (ports 443 and 80, as ndep.nv.gov) and 2026-11-15 (connect timeout): the feed "
+              "is built but has no successful current read, and its health stays not ok until one succeeds.")},
     {"id": "nv-ndep-hab-program", "agency": "Nevada Division of Environmental Protection",
      "name": "Nevada Division of Environmental Protection (harmful algal bloom program)",
      "channel_kind": "state_alert_page", "urls": [HAB_PAGE], "method": "html", "legal_basis": None,
