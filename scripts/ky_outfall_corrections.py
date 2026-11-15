@@ -31,6 +31,17 @@ NOTE = ("A KPDES permit for a sewer collection system (KYP...; EPA permit type S
 RENAME = {"KY0104027": "City of Bardstown plant (KY0104027)"}
 
 
+def _point_corrections():
+    """scripts/outfall_point_corrections.py (cited point corrections a rebuild must write again), loaded by path: this
+    script runs with python -I, which keeps the scripts folder off sys.path."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("outfall_point_corrections",
+                                                  Path(__file__).resolve().parent / "outfall_point_corrections.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
 def main() -> int:
     plants = json.loads(PLANTS.read_text())
     rows = []
@@ -45,6 +56,7 @@ def main() -> int:
             rw = r.get("receiving_water_echo")
             rows.append({**r, "outfall_kind": "other", "kind_note": NOTE.format(rw=f" ('{rw}')" if rw else " (none given here)"),
                          "checked": READ, "supersedes": f"data/outfalls-plants-us.json {p} {r.get('outfall') or ''}".strip()})
+    _point_corrections().for_builder(OUT.name, rows)      # EPA's sign-flipped longitudes, cited (2026-11-15)
     doc = {"source": ("EPA ICIS-NPDES plant rows (data/outfalls-plants-us.json) for Kentucky's KYP collection-system "
                       f"permits, read {READ}; EPA's rows are kept and named in supersedes"),
            "rule": ("a KPDES collection-system permit (KYP...) is kind other: no outfall to a water; a plant EPA records "
