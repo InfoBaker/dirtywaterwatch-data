@@ -748,3 +748,68 @@ def test_r3_p1_7_other_states_pages_are_watched_as_before(tmp_path):
         outs.append((json.dumps({k: out[k] for k in ("records", "snaps", "stats")}, sort_keys=True, default=str)
                      .replace(str(d), "D"), saved))
     assert outs[0] == outs[1] and outs[0][1] == [body]
+
+
+def _wline(name, slug, coords, kind="river"):
+    xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+    return {"slug": slug, "name": name, "kind": kind, "state": "WI", "bbox": [min(xs), min(ys), max(xs), max(ys)],
+            "geometry": {"type": "LineString", "coordinates": coords}}
+
+
+# synthetic waters: two in Milwaukee County, a namesake in Dane County (about 120 km west), a qualified name
+WI_WATERS = {
+    "lincoln-creek-wi": _wline("Lincoln Creek", "lincoln-creek-wi", [[-87.99, 43.10], [-87.95, 43.11]]),
+    "lincoln-creek-dane-wi": _wline("Lincoln Creek", "lincoln-creek-dane-wi", [[-89.45, 43.05], [-89.42, 43.06]]),
+    "little-lincoln-creek-wi": _wline("Little Lincoln Creek", "little-lincoln-creek-wi", [[-87.98, 43.12], [-87.97, 43.13]]),
+    "wilson-park-creek-wi": _wline("Wilson Park Creek", "wilson-park-creek-wi", [[-87.93, 42.95], [-87.90, 42.94]]),
+    "milwaukee-river-wi": _wline("Milwaukee River", "milwaukee-river-wi", [[-87.92, 43.10], [-87.91, 43.04]]),
+}
+
+
+def _wo(no, slug, lat, lon, status="CSO"):
+    return {"npdes_permit": "WI0036820", "outfall": no, "outfall_status": status, "water_slug": slug,
+            "water_matched_by": "name", "match": "name", "lat": lat, "lon": lon, "state": "WI", "_file": "test"}
+
+
+WI_OUTFALLS = [_wo("101", "lincoln-creek-wi", 43.105, -87.97), _wo("102", "milwaukee-river-wi", 43.07, -87.915),
+               _wo("103", "lincoln-creek-wi", 43.108, -87.96, status="CLS")]
+
+
+@pytest.fixture
+def wisconsin_live(monkeypatch):
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"WI"})
+    return S
+
+
+def test_r3_p2_10_a_named_water_is_placed_in_milwaukee_county_with_the_permits_outfalls(wisconsin_live):
+    t = "MMSD Storm Update June 1, 2027"
+    cso = _recs(t, [t, "A combined sewer overflow into Lincoln Creek occurred on June 1, 2027."])["cso"]
+    res = S.Resolver(WI_WATERS, WI_OUTFALLS, placement_rules={"no_outfall_all_waters": True})
+    pl = res.resolve(cso)
+    assert pl["water_slugs"] == ["lincoln-creek-wi"]                  # not Dane County's namesake, not Little Lincoln
+    assert [o["outfall"] for o in pl["outfalls"]] == ["101"]          # the open outfall on the named water
+    reach = {"key": "r1", "permit": "WI0036820", "outfall": "101", "model": "river"}
+    assert [r["key"] for r, _ in S.event_reaches(cso, pl, S.index_reaches({"r1": reach}))] == ["r1"]
+    sso = _recs(t, [t, "Separate Sewer Overflows: 1 million gallons",
+                    "– Wilson Park Creek: 125,000 gallons"])["sso"]
+    assert res.resolve(sso)["water_slugs"] == ["wilson-park-creek-wi"]
+    # a combined sewer overflow that names no water: every water the permit's open outfalls reach
+    bare = _recs(t, [t, "A combined sewer overflow occurred on June 1, 2027."])["cso"]
+    assert set(res.resolve(bare)["water_slugs"]) == {"lincoln-creek-wi", "milwaukee-river-wi"}
+    # only the Dane County namesake on record: a Milwaukee report is not placed on it
+    alone = S.Resolver({k: WI_WATERS[k] for k in ("lincoln-creek-dane-wi",)}, [], placement_rules={})
+    assert alone.resolve(cso)["water_slugs"] == []
+
+
+def test_r3_p2_10_the_wisconsin_set_additions_change_no_other_states_placement(wisconsin_live, monkeypatch):
+    from test_ingest_or import OUTFALLS, SLOUGH, WILL, bes
+    evs = list(bes()[0].values())
+    def run():
+        res = S.Resolver({"willamette-river-or": WILL, "columbia-slough-or": SLOUGH}, OUTFALLS, placement_rules={})
+        return json.dumps([res.resolve(e) for e in evs], sort_keys=True, default=str)
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"OR", "WI"})
+    with_wi = run()
+    monkeypatch.setattr(S, "NAMED_WATER_OUTFALL_STATES", S.NAMED_WATER_OUTFALL_STATES - {"WI"})
+    monkeypatch.setattr(S, "COUNTY_FIELD_STATES", S.COUNTY_FIELD_STATES - {"WI"})
+    monkeypatch.setattr(S, "COUNTY_STATES", {k: v for k, v in S.COUNTY_STATES.items() if k != "WI"})
+    assert run() == with_wi
