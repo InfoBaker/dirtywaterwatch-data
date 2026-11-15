@@ -414,12 +414,25 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
     if h.get("keep_missing", True):
         now = {r["event_id"] for r in records}
         index = []
+        # history.supersede_unique (opt-in; Arkansas, re-review 2026-11-14 P2-1): a corrected row is a record new in
+        # this fetch, and a key counts only when exactly one new record and exactly one record that left the source
+        # share it; an ambiguous or pre-existing match keeps both records independently
+        unique = bool(h.get("supersede_unique"))
+        gone = [p for eid, p in prev.items() if eid not in now]
         for keys in h.get("supersede") or []:
             idx: dict[str, dict] = {}
             for r in records:
+                if unique and r["event_id"] in prev:
+                    continue
                 k = _supersede_keys(r, keys)
                 if k is not None:
-                    idx.setdefault(k, r)
+                    if unique and k in idx:
+                        idx[k] = None
+                    else:
+                        idx.setdefault(k, r)
+            if unique:
+                left = Counter(_supersede_keys(p, keys) for p in gone)
+                idx = {k: v for k, v in idx.items() if v is not None and left.get(k) == 1}
             index.append((keys, idx))
         for eid, p in prev.items():
             if eid in now:
@@ -434,6 +447,16 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
                 if k is not None and k in idx:
                     succ = idx[k]
                     break
+            if succ is not None and h.get("supersede_max_days") is not None:
+                # history.supersede_max_days (opt-in): a corrected start lies within this many days of the old one;
+                # a later posting is a new episode, never a correction
+                try:
+                    from datetime import datetime as _dt
+                    gap = abs((_dt.fromisoformat(succ["started_at"]) - _dt.fromisoformat(p["started_at"])).total_seconds())
+                except (KeyError, TypeError, ValueError):
+                    gap = None
+                if gap is None or gap > 86400 * float(h["supersede_max_days"]):
+                    succ = None
             if succ is not None and not p.get("duplicate_of"):
                 p["duplicate_of"] = succ["event_id"]
                 p["raw"]["_duplicate_basis"] = f"gone from the source; {succ['event_id']} looks like its corrected row"
