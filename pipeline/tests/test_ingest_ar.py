@@ -551,3 +551,31 @@ def test_the_unique_supersede_options_are_set_only_by_arkansas():
     hits = {p.name for p in (R.ROOT / "data" / "sources").glob("*.yaml")
             if re.search(r"supersede_(unique|max_days)", p.read_text())}
     assert hits == {"ar-deq-hab-advisories.yaml"}
+
+
+def test_the_earlier_state_shape_is_read_with_every_period_kept(tmp_path):
+    """State written by the first implementation (one period per beach, earlier periods under "earlier") replayed
+    through main(): active, lifted and returning beaches keep every period and its poll bounds (re-review P2-2)."""
+    out = tmp_path / "adh.json"
+    (tmp_path / "adh.state.json").write_text(json.dumps({"items": {
+        "SB901": {"first_seen": "2026-11-01T12:00:00Z", "last_seen": "2026-11-10T12:00:00Z", "name": "Example Point West"},
+        "SB902": {"first_seen": "2026-11-05T12:00:00Z", "last_seen": "2026-11-06T12:00:00Z",
+                  "left_at": "2026-11-07T12:00:00Z", "name": "Sample Cove"},
+        "SB903": {"first_seen": "2026-11-08T12:00:00Z", "last_seen": "2026-11-09T12:00:00Z", "name": "Example Landing",
+                  "earlier": [{"first_seen": "2026-10-01T12:00:00Z", "left_at": "2026-10-03T12:00:00Z"}]}}}))
+    page = tmp_path / "p.html"
+    page.write_text("<main><h2>Closed Swim Beaches</h2><ul><li>SB901 - Example Point West</li><li>SB902 - Sample Cove"
+                    "</li></ul><h2>Rules</h2></main>")
+    assert B.main(["--file", str(page), "--out", str(out), "--at", "2026-11-14T12:00:00Z"]) == 0
+    recs = sorted(((r["raw"]["beach_id"], r["started_at"], r["ended_at"], r["status"])
+                   for r in json.loads(out.read_text())["records"]))
+    assert recs == [
+        ("SB901", "2026-11-01T12:00:00Z", None, "advisory_active"),                         # still listed
+        ("SB902", "2026-11-05T12:00:00Z", "2026-11-07T12:00:00Z", "advisory_lifted"),       # the lifted period kept
+        ("SB902", "2026-11-14T12:00:00Z", None, "advisory_active"),                         # back: a new episode
+        ("SB903", "2026-10-01T12:00:00Z", "2026-10-03T12:00:00Z", "advisory_lifted"),       # the earlier period
+        ("SB903", "2026-11-08T12:00:00Z", "2026-11-14T12:00:00Z", "advisory_lifted"),       # ends at this read
+    ]
+    state = json.loads((tmp_path / "adh.state.json").read_text())
+    assert state["items"]["SB903"]["episodes"][1]["last_seen"] == "2026-11-09T12:00:00Z"
+    assert all("first_seen" not in it for it in state["items"].values())

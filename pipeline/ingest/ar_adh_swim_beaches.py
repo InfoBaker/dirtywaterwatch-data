@@ -115,10 +115,24 @@ def read(lines: list[str]) -> dict[str, str]:
     return found
 
 
+def migrate(state: dict) -> dict:
+    """The earlier state shape kept one period per beach ({first_seen, last_seen, left_at, earlier: [{first_seen,
+    left_at}]}): read it as episodes in memory, every known period and its poll bounds kept (re-review P2-2)."""
+    for it in (state.get("items") or {}).values():
+        if isinstance(it, dict) and "episodes" not in it and it.get("first_seen"):
+            eps = [{"first_seen": e["first_seen"], "left_at": e.get("left_at"),
+                    **({"last_seen": e["last_seen"]} if e.get("last_seen") else {})}
+                   for e in it.pop("earlier", None) or [] if isinstance(e, dict) and e.get("first_seen")]
+            eps.append({"first_seen": it.pop("first_seen"), "last_seen": it.pop("last_seen", None),
+                        "left_at": it.pop("left_at", None)})
+            it["episodes"] = eps
+    return state
+
+
 def update(state: dict, found: dict[str, str], at: str) -> dict:
     """Each listing of a beach is its own episode: one that leaves the list ends at that read; one that comes back
     opens a new episode (a new record), so the earlier closure keeps its own period."""
-    items = state.setdefault("items", {})
+    items = migrate(state).setdefault("items", {})
     for k, it in items.items():
         ep = it["episodes"][-1]
         if ep.get("left_at") is None and k not in found:
@@ -179,7 +193,7 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=out)
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    state = read_json(state_path, {}) or {}
+    state = migrate(read_json(state_path, {}) or {})
     if "--file" not in argv and state.get("last_found") != found:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "closed": found}, indent=1).encode(), "json")
     state["last_found"] = found
