@@ -118,6 +118,9 @@ def sanitize(doc: dict) -> dict:
         head, sep, rest = str(a.get("CSO_Number") or "").partition("--")
         if sep:
             a["CSO_Number"] = f"{head.strip()} -- {scrub_name(' '.join(rest.split())) or ''}".strip()
+        elif a.get("CSO_Number") is not None:
+            # no '--': the whole text is scrubbed, whether or not the row will become a record (re-review P1-2)
+            a["CSO_Number"] = scrub_name(" ".join(str(a["CSO_Number"]).split()))
         for k in ("X_Coordinate", "Y_Coordinate"):
             if isinstance(a.get(k), (int, float)):
                 a[k] = round(float(a[k]), 3)
@@ -274,7 +277,10 @@ def fetch() -> Path:
     r.raise_for_status()
     doc = r.json()
     if doc.get("error") or doc.get("exceededTransferLimit"):
-        raise SystemExit(f"IDEM's layer answered {doc.get('error') or 'more than one page'}")
+        # a category, never the answer's own text (re-review 2026-11-14 P1-2)
+        code = (doc.get("error") or {}).get("code") if isinstance(doc.get("error"), dict) else None
+        raise SystemExit("IDEM's layer answered " + (f"an error (code {int(code)})" if isinstance(code, int) else
+                                                     "an error" if doc.get("error") else "more than one page"))
     RAW.parent.mkdir(parents=True, exist_ok=True)
     RAW.write_text(json.dumps(sanitize(doc)))
     return RAW
