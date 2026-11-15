@@ -982,16 +982,58 @@ def test_a_report_without_its_confirmation_number_fails_the_read(tmp_path, monke
         assert {r["event_id"] for r in doc["records"]} == before
         return
     # one report without its number: the readable ones are kept and saved, that one is never built, saved or keyed
-    # 'no-id'; its earlier record is kept, and the events file says why; the next read asks for it again
-    assert M.main(["--backfill", today, "--out", str(out)]) == 0
+    # 'no-id'; its earlier record is kept, and the events file says why; the read is incomplete (verification 2
+    # P2-2): not ok, and the next read asks for it again
+    assert M.main(["--backfill", today, "--out", str(out)]) == 1
     doc = json.loads(out.read_text())
+    assert doc["ok"] is False
     assert {r["event_id"] for r in doc["records"]} == before and not any(e.endswith(":no-id") for e in before)
     assert doc["meta"]["unreadable_reports"]["count"] == 1 and "Confirmation" in doc["error"]
     assert saved and all("no-id" not in repr(a) and '"confirmation_no": ""' not in a[1].decode() for a in saved)
     monkeypatch.setattr(M, "post", lambda sess, data: page)
     assert M.main(["--backfill", today, "--out", str(out)]) == 0
     doc = json.loads(out.read_text())
-    assert doc["error"] is None and "unreadable_reports" not in doc["meta"]
+    assert doc["ok"] is True and doc["error"] is None and "unreadable_reports" not in doc["meta"]
+    assert "retry_from" not in doc["meta"]
+
+
+def test_a_report_left_out_of_a_deep_read_is_asked_for_again_until_read(tmp_path, monkeypatch):
+    """Verification 2 P2-2: a deep read that leaves out a January 2025 report with no confirmation number is not ok,
+    is not counted as the weekly deep read, and the next reads go back to that report's day; the error stays until
+    the report is read, and only then does the run return to its usual window."""
+    from datetime import datetime as dt, timedelta as td
+    rows, _, _, _ = page_rows()
+    rows = [dict(r) for r in rows]
+    old = {**rows[0], "date_started": "01/15/2025", "date_stopped": "01/15/2025", "date_reported": "01/16/2025",
+           "confirmation_no": ""}
+    readable = {**old, "confirmation_no": "aaaaaaaa-0000-4000-8000-000000000099"}
+    starts, serve = [], {"rows": rows + [old]}
+    def fetch(start, end, pause=0):
+        starts.append(start)
+        return [dict(r) for r in serve["rows"]], {"windows": 1, "window_start": start.isoformat(),
+                                                   "window_end": end.isoformat(), "data_current_as_of": None}
+    monkeypatch.setattr(M, "fetch", fetch)
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: tmp_path / "raw.json")
+    monkeypatch.setattr(M, "ROOT", tmp_path)
+    out = tmp_path / "ev.json"
+    for _ in range(2):                                   # two consecutive runs, the report unreadable at both
+        assert M.main(["--out", str(out)]) == 1
+        assert starts[-1] <= date(2025, 1, 15)
+        doc = json.loads(out.read_text())
+        assert doc["ok"] is False and "Confirmation" in doc["error"]
+        assert doc["meta"]["retry_from"] == "2025-01-15" and not doc["meta"].get("deep_read_at")
+    # a recent deep read does not shorten the retry: the window still reaches the left-out report
+    doc["meta"]["deep_read_at"] = dt.now(M.TZ).isoformat()
+    out.write_text(json.dumps(doc))
+    assert M.main(["--out", str(out)]) == 1 and starts[-1] == date(2025, 1, 15)
+    # read at last: ok, error cleared, the retry dropped; the next run is the usual window
+    serve["rows"] = rows + [readable]
+    assert M.main(["--out", str(out)]) == 0
+    doc = json.loads(out.read_text())
+    assert doc["ok"] is True and doc["error"] is None and "retry_from" not in doc["meta"]
+    assert any(r["raw"]["row"]["confirmation_no"].endswith("99") for r in doc["records"])
+    assert M.main(["--out", str(out)]) == 0
+    assert starts[-1] == dt.now(M.TZ).date() - td(days=M.WINDOW_DAYS)
 
 
 @pytest.mark.parametrize("area", [5.0, None])
