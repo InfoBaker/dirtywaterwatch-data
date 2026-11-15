@@ -32,7 +32,8 @@ Record rules
     rescission is no evidence, so the advisory ages out after the status build's 14 days; a failed run confirms nothing.
   - A release read again is reconciled (revise): its current county, waters, cause and advice replace the saved ones,
     the earliest publication time stays the start; a water it no longer names ends at that read (poll precision,
-    raw.revised_out). A rescission that names no county, for a water open in more than one county, lifts none
+    raw.revised_out), and a water it names again is open again (raw.revised_out_reads keeps the read that dropped it);
+    a water KDHE rescinded stays lifted. A rescission that names no county, for a water open in more than one county, lifts none
     (rescissions_seen_ambiguous in meta).
   - raw.time_zone by the release's county (pipeline/zones.py kansas_zone); raw._placement "named_water_only".
   - The feed's offsets read -0600 in October as in November (KDHE's server states Central Standard Time year-round);
@@ -181,6 +182,14 @@ def revise(old: dict, new: dict) -> None:
     publication time stays the start (a later pubDate never moves the start later), and the status is kept."""
     for k in REVISABLE:
         old[k] = new[k]
+    if old.get("status") == "advisory_lifted" and old["raw"].get("revised_out") and not old["raw"].get("lifted_by"):
+        # the release names this water again after a revision had dropped it (verification P1-2): the earlier end was
+        # this site's reading of a revision, never KDHE's rescission, so the advisory is open again under KDHE's
+        # release; the read that dropped it is kept in raw.revised_out_reads. A rescission (lifted_by) stays lifted
+        old["raw"].setdefault("revised_out_reads", []).append(old.get("ended_at"))
+        old["status"], old["ended_at"] = "advisory_active", None
+        for k in ("revised_out", "ended_at_precision", "end_basis"):
+            old["raw"].pop(k, None)
     for k in ("title", "waters", "release_waters", "county", "time_zone", "cause"):
         old["raw"][k] = new["raw"][k]
     if new.get("started_at") and new["started_at"] != old.get("started_at"):
