@@ -75,7 +75,7 @@ def test_a_record_starts_at_the_first_read_never_at_the_update_date():
     assert "136854961" in r["raw"]["point_url"] and r["raw"]["county"] == "Churchill County"
     m = next(x for x in recs if x["waterbody_text"] == "Marlette Lake")
     assert (m["lat"], m["lon"], m["coord_source"]) == (39.174, -119.902, "gnis") and "860477" in m["raw"]["point_url"]
-    assert r["source_record_id"] == "lahontan-reservoir:2026-11-14"
+    assert r["source_record_id"] == "lahontan-reservoir:20261114T200000Z"
 
 
 def test_a_level_change_updates_the_same_record_and_a_water_gone_is_lifted_at_the_read():
@@ -363,3 +363,37 @@ def test_p1_3_nevada_cannot_go_live_without_a_successful_current_read():
     assert "no successful current read" in reg["nv-state-parks-hab"]["note"]
     # the archived copies are fixtures only: the ingester has no archive fallback
     assert "archive.org" not in (Path(P.__file__)).read_text()
+
+
+def test_p2_5_a_same_day_reopening_keeps_both_episodes():
+    a, b, c = "2026-11-14T20:00:00Z", "2026-11-14T21:00:00Z", "2026-11-14T22:00:00Z"
+    first, _ = P.build(AUG26, a, [])
+    empty = re.sub(r"(HAB Watch Advisories</label>.*?<div class=\"typography\">).*?(</div>)",
+                   lambda m: m.group(1) + "<p>None at this time.</p>" + m.group(2), AUG26, count=1, flags=re.S)
+    second, meta = P.build(empty, b, first)
+    assert meta["lifted_this_read"] == 4
+    third, meta = P.build(AUG26, c, second)
+    assert meta["opened"] == 4 and len(third) == 8
+    lah = sorted((x for x in third if x["waterbody_text"] == "Lahontan Reservoir"), key=lambda x: x["started_at"])
+    assert [(x["status"], x["started_at"], x["ended_at"]) for x in lah] == [("advisory_lifted", a, b),
+                                                                           ("advisory_active", c, None)]
+    assert len({x["event_id"] for x in third}) == 8
+    # an ordinary poll keeps the id
+    fourth, meta = P.build(AUG26, "2026-11-14T23:00:00Z", third)
+    assert meta["opened"] == 0 and {x["event_id"] for x in fourth} == {x["event_id"] for x in third}
+
+
+def test_p2_8_a_removal_seen_after_a_long_gap_does_not_colour_the_gap():
+    from datetime import datetime, timezone
+    from build import status as S
+    first, _ = P.build(AUG26, "2025-11-14T20:00:00Z", [])
+    empty = re.sub(r"(HAB Watch Advisories</label>.*?<div class=\"typography\">).*?(</div>)",
+                   lambda m: m.group(1) + "<p>None at this time.</p>" + m.group(2), AUG26, count=1, flags=re.S)
+    later, _ = P.build(empty, "2026-02-14T20:00:00Z", first)
+    lah = next(x for x in later if x["waterbody_text"] == "Lahontan Reservoir")
+    assert lah["status"] == "advisory_lifted" and lah["raw"]["ended_at_precision"] == "poll"
+    ivs = S.event_intervals(lah, "NV", datetime(2026, 2, 15, tzinfo=timezone.utc), None)
+    cap = datetime(2025, 11, 28, 20, tzinfo=timezone.utc)                    # 14 days after the last listing read
+    red = [iv for iv in ivs if iv["rule"] != "not_reconfirmed"]
+    assert red and max(iv["end"] for iv in red) <= cap
+    assert all(iv["rule"] == "not_reconfirmed" for iv in ivs if iv["end"] > cap)
