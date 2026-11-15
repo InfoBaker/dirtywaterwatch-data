@@ -1,0 +1,2563 @@
+{
+ "_how": "made by `python -m tests.test_rain_levels` from pipeline/: the compute() output of `git show 76c4655:pipeline/build/rain_likely.py` on baseline_cases(), with the rain_likely block of `git show 76c4655:data/rules.json` (kept here as rules)",
+ "cases": [
+  {
+   "block": {
+    "counts": {
+     "episodes": 4,
+     "likely_now": 4,
+     "permits": 4,
+     "rain_expected": 4,
+     "suppressed_now": 0
+    },
+    "enabled": true,
+    "episodes": {
+     "rain_likely:KY0021466:20260809T04Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-08-12T12:00:00Z",
+      "in_effect": true,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "KY0021466",
+      "pieces": [
+       [
+        "2026-08-09T04:00:00Z",
+        "2026-08-12T12:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-08-09T04:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-09T12:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-08-09T11:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.3,
+       "peak_at": "2026-08-09T04:00:00Z",
+       "permit": "KY0021466",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "KY",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.25,
+       "threshold_kind": "operator_rule",
+       "threshold_rule": "rain_likely.fallback.by_permit.KY0021466",
+       "threshold_source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+       "threshold_text": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+       "trigger_basis": "operator",
+       "until": "2026-08-12T12:00:00Z",
+       "until_rule": "72 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-08-09T04:00:00Z",
+      "state": "KY",
+      "trigger_basis": "operator",
+      "waters": [
+       "p-ky"
+      ]
+     },
+     "rain_likely:MA0100552:20260809T18Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-08-12T02:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MA0100552",
+      "pieces": [
+       [
+        "2026-08-09T18:00:00Z",
+        "2026-08-12T02:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-08-09T18:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-10T02:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-08-10T01:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.15,
+       "peak_at": "2026-08-09T18:00:00Z",
+       "permit": "MA0100552",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-08-12T02:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-08-09T18:00:00Z",
+      "state": "MA",
+      "trigger_basis": "default",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "rain_likely:MA0101613:20260810T01Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-08-12T09:00:00Z",
+      "in_effect": true,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "MA0101613",
+      "pieces": [
+       [
+        "2026-08-10T01:00:00Z",
+        "2026-08-12T09:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-08-10T01:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-10T09:00:00Z",
+       "history_since": "2022-07-02",
+       "history_until": "2026-07-31",
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-08-10T08:00:00Z",
+       "n_discharge_days": 50,
+       "peak_24h_in": 0.35,
+       "peak_at": "2026-08-10T01:00:00Z",
+       "permit": "MA0101613",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "threshold_kind": "operator_history",
+       "threshold_rule": "rain_likely.percentile",
+       "threshold_source": null,
+       "threshold_text": "p10 of 50 days",
+       "trigger_basis": "operator",
+       "until": "2026-08-12T09:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-08-10T01:00:00Z",
+      "state": "MA",
+      "trigger_basis": "operator",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "rain_likely:MD0021598:20260809T11Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-08-11T19:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MD0021598",
+      "pieces": [
+       [
+        "2026-08-09T11:00:00Z",
+        "2026-08-11T19:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-08-09T11:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-09T19:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-08-09T18:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.6,
+       "peak_at": "2026-08-09T11:00:00Z",
+       "permit": "MD0021598",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MD",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "state",
+       "threshold_rule": "rain_likely.fallback.by_state.MD",
+       "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+       "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+       "trigger_basis": "default",
+       "until": "2026-08-11T19:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-08-09T11:00:00Z",
+      "state": "MD",
+      "trigger_basis": "default",
+      "waters": [
+       "p-md"
+      ]
+     }
+    },
+    "forecast": {
+     "grids": null,
+     "source_id": "nws-api-gridpoint-qpf",
+     "window_hours": null
+    },
+    "label": "Discharge likely: heavy rain, no report received",
+    "label_by_basis": {
+     "default": "Discharge possible: heavy rain, no report received",
+     "operator": "Discharge likely: heavy rain, no report received",
+     "state": "Discharge likely: heavy rain, no report received"
+    },
+    "notice_suppress_hours": 24.0,
+    "permits": {
+     "KY0021466": {
+      "discharger_id": null,
+      "episode": "rain_likely:KY0021466:20260809T04Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge likely: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "KY",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.25,
+      "threshold_kind": "operator_rule",
+      "threshold_rule": "rain_likely.fallback.by_permit.KY0021466",
+      "threshold_source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+      "threshold_text": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+      "trigger_basis": "operator",
+      "valid_time": "2026-08-10T12:00:00+00:00",
+      "waters": [
+       "p-ky"
+      ]
+     },
+     "MA0100552": {
+      "discharger_id": null,
+      "episode": "rain_likely:MA0100552:20260809T18Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MA",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "site_default",
+      "threshold_rule": "rain_likely.fallback.default",
+      "threshold_source": "This site's methods page",
+      "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+      "trigger_basis": "default",
+      "valid_time": "2026-08-10T12:00:00+00:00",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "MA0101613": {
+      "discharger_id": null,
+      "episode": "rain_likely:MA0101613:20260810T01Z",
+      "history_since": "2022-07-02",
+      "history_until": "2026-07-31",
+      "label": "Discharge likely: heavy rain, no report received",
+      "n_discharge_days": 50,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MA",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "history",
+      "threshold_in": 0.3,
+      "threshold_kind": "operator_history",
+      "threshold_rule": "rain_likely.percentile",
+      "threshold_source": null,
+      "threshold_text": "p10 of 50 days",
+      "trigger_basis": "operator",
+      "valid_time": "2026-08-10T12:00:00+00:00",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "MD0021598": {
+      "discharger_id": null,
+      "episode": "rain_likely:MD0021598:20260809T11Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MD",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "state",
+      "threshold_rule": "rain_likely.fallback.by_state.MD",
+      "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+      "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "trigger_basis": "default",
+      "valid_time": "2026-08-10T12:00:00+00:00",
+      "waters": [
+       "p-md"
+      ]
+     }
+    },
+    "problems": [],
+    "rainfall": {
+     "error": null,
+     "fetched_at": "2026-08-10T12:00:00Z",
+     "last_ok_at": "2026-08-10T12:00:00+00:00",
+     "ok": true,
+     "points": 2,
+     "product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+     "read": null,
+     "source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+     "source_id": "noaa-mrms-qpe-imageserver",
+     "stale": false,
+     "states": null,
+     "units": null,
+     "valid_time": "2026-08-10T12:00:00Z"
+    },
+    "rainfall_stale_hours": 3,
+    "rule": "rain_likely",
+    "tail_hours": 48.0,
+    "thresholds": {
+     "built": null,
+     "method": null,
+     "with_history": null
+    },
+    "waters": {
+     "p-ky": {
+      "label": "Discharge likely: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "KY0021466"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "operator"
+      ],
+      "trigger_basis": "operator"
+     },
+     "p-ma": {
+      "label": "Discharge likely: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "MA0100552",
+       "MA0101613"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "operator",
+       "default"
+      ],
+      "trigger_basis": "operator"
+     },
+     "p-md": {
+      "label": "Discharge possible: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "MD0021598"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "default"
+      ],
+      "trigger_basis": "default"
+     }
+    }
+   },
+   "by_reach": {},
+   "by_water": {
+    "p-ky": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-08-12 12:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:KY0021466:20260809T04Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "KY0021466",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-08-09T04:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-09T12:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-08-09T11:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.3,
+       "peak_at": "2026-08-09T04:00:00Z",
+       "permit": "KY0021466",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "KY",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.25,
+       "threshold_kind": "operator_rule",
+       "threshold_rule": "rain_likely.fallback.by_permit.KY0021466",
+       "threshold_source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+       "threshold_text": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+       "trigger_basis": "operator",
+       "until": "2026-08-12T12:00:00Z",
+       "until_rule": "72 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 72.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.25,
+       "trigger_basis": "operator"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-08-09 04:00:00+00:00",
+      "started_at": "2026-08-09T04:00:00Z",
+      "trigger_basis": "operator",
+      "window_basis": "72 hours after the 24-hour total falls below the threshold",
+      "window_hours": 72.0,
+      "yellow_rule": {
+       "hours": 72.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ],
+    "p-ma": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-08-12 02:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MA0100552:20260809T18Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MA0100552",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-08-09T18:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-10T02:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-08-10T01:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.15,
+       "peak_at": "2026-08-09T18:00:00Z",
+       "permit": "MA0100552",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-08-12T02:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-08-09 18:00:00+00:00",
+      "started_at": "2026-08-09T18:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     },
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-08-12 09:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MA0101613:20260810T01Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "MA0101613",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-08-10T01:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-10T09:00:00Z",
+       "history_since": "2022-07-02",
+       "history_until": "2026-07-31",
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-08-10T08:00:00Z",
+       "n_discharge_days": 50,
+       "peak_24h_in": 0.35,
+       "peak_at": "2026-08-10T01:00:00Z",
+       "permit": "MA0101613",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "threshold_kind": "operator_history",
+       "threshold_rule": "rain_likely.percentile",
+       "threshold_source": null,
+       "threshold_text": "p10 of 50 days",
+       "trigger_basis": "operator",
+       "until": "2026-08-12T09:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "trigger_basis": "operator"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-08-10 01:00:00+00:00",
+      "started_at": "2026-08-10T01:00:00Z",
+      "trigger_basis": "operator",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ],
+    "p-md": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-08-11 19:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MD0021598:20260809T11Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MD0021598",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-08-09T11:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-08-09T19:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-08-09T18:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.6,
+       "peak_at": "2026-08-09T11:00:00Z",
+       "permit": "MD0021598",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MD",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "state",
+       "threshold_rule": "rain_likely.fallback.by_state.MD",
+       "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+       "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+       "trigger_basis": "default",
+       "until": "2026-08-11T19:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-08-10T12:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-08-09 11:00:00+00:00",
+      "started_at": "2026-08-09T11:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "block": {
+    "counts": {
+     "episodes": 4,
+     "likely_now": 4,
+     "permits": 4,
+     "rain_expected": 4,
+     "suppressed_now": 0
+    },
+    "enabled": true,
+    "episodes": {
+     "rain_likely:KY0021466:20261031T06Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-11-03T14:00:00Z",
+      "in_effect": true,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "KY0021466",
+      "pieces": [
+       [
+        "2026-10-31T06:00:00Z",
+        "2026-11-03T14:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-10-31T06:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-10-31T14:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-10-31T13:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.3,
+       "peak_at": "2026-10-31T06:00:00Z",
+       "permit": "KY0021466",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "KY",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.25,
+       "threshold_kind": "operator_rule",
+       "threshold_rule": "rain_likely.fallback.by_permit.KY0021466",
+       "threshold_source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+       "threshold_text": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+       "trigger_basis": "operator",
+       "until": "2026-11-03T14:00:00Z",
+       "until_rule": "72 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-10-31T06:00:00Z",
+      "state": "KY",
+      "trigger_basis": "operator",
+      "waters": [
+       "p-ky"
+      ]
+     },
+     "rain_likely:MA0100552:20261031T20Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-11-03T04:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MA0100552",
+      "pieces": [
+       [
+        "2026-10-31T20:00:00Z",
+        "2026-11-03T04:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-10-31T20:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-11-01T04:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-11-01T03:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.15,
+       "peak_at": "2026-10-31T20:00:00Z",
+       "permit": "MA0100552",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-11-03T04:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-10-31T20:00:00Z",
+      "state": "MA",
+      "trigger_basis": "default",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "rain_likely:MA0101613:20261101T03Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-11-03T11:00:00Z",
+      "in_effect": true,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "MA0101613",
+      "pieces": [
+       [
+        "2026-11-01T03:00:00Z",
+        "2026-11-03T11:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-11-01T03:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-11-01T11:00:00Z",
+       "history_since": "2022-07-02",
+       "history_until": "2026-07-31",
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-11-01T10:00:00Z",
+       "n_discharge_days": 50,
+       "peak_24h_in": 0.35,
+       "peak_at": "2026-11-01T03:00:00Z",
+       "permit": "MA0101613",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "threshold_kind": "operator_history",
+       "threshold_rule": "rain_likely.percentile",
+       "threshold_source": null,
+       "threshold_text": "p10 of 50 days",
+       "trigger_basis": "operator",
+       "until": "2026-11-03T11:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-11-01T03:00:00Z",
+      "state": "MA",
+      "trigger_basis": "operator",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "rain_likely:MD0021598:20261031T13Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-11-02T21:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MD0021598",
+      "pieces": [
+       [
+        "2026-10-31T13:00:00Z",
+        "2026-11-02T21:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-10-31T13:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-10-31T21:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-10-31T20:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.6,
+       "peak_at": "2026-10-31T13:00:00Z",
+       "permit": "MD0021598",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MD",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "state",
+       "threshold_rule": "rain_likely.fallback.by_state.MD",
+       "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+       "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+       "trigger_basis": "default",
+       "until": "2026-11-02T21:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-10-31T13:00:00Z",
+      "state": "MD",
+      "trigger_basis": "default",
+      "waters": [
+       "p-md"
+      ]
+     }
+    },
+    "forecast": {
+     "grids": null,
+     "source_id": "nws-api-gridpoint-qpf",
+     "window_hours": null
+    },
+    "label": "Discharge likely: heavy rain, no report received",
+    "label_by_basis": {
+     "default": "Discharge possible: heavy rain, no report received",
+     "operator": "Discharge likely: heavy rain, no report received",
+     "state": "Discharge likely: heavy rain, no report received"
+    },
+    "notice_suppress_hours": 24.0,
+    "permits": {
+     "KY0021466": {
+      "discharger_id": null,
+      "episode": "rain_likely:KY0021466:20261031T06Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "KY",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "site_default",
+      "threshold_rule": "rain_likely.fallback.default",
+      "threshold_source": "This site's methods page",
+      "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+      "trigger_basis": "default",
+      "valid_time": "2026-11-01T14:00:00+00:00",
+      "waters": [
+       "p-ky"
+      ]
+     },
+     "MA0100552": {
+      "discharger_id": null,
+      "episode": "rain_likely:MA0100552:20261031T20Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MA",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "site_default",
+      "threshold_rule": "rain_likely.fallback.default",
+      "threshold_source": "This site's methods page",
+      "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+      "trigger_basis": "default",
+      "valid_time": "2026-11-01T14:00:00+00:00",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "MA0101613": {
+      "discharger_id": null,
+      "episode": "rain_likely:MA0101613:20261101T03Z",
+      "history_since": "2022-07-02",
+      "history_until": "2026-07-31",
+      "label": "Discharge likely: heavy rain, no report received",
+      "n_discharge_days": 50,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MA",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "history",
+      "threshold_in": 0.3,
+      "threshold_kind": "operator_history",
+      "threshold_rule": "rain_likely.percentile",
+      "threshold_source": null,
+      "threshold_text": "p10 of 50 days",
+      "trigger_basis": "operator",
+      "valid_time": "2026-11-01T14:00:00+00:00",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "MD0021598": {
+      "discharger_id": null,
+      "episode": "rain_likely:MD0021598:20261031T13Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MD",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "state",
+      "threshold_rule": "rain_likely.fallback.by_state.MD",
+      "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+      "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "trigger_basis": "default",
+      "valid_time": "2026-11-01T14:00:00+00:00",
+      "waters": [
+       "p-md"
+      ]
+     }
+    },
+    "problems": [],
+    "rainfall": {
+     "error": null,
+     "fetched_at": "2026-11-01T14:00:00Z",
+     "last_ok_at": "2026-11-01T14:00:00+00:00",
+     "ok": true,
+     "points": 2,
+     "product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+     "read": null,
+     "source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+     "source_id": "noaa-mrms-qpe-imageserver",
+     "stale": false,
+     "states": null,
+     "units": null,
+     "valid_time": "2026-11-01T14:00:00Z"
+    },
+    "rainfall_stale_hours": 3,
+    "rule": "rain_likely",
+    "tail_hours": 48.0,
+    "thresholds": {
+     "built": null,
+     "method": null,
+     "with_history": null
+    },
+    "waters": {
+     "p-ky": {
+      "label": "Discharge possible: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "KY0021466"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "default"
+      ],
+      "trigger_basis": "default"
+     },
+     "p-ma": {
+      "label": "Discharge likely: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "MA0100552",
+       "MA0101613"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "operator",
+       "default"
+      ],
+      "trigger_basis": "operator"
+     },
+     "p-md": {
+      "label": "Discharge possible: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "MD0021598"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "default"
+      ],
+      "trigger_basis": "default"
+     }
+    }
+   },
+   "by_reach": {},
+   "by_water": {
+    "p-ky": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-11-03 14:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:KY0021466:20261031T06Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "KY0021466",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-10-31T06:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-10-31T14:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-10-31T13:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.3,
+       "peak_at": "2026-10-31T06:00:00Z",
+       "permit": "KY0021466",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "KY",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.25,
+       "threshold_kind": "operator_rule",
+       "threshold_rule": "rain_likely.fallback.by_permit.KY0021466",
+       "threshold_source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+       "threshold_text": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+       "trigger_basis": "operator",
+       "until": "2026-11-03T14:00:00Z",
+       "until_rule": "72 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 72.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.25,
+       "trigger_basis": "operator"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-10-31 06:00:00+00:00",
+      "started_at": "2026-10-31T06:00:00Z",
+      "trigger_basis": "operator",
+      "window_basis": "72 hours after the 24-hour total falls below the threshold",
+      "window_hours": 72.0,
+      "yellow_rule": {
+       "hours": 72.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ],
+    "p-ma": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-11-03 04:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MA0100552:20261031T20Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MA0100552",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-10-31T20:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-11-01T04:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-11-01T03:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.15,
+       "peak_at": "2026-10-31T20:00:00Z",
+       "permit": "MA0100552",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-11-03T04:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-10-31 20:00:00+00:00",
+      "started_at": "2026-10-31T20:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     },
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-11-03 11:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MA0101613:20261101T03Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "MA0101613",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-11-01T03:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-11-01T11:00:00Z",
+       "history_since": "2022-07-02",
+       "history_until": "2026-07-31",
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-11-01T10:00:00Z",
+       "n_discharge_days": 50,
+       "peak_24h_in": 0.35,
+       "peak_at": "2026-11-01T03:00:00Z",
+       "permit": "MA0101613",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "threshold_kind": "operator_history",
+       "threshold_rule": "rain_likely.percentile",
+       "threshold_source": null,
+       "threshold_text": "p10 of 50 days",
+       "trigger_basis": "operator",
+       "until": "2026-11-03T11:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "trigger_basis": "operator"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-11-01 03:00:00+00:00",
+      "started_at": "2026-11-01T03:00:00Z",
+      "trigger_basis": "operator",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ],
+    "p-md": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-11-02 21:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MD0021598:20261031T13Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MD0021598",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-10-31T13:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-10-31T21:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-10-31T20:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.6,
+       "peak_at": "2026-10-31T13:00:00Z",
+       "permit": "MD0021598",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MD",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "state",
+       "threshold_rule": "rain_likely.fallback.by_state.MD",
+       "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+       "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+       "trigger_basis": "default",
+       "until": "2026-11-02T21:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-11-01T14:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-10-31 13:00:00+00:00",
+      "started_at": "2026-10-31T13:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "block": {
+    "counts": {
+     "episodes": 4,
+     "likely_now": 4,
+     "permits": 4,
+     "rain_expected": 4,
+     "suppressed_now": 0
+    },
+    "enabled": true,
+    "episodes": {
+     "rain_likely:KY0021466:20260430T12Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-05-02T20:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "KY0021466",
+      "pieces": [
+       [
+        "2026-04-30T12:00:00Z",
+        "2026-05-02T20:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-04-30T12:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-04-30T20:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-04-30T19:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.3,
+       "peak_at": "2026-04-30T12:00:00Z",
+       "permit": "KY0021466",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "KY",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-05-02T20:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-04-30T12:00:00Z",
+      "state": "KY",
+      "trigger_basis": "default",
+      "waters": [
+       "p-ky"
+      ]
+     },
+     "rain_likely:MA0100552:20260501T02Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-05-03T10:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MA0100552",
+      "pieces": [
+       [
+        "2026-05-01T02:00:00Z",
+        "2026-05-03T10:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-05-01T02:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-05-01T10:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-05-01T09:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.15,
+       "peak_at": "2026-05-01T02:00:00Z",
+       "permit": "MA0100552",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-05-03T10:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-05-01T02:00:00Z",
+      "state": "MA",
+      "trigger_basis": "default",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "rain_likely:MA0101613:20260501T09Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-05-03T17:00:00Z",
+      "in_effect": true,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "MA0101613",
+      "pieces": [
+       [
+        "2026-05-01T09:00:00Z",
+        "2026-05-03T17:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-05-01T09:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-05-01T17:00:00Z",
+       "history_since": "2022-07-02",
+       "history_until": "2026-07-31",
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-05-01T16:00:00Z",
+       "n_discharge_days": 50,
+       "peak_24h_in": 0.35,
+       "peak_at": "2026-05-01T09:00:00Z",
+       "permit": "MA0101613",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "threshold_kind": "operator_history",
+       "threshold_rule": "rain_likely.percentile",
+       "threshold_source": null,
+       "threshold_text": "p10 of 50 days",
+       "trigger_basis": "operator",
+       "until": "2026-05-03T17:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-05-01T09:00:00Z",
+      "state": "MA",
+      "trigger_basis": "operator",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "rain_likely:MD0021598:20260430T19Z": {
+      "active": true,
+      "discharger_id": null,
+      "discharger_name": "Test Water and Sewer",
+      "end": "2026-05-03T03:00:00Z",
+      "in_effect": true,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MD0021598",
+      "pieces": [
+       [
+        "2026-04-30T19:00:00Z",
+        "2026-05-03T03:00:00Z"
+       ]
+      ],
+      "rain": {
+       "above_from": "2026-04-30T19:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-05-01T03:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-05-01T02:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.6,
+       "peak_at": "2026-04-30T19:00:00Z",
+       "permit": "MD0021598",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MD",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "state",
+       "threshold_rule": "rain_likely.fallback.by_state.MD",
+       "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+       "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+       "trigger_basis": "default",
+       "until": "2026-05-03T03:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reaches": [],
+      "start": "2026-04-30T19:00:00Z",
+      "state": "MD",
+      "trigger_basis": "default",
+      "waters": [
+       "p-md"
+      ]
+     }
+    },
+    "forecast": {
+     "grids": null,
+     "source_id": "nws-api-gridpoint-qpf",
+     "window_hours": null
+    },
+    "label": "Discharge likely: heavy rain, no report received",
+    "label_by_basis": {
+     "default": "Discharge possible: heavy rain, no report received",
+     "operator": "Discharge likely: heavy rain, no report received",
+     "state": "Discharge likely: heavy rain, no report received"
+    },
+    "notice_suppress_hours": 24.0,
+    "permits": {
+     "KY0021466": {
+      "discharger_id": null,
+      "episode": "rain_likely:KY0021466:20260430T12Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge likely: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "KY",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.25,
+      "threshold_kind": "operator_rule",
+      "threshold_rule": "rain_likely.fallback.by_permit.KY0021466",
+      "threshold_source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+      "threshold_text": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+      "trigger_basis": "operator",
+      "valid_time": "2026-05-01T20:00:00+00:00",
+      "waters": [
+       "p-ky"
+      ]
+     },
+     "MA0100552": {
+      "discharger_id": null,
+      "episode": "rain_likely:MA0100552:20260501T02Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MA",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "site_default",
+      "threshold_rule": "rain_likely.fallback.default",
+      "threshold_source": "This site's methods page",
+      "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+      "trigger_basis": "default",
+      "valid_time": "2026-05-01T20:00:00+00:00",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "MA0101613": {
+      "discharger_id": null,
+      "episode": "rain_likely:MA0101613:20260501T09Z",
+      "history_since": "2022-07-02",
+      "history_until": "2026-07-31",
+      "label": "Discharge likely: heavy rain, no report received",
+      "n_discharge_days": 50,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MA",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "history",
+      "threshold_in": 0.3,
+      "threshold_kind": "operator_history",
+      "threshold_rule": "rain_likely.percentile",
+      "threshold_source": null,
+      "threshold_text": "p10 of 50 days",
+      "trigger_basis": "operator",
+      "valid_time": "2026-05-01T20:00:00+00:00",
+      "waters": [
+       "p-ma"
+      ]
+     },
+     "MD0021598": {
+      "discharger_id": null,
+      "episode": "rain_likely:MD0021598:20260430T19Z",
+      "history_since": null,
+      "history_until": null,
+      "label": "Discharge possible: heavy rain, no report received",
+      "n_discharge_days": null,
+      "name": "Test Water and Sewer",
+      "point": [
+       42.0,
+       -72.0
+      ],
+      "qpf_24h_in": 0.5,
+      "qpf_update_time": null,
+      "rain_12h_in": null,
+      "rain_24h_in": 0.0,
+      "rain_48h_in": null,
+      "rain_6h_in": 0.0,
+      "rain_expected": true,
+      "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+      "rainfall_read": null,
+      "rainfall_read_text": null,
+      "reaches": [],
+      "state": "MD",
+      "status": "likely",
+      "suppressed_by": [],
+      "threshold_basis": "published",
+      "threshold_in": 0.1,
+      "threshold_kind": "state",
+      "threshold_rule": "rain_likely.fallback.by_state.MD",
+      "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+      "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "trigger_basis": "default",
+      "valid_time": "2026-05-01T20:00:00+00:00",
+      "waters": [
+       "p-md"
+      ]
+     }
+    },
+    "problems": [],
+    "rainfall": {
+     "error": null,
+     "fetched_at": "2026-05-01T20:00:00Z",
+     "last_ok_at": "2026-05-01T20:00:00+00:00",
+     "ok": true,
+     "points": 2,
+     "product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+     "read": null,
+     "source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+     "source_id": "noaa-mrms-qpe-imageserver",
+     "stale": false,
+     "states": null,
+     "units": null,
+     "valid_time": "2026-05-01T20:00:00Z"
+    },
+    "rainfall_stale_hours": 3,
+    "rule": "rain_likely",
+    "tail_hours": 48.0,
+    "thresholds": {
+     "built": null,
+     "method": null,
+     "with_history": null
+    },
+    "waters": {
+     "p-ky": {
+      "label": "Discharge likely: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "KY0021466"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "operator"
+      ],
+      "trigger_basis": "operator"
+     },
+     "p-ma": {
+      "label": "Discharge likely: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "MA0100552",
+       "MA0101613"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "operator",
+       "default"
+      ],
+      "trigger_basis": "operator"
+     },
+     "p-md": {
+      "label": "Discharge possible: heavy rain, no report received",
+      "likely": true,
+      "permits": [
+       "MD0021598"
+      ],
+      "qpf_24h_in": 0.5,
+      "rain_24h_in": 0.0,
+      "rain_expected": true,
+      "sources": [
+       "noaa-mrms-qpe-imageserver"
+      ],
+      "trigger_bases": [
+       "default"
+      ],
+      "trigger_basis": "default"
+     }
+    }
+   },
+   "by_reach": {},
+   "by_water": {
+    "p-ky": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-05-02 20:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:KY0021466:20260430T12Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "KY0021466",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-04-30T12:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-04-30T20:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-04-30T19:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.3,
+       "peak_at": "2026-04-30T12:00:00Z",
+       "permit": "KY0021466",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "KY",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-05-02T20:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-04-30 12:00:00+00:00",
+      "started_at": "2026-04-30T12:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ],
+    "p-ma": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-05-03 10:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MA0100552:20260501T02Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MA0100552",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-05-01T02:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-05-01T10:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-05-01T09:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.15,
+       "peak_at": "2026-05-01T02:00:00Z",
+       "permit": "MA0100552",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "site_default",
+       "threshold_rule": "rain_likely.fallback.default",
+       "threshold_source": "This site's methods page",
+       "threshold_text": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+       "trigger_basis": "default",
+       "until": "2026-05-03T10:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-05-01 02:00:00+00:00",
+      "started_at": "2026-05-01T02:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     },
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-05-03 17:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MA0101613:20260501T09Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge likely: heavy rain, no report received",
+      "permit": "MA0101613",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-05-01T09:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-05-01T17:00:00Z",
+       "history_since": "2022-07-02",
+       "history_until": "2026-07-31",
+       "label": "Discharge likely: heavy rain, no report received",
+       "last_above_at": "2026-05-01T16:00:00Z",
+       "n_discharge_days": 50,
+       "peak_24h_in": 0.35,
+       "peak_at": "2026-05-01T09:00:00Z",
+       "permit": "MA0101613",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MA",
+       "suppressed_by": [],
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "threshold_kind": "operator_history",
+       "threshold_rule": "rain_likely.percentile",
+       "threshold_source": null,
+       "threshold_text": "p10 of 50 days",
+       "trigger_basis": "operator",
+       "until": "2026-05-03T17:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "history",
+       "threshold_in": 0.3,
+       "trigger_basis": "operator"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-05-01 09:00:00+00:00",
+      "started_at": "2026-05-01T09:00:00Z",
+      "trigger_basis": "operator",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ],
+    "p-md": [
+     {
+      "authority": "NOAA MRMS radar estimate",
+      "color": "yellow",
+      "end": "2026-05-03 03:00:00+00:00",
+      "ended_at": null,
+      "event_id": "rain_likely:MD0021598:20260430T19Z",
+      "event_status": null,
+      "event_type": null,
+      "fixture": false,
+      "label": "Discharge possible: heavy rain, no report received",
+      "permit": "MD0021598",
+      "placement": null,
+      "rain": {
+       "above_from": "2026-04-30T19:00:00Z",
+       "discharger_id": null,
+       "discharger_name": "Test Water and Sewer",
+       "dropped_below_at": "2026-05-01T03:00:00Z",
+       "history_since": null,
+       "history_until": null,
+       "label": "Discharge possible: heavy rain, no report received",
+       "last_above_at": "2026-05-01T02:00:00Z",
+       "n_discharge_days": null,
+       "peak_24h_in": 0.6,
+       "peak_at": "2026-04-30T19:00:00Z",
+       "permit": "MD0021598",
+       "point": [
+        42.0,
+        -72.0
+       ],
+       "qpf_24h_in": 0.5,
+       "qpf_update_time": null,
+       "rain_24h_in": 0.0,
+       "rainfall_product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)",
+       "rainfall_read": null,
+       "rainfall_read_text": null,
+       "rainfall_service": "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer",
+       "rainfall_source": "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total",
+       "rainfall_source_id": "noaa-mrms-qpe-imageserver",
+       "rainfall_stale": false,
+       "state": "MD",
+       "suppressed_by": [],
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "threshold_kind": "state",
+       "threshold_rule": "rain_likely.fallback.by_state.MD",
+       "threshold_source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+       "threshold_text": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+       "trigger_basis": "default",
+       "until": "2026-05-03T03:00:00Z",
+       "until_rule": "48 hours after the 24-hour total falls below the threshold",
+       "valid_time": "2026-05-01T20:00:00+00:00"
+      },
+      "reach": null,
+      "red_rule": null,
+      "rule": "rain_likely",
+      "rule_applied": {
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+       "tail_hours": 48.0,
+       "threshold_basis": "published",
+       "threshold_in": 0.1,
+       "trigger_basis": "default"
+      },
+      "source_id": "noaa-mrms-qpe-imageserver",
+      "start": "2026-04-30 19:00:00+00:00",
+      "started_at": "2026-04-30T19:00:00Z",
+      "trigger_basis": "default",
+      "window_basis": "48 hours after the 24-hour total falls below the threshold",
+      "window_hours": 48.0,
+      "yellow_rule": {
+       "hours": 48.0,
+       "rationale": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+       "rule": "rain_likely",
+       "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "commit": "76c4655",
+ "rules": {
+  "rain_likely": {
+   "compare": "The NOAA MRMS radar-only rainfall estimate for the 24 hours to the latest hour, read every hour at each outfall from the radar grid. NOAA's radar rainfall service labels its values as inches but has been publishing millimetres; since November 7, 2026 this site works out the unit from the values themselves and from nearby airport rain gauges, converts to inches, and records with each reading the unit it read.",
+   "doc": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+   "enabled": true,
+   "fallback": {
+    "_by_permit_doc": "An operator's own published rain trigger for one permit, in the operator's season (months), with its own caution length (tail_hours): it applies before the state's rule, and outside its months the state's rule or the default applies (build/rain_likely.py operator_rule).",
+    "by_permit": {
+     "KY0021466": {
+      "basis": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+      "inches": 0.25,
+      "months": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "operator": "Sanitation District No. 1 of Northern Kentucky",
+      "source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+      "tail_hours": 72,
+      "time_zone": "America/New_York"
+     }
+    },
+    "by_state": {
+     "DC": {
+      "basis": "District and county agencies recommend not swimming for 48 hours after half an inch of rain, as Anacostia Riverkeeper publishes their advice; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "inches": 0.1,
+      "source": "Anacostia Riverkeeper, Swim Guide listings for the District of Columbia",
+      "trigger_basis": "default"
+     },
+     "MD": {
+      "basis": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "inches": 0.1,
+      "source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+      "trigger_basis": "default"
+     },
+     "ME": {
+      "basis": "Maine Healthy Beaches issues rainfall advisories after 1 inch or more of rain in 24 hours",
+      "inches": 1.0,
+      "source": "Maine Healthy Beaches program (Maine DEP)"
+     },
+     "NY": {
+      "basis": "New York lets operators issue combined sewer advisories from rainfall data or models; New York City's waterbody advisory model uses a rainfall threshold of 0.1 inch on most of its waters",
+      "inches": 0.1,
+      "source": "6 NYCRR 750-2.7(b)(2)(iii); New York City Department of Environmental Protection, Waterbody Advisory System"
+     },
+     "RI": {
+      "basis": "Rhode Island closes shellfish areas in Narragansett Bay after 0.5 inch of rain",
+      "inches": 0.5,
+      "source": "Rhode Island DEM shellfish program, rainfall closures"
+     }
+    },
+    "default": {
+     "basis": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+     "cost_rationale": "What the default costs. This site's own analysis compared Massachusetts operators' verified reports (July 2022 to October 2026) and Michigan's discharge list (2001 to October 2026) with NOAA radar rainfall. By the operators' own rain figures, overflows that began with less than 0.1 inch of rain were about 3 percent of Massachusetts discharge days and 1 percent of Michigan's; by radar, the 0.1 inch default would have flagged 96 to 97 percent of past overflow days. But on about half of the days with 0.1 inch or more by radar at a Massachusetts operator's outfalls, no overflow was reported that day or in the next two (two days in three for the 12 Michigan operators tested), so where the default applies the caution will often show with no overflow following. In Massachusetts, the operators' own amounts cut those quiet days from 50 to 34 percent while keeping nine overflows in ten. A day with no report is not proof that no overflow happened: some overflows are reported late or not at all.",
+     "cost_source": "MassDEP Sewage Notification Data System, Verified Data Reports, July 2022 to October 2026; Michigan EGLE, MiEnviro CSO/SSO List, 2001 to October 2026; NOAA MRMS radar-only daily rainfall, via the Iowa Environmental Mesonet; analysis by DirtyWaterWatch, November 2026",
+     "inches": 0.1,
+     "source": "This site's methods page",
+     "trigger_basis": "default"
+    }
+   },
+   "forecast_source": "NOAA National Weather Service gridpoint forecast (api.weather.gov), quantitative precipitation, next 24 hours",
+   "label": "Discharge likely: heavy rain, no report received",
+   "label_by_basis": {
+    "default": "Discharge possible: heavy rain, no report received",
+    "operator": "Discharge likely: heavy rain, no report received",
+    "state": "Discharge likely: heavy rain, no report received"
+   },
+   "label_by_basis_rationale": "The label says how strong the estimate is. It reads \"discharge likely\" where the amount comes from the operator's own discharge history or from a rain trigger its state publishes, and \"discharge possible\" where only this site's default of 0.1 inch applies. The colour, the rule and how long the caution lasts are the same.",
+   "min_discharge_days": 10,
+   "notice_suppress_hours": 24,
+   "notice_suppress_rationale": "A discharge notice from the operator that began in the last 24 hours takes over: the waters it names follow the advisory rules above.",
+   "percentile": 10,
+   "rainfall_source": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS) radar-only precipitation estimate, 1 km",
+   "rainfall_stale_hours": 3,
+   "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+   "tail_hours": 48,
+   "tail_rationale": "The caution lasts 48 hours after the 24-hour rainfall total falls back below the amount, as Massachusetts advises avoiding contact during rainstorms and for 48 hours after they end.",
+   "tail_source": "Massachusetts 314 CMR 16.09(4)",
+   "threshold_rationale": "The amount is the 10th percentile of the rainfall on the days the operator discharged: nine discharge days in ten had more rain. It is computed for each operator with at least 10 such days. In Massachusetts it is the rainfall the operator itself reported in its sewage notification reports since July 2022. In Michigan, whose discharge list gives the operator's rainfall for the whole event rather than for one day, it is the NOAA MRMS radar's daily rainfall at the operator's outfalls on the days its reported combined sewer and retention basin discharges began since 2015, the larger of that day's total and the day before's. Operators without that history use a published rule below.",
+   "threshold_source": "MassDEP Sewage Notification Data System, via the EEA Data Portal (Verified Data Reports, rainfall reported by each permittee); Michigan EGLE, MiEnviro CSO/SSO List, with NOAA MRMS daily rainfall via the Iowa Environmental Mesonet"
+  }
+ }
+}
