@@ -324,6 +324,26 @@ def _records_for(art: dict, url: str, at: str) -> list[dict]:
     return out
 
 
+MIN_BODY_CHARS = 40
+
+
+def incomplete_revision(cur: dict | None, art: dict, url: str, at: str) -> str | None:
+    """Why a newly read release cannot replace what is saved, or None. A body that is empty or a stub is never a
+    complete release; a revision of a saved release that gives fewer reports than the saved one (a body cut short, a
+    lost section) is not taken: the saved one is kept, so a partial read never deletes a report. A revision that
+    really withdraws a report therefore stays listed as unread for a person to check."""
+    if len((art.get("body") or "").strip()) < MIN_BODY_CHARS:
+        return "the release's body is empty or cut short"
+    old = (cur or {}).get("article")
+    if not old or not (cur or {}).get("municipal"):
+        return None
+    before = len(records_for(old, url, cur.get("read_at") or at))
+    after = len(records_for(art, url, at)) if MUNICIPAL.search(art["body"]) else 0
+    if after < before:
+        return f"the revision gives {after} report(s) where the saved release gave {before}"
+    return None
+
+
 def get(url: str) -> str:
     r = requests.get(url, headers=HEADERS, timeout=(20, 120))
     r.raise_for_status()
@@ -368,6 +388,13 @@ def main(argv=None) -> int:
             art = parse_article(page)
         except (requests.RequestException, ValueError, KeyError) as e:
             errors.append(scrub_title(f"{it['url']}: {e}"))
+            continue
+        why = incomplete_revision(cur, art, it["url"], at)
+        if why:
+            # a revision that cannot be read whole keeps the saved release and its records; it is listed and read
+            # again next run (the saved rss_pubdate is the older one), and the feed is not healthy until then
+            # (lessons 4 and 5; Astra verification 2026-11-15)
+            errors.append(scrub_title(f"{it['url']}: {why} (the saved release is kept)"))
             continue
         # the title is matched as published (in memory) and saved only after the scrub
         arts[it["url"]] = {"title": scrub_title(it["title"]), "rss_pubdate": it["rss_pubdate"], "article": art,
