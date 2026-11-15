@@ -884,3 +884,32 @@ def test_monthly_totals_leave_missing_months_and_measures_blank_and_other_feeds_
     assert s["events"] == [2.0, 2.0] and s["hours"] == [0.0, None] and s["gallons"] == [None, 700_000.0]
     other = _totals_chart(evs, "xx-example-monthly")
     assert other["events"] == [1.0, 0.0, 1.0] and other["gallons"] == [1_100_000.0, 0.0, 1_100_000.0]
+
+
+def test_a_facility_name_never_becomes_the_operator_and_permit_only_rows_are_not_counted():
+    """Astra re-review 2026-11-14 P2-6: state, federal, institutional, school, park and business plants whose names do
+    not give their permittee are permit-only rows (the plant kept in the notes, out of the named-operator count);
+    a legal entity's own name (LLC, district) still names the row; the register follows the rows."""
+    B = _script("add_in_operators")
+    for pn, t in (("EXAMPLE CREEK I-69 SB REST AREA", "State Government"),
+                  ("EXAMPLEVILLE CORRECTIONAL FACILITY", "State Government"),
+                  ("EXAMPLE DIVISION, NAVAL SURFACE WARFARE CENTER", "Federal Facility (U.S. Government)"),
+                  ("EXAMPLE CHRISTIAN VILLAGE", "Privately Owned Facility"),
+                  ("EXAMPLE ELEMENTARY SCHOOL", "Non-Government"),
+                  ("EXAMPLE ACRES MOBILE HOME PARK", "Privately Owned Facility"),
+                  ("CAMP EXAMPLE", "Privately Owned Facility"),
+                  ("EXAMPLE TRAVEL CENTER", "Privately Owned Facility")):
+        rid, name, lf, note = B.owner_of_plant(pn, t)
+        assert (rid, name, lf) == (None, None, B.PERMIT_ONLY) and "does not establish" in note, pn
+    assert B.owner_of_plant("EXAMPLE ACRES MOBILE HOME PARK LLC", "Privately Owned Facility")[2] == "mobile-home park"
+    assert B.owner_of_plant("EXAMPLE LAKE CD WWTP", "Municipal or Water District")[1] == "Example Lake CD"
+    assert B.owner_of_plant("EXAMPLE SCHOOL CORPORATION WWTP", "Non-Government")[2] == "special district"
+    rows = _rows()
+    for permit, plant in (("IN0052043", "Pigeon Creek I-69 Sb Rest Area"),
+                          ("IN0042960", "Putnamville Correctional Facility")):
+        r = next(x for x in rows if permit in x["npdes_permits"])
+        assert r["name"] == f"Holder of permit {permit}" and r["legal_form"] == B.PERMIT_ONLY and plant in r["notes"]
+    assert not [r["id"] for r in rows if r["name"].startswith("Holder of permit") and r["legal_form"] != B.PERMIT_ONLY]
+    chans = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())["channels"]
+    names = {c.get("operator_id"): json.dumps(c) for c in chans if c.get("operator_id") == "in-in0042960"}
+    assert names and "Putnamville" not in "".join(names.values())
