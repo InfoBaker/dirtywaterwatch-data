@@ -111,3 +111,61 @@ def test_the_files_carry_neither_copy_and_their_rows_point_at_the_river():
               if x.startswith('{"') and ('"ND0022349"' in x or '"NDG589311"' in x)]
     tied = {(r["npdes_permit"], r["outfall"]): r["water_slug"] for r in plants}
     assert tied[("ND0022349", "002")] == tied[("NDG589311", "NODI")] == "missouri-river-nd"
+
+
+# ---------------------------------------------------------------- Arkansas go-live audit 2026-11-15, items 2 to 4
+
+def test_a_record_of_another_name_is_measured_only_when_a_ruling_names_it(monkeypatch):
+    """South Fork Spring River (NHD) and openboatlaunch's South Spring River are one river under two names: the NHD
+    build never cut it (no covers_part_of), so the ruling alone brings it to the recheck."""
+    rows = [{"slug": "example-fork-river-xx", "name": "South Fork Example River", "kind": "river", "state": "MN",
+             "gnis_id": "333", "geometry": line((-95.0, 46.0), (-95.0, 46.45))}]
+    monkeypatch.setattr(N, "REMAINDER_ON", {})
+    assert N.recheck_remainders(rows, [], _existing()) == [] and len(rows) == 1
+    monkeypatch.setattr(N, "REMAINDER_ON", {("MN", 333): {"to": "example-river-xx", "on": ["example-river-xx"],
+                                                          "why": "invented"}})
+    t = _target("example-fork-river-xx")
+    acts = N.recheck_remainders(rows, [t], _existing(), "2026-11-15")
+    assert rows == [] and acts[0]["action"] == "dropped" and t["slugs"] == ["example-river-xx"]
+
+
+@pytest.mark.parametrize("gnis,to,on", [
+    (76253, "bayou-bartholomew-ar", {"bartholomew-bayou-ar"}),                       # P2-1, the second record
+    (78762, "white-river-ar", {"bull-shoals-lake-ar", "beaver-lake-ar"}),            # P2-2, the reservoirs
+    (558280, "ouachita-river-ar", {"lake-ouachita-ar"}),                             # P2-2
+    (55029, "south-spring-river-ar", set()),                                        # P2-3, the same river renamed
+])
+def test_arkansas_rulings_are_recorded(gnis, to, on):
+    r = N.REMAINDER_ON[("AR", gnis)]
+    assert r["to"] == to and on | {to} <= set(r["on"])
+
+
+AR_GONE = {"south-fork-spring-river-ar": "south-spring-river-ar", "white-river-des-arc-ar": "white-river-ar",
+           "ouachita-river-hot-springs-ar": "ouachita-river-ar"}
+AR_ROWS_OFF = {**AR_GONE, "bayou-bartholomew-bowie-ar": "bayou-bartholomew-ar"}
+
+
+def test_a_recut_with_rows_follow_moves_its_rows_and_keeps_the_true_remainder(monkeypatch):
+    monkeypatch.setattr(N, "REMAINDER_ON", {("MN", 111): {"to": "example-river-xx", "on": ["example-river-xx"],
+                                                          "rows_follow": True, "why": "invented"}})
+    rows = [{"slug": "example-river-east-xx", "name": "Example River", "kind": "river", "state": "MN",
+             "gnis_id": "111", "covers_part_of": "example-river-stub-xx",
+             "geometry": {"type": "MultiLineString", "coordinates": [
+                 [[-95.0, 46.0], [-95.0, 46.45]], [[-94.5, 47.0], [-94.5, 47.09]]]}}]
+    t = _target("example-river-east-xx")
+    acts = N.recheck_remainders(rows, [t], _existing(), "2026-11-15")
+    assert [a["action"] for a in acts] == ["recut"] and 9.0 < rows[0]["length_km"] < 11.0
+    assert t["slugs"] == ["example-river-xx"] and set(t["reach_slugs"].values()) == {"example-river-xx"}
+
+
+def test_arkansas_copies_are_gone_and_their_rows_follow():
+    nhd = json.loads((ROOT / "data" / "waters-nhd.json").read_text())
+    slugs = {w["slug"] for w in nhd["waters"]}
+    assert not set(AR_GONE) & slugs
+    bb = [w for w in nhd["waters"] if w["slug"] == "bayou-bartholomew-bowie-ar"]
+    assert not bb or bb[0]["length_km"] < 30                     # only the headwaters, the true remainder, stay
+    for t in nhd["targets"]:                      # no target row names a copy or the bayou's recut headwaters
+        assert not set(AR_ROWS_OFF) & (set(t.get("slugs") or []) | set((t.get("reach_slugs") or {}).values()))
+    from common import load_outfall_registry       # and no outfall is tied to one
+    assert not [o for o in load_outfall_registry(ROOT / "data") if o.get("water_slug") in AR_ROWS_OFF]
+
