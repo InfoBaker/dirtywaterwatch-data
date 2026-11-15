@@ -63986,7 +63986,9 @@
   "operator": "SC DES",
   "operator_type": "state",
   "role": "advisories",
-  "event_types": [],
+  "event_types": [
+   "beach_advisory"
+  ],
   "waters_covered": null,
   "water_slugs": [],
   "url": "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0",
@@ -64013,11 +64015,11 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "The layer answered (23 sites: name, station, point; contact and telephone fields not read) but carries no date or status and DES does not say what a site on it means; registered as a channel, not read as advisories until DES confirms (owner question).",
+  "status": "used",
+  "status_reason": "Read by pipeline/ingest/sc_des_advisories.py: 23 sites on 2026-11-15 (OBJECTID, Name, Station, point), each a record of DES's undated listing at its own point, from the first read that listed it; the first complete read without a site ends it at that read.",
   "verified": "fetched",
-  "checked": "2026-11-14",
-  "notes": "Contact field may carry a person: do not ingest.",
+  "checked": "2026-11-15",
+  "notes": "Contact and Phone fields never requested; the layer has no description, date or status field.",
   "area": "sc"
  },
  {

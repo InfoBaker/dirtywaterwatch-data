@@ -198,6 +198,9 @@ POLL_END_HORIZON_SOURCES |= {"pr-drna-beach-notices"}
 # Idaho: DEQ's CyanoHAB table, read by polling; an advisory or a Watch listed again after an unread gap carries
 # raw.listed_periods (ingest/id_deq_cyanohab.py), each period coloured on its own (Astra IA/ID review 2026-11-15 P2-3)
 POLL_END_HORIZON_SOURCES |= {"id-deq-cyanohab-risk-table"}
+# DES's "Swimming Advisory" layer (river and lake sites, ingest/sc_des_advisories.py): an end seen only at a read, the
+# same limit as DES's beach layer; keyed on the source, so no other feed changes
+POLL_END_HORIZON_SOURCES |= {"sc-des-freshwater-swim-advisories"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
