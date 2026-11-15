@@ -5,7 +5,8 @@ provenance (the public's report or the operator's own) and the Department's find
 Source
   The Clean Water Commission's page (https://dnr.mo.gov/commissions-boards-councils/clean-water-commission, registry
   mo-dnr-concern-reports) links one document page a month ("Water Pollution Control Concerns Report, February 2026",
-  /document-search/water-pollution-control-concerns-report-<month>-<year>); each document page links its PDF ("Water
+  /document-search/water-pollution-control-concerns-report-<month>-<year>); each document page carries its PDF (since
+  2026-11 only in the PDF viewer frame's data-src; a page with none fails the run) ("Water
   Pollution Control Detail Report, Concerns Investigated Between February 01, 2026 and February 28, 2026") and shows a
   "Last revised" date. The PDF is generated text (no scan) and is read with the pure-Python reader
   (ingest/nh_pdftext.py); each concern is a block: region, date received, investigation date, suspected source,
@@ -67,7 +68,7 @@ INDEX = "https://dnr.mo.gov/commissions-boards-councils/clean-water-commission"
 BASE = "https://dnr.mo.gov"
 AUTHORITY = "Missouri Department of Natural Resources, Water Pollution Control concern report"
 DOC_LINK = re.compile(r'href="(/document-search/water-pollution-control-concerns-report-[a-z]+-\d{4})"')
-PDF_LINK = re.compile(r'href="([^"]+\.pdf)"', re.I)
+PDF_LINK = re.compile(r'(?:href|data-src)="([^"]+\.pdf)"', re.I)  # the viewer frame carries it in data-src
 REVISED = re.compile(r"Last revised.*?(\d{2}/\d{2}/\d{4})", re.S)
 SEWER_TYPE = "bypass or sewer overflow"
 PRIVATE_TYPE = "single family residence"
@@ -405,8 +406,8 @@ def fetch(prev: list[dict], read: list | None = None) -> list[tuple[bytes, dict]
         page = requests.get(BASE + path, headers=HEADERS, timeout=(20, 120))
         page.raise_for_status()
         pdfs = [u for u in PDF_LINK.findall(page.text) if "/files/" in u]
-        if not pdfs:
-            continue
+        if not pdfs:                                      # a format change fails the run, never empties it
+            raise ValueError(f"concern report page has no PDF link: {path}")
         pdf_url = html.unescape(pdfs[0])
         pdf_url = pdf_url if pdf_url.startswith("http") else BASE + pdf_url
         rev = REVISED.search(page.text)
