@@ -250,7 +250,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-baring-north-wwtf-dnr-report",
-   "name": "Baring North WWTF",
+   "name": "Baring North WWTF (permit MO0056642)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -264,7 +264,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Baring North WWTF reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Baring North WWTF (permit MO0056642) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -896,7 +896,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-cape-girardeau-municipal-wwtf-dnr-report",
-   "name": "Cape Girardeau Municipal WWTF",
+   "name": "Cape Girardeau Municipal WWTF (permit MO0136328)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -910,7 +910,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Cape Girardeau Municipal WWTF reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Cape Girardeau Municipal WWTF (permit MO0136328) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -1040,7 +1040,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-center-creek-201-wastewater-dnr-report",
-   "name": "Center Creek 201 Wastewater",
+   "name": "Center Creek 201 Wastewater (permit MO0040185)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -1054,7 +1054,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Center Creek 201 Wastewater reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Center Creek 201 Wastewater (permit MO0040185) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -13016,7 +13016,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-dcsd-treatment-plant-1-dnr-report",
-   "name": "DCSD Treatment Plant 1",
+   "name": "DCSD Treatment Plant 1 (permit MO0085472)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -13030,7 +13030,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: DCSD Treatment Plant 1 reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: DCSD Treatment Plant 1 (permit MO0085472) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -14281,7 +14281,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-howardville-wastewater-st-dnr-report",
-   "name": "Howardville Wastewater St",
+   "name": "Howardville Wastewater St (permit MO0092321)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -14295,7 +14295,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Howardville Wastewater St reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Howardville Wastewater St (permit MO0092321) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -14305,7 +14305,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-humphreys-wwtf-dnr-report",
-   "name": "Humphreys WWTF",
+   "name": "Humphreys WWTF (permit MO0119750)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -14319,7 +14319,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Humphreys WWTF reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Humphreys WWTF (permit MO0119750) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -18474,7 +18474,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-salisbury-s-2-4-ac-lagoon-dnr-report",
-   "name": "Salisbury S 2.4 Ac Lagoon",
+   "name": "Salisbury S 2.4 Ac Lagoon (permit MO0025321)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -18488,7 +18488,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Salisbury S 2.4 Ac Lagoon reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Salisbury S 2.4 Ac Lagoon (permit MO0025321) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {

@@ -176,7 +176,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "ks-beloit-water-treatment-plant-kdhe-report",
-   "name": "Beloit Water Treatment Plant",
+   "name": "Beloit Water Treatment Plant (permit KS0101541)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -190,7 +190,7 @@
    "sources": [
     "ks-law-kar-28-16-27"
    ],
-   "note": "No web channel found: Beloit Water Treatment Plant reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). No public notice is required by statute or rule. (research/ks/report.md §2.1)",
+   "note": "No web channel found: Beloit Water Treatment Plant (permit KS0101541) reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/ks/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -9858,7 +9858,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "ks-liberal-wastewater-plant-kdhe-report",
-   "name": "Liberal Wastewater Plant",
+   "name": "Liberal Wastewater Plant (permit KS0080870)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -9872,7 +9872,7 @@
    "sources": [
     "ks-law-kar-28-16-27"
    ],
-   "note": "No web channel found: Liberal Wastewater Plant reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). No public notice is required by statute or rule. (research/ks/report.md §2.1)",
+   "note": "No web channel found: Liberal Wastewater Plant (permit KS0080870) reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/ks/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -9906,7 +9906,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "ks-louisburg-wastewater-plant-1-kdhe-report",
-   "name": "Louisburg Wastewater Plant #1",
+   "name": "Louisburg Wastewater Plant #1 (permit KS0024856)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -9920,7 +9920,7 @@
    "sources": [
     "ks-law-kar-28-16-27"
    ],
-   "note": "No web channel found: Louisburg Wastewater Plant #1 reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). No public notice is required by statute or rule. (research/ks/report.md §2.1)",
+   "note": "No web channel found: Louisburg Wastewater Plant #1 (permit KS0024856) reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/ks/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -9930,7 +9930,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "ks-louisburg-wastewater-plt-2-kdhe-report",
-   "name": "Louisburg Wastewater Plt #2",
+   "name": "Louisburg Wastewater Plt #2 (permit KS0087149)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -9944,7 +9944,7 @@
    "sources": [
     "ks-law-kar-28-16-27"
    ],
-   "note": "No web channel found: Louisburg Wastewater Plt #2 reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). No public notice is required by statute or rule. (research/ks/report.md §2.1)",
+   "note": "No web channel found: Louisburg Wastewater Plt #2 (permit KS0087149) reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/ks/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -11340,7 +11340,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "ks-wichita-four-mile-crk-wwtp-kdhe-report",
-   "name": "Wichita Four Mile Crk WWTP",
+   "name": "Wichita Four Mile Crk WWTP (permit KS0081973)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -11354,7 +11354,7 @@
    "sources": [
     "ks-law-kar-28-16-27"
    ],
-   "note": "No web channel found: Wichita Four Mile Crk WWTP reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). No public notice is required by statute or rule. (research/ks/report.md §2.1)",
+   "note": "No web channel found: Wichita Four Mile Crk WWTP (permit KS0081973) reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/ks/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -11460,7 +11460,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "ks-wilson-wastewater-plant-kdhe-report",
-   "name": "Wilson Wastewater Plant",
+   "name": "Wilson Wastewater Plant (permit KS0096954)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -11474,7 +11474,7 @@
    "sources": [
     "ks-law-kar-28-16-27"
    ],
-   "note": "No web channel found: Wilson Wastewater Plant reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). No public notice is required by statute or rule. (research/ks/report.md §2.1)",
+   "note": "No web channel found: Wilson Wastewater Plant (permit KS0096954) reports an emergency or accidental sewage discharge that its permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/ks/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {

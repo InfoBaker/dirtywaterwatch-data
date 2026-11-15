@@ -451676,9 +451676,9 @@
  },
  {
   "id": "mo-baring-north-wwtf",
-  "name": "Baring North WWTF",
-  "short_name": "Baring North WWTF",
-  "legal_form": "city",
+  "name": "Baring North WWTF (permit MO0056642)",
+  "short_name": "Baring North WWTF (permit MO0056642)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0056642",
@@ -451691,13 +451691,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Baring"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Baring North WWTF (MO0056642).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -452574,9 +452572,9 @@
  },
  {
   "id": "mo-cape-girardeau-municipal-wwtf",
-  "name": "Cape Girardeau Municipal WWTF",
-  "short_name": "Cape Girardeau Municipal WWTF",
-  "legal_form": "city",
+  "name": "Cape Girardeau Municipal WWTF (permit MO0136328)",
+  "short_name": "Cape Girardeau Municipal WWTF (permit MO0136328)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0136328",
@@ -452590,13 +452588,11 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Cape Girardeau"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Cape Girardeau WWTP (MO0136328).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -452761,9 +452757,9 @@
  },
  {
   "id": "mo-center-creek-201-wastewater",
-  "name": "Center Creek 201 Wastewater",
-  "short_name": "Center Creek 201 Wastewater",
-  "legal_form": "city",
+  "name": "Center Creek 201 Wastewater (permit MO0040185)",
+  "short_name": "Center Creek 201 Wastewater (permit MO0040185)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0040185",
@@ -452776,13 +452772,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Webb City"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Center Creek 201 WWTP (MO0040185).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -469323,9 +469317,9 @@
  },
  {
   "id": "mo-dcsd-treatment-plant-1",
-  "name": "DCSD Treatment Plant 1",
-  "short_name": "DCSD Treatment Plant 1",
-  "legal_form": "city",
+  "name": "DCSD Treatment Plant 1 (permit MO0085472)",
+  "short_name": "DCSD Treatment Plant 1 (permit MO0085472)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0085472",
@@ -469340,13 +469334,11 @@
   "water_slugs": [],
   "outfall_count": 4,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 4 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "St. Charles"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Dcsd Treatment Plant 1 (MO0085472).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -470696,9 +470688,9 @@
  },
  {
   "id": "mo-howardville-wastewater-st",
-  "name": "Howardville Wastewater St",
-  "short_name": "Howardville Wastewater St",
-  "legal_form": "city",
+  "name": "Howardville Wastewater St (permit MO0092321)",
+  "short_name": "Howardville Wastewater St (permit MO0092321)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0092321",
@@ -470711,13 +470703,11 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Howardville"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Howardville WWTF (MO0092321).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -470729,9 +470719,9 @@
  },
  {
   "id": "mo-humphreys-wwtf",
-  "name": "Humphreys WWTF",
-  "short_name": "Humphreys WWTF",
-  "legal_form": "city",
+  "name": "Humphreys WWTF (permit MO0119750)",
+  "short_name": "Humphreys WWTF (permit MO0119750)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0119750",
@@ -470744,13 +470734,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Humphreys"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Humphreys WWTF (MO0119750).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -476122,9 +476110,9 @@
  },
  {
   "id": "mo-salisbury-s-2-4-ac-lagoon",
-  "name": "Salisbury S 2.4 Ac Lagoon",
-  "short_name": "Salisbury S 2.4 Ac Lagoon",
-  "legal_form": "city",
+  "name": "Salisbury S 2.4 Ac Lagoon (permit MO0025321)",
+  "short_name": "Salisbury S 2.4 Ac Lagoon (permit MO0025321)",
+  "legal_form": "facility (permittee not named)",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0025321",
@@ -476137,13 +476125,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Salisbury"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Salisbury S 2.4 Ac Lagoon (MO0025321).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -480483,9 +480469,9 @@
  },
  {
   "id": "ks-beloit-water-treatment-plant",
-  "name": "Beloit Water Treatment Plant",
-  "short_name": "Beloit Water Treatment Plant",
-  "legal_form": "city",
+  "name": "Beloit Water Treatment Plant (permit KS0101541)",
+  "short_name": "Beloit Water Treatment Plant (permit KS0101541)",
+  "legal_form": "facility (permittee not named)",
   "state": "KS",
   "kind": "plant",
   "npdes_permit": "KS0101541",
@@ -480498,13 +480484,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
+  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Beloit"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Beloit Water Treatment Plant (KS0101541).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -493471,9 +493455,9 @@
  },
  {
   "id": "ks-liberal-wastewater-plant",
-  "name": "Liberal Wastewater Plant",
-  "short_name": "Liberal Wastewater Plant",
-  "legal_form": "city",
+  "name": "Liberal Wastewater Plant (permit KS0080870)",
+  "short_name": "Liberal Wastewater Plant (permit KS0080870)",
+  "legal_form": "facility (permittee not named)",
   "state": "KS",
   "kind": "plant",
   "npdes_permit": "KS0080870",
@@ -493486,13 +493470,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
+  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Liberal"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: City of Liberal (KS0080870).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -493537,9 +493519,9 @@
  },
  {
   "id": "ks-louisburg-wastewater-plant-1",
-  "name": "Louisburg Wastewater Plant #1",
-  "short_name": "Louisburg Wastewater Plant #1",
-  "legal_form": "city",
+  "name": "Louisburg Wastewater Plant #1 (permit KS0024856)",
+  "short_name": "Louisburg Wastewater Plant #1 (permit KS0024856)",
+  "legal_form": "facility (permittee not named)",
   "state": "KS",
   "kind": "plant",
   "npdes_permit": "KS0024856",
@@ -493552,13 +493534,11 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
+  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Louisburg"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Louisburg Mwtp #1 (KS0024856).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -493570,9 +493550,9 @@
  },
  {
   "id": "ks-louisburg-wastewater-plt-2",
-  "name": "Louisburg Wastewater Plt #2",
-  "short_name": "Louisburg Wastewater Plt #2",
-  "legal_form": "city",
+  "name": "Louisburg Wastewater Plt #2 (permit KS0087149)",
+  "short_name": "Louisburg Wastewater Plt #2 (permit KS0087149)",
+  "legal_form": "facility (permittee not named)",
   "state": "KS",
   "kind": "plant",
   "npdes_permit": "KS0087149",
@@ -493585,13 +493565,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
+  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Louisburg"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Louisburg - Plant #2 (KS0087149).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -495342,9 +495320,9 @@
  },
  {
   "id": "ks-wichita-four-mile-crk-wwtp",
-  "name": "Wichita Four Mile Crk WWTP",
-  "short_name": "Wichita Four Mile Crk WWTP",
-  "legal_form": "city",
+  "name": "Wichita Four Mile Crk WWTP (permit KS0081973)",
+  "short_name": "Wichita Four Mile Crk WWTP (permit KS0081973)",
+  "legal_form": "facility (permittee not named)",
   "state": "KS",
   "kind": "plant",
   "npdes_permit": "KS0081973",
@@ -495357,13 +495335,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
+  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Wichita"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Wichita Four Mile Crk WWTP Alan King (KS0081973).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -495501,9 +495477,9 @@
  },
  {
   "id": "ks-wilson-wastewater-plant",
-  "name": "Wilson Wastewater Plant",
-  "short_name": "Wilson Wastewater Plant",
-  "legal_form": "city",
+  "name": "Wilson Wastewater Plant (permit KS0096954)",
+  "short_name": "Wilson Wastewater Plant (permit KS0096954)",
+  "legal_form": "facility (permittee not named)",
   "state": "KS",
   "kind": "plant",
   "npdes_permit": "KS0096954",
@@ -495516,13 +495492,11 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
-  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually.",
+  "notification_channel": "K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not provide for to be reported to the Kansas Department of Health and Environment immediately, and a planned bypass to be approved at least seven days ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. KDHE issues a stream advisory by news release when it judges one needed. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [
-   "Wilson"
-  ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: City of Wilson (KS0096954).",
+  "towns": [],
+  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
