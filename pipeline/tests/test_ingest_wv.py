@@ -278,3 +278,12 @@ def test_observation_at_utc_midnight_is_that_date():
     assert (utc, day) == ("2026-07-01T00:00:00Z", "2026-07-01")
     utc, day = H.observed({"Date_Observed": 1782876600000})      # 2026-07-01T03:30:00Z: June 30 in Eastern time
     assert day == "2026-06-30" and utc == "2026-07-01T03:30:00Z"
+
+
+def test_state_text_counts_follow_the_outlet_file():
+    doc = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
+    open_rows = [r for r in doc["outfalls"] if r["outfall_kind"] == "cso" and not r["dep_outlet_end"]]
+    named = sum(1 for r in open_rows if not r.get("receiving_water_from") and r["receiving_water_echo"])
+    t = (ROOT / "research" / "wv" / "state-text.md").read_text()
+    assert f"({named} of the {len(open_rows)} open outlets)" in t
+    assert f"{len(open_rows)} open combined sewer outlets" in t

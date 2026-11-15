@@ -140,7 +140,6 @@ TOTAL_NOTES = {
     "me-dep-cso-annual": "Maine's Department of Environmental Protection reports one total per community and year, for all of its combined sewer outlets; the total is shown in full on each water the community's outlets reach. Event-days: calendar days with any combined sewer discharge in the community.",
     "echo-cso-dmr-monthly": "Monthly totals each operator files with the U.S. Environmental Protection Agency for each outlet (discharge monitoring reports). They describe the same discharges the state notices report, so they are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
     "nh-permittees": "Portsmouth publishes monthly combined sewer overflow volumes for each outlet, not individual discharges.",
-    "wv-echo-dmr-cso": "Months in which a West Virginia operator reported flow leaving a combined sewer outlet on its monthly discharge monitoring report (published by the U.S. Environmental Protection Agency weeks after the month); the figure is a rate, not a count or a volume. They are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
 }
 MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                "November", "December"]
