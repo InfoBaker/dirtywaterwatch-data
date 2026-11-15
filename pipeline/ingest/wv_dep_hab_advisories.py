@@ -27,7 +27,9 @@ Records (a map of what is in effect, read as a snapshot)
   - Placement by the agency's own geometry only: the marker is a point's position, the point half way along a
     segment, or an interior point of an area (never a vertex mean, which can fall outside a concave area), rounded to
     three decimals (coord_source 'agency_layer'); raw.geometry_kind and raw.marker_basis say which. DEP's segment or
-    area itself is kept in raw.agency_extent (GeoJSON, three decimals). No water name is invented.
+    area itself is kept in raw.agency_extent (GeoJSON, three decimals); when it has several parts, the status build
+    places the advisory on the water of each part by that part's own interior point (build/status.py
+    extent_part_points), and each water's colour follows the whole-water and river rules. No water name is invented.
 
 Run from pipeline/: python -m ingest.wv_dep_hab_advisories [--file saved.json] [--at 2026-11-14T12:00:00Z]
 Cadence: with the refresh (daily is enough; the map changes rarely).
