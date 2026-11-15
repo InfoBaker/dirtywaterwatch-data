@@ -1,0 +1,780 @@
+{
+ "about": "Water names in Iowa's records that data/receiving-waters-national.json does not hold for IA: the receiving streams the Department of Natural Resources' field offices entered on the incoming reports read for the major municipal facilities, and the waters the Department's news releases name; Waterloo's notices name no water. One row per name and county (the county the record gives), with the number of reports, how many are open now, and the operators; the reports give no point. Records naming no water are left out (by_reason). Written by scripts/ia_id_report_water_names.py.",
+ "state": "IA",
+ "waters": 51,
+ "reports": 61,
+ "reports_on_listed_waters": 73,
+ "by_reason": {
+  "Waterloo's notices name a street, not a water": 17,
+  "no water named": 226,
+  "the report names no one water (\"multiple, see report\")": 1,
+  "the report's receiving stream is not a water (None, Varies, unknown)": 4
+ },
+ "rows": [
+  {
+   "name": "North River",
+   "reports": 3,
+   "county": "Warren County",
+   "operators": [
+    "Carlisle City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 3
+   },
+   "open": 0,
+   "as_typed": [
+    "North River"
+   ]
+  },
+  {
+   "name": "Catfish Creek",
+   "reports": 2,
+   "county": "Dubuque County",
+   "operators": [
+    "City Of Dubuque Water Pollution Control Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Catfish Creek"
+   ]
+  },
+  {
+   "name": "Creek tributary to Des Moines River",
+   "reports": 2,
+   "county": "Wapello County",
+   "operators": [
+    "Ottumwa City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Creek tributary to Des Moines River"
+   ]
+  },
+  {
+   "name": "Elk Creek/Cardinal Creek",
+   "reports": 2,
+   "county": "Jasper County",
+   "operators": [
+    "Newton Water Pollution Control Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Elk Creek/Cardinal Creek"
+   ]
+  },
+  {
+   "name": "Mississippi",
+   "reports": 2,
+   "county": "Des Moines County",
+   "operators": [
+    "Burlington City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Mississippi"
+   ]
+  },
+  {
+   "name": "Spring Branch Creek",
+   "reports": 2,
+   "county": "Chickasaw County",
+   "operators": [
+    "New Hampton City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Spring Branch Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Creek",
+   "reports": 2,
+   "county": "Lucas County",
+   "operators": [
+    "Chariton City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Creek",
+   "reports": 2,
+   "county": "Mahaska County",
+   "operators": [
+    "Oskaloosa City Of Stp (Southwest)"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed Creek"
+   ]
+  },
+  {
+   "name": "Wapsipinicon Creek",
+   "reports": 2,
+   "county": "Muscatine County",
+   "operators": [
+    "West Liberty City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 2
+   },
+   "open": 0,
+   "as_typed": [
+    "Wapsipinicon Creek"
+   ]
+  },
+  {
+   "name": "Bacon Creek Channel",
+   "reports": 1,
+   "county": "Woodbury County",
+   "operators": [
+    "City of Sioux City"
+   ],
+   "sources": {
+    "ia-dnr-news-releases": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Bacon Creek Channel"
+   ]
+  },
+  {
+   "name": "Catfish creek",
+   "reports": 1,
+   "county": "Dubuque County",
+   "operators": [
+    "City Of Dubuque Water Pollution Control Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Catfish creek"
+   ]
+  },
+  {
+   "name": "Cedar",
+   "reports": 1,
+   "county": "Black Hawk County",
+   "operators": [
+    "Waterloo City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Cedar"
+   ]
+  },
+  {
+   "name": "Cedar",
+   "reports": 1,
+   "county": "Linn County",
+   "operators": [
+    "Cedar Rapids Water Pollution Control"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Cedar"
+   ]
+  },
+  {
+   "name": "Cherry Creek, Elk Creek, Cardinal Creek",
+   "reports": 1,
+   "county": "Jasper County",
+   "operators": [
+    "Newton Water Pollution Control Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Cherry Creek, Elk Creek, Cardinal Creek"
+   ]
+  },
+  {
+   "name": "Competine Creek",
+   "reports": 1,
+   "county": "Marion County",
+   "operators": [
+    "Knoxville City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Competine Creek"
+   ]
+  },
+  {
+   "name": "Competine creek",
+   "reports": 1,
+   "county": "Marion County",
+   "operators": [
+    "Knoxville City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Competine creek"
+   ]
+  },
+  {
+   "name": "Creek to Miss River",
+   "reports": 1,
+   "county": "Des Moines County",
+   "operators": [
+    "Burlington City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Creek to Miss River"
+   ]
+  },
+  {
+   "name": "Duck Creek",
+   "reports": 1,
+   "county": "Scott County",
+   "operators": [
+    "Davenport City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Duck Creek"
+   ]
+  },
+  {
+   "name": "Goose Creek",
+   "reports": 1,
+   "county": "Scott County",
+   "operators": [
+    "Davenport City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Goose Creek"
+   ]
+  },
+  {
+   "name": "Heather Branch",
+   "reports": 1,
+   "county": "Henry County",
+   "operators": [
+    "Mount Pleasant City Of Stp (main)"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Heather Branch"
+   ]
+  },
+  {
+   "name": "Kitty Creek, but cannot verify it entered stream",
+   "reports": 1,
+   "county": "Jones County",
+   "operators": [
+    "Monticello City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Kitty Creek, but cannot verify it entered stream"
+   ]
+  },
+  {
+   "name": "Little Whitebreast Creek",
+   "reports": 1,
+   "county": "Lucas County",
+   "operators": [
+    "Chariton City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Little Whitebreast Creek"
+   ]
+  },
+  {
+   "name": "Lyons Creek to Boone River",
+   "reports": 1,
+   "county": "Hamilton County",
+   "operators": [
+    "Webster City, City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Lyons Creek to Boone River"
+   ]
+  },
+  {
+   "name": "Middle Platte River",
+   "reports": 1,
+   "county": "Union County",
+   "operators": [
+    "Creston City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Middle Platte River"
+   ]
+  },
+  {
+   "name": "Mississippi",
+   "reports": 1,
+   "county": "Clinton County",
+   "operators": [
+    "Clinton City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Mississippi"
+   ]
+  },
+  {
+   "name": "North Fork Maquoketa",
+   "reports": 1,
+   "county": "Dubuque County",
+   "operators": [
+    "Dyersville City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "North Fork Maquoketa"
+   ]
+  },
+  {
+   "name": "North River",
+   "reports": 1,
+   "county": "Polk County",
+   "operators": [
+    "Des Moines Metropolitan WRF"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "North River"
+   ]
+  },
+  {
+   "name": "Platt River",
+   "reports": 1,
+   "county": "Union County",
+   "operators": [
+    "Creston City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Platt River"
+   ]
+  },
+  {
+   "name": "Shelton Marsh",
+   "reports": 1,
+   "county": "Lucas County",
+   "operators": [
+    "Chariton City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Shelton Marsh"
+   ]
+  },
+  {
+   "name": "Soldier Creek",
+   "reports": 1,
+   "county": "Webster County",
+   "operators": [
+    "Fort Dodge City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Soldier Creek"
+   ]
+  },
+  {
+   "name": "South River",
+   "reports": 1,
+   "county": "Warren County",
+   "operators": [
+    "INDIANOLA WATER RESOURCE RECOVERY FACILITY"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "South River"
+   ]
+  },
+  {
+   "name": "Storm Sewer - Floyd River",
+   "reports": 1,
+   "county": "Woodbury County",
+   "operators": [
+    "Sioux City, City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Storm Sewer - Floyd River"
+   ]
+  },
+  {
+   "name": "Suanders Branch Creek",
+   "reports": 1,
+   "county": "Henry County",
+   "operators": [
+    "Mount Pleasant City Of Stp (main)"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Suanders Branch Creek"
+   ]
+  },
+  {
+   "name": "Thunder Creek",
+   "reports": 1,
+   "county": "Marion County",
+   "operators": [
+    "Pella City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Thunder Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Creek",
+   "reports": 1,
+   "county": "Poweshiek County",
+   "operators": [
+    "Grinnell City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Creek to Prairie Creek",
+   "reports": 1,
+   "county": "Linn County",
+   "operators": [
+    "Cedar Rapids Water Pollution Control"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed Creek to Prairie Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Creek to Silver Creek",
+   "reports": 1,
+   "county": "Clinton County",
+   "operators": [
+    "Dewitt City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed Creek to Silver Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to the Platte River",
+   "reports": 1,
+   "county": "Union County",
+   "operators": [
+    "Creston City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed Tributary to the Platte River"
+   ]
+  },
+  {
+   "name": "Unnamed creek to Nishnabotna River",
+   "reports": 1,
+   "county": "Cass County",
+   "operators": [
+    "Atlantic City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed creek to Nishnabotna River"
+   ]
+  },
+  {
+   "name": "Unnamed to Spring",
+   "reports": 1,
+   "county": "Buchanan County",
+   "operators": [
+    "City Of Jesup - South Wastewater Treatment Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed to Spring"
+   ]
+  },
+  {
+   "name": "Unnamed to Spring Creek",
+   "reports": 1,
+   "county": "Buchanan County",
+   "operators": [
+    "City Of Jesup - South Wastewater Treatment Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed to Spring Creek"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to East Boyer River",
+   "reports": 1,
+   "county": "Crawford County",
+   "operators": [
+    "Denison Municipal Utilities-stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Unnamed tributary to East Boyer River"
+   ]
+  },
+  {
+   "name": "Walton Lake",
+   "reports": 1,
+   "county": "Jefferson County",
+   "operators": [
+    "Fairfield, City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Walton Lake"
+   ]
+  },
+  {
+   "name": "Wapsi Creek",
+   "reports": 1,
+   "county": "Muscatine County",
+   "operators": [
+    "West Liberty City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Wapsi Creek"
+   ]
+  },
+  {
+   "name": "Wapsipinonoc",
+   "reports": 1,
+   "county": "Muscatine County",
+   "operators": [
+    "West Liberty City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Wapsipinonoc"
+   ]
+  },
+  {
+   "name": "West Lake Okoboji",
+   "reports": 1,
+   "county": "Dickinson County",
+   "operators": [
+    "Iowa Great Lakes Sanitary District Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "West Lake Okoboji"
+   ]
+  },
+  {
+   "name": "ditch to Sugar Creek",
+   "reports": 1,
+   "county": "Wapello County",
+   "operators": [
+    "Ottumwa City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "ditch to Sugar Creek"
+   ]
+  },
+  {
+   "name": "south fork Catfish Creek",
+   "reports": 1,
+   "county": "Dubuque County",
+   "operators": [
+    "City Of Dubuque Water Pollution Control Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "south fork Catfish Creek"
+   ]
+  },
+  {
+   "name": "unnamed creek to camp creek",
+   "reports": 1,
+   "county": "Polk County",
+   "operators": [
+    "Mitchellville City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "unnamed creek to camp creek"
+   ]
+  },
+  {
+   "name": "unnamed stream to Spring Creek",
+   "reports": 1,
+   "county": "Buchanan County",
+   "operators": [
+    "City Of Jesup - South Wastewater Treatment Plant"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "unnamed stream to Spring Creek"
+   ]
+  },
+  {
+   "name": "unnamed tributary of Pheasant Creek",
+   "reports": 1,
+   "county": "Scott County",
+   "operators": [
+    "Davenport City Of Stp"
+   ],
+   "sources": {
+    "ia-dnr-focomp-incoming-reports": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "unnamed tributary of Pheasant Creek"
+   ]
+  }
+ ]
+}
