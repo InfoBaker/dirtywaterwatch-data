@@ -191,6 +191,9 @@ CONFIRM_DAYS = 14
 # advisory feeds whose end is seen only by polling: the colour stops CONFIRM_DAYS after the last read that showed the
 # advisory, however late its end is seen (verify2 P1-1; Delaware's map and DES's beach and bloom layers)
 POLL_END_HORIZON_SOURCES = {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab"}
+# Puerto Rico: a DRNA beach advisory whose end is the first notice seen without the beach (ingest/pr_drna_beaches.py,
+# raw.ended_at_precision "poll"); keyed on the source, so no other feed changes (Astra PR review P1-1)
+POLL_END_HORIZON_SOURCES |= {"pr-drna-beach-notices"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}

@@ -48,12 +48,15 @@ def test_the_sample_date_is_never_the_start():
         assert r["started_at"] == r["raw"]["notices"][0]["published"]
 
 
-def test_an_advisory_ends_at_the_next_notice_that_does_not_list_it():
+def test_an_omission_is_not_a_lift_its_end_has_poll_precision_and_cites_the_notice():
+    # Astra P1-1: a later list without the beach is the first notice seen without it, not DRNA's lift time
     recs, _ = _records()
     r = recs["RW-23:105202"]
     assert r["status"] == "advisory_lifted" and r["ended_at"] == "2026-11-13T19:07:56Z"
-    assert r["raw"]["ended_at_precision"] == "minute" and "does not list this beach" in r["raw"]["end_basis"]
-    assert "_last_seen_in_source" not in r["raw"]
+    assert r["raw"]["ended_at_precision"] == "poll" and "no longer lists the beach" in r["raw"]["end_basis"]
+    assert "not a lift time" in r["raw"]["end_basis"] and r["raw"]["ended_by_notice"] == 105307
+    assert r["raw"]["end_url"] and r["raw"]["end_url"].startswith("https://www.drna.pr.gov/")
+    assert r["raw"]["_last_seen_in_source"] == "2026-11-06T16:39:10Z"     # the last notice that listed it
 
 
 def test_an_all_fit_notice_ends_every_open_advisory_and_an_unread_one_ends_none():
@@ -66,6 +69,7 @@ def test_an_all_fit_notice_ends_every_open_advisory_and_an_unread_one_ends_none(
     recs, _ = P.records(ns, AT)
     assert len(recs) == 2 and all(r["ended_at"] == "2026-11-02T12:00:00Z" for r in recs)
     assert all("fit for bathers" in r["raw"]["end_basis"] for r in recs)
+    assert all(r["raw"]["ended_at_precision"] == "minute" for r in recs)     # an explicit statement: DRNA's time
 
 
 def test_the_beachs_name_decides_a_wrong_station_number():
@@ -73,19 +77,19 @@ def test_the_beachs_name_decides_a_wrong_station_number():
     r = recs["RW-34:104868"]
     assert r["waterbody_text"] == "Playa Cabullón (Ponce)" and r["raw"]["listed_as"] == ["RW-30"]
     assert "is that of RW-34" in r["raw"]["station_note"] and r["lat"] == 17.969
-    assert P.station_of("RW-06", "Balneario de Patillas") == ("RW-6", None)
-    assert P.station_of("RWW-28", "Playa El Alambique")[0] == "RW-28"
-    assert P.station_of("RW14A", "Playa Mojacasabe")[0] == "RW-14"
-    assert P.station_of("RW-28", "Muelle de Arecibo")[0] == "RW-38"
-    assert P.station_of("RW-4", "Balneario Punta Santiago")[0] == "RW-4"
+    assert P.station_of("RW-06", "Balneario de Patillas", "Patillas") == ("RW-6", None)
+    assert P.station_of("RWW-28", "Playa El Alambique", "Carolina")[0] == "RW-28"
+    assert P.station_of("RW14A", "Playa Mojacasabe", "Cabo Rojo")[0] == "RW-14"
+    assert P.station_of("RW-28", "Muelle de Arecibo", "Arecibo")[0] == "RW-38"
+    assert P.station_of("RW-4", "Balneario Punta Santiago", "Humacao")[0] == "RW-4"
 
 
 def test_every_station_has_one_cited_point_rounded_to_three_decimals():
     assert len(P.STATIONS) == 36
-    for k, (name, town, wqx, lat, lon, rule) in P.STATIONS.items():
+    for k, (name, town, wqx, lat, lon, names) in P.STATIONS.items():
         assert 17.8 < lat < 18.6 and -67.3 < lon < -65.2, k
         assert round(lat, 3) == lat and round(lon, 3) == lon
-        assert re.search(rule, P.fold(name)), k
+        assert P.norm(name) in P.STATION_NAMES[k], k
     recs, _ = _records()
     for r in recs.values():
         assert r["coord_source"] == "station_point" and r["raw"]["point_url"].startswith(
@@ -104,7 +108,8 @@ def test_an_unknown_station_is_kept_with_no_point():
     post["content"] = {"rendered": post["content"]["rendered"].replace("Tropical Beach", "Playa Ejemplo").replace(
         "RW-31", "RW-99")}
     recs, _ = P.records([P.parse_notice(post)], AT)
-    assert len(recs) == 1 and recs[0]["lat"] is None and "not in DRNA's station table" in recs[0]["parse_error"]
+    assert len(recs) == 1 and recs[0]["lat"] is None and "not matched to DRNA's station table" in recs[0]["parse_error"]
+    assert "place on the map is not known" in recs[0]["raw"]["place_unknown"]
 
 
 def test_main_reads_saved_posts(tmp_path, monkeypatch):
