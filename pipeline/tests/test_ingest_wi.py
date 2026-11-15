@@ -298,9 +298,14 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["wi-mmsd-cso-notification-plan"]["barrier"] == "image_only"
     assert reg["wi-mmsd-rain-facility-page"]["records"] is False      # a counter, never an overflow
     assert reg["wi-superior-cso-page"]["monitored"] is True and reg["wi-superior-cso-page"]["records"] is False
-    # pages that can carry staff names are not fetched until a safe-field reader exists (Astra review P1-6)
+    # pages that can carry staff names are watched for availability only, with no text or body kept (Astra review
+    # P1-6; re-review 2026-11-15 P1-7, P2-11), and Milwaukee's beach page's bot wall is a barrier, not worked around
     for cid in ("wi-dnr-serts-open-spills", "wi-dnr-brrts-search", "wi-dnr-beach-health", "wi-dnr-beach-layer"):
-        assert reg[cid]["monitored"] is False and reg[cid]["records"] is False
+        assert reg[cid]["monitored"] is True and reg[cid]["records"] is False and reg[cid]["metadata_only"] is True
+        assert reg[cid]["availability_only"] is True
+    mb = reg["wi-milwaukee-health-beaches"]
+    assert mb["monitored"] is False and mb["unmonitored_reason"] == "bot_wall" and mb["barrier"] == "bot_wall"
+    assert "headers" not in mb
     assert not any(c["barrier"] == "print_only" for c in reg.values())
     named = {c["operator_id"] for c in reg.values() if c.get("legal_basis") and "122.38" in c["legal_basis"]}
     assert {"wi-mmsd", "wi-superior-sewage-disposal-system"} <= named   # every CSO permittee named
