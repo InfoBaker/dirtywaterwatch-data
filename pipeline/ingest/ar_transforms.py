@@ -77,8 +77,13 @@ PRIVATE_IMPACT = re.compile(r"affected\s+private\s+property|basement\s+backup", 
 INDUSTRY = re.compile(r"\b(packaging|kraft|paper|weyerhaeuser|brick|mine|gravel|arms|armtec|steel|foods|pilgrim|"
                       r"tyson|lumber|chemical|refin\w*|plastics?)\b", re.I)
 WATER_WORD = r"(?:Creek|River|Bayou|Lake|Branch|Slough|Reservoir|Fork|Run)"
-CAP = r"(?:Mc[A-Z][a-z]+|St\.|[A-Z][a-z']+|De|La)"         # no full stop: a sentence ends the name
-WATER_NAME = re.compile(rf"\b((?:{CAP}[ \t]+){{1,4}}{WATER_WORD}\b|Lake(?:[ \t]+{CAP}){{1,3}}\b)")
+# no full stop: a sentence ends the name; a hyphen joins words of one name ("Little-Sample Creek", verification P1-4)
+CAP = r"(?:(?:Mc[A-Z][a-z]+|[A-Z][a-z']+)(?:-(?:Mc[A-Z][a-z]+|[A-Z][a-z']+))*|St\.|De|La)"
+# no length cap: a long name is read whole and refused if too long to be one (MAX_NAME_WORDS), never cut short
+WATER_NAME = re.compile(rf"\b((?:{CAP}[ \t]+)+{WATER_WORD}\b|Lake(?:[ \t]+{CAP})+\b)")
+MAX_NAME_WORDS = 6
+CAPS_RUN = re.compile(r"\b[A-Z][A-Z'.]+(?:[ \t]+[A-Z][A-Z'.]+)+\b")
+WATER_WORD_RX = re.compile(rf"\b{WATER_WORD}\b", re.I)
 STREET_AFTER = re.compile(r"^\s*(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|circle|cir|court|ct|parkway|pkwy|"
                           r"loop|cove|cv|terrace|way|place|pl|trail|trl|estates|subdivision|park|apartments|"
                           r"manhole|lift|pump)\b", re.I)
@@ -95,8 +100,9 @@ STREETY = re.compile(r"\b(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|cir
                      r"loop|cove|cv|terrace|way|place|pl|trail|trl)\.?\s*$", re.I)
 
 
-QUALIFIER_BEFORE = re.compile(r"\b(little|middle|upper|lower|big|east|west|north|south)((?:\s+(?:fork|branch|prong))"
-                              r"(?:\s+of(?:\s+the)?)?)?\s+$", re.I)
+# a chain of qualifiers written before a name ("upper little Sample Creek", "west fork of the"): all of it stays
+QUALIFIER_BEFORE = re.compile(r"(?:\b(?:little|middle|upper|lower|big|east|west|north|south)(?:\s+(?:fork|branch|prong))?"
+                              r"(?:\s+of(?:\s+the)?)?[\s-]+)+$", re.I)
 # words a sentence goes on with after a lake's name ("Lake Hamilton Due to rain"): not part of it
 TRAIL_STOP = {"due", "used", "approximately", "approx", "was", "were", "from", "after", "near", "and", "the", "at",
               "on", "in", "to", "area", "about", "around", "with", "by"}
@@ -116,6 +122,8 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
     text = text or ""
     if text and not re.search(r"[a-z]", text):
         text = _title(text)
+    # a run of capitals inside mixed text ("overflow into TOWN CREEK") is read as a name when it holds a water word
+    text = CAPS_RUN.sub(lambda m: _title(m.group(0)) if WATER_WORD_RX.search(m.group(0)) else m.group(0), text)
     names, unused = [], []
     for m in WATER_NAME.finditer(text):
         words = m.group(1).split()
@@ -125,6 +133,9 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
             while len(words) > 2 and words[-1].lower().strip(".,") in TRAIL_STOP:
                 words.pop()
         cand = " ".join(words).strip(" .,;")
+        if len(words) > MAX_NAME_WORDS:
+            unused.append(cand)                  # too long to be one name: refused, never shortened
+            continue
         if STREET_AFTER.match(text[m.end():]) or (words and STREET_AFTER.match(words[-1])):
             unused.append(cand)                  # "Lake Lane", "Mill Creek Estates": a street or a place
             continue
@@ -140,8 +151,9 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
             unused.append(f"a tributary of {cand}")
             continue
         q = QUALIFIER_BEFORE.search(before.rstrip() + " ")
-        if q and not re.match(r"(little|middle|upper|lower|big|east|west|north|south)\b", cand, re.I):
-            cand = re.sub(r"\bOf\b", "of", re.sub(r"\bThe\b", "the", _title(q.group(0).strip()))) + " " + cand
+        if q:
+            pre = re.sub(r"\bOf\b", "of", re.sub(r"\bThe\b", "the", _title(q.group(0).strip())))
+            cand = pre + ("" if pre.endswith("-") else " ") + cand          # "Upper-Little Sample Creek" stays joined
         names.append(cand)
     return list(dict.fromkeys(names)), list(dict.fromkeys(unused))
 
@@ -308,7 +320,7 @@ NOT_GIVEN = re.compile(r"^\s*(n/?a|none|-+)\s*$", re.I)
 COORDS = re.compile(r"\(\s*coordinates\s+(-?\d{1,2}\.\d+)\s*,\s*(-?\d{2,3}\.\d+)\s*\)", re.I)
 # the water's point in the USGS Geographic Names Information System for that name in the advisory's county (The National
 # Map geonames, layer 7 Other Hydrographic Features, read 2026-11-14): (name, county) -> (GNIS feature id, lat, lon).
-# Waters with no GNIS feature of that name in that county (Lake Hamilton, Lake Conway, Brewer Lake in Conway County,
+# Waters with no GNIS feature of that name in that county (Lake Hamilton: NHD_POINTS below; Lake Conway, Brewer Lake in Conway County,
 # Harris Brake Lake, Lake Nimrod, Lake Fayetteville, Lake Wilson in Washington County, Huston Lake, Mom's Lake, the
 # park ponds) have no point here and are placed by name and county only.
 GNIS_POINTS = {
@@ -334,6 +346,15 @@ GNIS_POINTS = {
 }
 
 
+# a lake with no GNIS place-name point of its name in its county, placed by a point inside its USGS National
+# Hydrography Dataset waterbody polygon (hydro.nationalmap.gov nhd MapServer layer 12, read 2026-11-15; the point is
+# the polygon's representative point, inside the water, rounded to 0.001 degree): (name, county) -> (NHD permanent
+# identifier, GNIS id, lat, lon). Re-review 2026-11-14 P1-1.
+NHD_POINTS = {
+    ("lake hamilton", "Garland"): ("58159519", "74878", 34.487, -93.130),   # 27.0 km², GNIS name "Lake Hamilton"
+}
+
+
 DESCRIBED = re.compile(r"^(stream|creek|pond|lake|cove|inlet|spring)\b\s+(by|near|at|behind|east|west|north|south|"
                        r"below|above|off)\b", re.I)
 
@@ -345,15 +366,31 @@ def round_text_coords(text):
     return COORDS.sub(lambda m: f"(coordinates {round(float(m.group(1)), 3)}, {round(float(m.group(2)), 3)})", text)
 
 
-def hab_water(text: str) -> tuple[str, str | None]:
-    """(the water's name, the qualifier DEQ adds): "Lake Catherine - Spencer Bay *" -> ("Lake Catherine", "Spencer
-    Bay"); "Huston Lake on Big Huston Creek" -> ("Huston Lake", "on Big Huston Creek"); the star and a coordinate
-    note are not part of the name."""
+# "on Big Huston Creek", "near Exampleville" after a lake's name: where the lake lies (the stream it is on, the town
+# near it), not a part of it; the advisory is DEQ's for the whole lake (verification 2026-11-15 P2-7). After a river's
+# name it stays a part (its stretch near the town), and "by ...", a bay or an arm after a dash, stay a part.
+LOCATOR = re.compile(rf"^(?:on\s+(?:{CAP}\s+)+{WATER_WORD}|near\s+(?:{CAP}\s*)+)$")
+
+
+def hab_parts(text: str) -> tuple[str, str | None, str | None]:
+    """(the water's name, the part of it DEQ names, where DEQ says it lies): "Lake Catherine - Spencer Bay *" ->
+    ("Lake Catherine", "Spencer Bay", None); "Huston Lake on Big Huston Creek" -> ("Huston Lake", None, "on Big
+    Huston Creek"); the star and a coordinate note are not part of the name."""
     t = COORDS.sub("", text or "").replace("’", "'").rstrip(" *").strip()
     m = re.match(r"^(.*?)\s+(?:-\s+(.+)|((?:on|near|by)\s+.+))$", t)
     if m and not t.lower().startswith("stream"):
-        return m.group(1).strip(), (m.group(2) or m.group(3)).strip()
-    return t, None
+        extra = (m.group(2) or m.group(3)).strip()
+        if m.group(3) and LOCATOR.match(extra) and re.search(r"\b(?:lake|reservoir|pond)\b", m.group(1), re.I):
+            # only a lake is located so: "Sample River near Exampleville" is the river's stretch near the town
+            return m.group(1).strip(), None, extra
+        return m.group(1).strip(), extra, None
+    return t, None, None
+
+
+def hab_water(text: str) -> tuple[str, str | None]:
+    """(the water's name, the part of it DEQ names): hab_parts without the locator."""
+    name, qualifier, _ = hab_parts(text)
+    return name, qualifier
 
 
 def hab_counties(text: str) -> list[str]:
@@ -372,7 +409,7 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     _local_midnights(rec)
     raw_name = F.clean(row.get("waterbody"))
     star = raw_name.endswith("*")
-    name, qualifier = hab_water(raw_name)
+    name, qualifier, locator = hab_parts(raw_name)
     rec["event_type"] = "hab_advisory"
     described = bool(DESCRIBED.match(name or ""))
     if described:
@@ -385,6 +422,9 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if qualifier:
         # "Lake Catherine - Spencer Bay": DEQ's advisory is for part of the lake, never the whole lake's colour
         notes["_water_qualifier"] = qualifier
+    if locator:
+        # "Huston Lake on Big Huston Creek": where the lake lies; the advisory is for the whole lake
+        notes["_water_locator"] = locator
     counties = hab_counties(row.get("county"))
     if counties:
         notes["county"] = f"{counties[0]} County"
@@ -425,12 +465,26 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
         rec["lat"], rec["lon"] = round(float(m.group(1)), 3), round(float(m.group(2)), 3)
         rec["coord_source"], rec["coord_precision_m"] = "source", 150
         notes["_point_basis"] = "the coordinates DEQ gives in the advisory's waterbody name, rounded to 0.001 degree"
-    else:
+    elif not qualifier and not described:
+        # the parent lake's GNIS point is never used for a bay, an arm or a described place: that would draw the
+        # marker at the wrong place (review 2026-11-14 P1-3); such a row has a point only where DEQ gives one
         pt = next((GNIS_POINTS[(name.lower(), c)] for c in counties if (name.lower(), c) in GNIS_POINTS), None)
+        nhd = None if pt else next((NHD_POINTS[(name.lower(), c)] for c in counties
+                                    if (name.lower(), c) in NHD_POINTS), None)
         if pt:
             rec["lat"], rec["lon"] = pt[1], pt[2]
             rec["coord_source"], rec["coord_precision_m"] = "gnis", 1000
             notes["_point_basis"] = (f"the USGS GNIS feature {pt[0]} of this name in this county (The National Map "
                                      "geonames, read 2026-11-14): the water, not where the bloom was sampled")
+        elif nhd:
+            rec["lat"], rec["lon"] = nhd[2], nhd[3]
+            rec["coord_source"], rec["coord_precision_m"] = "hand", 1000
+            notes["_point_basis"] = (f"a point inside the USGS National Hydrography Dataset waterbody {nhd[0]} (GNIS "
+                                     f"{nhd[1]}, named {name}) in this county (read 2026-11-15): the water, not where "
+                                     "the bloom was sampled")
     if not described and not qualifier:
         notes["advisory_extent"] = "named_water"      # DEQ names the lake itself as the advisory's water
+    else:
+        # part of a water, or a place described near one: the status build draws its marker only and never colours
+        # the water it is placed on, whatever the water's size (build/status.py part_of_water)
+        notes["advisory_extent"] = "part_of_water"

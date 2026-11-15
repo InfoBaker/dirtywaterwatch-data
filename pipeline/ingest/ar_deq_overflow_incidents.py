@@ -112,6 +112,26 @@ class SearchFailed(RuntimeError):
     """A window that could not be read whole: the run keeps the previous records."""
 
 
+CONFIRMATION = re.compile(r"^[A-Za-z0-9][A-Za-z0-9-]{5,63}$")
+MAX_NO_ID_SHARE = 0.05
+NO_ID_REASON = ("no readable Web Confirmation Number (DEQ's key for the report); left out of this read and asked for "
+                "again at the next")
+
+
+def check_ids(rows: list[dict]) -> tuple[list[dict], int]:
+    """(the reports that carry DEQ's Web Confirmation Number, how many did not). The number is the record key: a
+    report without one would be keyed 'no-id' and collapse with every other such report, so it is never built or
+    saved. A few such reports are left out of this read (the events file says how many and why; the next read asks
+    for them again); none read, or more than MAX_NO_ID_SHARE of them without one (a changed detail row), is
+    SearchFailed before anything is saved and the run keeps the previous records (verification 2026-11-15 P2-6)."""
+    good = [r for r in rows if CONFIRMATION.match((r.get("confirmation_no") or "").strip())]
+    bad = len(rows) - len(good)
+    if bad and (not good or bad > max(1, MAX_NO_ID_SHARE * len(rows))):
+        raise SearchFailed(f"{bad} of {len(rows)} reports have no readable Web Confirmation Number (a blank number or "
+                           "a changed detail row); nothing is saved")
+    return good, bad
+
+
 def text(fragment: str) -> str:
     t = re.sub(r"<br\s*/?>", " ", fragment or "", flags=re.I)
     t = re.sub(r"<[^>]+>", " ", t)
@@ -292,6 +312,7 @@ def main(argv: list[str] | None = None) -> int:
                 info["deep_read_at"] = fetched_at
             elif last_deep:
                 info["deep_read_at"] = last_deep
+        rows, no_id = check_ids(rows)
     except (requests.RequestException, SearchFailed, ValueError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
@@ -310,11 +331,14 @@ def main(argv: list[str] | None = None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
         return 1
+    if no_id:
+        stats = {**stats, "unreadable_reports": {"count": no_id, "reason": NO_ID_REASON}}
     meta = {**stats, **runner.public_meta(block.get("meta") or {}), "platform": "html-form", "raw_path": raw_path,
             "generic": True, "registry_ids": row.get("registry_ids") or [], "timezone": block.get("time_zone"),
             "rows_polled": polled, "rows_carried": len(rows) - polled, **info}
     path_notes_to_meta(records, meta)
-    out = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta, path=path)
+    out = write_events(SOURCE_ID, records, ok=True, error=f"{no_id} report(s): {NO_ID_REASON}" if no_id else None,
+                       meta=meta, path=path)
     print(f"{SOURCE_ID}: {polled} rows polled ({info.get('window_start')}..{info.get('window_end')}), "
           f"{len(rows) - polled} carried -> {len(records)} records; types {stats.get('by_type')}; -> {out}")
     return 0

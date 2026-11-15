@@ -1218,6 +1218,24 @@ def qualified_only(name: str, text: str) -> bool:
     return bool(hits) and all(QUALIFIER_BEFORE.search(text[:i]) for i in hits)
 
 
+# States whose reports' water names keep every qualifier written before them (Arkansas: ingest/ar_transforms.py keeps
+# "Upper Little Sample Creek" whole), so any of these words before a matched name makes another water of it: the
+# report is not placed on the shorter namesake (verification 2026-11-15 P1-4). Keyed by state: no other state changes.
+STATE_QUALIFIER_BEFORE = {
+    "AR": re.compile(r"\b(?:little|middle|upper|lower|big|east|west|north|south)(?:\s+(?:fork|branch|prong))?"
+                     r"(?:\s+of(?:\s+the)?)?\s+$"),
+}
+
+
+def state_qualified_only(name: str, text: str, state: str | None) -> bool:
+    """qualified_only with the state's own wider qualifier list (STATE_QUALIFIER_BEFORE); False for other states."""
+    rx = STATE_QUALIFIER_BEFORE.get(state or "")
+    if not rx or not name:
+        return False
+    hits = [m.start() for m in re.finditer(rf"(?<= ){re.escape(name)}(?= )", text)]
+    return bool(hits) and all(rx.search(text[:i]) for i in hits)
+
+
 NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so it is listed with its county and placed "
                    "on no water (never on its permit's outfalls' water)")
 
@@ -1969,7 +1987,7 @@ class Resolver:
         names = [n for n in found if not any(n != m and f" {n} " in f" {m} " for m in found)]
         # a qualified water is not its plain-named namesake: "little cuyahoga river" is not "cuyahoga river", nor
         # "west branch huron river" "huron river", when the qualified one has no record (Ohio go-live audit P2-2)
-        names = [n for n in names if not qualified_only(n, t)]
+        names = [n for n in names if not qualified_only(n, t) and not state_qualified_only(n, t, state)]
         out, notes, ambiguous = [], [], False
         for n in sorted(names):
             slugs = found[n]
@@ -3358,6 +3376,13 @@ def names_its_water(ev: dict) -> bool:
     return (ev.get("raw") or {}).get("advisory_extent") == "named_water"
 
 
+def part_of_water(ev: dict) -> bool:
+    """An authority's advisory for part of a water only (raw.advisory_extent "part_of_water": Arkansas DEQ's "Lake X -
+    Y Bay", a place described near a water): a marker at its own cited point, never the whole water's colour, whatever
+    the water's size (review 2026-11-14 P1-3). No other source writes this value, so no other state's output changes."""
+    return (ev.get("raw") or {}).get("advisory_extent") == "part_of_water"
+
+
 def stretch_text(ev: dict | None) -> str:
     """' · from X to Y' for an advisory whose source names its ends (the record's `stretch`, else raw.stretch), else ''."""
     g = (ev or {}).get("stretch") or {}
@@ -4001,7 +4026,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             on_river = advisory_on_river(ev, waters[slug], traced)
             pt_only = point_extent_only(ev)
             if on_river or pt_only or (ev.get("event_type") in POINT_ADVISORY_TYPES
-                                       and not colours_whole_water(waters[slug])):
+                                       and (not colours_whole_water(waters[slug]) or part_of_water(ev))):
                 point_on.append(slug)
                 if on_river:
                     river_point.append(slug)
