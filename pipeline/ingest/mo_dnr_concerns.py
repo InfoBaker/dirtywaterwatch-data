@@ -337,6 +337,24 @@ def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str,
         rev = list(revision(meta))
         for b in bs:
             if SEWER_TYPE not in b["type"].lower():
+                # a concern already decided (kept or not) that a later report files outside the sewer category: the
+                # later decision withdraws the sewage record and is kept in the ledger, so an older report read again
+                # cannot restore it (verification P1-3); a concern never seen as sewer is not read
+                no = str(b.get("no") or "")
+                known = ledger.get(no) if no else None
+                if known is None and not (no and f"{SOURCE_ID}:{no}" in recs):
+                    continue
+                if known and list(known.get("revision") or []) > rev:
+                    stats["older_decision_ignored"] += 1
+                    continue
+                ledger[no] = {"decision": "reclassified_out_of_scope", "kept": False, "revision": rev,
+                              "pdf_url": meta.get("pdf_url"), "decided_at": at}
+                stats["reclassified_out_of_scope"] += 1
+                if f"{SOURCE_ID}:{no}" in recs:
+                    gone = recs.pop(f"{SOURCE_ID}:{no}")
+                    withdrawn.append({"concern_no": no, "decision": "reclassified_out_of_scope",
+                                      "was": gone["raw"].get("dnr_finding"), "report_period": meta.get("period")})
+                    stats["withdrawn"] += 1
                 continue
             stats["sewer_overflow_type"] += 1
             decision, rec, safe = record(b, meta, keys, at)

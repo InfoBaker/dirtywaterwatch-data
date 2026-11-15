@@ -675,3 +675,25 @@ def test_msd_post_without_a_publication_time_or_malformed_fails_the_run_and_keep
         assert M.main(["--file", str(f)]) == 1
         out = json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
         assert out["ok"] is False and out["records"] == first["records"]
+
+
+def test_a_concern_reclassified_outside_the_sewer_category_loses_its_sewage_record():
+    """Verification P1-3: sewer (February) -> the March entry filed only as a single-family residence and referred to
+    the county -> February read again: no sewage record, the ledger keeps the reclassification."""
+    keep = _marble(*FEB, "2/10/2026", "Referred to the city.")
+    resid = _pdf([(350.25, 730, MAR[0]), (28.8, 20, MAR[1]), (525.8, 20, "Page 2 of 5")] + _block(
+        640, "SWRO", "2/9/2026", "3/3/2026", ["Example Neighbor"], "Bollinger",
+        ["Single Family Residence"], 70010, "A septic tank overflows.", "Referred to the county health department."))
+    r1, s1, _ = C.run([(keep, {"pdf_url": "https://dnr.mo.gov/feb.pdf"})], [], AT)
+    assert len(r1) == 1
+    r2, s2, _ = C.run([(resid, {"pdf_url": "https://dnr.mo.gov/mar.pdf"})], r1, AT, s1["decisions"])
+    assert r2 == [] and s2["decisions"]["70010"]["decision"] == "reclassified_out_of_scope"
+    assert s2["withdrawn_concerns"][0]["decision"] == "reclassified_out_of_scope"
+    r3, s3, _ = C.run([(keep, {"pdf_url": "https://dnr.mo.gov/feb.pdf"})], r2, AT, s2["decisions"])
+    assert r3 == [] and s3["older_decision_ignored"] == 1
+    for order in ([(keep, {}), (resid, {})], [(resid, {}), (keep, {})]):       # one run, either order
+        r, _, _ = C.run(order, [], AT)
+        assert r == []
+    # a concern never filed as sewer is still not read
+    r4, s4, _ = C.run([(resid, {})], [], AT)
+    assert r4 == [] and "70010" not in s4["decisions"]
