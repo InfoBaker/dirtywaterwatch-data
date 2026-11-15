@@ -347,3 +347,40 @@ def test_a_failed_station_read_quotes_no_station_text(monkeypatch, tmp_path):
 ])
 def test_only_dnrecs_own_numbered_name_keeps_its_number(name, kept):
     assert W.scrub_unit_name(name) == kept
+
+
+# --------------------------------------------- P2: Florence's cached export is the current format
+
+FLORENCE_EVENTS = Path(__file__).resolve().parents[2] / "data" / "build" / "events" / "sc-florence-sso-notices.json"
+FLORENCE_STATE = sorted((Path(__file__).resolve().parents[2] / "data" / "raw" / "sc").glob("florence-state-*.json"))
+
+
+def _florence_checks(recs):
+    ids = {r["event_id"] for r in recs}
+    blob = json.dumps(recs).lower()
+    assert "no threat to public health" not in blob and "no threat to" not in blob
+    advice = [r for r in recs if r["event_id"].endswith("-advice")]
+    for r in recs:
+        if r.get("advice_text") and not r["event_id"].endswith("-advice"):
+            assert r["status"] != "advisory_active"          # the advice is its own record, never the overflow's
+    for a in advice:
+        assert a["raw"]["_advice_not_a_discharge"] is True and a["raw"]["overflow_record"] in ids
+        assert a["raw"]["_ages_after_confirmation"] is True
+    spills = [r for r in recs if not (r.get("raw") or {}).get("_advice_not_a_discharge")]
+    assert len({r["event_id"] for r in spills}) == len(spills)
+    return advice
+
+
+@pytest.mark.skipif(not FLORENCE_STATE, reason="no saved Florence state on this machine")
+def test_florence_records_rebuilt_from_the_saved_state_are_the_current_format(tmp_path):
+    from ingest import sc_florence_sso as F
+    out = tmp_path / "florence.json"
+    assert F.main(["--file", str(FLORENCE_STATE[-1]), "--out", str(out)]) == 0
+    recs = json.loads(out.read_text())["records"]
+    assert _florence_checks(recs)                              # at least one advice record, kept apart
+
+
+@pytest.mark.skipif(not FLORENCE_EVENTS.is_file(), reason="no cached Florence export on this machine")
+def test_the_cached_florence_export_is_the_current_format():
+    # a generated file older than the advice split fails here: regenerate it before the export
+    _florence_checks(json.loads(FLORENCE_EVENTS.read_text())["records"])
