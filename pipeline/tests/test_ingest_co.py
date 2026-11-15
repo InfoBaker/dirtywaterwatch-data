@@ -371,7 +371,8 @@ def test_review_part_of_a_standing_notice_gone_keeps_the_advisory_and_fails_heal
     second, meta = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
     barr = next(r for r in second if r["source_record_id"].startswith("barr-lake"))
     assert barr["ended_at"] is None and "_unlisted_since" not in barr["raw"]
-    assert barr["raw"]["_last_seen_in_source"] == T0 and barr["raw"]["_unresolved_wording"] == [q]
+    # the red-alert sentence (its core quote) still stands: confirmed at this read (Astra verification 2026-11-15)
+    assert barr["raw"]["_last_seen_in_source"] == T1 and barr["raw"]["_unresolved_wording"] == [q]
     assert any(u["notice"] == "cpw-barr-lake-red-alert" for u in meta["unvalidated"])
 
 
@@ -457,3 +458,42 @@ def test_review_the_mountain_scrub_and_notice_set_are_used_only_by_these_three_s
              and p.name not in ("mountain_scrub.py", "notice_set.py")}
     assert users == {"co_cdphe_toxic_algae.py", "co_official_notices.py", "mt_deq_hab_map.py",
                      "wy_deq_hcb_bulletins.py"}, users
+
+
+# ---------------------------------------------------------------- Astra verification 2026-11-15 (last round)
+
+def test_verify_barr_lake_stays_coloured_while_its_red_alert_sentence_stands():
+    from datetime import datetime, timezone
+    from build import status as S
+    first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    q = C.NOTICES[2]["records"][0]["quotes"][1]            # only the precaution sentence removed, for weeks
+    recs, at = first, None
+    for at in ("2026-11-20T18:00:00Z", "2026-12-05T18:00:00Z", "2026-12-20T18:00:00Z"):
+        recs, meta = NS.build(C.SOURCE_ID, C.NOTICES, at, recs, getter=getter(drop=q), save=False)
+        assert any(u["notice"] == "cpw-barr-lake-red-alert" for u in meta["unvalidated"])
+    barr = next(r for r in recs if r["source_record_id"].startswith("barr-lake"))
+    assert barr["ended_at"] is None and barr["raw"]["_last_seen_in_source"] == at
+    assert barr["raw"]["_unresolved_wording"] == [q]
+    now = datetime(2026, 12, 20, 19, tzinfo=timezone.utc)
+    live = [iv for iv in S.event_intervals(barr, "CO", now) if iv["start"] <= now <= iv["end"]]
+    assert live and live[0]["color"] in ("red", "yellow")
+    # the red-alert sentence itself gone (the precaution left): unresolved, never confirmed
+    q0 = C.NOTICES[2]["records"][0]["quotes"][0]
+    nxt, _ = NS.build(C.SOURCE_ID, C.NOTICES, "2026-12-21T18:00:00Z", recs, getter=getter(drop=q0), save=False)
+    barr = next(r for r in nxt if r["source_record_id"].startswith("barr-lake"))
+    assert barr["raw"]["_last_seen_in_source"] == at and barr["ended_at"] is None
+
+
+def test_verify_two_relisting_cycles_in_one_day_keep_both_intervals():
+    q = C.NOTICES[2]["records"][0]["quotes"]
+    reads = [("2026-11-16T15:00:00Z", None), ("2026-11-16T16:00:00Z", q), ("2026-11-16T17:00:00Z", None),
+             ("2026-11-16T18:00:00Z", q), ("2026-11-16T19:00:00Z", None), ("2026-11-16T20:00:00Z", q)]
+    recs = []
+    for at, drop in reads:
+        recs, _ = NS.build(C.SOURCE_ID, C.NOTICES, at, recs, getter=getter(drop=drop), save=False)
+    barr = sorted(((r["started_at"], r["ended_at"]) for r in recs if r["source_record_id"].startswith("barr-lake")))
+    assert barr == [("2026-08-03T19:00:00-06:00", "2026-11-16T16:00:00Z"),
+                    ("2026-11-16T17:00:00Z", "2026-11-16T18:00:00Z"),
+                    ("2026-11-16T19:00:00Z", "2026-11-16T20:00:00Z")]
+    ids = [r["event_id"] for r in recs]
+    assert len(ids) == len(set(ids))

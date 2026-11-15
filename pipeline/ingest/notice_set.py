@@ -18,7 +18,9 @@ Notice kinds
   A standing notice may name an "anchor" (text always on its page): an answer without it is not the page, and is a
   failed read. Only a read that shows none of a standing record's sentences, and none of the notice's "alert_words",
   withdraws it; part of the wording gone, or the alert words without the sentences, is unresolved (the record stays as
-  it was, never ended, never confirmed; meta.unvalidated). Shown again after a withdrawal: a new record
+  it was, never ended, never confirmed; meta.unvalidated), except that a record whose "core_quotes" (its warning
+  sentences) are all still on the page is confirmed at the read, with the changed wording in raw._unresolved_wording
+  and the notice still unvalidated. A second relisting on the same local day takes the read's UTC time in its id. Shown again after a withdrawal: a new record
   ("<id>:relisted-<local day>", raw.episode_of, started at that read, time_precision poll); the ended one keeps its
   end. A dated notice whose answer shows none of its sentences is a failed read (an error page answered with 200). The first read that does not show a standing notice also sets ended_at there (raw.ended_at_precision
   poll, raw._ages_after_confirmation), so the colour stops 14 days after the last read that showed it.
@@ -113,7 +115,7 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
         if text is None:
             unvalidated.append({"notice": n["id"], "reason": err or "not read"})
         for rec in n["records"]:
-            f = {k: v for k, v in rec.items() if k not in ("quotes", "raw")}
+            f = {k: v for k, v in rec.items() if k not in ("quotes", "core_quotes", "raw")}
             raw = {**(rec.get("raw") or {}), "notice_id": n["id"], "notice_kind": n["kind"],
                    "quotes": rec.get("quotes") or [], "reviewed": n["reviewed"]}
             base = f"{source_id}:{f['source_record_id']}"
@@ -132,25 +134,39 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
             mine_missing = [q for q in mine if q in missing]
             if n["kind"] == "standing":
                 alert = [w for w in n.get("alert_words") or [] if norm(w) in text.lower()]
+                # the record's warning sentences ("core_quotes", the reviewer's choice): while every one is on the
+                # page the warning stands and each read confirms it, whatever ancillary wording changed (Astra
+                # verification 2026-11-15 P1)
+                core = [q for q in rec.get("core_quotes") or [] if q in mine]
+                core_ok = bool(core) and not any(q in mine_missing for q in core)
                 if mine_missing and (len(mine_missing) < len(mine) or alert):
                     # part of the wording gone, or all of it gone while the page still speaks of the alert: the
-                    # wording changed, not a withdrawal. Unresolved: the record stays as it was (never ended, never
-                    # confirmed) and the notice does not validate (Astra review 2026-11-15 P1)
+                    # wording changed, not a withdrawal. Unresolved: the notice does not validate; the record stays
+                    # as it was (never ended, never confirmed) unless its warning sentences are all still on the page
+                    # (Astra review 2026-11-15 P1)
                     unvalidated.append({"notice": n["id"], "reason": "the notice's wording changed on its page: "
                                         f"{len(mine_missing)} of {len(mine)} sentences not found"
                                         + (f" while the page still says {alert}" if alert else "")})
-                    if old:
-                        o = dict(old)
-                        o["raw"] = {**(old.get("raw") or {}), "_unresolved_wording": mine_missing}
-                        out[eid] = o
-                    continue
-                if not mine_missing:
+                    if not core_ok:
+                        if old:
+                            o = dict(old)
+                            o["raw"] = {**(old.get("raw") or {}), "_unresolved_wording": mine_missing}
+                            out[eid] = o
+                        continue
+                    raw["_unresolved_wording"] = mine_missing
+                    raw["confirm_basis"] = ("the notice's warning sentence is still on the page at this read; other "
+                                            "wording of the notice changed and awaits review")
+                if not mine_missing or core_ok:
                     raw["_last_seen_in_source"] = fetched
                     if old and (old.get("raw") or {}).get("_unlisted_since"):
                         # listed again after a read that no longer showed it: a new episode under its own id, from
                         # this read (a poll bound); the earlier episode keeps its end (lessons, item 3)
                         day = _local_day(fetched, raw.get("time_zone"))
                         f["source_record_id"] = f"{rec['source_record_id']}:relisted-{day}"
+                        if f"{source_id}:{f['source_record_id']}" in prev:
+                            # a second relisting on the same local day: its own id by the read's time, never the
+                            # earlier episode's (Astra verification 2026-11-15 P2)
+                            f["source_record_id"] += "-" + re.sub(r"\D", "", fetched[11:19]) + "z"
                         f["started_at"], f["time_precision"] = fetched, "poll"
                         raw["episode_of"] = base
                         raw["start_basis"] = ("shown again on the page at this read after a read that no longer "
