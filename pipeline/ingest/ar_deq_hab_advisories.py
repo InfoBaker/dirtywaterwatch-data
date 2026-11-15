@@ -6,7 +6,7 @@ Source
   area, date, lifted}]}. Record rules: the fetch block in data/sources/ar-deq-hab-advisories.yaml and
   ingest/ar_transforms.py ar_hab_record, through the generic field map, history and redaction (ingest/generic/
   runner.build); this module only fetches, so that a coordinate pair DEQ writes inside a waterbody name ("Stream by ...
-  (coordinates 35.507114, -94.216947)") is rounded to 0.001 degree (ar_transforms.round_text_coords) before anything
+  (coordinates 35.123456, -93.654321)") is rounded to 0.001 degree (ar_transforms.round_text_coords) before anything
   is saved, mapped or used in a record key (review 2026-11-14 P1-6). data/raw keeps only those rounded safe rows
   (dww-safe-rows/1), and only when they change. A failed read keeps the previous records (ok false).
 
