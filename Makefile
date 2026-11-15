@@ -123,6 +123,8 @@
 #                  Colorado: co_cdphe_toxic_algae (CDPHE's toxic algae status sheet: algal-bloom advisories by water)
 #                  and co_official_notices (a reviewed set of official notices: CPW's John Martin advisory after the
 #                  Pueblo spill, NPS's Blue Mesa release, Barr Lake's red alert; the state publishes no spill list)
+#                  Montana: mt_deq_hab_map (DEQ's harmful algal bloom map layer: bloom advisories with DEQ's issue
+#                  and lift dates; the state publishes no overflow list)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

@@ -1,0 +1,32 @@
+id: "mt-deq-hab-map"
+name: "Montana DEQ harmful algal bloom map layer: algal-bloom advisories with DEQ's issue and lift dates"
+url: "https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0"
+homepage: "https://gis.mtdeq.us/portal/apps/dashboards/10c34f5c7da24c4188b9ddc220d43970"
+kind: "arcgis"
+level: "state"
+# Ingester: pipeline/ingest/mt_deq_hab_map.py (source id mt-deq-hab-map): one query of the safe fields every run.
+# Read 2026-11-14: 445 rows (2019 to 2026; 77 in 2026), none at Caution or Closure at the read. 276 advisories: 254 with
+#   DEQ's lift date, 22 with no lift date (aged by the site's 14-day rule), none current; 2020: 32, 2021: 29, 2022: 41,
+#   2023: 19, 2024: 41, 2025: 57, 2026: 57. Not records: 126 rows with no issued date (public reports DEQ did not turn
+#   into an advisory), 5 whose note says no advisory was issued, 38 DEQ marked Green Algae/Other. 6 rows at waters the
+#   report calls not publicly accessible keep their county only.
+# Times: DEQ's advisory_issued and advisory_lifted fields are free text holding dates ("7/21: based on photos", "8/3/2026
+#   no new info"); the earliest date of each is the issue and the lift date, day precision, Mountain time; a date with
+#   no year takes the year of the observation. Most lifts come 14 days after the issue with "no new info".
+# Privacy: the reporter's description, photo link and illness answers are never requested; the advisory notes can name
+#   people, so only their dates and the words caution, closure and toxin are kept, in records and in the raw save.
+# Terms (the item's licence): "Data intended for reference and planning purposes only ... DEQ cannot verify accuracy or
+#   contents of publicly editable data."
+cadence: "edited by DEQ through the season; read every run"
+license: "the item's terms: reference and planning purposes only; publicly editable data not verified by DEQ"
+attribution: "Montana Department of Environmental Quality"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["MT"]
+registry_ids: ["mt-hab-map", "mt-deq-hab-dashboard"]
+access: ["arcgis"]
+access_detail: "ArcGIS FeatureServer layer 0, outFields globalid,name,county,agency,sample_date,advisory_lvl,advisory_issued,advisory_lifted,date_observed,microcystin,anatoxin,public_accessible; outSR 4326, geometryPrecision 3."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

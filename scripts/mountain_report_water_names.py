@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 NATIONAL = ROOT / "data" / "receiving-waters-national.json"
 SOURCES = {"CO": ("co-cdphe-toxic-algae", "co-official-notices"),
-           "MT": ("mt-deq-hab-map", "mt-deq-notices"),
+           "MT": ("mt-deq-hab-map",),
            "WY": ("wy-deq-hcb-bulletins",)}
 NAMES = {"CO": "Colorado", "MT": "Montana", "WY": "Wyoming"}
 OPEN = {"advisory_active", "ongoing"}
