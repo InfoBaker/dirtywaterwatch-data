@@ -6,6 +6,7 @@ Central time, the key and DEQ's duplicate rows, the industrial reports left out,
 never read; house numbers, names and phones never reach a record or data/raw; a private-property report keeps no
 location). Every fixture row is invented."""
 import json
+import re
 from datetime import date
 from pathlib import Path
 
@@ -490,3 +491,17 @@ def test_an_sb_item_carrying_a_contact_or_address_is_never_saved(tmp_path, monke
     # a plain name, with a short number, is still read
     assert B.read(["SB903 - Example Beach 2"]) == {"SB903": "Example Beach 2"}
     assert B.read(["SB904 \u2013 Sample Point West"]) == {"SB904": "Sample Point West"}
+
+
+def test_no_unrounded_point_is_written_in_arkansas_code_comments_tests_or_texts():
+    """A point finer than 0.001 degree in Arkansas's committed code, comments, fixtures, source YAMLs or research
+    texts is only the invented 35.123456, -93.654321 (re-review P1-6). The outfall registry keeps its precision."""
+    root = R.ROOT
+    files = [*root.glob("pipeline/ingest/ar_*.py"), *root.glob("pipeline/tests/*_ar*.py"),
+             *root.glob("pipeline/tests/fixtures/ar_*"), *root.glob("data/sources/ar-*.yaml"),
+             *root.glob("research/ar/*.md"), root / "research/ar/receiving-waters-missing.json",
+             *root.glob("scripts/ar_*.py")]
+    pair = re.compile(r"(-?\d{1,3}\.\d{4,})\s*,\s*(-?\d{1,3}\.\d{4,})")
+    for f in files:
+        for a, b in pair.findall(f.read_text(errors="ignore")):
+            assert (a, b) == ("35.123456", "-93.654321"), (f.name, a, b)
