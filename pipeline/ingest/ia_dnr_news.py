@@ -58,8 +58,9 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import BUILD_DIR, HEADERS, event, now_iso, parse_volume_gal, read_json, save_raw, scrub_text, \
+from common import BUILD_DIR, DATA_DIR, HEADERS, event, now_iso, parse_volume_gal, read_json, save_raw, scrub_text, \
     strip_house_numbers, write_events, write_json
+from ingest.ia_id_privacy import scrub_sentences
 
 SOURCE_ID = "ia-dnr-news-releases"
 SITE = "https://www.iowadnr.gov"
@@ -129,7 +130,8 @@ def parse_article(page: str) -> dict:
     end = re.search(r"\nTo report a release after hours|Secondary Navigation Menu", body)
     body = body[:end.start()] if end else body[:6000]
     d = date(int(m.group(3)), MONTHS.index(m.group(1)) + 1, int(m.group(2)))
-    return {"title": title, "date": d.isoformat(), "body": strip_house_numbers(scrub_text(body.strip()))}
+    return {"title": title, "date": d.isoformat(),
+            "body": scrub_sentences(strip_house_numbers(scrub_text(body.strip())))}
 
 
 def _year_for(month: int, release: date) -> int:
@@ -162,8 +164,26 @@ STARTED = rf"\bOn\s+{DAY}{TIME}\b,?[^.]*?\bbegan\b"
 ENDED = rf"\bended\s+(?:on\s+)?{DAY}{TIME}"
 
 
+# a statement that is negated or only conditional or expected is not a completed one (lessons 1): "has not been
+# stopped", "will be lifted when", "is expected to end", "if results allow", "until"
+NOT_DONE = re.compile(r"(?i)\b(?:not|n't|no longer|never|will|would|could|should|may|might|expected|anticipated|"
+                      r"planned|once|until|unless|if|when)\b")
+STOP_WORDS = re.compile(r"\b(?:has|have|was|were)\s+(?:been\s+)?(?:stopped|halted|ended)\b|\bended\b", re.I)
+CSO_DENIED = re.compile(r"(?i)\b(?:no|not|non|never|nor|without)\b[\s-]+(?:\w+\s+){0,3}?(?:a\s+)?combined sewer")
+SSO_AFFIRMED = re.compile(r"(?i)\b(?:sanitary|separate)\s+sewer\s+overflow")
+
+
+def sentences(text: str) -> list[str]:
+    return [s for s in re.split(r"(?<=[.!?])\s+|\n", text or "") if s.strip()]
+
+
+def affirmed(text: str, pattern) -> bool:
+    """True when a sentence states it and that sentence is neither negated nor conditional."""
+    return any(pattern.search(s) and not NOT_DONE.search(s) for s in sentences(text))
+
+
 def classify(text: str) -> tuple[str, str]:
-    if re.search(r"combined sewer", text, re.I):
+    if re.search(r"combined sewer", CSO_DENIED.sub(" ", text), re.I):
         return "cso", "sewage"
     if re.search(r"biosolids|sludge", text, re.I):
         return "sso", "sewage sludge / biosolids"
@@ -189,6 +209,8 @@ def record_from(text: str, art: dict, url: str, sid: str, county: str | None, st
         rep, _, rep_words = _when(text, release, NOTIFIED_ALT)
     start, sp, start_words = _when(text, release, STARTED)
     end, ep, end_words = _when(text, release, ENDED)
+    if end and NOT_DONE.search(next((s for s in sentences(text) if end_words and end_words in s), "")):
+        end, ep, end_words = None, None, None           # "is expected to have ended April 27": not an end
     vol = re.search(r"estimated\s+(?:that\s+)?(?:nearly\s+|about\s+|approximately\s+)?"
                     r"([\d.,]+|one|two|three|four|five|six|seven|eight|nine|ten)\s*(million\s+)?gallons", text, re.I)
     gal, flag = (None, "unknown")
@@ -198,8 +220,7 @@ def record_from(text: str, art: dict, url: str, sid: str, county: str | None, st
         num = NUMBER_WORDS.get(n) or float(n.replace(",", "") or 0)
         gal = int(num * 1_000_000) if vol.group(2) else int(num)
         flag, vtext = "estimated", vol.group(0)
-    stopped = bool(end) or bool(re.search(r"\b(?:has|have|was|were)\s+(?:been\s+)?(?:stopped|halted|ended)\b|halting",
-                                          text, re.I))
+    stopped = bool(end) or affirmed(text, STOP_WORDS)
     advice = [s.strip() for s in re.split(r"(?<=[.!])\s+", text)
               if re.search(r"\bavoid\b|stay out|take caution|advised", s, re.I)]
     cm = re.search(r"\bin\s+((?:[A-Z][a-z]+\s+){1,2})County\b", text) or \
@@ -207,9 +228,15 @@ def record_from(text: str, art: dict, url: str, sid: str, county: str | None, st
     county = county or (f"{cm.group(1).strip()} County" if cm else None)
     city = re.search(r"\b(?:by|at|from) the City of ([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)", text)
     plant = re.search(r"\b(?:the\s+)?([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s+wastewater treatment plant", text)
-    operator = (f"City of {city.group(1)}" if city else (f"{plant.group(1)} wastewater treatment plant" if plant else None))
+    # the operator is the operator row of the city that owns the system (data/dischargers.json), named from the
+    # permittee; a treatment plant named by its town is that town's row; otherwise none (the plant stays in raw)
+    town = city.group(1) if city else (plant.group(1) if plant else None)
+    op = operators().get(f"city of {town}".lower()) if town else None
+    operator = op[1] if op else None
     tm = re.search(r"\b(?:discharge|bypass|release)\s+began\s+(?:around|at|about)\s+\d{1,2}(?::\d{2})?\s*[ap]\.?\s*m\.?", text, re.I)
     raw = {"release_title": art["title"], "release_date": art["date"], "text": text, "county": county, "state": "IA",
+           "system_owner_as_written": (f"City of {city.group(1)}" if city else (f"{plant.group(1)} wastewater treatment plant"
+                                                                       if plant else None)),
            "statewide": statewide, "other_waters": waters[1:], "time_zone": TZ_NAME,
            "timezone_note": "Central time; the year is the release's", "reported_words": rep_words,
            "start_words": start_words, "end_words": end_words,
@@ -222,7 +249,7 @@ def record_from(text: str, art: dict, url: str, sid: str, county: str | None, st
     if statewide:
         raw["placement"] = "the release names no community or water for these bypasses: placed on no water"
     return event(source_id=SOURCE_ID, source_record_id=sid, event_type=et, status="ended" if stopped else "unknown",
-                 discharger_name=operator, waterbody_text=None if statewide else (waters[0] if waters else None),
+                 discharger_name=operator, discharger_id=op[0] if op else None, waterbody_text=None if statewide else (waters[0] if waters else None),
                  started_at=start, ended_at=end, time_precision=sp or ("day" if rep else None), reported_at=rep,
                  published_at=art["date"], source_updated_at=None, fetched_at=at, material=material, volume_gal=gal,
                  volume_text=vtext, estimate_flag=flag, authority=AUTHORITY,
@@ -230,7 +257,45 @@ def record_from(text: str, art: dict, url: str, sid: str, county: str | None, st
                  advice_window_hours=None, advice_window_basis=None, source_url=url, raw=raw)
 
 
+_OPERATORS: dict | None = None
+
+
+def operators() -> dict[str, tuple[str, str]]:
+    """{'city of x': (row id, name)} of Iowa's operator rows whose name is a city's."""
+    global _OPERATORS
+    if _OPERATORS is None:
+        rows = read_json(DATA_DIR / "dischargers.json", []) or []
+        _OPERATORS = {r["name"].lower(): (r["id"], r["name"]) for r in rows
+                      if isinstance(r, dict) and r.get("state") == "IA" and r.get("name", "").startswith("City of ")}
+    return _OPERATORS
+
+
+def split_types(rec_text: str) -> list[str]:
+    """Both a combined and a separate sewer overflow affirmed in the text: two records (lessons 11), else one."""
+    t = CSO_DENIED.sub(" ", rec_text)
+    if re.search(r"combined sewer", t, re.I) and SSO_AFFIRMED.search(t):
+        return ["cso", "sso"]
+    return [""]
+
+
 def records_for(art: dict, url: str, at: str) -> list[dict]:
+    art = {**art, "body": scrub_sentences(art["body"])}          # the scrub again on what the state file carried
+    out = []
+    for r in _records_for(art, url, at):
+        kinds = split_types(r["raw"]["text"])
+        if kinds == [""]:
+            out.append(r)
+            continue
+        for k in kinds:
+            sid = r["source_record_id"] + ("" if k == "cso" else f"#{k}")
+            out.append(event(**{**{f: r.get(f) for f in r if f not in ("event_id", "source_record_id", "event_type",
+                                                                         "raw")},
+                                "source_record_id": sid, "event_type": k, "raw": {**r["raw"], "type_basis":
+                                f"the release names a combined and a separate sewer overflow: this record is the {k}"}}))
+    return out
+
+
+def _records_for(art: dict, url: str, at: str) -> list[dict]:
     body = art["body"]
     path = url.split("/news-release/")[-1]
     heads = list(SECTION.finditer(body))
@@ -268,7 +333,9 @@ def main(argv=None) -> int:
         if "--backfill" in argv:
             for n in range(BACKFILL_PAGES):
                 items += parse_listing(get(LISTING.format(n=n)))
-    except (requests.RequestException, OSError) as e:
+        if not items:
+            raise ValueError("the topic's feed lists no release: a failed read")
+    except (requests.RequestException, OSError, ValueError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
@@ -299,7 +366,11 @@ def main(argv=None) -> int:
     meta = {"registry_ids": [SOURCE_ID], "url": RSS, "releases_kept": len(arts) - len(not_muni),
             "not_municipal": not_muni, "errors": errors[:10],
             "cadence": "the topic's RSS each run; --backfill reads the topic's four listing pages once"}
-    path = write_events(SOURCE_ID, recs, meta=meta)
+    if errors:
+        # an unread release is read again next run (it is not in the state); the feed is not healthy until it is
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, error="; ".join(errors[:3]), meta=meta)
+    else:
+        path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {len(arts)} wastewater releases known ({len(not_muni)} not municipal); {len(recs)} records "
           f"-> {path}" + (f"; {len(errors)} errors" if errors else ""))
     return 0

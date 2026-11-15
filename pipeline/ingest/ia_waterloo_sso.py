@@ -23,8 +23,8 @@ Records (one per notice; all are sewage from the City's collection system)
   - Place: no water and no point: waterbody_text none, placed on no water, listed with Black Hawk County and the City;
     the notice's location (a street, an intersection, a lift station) is kept in raw.location after the house-number
     scrub. Never geocoded, never put at the plant.
-  - Identity: source_record_id the start's local date and time (to the minute; a second notice at the same minute is
-    ~2, in page order), so a corrected location keeps the record. A notice that leaves the page
+  - Identity: source_record_id the start's local date and time (to the minute), so a corrected location keeps the
+    record; notices that share a minute are minute~location (assign_ids), never numbered in page order. A notice that leaves the page
     keeps its record (raw._unlisted_since); a paragraph the reader cannot read is an "unknown" record with
     parse_error, never dropped.
   Privacy: only the list of notices is read (the page's contact block is not); every street address's house number is
@@ -48,6 +48,8 @@ import requests
 
 from common import EVENTS_DIR, HEADERS, end_after, event, now_iso, read_json, save_raw, scrub_text, \
     strip_house_numbers, write_events
+from ingest.ia_id_privacy import home_place
+from ingest.ia_id_privacy import scrub as strict_scrub
 
 SOURCE_ID = "ia-waterloo-sso-notices"
 URL = "https://www.ci.waterloo.ia.us/departments/waste_management/sso_and_bypass_public_notification.php"
@@ -55,6 +57,7 @@ TZ_NAME = "America/Chicago"
 TZ = ZoneInfo(TZ_NAME)
 AUTHORITY = "City of Waterloo Waste Management Services (SSO and bypass public notification)"
 OPERATOR = "City of Waterloo"
+OPERATOR_ID = "ia-waterloo"   # the operator row holding IA0042650 (data/dischargers.json)
 PERMIT = "IA0042650"          # CITY OF WATERLOO (EPA ICIS-NPDES; research/ia/federal-seed.json)
 START = re.compile(r"Recent SSO and Bypass Events", re.I)
 END = re.compile(r"Listing of SSO & Bypass Public Notification Report Forms|Terms:", re.I)
@@ -145,12 +148,13 @@ def read(para: str) -> dict:
         eh = int(stop.group(1)) % 12 + (12 if stop.group(3).upper() == "P" else 0)
         end = start.replace(hour=eh, minute=int(stop.group(2)))
         if end < start:
-            end += timedelta(days=1)
+            end = (end + timedelta(days=1)).replace(tzinfo=TZ)      # the next calendar day, its own offset
         end_basis = "the time the notice says the overflow was stopped"
     else:
         d = duration(rest)
         if d is not None:
-            end, end_basis = start + d, "the notice's start plus the duration it states"
+            # elapsed time (in UTC), so a duration across a clock change ends at the right local time
+            end, end_basis = end_after(start, d, "minute")[0], "the notice's start plus the duration it states"
     gal, vtext = volume(rest)
     cause = re.search(r"(?:was|were) the result of ([^.]+)", rest, re.I)
     return {"start": start, "notified": notified, "location": loc, "end": end, "end_basis": end_basis,
@@ -159,27 +163,71 @@ def read(para: str) -> dict:
             "bypass_pumping": bool(re.search(r"bypass pumping", rest, re.I)), "text": text}
 
 
+def assign_ids(parsed: list[dict], previous: list[dict]) -> list[str]:
+    """Each notice's source_record_id, whatever the page's order: the start minute; when two notices share a minute,
+    the minute and the location (minute~location). A notice keeps the id of the earlier record with its minute and
+    location; a lone notice at a minute keeps the minute's id even when its location was corrected."""
+    prev = {}
+    for p in previous:
+        sid = p.get("source_record_id") or ""
+        if sid and not sid.startswith("unread-"):
+            prev[sid] = slug((p.get("raw") or {}).get("location") or "")
+    bases = [f["start"].strftime("%Y-%m-%dT%H%M") for f in parsed]
+    count = {b: bases.count(b) for b in bases}
+    ids: list[str | None] = [None] * len(parsed)
+    taken = set()
+    # first, an earlier record with the same minute and location keeps its id
+    for i, (f, b) in enumerate(zip(parsed, bases)):
+        loc = slug(f["location"] or "")
+        for sid, ploc in prev.items():
+            if sid.split("~")[0] == b and ploc == loc and sid not in taken:
+                ids[i] = sid
+                taken.add(sid)
+                break
+    order = sorted(range(len(parsed)), key=lambda i: (bases[i], slug(parsed[i]["location"] or ""), parsed[i]["text"]))
+    for i in order:
+        if ids[i]:
+            continue
+        b, loc = bases[i], slug(parsed[i]["location"] or "")
+        if count[b] == 1 and b not in taken:
+            ids[i] = b                                  # a lone notice at its minute (a corrected location keeps it)
+        else:
+            sid, n = f"{b}~{loc or 'notice'}", 2
+            while sid in taken:
+                sid, n = f"{b}~{loc or 'notice'}-{n}", n + 1
+            ids[i] = sid
+        taken.add(ids[i])
+    return ids
+
+
 def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], dict]:
     out: dict[str, dict] = {}
     bad = 0
+    good: list[dict] = []
+    for p in paras:
+        try:
+            good.append(read(p))
+        except ValueError:
+            pass
+    ids = iter(assign_ids(good, previous))
     for p in paras:
         try:
             f = read(p)
         except ValueError as e:
             bad += 1
-            text = strip_house_numbers(scrub_text(p))
+            text = strict_scrub(strip_house_numbers(scrub_text(p)))
             sid = "unread-" + hashlib.sha1(text.encode()).hexdigest()[:12]
             out[sid] = event(source_id=SOURCE_ID, source_record_id=sid, event_type="sso", status="unknown",
-                             discharger_name=OPERATOR, npdes_permit=PERMIT, fetched_at=at, authority=AUTHORITY,
+                             discharger_name=OPERATOR, discharger_id=OPERATOR_ID, npdes_permit=PERMIT, fetched_at=at,
+                             authority=AUTHORITY,
                              source_url=URL, raw={"notice": text, "time_zone": TZ_NAME, "county": "Black Hawk County",
                                                   "city": "Waterloo", "state": "IA"},
                              parse_error=f"{e}: {text[:120]!r}")
             continue
-        base = f["start"].strftime("%Y-%m-%dT%H%M")
-        sid, n = base, 2
-        while sid in out:                # two notices at the same minute: the later one on the page is ~2
-            sid, n = f"{base}~{n}", n + 1
-        raw = {"notice": f["text"], "location": f["location"], "cause": f["cause"],
+        sid = next(ids)
+        if home_place(f["text"], f["location"]):
+            f = {**f, "location": None}
+        raw = {"notice": strict_scrub(f["text"]), "location": strict_scrub(f["location"]), "cause": strict_scrub(f["cause"]),
                "permitted_overflow": f["permitted_overflow"], "bypass_pumping": f["bypass_pumping"],
                "start_basis": ("the time the City was notified of the overflow: it began at or before this time"
                                if f["notified"] else "the time the notice says the City began the bypass"),
@@ -190,7 +238,8 @@ def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], 
         if f["end"] is not None:
             raw.update(ended_at_precision="minute", end_basis=f["end_basis"])
         out[sid] = event(source_id=SOURCE_ID, source_record_id=sid, event_type="sso",
-                         status="ended" if f["end"] else "unknown", discharger_name=OPERATOR, npdes_permit=PERMIT,
+                         status="ended" if f["end"] else "unknown", discharger_name=OPERATOR,
+                         discharger_id=OPERATOR_ID, npdes_permit=PERMIT,
                          started_at=f["start"].isoformat(), ended_at=f["end"].isoformat() if f["end"] else None,
                          time_precision="minute", reported_at=None, published_at=None, source_updated_at=None,
                          fetched_at=at, material="sewage", volume_gal=f["volume_gal"], volume_text=f["volume_text"],
@@ -204,6 +253,11 @@ def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], 
         p = dict(p)
         p["raw"] = {**(p.get("raw") or {})}
         p["raw"].setdefault("_unlisted_since", at)
+        for k in ("notice", "location", "cause"):          # the scrub again on what is carried from earlier runs
+            if isinstance(p["raw"].get(k), str):
+                p["raw"][k] = strict_scrub(p["raw"][k])
+        if isinstance(p.get("parse_error"), str):
+            p["parse_error"] = strict_scrub(p["parse_error"])
         out[sid] = p
         kept += 1
     recs = sorted(out.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
@@ -221,12 +275,14 @@ def main(argv=None) -> int:
             r.raise_for_status()
             page = r.text
         paras = notices(page)
+        if not paras and (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records"):
+            raise ValueError("the list is empty where notices were listed before: a failed read")
     except (requests.RequestException, OSError, ValueError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
     prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
-    scrubbed = [strip_house_numbers(scrub_text(p)) for p in paras]
+    scrubbed = [strict_scrub(strip_house_numbers(scrub_text(p))) for p in paras]
     if "--file" not in argv and (prev_doc.get("meta") or {}).get("list_hash") != hashlib.sha1(
             json.dumps(scrubbed).encode()).hexdigest():
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "notices": scrubbed}, indent=1).encode(), "json")
@@ -234,7 +290,12 @@ def main(argv=None) -> int:
     meta = {"registry_ids": [SOURCE_ID], "url": URL, **stats,
             "list_hash": hashlib.sha1(json.dumps(scrubbed).encode()).hexdigest(),
             "cadence": "with the refresh; the City posts each notice after the event"}
-    path = write_events(SOURCE_ID, recs, meta=meta)
+    if stats["unreadable"]:
+        # an unreadable notice is kept (parse_error) and read again next run; the feed is not healthy until it is read
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta,
+                            error=f"{stats['unreadable']} notice(s) the reader cannot read")
+    else:
+        path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {stats['on_page']} notices on the page ({stats['unreadable']} unreadable); "
           f"{len(recs)} records -> {path}")
     return 0

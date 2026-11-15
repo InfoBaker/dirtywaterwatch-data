@@ -42,8 +42,9 @@ def test_waterloo_times_ends_and_volumes():
     b = recs["2026-10-01T0700"]                               # "7:00 AM AM", unknown volume and duration
     assert b["ended_at"] is None and b["status"] == "unknown" and b["volume_gal"] is None
     assert b["raw"]["permitted_overflow"] is True
-    assert recs["2026-10-01T0740"]["ended_at"] == "2026-10-01T19:46:00-05:00"          # 12.1 hours
-    assert recs["2026-10-01T0740~2"]["ended_at"] == "2026-10-01T15:25:00-05:00"        # 7.75 hours, same minute
+    # two notices at the same minute: each is minute~location, never numbered in page order (lessons 7)
+    assert recs["2026-10-01T0740~example-st"]["ended_at"] == "2026-10-01T19:46:00-05:00"          # 12.1 hours
+    assert recs["2026-10-01T0740~sample-rd-and-example-dr"]["ended_at"] == "2026-10-01T15:25:00-05:00"  # 7.75 hours
     c = recs["2026-07-31T1904"]                               # "7:04PM", "two hours, 30 minutes"
     assert c["started_at"] == "2026-07-31T19:04:00-05:00" and c["ended_at"] == "2026-07-31T21:34:00-05:00"
     d = recs["2025-10-23T1100"]                               # "at11:00AM", "stopped at 12:00PM"
@@ -100,8 +101,11 @@ ART = {"https://www.iowadnr.gov/news-release/2026-08-04/wastewater-discharge-exa
        "https://www.iowadnr.gov/news-release/2026-04-28/company-wastewater": "dnr-article-company.html"}
 
 
-def news(tmp_path, monkeypatch):
+def news(tmp_path, monkeypatch, ops=None):
     monkeypatch.setattr(N, "STATE_PATH", tmp_path / "state.json")
+    # the operator rows the releases are named from (invented): a city with no row names no operator
+    monkeypatch.setattr(N, "_OPERATORS", {"city of exampleton": ("ia-exampleton", "City of Exampleton")}
+                        if ops is None else ops)
     out = {}
     monkeypatch.setattr(N, "write_events", lambda sid, recs, **kw: out.update(recs=recs, **kw) or tmp_path)
     monkeypatch.setattr(N, "get", lambda url: (_ for _ in ()).throw(AssertionError(f"no network in tests: {url}")))
@@ -192,7 +196,9 @@ def test_focomp_report_read_safe_fields_only():
     for personal in ("Jordan Example", "Casey Example", "555-0142", "pat@example.com", "1357", "2468"):
         assert personal not in blob
     assert r["receiving_stream"] == "Example River" and r["location_type"] == "WWTP" and r["closed"] == "Closed"
-    assert r["address"] == "[house number removed] Example Ave" and "outfall 004" in r["details"]
+    assert r["address"] == "[house number removed] Example Ave"
+    # a phone and a contact form in the details: text that may name a person is withheld whole (lessons 6)
+    assert r["details"] == "[withheld: the text may name a person]"
 
 
 def test_focomp_records_times_types_water_and_operator(tmp_path, monkeypatch):
