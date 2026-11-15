@@ -75,7 +75,7 @@ AGENCY = [
      "feed_source_id": "pr-drna-beach-notices", "publishes": "notices", "noun": "Data feed", "authority": DRNA,
      "sources": ["pr-drna-beach-notices"],
      "note": ("DRNA's weekly notice lists the beaches whose enterococci samples exceed the Beach Action Value as not "
-              "fit for bathers (280 notices since 2019-10; 37 stations). Read by its own module every refresh. No terms "
+              "fit for bathers (280 notices since 2019-10; 36 stations in its table). Read by its own module every refresh. No terms "
               "of use stated on the API.")},
     {"id": "pr-drna-spill-reports", "agency": DRNA, "name": f"{DRNA} (spill and bypass reports from permittees)",
      "channel_kind": "state_alert_page", "urls": [], "method": None,
