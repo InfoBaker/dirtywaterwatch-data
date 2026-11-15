@@ -449,3 +449,39 @@ def test_dnr_hab_map_is_registered_as_a_read_feed():
     row = reg["mo-dnr-hab-map"]
     assert row["feed_source_id"] == "mo-dnr-hab-map" and not row.get("availability_only")
     assert (ROOT / "data" / "sources" / "mo-dnr-hab-map.yaml").exists()
+
+
+def test_a_response_or_publication_bound_is_never_an_unqualified_start_in_any_export():
+    """Re-review P1-6: KC's response time, MSD's post day, DNR's receipt day and Leavenworth's notified time stay
+    qualified as upper bounds in the intervals, the slim record, the index, active.json and the CSV; a record whose
+    start is its own (and every other state's) is written as before."""
+    from datetime import datetime, timezone
+    from export import build as B
+    from export import csv as X
+    r = kc()[0]["9001"]
+    assert r["raw"]["start_kind"] == "response"
+    ivs = S.event_intervals(r, "MO", datetime(2024, 10, 15, tzinfo=timezone.utc))
+    assert ivs and all(iv["started_at_bound"] == "on_or_before" and iv["started_at_kind"] == "response" for iv in ivs)
+    slim = B.slim_event({**r, "file": "events/x.json"})
+    assert "raw" not in slim and slim["started_at_bound"] == "on_or_before" and slim["started_at_kind"] == "response"
+    ix = B.index_obj(slim)
+    assert ix["started_at_bound"] == "on_or_before" and ix["started_at_kind"] == "response"
+    act = B.active_entries({r["event_id"]: [{"status": "red", "water": "w"}]}, {r["event_id"]: slim})
+    assert act[0]["started_at_bound"] == "on_or_before"
+    assert X.start_precision_text(r) == "minute; on or before (response)"
+    own = kc()[0]["9002"]                                     # "began at": the start is the overflow's own
+    assert own["raw"]["start_kind"] == "start" and S.start_bound(own) == {}
+    assert X.start_precision_text(own) == "minute" and "started_at_bound" not in B.slim_event({**own, "file": "f"})
+    plain = {"event_id": "ma-massdep:1", "source_id": "ma-massdep", "event_type": "cso", "status": "ended",
+             "started_at": "2026-06-12T10:00:00-04:00", "time_precision": "minute", "file": "f", "water_slugs": [],
+             "raw": {"start_kind": "response"}}                # another state's record: no flag, no change
+    assert "started_at_bound" not in B.slim_event(plain) and "started_at_bound" not in B.index_obj(B.slim_event(plain))
+    assert X.start_precision_text(plain) == "minute"
+
+
+def test_dnr_concern_received_day_is_an_upper_bound():
+    recs = list(concerns()[0].values())
+    got = [r for r in recs if r["raw"]["start_kind"] == "received"]
+    assert got and all(r["raw"]["start_is_upper_bound"] is True and S.start_bound(r)["started_at_kind"] == "received"
+                       for r in got)
+    assert all(S.start_bound(r) == {} for r in recs if r["raw"]["start_kind"] == "incident")
