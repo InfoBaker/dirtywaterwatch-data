@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1463 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1473 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -47,7 +47,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
 | nv | 3 | 1 | 8 | 3 | 0 | 15 |
-| **all** | **522** | **235** | **429** | **204** | **73** | **1463** |
+| ok | 3 | 0 | 6 | 1 | 0 | 10 |
+| **all** | **525** | **235** | **435** | **205** | **73** | **1473** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1696,3 +1697,18 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nv-epa-sobe` | EPA ECHO SOBE (Nevada) | rejected | fetched | events | No Nevada events and no Nevada collection systems in the current and all-versions extracts of 2026-11-12 (rechecked at the build). |
 | `nv-ndep-environmental-activities` | NDEP Nevada Environmental Activities portal (Report a Spill) | rejected | fetched | events | Intake only (an online form and account login); no public view of the notices found. The host did not answer the collector on 2026-11-14. |
 | `nv-swim-guide` | Swim Guide affiliates in Nevada | rejected | search_only | monitoring | None found (search only). |
+
+## ok: Oklahoma (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ok-deq-opdes-rules` | OAC 252:606 Oklahoma Pollutant Discharge Elimination System (OPDES) Standards | used | fetched | law | Municipal OPDES Part III (March 2017) B.6: oral notice to DEQ within 24 hours of awareness of any collection-system bypass or SSO, written in five days; Chapter 606 incorporates 40 CFR 122.41 (expansion research 2026-11-09). |
+| `ok-deq-wastewater-reporting` | Oklahoma DEQ wastewater reporting requirements page and Form 605-011 | used | fetched | law | The page asks for a telephone report within 48 hours of the event and a written one in five days (also 'five business days'); Form 605-011 (revised 2025-10-01) for 24 hours and five days. Intake guidance, not public output. |
+| `ok-nps-chickasaw-bacteria` | National Park Service, Chickasaw National Recreation Area: bathing beach monitoring (E. coli table) | used | fetched | monitoring | Read by the ok-nps-chickasaw-bacteria ingester (2026-11-14): 10 places, sample dates 2026-08-06 to 2026-08-27, 40 results (8 censored '<1'), highest 162.4 (Bear Falls, 2026-08-20), highest geometric mean 113.6; none at the park's threshold (235 weekly, 126 geometric mean), so no record. No unit stated; no posting or removal dates. |
+| `ok-beaches` | Oklahoma bacteria beach monitoring | watch | fetched | advisories | Superseded by ok-nps-chickasaw-bacteria (used) for Chickasaw; Tulsa's Zink Lake dashboard, GRDA's map and OWRB's data registered with their barriers; no statewide beach program. |
+| `ok-deq-gis-waterqweb` | Oklahoma DEQ WaterQWeb MapServer | watch | fetched | outfalls | Layer 4 read 2026-11-14 (safe fields): 1,499 discharge points of 872 permits, updated 2026-06-14; for the 307 sewage permits it holds its points equal EPA's (median 0 m), so it adds no outfall; its permit status is noted on the operator rows. Watched weekly (register). |
+| `ok-deq-industrial-spill-rule` | OAC 252:616-5-3 (industrial wastewater) spill notice to DEQ | watch | search_only | law | Industrial only. |
+| `ok-okc-tulsa-utilities` | Oklahoma City Utilities and City of Tulsa Water and Sewer overflow notices | watch | search_only | events | OKC's June 15, 2026 repair notice (no wastewater believed to enter the river) and Tulsa's Water and Sewer page (an overflow phone line) read; no public overflow archive. |
+| `ok-otrd-checkmyoklake` | Oklahoma Tourism and Recreation Department "Check My OK Lake" blue-green algae status | watch | search_only | advisories | The old Check My OK Lake host failed; TravelOK's lake-conditions chooser is the successor candidate, selected-lake results not exposed (2026-11-09). Watched. |
+| `ok-usace-tulsa-hab` | US Army Corps of Engineers Tulsa District blue-green algae lake advisories | watch | search_only | advisories | Program page answers 403 to automated readers (2026-11-09); registered as a barrier. |
+| `ok-epa-sobe` | EPA SOBE (eRule) extract, Oklahoma rows | rejected | fetched | events | No Oklahoma report in the current and all-versions extracts of 2026-11-12; one collection system registered (OK0044733, Kickapoo, tribal). |
