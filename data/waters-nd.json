@@ -1,0 +1,6459 @@
+{
+ "state": "ND",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 206,
+ "waters": [
+  {
+   "slug": "alkali-lake-nd",
+   "name": "Alkali Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Rutland"
+   ],
+   "bbox": [
+    -97.394158,
+    46.019594,
+    -97.374989,
+    46.031705
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.825,
+   "launches": [
+    "alkali-lake-boat-launch-near-rutland-nd"
+   ],
+   "water_id": "alkali-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "2f73ad10d158ec83ce0233082bc14bb5c835afee8da659c1df3d41e6be6a2c1d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alkali-lake-spiritwood-lake-nd",
+   "name": "Alkali Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Spiritwood Lake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alkali-lake-boat-launch-near-spiritwood-lake-nd"
+   ],
+   "water_id": "alkali-lake-spiritwood-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alkaline-lake-nd",
+   "name": "Alkaline Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Napoleon",
+    "Streeter"
+   ],
+   "bbox": [
+    -99.617886,
+    46.631465,
+    -99.5165,
+    46.694
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 24.207,
+   "launches": [
+    "alkaline-lake-boat-launch-near-napoleon-nd"
+   ],
+   "water_id": "alkaline-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "96b47e61e067756074ce2f98cb1968eb1e9a83022aaa0012725266286fd7e3ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "antelope-lake-nd",
+   "name": "Antelope Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Anamoose"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "antelope-lake-boat-launch-nd"
+   ],
+   "water_id": "antelope-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "armourdale-lake-nd",
+   "name": "Armourdale Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Rolla"
+   ],
+   "bbox": [
+    -99.438435,
+    48.876557,
+    -99.416794,
+    48.888627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.387,
+   "launches": [
+    "armourdale-lake-boat-launch-nd"
+   ],
+   "water_id": "armourdale-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "e5964bf6fea423d90564804f035f48fbe894da7fe5222b515fcef130c4d47d97",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arrowwood-lake-nd",
+   "name": "Arrowwood Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kensal"
+   ],
+   "bbox": [
+    -98.860327,
+    47.2565,
+    -98.825526,
+    47.326815
+   ],
+   "wikidata": "Q49699869",
+   "charted": false,
+   "area_km2": 7.447,
+   "launches": [
+    "primitive-boat-launch-nd"
+   ],
+   "water_id": "arrowwood-lake-nd",
+   "gnis_id": "1027742",
+   "geometry_hash": "f0613abfdfa83f40b0ccb59506789421f21a1cbc324231375d7263835af8b0ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "audubon-lake-nd",
+   "name": "Audubon Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Coleharbor",
+    "Garrison",
+    "Riverdale",
+    "Underwood"
+   ],
+   "bbox": [
+    -101.26628,
+    47.545595,
+    -101.090531,
+    47.687709
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 75.669,
+   "launches": [
+    "cole-harbor-ice-access-point-nd",
+    "east-ice-access-point-nd",
+    "lake-audubon-cabin-sites-nd",
+    "lake-audubon-north-arm-nd",
+    "lane-ramp-nd",
+    "meyers-ice-access-point-nd",
+    "ne-ice-access-point-nd",
+    "nelson-bay-ice-access-point-nd",
+    "south-nelson-bay-ice-access-point-nd",
+    "three-mile-corn-nd",
+    "totten-trail-nd",
+    "turtle-lake-ramp-nd"
+   ],
+   "water_id": "audubon-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "1667a2a843c10d05902162100a4f518be70f657052f292f94bfed4c5c736028b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ice-access-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bader-lake-nd",
+   "name": "Bader Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Medina"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bader-lake-boat-launch-nd"
+   ],
+   "water_id": "bader-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "barnes-lake-nd",
+   "name": "Barnes Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Stutsman County"
+   ],
+   "bbox": [
+    -99.294234,
+    47.220767,
+    -99.261039,
+    47.241151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barnes-lake-boat-launch-nd"
+   ],
+   "water_id": "barnes-lake-nd",
+   "gnis_id": "1027811",
+   "geometry_hash": "a85ac49868173b3adef612b5fb201b2be127175819457cce345e40d33bfe8610",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-lake-nd",
+   "name": "Beaver Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Napoleon"
+   ],
+   "bbox": [
+    -99.616346,
+    46.37669,
+    -99.594546,
+    46.416998
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.255,
+   "launches": [
+    "beaver-lake-boat-launch-nd"
+   ],
+   "water_id": "beaver-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "f1dd491f02ddcd6f4c8e049db8e712782bf803dafe85813efdaf5b9585444247",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "belcourt-lake-nd",
+   "name": "Belcourt Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.769555,
+    48.866368,
+    -99.746682,
+    48.892277
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.837,
+   "launches": [
+    "belcourt-lake-boat-launch-near-belcourt-nd",
+    "belcourt-lake-boat-launch-near-belcourt-nd-2"
+   ],
+   "water_id": "belcourt-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "957c6c15d9b60ce91524e1ccb03c48ec56fa6b79046e2e669dfcb0916fcf17e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "belfield-pond-nd",
+   "name": "Belfield Pond",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belfield"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "belfield-pond-boat-launch-nd"
+   ],
+   "water_id": "belfield-pond-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "benzel-bay-nd",
+   "name": "Benzel Bay",
+   "kind": "bay",
+   "state": "ND",
+   "towns": [
+    "Oakes"
+   ],
+   "bbox": [
+    -97.907492,
+    46.144237,
+    -97.903792,
+    46.147216
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "kraft-lake-boating-access-nd"
+   ],
+   "water_id": "benzel-bay-nd",
+   "gnis_id": null,
+   "geometry_hash": "32a7129c7c4c8daddaffaed9ed27d79106aac28f3091a488e6afed914ec7f832",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-tiger-bay-nd",
+   "name": "Black Tiger Bay",
+   "kind": "bay",
+   "state": "ND",
+   "towns": [
+    "St. Michael"
+   ],
+   "bbox": [
+    -98.823434,
+    47.929435,
+    -98.712859,
+    47.993943
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 19.805,
+   "launches": [],
+   "water_id": "black-tiger-bay-nd",
+   "gnis_id": null,
+   "geometry_hash": "61f409c667487f92a90d49e65c5f8e98221f110538727a3465e7783fba4ba4a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "black-tiger-bay-campground-north-ramp-nd",
+    "black-tiger-bay-south-boat-ramp-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blacktail-lake-nd",
+   "name": "Blacktail Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Williams County"
+   ],
+   "bbox": [
+    -103.751283,
+    48.42801,
+    -103.729625,
+    48.437908
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.665,
+   "launches": [
+    "blacktail-lake-boat-launch-in-williams-county-nd"
+   ],
+   "water_id": "blacktail-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "593357d01985a4547fcbb01a1b2c0cc619785dac67b7a10df00efa9bb3c5be5a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boom-lake-marion-lake-nd",
+   "name": "Boom Lake (Marion Lake)",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Marion"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boom-lake-marion-lake-boat-launch-nd"
+   ],
+   "water_id": "boom-lake-marion-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bowman-haley-reservoir-nd",
+   "name": "Bowman-Haley Reservoir",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Bowman"
+   ],
+   "bbox": [
+    -103.296316,
+    45.951548,
+    -103.246106,
+    46.011058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.858,
+   "launches": [
+    "bowman-haley-reservoir-boat-launch-in-bowman-county-nd",
+    "bowman-haley-reservoir-boat-launch-in-bowman-county-nd-2",
+    "bowman-haley-reservoir-boat-launch-near-bowman-nd"
+   ],
+   "water_id": "bowman-haley-reservoir-nd",
+   "gnis_id": null,
+   "geometry_hash": "61580092f036a0ca9199722ec8b44c0a4552d82ff019d28365207f27f07036c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brewer-lake-nd",
+   "name": "Brewer Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Erie"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brewer-lake-boat-launch-nd"
+   ],
+   "water_id": "brewer-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brush-lake-nd",
+   "name": "Brush Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Mercer"
+   ],
+   "bbox": [
+    -100.737193,
+    47.522046,
+    -100.718073,
+    47.535986
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.002,
+   "launches": [
+    "brush-lake-boat-launch-nd"
+   ],
+   "water_id": "brush-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "437791969efd15d17a9b48c0ac17a0fabd6e3d02b02e53a7cce4798b0a126849",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-lake-nd",
+   "name": "Buffalo Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Forman"
+   ],
+   "bbox": [
+    -97.499827,
+    46.134638,
+    -97.482289,
+    46.151154
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.81,
+   "launches": [
+    "buffalo-lake-boat-launch-near-forman-nd"
+   ],
+   "water_id": "buffalo-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "e3c77f4f6a21d868ffb1f6e411de51dd861acc42e8ecf71d76962b011c26ca63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-lodge-lake-nd",
+   "name": "Buffalo Lodge Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Granville"
+   ],
+   "bbox": [
+    -100.781173,
+    48.308079,
+    -100.738008,
+    48.343614
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.196,
+   "launches": [
+    "buffalo-lodge-lake-boat-launch-nd"
+   ],
+   "water_id": "buffalo-lodge-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "87322696484281ec5107fdbdb8b0cb5aedf0dde14b6423cb7e71cbb6e81cd03d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "camel-hump-lake-nd",
+   "name": "Camel Hump Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Beach"
+   ],
+   "bbox": [
+    -103.824371,
+    46.943615,
+    -103.810919,
+    46.947623
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.175,
+   "launches": [
+    "camel-hump-lake-boat-launch-nd"
+   ],
+   "water_id": "camel-hump-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "6c03b6ccf67ee26c919733e1e2a10497f5918bafc941497ad89bf1336bc0147e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carbury-lake-nd",
+   "name": "Carbury Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Carbury"
+   ],
+   "bbox": [
+    -100.558641,
+    48.871752,
+    -100.551348,
+    48.891487
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.489,
+   "launches": [
+    "carbury-lake-boat-launch-nd"
+   ],
+   "water_id": "carbury-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "b06cfa5541f1737dfb672e43f082468d67496a01e0c5d885e177c6e93533c33c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carpenter-lake-nd",
+   "name": "Carpenter Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Dunseith"
+   ],
+   "bbox": [
+    -99.992279,
+    48.949262,
+    -99.961549,
+    48.970725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.819,
+   "launches": [
+    "carpenter-lake-boat-launch-nd"
+   ],
+   "water_id": "carpenter-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "36099a9f84f7880729250faf0afebfa733443aa17d3f47bb6dad567338ea2722",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "casselton-reservoir-nd",
+   "name": "Casselton Reservoir",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Casselton"
+   ],
+   "bbox": [
+    -97.23113,
+    46.901673,
+    -97.222504,
+    46.904855
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "casselton-reservoir-boat-launch-nd"
+   ],
+   "water_id": "casselton-reservoir-nd",
+   "gnis_id": null,
+   "geometry_hash": "1c3473e5b513d52a540f1c2826949194defbc767ce06e23d9a584a9bc40f2b62",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-nd",
+   "name": "Cedar Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Slope County"
+   ],
+   "bbox": [
+    -102.987269,
+    46.281489,
+    -102.965464,
+    46.305169
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.939,
+   "launches": [
+    "cedar-lake-boat-launch-nd"
+   ],
+   "water_id": "cedar-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "3c66ae13b3fbbb83186b85a2a3e925039774854082038f8974d1c45d09fb424e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cherry-lake-nd",
+   "name": "Cherry Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kidder County"
+   ],
+   "bbox": [
+    -99.888906,
+    47.054762,
+    -99.857571,
+    47.072195
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.896,
+   "launches": [
+    "cherry-lake-boat-launch-nd"
+   ],
+   "water_id": "cherry-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "8475f354c8630108269e7edb19acd68e6b3a5b398efa6d082d1a128c6284f780",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clark-lake-nd",
+   "name": "Clark Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Stutsman County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clark-lake-boat-launch-nd"
+   ],
+   "water_id": "clark-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-nd",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Anamoose"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clear-lake-boat-launch-nd"
+   ],
+   "water_id": "clear-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clearwater-lake-nd",
+   "name": "Clearwater Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Stanley"
+   ],
+   "bbox": [
+    -102.28984,
+    48.405886,
+    -102.276106,
+    48.418024
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clearwater-lake-boat-launch-nd"
+   ],
+   "water_id": "clearwater-lake-nd",
+   "gnis_id": "1028390",
+   "geometry_hash": "72673eb87b53ec4d9fee69f05732fa5e96931044b386caad3abdf842a81617d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coal-lake-nd",
+   "name": "Coal Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Underwood"
+   ],
+   "bbox": [
+    -101.085741,
+    47.429902,
+    -101.045884,
+    47.458233
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.709,
+   "launches": [
+    "coal-lake-boat-launch-nd"
+   ],
+   "water_id": "coal-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "f43e5c119dd57cdf4861b2914d347f7effe7d6be532eca05aad6e765759c67d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coal-mine-lake-nd",
+   "name": "Coal Mine Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Sheridan County"
+   ],
+   "bbox": [
+    -100.197227,
+    47.674157,
+    -100.136741,
+    47.694462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.541,
+   "launches": [
+    "coal-mine-lake-boat-launch-nd"
+   ],
+   "water_id": "coal-mine-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "d0f02708999953f32ec2a52a52d550daa1233cfaf9ca83b4a2e4fd4d9a2d99a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coldwater-lake-nd",
+   "name": "Coldwater Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "McIntosh County"
+   ],
+   "bbox": [
+    -99.079907,
+    45.989499,
+    -99.063158,
+    46.02158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "coldwater-lake-boat-launch-nd"
+   ],
+   "water_id": "coldwater-lake-nd",
+   "gnis_id": "1035537",
+   "geometry_hash": "f631d1a1a7ff46a11ca46cccea83a9c42300468c05d22504921402060c209f47",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-alamo-nd",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Alamo"
+   ],
+   "bbox": [
+    -103.46562,
+    48.582898,
+    -103.4177,
+    48.590649
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cottonwood-lake-boat-launch-near-alamo-nd"
+   ],
+   "water_id": "cottonwood-lake-alamo-nd",
+   "gnis_id": "1028471",
+   "geometry_hash": "42fbcbad211ae15cfae25ff8baa06f6e33368fdc00b06e61276aadc6d188d812",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-nd",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Butte"
+   ],
+   "bbox": [
+    -100.681679,
+    47.873067,
+    -100.66284,
+    47.88253
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.945,
+   "launches": [
+    "cottonwood-lake-boat-launch-near-butte-nd"
+   ],
+   "water_id": "cottonwood-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "b7584bd262861020c35da2c5c4ee7f69c41a47557e51ac565c023210fd31b1fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-lake-nd",
+   "name": "Crooked Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Turtle Lake"
+   ],
+   "bbox": [
+    -100.907407,
+    47.638118,
+    -100.866585,
+    47.70285
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.755,
+   "launches": [
+    "crooked-lake-boat-launch-in-mclean-county-nd",
+    "crooked-lake-boat-launch-near-turtle-lake-nd"
+   ],
+   "water_id": "crooked-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "dba67cbacf6e09af36faa82ebb73d82b3d05c864428b0dc352df82a9b4360480",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crown-butte-lake-nd",
+   "name": "Crown Butte Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Morton County"
+   ],
+   "bbox": [
+    -101.095332,
+    46.864485,
+    -101.086363,
+    46.870829
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.145,
+   "launches": [
+    "crown-butte-lake-boat-launch-nd"
+   ],
+   "water_id": "crown-butte-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "87178aff8ab1ea1cba01162b2a0e27f609e419aae7e7209f2844c4a241ca9896",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "davis-lake-nd",
+   "name": "Davis Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Balta"
+   ],
+   "bbox": [
+    -100.112461,
+    48.14535,
+    -100.092375,
+    48.155172
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.356,
+   "launches": [
+    "davis-lake-boat-launch-nd"
+   ],
+   "water_id": "davis-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "2c5be41f789f8ce00a4902f1832df15397cb7febd0171bd771736a9b27b18d12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dead-colt-creek-nd",
+   "name": "Dead Colt Creek",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Lisbon"
+   ],
+   "bbox": [
+    -97.793423,
+    46.282805,
+    -97.608565,
+    46.379138
+   ],
+   "wikidata": "Q49890173",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dead-colt-creek-boat-launch-near-lisbon-nd"
+   ],
+   "water_id": "dead-colt-creek-nd",
+   "gnis_id": "1028631",
+   "geometry_hash": "1964dd79cfd0ea880874621c3fa6684321645ff663899ed057e4b722440471be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "devils-lake-nd",
+   "name": "Devils Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Devils Lake",
+    "Fort Totten",
+    "Lakewood Park",
+    "Minnewaukan",
+    "St. Michael",
+    "Tokio"
+   ],
+   "bbox": [
+    -99.263091,
+    47.929413,
+    -98.695914,
+    48.189476
+   ],
+   "wikidata": "Q5267424",
+   "charted": false,
+   "area_km2": 311.351,
+   "launches": [
+    "black-tiger-bay-nd",
+    "creel-bay-nd",
+    "east-bay-east-ramp-nd",
+    "east-bay-west-ramp-nd",
+    "estenson-landing-nd",
+    "grahams-island-state-park-nd",
+    "henegar-landing-nd",
+    "minnewaukan-dumpground-nd",
+    "schwab-landing-east-ramp-nd",
+    "schwab-landing-west-ramp-nd"
+   ],
+   "water_id": "devils-lake-nd",
+   "gnis_id": "1034194",
+   "geometry_hash": "9b4ab707c76651dbcfc45db0c4989ab9a2c58ca666dda38a14ebe48844cbeb40",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "spirit-lake-casino-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "diamond-lake-nd",
+   "name": "Diamond Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kulm"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "diamond-lake-boat-launch-nd"
+   ],
+   "water_id": "diamond-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dion-lake-nd",
+   "name": "Dion Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.902199,
+    48.97471,
+    -99.890585,
+    48.981232
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.373,
+   "launches": [
+    "dion-lake-boat-launch-nd"
+   ],
+   "water_id": "dion-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "f4f88a4281b895ab66eee8c7404d7cf461e34727ef5ac6e6ead19194f83d53b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dry-lake-bordulac-nd",
+   "name": "Dry Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bordulac"
+   ],
+   "bbox": [
+    -98.9312,
+    47.363386,
+    -98.866334,
+    47.388195
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.499,
+   "launches": [
+    "dry-lake-boat-launch-near-bordulac-nd"
+   ],
+   "water_id": "dry-lake-bordulac-nd",
+   "gnis_id": null,
+   "geometry_hash": "226f7369f40c54fc9aab5a393c7c52d89be83247250abaeb420bed43e97edfab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dry-lake-nd",
+   "name": "Dry Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Ashley"
+   ],
+   "bbox": [
+    -99.458928,
+    46.042174,
+    -99.398676,
+    46.111856
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.911,
+   "launches": [
+    "dry-lake-boat-launch-near-ashley-nd",
+    "dry-lake-boat-launch-near-ashley-nd-2",
+    "dry-lake-boat-launch-near-ashley-nd-3"
+   ],
+   "water_id": "dry-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "37fee66866d0cc19a4d3b1c4ef378f14a51af123cd2d979ef26d9e988e07cebe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-park-lake-nd",
+   "name": "East Park Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "McLean County"
+   ],
+   "bbox": [
+    -100.739751,
+    47.356161,
+    -100.717551,
+    47.363137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.563,
+   "launches": [
+    "east-park-lake-boat-launch-nd"
+   ],
+   "water_id": "east-park-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "5d88b9ab477d989e7657aade315d7547b17d3449980a4e847907f706a0c6bfcf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eckelson-lake-nd",
+   "name": "Eckelson Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Sanborn"
+   ],
+   "bbox": [
+    -98.30749,
+    46.921805,
+    -98.282436,
+    46.937711
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.287,
+   "launches": [
+    "eckelson-lake-boat-launch-nd"
+   ],
+   "water_id": "eckelson-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "a7e623d42c99d68a605c249428f64074d48f236ee1c94cb633c3222e930def1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eckelson-lake-south-nd",
+   "name": "Eckelson Lake South",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Sanborn"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "eckelson-lake-south-boat-launch-nd"
+   ],
+   "water_id": "eckelson-lake-south-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "edward-arthur-patterson-lake-nd",
+   "name": "Edward Arthur Patterson Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Dickinson"
+   ],
+   "bbox": [
+    -102.905674,
+    46.843543,
+    -102.825364,
+    46.871643
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.982,
+   "launches": [
+    "edward-arthur-patterson-lake-boat-launch-near-dickinson-nd",
+    "edward-arthur-patterson-lake-boat-launch-near-dickinson-nd-2",
+    "edward-arthur-patterson-lake-boat-launch-near-dickinson-nd-3"
+   ],
+   "water_id": "edward-arthur-patterson-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "5e8044f1f87b5e5ec0ce2dd9ae16f82de0e1ac7b0ebdf6a38397ea38cefea5a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "epping-dam-nd",
+   "name": "Epping Dam",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Williston"
+   ],
+   "bbox": [
+    -103.431897,
+    48.255039,
+    -103.403847,
+    48.269391
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.597,
+   "launches": [
+    "epping-dam-boat-launch-nd"
+   ],
+   "water_id": "epping-dam-nd",
+   "gnis_id": null,
+   "geometry_hash": "cb37578d9517aff6d143c049033084a9359d68133319626b450d0bad7371137f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fish-creek-lake-nd",
+   "name": "Fish Creek Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Morton County"
+   ],
+   "bbox": [
+    -101.238814,
+    46.72382,
+    -101.226609,
+    46.730043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.244,
+   "launches": [
+    "fish-creek-lake-boat-launch-in-morton-county-nd"
+   ],
+   "water_id": "fish-creek-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "05b3afbe86a8a0bbf587b0d3c44cc010a91b6bff2c9cd68ce68fb62420322c1d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flood-lake-south-nd",
+   "name": "Flood Lake South",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kulm"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "flood-lake-south-boat-launch-nd"
+   ],
+   "water_id": "flood-lake-south-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "four-corners-lake-nd",
+   "name": "Four Corners Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Lidgerwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "four-corners-lake-boat-launch-nd"
+   ],
+   "water_id": "four-corners-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fox-lake-nd",
+   "name": "Fox Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Eckelson"
+   ],
+   "bbox": [
+    -98.364994,
+    46.936423,
+    -98.336336,
+    46.979558
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.544,
+   "launches": [
+    "fox-lake-boat-launch-nd"
+   ],
+   "water_id": "fox-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "3648a6a0e24b3b49d74d20541498e6536fd76ada7394efa8086c535f8e155326",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "free-peoples-lake-nd",
+   "name": "Free Peoples Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "St. Michael"
+   ],
+   "bbox": [
+    -98.743307,
+    47.90288,
+    -98.716724,
+    47.914674
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.868,
+   "launches": [
+    "free-peoples-lake-boat-launch-nd"
+   ],
+   "water_id": "free-peoples-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "7019c5c24ab604f8903314733af50cdba646de81329e0b95921cffb70547ebe2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "frettim-lake-nd",
+   "name": "Frettim Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Robinson"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "frettim-lake-boat-launch-nd"
+   ],
+   "water_id": "frettim-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gascoyne-lake-nd",
+   "name": "Gascoyne Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Gascoyne",
+    "Scranton"
+   ],
+   "bbox": [
+    -103.105202,
+    46.127031,
+    -103.087049,
+    46.144315
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.774,
+   "launches": [
+    "gascoyne-lake-boat-launch-near-scranton-nd"
+   ],
+   "water_id": "gascoyne-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "bc31b25525ad993870687e75ec0a68f16d1445d9b666ea0013903375e9b8c70a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "george-lake-nd",
+   "name": "George Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Karlsruhe"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "george-lake-boat-launch-nd"
+   ],
+   "water_id": "george-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "georgeson-lake-nd",
+   "name": "Georgeson Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "New Rockford"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "georgeson-lake-boat-launch-nd"
+   ],
+   "water_id": "georgeson-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "golden-lake-nd",
+   "name": "Golden Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Finley",
+    "Hatton"
+   ],
+   "bbox": [
+    -97.644948,
+    47.557217,
+    -97.631725,
+    47.5774
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.472,
+   "launches": [
+    "golden-lake-boat-launch-near-finley-nd",
+    "golden-lake-boat-launch-near-hatton-nd"
+   ],
+   "water_id": "golden-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "5325a9a9c835dd980c51ba2183904b6fda9f940fbe79d0657b9d50b191f892fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "goose-lake-nd",
+   "name": "Goose Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Harvey"
+   ],
+   "bbox": [
+    -99.940454,
+    47.830511,
+    -99.876766,
+    47.840944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.149,
+   "launches": [
+    "goose-lake-boat-launch-nd"
+   ],
+   "water_id": "goose-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "488b6dd5d51a59adead7616d552f1404bba497392bd7f8276b3ce54e940bb74a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gordon-lake-nd",
+   "name": "Gordon Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.785354,
+    48.916035,
+    -99.7716,
+    48.927833
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.765,
+   "launches": [
+    "gordon-lake-boat-launch-near-belcourt-nd"
+   ],
+   "water_id": "gordon-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "48378233a11a474bbe6a5774b7f05745446eef94f1630b0e13143ceb34d28e50",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grass-lake-nd",
+   "name": "Grass Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Lidgerwood"
+   ],
+   "bbox": [
+    -97.252473,
+    46.089311,
+    -97.224039,
+    46.109548
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.9,
+   "launches": [
+    "grass-lake-boat-launch-nd"
+   ],
+   "water_id": "grass-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "3ca81c01e9e6e9b4ae96fbae41ce48a41c22887066a2cc51a39e2c77a2a01b3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gravel-lake-nd",
+   "name": "Gravel Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.837939,
+    48.951535,
+    -99.828603,
+    48.961507
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.443,
+   "launches": [
+    "gravel-lake-boat-launch-nd"
+   ],
+   "water_id": "gravel-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "d1ee7dd4d363c822dbfaa3be5945527235433dca4a7d121a05fe45cd912b6373",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "green-lake-nd",
+   "name": "Green lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Wishek"
+   ],
+   "bbox": [
+    -99.486795,
+    46.194322,
+    -99.427486,
+    46.214273
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.223,
+   "launches": [
+    "green-lake-boat-launch-nd"
+   ],
+   "water_id": "green-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "734023f68a0f9336dded0ac655ff8b5c88049b1419aeea5f7bab59c53326b8ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gullys-slough-nd",
+   "name": "Gullys Slough",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hankinson"
+   ],
+   "bbox": [
+    -97.063945,
+    46.041806,
+    -97.049045,
+    46.050883
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.627,
+   "launches": [
+    "gullys-slough-boat-launch-nd"
+   ],
+   "water_id": "gullys-slough-nd",
+   "gnis_id": null,
+   "geometry_hash": "ab16dab403c47f1819b0873220a012710b0f1d5789cee1ae0b3c33d8087f7c14",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harmon-lake-nd",
+   "name": "Harmon Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Harmon"
+   ],
+   "bbox": [
+    -100.97778,
+    46.930474,
+    -100.959742,
+    46.941916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.613,
+   "launches": [
+    "harmon-lake-boat-launch-near-harmon-nd"
+   ],
+   "water_id": "harmon-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "7f7b898ccccbb3291030937b8bc5dd44297f03493832c577ba67dfc3286763e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harmony-lake-nd",
+   "name": "Harmony Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Truax"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "harmony-lake-boat-launch-nd"
+   ],
+   "water_id": "harmony-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harr-lake-nd",
+   "name": "Harr Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "McIntosh County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "harr-lake-boat-launch-nd"
+   ],
+   "water_id": "harr-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hehn-schaffer-lake-nd",
+   "name": "Hehn-Schaffer Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Gackle"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hehn-schaffer-lake-boat-launch-nd"
+   ],
+   "water_id": "hehn-schaffer-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hiddenwood-lake-nd",
+   "name": "Hiddenwood Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Makoti"
+   ],
+   "bbox": [
+    -101.810319,
+    47.841721,
+    -101.790047,
+    47.854228
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.591,
+   "launches": [
+    "hiddenwood-lake-boat-launch-nd"
+   ],
+   "water_id": "hiddenwood-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "6c03daa7cddf080e06735df93b528cce978022366704d4f65686667eaaa849ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hinsz-lake-nd",
+   "name": "Hinsz Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Anamoose"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hinsz-lake-boat-launch-nd"
+   ],
+   "water_id": "hinsz-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hobart-lake-nd",
+   "name": "Hobart Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Valley City"
+   ],
+   "bbox": [
+    -98.150105,
+    46.906865,
+    -98.101797,
+    46.935611
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.962,
+   "launches": [
+    "hobart-lake-boat-launch-nd"
+   ],
+   "water_id": "hobart-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "a90b66df68cace656f19a95ec2e98e2d58d29c2aa6ca3ce7145c58ed6fb9415d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "homme-reservoir-nd",
+   "name": "Homme Reservoir",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Park River"
+   ],
+   "bbox": [
+    -97.817671,
+    48.402046,
+    -97.789326,
+    48.411837
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.878,
+   "launches": [
+    "homme-reservoir-boat-launch-near-park-river-nd-2",
+    "homme-reservoir-boat-launch-near-park-river-nd"
+   ],
+   "water_id": "homme-reservoir-nd",
+   "gnis_id": null,
+   "geometry_hash": "f62a8ec5febe241e0b992242deb3fe49eb5efa38abb1d0d1633f52053ff9db09",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hooker-lake-nd",
+   "name": "Hooker Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.891823,
+    48.957284,
+    -99.8869,
+    48.962724
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.17,
+   "launches": [
+    "hooker-lake-boat-launch-nd"
+   ],
+   "water_id": "hooker-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "808c0cb1a7edff67d1dbdb5830f6d08ed5e67ea1c4698aa2ca9c81b8bb1026c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horsehead-lake-nd",
+   "name": "Horsehead Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Steele"
+   ],
+   "bbox": [
+    -99.818991,
+    47.003493,
+    -99.751146,
+    47.097041
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 33.468,
+   "launches": [
+    "horsehead-lake-boat-launch-nd"
+   ],
+   "water_id": "horsehead-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "6223eb68da943c998e451e0ce1ff08c4146dbc2c3a9c796fa3b14616877aa728",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-nd",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hankinson"
+   ],
+   "bbox": [
+    -96.991328,
+    46.039468,
+    -96.980303,
+    46.045804
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.352,
+   "launches": [
+    "horseshoe-lake-boat-launch-nd"
+   ],
+   "water_id": "horseshoe-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "d719085fda937f06abead9ad99ba51442a1dd7d5cf8e5bf512cb1f590366622c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hurdsfield-tuffy-lake-nd",
+   "name": "Hurdsfield-Tuffy Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Chaseley"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hurdsfield-tuffy-lake-boat-launch-nd"
+   ],
+   "water_id": "hurdsfield-tuffy-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "indian-creek-nd",
+   "name": "Indian Creek",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Regent"
+   ],
+   "bbox": [
+    -102.628571,
+    46.341396,
+    -102.622927,
+    46.349686
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "indian-creek-boat-launch-nd"
+   ],
+   "water_id": "indian-creek-nd",
+   "gnis_id": null,
+   "geometry_hash": "196e5c0a83261f85258fe08966366326233b9c4e44ca27db1eef4c7cd775aaad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-nd",
+   "name": "Island Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Urbana"
+   ],
+   "bbox": [
+    -98.402046,
+    46.892743,
+    -98.382077,
+    46.910599
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.131,
+   "launches": [
+    "island-lake-boat-launch-nd"
+   ],
+   "water_id": "island-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "459b017b74ea293de25f17c29584cd02d15a9ae2febe01a9015089314e1351ad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "james-river-nd",
+   "name": "James River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Oakes"
+   ],
+   "bbox": [
+    -99.8417,
+    45.892928,
+    -98.110105,
+    47.740674
+   ],
+   "wikidata": "Q1542610",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dakota-lake-nd"
+   ],
+   "water_id": "james-river-nd",
+   "gnis_id": "1261082",
+   "geometry_hash": "3ca75a7fe5c2879cc5f1cf58d5b4b3d385b3e8a388acd3a49b6a09e439495a31",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jamestown-reservoir-nd",
+   "name": "Jamestown Reservoir",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Jamestown"
+   ],
+   "bbox": [
+    -98.766468,
+    46.931181,
+    -98.699602,
+    47.102697
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.817,
+   "launches": [
+    "boat-club-bay-nd",
+    "five-mile-corner-landing-nd",
+    "jamestown-reservoir-marina-area-nd",
+    "jamestown-reservoir-marina-area-north-ramp-nd",
+    "jamestown-reservoir-marina-area-south-ramp-nd",
+    "jamestown-reservoir-west-landing-nd",
+    "pelican-point-jamestown-nd",
+    "pelican-point-nd"
+   ],
+   "water_id": "jamestown-reservoir-nd",
+   "gnis_id": null,
+   "geometry_hash": "774b838c345a3ae3ebc3d3c92c0beae4efe317a361aa21d2785392d6ae05618b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jarvis-lake-nd",
+   "name": "Jarvis Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.863132,
+    48.9157,
+    -99.842533,
+    48.936703
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jarvis-lake-boat-launch-nd"
+   ],
+   "water_id": "jarvis-lake-nd",
+   "gnis_id": "1029652",
+   "geometry_hash": "69ef7487e33d4a437e92bc9858a5ac18f7c2b4759e8b16ad412bed97d3e14c2b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jasper-lake-nd",
+   "name": "Jasper Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kidder County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jasper-lake-boat-launch-nd"
+   ],
+   "water_id": "jasper-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jim-lake-nd",
+   "name": "Jim Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Kensal"
+   ],
+   "bbox": [
+    -98.849699,
+    47.16404,
+    -98.78764,
+    47.194095
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.793,
+   "launches": [],
+   "water_id": "jim-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "3818e3bb7d38a2fe64058bcfc99738cd1472b820ae7188bd9f03b64dd1ce4c73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "jim-lake-boat-launch-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kalmbach-lake-nd",
+   "name": "Kalmbach Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Gackle"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kalmbach-lake-boat-launch-nd"
+   ],
+   "water_id": "kalmbach-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kettle-lake-nd",
+   "name": "Kettle Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Appam"
+   ],
+   "bbox": [
+    -103.625128,
+    48.606393,
+    -103.622522,
+    48.607759
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kettle-lake-boat-launch-nd"
+   ],
+   "water_id": "kettle-lake-nd",
+   "gnis_id": "1029733",
+   "geometry_hash": "49446c5dea7de0b111a581b15441f99c1df85293910c44f14ef8ac2957743c53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kislingburg-lake-nd",
+   "name": "Kislingburg Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Ashley"
+   ],
+   "bbox": [
+    -99.357305,
+    46.042411,
+    -99.296043,
+    46.056033
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.589,
+   "launches": [
+    "kislingburg-lake-boat-launch-nd"
+   ],
+   "water_id": "kislingburg-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "d3352550f7704c1eebbfd7e06dda8b1c3f5082ba7bc3ae020fa08b08db23384f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "knife-river-nd",
+   "name": "Knife River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Stanton"
+   ],
+   "bbox": [
+    -103.21013,
+    47.115573,
+    -101.353168,
+    47.359763
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.718,
+   "launches": [
+    "stanton-park-nd"
+   ],
+   "water_id": "knife-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "03f3bed2539d0913230199dc03a4bd7e6e90c58df1afdf95514e2f998dfe869a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-addie-nd",
+   "name": "Lake Addie",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Binford"
+   ],
+   "bbox": [
+    -98.292856,
+    47.52269,
+    -98.280523,
+    47.531563
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.558,
+   "launches": [
+    "lake-addie-boat-launch-nd"
+   ],
+   "water_id": "lake-addie-nd",
+   "gnis_id": null,
+   "geometry_hash": "8a5d0a5535365be0086c0e5e4381cc9a9790ce4d22c9602193a55ff763927f21",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ashtabula-nd",
+   "name": "Lake Ashtabula",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Cooperstown",
+    "Sibley",
+    "Valley City"
+   ],
+   "bbox": [
+    -98.099649,
+    47.033298,
+    -97.953834,
+    47.330016
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 24.407,
+   "launches": [
+    "ashtabula-crossing-east-ramp-nd",
+    "ashtabula-crossing-west-ramp-nd",
+    "eggerts-landing-nd",
+    "karnack-bridge-nd",
+    "mel-reiman-area-nd",
+    "old-hughway-26-boat-ramp-nd",
+    "sibley-crossing-nd",
+    "sundstroms-landing-nd"
+   ],
+   "water_id": "lake-ashtabula-nd",
+   "gnis_id": null,
+   "geometry_hash": "5b022c33d43c7f6a65cfef0116b7440ca9c4f676ccedd120fc7ae353a4dca09c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-brekken-nd",
+   "name": "Lake Brekken",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Turtle Lake"
+   ],
+   "bbox": [
+    -100.907567,
+    47.541399,
+    -100.885727,
+    47.550107
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.049,
+   "launches": [
+    "lake-brekken-boat-launch-nd"
+   ],
+   "water_id": "lake-brekken-nd",
+   "gnis_id": null,
+   "geometry_hash": "0c0c8dd88f95be87557b093bc8167a1a2afd1e416b7e0c6cebf41c5896cfec6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-coe-nd",
+   "name": "Lake Coe",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Eddy County"
+   ],
+   "bbox": [
+    -98.715336,
+    47.688373,
+    -98.6743,
+    47.703944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.374,
+   "launches": [
+    "lake-coe-boat-launch-in-eddy-county-nd"
+   ],
+   "water_id": "lake-coe-nd",
+   "gnis_id": null,
+   "geometry_hash": "b91cda3f9b67d78403d6642a80dc92eea037c6ff4951bd67754013767af5344f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-darling-nd",
+   "name": "Lake Darling",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Carpio",
+    "Greene",
+    "Mohall"
+   ],
+   "bbox": [
+    -101.737871,
+    48.457113,
+    -101.532708,
+    48.718274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 41.171,
+   "launches": [
+    "grano-crossing-nd",
+    "greene-crossing-nd",
+    "spillway-boat-ramp-nd",
+    "west-landing-1-nd",
+    "west-landing-2-nd",
+    "west-landing-3-nd"
+   ],
+   "water_id": "lake-darling-nd",
+   "gnis_id": null,
+   "geometry_hash": "4a0854f009d6dc7f50bea52c93c2b7adea5f0c3b035b9a03da28ef3c08681475",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elsie-nd",
+   "name": "Lake Elsie",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hankinson"
+   ],
+   "bbox": [
+    -96.941438,
+    46.034504,
+    -96.924198,
+    46.052505
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.689,
+   "launches": [
+    "lake-elsie-boat-launch-near-hankinson-nd",
+    "lake-elsie-boat-launch-near-hankinson-nd-2"
+   ],
+   "water_id": "lake-elsie-nd",
+   "gnis_id": null,
+   "geometry_hash": "b1709a008c09ae20a01cb7f7a99eb104763d2d5c7b36b2c10a5779548bcda234",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hiawatha-nd",
+   "name": "Lake Hiawatha",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Sykeston"
+   ],
+   "bbox": [
+    -99.404679,
+    47.464706,
+    -99.397794,
+    47.484336
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.351,
+   "launches": [
+    "lake-hiawatha-boat-launch-nd"
+   ],
+   "water_id": "lake-hiawatha-nd",
+   "gnis_id": null,
+   "geometry_hash": "5754372d67d07c9c743b8beaa77e8094c11ea43f83ebea7455045d291bc15fdc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-holmes-nd",
+   "name": "Lake Holmes",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Turtle Lake"
+   ],
+   "bbox": [
+    -100.888367,
+    47.526764,
+    -100.857516,
+    47.542318
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.836,
+   "launches": [
+    "lake-holmes-boat-launch-near-turtle-lake-nd",
+    "lake-holmes-boat-launch-near-turtle-lake-nd-2"
+   ],
+   "water_id": "lake-holmes-nd",
+   "gnis_id": null,
+   "geometry_hash": "d48d25781045e105d9ea337b5732b1bd624b093430b6e707f62aeee56484a5a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hoskins-nd",
+   "name": "Lake Hoskins",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Ashley"
+   ],
+   "bbox": [
+    -99.46528,
+    46.033702,
+    -99.438618,
+    46.049391
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.39,
+   "launches": [
+    "lake-hoskins-boat-launch-nd"
+   ],
+   "water_id": "lake-hoskins-nd",
+   "gnis_id": null,
+   "geometry_hash": "98b18081e5de8e6a470cd755406b6e67e777eb0edac354de6d1ad38a990ee6c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ilo-nd",
+   "name": "Lake Ilo",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Dunn Center"
+   ],
+   "bbox": [
+    -102.68866,
+    47.329371,
+    -102.646432,
+    47.352757
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.943,
+   "launches": [
+    "lake-ilo-boat-launch-nd"
+   ],
+   "water_id": "lake-ilo-nd",
+   "gnis_id": null,
+   "geometry_hash": "0d2e8b28eb1ffc187b72425c06788e01917970b27cda1b33e4eee2a7d72d918d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-isabel-nd",
+   "name": "Lake Isabel",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Steele"
+   ],
+   "bbox": [
+    -99.763824,
+    46.809537,
+    -99.735543,
+    46.827539
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.514,
+   "launches": [
+    "lake-isabel-boat-launch-nd"
+   ],
+   "water_id": "lake-isabel-nd",
+   "gnis_id": null,
+   "geometry_hash": "462804ff2bc6f59b00794f1ec77d994268c2c3cd38fc5099e27d589f5273bfc7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-josephine-nd",
+   "name": "Lake Josephine",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Tuttle"
+   ],
+   "bbox": [
+    -100.025687,
+    47.165529,
+    -99.968827,
+    47.19497
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-josephine-boat-launch-nd"
+   ],
+   "water_id": "lake-josephine-nd",
+   "gnis_id": "1029697",
+   "geometry_hash": "12ffea5af50365991d096f9bfed60a5067c6f8151d5316feb550b4d0f9eec487",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-juanita-nd",
+   "name": "Lake Juanita",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Grace City"
+   ],
+   "bbox": [
+    -98.755648,
+    47.530229,
+    -98.719687,
+    47.56461
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.008,
+   "launches": [
+    "lake-juanita-boat-launch-nd"
+   ],
+   "water_id": "lake-juanita-nd",
+   "gnis_id": null,
+   "geometry_hash": "6f4d600db1c14a7d63576f1cf78a130fb06d4d6cf562cecf0cf12fcd31b0b7cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lamoure-nd",
+   "name": "Lake LaMoure",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "LaMoure"
+   ],
+   "bbox": [
+    -98.303613,
+    46.292121,
+    -98.268508,
+    46.311474
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.814,
+   "launches": [
+    "lake-lamoure-boat-launch-nd"
+   ],
+   "water_id": "lake-lamoure-nd",
+   "gnis_id": null,
+   "geometry_hash": "cf3642f3c4896dbb5ffd17bba93719fc4e740da426acb9c888c830be9a79085d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-metigoshe-nd",
+   "name": "Lake Metigoshe",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bottineau"
+   ],
+   "bbox": [
+    -100.374163,
+    48.95333,
+    -100.335072,
+    49.004318
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.328,
+   "launches": [
+    "hahns-bay-nd",
+    "lake-metigoshe-state-park-nd",
+    "the-narrows-nd"
+   ],
+   "water_id": "lake-metigoshe-nd",
+   "gnis_id": null,
+   "geometry_hash": "fcb120437ca7a5b084a3c9139a548848a4db74cda38fb1f16c0d5bdb5a163a49",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oahe-bismarck-nd",
+   "name": "Lake Oahe",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bismarck"
+   ],
+   "bbox": [
+    -100.704074,
+    46.593067,
+    -100.572922,
+    46.68225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.644,
+   "launches": [
+    "maclean-bottoms-gun-range-nd"
+   ],
+   "water_id": "lake-oahe-bismarck-nd",
+   "gnis_id": null,
+   "geometry_hash": "891f3c0720b946850e435b1d129771f311019cee83af68fe16b77241a780d13f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oahe-nd",
+   "name": "Lake Oahe",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Cannon Ball",
+    "Fort Rice",
+    "Fort Yates",
+    "Livona"
+   ],
+   "bbox": [
+    -101.151381,
+    44.42639,
+    -100.214898,
+    46.628424
+   ],
+   "wikidata": "Q474408",
+   "charted": false,
+   "area_km2": 1385.428,
+   "launches": [
+    "beaver-bay-nd",
+    "beaver-bay-east-ramp-nd",
+    "beaver-bay-low-water-ramp-nd",
+    "cattail-bay-winona-nd",
+    "fort-rice-nd",
+    "fort-rice-low-water-ramp-nd",
+    "fort-yates-nd",
+    "hazelton-nd",
+    "jennerville-rivery-nd",
+    "langeliers-bay-nd",
+    "north-low-water-boat-ramp-nd"
+   ],
+   "water_id": "lake-oahe-nd",
+   "gnis_id": "1266878",
+   "geometry_hash": "df7f2d45e3b9f1bfbb9cb6fe830b10599cbc9a86edc33ab7a3afa663efdfa8b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "prairie-knights-marina-nd",
+    "prairie-knights-marina-low-water-ramp-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-renwick-nd",
+   "name": "Lake Renwick",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Akra Township"
+   ],
+   "bbox": [
+    -97.779618,
+    48.774101,
+    -97.747571,
+    48.787199
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.984,
+   "launches": [
+    "lake-renwick-boat-launch-nd"
+   ],
+   "water_id": "lake-renwick-nd",
+   "gnis_id": null,
+   "geometry_hash": "de5b48b129a78f8cf489d498fb3358052a0f858b5f86f75b90293178bf7e8803",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sakakawea-nd",
+   "name": "Lake Sakakawea",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Brendle's Bay",
+    "Charging Eagle Bay",
+    "Emmet",
+    "Four Bears Village",
+    "Garrison",
+    "Lunds Landing",
+    "New Town",
+    "Pick City",
+    "Riverdale",
+    "Twin Buttes / cuuk gaamaaʔuush / Tííru’pa Pshíí Wóónis",
+    "Van Hook"
+   ],
+   "bbox": [
+    -103.573478,
+    47.4525,
+    -101.249819,
+    48.171338
+   ],
+   "wikidata": "Q1801077",
+   "charted": false,
+   "area_km2": 1415.36,
+   "launches": [
+    "beaver-creek-bay-nd",
+    "beaver-creek-bay-coe-low-water-ramp-nd",
+    "beaver-creek-bay-ndgf-low-water-ramp-nd",
+    "beulah-bay-nd",
+    "charging-eagle-bay-nd",
+    "charging-eagle-bay-2004-low-water-ramp-nd",
+    "deep-water-creek-bay-1st-low-water-ramp-nd",
+    "deep-water-creek-bay-east-corps-ramp-nd",
+    "deep-water-creek-bay-north-game-and-fish-ramp-nd",
+    "douglas-creek-bay-2004-low-water-ramp-nd",
+    "douglas-creek-bay-south-ramp-nd",
+    "douglas-creek-bay-zieglers-ramp-nd",
+    "fort-stevenson-state-park-marina-ramp-nd",
+    "fort-stevenson-state-park-west-ramp-nd",
+    "four-bears-east-ramp-nd",
+    "four-bears-north-low-water-ramp-nd",
+    "four-bears-west-ramp-nd",
+    "garrison-creek-nd",
+    "government-bay-nd",
+    "hazen-bay-nd",
+    "hazen-bay-low-water-ramp-nd",
+    "hazen-bay-walleye-bay-ramp-nd",
+    "indian-hills-resort-nd",
+    "indian-hills-resort-2nd-low-water-ramp-nd",
+    "lake-sakakawea-state-park-nd",
+    "lake-sakakawea-state-park-rodeo-bay-ramp-nd",
+    "lewis-and-clark-state-park-nd",
+    "lewis-and-clark-state-park-low-water-ramp-nd",
+    "little-beaver-bay-east-ramp-nd",
+    "little-beaver-bay-main-lake-ramp-nd",
+    "little-beaver-bay-west-ramp-nd",
+    "little-missouri-bay-nd",
+    "little-missouri-bay-1st-low-water-ramp-nd",
+    "little-missouri-bay-2nd-low-water-ramp-nd",
+    "littlefield-bay-nd",
+    "parshall-bay-east-ramp-nd",
+    "parshall-bay-point-ramp-nd",
+    "parshall-bay-west-park-ramp-nd",
+    "pouch-point-nd",
+    "pouch-point-1st-low-water-ramp-nd",
+    "pouch-point-2nd-low-water-ramp-nd",
+    "red-butte-bay-nd",
+    "skunk-bay-north-ramp-nd",
+    "skunk-bay-south-ramp-nd",
+    "sportsmens-centennial-park-nd",
+    "sportsmens-centennial-park-1st-low-water-ramp-nd",
+    "sportsmens-centennial-park-high-water-ramp-nd",
+    "steinke-bay-nd",
+    "steinke-bay-1st-low-water-ramp-nd",
+    "steinke-bay-2nd-low-water-ramp-nd",
+    "tobacco-garden-creek-bay-1st-low-water-ramp-nd",
+    "tobacco-garden-creek-bay-new-main-ramp-nd",
+    "tobacco-garden-creek-bay-old-main-ramp-nd",
+    "van-hook-north-ramp-nd",
+    "van-hook-old-east-ramp-nd",
+    "van-hook-south-ramp-nd",
+    "west-totten-trail-nd",
+    "west-totten-trail-high-water-ramp-nd",
+    "white-earth-bay-nd",
+    "whitetail-bay-lund-s-landing-nd",
+    "whitetail-bay-lund-s-landing-1st-low-water-ramp-nd",
+    "whitetail-bay-lund-s-landing-2nd-low-water-ramp-nd",
+    "whitetail-bay-lund-s-landing-3rd-low-water-ramp-nd",
+    "whitetail-bay-lund-s-landing-east-ramp-nd",
+    "wolf-creek-east-game-and-fish-ramp-nd",
+    "wolf-creek-low-water-ramp-nd",
+    "wolf-creek-new-main-ramp-nd",
+    "wolf-creek-old-main-ramp-nd"
+   ],
+   "water_id": "lake-sakakawea-nd",
+   "gnis_id": "1033989",
+   "geometry_hash": "8cee6942edd625b14a1390a01498779225d46b8a385c4c72d5c59339304d7a97",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "camp-of-the-cross-nd",
+    "camp-of-the-cross-low-water-ramp-nd",
+    "dakota-waters-resort-nd",
+    "dakota-waters-resort-west-ramp-nd",
+    "mckenzie-bay-east-ramp-nd",
+    "mckenzie-bay-west-ramp-nd",
+    "new-town-marina-nd",
+    "sanish-bay-aftem-nd",
+    "sanish-bay-aftem-low-water-ramp-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tewaukon-nd",
+   "name": "Lake Tewaukon",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Rutland"
+   ],
+   "bbox": [
+    -97.376796,
+    45.990807,
+    -97.330862,
+    46.011949
+   ],
+   "wikidata": "Q49701599",
+   "charted": false,
+   "area_km2": 4.668,
+   "launches": [
+    "east-lake-nd",
+    "north-shore-boat-launch-nd",
+    "south-ramp-on-north-shore-boat-launch-nd"
+   ],
+   "water_id": "lake-tewaukon-nd",
+   "gnis_id": "1032460",
+   "geometry_hash": "dd838c68e8761f4a667a66b83dceb89bbdda7f475b2b5e1c082b9e23f81f6ef2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tobiason-nd",
+   "name": "Lake Tobiason",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Finley"
+   ],
+   "bbox": [
+    -97.643292,
+    47.638793,
+    -97.634591,
+    47.646267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.213,
+   "launches": [
+    "lake-tobiason-boat-launch-nd"
+   ],
+   "water_id": "lake-tobiason-nd",
+   "gnis_id": null,
+   "geometry_hash": "0dec473a3f86cbe302cc8e210180a85a062c23ac041fbf253bac11e7fcd6a311",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-trenton-nd",
+   "name": "Lake Trenton",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Trenton"
+   ],
+   "bbox": [
+    -103.849855,
+    48.040408,
+    -103.795409,
+    48.068301
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.01,
+   "launches": [
+    "lake-trenton-boat-launch-nd"
+   ],
+   "water_id": "lake-trenton-nd",
+   "gnis_id": null,
+   "geometry_hash": "d4e02ca05137ff6ebf195ba2624a07dd5b73a0234e87e2f9a43b4dcca2e06996",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tschida-nd",
+   "name": "Lake Tschida",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Johnson Ford"
+   ],
+   "bbox": [
+    -101.968545,
+    46.590338,
+    -101.810955,
+    46.626789
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.336,
+   "launches": [
+    "carson-sportsmens-nd",
+    "crappie-creek-nd",
+    "elgin-sportsmen-nd",
+    "gilligans-rec-area-nd",
+    "koehlers-point-nd",
+    "lake-tschida-cabin-area-nd",
+    "lake-tschida-north-shore-nd",
+    "rimrock-rec-area-east-ramp-nd",
+    "rimrock-rec-area-west-ramp-nd",
+    "schatz-creek-nd",
+    "sled-creek-new-leipzig-nd"
+   ],
+   "water_id": "lake-tschida-nd",
+   "gnis_id": null,
+   "geometry_hash": "8a4bc85efcaa505f5e7ff1ff414019a014869ae5af1c75a51310f91486b080d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-williams-nd",
+   "name": "Lake Williams",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Lake Williams"
+   ],
+   "bbox": [
+    -99.624361,
+    47.125111,
+    -99.609805,
+    47.132968
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.802,
+   "launches": [
+    "lake-williams-boat-launch-nd"
+   ],
+   "water_id": "lake-williams-nd",
+   "gnis_id": null,
+   "geometry_hash": "fa9051cc0581efc612d5bb297f3bc65ed7e9eb4c36914042a882f97bea13b7b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "larson-lake-nd",
+   "name": "Larson Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Regent"
+   ],
+   "bbox": [
+    -102.522117,
+    46.424343,
+    -102.507841,
+    46.438885
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.563,
+   "launches": [
+    "larson-lake-boat-launch-nd"
+   ],
+   "water_id": "larson-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "23060d71cb23092b694a4dddd7ebb03826fb502a0ae25b6006dc7ececf5d8ab7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-knife-river-nd",
+   "name": "Little Knife River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Stanley"
+   ],
+   "bbox": [
+    -102.567426,
+    48.00071,
+    -102.314172,
+    48.319877
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-knife-river-boat-launch-nd"
+   ],
+   "water_id": "little-knife-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "a4f12592a378e23d944a0ad309678ae4266f54f50a388a3e9dd48b0e48243a55",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-muddy-river-nd",
+   "name": "Little Muddy River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Williston"
+   ],
+   "bbox": [
+    -103.606408,
+    48.135358,
+    -103.5639,
+    48.396474
+   ],
+   "wikidata": "Q6651076",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-muddy-river-boat-launch-nd"
+   ],
+   "water_id": "little-muddy-river-nd",
+   "gnis_id": "1027634",
+   "geometry_hash": "d6492200085eb4fb7fcca9639f99ed190731d33f1d7968e559d718578e384ac3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-south-pembina-river-mount-carmel-nd",
+   "name": "Little South Pembina River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Mount Carmel"
+   ],
+   "bbox": [
+    -98.388832,
+    48.92053,
+    -98.34117,
+    48.938885
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-south-pembina-river-boat-launch-near-mount-carmel-nd"
+   ],
+   "water_id": "little-south-pembina-river-mount-carmel-nd",
+   "gnis_id": null,
+   "geometry_hash": "a233a97cb6973d7fa43970159603eb5a084b143ac15a063a8b61ec925b436511",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-south-pembina-river-nd",
+   "name": "Little South Pembina River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Langdon"
+   ],
+   "bbox": [
+    -98.308158,
+    48.918361,
+    -98.302271,
+    48.9212
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-south-pembina-river-boat-launch-near-langdon-nd"
+   ],
+   "water_id": "little-south-pembina-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "e9f07ec2af8d4c4381899dba29212d73ca6f4e3282d0a494a8943fc8d854bacf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-bottineau-nd",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bottineau"
+   ],
+   "bbox": [
+    -100.263919,
+    48.912018,
+    -100.248339,
+    48.935487
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.208,
+   "launches": [
+    "long-lake-boat-launch-near-bottineau-nd"
+   ],
+   "water_id": "long-lake-bottineau-nd",
+   "gnis_id": null,
+   "geometry_hash": "db88ec732666ffc112d0e9dc65ecc3fcd20d2b74d515851f944090d8050635f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-nd",
+   "name": "Long Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "McLean County"
+   ],
+   "bbox": [
+    -100.871851,
+    47.703589,
+    -100.850764,
+    47.734355
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.994,
+   "launches": [
+    "long-lake-boat-launch-in-mclean-county-nd"
+   ],
+   "water_id": "long-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "035cd5d36b23d28f49043e1bc10c901d2a2ee0929bdece1647afa052ab16b0b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "loon-lake-nd",
+   "name": "Loon Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bottineau"
+   ],
+   "bbox": [
+    -100.320327,
+    48.926435,
+    -100.29467,
+    48.941189
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.536,
+   "launches": [
+    "loon-lake-boat-launch-nd"
+   ],
+   "water_id": "loon-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "16e61154e4ef192a2fc5a5f07e5e397718ad1931ac0490b482a7a568e62d357d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lueck-lake-nd",
+   "name": "Lueck Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hankinson"
+   ],
+   "bbox": [
+    -97.053092,
+    46.025748,
+    -97.033143,
+    46.032186
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.663,
+   "launches": [
+    "lueck-lake-boat-launch-nd"
+   ],
+   "water_id": "lueck-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "8d05f96e75e4178e48c895258d55db0c170a91efde0931ed0f825b8cf85eab28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "makoti-lake-nd",
+   "name": "Makoti Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Makoti"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "makoti-lake-boat-launch-nd"
+   ],
+   "water_id": "makoti-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marquette-slough-nd",
+   "name": "Marquette Slough",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Rutland"
+   ],
+   "bbox": [
+    -97.366033,
+    46.011289,
+    -97.355712,
+    46.020485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.346,
+   "launches": [
+    "marquette-slough-boat-launch-nd"
+   ],
+   "water_id": "marquette-slough-nd",
+   "gnis_id": null,
+   "geometry_hash": "4708558d054169dcc0bf8af735bdb110bc3aaeed745d0b411f3014592186192b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "martin-lake-nd",
+   "name": "Martin Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.717466,
+    48.857294,
+    -99.697036,
+    48.863537
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "martin-lake-boat-launch-nd"
+   ],
+   "water_id": "martin-lake-nd",
+   "gnis_id": "1030107",
+   "geometry_hash": "a3be4294f323b5569e2ae4339dc9a970179c1e9fe3f4360e4c04012825e2767f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marvin-miller-lake-nd",
+   "name": "Marvin Miller Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Streeter"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "marvin-miller-lake-boat-launch-nd"
+   ],
+   "water_id": "marvin-miller-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcclusky-canal-nd",
+   "name": "McClusky Canal",
+   "kind": "canal",
+   "state": "ND",
+   "towns": [
+    "McClusky"
+   ],
+   "bbox": [
+    -101.100459,
+    47.313985,
+    -100.446848,
+    47.56973
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mcclusky-canal-boat-launch-nd"
+   ],
+   "water_id": "mcclusky-canal-nd",
+   "gnis_id": null,
+   "geometry_hash": "fb203fc9ac3303e817ccbba4c81e47012957d692740138585912f6ff097a879e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcleod-lake-nd",
+   "name": "McLeod Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Ray"
+   ],
+   "bbox": [
+    -103.182626,
+    48.335295,
+    -103.169086,
+    48.340722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.118,
+   "launches": [
+    "mcleod-lake-boat-launch-nd"
+   ],
+   "water_id": "mcleod-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "a010cd54e5c988cbdd0f7325fb7e505d7e442cf2cfb961c67232191cfcaa6e75",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcville-coulee-nd",
+   "name": "McVille Coulee",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "McVille"
+   ],
+   "bbox": [
+    -98.175041,
+    47.712392,
+    -98.150998,
+    47.795766
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mcville-coulee-boat-launch-near-mcville-nd"
+   ],
+   "water_id": "mcville-coulee-nd",
+   "gnis_id": null,
+   "geometry_hash": "da2210acd0f5f332bfb3f90a82c55b37130b878d4f9cd47b033a3ce8d5966b82",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-lake-nd",
+   "name": "Meadow Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Barnes County"
+   ],
+   "bbox": [
+    -98.363448,
+    46.728254,
+    -98.304341,
+    46.778401
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.849,
+   "launches": [
+    "meadow-lake-boat-launch-nd"
+   ],
+   "water_id": "meadow-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "685ad829fb761022e29253b2399fb1d2892cd287dd1a1c4e83d572bfa2ed1dfa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-branch-forest-river-nd",
+   "name": "Middle Branch Forest River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Lankin",
+    "Whitman"
+   ],
+   "bbox": [
+    -98.121721,
+    48.180515,
+    -97.808459,
+    48.248022
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "middle-branch-forest-river-boat-launch-near-lankin-nd",
+    "middle-branch-forest-river-boat-launch-near-whitman-nd"
+   ],
+   "water_id": "middle-branch-forest-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "85f64a6bc5cb291e7372613ba1ba87758385ff81ff8499f89fa76b6531704992",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "miller-lake-nd",
+   "name": "Miller Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Guyson"
+   ],
+   "bbox": [
+    -99.222897,
+    46.234037,
+    -99.17196,
+    46.246213
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "miller-lake-boat-launch-nd"
+   ],
+   "water_id": "miller-lake-nd",
+   "gnis_id": "1034170",
+   "geometry_hash": "e96e079f8ee452c18242b1bf3de5364e3ce8d633e921b6564619bb781e53329f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mirror-lake-nd",
+   "name": "Mirror Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hettinger"
+   ],
+   "bbox": [
+    -102.644094,
+    45.993608,
+    -102.632387,
+    45.998679
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.273,
+   "launches": [
+    "mirror-lake-boat-launch-nd"
+   ],
+   "water_id": "mirror-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "8cd58b1ce42f01795dae8371cb23bcf82318dd0840b430c3c6f86cf0302f20cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "missouri-river-nd",
+   "name": "Missouri River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Bismarck",
+    "Buford",
+    "Mandan",
+    "Pick City",
+    "Sanger",
+    "Schmidt",
+    "Stanton",
+    "Washburn",
+    "Williston"
+   ],
+   "bbox": [
+    -104.609337,
+    45.861131,
+    -100.377264,
+    48.146386
+   ],
+   "wikidata": "Q5419",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "car-bodies-nd",
+    "confluence-area-new-east-ramp-nd",
+    "confluence-area-old-main-ramp-nd",
+    "fox-island-park-nd",
+    "garrison-dam-tailrace-nd",
+    "graner-bottoms-sugar-loaf-nd",
+    "hoge-landing-nd",
+    "kimball-bottoms-desert-nd",
+    "kniefel-misty-waters-landing-nd",
+    "lewis-and-clark-bridge-nd",
+    "little-heart-bottoms-schmidt-nd",
+    "sanger-cross-ranch-nd",
+    "steckel-boat-landing-wilton-nd",
+    "upa-site-stanton-nd",
+    "washburn-nd"
+   ],
+   "water_id": "missouri-river-ia",
+   "gnis_id": "756398",
+   "geometry_hash": "369fd9885a34a5bffd017ea45dc4ebb3f86c13898914e441c17509317ce42f4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "moon-lake-nd",
+   "name": "Moon Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Valley City"
+   ],
+   "bbox": [
+    -98.164731,
+    46.851744,
+    -98.15486,
+    46.861082
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.418,
+   "launches": [
+    "moon-lake-boat-launch-nd"
+   ],
+   "water_id": "moon-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "24c95aea03386c07ae1ce050659e121518092f10a863dd56cf7b213a5b1da299",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "moores-lake-nd",
+   "name": "Moores Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Dickey County"
+   ],
+   "bbox": [
+    -98.88408,
+    46.03313,
+    -98.877774,
+    46.037789
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "moores-lake-boat-launch-nd"
+   ],
+   "water_id": "moores-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "00d7754c2c9b52b29db0ab87b0dee7956d5e6b5bd1d361f5f4ba51bbb502f9b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mooreton-pond-nd",
+   "name": "Mooreton Pond",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Mooreton"
+   ],
+   "bbox": [
+    -96.841642,
+    46.265557,
+    -96.835079,
+    46.268536
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.178,
+   "launches": [
+    "mooreton-pond-boat-launch-nd"
+   ],
+   "water_id": "mooreton-pond-nd",
+   "gnis_id": null,
+   "geometry_hash": "65e38964a0d595ec4e8a134fb4a530c04c3f3e59928ae29e1be13e6082c3c89f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nelson-lake-max-nd",
+   "name": "Nelson Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Max"
+   ],
+   "bbox": [
+    -101.480394,
+    47.919074,
+    -101.470395,
+    47.925045
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.39,
+   "launches": [
+    "nelson-lake-boat-launch-near-max-nd",
+    "nelson-lake-boat-launch-near-max-nd-2"
+   ],
+   "water_id": "nelson-lake-max-nd",
+   "gnis_id": null,
+   "geometry_hash": "7e5bc74146a4c7d07d065e9a4106f60cdc744033399d5d2ec1c672fbec90a630",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nelson-lake-nd",
+   "name": "Nelson Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Center"
+   ],
+   "bbox": [
+    -101.245522,
+    47.064049,
+    -101.20147,
+    47.092251
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.409,
+   "launches": [
+    "nelson-lake-boat-launch-near-center-nd",
+    "nelson-lake-boat-launch-near-center-nd-2"
+   ],
+   "water_id": "nelson-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "faa6f101dbefb2d422323c16500c0c81ab14f00aa53cea76c652586b8c10aaa6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-johns-lake-nd",
+   "name": "New Johns Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "McClusky"
+   ],
+   "bbox": [
+    -100.673057,
+    47.310526,
+    -100.613614,
+    47.33138
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.949,
+   "launches": [
+    "new-johns-lake-boat-launch-near-mcclusky-nd",
+    "new-johns-lake-boat-launch-in-burleigh-county-nd"
+   ],
+   "water_id": "new-johns-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "11046a22fb904280a9db3e3081622b0f4af594fbf179fa8e1e6f0a9236bafc0c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-forest-river-nd",
+   "name": "North Branch Forest River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Adams"
+   ],
+   "bbox": [
+    -98.011405,
+    48.309099,
+    -97.8443,
+    48.372054
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-branch-forest-river-boat-launch-nd"
+   ],
+   "water_id": "north-branch-forest-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "58ca7add28340b541b2d1bd378568ee979302b7fe097f8c4ae172d019b9464e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-golden-lake-nd",
+   "name": "North Golden Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hatton"
+   ],
+   "bbox": [
+    -97.636225,
+    47.581036,
+    -97.628414,
+    47.610277
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.212,
+   "launches": [
+    "north-golden-lake-boat-launch-near-hatton-nd",
+    "north-golden-lake-boat-launch-near-hatton-nd-2"
+   ],
+   "water_id": "north-golden-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "b00528129d5e9c50932bfbde828694cc914d56df034af8e5f253ab166ed31cb2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-washington-lake-nd",
+   "name": "North Washington Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Eddy County"
+   ],
+   "bbox": [
+    -98.721643,
+    47.741552,
+    -98.697123,
+    47.768813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.105,
+   "launches": [
+    "north-washington-lake-boat-launch-nd"
+   ],
+   "water_id": "north-washington-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "2022f3cb6d0969fcf9b610a6e486af693b7bd47957ee5d495d7876455b1f8b08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "odland-dam-nd",
+   "name": "Odland Dam",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Beach"
+   ],
+   "bbox": [
+    -104.016745,
+    47.023305,
+    -104.004429,
+    47.041722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.482,
+   "launches": [
+    "odland-dam-boat-launch-near-beach-nd"
+   ],
+   "water_id": "odland-dam-nd",
+   "gnis_id": null,
+   "geometry_hash": "1f387d830b206e6aa94ccfc6edee0871f027143b6f8792bf2c83492e1d92412b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ole-breum-lake-nd",
+   "name": "Ole Breum Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Forman"
+   ],
+   "bbox": [
+    -97.497853,
+    46.10376,
+    -97.486257,
+    46.126117
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.028,
+   "launches": [
+    "ole-breum-lake-boat-launch-nd"
+   ],
+   "water_id": "ole-breum-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "88dabb67770670d90277d209bbc0102f11a749b9f825e9368c9150bac136065f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ost-lake-nd",
+   "name": "Ost Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Guyson"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ost-lake-boat-launch-nd"
+   ],
+   "water_id": "ost-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "painted-woods-creek-nd",
+   "name": "Painted Woods Creek",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Washburn"
+   ],
+   "bbox": [
+    -100.98447,
+    47.207524,
+    -100.521854,
+    47.314742
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "painted-woods-creek-boat-launch-nd"
+   ],
+   "water_id": "painted-woods-creek-nd",
+   "gnis_id": "1030618",
+   "geometry_hash": "0aebf046cf05d3358a5b3cdc40224f19616424249012e20d0ad748a568488930",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "painted-woods-pond-nd",
+   "name": "Painted Woods Pond",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Washburn"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "painted-woods-pond-boat-launch-nd"
+   ],
+   "water_id": "painted-woods-pond-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pearl-lake-nd",
+   "name": "Pearl Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Medina"
+   ],
+   "bbox": [
+    -99.369884,
+    47.021134,
+    -99.338822,
+    47.041709
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.901,
+   "launches": [
+    "pearl-lake-boat-launch-nd"
+   ],
+   "water_id": "pearl-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "3c92b8563caf5451cce0a061ac3212cd55d9a2e22b2329a261b0c41fdb8a6cf9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pelican-lake-nd",
+   "name": "Pelican Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bottineau County"
+   ],
+   "bbox": [
+    -100.280197,
+    48.939776,
+    -100.262267,
+    48.947115
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.543,
+   "launches": [
+    "pelican-lake-boat-launch-nd"
+   ],
+   "water_id": "pelican-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "3264b2fa4e691a8cbe39098e562beba5d8c3bdf8aee469b4c6b8be37b8d86bd4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pfeifle-lake-nd",
+   "name": "Pfeifle Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Ashley"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pfeifle-lake-boat-launch-nd"
+   ],
+   "water_id": "pfeifle-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pheasant-lake-nd",
+   "name": "Pheasant Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Ellendale"
+   ],
+   "bbox": [
+    -98.682653,
+    46.003986,
+    -98.659974,
+    46.039826
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.791,
+   "launches": [
+    "pheasant-lake-boat-launch-nd"
+   ],
+   "water_id": "pheasant-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "ad12691a53de620738b61741e40f5a3983207afcf947f71e67d5afd4e6af0040",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pipestem-lake-nd",
+   "name": "Pipestem Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Jamestown"
+   ],
+   "bbox": [
+    -98.859552,
+    46.959886,
+    -98.749035,
+    46.981865
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.95,
+   "launches": [
+    "parkhurst-landing-nd"
+   ],
+   "water_id": "pipestem-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "319b8a5e2c5322d2b774bd20a686e42e7c6d2148fb50c82405c9369b92998d71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "powers-lake-nd",
+   "name": "Powers Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Powers Lake"
+   ],
+   "bbox": [
+    -102.655556,
+    48.496871,
+    -102.595739,
+    48.559768
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.76,
+   "launches": [
+    "powers-lake-boat-launch-near-powers-lake-nd",
+    "powers-lake-boat-launch-near-powers-lake-nd-2"
+   ],
+   "water_id": "powers-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "cd28d0beb28e43c635b7b5d7308012cfde25bbb49fe1c4d50d20f4064088f07b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "r-and-m-lake-nd",
+   "name": "R and M Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Stutsman County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "r-and-m-lake-boat-launch-nd"
+   ],
+   "water_id": "r-and-m-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "railroad-lake-nd",
+   "name": "Railroad Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Guyson"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "railroad-lake-boat-launch-nd"
+   ],
+   "water_id": "railroad-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "raleigh-reservoir-nd",
+   "name": "Raleigh Reservoir",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Raleigh"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "raleigh-reservoir-boat-launch-nd"
+   ],
+   "water_id": "raleigh-reservoir-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-river-nd",
+   "name": "Red River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Abercrombie",
+    "Drayton",
+    "Fargo",
+    "Grand Forks",
+    "Pembina",
+    "Wahpeton"
+   ],
+   "bbox": [
+    -97.355502,
+    46.264366,
+    -96.5944,
+    50.312214
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 73.738,
+   "launches": [
+    "52nd-ave-area-nd",
+    "belmont-park-nd",
+    "brushvale-bridge-nd",
+    "drayton-city-park-nd",
+    "drayton-dam-nd",
+    "red-river-boat-launch-near-fargo-nd-2",
+    "fort-abercrombie-nd",
+    "midtown-dam-fargo-nd",
+    "midtown-dam-nd",
+    "north-forks-landing-nd",
+    "pembina-city-park-nd",
+    "south-forks-area-nd"
+   ],
+   "water_id": "red-river-mn",
+   "gnis_id": null,
+   "geometry_hash": "0e4b4bb630978b6b4bdf8f16fcc1459a46fde6b3e119358b5bbcdfc95f201a3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-willow-lake-nd",
+   "name": "Red Willow Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Binford"
+   ],
+   "bbox": [
+    -98.380936,
+    47.641171,
+    -98.368595,
+    47.653523
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.672,
+   "launches": [
+    "red-willow-lake-boat-launch-nd"
+   ],
+   "water_id": "red-willow-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "19d21a58aed6304eec034eeb50be3e0d7f69b2fb91187e22ecf4a977ed1142a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "reule-lake-nd",
+   "name": "Reule Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Medina"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "reule-lake-boat-launch-nd"
+   ],
+   "water_id": "reule-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rice-lake-hesnault-nd",
+   "name": "Rice Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hesnault"
+   ],
+   "bbox": [
+    -101.551894,
+    48.002785,
+    -101.526983,
+    48.01613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.104,
+   "launches": [
+    "rice-lake-boat-launch-near-hesnault-nd"
+   ],
+   "water_id": "rice-lake-hesnault-nd",
+   "gnis_id": null,
+   "geometry_hash": "0a90e63c2b87ed615678dd4efcc33a1a7914c9b8d75d01269d581bcb55785dda",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rice-lake-nd",
+   "name": "Rice Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Hull"
+   ],
+   "bbox": [
+    -100.09287,
+    46.023649,
+    -100.055531,
+    46.068073
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.246,
+   "launches": [
+    "rice-lake-boat-launch-near-hull-nd",
+    "rice-lake-boat-launch-near-hull-nd-2"
+   ],
+   "water_id": "rice-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "0f2a5c8355f0ff1a2b9ad34b82e421862933180e14ec48c2a7e2bab3854f825c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-drake-nd",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Drake"
+   ],
+   "bbox": [
+    -100.290842,
+    48.021455,
+    -100.262631,
+    48.041408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "round-lake-boat-launch-nd"
+   ],
+   "water_id": "round-lake-drake-nd",
+   "gnis_id": "1031018",
+   "geometry_hash": "e98f61a85603bbd24713b006baddc89e4e4679cd023b3fd1de5cf19561324215",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-nd",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Minnewaukan"
+   ],
+   "bbox": [
+    -99.237808,
+    48.021137,
+    -99.223874,
+    48.030897
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.657,
+   "launches": [
+    "round-lake-bay-nd"
+   ],
+   "water_id": "round-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "13aee88d086ada918e0381324b0e4244078bebb4e23aaab1d8f8559bda4a3876",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saint-marys-lake-nd",
+   "name": "Saint Marys Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Valley City"
+   ],
+   "bbox": [
+    -98.161563,
+    46.843456,
+    -98.147357,
+    46.854083
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.337,
+   "launches": [
+    "saint-marys-lake-boat-launch-nd"
+   ],
+   "water_id": "saint-marys-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "f31697c7fdba34c1805b5d787ae47656e0f5628eb91b911e905d5786a27a7686",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sand-lake-nd",
+   "name": "Sand Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Rugby"
+   ],
+   "bbox": [
+    -99.805186,
+    48.406027,
+    -99.797514,
+    48.411682
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sand-lake-boat-launch-near-rugby-nd"
+   ],
+   "water_id": "sand-lake-nd",
+   "gnis_id": "1031342",
+   "geometry_hash": "ba36fe9c712731fb00d9abbde5f44af6b1839c475e222437729242952cc6cd35",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sather-lake-nd",
+   "name": "Sather Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "McKenzie County"
+   ],
+   "bbox": [
+    -103.811991,
+    47.664065,
+    -103.7972,
+    47.674035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "sather-lake-boat-launch-nd"
+   ],
+   "water_id": "sather-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "c80b99ad67d13531bcb9b0c03b80a9b76413e8b89b941a1b73e2d6b50748d5cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "school-section-lake-nd",
+   "name": "School Section Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kelvin"
+   ],
+   "bbox": [
+    -100.007927,
+    48.937229,
+    -99.986787,
+    48.95081
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.467,
+   "launches": [
+    "school-section-lake-boat-launch-nd"
+   ],
+   "water_id": "school-section-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "5ed2341ef6ce17f7e76a9516fdf51d414e3372a01961f6f6f357f73e0360199f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "schumacher-lake-nd",
+   "name": "Schumacher Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kidder County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "schumacher-lake-boat-launch-nd"
+   ],
+   "water_id": "schumacher-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sheep-creek-nd",
+   "name": "Sheep Creek",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Elgin"
+   ],
+   "bbox": [
+    -101.854003,
+    46.342526,
+    -101.848591,
+    46.347713
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sheep-creek-boat-launch-nd"
+   ],
+   "water_id": "sheep-creek-nd",
+   "gnis_id": null,
+   "geometry_hash": "c5e1a1d9506e60e273ca1d416f796a4bf56a2b0682598f2247bdee8d4b85912e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sheyenne-river-nd",
+   "name": "Sheyenne River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Fort Ransom",
+    "Harvey",
+    "Lisbon",
+    "Valley City"
+   ],
+   "bbox": [
+    -100.504089,
+    46.367537,
+    -96.825261,
+    47.910557
+   ],
+   "wikidata": "Q2278535",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ashtabula-tailrace-nd",
+    "chautaugua-park-nd",
+    "faust-park-nd",
+    "ft-ransom-walker-dam-nd",
+    "lisbon-city-park-nd",
+    "pommeroy-canoe-access-site-nd",
+    "sheyenne-river-boat-launch-near-harvey-nd"
+   ],
+   "water_id": "sheyenne-river-nd",
+   "gnis_id": "1035146",
+   "geometry_hash": "4be240a523247f7bb69d179c4cd10839cb27fcb0242b668ed67ffd8cb9b6bcb7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "short-creek-dam-nd",
+   "name": "Short Creek Dam",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "short-creek-dam-boat-launch-nd"
+   ],
+   "water_id": "short-creek-dam-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shriner-lake-nd",
+   "name": "Shriner Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Lidgerwood"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "shriner-lake-boat-launch-nd"
+   ],
+   "water_id": "shriner-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shutte-lake-nd",
+   "name": "Shutte Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Dunseith"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "shutte-lake-boat-launch-nd"
+   ],
+   "water_id": "shutte-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sibley-lake-nd",
+   "name": "Sibley Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Steele"
+   ],
+   "bbox": [
+    -99.762911,
+    46.929823,
+    -99.718466,
+    46.970785
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.704,
+   "launches": [
+    "sibley-lake-boat-launch-nd"
+   ],
+   "water_id": "sibley-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "bac18dd40daf9371c060df2d365b9d30667eaaeadbba8710b090c4957c29fb3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-bowdon-nd",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bowdon"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "silver-lake-boat-launch-near-bowdon-nd"
+   ],
+   "water_id": "silver-lake-bowdon-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-nd",
+   "name": "Silver Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Forman"
+   ],
+   "bbox": [
+    -97.585987,
+    46.019482,
+    -97.564264,
+    46.027645
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.611,
+   "launches": [
+    "silver-lake-boat-launch-near-forman-nd",
+    "silver-lake-boat-launch-near-forman-nd-2"
+   ],
+   "water_id": "silver-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "81b2bc64e6c1ad04b72f61f4a66416170af2a69af712b0f5562b1c2cea1c3c53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skjermo-lake-nd",
+   "name": "Skjermo Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Westby"
+   ],
+   "bbox": [
+    -103.885195,
+    48.950388,
+    -103.880588,
+    48.957632
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "skjermo-lake-boat-launch-nd"
+   ],
+   "water_id": "skjermo-lake-nd",
+   "gnis_id": "1032114",
+   "geometry_hash": "c89a41d3dd58a3825af36cbae3fb85954f73a582e007cf2ecd570c5063f9d1de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smisheck-lake-nd",
+   "name": "Smisheck Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Powers Lake"
+   ],
+   "bbox": [
+    -102.66645,
+    48.611367,
+    -102.640433,
+    48.635823
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.891,
+   "launches": [
+    "smisheck-lake-boat-launch-nd"
+   ],
+   "water_id": "smisheck-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "5f1c797407606a612d16682c8ee74a1776e4f7529d4d734b426f1d5a7be7132c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "souris-river-nd",
+   "name": "Souris River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Burlington",
+    "Carpio",
+    "Cole Ford",
+    "Minot",
+    "Upham"
+   ],
+   "bbox": [
+    -101.971321,
+    48.061606,
+    -100.390873,
+    49.266161
+   ],
+   "wikidata": "Q487925",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-lodge-canoe-trail-nd",
+    "east-side-estates-canoe-launch-nd",
+    "mouse-river-park-nd"
+   ],
+   "water_id": "souris-river-nd",
+   "gnis_id": "1035892",
+   "geometry_hash": "47638565fac25ffca490f4658d5815e107cf69d79dbca343918abcb7b8c505a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pool-87-pumping-station-boat-ramp-nd",
+    "pool-87a-gravel-boat-ramp-nd",
+    "pool-96-concrete-slab-boat-launch-nd",
+    "pool-a-un-improved-nd"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-branch-forest-river-nd",
+   "name": "South Branch Forest River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Fordville"
+   ],
+   "bbox": [
+    -97.966879,
+    48.155869,
+    -97.742866,
+    48.208136
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-branch-forest-river-boat-launch-nd"
+   ],
+   "water_id": "south-branch-forest-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "1e6d2b57f4f5e2d47a8bb13ce81ac66070f5de4682386a959d87640e86a6f297",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-branch-turtle-river-nd",
+   "name": "South Branch Turtle River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Larimore"
+   ],
+   "bbox": [
+    -97.820413,
+    47.928084,
+    -97.58377,
+    47.948598
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-branch-turtle-river-boat-launch-nd"
+   ],
+   "water_id": "south-branch-turtle-river-nd",
+   "gnis_id": null,
+   "geometry_hash": "32ee003928f9e0e741703acfe5a3b4e4a56b6c240eb98e30f61bdc2e67b8105b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spiritwood-lake-nd",
+   "name": "Spiritwood Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Spiritwood Lake"
+   ],
+   "bbox": [
+    -98.603177,
+    47.068413,
+    -98.569789,
+    47.080889
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-lake-spiritwood-lake-nd",
+    "spiritwood-lake-boat-launch-near-spiritwood-lake-nd",
+    "spiritwood-lake-boat-launch-near-spiritwood-lake-nd-2"
+   ],
+   "water_id": "spiritwood-lake-nd",
+   "gnis_id": "1032219",
+   "geometry_hash": "7d0590d164aa19351f25c59aaef6b6442e12ad77a0fcb97ec209ecb733404edb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sprague-lake-nd",
+   "name": "Sprague Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Rutland"
+   ],
+   "bbox": [
+    -97.550322,
+    46.012396,
+    -97.530142,
+    46.022629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.847,
+   "launches": [
+    "east-sprague-lake-boat-launch-nd",
+    "west-sprague-lake-boat-launch-nd"
+   ],
+   "water_id": "sprague-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "94981c220beb079a98a969640d76005f2ec8e2242e7ef40753cbc567393ab25a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-nd",
+   "name": "Spring Creek",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Litchville"
+   ],
+   "bbox": [
+    -98.286175,
+    46.667737,
+    -97.947894,
+    46.853963
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spring-creek-boat-launch-nd"
+   ],
+   "water_id": "spring-creek-nd",
+   "gnis_id": null,
+   "geometry_hash": "abe748bdd1a2d08f3a3c6574e92a66e231c44ea1f073dd330570d79bc99a623a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-lake-nd",
+   "name": "Spring Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Rhame"
+   ],
+   "bbox": [
+    -103.741736,
+    46.220995,
+    -103.725077,
+    46.228539
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spring-lake-boat-launch-nd"
+   ],
+   "water_id": "spring-lake-nd",
+   "gnis_id": "1032253",
+   "geometry_hash": "2e0f97e96425cd8bc3895f3766caf7752ec5347de83b7a54079db1ce44971871",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stink-lake-nd",
+   "name": "Stink Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Medina"
+   ],
+   "bbox": [
+    -99.439082,
+    46.877727,
+    -99.412284,
+    46.890551
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stink-lake-boat-launch-nd"
+   ],
+   "water_id": "stink-lake-nd",
+   "gnis_id": "1032317",
+   "geometry_hash": "8591e5ee92a6f9fa6b3dc396f25af6e810a2d2b6d61ffac9cc1b20eb8e62ed56",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stober-lake-nd",
+   "name": "Stober Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Goodrich"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stober-lake-boat-launch-nd"
+   ],
+   "water_id": "stober-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "storm-creek-lake-nd",
+   "name": "Storm Creek Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "New Salem"
+   ],
+   "bbox": [
+    -101.620649,
+    46.894543,
+    -101.600334,
+    46.908441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.599,
+   "launches": [
+    "storm-creek-lake-boat-launch-nd"
+   ],
+   "water_id": "storm-creek-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "318d2cb7ab8cfcab2553e5d66d5f9b983268f3391d3cc993cefd2018ea728d3a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "strawberry-lake-bottineau-nd",
+   "name": "Strawberry Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Bottineau"
+   ],
+   "bbox": [
+    -100.508564,
+    48.941774,
+    -100.502007,
+    48.948834
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.192,
+   "launches": [
+    "strawberry-lake-boat-launch-near-bottineau-nd"
+   ],
+   "water_id": "strawberry-lake-bottineau-nd",
+   "gnis_id": null,
+   "geometry_hash": "990cb664763cb4df9c1251280a71cea6cbc53640d52f8af4208e011dfaea11fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "strawberry-lake-nd",
+   "name": "Strawberry Lake",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "McLean County"
+   ],
+   "bbox": [
+    -100.872522,
+    47.751594,
+    -100.860838,
+    47.768946
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.642,
+   "launches": [
+    "strawberry-lake-boat-launch-in-mclean-county-nd"
+   ],
+   "water_id": "strawberry-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "6d497d2ec3a5ba5e63be6240f32bb96050246148e8795e099b651c1ac73fb9e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "streeter-lake-nd",
+   "name": "Streeter Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Streeter"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "streeter-lake-boat-launch-nd"
+   ],
+   "water_id": "streeter-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stump-lake-nd",
+   "name": "Stump Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Tolna"
+   ],
+   "bbox": [
+    -98.525587,
+    47.840121,
+    -98.301359,
+    47.991076
+   ],
+   "wikidata": "Q16900828",
+   "charted": false,
+   "area_km2": 77.29,
+   "launches": [
+    "stump-lake-park-nd",
+    "tolna-landing-stump-lake-nd"
+   ],
+   "water_id": "stump-lake-nd",
+   "gnis_id": "1032375",
+   "geometry_hash": "f30d9e62d8112b8716062368f10527bc168a22bfe88a20668f82667961872122",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sweet-briar-lake-nd",
+   "name": "Sweet Briar Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "New Salem"
+   ],
+   "bbox": [
+    -101.281324,
+    46.863507,
+    -101.255343,
+    46.880755
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.155,
+   "launches": [
+    "sweet-briar-lake-boat-launch-near-new-salem-nd",
+    "sweet-briar-lake-boat-launch-near-new-salem-nd-2"
+   ],
+   "water_id": "sweet-briar-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "90c593736b3d29c1d163105bc6f7d1cc3891d547af9436e8edaaa98543c87edd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tolna-coulee-nd",
+   "name": "Tolna Coulee",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Tolna"
+   ],
+   "bbox": [
+    -98.525535,
+    47.787939,
+    -98.381567,
+    47.886848
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tolna-coulee-boat-launch-nd"
+   ],
+   "water_id": "tolna-coulee-nd",
+   "gnis_id": null,
+   "geometry_hash": "b320fcef54a6ead7924d0800eb151ea5b60f73cd303358f019cc664a867d412d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tosse-slough-nd",
+   "name": "Tosse Slough",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Lidgerwood"
+   ],
+   "bbox": [
+    -97.251194,
+    45.949485,
+    -97.219023,
+    45.963569
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.545,
+   "launches": [
+    "tosse-slough-boat-launch-nd"
+   ],
+   "water_id": "tosse-slough-nd",
+   "gnis_id": null,
+   "geometry_hash": "fd415c57e625c665e01984c07db7fe4e38b1269b3a4f8b57b6bffe86c4b02cfb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trautman-slough-nd",
+   "name": "Trautman Slough",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Cleveland"
+   ],
+   "bbox": [
+    -99.202219,
+    46.810403,
+    -99.149677,
+    46.836224
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.24,
+   "launches": [
+    "trautman-slough-boat-launch-nd"
+   ],
+   "water_id": "trautman-slough-nd",
+   "gnis_id": null,
+   "geometry_hash": "f740a5dc4d23d6c729f3278c77c91816304a9962fdf5bef2bf9ed27962e0f28b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lakes-nd",
+   "name": "Twin Lakes",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "LaMoure"
+   ],
+   "bbox": [
+    -98.305565,
+    46.373162,
+    -98.244145,
+    46.442113
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.944,
+   "launches": [
+    "twin-lakes-boat-launch-nd"
+   ],
+   "water_id": "twin-lakes-nd",
+   "gnis_id": null,
+   "geometry_hash": "68297382abd39bf5e26f4c5d646f32eb667fa7ac5c3b7bbd17ab75fdde94fde2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "velva-sportsmen-s-pond-nd",
+   "name": "Velva Sportsmen's Pond",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Velva"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "velva-sportsmen-s-pond-boat-launch-nd"
+   ],
+   "water_id": "velva-sportsmen-s-pond-nd",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "walker-lake-nd",
+   "name": "Walker Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.863806,
+    48.949505,
+    -99.827313,
+    48.981651
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.422,
+   "launches": [
+    "walker-lake-boat-launch-near-belcourt-nd"
+   ],
+   "water_id": "walker-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "dba43fecc1e8680f748825f412bb0ad36191322757e29acb22a6a63ecc77926e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-lake-south-nd",
+   "name": "West Lake South",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Napoleon"
+   ],
+   "bbox": [
+    -99.823174,
+    46.443761,
+    -99.784932,
+    46.510399
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.92,
+   "launches": [
+    "west-lake-south-boat-launch-nd"
+   ],
+   "water_id": "west-lake-south-nd",
+   "gnis_id": null,
+   "geometry_hash": "567f87a6c29661a90d258068b862b0ba463b541e9317aaa35836efa0d566f575",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wheaton-lake-nd",
+   "name": "Wheaton Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Belcourt"
+   ],
+   "bbox": [
+    -99.798355,
+    48.915426,
+    -99.788098,
+    48.922434
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.297,
+   "launches": [
+    "wheaton-lake-boat-launch-near-belcourt-nd",
+    "wheaton-lake-boat-launch-near-belcourt-nd-2"
+   ],
+   "water_id": "wheaton-lake-nd",
+   "gnis_id": null,
+   "geometry_hash": "e4e27c7f3adf66ad246d63155eca0f1599b440cfa122b674501b4b20769a7fad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "white-earth-river-nd",
+   "name": "White Earth River",
+   "kind": "stream",
+   "state": "ND",
+   "towns": [
+    "Powers Lake"
+   ],
+   "bbox": [
+    -102.782636,
+    48.112032,
+    -102.66455,
+    48.618767
+   ],
+   "wikidata": "Q6126544",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "white-earth-river-boat-launch-nd"
+   ],
+   "water_id": "white-earth-river-nd",
+   "gnis_id": "1035240",
+   "geometry_hash": "cc8338f72061cac6f307f84ea61ef488a647ee0e591b7c8c566930da4d5b6ea5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-dam-nd",
+   "name": "Wilson Dam",
+   "kind": "reservoir",
+   "state": "ND",
+   "towns": [
+    "Merricourt"
+   ],
+   "bbox": [
+    -98.761138,
+    46.174786,
+    -98.748891,
+    46.178139
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.177,
+   "launches": [
+    "wilson-dam-boat-launch-nd"
+   ],
+   "water_id": "wilson-dam-nd",
+   "gnis_id": null,
+   "geometry_hash": "7c8829403aa880c6e4a0b54c54e6b70e5c85e42af995cc1b577b5e41add875c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wood-lake-nd",
+   "name": "Wood Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Fort Totten"
+   ],
+   "bbox": [
+    -98.848887,
+    47.896915,
+    -98.836819,
+    47.905585
+   ],
+   "wikidata": "Q141401585",
+   "charted": false,
+   "area_km2": 0.418,
+   "launches": [
+    "wood-lake-boat-launch-nd"
+   ],
+   "water_id": "wood-lake-nd",
+   "gnis_id": "1032874",
+   "geometry_hash": "1d19d4e7314ca4539850e517ea921037b2d6755ce0d1f918bc2f79448d261308",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "woodhouse-lake-nd",
+   "name": "Woodhouse Lake",
+   "kind": "lake",
+   "state": "ND",
+   "towns": [
+    "Kidder County"
+   ],
+   "bbox": [
+    -100.017692,
+    47.300288,
+    -100.003807,
+    47.316782
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "woodhouse-lake-boat-launch-nd"
+   ],
+   "water_id": "woodhouse-lake-nd",
+   "gnis_id": "1032881",
+   "geometry_hash": "0ae06846bb485e920cc7e35092ae45ee4416d3e827f66cb3467ba550b6ce1422",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellowstone-river-nd",
+   "name": "Yellowstone River",
+   "kind": "river",
+   "state": "ND",
+   "towns": [
+    "Fairview"
+   ],
+   "bbox": [
+    -104.528134,
+    47.279587,
+    -103.952737,
+    47.982536
+   ],
+   "wikidata": "Q374772",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sundheim-park-nd"
+   ],
+   "water_id": "yellowstone-river-mt",
+   "gnis_id": "1035255",
+   "geometry_hash": "045c2544b5c892b0317711e977f49734f58e72614a505727825395263b3870f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}

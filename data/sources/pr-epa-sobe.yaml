@@ -1,0 +1,43 @@
+id: "pr-epa-sobe"
+name: "EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, SOBE), Puerto Rico permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Notes (research/pr, status used, verified fetched, checked 2026-11-14): Read by the national
+#   overflow module (ingest/echo_sewer_overflow_events.py, Puerto Rico permits added 2026-11-14):
+#   940 current reports from 45 permits in the 2026-11-12 extract (SSO 863, bypass 77, none typed
+#   CSO; 2025-04-03 to 2026-11-10), every one with a point; 252 read as reaching a water (35
+#   permits), 688 dropped (SSOs naming no water with only odour, aesthetic, land or no observable
+#   impacts); received a median 2 days after the start (90th percentile 14). Times in Atlantic
+#   Standard Time.
+# Access detail (research, quoted): Daily ZIP from ECHO; join
+#   sewer_overflow_bypass_report_events.csv to _types.csv and _receiving_waters.csv on
+#   sewer_overflow_bypass_event_key. Filter permit_identifier LIKE 'PR%'. Extracted 2026-11-04 from
+#   the copy in the shared scratchpad (downloaded 2026-11-03). Sample:
+#   research/pr/raw/sobe-sample.json.
+# Can fill: source_record_id (event key + event id), event_type (SSO/BYP/CSO), started_at, ended_at,
+#   reported_at (program_report_received_date), coordinates (permittee-reported point), volume,
+#   units (gallons), estimate_flag (quantification method), waterbody (receiving-water table, free
+#   text), location_text (description), authority (permit)
+# Cannot fill: published_at (no per-row publication time; daily file); advice_text; valid_until;
+#   timezone (not stated; assume local); revision_history (only the current transaction)
+# Waters: all PRASA sewer systems island-wide; receiving water per event (Spanish or English free
+#   text)
+# History: Starts 2025-04-03 (receipts from 2025-08-18): 314 events in 2025, 607 in 2026 to
+#   2026-10-31. Types: SSO 847, BYP 77; no CSO-typed rows although Puerto Nuevo has 12 CSO outfalls.
+# Research notes: Owner type 'State Government' (PRASA) on 844 rows. Receiving-water names are
+#   inconsistent ('RIO BAIROA' and 'BAIROA RIVER'; 'unnamed creek' 29; 'CREEK (UNKNOWN THE NAME)'
+#   21): match on coordinates, not names.
+cadence: "ECHO file rebuilt daily; permittee files within days (median 2 days start to receipt, Puerto Rico 2025-04 to 2026-11)"
+license: "US federal government data; no restriction stated by ECHO."
+attribution: "US EPA (filed by PRASA through NeT-SewerOverflow)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["PR"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO; join sewer_overflow_bypass_report_events.csv to _types.csv and _receiving_waters.csv on sewer_overflow_bypass_event_key. Filter permit_identifier LIKE 'PR%'. Extracted 2026-11-04 from the copy in the shared scratchpad (downloaded 2026-11-03). Sample: research/pr/raw/sobe-sample.json."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6), (m); 40 CFR 127 (eRule Phase 2)"
+checked: "2026-11-14"

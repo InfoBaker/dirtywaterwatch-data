@@ -1,0 +1,88 @@
+{
+ "about": "Water names in Oklahoma's records that data/receiving-waters-national.json does not hold for OK: the waters of the National Park Service's sampling places at Chickasaw National Recreation Area (its table read 2026-11-14, places tied to waters by the park's own description), one row per name and county, with the GNIS points of the named places. No record is open on them today (no result reached the park's threshold); they are listed so a later result is placed. EPA's overflow tables hold no Oklahoma report, and every receiving water of Oklahoma's permits is already on the national list.",
+ "state": "OK",
+ "waters": 4,
+ "records": 0,
+ "rows": [
+  {
+   "name": "Travertine Creek",
+   "county": "Murray County",
+   "records": 0,
+   "sources": {
+    "ok-nps-chickasaw-bacteria": 0
+   },
+   "places": [
+    "Little Niagara",
+    "Bear Falls",
+    "Panther Falls"
+   ],
+   "points": [
+    [
+     34.508,
+     -96.95
+    ],
+    [
+     34.51,
+     -96.954
+    ],
+    [
+     34.503,
+     -96.966
+    ]
+   ],
+   "point_basis": "USGS GNIS features named by the park (The National Map geonames, Other Hydrographic Features), read 2026-11-14"
+  },
+  {
+   "name": "Rock Creek",
+   "county": "Murray County",
+   "records": 0,
+   "sources": {
+    "ok-nps-chickasaw-bacteria": 0
+   },
+   "places": [
+    "Black Sulphur Springs",
+    "40 Ft Hole"
+   ],
+   "points": [
+    [
+     34.506,
+     -96.97
+    ]
+   ],
+   "point_basis": "USGS GNIS feature Black Sulphur Springs (1101921), read 2026-11-14",
+   "note": "the national list's Rock Creeks are other waters (Le Flore and Latimer counties, and a tributary in Craig County)"
+  },
+  {
+   "name": "Veterans Lake",
+   "county": "Murray County",
+   "records": 0,
+   "sources": {
+    "ok-nps-chickasaw-bacteria": 0
+   },
+   "places": [
+    "Veterans Lake"
+   ],
+   "points": [
+    [
+     34.49,
+     -96.983
+    ]
+   ],
+   "point_basis": "USGS GNIS features named by the park (The National Map geonames, Other Hydrographic Features), read 2026-11-14"
+  },
+  {
+   "name": "Lake of the Arbuckles",
+   "county": "Murray County",
+   "records": 0,
+   "sources": {
+    "ok-nps-chickasaw-bacteria": 0
+   },
+   "places": [
+    "Buckhorn Pavilion",
+    "Buckhorn Loop D",
+    "Point Day Use",
+    "Goddard Youth Camp"
+   ]
+  }
+ ]
+}

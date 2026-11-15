@@ -1,0 +1,466 @@
+{
+ "ky-dow-hab-viewer": {
+  "counts": {
+   "kept_missing": 3,
+   "new": 3
+  },
+  "records": [
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:a",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "_unlisted_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000001",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000001"
+     }
+    },
+    "source_record_id": "a",
+    "started_at": "2026-10-01T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:a2",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "_last_seen_in_source": "2026-11-02T12:00:00Z",
+     "_status_seen": [
+      {
+       "first_seen_at": "2026-11-02T12:00:00Z",
+       "status": null
+      }
+     ],
+     "row": {
+      "npdes_no": "MD0000001",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000001"
+     }
+    },
+    "source_record_id": "a2",
+    "started_at": "2026-10-01T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:b",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "_unlisted_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000002",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000002"
+     }
+    },
+    "source_record_id": "b",
+    "started_at": "2026-10-02T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:c",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-01T12:00:00Z",
+     "_last_seen_in_source": "2026-11-02T12:00:00Z",
+     "_status_seen": [
+      {
+       "first_seen_at": "2026-11-02T12:00:00Z",
+       "status": null
+      }
+     ],
+     "row": {
+      "extra": "x",
+      "npdes_no": "MD0000003",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000003"
+     }
+    },
+    "source_record_id": "c",
+    "started_at": "2026-10-03T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:d",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "_last_seen_in_source": "2026-11-02T12:00:00Z",
+     "_status_seen": [
+      {
+       "first_seen_at": "2026-11-02T12:00:00Z",
+       "status": null
+      }
+     ],
+     "row": {
+      "npdes_no": "MD0000009",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000009"
+     }
+    },
+    "source_record_id": "d",
+    "started_at": "2026-10-09T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:e",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "_unlisted_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000004",
+      "overflow_address": "Sample Lane",
+      "permit_no": "TN0000004"
+     }
+    },
+    "source_record_id": "e",
+    "started_at": "2026-10-04T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "ky-dow-hab-viewer:e2",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "_last_seen_in_source": "2026-11-02T12:00:00Z",
+     "_status_seen": [
+      {
+       "first_seen_at": "2026-11-02T12:00:00Z",
+       "status": null
+      }
+     ],
+     "row": {
+      "npdes_no": "MD0000004",
+      "overflow_address": "Sample Lane",
+      "permit_no": "TN0000004"
+     }
+    },
+    "source_record_id": "e2",
+    "started_at": "2026-10-04T08:00:00-04:00",
+    "status": "discharge_reported"
+   }
+  ]
+ },
+ "md-mde-overflows": {
+  "counts": {
+   "kept_missing": 1,
+   "new": 3,
+   "revised": 1,
+   "superseded_by_corrected_row": 2
+  },
+  "records": [
+   {
+    "duplicate_of": "md-mde-overflows:a2",
+    "ended_at": null,
+    "event_id": "md-mde-overflows:a",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_duplicate_basis": "gone from the source; md-mde-overflows:a2 looks like its corrected row",
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000001",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000001"
+     }
+    },
+    "source_record_id": "a",
+    "started_at": "2026-10-01T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "md-mde-overflows:a2",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000001",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000001"
+     }
+    },
+    "source_record_id": "a2",
+    "started_at": "2026-10-01T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "md-mde-overflows:b",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000002",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000002"
+     }
+    },
+    "source_record_id": "b",
+    "started_at": "2026-10-02T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "md-mde-overflows:c",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-01T12:00:00Z",
+     "_revisions": [
+      {
+       "old_values": {
+        "extra": null
+       },
+       "replaced_at": "2026-11-02T12:00:00Z",
+       "seen_until": "2026-11-01T12:00:00Z",
+       "source_updated_at_before": null
+      }
+     ],
+     "row": {
+      "extra": "x",
+      "npdes_no": "MD0000003",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000003"
+     }
+    },
+    "source_record_id": "c",
+    "started_at": "2026-10-03T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "md-mde-overflows:d",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000009",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000009"
+     }
+    },
+    "source_record_id": "d",
+    "started_at": "2026-10-09T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": "md-mde-overflows:e2",
+    "ended_at": null,
+    "event_id": "md-mde-overflows:e",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_duplicate_basis": "gone from the source; md-mde-overflows:e2 looks like its corrected row",
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000004",
+      "overflow_address": "Sample Lane",
+      "permit_no": "TN0000004"
+     }
+    },
+    "source_record_id": "e",
+    "started_at": "2026-10-04T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "md-mde-overflows:e2",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000004",
+      "overflow_address": "Sample Lane",
+      "permit_no": "TN0000004"
+     }
+    },
+    "source_record_id": "e2",
+    "started_at": "2026-10-04T08:00:00-04:00",
+    "status": "discharge_reported"
+   }
+  ]
+ },
+ "tn-tdec-events-report": {
+  "counts": {
+   "kept_missing": 1,
+   "new": 3,
+   "revised": 1,
+   "superseded_by_corrected_row": 2
+  },
+  "records": [
+   {
+    "duplicate_of": "tn-tdec-events-report:a2",
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:a",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_duplicate_basis": "gone from the source; tn-tdec-events-report:a2 looks like its corrected row",
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000001",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000001"
+     }
+    },
+    "source_record_id": "a",
+    "started_at": "2026-10-01T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:a2",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000001",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000001"
+     }
+    },
+    "source_record_id": "a2",
+    "started_at": "2026-10-01T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:b",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000002",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000002"
+     }
+    },
+    "source_record_id": "b",
+    "started_at": "2026-10-02T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:c",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-01T12:00:00Z",
+     "_revisions": [
+      {
+       "old_values": {
+        "extra": null
+       },
+       "replaced_at": "2026-11-02T12:00:00Z",
+       "seen_until": "2026-11-01T12:00:00Z",
+       "source_updated_at_before": null
+      }
+     ],
+     "row": {
+      "extra": "x",
+      "npdes_no": "MD0000003",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000003"
+     }
+    },
+    "source_record_id": "c",
+    "started_at": "2026-10-03T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:d",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000009",
+      "overflow_address": "Example Road",
+      "permit_no": "TN0000009"
+     }
+    },
+    "source_record_id": "d",
+    "started_at": "2026-10-09T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": "tn-tdec-events-report:e2",
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:e",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_duplicate_basis": "gone from the source; tn-tdec-events-report:e2 looks like its corrected row",
+     "_missing_from_source_since": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000004",
+      "overflow_address": "Sample Lane",
+      "permit_no": "TN0000004"
+     }
+    },
+    "source_record_id": "e",
+    "started_at": "2026-10-04T00:00:00-04:00",
+    "status": "discharge_reported"
+   },
+   {
+    "duplicate_of": null,
+    "ended_at": null,
+    "event_id": "tn-tdec-events-report:e2",
+    "event_type": "sso",
+    "fetched_at": "2026-11-01T12:00:00Z",
+    "raw": {
+     "_first_seen_at": "2026-11-02T12:00:00Z",
+     "row": {
+      "npdes_no": "MD0000004",
+      "overflow_address": "Sample Lane",
+      "permit_no": "TN0000004"
+     }
+    },
+    "source_record_id": "e2",
+    "started_at": "2026-10-04T08:00:00-04:00",
+    "status": "discharge_reported"
+   }
+  ]
+ }
+}

@@ -10,6 +10,8 @@ Files:
   rain.json          the "discharge likely" caution: per CSO permittee its rainfall threshold and
                      basis, the radar 24-hour total, the 24-hour forecast, its state now; the
                      episodes with their pieces (build/rain_likely.py, docs/rain-likely.md)
+  rain-levels.json   the operator levels the caution rests on, per operator its storms and reported
+                     overflows by rain size (build/rain_history.py; data/rain-levels.json as it is)
   waters/<slug>.json one tracked water: status record, its events (newest first, index fields
                      plus source, waterbody text, outfall, volume text, placement, file) and its
                      history strip and intervals; pages load only this
@@ -149,12 +151,17 @@ def slim_event(rec: dict) -> dict:
     own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
     if rec.get("ended_at") and own and own != rec.get("time_precision"):
         out["ended_at_precision"] = own
+    out.update(status_mod.start_bound(rec))          # re-review P1-6: only records whose start is an upper bound
     return out
 
 
 def index_obj(rec: dict) -> dict:
     o = {k: rec.get(k) for k in INDEX_FIELDS}
     o.update(bounds_precision(rec))
+    if rec.get("started_at_bound"):                  # slim rows of a start that is an upper bound (re-review P1-6)
+        o.update(started_at_bound=rec["started_at_bound"], started_at_kind=rec.get("started_at_kind"))
+    else:
+        o.update(status_mod.start_bound(rec))
     o["state"] = rec.get("state") or status_mod.event_state(rec)     # public_record's, read with raw
     for k in ("lat", "lon"):
         if o[k] is not None:
@@ -901,7 +908,7 @@ def shown_path(p: Path) -> str:
 
 PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overlays.geojson", "advisory-points.geojson",
                    "reaches.geojson", "reach-paths.geojson", "rain.json", "coverage.json", "dischargers.json",
-                   "outfalls.json")
+                   "outfalls.json", "rain-levels.json")
 BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # the old hard stop; removed whenever the export runs
 HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name) a hit is in, for the next run's fix
 SCAN_CACHE = BUILD_DIR / "blocklist-scan-cache.json"  # digests of out/ texts found clean (blocklist_hits), saved state
@@ -1069,6 +1076,9 @@ def public_rain(block: dict) -> dict:
             "counts", "permits", "episodes")
     out = {k: block.get(k) for k in keep}
     out["thresholds_built"] = (block.get("thresholds") or {}).get("built")
+    # the operator levels (build/rain_history.py): the label by level and the levels file's header, when loaded; the
+    # permits' and episodes' level, evidence and history rows pass through with them
+    out.update({k: block[k] for k in ("label_by_level", "levels") if block.get(k) is not None})
     out["rules_ref"] = "rain_likely"
     return out
 
@@ -1500,6 +1510,41 @@ def operator_outfalls(d: dict, by_permit: dict, by_operator: dict | None = None)
 
 # ---------------------------------------------------------------- main
 
+def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
+    """The advisory-points.geojson features: beach, rain and HAB advisories that colour no water, one per status
+    advisory point (a further part of a multipart advisory at its own part_point)."""
+    pts = []
+    for ap in st.get("advisory_points") or []:
+        e = by_event.get(ap["event_id"])
+        if not e:
+            continue
+        # a report with no point of its own (Hawaii): the marker at the point of the water record status gave it
+        # a further part of an advisory the authority drew in several parts (status: part_point, West Virginia DEP's
+        # bloom map only): that water's marker at the part's own point, under its own feature id
+        pp = ap.get("part_point")
+        src = pp if pp else e if e.get("lat") is not None and e.get("lon") is not None else ap
+        if src.get("lat") is None or src.get("lon") is None:
+            continue
+        lon, lat = round(float(src["lon"]), 5), round(float(src["lat"]), 5)
+        fid = f"{e['event_id']}~{'+'.join(ap.get('water_slugs') or [])}" if pp else e["event_id"]
+        if pp and pp.get("piece"):
+            fid += f"~{pp['piece'] + 1}"        # a further separate piece of the same water (status: part_point.piece)
+        pts.append({"type": "Feature", "id": fid, "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                    "properties": {"event_id": e["event_id"], "lat": lat, "lon": lon, "status": ap["status"],
+                                   "rule": ap.get("rule"), "type": e["event_type"], "event_status": e.get("status"),
+                                   "category": ap.get("category") or status_mod.category_of(e["event_type"]),
+                                   "authority": e.get("authority"), "name": e.get("waterbody_text"),
+                                   "started": e.get("started_at"), "ended": e.get("ended_at"), "until": ap.get("until"),
+                                   **bounds_precision(e),
+                                   "water_slugs": ap.get("water_slugs") or [], "why": ap.get("why"),
+                                   **({"point_basis": ap["point_basis"]} if ap.get("point_basis") else {}),
+                                   **({"point_basis": pp["basis"]} if pp else {}),
+                                   # replay: the strictest of these for the hour, not today's status
+                                   "intervals": ap.get("intervals") or [],
+                                   "fixture": e.get("fixture", False), "file": e.get("file")}})
+    return pts
+
+
 def export(include_fixtures: bool = False, include_restricted: bool = False) -> dict:
     if include_fixtures and os.environ.get("DWW_ALLOW_FIXTURES") != "1":
         raise SystemExit("export: refusing to write out/ with research fixture events; "
@@ -1595,6 +1640,13 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                                             "count": len(active), "events": publicize(active)})
     # the "discharge likely" caution: per permittee (threshold, radar total, forecast) and its episodes
     write_compact(OUT_DIR / "rain.json", {"built": now_iso(), **publicize(public_rain(rain_block))})
+    # the operator levels behind it (build/rain_history.py), the file as it is: counts and dates, no personal data
+    from build import rain_history
+    rain_levels = rain_history.load_levels()
+    if rain_levels is not None:
+        write_compact(OUT_DIR / "rain-levels.json", publicize(rain_levels))
+    else:
+        (OUT_DIR / "rain-levels.json").unlink(missing_ok=True)
     write_compact(OUT_DIR / "events.json", {"built": now_iso(), "fixtures_included": include_fixtures,
                                             "count": len(out_events), "events": out_events})
 
@@ -1638,6 +1690,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                "reaches": [{"key": k, **{f: (st.get("reaches") or {}).get(k, {}).get(f)
                                          for f in ("status", "river", "permit", "outfall", "length_km", "cut_reason", "active",
                                                    "rain_likely", "rain_trigger_basis")},
+                            # the level of its rain caution now, where the operator levels are loaded
+                            **({"rain_level": (st.get("reaches") or {})[k]["rain_level"]}
+                               if "rain_level" in ((st.get("reaches") or {}).get(k) or {}) else {}),
                             # an authority's advisory for a named stretch (ADVISORY_KIND): its kind and category
                             **({"reach_kind": ADVISORY_KIND, "category": (st.get("reaches") or {})[k].get("category")}
                                if (st.get("reaches") or {}).get(k, {}).get("kind") == ADVISORY_KIND else {})}
@@ -1683,7 +1738,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             "rain_likely": bool(w["reasons"]) and w["reasons"][0]["rule"] == "rain_likely",
             # which amount set it (operator, state, default: "Discharge possible" for the default), else absent
             **({"rain_trigger_basis": w["reasons"][0].get("trigger_basis")}
-               if w["reasons"] and w["reasons"][0]["rule"] == "rain_likely" else {})}})
+               if w["reasons"] and w["reasons"][0]["rule"] == "rain_likely" else {}),
+            # its level ("likely" or "possible"), where the operator levels are loaded: the label follows it
+            **({"rain_level": w["reasons"][0]["level"]}
+               if w["reasons"] and w["reasons"][0]["rule"] == "rain_likely" and w["reasons"][0].get("level") else {})}})
     # waters.json is the index: per-water event ids and outfalls are in waters/<slug>.json
     index_rows = [{**{k: v for k, v in r.items() if k not in ("events", "outfalls", "provisional_outfalls")},
                    "outfall_count": len(r["outfalls"])}
@@ -1697,28 +1755,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         for lo in launch_feats.values() if lo["lat"] is not None and lo["lon"] is not None]})
 
     # advisory markers: beach, rain and HAB advisories that colour no water
-    pts = []
-    for ap in st.get("advisory_points") or []:
-        e = by_event.get(ap["event_id"])
-        if not e:
-            continue
-        # a report with no point of its own (Hawaii): the marker at the point of the water record status gave it
-        src = e if e.get("lat") is not None and e.get("lon") is not None else ap
-        if src.get("lat") is None or src.get("lon") is None:
-            continue
-        lon, lat = round(float(src["lon"]), 5), round(float(src["lat"]), 5)
-        pts.append({"type": "Feature", "id": e["event_id"], "geometry": {"type": "Point", "coordinates": [lon, lat]},
-                    "properties": {"event_id": e["event_id"], "lat": lat, "lon": lon, "status": ap["status"],
-                                   "rule": ap.get("rule"), "type": e["event_type"], "event_status": e.get("status"),
-                                   "category": ap.get("category") or status_mod.category_of(e["event_type"]),
-                                   "authority": e.get("authority"), "name": e.get("waterbody_text"),
-                                   "started": e.get("started_at"), "ended": e.get("ended_at"), "until": ap.get("until"),
-                                   **bounds_precision(e),
-                                   "water_slugs": ap.get("water_slugs") or [], "why": ap.get("why"),
-                                   **({"point_basis": ap["point_basis"]} if ap.get("point_basis") else {}),
-                                   # replay: the strictest of these for the hour, not today's status
-                                   "intervals": ap.get("intervals") or [],
-                                   "fixture": e.get("fixture", False), "file": e.get("file")}})
+    pts = advisory_point_features(st, by_event)
     write_compact(OUT_DIR / "advisory-points.geojson", {"type": "FeatureCollection", "features": pts})
     # the outfalls whose latest report is a monthly total (docs/plan.md §2.x); scripts/export-outfalls.py merges
     # them into out/outfalls.json (`status: "monthly"`, days, month, received_at, label) for the map's points
@@ -1774,7 +1811,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     outfall_points = outfalls_mod.outfall_rows(
         outfalls, status_mod.states(), waters=set(waters), canon=lambda s: status_mod.SLUG_ALIASES.get(s, s),
         dischargers=dis, rain_permits=rain_block.get("permits") or {}, ma_layer=outfalls_mod.ma_layer_rows(),
-        marks=publicize(st.get("monthly_outfalls") or []))
+        marks=publicize(st.get("monthly_outfalls") or []), levels=rain_levels)
     outfalls_mod.write(outfall_points, OUT_DIR, now_iso())
     print(f"export: {outfalls_mod.summary(outfall_points)}")
 

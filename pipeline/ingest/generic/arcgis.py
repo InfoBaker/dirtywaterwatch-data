@@ -23,6 +23,16 @@ from datetime import UTC, datetime
 from ingest.generic.base import Fetched, get, get_json, load_pages, pages_doc
 
 
+class ArcGISError(RuntimeError):
+    """The service's error object (its message is unchanged: 'ArcGIS error: {...}'); .code is its numeric code, for a
+    source whose saved errors are bounded categories (runner.error_category)."""
+
+    def __init__(self, err):
+        super().__init__(f"ArcGIS error: {err}")
+        code = err.get("code") if isinstance(err, dict) else None
+        self.code = code if isinstance(code, int) else None
+
+
 def fetch(block: dict, sess) -> Fetched:
     """Every feature, by a cursor on the object id (where <where> AND <id> > the last id seen, ordered by it): it
     works on servers that ignore resultOffset, and cannot repeat a page. A page whose ids do not move past the
@@ -48,7 +58,7 @@ def fetch(block: dict, sess) -> Fetched:
             time.sleep(float(block.get("retry_wait_s", 20)))
             d = get_json(sess, f"{layer}/query", params, timeout=(15, 90))
         if "error" in d:
-            raise RuntimeError(f"ArcGIS error: {d['error']}")
+            raise ArcGISError(d["error"])
         got = d.get("features") or []
         if not got:
             break

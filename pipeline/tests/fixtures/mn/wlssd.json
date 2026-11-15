@@ -1,0 +1,195 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "uniqueIdField": {
+  "name": "OBJECTID",
+  "isSystemMaintained": true
+ },
+ "globalIdFieldName": "GlobalID",
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4326,
+  "latestWkid": 4326
+ },
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "sqlType": "sqlTypeOther",
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "OverflowDate",
+   "type": "esriFieldTypeDate",
+   "alias": "Overflow Date",
+   "sqlType": "sqlTypeOther",
+   "length": 8,
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "FacilityType",
+   "type": "esriFieldTypeString",
+   "alias": "Facility Type",
+   "sqlType": "sqlTypeOther",
+   "length": 255,
+   "domain": {
+    "type": "codedValue",
+    "name": "Facility_Type",
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDefaultValue",
+    "codedValues": [
+     {
+      "name": "Manhole",
+      "code": "Manhole"
+     },
+     {
+      "name": "Force Main",
+      "code": "ForceMain"
+     },
+     {
+      "name": "Pump Station",
+      "code": "PumpStation"
+     },
+     {
+      "name": "Treatment Plant",
+      "code": "Treatmentplant"
+     },
+     {
+      "name": "Other",
+      "code": "Other"
+     }
+    ]
+   },
+   "defaultValue": null
+  },
+  {
+   "name": "GlobalID",
+   "type": "esriFieldTypeGlobalID",
+   "alias": "GlobalID",
+   "sqlType": "sqlTypeOther",
+   "length": 38,
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "ReleaseAmount",
+   "type": "esriFieldTypeString",
+   "alias": "Release Amount",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": null,
+   "defaultValue": null
+  },
+  {
+   "name": "StateWaters",
+   "type": "esriFieldTypeString",
+   "alias": "Entered Waters of the State",
+   "sqlType": "sqlTypeOther",
+   "length": 256,
+   "domain": null,
+   "defaultValue": null
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 116,
+    "OverflowDate": 1776810900000,
+    "FacilityType": "Other",
+    "GlobalID": "6ef9fa2f-8e12-4c82-b51b-993803d055b8",
+    "ReleaseAmount": "Less than 50 gallons",
+    "StateWaters": "No"
+   },
+   "geometry": {
+    "x": -92.124,
+    "y": 46.76
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 118,
+    "OverflowDate": 1788742200000,
+    "FacilityType": "ForceMain",
+    "GlobalID": "be76a992-a3a8-40a9-8168-e9d241ad803e",
+    "ReleaseAmount": "100 gpm",
+    "StateWaters": "Yes"
+   },
+   "geometry": {
+    "x": -92.386,
+    "y": 46.624
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 119,
+    "OverflowDate": 1789590900000,
+    "FacilityType": "ForceMain",
+    "GlobalID": "3a375c15-a24a-44a7-a514-7bfeac211b40",
+    "ReleaseAmount": "25 gallons",
+    "StateWaters": "No"
+   },
+   "geometry": {
+    "x": -92.377,
+    "y": 46.7
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 121,
+    "OverflowDate": 1793655000000,
+    "FacilityType": "Treatmentplant",
+    "GlobalID": "c0383982-ba35-48f0-af15-9f477a35b582",
+    "ReleaseAmount": "70 MGD",
+    "StateWaters": "Yes"
+   },
+   "geometry": {
+    "x": -92.12,
+    "y": 46.758
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 122,
+    "OverflowDate": 1793793960000,
+    "FacilityType": "Treatmentplant",
+    "GlobalID": "c002ed91-5bd0-46ab-8237-e05c8ea2155c",
+    "ReleaseAmount": "70 MGD",
+    "StateWaters": "Yes"
+   },
+   "geometry": {
+    "x": -92.12,
+    "y": 46.758
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 8,
+    "OverflowDate": 1128297600000,
+    "FacilityType": null,
+    "GlobalID": "8c1125ae-002d-49bc-bd3e-d4f96a64ab4e",
+    "ReleaseAmount": null,
+    "StateWaters": null
+   },
+   "geometry": {
+    "x": -92.091,
+    "y": 46.791
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 78,
+    "OverflowDate": 1681257600000,
+    "FacilityType": "Manhole",
+    "GlobalID": "b544d85f-5438-4cf4-95ef-f0fa65f70486",
+    "ReleaseAmount": "25,000 gallons",
+    "StateWaters": null
+   },
+   "geometry": {
+    "x": -92.167,
+    "y": 46.809
+   }
+  }
+ ]
+}

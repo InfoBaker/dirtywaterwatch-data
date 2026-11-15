@@ -1,0 +1,709 @@
+{
+ "about": "Water names in Puerto Rico's records that data/receiving-waters-national.json does not hold for PR: EPA's overflow tables (the 2026-11-12 extract read on 2026-11-14; the reports kept as reaching a water, names as filed in English, Spanish or both) and the receiving waters PRASA's layer gives its 12 combined sewer outfalls, with the number of records giving each and their points. Generic texts that name no water ('unnamed creek', 'CREEK (UNKNOWN THE NAME)') are left out. DRNA's beach advisories are placed by their stations' points and name no receiving water.",
+ "state": "PR",
+ "waters": 35,
+ "reports": 102,
+ "held_in_national_list": [
+  "ATLANTIC OCEAN",
+  "BAIROA RIVER",
+  "CARIBBEAN SEA",
+  "LA PLATA RIVER",
+  "RIO BAIROA",
+  "RIO CIBUCO",
+  "RIO CIDRA",
+  "RIO GRANDE DE ARECIBO",
+  "RIO GRANDE DE MANATI",
+  "RIO GUAJATACA",
+  "RIO LA PLATA",
+  "RIO TURABO",
+  "RIO UNIBON",
+  "Rio Morovis"
+ ],
+ "rows": [
+  {
+   "name": "Charca los corazones",
+   "reports": 10,
+   "permits": [
+    "PR0023795"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.172,
+     -67.153
+    ]
+   ]
+  },
+  {
+   "name": "Caribe Ocean",
+   "reports": 9,
+   "permits": [
+    "PR0020575"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     17.974,
+     -67.04
+    ],
+    [
+     18.032,
+     -67.182
+    ]
+   ],
+   "possibly_same_as": "CARIBBEAN SEA"
+  },
+  {
+   "name": "OCEANO ATLANTICO",
+   "reports": 9,
+   "permits": [
+    "PR0020460",
+    "PR0023710"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.47,
+     -66.275
+    ],
+    [
+     18.484,
+     -66.678
+    ]
+   ],
+   "possibly_same_as": "ATLANTIC OCEAN"
+  },
+  {
+   "name": "QUEBRADA Y RIO CHICO",
+   "reports": 8,
+   "permits": [
+    "PR0020753",
+    "PR0025445"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     17.986,
+     -66.044
+    ],
+    [
+     17.986,
+     -66.004
+    ]
+   ]
+  },
+  {
+   "name": "CABO CARIBE",
+   "reports": 7,
+   "permits": [
+    "PR0020923",
+    "PR0021679"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.429,
+     -66.341
+    ],
+    [
+     18.469,
+     -66.396
+    ],
+    [
+     18.471,
+     -66.397
+    ]
+   ],
+   "possibly_same_as": "CANO CABO CARIBE"
+  },
+  {
+   "name": "CIBUCO RIVER",
+   "reports": 7,
+   "permits": [
+    "PR0020427",
+    "PR0020451"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.346,
+     -66.328
+    ],
+    [
+     18.348,
+     -66.319
+    ]
+   ],
+   "possibly_same_as": "RIO CIBUCO"
+  },
+  {
+   "name": "Río Coamo",
+   "reports": 7,
+   "permits": [
+    "PR0023761"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.061,
+     -66.373
+    ],
+    [
+     18.085,
+     -66.357
+    ],
+    [
+     18.086,
+     -66.357
+    ]
+   ]
+  },
+  {
+   "name": "Caño Martín Peña",
+   "reports": 0,
+   "outfalls": 6,
+   "permits": [
+    "PR0021555"
+   ],
+   "sources": [
+    "pr-prasa-cso-data"
+   ],
+   "points": [
+    [
+     18.431,
+     -66.059
+    ],
+    [
+     18.438,
+     -66.066
+    ],
+    [
+     18.441,
+     -66.069
+    ],
+    [
+     18.441,
+     -66.067
+    ],
+    [
+     18.442,
+     -66.07
+    ],
+    [
+     18.451,
+     -66.076
+    ]
+   ],
+   "possibly_same_as": "Martin Pena Channel"
+  },
+  {
+   "name": "RIO GRANDE DE LOIZA RIVER",
+   "reports": 6,
+   "permits": [
+    "PR0025976"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.191,
+     -65.965
+    ],
+    [
+     18.197,
+     -65.972
+    ],
+    [
+     18.216,
+     -66.004
+    ],
+    [
+     18.22,
+     -66.011
+    ],
+    [
+     18.239,
+     -66.009
+    ]
+   ],
+   "possibly_same_as": "RIO LOISA"
+  },
+  {
+   "name": "Bahía de San Juan",
+   "reports": 0,
+   "outfalls": 4,
+   "permits": [
+    "PR0021555"
+   ],
+   "sources": [
+    "pr-prasa-cso-data"
+   ],
+   "points": [
+    [
+     18.447,
+     -66.085
+    ],
+    [
+     18.463,
+     -66.119
+    ],
+    [
+     18.465,
+     -66.12
+    ],
+    [
+     18.465,
+     -66.119
+    ]
+   ],
+   "possibly_same_as": "San Juan Bay"
+  },
+  {
+   "name": "GUADIANA RIVER",
+   "reports": 4,
+   "permits": [
+    "PR0020737"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.303,
+     -66.237
+    ]
+   ]
+  },
+  {
+   "name": "Jayuya River",
+   "reports": 4,
+   "permits": [
+    "PR0026531"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.203,
+     -66.626
+    ],
+    [
+     18.204,
+     -66.625
+    ]
+   ],
+   "possibly_same_as": "RIO GRANDE DE JAYUYA"
+  },
+  {
+   "name": "Morovis River",
+   "reports": 4,
+   "permits": [
+    "PR0020711"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.338,
+     -66.421
+    ]
+   ],
+   "possibly_same_as": "RIO MOROVIS"
+  },
+  {
+   "name": "Mondongo Creek",
+   "reports": 3,
+   "permits": [
+    "PR0020575"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.047,
+     -67.062
+    ],
+    [
+     18.048,
+     -67.065
+    ]
+   ],
+   "possibly_same_as": "MONDONGO GREEK"
+  },
+  {
+   "name": "Cibuco River",
+   "reports": 2,
+   "permits": [
+    "PR0020923"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.41,
+     -66.333
+    ],
+    [
+     18.429,
+     -66.341
+    ]
+   ],
+   "possibly_same_as": "RIO CIBUCO"
+  },
+  {
+   "name": "Oceano Atlantico",
+   "reports": 2,
+   "permits": [
+    "PR0021237",
+    "PR0023710"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.481,
+     -66.546
+    ],
+    [
+     18.484,
+     -66.678
+    ]
+   ],
+   "possibly_same_as": "ATLANTIC OCEAN"
+  },
+  {
+   "name": "QUEBRADA Y EL RIO APEADERO",
+   "reports": 2,
+   "permits": [
+    "PR0020753"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     17.986,
+     -66.004
+    ]
+   ]
+  },
+  {
+   "name": "RIO GUAMANI",
+   "reports": 2,
+   "permits": [
+    "PR0025445"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     17.922,
+     -66.157
+    ]
+   ]
+  },
+  {
+   "name": "Río de Puerto Nuevo",
+   "reports": 0,
+   "outfalls": 2,
+   "permits": [
+    "PR0021555"
+   ],
+   "sources": [
+    "pr-prasa-cso-data"
+   ],
+   "points": [
+    [
+     18.426,
+     -66.079
+    ],
+    [
+     18.44,
+     -66.082
+    ]
+   ],
+   "possibly_same_as": "Puerto Nuevo River"
+  },
+  {
+   "name": "CANO CARIBE",
+   "reports": 1,
+   "permits": [
+    "PR0021679"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.471,
+     -66.397
+    ]
+   ],
+   "possibly_same_as": "CANO CABO CARIBE"
+  },
+  {
+   "name": "ENSENADA HONDA BAY",
+   "reports": 1,
+   "permits": [
+    "PR0026549"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.311,
+     -65.303
+    ]
+   ]
+  },
+  {
+   "name": "GURABO RIVER",
+   "reports": 1,
+   "permits": [
+    "PR0025976"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.261,
+     -66.006
+    ]
+   ]
+  },
+  {
+   "name": "LA MINA CREEK",
+   "reports": 1,
+   "permits": [
+    "PR0025453"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.116,
+     -65.473
+    ]
+   ]
+  },
+  {
+   "name": "LAS ARENAS CREEK",
+   "reports": 1,
+   "permits": [
+    "PR0020583"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.251,
+     -66.999
+    ]
+   ]
+  },
+  {
+   "name": "Manatí River",
+   "reports": 1,
+   "permits": [
+    "PR0021237"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.48,
+     -66.546
+    ]
+   ],
+   "possibly_same_as": "RIO GRANDE DE MANATI"
+  },
+  {
+   "name": "NEAR CREEK AT ROOSEVELT PS",
+   "reports": 1,
+   "permits": [
+    "PR0023795"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.197,
+     -67.149
+    ]
+   ]
+  },
+  {
+   "name": "OROCOVIS RIVER",
+   "reports": 1,
+   "permits": [
+    "PR0020745"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.231,
+     -66.388
+    ]
+   ],
+   "possibly_same_as": "RIO OROCOVIS"
+  },
+  {
+   "name": "PUERTO NUEVO BEACH",
+   "reports": 1,
+   "permits": [
+    "PR0021679"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.489,
+     -66.406
+    ]
+   ]
+  },
+  {
+   "name": "Puente de oro Creek",
+   "reports": 1,
+   "permits": [
+    "PR0023795"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.09,
+     -67.158
+    ]
+   ]
+  },
+  {
+   "name": "QUEBRADA YAUREL",
+   "reports": 1,
+   "permits": [
+    "PR0025445"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     17.984,
+     -66.022
+    ]
+   ]
+  },
+  {
+   "name": "Quebrada Amoroso",
+   "reports": 1,
+   "permits": [
+    "PR0025445"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     17.967,
+     -66.208
+    ]
+   ]
+  },
+  {
+   "name": "RIO GRANDE MANATI",
+   "reports": 1,
+   "permits": [
+    "PR0020427"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.346,
+     -66.468
+    ]
+   ],
+   "possibly_same_as": "RIO GRANDE DE MANATI"
+  },
+  {
+   "name": "RIO INDIO",
+   "reports": 1,
+   "permits": [
+    "PR0020711"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.332,
+     -66.399
+    ]
+   ]
+  },
+  {
+   "name": "RIO LA SABANA",
+   "reports": 1,
+   "permits": [
+    "PR0025399"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.172,
+     -65.869
+    ]
+   ]
+  },
+  {
+   "name": "Unknown Creek near Atlantic Ocean",
+   "reports": 1,
+   "permits": [
+    "PR0023736"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     18.336,
+     -67.253
+    ]
+   ]
+  }
+ ]
+}

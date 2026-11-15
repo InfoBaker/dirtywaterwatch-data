@@ -223,6 +223,90 @@
     "basis": "Ohio sets no period after a sewage discharge during which the water is to be avoided, and no Ohio statute or rule requires the public to be told of a sewer overflow or a bypass: operators report them to Ohio EPA within 24 hours, and those reports are not published. Ohio's permit rule requires a permanent sign at every permitted outfall, combined sewer overflow and bypass outfalls included, and requires a major discharger near a drinking-water intake to notify the water supplier as soon as practicable. Combined sewer operators in the Lake Erie basin must notify the public within four hours of becoming aware of an overflow under their public notification plans (40 CFR 122.38); operators in the Ohio River basin notify under their permits. The Northeast Ohio Regional Sewer District, Akron, Columbus and Bowling Green publish their overflows; the Metropolitan Sewer District of Greater Cincinnati advises avoiding contact with streams for 72 hours after rain. Ohio EPA's spills layer lists the sewage spills called in to its emergency line, by day, with no end. This site marks a reported discharge while it runs and applies its own caution after it ends; a report with only a day is read in Eastern time",
     "source": "OAC 3745-33-08(A)(12) and (F)(1); 40 CFR 122.38; 40 CFR 122.41(l)(6); NEORSD CSO alerts map; City of Akron overflow status map; City of Columbus Sewer Overflow Discharge Information; City of Bowling Green CSO events; Ohio EPA Spills (Office of Emergency Response); MSD of Greater Cincinnati CSO notification program"
    },
+   "MN": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Minnesota sets no period after a sewage discharge during which the water is to be avoided. State law requires a discharge that may pollute the state's waters to be reported to the state immediately, and requires a publicly owned treatment plant and any public or private domestic sewer system then promptly to tell potentially affected downstream users, the public, Tribal governments and drinking-water facilities by the fastest means it has, and to post signs at affected public use areas or tell the body that runs them; the reports go to the state Duty Officer and are not published, and no statewide list of the notices exists. The Metropolitan Council posts a page for each spill from its regional sewers in the Twin Cities, with the warning signs it puts up and takes down, and the Western Lake Superior Sanitary District maps its releases around Duluth. This site treats the Council's warning signs as its own window, marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "Minn. Stat. 115.061; Minnesota Pollution Control Agency guidance wq-wwprm1-43 and wq-wwprm1-59; Metropolitan Council, Wastewater Spills; Resource Renew (Western Lake Superior Sanitary District), overflow map"
+   },
+   "ND": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "North Dakota sets no period after a sewage discharge during which the water is to be avoided, and no North Dakota statute or rule requires the public to be told of a sewage discharge. A spill or discharge likely to pollute water must be reported to the Department of Environmental Quality immediately, and the permits require an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public list refuses automated reading; the Department's archive holds the reports of 1975 to 2020. The Department posts harmful algal bloom advisories and warnings by lake from May to December. Dates are read in Central time, and in Mountain time in the southwestern counties. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "N.D. Admin. Code 33.1-16-02.1-11(4); NDPDES general permit NDG420000 Part IV(F); North Dakota Department of Environmental Quality, General Environmental Incidents - Historical and harmful algal bloom listing; 49 CFR 71.7(a)"
+   },
+   "MO": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Missouri sets no period after a sewage discharge during which the water is to be avoided, and no Missouri statute or rule requiring the public to be told of a sewer overflow or a bypass was found: permitted wastewater facilities report them to the Department of Natural Resources within 24 hours of discovery, through its online portal, and those reports are not published. The Department's monthly concern reports, issued two to four months later, list the concerns it investigated; a concern is the reporting party's account unless the Department's comments say what it found. Kansas City's KC Water and St. Louis's Metropolitan Sewer District post some overflows on their own websites, and combined sewer operators post signs at their outfalls. State park swim beaches are posted 'Swimming is Not Recommended' when weekly E. coli samples exceed the state standard. This site marks a reported discharge while it runs and applies its own caution after it ends; a concern reported by the public is shown with this site's caution only",
+    "source": "Missouri Department of Natural Resources, sewer overflow reporting guidance (MoGEM) and Water Pollution Control concern reports; RSMo 640.080; KC Water news; MSD Project Clear alerts"
+   },
+   "KS": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Kansas sets no period after a sewage discharge during which the water is to be avoided, and no Kansas statute or rule requiring the public to be told of a sewer overflow or a bypass was found: an emergency or accidental sewage discharge that a valid permit does not provide for is reported to the Kansas Department of Health and Environment immediately, and a planned bypass needs its approval seven days ahead; those reports are not published. KDHE issues a stream advisory, asking people to avoid contact with a stretch of water, when it judges one needed, and rescinds it by a later release; KDHE and the state parks agency post advisories for harmful algal blooms on lakes. The City of Leavenworth posts each of its sewer overflows. This site shows KDHE's advisories in KDHE's own window until KDHE rescinds them (14 days after the last read that confirmed one once its release has left KDHE's feed), marks a reported discharge while it runs and applies its own caution after it ends; four western counties keep Mountain time",
+    "source": "K.A.R. 28-16-27; KDHE stream advisories (news flash) and Harmful Algal Blooms map; City of Leavenworth Sanitary Sewer Overflow Transparency Reports; 49 CFR 71.7(d)"
+   },
+   "AR": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Arkansas sets no period after a sewage discharge during which the water is to be avoided, and no Arkansas statute or rule requires the public to be told of a sewer overflow or a bypass. Every permittee must report any sanitary sewer overflow, “no matter how small”, any unanticipated bypass, any upset and any unpermitted discharge to the Division of Environmental Quality within 24 hours, and in most cases in writing within five days, on the Division's online forms, whether or not it reached water. The Division publishes the filed reports in its Reported Noncompliance Incident Data search, current to the previous day, with the days the overflow started and stopped, the volume and whether the filer says it reached a stream, but no time of day, no coordinates and no receiving-water field. The Division posts harmful algal bloom advisories with the days they were posted and lifted, and the Department of Health lists the swim beaches it has closed, with no dates. Dates are read in Central time. This site marks a reported discharge from its start day to its stop day and applies its own caution after it ends, or for 72 hours from the start of its day when no stop day is given; a report is placed on a stream only when its location names one and the filer did not say it stayed on land",
+    "source": "Arkansas Division of Environmental Quality, Reported Noncompliance Incident Data (NPDES permit Part II reporting conditions as stated there); DEQ Harmful Algal Blooms advisories; Arkansas Department of Health, Arkansas Swim Beach Program; 49 CFR part 71 (Arkansas lies wholly in the Central zone)"
+   },
+   "WI": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Wisconsin law sets no period after a sewage discharge during which the water is to be avoided. Every sanitary sewer overflow and treatment facility overflow must be publicly noticed promptly, by the communications the operator's emergency response plan names; the Department of Natural Resources' instructions make a notice to a daily newspaper the minimum when the overflow reaches surface water, and no web posting or hour deadline is set (s. NR 210.21(5), Wis. Adm. Code). The overflow is reported to the Department within 24 hours and on its form within five business days; the Department publishes none of these reports, and the U.S. Environmental Protection Agency's tables held no Wisconsin report on November 12, 2026. The two combined sewer permittees, the Milwaukee Metropolitan Sewerage District and the City of Superior, are in the Great Lakes Basin and owe an electronic public notice within four hours of a combined sewer overflow (40 CFR 122.38). The Milwaukee Metropolitan Sewerage District posts what it reported to the Department, with the dates and the volume, a few days after each overflow of its regional system. Times are read in Central time. Permits on tribal land are issued by the U.S. Environmental Protection Agency, and their reports go to it rather than to the Department. This site marks a reported discharge from its start to its end where the post gives both and applies its own caution after it ends; a report dated only to the day with no end shows caution for 72 hours from the start of that day, and one with a time but no end, or with only the storm's dates and none of its own, shows caution for 14 days from its report, then the end is marked not confirmed until 30 days after it began (after its report, when only the storm's dates are given); a combined sewer overflow that names no outfall is shown on every water the district's outfalls discharge to",
+    "source": "Wis. Adm. Code NR 210.21(5) (as the DNR's form 3400-184 instructions give it); 40 CFR 122.38; Milwaukee Metropolitan Sewerage District Storm Update posts"
+   },
+   "DE": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Delaware sets no period after a sewage release during which the water is to be avoided. Anyone causing an environmental release, which for sewage means 10,000 gallons or more, must report it to the Department of Natural Resources and Environmental Control as soon as it is known; the Department must post it on its website no later than one business day after the report, and notify the district's legislators and registered neighbours within 12 hours of being informed. Discharges in compliance with a permit are exempt, so Wilmington's combined sewer overflows, the state's only ones, are not reported there: each outfall carries a sign. The Department's release list gives the release's time and place, not its end. The Department's Recreational Water Program posts advisories and closures at monitored beaches with their own start and end dates. This site marks a reported release while it runs and applies its own caution after it ends",
+    "source": "7 Del. C. 6002(20), 6014(b) and 6028(a); Delaware DNREC Environmental Release Notification System (Recent Releases); DNREC Recreational Water Program"
+   },
+   "SC": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "South Carolina sets no period after a sewage spill during which the water is to be avoided. A wastewater utility must report a significant spill (5,000 gallons or more of untreated or partially treated sewage) to the Department of Environmental Services within 24 hours and in writing within five days, and give public notice within 24 hours of discovering it, through a channel the law does not name; the Department gives the notice when the utility does not. Spills caused by natural disasters, a third party's direct act or other acts of God are excluded. The Department publishes no list of the reports it receives. The City of Florence posts a notice for each overflow of 5,000 gallons or more. The Department posts swimming advisories at its beach monitoring stations and harmful algal bloom watches and advisories. This site marks a reported spill while it runs and applies its own caution after it ends",
+    "source": "S.C. Code 48-1-95(A)(5), (B) and (E); City of Florence sanitary sewer overflow notices; SC DES Beach Monitoring; SC DES Harmful Algal Bloom Monitoring"
+   },
+   "IN": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Indiana law sets no period after a sewage discharge during which the water is to be avoided. A combined sewer community must notify the affected public, local health departments, drinking water suppliers downstream and anyone who asks after its March newspaper notice whenever an overflow is occurring or imminent, in a manner agreed with each recipient, and post signs at public access points saying that sewage may be in the water during and for several days after rain or snowmelt (327 IAC 5-2.1); in the Lake Michigan and Lake Erie basins a public notice is due within four hours (327 IAC 5-2.2; 40 CFR 122.38). Sanitary sewer overflows and bypasses are reported to the Indiana Department of Environmental Management within 24 hours; the Department publishes no list of them. This site shows each combined sewer outlet's monthly totals from the operators' discharge monitoring reports with the monthly mark, marks a reported discharge while it runs and applies its own caution after it ends, and applies its rain caution at each open combined sewer outfall with a location once the outfall is placed on its water. Times are read in Eastern time, and in Central time in the twelve counties of the northwest and southwest. A report of a discharge that reached no water is not shown on this site",
+    "source": "327 IAC 5-2.1-5 and 5-2.1-6; 327 IAC 5-2.2-1; 40 CFR 122.38; IDEM sewer bypass/overflow incident reporting (State Form 48373); U.S. EPA discharge monitoring reports and sewer overflow and bypass event data (ECHO); 49 CFR 71.5(b)"
+   },
+   "WV": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "West Virginia law sets no period after a sewage discharge during which the water is to be avoided, and no West Virginia statute or rule requires the public to be told of a sewer overflow or a bypass. Whoever causes a spill or accidental discharge of sewage must report it by telephone to the Department of Environmental Protection's emergency spill line, and the permit's federal conditions add written reports; DEP publishes no list of these reports, and a 2025 bill that would have required public notice within 24 hours and an online spill database is pending in committee. West Virginia's combined sewer communities give notice by a sign at each outlet and a newspaper notice once a year; Charleston's sanitary board advises avoiding contact with the water around its outlets during overflow events and \"for at least 24 hours thereafter\", and Morgantown's utility board advised avoiding contact for 72 hours after rain (its page as read on November 9, 2026). Of the 61 permits with an open combined sewer outlet in the Department's outlet layer, none reported the number or length of its combined sewer overflows in the monthly reports the U.S. Environmental Protection Agency published for January 2025 to November 14, 2026 (as read on November 14, 2026); two report a monthly flow at one outlet, which this site shows as a monthly figure. This site applies its rain caution at each open combined sewer outfall with a location once the outfall is placed on its water (when radar shows 0.1 inch of rain in 24 hours there and no discharge is reported); an operator's own period is quoted as its own. Times are read in Eastern time",
+    "source": "47CSR11 (Water Resources Special Rules; DEP emergency spill line); 40 CFR 122.41(l)(6); EPA Combined Sewer Overflow Control Policy (59 FR 18688); WV DEP NPDES Outlets layer; U.S. EPA ECHO discharge monitoring reports; WV DEP algal bloom advisory map; Charleston Sanitary Board and Morgantown Utility Board combined sewer pages"
+   },
+   "LA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Louisiana law sets no period after a sewage discharge during which the water is to be avoided, and no Louisiana statute or rule requires the public to be told of a sewer overflow or a bypass. An unauthorized discharge is reported to the State Police hotline within the first hour when it is an emergency, or within 24 hours when it exceeds a reportable quantity, with a written report to the Department of Environmental Quality within seven days; the Department files the reports in its document system, whose search a CAPTCHA guards, and publishes no list. The City of Baton Rouge and Parish of East Baton Rouge lists every discharge from its collection systems in its quarterly reports under a federal consent decree, with the day, the cause, the receiving water and the gallons, but no time and no end; this site shows each such report with its caution for 72 hours from the start of its day. Louisiana has no municipal combined sewer system. Times are read in Central time. A report that names no receiving water is listed but not placed on a water",
+    "source": "LAC 33:I.3915, 3917 and 3925; 40 CFR 122.41(l)(6); LDEQ Single Point of Contact; City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D)"
+   },
+   "NV": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Nevada sets no period after a sewage discharge during which the water is to be avoided, and no Nevada statute or rule requires the public to be told when one happens. Since 2025 a city, county, unincorporated town, general improvement district, wastewater district or water authority aware of a sewage discharge must notify the Nevada Division of Environmental Protection online or by telephone, with no deadline, and the Division notifies any Indian tribe that may be affected (NRS 445A.467); a discharge permit adds the permittee's report to the Division within 24 hours and in writing within five days. No published list of these reports was found, and the U.S. Environmental Protection Agency's overflow records hold no Nevada report. Nevada State Parks post harmful algal bloom advisories (Watch, Warning or Danger) for waters in state parks, with the date of each update; the statewide bloom dashboard offered no data download when read on November 9, 2026. This site marks a reported discharge while it runs and applies its own caution after it ends; a bloom advisory is shown while the parks list it, and no longer than 14 days after the last read that found it listed. Nevada's times are Pacific time, except West Wendover's, which are Mountain time",
+    "source": "NRS 445A.467; 40 CFR 122.41(l)(6); 49 CFR 71.9(b); Nevada Division of State Parks, HAB Advisory; U.S. EPA sewer overflow and bypass event data (ECHO)"
+   },
+   "OK": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Oklahoma sets no period after a sewage discharge during which the water is to be avoided, and no Oklahoma statute or rule requires the public to be told when one happens. The Department of Environmental Quality's standard conditions for municipal discharge permits require oral notice to the Department within 24 hours of becoming aware of any sewer overflow or bypass, and a written report within five days; the Department's reporting page asks instead for a telephone report within 48 hours of the event, and its bypass form for 24 hours, so its instructions differ. No published list of these reports was found, and the U.S. Environmental Protection Agency's overflow records hold no Oklahoma report. The National Park Service posts its weekly E. coli results at the swimming places of Chickasaw National Recreation Area in summer and posts signs at the water when they are high. This site marks a reported discharge while it runs and applies its own caution after it ends; a park result at or above the park's threshold is shown with this site's caution for 72 hours from the sample, never as the park's notice. Oklahoma's times are Central time",
+    "source": "Oklahoma DEQ municipal OPDES permit Part III B.6 (March 2017); DEQ wastewater reporting requirements; DEQ Form 605-011 (October 2025); OAC 252:606; 40 CFR 122.41(l)(6); National Park Service, Chickasaw National Recreation Area, Bathing Beach Monitoring Program"
+   },
+   "PR": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Puerto Rico sets no period after a sewage discharge during which the water is to be avoided, and no Puerto Rico statute or rule requiring the public to be told of a sewer overflow or a bypass was found: the Puerto Rico Aqueduct and Sewer Authority (PRASA) and the other permittees report them to the U.S. Environmental Protection Agency, which writes Puerto Rico's permits, within 24 hours and in writing within five days, and EPA publishes the electronic reports in its overflow records with the day it received each (a median of 2 days after the start in 2025 and 2026), not the day each was published. PRASA's Puerto Nuevo permit requires a public notification process for its combined sewer overflows in San Juan, and its 2023 consent decree modification calls for posting them on PRASA's website; no posted overflow was found. The Department of Natural and Environmental Resources (DRNA) publishes a weekly notice of the beaches whose samples exceed the enterococci Beach Action Value, which it declares not fit for bathers; this site shows each as DRNA's own advisory from the notice that lists it until a notice says the beaches are fit for bathers; a later notice that only no longer lists a beach is not a lift, so its advisory is shown for 14 days after the last notice that listed it. This site marks a reported discharge while it runs and applies its own caution after it ends; times are read in Atlantic Standard Time, which Puerto Rico keeps all year",
+    "source": "40 CFR 122.41(l)(6); 40 CFR part 127; U.S. EPA sewer overflow and bypass event data (ECHO); NPDES permit PR0021555 (2021), CSO permit conditions; United States v. PRASA, No. 3:15-cv-02283 (D.P.R.), 2023 modification; DRNA Programa de Monitoría de Playas y Notificación Pública (drna.pr.gov)"
+   },
    "IA": {
     "hours": null,
     "clock": "end_of_discharge",
@@ -382,6 +466,9 @@
     "hi-doh-cwb-events-api",
     "tx-glo-beach-watch",
     "tn-tdec-hab-advisory-status",
+    "ok-nps-chickasaw-bacteria",
+    "ar-deq-hab-advisories",
+    "de-dnrec-recreational-water",
     "id-deq-cyanohab-risk-table"
    ],
    "flag": "_agency_label_only",
@@ -396,6 +483,15 @@
     "tn-tdec-events-report",
     "oh-epa-spills-opendata",
     "oh-columbus-sewer-overflow",
+    "mn-wlssd-overflows",
+    "mn-mces-spill-notices",
+    "nd-deq-eir-legacy-general",
+    "mo-msd-stl-project-clear",
+    "mo-dnr-concern-reports",
+    "ar-deq-overflow-incidents",
+    "wi-mmsd-storm-updates",
+    "de-dnrec-derns-recent-releases",
+    "la-baton-rouge-quarterly",
     "ia-dnr-news-releases",
     "ia-dnr-focomp-incoming-reports"
    ],
@@ -539,6 +635,41 @@
    "default": "Discharge possible: heavy rain, no report received"
   },
   "label_by_basis_rationale": "The label says how strong the estimate is. It reads \"discharge likely\" where the amount comes from the operator's own discharge history or from a rain trigger its state publishes, and \"discharge possible\" where only this site's default of 0.1 inch applies. The colour, the rule and how long the caution lasts are the same.",
+  "history": {
+   "doc": "Where an operator has enough dated overflow reports, this site pairs every storm at its outfalls since 2015 with the operator's own reports. The caution reads discharge possible from the smallest storm after which the operator ever reported an overflow, rounded down to the next step, and discharge likely from the smallest step at which it reported an overflow after at least half of the storms of that size and of all larger storms together. Below the possible amount no caution shows only where at least 30 storms that small are on record over at least three years and none was followed by a reported overflow; otherwise the caution starts where a published rule or this site's default would start it, and lasts at least as long. This is an estimate, not a report, and it never replaces a red advisory.",
+   "source": "The operators' own dated combined sewer overflow reports, as the operators and state agencies publish them in the sources this site reads; NOAA MRMS daily rainfall totals at each operator's outfalls, from the Iowa Environmental Mesonet reanalysis point service, from 2015.",
+   "label_by_level": {
+    "likely": "Discharge likely: heavy rain, no report received",
+    "possible": "Discharge possible: heavy rain, no report received"
+   },
+   "label_by_level_rationale": "With an operator's own record the label follows the storm: \"discharge likely\" when the rain of the last 24 hours reaches the amount after which the operator reported an overflow after at least half of the storms, and \"discharge possible\" below it. A water reads \"discharge likely\" when any of its operators' cautions does.",
+   "rungs_in": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+   ],
+   "rungs_in_rationale": "The steps every amount is rounded down to, in inches of rain in a day, so an amount is never read more finely than the record supports.",
+   "likely_share": 0.5,
+   "likely_share_rationale": "The caution reads discharge likely from the step at which an overflow was reported after at least half of the storms of that size and larger, the cautious choice.",
+   "quiet_min_storms": 30,
+   "quiet_min_storms_rationale": "No caution shows below the smallest storm followed by a reported overflow only when at least 30 storms that small are on record, over at least three years, and none was followed by one.",
+   "quiet_min_period_days": 1095,
+   "quiet_min_period_days_rationale": "Three years of record are needed before small storms can be read as quiet: one or two years of reports cannot show how a system behaves across wet and dry seasons.",
+   "min_storms": 10,
+   "min_storms_rationale": "A size of storm needs at least 10 storms on record before it can set the discharge likely amount; thinner sizes are pooled with their neighbours.",
+   "min_report_storms": 10,
+   "min_report_storms_rationale": "An operator's record is used only when at least 10 storms were followed by a reported overflow.",
+   "min_total_storms": 20,
+   "min_total_storms_rationale": "An operator's record is used only when it holds at least 20 storms.",
+   "min_period_days": 365,
+   "min_period_days_rationale": "An operator's record is used only when it covers at least a year, so every season is in it.",
+   "_system_changes_doc": "A completed project that changed how often a system overflows (a tunnel, a storage basin, sewer separation), cited by its source: {\"<permit>\": [{\"from\": \"YYYY-MM-DD\", \"what\": \"plain words\", \"source\": \"citation\"}]}. The record for that operator then starts on that day. Until one is cited, a drop in reporting is stated and the whole record is kept.",
+   "system_changes": {}
+  },
   "percentile": 10,
   "min_discharge_days": 10,
   "threshold_rationale": "The amount is the 10th percentile of the rainfall on the days the operator discharged: nine discharge days in ten had more rain. It is computed for each operator with at least 10 such days. In Massachusetts it is the rainfall the operator itself reported in its sewage notification reports since July 2022. In Michigan, whose discharge list gives the operator's rainfall for the whole event rather than for one day, it is the NOAA MRMS radar's daily rainfall at the operator's outfalls on the days its reported combined sewer and retention basin discharges began since 2015, the larger of that day's total and the day before's. Operators without that history use a published rule below.",

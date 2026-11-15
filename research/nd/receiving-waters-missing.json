@@ -1,0 +1,273 @@
+{
+ "about": "Receiving-water names in North Dakota's records (DEQ's harmful algal bloom listing, read 2026-11-14) that data/receiving-waters-national.json does not hold for ND, by name as typed, with the counties DEQ gives (a same-named lake elsewhere in the state is not the one listed: North Dakota has more than one Clear Lake and Buffalo Lake). DEQ's archive of incidents 1975-2020 names no water: its 36 sewage reports are placed by their own points or listed with their county.",
+ "state": "ND",
+ "left_out": [
+  {
+   "name": "Devils Lake",
+   "reports": 1,
+   "reason": "on the national list already"
+  },
+  {
+   "name": "(none)",
+   "reports": 36,
+   "reason": "DEQ's incident archive gives a point and a county, no water name"
+  }
+ ],
+ "waters": 8,
+ "reports": 8,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in ND": 8
+ },
+ "resolved_names": 11,
+ "resolved_reports": 11,
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/nd/receiving-waters-missing.json --state ND",
+  "records_built": 0,
+  "names_resolved": 11,
+  "network_requests": 0
+ },
+ "rows": [
+  {
+   "name": "Blacktail Dam",
+   "reports": 1,
+   "county": "Williams County",
+   "counties": [
+    "Williams County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Blacktail Dam"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Bowman-Haley Dam",
+   "reports": 1,
+   "county": "Bowman County",
+   "counties": [
+    "Bowman County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Bowman - Haley Dam"
+   ],
+   "aliases_suggested": [
+    "Bowman-Haley Lake",
+    "Bowman-Haley Reservoir"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Larimore Dam",
+   "reports": 1,
+   "county": "Grand Forks County",
+   "counties": [
+    "Grand Forks County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Larimore Dam"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "North Lake Washington",
+   "reports": 1,
+   "county": "Eddy County",
+   "counties": [
+    "Eddy County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "North Lake Washington"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Patterson Lake",
+   "reports": 1,
+   "county": "Stark County",
+   "counties": [
+    "Stark County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Patterson Lake"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "South Golden Lake",
+   "reports": 1,
+   "county": "Steele County",
+   "counties": [
+    "Steele County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "South Golden Lake"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Sykeston Dam",
+   "reports": 1,
+   "county": "Wells County",
+   "counties": [
+    "Wells County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Sykeston Dam"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "West Lake Napoleon",
+   "reports": 1,
+   "county": "Logan County",
+   "counties": [
+    "Logan County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "West Lake Napoleon"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in ND; the reports give no place to look for it in the NHD high-resolution flowlines"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Antelope Lake",
+   "reports": 1,
+   "slugs": [
+    "antelope-lake-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Pierce County"
+  },
+  {
+   "name": "Buffalo Lake",
+   "reports": 1,
+   "slugs": [
+    "buffalo-lake-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Sargent County"
+  },
+  {
+   "name": "Buffalo Lodge Lake",
+   "reports": 1,
+   "slugs": [
+    "buffalo-lodge-lake-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "McHenry County"
+  },
+  {
+   "name": "Clear Lake",
+   "reports": 1,
+   "slugs": [
+    "clear-lake-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Pierce County"
+  },
+  {
+   "name": "Horsehead Lake",
+   "reports": 1,
+   "slugs": [
+    "horsehead-lake-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Kidder County"
+  },
+  {
+   "name": "Lake Ashtabula",
+   "reports": 1,
+   "slugs": [
+    "lake-ashtabula-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Barnes County"
+  },
+  {
+   "name": "Lake Brekken",
+   "reports": 1,
+   "slugs": [
+    "lake-brekken-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "McLean County"
+  },
+  {
+   "name": "Lake Darling",
+   "reports": 1,
+   "slugs": [
+    "lake-darling-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Renville County"
+  },
+  {
+   "name": "Lake Ilo",
+   "reports": 1,
+   "slugs": [
+    "lake-ilo-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Dunn County"
+  },
+  {
+   "name": "Lake Isabel",
+   "reports": 1,
+   "slugs": [
+    "lake-isabel-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Kidder County"
+  },
+  {
+   "name": "Lake Tschida",
+   "reports": 1,
+   "slugs": [
+    "lake-tschida-nd"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Grant County"
+  }
+ ]
+}
