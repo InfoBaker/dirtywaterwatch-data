@@ -411,3 +411,129 @@ def test_iowa_placement_values_are_written_only_by_iowa():
             if p.is_file() and p.suffix in (".py", ".yaml", ".json")
             and ("own_place_only" in p.read_text(errors="ignore") or "_also_named_waters" in p.read_text(errors="ignore"))]
     assert {p.name for p in hits} == {"ia_waterloo_sso.py", "ia_dnr_focomp.py", "ia_dnr_news.py"}, hits
+
+
+# ------------------------------------------------------------------ P1-3 a partial FOCOMP detail read keeps good fields
+
+FFIX = Path(__file__).resolve().parent / "fixtures" / "ia"
+
+
+def _focomp_run(tmp_path, monkeypatch, pages, at, saves=None):
+    """F.main on the invented facility page and these report pages {rid: html}; every save captured."""
+    saves = [] if saves is None else saves
+    fl = tmp_path / "facilities.json"
+    fl.write_text(json.dumps({"facilities": [dict(FAC, county="Polk")]}))
+    monkeypatch.setattr(F, "FACILITIES", fl)
+    monkeypatch.setattr(F, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(F, "iowa_plants", lambda: [])
+    monkeypatch.setattr(F, "_OPERATORS", {})
+    monkeypatch.setattr(F, "PAUSE_S", 0)
+    fac_page = (FFIX / "focomp-facility.html").read_text()
+
+    def get(url):
+        if "FacilityDetail" in url:
+            return fac_page
+        rid = url.split("incomingReportID=")[1]
+        if rid not in pages:
+            raise F.requests.RequestException("not in this test")
+        return pages[rid]
+    monkeypatch.setattr(F, "get", get)
+    monkeypatch.setattr(F, "save_raw", lambda sid, data, ext: saves.append(data.decode()))
+    real = F.write_json
+    monkeypatch.setattr(F, "write_json", lambda p, d, *a, **k: (saves.append(json.dumps(d)), real(p, d, *a, **k)))
+    out = {}
+
+    def we(sid, recs, **kw):
+        out.clear()
+        out.update(recs=recs, **kw)
+        saves.append(json.dumps({"recs": recs, **kw}, default=str))
+        return tmp_path / "events.json"
+    monkeypatch.setattr(F, "write_events", we)
+    monkeypatch.setattr(F, "BACKFILL_FROM", "2000-01-01")
+    rc = F.main(["--at", at, "--facility-budget", "1", "--report-budget", "10"])
+    return rc, out, {r["source_record_id"]: r for r in out.get("recs") or []}
+
+
+@pytest.mark.parametrize("damage", [
+    lambda p: p.replace('name="IncidentStart"', 'name="IncidentStartDate"'),
+    lambda p: p.replace('name="DateReceived"', 'name="ReceivedOn"').replace('name="IncidentEndTime"', 'name="EndT"'),
+    lambda p: p.replace('name="IncidentStart" value="6/15/2026"', 'name="IncidentStart" value=""'),
+    lambda p: p.replace('name="IncidentStart" value="6/15/2026"', 'name="IncidentStart" value="15 June"'),
+])
+def test_p1_3_a_partial_or_malformed_detail_read_never_replaces_good_dates(tmp_path, monkeypatch, damage):
+    good = {rid: (FFIX / f"focomp-report-{rid}.html").read_text() for rid in ("900001", "900002", "900004")}
+    good["100001"] = good["900004"].replace('value="900004"', 'value="100001"')       # the page's fifth report
+    rc, out, recs = _focomp_run(tmp_path, monkeypatch, good, "2026-09-26T12:00:00Z")
+    assert rc == 0 and recs["900002"]["started_at"] == "2026-06-15T14:10:00-05:00"
+    st = json.loads((tmp_path / "state.json").read_text())
+    for r in st["reports"].values():                 # make every report due a re-read
+        r["closed"] = "Open"
+    (tmp_path / "state.json").write_text(json.dumps(st))
+    bad = dict(good, **{"900002": damage(good["900002"])})
+    rc, out, recs = _focomp_run(tmp_path, monkeypatch, bad, "2026-09-28T12:00:00Z")
+    assert rc == 0 and out["ok"] is False and any("900002" in e for e in out["meta"]["unread"])
+    assert recs["900002"]["started_at"] == "2026-06-15T14:10:00-05:00"          # the good read kept
+    assert recs["900001"]["raw"]["_read_at"] == "2026-09-28T12:00:00Z"           # the readable report updated
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert st["reports"]["900002"]["retry"] is True
+    assert F.reports_to_read(st, "2026-09-28T13:00:00Z", 1) == [(FAC["st_fac_id"], "900002")]   # first next run
+    # a later good read clears it
+    rc, out, recs = _focomp_run(tmp_path, monkeypatch, good, "2026-09-29T12:00:00Z")
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert "retry" not in st["reports"]["900002"] and out.get("ok", True) is not False
+
+
+# ------------------------------------------------------------------ P1-5 Iowa privacy before the first save
+
+def test_p1_5_focomp_a_home_is_found_before_the_text_is_withheld_and_never_saved(tmp_path, monkeypatch):
+    page = (FFIX / "focomp-report-900002.html").read_text()
+    import re as _re
+    page = _re.sub(r'(<textarea[^>]*name="ReportDetails"[^>]*>).*?(</textarea>)',
+                   r"\1Overflow at the home of Example Person on Sample Ln.\2", page, flags=_re.S)
+    page = _re.sub(r'name="Latitude"[^>]*value="[^"]*"', 'name="Latitude" value="41.51234"', page)
+    page = _re.sub(r'name="Longitude"[^>]*value="[^"]*"', 'name="Longitude" value="-93.49876"', page)
+    rep = F.parse_report(page)
+    assert rep["private_home"] is True and rep["lat"] is None and rep["details"].startswith("[withheld")
+    saves = []
+    rc, out, recs = _focomp_run(tmp_path, monkeypatch, {"900002": page}, "2026-09-26T12:00:00Z", saves)
+    r = recs["900002"]
+    assert r["lat"] is None and r["raw"]["incident_address"] is None and "private home" in r["raw"]["privacy_cut"]
+    for s in saves:
+        for bad in ("Example Person", "41.512", "-93.498", "41.51234"):
+            assert bad not in s, (bad, s[:200])
+    # carried state saved before the fix: a withheld place description loses its point
+    st = {"reports": {"1": {"fac": "399999001", "fields": {"location": "[withheld: the text may name a person]",
+                                                          "lat": 41.5, "lon": -93.5, "address": "Sample Ln"}}}}
+    f = F.scrub_state(st)["reports"]["1"]["fields"]
+    assert f["lat"] is None and f["address"] is None and f["private_home"] is True
+
+
+def test_p1_5_news_titles_are_scrubbed_on_every_save(tmp_path, monkeypatch):
+    monkeypatch.setattr(N, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(N, "_OPERATORS", {})
+    title = "Wastewater bypass reported by Example Person, call 515-555-0142"
+    rss = (f"<rss><channel><item><title>{title}</title><link>https://www.iowadnr.gov/news-release/2026-11-01/x</link>"
+           "<pubDate>Sun, 01 Nov 2026 12:00:00 GMT</pubDate></item></channel></rss>")
+    page = ("<html><body><h1>" + title + "</h1>\n<p>Sunday, November 1, 2026</p>\n<p>News Release</p>\n"
+            "<p>The City of Exampleton reported that its lift station discharged wastewater into Sample Creek.</p>"
+            "</body></html>")
+    saves = []
+    monkeypatch.setattr(N, "get", lambda url: rss if url == N.RSS else page)
+    monkeypatch.setattr(N, "save_raw", lambda sid, data, ext: saves.append(data.decode()))
+    real = N.write_json
+    monkeypatch.setattr(N, "write_json", lambda p, d, *a, **k: (saves.append(json.dumps(d)), real(p, d, *a, **k)))
+    out = {}
+    monkeypatch.setattr(N, "write_events", lambda sid, recs, **kw: (out.update(recs=recs, **kw),
+                                                                     saves.append(json.dumps({"r": recs, **kw})))[0])
+    assert N.main(["--at", T0]) == 0
+    # carried state from before the fix is scrubbed again
+    st = json.loads((tmp_path / "state.json").read_text())
+    for a in st["articles"].values():
+        a["title"] = title
+        a["article"]["title"] = title
+    (tmp_path / "state.json").write_text(json.dumps(st))
+    assert N.main(["--at", T1]) == 0
+    assert len(saves) >= 4
+    for s in saves:
+        for bad in ("Example Person", "555-0142"):
+            assert bad not in s, (bad, s[:300])
