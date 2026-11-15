@@ -916,7 +916,9 @@ def test_v_3_names_and_private_home_points_never_reach_a_save(monkeypatch, tmp_p
     assert "43.023, -87.918" in blob                            # a point not described as a home is kept, rounded
     recs = {r["event_type"]: r for r in written[-1][0]}
     assert set(recs) == {"cso", "sso"} and recs["cso"]["waterbody_text"] == "Lincoln Creek"
-    assert recs["cso"]["started_at"] == "2027-06-01" and recs["sso"]["started_at"] == "2027-06-01"
+    assert recs["cso"]["started_at"] == "2027-06-01"
+    # the sso's only date follows "reported": a reporting day, not its start (earlier #2)
+    assert recs["sso"]["started_at"] is None and recs["sso"]["raw"]["reported_day"] == "2027-06-01"
     # the water and organisation names MMSD's posts use are kept
     assert M.safe_line("The Milwaukee Metropolitan Sewerage District reported an overflow into the Kinnickinnic "
                        "River and Wilson Park Creek.") == ("The Milwaukee Metropolitan Sewerage District reported an "
