@@ -125,7 +125,10 @@ def hab_table(page: str) -> list[dict] | None:
         return None
     m = re.search(r"<table.*?</table>", page[i:], re.S)
     if not m:
-        return [] if re.search(r"no current watches", page[i:i + 3000], re.I) else None
+        # DES's paragraph "If it is empty, there are no current watches and/or advisories listed" is conditional: it
+        # stands above the table whether or not the table is there, so it is never read as an empty listing; only an
+        # unconditional statement that none are current is (verify P1-4)
+        return [] if empty_declared(_text(page[i:i + 3000])) else None
     head = [_text(c).lower() for c in re.findall(r"<th[^>]*>(.*?)</th>", m.group(0), re.S)]
     if head and not re.search(r"level|advisory|watch", head[0]):
         return None                                    # the columns changed: not read as DES's table
@@ -135,11 +138,25 @@ def hab_table(page: str) -> list[dict] | None:
         if not any(cells):
             continue                                   # a header row or an empty spacer
         if len(cells) < 4 or cells[0].strip().lower() not in HAB_TIERS or not _date(cells[3]) or not cells[2]:
-            if len(cells) == 1 and re.search(r"no current watches", cells[0], re.I):
+            if len(cells) == 1 and empty_declared(cells[0]):
                 continue
             return None                                # an error row or a row not in DES's shape
         rows.append({"level": cells[0], "area": cells[1], "water": cells[2], "issued": cells[3]})
     return rows
+
+
+NONE_CURRENT = re.compile(r"\b(?:there\s+are\s+)?(?:currently\s+)?no\s+(?:current|active)\s+(?:recreational\s+)?"
+                          r"(?:HAB\s+)?(?:watches|advisories)", re.I)
+
+
+def empty_declared(text: str) -> bool:
+    """A sentence that says, unconditionally, that no watch or advisory is current ("There are currently no active
+    watches or advisories"); a sentence that begins with "If" or speaks of the table being empty is not one."""
+    for sent in re.split(r"(?<=[.!?])\s+", text or ""):
+        if NONE_CURRENT.search(sent) and not re.match(r"\s*(?:if|when|should)\b", sent, re.I) \
+                and not re.search(r"\bif\b[^.]*\bempty\b|\bempty\b[^.]*\bif\b|will\s+appear", sent, re.I):
+            return True
+    return False
 
 
 def check_layer(js, required: tuple[str, ...]) -> list[dict]:
