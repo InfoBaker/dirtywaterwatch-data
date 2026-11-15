@@ -53,7 +53,8 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import TIME, clock, find_date, migrate_water_text, sentences, volume, water_text, waters
+from ingest.mo_kc_water_news import (TIME, clock, find_date, migrate_water_text, safe_link, safe_text, sentences, volume,
+                                     water_text, waters)
 
 SOURCE_ID = "mo-msd-stl-project-clear"
 API = "https://msdprojectclear.org/wp-json/wp/v2/posts"
@@ -150,7 +151,7 @@ def record(p: dict, at: str) -> dict:
                 ws.append(w)
     v, flag, vtext = volume(text)
     plant = bool(re.search(r"treatment plant", title, re.I))
-    raw = {"state": "MO", "time_zone": "America/Chicago", "title": title,
+    raw = {"state": "MO", "time_zone": "America/Chicago", "place_key": place_key(title),
            "is_follow_up": bool(FOLLOW_UP.search(title)), "start_kind": kind, "day_read_from": how,
            "start_is_upper_bound": kind in ("discovered", "reported", "publication", "stated"),
            "start_basis": ("the post gives no day for the overflow: dated to the post's own day, on or before which it "
@@ -169,7 +170,13 @@ def record(p: dict, at: str) -> dict:
         published_at=(datetime.fromisoformat(p["date_gmt"]).replace(tzinfo=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
                       if p.get("date_gmt") else None),
         fetched_at=at, material="wastewater", volume_gal=v, volume_text=vtext, estimate_flag=flag,
-        authority=AUTHORITY, advice_text=avoid.group(0).strip() if avoid else None, source_url=p["link"], raw=raw)
+        authority=AUTHORITY, advice_text=safe_text(avoid.group(0).strip()) if avoid else None,
+        source_url=permalink(p), raw=raw)
+
+
+def permalink(p: dict) -> str:
+    """The post's address, or msdprojectclear.org/?p=<id> where the address carries a house number (P1-9)."""
+    return safe_link(p["link"], f"https://msdprojectclear.org/?p={p['id']}" if p.get("id") else None)
 
 
 def place_key(title: str) -> str:
@@ -184,9 +191,9 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
     for r in recs.values():
         if not r["raw"].get("is_follow_up"):
             continue
-        k = place_key(r["raw"]["title"])
+        k = r["raw"].get("place_key") or place_key(r["raw"].get("title") or "")
         d = datetime.fromisoformat(r["started_at"][:10])
-        cands = [f for f in firsts if place_key(f["raw"]["title"]) == k and
+        cands = [f for f in firsts if (f["raw"].get("place_key") or place_key(f["raw"].get("title") or "")) == k and
                  0 <= (d - datetime.fromisoformat(f["started_at"][:10])).days <= 14]
         if not cands:
             continue
@@ -202,7 +209,11 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
 def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
+        r["raw"].setdefault("place_key", place_key(r["raw"].get("title") or ""))
+        r["raw"].pop("title", None)                   # the post title is no longer kept (re-review P1-9)
         migrate_water_text(r)
+        r["advice_text"] = safe_text(r.get("advice_text"))
+        r["source_url"] = safe_link(r.get("source_url") or "", f"https://msdprojectclear.org/?p={r.get('source_record_id')}")
     stats = {"posts": 0, "own_posts": 0, "notices": 0}
     for page in pages:
         for p in page:
@@ -225,8 +236,8 @@ def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict],
 
 
 def safe_posts(page: list[dict]) -> list[dict]:
-    return [{"id": p["id"], "date_gmt": p.get("date_gmt"), "modified_gmt": p.get("modified_gmt"), "link": p["link"],
-             "title": common.strip_house_numbers(html.unescape(p["title"]["rendered"])),
+    return [{"id": p["id"], "date_gmt": p.get("date_gmt"), "modified_gmt": p.get("modified_gmt"), "link": permalink(p),
+             "place_key": place_key(common.strip_house_numbers(html.unescape(p["title"]["rendered"]))),
              } for p in page if is_notice(p)]
 
 

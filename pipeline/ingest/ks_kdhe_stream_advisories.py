@@ -20,7 +20,7 @@ Record rules
     discharge report), status advisory_active, started_at the release's pubDate (time_precision minute: the time KDHE
     published it, the latest the advisory can have begun; raw.start_basis), published_at the same, raw.cause "sewage"
     when the description names sewage or wastewater, "livestock waste" when it names livestock or manure, else
-    "not stated"; advice_text KDHE's description. raw.advisory_extent "named_water" and raw.advisory_noun "Stream
+    "not stated"; advice_text built from those facts (advice_of), never the description. raw.advisory_extent "named_water" and raw.advisory_noun "Stream
     advisory": it colours the waters the title names (waterbody_text the first, raw.waters all), in raw.county.
   - A rescission ends every open record one of whose waters it names: status advisory_lifted, ended_at its pubDate
     (raw.ended_at_precision minute), raw.lifted_by its title and link. A rescission with no issue on record is counted
@@ -38,7 +38,8 @@ Record rules
   - The feed's offsets read -0600 in October as in November (KDHE's server states Central Standard Time year-round);
     the time is kept as stated, raw.offset_note says so.
 
-Privacy: the feed names no people; only titles, links, dates and descriptions are kept (safe_feed).
+Privacy: a release's description is never saved: the records keep the facts read from it (waters, county, cause)
+and advice built from them; titles are scrubbed (safe_text); the raw save keeps the same facts (safe_feed).
 Run from pipeline/:  python -m ingest.ks_kdhe_stream_advisories [--file feed.xml]
 """
 from __future__ import annotations
@@ -56,6 +57,7 @@ import requests
 import common
 import zones
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from ingest.mo_kc_water_news import safe_text
 
 SOURCE_ID = "ks-kdhe-stream-advisories"
 FEED = "https://www.kdhe.ks.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"
@@ -127,6 +129,17 @@ def desc_waters(desc: str) -> list[str]:
     return [w for w in ws if re.search(r"\b(?:Creek|River|Lake|Reservoir|Branch|Fork|Inlet|Pond)\b", w)]
 
 
+CAUSE_TEXT = {"sewage": "after a sewage or wastewater discharge", "livestock waste": "after a livestock waste discharge",
+              "not stated": "(KDHE's release states no cause this site reads)"}
+
+
+def advice_of(w: str | None, county: str | None, cause: str) -> str:
+    """The advice kept: built from the facts read (KDHE's level, the water, the county, the cause), never the release's
+    own description, which can name people or places (re-review P1-9)."""
+    where = " in ".join(x for x in (w, county) if x) or "the waters the release names"
+    return f"KDHE stream advisory for {where} {CAUSE_TEXT[cause]}: avoid contact with the water until KDHE rescinds it."
+
+
 def issue_records(it: dict, waters: list[str], county: str | None) -> list[dict]:
     """One record per water the release names (title and description), so each colours and lifts on its own."""
     at = iso(it["date"])
@@ -134,14 +147,15 @@ def issue_records(it: dict, waters: list[str], county: str | None) -> list[dict]
     aid = re.sub(r"\D", "", it["link"].rsplit("aid=", 1)[-1]) or key(it["title"])
     ws = list(dict.fromkeys(waters + [w for w in desc_waters(desc) if key(w) not in {key(x) for x in waters}]))
     out = []
+    cause = cause_of(f"{it['title']} {desc}")
     for w in ws or [None]:
         out.append(event(
             source_id=SOURCE_ID, source_record_id=f"{aid}-{key(w)}" if w else aid, event_type="beach_advisory",
             status="advisory_active", waterbody_text=w, started_at=at, time_precision="minute", published_at=at,
-            reported_at=at, authority=AUTHORITY, advice_text=desc or None, source_url=it["link"],
-            raw={"state": "KS", "time_zone": zones.kansas_zone(county=county), "title": it["title"], "release": aid,
-                 "waters": [w] if w else [], "release_waters": ws, "county": county,
-                 "cause": cause_of(f"{it['title']} {desc}"), "advisory_extent": "named_water",
+            reported_at=at, authority=AUTHORITY, advice_text=advice_of(w, county, cause), source_url=it["link"],
+            raw={"state": "KS", "time_zone": zones.kansas_zone(county=county), "title": safe_text(it["title"]),
+                 "release": aid, "waters": [w] if w else [], "release_waters": ws, "county": county,
+                 "cause": cause, "advisory_extent": "named_water",
                  "advisory_noun": "Stream advisory", "offset_note": OFFSET_NOTE, "_placement": "named_water_only",
                  "start_basis": "the time KDHE published the advisory; it may have begun earlier the same day",
                  "time_basis": "the feed's publication time (pubDate)"}))
@@ -149,6 +163,17 @@ def issue_records(it: dict, waters: list[str], county: str | None) -> list[dict]
 
 
 REVISABLE = ("waterbody_text", "advice_text", "source_url")
+FORBIDDEN_RAW = ("description", "text")
+
+
+def migrate(r: dict) -> None:
+    """An earlier save at the next read: the release's description never kept (re-review P1-8, P1-9)."""
+    raw = r.setdefault("raw", {})
+    for k in FORBIDDEN_RAW:
+        raw.pop(k, None)
+    raw["title"] = safe_text(raw.get("title"))
+    if r.get("advice_text") and not str(r["advice_text"]).startswith("KDHE stream advisory for "):
+        r["advice_text"] = advice_of(r.get("waterbody_text"), raw.get("county"), raw.get("cause") or "not stated")
 
 
 def revise(old: dict, new: dict) -> None:
@@ -173,6 +198,8 @@ def iso_utc(t: str) -> str:
 
 def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        migrate(r)
     stats = {"releases": 0, "issues": 0, "rescissions": 0, "lifted": 0, "rescissions_without_issue": 0,
              "revised_out": 0, "rescissions_ambiguous": 0}
     its = items(feed)
@@ -244,7 +271,15 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
 
 def safe_feed(body: bytes) -> bytes:
     """Only the stream advisory releases, never the rest of KDHE's news (Astra 2026-11-14 P1-9)."""
-    keep = [i for i in items(body) if kind(i["title"])[0]]
+    keep = []
+    for i in items(body):
+        k, waters, county = kind(i["title"])
+        if not k:
+            continue
+        # the facts read, never the release's description (re-review P1-9)
+        keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "kind": k,
+                     "waters": list(dict.fromkeys(waters + desc_waters(i["description"]))), "county": county,
+                     "cause": cause_of(f"{i['title']} {i['description']}")})
     return json.dumps({"url": FEED, "items": keep}, ensure_ascii=False, indent=1).encode()
 
 

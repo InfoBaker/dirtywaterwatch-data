@@ -90,7 +90,7 @@ def test_kc_records_are_placed_by_named_water_only_and_the_raw_save_holds_no_pos
     assert not [r for r in recs.values() if "post_text" in r["raw"]]
     saved = json.loads(K.safe_feed((FIX / "kc_feed.xml").read_bytes()))
     assert len(saved["items"]) == 5 and not [i for i in saved["items"] if "text" in i]
-    assert not [i for i in saved["items"] if "Bonds" in i["title"]]
+    assert not [i for i in saved["items"] if "title" in i]           # titles are no longer saved (re-review P1-9)
 
 
 def test_kc_first_page_404_is_a_failed_run(monkeypatch):
@@ -587,3 +587,52 @@ def test_kc_old_saves_lose_post_text_and_gain_every_water_on_repeated_runs(tmp_p
     assert len(out) == len(recs) and "555-0100" not in json.dumps(out)
     assert {r["raw"]["_placement"] for r in out} == {"named_water_only"}
     assert {r["event_id"]: r["waterbody_text"] for r in out} == {r["event_id"]: r["waterbody_text"] for r in recs}
+
+
+def test_names_phones_and_addresses_never_reach_titles_advice_links_or_the_raw_saves():
+    """Re-review P1-9: a synthetic person, telephone and house number in an MSD title, advice and link, in a KC title and
+    link and in a KDHE release's title and description: absent from every record and raw save, earlier saves too."""
+    from ingest import ks_kdhe_stream_advisories as A
+    post = {"id": 7001, "date_gmt": "2026-03-02T15:00:00", "modified_gmt": "2026-03-02T15:00:00",
+            "link": "https://msdprojectclear.org/newsroom/alerts/overflow-at-4321-example-lane-reported-by-jane-example/",
+            "title": {"rendered": "Overflow reported by Jane Example, 573-555-0100, at 4321 Example Lane in Example Heights"},
+            "content": {"rendered": "<p>On Monday sewage reached Example Creek. Residents should avoid Example Creek; "
+                                    "call Staff Example at 573-555-0100.</p>"}}
+    recs, _ = M.run([[post]], [], AT)
+    saved = json.dumps(M.safe_posts([post]))
+    blob = json.dumps(recs) + saved
+    for p in PERSONAL:
+        assert p not in blob, p
+    assert recs[0]["source_url"] == "https://msdprojectclear.org/?p=7001"
+    assert recs[0]["raw"]["place_key"] == "exampleheights"
+    old = json.loads(json.dumps(recs))
+    old[0]["raw"]["title"] = post["title"]["rendered"]
+    old[0]["advice_text"] = "Avoid Example Creek; call Staff Example at 573-555-0100."
+    old[0]["source_url"] = post["link"]
+    again, _ = M.run([], old, AT)
+    for p in PERSONAL:
+        assert p not in json.dumps(again), p
+    feed = (b'<?xml version="1.0"?><rss><channel><item><title>Stream Advisory Issued for Example Creek in Shawnee County'
+            b'</title><link>https://www.kdhe.ks.gov/CivicAlerts.aspx?aid=77</link><pubDate>Mon, 02 Nov 2026 09:00:00 -0600'
+            b'</pubDate><description>Sewage from 1234 Example Lane reached Example Creek. Jane Example, 913-555-0199, '
+            b'says call her.</description></item></channel></rss>')
+    ks, _ = A.run(feed, [], AT)
+    blob = json.dumps(ks) + A.safe_feed(feed).decode()
+    for p in PERSONAL + ["Jane Example", "913-555-0199"]:
+        assert p not in blob, p
+    assert ks[0]["raw"]["cause"] == "sewage" and ks[0]["advice_text"].startswith("KDHE stream advisory for Example Creek")
+    old = json.loads(json.dumps(ks))
+    old[0]["advice_text"] = "Sewage from 1234 Example Lane. Jane Example, 913-555-0199."
+    old[0]["raw"]["description"] = old[0]["advice_text"]
+    again, _ = A.run(b'<?xml version="1.0"?><rss><channel></channel></rss>', old, AT)
+    assert "Jane Example" not in json.dumps(again) and "1234" not in json.dumps(again)
+
+
+def test_safe_text_keeps_places_and_safe_link_keeps_plain_addresses():
+    assert K.safe_text("avoid the creek by Example Creek") == "avoid the creek by Example Creek"
+    assert "Jane" not in K.safe_text("reported by Jane Example near the plant")
+    assert K.safe_link("https://x.org/news/overflow-near-example-street/", "https://x.org/?p=1") == \
+        "https://x.org/news/overflow-near-example-street/"
+    assert K.safe_link("https://x.org/news/overflow-on-june-3-2024/", "https://x.org/?p=1") == \
+        "https://x.org/news/overflow-on-june-3-2024/"
+    assert K.safe_link("https://x.org/news/overflow-at-1234-example-st/", "https://x.org/?p=1") == "https://x.org/?p=1"
