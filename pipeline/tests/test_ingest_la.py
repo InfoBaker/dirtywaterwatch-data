@@ -224,3 +224,35 @@ def test_reports_are_kept_by_number_and_due_rules():
     assert (95, "https://example.org/r95.pdf") in Q.due(state, links, "2026-12-30T00:00:00Z")   # re-read after 30 days
     assert (95, "https://example.org/r95-b.pdf") in Q.due(state, {95: "https://example.org/r95-b.pdf"},
                                                          "2026-11-15T00:00:00Z")
+
+
+def test_a_name_only_tie_beyond_25_km_is_refused_in_wv_and_la():
+    from ingest import outfall_waters as OW
+
+    class MT:
+        def __init__(self, d):
+            self.d = d
+        waters = {"example-bayou-la": {"name": "Example Bayou", "kind": "river"}}
+
+        def dist(self, s, lat, lon):
+            return self.d
+
+        def source_of(self, s):
+            return "nhd"
+
+        def no_outline(self, s):
+            return False
+
+        def evidence_of(self):
+            return {}
+    res = {"slug": "example-bayou-la", "step": "name", "how": "the only record of that name"}
+    for st in ("WV", "LA"):
+        o = {"state": st, "npdes_permit": f"{st}0000001", "lat": 30.4, "lon": -91.1, "receiving_water_echo": "EXAMPLE BAYOU"}
+        OW.apply(o, res, MT(30_000.0))
+        assert o["water_slug"] is None and "30 km" in o["no_water_reason"]
+        o = {**o, "water_slug": None}
+        OW.apply(o, res, MT(20_000.0))
+        assert o["water_slug"] == "example-bayou-la"
+    o = {"state": "OK", "npdes_permit": "OK0000001", "lat": 35.0, "lon": -97.0, "receiving_water_echo": "EXAMPLE BAYOU"}
+    OW.apply(o, res, MT(30_000.0))
+    assert o["water_slug"] == "example-bayou-la"                                # other states unchanged
